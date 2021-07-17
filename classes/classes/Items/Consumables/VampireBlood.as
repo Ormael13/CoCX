@@ -93,16 +93,10 @@ public class VampireBlood extends Consumable {
             outputText("\n\n");
             if (player.hasGooSkin()) {
                 mutations.humanizeSkin();
+                outputText("\n\n");
             }
 
-            if (player.vampireScore() >= 6) {
-                outputText("As soon as the last drop of blood passes your now crimson lips, a terrible pain flares in the center of your back, a pain so intense thatyou black out briefly, coming back to your senses as you hit your head against the ground. You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than mostof the bones in your body. These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground. In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowlyclosing on their own. \n\nStill panting from the pain, you take a look at your new appendage. It's a pair of large vampire wings of impressive size.\n\nFeeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape.");
-            } else {
-                outputText("You drop the vial, the glass shattering, as intense pain flares around your shoulder blades. The pain intensifies, causing you to drop to the ground, clawing and screaming in agony as your back suddenly explodes with a wet ripping noise, blood splattering around you as a large pair of black leathery wings emerge from the bloody ruin that is your backright now, stretching to their full span. The pain finally starts to recede, leaving a bone-deep weariness in it’s wake.\n\nAfter a while, you manage to recover enough to be sure that trying to stand up won’t result in graceless, and painful, flopping, soyou do just that, wrapping your new wings around you on instinct as you rise. Huh, wrapped like this you could probably pass them off as a long cape so long as nobody looks too closely, but you are certain they are the real deal.\n\nAfter all that pain, flying better be worth it.");
-            }
-            outputText("<b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>");
-
-            mutations.setWingType(Wings.VAMPIRE, "cape-like");
+            CoC.instance.transformations.WingsVampire.applyEffect();
             changes++;
         }
 

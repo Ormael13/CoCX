@@ -131,7 +131,7 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.tongue.type != Tongue.RAVENOUS_TONGUE) CoC.instance.transformations.TongueRavenous.applyEffect(false);
 			if (player.horns.type != Horns.ANTLERS) CoC.instance.transformations.HornsAntlersWendigo.applyEffect(false);
 			if (player.ears.type != Ears.DEER) CoC.instance.transformations.EarsDeer.applyEffect(false);
-			if (player.wings.type != Wings.LEVITATION) CoC.instance.mutations.setWingType(Wings.LEVITATION, "levitation");
+			if (player.wings.type != Wings.LEVITATION) CoC.instance.transformations.WingsLevitation.applyEffect(false);;
 			if (player.rearBody.type != RearBody.FUR_COAT) CoC.instance.mutations.setRearBody(RearBody.FUR_COAT);
 			if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE) player.vaginaType(VaginaClass.EQUINE);
 			if (player.hasVagina() && player.biggestTitSize() < 8) player.breastRows[0].breastRating += 8;

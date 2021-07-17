@@ -119,17 +119,18 @@ public class ManticoreVenom extends Consumable {
 		if ((player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL) && player.wings.type != Wings.MANTICORE_LIKE_LARGE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
 			//Grow bigger manticore wings!
 			if (player.wings.type == Wings.MANTICORE_LIKE_SMALL) {
-				outputText("\n\nYou feel your wings growing larger by the second. They keep growing until they reach three times their original size. The transformation finally stops as your wings reach a span of twice your arm’s length. These will be really useful should you want to fly around in search of a meal.  <b>You now have fully grown manticore wings.</b>");
-				mutations.setWingType(Wings.MANTICORE_LIKE_LARGE, "large manticore-like");
+				outputText("\n\n");
+        CoC.instance.transformations.WingsManticoreLarge.applyEffect();
 			}
 			//Grow small manticore wings if player has none.
 			else if (player.wings.type == Wings.NONE) {
-				outputText("\n\nYou scream something akin to a roar from the tremendous amount of pain you're suddenly experiencing as something starts to push out from your back. Your claws start digging large marks into the ground as the things stretch out and burst through your skin. Large bones covered in a thin, yet sturdy layer of skin, forming a pair of small bat-like wings slowly push out before finally staying in place. They are too small right now to allow you to take flight but they sure look good on you.  <b>You now have small manticore wings.</b>");
-				mutations.setWingType(Wings.MANTICORE_LIKE_SMALL, "small manticore-like");
+				outputText("\n\n");
+        CoC.instance.transformations.WingsManticoreSmall.applyEffect();
 			}
 			//Remove old wings
 			else {
-				mutations.removeWings();
+				outputText("\n\n");
+				CoC.instance.transformations.WingsNone.applyEffect();
 			}
 			changes++;
 		}

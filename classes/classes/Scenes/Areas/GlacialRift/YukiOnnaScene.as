@@ -119,7 +119,7 @@ public class YukiOnnaScene extends BaseContent
 					else player.hairColor = "platinum blonde";
 				}
 				if (player.hairLength < 25) player.hairLength = 25;
-				CoC.instance.mutations.setWingType(Wings.LEVITATION, "levitation");
+				CoC.instance.transformations.WingsLevitation.applyEffect(false);
 				CoC.instance.mutations.setRearBody(RearBody.GLACIAL_AURA);
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					player.skin.base.pattern = Skin.PATTERN_NONE;

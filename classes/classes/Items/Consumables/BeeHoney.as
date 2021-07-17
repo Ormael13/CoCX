@@ -242,22 +242,23 @@ public class BeeHoney extends Consumable
 			//Wings
 			//Grow bigger bee wings!
 			if (changes < changeLimit && player.wings.type == Wings.BEE_LIKE_SMALL && Utils.rand(4)) {
+				outputText("\n\n");
+				CoC.instance.transformations.WingsBeeLarge.applyEffect();
 				changes++;
-				mutations.setWingType(Wings.BEE_LIKE_LARGE, "large bee-like");
-				outputText("\n\nYour wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly!  <b>You now have large bee wings!</b>  You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.");
 			}
 
 			//Grow new bee wings if player has none.
 			if (changes < changeLimit && player.wings.type == Wings.NONE && Utils.rand(4)) {
+				outputText("\n\n");
+				CoC.instance.transformations.WingsBeeSmall.applyEffect();
 				changes++;
-				outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.  You hastily remove the top portion of your [armor] and marvel as a pair of small bee-like wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new bee wings</b>.");
-				mutations.setWingType(Wings.BEE_LIKE_SMALL, "small bee-like");
 			}
 			//Melt demon wings!
 			if (changes < changeLimit && player.wings.type != Wings.BEE_LIKE_SMALL && player.wings.type != Wings.BEE_LIKE_LARGE) {
 				changes++;
 				outputText("\n\nYour wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
-				mutations.removeWings();
+				outputText("\n\n");
+				CoC.instance.transformations.WingsNone.applyEffect();
 			}
 			//Remove gills!
 			if (Utils.rand(4) == 0 && player.hasGills() && changes < changeLimit) {

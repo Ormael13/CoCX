@@ -1578,14 +1578,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Aquatic Affinity
-			if (InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEADRAGON) && InCollection(player.arms.type,Arms.ORCA,Arms.SEADRAGON) && player.tailType == Tail.ORCA && InCollection(player.ears.type,Ears.ORCA,Ears.ORCA) && !player.hasPerk(PerkLib.AquaticAffinity)) {
+			if (InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEA_DRAGON) && InCollection(player.arms.type,Arms.ORCA,Arms.SEA_DRAGON) && player.tailType == Tail.ORCA && InCollection(player.ears.type,Ears.ORCA,Ears.ORCA) && !player.hasPerk(PerkLib.AquaticAffinity)) {
 				outputText("\nYou suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp.\n");
 				if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
 				outputText("\n(<b>Gained Perk: Aquatic Affinity</b>)\n");
 				player.createPerk(PerkLib.AquaticAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((!InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEADRAGON) || !InCollection(player.arms.type,Arms.ORCA,Arms.SEADRAGON) || player.tailType != Tail.ORCA || !InCollection(player.ears.type,Ears.ORCA,Ears.ORCA)) && player.hasPerk(PerkLib.AquaticAffinity)) {
+			else if ((!InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEA_DRAGON) || !InCollection(player.arms.type,Arms.ORCA,Arms.SEA_DRAGON) || player.tailType != Tail.ORCA || !InCollection(player.ears.type,Ears.ORCA,Ears.ORCA)) && player.hasPerk(PerkLib.AquaticAffinity)) {
 				outputText("\nAs you lose the respiratory organ to breath underwater it also becomes obvious that you will drown if attempting to breath water in. You will need to get items or transform to breath underwater again.\n");
 				if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
 				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");

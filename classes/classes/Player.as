@@ -636,14 +636,14 @@ use namespace CoC;
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEADRAGON) armorDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.SEADRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -6204,7 +6204,7 @@ use namespace CoC;
 			if (wings.type == Wings.DRACONIC_HUGE)
 				dragonCounter += 4;
 				dragonCounter2 += 4;
-			if (wings.type == Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM)
+			if (wings.type == Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM)
 				dragonCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				dragonCounter++;
@@ -6289,7 +6289,7 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (tongue.type == Tongue.DRACONIC)
 				jabberwockyCounter++;
-			if (wings.type == Wings.FEY_DRAGON_WINGS)
+			if (wings.type == Wings.FEY_DRAGON)
 				jabberwockyCounter += 4;
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				jabberwockyCounter -= 10;
@@ -6339,7 +6339,7 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && jabberwockyCounter >= 8)
 				jabberwockyCounter += 1;
-			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
+			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
 			if (isGargoyle()) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -7028,7 +7028,7 @@ use namespace CoC;
 				poltergeistCounter++;
 			if (lowerBody == LowerBody.GHOST_2)
 				poltergeistCounter += 2;
-			if (wings.type == Wings.ETHEREAL_WINGS)
+			if (wings.type == Wings.ETHEREAL)
 				poltergeistCounter += 2;
 			if (tailType == Tail.NONE)
 				poltergeistCounter++;
@@ -7383,7 +7383,7 @@ use namespace CoC;
 				orcaCounter += 1;
 			if (isGargoyle()) orcaCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) orcaCounter = 0;
-			if (wings.type == Wings.SEADRAGON || lowerBody == LowerBody.SEADRAGON || arms.type == Arms.SEADRAGON)
+			if (wings.type == Wings.SEA_DRAGON || lowerBody == LowerBody.SEA_DRAGON || arms.type == Arms.SEA_DRAGON)
 				orcaCounter = 0;
 			orcaCounter = finalRacialScore(orcaCounter, Race.ORCA);
 			End("Player","racialScore");
@@ -7394,9 +7394,9 @@ use namespace CoC;
 		public function leviathanScore():Number {
 			Begin("Player","racialScore","orca");
 			var LeviathanCounter:Number = 0;
-			if (horns.type == Horns.SEADRAGON)
+			if (horns.type == Horns.SEA_DRAGON)
 				LeviathanCounter++;
-			if (antennae.type == Antennae.SEADRAGON)
+			if (antennae.type == Antennae.SEA_DRAGON)
 				LeviathanCounter++;
 			if (ears.type == Ears.ORCA)
 				LeviathanCounter++;
@@ -7412,9 +7412,9 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (hairType == Hair.PRISMATIC)
 				LeviathanCounter++;
-			if (lowerBody == LowerBody.SEADRAGON)
+			if (lowerBody == LowerBody.SEA_DRAGON)
 				LeviathanCounter++;
-			if (arms.type == Arms.SEADRAGON)
+			if (arms.type == Arms.SEA_DRAGON)
 				LeviathanCounter++;
 			if (rearBody.type == RearBody.ORCA_BLOWHOLE)
 				LeviathanCounter++;
@@ -7422,9 +7422,9 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (skinAdj == "glossy")
 				LeviathanCounter++;
-			if (skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY)
+			if (skin.base.pattern == Skin.PATTERN_SEA_DRAGON_UNDERBODY)
 				LeviathanCounter++;
-			if (wings.type == Wings.SEADRAGON)
+			if (wings.type == Wings.SEA_DRAGON)
 				LeviathanCounter += 4;
 			if (tone < 10)
 				LeviathanCounter++;
@@ -7468,9 +7468,9 @@ use namespace CoC;
 				LeviathanCounter += 1;
 			if (isGargoyle()) LeviathanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) LeviathanCounter = 0;
-			if (wings.type == Wings.NONE || lowerBody != LowerBody.SEADRAGON || arms.type != Arms.SEADRAGON)
+			if (wings.type == Wings.NONE || lowerBody != LowerBody.SEA_DRAGON || arms.type != Arms.SEA_DRAGON)
 				LeviathanCounter = 0;
-			LeviathanCounter = finalRacialScore(LeviathanCounter, Race.SEADRAGON);
+			LeviathanCounter = finalRacialScore(LeviathanCounter, Race.SEA_DRAGON);
 			End("Player","racialScore");
 			return LeviathanCounter;
 		}

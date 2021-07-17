@@ -615,19 +615,20 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Alicorn wings
 		if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && player.horns.type == Horns.UNICORN && rand(4) == 0) {
-			outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>");
-			mutations.setWingType(Wings.FEATHERED_ALICORN, "large white feathered");
+			outputText("\n\n");
+      CoC.instance.transformations.WingsFeatheredAlicorn.applyEffect();
 			changes++;
 		}
 		//Nightmare wings
 		if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && (player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) && player.cor > 89 && rand(4) == 0) {
-			outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>");
-			mutations.setWingType(Wings.NIGHTMARE, "large black leathery");
+			outputText("\n\n");
+      CoC.instance.transformations.WingsNightmare.applyEffect();
 			changes++;
 		}
 		//Remove old wings
 		if (type == 2 && (player.wings.type != Wings.FEATHERED_ALICORN || (player.wings.type != Wings.NIGHTMARE && player.cor > 89)) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
-			mutations.removeWings();
+			outputText("\n\n");
+			CoC.instance.transformations.WingsNone.applyEffect();
 			changes++;
 		}
 		if (rand(3) == 0) outputText(player.modTone(60, 1));

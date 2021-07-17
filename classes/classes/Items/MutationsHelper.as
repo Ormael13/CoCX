@@ -73,21 +73,6 @@ import classes.BodyParts.Wings;
 			changes++;
 		}
 
-		public function removeWings(degargoylize:Boolean=false):void {
-			if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE && !degargoylize) return;
-			if (player.wings.type == Wings.NONE) return;
-			switch(rand(2)) {
-				case 0:
-					outputText("\n\nSensation fades from your " + player.wings.desc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
-					break;
-				case 1:
-					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
-					break;
-			}
-			setWingType(Wings.NONE, "non-existant");
-			changes++;
-		}
-
 		public function updateGills(newGillType:int = Gills.NONE):int
 		{
 			trace("Called updateGills(" + newGillType + ")");
@@ -404,44 +389,6 @@ import classes.BodyParts.Wings;
 		[4, StatusEffects.UnlockedFoxTail4th],
 		[5, StatusEffects.UnlockedFoxTail5th],
 		[6, StatusEffects.UnlockedFoxTail6th]
-	]);
-
-	public function setWingType(wingType:int, wingDesc:String):Boolean {
-		var a:Boolean   = setBodyPartType("wings.type", METAMORPH_WINGS, wingType);
-		player.wings.desc = wingDesc;
-		return a;
-	}
-	private const METAMORPH_WINGS:Object = createMapFromPairs([
-		[Wings.BAT_LIKE_LARGE, StatusEffects.UnlockedDemonLargeBatWings],
-		[Wings.BAT_LIKE_LARGE_2, StatusEffects.UnlockedDemonLargeBatWings2],
-		[Wings.BAT_LIKE_TINY, StatusEffects.UnlockedDemonTinyBatWings],
-		[Wings.BEE_LIKE_LARGE, StatusEffects.UnlockedBeeWingsLarge],
-		[Wings.BEE_LIKE_SMALL, StatusEffects.UnlockedBeeWingsSmall],
-		[Wings.DRACONIC_HUGE, StatusEffects.UnlockedDraconicWingsHuge],
-		[Wings.DRACONIC_LARGE, StatusEffects.UnlockedDraconicWingsLarge],
-		[Wings.DRACONIC_SMALL, StatusEffects.UnlockedDraconicWingsSmall],
-		[Wings.ETHEREAL_WINGS, null],
-		[Wings.FEATHERED_ALICORN, StatusEffects.UnlockedAlicornWings],
-		[Wings.FEATHERED_AVIAN, null],
-		[Wings.FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
-		[Wings.FEATHERED_PHOENIX, StatusEffects.UnlockedPhoenixWings],
-		[Wings.FEATHERED_SPHINX, StatusEffects.UnlockedSphinxWings],
-		[Wings.FEY_DRAGON_WINGS, null],
-		[Wings.GARGOYLE_LIKE_LARGE, null],
-		[Wings.GIANT_DRAGONFLY, null],
-		[Wings.HARPY, null],
-		[Wings.IMP, null],
-		[Wings.LEVITATION, null],
-		[Wings.MANTICORE_LIKE_LARGE, StatusEffects.UnlockedManticoreWingsLarge],
-		[Wings.MANTICORE_LIKE_SMALL, StatusEffects.UnlockedManticoreWingsSmall],
-		[Wings.MANTIS_LIKE_LARGE, StatusEffects.UnlockedMantisWingsLarge],
-		[Wings.MANTIS_LIKE_LARGE_2, null],
-		[Wings.MANTIS_LIKE_SMALL, StatusEffects.UnlockedMantisWingsSmall],
-		[Wings.NIGHTMARE, StatusEffects.UnlockedNightmareWings],
-		[Wings.NONE, StatusEffects.UnlockedHumanNoWings],
-		[Wings.PLANT, null],
-		[Wings.SHARK_FIN, null],
-		[Wings.THUNDEROUS_AURA, StatusEffects.UnlockedRaijuThunderousAura],
 	]);
 
 	/**

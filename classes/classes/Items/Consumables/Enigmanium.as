@@ -386,13 +386,14 @@ public class Enigmanium extends Consumable{
 
 			//Wings
 			if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.SPHINX && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
-				mutations.setWingType(Wings.FEATHERED_SPHINX, "large feathered");
+				outputText("\n\n");
+        CoC.instance.transformations.WingsFeatheredSphinx.applyEffect();
 				changes++;
 			}
 			//Remove old wings
 			if (player.wings.type != Wings.FEATHERED_SPHINX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				mutations.removeWings();
+				outputText("\n\n");
+				CoC.instance.transformations.WingsNone.applyEffect();
 				changes++;
 			}
 

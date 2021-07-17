@@ -72,13 +72,6 @@ public final class Mutations extends MutationsHelper {
         return bonusempoweroni;
     }
 
-    //split large wings to two pairs
-    /*else if (player.wings.type == Wings.BAT_LIKE_LARGE && player.cor >= 75) {
-        outputText("\n\n");
-        outputText("Your large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have split into two pairs!</b>");
-        setWingType(Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like");
-    }*/
-
     //ManUp Beer
     public function manUpBeer(player:Player):void {
         player.slimeFeed();
@@ -4154,8 +4147,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes wings!
         if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour shoulders tingle, feeling lighter.  Something lands behind you with a 'thump', and when you turn to look you see your wings have fallen off.  This might be the best (and worst) booze you've ever had!  <b>You no longer have wings!</b>");
-            setWingType(Wings.NONE, "non-existant");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes antennaes!
@@ -4374,8 +4367,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes wings!
         if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour shoulders tingle, feeling lighter.  Something lands behind you with a 'thump', and when you turn to look you see your wings have fallen off.  This might be the best (and worst) booze you've ever had!  <b>You no longer have wings!</b>");
-            setWingType(Wings.NONE, "non-existant");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes antennaes!
@@ -4515,8 +4508,8 @@ public final class Mutations extends MutationsHelper {
         //Cosmetic changes based on 'goopyness'
         //Remove wings
         if (player.wings.type > Wings.NONE && rand(2) == 0 && changes < changeLimit) {
-            outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your wings slowly turn to sludge, dripping to the ground as your body becomes more goo-like.");
-            setWingType(Wings.NONE, "non-existant");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Human face
@@ -4858,7 +4851,8 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Removes wings
         if (!InCollection(player.wings.type, Wings.NONE, Wings.GARGOYLE_LIKE_LARGE) && rand(3) == 0 && changes < changeLimit) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
 
@@ -5380,23 +5374,23 @@ public final class Mutations extends MutationsHelper {
         //Grow Dragon Wings
         if (type == 1 && player.wings.type != Wings.DRACONIC_HUGE && player.ears.type == Ears.DRAGON && changes < changeLimit && rand(3) == 0) {
             if (player.wings.type == Wings.NONE) {
-                outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
-                setWingType(Wings.DRACONIC_SMALL, "small, draconic");
+                outputText("\n\n");
+			    CoC.instance.transformations.WingsDraconicSmall.applyEffect();
             }
             //(If Small Dragon Wings Present)
             else if (player.wings.type == Wings.DRACONIC_SMALL) {
-                outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
-                setWingType(Wings.DRACONIC_LARGE, "large, draconic");
+                outputText("\n\n");
+			    CoC.instance.transformations.WingsDraconicLarge.applyEffect();
             }
             //even larger dragon wings ^^
             else if (player.wings.type == Wings.DRACONIC_LARGE) {
-                outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
-                setWingType(Wings.DRACONIC_HUGE, "large, majestic draconic");
+                outputText("\n\n");
+			    CoC.instance.transformations.WingsDraconicHuge.applyEffect();
             }
             //(If other wings present)
             else {
-                outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
-                setWingType(Wings.DRACONIC_SMALL, "small, draconic");
+                outputText("\n\n");
+			    CoC.instance.transformations.WingsDraconicSmall.applyEffect();
             }
             changes++;
         }
@@ -5431,17 +5425,19 @@ public final class Mutations extends MutationsHelper {
         }
         //Propah Wings
         if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
-            outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
-            setWingType(Wings.FEATHERED_LARGE, "large, feathered");
+            outputText("\n\n");
+			CoC.instance.transformations.WingsFeatheredLarge.applyEffect();
             changes++;
         }
         //Remove old wings
         if (type == 2 && player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         if (type == 3 && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Dragon Arms
@@ -5803,9 +5799,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes wings
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
-            //	if (player.wings.type == SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine.  After a moment the pain passes, though your fin is gone!");
-            outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
-            setWingType(Wings.NONE, "non-existant");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes tail
@@ -7469,14 +7464,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Wings
         if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.PHOENIX && rand(4) == 0) {
-            outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, crimson wings.</b>");
-            setWingType(Wings.FEATHERED_PHOENIX, "large crimson feathered");
-            player.hairColor = "platinum crimson";
+            outputText("\n\n");
+			CoC.instance.transformations.WingsFeatheredPhoenix.applyEffect();
             changes++;
         }
         //Remove old wings
         if (player.wings.type != Wings.FEATHERED_PHOENIX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
 
@@ -8256,13 +8251,14 @@ public final class Mutations extends MutationsHelper {
         }
         //-Propah Wings
         if (player.wings.type == Wings.NONE && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
-            outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
-            setWingType(Wings.FEATHERED_LARGE, "large, feathered");
+            outputText("\n\n");
+			CoC.instance.transformations.WingsFeatheredLarge.applyEffect();
             changes++;
         }
         //-Remove old wings
         if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //-Feathery Arms
@@ -8489,24 +8485,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Wings
         if (player.wings.type != Wings.FEATHERED_AVIAN && player.arms.type == Arms.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
-            if (player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.DRACONIC_HUGE || player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE || player.wings.type == Wings.BAT_LIKE_LARGE_2 || Arms.canFly(player.arms.type) || player.wings.type == Wings.VAMPIRE) {
-                outputText("\n\nYour wings feel suddenly heavier, and you’re forced to sit down to keep balance. Putting attention to the things happening at your back, you realize that the scales covering them are falling!");
-                outputText("\n\nA bit alarmed, you’re surprised when, not much later, feathers started sprouting everywhere on them. t all the same, as long ones grow at the base, while shorter ones appear on the upper part of them and near your shoulders. When all the growth is finished, your wings are left with a much more bird-like appearance.");
-                outputText("\n\n<b>In the end, your pair of now avian wings will carry you to skies with ease.</b>");
-            } else if (player.wings.type > Wings.NONE) {
-                outputText("\n\nYour wings feel suddenly heavier, and you’re forced to sit down to keep balance. Putting attention to the things happening at your back, you realize that the delicate tissue of them is becoming skin and flesh, with bones sprouting inside and placing themselves to support the added weight.");
-                outputText("\n\nOnce the muscles and bones are correctly formed, feathers start sprouting everywhere on them. Not all the same, as long ones grow at the base, while shorter ones appear on the upper part of them and near your shoulders. When all the growth is finished, your wings are left with a much more bird-like appearance.");
-                outputText("\n\n<b>In the end, your pair of now avian wings will carry you to skies with ease.</b>");
-            } else {
-                outputText("\n\nA sudden ache overcomes your back, when you’re at the middle of your daily routine. Knowing from before how hazardous is the food found on the wilds of Mareth, you curse the strange seed that you’ve just eat for this painful state.");
-                outputText("\n\nBefore you can find something to soothe the pain, a piercing sensation of something tearing its way of of your flesh and skin makes you lose the balance and fall. Instinctively, you take off the upper part of your [armor] so anything that it’s growing from back there makes they way out without any trouble.");
-                outputText("\n\nWhen everything finishes, you take a look at your backside, noticing two shapes sprouting from your upper back. They grow and grow, and when you recognize them as wings, they’ve already grown to carry with your body ease through the skies. Once the growth stops, you extend them and flex your newly gained bones and muscles. <b>Seems like you’ve gained a pair of avian wings!</b>");
-            }
-            setWingType(Wings.FEATHERED_AVIAN, "large, feathered");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsFeatheredAvian.applyEffect();
             changes++;
         }
         if (player.wings.type != Wings.FEATHERED_AVIAN && player.wings.type != Wings.NONE && changes < changeLimit && rand(3) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Hair
@@ -9335,9 +9320,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes wings
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.ETHEREAL_WINGS, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
-            setWingType(Wings.NONE, "non-existant");
+        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.ETHEREAL, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes tail
@@ -9386,8 +9371,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Wings
         if (player.wings.type == Wings.NONE && player.rearBody.type == RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nYour body feels lighter than usual, almost as if you’re floating on air. Unintentionally you lean forward, finding yourself floating a few feet off the ground. Confused as to what is happening, you try to move, floating a few paces in the direction you want to go. That’s when you notice three pairs of wispy otherworldly tendrils growing out of your back. They glow faintly and almost appear as though they’re moving with the wind. They don’t even hold any weight. <b>You can get used to floating like this with your ethereal wings.</b>");
-            setWingType(Wings.ETHEREAL_WINGS, "etheral tendrils");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsEthereal.applyEffect();
             changes++;
         }
         //Transparent skin
@@ -9826,12 +9811,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou've become so charged in electricity that your movements are sometimes accompanied by the sound of static. <b>It's going to be difficult to hide your presence with that thunderous aura of yours.</b>");
-            setWingType(Wings.THUNDEROUS_AURA, "thunderous aura");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsThunderousAura.applyEffect();
             changes++;
         }
         if (player.wings.type != Wings.THUNDEROUS_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
@@ -9993,13 +9979,14 @@ public final class Mutations extends MutationsHelper {
         }
         //-Propah Wings
         if (player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
-            setWingType(Wings.FEATHERED_LARGE, "large, feathered");
+            outputText("\n\n");
+			CoC.instance.transformations.WingsFeatheredLarge.applyEffect();
             changes++;
         }
         //-Remove old wings
         if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //-Feathery Arms
@@ -10134,8 +10121,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (((!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && type == 0) || (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
-            setWingType(Wings.NONE, "non-existant");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
@@ -10146,8 +10133,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (player.wings.type == Wings.NONE && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.GAZER && player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2 && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nYou feel so tired you could fall on your knees but to your surprise you don't. Instead of actually hitting the ground you simply float in the air. Your legs begin to sweat and drip at high rate until they cover in some kind of oily black fluids just like those of a gazer.  <b>You are now naturally levitating.</b>");
-			setWingType(Wings.LEVITATION, "levitation");
+            outputText("\n\n");
+			CoC.instance.transformations.WingsLevitation.applyEffect();
+            outputText("\n\n Your legs begin to sweat and drip at high rate until they cover in some kind of oily black fluids just like those of a gazer. <b>You now have gazer legs.</b>");
 			setLowerBody(LowerBody.GAZER);
             changes++;
         }
@@ -10471,16 +10459,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.arms.type == Arms.KAMAITACHI && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nWinds begin to amass around you as if the prelude to a gathering storm. " +
-                    "At first you think you are about to be attacked before you realise it’s all your doing. " +
-                    "Merely by thinking about it the wind suddenly blows into a raging tornado carrying you up before you seize control and give it just enough " +
-                    "strength to uplift you into its currents. It would seem you have gained the infamous wind control power of the kamaitachi achieving mastery " +
-                    "over it. Well this is going to be fun to play with. <b>You now have the ability to control winds as the Kamaitachi do using your windy aura!</b>");
-            setWingType(Wings.WINDY_AURA, "windy aura");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsWindyAura.applyEffect();
             changes++;
         }
         if (player.wings.type != Wings.WINDY_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         if (player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
@@ -10653,8 +10638,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-may randomly remove bee wings:
         if (rand(4) == 0 && (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) && changes < changeLimit) {
-            outputText("\n\nYour wings twitch and flap involuntarily.  You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up.  They're starting to look a lot like they did when they first popped out, wet and new.  <b>As you watch, they shrivel all the way, then recede back into your body.</b>");
-            setWingType(Wings.NONE, "non-existent");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
@@ -12177,10 +12162,9 @@ public final class Mutations extends MutationsHelper {
         }
         //Dragonfly Wings:
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.GIANT_DRAGONFLY) && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYou scream and fall to your knees as incredible pain snags at your shoulders, as if needle like hooks were being sunk into your flesh just below your shoulder blades.  After about five seconds of white hot, keening agony it is with almost sexual relief that something splits out of your upper back.  You clench the dirt as you slide what feel like giant leaves of paper into the open air.  Eventually the sensation passes and you groggily get to your feet.  You can barely believe what you can see by craning your neck behind you - <b>you've grown a set of four giant dragonfly wings</b>, thinner, longer and more pointed than the ones you've seen upon the forest bee girls, but no less diaphanous and beautiful.  You cautiously flex the new muscle groups in your shoulder blades and gasp as your new wings whirr and lift you several inches off the ground.  What fun this is going to be!");
-            //Wings Fall Out: You feel a sharp pinching sensation in your shoulders and you cringe slightly.  Your former dragonfly wings make soft, papery sounds as they fall into the dirt behind you.
+            outputText("\n\n");
+            CoC.instance.transformations.WingsGiantDragonfly.applyEffect();
             changes++;
-            setWingType(Wings.GIANT_DRAGONFLY, "giant dragonfly");
         }
         if (changes == 0) {
             outputText("\n\nWell... that didn't amount to much.");
@@ -12738,28 +12722,24 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Demon wings
-        if ((player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_LARGE) && player.cor >= 50 && rand(3) == 0) {
-            outputText("\n\nThe muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into large <b>bat-like demon-wings!</b>");
-            setWingType(Wings.BAT_LIKE_LARGE, "large, bat-like");
-            flags[kFLAGS.TIMES_TRANSFORMED]++;
-        }
-        if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75 && rand(3) == 0) {
-            outputText("\n\nYour small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>");
-            setWingType(Wings.BAT_LIKE_LARGE, "large, bat-like");
+        if (((player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_LARGE) && player.cor >= 50 || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.WingsDemonicLarge.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.MANTIS_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_SMALL) && player.cor >= 50 && rand(3) == 0) {
-            outputText("\n\nThe muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into small <b>bat-like demon-wings!</b>");
-            setWingType(Wings.BAT_LIKE_TINY, "tiny, bat-like");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if (player.wings.type == Wings.NONE && player.cor >= 50 && rand(3) == 0) {
-            outputText("\n\nA knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have tiny demonic wings</b>.");
-            setWingType(Wings.BAT_LIKE_TINY, "tiny, bat-like");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY) && rand(3) == 0) {
-            removeWings();
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
     }
@@ -14470,7 +14450,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hairType == Hair.SNOWY && player.faceType == Face.YUKI_ONNA && player.arms.type == Arms.YUKI_ONNA && player.lowerBody == LowerBody.YUKI_ONNA && player.rearBody.type != RearBody.GLACIAL_AURA && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nCold… so cold! You ball yourself up, trying to get some heat but no matter how much you try it gets colder and colder. Just as you think you are about to freeze to death it stops. You look around you in confusion. The air is chilling yet you don't feel it. The ice at your feet covered up with snow and somehow you know deep down if you wanted you could conjure out a blizzard. ");
             outputText("Furthermore you feel lighter then the air now and, as if to demonstrate your new powers, you allow yourself to be carried by the icy wind achieving a form of levitation. Well it seems you are full Yuki Onna now. <b>You gained a Glacial aura and the ability to levitate!</b>");
-            setWingType(Wings.LEVITATION, "levitation");
+            CoC.instance.transformations.WingsLevitation.applyEffect(false);
             setRearBody(RearBody.GLACIAL_AURA);
             changes++;
         }
@@ -14625,16 +14605,16 @@ public final class Mutations extends MutationsHelper {
         }
 
         //-Existing horns become draconic, max of 4, max length of 1'
-        if (player.horns.type != Horns.SEADRAGON && type == 1 && changes < changeLimit && rand(5) == 0) {
+        if (player.horns.type != Horns.SEA_DRAGON && type == 1 && changes < changeLimit && rand(5) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HornsSeadragon.applyEffect();
             changes++;
         }
 
         //antenna
-        if (player.antennae.type != Antennae.SEADRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.antennae.type != Antennae.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nA strange feeling washes over you as something crawls along your neck. You reach your hand up as large, thin strands of flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles, but instead, they start producing dim bioluminescent lights, much like the whiskers of deep-sea creatures. <b>Just like a sea dragon you now have four bioluminescent neck strands!</b>");
-            setAntennae(Antennae.SEADRAGON);
+            setAntennae(Antennae.SEA_DRAGON);
             changes++;
         }
         //Change hair type to normal
@@ -14702,7 +14682,7 @@ public final class Mutations extends MutationsHelper {
             if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
             outputText("Your skin starts to change, turning [skin color]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>");
             changes++;
-            player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEADRAGON_UNDERBODY});
+            player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEA_DRAGON_UNDERBODY});
         }
 
         //legs
@@ -14722,26 +14702,25 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Dragon legs
-        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEADRAGON && player.lowerBody != LowerBody.GARGOYLE && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEA_DRAGON && player.lowerBody != LowerBody.GARGOYLE && type == 1 && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("\n\nYour toes press against each other together as sharp, reptilian claws protrude from your feet. As you unfurl your toes, you notice that they are now webbed. The phalanges seem more suited more for swimming than running. <b>You can only guess those Sea dragon legs will help you to swim at great speeds.</b>");
-                setLowerBody(LowerBody.SEADRAGON);
+                setLowerBody(LowerBody.SEA_DRAGON);
             } else {
                 humanizeLowerBody();
             }
             changes++;
         }
         //Dragon arms
-        if (player.lowerBody == LowerBody.SEADRAGON && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.SEADRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.SEA_DRAGON && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.SEA_DRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.ArmsSeaDragon.applyEffect();
             changes++;
         }
         //Dragon Wings
-        if (player.lowerBody == LowerBody.SEADRAGON && player.arms.type == Arms.SEADRAGON && player.wings.type != Wings.SEADRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you." +
-                    "\n\nAs you examine the fleshy appendage, you realize it's webbed. It seems to resemble more of a giant aquatic flipper than wings. The insides are not only colorful but also display several minute light specks. Not unlike those of a deep-sea beast. <b>You can now fly and swim at great speed with your brand new sea dragon wings!</b>");
-            setWingType(Wings.SEADRAGON, "large majestic aquatic");
+        if (player.lowerBody == LowerBody.SEA_DRAGON && player.arms.type == Arms.SEA_DRAGON && player.wings.type != Wings.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.WingsSeaDragon.applyEffect();
             changes++;
         }
         //tail
@@ -14753,7 +14732,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //dragon tail
-        if (player.arms.type == Arms.SEADRAGON && player.tailType != Tail.ORCA && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.arms.type == Arms.SEA_DRAGON && player.tailType != Tail.ORCA && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ");
             outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ");
             outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>");
@@ -15026,8 +15005,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove those damn wings!
         if (changes < changeLimit && rand(3) == 0 && player.wings.type != Wings.NONE) {
-            setWingType(Wings.NONE, "non-existant");
-            outputText("\n\nYou wings suddenly shrivel and fall of your back before turning to dust.");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
             changes++;
         }
         //Neck
@@ -15334,17 +15313,19 @@ public final class Mutations extends MutationsHelper {
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.MANTIS_LIKE_LARGE) && changes < changeLimit && rand(4) == 0) {
             //Grow bigger mantis wings!
             if (player.wings.type == Wings.MANTIS_LIKE_SMALL) {
-                outputText("\n\nYour wings tingle as they grow, filling out covering your back abdomen until they are large enough to lift you from the ground and allow you to fly!  You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.  <b>You now have large Mantis wings!</b>");
-                setWingType(Wings.MANTIS_LIKE_LARGE, "large mantis-like");
+                outputText("\n\n");
+                CoC.instance.transformations.WingsMantisLarge.applyEffect();
             }
             //Grow small mantis wings if player has none.
             else if (player.wings.type == Wings.NONE) {
-                outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.");
-                outputText("\nYou hastily remove the top portion of your [armor] and marvel as a pair of small Insectile wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can’t seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new mantis wings</b>.");
-                setWingType(Wings.MANTIS_LIKE_SMALL, "small mantis-like");
+                outputText("\n\n");
+                CoC.instance.transformations.WingsMantisSmall.applyEffect();
             }
             //Remove old wings
-            else removeWings();
+            else {
+                outputText("\n\n");
+                CoC.instance.transformations.WingsNone.applyEffect();
+            }
             changes++;
         }
 
@@ -15529,53 +15510,30 @@ public final class Mutations extends MutationsHelper {
             //grow smalls to large
             if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) {
                 outputText("\n\n");
-                outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>");
-                setWingType(Wings.BAT_LIKE_LARGE, "large, bat-like");
-            } else if (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) {
+                CoC.instance.transformations.WingsDemonicLarge.applyEffect();
+            } else if (player.wings.type == Wings.BEE_LIKE_SMALL) {
                 outputText("\n\n");
-                outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into ");
-                if (player.wings.type == Wings.BEE_LIKE_SMALL) {
-                    outputText("small ");
-                    setWingType(Wings.BAT_LIKE_TINY, "tiny, bat-like");
-                } else {
-                    outputText("large ");
-                    setWingType(Wings.BAT_LIKE_LARGE, "large, bat-like");
-                }
-                outputText("<b>bat-like demon-wings!</b>");
+                CoC.instance.transformations.WingsDemonicTiny.applyEffect();
+            } else if (player.wings.type == Wings.BEE_LIKE_LARGE) {
+                outputText("\n\n");
+                CoC.instance.transformations.WingsDemonicLarge.applyEffect();
             } else {
-                outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by small <b>bat-like demon-wings!</b>");
-                setWingType(Wings.BAT_LIKE_TINY, "tiny, bat-like");
+                outputText("\n\n");
+                CoC.instance.transformations.WingsDemonicTiny.applyEffect();
             }
             //No wings
             if (player.wings.type == Wings.NONE) {
                 outputText("\n\n");
-                outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have tiny demonic wings</b>.");
-                setWingType(Wings.BAT_LIKE_TINY, "tiny, bat-like");
+                CoC.instance.transformations.WingsDemonicTiny.applyEffect();
             }
             changes++;
         }
 
         //wings 2
         if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wings.type, Wings.DEVILFEATHER) && (player.tailType == Tail.GOAT || player.tailType == Tail.DEMONIC)) {
-            //grow smalls to large
-            if ((player.wings.type == Wings.BAT_LIKE_LARGE) && player.cor >= 75) {
-                outputText("\n\n");
-                outputText("Your wing shrivels before suddenly changing and covering themselves with black feathers. They still look demonic in a sense, albeit they are feathered now. <b>You now have black, feathered wings!</b>");
-                setWingType(Wings.DEVILFEATHER, "black, feathered");
-            } else if (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) {
-                outputText("\n\n");
-                outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into <b>black, feathered wings!</b>");
-                setWingType(Wings.DEVILFEATHER, "black, feathered");
-            } else {
-                outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by <b>black, feathered wings!</b>");
-                setWingType(Wings.DEVILFEATHER, "black, feathered");
-            }
-            //No wings
-            if (player.wings.type == Wings.NONE) {
-                outputText("\n\n");
-                outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of black feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have black, feathered wings!</b>");
-                setWingType(Wings.DEVILFEATHER, "black, feathered");
-            }
+
+            outputText("\n\n");
+            CoC.instance.transformations.WingsDevilfeather.applyEffect();
             changes++;
         }
 
@@ -15703,8 +15661,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Fea Dragon Wings
         if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.DRACONIC_HUGE) && changes < changeLimit) {
-            outputText("\n\nYou ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>");
-            setWingType(Wings.FEY_DRAGON_WINGS, "large majestic fey draconic");
+            outputText("\n\n");
+            CoC.instance.transformations.WingsFeyDragon.applyEffect();
             changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -15952,7 +15910,7 @@ public final class Mutations extends MutationsHelper {
         //Removes wings!
         if (player.rearBody.type == RearBody.SNAIL_SHELL && player.wings.type >= Wings.NONE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(2) == 0) {
             outputText("\n\nTo your utter disappointment your wings are absorbed back into your shell. Guess there's no such things as flying snails.");
-            setWingType(Wings.NONE, "non-existant");
+            CoC.instance.transformations.WingsNone.applyEffect(false);
             changes++;
         }
         //Face

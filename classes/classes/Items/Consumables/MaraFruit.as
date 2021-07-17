@@ -255,12 +255,7 @@ public class MaraFruit extends Consumable{
 		}
 		//Wings slot aka tentacle cockvine wings
 		if (player.arms.type == Arms.PLANT && player.wings.type != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
-			if (player.wings.type != Wings.NONE) {
-				outputText("\n\nYour old wings are drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state not last long.");
-			}
-			outputText("\n\nPressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your [hips].");
-			outputText(" After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>");
-			mutations.setWingType(Wings.PLANT, "cockvine");
+			CoC.instance.transformations.WingsPlant.applyEffect();
 			changes++;
 		}
 		//Ears
@@ -326,7 +321,7 @@ public class MaraFruit extends Consumable{
 				outputText(" recedes back into your body, disappearing entirely into your backside as if it never existed.");
 			}
 			if (player.tailType != 0) mutations.setTailType(0);
-			mutations.setWingType(Wings.NONE, "non-existant");
+			CoC.instance.transformations.WingsNone.applyEffect(false);
 			mutations.setLowerBody(LowerBody.PLANT_FLOWER);
 			player.coatColor = "pink";
 			player.legCount = 12;

@@ -1659,7 +1659,7 @@
             <case values="Antennae.CENTIPEDE">
                 <show part="antennae/bee"/> <!-- Temporary -->
             </case>
-			<case values="Antennae.SEADRAGON">
+			<case values="Antennae.SEA_DRAGON">
                 <show part="neck/seaDragonWhisker"/>
             </case>
             <default>
@@ -1719,7 +1719,7 @@
 			<case values="Horns.ANTLERS">
 				<show part="horns_overclothe/deer"/>
             </case>
-			<case values="Horns.SEADRAGON">
+			<case values="Horns.SEA_DRAGON">
                 <show part="horns_bg/seaDragon"/>
             </case>
         </switch>
@@ -2180,7 +2180,7 @@
                         <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY">
                             <set var="skinx">orca</set>
                         </if>
-						<if test="skin.base.pattern==Pattern.SEADRAGON_UNDERBODY">
+						<if test="skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
                             <set var="skinx">orca</set>
 							<show part="torso_pattern/Bbioluminescence"/>
                         </if>
@@ -2778,7 +2778,7 @@
                 <show part="hands/scales"/>
                 <show part="hands_bg/scales"/>
             </case>
-            <case values="Arms.ORCA,Arms.SEADRAGON">
+            <case values="Arms.ORCA,Arms.SEA_DRAGON">
                 <hide part="arms/*"/>
                 <hide part="arms_bg/*"/>
                 <show part="arms_bg/orca"/>
@@ -3196,7 +3196,7 @@
 				</if>
 
             </case>
-			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEADRAGON">
+			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEA_DRAGON">
 				<if test="lowerBody==LowerBody.ORCA">
 					<hide part="legs/*"/>
 					<show part="legs/orca"/>
@@ -3434,7 +3434,7 @@
 					<show part="wings_front/mantibig"/>
 				</if>
             </case>
-            <case values="Wings.FEY_DRAGON_WINGS">
+            <case values="Wings.FEY_DRAGON">
                 <show part="wings/fairy"/>
                 <show part="wings_bg/fairy"/>
 				<if test="playerHasLargeLowerBody">
@@ -3464,7 +3464,7 @@
 					<show part="wings_front/devilfeather"/>
 				</if>
             </case>
-			<case values="Wings.ETHEREAL_WINGS">
+			<case values="Wings.ETHEREAL">
                 <show part="wings/ghost"/>
             </case>
 			<case values="Wings.WRAITH">
@@ -3476,7 +3476,7 @@
 			<case values="Wings.WINDY_AURA">
                 <show part="aura/windyaura"/>
             </case>
-			<case values="Wings.SEADRAGON">
+			<case values="Wings.SEA_DRAGON">
                 <show part="wings_bg/seaDragonLeft"/>
 				<show part="wings_bg/seaDragonRight"/>
             </case>

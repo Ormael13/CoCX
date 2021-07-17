@@ -227,24 +227,24 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	//Grow Dragon Wings
 	if (player.wings.type != Wings.DRACONIC_HUGE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 		if (player.wings.type == Wings.NONE) {
-			outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
-            CoC.instance.mutations.setWingType(Wings.DRACONIC_SMALL, "small, draconic");
-        }
+			outputText("\n\n");
+			CoC.instance.transformations.WingsDraconicSmall.applyEffect();
+    }
 		//(If Small Dragon Wings Present)
 		else if (player.wings.type == Wings.DRACONIC_SMALL) {
-			outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
-            CoC.instance.mutations.setWingType(Wings.DRACONIC_LARGE, "large, draconic");
-        }
+			outputText("\n\n");
+			CoC.instance.transformations.WingsDraconicLarge.applyEffect();
+    }
 		//even larger dragon wings ^^
 		else if (player.wings.type == Wings.DRACONIC_LARGE) {
-			outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
-            CoC.instance.mutations.setWingType(Wings.DRACONIC_HUGE, "large, majestic draconic");
-        }
+			outputText("\n\n");
+			CoC.instance.transformations.WingsDraconicHuge.applyEffect();
+    }
 		//(If other wings present)
 		else {
-			outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
-            CoC.instance.mutations.setWingType(Wings.DRACONIC_SMALL, "small, draconic");
-        }
+			outputText("\n\n");
+			CoC.instance.transformations.WingsDraconicSmall.applyEffect();
+    }
 		changes++;
 	}
 	//Get Dragon Breath (Tainted version)

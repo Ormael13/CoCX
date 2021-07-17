@@ -24,8 +24,8 @@ public class Antennae extends BodyPart {
 	EnumValue.add(Types, MOTH, "MOTH", {name: "moth"});
 	public static const CENTIPEDE:int 	= 6;
 	EnumValue.add(Types, CENTIPEDE, "CENTIPEDE", {name: "centipede"});
-	public static const SEADRAGON:int 	= 7;
-	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name: "sea dragon"});
+	public static const SEA_DRAGON:int 	= 7;
+	EnumValue.add(Types, SEA_DRAGON, "SEA_DRAGON", {name: "sea dragon"});
 
 	public function Antennae() {
 		super(null, null);

@@ -981,13 +981,13 @@ public class Combat extends BaseContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
@@ -6009,7 +6009,7 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
-		
+
     }
 
     public function WeaponFlyingSwordsStatusProcs():void {
@@ -9113,13 +9113,13 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellPyreBurstEx, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) { 
-            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) { 
-                player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting); 
-            } else { 
-                player.addStatusValue(StatusEffects.CooldownSpellChainLighting, 1, -1); 
-            } 
-        } 
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellChainLighting, 1, -1);
+            }
+        }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLightingEx)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellChainLightingEx) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellChainLightingEx);
@@ -12787,7 +12787,7 @@ public class Combat extends BaseContent {
 		clearOutput();
         if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI) outputText("You create a small cyclone to ride upon and lift yourself up in the air.\n\n");
         else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight letting the storm carry you up.\n\n");
-        else if (player.wings.type == Wings.ETHEREAL_WINGS) outputText("You take flight letting the storm carry you up.\n\n");
+        else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight letting the storm carry you up.\n\n");
         else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.\n\n");
         else outputText("You open you wing taking flight.\n\n");
         player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
@@ -12813,7 +12813,7 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
         enemyAI();
     }
-	
+
 	public function landAfterUsingFlyingSword():void {
 		clearOutput();
 		outputText("You descend to the ground and step down from your "+player.weaponFlyingSwordsName+".\n\n");
@@ -12836,7 +12836,7 @@ public class Combat extends BaseContent {
         player.removeStatusEffect(StatusEffects.Flying);
 		doNext(curry(combatMenu, false));
 	}
-	
+
 	public function attackFlyingSword():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
         clearOutput();
@@ -13422,7 +13422,7 @@ public class Combat extends BaseContent {
         modssc = Math.round(modssc * 100) / 100;
         return modssc;
     }
-	
+
 	public function flyingSwordAttackCost():Number {
 		var fsac:Number = 25;
 		if (player.hasPerk(PerkLib.SoaringBlades)) {
@@ -13433,7 +13433,7 @@ public class Combat extends BaseContent {
 		}
 		return fsac;
 	}
-	
+
 	public function flyingSwordUseCost():Number {
 		var fsuc:Number = 100;
 		if (player.hasPerk(PerkLib.SoaringBlades)) {
@@ -13444,7 +13444,7 @@ public class Combat extends BaseContent {
 		}
 		return fsuc;
 	}
-	
+
 	public function flyingWithSoulforceCost():Number {
 		var fwsc:Number = 500;
 		if (player.perkv1(PerkLib.Dantain) > 2) fwsc -= 100;

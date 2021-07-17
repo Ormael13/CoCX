@@ -656,7 +656,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your skin is also covered in various place with "+player.skin.base.adj+".");
 		}
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
-		if (player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of a sea dragon. Your underbelly is also lined up with bioluminescent dots like those of a deep sea fish.\n");
+		if (player.skin.base.pattern == Skin.PATTERN_SEA_DRAGON_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of a sea dragon. Your underbelly is also lined up with bioluminescent dots like those of a deep sea fish.\n");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
 		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_TATTOO) outputText(" You have strange ushi-oni tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
 	}
@@ -979,7 +979,7 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.VAMPIRE){
 			outputText(" Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");
 		}
-		if (wingType == Wings.FEY_DRAGON_WINGS){
+		if (wingType == Wings.FEY_DRAGON){
 			outputText(" Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone. While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.");
 		}
 		if (wingType == Wings.FEATHERED_AVIAN){
@@ -988,7 +988,7 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.NIGHTMARE){
 			outputText(" A pair of large ominous black leathery wings expand from your back. You can open them wide to soar high in the sky.");
 		}
-		if (wingType == Wings.ETHEREAL_WINGS){
+		if (wingType == Wings.ETHEREAL){
 			outputText(" Three pairs of otherworldly tendrils grow out of your back. They have an ethereal glow around them and they gently sway against an invisible wind.");
 		}
 		if (wingType == Wings.THUNDEROUS_AURA){
@@ -1003,7 +1003,7 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.FAIRY){
 			outputText(" A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
 		}
-		if (wingType == Wings.SEADRAGON){
+		if (wingType == Wings.SEA_DRAGON){
 			outputText(" Two large majestic webbed wings not unlike the aquatic flippers of a deep-sea creature unfurls from your back, the interior lined with bright color patterns and bioluminescent specks that change depending on your mood. These wings are as good to fly as they are to swim.");
 		}
 	}
@@ -1133,7 +1133,7 @@ public class PlayerAppearance extends BaseContent {
 			if (player.horns.count > 0)
 				outputText(" You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
 		}
-		if (player.horns.type == Horns.SEADRAGON) {
+		if (player.horns.type == Horns.SEA_DRAGON) {
 			if (player.horns.count > 0)
 				outputText(" Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.\n");
 		}
@@ -1414,7 +1414,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
 			if(player.antennae.type == Antennae.CENTIPEDE)
 				outputText(" A pair of long antennae have grown just behind your hairline. They occasionally curl and twitch at the slightest of movements.");
-			if(player.antennae.type == Antennae.SEADRAGON)
+			if(player.antennae.type == Antennae.SEA_DRAGON)
 				outputText(" Just below your ears are four bioluminescent strands that run down your neck, beautifully lighting up your front and giving you an air of mystique.");
 		}
 		//not bald
