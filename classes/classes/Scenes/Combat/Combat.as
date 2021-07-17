@@ -517,7 +517,7 @@ public class Combat extends BaseContent {
 			if (flags[kFLAGS.AUTO_FLIGHT] == 1 && player.canFly()) {
 				if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI) outputText("You create a small cyclone to ride upon and lift yourself up in the air.");
 				else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight letting the storm carry you up.");
-				else if (player.wings.type == Wings.ETHEREAL_WINGS) outputText("You take flight letting the storm carry you up.");
+				else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight letting the storm carry you up.");
 				else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.");
 				else outputText("You open you wing taking flight.");
 				player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);

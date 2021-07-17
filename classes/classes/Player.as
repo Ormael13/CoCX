@@ -8883,7 +8883,7 @@ use namespace CoC;
 			}
 			if (InCollection(skinTone, SphinxSkinColor))
 				sphinxCounter++;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
 				sphinxCounter++;
