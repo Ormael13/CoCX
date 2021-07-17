@@ -26,7 +26,7 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function playerRemove():WeaponRange { //This item is being removed by the player. Remove any perks, etc.
-			while (game.player.findPerk(weapPerk.ptype) >= 0) game.player.removePerk(weapPerk.ptype);
+			while (game.player.hasPerk(weapPerk.ptype)) game.player.removePerk(weapPerk.ptype);
 			return super.playerRemove();
 		}
 		

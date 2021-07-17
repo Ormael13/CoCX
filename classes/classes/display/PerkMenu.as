@@ -25,10 +25,16 @@ public class PerkMenu extends BaseContent {
 		var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks");
-		while(temp < player.perks.length) {
-			outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
-			temp++;
+		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
+			playerPerksList();
 		}
+		else{
+			while(temp < player.perks.length) {
+				outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
+				temp++;
+			}
+		}
+
 		menu();
 		addButton(0, "Next", playerMenu);
 		if (player.perkPoints > 0) {
@@ -57,7 +63,7 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.Venomancy) || player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)||
 			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
-			outputText("\n<b>You can choose and adjust various effect related to your magic.</b>");
+			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
 			addButton(7, "Magic Opt",MagicOption);
 		}
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
@@ -70,7 +76,10 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(10, "Number of", EngineCore.doNothing);
 		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
-
+		if (player.hasPerk(PerkLib.LiftOff)) {
+			outputText("\n<b>You can choose and adjust various misc effects.</b>");
+			addButton(12, "Misc Opt",MiscOption);
+		}
 		//if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 		//	if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
 		//	if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
@@ -98,6 +107,29 @@ public class PerkMenu extends BaseContent {
 			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
 			addButton(3, "Bloody Opt",DarkRitualOption);
 		}
+		addButton(14, "Back", displayPerks);
+	}
+
+	public function MiscOption(e:MouseEvent = null):void {
+		clearOutput();
+		menu();
+		var autoFlyingFlag:int = flags[kFLAGS.AUTO_FLIGHT];
+        var setflag:Function = curry(setFlag,MiscOption);
+		var autoFlyingType:Function = curry(setflag,kFLAGS.AUTO_FLIGHT);
+        if (player.hasPerk(PerkLib.LiftOff)) {
+			outputText("You can choose to start flying or not at the start of each combat.\n");
+			outputText("Start ");
+			switch(autoFlyingFlag) {
+				case 0: outputText("on the ground"); break;
+				case 1: outputText("flying (by wings)"); break;
+				case 2: outputText("flying (on flying sword)"); break;
+				case 3: outputText("flying (using soulforce)"); break;
+			}
+		}
+		if (autoFlyingFlag != 0) addButton(0, "On Ground", autoFlyingType,0);
+		if (player.canFly() && autoFlyingFlag != 1) addButton(1, "By Wings", autoFlyingType,1);
+		if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingS", autoFlyingType,2);
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
 		addButton(14, "Back", displayPerks);
 	}
 
@@ -779,6 +811,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Metabolism Mutations");
 			mutationsDatabaseVerify([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved]);
 			mutationsDatabaseVerify([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved]);
+			mutationsDatabaseVerify([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved]);
 			mutationsDatabase();
 		}
 
@@ -910,9 +943,9 @@ public class PerkMenu extends BaseContent {
 		}
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.hasPerk(perkName[0])) {	//Just checking if you have the base.
-				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
+				outputText("\n" + perkName[0].name() + ": <font color=\"#008000\">Acquired.</font>");
 			} else {
-				outputText("\n" + perkName[0].name + ": <font color=\"#800000\">Missing.</font>");
+				outputText("\n" + perkName[0].name() + ": <font color=\"#800000\">Missing.</font>");
 			}
 			outputText("\nTier: " + String(perkCount) + " of " + String(perkName.length) + ".");
 			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
@@ -950,7 +983,7 @@ public class PerkMenu extends BaseContent {
 		}
 		else { //Help Off
 			if (player.hasPerk(perkName[0])) {
-				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
+				outputText("\n" + perkName[0].name() + ": <font color=\"#008000\">Acquired.</font>");
 				outputText("\nTier: " + String(perkCount));
 				if (!perkCount == 0){	//De-sync between desc.
 					perkCount -= 1;
@@ -967,7 +1000,7 @@ public class PerkMenu extends BaseContent {
 	}
 
 	public function perkDatabase(page:int=0, count:int=20):void {
-		var allPerks:Array = PerkTree.obtainablePerks();
+		var allPerks:Array = PerkTree.obtainablePerks().sort();
 		clearOutput();
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
@@ -980,7 +1013,7 @@ public class PerkMenu extends BaseContent {
 			else if (ptype.available(player)) color=darkTheme()?'#44cc44':'#228822'; // can take on next lvl
 			else color=darkTheme()?'#ffcc44':'#aa8822'; // requirements not met
 
-			outputText("<font color='" +color +"'><b>"+ptype.name+"</b></font>: ");
+			outputText("<font color='" +color +"'><b>"+ptype.name()+"</b></font>: ");
 			outputText(pclass?ptype.desc(pclass):ptype.longDesc);
 			if (!pclass && ptype.requirements.length>0) {
 				var reqs:Array = [];
@@ -1011,6 +1044,150 @@ public class PerkMenu extends BaseContent {
 	private function setFlag(returnTo:Function,flag:int,val:int):void{
 		flags[flag] =  val;
 		returnTo();
+	}
+
+	public function playerPerksList():void {	//Can this be done better? Very likely. But hell, I'm not a programmer.
+		var pPerkList:Array = player.perks;	 	//Player Perks
+		var masterlist:Array = [];				//Temp hold of above
+		var ignorelist:Array = [];				//List to check against repetitively
+		var endlist:Array = [];					//Final list of perks to output
+
+		function initSet():void {
+			var mutationList:Array = [PerkLib.BlackHeart, PerkLib.FrozenHeart, PerkLib.ObsidianHeart, PerkLib.TwinHeart, PerkLib.HeartOfTheStorm, PerkLib.DraconicHeart, PerkLib.MantislikeAgility, PerkLib.OniMusculature, PerkLib.VenomGlands, PerkLib.HollowFangs, PerkLib.SalamanderAdrenalGlands, PerkLib.OrcAdrenalGlands, PerkLib.VampiricBloodsteam, PerkLib.HinezumiBurningBlood, PerkLib.FeyArcaneBloodstream, PerkLib.PigBoarFat, PerkLib.NaturalPunchingBag, PerkLib.WhaleFat, PerkLib.YetiFat, PerkLib.ArachnidBookLung, PerkLib.DraconicLungs, PerkLib.CaveWyrmLungs, PerkLib.MelkieLung, PerkLib.DrakeLungs, PerkLib.ManticoreMetabolism, PerkLib.DisplacerMetabolism, PerkLib.LactaBovinaOvaries, PerkLib.FloralOvaries, PerkLib.MinotaurTesticles, PerkLib.EasterBunnyEggBag, PerkLib.NukiNuts, PerkLib.GorgonsEyes, PerkLib.GazerEye, PerkLib.ElvishPeripheralNervSys, PerkLib.LizanMarrow, PerkLib.DraconicBones, PerkLib.HarpyHollowBones, PerkLib.KitsuneThyroidGland, PerkLib.NekomataThyroidGland, PerkLib.KitsuneParathyroidGlands, PerkLib.HellcatParathyroidGlands]
+			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
+				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){	//Okay, proved that this does remove the base mutations properly.
+					var pPerkReq:PerkType = pPerks.ptype
+					var perkno:Boolean = true;
+					for each (var temp1:Object in pPerkReq.requirements) {
+						if (temp1.hasOwnProperty("perk") || temp1.hasOwnProperty("perks") || temp1.hasOwnProperty("allperks")){
+							masterlist.push(pPerkReq);
+							perkno = false;
+							break;
+						}
+					}
+					if (perkno) {
+						ignorelist.push(pPerkReq);
+						endlist.push(pPerkReq);
+					}
+				}
+			}
+			repPerkClr();
+		}
+
+		//Idea: Local perk table to create new one every time, then overwrite existing one higher up? Skips the removing step which seems to be the problem....?
+		function repPerkClr():void { //Cycling perks against requirements until no higher can be achieved per.
+			var change:Boolean = false;
+			var replaceList:Array = [];
+			var removeList:Array = [];
+			for each(var pPerk:PerkType in masterlist) {
+				var requirelen:int = 0;
+				for each (var cond:Object in pPerk.requirements) {
+					if (cond.hasOwnProperty("allperks")){	//Checks if player has all required perks
+						var pCondPerkLen:int = cond.allperks.length;
+						var condlen:int = 0;
+						var alltrue:Array = [];
+						for each (var pPerkYes1:PerkType in cond.allperks) {
+							if (ignorelist.indexOf(pPerkYes1) >= 0) {
+								condlen++
+								alltrue.push(pPerkYes1);
+								change = true;
+								if (condlen == pCondPerkLen){
+									replaceList.push(pPerk);
+									for each (var pPerkRem:PerkType in alltrue){
+										removeList.push(pPerkRem)
+									}
+								}
+							}
+						}
+						break;
+					}
+					else if (cond.hasOwnProperty("perks")){	//Checks if player has any of the perks
+						var pPerkCycle:Boolean = false
+						for each (var pPerkYes2:PerkType in cond.perks) {
+							if (ignorelist.indexOf(pPerkYes2) >= 0) {
+								removeList.push(pPerkYes2);
+								change = true;
+								if (!pPerkCycle) {
+									replaceList.push(pPerk);
+									pPerkCycle = true
+								}
+							}
+						}
+						//break;
+					}
+					else if (cond.hasOwnProperty("perk")){	//Checks if player has the perk
+						if (ignorelist.indexOf(cond.perk) >= 0) {
+							replaceList.push(pPerk);
+							removeList.push(cond.perk);
+							endlist.push(pPerk);
+							change = true;
+							break;
+						}
+					}
+					else {	//This should never occur, as all these in masterlist should have a perk requirement of some sort.
+						requirelen++
+					}
+				}
+				if (requirelen == pPerk.requirements.len){
+					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
+				}
+			}
+			if (change) {	//This feels terrible. But I suppose it works as a workaround to me not being able to directly splice arrays, since it seems to fuck up in odd ways.
+				for each (var pPerkCleared:PerkType in replaceList){	//Keep perks for final/filter
+					ignorelist.push(pPerkCleared);
+					endlist.push(pPerkCleared);
+					masterlist.splice(masterlist.indexOf(pPerkCleared), 1);
+				}
+				var endResetList:Array = [];
+				for each (var pPerkQuarantined:PerkType in endlist){	//Remove perks from source
+					if (!(removeList.indexOf(pPerkQuarantined) >= 0)){
+						if (!(endResetList.indexOf(pPerkQuarantined) >= 0)){
+							endResetList.push(pPerkQuarantined);
+						}
+					}
+				}
+				endlist = endResetList;
+				repPerkClr();
+			}
+			else {
+				perkOut();
+			}
+		}
+
+		function perkOut():void {	//Results of just the perks that are left.
+			for each(var pPerk:PerkType in endlist.sort()) {	//The fuck, this doesn't do it right either.
+				outputText("<b>" + player.getPerk(pPerk).perkName + ":</b> ");
+				try {
+					outputText(player.getPerk(pPerk).perkDesc);
+				} catch (error:Error) {
+					outputText("No description.");
+				}
+				outputText(" \n");
+			}
+		}
+
+		function tempchk():void{	//Debug function to see where specific perks have been sent to.
+			var chkperk:PerkType = PerkLib.EternalyLastingBuffs
+			var hi:Boolean = false;
+			if (masterlist.indexOf(chkperk) >= 0){
+				outputText("MasterList\n");
+				hi = true
+			}
+			if (ignorelist.indexOf(chkperk) >= 0){
+				outputText("IgnoreList\n");
+				hi = true
+			}
+			if (endlist.indexOf(chkperk) >= 0){
+				outputText("EndList\n");
+				hi = true
+			}
+			if (!hi){
+				outputText("Lost to the void");
+			}
+			outputText("\n");
+		}
+
+		initSet();
 	}
 	/* [INTERMOD: revamp]
 	 public function ascToleranceOption():void{

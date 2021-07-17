@@ -43,11 +43,11 @@ public class PerkType extends BaseContent
 		}
 
 		/**
-		 * Perk short name, could be changed in future game versions
+		 * Perk short name.
+		 * If this is perk player has, `params` is not-null and has value1-4 properties
 		 */
-		public function get name():String
-		{
-			return _name;
+		public function name(params:PerkClass=null):String {
+			return _name
 		}
 
 		/**
@@ -499,6 +499,17 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireMaxVenom(value:int):PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxVenom() >= value;
+				},
+				text: "Max. Venom/Web "+value,
+				type: "venom_web",
+				value: value
+			});
+			return this;
+		}
 		private function fnRequireAttr(attrname:String,value:int):Function {
 			return function(player:Player):Boolean {
 				return player[attrname] >= value;
@@ -520,7 +531,7 @@ public class PerkType extends BaseContent
 				fn  : function (player:Player):Boolean {
 					return player.hasPerk(perk);
 				},
-				text: perk.name,
+				text: perk.name(),
 				type: "perk",
 				perk: perk
 			});
@@ -530,7 +541,7 @@ public class PerkType extends BaseContent
 			if (perks.length == 0) throw ("Incorrect call of requireAnyPerk() - should NOT be empty");
 			var text:Array = [];
 			for each (var perk:PerkType in perks) {
-				text.push(perk.name);
+				text.push(perk.name());
 			}
 			requirements.push({
 				fn  : function (player:Player):Boolean {
@@ -542,6 +553,29 @@ public class PerkType extends BaseContent
 				text: text.join(" or "),
 				type: "anyperk",
 				perks: perks
+			});
+			return this;
+		}
+		public function requirePerks(...perks:Array):PerkType {	//As opposed to requirePerk or requireAnyPerk, this checks for if player has all required perks instead of any of them or just the one.
+			if (perks.length == 0) throw ("Incorrect call of requirePerks() - should NOT be empty");
+			var text:Array = [];
+			for each (var perk:PerkType in perks) {
+				text.push(perk.name());
+			}
+			requirements.push({
+				fn  : function (player:Player):Boolean {
+					var allPerksYes:Boolean = true;
+					for each (var perk:PerkType in perks) {
+						if (!player.hasPerk(perk)) {
+							allPerksYes = false;
+							break;
+						}
+					}
+					return allPerksYes;
+				},
+				text: text.join(" and "),
+				type: "allperks",
+				allperks: perks
 			});
 			return this;
 		}

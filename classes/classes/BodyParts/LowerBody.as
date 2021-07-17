@@ -762,8 +762,8 @@ public class LowerBody extends SaveableBodyPart {
 		legCount: 12,
 		legs: "vine-like tentacle stamens",
 		appearanceDesc: "Around your waist, the petals of a large [skin coat.nakedcolor] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens.",
-		isAlraune: true,
-		hasTentacles: true
+		tentacle: true,
+		isAlraune: true
 	});
 
 	public static const LION:int = 35;
@@ -1138,7 +1138,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const FLOWER_LILIRAUNE:int = 64;
 	EnumValue.add(Types, FLOWER_LILIRAUNE, "FLOWER_LILIRAUNE", {
 		name: "liliraune flower",
-		appearanceDesc: "Around your waist, the petals of a large {nakedCoatColor} orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the center, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens. You used to be alone in the pitcher, but you now share space with your twin sister, taking turns with her whether it's for battle or sex.",
+		tentacle: true,
+		appearanceDesc: "Around your waist, the petals of a large [skin coat.nakedcolor] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the center, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens. You used to be alone in the pitcher, but you now share space with your twin sister, taking turns with her whether it's for battle or sex.",
 		isAlraune: true,
 		isLiliraune: true,
 		hasTentacles: true

@@ -30,15 +30,15 @@ import classes.internals.*;
 				else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 			}
 			//Determine if evaded
-			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
-			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				if(plural) outputText("' attacks.\n");
 				else outputText("'s attack.\n");
@@ -143,15 +143,15 @@ import classes.internals.*;
 				else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 			}
 			//Determine if evaded
-			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
-			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				if (plural) outputText("' attacks.\n");
 				else outputText("'s attack.\n");
@@ -265,15 +265,15 @@ import classes.internals.*;
 					else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 				}
 				//Determine if evaded
-				else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+				else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				}
 				//("Misdirection"
-				else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+				else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				}
 				//Determine if cat'ed
-				else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+				else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 					if (plural) outputText("' attacks.\n");
 					else outputText("'s attack.\n");

@@ -85,7 +85,7 @@ package classes.Scenes.Camp
 			if (maxPermanentImprovedStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentImprovedStoneGolemsBagSize();
 			if (maxPermanentSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentSteelGolemsBagSize();
 			if (maxPermanentImprovedSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentImprovedSteelGolemsBagSize();
-			if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) maxReusableGolemCoresBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BeginnerGolemMaker)) maxReusableGolemCoresBagSizeCounter += 2;
 			maxReusableGolemCoresBagSizeCounter *= 3;
 			return maxReusableGolemCoresBagSizeCounter;
 		}
@@ -121,17 +121,20 @@ package classes.Scenes.Camp
 			clearOutput();
 			outputText("What helper would you like to make?\n\n");
 			outputText("<b>Stored golem cores for future reuse when making new golems:</b> " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
-			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + "\n");
-			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERMANENT_GOLEMS_BAG] + " / " + maxPermanentStoneGolemsBagSize() + "\n");
+			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERMANENT_GOLEMS_BAG] + " / " + maxPermanentStoneGolemsBagSize() + " golems\n");
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) outputText("<b>Improved Stone Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] + " / " + maxPermanentImprovedStoneGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Golems Bag:</b> " + flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentSteelGolemsBagSize() + " golems\n");
+			//outputText("<b>Improved Metal Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentImprovedSteelGolemsBagSize() + " golems\n");
 			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
 			menu();
 			if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make the most simple golem out of a pile of stones.  <b>It will crumble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePermanentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + permanentStoneGolemMakingCost() + " Mana");
-			/*if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) */addButtonDisabled(2, "M.S.Golem", "Make metal golem.\n\nSoon");//Cost: 2 Golem Plasma Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, i coś jeszcze innego? " + permanentSteelGolemMakingCost() + " Mana
+			/*if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) */addButtonDisabled(2, "M.Golem", "Make metal golem.\n\nSoon");//Cost: 1 Golem Plasma Core, 10 Stones, 10 Metal Plates, 10 Mechanisms, i coś jeszcze innego? " + permanentSteelGolemMakingCost() + " Mana
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) addButton(6, "I.P.S.Golem", makePermanentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 100 Stones, " + permanentImprovedStoneGolemMakingCost() + " Mana");
-			addButtonDisabled(7, "I.M.S.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + permanentImprovedSteelGolemMakingCost() + " Mana
+			addButtonDisabled(7, "I.M.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + permanentImprovedSteelGolemMakingCost() + " Mana
 			addButtonDisabled(12, "Upgrades", "Options to upgrade permanent golems.");
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			addButton(14, "Back", playerMenu);
@@ -363,50 +366,49 @@ package classes.Scenes.Camp
 			}
 		}
 		
-		//---------------
+		//--------------
 		//
 		//  ELEMENTALS
 		//
-		//---------------
+		//--------------
 		
 		public function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
-			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank1) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank2) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank3) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank5) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank6) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank7) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank9) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementalContractRank10) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank11) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank12) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank13) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank14) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank15) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank16) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank17) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank18) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank19) >= 0) maxSizeOfElementalsArmyCounter += 2;
-			if (player.findPerk(PerkLib.ElementalContractRank19) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank20) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank21) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank22) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank23) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank24) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank25) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank26) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank27) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank28) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank29) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank30) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementalContractRank31) >= 0) maxSizeOfElementalsArmyCounter += 3;
-			if (player.findPerk(PerkLib.ElementsOfTheOrtodoxPath) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) maxSizeOfElementalsArmyCounter += 1;
-			if (player.findPerk(PerkLib.ElementsOfMarethAdvanced) >= 0) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank1)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank2)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank3)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank4)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank5)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank6)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank7)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank8)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank9)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank10)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank11)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank12)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank13)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank14)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank15)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank16)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank17)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank18)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementalContractRank19)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank20)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank21)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank22)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank23)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank24)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank25)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank26)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank27)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank28)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank29)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank30)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementalContractRank31)) maxSizeOfElementalsArmyCounter += 3;
+			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 1;
 			return maxSizeOfElementalsArmyCounter;
 		}
 		
@@ -414,7 +416,7 @@ package classes.Scenes.Camp
 			clearOutput();
 			menu();
 			outputText("Which one elemental would you like to summon or promote to higher rank?\n\n");
-			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n\n");
+			if (player.hasPerk(PerkLib.JobElementalConjurer)) outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n\n");
 			outputText("<b>Currently summoned elementals:</b><i>");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 				outputText("\nAir");
@@ -906,7 +908,7 @@ package classes.Scenes.Camp
 			addButton(1, "Earth", evocationTomeEarth).hint(" Information about the Earth Elements.");
 			addButton(2, "Fire", evocationTomeFire).hint(" Information about the Fire Elements.");
 			addButton(3, "Water", evocationTomeWater).hint(" Information about the Water Elements.");
-			if (player.findPerk(PerkLib.ElementsOfTheOrtodoxPath) >= 0) {
+			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
 				addButton(4, "Ether", evocationTomeEther).hint(" Information about the Ether Elements.");
 				addButton(5, "Wood", evocationTomeWood).hint(" Information about the Wood Elements.");
 				addButton(6, "Metal", evocationTomeMetal).hint(" Information about the Metal Elements.");
@@ -916,7 +918,7 @@ package classes.Scenes.Camp
 				addButtonDisabled(5, "Wood", "Req. Elements of the orthodox Path perk.");
 				addButtonDisabled(6, "Metal", "Req. Elements of the orthodox Path perk.");
 			}
-			if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) {
+			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
 				addButton(7, "Ice", evocationTomeIce).hint(" Information about the Ice Elements.");
 				addButton(8, "Lightning", evocationTomeLightning).hint(" Information about the Lightning Elements.");
 				addButton(9, "Darkness", evocationTomeDarkness).hint(" Information about the Darkness Elements.");
@@ -926,7 +928,7 @@ package classes.Scenes.Camp
 				addButtonDisabled(8, "Lightning", "Req. Elements of Mareth: Basics perk.");
 				addButtonDisabled(9, "Darkness", "Req. Elements of Mareth: Basics perk.");
 			}
-			if (player.findPerk(PerkLib.ElementsOfMarethAdvanced) >= 0) {
+			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) {
 				addButton(10, "Poison", evocationTomePoison).hint(" Information about the Poison Elements.");
 				addButton(11, "Purity", evocationTomePurity).hint(" Information about the Purity Elements.");
 				addButton(12, "Corruption", evocationTomeCorruption).hint(" Information about the Corruption Elements.");
@@ -1045,61 +1047,61 @@ package classes.Scenes.Camp
 		}
 		private function accessSummonElementalsMainMenu1():void {
 			menu();
-			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu).hint("Req. 100 mana, 50 fatigue");
-			if (player.findPerk(PerkLib.ElementalContractRank1) >= 0) addButton(1, "RankUp(1)", rankUpSubmenu1st).hint("Req. 100 mana, 50 fatigue");
-			if (player.findPerk(PerkLib.ElementalContractRank2) >= 0) addButton(2, "RankUp(2)", rankUpSubmenu2nd).hint("Req. 200 mana, 100 fatigue");
-			if (player.findPerk(PerkLib.ElementalContractRank3) >= 0) addButton(3, "RankUp(3)", rankUpSubmenu3rd).hint("Req. 300 mana, 150 fatigue");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu).hint("Req. 100 mana, 50 fatigue");
+			if (player.hasPerk(PerkLib.ElementalContractRank1)) addButton(1, "RankUp(1)", rankUpSubmenu1st).hint("Req. 100 mana, 50 fatigue");
+			if (player.hasPerk(PerkLib.ElementalContractRank2)) addButton(2, "RankUp(2)", rankUpSubmenu2nd).hint("Req. 200 mana, 100 fatigue");
+			if (player.hasPerk(PerkLib.ElementalContractRank3)) addButton(3, "RankUp(3)", rankUpSubmenu3rd).hint("Req. 300 mana, 150 fatigue");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 2) {
-				if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) addButton(4, "RankUp(4)", rankUpSubmenu4th).hint("Req. 400 mana, 200 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank5) >= 0) addButton(5, "RankUp(5)", rankUpSubmenu5th).hint("Req. 500 mana, 250 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank6) >= 0) addButton(6, "RankUp(6)", rankUpSubmenu6th).hint("Req. 600 mana, 300 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank7) >= 0) addButton(7, "RankUp(7)", rankUpSubmenu7th).hint("Req. 700 mana, 350 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank4)) addButton(4, "RankUp(4)", rankUpSubmenu4th).hint("Req. 400 mana, 200 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank5)) addButton(5, "RankUp(5)", rankUpSubmenu5th).hint("Req. 500 mana, 250 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank6)) addButton(6, "RankUp(6)", rankUpSubmenu6th).hint("Req. 600 mana, 300 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank7)) addButton(7, "RankUp(7)", rankUpSubmenu7th).hint("Req. 700 mana, 350 fatigue");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 3) {
-				if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) addButton(8, "RankUp(8)", rankUpSubmenu8th).hint("Req. 800 mana, 400 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank9) >= 0) addButton(9, "RankUp(9)", rankUpSubmenu9th).hint("Req. 900 mana, 450 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank10) >= 0) addButton(10, "RankUp(10)", rankUpSubmenu10th).hint("Req. 1000 mana, 500 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank11) >= 0) addButton(11, "RankUp(11)", rankUpSubmenu11th).hint("Req. 1100 mana, 550 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank8)) addButton(8, "RankUp(8)", rankUpSubmenu8th).hint("Req. 800 mana, 400 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank9)) addButton(9, "RankUp(9)", rankUpSubmenu9th).hint("Req. 900 mana, 450 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank10)) addButton(10, "RankUp(10)", rankUpSubmenu10th).hint("Req. 1000 mana, 500 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank11)) addButton(11, "RankUp(11)", rankUpSubmenu11th).hint("Req. 1100 mana, 550 fatigue");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
-				if (player.findPerk(PerkLib.ElementalContractRank12) >= 0) addButton(12, "RankUp(12)", rankUpSubmenu12th).hint("Req. 1200 mana, 600 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank13) >= 0) addButton(13, "RankUp(13)", rankUpSubmenu13th).hint("Req. 1300 mana, 650 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank12)) addButton(12, "RankUp(12)", rankUpSubmenu12th).hint("Req. 1200 mana, 600 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank13)) addButton(13, "RankUp(13)", rankUpSubmenu13th).hint("Req. 1300 mana, 650 fatigue");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function accessSummonElementalsMainMenu2():void {
 			menu();
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
-				if (player.findPerk(PerkLib.ElementalContractRank14) >= 0) addButton(0, "RankUp(14)", rankUpSubmenu14th).hint("Req. 1400 mana, 700 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank15) >= 0) addButton(1, "RankUp(15)", rankUpSubmenu15th).hint("Req. 1500 mana, 750 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank14)) addButton(0, "RankUp(14)", rankUpSubmenu14th).hint("Req. 1400 mana, 700 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank15)) addButton(1, "RankUp(15)", rankUpSubmenu15th).hint("Req. 1500 mana, 750 fatigue");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 5) {
-				if (player.findPerk(PerkLib.ElementalContractRank16) >= 0) addButton(2, "RankUp(16)", rankUpSubmenu16th).hint("Req. 1600 mana, 800 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank17) >= 0) addButton(3, "RankUp(17)", rankUpSubmenu17th).hint("Req. 1700 mana, 850 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank18) >= 0) addButton(4, "RankUp(18)", rankUpSubmenu18th).hint("Req. 1800 mana, 900 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank19) >= 0) addButton(5, "RankUp(19)", rankUpSubmenu19th).hint("Req. 1900 mana, 950 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank16)) addButton(2, "RankUp(16)", rankUpSubmenu16th).hint("Req. 1600 mana, 800 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank17)) addButton(3, "RankUp(17)", rankUpSubmenu17th).hint("Req. 1700 mana, 850 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank18)) addButton(4, "RankUp(18)", rankUpSubmenu18th).hint("Req. 1800 mana, 900 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank19)) addButton(5, "RankUp(19)", rankUpSubmenu19th).hint("Req. 1900 mana, 950 fatigue");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 6) {
-				if (player.findPerk(PerkLib.ElementalContractRank20) >= 0) addButton(6, "RankUp(20)", rankUpSubmenu20th).hint("Req. 2000 mana, 1000 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank21) >= 0) addButton(7, "RankUp(21)", rankUpSubmenu21th).hint("Req. 2100 mana, 1050 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank22) >= 0) addButton(8, "RankUp(22)", rankUpSubmenu22th).hint("Req. 2200 mana, 1100 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank23) >= 0) addButton(9, "RankUp(23)", rankUpSubmenu23th).hint("Req. 2300 mana, 1150 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank20)) addButton(6, "RankUp(20)", rankUpSubmenu20th).hint("Req. 2000 mana, 1000 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank21)) addButton(7, "RankUp(21)", rankUpSubmenu21th).hint("Req. 2100 mana, 1050 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank22)) addButton(8, "RankUp(22)", rankUpSubmenu22th).hint("Req. 2200 mana, 1100 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank23)) addButton(9, "RankUp(23)", rankUpSubmenu23th).hint("Req. 2300 mana, 1150 fatigue");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 7) {
-				if (player.findPerk(PerkLib.ElementalContractRank24) >= 0) addButton(10, "RankUp(24)", rankUpSubmenu24th).hint("Req. 2400 mana, 1200 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank25) >= 0) addButton(11, "RankUp(25)", rankUpSubmenu25th).hint("Req. 2500 mana, 1250 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank26) >= 0) addButton(12, "RankUp(26)", rankUpSubmenu26th).hint("Req. 2600 mana, 1300 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank27) >= 0) addButton(13, "RankUp(27)", rankUpSubmenu27th).hint("Req. 2700 mana, 1350 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank24)) addButton(10, "RankUp(24)", rankUpSubmenu24th).hint("Req. 2400 mana, 1200 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank25)) addButton(11, "RankUp(25)", rankUpSubmenu25th).hint("Req. 2500 mana, 1250 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank26)) addButton(12, "RankUp(26)", rankUpSubmenu26th).hint("Req. 2600 mana, 1300 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank27)) addButton(13, "RankUp(27)", rankUpSubmenu27th).hint("Req. 2700 mana, 1350 fatigue");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function accessSummonElementalsMainMenu3():void {
 			menu();
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 8) {
-				if (player.findPerk(PerkLib.ElementalContractRank28) >= 0) addButton(10, "RankUp(28)", rankUpSubmenu28th).hint("Req. 2800 mana, 1400 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank29) >= 0) addButton(11, "RankUp(29)", rankUpSubmenu29th).hint("Req. 2900 mana, 1450 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank30) >= 0) addButton(12, "RankUp(30)", rankUpSubmenu30th).hint("Req. 3000 mana, 1500 fatigue");
-				if (player.findPerk(PerkLib.ElementalContractRank31) >= 0) addButton(13, "RankUp(31)", rankUpSubmenu31th).hint("Req. 3100 mana, 1550 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank28)) addButton(10, "RankUp(28)", rankUpSubmenu28th).hint("Req. 2800 mana, 1400 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank29)) addButton(11, "RankUp(29)", rankUpSubmenu29th).hint("Req. 2900 mana, 1450 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank30)) addButton(12, "RankUp(30)", rankUpSubmenu30th).hint("Req. 3000 mana, 1500 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank31)) addButton(13, "RankUp(31)", rankUpSubmenu31th).hint("Req. 3100 mana, 1550 fatigue");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
@@ -1111,17 +1113,17 @@ package classes.Scenes.Camp
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth).hint("100 mana, 50 fatigue");
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire).hint("100 mana, 50 fatigue");
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater).hint("100 mana, 50 fatigue");
-				if (player.findPerk(PerkLib.ElementsOfTheOrtodoxPath) >= 0) {
+				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther).hint("100 mana, 50 fatigue");
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood).hint("100 mana, 50 fatigue");
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal).hint("100 mana, 50 fatigue");
 				}
-				if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) {
+				if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce).hint("100 mana, 50 fatigue");
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning).hint("100 mana, 50 fatigue");
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness).hint("100 mana, 50 fatigue");
 				}
-				if (player.findPerk(PerkLib.ElementsOfMarethAdvanced) >= 0) {
+				if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsPoison) < 1) addButton(10, "Poison", summonElementalPoison).hint("100 mana, 50 fatigue");
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsPurity) < 1) addButton(11, "Purity", summonElementalPurity).hint("100 mana, 50 fatigue");
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption).hint("100 mana, 50 fatigue");
@@ -2123,6 +2125,124 @@ package classes.Scenes.Camp
 			outputText("\"<i>Someday you will attempt this ritual again and when you do I will..</i>\"");
 			outputText("Its final curse is silenced as its power are sealed again reducing it back to its former size. \"<b>Well this ritual is a failure you will have to try again when you achieved better control.</b>\"");
 			HPChange(-(Math.round(player.HP * 0.5)), true);
+		}
+		
+		//-------------
+		//
+		//  SKELETONS
+		//
+		//-------------
+		
+		public function maxDemonBonesStored():Number {
+			var maxDemonBonesStoredCounter:Number = 100;
+			return maxDemonBonesStoredCounter;
+		}
+		public function maxSkeletonWarriors():Number {
+			var maxSkeletonWarriorsCounter:Number = 0;
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) maxSkeletonWarriorsCounter += 3;
+			if (player.hasPerk(PerkLib.GreaterHarvest)) maxSkeletonWarriorsCounter += 3;
+			if (player.hasPerk(PerkLib.BoneSoul)) maxSkeletonWarriorsCounter += 4;
+			return maxSkeletonWarriorsCounter;
+		}
+		public function maxSkeletonArchers():Number {
+			var maxSkeletonArchersCounter:Number = 0;
+			if (player.hasPerk(PerkLib.GreaterHarvest)) maxSkeletonArchersCounter += 3;
+			if (player.hasPerk(PerkLib.BoneSoul)) maxSkeletonArchersCounter += 3;
+			if (player.hasPerk(PerkLib.SkeletonLord)) maxSkeletonArchersCounter += 4;
+			return maxSkeletonArchersCounter;
+		}
+		public function maxSkeletonMages():Number {
+			var maxSkeletonMagesCounter:Number = 0;
+			if (player.hasPerk(PerkLib.GreaterHarvest)) maxSkeletonMagesCounter += 3;
+			if (player.hasPerk(PerkLib.BoneSoul)) maxSkeletonMagesCounter += 3;
+			if (player.hasPerk(PerkLib.SkeletonLord)) maxSkeletonMagesCounter += 4;
+			return maxSkeletonMagesCounter;
+		}
+		
+		public function accessMakeSkeletonWinionsMainMenu():void {
+			clearOutput();
+			outputText("What skeleton would you like to make?\n\n");
+			outputText("<b>Stored Demon Bones:</b> " + player.perkv1(PerkLib.PrestigeJobNecromancer) + " / " + maxDemonBonesStored() + "\n");
+			outputText("<b>Skeleton Warriors:</b> " + player.perkv2(PerkLib.PrestigeJobNecromancer) + " / " + maxSkeletonWarriors() + "\n");
+			if (player.hasPerk(PerkLib.GreaterHarvest)) {
+				outputText("<b>Skeleton Archers:</b> " + player.perkv1(PerkLib.GreaterHarvest) + " / " + maxSkeletonArchers() + "\n");
+				outputText("<b>Skeleton Mages:</b> " + player.perkv2(PerkLib.GreaterHarvest) + " / " + maxSkeletonMages() + "\n");
+			}
+			menu();
+			if (player.perkv1(PerkLib.PrestigeJobNecromancer) >= 20 && player.soulforce >= 5000) {
+				addButton(0, "C.Skeleton(W)", createSkeletonWarrior).hint("Create Skeleton Warrior.");
+				if (player.hasPerk(PerkLib.GreaterHarvest)) {
+					if (player.perkv1(PerkLib.PrestigeJobNecromancer) > 0) {
+						if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) addButton(1, "C.Skeleton(A)", createSkeletonArcher).hint("Create Skeleton Archer.");
+						else addButtonDisabled(1, "C.Skeleton(A)", "Req. to create at least 1 Skeleton Warrior before creating Skeleton Archer.");
+						if (player.perkv1(PerkLib.GreaterHarvest) > 0) addButton(2, "C.Skeleton(M)", createSkeletonMage).hint("Create Skeleton Mage.");
+						else addButtonDisabled(2, "C.Skeleton(M)", "Req. to create at least 1 Skeleton Archer before creating Skeleton Mage.");
+					}
+				}
+				else {
+					addButtonDisabled(1, "???", "Req. Greater harvest perk to unlock this option.");
+					addButtonDisabled(2, "???", "Req. Greater harvest perk to unlock this option.");
+				}
+				
+			}
+			else {
+				addButtonDisabled(0, "C.Skeleton(W)", "You lack required amont of demon bones (20+) and/or soulforce (5000+) to create skeleton warrior.");
+				if (player.hasPerk(PerkLib.GreaterHarvest)) {
+					addButtonDisabled(1, "C.Skeleton(A)", "You lack required amont of demon bones (20+) and/or soulforce (5000+) to create skeleton archer.");
+					addButtonDisabled(2, "C.Skeleton(M)", "You lack required amont of demon bones (20+) and/or soulforce (5000+) to create skeleton mage.");
+				}
+				else {
+					addButtonDisabled(1, "???", "Req. Greater harvest perk to unlock this option.");
+					addButtonDisabled(2, "???", "Req. Greater harvest perk to unlock this option.");
+				}
+			}
+			addButton(14, "Back", playerMenu);
+		}
+		
+		public function createSkeletonWarrior():void {
+			clearOutput();
+			if (player.perkv2(PerkLib.PrestigeJobNecromancer) == maxSkeletonWarriors()) {
+				outputText("You already got as many Skeleton Warriors as you could realistically control.");
+				doNext(accessMakeSkeletonWinionsMainMenu);
+				return;
+			}
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, -20);
+			player.soulforce -= 5000;
+			statScreenRefresh();
+			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Warrior, ready to fight things and do anything your finger will request.");
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 2, 1);
+			doNext(accessMakeSkeletonWinionsMainMenu);
+			cheatTime2(10);
+		}
+		public function createSkeletonArcher():void {
+			clearOutput();
+			if (player.perkv1(PerkLib.GreaterHarvest) == maxSkeletonArchers()) {
+				outputText("You already got as many Skeleton Archers as you could realistically control.");
+				doNext(accessMakeSkeletonWinionsMainMenu);
+				return;
+			}
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, -20);
+			player.soulforce -= 5000;
+			statScreenRefresh();
+			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Archer, ready to fight things and do anything your finger will request.");
+			player.addPerkValue(PerkLib.GreaterHarvest, 1, 1);
+			doNext(accessMakeSkeletonWinionsMainMenu);
+			cheatTime2(10);
+		}
+		public function createSkeletonMage():void {
+			clearOutput();
+			if (player.perkv2(PerkLib.GreaterHarvest) == maxSkeletonMages()) {
+				outputText("You already got as many Skeleton Mages as you could realistically control.");
+				doNext(accessMakeSkeletonWinionsMainMenu);
+				return;
+			}
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, -20);
+			player.soulforce -= 5000;
+			statScreenRefresh();
+			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Mage, ready to fight things and do anything your finger will request.");
+			player.addPerkValue(PerkLib.GreaterHarvest, 2, 1);
+			doNext(accessMakeSkeletonWinionsMainMenu);
+			cheatTime2(10);
 		}
 	}
 }

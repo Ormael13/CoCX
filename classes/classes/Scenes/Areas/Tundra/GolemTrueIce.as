@@ -17,8 +17,8 @@ package classes.Scenes.Areas.Tundra
 		public function backhand():void {
 			outputText("The golem visage twists into a grimace of irritation, and it flyby you swinging hand at you in a vicious backhand.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 3;
 			damage = Math.round(damage);
 			//Dodge
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
@@ -34,8 +34,8 @@ package classes.Scenes.Areas.Tundra
 			outputText("Raising it fists high overhead, golem swiftly dives down bringing it fists down in a punishing strike!");
 			
 			var damage:Number = 100 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 3;
 			damage = Math.round(damage);
 			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else

@@ -430,7 +430,14 @@ public class Enigmanium extends Consumable{
 				mutations.humanizeSkin();
 				changes++;
 			}
-
+			//sphinx color skin
+			var SphinxSkinColor:Array = ["dark", "tan"];
+			if (!InCollection(player.skinTone, SphinxSkinColor) && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
+				player.skin.base.color = randomChoice(SphinxSkinColor);
+				outputText("[skin]!</b>");
+				changes++;
+			}
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ
 			if (player.ears.type != Ears.LION && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {

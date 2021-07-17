@@ -447,7 +447,7 @@ internal function defeatKellyNDBREAKHIM():void {
 //Win Second Fight (Third Feminizing Encounter):
 internal function breakingKeltNumeroThree():void {
 	clearOutput();
-	if(monster.HP < 1) outputText("Slumping down, ");
+	if(monster.HP <= monster.minHP()) outputText("Slumping down, ");
 	else outputText("Moaning, ");
 	outputText("he doesn't attempt to escape or attack you.  Before he can do anything, you're already on him. His reactions appear to be a lot slower since he began discovering his new craving for your dick.  He just stares at you nervously, waiting for your next move.");
 	

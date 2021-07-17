@@ -215,7 +215,6 @@
 			player.tone = 0;
 			player.thickness = 20;
 			player.femininity = 80;
-
 			player.horns.type = Horns.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.tailType = Tail.NONE;
@@ -444,6 +443,11 @@
 		public function Need2GoEndElfQuest():void {
 			clearOutput();
 			WoodElvesQuest = QUEST_STAGE_PCFUCKOFF;
+			outputText("The three look sad as you tell them you’ll be leaving." +
+					"\n\nMerisiel sighs. \"<i>I figured you would when I realized your memories were returning. Don’t worry, we won’t try to stop you.</i>\"\n\n" +
+					"Elenwen tells you where your old equipment is being stored. \"<i>We didn’t get rid of it… we were planning on giving it back to you after your naming ceremony tomorrow anyway. I suppose you’ll be wanting it.</i>\"\n\n" +
+					"Alyssa has tears in her eyes as she pleads with you but your mind's made up and you decide to leave, heading back to your camp.");
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function KeepName():void {
@@ -581,7 +585,25 @@
 		public function GroveLayout():void {
 			clearOutput()
 			if (WoodElvesQuest != QUEST_STAGE_PCCAMEBACK){
-				outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME BLA BLA BLA WELCOME");
+				outputText("You walk along the treeline following the way back to the elves as you last remember. You know you are nearing your destination as the familiar sound of running water as the river hits your ears before coming to view." +
+						"You spot the giant tree resting in its clearing before you quickly advance to it. Memories flow through you as you caress its fine bark. A gentle vine stretches out, endearingly caressing you in reciprocation. Your memories guide you as you follow the river back and finally spot the elven houses. You walk on the gravel as a few curious glances turn your way. Their eyes glint with the sparkling green light bouncing off of their glance as the elves take notice of you one after the other." +
+						"\n\nOut of nowhere, you are grabbed from behind as an elf gives you a surprise hug. You flinch softly at the vice-like grip, it's as if they never want to let go of you again. The elf gently loosens her grip as she looks into your eyes. Alyssa stares at you intently before gathering her words." +
+						"\n\n\"<i>Sister [name]! You came back, we all thought you would get captured by demons or worse out there!</i>");
+			if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
+				outputText("\"" +
+				"\n\nUnsurprisingly, Elenwen is not so far behind acting a little confused." +
+						"\n\n\"<i>Alyssa, what's going on? </i>");
+				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i>Who's this?</i>");
+				outputText("<i> Wait, that's actually [name]?! You finally came home! Merisiel is going to be overjoyed!</i>\"" +
+						"\n\nYou pause briefly; that's slightly concerning. You ask what happened with Merisiel." +
+						"\n\n\"<i>Well, ever since you left she's been kind of depressed. She's constantly asking herself over and over if the memory incident was her fault. </i>");
+				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Doesn't matter if you've changed t</i>");
+				else outputText("<i>T</i>");
+				outputText("<i>he mere fact that you are here despite everything is going to cheer her up.</i>\"" +
+						"Before you know it, they organize a whole party just for you. Wine, food, and more discreet pleasures included. Perhaps coming back once in a while would be nice." +
+						" You think out loud. It's just that you need time to yourself. Besides, if you spent all your time here there wouldn't be any time left for your quest." +
+						"\n\nElenwen shrugs before replying to your statement. Guess you have been thinking out loud. \"<i>You're free to come and go. Besides that, you fighting to save the land is something we should be proud of. Who knows, you might even free the blessed tree eventually.</i>\"" +
+						"\n\nFreeing the blessed tree uh… that might be something worth looking into. Regardless, you spend the few remaining hours with them and only leave at dusk promising not only to them but yourself that you will visit once in a while.");
 				WoodElvesQuest = QUEST_STAGE_PCCAMEBACK
 				GroveLayout2(true);
 			}
@@ -591,7 +613,10 @@
 
 		///ELF VILLAGE SECTION///
 		public function GroveLayout2(isFirstTime:Boolean = false):void {
-			if (!isFirstTime)outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO");
+			if (!isFirstTime)outputText("The elven village is at its usual calm today. Your sisters are playfully frolicking around in the grove. Sewing, swimming, playing music, or in some rare cases training with weapons in the small area dedicated to archery and more martial pursuit." +
+					" This grove is a small oasis of innocence cut away from the rest of Mareth. The elves living their long hedonistic existence on a day-to-day basis without worry or fear." +
+					"\n\nThe only stain amidst this beautiful scenery is the 'blessed' trees at the edge of this settlement which reminds you all too well that if no one steps up and does the fighting even this haven will eventually become corrupted and defiled beyond repair before disappearing from the face of Mareth. You try and keep your mind joyful however not to darken the light of day.");
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" Well, what's left of it… it's hard to get any sun with those damn clouds covering the sky.");
 			menu();
 			addButton(0, "River", River);
 			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
@@ -605,6 +630,7 @@
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
 		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
 			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
+			addButtonDisabled(3, "Elenwen", "Under Review.");
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
 			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
@@ -861,7 +887,7 @@
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}
-			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked, even before we came to Mareth. I still practice that way, as you can see.</i>\"" +
+			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked. I still practice that way, as you can see.</i>\"" +
 					"\n\nWith that, you take up a practice spear and begin training your posture and movements." +
 					" Alyssa alternates between watching you and correcting your posture with her hands." +
 					" Though she constantly tells you not to force your movement in favor of feeling where the wind is directing you," +
@@ -903,7 +929,7 @@
 			CoC.instance.timeQ = 1;
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry,0,0,0,0);
+				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry1to4,1,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
@@ -911,16 +937,14 @@
 			else if (player.spe >= 100 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING1 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
 				player.createPerk(PerkLib.ELFElvenBattleStyle,0,0,0,0);
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryII,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,2);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 150 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING2 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING3;
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIII,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryII);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,3);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Spear Dancing Flurry III Perk! <b>Gained Perk: Elven Spear Dancing Flurry III</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
@@ -928,8 +952,7 @@
 			else if (player.spe >= 200 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING3 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING4;
 				player.createPerk(PerkLib.ELFElvenSpearDancingTechnique,0,0,0,0);
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIV,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryIII);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,4);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Technique and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Spear Dancing Technique and Elven Spear Dancing Flurry IV</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;

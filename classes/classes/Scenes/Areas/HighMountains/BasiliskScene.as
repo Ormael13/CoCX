@@ -66,7 +66,7 @@ public class BasiliskScene extends BaseContent
 			spriteSelect(75);
 			clearOutput();
 			//Player HP victory:
-			if(monster.HP < 1) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops its head and looks at the ground, evidently demonstrating submission.");
+			if(monster.HP <= monster.minHP()) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops its head and looks at the ground, evidently demonstrating submission.");
 			//Player Lust victory:
 			else outputText("No longer able to control its raging erection, the basilisk closes its eyes and sinks to one knee.  It would probably be attempting to signal its submission to you if it weren't furiously masturbating its long, purple cock, which has emerged straining from the creature's genital slit.");
 
@@ -193,14 +193,14 @@ public class BasiliskScene extends BaseContent
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you.  You are free of its spell!  Except... you can't move.  You are standing there, gazing into nothing, and you can't move.  You can feel your arms and legs and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed.  The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n");
 			//Undo slow to determine if bad end time
 			player.removeStatusEffect(StatusEffects.BasiliskSlow);
-			dynStats("spe", player.findPerk(PerkLib.BasiliskResistance) < 0 ? 3 : 1, "lus", 399);
+			dynStats("spe", !player.hasPerk(PerkLib.BasiliskResistance) ? 3 : 1, "lus", 399);
 			//Bad end
-			if(player.spe < 5 && player.findPerk(PerkLib.BasiliskResistance) < 0) {
+			if(player.spe < 5 && !player.hasPerk(PerkLib.BasiliskResistance)) {
 				basiliskBadEnd();
 				return;
 			}
 			//choose between loss rapes
-			if(player.hasVagina() && (player.inHeat || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS))
+			if(player.hasVagina() && (player.inHeat || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb) || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS))
 				basiliskHasVagEggStuff();
 			else defaultBasiliskRape();
 		}
@@ -245,7 +245,7 @@ public class BasiliskScene extends BaseContent
 			//(egg preg:
 			if(player.pregnancyIncubation > 1 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) outputText("  The basilisk licks your bulging belly hungrily, pushing against and testing for the eggs you are carrying.  Your sensitive cargo shifts around under its hungry attention; you'd squirm, but that is, of course, impossible.");
 			//(heat or perk:
-			if(player.inHeat || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) outputText("  The basilisk licks your belly hungrily, its sticky tongue crawling like a warm tentacle across your sensitive underside.  You'd squirm, but that is impossible.  The creature is making you feel everything it is forcing upon you.");
+			if(player.inHeat || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) outputText("  The basilisk licks your belly hungrily, its sticky tongue crawling like a warm tentacle across your sensitive underside.  You'd squirm, but that is impossible.  The creature is making you feel everything it is forcing upon you.");
 			outputText("\n\n");
 
 			outputText("The basilisk gets up and again stares back into your eyes and you feel its will press indomitably against your pliable mind.  At the very edge of your vision, underneath the creature you can see a hint of shiny purple; the creature's cock has slid out of its genital slit.  How long it is and what it looks like you cannot see, but as with another raspy moan you finally accept what is about to happen, there is no doubt you are going to get to know about it very personally.\n\n");
@@ -290,7 +290,7 @@ public class BasiliskScene extends BaseContent
 				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n");
 				player.createVagina();
 			}
-			if(player.findPerk(PerkLib.BasiliskWomb) >= 0) {
+			if(player.hasPerk(PerkLib.BasiliskWomb)) {
 				outputText("\nA sudden pressure in your belly wakes you, making you moan softly in pain as you feel your womb rippling and squeezing, the walls contracting around the ripe eggs inside you.  You drag yourself from your bedding, divesting yourself of your lower clothes and staggering out into the middle of the camp. Squatting upright, you inhale deeply and start to concentrate.");
 				outputText("\n\nA thick, green slime begins to flow from your stretched netherlips, splatting wetly onto the ground below you and quickly soaking into the dry earth. You settle easily into the rhythm of oushing with your contractions and breathing deeply when they ebb.  The eggs inside you move quickly, lubricated by the strange slime that cushioned them in your womb, sized and shaped just right the pressure of their passage stretches you in the most delightful way, your [clit] growing erect");
 				if(player.hasCock()) outputText(" and [eachCock] starting to leak pre-cum");
@@ -524,7 +524,7 @@ public class BasiliskScene extends BaseContent
 
 				outputText("The minotaur holds onto you until he has finished spurting his last into you, before abruptly setting you back down on your frozen feet, pulling his slimy, receding member out of your abused anus and with a satisfied snort, takes his leave.  You feel his cum drooling out of you and down your " + hipDescript() + ", but in your hazy, druggy state the feeling is almost sensual.");
 				//(Addict:
-				if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.");
+				if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.");
 				outputText("\n\n");
 
 				outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your [legs] and re-dress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.");
@@ -575,7 +575,7 @@ public class BasiliskScene extends BaseContent
 
 			outputText("The minotaur holds onto you until he has finished spurting his last into you, before abruptly setting you back down on your frozen feet, pulling his slimy, receding member out of your abused anus and with a satisfied snort, takes his leave.  You feel his cum drooling out of you and down your " + hipDescript() + ", but in your hazy, druggy state the feeling is almost sensual.");
 			//(Addict:
-			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.");
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict)) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.");
 			outputText("\n\n");
 
 			outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your knees and redress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.");
@@ -588,7 +588,7 @@ public class BasiliskScene extends BaseContent
 			spriteSelect(75);
 			clearOutput();
 			outputText("Leaning back on your carapace-clad abdomen, you try and look over your defeated opponent.  Even slumped over in ");
-			if(monster.HP < 1) outputText("exhaustion");
+			if(monster.HP <= monster.minHP()) outputText("exhaustion");
 			else outputText("arousal");
 			outputText(", the basilisk is still striving to meet your eyes with its own.  Clenching your teeth, you avert your eyes and stomp forward blindly, colliding roughly with the spined lizard, knocking him flat on his back on the rocky ground.");
 
@@ -605,7 +605,7 @@ public class BasiliskScene extends BaseContent
 			//if(player.gender != 3) outputText("s");
 			outputText(" just over his mouth.");
 			//[(if PC has eggs in vag or Oviposition)
-			if(player.findPerk(PerkLib.BasiliskWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) outputText("  You watch with idle amusement as the scent of your excitement perks up the basilisk's reptilian member, rising until it reaches its impressive full length.  <i>Maybe some other time</i>, you think to yourself, as you set about the business of unloading your overfull abdomen.");
+			if(player.hasPerk(PerkLib.BasiliskWomb) || player.hasPerk(PerkLib.Oviposition) || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) outputText("  You watch with idle amusement as the scent of your excitement perks up the basilisk's reptilian member, rising until it reaches its impressive full length.  <i>Maybe some other time</i>, you think to yourself, as you set about the business of unloading your overfull abdomen.");
 			outputText("You can feel the eggs sliding into position, weighing down your extended ovipositor as you slide it up the bound basilisk's thigh, prodding at his taut backdoor.  The sensation of the heavy organ forcing open his tight hole sends a shiver through his body, and it isn't long before the lube-drooling appendage forces its way in; you sink down further, practically resting your body atop him as you release a happy sigh.");
 
 			outputText("\n\nThe segmented shaft works forward, driving in up to its second ring, wiggling and thrusting in an attempt to slide even deeper into your bound slut.  The anal stimulation proves to be too much for the tied lizard, and with another hiss he blows his load beneath you, spraying his seed across your chitin undercarriage.  It's utterly unacceptable that he's enjoying this more than you, and you glare down at him before shoving your ");
@@ -641,7 +641,7 @@ public class BasiliskScene extends BaseContent
 			if(player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
 			else outputText("saunter arrogantly over to the basilisk's crumpled up figure");
 			outputText(" and lightly nudge him in his ribs with your [foot].  His eyes are closed from to the ");
-			if(monster.HP < 1) outputText("pain");
+			if(monster.HP <= monster.minHP()) outputText("pain");
 			else outputText("arousal");
 			outputText(" he's currently suffering through, but you know they won't stay that way for long.  You zealously search through your bags for some extra undergarments and wrap them around the lizard beast's scaly visage; with a quick afterthought, you reach for his talons and tie them to his face, atop his eyes in mock mourning for what is about to happen.  You let out another perverse giggle and wonder vaguely if there is anything more you can do to make this situation more humiliating for the beast.");
 

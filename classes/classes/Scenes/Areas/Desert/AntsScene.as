@@ -2100,7 +2100,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nUp the hallway, you can hear the patter of soft feet; one of your many children must be coming to fetch the egg.  Acting quickly, you grab your [armor] and position it so that it obstructs the view of your naked bodies.");
 
 				//(If PC wasn't wearing revealing clothing:)
-				if (!player.findPerk(PerkLib.SluttySeduction) < 0) outputText("\n\nThe \"<i>child</i>\" that walks in notices both of you breathing heavily, and quickly takes note of your need for privacy.  Phylla scoops up the egg and embarrassingly extends it to him.  He does his best to avert his eyes and quickly scampers over to fetch the egg and leaves.");
+				if (!player.hasPerk(PerkLib.SluttySeduction)) outputText("\n\nThe \"<i>child</i>\" that walks in notices both of you breathing heavily, and quickly takes note of your need for privacy.  Phylla scoops up the egg and embarrassingly extends it to him.  He does his best to avert his eyes and quickly scampers over to fetch the egg and leaves.");
 				//(If PC was wearing revealing clothing:)
 				else outputText("\n\nYour attempts at modesty end up failing as the offspring of your union stumbles in and covers his eyes at the sight.  He quickly fumbles his way over to the egg and takes off, not daring to look back at his bare naked parents.");
 

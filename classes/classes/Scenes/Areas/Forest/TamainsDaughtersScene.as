@@ -103,7 +103,7 @@ public function encounterTamanisDaughters():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS]++;
 	clearOutput();
-	if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
+	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
 	if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 2) {
 		flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
 		outputText("\n\n<b>You have meet them enough times to be able to find them in the future when using soul sense. (Removes Tamani Daughters from forest explore encounters pool!)</b>\n\n");
@@ -1037,7 +1037,7 @@ private function knockUpDaughters():void {
 	flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 2;
 	var cum:Number = player.cumQ();
 	//Breeder perk is awesome
-	if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] += 3;
+	if (player.hasPerk(PerkLib.MaraesGiftStud)) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] += 3;
 	if (cum >=  50 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
 	if (cum >= 100 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
 	if (cum >= 200 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
@@ -1050,7 +1050,7 @@ private function knockUpDaughters():void {
 internal function combatWinAgainstDaughters():void {
 	spriteSelect(57);
 	clearOutput();
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.");
 		if(player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("In spite of their injuries, they do try to present their bodies in as lewd a way as possible.  You could still fuck them, but things might get out of hand...\n\nDo you fuck them?");

@@ -353,7 +353,7 @@ use namespace CoC;
 			clearOutput();
 			//Flag them defeated!
 			flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] = 1;
-			if(monster.HP < 1) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
+			if(monster.HP <= monster.minHP()) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.");
 			if(player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?");
@@ -525,7 +525,7 @@ use namespace CoC;
 			flags[kFLAGS.DEFEATED_ZETAZ]++;
 			clearOutput();
 			//[VICTORY HP]
-			if(monster.HP < 1) outputText("Zetaz sinks down on his knees, too wounded to continue.  He looks up at you with helpless rage in his eyes and asks, \"<i>Are you satisfied now?  Go ahead then, kill me.  My life hasn't been worth living since I met you anyway.</i>\"\n\n");
+			if(monster.HP <= monster.minHP()) outputText("Zetaz sinks down on his knees, too wounded to continue.  He looks up at you with helpless rage in his eyes and asks, \"<i>Are you satisfied now?  Go ahead then, kill me.  My life hasn't been worth living since I met you anyway.</i>\"\n\n");
 			//[VICTORY LUST]
 			else outputText("Zetaz sinks down on his knees and fishes his massive, pre-drooling member from under his loincloth.  He looks up at you, nearly crying and moans, \"<i>Why? Ruining my life wasn't enough?  You had to make me jerk off at your feet too?  Just kill me, I don't want to live anymore.</i>\"\n\n");
 
@@ -551,7 +551,7 @@ use namespace CoC;
 			outputText("\"<i>Really?</i>\" questions Zetaz in a voice laced with suspicion. \"<i>For fuck's sake, I'm already a renegade.  I'll take your deal.  It's not like it costs me anything I wouldn't give away for free anyway.</i>\"\n\n");
 
 			outputText("Invigorated by the promise of safety and freedom, Zetaz pulls himself up and ");
-			if(monster.HP < 1) outputText("staggers");
+			if(monster.HP <= monster.minHP()) outputText("staggers");
 			else outputText("nearly stumbles over his lust-filled cock");
 			outputText(" towards a desk.  His dextrous fingers twist the knob on the top drawer expertly until a quiet 'click' comes from the furniture.  He reaches down to the divider between the drawers and pulls on it, revealing a tiny, hidden compartment.  In the center of it is a detailed map of the mountain and its upper reaches.  Though the secret diagram is quite crude, it depicts a winding trail that bypasses numerous harpy nests, minotaur caves, and various unrecognizable pitfalls to reach the cloud-shrouded mountain peak.  The drawing loses much of its detail once it gets to the demon fortifications at the top, but it can't be that hard to track down Lethice once you've entered the seat of her power, can it?\n\n");
 

@@ -147,7 +147,7 @@ public final class ConsumableLib extends BaseContent
 		public const HG_SFRP:SimpleConsumable = mk("HGSFRP", "HGSFRPill", "a high-grade Soulforce Recovery Pill", 360, "This high-grade recovery pill could hep you recover some of the spent soulforce.  It can restore significant amount of soulforce compared to lower grade pills but still it's only an aid not a replacement for regular cultivation.", m.highgradesoulforcerecoverypill);
 		public const HGSFRPB:SimpleConsumable = mk("HGSFRPB", "HGSFRPBottle", "a bottle of high-grade Soulforce Recovery Pills", 3610, "Those high-grade recovery pills could help you recover some of the spent soulforce.  They can restore significant amount of soulforce compared to lower grade pills but still it's only an aid not a replacement for regular cultivation.", m.highgradesoulforcerecoverypill2);
 		//public const SG_SFRP:SimpleConsumable = mk("SGSFRP", "SuperiorGradeSFRecovPill", "a superior-grade Soulforce Recovery Pill", 2160, "This superior-grade recovery pill could hep you recover some of the spent soulforce.  Best possible to obtain pill to fast recover soulforce in tight situations when you not have time to cultivate.", m.superiorgradesoulforcerecoverypill);
-		public const FATPILL:SimpleConsumable = mk("FATPILL", "FastingPill", "a Fasting Pill", 100, "This fasting pill could keep you from hunger for few days.", m.fasteningpill);
+		public const FATPILL:SimpleConsumable = mk("FATPILL", "FastingPill", "a Fasting Pill", 100, "This fasting pill could keep you fully/partialy from feeling hunger for a few days.", m.fasteningpill);
 
 		//SOUL SKILLS MANUALS
 		public const TRITMAN:SimpleConsumable = mk("TRITMAN", "TTManual", "a manual for Triple Thrust Soulskill", 50, "This manual would teach you how to use Triple Thrust soulskill.", m.triplethrustmanual);
@@ -158,20 +158,24 @@ public final class ConsumableLib extends BaseContent
 		public const COMETMA:SimpleConsumable = mk("COMETMA", "COManual", "a manual for Comet Soulskill", 200, "This manual would teach you how to use Comet soulskill.", m.cometmanual);
 		public const VPTRMAN:SimpleConsumable = mk("VPTRMAN", "VPTManual", "a manual for Violet Pupil Transformation Soulskill", 200, "This manual would teach you how to use Violet Pupil Transformation soulskill.", m.violetpupiltransformationmanual);
 		public const SOBLMAN:SimpleConsumable = mk("SOBLMAN", "SOBLManual", "a manual for Soul Blast Soulskill", 1000, "This manual would teach you how to use Soul Blast soulskill.", m.soulblastmanual);
-		public const FOLBMAN:SimpleConsumable = mk("FOLBMAN", "FOLBscManual", "a manual for Flames of Love (Basic Rank) Soulskill", 100, "This manual would teach you how to use Flames of Love (Basic Rank) soulskill.", m.basicflamesoflovemanual);
-		public const IOLBMAN:SimpleConsumable = mk("IOLBMAN", "IOLBscManual", "a manual for Icicles of Love (Basic Rank) Soulskill", 100, "This manual would teach you how to use Icicles of Love (Basic Rank) soulskill.", m.basiciciclesoflovemanual);
-		public const SOSBMAN:SimpleConsumable = mk("SOSBMAN", "SOSBscManual", "a manual for Storm of Sisterhood (B) Soulskill", 100, "This manual would teach you how to use Storm of Sisterhood (Basic Rank) soulskill.", m.basicstormofsisterhoodmanual);
-		public const NOBBMAN:SimpleConsumable = mk("NOBBMAN", "NOBBscManual", "a manual for Night of Brotherhood (B) Soulskill", 100, "This manual would teach you how to use Night of Brotherhood (Basic Rank) soulskill.", m.basicnightofbrotherhoodmanual);
+		public const FOLBMAN:SimpleConsumable = mk("FOLBMAN", "FOLBscManual", "a manual for Flames of Love (Rankless) Soulskill", 50, "This manual would teach you how to use Flames of Love (Rankless) soulskill.", m.flamesoflovemanualrankless);
+		public const IOLBMAN:SimpleConsumable = mk("IOLBMAN", "IOLBscManual", "a manual for Icicles of Love (Rankless) Soulskill", 50, "This manual would teach you how to use Icicles of Love (Rankless) soulskill.", m.iciclesoflovemanualrankless);
+		public const SOSBMAN:SimpleConsumable = mk("SOSBMAN", "SOSBscManual", "a manual for Storm of Sisterhood (Rankless) Soulskill", 50, "This manual would teach you how to use Storm of Sisterhood (Rankless) soulskill.", m.stormofsisterhoodmanualrankless);
+		public const NOBBMAN:SimpleConsumable = mk("NOBBMAN", "NOBBscManual", "a manual for Night of Brotherhood (Rankless) Soulskill", 50, "This manual would teach you how to use Night of Brotherhood (Rankless) soulskill.", m.nightofbrotherhoodmanualrankless);
 		public const DEV_MAN:SimpleConsumable = mk("DEV_MAN", "DevourManual", "a manual for Devour Soulskill", 50, "This manual would teach you how to use Devour soulskill.", m.devourermanual);
 		public const HOB1MAN:SimpleConsumable = mk("HOB1MAN", "HoBManual", "a manual for Hail of Blades", 100, "This manual would teach you how to use Hail of Blades soulskill.", m.hailofbladesmanual1);
 		public const HOB2MAN:SimpleConsumable = mk("HOB2MAN", "GHoBManual", "a manual for Grandiose Hail of Blades", 400, "This manual would teach you how to use Grandiose Hail of Blades soulskill.", m.hailofbladesmanual2);
 		public const HOB3MAN:SimpleConsumable = mk("HOB3MAN", "GHoMBManual", "a manual for Grandiose Hail of Moon Blades", 1600, "This manual would teach you how to use Grandiose Hail of Moon Blades soulskill.", m.hailofbladesmanual3);
 		//public const HOB4MAN:SimpleConsumable = mk("HOB4MAN", "Manual", "a manual for Grandiose Hailstorm of Yin-Yang Blades: Endless Tide", x, ".", m.hailofbladesmanual4);secret grandmaster ver of Hail of Blades ^^
 		//public const YYB_MAN:SimpleConsumable = mk("YYB_MAN", "YYBlastManual", "a manual for Yin Yang Blast", x, "This manual would teach you how to use Yin Yang Blast combination soulskill and it components Yin Palm and Yang Fist soulskills.", m.xxx);
-	/*	public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Flames of Love () Soulskill", x, "This manual would teach you how to use Flames of Love (... Rank) soulskill.", m.xxx);
-		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Icicles of Love () Soulskill", x, ".", m.xxx);
-		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood () Soulskill", x, ".", m.xxx);
-		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Night of Brotherhood () Soulskill", x, ".", m.xxx);
+	/*	public const FOLLMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Flames of Love (Low Rank) Soulskill", x, "This manual would teach you how to use Flames of Love (Low Rank) soulskill.", m.xxx);
+		public const IOLLMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Icicles of Love (Low Rank) Soulskill", x, "This manual would teach you how to use Icicles of Love (Low Rank) soulskill.", m.xxx);
+		public const SOSLMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood (Low Rank) Soulskill", x, "This manual would teach you how to use Storm of Sisterhood (Low Rank) soulskill.", m.xxx);
+		public const NOBLMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Night of Brotherhood (Low Rank) Soulskill", x, "This manual would teach you how to use Night of Brotherhood (Low Rank) soulskill.", m.xxx);
+		public const FOLXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Flames of Love () Soulskill", x, "This manual would teach you how to use Flames of Love (... Rank) soulskill.", m.xxx);
+		public const IOLXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Icicles of Love () Soulskill", x, ".", m.xxx);
+		public const SOSXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood () Soulskill", x, ".", m.xxx);
+		public const NOBXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Night of Brotherhood () Soulskill", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);

@@ -39,7 +39,7 @@ public class Dreams {
         if(player.minotaurAddicted()) {
             choices[choices.length] = 6;
             choices[choices.length] = 6;
-            if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) choices[choices.length] = 6;
+            if(player.hasPerk(PerkLib.MinotaurCumAddict)) choices[choices.length] = 6;
         }
         //Akbal
         if(CoC.instance.flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] > 4) {
@@ -114,10 +114,10 @@ public class Dreams {
         var dreamLust:Number = dreamtemp;
 
         // Lusty increases by 1/3rd
-        if (player.findPerk(PerkLib.Lusty) >= 0) dreamLust += (dreamtemp / 3);
+        if (player.hasPerk(PerkLib.Lusty)) dreamLust += (dreamtemp / 3);
 
         // Well Adjusted cuts by half
-        if (player.findPerk(PerkLib.WellAdjusted) >= 0) dreamLust = (dreamLust / 2);
+        if (player.hasPerk(PerkLib.WellAdjusted)) dreamLust = (dreamLust / 2);
 
         if (dreamLust > 0) player.dynStats("lus", dreamLust);
 

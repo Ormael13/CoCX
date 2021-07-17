@@ -13,15 +13,13 @@ import classes.Items.*;
 import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
-import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
-import classes.Scenes.Places.HeXinDao;
 import classes.Scenes.Places.Boat.MaraeScene;
 import classes.Scenes.Soulforce;
-import classes.Scenes.Camp.HarvestMoonScenes;
+import classes.Scenes.SceneLib;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -71,7 +69,6 @@ public class Camp extends NPCAwareContent{
 	public var codex:Codex = new Codex();
 	public var questlog:Questlog = new Questlog();
 	public var soulforce:Soulforce = new Soulforce();
-	public var hexindao:HeXinDao = new HeXinDao();
 	public var dungeon1:Factory = new Factory();
 	public var dungeon2:DeepCave = new DeepCave();
 	public var dungeonS:DesertCave = new DesertCave();
@@ -80,7 +77,6 @@ public class Camp extends NPCAwareContent{
 	public var dungeonDD:DenOfDesire = new DenOfDesire();
 	public var dungeonAP:AnzuPalace = new AnzuPalace();
 	public var dungeonEL:EbonLabyrinth = new EbonLabyrinth();
-	public var EvangelineF:EvangelineFollower = new EvangelineFollower();
 	public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 	public var HolliPure:HolliPureScene = new HolliPureScene();
 	public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
@@ -1053,7 +1049,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 		if (followerShouldra()) counter++;
 		if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-		if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
@@ -1184,7 +1180,7 @@ public class Camp extends NPCAwareContent{
 		if (emberScene.followerEmber()) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
-		if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
@@ -1765,14 +1761,14 @@ public class Camp extends NPCAwareContent{
 			}
 			//Celess
 			//Evangeline
-			if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
+			if (EvangelineFollower.EvangelineFollowerStage >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 				outputText("There is a small bedroll for Evangeline near the [camp] edge");
 				if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and she's sleeping on it right now.");
 				else outputText(", though she probably wander somewhere near [camp] looking for more ingredients to make her potions.");
 				outputText(" Next to it stands a small chest with her personal stuff.\n\n");
-				buttons.add("Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
+				buttons.add("Evangeline", SceneLib.evangelineFollower.meetEvangeline).hint("Visit Evangeline.");
 			}
-			else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
+			else if (EvangelineFollower.EvangelineFollowerStage >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
 				/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/
 				outputText("Evangeline isn't in the [camp] as she went to buy some items. She should be out no longer than a few hours.\n\n");
 				//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
@@ -1978,8 +1974,8 @@ public class Camp extends NPCAwareContent{
 		addButton(3, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(4, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
-		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer)) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
-		else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
+		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
+		else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option.");
 		//button 7
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
 			addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
@@ -2042,6 +2038,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(0, "Make", "You need to be golemancer to use this option.");
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 		else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this.");
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(5, "Skeletons", campMake.accessMakeSkeletonWinionsMainMenu).hint("Check your options for making some skeletons.");
+		else addButtonDisabled(5, "Skeletons", "You need to be necromancer to use this option.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -3327,10 +3325,10 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 		else addButtonDisabled(7, "???", "???");
-		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
+		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "???");
-		//if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
-		//else addButtonDisabled(11, "???", "???");
+		if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
+		else addButtonDisabled(11, "???", "???");
 		addButton(14, "Back", playerMenu);
 		return true;
 	}
@@ -4141,7 +4139,6 @@ public function wakeFromBadEnd():void {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 12;
 			outputText("No worry it's not a bug it's an airplan...err ok your save is just upgraded to the next level ^^");
-			if (flags[kFLAGS.EVANGELINE_GEMS_PURSE] < 0) flags[kFLAGS.EVANGELINE_GEMS_PURSE] = 0;
 			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 0) flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
 			if (flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] < 0) flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] = 0;
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 5) flags[kFLAGS.CAMP_CABIN_PROGRESS] -= 2;
@@ -4174,7 +4171,6 @@ public function wakeFromBadEnd():void {
 				player.removePerk(PerkLib.DeityJobMunchkin);
 				player.createPerk(PerkLib.JobAllRounder, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.EVANGELINE_TALKS] < 0) flags[kFLAGS.EVANGELINE_TALKS] = 0;
 			doNext(doCamp);
 			return;
 		}
@@ -4727,7 +4723,19 @@ public function wakeFromBadEnd():void {
 				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
 				player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,2,0,0,0);
 			}
-			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone,0,0,0,0);
+			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
+			if (flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] > 0) flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] = 0;
+			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] > 0) flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
+			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 0;
+			if (flags[kFLAGS.EVANGELINE_02330] > 0) flags[kFLAGS.EVANGELINE_02330] = 0;
+			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
+			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
+			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
 			doNext(doCamp);
 			return;
 		}

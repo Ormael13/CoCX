@@ -39,16 +39,16 @@ package classes.Items.Weapons
 		}
 		
 		override public function playerEquip():Weapon {
-			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
-			while (game.player.findPerk(PerkLib.StrifeWarden) >= 0) game.player.removePerk(PerkLib.StrifeWarden);
+			while (game.player.hasPerk(PerkLib.StrifeWarden)) game.player.removePerk(PerkLib.StrifeWarden);
 			game.player.createPerk(PerkLib.StrifeWarden,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Weapon {
-			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
-			while (game.player.findPerk(PerkLib.StrifeWarden) >= 0) game.player.removePerk(PerkLib.StrifeWarden);
+			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			while (game.player.hasPerk(PerkLib.StrifeWarden)) game.player.removePerk(PerkLib.StrifeWarden);
 			return super.playerRemove();
 		}
 	}

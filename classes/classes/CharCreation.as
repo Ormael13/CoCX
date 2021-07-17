@@ -405,7 +405,7 @@ import coc.view.MainView;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
-				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.CHARVIEW_STYLE]) {
+				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -1447,7 +1447,7 @@ import coc.view.MainView;
 					outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?");
 					break;
 				case PerkLib.HistoryScholar:
-					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, spellcasting uses 20% less mana and will start with Job: Sorcerer perk.  Is this your history?");
+					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, your mana cap increased by 10% and will start with Job: Sorcerer perk.  Is this your history?");
 					break;
 				case PerkLib.HistoryScout:
 					outputText("You spent much of your time learning how to use ranged weapons, and you had plans to find work as a hunter when you grew up.  You do 10% more damage with physical range attacks and +20% accuracy.  You will also start out with 50 gems and Job: Ranger perk.  Is this your history?");
@@ -1754,7 +1754,9 @@ import coc.view.MainView;
 			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
 			player.sleepUpdateStat();
 			player.HP = player.maxHP();
-			doYesNo(goToIngnam, arrival);
+			//doYesNo(goToIngnam, arrival);
+			addButton(0, "Ingnam", goToIngnam);
+			addButton(1,"Skip Ingnam", arrival);
 		}
 
 		public function goToIngnam():void {
