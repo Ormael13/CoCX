@@ -3054,6 +3054,7 @@ public class Combat extends BaseContent {
 				}
 				archeryXP(1);
                 outputText("\n\n");
+				WeaponRangeStatusProcs();
                 checkAchievementDamage(damage);
                 flags[kFLAGS.ARROWS_SHOT]++;
                 bowPerkUnlock();
@@ -3075,6 +3076,7 @@ public class Combat extends BaseContent {
 					archeryXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
+				WeaponRangeStatusProcs();
 				WrathGenerationPerHit1(5);
                 heroBaneProc(damage);
             }
@@ -3358,7 +3360,6 @@ public class Combat extends BaseContent {
                         } else damage *= 2;
                     }
                 }
-
                 damage = Math.round(damage);
                 checkAchievementDamage(damage);
                 if (monster.HP <= monster.minHP()) {
@@ -3367,7 +3368,6 @@ public class Combat extends BaseContent {
                     else if (monster.plural)
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-
                     doDamage(damage, true, true);
                     if (crit) {
                         outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
@@ -3375,6 +3375,7 @@ public class Combat extends BaseContent {
                     }
                     throwingXP(1);
                     outputText("\n\n");
+					WeaponRangeStatusProcs();
                     doNext(endHpVictory);
                     return;
                 } else {
@@ -3385,12 +3386,13 @@ public class Combat extends BaseContent {
                         throwingXP(1);
                     }
                     if (crit) hasCritAtLeastOnce = true;
+					WeaponRangeStatusProcs();
                     WrathGenerationPerHit1(5);
                     heroBaneProc(damage);
                 }
             }
             else{
-                hasMissedAtLeastOnce = true
+                hasMissedAtLeastOnce = true;
             }
             currentShot++;
         }
@@ -3548,6 +3550,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
 */
             damage = Math.round(damage);
+			WeaponRangeStatusProcs();
             checkAchievementDamage(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -3822,6 +3825,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też*/
             damage = Math.round(damage);
             checkAchievementDamage(damage);
+			WeaponRangeStatusProcs();
 			WrathGenerationPerHit1(5);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -6126,11 +6130,14 @@ public class Combat extends BaseContent {
                 else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
             }
         }
-        if (player.hasPerk(PerkLib.VampiricBlade)) {
-            if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") HPChange(Math.round(player.maxHP() * 0.005), false);
-            else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * 0.02), false);
-            else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * 0.04), false);
-            else HPChange(Math.round(player.maxHP() * 0.01), false);
+        if (player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+			var restoreamount:Number = 0;
+			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
+			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) restoreamount += 1;
+            if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") HPChange(Math.round(player.maxHP() * restoreamount * 0.005), false);
+            else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * restoreamount * 0.02), false);
+            else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * restoreamount * 0.04), false);
+            else HPChange(Math.round(player.maxHP() * restoreamount * 0.01), false);
         }
 		if (player.weapon == weapons.VENCLAW) {
             outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -6144,7 +6151,7 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
-
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
     public function WeaponFlyingSwordsStatusProcs():void {
@@ -9091,6 +9098,11 @@ public class Combat extends BaseContent {
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
                 else player.takePhysDamage(100);
             }
+        }
+		//Lifesteal Enchantment
+        if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+            if (player.statusEffectv1(StatusEffects.LifestealEnchantment) <= 0) player.removeStatusEffect(StatusEffects.LifestealEnchantment);
+            else player.addStatusValue(StatusEffects.LifestealEnchantment, 1, -1);
         }
         //Flying
         if (player.isFlying()) {
@@ -13831,7 +13843,7 @@ public class Combat extends BaseContent {
 			damage *= ((puppies / 2) + 1.25);
 		}
 		if (monster.plural) damage *= 2;
-		damage = Math.round(damage);
+		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -13882,7 +13894,7 @@ public class Combat extends BaseContent {
 			crit = true;
 			damage *= ((puppies / 2) + 1.25);
 		}
-		damage = Math.round(damage);
+		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doTrueDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -13926,7 +13938,7 @@ public class Combat extends BaseContent {
 			damage *= ((puppies / 2) + 1.25);
 		}
 		if (monster.plural) damage *= 10;
-		damage = Math.round(damage);
+		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -14659,4 +14671,3 @@ public class Combat extends BaseContent {
     }
 }
 }
-

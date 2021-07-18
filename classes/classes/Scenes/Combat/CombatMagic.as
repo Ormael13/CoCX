@@ -1730,6 +1730,16 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) {
+			bd = buttons.add("LifestealEnch", spellLifestealEnchantment)
+					.hint("Lifesteal Enchantment will add lifesteal effect to your melee weapons.  " +
+							"\n\nBlood Cost: " + spellCostBlood(500) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+				bd.disable("You can recast this spell only after it duration ended.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
 			bd = buttons.add("BloodField", spellBloodField)
 					.hint("Blood Field will form field on the ground that would slow down enemies, drain their health and heal the caster.  " +
@@ -1947,6 +1957,18 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			enemyAI();
 		}
+	}
+	
+	public function spellLifestealEnchantment():void {
+		clearOutput();
+		HPChange(spellCostBlood(500), false);
+		player.createStatusEffect(StatusEffects.LifestealEnchantment,5,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather around [weapon], adding a crimson glow.\n\n");
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		statScreenRefresh();
+		enemyAI();
 	}
 	
 	public function spellBloodField():void {

@@ -2306,7 +2306,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 75 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo")) {
+			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
@@ -15430,4 +15430,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

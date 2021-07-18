@@ -4335,7 +4335,9 @@ public class PerkLib
             Juggernaut.requireTou(100)
                     .requirePerk(HeavyArmorProficiency)
                     .requireLevel(18);
-            //AyoArmorProficiency.requireMinTou(80).requirePerk(HeavyArmorProficiency);
+            AyoArmorProficiency.requireTou(100)
+					.requirePerk(HeavyArmorProficiency)
+                    .requireLevel(18);
             HalfStepToAdvancedEndurance.requireTou(120)
                     .requireStr(80)
                     .requireLevel(18)

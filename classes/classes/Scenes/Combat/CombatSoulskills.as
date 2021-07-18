@@ -432,7 +432,31 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			}
-		}
+		}/*
+		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge))  {
+			if (!player.statStore.hasBuff("ScarletSpiritCharge")) {
+				bd = buttons.add("S.S.Ch.", TranceTransformation).hint("Activate Scarlet Spirit Charge state, which enhancing physical and mental abilities at constant cost of health.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				if (player.soulforce < 100) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				}
+			} else {
+				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");
+			}
+		}//jak odróżnić to od Trace and VPT soulskills???
+		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
+			if (!player.statStore.hasBuff("ScarletSpiritCharge")) {
+				bd = buttons.add("S.S.Ch.SF", TranceTransformation).hint("Activate Scarlet Spirit Charge (SF) state, which enhancing physical and mental abilities at constant cost of health & soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				if (player.soulforce < 100) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				}
+			} else {
+				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");
+			}
+		}*/
 	}
 
 	public function TripleThrust():void {
@@ -1922,6 +1946,94 @@ public class CombatSoulskills extends BaseCombatContent {
 		else enemyAI();
 	}
 	/*
+	public function spellMight(silent:Boolean = false):void {
+		var doEffect:Function = function():* {
+			var MightBoostCap:Number = 1.5;
+			MightBoostCap *= player.intStat.core.max;
+			MightBoostCap = Math.round(MightBoostCap);
+			var MightBoost:Number = player.intStat.core.value;
+			//MightBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells
+			if (MightBoost < 10) MightBoost = 10;
+			if (player.hasPerk(PerkLib.JobEnchanter)) MightBoost *= 1.2;
+			MightBoost *= spellModBlack();
+			//MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
+			MightBoost = Math.round(MightBoost);
+			if (MightBoost > MightBoostCap) MightBoost = MightBoostCap;
+			var MightDuration:Number = 5;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsV)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.EverLastingBuffs)) MightDuration += 5;
+			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) MightDuration += 5;
+			tempTou = MightBoost;
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = Math.round(MightBoost * 1.25);
+			else tempStr = MightBoost;
+			var oldHPratio:Number = player.hp100/100;
+			var buffValues:Object = {"tou.mult":tempTou/100};
+
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
+				buffValues["int.mult"] = Math.min( tempInt/100, player.intStat.mult.value/2);
+			} else {
+				buffValues["str.mult"] = Math.min( tempStr/100, player.strStat.mult.value/2);
+			}
+			player.buff("Might").setStats(buffValues).combatTemporary(MightDuration);
+			player.HP = oldHPratio*player.maxHP();
+			statScreenRefresh();
+		};
+
+		if (silent)	{ // for Battlemage
+			doEffect.call();
+			return;
+		}
+
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < (50 * spellMightCostMultiplier())) player.HP -= (50 * spellMightCostMultiplier());
+		else useMana((50 * spellMightCostMultiplier()),6);
+		var tempStr:Number = 0;
+		var tempTou:Number = 0;
+		var tempInt:Number = 0;
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n");
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		if(rand(100) < backfire) {
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			outputText("The rush of success and power flows through your body.  You feel like you can do anything!");
+			doEffect.call();
+		}
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}*/
+	/*
 	 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^
 	 public function mantisOmniSlash():void {
 	 flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -2111,4 +2223,4 @@ public class CombatSoulskills extends BaseCombatContent {
 	 else enemyAI();
 	 }*/
 }
-}
+}
