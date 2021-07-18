@@ -27,9 +27,9 @@ public class Naga extends Monster
 				}
 				else {
 					player.createStatusEffect(StatusEffects.NagaVenom,0,0,0,0);
-					player.takeMagicDamage(5+rand(5));
+					player.takePoisonDamage(5+rand(5));
 				}
-				player.takeMagicDamage(5+rand(5));
+				player.takePoisonDamage(5+rand(5));
 			}
 			else {
 				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
@@ -40,8 +40,8 @@ public class Naga extends Monster
 					// speDown.visible = true;
 					player.addStatusValue(StatusEffects.NagaVenom,1,2);
 				}
-				else player.takeMagicDamage(5+rand(5));
-				player.takeMagicDamage(5+rand(5));
+				else player.takePoisonDamage(5+rand(5));
+				player.takePoisonDamage(5+rand(5));
 			}
 		}
 		

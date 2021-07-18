@@ -325,6 +325,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
@@ -341,6 +343,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
@@ -355,6 +359,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
@@ -371,6 +377,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
@@ -385,6 +393,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
@@ -401,6 +411,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
@@ -415,6 +427,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
@@ -431,6 +445,8 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}/*
 		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge))  {
@@ -440,6 +456,8 @@ public class CombatSoulskills extends BaseCombatContent {
 					bd.disable("Your current soulforce is too low.");
 				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if (player.isGargoyle()) {
+					bd.disable("You cannot use blood soulskills if you not have blood at all.");
 				}
 			} else {
 				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");
@@ -452,6 +470,8 @@ public class CombatSoulskills extends BaseCombatContent {
 					bd.disable("Your current soulforce is too low.");
 				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if (player.isGargoyle()) {
+					bd.disable("You cannot use blood soulskills if you not have blood at all.");
 				}
 			} else {
 				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");

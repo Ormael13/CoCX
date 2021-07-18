@@ -78,18 +78,14 @@ package classes.Scenes.NPCs
 	public function evangelineAffection(changes:Number = 0):Number
 		{
 			EvangelineAffectionMeter += changes;
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && EvangelineAffectionMeter > 70) EvangelineAffectionMeter = 70;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && EvangelineAffectionMeter > 65) EvangelineAffectionMeter = 65;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && EvangelineAffectionMeter > 60) EvangelineAffectionMeter = 60;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineAffectionMeter > 55) EvangelineAffectionMeter = 55;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineAffectionMeter > 50) EvangelineAffectionMeter = 50;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 40;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineAffectionMeter > 35) EvangelineAffectionMeter = 35;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 40;//current cap
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && EvangelineAffectionMeter > 30) EvangelineAffectionMeter = 30;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && EvangelineAffectionMeter > 20) EvangelineAffectionMeter = 20;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && EvangelineAffectionMeter > 15) EvangelineAffectionMeter = 15;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 0 && EvangelineAffectionMeter > 10) EvangelineAffectionMeter = 10;
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && EvangelineAffectionMeter > 70) EvangelineAffectionMeter = 75;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && EvangelineAffectionMeter > 65) EvangelineAffectionMeter = 70;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && EvangelineAffectionMeter > 60) EvangelineAffectionMeter = 67;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineAffectionMeter > 55) EvangelineAffectionMeter = 60;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineAffectionMeter > 50) EvangelineAffectionMeter = 56;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 50;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineAffectionMeter > 35) EvangelineAffectionMeter = 45;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1 && flags[kFLAGS.EVANGELINE_LVL_UP] < 5 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 40;//current cap
 			else if (EvangelineAffectionMeter < 0) EvangelineAffectionMeter = 0;
 			return EvangelineAffectionMeter;
 		}
@@ -222,17 +218,17 @@ private function evangelineAppearance():void {
 	outputText(" tall.\n\n");
 	outputText("Oddly despite living in Mareth she looks like a human aside from her eyes that have uncanny pupils, which after narrowing looks like two cat slits that forms an X shape over her golden eyes. Her ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 9) outputText("crimson platinum "); 
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) outputText("platinum blonde "); 
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("platinum blonde "); 
 	else outputText("red ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 10) outputText("hair are ass-length along with breats that could easily fill a F-cup bra, expansive ass and fertile hips.\n\n");
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
 	else outputText("hair short along with breasts not bigger than A cup, almost non-existent butt and boyish hips cause her to look quite tomboyish.\n\n");
 	//outputText(".\n\n");
 	outputText("She's wearing ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("a skimpy chain bikini that barely qualifies as armor. The chain is made from links much finer and lighter than normal, so fine that it feels almost silken under fingertips. A simple seal in the g-string-like undergarment states, \"Virgins only.\"");
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("a suit of steel 'armor' which have two round disks that barely cover her nipples, a tight chainmail bikini, and circular butt-plates.");
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) outputText("a suit of steel 'armor' which have two round disks that barely cover her nipples, a tight chainmail bikini, and circular butt-plates.");
 	else outputText("a simple peasant’s robe that’s torn and frayed in a few places.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glows.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glows.");
 	doNext(meetEvangeline);
 }
 
@@ -242,13 +238,15 @@ private function evangelineTalkMenu():void {
 	menu();
 	addButton(0, "Your Eyes", TalkYourEyes).hint("Talk about her unusual eyes.");
 	if (EvangelineTalks >= 1) addButton(1, "Demons", TalkDemons).hint("Ask about demons in general.");
+	else addButtonDisabled(1, "???", "???");
 	if (EvangelineTalks >= 2) addButton(2, "Past Life", TalkPastLife1).hint("Talk about her past before meeting you.");
-	//if (EvangelineTalks >= 3) addButton(3, "3", ).hint("");her father? - na X affection score odblokowywane?
+	else addButtonDisabled(2, "???", "???");
+	//if (EvangelineTalks >= 3 && EvangelineAffectionMeter > 30) addButton(3, "3", ).hint("");her father? - na X affection score odblokowywane?	unlocks Dilapidated Temple/Shrine?
+	addButtonDisabled(3, "???", "???");
 	//if (EvangelineTalks >= 4) addButton(4, "4", ).hint("");her soul? - jak sie PC dowie o byciu demonicą przez nią?
 	//if (EvangelineTalks >= 5) addButton(5, "5", ).hint("");
 	addButton(14, "Back", meetEvangeline);
 }
-
 private function TalkYourEyes():void {
 	clearOutput();
 	outputText("At first you exchange a few casual word with Evangeline and then you change the subject to her eyes. She has very unusual X shaped irises, and if not for them she could pass for another human. She pauses for a moment before replying.\n\n");
@@ -258,11 +256,10 @@ private function TalkYourEyes():void {
 	outputText("\"<i>They are not giving me any benefit I know about, beside making me look like a freak. Well at least all the humans I met before told me this. And some even felt constantly uneasy around me thinking I'm some kind of abomination. Well at least until...</i>\" suddenly she stops and when you question the reason she giving you a gaze saying 'I don't wanna talk about it'. Well looks like they are just a rare trait. But she mentioned something about her father. Changing subject you ask about him.\n\n");
 	outputText("\"<i>My father...</i>\" she pauses for a moment before shaking her head. \"<i>No I do not want to talk about him now either. Sorry can you leave me alone for a while?</i>\"");
 	evangelineAffection(1);
-	if (EvangelineTalks == 0) EvangelineTalks += 1;
+	if (EvangelineTalks == 0) EvangelineTalks = 1;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkDemons():void {
 	clearOutput();
 	outputText("This time you chat with her about demons in general, like what types of them she’s seen so far or some details about them. Knowing that you’re gonna spend some time in this realm, maybe even the rest of your life, anyone who could help you in your quest would be very useful and she seems like she may know something.\n\n");
@@ -271,11 +268,10 @@ private function TalkDemons():void {
 	else outputText("but a few things you’re hearing for the first time");
 	outputText(". Large parts of your conversation is spent on discussing the structure of chain of command amongst demons. Feeling satisfied after learning something new you thank her after you finish talking.");
 	evangelineAffection(1);
-	if (EvangelineTalks == 1) EvangelineTalks += 1;
+	if (EvangelineTalks == 1) EvangelineTalks = 2;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkPastLife1():void {
 	clearOutput();
 	outputText("This time you ask Evangeline about the time you both met. What she’s been doing or how she managed to avoid demons. For a really long moment she remained silent.\n\n");
@@ -288,11 +284,18 @@ private function TalkPastLife1():void {
 	else outputText("turns out to be futile");
 	outputText(". She talks about many things and some may or may not be lies, about this 'treasure' and how you only know it’s well hidden and the demons will never find it without her pointing to the place.");
 	evangelineAffection(1);
-	if (EvangelineTalks == 2) EvangelineTalks += 1;
+	if (EvangelineTalks == 2) EvangelineTalks = 3;
+	doNext(evangelineTalkMenu);
+	cheatTime2(15);
+}/*
+private function TalkYourFather():void {
+	clearOutput();
+	outputText("Placeholder text.");
+	evangelineAffection(1);
+	if (EvangelineTalks == 3) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-/*
 private function TalkPastLife2():void {
 	clearOutput();
 	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona demonicą ^^
@@ -301,7 +304,6 @@ private function TalkPastLife2():void {
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkPastLife3():void {
 	clearOutput();
 	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona boginią ^^
@@ -310,21 +312,27 @@ private function TalkPastLife3():void {
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkYourEyes():void {
 	clearOutput();
 	outputText("Placeholder text.");
 	evangelineAffection(1);
-	if (EvangelineTalks == 3) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
+	if (EvangelineTalks == 4) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkYourEyes():void {
 	clearOutput();
 	outputText("Placeholder text.");
 	evangelineAffection(1);
-	if (EvangelineTalks == 4) EvangelineTalks += 1;
+	if (EvangelineTalks == 5) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
+	doNext(evangelineTalkMenu);
+	cheatTime2(15);
+}
+private function TalkYourEyes():void {
+	clearOutput();
+	outputText("Placeholder text.");
+	evangelineAffection(1);
+	if (EvangelineTalks == 6) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }

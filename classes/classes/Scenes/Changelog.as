@@ -123,7 +123,13 @@ package classes.Scenes
 			outputText("-Added Acid elmental attack type. Acid Spit, Hydra Acid Breath specials dmg been changed to this new type of elemental dmg.\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 100+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-Evangeline initial encounter and post fight talk scene been slight adjusted. Her repeat encouter after rejecting recruitment first time now req. higher level and finding two city-like hubs unlocked. After been in camp her level up process is bit faster.\n");
-			outputText("-Intenral mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 12 for this to be possible.\n");
+			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 12 for this to be possible.\n");
+			outputText("-With adding 4 new subtypes of elemental dmg some of enemy attacks dmg been adjusted from magic type to one of those new four types. Also there is resistance tracked for those new types on stats page.\n");
+			outputText("-When PC race change to race without blood (atm only gargoyle) it would disable all blood spells and blood soulskills.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -144,7 +150,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -211,9 +216,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -254,6 +257,21 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

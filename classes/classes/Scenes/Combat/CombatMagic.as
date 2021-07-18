@@ -1597,7 +1597,7 @@ public class CombatMagic extends BaseCombatContent {
 		// GRAY MAGIC
 		if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
 			if (player.hasStatusEffect(StatusEffects.ManaShield)) {
-				buttons.add("Deactiv MS", DeactivateManaShield).hint("Deactivate Mana Shield.\n");
+				buttons.add("Deactiv MS", DeactivateManaShield).hint("Deactivate Mana Shield.");
 			} else {
 				bd = buttons.add("Mana Shield", spellManaShield)
 						.hint("Drawning your own mana with help of lust and force of the willpower to form shield that can absorb attacks.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\nMana Cost: 1 mana point per 1 point of damage blocked");
@@ -1672,20 +1672,23 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood spells if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
-			bd = buttons.add("BloodShield", spellBloodShield)
-					.hint("Blood Shield will form many blood shields to block enemy attacks.  " +
-							"\n\nBlood Cost: " + spellCostBlood(spellBloodShieldCost()) + "");
-			if ((bloodForBloodGod - 1) < spellCostBlood(spellBloodShieldCost())) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodShield)) {
-				bd.disable("You can't cast this spell again before shields is broken.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			if (player.hasStatusEffect(StatusEffects.BloodShield)) {
+				buttons.add("Deactiv BS", DeactivateBloodShield).hint("Deactivate Blood Shield.");
+			}
+			else {
+				bd = buttons.add("BloodShield", spellBloodShield)
+						.hint("Blood Shield will form blood shield to block enemy attacks.  " +
+								"\n\nBlood Cost: " + spellCostBlood(spellBloodShieldCost()) + "");
+				if ((bloodForBloodGod - 1) < spellCostBlood(spellBloodShieldCost())) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.isGargoyle()) {
+					bd.disable("You cannot use blood spells if you not have blood at all.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
@@ -1700,6 +1703,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood spells if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
@@ -1714,6 +1719,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood spells if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {//blood wave (deal more to larger groups of enemies than normal small groups)
@@ -1728,16 +1735,20 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood spells if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) {
 			bd = buttons.add("LifestealEnch", spellLifestealEnchantment)
-					.hint("Lifesteal Enchantment will add lifesteal effect to your melee weapons.  " +
+					.hint("Lifesteal Enchantment will add lifesteal effect to your weapons.  " +
 							"\n\nBlood Cost: " + spellCostBlood(500) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(500)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
 				bd.disable("You can recast this spell only after it duration ended.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood spells if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
@@ -1752,6 +1763,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood spells if you not have blood at all.");
 			}
 		}
 	}
@@ -1855,6 +1868,12 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		statScreenRefresh();
+		enemyAI();
+	}
+	public function DeactivateBloodShield():void {
+		clearOutput();
+		outputText("Deciding you no longer need to maintain your blood shield, you stop maintaining it.\n\n");
+		player.removeStatusEffect(StatusEffects.BloodShield);
 		enemyAI();
 	}
 	
@@ -1963,7 +1982,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		HPChange(spellCostBlood(500), false);
 		player.createStatusEffect(StatusEffects.LifestealEnchantment,5,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather around [weapon], adding a crimson glow.\n\n");
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather around weapons, adding a crimson glow.\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();

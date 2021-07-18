@@ -1858,7 +1858,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own fire with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeAcidDamage(damage);
 				outputText("Your own spit smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -2191,7 +2191,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own ice with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeIceDamage(damage);
 				outputText("Your own ice smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -2287,7 +2287,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own lightning with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeLightningDamage(damage);
 				outputText("Your own lightning smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -2382,7 +2382,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own darkness with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeDarknessDamage(damage);
 				outputText("Your own darkness smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -2476,7 +2476,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own water with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeWaterDamage(damage);
 				outputText("Your own water smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -2643,7 +2643,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
 			else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ");
 			fatigue(10);
-			player.takeMagicDamage(10 + rand(20), true);
+			player.takeFireDamage(10 + rand(20), true);
 			outputText("\n\n");
 			enemyAI();
 			return;
@@ -2716,7 +2716,7 @@ public class MagicSpecials extends BaseCombatContent {
 					return;
 				}
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-				player.takeMagicDamage(damage);
+				player.takeFireDamage(damage);
 			}
 			outputText("\n\n");
 		}
