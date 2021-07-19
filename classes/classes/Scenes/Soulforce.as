@@ -425,6 +425,26 @@ use namespace CoC;
 				Metamorph.GeneticMemoryStorage[earsMem.name] = true;
 			}
 
+			for each (var armsMem: * in ArmsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[armsMem.name] = true;
+			}
+
+			for each (var hornsMem: * in HornsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[hornsMem.name] = true;
+			}
+
+			for each (var skinMem: * in SkinMem.Memories) {
+				Metamorph.GeneticMemoryStorage[skinMem.name] = true;
+			}
+
+			for each (var tongueMem: * in TongueMem.Memories) {
+				Metamorph.GeneticMemoryStorage[tongueMem.name] = true;
+			}
+
+			for each (var wingsMem: * in WingsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[wingsMem.name] = true;
+			}
+
 			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedScales)) player.createStatusEffect(StatusEffects.UnlockedScales,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedChitin)) player.createStatusEffect(StatusEffects.UnlockedChitin,0,0,0,0);
@@ -634,18 +654,7 @@ use namespace CoC;
 			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreFace)) player.createStatusEffect(StatusEffects.UnlockedManticoreFace,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes)) player.createStatusEffect(StatusEffects.UnlockedManticoreEyes,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxWings)) player.createStatusEffect(StatusEffects.UnlockedSphinxWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) player.createStatusEffect(StatusEffects.UnlockedSphinxArms,0,0,0,0);/*
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);*/
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) player.createStatusEffect(StatusEffects.UnlockedSphinxArms,0,0,0,0);
 			doNext(SoulforceCheats);
 		}
 		public function PerkGalore1():void {

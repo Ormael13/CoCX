@@ -149,26 +149,21 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	var dragon_coat_color:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	//Gain Dragon Scales
 	if (player.hasPartialCoat(Skin.DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
-		outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
-		player.skin.growCoat(Skin.DRAGON_SCALES,{},Skin.COVERAGE_COMPLETE);
 		player.coatColor = randomChoice(dragon_coat_color);
-		outputText("<b>Your body is now fully covered in " + player.skin.coat.color + " shield-shaped dragon scales.</b>");
-		if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
-			outputText("\n\n<b>Genetic Memory: Dragon Scales - Memorized!</b>\n\n");
-			player.createStatusEffect(StatusEffects.UnlockedDragonScales, 0, 0, 0, 0);
-		}
+		outputText("\n\n");
+		CoC.instance.transformations.SkinDragonScales().applyEffect();
 		changes++;
 	}
 	if (!player.hasDragonScales() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-		outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". It doesn’t cover your skin entirely but should provide excellent protection regardless.  They are smooth and look nearly as tough as iron. ");
 		var color:String;
 		if (rand(10) == 0) {
 			color = randomChoice("purple","silver");
 		} else {
 			color = randomChoice("red","green","white","blue","black");
 		}
-		player.skin.growCoat(Skin.DRAGON_SCALES,{color:color},Skin.COVERAGE_LOW);
-		outputText("<b>Your body is now partially covered in " + color + " shield-shaped dragon scales.</b>");
+		player.coatColor = color;
+		outputText("\n\n");
+		CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
 		changes++;
 	}
 	//Gain Dragon Legs

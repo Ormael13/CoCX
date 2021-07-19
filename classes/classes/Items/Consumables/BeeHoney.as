@@ -166,16 +166,8 @@ public class BeeHoney extends Consumable
 			}
 			// Chitin
 			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW || player.skin.coat.type != Skin.CHITIN || player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
-				player.skin.growCoat(Skin.CHITIN,{
-					color:"yellow",
-					color2:"black",
-					pattern:Skin.PATTERN_BEE_STRIPES
-				},Skin.COVERAGE_LOW);
-				// TODO grow chitin text
-				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
-					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
-				}
+				outputText("\n\n");
+				CoC.instance.transformations.SkinChitin(Skin.COVERAGE_LOW, {color:"yellow",	color2:"black",	pattern:Skin.PATTERN_BEE_STRIPES}).applyEffect();
 				changes++;
 			}
 			//Bee Legs

@@ -316,7 +316,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			player.wings.type = Wings.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.horns.type = Horns.NONE;
-			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
+			CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
 			if (player.hasCock() && player.wolfCocks() < 1) {
 				var selectedCockValue:int = -1;
 				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
@@ -791,7 +791,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			player.wings.type = Wings.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.horns.type = Horns.NONE;
-			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
+			CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
 			if (player.hasCock() && player.wolfCocks() < 1) {
 				var selectedCockValue:int = -1;
 				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)

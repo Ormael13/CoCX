@@ -1346,7 +1346,7 @@ public class DebugMenu extends BaseContent
 			player.lowerBody = LowerBody.CAT;
 			player.legCount = 2;
 			player.skin.restore();
-			player.skin.growFur();
+			CoC.instance.transformations.SkinFur().applyEffect(false);
 			//Draconic TF
 			player.horns.type = Horns.DRACONIC_X2;
 			player.horns.count = 4;
@@ -1369,7 +1369,7 @@ public class DebugMenu extends BaseContent
 			player.legCount = 2;
 			//Draconic TF
 			player.skin.restore();
-			player.skin.growCoat(Skin.SCALES);
+			CoC.instance.transformations.SkinScales().applyEffect(false);
 			player.tongue.type = Tongue.DRACONIC;
 			player.horns.type = Horns.DRACONIC_X2;
 			player.horns.count = 4;

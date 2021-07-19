@@ -223,7 +223,7 @@ package classes.GeneticMemories {
 
 		public static const THUNDEROUS_AURA:int = 19;
 		EnumValue.add(Memories, THUNDEROUS_AURA, "THUNDEROUS_AURA", {
-			name: "Thunderous Aura Wings",
+			name: "Thunderous Aura (Wings)",
 			metamorphCost: 100,
 			metamorphTitle: "Raiju",
 			transformation: function(): Transformation {

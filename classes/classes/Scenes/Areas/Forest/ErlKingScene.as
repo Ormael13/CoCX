@@ -1020,11 +1020,7 @@ public class ErlKingScene extends BaseContent
 			//Gain fur
 			if (rand(4) == 0 && changes < changeLimit && player.horns.count > 0 && player.lowerBody != LowerBody.GARGOYLE && !player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
-				player.skin.growCoat(Skin.FUR, {color:"brown"});
-				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-				}
+				CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color:"brown"}).applyEffect(false);
 				changes++;
 			}
 			//Change face to normal

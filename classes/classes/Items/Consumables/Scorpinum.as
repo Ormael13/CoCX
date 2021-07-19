@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.CoC;
 
 public class Scorpinum extends Consumable {
 	public function Scorpinum() {
@@ -49,11 +50,7 @@ public class Scorpinum extends Consumable {
 		}
 		//Gain chitin skin
 		if (changes < changeLimit && !player.hasCoatOfType(Skin.CHITIN) && !player.isGargoyle() && player.tailType == Tail.SCORPION && rand(2) == 0) {
-			mutations.growChitin("green");
-			if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
-				outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
-				player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
-			}
+			CoC.instance.transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {color: "green"}).applyEffect();
 			changes++;
 		}
 		return false;

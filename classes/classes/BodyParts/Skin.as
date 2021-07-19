@@ -181,7 +181,7 @@ public class Skin extends SaveableBodyPart {
 		return null;
 	}
 	/**
-	 * @param options = {color,adj,desc}
+	 * @param options = {color,color2,pattern,adj,desc}
 	 */
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;

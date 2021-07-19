@@ -1720,28 +1720,21 @@ public final class Mutations extends MutationsHelper {
         }
         //Winter wolf fur partial fur
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && !player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
-            player.hairColor = "glacial white";
-            if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
-            else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
-            else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
-            player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_LOW);
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+            if (player.hairColor != "glacial white") {
+                outputText("\n\n");
+                CoC.instance.transformations.HairChangeColor(["glacial white"]).applyEffect();
             }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: "glacial white"}).applyEffect();
             changes++;
         }
         //Winter wolf full fur
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
-            player.hairColor = "glacial white";
-            if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
-            else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now covered in [haircolor] fur from head to toe.</b>");
-            else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
-            player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_COMPLETE);
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+            if (player.hairColor != "glacial white") {
+                outputText("\n\n");
+                CoC.instance.transformations.HairChangeColor(["glacial white"]).applyEffect();
             }
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "glacial white"}).applyEffect();
             changes++;
         }
         if (rand(2) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasFullCoatOfType(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
@@ -2413,41 +2406,18 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (type == 3 && player.hairColor != "midnight black" && player.lowerBody != LowerBody.GARGOYLE) {
-            if (player.hasFur()) outputText("<b>\n\nYour fur and hair tingles, growing in thicker than ever as darkness begins to spread from the roots, turning it midnight black.</b>");
-            else outputText("<b>\n\nYour [skin.type] itches like crazy as fur grows out from it, coating your body.  It's incredibly dense and black as the middle of a moonless night.</b>");
-            player.hairColor = "midnight black";
-            if (player.hasFur()) {
-                player.skin.coat.color = player.hairColor;
-                player.skinAdj = "thick";
-            } else {
-                player.skin.growCoat(Skin.FUR, {color: player.hairColor, adj: "thick"});
-                if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                    outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                    player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-                }
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.HairChangeColor(["midnight black"]).applyEffect();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "midnight black", adj: "thick"}).applyEffect();
         }
         //Become furred - requires paws and tail
         if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasFur() && !player.isGargoyle()) {
-            if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!");
-            else outputText("\n\nYour [skin base] itches intensely.  You gaze down as more and more hairs break forth from your [skin base], quickly transforming into a soft coat of fur.");
+            outputText("\n\n");
             if (rand(3) > 0) {
-                player.skin.growCoat(Skin.FUR, {
-                    color: randomChoice([
-                        "brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray",
-                        "light gray", "silver", "white"])
-                });
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white"]}).applyEffect();
             } else {
-                player.skin.growCoat(Skin.FUR, {
-                    color: randomChoice(["orange", "brown", "black"]),
-                    pattern: Skin.PATTERN_SPOTTED,
-                    color2: "white"
-                });
-            }
-            outputText("  <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["orange", "brown", "black"], pattern: Skin.PATTERN_SPOTTED, color2: "white"}).applyEffect();
             }
             changes++;
         }
@@ -3591,15 +3561,10 @@ public final class Mutations extends MutationsHelper {
         }
         //enhanced get shitty fur
         if (enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR && player.lowerBody != LowerBody.GARGOYLE) {
-            if (player.skinDesc != "fur") outputText("\n\nYour [skin.type] itches intensely.  You scratch and scratch, but it doesn't bring any relief.  Fur erupts between your fingers, and you watch open-mouthed as it fills in over your whole body.  The fur is patterned in black and white, like that of a cow.  The color of it even spreads to your hair!  <b>You have cow fur!</b>");
-            else outputText("\n\nA ripple spreads through your fur as some patches darken and others lighten.  After a few moments you're left with a black and white spotted pattern that goes the whole way up to the hair on your head!  <b>You've got cow fur!</b>");
-            player.hairColor = "black";
-//				player.hairColor2 = "white"; // TODO 2-color hair
-            player.skin.growCoat(Skin.FUR, {
-                color: "black",
-                color2: "white",
-                pattern: Skin.PATTERN_SPOTTED
-            });
+            outputText("\n\n");
+            CoC.instance.transformations.HairChangeColor(["black"]).applyEffect();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "black", color2: "white", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
         }
         //if enhanced to probova give a shitty cow face
         else if (enhanced && player.faceType != Face.COW_MINOTAUR && player.tailType != Tail.GARGOYLE) {
@@ -5082,21 +5047,14 @@ public final class Mutations extends MutationsHelper {
         //Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
         if (!player.hasPartialCoat(Skin.SCALES) && player.lowerBody == LowerBody.NAGA && changes < changeLimit && rand(5) == 0) {
             //(fur)
-            var color:String;
+            var colors: Array;
             if (rand(10) == 0) {
-                color = randomChoice("purple", "silver");
+                colors = ["purple", "silver"];
             } else {
-                color = randomChoice("red", "green", "white", "blue", "black");
+                colors = ["red", "green", "white", "blue", "black"];
             }
-            if (player.hasFur()) {
-                //set new skinTone
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>");
-            }
-            //(no fur)
-            else {
-                outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color + " scales.</b>");
-            }
-            player.skin.growCoat(Skin.SCALES, {color: color}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {colors: colors}).applyEffect();
             changes++;
         }
         //Snake eyes
@@ -5134,6 +5092,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances();
+        var colors: Array;
         if (type != 3) {
             outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.  Minutes pass as you start wishing you had water with you, to get rid of the ");
             if (type == 0) outputText("aftertaste.");
@@ -5329,21 +5288,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
         if (!player.hasPartialCoat(Skin.SCALES) && player.lowerBody == LowerBody.NAGA && changes < changeLimit && rand(5) == 0) {
-            //(fur)
-            var color:String;
             if (rand(10) == 0) {
-                color = randomChoice("purple", "silver");
+                colors = ["purple", "silver"];
             } else {
-                color = randomChoice("red", "green", "white", "blue", "black");
+                colors = ["red", "green", "white", "blue", "black"];
             }
-            if (player.hasFur()) {
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>");
-            }
-            //(no fur)
-            else {
-                outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color + " scales.</b>");
-            }
-            player.skin.growCoat(Skin.SCALES, {color: color}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {colors: colors}).applyEffect();
             changes++;
         }
         //Snake eyes for hydra
@@ -5533,45 +5484,23 @@ public final class Mutations extends MutationsHelper {
 
         //Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
         if (!player.hasFullCoatOfType(Skin.SCALES) && ((type == 0 && player.eyes.type == Eyes.GORGON) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
-            //set new skinTone
             if (rand(10) == 0) {
-                color = randomChoice("purple", "silver");
+                colors = ["purple", "silver"];
+            } else {
+                colors = ["red", "green", "white", "blue", "black"];
             }
-            //non rare skinTone
-            else {
-                color = randomChoice("red", "green", "white", "blue", "black");
-            }
-            if (player.hasFur()) {
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to waist.</b>");
-            }
-            //(no fur)
-            else {
-                outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + color + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to waist in shiny scales.</b>");
-            }
-            addGeneticMemory(StatusEffects.UnlockedScales, "Scales");
-            player.skin.growCoat(Skin.SCALES, {color: color});
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {colors: colors}).applyEffect();
             changes++;
         }
         if (type == 1 && player.wings.type == Wings.DRACONIC_LARGE && player.hasPartialCoat(Skin.DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
-            player.skin.growCoat(Skin.DRAGON_SCALES, {}, Skin.COVERAGE_COMPLETE);
-            outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
-                outputText("\n\n<b>Genetic Memory: Dragon Scales - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedDragonScales, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinDragonScales().applyEffect();
             changes++;
         }
         if (type == 1 && player.wings.type == Wings.DRACONIC_LARGE && !player.hasDragonScales() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". It doesn’t cover your skin entirely but should provide excellent protection regardless.  They are smooth and look nearly as tough as iron. ");
-            var color2:String;
-            if (rand(10) == 0) {
-                color2 = randomChoice("purple", "silver");
-            } else {
-                color2 = randomChoice("red", "green", "white", "blue", "black");
-            }
-            player.skin.growCoat(Skin.DRAGON_SCALES, {color: color2}, Skin.COVERAGE_LOW);
-            outputText("<b>Your body is now partially covered in " + color2 + " shield-shaped dragon scales.</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
             changes++;
         }
         if (changes == 0) {
@@ -5589,39 +5518,6 @@ public final class Mutations extends MutationsHelper {
         }
         player.refillHunger(5);
     }
-
-    /*
-            public function extensionSerum(player:Player):void
-            {
-                clearOutput();
-                if (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] > 2) {
-                    outputText("<b>No way!</b>  Your head itches like mad from using the rest of these, and you will NOT use another.\n");
-                    if (!debug) {
-                        inventory.takeItem(consumables.EXTSERM);
-                    }
-                    return;
-                }
-                outputText("You open the bottle of hair extension serum and follow the directions carefully, massaging it into your scalp and being careful to keep it from getting on any other skin.  You wash off your hands with lakewater just to be sure.");
-                if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
-                    outputText("\n\nThe tingling on your head lets you know that it's working!");
-                    flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
-                    flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] = 1;
-                }
-                else if (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 1) {
-                    outputText("\n\nThe tingling intensifies, nearly making you feel like tiny invisible faeries are massaging your scalp.");
-                    flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
-                }
-                else if (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 2) {
-                    outputText("\n\nThe tingling on your scalp is intolerable!  It's like your head is a swarm of angry ants, though you could swear your hair is growing so fast that you can feel it weighing you down more and more!");
-                    flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
-                }
-                if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && player.hairType != 4) {
-                    flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-                    outputText("\n\n<b>Somehow you know that your [hair] is growing again.</b>");
-                }
-                if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
-            }
-            */
 
     public function superHummus(player:Player):void {
         clearOutput();
@@ -6421,19 +6317,13 @@ public final class Mutations extends MutationsHelper {
         }
         //TURN INTO A FURRAH!  OH SHIT
         if ((player.eyes.type == Eyes.CAT || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
-            if (!player.hasCoatOfType(Skin.FUR)) humanizeSkin();
+            if (!player.hasCoatOfType(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect();
             if (type == 1) {
-                player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])}, Skin.COVERAGE_LOW);
-                outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
             } else {
                 outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
-                if (type == 3) player.skin.growCoat(Skin.FUR, {color: randomChoice(["black", "midnight black", "midnight"])}, Skin.COVERAGE_COMPLETE);
-                else player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])}, Skin.COVERAGE_COMPLETE);
-                outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
-            }
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                if (type == 3) CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["black", "midnight black", "midnight"]}).applyEffect();
+                else CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
             }
             changes++;
         }
@@ -6771,25 +6661,14 @@ public final class Mutations extends MutationsHelper {
         }
         //-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
         if (!player.hasFullCoatOfType(Skin.SCALES) && player.ears.type == Ears.LIZARD && player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(5) == 0) {
-            var color:String;
+            var colors: Array;
             if (rand(10) == 0) {
-                color = randomChoice("purple", "silver");
+                colors = ["purple", "silver"];
             } else {
-                color = randomChoice("red", "green", "white", "blue", "black");
+                colors = ["red", "green", "white", "blue", "black"];
             }
-            //(fur)
-            if (player.hasFur()) {
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>");
-            }
-            //(no fur)
-            else {
-                outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny " + color + " scales.</b>");
-            }
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
-                outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedScales, 0, 0, 0, 0);
-            }
-            player.skin.growCoat(Skin.SCALES, {color: color});
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {colors: colors}).applyEffect();
             changes++;
         }
         //-Lizard-like face.
@@ -7032,9 +6911,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(3) == 0) {
-            outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.");
-            outputText("  <b>Your body is now partially covered with small patches of scales!</b>");
-            player.skin.growCoat(Skin.SCALES, {color: "red"}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
@@ -7232,9 +7110,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(3) == 0) {
-            outputText("\n\nYou feel your skin shift as black scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.");
-            outputText("  <b>Your body is now partially covered with small patches of black scales!</b>");
-            player.skin.growCoat(Skin.SCALES, {color: "midnight black"}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
@@ -7585,9 +7462,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(4) == 0) {
-            outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.");
-            outputText("  <b>Your body is now partially covered with small patches of scales!</b>");
-            player.skin.growCoat(Skin.SCALES, {color: "red"}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
@@ -7933,42 +7809,21 @@ public final class Mutations extends MutationsHelper {
         //Partial and full fur
         if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
             humanizeSkin();
-            if (player.coatColor == "") player.coatColor = player.hairColor;
             if (rand(2) == 0) {
-                player.skin.growCoat(Skin.FUR, {color: player.skin.coat.color}, Skin.COVERAGE_LOW);
-                outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
             } else {
-                outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
-                player.skin.growCoat(Skin.FUR, {color: player.skin.coat.color}, Skin.COVERAGE_COMPLETE);
-                outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
-            }
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.skin.coat.color}).applyEffect();
             }
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
             humanizeSkin();
-            if (player.coatColor == "") player.coatColor = player.hairColor;
-            player.skin.growCoat(Skin.FUR, {color: player.skin.coat.color}, Skin.COVERAGE_LOW);
-            outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.hasPartialCoat(Skin.FUR)) {
             humanizeSkin();
-            if (player.coatColor == "") player.coatColor = player.hairColor;
-            outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
-            player.skin.growCoat(Skin.FUR, {color: player.skin.coat.color}, Skin.COVERAGE_COMPLETE);
-            outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.skin.coat.color}).applyEffect();
             changes++;
         }
         //-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
@@ -8790,13 +8645,7 @@ public final class Mutations extends MutationsHelper {
         //-Fur (Req: Footsies)
         if (!player.hasFur() && (player.lowerBody == LowerBody.KANGAROO || type == 1) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             changes++;
-            outputText("\n\nYour [skin.type] itches terribly all over and you try cartoonishly to scratch everywhere at once.  ");
-            player.skin.growCoat(Skin.FUR, {color: "brown"});
-            outputText("As you pull your hands in, you notice [skin coat.color] fur growing on the backs of them.  All over your body the scene is repeated, covering you in the stuff.  <b>You now have fur!</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "brown"}).applyEffect();
         }
         //-Roo footsies (Req: Tail)
         if (player.lowerBody != LowerBody.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && (type == 1 || player.tailType == Tail.KANGAROO) && changes < changeLimit && rand(4) == 0) {
@@ -8975,7 +8824,7 @@ public final class Mutations extends MutationsHelper {
         //(Fur/Scales fall out replaced by chitin)
         if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
 			outputText("\n\n");
-			transformations.SkinChitin.applyEffect();
+			transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
             changes++;
         }
         //(Gain human face)
@@ -10309,19 +10158,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(Ratatoskr_Colour);
-            if (player.hasScales()) {
-                //set new skinTone
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] scales.  Panicked, you look down and realize that your scales are falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the scales is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-            }
-            if (player.hasChitin()) {
-                //set new skinTone
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] chitin.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the chitin is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-            }
-            //(no scales and chitin)
-            else {
-                outputText("\n\nYou feel your skin shift as fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color1 + " fur.</b>");
-            }
-            player.skin.growCoat(Skin.FUR, {color: color1}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
         }
         //get partial fur from full if pc face is human
         if (player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
@@ -10465,19 +10303,8 @@ public final class Mutations extends MutationsHelper {
 
         if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(kamaitachi_hair);
-            if (player.hasScales()) {
-                //set new skinTone
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] scales.  Panicked, you look down and realize that your scales are falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the scales is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-            }
-            if (player.hasChitin()) {
-                //set new skinTone
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] chitin.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the chitin is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-            }
-            //(no scales and chitin)
-            else {
-                outputText("\n\nYou feel your skin shift as fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color1 + " fur.</b>");
-            }
-            player.skin.growCoat(Skin.FUR, {color: color1}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
         }
 
         //get partial fur from full if pc face is human
@@ -10984,11 +10811,6 @@ public final class Mutations extends MutationsHelper {
         //[Grow Fur]
         //FOURTH
         if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            //from scales
-            if (player.hasScales()) outputText("\n\nYour skin shifts and every scale stands on end, sending you into a mild panic.  No matter how you tense, you can't seem to flatten them again.  The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out.  You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old.  <b>Oh well; at least you won't need to sun yourself as much with your new fur.</b>");
-            //from skin
-            else outputText("\n\nYour skin itches all over, the sudden intensity and uniformity making you too paranoid to scratch.  As you hold still through an agony of tiny tingles and pinches, fine, luxuriant fur sprouts from every bare inch of your skin!  <b>You'll have to get used to being furry...</b>");
-            player.skin.growCoat(Skin.FUR);
             if (player.kitsuneScore() >= 4)
                 if (InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
                     player.skin.coat.color = player.hairColor;
@@ -10997,13 +10819,10 @@ public final class Mutations extends MutationsHelper {
                 else
                     player.skin.coat.color = randomChoice(KitsuneScene.basicKitsuneFur);
             else {
-                // TODO patterns
                 player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
             }
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur().applyEffect();
             changes++;
         }
         //[Grow Fox Legs]
@@ -11315,9 +11134,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(3) == 0) {
-            outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.");
-            outputText("  <b>Your body is now partially covered with small patches of scales!</b>");
-            player.skin.growCoat(Skin.SCALES, {color: "red"}, Skin.COVERAGE_LOW);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
@@ -12436,31 +12254,15 @@ public final class Mutations extends MutationsHelper {
         }
         //get partial fur from nothing
         if (player.faceType == Face.RACCOON_MASK && !player.hasFur() && rand(3) == 0 && changes < changeLimit) {
-                color1 = randomChoice(Coon_HairColor1);
-            if (player.hasScales()) {
-                //set new skinTone
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] scales.  Panicked, you look down and realize that your scales are falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the scales is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-            }
-            if (player.hasChitin()) {
-                //set new skinTone
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] chitin.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the chitin is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-            }
-            //(no scales and chitin)
-            else {
-                outputText("\n\nYou feel your skin shift as fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color1 + " fur.</b>");
-            }
-            player.skin.growCoat(Skin.FUR, {color: color1}, Skin.COVERAGE_LOW);
+            color1 = randomChoice(Coon_HairColor1);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
         }
         //gain full fur
         if (player.faceType == Face.RACCOON_MASK && (player.lowerBody == LowerBody.RACCOON && player.ears.type == Ears.RACCOON) && player.hasFur() && player.skin.coverage == Skin.COVERAGE_LOW && changes < changeLimit && rand(4) == 0) {
-                color1 = randomChoice(Coon_HairColor1);
-            outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
-            player.skin.growCoat(Skin.FUR, {color: color1});
-            outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            color1 = randomChoice(Coon_HairColor1);
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: color1}).applyEffect();
             changes++;
         }
 
@@ -12646,16 +12448,8 @@ public final class Mutations extends MutationsHelper {
             }
             //from skinscales
             if (!player.hasFur()) {
-                outputText("\n\nYour [skin] " + player.skin.isAre("itches", "itch") + outputText(" all over"));
-                if (player.tailType > Tail.NONE) outputText(", except on your tail");
-                outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of " + player.coatColor + " fur begin to force through your skin");
-                if (player.hasScales()) outputText(", pushing your scales out with little pinches");
-                outputText(", resolving the problem for you.  <b>You now have fur.</b>");
-                player.skin.growCoat(Skin.FUR, {color: player.coatColor});
-                if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                    outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                    player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-                }
+                outputText("\n\n");
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.coatColor}).applyEffect();
             }
             //from other color fur
             else {
@@ -12972,22 +12766,12 @@ public final class Mutations extends MutationsHelper {
         }
         //No fur, has ferret ears, tail, and legs:
         if (!player.hasFur() && player.ears.type == Ears.FERRET && player.tailType == Tail.FERRET && player.lowerBody == LowerBody.FERRET && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYour skin starts to itch like crazy as a thick coat of fur sprouts out of your skin.");
-            //If hair was not sandy brown, silver, white, or brown
             if (player.hairColor != "sandy brown" && player.hairColor != "silver" && player.hairColor != "white" && player.hairColor != "brown") {
-                outputText("\n\nOdder still, all of your hair changes to ");
-                if (rand(4) == 0) player.hairColor = "sandy brown";
-                else if (rand(3) == 0) player.hairColor = "silver";
-                else if (rand(2) == 0) player.hairColor = "white";
-                else player.hairColor = "brown";
-                outputText(".");
+                outputText("\n\n");
+                CoC.instance.transformations.HairChangeColor(["sandy brown", "silver", "white", "brown"]).applyEffect();
             }
-            player.skin.growCoat(Skin.FUR, {color: player.hairColor});
-            outputText("  <b>You now have [skin coat.color] fur!</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.hairColor}).applyEffect();
             changes++;
         }
         //Tail TFs!
@@ -13237,20 +13021,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (boar && rand(2) == 0 && player.hasPlainSkinOnly() && !player.hasFur() && changes < changeLimit) {
-            var skinChoosen:int = rand(5);
-            var furToBeChosen:String;
-            if (skinChoosen == 0) furToBeChosen = "brown";
-            else if (skinChoosen == 1) furToBeChosen = "dark brown";
-            else if (skinChoosen == 2) furToBeChosen = "black";
-            else if (skinChoosen == 3) furToBeChosen = "red";
-            else furToBeChosen = "gray";
-            outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
-            player.skin.growCoat(Skin.FUR, {color: furToBeChosen});
-            outputText("<b>You now have a warm coat of [skin coat.color] boar fur!</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "dark brown", "black", "red", "gray"]}).applyEffect();
             changes++;
         }
         //Change skin colour
@@ -14315,10 +14087,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Fur
         if (player.hairType == Hair.FLUFFY && (player.rearBody.type != RearBody.YETI_FUR || !player.skin.checkProps({coverage: Skin.COVERAGE_LOW, coat: {type: Skin.FUR}})) && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nThick hair starts to grow in random areas all over your body. ");
-            if (player.breastRows.length > 0) outputText("Your breasts in particular cover with hair forming into what can only be described as a natural bikini.");
-            outputText(" Furthermore, your hair natural color turns to white. Your body is now <b>partially covered with thick white fur!</b>");
-            player.skin.growFur({color: "white"}, Skin.COVERAGE_LOW);
+            if (player.hairColor != "white") {
+                outputText("\n\n");
+                CoC.instance.transformations.HairChangeColor(["white"]).applyEffect();
+            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: "white"}).applyEffect();
             setRearBody(RearBody.YETI_FUR);
             player.hairColor = "white";
             changes++;
@@ -15057,9 +14831,8 @@ public final class Mutations extends MutationsHelper {
         //Coat
         if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit && rand(4) == 0) {
             if (!InCollection(player.coatColor, wyrmCoatColor)) player.coatColor = randomChoice(wyrmCoatColor);
-            outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
-            player.skin.growCoat(Skin.DRAGON_SCALES, {}, Skin.COVERAGE_LOW);
-            outputText("<b>Your body is now partialy covered in " + player.skin.coat.color + " shield-shaped dragon scales.</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
             changes++;
         }
         //Coat color fix
@@ -15318,12 +15091,8 @@ public final class Mutations extends MutationsHelper {
         //PartialCoatChitin skin
         var MantisColor:Array = ["green", "turquoise", "emerald"];
         if (changes < changeLimit && !player.hasPartialCoat(Skin.CHITIN) && rand(2) == 0) {
-            var randomColor:String = randomChoice(MantisColor);
-            growPartialChitin(randomColor);
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
-                outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: MantisColor}).applyEffect();
             changes++;
         }
 
@@ -15396,12 +15165,7 @@ public final class Mutations extends MutationsHelper {
 
         //Chitin skin
         if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
-            var randomColorF:String = randomChoice(MantisColor);
-            growChitin(randomColorF);
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
-                outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
-            }
+            CoC.instance.transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: MantisColor}).applyEffect();
             changes++;
         }
 
@@ -15877,26 +15641,13 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0 && player.hasPlainSkinOnly() && !player.hasFur() && changes < changeLimit) {
             outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of ");
             if (player.faceType == Face.PANDA) {
-                outputText("white fur. Your leg fur and your arms up to your neck and shoulders, on the other hand, turns pitch black. <b>You are now covered in white fur, your forepaw and hindpaw black as night. On your white face you have two black circle around the eye just like a panda.</b> As if to match your fur color pattern your hair shift color to black and white.");
-                player.hairColor = "white";
-                //player.hairColor2 = "black"; // TODO 2-color hair
-                player.skin.growCoat(Skin.FUR, {
-                    color: "white",
-                    color2: "black",
-                    pattern: Skin.PATTERN_SPOTTED
-                });
+                outputText("\n\n");
+                CoC.instance.transformations.HairChangeColor(["white"]).applyEffect();
+                outputText("\n\n");
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "white", color2: "black", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
             } else {
-                var skinChoosen:int = rand(3);
-                var furToBeChosen:String;
-                if (skinChoosen == 0) furToBeChosen = "brown";
-                else if (skinChoosen == 1) furToBeChosen = "white";
-                else furToBeChosen = "black";
-                player.skin.growCoat(Skin.FUR, {color: furToBeChosen});
-                outputText("[skin coat.color] fur. <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
-            }
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                outputText("\n\n");
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "white", "black"]}).applyEffect();
             }
             changes++;
         }
@@ -16300,23 +16051,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && !player.hasFur()) {
-            if (!player.hasCoat()) {
-                outputText("\n\nYou start to scratch your [skin], as an uncomfortable itching overcomes you. It’s quite annoying, like the aftermath of being bitten by a bug, only that it’s all over at the same time.");
-            } else if (player.hasScales()) {
-                outputText("\n\nThe layer of scales covering your body feels weird for a second, almost looking like they’re moving on they own, and that is when you realize that they changing!");
-                outputText("\n\nThe feeling is quite odd, a bit of an itching from the place where they join your skin, that quickly becomes more intense as their transformation advances. Then a bunch of scales fall from your arm. Soon all the scales on your arm fall off, leaving behind a layer of healthy, normal skin. The process continues overs the rest of your body, and before long you are covered in a layer of " + player.skinTone + " skin.");
-                outputText("\n\nNot for long though, as an uncomfortable itching overcomes you. It’s quite annoying, like the aftermath of being bitten for a bug, only all over your body at the same time.");
-            }
-            outputText("\n\nSoon you realize that the sensation is coming from <i>under</i> your skin. After rubbing one of your arms in annoyance, you feel something different, and when you lay your eyes on it, you realize that a patch of fur is growing over your skin. Then you spot similar patches over your legs, chest and back. Fur grows over your body, patches joining and closing over your skin, and in a matter of seconds, your entire body is covered with a lovely coat of thick fur. The soft and fluffy sensation is quite pleasant to the touch.  <b>Seems like you’re now covered from head to toe with russet-red fur with black fur on your underside!</b>");
-            player.skin.growCoat(Skin.FUR, {
-                color: "russet-red",
-                color2: "black",
-                pattern: Skin.PATTERN_RED_PANDA_UNDERBODY
-            });
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-                outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet-red", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
             changes++;
         }
         player.refillHunger(20);
@@ -17134,28 +16870,13 @@ public final class Mutations extends MutationsHelper {
             var color:String;
             var melkie_FurColor:Array = ["gray", "silver", "white", "glacial white", "light gray"];
             if (!player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE && changes < changeLimit && rand(4) == 0) {
-                //(scales and chitin)
-                color = randomChoice(melkie_FurColor);
-                if (player.hasScales()) {
-                    //set new skinTone
-                    outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] scales.  Panicked, you look down and realize that your scales are falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the scales is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-                }
-                if (player.hasChitin()) {
-                    //set new skinTone
-                    outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] chitin.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the chitin is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
-                }
-                //(no scales and chitin)
-                else {
-                    outputText("\n\nYou feel your skin shift as fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color + " fur.</b>");
-                }
-                player.skin.growCoat(Skin.FUR, {color: color}, Skin.COVERAGE_LOW);
+                outputText("\n\n");
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
                 changes++;
             }
             if (player.hasPartialCoat(Skin.FUR) && !InCollection(player.coatColor, melkie_FurColor) && changes < changeLimit && rand(4) == 0) {
-                //(scales and chitin)
-                color = randomChoice(melkie_FurColor);
-                outputText("\n\nYour fur begins to itch as it changes colors toward lighter shades more fit for a Melkie  <b>Your body is now partially covered with small patches of " + color + " fur.</b>");
-                player.skin.growCoat(Skin.FUR, {color: color}, Skin.COVERAGE_LOW);
+                outputText("\n\n");
+                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
                 changes++;
             }
             //Arms

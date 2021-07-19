@@ -73,6 +73,16 @@ package classes.Scenes {
 				// TODO: Move migration inside else after finished
 				// migration
 
+				GeneticMemoryStorage["Human Hair"] = true;
+				GeneticMemoryStorage["Human Face"] = true;
+				GeneticMemoryStorage["Human Eyes"] = true;
+				GeneticMemoryStorage["Human Tongue"] = true;
+				GeneticMemoryStorage["Human Ears"] = true;
+				GeneticMemoryStorage["Human Arms"] = true;
+				GeneticMemoryStorage["No Horns"] = true;
+				GeneticMemoryStorage["No Wings"] = true;
+				GeneticMemoryStorage["Plain Skin"] = true;
+
 				if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) GeneticMemoryStorage["Human Hair"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) GeneticMemoryStorage["Feather Hair"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair)) GeneticMemoryStorage["Gorgon Hair"] = true;
@@ -209,7 +219,13 @@ package classes.Scenes {
 				if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings)) GeneticMemoryStorage["Vampire Wings"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) GeneticMemoryStorage["Nightmare Wings"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedSphinxWings)) GeneticMemoryStorage["Feathered Sphinx Wings"] = true;
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura)) GeneticMemoryStorage["Thunderous Aura Wings"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura)) GeneticMemoryStorage["Thunderous Aura (Wings)"] = true;
+
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) GeneticMemoryStorage["Plain Skin"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedFur)) GeneticMemoryStorage["Fur Skin"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedScales)) GeneticMemoryStorage["Scales Skin"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedChitin)) GeneticMemoryStorage["Chitin Skin"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) GeneticMemoryStorage["Dragon Scales Skin"] = true;
 		}
 
 		public function Metamorph() {
@@ -289,7 +305,7 @@ package classes.Scenes {
 				{
 					name: "Page 3",
 					func: accessPage3MetamorphMenu,
-					hint: "Skin, Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail"
+					hint: "Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail"
 				}
 			];
 
@@ -419,9 +435,9 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of skin do you want?");
+			outputText("How do you want to change your skin?");
 
-			openPaginatedMenuOld(title, accessSkinMenu, currentPage, Skin.SkinTypes, Skin.SkinTypes[player.skinType], Skin.getTFDescription);
+			openPaginatedSkinMenu(title, currentPage);
 		}
 
 		private function accessRearBodyMenu(currentPage: int = 0): void {
@@ -563,6 +579,101 @@ package classes.Scenes {
 			doNext(accessMetamorphMenu);
 		}
 
+		private function openPaginatedSkinMenu (title: String, currentPage: int): void {
+			menu();
+
+			const memArray: Array = SkinMem.Memories;
+
+			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
+
+			const lastPage: int = Math.ceil(memArray.length/memsPerPage) - 1;
+
+			const pageMems: Array = memArray.slice(currentPage * memsPerPage, (currentPage * memsPerPage) + memsPerPage);
+
+			var currentButton: int = 0;
+
+			for each (var genMem: * in pageMems) {
+				const buttonStr: String = genMem.metamorphTitle || "";
+				const unlocked: Boolean = GeneticMemoryStorage[genMem.name];
+				const enoughSF: Boolean = player.soulforce >= genMem.metamorphCost;
+
+				if (!genMem.transformationFunc) {
+					const partsInUse: Boolean = genMem.transformation().isPresent();
+					if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.metamorphCost + " SF");
+					else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
+					else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.metamorphCost + " SF (You don't have enough Soulforce for this metamorphosis!)");
+					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+					currentButton++;
+				} else {
+					if (unlocked) addButton(currentButton, buttonStr, openCoverageMenu, genMem);
+					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+					currentButton++;
+				}
+			}
+
+			if (lastPage > 0) {
+				if (currentPage > 0) addButton(12, "Prev Page", accessSkinMenu, currentPage - 1);
+				else addButtonDisabled (12, "Prev Page");
+				if (currentPage < lastPage) addButton(13, "Next Page", accessSkinMenu, currentPage + 1);
+				else addButtonDisabled (13, "Next Page");
+			}
+
+			addButton(14, "Back", accessMetamorphMenu);
+		}
+
+		private function openCoverageMenu(genMem: *): void {
+			clearOutput();
+			menu();
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.name.split(" Skin")[0] + " Coverage</u></font>\n");
+			outputText("How much do you want your skin to be covered?");
+
+			const coverages: Array = [
+				{
+					name: "Low",
+					value: Skin.COVERAGE_LOW
+				},
+				{
+					name: "Medium",
+					value: Skin.COVERAGE_MEDIUM
+				},
+				{
+					name: "High",
+					value: Skin.COVERAGE_HIGH
+				},
+				{
+					name: "Complete",
+					value: Skin.COVERAGE_COMPLETE
+				}
+			];
+
+			var currentButton: int = 0;
+
+			for each (var coverage: Object in coverages) {
+				if (InCollection(coverage.value, genMem.availableCoverages)) {
+					const cost: int = genMem.metamorphCost * (coverages.indexOf(coverage) + 1);
+					const enoughSF: Boolean = player.soulforce >= cost;
+					const inEffect: Boolean = genMem.transformationFunc(coverage.value).isPresent();
+
+					if (enoughSF && !inEffect) addButton(currentButton, coverage.name, doMetamorphSkin, genMem, coverage.value, cost).hint("Cost: " + cost + " SF");
+					else if (inEffect) addButtonDisabled(currentButton, coverage.name, "You already have this much coverage, the metamorphosis would have no effect!");
+					else addButtonDisabled(currentButton, coverage.name, "Cost: " + cost + " SF (You don't have enough Soulforce for this coverage!)");
+					currentButton++;
+				}
+			}
+
+			addButton(14, "Back", accessSkinMenu);
+		}
+
+		private function doMetamorphSkin (genMem: *, coverage: int, cost: int): void {
+			clearOutput();
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.name.split(" Skin")[0] + "</u></font>\n");
+
+			genMem.transformationFunc(coverage).applyEffect();
+			player.soulforce -= cost;
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			doNext(accessMetamorphMenu);
+		}
+
 		public static function unlockMetamorph (genMemName: String): void {
 			if (!GeneticMemoryStorage[genMemName] && player.hasPerk(PerkLib.GeneticMemory)) {
 				GeneticMemoryStorage[genMemName] = true;
@@ -572,7 +683,6 @@ package classes.Scenes {
 
 		private function accessPage3MetamorphMenu():void {
 			menu();
-			addButton(0, "Skin", accessSkinMenuOld);
 			addButton(1, "SkinPat.", accessSkinPatternsMenuOld);
 			addButton(2, "Rear B.", accessRearBodyMenuOld);
 			addButton(3, "Antennae", accessAntennaeMenuOld);
@@ -583,34 +693,6 @@ package classes.Scenes {
 			addButton(8, "Tail(4)", accessPage4TailMenu);
 			addButton(9, "Tail(5)", accessPage5TailMenu);
 			addButton(14, "Back", accessMetamorphMenu);
-		}
-		private function accessSkinMenuOld():void {
-			menu();
-			if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin) && player.skinType != Skin.PLAIN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanSkin);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin) && player.skinType == Skin.PLAIN) addButtonDisabled(0, "Human", "You already have plain human skin.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin) && player.skinType != Skin.PLAIN && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedFur) && player.skinType != Skin.FUR && player.soulforce >= 100) addButton(1, "Fur", metamorphFur);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedFur) && player.skinType == Skin.FUR) addButtonDisabled(1, "Fur", "You already have fur.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedFur) && player.skinType != Skin.FUR && player.soulforce < 100) addButtonDisabled(1, "Fur", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedScales) && player.skinType != Skin.SCALES && player.soulforce >= 100) addButton(2, "Scales", metamorphScales);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedScales) && player.skinType == Skin.SCALES) addButtonDisabled(2, "Scales", "You already have scales.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedScales) && player.skinType != Skin.SCALES && player.soulforce < 100) addButtonDisabled(2, "Scales", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedChitin) && !player.hasCoatOfType(Skin.CHITIN) && player.soulforce >= 100) addButton(4, "Chitin", metamorphChitin);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedChitin) && player.hasCoatOfType(Skin.CHITIN)) addButtonDisabled(4, "Chitin", "You already have chitin.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedChitin) && !player.hasCoatOfType(Skin.CHITIN) && player.soulforce < 100) addButtonDisabled(4, "Chitin", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(4, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.skinType != Skin.DRAGON_SCALES && player.soulforce >= 150) addButton(8, "D.Scales", metamorphDragonScales);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.skinType == Skin.DRAGON_SCALES) addButtonDisabled(8, "D.Scales", "You already have dragon scales.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.skinType != Skin.DRAGON_SCALES && player.soulforce < 150) addButtonDisabled(8, "D.Scales", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
-			addButton(14, "Back", accessPage3MetamorphMenu);
 		}
 		private function accessSkinPatternsMenuOld():void {
 			menu();
@@ -1250,26 +1332,6 @@ package classes.Scenes {
 			player.skin.base.adj = "";
 			doNext(accessSkinPatternsMenuOld);
 		}
-		private function metamorphHumanSkin():void {
-			clearOutput();
-			player.soulforce -= 500;
-			switch (player.coatType()) {
-				case Skin.FUR:
-					outputText("\n\nYour fur itches incessantly, so you start scratching it. It starts coming off in big clumps before the whole mess begins sloughing off your body. In seconds, your skin is nude. <b>You've lost your fur!</b>");
-					break;
-				case Skin.SCALES:
-					outputText("\n\nYour scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>");
-					break;
-				case Skin.DRAGON_SCALES:
-					outputText("\n\nYour dragon scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your dragon scales!</b>");
-					break;
-				default:
-					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is once again normal!</b>");
-			}
-			player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
-			doNext(accessSkinMenuOld);
-		}
-
 
 		private function metamorphPigTail():void {
 			clearOutput();
@@ -1287,8 +1349,6 @@ package classes.Scenes {
 			player.rearBody.type = RearBody.BAT_COLLAR;
 			doNext(accessRearBodyMenuOld);
 		}
-
-
 
 		private function metamorphRaijuSkinPattern():void {
 			clearOutput();
@@ -1598,109 +1658,6 @@ package classes.Scenes {
 			outputText("\n\n<b>You now have fish like gills!</b>");
 			player.gills.type = Gills.FISH;
 			doNext(accessGillsMenuOld);
-		}
-		//all skin types TF effects goes here
-		/*private function metamorphTattoed():void {
-			clearOutput();
-			player.soulforce -= 100;
-
-			doNext(accessMetamorphMenu);
-		}*/
-		private function metamorphDragonScales():void {
-			clearOutput();
-			player.soulforce -= 150;
-			outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles. You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers. Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". They are smooth and look nearly as tough as iron. ");
-			var color:String;
-			if (rand(10) == 0) {
-				color = randomChoice("purple","silver");
-			} else {
-				color = randomChoice("red","green","white","blue","black");
-			}
-			outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
-			player.skin.growCoat(Skin.DRAGON_SCALES,{color:color});
-			doNext(accessSkinMenuOld);
-		}
-		private function metamorphChitin():void {
-			clearOutput();
-			player.soulforce -= 100;
-			var chitinColor:String;
-			if (rand(2) == 0) chitinColor = "pale white";
-			else chitinColor = "green";
-			if (player.hasCoat()) {
-				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, " + chitinColor + " chitin underneath.");
-			} else {
-				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.");
-			}
-			outputText(" <b>You now have " + chitinColor + " chitin exoskeleton covering your body.</b>");
-			player.skin.growCoat(Skin.CHITIN,{adj:"",color:chitinColor});
-			doNext(accessSkinMenuOld);
-		}
-		private function metamorphScales():void {
-			clearOutput();
-			player.soulforce -= 100;
-			if (player.skinType == Skin.FUR) {
-				if (rand(10) == 0) {
-					if (rand(2) == 0) player.coatColor = "purple";
-					else player.coatColor = "silver";
-				}
-				else {
-					switch (rand(5)) {
-						case 0:
-							player.coatColor = "red";
-							break;
-						case 1:
-							player.coatColor = "green";
-							break;
-						case 2:
-							player.coatColor = "white";
-							break;
-						case 3:
-							player.coatColor = "blue";
-							break;
-						default:
-							player.coatColor = "black";
-							break;
-					}
-				}
-				outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.coatColor + " scales covering most of your body. The rest of the fur is easy to remove. <b>You're now covered in scales from head to toe.</b>");
-			}
-			else {
-				outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless. You peel back your [armor] and the transformation has already finished on the rest of your body. ");
-				if (rand(10) == 0) {
-					if (rand(2) == 0) player.coatColor = "purple";
-					else player.coatColor = "silver";
-				}
-				else {
-					switch (rand(5)) {
-						case 0:
-							player.coatColor = "red";
-							break;
-						case 1:
-							player.coatColor = "green";
-							break;
-						case 2:
-							player.coatColor = "white";
-							break;
-						case 3:
-							player.coatColor = "blue";
-							break;
-						default:
-							player.coatColor = "black";
-							break;
-					}
-				}
-				outputText("<b>You're covered from head to toe in shiny " + player.coatColor + " scales.</b>");
-			}
-			player.skin.growCoat(Skin.SCALES,{color:player.coatColor});
-			doNext(accessSkinMenuOld);
-		}
-		private function metamorphFur():void {
-			clearOutput();
-			player.soulforce -= 100;
-			if (player.skinType == Skin.SCALES) outputText("Your skin shifts and every scale stands on end, sending you into a mild panic. No matter how you tense, you can't seem to flatten them again. The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out. You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old. <b>Oh well; at least you won't need to sun yourself as much with your new fur.</b>");
-			else outputText("Your skin itches all over, the sudden intensity and uniformity making you too paranoid to scratch. As you hold still through an agony of tiny tingles and pinches, fine, luxuriant fur sprouts from every bare inch of your skin! <b>You'll have to get used to being furry...</b>");
-			player.skin.growFur();
-			doNext(accessSkinMenuOld);
 		}
 
 		private function removeOldWings():void {

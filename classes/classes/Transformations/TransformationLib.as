@@ -1,5 +1,6 @@
 package classes.Transformations {
 import classes.BaseContent;
+import classes.CoC;
 
 import classes.BodyParts.Horns;
 import classes.BodyParts.Hair;
@@ -86,19 +87,19 @@ public const MutagenSpeSpider:PossibleEffect    = new MutagenEffect(
 			"Mutagen Bonus SPE (spider)",
 			"spe",
 			1.5,
-			"Your reflexes feel much faster. Experimentally, you make a grab at a fly on a nearby rock and quickly snatch it out of the air.  A compulsion to stuff it in your mouth and eat it surfaces, but you resist the odd desire.  Why would you ever want to do something like that?"
+			"Your reflexes feel much faster. Experimentally, you make a grab at a fly on a nearby rock and quickly snatch it out of the air. A compulsion to stuff it in your mouth and eat it surfaces, but you resist the odd desire. Why would you ever want to do something like that?"
 );
 public const MutagenTouSpider:PossibleEffect    = new MutagenEffect(
 			"Mutagen Bonus TOU (spider)",
 			"tou",
 			1,
-			"Stretching languidly, you realize you're feeling a little tougher than before, almost as if you had a full-body shell of armor protecting your internal organs.  How strange.  You probe at yourself, and while your [skinfurscales] doesn't feel much different, the underlying flesh does seem tougher."
+			"Stretching languidly, you realize you're feeling a little tougher than before, almost as if you had a full-body shell of armor protecting your internal organs. How strange. You probe at yourself, and while your [skinfurscales] doesn't feel much different, the underlying flesh does seem tougher."
 );
 public const MutagenLibSpider:PossibleEffect    = new MutagenEffect(
 			"Mutagen Bonus LIB (spider)",
 			"lib",
 			1,
-			"You suddenly feel slightly needier, and your loins stir in quiet reminder that they could be seen to. The aftertaste hangs on your tongue and your teeth.  You wish there had been more."
+			"You suddenly feel slightly needier, and your loins stir in quiet reminder that they could be seen to. The aftertaste hangs on your tongue and your teeth. You wish there had been more."
 );
 public const SensUpSpider:PossibleEffect        = new DynstatEffect(
 			"Spider sens up",
@@ -112,7 +113,7 @@ public const VenomRechargeSpider:PossibleEffect = new SimpleEffect(
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				desc += "The spinnerets on your abdomen twitch and drip a little webbing.  The entirety of its heavy weight shifts slightly, and somehow you know you'll produce webs faster now.";
+				desc += "The spinnerets on your abdomen twitch and drip a little webbing. The entirety of its heavy weight shifts slightly, and somehow you know you'll produce webs faster now.";
 
 				if (doOutput) outputText(desc);
 				player.tailRecharge += 5;
@@ -175,7 +176,7 @@ public const CocksThickenAll:PossibleEffect             = new SimpleEffect(
 					desc += "You can feel your [cocks] filling out in your [armor]. Pulling ";
 					if (player.cockTotal() == 1) desc += "it";
 					else desc += "them";
-					desc += " out, you look closely.  ";
+					desc += " out, you look closely. ";
 					if (player.cockTotal() == 1) desc += "It's";
 					else desc += "They're";
 					desc += " definitely thicker.";
@@ -197,7 +198,7 @@ public function makeHairColorTf(colors:/*String*/Array):Transformation {
 					player.hairColorOnly = color;
 					var desc: String = "";
 
-					desc += "Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!";
+					desc += "Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it. Your hair has become [haircolor]!";
 
 					if (doOutput) outputText(desc);
 				},
@@ -213,9 +214,9 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				if (player.tailType > Tail.NONE) desc += "Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire.  You jump from the pain at your [butt] and grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your [butt]!</b>\n\n";
+				if (player.tailType > Tail.NONE) desc += "Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire. You jump from the pain at your [butt] and grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your [butt]!</b>\n\n";
 				//(No tail)
-				else desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure.  You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body.  Reaching back, you grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your [butt]!</b>";
+				else desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your [butt]!</b>";
 
 				if (doOutput) outputText(desc);
 				//(Pre-existing tails)
@@ -240,27 +241,318 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 
 /*
 		*/
-		public const SkinChitin:Transformation = new SimpleTransformation("Chitin skin",
+		public const SkinPlain:Transformation = new SimpleTransformation("Plain Skin",
 			// apply effect
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				if (player.hasCoat()) {
-						desc += "A slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, midnight purple chitin underneath.";
-				} else {
-						desc += "A slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.";
+				switch (player.coatType()) {
+					case Skin.FUR:
+						desc += "Your fur itches incessantly, so you start scratching it. It starts coming off in big clumps before the whole mess begins sloughing off your body. In seconds, your skin is nude. <b>You've lost your fur!</b>";
+						break;
+					case Skin.SCALES:
+						desc += "Your scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>";
+						break;
+					case Skin.DRAGON_SCALES:
+						desc += "Your dragon scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your dragon scales!</b>";
+						break;
+					default:
+						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is once again normal!</b>";
 				}
-					desc += "  <b>You now have midnight purple chitin exoskeleton partialy covering your body.</b>";
 
 				if (doOutput) outputText(desc);
-				player.skin.growCoat(Skin.CHITIN, {color: "midnight purple"}, Skin.COVERAGE_LOW);
-				addGeneticMemory(StatusEffects.UnlockedChitin, "Chitin");
+				player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
+				Metamorph.unlockMetamorph("Plain Skin");
 			},
 			// is present
 			function ():Boolean {
-				return player.hasCoatOfType(Skin.CHITIN);
+				return player.skinType === Skin.PLAIN && player.skin.coverage == Skin.COVERAGE_NONE;
 			}
 		);
+
+		/**
+	 	* @param options = {color/colors,color2/colors2,pattern,adj,desc}
+	 	*/
+		public function SkinFur(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null):Transformation {
+			return new SimpleTransformation("Fur Skin",
+				// apply effect
+				function (doOutput:Boolean):void {
+					options = skinFormatOptions(options);
+					player.skinDesc = "fur";
+
+					const color: String = options.color;
+
+					var desc: String = "";
+
+					// Coverage
+					if (player.hasCoatOfType(Skin.FUR)) {
+						if (coverage > player.skin.coverage) {
+							desc += "You suddenly feel a familiar itch on parts of your skin uncovered by fur. You're not surprised when <b>even more " + player.coatColor + " fur sprouts, covering more of your body.</b>";
+						} else if (coverage < player.skin.coverage) {
+							desc += "Sections of your " + player.coatColor + " fur itch incessantly, and as you scratch yourself, it starts coming off in big clumps. <b>You still have " + player.coatColor + " fur on your body, but now it covers less of your skin.</b>";
+						}
+
+						if (coverage !== player.skin.coverage && color !== player.coatColor) {
+							desc += "\n\n";
+						}
+
+						if (color !== player.coatColor) {
+							desc += "You feel a strange sensation on your fur, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your fur is now " + color + ".</b>"
+						}
+					} else {
+						switch (coverage) {
+							case Skin.COVERAGE_LOW:
+								if (!player.hasCoat()) desc += "Your skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of " + color + " fur. <b>You are now partialy covered in " + color + " fur.</b>";
+            		else if (player.hasScales()) desc += "Your scales itch incessantly. You scratch, feeling them flake off to reveal a coat of " + color + " fur growing out from below!  <b>You are now partialy covered in " + color + " fur.</b>";
+            		else desc += "Your skin itch incessantly. You scratch, feeling it current form shifting into a coat of " + color + " fur. <b>You are now partialy covered in " + color + " fur.</b>";
+								break;
+							case Skin.COVERAGE_COMPLETE:
+								if (player.skinType == Skin.SCALES) desc += "Your skin shifts and every scale stands on end, sending you into a mild panic. No matter how you tense, you can't seem to flatten them again. The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out. You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old. <b>Oh well, at least you won't need to sun yourself as much with your new " + color + " fur.</b>";
+								else desc += "Your skin itches all over, the sudden intensity and uniformity making you too paranoid to scratch. As you hold still through an agony of tiny tingles and pinches, fine, luxuriant " + color + " fur sprouts from every bare inch of your skin! <b>You're now covered from head to toe in " + color + " fur.</b>";
+								break;
+							default:
+								desc +="ERROR: DESCRIPTION FOR THIS LEVEL OF FUR COVERAGE DOES NOT EXIST"
+						}
+					}
+
+					// Patterns
+					if (options.pattern && options.pattern !== player.skin.base.pattern) {
+						const pattern: int = options.pattern;
+
+						if (!options.color2 && options.colors2) {
+							options.color2 = randomChoice(options.colors2);
+							options.colors2 = undefined;
+						}
+
+						switch (pattern) {
+							case Skin.PATTERN_SPOTTED:
+								if (!options.color2) options.color2 = "black";
+								desc += "\n\nA ripple spreads through your fur as some patches darken and others lighten. After a few moments you're left with a " + options.color2 + " and " + color + " spotted pattern that goes the whole way up to the hair on your head! <b>You've got spotted fur!</b>";
+								break;
+							case Skin.PATTERN_RED_PANDA_UNDERBODY:
+								if (!options.color2) options.color2 = "black";
+								desc += "\n\nA ripple spreads through your fur as your underside changes colors, becoming " + options.color2 + " rather than " + color + ". <b>Now your underside fur is " + options.color2 + ".";
+								break;
+						}
+					}
+
+					player.skin.growCoat(Skin.FUR, options, coverage);
+					if (doOutput) outputText(desc);
+					Metamorph.unlockMetamorph("Fur Skin");
+				},
+				// is present
+				function ():Boolean {
+					options = skinFormatOptions(options);
+
+					return player.hasCoatOfType(Skin.FUR) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+				}
+			)
+		};
+
+		public function SkinScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null):Transformation {
+			return new SimpleTransformation("Scales Skin",
+				// apply effect
+				function (doOutput:Boolean):void {
+					options = skinFormatOptions(options);
+
+					const color: String = options.color;
+
+					var desc: String = "";
+
+					// Coverage
+					if (player.hasCoatOfType(Skin.SCALES)) {
+						if (coverage > player.skin.coverage) {
+							desc += "You suddenly feel a familiar itch on parts of your skin uncovered by scales. You're not surprised when <b>even more " + player.coatColor + " scales sprout, covering more of your body.</b>";
+						} else if (coverage < player.skin.coverage) {
+							desc += "Sections of your " + player.coatColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have " + player.coatColor + " scales on your body, but now they cover less of your skin.</b>";
+						}
+
+						if (coverage !== player.skin.coverage && color !== player.coatColor) {
+							desc += "\n\n";
+						}
+
+						if (color !== player.coatColor) {
+							desc += "You feel a strange sensation on your scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your scales are now " + color + ".</b>"
+						}
+					} else {
+						switch (coverage) {
+							case Skin.COVERAGE_LOW:
+            		if (player.hasFur()) {
+                	desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
+            		} else {
+                	desc += "You feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. <b>Your body is now partially covered with small patches of " + color + " scales.</b>";
+            		}
+								break;
+							case Skin.COVERAGE_COMPLETE:
+            		if (player.hasFur()) {
+                	desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove. <b>You're now covered in scales from head to toe.</b>";
+            		} else {
+                	desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. <b>You're covered from head to toe in shiny " + color + " scales.</b>";
+            		}
+								break;
+							default:
+								desc +="ERROR: DESCRIPTION FOR THIS LEVEL OF SCALES COVERAGE DOES NOT EXIST"
+						}
+					}
+
+					player.skin.growCoat(Skin.SCALES, options, coverage);
+					if (doOutput) outputText(desc);
+					Metamorph.unlockMetamorph("Scales Skin");
+				},
+				// is present
+				function ():Boolean {
+					options = skinFormatOptions(options);
+
+					return player.hasCoatOfType(Skin.SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+				}
+			)
+		};
+
+		public function SkinDragonScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null):Transformation {
+			return new SimpleTransformation("Dragon Scales Skin",
+				// apply effect
+				function (doOutput:Boolean):void {
+					options = skinFormatOptions(options);
+
+					const color: String = options.color;
+
+					var desc: String = "";
+
+					// Coverage
+					if (player.hasCoatOfType(Skin.DRAGON_SCALES)) {
+						if (coverage > player.skin.coverage) {
+							desc += "You suddenly feel a familiar itch on parts of your skin uncovered by dragon scales. You're not surprised when <b>even more " + player.coatColor + " dragon scales sprout, covering more of your body.</b>";
+						} else if (coverage < player.skin.coverage) {
+							desc += "Sections of your " + player.coatColor + " dragon scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have " + player.coatColor + " dragon scales on your body, but now they cover less of your skin.</b>";
+						}
+
+						if (coverage !== player.skin.coverage && color !== player.coatColor) {
+							desc += "\n\n";
+						}
+
+						if (color !== player.coatColor) {
+							desc += "You feel a strange sensation on your dragon scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your dragon scales are now " + color + ".</b>"
+						}
+					} else {
+						switch (coverage) {
+							case Skin.COVERAGE_LOW:
+								desc += "Prickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". It doesn’t cover your skin entirely but should provide excellent protection regardless.  They are smooth and look nearly as tough as iron. <b>Your body is now partially covered in " + color + " shield-shaped dragon scales.</b>";
+								break;
+							case Skin.COVERAGE_COMPLETE:
+								desc += "Prickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles. You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers. Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ". They are smooth and look nearly as tough as iron. <b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>";
+								break;
+							default:
+								desc +="ERROR: DESCRIPTION FOR THIS LEVEL OF DRAGON SCALES COVERAGE DOES NOT EXIST"
+						}
+					}
+
+					player.skin.growCoat(Skin.DRAGON_SCALES, options, coverage);
+					if (doOutput) outputText(desc);
+					Metamorph.unlockMetamorph("Dragon Scales Skin");
+				},
+				// is present
+				function ():Boolean {
+					options = skinFormatOptions(options);
+
+					return player.hasCoatOfType(Skin.DRAGON_SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+				}
+			)
+		};
+
+		public function SkinChitin(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null):Transformation {
+			return new SimpleTransformation("Chitin Skin",
+				// apply effect
+				function (doOutput:Boolean):void {
+					options = skinFormatOptions(options);
+
+					const color: String = options.color;
+
+					var desc: String = "";
+
+					// Coverage
+					if (player.hasCoatOfType(Skin.CHITIN)) {
+						if (coverage > player.skin.coverage) {
+							desc += "You suddenly feel a familiar itch on parts of your skin uncovered by chitin. When you scratch yourself, your skin starts to harden, becoming chitin in the same color as what was already on your body. <b>Even more " + player.coatColor + " chitin is covering your body now.</b>";
+						} else if (coverage < player.skin.coverage) {
+							desc += "Sections of your " + player.coatColor + " chitin itch incessantly, and as you scratch yourself, you feel it softening and becoming normal skin again. <b>You still have " + player.coatColor + " chitin on your body, but now it covers less.</b>";
+						}
+
+						if (coverage !== player.skin.coverage && color !== player.coatColor) {
+							desc += "\n\n";
+						}
+
+						if (color !== player.coatColor) {
+							desc += "You feel a strange sensation on the chitin that your skin became, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your chitin is now " + color + ".</b>"
+						}
+					} else {
+						switch (coverage) {
+							case Skin.COVERAGE_LOW:
+								if (player.hasCoat()) {
+									desc += "A slowly-building itch spreads over parts of your body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, " + color + " chitin underneath.";
+								} else {
+									desc += "A slowly-building itch spreads over parts of your body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.";
+								}
+								desc += " <b>You now have " + color + " chitin exoskeleton covering parts of your body.</b>";
+
+								break;
+							case Skin.COVERAGE_COMPLETE:
+								if (player.hasCoat()) {
+									desc += "A slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, " + color + " chitin underneath.";
+								} else {
+									desc += "A slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.";
+								}
+								desc += " <b>You now have " + color + " chitin exoskeleton covering your body.</b>";
+								break;
+							default:
+								desc +="ERROR: DESCRIPTION FOR THIS LEVEL OF FUR COVERAGE DOES NOT EXIST"
+						}
+					}
+
+					// Patterns
+					if (options.pattern && options.pattern !== player.skin.base.pattern) {
+						const pattern: int = options.pattern;
+
+						if (!options.color2 && options.colors2) {
+							options.color2 = randomChoice(options.colors2);
+						}
+
+						switch (pattern) {
+							case Skin.PATTERN_BEE_STRIPES:
+								if (!options.color2) options.color2 = "black";
+								desc += "\n\nA ripple spreads through your chitin as some patches change in color. After a few moments you're left with a " + options.color2 + " and " + color + " striped pattern, like a bee's! <b>You've got striped chitin!</b>";
+								break;
+						}
+					}
+
+					player.skin.growCoat(Skin.CHITIN, options, coverage);
+					if (doOutput) outputText(desc);
+					Metamorph.unlockMetamorph("Chitin Skin");
+				},
+				// is present
+				function ():Boolean {
+					options = skinFormatOptions(options);
+
+					return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+				}
+			)
+		};
+
+		private function skinFormatOptions(options: *): * {
+			if (!options) options = {};
+
+			if (player.coatColor == "" || player.skinType === Skin.PLAIN) player.coatColor = player.hairColor;
+
+			if (!options.adj) options.adj = "";
+
+			if (!options.color && !options.colors) {
+				options.color = player.coatColor;
+				options.colors = [options.color];
+			} else if (!options.color && options.colors) {
+				options.color = randomChoice(options.colors);
+			}
+
+			return options;
+		}
 		/*
 */
 
@@ -429,7 +721,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 					TransformationUtils.applyTFIfNotPresent(transformations.HornsDraconicDual, doOutput);
 
 					if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-						desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish <b>you have four draconic-looking horns, each about twelve inches long.</b>"
+						desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish <b>you have four draconic-looking horns, each about twelve inches long.</b>"
 					} else {
 						desc += "A second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop. A sense of finality settles over you. <b>You have four draconic-looking horns, each about twelve inches long.</b>";
 					}
@@ -451,7 +743,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 	        var desc: String = "";
 
 					if (player.horns.type === Horns.NONE) {
-						desc += "With painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horns sprout from your head before stopping.  <b>You have about four inches of dragon-like horns.</b>";
+						desc += "With painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns. They're angled back in such a way as to resemble those you saw on the dragons in your village's legends. A few inches of horns sprout from your head before stopping. <b>You have about four inches of dragon-like horns.</b>";
 					} else {
 						desc += "You feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
 
@@ -542,9 +834,9 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 	        var desc: String = "";
 
 					if (player.horns.type === Horns.NONE) {
-						desc += "You hear the sound of cracking branches erupting from the tip of your skull. Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear. <b>You've grown antlers!</b>";
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull. Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree. Investigating the exotic additions sprouting from your head, the situation becomes clear. <b>You've grown antlers!</b>";
 					} else {
-						desc += "You hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>";
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull. The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else. Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>";
 					}
 
 	        player.horns.count = 4 + rand(12);
@@ -601,9 +893,9 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 	        var desc: String = "";
 
 					if (player.horns.type === Horns.NONE) {
-						desc += "You hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown oak horns!</b>";
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull. Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree. Investigating the exotic additions sprouting from your head, the situation becomes clear. <b>You've grown oak horns!</b>";
 					} else {
-						desc += "You hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained oak horns!</b>";
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull. The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else. Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained oak horns!</b>";
 					}
 
 	        player.horns.count = 4 + rand(12);
@@ -623,9 +915,9 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 	        var desc: String = "";
 
 					if (player.horns.type === Horns.NONE) {
-						desc += "A spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>";
+						desc += "A spot on each side of your head has been getting steadily sorer. You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>";
 					} else {
-						desc += "Your old horns slowly crumbling away until nothing is left.  Then a spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge pair of orchids is now flourishing their floppy petals and stamen above your head! <b>You've grown a pair of orchid flowers!</b>";
+						desc += "Your old horns slowly crumbling away until nothing is left. Then a spot on each side of your head has been getting steadily sorer. You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge pair of orchids is now flourishing their floppy petals and stamen above your head! <b>You've grown a pair of orchid flowers!</b>";
 					}
 
 	        player.horns.count = 2;
@@ -664,10 +956,10 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 						desc += "You writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>";
 					} else {
 						if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-              desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have two sea dragon horns, each about twelve inches long.";
+              desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
               player.horns.count = 12;
             } else {
-              desc += "\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They look must look like the horns of a sea dragon.";
+              desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They look must look like the horns of a sea dragon.";
               if (player.horns.count > 13) {
                   desc += " The change also seems to have shrunken the horns, they're about a foot long now.";
                   player.horns.count = 12;
@@ -940,7 +1232,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 		public const HairGrass:Transformation = new SimpleTransformation("Grass Hair",
 			// apply effect
 			function (doOutput:Boolean):void {
-				var desc: String = "Your [hair] begins to fall out in clumps, eventually leaving your scalp completely bald. Although, thankfully, it does not remain like that for long. Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are. <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery.</b>";
+				var desc: String = "Your [hair] begins to fall out in clumps, eventually leaving your scalp completely bald. Although, thankfully, it does not remain like that for long. Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you. You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are. <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery.</b>";
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.GRASS;
@@ -956,14 +1248,14 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			function (doOutput:Boolean):void {
 				var desc: String = "";
         if (player.hairLength <= 0) {
-            desc += "Your head buzzes pleasantly, feeling suddenly hot and wet.  You instinctively reach up to feel the source of your wetness, and discover you've grown some kind of gooey hair.  From time to time it drips, running down your back to the crack of your [butt].";
+            desc += "Your head buzzes pleasantly, feeling suddenly hot and wet. You instinctively reach up to feel the source of your wetness, and discover you've grown some kind of gooey hair. From time to time it drips, running down your back to the crack of your [butt].";
         } else {
             if (player.hairColor.indexOf("rubbery") == -1 && player.hairColor.indexOf("latex-textured") == -1) {
-                desc += "Your head buzzes pleasantly, feeling suddenly hot and wet.  You instinctively reach up to feel the source of your wetness, and discover your hair has become a slippery, gooey mess.  From time to time it drips, running down your back to the crack of your [butt].";
+                desc += "Your head buzzes pleasantly, feeling suddenly hot and wet. You instinctively reach up to feel the source of your wetness, and discover your hair has become a slippery, gooey mess. From time to time it drips, running down your back to the crack of your [butt].";
             }
             //Latexy stuff
             else {
-                desc += "Your oddly inorganic hair shifts, becoming partly molten as rivulets of liquid material roll down your back.  How strange.";
+                desc += "Your oddly inorganic hair shifts, becoming partly molten as rivulets of liquid material roll down your back. How strange.";
             }
         }
         if (player.hairColor != "green" && player.hairColor != "purple" && player.hairColor != "blue" && player.hairColor != "cerulean" && player.hairColor != "emerald") {
@@ -1130,6 +1422,25 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				return player.hairType === Hair.FAIRY;
 			}
 		);
+
+		public function HairChangeColor(colors:/*String*/Array):Transformation {
+			return new SimpleTransformation("Hair Color: " + colors.join("|"),
+					// apply effect
+					function (doOutput:Boolean):void {
+						var color:String = randomChoice(colors);
+						player.hairColor = color;
+						var desc: String = "";
+
+						desc += "You feel a strange tingling on your scalp. You bring a hand up to it, only to discover that <b>your hair color is now [haircolor]!</b>";
+
+						if (doOutput) outputText(desc);
+					},
+					// is present
+					function ():Boolean {
+						return InCollection(player.hairColor, colors);
+					}
+			)
+		}
 		/*
 */
 
@@ -1183,8 +1494,8 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-	        if (player.faceType == Face.HORSE) desc += "Your face is wracked with pain.  You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else.  <b>Your horse-like features rearrange to take on many canine aspects.</b>";
-	        else desc += "Your face is wracked with pain.  You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different.  You find a puddle to view your reflection...<b>your face is now a cross between human and canine features.</b>";
+	        if (player.faceType == Face.HORSE) desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your horse-like features rearrange to take on many canine aspects.</b>";
+	        else desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection...<b>your face is now a cross between human and canine features.</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.DOG;
@@ -1307,7 +1618,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-					desc += "You grunt as your [face] twists and reforms.  Even your teeth ache as their positions are rearranged to match some new, undetermined order. When the process finishes, <b>you're left with a bunny face complete with a constantly twitching nose and prominent buck-teeth.</b>";
+					desc += "You grunt as your [face] twists and reforms. Even your teeth ache as their positions are rearranged to match some new, undetermined order. When the process finishes, <b>you're left with a bunny face complete with a constantly twitching nose and prominent buck-teeth.</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.BUNNY;
@@ -1323,8 +1634,8 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-					if (player.faceType == Face.HUMAN || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SHARK_TEETH || player.faceType == Face.BUNNY) desc += "The base of your nose suddenly hurts, as though someone were pinching and pulling at it.  As you shut your eyes against the pain and bring your hands to your face, you can feel your nose and palate shifting and elongating.  This continues for about twenty seconds as you stand there, quaking.  When the pain subsides, you run your hands all over your face; what you feel is a long muzzle sticking out, whiskered at the end and with a cleft lip under a pair of flat nostrils.  You open your eyes and receive confirmation. <b>You now have a kangaroo face!  Crikey!</b>";
-	        else desc += "Your nose tingles. As you focus your eyes toward the end of it, it twitches and shifts into a muzzle similar to a stretched-out rabbit's, complete with harelip and whiskers.  <b>You now have a kangaroo face!</b>";
+					if (player.faceType == Face.HUMAN || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SHARK_TEETH || player.faceType == Face.BUNNY) desc += "The base of your nose suddenly hurts, as though someone were pinching and pulling at it. As you shut your eyes against the pain and bring your hands to your face, you can feel your nose and palate shifting and elongating. This continues for about twenty seconds as you stand there, quaking. When the pain subsides, you run your hands all over your face; what you feel is a long muzzle sticking out, whiskered at the end and with a cleft lip under a pair of flat nostrils. You open your eyes and receive confirmation. <b>You now have a kangaroo face!  Crikey!</b>";
+	        else desc += "Your nose tingles. As you focus your eyes toward the end of it, it twitches and shifts into a muzzle similar to a stretched-out rabbit's, complete with harelip and whiskers. <b>You now have a kangaroo face!</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.KANGAROO;
@@ -1409,20 +1720,20 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 					var desc: String = "";
 
 	        if (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.BUNNY) {
-	          desc += "A sudden wave of exhaustion passes over you, and your face goes partially numb around your eyes.  ";
+	          desc += "A sudden wave of exhaustion passes over you, and your face goes partially numb around your eyes. ";
 	          if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.BUNNY) {
 	              desc += "Your prominent teeth chatter noisily at first, then with diminishing violence, until you can no longer feel them jutting past the rest!  ";
 	          }
-	          desc += "Shaking your head a bit, you wait for your energy to return, then examine your appearance.  ";
+	          desc += "Shaking your head a bit, you wait for your energy to return, then examine your appearance. ";
 	          if (((player.skin.base.color == "ebony" || player.skin.base.color == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
-	              desc += "Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>";
+	              desc += "Nothing seems different at first. Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>";
 	          } else desc += "A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>";
 	     		}
 	     		else {
-	     		    desc += "A sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions.  A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came.  Checking your reflection in your water barrel, you find ";
+	     		    desc += "A sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions. A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came. Checking your reflection in your water barrel, you find ";
 	     		    //[(if black/midnight fur or if black scales)
-	     		    if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) desc += "your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ".  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>";
-	     		    else if ((player.skin.base.color == "ebony" || player.skin.base.color == "black") && (!player.hasCoat())) desc += "your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>";
+	     		    if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) desc += "your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ". You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>";
+	     		    else if ((player.skin.base.color == "ebony" || player.skin.base.color == "black") && (!player.hasCoat())) desc += "your face apparently returned to normal shape. You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your normal human face.</b>";
 	     		    else desc += "your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>";
 	     		}
 
@@ -1440,7 +1751,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-					desc += "Your face pinches with tension, and you rub the bridge of your nose to release it.  The action starts a miniature slide in your bone structure, and your nose extends out in front of you!  You shut your eyes, waiting for the sinus pressure to subside, and when you open them, a triangular, pointed snout dotted with whiskers and capped by a black nose greets you!  <b>You now have a raccoon's face!</b>";
+					desc += "Your face pinches with tension, and you rub the bridge of your nose to release it. The action starts a miniature slide in your bone structure, and your nose extends out in front of you!  You shut your eyes, waiting for the sinus pressure to subside, and when you open them, a triangular, pointed snout dotted with whiskers and capped by a black nose greets you!  <b>You now have a raccoon's face!</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.RACCOON;
@@ -1456,9 +1767,9 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-	        desc += "Your teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ";
+	        desc += "Your teeth grind on their own, and you feel a strange, insistent pressure just under your nose. As you open your mouth and run your tongue along them, you can feel ";
 	        if (player.faceType != Face.HUMAN) desc += "the sharp teeth receding and ";
-	        desc += "your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely. Well, you now have rodent incisors and your face aches a tiny bit - wonder if they're going to keep growing? <b>Your mouth has taken on some rabbit-like characteristics!</b>";
+	        desc += "your incisors lengthening. It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely. Well, you now have rodent incisors and your face aches a tiny bit - wonder if they're going to keep growing? <b>Your mouth has taken on some rabbit-like characteristics!</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.BUCKTEETH;
@@ -1474,7 +1785,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-					desc += "A wave of light-headedness hits you, and you black out. In your unconsciousness, you dream of chewing - food, wood, cloth, paper, leather, even metal... whatever you can fit in your mouth, even if it doesn't taste like anything much.  For several minutes you just chew and chew your way through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken. Your teeth work, feeling longer and more prominent than before, and you hunt up your reflection. <b>Your face has shifted to resemble a mouse's, down to the whiskers!</b>";
+					desc += "A wave of light-headedness hits you, and you black out. In your unconsciousness, you dream of chewing - food, wood, cloth, paper, leather, even metal... whatever you can fit in your mouth, even if it doesn't taste like anything much. For several minutes you just chew and chew your way through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken. Your teeth work, feeling longer and more prominent than before, and you hunt up your reflection. <b>Your face has shifted to resemble a mouse's, down to the whiskers!</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.MOUSE;
@@ -1490,7 +1801,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-					desc += "A horrible itching begins to encompass the area around your eyes.  You grunt annoyedly, rubbing furiously at the afflicted area.  Once the feeling passes, you make your way to the nearest reflective surface to see if anything has changed.  Your suspicions are confirmed.  The [skinFurScales] around your eyes has darkened.  <b>You now have a ferret mask!</b>";
+					desc += "A horrible itching begins to encompass the area around your eyes. You grunt annoyedly, rubbing furiously at the afflicted area. Once the feeling passes, you make your way to the nearest reflective surface to see if anything has changed. Your suspicions are confirmed. The [skinFurScales] around your eyes has darkened. <b>You now have a ferret mask!</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.FERRET_MASK;
@@ -1506,7 +1817,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-					desc += "You cry out in pain as the bones in your face begin to break and rearrange.  You rub your face furiously in an attempt to ease the pain, but to no avail.  As the sensations pass, you examine your face in a nearby puddle.  <b>You nearly gasp in shock at the sight of your new ferret face!</b>";
+					desc += "You cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new ferret face!</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.FERRET;
@@ -1604,7 +1915,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				function (doOutput:Boolean):void {
 					var desc: String = "";
 
-					desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting reforming into something... different, your screams turning into a howl as the change ends. You go to find a puddle in order to view your reflection...  <b>Your face looks like the one of a feral looking wolf composed of a maw jagged with threatening canines a wet muzzle and a animalistic tongue.</b>";
+					desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting reforming into something... different, your screams turning into a howl as the change ends. You go to find a puddle in order to view your reflection... <b>Your face looks like the one of a feral looking wolf composed of a maw jagged with threatening canines a wet muzzle and a animalistic tongue.</b>";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.WOLF;
@@ -1692,7 +2003,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 					desc += "The familiar tingle of transformation spreads across your face. Your ";
 					if (player.hasMuzzle()) desc += "muzzle";
 					else desc += "face";
-					desc += " shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n";
+					desc += " shifts into a vaguely triangular shape, something that would look at home on a predatory reptile... or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n";
 
 					if (doOutput) outputText(desc);
 					player.faceType = Face.PLANT_DRAGON;
@@ -2239,7 +2550,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 
 	      desc += "Your tongue tingles";
         if (player.tongue.type != Tongue.HUMAN) desc += ", thickening in your mouth until it feels more like your old human tongue, at least for the first few inches";
-        desc += ". It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>";
+        desc += ". It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out. You find it easy to move and control, as natural as walking. <b>You now have a long demon-tongue.</b>";
 
 	      player.tongue.type = Tongue.DEMONIC;
 				Metamorph.unlockMetamorph("Demonic Tongue");
@@ -2364,8 +2675,8 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 						else if (rand(3) == 1) desc += "Your ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have lion ears.</b>";
 						else desc += "Your ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>";
 					} else {
-						if (rand(2) == 0) desc += "Your ears change shape, morphing into round, feline ears not unlike those of a lion!  They swivel about reflexively as you adjust to them.  <b>You now have lion ears.</b>";
-						else desc += "Your ears tingle and begin to change shape. Within a few moments, they've become long and feline.  Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have lion ears.</b>";
+						if (rand(2) == 0) desc += "Your ears change shape, morphing into round, feline ears not unlike those of a lion!  They swivel about reflexively as you adjust to them. <b>You now have lion ears.</b>";
+						else desc += "Your ears tingle and begin to change shape. Within a few moments, they've become long and feline. Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have lion ears.</b>";
 					}
 
           player.ears.type = Ears.LION;
@@ -2441,7 +2752,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
       function(doOutput: Boolean): void {
           var desc: String = "";
 
-					if (player.ears.type == -1) desc += "Two painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ";
+					if (player.ears.type == -1) desc += "Two painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur. ";
           if (player.ears.type == Ears.HUMAN) desc += "Your ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears. ";
           if (player.ears.type == Ears.DOG) desc += "Your ears change shape, morphing into from their doglike shape into equine-like ears! ";
           else desc += "Your ears change shape, morphing into teardrop-shaped horse ears! ";
@@ -2653,7 +2964,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
       function(doOutput: Boolean): void {
           var desc: String = "";
 
-          desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, fleshy bumps with holes in their centers.  <b>You have whales ears!</b>";
+          desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, fleshy bumps with holes in their centers. <b>You have whales ears!</b>";
 
           player.ears.type = Ears.ORCA;
           if (doOutput) outputText(desc);
@@ -2742,8 +3053,8 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
       function(doOutput: Boolean): void {
           var desc: String = "";
 
-          if (player.ears.type == -1) desc += "Two painful nubs begin sprouting from your head, growing and opening into canine ears.  ";
-          if (player.ears.type == Ears.HUMAN) desc += "The skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head.  They shift and elongate, becoming canine in nature. ";
+          if (player.ears.type == -1) desc += "Two painful nubs begin sprouting from your head, growing and opening into canine ears. ";
+          if (player.ears.type == Ears.HUMAN) desc += "The skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate, becoming canine in nature. ";
           if (player.ears.type == Ears.HORSE) desc += "Your equine ears twist as they transform into canine versions. ";
           if (player.ears.type > Ears.DOG) desc += "Your ears transform, becoming more canine in appearance. ";
           desc += "<b>You now have dog ears.</b>";
@@ -2779,9 +3090,9 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
           var desc: String = "";
 
           if (player.ears.type != Ears.HUMAN) {
-            desc += "Your ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>";
+            desc += "Your ears twitch once, twice, before starting to shake and tremble madly. They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>";
           } else {
-            desc += "A weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>.  You bet they look cute!";
+            desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>. You bet they look cute!";
           }
 
           player.ears.type = Ears.SHARK;
@@ -2814,7 +3125,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
       function(doOutput: Boolean): void {
           var desc: String = "";
 
-          desc += "Your ears twitch and curl in on themselves, sliding around on the flesh of your head.  They grow warmer and warmer before they finally settle on the top of your head and unfurl into long, fluffy bunny-ears.  <b>You now have a pair of bunny ears.</b>";
+          desc += "Your ears twitch and curl in on themselves, sliding around on the flesh of your head. They grow warmer and warmer before they finally settle on the top of your head and unfurl into long, fluffy bunny-ears. <b>You now have a pair of bunny ears.</b>";
 
           player.ears.type = Ears.BUNNY;
           if (doOutput) outputText(desc);
@@ -2862,8 +3173,8 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
       function(doOutput: Boolean): void {
           var desc: String = "";
 
-          if (player.ears.type == Ears.BUNNY) desc += "Your ears stiffen and shift to the sides!  You reach up and find them pointed outwards instead of up and down; they feel a bit wider now as well.  As you touch them, you can feel them swiveling in place in response to nearby sounds.  <b>You now have a pair of kangaroo ears!</b>";
-          else desc += "Your ears twist painfully as though being yanked upwards and you clap your hands to your head.  Feeling them out, you discover them growing!  They stretch upwards, reaching past your fingertips, and then the tugging stops.  You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen.  <b>You now have a pair of kangaroo ears!</b>";
+          if (player.ears.type == Ears.BUNNY) desc += "Your ears stiffen and shift to the sides!  You reach up and find them pointed outwards instead of up and down; they feel a bit wider now as well. As you touch them, you can feel them swiveling in place in response to nearby sounds. <b>You now have a pair of kangaroo ears!</b>";
+          else desc += "Your ears twist painfully as though being yanked upwards and you clap your hands to your head. Feeling them out, you discover them growing!  They stretch upwards, reaching past your fingertips, and then the tugging stops. You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen. <b>You now have a pair of kangaroo ears!</b>";
 
           player.ears.type = Ears.KANGAROO;
           if (doOutput) outputText(desc);
@@ -2911,9 +3222,9 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
       function(doOutput: Boolean): void {
           var desc: String = "";
 
-          if (player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) desc += "Your ears compress, constricting your ear canal momentarily.  You shake your head to get sound back, and reach up to touch the auricles, to find a pair of stubby egg-shaped ears in their place.  <b>You now have raccoon ears!</b>";
-          else if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.CAT) desc += "Your ears tingle.  Huh.  Do they feel a bit rounder at the tip now?  <b>Looks like you have raccoon ears.</b>";
-          else desc += "Your ears prick and stretch uncomfortably, poking up through your [hair].  Covering them with your hands, you feel them shaping into little eggdrop ornaments resting atop your head.  <b>You have raccoon ears!</b>";
+          if (player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) desc += "Your ears compress, constricting your ear canal momentarily. You shake your head to get sound back, and reach up to touch the auricles, to find a pair of stubby egg-shaped ears in their place. <b>You now have raccoon ears!</b>";
+          else if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.CAT) desc += "Your ears tingle. Huh. Do they feel a bit rounder at the tip now?  <b>Looks like you have raccoon ears.</b>";
+          else desc += "Your ears prick and stretch uncomfortably, poking up through your [hair]. Covering them with your hands, you feel them shaping into little eggdrop ornaments resting atop your head. <b>You have raccoon ears!</b>";
 
           player.ears.type = Ears.RACCOON;
           if (doOutput) outputText(desc);
@@ -2932,7 +3243,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
           desc += "Your ears ";
           if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) desc += "shrink suddenly";
           else desc += "pull away from your head";
-          desc += ", like they're being pinched, and you can distinctly feel the auricles taking a rounded shape through the pain.  Reaching up to try and massage away their stings, <b>you're not terribly surprised when you find a pair of fuzzy mouse's ears poking through your [hair].</b>";
+          desc += ", like they're being pinched, and you can distinctly feel the auricles taking a rounded shape through the pain. Reaching up to try and massage away their stings, <b>you're not terribly surprised when you find a pair of fuzzy mouse's ears poking through your [hair].</b>";
 
           player.ears.type = Ears.MOUSE;
           if (doOutput) outputText(desc);
@@ -2948,7 +3259,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
       function(doOutput: Boolean): void {
           var desc: String = "";
 
-          desc += "You squint as you feel a change in your ears.  Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>";
+          desc += "You squint as you feel a change in your ears. Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>";
 
           player.ears.type = Ears.FERRET;
           if (doOutput) outputText(desc);
@@ -3537,7 +3848,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 
 				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["black"]), false);
 
-				desc += "You blink, and then blink again.  It feels like something is irritating your eyes. Panic sets in as black suddenly blooms in the corner of your left eye and then your right, as if drops of ink were falling into them.  You calm yourself down with the thought that rubbing at your eyes will certainly make whatever is happening to them worse; through force of will you hold your hands behind your back and wait for the strange affliction to run its course. The strange inky substance pools over your entire vision before slowly fading, thankfully taking the irritation with it. As soon as it goes you stride quickly over to the stream and stare at your reflection. <b>Your pupils, your irises, your entire eye has turned a liquid black</b>, leaving you looking vaguely like the many half insect creatures which inhabit these lands. You find you are merely grateful the change apparently hasn't affected your vision.";
+				desc += "You blink, and then blink again. It feels like something is irritating your eyes. Panic sets in as black suddenly blooms in the corner of your left eye and then your right, as if drops of ink were falling into them. You calm yourself down with the thought that rubbing at your eyes will certainly make whatever is happening to them worse; through force of will you hold your hands behind your back and wait for the strange affliction to run its course. The strange inky substance pools over your entire vision before slowly fading, thankfully taking the irritation with it. As soon as it goes you stride quickly over to the stream and stare at your reflection. <b>Your pupils, your irises, your entire eye has turned a liquid black</b>, leaving you looking vaguely like the many half insect creatures which inhabit these lands. You find you are merely grateful the change apparently hasn't affected your vision.";
 
 				player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
 				if (doOutput) outputText(desc);
@@ -3678,22 +3989,22 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 
 		// EYE COLORS
 		public function EyesChangeColor(colors:/*String*/Array):Transformation {
-		return new SimpleTransformation("Eye color: " + colors.join("|"),
-				// apply effect
-				function (doOutput:Boolean):void {
-					var color:String = randomChoice(colors);
-					player.eyes.colour = color;
-					var desc: String = "";
+			return new SimpleTransformation("Eye Color: " + colors.join("|"),
+					// apply effect
+					function (doOutput:Boolean):void {
+						var color:String = randomChoice(colors);
+						player.eyes.colour = color;
+						var desc: String = "";
 
-					desc += "You feel something change around the upper half of your face, but you're not sure what. There doesn't seem to be much difference, but you should probably check it out the first chance you get. <b>Your eye color is now [eyecolor]!</b>";
+						desc += "You feel something change around the upper half of your face, but you're not sure what. There doesn't seem to be much difference, but you should probably check it out the first chance you get. <b>Your eye color is now [eyecolor]!</b>";
 
-					if (doOutput) outputText(desc);
-				},
-				// is present
-				function ():Boolean {
-					return InCollection(player.eyes.colour, colors);
-				}
-		)
+						if (doOutput) outputText(desc);
+					},
+					// is present
+					function ():Boolean {
+						return InCollection(player.eyes.colour, colors);
+					}
+			)
 		}
 
 		public const EyesOniColors:Transformation = new SimpleTransformation("Oni Eye Colors",
@@ -3831,13 +4142,13 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				if (player.isTaur()) desc += "Your quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!";
-				else if (player.isGoo()) desc += "Your lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>";
-				else if (player.isNaga()) desc += "You collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>";
-				else if (player.isScylla()) desc += "You collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>";
+				if (player.isTaur()) desc += "Your quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side. Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow. When it finally stops, <b>you look down to behold your new pair of human legs</b>!";
+				else if (player.isGoo()) desc += "Your lower body rushes inward, molding into two leg-like shapes that gradually stiffen up. In moments they solidify into normal-looking legs, complete with regular, human feet. <b>You now have normal feet!</b>";
+				else if (player.isNaga()) desc += "You collapse as your sinuous snake-tail tears in half, shifting into legs. The pain is immense, particularly where your new feet are forming. <b>You have human legs again.</b>";
+				else if (player.isScylla()) desc += "You collapse as your tentacle legs starts to merge. The pain is immense, particularly where your new feet are forming. <b>You have human legs again.</b>";
 				else if (player.isAlraune()) {
-					desc += "You suddenly lose all feeling from the waist down, your pitcher quickly withering and dying. Soon after it began, your pitcher is reduced to nothing but dust, leaving you to stand on two ordinary human legs. On the ground is all that is left of your flower, a single petal still intact that you proceed to put in your bag. Something tells you you will need it to become an alraune again.  <b>You have human legs again.</b>";
-				} else if (player.isBiped()) desc += "You collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>";
+					desc += "You suddenly lose all feeling from the waist down, your pitcher quickly withering and dying. Soon after it began, your pitcher is reduced to nothing but dust, leaving you to stand on two ordinary human legs. On the ground is all that is left of your flower, a single petal still intact that you proceed to put in your bag. Something tells you you will need it to become an alraune again. <b>You have human legs again.</b>";
+				} else if (player.isBiped()) desc += "You collapse as your legs shift and twist. By the time the pain subsides, you notice that you have normal legs and normal feet. <b>You now have normal feet!</b>";
 
 
 				if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
@@ -3855,7 +4166,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
+				desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
 
 				setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
 				if (doOutput) outputText(desc);
@@ -3872,7 +4183,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of midnight purple exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a dark purple, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a midnight purple, arachnid exoskeleton.</b>";
+				desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of midnight purple exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a dark purple, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a midnight purple, arachnid exoskeleton.</b>";
 
 				if (doOutput) outputText(desc);
 				setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
@@ -3995,12 +4306,12 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 							break;
 						case Arms.SPIDER:
 						case Arms.USHI_ONI:
-							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving [skin base.type] behind.";
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering is flaking away. The glossy black coating is soon gone, leaving [skin base.type] behind.";
 							break;
 						case Arms.HARPY:
 						case Arms.PHOENIX:
 						case Arms.AVIAN:
-							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving [skin] behind.";
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating. The wing-like shape your arms once had is gone in a matter of moments, leaving [skin] behind.";
 							break;
 						case Arms.GARGOYLE:
 							desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
@@ -4415,7 +4726,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 						if (player.arms.type == Arms.BEE) desc += "The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
 						else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
 						else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a shiny black carapace</b>.";
-						else desc += "You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+						else desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 					}
 
 					player.coatColor = "black";
@@ -4529,7 +4840,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 	    function(doOutput: Boolean): void {
 	        var desc: String = "";
 
-	        desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>";
+	        desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms. Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>";
 
 					player.arms.type = Arms.PLANT;
 	        if (doOutput) outputText(desc);
@@ -4577,7 +4888,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 	    function(doOutput: Boolean): void {
 	        var desc: String = "";
 
-	        desc += "Something weird happens in your hands. For a few seconds you lose the sense of touch and as it comes back your nails turn pale blue. You can feel terrible cold running at your fingertips.  While you can dismiss this cold and enable it at will you can’t help but smirk at your newfound ability. <b>Woe to whoever you decide to touch with your glacial hands.</b>";
+	        desc += "Something weird happens in your hands. For a few seconds you lose the sense of touch and as it comes back your nails turn pale blue. You can feel terrible cold running at your fingertips. While you can dismiss this cold and enable it at will you can’t help but smirk at your newfound ability. <b>Woe to whoever you decide to touch with your glacial hands.</b>";
 
 					player.arms.type = Arms.YUKI_ONNA;
 	        if (doOutput) outputText(desc);
@@ -4934,13 +5245,13 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				var desc: String = "";
 
 				if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
-					if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ";
-					desc += "You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+					if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. ";
+					desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 				} else {
 					if (player.arms.type == Arms.BEE) desc += "The fizz covering your upper arms starting to fall down leaving only midnight purple chitin clad arms.";
 					else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "The scales covering your upper arms starting to fall down leaving only midnight purple chitin clad arms.";
 					else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a midnight purple carapace</b>.";
-					else desc += "You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+					else desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 				}
 				if (doOutput) outputText(desc);
 				player.coatColor = "midnight purple";
@@ -5002,7 +5313,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 		        			desc += "Sensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the 	ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
 									break;
 								case 1:
-									desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your 	shoulder-blades.  After a moment the pain passes, though your wings are gone!";
+									desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your 	shoulder-blades. After a moment the pain passes, though your wings are gone!";
 									break;
 							}
 						}
@@ -5120,7 +5431,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 		    }
 		);
 
-		public const WingsThunderousAura: Transformation = new SimpleTransformation("Thunderous Aura Wings",
+		public const WingsThunderousAura: Transformation = new SimpleTransformation("Thunderous Aura (Wings)",
 		    // apply effect
 		    function(doOutput: Boolean): void {
 		        var desc: String = "";
@@ -5130,7 +5441,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 		        player.wings.type = Wings.THUNDEROUS_AURA;
 
 		        if (doOutput) outputText(desc);
-		        Metamorph.unlockMetamorph("Thunderous Aura Wings");
+		        Metamorph.unlockMetamorph("Thunderous Aura (Wings)");
 		    },
 		    // is present
 		    function(): Boolean {
@@ -5341,7 +5652,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 		        TransformationUtils.applyTFIfNotPresent(transformations.WingsDemonicTiny, doOutput);
 
 						if (player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_LARGE) {
-							desc += "The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into large <b>bat-like demon-wings!</b>";
+							desc += "The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing. You twist your head as far as you can for a look and realize they've changed into large <b>bat-like demon-wings!</b>";
 						} else {
 							desc += "Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body. You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings. <b>Your demonic wings have grown!</b>";
 						}
@@ -5519,11 +5830,11 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 						if ((player.wings.type == Wings.BAT_LIKE_LARGE) && player.cor >= 75) {
                 desc += "Your wing shrivels before suddenly changing and covering themselves with black feathers. They still look demonic in a sense, albeit they are feathered now. <b>You now have black, feathered wings!</b>";
             } else if (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) {
-                desc += "The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into <b>black, feathered wings!</b>";
+                desc += "The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing. You twist your head as far as you can for a look and realize they've changed into <b>black, feathered wings!</b>";
             } else if (player.wings.type != Wings.NONE) {
-                desc += "A sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by <b>black, feathered wings!</b>";
+                desc += "A sensation of numbness suddenly fills your wings. When it dies away, they feel... different. Looking back, you realize that they have been replaced by <b>black, feathered wings!</b>";
             } else {
-                desc += "A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of black feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have black, feathered wings!</b>";
+                desc += "A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of black feathered wings sprout from your back, ripping a pair of holes in the back of your [armor]. <b>You now have black, feathered wings!</b>";
             }
 
 		        player.wings.desc = "black, feathered";
@@ -5590,7 +5901,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 				var row:int = player.smallestTitRow();
 				var desc: String = "";
 
-				desc += "Your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Just as you start to scratch at your " + breastDescript(row) + ", your chest pushes out in slight but sudden growth.";
+				desc += "Your chest aches and tingles, and your hands reach up to scratch at it unthinkingly. Just as you start to scratch at your " + breastDescript(row) + ", your chest pushes out in slight but sudden growth.";
 
 				if (doOutput) outputText(desc);
 				player.breastRows[row].breastRating++;
@@ -5633,7 +5944,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				desc += "A chill runs over your [allbreasts] and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ";
+				desc += "A chill runs over your [allbreasts] and vanishes. You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ";
 				if (player.biggestTitSize() < 1) desc += "'breast'.";
 				else desc += "breast.";
 
@@ -5658,7 +5969,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				desc += "A tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!";
+				desc += "A tickling sensation plucks at your nipples and you cringe, trying not to giggle. Looking down you are in time to see the last spot of flesh tone disappear from your [nipples]. They have turned an onyx black!";
 
 				if (doOutput) outputText(desc);
 				player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
@@ -5762,7 +6073,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			AssGrowUpTo11,
 
 			EarsElfin,
-			SkinChitin,
+			SkinChitin(Skin.COVERAGE_LOW, {color: "midnight purple"}),
 			TieredSpiderFace,
 			makeHairColorTf(["midnight purple"]),
 			new OrderedTransformation("EyesRedThenSpider", [
@@ -5782,4 +6093,5 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 */
 }
 }
+
 

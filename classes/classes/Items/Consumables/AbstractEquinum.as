@@ -544,24 +544,10 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Fur - if has horsetail && ears and not at changelimit
 		if (!player.hasFur() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
-			if (!player.hasScales()) {
-				outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of </b>");
-				if (type == 0) outputText("<b>[haircolor]-colored fur.</b>");
-				else outputText("<b>[haircolor]-colored fur.</b>");
-			} else {
-				player.skinDesc = "fur";
-				outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of ");
-				if (type == 0) outputText("[haircolor]");
-				else outputText("white");
-				outputText(" [skin.type].  At last the itching stops as <b>you brush a few more loose scales from your new coat of fur.</b>");
-			}
+			outputText("\n\n");
+			if (type == 0) 	CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"]}).applyEffect();
+			else CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["platinum blonde", "silver", "white", "pure white"]}).applyEffect();
 			changes++;
-			if (type == 0) player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"])});
-			else player.skin.growCoat(Skin.FUR, {color: randomChoice(["platinum blonde", "silver", "white", "pure white"])});
-			if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-				outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-				player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-			}
 		}
 		//Ears - requires tail
 		if (player.ears.type != Ears.HORSE && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
