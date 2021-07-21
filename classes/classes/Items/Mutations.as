@@ -15283,8 +15283,8 @@ public final class Mutations extends MutationsHelper {
                 outputText(" until they flake away to nothing. This said something soon replaces them.");
                 setHornType(Horns.NONE, 0);
             }
-            setHornType(Horns.FROSTWYRM, 2);
-            outputText("\n\nYou write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two large spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>");
+            setHornType(Horns.FROSTWYRM, 30);
+            outputText("\n\nYou write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two massive spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>");
             changes++;
         }
         //Gain frost wyrm Ears
