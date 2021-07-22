@@ -143,7 +143,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		player.ears.type = Ears.ELFIN;
 		player.faceType = Face.HUMAN;
 		player.tongue.type = Tongue.HUMAN;
-		player.createVagina()
+		if (!player.hasVagina()) player.createVagina()
 		if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
 		else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
 		player.antennae.type = Antennae.NONE;
