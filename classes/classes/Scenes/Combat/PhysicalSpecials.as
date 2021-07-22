@@ -171,7 +171,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
-			if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
+			if ((player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.FROSTWYRM) && player.horns.count >= 6) {
 				bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -4157,10 +4157,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN) outputText("weapons, ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("weapons, ");
 			else outputText("weapon, ");
 			outputText("you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN) outputText("horns ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
 			else outputText("horn, ");
 			outputText("to stab only at air.\n\n");
 			enemyAI();
