@@ -34,28 +34,6 @@ import classes.BodyParts.Wings;
 			changes++;
 		}
 
-		public function humanizeSkin(degargoylize:Boolean=false):void {
-			switch (player.coatType()) {
-				case Skin.FUR:
-					outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is nude.  <b>You've lost your fur!</b>");
-					break;
-				case Skin.SCALES:
-					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>");
-					break;
-				case Skin.DRAGON_SCALES:
-					outputText("\n\nYour dragon scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your dragon scales!</b>");
-					break;
-				default:
-					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
-			}
-			player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
-			if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) {
-				outputText("\n\n<b>Genetic Memory: Human skin - Memorized!</b>\n\n");
-				player.createStatusEffect(StatusEffects.UnlockedHumanSkin, 0, 0, 0, 0);
-			}
-			changes++;
-		}
-
 		public function updateGills(newGillType:int = Gills.NONE):int
 		{
 			trace("Called updateGills(" + newGillType + ")");

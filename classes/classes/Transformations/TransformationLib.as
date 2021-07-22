@@ -557,6 +557,113 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 */
 
 /*
+*    ███████ ██   ██ ██ ███    ██ 			███████   █████  ████████ ████████ ███████ ██████  ███    ██
+*    ██      ██  ██  ██ ████   ██ 			██   ██  ██   ██    ██       ██    ██      ██   ██ ████   ██
+*    ███████ █████   ██ ██ ██  ██ 			███████  ███████    ██       ██    █████   ██████  ██ ██  ██
+*         ██ ██  ██  ██ ██  ██ ██ 			██		   ██   ██    ██       ██    ██      ██   ██ ██  ██ ██
+*    ███████ ██   ██ ██ ██   ████ 			██		   ██   ██    ██       ██    ███████ ██   ██ ██   ████
+*/
+
+/*
+		*/
+		public const SkinPatternNone: Transformation = new SimpleTransformation("No Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+		        desc += "Your skin patterns itches incessantly, and as you scratch they shifts and changes, becoming less and less visible till they gone. <b>Your skin is without any skin patterns!</b>";
+		        player.skin.base.adj = "";
+		        player.skin.base.pattern = Skin.PATTERN_NONE;
+
+		        if (doOutput) outputText(desc);
+		        Metamorph.unlockMetamorph("No Skin Pattern");
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_NONE;
+		    }
+		);
+
+		public const SkinPatternOrc: Transformation = new SimpleTransformation("Orc Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+		        desc += "You double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>";
+		        player.skin.base.color2 = "black";
+						player.skin.base.adj = "scar shaped tattooed";
+		        player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
+
+		        if (doOutput) outputText(desc);
+		        Metamorph.unlockMetamorph("Orc Skin Pattern");
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_SCAR_SHAPED_TATTOO;
+		    }
+		);
+
+		public const SkinPatternRaiju: Transformation = new SimpleTransformation("Raiju Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+		        desc += "You suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>";
+		        player.skin.base.adj = "tattooed";
+		        player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
+
+		        if (doOutput) outputText(desc);
+		        Metamorph.unlockMetamorph("Raiju Skin Pattern");
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
+		    }
+		);
+
+		public const SkinPatternOni: Transformation = new SimpleTransformation("Oni Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+		        desc += "As you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>";
+		        player.skin.base.adj = "tattooed";
+		        player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
+
+		        if (doOutput) outputText(desc);
+		        Metamorph.unlockMetamorph("Oni Skin Pattern");
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_BATTLE_TATTOO;
+		    }
+		);
+
+		public const SkinPatternKitsune: Transformation = new SimpleTransformation("Kitsune Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+		        desc += "You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face. You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin]. The glow gradually fades, but the distinctive ";
+		        if (rand(2) == 0) desc += "angular";
+		        else desc += "curved";
+		        desc += " markings remain, as if etched into your skin. <b>You now have Kitsune tattoos on your skin.</b>";
+		        player.skin.base.color2 = "black";
+						player.skin.base.adj = "tattooed";
+		        player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
+
+		        if (doOutput) outputText(desc);
+		        Metamorph.unlockMetamorph("Kitsune Skin Pattern");
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_MAGICAL_TATTOO;
+		    }
+		);
+		/*
+*/
+
+/*
 *    ██   ██  ██████  ██████  ███    ██ ███████
 *    ██   ██ ██    ██ ██   ██ ████   ██ ██
 *    ███████ ██    ██ ██████  ██ ██  ██ ███████

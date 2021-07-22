@@ -437,6 +437,10 @@ use namespace CoC;
 				Metamorph.GeneticMemoryStorage[skinMem.name] = true;
 			}
 
+			for each (var skinPatternMem: * in SkinPatternMem.Memories) {
+				Metamorph.GeneticMemoryStorage[skinPatternMem.name] = true;
+			}
+
 			for each (var tongueMem: * in TongueMem.Memories) {
 				Metamorph.GeneticMemoryStorage[tongueMem.name] = true;
 			}

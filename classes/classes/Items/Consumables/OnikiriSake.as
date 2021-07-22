@@ -179,18 +179,14 @@ public class OnikiriSake extends Consumable {
 		}
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
-			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
-			if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
-				outputText("\n\n<b>Genetic Memory: Battle Tattooed Skin - Memorized!</b>\n\n");
-				player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
-			}
-			player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
-			player.skin.base.adj = "battle tattooed";
+			outputText("\n\n");
+      CoC.instance.transformations.SkinPatternOni.applyEffect();
 			changes++;
 		}
 		//});
 		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-			mutations.humanizeSkin();
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPlain.applyEffect();
 		}
 		//Taller
 		if (changes < changeLimit && rand(3) == 0 && player.tallness < 132) {

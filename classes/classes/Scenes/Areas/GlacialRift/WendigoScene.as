@@ -111,12 +111,12 @@ package classes.Scenes.Areas.GlacialRift
 			player.coatColor = "snow white";
 			if (player.faceType == Face.ANIMAL_TOOTHS) {
 				CoC.instance.transformations.FaceDeer.applyEffect(false);
-				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
+				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
 				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.coatColor}).applyEffect(false);
 			}
 			else {
         CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);
-				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
+				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
 			}
 			if (player.tailType != Tail.WENDIGO) CoC.instance.mutations.setTailType(Tail.WENDIGO);
 			if (player.tailCount != 1) player.tailCount = 1;

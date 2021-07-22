@@ -4237,7 +4237,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Skin/fur
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //skinTone
@@ -4443,7 +4444,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Skin/fur
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //skinTone
@@ -5666,19 +5668,14 @@ public final class Mutations extends MutationsHelper {
         //Change skin to normal
         if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
             if (player.skinAdj != "") player.skinAdj = "";
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Raiju / Other skin pattern removal
         if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-            if (player.skin.base.pattern == Skin.PATTERN_LIGHTNING_SHAPED_TATTOO) outputText("\n\nYour skin tingles and you look down just in time to see your tattoos fade to nothingness back into your now uniform skin.");
-            else outputText("\n\nYour skin tingles and you look down just in time to see your skin color patterns fade and back into the color of your " + player.skinTone + " skin leaving you with a uniform skin coloration.");
-            player.skin.base.pattern = Skin.PATTERN_NONE;
-            player.skin.base.adj = "";
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) {
-                outputText("\n\n<b>Genetic Memory: No Skin Patterns - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternNone.applyEffect();
             changes++;
         }
         //-----------------------
@@ -6916,7 +6913,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Removing gills
@@ -7115,7 +7113,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Skin color change
@@ -7467,7 +7466,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         // Remove gills
@@ -7808,7 +7808,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Partial and full fur
         if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             if (rand(2) == 0) {
                 CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
             } else {
@@ -7817,12 +7818,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.hasPartialCoat(Skin.FUR)) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.skin.coat.color}).applyEffect();
             changes++;
         }
@@ -9479,7 +9482,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Hair Color
@@ -9608,18 +9612,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (player.hasPlainSkinOnly() && !player.skin.hasScarShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Scar Tattooed Skin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedScarTattoed, 0, 0, 0, 0);
-            }
-            player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
-            player.skin.base.color2 = "black";
-            player.skin.base.adj = "scar shaped tattooed";
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternOrc.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && player.orcScore() >= 11 && !player.hasPerk(PerkLib.Ferocity) && changes < changeLimit) {
@@ -9765,13 +9764,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
-            }
-            player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
-            player.skin.base.adj = "lightning shaped tattooed";
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternRaiju.applyEffect();
             changes++;
         }
         if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
@@ -9947,13 +9941,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
-            }
-            player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
-            player.skin.base.adj = "lightning shaped tattooed";
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternRaiju.applyEffect();
             changes++;
         }
         if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
@@ -10069,7 +10058,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
             if (player.skinAdj != "") player.skinAdj = "";
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
         }
 		if (type == 1) {
 			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10 && changes < changeLimit && rand(3) == 0) {
@@ -11139,7 +11129,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Removing gills
@@ -11544,17 +11535,8 @@ public final class Mutations extends MutationsHelper {
         //[Change Skin Color: add "Tattoos"]
         //From Tan, Olive, or Light skin tones
         mutationStep(player.skin.base.type == Skin.PLAIN && !player.skin.hasMagicalTattoo(), 3, function ():void {
-            outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin].  The glow gradually fades, but the distinctive ");
-            if (mystic) outputText("angular");
-            else outputText("curved");
-            outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Magic Tattooed Skin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
-            }
-            player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
-            player.skin.base.color2 = "black";
-            player.skin.base.adj = "sexy tattooed";
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternKitsune.applyEffect();
         });
         //Nipples Turn Back:
         mutationStep(player.hasStatusEffect(StatusEffects.BlackNipples), 3, function ():void {
@@ -13017,7 +12999,8 @@ public final class Mutations extends MutationsHelper {
                 player.skin.base.adj = "";
             }
             if (player.skinAdj != "") player.skinAdj = "";
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (boar && rand(2) == 0 && player.hasPlainSkinOnly() && !player.hasFur() && changes < changeLimit) {
@@ -13827,7 +13810,8 @@ public final class Mutations extends MutationsHelper {
         //Skin
         //Skin
         if ((!player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE) && rand(3) == 0 && changes < changeLimit) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Skin part 2
@@ -14309,7 +14293,8 @@ public final class Mutations extends MutationsHelper {
                 player.skin.base.adj = "";
             }
             if (player.skinAdj != "") player.skinAdj = "";
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (player.yukiOnnaScore() >= 14) {
@@ -15653,7 +15638,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasPlainSkinOnly() && rand(4) == 0 && changes < changeLimit) {
             if (player.skinAdj != "") player.skinAdj = "";
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (player.gender == 1 && changes < changeLimit && rand(2) == 0) outputText(player.modTone(85, 3));
@@ -15691,7 +15677,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Red/Orange skin!
@@ -16465,7 +16452,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            humanizeSkin();
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPlain.applyEffect();
             changes++;
         }
         if ((type == 0 || type == 1 || type == 2) && player.hairType == Hair.NORMAL && player.hairColor != "dark green" && changes < changeLimit && rand(3) == 0) {
@@ -16857,7 +16845,8 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             if (!player.hasPartialCoat(Skin.FUR) && rand(4) == 0) {
-                humanizeSkin();
+                outputText("\n\n");
+                CoC.instance.transformations.SkinPlain.applyEffect();
                 changes++;
             }
             //Reset fur if fully coated
@@ -17055,7 +17044,8 @@ public final class Mutations extends MutationsHelper {
             }
             //Dump that damn coat away
             if (player.hasCoat() && rand(4) == 0) {
-                humanizeSkin();
+                outputText("\n\n");
+                CoC.instance.transformations.SkinPlain.applyEffect();
                 changes++;
             }
             //Arms

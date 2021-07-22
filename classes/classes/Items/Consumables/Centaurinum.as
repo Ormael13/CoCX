@@ -339,7 +339,8 @@ public class Centaurinum extends Consumable{
 		}
 		//Human skin
 		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeSkin();
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)

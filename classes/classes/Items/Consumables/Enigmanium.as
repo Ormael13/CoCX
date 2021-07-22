@@ -427,7 +427,8 @@ public class Enigmanium extends Consumable{
 
 			//Human skin
 			if (player.tailType == Tail.CAT && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
-				mutations.humanizeSkin();
+				outputText("\n\n");
+				CoC.instance.transformations.SkinPlain.applyEffect();
 				changes++;
 			}
 			//sphinx color skin

@@ -226,6 +226,12 @@ package classes.Scenes {
 				if (player.hasStatusEffect(StatusEffects.UnlockedScales)) GeneticMemoryStorage["Scales Skin"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedChitin)) GeneticMemoryStorage["Chitin Skin"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) GeneticMemoryStorage["Dragon Scales Skin"] = true;
+
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) GeneticMemoryStorage["No Skin Pattern"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedTattoed)) GeneticMemoryStorage["Kitsune Skin Pattern"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) GeneticMemoryStorage["Oni Skin Pattern"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) GeneticMemoryStorage["Raiju Skin Pattern"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) GeneticMemoryStorage["Orc Skin Pattern"] = true;
 		}
 
 		public function Metamorph() {
@@ -305,7 +311,7 @@ package classes.Scenes {
 				{
 					name: "Page 3",
 					func: accessPage3MetamorphMenu,
-					hint: "Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail"
+					hint: "Rear Body, Antennae, Gills, Tail"
 				}
 			];
 
@@ -683,7 +689,6 @@ package classes.Scenes {
 
 		private function accessPage3MetamorphMenu():void {
 			menu();
-			addButton(1, "SkinPat.", accessSkinPatternsMenuOld);
 			addButton(2, "Rear B.", accessRearBodyMenuOld);
 			addButton(3, "Antennae", accessAntennaeMenuOld);
 			addButton(4, "Gills", accessGillsMenuOld);
@@ -693,34 +698,6 @@ package classes.Scenes {
 			addButton(8, "Tail(4)", accessPage4TailMenu);
 			addButton(9, "Tail(5)", accessPage5TailMenu);
 			addButton(14, "Back", accessMetamorphMenu);
-		}
-		private function accessSkinPatternsMenuOld():void {
-			menu();
-			if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern) && player.skin.base.pattern != Skin.PATTERN_NONE && player.soulforce >= 500) addButton(0, "Human", metamorphHumanNoSkinPatterns);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern) && player.skin.base.pattern == Skin.PATTERN_NONE) addButtonDisabled(0, "Human", "You already have no skin patterns.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern) && player.skin.base.pattern != Skin.PATTERN_NONE && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedTattoed) && player.skin.base.pattern != Skin.PATTERN_MAGICAL_TATTOO && player.soulforce >= 100) addButton(1, "Kitsune", metamorphKitsuneSkinPattern);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedTattoed) && player.skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO) addButtonDisabled(1, "Kitsune", "You already have kitsune skin patterns.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedTattoed) && player.skin.base.pattern != Skin.PATTERN_MAGICAL_TATTOO && player.soulforce < 100) addButtonDisabled(1, "Kitsune", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed) && player.skin.base.pattern != Skin.PATTERN_BATTLE_TATTOO && player.soulforce >= 100) addButton(5, "Oni", metamorphOniSkinPattern);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed) && player.skin.base.pattern == Skin.PATTERN_BATTLE_TATTOO) addButtonDisabled(5, "Oni", "You already have oni skin patterns.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed) && player.skin.base.pattern != Skin.PATTERN_BATTLE_TATTOO && player.soulforce < 100) addButtonDisabled(5, "Oni", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(5, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed) && player.skin.base.pattern != Skin.PATTERN_LIGHTNING_SHAPED_TATTOO && player.soulforce >= 100) addButton(7, "Raiju", metamorphRaijuSkinPattern);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed) && player.skin.base.pattern == Skin.PATTERN_LIGHTNING_SHAPED_TATTOO) addButtonDisabled(7, "Raiju", "You already have raiju skin patterns.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed) && player.skin.base.pattern != Skin.PATTERN_LIGHTNING_SHAPED_TATTOO && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(7, "???", "You have not yet unlocked this metamorphosis!");
-
-			if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed) && player.skin.base.pattern != Skin.PATTERN_SCAR_SHAPED_TATTOO && player.soulforce >= 100) addButton(9, "Orc", metamorphOrcSkinPattern);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed) && player.skin.base.pattern == Skin.PATTERN_SCAR_SHAPED_TATTOO) addButtonDisabled(9, "Orc", "You already have orc skin patterns.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed) && player.skin.base.pattern != Skin.PATTERN_SCAR_SHAPED_TATTOO && player.soulforce < 100) addButtonDisabled(9, "Orc", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
-			addButton(14, "Back", accessPage3MetamorphMenu);
 		}
 		private function accessRearBodyMenuOld():void {
 			menu();
@@ -1278,14 +1255,7 @@ package classes.Scenes {
 			player.tailType = Tail.HORSE;
 			doNext(accessPage1TailMenu);
 		}
-		private function metamorphOrcSkinPattern():void {
-			clearOutput();
-			player.soulforce -= 100;
-			outputText("\n\nYou double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>");
-			player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
-			player.skin.base.adj = "scar shaped tattooed";
-			doNext(accessSkinPatternsMenuOld);
-		}
+
 
 		private function metamorphHumanNoRearBody():void {
 			clearOutput();
@@ -1324,14 +1294,7 @@ package classes.Scenes {
 		}
 
 
-		private function metamorphHumanNoSkinPatterns():void {
-			clearOutput();
-			player.soulforce -= 500;
-			outputText("\n\nYour skin patterns itches incessantly, and as you scratch they shifts and changes, becoming less and less visible till they gone. <b>Your skin is without any skin patterns!</b>");
-			player.skin.base.pattern = Skin.PATTERN_NONE;
-			player.skin.base.adj = "";
-			doNext(accessSkinPatternsMenuOld);
-		}
+
 
 		private function metamorphPigTail():void {
 			clearOutput();
@@ -1350,14 +1313,7 @@ package classes.Scenes {
 			doNext(accessRearBodyMenuOld);
 		}
 
-		private function metamorphRaijuSkinPattern():void {
-			clearOutput();
-			player.soulforce -= 100;
-			outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
-			player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
-			player.skin.base.adj = "lightning shaped tattooed";
-			doNext(accessSkinPatternsMenuOld);
-		}
+
 		private function metamorphRaijuMane():void {
 			clearOutput();
 			player.soulforce -= 100;
@@ -1374,14 +1330,7 @@ package classes.Scenes {
 			doNext(accessPage4TailMenu);
 		}
 
-		private function metamorphOniSkinPattern():void {
-			clearOutput();
-			player.soulforce -= 100;
-			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
-			player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
-			player.skin.base.adj = "battle tattooed";
-			doNext(accessSkinPatternsMenuOld);
-		}
+
 
 
 
@@ -1565,17 +1514,7 @@ package classes.Scenes {
 			player.tailType = Tail.DEMONIC;
 			doNext(accessPage1TailMenu);
 		}
-		private function metamorphKitsuneSkinPattern():void {
-			clearOutput();
-			player.soulforce -= 100;
-			outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face. You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin]. The glow gradually fades, but the distinctive ");
-			if (rand(2) == 0) outputText("angular");
-			else outputText("curved");
-			outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
-			player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
-			player.skin.base.adj = "sexy tattooed";
-			doNext(accessSkinPatternsMenuOld);
-		}
+
 
 		private function metamorphTailFox9th():void {
 			clearOutput();

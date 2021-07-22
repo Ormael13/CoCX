@@ -198,7 +198,8 @@ public class MaraFruit extends Consumable{
 
 		//Skin
 		if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
-			mutations.humanizeSkin();
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
 		if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && player.skinTone != "light green" && changes < changeLimit && rand(2) == 0) {

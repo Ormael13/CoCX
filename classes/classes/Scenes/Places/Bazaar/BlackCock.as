@@ -1497,7 +1497,8 @@ import classes.CoC;
 				changes++;
 			}
 			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && player.faceType == Face.HUMAN) {
-				CoC.instance.mutations.humanizeSkin();
+				outputText("\n\n");
+				CoC.instance.transformations.SkinPlain.applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {

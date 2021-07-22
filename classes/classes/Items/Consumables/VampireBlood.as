@@ -92,7 +92,7 @@ public class VampireBlood extends Consumable {
         if (pure && rand(3) == 0 && changes < changeLimit && player.wings.type !== Wings.VAMPIRE) {
             outputText("\n\n");
             if (player.hasGooSkin()) {
-                mutations.humanizeSkin();
+                CoC.instance.transformations.SkinPlain.applyEffect();
                 outputText("\n\n");
             }
 
