@@ -9300,17 +9300,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Skin pattern - black or white veins pattern - adv ghost tf
         if (!player.skin.hasWhiteBlackVeins() && player.hasGhostSkin() && (player.skin.base.color == "white" || player.skin.base.color == "sable") && rand(3) == 0 && changes < changeLimit && type == 1) {
-            outputText("\n\nYour skin tingles and itches faintly. You look down to see ");
-            if (player.skin.base.color == "sable") outputText("white");
-            if (player.skin.base.color == "white") outputText("black");
-            outputText(" veins etching deep into your skin across the entirety of your body. <b>You now have ");
-            if (player.skin.base.color == "sable") outputText("white");
-            if (player.skin.base.color == "white") outputText("black");
-            outputText(" veins.</b>");
-            player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
-            if (player.skin.base.color == "sable") player.skin.base.color2 = "white";
-            if (player.skin.base.color == "white") player.skin.base.color2 = "black";
-            player.skin.base.adj = "veined";
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternWhiteBlackVeins.applyEffect();
             changes++;
         }
         //Effect Script 8: 100% chance of healing
@@ -10074,9 +10065,8 @@ public final class Mutations extends MutationsHelper {
 				changes++;
 			}
 			if (!player.skin.hasOilySkin() && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nThe black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>");
-				player.skin.base.pattern = Skin.PATTERN_OIL;
-				player.skin.base.adj = "oily skin";
+				outputText("\n\n");
+                CoC.instance.transformations.SkinPatternOil.applyEffect();
 				changes++;
 			}
 			var tone:Array = ["snow white", "red", "pale white"];
@@ -10385,9 +10375,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (!player.skin.hasWindSweptScars() && player.wings.type == Wings.WINDY_AURA && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou scream in pain as your aura flares again, leaving clean cuts all over your body. The cuts glows green for an instant before taking back on a more ordinary brown tone, closing into what looks like innocuous scars at first glance. <b>Clearly those new windswept scars of yours actually improves your wind control, marking you as a full Kamaitachi.</b>");
-            player.skin.base.pattern = Skin.PATTERN_SCAR_WINDSWEPT;
-            player.skin.base.adj = "windswept scars";
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternScarWindswept.applyEffect();
             changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -12995,8 +12984,8 @@ public final class Mutations extends MutationsHelper {
         //Change skin to normal
         if (!player.hasPlainSkinOnly() && rand(2) == 0 && changes < changeLimit) {
             if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-                player.skin.base.pattern = Skin.PATTERN_NONE;
-                player.skin.base.adj = "";
+                outputText("\n\n");
+                CoC.instance.transformations.SkinPatternNone.applyEffect();
             }
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("\n\n");
@@ -14289,8 +14278,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasPlainSkinOnly() && rand(2) == 0 && changes < changeLimit) {
             if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-                player.skin.base.pattern = Skin.PATTERN_NONE;
-                player.skin.base.adj = "";
+                outputText("\n\n");
+                CoC.instance.transformations.SkinPatternNone.applyEffect();
             }
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("\n\n");
@@ -14437,8 +14426,8 @@ public final class Mutations extends MutationsHelper {
 
         //antenna
         if (player.antennae.type != Antennae.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nA strange feeling washes over you as something crawls along your neck. You reach your hand up as large, thin strands of flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles, but instead, they start producing dim bioluminescent lights, much like the whiskers of deep-sea creatures. <b>Just like a sea dragon you now have four bioluminescent neck strands!</b>");
-            setAntennae(Antennae.SEA_DRAGON);
+            outputText("\n\n");
+            CoC.instance.transformations.AntennaeSeaDragon.applyEffect();
             changes++;
         }
         //Change hair type to normal
@@ -15083,9 +15072,8 @@ public final class Mutations extends MutationsHelper {
 
         //Antennae (nie wymaga innych body parts)
         if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
-            if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
-            else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
-            setAntennae(Antennae.MANTIS);
+            outputText("\n\n");
+            CoC.instance.transformations.AntennaeMantis.applyEffect();
             changes++;
         }
         //Horns
@@ -15735,10 +15723,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Antennae
         if (changes < changeLimit && player.faceType == Face.FIRE_SNAIL && player.antennae.type != Antennae.FIRE_SNAIL && rand(3) == 0) {
-            /*if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
-                else */
-            outputText("\n\nTwo large lumps suddenly pushes out of your head and before you know it a pair of prehensile horn-like antennae are flopping in front of your forehead <b>just like those of a slug or snail</b>.");
-            setAntennae(Antennae.FIRE_SNAIL);
+            outputText("\n\n");
+            CoC.instance.transformations.AntennaeFireSnail.applyEffect();
             changes++;
         }
         //Hair
@@ -16478,10 +16464,9 @@ public final class Mutations extends MutationsHelper {
 			CoC.instance.transformations.EarsCow.applyEffect();
             changes++;
         }
-        if (player.skin.base.type == Skin.PLAIN && !player.skin.hasUshiOniOnnaTattoo() && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour chest burns as strange marks appear on it, burning your skin until it creates a <b>black spider glyph in your chest</b>. You feel like something is coming up throughout your skin and upon taking your [armor] off, strokes of coarse fur travelling from your abdomen, all the way up to your breasts. Conveniently ending around the nipples, covering them, <b>you know have a Ushi-Oni torso pattern.</b>");
-            player.skin.base.pattern = Skin.PATTERN_USHI_ONI_TATTOO;
-            player.skin.base.adj = "black spider glyph tattooed";
+        if (player.skin.base.type == Skin.PLAIN && !player.skin.hasUshiOniTattoo() && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.SkinPatternUshiOniTattoo.applyEffect();
             changes++;
         }
         if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune()) && changes < changeLimit && rand(4) == 0) {

@@ -31,10 +31,6 @@ public class Antennae extends BodyPart {
 		super(null, null);
 	}
 
-	public static function getTFDescription(creature: *, bodyPart: *):String {
-		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
-	}
-
 	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
 

@@ -122,8 +122,7 @@ public class YukiOnnaScene extends BaseContent
 				CoC.instance.transformations.WingsLevitation.applyEffect(false);
 				CoC.instance.mutations.setRearBody(RearBody.GLACIAL_AURA);
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-					player.skin.base.pattern = Skin.PATTERN_NONE;
-					player.skin.base.adj = "";
+					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
 				if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.DeadMetabolism, 0, 0, 0, 0);

@@ -59,17 +59,6 @@ package classes.Scenes {
 				resetState();
 			}
 
-				// resetState();
-
-				// GeneticMemoryStorage["Human Hair"] = true;
-				// GeneticMemoryStorage["Storm Hair"] = true;
-				// GeneticMemoryStorage["Human Face"] = true;
-				// GeneticMemoryStorage["Human Tongue"] = true;
-				// GeneticMemoryStorage["Vampire Face"] = true;
-				// GeneticMemoryStorage["Vampire Eyes"] = true;
-				// GeneticMemoryStorage["Fox Eyes"] = true;
-				// GeneticMemoryStorage["Elf Tongue"] = true;
-
 				// TODO: Move migration inside else after finished
 				// migration
 
@@ -82,6 +71,8 @@ package classes.Scenes {
 				GeneticMemoryStorage["No Horns"] = true;
 				GeneticMemoryStorage["No Wings"] = true;
 				GeneticMemoryStorage["Plain Skin"] = true;
+				GeneticMemoryStorage["No Skin Pattern"] = true;
+				GeneticMemoryStorage["No Antennae"] = true;
 
 				if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) GeneticMemoryStorage["Human Hair"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) GeneticMemoryStorage["Feather Hair"] = true;
@@ -232,6 +223,11 @@ package classes.Scenes {
 				if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) GeneticMemoryStorage["Oni Skin Pattern"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) GeneticMemoryStorage["Raiju Skin Pattern"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) GeneticMemoryStorage["Orc Skin Pattern"] = true;
+
+				if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) || player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae)) GeneticMemoryStorage["No Antennae"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae)) GeneticMemoryStorage["Mantis Antennae"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae)) GeneticMemoryStorage["Bee Antennae"] = true;
+
 		}
 
 		public function Metamorph() {
@@ -463,7 +459,7 @@ package classes.Scenes {
 			outputText(title);
 			outputText("What kind of antennae do you want?");
 
-			openPaginatedMenuOld(title, accessAntennaeMenu, currentPage, Antennae.Types, Antennae.Types[player.antennae.type], Antennae.getTFDescription);
+			openPaginatedMenu(title, accessAntennaeMenu, currentPage, AntennaeMem.Memories);
 		}
 
 		private function accessSkinPatternsMenu(currentPage: int = 0): void {
@@ -473,7 +469,7 @@ package classes.Scenes {
 			outputText(title);
 			outputText("What kind of skin patterns do you want?");
 
-			openPaginatedMenuOld(title, accessSkinPatternsMenu, currentPage, Skin.PatternTypes, Skin.PatternTypes[player.skin.base.pattern], Skin.getTFDescription);
+			openPaginatedMenu(title, accessSkinPatternsMenu, currentPage, SkinPatternMem.Memories);
 		}
 
 		private function accessGillsMenu(currentPage: int = 0): void {
@@ -739,20 +735,8 @@ package classes.Scenes {
 		}
 		private function accessAntennaeMenuOld():void {
 			menu();
-			if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type != Antennae.NONE && player.soulforce >= 500) addButton(0, "Human", metamorphHumanNoAntennae);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type == Antennae.NONE) addButtonDisabled(0, "Human", "You already have no antennaes.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type != Antennae.NONE && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
 
-			if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type != Antennae.MANTIS && player.soulforce >= 100) addButton(1, "Mantis", metamorphMantisAntennae);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type == Antennae.MANTIS) addButtonDisabled(1, "Mantis", "You already have mantis antennaes.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type != Antennae.MANTIS && player.soulforce < 100) addButtonDisabled(1, "Mantis", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
 
-			if (player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae) && player.antennae.type != Antennae.BEE && player.soulforce >= 100) addButton(2, "Bee", metamorphBeeAntennae);
-			else if (player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae) && player.antennae.type == Antennae.BEE) addButtonDisabled(2, "Bee", "You already have bee antennaes.");
-			else if (player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae) && player.antennae.type != Antennae.BEE && player.soulforce < 100) addButtonDisabled(2, "Bee", "You do not have enough Soulforce for this metamorphosis.");
-			else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
 			addButton(14, "Back", accessPage3MetamorphMenu);
 		}
 		private function accessGillsMenuOld():void {
@@ -1276,13 +1260,7 @@ package classes.Scenes {
 		}
 
 
-		private function metamorphHumanNoAntennae():void {
-			clearOutput();
-			player.soulforce -= 500;
-			outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead. When it passes, you touch yourself and discover your antennae.type have vanished!");
-			player.antennae.type = Antennae.NONE;
-			doNext(accessAntennaeMenuOld);
-		}
+
 		private function metamorphHumanNoGills():void {
 			clearOutput();
 			player.soulforce -= 500;
@@ -1348,14 +1326,7 @@ package classes.Scenes {
 			doNext(accessPage4TailMenu);
 		}
 
-		private function metamorphMantisAntennae():void {
-			clearOutput();
-			player.soulforce -= 100;
-			if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
-			else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
-			player.antennae.type = Antennae.MANTIS;
-			doNext(accessAntennaeMenuOld);
-		}
+
 
 
 		private function metamorphGoatTail():void {
@@ -1477,14 +1448,7 @@ package classes.Scenes {
 			doNext(accessPage1TailMenu);
 		}
 
-		private function metamorphBeeAntennae():void {
-			clearOutput();
-			player.soulforce -= 100;
-			if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
-			else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".");
-			player.antennae.type = Antennae.BEE;
-			doNext(accessAntennaeMenuOld);
-		}
+
 		private function metamorphLizardTail():void {
 			clearOutput();
 			player.soulforce -= 100;

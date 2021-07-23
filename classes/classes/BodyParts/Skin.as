@@ -381,7 +381,7 @@ public class Skin extends SaveableBodyPart {
 	public function hasWhiteBlackVeins():Boolean {
 		return base.pattern == PATTERN_WHITE_BLACK_VEINS;
 	}
-	public function hasUshiOniOnnaTattoo():Boolean {
+	public function hasUshiOniTattoo():Boolean {
 		return base.pattern == PATTERN_USHI_ONI_TATTOO;
 	}
 	override public function restore(keepTone:Boolean = true):void {
@@ -552,10 +552,6 @@ public class Skin extends SaveableBodyPart {
 		savedata.furColor    = coat.color;
 		savedata.scalesColor = coat.color;
 		savedata.chitinColor = coat.color;
-	}
-
-	public static function getTFDescription(creature: *, bodyPart: *):String {
-		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
 	}
 
 	private static function formatDescription(desc:String, creature: *): String {

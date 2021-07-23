@@ -101,8 +101,8 @@ public class PotentVenom extends Consumable {
 		}
 		//Antenna
 		if (player.antennae.type != Antennae.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.");
-			mutations.setAntennae(Antennae.CENTIPEDE);
+			outputText("\n\n");
+			CoC.instance.transformations.AntennaeCentipede.applyEffect();
 			changes++;
 		}
 		//Ears
@@ -133,11 +133,8 @@ public class PotentVenom extends Consumable {
 		}
 		//Tatoo
 		if (player.eyes.type == Eyes.CENTIPEDE && !player.skin.hasVenomousMarking() && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou feel an unusual warmth in your chest. You look down to see a purple blot form on your chest and then begin to spread out across your skin like brushstrokes. " +
-					"It doesn't stop until your skin is covered in intricate purple designs. You can feel your venom pumping through them. " +
-					"<b>Your skin is covered in venomous body markings.</b>");
-			player.skin.base.pattern = Skin.PATTERN_VENOMOUS_MARKINGS;
-			player.skin.base.adj = "venomous marking covered";
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPatternVenomousMarkings.applyEffect();
 			changes++;
 		}
 

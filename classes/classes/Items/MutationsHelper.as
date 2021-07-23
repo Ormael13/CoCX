@@ -154,18 +154,6 @@ import classes.BodyParts.Wings;
 	// * @return true if added genetic memory (displayed "genetic memory unlocked" text)
 	// =================================
 
-	public function setAntennae(antennae:int):Boolean {
-		return setBodyPartType("antennae.type", METAMORPH_ANTENNAE, antennae);
-	}
-	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
-		[Antennae.BEE, StatusEffects.UnlockedBeeAntennae],
-		[Antennae.COCKATRICE, null],
-		[Antennae.FIRE_SNAIL, null],
-		[Antennae.NONE, StatusEffects.UnlockedHumanNoAntennae],
-		[Antennae.MANTIS, StatusEffects.UnlockedMantisAntennae],
-		[Antennae.MOTH, null],
-	]);
-
 	public function setGillType(gillType:int):Boolean {
 		return setBodyPartType("gills.type", METAMORPH_GILLS, gillType);
 	}

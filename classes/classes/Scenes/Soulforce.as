@@ -5,20 +5,8 @@
 package classes.Scenes
 {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
+
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.Alraune;
@@ -447,6 +435,10 @@ use namespace CoC;
 
 			for each (var wingsMem: * in WingsMem.Memories) {
 				Metamorph.GeneticMemoryStorage[wingsMem.name] = true;
+			}
+
+			for each (var antennaeMem: * in AntennaeMem.Memories) {
+				Metamorph.GeneticMemoryStorage[antennaeMem.name] = true;
 			}
 
 			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);

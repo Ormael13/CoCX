@@ -2,6 +2,7 @@ package classes.Transformations {
 import classes.BaseContent;
 import classes.CoC;
 
+import classes.BodyParts.Antennae;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Hair;
 import classes.BodyParts.Arms;
@@ -660,6 +661,103 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 		        return player.skin.base.pattern === Skin.PATTERN_MAGICAL_TATTOO;
 		    }
 		);
+
+		public const SkinPatternVenomousMarkings: Transformation = new SimpleTransformation("Venomous Markings Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+		        desc += "You feel an unusual warmth in your chest. You look down to see a purple blot form on your chest and then begin to spread out across your skin like brushstrokes. It doesn't stop until your skin is covered in intricate purple designs. You can feel your venom pumping through them. <b>Your skin is covered in venomous body markings.</b>";
+
+						player.skin.base.pattern = Skin.PATTERN_VENOMOUS_MARKINGS;
+						player.skin.base.adj = "venomous markings-covered";
+
+		        if (doOutput) outputText(desc);
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_MAGICAL_TATTOO;
+		    }
+		);
+
+		public const SkinPatternWhiteBlackVeins: Transformation = new SimpleTransformation("White Black Veins Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+		        desc += "Your skin tingles and itches faintly. You look down to see ";
+            if (player.skin.base.color == "sable") desc += "white";
+            if (player.skin.base.color == "white") desc += "black";
+            desc += " veins etching deep into your skin across the entirety of your body. <b>You now have ";
+            if (player.skin.base.color == "sable") desc += "white";
+            if (player.skin.base.color == "white") desc += "black";
+            desc += " veins.</b>";
+            if (player.skin.base.color == "sable") player.skin.base.color2 = "white";
+            if (player.skin.base.color == "white") player.skin.base.color2 = "black";
+
+						player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
+						player.skin.base.adj = "veined";
+
+		        if (doOutput) outputText(desc);
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_WHITE_BLACK_VEINS;
+		    }
+		);
+
+		public const SkinPatternOil: Transformation = new SimpleTransformation("Oil Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+						desc += "The black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>";
+
+						player.skin.base.pattern = Skin.PATTERN_OIL;
+						player.skin.base.adj = "oily skin";
+
+						if (doOutput) outputText(desc);
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_OIL;
+		    }
+		);
+
+		public const SkinPatternScarWindswept: Transformation = new SimpleTransformation("Scar Windswept Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+						desc += "You scream in pain as your aura flares again, leaving clean cuts all over your body. The cuts glows green for an instant before taking back on a more ordinary brown tone, closing into what looks like innocuous scars at first glance. <b>Clearly those new windswept scars of yours actually improves your wind control, marking you as a full Kamaitachi.</b>";
+
+						player.skin.base.pattern = Skin.PATTERN_SCAR_WINDSWEPT;
+            player.skin.base.adj = "windswept scars";
+		        if (doOutput) outputText(desc);
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_SCAR_WINDSWEPT;
+		    }
+		);
+
+		public const SkinPatternUshiOniTattoo: Transformation = new SimpleTransformation("Ushi-Oni Tattoo Skin Pattern",
+		    // apply effect
+		    function(doOutput: Boolean): void {
+		        var desc: String = "";
+
+						desc += "Your chest burns as strange marks appear on it, burning your skin until it creates a <b>black spider glyph in your chest</b>. You feel like something is coming up throughout your skin and upon taking your [armor] off, strokes of coarse fur travelling from your abdomen, all the way up to your breasts. Conveniently ending around the nipples, covering them, <b>you know have a Ushi-Oni torso pattern.</b>";
+
+            player.skin.base.pattern = Skin.PATTERN_USHI_ONI_TATTOO;
+            player.skin.base.adj = "black spider glyph-tattooed";
+
+		        if (doOutput) outputText(desc);
+		    },
+		    // is present
+		    function(): Boolean {
+		        return player.skin.base.pattern === Skin.PATTERN_USHI_ONI_TATTOO;
+		    }
+		);
 		/*
 */
 
@@ -1121,6 +1219,116 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 	        return player.horns.type === Horns.USHI_ONI;
 	    }
 		);
+		/*
+*/
+
+/*
+*     █████  ███    ██ ████████ ███████ ███    ██ ███    ██  █████  ███████
+*    ██   ██ ████   ██ 	  ██    ██      ████   ██ ████   ██ ██   ██ ██
+*    ███████ ██ ██  ██    ██    █████   ██ ██  ██ ██ ██  ██ ███████ █████
+*    ██   ██ ██  ██ ██    ██    ██      ██  ██ ██ ██  ██ ██ ██   ██ ██
+*    ██   ██ ██   ████    ██    ███████ ██   ████ ██   ████ ██   ██ ███████
+*/
+
+/*
+		*/
+    public const AntennaeNone: Transformation = new SimpleTransformation("No Antennae",
+        // apply effect
+        function(doOutput: Boolean): void {
+            var desc: String = "";
+
+            desc += "The muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead. When it passes, you touch yourself and discover your antennae.type have vanished!";
+            player.antennae.type = Antennae.NONE;
+
+            if (doOutput) outputText(desc);
+            Metamorph.unlockMetamorph("No Antennae");
+        },
+        // is present
+        function(): Boolean {
+            return player.antennae.type === Antennae.NONE;
+        }
+    );
+
+    public const AntennaeMantis: Transformation = new SimpleTransformation("Mantis Antennae",
+        // apply effect
+        function(doOutput: Boolean): void {
+            var desc: String = "";
+
+            if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.";
+            else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
+            player.antennae.type = Antennae.MANTIS;
+
+            if (doOutput) outputText(desc);
+            Metamorph.unlockMetamorph("Mantis Antennae");
+        },
+        // is present
+        function(): Boolean {
+            return player.antennae.type === Antennae.MANTIS;
+        }
+    );
+
+    public const AntennaeBee: Transformation = new SimpleTransformation("Bee Antennae",
+        // apply effect
+        function(doOutput: Boolean): void {
+            var desc: String = "";
+
+            if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.";
+            else desc += "Your head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".";
+            player.antennae.type = Antennae.BEE;
+
+            if (doOutput) outputText(desc);
+            Metamorph.unlockMetamorph("Bee Antennae");
+        },
+        // is present
+        function(): Boolean {
+            return player.antennae.type === Antennae.BEE;
+        }
+    );
+
+    public const AntennaeCentipede: Transformation = new SimpleTransformation("Centipede Antennae",
+        // apply effect
+        function(doOutput: Boolean): void {
+            var desc: String = "";
+
+            desc += "Your head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.";
+
+            if (doOutput) outputText(desc);
+        },
+        // is present
+        function(): Boolean {
+            return player.antennae.type === Antennae.CENTIPEDE;
+        }
+    );
+
+    public const AntennaeFireSnail: Transformation = new SimpleTransformation("Fire Snail Antennae",
+        // apply effect
+        function(doOutput: Boolean): void {
+            var desc: String = "Two large lumps suddenly pushes out of your head and before you know it a pair of prehensile horn-like antennae are flopping in front of your forehead <b>just like those of a slug or snail</b>.";
+
+            desc += "";
+
+            if (doOutput) outputText(desc);
+        },
+        // is present
+        function(): Boolean {
+            return player.antennae.type === Antennae.FIRE_SNAIL;
+        }
+    );
+
+    public const AntennaeSeaDragon: Transformation = new SimpleTransformation("Sea Dragon Antennae",
+        // apply effect
+        function(doOutput: Boolean): void {
+            var desc: String = "";
+
+            desc += "A strange feeling washes over you as something crawls along your neck. You reach your hand up as large, thin strands of flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles, but instead, they start producing dim bioluminescent lights, much like the whiskers of deep-sea creatures. <b>Just like a sea dragon you now have four bioluminescent neck strands!</b>";
+
+            if (doOutput) outputText(desc);
+        },
+        // is present
+        function(): Boolean {
+            return player.antennae.type === Antennae.SEA_DRAGON;
+        }
+    );
 		/*
 */
 
@@ -4094,7 +4302,24 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 			}
 		);
 
+		public const EyesFiendish:Transformation = new SimpleTransformation("Fiendish Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.eyes.type = Eyes.FIENDISH;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.FIENDISH;
+			}
+		);
+
 		// EYE COLORS
+
 		public function EyesChangeColor(colors:/*String*/Array):Transformation {
 			return new SimpleTransformation("Eye Color: " + colors.join("|"),
 					// apply effect
@@ -6141,7 +6366,7 @@ public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinou
 
 /*
 *    ████████ ██ ███████ ██████  ███████ ██████      ████████ ███████ ███████
-*       ██    ██ ██      ██   ██ ██      ██   ██     	 ██    ██      ██
+*       ██    ██ ██      ██   ██ ██      ██   ██     	  ██    ██      ██
 *       ██    ██ █████   ██████  █████   ██   ██        ██    █████   ███████
 *       ██    ██ ██      ██   ██ ██      ██   ██        ██    ██           ██
 *       ██    ██ ███████ ██   ██ ███████ ██████         ██    ██      ███████

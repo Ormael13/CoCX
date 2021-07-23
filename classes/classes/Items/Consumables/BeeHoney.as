@@ -153,9 +153,8 @@ public class BeeHoney extends Consumable
 			}
 			//Antennae
 			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.BEE && Utils.rand(3) == 0) {
-				if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
-				else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + Appearance.hairDescription(player) + ".");
-				mutations.setAntennae(Antennae.BEE);
+				outputText("\n\n");
+				CoC.instance.transformations.AntennaeBee.applyEffect();
 				changes++;
 			}
 			//Horns
