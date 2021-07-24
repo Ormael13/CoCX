@@ -1968,24 +1968,19 @@ public class Camp extends NPCAwareContent{
 		menu();
 		clearOutput();
 		outputText("What would you like to do?");
-		addButton(0, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
-		addButton(1, "Build", campBuildingSim).hint("Check your [camp] build options.");
-		addButton(2, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
-		addButton(3, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
-		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(4, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
+		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.");
+		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(1, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
+		else addButtonDisabled(1, "Winions", "You need to be able to make some minions that fight for you to use this option.");
+		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
+		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
+		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
-		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
-		else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option.");
-		//button 7
-		if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
-			addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
-		}
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(9, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
-		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(10, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(11, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-		addButton(12, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
-		addButton(13, "NPC's", SparrableNPCsMenu);
+		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
+		else addButtonDisabled(7, "Herbalism", "Would you kindly find Rathazul first?");
+		if (player.explored >= 1) addButton(9, "Dummy", DummyTraining).hint("Train your mastery level on this.");
+		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
+		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
+		else addButtonDisabled(13, "Ascension", "Don't you have a job to finish first. Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -2000,6 +1995,7 @@ public class Camp extends NPCAwareContent{
 		} else {
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
+		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -2019,16 +2015,29 @@ public class Camp extends NPCAwareContent{
 			//addButtonDisabled(6, "Build Misc(O)", "Req. Carpenter's Toolbox.");
 		}
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(1, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
-		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
+		else addButtonDisabled(1, "Build Cabin", "You need to wait until 7th day.");
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10) {
+			if (player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
+			addButtonDisabled(10, "AddImpSkull", "Req. at least one imp skull.");
+		}
+		else addButtonDisabled(10, "AddImpSkull", "Req. built at least one wall section.");
 		addButton(14, "Back", campActions);
 	}
 
 	private function campMiscActions():void {
 		menu();
-		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
-		else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
-		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
-		else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(0, "Fishery", VisitFishery).hint("Visit Fishery.");
+		else addButtonDisabled(0, "Fishery", "Would you kindly build it first?");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(1, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
+		else addButtonDisabled(1, "Ward", "Would you kindly instal it first?");
+		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(2, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
+		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
+		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
+		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
+		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(5, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
+		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
+		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
+		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -2240,20 +2249,46 @@ public class Camp extends NPCAwareContent{
 		doNext(HerbalismMenu);
 	}
 
+	private function VisitFishery():void {
+		outputText("\n\nYou go check at the barrels for food.");
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) outputText(" There is currently " + flags[kFLAGS.FISHES_STORED_AT_FISHERY] + " fish in the barrel.");
+		menu();
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(0, "Retrieve", Retrieve);
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(1, "Retrieve Stack", RetrieveStack);
+		addButton(14, "Back", campMiscActions);
+	}
+
+	private function Retrieve():void {
+		outputText("\n\nYou pick up a fish and add it to your inventory.");
+		flags[kFLAGS.FISHES_STORED_AT_FISHERY]--;
+		inventory.takeItem(consumables.FREFISH, VisitFishery);
+	}
+
 	private function MagicWardMenu():void {
 		clearOutput();
 		outputText("You touch one of the warding stones");
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
 			outputText(", and feel a surge of power as every stone comes alive with power.  The ward is up, and your [camp] should be safe.");
 			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 3;
-			doNext(campActions);
+			doNext(campMiscActions);
 			return;
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 3) {
 			outputText(" and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
 			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
-			doNext(campActions);
+			doNext(campMiscActions);
 			return;
+		}
+	}
+
+	private function RetrieveStack():void {
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
+			outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
+			flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
+			inventory.takeItem(useables.STAFISH, VisitFishery);
+		} else {
+			outputText("\n\nYou need more fish to bag out a bundle.");
+			doNext(VisitFishery);
 		}
 	}
 
@@ -2271,22 +2306,28 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
 	}
-
-private function SparrableNPCsMenu():void {
-	clearOutput();
-	outputText("Champion party composition: [name]");
-	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
-		else outputText(", (no combat companion)");
+	
+	private function DummyTraining():void {
+		clearOutput();
+		outputText("You walk toward the worn out dummy as you drawn your [weapon].");
+		startCombat(new TrainingDummy());
 	}
-	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
-		else outputText(", (no combat companion)");
-	}/*
-	if (player.hasPerk(PerkLib.AdvancedLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_3]);
-		else outputText(", (no combat companion)");
-	}*/
+
+	private function SparrableNPCsMenu():void {
+		clearOutput();
+		outputText("Champion party composition: [name]");
+		if (player.hasPerk(PerkLib.BasicLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
+			else outputText(", (no combat companion)");
+		}
+		if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
+			else outputText(", (no combat companion)");
+		}/*
+		if (player.hasPerk(PerkLib.AdvancedLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_3] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_3]);
+			else outputText(", (no combat companion)");
+		}*/
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			outputText("\n\nPlaceholder text about deciding if sparrable npc's in [camp] should train or relax (train mean rising in lvl after enough time loosing to PC in sparrings).");
 			outputText("\n\nPlaceholder text about current mode [camp] combat NPC's are in: ");
@@ -2362,32 +2403,6 @@ private function SparrableNPCsMenu():void {
 		if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
 		else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
-	}
-
-	private function VisitFishery():void {
-		outputText("\n\nYou go check at the barrels for food.");
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) outputText(" There is currently " + flags[kFLAGS.FISHES_STORED_AT_FISHERY] + " fish in the barrel.");
-		menu();
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(0, "Retrieve", Retrieve);
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(1, "Retrieve Stack", RetrieveStack);
-		addButton(14, "Back", campActions);
-	}
-
-	private function Retrieve():void {
-		outputText("\n\nYou pick up a fish and add it to your inventory.");
-		flags[kFLAGS.FISHES_STORED_AT_FISHERY]--;
-		inventory.takeItem(consumables.FREFISH, VisitFishery);
-	}
-
-	private function RetrieveStack():void {
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
-			outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
-			flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
-			inventory.takeItem(useables.STAFISH, VisitFishery);
-		} else {
-			outputText("\n\nYou need more fish to bag out a bundle.");
-			doNext(VisitFishery);
-		}
 	}
 
 	private function swimInStream():void {

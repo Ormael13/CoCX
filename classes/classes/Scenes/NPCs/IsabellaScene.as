@@ -1004,80 +1004,80 @@ public function defeatIsabella():void {
 			else flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 1;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 24);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 24, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 1;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 30);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 30, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 2;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 36);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 36, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 3;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 42);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 42, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 4;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 48);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 48, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 5;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 54);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 54, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 6;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 60);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 60, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 7;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 66);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 66, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 8;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 72);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 72, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 9;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 78);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 78, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 10;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ISABELLA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 84);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 84, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 11;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ISABELLA_LVL_UP] == 11) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 90);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 90, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 12;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.ISABELLA_LVL_UP] == 12) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 96);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 96, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 13;
 		}

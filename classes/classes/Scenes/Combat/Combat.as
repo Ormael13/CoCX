@@ -7948,7 +7948,7 @@ public class Combat extends BaseContent {
             monster.gems *= 2;
             monster.gems = Math.round(monster.gems);
         }
-        monster.handleAwardText(); //Each monster can now override the default award text
+        if (!monster.hasPerk(PerkLib.NoExpGained)) monster.handleAwardText(); //Each monster can now override the default award text
         if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
             if (nextFunc != null) doNext(nextFunc);
             else doNext(playerMenu);
@@ -7959,7 +7959,7 @@ public class Combat extends BaseContent {
         dropItem(monster, nextFunc);
         inCombat = false;
         player.gems += monster.gems;
-        player.XP += monster.XP;
+        if (!monster.hasPerk(PerkLib.NoExpGained)) player.XP += monster.XP;
         mainView.statsView.showStatUp('xp');
         dynStats("lust", 0, "scale", false); //Forces up arrow.
     }
@@ -13255,7 +13255,11 @@ public class Combat extends BaseContent {
             clearStatuses(false);
             doNext(camp.returnToCampUseOneHour);
             return;
-        } else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+        }
+		if (monster.short == "training dummy") {
+			outputText("As you retreat the training dummy just stands there in it usual spot. ");
+		}
+		else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
         //Nonflying PCs
         else {
             //In prison!
@@ -13396,7 +13400,10 @@ public class Combat extends BaseContent {
                 outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
             }
             //Non-fliers flee
-            else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.");
+            else {
+				if (monster.short == "training dummy") outputText("When you look back you see it's still in the same spot seemly grinning at you.");
+				else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.");
+			}
             if (monster.short == "Izma") {
                 outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.");
             }

@@ -1090,7 +1090,7 @@ import flash.utils.getQualifiedClassName;
 			if (diff2 == -17) difference -= 0.85;
 			if (diff2 == -18) difference -= 0.9;
 			if (diff2 == -19) difference -= 0.99;
-			if (diff2 < -20) {
+			if (diff2 < -19) {
 				var minXP:Number = 1;
 				if (hasPerk(PerkLib.ShieldWielder)) minXP *= 1.5;
 				if (hasPerk(PerkLib.EnemyBossType)) minXP *= 2;
