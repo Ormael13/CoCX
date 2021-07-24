@@ -6168,6 +6168,7 @@ public class Combat extends BaseContent {
             if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
             else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
         }
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
 	public function ShieldsStatusProcs():void {
@@ -10824,88 +10825,65 @@ public class Combat extends BaseContent {
         if (player.armor == armors.SCANSC) player.SexXP(XP);
         player.SexXP(XP);
     }
+	
+	private function weaponmasteryXPMulti():Number {
+		var multi:Number = 1;
+		if (player.humanScore() == player.humanMaxScore()) multi += 2;
+		else if (player.humanScore() >= player.humanMaxScore() - 9) multi += 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) multi *= 3;
+		else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) multi *= 2;
+        return multi;
+	}
 
 	public function gauntletXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.gauntletXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.gauntletXP(XP);
-        player.gauntletXP(XP);
+		player.gauntletXP(XP * weaponmasteryXPMulti());
     }
 	public function swordXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.swordXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.swordXP(XP);
-        player.swordXP(XP);
+		player.swordXP(XP * weaponmasteryXPMulti());
     }
 	public function axeXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.axeXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.axeXP(XP);
-        player.axeXP(XP);
+		player.axeXP(XP * weaponmasteryXPMulti());
     }
 	public function macehammerXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.macehammerXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.macehammerXP(XP);
-        player.macehammerXP(XP);
+		player.macehammerXP(XP * weaponmasteryXPMulti());
     }
 	public function duelingswordXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.duelingswordXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.duelingswordXP(XP);
-        player.duelingswordXP(XP);
+		player.duelingswordXP(XP * weaponmasteryXPMulti());
     }
 	public function spearXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.spearXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
-        player.spearXP(XP);
+		player.spearXP(XP * weaponmasteryXPMulti());
     }
 	public function daggerXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.daggerXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.daggerXP(XP);
-        player.daggerXP(XP);
+		player.daggerXP(XP * weaponmasteryXPMulti());
     }
 	public function whipXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.whipXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.whipXP(XP);
-        player.whipXP(XP);
+		player.whipXP(XP * weaponmasteryXPMulti());
     }
 	public function exoticXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.exoticXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
-        player.exoticXP(XP);
+		player.exoticXP(XP * weaponmasteryXPMulti());
     }
 
 	public function archeryXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.archeryXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.archeryXP(XP);
-        player.archeryXP(XP);
+		player.archeryXP(XP * weaponmasteryXPMulti());
     }
 	public function throwingXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.throwingXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.throwingXP(XP);
-        player.throwingXP(XP);
+		player.throwingXP(XP * weaponmasteryXPMulti());
     }
 	public function firearmsXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.firearmsXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.firearmsXP(XP);
-        player.firearmsXP(XP);
+		player.firearmsXP(XP * weaponmasteryXPMulti());
     }
 
 	public function dualWieldSmallXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldSmallXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldSmallXP(XP);
-        player.dualWieldSmallXP(XP);
+		player.dualWieldSmallXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldNormalXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldNormalXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldNormalXP(XP);
-        player.dualWieldNormalXP(XP);
+		player.dualWieldNormalXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldLargeXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldLargeXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldLargeXP(XP);
-        player.dualWieldLargeXP(XP);
+		player.dualWieldLargeXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldFirearmsXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldFirearmsXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldFirearmsXP(XP);
-        player.dualWieldFirearmsXP(XP);
+		player.dualWieldFirearmsXP(XP * weaponmasteryXPMulti());
     }
 
     //VICTORY OR DEATH?
