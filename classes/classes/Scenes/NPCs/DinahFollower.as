@@ -73,9 +73,9 @@ import classes.internals.Utils;
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
 			_extra = (1 + rand(3));
-			if (rand(2) == 0) _roulette1 = (1 + rand(4));
-			if (rand(2) == 0) _roulette2 = (1 + rand(3));
-			if (rand(2) == 0) _roulette3 = (1 + rand(5));
+			if (rand(2) == 0) _roulette1 = rand(4);
+			if (rand(2) == 0) _roulette2 = rand(3);
+			if (rand(2) == 0) _roulette3 = rand(5);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
 				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
@@ -136,50 +136,50 @@ import classes.internals.Utils;
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DINAH_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DINAH_LVL_UP] == 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 6);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 6, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DINAH_LVL_UP] == 2) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 12);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 12, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 3;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DINAH_LVL_UP] == 3) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 18);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 18, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 4;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DINAH_LVL_UP] == 4) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 24);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 24, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 5;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DINAH_LVL_UP] == 5) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 30);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 30, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 6;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DINAH_LVL_UP] == 6) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 36);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 36, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 7;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 7 && flags[kFLAGS.DINAH_LVL_UP] == 7) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 42);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 42, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 8;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 8 && flags[kFLAGS.DINAH_LVL_UP] == 8) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 48);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 48, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 9;
 				}
@@ -245,9 +245,11 @@ import classes.internals.Utils;
 			if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
 			if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
 			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
-			//later put her lower body armor part of HB set
 			if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 			if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			//if (_roulette4 == 0) addButtonDisabled(6, "???", "Dud. Shame, shame.");
+			//if (_roulette5 == 0) addButtonDisabled(7, "???", "Dud. Shame, shame.");
+			//if (_roulette6 == 0) addButtonDisabled(8, "???", "Dud. Shame, shame.");
 			addButton(14, "Back", DinahShopMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
@@ -340,7 +342,7 @@ import classes.internals.Utils;
 				doNext(DinahShopMainMenu3);
 				return;
 			}
-			doYesNo(Utils.curry(catChimeraTransact4,itype), DinahShopMainMenu2);
+			doYesNo(Utils.curry(catChimeraTransact5,itype), DinahShopMainMenu2);
 		}
 		public function catChimeraTransact1(itype:ItemType):void {
 			clearOutput();
