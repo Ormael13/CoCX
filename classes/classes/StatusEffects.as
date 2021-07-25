@@ -529,6 +529,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const NoMoreMarble:StatusEffectType                   = mk("No More Marble");
 		public static const Oswald:StatusEffectType                         = mk("Oswald");
 		public static const Overheat:StatusEffectType                		= mk("Overheat");
+		public static const PCClone:StatusEffectType            			= mk("PC Clone");
 		public static const PCDaughters:StatusEffectType            		= mk("PC Daughters");
 		public static const PCDaughtersWorkshop:StatusEffectType            = mk("PC Daughters Workshop");
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");

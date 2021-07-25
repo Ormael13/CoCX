@@ -131,6 +131,10 @@ package classes.Scenes
 			outputText("-Bit of moving around options in camp actions. Nothing serious. Just some of less used options moved to submenus and adding disabled buttons for all options that not had them in this manu or it submenus.\n");
 			outputText("-Sparring Ring can be upgraded 2 times. Each upgrade will decrease time needed for npc's to train for level up (shorter by 1/6 then 1/5 of orginal time) and mastery exp for hitting training dummy would increase by 100% per upgrade (to 200%/300%).\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			outputText("-Battleshield perk tier been decreased from 7th to 3rd. Req. intelligence was halfed.\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Defensive Staff Channeling. Req. Staff Channeling and Job: Enchanter perks, knowing any defensive spell, 120+ int. Effect: When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
+			outputText(" (Mana shield would be able to absorb more damage per mana spent and blizzard would last longer or block more fire attacks before vanishing)\n");
+			outputText("-For staff channeling perk effects would now count also weapons that are only 'partial' staffs like inscribed spellblade or demonic scythe.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -152,6 +156,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -218,7 +223,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -257,12 +264,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

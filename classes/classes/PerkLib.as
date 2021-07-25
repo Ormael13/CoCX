@@ -450,6 +450,12 @@ public class PerkLib
 		public static const SlimeMetabolismEvolved:PerkType = mk("Slime Metabolism (Evolved)", "Slime Metabolism (Evolved)",
 				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of cum and increase max Hunger cap by 50 (if PC have Hunger bar active).",
 				"You've chosen the 'Slime Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of cum and keeping it for 50% longer.");
+		public static const DefensiveStaffChanneling:PerkType = mk("Defensive Staff Channeling", "Defensive Staff Channeling",
+				"When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).",
+				"You've chosen the 'Defensive Staff Channeling' perk. When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
+		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
+				".",
+				"You've chosen the 'Offensive Staff Channeling' perk. .");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -2992,8 +2998,8 @@ public class PerkLib
 				"Slows hunger rate by further 20%.",
 				"You've chosen the 'Survivalist 2' perk.  With this perk, your hunger rate is reduced by another 20%.");
 		public static const StaffChanneling:PerkType = mk("Staff Channeling", "Staff Channeling",
-				"Basic attack with wizard's staff is replaced with ranged magic bolt. (Allow attack flying enemies)",
-				"You've chosen the 'Staff Channeling' perk. Basic attack with wizard's staff is replaced with ranged magic bolt. (Allow attack flying enemies)");
+				"Melee attacks with staffs would turn to ranged magic bolts. In additiona to hitting enemy next to you they would enable hitting enemeis out of your reach (for ex. flying enemies).",
+				"You've chosen the 'Staff Channeling' perk. Melee attacks with staffs would turn to ranged magic bolts. In additiona to hitting enemy next to you they would enable hitting enemeis out of your reach (for ex. flying enemies).");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
 				"Enables sixth item slot.",
 				"You've chosen the 'Strong Back' perk, enabling a sixth item slot.");
@@ -5066,6 +5072,18 @@ public class PerkLib
             GreyMage.requirePerk(GreyMageApprentice)
                     .requireInt(125)
                     .requireLevel(18);
+            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
+                    .requirePerk(JobEnchanter)
+                    .requireInt(100)
+                    .requireLevel(18);
+            DefensiveStaffChanneling.requirePerk(StaffChanneling)
+                    .requirePerk(JobEnchanter)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsManaShield)
+                                || player.hasStatusEffect(StatusEffects.KnowsBlizzard);
+                    }, "Any defensive spell")
+                    .requireInt(120)
+                    .requireLevel(18);
             //Tier 4 Intelligence perks
             GrandArchmage.requirePerk(Archmage)
                     .requirePerk(FocusedMind)
@@ -5195,10 +5213,6 @@ public class PerkLib
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)
-                    .requireLevel(42);
-            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
-                    .requirePerk(JobEnchanter)
-                    .requireInt(200)
                     .requireLevel(42);
             //Tier 8 Intelligence perks
             PeerlessSpirituality.requireWis(180)

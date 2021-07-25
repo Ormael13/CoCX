@@ -5275,7 +5275,7 @@ public class Combat extends BaseContent {
                 } else if (vbladeeffect) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
                 else if (MDODialogs) {
                 } else if (!MSGControll) {
-                    outputText("You hit [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
+					outputText("You "+player.weaponVerb+" [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
                 }
                 if (crit) {
                     outputText("<b>Critical! </b>");

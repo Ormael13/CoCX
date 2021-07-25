@@ -1109,7 +1109,7 @@ use namespace CoC;
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return weapon == game.weapons.ASCENSU || weapon == game.weapons.DEPRAVA || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT;
+			return weapon == game.weapons.ASCENSU || weapon == game.weapons.DEPRAVA || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF;
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -1122,6 +1122,10 @@ use namespace CoC;
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
 			return isRibbonTypeWeapon() || weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS || weapon == game.weapons.SDRILL || weapon == game.weapons.G_SHURI || weapon == game.weapons.CHAKRAM;
+		}
+		//Partial staff type weapons
+		public function isPartiallyStaffTypeWeapon():Boolean {
+			return weapon == game.weapons.S_BLADE || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -2213,7 +2217,9 @@ use namespace CoC;
 		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
 			var magicmult:Number = 1;
 			// if magical damage, double efficiency
-			if (magic == true) magicmult /= 2;
+			if (magic == true) magicmult *= 0.5;
+			// defensive staff channeling
+			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
 				if (display) {
@@ -2282,8 +2288,8 @@ use namespace CoC;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
 				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					/*if (damagetype == 0) damage = manaShieldAbsorb(damage, display);
-					else */damage = manaShieldAbsorbMagic(damage, display);
+					/*if (damagetype == 0) */damage = manaShieldAbsorb(damage, display);
+					//else damage = manaShieldAbsorbMagic(damage, display);
 				}
 				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
 					damage = bloodShieldAbsorb(damage, display);

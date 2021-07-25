@@ -2038,6 +2038,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
+		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		addButton(14, "Back", campActions);
 	}
 
@@ -2264,6 +2266,17 @@ public class Camp extends NPCAwareContent{
 		inventory.takeItem(consumables.FREFISH, VisitFishery);
 	}
 
+	private function RetrieveStack():void {
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
+			outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
+			flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
+			inventory.takeItem(useables.STAFISH, VisitFishery);
+		} else {
+			outputText("\n\nYou need more fish to bag out a bundle.");
+			doNext(VisitFishery);
+		}
+	}
+
 	private function MagicWardMenu():void {
 		clearOutput();
 		outputText("You touch one of the warding stones");
@@ -2281,17 +2294,6 @@ public class Camp extends NPCAwareContent{
 		}
 	}
 
-	private function RetrieveStack():void {
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
-			outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
-			flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
-			inventory.takeItem(useables.STAFISH, VisitFishery);
-		} else {
-			outputText("\n\nYou need more fish to bag out a bundle.");
-			doNext(VisitFishery);
-		}
-	}
-
 	private function fillUpPillBottle00():void {
 		clearOutput();
 		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
@@ -2305,6 +2307,67 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+	}
+
+	private function VisitClone():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) {
+			if (player.statusEffectv4(StatusEffects.PCClone) < 4) outputText("Your clone is still incomplete. Would you work on completing it?");
+			else {
+				outputText("Your clone is wandering around camp. What would you ask " + player.mf + " to do?\n\n");
+				outputText("Current clone task: ");
+				outputText("Nothing");
+			}
+		}
+		else outputText("You not have clone created.");
+		outputText("\n\n");
+		menu();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) addButtonDisabled(0, "Create", "You already created your clone.");
+		else addButton(0, "Create", CreateClone);
+		addButton(14, "Back", campMiscActions);
+	}
+	private function CreateClone():void {
+		menu();
+		if (player.HP > player.maxHP() * 0.5 && player.soulforce >= player.maxSoulforce()) addButton(0, "Form", FormClone);
+		else {
+			if (player.soulforce < player.maxSoulforce()) addButtonDisabled(0, "Form", "Your soulforce is too low.");
+			else addButtonDisabled(0, "Form", "Your health is too low.");
+		}
+		addButton(4, "Back", VisitClone);
+	}
+	private function FormClone():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) {
+			if (player.statusEffectv4(StatusEffects.PCClone) == 3) {
+				outputText("Part 4 forming placeholder.\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				player.addStatusValue(StatusEffects.PCClone, 3, 30);
+				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				HPChange( -player.maxHP() * 0.5, true);
+				player.statPoints -= 150;
+				player.perkPoints -= 30;
+				player.level -= 30;
+			}
+			else if (player.statusEffectv4(StatusEffects.PCClone) == 2) {
+				outputText("Part 3 forming placeholder.\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				HPChange( -player.maxHP() * 0.5, true);
+			}
+			else {
+				outputText("Part 2 forming placeholder.\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				HPChange( -player.maxHP() * 0.5, true);
+			}
+		}
+		else {
+			outputText("Part 1 forming placeholder.\n\n");
+			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			HPChange( -player.maxHP() * 0.5, true);
+		}
+		doNext(camp.returnToCampUseEightHours);
 	}
 	
 	private function DummyTraining():void {
@@ -3626,7 +3689,6 @@ public function wakeFromBadEnd():void {
 			outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
 			doNext(doCamp);
 		}
-
 	}
 
 	private function buildCampGate():void {
