@@ -561,7 +561,7 @@ private function loseToIzma():void {
 		outputText(" at the thought of something that huge forcing its way into it... but you did make a promise and you are ");
 		if(player.HP < 1) outputText("too weak to resist");
 		else outputText("feeling very horny");
-		outputText(", so you comply.  You remove the last bits of your [armor], and position yourself on the ground, your [butt] facing towards Izma.  You can hear her stalking across the sand toward you, but it still sends tingles up your spine when her hands - now free of her metal gauntlets - fall onto your " + assDescript() + ".\n\n");
+		outputText(", so you comply.  You remove the last bits of your [armor], and position yourself on the ground, your [butt] facing towards Izma.  You can hear her stalking across the sand toward you, but it still sends tingles up your spine when her hands - now free of her metal gauntlets - fall onto your [ass].\n\n");
 
 		outputText("\"<i>Ooh, looking good from this angle.  I'm going to enjoy taking you like this... after all, if you want to be on top, then you gotta fight for it.</i>\"\n\n");
 
@@ -594,7 +594,7 @@ private function loseToIzma():void {
 			outputText("\"<i>The heck!?  What kind of monsters have you been running into?</i>\" she wonders aloud.");
 		}
 
-		outputText("\n\nFully buried, she tightly grips your " + assDescript() + "  and then pulls out partway, before thrusting herself back in fiercely.  \"<i>Thought you were clever, eh?  Wanted to try doing it like shark people do, did you?  Well, among the sharks, there're only two sorts - the strong and the weak.  And this is what the weak get.</i>\"  She growls fiercely.\n\n");
+		outputText("\n\nFully buried, she tightly grips your [ass]  and then pulls out partway, before thrusting herself back in fiercely.  \"<i>Thought you were clever, eh?  Wanted to try doing it like shark people do, did you?  Well, among the sharks, there're only two sorts - the strong and the weak.  And this is what the weak get.</i>\"  She growls fiercely.\n\n");
 
 		outputText("Harder and faster she thrusts, building up a rhythm that grows in pace, her balls slapping audibly against your [butt] as she bucks back and forth.  You can feel her huge male organ in your depths, rubbing against your prostrate, stretching your inner walls, her boiling erection against your burning heat.  You moan in pleasure; you can't help but enjoy this");
 		if(player.hasCock()) outputText(", and your own male organ is hard and throbbing from the stimulation");
@@ -777,7 +777,7 @@ private function finalIzmaSubmission():void {
 	else outputText("flank");
 	outputText(".\n\n");
 
-	outputText("Some of Izma's hot pre-cum dribbles out onto your back and runs down to your " + assDescript() + ".  It causes your eyes to roll back in your head; you can only imagine the taste of her salty pre running down your throat.  Izma snickers, aware of her hold over you, before tightening her grip.");
+	outputText("Some of Izma's hot pre-cum dribbles out onto your back and runs down to your [ass].  It causes your eyes to roll back in your head; you can only imagine the taste of her salty pre running down your throat.  Izma snickers, aware of her hold over you, before tightening her grip.");
 	if(player.hasCock() || player.hasVagina()) {
 		outputText("  The tight embrace makes ");
 		if(player.hasCock()) {
@@ -1514,7 +1514,7 @@ private function submitToLakeIzma():void {
 	//(starter -all sexes)
 	outputText("You give Izma a smile and begin to slowly, sensuously remove your [armor], littering the sand around you.  As the tigershark watches, you strike a few poses, and then sink onto your hands and knees with your rear facing towards her.  You twist around to look at her over your shoulder, ");
 	if(player.hasLongTail() > 0) outputText("your tail waving enticingly, ");
-	outputText("before you give your " + assDescript() + " a seductive wiggle.  You tell her that you think it's her turn to play.\n\n");
+	outputText("before you give your [ass] a seductive wiggle.  You tell her that you think it's her turn to play.\n\n");
 
 	outputText("Izma's breath visibly catches in her throat, her cock painfully erect and pulsing with lust.  She doesn't even bother to remove her bikini, instead stalking towards you, her intention obvious with every movement.  Within seconds she is behind you, her hands firmly gripping your [butt].  You feel a sudden hot liquid sensation in between your buttocks, and you squeak in shock - it's almost like somebody has tipped hot lava onto your ass. Izma's cum is so hot you're surprised you don't see steam wafting back over you.\n\n");
 
@@ -1541,7 +1541,7 @@ private function submitToLakeIzma():void {
  			outputText("\"<i>The heck!?  What kind of monsters have you been running into?</i>\" she wonders aloud.\n\n");
 		}
 
-		outputText("Fully buried, she tightly grips your " + assDescript() + "  and then pulls out partway, before thrusting herself back in fiercely.  \"<i>Thought you were clever, eh?  Wanted to try doing it like shark people do, did you?  Well, among the sharks, there're only two sorts - the strong and the weak.  And this is what the weak get.</i>\"  She growls fiercely.\n\n");
+		outputText("Fully buried, she tightly grips your [ass]  and then pulls out partway, before thrusting herself back in fiercely.  \"<i>Thought you were clever, eh?  Wanted to try doing it like shark people do, did you?  Well, among the sharks, there're only two sorts - the strong and the weak.  And this is what the weak get.</i>\"  She growls fiercely.\n\n");
 
  		outputText("Harder and faster she thrusts, building up a rhythm that grows in pace, her balls slapping audibly against your [butt] as she bucks back and forth.  You can feel her huge male organ in your depths, rubbing against your prostrate, stretching your inner walls, her boiling erection against your burning heat.  You moan in pleasure; you can't help but enjoy this");
 		if(player.hasCock()) outputText(", and your own male organ is hard and throbbing from the stimulation");

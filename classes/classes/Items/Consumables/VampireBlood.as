@@ -115,10 +115,7 @@ public class VampireBlood extends Consumable {
 
         if (!pure && rand(3) == 0 && changes < changeLimit && player.rearBody.type !== RearBody.BAT_COLLAR) {
             outputText("\n\n");
-
-            outputText("You drop the vial, the glass shattering as it hits the ground, as an intense itching sets in around your neck. Bringing your hands to your neck to scratch it, you find sparse, downy fuzz. As you scratch away, it continues lengthening and growing in density until you have a collar of fur around your neck.\n\nWell, this isn’t so bad, the scarf-like look is certainly nice, at the very least.<b>Your neck now sports a collar of fur.</b>");
-
-            mutations.setRearBody(RearBody.BAT_COLLAR);
+            CoC.instance.transformations.RearBodyBatCollar.applyEffect();
             changes++;
         }
 

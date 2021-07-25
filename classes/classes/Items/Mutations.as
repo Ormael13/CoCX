@@ -1783,21 +1783,22 @@ public final class Mutations extends MutationsHelper {
         //Grow tail if not wolf-tailed
         if (rand(2) == 0 && changes < changeLimit && player.tailType != Tail.WOLF && player.tailType != Tail.GARGOYLE) {
             if (player.tailType == Tail.NONE) {
-                outputText("\n\nA pressure builds in your backside. You feel under your clothes and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes, and grow most of the way to the ground. A thick coat of fur cold to the touch yet warm on your tail skin cover it entirely from the base to the tip.  ");
-                outputText("<b>You now have a wolf-tail.</b>");
-                setTailType(Tail.WOLF);
+                outputText("\n\n");
+                CoC.instance.transformations.TailWolf.applyEffect();
                 changes++;
             }
             if (player.tailType != Tail.NONE && player.tailType != Tail.WOLF) {
-                outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>");
-                setTailType(Tail.NONE, 0);
-                player.tailVenom = 0;
-                player.tailRecharge = 5;
+                outputText("\n\n");
+                CoC.instance.transformations.TailNone.applyEffect();
                 changes++;
             }
         }
         // Remove gills
-        if (rand(3) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(3) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //If no changes yay
         if (changes == 0) {
             outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
@@ -2439,19 +2440,20 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow tail if not dog-tailed
         if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.GARGOYLE && ((player.tailType != Tail.DOG && type != 6) || (player.tailType != Tail.WOLF && type == 6))) {
-            if (player.tailType == Tail.NONE) {
-                outputText("\n\nA pressure builds in your backside. You feel under your clothes and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes, and grow most of the way to the ground. A thick coat of fur springs up to cover your new tail.  ");
+            outputText("\n\n");
+            if (type != 6) {
+                CoC.instance.transformations.TailDog.applyEffect();
+            } else {
+                CoC.instance.transformations.TailWolf.applyEffect();
             }
-            if (player.tailType == Tail.HORSE && type != 6) outputText("\n\nYou feel a tightness in your rump, matched by the tightness with which the strands of your tail clump together.  In seconds they fuse into a single tail, rapidly sprouting thick fur.  ");
-            if (player.tailType == Tail.DEMONIC && type != 6) outputText("\n\nThe tip of your tail feels strange.  As you pull it around to check on it, the spaded tip disappears, quickly replaced by a thick coat of fur over the entire surface of your tail.  ");
-            //Generic message for now
-            if (player.tailType >= Tail.COW && type != 6) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long puffy tail!  ");
             changes++;
-            outputText("<b>You now have a dog-tail.</b>");
-            setTailType(Tail.DOG);
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         if (player.hasFullCoatOfType(Skin.FUR) && changes < changeLimit && rand(3) == 0 && type != 6) {
             outputText("\n\nYou become more... solid.  Sinewy.  A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace.  You imagine that must have felt something like this.");
             MutagenBonus("tou", 4);
@@ -3464,17 +3466,8 @@ public final class Mutations extends MutationsHelper {
         //General Appearance (Tail -> Ears -> Paws(fur stripper) -> Face -> Horns
         //Give the player a bovine tail, same as the minotaur
         if (tainted && player.tailType != Tail.COW && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            if (player.tailType == Tail.NONE) outputText("\n\nYou feel the flesh above your [butt] knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
-            else {
-                if (player.tailType < Tail.SPIDER_ADBOMEN || player.tailType > Tail.BEE_ABDOMEN) {
-                    outputText("\n\nYour tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
-                }
-                //insect
-                if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN) {
-                    outputText("\n\nYour insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.");
-                }
-            }
-            setTailType(Tail.COW);
+            outputText("\n\n");
+            CoC.instance.transformations.TailCow.applyEffect();
             changes++;
         }
         //Give the player bovine ears, same as the minotaur
@@ -3581,7 +3574,11 @@ public final class Mutations extends MutationsHelper {
             }
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
 
         //Increase the size of the player's ass (less likely then hips), if it is not already somewhat big
         if (rand(2) == 0 && player.butt.type < 13 && changes < changeLimit) {
@@ -4270,7 +4267,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         if (changes < changeLimit && rand(3) == 0) {
             if (rand(2) == 0) player.modFem(85, 3);
             if (rand(2) == 0) player.modThickness(20, 3);
@@ -4485,7 +4486,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         if (changes < changeLimit && rand(3) == 0) {
             if (rand(2) == 0) player.modFem(85, 3);
             if (rand(2) == 0) player.modThickness(20, 3);
@@ -4601,9 +4606,8 @@ public final class Mutations extends MutationsHelper {
         }
         //5 Goopy rear body
         if (player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore)) && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent " + player.skinTone + " body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. ");
-            outputText("Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.");
-            setRearBody(RearBody.METAMORPHIC_GOO);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyMetamorphicGoo.applyEffect();
             changes++;
         }
         //6a. Grow vagina if none
@@ -4757,14 +4761,16 @@ public final class Mutations extends MutationsHelper {
             }
             //Tail TF
             if (player.tailType != Tail.SHARK && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\n");
+                CoC.instance.transformations.TailShark.applyEffect();
                 changes++;
-                if (player.tailType == Tail.NONE) outputText("\n\nJets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.");
-                else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.");
-                setTailType(Tail.SHARK);
             }
             //Gills TF
-            if (player.gills.type != Gills.FISH && player.tailType == Tail.SHARK && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0)
-                updateGills(Gills.FISH);
+            if (player.gills.type != Gills.FISH && player.tailType == Tail.SHARK && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsFish.applyEffect();
+            changes++;
+        }
             //Hair
             if (player.hairColor != "silver" && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
                 changes++;
@@ -4824,8 +4830,7 @@ public final class Mutations extends MutationsHelper {
             //FINZ
             if (player.rearBody.type != RearBody.SHARK_FIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\n");
-                outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.");
-                setRearBody(RearBody.SHARK_FIN);
+                CoC.instance.transformations.RearBodySharkFin.applyEffect();
                 changes++;
             }
             if (changes == 0) {
@@ -5072,7 +5077,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
 
         //Default change - blah
         if (changes == 0) outputText("\n\nRemakarbly, the snake-oil has no effect.  Should you really be surprised at snake-oil NOT doing anything?");
@@ -5712,7 +5721,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //Black Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
@@ -5763,16 +5776,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes tail
         if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>");
-            setTailType(Tail.NONE, 0);
-            player.tailVenom = 0;
-            player.tailRecharge = 5;
+            outputText("\n\n");
+            CoC.instance.transformations.TailNone.applyEffect();
             changes++;
         }
         //Revert rear body to normal
         if (player.rearBody.type != RearBody.NONE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger in it.  After a moment the pain passes, though your back is back to what you looked like when you entered this realm!");
-            setRearBody(RearBody.NONE);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyNone.applyEffect();
             changes++;
         }
         //Increase height up to 5 feet.
@@ -6153,48 +6164,34 @@ public final class Mutations extends MutationsHelper {
         }
         //DA TAIL (IF ALREADY HAZ URZ)
         if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && type != 1 && rand(3) == 0 && changes < changeLimit) {
-            if (player.tailType == Tail.NONE) {
-                choice = rand(3);
-                if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
-                if (choice == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>");
-                if (choice == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>");
-            } else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
-            setTailType(Tail.CAT);
+            outputText("\n\n");
+            CoC.instance.transformations.TailCat.applyEffect();
             changes++;
         }
         if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            if (player.tailType == Tail.NONE) {
-                choice = rand(3);
-                if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
-                if (choice == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>");
-                if (choice == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>");
-            } else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
-            setTailType(Tail.CAT, 1);
+            outputText("\n\n");
+            CoC.instance.transformations.TailCat.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.CAT && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, it starts splitting into two, stopping once the split reaches a third of the way down the length!  <b>You now have a cat tail that is forked on the last third of its length.</b>");
-            setTailType(Tail.NEKOMATA_FORKED_1_3);
+            outputText("\n\n");
+            CoC.instance.transformations.TailNekomataOneThirdForked.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.NEKOMATA_FORKED_1_3 && player.level >= 6 && player.inte >= 10 && player.wis >= 25 && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy, and partially forked tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, it starts splitting into two, stopping as another third of its length becomes forked!  <b>You now have a cat tail that is forked at two thirds of its length.</b>");
-            setTailType(Tail.NEKOMATA_FORKED_2_3);
+            outputText("\n\n");
+            CoC.instance.transformations.TailNekomataTwoThirdsForked.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.NEKOMATA_FORKED_2_3 && player.level >= 12 && player.inte >= 20 && player.wis >= 50 && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy, and partially forked tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, your tail finishes splitting in two!  <b>You now have a pair of cat-tails.</b>");
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) {
-                outputText("\n\n<b>Genetic Memory: 2nd Cat Tail - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedCatTail2nd, 0, 0, 0, 0);
-            }
-            setTailType(Tail.CAT, 2);
+            outputText("\n\n");
+            CoC.instance.transformations.TailCat2nd.applyEffect();
             changes++;
         }
         //Kasha tail interaction with nekomata ghastly fruit
         if (player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nSomething weird is happening to your tail as the fire suddenly begins to flare to twice its volume. You screech, hiss and yowl in pain like a cat as it suddenly cracks and splits into <b>two fiery cat tails.</b> Feeling horny you proceed to stretch and lick your vagina to damp out your growing heat but it swiftly becomes obvious you will not be able to get rid of that scorching heat without a victim. ");
-            setTailType(Tail.TWINKASHA, 2);
+            outputText("\n\n");
+            CoC.instance.transformations.TailTwinkasha.applyEffect();
             changes++;
         }
         //Da paws (if already haz tail)
@@ -6234,16 +6231,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
-            setRearBody(RearBody.LION_MANE);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyLionMane.applyEffect();
             changes++;
         }
         //Displacer beast tentacles
         if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && type == 3 && rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DISPLACER) {
-            if (player.rearBody.type != RearBody.NONE) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger in it.  After a moment the pain passes, though your back is back to what you looked like when you entered this realm! ");
-            else outputText("\n\n");
-            outputText("Two large fleshy lumps explode from your shoulders and you scream in pain. These fleshy appendages weave and move like whips in your back and only stop doing so when you finally manage to calm yourself. <b>As you look back to see what's going on, you notice you now have a pair of tentacles with thick, fleshy heads. You can feel the air brushing over the sensitive needles and suction cups that cover both of them, your new venom glistening on the tips.</b>");
-            setRearBody(RearBody.DISPLACER_TENTACLES);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyDisplacerTentacles.applyEffect();
             changes++;
         }
         //CAT-FACE!
@@ -6325,7 +6320,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         if (changes < changeLimit) {
             if (rand(2) == 0) outputText(player.modThickness(5, 2));
             if (rand(2) == 0) outputText(player.modTone(76, 2));
@@ -6382,7 +6381,7 @@ public final class Mutations extends MutationsHelper {
             //(COOCH)
             else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate and lay eggs spreads through you, increasing your lust and boosting your sex-drive.");
             //(TARDS)
-            else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
+            else outputText("puddling in your featureless crotch for a split-second before it slides into your [ass].  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
             //+3 lib if less than 50
             if (player.lib < 50) MutagenBonus("lib", 1);
             //+2 lib if less than 75
@@ -6632,11 +6631,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Tail – sinuous lizard tail
         if (player.tailType != Tail.LIZARD && player.arms.type == Arms.LIZARD && changes < changeLimit && rand(5) == 0) {
-            //No tail
-            if (player.tailType == Tail.NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  <b>You now have a reptilian tail!</b>");
-            //Yes tail
-            else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  <b>You now have a reptilian tail.</b>");
-            setTailType(Tail.LIZARD);
+            outputText("\n\n");
+            CoC.instance.transformations.TailLizard.applyEffect();
             changes++;
         }
         //Lizard eyes
@@ -6675,7 +6671,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
@@ -6726,7 +6726,7 @@ public final class Mutations extends MutationsHelper {
             //(COOCH)
             else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
             //(TARDS)
-            else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
+            else outputText("puddling in your featureless crotch for a split-second before it slides into your [ass].  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
             MutagenBonus("lib", 2);
             changes++;
         }
@@ -6850,11 +6850,8 @@ public final class Mutations extends MutationsHelper {
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
         if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            //No tail
-            if (player.tailType == Tail.NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>");
-            //Yes tail
-            else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail.</b>");
-            setTailType(Tail.SALAMANDER);
+            outputText("\n\n");
+            CoC.instance.transformations.TailSalamander.applyEffect();
             changes++;
         }
         //Legs
@@ -6918,7 +6915,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removing gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
@@ -6976,7 +6977,7 @@ public final class Mutations extends MutationsHelper {
             //(COOCH)
             else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate and lay eggs spreads through you, increasing your lust and boosting your sex-drive.");
             //(TARDS)
-            else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
+            else outputText("puddling in your featureless crotch for a split-second before it slides into your [ass].  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
             //+2 lib if less than 60
             if (player.lib < 60) MutagenBonus("lib", 1);
             //+1 if above 60.
@@ -7040,9 +7041,7 @@ public final class Mutations extends MutationsHelper {
         //Tail
         if (player.tailType != Tail.CAVE_WYRM && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            if (player.tailType != Tail.NONE) outputText("You feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  ");
-            outputText("A large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail with patches of black scales which taper on the ground. Its fat and chubby like that of a newt and its heavy weight helps you keep your balance not to mention that people will just want to outright hug it.  <b>You have grown a large earth wyrm tail.</b>");
-            setTailType(Tail.CAVE_WYRM);
+            CoC.instance.transformations.TailCaveWyrm.applyEffect();
             changes++;
         }
         //Legs
@@ -7138,7 +7137,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removing gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
@@ -7192,7 +7195,7 @@ public final class Mutations extends MutationsHelper {
             //(COOCH)
             else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
             //(TARDS)
-            else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
+            else outputText("puddling in your featureless crotch for a split-second before it slides into your [ass].  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
             MutagenBonus("lib", 2);
             changes++;
         }
@@ -7356,11 +7359,8 @@ public final class Mutations extends MutationsHelper {
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
         if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            //No tail
-            if (player.tailType == Tail.NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>");
-            //Yes tail
-            else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail.</b>");
-            setTailType(Tail.SALAMANDER);
+            outputText("\n\n");
+            CoC.instance.transformations.TailSalamander.applyEffect();
             changes++;
         }
         //SPECIAL:
@@ -7471,7 +7471,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //Phoenix Fire Breath
         if (player.phoenixScore() >= 5 && changes < changeLimit && !player.hasPerk(PerkLib.PhoenixFireBreath)) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself.  It had enough force to sent a little bit of dirt and shattered gravel all around.");
@@ -7801,9 +7805,8 @@ public final class Mutations extends MutationsHelper {
         }
         //DAH BUNBUNTAILZ
         if (player.tailType != Tail.RABBIT && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            if (player.tailType > Tail.NONE) outputText("\n\nYour tail burns as it shrinks, pulling tighter and tighter to your backside until it's the barest hint of a stub.  At once, white, poofy fur explodes out from it.  <b>You've got a white bunny-tail!  It even twitches when you aren't thinking about it.</b>");
-            else outputText("\n\nA burning pressure builds at your spine before dissipating in a rush of relief. You reach back and discover a small, fleshy tail that's rapidly growing long, poofy fur.  <b>You have a rabbit tail!</b>");
-            setTailType(Tail.RABBIT);
+            outputText("\n\n");
+            CoC.instance.transformations.TailRabbit.applyEffect();
             changes++;
         }
         //Partial and full fur
@@ -7848,7 +7851,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //Bunny Breeder Perk?
         //FAILSAAAAFE
         if (changes == 0) {
@@ -8165,11 +8172,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Feathery Tail
         if (player.tailType != Tail.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.wings.type == Wings.FEATHERED_LARGE) && rand(4) == 0) {
-            //(tail)
-            if (player.tailType > Tail.NONE) outputText("\n\nYour tail shortens, folding into the crack of your [butt] before it disappears. A moment later, a fan of feathers erupts in its place, fluffing up and down instinctively every time the breeze shifts. <b>You have a feathery harpy tail!</b>");
-            //(no tail)
-            else outputText("\n\nA tingling tickles the base of your spine, making you squirm in place. A moment later, it fades, but a fan of feathers erupts from your [skin.type] in its place. The new tail fluffs up and down instinctively with every shift of the breeze. <b>You have a feathery harpy tail!</b>");
-            setTailType(Tail.HARPY);
+            outputText("\n\n");
+            CoC.instance.transformations.TailHarpy.applyEffect();
             changes++;
         }
         //-Propah Wings
@@ -8210,7 +8214,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //SPECIAL:
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
         if (!player.hasPerk(PerkLib.HarpyWomb) && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && rand(4) == 0 && changes < changeLimit) {
@@ -8373,26 +8381,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Tail
         if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
-            if (player.tailType > Tail.NONE) {
-                if (player.tailCount > 1) {
-                    outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tails, as they tense and twitch, so you look back to examine what’s happening to them.");
-                    outputText("\n\nWhen you lay your eyes on them, the first thing that you notice if that is they’re entwining in a mess of curls and knots, the flesh on them merging until you have a single one. Then, the lone tail left starts shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.");
-                } else {
-                    outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tail, as it tenses and twitches, so you look back to examine what’s happening.");
-                    outputText("\n\nWhen you lay your eyes on it, the first thing that you notice if that is shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.");
-                }
-            } else {
-                outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your spine. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something sprouts just above your butt and you take of your lower clothing so you can examine it.");
-                outputText("\n\nWhen you lay your eyes on it, you notice a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.");
-            }
-            outputText(" <b>In any case, you have now a full, fan-shaped avian tail above your [butt]!</b>");
-            setTailType(Tail.AVIAN);
+            outputText("\n\n");
+            CoC.instance.transformations.TailAvian.applyEffect();
             changes++;
         }
         if (player.tailType != Tail.GRIFFIN && player.lowerBody == LowerBody.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
-            outputText("\n\nThe fan of feathers at your backside reacts under the statue magic effects. An otherworldly magic envelopes it, making the feathers twist and converge in an odd fashion, at the same time that the small bump of your tail elongates until becoming long enough to reach far past your knee.");
-            outputText("\n\nBefore you notice it, the long feathers have merged into a tuft of " + player.skin.coat.color + " at the end of your now long tail, while the short, downy ones now cover every inch of bare skin that the elongated appendage now have. <b>Well, seems like you gained a griffin-like tail!</b> It’s quite leonine in shape, but its appearance remains a bit avian.");
-            setTailType(Tail.GRIFFIN);
+            outputText("\n\n");
+            CoC.instance.transformations.TailGriffin.applyEffect();
             changes++;
         }
         //Arms
@@ -8667,20 +8662,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Roo tail (Req: Ears)
         if (player.tailType != Tail.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0 && (type != 1 || player.ears.type == Ears.KANGAROO)) {
-            //gain roo tail:
-            if (player.tailType == Tail.NONE) outputText("\n\nA painful pressure in your lower body causes you to stand straight and lock up.  At first you think it might be gas.  No... something is growing at the end of your tailbone.  As you hold stock still so as not to exacerbate the pain, something thick pushes out from the rear of your garments.  The pain subsides and you crane your neck around to look; a long, tapered tail is now attached to your butt and a thin coat of fur is already growing in!  <b>You now have a kangaroo tail!</b>");
-            //gain roo tail from bee tail:
-            else if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN) {
-                outputText("\n\nYour chitinous backside shakes and cracks once you finish eating.  Peering at it as best you can, it appears as though the fuzz is falling out in clumps and the chitin is flaking off.  As convulsions begin to wrack your body and force you to collapse, the ");
-                if (player.tailType == Tail.BEE_ABDOMEN) outputText("hollow stinger drops out of the end, taking the venom organ with it.");
-                else outputText("spinnerets drop out of the end, taking the last of your webbing with it.");
-                outputText("  By the time you're back to yourself, the insectile carapace has fallen off completely, leaving you with a long, thick, fleshy tail in place of your proud, insectile abdomen.  <b>You now have a kangaroo tail!</b>  You wipe the errant spittle from your mouth as you idly bob your new tail about.");
-            }
-            //gain roo tail from other tail:
-            else {
-                outputText("\n\nYour tail twitches as you eat.  It begins to feel fat and swollen, and you try to look at your own butt as best you can.  What you see matches what you feel as your tail thickens and stretches out into a long cone shape.  <b>You now have a kangaroo tail!</b>");
-            }
-            setTailType(Tail.KANGAROO);
+            outputText("\n\n");
+            CoC.instance.transformations.TailKangaroo.applyEffect();
             changes++;
         }
         //-Roo ears
@@ -8698,7 +8681,11 @@ public final class Mutations extends MutationsHelper {
             //trigger effect: Your body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
 
         if (changes == 0) {
             outputText("\n\nIt did not seem to have any effects, but you do feel better rested.");
@@ -8904,14 +8891,7 @@ public final class Mutations extends MutationsHelper {
         //(Tail becomes spider abdomen GRANT WEB ATTACK)
         if (player.tailType != Tail.SPIDER_ADBOMEN && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.ATLACH_NACHA) && player.arms.type == Arms.SPIDER && rand(4) == 0) {
             outputText("\n\n");
-            //(Pre-existing tails)
-            if (player.tailType > Tail.NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire.  You jump from the pain at your [butt] and grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your [butt]!</b>\n\n");
-            //(No tail)
-            else outputText("A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure.  You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body.  Reaching back, you grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your [butt]!</b>");
-            setTailType(Tail.SPIDER_ADBOMEN);
-            player.tailVenom = 5;
-            player.tailRecharge = 5;
-            player.coatColor = "black";
+            CoC.instance.transformations.TailSpider.applyEffect();
             changes++;
         }
         //(Drider Item Only: Carapace-Clad Legs to Drider Legs)
@@ -9244,10 +9224,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes tail
         if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>");
-            setTailType(Tail.NONE, 0);
-            player.tailVenom = 0;
-            player.tailRecharge = 5;
+            outputText("\n\n");
+            CoC.instance.transformations.TailNone.applyEffect();
             changes++;
         }
         //Incorporeality perk
@@ -9282,8 +9260,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Rear body
         if (player.lowerBody == LowerBody.GHOST_2 && player.rearBody.type != RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nA chill makes its way through your body. You can feel your body has changed and become something more incorporeal. An eerie glow surrounds your body as you fully become an otherworldly apparition.");
-            setRearBody(RearBody.GHOSTLY_AURA);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyGhostlyAura.applyEffect();
             changes++;
         }
         //Wings
@@ -9618,13 +9596,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\n<b>(Gained Perk: Ferocity</b>)");
             player.createPerk(PerkLib.Ferocity, 0, 0, 0, 0);
             changes++;
-        }/*
-			if (player.arms.type == Arms.ORC (zamienić to na nieco inne wymagania jak min race score czy coś takiego) && player.tailType != Tail.PIG && changes < changeLimit && rand(3) == 0) {//dla high orka
-				if (player.tailType == Tail.NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
-				else outputText("\n\nYou nearly jump out of your skin as your tail burst into a huge lightning bolt. You watch as it curls and twist around before it fizzles out.  <b>You now have a silky Raiju tail!</b>");
-				setTailType(Tail.PIG);
-				changes++;
-			}*/
+        }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
@@ -9704,14 +9676,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.arms.type == Arms.RAIJU && player.tailType != Tail.RAIJU && changes < changeLimit && rand(3) == 0) {
-            if (player.tailType == Tail.NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out of the area just above your ass. You watch in amazement as it twists and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
-            else outputText("\n\nYou nearly jump out of your skin as your tail bursts into a huge lightning bolt. You watch as it curls and twists around before it fizzles out.  <b>You now have a silky Raiju tail!</b>");
-            setTailType(Tail.RAIJU);
+            outputText("\n\n");
+            CoC.instance.transformations.TailRaiju.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.RAIJU && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
-            setRearBody(RearBody.RAIJU_MANE);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyRaijuMane.applyEffect();
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
@@ -9895,14 +9866,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.arms.type == Arms.HARPY && player.tailType != Tail.THUNDERBIRD && changes < changeLimit && rand(3) == 0) {
-            if (player.tailType == Tail.NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming still before it fully fizzles out, <b>leaving you with a long sinuous bolt shaped thunderbird tail!</b>");
-            else outputText("\n\nYou nearly jump out of your skin as your tail burst into a huge lightning bolt. You watch as it curls and twist around before it fizzles out.  <b>You now have a long sinuous bolt shaped thunderbird tail!</b>");
-            setTailType(Tail.THUNDERBIRD);
+            outputText("\n\n");
+            CoC.instance.transformations.TailThunderbird.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.THUNDERBIRD && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
-            setRearBody(RearBody.RAIJU_MANE);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyRaijuMane.applyEffect();
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
@@ -10020,10 +9990,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>");
-            setTailType(Tail.NONE, 0);
-            player.tailVenom = 0;
-            player.tailRecharge = 5;
+            outputText("\n\n");
+            CoC.instance.transformations.TailNone.applyEffect();
             changes++;
         }
 		if (player.wings.type == Wings.NONE && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.GAZER && player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2 && changes < changeLimit && rand(3) == 0 && type == 1) {
@@ -10059,9 +10027,8 @@ public final class Mutations extends MutationsHelper {
 				changes++;
 			}
 			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou gasp in alien pleasure as two large protrusions explode from your back freeing a pair of black tentacle stalks. The tips open to a set of eyes the same color as yours gazing at the world. These eyes share their vision with your central eye allowing you to see the world in a full peripheral view. <b>You now have two eye mounted tentacle stalks on your back.</b>");
-				player.createStatusEffect(StatusEffects.GazerEyeStalksPlayer, 2, 0, 0, 0);
-				setRearBody(RearBody.TENTACLE_EYESTALKS);
+				outputText("\n\n");
+                CoC.instance.transformations.RearBodyTentacleEyestalks.applyEffect();
 				changes++;
 			}
 			if (!player.skin.hasOilySkin() && rand(3) == 0 && changes < changeLimit) {
@@ -10217,15 +10184,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.arms.type == Arms.SQUIRREL && player.tailType != Tail.SQUIRREL && changes < changeLimit && rand(3) == 0) {
-            if (player.tailType == Tail.NONE) outputText("\n\nA pressure builds in your backside. " +
-                    "You feel under your clothes and discover an odd bump that seems to be growing larger by the moment. " +
-                    "In seconds it passes between your fingers and bursts out the back of your clothes, " +
-                    "it grows most of the way to the ground before suddenly curving back up, turning easily twice as big as you are. " +
-                    "A thick coat of light and [skin coat.color] striped fur covers it entirely from the base to the tip. " +
-                    "Well it's going to be hard to hide this huge thing, especially since it curls and puffs up just <b>like a squirrel tail.</b>");
-            else outputText("\n\nSomething weird happens with your tail as it begins to change into something else. " +
-                    "Within seconds the shape and coverage becomes closer to what you would expect of a squirrel tail. <b>You now have a squirrel tail!</b>");
-            setTailType(Tail.SQUIRREL);
+            outputText("\n\n");
+            CoC.instance.transformations.TailSquirrel.applyEffect();
             changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -10321,13 +10281,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.arms.type == Arms.KAMAITACHI && player.tailType != Tail.WEASEL && changes < changeLimit && rand(3) == 0) {
-            if (player.tailType == Tail.NONE) outputText("\n\nA pressure builds in your backside. " +
-                    "You feel under your waist and discover an odd bump that seems to be growing larger by the moment. " +
-                    "In seconds it passes between your fingers and bursts out the back of your ass into a tail which gets covered with a " +
-                    "thick coat of fur entirely from the base to the tip. <b>You now have a weasel tail.</b>");
-            else outputText("\n\nSomething weird happens with your tail as it begins to change into something else. " +
-                    "Within seconds the shape and coverage becomes closer to what you would expect of a weasel tail. <b>You now have a silky weasel tail!</b>");
-            setTailType(Tail.WEASEL);
+            outputText("\n\n");
+            CoC.instance.transformations.TailWeasel.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.KAMAITACHI && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
@@ -10504,7 +10459,7 @@ public final class Mutations extends MutationsHelper {
         //- may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
         if (rand(4) == 0 && changes < changeLimit && player.tailType == Tail.BEE_ABDOMEN) {
             outputText("\n\nAs the gentle tingling of the tentacle's remaining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>\n\n");
-            setTailType(Tail.NONE);
+            CoC.instance.transformations.TailNone.applyEffect(false);
             changes++;
         }
         //-may randomly remove bee wings:
@@ -10525,8 +10480,11 @@ public final class Mutations extends MutationsHelper {
             //appearance screen: replace 'hair' with 'tentacle-hair'
         }
         //-feathery gills sprout from chest and drape sensually over nipples (cumulative swimming power boost with fin, if swimming is implemented)
-        if (rand(5) == 0 && player.gills.type != Gills.ANEMONE && player.skin.base.color == "aphotic blue-black" && changes < changeLimit)
-            updateGills(Gills.ANEMONE);
+        if (rand(5) == 0 && player.gills.type != Gills.ANEMONE && player.skin.base.color == "aphotic blue-black" && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsAnemone.applyEffect();
+            changes++;
+        }
         //-[aphotic] skin tone (blue-black)
         if (rand(5) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.skin.base.color != "aphotic blue-black") {
             outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>");
@@ -10846,11 +10804,8 @@ public final class Mutations extends MutationsHelper {
         //[Grow Fox Tail](fairly common)
         //FIRST
         if (player.tailType != Tail.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            //from no tail
-            if (player.tailType == Tail.NONE) outputText("\n\nA pressure builds on your backside.  You feel under your [armor] and discover a strange nodule growing there that seems to be getting larger by the second.  With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it had a mind of its own.  <b>You now have a fox's tail!</b>");
-            //from another type of tail
-            else outputText("\n\nPain lances through your lower back as your tail shifts violently.  With one final aberrant twitch, it fluffs out into a long, bushy fox tail that whips around in an almost hypnotic fashion.  <b>You now have a fox's tail!</b>");
-            setTailType(Tail.FOX, 1);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(1).applyEffect();
             changes++;
         }
         //[Grow Fox Face]
@@ -10931,7 +10886,7 @@ public final class Mutations extends MutationsHelper {
             //(COOCH)
             else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
             //(TARDS)
-            else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
+            else outputText("puddling in your featureless crotch for a split-second before it slides into your [ass].  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
             MutagenBonus("lib", 2);
             changes++;
         }
@@ -11055,11 +11010,8 @@ public final class Mutations extends MutationsHelper {
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
         if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            //No tail
-            if (player.tailType == Tail.NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>");
-            //Yes tail
-            else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail.</b>");
-            setTailType(Tail.SALAMANDER);
+            outputText("\n\n");
+            CoC.instance.transformations.TailSalamander.applyEffect();
             changes++;
         }
         //Legs
@@ -11123,7 +11075,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removing gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
@@ -11398,15 +11354,8 @@ public final class Mutations extends MutationsHelper {
         //**********************
         //[Grow Fox Tail]
         mutationStep(player.tailType != Tail.FOX && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 4, function ():void {
-            //if PC has no tail
-            if (player.tailType == Tail.NONE) {
-                outputText("\n\nA pressure builds on your backside.  You feel under your [armor] and discover a strange nodule growing there that seems to be getting larger by the second.  With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it has a mind of its own.  <b>You now have a fox-tail.</b>");
-            }
-            //if PC has another type of tail
-            else if (player.tailType != Tail.FOX) {
-                outputText("\n\nPain lances through your lower back as your tail shifts and twitches violently.  With one final aberrant twitch, it fluffs out into a long, bushy fox tail that whips around in an almost hypnotic fashion.  <b>You now have a fox-tail.</b>");
-            }
-            setTailType(Tail.FOX, 1);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(1).applyEffect();
         });
         var nFoxTails:int = (player.ears.type == Ears.FOX && player.tailType == Tail.FOX) ? player.tailCount : 0;
         if (nFoxTails == 8 && !mystic && rand(3) == 0) {
@@ -11415,63 +11364,53 @@ public final class Mutations extends MutationsHelper {
         //[Grow Addtl. Fox Tail]
         //(rare effect, up to max of 8 tails, requires PC level and int*10 = number of tail to be added)
         mutationStep(nFoxTails == 1 && player.inte >= 15 && player.wis >= 15, mystic ? 2 : 3, function ():void {
-            outputText("\n\nA tingling pressure builds on your backside, and your bushy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, your tail splits into two!  <b>You now have a pair of fox-tails.</b>");
-            setTailType(Tail.FOX, 2);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(2).applyEffect();
         });
         mutationStep(nFoxTails == 2 && player.level >= 6 && player.inte >= 30 && player.wis >= 30, mystic ? 2 : 3, function ():void {
-            outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-            setTailType(Tail.FOX, 3);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(3).applyEffect();
         });
         mutationStep(nFoxTails == 3 && player.level >= 12 && player.inte >= 45 && player.wis >= 45, mystic ? 2 : 3, function ():void {
-            outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-            setTailType(Tail.FOX, 4);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(4).applyEffect();
         });
         mutationStep(nFoxTails == 4 && player.level >= 18 && player.inte >= 60 && player.wis >= 60, mystic ? 2 : 3, function ():void {
-            outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-            setTailType(Tail.FOX, 5);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(5).applyEffect();
         });
         mutationStep(nFoxTails == 5 && player.level >= 24 && player.inte >= 75 && player.wis >= 75, mystic ? 2 : 3, function ():void {
-            outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-            setTailType(Tail.FOX, 6);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(6).applyEffect();
         });
         mutationStep(nFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 3, function ():void {
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(7).applyEffect();
             if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
-                outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
+                outputText("\n\nBut something is wrong...  The cosmic power radiating from your body feels... tainted somehow. The corruption pouring off your body feels... good.</b>");
                 outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
                 player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
                 dynStats("lus", 5, "cor", 5);
                 MutagenBonus("lib", 1);
-            } else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-            player.tailCount = 7;
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-                outputText("\n\n<b>Genetic Memory: 7th Fox Tail - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFoxTail7th, 0, 0, 0, 0);
             }
         });
         mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
-            outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-            player.tailCount++;
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-                outputText("\n\n<b>Genetic Memory: 8th Fox Tail - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFoxTail8th, 0, 0, 0, 0);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(8).applyEffect();
         });
         //[Grow 9th tail and gain Corrupted Nine-tails perk]
         mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
+            outputText("\n\n");
+            CoC.instance.transformations.TailFox(9).applyEffect();
+
             if (!player.hasPerk(PerkLib.CorruptedNinetails)) {
-                outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  But something is strange...  The cosmic power radiating from your body feels...  somehow more tainted than before.  The corruption pouring off your body feels...  amazing good.</b>");
-                outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
+                outputText("\n\nBut something is strange...  The cosmic power radiating from your body feels... somehow more tainted than before. The corruption pouring off your body feels... amazingly good.</b>");
+                outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn. With your newfound power, it's a goal that is well within reach.");
                 outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants boosts to your racial special attacks.)");
                 player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
                 dynStats("lus", 10, "cor", 10);
                 MutagenBonus("lib", 2);
-            } else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-            player.tailCount = 9;
-            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-                outputText("\n\n<b>Genetic Memory: 9th Fox Tail - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedFoxTail9th, 0, 0, 0, 0);
             }
-
         });
         //Fox Eyes
         mutationStep(player.ears.type == Ears.FOX && player.eyes.type != Eyes.FOX, 3, function ():void {
@@ -12114,16 +12053,8 @@ public final class Mutations extends MutationsHelper {
         }
         //bodypart changes:
         if (player.tailType != Tail.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            //grow da tail
-            //from no tail:
-            if (player.tailType == Tail.NONE) {
-                outputText("\n\nPain shivers through your spine and forces you onto the ground; your body locks up despite your attempt to rise again.  You can feel a tug on your spine from your backside, as if someone is trying to pull it out!  Several nodules form along your back, growing into new vertebrae and pushing the old ones downward and into your [armor].  An uncomfortable pressure grows there, as whatever development is taking place fights to free itself from the constriction.  Finally the shifting stops, and you're able to move again; the first thing you do is loosen your bottoms, allowing a matted tail to slide out.  <b>It twitches involuntarily, fluffing out into a ringed raccoon tail!</b>");
-            }
-            //from other tail:
-            else {
-                outputText("\n\nYour tail goes rigid with pain, and soon your body follows.  It feels as though your spine is trying to push the growth off of your body... barely, you manage to turn your head to see almost exactly that!  A new ringed, fluffy tail is growing in behind its predecessor, dark bands after light.  Soon it reaches full length and a tear comes to your eye as your old tail parts from its end and drops to the ground like overripe fruit, dissolving.  <b>You now have a raccoon tail!</b>");
-            }
-            setTailType(Tail.RACCOON);
+            outputText("\n\n");
+            CoC.instance.transformations.TailRaccoon.applyEffect();
             changes++;
         }
 
@@ -12355,21 +12286,13 @@ public final class Mutations extends MutationsHelper {
         //gain tail
         //from no tail
         if (player.ears.type == Ears.MOUSE && player.tailType != Tail.MOUSE && changes < changeLimit && rand(3) == 0 && type == 0) {
-            //from other tail
-            if (player.tailType > Tail.NONE) {
-                outputText("\n\nYour tail clenches and itches simultaneously, leaving you wondering whether to cry out or try to scratch it.  The question is soon answered as the pain takes the forefront; looking backward is a horrible strain, but when you manage it, you can see your old appendage ");
-                if (player.tailType == Tail.HORSE) outputText("elongating");
-                else outputText("compressing");
-                outputText(" into a long, thin line.  With a shudder, it begins to shed until it's completely, starkly nude.  <b>Your new mouse tail looks a bit peaked.</b>");
-            } else outputText("\n\nA small nub pokes from your backside, and you turn to look at it.  When you do, your neck aches as if whiplashed, and you groan as your spine shifts smoothly downward like a rope being pulled, growing new vertebra behind it and expanding the nub into a naked, thin, tapered shape.  <b>Rubbing at your sore neck, you stare at your new mouse tail.</b>");
-            setTailType(Tail.MOUSE);
+            outputText("\n\n");
+            CoC.instance.transformations.TailMouse.applyEffect();
             changes++;
         }
         if (player.ears.type == Ears.MOUSE && player.tailType != Tail.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
-            if (player.tailType > Tail.NONE) outputText("\n\nY");
-            else outputText("\n\nA small nub pokes from your backside, and you turn to look at it.  Y");
-            outputText("ou jump in surprise as your tail suddenly sparks and lights ablaze. Oddly, it doesn’t hurt. Your tail doesn’t seem to burn your own skin but whatever it touches is set aflame. Pondering how difficult it will be to move around without torching everything, your tail’s fire suddenly dies down. Seems you can light it up or extinguish it at will.  <b>You now have a fiery mouse tail!</b>");
-            setTailType(Tail.HINEZUMI);
+            outputText("\n\n");
+            CoC.instance.transformations.TailHinezumi.applyEffect();
             changes++;
         }
         //gain legs
@@ -12467,14 +12390,9 @@ public final class Mutations extends MutationsHelper {
     private function demonChanges(player:Player):void {
         //Change tail if already horned.
         if (player.tailType != Tail.DEMONIC && player.lowerBody != LowerBody.GARGOYLE && player.horns.count > 0) {
-            if (player.tailType != Tail.NONE) {
-                outputText("\n\n");
-                if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ");
-                else outputText("You feel a tingling in your tail.  You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip.  ");
-                outputText("<b>Your tail is now demonic in appearance.</b>");
-            } else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.");
+            outputText("\n\n");
+            CoC.instance.transformations.TailDemonic.applyEffect();
             dynStats("cor", 4);
-            setTailType(Tail.DEMONIC);
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //grow horns!
@@ -12690,9 +12608,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //If the PC has gills:
-        if (player.hasGills() && rand(4) == 0 && changes < changeLimit) updateGills();
-        //	outputText("\n\nYou grit your teeth as a stinging sensation arises in your gills.  Within moments, the sensation passes, and <b>your gills are gone!</b>");
-        //If the PC has tentacle hair:
+        if (player.hasGills() && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
         if (player.hairType == Hair.ANEMONE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
             CoC.instance.transformations.HairHuman.applyEffect();
@@ -12747,37 +12667,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Tail TFs!
         if (player.tailType != Tail.FERRET && player.ears.type == Ears.FERRET && rand(3) == 0 && changes < changeLimit) {
-            //If ears are ferret, no tail:
-            if (player.tailType == 0) {
-                outputText("\n\nYou slump to the ground as you feel your spine lengthening and twisting, sprouting fur as it finishes growing.  Luckily the new growth does not seem to have ruined your [armor].  <b>You now have a ferret tail!</b>");
-            }
-                    //Placeholder for any future TFs that will need to be made compatible with this one
-            //centaur, has ferret ears:
-            else if (player.tailType == Tail.HORSE && player.isTaur()) outputText("\n\nYou shiver as the wind gets to your tail, all of its shiny bristles having fallen out.  Your tail then begins to lengthen, warming back up as it sprouts a new, shaggier coat of fur.  This new, mismatched tail looks a bit odd on your horse lower body.  <b>You now have a ferret tail!</b>");
-            //If tail is harpy, has ferret ears:
-            else if (player.tailType == Tail.HARPY) outputText("\n\nYou feel a soft tingle as your tail feathers fall out one by one.  The little stump that once held the feathers down begins to twist and lengthen before sprouting soft, fluffy fur.  <b>You now have a ferret tail!</b>");
-            //If tail is bunny, has ferret ears:
-            else if (player.tailType == Tail.RABBIT) outputText("\n\nYou feel a pressure at the base of your tiny, poofy bunny tail as it begins to lengthen, gaining at least another foot in length.  <b>You now have a ferret tail!</b>");
-            //If tail is reptilian/draconic, has ferret ears:
-            else if (player.tailType == Tail.DRACONIC || player.tailType == Tail.LIZARD) outputText("\n\nYou reach a hand behind yourself to rub at your backside as your tail begins to twist and warp, becoming much thinner than before.  It then sprouts a thick coat of fur.  <b>You now have a ferret tail!</b>");
-            //If tail is cow, has ferret ears:
-            else if (player.tailType == Tail.COW) outputText("\n\nYour tail begins to itch slightly as the poof at the end of your tail begins to spread across its entire surface, making all of its fur much more dense than it was before. It also loses a tiny bit of its former length. <b>You now have a ferret tail!</b>");
-            //If tail is cat, has ferret ears:
-            else if (player.tailType == Tail.CAT) outputText("\n\nYour tail begins to itch as its fur becomes much denser than it was before.  It also loses a tiny bit of its former length.  <b>You now have a ferret tail!</b>");
-            //If tail is dog, has ferret ears:
-            else if (player.tailType == Tail.DOG) outputText("\n\nSomething about your tail feels... different.  You reach behind yourself, feeling it.  It feels a bit floppier than it was before, and the fur seems to have become a little more dense.  <b>You now have a ferret tail!</b>");
-            //If tail is kangaroo, has ferret ears:
-            else if (player.tailType == Tail.KANGAROO) outputText("\n\nYour tail becomes uncomfortably tight as the entirety of its length begins to lose a lot of its former thickness.  The general shape remains tapered, but its fur has become much more dense and shaggy.  <b>You now have a ferret tail!</b>");
-            //If tail is fox, has ferret ears:
-            else if (player.tailType == Tail.FOX) outputText("\n\nYour tail begins to itch as its fur loses a lot of its former density.  It also appears to have lost a bit of length.  <b>You now have a ferret tail!</b>");
-            //If tail is raccoon, has ferret ears:
-            else if (player.tailType == Tail.RACCOON) outputText("\n\nYour tail begins to itch as its fur loses a lot of its former density, losing its trademark ring pattern as well.  It also appears to have lost a bit of length.  <b>You now have a ferret tail!</b>");
-            //If tail is horse, has ferret ears:
-            else if (player.tailType == Tail.HORSE) outputText("\n\nYou shiver as the wind gets to your tail, all of its shiny bristles having fallen out.  Your tail then begins to lengthen, warming back up as it sprouts a new, shaggier coat of fur.  <b>You now have a ferret tail!</b>");
-            //If tail is mouse, has ferret ears:
-            else if (player.tailType == Tail.MOUSE) outputText("\n\nYour tail begins to itch as its bald surface begins to sprout a thick layer of fur.  It also appears to have lost a bit of its former length.  <b>You now have a ferret tail!</b>");
-            else outputText("\n\nYour tail begins to itch a moment before it starts writhing, your back muscles spasming as it changes shape. Before you know it, <b>your tail has reformed into a narrow, ferret's tail.</b>");
-            setTailType(Tail.FERRET);
+            outputText("\n\n");
+            CoC.instance.transformations.TailFerret.applyEffect();
             changes++;
         }
                 //If naga, has ferret ears:
@@ -12924,17 +12815,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Gain pig tail if you already have pig ears!
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.ears.type == Ears.PIG && player.tailType != Tail.PIG) {
-            if (player.tailType > 0) //If you have non-pig tail.
-                outputText("\n\nYou feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>");
-            else //If you don't have a tail.
-                outputText("\n\nYou feel a tug at the base of your spine as it lengthens ever so slightly. Looking over your shoulder, <b>you find that you have sprouted a small, curly pig tail.</b>");
-            setTailType(Tail.PIG);
+            outputText("\n\n");
+            CoC.instance.transformations.TailPig.applyEffect();
             changes++;
         }
         //Gain pig tail even when centaur, needs pig ears.
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.ears.type == Ears.PIG && player.tailType != Tail.PIG && player.isTaur() && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.PONY)) {
-            outputText("\n\nThere is a tingling in your [tail] as it begins to warp and change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b> This new, mismatched tail looks a bit odd on your horse lower body.");
-            setTailType(Tail.PIG);
+            outputText("\n\n");
+            CoC.instance.transformations.TailPig.applyEffect();
             changes++;
         }
         //Turn your lower body into pig legs if you have pig ears and tail.
@@ -13448,7 +13336,7 @@ public final class Mutations extends MutationsHelper {
             setLowerBody(LowerBody.SCYLLA);
             player.legCount = 8;
             if (player.tailType != Tail.NONE) {
-                setTailType(Tail.NONE, 0);
+                CoC.instance.transformations.TailNone.applyEffect(false);
             }
             changes++;
         }
@@ -13816,11 +13704,8 @@ public final class Mutations extends MutationsHelper {
         }
         //SkinColor
         if (player.coatColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nAs you look at yourself for a second, you notice some small glowing pink dot appearing on your skin as it starts to change hue toward a ghostly white. " +
-                    "You think of the deep sea predators using light to confound and capture prey. " +
-                    "You realise that you now have <b>bioluminescent ghostly pale skin that will glow slightly even in the darkest reach of the ocean.</b>");
-            player.coatColor = "ghostly pale";
-            setRearBody(RearBody.KRAKEN);
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyKraken.applyEffect();
             changes++;
         }
 
@@ -13904,7 +13789,7 @@ public final class Mutations extends MutationsHelper {
             setLowerBody(LowerBody.SCYLLA);
             player.legCount = 8;
             if (player.tailType != Tail.NONE) {
-                setTailType(Tail.NONE, 0);
+                CoC.instance.transformations.TailNone.applyEffect(false);
             }
             changes++;
         }
@@ -13913,7 +13798,7 @@ public final class Mutations extends MutationsHelper {
             setLowerBody(LowerBody.KRAKEN);
             player.legCount = 10;
             if (player.tailType != Tail.NONE) {
-                setTailType(Tail.NONE, 0);
+                CoC.instance.transformations.TailNone.applyEffect(false);
             }
             changes++;
         }
@@ -14059,15 +13944,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Fur
-        if (player.hairType == Hair.FLUFFY && (player.rearBody.type != RearBody.YETI_FUR || !player.skin.checkProps({coverage: Skin.COVERAGE_LOW, coat: {type: Skin.FUR}})) && changes < changeLimit && rand(4) == 0) {
-            if (player.hairColor != "white") {
-                outputText("\n\n");
-                CoC.instance.transformations.HairChangeColor(["white"]).applyEffect();
-            }
+        if (player.hairType == Hair.FLUFFY && player.rearBody.type != RearBody.YETI_FUR && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: "white"}).applyEffect();
-            setRearBody(RearBody.YETI_FUR);
-            player.hairColor = "white";
+            CoC.instance.transformations.RearBodyYetiFur.applyEffect();
             changes++;
         }
         //Eyes
@@ -14263,7 +14142,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nCold… so cold! You ball yourself up, trying to get some heat but no matter how much you try it gets colder and colder. Just as you think you are about to freeze to death it stops. You look around you in confusion. The air is chilling yet you don't feel it. The ice at your feet covered up with snow and somehow you know deep down if you wanted you could conjure out a blizzard. ");
             outputText("Furthermore you feel lighter then the air now and, as if to demonstrate your new powers, you allow yourself to be carried by the icy wind achieving a form of levitation. Well it seems you are full Yuki Onna now. <b>You gained a Glacial aura and the ability to levitate!</b>");
             CoC.instance.transformations.WingsLevitation.applyEffect(false);
-            setRearBody(RearBody.GLACIAL_AURA);
+            CoC.instance.transformations.RearBodyGlacialAura.applyEffect(false);
             changes++;
         }
         if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skin.base.color != "glacial white" && player.skin.base.color != "light blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
@@ -14538,18 +14417,14 @@ public final class Mutations extends MutationsHelper {
         }
         //tail
         if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ");
-            outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ");
-            outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>");
-            setTailType(Tail.ORCA);
+            outputText("\n\n");
+            CoC.instance.transformations.TailOrca.applyEffect();
             changes++;
         }
         //dragon tail
         if (player.arms.type == Arms.SEA_DRAGON && player.tailType != Tail.ORCA && type == 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ");
-            outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ");
-            outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>");
-            setTailType(Tail.ORCA);
+            outputText("\n\n");
+            CoC.instance.transformations.TailOrca.applyEffect();
             changes++;
         }
         //ears
@@ -14567,10 +14442,7 @@ public final class Mutations extends MutationsHelper {
         //blowhole
         if (player.ears.type == Ears.ORCA && player.rearBody.type != RearBody.ORCA_BLOWHOLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            if (player.rearBody.type > RearBody.NONE) outputText("Your wings fold into themselves, merging together with your back.  ");
-            outputText("Pain rushes just behind your shoulder blades as a hole opens up, air rushing in. The hole is burning making you groan in pain as air flows in and out. Eventually you get accustomed to breathing from your back like whales do, but it sure was a weird experience.");
-            if (silly()) outputText("  Well it doesn't matter because now you can break the world record of the longest breath holding by sitting on the ocean floor for more than 90 minutes.");
-            setRearBody(RearBody.ORCA_BLOWHOLE);
+            CoC.instance.transformations.RearBodyOrcaBlowhole.applyEffect();
             changes++;
         }
         //eyes to human
@@ -14823,8 +14695,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Neck
         if (player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
-            setRearBody(RearBody.FROSTWYRM);
-            outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon gets so thick it almost looks as if you're wearing a white fur collar. <b>Your neck is now well protected against the cold thanks to your thick fur collar.</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodyFrostwyrm.applyEffect();
             changes++;
         }
         //Wyrm legs
@@ -15109,10 +14981,8 @@ public final class Mutations extends MutationsHelper {
 
         //Tail
         if (player.arms.type == Arms.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.tailType != Tail.MANTIS_ABDOMEN && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nPainful swelling just above your firm backside doubles you over.");
-            outputText("\nIt gets worse and worse as the swollen lump begins to protrude from your backside, swelling and elongating with a series of pops until you have a bulbous abdomen hanging just above your butt.");
-            outputText("\nThe whole thing is covered in a hard greenish chitinous material, and large enough to be impossible to hide. <b>You have a Mantis abdomen.</b>");
-            setTailType(Tail.MANTIS_ABDOMEN);
+            outputText("\n\n");
+            CoC.instance.transformations.TailMantis.applyEffect();
             changes++;
         }
 
@@ -15138,12 +15008,17 @@ public final class Mutations extends MutationsHelper {
 
         //Chitin skin
         if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: MantisColor}).applyEffect();
             changes++;
         }
 
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.GillsNone.applyEffect();
+            changes++;
+        }
 
         player.refillHunger(5);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -15295,15 +15170,9 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.HOOFED && (player.tailType != Tail.GOAT && player.tailType != Tail.DEMONIC)) {
             outputText("\n\n");
             if (rand(2) == 0) {
-                outputText("You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
-                setTailType(Tail.GOAT);
+                CoC.instance.transformations.TailGoat.applyEffect();
             } else {
-                if (player.tailType != Tail.NONE) {
-                    if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ");
-                    else outputText("You feel a tingling in your tail.  You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip.  ");
-                    outputText("<b>Your tail is now demonic in appearance.</b>");
-                } else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.");
-                setTailType(Tail.DEMONIC);
+                CoC.instance.transformations.TailDemonic.applyEffect();
             }
             changes++;
         }
@@ -15588,11 +15457,7 @@ public final class Mutations extends MutationsHelper {
         //Tail
         if (player.tailType != Tail.BEAR && player.lowerBody == LowerBody.BEAR && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            if (player.tailType != Tail.NONE) outputText("You feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  ");
-            outputText("You groan in surprise as you feel your spine lengthening and twisting, sprouting fur as it finishes growing. ");
-            if (!player.isNaked()) outputText("Luckily the new growth does not seem to have ruined your [armor]. ");
-            outputText("Curious, you examine the new appendage, wagging it and smiling as you see your cute, <b>brand new bear-like tail!</b>");
-            setTailType(Tail.BEAR);
+            CoC.instance.transformations.TailBear.applyEffect();
             changes++;
         }
         //Face
@@ -15683,7 +15548,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your legs, eventually reaching your feet. Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones changing into something else or disintegrating while you contort in unthinkable agony. Sometime later you feel the pain began to ease and you lay on the ground, spent by the terrible experience. ");
                 outputText("Once you feel you’ve recovered, you try to stand, but to your amazement you discover that you no longer have legs: the bottom half of your body is united in a large wide lump, ending into a point. It’s not that your bones were altered but it’s that everything below your waist was converted to muscle mass like that of an invertebrate. Your spine now reaches all the way up to your waist and ends at your thigh where it vanishes fully.");
                 outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs. Your underbelly begins to sweat profusely so much that it becomes glistening, your fat tail shining wetly as the ground beneath you gets covered with your viscous sticky fluids. Your underbody feels and looks like that of a slug or a snail and come to think of it it might just be exactly that.  <b>Your lower body is now a snail tail.</b>");
-                if (player.tailType > Tail.NONE) setTailType(Tail.NONE);
+                if (player.tailType !== Tail.NONE) CoC.instance.transformations.TailNone.applyEffect(false);
                 setLowerBody(LowerBody.FIRE_SNAIL);
             } else {
                 humanizeLowerBody();
@@ -15691,11 +15556,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Snail shell
-        if (player.rearBody.type != RearBody.SNAIL_SHELL && changes < changeLimit && rand(3) == 0) {//player.ears.type == Ears.ORCA &&
-            outputText("\n\nYour back begins to hurt as you feel like your flesh and bones are being torn out. You lie down, screaming in pain as your back keeps on expanding, breathing heavily. Not just that but you feel eviscerated as your guts and organs shift places within your body, causing you to puke from the growing nausea. Eventually it all stops and you take a glimpse behind you. A massive shell has grown behind your back, your organs relocating to inside its safety. ");
-            outputText("Geez, what a deep breath! it's like your lungs doubled in size. You finally manage to calm down and crawl your way to a resting spot in order to finish coping with the transformation and the now massive weight on your back. <b>You now have a Shell.</b>");
-            setRearBody(RearBody.SNAIL_SHELL);
-            player.coatColor = "brown";
+        if (player.rearBody.type != RearBody.SNAIL_SHELL && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.RearBodySnailShell.applyEffect();
             changes++;
         }
         //Removes wings!
@@ -16003,24 +15866,7 @@ public final class Mutations extends MutationsHelper {
         //Tail
         if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.RED_PANDA) {
             outputText("\n\n");
-            if (player.tailCount > 1) {
-                outputText("Your tails seem to move on their own, tangling together in a single mass. Before you can ever feel it happening, you realize that they’re merging! An increased sensation of heat, not unlike the flavor of the roots, rushes through your body, and once that it fades, you realize that you now have a single tail.");
-                outputText("\n\nThe process doesn’t stop here though, as the feel of that spicy root returns, but now the heat is felt only in your tail, as it shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
-                outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful to the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
-            } else if (player.tailType == Tail.NONE) {
-                outputText("Feeling an uncomfortable sensation on your butt, you stretch yourself, attributing it to having sat on a rough surface. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses  seem to have stopped, it has become a long, fluffy tube");
-                outputText("\n\nShortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
-                outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
-            } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN) {
-                outputText("Your insectile backside seems affected by the root properties, as your venom production suddenly stops. The flesh within the abdomen retracts into your backside, the chiting covering falling, leaving exposed a layer of soft, bare skin. When the abdomen disappears, your left with a comically sized butt, that soon reverts to its usual size.");
-                outputText("\n\nThe root keeps doing its thing, as you feel an uncomfortable sensation on your butt. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses  seem to have stopped, it has become a long, fluffy tube, quite different from your former abdomen.");
-                outputText("\n\nShortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
-                outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
-            } else {
-                outputText("The feel of that spicy root returns, but now the heat is felt on your tail, that shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
-                outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control their moves with easy, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
-            }
-            setTailType(Tail.RED_PANDA, 1);
+            CoC.instance.transformations.TailRedPanda.applyEffect();
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && !player.hasFur()) {
@@ -16493,11 +16339,7 @@ public final class Mutations extends MutationsHelper {
         //Tail
         if (player.tailType != Tail.USHI_ONI && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER) && rand(4) == 0) {// && player.arms.type == Arms.SPIDER
             outputText("\n\n");
-            if (player.tailType > Tail.NONE) outputText("You feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground. ");
-            outputText("You feel a little pressure in your rear as you look back you see something emerging from it, a long, dexterous tail appear from it, It looks something along 25 inches witha little orifice in the tip, where the spinneret is located, <b>you now have an Ushi-" + player.mf("Oni", "Onna") + " tail.</b>\n\n");
-            setTailType(Tail.USHI_ONI, 1);
-            //player.tailVenom = 5;
-            //player.tailRecharge = 5;
+            CoC.instance.transformations.TailUshiOni.applyEffect();
             changes++;
         }
         //Drider Item Only: Carapace-Clad Legs to Drider Legs

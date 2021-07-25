@@ -251,7 +251,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("  Shortly after, you feel her bee seed start to flow inside your bowels.  Soon, lumps that must be her eggs accompany the seed.\n\n");
 			var cockIndex:int = player.cockThatFits(50);
 			if (cockIndex >= 0) {
-				outputText("Left wanting a bit more pleasure, you lift up the bee girl, and gently lower her onto your waiting " + cockDescript(cockIndex) + " so that she can mount you in the same way you mounted her.  Well, almost, since you’re quite sure her rough slick interior is very different than the inside of your " + assDescript() + ".  While a bit surprised at first, she quickly gets really into bouncing on top of your " + cockDescript(cockIndex) + " while her egg layer keeps working its magic.\n\n");
+				outputText("Left wanting a bit more pleasure, you lift up the bee girl, and gently lower her onto your waiting " + cockDescript(cockIndex) + " so that she can mount you in the same way you mounted her.  Well, almost, since you’re quite sure her rough slick interior is very different than the inside of your [ass].  While a bit surprised at first, she quickly gets really into bouncing on top of your " + cockDescript(cockIndex) + " while her egg layer keeps working its magic.\n\n");
 			}
 			if (player.hasVagina()) {
 				outputText("Your " + vaginaDescript(0) + " is left a bit wanting, so you free up one of your hands to deal with the lack of attention.  No sooner had you started playing with your " + clitDescript() + ", you find that the bee girl has brought one of her hands into the fray to deal with the lack of attention herself, all the while grinning at you.  You return her smile and move your hand instead to her honey pot’s little button and start playing with that while she deals with your clit.\n\n");
@@ -916,7 +916,7 @@ public class BeeGirlScene extends BaseContent
 		private function beeMaidenPlay():void {
 			clearOutput();
 			spriteSelect(6);
-			outputText("You nod to her and walk up to the flower.  She moves a bit to the side and pats the spot next to her.  You first slip out of your [armor], then sit your " + assDescript() + " next to her.  ");
+			outputText("You nod to her and walk up to the flower.  She moves a bit to the side and pats the spot next to her.  You first slip out of your [armor], then sit your [ass] next to her.  ");
 			if (player.cor <= 33)
 				outputText("You sit there a bit nervously and wonder what she plans to do.");
 			else if (player.cor <= 66)
@@ -1209,7 +1209,7 @@ public class BeeGirlScene extends BaseContent
 
 						outputText("The sensations prove too much for you to take and you begin to shake violently, incapable of alleviating the awful pressure in your rear.\n\n");
 
-						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick and punch at your " + assDescript() + ". The volley of blows is enough to stop you from shaking, but the pressure doesn't go away.\n\n");
+						outputText("They seem to understand your problem though and, more out of a desire to not get tossed off than to help you with your needs, begin to kick and punch at your [ass]. The volley of blows is enough to stop you from shaking, but the pressure doesn't go away.\n\n");
 
 						outputText("The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n");
 						outputText("You awake in a couple of hours and stagger to your hooves, wobbly walking away using trees to steady yourself.  Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
@@ -1633,7 +1633,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.hasLongTail() > 0) outputText(" and your flailing tail is held firmly in place by her hand");
 				outputText(". Her other hand slides into your " + vaginaDescript() + " and scrapes around inside, causing an explosion of pleasure inside you. Your love canal grabs her and pulls her arm deeper inside you, your equine muscles making her powerless to resist.");
 				//[Asses other than tight:
-				if (player.ass.analLooseness >= 2) outputText("  Not wanting this, she attempts to brace her other hand between your " + assDescript() + "'s cheeks, but your " + assholeDescript() + " opens and she slides inside. With an immense effort she pulls out of your ass, nearly pushing you over the edge in the process, but the arm stuck on your vagina is stuck tight.");
+				if (player.ass.analLooseness >= 2) outputText("  Not wanting this, she attempts to brace her other hand between your [ass]'s cheeks, but your " + assholeDescript() + " opens and she slides inside. With an immense effort she pulls out of your ass, nearly pushing you over the edge in the process, but the arm stuck on your vagina is stuck tight.");
 				outputText("  It's not long before her hand finds your uterus and begin probing it, pushing you beyond your limit.\n\n");
 
 				//[Huge cum amount:

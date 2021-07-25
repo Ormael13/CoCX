@@ -557,29 +557,16 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Tail - requires legs
 		if (player.tailType != Tail.HORSE && player.tailType != Tail.GARGOYLE && player.lowerBody == LowerBody.HOOFED && rand(2) == 0 && changes < changeLimit) {
-			//no tail
-			if (player.tailType == 0) {
-				outputText("\n\nThere is a sudden tickling on your ass, and you notice you have sprouted a long shiny horsetail of the same [haircolor] color as your hair.");
-			}
-			//if other animal tail
-			if (player.tailType > Tail.HORSE && player.tailType <= Tail.COW) {
-				outputText("\n\nPain lances up your " + Appearance.assholeDescript(player) + " as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.");
-			}
-			//if bee/mantis/scorpion/spider-butt.
-			if ((player.tailType > Tail.COW && player.tailType < Tail.SHARK) || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN) {
-				outputText("\n\nYour insect-like abdomen bunches up as it begins shrinking, exoskeleton flaking off like a snake sheds its skin.  It bunches up until it is as small as a tennis ball, then explodes outwards, growing into an animalistic tail shape.  Moments later, it explodes into filaments of pain, dividing into hundreds of strands and turning into a shiny horsetail.");
-			}
-			if (player.tailType >= Tail.SHARK) {
-				outputText("\n\nPain lances up your " + player.assholeDescript() + " as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.");
-			}
-			outputText("  <b>You now have a horse-tail.</b>");
-			mutations.setTailType(Tail.HORSE, 1);
-			player.tailVenom    = 0;
-			player.tailRecharge = 0;
+			outputText("\n\n");
+			CoC.instance.transformations.TailHorse.applyEffect();
 			changes++;
 		}
 		// Remove gills
-		if (rand(4) == 0 && player.hasGills() && changes < changeLimit) mutations.updateGills();
+		if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+			outputText("\n\n");
+			CoC.instance.transformations.GillsNone.applyEffect();
+			changes++;
+		}
 
 		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.HORSE && player.tailType != Tail.GARGOYLE && player.tailType == Tail.HORSE) {
 			temp = 1;

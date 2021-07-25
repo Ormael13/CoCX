@@ -1466,14 +1466,14 @@ import classes.CoC;
 				player.arms.type = Arms.HUMAN;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.tailType == 0) {
-				outputText("You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
-				CoC.instance.mutations.setTailType(Tail.GOAT);
+			if (rand(3) == 0 && changes < changeLimit && player.tailType == Tail.NONE) {
+				outputText("\n\n");
+				CoC.instance.transformations.TailGoat.applyEffect();
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.tailType > 0 && player.lowerBody != LowerBody.GARGOYLE && player.tailType != Tail.GOAT) {
-				outputText("You [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a <b>short stubby goat-like tail</b>.");
-				CoC.instance.mutations.setTailType(Tail.GOAT);
+			if (rand(3) == 0 && changes < changeLimit && player.tailType !== Tail.NONE && player.lowerBody != LowerBody.GARGOYLE && player.tailType != Tail.GOAT) {
+				outputText("\n\n");
+				CoC.instance.transformations.TailGoat.applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.horns.type != Horns.ORCHID) {

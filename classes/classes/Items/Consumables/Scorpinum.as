@@ -31,11 +31,8 @@ public class Scorpinum extends Consumable {
 		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//gain scorpion tail
 		if (changes < changeLimit && player.tailType != Tail.SCORPION && player.tailType != Tail.GARGOYLE && rand(2) == 0) {
-			if (player.tailType != Tail.NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");
-			else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a scorpion tail.</b>");
-			mutations.setTailType(Tail.SCORPION);
-			player.tailVenom = 15;
-			player.tailRecharge = 5;
+      outputText("\n\n");
+      CoC.instance.transformations.TailScorpion.applyEffect();
 			changes++;
 		}
 		//Venom Increase

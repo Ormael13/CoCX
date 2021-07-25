@@ -456,7 +456,7 @@ public class Enigmanium extends Consumable{
 					}
 				}
 				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
-				mutations.setTailType(Tail.CAT);
+				CoC.instance.transformations.TailCat.applyEffect(false);
 				changes++;
 			}
 

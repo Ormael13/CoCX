@@ -193,7 +193,7 @@ private function heckelLovesDaAnal(loss:Boolean = false):void {
 	clearOutput();
 	//rejection - ass not loose enough
 	if(player.analCapacity() <= 20 && !loss) {
-		outputText("Heckel lets out a barking laugh when you suggest using your " + assDescript() + ", ruffling your hair playfully. \"<i>Know your limits, [name], I'd tear you apart down there. I'm sure there are plenty of others in this realm who can help you out with that.</i>\"\n\n");
+		outputText("Heckel lets out a barking laugh when you suggest using your [ass], ruffling your hair playfully. \"<i>Know your limits, [name], I'd tear you apart down there. I'm sure there are plenty of others in this realm who can help you out with that.</i>\"\n\n");
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}

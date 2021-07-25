@@ -521,7 +521,7 @@ private function cinnabarMultiCockPortalFuckFest():void {
 		outputText("\n\n");
 	}
 
-	outputText("The slut-rat gargles in irritation around your sensitive, cummed-out cock, clearly displeased that you're still inside her.  You step back from the wall, your [legs] giving out from the sensory overload of unsheathing your [cocks] simultaneously to drop you flat on your " + assDescript() + ".  At the same time, Cinnabar starts coughing and groaning, clearly exhausted from the one-" + player.mf("man","woman") + " gangbang.  You understand how that feels; just touching " + sMultiCockDesc() + " makes your head swoon.\n\n");
+	outputText("The slut-rat gargles in irritation around your sensitive, cummed-out cock, clearly displeased that you're still inside her.  You step back from the wall, your [legs] giving out from the sensory overload of unsheathing your [cocks] simultaneously to drop you flat on your [ass].  At the same time, Cinnabar starts coughing and groaning, clearly exhausted from the one-" + player.mf("man","woman") + " gangbang.  You understand how that feels; just touching " + sMultiCockDesc() + " makes your head swoon.\n\n");
 
 	outputText("An incessant licking reaches your ears, getting your attention.  You stand up, careful about your [cocks] while you look towards the bed.  The portals are closed down, and Cinnabar is bent double, folded in half like a contortionist");
 	if(player.cumQ() >= 1000) outputText(" while her huge, cum-filled belly bulges out to the sides");

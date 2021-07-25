@@ -149,7 +149,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
 				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
-				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
+				else addButton(6, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 			}
 			else addButtonDisabled(6, "???", "Req. Metamorph.");
 			if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
@@ -439,6 +439,18 @@ use namespace CoC;
 
 			for each (var antennaeMem: * in AntennaeMem.Memories) {
 				Metamorph.GeneticMemoryStorage[antennaeMem.name] = true;
+			}
+
+			for each (var gillsMem: * in GillsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[gillsMem.name] = true;
+			}
+
+			for each (var rearBodyMem: * in RearBodyMem.Memories) {
+				Metamorph.GeneticMemoryStorage[rearBodyMem.name] = true;
+			}
+
+			for each (var tailMem: * in TailMem.Memories) {
+				Metamorph.GeneticMemoryStorage[tailMem.name] = true;
 			}
 
 			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);

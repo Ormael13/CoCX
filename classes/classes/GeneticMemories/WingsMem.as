@@ -30,7 +30,7 @@ package classes.GeneticMemories {
 
     public static var Memories:/*EnumValue*/ Array = [];
 
-		public static const NONE:int = 0;
+		public static const NONE:int = 0
 		EnumValue.add(Memories, NONE, "NONE", {
 			name: "No Wings",
 			metamorphCost: 500,
@@ -40,7 +40,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE_SMALL:int = 1;
+		public static const BEE_SMALL:int = 1
 		EnumValue.add(Memories, BEE_SMALL, "BEE_SMALL", {
 			name: "Bee Small Wings",
 			metamorphCost: 100,
@@ -50,7 +50,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE_LARGE:int = 2;
+		public static const BEE_LARGE:int = 2
 		EnumValue.add(Memories, BEE_LARGE, "BEE_LARGE", {
 			name: "Bee Large Wings",
 			metamorphCost: 200,
@@ -60,7 +60,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMONIC_TINY:int = 3;
+		public static const DEMONIC_TINY:int = 3
 		EnumValue.add(Memories, DEMONIC_TINY, "DEMONIC_TINY", {
 			name: "Demonic Small Wings",
 			metamorphCost: 100,
@@ -70,7 +70,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMONIC_LARGE:int = 4;
+		public static const DEMONIC_LARGE:int = 4
 		EnumValue.add(Memories, DEMONIC_LARGE, "DEMONIC_LARGE", {
 			name: "Demonic Large Wings",
 			metamorphCost: 200,
@@ -81,7 +81,7 @@ package classes.GeneticMemories {
 		});
 
 		// UNUSED
-		// public static const DEMONIC_LARGE_X4:int = 8;
+		// public static const DEMONIC_LARGE_X4:int = 5
 		// EnumValue.add(Memories, DEMONIC_LARGE_X4, "DEMONIC_LARGE_X4", {
 		// 	name: "Demonic Large Quadruple Wings",
 		// 	metamorphCost: 300,
@@ -91,7 +91,7 @@ package classes.GeneticMemories {
 		// 	}
 		// });
 
-		public static const FEATHERED_LARGE:int = 5;
+		public static const FEATHERED_LARGE:int = 6
 		EnumValue.add(Memories, FEATHERED_LARGE, "FEATHERED_LARGE", {
 			name: "Harpy Wings",
 			metamorphCost: 100,
@@ -101,7 +101,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_SMALL:int = 6;
+		public static const DRACONIC_SMALL:int = 7
 		EnumValue.add(Memories, DRACONIC_SMALL, "DRACONIC_SMALL", {
 			name: "Draconic Small Wings",
 			metamorphCost: 100,
@@ -111,7 +111,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_LARGE:int = 7;
+		public static const DRACONIC_LARGE:int = 8
 		EnumValue.add(Memories, DRACONIC_LARGE, "DRACONIC_LARGE", {
 			name: "Draconic Large Wings",
 			metamorphCost: 200,
@@ -121,7 +121,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_HUGE:int = 9;
+		public static const DRACONIC_HUGE:int = 9
 		EnumValue.add(Memories, DRACONIC_HUGE, "DRACONIC_HUGE", {
 			name: "Draconic Huge Wings",
 			metamorphCost: 300,
@@ -131,7 +131,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FEATHERED_PHOENIX:int = 10;
+		public static const FEATHERED_PHOENIX:int = 10
 		EnumValue.add(Memories, FEATHERED_PHOENIX, "FEATHERED_PHOENIX", {
 			name: "Phoenix Wings",
 			metamorphCost: 100,
@@ -141,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FEATHERED_ALICORN:int = 11;
+		public static const FEATHERED_ALICORN:int = 11
 		EnumValue.add(Memories, FEATHERED_ALICORN, "FEATHERED_ALICORN", {
 			name: "Alicorn Wings",
 			metamorphCost: 200,
@@ -151,7 +151,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS_SMALL:int = 12;
+		public static const MANTIS_SMALL:int = 12
 		EnumValue.add(Memories, MANTIS_SMALL, "MANTIS_SMALL", {
 			name: "Mantis Small Wings",
 			metamorphCost: 100,
@@ -161,7 +161,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS_LARGE:int = 13;
+		public static const MANTIS_LARGE:int = 13
 		EnumValue.add(Memories, MANTIS_LARGE, "MANTIS_LARGE", {
 			name: "Mantis Large Wings",
 			metamorphCost: 200,
@@ -171,7 +171,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTICORE_SMALL:int = 14;
+		public static const MANTICORE_SMALL:int = 14
 		EnumValue.add(Memories, MANTICORE_SMALL, "MANTICORE_SMALL", {
 			name: "Manticore Small Wings",
 			metamorphCost: 100,
@@ -181,7 +181,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTICORE_LARGE:int = 15;
+		public static const MANTICORE_LARGE:int = 15
 		EnumValue.add(Memories, MANTICORE_LARGE, "MANTICORE_LARGE", {
 			name: "Manticore Large Wings",
 			metamorphCost: 200,
@@ -191,7 +191,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const VAMPIRE:int = 16;
+		public static const VAMPIRE:int = 16
 		EnumValue.add(Memories, VAMPIRE, "VAMPIRE", {
 			name: "Vampire Wings",
 			metamorphCost: 100,
@@ -201,7 +201,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const NIGHTMARE:int = 17;
+		public static const NIGHTMARE:int = 17
 		EnumValue.add(Memories, NIGHTMARE, "NIGHTMARE", {
 			name: "Nightmare Wings",
 			metamorphCost: 200,
@@ -211,7 +211,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FEATHERED_SPHINX:int = 18;
+		public static const FEATHERED_SPHINX:int = 18
 		EnumValue.add(Memories, FEATHERED_SPHINX, "FEATHERED_SPHINX", {
 			name: "Sphinx Wings",
 			metamorphCost: 100,
@@ -221,7 +221,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const THUNDEROUS_AURA:int = 19;
+		public static const THUNDEROUS_AURA:int = 19
 		EnumValue.add(Memories, THUNDEROUS_AURA, "THUNDEROUS_AURA", {
 			name: "Thunderous Aura (Wings)",
 			metamorphCost: 100,

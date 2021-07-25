@@ -92,18 +92,14 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Scorpion tail
 		if (player.arms.type == Arms.LION && changes < changeLimit && player.tailType != Tail.GARGOYLE && player.tailType != Tail.SCORPION && player.tailType != Tail.MANTICORE_PUSSYTAIL && rand(2) == 0) {
-			if (player.tailType != Tail.NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");
-			else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a scorpion tail.</b>");
-			mutations.setTailType(Tail.SCORPION);
-			player.tailVenom = 15;
-			player.tailRecharge = 5;
+      outputText("\n\n");
+      CoC.instance.transformations.TailScorpion.applyEffect();
 			changes++;
 		}
 		//PussyTail (only females)
 		if ((player.gender == 2 || (player.gender == 3 && player.mf("m", "f") == "f")) && player.tailType == Tail.SCORPION && changes < changeLimit && player.tailType != Tail.MANTICORE_PUSSYTAIL && rand(2) == 0) {
-			outputText("\n\nYour scorpion tail starts shifting as your stinger falls to the ground, leaving you with a wide hole at the tip of your tail. You have a feeling of emptiness in your tail, like if it was hollowed from the inside. The end of your tail where the stinger used to be suddenly explodes into a flower-like bulb of flesh. The petals open into what looks like the inside of a pussy, its folds moist and well lubricated. Right after the previous transformation’s finished, spikes start to grow out of the bulbous tip giving your tail tip the appearance of a spiked bulb. ");
-			outputText("Flinging your tail randomly to test your new appendage you shoot one of them straight into a nearby tree. You idly wonder what it will feel like to milk men with this.  <b>It seems you've grown the tail of a manticore.</b>");
-			mutations.setTailType(Tail.MANTICORE_PUSSYTAIL);
+			outputText("\n\n");
+			CoC.instance.transformations.TailManticore.applyEffect();
 			changes++;
 		}
 		//Wings
@@ -127,9 +123,9 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Back(Rear) body
 		if ((player.wings.type == Wings.MANTICORE_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_LARGE) && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
-			mutations.setRearBody(RearBody.LION_MANE);
-			changes++;
+			outputText("\n\n");
+      CoC.instance.transformations.RearBodyLionMane.applyEffect();
+      changes++;
 		}
 		//Ears
 		if (player.rearBody.type == RearBody.LION_MANE && player.ears.type == Ears.HUMAN && player.ears.type != Ears.LION && changes < changeLimit && rand(3) == 0) {

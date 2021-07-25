@@ -307,12 +307,12 @@ public class MaraFruit extends Consumable{
 			outputText("\n\nYour close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation. The feeling is short lived as your feet suddenly tingle with a weird feeling. Opening your eyes you look down in panic as your feet roots themselves in the ground and start to merge together up to your pussy into a trunk which turn a shade of green darker than the rest of your body. Your tentacle wings have also moved down to your feet tips but the weirdest thing happens when everything below your waist grows bloated, easily becoming twice as large as you are. ");
 			outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explodes in a orchid of enormous size with petals large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
 			if (player.tailType != 0) {
-				if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen");
-				else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails");
-				else outputText(" Your tail");
-				outputText(" recedes back into your body, disappearing entirely into your backside as if it never existed.");
+				if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen recedes");
+				else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails recede");
+				else outputText(" Your tail recedes");
+				outputText(" back into your body, disappearing entirely into your backside.");
 			}
-			if (player.tailType != 0) mutations.setTailType(0);
+			CoC.instance.transformations.TailNone.applyEffect(false);
 			CoC.instance.transformations.WingsNone.applyEffect(false);
 			mutations.setLowerBody(LowerBody.PLANT_FLOWER);
 			player.coatColor = "pink";

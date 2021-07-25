@@ -937,7 +937,7 @@ private function exgartuanSleepSurprise():void {
 		outputText(" deposit.  Quiet, barely audible squishes hang in the air around you as your gut is ");
 		if(cumQ < 500) outputText("pumped into");
 		else outputText("pumped full");
-		outputText(" with obscene, liquid sloshing.  Your " + hipDescript() + " and " + assDescript() + " rise off the ground with your back as your muscles lock");
+		outputText(" with obscene, liquid sloshing.  Your " + hipDescript() + " and [ass] rise off the ground with your back as your muscles lock");
 		if(player.balls > 0) outputText(" and your [balls] pull tight against your groin from the effort");
 		outputText(".");
 		cumQ = player.cumQ();

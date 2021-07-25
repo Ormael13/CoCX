@@ -120,7 +120,7 @@ public class YukiOnnaScene extends BaseContent
 				}
 				if (player.hairLength < 25) player.hairLength = 25;
 				CoC.instance.transformations.WingsLevitation.applyEffect(false);
-				CoC.instance.mutations.setRearBody(RearBody.GLACIAL_AURA);
+				CoC.instance.transformations.RearBodyGlacialAura.applyEffect(false);
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}

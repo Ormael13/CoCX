@@ -237,7 +237,7 @@ use namespace CoC;
 
 				outputText("Hands slide over you, stroking and patting your equine form. The roving fingers find their way to your rear quickly, and begin teasing around your " + vaginaDescript() + " and " + assholeDescript() + ". They probe around but don't penetrate and you stamp your hoof in frustration. There's a chuckle from behind you and all but a handful of the hands disappear.\n\n");
 
-				outputText("A slightly larger hand smacks your " + assDescript() + " then slides up and pops a thick finger inside. Your " + assholeDescript() + " tries to suck it in deeper, but loses the opportunity as it's extracted before doing anything. Instead, the hand returns to your flank and slides slowly forward to your torso.\n\n");
+				outputText("A slightly larger hand smacks your [ass] then slides up and pops a thick finger inside. Your " + assholeDescript() + " tries to suck it in deeper, but loses the opportunity as it's extracted before doing anything. Instead, the hand returns to your flank and slides slowly forward to your torso.\n\n");
 
 				outputText("The 'head' imp comes around into your vision, hovering in front of you and letting you get a good look at his long member. He pulls on it, extracting a large bead of pre onto his other hand. Opening your mouth, he wipes the salty substance onto your tongue. You swallow it happily and feel your mouth watering and your " + vaginaDescript() + " pumping out fluid.\n\n");
 
@@ -250,7 +250,7 @@ use namespace CoC;
 
 				outputText("At the edge of the clearing is the leader, laughing as he watches you and still jerking himself. As if realizing that there's a better option available, he grabs the defeated imp and inserts himself into him, using him like a living cock sleeve who appears to not mind the position and cries out repeatedly as his ass is abused.\n\n");
 
-				outputText("Your unexpected running momentarily paused the cocks inside you as their owners groped for holds on your " + hipDescript() + " and " + assDescript() + ". With their positions relatively well established, they begin pounding at you again, causing you to nearly stumble in pleasure.\n\n");
+				outputText("Your unexpected running momentarily paused the cocks inside you as their owners groped for holds on your " + hipDescript() + " and [ass]. With their positions relatively well established, they begin pounding at you again, causing you to nearly stumble in pleasure.\n\n");
 
 				outputText("Managing to steady yourself, you run faster, feeling the frenetic cocks inside you explode. The hot spunk sprays about inside and you scream in ecstasy.");
 				//[Has breasts:

@@ -314,7 +314,7 @@ use namespace CoC;
 			outputText("With a new sense of purpose and the thrill of the coming hunt you return to your camp. Let Lethice and her Demons tremble in the cold of the coming winter; Mareth has something far greater to fear now. Your ice will spread and cover the world of the living until all know and shiver at the name of <b>Fenrir</b>.\n\n");
       if (player.faceType == Face.ANIMAL_TOOTHS) CoC.instance.transformations.FaceWolf.applyEffect(false);
 			CoC.instance.transformations.EyesFenrir.applyEffect(false);
-			CoC.instance.mutations.setRearBody(RearBody.FENRIR_ICE_SPIKES);
+			CoC.instance.transformations.RearBodyFenrirIceSpikes.applyEffect(false);
 			player.createPerk(PerkLib.ColdMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FromTheFrozenWaste, 0, 0, 0, 0);

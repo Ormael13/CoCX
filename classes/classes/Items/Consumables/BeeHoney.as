@@ -205,11 +205,8 @@ public class BeeHoney extends Consumable
 			}
 			//Bee butt - 66% lower chance if already has a tail
 			if (changes < changeLimit && player.tailType != Tail.BEE_ABDOMEN && player.lowerBody != LowerBody.GARGOYLE && (player.tailType == Tail.NONE || Utils.rand(1.5) == 0) && Utils.rand(4) == 0) {
-				if (player.tailType > Tail.NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.");
-				else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a bee's abdomen.</b>");
-				mutations.setTailType(Tail.BEE_ABDOMEN,1);
-				player.tailVenom = 10;
-				player.tailRecharge = 5;
+				outputText("\n\n");
+				CoC.instance.transformations.TailBee.applyEffect();
 				changes++;
 			}
 			//Venom Increase
@@ -244,10 +241,8 @@ public class BeeHoney extends Consumable
 			}
 			//Remove gills!
 			if (Utils.rand(4) == 0 && player.hasGills() && changes < changeLimit) {
-				if (player.gills.type == Gills.ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
-				else outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water quite so long anymore.");
-				outputText("  <b>You no longer have gills!</b>");
-				mutations.updateGills(Gills.NONE);
+				outputText("\n\n");
+				CoC.instance.transformations.GillsNone.applyEffect();
 				changes++;
 			}
 

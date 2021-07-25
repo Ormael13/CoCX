@@ -1237,7 +1237,7 @@ use namespace CoC;
 			}
 			//Reduce excessive anal wetness
 			if (player.ass.analWetness >= AssClass.WETNESS_SLIMY) {
-				outputText("The constant fluids leaking from your " + assDescript() + " slow down, then stop.  ");
+				outputText("The constant fluids leaking from your [ass] slow down, then stop.  ");
 				player.ass.analWetness = AssClass.WETNESS_MOIST;
 				changes++;
 			}

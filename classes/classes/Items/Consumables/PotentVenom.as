@@ -119,10 +119,8 @@ public class PotentVenom extends Consumable {
 		}
 		//NeckMaxilipeds
 		if (player.lowerBody == LowerBody.CENTIPEDE && player.rearBody.type != RearBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour neck tingles and begins to itch all of a sudden. You reach up to scratch when your fingers brush up against something hard. " +
-					"You look down to find a pair of grasping pincer like stingers around your neck. They open and close at will and tuck away easily when not in use. " +
-					"<b>It will be easier to hold onto and bite enemies with your new maxillipeds.</b>");
-			mutations.setRearBody(RearBody.CENTIPEDE);
+			outputText("\n\n");
+			CoC.instance.transformations.RearBodyCentipede.applyEffect();
 			changes++;
 		}
 		//Eyes

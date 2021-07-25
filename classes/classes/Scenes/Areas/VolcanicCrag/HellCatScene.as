@@ -249,8 +249,6 @@ public function WitchesSabbathThirdVisitYes():void {
 	if (player.tone > 0) player.tone = 0;
 	player.modFem(100, 100);
 	outputText(" The heat is almost gone, it heads for your tail exploding there in a sheath of flame before spiraling toward your head.");
-	mutations.setTailType(Tail.BURNING);
-	if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
 	outputText(" All of these pleasurable changes are driving you insane with desire to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead.");
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
 	outputText("\n\n");
@@ -260,6 +258,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire you having some hellish hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good and hell with a body like yours going in heat likely is going to be a recurring two sided joke. <b>You were altered and transformed into a Hellcat!</b>");
 
+	CoC.instance.transformations.TailBurning.applyEffect(false);
 	CoC.instance.transformations.HairBurning.applyEffect(false);
 	CoC.instance.transformations.EyesInfernal.applyEffect(false);
 	if (rand(2) == 0) player.goIntoRut(false);
@@ -301,8 +300,6 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 	player.modFem(100, 100);
 	if (playerWasAlreadyHerm) outputText(" your body begins to change.");
 	outputText(" The heat heads for your tail exploding there in a sheath of flame before spiraling toward your head.");
-	mutations.setTailType(Tail.BURNING);
-	if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
 	outputText(" All of these pleasurable changes are driving you insane with desire to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead.");
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
@@ -310,6 +307,7 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 	player.hairColor = "midnight black";
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire you having some hellish hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good.");
+	CoC.instance.transformations.TailBurning.applyEffect(false);
 	CoC.instance.transformations.EyesInfernal.applyEffect(false);
 	CoC.instance.transformations.HairBurning.applyEffect(false);
 	if (rand(2) == 0) player.goIntoRut(false);
