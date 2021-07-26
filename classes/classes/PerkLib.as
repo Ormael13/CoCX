@@ -2578,6 +2578,9 @@ public class PerkLib
 		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Prestige Job: Arcane Archer",
 				"You've trained in prestige art of combining magic and arrows. (+40 to max spe/int - scalable)",
 				"You've chosen the 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.").withBuffs({'spe.mult':0.40,'int.mult':0.40});
+		public static const PrestigeJobArchpriest:PerkType = mk("Prestige Job: Arch-priest", "Prestige Job: Arch-priest",
+				"You've trained in prestige art of divine magic. (+40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower)",
+				"You've chosen the 'Prestige Job: Arch-priest' perk, training yourself to became Arch-priest.").withBuffs({'tou.mult':0.40,'int.mult':0.40});
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking. (+60 to max str, +20 to max tou - scalable)",
 				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':0.60,'tou.mult':0.20});
@@ -5205,11 +5208,16 @@ public class PerkLib
                     .requireInt(200)
                     .requireLevel(42)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;// || player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2
-                    }, "Finished a certain black mage quest line up to the third part of the training");//Siegweird
-			DarkRitual.requirePerk(HexKnowledge)
-					.requireInt(200)
-					.requireLevel(45);
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;
+                    }, "Finished a certain black mage quest line up to the third part of the training");//Alvina
+        	PrestigeJobArchpriest.requirePrestigeJobSlot()
+                    .requirePerk(JobEnchanter)
+                    .requirePerk(JobGuardian)
+                    .requireInt(200)
+                    .requireLevel(42)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 1;
+                    }, "Finished a certain paladin quest line up to the second part of the training");//Siegweird
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)
@@ -5233,7 +5241,10 @@ public class PerkLib
                     .requireInt(300)
                     .requirePerk(PeerlessSpirituality)
                     .requireLevel(54);
-            RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
+            DarkRitual.requirePerk(HexKnowledge)
+					.requireInt(250)
+					.requireLevel(54);
+			RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
                     .requirePerk(RagingInfernoEx)
                     .requireLevel(54)
                     .requireInt(300);

@@ -10448,6 +10448,8 @@ use namespace CoC;
 			var prestigeJobs1:Number = 0;
 			if (hasPerk(PerkLib.PrestigeJobArcaneArcher))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobArchpriest))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBerserker))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBindmaster))

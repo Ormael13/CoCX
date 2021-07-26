@@ -135,12 +135,18 @@ package classes.Scenes
 			outputText("-New tier 3 intelligence lvl-up perk: Defensive Staff Channeling. Req. Staff Channeling and Job: Enchanter perks, knowing any defensive spell, 120+ int. Effect: When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
 			outputText(" (Mana shield would be able to absorb more damage per mana spent and blizzard would last longer or block more fire attacks before vanishing)\n");
 			outputText("-For staff channeling perk effects would now count also weapons that are only 'partial' staffs like inscribed spellblade or demonic scythe.\n");
-			outputText("-\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Arch-priest. Req. Jobs: Guardian and Enchanter, 200+ int, finishing second part of certain paladin npc training. Effect: +40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower.\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen\n");/*ostatni punkt changelogu
@@ -156,6 +162,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -224,7 +231,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -264,7 +273,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

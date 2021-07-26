@@ -261,6 +261,7 @@ use namespace CoC;
 		public function AddMaxBackpack03():void {
 			outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobArchpriest)) player.createPerk(PerkLib.PrestigeJobArchpriest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
@@ -4227,4 +4228,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}
