@@ -290,7 +290,6 @@ public class LowerBody extends SaveableBodyPart {
 		name: "wolf",
 		appearanceDesc: "{legCount} digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.",
 		canPounce: true
-
 	});
 
 	public static const PLANT_FLOWER:int = 34;
@@ -302,8 +301,6 @@ public class LowerBody extends SaveableBodyPart {
 		tentacle: true,
 		isAlraune: true
 	});
-
-
 
 	public static const LION:int = 35;
 	EnumValue.add(Types, LION, "LION", {
