@@ -4890,7 +4890,7 @@ public function wakeFromBadEnd():void {
 			if (refundAscensionPerks) {
 				doNext(CoC.instance.charCreation.migrationAscension);
 			} else {
-				doCamp;
+				doCamp();
 			}
 
 			return;
