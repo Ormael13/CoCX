@@ -164,9 +164,9 @@ public class HeXinDao extends BaseContent
     public function riverislandVillageStuff():void {
         spriteSelect(-1);
         clearOutput();
-        outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. Aside from bridges connecting each of the islands together, two larger ones connects them as a whole to both sides of the river serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing people to use the bridges if they wish to enter.\n"); //Side question, why can't the ones with wings fly in?
-        //outputText("\n\nNear one of major briges is located merchant area with various smaller or larger places where all visitors can buy or sell various items. Among then two attracts most attention with first been largest stall here and other largest shop. On almost opposite side of village near other brige is located medium sized shop with sign indicating it govern local exchanges and transformation items market.");
-        //outputText("\n\nAt the island located on west end of He'Xin'Dao you see one of biggest buildings here. From sounds of weapon clashing it seems to be some kind of local arena.");
+        outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. Aside from bridges connecting each of the islands together, two larger ones connects them as a whole to both sides of the river serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing people to use the bridges if they wish to enter.\n");
+        outputText("\n\nNear one of major briges is located merchant area with various smaller or larger places where all visitors can buy or sell various items. Among then two attracts most attention with first been largest stall here and other largest shop. On almost opposite side of village near other brige is located medium sized shop with sign indicating it govern local exchanges and transformation items market.");
+        outputText("\n\nAt the island located on west end of He'Xin'Dao you see one of biggest buildings here. From sounds of weapon clashing it seems to be some kind of local arena.");	//Side question, why can't the ones with wings fly in?
         //outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
         riverislandMenuShow();
     }
@@ -223,12 +223,14 @@ public class HeXinDao extends BaseContent
 			menu();
             addButton(0, "LGSFRecovPill", buyItem1,consumables.LG_SFRP,
 					sayLine1(consumables.LG_SFRP,"It's a rather quite useful item for all soul cultivators, this little pill can help you restore some of your soulforce.")).hint("Low-grade Soulforce Recovery Pill.");
-			addButton(1, "Bag of Cosmos", buyItem1,consumables.BAGOCOS,
-					sayLine1(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
-			addButton(2, "E.P.Bottle", buyItem1,useables.E_P_BOT,
+			addButton(1, "E.P.Bottle", buyItem1,useables.E_P_BOT,
 					sayLine1(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills,they must be consumed shortly after opening the bottle or they would lose their effects. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
-			addButton(3, "IncenOfInsig", buyItem1,consumables.INCOINS,
+			addButton(2, "IncenOfInsig", buyItem1,consumables.INCOINS,
 					sayLine1(consumables.INCOINS,"These incenses are quite special. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(3, "Fasting Pill", buyItem2,consumables.FATPILL,
+					sayLine1(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.");
+			addButton(4, "Bag of Cosmos", buyItem1,consumables.BAGOCOS,
+					sayLine1(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
 				addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN,
 						sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust, this very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."),
@@ -246,30 +248,36 @@ public class HeXinDao extends BaseContent
 						sayLine2(consumables.HOB1MAN,"It's a manual for Hail of Blades, this simple technique allows you to form few etheral weapons traveling at extreme speeds that will become stronger and stronger as you train your body and soul."),
 						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  "
 				).hint("Hail of Blades Manual.");
-				if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(13, "Fasting Pill", buyItem2,consumables.FATPILL,
-						sayLine1(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.");
 			}
+			addButton(10, "FlamesOfLove", buyItem1,consumables.FOLBMAN,
+					sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."),
+					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Flames of Love (Rankless) Manual.");
+			addButton(11, "IciclesOfLove", buyItem1,consumables.IOLBMAN,
+					sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."),
+					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Icicles of Love (Rankless) Manual.");
+			addButton(12, "SoSisterhood", buyItem1,consumables.SOSBMAN,
+					sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into ligthing."),
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Storm of Sisterhood (Rankless) Manual.");
+			addButton(13, "NoBrotherhood", buyItem1,consumables.NOBBMAN,
+					sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."),
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Night of Brotherhood (Rankless) Manual.");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
 		function TierII():void {
 			menu();
-			addButton(0, "Flames of Love (B)", buyItem2,consumables.FOLBMAN,
-					sayLine2(consumables.FOLBMAN,"It's a manual for Flames of Love (Basic Rank), this simple technique allows you to convert excess lust into flames."),
-					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
-			).hint("Flames of Love (Basic Rank) Manual.");
-			addButton(1, "Icicles of Love (B)", buyItem2,consumables.IOLBMAN,
-					sayLine2(consumables.IOLBMAN,"It's a manual for Icicles of Love (Basic Rank), this simple technique allows you to covert excess lust into icicles."),
-					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
-			).hint("Icicles of Love (Basic Rank) Manual.");
-			addButton(2, "Storm of Sisterhood (B)", buyItem2,consumables.SOSBMAN,
-					sayLine2(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Basic Rank), this simple technique allows you to convert excess wrath into ligthing."),
-					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
-			).hint("Storm of Sisterhood (Basic Rank) Manual.");
-			addButton(3, "Night of Brotherhood (B)", buyItem2,consumables.NOBBMAN,
-					sayLine2(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Basic Rank), this simple technique allows you to covert excess wrath into darkness."),
-					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
-			).hint("Night of Brotherhood (Basic Rank) Manual.");
+			addButton(0, "Comet", buyItem2,consumables.COMETMA,
+					sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),
+					"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
+			).hint("Comet Manual.");
+			addButton(1, "V P Trans", buyItem2,consumables.VPTRMAN,
+					sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power that would fill your whole body allowing you to recover even from the brink of death.  It's only flaw is that it constantly drains the cultivator's soulforce so you could end up in a tight situation without enough soulforce to use other skills."),
+					"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It should give you another edge during your crusade against demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  "
+			).hint("Violet Pupil Transformation Manual.");
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) {
 				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
 						sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts that will become stronger and stronger as you train your body and soul."),
@@ -282,15 +290,7 @@ public class HeXinDao extends BaseContent
 			}
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) {
 				addButton(7, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
-						sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Warrior stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
-				addButton(8, "Comet", buyItem2,consumables.COMETMA,
-						sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),
-						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
-				).hint("Comet Manual.");
-				addButton(9, "V P Trans", buyItem2,consumables.VPTRMAN,
-						sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power that would fill your whole body allowing you to recover even from the brink of death.  It's only flaw is that it constantly drains the cultivator's soulforce so you could end up in a tight situation without enough soulforce to use other skills."),
-						"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It should give you another edge during your crusade against demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  "
-				).hint("Violet Pupil Transformation Manual.");
+					sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Warrior stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
 			}
             addButton(14, "Back", golemmerchant);
             statScreenRefresh();

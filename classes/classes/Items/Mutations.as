@@ -466,8 +466,8 @@ public final class Mutations extends MutationsHelper {
     //	}
     public function fasteningpill(player:Player):void {
         outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a sensation of your stomach been full.");
-        if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 24);
-        else player.createStatusEffect(StatusEffects.FastingPill, 73, 0, 0, 0);
+        if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 8);
+        else player.createStatusEffect(StatusEffects.FastingPill, 25, 0, 0, 0);
         statScreenRefresh();
     }
 
@@ -693,12 +693,27 @@ public final class Mutations extends MutationsHelper {
         player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
     }
 
-    public function basicflamesoflovemanual(player:Player):void {
+    public function flamesoflovemanualrankless(player:Player):void {
+        clearOutput();
+        if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
+    }
+
+    public function flamesoflovemanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
                 return;
             }
@@ -713,19 +728,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function higherrankflamesoflovemanual(player:Player):void {
+    public function iciclesoflovemanualrankless(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (burning hot) flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love ( Rank).</b>");
-        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
     }
 
-    public function basiciciclesoflovemanual(player:Player):void {
+    public function iciclesoflovemanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Low Rank).</b>");
                 player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
                 return;
             }
@@ -740,19 +763,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function higherrankiciclesoflovemanual(player:Player):void {
+    public function stormofsisterhoodmanualrankless(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (freezing cold) icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love ( Rank).</b>");
-        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
     }
 
-    public function basicstormofsisterhoodmanual(player:Player):void {
+    public function stormofsisterhoodmanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
                 return;
             }
@@ -767,12 +798,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function basicnightofbrotherhoodmanual(player:Player):void {
+    public function nightofbrotherhoodmanualrankless(player:Player):void {
+        clearOutput();
+        if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
+    }
+
+    public function nightofbrotherhoodmanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
                 return;
             }
@@ -3933,24 +3979,42 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
 				return;
 			}
+			//Smart enough for Blood Shield and doesnt have it
+			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Shield.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodShield, 0, 0, 0, 0);
+				return;
+			}
 			//Smart enough for Blood Explosion and doesnt have it
-			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
 				return;
-			}/*
-			//Smart enough for  and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			}
+			//Smart enough for Blood Chains and doesnt have it
+			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Chains.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodChains, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for  and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Blood Wave and doesnt have it
+			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Wave.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodWave, 0, 0, 0, 0);
 				return;
-			}*/
+			}
+			//Smart enough for Lifesteal Enchantment and doesnt have it
+			if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Lifesteal Enchantment.</b>");
+				player.createStatusEffect(StatusEffects.KnowsLifestealEnchantment, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Field and doesnt have it
+			if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Field.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodField, 0, 0, 0, 0);
+				return;
+			}
 		}
 	}
 
@@ -3977,23 +4041,29 @@ public final class Mutations extends MutationsHelper {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
 				return;
+			}
+			//Smart enough for Heart Seeker and doesnt have it
+			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Heart Seeker.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeartSeeker, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Dewdrops and doesnt have it
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Dewdrops.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Requiem and doesnt have it
+			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
+				return;
 			}/*
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Scarlet Spirit Charge and doesnt have it
+			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Scarlet Spirit Charge.</b>");
+				player.createStatusEffect(StatusEffects.KnowsScarletSpiritCharge, 0, 0, 0, 0);
 				return;
 			}*/
 		}
@@ -4003,23 +4073,29 @@ public final class Mutations extends MutationsHelper {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
 				return;
+			}
+			//Smart enough for SF Infused Heart Seeker and doesnt have it
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Heart Seeker.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeartSeekerSF, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for SF Infused Blood Dewdrops and doesnt have it
+			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Dewdrops.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for SF Infused Blood Requiem and doesnt have it
+			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
+				return;
 			}/*
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for SF Infused Scarlet Spirit Charge and doesnt have it
+			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Scarlet Spirit Charge.</b>");
+				player.createStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF, 0, 0, 0, 0);
 				return;
 			}*/
 		}

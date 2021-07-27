@@ -135,8 +135,8 @@ private function acceptDominikasKnowledge():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] = 7 + rand(3);
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n");
 
-		//[If player knows all spells]
-		if(player.spellCountWhiteBlack() == 17) {
+		//[If player knows all white/black spells]
+		if(player.spellCountWhiteBlack() == 19) {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154] == 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n");
@@ -219,6 +219,14 @@ private function acceptDominikasKnowledge():void {
 			else if(!player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				player.createStatusEffect(StatusEffects.KnowsBlizzard,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Blizzard</b>");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
+				player.createStatusEffect(StatusEffects.KnowsFireStorm,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Fire Storm</b>");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
+				player.createStatusEffect(StatusEffects.KnowsIceRain,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Ice Rain</b>");
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL ORMAEL VIA DISCORD (link to it in Fenoxo forum mod thread first post)==");
 			dynStats("int", 2);

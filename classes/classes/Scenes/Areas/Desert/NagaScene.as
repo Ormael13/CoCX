@@ -1030,7 +1030,7 @@ public function naggaSqueeze():void {
 	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
@@ -1153,7 +1153,7 @@ public function naggaTease():void {
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 		damage *= damagemultiplier;
         //Determine if critical tease!
@@ -1283,4 +1283,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

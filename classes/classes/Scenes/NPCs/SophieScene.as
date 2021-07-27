@@ -501,7 +501,7 @@ private function cramANippleInIt():void {
 	//(Low PG)
 	if(player.biggestLactation() < 2) {
 		outputText("She suckles harder and harder until your feel your milk let down.  A pleasant trickle of your breast-milk leaks from your " + nippleDescript(0) + " into her mouth.  Sophie's arms close around your back, allowing her to lock herself onto you as she giddily sucks down your liquid nutrients.  The expression on her ");
-		if(monster.HP < 1) outputText("battered ");
+		if(monster.HP <= monster.minHP()) outputText("battered ");
 		else outputText("lusty ");
 		outputText("visage is one of pure satisfaction, and you wonder at her strange love of milk.  The harpy empties the first nipple and moves on to the ");
 		if(player.totalNipples() > 2) outputText("next");
@@ -544,7 +544,7 @@ private function cramANippleInIt():void {
 	outputText("  She wipes a bit of milk from her lips and says, \"<i>");
     if (CoC.instance.inCombat) {
         //(Fought HP won:
-		if(monster.HP < 1) outputText("You know you don't have to beat me up to get me to drink your milk right? It's too delicious to turn down!</i>\"\n\n");
+		if(monster.HP <= monster.minHP()) outputText("You know you don't have to beat me up to get me to drink your milk right? It's too delicious to turn down!</i>\"\n\n");
 		//(Fought Lust won:
 		else {
 			outputText("Mmmm, you sure know how to get a woman's blood pumping before you give her what she wants, don't you?");
@@ -909,7 +909,7 @@ internal function sophieLostCombat():void {
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
 	clearOutput();
 	outputText("Sophie is down!  ");
-	if(monster.HP < 1) outputText("She's too wounded to fight, and she lies in a miserable heap in the nest.");
+	if(monster.HP <= monster.minHP()) outputText("She's too wounded to fight, and she lies in a miserable heap in the nest.");
 	else outputText("She's too turned on to be a threat and is happily masturbating.");
 	//RAEP OPTIONS
 	if(player.gender != 0) {
@@ -958,7 +958,7 @@ private function maleVictorySophieRape():void {
 	var x:Number = player.cockThatFits(232);
 	clearOutput();
 	outputText("Sophie is ");
-	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.");
+	if(monster.HP <= monster.minHP()) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.");
 	else outputText("too turned on to resist, and is vigorously fisting her large pussy.");
 	outputText("  Not satisfied with a simple victory, you undress and expose your ");
 	if(player.lust > 90) outputText("dripping ");
@@ -1049,7 +1049,7 @@ private function sophieVictoryPussyGrind():void {
 	sophieBimbo.sophieSprite();
 	clearOutput();
 	outputText("Sophie is ");
-	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.");
+	if(monster.HP <= monster.minHP()) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.");
 	else outputText("too turned on to resist, and is vigorously fisting her large pussy.  You pull her feathery arm from the horny snatch and shove it to the side.");
 	outputText("  This harpy needs a lesson in how to enjoy the touch of another woman.   You force her thighs apart, but she pulls them closed before you can do anything.  Growling in irritation, you give her feathery ass a slap and yank them the whole way open.  Sophie gains the presence of mind to glare up at you and scold, \"<i>Little girl, I do not want or need you or your pussy.</i>\"\n\n");
 	
@@ -1108,7 +1108,7 @@ private function fuckDatClit():void {
 	sophieBimbo.sophieSprite();
 	clearOutput();
 	outputText("Sophie is ");
-	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.");
+	if(monster.HP <= monster.minHP()) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.");
 	else outputText("too turned on to resist, and is vigorously fisting her large pussy.  You pull her feathery arm from the horny snatch and shove it to the side.");
 	outputText("  This harpy needs a lesson in how to enjoy the touch of another woman.   You force her thighs apart, but she pulls them closed before you can do anything.  Growling in irritation, you give her feathery ass a slap and yank them the whole way open.  Sophie gains the presence of mind to glare up at you and scold, \"<i>Little girl, I do not want or need you or your pussy.</i>\"\n\n");
 	

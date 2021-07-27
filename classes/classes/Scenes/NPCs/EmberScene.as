@@ -2089,80 +2089,80 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1) flags[kFLAGS.EMBER_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 4 && flags[kFLAGS.EMBER_LVL_UP] < 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 24);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 24, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 1;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 5 && flags[kFLAGS.EMBER_LVL_UP] == 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 30);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 30, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 6 && flags[kFLAGS.EMBER_LVL_UP] == 2) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 36);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 36, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 3;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 7 && flags[kFLAGS.EMBER_LVL_UP] == 3) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 42);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 42, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 4;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 8 && flags[kFLAGS.EMBER_LVL_UP] == 4) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 48);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 48, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 5;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 9 && flags[kFLAGS.EMBER_LVL_UP] == 5) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 54);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 54, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 6;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 10 && flags[kFLAGS.EMBER_LVL_UP] == 6) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 60);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 60, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 7;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 11 && flags[kFLAGS.EMBER_LVL_UP] == 7) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 66);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 66, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 8;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 12 && flags[kFLAGS.EMBER_LVL_UP] == 8) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 72);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 72, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 9;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 13 && flags[kFLAGS.EMBER_LVL_UP] == 9) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 78);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 78, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 10;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 14 && flags[kFLAGS.EMBER_LVL_UP] == 10) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 84);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 84, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 11;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 15 && flags[kFLAGS.EMBER_LVL_UP] == 11) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 90);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 90, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 12;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 16 && flags[kFLAGS.EMBER_LVL_UP] == 12) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 96);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 96, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 13;
 				}

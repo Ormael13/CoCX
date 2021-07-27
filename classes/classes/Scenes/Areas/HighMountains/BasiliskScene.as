@@ -66,7 +66,7 @@ public class BasiliskScene extends BaseContent
 			spriteSelect(75);
 			clearOutput();
 			//Player HP victory: 
-			if(monster.HP < 1) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops its head and looks at the ground, evidently demonstrating submission.");
+			if(monster.HP <= monster.minHP()) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops its head and looks at the ground, evidently demonstrating submission.");
 			//Player Lust victory: 
 			else outputText("No longer able to control its raging erection, the basilisk closes its eyes and sinks to one knee.  It would probably be attempting to signal its submission to you if it weren't furiously masturbating its long, purple cock, which has emerged straining from the creature's genital slit.");
 		
@@ -588,7 +588,7 @@ public class BasiliskScene extends BaseContent
 			spriteSelect(75);
 			clearOutput();
 			outputText("Leaning back on your carapace-clad abdomen, you try and look over your defeated opponent.  Even slumped over in ");
-			if(monster.HP < 1) outputText("exhaustion");
+			if(monster.HP <= monster.minHP()) outputText("exhaustion");
 			else outputText("arousal");
 			outputText(", the basilisk is still striving to meet your eyes with its own.  Clenching your teeth, you avert your eyes and stomp forward blindly, colliding roughly with the spined lizard, knocking him flat on his back on the rocky ground.");
 			
@@ -641,7 +641,7 @@ public class BasiliskScene extends BaseContent
 			if(player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
 			else outputText("saunter arrogantly over to the basilisk's crumpled up figure");
 			outputText(" and lightly nudge him in his ribs with your [foot].  His eyes are closed from to the ");
-			if(monster.HP < 1) outputText("pain");
+			if(monster.HP <= monster.minHP()) outputText("pain");
 			else outputText("arousal");
 			outputText(" he's currently suffering through, but you know they won't stay that way for long.  You zealously search through your bags for some extra undergarments and wrap them around the lizard beast's scaly visage; with a quick afterthought, you reach for his talons and tie them to his face, atop his eyes in mock mourning for what is about to happen.  You let out another perverse giggle and wonder vaguely if there is anything more you can do to make this situation more humiliating for the beast.");
 			

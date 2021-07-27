@@ -31,6 +31,8 @@ package classes.Scenes
 			outputText("<b>Version 0.8s:</b>\n\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Flying Sword Path. Req. Job: Soul Cultivator perk. Effect: Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Soaring Blades. Req. Dantain and Flying Sword Path perks. Effect: Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.\n");
+			outputText("-New tier 0 intelligence lvl-up perk: Grey Magic. Req. One of 4 white spells: Whitefire, Pyre Burst, Lightning Bolt, Chain Lighting AND One of black spells: Ice Spike, Arctic Gale, Darkness Shard, Dusk Wave; 50+ int. Effect: Access to learn and cast grey magic spells. (+30 to max lust)\n");
+			outputText("-New tier 1 intelligence lvl-up perk: Grey Mage Apprentice. Req. Grey Magic perk and 75+ int. Effect: Increases grey spell strength by 10%, mana pool by 150, lust bar by 20, regain it 25% faster.\n");
 			outputText("-New tier 0 misc lvl-up perk: Venomous Adipose Tissue. Req. 10+ tou and having 100 points in venom/web pool. Effect: Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)\n");
 			outputText("-New tier 0 misc lvl-up perk: Venomous Diet. Req. Enabled hunger mode and having 100 points in venom/web pool. Effect: Increase venom/web recharge speed based on current hunger level.\n");
 			outputText("-New tier 2 misc lvl-up perk: Higly Venomous Diet. Req. Venomous Diet perk and enabled hunger mode. Effect: Increase venom/web recharge speed at cost of faster getting hungry.\n");
@@ -39,6 +41,7 @@ package classes.Scenes
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to tou multi and +60 to wis multi (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
 			outputText("-New tier 8 wisdom lvl-up perk: Greater harvest. Req. Prestige Job: Necromancer perk. Effect: A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Grand Grey Archmage. Req. Grey Archmage perk and 225+ int. Effect: Increases grey spell strength by 40%, mana pool by 600, lust bar by 160, regain it 100% faster. Grey spells can be cast without limitation due to current lust.\n");
 			outputText("-New tier 9 wisdom lvl-up perk: Bone soul. Req. Greater harvest perk. Effect: When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%. Increase limit of stored demonic bones by 100.\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Skeleton Lord. Req. Bone soul perk. Effect: You may now control up to 10 skeleton of each type. Allow to levitate all skeletons.\n");
 			outputText("-New event perk: H class Heaven Tribulation Survivor. Gained by surviving 3 rounds of H class Heaven tribulation attacks. Effects: +10% to all stats multi/+50 to sens. Allow to comprehend Dao of Elements.\n");
@@ -73,6 +76,8 @@ package classes.Scenes
 			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
 			outputText("-Added in combat slow venom recharge.\n");
 			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
+			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting.\n");
+			outputText("-Nosferatu spell been moved to grey book. Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
 			outputText("-Jtex many code corrections.\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
 			outputText("-Lia code changes/corrections.\n");
@@ -82,20 +87,15 @@ package classes.Scenes
 			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
 			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");///Water/Air/Earth
 			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
-			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting.\n");
 			outputText("-New tier 10 soulforce lvl-up perk: Soul King. Req. Soul Tyrant and F class Heaven Tribulation Survivor perks; 200+ wis. Effect: Allow reaching 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)\n");
 			outputText("-New tier 10 soulforce lvl-up perk: Flesh Body: Overlord Stage. Req. Flesh Body: Elder Stage perk. Effect: Your reached fourth stage of body cultivating. (+10 to unarmed attack, +5 to armor, +4 to magic resistance, +500 max HP S.King, S.Emperor, S.Ancestor stages\n");
 			outputText("-New tier 10 soulforce lvl-up perk: Daoist: Overlord Stage. Req. Daoist: Elder Stage perk. Effect: Your reached fourth stage of Daoist path. (+50% soulskill/m.soulskill power, +60 max SF S.King, S.Emperor, S.Ancestor stages)\n");
 			outputText("-New tier 11 soulforce lvl-up perk: Soul Emperor. Req. Soul King perk and 220+ wis. Effect: Allow reaching 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)\n");
 			outputText("-New tier 12 soulforce lvl-up perk: Soul Ancestor. Req. Soul Emperor perk and 240+ wis. Effect: Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)\n");
-			outputText("-New tier 0 int lvl-up perk: Grey Magic. Req. One of 4 white spells: Whitefire, Pyre Burst, Lightning Bolt, Chain Lighting AND One of black spells: Ice Spike, Arctic Gale, Darkness Shard, Dusk Wave; 50+ int. Effect: Access to learn and cast grey magic spells. (+30 to max lust)\n");
-			outputText("-Nosferatu spell been moved to grey book. Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
-			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpewcted help in form of evolved twins for attacks and/or defense.\n");
-			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
+			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpected help in form of evolved twins for attacks and/or defense.\n");
+			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison, water, earth, wind, blood. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
 			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
 			outputText("-Exploring Forrest can trigger meeting with Wood Elfs. That carry a chance to become pernamenrtly TF'd into one of them. Or if correct decision will be chosen it would cause PC to never again meet them.\n");
-			outputText("-New tier 1 intelligence lvl-up perk: Grey Mage Apprentice. Req. Grey Magic perk and 75+ int. Effect: Increases grey spell strength by 10%, mana pool by 150, lust bar by 20, regain it 25% faster.\n");
-			outputText("-New tier 8 intelligence lvl-up perk: Grand Grey Archmage. Req. Grey Archmage perk and 225+ int. Effect: Increases grey spell strength by 40%, mana pool by 600, lust bar by 160, regain it 100% faster. Grey spells can be cast without limitation due to current lust.\n");
 			outputText("-Grey Mage perk tier been lowered from tier 7 to tier 3 intelligence perk. Req. changed to having perk Grey Mage Apprentice and 125+ int. Effects changed to: Increases grey spell strength by 20%, mana pool by 300, lust bar by 40, regain it 50% faster. Treshold for white/black magic use effect stays unchanged.\n");
 			outputText("-Grey Archmage perk tier been lowered from tier 10 to tier 6 intelligence perk. Req. int lowered to 175+. Effects changed to: Increases grey spell strength by 30%, mana pool by 450, lust bar by 80 and regain mana 75% faster.\n");
 			outputText("-Convergence perk tier been lowered from tier 8 to tier 6 intelligence perk. Req. int lowered to 175+. Effects unchanged.\n");
@@ -106,32 +106,64 @@ package classes.Scenes
 			outputText("-New tier 8 libido lvl-up perk: Unbreakable bind. Req. Prestige Job: Bindmaster perk. Effect: Improves all binding abilities efficiency by 100%.\n");
 			outputText("-New tier 9 libido lvl-up perk: Sadomasochism. Req. Unbreakable bind perk. Effect: You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)\n");
 			outputText("-New tier 10 libido lvl-up perk: Control freak. Req. Sadomasochism perk. Effect: Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.\n");
+			outputText("-In Journey to the east appearted yet another weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless stat points (after capping all core stats) and deeply lacking spare perk points. But be warned that service not come cheap either... but what is few stones for such rich adventure as your PC, right?\n");
+			outputText("-Fasting Pill can be bought by non cultivator PC's too. But it effectivness is now 2x lower and duration 3 times shorter.\n");
+			outputText("-Flames/Icicles of Love and Storm of Sisterhood/Night of Brotherhood soulskills been slight changed. Their are considered (Rankless) instead of (Basic Rank), they not req. any cultivation perk to be bought (that mean they on first stall of golem merchant now). Due to reduction of req. their power been decreased, less lust/wrath used and cooldown decreased to 1 turn.\n");
+			outputText("-Added Wind elmental attack type. Tornado Strike, Hurricane, Wind scythe specials dmg been changed to this new type of elemental dmg.\n");
+			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
+			outputText("-New Blood Soulskill: Heart Seeker - learned from Crimson Jade. Cost 120 health. Deal true dmg and have cooldown of 3 turns.\n");
+			outputText("-New Blood Soulskill: Blood Dewdrops - learned from Crimson Jade. Cost 240 health. Deal AoE phys dmg and have cooldown of 2 turns.\n");
+			outputText("-New Blood Soulskill: Blood Requiem - learned from Crimson Jade. Cost 150 health. Deal phys dmg and have cooldown of 4 turns. Would also reduce healing effects on enemies by 20% (constructs, elementals, flesh constructs, ghosts) / 50% (plants) / 80% (rest enemy types) for 2 turns (4 turns from SF variant). Debuff duration stacks.\n");
+			outputText("-New Blood Spell: Blood Shield - learned from Red Manuscript. Cost 20% of max Over HP. Would create crimson shield that will absorb dmg equal to cost of cast multiplied by blood spells power multiplier. In case caster already have other shields active it will the last shield that absorb the damage.\n");
+			outputText("-New Blood Spell: Blood Chains - learned from Red Manuscript. Cost 100 health. Would immobilize enemy (stun effect) for 2 turns and have cooldown of 3 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
+			outputText("-New Blood Spell: Blood Wave - learned from Red Manuscript. Cost 400 health. Deal AoE magic dmg and have cooldown of 5 turns. If used against large groups of enemies would deal much more damage.\n");
+			outputText("-New Blood Spell: Lifesteal Enchantment - learned from Red Manuscript. Cost 500 health. Adding lifesteal on melee (0.5%/1%/2%/4%) and range (1%) weapons attacks for 5 turns.\n");
+			outputText("-New Blood Spell: Blood Field - learned from Red Manuscript. Cost 600 health. Would form a field of blood on the ground that would drain enemy health and heal caster. Additionaly enemeis will have their speed reduced. Not effective against any target that aren't touching the ground (flying enemies or ones beneath the ground).\n");
+			outputText("-Added Water & Earth elmental attack type. Water and Earth elementals dmg been changed to those new types of elemental dmg.\n");
+			outputText("-Added Acid elmental attack type. Acid Spit, Hydra Acid Breath specials dmg been changed to this new type of elemental dmg.\n");
+			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 100+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-Evangeline initial encounter and post fight talk scene been slight adjusted. Her repeat encouter after rejecting recruitment first time now req. higher level and finding two city-like hubs unlocked. After been in camp her level up process is bit faster.\n");
+			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 12 for this to be possible.\n");
+			outputText("-With adding 4 new subtypes of elemental dmg some of enemy attacks dmg been adjusted from magic type to one of those new four types. Also there is resistance tracked for those new types on stats page.\n");
+			outputText("-When PC race change to race without blood (atm only gargoyle) it would disable all blood spells and blood soulskills.\n");
+			outputText("-Added training dummy that is avialable after first exploration. It wouldn't deal much dmg back and won;t give exp after beating it. It would also allow to always retreat from fight. It purpose is to help in safe manner to train weapon masteries. So not go all out trying to kill it in one hit or the training will last much longer ^^\n");
+			outputText("-New monster perk: No Exp Gained. Atm only training dummy have it. As for effects it name speaks for itself.\n");
+			outputText("-Bit of moving around options in camp actions. Nothing serious. Just some of less used options moved to submenus and adding disabled buttons for all options that not had them in this manu or it submenus.\n");
+			outputText("-Sparring Ring can be upgraded 2 times. Each upgrade will decrease time needed for npc's to train for level up (shorter by 1/6 then 1/5 of orginal time) and mastery exp for hitting training dummy would increase by 100% per upgrade (to 200%/300%).\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			outputText("-Battleshield perk tier been decreased from 7th to 3rd. Req. intelligence was halfed.\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Defensive Staff Channeling. Req. Staff Channeling and Job: Enchanter perks, knowing any defensive spell, 120+ int. Effect: When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
+			outputText(" (Mana shield would be able to absorb more damage per mana spent and blizzard would last longer or block more fire attacks before vanishing)\n");
+			outputText("-For staff channeling perk effects would now count also weapons that are only 'partial' staffs like inscribed spellblade or demonic scythe.\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Arch-priest. Req. Jobs: Guardian and Enchanter, 200+ int, finishing second part of certain paladin npc training. Effect: +40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower.\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
-			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex)\n");/*ostatni punkt changelogu
+			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
+			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -198,6 +230,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -221,10 +255,9 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			outputText("\n");
+			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
-			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
 			outputText("\n");
@@ -240,12 +273,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -304,12 +331,12 @@ package classes.Scenes
 			outputText("<b>Version 0.8r (2nd marriage option, new type of enemies + 2nd floor of RD opened, wrath changes (part 1), masteries (part 2), 2nd hidden job, many small QoL changes and bugfixes):</b>\n\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Mage's Wrath. Req. Job: Sorcerer perk, 50+ int. Effect: Magic Bolt (and Elemental Bolt if PC knows it) will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Mana Core. Req. Job: Sorcerer perk, 345+ max mana. Effect: Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.\n");
-			outputText("-New tier 1 str lvl-up perk: Furious strikes. Req. Job: Warrior perk and 30+ str. Effect: Wrath generated by base melee/range attacks and abilities increases by 100%.\n");
-			outputText("-New tier 2 str lvl-up perk: Adrenaline Rush. Req. Adrenaline Rush perk. Effect: Always start combat with 100 more points of wrath.\n");
+			outputText("-New tier 1 strength lvl-up perk: Furious strikes. Req. Job: Warrior perk and 30+ str. Effect: Wrath generated by base melee/range attacks and abilities increases by 100%.\n");
+			outputText("-New tier 2 strength lvl-up perk: Adrenaline Rush. Req. Adrenaline Rush perk. Effect: Always start combat with 100 more points of wrath.\n");
 			outputText("-New tier 2 misc lvl-up perk: Natural Instincts. Req. Job: Beast Warrior perk. Effect: All racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.\n");
 			outputText("-New tier 3 misc lvl-up perk: Natural Arsenal. Req. Natural Instincts perk and 60+ str/tou. Effect: All natural weapon based racial abilities gain a +50% damage bonus.\n");
-			outputText("-New tier 3 str lvl-up perk: Way of the Warrior. Req. Job: Warrior perk. Effect: Enable autocast of Warrior's rage and boost it based on PC current stats. (+1 per 10 pts of core stat value)\n");
-			outputText("-New tier 3 str lvl-up perk: Unlimited rage. Req. Furious strikes perk and 60+ str. Effect: Wrath generated by base melee/range attacks and abilities increases by 100%.\n");
+			outputText("-New tier 3 strength lvl-up perk: Way of the Warrior. Req. Job: Warrior perk. Effect: Enable autocast of Warrior's rage and boost it based on PC current stats. (+1 per 10 pts of core stat value)\n");
+			outputText("-New tier 3 strength lvl-up perk: Unlimited rage. Req. Furious strikes perk and 60+ str. Effect: Wrath generated by base melee/range attacks and abilities increases by 100%.\n");
 			outputText("-New tier 5 intelligence lvl-up perk: Arcane Regeneration (Mythical). Req. Grand Archmage (2nd Circle), Arcane Regeneration (Legendary) perks and 150+ int. Effect: Increase max mana by 25% and recovery rate by 50.\n");
 			outputText("-New event perk: My Blood for Blood Puppies. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 10x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
 			outputText("-New event perk: Hidden Job: Asura. Gained by spending 1 super perk point and having free slot for hidden job. Effects: Allow to reach OverMax Wrath equal to 110% of current max wrath. Gain access to Asura Form transformation (3x more melee attacks, +60%/30%/20% of core str/spe/tou stat value - drains 20 wrath per turn to maintains this form).\n");
@@ -625,7 +652,7 @@ package classes.Scenes
 			outputText("-New consumable items (by Ormael): Balls of Flame, Frozen Balls, THUNDERballs, Balls of the Darkness, Poisoned Balls - buyable at Serena shop in HXD (Shelf 3 - all of them req. lvl 42+ to be accessable). Each costs 60 gems and deal same damage as bangball mk 3 but with elemental affix (fire, ice, lighting, darkness, poison).\n");
 			outputText("-New consumable item: Red Manuscript. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Spells when PC have Hidden Job: Blood Demon.\n");
 			outputText("-New consumable item: Crimson Jade. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Soulskills when PC have Way of the Blood.\n");
-			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
+			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");
 			outputText("-New Blood Spell: Blood Explosion - learned from Red Manuscript. Cost 200 health. Deal AoE magic dmg and have cooldown of 3 turns.\n");
 			outputText("-New Blood Soulskill: Blood Swipe - learned from Crimson Jade. Cost 60 health. Deal phys dmg and have cooldown of 2 turns.\n");
 			outputText("-New TF item (by Liandri): Smarty Nuts. Buyable at Moga'Hen TF items shop. Using this item would turn PC into Ratatoskr (squirrel-morph). Racial bonuses for Half squirrel-morph (6+) /  squirrel-morph (12+) / Ratatoskr (18+): -10/20/25% to Str multi, +60/90/140% to Spe multi, +40/95/155% to Int multi\n");

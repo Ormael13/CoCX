@@ -118,7 +118,7 @@ internal function sharkWinChoices():void {
 	spriteSelect(70);
 	//HP Win
 	clearOutput();
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("The shark-girl falls, clearly defeated.");
 	}
 	//Lust win

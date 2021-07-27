@@ -27,6 +27,7 @@ package classes.Scenes.Places.HeXinDao
 		public var riverdungeon:RiverDungeon = new RiverDungeon();
 
 		public static var AhriStatsToPerksConvertCounter:Number;
+		public static var AhriTavernTalks:Boolean;
 
 		public function stateObjectName():String {
 			return "JourneyToTheEast";
@@ -34,17 +35,20 @@ package classes.Scenes.Places.HeXinDao
 
 		public function resetState():void {
 			AhriStatsToPerksConvertCounter = 0;
+			AhriTavernTalks = false;
 		}
 
 		public function saveToObject():Object {
 			return {
-				"AhriStatsToPerksConvertCounter": AhriStatsToPerksConvertCounter
+				"AhriStatsToPerksConvertCounter": AhriStatsToPerksConvertCounter,
+				"AhriTavernTalks": AhriTavernTalks
 			};
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
 				AhriStatsToPerksConvertCounter = o["AhriStatsToPerksConvertCounter"];
+				AhriTavernTalks = o["AhriTavernTalks"];
 			} else {
 				// loading from old save
 				resetState();
@@ -69,16 +73,16 @@ package classes.Scenes.Places.HeXinDao
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
 			addButton(2, "???", shadyPerson).hint("A strange two headed morph with two tails is sitting at one of the tables.");
-			addButton(4, "Adv.Guild", BoardkeeperYangMain);/*
+			addButton(4, "Adv.Guild", BoardkeeperYangMain);
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			//addButtonDisabled(6, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			if (workHoursMadam()) {
-				if (flags[kFLAGS.AHRI_FOLLOWER] > 0) addButton(7, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");
-				else addButtonDisabled(7, "???", "You see mysterious looking animal-morph sitting at one of the inn tables.");//Ahri
+				if (AhriTavernTalks) addButton(7, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");
+				else addButton(7, "???", visitMadam).hint("You see mysterious looking animal-morph sitting at one of the inn tables.");//Ahri
 			}
 			else {
-				if (flags[kFLAGS.AHRI_FOLLOWER] > 0) addButtonDisabled(7, "Madam", "'Madam' isn't currently at her usual table in the inn.");
-			}*/
+				if (AhriTavernTalks) addButtonDisabled(7, "Madam", "'Madam' isn't currently at her usual table in the inn.");
+			}
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
@@ -165,43 +169,47 @@ package classes.Scenes.Places.HeXinDao
 			return false;
 		}
 		private function visitMadam():void {
-			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion		outputText("\n\n");
-			if (flags[kFLAGS.AHRI_FOLLOWER] > 0) {
-				outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looking at you. \"<i>Another session to exchange your grown potential to some thing more elusive?</i>\"\n\n");
+			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion		outputText("\"<i></i>\"\n\n");
+			if (AhriTavernTalks) {
+				outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looking at you. \"<i>Another session to exchange your grown potential to increased ability to develop mystical abilities?</i>\"\n\n");
 			}
 			else {
 				outputText("When you apporach the table you see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
 				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to my table seeking my services? I not able to provide alot aside something i calls 'conversion'.</i>\"\n\n");
-				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop more mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
+				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
 				outputText("Just like that without any string attatched?\n\n");
-				outputText("\"<i>Of course there would be additional price. (opis dodatkowego kosztu) </i>\" She pause before asking \"<i>So dear customer would you like me to perform this conversion on you?</i>\"\n\n");
-				flags[kFLAGS.AHRI_FOLLOWER] = 1;
+				outputText("\"<i>Of course there would be additional price. Ten spirit stones.</i>\" She pause before asking \"<i>So dear customer would you like me to perform this conversion on you?</i>\"\n\n");
+				AhriTavernTalks = true;
 			}
-			//outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
 			menu();
 			addButton(1, "Convert", visitMadamConvert);
 			addButton(3, "Back", curry(enteringInn,false));
 		}
 		private function visitMadamConvert():void {
 			clearOutput();
-			if (player.statPoints < 5) {
-				outputText("\"<i>(brak dodatkowego kosztu).</i>\" Madam shakes her head, \"<i>Come see me again when (opis dodatkowego kosztu).</i>\"\n\n");
+			if (flags[kFLAGS.SPIRIT_STONES] < 10) {
+				outputText("\"<i>Ten Spirit Stones.</i>\" Madam shakes her head, \"<i>Come see me again when you gather them.</i>\"\n\n");
 				doNext(visitMadam);
 			}
 			else if (player.statPoints < 5) {
 				outputText("\"<i>Seems your grown potential isn't sufficient.</i>\" Madam shakes her head, \"<i>Come see me again when it would increase.</i>\"\n\n");
 				doNext(visitMadam);
 			}
-			else if (AhriStatsToPerksConvertCounter > 4 && flags[kFLAGS.AHRI_FOLLOWER] <= 1) {
+			else if (AhriStatsToPerksConvertCounter > 4 && AhriTavernTalks > 0) {
 				outputText("\"<i>It's unfotunate but i can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum five times and you dear customer reached this limit.</i>\"\n\n");
 				doNext(visitMadam);
 			}
 			else {
-				outputText("\"<i>(brak dodatkowego kosztu).</i>\"\n\n");
-				//zabranie przedmiotu/ów jakie potrzebne są do konwersji
+				outputText("After recieving payment Madam puts them in bag that was on her robes belt. \"<i>Come we can't do 'it' here,</i>\" she starts to walk toward door that lead to backroom of the inn. As you already paid, you follow her to short corridor behind doors. Opening one of the side room doors she monition for you to come inside.\n\n");
+				outputText("\"<i>Please sit down as whole process would take some time.</i>\" She points toward casual looking sofa. After you sit and find comfortable postion she walsk behinds you. \"<i>Dear customer please close your eyes.</i>\" she nearly whisper it with extremely hypnotizing voice next to your ear.\n\n");
+				outputText("You close the eyes and then you feal weird energy that start spread, starting form sides of you head, in your body. It feels extremly comfortable and before you notice it caused you to fell asleep.\n\n");
+				outputText("When you wake up, it feel something missing in your body and yet at the same time something new appeared too. Looking around there is noone aside you in the room, with doors left opened wide. Looks like madam wanted to say 'return on your own'. Slightly unsatisfied you returns to the drinkin hall.\n\n");
 				if (AhriStatsToPerksConvertCounter > 0) AhriStatsToPerksConvertCounter += 1;
 				else AhriStatsToPerksConvertCounter = 1;
-				doNext(visitMadam);
+				flags[kFLAGS.SPIRIT_STONES] -= 10;
+				player.statPoints -= 5;
+				player.perkPoints += 1;
+				doNext(curry(enteringInn,false));
 				cheatTime2(30);
 			}
 		}

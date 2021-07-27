@@ -925,7 +925,7 @@ public class Combat extends BaseContent {
             buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
-            bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsFlamesOfLove))+" round  \n\nLust cost: "+flamesOfLoveLC()+"% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
                 bd.disable("You need more time before you can use Flames of Love again.");
             } else if (player.lust < 50) {
@@ -941,7 +941,7 @@ public class Combat extends BaseContent {
             }
         }*/
         if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
-            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsIciclesOfLove))+" round  \n\nLust cost: "+iciclesOfLoveLC()+"% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
                 bd.disable("You need more time before you can use Icicles of Love again.");
             } else if (player.lust < 50) {
@@ -957,7 +957,7 @@ public class Combat extends BaseContent {
             }
         }*/
 		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
-			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood))+" round  \n\nWrath cost: "+stormOfSisterhoodWC()+"% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
 				bd.disable("You need more time before you can use Storm of Sisterhood again.");
 			} else if (player.wrath < 50) {
@@ -965,7 +965,7 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
-			bd = buttons.add("Night of Brotherhood", nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			bd = buttons.add("Night of Brotherhood", nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood))+" round  \n\nWrath cost: "+nightOfBrotherhoodWC()+"% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
 				bd.disable("You need more time before you can use Night of Brotherhood again.");
 			} else if (player.wrath < 50) {
@@ -999,9 +999,23 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-			bd = buttons.add("B.Puppies", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
 			var bloodForBloodGod:Number = (player.HP - player.minHP());
-			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
+			bd = buttons.add("B.P. BS", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Blood Swipe. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(20)) {
+				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
+			}
+			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
+				bd.disable("Your already commanded Puppies to attack this turn.");
+			}
+			bd = buttons.add("B.P. HS", heartSeekerBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Heart Seeker. Would deal 10x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(40) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(40)) {
+				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
+			}
+			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
+				bd.disable("Your already commanded Puppies to attack this turn.");
+			}
+			bd = buttons.add("B.P. BD", bloodDewdropsBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Blood Dewdrops. Would deal 10x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(80) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(80)) {
 				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
 			}
 			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
@@ -1795,6 +1809,9 @@ public class Combat extends BaseContent {
         outputText("\n\nYour elemental hit [monster a] [monster name]! ");
         switch (elementType) {
             case EARTH:
+                elementalDamage *= 2.5;
+                doEarthDamage(elementalDamage, true, true);
+                break;
             case WOOD:
                 elementalDamage *= 2.5;
                 doDamage(elementalDamage, true, true);
@@ -1807,6 +1824,8 @@ public class Combat extends BaseContent {
                 doFireDamage(elementalDamage, true, true);
                 break;
             case WATER:
+                doWaterDamage(elementalDamage, true, true);
+                break;
             case ICE:
                 doIceDamage(elementalDamage, true, true);
                 break;
@@ -3035,6 +3054,7 @@ public class Combat extends BaseContent {
 				}
 				archeryXP(1);
                 outputText("\n\n");
+				WeaponRangeStatusProcs();
                 checkAchievementDamage(damage);
                 flags[kFLAGS.ARROWS_SHOT]++;
                 bowPerkUnlock();
@@ -3056,6 +3076,7 @@ public class Combat extends BaseContent {
 					archeryXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
+				WeaponRangeStatusProcs();
 				WrathGenerationPerHit1(5);
                 heroBaneProc(damage);
             }
@@ -3339,7 +3360,6 @@ public class Combat extends BaseContent {
                         } else damage *= 2;
                     }
                 }
-
                 damage = Math.round(damage);
                 checkAchievementDamage(damage);
                 if (monster.HP <= monster.minHP()) {
@@ -3348,7 +3368,6 @@ public class Combat extends BaseContent {
                     else if (monster.plural)
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-
                     doDamage(damage, true, true);
                     if (crit) {
                         outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
@@ -3356,6 +3375,7 @@ public class Combat extends BaseContent {
                     }
                     throwingXP(1);
                     outputText("\n\n");
+					WeaponRangeStatusProcs();
                     doNext(endHpVictory);
                     return;
                 } else {
@@ -3366,12 +3386,13 @@ public class Combat extends BaseContent {
                         throwingXP(1);
                     }
                     if (crit) hasCritAtLeastOnce = true;
+					WeaponRangeStatusProcs();
                     WrathGenerationPerHit1(5);
                     heroBaneProc(damage);
                 }
             }
             else{
-                hasMissedAtLeastOnce = true
+                hasMissedAtLeastOnce = true;
             }
             currentShot++;
         }
@@ -3475,6 +3496,7 @@ public class Combat extends BaseContent {
             //Determine if critical hit!
             var crit:Boolean = false;
             var critChance:int = 5;
+            var critDmg:Number = 1.75;
             critChance += combatPhysicalCritical();
             if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
             if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
@@ -3483,9 +3505,11 @@ public class Combat extends BaseContent {
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
             if (rand(100) < critChance) {
                 crit = true;
-                if (player.hasPerk(PerkLib.AnatomyExpert)) damage *= 2.25;
-                else damage *= 1.75;
+                if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
+                if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
+                damage *= critDmg;
             }
+			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
@@ -3526,6 +3550,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
 */
             damage = Math.round(damage);
+			WeaponRangeStatusProcs();
             checkAchievementDamage(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -3800,6 +3825,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też*/
             damage = Math.round(damage);
             checkAchievementDamage(damage);
+			WeaponRangeStatusProcs();
 			WrathGenerationPerHit1(5);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -5249,7 +5275,7 @@ public class Combat extends BaseContent {
                 } else if (vbladeeffect) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
                 else if (MDODialogs) {
                 } else if (!MSGControll) {
-                    outputText("You hit [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
+					outputText("You "+player.weaponVerb+" [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
                 }
                 if (crit) {
                     outputText("<b>Critical! </b>");
@@ -6104,11 +6130,14 @@ public class Combat extends BaseContent {
                 else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
             }
         }
-        if (player.hasPerk(PerkLib.VampiricBlade)) {
-            if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") HPChange(Math.round(player.maxHP() * 0.005), false);
-            else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * 0.02), false);
-            else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * 0.04), false);
-            else HPChange(Math.round(player.maxHP() * 0.01), false);
+        if (player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+			var restoreamount:Number = 0;
+			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
+			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) restoreamount += 1;
+            if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") HPChange(Math.round(player.maxHP() * restoreamount * 0.005), false);
+            else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * restoreamount * 0.02), false);
+            else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * restoreamount * 0.04), false);
+            else HPChange(Math.round(player.maxHP() * restoreamount * 0.01), false);
         }
 		if (player.weapon == weapons.VENCLAW) {
             outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -6122,7 +6151,7 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
-
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
     public function WeaponFlyingSwordsStatusProcs():void {
@@ -6139,6 +6168,7 @@ public class Combat extends BaseContent {
             if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
             else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
         }
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
 	public function ShieldsStatusProcs():void {
@@ -7231,6 +7261,294 @@ public class Combat extends BaseContent {
         return damage;
     }
 
+    public function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            dynStats("lus", 3);
+            if (player.armorName == "Scandalous Succubus Clothing") {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+        }
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            var bonusDamageFromMissingHP:Number = 1;
+            if (player.hp100 < 100) {
+                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+            }
+            damage *= bonusDamageFromMissingHP;
+        }
+        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
+        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = DamageOverhaul(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        // Uma's Massage Bonuses
+        var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
+        if (sac) {
+            if (sac.value1 == UmasShop.MASSAGE_POWER) {
+                damage *= sac.value2;
+            }
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+        if (apply) {
+            monster.HP -= damage;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
+            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+        }
+        if (display) {
+            if (damage > 0) {
+                if (damage > 1000) CommasForDigits(damage);
+                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+        }
+        //Isabella gets mad
+        if (monster.short == "Isabella") {
+            flags[kFLAGS.ISABELLA_AFFECTION]--;
+            //Keep in bounds
+            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
+        }
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+    }
+
+    public function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            dynStats("lus", 3);
+            if (player.armorName == "Scandalous Succubus Clothing") {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+        }
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            var bonusDamageFromMissingHP:Number = 1;
+            if (player.hp100 < 100) {
+                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+            }
+            damage *= bonusDamageFromMissingHP;
+        }
+        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
+        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = DamageOverhaul(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        // Uma's Massage Bonuses
+        var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
+        if (sac) {
+            if (sac.value1 == UmasShop.MASSAGE_POWER) {
+                damage *= sac.value2;
+            }
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+        if (apply) {
+            monster.HP -= damage;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
+            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+        }
+        if (display) {
+            if (damage > 0) {
+                if (damage > 1000) CommasForDigits(damage);
+                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+        }
+        //Isabella gets mad
+        if (monster.short == "Isabella") {
+            flags[kFLAGS.ISABELLA_AFFECTION]--;
+            //Keep in bounds
+            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
+        }
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+    }
+
+    public function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            dynStats("lus", 3);
+            if (player.armorName == "Scandalous Succubus Clothing") {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+        }
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            var bonusDamageFromMissingHP:Number = 1;
+            if (player.hp100 < 100) {
+                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+            }
+            damage *= bonusDamageFromMissingHP;
+        }
+        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
+        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = DamageOverhaul(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        // Uma's Massage Bonuses
+        var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
+        if (sac) {
+            if (sac.value1 == UmasShop.MASSAGE_POWER) {
+                damage *= sac.value2;
+            }
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+        if (apply) {
+            monster.HP -= damage;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
+            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+        }
+        if (display) {
+            if (damage > 0) {
+                if (damage > 1000) CommasForDigits(damage);
+                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+        }
+        //Isabella gets mad
+        if (monster.short == "Isabella") {
+            flags[kFLAGS.ISABELLA_AFFECTION]--;
+            //Keep in bounds
+            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
+        }
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+    }
+
+    public function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            dynStats("lus", 3);
+            if (player.armorName == "Scandalous Succubus Clothing") {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+        }
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            var bonusDamageFromMissingHP:Number = 1;
+            if (player.hp100 < 100) {
+                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+            }
+            damage *= bonusDamageFromMissingHP;
+        }
+        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
+        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = DamageOverhaul(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        // Uma's Massage Bonuses
+        var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
+        if (sac) {
+            if (sac.value1 == UmasShop.MASSAGE_POWER) {
+                damage *= sac.value2;
+            }
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+        if (apply) {
+            monster.HP -= damage;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
+            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+        }
+        if (display) {
+            if (damage > 0) {
+                if (damage > 1000) CommasForDigits(damage);
+                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+        }
+        //Isabella gets mad
+        if (monster.short == "Isabella") {
+            flags[kFLAGS.ISABELLA_AFFECTION]--;
+            //Keep in bounds
+            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
+        }
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+    }
+
 	public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         if (damage < 1) damage = 1;
@@ -7631,7 +7949,7 @@ public class Combat extends BaseContent {
             monster.gems *= 2;
             monster.gems = Math.round(monster.gems);
         }
-        monster.handleAwardText(); //Each monster can now override the default award text
+        if (!monster.hasPerk(PerkLib.NoExpGained)) monster.handleAwardText(); //Each monster can now override the default award text
         if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
             if (nextFunc != null) doNext(nextFunc);
             else doNext(playerMenu);
@@ -7642,7 +7960,7 @@ public class Combat extends BaseContent {
         dropItem(monster, nextFunc);
         inCombat = false;
         player.gems += monster.gems;
-        player.XP += monster.XP;
+        if (!monster.hasPerk(PerkLib.NoExpGained)) player.XP += monster.XP;
         mainView.statsView.showStatUp('xp');
         dynStats("lust", 0, "scale", false); //Forces up arrow.
     }
@@ -8773,14 +9091,19 @@ public class Combat extends BaseContent {
         }
         //Ezekiel Curse
         if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
-            if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {
+            if (EvangelineFollower.EvangelineAffectionMeter >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {
                 outputText("<b>You feel familiar feeling of your own lifeforce been slowly extinquished.  Maybe you should finish this fight as soon as possible to start healing this aligment?</b>\n\n");
                 player.takePhysDamage(500);
-            } else if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2) {
+            } else if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
                 outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation as otherwise...</b>\n\n");
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
                 else player.takePhysDamage(100);
             }
+        }
+		//Lifesteal Enchantment
+        if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+            if (player.statusEffectv1(StatusEffects.LifestealEnchantment) <= 0) player.removeStatusEffect(StatusEffects.LifestealEnchantment);
+            else player.addStatusValue(StatusEffects.LifestealEnchantment, 1, -1);
         }
         //Flying
         if (player.isFlying()) {
@@ -9379,6 +9702,20 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodExplosion, 1, -1);
             }
         }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodChains)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodChains) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodChains);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodChains, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodWave)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodWave) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodWave);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodWave, 1, -1);
+            }
+        }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipe)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellBloodSwipe) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipe);
@@ -9391,6 +9728,20 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodSwipeSF, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdrops)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodDewdrops) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodDewdrops);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodDewdrops, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodDewdropsSF) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
         //Companion Boosting PC Armor Value
@@ -10474,88 +10825,65 @@ public class Combat extends BaseContent {
         if (player.armor == armors.SCANSC) player.SexXP(XP);
         player.SexXP(XP);
     }
+	
+	private function weaponmasteryXPMulti():Number {
+		var multi:Number = 1;
+		if (player.humanScore() == player.humanMaxScore()) multi += 2;
+		else if (player.humanScore() >= player.humanMaxScore() - 9) multi += 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) multi *= 3;
+		else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) multi *= 2;
+        return multi;
+	}
 
 	public function gauntletXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.gauntletXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.gauntletXP(XP);
-        player.gauntletXP(XP);
+		player.gauntletXP(XP * weaponmasteryXPMulti());
     }
 	public function swordXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.swordXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.swordXP(XP);
-        player.swordXP(XP);
+		player.swordXP(XP * weaponmasteryXPMulti());
     }
 	public function axeXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.axeXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.axeXP(XP);
-        player.axeXP(XP);
+		player.axeXP(XP * weaponmasteryXPMulti());
     }
 	public function macehammerXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.macehammerXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.macehammerXP(XP);
-        player.macehammerXP(XP);
+		player.macehammerXP(XP * weaponmasteryXPMulti());
     }
 	public function duelingswordXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.duelingswordXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.duelingswordXP(XP);
-        player.duelingswordXP(XP);
+		player.duelingswordXP(XP * weaponmasteryXPMulti());
     }
 	public function spearXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.spearXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
-        player.spearXP(XP);
+		player.spearXP(XP * weaponmasteryXPMulti());
     }
 	public function daggerXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.daggerXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.daggerXP(XP);
-        player.daggerXP(XP);
+		player.daggerXP(XP * weaponmasteryXPMulti());
     }
 	public function whipXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.whipXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.whipXP(XP);
-        player.whipXP(XP);
+		player.whipXP(XP * weaponmasteryXPMulti());
     }
 	public function exoticXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.exoticXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
-        player.exoticXP(XP);
+		player.exoticXP(XP * weaponmasteryXPMulti());
     }
 
 	public function archeryXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.archeryXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.archeryXP(XP);
-        player.archeryXP(XP);
+		player.archeryXP(XP * weaponmasteryXPMulti());
     }
 	public function throwingXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.throwingXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.throwingXP(XP);
-        player.throwingXP(XP);
+		player.throwingXP(XP * weaponmasteryXPMulti());
     }
 	public function firearmsXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.firearmsXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.firearmsXP(XP);
-        player.firearmsXP(XP);
+		player.firearmsXP(XP * weaponmasteryXPMulti());
     }
 
 	public function dualWieldSmallXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldSmallXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldSmallXP(XP);
-        player.dualWieldSmallXP(XP);
+		player.dualWieldSmallXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldNormalXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldNormalXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldNormalXP(XP);
-        player.dualWieldNormalXP(XP);
+		player.dualWieldNormalXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldLargeXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldLargeXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldLargeXP(XP);
-        player.dualWieldLargeXP(XP);
+		player.dualWieldLargeXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldFirearmsXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldFirearmsXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldFirearmsXP(XP);
-        player.dualWieldFirearmsXP(XP);
+		player.dualWieldFirearmsXP(XP * weaponmasteryXPMulti());
     }
 
     //VICTORY OR DEATH?
@@ -11750,7 +12078,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
@@ -11790,6 +12118,41 @@ public class Combat extends BaseContent {
         outputText("\n\n");
         monster.removeStatusEffect(StatusEffects.ConstrictedScylla);
         enemyAI();
+    }
+
+    public function WhipStrangulate():void {
+		clearOutput();
+		if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
+			outputText("You are too tired to strangulate " + monster.a + " " + monster.short + ".");
+			addButton(0, "Next", SceneLib.combat.combatMenu, false);
+			return;
+		}
+		fatigue(20, USEFATG_PHYSICAL);
+		//Squeeze -
+		outputText("You tighten the noose around your opponent's necks, your whip leaving red marks into the flesh. ");
+		var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
+		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+		damage = damage;
+		doDamage(damage, true, true);
+		//Enemy faints -
+		if(monster.HP <= monster.minHP()) {
+			outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you squeze all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+			if(monster.short == "demons")
+				outputText("The others quickly back off, terrified at the idea of what you might do to them.");
+			outputText("\n\n");
+			doNext(endHpVictory);
+			return;
+		}
+		outputText("\n\n");
+		enemyAI();
     }
 
     public function WhipLeggoMyEggo():void {
@@ -11912,7 +12275,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
@@ -12061,7 +12424,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
@@ -12870,7 +13233,11 @@ public class Combat extends BaseContent {
             clearStatuses(false);
             doNext(camp.returnToCampUseOneHour);
             return;
-        } else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+        }
+		if (monster.short == "training dummy") {
+			outputText("As you retreat the training dummy just stands there in it usual spot. ");
+		}
+		else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
         //Nonflying PCs
         else {
             //In prison!
@@ -13011,7 +13378,10 @@ public class Combat extends BaseContent {
                 outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
             }
             //Non-fliers flee
-            else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.");
+            else {
+				if (monster.short == "training dummy") outputText("When you look back you see it's still in the same spot seemly grinning at you.");
+				else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.");
+			}
             if (monster.short == "Izma") {
                 outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.");
             }
@@ -13316,70 +13686,86 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function flamesOfLove():void {
+    public function flamesOfLoveLC():Number {
+		var follc:Number = 10;
+		return follc;
+	}
+	public function flamesOfLove():void {
         clearOutput();
         var fireDMG:Number = 0;
-        fireDMG += Math.round(player.lust * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, 2, 0, 0, 0);
+        fireDMG += Math.round(player.lust * (flamesOfLoveLC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, Math.round(player.statusEffectv1(StatusEffects.KnowsFlamesOfLove)), 0, 0, 0);
         player.lust -= fireDMG;
-        fireDMG *= 10;
+        fireDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsFlamesOfLove));
 		if (monster.plural) fireDMG *= 2;
 		fireDMG *= fireDamageBoostedByDao();
 		fireDMG = Math.round(fireDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
-        outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'.");
-		doFireDamage(fireDMG);
+        outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'. ");
+		doFireDamage(fireDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
 
-    public function iciclesOfLove():void {
+    public function iciclesOfLoveLC():Number {
+		var iollc:Number = 10;
+		return iollc;
+	}
+	public function iciclesOfLove():void {
         clearOutput();
         var iceDMG:Number = 0;
-        iceDMG += Math.round(player.lust * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, 2, 0, 0, 0);
+        iceDMG += Math.round(player.lust * (iciclesOfLoveLC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, Math.round(player.statusEffectv1(StatusEffects.KnowsIciclesOfLove)), 0, 0, 0);
         player.lust -= iceDMG;
-        iceDMG *= 10;
+        iceDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsIciclesOfLove));
         if (monster.plural) iceDMG *= 2;
 		iceDMG *= iceDamageBoostedByDao();
 		iceDMG = Math.round(iceDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
-        outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'.");
-		doIceDamage(iceDMG);
+        outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'. ");
+		doIceDamage(iceDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
 
-    public function stormOfSisterhood():void {
+    public function stormOfSisterhoodWC():Number {
+		var soswc:Number = 10;
+		return soswc;
+	}
+	public function stormOfSisterhood():void {
         clearOutput();
         var lightingDMG:Number = 0;
-        lightingDMG += Math.round(player.wrath * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownStormOfSisterhood, 2, 0, 0, 0);
+        lightingDMG += Math.round(player.wrath * (stormOfSisterhoodWC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownStormOfSisterhood, Math.round(player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood)), 0, 0, 0);
         player.wrath -= lightingDMG;
-        lightingDMG *= 10;
+        lightingDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood));
         if (monster.plural) lightingDMG *= 2;
 		lightingDMG *= lightningDamageBoostedByDao();
 		lightingDMG = Math.round(lightingDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing storm of sisterhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in ligthing.\n\n");
-        outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'.");
-		doLightingDamage(lightingDMG);
+        outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'. ");
+		doLightingDamage(lightingDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
 
-    public function nightOfBrotherhood():void {
+    public function nightOfBrotherhoodWC():Number {
+		var nobwc:Number = 10;
+		return nobwc;
+	}
+	public function nightOfBrotherhood():void {
         clearOutput();
         var darknessDMG:Number = 0;
-        darknessDMG += Math.round(player.wrath * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownNightOfBrotherhood, 2, 0, 0, 0);
+		darknessDMG += Math.round(player.wrath * (nightOfBrotherhoodWC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownNightOfBrotherhood, Math.round(player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood)), 0, 0, 0);
         player.wrath -= darknessDMG;
-        darknessDMG *= 10;
+        darknessDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood));
         if (monster.plural) darknessDMG *= 2;
 		darknessDMG *= darknessDamageBoostedByDao();
 		darknessDMG = Math.round(darknessDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing night of brotherhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in darkness.\n\n");
-        outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'.");
-		doDarknessDamage(darknessDMG);
+        outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'. ");
+		doDarknessDamage(darknessDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
@@ -13425,7 +13811,7 @@ public class Combat extends BaseContent {
 	public function bloodSwipeBloodPuppies():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(spellCostBlood(20), false);
 		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
 		if (damage < 10) damage = 10;
@@ -13442,19 +13828,110 @@ public class Combat extends BaseContent {
 			damage *= ((puppies / 2) + 1.25);
 		}
 		if (monster.plural) damage *= 2;
-		damage = Math.round(damage);
+		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		WrathGenerationPerHit2(15);
+		heroBaneProc(damage);
+		statScreenRefresh();
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 1;
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else {
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+	}
+	public function heartSeekerBloodPuppies():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(40), false);
+		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, large blood dripping spears coalesce briefly before being shot, flying toward " + monster.a + monster.short + " vital spot.\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.25;
+		if (damage < 10) damage = 10;
+		var puppies:Number = 1;
+		if (player.hasPerk(PerkLib.AsuraStrength)) puppies += 0.1;
+		damage *= puppies;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= ((puppies / 2) + 1.25);
+		}
+		damage = Math.round(damage * bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		WrathGenerationPerHit2(15);
+		heroBaneProc(damage);
+		statScreenRefresh();
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 1;
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else {
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+	}
+	public function bloodDewdropsBloodPuppies():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(80), false);
+		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red dewdrops shoots from one of their front paws their rised for short moment, flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
+		if (damage < 10) damage = 10;
+		var puppies:Number = 1;
+		if (player.hasPerk(PerkLib.AsuraStrength)) puppies += 0.1;
+		damage *= puppies;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= ((puppies / 2) + 1.25);
+		}
+		if (monster.plural) damage *= 10;
+		damage = Math.round(damage * bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
 		if (rand(20) < 4) {
@@ -13789,6 +14266,61 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 1) boostP += 0.1;
 		}
 		return boostP;
+	}
+	public function windDamageBoostedByDao():Number {
+		var boostWi:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfWind)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) boostWi += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 4) boostWi += 0.5;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 3) boostWi += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 2) boostWi += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 1) boostWi += 0.1;
+		}
+		return boostWi;
+	}
+	public function bloodDamageBoostedByDao():Number {
+		var boostBl:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 5) boostBl += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 4) boostBl += 0.5;
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 3) boostBl += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 2) boostBl += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 1) boostBl += 0.1;
+		}
+		return boostBl;
+	}
+	public function waterDamageBoostedByDao():Number {
+		var boostWa:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfWater)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 5) boostWa += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 4) boostWa += 0.5;
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 3) boostWa += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 2) boostWa += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 1) boostWa += 0.1;
+		}
+		return boostWa;
+	}
+	public function earthDamageBoostedByDao():Number {
+		var boostEa:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 5) boostEa += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 4) boostEa += 0.5;
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 3) boostEa += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 2) boostEa += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 1) boostEa += 0.1;
+		}
+		return boostEa;
+	}
+	public function acidDamageBoostedByDao():Number {
+		var boostAc:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 5) boostAc += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 4) boostAc += 0.5;
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 3) boostAc += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 2) boostAc += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 1) boostAc += 0.1;
+		}
+		return boostAc;
 	}
 
     public function oniRampagePowerMulti():Number {

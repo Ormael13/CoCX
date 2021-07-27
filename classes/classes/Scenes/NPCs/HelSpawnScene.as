@@ -1466,7 +1466,7 @@ internal function beatUpYourDaughter():void {
 	else {
 		outputText(flags[kFLAGS.HELSPAWN_NAME] + " stumbles back, dropping her weapon and waving her arms, \"<i>I give, I give.</i>\"");
 		outputText("\n\nWith an approving nod, you lower your [weapon], telling her she did a fine job.  Not many people can stand up to you for as long as she did, after all.  She grins a little, but winces when you try and get close");
-		if(monster.HP < 1) outputText(", rubbing her many bruises");
+		if(monster.HP <= monster.minHP()) outputText(", rubbing her many bruises");
 		else outputText(", blushing brightly after your slutty display");
 		outputText(".  You chuckle and ruffle her hair, \"<i>C'mon, kiddo, let's get some food in you.</i>\"");
 		outputText("\n\n\"<i>Yeah, food,</i>\" she groans, stumbling after you as you both recover from the furious sparring match.");

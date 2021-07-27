@@ -581,7 +581,7 @@ internal function marbleFightWin():void {
 	spriteSelect(41);
 	clearOutput();
 	//Win by hp
-	if(monster.HP < 1) outputText("Marble falls to the ground defeated; she looks up at you helplessly, wondering what you're going to do next.  ");
+	if(monster.HP <= monster.minHP()) outputText("Marble falls to the ground defeated; she looks up at you helplessly, wondering what you're going to do next.  ");
 	//win by lust
 	else outputText("Marble collapses and looks at you longingly, pulling up her skirt with a look of desperation in her eyes.  ");
 	//after the lust+HP defeat scenes if the player wins

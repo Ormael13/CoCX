@@ -2025,7 +2025,7 @@ public class BeeGirlScene extends BaseContent
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			outputText("You advance on your ");
-			if(monster.HP < 1) outputText("hapless");
+			if(monster.HP <= monster.minHP()) outputText("hapless");
 			else outputText("horny");
 			outputText(" foe, pulling your new favorite toy from your pouch like a knight drawing a sword.  The only difference is, your \"sword\" jiggles and leaks pink fluid.   Rushing forward, you close the distance in a leap and gently slap her face.   She looks up at you, dazed and confused, opening her mouth in protest.   The artificial dong easily muffles her noise-hole. From the blush that colors her cheeks, you can tell its fluids are already starting to affect her.\n\n");
 			

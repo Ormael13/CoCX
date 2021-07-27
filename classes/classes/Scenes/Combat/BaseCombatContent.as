@@ -63,6 +63,18 @@ public class BaseCombatContent extends BaseContent {
 	protected function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doPoisonDamage(damage, apply, display);
 	}
+	protected function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doWindDamage(damage, apply, display);
+	}
+	protected function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doWaterDamage(damage, apply, display);
+	}
+	protected function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doEarthDamage(damage, apply, display);
+	}
+	protected function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doAcidDamage(damage, apply, display);
+	}
 	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doTrueDamage(damage, apply, display);
 	}

@@ -1090,7 +1090,7 @@ import flash.utils.getQualifiedClassName;
 			if (diff2 == -17) difference -= 0.85;
 			if (diff2 == -18) difference -= 0.9;
 			if (diff2 == -19) difference -= 0.99;
-			if (diff2 < -20) {
+			if (diff2 < -19) {
 				var minXP:Number = 1;
 				if (hasPerk(PerkLib.ShieldWielder)) minXP *= 1.5;
 				if (hasPerk(PerkLib.EnemyBossType)) minXP *= 2;
@@ -2396,6 +2396,11 @@ import flash.utils.getQualifiedClassName;
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				if (hasPerk(PerkLib.Diehard) && !hasPerk(PerkLib.EpicDiehard) && this.HP < 1) healingPercent -= 1;
 				if (hasPerk(PerkLib.LizanMarrowFinalForm) && this.HP < 1) healingPercent -= 1;
+				if (hasStatusEffect(StatusEffects.BloodRequiem) && healingPercent > 0) {
+					if (hasPerk(PerkLib.EnemyConstructType) || hasPerk(PerkLib.EnemyElementalType) || hasPerk(PerkLib.EnemyFleshConstructType) || hasPerk(PerkLib.EnemyGhostType)) healingPercent *= 0.8;
+					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
+					else healingPercent *= 0.2;
+				}
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (45 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.ImprovedLifeline)) temp2 += (60 * (1 + newGamePlusMod()));
@@ -2797,6 +2802,21 @@ import flash.utils.getQualifiedClassName;
 					outputText("As blood flows through the water the "+(this is UnderwaterTigersharkGirl ? "tiger ":"")+"shark girl"+(this is UnderwaterSharkGirlsPack ? "s":"")+" grows increasingly vicious. ");
 				}
 			}
+			if (game.player.hasStatusEffect(StatusEffects.BloodField)) {
+				game.player.addStatusValue(StatusEffects.BloodField, 1, -1);
+				if (game.player.statusEffectv1(StatusEffects.BloodField) <= 0) game.player.removeStatusEffect(StatusEffects.BloodField);
+				if (!game.player.hasStatusEffect(StatusEffects.MonsterDig) && !isFlying()) {
+					var bloodfield:Number = statusEffectv2(StatusEffects.Hemorrhage);
+					if (plural) bloodfield *= 5;
+					if (hasPerk(PerkLib.EnemyLargeGroupType)) bloodfield *= 5;
+					bloodfield = SceneLib.combat.doDamage(bloodfield);
+					EngineCore.HPChange(bloodfield, false);
+				}
+			}
+			if (hasStatusEffect(StatusEffects.BloodRequiem)) {
+				addStatusValue(StatusEffects.BloodRequiem, 1, -1);
+				if (statusEffectv1(StatusEffects.BloodRequiem) <= 0) removeStatusEffect(StatusEffects.BloodRequiem);
+			}
 			if(hasStatusEffect(StatusEffects.MonsterRegen)) {
 				if(statusEffectv1(StatusEffects.MonsterRegen) <= 0)
 					removeStatusEffect(StatusEffects.MonsterRegen);
@@ -3018,7 +3038,7 @@ import flash.utils.getQualifiedClassName;
 						store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Acid after-effect. ");
-						store7 = SceneLib.combat.doMagicDamage(store7, true, true);
+						store7 = SceneLib.combat.doAcidDamage(store7, true, true);
 						outputText("\n\n");
 					}
 				}
@@ -3040,7 +3060,7 @@ import flash.utils.getQualifiedClassName;
 						store10 += maxHP() * statusEffectv2(StatusEffects.PoisonDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
-						store10 = SceneLib.combat.doMagicDamage(store10, true, true);
+						store10 = SceneLib.combat.doPoisonDamage(store10, true, true);
 						outputText("\n\n");
 					}
 				}
@@ -3061,7 +3081,7 @@ import flash.utils.getQualifiedClassName;
 						store9 += maxHP() * statusEffectv2(StatusEffects.PoisonDoTH);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
-						store9 = SceneLib.combat.doMagicDamage(store9, true, true);
+						store9 = SceneLib.combat.doPoisonDamage(store9, true, true);
 						outputText("\n\n");
 					}
 				}
@@ -3392,4 +3412,3 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
-
