@@ -1,6 +1,8 @@
 package classes.Transformations {
 import classes.EngineCore;
 import classes.internals.Utils;
+import classes.CoC;
+import classes.BodyParts.LowerBody;
 
 public class TransformationUtils {
 	function TransformationUtils() {
@@ -49,12 +51,20 @@ public class TransformationUtils {
 		}
     }
 
+    // For Tail TFs: If the lower body doesn't allow a tail, humanize the lower body
+    public static function removeLowerBodyIfIncompatible(player: *, doOutput: Boolean = true): void {
+        if (!LowerBody.allowsTail(player.lowerBody)) {
+            CoC.instance.transformations.LowerBodyHuman.applyEffect(doOutput);
+			if (doOutput) EngineCore.outputText("\n\n");
+        }
+    }
+
     /**
      * Pick `count` effects from `effects` array (if `allowDuplicates` is false, don't pick them twice) and apply
      * their effects.
      * @return Number of effects applied
      */
-    public static function pickAndRunMultipleEffects(effects: /*PossibleEffect*/Array, count:int, allowDuplicates:Boolean, doOutput:Boolean, textSeparator:String = '\n\n'):int {
+    public static function pickAndRunMultipleEffects(effects: /*PossibleEffect*/Array, count:int, doOutput:Boolean = true, allowDuplicates:Boolean = false, textSeparator:String = '\n\n'):int {
         if (!allowDuplicates) effects = effects.slice();
         var result:int = 0;
         while (count --> 0) {

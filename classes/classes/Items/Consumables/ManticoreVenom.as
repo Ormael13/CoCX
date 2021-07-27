@@ -26,7 +26,7 @@ public class ManticoreVenom extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You guzzle down the vial and your lust immediately spikes up, making you spontaneously orgasm. Your body seems to react strangely to the poison however.");
@@ -78,10 +78,7 @@ public class ManticoreVenom extends Consumable {
 		//Legs
 		if (player.lowerBody != LowerBody.LION && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ");
-			outputText("Your legs suddenly shift painfully, forcing you down on all fours as the bones of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toes as they clench into the ground. As you feel the pain recede you sit and take a look at your foot; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>");
-			mutations.setLowerBody(LowerBody.LION);
-			player.legCount = 2;
+			CoC.instance.transformations.LowerBodyLion(2).applyEffect();
 			changes++;
 		}
 		//Arms

@@ -58,250 +58,435 @@ package classes.Scenes {
 				GeneticMemoryStorage["No Tail"] = true;
 				/*
 			*/
+
+			// Generic value for TFs unlocked from the beginning
+			GeneticMemoryStorage["Unlocked Metamorph"] = true;
 		}
 
 		public function saveToObject():Object {
 			return {
-				"storage": GeneticMemoryStorage
+				"genetic memory storage": GeneticMemoryStorage
 			};
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-				GeneticMemoryStorage = Utils.copyObject({}, o["storage"]);
+				GeneticMemoryStorage = Utils.copyObject({}, o["genetic memory storage"]);
 
 				GeneticMemoryStorage = {};
-				var storage:* = o["storage"];
+				var storage:* = o["genetic memory storage"];
 				for (var k:String in storage) {
     			if (storage.hasOwnProperty(k)) GeneticMemoryStorage[k] = !!storage[k];
 				}
 			} else {
 				// Migration from old save
-
 				resetState();
-			}
 
-				// TODO: Move migration inside else after finished
-				// migration
-
-				// Basic human parts, unlocked from the start
-				GeneticMemoryStorage["Human Hair"] = true;
-				GeneticMemoryStorage["Human Face"] = true;
-				GeneticMemoryStorage["Human Eyes"] = true;
-				GeneticMemoryStorage["Human Tongue"] = true;
-				GeneticMemoryStorage["Human Ears"] = true;
-				GeneticMemoryStorage["Human Arms"] = true;
-				GeneticMemoryStorage["Human Lower Body"] = true;
-				GeneticMemoryStorage["No Horns"] = true;
-				GeneticMemoryStorage["No Wings"] = true;
-				GeneticMemoryStorage["Plain Skin"] = true;
-				GeneticMemoryStorage["No Skin Pattern"] = true;
-				GeneticMemoryStorage["No Antennae"] = true;
-				GeneticMemoryStorage["No Gills"] = true;
-				GeneticMemoryStorage["No Rear Body"] = true;
-				GeneticMemoryStorage["No Tail"] = true;
-
-				// Converting Unlocked flags into Genetic Memory Storage
+				// Converting Unlocked flags into Genetic Memory Storage (Human flags are dealt with in the refund migration in Camp.as)
 				/*
 					*/
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) GeneticMemoryStorage["Human Hair"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) GeneticMemoryStorage["Feather Hair"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHarpyHair);
 					if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair)) GeneticMemoryStorage["Gorgon Hair"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedGorgonHair);
 					if (player.hasStatusEffect(StatusEffects.UnlockedElfHair)) GeneticMemoryStorage["Silky Hair"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedElfHair);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair)) GeneticMemoryStorage["Storm Hair"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuHair);
 					if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) GeneticMemoryStorage["Burning Hair"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHellcatBurningHair);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanFace)) GeneticMemoryStorage["Human Face"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace)) GeneticMemoryStorage["Horse Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHorseFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace)) GeneticMemoryStorage["Cow Minotaur Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCowMinotaurFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth)) GeneticMemoryStorage["Shark Teeth Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSharkTeeth);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs)) GeneticMemoryStorage["Snake Fangs Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSnakeFangs);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatFace)) GeneticMemoryStorage["Cat Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatFangs)) GeneticMemoryStorage["Cat Canines Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatFangs);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLizardFace)) GeneticMemoryStorage["Lizard Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLizardFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFangs)) GeneticMemoryStorage["Spider Fangs Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSpiderFangs);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxFace)) GeneticMemoryStorage["Fox Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedPigFace)) GeneticMemoryStorage["Pig Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedPigFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBoarFace)) GeneticMemoryStorage["Boar Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBoarFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedManticoreFace)) GeneticMemoryStorage["Manticore Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedManticoreFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace)) GeneticMemoryStorage["Salamander Fangs Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSalamanderFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOrcaFace)) GeneticMemoryStorage["Orca Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOrcaFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFace)) GeneticMemoryStorage["Draconic Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs)) GeneticMemoryStorage["Draconic Fangs Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicFangs);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDevilFangs)) GeneticMemoryStorage["Devil Fangs Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDevilFangs);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOniFace)) GeneticMemoryStorage["Oni Teeth Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOniFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace)) GeneticMemoryStorage["Weasel Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace)) GeneticMemoryStorage["Vampire Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedVampireFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace)) GeneticMemoryStorage["Red Panda Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRedPandaFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCheshireFace)) GeneticMemoryStorage["Cheshire Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCheshireFace);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile)) GeneticMemoryStorage["Cheshire Smile Face"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCheshireSmile);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanEyes)) GeneticMemoryStorage["Human Eyes"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes)) GeneticMemoryStorage["Spider Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSpiderFourEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatEyes)) GeneticMemoryStorage["Cat Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes)) GeneticMemoryStorage["Gorgon Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedGorgonEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes)) GeneticMemoryStorage["Manticore Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedManticoreEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes)) GeneticMemoryStorage["Fox Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes)) GeneticMemoryStorage["Lizard Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLizardEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes)) GeneticMemoryStorage["Snake Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSnakeEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes)) GeneticMemoryStorage["Draconic Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes)) GeneticMemoryStorage["Devil Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDevilEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes)) GeneticMemoryStorage["Oni Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOniEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes)) GeneticMemoryStorage["Elf Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedElfEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes)) GeneticMemoryStorage["Raiju Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes)) GeneticMemoryStorage["Vampire Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedVampireEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) GeneticMemoryStorage["Infernal Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes)) GeneticMemoryStorage["Orc Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOrcEyes);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes)) GeneticMemoryStorage["Displacer Eyes"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDisplacerEyes);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue)) GeneticMemoryStorage["Human Tongue"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue)) GeneticMemoryStorage["Snake Tongue"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSnakeTongue);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge)) GeneticMemoryStorage["Demonic Tongue"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDemonTonuge);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue)) GeneticMemoryStorage["Draconic Tongue"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicTongue);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue)) GeneticMemoryStorage["Cat Tongue"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatTongue);
 					if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue)) GeneticMemoryStorage["Elf Tongue"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedElfTongue);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars)) GeneticMemoryStorage["Human Ears"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars)) GeneticMemoryStorage["Horse Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHorseEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCowEars)) GeneticMemoryStorage["Cow Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCowEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedElfinEars)) GeneticMemoryStorage["Elfin Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedElfinEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatEars)) GeneticMemoryStorage["Cat Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLizardEars)) GeneticMemoryStorage["Lizard Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLizardEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars)) GeneticMemoryStorage["Fox Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars)) GeneticMemoryStorage["Draconic Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedPigEars)) GeneticMemoryStorage["Pig Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedPigEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLionEars)) GeneticMemoryStorage["Lion Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLionEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars)) GeneticMemoryStorage["Orca Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOrcaEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars)) GeneticMemoryStorage["Snake Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSnakeEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars)) GeneticMemoryStorage["Goat Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedGoatEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOniEars)) GeneticMemoryStorage["Oni Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOniEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedElfEars)) GeneticMemoryStorage["Elven Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedElfEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars)) GeneticMemoryStorage["Weasel Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBatEars)) GeneticMemoryStorage["Bat Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBatEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars)) GeneticMemoryStorage["Vampire Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedVampireEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars)) GeneticMemoryStorage["Red Panda Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRedPandaEars);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars)) GeneticMemoryStorage["Displacer Ears"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDisplacerEars);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns)) GeneticMemoryStorage["No Horns"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedDemonHorns)) GeneticMemoryStorage["Demon Horns"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDemonHorns);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns)) GeneticMemoryStorage["Cow Minotaur Horns"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCowMinotaurHorns);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX2)) GeneticMemoryStorage["Draconic Dual Horns"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicX2);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4)) GeneticMemoryStorage["Draconic Quadruple Horns"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicX4);
 					if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns)) GeneticMemoryStorage["Goat Horns"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedGoatHorns);
 					if (player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn)) GeneticMemoryStorage["Unicorn Horn"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedUnicornHorn);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn)) GeneticMemoryStorage["Oni Horn"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOniSingleHorn);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns)) GeneticMemoryStorage["Oni Dual Horns"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOniTwinHorns);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) GeneticMemoryStorage["Bicorn Horns"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBicornHorns);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanArms)) GeneticMemoryStorage["Human Arms"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms)) GeneticMemoryStorage["Harpy Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHarpyArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms)) GeneticMemoryStorage["Spider Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSpiderArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedMantisArms)) GeneticMemoryStorage["Mantis Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedMantisArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms)) GeneticMemoryStorage["Bee Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBeeArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms)) GeneticMemoryStorage["Salamander Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSalamanderArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms)) GeneticMemoryStorage["Phoenix Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedPhoenixArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms)) GeneticMemoryStorage["Shark Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSharkArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLionArms)) GeneticMemoryStorage["Lion Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLionArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms)) GeneticMemoryStorage["Fox Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms)) GeneticMemoryStorage["Kitsune Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedKitsuneArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) GeneticMemoryStorage["Lizard Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLizardArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms)) GeneticMemoryStorage["Draconic Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms)) GeneticMemoryStorage["Orca Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOrcaArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms)) GeneticMemoryStorage["Devil Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDevilArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOniArms)) GeneticMemoryStorage["Oni Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOniArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedElfArms)) GeneticMemoryStorage["Elf Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedElfArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms)) GeneticMemoryStorage["Raiju Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms)) GeneticMemoryStorage["Red Panda Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRedPandaArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatArms)) GeneticMemoryStorage["Cat Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) GeneticMemoryStorage["Sphinx Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSphinxArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedPigArms)) GeneticMemoryStorage["Pig Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedPigArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms)) GeneticMemoryStorage["Boar Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBoarArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOrcArms)) GeneticMemoryStorage["Orc Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOrcArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms)) GeneticMemoryStorage["Displacer Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDisplacerArms);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2)) GeneticMemoryStorage["Raiju Paws Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuArms2);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBatWings)) GeneticMemoryStorage["Bat Wing Arms"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBatWings);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoWings)) GeneticMemoryStorage["No Wings"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedBeeWingsSmall)) GeneticMemoryStorage["Bee Small Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBeeWingsSmall);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBeeWingsLarge)) GeneticMemoryStorage["Bee Large Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBeeWingsLarge);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDemonTinyBatWings)) GeneticMemoryStorage["Demonic Tiny Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDemonTinyBatWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings)) GeneticMemoryStorage["Demonic Large Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDemonLargeBatWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2)) GeneticMemoryStorage["Demonic Large Quadruple Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2);
 					if (player.hasStatusEffect(StatusEffects.UnlockedHarpyWings)) GeneticMemoryStorage["Feathered Large Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHarpyWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall)) GeneticMemoryStorage["Draconic Small Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicWingsSmall);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge)) GeneticMemoryStorage["Draconic Large Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicWingsLarge);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge)) GeneticMemoryStorage["Draconic Huge Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicWingsHuge);
 					if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings)) GeneticMemoryStorage["Feathered Phoenix Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedPhoenixWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) GeneticMemoryStorage["Feathered Alicorn Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedAlicornWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsSmall)) GeneticMemoryStorage["Mantis Small Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedMantisWingsSmall);
 					if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge)) GeneticMemoryStorage["Mantis Large Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedMantisWingsLarge);
 					if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsSmall)) GeneticMemoryStorage["Manticore Small Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedManticoreWingsSmall);
 					if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge)) GeneticMemoryStorage["Manticore Large Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedManticoreWingsLarge);
 					if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings)) GeneticMemoryStorage["Vampire Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedVampireWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) GeneticMemoryStorage["Nightmare Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedNightmareWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSphinxWings)) GeneticMemoryStorage["Feathered Sphinx Wings"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSphinxWings);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura)) GeneticMemoryStorage["Thunderous Aura (Wings)"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuThunderousAura);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) GeneticMemoryStorage["Plain Skin"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedFur)) GeneticMemoryStorage["Fur Skin"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFur);
 					if (player.hasStatusEffect(StatusEffects.UnlockedScales)) GeneticMemoryStorage["Scales Skin"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedScales);
 					if (player.hasStatusEffect(StatusEffects.UnlockedChitin)) GeneticMemoryStorage["Chitin Skin"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedChitin);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) GeneticMemoryStorage["Dragon Scales Skin"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDragonScales);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) GeneticMemoryStorage["No Skin Pattern"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedTattoed)) GeneticMemoryStorage["Kitsune Skin Pattern"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedTattoed);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) GeneticMemoryStorage["Oni Skin Pattern"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBattleTattoed);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) GeneticMemoryStorage["Raiju Skin Pattern"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLightningTattoed);
 					if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) GeneticMemoryStorage["Orc Skin Pattern"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedScarTattoed);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoAntennae)) GeneticMemoryStorage["No Antennae"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae)) GeneticMemoryStorage["Mantis Antennae"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedMantisAntennae);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae)) GeneticMemoryStorage["Bee Antennae"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBeeAntennae);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoGills)) GeneticMemoryStorage["No Gills"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedFishGills)) GeneticMemoryStorage["Fish Gills"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFishGills);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody)) GeneticMemoryStorage["No Rear Body"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedLionMane)) GeneticMemoryStorage["Lion Mane Rear Body"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLionMane);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSharkFin)) GeneticMemoryStorage["Shark Fin Rear Body"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSharkFin);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole)) GeneticMemoryStorage["Orca Blowhole Rear Body"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOrcaBlowhole);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane)) GeneticMemoryStorage["Raiju Mane Rear Body"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuMane);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar)) GeneticMemoryStorage["Bat Collar Rear Body"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBatCollar);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerBTentacles)) GeneticMemoryStorage["Displacer Tentacles Rear Body"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDisplacerBTentacles);
 
-					if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail)) GeneticMemoryStorage["No Tail"] = true;
 					if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail)) GeneticMemoryStorage["Horse Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHorseTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDemonTail)) GeneticMemoryStorage["Demonic Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDemonTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCowTail)) GeneticMemoryStorage["Cow Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCowTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSpiderTail)) GeneticMemoryStorage["Spider Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSpiderTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedBeeTail)) GeneticMemoryStorage["Bee Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedBeeTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSharkTail)) GeneticMemoryStorage["Shark Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSharkTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedLizardTail)) GeneticMemoryStorage["Lizard Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedLizardTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedHarpyTail)) GeneticMemoryStorage["Harpy Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHarpyTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail)) GeneticMemoryStorage["Draconic Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedDraconicTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedPigTail)) GeneticMemoryStorage["Pig Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedPigTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedScorpionTail)) GeneticMemoryStorage["Scorpion Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedScorpionTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedManticoreTail)) GeneticMemoryStorage["Manticore Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedManticoreTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail)) GeneticMemoryStorage["Goat Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedGoatTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail)) GeneticMemoryStorage["Salamander Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedSalamanderTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail)) GeneticMemoryStorage["Mantis Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedMantisTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail)) GeneticMemoryStorage["Orca Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedOrcaTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail)) GeneticMemoryStorage["Raiju Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRaijuTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaTail)) GeneticMemoryStorage["Red Panda Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedRedPandaTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) GeneticMemoryStorage["Burning Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedHellcatBurningTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatTail)) GeneticMemoryStorage["Cat Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail1)) GeneticMemoryStorage["Forked 1/3 Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedNekomataForkedTail1);
 					if (player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail2)) GeneticMemoryStorage["Forked 2/3 Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedNekomataForkedTail2);
 					if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) GeneticMemoryStorage["Cat 2nd Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedCatTail2nd);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail)) GeneticMemoryStorage["Fox Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd)) GeneticMemoryStorage["Fox 2nd Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail2nd);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd)) GeneticMemoryStorage["Fox 3rd Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail3rd);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th)) GeneticMemoryStorage["Fox 4th Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail4th);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th)) GeneticMemoryStorage["Fox 5th Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail5th);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th)) GeneticMemoryStorage["Fox 6th Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail6th);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th)) GeneticMemoryStorage["Fox 7th Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail7th);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th)) GeneticMemoryStorage["Fox 8th Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail8th);
 					if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th)) GeneticMemoryStorage["Fox 9th Tail"] = true;
+					player.removeStatusEffect(StatusEffects.UnlockedFoxTail9th);
+
+          if (player.hasStatusEffect(StatusEffects.UnlockedHoofedLegs)) GeneticMemoryStorage["Hoofed Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedHoofedLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody)) GeneticMemoryStorage["Snake Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedSnakeLowerBody);
+          if (player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels)) GeneticMemoryStorage["Demon High Heels Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedDemonHighHeels);
+          if (player.hasStatusEffect(StatusEffects.UnlockedDemonClawedLegs)) GeneticMemoryStorage["Demon Clawed Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedDemonClawedLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedBeeLegs)) GeneticMemoryStorage["Bee Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedBeeLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedCatLegs)) GeneticMemoryStorage["Cat Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedCatLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedLizardLegs)) GeneticMemoryStorage["Lizard Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedLizardLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedHarpyLegs)) GeneticMemoryStorage["Harpy Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedHarpyLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedSpiderLegs)) GeneticMemoryStorage["Spider Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedSpiderLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedDriderLegs)) GeneticMemoryStorage["Drider Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedDriderLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody)) GeneticMemoryStorage["Fox Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedFoxLowerBody);
+          if (player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs)) GeneticMemoryStorage["Draconic Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedDraconicLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedClovenHoofedLegs)) GeneticMemoryStorage["Cloven Hoofed Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedClovenHoofedLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs)) GeneticMemoryStorage["Salamander Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedSalamanderLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedMantisLegs)) GeneticMemoryStorage["Mantis Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedMantisLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedSharkLegs)) GeneticMemoryStorage["Shark Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedSharkLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedLionLegs)) GeneticMemoryStorage["Lion Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedLionLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs)) GeneticMemoryStorage["Orca Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedOrcaLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedOniLegs)) GeneticMemoryStorage["Oni Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedOniLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs)) GeneticMemoryStorage["Elf Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedElfLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs)) GeneticMemoryStorage["Raiju Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedRaijuLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaLegs)) GeneticMemoryStorage["Red Panda Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedRedPandaLegs);
+          if (player.hasStatusEffect(StatusEffects.UnlockedOrcLegs)) GeneticMemoryStorage["Orc Lower Body"] = true;
+          player.removeStatusEffect(StatusEffects.UnlockedOrcLegs);
 					/*
 				*/
 
@@ -341,6 +526,7 @@ package classes.Scenes {
 					}
 					/*
 				*/
+			}
 		}
 
 		public function Metamorph() {
@@ -551,7 +737,18 @@ package classes.Scenes {
 			outputText(title);
 			outputText("What kind of lower body do you want?");
 
-			openPaginatedMenuOld(title, accessLowerBodyMenu, currentPage, LowerBody.Types, LowerBody.Types[player.lowerBody], LowerBody.getTFDescription);
+			var memArray: Array = LowerBodyMem.Memories;
+
+			// Locks Taur TFs if player didn't become Taur at least once
+			if (!GeneticMemoryStorage["Taur Lower Body"]) {
+				memArray.map(function(item: *, index: int, array: Array): void {
+					if (item && item.isTaur) {
+						item.id = "Locked Metamorph";
+					}
+				});
+			}
+
+			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, memArray);
 		}
 
 		private function accessSkinMenu(currentPage: int = 0): void {
@@ -614,52 +811,6 @@ package classes.Scenes {
 			openPaginatedMenu(title, accessTailMenu, currentPage, TailMem.Memories);
 		}
 
-		private function openPaginatedMenuOld (title: String, thisMenu: *, currentPage: int, partsArray:Array, currentPart: *, getTFDescription: *): void {
-			menu();
-
-			var partsList: Array = [];
-
-			// Removing empty slots
-			for each (var part: * in partsArray) {
-				if (part && part.metamorphFlag) {
-					partsList.push(part);
-				}
-			}
-
-			const partsPerPage: int = partsList.length > 14 ? 12 : 14;
-
-			const lastPage: int = Math.ceil(partsList.length/partsPerPage) - 1;
-
-			const pageParts: Array = partsList.slice(currentPage * partsPerPage, (currentPage * partsPerPage) + partsPerPage);
-
-			var currentButton: int = 0;
-
-			for each (var bodyPart: * in pageParts) {
-				if (bodyPart.metamorphFlag) {
-					const buttonStr: String = bodyPart.metamorphTitle || "";
-
-					const unlocked: Boolean = player.hasStatusEffect(bodyPart.metamorphFlag);
-					const isPossible: Boolean = currentPart === bodyPart;
-					const enoughSF: Boolean = player.soulforce >= bodyPart.metamorphCost;
-
-					if (unlocked && !isPossible && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, bodyPart, getTFDescription);
-					else if (unlocked && isPossible) addButtonDisabled(currentButton, buttonStr, "You already have this body part.");
-					else if (unlocked && !isPossible && enoughSF) addButtonDisabled(currentButton, buttonStr, "You don't have enough Soulforce for this metamorphosis!");
-					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
-					currentButton++;
-				}
-			}
-
-			if (lastPage > 0) {
-				if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1);
-				else addButtonDisabled (12, "Prev Page");
-				if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1);
-				else addButtonDisabled (13, "Next Page");
-			}
-
-			addButton(14, "Back", accessMetamorphMenu);
-		}
-
 		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
 			menu();
 
@@ -667,7 +818,6 @@ package classes.Scenes {
 				if (element) {
 					return true;
 				}
-
 				return false;
 			});
 
@@ -680,14 +830,14 @@ package classes.Scenes {
 			var currentButton: int = 0;
 
 			for each (var genMem: * in pageMems) {
-				const buttonStr: String = genMem.metamorphTitle || "";
-				const unlocked: Boolean = GeneticMemoryStorage[genMem.name];
+				const buttonStr: String = genMem.title || "";
+				const unlocked: Boolean = GeneticMemoryStorage[genMem.id];
 				const partsInUse: Boolean = genMem.transformation().isPresent();
-				const enoughSF: Boolean = player.soulforce >= genMem.metamorphCost;
+				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
-				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.metamorphCost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
+				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
-				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.metamorphCost + " SF (You don't have enough Soulforce for this metamorphosis!)");
+				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
 				currentButton++;
 			}
@@ -706,7 +856,7 @@ package classes.Scenes {
 			clearOutput();
 			outputText(title);
 			genMem.transformation().applyEffect();
-			player.soulforce -= genMem.metamorphCost;
+			player.soulforce -= genMem.cost;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(accessMetamorphMenu);
 		}
@@ -714,7 +864,15 @@ package classes.Scenes {
 		private function openPaginatedSkinMenu (title: String, currentPage: int): void {
 			menu();
 
-			const memArray: Array = SkinMem.Memories;
+			var memArray: Array = SkinMem.Memories;
+
+			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
+				if (element) {
+					return true;
+				}
+
+				return false;
+			});
 
 			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
 
@@ -725,15 +883,15 @@ package classes.Scenes {
 			var currentButton: int = 0;
 
 			for each (var genMem: * in pageMems) {
-				const buttonStr: String = genMem.metamorphTitle || "";
-				const unlocked: Boolean = GeneticMemoryStorage[genMem.name];
-				const enoughSF: Boolean = player.soulforce >= genMem.metamorphCost;
+				const buttonStr: String = genMem.title || "";
+				const unlocked: Boolean = GeneticMemoryStorage[genMem.id];
+				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
 				if (!genMem.transformationFunc) {
 					const partsInUse: Boolean = genMem.transformation().isPresent();
-					if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.metamorphCost + " SF");
+					if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 					else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
-					else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.metamorphCost + " SF (You don't have enough Soulforce for this metamorphosis!)");
+					else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
 					currentButton++;
 				} else {
@@ -756,7 +914,7 @@ package classes.Scenes {
 		private function openCoverageMenu(genMem: *): void {
 			clearOutput();
 			menu();
-			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.name.split(" Skin")[0] + " Coverage</u></font>\n");
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.id.split(" Skin")[0] + " Coverage</u></font>\n");
 			outputText("How much do you want your skin to be covered?");
 
 			const coverages: Array = [
@@ -782,7 +940,7 @@ package classes.Scenes {
 
 			for each (var coverage: Object in coverages) {
 				if (InCollection(coverage.value, genMem.availableCoverages)) {
-					const cost: int = genMem.metamorphCost * (coverages.indexOf(coverage) + 1);
+					const cost: int = genMem.cost * (coverages.indexOf(coverage) + 1);
 					const enoughSF: Boolean = player.soulforce >= cost;
 					const inEffect: Boolean = genMem.transformationFunc(coverage.value).isPresent();
 
@@ -798,7 +956,7 @@ package classes.Scenes {
 
 		private function doMetamorphSkin (genMem: *, coverage: int, cost: int): void {
 			clearOutput();
-			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.name.split(" Skin")[0] + "</u></font>\n");
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.id.split(" Skin")[0] + "</u></font>\n");
 
 			genMem.transformationFunc(coverage).applyEffect();
 			player.soulforce -= cost;
@@ -812,6 +970,7 @@ package classes.Scenes {
 				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "</b>");
 			}
 		}
+
 		private function accessPageEx1MetamorphMenu():void {
 			menu();
 			if (player.soulforce >= 300) addButton(0, "Height +1", metamorphHeight1U);

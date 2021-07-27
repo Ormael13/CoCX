@@ -119,8 +119,7 @@ package classes.Scenes.Areas.GlacialRift
 				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
 			}
 			if (player.tailType != Tail.WENDIGO) CoC.instance.transformations.TailWendigo.applyEffect(false);
-			if (player.lowerBody != LowerBody.WENDIGO) CoC.instance.mutations.setLowerBody(LowerBody.WENDIGO);
-			if (player.legCount != 2) player.legCount = 2;
+			if (player.lowerBody != LowerBody.WENDIGO) transformations.LowerBodyWendigo.applyEffect(false);
 			if (player.arms.type != Arms.WENDIGO) CoC.instance.transformations.ArmsWendigo.applyEffect(false);
 			if (CoC.instance.transformations.EyesDead.isPossible()) {
 				CoC.instance.transformations.EyesDead.applyEffect(false);

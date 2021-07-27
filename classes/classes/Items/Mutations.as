@@ -889,7 +889,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         var temp3:Number = 0;
         var rando:Number = rand(100);
-        rando += (10 * player.additionalTransformationChances());
+        rando += (10 * player.additionalTransformationChances);
         clearOutput();
         outputText("The draft is slick and sticky, ");
         if (player.cor <= 33) outputText("just swallowing it makes you feel unclean.");
@@ -1199,7 +1199,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         var temp3:Number = 0;
         var rando:Number = Math.random() * 100;
-        rando += (10 * player.additionalTransformationChances());
+        rando += (10 * player.additionalTransformationChances);
         if (rando >= 90 && !tainted) rando -= 10;
         if (player.cor < 35) {
             clearOutput();
@@ -1436,7 +1436,7 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 1;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         player.slimeFeed();
         clearOutput();
         outputText("The pepper taste and feels like trying to eat snow and ice. However you eat it anyway still feeling a cold tingling in your mouth.");
@@ -1715,26 +1715,26 @@ public final class Mutations extends MutationsHelper {
         //Wolf face
         if (rand(2) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS && player.hasFur()) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceWolf.applyEffect();
+            transformations.FaceWolf.applyEffect();
             changes++;
         }
         //Winter wolf fur partial fur
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && !player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
             if (player.hairColor != "glacial white") {
                 outputText("\n\n");
-                CoC.instance.transformations.HairChangeColor(["glacial white"]).applyEffect();
+                transformations.HairChangeColor(["glacial white"]).applyEffect();
             }
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: "glacial white"}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_LOW, {color: "glacial white"}).applyEffect();
             changes++;
         }
         //Winter wolf full fur
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
             if (player.hairColor != "glacial white") {
                 outputText("\n\n");
-                CoC.instance.transformations.HairChangeColor(["glacial white"]).applyEffect();
+                transformations.HairChangeColor(["glacial white"]).applyEffect();
             }
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "glacial white"}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "glacial white"}).applyEffect();
             changes++;
         }
         if (rand(2) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasFullCoatOfType(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
@@ -1745,25 +1745,25 @@ public final class Mutations extends MutationsHelper {
         }
         if (changes < changeLimit && player.arms.type == Arms.HUMAN && rand(2) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsWolf.applyEffect();
+            transformations.ArmsWolf.applyEffect();
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE, Arms.WOLF) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Wolf paws
         if (rand(2) == 0 && player.lowerBody != LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && changes < changeLimit) {
             if (player.isBiped() && player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou scream in agony as you feel the bones in your feets break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paws.</b>");
-                setLowerBody(LowerBody.WOLF);
-                player.legCount = 2;
+                outputText("\n\n");
+                transformations.LowerBodyWolf(2).applyEffect();
                 changes++;
             }
             if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.WOLF) {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
                 changes++;
             }
         }
@@ -1771,12 +1771,12 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0 && player.ears.type != Ears.WOLF && player.tailType == Tail.WOLF && changes < changeLimit) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.EarsWolf.applyEffect();
+                transformations.EarsWolf.applyEffect();
                 changes++;
             }
             if (player.ears.type != Ears.HUMAN && player.ears.type != Ears.WOLF && player.tailType == Tail.WOLF) {
                 outputText("\n\n");
-                CoC.instance.transformations.EarsHuman.applyEffect();
+                transformations.EarsHuman.applyEffect();
                 changes++;
             }
         }
@@ -1784,19 +1784,19 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0 && changes < changeLimit && player.tailType != Tail.WOLF && player.tailType != Tail.GARGOYLE) {
             if (player.tailType == Tail.NONE) {
                 outputText("\n\n");
-                CoC.instance.transformations.TailWolf.applyEffect();
+                transformations.TailWolf.applyEffect();
                 changes++;
             }
             if (player.tailType != Tail.NONE && player.tailType != Tail.WOLF) {
                 outputText("\n\n");
-                CoC.instance.transformations.TailNone.applyEffect();
+                transformations.TailNone.applyEffect();
                 changes++;
             }
         }
         // Remove gills
         if (rand(3) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //If no changes yay
@@ -1823,7 +1823,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Initial outputs & crit level
         clearOutput();
         if (type == 0) {
@@ -2387,7 +2387,7 @@ public final class Mutations extends MutationsHelper {
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN && type != 6) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Master Furry Appearance Order:
@@ -2395,63 +2395,58 @@ public final class Mutations extends MutationsHelper {
         //Dog-face requires fur & paws  Should be last morph to take place
         if (rand(4) == 0 && changes < changeLimit && player.faceType != Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceDog.applyEffect();
+            transformations.FaceDog.applyEffect();
             changes++;
         }
 
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairHuman.applyEffect();
+		    transformations.HairHuman.applyEffect();
             changes++;
         }
 
         if (type == 3 && player.hairColor != "midnight black" && player.lowerBody != LowerBody.GARGOYLE) {
             outputText("\n\n");
-            CoC.instance.transformations.HairChangeColor(["midnight black"]).applyEffect();
+            transformations.HairChangeColor(["midnight black"]).applyEffect();
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "midnight black", adj: "thick"}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "midnight black", adj: "thick"}).applyEffect();
         }
         //Become furred - requires paws and tail
         if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasFur() && !player.isGargoyle()) {
             outputText("\n\n");
             if (rand(3) > 0) {
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white"]}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white"]}).applyEffect();
             } else {
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["orange", "brown", "black"], pattern: Skin.PATTERN_SPOTTED, color2: "white"}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["orange", "brown", "black"], pattern: Skin.PATTERN_SPOTTED, color2: "white"}).applyEffect();
             }
             changes++;
         }
         //Change to paws - requires tail and ears
         if (rand(3) == 0 && player.lowerBody != LowerBody.DOG && player.tailType == Tail.DOG && player.ears.type == Ears.DOG && changes < changeLimit) {
-            //Feet -> paws
-            if (player.lowerBody == LowerBody.HUMAN) outputText("\n\nYou scream in agony as you feel the bones in your feet break and begin to rearrange. <b>You now have paws</b>.");
-            //Hooves -> Paws
-            else if (player.lowerBody == LowerBody.HOOFED) outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits.  Their flesh softens as your hooves reshape into furred paws.");
-            else outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on fur-covered paws!  <b>You now have paws</b>.");
-            setLowerBody(LowerBody.DOG);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyDog(2).applyEffect();
             changes++;
         }
         //Change to dog-ears!  Requires dog-tail
         if (rand(2) == 0 && player.ears.type != Ears.DOG && player.tailType == Tail.DOG && changes < changeLimit) {
-            CoC.instance.transformations.EarsDog.applyEffect();
+            transformations.EarsDog.applyEffect();
             changes++;
         }
         //Grow tail if not dog-tailed
         if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.GARGOYLE && ((player.tailType != Tail.DOG && type != 6) || (player.tailType != Tail.WOLF && type == 6))) {
             outputText("\n\n");
             if (type != 6) {
-                CoC.instance.transformations.TailDog.applyEffect();
+                transformations.TailDog.applyEffect();
             } else {
-                CoC.instance.transformations.TailWolf.applyEffect();
+                transformations.TailWolf.applyEffect();
             }
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         if (player.hasFullCoatOfType(Skin.FUR) && changes < changeLimit && rand(3) == 0 && type != 6) {
@@ -2535,7 +2530,7 @@ public final class Mutations extends MutationsHelper {
         //Chances to up the max number of changes
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Generic drinking text
         clearOutput();
         outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.");
@@ -2620,7 +2615,7 @@ public final class Mutations extends MutationsHelper {
         //Chances to up the max number of changes
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Generic drinking text
         clearOutput();
         outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.");
@@ -3220,7 +3215,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         if (enhanced) changeLimit += 2;
         //Temporary storage
         var temp:Number = 0;
@@ -3336,7 +3331,7 @@ public final class Mutations extends MutationsHelper {
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairHuman.applyEffect();
+		    transformations.HairHuman.applyEffect();
             changes++;
         }
 
@@ -3467,13 +3462,13 @@ public final class Mutations extends MutationsHelper {
         //Give the player a bovine tail, same as the minotaur
         if (tainted && player.tailType != Tail.COW && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailCow.applyEffect();
+            transformations.TailCow.applyEffect();
             changes++;
         }
         //Give the player bovine ears, same as the minotaur
         if (tainted && player.ears.type != Ears.COW && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.COW) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsCow.applyEffect();
+			transformations.EarsCow.applyEffect();
             changes++;
         }
         //If the player is under 7 feet in height, increase their height, similar to the minotaur
@@ -3493,16 +3488,8 @@ public final class Mutations extends MutationsHelper {
         //Give the player hoofs, if the player already has hoofs STRIP FUR
         if (tainted && player.lowerBody != LowerBody.HOOFED && player.ears.type == Ears.COW) {
             if (changes < changeLimit && rand(3) == 0) {
-                changes++;
-                if (player.lowerBody == LowerBody.HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-                if (player.lowerBody == LowerBody.DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-                if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
-                if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
-                //Catch-all
-                if (player.isNaga()) outputText("\n\nYou stagger as your [feet] change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-                outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>");
-                setLowerBody(LowerBody.HOOFED);
-                player.legCount = 2;
+                outputText("\n\n");
+                transformations.LowerBodyHoofed().applyEffect();
                 dynStats("cor", 0);
                 changes++;
             }
@@ -3524,45 +3511,45 @@ public final class Mutations extends MutationsHelper {
                 //If no horns yet..
                 if (player.horns.type == Horns.NONE || player.horns.count == 0) {
                     outputText("\n\n");
-                    CoC.instance.transformations.HornsCowMinotaur.applyEffect();
+                    transformations.HornsCowMinotaur.applyEffect();
                     changes++;
                 }
                 //TF other horns
                 if (player.horns.type != Horns.NONE && player.horns.type != Horns.COW_MINOTAUR && player.horns.type != Horns.ORCHID && player.horns.count > 0) {
                     outputText("\n\n");
-                    CoC.instance.transformations.HornsCowMinotaur.applyEffect();
+                    transformations.HornsCowMinotaur.applyEffect();
                 }
             }
             //Not mino horns, change to cow-horns
             if ((player.horns.type == Horns.DEMON || player.horns.type > Horns.COW_MINOTAUR) && player.horns.type != Horns.ORCHID) {
                 outputText("\n\n");
-                CoC.instance.transformations.HornsCowMinotaur.applyEffect();
+                transformations.HornsCowMinotaur.applyEffect();
                 changes++;
             }
         }
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //If the player's face is non-human, they gain a human face
         if (!enhanced && player.horns.type != Horns.COW_MINOTAUR && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
             //Remove face before fur!
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //enhanced get shitty fur
         if (enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR && player.lowerBody != LowerBody.GARGOYLE) {
             outputText("\n\n");
-            CoC.instance.transformations.HairChangeColor(["black"]).applyEffect();
+            transformations.HairChangeColor(["black"]).applyEffect();
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "black", color2: "white", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "black", color2: "white", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
         }
         //if enhanced to probova give a shitty cow face
         else if (enhanced && player.faceType != Face.COW_MINOTAUR && player.tailType != Tail.GARGOYLE) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceCowMinotaur.applyEffect();
+            transformations.FaceCowMinotaur.applyEffect();
             changes++;
         }
         //Increase the size of the player's hips, if they are not already childbearing or larger
@@ -3576,7 +3563,7 @@ public final class Mutations extends MutationsHelper {
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
 
@@ -4063,7 +4050,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
@@ -4163,19 +4150,19 @@ public final class Mutations extends MutationsHelper {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairHuman.applyEffect(false);
+		    transformations.HairHuman.applyEffect(false);
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Removes wings!
         if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes antennaes!
@@ -4186,18 +4173,19 @@ public final class Mutations extends MutationsHelper {
         }
         //Fix Legs!
         if (player.lowerBody != LowerBody.HUMAN) {
-            humanizeLowerBody();
+            outputText("\n\n");
+            transformations.LowerBodyHuman.applyEffect();
             changes++;
         }
         //Eye colors
-        if (player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesGoblinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
-            CoC.instance.transformations.EyesGoblinColors.applyEffect();
+        if (player.eyes.type == Eyes.HUMAN && transformations.EyesGoblinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
+            transformations.EyesGoblinColors.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.GREMLIN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Add gremlin eyes
@@ -4207,9 +4195,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Omg Crazy hairs
-        if (CoC.instance.transformations.HairCrazy.isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (transformations.HairCrazy.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairCrazy.applyEffect();
+            transformations.HairCrazy.applyEffect();
             changes++;
         }
         //Dye those hairs
@@ -4235,7 +4223,7 @@ public final class Mutations extends MutationsHelper {
         //Skin/fur
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //skinTone
@@ -4253,23 +4241,23 @@ public final class Mutations extends MutationsHelper {
             if (player.faceType != Face.HUMAN) {
                 outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
                 outputText("\n\n");
-                CoC.instance.transformations.FaceHuman.applyEffect(false);
+                transformations.FaceHuman.applyEffect(false);
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceCrazy.applyEffect();
+                transformations.FaceCrazy.applyEffect();
             }
             changes++;
         }
         //Ears!
         if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsGremlin.applyEffect();
+            transformations.EarsGremlin.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         if (changes < changeLimit && rand(3) == 0) {
@@ -4289,7 +4277,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
@@ -4388,19 +4376,19 @@ public final class Mutations extends MutationsHelper {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairHuman.applyEffect(false);
+		    transformations.HairHuman.applyEffect(false);
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Removes wings!
         if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes antennaes!
@@ -4411,11 +4399,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Fix Legs!
         if (player.lowerBody != LowerBody.HUMAN && changes < changeLimit) {
-            humanizeLowerBody();
+            outputText("\n\n");
+            transformations.LowerBodyHuman.applyEffect();
             changes++;
         }
-        if (player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesGoblinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
-            CoC.instance.transformations.EyesGoblinColors.applyEffect();
+        if (player.eyes.type == Eyes.HUMAN && transformations.EyesGoblinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
+            transformations.EyesGoblinColors.applyEffect();
             changes++;
         }
         var goblin_hair_color:Array = ["red", "purple", "green", "blue", "pink", "orange"];
@@ -4427,7 +4416,7 @@ public final class Mutations extends MutationsHelper {
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //-Remove extra breast rows
@@ -4446,7 +4435,7 @@ public final class Mutations extends MutationsHelper {
         //Skin/fur
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //skinTone
@@ -4471,24 +4460,24 @@ public final class Mutations extends MutationsHelper {
         if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.ELFIN) {
             if (player.faceType != Face.ANIMAL_TOOTHS) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+                transformations.FaceAnimalTeeth.applyEffect();
             } else {
                 outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
                 outputText("\n\n");
-                CoC.instance.transformations.FaceHuman.applyEffect(false);
+                transformations.FaceHuman.applyEffect(false);
             }
             changes++;
         }
         //Ears!
         if (player.ears.type != Ears.ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsElfin.applyEffect();
+			transformations.EarsElfin.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         if (changes < changeLimit && rand(3) == 0) {
@@ -4513,7 +4502,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         if (type == 0) outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your [skin.type] slowly.");
         if (type == 2) outputText("Well here goes nothing, you gulp down the thing and sure enough, you begin to feel strange as you ingest the jelly. Well at least it tastes like grapes.");
@@ -4546,20 +4535,20 @@ public final class Mutations extends MutationsHelper {
         //Remove wings
         if (player.wings.type > Wings.NONE && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Human face
         if (player.faceType != Face.HUMAN && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect(false);
+            transformations.FaceHuman.applyEffect(false);
             changes++;
         }
         //1.Goopy arms
         if (player.arms.type != Arms.GOO && changes < changeLimit && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsGoo.applyEffect();
+            transformations.ArmsGoo.applyEffect();
             changes++;
         }
         //2.Goopy skin
@@ -4585,29 +4574,23 @@ public final class Mutations extends MutationsHelper {
         }
         ////2a.Make alterations to dick/vaginal/nippular descriptors to match
         //3.Goopy hair
-        if (player.hasGooSkin() && CoC.instance.transformations.HairGoo.isPossible() && rand(2) == 0 && changes < changeLimit) {
+        if (player.hasGooSkin() && transformations.HairGoo.isPossible() && rand(2) == 0 && changes < changeLimit) {
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairGoo.applyEffect();
+		    transformations.HairGoo.applyEffect();
             dynStats("lus", 10);
             changes++;
         }
         //DONE EXCEPT FOR TITS & MULTIDICKS (UNFINISHED KINDA)
         //4.Goo legs
         if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour viewpoint rapidly drops as everything below your [butt] and groin melts together into an amorphous blob.  Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.");
-            player.tallness -= 3 + rand(2);
-            if (player.tallness < 36) {
-                player.tallness = 36;
-                outputText("  The goo firms up and you return to your previous height.  It would truly be hard to get any shorter than you already are!");
-            }
-            setLowerBody(LowerBody.GOO);
-            player.legCount = 1;
+            outputText("\n\n");
+            transformations.LowerBodyGoo.applyEffect();
             changes++;
         }
         //5 Goopy rear body
         if (player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore)) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyMetamorphicGoo.applyEffect();
+            transformations.RearBodyMetamorphicGoo.applyEffect();
             changes++;
         }
         //6a. Grow vagina if none
@@ -4653,7 +4636,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         if (type == 0) {
             clearOutput();
             outputText("You have no idea why, but you decide to eat the pointed tooth. To your surprise, it's actually quite brittle, turning into a fishy-tasting dust. You figure it must just be a tablet made to look like a shark's tooth.");
@@ -4745,30 +4728,30 @@ public final class Mutations extends MutationsHelper {
             //Mouth TF
             if (player.faceType != Face.SHARK_TEETH && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceSharkTeeth.applyEffect();
+                transformations.FaceSharkTeeth.applyEffect();
                 changes++;
             }
             //Ear tf
             if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-                CoC.instance.transformations.EarsShark.applyEffect();
+                transformations.EarsShark.applyEffect();
                 changes++;
             }
             //Remove odd eyes
             if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
                 changes++;
             }
             //Tail TF
             if (player.tailType != Tail.SHARK && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\n");
-                CoC.instance.transformations.TailShark.applyEffect();
+                transformations.TailShark.applyEffect();
                 changes++;
             }
             //Gills TF
             if (player.gills.type != Gills.FISH && player.tailType == Tail.SHARK && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsFish.applyEffect();
+            transformations.GillsFish.applyEffect();
             changes++;
         }
             //Hair
@@ -4806,31 +4789,28 @@ public final class Mutations extends MutationsHelper {
                     player.skin.base.color2 = "black";
                     changes++;
                 }
-                if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedAquaScales)) {
-                    outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
-                    player.createStatusEffect(StatusEffects.UnlockedAquaScales, 0, 0, 0, 0);
-                }
             }
             //Legs
             if (player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SHARK && changes < changeLimit && rand(3) == 0) {
-                outputText("\n\nYou feel something change in your feets as webing form between your toes. Well this is sure to help you swim faster. <b>You now have webed feet!</b>");
-                setLowerBody(LowerBody.SHARK);
+                outputText("\n\n");
+                transformations.LowerBodyShark(2).applyEffect();
                 changes++;
             }
             if (player.lowerBody != LowerBody.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
                 changes++;
             }
             //Arms
             if (player.lowerBody == LowerBody.SHARK && !InCollection(player.arms.type, Arms.SHARK, Arms.GARGOYLE) && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\n");
-                CoC.instance.transformations.ArmsShark.applyEffect();
+                transformations.ArmsShark.applyEffect();
                 changes++;
             }
             //FINZ
             if (player.rearBody.type != RearBody.SHARK_FIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\n");
-                CoC.instance.transformations.RearBodySharkFin.applyEffect();
+                transformations.RearBodySharkFin.applyEffect();
                 changes++;
             }
             if (changes == 0) {
@@ -4873,7 +4853,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //b) Description while used
         outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
         //(if outside combat)
@@ -4889,7 +4869,7 @@ public final class Mutations extends MutationsHelper {
         //Removes wings
         if (!InCollection(player.wings.type, Wings.NONE, Wings.GARGOYLE_LIKE_LARGE) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
 
@@ -5017,38 +4997,22 @@ public final class Mutations extends MutationsHelper {
         //9c) II The tongue (sensitivity bonus, stored as a perk?)
         if (changes == 0 && player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueSnake.applyEffect();
+            transformations.TongueSnake.applyEffect();
             player.addCurse("sen", 5, 1);
             changes++;
         }
         //9c) III The fangs
         if (changes == 0 && player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSnakeFangs.applyEffect();
+            transformations.FaceSnakeFangs.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
         //9c) I The tail ( http://tvtropes.org/pmwiki/pmwiki.php/Main/TransformationIsAFreeAction ) (Shouldn't we try to avert this? -Ace)
         //Should the enemy "kill" you during the transformation, it skips the scene and immediately goes to tthe rape scene. (Now that I'm thinking about it, we should add some sort of appendix where the player realizes how much he's/she's changed. -Ace)
         if (changes == 0 && player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && rand(4) == 0 && changes < changeLimit) {
-            if (player.lowerBody == LowerBody.SCYLLA) {
-                outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
-            } else {
-                if (player.lowerBody == LowerBody.MELKIE) {
-                    humanizeLowerBody();
-                    outputText("\n\nHowever this doesnt last long as changes begins to overcome your legs again.");
-                }
-                outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
-                //(If used in combat, you lose a turn here. Half-corrupted Jojo and the Naga won't attack you during that period, but other monsters will)
-                //FUCK NO
-                outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
-                outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
-            }
-            outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
-            if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
-            outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.");
-            setLowerBody(LowerBody.NAGA);
-            player.legCount = 1;
+            outputText("\n\n");
+            CoC.instance.transformations.LowerBodyHoofed(4).applyEffect();
             changes++;
         }
         //Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
@@ -5061,25 +5025,25 @@ public final class Mutations extends MutationsHelper {
                 colors = ["red", "green", "white", "blue", "black"];
             }
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {colors: colors}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {colors: colors}).applyEffect();
             changes++;
         }
         //Snake eyes
         if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesSnake.applyEffect();
+            transformations.EyesSnake.applyEffect();
             changes++;
         }
         //Ears!
         if (player.ears.type != Ears.SNAKE && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsSnake.applyEffect();
+			transformations.EarsSnake.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
 
@@ -5102,7 +5066,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         var colors: Array;
         if (type != 3) {
             outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.  Minutes pass as you start wishing you had water with you, to get rid of the ");
@@ -5250,37 +5214,27 @@ public final class Mutations extends MutationsHelper {
         //Snake tounge
         if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueSnake.applyEffect();
+            transformations.TongueSnake.applyEffect();
             player.addCurse("sen", 5, 1);
             changes++;
         }
         //Dragon tongue
         if (type == 1 && player.tongue.type != Tongue.DRACONIC && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueDraconic.applyEffect();
+            transformations.TongueDraconic.applyEffect();
             changes++;
         }
         //Face with snake fangs
         if (player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSnakeFangs.applyEffect();
+            transformations.FaceSnakeFangs.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
         //Snake lower body
         if (player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
-            if (player.lowerBody == LowerBody.SCYLLA) {
-                outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
-            } else {
-                outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
-                outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
-                outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
-            }
-            outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
-            if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
-            outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your <b>newly formed snake tail.</b> You can't help feeling proud of this majestic new body of yours.");
-            setLowerBody(LowerBody.NAGA);
-            player.legCount = 1;
+            outputText("\n\n");
+            CoC.instance.transformations.LowerBodySnake.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.HYDRA && player.statusEffectv1(StatusEffects.HydraTailsPlayer) < 12 && rand(4) == 0 && changes < changeLimit && type == 3) {
@@ -5289,12 +5243,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.lowerBody == LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit && type == 3) {
-            outputText("\n\nWith a ripping sound your tail suddenly begins to tear apart, splitting from the junction just below your thigh level into two segments as if cut by a scalpel. Pain doubles up as bones snaps, your tail tip growing into larger bulbs which a few second later turns into snake heads hissing loudly and mirroring your pain ");
-            outputText("as blood seeps out of the wound. Finally, the wound left by the splitting of your tail closes at high speed, filling in with new flesh and muscle as your newly acquired hydra regeneration kicks in. <b>You snake tail is now forked with two hydra heads!</b>");
-            if (!player.hasPerk(PerkLib.HydraRegeneration)) player.createPerk(PerkLib.HydraRegeneration, 0, 0, 0, 0);
-            player.createStatusEffect(StatusEffects.HydraTailsPlayer, 2, 0, 0, 0);
-            player.tailCount = 2;
-            setLowerBody(LowerBody.HYDRA);
+            outputText("\n\n");
+            transformations.LowerBodyHydra.applyEffect();
             changes++;
         }
         //Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
@@ -5305,43 +5255,43 @@ public final class Mutations extends MutationsHelper {
                 colors = ["red", "green", "white", "blue", "black"];
             }
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {colors: colors}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {colors: colors}).applyEffect();
             changes++;
         }
         //Snake eyes for hydra
         if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesSnake.applyEffect();
+            transformations.EyesSnake.applyEffect();
             changes++;
         }
         //Snake eyes
         if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesSnake.applyEffect();
+            transformations.EyesSnake.applyEffect();
             changes++;
         }
         //Ears!
         if ((type == 0 || type == 2) && player.ears.type != Ears.SNAKE && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsSnake.applyEffect();
+			transformations.EarsSnake.applyEffect();
             changes++;
         }
         //Gorgon hair
-        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && CoC.instance.transformations.HairGorgon.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && transformations.HairGorgon.isPossible() && changes < changeLimit && rand(4) == 0) {
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairGorgon.applyEffect();
+		    transformations.HairGorgon.applyEffect();
             changes++;
         }
         //Gorgon eyes
         if (type == 0 && player.hairType == Hair.GORGON && player.eyes.type == Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesGorgon.applyEffect();
+            transformations.EyesGorgon.applyEffect();
             changes++;
         }
         //Snake eyes for hydra
         if (type == 3 && player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesSnake.applyEffect();
+            transformations.EyesSnake.applyEffect();
             changes++;
         }
         //-Existing horns become draconic, max of 4, max length of 1'
@@ -5353,10 +5303,10 @@ public final class Mutations extends MutationsHelper {
                     //High quantity demon horns
                     if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
                         outputText("\n\n");
-                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
+                        transformations.HornsDraconicQuadruple.applyEffect();
                     } else {
                         outputText("\n\n");
-                        CoC.instance.transformations.HornsDraconicDual.applyEffect();
+                        transformations.HornsDraconicDual.applyEffect();
                     }
                     changes++;
                 }
@@ -5364,7 +5314,7 @@ public final class Mutations extends MutationsHelper {
                 else {
                     //-If no horns, grow a pair
                     outputText("\n\n");
-                    CoC.instance.transformations.HornsDraconicDual.applyEffect();
+                    transformations.HornsDraconicDual.applyEffect();
                     changes++;
                 }
             }
@@ -5386,7 +5336,7 @@ public final class Mutations extends MutationsHelper {
                     else {
                         //--Next horns growth adds second row and brings length up to 12\"
                         outputText("\n\n");
-                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
+                        transformations.HornsDraconicQuadruple.applyEffect();
                         changes++;
                     }
                 }
@@ -5395,29 +5345,29 @@ public final class Mutations extends MutationsHelper {
         //Gain Dragon Ears
         if (type == 1 && changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.SNAKE && player.ears.type != Ears.DRAGON) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsDraconic.applyEffect();
+			transformations.EarsDraconic.applyEffect();
             changes++;
         }
         //Grow Dragon Wings
         if (type == 1 && player.wings.type != Wings.DRACONIC_HUGE && player.ears.type == Ears.DRAGON && changes < changeLimit && rand(3) == 0) {
             if (player.wings.type == Wings.NONE) {
                 outputText("\n\n");
-			    CoC.instance.transformations.WingsDraconicSmall.applyEffect();
+			    transformations.WingsDraconicSmall.applyEffect();
             }
             //(If Small Dragon Wings Present)
             else if (player.wings.type == Wings.DRACONIC_SMALL) {
                 outputText("\n\n");
-			    CoC.instance.transformations.WingsDraconicLarge.applyEffect();
+			    transformations.WingsDraconicLarge.applyEffect();
             }
             //even larger dragon wings ^^
             else if (player.wings.type == Wings.DRACONIC_LARGE) {
                 outputText("\n\n");
-			    CoC.instance.transformations.WingsDraconicHuge.applyEffect();
+			    transformations.WingsDraconicHuge.applyEffect();
             }
             //(If other wings present)
             else {
                 outputText("\n\n");
-			    CoC.instance.transformations.WingsDraconicSmall.applyEffect();
+			    transformations.WingsDraconicSmall.applyEffect();
             }
             changes++;
         }
@@ -5453,43 +5403,43 @@ public final class Mutations extends MutationsHelper {
         //Propah Wings
         if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.WingsFeatheredLarge.applyEffect();
+			transformations.WingsFeatheredLarge.applyEffect();
             changes++;
         }
         //Remove old wings
         if (type == 2 && player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         if (type == 3 && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Dragon Arms
         if (type == 1 && player.wings.type == Wings.DRACONIC_HUGE && player.arms.type != Arms.DRACONIC && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsDraconic.applyEffect();
+            transformations.ArmsDraconic.applyEffect();
             changes++;
         }
         //Feathery Arms
         if (type == 2 && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nWhen you go to wipe your mouth form remains of the oil, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
-            CoC.instance.transformations.ArmsHarpy.applyEffect();
+            transformations.ArmsHarpy.applyEffect();
             changes++;
         }
         //Hydra Arms
         if (type == 3 && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.HYDRA) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHydra.applyEffect();
+            transformations.ArmsHydra.applyEffect();
             changes++;
         }
 
         //Feathery Hair
-        if (type == 2 && CoC.instance.transformations.HairFeather.isPossible() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && transformations.HairFeather.isPossible() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairFeather.applyEffect();
+            transformations.HairFeather.applyEffect();
             changes++;
         }
 
@@ -5501,17 +5451,17 @@ public final class Mutations extends MutationsHelper {
                 colors = ["red", "green", "white", "blue", "black"];
             }
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {colors: colors}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_COMPLETE, {colors: colors}).applyEffect();
             changes++;
         }
         if (type == 1 && player.wings.type == Wings.DRACONIC_LARGE && player.hasPartialCoat(Skin.DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinDragonScales().applyEffect();
+            transformations.SkinDragonScales().applyEffect();
             changes++;
         }
         if (type == 1 && player.wings.type == Wings.DRACONIC_LARGE && !player.hasDragonScales() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
+            transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
             changes++;
         }
         if (changes == 0) {
@@ -5540,7 +5490,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(100);
         outputText("\n\n");
-        CoC.instance.transformations.HairHuman.applyEffect(false);
+        transformations.HairHuman.applyEffect(false);
         if (player.humanScore() > 4) {
             outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
         } else {
@@ -5549,7 +5499,7 @@ public final class Mutations extends MutationsHelper {
         player.arms.type = Arms.HUMAN;
         player.eyes.type = Eyes.HUMAN;
         player.antennae.type = Antennae.NONE;
-        CoC.instance.transformations.FaceHuman.applyEffect(false);
+        transformations.FaceHuman.applyEffect(false);
         player.lowerBody = LowerBody.HUMAN;
         player.legCount = 2;
         player.wings.type = Wings.NONE;
@@ -5627,7 +5577,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(5);
@@ -5642,7 +5592,8 @@ public final class Mutations extends MutationsHelper {
         //-----------------------
         //1st priority: Change lower body to bipedal.
         if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            humanizeLowerBody();
+            outputText("\n\n");
+            transformations.LowerBodyHuman.applyEffect();
             changes++;
         }
         //Remove Incorporeality Perk
@@ -5678,13 +5629,13 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Raiju / Other skin pattern removal
         if (player.skin.base.pattern != Skin.PATTERN_NONE) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternNone.applyEffect();
+            transformations.SkinPatternNone.applyEffect();
             changes++;
         }
         //-----------------------
@@ -5693,37 +5644,37 @@ public final class Mutations extends MutationsHelper {
         //-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //-Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //-Human tongue
         if (player.tongue.type != Tongue.HUMAN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueHuman.applyEffect();
+            transformations.TongueHuman.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //-Gain human ears (If you have human face)
         if ((player.ears.type != Ears.HUMAN && player.faceType == Face.HUMAN) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsHuman.applyEffect();
+            transformations.EarsHuman.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //Black Nipples Turn Back:
@@ -5742,7 +5693,7 @@ public final class Mutations extends MutationsHelper {
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairHuman.applyEffect();
+		    transformations.HairHuman.applyEffect();
             changes++;
         }
 
@@ -5765,25 +5716,25 @@ public final class Mutations extends MutationsHelper {
         //Removes horns
         if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.GARGOYLE && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HornsNone.applyEffect();
+            transformations.HornsNone.applyEffect();
             changes++;
         }
         //Removes wings
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes tail
         if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailNone.applyEffect();
+            transformations.TailNone.applyEffect();
             changes++;
         }
         //Revert rear body to normal
         if (player.rearBody.type != RearBody.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyNone.applyEffect();
+            transformations.RearBodyNone.applyEffect();
             changes++;
         }
         //Increase height up to 5 feet.
@@ -5931,7 +5882,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Text go!
         clearOutput();
         if (type == 0) outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
@@ -6154,129 +6105,115 @@ public final class Mutations extends MutationsHelper {
         //DA EARZ
         if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && type != 3 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsCat.applyEffect();
+			transformations.EarsCat.applyEffect();
             changes++;
         }
         if (player.ears.type != Ears.DISPLACER && player.tailType != Tail.GARGOYLE && type == 3 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsDisplacer.applyEffect();
+			transformations.EarsDisplacer.applyEffect();
             changes++;
         }
         //DA TAIL (IF ALREADY HAZ URZ)
         if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && type != 1 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailCat.applyEffect();
+            transformations.TailCat.applyEffect();
             changes++;
         }
         if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailCat.applyEffect();
+            transformations.TailCat.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.CAT && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailNekomataOneThirdForked.applyEffect();
+            transformations.TailNekomataOneThirdForked.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.NEKOMATA_FORKED_1_3 && player.level >= 6 && player.inte >= 10 && player.wis >= 25 && type == 1 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailNekomataTwoThirdsForked.applyEffect();
+            transformations.TailNekomataTwoThirdsForked.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.NEKOMATA_FORKED_2_3 && player.level >= 12 && player.inte >= 20 && player.wis >= 50 && type == 1 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailCat2nd.applyEffect();
+            transformations.TailCat2nd.applyEffect();
             changes++;
         }
         //Kasha tail interaction with nekomata ghastly fruit
         if (player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailTwinkasha.applyEffect();
+            transformations.TailTwinkasha.applyEffect();
             changes++;
         }
         //Da paws (if already haz tail)
         if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT && type != 3) {
-            //hoof to cat:
-            if (player.lowerBody == LowerBody.HOOFED) {
-                outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>");
-                if (player.isTaur()) outputText("  You feel woozy and collapse on your side.  When you wake, you're no longer a centaur and your body has returned to a humanoid shape.");
-            }
-            //Goo to cat
-            else if (player.lowerBody == LowerBody.GOO) {
-                outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into digitigrade legs, complete with soft, padded cat-paws.  <b>You now have cat-paws!</b>");
-            }
-            //non hoof to cat:
-            else outputText("\n\nYou scream in agony as you feel the bones in your [feet] break and begin to rearrange. When the pain fades, you feel surprisingly well-balanced. <b>You now have cat paws.</b>");
-            setLowerBody(LowerBody.CAT);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyCat(2).applyEffect();
             changes++;
         }
         if (player.tailType == Tail.CAT && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.LION && type == 3) {
             outputText("\n\n");
-            if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ");
-            outputText("Your legs suddenly shift painfully, forcing you down on all fours as the bones of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toes as they clench into the ground. As you feel the pain recede you sit and take a look at your foot; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>");
-            setLowerBody(LowerBody.LION);
-            player.legCount = 2;
+            transformations.LowerBodyLion(2).applyEffect();
             changes++;
         }
         //Da cat arm
         if (player.lowerBody == LowerBody.CAT && type != 3 && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsCat.applyEffect();
+            transformations.ArmsCat.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.LION && type == 3 && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DISPLACER) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsDisplacer.applyEffect();
+            transformations.ArmsDisplacer.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyLionMane.applyEffect();
+            transformations.RearBodyLionMane.applyEffect();
             changes++;
         }
         //Displacer beast tentacles
         if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && type == 3 && rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DISPLACER) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyDisplacerTentacles.applyEffect();
+            transformations.RearBodyDisplacerTentacles.applyEffect();
             changes++;
         }
         //CAT-FACE!
         if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && type != 1 && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE) && type != 3) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceCat.applyEffect();
+            transformations.FaceCat.applyEffect();
             changes++;
         }
         if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES && (type == 1 || type == 3)) {
             //This scenario exist only for cat tf that have no furry version!
             outputText("\n\n");
-            CoC.instance.transformations.FaceCatCanines.applyEffect();
+            transformations.FaceCatCanines.applyEffect();
             changes++;
         }
         if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
             outputText("\n\n");
             if (player.faceType == Face.CAT) {
-                CoC.instance.transformations.FaceCheshire.applyEffect();
+                transformations.FaceCheshire.applyEffect();
             }
             if (player.faceType == Face.CAT_CANINES) {
-                CoC.instance.transformations.FaceCheshireSmile.applyEffect();
+                transformations.FaceCheshireSmile.applyEffect();
             }
             changes++;
         }
         //CAT TOUNGE CUZ WHY NOT?
         if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueCat.applyEffect();
+            transformations.TongueCat.applyEffect();
             changes++;
         }
         //DAT EYES
         if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT && player.eyes.type != Eyes.INFERNAL && type != 3) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesCat.applyEffect();
+            transformations.EyesCat.applyEffect();
             changes++;
         }
-        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.TongueCat.isPresent() && CoC.instance.transformations.EyesDisplacer.isPossible() && type == 3) {
-            CoC.instance.transformations.EyesDisplacer.applyEffect();
+        if (rand(3) == 0 && changes < changeLimit && transformations.TongueCat.isPresent() && transformations.EyesDisplacer.isPossible() && type == 3) {
+            transformations.EyesDisplacer.applyEffect();
             changes++;
         }
         //cheshire fur color
@@ -6309,20 +6246,20 @@ public final class Mutations extends MutationsHelper {
         }
         //TURN INTO A FURRAH!  OH SHIT
         if ((player.eyes.type == Eyes.CAT || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
-            if (!player.hasCoatOfType(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect();
+            if (!player.hasCoatOfType(Skin.FUR)) transformations.SkinPlain.applyEffect();
             if (type == 1) {
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
             } else {
                 outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
-                if (type == 3) CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["black", "midnight black", "midnight"]}).applyEffect();
-                else CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+                if (type == 3) transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["black", "midnight black", "midnight"]}).applyEffect();
+                else transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
             }
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         if (changes < changeLimit) {
@@ -6351,7 +6288,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You uncork the vial of fluid and drink it down.  The taste is sour, like a dry wine with an aftertaste not entirely dissimilar to alcohol.  Instead of the warmth you'd expect, it leaves your throat feeling cold and a little numb.");
@@ -6556,16 +6493,16 @@ public final class Mutations extends MutationsHelper {
                 if (player.horns.count > 0) {
                     //High quantity demon horns
                     if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
+                        transformations.HornsDraconicQuadruple.applyEffect();
                     } else {
-                        CoC.instance.transformations.HornsDraconicDual.applyEffect();
+                        transformations.HornsDraconicDual.applyEffect();
                     }
                     changes++;
                 }
                 //No horns
                 else {
                     //-If no horns, grow a pair
-                    CoC.instance.transformations.HornsDraconicDual.applyEffect();
+                    transformations.HornsDraconicDual.applyEffect();
                     changes++;
                 }
             }
@@ -6587,7 +6524,7 @@ public final class Mutations extends MutationsHelper {
                     else {
                         //--Next horns growth adds second row and brings length up to 12\"
                         outputText("\n\n");
-                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
+                        transformations.HornsDraconicQuadruple.applyEffect();
                         changes++;
                     }
                 }
@@ -6610,46 +6547,37 @@ public final class Mutations extends MutationsHelper {
         //Big physical changes:
         //-Legs – Draconic, clawed feet
         if (player.lowerBody != LowerBody.LIZARD && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
-            //Hooves -
-            if (player.lowerBody == LowerBody.HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //TAURS -
-            else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with lizard-like claws.");
-            //feet types -
-            else if (player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.PLANT_ROOT_CLAWS || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //Else –
-            else outputText("\n\nPain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
-            outputText("  <b>You have reptilian legs and claws!</b>");
-            setLowerBody(LowerBody.LIZARD);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyLizard(2).applyEffect();
             changes++;
         }
         //Arms
         if (player.arms.type != Arms.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsLizard.applyEffect();
+            transformations.ArmsLizard.applyEffect();
             changes++;
         }
         //-Tail – sinuous lizard tail
         if (player.tailType != Tail.LIZARD && player.arms.type == Arms.LIZARD && changes < changeLimit && rand(5) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailLizard.applyEffect();
+            transformations.TailLizard.applyEffect();
             changes++;
         }
         //Lizard eyes
         if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
-            CoC.instance.transformations.EyesLizard.applyEffect();
+            transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.LIZARD) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //-Ears become smaller nub-like openings?
         if (player.ears.type != Ears.LIZARD && player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(5) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsLizard.applyEffect();
+			transformations.EarsLizard.applyEffect();
             changes++;
         }
         //-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
@@ -6661,19 +6589,19 @@ public final class Mutations extends MutationsHelper {
                 colors = ["red", "green", "white", "blue", "black"];
             }
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {colors: colors}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_COMPLETE, {colors: colors}).applyEffect();
             changes++;
         }
         //-Lizard-like face.
         if (player.faceType != Face.LIZARD && player.hasScales() && player.ears.type == Ears.LIZARD && player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(5) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceLizard.applyEffect();
+            transformations.FaceLizard.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //FAILSAFE CHANGE
@@ -6696,7 +6624,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
@@ -6851,73 +6779,64 @@ public final class Mutations extends MutationsHelper {
         //Tail - unlocks enhanced with fire tail whip attack
         if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailSalamander.applyEffect();
+            transformations.TailSalamander.applyEffect();
             changes++;
         }
         //Legs
         if (player.lowerBody != LowerBody.SALAMANDER && player.tailType == Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            //Hooves -
-            if (player.lowerBody == LowerBody.HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //TAURS -
-            else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with salamander-like claws.");
-            //feet types -
-            else if (player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //Else –
-            else outputText("\n\nPain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
-            outputText("  <b>You have salamander legs and claws!</b>");
-            setLowerBody(LowerBody.SALAMANDER);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodySalamander(2).applyEffect();
             changes++;
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsSalamander.applyEffect();
+            transformations.ArmsSalamander.applyEffect();
             changes++;
         }
         //Lizard eyes
         if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
-            CoC.instance.transformations.EyesLizard.applyEffect();
+            transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.LIZARD) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
+            transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Human ears
         if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsHuman.applyEffect();
+            transformations.EarsHuman.applyEffect();
             changes++;
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Removing gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //FAILSAFE CHANGE
@@ -6940,7 +6859,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You chew on the weird glowy crystal, which begins to melt in your mouth like sugar. Your head spin for a moment as you begin to have hallucinations. This leaves you with weird feeling in your entire body, filling you with changes.");
@@ -7041,79 +6960,70 @@ public final class Mutations extends MutationsHelper {
         //Tail
         if (player.tailType != Tail.CAVE_WYRM && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailCaveWyrm.applyEffect();
+            transformations.TailCaveWyrm.applyEffect();
             changes++;
         }
         //Legs
         if (player.lowerBody != LowerBody.CAVE_WYRM && player.tailType == Tail.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
-            //Hooves -
-            if (player.lowerBody == LowerBody.HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //TAURS -
-            else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with cave wyrm-like claws.");
-            //feet types -
-            else if (player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //Else –
-            else outputText("\n\nPain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
-            outputText("  <b>You have cave wyrm legs and claws!</b>");
-            setLowerBody(LowerBody.CAVE_WYRM);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyCaveWyrm.applyEffect();
             changes++;
         }
         //Arms
         if (player.arms.type != Arms.CAVE_WYRM && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsCaveWyrm.applyEffect();
+            transformations.ArmsCaveWyrm.applyEffect();
             changes++;
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
+            transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(3) == 0 && CoC.instance.transformations.FaceSalamanderFangs.isPresent() && CoC.instance.transformations.EyesHuman.isPresent()) {
+        if (changes < changeLimit && rand(3) == 0 && transformations.FaceSalamanderFangs.isPresent() && transformations.EyesHuman.isPresent()) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesCaveWyrm.applyEffect();
+            transformations.EyesCaveWyrm.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.CAVE_WYRM) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Ears
         if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.CAVE_WYRM && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsCaveWyrm.applyEffect();
+            transformations.EarsCaveWyrm.applyEffect();
             changes++;
         }
         //Tongue
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueCaveWyrm.applyEffect();
+            transformations.TongueCaveWyrm.applyEffect();
             changes++;
         }
         if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueHuman.applyEffect();
+            transformations.TongueHuman.applyEffect();
             changes++;
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Skin color change
@@ -7139,7 +7049,7 @@ public final class Mutations extends MutationsHelper {
         //Removing gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //FAILSAFE CHANGE
@@ -7162,7 +7072,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
@@ -7360,7 +7270,7 @@ public final class Mutations extends MutationsHelper {
         //Tail - unlocks enhanced with fire tail whip attack
         if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailSalamander.applyEffect();
+            transformations.TailSalamander.applyEffect();
             changes++;
         }
         //SPECIAL:
@@ -7372,108 +7282,93 @@ public final class Mutations extends MutationsHelper {
         }
         //-Salamander Legs
         if (player.lowerBody != LowerBody.SALAMANDER && player.tailType == Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            //Hooves -
-            if (player.lowerBody == LowerBody.HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //TAURS -
-            else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with salamander-like claws.");
-            //feet types -
-            else if (player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //Else –
-            else outputText("\n\nPain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
-            outputText("  <b>You have salamander legs and claws!</b>");
-            setLowerBody(LowerBody.SALAMANDER);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodySalamander(2).applyEffect();
             changes++;
         }
         //-Harpy legs
         if (player.lowerBody != LowerBody.HARPY && player.tailType == Tail.SALAMANDER && changes < changeLimit && rand(4) == 0) {
-            //(biped/taur)
-            if (!player.isGoo()) outputText("\n\nYour [legs] creak ominously a split-second before they go weak and drop you on the ground. They go completely limp, twisting and reshaping before your eyes in ways that make you wince. Your lower body eventually stops, but the form it's settled on is quite thick in the thighs. Even your [feet] have changed.  ");
-            //goo
-            else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ");
-            setLowerBody(LowerBody.HARPY);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyHarpy.applyEffect();
             changes++;
-            //(cont)
-            outputText("While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in [haircolor] feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>");
         }
         //Arms
         if (player.arms.type != Arms.PHOENIX && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou smile impishly as you lick the remains of the liqueur from your teeth, but then you notice something changing. ");
-            CoC.instance.transformations.ArmsPhoenix.applyEffect();
+            transformations.ArmsPhoenix.applyEffect();
             changes++;
         }
         //Wings
         if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.PHOENIX && rand(4) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.WingsFeatheredPhoenix.applyEffect();
+			transformations.WingsFeatheredPhoenix.applyEffect();
             changes++;
         }
         //Remove old wings
         if (player.wings.type != Wings.FEATHERED_PHOENIX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
 
         //-Feathery Hair
-        if (CoC.instance.transformations.HairFeather.isPossible() && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
+        if (transformations.HairFeather.isPossible() && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
             outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy red fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a phoenix!");
             player.hairColor = "platinum crimson";
             outputText("\n\n");
-            CoC.instance.transformations.HairFeather.applyEffect(false);
+            transformations.HairFeather.applyEffect(false);
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.GARGOYLE && CoC.instance.transformations.EyesHuman.isPresent()) {
-            CoC.instance.transformations.EyesLizard.applyEffect();
+        if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.GARGOYLE && transformations.EyesHuman.isPresent()) {
+            transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
+            transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         //Human ears
         if (player.faceType == Face.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsHuman.applyEffect();
+            transformations.EarsHuman.applyEffect();
             changes++;
         }
         //Elfin ears
         if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsElfin.applyEffect();
+			transformations.EarsElfin.applyEffect();
             changes++;
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //Phoenix Fire Breath
@@ -7522,7 +7417,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //If this is a pregnancy change, only 1 change per proc.
         if (pregnantChange) changeLimit = 1;
         else clearOutput();
@@ -7771,89 +7666,80 @@ public final class Mutations extends MutationsHelper {
         }
         //Bunny feet! - requirez earz
         if (player.lowerBody != LowerBody.BUNNY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.BUNNY) {
-            //Taurs
-            if (player.isTaur()) outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of fur-covered rabbit feet</b>!");
-            //Non-taurs
-            else {
-                outputText("\n\nNumbness envelops your [legs] as they pull tighter and tighter.  You overbalance and drop on your " + assDescript());
-                if (player.tailType > Tail.NONE) outputText(", nearly smashing your tail flat");
-                else outputText(" hard enough to sting");
-                outputText(" while the change works its way through you.  Once it finishes, <b>you discover that you now have fuzzy bunny feet and legs</b>!");
-            }
+            outputText("\n\n");
+            transformations.LowerBodyBunny.applyEffect();
             changes++;
-            setLowerBody(LowerBody.BUNNY);
-            player.legCount = 2;
         }
         //get teeth - from human, bunny, coonmask, or other humanoid teeth faces
         if (player.ears.type == Ears.BUNNY && player.faceType != Face.BUCKTEETH && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
             if (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH) outputText("You catch your nose twitching on its own at the bottom of your vision, but as soon as you focus on it, it stops.  A moment later, some of your teeth tingle and brush past your lips, exposing a white pair of buckteeth! <b>Your mouth has taken on some rabbit-like characteristics!</b>\n\n");
-            CoC.instance.transformations.FaceBuckteeth.applyEffect();
+            transformations.FaceBuckteeth.applyEffect();
             changes++;
         }
         //FULL BUN FACE!  REQUIREZ EARZ
         if (player.ears.type == Ears.BUNNY && player.faceType == Face.BUCKTEETH && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceBunny.applyEffect();
+            transformations.FaceBunny.applyEffect();
             changes++;
         }
         //DAH BUNBUN EARZ - requires poofbutt!
         if (player.ears.type != Ears.BUNNY && changes < changeLimit && rand(3) == 0 && player.tailType == Tail.RABBIT) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsBunny.applyEffect();
+            transformations.EarsBunny.applyEffect();
             changes++;
         }
         //DAH BUNBUNTAILZ
         if (player.tailType != Tail.RABBIT && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailRabbit.applyEffect();
+            transformations.TailRabbit.applyEffect();
             changes++;
         }
         //Partial and full fur
         if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             if (rand(2) == 0) {
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
             } else {
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.skin.coat.color}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.skin.coat.color}).applyEffect();
             }
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
+            transformations.SkinPlain.applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.skin.coat.color}).applyEffect();
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.hasPartialCoat(Skin.FUR)) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.skin.coat.color}).applyEffect();
+            transformations.SkinPlain.applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.skin.coat.color}).applyEffect();
             changes++;
         }
         //-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //-Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //Bunny Breeder Perk?
@@ -7925,7 +7811,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Generic eating text:
         clearOutput();
         outputText("You pop the nut into your mouth, chewing the delicious treat and swallowing it quickly.  No wonder harpies love these things so much!");
@@ -8022,7 +7908,7 @@ public final class Mutations extends MutationsHelper {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairFeather.applyEffect(false);
+		    transformations.HairFeather.applyEffect(false);
             changes++;
         }
         //****************
@@ -8152,7 +8038,7 @@ public final class Mutations extends MutationsHelper {
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //****************
@@ -8160,63 +8046,57 @@ public final class Mutations extends MutationsHelper {
         //****************
         //-Harpy legs
         if (player.lowerBody != LowerBody.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.tailType == Tail.HARPY) && rand(4) == 0) {
-            //(biped/taur)
-            if (!player.isGoo()) outputText("\n\nYour [legs] creak ominously a split-second before they go weak and drop you on the ground. They go completely limp, twisting and reshaping before your eyes in ways that make you wince. Your lower body eventually stops, but the form it's settled on is quite thick in the thighs. Even your [feet] have changed.  ");
-            //goo
-            else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ");
-            setLowerBody(LowerBody.HARPY);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyHarpy.applyEffect();
             changes++;
-            //(cont)
-            outputText("While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in [haircolor] feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>");
         }
         //-Feathery Tail
         if (player.tailType != Tail.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.wings.type == Wings.FEATHERED_LARGE) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailHarpy.applyEffect();
+            transformations.TailHarpy.applyEffect();
             changes++;
         }
         //-Propah Wings
         if (player.wings.type == Wings.NONE && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.WingsFeatheredLarge.applyEffect();
+			transformations.WingsFeatheredLarge.applyEffect();
             changes++;
         }
         //-Remove old wings
         if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //-Feathery Arms
         if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
             outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
-            CoC.instance.transformations.ArmsHarpy.applyEffect();
+            transformations.ArmsHarpy.applyEffect();
             changes++;
         }
 
         //-Feathery Hair
-        if (CoC.instance.transformations.HairFeather.isPossible() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
+        if (transformations.HairFeather.isPossible() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairFeather.applyEffect();
+            transformations.HairFeather.applyEffect();
             changes++;
         }
         //-Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && (type == 1 || (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN)) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //-Gain human ears (keep elf ears)
         if ((player.ears.type != Ears.HUMAN && player.ears.type != Ears.ELFIN) && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsHuman.applyEffect();
+            transformations.EarsHuman.applyEffect();
             changes++;
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //SPECIAL:
@@ -8259,7 +8139,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Generic eating text:
         clearOutput();
         if (type == 0) outputText("You crack open the seed easily, and eat the fruit inside. A bit dry, as you expected, but with a sweet and aromatic taste that leaves you wanting another one.");
@@ -8335,89 +8215,54 @@ public final class Mutations extends MutationsHelper {
         }
         //Legs
         if (player.lowerBody != LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
-            if (player.isGoo()) {
-                outputText("\n\nTrying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.");
-                outputText("\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
-                outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
-            } else if (player.isTaur()) {
-                outputText("\n\nAn strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.");
-                outputText("\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
-                outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
-            } else if (player.isNaga()) {
-                outputText("\n\nYour tail splits in two, and eventually reshapes into the more familiar form of two legs. These are far different from the ones that you expected, however; instead of the usual human legs, these have an array of small, shiny golden scales from the knee down, with " + player.skin.coat.color + "-colored feathers taking over the area between your knees and crotch, looking not unlike a bird’s.");
-                outputText("\n\nYour toes are unusually shaped, too; four of them are in the front, and one of them is on the back of each foot. The toenails have become sharp, menacing talons, best used for snatching prey and the occasional unwilling partner. Looks like <b>you have a new set of avian legs!</b>");
-            } else if (player.lowerBody == LowerBody.MELKIE) outputText("\n\nYour body straightens and telescopes suddenly and without the length of your seal half to anchor you, " +
-                    "you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated. " +
-                    "As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new bird like legs wish sharp claws! " +
-                    "Looks like <b>you have a new set of avian legs!</b");
-            else if (player.isScylla()) {
-                outputText("\n\nAn strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.");
-                outputText("\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
-                outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
-            } else if (player.isAlraune()) {
-                outputText("\n\nTrying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.");
-                outputText("\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
-                outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
-            } else if (player.lowerBody == LowerBody.HOOFED) {
-                outputText("\n\nYour feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
-                outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
-            } else if (player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS) {
-                outputText("\n\nYour feet feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The skin below your knees grows an array of small, shiny golden scales and your demonic high-heels recede into your body. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
-                outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers sprouting all over the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>");
-            } else {
-                outputText("\n\nYour [feet] feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The fur on them below your knees falls off, but is quickly replaced by an array of small, shiny golden scales. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
-                outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>");
-            }
-            setLowerBody(LowerBody.AVIAN);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyAvian.applyEffect();
             changes++;
         }
         if (player.lowerBody != LowerBody.GRYPHON && player.eyes.type == Eyes.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
-            outputText("\n\nTaking a seat while you see how the magic within the statue affects you, a familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.skin.coat.color2 + " colored fur over them.");
-            outputText("\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>");
-            setLowerBody(LowerBody.GRYPHON);
-            player.legCount = 2;
+            outputText("\n\nYou take a seat while you see how the magic within the statue affects you.\n\n");
+            transformations.LowerBodyGryphon(2).applyEffect();
             changes++;
         }
         //Tail
         if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailAvian.applyEffect();
+            transformations.TailAvian.applyEffect();
             changes++;
         }
         if (player.tailType != Tail.GRIFFIN && player.lowerBody == LowerBody.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailGriffin.applyEffect();
+            transformations.TailGriffin.applyEffect();
             changes++;
         }
         //Arms
         if (player.arms.type != Arms.AVIAN && player.tailType == Tail.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsAvian.applyEffect();
+            transformations.ArmsAvian.applyEffect();
             changes++;
         }
         if (player.arms.type != Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsGryphon.applyEffect();
+            transformations.ArmsGryphon.applyEffect();
             changes++;
         }
         //Wings
         if (player.wings.type != Wings.FEATHERED_AVIAN && player.arms.type == Arms.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsFeatheredAvian.applyEffect();
+            transformations.WingsFeatheredAvian.applyEffect();
             changes++;
         }
         if (player.wings.type != Wings.FEATHERED_AVIAN && player.wings.type != Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Hair
-        if (CoC.instance.transformations.HairFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (transformations.HairFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\nWhile you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
             outputText("\n\nThe base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairFeather.applyEffect(false);
+		    transformations.HairFeather.applyEffect(false);
             changes++;
         }
         //Face
@@ -8428,18 +8273,18 @@ public final class Mutations extends MutationsHelper {
             } else {
                 outputText("With the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your [face] feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak. That's quite the change, even for your [face].\n\nA bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike of an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.\n\nThis isn’t the only major change, as you feel your [ears] twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
             }
-            CoC.instance.transformations.FaceAvian.applyEffect(false);
+            transformations.FaceAvian.applyEffect(false);
             changes++;
         }
         //Ears
         if (player.ears.type != Ears.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsAvian.applyEffect();
+            transformations.EarsAvian.applyEffect();
             changes++;
         }
         if (player.ears.type != Ears.GRYPHON && player.tailType == Tail.GRIFFIN && changes < changeLimit && type == 1 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsGryphon.applyEffect();
+            transformations.EarsGryphon.applyEffect();
             changes++;
         }
         //Skin
@@ -8476,7 +8321,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Eyes
         if (player.eyes.type != Eyes.GRYPHON && player.arms.type == Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
-            CoC.instance.transformations.EyesGryphon.applyEffect();
+            transformations.EyesGryphon.applyEffect();
             changes++;
         }
         if (changes == 0 && type == 0) outputText("\n\nIt seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
@@ -8515,7 +8360,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Used as a holding variable for biggest dicks and the like
         var biggestCock:Number;
         //****************
@@ -8565,21 +8410,21 @@ public final class Mutations extends MutationsHelper {
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
 
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairHuman.applyEffect();
+		    transformations.HairHuman.applyEffect();
             changes++;
         }
 
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //****************
@@ -8637,38 +8482,29 @@ public final class Mutations extends MutationsHelper {
         //-Face (Req: Fur + Feet)
         if (player.faceType != Face.KANGAROO && ((player.hasFur() && player.lowerBody == LowerBody.KANGAROO) || type == 1) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceKangaroo.applyEffect();
+            transformations.FaceKangaroo.applyEffect();
             changes++;
         }
         //-Fur (Req: Footsies)
         if (!player.hasFur() && (player.lowerBody == LowerBody.KANGAROO || type == 1) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             changes++;
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "brown"}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "brown"}).applyEffect();
         }
         //-Roo footsies (Req: Tail)
         if (player.lowerBody != LowerBody.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && (type == 1 || player.tailType == Tail.KANGAROO) && changes < changeLimit && rand(4) == 0) {
-            //gain roo feet from centaur:
-            if (player.isTaur()) outputText("\n\nYour backlegs suddenly wobble and collapse, causing you to pitch over onto your side.  Try as you might, you can't get them to stop spasming so you can stand back up; you thrash your hooves wildly as a pins-and-needles sensation overtakes your lower body.  A dull throbbing along your spine makes you moan in agony; it's as though someone had set an entire bookshelf on your shoulders and your spine were being compressed far beyond its limit.  After a minute of pain, the pressure evaporates and you look down at your legs.  Not only are your backlegs gone, but your forelegs have taken on a dogleg shape, with extremely long feet bearing a prominent middle toe!  You set about rubbing the feeling back into your legs and trying to move the new feet.  <b>You now have kangaroo legs!</b>");
-            //gain roo feet from naga:
-            else if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYour tail quivers, then shakes violently, planting you on your face.  As you try to bend around to look at it, you can just see the tip shrinking out of your field of vision from the corner of your eye.  The scaly skin below your waist tightens intolerably, then splits; you wriggle out of it, only to find yourself with a pair of long legs instead!  A bit of hair starts to grow in as you stand up unsteadily on your new, elongated feet.  <b>You now have kangaroo legs!</b>  Now, what are you going to do with a giant shed snakeskin?");
-            else if (player.lowerBody == LowerBody.MELKIE) outputText("\n\nYour body straightens and telescopes suddenly and without the length of your seal half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs covered in fur!  You examine the fuzzy legs and long-toed, sensitive feet. <b>Your legs are now those of a kangaroo!</b>");
-            //gain roo feet from slime:
-            else if (player.lowerBody == LowerBody.GOO) outputText("\n\nYour mounds of goo shrink and part involuntarily, exposing your crotch.  Modesty overwhelms you and you try to pull them together, but the shrinkage is continuing faster than you can shift your gooey body around.  Before long you've run out of goo to move, and your lower body now ends in a pair of slippery digitigrade legs with long narrow feet.  They dry in the air and a bit of fur begins to sprout as you look for something to cover up with.  <b>You now have kangaroo legs!</b> You sigh.  Guess this means it's back to wearing underpants again.");
-            //gain roo feet from human/bee/demon/paw/lizard:
-            else outputText("\n\nYour feet begin to crack and shift as the metatarsal bones lengthen.  Your knees buckle from the pain of your bones rearranging themselves, and you fall over.  After fifteen seconds of what feels like your feet being racked, the sensation stops.  You look down at your legs; they've taken a roughly dog-leg shape, but they have extremely long feet with a prominent middle toe!  As you stand up you find that you're equally comfortable standing flat on your feet as you are on the balls of them!  <b>You now have kangaroo legs!</b>");
-            setLowerBody(LowerBody.KANGAROO);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyKangaroo.applyEffect();
             changes++;
         }
         //-Roo tail (Req: Ears)
         if (player.tailType != Tail.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0 && (type != 1 || player.ears.type == Ears.KANGAROO)) {
             outputText("\n\n");
-            CoC.instance.transformations.TailKangaroo.applyEffect();
+            transformations.TailKangaroo.applyEffect();
             changes++;
         }
         //-Roo ears
         if (player.ears.type != Ears.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            CoC.instance.transformations.EarsKangaroo.applyEffect();
+            transformations.EarsKangaroo.applyEffect();
             changes++;
         }
         //UBEROOOO
@@ -8683,7 +8519,7 @@ public final class Mutations extends MutationsHelper {
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
 
@@ -8713,7 +8549,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Consuming Text
         if (type == 0) outputText("You wad up the sweet, pink gossamer and eat it, finding it to be delicious and chewy, almost like gum.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.");
         else if (type == 1) outputText("You wad up the sweet, black gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.");
@@ -8820,7 +8656,7 @@ public final class Mutations extends MutationsHelper {
         //(Gain human face)
         if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS && player.faceType != Face.HUMAN) && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\n");
-			CoC.instance.transformations.FaceHuman.applyEffect();
+			transformations.FaceHuman.applyEffect();
             changes++;
         }
         //-Remove breast rows over 2.
@@ -8863,7 +8699,7 @@ public final class Mutations extends MutationsHelper {
         if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune())
                 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\n");
-			transformations.LegsHuman.applyEffect();
+            transformations.LowerBodyHuman.applyEffect();
             changes++;
         }
         //Drider butt
@@ -8885,21 +8721,19 @@ public final class Mutations extends MutationsHelper {
         //(Normal Biped Legs -> Carapace-Clad Legs)
         if (((type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS && player.lowerBody != LowerBody.ATLACH_NACHA) || (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-			transformations.LegsSpider.applyEffect();
+            transformations.LowerBodySpider.applyEffect();
             changes++;
         }
         //(Tail becomes spider abdomen GRANT WEB ATTACK)
         if (player.tailType != Tail.SPIDER_ADBOMEN && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.ATLACH_NACHA) && player.arms.type == Arms.SPIDER && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailSpider.applyEffect();
+            transformations.TailSpider.applyEffect();
             changes++;
         }
         //(Drider Item Only: Carapace-Clad Legs to Drider Legs)
         if (type == 1 && player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
-            outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
-            setLowerBody(LowerBody.DRIDER);
-            player.legCount = 8;
-            player.coatColor = "black";
+            outputText("\n\n");
+            transformations.LowerBodyDrider.applyEffect();
             changes++;
         }
         // Remove gills
@@ -8942,14 +8776,9 @@ public final class Mutations extends MutationsHelper {
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		outputText("You wad up the sweet, midnight gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat. ");
-		TransformationUtils.pickAndRunMultipleEffects(
-				transformations.List_AtlachNacha,
-				changeLimit,
-				false,
-				true
-		);
+		TransformationUtils.pickAndRunMultipleEffects(transformations.List_AtlachNacha, changeLimit);
 	}
 
     public function broBrew(player:Player):void {
@@ -8965,7 +8794,7 @@ public final class Mutations extends MutationsHelper {
             outputText("The stuff hits you like a giant cube, nearly staggering you as it begins to settle.");
             if (player.tallness < 77) {
                 player.tallness = 77;
-                outputText(".. Did the ground just get farther away?  You glance down and realize, you're growing!  Like a sped-up flower sprout, you keep on getting taller until finally stopping around... six and a half feet, you assume.  Huh.  You didn't expect that to happen!");
+                outputText("... Did the ground just get farther away?  You glance down and realize, you're growing!  Like a sped-up flower sprout, you keep on getting taller until finally stopping around... six and a half feet, you assume.  Huh.  You didn't expect that to happen!");
             }
             if (player.tone < 100) {
                 outputText("  A tingling in your arm draws your attention just in time to see your biceps and triceps swell with new-found energy, skin tightening until thick cords of muscle run across the whole appendage.  Your other arm surges forward with identical results.  To compensate, your shoulders and neck widen to bodybuilder-like proportions while your chest and abs tighten to a firm, statuesque physique.  Your [legs] and glutes are the last to go, bulking up to proportions that would make any female martial artist proud.  You feel like you could kick forever with legs this powerful.");
@@ -9125,7 +8954,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Effect script 1:  (higher intelligence)
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
@@ -9161,15 +8990,15 @@ public final class Mutations extends MutationsHelper {
         }
         //Appearance Change
         //Hair
-        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.HairGhost.isPossible()) {
+        if (rand(3) == 0 && changes < changeLimit && transformations.HairGhost.isPossible()) {
             outputText("\n\n");
-            CoC.instance.transformations.HairGhost.applyEffect();
+            transformations.HairGhost.applyEffect();
             changes++;
         }
         //Eyes
-        if (player.hairType == Hair.GHOST && CoC.instance.transformations.EyesGhost.isPossible() && rand(3) == 0 && changes < changeLimit) {
+        if (player.hairType == Hair.GHOST && transformations.EyesGhost.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-			CoC.instance.transformations.EyesGhost.applyEffect();
+			transformations.EyesGhost.applyEffect();
             changes++;
         }
         //Skin
@@ -9191,23 +9020,24 @@ public final class Mutations extends MutationsHelper {
         }
         //Legs
         if (player.lowerBody == LowerBody.GHOST && player.lowerBody != LowerBody.GHOST_2 && rand(3) == 0 && changes < changeLimit && type == 1) {
-            outputText("\n\nA numbing sensation crawls upwards from your feet to your thighs, lingering for a few moments. As the pain subsides, you realize to your horror that your feet have become merged… and incorporeal! You drop on your butt… or so you expect. You feel like you are standing, yet you are severely lacking in actual legs. Regardless, you need to get used to your  <b>brand new ghastly lower body!</b>");
-            setLowerBody(LowerBody.GHOST_2);
+            outputText("\n\n");
+            transformations.LowerBodyGhost2.applyEffect();
             changes++;
         }
         if (player.hairType == 2 && player.lowerBody != LowerBody.GHOST && rand(3) == 0 && changes < changeLimit) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nA numbing sensation crawls upwards from your feet to your thighs, lingering for a few moments. As the pain subsides, you realize to your horror that your legs have become incorporeal!");
-                setLowerBody(LowerBody.GHOST);
+                outputText("\n\n");
+                transformations.LowerBodyGhost.applyEffect();
             } else {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
             }
             changes++;
         }
         //Arms
         if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.GHOST) && player.lowerBody == LowerBody.GHOST && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsGhost.applyEffect();
+            transformations.ArmsGhost.applyEffect();
             changes++;
         }
         //Removes antennae
@@ -9219,13 +9049,13 @@ public final class Mutations extends MutationsHelper {
         //Removes wings
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.ETHEREAL, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes tail
         if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailNone.applyEffect();
+            transformations.TailNone.applyEffect();
             changes++;
         }
         //Incorporeality perk
@@ -9238,36 +9068,36 @@ public final class Mutations extends MutationsHelper {
         //Face
         if (player.eyes.type == Eyes.GHOST && player.faceType != Face.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceGhost.applyEffect();
+            transformations.FaceGhost.applyEffect();
             changes++;
         }
         //Tongue
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueGhost.applyEffect();
+            transformations.TongueGhost.applyEffect();
             changes++;
         }
         if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueHuman.applyEffect();
+            transformations.TongueHuman.applyEffect();
             changes++;
         }
         //Horns
         if (player.hairType == Hair.GHOST && changes < changeLimit && rand(3) == 0 && type == 1 && player.horns.type != Horns.GHOSTLY_WISPS) {
             outputText("\n\n");
-            CoC.instance.transformations.HornsGhostlyWisps.applyEffect();
+            transformations.HornsGhostlyWisps.applyEffect();
             changes++;
         }
         //Rear body
         if (player.lowerBody == LowerBody.GHOST_2 && player.rearBody.type != RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyGhostlyAura.applyEffect();
+            transformations.RearBodyGhostlyAura.applyEffect();
             changes++;
         }
         //Wings
         if (player.wings.type == Wings.NONE && player.rearBody.type == RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsEthereal.applyEffect();
+            transformations.WingsEthereal.applyEffect();
             changes++;
         }
         //Transparent skin
@@ -9279,7 +9109,7 @@ public final class Mutations extends MutationsHelper {
         //Skin pattern - black or white veins pattern - adv ghost tf
         if (!player.skin.hasWhiteBlackVeins() && player.hasGhostSkin() && (player.skin.base.color == "white" || player.skin.base.color == "sable") && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternWhiteBlackVeins.applyEffect();
+            transformations.SkinPatternWhiteBlackVeins.applyEffect();
             changes++;
         }
         //Effect Script 8: 100% chance of healing
@@ -9303,7 +9133,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
         //Stats
         if (player.str > 40 && rand(3) == 0 && changes < changeLimit) {
@@ -9374,45 +9204,48 @@ public final class Mutations extends MutationsHelper {
         if (player.faceType != Face.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.faceType == Face.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceElf.applyEffect();
+                transformations.FaceElf.applyEffect();
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceHuman.applyEffect();
+                transformations.FaceHuman.applyEffect();
             }
             changes++;
         }
         if (player.lowerBody != LowerBody.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nSomething shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>");
-                setLowerBody(LowerBody.ELF);
-            } else humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyElf.applyEffect();
+            } else {
+            	outputText("\n\n");
+            	transformations.LowerBodyHuman.applyEffect();
+            }
             changes++;
         }
         if (player.lowerBody == LowerBody.ELF && player.arms.type != Arms.ELF && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                CoC.instance.transformations.ArmsElf.applyEffect();
+                transformations.ArmsElf.applyEffect();
             } else {
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             changes++;
         }
         if (player.arms.type == Arms.ELF && player.ears.type != Ears.ELVEN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.ears.type == Ears.HUMAN) {
-			    CoC.instance.transformations.EarsElven.applyEffect();
+			    transformations.EarsElven.applyEffect();
             } else {
-                CoC.instance.transformations.EarsHuman.applyEffect();
+                transformations.EarsHuman.applyEffect();
             }
             changes++;
         }
         if (player.ears.type == Ears.ELVEN && player.eyes.type != Eyes.ELF && changes < changeLimit && rand(3) == 0) {
-            if (CoC.instance.transformations.EyesHuman.isPresent()) {
+            if (transformations.EyesHuman.isPresent()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesElf.applyEffect();
+                transformations.EyesElf.applyEffect();
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
@@ -9424,17 +9257,17 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueElf.applyEffect();
+            transformations.TongueElf.applyEffect();
             changes++;
         }
         if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueHuman.applyEffect();
+            transformations.TongueHuman.applyEffect();
             changes++;
         }
-        if (CoC.instance.transformations.HairSilky.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (transformations.HairSilky.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairSilky.applyEffect();
+            transformations.HairSilky.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.ELF && player.arms.type == Arms.ELF && player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
@@ -9452,7 +9285,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Hair Color
@@ -9472,7 +9305,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
         //Stats
@@ -9534,42 +9367,44 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical
         if (player.lowerBody != LowerBody.ORC && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou have trouble standing up as multiple flashes of mild pain run across your legs as a whole set of intricate scar shaped tattoos covers them. Furthermore, your toenails become increasingly pointed, looking like a set of claws. Well, it seems you will have get used to your <b>scar tattooed legs and feet topped with pointed nails.</b>");
-                setLowerBody(LowerBody.ORC);
-            } else humanizeLowerBody();
+                transformations.LowerBodyOrc.applyEffect();
+            } else {
+            	transformations.LowerBodyHuman.applyEffect();
+            }
             changes++;
         }
         if (player.lowerBody == LowerBody.ORC && player.arms.type != Arms.ORC && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                CoC.instance.transformations.ArmsOrc.applyEffect();
+                transformations.ArmsOrc.applyEffect();
             } else {
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             changes++;
         }
         if (player.arms.type == Arms.ORC && player.faceType != Face.ORC_FANGS && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceOrcFangs.applyEffect();
+            transformations.FaceOrcFangs.applyEffect();
             changes++;
         }
         if (player.ears.type != Ears.ELFIN && rand(3) == 0 && changes < changeLimit) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("\n\n");
-			    CoC.instance.transformations.EarsElfin.applyEffect();
+			    transformations.EarsElfin.applyEffect();
             } else {
             	outputText("\n\n");
-            	CoC.instance.transformations.EarsHuman.applyEffect();
+            	transformations.EarsHuman.applyEffect();
             }
             changes++;
         }
-        if (player.ears.type == Ears.ELFIN && CoC.instance.transformations.EyesOrc.isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.ELFIN && transformations.EyesOrc.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                CoC.instance.transformations.EyesOrc.applyEffect();
+                transformations.EyesOrc.applyEffect();
             } else {
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
@@ -9582,12 +9417,12 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (player.hasPlainSkinOnly() && !player.skin.hasScarShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternOrc.applyEffect();
+            transformations.SkinPatternOrc.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && player.orcScore() >= 11 && !player.hasPerk(PerkLib.Ferocity) && changes < changeLimit) {
@@ -9608,7 +9443,7 @@ public final class Mutations extends MutationsHelper {
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
-            changeLimit += player.additionalTransformationChances();
+            changeLimit += player.additionalTransformationChances;
             outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
         //Stats
@@ -9651,83 +9486,86 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.lowerBody != LowerBody.RAIJU && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidentally hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>");
-                setLowerBody(LowerBody.RAIJU);
-            } else humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyRaiju(2).applyEffect();
+            } else {
+            	outputText("\n\n");
+            	transformations.LowerBodyHuman.applyEffect();
+            }
             changes++;
         }
         if (player.lowerBody == LowerBody.RAIJU && player.arms.type != Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                CoC.instance.transformations.ArmsRaiju.applyEffect();
+                transformations.ArmsRaiju.applyEffect();
             } else {
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             changes++;
         }
         if (player.arms.type == Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsRaijuPaws.applyEffect();
+            transformations.ArmsRaijuPaws.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.RAIJU_PAWS && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsRaiju.applyEffect();
+            transformations.ArmsRaiju.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.RAIJU && player.tailType != Tail.RAIJU && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailRaiju.applyEffect();
+            transformations.TailRaiju.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.RAIJU && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyRaijuMane.applyEffect();
+            transformations.RearBodyRaijuMane.applyEffect();
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsThunderousAura.applyEffect();
+            transformations.WingsThunderousAura.applyEffect();
             changes++;
         }
         if (player.wings.type != Wings.THUNDEROUS_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceWeasel.applyEffect();
+            transformations.FaceWeasel.applyEffect();
             changes++;
         }
         if (player.faceType == Face.WEASEL && player.ears.type != Ears.RAIJU && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.EarsRaiju.applyEffect();
+                transformations.EarsRaiju.applyEffect();
             } else {
             	outputText("\n\n");
-            	CoC.instance.transformations.EarsHuman.applyEffect();
+            	transformations.EarsHuman.applyEffect();
             }
             changes++;
         }
-        if (player.ears.type == Ears.RAIJU && CoC.instance.transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.RAIJU && transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                CoC.instance.transformations.EyesRaijuColors.applyEffect();
+                transformations.EyesRaijuColors.applyEffect();
             } else {
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
 
-        if (CoC.instance.transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairStorm.applyEffect();
+            transformations.HairStorm.applyEffect();
             changes++;
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternRaiju.applyEffect();
+            transformations.SkinPatternRaiju.applyEffect();
             changes++;
         }
         if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
@@ -9747,7 +9585,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         outputText("You eat up the seed and not to soon after let out a howling moan as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         //Stats
         if (rand(3) == 0 && changes < changeLimit) {
@@ -9837,73 +9675,67 @@ public final class Mutations extends MutationsHelper {
         }
         //-Harpy legs
         if (player.lowerBody != LowerBody.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            //(biped/taur)
-            if (!player.isGoo()) outputText("\n\nYour [legs] creak ominously a split-second before they go weak and drop you on the ground. They go completely limp, twisting and reshaping before your eyes in ways that make you wince. Your lower body eventually stops, but the form it's settled on is quite thick in the thighs. Even your [feet] have changed.  ");
-            //goo
-            else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ");
-            setLowerBody(LowerBody.HARPY);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyHarpy.applyEffect();
             changes++;
-            //(cont)
-            outputText("While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in [haircolor] feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>");
         }
         //-Propah Wings
         if (player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.WingsFeatheredLarge.applyEffect();
+			transformations.WingsFeatheredLarge.applyEffect();
             changes++;
         }
         //-Remove old wings
         if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //-Feathery Arms
         if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou smile impishly as you lick the last bits of the seed from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
-            CoC.instance.transformations.ArmsHarpy.applyEffect();
+            transformations.ArmsHarpy.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.HARPY && player.tailType != Tail.THUNDERBIRD && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailThunderbird.applyEffect();
+            transformations.TailThunderbird.applyEffect();
             changes++;
         }
         if (player.tailType == Tail.THUNDERBIRD && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyRaijuMane.applyEffect();
+            transformations.RearBodyRaijuMane.applyEffect();
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsElfin.applyEffect();
+			transformations.EarsElfin.applyEffect();
             changes++;
         }
 
-        if (player.ears.type == Ears.ELFIN && CoC.instance.transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.ELFIN && transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                CoC.instance.transformations.EyesRaijuColors.applyEffect();
+                transformations.EyesRaijuColors.applyEffect();
             } else {
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
 
-        if (CoC.instance.transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairStorm.applyEffect();
+            transformations.HairStorm.applyEffect();
             changes++;
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternRaiju.applyEffect();
+            transformations.SkinPatternRaiju.applyEffect();
             changes++;
         }
         if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
@@ -9923,7 +9755,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         outputText("You apply the eyedrops to your eye"+(player.eyes.type == Eyes.MONOEYE ? "":"s")+" pointlessly hoping it can help you wash away all the dirty things you have seen on mareth. For a few seconds, your vision becomes… clearer? However this is not without other changes.");
         //Stats
 		if (rand(3) == 0 && changes < changeLimit) {
@@ -9964,61 +9796,62 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.blockingBodyTransformations()) changeLimit = 0;
         //Physical
-		if (CoC.instance.transformations.EyesMonoeye.isPresent() && CoC.instance.transformations.EyesChangeColor(["red"]).isPossible() && changes < changeLimit && rand(3) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect();
+		if (transformations.EyesMonoeye.isPresent() && transformations.EyesChangeColor(["red"]).isPossible() && changes < changeLimit && rand(3) == 0) {
+            transformations.EyesChangeColor(["red"]).applyEffect();
             changes++;
         }
         if (player.eyes.type != Eyes.MONOEYE && changes < changeLimit && rand(3) == 0) {
-            if (CoC.instance.transformations.EyesHuman.isPresent()) {
+            if (transformations.EyesHuman.isPresent()) {
                 outputText("\n\n");
-			CoC.instance.transformations.EyesMonoeye.applyEffect();
+			transformations.EyesMonoeye.applyEffect();
             }
 			else {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
 		if (player.faceType != Face.ANIMAL_TOOTHS && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+            transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
 		if (((!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && type == 0) || (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailNone.applyEffect();
+            transformations.TailNone.applyEffect();
             changes++;
         }
 		if (player.wings.type == Wings.NONE && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.GAZER && player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2 && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-			CoC.instance.transformations.WingsLevitation.applyEffect();
-            outputText("\n\n Your legs begin to sweat and drip at high rate until they cover in some kind of oily black fluids just like those of a gazer. <b>You now have gazer legs.</b>");
-			setLowerBody(LowerBody.GAZER);
+			transformations.WingsLevitation.applyEffect();
+            outputText("\n\n");
+            transformations.LowerBodyGazer.applyEffect();
             changes++;
         }
 		if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && ((type == 0) || (player.lowerBody != LowerBody.GAZER && type == 1)) && changes < changeLimit && rand(3) == 0) {
-            humanizeLowerBody();
+            outputText("\n\n");
+            transformations.LowerBodyHuman.applyEffect();
             changes++;
         }
 		if (changes < changeLimit && player.lowerBody == LowerBody.GAZER && player.arms.type == Arms.HUMAN && player.arms.type != Arms.GAZER && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-			CoC.instance.transformations.ArmsGazer.applyEffect();
+			transformations.ArmsGazer.applyEffect();
             changes++;
         }
 		if (changes < changeLimit && ((!InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && type == 0) || (!InCollection(player.arms.type, Arms.HUMAN, Arms.GAZER, Arms.GARGOYLE) && type == 1)) && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
         }
 		if (type == 1) {
 			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10 && changes < changeLimit && rand(3) == 0) {
@@ -10028,12 +9861,12 @@ public final class Mutations extends MutationsHelper {
 			}
 			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n");
-                CoC.instance.transformations.RearBodyTentacleEyestalks.applyEffect();
+                transformations.RearBodyTentacleEyestalks.applyEffect();
 				changes++;
 			}
 			if (!player.skin.hasOilySkin() && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n");
-                CoC.instance.transformations.SkinPatternOil.applyEffect();
+                transformations.SkinPatternOil.applyEffect();
 				changes++;
 			}
 			var tone:Array = ["snow white", "red", "pale white"];
@@ -10061,7 +9894,7 @@ public final class Mutations extends MutationsHelper {
         var Ratatoskr_Colour:Array = ["brown","light brown","caramel","chocolate","russet"];
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         outputText("You chew at the nuts and begin to shake as your body is overcome with changes...");
         //Stats
         if (rand(4) == 0 && changes < changeLimit) {
@@ -10106,7 +9939,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(Ratatoskr_Colour);
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
         }
         //get partial fur from full if pc face is human
         if (player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
@@ -10122,70 +9955,67 @@ public final class Mutations extends MutationsHelper {
             player.tallness -= (1 + rand(5));
         }
         if (player.lowerBody != LowerBody.SQUIRREL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. " +
-                        "Sitting down before you accidentally hurt yourself, you watch with apprehension as your legs begin to shift, " +
-                        "fluffy patches of fur traveling up your legs until they reach your knees. " +
-                        "You yelp as the bones in your feet split and rearrange themselves into paws." +
-                        "Eventually, the sensation ebbs and you slowly get used to your <b>squirrel paws!</b>");
-                setLowerBody(LowerBody.SQUIRREL);
-            }
-			else humanizeLowerBody();
+                transformations.LowerBodySquirrel.applyEffect();
+			} else {
+				transformations.LowerBodyHuman.applyEffect();
+			}
             changes++;
         }
         if (player.lowerBody == LowerBody.SQUIRREL && player.arms.type != Arms.SQUIRREL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                CoC.instance.transformations.ArmsSquirrel.applyEffect();
+                transformations.ArmsSquirrel.applyEffect();
             }
 			else {
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             changes++;
         }
         if (player.faceType != Face.SMUG && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSmug.applyEffect();
+            transformations.FaceSmug.applyEffect();
             changes++;
         }
         if (player.faceType == Face.SMUG && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSquirrel.applyEffect();
+            transformations.FaceSquirrel.applyEffect();
             changes++;
         }
         if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.ears.type != Ears.SQUIRREL && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.EarsSquirrel.applyEffect();
+                transformations.EarsSquirrel.applyEffect();
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.EarsHuman.applyEffect();
+                transformations.EarsHuman.applyEffect();
             }
             changes++;
         }
 		if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.tongue.type != Tongue.RATATOSKR && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			CoC.instance.transformations.TongueRatatoskr.applyEffect();
+			transformations.TongueRatatoskr.applyEffect();
 			changes++;
 		}
-        if (player.ears.type == Ears.SQUIRREL && CoC.instance.transformations.EyesRatatoskr.isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.SQUIRREL && transformations.EyesRatatoskr.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                CoC.instance.transformations.EyesRatatoskr.applyEffect();
+                transformations.EyesRatatoskr.applyEffect();
             } else {
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
 
-        if (CoC.instance.transformations.HairRatatoskr.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (transformations.HairRatatoskr.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairRatatoskr.applyEffect();
+            transformations.HairRatatoskr.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.SQUIRREL && player.tailType != Tail.SQUIRREL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailSquirrel.applyEffect();
+            transformations.TailSquirrel.applyEffect();
             changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -10200,7 +10030,7 @@ public final class Mutations extends MutationsHelper {
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
-            changeLimit += player.additionalTransformationChances();
+            changeLimit += player.additionalTransformationChances;
             outputText("As you admire the shiny jewel, the wind around you suddenly becomes stronger on sending debris around, before a sudden blade of winds runs through your body leaving a bleeding cut! Rather then pain the fresh wound begins to throb with increasing pleasure. You let out a howling moan, the jewel crumbles to dust before the feeling slowly subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
         //Stats
@@ -10244,7 +10074,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(kamaitachi_hair);
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
         }
 
         //get partial fur from full if pc face is human
@@ -10258,80 +10088,80 @@ public final class Mutations extends MutationsHelper {
 
         if (player.lowerBody != LowerBody.WEASEL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidentally hurt yourself," +
-                        " you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. " +
-                        "You yelp as the bones in your feet split and rearrange themselves into paws. " +
-                        "Eventually, the sensation ebbs and you slowly get used to your new <b>weasel paws!</b>");
-                setLowerBody(LowerBody.WEASEL);
-            } else humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyWeasel(2).applyEffect();
+            } else {
+            	outputText("\n\n");
+            	transformations.LowerBodyHuman.applyEffect();
+            }
             changes++;
         }
         if (player.lowerBody == LowerBody.WEASEL && player.arms.type != Arms.WEASEL && player.arms.type != Arms.KAMAITACHI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                CoC.instance.transformations.ArmsWeasel.applyEffect();
+                transformations.ArmsWeasel.applyEffect();
             } else {
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             changes++;
         }
         if (player.arms.type == Arms.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsKamaitachi.applyEffect();
+            transformations.ArmsKamaitachi.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.KAMAITACHI && player.tailType != Tail.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailWeasel.applyEffect();
+            transformations.TailWeasel.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.KAMAITACHI && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsWindyAura.applyEffect();
+            transformations.WingsWindyAura.applyEffect();
             changes++;
         }
         if (player.wings.type != Wings.WINDY_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         if (player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceWeasel.applyEffect();
+            transformations.FaceWeasel.applyEffect();
             changes++;
         }
         if (player.faceType == Face.WEASEL && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("\n\n");
-			    CoC.instance.transformations.EarsWeasel.applyEffect();
+			    transformations.EarsWeasel.applyEffect();
             } else {
             	outputText("\n\n");
-            	CoC.instance.transformations.EarsHuman.applyEffect();
+            	transformations.EarsHuman.applyEffect();
             }
             changes++;
         }
-        if (player.ears.type == Ears.WEASEL && CoC.instance.transformations.EyesWeasel.isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.WEASEL && transformations.EyesWeasel.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (transformations.EyesHuman.isPresent()) {
-                if (CoC.instance.transformations.EyesKamaitachiColors.isPossible()) {
+                if (transformations.EyesKamaitachiColors.isPossible()) {
                     outputText("\n\n");
-                    CoC.instance.transformations.EyesKamaitachiColors.applyEffect();
+                    transformations.EyesKamaitachiColors.applyEffect();
                 }
-                CoC.instance.transformations.EyesWeasel.applyEffect();
+                transformations.EyesWeasel.applyEffect();
             } else {
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
 
-        if (CoC.instance.transformations.HairWindswept.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (transformations.HairWindswept.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairWindswept.applyEffect();
+            transformations.HairWindswept.applyEffect();
             changes++;
         }
         if (!player.skin.hasWindSweptScars() && player.wings.type == Wings.WINDY_AURA && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternScarWindswept.applyEffect();
+            transformations.SkinPatternScarWindswept.applyEffect();
             changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -10431,7 +10261,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //possible use effects:
         //- toughess up, sensitivity down
         if (rand(3) == 0 && changes < changeLimit) {
@@ -10459,20 +10289,20 @@ public final class Mutations extends MutationsHelper {
         //- may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
         if (rand(4) == 0 && changes < changeLimit && player.tailType == Tail.BEE_ABDOMEN) {
             outputText("\n\nAs the gentle tingling of the tentacle's remaining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>\n\n");
-            CoC.instance.transformations.TailNone.applyEffect(false);
+            transformations.TailNone.applyEffect(false);
             changes++;
         }
         //-may randomly remove bee wings:
         if (rand(4) == 0 && (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
 
-        if (player.gills.type == Gills.ANEMONE && CoC.instance.transformations.HairAnemone.isPossible() && changes < changeLimit && rand(5) == 0) {
+        if (player.gills.type == Gills.ANEMONE && transformations.HairAnemone.isPossible() && changes < changeLimit && rand(5) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairAnemone.applyEffect();
+            transformations.HairAnemone.applyEffect();
             changes++;
             changes++;
             changes++;
@@ -10482,7 +10312,7 @@ public final class Mutations extends MutationsHelper {
         //-feathery gills sprout from chest and drape sensually over nipples (cumulative swimming power boost with fin, if swimming is implemented)
         if (rand(5) == 0 && player.gills.type != Gills.ANEMONE && player.skin.base.color == "aphotic blue-black" && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsAnemone.applyEffect();
+            transformations.GillsAnemone.applyEffect();
             changes++;
         }
         //-[aphotic] skin tone (blue-black)
@@ -10515,7 +10345,7 @@ public final class Mutations extends MutationsHelper {
         if (enhanced) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Used for dick and boob TFs
         var counter:int = 0;
 
@@ -10597,7 +10427,7 @@ public final class Mutations extends MutationsHelper {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nEerie flames of the jewel migrate up your body to your head, where they cover your [hair].  Though they burned nowhere else in their lazy orbit, your head begins to heat up as they congregate.  Fearful, you raise your hands to it just as the temperature peaks, but as you touch your hair, the searing heat is suddenly gone - along with your tentacles!  <b>Your hair is normal again!</b>");
             outputText("\n\n");
-            CoC.instance.transformations.HairHuman.applyEffect(false);
+            transformations.HairHuman.applyEffect(false);
             changes++;
         }
         //[Adjust hair length toward range of 16-26 – very long to ass-length]
@@ -10759,53 +10589,34 @@ public final class Mutations extends MutationsHelper {
                 player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
             }
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur().applyEffect();
+            transformations.SkinFur().applyEffect();
             changes++;
         }
         //[Grow Fox Legs]
         //THIRD
         if ((enhanced || player.ears.type == Ears.FOX) && player.lowerBody != LowerBody.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
-            //4 legs good, 2 legs better
-            if (player.isTaur()) outputText("\n\nYou shiver as the strength drains from your back legs.  Shaken, you sit on your haunches, forelegs braced wide to stop you from tipping over;  their hooves scrape the dirt as your lower body shrinks, dragging them backward until you can feel the upper surfaces of your hindlegs with their undersides.  A wave of nausea and vertigo overtakes you, and you close your eyes to shut out the sensations.  When they reopen, what greets them are not four legs, but only two... and those roughly in the shape of your old hindleg, except for the furry toes where your hooves used to be.  <b>You now have fox legs!</b>");
-            //n*ga please
-            else if (player.isNaga()) outputText("\n\nYour scales split at the waistline and begin to peel, shedding like old snakeskin.  If that weren't curious enough, the flesh - not scales - underneath is pink and new, and the legs it covers crooked into the hocks and elongated feet of a field animal.  As the scaly coating falls and you step out of it, walking of necessity on your toes, a fine powder blows from the dry skin.  Within minutes, it crumbles completely and is taken by the ever-moving wind.  <b>Your legs are now those of a fox!</b>");
-            //other digitigrade
-            else if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO)
-                outputText("\n\nYour legs twitch and quiver, forcing you to your seat.  As you watch, the ends shape themselves into furry, padded toes.  <b>You now have fox feet!</b>  Rather cute ones, actually.");
-            //red drider bb gone
-            else if (player.isDrider()) outputText("\n\nYour legs buckle under you and you fall, smashing your abdomen on the ground.  Though your control deserts and you cannot see behind you, still you feel the disgusting sensation of chitin loosening and sloughing off your body, and the dry breeze on your exposed nerves.  Reflexively, your legs cling together to protect as much of their now-sensitive surface as possible.  When you try to part them, you find you cannot.  Several minutes pass uncomforably until you can again bend your legs, and when you do, you find that all the legs of a side bend together - <b>in the shape of a fox's leg!</b>");
-            //goo home and goo to bed
-            else if (player.isGoo()) outputText("\n\nIt takes a while before you notice that your gooey mounds have something more defined in them.  As you crane your body and shift them around to look, you can just make out a semi-solid mass in the shape of a crooked, animalistic leg.  You don't think much of it until, a few minutes later, you step right out of your swishing gooey undercarriage and onto the new foot.  The goo covering it quickly dries up, as does the part you left behind, <b>revealing a pair of dog-like fox legs!</b>");
-            else if (player.lowerBody == LowerBody.MELKIE) outputText("\n\nYour body straightens and telescopes suddenly and without the length of your seal half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs covered in fur!  You examine the fuzzy legs and long-toed, sensitive feet. <b>Your legs are now those of a fox!</b>");
-                    //other digitigrade
-            //reg legs, not digitigrade
-            else {
-                outputText("\n\nYour hamstrings tense painfully and begin to pull, sending you onto your face.  As you writhe on the ground, you can feel your thighs shortening and your feet stretching");
-                if (player.lowerBody == LowerBody.BEE) outputText(", while a hideous cracking fills the air");
-                outputText(".  When the spasms subside and you can once again stand, <b>you find that your legs have been changed to those of a fox!</b>");
-            }
-            setLowerBody(LowerBody.FOX);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyFox(2).applyEffect();
             changes++;
         }
         //Grow Fox Arms
         if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsFox.applyEffect();
+            transformations.ArmsFox.applyEffect();
             changes++;
         }
         //Grow Fox Ears]
         //SECOND
         if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsFox.applyEffect();
+			transformations.EarsFox.applyEffect();
             changes++;
         }
         //[Grow Fox Tail](fairly common)
         //FIRST
         if (player.tailType != Tail.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(1).applyEffect();
+            transformations.TailFox(1).applyEffect();
             changes++;
         }
         //[Grow Fox Face]
@@ -10813,13 +10624,13 @@ public final class Mutations extends MutationsHelper {
         //should work from any face, including other muzzles
         if (player.tailType == Tail.FOX && player.faceType != Face.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Fox Eyes
         if (player.faceType == Face.FOX && player.eyes.type != Eyes.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesFox.applyEffect();
+            transformations.EyesFox.applyEffect();
             changes++;
         }
         if (player.tone > 40 && changes < changeLimit && rand(2) == 0) {
@@ -10856,7 +10667,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
@@ -11011,73 +10822,64 @@ public final class Mutations extends MutationsHelper {
         //Tail - unlocks enhanced with fire tail whip attack
         if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailSalamander.applyEffect();
+            transformations.TailSalamander.applyEffect();
             changes++;
         }
         //Legs
         if (player.lowerBody != LowerBody.SALAMANDER && player.tailType == Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            //Hooves -
-            if (player.lowerBody == LowerBody.HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //TAURS -
-            else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with salamander-like claws.");
-            //feet types -
-            else if (player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
-            //Else –
-            else outputText("\n\nPain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
-            outputText("  <b>You have salamander legs and claws!</b>");
-            setLowerBody(LowerBody.SALAMANDER);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodySalamander(2).applyEffect();
             changes++;
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsSalamander.applyEffect();
+            transformations.ArmsSalamander.applyEffect();
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && CoC.instance.transformations.EyesHuman.isPresent()) {
-            CoC.instance.transformations.EyesLizard.applyEffect();
+        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && transformations.EyesHuman.isPresent()) {
+            transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.LIZARD) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
+            transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Human ears
         if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsHuman.applyEffect();
+            transformations.EarsHuman.applyEffect();
             changes++;
         }
         //Partial scaled skin
         if (player.hasPlainSkinOnly() && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
         if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Removing gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         //FAILSAFE CHANGE
@@ -11244,7 +11046,7 @@ public final class Mutations extends MutationsHelper {
     public function foxJewel(mystic:Boolean, player:Player):void {
         clearOutput();
         mutationStart("foxJewel" + (mystic ? "M" : ""), 3);
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         if (mystic) changeLimit += 2;
         if (mystic) outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie purple flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale lavender flames swirl around you, the air is filled with a sickly sweet scent that drips with the bitter aroma of licorice, filling you with a dire warmth.");
         else outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie blue flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale azure flames swirl around you, the air is filled with a sweet scent that drips with the aroma of wintergreen, sending chills down your spine.");
@@ -11355,7 +11157,7 @@ public final class Mutations extends MutationsHelper {
         //[Grow Fox Tail]
         mutationStep(player.tailType != Tail.FOX && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 4, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(1).applyEffect();
+            transformations.TailFox(1).applyEffect();
         });
         var nFoxTails:int = (player.ears.type == Ears.FOX && player.tailType == Tail.FOX) ? player.tailCount : 0;
         if (nFoxTails == 8 && !mystic && rand(3) == 0) {
@@ -11365,27 +11167,27 @@ public final class Mutations extends MutationsHelper {
         //(rare effect, up to max of 8 tails, requires PC level and int*10 = number of tail to be added)
         mutationStep(nFoxTails == 1 && player.inte >= 15 && player.wis >= 15, mystic ? 2 : 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(2).applyEffect();
+            transformations.TailFox(2).applyEffect();
         });
         mutationStep(nFoxTails == 2 && player.level >= 6 && player.inte >= 30 && player.wis >= 30, mystic ? 2 : 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(3).applyEffect();
+            transformations.TailFox(3).applyEffect();
         });
         mutationStep(nFoxTails == 3 && player.level >= 12 && player.inte >= 45 && player.wis >= 45, mystic ? 2 : 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(4).applyEffect();
+            transformations.TailFox(4).applyEffect();
         });
         mutationStep(nFoxTails == 4 && player.level >= 18 && player.inte >= 60 && player.wis >= 60, mystic ? 2 : 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(5).applyEffect();
+            transformations.TailFox(5).applyEffect();
         });
         mutationStep(nFoxTails == 5 && player.level >= 24 && player.inte >= 75 && player.wis >= 75, mystic ? 2 : 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(6).applyEffect();
+            transformations.TailFox(6).applyEffect();
         });
         mutationStep(nFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(7).applyEffect();
+            transformations.TailFox(7).applyEffect();
             if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
                 outputText("\n\nBut something is wrong...  The cosmic power radiating from your body feels... tainted somehow. The corruption pouring off your body feels... good.</b>");
                 outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
@@ -11396,12 +11198,12 @@ public final class Mutations extends MutationsHelper {
         });
         mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(8).applyEffect();
+            transformations.TailFox(8).applyEffect();
         });
         //[Grow 9th tail and gain Corrupted Nine-tails perk]
         mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.TailFox(9).applyEffect();
+            transformations.TailFox(9).applyEffect();
 
             if (!player.hasPerk(PerkLib.CorruptedNinetails)) {
                 outputText("\n\nBut something is strange...  The cosmic power radiating from your body feels... somehow more tainted than before. The corruption pouring off your body feels... amazingly good.</b>");
@@ -11415,22 +11217,22 @@ public final class Mutations extends MutationsHelper {
         //Fox Eyes
         mutationStep(player.ears.type == Ears.FOX && player.eyes.type != Eyes.FOX, 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.EyesFox.applyEffect();
+            transformations.EyesFox.applyEffect();
         });
         //Kitsune arms
         mutationStep(player.arms.type == Arms.HUMAN, 2, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsKitsune.applyEffect();
+            transformations.ArmsKitsune.applyEffect();
         });
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         mutationStep(!InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE, Arms.FOX, Arms.KITSUNE), 4, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
         });
         //[Grow Fox Ears]
         mutationStep(player.tailType == Tail.FOX && player.ears.type != Ears.FOX, mystic ? 2 : 4, function ():void {
             outputText("\n\n");
-			CoC.instance.transformations.EarsFox.applyEffect();
+			transformations.EarsFox.applyEffect();
         });
         //[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
         mutationStep(!InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && player.lowerBody != LowerBody.GARGOYLE && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors), mystic ? 2 : 4, function ():void {
@@ -11464,7 +11266,7 @@ public final class Mutations extends MutationsHelper {
         //From Tan, Olive, or Light skin tones
         mutationStep(player.skin.base.type == Skin.PLAIN && !player.skin.hasMagicalTattoo(), 3, function ():void {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternKitsune.applyEffect();
+            transformations.SkinPatternKitsune.applyEffect();
         });
         //Nipples Turn Back:
         mutationStep(player.hasStatusEffect(StatusEffects.BlackNipples), 3, function ():void {
@@ -11711,7 +11513,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         outputText("You pour some of the oil onto your hands and ");
         if (player.cor < 30) outputText("hesitantly ");
         else if (player.cor > 70) outputText("eagerly ");
@@ -11930,13 +11732,13 @@ public final class Mutations extends MutationsHelper {
         //Remove odd eyes
         if ((player.eyes.type == Eyes.SPIDER || player.eyes.type == Eyes.CAT) && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //PC Trap Effects
-        if (CoC.instance.transformations.EyesSandTrap.isPossible() && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (transformations.EyesSandTrap.isPossible() && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesSandTrap.applyEffect();
+            transformations.EyesSandTrap.applyEffect();
             changes++;
         }
         //Vagina Turns Black:
@@ -11956,7 +11758,7 @@ public final class Mutations extends MutationsHelper {
         //Dragonfly Wings:
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.GIANT_DRAGONFLY) && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsGiantDragonfly.applyEffect();
+            transformations.WingsGiantDragonfly.applyEffect();
             changes++;
         }
         if (changes == 0) {
@@ -12005,7 +11807,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
         //stat gains:
         //gain speed to ceiling of 80
@@ -12054,7 +11856,7 @@ public final class Mutations extends MutationsHelper {
         //bodypart changes:
         if (player.tailType != Tail.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailRaccoon.applyEffect();
+            transformations.TailRaccoon.applyEffect();
             changes++;
         }
 
@@ -12066,14 +11868,14 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Eyes Color
-        if (CoC.instance.transformations.EyesRaccoonColors.isPossible() || CoC.instance.transformations.EyesHuman.isPossible()) {
-            if (CoC.instance.transformations.EyesRaccoonColors.isPossible()) {
+        if (transformations.EyesRaccoonColors.isPossible() || transformations.EyesHuman.isPossible()) {
+            if (transformations.EyesRaccoonColors.isPossible()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesRaccoonColors.applyEffect();
+                transformations.EyesRaccoonColors.applyEffect();
             }
-            if (CoC.instance.transformations.EyesHuman.isPossible()) {
+            if (transformations.EyesHuman.isPossible()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
@@ -12081,67 +11883,40 @@ public final class Mutations extends MutationsHelper {
         //gain coon ears
         if (player.tailType == Tail.RACCOON && player.ears.type != Ears.RACCOON && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsRaccoon.applyEffect();
+            transformations.EarsRaccoon.applyEffect();
             changes++;
         }
         //gain feet-coon
         if (player.ears.type == Ears.RACCOON && player.lowerBody != LowerBody.RACCOON && changes < changeLimit && rand(4) == 0) {
-            //from naga non-feet (gain fatigue and lose lust)
-            if (player.isNaga()) {
-                outputText("\n\nYour body straightens and telescopes suddenly and without the length of your snake half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs!  The tattered snake-skin continues melding into your groin as you examine the fuzzy legs and long-toed, sensitive feet.  <b>Looks like you now have raccoon hind-paws...</b> and an upset stomach.");
-                dynStats("lus", -30);
-                fatigue(5);
-            } else if (player.lowerBody == LowerBody.MELKIE) {
-                outputText("\n\nYour body straightens and telescopes suddenly and without the length of your seal half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs covered in fur!  You examine the fuzzy legs and long-toed, sensitive feet.  <b>Looks like you now have raccoon hind-paws...</b> and an upset stomach.");
-                dynStats("lus", -30);
-                fatigue(5);
-            }
-            //from amoeba non-feet
-            else if (player.isGoo()) outputText("\n\nYour gooey undercarriage begins to boil violently, and before you can do anything, it evaporates!  Left sitting on just the small pad of sticky half-dried slime that comprises your [butt], a sudden bulge under you is enough to push you onto your back.  Wondering idly and unable to see what's happening, you close your eyes and try to focus on what sensations you can feel from your lower body.  You feel... a swell of expansion, followed by weak muscles trying to contract for the first time, pulling flimsy, folded limbs apart and laying them flat.  As your attention wanders downward, you feel toes wiggling - far longer toes than you remember.  For several minutes you lie still and test muscles gingerly as your body solidifes, but when you can finally move again and look at your legs properly, what you see surprises you very little.  <b>You have fuzzy legs and a pair of long-toed raccoon paws!</b>");
-            //from hooves or hard feet, including centaurs and bees
-            else if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.PONY || player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.isTaur()) {
-                outputText("\n\nYour [feet] feel very... wide, all of a sudden.  You clop around experimentally, finding them far less responsive and more cumbersome than usual.  On one step, one of your feet ");
-                if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.PONY) outputText("pops right out of its hoof just in time");
-                else outputText("comes loose inside its long boot, and you pull it free with irritation only");
-                outputText(" for you to set it back down on a sharp rock!  Biting off a curse, you examine the new bare foot.  It looks much like a human's, except for the nearly-twice-as-long toes.  You find you can even use them to pick things up; the sharp rock is dropped into your hand and tossed far away.  The shed [foot] is quickly joined on the ground by its complement, revealing more long toes.  ");
-                if (player.isTaur()) outputText("For a few minutes you amuse yourself with your four prehensile feet... you even make up a game that involves juggling a stone under your body by tossing it between two feet while balancing on the others.  It's only a short while, however, before your lower stomach grumbles and a searing pain makes you miss your catch.  Anticipating what will happen, you lie down carefully and close your eyes, biting down on a soft wad of cloth.  The pain quickly returns and drives you into unconsciousness, and when you awaken, your back legs are gone.  ");
-                outputText("<b>You now have two fuzzy, long-toed raccoon legs.</b>");
-            }
-            //from human, demon, paw feet
-            else {
-                outputText("\n\nYour toes wiggle of their own accord, drawing your attention.  Looking down, you can see them changing from their current shape, stretching into oblongs.  When they finish, your foot appears humanoid, but with long, prehesile toes!  ");
-                if ((player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS) && !player.hasFur()) outputText("The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs...  ");
-                outputText("<b>You now have raccoon paws!</b>");
-            }
-            setLowerBody(LowerBody.RACCOON);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyRaccoon.applyEffect();
             changes++;
         }
 
         //Grow coon Arms
         if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsRaccoon.applyEffect();
+            transformations.ArmsRaccoon.applyEffect();
             changes++;
         }
 
         //gain half-coon face (prevented if already full-coon)
         if (player.faceType != Face.RACCOON_MASK && player.faceType != Face.RACCOON && (player.skin.coverage != Skin.COVERAGE_COMPLETE || player.skin.coverage != Skin.COVERAGE_HIGH) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceRaccoonMask.applyEffect();
+            transformations.FaceRaccoonMask.applyEffect();
             changes++;
         }
                 //gain full-coon face (requires half-coon and fur)
         //from humanoid - should be the only one possible
         else if (player.faceType == Face.RACCOON_MASK && player.lowerBody == LowerBody.RACCOON && player.hasFur() && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceRaccoon.applyEffect();
+            transformations.FaceRaccoon.applyEffect();
             changes++;
         }
         //Reset coon face
         if (player.faceType == Face.RACCOON && rand(4) == 0 && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
 
@@ -12158,13 +11933,13 @@ public final class Mutations extends MutationsHelper {
         if (player.faceType == Face.RACCOON_MASK && !player.hasFur() && rand(3) == 0 && changes < changeLimit) {
             color1 = randomChoice(Coon_HairColor1);
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
         }
         //gain full fur
         if (player.faceType == Face.RACCOON_MASK && (player.lowerBody == LowerBody.RACCOON && player.ears.type == Ears.RACCOON) && player.hasFur() && player.skin.coverage == Skin.COVERAGE_LOW && changes < changeLimit && rand(4) == 0) {
             color1 = randomChoice(Coon_HairColor1);
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: color1}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: color1}).applyEffect();
             changes++;
         }
 
@@ -12190,7 +11965,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //use:
         if (type == 0) {
             outputText("You pop several of the beans in your mouth and suck; they immediately reward you by giving up an oily, chocolatey flavor with a hint of bitterness.  For several minutes you ");
@@ -12280,57 +12055,55 @@ public final class Mutations extends MutationsHelper {
         //gain ears
         if (player.ears.type != Ears.MOUSE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsMouse.applyEffect();
+            transformations.EarsMouse.applyEffect();
             changes++;
         }
         //gain tail
         //from no tail
         if (player.ears.type == Ears.MOUSE && player.tailType != Tail.MOUSE && changes < changeLimit && rand(3) == 0 && type == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailMouse.applyEffect();
+            transformations.TailMouse.applyEffect();
             changes++;
         }
         if (player.ears.type == Ears.MOUSE && player.tailType != Tail.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.TailHinezumi.applyEffect();
+            transformations.TailHinezumi.applyEffect();
             changes++;
         }
         //gain legs
         if (player.lowerBody != LowerBody.MOUSE && player.tailType == Tail.MOUSE && changes < changeLimit && rand(3) == 0 && type == 0) {
-            outputText("\n\nYour legs begins to change covering up to the tight with a thin layer of fur. Your feet distort to takes on a more animalistic appearance and the nails sharpens to points more like mouses claws. <b>Seems you now got mouses leg paws now.</b>");
-            setLowerBody(LowerBody.MOUSE);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyMouse.applyEffect();
         }
         if (player.lowerBody != LowerBody.HINEZUMI && player.tailType == Tail.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nYour legs grow increasingly hot until suddenly they light up and start blazing, just like your tail. Well wow! Kicking with these is sure to pack an extra punch. The fur under your fiery coat doesn’t seem to burn either, but you're pretty sure anything that gets a kick from your legs is in for a painful experience. <b>You now have blazing mouse legs!</b>");
-            setLowerBody(LowerBody.HINEZUMI);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyHinezumi.applyEffect();
         }
         //gain arms
         if (player.arms.type != Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHinezumi.applyEffect();
+            transformations.ArmsHinezumi.applyEffect();
         }
         //get hinezumi eyes
-        if (CoC.instance.transformations.EyesHinezumi.isPossible() && CoC.instance.transformations.EyesHuman.isPresent() && rand(3) == 0 && changes < changeLimit && type == 1) {
+        if (transformations.EyesHinezumi.isPossible() && transformations.EyesHuman.isPresent() && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHinezumi.applyEffect();
+            transformations.EyesHinezumi.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.HINEZUMI && rand(2) == 0 && changes < changeLimit && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Hair
         var color1:String;
         var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
-        if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && CoC.instance.transformations.HairBurning.isPossible() && changes < changeLimit && rand(3) == 0 && type == 1) {
+        if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && transformations.HairBurning.isPossible() && changes < changeLimit && rand(3) == 0 && type == 1) {
             color1 = randomChoice(Hinezumi_HairColor);
             player.hairColor = color1;
             outputText("\n\n");
-            CoC.instance.transformations.HairBurning.applyEffect();
+            transformations.HairBurning.applyEffect();
             changes++;
         }
         //get fur
@@ -12343,7 +12116,7 @@ public final class Mutations extends MutationsHelper {
             //from skinscales
             if (!player.hasFur()) {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.coatColor}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.coatColor}).applyEffect();
             }
             //from other color fur
             else {
@@ -12367,19 +12140,19 @@ public final class Mutations extends MutationsHelper {
         //get teeth - from human, bunny, coonmask, or other humanoid teeth faces
         if (player.ears.type == Ears.MOUSE && (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH || player.faceType == Face.BUNNY || player.faceType == Face.SPIDER_FANGS || player.faceType == Face.RACCOON_MASK) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceBuckteeth.applyEffect();
+            transformations.FaceBuckteeth.applyEffect();
             changes++;
         }
         //get mouse muzzle from mouse teeth or other muzzle
         if (player.hasFur() && player.faceType != Face.MOUSE && (player.faceType != Face.HUMAN || player.faceType != Face.SHARK_TEETH || player.faceType != Face.BUNNY || player.faceType != Face.SPIDER_FANGS || player.faceType != Face.RACCOON_MASK) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceMouse.applyEffect();
+            transformations.FaceMouse.applyEffect();
             changes++;
         }
         //get mouse teeth from mouse muzzle
         if (player.hasFur() && player.faceType == Face.MOUSE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYour mouse face begins to change as if melting. When you pass your hand over it you discover to your surprise its back to being human.or well it would be if not for your buck teeth way larger than normal.  <b>Your face is now human save for your two incisor like buck teeth.</b>");
-            CoC.instance.transformations.FaceBuckteeth.applyEffect(false);
+            transformations.FaceBuckteeth.applyEffect(false);
             changes++;
         }
         player.refillHunger(10);
@@ -12391,7 +12164,7 @@ public final class Mutations extends MutationsHelper {
         //Change tail if already horned.
         if (player.tailType != Tail.DEMONIC && player.lowerBody != LowerBody.GARGOYLE && player.horns.count > 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailDemonic.applyEffect();
+            transformations.TailDemonic.applyEffect();
             dynStats("cor", 4);
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
@@ -12399,7 +12172,7 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody != LowerBody.GARGOYLE && (player.horns.count == 0 || (rand(player.horns.count + 3) == 0))) {
             if (player.horns.type == Horns.NONE) {
                 outputText("\n\n");
-                CoC.instance.transformations.HornsDemonic.applyEffect();
+                transformations.HornsDemonic.applyEffect();
             } else if (player.horns.count < 12 && player.horns.type == Horns.DEMON) {
                 outputText("\n\n");
                 outputText("Another pair of demon horns, larger than the last, forms behind the first row.");
@@ -12410,7 +12183,7 @@ public final class Mutations extends MutationsHelper {
             //Text for shifting horns
             else if (player.horns.type != Horns.DEMON && player.horns.type != Horns.ORCHID) {
                 outputText("\n\n");
-                CoC.instance.transformations.HornsDemonic.applyEffect();
+                transformations.HornsDemonic.applyEffect();
                 dynStats("cor", 3);
             }
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -12426,7 +12199,7 @@ public final class Mutations extends MutationsHelper {
             //Remove face before fur!
             if (player.faceType != Face.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceHuman.applyEffect();
+                transformations.FaceHuman.applyEffect();
             }
             //De-fur
             else if (!player.hasPlainSkinOnly()) {
@@ -12440,13 +12213,13 @@ public final class Mutations extends MutationsHelper {
         //Demon tongue
         if (player.tongue.type != Tongue.DEMONIC && rand(2) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueDemonic.applyEffect();
+            transformations.TongueDemonic.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //foot changes - requires furless
@@ -12455,39 +12228,35 @@ public final class Mutations extends MutationsHelper {
             if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
                 if (player.lowerBody != LowerBody.DEMONIC_CLAWS) {
                     outputText("\n\n");
-                    outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your [feet]. Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>");
-                    setLowerBody(LowerBody.DEMONIC_CLAWS);
-                    player.legCount = 2;
+                    transformations.LowerBodyDemonClawed.applyEffect();
                 }
             }
             //Females/futa get high heels
             else if (player.lowerBody != LowerBody.DEMONIC_HIGH_HEELS) {
                 outputText("\n\n");
-                outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your [feet]. Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horns protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.");
-                setLowerBody(LowerBody.DEMONIC_HIGH_HEELS);
-                player.legCount = 2;
+                transformations.LowerBodyDemonHighHeels.applyEffect();
             }
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Demon wings
         if (((player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_LARGE) && player.cor >= 50 || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsDemonicLarge.applyEffect();
+            transformations.WingsDemonicLarge.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.MANTIS_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_SMALL) && player.cor >= 50 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsDemonicTiny.applyEffect();
+            transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if (player.wings.type == Wings.NONE && player.cor >= 50 && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsDemonicTiny.applyEffect();
+            transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY) && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
     }
@@ -12531,7 +12300,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Ferret Fruit Effects
         //- + Thin:
         if (player.thickness > 15 && changes < changeLimit && rand(3) == 0) {
@@ -12610,25 +12379,25 @@ public final class Mutations extends MutationsHelper {
         //If the PC has gills:
         if (player.hasGills() && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
         if (player.hairType == Hair.ANEMONE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.HairHuman.applyEffect();
+            transformations.HairHuman.applyEffect();
             changes++;
         }
         //If the PC has goo hair:
         if (player.hairType == Hair.GOO && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.HairHuman.applyEffect();
+            transformations.HairHuman.applyEffect();
             changes++;
         }
         //If the PC has four eyes:
         if (player.eyes.type == Eyes.SPIDER && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark.  You touch your forehead to inspect your eyes, only to find out that they have disappeared.  <b>You only have two eyes now!</b>");
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Go into heat
@@ -12640,66 +12409,58 @@ public final class Mutations extends MutationsHelper {
         //Turn ferret mask to full furface.
         if (player.faceType == Face.FERRET_MASK && player.hasFur() && player.ears.type == Ears.FERRET && player.tailType == Tail.FERRET && player.lowerBody == LowerBody.FERRET && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceFerret.applyEffect();
+            transformations.FaceFerret.applyEffect();
             changes++;
         }
         //If face is human:
         if (player.faceType == 0 && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceFerretMask.applyEffect();
+            transformations.FaceFerretMask.applyEffect();
             changes++;
         }
         //If face is not ferret, has ferret ears, tail, and legs:
         if (player.faceType != Face.HUMAN && player.faceType != Face.FERRET_MASK && player.faceType != Face.FERRET && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //No fur, has ferret ears, tail, and legs:
         if (!player.hasFur() && player.ears.type == Ears.FERRET && player.tailType == Tail.FERRET && player.lowerBody == LowerBody.FERRET && rand(4) == 0 && changes < changeLimit) {
             if (player.hairColor != "sandy brown" && player.hairColor != "silver" && player.hairColor != "white" && player.hairColor != "brown") {
                 outputText("\n\n");
-                CoC.instance.transformations.HairChangeColor(["sandy brown", "silver", "white", "brown"]).applyEffect();
+                transformations.HairChangeColor(["sandy brown", "silver", "white", "brown"]).applyEffect();
             }
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.hairColor}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: player.hairColor}).applyEffect();
             changes++;
         }
         //Tail TFs!
         if (player.tailType != Tail.FERRET && player.ears.type == Ears.FERRET && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.TailFerret.applyEffect();
+            transformations.TailFerret.applyEffect();
             changes++;
         }
                 //If naga, has ferret ears:
         //(NOTE: this is the only exception to the legs coming after the tail, as the ferret tail will only go away right after it appears because of your snake lower half)
         else if (player.isNaga() && player.ears.type == Ears.FERRET && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a snake.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
+            outputText("\n\n");
+            transformations.LowerBodyFerret.applyEffect();
             changes++;
-            setLowerBody(LowerBody.FERRET);
-            player.legCount = 2;
         } else if (player.lowerBody == LowerBody.MELKIE) {
-            outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your seal-like tail. Unable " +
-                    "to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a seal. Instead, you only have two legs. " +
-                    "They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
+            outputText("\n\n");
+            transformations.LowerBodyFerret.applyEffect();
             changes++;
-            setLowerBody(LowerBody.FERRET);
-            player.legCount = 2;
         }
         //If legs are not ferret, has ferret ears and tail
         if (player.lowerBody != LowerBody.FERRET && player.ears.type == Ears.FERRET && player.tailType == Tail.FERRET && rand(4) == 0 && changes < changeLimit) {
-            //-If centaur, has ferret ears and tail:
-            if (player.isTaur()) outputText("\n\nYou scream in agony as a horrible pain racks your entire horse lower half.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a horse.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
-
-            outputText("\n\nYou scream in agony as the bones in your legs begin to break and rearrange.  Even as the pain passes, an uncomfortable combination of heat and throbbing continues even after the transformation is over.  You rest for a moment, allowing the sensations to subside.  Now feeling more comfortable, <b>you stand up, ready to try out your new ferret legs!</b>");
+            outputText("\n\n");
+            transformations.LowerBodyFerret.applyEffect();
             changes++;
-            setLowerBody(LowerBody.FERRET);
-            player.legCount = 2;
         }
         //If ears are not ferret:
         if (player.ears.type != Ears.FERRET && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsFerret.applyEffect();
+            transformations.EarsFerret.applyEffect();
             changes++;
         }
         //If no other effect occurred, fatigue decreases:
@@ -12719,7 +12480,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (boar) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
         player.refillHunger(20);
         if (rand(3) == 0 && changes < changeLimit) {
@@ -12810,62 +12571,53 @@ public final class Mutations extends MutationsHelper {
         //Gain pig ears!
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.PIG) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsPig.applyEffect();
+			transformations.EarsPig.applyEffect();
             changes++;
         }
         //Gain pig tail if you already have pig ears!
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.ears.type == Ears.PIG && player.tailType != Tail.PIG) {
             outputText("\n\n");
-            CoC.instance.transformations.TailPig.applyEffect();
+            transformations.TailPig.applyEffect();
             changes++;
         }
         //Gain pig tail even when centaur, needs pig ears.
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.ears.type == Ears.PIG && player.tailType != Tail.PIG && player.isTaur() && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.PONY)) {
             outputText("\n\n");
-            CoC.instance.transformations.TailPig.applyEffect();
+            transformations.TailPig.applyEffect();
             changes++;
         }
         //Turn your lower body into pig legs if you have pig ears and tail.
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.ears.type == Ears.PIG && player.tailType == Tail.PIG && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
-            if (player.isTaur()) //Centaur
-                outputText("\n\nYou scream in agony as a horrible pain racks your entire bestial lower half. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the animal's lower body. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
-            else if (player.lowerBody == LowerBody.NAGA) //Naga
-                outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a snake. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
-            else if (player.lowerBody == LowerBody.MELKIE) outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your seal-like tail. Unable " +
-                    "to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a seal. Instead, you only have two legs. " +
-                    "They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
-            else //Bipedal
-                outputText("\n\nYou scream in agony as the bones in your legs break and rearrange. Once the pain subsides, you inspect your legs, finding that they are digitigrade and ending in cloven hooves. <b>You now have pig legs!</b>");
-            setLowerBody(LowerBody.CLOVEN_HOOFED);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyClovenHoofed(2).applyEffect();
             changes++;
         }
         //Gain pig/boar arms
         if (rand(2) == 0 && changes < changeLimit && player.tailType == Tail.PIG && player.lowerBody == LowerBody.CLOVEN_HOOFED && (player.arms.type != Arms.PIG || player.arms.type != Arms.BOAR)) {
             outputText("\n\n");
             if (boar) {
-                CoC.instance.transformations.ArmsBoar.applyEffect();
+                transformations.ArmsBoar.applyEffect();
                 changes++;
             } else {
-                CoC.instance.transformations.ArmsPig.applyEffect();
+                transformations.ArmsPig.applyEffect();
                 changes++;
             }
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.PIG, Arms.BOAR) && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Gain pig/boar face when you have the first three pig TFs.
         if (rand(2) == 0 && changes < changeLimit && player.ears.type == Ears.PIG && player.tailType == Tail.PIG && player.lowerBody == LowerBody.CLOVEN_HOOFED && (player.faceType != Face.PIG || player.faceType != Face.BOAR)) {
             if (boar) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceBoar.applyEffect();
+                transformations.FaceBoar.applyEffect();
                 changes++;
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.FacePig.applyEffect();
+                transformations.FacePig.applyEffect();
                 changes++;
             }
         }
@@ -12873,16 +12625,16 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPlainSkinOnly() && rand(2) == 0 && changes < changeLimit) {
             if (player.skin.base.pattern != Skin.PATTERN_NONE) {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinPatternNone.applyEffect();
+                transformations.SkinPatternNone.applyEffect();
             }
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (boar && rand(2) == 0 && player.hasPlainSkinOnly() && !player.hasFur() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "dark brown", "black", "red", "gray"]}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "dark brown", "black", "red", "gray"]}).applyEffect();
             changes++;
         }
         //Change skin colour
@@ -12924,14 +12676,14 @@ public final class Mutations extends MutationsHelper {
         if (player.horns.count == 0 && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
             outputText("\n\n");
             //[Player horns type changed to Antlers.]
-            CoC.instance.transformations.HornsAntlers.applyEffect();
+            transformations.HornsAntlers.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //[Show this description instead if the player already had horns when the transformation occurred.]
         else if (player.horns.count > 0 && player.horns.type != Horns.ANTLERS && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
             outputText("\n\n");
             //[Player horns type changed to Antlers.]
-            CoC.instance.transformations.HornsAntlers.applyEffect();
+            transformations.HornsAntlers.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if (returnToBakery) {
@@ -12958,7 +12710,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
@@ -13283,13 +13035,13 @@ public final class Mutations extends MutationsHelper {
         //Face
         if (player.hasPlainSkinOnly() && player.skinAdj == "slippery" && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Ears
         if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsElfin.applyEffect();
+			transformations.EarsElfin.applyEffect();
             changes++;
         }
         //Ink spray attack
@@ -13309,35 +13061,15 @@ public final class Mutations extends MutationsHelper {
         //Legs
         if (player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.lowerBody != LowerBody.SCYLLA)) {
             if (changes < changeLimit && rand(3) == 0) {
-                if (player.lowerBody == LowerBody.CLOVEN_HOOFED) outputText("\n\nYour lower half suddenly transform back into two human legs. You so missed having normal legs like before.");
-                if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYour tail split in two and turn into a pair of legs. You missed behing able to walk instead of slithering around.");
-                if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
-                outputText("\n\n<b>You now have human legs in place of your feet!</b>");
-                setLowerBody(LowerBody.HUMAN);
-                player.legCount = 2;
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
                 MutagenBonus("spe", 1);
                 changes++;
             }
         }
         if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.CLOVEN_HOOFED) && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing.");
-            if (player.tailType != 0) {
-                if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen");
-                else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails");
-                else outputText(" Your tail");
-                outputText(" recede back into your body disappearing entirely into your backside as if it never existed.");
-            }
-            outputText(" You suddenly feel something weird down your leg as you notice they are literally boneless! No wonder you fell down there's no way those empty lump of flesh would be able to carry your weight around. As you think over how you will fix this annoying situation wracking pain hits you in waves as your legs seems to stretch to a ridiculous length up to twice your height. Just as you think this can't get any weirder your legs split apart dividing into four then again into eighths!");
-            outputText(" You watch you toe disappearing turning your feet into what could have been described as eight very weird tails when your legs start to cover with what looks like suction cups similar to those of an octopus. <b>Your legs have turned into tentacles!</b>");
-            if (type == 0) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.");
-            if (type == 1) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.");
-            if (type == 2) outputText(" Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.");
-            outputText(" As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!");
-            setLowerBody(LowerBody.SCYLLA);
-            player.legCount = 8;
-            if (player.tailType != Tail.NONE) {
-                CoC.instance.transformations.TailNone.applyEffect(false);
-            }
+            outputText("\n\n");
+            transformations.LowerBodyScylla.applyEffect();
             changes++;
         }
         //FAILSAFE CHANGE
@@ -13362,7 +13094,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
@@ -13680,7 +13412,7 @@ public final class Mutations extends MutationsHelper {
         //Hood
         if (player.lowerBody == LowerBody.KRAKEN && player.horns.type != Horns.KRAKEN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HornsKraken.applyEffect();
+            transformations.HornsKraken.applyEffect();
             changes++;
         }
 
@@ -13688,7 +13420,7 @@ public final class Mutations extends MutationsHelper {
         //Skin
         if ((!player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Skin part 2
@@ -13705,41 +13437,41 @@ public final class Mutations extends MutationsHelper {
         //SkinColor
         if (player.coatColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyKraken.applyEffect();
+            transformations.RearBodyKraken.applyEffect();
             changes++;
         }
 
         //Face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
 
         //Ears
         if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsElfin.applyEffect();
+			transformations.EarsElfin.applyEffect();
             changes++;
         }
 
         //Arms
         if (player.arms.type != Arms.KRAKEN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsKraken.applyEffect();
+            transformations.ArmsKraken.applyEffect();
             changes++;
         }
 
 
         //Eyes Color
-        if (CoC.instance.transformations.EyesKrakenColors.isPossible() || CoC.instance.transformations.EyesKraken.isPossible()) {
-            if (CoC.instance.transformations.EyesKrakenColors.isPossible()) {
+        if (transformations.EyesKrakenColors.isPossible() || transformations.EyesKraken.isPossible()) {
+            if (transformations.EyesKrakenColors.isPossible()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesKrakenColors.applyEffect();
+                transformations.EyesKrakenColors.applyEffect();
             }
-            if (CoC.instance.transformations.EyesKraken.isPossible()) {
+            if (transformations.EyesKraken.isPossible()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesKraken.applyEffect();
+                transformations.EyesKraken.applyEffect();
             }
             changes++;
         }
@@ -13762,44 +13494,20 @@ public final class Mutations extends MutationsHelper {
         //Legs
         if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.KRAKEN) {
             if (changes < changeLimit && rand(3) == 0) {
-                if (player.lowerBody == LowerBody.CLOVEN_HOOFED) outputText("\n\nYour lower half suddenly transform back into two human legs. You so missed having normal legs like before.");
-                if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYour tail split in two and turn into a pair of legs. You missed behing able to walk instead of slithering around.");
-                if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
-                outputText("\n\n<b>You now have human legs in place of your feet!</b>");
-                setLowerBody(LowerBody.HUMAN);
-                player.legCount = 2;
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
                 MutagenBonus("spe", 1);
                 changes++;
             }
         }
         if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.KRAKEN && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing.");
-            if (player.tailType != 0) {
-                if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen");
-                else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails");
-                else outputText(" Your tail");
-                outputText(" recede back into your body disappearing entirely into your backside as if it never existed.");
-            }
-            outputText(" You suddenly feel something weird down your leg as you notice they are literally boneless! No wonder you fell down there's no way those empty lump of flesh would be able to carry your weight around. As you think over how you will fix this annoying situation wracking pain hits you in waves as your legs seems to stretch to a ridiculous length up to twice your height. Just as you think this can't get any weirder your legs split apart dividing into four then again into eighths!");
-            outputText(" You watch you toe disappearing turning your feet into what could have been described as eight very weird tails when your legs start to cover with what looks like suction cups similar to those of an octopus. <b>Your legs have turned into tentacles!</b>\n\n");
-            if (type == 0) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.");
-            if (type == 1) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.");
-            if (type == 2) outputText(" Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.");
-            outputText(" As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!");
-            setLowerBody(LowerBody.SCYLLA);
-            player.legCount = 8;
-            if (player.tailType != Tail.NONE) {
-                CoC.instance.transformations.TailNone.applyEffect(false);
-            }
+            outputText("\n\n");
+            transformations.LowerBodyScylla.applyEffect();
             changes++;
         }
         if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody == LowerBody.SCYLLA && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nSomething in your tentacle legs shifts as additional limbs grow. You look down to discover two larger tentacles have grown along your eight legs. <b>They look similar to the ones a kraken might have.</b>");
-            setLowerBody(LowerBody.KRAKEN);
-            player.legCount = 10;
-            if (player.tailType != Tail.NONE) {
-                CoC.instance.transformations.TailNone.applyEffect(false);
-            }
+            outputText("\n\n");
+            transformations.LowerBodyKraken.applyEffect();
             changes++;
         }
 
@@ -13820,7 +13528,7 @@ public final class Mutations extends MutationsHelper {
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("The cum tastes pretty much like you expected it would, salty. Strangely, you feel warmer by the minute, perhaps it's your body adapting to the very hot feeling the cum left in your stomach.");
@@ -13912,51 +13620,52 @@ public final class Mutations extends MutationsHelper {
         //Legs
         if (player.lowerBody != LowerBody.YETI && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYour legs start becoming excessively hairy down to your feet. They’re so hairy that you can no longer see your skin. Just as you thought the transformation was over, you see your feet enlarging to twice their size. They look like those of a huge monkey. Well, you guess people can call you Bigfoot now with your enormous <b>yeti feet!</b>");
-                setLowerBody(LowerBody.YETI);
+                outputText("\n\n");
+                transformations.LowerBodyYeti.applyEffect();
             } else {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
             }
             changes++;
         }
         //Arms
         if (player.lowerBody == LowerBody.YETI && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YETI) && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsYeti.applyEffect();
+            transformations.ArmsYeti.applyEffect();
             changes++;
         }
         //Ears
         if (player.arms.type == Arms.YETI && player.ears.type != Ears.YETI && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EarsYeti.applyEffect();
+            transformations.EarsYeti.applyEffect();
             changes++;
         }
         //Face
         if (player.ears.type == Ears.YETI && player.faceType != Face.YETI_FANGS && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceYetiFangs.applyEffect();
+            transformations.FaceYetiFangs.applyEffect();
             changes++;
         }
         //Hair
-        if (player.faceType == Face.YETI_FANGS && CoC.instance.transformations.HairFluffy.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType == Face.YETI_FANGS && transformations.HairFluffy.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairFluffy.applyEffect();
+            transformations.HairFluffy.applyEffect();
             changes++;
         }
         //Fur
         if (player.hairType == Hair.FLUFFY && player.rearBody.type != RearBody.YETI_FUR && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyYetiFur.applyEffect();
+            transformations.RearBodyYetiFur.applyEffect();
             changes++;
         }
         //Eyes
         if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
-        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (CoC.instance.transformations.EyesChangeColor(["silver", "gray"]).isPossible())) {
-            CoC.instance.transformations.EyesChangeColor(["silver", "gray"]).applyEffect(false);
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (transformations.EyesChangeColor(["silver", "gray"]).isPossible())) {
+            transformations.EyesChangeColor(["silver", "gray"]).applyEffect(false);
             outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to [eyecolor]. <b>You now have [eyecolor] irises.</b>");
             changes++;
         }
@@ -14006,7 +13715,7 @@ public final class Mutations extends MutationsHelper {
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("As you examine the shard it spontaneously melts. Rivulets of freezing liquid flow down your arms and a frigid chill spreads throughout your body.");
@@ -14101,48 +13810,49 @@ public final class Mutations extends MutationsHelper {
         //Face
         if (player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.YUKI_ONNA && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceYukiOnna.applyEffect();
+            transformations.FaceYukiOnna.applyEffect();
             changes++;
         }
         //Legs
         if (player.lowerBody != LowerBody.YUKI_ONNA && player.faceType == Face.YUKI_ONNA && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou feel your feet going numb and the numbness spreading up your lower legs. You look down to your feet and notice with surprise that you no longer feel them, aside of the nails turning pale blue there's little to explain the ice forming under your steps. <b>Your feet now chill the ground beneath you.</b>");
-                setLowerBody(LowerBody.YUKI_ONNA);
+                outputText("\n\n");
+                transformations.LowerBodyYukiOnna.applyEffect();
             } else {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
             }
             changes++;
         }
         //Arms
         if (player.lowerBody == LowerBody.YUKI_ONNA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YUKI_ONNA) && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsYukiOnna.applyEffect();
+            transformations.ArmsYukiOnna.applyEffect();
             changes++;
         }
         //eyes color
-        if (CoC.instance.transformations.EyesChangeColor(["light purple"]).isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (transformations.EyesChangeColor(["light purple"]).isPossible() && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
-                CoC.instance.transformations.EyesChangeColor(["light purple"]).applyEffect(false);
+                transformations.EyesChangeColor(["light purple"]).applyEffect(false);
                 outputText("\n\nFrigid water trickles from your eyes as if you are crying and pain forces them closed. You double over as they burn but slowly the agonizing sensation fades away and you blink to clear them. At first everything looks hazy as if seen through a clouded glass but it eventually clears up. <b>You glance down at your reflection in a puddle and find that your irises turned light purple like the reflection of the sun on snow.</b>");
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
         //Hair
-        if (player.faceType == Face.YUKI_ONNA && CoC.instance.transformations.HairSnowy.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType == Face.YUKI_ONNA && transformations.HairSnowy.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairSnowy.applyEffect();
+            transformations.HairSnowy.applyEffect();
             changes++;
         }
         //Read body + Wings slot
         if (player.hairType == Hair.SNOWY && player.faceType == Face.YUKI_ONNA && player.arms.type == Arms.YUKI_ONNA && player.lowerBody == LowerBody.YUKI_ONNA && player.rearBody.type != RearBody.GLACIAL_AURA && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nCold… so cold! You ball yourself up, trying to get some heat but no matter how much you try it gets colder and colder. Just as you think you are about to freeze to death it stops. You look around you in confusion. The air is chilling yet you don't feel it. The ice at your feet covered up with snow and somehow you know deep down if you wanted you could conjure out a blizzard. ");
             outputText("Furthermore you feel lighter then the air now and, as if to demonstrate your new powers, you allow yourself to be carried by the icy wind achieving a form of levitation. Well it seems you are full Yuki Onna now. <b>You gained a Glacial aura and the ability to levitate!</b>");
-            CoC.instance.transformations.WingsLevitation.applyEffect(false);
-            CoC.instance.transformations.RearBodyGlacialAura.applyEffect(false);
+            transformations.WingsLevitation.applyEffect(false);
+            transformations.RearBodyGlacialAura.applyEffect(false);
             changes++;
         }
         if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skin.base.color != "glacial white" && player.skin.base.color != "light blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
@@ -14158,11 +13868,11 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPlainSkinOnly() && rand(2) == 0 && changes < changeLimit) {
             if (player.skin.base.pattern != Skin.PATTERN_NONE) {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinPatternNone.applyEffect();
+                transformations.SkinPatternNone.applyEffect();
             }
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (player.yukiOnnaScore() >= 14) {
@@ -14202,7 +13912,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        //changeLimit += player.additionalTransformationChances();
+        //changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You eat the weird kelp seed and suddenly feel like singing. It seems like your talent for music are skyrocketing as you embrace the changes within you!");
@@ -14223,7 +13933,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You apply the sunscreen on your skin and suddenly feel some of your worries fly as you laugh cheerfully at the thought of taking a vacation day or two to rest and swim at the beach. Your body seems to react weirdly to the sunscreen.");
@@ -14292,33 +14002,33 @@ public final class Mutations extends MutationsHelper {
         //face
         if (player.faceType != Face.ORCA && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceOrca.applyEffect();
+            transformations.FaceOrca.applyEffect();
             changes++;
         }
 
         //-Existing horns become draconic, max of 4, max length of 1'
         if (player.horns.type != Horns.SEA_DRAGON && type == 1 && changes < changeLimit && rand(5) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HornsSeadragon.applyEffect();
+            transformations.HornsSeadragon.applyEffect();
             changes++;
         }
 
         //antenna
         if (player.antennae.type != Antennae.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.AntennaeSeaDragon.applyEffect();
+            transformations.AntennaeSeaDragon.applyEffect();
             changes++;
         }
         //Change hair type to normal
-        if ((CoC.instance.transformations.HairHuman.isPossible() && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
+        if ((transformations.HairHuman.isPossible() && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairHuman.applyEffect();
+            transformations.HairHuman.applyEffect();
             changes++;
         }
         //Change hair type to prismatic
         if ((player.hairType == Hair.NORMAL) && type == 1 && changes < changeLimit && rand(2) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HairPrismatic.applyEffect();
+            transformations.HairPrismatic.applyEffect();
             changes++;
         }
 
@@ -14380,103 +14090,105 @@ public final class Mutations extends MutationsHelper {
         //legs
         if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.ORCA && player.lowerBody != LowerBody.GARGOYLE && type == 0 && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYour toes suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. <b>You can only guess those Orca legs will help you to swim at great speed.</b>");
-                setLowerBody(LowerBody.ORCA);
+                outputText("\n\n");
+                transformations.LowerBodyOrca(2).applyEffect();
             } else {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
             }
             changes++;
         }
         //arms
         if (player.lowerBody == LowerBody.ORCA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.ORCA) && type == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsOrca.applyEffect();
+            transformations.ArmsOrca.applyEffect();
             changes++;
         }
         //Dragon legs
         if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEA_DRAGON && player.lowerBody != LowerBody.GARGOYLE && type == 1 && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYour toes press against each other together as sharp, reptilian claws protrude from your feet. As you unfurl your toes, you notice that they are now webbed. The phalanges seem more suited more for swimming than running. <b>You can only guess those Sea dragon legs will help you to swim at great speeds.</b>");
-                setLowerBody(LowerBody.SEA_DRAGON);
+                outputText("\n\n");
+                transformations.LowerBodySeaDragon(2).applyEffect();
             } else {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
             }
             changes++;
         }
         //Dragon arms
         if (player.lowerBody == LowerBody.SEA_DRAGON && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.SEA_DRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsSeaDragon.applyEffect();
+            transformations.ArmsSeaDragon.applyEffect();
             changes++;
         }
         //Dragon Wings
         if (player.lowerBody == LowerBody.SEA_DRAGON && player.arms.type == Arms.SEA_DRAGON && player.wings.type != Wings.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsSeaDragon.applyEffect();
+            transformations.WingsSeaDragon.applyEffect();
             changes++;
         }
         //tail
         if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailOrca.applyEffect();
+            transformations.TailOrca.applyEffect();
             changes++;
         }
         //dragon tail
         if (player.arms.type == Arms.SEA_DRAGON && player.tailType != Tail.ORCA && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailOrca.applyEffect();
+            transformations.TailOrca.applyEffect();
             changes++;
         }
         //ears
         if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsOrca.applyEffect();
+			transformations.EarsOrca.applyEffect();
             changes++;
         }
         //ears alternative
         if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA2 && type == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsOrca2.applyEffect();
+			transformations.EarsOrca2.applyEffect();
             changes++;
         }
         //blowhole
         if (player.ears.type == Ears.ORCA && player.rearBody.type != RearBody.ORCA_BLOWHOLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyOrcaBlowhole.applyEffect();
+            transformations.RearBodyOrcaBlowhole.applyEffect();
             changes++;
         }
         //eyes to human
         if (player.eyes.type != Eyes.HUMAN && changes < changeLimit && type == 0 && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //eyes to human if not dragon
         if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.DRACONIC && changes < changeLimit && type == 1 && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //eyes to orange
-        if (CoC.instance.transformations.EyesChangeColor(["orange"]).isPossible() && changes < changeLimit && type == 0 && rand(4) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["orange"]).applyEffect();
+        if (transformations.EyesChangeColor(["orange"]).isPossible() && changes < changeLimit && type == 0 && rand(4) == 0) {
+            transformations.EyesChangeColor(["orange"]).applyEffect();
             changes++;
         }
         //eyes to sea dragon list
-        if (CoC.instance.transformations.EyesSeadragonColors.isPossible() && changes < changeLimit && type == 1 && rand(4) == 0) {
-            CoC.instance.transformations.EyesSeadragonColors.applyEffect();
+        if (transformations.EyesSeadragonColors.isPossible() && changes < changeLimit && type == 1 && rand(4) == 0) {
+            transformations.EyesSeadragonColors.applyEffect();
             changes++;
         }
         //Gain Dragon Eyes
         if (player.eyes.type == Eyes.HUMAN && rand(3) == 0 && type == 1 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesDraconic.applyEffect();
+            transformations.EyesDraconic.applyEffect();
             changes++;
         }
         //Gain Dragon Tongue
         if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.DRACONIC && type == 1) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueDraconic.applyEffect();
+            transformations.TongueDraconic.applyEffect();
             changes++;
             //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
@@ -14519,7 +14231,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You bring the flower up to your nose and smell it. " +
@@ -14630,41 +14342,41 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM) {
             if (player.horns.type != Horns.NONE) {
                 outputText("\n\n");
-                CoC.instance.transformations.HornsNone.applyEffect();
+                transformations.HornsNone.applyEffect();
             }
             outputText("\n\n");
-            CoC.instance.transformations.HornsFrostwyrm.applyEffect();
+            transformations.HornsFrostwyrm.applyEffect();
             changes++;
         }
         //Gain frost wyrm Ears
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.SNAKE) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsSnake.applyEffect();
+			transformations.EarsSnake.applyEffect();
             changes++;
         }
         //Gain Dragon Ears
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.DRAGON) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsDraconic.applyEffect();
+			transformations.EarsDraconic.applyEffect();
             changes++;
         }
         //Gain Frost wyrm Eyes
-        if (CoC.instance.transformations.EyesFrostwyrm.isPossible() && rand(3) == 0 && changes < changeLimit) {
+        if (transformations.EyesFrostwyrm.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesFrostwyrm.applyEffect();
+            transformations.EyesFrostwyrm.applyEffect();
             changes++;
         }
         //Gain Frost wyrm face
         if (player.faceType != Face.ANIMAL_TOOTHS && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+            transformations.FaceAnimalTeeth.applyEffect();
             outputText("\n\nWell, now that you think about it, a frost wyrm’s diet mostly consists of meat, so getting sharper canines to properly eat your meat makes enough sense.");
             changes++;
         }
         //Gain Dragon Tongue
         if (changes < changeLimit && rand(3) == 0 && player.tongue.type != Tongue.DRACONIC) {
             outputText("\n\n");
-            CoC.instance.transformations.TongueDraconic.applyEffect();
+            transformations.TongueDraconic.applyEffect();
             changes++;
             //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
@@ -14678,7 +14390,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit && rand(4) == 0) {
             if (!InCollection(player.coatColor, wyrmCoatColor)) player.coatColor = randomChoice(wyrmCoatColor);
             outputText("\n\n");
-            CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
+            transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
             changes++;
         }
         //Coat color fix
@@ -14690,47 +14402,19 @@ public final class Mutations extends MutationsHelper {
         //Remove those damn wings!
         if (changes < changeLimit && rand(3) == 0 && player.wings.type != Wings.NONE) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsNone.applyEffect();
+            transformations.WingsNone.applyEffect();
             changes++;
         }
         //Neck
         if (player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodyFrostwyrm.applyEffect();
+            transformations.RearBodyFrostwyrm.applyEffect();
             changes++;
         }
         //Wyrm legs
         if (player.lowerBody != LowerBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
-            if (player.lowerBody == LowerBody.SCYLLA) {
-                outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. " +
-                        "Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: " +
-                        "the bottom half of your body is like that of a snake's and easily four times your length from the waist up.");
-            } else {
-                if (player.lowerBody == LowerBody.MELKIE) {
-                    humanizeLowerBody();
-                    outputText("\n\nHowever this doesnt last long as changes begins to overcome your legs again.");
-                }
-                outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak. " +
-                        "You swiftly collapse, unable to maintain your own weight as your legs begins to changes." +
-                        "\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle." +
-                        " The process continues through the length of your [legs], eventually reaching your [feet].  " +
-                        "Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. " +
-                        "You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony. " +
-                        "Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, " +
-                        "but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's and easily four times your length from the waist up.");
-            }
-            outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
-            if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
-            if (!player.hasCoatOfType(Skin.DRAGON_SCALES)) {
-                player.coatColor = randomChoice(wyrmCoatColor);
-            }
-            outputText("  But then, " + player.coatColor + " armored scales start to form on the surface of your skin, slowly becoming visible, " +
-                    "recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, " +
-                    "except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. " +
-                    "You can't help feeling proud of this majestic new body of yours. This said, it doesn't end there as warm snowy white fur covers up the scale up to your thigh area, " +
-                    "seems you are dressed for the winter now. <b>You now have a long, warm and fluffy frost wyrm tail.</b>");
-            setLowerBody(LowerBody.FROSTWYRM);
-            player.legCount = 1;
+            outputText("\n\n");
+            transformations.LowerBodyFrostwyrm.applyEffect();
             changes++;
         }
 
@@ -14738,13 +14422,13 @@ public final class Mutations extends MutationsHelper {
         //Fix non human arms
         if (changes < changeLimit && rand(3) == 0 && player.arms.type != Arms.FROSTWYRM && player.arms.type != Arms.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsHuman.applyEffect();
+            transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Gain frost wyrm Arms
         if (changes < changeLimit && rand(3) == 0 && player.arms.type == Arms.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsFrostwyrm.applyEffect();
+            transformations.ArmsFrostwyrm.applyEffect();
             changes++;
         }
 
@@ -14799,7 +14483,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You prepare the tea using grass you acquired and then drinks it. Its sharp taste fires up your palate and in moments, you find yourself more mentaly and physicaly sharp just like a blade.");
@@ -14938,20 +14622,20 @@ public final class Mutations extends MutationsHelper {
         var MantisColor:Array = ["green", "turquoise", "emerald"];
         if (changes < changeLimit && !player.hasPartialCoat(Skin.CHITIN) && rand(2) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: MantisColor}).applyEffect();
+            transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: MantisColor}).applyEffect();
             changes++;
         }
 
         //Antennae (nie wymaga innych body parts)
         if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.AntennaeMantis.applyEffect();
+            transformations.AntennaeMantis.applyEffect();
             changes++;
         }
         //Horns
         if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.horns.count > 0 && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HornsNone.applyEffect();
+            transformations.HornsNone.applyEffect();
             changes++;
         }
 
@@ -14965,24 +14649,22 @@ public final class Mutations extends MutationsHelper {
 
         //Legs
         if (player.lowerBody != LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour legs tremble with sudden unbearable pain, as if they’re being ripped apart from the inside out and being stitched together again all at once.");
-            outputText("\nYou scream in agony as you hear bones snapping and cracking. A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining green chitin from the thigh down. <b>You now have mantis feet.</b>");
-            setLowerBody(LowerBody.MANTIS);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyMantis(2).applyEffect();
             changes++;
         }
 
         //Arms
         if (player.lowerBody == LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsMantis.applyEffect();
+            transformations.ArmsMantis.applyEffect();
             changes++;
         }
 
         //Tail
         if (player.arms.type == Arms.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.tailType != Tail.MANTIS_ABDOMEN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailMantis.applyEffect();
+            transformations.TailMantis.applyEffect();
             changes++;
         }
 
@@ -14991,17 +14673,17 @@ public final class Mutations extends MutationsHelper {
             //Grow bigger mantis wings!
             if (player.wings.type == Wings.MANTIS_LIKE_SMALL) {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsMantisLarge.applyEffect();
+                transformations.WingsMantisLarge.applyEffect();
             }
             //Grow small mantis wings if player has none.
             else if (player.wings.type == Wings.NONE) {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsMantisSmall.applyEffect();
+                transformations.WingsMantisSmall.applyEffect();
             }
             //Remove old wings
             else {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsNone.applyEffect();
+                transformations.WingsNone.applyEffect();
             }
             changes++;
         }
@@ -15009,14 +14691,14 @@ public final class Mutations extends MutationsHelper {
         //Chitin skin
         if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: MantisColor}).applyEffect();
+            transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: MantisColor}).applyEffect();
             changes++;
         }
 
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.GillsNone.applyEffect();
+            transformations.GillsNone.applyEffect();
             changes++;
         }
 
@@ -15036,7 +14718,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("You raise the disgusting black concoction to your mouth. The taste is better than its texture but leaves you with a strong aftertaste of sulfur.");
@@ -15161,18 +14843,17 @@ public final class Mutations extends MutationsHelper {
         //physical changes
         //legs
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.HOOFED) {
-            outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
-            setLowerBody(LowerBody.HOOFED);
-            player.legCount = 2;
+            outputText("\n\n");
+            CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
             changes++;
         }
         //tail
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.HOOFED && (player.tailType != Tail.GOAT && player.tailType != Tail.DEMONIC)) {
             outputText("\n\n");
             if (rand(2) == 0) {
-                CoC.instance.transformations.TailGoat.applyEffect();
+                transformations.TailGoat.applyEffect();
             } else {
-                CoC.instance.transformations.TailDemonic.applyEffect();
+                transformations.TailDemonic.applyEffect();
             }
             changes++;
         }
@@ -15181,21 +14862,21 @@ public final class Mutations extends MutationsHelper {
             //grow smalls to large
             if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsDemonicLarge.applyEffect();
+                transformations.WingsDemonicLarge.applyEffect();
             } else if (player.wings.type == Wings.BEE_LIKE_SMALL) {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsDemonicTiny.applyEffect();
+                transformations.WingsDemonicTiny.applyEffect();
             } else if (player.wings.type == Wings.BEE_LIKE_LARGE) {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsDemonicLarge.applyEffect();
+                transformations.WingsDemonicLarge.applyEffect();
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsDemonicTiny.applyEffect();
+                transformations.WingsDemonicTiny.applyEffect();
             }
             //No wings
             if (player.wings.type == Wings.NONE) {
                 outputText("\n\n");
-                CoC.instance.transformations.WingsDemonicTiny.applyEffect();
+                transformations.WingsDemonicTiny.applyEffect();
             }
             changes++;
         }
@@ -15204,25 +14885,25 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wings.type, Wings.DEVILFEATHER) && (player.tailType == Tail.GOAT || player.tailType == Tail.DEMONIC)) {
 
             outputText("\n\n");
-            CoC.instance.transformations.WingsDevilfeather.applyEffect();
+            transformations.WingsDevilfeather.applyEffect();
             changes++;
         }
 
         //arms
         if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DEVIL && (player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE)) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsDevil.applyEffect();
+            transformations.ArmsDevil.applyEffect();
             changes++;
         }
         //Horns
         if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DEVIL) {
             outputText("\n\n");
             if (player.horns.type == Horns.NONE) {
-                CoC.instance.transformations.HornsGoat.applyEffect();
+                transformations.HornsGoat.applyEffect();
             } else if (player.horns.type == Horns.GOAT) {
-                CoC.instance.transformations.HornsGoatQuadruple.applyEffect();
+                transformations.HornsGoatQuadruple.applyEffect();
             } else {
-                CoC.instance.transformations.HornsGoat.applyEffect();
+                transformations.HornsGoat.applyEffect();
             }
             changes++;
         }
@@ -15230,26 +14911,26 @@ public final class Mutations extends MutationsHelper {
         //Ears
         if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.GOAT && player.horns.type == Horns.GOAT) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsGoat.applyEffect();
+			transformations.EarsGoat.applyEffect();
             changes++;
         }
         //Fangs
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.DEVIL_FANGS && player.ears.type == Ears.GOAT) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceDevilFangs.applyEffect();
+            transformations.FaceDevilFangs.applyEffect();
             changes++;
         }
         //Eyes
-        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.FaceDevilFangs.isPresent()) {
-            if (CoC.instance.transformations.EyesGoat.isPresent()) {
+        if (rand(3) == 0 && changes < changeLimit && transformations.FaceDevilFangs.isPresent()) {
+            if (transformations.EyesGoat.isPresent()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesDevil.applyEffect();
-            } else if (CoC.instance.transformations.EyesDevil.isPresent()) {
+                transformations.EyesDevil.applyEffect();
+            } else if (transformations.EyesDevil.isPresent()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesGoat.applyEffect();
+                transformations.EyesGoat.applyEffect();
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesDevil.applyEffect();
+                transformations.EyesDevil.applyEffect();
             }
             changes++;
         }
@@ -15324,16 +15005,16 @@ public final class Mutations extends MutationsHelper {
         if ((player.faceType == Face.DRAGON || player.faceType == Face.DRAGON_FANGS) && changes < changeLimit) {
             outputText("\n\n");
             if (player.faceType == Face.DRAGON_FANGS) {
-                CoC.instance.transformations.FaceBucktooth.applyEffect();
+                transformations.FaceBucktooth.applyEffect();
             } else {
-                CoC.instance.transformations.FaceJabberwocky.applyEffect();
+                transformations.FaceJabberwocky.applyEffect();
             }
             changes++;
         }
         //-Fea Dragon Wings
         if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.DRACONIC_HUGE) && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.WingsFeyDragon.applyEffect();
+            transformations.WingsFeyDragon.applyEffect();
             changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -15348,7 +15029,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //Temporary storage
         var temp:Number = 0;
         //clear screen
@@ -15418,61 +15099,64 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.BEAR && player.ears.type != Ears.PANDA && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (rand(2) == 0) {
-                CoC.instance.transformations.EarsBear.applyEffect();
+                transformations.EarsBear.applyEffect();
             } else {
-                CoC.instance.transformations.EarsPanda.applyEffect();
+                transformations.EarsPanda.applyEffect();
             }
             changes++;
         }
         //Eyes
-        if (changes < changeLimit && rand(3) == 0 && CoC.instance.transformations.EyesHuman.isPresent() && player.ears.type == Ears.BEAR) {
+        if (changes < changeLimit && rand(3) == 0 && transformations.EyesHuman.isPresent() && player.ears.type == Ears.BEAR) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesBear.applyEffect();
+            transformations.EyesBear.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.BEAR) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Arms
         if (player.arms.type != Arms.BEAR && player.arms.type != Arms.GARGOYLE && player.eyes.type == Eyes.BEAR && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                CoC.instance.transformations.ArmsBear.applyEffect();
+                transformations.ArmsBear.applyEffect();
             } else {
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             changes++;
         }
         //Legs
         if (player.lowerBody != LowerBody.BEAR && player.arms.type == Arms.BEAR && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYour legs suddenly shift, painfully forcing you down on all fours as the bones of your feet change shape into something different. You feel hair growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede, you sit and take a look at your foot or rather, your large bear hind paws, now armed with sharp claws. <b>You now have bear-like paws.</b>");
-                setLowerBody(LowerBody.BEAR);
-            } else humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyBear(2).applyEffect();
+            } else {
+            	outputText("\n\n");
+            	transformations.LowerBodyHuman.applyEffect();
+            }
             changes++;
         }
         //Tail
         if (player.tailType != Tail.BEAR && player.lowerBody == LowerBody.BEAR && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.TailBear.applyEffect();
+            transformations.TailBear.applyEffect();
             changes++;
         }
         //Face
         if (((player.ears.type == Ears.BEAR && player.faceType != Face.BEAR) || (player.ears.type == Ears.PANDA && player.faceType != Face.PANDA)) && player.faceType == Face.HUMAN && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.ears.type == Ears.BEAR) {
-                CoC.instance.transformations.FaceBear.applyEffect();
+                transformations.FaceBear.applyEffect();
             } else {
-                CoC.instance.transformations.FacePanda.applyEffect();
+                transformations.FacePanda.applyEffect();
             }
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.BEAR && player.faceType != Face.PANDA && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Fur
@@ -15480,19 +15164,19 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of ");
             if (player.faceType == Face.PANDA) {
                 outputText("\n\n");
-                CoC.instance.transformations.HairChangeColor(["white"]).applyEffect();
+                transformations.HairChangeColor(["white"]).applyEffect();
                 outputText("\n\n");
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "white", color2: "black", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "white", color2: "black", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "white", "black"]}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "white", "black"]}).applyEffect();
             }
             changes++;
         }
         if (!player.hasPlainSkinOnly() && rand(4) == 0 && changes < changeLimit) {
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         if (player.gender == 1 && changes < changeLimit && rand(2) == 0) outputText(player.modTone(85, 3));
@@ -15511,7 +15195,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
         outputText("Sometimes you question your choices in life. Right now, for instance, your choice is to drink up the saliva of some fiery snail, thing. The first thing of note to happen is that your body begins to heat up. Whatever this thing is doing to you, it's clearly raising your arousal.");
@@ -15531,7 +15215,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Red/Orange skin!
@@ -15544,50 +15228,47 @@ public final class Mutations extends MutationsHelper {
         //Legs
         if (player.skinAdj == "sticky glistering" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.FIRE_SNAIL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
-                outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle. The process continues through the length of your legs, eventually reaching your feet. Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones changing into something else or disintegrating while you contort in unthinkable agony. Sometime later you feel the pain began to ease and you lay on the ground, spent by the terrible experience. ");
-                outputText("Once you feel you’ve recovered, you try to stand, but to your amazement you discover that you no longer have legs: the bottom half of your body is united in a large wide lump, ending into a point. It’s not that your bones were altered but it’s that everything below your waist was converted to muscle mass like that of an invertebrate. Your spine now reaches all the way up to your waist and ends at your thigh where it vanishes fully.");
-                outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs. Your underbelly begins to sweat profusely so much that it becomes glistening, your fat tail shining wetly as the ground beneath you gets covered with your viscous sticky fluids. Your underbody feels and looks like that of a slug or a snail and come to think of it it might just be exactly that.  <b>Your lower body is now a snail tail.</b>");
-                if (player.tailType !== Tail.NONE) CoC.instance.transformations.TailNone.applyEffect(false);
-                setLowerBody(LowerBody.FIRE_SNAIL);
+                outputText("\n\n");
+                transformations.LowerBodyFireSnail.applyEffect();
             } else {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
             }
             changes++;
         }
         //Snail shell
         if (player.rearBody.type != RearBody.SNAIL_SHELL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.RearBodySnailShell.applyEffect();
+            transformations.RearBodySnailShell.applyEffect();
             changes++;
         }
         //Removes wings!
         if (player.rearBody.type == RearBody.SNAIL_SHELL && player.wings.type >= Wings.NONE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(2) == 0) {
             outputText("\n\nTo your utter disappointment your wings are absorbed back into your shell. Guess there's no such things as flying snails.");
-            CoC.instance.transformations.WingsNone.applyEffect(false);
+            transformations.WingsNone.applyEffect(false);
             changes++;
         }
         //Face
         if (player.rearBody.type == RearBody.SNAIL_SHELL && player.faceType != Face.FIRE_SNAIL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceFireSnail.applyEffect();
+            transformations.FaceFireSnail.applyEffect();
             changes++;
         }
         //Eyes
-        if (CoC.instance.transformations.FaceFireSnail.isPossible() && CoC.instance.transformations.EyesFireSnail.isPossible() && changes < changeLimit && rand(3) == 0) {
+        if (transformations.FaceFireSnail.isPossible() && transformations.EyesFireSnail.isPossible() && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesFireSnail.applyEffect();
+                transformations.EyesFireSnail.applyEffect();
             } else {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
             }
             changes++;
         }
         //Antennae
         if (changes < changeLimit && player.faceType == Face.FIRE_SNAIL && player.antennae.type != Antennae.FIRE_SNAIL && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.AntennaeFireSnail.applyEffect();
+            transformations.AntennaeFireSnail.applyEffect();
             changes++;
         }
         //Hair
@@ -15600,7 +15281,7 @@ public final class Mutations extends MutationsHelper {
             }
             outputText("\n\nAs if sweating wasn't bad enough your body temperature suddenly spikes again. Before you know it your entire body is set on fire, especially your hair of which the tips glows like smoldering embers. Not only that but instead of normal sweat your entire body now quite literally seethes liquid fire. <b>Guess you’re a full fire snail now with this burning hair of yours.</b>");
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairBurning.applyEffect(false);
+		    transformations.HairBurning.applyEffect(false);
             changes++;
         }
         player.refillHunger(10);
@@ -15620,7 +15301,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("Having bought that odd-looking root on the bakery, you give it a try, only to face the mildly spicy taste of the transformative. Still, it has a rich flavour and texture, but soon that becomes secondary, as you realize that the foreign rhizome is changing your body!");
 
@@ -15787,7 +15468,7 @@ public final class Mutations extends MutationsHelper {
         //Ears
         if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.RED_PANDA) {
             outputText("\n\n");
-			CoC.instance.transformations.EarsRedPanda.applyEffect();
+			transformations.EarsRedPanda.applyEffect();
             changes++;
         }
         //Removes antennae
@@ -15799,7 +15480,7 @@ public final class Mutations extends MutationsHelper {
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
             outputText("\n\n");
-            CoC.instance.transformations.EyesHuman.applyEffect();
+            transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Hair
@@ -15826,7 +15507,7 @@ public final class Mutations extends MutationsHelper {
                     outputText("\n\nNot for long, it seems, as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
                 } else outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing your hair this time, <b>turning it into [hair]</b>.");
 		        outputText("\n\n");
-		        CoC.instance.transformations.HairHuman.applyEffect(false);
+		        transformations.HairHuman.applyEffect(false);
             }
             flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
             changes++;
@@ -15834,44 +15515,30 @@ public final class Mutations extends MutationsHelper {
         //Face
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.RED_PANDA && player.ears.type == Ears.RED_PANDA) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceRedPanda.applyEffect();
+            transformations.FaceRedPanda.applyEffect();
             changes++;
         }
         //Arms
         if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.RED_PANDA && player.tailType == Tail.RED_PANDA) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsRedPanda.applyEffect();
+            transformations.ArmsRedPanda.applyEffect();
             changes++;
         }
         //Legs
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.RED_PANDA && player.arms.type == Arms.RED_PANDA) {
-            if (player.isTaur()) {
-                outputText("\n\nYou legs tremble, forcing you to lie on the ground, as they don't seems to answer you anymore. A burning sensation in them is the last thing you remember before briefly blacking out. When it subsides and you finally awaken, you look at them again, only to see that you’ve left with a single set of digitigrade legs, and a much more humanoid backside. Soon enough, the feeling returns to your reformed legs, only to come with an itching sensation. A thick black-brown coat of fur sprouts from them. It’s soft and fluffy to the touch. Cute pink paw pads complete the transformation. Seems like <b>you’ve gained a set of red-panda paws!</b>");
-            }
-            if (player.isNaga()) {
-                outputText("\n\nA strange feeling in your tail makes you have to lay on the ground. Then, the feeling becomes stronger, as you feel an increasing pain in the middle of your coils. You gaze at them for a second, only to realize that they’re dividing! In a matter of seconds, they’ve reformed into a more traditional set of legs, with the peculiarity being that they’re fully digitigrade in shape. Soon, every scale on them falls off to leave soft [skin] behind. That doesn’t last long, because soon a thick coat of black-brown fur covers them. It feels soft and fluffy to the touch. Cute pink paw pads complete the transformation. Seems like <b>you’ve gained a set of red-panda paws!</b>");
-            }
-            if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
-            outputText("\n\nThat doesn’t last long, because soon a thick coat of black-brown fur covers them. It feels soft and fluffy to the touch. Cute pink paw pads complete the transformation. Seems like <b>you’ve gained a set of red-panda paws!</b>");
-            if (player.isGoo()) {
-                outputText("\n\nThe blob that forms your lower body becomes suddenly rigid under the rhizome effects, forcing you to stay still until the transformation ends. Amazingly, what was once goo turns into flesh and skill in mere seconds, thus leaving you with a very human-like set of legs and feet.");
-                outputText("\n\nIt doesn’t stop here as a feeling of unease forces you to sit on a nearby rock, as you feel something within your newly regained feet is changing. Numbness overcomes them, as muscles and bones change, softly shifting, melding and rearranging themselves. For a second you feel that they’re becoming goo again, but after a couple of minutes, they leave you with a set of digitigrade legs with pink pawpads, ending in short black claws and covered in a thick layer of black-brown fur. It feels quite soft and fluffy. <b>You’ve gained a set of red-panda paws!</b>");
-            } else {
-                outputText("\n\nA feeling of unease forces your to sit on a nearby rock, as you feel something within your [feet] is changing. Numbness overcomes them, as muscles and bones change, softly shifting, melding and rearranging themselves. After a couple of minutes, they leave you with a set of digitigrade legs with pink pawpads, ending in short black claws and covered in a thick layer of black-brown fur. It feels quite soft and fluffy. <b>You’ve gained a set of red-panda paws!</b>");
-            }
-            setLowerBody(LowerBody.RED_PANDA);
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodyRedPanda.applyEffect();
             changes++;
         }
         //Tail
         if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.RED_PANDA) {
             outputText("\n\n");
-            CoC.instance.transformations.TailRedPanda.applyEffect();
+            transformations.TailRedPanda.applyEffect();
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && !player.hasFur()) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet-red", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet-red", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
             changes++;
         }
         player.refillHunger(20);
@@ -15911,7 +15578,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
 
@@ -16285,7 +15952,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPlain.applyEffect();
+            transformations.SkinPlain.applyEffect();
             changes++;
         }
         if ((type == 0 || type == 1 || type == 2) && player.hairType == Hair.NORMAL && player.hairColor != "dark green" && changes < changeLimit && rand(3) == 0) {
@@ -16297,7 +15964,7 @@ public final class Mutations extends MutationsHelper {
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
 		    outputText("\n\n");
-		    CoC.instance.transformations.HairHuman.applyEffect();
+		    transformations.HairHuman.applyEffect();
             changes++;
         }
 
@@ -16307,16 +15974,17 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.UshiOnnaVariant, 0, 0, 0, 0);
             } else player.createStatusEffect(StatusEffects.UshiOnnaVariant, 0, 0, 0, 0);
             outputText("\n\n");
-			CoC.instance.transformations.EarsCow.applyEffect();
+			transformations.EarsCow.applyEffect();
             changes++;
         }
         if (player.skin.base.type == Skin.PLAIN && !player.skin.hasUshiOniTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            CoC.instance.transformations.SkinPatternUshiOniTattoo.applyEffect();
+            transformations.SkinPatternUshiOniTattoo.applyEffect();
             changes++;
         }
         if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune()) && changes < changeLimit && rand(4) == 0) {
-            humanizeLowerBody();
+            outputText("\n\n");
+            transformations.LowerBodyHuman.applyEffect();
             changes++;
         }
         //Normal Biped Legs -> Carapace-Clad Legs
@@ -16330,96 +15998,91 @@ public final class Mutations extends MutationsHelper {
 				) && player.lowerBody != LowerBody.GARGOYLE
 				&& changes < changeLimit && rand(4) == 0
 		) {
-            outputText("\n\nStarting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>");
-            setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
-            player.coatColor = "black";
-            player.legCount = 2;
+            outputText("\n\n");
+            transformations.LowerBodySpider.applyEffect();
             changes++;
         }
         //Tail
         if (player.tailType != Tail.USHI_ONI && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER) && rand(4) == 0) {// && player.arms.type == Arms.SPIDER
             outputText("\n\n");
-            CoC.instance.transformations.TailUshiOni.applyEffect();
+            transformations.TailUshiOni.applyEffect();
             changes++;
         }
         //Drider Item Only: Carapace-Clad Legs to Drider Legs
         if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
-            outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
-            setLowerBody(LowerBody.DRIDER);
-            player.coatColor = "black";
-            player.legCount = 8;
+            outputText("\n\n");
+            transformations.LowerBodyDrider.applyEffect();
             changes++;
         }
         //Drider butt
         if (player.isDrider() && player.tailType == Tail.USHI_ONI && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and " + player.hairColor + " fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well,  getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-" + player.mf("Oni", "Onna") + " lower body with an internal skeleton and fur.</b>");
-            setLowerBody(LowerBody.USHI_ONI);
-            player.coatColor = "black";
+            outputText("\n\n");
+            transformations.LowerBodyUshiOni.applyEffect();
             changes++;
         }
         //Ushi oni/onna arms
         if (player.arms.type == Arms.SPIDER && player.arms.type != Arms.USHI_ONI && player.lowerBody == LowerBody.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsUshiOni.applyEffect();
+            transformations.ArmsUshiOni.applyEffect();
             changes++;
         }
         //(Arms to carapace-covered arms)
         if (!InCollection(Arms.GARGOYLE, Arms.SPIDER) && player.lowerBody == LowerBody.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.ArmsSpider.applyEffect();
+            transformations.ArmsSpider.applyEffect();
             changes++;
         }
         //Ushi oni/onna fangs
         if (player.faceType == Face.HUMAN && player.faceType != Face.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceUshiOniOnna.applyEffect();
+            transformations.FaceUshiOniOnna.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.FaceHuman.applyEffect();
+            transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Ushi oni/onna horns
         if (player.horns.type != Horns.USHI_ONI && player.horns.type == Horns.NONE && player.faceType == Face.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HornsUshiOni.applyEffect();
+            transformations.HornsUshiOni.applyEffect();
             changes++;
         }
         if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.USHI_ONI && rand(3) == 0) {
             outputText("\n\n");
-            CoC.instance.transformations.HornsNone.applyEffect();
+            transformations.HornsNone.applyEffect();
             changes++;
         }
         //eyes color change
-        if ((type == 0 || type == 1 || type == 2) && CoC.instance.transformations.EyesChangeColor(["black"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["black"]).applyEffect(false);
+        if ((type == 0 || type == 1 || type == 2) && transformations.EyesChangeColor(["black"]).isPossible() && changes < changeLimit && rand(2) == 0) {
+            transformations.EyesChangeColor(["black"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now black.");
             changes++;
         }
-        if ((type == 3 || type == 4 || type == 5) && CoC.instance.transformations.EyesChangeColor(["red"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
+        if ((type == 3 || type == 4 || type == 5) && transformations.EyesChangeColor(["red"]).isPossible() && changes < changeLimit && rand(2) == 0) {
+            transformations.EyesChangeColor(["red"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now red.");
             changes++;
         }
-        if ((type == 6 || type == 7 || type == 8) && CoC.instance.transformations.EyesChangeColor(["gray"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["gray"]).applyEffect(false);
+        if ((type == 6 || type == 7 || type == 8) && transformations.EyesChangeColor(["gray"]).isPossible() && changes < changeLimit && rand(2) == 0) {
+            transformations.EyesChangeColor(["gray"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now gray.");
             changes++;
         }
-        if ((type == 9 || type == 10 || type == 11) && CoC.instance.transformations.EyesChangeColor(["brown"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
+        if ((type == 9 || type == 10 || type == 11) && transformations.EyesChangeColor(["brown"]).isPossible() && changes < changeLimit && rand(2) == 0) {
+            transformations.EyesChangeColor(["brown"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now brown.");
             changes++;
         }
-        if ((type == 12 || type == 13 || type == 14) && CoC.instance.transformations.EyesChangeColor(["light blue"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["light blue"]).applyEffect(false);
+        if ((type == 12 || type == 13 || type == 14) && transformations.EyesChangeColor(["light blue"]).isPossible() && changes < changeLimit && rand(2) == 0) {
+            transformations.EyesChangeColor(["light blue"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now light blue.");
             changes++;
         }
-        if ((type == 15 || type == 16 || type == 17) && CoC.instance.transformations.EyesChangeColor(["yellow"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            CoC.instance.transformations.EyesChangeColor(["yellow"]).applyEffect(false);
+        if ((type == 15 || type == 16 || type == 17) && transformations.EyesChangeColor(["yellow"]).isPossible() && changes < changeLimit && rand(2) == 0) {
+            transformations.EyesChangeColor(["yellow"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now yellow.");
             changes++;
         }
@@ -16440,7 +16103,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
@@ -16474,7 +16137,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You eat the kelp and a deep chill runs across your body as something in you begins to change.");
         if (player.blockingBodyTransformations()) {
@@ -16597,12 +16260,12 @@ public final class Mutations extends MutationsHelper {
             //Remove odd eyes
             if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
                 changes++;
             }
             //Set eyes to the racial coloration
-            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesChangeColor(["blue"]).isPossible()) {
-                CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect(false);
+            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesChangeColor(["blue"]).isPossible()) {
+                transformations.EyesChangeColor(["blue"]).applyEffect(false);
                 outputText("\n\nYou shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
                 changes++;
             }
@@ -16616,7 +16279,7 @@ public final class Mutations extends MutationsHelper {
             //Remove special hairs
             if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(4) == 0) {
 		        outputText("\n\n");
-		        CoC.instance.transformations.HairHuman.applyEffect();
+		        transformations.HairHuman.applyEffect();
                 changes++;
             }
 
@@ -16632,48 +16295,46 @@ public final class Mutations extends MutationsHelper {
             //Set ears to melkie
             if (changes < changeLimit && rand(4) == 0 && player.ears.type != Ears.MELKIE) {
                 outputText("\n\n");
-                CoC.instance.transformations.EarsMelkie.applyEffect();
+                transformations.EarsMelkie.applyEffect();
                 changes++;
             }
             //Set legs to human
             if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.MELKIE) {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
+                changes++;
             }
             //Set legs to Melkie
             if (changes < changeLimit && rand(4) == 0 && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.MELKIE) {
-                setLowerBody(LowerBody.MELKIE);
-                outputText("\n\nWhoa! Something weird is happening with your legs and without warning, you trip over in confusion. You check to see what the hell is going on, and to " +
-                        "your complete surprise, you discover your legs have been replaced by what looks like a seal tail. Just as you ponder in utter confusion and annoyance how you will move " +
-                        "on land your vaginal hole opens wide like a suit, letting your two very human legs slide out. Wait what? You got a tail and human legs yet both feels like they are " +
-                        "part of the same body. Well, at least you now know where your privates had gone to, though you’re still surprised to discover you have two labia with one between your " +
-                        "two human legs. Having a cock slide through both at the same time should feel extra pleasurable. Well, you guess you won’t have trouble walking overland or swimming " +
-                        "in the depth of the icy sea with your <b>brand new Melkie tail. Heck, it seems you can get rid of your human legs at will and be a mermaid full time if you want.</b>");
+                outputText("\n\n");
+                transformations.LowerBodyMelkie.applyEffect();
                 changes++;
             }
             //Set weird face to human
             if (changes < changeLimit && rand(4) == 0 && player.faceType != Face.HUMAN && player.faceType != Face.ANIMAL_TOOTHS) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceHuman.applyEffect();
+                transformations.FaceHuman.applyEffect();
+                changes++;
             }
             //Set face to Melkie
             if (changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN && player.faceType != Face.ANIMAL_TOOTHS) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+                transformations.FaceAnimalTeeth.applyEffect();
                 outputText("\n\nWell, now that you think about it, a Melkie’s diet mostly consists of fish, so getting sharper canines to properly eat your meat makes enough sense.");
                 changes++;
             }
             if (changes < changeLimit && rand(4) == 0 && player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.MELKIE) {
-                CoC.instance.transformations.TongueHuman.applyEffect();
+                transformations.TongueHuman.applyEffect();
             }
             if (changes < changeLimit && rand(4) == 0 && player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.MELKIE) {
                 outputText("\n\n");
-                CoC.instance.transformations.TongueMelkie.applyEffect();
+                transformations.TongueMelkie.applyEffect();
                 player.createPerk(PerkLib.MelkieSong, 0, 0, 0, 0);
                 changes++;
             }
             if (!player.hasPartialCoat(Skin.FUR) && rand(4) == 0) {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinPlain.applyEffect();
+                transformations.SkinPlain.applyEffect();
                 changes++;
             }
             //Reset fur if fully coated
@@ -16687,22 +16348,22 @@ public final class Mutations extends MutationsHelper {
             var melkie_FurColor:Array = ["gray", "silver", "white", "glacial white", "light gray"];
             if (!player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE && changes < changeLimit && rand(4) == 0) {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
                 changes++;
             }
             if (player.hasPartialCoat(Skin.FUR) && !InCollection(player.coatColor, melkie_FurColor) && changes < changeLimit && rand(4) == 0) {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
                 changes++;
             }
             //Arms
             if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN && player.arms.type != Arms.MELKIE) {
                 outputText("\n\n");
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             if (changes < changeLimit && rand(4) == 0 && player.arms.type == Arms.HUMAN && player.arms.type != Arms.MELKIE && player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE) {
                 outputText("\n\n");
-                CoC.instance.transformations.ArmsMelkie.applyEffect();
+                transformations.ArmsMelkie.applyEffect();
                 changes++;
             }
             if (changes < changeLimit && rand(4) == 0) outputText(player.modFem(100, 3));
@@ -16722,7 +16383,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += player.additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You bite into the candy, your mouth foaming small sweet bubbles. Your body seems to react to it as you begin to change.");
         if (player.blockingBodyTransformations()) {
@@ -16750,14 +16411,14 @@ public final class Mutations extends MutationsHelper {
                 dynStats("spe", -5);
                 if (player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
                     outputText("\n\n");
-                    CoC.instance.transformations.FaceKudere.applyEffect();
+                    transformations.FaceKudere.applyEffect();
                 }
                 changes++;
             }
             //Fix the face if player face isn't human
             if (player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceHuman.applyEffect();
+                transformations.FaceHuman.applyEffect();
             }
             //Get those Cock to bubble:
             if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CANCER && rand(4) == 0 && changes < changeLimit) {
@@ -16818,67 +16479,59 @@ public final class Mutations extends MutationsHelper {
             //Remove odd eyes
             if (changes < changeLimit && rand(4) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.CANCER) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesHuman.applyEffect();
+                transformations.EyesHuman.applyEffect();
                 changes++;
             }
             //Set eyes to the racial coloration and change them to cancer type
-            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesCancer.isPossible() && CoC.instance.transformations.FaceKudere.isPresent()) {
+            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesCancer.isPossible() && transformations.FaceKudere.isPresent()) {
                 outputText("\n\n");
-                CoC.instance.transformations.EyesCancer.applyEffect();
+                transformations.EyesCancer.applyEffect();
                 changes++;
             }
 
             //Remove special hairs
             if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(4) == 0) {
 		        outputText("\n\n");
-		        CoC.instance.transformations.HairHuman.applyEffect();
+		        transformations.HairHuman.applyEffect();
                 changes++;
             }
 
             //Set ears to human
             if (changes < changeLimit && rand(4) == 0 && player.ears.type != Ears.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.EarsHuman.applyEffect();
+                transformations.EarsHuman.applyEffect();
             }
             //Set legs to human
             if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.CRAB && player.lowerBody != LowerBody.CANCER) {
-                humanizeLowerBody();
+                outputText("\n\n");
+                transformations.LowerBodyHuman.applyEffect();
             }
             //Set legs to crab
             if (changes < changeLimit && rand(4) == 0 && player.lowerBody == LowerBody.HUMAN) {
-                setLowerBody(LowerBody.CRAB);
-                player.coatColor = "reddish-orange";
-                outputText("\n\nYour two legs suddenly feel weird, their structure rearranging into bright reddish-orange carapace. You try walking on them, " +
-                        "making a few false starts until you manage to achieve a proper gait. " +
-                        "Soon enough, it becomes second nature to you.. You now have crab legs covered in reddish-orange chitin.");
+                transformations.LowerBodyCrab.applyEffect();
                 changes++;
             }
             //Set legs to cancer
             if (changes < changeLimit && rand(4) == 0 && player.lowerBody == LowerBody.CRAB) {
-                setLowerBody(LowerBody.CANCER);
-                player.legCount = 6;
-                outputText("\n\nYou fall to the ground, your body going limp as you are wracked by intense pain, you faint. " +
-                        "When you wake up you are almost scared to look at whatever damage might have occurred. " +
-                        "To your surprise, below your waist your body has transformed into that of a huge armored crab, eyes included, with 6 legs and two large pincers strong enough to break rocks. " +
-                        "Your privates are at the same place as they were before, hidden behind a quatuor of armored mandibula constantly chittering and foaming. " +
-                        "You clench and unclench your pincers, feeling the raw strength in them. Those are going to be soooooo fun to use. <b>You have grown the body of a crab from your waist down.</b>");
+                outputText("\n\n");
+                transformations.LowerBodyCancer.applyEffect();
                 changes++;
             }
             //Set weird face to human
             if (changes < changeLimit && rand(4) == 0 && player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
                 outputText("\n\n");
-                CoC.instance.transformations.FaceHuman.applyEffect();
+                transformations.FaceHuman.applyEffect();
             }
             //Dump that damn coat away
             if (player.hasCoat() && rand(4) == 0) {
                 outputText("\n\n");
-                CoC.instance.transformations.SkinPlain.applyEffect();
+                transformations.SkinPlain.applyEffect();
                 changes++;
             }
             //Arms
             if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN) {
                 outputText("\n\n");
-                CoC.instance.transformations.ArmsHuman.applyEffect();
+                transformations.ArmsHuman.applyEffect();
             }
             if (changes == 0) {
                 outputText("\n\nNothing happened.  Weird.");

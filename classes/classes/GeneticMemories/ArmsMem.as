@@ -10,17 +10,21 @@ package classes.GeneticMemories {
   public class ArmsMem extends BaseContent {
 	/**
 	 * Entry properties:
-	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
-	 * - metamorphTitle: name displayed on the metamorph button
+	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
+	 * - title: name displayed on the metamorph button
 	 * - transformation: TF object that refers to what the metamorph does
+	 *
+	 * Optional properties:
+	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 
 	 * Template:
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Name Saved in GeneticStorage],
-			metamorphCost: [Cost Here],
-			metamorphTitle: "[Race Here]",
+			id: [Name Saved in GeneticStorage],
+			cost: [Cost Here],
+			title: "[Race Here]",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -32,9 +36,9 @@ package classes.GeneticMemories {
 
 		public static const HUMAN:int = 0;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
-			name: "Human Arms",
-			metamorphCost: 500,
-			metamorphTitle: "Human",
+			id: "Human Arms",
+			cost: 500,
+			title: "Human",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsHuman;
 			}
@@ -42,9 +46,9 @@ package classes.GeneticMemories {
 
 		public static const HARPY:int = 1;
 		EnumValue.add(Memories, HARPY, "HARPY", {
-			name: "Harpy Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Harpy",
+			id: "Harpy Arms",
+			cost: 100,
+			title: "Harpy",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsHarpy;
 			}
@@ -52,9 +56,9 @@ package classes.GeneticMemories {
 
 		public static const SPIDER:int = 2;
 		EnumValue.add(Memories, SPIDER, "SPIDER", {
-			name: "Spider Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Spider",
+			id: "Spider Arms",
+			cost: 100,
+			title: "Spider",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsSpider;
 			}
@@ -62,9 +66,9 @@ package classes.GeneticMemories {
 
 		public static const MANTIS:int = 3;
 		EnumValue.add(Memories, MANTIS, "MANTIS", {
-			name: "Mantis Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Mantis",
+			id: "Mantis Arms",
+			cost: 100,
+			title: "Mantis",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsMantis;
 			}
@@ -72,9 +76,9 @@ package classes.GeneticMemories {
 
 		public static const BEE:int = 4;
 		EnumValue.add(Memories, BEE, "BEE", {
-			name: "Bee Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Bee",
+			id: "Bee Arms",
+			cost: 100,
+			title: "Bee",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsBee;
 			}
@@ -82,9 +86,9 @@ package classes.GeneticMemories {
 
 		public static const SALAMANDER:int = 5;
 		EnumValue.add(Memories, SALAMANDER, "SALAMANDER", {
-			name: "Salamander Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Salamander",
+			id: "Salamander Arms",
+			cost: 100,
+			title: "Salamander",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsSalamander;
 			}
@@ -92,9 +96,9 @@ package classes.GeneticMemories {
 
 		public static const PHOENIX:int = 6;
 		EnumValue.add(Memories, PHOENIX, "PHOENIX", {
-			name: "Phoenix Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Phoenix",
+			id: "Phoenix Arms",
+			cost: 100,
+			title: "Phoenix",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsPhoenix;
 			}
@@ -102,9 +106,9 @@ package classes.GeneticMemories {
 
 		public static const SHARK:int = 7;
 		EnumValue.add(Memories, SHARK, "SHARK", {
-			name: "Shark Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Shark",
+			id: "Shark Arms",
+			cost: 100,
+			title: "Shark",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsShark;
 			}
@@ -112,9 +116,9 @@ package classes.GeneticMemories {
 
 		public static const LION:int = 8;
 		EnumValue.add(Memories, LION, "LION", {
-			name: "Lion Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Lion",
+			id: "Lion Arms",
+			cost: 100,
+			title: "Lion",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsLion;
 			}
@@ -122,9 +126,9 @@ package classes.GeneticMemories {
 
 		public static const FOX:int = 9;
 		EnumValue.add(Memories, FOX, "FOX", {
-			name: "Fox Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Fox",
+			id: "Fox Arms",
+			cost: 100,
+			title: "Fox",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsFox;
 			}
@@ -132,9 +136,9 @@ package classes.GeneticMemories {
 
 		public static const KITSUNE:int = 10;
 		EnumValue.add(Memories, KITSUNE, "KITSUNE", {
-			name: "Kitsune Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Kitsune",
+			id: "Kitsune Arms",
+			cost: 100,
+			title: "Kitsune",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsKitsune;
 			}
@@ -142,9 +146,9 @@ package classes.GeneticMemories {
 
 		public static const LIZARD:int = 11;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
-			name: "Lizard Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Lizard",
+			id: "Lizard Arms",
+			cost: 100,
+			title: "Lizard",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsLizard;
 			}
@@ -152,9 +156,9 @@ package classes.GeneticMemories {
 
 		public static const DRACONIC:int = 12;
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
-			name: "Draconic Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Draconic",
+			id: "Draconic Arms",
+			cost: 100,
+			title: "Draconic",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsDraconic;
 			}
@@ -162,9 +166,9 @@ package classes.GeneticMemories {
 
 		public static const ORCA:int = 13;
 		EnumValue.add(Memories, ORCA, "ORCA", {
-			name: "Orca Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Orca",
+			id: "Orca Arms",
+			cost: 100,
+			title: "Orca",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsOrca;
 			}
@@ -172,9 +176,9 @@ package classes.GeneticMemories {
 
 		public static const DEVIL:int = 14;
 		EnumValue.add(Memories, DEVIL, "DEVIL", {
-			name: "Devil Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Devil",
+			id: "Devil Arms",
+			cost: 100,
+			title: "Devil",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsDevil;
 			}
@@ -182,9 +186,9 @@ package classes.GeneticMemories {
 
 		public static const ONI:int = 15;
 		EnumValue.add(Memories, ONI, "ONI", {
-			name: "Oni Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Oni",
+			id: "Oni Arms",
+			cost: 100,
+			title: "Oni",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsOni;
 			}
@@ -192,9 +196,9 @@ package classes.GeneticMemories {
 
 		public static const ELF:int = 16;
 		EnumValue.add(Memories, ELF, "ELF", {
-			name: "Elf Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Elf",
+			id: "Elf Arms",
+			cost: 100,
+			title: "Elf",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsElf;
 			}
@@ -202,9 +206,9 @@ package classes.GeneticMemories {
 
 		public static const RAIJU:int = 17;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
-			name: "Raiju Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Raiju",
+			id: "Raiju Arms",
+			cost: 100,
+			title: "Raiju",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsRaiju;
 			}
@@ -212,9 +216,9 @@ package classes.GeneticMemories {
 
 		public static const RED_PANDA:int = 18;
 		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
-			name: "Red Panda Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Red Panda",
+			id: "Red Panda Arms",
+			cost: 100,
+			title: "Red Panda",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsRedPanda;
 			}
@@ -222,9 +226,9 @@ package classes.GeneticMemories {
 
 		public static const CAT:int = 19;
 		EnumValue.add(Memories, CAT, "CAT", {
-			name: "Cat Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Cat",
+			id: "Cat Arms",
+			cost: 100,
+			title: "Cat",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsCat;
 			}
@@ -232,9 +236,9 @@ package classes.GeneticMemories {
 
 		public static const SPHINX:int = 20;
 		EnumValue.add(Memories, SPHINX, "SPHINX", {
-			name: "Sphinx Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Sphinx",
+			id: "Sphinx Arms",
+			cost: 100,
+			title: "Sphinx",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsSphinx;
 			}
@@ -242,9 +246,9 @@ package classes.GeneticMemories {
 
 		public static const PIG:int = 21;
 		EnumValue.add(Memories, PIG, "PIG", {
-			name: "Pig Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Pig",
+			id: "Pig Arms",
+			cost: 100,
+			title: "Pig",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsPig;
 			}
@@ -252,9 +256,9 @@ package classes.GeneticMemories {
 
 		public static const BOAR:int = 22;
 		EnumValue.add(Memories, BOAR, "BOAR", {
-			name: "Boar Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Boar",
+			id: "Boar Arms",
+			cost: 100,
+			title: "Boar",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsBoar;
 			}
@@ -262,9 +266,9 @@ package classes.GeneticMemories {
 
 		public static const ORC:int = 23;
 		EnumValue.add(Memories, ORC, "ORC", {
-			name: "Orc Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Orc",
+			id: "Orc Arms",
+			cost: 100,
+			title: "Orc",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsOrc;
 			}
@@ -272,9 +276,9 @@ package classes.GeneticMemories {
 
 		public static const DISPLACER:int = 24;
 		EnumValue.add(Memories, DISPLACER, "DISPLACER", {
-			name: "Displacer Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Displacer",
+			id: "Displacer Arms",
+			cost: 100,
+			title: "Displacer",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsDisplacer;
 			}
@@ -282,9 +286,9 @@ package classes.GeneticMemories {
 
 		public static const RAIJU_PAWS:int = 25;
 		EnumValue.add(Memories, RAIJU_PAWS, "RAIJU_PAWS", {
-			name: "Raiju Paws Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Raiju Paws",
+			id: "Raiju Paws Arms",
+			cost: 100,
+			title: "Raiju Paws",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsRaijuPaws;
 			}
@@ -292,9 +296,9 @@ package classes.GeneticMemories {
 
 		public static const BAT:int = 26;
 		EnumValue.add(Memories, BAT, "BAT", {
-			name: "Bat Wing Arms",
-			metamorphCost: 100,
-			metamorphTitle: "Bat",
+			id: "Bat Wing Arms",
+			cost: 100,
+			title: "Bat",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsBatWing;
 			}

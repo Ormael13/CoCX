@@ -1456,9 +1456,8 @@ import classes.CoC;
 			}
 			//Transformations
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
-				outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
-				player.legCount = 2;
-				CoC.instance.mutations.setLowerBody(LowerBody.CLOVEN_HOOFED);
+				outputText("\n\n");
+				transformations.LowerBodyClovenHoofed(2).applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.arms.type != Arms.HUMAN) {

@@ -15278,7 +15278,7 @@ use namespace CoC;
 			return sadomasochismBoost;
 		}
 
-		public function additionalTransformationChances():Number {
+		public function get additionalTransformationChances():Number {
 			var additionalTransformationChancesCounter:Number = 0;
 			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
@@ -15427,23 +15427,6 @@ use namespace CoC;
 			//mainView.statsView.showUpDown();
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
-		}
-
-		public function get changeLimit():int {
-			var changeLimit: int = 1;
-			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (hasPerk(PerkLib.TransformationResistance)) changeLimit--;
-    	if (blockingBodyTransformations()) changeLimit = 0;
-
-			return changeLimit;
 		}
 	}
 }

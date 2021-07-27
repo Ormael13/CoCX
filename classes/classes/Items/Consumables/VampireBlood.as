@@ -53,8 +53,10 @@ public class VampireBlood extends Consumable {
             outputText("With some effort, you force down the blood and swallow it. A rush of heat flows through your veins as your body starts to react to the new blood.");
         }
 
-        changes = 0;
-        changeLimit = player.changeLimit;
+		var changeLimit:Number = 1;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
 
         if (rand(3) == 0 && changes < changeLimit && pure ? player.arms.type != Arms.HUMAN : player.arms.type != Arms.BAT) {
             outputText("\n\n");

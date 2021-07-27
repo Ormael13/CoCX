@@ -19,7 +19,7 @@ public class Scorpinum extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You down the potion, grimacing at the strong taste.");

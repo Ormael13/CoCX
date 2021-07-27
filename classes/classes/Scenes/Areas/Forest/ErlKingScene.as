@@ -974,7 +974,7 @@ public class ErlKingScene extends BaseContent
 			var x:int = 0;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
-			changeLimit += player.additionalTransformationChances();
+			changeLimit += player.additionalTransformationChances;
 			// Stat TFs
 			if (player.blockingBodyTransformations()) changeLimit = 0;
 			// Main TFs

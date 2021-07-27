@@ -374,14 +374,9 @@ public class Enigmanium extends Consumable{
 		}
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyCat(4).applyEffect();
 			changes++;
-			outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.");
-			if (player.gender > 0) {
-				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
-			}
-			player.MutagenBonus("spe", 3);
-			mutations.setLowerBody(LowerBody.CAT);
-			player.legCount = 4;
 		}
 
 			//Wings
@@ -400,28 +395,9 @@ public class Enigmanium extends Consumable{
 
 			//generic version
 			if (player.lowerBody != LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
-				//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (player.isNaga() || player.isScylla()) {
-					if (player.isNaga()) {
-						outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
-					}
-					if (player.isScylla()) {
-						outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
-					}
-					mutations.setLowerBody(LowerBody.CAT);
-				}
-				//Catch-all
-				else {
-					if (player.lowerBody == LowerBody.HUMAN)
-						mutations.setLowerBody(LowerBody.CAT);
-					outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a lion!</b>");
-				}
-				if (player.gender > 0)
-					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyCat(4).applyEffect();
 				player.MutagenBonus("spe", 3);
-				//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have paws in place of your feet!</b>");
-				player.legCount = 4;
-				//dynStats("cor", 0);
 				changes++;
 			}
 
@@ -469,19 +445,8 @@ public class Enigmanium extends Consumable{
 
 			//Da paws (if already haz ears & tail)
 			if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
-				//hoof to cat:
-				if (player.lowerBody == LowerBody.HOOFED) {
-					outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>");
-					if (player.isTaur()) outputText("  You feel woozy and collapse on your side.  When you wake, you're no longer a centaur and your body has returned to a humanoid shape.");
-				}
-				//Goo to cat
-				else if (player.lowerBody == LowerBody.GOO) {
-					outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into digitigrade legs, complete with soft, padded cat-paws.  <b>You now have cat-paws!</b>");
-				}
-				//non hoof to cat:
-				else outputText("\n\nYou scream in agony as you feel the bones in your [feet] break and begin to rearrange. When the pain fades, you feel surprisingly well-balanced. <b>You now have cat paws.</b>");
-				mutations.setLowerBody(LowerBody.CAT);
-				player.legCount = 2;
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyCat(2).applyEffect();
 				changes++;
 			}
 

@@ -105,8 +105,7 @@ public class YukiOnnaScene extends BaseContent
 				outputText("You desperately need to fill this empty void within you with something... anything. Surely they will share it if you ask nicely and if they don't... you will simply have to steal it from them.\n\n");
 				outputText("As if to mirror your growing jealous indignation the snow around you becomes agitated, turning into a small indoor blizzard which only calms down once you do. You need to feel warmth again no matter what and it doesn't matter if everyone around you has to freeze to death in order to satisfy YOUR needs. <b>Your soul has frozen over, you have become a Yuki Onna in body and heart.</b>\n\n");
 				CoC.instance.transformations.FaceYukiOnna.applyEffect(false);
-				CoC.instance.mutations.setLowerBody(LowerBody.YUKI_ONNA);
-				if (player.legCount != 2) player.legCount = 2;
+				transformations.LowerBodyYukiOnna.applyEffect(false);
 				CoC.instance.transformations.ArmsYukiOnna.applyEffect(false);
 				CoC.instance.transformations.EyesHuman.applyEffect(false);
 				CoC.instance.transformations.EyesChangeColor(["light purple"]).applyEffect(false);

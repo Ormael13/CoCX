@@ -152,9 +152,6 @@ public class NightmareScene extends BaseContent
 						default:
 							player.skinTone = "blue";
 					}
-					CoC.instance.transformations.HornsDemonic.applyEffect(false);
-					player.wings.type = Wings.BAT_LIKE_LARGE;
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings, 0, 0, 0, 0);
 					outputText(" You try to meekly crawl away but the centauress is too fast for you. She has you easily pinned to the ground by her hoof as she lowers herself on your prone body aligning her meat with your hole. You try to scream for help but she cuts the air out with a swift blow now squeezing you between her horse body and the grass. You can only beg her as you feel her flare prod for the entrance of your cunt, smearing pre on your slit, she's clearly going to break you. ");
 					outputText("You ready a scream as her cock forces your lips apart but to your complete surprise her massive monster seamlessly slide in without further resistance. She begins to buck in and out filling you way past the cervix and, to your dismay, you actually realise you’re enjoying this.\n\n");
 					outputText("\"<i>My horn can penetrate anything, from the tightest pussy to the loosest hole. Leave it to me and I will turn you into a mess of pleasure.</i>\"\n\n");
@@ -170,6 +167,9 @@ public class NightmareScene extends BaseContent
 					outputText("\"<i>You are a lucky girl... I feel generous and since you're such a cutie I actually stopped only short of making you cum out your soul. Demons can only give births to imps anyway and I need a strong body like yours to carry my offspring into the world. Do take care of her will you?</i>\"\n\n");
 					outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
 					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your newfound corruption and all the more by the powerful black magic your body is permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this “blessing” resonating with your newfound corruption.\n\n");
+
+					CoC.instance.transformations.WingsDemonicLarge.applyEffect(false);
+					CoC.instance.transformations.HornsDemonic.applyEffect(false);
 				}
 				if (player.butt.type < 6) player.butt.type = 6;
 				if (player.hips.type < 6) player.hips.type = 6;

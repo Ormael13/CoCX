@@ -20,7 +20,7 @@ import classes.internals.Utils;
 	public class Consumable extends Useable
 	{
 
-        protected function get mutations():Mutations { return CoC.instance.mutations; }
+    protected function get mutations():Mutations { return CoC.instance.mutations; }
 		protected function get changes():int { return mutations.changes; }
 		protected function set changes(val:int):void { mutations.changes = val; }
 		protected function get changeLimit():int { return mutations.changeLimit; }
@@ -32,7 +32,7 @@ import classes.internals.Utils;
 		protected function get camp():Camp { return SceneLib.camp; }
 		protected function doNext(eventNo:Function):void { EngineCore.doNext(eventNo); }
 		protected function rand(n:Number):int { return Utils.rand(n); }
-		
+
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);
 		}
@@ -51,7 +51,7 @@ import classes.internals.Utils;
 			desc += "\nBase value: " + String(value);
 			return desc;
 		}
-		
+
 		/**
 		 * Delegate function for legacy 'Mutations.as' code.
 		 * @param	... args stat change parameters
@@ -66,7 +66,7 @@ import classes.internals.Utils;
 			return true;
 		}
 */
-		
+
 		/**
 		 * Perform effect on player WITHOUT requiring item being in player's inventory and removing it
 		 */
@@ -76,7 +76,7 @@ import classes.internals.Utils;
 			CoC_Settings.errorAMC("Consumable","doEffect",id);
 		}
 */
-		
+
 		/**
 		 * Removes item from player and does effect
 		 */

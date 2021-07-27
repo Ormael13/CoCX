@@ -1408,7 +1408,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Recharge venom/web pool
-			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA 
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA
 			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(PerkLib.VenomGlandsEvolved) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				if (player.hasPerk(PerkLib.ImprovedVenomGland)) player.tailRecharge += 5;
@@ -2123,7 +2123,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
 					outputText(" as your horn begins to split in two");
-					CoC.instance.transformations.HornsBicorn.applyEffect(false);
+					player.horns.type = Horns.BICORN;
 				}
 				if (!InCollection(player.hairColor, bicornHairPalette)) {
 					CurentColor = randomChoice(bicornHairPalette);
@@ -2137,40 +2137,42 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["red"]).isPossible()) {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
-					CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
+					player.eyes.colour = "red";
 				}
 				if (player.wings.type == Wings.FEATHERED_ALICORN) {
 					outputText(" Your wings aren’t spared either all the feather falling off to reveal a membranous demonic pair of bat wings.");
 					player.wings.type = Wings.NIGHTMARE;
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) {
-						outputText("\n\n<b>Genetic Memory: Nightmare Wings - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedNightmareWings, 0, 0, 0, 0);
-					}
 				}
-				outputText(" <b>You giggle in delight of your own corruption as you fall from grace into a ");
+				outputText("\n\n<b>You giggle in delight of your own corruption as you fall from grace into a ");
 				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
 				else outputText("bicorn");
-				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away whats left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on mareth.</b>\n");
+				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away whats left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on Mareth.</b>\n");
+
 				if (player.hasPerk(PerkLib.AvatorOfPurity)) player.removePerk(PerkLib.AvatorOfPurity);
 				player.createPerk(PerkLib.AvatorOfCorruption, 0, 0, 0, 0);
 				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
 				if(player.hasPerk(PerkLib.AuraOfPurity)) player.removePerk(PerkLib.AuraOfPurity);
 				player.cor = 100;
+
+				// TFs from scene for possible Metamorph unlock texts afterwards
+				if (player.horns.type == Horns.UNICORN) {
+					CoC.instance.transformations.HornsBicorn.applyEffect(false);
+				}
+				if (player.wings.type == Wings.FEATHERED_ALICORN) {
+					CoC.instance.transformations.WingsNightmare.applyEffect(false);
+				}
+				CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
 				needNext = true;
 			}
 			//Fixing wings
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
-				outputText("\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.\n");
-				player.wings.type = Wings.NIGHTMARE;
-				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) {
-					outputText("\n\n<b>Genetic Memory: Nightmare Wings - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedNightmareWings, 0, 0, 0, 0);
-				}
+				outputText("\n\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.");
+				CoC.instance.transformations.WingsNightmare.applyEffect(false);
 				needNext = true;
 			}
 			//Losing horn
 			if (player.hasPerk(PerkLib.AvatorOfCorruption) && player.cor > 10 && player.horns.type != Horns.BICORN) {
-				outputText("\n<b>Without your horns, the magic power they once granted withers and dies, vanishing completely.</b>\n");
+				outputText("\n\n<b>Without your horns, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.AvatorOfCorruption);
 				if (!player.hasPerk(PerkLib.EclipticMind))
 				{
@@ -2186,7 +2188,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA sudden wave of serenity pass over you as you realise how pure you have become.");
 				if (player.horns.type == Horns.BICORN) {
 					outputText(" Your two horns merges into a single one and you can feel the pure unity of your horn restored.");
-					CoC.instance.transformations.HornsUnicorn.applyEffect(false);
+					player.horns.type = Horns.UNICORN;
 				}
 				if (!InCollection(player.hairColor, unicornHairPalette)) {
 					CurentColor = randomChoice(unicornHairPalette);
@@ -2200,15 +2202,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["blue"]).isPossible()) {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");
-					CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect(false);
+					player.eyes.colour = "blue";
 				}
 				if (player.wings.type == Wings.NIGHTMARE) {
 					outputText(" Your wings also redeem themselves changing into a pair of angelic wings covered with white feathers.");
 					player.wings.type = Wings.FEATHERED_ALICORN;
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) {
-						outputText("\n\n<b>Genetic Memory: Alicorn Wings - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedAlicornWings, 0, 0, 0, 0);
-					}
 				}
 				outputText(" <b>You laugh heartily at your unblemish pure form as you realise you are an ");
 				if (player.wings.type == Wings.FEATHERED_ALICORN) outputText("alicorn");
@@ -2219,15 +2217,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
 				if(player.hasPerk(PerkLib.AuraOfCorruption)) player.removePerk(PerkLib.AuraOfCorruption);
 				player.cor = 0;
+
+				// TFs from scene for possible Metamorph unlock texts afterwards
+				if (player.horns.type == Horns.BICORN) {
+					CoC.instance.transformations.HornsUnicorn.applyEffect(false);
+				}
+				if (player.wings.type == Wings.NIGHTMARE) {
+					CoC.instance.transformations.WingsFeatheredAlicorn.applyEffect(false);
+				}
+				CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect(false);
 				needNext = true;
 			}
 			if (player.horns.type == Horns.UNICORN && player.wings.type == Wings.NIGHTMARE) {
-				outputText("\nYour wings redeem themselves changing into a pair of angelic wings covered with white feathers.\n");
+				outputText("\nYour wings redeem themselves changing into a pair of angelic wings covered with white feathers.");
 				player.wings.type = Wings.FEATHERED_ALICORN;
-				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) {
-					outputText("\n\n<b>Genetic Memory: Alicorn Wings - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedAlicornWings, 0, 0, 0, 0);
-				}
+				CoC.instance.transformations.WingsFeatheredAlicorn.applyEffect(false);
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.AvatorOfPurity) && player.cor < 90 && player.horns.type != Horns.UNICORN) {

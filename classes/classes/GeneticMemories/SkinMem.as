@@ -10,19 +10,23 @@ package classes.GeneticMemories {
   public class SkinMem extends BaseContent {
 	/**
 	 * Entry properties:
-	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
-	 * - metamorphTitle: name displayed on the metamorph button
+	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
+	 * - title: name displayed on the metamorph button
 	 * - availableCoverages: which levels of skin coverage are available for this skin Metamorph
 	 * - transformation: TF object that refers to what the metamorph does
 	 * - transformationFunc: returns TF function that refers to what the metamorph does, overwrites transformation
+	 *
+	 * Optional properties:
+	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 
 	 * Template:
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Name Saved in GeneticStorage],
-			metamorphCost: [Cost Here],
-			metamorphTitle: "[Race Here]",
+			id: [Name Saved in GeneticStorage],
+			cost: [Cost Here],
+			title: "[Race Here]",
 			availableCoverages: [Skin.COVERAGES_HERE],
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
@@ -38,9 +42,9 @@ package classes.GeneticMemories {
 
 		public static const PLAIN:int = 0;
 		EnumValue.add(Memories, PLAIN, "PLAIN", {
-			name: "Plain Skin",
-			metamorphCost: 500,
-			metamorphTitle: "Human",
+			id: "Plain Skin",
+			cost: 500,
+			title: "Human",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.SkinPlain;
 			}
@@ -48,9 +52,9 @@ package classes.GeneticMemories {
 
 		public static const FUR:int = 1;
 		EnumValue.add(Memories, FUR, "FUR", {
-			name: "Fur Skin",
-			metamorphCost: 100,
-			metamorphTitle: "Fur",
+			id: "Fur Skin",
+			cost: 100,
+			title: "Fur",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
 			transformationFunc: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinFur(coverage);
@@ -59,9 +63,9 @@ package classes.GeneticMemories {
 
 		public static const SCALES:int = 2;
 		EnumValue.add(Memories, SCALES, "SCALES", {
-			name: "Scales Skin",
-			metamorphCost: 100,
-			metamorphTitle: "Scales",
+			id: "Scales Skin",
+			cost: 100,
+			title: "Scales",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
 			transformationFunc: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinScales(coverage);
@@ -70,9 +74,9 @@ package classes.GeneticMemories {
 
 		public static const DRAGON_SCALES:int = 3;
 		EnumValue.add(Memories, DRAGON_SCALES, "DRAGON_SCALES", {
-			name: "Dragon Scales Skin",
-			metamorphCost: 150,
-			metamorphTitle: "D.Scales",
+			id: "Dragon Scales Skin",
+			cost: 150,
+			title: "D.Scales",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
 			transformationFunc: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinDragonScales(coverage);
@@ -81,9 +85,9 @@ package classes.GeneticMemories {
 
 		public static const CHITIN:int = 4;
 		EnumValue.add(Memories, CHITIN, "CHITIN", {
-			name: "Chitin Skin",
-			metamorphCost: 100,
-			metamorphTitle: "Chitin",
+			id: "Chitin Skin",
+			cost: 100,
+			title: "Chitin",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
 			transformationFunc: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinChitin(coverage);

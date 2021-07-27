@@ -10,17 +10,21 @@ package classes.GeneticMemories {
   public class HairMem extends BaseContent {
 	/**
 	 * Entry properties:
-	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
-	 * - metamorphTitle: name displayed on the metamorph button
+	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
+	 * - title: name displayed on the metamorph button
 	 * - transformation: TF object that refers to what the metamorph does
+	 *
+	 * Optional properties:
+	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 
 	 * Template:
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Name Saved in GeneticStorage],
-			metamorphCost: [Cost Here],
-			metamorphTitle: "[Race Here]",
+			id: [Name Saved in GeneticStorage],
+			cost: [Cost Here],
+			title: "[Race Here]",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -32,9 +36,9 @@ package classes.GeneticMemories {
 
 		public static const NORMAL:int = 0;
 		EnumValue.add(Memories, NORMAL, "NORMAL", {
-			name: "Human Hair",
-			metamorphCost: 500,
-			metamorphTitle: "Human",
+			id: "Human Hair",
+			cost: 500,
+			title: "Human",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HairHuman;
 			}
@@ -42,9 +46,9 @@ package classes.GeneticMemories {
 
 		public static const FEATHER:int = 1;
 		EnumValue.add(Memories, FEATHER, "FEATHER", {
-			name: "Feather Hair",
-			metamorphCost: 100,
-			metamorphTitle: "Feather",
+			id: "Feather Hair",
+			cost: 100,
+			title: "Feather",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HairFeather;
 			}
@@ -52,9 +56,9 @@ package classes.GeneticMemories {
 
 		public static const GORGON:int = 2;
 		EnumValue.add(Memories, GORGON, "GORGON", {
-			name: "Gorgon Hair",
-			metamorphCost: 100,
-			metamorphTitle: "Gorgon",
+			id: "Gorgon Hair",
+			cost: 100,
+			title: "Gorgon",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HairGorgon;
 			}
@@ -62,9 +66,9 @@ package classes.GeneticMemories {
 
 		public static const ELF:int = 3;
 		EnumValue.add(Memories, ELF, "ELF", {
-			name: "Silky Hair",
-			metamorphCost: 100,
-			metamorphTitle: "Elf",
+			id: "Silky Hair",
+			cost: 100,
+			title: "Elf",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HairSilky;
 			}
@@ -72,9 +76,9 @@ package classes.GeneticMemories {
 
 		public static const STORM:int = 4;
 		EnumValue.add(Memories, STORM, "STORM", {
-			name: "Storm Hair",
-			metamorphCost: 100,
-			metamorphTitle: "Storm",
+			id: "Storm Hair",
+			cost: 100,
+			title: "Storm",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HairStorm;
 			}
@@ -82,9 +86,9 @@ package classes.GeneticMemories {
 
 		public static const BURNING:int = 5;
 		EnumValue.add(Memories, BURNING, "BURNING", {
-			name: "Burning Hair",
-			metamorphCost: 100,
-			metamorphTitle: "Burning",
+			id: "Burning Hair",
+			cost: 100,
+			title: "Burning",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HairBurning;
 			}

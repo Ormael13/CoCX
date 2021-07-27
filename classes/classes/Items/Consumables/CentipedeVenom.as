@@ -29,7 +29,7 @@ public class CentipedeVenom extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You pop the cork on the vial and quickly chug the clear liquid. It tastes somewhat sweet, leaving your body feeling warm all over.");
@@ -51,16 +51,7 @@ public class CentipedeVenom extends Consumable {
 		//Legs
 		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure back into a plain human-like form. ");
-			outputText("Pain shoots through your legs as you stumble to the ground. You can feel the bones in your legs fuse and reshape themselves as they become longer. " +
-					"As the initial pain passes you manage to sit up and look at what happened to you. To your shock or maybe even horror, in place of legs you now have the long, segmented, insectoid body of a centipede. " +
-					"It's easily three times the length as you are tall. Each segment has a pair of pointed spindly legs which will make walking interesting to say the least. " +
-					"At the very end of your insectoid body sits a pair of longer legs that appear to be a set of stingers. You get up to try out your new body. " +
-					"At first you nearly face plant into the ground as you attempt to coordinate your many legs all at once. " +
-					"After some practice you're able to move your new legs in sync and independently with little issue, even enjoying the feeling of curling into yourself. " +
-					"<b>You think you'll have some fun with this new centipede body.</b>");
-			mutations.setLowerBody(LowerBody.CENTIPEDE);
-			player.legCount = 100;
+			CoC.instance.transformations.LowerBodyCentipede.applyEffect();
 			changes++;
 		}
 		//Arms

@@ -10,17 +10,21 @@ package classes.GeneticMemories {
   public class HornsMem extends BaseContent {
 	/**
 	 * Entry properties:
-	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
-	 * - metamorphTitle: name displayed on the metamorph button
+	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
+	 * - title: name displayed on the metamorph button
 	 * - transformation: TF object that refers to what the metamorph does
+	 *
+	 * Optional properties:
+	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 
 	 * Template:
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Name Saved in GeneticStorage],
-			metamorphCost: [Cost Here],
-			metamorphTitle: "[Race Here]",
+			id: [Name Saved in GeneticStorage],
+			cost: [Cost Here],
+			title: "[Race Here]",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -32,9 +36,9 @@ package classes.GeneticMemories {
 
 		public static const NONE:int = 0;
 		EnumValue.add(Memories, NONE, "NONE", {
-			name: "No Horns",
-			metamorphCost: 500,
-			metamorphTitle: "No Horns",
+			id: "No Horns",
+			cost: 500,
+			title: "No Horns",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsNone;
 			}
@@ -42,9 +46,9 @@ package classes.GeneticMemories {
 
 		public static const DEMON:int = 1;
 		EnumValue.add(Memories, DEMON, "DEMON", {
-			name: "Demon Horns",
-			metamorphCost: 100,
-			metamorphTitle: "Demon",
+			id: "Demon Horns",
+			cost: 100,
+			title: "Demon",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsDemonic;
 			}
@@ -52,9 +56,9 @@ package classes.GeneticMemories {
 
 		public static const COW_MINOTAUR:int = 2;
 		EnumValue.add(Memories, COW_MINOTAUR, "COW_MINOTAUR", {
-			name: "Cow Minotaur Horns",
-			metamorphCost: 100,
-			metamorphTitle: "Cow/Mino",
+			id: "Cow Minotaur Horns",
+			cost: 100,
+			title: "Cow/Mino",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsCowMinotaur;
 			}
@@ -62,9 +66,9 @@ package classes.GeneticMemories {
 
 		public static const DRACONIC_X2:int = 3;
 		EnumValue.add(Memories, DRACONIC_X2, "DRACONIC_X2", {
-			name: "Draconic Dual Horns",
-			metamorphCost: 100,
-			metamorphTitle: "Draconic x2",
+			id: "Draconic Dual Horns",
+			cost: 100,
+			title: "Draconic x2",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsDraconicDual;
 			}
@@ -72,9 +76,9 @@ package classes.GeneticMemories {
 
 		public static const DRACONIC_X4:int = 4;
 		EnumValue.add(Memories, DRACONIC_X4, "DRACONIC_X4", {
-			name: "Draconic Quadruple Horns",
-			metamorphCost: 200,
-			metamorphTitle: "Draconic x4",
+			id: "Draconic Quadruple Horns",
+			cost: 200,
+			title: "Draconic x4",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsDraconicQuadruple;
 			}
@@ -82,9 +86,9 @@ package classes.GeneticMemories {
 
 		public static const GOAT:int = 5;
 		EnumValue.add(Memories, GOAT, "GOAT", {
-			name: "Goat Horns",
-			metamorphCost: 100,
-			metamorphTitle: "Goat",
+			id: "Goat Horns",
+			cost: 100,
+			title: "Goat",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsGoat;
 			}
@@ -92,9 +96,9 @@ package classes.GeneticMemories {
 
 		public static const UNICORN:int = 6;
 		EnumValue.add(Memories, UNICORN, "UNICORN", {
-			name: "Unicorn Horn",
-			metamorphCost: 100,
-			metamorphTitle: "Unicorn",
+			id: "Unicorn Horn",
+			cost: 100,
+			title: "Unicorn",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsUnicorn;
 			}
@@ -102,9 +106,9 @@ package classes.GeneticMemories {
 
 		public static const ONI:int = 7;
 		EnumValue.add(Memories, ONI, "ONI", {
-			name: "Oni Horn",
-			metamorphCost: 100,
-			metamorphTitle: "Oni",
+			id: "Oni Horn",
+			cost: 100,
+			title: "Oni",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsOni;
 			}
@@ -112,9 +116,9 @@ package classes.GeneticMemories {
 
 		public static const ONI_X2:int = 8;
 		EnumValue.add(Memories, ONI_X2, "ONI_X2", {
-			name: "Oni Dual Horns",
-			metamorphCost: 100,
-			metamorphTitle: "Oni x2",
+			id: "Oni Dual Horns",
+			cost: 100,
+			title: "Oni x2",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsOniDual;
 			}
@@ -122,9 +126,9 @@ package classes.GeneticMemories {
 
 		public static const BICORN:int = 9;
 		EnumValue.add(Memories, BICORN, "BICORN", {
-			name: "Bicorn Horns",
-			metamorphCost: 100,
-			metamorphTitle: "Bicorn",
+			id: "Bicorn Horns",
+			cost: 100,
+			title: "Bicorn",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.HornsBicorn;
 			}

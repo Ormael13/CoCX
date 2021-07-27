@@ -25,7 +25,7 @@ public class MaraFruit extends Consumable{
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		//Temporary storage
 		var temp2:Number = 0;
@@ -221,20 +221,14 @@ public class MaraFruit extends Consumable{
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 				if (player.lowerBody != LowerBody.PLANT_ROOT_CLAWS) {
 					outputText("\n\n");
-					if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ");
-					outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your [feet]. In few places the skin on your feet breaks up to reveal... a root-like skin underneath. Gradually the rest of the skin around the ankle is shed of uncovering your new feet shape, that are roots arranged in a way to loosely reassemble feet. <b>Your feet are now formed into roots.</b>");
-					mutations.setLowerBody(LowerBody.PLANT_ROOT_CLAWS);
-					player.legCount = 2;
+					CoC.instance.transformations.LowerBodyPlantRootClaws.applyEffect();
 				}
 			}
 			//Females/futa get high heels
 			else {
 				if (player.lowerBody != LowerBody.PLANT_HIGH_HEELS && player.lowerBody != LowerBody.PLANT_FLOWER) {
 					outputText("\n\n");
-					if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ");
-					outputText("Soon after you start to feel something new tickling and crawling its way into being, this time on your tights, working its way down your legs.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your thighs and shank all the way down to your ankles. <b>You now have vine-covered legs.</b>");
-					mutations.setLowerBody(LowerBody.PLANT_HIGH_HEELS);
-					player.legCount = 2;
+					CoC.instance.transformations.LowerBodyPlantHighHeels.applyEffect();
 				}
 			}
 			changes++;
@@ -314,9 +308,8 @@ public class MaraFruit extends Consumable{
 			}
 			CoC.instance.transformations.TailNone.applyEffect(false);
 			CoC.instance.transformations.WingsNone.applyEffect(false);
-			mutations.setLowerBody(LowerBody.PLANT_FLOWER);
+			CoC.instance.transformations.LowerBodyPlantFlower.applyEffect(false);
 			player.coatColor = "pink";
-			player.legCount = 12;
 			changes++;
 		}
 		player.refillHunger(10);

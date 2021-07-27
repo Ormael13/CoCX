@@ -51,7 +51,7 @@ public class AbstractEquinum extends Consumable {
 		//Chancee to raise limit
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		//Used for random chances
 		//Set up output
 		clearOutput();
@@ -509,10 +509,8 @@ public class AbstractEquinum extends Consumable {
 
 		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
 			if (changes < changeLimit && rand(3) == 0) {
-				if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
-				else if (player.lowerBody == LowerBody.DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				else outputText("\n\nA coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>");
-				mutations.setLowerBody(LowerBody.HOOFED);
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
 				changes++;
 			}
 		}

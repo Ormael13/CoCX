@@ -25,7 +25,7 @@ public class Centaurinum extends Consumable{
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
 		var temp2:Number = 0;
 		var temp3:Number = 0;
@@ -275,43 +275,16 @@ public class Centaurinum extends Consumable{
 
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyHoofed(4).applyEffect();
 			changes++;
-			outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.");
-			if (player.gender > 0) {
-				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
-			}
 			player.MutagenBonus("spe", 3);
-			mutations.setLowerBody(LowerBody.HOOFED);
-			player.legCount = 4;
 		}
 		//generic version
 		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
-			//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-			if (player.isNaga() || player.isScylla()) {
-				if (player.isNaga()) {
-					outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
-				}
-				if (player.isScylla()) {
-					outputText("\n\nYou collapse as your tentacle legs start to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
-				}
-			}
-			//Catch-all
-			else outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>");
-			if (player.gender > 0) outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
-			if ((player.lowerBody == LowerBody.HUMAN && player.arms.type != Arms.KITSUNE) || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS
-					|| player.lowerBody == LowerBody.AVIAN || player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.ELF)
-			{
-				outputText("\n\n <b>Furthermore your feets turned into hooves!</b>");
-				mutations.setLowerBody(LowerBody.HOOFED);
-			}
-			else if (player.lowerBody == LowerBody.HUMAN && player.arms.type == Arms.KITSUNE){
-				outputText("\n\n <b>Furthermore your feet turned into fox paws!</b>");
-				mutations.setLowerBody(LowerBody.FOX);
-			}
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyTaur().applyEffect();
 			player.MutagenBonus("spe", 3);
-			//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>");
-			player.legCount = 4;
-			//dynStats("cor", 0);
 			changes++;
 		}
 		//Horse tail

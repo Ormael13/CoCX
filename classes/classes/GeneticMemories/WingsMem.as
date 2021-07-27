@@ -10,17 +10,21 @@ package classes.GeneticMemories {
   public class WingsMem extends BaseContent {
 	/**
 	 * Entry properties:
-	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
-	 * - metamorphTitle: name displayed on the metamorph button
+	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
+	 * - title: name displayed on the metamorph button
 	 * - transformation: TF object that refers to what the metamorph does
+	 *
+	 * Optional properties:
+	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 
 	 * Template:
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Name Saved in GeneticStorage],
-			metamorphCost: [Cost Here],
-			metamorphTitle: "[Race Here]",
+			id: [Name Saved in GeneticStorage],
+			cost: [Cost Here],
+			title: "[Race Here]",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -32,9 +36,9 @@ package classes.GeneticMemories {
 
 		public static const NONE:int = 0
 		EnumValue.add(Memories, NONE, "NONE", {
-			name: "No Wings",
-			metamorphCost: 500,
-			metamorphTitle: "None",
+			id: "No Wings",
+			cost: 500,
+			title: "None",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsNone;
 			}
@@ -42,9 +46,9 @@ package classes.GeneticMemories {
 
 		public static const BEE_SMALL:int = 1
 		EnumValue.add(Memories, BEE_SMALL, "BEE_SMALL", {
-			name: "Bee Small Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Bee(S)",
+			id: "Bee Small Wings",
+			cost: 100,
+			title: "Bee(S)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsBeeSmall;
 			}
@@ -52,9 +56,9 @@ package classes.GeneticMemories {
 
 		public static const BEE_LARGE:int = 2
 		EnumValue.add(Memories, BEE_LARGE, "BEE_LARGE", {
-			name: "Bee Large Wings",
-			metamorphCost: 200,
-			metamorphTitle: "Bee(L)",
+			id: "Bee Large Wings",
+			cost: 200,
+			title: "Bee(L)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsBeeLarge;
 			}
@@ -62,9 +66,9 @@ package classes.GeneticMemories {
 
 		public static const DEMONIC_TINY:int = 3
 		EnumValue.add(Memories, DEMONIC_TINY, "DEMONIC_TINY", {
-			name: "Demonic Small Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Demonic(S)",
+			id: "Demonic Small Wings",
+			cost: 100,
+			title: "Demonic(S)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDemonicTiny;
 			}
@@ -72,9 +76,9 @@ package classes.GeneticMemories {
 
 		public static const DEMONIC_LARGE:int = 4
 		EnumValue.add(Memories, DEMONIC_LARGE, "DEMONIC_LARGE", {
-			name: "Demonic Large Wings",
-			metamorphCost: 200,
-			metamorphTitle: "Demonic(L)",
+			id: "Demonic Large Wings",
+			cost: 200,
+			title: "Demonic(L)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDemonicLarge;
 			}
@@ -83,9 +87,9 @@ package classes.GeneticMemories {
 		// UNUSED
 		// public static const DEMONIC_LARGE_X4:int = 5
 		// EnumValue.add(Memories, DEMONIC_LARGE_X4, "DEMONIC_LARGE_X4", {
-		// 	name: "Demonic Large Quadruple Wings",
-		// 	metamorphCost: 300,
-		// 	metamorphTitle: "Demonic(L) x4",
+		// 	id: "Demonic Large Quadruple Wings",
+		// 	cost: 300,
+		// 	title: "Demonic(L) x4",
 		// 	transformation: function(): Transformation {
 		// 		return CoC.instance.transformations.WingsDemonicQuadrupleLarge;
 		// 	}
@@ -93,9 +97,9 @@ package classes.GeneticMemories {
 
 		public static const FEATHERED_LARGE:int = 6
 		EnumValue.add(Memories, FEATHERED_LARGE, "FEATHERED_LARGE", {
-			name: "Harpy Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Harpy",
+			id: "Harpy Wings",
+			cost: 100,
+			title: "Harpy",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsFeatheredLarge;
 			}
@@ -103,9 +107,9 @@ package classes.GeneticMemories {
 
 		public static const DRACONIC_SMALL:int = 7
 		EnumValue.add(Memories, DRACONIC_SMALL, "DRACONIC_SMALL", {
-			name: "Draconic Small Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Draconic(S)",
+			id: "Draconic Small Wings",
+			cost: 100,
+			title: "Draconic(S)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDraconicSmall;
 			}
@@ -113,9 +117,9 @@ package classes.GeneticMemories {
 
 		public static const DRACONIC_LARGE:int = 8
 		EnumValue.add(Memories, DRACONIC_LARGE, "DRACONIC_LARGE", {
-			name: "Draconic Large Wings",
-			metamorphCost: 200,
-			metamorphTitle: "Draconic(L)",
+			id: "Draconic Large Wings",
+			cost: 200,
+			title: "Draconic(L)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDraconicLarge;
 			}
@@ -123,9 +127,9 @@ package classes.GeneticMemories {
 
 		public static const DRACONIC_HUGE:int = 9
 		EnumValue.add(Memories, DRACONIC_HUGE, "DRACONIC_HUGE", {
-			name: "Draconic Huge Wings",
-			metamorphCost: 300,
-			metamorphTitle: "Draconic(H)",
+			id: "Draconic Huge Wings",
+			cost: 300,
+			title: "Draconic(H)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsDraconicHuge;
 			}
@@ -133,9 +137,9 @@ package classes.GeneticMemories {
 
 		public static const FEATHERED_PHOENIX:int = 10
 		EnumValue.add(Memories, FEATHERED_PHOENIX, "FEATHERED_PHOENIX", {
-			name: "Phoenix Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Phoenix",
+			id: "Phoenix Wings",
+			cost: 100,
+			title: "Phoenix",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsFeatheredPhoenix;
 			}
@@ -143,9 +147,9 @@ package classes.GeneticMemories {
 
 		public static const FEATHERED_ALICORN:int = 11
 		EnumValue.add(Memories, FEATHERED_ALICORN, "FEATHERED_ALICORN", {
-			name: "Alicorn Wings",
-			metamorphCost: 200,
-			metamorphTitle: "Alicorn",
+			id: "Alicorn Wings",
+			cost: 200,
+			title: "Alicorn",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsFeatheredAlicorn;
 			}
@@ -153,9 +157,9 @@ package classes.GeneticMemories {
 
 		public static const MANTIS_SMALL:int = 12
 		EnumValue.add(Memories, MANTIS_SMALL, "MANTIS_SMALL", {
-			name: "Mantis Small Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Mantis(S)",
+			id: "Mantis Small Wings",
+			cost: 100,
+			title: "Mantis(S)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsMantisSmall;
 			}
@@ -163,9 +167,9 @@ package classes.GeneticMemories {
 
 		public static const MANTIS_LARGE:int = 13
 		EnumValue.add(Memories, MANTIS_LARGE, "MANTIS_LARGE", {
-			name: "Mantis Large Wings",
-			metamorphCost: 200,
-			metamorphTitle: "Mantis(L)",
+			id: "Mantis Large Wings",
+			cost: 200,
+			title: "Mantis(L)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsMantisLarge;
 			}
@@ -173,9 +177,9 @@ package classes.GeneticMemories {
 
 		public static const MANTICORE_SMALL:int = 14
 		EnumValue.add(Memories, MANTICORE_SMALL, "MANTICORE_SMALL", {
-			name: "Manticore Small Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Manticore(S)",
+			id: "Manticore Small Wings",
+			cost: 100,
+			title: "Manticore(S)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsManticoreSmall;
 			}
@@ -183,9 +187,9 @@ package classes.GeneticMemories {
 
 		public static const MANTICORE_LARGE:int = 15
 		EnumValue.add(Memories, MANTICORE_LARGE, "MANTICORE_LARGE", {
-			name: "Manticore Large Wings",
-			metamorphCost: 200,
-			metamorphTitle: "Manticore(L)",
+			id: "Manticore Large Wings",
+			cost: 200,
+			title: "Manticore(L)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsManticoreLarge;
 			}
@@ -193,9 +197,9 @@ package classes.GeneticMemories {
 
 		public static const VAMPIRE:int = 16
 		EnumValue.add(Memories, VAMPIRE, "VAMPIRE", {
-			name: "Vampire Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Vampire",
+			id: "Vampire Wings",
+			cost: 100,
+			title: "Vampire",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsVampire;
 			}
@@ -203,9 +207,9 @@ package classes.GeneticMemories {
 
 		public static const NIGHTMARE:int = 17
 		EnumValue.add(Memories, NIGHTMARE, "NIGHTMARE", {
-			name: "Nightmare Wings",
-			metamorphCost: 200,
-			metamorphTitle: "Nightmare",
+			id: "Nightmare Wings",
+			cost: 200,
+			title: "Nightmare",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsNightmare;
 			}
@@ -213,9 +217,9 @@ package classes.GeneticMemories {
 
 		public static const FEATHERED_SPHINX:int = 18
 		EnumValue.add(Memories, FEATHERED_SPHINX, "FEATHERED_SPHINX", {
-			name: "Sphinx Wings",
-			metamorphCost: 100,
-			metamorphTitle: "Sphinx",
+			id: "Sphinx Wings",
+			cost: 100,
+			title: "Sphinx",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsFeatheredSphinx;
 			}
@@ -223,9 +227,9 @@ package classes.GeneticMemories {
 
 		public static const THUNDEROUS_AURA:int = 19
 		EnumValue.add(Memories, THUNDEROUS_AURA, "THUNDEROUS_AURA", {
-			name: "Thunderous Aura (Wings)",
-			metamorphCost: 100,
-			metamorphTitle: "Raiju",
+			id: "Thunderous Aura (Wings)",
+			cost: 100,
+			title: "Raiju",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsThunderousAura;
 			}

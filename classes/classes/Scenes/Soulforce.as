@@ -398,60 +398,66 @@ use namespace CoC;
 		public function AllMetamorphOptionsUnlock():void {
 
 			for each (var hairMem: * in HairMem.Memories) {
-				Metamorph.GeneticMemoryStorage[hairMem.name] = true;
+				Metamorph.GeneticMemoryStorage[hairMem.id] = true;
 			}
 
 			for each (var faceMem: * in FaceMem.Memories) {
-				Metamorph.GeneticMemoryStorage[faceMem.name] = true;
+				Metamorph.GeneticMemoryStorage[faceMem.id] = true;
 			}
 
 			for each (var eyesMem: * in EyesMem.Memories) {
-				Metamorph.GeneticMemoryStorage[eyesMem.name] = true;
+				Metamorph.GeneticMemoryStorage[eyesMem.id] = true;
 			}
 
 			for each (var earsMem: * in EarsMem.Memories) {
-				Metamorph.GeneticMemoryStorage[earsMem.name] = true;
+				Metamorph.GeneticMemoryStorage[earsMem.id] = true;
 			}
 
 			for each (var armsMem: * in ArmsMem.Memories) {
-				Metamorph.GeneticMemoryStorage[armsMem.name] = true;
+				Metamorph.GeneticMemoryStorage[armsMem.id] = true;
 			}
 
 			for each (var hornsMem: * in HornsMem.Memories) {
-				Metamorph.GeneticMemoryStorage[hornsMem.name] = true;
+				Metamorph.GeneticMemoryStorage[hornsMem.id] = true;
 			}
 
 			for each (var skinMem: * in SkinMem.Memories) {
-				Metamorph.GeneticMemoryStorage[skinMem.name] = true;
+				Metamorph.GeneticMemoryStorage[skinMem.id] = true;
 			}
 
 			for each (var skinPatternMem: * in SkinPatternMem.Memories) {
-				Metamorph.GeneticMemoryStorage[skinPatternMem.name] = true;
+				Metamorph.GeneticMemoryStorage[skinPatternMem.id] = true;
 			}
 
 			for each (var tongueMem: * in TongueMem.Memories) {
-				Metamorph.GeneticMemoryStorage[tongueMem.name] = true;
+				Metamorph.GeneticMemoryStorage[tongueMem.id] = true;
 			}
 
 			for each (var wingsMem: * in WingsMem.Memories) {
-				Metamorph.GeneticMemoryStorage[wingsMem.name] = true;
+				Metamorph.GeneticMemoryStorage[wingsMem.id] = true;
 			}
 
 			for each (var antennaeMem: * in AntennaeMem.Memories) {
-				Metamorph.GeneticMemoryStorage[antennaeMem.name] = true;
+				Metamorph.GeneticMemoryStorage[antennaeMem.id] = true;
 			}
 
 			for each (var gillsMem: * in GillsMem.Memories) {
-				Metamorph.GeneticMemoryStorage[gillsMem.name] = true;
+				Metamorph.GeneticMemoryStorage[gillsMem.id] = true;
 			}
 
 			for each (var rearBodyMem: * in RearBodyMem.Memories) {
-				Metamorph.GeneticMemoryStorage[rearBodyMem.name] = true;
+				Metamorph.GeneticMemoryStorage[rearBodyMem.id] = true;
+			}
+
+			for each (var lowerBodyMem: * in LowerBodyMem.Memories) {
+				Metamorph.GeneticMemoryStorage[lowerBodyMem.id] = true;
 			}
 
 			for each (var tailMem: * in TailMem.Memories) {
-				Metamorph.GeneticMemoryStorage[tailMem.name] = true;
+				Metamorph.GeneticMemoryStorage[tailMem.id] = true;
 			}
+
+			Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 
 			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedScales)) player.createStatusEffect(StatusEffects.UnlockedScales,0,0,0,0);

@@ -23,6 +23,7 @@ import classes.Scenes.SceneLib;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
+import classes.Scenes.Metamorph;
 
 import coc.view.ButtonData;
 
@@ -101,6 +102,11 @@ public class Camp extends NPCAwareContent{
 		}
 */
 
+	public function campAfterMigration():void {
+		clearOutput();
+		doCamp();
+	}
+
 	public function returnToCamp(timeUsed:int):void {
 		clearOutput();
 		if (timeUsed == 1)
@@ -154,7 +160,7 @@ public class Camp extends NPCAwareContent{
 	public var HadNightEvent: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
 
-	private function doCamp():void { //Only called by playerMenu
+	public function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
 		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
 			trace("Autosaving to slot: " + player.slotName);
@@ -4714,8 +4720,104 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
+
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
+			clearOutput();
+
+			var refundPermanentMetamorphUnlocks: Boolean = false;
+
+			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
+			/*
+				*/
+				if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+					refundPermanentMetamorphUnlocks = true;
+
+					// Non-human permanent Metamorphs cost 5 points each
+					player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
+					player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+
+					// Upgrade prices
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
+						player.ascensionPerkPoints += 15;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
+						player.ascensionPerkPoints += 30;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
+						player.ascensionPerkPoints += 45;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
+						player.ascensionPerkPoints += 60;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
+						player.ascensionPerkPoints += 75;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
+						player.ascensionPerkPoints += 90;
+					}
+
+					// Human permanent Metamorphs cost 25 each, but 5 was already refunded, leaving 20
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
+
+					outputText("Metamorph has been updated and all genetic memories are permanent by default.\n\nAscension points were refunded, so you'll be redirected to the Ascension menu to buy new stuff, then either go back to where you stopped or reincarnate.");
+				}
+				/*
+			*/
+
+			// Remove Unlocked Human Metamorph flags regardless of refund
+			/*
+				*/
+				player.removeStatusEffect(StatusEffects.UnlockedHumanHair);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanFace);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEyes);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanTongue);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEars);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanArms);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanLowerBody);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoHorns);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoWings);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanSkin);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoAntennae);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoGills);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoRearBody);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
+				/*
+			*/
+
+			if (refundPermanentMetamorphUnlocks) {
+				doNext(CoC.instance.charCreation.migrationAscension);
+			} else {
+				doCamp();
+			}
+
+			return;
+		}
+
+
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 && flags[kFLAGS.HARDCORE_MODE] == 1) flags[kFLAGS.HARDCORE_MODE] = 0;

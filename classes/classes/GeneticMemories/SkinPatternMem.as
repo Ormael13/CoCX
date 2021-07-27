@@ -10,17 +10,21 @@ package classes.GeneticMemories {
   public class SkinPatternMem extends BaseContent {
 	/**
 	 * Entry properties:
-	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
-	 * - metamorphTitle: name displayed on the metamorph button
+	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
+	 * - title: name displayed on the metamorph button
 	 * - transformation: TF object that refers to what the metamorph does
+	 *
+	 * Optional properties:
+	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 
 	 * Template:
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Name Saved in GeneticStorage],
-			metamorphCost: [Cost Here],
-			metamorphTitle: "[Race Here]",
+			id: [Name Saved in GeneticStorage],
+			cost: [Cost Here],
+			title: "[Race Here]",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -32,9 +36,9 @@ package classes.GeneticMemories {
 
 		public static const NONE:int = 0;
 		EnumValue.add(Memories, NONE, "NONE", {
-			name: "No Skin Pattern",
-			metamorphCost: 500,
-			metamorphTitle: "None",
+			id: "No Skin Pattern",
+			cost: 500,
+			title: "None",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.SkinPatternNone;
 			}
@@ -42,9 +46,9 @@ package classes.GeneticMemories {
 
 		public static const MAGICAL:int = 1;
 		EnumValue.add(Memories, MAGICAL, "MAGICAL", {
-			name: "Kitsune Skin Pattern",
-			metamorphCost: 100,
-			metamorphTitle: "Kitsune",
+			id: "Kitsune Skin Pattern",
+			cost: 100,
+			title: "Kitsune",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.SkinPatternKitsune
 			}
@@ -52,9 +56,9 @@ package classes.GeneticMemories {
 
 		public static const BATTLE:int = 2;
 		EnumValue.add(Memories, BATTLE, "BATTLE", {
-			name: "Oni Skin Pattern",
-			metamorphCost: 100,
-			metamorphTitle: "Oni",
+			id: "Oni Skin Pattern",
+			cost: 100,
+			title: "Oni",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.SkinPatternOni
 			}
@@ -62,9 +66,9 @@ package classes.GeneticMemories {
 
 		public static const LIGHTNING_SHAPED:int = 3;
 		EnumValue.add(Memories, LIGHTNING_SHAPED, "LIGHTNING_SHAPED", {
-			name: "Raiju Skin Pattern",
-			metamorphCost: 100,
-			metamorphTitle: "Raiju",
+			id: "Raiju Skin Pattern",
+			cost: 100,
+			title: "Raiju",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.SkinPatternRaiju
 			}
@@ -72,9 +76,9 @@ package classes.GeneticMemories {
 
 		public static const SCAR_SHAPED:int = 4;
 		EnumValue.add(Memories, SCAR_SHAPED, "SCAR_SHAPED", {
-			name: "Orc Skin Pattern",
-			metamorphCost: 100,
-			metamorphTitle: "Orc",
+			id: "Orc Skin Pattern",
+			cost: 100,
+			title: "Orc",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.SkinPatternOrc
 			}

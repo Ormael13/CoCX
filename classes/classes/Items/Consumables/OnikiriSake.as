@@ -32,9 +32,10 @@ public class OnikiriSake extends Consumable {
 	}
 
 	override public function useItem():Boolean {
-		var changes:Number = 0;
-		var changeLimit:Number = player.changeLimit;
-		changeLimit += player.additionalTransformationChances();
+		var changeLimit:Number = 1;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
 		var temp:Number = 0;
 		player.slimeFeed();
@@ -113,13 +114,14 @@ public class OnikiriSake extends Consumable {
 		//Physical changes
 		//Legs
 		if (player.lowerBody == LowerBody.HUMAN && changes < changeLimit && rand(4) == 0) {
-			outputText("\n\nNot again! Now it's the skin on your legs that is burning as a whole set of intricate warlike tattoos covers them. Furthermore, your toenails become increasingly pointed turning black just like a set of claws. Well it seems you will have get used to your");
-			outputText(" <b>war tattooed legs and feet topped with sharp nails.</b>");
-			mutations.setLowerBody(LowerBody.ONI);
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyOni.applyEffect();
 			changes++;
 		}
 		if (player.lowerBody != LowerBody.ONI && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-			mutations.humanizeLowerBody();
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyHuman.applyEffect();
+			changes++;
 		}
 		//Arms
 		if (player.arms.type != Arms.ONI && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
