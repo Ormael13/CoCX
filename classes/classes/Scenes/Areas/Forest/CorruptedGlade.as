@@ -310,7 +310,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				if (player.fatigue > player.maxFatigue() - 40) addButtonDisabled(button++, "Axe", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Axe", destroyTheCorruptedGlades, 3);
 			}
-			if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut") {
+			if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut" || player.isPartiallyStaffTypeWeapon()) {
 				if (player.fatigue > player.maxFatigue() - 30) addButtonDisabled(button++, "Weapon", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Weapon", destroyTheCorruptedGlades, 4);
 			}

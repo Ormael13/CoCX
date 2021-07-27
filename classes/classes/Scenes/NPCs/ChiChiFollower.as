@@ -162,20 +162,20 @@ public function WonSparringFight():void {
 		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 1;
 		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 9 && flags[kFLAGS.CHI_CHI_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 54);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 54, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0);
 			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CHI_CHI_LVL_UP] = 6;
 		}
 		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 10 && flags[kFLAGS.CHI_CHI_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 60);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 60, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0);
 			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CHI_CHI_LVL_UP] = 7;
 		}
 		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.CHI_CHI_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 66);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 66, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0);
 			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CHI_CHI_LVL_UP] = 8;
 		}

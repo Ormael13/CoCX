@@ -1974,24 +1974,19 @@ public class Camp extends NPCAwareContent{
 		menu();
 		clearOutput();
 		outputText("What would you like to do?");
-		addButton(0, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
-		addButton(1, "Build", campBuildingSim).hint("Check your [camp] build options.");
-		addButton(2, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
-		addButton(3, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
-		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(4, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
+		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.");
+		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(1, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
+		else addButtonDisabled(1, "Winions", "You need to be able to make some minions that fight for you to use this option.");
+		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
+		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
+		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
-		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
-		else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option.");
-		//button 7
-		if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
-			addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
-		}
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(9, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
-		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(10, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(11, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-		addButton(12, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
-		addButton(13, "NPC's", SparrableNPCsMenu);
+		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
+		else addButtonDisabled(7, "Herbalism", "Would you kindly find Rathazul first?");
+		if (player.explored >= 1) addButton(9, "Dummy", DummyTraining).hint("Train your mastery level on this.");
+		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
+		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
+		else addButtonDisabled(13, "Ascension", "Don't you have a job to finish first. Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -2006,6 +2001,7 @@ public class Camp extends NPCAwareContent{
 		} else {
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
+		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -2025,16 +2021,31 @@ public class Camp extends NPCAwareContent{
 			//addButtonDisabled(6, "Build Misc(O)", "Req. Carpenter's Toolbox.");
 		}
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(1, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
-		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
+		else addButtonDisabled(1, "Build Cabin", "You need to wait until 7th day.");
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10) {
+			if (player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
+			addButtonDisabled(10, "AddImpSkull", "Req. at least one imp skull.");
+		}
+		else addButtonDisabled(10, "AddImpSkull", "Req. built at least one wall section.");
 		addButton(14, "Back", campActions);
 	}
 
 	private function campMiscActions():void {
 		menu();
-		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
-		else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
-		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
-		else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(0, "Fishery", VisitFishery).hint("Visit Fishery.");
+		else addButtonDisabled(0, "Fishery", "Would you kindly build it first?");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(1, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
+		else addButtonDisabled(1, "Ward", "Would you kindly instal it first?");
+		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(2, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
+		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
+		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
+		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
+		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(5, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
+		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
+		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
+		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
+		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		addButton(14, "Back", campActions);
 	}
 
@@ -2246,19 +2257,45 @@ public class Camp extends NPCAwareContent{
 		doNext(HerbalismMenu);
 	}
 
+	private function VisitFishery():void {
+		outputText("\n\nYou go check at the barrels for food.");
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) outputText(" There is currently " + flags[kFLAGS.FISHES_STORED_AT_FISHERY] + " fish in the barrel.");
+		menu();
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(0, "Retrieve", Retrieve);
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(1, "Retrieve Stack", RetrieveStack);
+		addButton(14, "Back", campMiscActions);
+	}
+
+	private function Retrieve():void {
+		outputText("\n\nYou pick up a fish and add it to your inventory.");
+		flags[kFLAGS.FISHES_STORED_AT_FISHERY]--;
+		inventory.takeItem(consumables.FREFISH, VisitFishery);
+	}
+
+	private function RetrieveStack():void {
+		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
+			outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
+			flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
+			inventory.takeItem(useables.STAFISH, VisitFishery);
+		} else {
+			outputText("\n\nYou need more fish to bag out a bundle.");
+			doNext(VisitFishery);
+		}
+	}
+
 	private function MagicWardMenu():void {
 		clearOutput();
 		outputText("You touch one of the warding stones");
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
 			outputText(", and feel a surge of power as every stone comes alive with power.  The ward is up, and your [camp] should be safe.");
 			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 3;
-			doNext(campActions);
+			doNext(campMiscActions);
 			return;
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 3) {
 			outputText(" and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
 			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
-			doNext(campActions);
+			doNext(campMiscActions);
 			return;
 		}
 	}
@@ -2278,21 +2315,88 @@ public class Camp extends NPCAwareContent{
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
 	}
 
-private function SparrableNPCsMenu():void {
-	clearOutput();
-	outputText("Champion party composition: [name]");
-	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
-		else outputText(", (no combat companion)");
+	private function VisitClone():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) {
+			if (player.statusEffectv4(StatusEffects.PCClone) < 4) outputText("Your clone is still incomplete. Would you work on completing it?");
+			else {
+				outputText("Your clone is wandering around camp. What would you ask " + player.mf + " to do?\n\n");
+				outputText("Current clone task: ");
+				outputText("Nothing");
+			}
+		}
+		else outputText("You not have clone created.");
+		outputText("\n\n");
+		menu();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) addButtonDisabled(0, "Create", "You already created your clone.");
+		else addButton(0, "Create", CreateClone);
+		addButton(14, "Back", campMiscActions);
 	}
-	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
-		else outputText(", (no combat companion)");
-	}/*
-	if (player.hasPerk(PerkLib.AdvancedLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_3]);
-		else outputText(", (no combat companion)");
-	}*/
+	private function CreateClone():void {
+		menu();
+		if (player.HP > player.maxHP() * 0.5 && player.soulforce >= player.maxSoulforce()) addButton(0, "Form", FormClone);
+		else {
+			if (player.soulforce < player.maxSoulforce()) addButtonDisabled(0, "Form", "Your soulforce is too low.");
+			else addButtonDisabled(0, "Form", "Your health is too low.");
+		}
+		addButton(4, "Back", VisitClone);
+	}
+	private function FormClone():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.PCClone)) {
+			if (player.statusEffectv4(StatusEffects.PCClone) == 3) {
+				outputText("Part 4 forming placeholder.\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				player.addStatusValue(StatusEffects.PCClone, 3, 30);
+				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				HPChange( -player.maxHP() * 0.5, true);
+				player.statPoints -= 150;
+				player.perkPoints -= 30;
+				player.level -= 30;
+			}
+			else if (player.statusEffectv4(StatusEffects.PCClone) == 2) {
+				outputText("Part 3 forming placeholder.\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				HPChange( -player.maxHP() * 0.5, true);
+			}
+			else {
+				outputText("Part 2 forming placeholder.\n\n");
+				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				HPChange( -player.maxHP() * 0.5, true);
+			}
+		}
+		else {
+			outputText("Part 1 forming placeholder.\n\n");
+			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			HPChange( -player.maxHP() * 0.5, true);
+		}
+		doNext(camp.returnToCampUseEightHours);
+	}
+
+	private function DummyTraining():void {
+		clearOutput();
+		outputText("You walk toward the worn out dummy as you drawn your [weapon].");
+		startCombat(new TrainingDummy());
+	}
+
+	private function SparrableNPCsMenu():void {
+		clearOutput();
+		outputText("Champion party composition: [name]");
+		if (player.hasPerk(PerkLib.BasicLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
+			else outputText(", (no combat companion)");
+		}
+		if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
+			else outputText(", (no combat companion)");
+		}/*
+		if (player.hasPerk(PerkLib.AdvancedLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_3] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_3]);
+			else outputText(", (no combat companion)");
+		}*/
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			outputText("\n\nPlaceholder text about deciding if sparrable npc's in [camp] should train or relax (train mean rising in lvl after enough time loosing to PC in sparrings).");
 			outputText("\n\nPlaceholder text about current mode [camp] combat NPC's are in: ");
@@ -2368,32 +2472,6 @@ private function SparrableNPCsMenu():void {
 		if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
 		else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
-	}
-
-	private function VisitFishery():void {
-		outputText("\n\nYou go check at the barrels for food.");
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) outputText(" There is currently " + flags[kFLAGS.FISHES_STORED_AT_FISHERY] + " fish in the barrel.");
-		menu();
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(0, "Retrieve", Retrieve);
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(1, "Retrieve Stack", RetrieveStack);
-		addButton(14, "Back", campActions);
-	}
-
-	private function Retrieve():void {
-		outputText("\n\nYou pick up a fish and add it to your inventory.");
-		flags[kFLAGS.FISHES_STORED_AT_FISHERY]--;
-		inventory.takeItem(consumables.FREFISH, VisitFishery);
-	}
-
-	private function RetrieveStack():void {
-		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
-			outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
-			flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
-			inventory.takeItem(useables.STAFISH, VisitFishery);
-		} else {
-			outputText("\n\nYou need more fish to bag out a bundle.");
-			doNext(VisitFishery);
-		}
 	}
 
 	private function swimInStream():void {
@@ -3331,7 +3409,7 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 		else addButtonDisabled(7, "???", "???");
-		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
+		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "???");
 		if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
 		else addButtonDisabled(11, "???", "???");
@@ -3617,7 +3695,6 @@ public function wakeFromBadEnd():void {
 			outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
 			doNext(doCamp);
 		}
-
 	}
 
 	private function buildCampGate():void {
@@ -3846,10 +3923,10 @@ public function wakeFromBadEnd():void {
 		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
 			if (!levelup) {
-				if (player.statPoints > 0) {
+				if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Stat Up");
 					mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
-				} else {
+				} else  if (player.perkPoints > 0) {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Perk Up");
 					mainView.levelButton.toolTipText = "Spend your perk points on a new perk. \n\nYou currently have " + String(player.perkPoints) + ".";
 				}
@@ -4721,17 +4798,23 @@ public function wakeFromBadEnd():void {
 			return;
 		}
 
+		// Flag to define whether the migration should open the Ascension menu for the player to buy Perks, mostly used for refunds
+		// Remember to set to False at the start of a migration if it's used
+		var refundAscensionPerks: Boolean = false;
+
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
 			clearOutput();
 
-			var refundPermanentMetamorphUnlocks: Boolean = false;
+			refundAscensionPerks = false;
+
 
 			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
 			/*
 				*/
 				if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
-					refundPermanentMetamorphUnlocks = true;
+					refundAscensionPerks = true;
+					outputText("Metamorph has been updated and all genetic memories are permanent by default.\n\nAscension points were refunded, so you'll be redirected to the Ascension menu to buy new stuff, then either go back to where you stopped or reincarnate.");
 
 					// Non-human permanent Metamorphs cost 5 points each
 					player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
@@ -4779,8 +4862,6 @@ public function wakeFromBadEnd():void {
 					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
 					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
 					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
-
-					outputText("Metamorph has been updated and all genetic memories are permanent by default.\n\nAscension points were refunded, so you'll be redirected to the Ascension menu to buy new stuff, then either go back to where you stopped or reincarnate.");
 				}
 				/*
 			*/
@@ -4806,7 +4887,7 @@ public function wakeFromBadEnd():void {
 				/*
 			*/
 
-			if (refundPermanentMetamorphUnlocks) {
+			if (refundAscensionPerks) {
 				doNext(CoC.instance.charCreation.migrationAscension);
 			} else {
 				doCamp();
@@ -4814,7 +4895,6 @@ public function wakeFromBadEnd():void {
 
 			return;
 		}
-
 
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
@@ -4841,15 +4921,15 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);

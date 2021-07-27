@@ -408,7 +408,7 @@ public class ParserTags {
         "coat.isare"  : function ():* {return CoC.instance.player.skin.coat.isAre();},
         "coat.color"  : function ():* {return CoC.instance.player.coatColor;},
         "coat.color2" : function ():* {return CoC.instance.player.skin.coat.color2;},
-        "coat.nakedcolor"  : function ():* {return CoC.instance.player.nakedCoatColor;},
+        "nakedcoatcolor.color"  : function ():* {return CoC.instance.player.nakedCoatColor;},
         "full"        : skinDescriptionFn("full", false, false),
         "full.noadj"  : skinDescriptionFn("full", true, false),
         "full.notone" : skinDescriptionFn("full", false, true),

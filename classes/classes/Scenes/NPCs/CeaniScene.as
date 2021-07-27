@@ -646,32 +646,32 @@ public function sparringWithCeaniWon():void
 		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.CEANI_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 1;
 		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 66);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 66, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 5;
 		}
 		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 12 && flags[kFLAGS.CEANI_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 72);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 72, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 6;
 		}
 		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 13 && flags[kFLAGS.CEANI_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 78);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 78, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 7;
 		}
 		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 14 && flags[kFLAGS.CEANI_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 84);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 84, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 8;
 		}
 		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 15 && flags[kFLAGS.CEANI_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 90);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 90, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 9;
 		}

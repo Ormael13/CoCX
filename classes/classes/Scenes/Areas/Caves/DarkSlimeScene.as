@@ -145,7 +145,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		CoC.instance.transformations.EarsElfin.applyEffect(false);
 		CoC.instance.transformations.FaceHuman.applyEffect(false);
 		CoC.instance.transformations.TongueHuman.applyEffect(false);
-		player.createVagina()
+		if (!player.hasVagina()) player.createVagina()
 		if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
 		else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
 		CoC.instance.transformations.AntennaeNone.applyEffect(false);

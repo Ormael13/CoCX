@@ -157,27 +157,27 @@ public class AbstractEquinum extends Consumable {
 				outputText("\n\nYou let out a throaty \"Neiiiigh\" as your animalistic instincts take over.");
 			}
 			if (player.inte < 10 && player.inte > 5) {
-				player.addCurse("int", -1, 1);
+				player.addCurse("int", 1, 1);
 				outputText("\n\nYou smile vacantly as you drink the potion, knowing you're just a big dumb animal who loves to fuck.");
 				changes++;
 			}
 			if (player.inte <= 20 && player.inte >= 10) {
-				player.addCurse("int", -2, 1);
+				player.addCurse("int", 2, 1);
 				outputText("\n\nYou find yourself looking down at the empty bottle in your hand and realize you haven't thought ANYTHING since your first sip.");
 				changes++;
 			}
 			if (player.inte <= 30 && player.inte > 20) {
-				player.addCurse("int", -3, 1);
+				player.addCurse("int", 3, 1);
 				outputText("\n\nYou smile broadly as your cares seem to melt away.  A small part of you worries that you're getting dumber.");
 				changes++;
 			}
 			if (player.inte <= 50 && player.inte > 30) {
-				player.addCurse("int", -4, 1);
+				player.addCurse("int", 4, 1);
 				outputText("\n\nIt becomes harder to keep your mind focused as your intellect diminishes.");
 				changes++;
 			}
 			if (player.inte > 50) {
-				player.addCurse("int", -5, 1);
+				player.addCurse("int", 5, 1);
 				outputText("\n\nYour usually intelligent mind feels much more sluggish.");
 				changes++;
 			}

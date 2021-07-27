@@ -134,7 +134,7 @@ public class Evangeline1 extends Monster
 			outputText("Evangeline utters word of power, summoning an electrical charge around her weapon. <b>It looks like she'll deal more physical damage now!</b>");
 			createStatusEffect(StatusEffects.ChargeWeapon, 50, 0, 0, 0);
 			this.weaponAttack += (5 + (inte / 10)) * SpellMod();
-			fatigue += spellCostChargeWeapon();
+			mana -= spellCostChargeWeapon();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
@@ -142,7 +142,7 @@ public class Evangeline1 extends Monster
 			outputText("Evangeline utters word of power, summoning an electrical charge around her armor. <b>It looks like her armor will be reducing some of incoming damage now!</b>");
 			createStatusEffect(StatusEffects.ChargeArmor, 50, 0, 0, 0);
 			this.armorDef += (4 + (inte / 15)) * SpellMod();
-			fatigue += spellCostChargeArmor();
+			mana -= spellCostChargeArmor();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
@@ -157,7 +157,7 @@ public class Evangeline1 extends Monster
 			else {
 				outputText("You manage to blink in the nick of time!");
 			}
-			fatigue += spellCostBlind();
+			mana -= spellCostBlind();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
@@ -185,7 +185,7 @@ public class Evangeline1 extends Monster
 			damage *= 0.25;
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
-			fatigue += spellCostWhitefire();
+			mana -= spellCostWhitefire();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
@@ -199,7 +199,7 @@ public class Evangeline1 extends Monster
 			lustDmg = Math.round(lustDmg);
 			player.dynStats("lus", lustDmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
-			fatigue += spellCostArouse();
+			mana -= spellCostArouse();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
@@ -215,7 +215,7 @@ public class Evangeline1 extends Monster
 			temp = Math.round(temp);
 			outputText("Evangeline flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
-			fatigue += spellCostHeal();
+			mana -= spellCostHeal();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
@@ -223,7 +223,7 @@ public class Evangeline1 extends Monster
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>");
 			this.statStore.addBuffObject({ 'str': +(5 + (inte / 10)) * SpellMod(), 'tou': -(5 + (inte / 10)) * SpellMod()}, "EvangelineMight",{})
-			fatigue += spellCostMight();
+			mana -= spellCostMight();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
@@ -232,87 +232,69 @@ public class Evangeline1 extends Monster
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
 			this.speStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
-			fatigue += spellCostBlink();
+			mana -= spellCostBlink();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) {
 				var choice4:Number = rand(2);
 				if (choice4 == 0) eAttack();
 				if (choice4 == 1) {
 					if (this.lust > 50) {
 						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
 						else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-						else if (!statStore.hasBuff("EvangelineMight") && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
-						else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (maxFatigue() - spellCostBlink()))) BlinkSpell();
-						else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						else if (!statStore.hasBuff("EvangelineMight") && (mana >= spellCostMight())) MightSpell();
+						else if (!hasStatusEffect(StatusEffects.Blink) && (mana >= spellCostBlink())) BlinkSpell();
+						else if (HPRatio() < .75 && (mana >= spellCostHeal())) HealSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (mana >= spellCostBlind()) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						else if (rand(2) == 0 && (mana >= spellCostArouse())) ArouseSpell();
+						else if ((this.lust < maxLust() * 0.75) && (mana >= spellCostWhitefire())) WhiteFireSpell();
 						else eAttack();
 					}
 					else {
 						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
 						else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
-						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						else if ((this.lust < maxLust() * 0.75) && (mana >= spellCostWhitefire())) WhiteFireSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (mana >= spellCostBlind()) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
 						else eAttack();
 					}
 				}
 			}
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
-				var choice3:Number = rand(2);
-				if (choice3 == 0) eAttack();
-				if (choice3 == 1) {
-					if (this.lust > 50) {
-						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
-						else if (!statStore.hasBuff("EvangelineMight") && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
-						else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
-						else eAttack();
-					}
-					else {
-						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
-						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
-						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else eAttack();
-					}
-				}
-			}
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) {
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) {
 				var choice2:Number = rand(2);
 				if (choice2 == 0) eAttack();
 				if (choice2 == 1) {
 					if (this.lust > 50) {
-						if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
-						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
+						else if (!statStore.hasBuff("EvangelineMight") && (mana >= spellCostMight())) MightSpell();
+						else if (HPRatio() < .75 && (mana >= spellCostHeal())) HealSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (mana >= spellCostBlind()) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						else if (rand(2) == 0 && (mana >= spellCostArouse())) ArouseSpell();
+						else if ((this.lust < maxLust() * 0.75) && (mana >= spellCostWhitefire())) WhiteFireSpell();
 						else eAttack();
 					}
 					else {
-						if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
-						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
+						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
+						else if ((this.lust < maxLust() * 0.75) && (mana >= spellCostWhitefire())) WhiteFireSpell();
+						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (mana >= spellCostBlind()) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
 						else eAttack();
 					}
 				}
 			}
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2 || flags[kFLAGS.EVANGELINE_LVL_UP] == 3) {
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) {
 				var choice1:Number = rand(2);
 				if (choice1 == 0) eAttack();
 				if (choice1 == 1) {
 					if (this.lust > 50) {
-						if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
-						else if (rand(3) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
-						else if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						if (HPRatio() < .75 && (mana >= spellCostHeal())) HealSpell();
+						else if (rand(3) == 0 && (mana >= spellCostArouse())) ArouseSpell();
+						else if ((this.lust < maxLust() * 0.75) && (mana >= - spellCostWhitefire())) WhiteFireSpell();
 						else eAttack();
 					}
 					else {
-						if ((this.lust < maxLust() * 0.75) && (fatigue < (maxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
+						if ((this.lust < maxLust() * 0.75) && (mana >= spellCostWhitefire())) WhiteFireSpell();
 						else eAttack();
 					}
 				}
@@ -327,7 +309,7 @@ public class Evangeline1 extends Monster
 			this.a = "";
 			this.short = "Evangeline";
 			this.imageName = "evangeline";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 0 || flags[kFLAGS.EVANGELINE_LVL_UP] == 1) {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing simple peasant's rags and using bare fists to attack.";
 				initStrTouSpeInte(10, 10, 5, 40);
 				this.weaponName = "fists";
@@ -337,66 +319,67 @@ public class Evangeline1 extends Monster
 				this.armorDef = 1;
 				this.armorMDef = 1;
 				this.bonusHP = 30;
-				this.bonusLust = 22;
+				this.bonusLust = 23;
 				this.additionalXP += 5;
-				this.level = 2;
+				this.level = 3;
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) {
-				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing simple peasant's rags and using bare fists to attack.";
-				initStrTouSpeInte(18, 18, 10, 61);
-				this.weaponName = "fists";
-				this.weaponVerb="punches";
-				this.weaponAttack = 1;
-				this.armorName = "rags";
-				this.armorDef = 1;
-				this.armorMDef = 1;
-				this.bonusHP = 60;
-				this.bonusLust = 24;
-				this.additionalXP += 10;
-				this.level = 4;
-			}
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) {
-				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing simple peasant's rags and using bare fists to attack.";
-				initStrTouSpeInte(28, 28, 15, 100);
-				this.weaponName = "fists";
-				this.weaponVerb="punches";
-				this.weaponAttack = 1;
-				this.armorName = "rags";
-				this.armorDef = 1;
-				this.armorMDef = 1;
-				this.bonusHP = 90;
-				this.bonusLust = 26;
-				this.additionalXP += 15;
-				this.level = 6;
-			}
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing simple peasant's rags and using spiked gauntlet to attack.";
-				initStrTouSpeInte(32, 32, 25, 100);
+				initStrTouSpeInte(28, 28, 15, 100);
 				this.weaponName = "spiked gauntlet";
 				this.weaponVerb="spiked punch";
 				this.weaponAttack = 6;
 				this.armorName = "rags";
 				this.armorDef = 1;
 				this.armorMDef = 1;
-				this.bonusHP = 120;
-				this.bonusLust = 28;
-				this.additionalXP += 20;
-				this.level = 8;
+				this.bonusHP = 60;
+				this.bonusLust = 26;
+				this.additionalXP += 10;
+				this.level = 6;
 			}
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing practically indecent steel armor and using spiked gauntlet to attack.";
-				initStrTouSpeInte(32, 32, 35, 100);
+				initStrTouSpeInte(32, 32, 25, 100);
 				this.weaponName = "spiked gauntlet";
 				this.weaponVerb="spiked punch";
 				this.weaponAttack = 6;
 				this.armorName = "practically indecent steel armor";
 				this.armorDef = 11;
 				this.armorMDef = 1;
-				this.bonusHP = 150;
-				this.bonusLust = 30;
-				this.additionalXP += 25;
-				this.level = 10;
+				this.bonusHP = 90;
+				this.bonusLust = 29;
+				this.additionalXP += 15;
+				this.level = 9;
 			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) {
+				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing practically indecent steel armor and using inscribed spellblade to attack.";
+				initStrTouSpeInte(32, 32, 45, 100);
+				this.weaponName = "inscribed spellblade";
+				this.weaponVerb="slash";
+				this.weaponAttack = 9;
+				this.armorName = "practically indecent steel armor";
+				this.armorDef = 11;
+				this.armorMDef = 1;
+				this.bonusHP = 120;
+				this.bonusLust = 32;
+				this.additionalXP += 20;
+				this.level = 12;
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
+				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human bimbo. She's wearing practically indecent steel armor and using inscribed spellblade to attack.";
+				initStrTouSpeInte(41, 46, 55, 100);
+				this.weaponName = "inscribed spellblade";
+				this.weaponVerb="slash";
+				this.weaponAttack = 9;
+				this.armorName = "practically indecent steel armor";
+				this.armorDef = 11;
+				this.armorMDef = 1;
+				this.bonusHP = 240;
+				this.bonusLust = 76;
+				this.lust = 70;
+				this.additionalXP += 40;
+				this.level = 15;
+			}/*
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing practically indecent steel armor and using inscribed spellblade to attack.";
 				initStrTouSpeInte(32, 32, 45, 100);
@@ -410,32 +393,51 @@ public class Evangeline1 extends Monster
 				this.bonusLust = 32;
 				this.additionalXP += 30;
 				this.level = 12;
+			}*/
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
+				createBreastRow(Appearance.breastCupInverse("E"));
+				this.hips.type = Hips.RATING_CURVY + 2;
+				this.butt.type = Butt.RATING_JIGGLY + 2;
+				initWisLibSensCor(15, 25, 35, 100);
+				this.hairColor = "platinum blonde";
+				this.hairLength = 36;
+				this.lustVuln = .8;
 			}
-			createBreastRow(Appearance.breastCupInverse("A"));
+			else {
+				createBreastRow(Appearance.breastCupInverse("A"));
+				this.hips.type = Hips.RATING_BOYISH;
+				this.butt.type = Butt.RATING_BUTTLESS;
+				initWisLibSensCor(15, 10, 10, 100);
+				this.hairColor = "red";
+				this.hairLength = 6;
+				this.lustVuln = .85;
+			}
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 90;
-			this.hips.type = Hips.RATING_BOYISH;
-			this.butt.type = Butt.RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"olive"});
-			this.hairColor = "red";
-			this.hairLength = 6;
-			initWisLibSensCor(15, 10, 10, 100);
-			this.lustVuln = .85;
 			this.lust = 10;
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) {
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 6) {
 			}
 			checkMonster();
 		}

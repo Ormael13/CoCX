@@ -63,7 +63,7 @@ public class MinotaurBlood extends Consumable {
 			//Chance of speed drop
 			if (rand(2) == 0 && player.str > 50) {
 				outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
-				player.addCurse("spe", -1,1);
+				player.addCurse("spe", 1,1);
 			}
 			changes++;
 		}

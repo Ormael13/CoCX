@@ -1108,7 +1108,7 @@ use namespace CoC;
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return weapon == game.weapons.ASCENSU || weapon == game.weapons.DEPRAVA || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT;
+			return weapon == game.weapons.ASCENSU || weapon == game.weapons.DEPRAVA || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF;
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -1121,6 +1121,10 @@ use namespace CoC;
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
 			return isRibbonTypeWeapon() || weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS || weapon == game.weapons.SDRILL || weapon == game.weapons.G_SHURI || weapon == game.weapons.CHAKRAM;
+		}
+		//Partial staff type weapons
+		public function isPartiallyStaffTypeWeapon():Boolean {
+			return weapon == game.weapons.S_BLADE || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -2212,7 +2216,9 @@ use namespace CoC;
 		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
 			var magicmult:Number = 1;
 			// if magical damage, double efficiency
-			if (magic == true) magicmult /= 2;
+			if (magic == true) magicmult *= 0.5;
+			// defensive staff channeling
+			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
 				if (display) {
@@ -2255,6 +2261,111 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.BloodShield);
 				return damage;
 			}
+		}
+		public function difficultyDamageMultiplier(damage:Number):Number{
+			var damageMultiplier:Number = 1;
+			//EZ MOAD half damage
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damageMultiplier *= 0.1;
+			//Difficulty modifier flags.
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damageMultiplier *= 1.2;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damageMultiplier *= 1.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damageMultiplier *= 2;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damageMultiplier *= 3.5;
+			return damage * damageMultiplier;
+		}
+		public function takeDamage(damage:Number, damagetype:Number = 0, display:Boolean = false):Number{
+			// Damage types:
+			// 0: phys, 1: null, 2: null, 3: null
+			// 4: magical, 5: fire, 6: ice
+			// 7: lightning, 8: darkness, 9: poison
+			// 10: wind, 11: water, 12: earth
+			damage = difficultyDamageMultiplier(damage);
+			//Round
+			damage = Math.round(damage);
+			// we return "1 damage received" if it is in (0..1) but deduce no HP
+			var returnDamage:int = (damage>0 && damage<1)?1:damage;
+			if (damage>0){
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					/*if (damagetype == 0) */damage = manaShieldAbsorb(damage, display);
+					//else damage = manaShieldAbsorbMagic(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
+				}
+				if (damage > 0) {
+					switch (damagetype) {
+						case 0: // physical
+							damage = reducePhysDamage(damage);
+							break;
+						case 1: // physical
+							damage = reducePhysDamage(damage);
+							break;
+						case 2: // physical
+							damage = reducePhysDamage(damage);
+							break;
+						case 3: // physical
+							damage = reducePhysDamage(damage);
+							break;
+						case 4: // magical
+							damage = reduceMagicDamage(damage);
+							break;
+						case 5: // fire
+							if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/4*3;
+							damage = reduceFireDamage(damage);
+							break;
+						case 6: // ice
+							damage = reduceIceDamage(damage);
+							break;
+						case 7: // lightning
+							damage = reduceLightningDamage(damage);
+							break;
+						case 8: // darkness
+							damage = reduceDarknessDamage(damage);
+							break;
+						case 9: // poison
+							damage = reducePoisonDamage(damage);
+							break;
+						case 10: // wind
+							damage = reduceWindDamage(damage);
+							break;
+						case 11: // water
+							damage = reduceWaterDamage(damage);
+							break;
+						case 12: // earth
+							damage = reduceEarthDamage(damage);
+							break;
+						case 13: // acid
+							damage = reducePoisonDamage(damage);
+							break;
+						default:
+							damage = reducePhysDamage(damage);
+					}
+					//Wrath
+					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
+					//game.HPChange(-damage, display);
+					HP -= damage;
+					if (display) {
+						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+					}
+					game.mainView.statsView.showStatDown('hp');
+					dynStats("lus", 0); //Force display arrow.
+				}
+				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+					dynStats("lus", int(damage / 2));
+				}
+				if (damagetype == 0 && flags[kFLAGS.YAMATA_MASOCHIST] > 1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
+					dynStats("lus", int(damage / 8));
+				}
+				//Prevent negatives
+				if (HP < minHP()){
+					HP = minHP();
+					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
+				}
+			}
+			return returnDamage;
 		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
@@ -2305,7 +2416,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 75 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo")) {
+			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
@@ -2373,56 +2484,9 @@ use namespace CoC;
 			return mult;
 		}
 		public override function takePhysDamage(damage:Number, display:Boolean = false):Number{
-			//Round
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				else {
-					damage = reducePhysDamage(damage);
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
-				}
-				if (flags[kFLAGS.YAMATA_MASOCHIST] > 1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
-					dynStats("lus", int(damage / 8));
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
+			return takeDamage(damage, 0, display);
 		}
 		public function reducePhysDamage(damage:Number):Number {
-			var damageMultiplier:Number = 1;
-			//EZ MOAD half damage
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damageMultiplier *= 0.1;
-			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damageMultiplier *= 3.5;
-
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.hasPerk(PerkLib.Tactician) && CoC.instance.monster.inte >= 50) {
@@ -2445,8 +2509,7 @@ use namespace CoC;
 			}
 			//Apply damage resistance percentage.
 			damage *= damagePercent() / 100;
-			if (damageMultiplier < 0) damageMultiplier = 0;
-			return int(damage * damageMultiplier);
+			return damage;
 		}
 
 		public override function damageMagicalPercent():Number {
@@ -2512,52 +2575,9 @@ use namespace CoC;
 			return mult;
 		}
 		public override function takeMagicDamage(damage:Number, display:Boolean = false):Number {
-			//Round
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				else {
-					damage = reduceMagicDamage(damage);
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
+			return takeDamage(damage, 4, display);
 		}
 		public function reduceMagicDamage(damage:Number):Number {
-			var magicdamageMultiplier:Number = 1;
-			//EZ MOAD half damage
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) magicdamageMultiplier *= 0.1;
-			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) magicdamageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) magicdamageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) magicdamageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) magicdamageMultiplier *= 3.5;
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
@@ -2579,8 +2599,7 @@ use namespace CoC;
 			}
 			//Apply magic damage resistance percentage.
 			damage *= damageMagicalPercent() / 100;
-			if (magicdamageMultiplier < 0) magicdamageMultiplier = 0;
-			return int(damage * magicdamageMultiplier);
+			return damage;
 		}
 
 		public override function damageFirePercent():Number {
@@ -2609,57 +2628,9 @@ use namespace CoC;
 			return mult;
 		}
 		public override function takeFireDamage(damage:Number, display:Boolean = false):Number {
-			//Round
-			if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/4*3;
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				else {
-					damage = reduceFireDamage(damage);
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
-					if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
-						createStatusEffect(StatusEffects.HydraRegenerationDisabled, 0, 0, 0, 0);
-						outputText(" <b>The fire damage you took suddenly weakened your ability to regenerate!</b>");
-					}
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
+			return takeDamage(damage, 5, display);
 		}
 		public function reduceFireDamage(damage:Number):Number {
-			var firedamageMultiplier:Number = 1;
-			//EZ MOAD half damage
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) firedamageMultiplier *= 0.1;
-			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) firedamageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) firedamageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) firedamageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) firedamageMultiplier *= 3.5;
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
@@ -2681,8 +2652,7 @@ use namespace CoC;
 			}
 			//Apply fire damage resistance percentage.
 			damage *= damageFirePercent() / 100;
-			if (firedamageMultiplier < 0) firedamageMultiplier = 0;
-			return int(damage * firedamageMultiplier);
+			return damage;
 		}
 
 		public override function damageIcePercent():Number {
@@ -2717,52 +2687,9 @@ use namespace CoC;
 			return mult;
 		}
 		public override function takeIceDamage(damage:Number, display:Boolean = false):Number {
-			//Round
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				else {
-					damage = reduceIceDamage(damage);
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
+			return takeDamage(damage, 6, display);
 		}
 		public function reduceIceDamage(damage:Number):Number {
-			var icedamageMultiplier:Number = 1;
-			//EZ MOAD half damage
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) icedamageMultiplier *= 0.1;
-			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) icedamageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) icedamageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) icedamageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) icedamageMultiplier *= 3.5;
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
@@ -2784,8 +2711,7 @@ use namespace CoC;
 			}
 			//Apply ice damage resistance percentage.
 			damage *= damageIcePercent() / 100;
-			if (icedamageMultiplier < 0) icedamageMultiplier = 0;
-			return int(damage * icedamageMultiplier);
+			return damage;
 		}
 
 		public override function damageLightningPercent():Number {
@@ -2814,52 +2740,9 @@ use namespace CoC;
 			return mult;
 		}
 		public override function takeLightningDamage(damage:Number, display:Boolean = false):Number {
-			//Round
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				else {
-					damage = reduceLightningDamage(damage);
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
+			return takeDamage(damage, 7, display);
 		}
 		public function reduceLightningDamage(damage:Number):Number {
-			var lightningdamageMultiplier:Number = 1;
-			//EZ MOAD half damage
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) lightningdamageMultiplier *= 0.1;
-			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) lightningdamageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) lightningdamageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) lightningdamageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) lightningdamageMultiplier *= 3.5;
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
@@ -2881,8 +2764,7 @@ use namespace CoC;
 			}
 			//Apply lightning damage resistance percentage.
 			damage *= damageLightningPercent() / 100;
-			if (lightningdamageMultiplier < 0) lightningdamageMultiplier = 0;
-			return int(damage * lightningdamageMultiplier);
+			return damage;
 		}
 
 		public override function damageDarknessPercent():Number {
@@ -2903,52 +2785,9 @@ use namespace CoC;
 			return mult;
 		}
 		public override function takeDarknessDamage(damage:Number, display:Boolean = false):Number {
-			//Round
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				else {
-					damage = reduceDarknessDamage(damage);
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
+			return takeDamage(damage, 8, display);
 		}
 		public function reduceDarknessDamage(damage:Number):Number {
-			var darknessdamageMultiplier:Number = 1;
-			//EZ MOAD half damage
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) darknessdamageMultiplier *= 0.1;
-			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) darknessdamageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) darknessdamageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) darknessdamageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) darknessdamageMultiplier *= 3.5;
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
@@ -2970,8 +2809,7 @@ use namespace CoC;
 			}
 			//Apply darkness damage resistance percentage.
 			damage *= damageDarknessPercent() / 100;
-			if (darknessdamageMultiplier < 0) darknessdamageMultiplier = 0;
-			return int(damage * darknessdamageMultiplier);
+			return damage;
 		}
 
 		public override function damagePoisonPercent():Number {
@@ -2994,52 +2832,9 @@ use namespace CoC;
 			return mult;
 		}
 		public override function takePoisonDamage(damage:Number, display:Boolean = false):Number {
-			//Round
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				else {
-					damage = reducePoisonDamage(damage);
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
+			return takeDamage(damage, 9, display);
 		}
 		public function reducePoisonDamage(damage:Number):Number {
-			var poisondamageMultiplier:Number = 1;
-			//EZ MOAD half damage
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) poisondamageMultiplier *= 0.1;
-			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) poisondamageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) poisondamageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) poisondamageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) poisondamageMultiplier *= 3.5;
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
@@ -3061,8 +2856,187 @@ use namespace CoC;
 			}
 			//Apply poison damage resistance percentage.
 			damage *= damagePoisonPercent() / 100;
-			if (poisondamageMultiplier < 0) poisondamageMultiplier = 0;
-			return int(damage * poisondamageMultiplier);
+			return damage;
+		}
+
+		public override function damageWindPercent():Number {
+			var mult:Number = damageMagicalPercent();/*
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
+			if (hasStatusEffect(StatusEffects.DaoOfWind) && (statusEffectv2(StatusEffects.DaoOfWind) > 2)) mult -= 10;
+			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
+				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
+			}
+			//Caps damage reduction at 100%
+			if (mult < 0) mult = 0;
+			return mult;
+		}
+		public override function takeWindDamage(damage:Number, display:Boolean = false):Number {
+			return takeDamage(damage, 10, display);
+		}
+		public function reduceWindDamage(damage:Number):Number {
+			//Opponents can critical too!
+			var critChanceMonster:int = 5;
+			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
+				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
+				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
+			}
+			if (rand(100) < critChanceMonster) {
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
+				var dr:Number = damage * bouncybodyDR();
+				damage -= dr;
+				damage = Math.round(damage);
+			}
+			//Apply poison damage resistance percentage.
+			damage *= damageWindPercent() / 100;
+			return damage;
+		}
+
+		public override function damageWaterPercent():Number {
+			var mult:Number = damageMagicalPercent();/*
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
+			if (hasStatusEffect(StatusEffects.DaoOfWater) && (statusEffectv2(StatusEffects.DaoOfWater) > 2)) mult -= 10;
+			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
+				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
+			}
+			//Caps damage reduction at 100%
+			if (mult < 0) mult = 0;
+			return mult;
+		}
+		public override function takeWaterDamage(damage:Number, display:Boolean = false):Number {
+			return takeDamage(damage, 11, display);
+		}
+		public function reduceWaterDamage(damage:Number):Number {
+			//Opponents can critical too!
+			var critChanceMonster:int = 5;
+			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
+				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
+				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
+			}
+			if (rand(100) < critChanceMonster) {
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
+				var dr:Number = damage * bouncybodyDR();
+				damage -= dr;
+				damage = Math.round(damage);
+			}
+			//Apply poison damage resistance percentage.
+			damage *= damagePoisonPercent() / 100;
+			return damage;
+		}
+
+		public override function damageEarthPercent():Number {
+			var mult:Number = damageMagicalPercent();/*
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
+			if (hasStatusEffect(StatusEffects.DaoOfEarth) && (statusEffectv2(StatusEffects.DaoOfEarth) > 2)) mult -= 10;
+			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
+				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
+			}
+			//Caps damage reduction at 100%
+			if (mult < 0) mult = 0;
+			return mult;
+		}
+		public override function takeEarthDamage(damage:Number, display:Boolean = false):Number {
+			return takeDamage(damage, 12, display);
+		}
+		public function reduceEarthDamage(damage:Number):Number {
+			//Opponents can critical too!
+			var critChanceMonster:int = 5;
+			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
+				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
+				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
+			}
+			if (rand(100) < critChanceMonster) {
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
+				var dr:Number = damage * bouncybodyDR();
+				damage -= dr;
+				damage = Math.round(damage);
+			}
+			//Apply poison damage resistance percentage.
+			damage *= damagePoisonPercent() / 100;
+			return damage;
+		}
+
+		public override function damageAcidPercent():Number {
+			var mult:Number = damageMagicalPercent();/*
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
+			if (hasStatusEffect(StatusEffects.DaoOfAcid) && (statusEffectv2(StatusEffects.DaoOfAcid) > 2)) mult -= 10;
+			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
+				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
+			}
+			//Caps damage reduction at 100%
+			if (mult < 0) mult = 0;
+			return mult;
+		}
+		public override function takeAcidDamage(damage:Number, display:Boolean = false):Number {
+			return takeDamage(damage, 13, display);
+		}
+		public function reduceAcidDamage(damage:Number):Number {
+			//Opponents can critical too!
+			var critChanceMonster:int = 5;
+			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
+				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
+				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
+			}
+			if (rand(100) < critChanceMonster) {
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
+				var dr:Number = damage * bouncybodyDR();
+				damage -= dr;
+				damage = Math.round(damage);
+			}
+			//Apply poison damage resistance percentage.
+			damage *= damagePoisonPercent() / 100;
+			return damage;
 		}
 
 		public function henchmanBasedInvulnerabilityFrame():Boolean {
@@ -10473,6 +10447,8 @@ use namespace CoC;
 			var prestigeJobs1:Number = 0;
 			if (hasPerk(PerkLib.PrestigeJobArcaneArcher))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobArchpriest))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBerserker))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBindmaster))
@@ -15341,6 +15317,14 @@ use namespace CoC;
 				case 2: return female;
 				default: return old;
 			}
+		}
+
+		public function get areBaseStatsMaxed(): Boolean {
+			if (strStat.core.value < strStat.core.max || touStat.core.value < touStat.core.max || speStat.core.value < speStat.core.max || intStat.core.value < intStat.core.max || wisStat.core.value < wisStat.core.max || libStat.core.value < libStat.core.max) {
+				return false;
+			}
+
+			return true;
 		}
 
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {

@@ -958,6 +958,22 @@ public class Creature extends Utils
 			HP = boundFloat(0,HP-Math.round(damage),HP);
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}
+		public function takeWindDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeWaterDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeEarthDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeAcidDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
 		public function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
 			if (applyRes) lustDmg *= lustPercent()/100;
 			lust = boundFloat(minLust(),lust+Math.round(lustDmg),maxLust());
@@ -4003,38 +4019,47 @@ public class Creature extends Utils
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageRangePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageMagicalPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageFirePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageIcePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageLightningPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageDarknessPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damagePoisonPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageWindPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageWaterPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageEarthPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageAcidPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
