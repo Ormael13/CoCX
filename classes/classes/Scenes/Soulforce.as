@@ -230,7 +230,7 @@ use namespace CoC;
 			//9
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
-			addButton(12, "Atlach Test", SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG).hint("Trigger Atlach scenes.");
+			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -244,7 +244,7 @@ use namespace CoC;
 			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			//8
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) addButton(8, ":Re", AddMaxBackpack5).hint("Rewind Evangeline.");
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			addButton(10, "All4HiddenPrestige", AddMaxBackpack03).hint("A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
@@ -261,6 +261,7 @@ use namespace CoC;
 		public function AddMaxBackpack03():void {
 			outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobArchpriest)) player.createPerk(PerkLib.PrestigeJobArchpriest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
@@ -268,6 +269,7 @@ use namespace CoC;
 			if (!player.hasPerk(PerkLib.PrestigeJobSentinel)) player.createPerk(PerkLib.PrestigeJobSentinel, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) player.createPerk(PerkLib.PrestigeJobSoulArtMaster, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSpellKnight)) player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobStalker)) player.createPerk(PerkLib.PrestigeJobStalker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobTempest)) player.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
@@ -314,6 +316,25 @@ use namespace CoC;
 				outputText("Get a Life... i mean Wendigo Psychosis...");
 				doNext(submenucuzwhynot);
 			}
+		}
+		public function AddMaxBackpack5():void {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
+			if (flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] > 0) flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] = 0;
+			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] > 0) flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
+			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 0;
+			if (flags[kFLAGS.EVANGELINE_02330] > 0) flags[kFLAGS.EVANGELINE_02330] = 0;
+			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
+			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
+			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
+			outputText("Rewind Evangeline ^^");
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack6():void {
+			var floor:Number = rand(3);
+			floor *= 5;
+			floor += 80;
+			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, floor, 0, 0, 0);
+			SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG();
 		}
 		public function TestDynamicStats():void {
 			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
@@ -2927,6 +2948,11 @@ use namespace CoC;
 			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) outputText("Lightning: "+player.statusEffectv1(StatusEffects.DaoOfLightning)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) outputText("Darkness: "+player.statusEffectv1(StatusEffects.DaoOfDarkness)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) outputText("Poison: "+player.statusEffectv1(StatusEffects.DaoOfPoison)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfWind)) outputText("Wind: "+player.statusEffectv1(StatusEffects.DaoOfWind)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) outputText("Blood: "+player.statusEffectv1(StatusEffects.DaoOfBlood)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfWater)) outputText("Water: "+player.statusEffectv1(StatusEffects.DaoOfWater)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) outputText("Earth: "+player.statusEffectv1(StatusEffects.DaoOfEarth)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) outputText("Acid: "+player.statusEffectv1(StatusEffects.DaoOfAcid)+"\n");
 			menu();
 			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 5) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
 			else addButton(0, "Fire", DaoContemplationsEffect, StatusEffects.DaoOfFire, "Fire");
@@ -2938,6 +2964,16 @@ use namespace CoC;
 			else addButton(3, "Darkness", DaoContemplationsEffect, StatusEffects.DaoOfDarkness, "Darkness");
 			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 5) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
 			else addButton(4, "Poison", DaoContemplationsEffect, StatusEffects.DaoOfPoison, "Poison");
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) addButtonDisabled(5, "Wind", "You reached limit of comprehending this Dao.");
+			else addButton(5, "Wind", DaoContemplationsEffect, StatusEffects.DaoOfWind, "Wind");
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 5) addButtonDisabled(6, "Blood", "You reached limit of comprehending this Dao.");
+			else addButton(6, "Blood", DaoContemplationsEffect, StatusEffects.DaoOfBlood, "Blood");
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 5) addButtonDisabled(7, "Water", "You reached limit of comprehending this Dao.");
+			else addButton(7, "Water", DaoContemplationsEffect, StatusEffects.DaoOfWater, "Water");
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 5) addButtonDisabled(8, "Earth", "You reached limit of comprehending this Dao.");
+			else addButton(8, "Earth", DaoContemplationsEffect, StatusEffects.DaoOfEarth, "Earth");
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 5) addButtonDisabled(9, "Acid", "You reached limit of comprehending this Dao.");
+			else addButton(9, "Acid", DaoContemplationsEffect, StatusEffects.DaoOfAcid, "Acid");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		private function DaoContemplationsEffect(statusEffect:StatusEffectType, daoname:String):void {
@@ -4192,4 +4228,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}

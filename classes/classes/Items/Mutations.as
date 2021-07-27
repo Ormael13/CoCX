@@ -167,7 +167,7 @@ public final class Mutations extends MutationsHelper {
         player.buff("Curse").addStats( {"lib.mult": -0.05} ).permanent();
 		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", -4, "lus", -20);
         else dynStats("lus", -10);
-        player.addCurse("lib", -2, 1);
+        player.addCurse("lib", 2, 1);
         player.refillHunger(15);
     }
 
@@ -208,7 +208,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
         dynStats("lus", -25, "cor", -10);
-        player.addCurse("lib", -10, 1);
+        player.addCurse("lib", 10, 1);
         if (!player.hasPerk(PerkLib.PurityBlessing)) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
     }
 
@@ -466,8 +466,8 @@ public final class Mutations extends MutationsHelper {
     //	}
     public function fasteningpill(player:Player):void {
         outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a sensation of your stomach been full.");
-        if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 24);
-        else player.createStatusEffect(StatusEffects.FastingPill, 73, 0, 0, 0);
+        if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 8);
+        else player.createStatusEffect(StatusEffects.FastingPill, 25, 0, 0, 0);
         statScreenRefresh();
     }
 
@@ -693,12 +693,27 @@ public final class Mutations extends MutationsHelper {
         player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
     }
 
-    public function basicflamesoflovemanual(player:Player):void {
+    public function flamesoflovemanualrankless(player:Player):void {
+        clearOutput();
+        if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
+    }
+
+    public function flamesoflovemanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
                 return;
             }
@@ -713,19 +728,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function higherrankflamesoflovemanual(player:Player):void {
+    public function iciclesoflovemanualrankless(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (burning hot) flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love ( Rank).</b>");
-        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
     }
 
-    public function basiciciclesoflovemanual(player:Player):void {
+    public function iciclesoflovemanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Low Rank).</b>");
                 player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
                 return;
             }
@@ -740,19 +763,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function higherrankiciclesoflovemanual(player:Player):void {
+    public function stormofsisterhoodmanualrankless(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (freezing cold) icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love ( Rank).</b>");
-        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
     }
 
-    public function basicstormofsisterhoodmanual(player:Player):void {
+    public function stormofsisterhoodmanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
                 return;
             }
@@ -767,12 +798,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function basicnightofbrotherhoodmanual(player:Player):void {
+    public function nightofbrotherhoodmanualrankless(player:Player):void {
+        clearOutput();
+        if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
+    }
+
+    public function nightofbrotherhoodmanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
                 return;
             }
@@ -3120,7 +3166,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.cor < 66) outputText("You feel like some kind of freak.");
                 else outputText("You feel like some kind of sexy [skin.type] love-doll.");
                 dynStats("lus", 10, "cor", 2);
-                player.addCurse("spe", -3, 1);
+                player.addCurse("spe", 3, 1);
                 player.addCurse("sen", 8, 1);
             }
             //Change skin to normal if not flawless!
@@ -3933,24 +3979,42 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
 				return;
 			}
+			//Smart enough for Blood Shield and doesnt have it
+			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Shield.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodShield, 0, 0, 0, 0);
+				return;
+			}
 			//Smart enough for Blood Explosion and doesnt have it
-			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
 				return;
-			}/*
-			//Smart enough for  and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			}
+			//Smart enough for Blood Chains and doesnt have it
+			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Chains.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodChains, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for  and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Blood Wave and doesnt have it
+			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Wave.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodWave, 0, 0, 0, 0);
 				return;
-			}*/
+			}
+			//Smart enough for Lifesteal Enchantment and doesnt have it
+			if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Lifesteal Enchantment.</b>");
+				player.createStatusEffect(StatusEffects.KnowsLifestealEnchantment, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Field and doesnt have it
+			if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Field.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodField, 0, 0, 0, 0);
+				return;
+			}
 		}
 	}
 
@@ -3977,23 +4041,29 @@ public final class Mutations extends MutationsHelper {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
 				return;
+			}
+			//Smart enough for Heart Seeker and doesnt have it
+			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Heart Seeker.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeartSeeker, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Dewdrops and doesnt have it
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Dewdrops.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Requiem and doesnt have it
+			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
+				return;
 			}/*
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Scarlet Spirit Charge and doesnt have it
+			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Scarlet Spirit Charge.</b>");
+				player.createStatusEffect(StatusEffects.KnowsScarletSpiritCharge, 0, 0, 0, 0);
 				return;
 			}*/
 		}
@@ -4003,23 +4073,29 @@ public final class Mutations extends MutationsHelper {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
 				return;
+			}
+			//Smart enough for SF Infused Heart Seeker and doesnt have it
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Heart Seeker.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeartSeekerSF, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for SF Infused Blood Dewdrops and doesnt have it
+			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Dewdrops.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for SF Infused Blood Requiem and doesnt have it
+			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
+				return;
 			}/*
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for SF Infused Scarlet Spirit Charge and doesnt have it
+			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Scarlet Spirit Charge.</b>");
+				player.createStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF, 0, 0, 0, 0);
 				return;
 			}*/
 		}
@@ -4084,8 +4160,8 @@ public final class Mutations extends MutationsHelper {
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
             dynStats("str", -1);
-            if (player.str > 70) player.addCurse("str", -1, 1);
-            if (player.str > 90) player.addCurse("str", -2, 1);
+            if (player.str > 70) player.addCurse("str", 1, 1);
+            if (player.str > 90) player.addCurse("str", 2, 1);
             outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.");
             changes++;
         }
@@ -4093,8 +4169,8 @@ public final class Mutations extends MutationsHelper {
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
             dynStats("tou", -1);
-            if (player.tou > 70) player.addCurse("tou", -1, 1);
-            if (player.tou > 90) player.addCurse("tou", -2, 1);
+            if (player.tou > 70) player.addCurse("tou", 1, 1);
+            if (player.tou > 90) player.addCurse("tou", 2, 1);
             changes++;
         }
         //Speed boost
@@ -4308,8 +4384,8 @@ public final class Mutations extends MutationsHelper {
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
             dynStats("str", -1);
-            if (player.str > 70) player.addCurse("str", -2, 1);
-            if (player.str > 90) player.addCurse("str", -2, 1);
+            if (player.str > 70) player.addCurse("str", 2, 1);
+            if (player.str > 90) player.addCurse("str", 2, 1);
             outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.");
             changes++;
         }
@@ -4317,8 +4393,8 @@ public final class Mutations extends MutationsHelper {
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
             dynStats("tou", -1);
-            if (player.tou > 70) player.addCurse("tou", -1, 1);
-            if (player.tou > 90) player.addCurse("tou", -2, 1);
+            if (player.tou > 70) player.addCurse("tou", 1, 1);
+            if (player.tou > 90) player.addCurse("tou", 2, 1);
             changes++;
         }
         //Speed boost
@@ -4710,7 +4786,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Decrease intellect 1-3 points (Down to 40 points)
         if (player.inte > 40 && rand(3) == 0 && changes < changeLimit) {
-            player.addCurse("int", -(1 + rand(3)), 1);
+            player.addCurse("int", (1 + rand(3)), 1);
             changes++;
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
         }
@@ -6146,7 +6222,7 @@ public final class Mutations extends MutationsHelper {
         //Does not add to change total
         if (player.tou > 50 && rand(3) == 0) {
             outputText("\n\nYour body seems to compress momentarily, becoming leaner and noticeably less tough.");
-            player.addCurse("tou", -2, 1);
+            player.addCurse("tou", 2, 1);
         }
         //Intelliloss
         if (type == 0 && rand(3) == 0 && changes < changeLimit) {
@@ -6173,7 +6249,7 @@ public final class Mutations extends MutationsHelper {
             }
             //High intelligence
             else outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this fruit may have actually made you dumber.  It would be best not to eat too much of it.");
-            player.addCurse("int", -1, 1);
+            player.addCurse("int", 1, 1);
             changes++;
         }
         if ((type == 1 || type == 2) && rand(3) == 0 && changes < changeLimit) {
@@ -6183,7 +6259,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (type == 3 && player.inte > 12 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nSomething alerts your senses. You walk on all " + (player.arms.type == Arms.DISPLACER ? "six" : "four") + " sniffing the air around you and growling as your mind regresses into a feral state not unlike that of a beast or rather in your case that of a displacer beast.");
-            player.addCurse("int", -3, 1);
+            player.addCurse("int", 3, 1);
             changes++;
         }
         //Libido gain
@@ -6579,7 +6655,7 @@ public final class Mutations extends MutationsHelper {
         //-Reduces speed down to 50.
         if (player.spe > 50 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
-            player.addCurse("spe", -1, 1);
+            player.addCurse("spe", 1, 1);
             changes++;
         }
         //-Reduces sensitivity.
@@ -6940,13 +7016,13 @@ public final class Mutations extends MutationsHelper {
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
-            player.addCurse("spe", -1, 1);
+            player.addCurse("spe", 1, 1);
             changes++;
         }
         //-Reduces intelligence down to 60.
         if (player.inte > 60 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
-            player.addCurse("int", -1, 1);
+            player.addCurse("int", 1, 1);
             changes++;
         }
         //-Raises libido up to 90.
@@ -7408,7 +7484,7 @@ public final class Mutations extends MutationsHelper {
         //-Reduces intelligence down to 60.
         if (player.inte > 60 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
-            player.addCurse("int", -1, 1);
+            player.addCurse("int", 1, 1);
             changes++;
         }
         //-Raises libido up to 80.
@@ -7449,9 +7525,9 @@ public final class Mutations extends MutationsHelper {
         }
         //-Reduces strength down to 70.
         if (player.str > 70) {
-            player.addCurse("str", -1, 1);
-            if (player.str > 80) player.addCurse("str", -1, 1);
-            if (player.str > 90) player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
+            if (player.str > 80) player.addCurse("str", 1, 1);
+            if (player.str > 90) player.addCurse("str", 1, 1);
             outputText("\n\nYou feel a little weaker, but maybe it's just the liqueur.");
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -8193,7 +8269,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
             if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
             else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
-            player.addCurse("tou", -1, 1);
+            player.addCurse("tou", 1, 1);
         }
         //-Strength increase to 70
         if (rand(3) == 0 && changes < changeLimit) {
@@ -8520,7 +8596,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
             if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
             else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more avian-like in structure?");
-            player.addCurse("tou", -1, 1);
+            player.addCurse("tou", 1, 1);
         }
         //-Strength increase to 70
         if (type == 0 && rand(3) == 0 && changes < changeLimit) {
@@ -8836,7 +8912,7 @@ public final class Mutations extends MutationsHelper {
             else if (player.inte > 10) outputText("\n\nYour mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.");
             //gain dumb (10-1 int):
             else outputText("\n\nYou lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?");
-            player.addCurse("int", -1, 1);
+            player.addCurse("int", 1, 1);
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //****************
@@ -9046,7 +9122,7 @@ public final class Mutations extends MutationsHelper {
         //(If speed>80, decreases speed down to minimum of 80)
         if (player.spe > 80 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou feel like resting high in the trees and waiting for your unsuspecting prey to wander below so you can take them without having to exert yourself.  What an odd thought!");
-            player.addCurse("spe", -2, 1);
+            player.addCurse("spe", 2, 1);
             changes++;
         }
         //(increases sensitivity)
@@ -9072,7 +9148,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nLethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  ");
             if (player.spiderScore() < 4) outputText("Wait, you're not a spider, that doesn't make any sense!");
             else outputText("Well, maybe you should put your nice, heavy abdomen to work.");
-            player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -9427,7 +9503,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
         dynStats("str", 35, "tou", 35, "lib", 5, "lus", 40);
-        player.addCurse("int", -1, 1);
+        player.addCurse("int", 1, 1);
         player.refillHunger(30);
     }
 
@@ -9653,7 +9729,7 @@ public final class Mutations extends MutationsHelper {
         //Stats
         if (player.str > 40 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA sense of helplessness settles upon you as your limbs lose mass, leaving you feeling weaker and punier.");
-            player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit) {
@@ -9827,7 +9903,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
-            player.addCurse("int", -1, 1);
+            player.addCurse("int", 1, 1);
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.thickness > 20) {
@@ -10112,7 +10188,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
             if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
             else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
-            player.addCurse("tou", -1, 1);
+            player.addCurse("tou", 1, 1);
         }
         if (rand(4) == 0 && changes < changeLimit) {
             outputText("\n\nYou roll your tongue over your lips as residual tingles run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");
@@ -10306,10 +10382,10 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && rand(3) == 0 && player.spe > 15 && type == 1) {
             outputText("\n\nUgh why are you even in such a hurry all the time you should just relax and take your time instead of rushing ahead. The world ain't gonna end overnight.");
 			if (player.wings.type != Wings.LEVITATION) outputText(" Heck walking takes so much effort, if you could levitate you would skip on that too.");
-            player.addCurse("spe", -1, 1);
-            if (player.str > 60) player.addCurse("spe", -1, 1);
-            if (player.str > 80) player.addCurse("spe", -1, 1);
-            if (player.str > 90) player.addCurse("spe", -1, 1);
+            player.addCurse("spe", 1, 1);
+            if (player.str > 60) player.addCurse("spe", 1, 1);
+            if (player.str > 80) player.addCurse("spe", 1, 1);
+            if (player.str > 90) player.addCurse("spe", 1, 1);
             changes++;
         }
 		if (rand(4) == 0 && changes < changeLimit && type == 1) {
@@ -10444,20 +10520,20 @@ public final class Mutations extends MutationsHelper {
         //[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
         if (changes < changeLimit && rand(3) == 0 && player.str > 15) {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you are this smart?  You tilt your head a bit, wondering where that thought came from.");
-            player.addCurse("str", -1, 1);
-            if (player.str > 60) player.addCurse("str", -1, 1);
-            if (player.str > 80) player.addCurse("str", -1, 1);
-            if (player.str > 90) player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
+            if (player.str > 60) player.addCurse("str", 1, 1);
+            if (player.str > 80) player.addCurse("str", 1, 1);
+            if (player.str > 90) player.addCurse("str", 1, 1);
             changes++;
         }
         //[decrease Toughness] (to some floor) // 20 or so was my thought here
         if (changes < changeLimit && rand(3) == 0 && player.tou > 20) {
             if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
             else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-            player.addCurse("tou", -1, 1);
-            if (player.tou > 60) player.addCurse("tou", -1, 1);
-            if (player.tou > 80) player.addCurse("tou", -1, 1);
-            if (player.tou > 90) player.addCurse("tou", -1, 1);
+            player.addCurse("tou", 1, 1);
+            if (player.tou > 60) player.addCurse("tou", 1, 1);
+            if (player.tou > 80) player.addCurse("tou", 1, 1);
+            if (player.tou > 90) player.addCurse("tou", 1, 1);
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -10869,7 +10945,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA pinprick sensation radiates from your stomach down to your knees, as though your legs were falling asleep.  Wobbling slightly, you stand up and take a few stumbling steps to work the blood back into them.  The sensation fades, but your grace fails to return and you stumble again.  You'll have to be a little more careful moving around for a while.");
             changes++;
-            player.addCurse("spe", -1, 1);
+            player.addCurse("spe", 1, 1);
         }
         //- corruption increases by 1 up to low threshold (~20)
         if (rand(3) == 0 && player.cor < 20 && changes < changeLimit) {
@@ -10975,20 +11051,20 @@ public final class Mutations extends MutationsHelper {
         //[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
         if (changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
-            player.addCurse("str", -1, 1);
-            if (player.str > 60) player.addCurse("str", -1, 1);
-            if (player.str > 80) player.addCurse("str", -1, 1);
-            if (player.str > 90) player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
+            if (player.str > 60) player.addCurse("str", 1, 1);
+            if (player.str > 80) player.addCurse("str", 1, 1);
+            if (player.str > 90) player.addCurse("str", 1, 1);
             changes++;
         }
         //[decrease Toughness] (to some floor) // 20 or so was my thought here
         if (changes < changeLimit && rand(3) == 0) {
             if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
             else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-            player.addCurse("tou", -1, 1);
-            if (player.tou > 60) player.addCurse("tou", -1, 1);
-            if (player.tou > 80) player.addCurse("tou", -1, 1);
-            if (player.tou > 90) player.addCurse("tou", -1, 1);
+            player.addCurse("tou", 1, 1);
+            if (player.tou > 60) player.addCurse("tou", 1, 1);
+            if (player.tou > 80) player.addCurse("tou", 1, 1);
+            if (player.tou > 90) player.addCurse("tou", 1, 1);
             changes++;
         }
 
@@ -11309,13 +11385,13 @@ public final class Mutations extends MutationsHelper {
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
-            player.addCurse("spe", -1, 1);
+            player.addCurse("spe", 1, 1);
             changes++;
         }
         //-Reduces intelligence down to 60.
         if (player.inte > 60 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
-            player.addCurse("int", -1, 1);
+            player.addCurse("int", 1, 1);
             changes++;
         }
         //-Raises libido up to 90.
@@ -11624,7 +11700,7 @@ public final class Mutations extends MutationsHelper {
         //-30 fatigue, -2 libido, -10 lust]
         fatigue(-40);
         dynStats("lus", -100, "cor", (-4 - rand(3)), "scale", false);
-        player.addCurse("lib", -2, 1);
+        player.addCurse("lib", 2, 1);
         HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
         player.refillHunger(30);
         if (player.cor > 50) dynStats("cor", -2);
@@ -11704,10 +11780,10 @@ public final class Mutations extends MutationsHelper {
         //[decrease Strength toward 15]
         mutationStep(player.str > 15, mystic ? 2 : 3, function ():void {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
-            player.addCurse("str", -1, 1);
-            if (player.str > 70) player.addCurse("str", -1, 1);
-            if (player.str > 50) player.addCurse("str", -1, 1);
-            if (player.str > 30) player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
+            if (player.str > 70) player.addCurse("str", 1, 1);
+            if (player.str > 50) player.addCurse("str", 1, 1);
+            if (player.str > 30) player.addCurse("str", 1, 1);
         });
         //[decrease Toughness toward 20]
         mutationStep(player.tou > 20, mystic ? 2 : 3, function ():void {
@@ -11716,7 +11792,7 @@ public final class Mutations extends MutationsHelper {
             //from 66 or greater toughness
             else outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
             dynStats("tou", -1);
-            if (player.tou > 66) player.addCurse("tou", -1, 1);
+            if (player.tou > 66) player.addCurse("tou", 1, 1);
         });
         mutationStep(mystic && player.cor < 100, 2, function ():void {
             if (player.cor < 33) outputText("\n\nA sense of dirtiness comes over you, like the magic of this gem is doing some perverse impropriety to you.");
@@ -12194,7 +12270,7 @@ public final class Mutations extends MutationsHelper {
         //Strength Loss:
         else if (player.str > 40 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA sense of helplessness settles upon you as your limbs lose mass, leaving you feeling weaker and punier.");
-            player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
             changes++;
         }
         //Sensitivity Increase:
@@ -12498,8 +12574,8 @@ public final class Mutations extends MutationsHelper {
         //lose toughness to floor of 50
         if (rand(4) && player.tou > 50 && changes < changeLimit) {
             outputText("\n\nYou find yourself wishing you could just sit around and eat all day, and spend a while lazing about and doing nothing before you can rouse yourself to get moving.");
-            if (player.tou > 75) player.addCurse("tou", -1, 1);
-            player.addCurse("tou", -1, 1);
+            if (player.tou > 75) player.addCurse("tou", 1, 1);
+            player.addCurse("tou", 1, 1);
             changes++;
         }
 
@@ -12737,9 +12813,9 @@ public final class Mutations extends MutationsHelper {
         if (player.tou > 50 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou feel a bit less sturdy, both physically and mentally.  In fact, you'd prefer to have somewhere to hide for the time being, until your confidence returns.  The next few minutes are passed in a mousey funk - even afterward, you can't quite regain the same sense of invincibility you had before.");
             changes++;
-            player.addCurse("tou", -1, 1);
-            if (player.tou >= 75) player.addCurse("tou", -1, 1);
-            if (player.tou >= 90) player.addCurse("tou", -1, 1);
+            player.addCurse("tou", 1, 1);
+            if (player.tou >= 75) player.addCurse("tou", 1, 1);
+            if (player.tou >= 90) player.addCurse("tou", 1, 1);
         }
 
         //SEXYYYYYYYYYYY
@@ -13063,7 +13139,7 @@ public final class Mutations extends MutationsHelper {
             //Get warned!
             if (flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
                 outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
-                player.addCurse("int", -(5 + rand(3)), 1);
+                player.addCurse("int", (5 + rand(3)), 1);
                 flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
             }
             //BEEN WARNED! BAD END! DUN DUN DUN
@@ -13329,12 +13405,12 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.spe > 50 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
-            player.addCurse("spe", -(1 + rand(3)), 1);
+            player.addCurse("spe", (1 + rand(3)), 1);
             changes++;
         }
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
-            player.addCurse("int", -(1 + rand(3)), 1);
+            player.addCurse("int", (1 + rand(3)), 1);
             changes++;
         }
         //-----------------------
@@ -13344,7 +13420,7 @@ public final class Mutations extends MutationsHelper {
             if (flags[kFLAGS.PIG_BAD_END_WARNING] == 0) {
                 outputText("\n\nYou find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
                 flags[kFLAGS.PIG_BAD_END_WARNING] = 1;
-                player.addCurse("int", -3, 1);
+                player.addCurse("int", 3, 1);
             } else {
                 outputText("\n\nAs you down the last of your truffle, your entire body begins to convulse violently. Your vision becomes blurry, and you black out.");
                 outputText("\n\nWhen you awaken, you are greeted by a large dog licking at your face. The dog seems oddly familiar. \"<i>Bessy, whatcha doin’ girl?</i>\" a voice calls. The voice seems familiar as well. A funny-looking pig on two legs soon appears at the dog’s side. \"<i>Now, now, what do we have here?</i>\" The pig inspects you for a moment, eventually finding a hint of pigtail truffle on your snout.");
@@ -14458,7 +14534,7 @@ public final class Mutations extends MutationsHelper {
         //int down to 15
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
-            player.addCurse("int", -1, 1);
+            player.addCurse("int", 1, 1);
             changes++;
         }
         //lib up to 75
@@ -14630,7 +14706,7 @@ public final class Mutations extends MutationsHelper {
         //tou down to 20
         if (player.tou > 20 && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\nAs the cold spreads through your frame, your vitality drains away and you feel oddly fragile, almost as if you were made of the ice yourself.");
-            player.addCurse("tou", -1, 1);
+            player.addCurse("tou", 1, 1);
             changes++;
         }
         //spe up to 80
@@ -15204,7 +15280,7 @@ public final class Mutations extends MutationsHelper {
         if (player.inte > 15 && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\nYour train of thought begins to slow down as if your head been dipped into cold water for a few minutes.");
             if (player.inte < 30) outputText("  You're starting to have trouble speaking normally, using pronouns like I less and less and [name] more often than not when describing yourself. Ugh that's fine, doesn't matter if you're not the smartest person on Mareth so long as you got a body that can do the talking for you or fuck some nice mate into doing it in your stead.");
-            player.addCurse("int", -20, 2);
+            player.addCurse("int", 20, 2);
             changes++;
         }
 
@@ -15283,8 +15359,8 @@ public final class Mutations extends MutationsHelper {
                 outputText(" until they flake away to nothing. This said something soon replaces them.");
                 setHornType(Horns.NONE, 0);
             }
-            setHornType(Horns.FROSTWYRM, 2);
-            outputText("\n\nYou write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two large spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>");
+            setHornType(Horns.FROSTWYRM, 30);
+            outputText("\n\nYou write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two massive spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>");
             changes++;
         }
         //Gain frost wyrm Ears
@@ -15473,10 +15549,10 @@ public final class Mutations extends MutationsHelper {
         //-Decrease strength toward 30
         if (changes < changeLimit && rand(3) == 0 && player.str > 30) {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can beat your foes with superior speed?");
-            player.addCurse("str", -1, 1);
-            if (player.str > 60) player.addCurse("str", -1, 1);
-            if (player.str > 80) player.addCurse("str", -1, 1);
-            if (player.str > 90) player.addCurse("str", -1, 1);
+            player.addCurse("str", 1, 1);
+            if (player.str > 60) player.addCurse("str", 1, 1);
+            if (player.str > 80) player.addCurse("str", 1, 1);
+            if (player.str > 90) player.addCurse("str", 1, 1);
             changes++;
         }
 

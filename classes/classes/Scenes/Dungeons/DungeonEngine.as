@@ -544,8 +544,15 @@ public class DungeonEngine extends BaseContent
             if (player.lust >= 30) addButton(5, "Masturbate", SceneLib.masturbation.masturbateGo);
 			else addButtonDisabled(5, "Masturbate", "Req. 30+ lust.");
 			addButton(9, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-            addButton(14, "Exit", ebonlabyrinth.exitDungeon);
+            addButton(14, "Exit", AreYouSureAboutThat);
 			setTopButtons();
+		}
+		private function AreYouSureAboutThat():void {
+			clearOutput();
+			outputText("\"<i>Are you sure about that?</i>\"");
+			menu();
+			addButton(1, "No", playerMenu);
+			addButton(3, "Yes", ebonlabyrinth.exitDungeon);
 		}
 		
 	}

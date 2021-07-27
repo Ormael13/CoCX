@@ -1004,99 +1004,99 @@ public function defeatIsabella():void {
 			else flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 1;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 24);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 24, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 1;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 30);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 30, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 2;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 36);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 36, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 3;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 42);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 42, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 4;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 48);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 48, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 5;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 54);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 54, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 6;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 60);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 60, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 7;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 66);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 66, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 8;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 72);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 72, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 9;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 78);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 78, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 10;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ISABELLA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 84);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 84, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 11;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ISABELLA_LVL_UP] == 11) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 90);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 90, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 12;
 		}
 		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.ISABELLA_LVL_UP] == 12) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 96);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 96, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 13;
 		}
 	}
 	if(monster.statusEffectv1(StatusEffects.Sparring) == 2) {
 		outputText("You give the ");
-		if(monster.HP < 1) outputText("damage-dazed");
+		if(monster.HP <= monster.minHP()) outputText("damage-dazed");
 		else outputText("arousal-addled");
 		outputText(" cow-girl a push, and she immediately slumps down, defeated.  Since this was just a light-hearted sparring match, you help her up and back to camp, where she can ");
-		if(monster.HP < 1) outputText("recuperate.");
+		if(monster.HP <= monster.minHP()) outputText("recuperate.");
 		else outputText("take care of her needs (or be taken care of).");
 		cleanupAfterCombat();
 		return;
 	}
 	outputText("You push the ");
-	if(monster.HP < 1) outputText("damage-dazed");
+	if(monster.HP <= monster.minHP()) outputText("damage-dazed");
 	else outputText("arousal-addled");
 	outputText(" cow-bitch, feeling your hand sink into one of her pillowy tits for a half-second before she tips and falls squarely onto her wide ass.  Isabella ");
-	if(monster.HP < 1) outputText("gr");
+	if(monster.HP <= monster.minHP()) outputText("gr");
 	else outputText("m");
 	outputText("oans, \"<i>");
 	if (monster.HP < 1)
@@ -1111,7 +1111,7 @@ public function defeatIsabella():void {
 		else outputText("I didn't want this! Please, I have so much milk... dink my moOOO-ilk!");
 	}
 	outputText("</i>\"  ");
-	if(monster.HP < 1) outputText("She acts so haughty, but she can't hide how her nipples are tenting her sheer top.");
+	if(monster.HP <= monster.minHP()) outputText("She acts so haughty, but she can't hide how her nipples are tenting her sheer top.");
 	else outputText("She acts like all she needs is a milking, but you can smell the dampness she's trickling from 'down under'.");
 	if (player.lust < 33) {
 		cleanupAfterCombat();
@@ -1234,7 +1234,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	outputText("Milk, huh?  No, that won't do.  You tell the ");
 	if(monster.lust >= monster.maxLust()) outputText("horny ");
 	outputText("cow-slut to roll over and get on all fours.  ");
-	if(monster.HP < 1) outputText("She struggles to comply, heaving her hefty body until she's wobbling on all fours, nearly falling into the dirt.");
+	if(monster.HP <= monster.minHP()) outputText("She struggles to comply, heaving her hefty body until she's wobbling on all fours, nearly falling into the dirt.");
 	else outputText("She struggles to comply, pulling her hands away from her erogenous zones as she wobbles onto shaky hands and knees.");
 	outputText("  You circle her, eyeing her like a predator salivating over a raw steak.  She shivers, sending ripples of motion through her plump, sun-kissed backside and swinging melons.  Her skirt rides high, ruffled and pushed up on her back, but Isabella dares not lower it under your watchful gaze.\n\n");
 	
@@ -1254,7 +1254,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	outputText(".  Isabella looks back with a mixture of fear and primal lust.  She doesn't seem to realize she's begun to wiggle her hips back and forth, teasing you with the plump, sweat-soaked curves of ass and the snake-like motions of her tail.\n\n");
 	
 	outputText("Isabella moans");
-	if(monster.HP < 1) outputText(", forgetting her wounds between the sight of your naked body and her lewd, compromised position");
+	if(monster.HP <= monster.minHP()) outputText(", forgetting her wounds between the sight of your naked body and her lewd, compromised position");
 	else outputText(" lustily, begging to be penetrated with her body while her voice tries to make love to your ears");
 	if (isabellaAccent()) outputText(".  \"<i>Vould you... put it inside me?  Please, I'm so sorry I didn't let you ravish me.  Take me, violate me vith your spear of lust!</i>\"");
 	else outputText(".  \"<i>Would you... put it inside me? Please, I'm so sorry I didn't let you ravish me. Take me, violate me with your spear of lust!</i>\"");
@@ -1525,7 +1525,7 @@ public function vaginalProdNPokeIsabella():void {
 	if (isabellaAccent()) outputText("\"<i>But vhy not?  Mein milk is so gooood.</i>\"");
 	else outputText("\"<i>But why not? My milk is so goood.</i>\"");
 	outputText(" The last word emphasizes the 'o's so much that it comes out almost like a moo.  You push her legs apart and flip up her skirt to reveal the cleft of her womanhood.  She didn't even bother with panties, so there's nothing to protect her ");
-	if(monster.HP < 1) outputText("slowly-engorging");
+	if(monster.HP <= monster.minHP()) outputText("slowly-engorging");
 	else outputText("juice-slicked");
 	outputText(" pussy-lips.  You look up at her and comment on the state of her vagina, asking if she's sure she didn't want it this way.\n\n");
 	

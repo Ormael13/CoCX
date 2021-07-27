@@ -69,7 +69,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
-					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || game.weapons.NPHBLDE,
+					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
 					PlayerHasASwordunholy:player.weapon == game.weapons.EBNYBLD,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
@@ -79,7 +79,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo(),
 					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
 					//PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
-					PlayerHasATetsu: player.weapon == game.weapons.OTETSU,
+					PlayerHasATetsu: player.weapon == game.weapons.OTETSU || player.weapon == game.weapons.POCDEST || player.weapon == game.weapons.DOCDEST,
 					PlayerHasATetsuHoly:player.weapon == game.weapons.POCDEST,
 					PlayerHasATetsuUnholy:player.weapon == game.weapons.DOCDEST,
 

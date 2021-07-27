@@ -222,19 +222,19 @@ private function alraunezeMeYes0():void {
 	outputText("<i>\"Mother...?</i>\"\n\n");
 	outputText("Marae warmly responds. <i>\"Good morning, my new daughter. I am glad that you appreciate your new form. I took the liberty of making you a body as close to my own as possible, within reason, of course, not hindering your ability to move around, for instance. Otherwise, it would have been difficult to continue your mission as my emissary.</i>\"\n\n");
 	outputText("You nod, appreciative of what she has done for you, as you feel as if you are now connected to her by some sort of invisible link. Knowing what must be done, you head back to your camp, leaving your newly acquired second mother to her affairs.\n\n");
-	if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 	}
-	if (player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftButtslut)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
 	}
-	if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Stud)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 	}
-	if (player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftProfractory)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 	}

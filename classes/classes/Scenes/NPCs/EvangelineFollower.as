@@ -1,10 +1,10 @@
+/**
+ * ...
+ * @author Ormael
+ */
+
 package classes.Scenes.NPCs 
 {
-	/**
-	 * ...
-	 * @author Ormael
-	 */
-	
 	import classes.*;
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.Eyes;
@@ -24,46 +24,85 @@ package classes.Scenes.NPCs
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRange;
 	import classes.Items.WeaponRangeLib;
+	import classes.internals.SaveableState;
+	import coc.view.ButtonDataList;
 	
-	public class EvangelineFollower extends NPCAwareContent
-	{	
+	public class EvangelineFollower extends NPCAwareContent implements SaveableState
+	{
+		public static var EvangelinePeepTalkOnInternalMutations:Number;
+		public static var EvangelineGemsPurse:Number;
+		public static var EvangelineTalks:Number;
+		public static var EvangelineAffectionMeter:Number;
+		public static var EvangelineFollowerStage:Number;
+
+		public function stateObjectName():String {
+			return "EvangelineFollower";
+		}
+
+		public function resetState():void {
+			EvangelinePeepTalkOnInternalMutations = 0;
+			EvangelineGemsPurse = 0;
+			EvangelineTalks = 0;
+			EvangelineAffectionMeter = 0;
+			EvangelineFollowerStage = 0;
+		}
+
+		public function saveToObject():Object {
+			return {
+				"EvangelinePeepTalkOnInternalMutations": EvangelinePeepTalkOnInternalMutations,
+				"EvangelineGemsPurse": EvangelineGemsPurse,
+				"EvangelineTalks": EvangelineTalks,
+				"EvangelineAffectionMeter": EvangelineAffectionMeter,
+				"EvangelineFollowerStage": EvangelineFollowerStage
+			};
+		}
+
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			if (o) {
+				EvangelinePeepTalkOnInternalMutations = o["EvangelinePeepTalkOnInternalMutations"];
+				EvangelineGemsPurse = o["EvangelineGemsPurse"];
+				EvangelineTalks = o["EvangelineTalks"];
+				EvangelineAffectionMeter = o["EvangelineAffectionMeter"];
+				EvangelineFollowerStage = o["EvangelineFollowerStage"];
+			} else {
+				// loading from old save
+				resetState();
+			}
+		}
+
 		public function EvangelineFollower() 
 		{
+			Saves.registerSaveableState(this);
 		}
 
 	public function evangelineAffection(changes:Number = 0):Number
 		{
-			flags[kFLAGS.EVANGELINE_AFFECTION] += changes;
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && flags[kFLAGS.EVANGELINE_AFFECTION] > 70) flags[kFLAGS.EVANGELINE_AFFECTION] = 70;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && flags[kFLAGS.EVANGELINE_AFFECTION] > 65) flags[kFLAGS.EVANGELINE_AFFECTION] = 65;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && flags[kFLAGS.EVANGELINE_AFFECTION] > 60) flags[kFLAGS.EVANGELINE_AFFECTION] = 60;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && flags[kFLAGS.EVANGELINE_AFFECTION] > 55) flags[kFLAGS.EVANGELINE_AFFECTION] = 55;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && flags[kFLAGS.EVANGELINE_AFFECTION] > 50) flags[kFLAGS.EVANGELINE_AFFECTION] = 50;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && flags[kFLAGS.EVANGELINE_AFFECTION] > 40) flags[kFLAGS.EVANGELINE_AFFECTION] = 40;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && flags[kFLAGS.EVANGELINE_AFFECTION] > 35) flags[kFLAGS.EVANGELINE_AFFECTION] = 35;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && flags[kFLAGS.EVANGELINE_AFFECTION] > 30) flags[kFLAGS.EVANGELINE_AFFECTION] = 30;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && flags[kFLAGS.EVANGELINE_AFFECTION] > 25) flags[kFLAGS.EVANGELINE_AFFECTION] = 25;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && flags[kFLAGS.EVANGELINE_AFFECTION] > 20) flags[kFLAGS.EVANGELINE_AFFECTION] = 20;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && flags[kFLAGS.EVANGELINE_AFFECTION] > 15) flags[kFLAGS.EVANGELINE_AFFECTION] = 15;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 0 && flags[kFLAGS.EVANGELINE_AFFECTION] > 10) flags[kFLAGS.EVANGELINE_AFFECTION] = 10;
-			else if (flags[kFLAGS.EVANGELINE_AFFECTION] < 0) flags[kFLAGS.EVANGELINE_AFFECTION] = 0;
-			return flags[kFLAGS.EVANGELINE_AFFECTION];
+			EvangelineAffectionMeter += changes;
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && EvangelineAffectionMeter > 70) EvangelineAffectionMeter = 75;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && EvangelineAffectionMeter > 65) EvangelineAffectionMeter = 70;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && EvangelineAffectionMeter > 60) EvangelineAffectionMeter = 67;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineAffectionMeter > 55) EvangelineAffectionMeter = 60;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineAffectionMeter > 50) EvangelineAffectionMeter = 56;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 50;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineAffectionMeter > 35) EvangelineAffectionMeter = 45;
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1 && flags[kFLAGS.EVANGELINE_LVL_UP] < 5 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 40;//current cap
+			else if (EvangelineAffectionMeter < 0) EvangelineAffectionMeter = 0;
+			return EvangelineAffectionMeter;
 		}
 	
 public function enterTheEvangeline():void
 {
 	clearOutput();
-	flags[kFLAGS.EVANGELINE_AFFECTION] = 1;
+	EvangelineAffectionMeter = 1;
 	outputText("You head out to explore the area when a scream surprises you.\n\n");
 	outputText("\"<i>H-help!!</i>\"\n\n");
 	outputText("You turn around only for a woman to suddenly flings herself into your arms. She looks like she’s has been roughed up a bit - her simple peasant’s robes have been torn and frayed, and her forehead is streaked with dirt, as if she was dragged through it.\n\n");
 	outputText("\"<i>Th-thank gods! Please, you must help me!</i>\" she cries, darting behind you as if to hide. \"<i>I was wandering over the wasteland trying to find a safe place to hide, and, and... the wretched, terrible little things attacked me!</i>\"\n\n");
-	outputText("On top of everything, you’re worried that this happened a bit too soon after you left your camp, and you’re about to question her, but you're interrupted as an imp flies out of the sky, growling and clawing at you menacingly. If not for the closeness to your camp you would not care too much, but better to deal with this demon spawn now than later see a whole swarm of them storming your camp. At the moment you were about to charge the enemy you felt a strange wetness on your neck’s nape...or so you thought you felt it.");
+	outputText("On top of everything, you’re worried that this happened a bit too soon after you left your camp, and you’re about to question her, but you're interrupted as an imp flies out of the sky, growling and clawing at you menacingly. If not for the closeness to your camp you would not care too much, but better to deal with this demon spawn now than later see a whole swarm of them storming your camp.");
 	if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
 	}
-	player.createStatusEffect(StatusEffects.EzekielCurse, 0, 0, 0, 0);
 	startCombat(new Imp());
 	doNext(playerMenu);
 }
@@ -74,9 +113,9 @@ public function winEvangelineImpFight():void
 	outputText("\"<i>Is it safe now?</i>\" Right after you showed that imp who is the champion here, the woman who was standing still while watching you fight from the side asks if it’s safe. After you assure her that it is, she relaxes. After a moment you start asking her about what happened.\n\n");
 	outputText("\"<i>I had gone out to find some supplies when I met this creature,</i>\" she says, still casting glances to her sides, \"<i>And then not thinking much, I started to run towards my hiding place, hoping I’d be faster than my pursuer, but he was quite persistent and chased me almost the whole way back. I was so scared he would find that place and then call for his friends. But at the moment I was about to risk it and hide there, you showed up.</i>\"\n\n");
 	outputText("As she talks you realize something, did she mention her hiding place is near here? Isn’t that dangerous? Someone you don’t know practically admitted that she is living very close to the portal that you said you would defend. What if she is a demon? Wishing to make things clear you wait till she’s finished talking and ask her directly where she lives. First she seems to be surprised, then becomes confused, and then after that a slight hint of fear before finally answering.\n\n");
-	outputText("\"<i>It’s just moment away from your...</i>\" she casts a glance over your shoulder \"<i>...camp. Still I could move it somewhere else, maybe to that desert city or to a different place. But...moving all my stuff would take a lot of time. Especially all my alchemical equipment that those little red devils didn’t find or smash.</i>\"\n\n");
-	outputText("Alchemical equipment? Looking at her you wouldn’t have guessed she was an alchemist. You ask her about this and she seems to brighten up and starts talking happily about various experiments she made in the past for no discernible reason. And just when you start to ponder about how to interrupt her she suddenly ceases talking, but only for a short moment.\n\n");
-	outputText("\"<i>I know you don’t know me and probably don’t trust me, but could you let me live near your camp? I could help you in case you somehow...transform too much or in some way you don't want to, return to your previous form, or grant you new ones, stronger and more fitted to survive here,</i>\" for a moment you seem to see a gleam in her eye, \"<i>so what do you think? By the way my name’s Evangeline.</i>\"");
+	outputText("\"<i>It’s just moment away from your...</i>\" she casts a glance over your shoulder \"<i>...camp. Suprising that anyone wish to stay here as i heard it's a cursed piece of land that anyone even demons avoids, but for someone like me it gives a good cover and scares off potential scavengers. Still I've been reconsidering moving myself somewhere else, maybe to that desert city or to a different place, as those lil assholes been recently more active around this area. But...moving all my stuff would take a lot of time. ");
+	outputText("Especially all my alchemical equipment that those little red devils didn’t find or smash.</i>\"\n\nAlchemical equipment? Looking at her you wouldn’t have guessed she was an alchemist. You ask her about this and she seems to brighten up and starts talking happily about various experiments she made in the past for no discernible reason. And just when you start to ponder about how to interrupt her she suddenly ceases talking, but only for a short moment.\n\n");
+	outputText("\"<i>I know you don’t know me and likely don’t trust me, but could you let me live near your camp? Since you're here it may be bit safer to stay here unless you also belive in that cursed land rumors. I could help you in case you somehow...transform too much or in some way you don't want to, return to your previous form, or grant you new ones, stronger and more fitted to survive here,</i>\" for a moment you seem to see a gleam in her eye, \"<i>so what do you think? By the way my name’s Evangeline.</i>\"");
 	cleanupAfterCombat();
 	menu();
 	addButton(0, "Move In", Tak);
@@ -87,21 +126,18 @@ public function Tak():void
 {
 	clearOutput();
 	outputText("She may be a suspicious person, but you could say the same about everyone else you’ve met in this realm so far. And after looking at her more closely and how she is now not looking around nervously anymore, you notice that she has got these weird looking eyes, like two cat-like slits crossing in the middle to form a X over the middle of her pupil. If you don’t take this into account she passes for a normal human. Out of curiosity, you casually ask her about her eyes, since normal people don’t have such eyes like this.\n\n");
-	outputText("\"<i>My eyes..? ohh that.</i>\" The mention of her eyes seem to make her nervous again. \"<i>You could say it’s the effect of me living in this tainted realm. Some get some 'extras' when born and I just merely gained these weird eyes. Although they have not bestowed me with night vision like for those cat-morphs.</i>\"\n\n");
+	outputText("\"<i>My eyes..? Ohh that.</i>\" The mention of her eyes seem to make her nervous again. \"<i>You could say it’s the effect of me living in this tainted realm. Some get some 'extras' when born and I just merely gained these weird eyes. Although they have not bestowed me with night vision like for those cat-morphs.</i>\"\n\n");
 	outputText("After that you two start to talk for some time about various things. It turns out she’s one of the few remaining humans that have not been taken prisoner or have been already turned into demons. After a long time spent chatting with Evangeline, you change subject to the one of her hideouts. Since you decided to give her a chance it won’t be good if she still stays quite far away from the camp perimeter. So you mention that she can move within your camp borders.\n\n");
 	outputText("\"<i>Thank you so much. I will go to my old cave and take my essentials.</i>\" After this Evangeline walks toward a group of large stones, and by moving one of them reveals a cave entrance hidden behind it. Shortly after disappearing your new camp member comes out carrying a bedroll and a small chest. Then despite your protests she picks the spot almost at the edge of the camp as her own.\n\n");
 	outputText("\"<i>I didn’t bring any alchemical reagents with me, so if you will need something made I will still need to venture to my old place. But do not worry, those rocks will mask the entrance well... unless some very powerful demon comes here by chance.</i>\" she chuckles and seeing your concerned face quickly reassures that chances for a strong demon to casually wander by are slim.\n\n");
-	outputText("Before leaving she stops as if having forgot something and heads to you.\n\n");
-	outputText("\"<i>I’m sorry there’s something important near your camp I must keep watch on so I had to curse you to make sure you would let me in. I removed the curse now so you should be all right. Have this fruit as an apology it should be very useful to you.</i>\"\n\n");
+	outputText("\"<i>I’m sorry there’s something important near your camp I must keep watch on so I had to invovle you earlier while been chased by the imp. Any help was better than no help, right? Have this fruit as an apology it should be very useful to you.</i>\"\n\n");
 	outputText("With all her things organized she heads out of your camp right away out to 'look for more stuff' for alchemical experiments.\n\n");
 	outputText("(<b>Evangeline has been added to the Followers menu!</b>)\n\n");
-	flags[kFLAGS.EVANGELINE_AFFECTION] = 3;
-	flags[kFLAGS.EVANGELINE_FOLLOWER] = 1;
+	EvangelineAffectionMeter = 3;
+	EvangelineFollowerStage = 1;
 	flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
-	flags[kFLAGS.EVANGELINE_GEMS_PURSE] = 0;
 	flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
-	flags[kFLAGS.EVANGELINE_TALKS] = 0;
-	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
+	//if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
 	inventory.takeItem(consumables.EZEKFRU, camp.returnToCampUseOneHour);
 }
 
@@ -110,8 +146,8 @@ public function Nie():void
 	clearOutput();
 	outputText("You don’t know her just as she pointed it out. So without veiling anything you say she needs to move her hideout somewhere else.\n\n");
 	outputText("\"<i>So that’s how it is? I just wanted to be nice and friendly but you just outright reject my offer.</i>\" She sighs, before slowly turning around. While starting to walk away you still hear her utter few last words. \"<i>Having someone who can help you keep transformations under control would be useful whoever you are. I will soon move out but in case you find some 'unexpected' troubles I will linger around this area for a little bit. Until we meet again stranger.</i>\"\n\n");
-	outputText("After rejecting Evangeline’s offer of joining camp you feel satisfied. She could have been just another demoness that was trying to lure you away from your quest. But...those last words somehow were odd. Unexpected troubles? <b>As she leaves, your neck starts burning with latent pain. You check your reflection in a puddle and notice a weird symbol where she touched you... did she actually curse you?</b>\n\n");
-	flags[kFLAGS.EVANGELINE_AFFECTION] = 2;
+	outputText("After rejecting Evangeline’s offer of joining camp you feel satisfied. She could have been just another demoness that was trying to lure you away from your quest. But...those last words somehow were odd. Unexpected troubles?\n\n");
+	EvangelineAffectionMeter = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -149,14 +185,12 @@ public function meetEvangeline():void {
 	menu();
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
+	if (EvangelineAffectionMeter >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
+	if (EvangelineAffectionMeter >= 5 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) {
-		addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
-		addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
-	}
+	if (EvangelineAffectionMeter >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 4) addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");//temporaly here until normal unlock will be placed
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -184,17 +218,17 @@ private function evangelineAppearance():void {
 	outputText(" tall.\n\n");
 	outputText("Oddly despite living in Mareth she looks like a human aside from her eyes that have uncanny pupils, which after narrowing looks like two cat slits that forms an X shape over her golden eyes. Her ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 9) outputText("crimson platinum "); 
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) outputText("platinum blonde "); 
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("platinum blonde "); 
 	else outputText("red ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 10) outputText("hair are ass-length along with breats that could easily fill a F-cup bra, expansive ass and fertile hips.\n\n");
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
 	else outputText("hair short along with breasts not bigger than A cup, almost non-existent butt and boyish hips cause her to look quite tomboyish.\n\n");
 	//outputText(".\n\n");
 	outputText("She's wearing ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("a skimpy chain bikini that barely qualifies as armor. The chain is made from links much finer and lighter than normal, so fine that it feels almost silken under fingertips. A simple seal in the g-string-like undergarment states, \"Virgins only.\"");
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("a suit of steel 'armor' which have two round disks that barely cover her nipples, a tight chainmail bikini, and circular butt-plates.");
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) outputText("a suit of steel 'armor' which have two round disks that barely cover her nipples, a tight chainmail bikini, and circular butt-plates.");
 	else outputText("a simple peasant’s robe that’s torn and frayed in a few places.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glows.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glows.");
 	doNext(meetEvangeline);
 }
 
@@ -203,41 +237,41 @@ private function evangelineTalkMenu():void {
 	outputText("What would you like to discuss with Evangeline?");
 	menu();
 	addButton(0, "Your Eyes", TalkYourEyes).hint("Talk about her unusual eyes.");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 1) addButton(1, "Demons", TalkDemons).hint("Ask about demons in general.");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 2) addButton(2, "Past Life", TalkPastLife1).hint("Talk about her past before meeting you.");
-	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 3) addButton(3, "3", ).hint("");her father? - na X affection score odblokowywane?
-	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 4) addButton(4, "4", ).hint("");her soul? - jak sie PC dowie o byciu demonicą przez nią?
-	//if (flags[kFLAGS.EVANGELINE_TALKS] >= 5) addButton(5, "5", ).hint("");
+	if (EvangelineTalks >= 1) addButton(1, "Demons", TalkDemons).hint("Ask about demons in general.");
+	else addButtonDisabled(1, "???", "???");
+	if (EvangelineTalks >= 2) addButton(2, "Past Life", TalkPastLife1).hint("Talk about her past before meeting you.");
+	else addButtonDisabled(2, "???", "???");
+	//if (EvangelineTalks >= 3 && EvangelineAffectionMeter > 30) addButton(3, "3", ).hint("");her father? - na X affection score odblokowywane?	unlocks Dilapidated Temple/Shrine?
+	addButtonDisabled(3, "???", "???");
+	//if (EvangelineTalks >= 4) addButton(4, "4", ).hint("");her soul? - jak sie PC dowie o byciu demonicą przez nią?
+	//if (EvangelineTalks >= 5) addButton(5, "5", ).hint("");
 	addButton(14, "Back", meetEvangeline);
 }
-
 private function TalkYourEyes():void {
 	clearOutput();
 	outputText("At first you exchange a few casual word with Evangeline and then you change the subject to her eyes. She has very unusual X shaped irises, and if not for them she could pass for another human. She pauses for a moment before replying.\n\n");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 1) outputText("\"<i>So you once again want talk about it? Let it be,</i>\"");
+	if (EvangelineTalks >= 1) outputText("\"<i>So you once again want talk about it? Let it be,</i>\"");
 	else outputText("\"<i>I was kinda expecting that you would ask about them eventually,</i>\"");
 	outputText(" she laughs, her gaze casting toward the ground for a moment. \"<i>Most people ask me the same question sooner or later. To tell you the truth I believe I inherited them from my father, since he had the same eyes too.</i>\" There is a clear sadness in her eyes as she says this.\n\n");
 	outputText("\"<i>They are not giving me any benefit I know about, beside making me look like a freak. Well at least all the humans I met before told me this. And some even felt constantly uneasy around me thinking I'm some kind of abomination. Well at least until...</i>\" suddenly she stops and when you question the reason she giving you a gaze saying 'I don't wanna talk about it'. Well looks like they are just a rare trait. But she mentioned something about her father. Changing subject you ask about him.\n\n");
 	outputText("\"<i>My father...</i>\" she pauses for a moment before shaking her head. \"<i>No I do not want to talk about him now either. Sorry can you leave me alone for a while?</i>\"");
 	evangelineAffection(1);
-	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;
+	if (EvangelineTalks == 0) EvangelineTalks = 1;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkDemons():void {
 	clearOutput();
 	outputText("This time you chat with her about demons in general, like what types of them she’s seen so far or some details about them. Knowing that you’re gonna spend some time in this realm, maybe even the rest of your life, anyone who could help you in your quest would be very useful and she seems like she may know something.\n\n");
 	outputText("It turns out Evangeline knows quite a bit about demons. Most of what she knows you already figured out on your own or could have guessed ");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 2) outputText("but one or two thing are still new to you");
+	if (EvangelineTalks >= 2) outputText("but one or two thing are still new to you");
 	else outputText("but a few things you’re hearing for the first time");
 	outputText(". Large parts of your conversation is spent on discussing the structure of chain of command amongst demons. Feeling satisfied after learning something new you thank her after you finish talking.");
 	evangelineAffection(1);
-	if (flags[kFLAGS.EVANGELINE_TALKS] == 1) flags[kFLAGS.EVANGELINE_TALKS]++;
+	if (EvangelineTalks == 1) EvangelineTalks = 2;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkPastLife1():void {
 	clearOutput();
 	outputText("This time you ask Evangeline about the time you both met. What she’s been doing or how she managed to avoid demons. For a really long moment she remained silent.\n\n");
@@ -246,47 +280,59 @@ private function TalkPastLife1():void {
 	outputText("\"<i>Well there’s some reason for that.</i>\"\n\nEvangeline casts her gaze down as she continues.\n\n\"<i>Even demons can go wild for some 'things' like lethicite or other things that could make them stronger in any way.</i>\"\n\n");
 	outputText("So it looks like she may have had something that caused all those demons to pursue her for so long. Probably something that is as valuable as this ‘lethicite’.\n\n");
 	outputText("\"<i>Yes you could say that. But I hid it before and only by catching me would they know where it’s hidden. Luckily for me they won’t get me now when you’re here, right champion?</i>\" She gives you one of those rare smiles in which you nod to. Sadly further attempts to find out what she hid ");
-	if (flags[kFLAGS.EVANGELINE_TALKS] >= 3) outputText("once again fails");
+	if (EvangelineTalks >= 3) outputText("once again fails");
 	else outputText("turns out to be futile");
 	outputText(". She talks about many things and some may or may not be lies, about this 'treasure' and how you only know it’s well hidden and the demons will never find it without her pointing to the place.");
 	evangelineAffection(1);
-	if (flags[kFLAGS.EVANGELINE_TALKS] == 2) flags[kFLAGS.EVANGELINE_TALKS]++;
+	if (EvangelineTalks == 2) EvangelineTalks = 3;
+	doNext(evangelineTalkMenu);
+	cheatTime2(15);
+}/*
+private function TalkYourFather():void {
+	clearOutput();
+	outputText("Placeholder text.");
+	evangelineAffection(1);
+	if (EvangelineTalks == 3) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-/*
 private function TalkPastLife2():void {
 	clearOutput();
 	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona demonicą ^^
 	evangelineAffection(1);zajmie miejsce PastTalk1 w menu
-	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;
+	if (EvangelineTalks == 0) EvangelineTalks += 1;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkPastLife3():void {
 	clearOutput();
 	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona boginią ^^
 	evangelineAffection(1);zajmie miejsce PastTalk2 w menu
-	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;//ustalić na jakiej wartości flagi bedzie sie pokazywać
+	if (EvangelineTalks == 0) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkYourEyes():void {
 	clearOutput();
 	outputText("Placeholder text.");
 	evangelineAffection(1);
-	if (flags[kFLAGS.EVANGELINE_TALKS] == 3) flags[kFLAGS.EVANGELINE_TALKS]++;//ustalić na jakiej wartości flagi bedzie sie pokazywać
+	if (EvangelineTalks == 4) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
-
 private function TalkYourEyes():void {
 	clearOutput();
 	outputText("Placeholder text.");
 	evangelineAffection(1);
-	if (flags[kFLAGS.EVANGELINE_TALKS] == 4) flags[kFLAGS.EVANGELINE_TALKS]++;
+	if (EvangelineTalks == 5) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
+	doNext(evangelineTalkMenu);
+	cheatTime2(15);
+}
+private function TalkYourEyes():void {
+	clearOutput();
+	outputText("Placeholder text.");
+	evangelineAffection(1);
+	if (EvangelineTalks == 6) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
 }
@@ -303,14 +349,14 @@ private function evangelineSexMenu():void {
 
 private function evangelineSparMenu():void {
 	clearOutput();
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 50) {
+	if (EvangelineAffectionMeter >= 50) {
 		outputText("You suggest a sparring session.  Evangeline asks, \"<i>How should we fight?  Would you rather we spar light or fight like the creatures of this world?</i>\"");
 		outputText("\n\n(Do you spar 'light' with no consequences for losing, or would you rather spar 'hard' (with full consequences for loss/win)?)");
 	}
 	else outputText("You suggest a sparring session.  Evangeline after a moment of hesistation nod in agreement.");
 	menu();
 	addButton(0, "Light", LightSpar);
-	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 50) addButton(1, "Hard", HardSpar);
+	if (EvangelineAffectionMeter >= 50) addButton(1, "Hard", HardSpar);
 	addButton(14, "Back", meetEvangeline);
 }
 
@@ -639,28 +685,28 @@ private function MakingInfernalWinePotion():void {
 private function LvLUp():void {
 	clearOutput();
 	outputText("\"<i>So [name] how much gems will you give me this time for my recovery or new experiments?</i>\" Asks Evangeline waiting for your decision.");
-	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
+	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	menu();
 	if (player.gems > 1) addButton(0, "1 gem", Give1Gem).hint("Give Evangeline 1 gem.");
 	if (player.gems > 10) addButton(1, "10 gems", Give10Gems).hint("Give Evangeline 10 gems.");
 	if (player.gems > 100) addButton(2, "100 gems", Give100Gems).hint("Give Evangeline 100 gems.");
-	if (player.level >= 1 && flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 60) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (player.level >= 2 && flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 108) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (player.level >= 3 && flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 206) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (player.level >= 4 && flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (player.level >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 640) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 1250 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 9 && flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 11 && flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 12 && flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 14 && flags[kFLAGS.EVANGELINE_LVL_UP] == 12 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 15 && flags[kFLAGS.EVANGELINE_LVL_UP] == 13 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 17 && flags[kFLAGS.EVANGELINE_LVL_UP] == 14 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 18 && flags[kFLAGS.EVANGELINE_LVL_UP] == 15 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 20 && flags[kFLAGS.EVANGELINE_LVL_UP] == 16 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(13, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && EvangelineGemsPurse >= 450) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && EvangelineGemsPurse >= 800) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineGemsPurse >= 640) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineGemsPurse >= 1250 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 9 && flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 11 && flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 12 && flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 14 && flags[kFLAGS.EVANGELINE_LVL_UP] == 12 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 15 && flags[kFLAGS.EVANGELINE_LVL_UP] == 13 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 17 && flags[kFLAGS.EVANGELINE_LVL_UP] == 14 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 18 && flags[kFLAGS.EVANGELINE_LVL_UP] == 15 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 20 && flags[kFLAGS.EVANGELINE_LVL_UP] == 16 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(13, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");
 	addButton(14, "Back", meetEvangeline);//lvl-up 9: cow TF effects
 }//lvl-up 11: succubus TF effects (skrzydła 3 stopien zmiany, rogi jedna para i ogon, moze zmiana odcienia skóry na purpurowy, błekity, różowy lub czerwony)
 //koszt vitality tincture, scholar tea i sucubus milk to 6 gems (1 VT to +2 str i tou a 1 ST to +2 do jej statów)
@@ -669,8 +715,8 @@ private function Give1Gem():void {
 	outputText("Reaching into your purse you take out a single gem and hands over it to her.");
 	outputText("\n\n\"<i>So stingy...</i>\" she mumbles.");
 	player.gems -= 1;
-	flags[kFLAGS.EVANGELINE_GEMS_PURSE]++;
-	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
+	EvangelineGemsPurse += 1;
+	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	statScreenRefresh();
 	doNext(LvLUp);
 }
@@ -680,8 +726,8 @@ private function Give10Gems():void {
 	outputText("Reaching into your purse you take out a few gems and hands over it to her.");
 	outputText("\n\n\"<i>Thanks...</i>\" she mumbles.");
 	player.gems -= 10;
-	flags[kFLAGS.EVANGELINE_GEMS_PURSE] += 10;
-	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
+	EvangelineGemsPurse += 10;
+	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	statScreenRefresh();
 	doNext(LvLUp);
 }
@@ -691,8 +737,8 @@ private function Give100Gems():void {
 	outputText("Reaching into your purse you take out around a hundred gems and hands over it to her.");
 	outputText("\n\n\"<i>Thank you,</i>\" she mumbles.");
 	player.gems -= 100;
-	flags[kFLAGS.EVANGELINE_GEMS_PURSE] += 100;
-	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
+	EvangelineGemsPurse += 100;
+	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	statScreenRefresh();
 	doNext(LvLUp);
 }
@@ -701,76 +747,76 @@ private function JustDoIt():void {
 	clearOutput();
 	outputText("This time instead of giving her gems you ask if she gathered enough of them for the next stage of her recovery. After a moment of thinking she smiles wide and rush toward her chest with her personal stuff near the bedroll.");
 	outputText("\n\n\"<i>I will come back as soon as possible after buying a few needed items. Please don't touch any of my belonging in the meantime,</i>\" you hear her saying before she excitedly rush out of the camp. After watching her leave in a rush you return to your own matter hoping that she will come back soon.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) {
+	/*if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 15) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 14) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 12) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 0;
+		EvangelineGemsPurse -= 0;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 150;
+		EvangelineGemsPurse -= 150;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
 		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 4;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 400;
+		EvangelineGemsPurse -= 400;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
 		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 4;//12 lub 18 lub 24 z powodu wypicia zmodyf bimbo liquer bo musi kupic itemy na modyf jego też
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 1250;
+		EvangelineGemsPurse -= 1250;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
 		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 4;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 640;
+		EvangelineGemsPurse -= ;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
 		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 5;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 400;
-	}
+		EvangelineGemsPurse -= ;
+	}*/
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 6;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 206;
+		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 10;
+		EvangelineGemsPurse -= 800;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 7;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 108;
+		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 8;
+		EvangelineGemsPurse -= 450;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 8;
-		flags[kFLAGS.EVANGELINE_GEMS_PURSE] -= 60;
+		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 6;
+		EvangelineGemsPurse -= 150;
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -883,16 +929,251 @@ private function recivingCraftedSoulGem():void {
 
 private function InternalMutations():void {
 	clearOutput();
-	outputText("Placeholder Text.");
-	menu();
-	addButton(14, "Back", meetEvangeline);
+	if (EvangelinePeepTalkOnInternalMutations == 0) {
+		outputText("Placeholder Text on dangers of internal mutation and etc.");
+		menu();
+		addButton(1, "No", InternalMutationsNie);
+		addButton(3, "Yes", InternalMutationsTak);
+	}
+	else if (EvangelinePeepTalkOnInternalMutations == 1) {
+		outputText("RE: Placeholder Text on dangers of internal mutation and etc.");
+		menu();
+		addButton(1, "No", InternalMutationsNie);
+		addButton(3, "Yes", InternalMutationsTak);
+	}
+	else if (EvangelinePeepTalkOnInternalMutations == 2) {
+		outputText("Evangeline's smile widens when she hears you would like to undergo another 'grafting'. \n\"So what today would you like to change [name]?\"");
+		InternalMutations0();
+	}
 }
+private function InternalMutationsNie():void {
+	outputText("\n\nPlaceholder Text on Evangeline been displeased with PC been super dumb village idiot.");
+	EvangelinePeepTalkOnInternalMutations = 1;
+	doNext(meetEvangeline);
+}
+private function InternalMutationsTak():void {
+	outputText("\n\nPlaceholder Text on Evangeline been pleased with PC not been so super dumb village idiot.");
+	EvangelinePeepTalkOnInternalMutations = 2;
+	doNext(meetEvangeline);
+}
+private function InternalMutations0(page:int = 0):void {
+	menu();
+	var menuItems:Array = [];
+	menuItems.push("Heart", InternalMutationsHeart);
+	menuItems.push("Muscle", InternalMutationsMuscle);
+	menuItems.push("Mouth", InternalMutationsMouth);
+	menuItems.push("Adrenal Glands",InternalMutationsAdrenals);
+	menuItems.push("Bloodstream",InternalMutationsBloodstream);
+	menuItems.push("Fat and Tissue", InternalMutationsFaTissue);
+	menuItems.push("Lungs",InternalMutationsLungs);
+	menuItems.push("Metabolism", InternalMutationsMetabolism);
+	menuItems.push("Ovaries", InternalMutationsOvaries);
+	menuItems.push("Testicles", InternalMutationsTesticles);
+	menuItems.push("Eyes", InternalMutationsEyes);
+	menuItems.push("Nerv/Sys", InternalMutationsPNervSys);
+	//Next Page
+	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
+	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
+	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
+	menuGen(menuItems, page);
 
+	function menuGen(menuItems:Array, page:int):void {
+		var selectMenu:ButtonDataList = new ButtonDataList();
+		for (var i:int = 0; i < menuItems.length; i++) {
+			if (i % 2 == 0) {
+				selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
+			}
+		}
+		submenu(selectMenu, meetEvangeline, page, false);
+	}
+
+	function InternalMutationsHeart():void{
+		var btnNum:int = 0
+		menu();
+		//Heart Mutations
+		mutationsAssistant([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsMuscle():void{
+		var btnNum:int = 0;
+		menu();
+		//Muscle Mutations
+		mutationsAssistant([PerkLib.MantislikeAgility, PerkLib.MantislikeAgilityEvolved, PerkLib.MantislikeAgilityFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.OniMusculature, PerkLib.OniMusculatureEvolved, PerkLib.OniMusculatureFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsMouth():void{
+		var btnNum:int = 0
+		menu();
+		//Mouth Mutations
+		mutationsAssistant([PerkLib.VenomGlands, PerkLib.VenomGlandsEvolved, PerkLib.VenomGlandsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HollowFangs, PerkLib.HollowFangsEvolved, PerkLib.HollowFangsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsAdrenals():void{
+		var btnNum:int = 0
+		menu();
+		//Adrenal Glands Mutations
+		mutationsAssistant([PerkLib.SalamanderAdrenalGlands, PerkLib.SalamanderAdrenalGlandsEvolved, PerkLib.SalamanderAdrenalGlandsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.OrcAdrenalGlands, PerkLib.OrcAdrenalGlandsEvolved, PerkLib.OrcAdrenalGlandsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsBloodstream():void{
+		var btnNum:int = 0
+		menu();
+		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
+		mutationsAssistant([PerkLib.VampiricBloodsteam, PerkLib.VampiricBloodsteamEvolved, PerkLib.VampiricBloodsteamFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HinezumiBurningBlood, PerkLib.HinezumiBurningBloodEvolved, PerkLib.HinezumiBurningBloodFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.FeyArcaneBloodstream, PerkLib.FeyArcaneBloodstreamEvolved, PerkLib.FeyArcaneBloodstreamFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsFaTissue():void{
+		var btnNum:int = 0
+		menu();
+		//Fat tissue Mutations
+		mutationsAssistant([PerkLib.PigBoarFat, PerkLib.PigBoarFatEvolved, PerkLib.PigBoarFatFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.NaturalPunchingBag, PerkLib.NaturalPunchingBagEvolved, PerkLib.NaturalPunchingBagFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.WhaleFat, PerkLib.WhaleFatEvolved, PerkLib.WhaleFatFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.YetiFat, PerkLib.YetiFatEvolved, PerkLib.YetiFatFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsLungs():void{
+		var btnNum:int = 0
+		menu();
+		//Lungs Mutations
+		mutationsAssistant([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm], btnNum++);
+		//mutationsAssistant([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsMetabolism():void{
+		var btnNum:int = 0
+		menu();
+		//Metabolism Mutations
+		mutationsAssistant([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved], btnNum++);
+		mutationsAssistant([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved], btnNum++);
+		mutationsAssistant([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsOvaries():void{
+		var btnNum:int = 0
+		menu();
+		//Ovaries Mutations
+		mutationsAssistant([PerkLib.LactaBovinaOvaries, PerkLib.LactaBovinaOvariesEvolved, PerkLib.LactaBovinaOvariesFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.FloralOvaries, PerkLib.FloralOvariesEvolved, PerkLib.FloralOvariesFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsTesticles():void{
+		var btnNum:int = 0
+		menu();
+		//Testicle Mutations
+		mutationsAssistant([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.EasterBunnyEggBag, PerkLib.EasterBunnyEggBagEvolved, PerkLib.EasterBunnyEggBagFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsEyes():void {
+		var btnNum:int = 0
+		menu();
+		//Eyes Mutations
+		mutationsAssistant([PerkLib.GazerEye, PerkLib.GazerEyeEvolved, PerkLib.GazerEyeFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.GorgonsEyes, PerkLib.GorgonsEyesEvolved], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsPNervSys():void{
+		var btnNum:int = 0
+		menu();
+		//Peripheral/NervSys Mutations
+		mutationsAssistant([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsBoneMarrow():void{
+		var btnNum:int = 0
+		menu();
+		//Bones and Marrow Mutations
+		mutationsAssistant([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm], btnNum++);
+		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsThyroidGlands():void{
+		var btnNum:int = 0
+		menu();
+		//Thyroid Glands Mutations
+		mutationsAssistant([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm], btnNum++);
+		//mutationsAssistant([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm], btnNum++);
+		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsParathyroid():void{
+		var btnNum:int = 0
+		menu();
+		//ParaThyroid Glands Mutations. What's the difference between this and the above???
+		mutationsAssistant([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm], btnNum++);
+		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsText():void {
+		outputText("Placeholder Text on grafting mutation.\n\n");
+		outputText("Placeholder Text on grafting mutation.\n\n");
+		outputText("Placeholder Text on grafting mutation.");
+	}
+	
+	function mutationsAssistant(perkName:Array, menuButton:int):void {
+		var perkCount:int = 0
+		for each(var perkTier:PerkType in perkName) {
+			if (!(player.hasPerk(perkTier))) {
+				if (perkTier.available(player)) {
+					addButton(menuButton, perkName[0].name(), perkChoice, perkTier, -9000, -9000, "Next Perk: " + perkTier.name())
+				} else {
+					addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.");
+				}
+				break;
+			}
+			perkCount++
+		}
+		if (perkCount == perkName.length) {
+			addButtonDisabled(menuButton, perkName[0].name(), "Highest Tier obtained!");
+		}
+	}
+
+	function perkChoice(perkTier:PerkType):void {
+		clearOutput();
+		InternalMutationsText();
+		player.createPerk(perkTier, 0, 0, 0, 0);
+		cheatTime2(30);
+		InternalMutations0();
+	}
+}
+		
 private function Experiments():void {
 	clearOutput();
-	outputText("Placeholder Text.");
-	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
+	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
+	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	menu();
+	addButtonDisabled(0, "BL/BB Plus", "Bimbo Liquer Plus / Bro Brew Plus");
+	addButtonDisabled(1, "Amazon L.", "Amazon Liquer");
 	addButton(13, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her experiments expenses.");
 	addButton(14, "Back", meetEvangeline);
 }

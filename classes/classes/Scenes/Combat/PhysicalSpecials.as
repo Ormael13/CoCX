@@ -95,11 +95,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Warrior Shout again.</b>\n\n");
 				}
 			}
-			bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
-			if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
-				bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
+			if (!player.isStaffTypeWeapon()) {
+				bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
+				if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
+					bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
+				}
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hairType == 4) {
 				bd = buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -171,7 +173,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
-			if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
+			if ((player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.FROSTWYRM) && player.horns.count >= 6) {
 				bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -729,7 +731,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -867,7 +869,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -960,7 +962,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -1290,7 +1292,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -1399,7 +1401,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
 		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -1493,7 +1495,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
 		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -3171,9 +3173,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. " + monster.capitalA + monster.short + " is caught in it and carried into the windstorm taking hit from various other flying objects. <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		damage = Math.round(damage * combat.windDamageBoostedByDao());
+		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. " + monster.capitalA + monster.short + " is caught in it and carried into the windstorm taking hit from various other flying objects. ");
+		doWindDamage(damage);
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -4157,10 +4159,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN) outputText("weapons, ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("weapons, ");
 			else outputText("weapon, ");
 			outputText("you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN) outputText("horns ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
 			else outputText("horn, ");
 			outputText("to stab only at air.\n\n");
 			enemyAI();

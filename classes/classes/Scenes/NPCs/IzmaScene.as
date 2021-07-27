@@ -473,7 +473,7 @@ internal function defeatIzma():void {
 	//(Izmafight = 0) 
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 0) {
 		outputText("Izma falls back into the sand, her ");
-		if(monster.HP < 1) outputText("injuries");
+		if(monster.HP <= monster.minHP()) outputText("injuries");
 		else outputText("lust");
 		outputText(" preventing her from fighting on.  She growls at you in annoyance, \"<i>Fine.  You win... this time.</i>\"\n\n");
 	}
@@ -481,7 +481,7 @@ internal function defeatIzma():void {
 		//(Izmafight = 1 or 2) 
 		if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] < 3) {
 			outputText("Having incapacitated Izma through ");
-			if(monster.HP < 1) outputText("physical");
+			if(monster.HP <= monster.minHP()) outputText("physical");
 			else outputText("sexual");
 			outputText(" prowess, you stand over the defeated tigershark.  \"<i>Okay, okay!  You win!  Geez... let's get on with it, I feel like I'm gonna go crazy.</i>\"  She begins removing her clothing.\n\n");
 		}

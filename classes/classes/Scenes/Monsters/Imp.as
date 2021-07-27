@@ -11,16 +11,14 @@ import classes.internals.*;
 
 public class Imp extends Monster
 	{
-		public var Evangeline:EvangelineFollower = new EvangelineFollower();
-
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
 			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
 				SceneLib.forest.kitsuneScene.winKitsuneImpFight();
 			}
-			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
-				Evangeline.winEvangelineImpFight();
+			else if (EvangelineFollower.EvangelineAffectionMeter == 1) {
+				SceneLib.evangelineFollower.winEvangelineImpFight();
 			}
 			else {
 				SceneLib.impScene.impVictory();
@@ -37,8 +35,8 @@ public class Imp extends Monster
 				player.lust = player.maxLust();
 				doNext(SceneLib.impScene.impRapesYou);
 			}
-			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
-				flags[kFLAGS.EVANGELINE_AFFECTION] = 2;
+			else if (EvangelineFollower.EvangelineAffectionMeter == 1) {
+				EvangelineFollower.EvangelineAffectionMeter = 2;
 				SceneLib.impScene.impRapesYou();
 			}
 			else {

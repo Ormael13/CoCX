@@ -3,6 +3,8 @@ package classes {
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
@@ -163,6 +165,9 @@ public class PlayerInfo extends BaseContent {
 			else
 				miscStats += "<b>Corrupted Glades Status:</b> Extinct\n";
 		}
+
+		if (JourneyToTheEast.AhriTavernTalks > 0) 
+			miscStats += "<b>Conversion (5 stat points to 1 perk point) counter:</b> "+JourneyToTheEast.AhriStatsToPerksConvertCounter+"\n";
 
 		if (flags[kFLAGS.EGGS_BOUGHT] > 0)
 			miscStats += "<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n";
@@ -358,6 +363,10 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Resistance (Lightning):</i> " + (100 - Math.round(player.damageLightningPercent())) + "%\n";
 		combatStats += "<i>Resistance (Darkness):</i> " + (100 - Math.round(player.damageDarknessPercent())) + "%\n";
 		combatStats += "<i>Resistance (Poison):</i> " + (100 - Math.round(player.damagePoisonPercent())) + "%\n";
+		combatStats += "<i>Resistance (Wind):</i> " + (100 - Math.round(player.damageWindPercent())) + "%\n";
+		combatStats += "<i>Resistance (Water):</i> " + (100 - Math.round(player.damageWaterPercent())) + "%\n";
+		combatStats += "<i>Resistance (Earth):</i> " + (100 - Math.round(player.damageEarthPercent())) + "%\n";
+		combatStats += "<i>Resistance (Acid):</i> " + (100 - Math.round(player.damageAcidPercent())) + "%\n";
 		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
@@ -612,6 +621,8 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
 			interpersonStats += "<b>Dinah Affection:</b> " + Math.round(flags[kFLAGS.DINAH_AFFECTION]) + "%\n";
 			interpersonStats += "<b>Spells Casted:</b> " + flags[kFLAGS.DINAH_SPELLS_CASTED] + "\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 9) interpersonStats += "<b>Dinah lvl:</b> 56\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 8) interpersonStats += "<b>Dinah lvl:</b> 50\n";
 			if (flags[kFLAGS.DINAH_LVL_UP] == 7) interpersonStats += "<b>Dinah lvl:</b> 44\n";
 			if (flags[kFLAGS.DINAH_LVL_UP] == 6) interpersonStats += "<b>Dinah lvl:</b> 38\n";
 			if (flags[kFLAGS.DINAH_LVL_UP] == 5) interpersonStats += "<b>Dinah lvl:</b> 32\n";
@@ -871,28 +882,28 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Evangeline Stats
 		var evangelineStats:String = "";
-		if (flags[kFLAGS.EVANGELINE_AFFECTION] > 2) {
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 17) evangelineStats += "<b>Evangeline lvl:</b> 42\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) evangelineStats += "<b>Evangeline lvl:</b> 40\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 15) evangelineStats += "<b>Evangeline lvl:</b> 36\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 14) evangelineStats += "<b>Evangeline lvl:</b> 34\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) evangelineStats += "<b>Evangeline lvl:</b> 30\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 12) evangelineStats += "<b>Evangeline lvl:</b> 28\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11) evangelineStats += "<b>Evangeline lvl:</b> 24\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10) evangelineStats += "<b>Evangeline lvl:</b> 22\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9) evangelineStats += "<b>Evangeline lvl:</b> 18\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) evangelineStats += "<b>Evangeline lvl:</b> 16\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) evangelineStats += "<b>Evangeline lvl:</b> 14\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) evangelineStats += "<b>Evangeline lvl:</b> 12\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 10\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) evangelineStats += "<b>Evangeline lvl:</b> 8\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) evangelineStats += "<b>Evangeline lvl:</b> 6\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) evangelineStats += "<b>Evangeline lvl:</b> 4\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) evangelineStats += "<b>Evangeline lvl:</b> 2\n";
-			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(flags[kFLAGS.EVANGELINE_AFFECTION]) + "%\n";
+		if (EvangelineFollower.EvangelineAffectionMeter > 2) {/*
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 17) evangelineStats += "<b>Evangeline lvl:</b> 51\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) evangelineStats += "<b>Evangeline lvl:</b> 48\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 15) evangelineStats += "<b>Evangeline lvl:</b> 45\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 14) evangelineStats += "<b>Evangeline lvl:</b> 42\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) evangelineStats += "<b>Evangeline lvl:</b> 39\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 12) evangelineStats += "<b>Evangeline lvl:</b> 36\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11) evangelineStats += "<b>Evangeline lvl:</b> 33\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10) evangelineStats += "<b>Evangeline lvl:</b> 30\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9) evangelineStats += "<b>Evangeline lvl:</b> 27\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) evangelineStats += "<b>Evangeline lvl:</b> 24\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) evangelineStats += "<b>Evangeline lvl:</b> 21\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) evangelineStats += "<b>Evangeline lvl:</b> 18\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 15\n";*/
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) evangelineStats += "<b>Evangeline lvl:</b> 12\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) evangelineStats += "<b>Evangeline lvl:</b> 9\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) evangelineStats += "<b>Evangeline lvl:</b> 6\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) evangelineStats += "<b>Evangeline lvl:</b> 3\n";
+			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(EvangelineFollower.EvangelineAffectionMeter) + "%\n";
 		}
-		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5) {
-			evangelineStats += "<b>Gems Purse:</b> " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems\n";
+		if (EvangelineFollower.EvangelineAffectionMeter >= 5) {
+			evangelineStats += "<b>Gems Purse:</b> " + EvangelineFollower.EvangelineGemsPurse + " gems\n";
 			evangelineStats += "<b>Spells Casted:</b> " + flags[kFLAGS.EVANGELINE_SPELLS_CASTED] + "\n";
 			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 0) {
 				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 10) evangelineStats += "<b>Spells Cost:</b> 100%\n";
@@ -1268,8 +1279,56 @@ public class PlayerInfo extends BaseContent {
 				else masteryStats += "None";
 				masteryStats += "\n";
 			}
-			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
-			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			if (player.hasStatusEffect(StatusEffects.DaoOfWind)) {
+				masteryStats += "<b>Minor Dao of Wind:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) masteryStats += "5th layer (+70% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 4) masteryStats += "4th layer (+50% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) {
+				masteryStats += "<b>Minor Dao of Blood:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 5) masteryStats += "5th layer (+70% dmg)";//, +10% resistance
+				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 4) masteryStats += "4th layer (+50% dmg)";//, +10% resistance
+				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 3) masteryStats += "3rd layer (+30% dmg)";//, +10% resistance
+				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfWater)) {
+				masteryStats += "<b>Minor Dao of Water:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfWater) == 5) masteryStats += "5th layer (+70% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 4) masteryStats += "4th layer (+50% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) {
+				masteryStats += "<b>Minor Dao of Earth:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 5) masteryStats += "5th layer (+70% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 4) masteryStats += "4th layer (+50% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) {
+				masteryStats += "<b>Minor Dao of Acid:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 5) masteryStats += "5th layer (+70% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 4) masteryStats += "4th layer (+50% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
 			masteryStats += "\n";
 		}
 		if (player.teaseLevel < combat.maxTeaseLevel())
@@ -1988,4 +2047,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}

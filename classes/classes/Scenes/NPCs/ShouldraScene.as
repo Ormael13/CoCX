@@ -162,7 +162,7 @@ internal function defeatDannyPhantom():void {
 	spriteSelect(67);
 	clearOutput();
 	//defeat by damage)
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("With an ear-splitting, ghostly wail that forces you to your knees, the ");
 		if(flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] >= 1) outputText("ghost ");
 		outputText("girl falls back, overcome by her injuries. Before you can stop her, she simply becomes insubstantial, her clothes undergoing the change as well. A breeze slips through the ruins, picking the ghost up and scattering her to the winds.");

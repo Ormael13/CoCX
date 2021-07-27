@@ -75,7 +75,7 @@ public class Enigmanium extends Consumable{
 			//Does not add to change total
 			if (player.tou > 50 && rand(2) == 0) {
 				outputText("\n\nYour body seems to compress momentarily, becoming leaner and noticeably less tough.");
-				player.addCurse("tou", -2, 1);
+				player.addCurse("tou", 2, 1);
 			}
 			//IntelliWisGain
 			if (rand(4) == 0 && changes < changeLimit) {
