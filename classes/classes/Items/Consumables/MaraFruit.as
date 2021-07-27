@@ -47,7 +47,7 @@ public class MaraFruit extends Consumable{
 		//-Reduces speed down to 60.
 		if (player.spe > 60 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
-			player.addCurse("spe", -2,1);
+			player.addCurse("spe", 2,1);
 			changes++;
 		}
 		if (player.blockingBodyTransformations()) changeLimit = 0;

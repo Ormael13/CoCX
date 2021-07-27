@@ -3054,6 +3054,7 @@ public class Combat extends BaseContent {
 				}
 				archeryXP(1);
                 outputText("\n\n");
+				WeaponRangeStatusProcs();
                 checkAchievementDamage(damage);
                 flags[kFLAGS.ARROWS_SHOT]++;
                 bowPerkUnlock();
@@ -3075,6 +3076,7 @@ public class Combat extends BaseContent {
 					archeryXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
+				WeaponRangeStatusProcs();
 				WrathGenerationPerHit1(5);
                 heroBaneProc(damage);
             }
@@ -3358,7 +3360,6 @@ public class Combat extends BaseContent {
                         } else damage *= 2;
                     }
                 }
-
                 damage = Math.round(damage);
                 checkAchievementDamage(damage);
                 if (monster.HP <= monster.minHP()) {
@@ -3367,7 +3368,6 @@ public class Combat extends BaseContent {
                     else if (monster.plural)
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-
                     doDamage(damage, true, true);
                     if (crit) {
                         outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
@@ -3375,6 +3375,7 @@ public class Combat extends BaseContent {
                     }
                     throwingXP(1);
                     outputText("\n\n");
+					WeaponRangeStatusProcs();
                     doNext(endHpVictory);
                     return;
                 } else {
@@ -3385,12 +3386,13 @@ public class Combat extends BaseContent {
                         throwingXP(1);
                     }
                     if (crit) hasCritAtLeastOnce = true;
+					WeaponRangeStatusProcs();
                     WrathGenerationPerHit1(5);
                     heroBaneProc(damage);
                 }
             }
             else{
-                hasMissedAtLeastOnce = true
+                hasMissedAtLeastOnce = true;
             }
             currentShot++;
         }
@@ -3548,6 +3550,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
 */
             damage = Math.round(damage);
+			WeaponRangeStatusProcs();
             checkAchievementDamage(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -3822,6 +3825,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też*/
             damage = Math.round(damage);
             checkAchievementDamage(damage);
+			WeaponRangeStatusProcs();
 			WrathGenerationPerHit1(5);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -5271,7 +5275,7 @@ public class Combat extends BaseContent {
                 } else if (vbladeeffect) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
                 else if (MDODialogs) {
                 } else if (!MSGControll) {
-                    outputText("You hit [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
+					outputText("You "+player.weaponVerb+" [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
                 }
                 if (crit) {
                     outputText("<b>Critical! </b>");
@@ -6126,11 +6130,14 @@ public class Combat extends BaseContent {
                 else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
             }
         }
-        if (player.hasPerk(PerkLib.VampiricBlade)) {
-            if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") HPChange(Math.round(player.maxHP() * 0.005), false);
-            else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * 0.02), false);
-            else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * 0.04), false);
-            else HPChange(Math.round(player.maxHP() * 0.01), false);
+        if (player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+			var restoreamount:Number = 0;
+			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
+			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) restoreamount += 1;
+            if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") HPChange(Math.round(player.maxHP() * restoreamount * 0.005), false);
+            else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * restoreamount * 0.02), false);
+            else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * restoreamount * 0.04), false);
+            else HPChange(Math.round(player.maxHP() * restoreamount * 0.01), false);
         }
 		if (player.weapon == weapons.VENCLAW) {
             outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -6144,7 +6151,7 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
-
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
     public function WeaponFlyingSwordsStatusProcs():void {
@@ -6161,6 +6168,7 @@ public class Combat extends BaseContent {
             if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
             else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
         }
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
 	public function ShieldsStatusProcs():void {
@@ -7941,7 +7949,7 @@ public class Combat extends BaseContent {
             monster.gems *= 2;
             monster.gems = Math.round(monster.gems);
         }
-        monster.handleAwardText(); //Each monster can now override the default award text
+        if (!monster.hasPerk(PerkLib.NoExpGained)) monster.handleAwardText(); //Each monster can now override the default award text
         if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
             if (nextFunc != null) doNext(nextFunc);
             else doNext(playerMenu);
@@ -7952,7 +7960,7 @@ public class Combat extends BaseContent {
         dropItem(monster, nextFunc);
         inCombat = false;
         player.gems += monster.gems;
-        player.XP += monster.XP;
+        if (!monster.hasPerk(PerkLib.NoExpGained)) player.XP += monster.XP;
         mainView.statsView.showStatUp('xp');
         dynStats("lust", 0, "scale", false); //Forces up arrow.
     }
@@ -9091,6 +9099,11 @@ public class Combat extends BaseContent {
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
                 else player.takePhysDamage(100);
             }
+        }
+		//Lifesteal Enchantment
+        if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+            if (player.statusEffectv1(StatusEffects.LifestealEnchantment) <= 0) player.removeStatusEffect(StatusEffects.LifestealEnchantment);
+            else player.addStatusValue(StatusEffects.LifestealEnchantment, 1, -1);
         }
         //Flying
         if (player.isFlying()) {
@@ -10812,88 +10825,65 @@ public class Combat extends BaseContent {
         if (player.armor == armors.SCANSC) player.SexXP(XP);
         player.SexXP(XP);
     }
+	
+	private function weaponmasteryXPMulti():Number {
+		var multi:Number = 1;
+		if (player.humanScore() == player.humanMaxScore()) multi += 2;
+		else if (player.humanScore() >= player.humanMaxScore() - 9) multi += 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) multi *= 3;
+		else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) multi *= 2;
+        return multi;
+	}
 
 	public function gauntletXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.gauntletXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.gauntletXP(XP);
-        player.gauntletXP(XP);
+		player.gauntletXP(XP * weaponmasteryXPMulti());
     }
 	public function swordXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.swordXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.swordXP(XP);
-        player.swordXP(XP);
+		player.swordXP(XP * weaponmasteryXPMulti());
     }
 	public function axeXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.axeXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.axeXP(XP);
-        player.axeXP(XP);
+		player.axeXP(XP * weaponmasteryXPMulti());
     }
 	public function macehammerXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.macehammerXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.macehammerXP(XP);
-        player.macehammerXP(XP);
+		player.macehammerXP(XP * weaponmasteryXPMulti());
     }
 	public function duelingswordXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.duelingswordXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.duelingswordXP(XP);
-        player.duelingswordXP(XP);
+		player.duelingswordXP(XP * weaponmasteryXPMulti());
     }
 	public function spearXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.spearXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
-        player.spearXP(XP);
+		player.spearXP(XP * weaponmasteryXPMulti());
     }
 	public function daggerXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.daggerXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.daggerXP(XP);
-        player.daggerXP(XP);
+		player.daggerXP(XP * weaponmasteryXPMulti());
     }
 	public function whipXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.whipXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.whipXP(XP);
-        player.whipXP(XP);
+		player.whipXP(XP * weaponmasteryXPMulti());
     }
 	public function exoticXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.exoticXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
-        player.exoticXP(XP);
+		player.exoticXP(XP * weaponmasteryXPMulti());
     }
 
 	public function archeryXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.archeryXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.archeryXP(XP);
-        player.archeryXP(XP);
+		player.archeryXP(XP * weaponmasteryXPMulti());
     }
 	public function throwingXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.throwingXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.throwingXP(XP);
-        player.throwingXP(XP);
+		player.throwingXP(XP * weaponmasteryXPMulti());
     }
 	public function firearmsXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.firearmsXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.firearmsXP(XP);
-        player.firearmsXP(XP);
+		player.firearmsXP(XP * weaponmasteryXPMulti());
     }
 
 	public function dualWieldSmallXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldSmallXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldSmallXP(XP);
-        player.dualWieldSmallXP(XP);
+		player.dualWieldSmallXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldNormalXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldNormalXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldNormalXP(XP);
-        player.dualWieldNormalXP(XP);
+		player.dualWieldNormalXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldLargeXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldLargeXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldLargeXP(XP);
-        player.dualWieldLargeXP(XP);
+		player.dualWieldLargeXP(XP * weaponmasteryXPMulti());
     }
 	public function dualWieldFirearmsXP(XP:Number = 0):void {
-        if (player.humanScore() == player.humanMaxScore()) player.dualWieldFirearmsXP(XP);
-		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldFirearmsXP(XP);
-        player.dualWieldFirearmsXP(XP);
+		player.dualWieldFirearmsXP(XP * weaponmasteryXPMulti());
     }
 
     //VICTORY OR DEATH?
@@ -13243,7 +13233,11 @@ public class Combat extends BaseContent {
             clearStatuses(false);
             doNext(camp.returnToCampUseOneHour);
             return;
-        } else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+        }
+		if (monster.short == "training dummy") {
+			outputText("As you retreat the training dummy just stands there in it usual spot. ");
+		}
+		else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
         //Nonflying PCs
         else {
             //In prison!
@@ -13384,7 +13378,10 @@ public class Combat extends BaseContent {
                 outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
             }
             //Non-fliers flee
-            else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.");
+            else {
+				if (monster.short == "training dummy") outputText("When you look back you see it's still in the same spot seemly grinning at you.");
+				else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.");
+			}
             if (monster.short == "Izma") {
                 outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.");
             }
@@ -13831,7 +13828,7 @@ public class Combat extends BaseContent {
 			damage *= ((puppies / 2) + 1.25);
 		}
 		if (monster.plural) damage *= 2;
-		damage = Math.round(damage);
+		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -13882,7 +13879,7 @@ public class Combat extends BaseContent {
 			crit = true;
 			damage *= ((puppies / 2) + 1.25);
 		}
-		damage = Math.round(damage);
+		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doTrueDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -13926,7 +13923,7 @@ public class Combat extends BaseContent {
 			damage *= ((puppies / 2) + 1.25);
 		}
 		if (monster.plural) damage *= 10;
-		damage = Math.round(damage);
+		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");

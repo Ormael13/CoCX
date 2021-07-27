@@ -117,15 +117,37 @@ package classes.Scenes
 			outputText("-New Blood Spell: Blood Shield - learned from Red Manuscript. Cost 20% of max Over HP. Would create crimson shield that will absorb dmg equal to cost of cast multiplied by blood spells power multiplier. In case caster already have other shields active it will the last shield that absorb the damage.\n");
 			outputText("-New Blood Spell: Blood Chains - learned from Red Manuscript. Cost 100 health. Would immobilize enemy (stun effect) for 2 turns and have cooldown of 3 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
 			outputText("-New Blood Spell: Blood Wave - learned from Red Manuscript. Cost 400 health. Deal AoE magic dmg and have cooldown of 5 turns. If used against large groups of enemies would deal much more damage.\n");
+			outputText("-New Blood Spell: Lifesteal Enchantment - learned from Red Manuscript. Cost 500 health. Adding lifesteal on melee (0.5%/1%/2%/4%) and range (1%) weapons attacks for 5 turns.\n");
 			outputText("-New Blood Spell: Blood Field - learned from Red Manuscript. Cost 600 health. Would form a field of blood on the ground that would drain enemy health and heal caster. Additionaly enemeis will have their speed reduced. Not effective against any target that aren't touching the ground (flying enemies or ones beneath the ground).\n");
 			outputText("-Added Water & Earth elmental attack type. Water and Earth elementals dmg been changed to those new types of elemental dmg.\n");
 			outputText("-Added Acid elmental attack type. Acid Spit, Hydra Acid Breath specials dmg been changed to this new type of elemental dmg.\n");
+			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 100+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-Evangeline initial encounter and post fight talk scene been slight adjusted. Her repeat encouter after rejecting recruitment first time now req. higher level and finding two city-like hubs unlocked. After been in camp her level up process is bit faster.\n");
+			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 12 for this to be possible.\n");
+			outputText("-With adding 4 new subtypes of elemental dmg some of enemy attacks dmg been adjusted from magic type to one of those new four types. Also there is resistance tracked for those new types on stats page.\n");
+			outputText("-When PC race change to race without blood (atm only gargoyle) it would disable all blood spells and blood soulskills.\n");
+			outputText("-Added training dummy that is avialable after first exploration. It wouldn't deal much dmg back and won;t give exp after beating it. It would also allow to always retreat from fight. It purpose is to help in safe manner to train weapon masteries. So not go all out trying to kill it in one hit or the training will last much longer ^^\n");
+			outputText("-New monster perk: No Exp Gained. Atm only training dummy have it. As for effects it name speaks for itself.\n");
+			outputText("-Bit of moving around options in camp actions. Nothing serious. Just some of less used options moved to submenus and adding disabled buttons for all options that not had them in this manu or it submenus.\n");
+			outputText("-Sparring Ring can be upgraded 2 times. Each upgrade will decrease time needed for npc's to train for level up (shorter by 1/6 then 1/5 of orginal time) and mastery exp for hitting training dummy would increase by 100% per upgrade (to 200%/300%).\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			outputText("-Battleshield perk tier been decreased from 7th to 3rd. Req. intelligence was halfed.\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Defensive Staff Channeling. Req. Staff Channeling and Job: Enchanter perks, knowing any defensive spell, 120+ int. Effect: When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
+			outputText(" (Mana shield would be able to absorb more damage per mana spent and blizzard would last longer or block more fire attacks before vanishing)\n");
+			outputText("-For staff channeling perk effects would now count also weapons that are only 'partial' staffs like inscribed spellblade or demonic scythe.\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Arch-priest. Req. Jobs: Guardian and Enchanter, 200+ int, finishing second part of certain paladin npc training. Effect: +40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower.\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -133,13 +155,15 @@ package classes.Scenes
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
+			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -206,6 +230,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -229,10 +255,9 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			outputText("\n");
+			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
-			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
 			outputText("\n");
@@ -248,6 +273,8 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

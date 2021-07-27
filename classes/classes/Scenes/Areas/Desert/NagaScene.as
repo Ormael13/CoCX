@@ -1283,4 +1283,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

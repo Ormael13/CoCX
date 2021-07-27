@@ -49,7 +49,7 @@ public class HarpyQueen extends Monster
 			outputText("The queen swings her arm at you and, despite being a few feet away, you feel a kinetic wall slam into you, and you go flying - right into the harpy brood!  You feel claws, teeth and talons dig into you, but you're saved by a familiar pair of scaled arms.  \"<i>Get back in there!</i>\" Helia shouts, throwing you back into the battle!");
 			//(Effect; Heavy Damage)
 			var damage:Number = 100 + rand(this.wis);
-			player.takeMagicDamage(damage, true);
+			player.takeWindDamage(damage, true);
 		}
 
 		//ATTACK FOUR: Whitefire!

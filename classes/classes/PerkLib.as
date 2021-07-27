@@ -118,17 +118,17 @@ public class PerkLib
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
 				"While others had to work hard to unlock their metamorphic potential, it came naturally to you. Whatever the reason for that is... truth be told you try not to think about it, afraid of what it might mean for you. As long as it's nothing harmful for you in the long run, right?");
 		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
-				"Allows you to retain up to 15 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 15 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage2:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 2)", "Ascension: Transcendental Genetic Memory (Stage 2)",
-				"Allows you to retain up to 30 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 30 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage3:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 3)", "Ascension: Transcendental Genetic Memory (Stage 3)",
-				"Allows you to retain up to 45 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 45 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage4:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 4)", "Ascension: Transcendental Genetic Memory (Stage 4)",
-				"Allows you to retain up to 60 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 60 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage5:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 5)", "Ascension: Transcendental Genetic Memory (Stage 5)",
-				"Allows you to retain up to 75 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 75 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage6:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 6)", "Ascension: Transcendental Genetic Memory (Stage 6)",
-				"Allows you to retain up to 90 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 90 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
 				"You're the underdog. Gain twice as much exp for beating up enemies above your current level with double the limit after which increases to gained exp stops.");// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
@@ -139,8 +139,6 @@ public class PerkLib
 				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive hp (+80), lust (+6), fatigue (+6) gains at lvl-up).");
 		public static const AscensionUnlockedPotential4thStage:PerkType = mk("Ascension: Unlocked Potential (4th Stage)", "Ascension: Unlocked Potential (4th Stage)",
 				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive wrath (+10), mana (+12), soulforce (+6) gains at lvl-up).");
-	//	public static const AscensionTranscendentalGeneticMemoryStage7:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 7)", "Ascension: Transcendental Genetic Memory (Stage 7)",
-	//			"Allows you to retain up to 105 chosen unlocked metamorphic options.");
 	//	public static const AscensionBuildingPrestige07:PerkType = mk("Ascension: Building Prestige (7th Stage)", "Ascension: Building Prestige (7th Stage)",
 	//			"Your understanding of prestige jobs from previous lives allows you to pick an 8th one at lvl 42+.");
 	//	public static const AscensionBuildingPrestige08:PerkType = mk("Ascension: Building Prestige (8th Stage)", "Ascension: Building Prestige (8th Stage)",
@@ -450,6 +448,12 @@ public class PerkLib
 		public static const SlimeMetabolismEvolved:PerkType = mk("Slime Metabolism (Evolved)", "Slime Metabolism (Evolved)",
 				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of cum and increase max Hunger cap by 50 (if PC have Hunger bar active).",
 				"You've chosen the 'Slime Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of cum and keeping it for 50% longer.");
+		public static const DefensiveStaffChanneling:PerkType = mk("Defensive Staff Channeling", "Defensive Staff Channeling",
+				"When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).",
+				"You've chosen the 'Defensive Staff Channeling' perk. When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
+		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
+				".",
+				"You've chosen the 'Offensive Staff Channeling' perk. .");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -2572,6 +2576,9 @@ public class PerkLib
 		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Prestige Job: Arcane Archer",
 				"You've trained in prestige art of combining magic and arrows. (+40 to max spe/int - scalable)",
 				"You've chosen the 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.").withBuffs({'spe.mult':0.40,'int.mult':0.40});
+		public static const PrestigeJobArchpriest:PerkType = mk("Prestige Job: Arch-priest", "Prestige Job: Arch-priest",
+				"You've trained in prestige art of divine magic. (+40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower)",
+				"You've chosen the 'Prestige Job: Arch-priest' perk, training yourself to became Arch-priest.").withBuffs({'tou.mult':0.40,'int.mult':0.40});
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking. (+60 to max str, +20 to max tou - scalable)",
 				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':0.60,'tou.mult':0.20});
@@ -2992,8 +2999,8 @@ public class PerkLib
 				"Slows hunger rate by further 20%.",
 				"You've chosen the 'Survivalist 2' perk.  With this perk, your hunger rate is reduced by another 20%.");
 		public static const StaffChanneling:PerkType = mk("Staff Channeling", "Staff Channeling",
-				"Basic attack with wizard's staff is replaced with ranged magic bolt. (Allow attack flying enemies)",
-				"You've chosen the 'Staff Channeling' perk. Basic attack with wizard's staff is replaced with ranged magic bolt. (Allow attack flying enemies)");
+				"Melee attacks with staffs would turn to ranged magic bolts. In additiona to hitting enemy next to you they would enable hitting enemeis out of your reach (for ex. flying enemies).",
+				"You've chosen the 'Staff Channeling' perk. Melee attacks with staffs would turn to ranged magic bolts. In additiona to hitting enemy next to you they would enable hitting enemeis out of your reach (for ex. flying enemies).");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
 				"Enables sixth item slot.",
 				"You've chosen the 'Strong Back' perk, enabling a sixth item slot.");
@@ -3875,6 +3882,7 @@ public class PerkLib
 		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
+		public static const NoExpGained:PerkType = mk("No Exp Gained", "No Exp Gained", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery", "Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon.").withBuffs({'int.mult':0.75});
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
@@ -3882,7 +3890,6 @@ public class PerkLib
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
-		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
@@ -4335,7 +4342,9 @@ public class PerkLib
             Juggernaut.requireTou(100)
                     .requirePerk(HeavyArmorProficiency)
                     .requireLevel(18);
-            //AyoArmorProficiency.requireMinTou(80).requirePerk(HeavyArmorProficiency);
+            AyoArmorProficiency.requireTou(100)
+					.requirePerk(HeavyArmorProficiency)
+                    .requireLevel(18);
             HalfStepToAdvancedEndurance.requireTou(120)
                     .requireStr(80)
                     .requireLevel(18)
@@ -5064,6 +5073,18 @@ public class PerkLib
             GreyMage.requirePerk(GreyMageApprentice)
                     .requireInt(125)
                     .requireLevel(18);
+            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
+                    .requirePerk(JobEnchanter)
+                    .requireInt(100)
+                    .requireLevel(18);
+            DefensiveStaffChanneling.requirePerk(StaffChanneling)
+                    .requirePerk(JobEnchanter)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsManaShield)
+                                || player.hasStatusEffect(StatusEffects.KnowsBlizzard);
+                    }, "Any defensive spell")
+                    .requireInt(120)
+                    .requireLevel(18);
             //Tier 4 Intelligence perks
             GrandArchmage.requirePerk(Archmage)
                     .requirePerk(FocusedMind)
@@ -5185,18 +5206,19 @@ public class PerkLib
                     .requireInt(200)
                     .requireLevel(42)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;// || player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2
-                    }, "Finished a certain black mage quest line up to the third part of the training");//Siegweird
-			DarkRitual.requirePerk(HexKnowledge)
-					.requireInt(200)
-					.requireLevel(45);
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;
+                    }, "Finished a certain black mage quest line up to the third part of the training");//Alvina
+        	PrestigeJobArchpriest.requirePrestigeJobSlot()
+                    .requirePerk(JobEnchanter)
+                    .requirePerk(JobGuardian)
+                    .requireInt(200)
+                    .requireLevel(42)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 1;
+                    }, "Finished a certain paladin quest line up to the second part of the training");//Siegweird
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)
-                    .requireLevel(42);
-            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
-                    .requirePerk(JobEnchanter)
-                    .requireInt(200)
                     .requireLevel(42);
             //Tier 8 Intelligence perks
             PeerlessSpirituality.requireWis(180)
@@ -5217,7 +5239,10 @@ public class PerkLib
                     .requireInt(300)
                     .requirePerk(PeerlessSpirituality)
                     .requireLevel(54);
-            RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
+            DarkRitual.requirePerk(HexKnowledge)
+					.requireInt(250)
+					.requireLevel(54);
+			RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
                     .requirePerk(RagingInfernoEx)
                     .requireLevel(54)
                     .requireInt(300);

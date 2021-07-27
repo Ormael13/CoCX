@@ -490,68 +490,68 @@ public function etnaRapeIntro2():void
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ETNA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 1;
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ETNA_LVL_UP] < 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 30);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 30);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 1;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ETNA_LVL_UP] == 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 36);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 36);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 2;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ETNA_LVL_UP] == 2) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 42);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 42);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 3;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ETNA_LVL_UP] == 3) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 48);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 48);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 4;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ETNA_LVL_UP] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 54);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 54);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 5;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ETNA_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 60);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 60);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 6;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ETNA_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 66);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 66);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 7;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ETNA_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 72);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 72);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 8;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ETNA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 78);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 78);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 9;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ETNA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 84);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 84);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 10;
 		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ETNA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 90);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 90);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 11;
 		}

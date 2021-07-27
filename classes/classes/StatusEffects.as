@@ -13,7 +13,7 @@ import classes.StatusEffects.VampireThirstEffect;
 	public class StatusEffects
 	{
 		//metamorph
-		public static const TranscendentalGeneticMemory:StatusEffectType = mk("Transcendental Genetic Memory");//v1 - limit of permable options, v2 - current permed options counter
+		public static const TranscendentalGeneticMemory:StatusEffectType = mk("Transcendental Genetic Memory");//v1 - limit of permable options, v2 - current permed options counter (Deprecated)
 		public static const UnlockedFur:StatusEffectType				 = mk("Unlocked Fur");//1 (for line 15)	użyć fox fur lub inne skin tf scene text
 		public static const UnlockedScales:StatusEffectType				 = mk("Unlocked Scales");
 		public static const UnlockedChitin:StatusEffectType				 = mk("Unlocked Chitin");
@@ -455,6 +455,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsIceRain:StatusEffectType                   = mk("Knows Ice Rain");
 		public static const KnowsIceSpike:StatusEffectType                  = mk("Knows Ice Spike");
 		public static const KnowsIciclesOfLove:StatusEffectType             = mk("Knows Icicles of Love");
+		public static const KnowsLifestealEnchantment:StatusEffectType      = mk("Knows Lifesteal Enchantment");
 		public static const KnowsLifetap:StatusEffectType                 	= mk("Knows Lifetap");
 		public static const KnowsLifeSiphon:StatusEffectType                = mk("Knows Life siphon");
 		public static const KnowsLightningBolt:StatusEffectType             = mk("Knows Lightning Bolt");
@@ -470,6 +471,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsPunishingKick:StatusEffectType	            = mk("Knows Punishing Kick");
 		public static const KnowsPyreBurst:StatusEffectType                 = mk("Knows Pyre Burst");
 		public static const KnowsRegenerate:StatusEffectType                = mk("Knows Regenerate");
+		public static const KnowsScarletSpiritCharge:StatusEffectType       = mk("Knows Scarlet Spirit Charge");
+		public static const KnowsScarletSpiritChargeSF:StatusEffectType		= mk("Knows Scarlet Spirit Charge (infused with Soulforce)");
 		public static const KnowsSextupleThrust:StatusEffectType            = mk("Knows Sextuple Thrust");
 		public static const KnowsSidewinder:StatusEffectType                = mk("Knows Sidewinder");
 		public static const KnowsSoulBlast:StatusEffectType                 = mk("Knows Soul Blast");
@@ -525,6 +528,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const NoMoreMarble:StatusEffectType                   = mk("No More Marble");
 		public static const Oswald:StatusEffectType                         = mk("Oswald");
 		public static const Overheat:StatusEffectType                		= mk("Overheat");
+		public static const PCClone:StatusEffectType            			= mk("PC Clone");
 		public static const PCDaughters:StatusEffectType            		= mk("PC Daughters");
 		public static const PCDaughtersWorkshop:StatusEffectType            = mk("PC Daughters Workshop");
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");
@@ -943,6 +947,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const JabbingStyle:StatusEffectType              = mkCombat("Jabbing Style");
 		public static const KamaitachiBleed:StatusEffectType           = mkCombat("Kamaitachi Bleed");
 		public static const KissOfDeath:StatusEffectType               = mkCombat("Kiss of Death");
+		public static const LifestealEnchantment:StatusEffectType      = mkCombat("Lifesteal Enchantment");
 		public static const LifeSiphon:StatusEffectType                = mkCombat("Life siphon");
 		public static const LizanBlowpipe:StatusEffectType             = LizanBlowpipeDebuff.TYPE;
 		public static const LoweredAccuracy:StatusEffectType           = mkCombat("Lowered Accuracy");
@@ -984,6 +989,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const RegenInhibitor:StatusEffectType            = mkCombat("Regen Inhibitor");
 		public static const ResonanceVolley:StatusEffectType           = mkCombat("Resonance Volley");
 		public static const Sandstorm:StatusEffectType                 = mkCombat("sandstorm");
+		public static const ScarletSpiritCharge:StatusEffectType       = mkCombat("Scarlet Spirit Charge");
 		public static const ScyllaBind:StatusEffectType                = mkCombat("Scylla Bind");
 		public static const Sealed:StatusEffectType                    = mkCombat("Sealed");
 		public static const Sealed2:StatusEffectType                   = mkCombat("Sealed2");

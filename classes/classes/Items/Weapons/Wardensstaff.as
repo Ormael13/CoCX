@@ -32,7 +32,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function get verb():String { 
-				return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
+			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
 		}
 		
 		override public function playerEquip():Weapon {

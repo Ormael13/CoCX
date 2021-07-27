@@ -1155,12 +1155,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				TransformationUtils.applyTFIfNotPresent(transformations.HornsNone, doOutput);
 
-				desc += "You write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two large spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>";
+				desc += "You write in pain as two bony lumps begin to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two large spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>";
 
-	        player.horns.count = 2;
-
-	        player.horns.type = Horns.FROSTWYRM;
-	        if (doOutput) outputText(desc);
+	      player.horns.count = 30;
+	      player.horns.type = Horns.FROSTWYRM;
+	      if (doOutput) outputText(desc);
 	    },
 	    // is present
 	    function(): Boolean {
