@@ -1709,6 +1709,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Animal tooth face
         if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasFur()) {
+            outputText("\n\n");
             transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
