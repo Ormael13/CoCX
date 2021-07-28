@@ -335,7 +335,19 @@ public function EtnaFillHerUp():void
 	if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] == 2) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 3;
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 	etnaAffection(10);
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	//yea you came from all 12 of your cock at the same fucking time
 	cleanupAfterCombat();
 }
 

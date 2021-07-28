@@ -1352,7 +1352,11 @@ use namespace CoC;
 				if (player.isLiliraune()) outputText(" both");
 				outputText(" become pregnant but promptly lose consciousness before you can contemplate the prospect any further.");
 				player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
+				if (player.isLiliraune()){
+					player.sexReward("cum","Vaginal");
+				}
+				player.sexReward("Default","Dick");
 				dynStats("lib", 1, "sen", 1, "cor", 1);
 				cleanupAfterCombat();
 				return;
