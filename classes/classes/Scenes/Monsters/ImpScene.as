@@ -1304,7 +1304,7 @@ use namespace CoC;
 			if (player.isAlraune){
 				outputText(images.showImage("imp-loss-female-fuck"));
 				outputText("You sink to the ground, too overcome by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows...and grows...and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
-				if (player.isLiliraune()){ outputText("Your twin sister can’t help but rub her pussy in anticipation the moment she sees this.\n\n" +
+				if (player.isLiliraune()){ outputText(" Your twin sister can’t help but rub her pussy in anticipation the moment she sees this.\n\n" +
 
 						"\"<i>Woah sis, he looks well equipped. You get fucked or I get fucked?</i>\"\n\n" +
 
@@ -1316,7 +1316,7 @@ use namespace CoC;
 				outputText("practically ");
 				if (player.isLiliraune()) outputText("juice themselves ");
 				else outputText("juices itself ");
-				outputText(" in anticipation, and you find yourself spreading away your 12 vine-like tentacle stamens in preparation so to properly give enough space for the tiny walking cumpump to jump into your ");
+				outputText("in anticipation, and you find yourself spreading away your 12 vine-like tentacle stamens in preparation so to properly give enough space for the tiny walking cumpump to jump into your ");
 				if (player.isLiliraune()) outputText("communal ");
 				outputText("bath.\n\n");
 
