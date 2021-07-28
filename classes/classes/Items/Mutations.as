@@ -11231,6 +11231,17 @@ public final class Mutations extends MutationsHelper {
                 dynStats("lus", 10, "cor", 10);
                 MutagenBonus("lib", 2);
             }
+
+        });
+        //Kitsune Human face
+        mutationStep(player.face != Face.FOX && player.face != Face.HUMAN, 3, function ():void {
+            outputText("\n\n");
+            transformations.FaceHuman.applyEffect();
+        });
+        //Kitsune fanged face
+        mutationStep(player.face == Face.HUMAN, 3, function ():void {
+            outputText("\n\n");
+            transformations.FaceAnimalTeeth.applyEffect();
         });
         //Fox Eyes
         mutationStep(player.ears.type == Ears.FOX && player.eyes.type != Eyes.FOX, 3, function ():void {
