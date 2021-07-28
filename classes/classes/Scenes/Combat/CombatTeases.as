@@ -147,7 +147,7 @@ public class CombatTeases extends BaseCombatContent {
 		//slutty simplicity bonus
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
 		//Elven Pole Dancing style bonus
-		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isUsingSpear()) damage += scalingBonusSpeed() * 0.1;
+		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) damage += scalingBonusSpeed() * 0.1;
 		//==============================
 		//TEASE SELECT CHOICES
 		//==BASICS========
