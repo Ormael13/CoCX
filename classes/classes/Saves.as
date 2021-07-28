@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BodyParts.Hair;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -2117,9 +2118,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.eyes.type = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
-			player.eyes.colour = "brown";
+			CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
 		else
-			player.eyes.colour = saveFile.data.eyeColor;
+			CoC.instance.transformations.EyesChangeColor([saveFile.data.eyeColor]).applyEffect(false);
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -2142,7 +2143,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.tallness = saveFile.data.tallness;
 		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
-			player.hairType = 0;
+			player.hairType = Hair.NORMAL;
 		else
 			player.hairType = saveFile.data.hairType;
 		if (saveFile.data.hairStyle == undefined)

@@ -2,7 +2,8 @@ package classes.BodyParts {
 import classes.Creature;
 import classes.BodyParts.*;
 import classes.internals.EnumValue;
-import flash.utils.Dictionary;
+import classes.StatusEffects;
+import classes.internals.Utils;
 
 public class Hair extends BodyPart {
 	/**
@@ -10,28 +11,39 @@ public class Hair extends BodyPart {
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("NORMAL", "FEATHER")
 	 * - name: human-readable default name, ("normal", "feather")
+	 *
 	 * - shortDesc: simple description of the hair
-	 * - longDesc: detailed description of the hair
+	 * - shortDescFunc: function that returns a shortDesc value (shortDesc is ignored if this exists)
+	 *
+	 * - appearanceDesc: detailed description of the hair for PlayerAppearance.as
+	 * - appearanceDescFunc: function that returns an appearanceDesc value (appearanceDesc is ignored if this exists)
+	 *
 	 * - beardDesc: description of the beard linked to the hair type
+	 *
+	 * - ignoresStyle: hair's unique appearance ignores normal hairstyles (plain, wild, etc.)
 	 */
 
 	public static var Types:/*EnumValue*/Array = [];
 
 	public static const NORMAL:int = 0;
 	EnumValue.add(Types, NORMAL, "NORMAL", {
-		name:"normal"
+		name:"normal",
+		appearanceDesc: "Although not particularly remarkable, your {hairInfo} looks good on you, accentuating your features well."
 	});
 
 	public static const FEATHER:int = 1;
 	EnumValue.add(Types, FEATHER, "FEATHER", {
 		name:"feather",
-		shortDesc: "feather-{hair}"
+		shortDesc: "feather-{hair}",
+		appearanceDesc: "Your {hairInfo} is made completely out of feathers rather than actual strands.",
+		ignoresStyle: true
 	});
 
 	public static const GHOST:int = 2;
 	EnumValue.add(Types, GHOST, "GHOST", {
 		name:"ghost",
 		shortDesc: "transparent {hair}",
+		appearanceDesc: "Although your {hairInfo} technically has the features of normal human hair, it is also completely transparent.",
 		beardDesc: "transparent "
 	});
 
@@ -39,6 +51,7 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, GOO, "GOO", {
 		name:"goopy",
 		shortDesc: "goo-{hair}",
+		appearanceDesc: "Atop your head is a gooey {hairInfo}, more like an amorphous blob imitating the familiar shape than the real deal.",
 		beardDesc: "gooey "
 	});
 
@@ -46,108 +59,173 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, ANEMONE, "ANEMONE", {
 		name:"tentacle",
 		shortDesc: "tentacle-{hair}",
-		beardDesc: "tentacley "
+		appearanceDesc: "Your {hairInfo} is in truth made out of anemone tentacles, only vaguely resembling the real deal.",
+		beardDesc: "tentacley ",
+		ignoresStyle: true
 	});
 
 	public static const QUILL:int = 5;
 	EnumValue.add(Types, QUILL, "QUILL", {
 		name:"quill",
-		shortDesc: "quill-{hair}"
+		shortDesc: "quill-{hair}",
+		appearanceDesc: "Your {hairInfo} is made completely out of quills rather than actual strands.",
+		ignoresStyle: true
 	});
 
 	public static const GORGON:int = 6;
 	EnumValue.add(Types, GORGON, "GORGON", {
 		name:"snake-like",
 		shortDesc: "snakes-{hair}",
-		longDesc: "snakes instead of {hair}"
+		appearanceDesc: "Atop your head is technically {hairInfo}, if one were to ignore that it is made of snakes rather than actual hair.",
+		ignoresStyle: true
 	});
 
 	public static const LEAF:int = 7;
 	EnumValue.add(Types, LEAF, "LEAF", {
 		name:"leaf",
 		shortDesc: "leaf-{hair}",
+		appearanceDesc: "Considering how your {hairInfo} is made completely out of leaves, you seem to have some sort of connection to nature.",
 		beardDesc: "moss "
 	});
 
 	public static const FLUFFY:int = 8;
 	EnumValue.add(Types, FLUFFY, "FLUFFY", {
 		name:"fluffy",
-		shortDesc: "fluffy {hair}"
+		shortDesc: "fluffy {hair}",
+		appearanceDesc: "You have a white pillowy {hair}, very much wooly to the touch and constantly trying to lull you to sleep anytime you lie against a surface.",
+		ignoresStyle: true
 	});
 
 	public static const GRASS:int = 9;
 	EnumValue.add(Types, GRASS, "GRASS", {
 		name:"grass",
-		shortDesc: "grass-{hair}"
+		shortDesc: "grass-{hair}",
+		appearanceDesc: "Rather than normal strands, your {hairInfo} is actually made entirely of grass, like some sort of nature spirit's."
 	});
 
 	public static const SILKEN:int = 10;
 	EnumValue.add(Types, SILKEN, "SILKEN", {
-		name:"silk-like",
-		shortDesc: "silk-like-{hair}"
+		name:"silky",
+		shortDesc: "elven {hair}",
+		appearanceDesc: "Your {hairInfo} is extremely glossy and smooth, its elvish features so perfect by human standards to the point of feeling unnatural."
 	});
 
 	public static const STORM:int = 11;
 	EnumValue.add(Types, STORM, "STORM", {
 		name:"glowing lightning-shaped",
-		shortDesc: "lightning-shaped {hair}",
-		longDesc: "{hair} with tips that end with glowing lightning-shaped locks"
+		shortDesc: "lightning {hair}",
+		appearanceDesc: "Your wild {hairInfo}'s tips end in glowing lightning-shaped locks, cackling with electricity whenever you will them to.",
+		ignoresStyle: true
 	});
 
 	public static const BURNING:int = 12;
 	EnumValue.add(Types, BURNING, "BURNING", {
 		name:"burning",
-		shortDesc: "burning mane",
-		longDesc: "mane of fire that burns things only when you wish it to"
+		shortDesc: "burning hair",
+		appearanceDesc: "Your wild {hair} has its tips overtaken by a magic flame, burning anything you wish it to and nothing more.",
+		ignoresStyle: true
 	});
 
 	public static const SNOWY:int = 13;
 	EnumValue.add(Types, SNOWY, "SNOWY", {
 		name:"snowy",
 		shortDesc: "snowy {hair}",
-		longDesc: "snowy {hair}, human in appearance but still regularly used as a nest by snow flurries"
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = "Your {hairInfo} is human in appearance, but cold to the touch and regularly used as a nest by snow flurries";
+
+			if (creature.rearBody.type == RearBody.GLACIAL_AURA) {
+				desc += ", an effect amplified by your bone-chilling aura";
+			}
+
+			desc += "."
+
+			return desc;
+		}
 	});
 
 	public static const FAIRY:int = 14;
 	EnumValue.add(Types, FAIRY, "FAIRY", {
-		name:"otherworldly, silk-like and almost translucent",
-		shortDesc: "silky {hair}",
-		longDesc: "otherworldly, silk-like and almost translucent {hair}"
+		name:"otherworldly silky and almost translucent",
+		shortDesc: "silky fairy {hair}",
+		appearanceDesc: "Despite looking almost human, your {hairInfo} is otherworldly smooth and almost translucent, its fairy traits easy to notice if not identify."
 	});
 
 	public static const CRAZY:int = 15;
 	EnumValue.add(Types, CRAZY, "CRAZY", {
 		name:"crazy",
-		shortDesc: "crazy {hair}"
+		shortDesc: "crazy {hair}",
+		appearanceDesc: "Your wild {hairInfo} is positively crazy, with spiked tips pointing outwards to your sides.",
+		ignoresStyle: true
 	});
 
 	public static const WINDSWEPT:int = 16;
 	EnumValue.add(Types, WINDSWEPT, "WINDSWEPT", {
-		name:"windswept"
+		name:"windswept",
+		appearanceDesc: "Your {hairInfo} is quite aerodynamic, shaped as to avoid encumbering you even in a windstorm."
 	});
 
 	public static const RATATOSKR:int = 17;
 	EnumValue.add(Types, RATATOSKR, "RATATOSKR", {
-		name:"striped",
-		shortDesc: "stripped Ratatoskr {hair}",
-		longDesc: "{hair}, stripped at the center with light tips not unlike the head of a chipmunk"
+		name:"stripped",
+		shortDesc: "stripped {hair}",
+		appearanceDesc: "Though your {hairInfo} could almost pass for human, it's stripped at the center with light tips not unlike the head of a chipmunk."
 	});
 
 	public static const PRISMATIC:int = 18;
 	EnumValue.add(Types, PRISMATIC, "PRISMATIC", {
 		name:"prismatic",
-		shortDesc: "{hair} with prismatic strands that vary in color like the rainbow"
+		shortDesc: "prismatic {hair}",
+		appearanceDesc: "Although your {hairInfo} looks mostly human, that notion is quickly discarded by its prismatic strands, varying in hue along their length to display all the colors of a rainbow."
 	});
 
+	// Additional modifiers for hair descriptions
+	public static var Styles:/*EnumValue*/Array = [];
+
 	public static const PLAIN:int  = 0;
+	EnumValue.add(Styles, PLAIN, "PLAIN", {
+		adjective: "plain"
+	});
+
 	public static const WILD:int = 1;
+	EnumValue.add(Styles, WILD, "WILD", {
+		adjective: "wild"
+	});
+
 	public static const PONYTAIL:int  = 2;
+	EnumValue.add(Styles, PONYTAIL, "PONYTAIL", {
+		adjective: "ponytailed"
+	});
+
 	public static const LONGTRESSES:int  = 3;
+	EnumValue.add(Styles, LONGTRESSES, "LONGTRESSES", {
+		adjective: "low ponytailed"
+	});
+
 	public static const TWINPIGTAIL:int  = 4;
+	EnumValue.add(Styles, TWINPIGTAIL, "TWINPIGTAIL", {
+		adjective: "twintailed"
+	});
+
 	public static const DWARVEN:int  = 5;
+	EnumValue.add(Styles, DWARVEN, "DWARVEN", {
+		adjective: "twintailed"
+	});
+
 	public static const SNOWLILY:int  = 6;
+	EnumValue.add(Styles, SNOWLILY, "SNOWLILY", {
+		adjective: ""
+	});
+
 	public static const FOURWIND:int  = 7;
+	EnumValue.add(Styles, FOURWIND, "FOURWIND", {
+		adjective: ""
+	});
+
 	public static const FOURWINDL:int  = 8;
+	EnumValue.add(Styles, FOURWINDL, "FOURWINDL", {
+		adjective: ""
+	});
+
 
 	public var color:String = "no";
 	public var length:Number = 0.0;
@@ -160,6 +238,123 @@ public class Hair extends BodyPart {
 		super.restore();
 		color = "no";
 		length = 0.0;
+	}
+
+	public static function getDescription(creature: *): String {
+		if (creature.hairLength == 0) {
+			if(creature.skinType == Skin.FUR)
+				return "furry head";
+			else {
+				return getHairLength(creature) + " head";
+			}
+		}
+
+		const id: int = creature.hairType;
+		const idStyle: int = creature.hairStyle;
+
+		return (Types[id].ignoresStyle ? "" : Styles[idStyle].adjective + " ") + getHairLength(creature) + " " +  creature.hairColor + " " + formatDescription(Types[id].shortDesc || "{hair}", creature);
+	}
+
+	public static function getShortDescription(creature: *): String {
+		if (creature.hairLength == 0) {
+			if(creature.skinType == Skin.FUR)
+				return "furry head";
+			else {
+				return getHairLength(creature) + " head";
+			}
+		}
+
+		const id: int = creature.hairType;
+
+		return formatDescription(Types[id].shortDesc || "{hair}", creature);
+	}
+
+	public static function getAppearanceDescription(creature: *): String {
+		if (creature.hairLength == 0) {
+			if(creature.skinType == Skin.FUR)
+				return "You have no hair, only a thin layer of fur atop of your head.";
+			else {
+				return "You have a completely " + getHairLength(creature) + " head, showing only shiny [skintone] [skin.type].";
+			}
+		}
+
+		const id: int = creature.hairType;
+
+		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
+	}
+
+	public static function getStyleDescription(creature: *): String {
+		const id: int = creature.hairStyle;
+
+		var hair:String = "hair";
+
+		//If furry and longish hair sometimes call it a mane (50%)
+		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+			hair = "mane";
+		}
+
+		return Styles[id].adjective + ' ' + hair;
+	}
+
+	private static function formatDescription(desc: String, creature: *): String {
+
+		const id: int = creature.hairType;
+		const idStyle: int = creature.hairStyle;
+
+		var hair:String = "hair";
+
+		//If furry and longish hair sometimes call it a mane (50%)
+		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+			hair = "mane";
+		}
+
+		const hairPattern:RegExp = /{hair}/g;
+		const hairInfoPattern:RegExp = /{hairInfo}/g;
+
+		return desc
+			.replace(hairPattern, hair)
+			.replace(hairInfoPattern, (Types[id].ignoresStyle ? "" : Styles[idStyle].adjective + " ") + getHairLength(creature) + " " +  creature.hairColor + " " +  hair);
+	}
+
+	public static function getHairLength (creature: *): String {
+		var options:Array;
+		var hairscale:Number;
+
+		hairscale = int((creature.hairLength/creature.tallness)*100)/100
+		if (hairscale == 0) {
+			options = ["shaved", "bald", "smooth", "hairless", "glabrous"];
+			return randomChoice(options);
+		} else if (hairscale <= 0.05){
+			options = ["close-cropped", "trim",	"very short"];
+			return randomChoice(options);
+		}	else if (hairscale > 0.05 && hairscale <= 0.1){
+			return "short";
+		}	else if (hairscale > 0.1 && hairscale <= 0.14){
+			return "shaggy";
+		}	else if (hairscale > 0.14 && hairscale <= 0.17){
+			return "moderately long";
+		}	else if (hairscale > 0.17 && hairscale <= 0.2){
+			if (rand(2) == 0) return "long";
+			else return "shoulder-length";
+		}	else if (hairscale > 0.2 && hairscale <= 0.25){
+			return "very long";
+		}	else if (hairscale > 0.25 && hairscale <= 0.4){
+			return "back-covering";
+		}	else if (hairscale > 0.4 && hairscale <= 0.5){
+			return "ass-length";
+		}	else if (hairscale > 0.5 && hairscale <= 1){
+			return "obscenely long, "
+		}	else if (hairscale > 1 ){
+			return "floor-length";
+		}
+
+		return "";
+	}
+
+	public static function ignoresStyle (creature: *): Boolean {
+		const id: int = creature.hairType;
+
+		return Types[id].ignoresStyle || false;
 	}
 }
 }

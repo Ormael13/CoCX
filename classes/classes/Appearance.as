@@ -29,90 +29,16 @@ public class Appearance extends Utils
 				return "hair";
 		}
 
-		public static function hairDescription(i_creature:Creature, longDesc:Boolean = false):String
-		{
-			var description:String = "";
-			var options:Array;
-			var hairscale:Number;
-			//
-			// LENGTH ADJECTIVE!
-			//
-			if (i_creature.hairLength == 0) {
-				options = ["shaved",
-					"bald",
-					"smooth",
-					"hairless",
-					"glabrous"];
-				description = randomChoice(options) + " head";
-				return description;
-			}
-			else {
-				hairscale = int((i_creature.hairLength/i_creature.tallness)*100)/100
-				if (hairscale <= 0.05){	//Values roughly based on actual human ratios.
-					options = ["close-cropped, ",
-						"trim, ",
-						"very short, "];
-					description += randomChoice(options);
-				}
-				else if (hairscale > 0.05 && hairscale <= 0.1){
-					description += "short, ";
-				}
-				else if (hairscale > 0.1 && hairscale <= 0.14){
-					description += "shaggy, ";
-				}
-				else if (hairscale > 0.14 && hairscale <= 0.17){
-					description += "moderately long, ";
-				}
-				else if (hairscale > 0.17 && hairscale <= 0.2){
-					if (rand(2) == 0) description += "long, ";
-					else description += "shoulder-length, ";
-				}
-				else if (hairscale > 0.2 && hairscale <= 0.25){
-					if (rand(2) == 0) description += "very long, ";
-					else description += "flowing locks of ";
-				}
-				else if (hairscale > 0.25 && hairscale <= 0.4){
-					description += "back-covering, ";
-				}
-				else if (hairscale > 0.4 && hairscale <= 0.5){
-					description += "ass-length, ";
-				}
-				else if (hairscale > 0.5 && hairscale <= 1){
-					description += "obscenely long, "
-				}
-				else if (hairscale > 1 ){
-					if (rand(2) == 0) description += "floor-length, ";
-					else description += "floor-dragging, ";
-				}
-			}
-			//
-			// COLORS
-			//
-			description += i_creature.hairColor + " ";
-			//
-			// HAIR WORDS
-			//
+		public static function hairDescription(i_creature:Creature):String {
+			return Hair.getDescription(i_creature);
+		}
 
-			const hairObj: Object = Hair.Types[i_creature.hairType];
+		public static function hairShortDescription(i_creature:Creature):String {
+			return Hair.getShortDescription(i_creature);
+		}
 
-			var hair:String = "hair";
-
-			//If furry and longish hair sometimes call it a mane (50%)
-			if (i_creature.hasFur() == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
-				hair += "mane";
-			}
-
-			if (longDesc) {
-				description += (hairObj.longDesc || hairObj.shortDesc || "hair").replace('{hair}', hair);
-			} else {
-				description += (hairObj.shortDesc || hairObj.longDesc || "hair").replace('{hair}', hair);
-			}
-
-			if (i_creature.hairType == Hair.SNOWY && i_creature.rearBody.type == RearBody.GLACIAL_AURA) {
-				description += ", which might be related to your bone chilling aura";
-			}
-
-			return description;
+		public static function hairStyleDescription(i_creature:Creature):String {
+			return Hair.getStyleDescription(i_creature);
 		}
 
 		public static function beardDescription(i_creature:Creature):String
@@ -162,15 +88,6 @@ public class Appearance extends Utils
 			const beardStyles: Array = ["beard", "goatee", "clean-cut beard", "mountain-man beard"];
 
 			description += beardStyles[i_creature.beardStyle];
-
-			return description;
-		}
-
-		public static function hairStyleDescription(i_creature:Creature):String
-		{
-			var description:String = "";
-			var options: Array = ["plain", "wild", "ponytail", "long tied up", "twin pigtail", "dwarven"];
-			description += options[i_creature.hairStyle];
 
 			return description;
 		}
@@ -2074,7 +1991,7 @@ public class Appearance extends Utils
 					[Wings.FEATHERED_LARGE, "large, feathered"],
 					[Wings.DRACONIC_SMALL, "small, draconic"],
 					[Wings.DRACONIC_LARGE, "large, draconic"],
-					[Wings.SEADRAGON, "large, aquatic"],
+					[Wings.SEA_DRAGON, "large, aquatic"],
 					[Wings.GIANT_DRAGONFLY, "giant dragonfly"],
 					[Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like"],
 					[Wings.DRACONIC_HUGE, "large, majestic draconic"],
@@ -2088,10 +2005,10 @@ public class Appearance extends Utils
 					[Wings.PLANT, "three pairs of cockvines"],
 					[Wings.MANTICORE_LIKE_SMALL, "small manticore-like"],
 					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
-					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
+					[Wings.FEY_DRAGON, "large majestic fey draconic"],
 					[Wings.FEATHERED_AVIAN, "large feathery"],
 					[Wings.NIGHTMARE, "large leathery"],
-					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
+					[Wings.ETHEREAL, "etheral tendrils"],
 					[Wings.THUNDEROUS_AURA, "thunderous aura"],
 					[Wings.LEVITATION, "levitation"],
 					[Wings.FAIRY, "butterfly"],

@@ -9,7 +9,7 @@ public class Tongue extends BodyPart{
 	 * - name: human-readable default name, ("human", "snake")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const HUMAN:int			= 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {name:"human"})
 	public static const SNAKE:int			= 1;
@@ -37,9 +37,16 @@ public class Tongue extends BodyPart{
 	public static const RAVENOUS_TONGUE:int	= 12;
 	EnumValue.add(Types, RAVENOUS_TONGUE, "RAVENOUS_TONGUE", {name:"ravenous"})
 	// Don't forget to add new types in DebugMenu.as list TONGUE_TYPE_CONSTANTS
-	
+
 	public function Tongue() {
 		super(null, null);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

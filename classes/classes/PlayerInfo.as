@@ -166,7 +166,7 @@ public class PlayerInfo extends BaseContent {
 				miscStats += "<b>Corrupted Glades Status:</b> Extinct\n";
 		}
 
-		if (JourneyToTheEast.AhriTavernTalks > 0) 
+		if (JourneyToTheEast.AhriTavernTalks > 0)
 			miscStats += "<b>Conversion (5 stat points to 1 perk point) counter:</b> "+JourneyToTheEast.AhriStatsToPerksConvertCounter+"\n";
 
 		if (flags[kFLAGS.EGGS_BOUGHT] > 0)
@@ -1389,7 +1389,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level > 6) outputText("\n\nYou have gained one perk point!");
 				else outputText("\n\nYou have gained two perk points!");
 			}
-			if (player.statPoints>0) {
+			if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
 				doNext(attributeMenu);
 			} else if (player.perkPoints > 0) {
 				doNext(perkBuyMenu);
@@ -1398,7 +1398,7 @@ public class PlayerInfo extends BaseContent {
 			}
 		}
 		//Spend attribute points
-		else if (player.statPoints > 0) {
+		else if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
 			attributeMenu();
 		}
 		//Spend perk points
@@ -1481,7 +1481,6 @@ public class PlayerInfo extends BaseContent {
 			playerMenu();
 		}
 	}
-
 
 //Attribute menu
 	private function attributeMenu():void {

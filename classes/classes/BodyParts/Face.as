@@ -11,126 +11,311 @@ public class Face extends SaveableBodyPart {
 	 * - value: numerical id (0, 10)
 	 * - id: name of the constant ("HUMAN", "SPIDER_FANGS")
 	 * - name: human-readable name, ("human", "spider")
-	 * - bite:
+	 *
+	 * - appearanceDesc: detailed description of the hair for PlayerAppearance.as
+	 * - appearanceDescFunc: function that returns an appearanceDesc value (appearanceDesc is ignored if this exists)
+	 *
+	 * - humanShaped: whether the face still resembles a human
+	 * - bite: whether the part allows attacking with teeth
 	 */
 	public static var Types:/*EnumValue*/Array = [];
 
-	public static const HUMAN:int            = 0;
-	EnumValue.add(Types, HUMAN, "HUMAN", {name: "human"});
-	public static const HORSE:int            = 1;
-	EnumValue.add(Types, HORSE, "HORSE", {name: "horse"});
-	public static const DOG:int              = 2;
-	EnumValue.add(Types, DOG, "DOG", {name: "dog", bite: true});
-	public static const COW_MINOTAUR:int     = 3;
-	EnumValue.add(Types, COW_MINOTAUR, "COW_MINOTAUR", {name: "cow"});
-	public static const SHARK_TEETH:int      = 4;
-	EnumValue.add(Types, SHARK_TEETH, "SHARK_TEETH", {name: "shark", bite: true});
-	public static const SNAKE_FANGS:int      = 5;
-	EnumValue.add(Types, SNAKE_FANGS, "SNAKE_FANGS", {name: "snake", bite: true});
-	public static const CAT:int              = 6;
-	EnumValue.add(Types, CAT, "CAT", {name: "cat", bite: true});
-	public static const LIZARD:int           = 7;
-	EnumValue.add(Types, LIZARD, "LIZARD", {name: "lizard", bite: true});
-	public static const BUNNY:int            = 8;
-	EnumValue.add(Types, BUNNY, "BUNNY", {name: "bunny", bite: true});
-	public static const KANGAROO:int         = 9;
-	EnumValue.add(Types, KANGAROO, "KANGAROO", {name: "kangaroo"});
-	public static const SPIDER_FANGS:int     = 10;
-	EnumValue.add(Types, SPIDER_FANGS, "SPIDER_FANGS", {name: "spider", bite: true});
-	public static const FOX:int              = 11;
-	EnumValue.add(Types, FOX, "FOX", {name: "fox", bite: true});
-	public static const DRAGON:int           = 12;
-	EnumValue.add(Types, DRAGON, "DRAGON", {name: "dragon", bite: true});
-	public static const RACCOON_MASK:int     = 13;
-	EnumValue.add(Types, RACCOON_MASK, "RACCOON_MASK", {name: "raccoon mask"});
-	public static const RACCOON:int          = 14;//button 0 on 2nd page of metamorph
-	EnumValue.add(Types, RACCOON, "RACCOON", {name: "raccoon", bite: true});
-	public static const BUCKTEETH:int        = 15;
-	EnumValue.add(Types, BUCKTEETH, "BUCKTEETH", {name: "buckteeth", bite: true});
-	public static const MOUSE:int            = 16;
-	EnumValue.add(Types, MOUSE, "MOUSE", {name: "mouse", bite: true});
-	public static const FERRET_MASK:int      = 17;
-	EnumValue.add(Types, FERRET_MASK, "FERRET_MASK", {name: "ferret mask"});
-	public static const FERRET:int           = 18;
-	EnumValue.add(Types, FERRET, "FERRET", {name: "ferret", bite: true});
-	public static const PIG:int              = 19;
-	EnumValue.add(Types, PIG, "PIG", {name: "pig"});
-	public static const BOAR:int             = 20;
-	EnumValue.add(Types, BOAR, "BOAR", {name: "boar"});
-	public static const RHINO:int            = 21;
-	EnumValue.add(Types, RHINO, "RHINO", {name: "rhino"});
-	public static const ECHIDNA:int          = 22;
-	EnumValue.add(Types, ECHIDNA, "ECHIDNA", {name: "echidna"});
-	public static const DEER:int             = 23;
-	EnumValue.add(Types, DEER, "DEER", {name: "deer"});
-	public static const WOLF:int             = 24;
-	EnumValue.add(Types, WOLF, "WOLF", {name: "wolf", bite: true});
-	public static const MANTICORE:int        = 25;
-	EnumValue.add(Types, MANTICORE, "MANTICORE", {name: "manticore", bite: true});
-	public static const SALAMANDER_FANGS:int = 26;
-	EnumValue.add(Types, SALAMANDER_FANGS, "SALAMANDER_FANGS", {name: "salamander", bite: true});
-	public static const YETI_FANGS:int       = 27;
-	EnumValue.add(Types, YETI_FANGS, "YETI_FANGS", {name: "yeti", bite: true});
-	public static const ORCA:int	         = 28;//button 0 on 3rd page of metamorph
-	EnumValue.add(Types, ORCA, "ORCA", {name: "orca", bite: true});
-	public static const PLANT_DRAGON:int	 = 29;
-	EnumValue.add(Types, PLANT_DRAGON, "PLANT_DRAGON", {name: "plant dragon", bite: true});
-	public static const DRAGON_FANGS:int	 = 30;
-	EnumValue.add(Types, DRAGON_FANGS, "DRAGON_FANGS", {name: "dragon fangs", bite: true});
-	public static const DEVIL_FANGS:int 	 = 31;
-	EnumValue.add(Types, DEVIL_FANGS, "DEVIL_FANGS", {name: "devil fangs", bite: true});
-	public static const ONI_TEETH:int   	 = 32;
-	EnumValue.add(Types, ONI_TEETH, "ONI_TEETH", {name: "oni teeth", bite: true});
-	public static const WEASEL:int 	 		 = 33;
-	EnumValue.add(Types, WEASEL, "WEASEL", {name: "weasel", bite: true});
-	public static const VAMPIRE:int     	 = 34;
-	EnumValue.add(Types, VAMPIRE, "VAMPIRE", {name: "vampire", bite: true});
-	public static const BUCKTOOTH:int   	 = 35;
-	EnumValue.add(Types, BUCKTOOTH, "BUCKTOOTH", {name: "jabberwocky bucktooth", bite: true});
-	public static const JABBERWOCKY:int 	 = 36;
-	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {name: "jabberwocky", bite: true});
-	public static const RED_PANDA:int   	 = 37;
-	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {name: "red-panda", bite: true});
-	public static const CAT_CANINES:int 	 = 38;
-	EnumValue.add(Types, CAT_CANINES, "CAT_CANINES", {name: "cat canines", bite: true});
-	public static const CHESHIRE:int    	 = 39;
-	EnumValue.add(Types, CHESHIRE, "CHESHIRE", {name: "cheshire", bite: true});
-	public static const CHESHIRE_SMILE:int	 = 40;
-	EnumValue.add(Types, CHESHIRE_SMILE, "CHESHIRE_SMILE", {name: "cheshire", bite: true});
-	public static const AVIAN:int			 = 41;
-	EnumValue.add(Types, AVIAN, "AVIAN", {name: "avian", bite: true});
-	public static const WOLF_FANGS:int		 = 42;//button 0 on 4th page of metamorph
-	EnumValue.add(Types, WOLF_FANGS, "WOLF_FANGS", {name: "wolf fangs", bite: true});
-	public static const ORC_FANGS:int		 = 43;
-	EnumValue.add(Types, ORC_FANGS, "ORC_FANGS", {name: "orc fangs", bite: true});
-	public static const ANIMAL_TOOTHS:int	 = 44;
-	EnumValue.add(Types, ANIMAL_TOOTHS, "ANIMAL_TOOTHS", {name: "animal teeth", bite: true});
-	public static const BEAR:int			 = 45;
-	EnumValue.add(Types, BEAR, "BEAR", {name: "bear", bite: true});
-	public static const PANDA:int			 = 46;
-	EnumValue.add(Types, PANDA, "PANDA", {name: "panda", bite: true});
-	public static const FIRE_SNAIL:int		 = 47;
-	EnumValue.add(Types, FIRE_SNAIL, "FIRE_SNAIL", {name: "fire snail"});
-	public static const GHOST:int			 = 48;
-	EnumValue.add(Types, GHOST, "GHOST", {name: "ghost"});
-	public static const JIANGSHI:int		 = 49;
-	EnumValue.add(Types, JIANGSHI, "JIANGSHI", {name: "jiangshi"});
-	public static const YUKI_ONNA:int		 = 50;
-	EnumValue.add(Types, YUKI_ONNA, "YUKI_ONNA", {name: "yuki onna"});
-	public static const KUDERE:int	 		 = 51;
-	EnumValue.add(Types, KUDERE, "KUDERE", {name: "kuudere"});
-	public static const USHI_ONI_ONNA:int	 = 52;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {name: "ushi-oni", bite: true});
-	public static const FAIRY:int            = 53;
-	EnumValue.add(Types, FAIRY, "FAIRY", {name: "fairy"});
-	public static const CRAZY:int            = 54;
-	EnumValue.add(Types, CRAZY, "CRAZY", {name: "crazy"});
-	public static const SMUG:int             = 55;
-	EnumValue.add(Types, SMUG, "SMUG", {name: "smug"});
-	public static const SQUIRREL:int         = 56;
-	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {name: "squirrel", bite: true});
-	public static const ELF:int           	 = 57;
-	EnumValue.add(Types, ELF, "ELF", {name: "elf"});
+	public static const HUMAN: int = 0;
+	EnumValue.add(Types, HUMAN, "HUMAN", {
+		name: "human",
+		humanShaped: true
+	});
+	public static const HORSE: int = 1;
+	EnumValue.add(Types, HORSE, "HORSE", {
+		name: "horse"
+	});
+	public static const DOG: int = 2;
+	EnumValue.add(Types, DOG, "DOG", {
+		name: "dog",
+		bite: true
+	});
+	public static const COW_MINOTAUR: int = 3;
+	EnumValue.add(Types, COW_MINOTAUR, "COW_MINOTAUR", {
+		name: "cow"
+	});
+	public static const SHARK_TEETH: int = 4;
+	EnumValue.add(Types, SHARK_TEETH, "SHARK_TEETH", {
+		name: "shark",
+		bite: true,
+		humanShaped: true
+	});
+	public static const SNAKE_FANGS: int = 5;
+	EnumValue.add(Types, SNAKE_FANGS, "SNAKE_FANGS", {
+		name: "snake",
+		bite: true,
+		humanShaped: true
+	});
+	public static const CAT: int = 6;
+	EnumValue.add(Types, CAT, "CAT", {
+		name: "cat",
+		bite: true
+	});
+	public static const LIZARD: int = 7;
+	EnumValue.add(Types, LIZARD, "LIZARD", {
+		name: "lizard",
+		bite: true
+	});
+	public static const BUNNY: int = 8;
+	EnumValue.add(Types, BUNNY, "BUNNY", {
+		name: "bunny",
+		bite: true,
+		humanShaped: true
+	});
+	public static const KANGAROO: int = 9;
+	EnumValue.add(Types, KANGAROO, "KANGAROO", {
+		name: "kangaroo"
+	});
+	public static const SPIDER_FANGS: int = 10;
+	EnumValue.add(Types, SPIDER_FANGS, "SPIDER_FANGS", {
+		name: "spider",
+		bite: true,
+		humanShaped: true
+	});
+	public static const FOX: int = 11;
+	EnumValue.add(Types, FOX, "FOX", {
+		name: "fox",
+		bite: true
+	});
+	public static const DRAGON: int = 12;
+	EnumValue.add(Types, DRAGON, "DRAGON", {
+		name: "dragon",
+		bite: true
+	});
+	public static const RACCOON_MASK: int = 13;
+	EnumValue.add(Types, RACCOON_MASK, "RACCOON_MASK", {
+		name: "raccoon mask"
+	});
+	public static const RACCOON: int = 14;
+	EnumValue.add(Types, RACCOON, "RACCOON", {
+		name: "raccoon",
+		bite: true
+	});
+	public static const BUCKTEETH: int = 15;
+	EnumValue.add(Types, BUCKTEETH, "BUCKTEETH", {
+		name: "buckteeth",
+		bite: true,
+		humanShaped: true
+	});
+	public static const MOUSE: int = 16;
+	EnumValue.add(Types, MOUSE, "MOUSE", {
+		name: "mouse",
+		bite: true
+	});
+	public static const FERRET_MASK: int = 17;
+	EnumValue.add(Types, FERRET_MASK, "FERRET_MASK", {
+		name: "ferret mask",
+		humanShaped: true
+	});
+	public static const FERRET: int = 18;
+	EnumValue.add(Types, FERRET, "FERRET", {
+		name: "ferret",
+		bite: true
+	});
+	public static const PIG: int = 19;
+	EnumValue.add(Types, PIG, "PIG", {
+		name: "pig"
+	});
+	public static const BOAR: int = 20;
+	EnumValue.add(Types, BOAR, "BOAR", {
+		name: "boar"
+	});
+	public static const RHINO: int = 21;
+	EnumValue.add(Types, RHINO, "RHINO", {
+		name: "rhino"
+	});
+	public static const ECHIDNA: int = 22;
+	EnumValue.add(Types, ECHIDNA, "ECHIDNA", {
+		name: "echidna"
+	});
+	public static const DEER: int = 23;
+	EnumValue.add(Types, DEER, "DEER", {
+		name: "deer"
+	});
+	public static const WOLF: int = 24;
+	EnumValue.add(Types, WOLF, "WOLF", {
+		name: "wolf",
+		bite: true
+	});
+	public static const MANTICORE: int = 25;
+	EnumValue.add(Types, MANTICORE, "MANTICORE", {
+		name: "manticore",
+		bite: true,
+		humanShaped: true
+	});
+	public static const SALAMANDER_FANGS: int = 26;
+	EnumValue.add(Types, SALAMANDER_FANGS, "SALAMANDER_FANGS", {
+		name: "salamander",
+		bite: true,
+		humanShaped: true
+	});
+	public static const YETI_FANGS: int = 27;
+	EnumValue.add(Types, YETI_FANGS, "YETI_FANGS", {
+		name: "yeti",
+		bite: true,
+		humanShaped: true
+	});
+	public static const ORCA: int = 28;//button 0 on 3rd page of metamorph
+	EnumValue.add(Types, ORCA, "ORCA", {
+		name: "orca",
+		bite: true
+	});
+	public static const PLANT_DRAGON: int = 29;
+	EnumValue.add(Types, PLANT_DRAGON, "PLANT_DRAGON", {
+		name: "plant dragon",
+		bite: true
+	});
+	public static const DRAGON_FANGS: int = 30;
+	EnumValue.add(Types, DRAGON_FANGS, "DRAGON_FANGS", {
+		name: "dragon fangs",
+		bite: true
+	});
+	public static const DEVIL_FANGS: int = 31;
+	EnumValue.add(Types, DEVIL_FANGS, "DEVIL_FANGS", {
+		name: "devil fangs",
+		bite: true
+	});
+	public static const ONI_TEETH: int = 32;
+	EnumValue.add(Types, ONI_TEETH, "ONI_TEETH", {
+		name: "oni teeth",
+		bite: true,
+		humanShaped: true
+	});
+	public static const WEASEL: int = 33;
+	EnumValue.add(Types, WEASEL, "WEASEL", {
+		name: "weasel",
+		bite: true
+	});
+	public static const VAMPIRE: int = 34;
+	EnumValue.add(Types, VAMPIRE, "VAMPIRE", {
+		name: "vampire",
+		bite: true,
+		humanShaped: true
+	});
+	public static const BUCKTOOTH: int = 35;
+	EnumValue.add(Types, BUCKTOOTH, "BUCKTOOTH", {
+		name: "jabberwocky bucktooth",
+		bite: true
+	});
+	public static const JABBERWOCKY: int = 36;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name: "jabberwocky",
+		bite: true
+	});
+	public static const RED_PANDA: int = 37;
+	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {
+		name: "red panda",
+		bite: true
+	});
+	public static const CAT_CANINES: int = 38;
+	EnumValue.add(Types, CAT_CANINES, "CAT_CANINES", {
+		name: "cat canines",
+		bite: true
+	});
+	public static const CHESHIRE: int = 39;
+	EnumValue.add(Types, CHESHIRE, "CHESHIRE", {
+		name: "cheshire",
+		bite: true
+	});
+	public static const CHESHIRE_SMILE: int = 40;
+	EnumValue.add(Types, CHESHIRE_SMILE, "CHESHIRE_SMILE", {
+		name: "cheshire",
+		bite: true,
+		humanShaped: true
+	});
+	public static const AVIAN: int = 41;
+	EnumValue.add(Types, AVIAN, "AVIAN", {
+		name: "avian",
+		bite: true
+	});
+	public static const WOLF_FANGS: int = 42;//button 0 on 4th page of metamorph
+	EnumValue.add(Types, WOLF_FANGS, "WOLF_FANGS", {
+		name: "wolf fangs",
+		bite: true,
+		humanShaped: true
+	});
+	public static const ORC_FANGS: int = 43;
+	EnumValue.add(Types, ORC_FANGS, "ORC_FANGS", {
+		name: "orc fangs",
+		bite: true,
+		humanShaped: true
+	});
+	public static const ANIMAL_TOOTHS: int = 44;
+	EnumValue.add(Types, ANIMAL_TOOTHS, "ANIMAL_TOOTHS", {
+		name: "animal teeth",
+		bite: true,
+		humanShaped: true
+	});
+	public static const BEAR: int = 45;
+	EnumValue.add(Types, BEAR, "BEAR", {
+		name: "bear",
+		bite: true
+	});
+	public static const PANDA: int = 46;
+	EnumValue.add(Types, PANDA, "PANDA", {
+		name: "panda",
+		bite: true
+	});
+	public static const FIRE_SNAIL: int = 47;
+	EnumValue.add(Types, FIRE_SNAIL, "FIRE_SNAIL", {
+		name: "fire snail",
+		humanShaped: true
+	});
+	public static const GHOST: int = 48;
+	EnumValue.add(Types, GHOST, "GHOST", {
+		name: "ghost",
+		humanShaped: true
+	});
+	public static const JIANGSHI: int = 49;
+	EnumValue.add(Types, JIANGSHI, "JIANGSHI", {
+		name: "jiangshi",
+		humanShaped: true
+	});
+	public static const YUKI_ONNA: int = 50;
+	EnumValue.add(Types, YUKI_ONNA, "YUKI_ONNA", {
+		name: "yuki onna",
+		humanShaped: true
+	});
+	public static const KUDERE: int = 51;
+	EnumValue.add(Types, KUDERE, "KUDERE", {
+		name: "kuudere",
+		humanShaped: true
+	});
+	public static const USHI_ONI: int = 52;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
+		name: "ushi-oni",
+		bite: true,
+		humanShaped: true
+	});
+	public static const FAIRY: int = 53;
+	EnumValue.add(Types, FAIRY, "FAIRY", {
+		name: "fairy",
+		humanShaped: true
+	});
+	public static const CRAZY: int = 54;
+	EnumValue.add(Types, CRAZY, "CRAZY", {
+		name: "crazy",
+		humanShaped: true
+	});
+	public static const SMUG: int = 55;
+	EnumValue.add(Types, SMUG, "SMUG", {
+		name: "smug",
+		humanShaped: true
+	});
+	public static const SQUIRREL: int = 56;
+	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {
+		name: "squirrel",
+		bite: true
+	});
+	public static const ELF: int = 57;
+	EnumValue.add(Types, ELF, "ELF", {
+		name: "elf",
+		humanShaped: true
+	});
 
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);
@@ -162,12 +347,8 @@ public class Face extends SaveableBodyPart {
 			return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL KITTEH IMMEDIATELY.</b>";
 		}
 	}
-	public function isHumanShaped():Boolean {
-		return isAny(HUMAN,
-				MANTICORE, BUCKTEETH, BUNNY, SHARK_TEETH, SNAKE_FANGS, SPIDER_FANGS,
-				YETI_FANGS, SALAMANDER_FANGS, ONI_TEETH, ORC_FANGS, CHESHIRE_SMILE,
-				FERRET_MASK, VAMPIRE, ANIMAL_TOOTHS, FIRE_SNAIL, GHOST, ELF, FAIRY,
-				SMUG, JIANGSHI, KUDERE, YUKI_ONNA, USHI_ONI_ONNA, CRAZY, WOLF_FANGS);
+	public static function isHumanShaped(faceId: int):Boolean {
+		return Types[faceId].humanShaped || false;
 	}
 	public function nounPhrase():String {
 		var stringo:String = "";
@@ -288,6 +469,21 @@ public class Face extends SaveableBodyPart {
 	}
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.faceType = type;
+	}
+
+	public static function getAppearanceDescription(creature: *): String {
+		const id: int = creature.faceType;
+
+		var desc: String = "";
+
+		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

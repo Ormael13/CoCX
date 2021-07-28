@@ -11,7 +11,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		{
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -29,7 +29,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			}
 			return false;
 		}
-	
+
 		public function timeChangeLarge():Boolean {
 			if (prison.inPrison || flags[kFLAGS.IN_INGNAM] > 0) return false;
 			if (flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
@@ -43,7 +43,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			return false;
 		}
 		//End of Interface Implementation
-		
+
 		override public function vapulaSlave():Boolean {
 			return flags[kFLAGS.VAPULA_FOLLOWER] == 1;
 
@@ -229,7 +229,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				else
 				{
 					outputText("Vapula mooches over when you call her name, resentfully kicking an imp out of the way as she does. “<i>Yes, [master]?</i>” she says, with exaggerated sweetness.");
-					
+
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] == 1)
 					{
 						flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] = 2;
@@ -264,24 +264,24 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			//Requires bipedal-ness
 			if (flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = spankVapulaLikeABoss;
 			else threesome = vapulaThreesomeMenu;
-			
+
 			choices("Appearance", fapulaFapfapfapAppearance, "Talk", talkToVapulaForSomeReason, "Feed", mFeed, "Feed(Dildo)", fFeed, "Threesome", threesome,
 				"Spank", spank, "", null, "", null, "", null, "Leave", camp.campSlavesMenu);
-					
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Work", sendToFarm);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(6, "Go Camp", backToCamp);
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 0) addButton(7, "Harvest Milk", harvestMilk);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1) addButton(7, "Stop Harvest", stopHarvest);
-					
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 			dynStats("lus", 10);
 		}
-		
+
 		private function sendToFarm():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell your succubus concubine that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Vapula laughs long and hard at this.");
 
 			outputText("\n\n“<i>Good one [master],</i>” she guffaws. “<i>Me! Working on a farm! Taking orders from a dog! You’ve got such a wicked sense of humor, I wish I could coil it and suck it dry. You... you really can’t be serious about this, can you?</i>” she asks, sobering as she catches your expression.");
@@ -289,51 +289,51 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\n“<i>I am. Her working with a succubus will teach her just as important a lesson as it will you, slaving in the dirt for my benefit. Don’t worry... I’ll be over to check up on you frequently, and if you’re </i>really<i> good I’ll give you something better to milk than your average cow when I do.</i>” ");
 
 			outputText("\n\nVapula argues for a while longer, but you stand firm and eventually, complaining bitterly under her breath, the succubus stomps off in the direction of the lake. It’s difficult to believe she will be anything like a competent worker, you think, and the cloud of imps she will inevitably take with her means she’s pretty dubious in the protection stakes too; on the other hand, such close exposure to an out-and-out demon will surely have an interesting effect on Whitney.");
-			
+
 			flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] = 1;
-			
+
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function backToCamp():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. Vapula fist pumps the sky.");
 
 			outputText("\n\n“<i>Yessssss! You will NOT regret this, [master]. Oh, I am SO out of here!</i>” She practically sprints out of the farm yard, leaving you to laugh and then cough in the dust cloud she leaves.");
-			
+
 			flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] = 0;
-			
+
 			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
-		
+
 		private function harvestMilk():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Vapula that you want her hooked up to a milking machine whenever possible; you need her fluids.");
 
 			outputText("\n\n“<i>Ooh, so that’s why you wanted me to come out here!</i>” Vapula grins and her fingers reach for a breast, already fantasising about insistent pressure on her nipples.");
-			
+
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("“<i>It’ll sure as hell beat whatever disgusting thing the bitch would have me doing instead. Why don’t you make her build a concentration machine? Lethice has loads; makes one dose of cream go so much further.</i>”");
 			else outputText("“<i>As you insist, [master]. It’ll sure as hell beat working.</i>”");
-			
+
 			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 1;
-			
+
 			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
-		
+
 		private function stopHarvest():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Vapula to stop producing succubus milk; you’re practically drowning in the stuff.");
 
 			outputText("\n\n“<i>Well, that was the whole idea, [master]. Sure you don’t want to drink some more? Alright, alright!</i>” A familiarly sulky expression descends on the demon’s face as you deny her her second most favourite activity.");
-			
+
 			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 0;
-			
+
 			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 
@@ -1082,7 +1082,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				outputText("You tell Vapula you're going to reward her for being such a good slut; pushing the pink end of the dildo into you with a sigh, you strap yourself into the harness so that the monstrous purple end bobs out in front of you.  You giggle as Vapula grabs hold of it and proceeds to lick it, coating the entirety of your artificial junk with her warm, sweet saliva.");
 			}
 			outputText("\n\nShe voraciously slurps the end and smiles up at you, making you laugh even harder.  This bizarre ritual is giving you a good insight into why guys like blowjobs so much; although you can't feel what your succubus slut is doing, it certainly feels very good to see her on her knees like this in front of you, slurping away at you with such evident enjoyment.  Hell, the fact you can't feel it almost makes it better; you could stand here and make her debase herself like this all day if you wanted to.");
-			outputText("\n\nVapula evidently has other ideas, however. Her smooth fingers trail across your " + buttDescript() + ", clasping you for a time as you run your fingers through her long hair, before inching inwards, sinking one and then two fingers into your " + assholeDescript() + ".  You close your eyes and flex your mind, making your end of the dildo twitch and then pulse, making it grow and then ebb, grow and then ebb, slowly working your tunnel until it feels wide and soaked with arousal.  Still looking cheekily upwards, Vapula crooks her fingers inwards, stroking at your dildo through your walls.  With a groan of impatience, you grab her head and drive the whole of the purple dildo into her mouth, stuffing her full of the warm, artificial dick.  She nearly chokes at first but her old reflexes acquired from a whole life devoted to lewdness and licentiousness start kicking in; Vapula gluttonously deepthroats it, softly moaning as she fingers herself with one hand and finger fucks your ass with the other.  She sucks like a whore, her lips and throat squeezing the dildo expertly, apparently oblivious to the fact it can't feel her.");
+			outputText("\n\nVapula evidently has other ideas, however. Her smooth fingers trail across your [butt], clasping you for a time as you run your fingers through her long hair, before inching inwards, sinking one and then two fingers into your " + assholeDescript() + ".  You close your eyes and flex your mind, making your end of the dildo twitch and then pulse, making it grow and then ebb, grow and then ebb, slowly working your tunnel until it feels wide and soaked with arousal.  Still looking cheekily upwards, Vapula crooks her fingers inwards, stroking at your dildo through your walls.  With a groan of impatience, you grab her head and drive the whole of the purple dildo into her mouth, stuffing her full of the warm, artificial dick.  She nearly chokes at first but her old reflexes acquired from a whole life devoted to lewdness and licentiousness start kicking in; Vapula gluttonously deepthroats it, softly moaning as she fingers herself with one hand and finger fucks your ass with the other.  She sucks like a whore, her lips and throat squeezing the dildo expertly, apparently oblivious to the fact it can't feel her.");
 			outputText("\n\nYou shake your head in wonder at your succubus slave; she really is just hungry for dick.  You decide to give her what she evidently needs. You take hold of her hair and piston into her, driving down her tight throat and then back out again, using the outward pull to thrust your end further into yourself, sending rivulets of girlcum down your thighs.");
 			outputText("\n\nShe works on it for what seems like hours.  You look down at your slut; she keeps staring at you with avid yet playful eyes, never breaking eye contact as she relentlessly throatfucks herself; you feel her lips curve a little as the shape of a ravenous smile appears on her face, and her eyes are glittering with an insatiable need.  The sight is enough to increase your own arousal, and you begin to move your dildo around more freely, sawing into her face as you push it backwards, forwards, grow it, shrink it, and then eventually just make it vibrate with violent force.  Your stamina is rapidly overwhelmed and you decide to reward her effort; you savagely press Vapula's head against your groin, burying all eight inches of your false cock into her waiting throat; deliriously you will your throbbing dildo to expand to pack you mercilessly tight, finally pushing you over the edge.  Your " + clitDescript() + " throbs as your vagina spasms ecstatically around the bulging sex toy; vaguely you feel release at the other end, and you hear Vapula loudly and shamelessly enjoy what the dildo pumps out.  You abandon yourself to the climax and keep thrusting your " + hipDescript() + " into her face, girlcum spurting around your harness.");
 			outputText("\n\nAfter a long haze of mindless bliss, you feel long fingers undoing the strap-on and lifting it away, before curling around your thighs.  You peacefully look down to find Vapula bending into your crotch, her warm, slimy tongue touching your belly.  She looks about six months pregnant with the amount of spooge she has managed to milk from the dildo, but she is still intent upon licking you clean.  You sigh and let her, her tongue expertly gliding across your skin and exploring every corner of your dripping sex; she smacks her lips and happily hums as she goes about it, evidently enjoying you like a dessert to the fine main course she just received.  Eventually she finishes her mutually pleasurable task, and the two of you slowly get to your feet. Without a word you send her on her way to digest her lavish meal with a slap on the ass.");

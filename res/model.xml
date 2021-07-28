@@ -1243,7 +1243,7 @@
         <cell rect="676,630,116,139" name="wings_bg/greatDragonLeft" dx="-12" dy="26"/>
         <cell rect="793,630,135,139" name="wings_bg/greatDragonRight" dx="105" dy="26"/>
     </spritemap>
-	
+
 	<!-- LAYER AREA -->
     <layers>
 		<layer name="fullbody"/>
@@ -1412,10 +1412,10 @@
 
 		<!-- WEAPON AREA -->
 		<if test="playerHasWeaponBannedArms">
-			<if test="WeaponDisplay == 0">		
+			<if test="WeaponDisplay == 0">
 				<!-- MELEE WEAPON -->
 				<if test="playerHasWeaponWings">
-					
+
 					<!-- Staff -->
 					<if test="PlayerHasAStaff">
 						<if test="PlayerHasAStaffHoly or PlayerHasAStaffUnholy">
@@ -1430,7 +1430,7 @@
 							</else>
 						</if>
 					</if>
-			
+
 					<!-- Sword -->
 					<if test="PlayerHasASword">
 						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
@@ -1460,7 +1460,7 @@
 							</if>
 						</if>
 					</if>
-			
+
 					<!-- Axe -->
 					<if test="PlayerHasAnAxe">
 						<if test="PlayerHasAnAxeHoly or PlayerHasAnAxeUnholy">
@@ -1484,7 +1484,7 @@
 							</else>
 						</if>
 					</if>
-					
+
 					<!-- Tetsubo -->
 					<if test="PlayerHasATetsu">
 						<if test="PlayerHasATetsuHoly or PlayerHasATetsuUnholy">
@@ -1499,7 +1499,7 @@
 							</else>
 						</if>
 					</if>
-					
+
 					<!-- Hammer -->
 					<if test="PlayerHasAHammer">
 						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
@@ -1523,7 +1523,7 @@
 							</else>
 						</if>
 					</if>
-			
+
 					<!-- Spear -->
 					<if test="PlayerHasASpear">
 						<if test="PlayerHasASpearHoly or PlayerHasASpearUnholy">
@@ -1538,7 +1538,7 @@
 							</else>
 						</if>
 					</if>
-			
+
 					<!-- Katana -->
 					<if test="PlayerHasKatana">
 						<if test="PlayerHasKatanaHoly or PlayerHasKatanaUnholy">
@@ -1556,9 +1556,9 @@
 							<show part="weaponBuff/katanaFireBuff"/>
 						</if>
 					</if>
-			
+
 					<!-- Rapiers -->
-					<if test="PlayerHasRapier">			
+					<if test="PlayerHasRapier">
 						<if test="PlayerHasRapierHoly or PlayerHasRapierUnholy">
 							<if test="PlayerHasRapierHoly">
 								<show part="weapon/rapierHoly"/>
@@ -1573,11 +1573,11 @@
 						<if test="FireBuff">
 							<show part="weaponBuff/rapierFireBuff"/>
 						</if>
-					</if>			
+					</if>
 				</if>
 				<!-- Shield -->
 				<if test="PlayerHasAShield">
-					<if test="PlayerHasSanctuary">					
+					<if test="PlayerHasSanctuary">
 						<if test="PlayerHasSanctuaryHoly or PlayerHasSanctuaryCorrupt">
 							<if test="PlayerHasSanctuaryHoly">
 								<show part="shield/shieldHoly"/>
@@ -1588,7 +1588,7 @@
 							<else>
 								<show part="shield/shieldGeneric"/>
 							</else>
-						</if>				
+						</if>
 						<else>
 							<show part="shield/shieldGeneric"/>
 						</else>
@@ -1596,9 +1596,9 @@
 				</if>
 				<else>
 				<!-- RANGED WEAPON -->
-					<if test="playerHasWeaponWings">	
+					<if test="playerHasWeaponWings">
 						<!-- Bows -->
-						<if test="PlayerHasABow">			
+						<if test="PlayerHasABow">
 							<if test="PlayerHasABowHoly or PlayerHasABowUnholy">
 								<if test="PlayerHasABowHoly">
 									<show part="weapon/bowHoly"/>
@@ -1611,11 +1611,11 @@
 								</else>
 							</if>
 						</if>
-						
-						<!-- Thrown -->	
-						<if test="PlayerHasAThrownWeapon">	
-							<!-- Javelin -->						
-							<if test="PlayerHasAJavelin">	
+
+						<!-- Thrown -->
+						<if test="PlayerHasAThrownWeapon">
+							<!-- Javelin -->
+							<if test="PlayerHasAJavelin">
 								<if test="PlayerHasAJavelinHoly or PlayerHasAJavelinUnholy">
 									<if test="PlayerHasAJavelinHoly">
 										<show part="weapon/spearHoly"/>
@@ -1627,24 +1627,24 @@
 										<show part="weapon/spearGeneric"/>
 									</else>
 								</if>
-							</if>						
+							</if>
 							<!-- Axe -->
-							<if test="PlayerHasAThrownAxe">				
+							<if test="PlayerHasAThrownAxe">
 								<show part="weapon/axeGeneric"/>
-							</if>						
+							</if>
 						</if>
-						
-						<!-- Guns -->	
-						<if test="PlayerHasLactoBlaster">	
+
+						<!-- Guns -->
+						<if test="PlayerHasLactoBlaster">
 							<show part="backAccessory/LactoblasterTank"/>
 							<show part="weapon/LactoblasterGun"/>
 							<show part="weapon/LactoblasterMilker"/>
 						</if>
-						
+
 					</if>
-					
+
 				</else>
-			</if>	
+			</if>
 		</if>
 
 		<!-- ANTENNAE AREA -->
@@ -1659,7 +1659,7 @@
             <case values="Antennae.CENTIPEDE">
                 <show part="antennae/bee"/> <!-- Temporary -->
             </case>
-			<case values="Antennae.SEADRAGON">
+			<case values="Antennae.SEA_DRAGON">
                 <show part="neck/seaDragonWhisker"/>
             </case>
             <default>
@@ -1719,7 +1719,7 @@
 			<case values="Horns.ANTLERS">
 				<show part="horns_overclothe/deer"/>
             </case>
-			<case values="Horns.SEADRAGON">
+			<case values="Horns.SEA_DRAGON">
                 <show part="horns_bg/seaDragon"/>
             </case>
         </switch>
@@ -1826,14 +1826,14 @@
             <case values="Eyes.HUMAN">
                 <show part="eyes/human"/>
             </case>
-            <case values="Eyes.FOUR_SPIDER_EYES">
+            <case values="Eyes.SPIDER">
                 <show part="horns/spider"/>
 				<show part="eyes/human"/>
             </case>
             <case values="Eyes.BLACK_EYES_SAND_TRAP">
                 <show part="eyes/sandtrap"/>
             </case>
-            <case values="Eyes.FOX,Eyes,Eyes.CAT_SLITS,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
+            <case values="Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
                 <show part="eyes/cat"/>
             </case>
             <case values="Eyes.DEVIL,Eyes.FROSTWYRM">
@@ -2180,7 +2180,7 @@
                         <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY">
                             <set var="skinx">orca</set>
                         </if>
-						<if test="skin.base.pattern==Pattern.SEADRAGON_UNDERBODY">
+						<if test="skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
                             <set var="skinx">orca</set>
 							<show part="torso_pattern/Bbioluminescence"/>
                         </if>
@@ -2519,7 +2519,7 @@
 				<show part="hands/furracoon"/>
 				<show part="hands_bg/furracoon"/>
                 <show part="overhands/ratatoskrRight"/>
-                <show part="overhands/ratatoskrLeft"/>			
+                <show part="overhands/ratatoskrLeft"/>
             </case>
             <case values="Arms.BEE">
                 <hide part="arms/*"/>
@@ -2676,7 +2676,7 @@
 					</if>
                 </if>
             </case>
-			<case values="Arms.DRAGON">
+			<case values="Arms.DRACONIC">
                 <show part="hands/scale"/>
                 <show part="hands_bg/scale"/>
 				<if test="PlayerHasViewableOutfit">
@@ -2778,7 +2778,7 @@
                 <show part="hands/scales"/>
                 <show part="hands_bg/scales"/>
             </case>
-            <case values="Arms.ORCA,Arms.SEADRAGON">
+            <case values="Arms.ORCA,Arms.SEA_DRAGON">
                 <hide part="arms/*"/>
                 <hide part="arms_bg/*"/>
                 <show part="arms_bg/orca"/>
@@ -2786,7 +2786,7 @@
                 <show part="hands/fins-orca"/>
                 <show part="hands_bg/fins-orca"/>
             </case>
-            <case values="Arms.DEVIL,Arms.RAIJU_2">
+            <case values="Arms.DEVIL,Arms.RAIJU_PAWS">
                 <show part="hands/devil"/>
                 <show part="hands_bg/devil"/>
             </case>
@@ -3079,22 +3079,22 @@
 						<show part="feet/scales"/>
 						<if test="PlayerHasViewableOutfit">
 							<if test="armStanceNonBannedList">
-								<if test="arms.type==Arms.DRAGON">
+								<if test="arms.type==Arms.DRACONIC">
 									<hide part="legs/*"/>
 									<hide part="feet/*"/>
 									<show part="legs/dragon"/>
-								</if>	
+								</if>
 							</if>
 							<else>
-								<if test="arms.type==Arms.DRAGON">
+								<if test="arms.type==Arms.DRACONIC">
 									<hide part="legs/*"/>
 									<hide part="feet/*"/>
 									<show part="legs/dragon"/>
-								</if>	
+								</if>
 							</else>
 						</if>
 					</else>
-                </if>          
+                </if>
             </case>
             <case values="LowerBody.HARPY">
                 <hide part="legs/*"/>
@@ -3196,7 +3196,7 @@
 				</if>
 
             </case>
-			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEADRAGON">
+			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEA_DRAGON">
 				<if test="lowerBody==LowerBody.ORCA">
 					<hide part="legs/*"/>
 					<show part="legs/orca"/>
@@ -3434,7 +3434,7 @@
 					<show part="wings_front/mantibig"/>
 				</if>
             </case>
-            <case values="Wings.FEY_DRAGON_WINGS">
+            <case values="Wings.FEY_DRAGON">
                 <show part="wings/fairy"/>
                 <show part="wings_bg/fairy"/>
 				<if test="playerHasLargeLowerBody">
@@ -3464,7 +3464,7 @@
 					<show part="wings_front/devilfeather"/>
 				</if>
             </case>
-			<case values="Wings.ETHEREAL_WINGS">
+			<case values="Wings.ETHEREAL">
                 <show part="wings/ghost"/>
             </case>
 			<case values="Wings.WRAITH">
@@ -3476,7 +3476,7 @@
 			<case values="Wings.WINDY_AURA">
                 <show part="aura/windyaura"/>
             </case>
-			<case values="Wings.SEADRAGON">
+			<case values="Wings.SEA_DRAGON">
                 <show part="wings_bg/seaDragonLeft"/>
 				<show part="wings_bg/seaDragonRight"/>
             </case>
@@ -4054,7 +4054,7 @@
 		<if test="lowerBody == LowerBody.CENTIPEDE">
 			<hide part="legs_pattern/*"/>
 		</if>
-		
+
 		<!-- SLIME CORES -->
 		<if test="DarkSlimeCore">
 			<show part="neck/darkGooCore"/>
@@ -4151,17 +4151,17 @@
 		<if test="sphinxRegalia">
 			<show part="clotheUnderAmulet/sphinxregalia"/>
 		</if>
-		
+
 		<!-- Skull Ornament -->
 		<if test="skullOrnament">
 			<show part="clotheHead_bg/warlockSkulls"/>
 		</if>
-		
+
 		<!-- Demon tail ring -->
 		<if test="demonTailRing">
 			<show part="tailAccessory/demonTailJewelery"/>
 		</if>
-		
+
 		<!-- Oni Gourd -->
 		<if test="oniGourd">
 			<show part="backAccessory/oniGourd"/>
@@ -4288,7 +4288,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<if test="iceQueenGown">
 			<if test="showClothing">
 				<show part="clothe/IceQueenKimonoTop"/>
@@ -4309,7 +4309,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<if test="OniLegendaryKimono">
 			<if test="showClothing">
 				<show part="clothe/OniKimonoTop"/>
@@ -4376,7 +4376,7 @@
 				</case>
 				<default>
 					<show part="armorNeck/fullplatetopFemaleLarge"/>
-				</default>		
+				</default>
 			</switch>
 			</if>
 			<show part="armorChest/fullplatebottom"/>
@@ -4388,7 +4388,7 @@
 				<show part="armorLegs_fg/taurarmorbottom"/>
 			</if>
 		</if>
-		
+
 		<if test="centaurBlackGuardArmor">
 			<if test="breastRows.length gt 0">
 			<switch>
@@ -4409,7 +4409,7 @@
 				</case>
 				<default>
 					<show part="armorNeck/blackFullplatetopFemaleLarge"/>
-				</default>		
+				</default>
 			</switch>
 			</if>
 			<show part="armorChest/blackFullplatebottom"/>
@@ -4465,8 +4465,8 @@
 				<hide part="balls/*"/>
 			</if>
 		</if>
-		
-		
+
+
 		<!--Mage set -->
 		<if test="MageRobe">
 			<if test="showClothing">
@@ -4579,7 +4579,7 @@
 				<hide part="balls/*"/>
 			</if>
 		</if>
-		
+
 		<!--Comfy set -->
 		<if test="comfyBikiniBra">
 			<if test="breastRows.length gt 0">
@@ -5143,7 +5143,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<if test="elfClothing">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -5345,21 +5345,21 @@
             <if test="showClothing">
                 <show part="clothe/berserkerArmorTop"/>
                 <if test="showArmClothing">
-                    <show part="clothRightArm/berserkerArmorArms"/>  
-					<else> 
-						<if test="PlayerIsFeralStancing">                      
+                    <show part="clothRightArm/berserkerArmorArms"/>
+					<else>
+						<if test="PlayerIsFeralStancing">
 							<show part="clothLeftArm/berserkerArmorArmsFeralLeft"/>
 							<show part="clothRightArm/berserkerArmorArmsFeralRight"/>
 						</if>
-					</else>					
+					</else>
                 </if>
                 <if test="showLegClothing">
                     <show part="clotheLegs/berserkerArmorLegs"/>
-					<else> 
-						<if test="PlayerIsFeralStancing">                      
+					<else>
+						<if test="PlayerIsFeralStancing">
 							<show part="clotheLegs/berserkerArmorLegsFeral"/>
 						</if>
-					</else>		
+					</else>
                 </if>
                 <else>
                     <if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
@@ -5369,7 +5369,7 @@
                     </if>
                     <if test="showLegClothing">
                         <show part="clotheLegs/berserkerArmorLegs"/>
-                        <else> 
+                        <else>
 							<if test="PlayerIsFeralStancing">
 								<show part="clotheLegs/berserkerArmorLegsFeral"/>
 							</if>
@@ -5378,7 +5378,7 @@
                 </else>
             </if>
         </if>
-		
+
 		<if test="chainMailBikini">
 			<if test="breastRows.length gt 0">
 			<switch>
@@ -5400,23 +5400,23 @@
 				<default>
 					<show part="bra/chainMailBraLarge"/>
 				</default>
-			</switch>	
+			</switch>
 			</if>
 			<if test="showClothing">
 				<if test="showLegClothing">
 					<if test="isTaur()==false">
-						<show part="panty/chainMailPanty"/>	
+						<show part="panty/chainMailPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
 					</if>
 				</if>
 			</if>
 		</if>
-		
+
 		<if test="showClothing == false">
-			<hide part="panty/*"/>	
+			<hide part="panty/*"/>
 		</if>
-		
-		
+
+
     </logic>
 </model>

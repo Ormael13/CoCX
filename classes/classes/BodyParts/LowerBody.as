@@ -4,6 +4,8 @@
 package classes.BodyParts {
 import classes.Creature;
 import classes.internals.EnumValue;
+import classes.StatusEffects;
+import classes.BodyParts.Tail;
 
 public class LowerBody extends SaveableBodyPart {
 	/**
@@ -11,28 +13,45 @@ public class LowerBody extends SaveableBodyPart {
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("HUMAN", "HOOFED")
 	 * - name: human-readable default name, ("human", "hoofed")
-	 * - legCount: number of legs the part has (defaults to 2 if property doesn't exist)
 	 *
-	 * - legs: what the part's legs are called (defaults to "legs" if property doesn't exist)
+	 * - legCount: number of legs the part has (defaults to 2)
+	 *
+	 * - legs: what the part's legs are called (defaults to "legs")
 	 * - legsPrefixes: optional list of descriptions to pick randomly before legs (e.g. *vulpine* legs)
 	 *
-	 * - leg: what the part's leg is called (defaults to "leg" if property doesn't exist)
+	 * - leg: what the part's leg is called (defaults to "leg")
 	 * - legPrefixes: optional list of descriptions to pick randomly before leg (e.g. *vulpine* leg)
 	 *
-	 * - feet: what the part's leg is called (defaults to "leg" if property doesn't exist)
+	 * - feet: what the part's leg is called (defaults to "leg")
 	 * - feetPrefixes: optional list of descriptions to pick randomly before feet (e.g. *vulpine* feet)
 	 *
-	 * - foot: what the part's leg is called (defaults to "leg" if property doesn't exist)
+	 * - foot: what the part's leg is called (defaults to "leg")
 	 * - footPrefixes: optional list of descriptions to pick randomly before foot (e.g. *vulpine* foot)
 	 *
-	 * - appearanceDesc: description for PlayerAppearance.as in the LOWERBODY DESCRIPTION area (always visible)
-	 * - appearanceDesc[TypeHere]: same as appearanceDesc, but only shown if player is of the specified type (Biped, Taur, or Drider)
+	 * - appearanceDesc: lower body part description for PlayerAppearance.as
+	 * - appearanceDescFunc: function that returns an appearanceDesc string value (appearanceDesc is ignored if this exists)
 	 *
-	 * - claw: Whether the part enables claw actions, meant to be checked during scenes
-	 * - tailSlam: Whether the part enables tail slam, meant to be checked during scenes
-	 * - tentacle: Whether the part enables tentacle actions, meant to be checked during scenes
+	 * - crotchDesc: crotch description for PlayerAppearance.as, such as whether there are tentacles covering the crotch (not a penis or vagina description)
+	 * - crotchDescFunc: function that returns a crotchDesc string value (crotchDesc is ignored if this exists)
 	 *
-	 * - is[TypeHere]: Whether the part counts the player as specific type (ex: Drider, Goo, Naga, Scylla, etc), defaults to false with no property
+	 * - noLowerGarment: whether the part disables wearing lower garment (defaults to false)
+	 * - noLowerGarmentFunc: function that returns a noLowerGarment boolean value (noLowerGarment is ignored if this exists)
+	 *
+	 * - canTaur: part can be used with a taur body (4 legs)
+	 * - hasTentacles: part has tentacles and enables tentacle actions
+	 * - hasPincers: part has pincers and enables pincer actions
+	 * - hasTalons: part has talons and enables talon actions
+	 * - hasClaws: part enables claw actions
+	 *
+	 * - draconic: part counts as "dragon or variant"
+	 * - feline: part counts as "cat or variant"
+	 * - eggLayer: part allows laying eggs if conditions are met
+	 *
+	 * - noTail: part doesn't allow a separate tail part
+	 * - tail: part includes or is tail (also doesn't allow a tail part)
+	 * - tailSlam: whether the part enables Tail Slam
+	 *
+	 * - is[TypeHere]: whether the part counts the creature as specific type (ex: Drider, Goo, Naga, Scylla, etc), defaults to false with no property
 	 */
 
 	public static var Types:/*EnumValue*/Array = [];
@@ -42,7 +61,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const HUMAN:int = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {
 		name: "human",
-		appearanceDesc: "{legCount} normal human legs grow down from your [hips], ending in normal human feet."
+		appearanceDesc: "{legCount} human legs grow down from your [hips], ending in normal human feet."
 	});
 
 	public static const HOOFED:int = 1;
@@ -50,16 +69,29 @@ public class LowerBody extends SaveableBodyPart {
 		name: "hoofed",
 		feet: "hooves",
 		foot: "hoof",
-		appearanceDescBiped: "Your two legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.",
-		appearanceDescTaur: "From the waist down, you have the body of a horse, with four muscled legs which are jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves."
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = ""
+
+			if (creature.isBiped()) {
+				desc += "Your two legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.";
+			}
+
+			if (creature.isTaur()) {
+				desc += "From the waist down, you have the body of a horse, with four muscled legs which are jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves."
+			}
+
+			return desc;
+		},
+		canTaur: true
 	});
 
 	public static const DOG:int = 2;
 	EnumValue.add(Types, DOG, "DOG", {
 		name: "dog",
-		feet: "paws",
-		foot: "paw",
-		appearanceDesc: "{legCount} digitigrade legs grow downwards from your waist, ending in dog-like hind-paws."
+		feet: "dog paws",
+		foot: "dog paw",
+		appearanceDesc: "{legCount} digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.",
+		canTaur: true
 	});
 
 	public static const NAGA:int = 3;
@@ -71,6 +103,7 @@ public class LowerBody extends SaveableBodyPart {
 		feet: "coils",
 		foot: "coiled tail",
 		appearanceDesc: "Below your waist, your flesh is fused together into a very long snake-like tail.",
+		tail: true,
 		tailSlam: true,
 		isNaga: true
 	});
@@ -80,8 +113,7 @@ public class LowerBody extends SaveableBodyPart {
 		name: "centaur",
 		leg: "equine leg",
 		feet: "hooves",
-		foot: "hoof",
-		centaur: true
+		foot: "hoof"
 	});
 
 	public static const DEMONIC_HIGH_HEELS:int = 5;
@@ -120,13 +152,16 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, CAT, "CAT", {
 		name: "cat",
 		appearanceDesc: "{legCount} digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.",
-		canPounce: true
+		canPounce: true,
+		feline: true,
+		canTaur: true
 	});
 
 	public static const LIZARD:int = 10;
 	EnumValue.add(Types, LIZARD, "LIZARD", {
 		name: "lizard",
-		appearanceDesc: "{legCount} digitigrade legs grow down from your [hips], ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back."
+		appearanceDesc: "{legCount} digitigrade legs grow down from your [hips], ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back.",
+		canTaur: true
 	});
 
 	public static const PONY:int = 11;
@@ -137,7 +172,16 @@ public class LowerBody extends SaveableBodyPart {
 		feet: "flat pony-feet",
 		foot: "flat pony-foot",
 		legCount: 4,
-		appearanceDescTaur: "From the waist down, you have an incredibly cute and cartoonish parody of a horse's body, with all four legs ending in flat, rounded feet."
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = ""
+
+			if (creature.isTaur()) {
+				desc += "From the waist down, you have an incredibly cute and cartoonish parody of a horse's body, with all four legs ending in flat, rounded feet."
+			}
+
+			return desc;
+		},
+		canTaur: true
 	});
 
 	public static const BUNNY:int = 12;
@@ -147,7 +191,8 @@ public class LowerBody extends SaveableBodyPart {
 		legPrefixes: ["fuzzy bunny", "fur-covered", "furry", ""],
 		feetPrefixes: ["large bunny", "rabbit", "large", ""],
 		footPrefixes: ["large bunny", "rabbit", "large", ""],
-		appearanceDesc: "Your {legCount} legs thicken below the waist as they turn into soft-furred rabbit-like legs. You even have large bunny feet that make hopping around a little easier than walking."
+		appearanceDesc: "Your {legCount} legs thicken below the waist as they turn into soft-furred rabbit-like legs. You even have large bunny feet that make hopping around a little easier than walking.",
+		canTaur: true
 	});
 
 	public static const HARPY:int = 13;
@@ -157,7 +202,9 @@ public class LowerBody extends SaveableBodyPart {
 		legPrefixes: ["bird-like", "feathered", ""],
 		feetPrefixes: ["taloned", ""],
 		foottPrefixes: ["taloned", ""],
-		appearanceDesc: "Your {legCount} legs are covered with [haircolor] plumage. Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons."
+		appearanceDesc: "Your {legCount} legs are covered with [haircolor] plumage. Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.",
+		hasTalons: true,
+		eggLayer: true
 	});
 
 	public static const KANGAROO:int = 14;
@@ -192,13 +239,16 @@ public class LowerBody extends SaveableBodyPart {
 		feetPrefixes: ["soft padded", "fox", ""],
 		foot: "paw",
 		footPrefixes: ["soft padded", "fox", "", ""],
-		appearanceDesc: "Your {legCount} fox legs are crooked into high knees with hocks and long feet; cute bulbous toes decorate the ends."
+		appearanceDesc: "Your {legCount} fox legs are crooked into high knees with hocks and long feet; cute bulbous toes decorate the ends.",
+		canTaur: true
 	});
 
 	public static const DRAGON:int = 18;
 	EnumValue.add(Types, DRAGON, "DRAGON", {
 		name: "dragon",
-		appearanceDesc: "{legCount} human-like legs grow down from your [hips], sheathed in scales and ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back."
+		appearanceDesc: "{legCount} human-like legs grow down from your [hips], sheathed in scales and ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back.",
+		draconic: true,
+		canTaur: true
 	});
 
 	public static const RACCOON:int = 19;
@@ -210,27 +260,31 @@ public class LowerBody extends SaveableBodyPart {
 		feetPrefixes: ["raccoon", "long-toed", ""],
 		foot: "paw",
 		footPrefixes: ["raccoon", "long-toed", ""],
-		appearanceDesc: "Your {legCount} legs, though covered in fur, are humanlike. Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch."
+		appearanceDesc: "Your {legCount} legs, though covered in fur, are humanlike. Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.",
+		canTaur: true
 	});
 
 	public static const FERRET:int = 20;
 	EnumValue.add(Types, FERRET, "FERRET", {
 		name: "ferret",
-		appearanceDesc: "{legCount} furry, digitigrade legs form below your [hips]. The fur is thinner on the feet, and your toes are tipped with claws."
+		appearanceDesc: "{legCount} furry, digitigrade legs form below your [hips]. The fur is thinner on the feet, and your toes are tipped with claws.",
+		canTaur: true
 	});
 
 	public static const CLOVEN_HOOFED:int = 21;
 	EnumValue.add(Types, CLOVEN_HOOFED, "CLOVEN_HOOFED", {
 		name: "cloven-hoofed",
-		legsPrefixes: ["pig-like", "swine", "", ""],
-		appearanceDesc: "{legCount} digitigrade legs form below your [hips], ending in cloven hooves."
+		legsPrefixes: ["pig-like", "cloven-hoofed", "", ""],
+		appearanceDesc: "{legCount} digitigrade legs form below your [hips], ending in cloven hooves.",
+		canTaur: true
 	});
 
 	//public static const :int = 22;not used anywhere legs number likely ^^
 
 	public static const ECHIDNA:int = 23;
 	EnumValue.add(Types, ECHIDNA, "ECHIDNA", {
-		name: "echidna"
+		name: "echidna",
+		canTaur: true
 	});
 
 	public static const DEERTAUR:int = 24;//[Deprecated] use CLOVEN_HOOFED and legCount = 4
@@ -241,21 +295,47 @@ public class LowerBody extends SaveableBodyPart {
 	public static const SALAMANDER:int = 25;
 	EnumValue.add(Types, SALAMANDER, "SALAMANDER", {
 		name: "salamander",
-		appearanceDesc: "{legCount} digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your [hips], ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back."
+		appearanceDesc: "{legCount} digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your [hips], ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back.",
+		eggLayer: true,
+		canTaur: true
 	});
 
 	public static const SCYLLA:int = 26;
 	EnumValue.add(Types, SCYLLA, "SCYLLA", {
 		name: "slippery octopus tentacles",
-		tentacle: true,
 		appearanceDesc: "Where your legs would normally start, you have grown the body of an octopus, with {legCount} tentacle legs that sprout from your [hips].",
-		isScylla: true
+		crotchDescFunc: function(creature: *): String {
+			var desc: String = "";
+
+			switch (creature.gender) {
+				case 1:
+					desc += "Your sex is concealed between your front octopus tentacle legs dangling freely when not in use.";
+				break;
+				case 2:
+					desc += "Your sex is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal your true self.";
+				break;
+				case 3:
+					desc += "Your sex";
+					if(creature.cockTotal() > 1) {
+						desc += "es are ";
+					} else {
+						desc += " is ";
+					}
+					desc += "concealed between your front octopus tentacle legs dangling freely. Other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.";
+			}
+
+			return desc;
+		},
+		isScylla: true,
+		hasTentacles: true,
+		noTail: true
 	});
 
 	public static const MANTIS:int = 27;
 	EnumValue.add(Types, MANTIS, "MANTIS", {
 		name: "mantis",
-		appearanceDesc: "Your {legCount} legs are covered in a shimmering [skin coat.color], insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
+		appearanceDesc: "Your {legCount} legs are covered in a shimmering [skin coat.color], insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.",
+		canTaur: true
 	});
 
 	//public static const :int = 28;thunder mantis legs
@@ -263,14 +343,26 @@ public class LowerBody extends SaveableBodyPart {
 	public static const SHARK:int = 29;
 	EnumValue.add(Types, SHARK, "SHARK", {
 		name: "shark",
-		appearanceDescBiped: "Your two legs are mostly human save for the webbing between your toes.",
-		appearanceDescTaur: "Your four legs end in three-toed scaled paws with webbing between the toes, and an even larger webbing running on the entire length."
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = ""
+
+			if (creature.isBiped()) {
+				desc += "Your two legs are mostly human save for the webbing between your toes.";
+			}
+
+			if (creature.isTaur()) {
+				desc += "Your four legs end in three-toed scaled paws with webbing between the toes, and an even larger webbing running on the entire length."
+			}
+
+			return desc;
+		},
+		canTaur: true
 	});
 
 	public static const GARGOYLE:int = 30;//button 0 on 3rd page of metamorph
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {
 		name: "gargoyle",
-		appearanceDesc: "Your {legCount} digitigrade {gargoyleMaterial} legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back."
+		appearanceDesc: "Your {legCount} digitigrade [gargoylematerial] legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back."
 	});
 
 	public static const PLANT_HIGH_HEELS:int = 31;
@@ -289,7 +381,8 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, WOLF, "WOLF", {
 		name: "wolf",
 		appearanceDesc: "{legCount} digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.",
-		canPounce: true
+		canPounce: true,
+		canTaur: true
 	});
 
 	public static const PLANT_FLOWER:int = 34;
@@ -306,7 +399,9 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, LION, "LION", {
 		name: "lion",
 		appearanceDesc: "Your four legs are covered in [skin coat.color] fur up to the thigh where it fades to white. They end with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs.",
-		canPounce: true
+		canPounce: true,
+		feline: true,
+		canTaur: true
 	});
 
 	public static const YETI:int = 36;
@@ -318,7 +413,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const ORCA:int = 37;
 	EnumValue.add(Types, ORCA, "ORCA", {
 		name: "orca",
-		appearanceDesc: "Your {legCount} legs are mostly human save for the webbing between your toes that assists you in swimming."
+		appearanceDesc: "Your {legCount} legs are mostly human save for the webbing between your toes that assists you in swimming.",
+		canTaur: true
 	});
 
 	public static const YGG_ROOT_CLAWS:int = 38;
@@ -342,7 +438,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const RAIJU:int = 41;
 	EnumValue.add(Types, RAIJU, "RAIJU", {
 		name: "raiju",
-		appearanceDesc: "You have {legCount} fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance."
+		appearanceDesc: "You have {legCount} fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.",
+		canTaur: true
 	});
 
 	public static const RED_PANDA:int = 42;
@@ -354,19 +451,21 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GARGOYLE_2:int = 43;
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
 		name: "gargoyle",
-		appearanceDesc: "Your {legCount} {gargoyleMaterial} legs aside of their stone structure look pretty much human."
+		appearanceDesc: "Your {legCount} [gargoylematerial] legs aside of their stone structure look pretty much human."
 	});
 
-	public static const AVIAN:int = 44;//button 0 on 4th page of metamorph
+	public static const AVIAN:int = 44;
 	EnumValue.add(Types, AVIAN, "AVIAN", {
 		name: "avian",
-		appearanceDesc: "You have strong thighs perfect for launching you into the air which end in slender, bird-like legs, covered with a [skin coat.color] plumage down to your knees and slightly rough, [skin] below. You have digitigrade feet, with toes that end in sharp talons."
+		appearanceDesc: "You have strong thighs perfect for launching you into the air which end in slender, bird-like legs, covered with a [skin coat.color] plumage down to your knees and slightly rough, [skin] below. You have digitigrade feet, with toes that end in sharp talons.",
+		canTaur: true
 	});
 
 	public static const GRYPHON:int = 45;
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name: "gryphon",
-		appearanceDesc: "You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [skin coat.color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws."
+		appearanceDesc: "You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [skin coat.color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws.",
+		canTaur: true
 	});
 
 	public static const ORC:int = 46;
@@ -396,7 +495,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const BEAR:int = 50;
 	EnumValue.add(Types, BEAR, "BEAR", {
 		name: "bear",
-		appearanceDesc: "Your {legCount} legs are covered with [skin coat.color] fur. They end with powerful bear-like paws."
+		appearanceDesc: "Your {legCount} legs are covered with [skin coat.color] fur. They end with powerful bear-like paws.",
+		canTaur: true
 	});
 
 	public static const HYDRA:int = 51;
@@ -407,7 +507,7 @@ public class LowerBody extends SaveableBodyPart {
 		leg: "hydra-tail",
 		feet: "coils",
 		foot: "coiled tail",
-		appearanceDesc: "Below your waist your flesh is fused together into the body of a snake which split into {hydraHeads} {doubleHeight} long serpentine coils each ending with a snake head. Your many heads tend to hiss when you are in pain or angry.",
+		appearanceDesc: "Below your waist your flesh is fused together into the body of a snake which split into [hydraheads] [doubletallness] long serpentine coils each ending with a snake head. Your many heads tend to hiss when you are in pain or angry.",
 		bite: true,
 		isNaga: true
 	});
@@ -427,7 +527,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GHOST_2:int = 54;
 	EnumValue.add(Types, GHOST_2, "GHOST_2", {
 		name: "poltergeist",
-		appearanceDesc: "Below your waist, your body fuses and fades away, like a ghost."
+		appearanceDesc: "Below your waist, your body fuses and fades away, like a ghost.",
+		noLowerGarment: true
 	});
 
 	public static const JIANGSHI:int = 55;
@@ -446,21 +547,47 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, MELKIE, "MELKIE", {
 		name: "melkie",
 		appearanceDesc: "Beneath your waist your body ends in the tail of a leopard seal. It allows you to swim gracefully in arctic waters. However, when the time to move on land arises, you can part the fur at your waist in order to let your two human legs out and walk on solid ground as the land dwellers do.",
+		crotchDesc: "You have a outer set of vaginal lips at the junction between your human body and seal tail, in which your internal sex and human legs are hidden when not in use.",
 		tailSlam: true
 	});
 
 	public static const CENTIPEDE:int = 58;
 	EnumValue.add(Types, CENTIPEDE, "CENTIPEDE", {
 		name: "centipede",
-		appearanceDesc: "In place of legs you have the body of a giant centipede. Your long segmented insectoid body has over a dozen pairs of spindly legs and is tipped with a pair of stingers that can pierce even the strongest armor."
+		appearanceDesc: "In place of legs you have the body of a giant centipede. Your long segmented insectoid body has over a dozen pairs of spindly legs and is tipped with a pair of stingers that can pierce even the strongest armor.",
+		noTail: true
 	});
 
 	public static const KRAKEN:int = 59;
 	EnumValue.add(Types, KRAKEN, "KRAKEN", {
 		name: "kraken",
-		tentacle: true,
-		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to {doubleHeight} feet in length!",
-		isKraken: true
+		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to [doubletallness] feet in length!",
+		crotchDescFunc: function(creature: *): String {
+			var desc: String = "";
+
+			switch (creature.gender) {
+				case 1:
+					desc += "Your sex is concealed between your front octopus tentacle legs, dangling freely when not in use.";
+				break;
+				case 2:
+					desc += "Your sex is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal your true self.";
+				break;
+				case 3:
+					desc += "Your sex";
+					if(creature.cockTotal() > 1) {
+						desc += "es are ";
+					} else {
+						desc += " is ";
+					}
+					desc += "concealed between your front octopus tentacle legs, dangling freely. The other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.";
+			}
+
+			return desc;
+		},
+		isScylla: true,
+		isKraken: true,
+		hasTentacles: true,
+		noTail: true
 	});
 
 	public static const CRAB:int = 60;
@@ -472,22 +599,33 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CANCER:int = 61;
 	EnumValue.add(Types, CANCER, "CANCER", {
 		name: "cancer",
-		appearanceDesc: "Where your legs would normally start, you have grown the body of a crab, with {legCountMinusTwo} chitin plated legs and two large pincers capable of tearing steel plating to shreds. A pair of stalk mounted crab eyes on the front of your shell look at your surroundings, giving you a full peripheral vision.",
+		appearanceDesc: "Where your legs would normally start, you have grown the body of a crab, with {legCountMinusTwo} chitin plated legs and two large pincers capable of tearing steel plating to shreds. A pair of stalk mounted crab eyes on the front of your shell look at your surroundings, giving you a full peripheral vision. On the front of your crab half, covering your privates, is a set of chitinous mandibula covered in feelers, constantly chittering and foaming with your drooling fluids.",
 		legCount: 6,
-		claw: true,
+		hasClaws: true,
+		hasPincers: true,
 		isDrider: true
 	});
 
 	public static const FROSTWYRM:int = 62;
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {
 		name: "frost wyrm",
-		appearanceDesc: "Below your waist your flesh is fused together into a very long snake-like tail easily {quadrupleHeight} feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [skin coat.color] dragon scales, harder than steel and capable of deflecting most weapons.",
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail easily [quadrupletallness] feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [skin coat.color] dragon scales, harder than steel and capable of deflecting most weapons.";
+
+			if (creature.tallness > 120) {
+				desc += " Your body is so large it's no wonder your passage underground can cause tremors.";
+			}
+
+			return desc;
+		},
+		tail: true,
 		tailSlam: true,
-		isNaga: true
+		isNaga: true,
+		draconic: true
 	});
 
-	public static const USHI_ONI_ONNA:int = 63;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {
+	public static const USHI_ONI:int = 63;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
 		name: "ushi-oni",
 		appearanceDesc: "You have the lower body of an ushi-oni, it is like the one of a drider except that it is covered in fur with the exoskeleton under it, the usually black sheen legs of a drider are replaced with rough bone ones of an ushi-oni.",
 		isDrider: true
@@ -499,13 +637,15 @@ public class LowerBody extends SaveableBodyPart {
 		tentacle: true,
 		appearanceDesc: "Around your waist, the petals of a large [skin nakedcoatcolor.color] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the center, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens. You used to be alone in the pitcher, but you now share space with your twin sister, taking turns with her whether it's for battle or sex.",
 		isAlraune: true,
-		isLiliraune: true
+		isLiliraune: true,
+		hasTentacles: true
 	});
 
 	public static const WEASEL:int = 65;
 	EnumValue.add(Types, WEASEL, "WEASEL", {
 		name: "weasel",
-		appearanceDesc: "You have {legCount} fluffy, furred legs like those of a weasel. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs."
+		appearanceDesc: "You have {legCount} fluffy, furred legs like those of a weasel. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs.",
+		canTaur: true
 	});
 
 	public static const GAZER:int = 66;
@@ -517,7 +657,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const SQUIRREL:int = 67;
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {
 		name: "squirrel",
-		appearanceDesc: "You have {legCount} fluffy, furred legs are covered in [skin coat.color] fur up to the thigh. They end with digitigrade squirrel paws."
+		appearanceDesc: "You have {legCount} fluffy, furred legs are covered in [skin coat.color] fur up to the thigh. They end with digitigrade squirrel paws.",
+		canTaur: true
 	});
 
 	public static const WENDIGO:int = 68;
@@ -525,7 +666,7 @@ public class LowerBody extends SaveableBodyPart {
 		name: "wendigo",
 		appearanceDesc: "Your legs are covered in fur up to the knee however they are entirely devoid of feet."
 	});
-	
+
 	public static const ATLACH_NACHA:int          = 69;
 	EnumValue.add(Types, ATLACH_NACHA, "ATLACH_NACHA", {
 		name: "atlach nacha",
@@ -535,10 +676,12 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "Where your legs would normally start you have grown the body of a spider, with {legCount} spindly legs that sprout from its sides."
 	});
 
-	public static const SEADRAGON:int = 70;
-	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {
+	public static const SEA_DRAGON:int = 70;
+	EnumValue.add(Types, SEA_DRAGON, "SEA_DRAGON", {
 		name: "sea dragon",
-		appearanceDesc: "Your {legCount} legs are mostly human save for the webbing between your clawed toes that assists you in swimming."
+		appearanceDesc: "Your {legCount} legs are mostly human save for the webbing between your clawed toes that assists you in swimming.",
+		draconic: true,
+		canTaur: true
 	});
 
 	override public function set type(value:int):void {
@@ -562,7 +705,7 @@ public class LowerBody extends SaveableBodyPart {
 				if (legCount != 4) legCount = 2;
 				break;
 			default:
-				legCount = Types[value].legCount || 2;
+				if (!legCount) legCount = 2;
 		}
 	}
 
@@ -573,6 +716,48 @@ public class LowerBody extends SaveableBodyPart {
 	override public function restore(keepColor:Boolean = true):void {
 		super.restore(keepColor);
 		legCount = 2;
+	}
+
+	override protected function loadFromOldSave(savedata:Object):void {
+		type = intOr(savedata.lowerBody, HUMAN);
+		if (type === CENTAUR) {
+			type = HOOFED;
+		} else if (type === DEERTAUR) {
+			type = CLOVEN_HOOFED;
+		}
+		legCount = intOr(savedata.legCount,2);
+	}
+
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.lowerBody = type;
+		savedata.legCount = legCount;
+	}
+
+	public static function getAppearanceDescription(creature: *):String {
+		const id: int = creature.lowerBody;
+
+		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
+	}
+
+	public static function getCrotchDescription(creature: *):String {
+		const id: int = creature.lowerBody;
+
+		return formatDescription((Types[id].crotchDescFunc ? Types[id].crotchDescFunc(creature) : Types[id].crotchDesc) || "", creature);
+	}
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return (bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.metamorphDesc) || "";
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+		const legCountPattern:RegExp = /{legCount}/g;
+		const legCountMinusTwoPattern:RegExp = /{legCountMinusTwo}/g;
+
+		return desc
+			.replace(legCountPattern, num2Text(creature.legCount))
+			.replace(legCountMinusTwoPattern, num2Text(creature.legCount - 2))
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 
 	public function legs():String {
@@ -630,6 +815,10 @@ public class LowerBody extends SaveableBodyPart {
 		return legCount == 4 && (type != PLANT_FLOWER && type != HYDRA);
 	}
 
+	public function canTaur():Boolean {
+		return Types[type].canTaur || false;
+	}
+
 	public function isDrider():Boolean {
 		return Types[type].isDrider || false;
 	}
@@ -658,70 +847,78 @@ public class LowerBody extends SaveableBodyPart {
 		return Types[type].isLiliraune || false;
 	}
 
-	override protected function loadFromOldSave(savedata:Object):void {
-		type = intOr(savedata.lowerBody, HUMAN);
-		if (type === CENTAUR) {
-			type = HOOFED;
-		} else if (type === DEERTAUR) {
-			type = CLOVEN_HOOFED;
-		}
-		legCount = intOr(savedata.legCount,2);
-	}
+	public static function lowerGarmentDisabled(creature: *, perk: String = ""):Boolean {
+		const id: int = creature.lowerBody;
 
-	override protected function saveToOldSave(savedata:Object):void {
-		savedata.lowerBody = type;
-		savedata.legCount = legCount;
-	}
-
-	public static function getAppearanceDescription(opts:Object):String {
-		if (Types[opts.id].appearanceDesc) {
-			return formatDescription(Types[opts.id].appearanceDesc, opts);
+		if (creature.isTaur() || creature.isDrider() || creature.isScylla() || creature.isKraken() || creature.isAlraune() || creature.isLiliraune() || (creature.isNaga() && (perk || creature.lowerGarmentPerk) != "NagaWearable")) {
+			return true;
 		}
 
-		return "";
+		return Types[id].noLowerGarmentFunc ? Types[id].noLowerGarmentFunc(creature) : (Types[id].noLowerGarment || false);
 	}
 
-	public static function getAppearanceDescriptionBiped(opts:Object):String {
-		if (Types[opts.id].appearanceDescBiped) {
-			return formatDescription(Types[opts.id].appearanceDescBiped, opts);
-		}
+	public static function hasDraconicLegs(creature: *):Boolean {
+		const id: int = creature.lowerBody;
 
-		return "";
+		return Types[id].draconic || false;
 	}
 
-	public static function getAppearanceDescriptionTaur(opts:Object):String {
-		if (Types[opts.id].appearanceDescTaur) {
-			return formatDescription(Types[opts.id].appearanceDescTaur, opts);
-		}
+	public static function hasFelineLegs(creature: *):Boolean {
+		const id: int = creature.lowerBody;
 
-		return "";
+		return Types[id].feline || false;
 	}
 
-	public static function getAppearanceDescriptionDrider(opts:Object):String {
-		if (Types[opts.id].appearanceDescDrider) {
-			return formatDescription(Types[opts.id].appearanceDescDrider, opts);
-		}
+	public static function canLayEggs(creature: *):Boolean {
+		const id: int = creature.lowerBody;
 
-		return "";
+		return Types[id].eggLayer || false;
 	}
 
-	private static function formatDescription(desc:String, opts: Object): String {
-		const upperCasePattern:RegExp = /^./;
-		const legCountPattern:RegExp = /{legCount}/g;
-		const legCountMinusTwoPattern:RegExp = /{legCountMinusTwo}/g;
-		const doubleHeightPattern:RegExp = /{doubleHeight}/g;
-		const quadrupleHeightPattern:RegExp = /{quadrupleHeight}/g;
-		const hydraHeadsPattern:RegExp = /{hydraHeads}/g;
-		const gargoyleMaterialPattern:RegExp = /{gargoyleMaterial}/g;
+	public static function hasTail(creature: *):Boolean {
+		const id: int = creature.lowerBody;
 
-		return " " + desc
-			.replace(legCountPattern, opts.legCount)
-			.replace(legCountMinusTwoPattern, opts.legCountMinusTwo)
-			.replace(doubleHeightPattern, opts.doubleHeight)
-			.replace(quadrupleHeightPattern, opts.quadrupleHeight)
-			.replace(hydraHeadsPattern, opts.hydraHeads)
-			.replace(gargoyleMaterialPattern, opts.gargoyleMaterial)
-			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
+		return Types[id].tail || false;
+	}
+
+	public static function allowsTail(id: int):Boolean {
+		return !Types[id].tail && !Types[id].noTail || false;
+	}
+
+	public static function hasTentacles(creature: *):Boolean {
+		const id: int = creature.lowerBody;
+
+		return Types[id].hasTentacles || false;
+	}
+
+	public static function hasPincers(creature: *):Boolean {
+		const id: int = creature.lowerBody;
+
+		return Types[id].hasPincers || false;
+	}
+
+	public static function hasTalons(creature: *):Boolean {
+		const id: int = creature.lowerBody;
+
+		return Types[id].hasTalons || false;
+	}
+
+	public static function hasClaws(creature: *):Boolean {
+		const id: int = creature.lowerBody;
+
+		return Types[id].hasClaws || false;
+	}
+
+	public static function isGoo(creature: *):Boolean {
+		const id: int = creature.lowerBody;
+
+		return Types[id].isGoo || false;
+	}
+
+	public static function canTailSlam(creature: *):Boolean {
+		const id: int = creature.lowerBody;
+
+		return Types[id].tailSlam || false;
 	}
 }
 }

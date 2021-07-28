@@ -9,7 +9,7 @@ import classes.Scenes.UniqueSexScenes;
 public class SharkGirlScene extends AbstractBoatContent{
 
 	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 	public function SharkGirlScene()
 	{
 	}
@@ -21,13 +21,13 @@ Gender: Mostly female, though there are males and herms. Due to the nature of th
 Height: 5-6 feet tall. Tiger sharks are primarily in the 6 foot region.
 Build: Well-toned and athletic.
 Skin tone: Grey. Light orange with stripes for tiger sharks.
-Hair color: Silver and in rare cases, Black. 
+Hair color: Silver and in rare cases, Black.
 Eye color: Red for both species.
 
 Typical dress: Ridiculously skimpy swimwear, which they use to entice victims. Some tiger shark girls will wear grass hula skirts when on land to hide their endowments.
 
 Weaponry: Fangs, tail and their bare hands.
-Notable features: Retractable shark teeth, a large fin between their shoulders and a shark tail dangling off of their backsides. 
+Notable features: Retractable shark teeth, a large fin between their shoulders and a shark tail dangling off of their backsides.
 
 Sexual characteristics: Despite their slutty nature, shark girls have rather modest endowments in comparison to other such creatures; the majority of them are C-cups, D-cups at most. Though, their hips and buttocks are nice and curvy. Tiger shark girls possess wildly varying bustlines that are larger than their 'sisters', and usually are hyper-endowed with male genitalia.
 
@@ -39,7 +39,7 @@ L.Draft
 
 History: Before the corruption truly began, the Shark people were a normal fishing community that lived by the lake. They respected and admired marine life so much that they used magic to morph their forms, allowing them to live both under the sea and on dry land. As the demons began to take control, the Shark people retreated into the lake water to avoid the taint. It was only through sheer bad luck that they wound up as they are now; when the factory was constructed, the chemical run-off was funnelled into the lake, causing a drastic change to the mindset of the Shark people and making them near-constantly horny. Those who swam too close to the pollutants found their bodies morphed in unexpected ways, becoming what are now known as tiger shark girls. Even if the factory were to be destroyed, it would take generations for the shark girls to fully lose the effects.
 
-Social Structure: Most shark girls travel in small groups, ruled over by one tiger shark girl. However, there are larger communities that can be found in the lake. Males are generally kept chained up, being abnormally aggressive even for sharks. But as they are more virile and fertile than tiger sharks girls, every once in a while they are unchained to help with reproduction. The Shark people spend most of their time either hunting for food or hunting for sex. 
+Social Structure: Most shark girls travel in small groups, ruled over by one tiger shark girl. However, there are larger communities that can be found in the lake. Males are generally kept chained up, being abnormally aggressive even for sharks. But as they are more virile and fertile than tiger sharks girls, every once in a while they are unchained to help with reproduction. The Shark people spend most of their time either hunting for food or hunting for sex.
 
 Sex Life: The shark girls treat sex like a game or a sport, constantly battling for dominance against their opponents and using them as sex toys if they win. As they're horny most of the time, shark girls often look for 'playmates', regardless if their victims want to 'play' or not!
 ----------------------------------
@@ -181,7 +181,7 @@ public function oceanSharkspackWinChoices():void {
 	}
 }
 
-//Male and Herm: 
+//Male and Herm:
 private function sharkgirlDickFuck():void {
 	player.addStatusValue(StatusEffects.SharkGirl,1,1);
 	clearOutput();
@@ -200,7 +200,7 @@ private function sharkgirlDickFuck():void {
 	//Non-nagaz
 	else {
 		outputText("You sneer at the fallen shark girl, making up your mind to have your way with her. You tear her bikini off as you whip out your [cock] and start to order, \"<i>Get to i--!</i>\" But you're cut short by the shark girl suddenly taking the entirety of your cock into her mouth, forcing it as deep into her mouth as possible. Quite a slutty creature, that's for sure. What surprises you more is that those sharp fangs of hers appear to be retractable, and she has a more human-like set hidden behind them.\n\n");
-		//[if herm] 
+		//[if herm]
 		if(player.gender == 3) outputText("While sucking you off, her hand steadily snakes its way between your legs. Without warning, she shoves three fingers into your " + vaginaDescript(0) + ", pushing in and stretching the moist passage out.\n\n");
 		outputText("You abruptly pull your cock from her mouth, causing the shark girl to gasp in surprise. She looks up at you, tears welling up in her eyes, \"<i>Please let me finish! I need this!</i>\" You smirk and order the shark girl onto her hands and knees. Her expression brightens and she obediently complies, getting down and raising her ass towards you. Taking a firm grip on her well-toned buttocks, you quickly shove your [cock] into her damp pussy and the shark girl squeals in excitement. You find yourself surprised by its texture; while it looks human enough on the outside, the inside is actually filled with strange feeler-like structures that wriggle and massage your cock as it pushes through.");
 		//[if herm]
@@ -260,7 +260,7 @@ private function sharkgirlSixtyNine():void {
 	}
 	else {
 		outputText("Making up your mind to rape the shark girl, you remove your [armor] and approach the slut before taking a firm grip on her silver hair. \"<i>You know what to do, bitch,</i>\" you sneer, pulling her head into your damp cunt. The shark girl needs no encouragement, eagerly probing your pussy with her long tongue");
-		//[if female] 
+		//[if female]
 		if(player.gender == 2) outputText(", pulling out every few minutes to lick your " + clitDescript() + ".");
 		//[if herm]
 		if(player.gender == 3) outputText(". You remind her not to neglect your [cock], and the shark girl responds by thoroughly licking your hard erection and sucking at your [balls].");
@@ -268,7 +268,7 @@ private function sharkgirlSixtyNine():void {
 		outputText("You shove the shark girl down onto the ground and quickly plant your crotch on her face, ordering the shark girl to continue. She complies enthusiastically, licking with a greater intensity and clearly loving the sensation of being dominated. You have to admit, you are enjoying your role as master.\n\n");
 		outputText("To reward your little slut for her efforts, your hand reaches back between her legs and slips under her skimpy black thong. You get to work fingering her moist cunt and you soon hear a series of muffled moans coming from beneath your legs. But she's smart enough to know not to stop licking, and you smirk at the effect you're having on the shark girl.  A cute little cry escapes from your little slave's mouth, and you pull your hand from her cunt before licking her sweet juices from your fingers. Shortly after, you cry out in orgasm");
 		if(player.gender == 2) outputText(", juices spraying from your sex and coating the girl's face.");
-		//[if herm]  
+		//[if herm]
 		else outputText(" and stand up, gripping your [cock] and splattering thick jets of cum onto her face.");
 		outputText("  The shark slut licks up your fluids hungrily.\n\n");
 		outputText("Thoroughly satisfied, you leave the shark girl on the ground covered in your fluids and depart for your camp.");
@@ -384,15 +384,15 @@ armorValue: 25 gems
 
 Putting it on: (Lust increases)
 
-[flat-chested]  You feel rather stupid putting the top part on like this, but you're willing to bear with it. It could certainly be good for distracting. [/]  
+[flat-chested]  You feel rather stupid putting the top part on like this, but you're willing to bear with it. It could certainly be good for distracting. [/]
 
-[breasts]  The bikini top clings tightly to your bustline, sending a shiver of pleasure through your body. It serves to turn you on quite nicely. [/]  
+[breasts]  The bikini top clings tightly to your bustline, sending a shiver of pleasure through your body. It serves to turn you on quite nicely. [/]
 
-[no dick]  The thong moves over your smooth groin, clinging onto your buttocks nicely. [If player has balls] However, your testicles do serve as an area of discomfort, stretching the material despite their normal size. [/] [/]  
+[no dick]  The thong moves over your smooth groin, clinging onto your buttocks nicely. [If player has balls] However, your testicles do serve as an area of discomfort, stretching the material despite their normal size. [/] [/]
 
-[dick]  You grunt in discomfort, your cock flopping free from the thong's confines. The tight material rubbing against your dick does manage to turn you on slightly. [/]  
+[dick]  You grunt in discomfort, your cock flopping free from the thong's confines. The tight material rubbing against your dick does manage to turn you on slightly. [/]
 
-[If dick is 7+ inches OR balls are apple-sized] You do your best to put the thong on, and while the material is very stretchy, it's simply far too uncomfortable to even try. Maybe if you shrunk your male parts down a little... [/]  
+[If dick is 7+ inches OR balls are apple-sized] You do your best to put the thong on, and while the material is very stretchy, it's simply far too uncomfortable to even try. Maybe if you shrunk your male parts down a little... [/]
 -------------------------------*/
 //Loss Rape scenes:
 internal function sharkLossRape():void {
@@ -417,17 +417,17 @@ internal function sharkLossRape():void {
 	//Female:
 	if(player.hasVagina() && (player.cockTotal() == 0 || rand(2) == 0)) {
 		outputText("You slump down in defeat, too ");
-		//[defeat via HP] 
+		//[defeat via HP]
 		if(player.HP < 1) outputText("hurt ");
 		else outputText("horny ");
 		outputText("to fight on.\n\n");
-		
-		outputText("The shark girl giggles and moves over to you, tugging at your [armor]  impatiently. Her tail swishes around and smacks your " + assDescript() + ". \"<i>You're gonna make me very happy, you hear? Otherwise...</i>\" she opens her mouth wide and you see her fangs glinting menacingly in the light. You gulp hard and nod, bringing a smile from the shark girl.\n\n"); 
+
+		outputText("The shark girl giggles and moves over to you, tugging at your [armor]  impatiently. Her tail swishes around and smacks your [ass]. \"<i>You're gonna make me very happy, you hear? Otherwise...</i>\" she opens her mouth wide and you see her fangs glinting menacingly in the light. You gulp hard and nod, bringing a smile from the shark girl.\n\n");
 		outputText("Wasting no time, she removes her skimpy swimwear and your own gear.  ");
 		//[if herm]
 		if(player.gender == 3) outputText("Seeing your [cock] puts a smile on the shark girl's face as she takes a firm grip on your erection. \"<i>Well, you're just full of surprises, aren't you? Maybe I'll give this bad boy a whirl sometime. For now though...</i>\"  ");
 		outputText("Her gaze drifts over to your " + vaginaDescript(0) + " and she licks her lips in delight. \"<i>Now that's what I'm looking for! Tell you what dear, you get me wet and I might just give you some pleasure too.</i>\"\n\n");
-		
+
 		outputText("She roughly grabs you by the hair and pulls your face into her drooling cunt, your tongue instinctively probing into her. \"<i>Mmm... don't you dare stop licking you dumb bitch, if you know what's good for you,</i>\" she orders. You reply by speeding up your tongue work. You're a little ashamed to admit it, but her dominant command makes you feel rather hot and bothered.\n\n");
 		outputText("The shark girl eventually sighs happily and relaxes her grip on your hair, pulling your head away a few inches. \"<i>Not bad bitch, not bad. Now get on your back.</i>\" You obey your mistress's command and flop onto your back. A sense of joy fills you as she positions her crotch in front of your face and moves her own head between your legs. You quickly resume eating her out, and this time she joins in the feast. It's not too long before the two of you orgasm, spraying girl-cum onto each other's faces.\n\n");
 		outputText("The shark girl stands to leave and winks at you before diving back into the water. You eventually pass out from the exertion.");
@@ -440,16 +440,16 @@ internal function sharkLossRape():void {
 	//Male:
 	else {
 		outputText("You slump down in defeat, too ");
-		//[defeat via HP] 
+		//[defeat via HP]
 		if(player.HP < 1) outputText("hurt ");
 		else outputText("horny ");
 		outputText("to fight on.\n\n");
-		
+
 		outputText("You feel the shark girl's bare foot press against your chest and she roughly pushes you onto your back. \"<i>Oh man, I can't even remember the last time I had an actual man...</i>\" the shark girl says, pulling your pants down to your ankles. Seeing your stiff erection, your opponent smirks and wets her lips before taking your entire [cock] into her mouth. The feeling is heavenly, her long tongue slithering around your shaft.\n\n");
 		outputText("But before you can begin to really enjoy it, she pulls her head away, visible strands of saliva still linking her mouth and your [cock]. The shark girl quickly maneuvers herself so that she's straddling your cock and presses herself down, the two of you gasping sharply from the sensation. \"<i>Hmm, good boy... You make me cum first, and I won't bite you. Deal?</i>\" You nod, though given that peculiar feelers inside her cunt are massaging your cock, you don't know how long you can really hold out.\n\n");
-		
+
 		outputText("The shark girl has no such qualms and rides you like a mechanical bull, hammering up and down your [cock] with incredible speed. It certainly feels nice, but the rough nature of the ride also certainly hurts. You'll be walking funny for a while after this, that's for sure.\n\n");
-		
+
 		outputText("Eventually, her vagina clamps down on your cock and she cries out in orgasm. You grunt loudly and cum a few seconds after, pumping your seed into her womb. The shark girl leans over and plants a tiny kiss on your lips. \"<i>Good boy. I'll be sure to see you again</i>\". She gets up again and you watch her re-enter the water before you pass out.");
 		player.sexReward("Default","Dick",true,false);
 		dynStats("sen", 1);
@@ -489,7 +489,7 @@ public function sharkspackLossOceanRape():void {
 	spriteSelect(32);
 	sharkLossOceanRape3();
 }
-public function sharkLossOceanRape2():void {	
+public function sharkLossOceanRape2():void {
 	outputText("Defeated, you pathetically try to swim back to the boat but the ");
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
 	if (!player.canSwimUnderwater()) outputText(", forcefully feeding you a strange kelp in the process. Somehow thanks to the aquatic plant you manage to breath underwater");

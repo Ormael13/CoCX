@@ -63,16 +63,16 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, BAT_ARM, "BAT_ARM", {name:"bat", wingSlap: true,canFly: true});
 	public static const VAMPIRE:int              = 25;
 	EnumValue.add(Types, VAMPIRE, "VAMPIRE", {name:"large bat", wingSlap: true,canFly: true});
-	public static const FEY_DRAGON_WINGS:int     = 26;
-	EnumValue.add(Types, FEY_DRAGON_WINGS, "FEY_DRAGON_WINGS", {name:"large majestic fey draconic", wingSlap: true,canFly: true});
+	public static const FEY_DRAGON:int     = 26;
+	EnumValue.add(Types, FEY_DRAGON, "FEY_DRAGON", {name:"large majestic fey draconic", wingSlap: true,canFly: true});
 	public static const FEATHERED_AVIAN:int      = 27;
 	EnumValue.add(Types, FEATHERED_AVIAN, "FEATHERED_AVIAN", {name:"avian", wingSlap: true,canFly: true});
 	public static const NIGHTMARE:int    		 = 28;
 	EnumValue.add(Types, NIGHTMARE, "NIGHTMARE", {name:"leathery", wingSlap: true,canFly: true});
 	public static const FEATHERED_SPHINX:int     = 29;//button 0 on 3rd page of metamorph
 	EnumValue.add(Types, FEATHERED_SPHINX, "FEATHERED_SPHINX", {name:"sphinx", wingSlap: true,canFly: true});
-	public static const ETHEREAL_WINGS:int    	 = 30;
-	EnumValue.add(Types, ETHEREAL_WINGS, "ETHEREAL_WINGS", {name:"ethereal tendrils",canFly: true});
+	public static const ETHEREAL:int    	 = 30;
+	EnumValue.add(Types, ETHEREAL, "ETHEREAL", {name:"ethereal tendrils",canFly: true});
 	public static const THUNDEROUS_AURA:int    	 = 31;
 	EnumValue.add(Types, THUNDEROUS_AURA, "THUNDEROUS_AURA", {name:"thunderous aura",canFly: true});
 	public static const LEVITATION:int    		 = 32;
@@ -83,8 +83,8 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, FAIRY, "FAIRY", {name:"fairy",canFly: true});
 	public static const WINDY_AURA:int    	 	 = 35;
 	EnumValue.add(Types, WINDY_AURA, "WINDY_AURA", {name:"windy aura",canFly: true});
-	public static const SEADRAGON:int        = 36;
-	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name:"large majestic aquatic", wingSlap: true,canFly: true});
+	public static const SEA_DRAGON:int        = 36;
+	EnumValue.add(Types, SEA_DRAGON, "SEA_DRAGON", {name:"large majestic aquatic", wingSlap: true,canFly: true});
 	//public static const :int    	 	 	 = 36;
 	//EnumValue.add(Types, , "", {name:"",canFly: true});
 
@@ -102,6 +102,13 @@ public class Wings extends SaveableBodyPart {
 		}
 
 		type = intOr(savedata.wingType, NONE);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

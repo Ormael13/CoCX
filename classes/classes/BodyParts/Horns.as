@@ -9,7 +9,7 @@ public class Horns extends BodyPart {
 	 * - name: human-readable default name, ("non-existant", "demon")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const NONE:int                     = 0;
 	EnumValue.add(Types, NONE, "NONE", {name:"non-existant"});
 	public static const DEMON:int                    = 1;
@@ -45,19 +45,26 @@ public class Horns extends BodyPart {
 	public static const SPELL_TAG:int           	 = 16;
 	EnumValue.add(Types, SPELL_TAG, "SPELL_TAG", {name:"spell tag"});
 	public static const GOATQUAD:int                 = 17;
-	EnumValue.add(Types, GOATQUAD, "GOATQUAD", {name:"4 goat", Gore: true});
+	EnumValue.add(Types, GOATQUAD, "GOATQUAD", {name:"4 goat", gore: true});
 	public static const KRAKEN:int              	 = 18;
 	EnumValue.add(Types, KRAKEN, "KRAKEN", {name:"kraken"});
 	public static const FROSTWYRM:int              	 = 19;
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name:"frostwyrm", gore: true});
-	public static const USHI_ONI_ONNA:int            = 20;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {name:"ushi-oni", gore: true});
-	public static const SEADRAGON:int            = 21;
-	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name:"sea dragon"});
-	
+	public static const USHI_ONI:int            = 20;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {name:"ushi-oni", gore: true});
+	public static const SEA_DRAGON:int            = 21;
+	EnumValue.add(Types, SEA_DRAGON, "SEA_DRAGON", {name:"sea dragon"});
+
 	public function Horns() {
 		super(null, null);
 	}
 	public var count:int = 0;
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
+	}
 }
 }

@@ -23,6 +23,7 @@ import classes.Scenes.SceneLib;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
+import classes.Scenes.Metamorph;
 
 import coc.view.ButtonData;
 
@@ -101,6 +102,11 @@ public class Camp extends NPCAwareContent{
 		}
 */
 
+	public function campAfterMigration():void {
+		clearOutput();
+		doCamp();
+	}
+
 	public function returnToCamp(timeUsed:int):void {
 		clearOutput();
 		if (timeUsed == 1)
@@ -154,7 +160,7 @@ public class Camp extends NPCAwareContent{
 	public var HadNightEvent: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
 
-	private function doCamp():void { //Only called by playerMenu
+	public function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
 		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
 			trace("Autosaving to slot: " + player.slotName);
@@ -972,7 +978,7 @@ public class Camp extends NPCAwareContent{
 		addButton(8, "Camp Actions", campActions).hint("Interact with the [camp] surroundings and also read your codex or questlog.");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
 		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
-		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold your body.");
+		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
 		var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 		if (player.lust >= 30) {
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
@@ -986,7 +992,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		
+
 		//Remove buttons according to conditions.
 		if (isNightTime) {
 			if (model.time.hours >= 22 || model.time.hours < 6) {
@@ -1197,19 +1203,19 @@ public class Camp extends NPCAwareContent{
 		if (followerKiha()) counter++;
 		return counter;
 	}
-	
+
 	public function nightTimeActiveFollowers():Number {
 		var counter:Number = 0;
 		if (followerShouldra()) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		return counter;
 	}
-	
+
 	public function nightTimeActiveLovers():Number {
 		var counter:Number = 0;
 		return counter;
 	}
-	
+
 	public function nightTimeActiveSlaves():Number {
 		var counter:Number = 0;
 		return counter;
@@ -2369,7 +2375,7 @@ public class Camp extends NPCAwareContent{
 		}
 		doNext(camp.returnToCampUseEightHours);
 	}
-	
+
 	private function DummyTraining():void {
 		clearOutput();
 		outputText("You walk toward the worn out dummy as you drawn your [weapon].");
@@ -3396,7 +3402,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
 		else addButtonDisabled(3, "???", "???");
 		addButton(4, "Next", placesPage2);
-		
+
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
 		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", SceneLib.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
@@ -3436,7 +3442,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "???");
 		addButton(9, "Previous", placesToPage1);
-		
+
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
 		else addButtonDisabled(10, "???", "???");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
@@ -3457,7 +3463,7 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(0, "???", "???");
 			addButtonDisabled(1, "???", "???");
 		}
-		
+
 		addButton(9, "Previous", placesToPage2);
 		addButton(14, "Back", playerMenu);
 	}
@@ -3498,7 +3504,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(13, "???", "???");
 		addButton(14, "Back", places);
 	}
-	
+
 	private function maraeIsland():void {
 		menu();
 		if (flags[kFLAGS.MARAE_QUEST_COMPLETE] < 1 && flags[kFLAGS.MET_MARAE_CORRUPTED] < 2 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] < 1) addButton(0, "Visit", marae.encounterMarae).hint("Normal visit on godess island.");
@@ -3917,10 +3923,10 @@ public function wakeFromBadEnd():void {
 		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
 			if (!levelup) {
-				if (player.statPoints > 0) {
+				if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Stat Up");
 					mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
-				} else {
+				} else  if (player.perkPoints > 0) {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Perk Up");
 					mainView.levelButton.toolTipText = "Spend your perk points on a new perk. \n\nYou currently have " + String(player.perkPoints) + ".";
 				}
@@ -4791,8 +4797,107 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
+
+		// Flag to define whether the migration should open the Ascension menu for the player to buy Perks, mostly used for refunds
+		// Remember to set to False at the start of a migration if it's used
+		var refundAscensionPerks: Boolean = false;
+
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
+			clearOutput();
+
+			refundAscensionPerks = false;
+
+
+			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
+			/*
+				*/
+				if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+					refundAscensionPerks = true;
+					outputText("Metamorph has been updated and all genetic memories are permanent by default.\n\nAscension points were refunded, so you'll be redirected to the Ascension menu to buy new stuff, then either go back to where you stopped or reincarnate.");
+
+					// Non-human permanent Metamorphs cost 5 points each
+					player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
+					player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+
+					// Upgrade prices
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
+						player.ascensionPerkPoints += 15;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
+						player.ascensionPerkPoints += 30;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
+						player.ascensionPerkPoints += 45;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
+						player.ascensionPerkPoints += 60;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
+						player.ascensionPerkPoints += 75;
+					}
+					if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
+						player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
+						player.ascensionPerkPoints += 90;
+					}
+
+					// Human permanent Metamorphs cost 25 each, but 5 was already refunded, leaving 20
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
+					if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
+				}
+				/*
+			*/
+
+			// Remove Unlocked Human Metamorph flags regardless of refund
+			/*
+				*/
+				player.removeStatusEffect(StatusEffects.UnlockedHumanHair);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanFace);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEyes);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanTongue);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEars);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanArms);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanLowerBody);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoHorns);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoWings);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanSkin);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoAntennae);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoGills);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoRearBody);
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
+				/*
+			*/
+
+			if (refundAscensionPerks) {
+				doNext(CoC.instance.charCreation.migrationAscension);
+			} else {
+				doCamp();
+			}
+
+			return;
+		}
+
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 && flags[kFLAGS.HARDCORE_MODE] == 1) flags[kFLAGS.HARDCORE_MODE] = 0;
@@ -4816,15 +4921,15 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
@@ -4913,8 +5018,8 @@ public function wakeFromBadEnd():void {
 
 	private function chooseEyesColorSaveUpdate(color:String):void {
 		clearOutput();
-		player.eyes.colour = color;
-		outputText("You now have " + color + " eyes. You will be returned to your [camp] now and you can continue your usual gameplay.");
+		CoC.instance.transformations.EyesChangeColor([color]).applyEffect(false);
+		outputText("You now have [eyecolor] eyes. You will be returned to your [camp] now and you can continue your usual gameplay.");
 		doNext(doCamp);
 	}
 
