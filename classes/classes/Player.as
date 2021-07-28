@@ -1100,13 +1100,13 @@ use namespace CoC;
 		}
 		//Polearm-type
 		public function isPolearmTypeWeapon():Boolean {
-			return weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.URTAHLB || isSpearTypeWeapon();
+			return weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.LHSCYTH || weapon == game.weapons.DEMSCYT || weapon == game.weapons.URTAHLB || isSpearTypeWeapon();
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
 			return weapon == game.weapons.DSSPEAR || weapon == game.weapons.LANCE || weapon == game.weapons.PTCHFRK || weapon == game.weapons.SESPEAR || weapon == game.weapons.SKYPIER || weapon == game.weapons.SPEAR || weapon == game.weapons.TRIDENT;
 		}
-		//Scythe-type DEMSCYT LHSCYTH
+		//Scythe-type DEMSCYT LHSCYTH (Currently scythes are part of the polearm cathegory)
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
 			return weapon == game.weapons.ADAGGER || weapon == game.weapons.DAGGER || weapon == game.weapons.DAGWHIP || weapon == game.weapons.L_DAGGR || weapon == game.weapons.RDAGGER || weapon == game.weapons.SDAGGER || weapon == game.weapons.TODAGGER || weapon == game.weapons.TDAGGER || weapon == game.weapons.TRIDAG || weapon == game.weapons.ANGSTD || weapon == game.weapons.DDAGGER;
@@ -1206,7 +1206,7 @@ use namespace CoC;
 		}
 		public function haveWeaponForJouster():Boolean
 		{
-			return isSpearTypeWeapon() || weaponName == "demonic scythe";
+			return isSpearTypeWeapon() || weaponName == "demonic scythe" || isPolearmTypeWeapon();
 		}
 		public function playerIsBlinded():Boolean
 		{

@@ -5323,7 +5323,7 @@ public class Combat extends BaseContent {
 				if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
 				if (player.isMaceHammerTypeWeapon()) macehammerXP(meleeMasteryEXPgains);
 				if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
-				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
+				if (player.isPolearmTypeWeapon()) spearXP(meleeMasteryEXPgains); //Polearm weapon should honestly also give exp to axes type weapon not just spear.
 				if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
 				if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
 				if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
@@ -11150,7 +11150,7 @@ public class Combat extends BaseContent {
 
     public function OrcaImpale():void {
         clearOutput();
-        if (player.isSpearTypeWeapon() || player.isSwordTypeWeapon()) {
+        if (player.isPolearmTypeWeapon() || player.isSwordTypeWeapon()) {
             outputText("You cannot impale your foe without a piercing weapon.");
             addButton(0, "Next", combatMenu, false);
         } else {
@@ -13616,8 +13616,11 @@ public class Combat extends BaseContent {
 				else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
 			}
             if (player.haveWeaponForJouster()) {
-                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3;
-                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5;
+                var JousterDamageMod:Number = 1;
+                if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
+                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3*JousterDamageMod;
+                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5*JousterDamageMod;
+
             }
 			damage *= (1 + PASPAS());
         } else {
@@ -13655,7 +13658,9 @@ public class Combat extends BaseContent {
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
             crit = true;
-            if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
+            if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()){
+                damage *= 2.5;
+            }
             else damage *= 1.75;
         }
 		outputText(".");
