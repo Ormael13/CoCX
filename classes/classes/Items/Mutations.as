@@ -11235,12 +11235,12 @@ public final class Mutations extends MutationsHelper {
 
         });
         //Kitsune Human face
-        mutationStep(player.face != Face.FOX && player.face != Face.HUMAN, 3, function ():void {
+        mutationStep(player.faceType != Face.FOX && player.faceType != Face.HUMAN, 3, function ():void {
             outputText("\n\n");
             transformations.FaceHuman.applyEffect();
         });
         //Kitsune fanged face
-        mutationStep(player.face == Face.HUMAN, 3, function ():void {
+        mutationStep(player.faceType == Face.HUMAN, 3, function ():void {
             outputText("\n\n");
             transformations.FaceAnimalTeeth.applyEffect();
         });
