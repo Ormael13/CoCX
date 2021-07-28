@@ -253,9 +253,26 @@ internal function tentacleLossRape():void {
 				" What a waste of semen. Well, you do still plan to hold as much in as you can.\n\n" +
 				"After a while, the creature withdraws its tentacles from you. It angles the tentacle-cock over your face and lets out one last load, covering your face in hot, thick sperm. You gleefully open your mouth to allow loads of the salty juice down your throat. Once spent, the creature shambles off, leaving you well milked and pollinated.");
 		player.slimeFeed();
-		player.sexReward("cum");
-		player.sexReward("cum");
-		player.sexReward("cum");
+		player.sexReward("cum","Vaginal");
+		player.sexReward("cum","Lips");
+		player.sexReward("cum","Anal");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		if (player.isLiliraune()){
+			player.sexReward("cum","Vaginal");
+			player.sexReward("cum","Lips");
+			player.sexReward("cum","Anal");
+		}
 		player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 		cleanupAfterCombat();
 		doNext(camp.returnToCampUseOneHour);
