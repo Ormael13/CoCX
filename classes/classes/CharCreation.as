@@ -24,6 +24,7 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Metamorph;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
 import classes.Stats.BuffableStat;
@@ -2566,6 +2567,7 @@ import coc.view.MainView;
 		}
 		private function reincarnate():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
+			Metamorph.resetMetamorph();
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();

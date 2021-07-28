@@ -218,7 +218,7 @@ use namespace CoC;
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
-			//9
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "Refund A. M.", RefundAscensionMetamorphPerks).hint("Refunds the Ascension points spent on Transcedental Metamorph Perks and brings you to the Ascension menu.");
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
@@ -466,6 +466,88 @@ use namespace CoC;
 
 			Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 			doNext(SoulforceCheats);
+		}
+		public function RefundAscensionMetamorphPerks(): void {
+			clearOutput();
+
+			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
+			/*
+				*/
+				outputText("Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
+
+				// Non-human permanent Metamorphs cost 5 points each
+				player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
+				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+
+				// Upgrade prices
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
+					player.ascensionPerkPoints += 15;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
+					player.ascensionPerkPoints += 30;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
+					player.ascensionPerkPoints += 45;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
+					player.ascensionPerkPoints += 60;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
+					player.ascensionPerkPoints += 75;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
+					player.ascensionPerkPoints += 90;
+				}
+
+				// Human permanent Metamorphs cost 25 each, but 5 was already refunded, leaving 20
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanHair);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanFace);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEyes);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanTongue);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEars);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanArms);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanLowerBody);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoHorns);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoWings);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanSkin);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoAntennae);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoGills);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoRearBody);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
+				/*
+			*/
+
+			if (player.ascensionPerkPoints > 0) {
+				outputText("\n\nYou'll be redirected to the Ascension menu to use your refunded points, then you can either go back to your current game or reincarnate.");
+				doNext(CoC.instance.charCreation.migrationAscension);
+			} else {
+				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
+				doNext(SceneLib.camp.campAfterMigration);
+			}
+
+			return;
 		}
 		public function PerkGalore1():void {
 			if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
