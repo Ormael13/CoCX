@@ -13,7 +13,7 @@ import classes.Scenes.UniqueSexScenes;
 public class MaleSpiderMorphScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public function MaleSpiderMorphScene()
 		{
 		}
@@ -24,13 +24,13 @@ public class MaleSpiderMorphScene extends BaseContent
 			clearOutput();
 			spriteSelect(74);
 			outputText("A spider-morph drops out of a tree in front of you, hanging by a single thread of sparkling webbing.  His purple eyes gaze deeply into your own while he looks you up and down.  ");
-			//DANGER MODE: 
+			//DANGER MODE:
 			if (rand(2) == 0) {
 				outputText("A moment later, he flips down onto his feet and advances, touching his half-hard, foreskin-shrouded cock.  Judging from the glint in his eyes, he plans to force himself upon you!");
 				//- auto fight
 				startCombat(new MaleSpiderMorph());
 			}
-			//NICE GUY MODE: 
+			//NICE GUY MODE:
 			else {
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"");
 				//[Fight] [Talk] [Leave]
@@ -41,7 +41,7 @@ public class MaleSpiderMorphScene extends BaseContent
 				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
 			}
 		}
-		
+
 		private function fightSpiderBoy():void {
 			startCombat(new MaleSpiderMorph());
 			spriteSelect(74);
@@ -98,7 +98,7 @@ public class MaleSpiderMorphScene extends BaseContent
 
 //Loss selector
 		public function loseToMaleSpiderMorph():void
-		{			
+		{
 			if (doSFWloss()) return; //No rape in SFW mode.
 			var choices:Array = [];
 			if (player.hasCock()) choices[choices.length] = 0;
@@ -240,7 +240,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			player.cuntChange(monster.cockArea(0), true, true, false);
 			outputText("\n\n");
 
-			outputText("You pinch the arachnid male's nipple as you begin to bounce up and down upon him.  Each lewd slap of your " + buttDescript() + " on his groin is accompanied by a rippling spasm of pleasure in your " + vaginaDescript() + ", inadvertantly milking the thick-skinned member with the muscular spasms.  He moans and begins trying to lift his hips to meet you.  You deny him, slamming your body down harder with every downward motion to crush him back into the moist swamp-earth.\n\n");
+			outputText("You pinch the arachnid male's nipple as you begin to bounce up and down upon him.  Each lewd slap of your [butt] on his groin is accompanied by a rippling spasm of pleasure in your " + vaginaDescript() + ", inadvertantly milking the thick-skinned member with the muscular spasms.  He moans and begins trying to lift his hips to meet you.  You deny him, slamming your body down harder with every downward motion to crush him back into the moist swamp-earth.\n\n");
 
 			outputText("\"<i>Ungh... uh... c-c-coming!</i>\" whines the spider-morph, trembling underneath you.  His cock squirts and dumps its inhuman seed into your innermost depths.  Squishing wetly, you can feel pump after pump of the thick spooge being forced past your cervix to burrow in your womb.  The male finishes his climax and sags down into the loam, panting.  Reaching down, you give him an irritated slap.  Your victim's dick actually starts wilting inside you while you ride him, spooge slopping past your lips with each thrust.  The nerve of some men!\n\n");
 
@@ -290,7 +290,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText(", displaying surprising strength as he holds your " + assholeDescript() + " at waist height.  You look up at the gloating arachnid ");
 			if (player.HP < 1) outputText("and silently mouth, \"<i>Please, no.</i>\"");
 			else outputText("and give a little nod, too intoxicated by arousal to decline any form of sex.");
-			outputText("  His only response is to squeeze tight on your " + buttDescript() + " and press forward until his pre-cum-soaked foreskin is glazing your rim in preparation for the coming penetration.  ");
+			outputText("  His only response is to squeeze tight on your [butt] and press forward until his pre-cum-soaked foreskin is glazing your rim in preparation for the coming penetration.  ");
 			if (player.lust >= player.maxLust()) outputText(SMultiCockDesc() + " bounces atop your belly, reacting strongly to the tingling sensation radiating from your " + assholeDescript() + ".");
 			else {
 				outputText(SMultiCockDesc() + " ");
@@ -306,7 +306,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			player.buttChange(monster.cockArea(0), true, true, false);
 			outputText("  A firm, unforgiving hand grabs hold of " + oMultiCockDesc() + " and starts pumping it with short, fast strokes.  The slippery carapace gliding along your length feels absolutely marvelous, and in no time you're utterly relaxed against his invading member, dripping rivulets of sticky pre-cream onto your belly.  A round, hard digits circles your frenulum with a soft, repetitive motion, and you nearly blow your load on the spot.\n\n");
 
-			outputText("Cruelly, the purple-eyed man stops touching you and puts his hands back on your hips and " + buttDescript() + ".  He admires you, his conquest, for a few moments while you leak onto yourself.  Time seems to drag on for an age, until you look up at him, still impaled on his thick tool, and ply him with questioning eyes.  The spider-morph gives you a reassuring squeeze and pulls back, his foreskin stretching inside of you while the hard cylindrical shape of his member vanishes from your rectum.  Your " + assDescript() + " clenches repeatedly, feeling cold and empty after holding on to his hot, black-skinned cock for so long.\n\n");
+			outputText("Cruelly, the purple-eyed man stops touching you and puts his hands back on your hips and [butt].  He admires you, his conquest, for a few moments while you leak onto yourself.  Time seems to drag on for an age, until you look up at him, still impaled on his thick tool, and ply him with questioning eyes.  The spider-morph gives you a reassuring squeeze and pulls back, his foreskin stretching inside of you while the hard cylindrical shape of his member vanishes from your rectum.  Your [ass] clenches repeatedly, feeling cold and empty after holding on to his hot, black-skinned cock for so long.\n\n");
 
 			outputText("You aren't left empty for long.  The hard-shelled aggressor propels his heavy cock forward.  It disappears into your hungry anus with a 'schliiooorp' and returns the feeling of blessed fullness to you.  This time, you can feel his crown bumping against something inside you, and the reaction is intense and immediate.  Pleasure hits you upside the head with a hammer-blow of sexual gratification.  It's almost like there's a button inside you, right behind your cock and labelled 'push here for bliss', and the spider is poking it hard.  ");
 			if (player.cockTotal() == 1) outputText("A ribbon ");
@@ -421,7 +421,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("You shudder violently, your stomach growling fiercely at you. It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world. A slimy green fluid starts leaking out of your " + vaginaDescript(0) + ", making a small puddle on the ground. The sensation is extremely pleasurable as you feel it running down your thighs. Groaning, you start to push out a small, smooth green ball, and the action makes your " + vaginaDescript(0) + " so much wetter.  You push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo. After the sixth, you orgasm, ");
 			//[if male/herm]
 			if (player.gender != 2) outputText("spraying your cum all over the ground underneath you, each egg squeezing out and prolonging the intense feeling.\n\n");
-			//[if female/genderless] 
+			//[if female/genderless]
 			else outputText("spraying your juices all over the ground and mixing in with the green slime, soaking your legs, each egg you squeeze out only prolonging the intense feeling.\n\n");
 
 			outputText("After what seems like hours, you have lost count of the eggs pushed out, and you collapse from sexual exhaustion.\n\n");

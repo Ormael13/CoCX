@@ -18,6 +18,7 @@ import classes.BodyParts.Wings;
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.CoC;
 
 public class CentipedeVenom extends Consumable {
 	public function CentipedeVenom() {
@@ -28,7 +29,7 @@ public class CentipedeVenom extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You pop the cork on the vial and quickly chug the clear liquid. It tastes somewhat sweet, leaving your body feeling warm all over.");
@@ -50,51 +51,37 @@ public class CentipedeVenom extends Consumable {
 		//Legs
 		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure back into a plain human-like form. ");
-			outputText("Pain shoots through your legs as you stumble to the ground. You can feel the bones in your legs fuse and reshape themselves as they become longer. " +
-					"As the initial pain passes you manage to sit up and look at what happened to you. To your shock or maybe even horror, in place of legs you now have the long, segmented, insectoid body of a centipede. " +
-					"It's easily three times the length as you are tall. Each segment has a pair of pointed spindly legs which will make walking interesting to say the least. " +
-					"At the very end of your insectoid body sits a pair of longer legs that appear to be a set of stingers. You get up to try out your new body. " +
-					"At first you nearly face plant into the ground as you attempt to coordinate your many legs all at once. " +
-					"After some practice you're able to move your new legs in sync and independently with little issue, even enjoying the feeling of curling into yourself. " +
-					"<b>You think you'll have some fun with this new centipede body.</b>");
-			mutations.setLowerBody(LowerBody.CENTIPEDE);
-			player.legCount = 100;
+			CoC.instance.transformations.LowerBodyCentipede.applyEffect();
 			changes++;
 		}
 		//Arms
 		if (player.arms.type != Arms.HUMAN && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeArms();
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		//Antenna
 		if (player.antennae.type != Antennae.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.");
-			mutations.setAntennae(Antennae.CENTIPEDE);
+			outputText("\n\n");
+			CoC.instance.transformations.AntennaeCentipede.applyEffect();
 			changes++;
 		}
 		//Ears
 		if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-			mutations.setEarType(Ears.ELFIN);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
 			changes++;
 		}
 		//Face
 		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0) {
-			if (player.faceType != Face.HUMAN) {
-				mutations.humanizeFace();
-			}
-			outputText("\n\nYou feel your some of your tooths changing, elongating into sharper dagger like form. Funnily, your face remained fully human even after the change. " +
-					"<b>Your mouth is now a cross over between animal and human!</b>");
-			mutations.setFaceType(Face.ANIMAL_TOOTHS);
+      outputText("\n\n");
+      CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
 			changes++;
 		}
 		//NeckMaxilipeds
 		if (player.lowerBody == LowerBody.CENTIPEDE && player.rearBody.type != RearBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour neck tingles and begins to itch all of a sudden. You reach up to scratch when your fingers brush up against something hard. " +
-					"You look down to find a pair of grasping pincer like stingers around your neck. They open and close at will and tuck away easily when not in use. " +
-					"<b>It will be easier to hold onto and bite enemies with your new maxillipeds.</b>");
-			mutations.setRearBody(RearBody.CENTIPEDE);
+			outputText("\n\n");
+			CoC.instance.transformations.RearBodyCentipede.applyEffect();
 			changes++;
 		}
 		//Venom Increase TEMPORARY

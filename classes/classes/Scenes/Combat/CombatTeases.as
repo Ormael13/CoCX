@@ -147,7 +147,7 @@ public class CombatTeases extends BaseCombatContent {
 		//slutty simplicity bonus
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
 		//Elven Pole Dancing style bonus
-		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isUsingSpear()) damage += scalingBonusSpeed() * 0.1;
+		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) damage += scalingBonusSpeed() * 0.1;
 		//==============================
 		//TEASE SELECT CHOICES
 		//==BASICS========
@@ -716,7 +716,7 @@ public class CombatTeases extends BaseCombatContent {
 				//BIMBO
 				//4 butt shake
 			case 4:
-				outputText("You turn away and bounce your " + buttDescript() + " up and down hypnotically");
+				outputText("You turn away and bounce your [butt] up and down hypnotically");
 				//Big butts = extra text + higher success
 				if (player.butt.type >= 10) {
 					outputText(", making it jiggle delightfully.  " + monster.capitalA + monster.short + " even gets a few glimpses of the " + assholeDescript() + " between your cheeks.");
@@ -773,7 +773,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//7 special Adjatha-crafted bend over bimbo times
 			case 7:
-				outputText("The glinting of light catches your eye and you whip around to inspect the glittering object, turning your back on " + monster.a + monster.short + ".  Locking your knees, you bend waaaaay over, " + chestDesc() + " swinging in the open air while your " + buttDescript() + " juts out at the " + monster.a + monster.short + ".  Your plump cheeks and " + hipDescript() + " form a jiggling heart-shape as you eagerly rub your thighs together.\n\n");
+				outputText("The glinting of light catches your eye and you whip around to inspect the glittering object, turning your back on " + monster.a + monster.short + ".  Locking your knees, you bend waaaaay over, " + chestDesc() + " swinging in the open air while your [butt] juts out at the " + monster.a + monster.short + ".  Your plump cheeks and " + hipDescript() + " form a jiggling heart-shape as you eagerly rub your thighs together.\n\n");
 				outputText("The clear, warm fluid of your happy excitement trickles down from your loins, polishing your [skin] to a glossy, inviting shine.  Retrieving the useless, though shiny, bauble, you hold your pose for just a moment longer, a sly little smile playing across your lips as you wiggle your cheeks one more time before straightening up and turning back around.");
 				vagina = true;
 				chance++;
@@ -881,13 +881,13 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//16 Anal gape
 			case 16:
-				outputText("You quickly strip out of your [armor] and turn around, giving your " + buttDescript() + " a hard slap and showing your enemy the real prize: your " + assholeDescript() + ".  With a smirk, you easily plunge your hand inside, burying yourself up to the wrist inside your anus.  You give yourself a quick fisting, watching the enemy over your shoulder while you moan lustily, sure to give them a good show.  You withdraw your hand and give your ass another sexy spank before readying for combat again.");
+				outputText("You quickly strip out of your [armor] and turn around, giving your [butt] a hard slap and showing your enemy the real prize: your " + assholeDescript() + ".  With a smirk, you easily plunge your hand inside, burying yourself up to the wrist inside your anus.  You give yourself a quick fisting, watching the enemy over your shoulder while you moan lustily, sure to give them a good show.  You withdraw your hand and give your ass another sexy spank before readying for combat again.");
 				anus = true;
 				ass  = true;
 				break;
 				//17 Bee abdomen tease
 			case 17:
-				outputText("You swing around, shedding the [armor] around your waist to expose your " + buttDescript() + " to " + monster.a + monster.short + ".  Taking up your oversized bee abdomen in both hands, you heft the thing and wave it about teasingly.  Drops of venom drip to and fro, a few coming dangerously close to " + monster.pronoun2 + ".  \"<i>Maybe if you behave well enough, I'll even drop a few eggs into your belly,</i>\" you say softly, dropping the abdomen back to dangle above your butt and redressing.");
+				outputText("You swing around, shedding the [armor] around your waist to expose your [butt] to " + monster.a + monster.short + ".  Taking up your oversized bee abdomen in both hands, you heft the thing and wave it about teasingly.  Drops of venom drip to and fro, a few coming dangerously close to " + monster.pronoun2 + ".  \"<i>Maybe if you behave well enough, I'll even drop a few eggs into your belly,</i>\" you say softly, dropping the abdomen back to dangle above your butt and redressing.");
 				ass = true;
 				chance += .5;
 				damage += .5;
@@ -921,7 +921,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//22 SPOIDAH SILK
 			case 22:
-				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to " + monster.a + monster.short + ", molding the sticky substance as " + monster.pronoun1 + " looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at " + monster.pronoun2 + ". It sticks to " + monster.pronoun3 + " body, the sensation causing " + monster.pronoun2 + " to hastily slap the heart off.  " + monster.mf("He", "She") + " returns " + monster.pronoun3 + " gaze to you to find you turned around, " + buttDescript() + " bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  " + monster.mf("He", "She") + " gulps.");
+				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to " + monster.a + monster.short + ", molding the sticky substance as " + monster.pronoun1 + " looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at " + monster.pronoun2 + ". It sticks to " + monster.pronoun3 + " body, the sensation causing " + monster.pronoun2 + " to hastily slap the heart off.  " + monster.mf("He", "She") + " returns " + monster.pronoun3 + " gaze to you to find you turned around, [butt] bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  " + monster.mf("He", "She") + " gulps.");
 				ass = true;
 				break;
 				//23 RUT TEASE
@@ -937,7 +937,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//24 STAFF POLEDANCE
 			case 24:
-				outputText("You run your tongue across your lips as you plant your staff into the ground.  Before your enemy can react, you spin onto the long, wooden shaft, using it like an impromptu pole.  You lean back against the planted staff, giving your enemy a good look at your body.  You stretch backwards like a cat, nearly touching your fingertips to the ground beneath you, now holding onto the staff with only one leg.  You pull yourself upright and give your " + buttDescript() + " a little slap and your " + chestDesc() + " a wiggle before pulling open your [armor] and sliding the pole between your tits.  You drop down to a low crouch, only just covering your genitals with your hand as you shake your " + buttDescript() + " playfully.  You give the enemy a little smirk as you slip your [armor] back on and pick up your staff.");
+				outputText("You run your tongue across your lips as you plant your staff into the ground.  Before your enemy can react, you spin onto the long, wooden shaft, using it like an impromptu pole.  You lean back against the planted staff, giving your enemy a good look at your body.  You stretch backwards like a cat, nearly touching your fingertips to the ground beneath you, now holding onto the staff with only one leg.  You pull yourself upright and give your [butt] a little slap and your " + chestDesc() + " a wiggle before pulling open your [armor] and sliding the pole between your tits.  You drop down to a low crouch, only just covering your genitals with your hand as you shake your [butt] playfully.  You give the enemy a little smirk as you slip your [armor] back on and pick up your staff.");
 				ass     = true;
 				breasts = true;
 				break;
@@ -986,7 +986,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//32 Genderless servant clothes
 			case 32:
-				outputText("You turn your back to your foe, and flip up your butt flap for a moment.   Your " + buttDescript() + " really is all you have to offer downstairs.");
+				outputText("You turn your back to your foe, and flip up your butt flap for a moment.   Your [butt] really is all you have to offer downstairs.");
 				ass = true;
 				chance++;
 				damage += 2;

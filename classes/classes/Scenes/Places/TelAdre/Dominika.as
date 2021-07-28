@@ -233,7 +233,7 @@ private function acceptDominikasKnowledge():void {
 		}
 		//[If player knows no spells]
 		else {
-			outputText("You nearly fall on your " + buttDescript() + " in surprise, fumbling to defend yourself from an attack, but Dominika laughs helplessly and tries to collect herself. \"<i>Oh goodness, oh I'm sorry, I'm sorry, this isn't anything. This is just flashy lights and constellation circles. This isn't going to hurt you, I'm sorry.</i>\" She walks over to you and extends a hand, helping you get to your feet and hugging you.\n\n");
+			outputText("You nearly fall on your [butt] in surprise, fumbling to defend yourself from an attack, but Dominika laughs helplessly and tries to collect herself. \"<i>Oh goodness, oh I'm sorry, I'm sorry, this isn't anything. This is just flashy lights and constellation circles. This isn't going to hurt you, I'm sorry.</i>\" She walks over to you and extends a hand, helping you get to your feet and hugging you.\n\n");
 
 			outputText("\"<i>So sorry, again,</i>\" she says, those black lips curving into a big smile. \"<i>I guess I'll take that to mean 'not much', so, here. Let me show you some things.</i>\"\n\n");
 
@@ -982,19 +982,19 @@ public function dominikaSpellblade():void {
 	}
 	else {
 		outputText("\"<i>Ah, lovely.</i>\"  The way Dominika's eyes curve makes it clear she's smiling as you approach.  \"<i>I was hoping you'd be here today.</i>\"\n\n");
-	
+
 		outputText("She gestures to the bartender as you sit.  She's happy to see you and she's buying you alcohol? Today is a good day.  \"<i>Been well, I trust?</i>\" she opens casually.  \"<i>Protecting your camp and your bottom?</i>\"  You're fairly confident she's smirking at that line.  \"<i>I wanted to thank you for your company of late,</i>\" the occultist says, once your drink arrives and the small talk concludes.  \"<i>It's been refreshing to talk with someone who's been interested in some degree of intellectualism.  And of course, it helps that you're able to... supply me with my unfortunate needs.</i>\"  A light chuckle comes from behind her veil.\n\n");
-	
+
 		outputText("\"<i>It's somewhat of a Marethian custom to give gifts once you get to know someone enough, or are interested in courting them,</i>\" Dominika continues.  \"<i>I'm sure by now you've encountered someone who feels so fondly of you.</i>\"  A thought interrupts her, and she gives another little laugh.  \"<i>Some time ago a rather broadly built man became enamored of me and presented me with - of all things - a revealing swimsuit.  As you may imagine from our talks I was not particularly smitten with the notion of diving into the water with but a single line vanishing into my buttocks and calmly rebuffed him.  Last I heard, he was still so wounded from this slight that he swore off all those who don't 'understand the need to swim'.</i>\"  She chuckles a few times, tracing a finger over the rim of her empty glass.  \"<i>Such is the social importance of the gift in this land.</i>\"\n\n");
-	
+
 		outputText("Reaching below the table, she pulls out something wrapped in cloth and twine.  Based on the shape you presume it to be a blade of some kind, but you're in no hurry to make assumptions - mostly because your drink isn't empty yet.  \"<i>While I have not grown up in such a culture and will hardly be so offended as to forever curse the name of all foreigners, I have endeavoured to make something that you will find useful.</i>\"\n\n");
-	
+
 		outputText("Holding the package in the palms of both hands, she extends it to you.  You take the offered gift and open it on the table.  Much as you anticipated it is indeed a sword, though one with strangely familiar lines and patterns engraved along its pommel and blade.  \"<i>My people found that it was best to perform magic with something that could - if necessary - also serve as a weapon on its own.  A crystal orb or stick tends to simply leave an opponent lightly bruised if employed as a weapon, rather than drawing blood.</i>\"  She reaches across the table and traces the lines on the blade with her finger.  \"<i>These inscriptions are based on the movement of the stars, and will draw power from them to enhance your magic - though admittedly given the difficulty of seeing the skies in this land, it's not as powerful as it would have been in my homeland.</i>\"  The connection to the night sky triggers the memory of where you've seen similar runes: Dominika's tattoos draw on the same iconography.\n\n");
-	
+
 		outputText("You grip the sword by its handle and lift it experimentally.  It's balanced well and seems functional.  \"<i>I'll admit that the blade may not be as sharp as one tempered by a blacksmith's hammer,</i>\" Dominika continues, \"<i>but it should serve your needs in sorcery no less than any other weapon.</i>\"  The magical power you can feel while wielding the weapon supports her claim.\n\n");
-	
+
 		outputText("Thanking her, you make a bit more small talk and idly bring up the possibility of returning to her apartment.  She chuckles a little and rests her chin on her hands. \"<i>Oh, I'm afraid I'm not hungry, and either way I need to do a little preparation for our next lesson.  Perhaps a bit later?</i>\"\n\n");
-	
+
 		outputText("Well, getting beer and a sword in one night is good enough you suppose, though you sure would've liked a triple combo of head in there too.  A good evening nonetheless.  You bid farewell to Dominika, thanking her once more for the drink and the blade before heading on your way.  She watches you go with an unreadable expression on her face.\n\n");
 	}
 	//(Player receives Spellblade)

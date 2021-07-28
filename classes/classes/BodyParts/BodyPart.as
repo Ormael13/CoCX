@@ -5,6 +5,7 @@ package classes.BodyParts {
 import classes.CoC_Settings;
 import classes.Creature;
 import classes.internals.SimpleJsonable;
+import classes.Measurements;
 
 public class BodyPart extends SimpleJsonable {
 

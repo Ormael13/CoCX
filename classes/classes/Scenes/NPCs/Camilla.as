@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.internals.*;
@@ -39,7 +39,7 @@ import classes.Scenes.SceneLib;
 				player.takePhysDamage(damage, true);
 			}
 		}
-		
+
 		public function phoenixFireBreathA():void {
 			if (!hasStatusEffect(StatusEffects.Uber)) {
 				outputText("Suddenly Camilla disengages from you and loops through the air, giving out a loud cry before she starts to barrel down at you. She’s clearly building up for something, so you’d better wait until she makes her move if you want a chance to dodge!");
@@ -67,7 +67,7 @@ import classes.Scenes.SceneLib;
 				removeStatusEffect(StatusEffects.Uber);
 			}
 		}
-		
+
 		public function lustBang():void {
 			outputText("\"<i>Here, CATCH!</i>\" Camilla shouts, lobbing a small, circular canister at you before ducking behind her sturdy shield. Oh shit!");
 			if (player.getEvasionRoll()) {
@@ -84,7 +84,7 @@ import classes.Scenes.SceneLib;
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
 			}
 		}
-		
+
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
@@ -109,8 +109,8 @@ import classes.Scenes.SceneLib;
 					eAttack();
 			}
 		}
-		
-		public function Camilla() 
+
+		public function Camilla()
 		{
 			this.a = "";
 			this.short = "Camilla";
@@ -148,7 +148,7 @@ import classes.Scenes.SceneLib;
 			this.level = 30;
 			this.gems = 60 + rand(45);
 			this.additionalXP = 50;
-			this.eyes.type = Eyes.REPTILIAN;
+			this.eyes.type = Eyes.LIZARD;
 			this.hairType = Hair.FEATHER;
 			this.arms.type = Arms.PHOENIX;
 			this.lowerBody = LowerBody.SALAMANDER;

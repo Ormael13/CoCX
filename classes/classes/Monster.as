@@ -1915,7 +1915,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.SlimeInsert, 1, -1);
 				return false;
 			}
-			else if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
+			else if (LowerBody.hasTentacles(player)) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
@@ -1926,7 +1926,7 @@ import flash.utils.getQualifiedClassName;
 			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 			return false;
 			}
-			else if (player.lowerBody == LowerBody.CANCER) {
+			else if (LowerBody.hasPincers(player)) {
 				EngineCore.outputText("Your prey pushes at your pincer, twisting and writhing in an effort to escape from your iron grip.");
 				if (statusEffectv1(StatusEffects.CancerGrab) <= 0) {
 					EngineCore.outputText("  " + capitalA + short + " proves to be too much for your pincer to handle, breaking free of your iron grip.");
@@ -1935,7 +1935,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.CancerGrab, 1, -1);
 				return false;
 			}
-			else if (player.lowerBody == LowerBody.GOO) {
+			else if (LowerBody.isGoo(player)) {
 			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your slimy body to handle, breaking free of your fluids.");

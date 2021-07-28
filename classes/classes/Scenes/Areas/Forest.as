@@ -44,7 +44,7 @@ use namespace CoC;
 		public function Forest() {
 			onGameInit(init);
 		}
-		
+
 		public function isDiscovered():Boolean {
 			return player.exploredForest > 0;
 		}
@@ -553,13 +553,13 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest.");
 				}
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
 						outputText("  Juices stream from your womanhood and begin pooling on the dirt and twigs beneath you.  ");
@@ -578,13 +578,13 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest floor.");
 				}
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
 						if (lake) outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the mud beneath you.  The sloppy fem-spunk only makes the ground more muddy.");

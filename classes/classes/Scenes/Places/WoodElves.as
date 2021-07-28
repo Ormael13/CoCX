@@ -17,6 +17,7 @@
 	import classes.Items.Armors.Nothing;
 	import classes.Scenes.SceneLib;
 	import classes.internals.SaveableState;
+	import classes.CoC;
 
 	public class WoodElves extends BaseContent implements SaveableState{
 
@@ -200,13 +201,14 @@
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.ears.type = Ears.ELVEN;
 			player.eyes.type = Eyes.ELF;
-			player.faceType = Face.ELF;
-			player.tongue.type = Tongue.ELF;
+      CoC.instance.transformations.FaceElf.applyEffect(false);
+			CoC.instance.transformations.TongueElf.applyEffect(false);
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
-			player.hairType = Hair.SILKEN;
+      outputText("\n\n");
+      CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
-			player.eyes.colour = "light green";
+			CoC.instance.transformations.EyesChangeColor(["light green"]).applyEffect(false);
 			player.skin.base.color = "light";
 			player.skinAdj = "flawless";
 			player.skinType = Skin.PLAIN;

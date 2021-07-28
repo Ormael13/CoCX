@@ -64,7 +64,7 @@ public class MagicSpecials extends BaseCombatContent {
 			combat.assumeAsuraForm007();
 		}
 		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
-			
+
 		}
 		if (player.wrath >= 50 && flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1) {
 			player.wrath -= 50;
@@ -121,7 +121,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
 		}
-		if (player.wings.type == Wings.SEADRAGON && player.antennae.type == Antennae.SEADRAGON && player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY){
+		if (player.wings.type == Wings.SEA_DRAGON && player.antennae.type == Antennae.SEA_DRAGON && player.skin.base.pattern == Skin.PATTERN_SEA_DRAGON_UNDERBODY){
 			bd = buttons.add("Electric Discharge", ElectricDischarge, "Release a deadly discharge of electricity.", "Electric discharge");
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
@@ -1033,7 +1033,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
-	
+
 	public function OrgasmicLightningStrike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -1147,7 +1147,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
-	
+
 	public function PleasureBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -1377,7 +1377,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
-	
+
 	public function PlasmaBlast():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -2506,7 +2506,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else combatRoundOver();
 	}
-	
+
 	public function trueDragonBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -2628,7 +2628,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
 			enemyAI();
 		}
-		
+
 	}
 //* Terrestrial Fire
 	public function fireballuuuuu():void {
@@ -2751,7 +2751,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = Math.round(0.5 * damage);
 			}
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, true); 
+			doFireDamage(damage, true, true);
 			outputText("\n\n");
 			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		}
@@ -2886,7 +2886,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
-	
+
 	public function berzerk():void {
 		clearOutput();
 		player.wrath -= 50;
@@ -2920,7 +2920,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 		enemyAI();
 	}
-	
+
 	public function blazingBattleSpirit():void {
 		clearOutput();
 		var blazingBattleSpiritDuration:Number = 10;
@@ -2932,7 +2932,7 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function cauterize():void {
 		clearOutput();
 		player.HP -= player.HP * 0.05;
@@ -2965,7 +2965,7 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function warriorsrage():void {
 		clearOutput();
 		player.wrath -= 50;
@@ -3274,7 +3274,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.HypnosisNaga,hypnosisDuration,0,0,0);
 		enemyAI();
 	}
-	
+
 	public function maleficium():void {
 		clearOutput();
 		player.lust += 50;
@@ -3285,7 +3285,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Maleficium,maleficiumDuration,0,0,0);
 		enemyAI();
 	}
-	
+
 	public function infernalflare():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -3395,7 +3395,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		enemyAI();
 	}
-	
+
 	public function hydraAcidBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3470,7 +3470,7 @@ public class MagicSpecials extends BaseCombatContent {
 		nekomataPuppeteer2();
 	}
 	public function nekomataPuppeteer2():void {
-		
+
 	}
 	//(Ghost Fire)
 	public function nekomataGhostFire():void {
@@ -4272,7 +4272,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	//Slime Bolt
 	public function SlimeBolt():void {
 		clearOutput();
@@ -5135,7 +5135,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else combatRoundOver();
 	}
-	
+
 	public function ChaosBeams():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownChaosBeams,11,0,0,0);
@@ -5239,7 +5239,7 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
-	
+
 	public function DominatingGaze():void {
 		clearOutput();
 		fatigue(50, USEFATG_MAGIC_NOBM);

@@ -18,7 +18,7 @@ import classes.display.SpriteDb;
 public class KitsuneScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public function KitsuneScene()
 		{
 		}
@@ -393,7 +393,7 @@ public class KitsuneScene extends BaseContent
 			player.sexReward("vaginalFluids", "Dick", true, false);
 			player.sexReward("cum");
 			doNext(kitsuneStillHungryMansion);
-		} //End letHer() 	
+		} //End letHer()
 
 //Formerly shoveHer()
 		private function kitsuneShoveHerMansion(willing:Boolean = true):void
@@ -1073,7 +1073,7 @@ public class KitsuneScene extends BaseContent
 			outputText("\"<i>Finished already?  I thought a big strong " + player.mf("boy", "girl") + " like you would put up more of a fight.</i>\"\n\n");
 			outputText("With a light shrug, she ceases chastising you and gets down to business, carefully pulling off your [armor] and rolling you over to get a good look at your body.  As her hands cascade over your naked form, you struggle in vain against her incessant pinches and gropes, unable to resist becoming aroused.  Her fingertips slide over your [chest], pressing down lightly as they circle your [nipples].  Ethereal flames crackle along behind her fingers as they drag across your flesh, making your whole body tingle with pleasure and forcing a moan from your throat.\n\n");
 			outputText("As she begins to examine your nethers, a number of her bushy red tails begin to slither around your limbs, binding your arms behind your back." + ((player.cocks.length > 0) ? "  She idly lifts [oneCock], playfully wobbling it back and forth and giggling at the pleasured grimace you make." : "" ) + ((player.balls > 0) ? "  Cupping her hand around your [balls], she hefts them a bit as if sizing them up, using the tip of one of her tails to tickle the underside of your scrotum." : "") + ((player.gender >= 2) ? "  Her fingertips then gently walk along your groin, sliding down to caress and part the lips of your " + vaginaDescript() + ", coming away with a thin thread of your feminine juices." : "" ) + "\n\n");
-			outputText("" + ((player.gender == 0) ? "\"<i>Heh, well, this is an awkward situation...</i>\" she says, eying your bizarre, featureless groin.  Flipping you over onto your stomach, she smiles, patting your " + buttDescript() + " lightly.  \"<i>But at least it looks like you're still good for </i>some<i> kinds of fun...</i>\"" : "\"<i>Oh, we are gonna have some </i>fun<i>, you and I,</i>\" she says, patting your head softly." ) + "\n\n");
+			outputText("" + ((player.gender == 0) ? "\"<i>Heh, well, this is an awkward situation...</i>\" she says, eying your bizarre, featureless groin.  Flipping you over onto your stomach, she smiles, patting your [butt] lightly.  \"<i>But at least it looks like you're still good for </i>some<i> kinds of fun...</i>\"" : "\"<i>Oh, we are gonna have some </i>fun<i>, you and I,</i>\" she says, patting your head softly." ) + "\n\n");
 			outputText("Once she is suitably satisfied with her teasing, she decides to get down to business, stripping out of her robes.  She throws you a sly grin as she pulls them down around her shoulders, letting her large breasts bounce free and giving you a little show, tweaking her nipples and moaning a bit.  Tugging at the sash around her waist, she lets her robes fall off entirely now, and you watch as her throbbing, twelve-inch cock springs to life, no longer held in check by the confines of her clothes.\n\n");
 			outputText("Though her impressive endowment isn't quite as fearsome as some of the others in this strange land, that eerie blue fire that encircles it gives you reason to worry.  There's little you can do about it though, wrapped up in her tails as you are, unable to resist her advances.  You squirm a bit when you feel her press up against your " + ((player.gender >= 2) ? vaginaDescript() : assholeDescript()) + ", struggling in vain against the tails binding you.  Your fears are assuaged somewhat when you feel the head pushing past your ");
 			if (player.hasVagina()) outputText("entrance");
@@ -2370,7 +2370,7 @@ public class KitsuneScene extends BaseContent
 			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.inte >= 100 && player.wis >= 100 && player.cor >= 50 && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(7, "Slave", AyaneSlave);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
-		
+
 //[Read Books]
 		private function readKitsuneBooks():void
 		{
@@ -2410,11 +2410,11 @@ public class KitsuneScene extends BaseContent
 			player.gems -= 1000;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public static var basicKitsuneHair:Array = ["white", "black", "black", "black", "red", "red", "red"];
 		public static var basicKitsuneFur:Array = ["orange and white", "black", "black and white", "red", "red and white", "white"];
 		public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
-		
+
 		//[Meditate]
 		// If kitsune-level-upped, returns new number of tails
 		public function meditateAtKitsuneShrine():int {
@@ -2476,25 +2476,17 @@ public class KitsuneScene extends BaseContent
 							outputText("\n\nNow you have [haircolor] fur matching your hair, like true kitsune elder. You look really regal!");
 						}
 					}
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-						outputText("\n\n<b>Genetic Memory: 9th Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail9th, 0, 0, 0, 0);
-					}
-					player.tailCount = 9;
+					CoC.instance.transformations.TailFox(9).applyEffect(false);
 					player.consumeItem(consumables.FOXJEWL);
 				} else if (player.tailCount == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && notANineTail && (!player.hasPerk(PerkLib.CorruptedKitsune) || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-						outputText("\n\n<b>Genetic Memory: 8th Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail8th, 0, 0, 0, 0);
-					}
+					CoC.instance.transformations.TailFox(8).applyEffect(false);
 					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					player.consumeItem(consumables.FOXJEWL);
-					player.tailCount++;
 					doNext(camp.returnToCampUseOneHour);
 				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 90 &&  player.inte >= 90 && notANineTail && (!player.hasPerk(PerkLib.CorruptedKitsune) || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
@@ -2508,42 +2500,18 @@ public class KitsuneScene extends BaseContent
 						dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					}
 					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-						outputText("\n\n<b>Genetic Memory: 7th Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail7th, 0, 0, 0, 0);
-					}
-					player.tailCount = 7;
+					CoC.instance.transformations.TailFox(7).applyEffect(false);
 					player.consumeItem(consumables.FOXJEWL);
 				} else if ((2 <= player.tailCount && player.tailCount <= 5) && player.tailCount - 1 <= player.level / 6 && player.tailCount <= player.inte / 15 && player.tailCount <= player.wis / 15) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailCount == 2) {
-						outputText("\n\n<b>Genetic Memory: 3rd Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd, 0, 0, 0, 0);
-					}
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailCount == 3) {
-						outputText("\n\n<b>Genetic Memory: 4th Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd, 0, 0, 0, 0);
-					}
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailCount == 4) {
-						outputText("\n\n<b>Genetic Memory: 5th Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd, 0, 0, 0, 0);
-					}
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailCount == 5) {
-						outputText("\n\n<b>Genetic Memory: 6th Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd, 0, 0, 0, 0);
-					}
+					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened. Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailCount + 1) + "!");
+					CoC.instance.transformations.TailFox(player.tailCount + 1).applyEffect(false);
 					player.consumeItem(consumables.FOXJEWL);
-					player.tailCount++;
 				} else if (player.inte >= 15 && player.wis >= 15 && player.tailCount == 1) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailCount + 1) + "!");
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd)) {
-						outputText("\n\n<b>Genetic Memory: 2nd Fox Tail - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd, 0, 0, 0, 0);
-					}
+					CoC.instance.transformations.TailFox(2).applyEffect(false);
 					player.consumeItem(consumables.FOXJEWL);
-					player.tailCount = 2;
 				} else {
 					outputText("As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
 					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});

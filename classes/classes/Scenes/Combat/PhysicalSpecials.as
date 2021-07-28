@@ -62,13 +62,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+
 				}
 			}
 			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {
@@ -136,7 +136,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI_ONNA || player.hasPerk(PerkLib.VenomGlands)) {
+			if (player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI || player.hasPerk(PerkLib.VenomGlands)) {
 				bd = buttons.add("SpiderBite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. (deal lust dmg and lower gradualy enemy lust resistance)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < player.VenomWebCost() * 5) {
 					bd.disable("You do not have enough venom to use spider bite right now!");
@@ -1300,9 +1300,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.haveWeaponForJouster()) {
-			if (player.isTaur() || player.isDrider()) damage *= 2;
-			if (player.isMeetingNaturalJousterReq()) damage *= 3;
-			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
+			var JousterDamageMod:Number = 1;
+			if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
+			if (player.isTaur() || player.isDrider()) damage *= 2*JousterDamageMod;
+			if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
+			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
 		}
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -5266,7 +5268,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Section for item damage modifiers
 			if (weaponRangePerk == "Bow"){
 				if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-				if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isUsingSpear() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
+				if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
 			}
 			damage = Math.round(damage);
 			if (monster.HP <= monster.minHP()) {

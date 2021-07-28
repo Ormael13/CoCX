@@ -10,7 +10,7 @@ package classes.Scenes.Areas.Plains
 	public class GnollScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public function GnollScene()
 		{
 		}
@@ -53,7 +53,7 @@ package classes.Scenes.Areas.Plains
 				//(if cockTotal=0 AND vaginas=0)
 				else outputText("The gnoll actually stops laughing for a moment when she takes in your featureless crotch.  \"<i>Well.  That's a new one,</i>\" she mutters.  She then takes two bobbing steps up the length of your body and rudely shoves her thumb into your mouth.  Her other hand guides her giant clitoris in after it, and you are in no position to stop her.\n\n");
 			}
-			//(if cockTotal>0 AND 
+			//(if cockTotal>0 AND
 			if (player.cockTotal() > 0) {
 				//thickestCock()>2")
 				if (player.thickestCockThickness() > 2) {
@@ -105,7 +105,7 @@ package classes.Scenes.Areas.Plains
 		public function defeatHyena():void
 		{
 			clearOutput();
-			//Gnoll Defeat (HP)	
+			//Gnoll Defeat (HP)
 			if (monster.HP < 1) outputText("The hyena girl collapses backwards onto the dusty ground, unable to continue the fight.");
 			//Gnoll Defeat (Lust)
 			else outputText("The hyena girl heaves a giant breath and takes a single step backwards.  Her club thumps to the ground and her hands fall to her shaft, stroking along its rough length.");
@@ -282,7 +282,7 @@ package classes.Scenes.Areas.Plains
 		private function yoDawgHyenaBallz2():void
 		{
 			clearOutput();
-			outputText("Using the distraction, you roll onto your belly, crawling towards your [armor], hoping to use the distraction to make an escape.  Baring your " + buttDescript() + ", however, proves to be a mistake, as the gnoll fixates on the wobbling orbs, lunging desperately.  She lands atop you, her paws pinning your head and shoulders to the ground as the warmth of her impatient shaft slides between your cheeks, her new scrotum slapping wetly against ");
+			outputText("Using the distraction, you roll onto your belly, crawling towards your [armor], hoping to use the distraction to make an escape.  Baring your [butt], however, proves to be a mistake, as the gnoll fixates on the wobbling orbs, lunging desperately.  She lands atop you, her paws pinning your head and shoulders to the ground as the warmth of her impatient shaft slides between your cheeks, her new scrotum slapping wetly against ");
 			if (player.balls > 0) outputText("your own " + ballsDescriptLight());
 			else outputText("your sweat-slick thighs");
 			outputText(".  The amazon wastes no time, guiding her monstrous clit to your " + assholeDescript() + " with gasping pleasure, thrusting the barrel-like pseudo-cock deeply inside your nethers, drawing a cry of penetration from your lips.  The plush interior of your anus parts before her energized clitoris, her cunt flowing with warm lubrication so heavily that its deluge inundates your bowels like a flood of pre-cum.");
@@ -291,7 +291,7 @@ package classes.Scenes.Areas.Plains
 
 			outputText("Roughly, she bucks against your hips, pushing your face against the grass and dirt, moving with relentless speed as she fucks you with every ounce of strength in her well-toned body.  She snarls and cries out, even laughing with a mad desperation, as she plunges her rock-hard joy buzzer into your loins trying to achieve release.  Your struggles are useless against the rutting passion of the hyena-girl, who uses you like a beast in heat.  In mere minutes, her body seizes, muscles straining with the blissful throes of imminent orgasm and you whisper a prayer that she'll be done shortly.  Gnashing her teeth, she hooks both spotted paws around your shoulders and drives her jet-black member into the velvet folds of your clenching asshole, her sweltering cunny gushing with her girl-cum.\n\n");
 
-			outputText("Her bucking pauses for a split-second and you can feel her fuzzy balls throbbing against your " + buttDescript() + ", the stimulation of her fucking filling them with fresh loads, eager to spill into your violated hole.  But, without a passage to let loose the torrent of her sperm with, the gnoll's balls merely swell with unspent passion, lewdly quivering against");
+			outputText("Her bucking pauses for a split-second and you can feel her fuzzy balls throbbing against your [butt], the stimulation of her fucking filling them with fresh loads, eager to spill into your violated hole.  But, without a passage to let loose the torrent of her sperm with, the gnoll's balls merely swell with unspent passion, lewdly quivering against");
 			if (player.balls > 0) outputText(" your distended sac, ballooning with the fatigued flood of the prostate-milking the girl is giving you");
 			else outputText(" your sore loins, soaked with the slimy river of the girl's excitement");
 			outputText(".  \"<i>N-no! I can't... quite... arg!</i>\" She trembles, unable to cum, before mindlessly starting anew, pistoning into your " + assholeDescript() + " with renewed vigor.  \"<i>I just! Have to! Fucking! Cum!</i>\" she grunts from between clenched teeth as she slams into you, the waterfall of lubrication from her pussy soaking your " + player.skinFurScales() + " as she wetly slaps her hips into yours in her increasingly desperate assault.\n\n");
@@ -335,7 +335,7 @@ package classes.Scenes.Areas.Plains
 
 		 Hyena Spot Effect #3
 		 (if butt.type>0)
-		 You seem to bounce on your feet as you drop a few pounds in your rear.  With your new, light " + buttDescript() + ", you feel like you can fly across the plains.
+		 You seem to bounce on your feet as you drop a few pounds in your rear.  With your new, light [butt], you feel like you can fly across the plains.
 		 (decrease butt.type)
 
 		 Hyena Spot Effect #4

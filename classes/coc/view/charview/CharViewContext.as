@@ -83,7 +83,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasATetsuHoly:player.weapon == game.weapons.POCDEST,
 					PlayerHasATetsuUnholy:player.weapon == game.weapons.DOCDEST,
 
-					PlayerHasASpear: player.isSpearTypeWeapon(),
+					PlayerHasASpear: player.isPolearmTypeWeapon(), //until polearm have their own sprite they share sprite with spears
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
 
@@ -240,7 +240,7 @@ class Pattern {
 	public static const NONE:int                    = Skin.PATTERN_NONE;
 	public static const MAGICAL_TATTOO:int          = Skin.PATTERN_MAGICAL_TATTOO;
 	public static const ORCA_UNDERBODY:int          = Skin.PATTERN_ORCA_UNDERBODY;
-	public static const SEADRAGON_UNDERBODY:int     = Skin.PATTERN_SEADRAGON_UNDERBODY;
+	public static const SEA_DRAGON_UNDERBODY:int     = Skin.PATTERN_SEA_DRAGON_UNDERBODY;
 	public static const BEE_STRIPES:int             = Skin.PATTERN_BEE_STRIPES;
 	public static const TIGER_STRIPES:int           = Skin.PATTERN_TIGER_STRIPES;
 	public static const BATTLE_TATTOO:int           = Skin.PATTERN_BATTLE_TATTOO;

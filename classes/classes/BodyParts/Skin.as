@@ -25,8 +25,8 @@ public class Skin extends SaveableBodyPart {
 	public static const COVERAGE_MEDIUM:int   = 2;
 	public static const COVERAGE_HIGH:int     = 3;
 	public static const COVERAGE_COMPLETE:int = 4;
-	
-	
+
+
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 1, 2)
@@ -37,7 +37,7 @@ public class Skin extends SaveableBodyPart {
 	 * - coat: is valid coat layer type (false, true, true)
 	 */
 	public static var SkinTypes:/*EnumValue*/Array = [];
-	
+
 	public static const PLAIN:int                 = 0;
 	EnumValue.add(SkinTypes, PLAIN, "PLAIN", {name:"skin", plural: false,base:true});
 	public static const FUR:int                   = 1;
@@ -74,7 +74,7 @@ public class Skin extends SaveableBodyPart {
 	EnumValue.add(SkinTypes, FEATHER, "FEATHER", {name:"feather", plural: false,base:true});
 	public static const TRANSPARENT:int 	      = 22;
 	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {name:"transparent", plural: false,base:true});
-	
+
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 1)
@@ -84,7 +84,7 @@ public class Skin extends SaveableBodyPart {
 	 * - coat: valid pattern for coat layer
 	 */
 	public static var PatternTypes:/*EnumValue*/Array = [];
-	
+
 	public static const PATTERN_NONE:int = 0;
 	EnumValue.add(PatternTypes, PATTERN_NONE, "NONE", {name:"none", base:true, coat:true});
 	public static const PATTERN_MAGICAL_TATTOO:int = 1;
@@ -109,20 +109,20 @@ public class Skin extends SaveableBodyPart {
 	EnumValue.add(PatternTypes, PATTERN_WHITE_BLACK_VEINS, "WHITE_BLACK_VEINS", {name:"white and black veins", base:true});
 	public static const PATTERN_VENOMOUS_MARKINGS:int = 11;
 	EnumValue.add(PatternTypes, PATTERN_VENOMOUS_MARKINGS, "VENOMOUS_MARKINGS", {name:"venomous markings", base:true});
-	public static const PATTERN_USHI_ONI_ONNA_TATTOO:int = 12;
-	EnumValue.add(PatternTypes, PATTERN_USHI_ONI_ONNA_TATTOO, "USHI_ONI_ONNA_TATTOO", {name:"ushi-oni tattoo", base:true});
+	public static const PATTERN_USHI_ONI_TATTOO:int = 12;
+	EnumValue.add(PatternTypes, PATTERN_USHI_ONI_TATTOO, "USHI_ONI_TATTOO", {name:"ushi-oni tattoo", base:true});
 	public static const PATTERN_SCAR_WINDSWEPT:int = 13;
 	EnumValue.add(PatternTypes, PATTERN_SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {name:"windswept scars", base:true});
 	public static const PATTERN_OIL:int = 14;
 	EnumValue.add(PatternTypes, PATTERN_OIL, "OIL", {name:"oily skin", base:true});
-	public static const PATTERN_SEADRAGON_UNDERBODY:int = 15;
-	EnumValue.add(PatternTypes, PATTERN_SEADRAGON_UNDERBODY, "SEADRAGON_UNDERBODY", {name:"sea dragon underbody", base:true});
+	public static const PATTERN_SEA_DRAGON_UNDERBODY:int = 15;
+	EnumValue.add(PatternTypes, PATTERN_SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {name:"sea dragon underbody", base:true});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
-	
+
 	public var base:SkinLayer;
 	public var coat:SkinLayer;
 	private var _coverage:int = COVERAGE_NONE;
-	
+
 	public function Skin(creature:Creature) {
 		super(creature, "skin", ["coverage"]);
 		base = new SkinLayer(this);
@@ -181,7 +181,7 @@ public class Skin extends SaveableBodyPart {
 		return null;
 	}
 	/**
-	 * @param options = {color,adj,desc}
+	 * @param options = {color,color2,pattern,adj,desc}
 	 */
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
@@ -381,8 +381,8 @@ public class Skin extends SaveableBodyPart {
 	public function hasWhiteBlackVeins():Boolean {
 		return base.pattern == PATTERN_WHITE_BLACK_VEINS;
 	}
-	public function hasUshiOniOnnaTattoo():Boolean {
-		return base.pattern == PATTERN_USHI_ONI_ONNA_TATTOO;
+	public function hasUshiOniTattoo():Boolean {
+		return base.pattern == PATTERN_USHI_ONI_TATTOO;
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;
@@ -552,6 +552,13 @@ public class Skin extends SaveableBodyPart {
 		savedata.furColor    = coat.color;
 		savedata.scalesColor = coat.color;
 		savedata.chitinColor = coat.color;
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

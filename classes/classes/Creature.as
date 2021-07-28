@@ -1036,7 +1036,7 @@ public class Creature extends Utils
 			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color2;
 		}
-		public function get NakedCoatColor():String {
+		public function get nakedCoatColor():String {
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {
@@ -3363,6 +3363,7 @@ public class Creature extends Utils
 		public function isBiped():Boolean { return lowerBodyPart.isBiped(); }
 		public function isNaga():Boolean { return lowerBodyPart.isNaga(); }
 		public function isTaur():Boolean { return lowerBodyPart.isTaur(); }
+		public function canTaur():Boolean { return lowerBodyPart.canTaur(); }
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
@@ -3944,9 +3945,9 @@ public class Creature extends Utils
 			return Appearance.hairOrFur(this);
 		}
 
-		public function hairDescript(longDesc:Boolean = false):String
+		public function hairDescript():String
 		{
-			return Appearance.hairDescription(this, longDesc);
+			return Appearance.hairDescription(this);
 		}
 
 		public function beardDescript():String
@@ -3956,7 +3957,7 @@ public class Creature extends Utils
 
 		public function hairStyleDescript():String
 		{
-			return Appearance.beardDescription(this);
+			return Appearance.hairStyleDescription(this);
 		}
 
 		public function hipDescript():String

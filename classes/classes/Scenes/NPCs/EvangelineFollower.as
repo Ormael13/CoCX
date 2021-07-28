@@ -3,7 +3,7 @@
  * @author Ormael
  */
 
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Arms;
@@ -26,7 +26,7 @@ package classes.Scenes.NPCs
 	import classes.Items.WeaponRangeLib;
 	import classes.internals.SaveableState;
 	import coc.view.ButtonDataList;
-	
+
 	public class EvangelineFollower extends NPCAwareContent implements SaveableState
 	{
 		public static var EvangelinePeepTalkOnInternalMutations:Number;
@@ -70,7 +70,7 @@ package classes.Scenes.NPCs
 			}
 		}
 
-		public function EvangelineFollower() 
+		public function EvangelineFollower()
 		{
 			Saves.registerSaveableState(this);
 		}
@@ -89,7 +89,7 @@ package classes.Scenes.NPCs
 			else if (EvangelineAffectionMeter < 0) EvangelineAffectionMeter = 0;
 			return EvangelineAffectionMeter;
 		}
-	
+
 public function enterTheEvangeline():void
 {
 	clearOutput();
@@ -167,7 +167,7 @@ public function Nie2():void
 	outputText("After moment of hesitation you once again decline her offer. Saying something about doing pretty well so far, you leave her be. Still your next hour is wasted on wandering around without any actual purpose.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
-	
+
 public function meetEvangeline():void {
 	clearOutput();
 	if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
@@ -217,8 +217,8 @@ private function evangelineAppearance():void {
 	else outputText("seven and a half feet");
 	outputText(" tall.\n\n");
 	outputText("Oddly despite living in Mareth she looks like a human aside from her eyes that have uncanny pupils, which after narrowing looks like two cat slits that forms an X shape over her golden eyes. Her ");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 9) outputText("crimson platinum "); 
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("platinum blonde "); 
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 9) outputText("crimson platinum ");
+	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("platinum blonde ");
 	else outputText("red ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 10) outputText("hair are ass-length along with breats that could easily fill a F-cup bra, expansive ass and fertile hips.\n\n");
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
@@ -868,7 +868,7 @@ private function curingJiangshi():void {
 		}
 		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 		player.skinTone = "light";
-		player.faceType = Face.HUMAN;
+		CoC.instance.transformations.FaceHuman.applyEffect(false);
 		player.eyes.type = Eyes.HUMAN;
 		player.horns.type = Horns.NONE;
 		player.horns.count = 0;
@@ -1139,7 +1139,7 @@ private function InternalMutations0(page:int = 0):void {
 		outputText("Placeholder Text on grafting mutation.\n\n");
 		outputText("Placeholder Text on grafting mutation.");
 	}
-	
+
 	function mutationsAssistant(perkName:Array, menuButton:int):void {
 		var perkCount:int = 0
 		for each(var perkTier:PerkType in perkName) {
@@ -1166,7 +1166,7 @@ private function InternalMutations0(page:int = 0):void {
 		InternalMutations0();
 	}
 }
-		
+
 private function Experiments():void {
 	clearOutput();
 	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
