@@ -1336,7 +1336,7 @@ use namespace CoC;
 				outputText("\n\n");
 				if (player.isLiliraune()) outputText("Several minutes of fucking later, he");
 				else outputText("He");
-				outputText("pulls his dick free, and you");
+				outputText(" pulls his dick free, and you");
 				if (player.isLiliraune()) outputText("r sister");
 				outputText(" flop");
 				if (player.isLiliraune()) outputText("s");
