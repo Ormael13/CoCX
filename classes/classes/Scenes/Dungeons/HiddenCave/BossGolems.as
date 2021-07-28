@@ -8,12 +8,10 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.AbstractGargoyle;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class BossGolems extends AbstractGargoyle
 	{
-		public var golems:HeXinDao = new HeXinDao();
 		
 		override protected function performCombatAction():void
 		{
@@ -61,7 +59,7 @@ public class BossGolems extends AbstractGargoyle
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) golems.gaunletchallange2postfight();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2postfight();
 			else {
 				outputText("Your last attack cause the golems to crumble to rubbles on the ground. It seems the way is clear, better not linguer in the same spot for to long there is no telling when another may cross your path.\n\n");
 				flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 2;

@@ -142,7 +142,7 @@ private function talkToBaker():void {
 
 	//[Brownie][Cookie][Cupcake][Doughnut][Pound Cake][Fox Berry][Ringtail Fig][Mouse Cocoa][Nevermind]
 	//[Nevermind] goes back to bakery main menu and is spacebar default
-	//all purchases offered after talking should spacebar to [No] and go to normal purchase output if [Yes], returning to bakery main menu afterward 
+	//all purchases offered after talking should spacebar to [No] and go to normal purchase output if [Yes], returning to bakery main menu afterward
 	menu();
 	addButton(0,"Brownie",talkAboutBrownies);
 	addButton(1,"Cookie",talkAboutCookies);
@@ -160,9 +160,9 @@ private function talkToBaker():void {
 private function talkAboutBrownies():void {
 	clearOutput();
 	outputText("\"<i>Like our brownies?</i>\" the baker asks.  \"<i>Recipe been handed down from chef to chef for years.  Original maker invented it at an inn, for guests to carry in their lunchboxes.</i>\"");
-	
+
 	outputText("\n\nHe continues.  \"<i>Won't tell you full recipe.  Made with mouse cocoa, fresh egg, and sugar made from bee honey - heated and strained.  No transformations.  Pinch of salt, mix up, put in pan, bake.  Easy to make lots; popular.  Want one?  Three gems.</i>\"");
-	
+
 	//[Yes][No]
 	menu();
 	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "brownies", 3));
@@ -183,9 +183,9 @@ private function talkAboutCookies():void {
 private function talkAboutCupcakes():void {
 	clearOutput();
 	outputText("\"<i>Cupcakes take work,</i>\" the baker intones, tilting his long face downward.  \"<i>Need butter, sugar, flour, and eggs for batter; gotta mix long time and add stuff slowly.  Candied berries get cut up, put inside batter in little pieces.  Bake batter in a special pan.</i>\"");
-	
+
 	outputText("\n\n\"<i>Then,</i>\" he sighs, \"<i>make icing.  Soften butter, add milk and sugar and berry juice, beat mixture.  Beat a long time.  Beat until arm tired.  Spread on cupcakes when they come out.</i>\"");
-	
+
 	outputText("\n\n\"<i>Too popular, too cheap.  Always making cupcakes, no time to experiment on recipes.  Want to raise price but cupcakes are best seller and customers get mad.</i>\"  A bell rings.  Sighing again, he walks over to the oven and opens it, then pulls out a tray of un-iced cupcakes.  \"<i>See?  Making now.  You buying one?  Four... no, still three gems I guess.</i>\"");
 	//[Yes][No]
 	menu();
@@ -197,7 +197,7 @@ private function talkAboutCupcakes():void {
 private function talkAboutDoughnuts():void {
 	clearOutput();
 	outputText("\"<i>Doughnuts are fun,</i>\" the gruff baker smiles.  \"<i>Make mix of wet yeast, milk, sugar, eggs, little salt, and shortening.  Sometimes cocoa too.  Pound dough until smooth, work out frustration from making cupcakes all day.  Then let sit in covered bowl to rise.  Roll it small and cut if plain, or make circles if jam doughnut; cover to rise again.</i>\"  He mimes bringing a string's ends together and traces a circle, respectively.");
-	
+
 	outputText("\n\n\"<i>Fry in hot oil until brown and delicious, lift out with spatula.  Penetrate jam doughnuts with pastry bag and squirt jam like cum into breeding cow... sorry.</i>\"  He frowns.  \"<i>Take longer to make than other things, even cupcakes.  Can't make batches as big because so many kinds.  So doughnuts cost more - five gems.  Still, lots of fun to pound and fry and stuff.  Sell lots when watch shifts change; watchmen come in and clean out doughnut trays.  Want to buy one before next rush starts?</i>\"");
 	//[Yes][No]
 	menu();
@@ -219,7 +219,7 @@ private function talkToBakerAboutPoundCake():void {
 private function talkAboutFoxBerry():void {
 	clearOutput();
 	outputText("\"<i>Don't even know where these came from,</i>\" the baker admits.  \"<i>Shipper just showed up one day, showed me how to prepare and sell them.  Very fruity, but popular.  Candy or cook them right and eat them all day, never grow anything.  Eat them raw instead, get fox parts, look like guard captain lady and guy at whorehouse.  Still want one for five gems?</i>\"");
-	
+
 	//[Yes][No]
 	menu();
 	addButton(0,"Yes",buyFoxBerry);
@@ -331,9 +331,9 @@ private function talkBakeryMenu():void {
 	if(flags[kFLAGS.RUBI_INTRODUCED] > 0) rubiT = "Rubi";
 	menu();
 	addButton(0,"Baker",talkToBaker);
-	
+
 	// rubiIntros returns 0 if you've driven rubi away
-	// I'm actually not sure how this was *supposed* to work, since it would just call eventParser with a event of 0 
+	// I'm actually not sure how this was *supposed* to work, since it would just call eventParser with a event of 0
 	// I guess it just wouldn't do anything?
 	// FWIW, the flag that has to be set to get rubiIntros to return zero is set in a function that has the comment:
 	//(Will no longer encounter Rubi at the bakery.)
@@ -388,7 +388,7 @@ public function nomnomnom(name:String,price:Number):void {
 			outputText(player.modTone(0,2));
 			outputText(player.modThickness(player.maxThicknessCap(),1));
 			if(rand(3) == 0 && player.butt.type < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.");
+				outputText("\n\nWhen you stand back up your [butt] jiggles a little bit more than you'd expect.");
 				player.butt.type++;
 			}
 			if(rand(3) == 0 && player.hips.type < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
@@ -417,7 +417,7 @@ public function nomnomnom(name:String,price:Number):void {
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cupcakes") {
 			outputText(player.modTone(0,4));
 			if(rand(2) == 0 && player.butt.type < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles with a good bit of extra weight.");
+				outputText("\n\nWhen you stand back up your [butt] jiggles with a good bit of extra weight.");
 				player.butt.type += 2;
 			}
 			player.refillHunger(20);
@@ -426,7 +426,7 @@ public function nomnomnom(name:String,price:Number):void {
 			outputText(player.modTone(0,2));
 			outputText(player.modThickness(player.maxThicknessCap(),2));
 			if(rand(3) == 0 && player.butt.type < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.");
+				outputText("\n\nWhen you stand back up your [butt] jiggles a little bit more than you'd expect.");
 				player.butt.type++;
 			}
 			if(rand(3) == 0 && player.hips.type < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
@@ -559,7 +559,7 @@ private function malesHelpOutWithEaster():void {
 	outputText(", each movement a not unpleasant sensation as the warmth infuses you.  The center of the pressure loosens, and your chocolate partner takes it upon herself to pin you to the floor, her warmness surrounding you.  Almost immediately you feel a similar pressure to the previous upon your groin, pulsating now as if stroking your cock in earnest.  You work out that she has enveloped your rod in what you assume is a vagina.  As if to confirm your suspicions, your captor lets out a small moan, increasing the fervor with which she rings out your dong.");
 	outputText("\n\nUnable now to contain your own lust, you start idly pumping into her velvety depths, the extreme warmth of which does nothing to discourage you.  Delighted by your newfound vigor, the mass riding you lets a sound out halfway between a squeal and a moan, increasing the vehemence of her own ministrations.  You pull your hand free from its prison only to thrust it higher up, gripping the highly malleable breast of the buxom girl.  Increasing the intensity of your pelvic endeavor, you elicit another moan from the bodacious vixen's lips, only adding fuel to your frenzied motions.  Jamming into her depths, intense heat assaults your body.  As if setting a spark to kindling, a torrid wave sweeps through you before you realize you are towards your limit.");
 	outputText("\n\nDecided on making your mate peak before you, your attention turns to bringing pleasure from your awkward thrusts into her depths.  Finding your current position lacking the dominance you need for your vision, you struggle out from beneath the heated woman, leaving her confused with her ass in the air.  Satisfied with your new arrangement, you take up position behind her and push your hand into her pussy, testing its plasticity.  Wasting no more time, you line up your [cock biggest] with the woman's opening and administer your entire length in a quick thrust.  The woman openly moans from your treatment of her depths.  Still remembering your goal, you bring your hand down and find a harder globule of chocolate that must be her clitoris.  While passively administering jabs into her pussy, you concentrate your fingers on her love button, rubbing with both tenderness and vigor.  Moaning openly now, the girl lets out a keening wail that puts you dangerously close to the edge yourself.  With a final burst of energy you aren't sure you can afford, you begin plunging into her silky breach with near desperation.");
-	
+
 	outputText("\n\nYour chocolate counterpart is now screaming with a passion unmatched by even yourself, while you ram as fast as your [legs] will allow.  The girl's other equipment is also reaching its limit, convulsing as if about to burst.  The shriek the woman emits is nothing short of ear-shattering as she cums, chocolate raining down on you.  ");
 	//[SILLYMODE]
 	if(silly()) outputText("You regret not bringing your umbrella for this Chocolate Rain, so that you could be like those that stay dry rather than those who feel the pain.  ");

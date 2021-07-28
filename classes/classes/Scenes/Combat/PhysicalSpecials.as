@@ -62,13 +62,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+
 				}
 			}
 			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {
@@ -95,11 +95,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Warrior Shout again.</b>\n\n");
 				}
 			}
-			bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
-			if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
-				bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
+			if (!player.isStaffTypeWeapon()) {
+				bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
+				if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
+					bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
+				}
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hairType == 4) {
 				bd = buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -122,21 +124,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.faceType == Face.SNAKE_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
 				if (player.lowerBody == LowerBody.HYDRA) {
 					bd = buttons.add("HydraBite", hydraBiteAttack).hint("Deal as many attacks as pc got heads. Also delivers naga poison for as many time as pc got heads. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to use hydra bite right now! (Req. 25+)");
+					if (player.tailVenom < player.VenomWebCost() * 5) {
+						bd.disable("You do not have enough venom to use hydra bite right now! (Req. "+player.VenomWebCost()*5+"+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					bd.requireFatigue(physicalCost(10 * player.statusEffectv1(StatusEffects.HydraTailsPlayer)));
 				}
 				else {
 					bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to use snake bite right now! (Req. 25+)");
+					if (player.tailVenom < player.VenomWebCost() * 5) {
+						bd.disable("You do not have enough venom to use snake bite right now! (Req. "+player.VenomWebCost()*5+"+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI_ONNA || player.hasPerk(PerkLib.VenomGlands)) {
+			if (player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI || player.hasPerk(PerkLib.VenomGlands)) {
 				bd = buttons.add("SpiderBite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. (deal lust dmg and lower gradualy enemy lust resistance)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
+				if (player.tailVenom < player.VenomWebCost() * 5) {
 					bd.disable("You do not have enough venom to use spider bite right now!");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -171,7 +173,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
-			if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
+			if ((player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.FROSTWYRM) && player.horns.count >= 6) {
 				bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -199,6 +201,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
 				bd = buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Whip Grapple
+			if (player.isWeaponsForWhipping()) {
+				bd = buttons.add("Grapple(W)", whipGrapple).hint("Attempt to grapple a foe with your whip.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				else if (monster.plural) bd.disable("You cannot grapple more than one foe at once.");
 			}
 			//Kick
 			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
@@ -261,26 +269,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 					period = "your refractory period";
 				}
 				bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
-					bd.disable("You do not have enough venom to sting right now! (Req. 25+)");
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough venom to sting right now! (Req. "+player.VenomWebCost()*5+"+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 				bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
-					bd.disable("You do not have enough venom to shoot a spike right now! (Req. 25+)");
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough venom to shoot a spike right now! (Req. "+player.VenomWebCost()*5+"+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Omni Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spikes at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot multiple spikes right now! (Req. 50+)");
+					if (player.tailVenom < player.VenomWebCost() * 10 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
+						bd.disable("You do not have enough venom to shoot multiple spikes right now! (Req. "+player.VenomWebCost()*10+"+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
 			if (player.tailType == Tail.SPIDER_ADBOMEN) {
 				bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
-					bd.disable("You do not have enough webbing to shoot right now!");
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough webbing to shoot right now! (Req. "+player.VenomWebCost()*5+"+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tail.isAny(Tail.SHARK, Tail.LIZARD, Tail.KANGAROO, Tail.DRACONIC, Tail.RACCOON, Tail.RED_PANDA)) {
@@ -475,7 +483,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.requireFatigue(physicalCost(30));
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.orcaScore() > 10 && player.faceType == Face.ORCA) {
+			if (player.orcaScore() >= 10 || player.leviathanScore() >= 20 && player.faceType == Face.ORCA) {
 				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
 				bd.requireFatigue(physicalCost(30));
 				if (!monster.hasStatusEffect(StatusEffects.Stunned)) bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
@@ -639,20 +647,40 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
-		if (player.weapon == weapons.L_WHIP) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+		if (player.weapon == weapons.L_WHIP) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
 		else if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)){
 			damage += scalingBonusLibido() * 0.20;
 			doDamage(damage, true, true);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(Math.round(damage*0.1), true, true);
 			damage = Math.round(damage * 1.1);
 		}
 		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			doDamage(damage, true, true);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(Math.round(damage*0.1), true, true);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage = Math.round(damage * 1.1);
@@ -703,7 +731,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -841,7 +869,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -934,7 +962,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -983,94 +1011,115 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
-			if (player.tailVenom >= 10) {
+			if (player.tailVenom >= player.VenomWebCost()) {
 				outputText("  ");
 				if(monster.lustVuln == 0) {
 					outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 				}
 				if (player.tailType == Tail.BEE_ABDOMEN) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-					var damageB:Number = 35 + rand(player.lib/10);
-					if (player.level < 10) damageB += 20 + (player.level * 3);
-					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-					else damageB += 80;
-					damageB *= 0.2;
-					monster.teased(monster.lustVuln * damageB);
+					var damage1B:Number = 35 + rand(player.lib / 10);
+					var damage1Bc:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bc *= 2;
+					if (player.level < 10) damage1B += 20 + (player.level * 3);
+					else if (player.level < 20) damage1B += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damage1B += 70 + (player.level - 20) * 1;
+					else damage1B += 80;
+					damage1B *= 0.2;
+					damage1B *= damage1Bc;
+					monster.teased(monster.lustVuln * damage1B);
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
-						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
+						monster.addStatusValue(StatusEffects.NagaVenom,3,damage1Bc);
 					}
-					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage1Bc, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.SCORPION) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.statStore.addBuffObject({spe:-2}, "Poison",{text:"Poison"});
+					var damage1Bcc:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bcc *= 2;
+					monster.statStore.addBuffObject({spe:-(damage1Bcc*2)}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
-						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
+						monster.addStatusValue(StatusEffects.NagaVenom,3,damage1Bcc);
 					}
-					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage1Bcc, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 					var lustdamage:Number = 35 + rand(player.lib / 10);
+					var damage1Bcbc:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bcbc *= 2;
 					if (player.level < 10) damage += 20 + (player.level * 3);
 					else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
 					else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
 					else damage += 80;
 					lustdamage *= 0.14;
+					lustdamage *= damage1Bcbc;
 					monster.teased(monster.lustVuln * lustdamage);
-					monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
+					monster.statStore.addBuffObject({tou:-(damage1Bcbc*2)}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
-						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
+						monster.addStatusValue(StatusEffects.NagaVenom,3,damage1Bcbc);
 					}
-					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage1Bcbc, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SNAKE_FANGS) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
+					var damage1Bccc:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bccc *= 2;
+					monster.statStore.addBuffObject({spe:-damage1Bccc}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,2,0.4);
-						monster.addStatusValue(StatusEffects.NagaVenom,1,0.4);
+						monster.addStatusValue(StatusEffects.NagaVenom,1,(damage1Bccc*0.4));
 					}
-					else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
-					player.tailVenom -= 5;
+					else monster.createStatusEffect(StatusEffects.NagaVenom, (damage1Bccc*0.4), 0.4, 0, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SPIDER_FANGS) {
 					if (player.lowerBody == LowerBody.ATLACH_NACHA){
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-						var damageB:Number = 35 + rand(player.lib / 10);
+						var damage2B:Number = 35 + rand(player.lib / 10);
 						var poisonScaling:Number = 1;
+						var damage1Bdcc:Number = 1;
+						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bdcc *= 2;
 						poisonScaling += player.lib/100;
 						poisonScaling += player.tou/100;
-						if (player.level < 10) damageB += 20 + (player.level * 3);
-						else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-						else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-						else damageB += 80;
-						damageB *= 0.2;
-						damageB *= 1+(poisonScaling/10);
-						monster.teased(monster.lustVuln * damageB);
+						if (player.level < 10) damage2B += 20 + (player.level * 3);
+						else if (player.level < 20) damage2B += 50 + (player.level - 10) * 2;
+						else if (player.level < 30) damage2B += 70 + (player.level - 20) * 1;
+						else damage2B += 80;
+						damage2B *= 0.2;
+						damage2B *= damage1Bdcc;
+						damage2B *= 1+(poisonScaling/10);
+						poisonScaling *= damage1Bdcc;
+						monster.teased(monster.lustVuln * damage2B);
 						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-						player.tailVenom -= 5;
+						player.tailVenom -= player.VenomWebCost();
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 					else {
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 						var lustDmg:int = 6 * monster.lustVuln;
+						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
 						monster.teased(lustDmg);
 						if (monster.lustVuln > 0) {
 							monster.lustVuln += 0.01;
 							if (monster.lustVuln > 1) monster.lustVuln = 1;
 						}
-						player.tailVenom -= 5;
+						player.tailVenom -= player.VenomWebCost();
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 				}
 				if (monster.lust >= monster.maxLust()) {
@@ -1243,7 +1292,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -1352,7 +1401,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
 		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -1446,7 +1495,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
 		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -1492,7 +1541,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] whipped few of " + monster.a + monster.short + ", dealing ");
-		if (player.weapon == weapons.L_WHIP) doFireDamage(damage, true, true);
+		if (player.weapon == weapons.L_WHIP) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		outputText(" damage! ");
 		if (crit) {
@@ -1593,9 +1645,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your claws hits few of " + monster.a + monster.short + ", dealing ");
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
 		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			doDamage(damage, true, true);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(Math.round(damage*0.1), true, true);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage = Math.round(damage * 1.1);
@@ -1730,7 +1786,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
-			damage = Math.round(damage);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			outputText("  Your tail slams against " + monster.a + monster.short + ", dealing ");
 			doFireDamage(damage, true, true);
 			outputText(" damage! ");
@@ -2043,9 +2099,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (damage < 5) damage = 5;
 			damage = Math.round(damage);
 			outputText("  Your wings slams against " + monster.a + monster.short + ", dealing ");
-			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+			}
 			else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				doDamage(damage, true, true);
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(Math.round(damage*0.1), true, true);
 				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 				damage = Math.round(damage * 1.1);
@@ -3113,9 +3173,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. " + monster.capitalA + monster.short + " is caught in it and carried into the windstorm taking hit from various other flying objects. <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		damage = Math.round(damage * combat.windDamageBoostedByDao());
+		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. " + monster.capitalA + monster.short + " is caught in it and carried into the windstorm taking hit from various other flying objects. ");
+		doWindDamage(damage);
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -3137,7 +3197,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//Keep logic sane if this attack brings victory
-		player.tailVenom -= 25;
+		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
@@ -3171,12 +3231,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//LAND A HIT!
 		else {
-			var Multiplier = 1;
+			var Multiplier:Number = 1;
 			if(player.hasPerk(PerkLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
-			if(player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) Multiplier *= 2;
 			if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
@@ -3231,6 +3292,52 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			//Failure (-10 HPs) -
 			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. ");
+			player.takePhysDamage(5, true);
+			if(player.HP <= player.minHP()) {
+				doNext(endHpLoss);
+				return;
+			}
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function whipGrapple():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to wrap your whip so tightly around someone right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if(monster.short == "pod") {
+			clearOutput();
+			outputText("You can't constrict something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		outputText("You entangle your opponent with your whip, attempting to bind its movement. ");
+		//WRAP IT UPPP
+		if(40 + rand(player.spe) > monster.spe) {
+			outputText("[monster a] [monster name] is tied up!");
+			monster.createStatusEffect(StatusEffects.ConstrictedWhip, 3 + rand(3),0,0,0);
+		}
+		//Failure
+		else {
+			//Failure (-10 HPs) -
+			outputText("[monster a] [monster name] manage to avoid the binding! ");
 			player.takePhysDamage(5, true);
 			if(player.HP <= player.minHP()) {
 				doNext(endHpLoss);
@@ -3708,15 +3815,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11) hydraBiteAttackpoweeeeer();
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraBiteAttackpoweeeeer();
 		//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-		monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
+		var d1Bdcc:Number = 2;
+		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d1Bdcc *= 2;
+		monster.statStore.addBuffObject({str:-d1Bdcc,spe:-d1Bdcc}, "Poison",{text:"Poison"});
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
 			monster.addStatusValue(StatusEffects.NagaVenom,2,2);
-			monster.addStatusValue(StatusEffects.NagaVenom,1,2);
+			monster.addStatusValue(StatusEffects.NagaVenom,1,d1Bdcc);
 		}
-		else monster.createStatusEffect(StatusEffects.NagaVenom,2,2,0,0);
+		else monster.createStatusEffect(StatusEffects.NagaVenom,d1Bdcc,2,0,0);
 		outputText("\n\n");
-		player.tailVenom -= 25;
+		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
 	}
@@ -3768,20 +3877,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch " + monster.a + monster.short + " off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
+			var d2Bdcc:Number = 2;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
+			monster.statStore.addBuffObject({str:-d2Bdcc,spe:-d2Bdcc}, "Poison",{text:"Poison"});
 			if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 			{
 				monster.addStatusValue(StatusEffects.NagaVenom,2,2);
-				monster.addStatusValue(StatusEffects.NagaVenom,1,2);
+				monster.addStatusValue(StatusEffects.NagaVenom,1,d2Bdcc);
 			}
-			else monster.createStatusEffect(StatusEffects.NagaVenom,2,2,0,0);
+			else monster.createStatusEffect(StatusEffects.NagaVenom,d2Bdcc,2,0,0);
 		}
 		else {
 			outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		player.tailVenom -= 25;
+		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
 	}
@@ -3814,28 +3925,32 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//React
 			if(monster.lustVuln == 0) outputText("  Your aphrodisiac toxin has no effect!");
 			else {
+				var d3Bdcc:Number = 1;
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d3Bdcc *= 2;
 				if (player.lowerBody == LowerBody.ATLACH_NACHA){
 					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
 					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
-					var lustDmg:Number = 35 + rand(player.lib / 10);
+					var lustDmg2:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;
 					poisonScaling += player.lib/100;
 					poisonScaling += player.tou/100;
-					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-					if (player.level < 10) lustDmg += 20 + (player.level * 3);
-					else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
-					else if (player.level < 30) lustDmg += 70 + (player.level - 20) * 1;
-					else lustDmg += 80;
-					lustDmg *= 0.2;
-					lustDmg *= 1+(poisonScaling/10);
-					monster.teased(monster.lustVuln * lustDmg, true);
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) lustDmg2 *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg2 *= 1.50;
+					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
+					if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
+					else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) lustDmg2 += 70 + (player.level - 20) * 1;
+					else lustDmg2 += 80;
+					lustDmg2 *= 0.2;
+					lustDmg2 *= d3Bdcc;
+					lustDmg2 *= 1+(poisonScaling/10);
+					poisonScaling *= d3Bdcc;
+					monster.teased(monster.lustVuln * lustDmg2, true);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, d3Bdcc);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, d3Bdcc, 0);
 				} else {
 					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
 					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
@@ -3844,6 +3959,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
 					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
 					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+					lustDmg *= d3Bdcc;
 					monster.teased(lustDmg, true);
 					if (monster.lustVuln > 0) {
 						monster.lustVuln += 0.05;
@@ -3857,7 +3973,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		player.tailVenom -= 25;
+		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
 	}
@@ -4043,10 +4159,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN) outputText("weapons, ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("weapons, ");
 			else outputText("weapon, ");
 			outputText("you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your ");
-			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN) outputText("horns ");
+			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
 			else outputText("horn, ");
 			outputText("to stab only at air.\n\n");
 			enemyAI();
@@ -4150,9 +4266,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+			}
 			else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				doDamage(damage, true, true);
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(Math.round(damage*0.1), true, true);
 				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 				damage = Math.round(damage * 1.1);
@@ -4276,9 +4396,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 				if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+					damage = Math.round(damage * combat.fireDamageBoostedByDao());
+					doFireDamage(damage, true, true);
+				}
 				else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 					doDamage(damage, true, true);
+					damage = Math.round(damage * combat.fireDamageBoostedByDao());
 					doFireDamage(Math.round(damage*0.1), true, true);
 					if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 					damage = Math.round(damage * 1.1);
@@ -4356,6 +4480,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("Searing pain lances through " + monster.a + monster.short + " as you manage to sting " + monster.pronoun2 + "!  ");
 		if(monster.plural) outputText("You watch as " + monster.pronoun1 + " stagger back a step and nearly trip, flushing hotly.");
 		else outputText("You watch as " + monster.pronoun1 + " staggers back a step and nearly trips, flushing hotly.");
+		var dBd3c:Number = 1;
+		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd3c *= 2;
 		if (player.tailType == 6) {
 			var damage:Number = 35 + rand(player.lib/10);
 			//Level adds more damage up to a point (level 30)
@@ -4368,16 +4494,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			damage *= dBd3c;
 			monster.teased(monster.lustVuln * damage);
 		}
 		if (player.tailType == 20) {
-			monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
+			monster.statStore.addBuffObject({spe:-(dBd3c*10)}, "Poison",{text:"Poison"});
 		}
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
-			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
+			monster.addStatusValue(StatusEffects.NagaVenom,3,(dBd3c*5));
 		}
-		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
+		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, (dBd3c*5), 0);
 		/*	if(!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		 IT used to paralyze 50% of the time, this is no longer the case!
 		 Paralise the other 50%!
@@ -4396,7 +4523,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
 		//Use tail mp
-		player.tailVenom -= 25;
+		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
@@ -4453,16 +4580,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-		monster.teased(monster.lustVuln * lustdamage, false);
+		var dBd1c:Number = 1;
+		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
+		monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
 		if (crit) outputText(" <b>Critical!</b>");
-		monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
-		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) monster.addStatusValue(StatusEffects.NagaVenom,3,5);
-		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
+		monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
+		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) monster.addStatusValue(StatusEffects.NagaVenom,3,(dBd1c*5));
+		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, (dBd1c*5), 0);
 		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		//New line before monster attack
-		monster.statStore.addBuffObject({spe:-(2+rand(3))}, "Poison",{text:"Poison"});
+		monster.statStore.addBuffObject({spe:-((2+rand(3))*dBd1c)}, "Poison",{text:"Poison"});
 		//Use tail mp
-		player.tailVenom -= 25;
+		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
@@ -4541,10 +4670,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//deal damage repeatedly
 		tailspikedamage();
 		tailspikedamage();
-		if (player.hasPerk(PerkLib.ClawTraining) && player.tailVenom >= 25) tailspikedamage();
-		if (player.hasPerk(PerkLib.ExtraClawAttack) && player.tailVenom >= 25) tailspikedamage();
-		if (player.hasPerk(PerkLib.MultiClawAttack) && player.tailVenom >= 25) tailspikedamage();
-		if (player.hasPerk(PerkLib.ClawingFlurry) && player.tailVenom >= 25) tailspikedamage();
+		if (player.hasPerk(PerkLib.ClawTraining) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
+		if (player.hasPerk(PerkLib.ExtraClawAttack) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
+		if (player.hasPerk(PerkLib.MultiClawAttack) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
+		if (player.hasPerk(PerkLib.ClawingFlurry) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);
@@ -4786,34 +4915,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function Drink():void {
 		clearOutput();
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
-		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
-		enemyAI();
-	}
-
-	public function DrunkenPowerEmpower():void {
-		var bonusempower:Number = 60;
-		var bonusdepower:Number = 20;
-		var durationhour:Number = 4;
-		if (player.spe < 21 || player.inte < 21) {
-			if (player.inte < 21) bonusdepower -= (player.inte - 1);
-			else bonusdepower -= (player.spe - 1);
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) {
+			player.addPerkValue(PerkLib.OniDrinkingJug, 1, 1);
+			CoC.instance.mutations.DrunkenPowerEmpower();
 		}
-		bonusempower += (20 * (1 + player.newGamePlusMod()));
-		player.statStore.replaceBuffObject({
-			str: bonusempower,
-			spe: -bonusdepower,
-			inte: -bonusdepower,
-			lib: bonusempower
-		}, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
-	}
-
-	public function DrunkenPowerEmpowerOni():Number {
-		var bonusempoweroni:Number = 12;
-		if (player.hasPerk(PerkLib.OniMusculature)) bonusempoweroni -= 6;
-		if (player.hasPerk(PerkLib.OniMusculatureEvolved)) bonusempoweroni -= 3;
-		return bonusempoweroni;
+		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+		enemyAI();
 	}
 
 	public function kick():void {
@@ -5129,6 +5237,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 				damage += player.inte * 0.2;
@@ -5136,6 +5245,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.iceDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
 				damage += player.inte * 0.2;
@@ -5143,6 +5253,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 				damage += player.inte * 0.2;
@@ -5150,6 +5261,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			}
 			//Section for item damage modifiers
 			if (weaponRangePerk == "Bow"){
@@ -5221,86 +5333,107 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 				}
 			}
-			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= 10) {
+			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= player.VenomWebCost()) {
 				outputText("  ");
 				if (monster.lustVuln == 0) {
 					outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 				}
 				if (player.tailType == Tail.BEE_ABDOMEN) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-					var damageB:Number = 35 + rand(player.lib / 10);
-					if (player.level < 10) damageB += 20 + (player.level * 3);
-					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-					else damageB += 80;
-					damageB *= 0.2;
-					monster.teased(monster.lustVuln * damageB);
+					var damage3B:Number = 35 + rand(player.lib / 10);
+					var dBdc1:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc1 *= 2;
+					if (player.level < 10) damage3B += 20 + (player.level * 3);
+					else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
+					else damage3B += 80;
+					damage3B *= 0.2;
+					damage3B *= dBdc1;
+					monster.teased(monster.lustVuln * damage3B);
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, dBdc1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, dBdc1, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.SCORPION) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
+					var dBdc2:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc2 *= 2;
+					monster.statStore.addBuffObject({tou:-(dBdc2*2), spe:-(dBdc2*2)}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, dBdc2);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, dBdc2, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 					var lustdamage:Number = 35 + rand(player.lib / 10);
+					var dBdc3:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc3 *= 2;
 					if (player.level < 10) lustdamage += 20 + (player.level * 3);
 					else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
 					else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
 					else lustdamage += 80;
 					lustdamage *= 0.14;
+					lustdamage *= dBdc3;
 					monster.teased(monster.lustVuln * lustdamage, false);
 					monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, dBdc3);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, dBdc3, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SNAKE_FANGS) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
+					var dBdc4:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc4 *= 2;
+					monster.statStore.addBuffObject({spe:-dBdc4}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 						monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
-						monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
-					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
-					player.tailVenom -= 5;
+						monster.addStatusValue(StatusEffects.NagaVenom, 1, (dBdc4*0.4));
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, (dBdc4*0.4), 0.4, 0, 0);
+					player.tailVenom -= player.VenomWebCost();
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SPIDER_FANGS) {
 					if (player.lowerBody == LowerBody.ATLACH_NACHA){
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-						var damageB:Number = 35 + rand(player.lib / 10);
+						var damage4B:Number = 35 + rand(player.lib / 10);
 						var poisonScaling:Number = 1;
+						var dBdc5:Number = 1;
+						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc5 *= 2;
 						poisonScaling += player.lib/100;
 						poisonScaling += player.tou/100;
-						if (player.level < 10) damageB += 20 + (player.level * 3);
-						else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-						else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-						else damageB += 80;
-						damageB *= 0.2;
-						damageB *= 1+(poisonScaling/10);
-						monster.teased(monster.lustVuln * damageB);
+						if (player.level < 10) damage4B += 20 + (player.level * 3);
+						else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
+						else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
+						else damage4B += 80;
+						damage4B *= 0.2;
+						damage4B *= dBdc5;
+						damage4B *= 1+(poisonScaling/10);
+						poisonScaling *= dBdc5;
+						monster.teased(monster.lustVuln * damage4B);
 						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-						player.tailVenom -= 5;
+							monster.addStatusValue(StatusEffects.NagaVenom, 3, dBdc5);
+						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, dBdc5, 0);
+						player.tailVenom -= player.VenomWebCost();
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 					else{
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 						var lustDmg:int = 6 * monster.lustVuln;
+						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
 						monster.teased(lustDmg);
 						if (monster.lustVuln > 0) {
 							monster.lustVuln += 0.01;
 							if (monster.lustVuln > 1) monster.lustVuln = 1;
 						}
-						player.tailVenom -= 5;
+						player.tailVenom -= player.VenomWebCost();
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 				}
 				if (monster.lust >= monster.maxLust()) {
@@ -5312,7 +5445,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				outputText("\n");
 			}
-			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
 			if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
 			outputText("\n");
 			if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
@@ -5419,6 +5552,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 			damage += player.inte * 0.2;
@@ -5426,6 +5560,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
 			damage += player.inte * 0.2;
@@ -5433,6 +5568,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 			damage += player.inte * 0.2;
@@ -5440,6 +5576,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 		}
 		damage = Math.round(damage);
 		outputText("You shoot the projectile toward your opponent the bolt flying at such speed and velocity all you see is a flash of light as it reach " + monster.a + monster.short + " and explode the blast projecting dirt and rock everywhere. It takes an entire minute for the smoke to settle. ");
@@ -5572,10 +5709,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("Then do it another time showering them with an extra volley of arrows. ");
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -5642,6 +5791,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.fireDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 			dmgBarrage += player.inte * 0.2;
@@ -5649,6 +5799,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.iceDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
 			dmgBarrage += player.inte * 0.2;
@@ -5656,6 +5807,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.lightningDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 			dmgBarrage += player.inte * 0.2;
@@ -5663,6 +5815,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.darknessDamageBoostedByDao());
 		}
 		return dmgBarrage;
 	}

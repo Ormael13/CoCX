@@ -9,25 +9,25 @@ public class Horns extends BodyPart {
 	 * - name: human-readable default name, ("non-existant", "demon")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const NONE:int                     = 0;
 	EnumValue.add(Types, NONE, "NONE", {name:"non-existant"});
 	public static const DEMON:int                    = 1;
 	EnumValue.add(Types, DEMON, "DEMON", {name:"demon"});
 	public static const COW_MINOTAUR:int             = 2;
-	EnumValue.add(Types, COW_MINOTAUR, "COW_MINOTAUR", {name:"cow", Gore: true});
+	EnumValue.add(Types, COW_MINOTAUR, "COW_MINOTAUR", {name:"cow", gore: true});
 	public static const DRACONIC_X2:int              = 3;
 	EnumValue.add(Types, DRACONIC_X2, "DRACONIC_X2", {name:"2 draconic"});
 	public static const DRACONIC_X4_12_INCH_LONG:int = 4;
 	EnumValue.add(Types, DRACONIC_X4_12_INCH_LONG, "DRACONIC_X4_12_INCH_LONG", {name:"four 12\" long draconic"});
 	public static const ANTLERS:int                  = 5;
-	EnumValue.add(Types, ANTLERS, "ANTLERS", {name:"deer", Gore: true});
+	EnumValue.add(Types, ANTLERS, "ANTLERS", {name:"deer", gore: true});
 	public static const GOAT:int                     = 6;
-	EnumValue.add(Types, GOAT, "GOAT", {name:"goat", Gore: true});
+	EnumValue.add(Types, GOAT, "GOAT", {name:"goat", gore: true});
 	public static const UNICORN:int                  = 7;
-	EnumValue.add(Types, UNICORN, "UNICORN", {name:"unicorn", Gore: true});
+	EnumValue.add(Types, UNICORN, "UNICORN", {name:"unicorn", gore: true});
 	public static const RHINO:int                    = 8;
-	EnumValue.add(Types, RHINO, "RHINO", {name:"rhino", Gore: true});
+	EnumValue.add(Types, RHINO, "RHINO", {name:"rhino", gore: true});
 	public static const OAK:int                      = 9;
 	EnumValue.add(Types, OAK, "OAK", {name:"oak"});
 	public static const GARGOYLE:int                 = 10;
@@ -39,25 +39,32 @@ public class Horns extends BodyPart {
 	public static const ONI:int                      = 13;
 	EnumValue.add(Types, ONI, "ONI", {name:"1 oni"});
 	public static const BICORN:int                   = 14;//button 0 on 2nd page of metamorph
-	EnumValue.add(Types, BICORN, "BICORN", {name:"bicorn", Gore: true});
+	EnumValue.add(Types, BICORN, "BICORN", {name:"bicorn", gore: true});
 	public static const GHOSTLY_WISPS:int            = 15;
 	EnumValue.add(Types, GHOSTLY_WISPS, "GHOSTLY_WISPS", {name:"ghostly wisps"});
 	public static const SPELL_TAG:int           	 = 16;
 	EnumValue.add(Types, SPELL_TAG, "SPELL_TAG", {name:"spell tag"});
 	public static const GOATQUAD:int                 = 17;
-	EnumValue.add(Types, GOATQUAD, "GOATQUAD", {name:"4 goat", Gore: true});
+	EnumValue.add(Types, GOATQUAD, "GOATQUAD", {name:"4 goat", gore: true});
 	public static const KRAKEN:int              	 = 18;
 	EnumValue.add(Types, KRAKEN, "KRAKEN", {name:"kraken"});
 	public static const FROSTWYRM:int              	 = 19;
-	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name:"frostwyrm", Gore: true});
-	public static const USHI_ONI_ONNA:int            = 20;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {name:"ushi-oni", Gore: true});
-	public static const SEADRAGON:int            = 21;
-	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name:"sea dragon"});
-	
+	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name:"frostwyrm", gore: true});
+	public static const USHI_ONI:int            = 20;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {name:"ushi-oni", gore: true});
+	public static const SEA_DRAGON:int            = 21;
+	EnumValue.add(Types, SEA_DRAGON, "SEA_DRAGON", {name:"sea dragon"});
+
 	public function Horns() {
 		super(null, null);
 	}
 	public var count:int = 0;
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
+	}
 }
 }

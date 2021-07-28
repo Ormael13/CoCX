@@ -25,7 +25,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.findPerk(PerkLib.GigantGrip) >= 0) return true;
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return true;
 			outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword. Just face that truth you not able to fix your tiny e-pen complex yet...  ");
 			return false;
 		}

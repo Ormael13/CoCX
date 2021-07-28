@@ -28,13 +28,13 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			while (game.player.findPerk(PerkLib.BlindImmunity) >= 0) game.player.removePerk(PerkLib.BlindImmunity);
+			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
 			game.player.createPerk(PerkLib.BlindImmunity,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():HeadJewelry {
-			while (game.player.findPerk(PerkLib.BlindImmunity) >= 0) game.player.removePerk(PerkLib.BlindImmunity);
+			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
 			return super.playerRemove();
 		}
 		

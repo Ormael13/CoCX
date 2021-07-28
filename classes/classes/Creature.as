@@ -24,6 +24,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
+import classes.PerkType;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Stats.Buff;
 import classes.Stats.BuffBuilder;
@@ -126,6 +127,22 @@ public class Creature extends Utils
 		public function set weaponRangeAttack(value:Number):void { _weaponRangeAttack = value; }
 		public function set weaponRangePerk(value:String):void { _weaponRangePerk = value; }
 		public function set weaponRangeValue(value:Number):void { _weaponRangeValue = value; }
+		//Weapon flying swords
+		private var _weaponFlyingSwordsName:String = "";
+		private var _weaponFlyingSwordsVerb:String = "";
+		private var _weaponFlyingSwordsAttack:Number = 0;
+		private var _weaponFlyingSwordsPerk:String = "";
+		private var _weaponFlyingSwordsValue:Number = 0;
+		public function get weaponFlyingSwordsName():String { return _weaponFlyingSwordsName; }
+		public function get weaponFlyingSwordsVerb():String { return _weaponFlyingSwordsVerb; }
+		public function get weaponFlyingSwordsAttack():Number { return _weaponFlyingSwordsAttack; }
+		public function get weaponFlyingSwordsPerk():String { return _weaponFlyingSwordsPerk; }
+		public function get weaponFlyingSwordsValue():Number { return _weaponFlyingSwordsValue; }
+		public function set weaponFlyingSwordsName(value:String):void { _weaponFlyingSwordsName = value; }
+		public function set weaponFlyingSwordsVerb(value:String):void { _weaponFlyingSwordsVerb = value; }
+		public function set weaponFlyingSwordsAttack(value:Number):void { _weaponFlyingSwordsAttack = value; }
+		public function set weaponFlyingSwordsPerk(value:String):void { _weaponFlyingSwordsPerk = value; }
+		public function set weaponFlyingSwordsValue(value:Number):void { _weaponFlyingSwordsValue = value; }
 		//Clothing/Armor
 		private var _armorName:String = "";
 		private var _armorDef:Number = 0;
@@ -142,6 +159,37 @@ public class Creature extends Utils
 		public function set armorDef(value:Number):void { _armorDef = value; }
 		public function set armorMDef(value:Number):void { _armorMDef = value; }
 		public function set armorPerk(value:String):void { _armorPerk = value; }
+		//Misc Jewelry
+		private var _miscjewelryName:String = "";
+		private var _miscjewelryEffectId:Number = 0;
+		private var _miscjewelryEffectMagnitude:Number = 0;
+		private var _miscjewelryPerk:String = "";
+		private var _miscjewelryValue:Number = 0;
+		public function get miscjewelryName():String { return _miscjewelryName; }
+		public function get miscjewelryEffectId():Number { return _miscjewelryEffectId; }
+		public function get miscjewelryEffectMagnitude():Number { return _miscjewelryEffectMagnitude; }
+		public function get miscjewelryPerk():String { return _miscjewelryPerk; }
+		public function get miscjewelryValue():Number { return _miscjewelryValue; }
+		public function set miscjewelryValue(value:Number):void { _miscjewelryValue = value; }
+		public function set miscjewelryName(value:String):void { _miscjewelryName = value; }
+		public function set miscjewelryEffectId(value:Number):void { _miscjewelryEffectId = value; }
+		public function set miscjewelryEffectMagnitude(value:Number):void { _miscjewelryEffectId = value; }
+		public function set miscjewelryPerk(value:String):void { _miscjewelryPerk = value; }
+		private var _miscjewelryName2:String = "";
+		private var _miscjewelryEffectId2:Number = 0;
+		private var _miscjewelryEffectMagnitude2:Number = 0;
+		private var _miscjewelryPerk2:String = "";
+		private var _miscjewelryValue2:Number = 0;
+		public function get miscjewelryName2():String { return _miscjewelryName2; }
+		public function get miscjewelryEffectId2():Number { return _miscjewelryEffectId2; }
+		public function get miscjewelryEffectMagnitude2():Number { return _miscjewelryEffectMagnitude2; }
+		public function get miscjewelryPerk2():String { return _miscjewelryPerk2; }
+		public function get miscjewelryValue2():Number { return _miscjewelryValue2; }
+		public function set miscjewelryValue2(value:Number):void { _miscjewelryValue2 = value; }
+		public function set miscjewelryName2(value:String):void { _miscjewelryName2 = value; }
+		public function set miscjewelryEffectId2(value:Number):void { _miscjewelryEffectId2 = value; }
+		public function set miscjewelryEffectMagnitude2(value:Number):void { _miscjewelryEffectId2 = value; }
+		public function set miscjewelryPerk2(value:String):void { _miscjewelryPerk2 = value; }
 		//Head Jewelery
 		private var _headjewelryName:String = "";
 		private var _headjewelryEffectId:Number = 0;
@@ -311,9 +359,9 @@ public class Creature extends Utils
 		public function get str():Number { return strStat.value; }
 		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
 			return 1;
-		} else {
-			return touStat.value;
-		}
+			} else {
+				return touStat.value;
+			}
 		}
 
 		public function get spe():Number { return speStat.value; }
@@ -334,33 +382,43 @@ public class Creature extends Utils
 			}
 		}
 
-		public function addCurse(statName:String, power:Number):void {
+		public function addCurse(statName:String, power:Number, tier:Number = 0):void{
+			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 0) tierPower = "Tribulation Vestiges";
+			if (tier == 1) tierPower = "Weakened";
+			if (tier == 2) tierPower = "Drained";
+			if (tier == 3) tierPower = "Damaged";
 			if (this.hasPerk(PerkLib.ZenjisInfluence2)) power *= 0.60;
 			if (statName == "sens" || statName == "cor") {
-				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
+				statStore.addBuff(statName, power, tierPower, {text: tierPower});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			} else {
-				statStore.addBuff(statName, -power, 'Curse', {text: 'Curse'});
+				statStore.addBuff(statName, -power, tierPower, {text: tierPower});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
-		public function removeCurse(statName:String, power:Number):void {
+		public function removeCurse(statName:String, power:Number, tier:Number = 0):void {
+			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 0) tierPower = "Tribulation Vestiges";
+			if (tier == 1) tierPower = "Weakened";
+			if (tier == 2) tierPower = "Drained";
+			if (tier == 3) tierPower = "Damaged";
 			var stat:BuffableStat = statStore.findBuffableStat(statName);
 			if (!stat) {
 				// Error? No stat with such name
 				throw new Error("No such stat "+statName);
 			}
-			var current:Number = stat.valueOfBuff('Curse');
+			var current:Number = stat.valueOfBuff(tierPower);
 			if (statName == "sens" || statName == "cor") {
 				if (current >0){
 					if (power*2 >= current) {
-						stat.removeBuff('Curse');
+						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					} else if (power*2 < current) {
-						stat.addOrIncreaseBuff('Curse', -power*2);
+						stat.addOrIncreaseBuff(tierPower, -power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					}
@@ -369,11 +427,11 @@ public class Creature extends Utils
 			else {
 				if (current < 0) {
 					if (power*2 >= -current) {
-						stat.removeBuff('Curse');
+						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					} else if (power*2 < -current) {
-						stat.addOrIncreaseBuff('Curse', power*2);
+						stat.addOrIncreaseBuff(tierPower, power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					}
@@ -661,8 +719,10 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.GrandArchmage)) max += 60;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) max += 75;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) max += 90;
-			if (hasPerk(PerkLib.GreyMage)) max += 120;
-			if (hasPerk(PerkLib.GreyArchmage)) max += 150;
+			if (hasPerk(PerkLib.GreyMageApprentice)) max += 20;
+			if (hasPerk(PerkLib.GreyMage)) max += 40;
+			if (hasPerk(PerkLib.GreyArchmage)) max += 80;
+			if (hasPerk(PerkLib.GrandGreyArchmage)) max += 160;
 			if (hasPerk(PerkLib.ElementalBondUrges)) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -682,6 +742,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.OmnibusGift)) max += 45;
 			if (hasPerk(PerkLib.JobCourtesan)) max += 60;
 			if (hasPerk(PerkLib.JobSeducer)) max += 30;
+			if (hasPerk(PerkLib.GreyMagic)) max += 30;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max += 300;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -806,52 +867,52 @@ public class Creature extends Utils
 			var oldHPratio:Number = hp100/100;
 			//Strength
 			if (dstr < 0){
-				addCurse("str", -dstr);
+				addCurse("str", -dstr,2);
 			}
 			if (dstr > 0){
-				removeCurse("str", dstr);
+				removeCurse("str", dstr,2);
 			}
 			//toughness
 			if (dtou < 0){
-				addCurse("tou", -dtou);
+				addCurse("tou", -dtou,2);
 			}
 			if (dtou > 0){
-				removeCurse("tou", dtou);
+				removeCurse("tou", dtou,2);
 			}
 			//Speed
 			if (dspe < 0){
-				addCurse("spe", -dspe);
+				addCurse("spe", -dspe,2);
 			}
 			if (dspe > 0){
-				removeCurse("spe", dspe);
+				removeCurse("spe", dspe,2);
 			}
 			//Intelligence
 			if (dint < 0){
-				addCurse("int", -dint);
+				addCurse("int", -dint,2);
 			}
 			if (dint > 0){
-				removeCurse("int", dint);
+				removeCurse("int", dint,2);
 			}
 			//Wisdom
 			if (dwis < 0){
-				addCurse("wis", -dwis);
+				addCurse("wis", -dwis,2);
 			}
 			if (dwis > 0){
-				removeCurse("wis", dwis);
+				removeCurse("wis", dwis,2);
 			}
 			//Libido
 			if (dlib < 0){
-				addCurse("lib", -dlib);
+				addCurse("lib", -dlib,2);
 			}
 			if (dlib > 0){
-				removeCurse("lib", dlib);
+				removeCurse("lib", dlib,2);
 			}
 			//Sensitivity
 			if (dsens > 0){
-				addCurse("sens", dsens);
+				addCurse("sens", dsens,2);
 			}
 			if (dsens < 0){
-				removeCurse("sens", -dsens);
+				removeCurse("sens", -dsens,2);
 			}
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
@@ -894,6 +955,22 @@ public class Creature extends Utils
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}
 		public function takePoisonDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeWindDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeWaterDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeEarthDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeAcidDamage(damage:Number, display:Boolean = false):Number {
 			HP = boundFloat(0,HP-Math.round(damage),HP);
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}
@@ -959,7 +1036,7 @@ public class Creature extends Utils
 			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color2;
 		}
-		public function get NakedCoatColor():String {
+		public function get nakedCoatColor():String {
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {
@@ -3286,12 +3363,13 @@ public class Creature extends Utils
 		public function isBiped():Boolean { return lowerBodyPart.isBiped(); }
 		public function isNaga():Boolean { return lowerBodyPart.isNaga(); }
 		public function isTaur():Boolean { return lowerBodyPart.isTaur(); }
+		public function canTaur():Boolean { return lowerBodyPart.canTaur(); }
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		public function isElf():Boolean {
-			return hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17
+			return hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
 		}
 
 		public function isFlying():Boolean {
@@ -3867,9 +3945,9 @@ public class Creature extends Utils
 			return Appearance.hairOrFur(this);
 		}
 
-		public function hairDescript(longDesc:Boolean = false):String
+		public function hairDescript():String
 		{
-			return Appearance.hairDescription(this, longDesc);
+			return Appearance.hairDescription(this);
 		}
 
 		public function beardDescript():String
@@ -3879,7 +3957,7 @@ public class Creature extends Utils
 
 		public function hairStyleDescript():String
 		{
-			return Appearance.beardDescription(this);
+			return Appearance.hairStyleDescription(this);
 		}
 
 		public function hipDescript():String
@@ -3941,38 +4019,47 @@ public class Creature extends Utils
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageRangePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageMagicalPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageFirePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageIcePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageLightningPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damageDarknessPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-
 		public function damagePoisonPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageWindPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageWaterPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageEarthPercent():Number {
+			var mult:Number = 100;
+			return mult;
+		}
+		public function damageAcidPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}

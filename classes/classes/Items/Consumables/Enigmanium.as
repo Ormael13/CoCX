@@ -24,6 +24,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class Enigmanium extends Consumable{
 	public function Enigmanium() {
@@ -44,7 +45,7 @@ public class Enigmanium extends Consumable{
 			//Text go!
 			clearOutput();
 			outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. Hey you could as well get to making riddles as a pastime.");
-			
+
 			//Speed raises up to 75
 			if (rand(3) == 0 && changes < changeLimit) {
 				//low speed
@@ -75,7 +76,7 @@ public class Enigmanium extends Consumable{
 			//Does not add to change total
 			if (player.tou > 50 && rand(2) == 0) {
 				outputText("\n\nYour body seems to compress momentarily, becoming leaner and noticeably less tough.");
-				dynStats("tou", -2);
+				player.addCurse("tou", 2, 1);
 			}
 			//IntelliWisGain
 			if (rand(4) == 0 && changes < changeLimit) {
@@ -84,8 +85,8 @@ public class Enigmanium extends Consumable{
 				player.MutagenBonus("wis", 2);
 				changes++;
 			}
-			
-			
+
+
 			//Libido gain
 			if (changes < changeLimit && rand(4) == 0) {
 				//Cat dicked folks
@@ -102,7 +103,7 @@ public class Enigmanium extends Consumable{
 					if (player.lust > 60) outputText("even more ");
 					outputText("turned on.");
 				}
-				dynStats("sen", .25);
+				player.addCurse("sen", 2, 1);
 				player.MutagenBonus("lib", 1);
 				changes++;
 			}
@@ -170,14 +171,14 @@ public class Enigmanium extends Consumable{
 			}
 		}
 		//Mare-gina
-			
+
 		//Increase player's breast size, if they are big FF or smaller
 			if (player.smallestTitSize() <= 14 && player.gender >= 2 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
 			player.breastRows[player.smallestTitRow()].breastRating++;
 			changes++;
 		}
-		
+
 		//Sexual changes would go here if I wasn't a tard.
 		//Heat
 		if (rand(4) == 0 && changes < changeLimit)
@@ -214,7 +215,7 @@ public class Enigmanium extends Consumable{
 				player.cocks[i].knotMultiplier = 1;
 				changes++;
 			}
-			
+
 			if ((player.isMaleOrHerm()) && rand(3) == 0 && changes < changeLimit) {
 			//If cocks that aren't Catsified!
 			if ((player.catCocks() + player.demonCocks()) < player.cocks.length) {
@@ -231,7 +232,8 @@ public class Enigmanium extends Consumable{
 						player.cocks[i].knotMultiplier = 1;
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
@@ -240,7 +242,8 @@ public class Enigmanium extends Consumable{
 						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
@@ -249,7 +252,8 @@ public class Enigmanium extends Consumable{
 						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
@@ -258,7 +262,8 @@ public class Enigmanium extends Consumable{
 						player.cocks[i].knotMultiplier = 1;
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					}
@@ -266,7 +271,8 @@ public class Enigmanium extends Consumable{
 				}
 				//MULTICOCK
 				else {
-					dynStats("sen", 4, "lus", 35);
+					dynStats("lus", 35);
+					player.addCurse("sen", 4, 1);
 					player.MutagenBonus("lib", 5);
 					player.cocks[i].cockType = CockTypesEnum.CAT;
 					player.cocks[i].knotMultiplier = 1;
@@ -293,7 +299,8 @@ public class Enigmanium extends Consumable{
 				if (player.cocks.length == 1) {
 					temp2 = player.increaseCock(0, rand(3) + 1);
 					temp = 0;
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				//Multicock
 				else {
@@ -367,76 +374,52 @@ public class Enigmanium extends Consumable{
 		}
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyCat(4).applyEffect();
 			changes++;
-			outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.");
-			if (player.gender > 0) {
-				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
-			}
-			player.MutagenBonus("spe", 3);
-			mutations.setLowerBody(LowerBody.CAT);
-			player.legCount = 4;
 		}
-			
+
 			//Wings
 			if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.SPHINX && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
-				mutations.setWingType(Wings.FEATHERED_SPHINX, "large feathered");
+				outputText("\n\n");
+        CoC.instance.transformations.WingsFeatheredSphinx.applyEffect();
 				changes++;
 			}
 			//Remove old wings
 			if (player.wings.type != Wings.FEATHERED_SPHINX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				mutations.removeWings();
+				outputText("\n\n");
+				CoC.instance.transformations.WingsNone.applyEffect();
 				changes++;
 			}
-			
-			
+
+
 			//generic version
 			if (player.lowerBody != LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
-				//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (player.isNaga() || player.isScylla()) {
-					if (player.isNaga()) {
-						outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
-					}
-					if (player.isScylla()) {
-						outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
-					}
-					mutations.setLowerBody(LowerBody.CAT);
-				}
-				//Catch-all
-				else {
-					if (player.lowerBody == LowerBody.HUMAN)
-						mutations.setLowerBody(LowerBody.CAT);
-					outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a lion!</b>");
-				}
-				if (player.gender > 0)
-					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyCat(4).applyEffect();
 				player.MutagenBonus("spe", 3);
-				//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have paws in place of your feet!</b>");
-				player.legCount = 4;
-				//dynStats("cor", 0);
 				changes++;
 			}
-			
-			//Human skin	
+
+			//Human skin
 			if (player.tailType == Tail.CAT && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
-				mutations.humanizeSkin();
+				outputText("\n\n");
+				CoC.instance.transformations.SkinPlain.applyEffect();
 				changes++;
 			}
-			
+			//sphinx color skin
+			var SphinxSkinColor:Array = ["dark", "tan"];
+			if (!InCollection(player.skinTone, SphinxSkinColor) && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
+				player.skin.base.color = randomChoice(SphinxSkinColor);
+				outputText("[skin]!</b>");
+				changes++;
+			}
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ
 			if (player.ears.type != Ears.LION && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-				//human to lion:
-				if (player.ears.type == Ears.HUMAN) {
-					if (rand(2) == 0) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have Lion ears.</b>");
-					else outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have Lion ears.</b>");
-				}
-				//non human to lion:
-				else {
-					if (rand(2) == 0) outputText("\n\nYour ears change shape, morphing into round, feline ears not unlike those of a lion!  They swivel about reflexively as you adjust to them.  <b>You now have lion ears.</b>");
-					else outputText("\n\nYour ears tingle and begin to change shape. Within a few moments, they've become long and feline.  Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have lion ears.</b>");
-				}
-				mutations.setEarType(Ears.LION);
+				outputText("\n\n");
+				CoC.instance.transformations.EarsLion.applyEffect();
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
@@ -449,61 +432,41 @@ public class Enigmanium extends Consumable{
 					}
 				}
 				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
-				mutations.setTailType(Tail.CAT);
+				CoC.instance.transformations.TailCat.applyEffect(false);
 				changes++;
 			}
-			
+
 			//DA Mouth
 			if (player.faceType != Face.CAT_CANINES && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit) {
-				if (player.faceType != Face.HUMAN) { outputText("\n\nYour face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-				}		
-				else { outputText("\n\nYou feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
-				}
-			mutations.setFaceType(Face.CAT_CANINES);
-			changes++;
-			}
-			
-			//Da paws (if already haz ears & tail)
-			if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
-				//hoof to cat:
-				if (player.lowerBody == LowerBody.HOOFED) {
-					outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>");
-					if (player.isTaur()) outputText("  You feel woozy and collapse on your side.  When you wake, you're no longer a centaur and your body has returned to a humanoid shape.");
-				}
-				//Goo to cat
-				else if (player.lowerBody == LowerBody.GOO) {
-					outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into digitigrade legs, complete with soft, padded cat-paws.  <b>You now have cat-paws!</b>");
-				}
-				//non hoof to cat:
-				else outputText("\n\nYou scream in agony as you feel the bones in your [feet] break and begin to rearrange. When the pain fades, you feel surprisingly well-balanced. <b>You now have cat paws.</b>");
-				mutations.setLowerBody(LowerBody.CAT);
-				player.legCount = 2;
+				outputText("\n\n");
+				CoC.instance.transformations.FaceCatCanines.applyEffect();
 				changes++;
 			}
-			
+
+			//Da paws (if already haz ears & tail)
+			if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyCat(2).applyEffect();
+				changes++;
+			}
+
 			//Sphinx Arms
 			if (player.lowerBody == LowerBody.CAT && rand(4) == 0 && changes < changeLimit && player.arms.type != Arms.SPHINX) {
-				if (player.arms.type != Arms.HUMAN) {
-					mutations.humanizeArms();
-					outputText(" ");
-				}
-				else outputText("\n\n");
-				outputText("Your hands suddenly start to tingle as your arms grow a thin layer of -fur color- fur up to your shoulders. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your five-fingered hands. That said, they don't look exactly like paws as your hands retain their dexterity and general appearance which is a perfect mix between human and leonine features. Thanks to their shape, your new bestial hands should not hinder your spellcasting abilities.. <b>Your arms are now covered in fur and end with clawed hands like those of a sphinx.</b>");
-				mutations.setArmType(Arms.SPHINX);
+				outputText("\n\n");
+				CoC.instance.transformations.ArmsSphinx.applyEffect();
 				changes++;
 			}
 			//CAT TOUNGE CUZ WHY NOT?
 			if (player.faceType == Face.HUMAN && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
-				mutations.setTongueType(Tongue.CAT);
+				outputText("\n\n");
+				CoC.instance.transformations.TongueCat.applyEffect();
 				changes++;
 			}
 
 			//DAT EYES
-			if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.dragonneScore() >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT_SLITS) {
-				//Gain cat-like eyes
-				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit</b>.");
-				mutations.setEyeType(Eyes.CAT_SLITS);
+			if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.dragonneScore() >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
+				outputText("\n\n");
+        CoC.instance.transformations.EyesCat.applyEffect();
 				changes++;
 			}
 			//FAILSAFE CHANGE
@@ -519,6 +482,6 @@ public class Enigmanium extends Consumable{
 			}
 			player.refillHunger(20);
 			return false;
-		}		
+		}
 	}
 }

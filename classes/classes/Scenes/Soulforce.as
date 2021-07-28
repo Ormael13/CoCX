@@ -5,20 +5,8 @@
 package classes.Scenes
 {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
+
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.Alraune;
@@ -60,6 +48,9 @@ import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
 
+import classes.Scenes.Metamorph;
+import classes.GeneticMemories.*;
+
 use namespace CoC;
 
 	public class Soulforce extends BaseContent
@@ -73,13 +64,24 @@ use namespace CoC;
 			clearOutput();
 			SoulCultivationLvL();
 			var dailySoulforceUsesLimit:Number = 0;
-			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
+			if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit++;
+			if (player.hasPerk(PerkLib.SoulWarrior)) dailySoulforceUsesLimit++;
+			if (player.hasPerk(PerkLib.SoulElder)) dailySoulforceUsesLimit++;
+			if (player.hasPerk(PerkLib.SoulTyrant)) dailySoulforceUsesLimit++;
+			if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1730\n");
+			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1830\n");
+			if (player.hasPerk(PerkLib.Dantain)) {
+				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 0) player.addPerkValue(PerkLib.Dantain, 1, 1);
+				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 1) player.addPerkValue(PerkLib.Dantain, 1, 1);
+				if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 2) player.addPerkValue(PerkLib.Dantain, 1, 1);
+				outputText("<b>Dantain:</b> ");
+				if (player.perkv1(PerkLib.Dantain) == 3) outputText("Nascent Soul");
+				else if (player.perkv1(PerkLib.Dantain) == 2) outputText("Core Formation");
+				else if (player.perkv1(PerkLib.Dantain) == 1) outputText("Foundation Establishment");
+				else outputText("Qi Condensation");
+				outputText("\n");
+			}
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -88,7 +90,9 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) outputText(""+player.statusEffectv1(StatusEffects.TribulationCountdown)+"\n");
+		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
@@ -127,23 +131,37 @@ use namespace CoC;
 					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
 				}
 			}
-		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
-			menu();
+		*/	menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
+			if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(1, "Contemplate", DaoContemplations).hint("Dao Contemplations");
+			else addButtonDisabled(1, "???", "Req. to succesfully survive 1st Tribulation.");
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
-				addButton(1, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
-				addButton(2, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
+				addButton(2, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
+				addButton(3, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
 				addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
 			}
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
+			else {
+				addButtonDisabled(2, "Self-sustain", "Wait till new day arrive to use this option again.");
+				addButtonDisabled(3, "Repres. Lust", "Wait till new day arrive to use this option again.");
+				addButtonDisabled(4, "Adj. Corr.", "Wait till new day arrive to use this option again.");
+			}
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
 				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
-				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
+				else addButton(6, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 			}
-			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
+			else addButtonDisabled(6, "???", "Req. Metamorph.");
+			if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
+			else addButtonDisabled(7, "???", "Req. Soul Sense.");
+			if (player.hasPerk(PerkLib.SoulApprentice)) {
+				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(9, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
+				else addButtonDisabled(9, "Mana", "Wait till new day arrive to use this option again.");
+			}
+			else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 			addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+			if (canfaceTribulation()) addButton(13, "Tribulation", tribulationsPrompt).hint("To face it or not? That's the question.");
+			else addButtonDisabled(13, "Tribulation", "It's not (yet) time for this.");
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 
@@ -177,7 +195,7 @@ use namespace CoC;
 				if (cLvlTier == 3) cLvlTier = 0;
 				if (!lNeed){
 					if (flags[kFLAGS.SOUL_CULTIVATION] >=4){
-						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name;
+						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name();
 					}
 				}
 				pLvl += 2;
@@ -203,7 +221,7 @@ use namespace CoC;
 			//9
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
-			addButton(12, "Atlach Test", SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG).hint("Trigger Atlach scenes.");
+			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -217,12 +235,12 @@ use namespace CoC;
 			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) addButton(8, ":Re", AddMaxBackpack5).hint("Rewind Evangeline.");
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			addButton(10, "All4HiddenPrestige", AddMaxBackpack03).hint("A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
-			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock form Michiko for future clarity.");
+			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack033():void {
@@ -234,11 +252,15 @@ use namespace CoC;
 		public function AddMaxBackpack03():void {
 			outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobArchpriest)) player.createPerk(PerkLib.PrestigeJobArchpriest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobNecromancer)) player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSentinel)) player.createPerk(PerkLib.PrestigeJobSentinel, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) player.createPerk(PerkLib.PrestigeJobSoulArtMaster, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSpellKnight)) player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobStalker)) player.createPerk(PerkLib.PrestigeJobStalker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobTempest)) player.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
@@ -285,6 +307,25 @@ use namespace CoC;
 				outputText("Get a Life... i mean Wendigo Psychosis...");
 				doNext(submenucuzwhynot);
 			}
+		}
+		public function AddMaxBackpack5():void {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
+			if (flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] > 0) flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] = 0;
+			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] > 0) flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
+			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 0;
+			if (flags[kFLAGS.EVANGELINE_02330] > 0) flags[kFLAGS.EVANGELINE_02330] = 0;
+			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
+			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
+			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
+			outputText("Rewind Evangeline ^^");
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack6():void {
+			var floor:Number = rand(3);
+			floor *= 5;
+			floor += 80;
+			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, floor, 0, 0, 0);
+			SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG();
 		}
 		public function TestDynamicStats():void {
 			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
@@ -351,18 +392,6 @@ use namespace CoC;
 			}
 			startCombat(new HellfireSnail());
 		}
-		public function AddReptaTongue():void {
-			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
-			inventory.takeItem(consumables.HUMMUS_, AddReptaTongue1);
-		}
-		public function AddReptaTongue1():void {
-			outputText("\n\n");
-			inventory.takeItem(consumables.REPTLUM, AddReptaTongue2);
-		}
-		public function AddReptaTongue2():void {
-			outputText("\n\n");
-			inventory.takeItem(consumables.OVIELIX, SoulforceCheats);
-		}
 		public function ChimeraBodyUltimateStage():void {
 			if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage)) {
 				player.removePerk(PerkLib.ChimericalBodyUltimateStage);
@@ -375,355 +404,195 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function AllMetamorphOptionsUnlock():void {
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedScales)) player.createStatusEffect(StatusEffects.UnlockedScales,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedChitin)) player.createStatusEffect(StatusEffects.UnlockedChitin,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) player.createStatusEffect(StatusEffects.UnlockedDragonScales,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedTattoed)) player.createStatusEffect(StatusEffects.UnlockedTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) player.createStatusEffect(StatusEffects.UnlockedBattleTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) player.createStatusEffect(StatusEffects.UnlockedLightningTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) player.createStatusEffect(StatusEffects.UnlockedScarTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFishGills)) player.createStatusEffect(StatusEffects.UnlockedFishGills,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanLowerBody)) player.createStatusEffect(StatusEffects.UnlockedHumanLowerBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) player.createStatusEffect(StatusEffects.UnlockedHumanSkin,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanArms)) player.createStatusEffect(StatusEffects.UnlockedHumanArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanFace)) player.createStatusEffect(StatusEffects.UnlockedHumanFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanTongue)) player.createStatusEffect(StatusEffects.UnlockedHumanTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanEyes)) player.createStatusEffect(StatusEffects.UnlockedHumanEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanEars)) player.createStatusEffect(StatusEffects.UnlockedHumanEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) player.createStatusEffect(StatusEffects.UnlockedHumanHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) player.createStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoGills)) player.createStatusEffect(StatusEffects.UnlockedHumanNoGills,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoAntennae)) player.createStatusEffect(StatusEffects.UnlockedHumanNoAntennae,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns)) player.createStatusEffect(StatusEffects.UnlockedHumanNoHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoWings)) player.createStatusEffect(StatusEffects.UnlockedHumanNoWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail)) player.createStatusEffect(StatusEffects.UnlockedHumanNoTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody)) player.createStatusEffect(StatusEffects.UnlockedHumanNoRearBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody)) player.createStatusEffect(StatusEffects.UnlockedFoxLowerBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxArms)) player.createStatusEffect(StatusEffects.UnlockedFoxArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxEars)) player.createStatusEffect(StatusEffects.UnlockedFoxEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail)) player.createStatusEffect(StatusEffects.UnlockedFoxTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxFace)) player.createStatusEffect(StatusEffects.UnlockedFoxFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxEyes)) player.createStatusEffect(StatusEffects.UnlockedFoxEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd)) player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd)) player.createStatusEffect(StatusEffects.UnlockedFoxTail3rd,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail4th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail5th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail6th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms)) player.createStatusEffect(StatusEffects.UnlockedKitsuneArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTail)) player.createStatusEffect(StatusEffects.UnlockedDemonTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonHorns)) player.createStatusEffect(StatusEffects.UnlockedDemonHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge)) player.createStatusEffect(StatusEffects.UnlockedDemonTonuge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels)) player.createStatusEffect(StatusEffects.UnlockedDemonHighHeels,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonClawedLegs)) player.createStatusEffect(StatusEffects.UnlockedDemonClawedLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTinyBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonTinyBatWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardLegs)) player.createStatusEffect(StatusEffects.UnlockedLizardLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) player.createStatusEffect(StatusEffects.UnlockedLizardArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardTail)) player.createStatusEffect(StatusEffects.UnlockedLizardTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardEyes)) player.createStatusEffect(StatusEffects.UnlockedLizardEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardEars)) player.createStatusEffect(StatusEffects.UnlockedLizardEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardFace)) player.createStatusEffect(StatusEffects.UnlockedLizardFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae)) player.createStatusEffect(StatusEffects.UnlockedBeeAntennae,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeArms)) player.createStatusEffect(StatusEffects.UnlockedBeeArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeLegs)) player.createStatusEffect(StatusEffects.UnlockedBeeLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeTail)) player.createStatusEffect(StatusEffects.UnlockedBeeTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedBeeWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedBeeWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyLegs)) player.createStatusEffect(StatusEffects.UnlockedHarpyLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyTail)) player.createStatusEffect(StatusEffects.UnlockedHarpyTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyArms)) player.createStatusEffect(StatusEffects.UnlockedHarpyArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) player.createStatusEffect(StatusEffects.UnlockedHarpyHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyWings)) player.createStatusEffect(StatusEffects.UnlockedHarpyWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfinEars)) player.createStatusEffect(StatusEffects.UnlockedElfinEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes)) player.createStatusEffect(StatusEffects.UnlockedSpiderFourEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderFangs)) player.createStatusEffect(StatusEffects.UnlockedSpiderFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderArms)) player.createStatusEffect(StatusEffects.UnlockedSpiderArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderLegs)) player.createStatusEffect(StatusEffects.UnlockedSpiderLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderTail)) player.createStatusEffect(StatusEffects.UnlockedSpiderTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDriderLegs)) player.createStatusEffect(StatusEffects.UnlockedDriderLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth)) player.createStatusEffect(StatusEffects.UnlockedSharkTeeth,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkTail)) player.createStatusEffect(StatusEffects.UnlockedSharkTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkLegs)) player.createStatusEffect(StatusEffects.UnlockedSharkLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkArms)) player.createStatusEffect(StatusEffects.UnlockedSharkArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkFin)) player.createStatusEffect(StatusEffects.UnlockedSharkFin,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicX2)) player.createStatusEffect(StatusEffects.UnlockedDraconicX2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicX4)) player.createStatusEffect(StatusEffects.UnlockedDraconicX4,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail7th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail8th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail9th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail)) player.createStatusEffect(StatusEffects.UnlockedSalamanderTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs)) player.createStatusEffect(StatusEffects.UnlockedSalamanderLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms)) player.createStatusEffect(StatusEffects.UnlockedSalamanderArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace)) player.createStatusEffect(StatusEffects.UnlockedSalamanderFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms)) player.createStatusEffect(StatusEffects.UnlockedPhoenixArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings)) player.createStatusEffect(StatusEffects.UnlockedPhoenixWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs)) player.createStatusEffect(StatusEffects.UnlockedOrcaLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaArms)) player.createStatusEffect(StatusEffects.UnlockedOrcaArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaTail)) player.createStatusEffect(StatusEffects.UnlockedOrcaTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaEars)) player.createStatusEffect(StatusEffects.UnlockedOrcaEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaFace)) player.createStatusEffect(StatusEffects.UnlockedOrcaFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole)) player.createStatusEffect(StatusEffects.UnlockedOrcaBlowhole,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue)) player.createStatusEffect(StatusEffects.UnlockedSnakeTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs)) player.createStatusEffect(StatusEffects.UnlockedSnakeFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody)) player.createStatusEffect(StatusEffects.UnlockedSnakeLowerBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes)) player.createStatusEffect(StatusEffects.UnlockedSnakeEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeEars)) player.createStatusEffect(StatusEffects.UnlockedSnakeEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGorgonHair)) player.createStatusEffect(StatusEffects.UnlockedGorgonHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes)) player.createStatusEffect(StatusEffects.UnlockedGorgonEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicEars)) player.createStatusEffect(StatusEffects.UnlockedDraconicEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsHuge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes)) player.createStatusEffect(StatusEffects.UnlockedDraconicEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue)) player.createStatusEffect(StatusEffects.UnlockedDraconicTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicFace)) player.createStatusEffect(StatusEffects.UnlockedDraconicFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs)) player.createStatusEffect(StatusEffects.UnlockedDraconicFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs)) player.createStatusEffect(StatusEffects.UnlockedDraconicLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicArms)) player.createStatusEffect(StatusEffects.UnlockedDraconicArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicTail)) player.createStatusEffect(StatusEffects.UnlockedDraconicTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHoofedLegs)) player.createStatusEffect(StatusEffects.UnlockedHoofedLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowTail)) player.createStatusEffect(StatusEffects.UnlockedCowTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowEars)) player.createStatusEffect(StatusEffects.UnlockedCowEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace)) player.createStatusEffect(StatusEffects.UnlockedCowMinotaurFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns)) player.createStatusEffect(StatusEffects.UnlockedCowMinotaurHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedClovenHoofedLegs)) player.createStatusEffect(StatusEffects.UnlockedClovenHoofedLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatTail)) player.createStatusEffect(StatusEffects.UnlockedGoatTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatHorns)) player.createStatusEffect(StatusEffects.UnlockedGoatHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatEars)) player.createStatusEffect(StatusEffects.UnlockedGoatEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilArms)) player.createStatusEffect(StatusEffects.UnlockedDevilArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilFangs)) player.createStatusEffect(StatusEffects.UnlockedDevilFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilEyes)) player.createStatusEffect(StatusEffects.UnlockedDevilEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae)) player.createStatusEffect(StatusEffects.UnlockedMantisAntennae,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisLegs)) player.createStatusEffect(StatusEffects.UnlockedMantisLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisArms)) player.createStatusEffect(StatusEffects.UnlockedMantisArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisTail)) player.createStatusEffect(StatusEffects.UnlockedMantisTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedMantisWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedMantisWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfLegs)) player.createStatusEffect(StatusEffects.UnlockedElfLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfArms)) player.createStatusEffect(StatusEffects.UnlockedElfArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfEars)) player.createStatusEffect(StatusEffects.UnlockedElfEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfEyes)) player.createStatusEffect(StatusEffects.UnlockedElfEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfHair)) player.createStatusEffect(StatusEffects.UnlockedElfHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfTongue)) player.createStatusEffect(StatusEffects.UnlockedElfTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniLegs)) player.createStatusEffect(StatusEffects.UnlockedOniLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniArms)) player.createStatusEffect(StatusEffects.UnlockedOniArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniEyes)) player.createStatusEffect(StatusEffects.UnlockedOniEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniEars)) player.createStatusEffect(StatusEffects.UnlockedOniEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniFace)) player.createStatusEffect(StatusEffects.UnlockedOniFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn)) player.createStatusEffect(StatusEffects.UnlockedOniSingleHorn,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns)) player.createStatusEffect(StatusEffects.UnlockedOniTwinHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs)) player.createStatusEffect(StatusEffects.UnlockedRaijuLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuArms)) player.createStatusEffect(StatusEffects.UnlockedRaijuArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuTail)) player.createStatusEffect(StatusEffects.UnlockedRaijuTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuMane)) player.createStatusEffect(StatusEffects.UnlockedRaijuMane,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuFace)) player.createStatusEffect(StatusEffects.UnlockedRaijuFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEars)) player.createStatusEffect(StatusEffects.UnlockedRaijuEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes)) player.createStatusEffect(StatusEffects.UnlockedRaijuEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuHair)) player.createStatusEffect(StatusEffects.UnlockedRaijuHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2)) player.createStatusEffect(StatusEffects.UnlockedRaijuArms2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura)) player.createStatusEffect(StatusEffects.UnlockedRaijuThunderousAura,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBatEars)) player.createStatusEffect(StatusEffects.UnlockedBatEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBatWings)) player.createStatusEffect(StatusEffects.UnlockedBatWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBatCollar)) player.createStatusEffect(StatusEffects.UnlockedBatCollar,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireEars)) player.createStatusEffect(StatusEffects.UnlockedVampireEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireWings)) player.createStatusEffect(StatusEffects.UnlockedVampireWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireFace)) player.createStatusEffect(StatusEffects.UnlockedVampireFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireEyes)) player.createStatusEffect(StatusEffects.UnlockedVampireEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigEars)) player.createStatusEffect(StatusEffects.UnlockedPigEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigTail)) player.createStatusEffect(StatusEffects.UnlockedPigTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigArms)) player.createStatusEffect(StatusEffects.UnlockedPigArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigFace)) player.createStatusEffect(StatusEffects.UnlockedPigFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBoarFace)) player.createStatusEffect(StatusEffects.UnlockedBoarFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBoarArms)) player.createStatusEffect(StatusEffects.UnlockedBoarArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcLegs)) player.createStatusEffect(StatusEffects.UnlockedOrcLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcArms)) player.createStatusEffect(StatusEffects.UnlockedOrcArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcFangs)) player.createStatusEffect(StatusEffects.UnlockedOrcFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcEyes)) player.createStatusEffect(StatusEffects.UnlockedOrcEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseFace)) player.createStatusEffect(StatusEffects.UnlockedHorseFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseEars)) player.createStatusEffect(StatusEffects.UnlockedHorseEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseTail)) player.createStatusEffect(StatusEffects.UnlockedHorseTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn)) player.createStatusEffect(StatusEffects.UnlockedUnicornHorn,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) player.createStatusEffect(StatusEffects.UnlockedAlicornWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) player.createStatusEffect(StatusEffects.UnlockedNightmareWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars)) player.createStatusEffect(StatusEffects.UnlockedRedPandaEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace)) player.createStatusEffect(StatusEffects.UnlockedRedPandaFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms)) player.createStatusEffect(StatusEffects.UnlockedRedPandaArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaLegs)) player.createStatusEffect(StatusEffects.UnlockedRedPandaLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaTail)) player.createStatusEffect(StatusEffects.UnlockedRedPandaTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatEars)) player.createStatusEffect(StatusEffects.UnlockedCatEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTail)) player.createStatusEffect(StatusEffects.UnlockedCatTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatLegs)) player.createStatusEffect(StatusEffects.UnlockedCatLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatArms)) player.createStatusEffect(StatusEffects.UnlockedCatArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatFace)) player.createStatusEffect(StatusEffects.UnlockedCatFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatFangs)) player.createStatusEffect(StatusEffects.UnlockedCatFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTongue)) player.createStatusEffect(StatusEffects.UnlockedCatTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatEyes)) player.createStatusEffect(StatusEffects.UnlockedCatEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireFace)) player.createStatusEffect(StatusEffects.UnlockedCheshireFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile)) player.createStatusEffect(StatusEffects.UnlockedCheshireSmile,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionEars)) player.createStatusEffect(StatusEffects.UnlockedLionEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars)) player.createStatusEffect(StatusEffects.UnlockedDisplacerEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes)) player.createStatusEffect(StatusEffects.UnlockedDisplacerEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms)) player.createStatusEffect(StatusEffects.UnlockedDisplacerArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerBTentacles)) player.createStatusEffect(StatusEffects.UnlockedDisplacerBTentacles,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail1)) player.createStatusEffect(StatusEffects.UnlockedNekomataForkedTail1,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail2)) player.createStatusEffect(StatusEffects.UnlockedNekomataForkedTail2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) player.createStatusEffect(StatusEffects.UnlockedCatTail2nd,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionMane)) player.createStatusEffect(StatusEffects.UnlockedLionMane,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionLegs)) player.createStatusEffect(StatusEffects.UnlockedLionLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionArms)) player.createStatusEffect(StatusEffects.UnlockedLionArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedScorpionTail)) player.createStatusEffect(StatusEffects.UnlockedScorpionTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreTail)) player.createStatusEffect(StatusEffects.UnlockedManticoreTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedManticoreWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedManticoreWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreFace)) player.createStatusEffect(StatusEffects.UnlockedManticoreFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes)) player.createStatusEffect(StatusEffects.UnlockedManticoreEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxWings)) player.createStatusEffect(StatusEffects.UnlockedSphinxWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) player.createStatusEffect(StatusEffects.UnlockedSphinxArms,0,0,0,0);/*
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);*/
+			for each (var hairMem: * in HairMem.Memories) {
+				Metamorph.GeneticMemoryStorage[hairMem.id] = true;
+			}
+
+			for each (var faceMem: * in FaceMem.Memories) {
+				Metamorph.GeneticMemoryStorage[faceMem.id] = true;
+			}
+
+			for each (var eyesMem: * in EyesMem.Memories) {
+				Metamorph.GeneticMemoryStorage[eyesMem.id] = true;
+			}
+
+			for each (var earsMem: * in EarsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[earsMem.id] = true;
+			}
+
+			for each (var armsMem: * in ArmsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[armsMem.id] = true;
+			}
+
+			for each (var hornsMem: * in HornsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[hornsMem.id] = true;
+			}
+
+			for each (var skinMem: * in SkinMem.Memories) {
+				Metamorph.GeneticMemoryStorage[skinMem.id] = true;
+			}
+
+			for each (var skinPatternMem: * in SkinPatternMem.Memories) {
+				Metamorph.GeneticMemoryStorage[skinPatternMem.id] = true;
+			}
+
+			for each (var tongueMem: * in TongueMem.Memories) {
+				Metamorph.GeneticMemoryStorage[tongueMem.id] = true;
+			}
+
+			for each (var wingsMem: * in WingsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[wingsMem.id] = true;
+			}
+
+			for each (var antennaeMem: * in AntennaeMem.Memories) {
+				Metamorph.GeneticMemoryStorage[antennaeMem.id] = true;
+			}
+
+			for each (var gillsMem: * in GillsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[gillsMem.id] = true;
+			}
+
+			for each (var rearBodyMem: * in RearBodyMem.Memories) {
+				Metamorph.GeneticMemoryStorage[rearBodyMem.id] = true;
+			}
+
+			for each (var lowerBodyMem: * in LowerBodyMem.Memories) {
+				Metamorph.GeneticMemoryStorage[lowerBodyMem.id] = true;
+			}
+
+			for each (var tailMem: * in TailMem.Memories) {
+				Metamorph.GeneticMemoryStorage[tailMem.id] = true;
+			}
+
+			Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 			doNext(SoulforceCheats);
 		}
 		public function PerkGalore1():void {
-			if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
+			if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
 				player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Corrupted Kitsune!)</b>");
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) < 0) {
+			if (!player.hasPerk(PerkLib.CorruptedNinetails)) {
 				player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Corrupted Ninetails!)</b>");
 			}
-			if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) {
+			if (!player.hasPerk(PerkLib.EnlightenedKitsune)) {
 				player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Enlightened Kitsune!)</b>");
 			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) {
+			if (!player.hasPerk(PerkLib.EnlightenedNinetails)) {
 				player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Enlightened Ninetails!)</b>");
 			}
-			if (player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
+			if (!player.hasPerk(PerkLib.FerasBoonAlpha)) {
 				player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Feras Boon Alpha!)</b>");
 			}
-			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) {
+			if (!player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
 				player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Feras Boon Breeding Bitch!)</b>");
 			}
-			if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
+			if (!player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
 				player.createPerk(PerkLib.FerasBoonMilkingTwat, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Feras Boon Milking Twat!)</b>");
 			}
-			if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
+			if (!player.hasPerk(PerkLib.FerasBoonSeeder)) {
 				player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Feras Boon Seeder!)</b>");
 			}
-			if (player.findPerk(PerkLib.FireLord) < 0) {
+			if (!player.hasPerk(PerkLib.FireLord)) {
 				player.createPerk(PerkLib.FireLord, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: FireLord!)</b>");
 			}
-			if (player.findPerk(PerkLib.Hellfire) < 0) {
+			if (!player.hasPerk(PerkLib.Hellfire)) {
 				player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Hellfire!)</b>");
 			}
-			if (player.findPerk(PerkLib.MagicalFertility) < 0) {
+			if (!player.hasPerk(PerkLib.MagicalFertility)) {
 				player.createPerk(PerkLib.MagicalFertility, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Magical Fertility!)</b>");
 			}
-			if (player.findPerk(PerkLib.MagicalVirility) < 0) {
+			if (!player.hasPerk(PerkLib.MagicalVirility)) {
 				player.createPerk(PerkLib.MagicalVirility, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Magical Virility!)</b>");
 			}
-			if (player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftButtslut)) {
 				player.createPerk(PerkLib.MaraesGiftButtslut, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Maraes Gift Buttslut!)</b>");
 			}
-			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Maraes Gift Fertility!)</b>");
 			}
-			if (player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftProfractory)) {
 				player.createPerk(PerkLib.MaraesGiftProfractory, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Maraes Gift Profractory!)</b>");
 			}
-			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 				player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Maraes Gift Stud!)</b>");
 			}
-			if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) < 0) {
+			if (!player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
 				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: 9T Kitsune Of Balance!)</b>");
 			}
-			if (player.findPerk(PerkLib.MilkMaid) < 0) {
+			if (!player.hasPerk(PerkLib.MilkMaid)) {
 				player.createPerk(PerkLib.MilkMaid, 1, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: MilkMaid!)</b>");
 			}
-			if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+			if (!player.hasPerk(PerkLib.OneTrackMind)) {
 				player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: One Track Mind!)</b>");
 			}
-			if (player.findPerk(PerkLib.PureAndLoving) < 0) {
+			if (!player.hasPerk(PerkLib.PureAndLoving)) {
 				player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pure And Loving!)</b>");
 			}
-			if (player.findPerk(PerkLib.PurityBlessing) < 0) {
+			if (!player.hasPerk(PerkLib.PurityBlessing)) {
 				player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Purity Blessing!)</b>");
 			}
-			if (player.findPerk(PerkLib.SensualLover) < 0) {
+			if (!player.hasPerk(PerkLib.SensualLover)) {
 				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
 			}
-			if (player.findPerk(PerkLib.Perfection) >= 0 && player.findPerk(PerkLib.Creationism) < 0) {
+			if (player.hasPerk(PerkLib.Perfection) && !player.hasPerk(PerkLib.Creationism)) {
 				player.createPerk(PerkLib.Creationism, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Creationism!)</b>");
 			}
-			if (player.findPerk(PerkLib.SoulPowered) >= 0 && player.findPerk(PerkLib.AllSeeing) < 0) {
+			if (player.hasPerk(PerkLib.SoulPowered) && !player.hasPerk(PerkLib.AllSeeing)) {
 				player.createPerk(PerkLib.AllSeeing, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: All-Seeing!)</b>");
 			}
-			if (player.findPerk(PerkLib.SoulOfSteel) >= 0 && player.findPerk(PerkLib.GodOfSteel) < 0) {
+			if (player.hasPerk(PerkLib.SoulOfSteel) && !player.hasPerk(PerkLib.GodOfSteel)) {
 				player.createPerk(PerkLib.GodOfSteel, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: God of Steel!)</b>");
 			}
-			if (player.findPerk(PerkLib.BlessedByLadyGodiva) >= 0 && player.findPerk(PerkLib.LadyGodivasFavoriteChild) < 0) {
+			if (player.hasPerk(PerkLib.BlessedByLadyGodiva) && !player.hasPerk(PerkLib.LadyGodivasFavoriteChild)) {
 				player.createPerk(PerkLib.LadyGodivasFavoriteChild, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Lady Godiva's favorite Child!)</b>");
 			}
-			if (player.findPerk(PerkLib.Surgeon) >= 0 && player.findPerk(PerkLib.Medic) < 0) {
+			if (player.hasPerk(PerkLib.Surgeon) && !player.hasPerk(PerkLib.Medic)) {
 				player.createPerk(PerkLib.Medic, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: MEDIC!!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.Cardinal) >= 0 && player.findPerk(PerkLib.Pope) < 0) {
+			if (player.hasPerk(PerkLib.Cardinal) && !player.hasPerk(PerkLib.Pope)) {
 				player.createPerk(PerkLib.Pope, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pope!)</b>");
 			}
-			if (player.findPerk(PerkLib.President) >= 0 && player.findPerk(PerkLib.Nerd) < 0) {
+			if (player.hasPerk(PerkLib.President) && !player.hasPerk(PerkLib.Nerd)) {
 				player.createPerk(PerkLib.Nerd, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: NERD!!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.SpysEnemy) >= 0 && player.findPerk(PerkLib.ShitYouTouchedSasha) < 0) {
+			if (player.hasPerk(PerkLib.SpysEnemy) && !player.hasPerk(PerkLib.ShitYouTouchedSasha)) {
 				player.createPerk(PerkLib.ShitYouTouchedSasha, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: SHIT YOU TOUCHED SASHA!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.ZZZ) >= 0 && player.findPerk(PerkLib.Lazy) < 0) {
+			if (player.hasPerk(PerkLib.ZZZ) && !player.hasPerk(PerkLib.Lazy)) {
 				player.createPerk(PerkLib.Lazy, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: LAZY!!!!)</b>");
 			}/*		Slut
-			if (player.findPerk(PerkLib.) >= 0 && player.findPerk(PerkLib.) < 0) {
+			if (player.hasPerk(PerkLib.) && !player.hasPerk(PerkLib.)) {
 				player.createPerk(PerkLib., 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: !)</b>");
 				player.createPerk(PerkLib., 0, 0, 0, 0);
@@ -731,214 +600,198 @@ use namespace CoC;
 				player.createPerk(PerkLib., 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: !)</b>");
 			}*/
-			if (player.findPerk(PerkLib.Weap0n) >= 0 && player.findPerk(PerkLib.Arm0r) < 0) {
+			if (player.hasPerk(PerkLib.Weap0n) && !player.hasPerk(PerkLib.Arm0r)) {
 				player.createPerk(PerkLib.Arm0r, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Armor!)</b>");
 			}
-			if (player.findPerk(PerkLib.SexChampion) >= 0 && player.findPerk(PerkLib.SexDeity) < 0) {
+			if (player.hasPerk(PerkLib.SexChampion) && !player.hasPerk(PerkLib.SexDeity)) {
 				player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
 			}
 			doNext(submenucuzwhynot);
 		}
 		public function PerkGalore2():void {
-			if (player.findPerk(PerkLib.PrestigeJobNecromancer) < 0) {
-				player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Necromancer!)</b>");
-			}
-			if (player.findPerk(PerkLib.PrestigeJobSeer) < 0) {
+			if (!player.hasPerk(PerkLib.PrestigeJobSeer)) {
 				player.createPerk(PerkLib.PrestigeJobSeer, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Seer!)</b>");
 			}
-			if (player.findPerk(PerkLib.PrestigeJobSoulArcher) < 0) {
+			if (!player.hasPerk(PerkLib.PrestigeJobSoulArcher)) {
 				player.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Soul Archer!)</b>");
 			}
-			if (player.findPerk(PerkLib.PrestigeJobGreySage) < 0) {
-				player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Grey Sage!)</b>");
-			}
-			if (player.findPerk(PerkLib.PrestigeJobSpellKnight) < 0) {
-				player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Spell Knight!)</b>");
-			}
-			if (player.findPerk(PerkLib.PrestigeJobWarlock) < 0) {
-				player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Warlock!)</b>");
-			}
-			if (player.findPerk(PerkLib.PiercedCrimstone) < 0) {
+			if (!player.hasPerk(PerkLib.PiercedCrimstone)) {
 				player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pierced: Crimstone!)</b>");
 			}
-			if (player.findPerk(PerkLib.PiercedFertite) < 0) {
+			if (!player.hasPerk(PerkLib.PiercedFertite)) {
 				player.createPerk(PerkLib.PiercedFertite, 5, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pierced: Fertite!)</b>");
 			}
-			if (player.findPerk(PerkLib.PiercedFurrite) < 0) {
+			if (!player.hasPerk(PerkLib.PiercedFurrite)) {
 				player.createPerk(PerkLib.PiercedFurrite, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pierced: Furrite!)</b>");
 			}
-			if (player.findPerk(PerkLib.PiercedLethite) < 0) {
+			if (!player.hasPerk(PerkLib.PiercedLethite)) {
 				player.createPerk(PerkLib.PiercedLethite, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pierced: Lethite!)</b>");
 			}
-			if (player.findPerk(PerkLib.BroodMother) < 0) {
+			if (!player.hasPerk(PerkLib.BroodMother)) {
 				player.createPerk(PerkLib.BroodMother, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Brood Mother!)</b>");
 			}
-			if (player.findPerk(PerkLib.Androgyny) < 0) {
+			if (!player.hasPerk(PerkLib.Androgyny)) {
 				player.createPerk(PerkLib.Androgyny, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Androgyny!)</b>");
 			}
-			if (player.findPerk(PerkLib.BasiliskWomb) < 0) {
+			if (!player.hasPerk(PerkLib.BasiliskWomb)) {
 				player.createPerk(PerkLib.BasiliskWomb, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Basilisk Womb!)</b>");
 			}
-			if (player.findPerk(PerkLib.BunnyEggs) < 0) {
+			if (!player.hasPerk(PerkLib.BunnyEggs)) {
 				player.createPerk(PerkLib.BunnyEggs, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Bunny Eggs!)</b>");
 			}
-			if (player.findPerk(PerkLib.DeityJobMunchkin) < 0) {
+			if (!player.hasPerk(PerkLib.DeityJobMunchkin)) {
 				player.createPerk(PerkLib.DeityJobMunchkin, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Deity Job: Munchkin!)</b>");
 			}
-			if (player.findPerk(PerkLib.Diapause) < 0) {
+			if (!player.hasPerk(PerkLib.Diapause)) {
 				player.createPerk(PerkLib.Diapause, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Diapause!)</b>");
 			}
-			if (player.findPerk(PerkLib.Feeder) < 0) {
+			if (!player.hasPerk(PerkLib.Feeder)) {
 				player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Feeder!)</b>");
 			}
-			if (player.findPerk(PerkLib.HarpyWomb) < 0) {
+			if (!player.hasPerk(PerkLib.HarpyWomb)) {
 				player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Harpy Womb!)</b>");
 			}
-			if (player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
+			if (!player.hasPerk(PerkLib.ImprovedVenomGland)) {
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Improved Venom Gland!)</b>");
 			}
-			if (player.findPerk(PerkLib.MinotaurCumResistance) < 0) {
+			if (!player.hasPerk(PerkLib.MinotaurCumResistance)) {
 				player.createPerk(PerkLib.MinotaurCumResistance, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Minotaur Cum Resistance!)</b>");
 			}
-			if (player.findPerk(PerkLib.BasiliskResistance) < 0) {
+			if (!player.hasPerk(PerkLib.BasiliskResistance)) {
 				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Basilisk Resistance!)</b>");
 			}
-			if (player.findPerk(PerkLib.Cornucopia) < 0) {
+			if (!player.hasPerk(PerkLib.Cornucopia)) {
 				player.createPerk(PerkLib.Cornucopia, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Cornucopia!)</b>");
 			}
-			if (player.findPerk(PerkLib.DemonicLethicite) < 0) {
+			if (!player.hasPerk(PerkLib.DemonicLethicite)) {
 				player.createPerk(PerkLib.DemonicLethicite, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Demonic Lethicite!)</b>");
 			}
-			if (player.findPerk(PerkLib.DemonSlayer) < 0) {
+			if (!player.hasPerk(PerkLib.DemonSlayer)) {
 				player.createPerk(PerkLib.DemonSlayer, 0.1, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Demon Slayer!)</b>");
 			}
-			if (player.findPerk(PerkLib.ElvenBounty) < 0) {
+			if (!player.hasPerk(PerkLib.ElvenBounty)) {
 				player.createPerk(PerkLib.ElvenBounty, 0, 15, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Elven Bounty!)</b>");
 			}
-			if (player.findPerk(PerkLib.FeralHunter) < 0) {
+			if (!player.hasPerk(PerkLib.FeralHunter)) {
 				player.createPerk(PerkLib.FeralHunter, 0.1, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Feral Hunter!)</b>");
 			}
-			if (player.findPerk(PerkLib.MarbleResistant) < 0) {
+			if (!player.hasPerk(PerkLib.MarbleResistant)) {
 				player.createPerk(PerkLib.MarbleResistant, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Marble Resistant!)</b>");
 			}
-			if (player.findPerk(PerkLib.Misdirection) < 0) {
+			if (!player.hasPerk(PerkLib.Misdirection)) {
 				player.createPerk(PerkLib.Misdirection, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Misdirection!)</b>");
 			}
-			if (player.findPerk(PerkLib.OmnibusGift) < 0) {
+			if (!player.hasPerk(PerkLib.OmnibusGift)) {
 				player.createPerk(PerkLib.OmnibusGift, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Omnibus Gift!)</b>");
 			}
-			if (player.findPerk(PerkLib.PilgrimsBounty) < 0) {
+			if (!player.hasPerk(PerkLib.PilgrimsBounty)) {
 				player.createPerk(PerkLib.PilgrimsBounty, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pilgrims Bounty!)</b>");
 			}
-			if (player.findPerk(PerkLib.ProductivityDrugs) < 0) {
+			if (!player.hasPerk(PerkLib.ProductivityDrugs)) {
 				player.createPerk(PerkLib.ProductivityDrugs,player.cor,10,player.lib,0);
 				outputText("\n\n<b>(Gained Perk: Productivity Drugs!)</b>");
 			}
-			if (player.findPerk(PerkLib.SenseCorruption) < 0) {
+			if (!player.hasPerk(PerkLib.SenseCorruption)) {
 				player.createPerk(PerkLib.SenseCorruption, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sense Corruption!)</b>");
 			}
-			if (player.findPerk(PerkLib.SenseWrath) < 0) {
+			if (!player.hasPerk(PerkLib.SenseWrath)) {
 				player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sense Wrath!)</b>");
 			}
-			if (player.findPerk(PerkLib.Whispered) < 0) {
+			if (!player.hasPerk(PerkLib.Whispered)) {
 				player.createPerk(PerkLib.Whispered, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Whispered!)</b>");
 			}
-			if (player.findPerk(PerkLib.ControlledBreath) < 0) {
+			if (!player.hasPerk(PerkLib.ControlledBreath)) {
 				player.createPerk(PerkLib.ControlledBreath, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Controlled Breath!)</b>");
 			}
-			if (player.findPerk(PerkLib.CleansingPalm) < 0) {
+			if (!player.hasPerk(PerkLib.CleansingPalm)) {
 				player.createPerk(PerkLib.CleansingPalm, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Cleansing Palm!)</b>");
 			}
-			if (player.findPerk(PerkLib.Enlightened) < 0) {
+			if (!player.hasPerk(PerkLib.Enlightened)) {
 				player.createPerk(PerkLib.Enlightened, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Enlightened!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryAlchemist) < 0 && player.findPerk(PerkLib.PastLifeAlchemist) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryAlchemist) && !player.hasPerk(PerkLib.PastLifeAlchemist)) {
 				player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Alchemist!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryCultivator) < 0 && player.findPerk(PerkLib.PastLifeCultivator) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryCultivator) && !player.hasPerk(PerkLib.PastLifeCultivator)) {
 				player.createPerk(PerkLib.HistoryCultivator, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Cultivator!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryFighter) < 0 && player.findPerk(PerkLib.PastLifeFighter) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryFighter) && !player.hasPerk(PerkLib.PastLifeFighter)) {
 				player.createPerk(PerkLib.HistoryFighter, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Fighter!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryFortune) < 0 && player.findPerk(PerkLib.PastLifeFortune) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryFortune) && !player.hasPerk(PerkLib.PastLifeFortune)) {
 				player.createPerk(PerkLib.HistoryFortune, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Fortune!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryHealer) < 0 && player.findPerk(PerkLib.PastLifeHealer) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryHealer) && !player.hasPerk(PerkLib.PastLifeHealer)) {
 				player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Healer!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryReligious) < 0 && player.findPerk(PerkLib.PastLifeReligious) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryReligious) && !player.hasPerk(PerkLib.PastLifeReligious)) {
 				player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Religious!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryScholar) < 0 && player.findPerk(PerkLib.PastLifeScholar) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryScholar) && !player.hasPerk(PerkLib.PastLifeScholar)) {
 				player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Scholar!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryScout) < 0 && player.findPerk(PerkLib.PastLifeScout) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryScout) && !player.hasPerk(PerkLib.PastLifeScout)) {
 				player.createPerk(PerkLib.HistoryScout, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Scout!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistorySlacker) < 0 && player.findPerk(PerkLib.PastLifeSlacker) < 0) {
+			if (!player.hasPerk(PerkLib.HistorySlacker) && !player.hasPerk(PerkLib.PastLifeSlacker)) {
 				player.createPerk(PerkLib.HistorySlacker, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Slacker!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistorySlut) < 0 && player.findPerk(PerkLib.PastLifeSlut) < 0) {
+			if (!player.hasPerk(PerkLib.HistorySlut) && !player.hasPerk(PerkLib.PastLifeSlut)) {
 				player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Slut!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistorySmith) < 0 && player.findPerk(PerkLib.PastLifeSmith) < 0) {
+			if (!player.hasPerk(PerkLib.HistorySmith) && !player.hasPerk(PerkLib.PastLifeSmith)) {
 				player.createPerk(PerkLib.HistorySmith, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Smith!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryTactician) < 0 && player.findPerk(PerkLib.PastLifeTactician) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryTactician) && !player.hasPerk(PerkLib.PastLifeTactician)) {
 				player.createPerk(PerkLib.HistoryTactician, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Tactician!)</b>");
 			}
-			if (player.findPerk(PerkLib.HistoryWhore) < 0 && player.findPerk(PerkLib.PastLifeWhore) < 0) {
+			if (!player.hasPerk(PerkLib.HistoryWhore) && !player.hasPerk(PerkLib.PastLifeWhore)) {
 				player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Whore!)</b>");
 			}
@@ -1099,8 +952,8 @@ use namespace CoC;
 			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
-			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 4 Tribulation perks.");
-			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
+			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(10, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
+			if (player.hasPerk(PerkLib.SoulAncestor)) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
@@ -1515,44 +1368,32 @@ use namespace CoC;
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function TribulationPerks():void {
-			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) {
-				player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: H class Heaven Tribulation Survivor!)</b>");
-			}
-			if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) < 0) {
-				player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: G class Heaven Tribulation Survivor!)</b>");
-			}
-			if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) < 0) {
-				player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: F class Heaven Tribulation Survivor!)</b>");
-			}
-			if (player.findPerk(PerkLib.EclassHeavenTribulationSurvivor) < 0) {
+			if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
 				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
 			}
 			doNext(SoulforceCheats);
 		}
 		public function Stage10to12SoulPerks():void {
-			if (player.findPerk(PerkLib.FleshBodyOverlordStage) < 0) {
-				player.createPerk(PerkLib.FleshBodyOverlordStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Flesh Body Overlord Stage!)</b>");
+			if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				player.removePerk(PerkLib.FleshBodyOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage!)</b>");
 			}
-			if (player.findPerk(PerkLib.DaoistOverlordStage) < 0) {
-				player.createPerk(PerkLib.DaoistOverlordStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Daoist Overlord Stage!)</b>");
+			if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+				player.removePerk(PerkLib.DaoistOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage!)</b>");
 			}
-			if (player.findPerk(PerkLib.SoulKing) < 0) {
-				player.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul King!)</b>");
+			if (player.hasPerk(PerkLib.SoulKing)) {
+				player.removePerk(PerkLib.SoulKing);
+				outputText("\n\n<b>(Lost Perk: Soul King!)</b>");
 			}
-			if (player.findPerk(PerkLib.SoulEmperor) < 0) {
-				player.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul Emperor!)</b>");
+			if (player.hasPerk(PerkLib.SoulEmperor)) {
+				player.removePerk(PerkLib.SoulEmperor);
+				outputText("\n\n<b>(Lost Perk: Soul Emperor!)</b>");
 			}
-			if (player.findPerk(PerkLib.SoulAncestor) < 0) {
-				player.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul Ancestor!)</b>");
+			if (player.hasPerk(PerkLib.SoulAncestor)) {
+				player.removePerk(PerkLib.SoulAncestor);
+				outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
 			}
 			doNext(SoulforceCheats);
 		}
@@ -1592,7 +1433,7 @@ use namespace CoC;
 				addButton(13, "-1-", EquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
-			
+
 		}
 		public function NonEquipmentMenu(page:int = 1):void {
 			menu();
@@ -1711,7 +1552,7 @@ use namespace CoC;
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
-		
+
 		public function AddRapPerk():void {
 			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
 			player.createPerk(PerkLib.RapierTraining, 0, 0, 0, 0);
@@ -1830,7 +1671,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
 			inventory.takeItem(necklaces.OBNECK, curry(EquipmentMenu, 2));
 		}
-		
+
 		public function AddFoxJewel():void {
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
 			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
@@ -1911,7 +1752,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Midnight gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.M_GOSSR, curry(NonEquipmentMenu, 2));
 		}
-		
+
 		public function AddMetalPieces():void {
 			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
@@ -1966,7 +1807,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
 			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
 		}
-		
+
 		public function FightTheDummy():void {
 			clearOutput();
 			outputText("Entering battle with The Dummy! Enjoy ^^");
@@ -1977,7 +1818,7 @@ use namespace CoC;
 			outputText("Entering battle with Succubus Gardener! Enjoy ^^");
 			startCombat(new SuccubusGardener());
 		}
-		
+
 		public function AddThickGreenOnnaGossamer():void {
 			outputText("\n\n<b>(Gained 1 Thick Green Onna Gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
@@ -2642,11 +2483,11 @@ use namespace CoC;
 		public function FairyTest():void {
 			clearOutput();
 			outputText("FAIRYTIME ^^");
-			player.faceType = Face.FAIRY;
+			CoC.instance.transformations.FaceFairy.applyEffect(false);
 			player.tongue.type = Tongue.ELF;
 			player.eyes.type = Eyes.FAIRY
 			player.ears.type = Ears.ELVEN
-			player.hairType = Hair.FAIRY;
+			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.tailType = Tail.NONE
 			player.arms.type = Arms.ELF
 			player.lowerBody = LowerBody.ELF;
@@ -2904,7 +2745,7 @@ use namespace CoC;
 			if (player.kitsuneScore() >= 5) {
 				if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
 					if (player.kitsuneScore() >= 16) {
-						if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+						if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
 							if (player.kitsuneScore() >= 26) SFR00 += 200;
 							else SFR00 += 150;
 						}
@@ -2918,62 +2759,111 @@ use namespace CoC;
 				if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) SFR00 += 40;
 				else SFR00 += 20;
 			}
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) SFR00 += 20;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) SFR00 += 20;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) SFR00 += 20;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) SFR00 += 20;
-			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) SFR00 += 20;
+			if (player.hasPerk(PerkLib.DaoistApprenticeStage)) SFR00 += 20;
+			if (player.hasPerk(PerkLib.DaoistWarriorStage)) SFR00 += 20;
+			if (player.hasPerk(PerkLib.DaoistElderStage)) SFR00 += 20;
+			if (player.hasPerk(PerkLib.DaoistOverlordStage)) SFR00 += 20;
+			if (player.hasPerk(PerkLib.DaoistTyrantStage)) SFR00 += 20;
 			return SFR00;
 		}
-		public function SoulforceRegeneration1():void {
+		private function SoulforceRegenerationCompatibileTrainingItems():Boolean {
+			return player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
+			|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+			|| player.weaponFlyingSwordsName == "training soul flying sword";
+		}
+		public function DaoContemplations():void {
 			clearOutput();
-			var soulforceamountrestored:int = 16;
-			soulforceamountrestored += SoulforceRegeneration00();
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 16;
-			player.soulforce += soulforceamountrestored;
-			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
-				var bonussoulforce:Number = 0;
-				bonussoulforce += SoulforceGainedFromCultivation1();
-				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
-				SoulforceGainedFromCultivation2();
+			outputText("Which Dao would you try to comprehend?\n\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfFire)) outputText("Fire: "+player.statusEffectv1(StatusEffects.DaoOfFire)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfIce)) outputText("Ice: "+player.statusEffectv1(StatusEffects.DaoOfIce)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) outputText("Lightning: "+player.statusEffectv1(StatusEffects.DaoOfLightning)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) outputText("Darkness: "+player.statusEffectv1(StatusEffects.DaoOfDarkness)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) outputText("Poison: "+player.statusEffectv1(StatusEffects.DaoOfPoison)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfWind)) outputText("Wind: "+player.statusEffectv1(StatusEffects.DaoOfWind)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) outputText("Blood: "+player.statusEffectv1(StatusEffects.DaoOfBlood)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfWater)) outputText("Water: "+player.statusEffectv1(StatusEffects.DaoOfWater)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) outputText("Earth: "+player.statusEffectv1(StatusEffects.DaoOfEarth)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) outputText("Acid: "+player.statusEffectv1(StatusEffects.DaoOfAcid)+"\n");
+			menu();
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 5) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
+			else addButton(0, "Fire", DaoContemplationsEffect, StatusEffects.DaoOfFire, "Fire");
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 5) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
+			else addButton(1, "Ice", DaoContemplationsEffect, StatusEffects.DaoOfIce, "Ice");
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 5) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
+			else addButton(2, "Lightning", DaoContemplationsEffect, StatusEffects.DaoOfLightning, "Lightning");
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 5) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
+			else addButton(3, "Darkness", DaoContemplationsEffect, StatusEffects.DaoOfDarkness, "Darkness");
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 5) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
+			else addButton(4, "Poison", DaoContemplationsEffect, StatusEffects.DaoOfPoison, "Poison");
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) addButtonDisabled(5, "Wind", "You reached limit of comprehending this Dao.");
+			else addButton(5, "Wind", DaoContemplationsEffect, StatusEffects.DaoOfWind, "Wind");
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 5) addButtonDisabled(6, "Blood", "You reached limit of comprehending this Dao.");
+			else addButton(6, "Blood", DaoContemplationsEffect, StatusEffects.DaoOfBlood, "Blood");
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 5) addButtonDisabled(7, "Water", "You reached limit of comprehending this Dao.");
+			else addButton(7, "Water", DaoContemplationsEffect, StatusEffects.DaoOfWater, "Water");
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 5) addButtonDisabled(8, "Earth", "You reached limit of comprehending this Dao.");
+			else addButton(8, "Earth", DaoContemplationsEffect, StatusEffects.DaoOfEarth, "Earth");
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 5) addButtonDisabled(9, "Acid", "You reached limit of comprehending this Dao.");
+			else addButton(9, "Acid", DaoContemplationsEffect, StatusEffects.DaoOfAcid, "Acid");
+			addButton(14, "Back", accessSoulforceMenu);
+		}
+		private function DaoContemplationsEffect(statusEffect:StatusEffectType, daoname:String):void {
+			clearOutput();
+			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
+			var dao:Number = rand(6);
+			if (dao > 0) {
+				outputText("After session ends you managed to progress in Dao of "+daoname+".");
+				if (player.hasStatusEffect(statusEffect)) {
+					player.addStatusValue(statusEffect, 1, dao);
+					if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+						player.addStatusValue(statusEffect, 1, -140);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 5th layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+						player.addStatusValue(statusEffect, 1, -100);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 4th layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+						player.addStatusValue(statusEffect, 1, -60);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 3rd layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+						player.addStatusValue(statusEffect, 1, -40);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 2nd layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+						player.addStatusValue(statusEffect, 1, -20);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 1st layer.</b>");
+					}
+				}
+				else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 			}
-			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
-			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
-			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
-			doNext(camp.returnToCampUseOneHour);
+			else outputText("After the session ends, you did not manage to make an progress in your comprehension.");
+			outputText("\n\n");
+			doNext(camp.returnToCampUseEightHours);
 		}
 		public function SoulforceRegeneration2():void {
 			clearOutput();
 			var soulforceamountrestored:int = 52;
 			soulforceamountrestored += (SoulforceRegeneration00() * 3);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 52;//48(4)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 52;//48(4)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 52;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 52;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -2993,19 +2883,19 @@ use namespace CoC;
 			clearOutput();
 			var soulforceamountrestored:int = 124;
 			soulforceamountrestored += (SoulforceRegeneration00() * 7);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 124;//112(12)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 124;//112(12)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 124;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 124;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -3025,19 +2915,19 @@ use namespace CoC;
 			clearOutput();
 			var soulforceamountrestored:int = 196;
 			soulforceamountrestored += (SoulforceRegeneration00() * 11);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 196;//176(20)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 196;//176(20)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 196;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 196;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -3057,19 +2947,19 @@ use namespace CoC;
 			clearOutput();
 			var soulforceamountrestored:int = 268;
 			soulforceamountrestored += (SoulforceRegeneration00() * 15);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 268;//240(28)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 268;//240(28)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 268;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 268;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -3089,19 +2979,19 @@ use namespace CoC;
 			clearOutput();
 			var soulforceamountrestored:int = 340;
 			soulforceamountrestored += (SoulforceRegeneration00() * 19);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 340;//304(36)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 340;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 340;//304(36)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 340;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 340;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -3121,19 +3011,19 @@ use namespace CoC;
 			clearOutput();
 			var soulforceamountrestored:int = 412;
 			soulforceamountrestored += (SoulforceRegeneration00() * 23);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 412;//368(44)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 412;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 412;//368(44)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 412;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 412;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -3153,19 +3043,19 @@ use namespace CoC;
 			clearOutput();
 			var soulforceamountrestored:int = 484;
 			soulforceamountrestored += (SoulforceRegeneration00() * 27);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 484;//432(52)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 484;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 484;//432(52)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 484;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 484;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -3185,19 +3075,19 @@ use namespace CoC;
 			clearOutput();
 			var soulforceamountrestored:int = 556;
 			soulforceamountrestored += (SoulforceRegeneration00() * 31);
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 556;//496(60)
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 556;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 556;//496(60)
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 556;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 556;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
@@ -3216,8 +3106,9 @@ use namespace CoC;
 		public function SoulforceGainedFromCultivation1():Number {
 			var cumulativegains:Number = 0;
 			if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
-				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
-				cumulativegains += 26;//+120% jak wszystkie 12 slotów - każdy kolejny dodany slot dodaje kolejne 10%
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+				&& player.weaponFlyingSwordsName == "training soul flying sword") {
+				cumulativegains += 28;//+130% jak wszystkie 13 slotów - każdy kolejny dodany slot dodaje kolejne 10%
 			}
 			else if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
 				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring") {
@@ -3236,6 +3127,7 @@ use namespace CoC;
 				if (player.jewelryName2 == "training soul ring") cumulativegains += 1;
 				if (player.jewelryName3 == "training soul ring") cumulativegains += 1;
 				if (player.jewelryName4 == "training soul ring") cumulativegains += 1;
+				if (player.weaponFlyingSwordsName == "training soul flying sword") cumulativegains += 1;
 			}
 			return cumulativegains;
 		}
@@ -3253,6 +3145,7 @@ use namespace CoC;
 			if (player.jewelryName2 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName3 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName4 == "training soul ring") bonussoulforce2 += 100;
+			if (player.weaponFlyingSwordsName == "training soul flying sword") bonussoulforce2 += 100;
 			if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > 0) {
 				if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2]) flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2];
 				else flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += (bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]);
@@ -3263,7 +3156,7 @@ use namespace CoC;
 			if (player.kitsuneScore() >= 5) {
 				if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
 					if (player.kitsuneScore() >= 16) {
-						if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+						if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
 							if (player.kitsuneScore() >= 26) costPercent += 1000;
 							else costPercent += 650;
 						}
@@ -3277,26 +3170,57 @@ use namespace CoC;
 				if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) costPercent += 200;
 				else costPercent += 100;
 			}
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) costPercent += 100;
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) costPercent += 150;
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) costPercent += 150;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) costPercent += 150;
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) costPercent += 200;
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) costPercent += 200;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) costPercent += 200;
-			if (player.findPerk(PerkLib.SoulKing) >= 0) costPercent += 250;
-			if (player.findPerk(PerkLib.SoulEmperor) >= 0) costPercent += 250;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) costPercent += 250;
+			if (player.hasPerk(PerkLib.DaoistCultivator)) costPercent += 100;
+			if (player.hasPerk(PerkLib.DaoistApprenticeStage)) costPercent += 100;
+			if (player.hasPerk(PerkLib.DaoistWarriorStage)) costPercent += 100;
+			if (player.hasPerk(PerkLib.DaoistElderStage)) costPercent += 100;
+			if (player.hasPerk(PerkLib.DaoistOverlordStage)) costPercent += 100;
+			if (player.hasPerk(PerkLib.DaoistTyrantStage)) costPercent += 100;
+			if (player.hasPerk(PerkLib.SoulApprentice)) costPercent += 100;
+			if (player.hasPerk(PerkLib.SoulPersonage)) costPercent += 100;
+			if (player.hasPerk(PerkLib.SoulWarrior)) costPercent += 100;
+			if (player.hasPerk(PerkLib.SoulSprite)) costPercent += 150;
+			if (player.hasPerk(PerkLib.SoulScholar)) costPercent += 150;
+			if (player.hasPerk(PerkLib.SoulElder)) costPercent += 150;
+			if (player.hasPerk(PerkLib.SoulExalt)) costPercent += 200;
+			if (player.hasPerk(PerkLib.SoulOverlord)) costPercent += 200;
+			if (player.hasPerk(PerkLib.SoulTyrant)) costPercent += 200;
+			if (player.hasPerk(PerkLib.SoulKing)) costPercent += 250;
+			if (player.hasPerk(PerkLib.SoulEmperor)) costPercent += 250;
+			if (player.hasPerk(PerkLib.SoulAncestor)) costPercent += 250;
 			mod *= costPercent/100;
 			return mod;
+		}
+		public function SoulforceRegeneration1():void {
+			clearOutput();
+			var soulforceamountrestored:int = 16;
+			soulforceamountrestored += SoulforceRegeneration00();
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
+			player.soulforce += soulforceamountrestored;
+			if (SoulforceRegenerationCompatibileTrainingItems()) {
+				var bonussoulforce:Number = 0;
+				bonussoulforce += SoulforceGainedFromCultivation1();
+				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+				SoulforceGainedFromCultivation2();
+			}
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function SelfSustain():void {
 			clearOutput();
@@ -3304,12 +3228,12 @@ use namespace CoC;
 			outputText("So what amount of your soulforce do you want to use?");
 			menu();
 			addButton(0, "V. Low", SelfSustain1).hint("Spend 50 soulforce for 10 hunger.");
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(1, "Low", SelfSustain2).hint("Spend 100 soulforce for 20 hunger.");
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(2, "Low-Med", SelfSustain3).hint("Spend 200 soulforce for 40 hunger.");
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(3, "Medium", SelfSustain4).hint("Spend 400 soulforce for 80 hunger.");
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(4, "High-Med", SelfSustain5).hint("Spend 800 soulforce for 160 hunger.");
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(5, "High", SelfSustain6).hint("Spend 1600 soulforce for 320 hunger.");
-			if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(6, "V. High", SelfSustain7).hint("Spend 3200 soulforce for 640 hunger.");
+			if (player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "Low", SelfSustain2).hint("Spend 100 soulforce for 20 hunger.");
+			if (player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "Low-Med", SelfSustain3).hint("Spend 200 soulforce for 40 hunger.");
+			if (player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "Medium", SelfSustain4).hint("Spend 400 soulforce for 80 hunger.");
+			if (player.hasPerk(PerkLib.SoulSprite)) addButton(4, "High-Med", SelfSustain5).hint("Spend 800 soulforce for 160 hunger.");
+			if (player.hasPerk(PerkLib.SoulScholar)) addButton(5, "High", SelfSustain6).hint("Spend 1600 soulforce for 320 hunger.");
+			if (player.hasPerk(PerkLib.SoulElder)) addButton(6, "V. High", SelfSustain7).hint("Spend 3200 soulforce for 640 hunger.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function SelfSustain1():void {
@@ -3430,12 +3354,12 @@ use namespace CoC;
 			outputText("So what amount of your soulforce do you want to use?");
 			menu();
 			addButton(0, "V. Low", RepresLust1).hint("Spend 40 soulforce for 20 lust.");
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(1, "Low", RepresLust2).hint("Spend 80 soulforce for 40 lust.");
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(2, "Low-med", RepresLust3).hint("Spend 200 soulforce for 100 lust.");
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(3, "Medium", RepresLust4).hint("Spend 400 soulforce for 200 lust.");
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(4, "High-Med", RepresLust5).hint("Spend 800 soulforce for 400 lust.");
-			if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(5, "High", RepresLust6).hint("Spend 1600 soulforce for 800 lust.");
-			if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(6, "V. High", RepresLust7).hint("Spend 3200 soulforce for 1600 lust.");
+			if (player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "Low", RepresLust2).hint("Spend 80 soulforce for 40 lust.");
+			if (player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "Low-med", RepresLust3).hint("Spend 200 soulforce for 100 lust.");
+			if (player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "Medium", RepresLust4).hint("Spend 400 soulforce for 200 lust.");
+			if (player.hasPerk(PerkLib.SoulSprite)) addButton(4, "High-Med", RepresLust5).hint("Spend 800 soulforce for 400 lust.");
+			if (player.hasPerk(PerkLib.SoulScholar)) addButton(5, "High", RepresLust6).hint("Spend 1600 soulforce for 800 lust.");
+			if (player.hasPerk(PerkLib.SoulElder)) addButton(6, "V. High", RepresLust7).hint("Spend 3200 soulforce for 1600 lust.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function RepresLust1():void {
@@ -3560,19 +3484,19 @@ use namespace CoC;
 		//	}You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed. - może do wykorzystania potem gdzieś?
 		//	else {
 				addButton(0, "100", Covert100Soulforce).hint("Convert 100 soulforce to 100 mana.");
-				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, "200", Covert200Soulforce).hint("Convert 200 soulforce to 200 mana.");
-				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(2, "500", Covert500Soulforce).hint("Convert 500 soulforce to 500 mana.");
-				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(3, "1000", Covert1000Soulforce).hint("Convert 1000 soulforce to 1000 mana.");
-				if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(4, "2000", Covert2000Soulforce).hint("Convert 2000 soulforce to 2000 mana.");
+				if (player.hasPerk(PerkLib.SoulPersonage)) addButton(1, "200", Covert200Soulforce).hint("Convert 200 soulforce to 200 mana.");
+				if (player.hasPerk(PerkLib.SoulWarrior)) addButton(2, "500", Covert500Soulforce).hint("Convert 500 soulforce to 500 mana.");
+				if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "1000", Covert1000Soulforce).hint("Convert 1000 soulforce to 1000 mana.");
+				if (player.hasPerk(PerkLib.SoulScholar)) addButton(4, "2000", Covert2000Soulforce).hint("Convert 2000 soulforce to 2000 mana.");
 				addButton(5, "100", Covert100Mana).hint("Convert 100 mana to 50 soulforce.");
-				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(6, "200", Covert200Mana).hint("Convert 200 mana to 100 soulforce.");
-				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(7, "500", Covert500Mana).hint("Convert 500 mana to 250 soulforce.");
-				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(8, "1000", Covert1000Mana).hint("Convert 1000 mana to 500 soulforce.");
-				if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(9, "2000", Covert2000Mana).hint("Convert 2000 mana to 1000 soulforce.");
-				if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(10, "5000", Covert5000Soulforce).hint("Convert 5000 soulforce to 5000 mana.");
-				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(11, "10000", Covert10000Soulforce).hint("Convert 10000 soulforce to 10000 mana.");
-				if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(12, "5000", Covert5000Mana).hint("Convert 5000 mana to 2500 soulforce.");
-				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(13, "10000", Covert10000Mana).hint("Convert 10000 mana to 5000 soulforce.");
+				if (player.hasPerk(PerkLib.SoulPersonage)) addButton(6, "200", Covert200Mana).hint("Convert 200 mana to 100 soulforce.");
+				if (player.hasPerk(PerkLib.SoulWarrior)) addButton(7, "500", Covert500Mana).hint("Convert 500 mana to 250 soulforce.");
+				if (player.hasPerk(PerkLib.SoulSprite)) addButton(8, "1000", Covert1000Mana).hint("Convert 1000 mana to 500 soulforce.");
+				if (player.hasPerk(PerkLib.SoulScholar)) addButton(9, "2000", Covert2000Mana).hint("Convert 2000 mana to 1000 soulforce.");
+				if (player.hasPerk(PerkLib.SoulElder)) addButton(10, "5000", Covert5000Soulforce).hint("Convert 5000 soulforce to 5000 mana.");
+				if (player.hasPerk(PerkLib.SoulExalt)) addButton(11, "10000", Covert10000Soulforce).hint("Convert 10000 soulforce to 10000 mana.");
+				if (player.hasPerk(PerkLib.SoulElder)) addButton(12, "5000", Covert5000Mana).hint("Convert 5000 mana to 2500 soulforce.");
+				if (player.hasPerk(PerkLib.SoulExalt)) addButton(13, "10000", Covert10000Mana).hint("Convert 10000 mana to 5000 soulforce.");
 				addButton(14, "Back", accessSoulforceMenu);
 		//	}
 		}
@@ -3806,15 +3730,15 @@ use namespace CoC;
 			outputText("So what amount of your soulforce do you want to use?");
 			menu();
 			addButton(0, "V. Low", CorrDrop1).hint("Spend 100 soulforce for lowering corruption by 1.");
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(1, "Low", CorrDrop2).hint("Spend 200 soulforce for lowering corruption by 2.");
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(2, "Medium", CorrDrop3).hint("Spend 500 soulforce for lowering corruption by 5.");
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(3, "High", CorrDrop4).hint("Spend 1000 soulforce for lowering corruption by 10.");
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(4, "V. High", CorrDrop5).hint("Spend 2000 soulforce for lowering corruption by 20.");
+			if (player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "Low", CorrDrop2).hint("Spend 200 soulforce for lowering corruption by 2.");
+			if (player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "Medium", CorrDrop3).hint("Spend 500 soulforce for lowering corruption by 5.");
+			if (player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "High", CorrDrop4).hint("Spend 1000 soulforce for lowering corruption by 10.");
+			if (player.hasPerk(PerkLib.SoulSprite)) addButton(4, "V. High", CorrDrop5).hint("Spend 2000 soulforce for lowering corruption by 20.");
 			addButton(5, "V. Low", CorrRise1).hint("Spend 50 soulforce for rising corruption by 1.");
-			if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(6, "Low", CorrRise2).hint("Spend 100 soulforce for rising corruption by 2.");
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(7, "Medium", CorrRise3).hint("Spend 250 soulforce for rising corruption by 5.");
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(8, "High", CorrRise4).hint("Spend 500 soulforce for rising corruption by 10.");
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(9, "V. High", CorrRise5).hint("Spend 1000 soulforce for rising corruption by 20.");
+			if (player.hasPerk(PerkLib.SoulApprentice)) addButton(6, "Low", CorrRise2).hint("Spend 100 soulforce for rising corruption by 2.");
+			if (player.hasPerk(PerkLib.SoulPersonage)) addButton(7, "Medium", CorrRise3).hint("Spend 250 soulforce for rising corruption by 5.");
+			if (player.hasPerk(PerkLib.SoulWarrior)) addButton(8, "High", CorrRise4).hint("Spend 500 soulforce for rising corruption by 10.");
+			if (player.hasPerk(PerkLib.SoulSprite)) addButton(9, "V. High", CorrRise5).hint("Spend 1000 soulforce for rising corruption by 20.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function CorrDrop1():void {
@@ -4103,6 +4027,36 @@ use namespace CoC;
 				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
+		}
+		private function canfaceTribulation():Boolean {
+			if ((player.level >= 24 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
+				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
+				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
+			else return false;
+		}
+		public function tribulationsPrompt():void {
+			clearOutput();
+			outputText("Something within you speaks. You can sense that you’ve nearly reached the pinnacle of cultivation as a Soul ");
+			if (player.level >= 60 && !player.hasPerk(PerkLib.SoulKing)) outputText("Tyrant");
+			else if (player.level >= 42 && !player.hasPerk(PerkLib.SoulExalt)) outputText("Elder");
+			else outputText("Warrior");
+			outputText(". Now, only a tiny step is needed to advance further.");
+			outputText("\n\nThough, you pause. It’s a feeling so close, yet so far. Do you progress your skills naturally, or push for the goal that you’ve worked so hard to achieve.");
+			menu();
+			addButton(1, "No", tribulationsPromptNo);
+			addButton(3, "Yes", tribulationsPromptYes);
+		}
+		public function tribulationsPromptYes():void {
+			clearOutput();
+			outputText("There’s no use in delaying the inevitable. You do not fear the tribulation, you know you’re ready.");
+			outputText("\n\nYou know it’s time to give it your all. With determination and force of will, you cannot fail.");
+			player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
+			doNext(playerMenu);
+		}
+		public function tribulationsPromptNo():void {
+			clearOutput();
+			outputText("As you pause, you know it’s not time yet. You can suppress your soulforce until it’s time for the tribulation to descend. Hopefully, then you’ll be ready.");
+			doNext(accessSoulforceMenu);
 		}
 	}
 }

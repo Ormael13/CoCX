@@ -35,9 +35,8 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n\n");
 		describeFaceShape();
 		outputText(" It has " + player.faceDesc() + "."); //M/F stuff!
-		describeEyes();
 		describeHairAndEars();
-		describeHairStyle();
+		describeEyes();
 		describeBeard();
 		describeTongue();
 		describeHorns();
@@ -252,27 +251,11 @@ public class PlayerAppearance extends BaseContent {
 		outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n");
 	}
 	//Crotchial stuff - mention scylla
-	if(player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
-		if(player.gender == 1)
-		{
-			outputText("\nYour sex is concealed between your front octopus tentacle legs dangling freely when not in use.\n");
-		}
-		if(player.gender == 2)
-		{
-			outputText("\nYour sex is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal your true self.\n");
-		}
-		if(player.gender == 3)
-		{
-			outputText("\nYour sex");
-			if(player.cockTotal() > 1)
-				outputText("es are ");
-			else outputText(" is ");
-			outputText("concealed between your front octopus tentacle legs dangling freely. Other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.\n");
-		}
+	var crotchDesc: String = LowerBody.getCrotchDescription(player);
+	if (crotchDesc) {
+		outputText("\n" + crotchDesc + "\n");
 	}
-	if(player.lowerBody == LowerBody.MELKIE) {
-		outputText("\nYou have a outer set of vaginal lips at the junction between your human body and seal tail in which your internal sex and human legs are hidden when not in use\n");
-	}
+
 	//Cock stuff!
 	if (player.hasCock()) {
 		rando = rand(100);
@@ -355,8 +338,10 @@ public class PlayerAppearance extends BaseContent {
 		//Worm flavor
 		if (player.hasStatusEffect(StatusEffects.Infested)) outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n");
 	}
+
 	//Of Balls and Sacks!
 	if(player.balls > 0) {
+		outputText("\n");
 		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
 			if(player.skinType != Skin.GOO) outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
@@ -364,24 +349,24 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else {
 			var sdesc:String;
-			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoo";
-			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoo";
+			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoos";
+			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoos";
 			else if (player.skin.hasLightningShapedTattoo()) sdesc = " covered with a few glowing lightning tattoos";
 			else if (player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
 			else if (player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
 			else if (player.skin.hasScarShapedTattoo()) sdesc = " covered by scar tattoos";
-			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous marking";
+			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous markings";
 			else if (player.skin.hasWhiteBlackVeins()) sdesc = " covered by [base.color2] veins";
 			else sdesc = "";
 			var swingsWhere:String;
 			if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
 			else swingsWhere = " under your [cocks].";
 			if (player.hasPlainSkinOnly() || player.hasRubberSkin()) outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
-			else if (player.hasFur()) outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
-			else if (player.hasCoatOfType(Skin.CHITIN)) outputText("A chitin [sack] hugs your [balls] tightly against your body.");
-			else if (player.hasScales()) outputText("A scaly [sack] hugs your [balls] tightly against your body.");
-			else if (player.skinType == Skin.STONE) outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
-			else if (player.skinType == Skin.GOO) outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
+			else if (player.hasFur()) outputText("A fuzzy [sack]" + sdesc + "  filled with [balls] swings low" + swingsWhere);
+			else if (player.hasCoatOfType(Skin.CHITIN)) outputText("A chitin [sack]" + sdesc + "  hugs your [balls] tightly against your body.");
+			else if (player.hasScales()) outputText("A scaly [sack]" + sdesc + "  hugs your [balls] tightly against your body.");
+			else if (player.skinType == Skin.STONE) outputText("A stone-solid sack" + sdesc + "  with [balls] swings heavily" + swingsWhere);
+			else if (player.skinType == Skin.GOO) outputText("An oozing, semi-solid sack" + sdesc + "  with [balls] swings heavily" + swingsWhere);
 		}
 
 		outputText(" You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
@@ -392,6 +377,7 @@ public class PlayerAppearance extends BaseContent {
 		//Worms extra descript. To match as seen in infested hellhounds.
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Across it's surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.\n")
 	} else {
+		outputText("\n");
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.\n")
 	}
 	//VAGOOZ
@@ -399,7 +385,7 @@ public class PlayerAppearance extends BaseContent {
 	if (player.vaginas.length > 0){
 		var vagLoop:int = 0
 		var clitExists:int = 0
-		if((player.gender == 2 || player.gender == 3) && player.isTaur() && player.lowerBody != 26)//26 is scylla.
+		if((player.gender == 2 || player.gender == 3) && player.isTaur() && !player.isScylla())
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 		if((player.gender == 2 || player.gender == 3) && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
@@ -448,8 +434,8 @@ public class PlayerAppearance extends BaseContent {
 					outputText(", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. Your dexterous, cum-hungry twat hides a ");
 					break;
 				case VaginaClass.NAGA:
-					outputText(" is deep and wide enought to insert your entire arm lenght inside and some more. Sometime you lament that most of your partners are no longer big enough to satisfy you");
-					if (player.lowerBody == LowerBody.NAGA) outputText("as your hot spot is now way further inside your lenghtly canal requiring quite a longer member to reach");
+					outputText(" is deep and wide enough to insert your entire arm length inside and some more. Sometimes you lament that most of your partners are no longer big enough to satisfy you");
+					if (player.isNaga()) outputText("as your hot spot is now way further inside your deep canal, requiring quite a longer member to reach");
 							outputText(". Inside you have a ");
 					break;
 				default:
@@ -670,9 +656,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your skin is also covered in various place with "+player.skin.base.adj+".");
 		}
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
-		if (player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of a sea dragon. Your underbelly is also lined up with bioluminescent dots like those of a deep sea fish.\n");
+		if (player.skin.base.pattern == Skin.PATTERN_SEA_DRAGON_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of a sea dragon. Your underbelly is also lined up with bioluminescent dots like those of a deep sea fish.\n");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
-		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_ONNA_TATTOO) outputText(" You have strange ushi oni-onna tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
+		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_TATTOO) outputText(" You have strange ushi-oni tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
 	}
 
 	public function describeGear():void {
@@ -703,9 +689,10 @@ public class PlayerAppearance extends BaseContent {
 		}
 		outputText("</b>");
 	}
+
 	public function describeRace():void {
 		// story.display("race");
-//Discuss race
+		//Discuss race
 		if (player.race() != player.startingRace) outputText("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm. ");
 		//Height and race.
 		outputText("You are a ");
@@ -723,30 +710,11 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" tall [race], with [bodytype].");
 		}
 	}
+
 	public function describeLowerBody():void {
-		const lowerBodyOpts:Object = {
-			id: player.lowerBody,
-			legCount: num2Text(player.legCount),
-			legCountMinusTwo: num2Text(player.legCount - 2),
-			doubleHeight: Measurements.footInchOrMetres(player.tallness * 2),
-			quadrupleHeight: Measurements.footInchOrMetres(player.tallness * 4),
-			hydraHeads: num2Text(player.statusEffectv1(StatusEffects.HydraTailsPlayer)),
-			gargoyleMaterial: getGargoyleMaterial()
-		};
 
-		//LOWERBODY DESCRIPTION
-		outputText(LowerBody.getAppearanceDescription(lowerBodyOpts));
-		if (player.isBiped()) {
-			outputText(LowerBody.getAppearanceDescriptionBiped(lowerBodyOpts));
-		} else if (player.isTaur()) {
-			outputText(LowerBody.getAppearanceDescriptionTaur(lowerBodyOpts));
-		} else if (player.isDrider()) {
-			outputText(LowerBody.getAppearanceDescriptionDrider(lowerBodyOpts));
-		}
-
-		// Special cases
-		if (player.lowerBody == LowerBody.FROSTWYRM && player.tallness > 120)
-			outputText(" Your body is so large it's no wonder your passage underground can cause tremors.");
+		outputText("\n\n");
+		outputText(LowerBody.getAppearanceDescription(player));
 
 		//Hip info only displays if you aren't a centaur.
 		if (player.isBiped() || player.isNaga()) {
@@ -888,190 +856,16 @@ public class PlayerAppearance extends BaseContent {
 		}
 
 		//TAILS
+		outputText("\n\n");
 		describeTail();
 	}
 
 	public function describeTail():void {
-		if (player.tailType == Tail.HORSE)
-			outputText(" A long [skin coat.color] horsetail hangs from your " + buttDescript() + ", smooth and shiny.");
-		if (player.tailType == Tail.FERRET)
-			outputText(" A long ferret tail sprouts from above your [butt]. It is thin, tapered, and covered in shaggy [skin coat.color] fur.");
-		if (player.tailType == Tail.DOG)
-			outputText(" A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.");
-		if (player.tailType == Tail.DEMONIC)
-			outputText(" A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your [leg] sensually at every opportunity.");
-		if (player.tailType == Tail.COW)
-			outputText(" A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
-		if (player.tailType == Tail.SPIDER_ADBOMEN) {
-			outputText(" A large, spherical spider-abdomen has grown out from your backside, covered in shiny [skin coat.color] chitin. Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
-			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
-				outputText(" Your bulging arachnid posterior feels fairly full of webbing.");
-			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
-				outputText(" Your arachnid rear bulges and feels very full of webbing.");
-			if (player.tailVenom == player.maxVenom())
-				outputText(" Your swollen spider-butt is distended with the sheer amount of webbing it's holding.");
-		}
-		if (player.tailType == Tail.BEE_ABDOMEN) {
-			outputText(" A large insectile bee-abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard chitin with black and yellow stripes, and tipped with a dagger-like stinger.");
-			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
-				outputText(" A single drop of poison hangs from your exposed stinger.");
-			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
-				outputText(" Poisonous bee venom coats your stinger completely.");
-			if (player.tailVenom == player.maxVenom())
-				outputText(" Venom drips from your poisoned stinger regularly.");
-		}
-		if (player.tailType == Tail.SCORPION) {
-			outputText(" A large insectile scorpion-like tail dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard chitin and tipped with a stinger.");
-			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
-				outputText(" A single drop of poison hangs from your exposed stinger.");
-			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
-				outputText(" Poisonous bee venom coats your stinger completely.");
-			if (player.tailVenom == player.maxVenom())
-				outputText(" Venom drips from your poisoned stinger regularly.");
-		}
-		if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-			outputText(" Your tail is covered in armored chitin from the base to the tip, it ends in a flower-like bulb. You can open and close your tail tip at will and its pussy-like interior can be used to milk male organs. ");
-			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.");
-		}
-		if (player.tailType == Tail.MANTIS_ABDOMEN)
-			outputText(" A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [skin coat.color]ish chitinous material.");
-		if (player.tailType == Tail.SHARK) {
-			outputText(" A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
-		}
-		if (player.tailType == Tail.CAT) {
-			if (player.tailCount <= 1) outputText(" A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
-			else outputText(" Pair of soft [skin coat.color] cat-tails sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
-		}
-		if (player.tailType == Tail.NEKOMATA_FORKED_1_3) {
-			outputText(" A soft [skin coat.color] forked on its one third length cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
-		}
-		if (player.tailType == Tail.NEKOMATA_FORKED_2_3) {
-			outputText(" A soft [skin coat.color] forked on its two thirds length cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
-		}
-		if (player.tailType == Tail.LIZARD) {
-			outputText(" A tapered tail hangs down from just above your " + assDescript() + ". It sways back and forth, assisting you with keeping your balance.");
-		}
-		if (player.tailType == Tail.SALAMANDER) {
-			outputText(" A tapered, covered in red scales tail hangs down from just above your " + assDescript() + ". It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.");
-		}
-		if (player.tailType == Tail.CAVE_WYRM) {
-			outputText(" A large newt tail trails down from your " + buttDescript() + ", tapering on the ground behind you. While it is heavy and plump, it can allow you to swim underwater like any fish if necessary, just like a newt.");
-		}
-		if (player.tailType == Tail.RABBIT)
-			outputText(" A short, soft bunny tail sprouts just above your " + assDescript() + ", twitching constantly whenever you don't think about it.");
-		else if (player.tailType == Tail.HARPY)
-			outputText(" A tail of feathers fans out from just above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
-		else if (player.tailType == Tail.KANGAROO) {
-			outputText(" A conical, ");
-			if (player.hasFur()) outputText("furry, " + player.coatColor);
-			else outputText("gooey, " + player.skinTone);
-			outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.");
-		}
-		else if (player.tailType == Tail.FOX) {
-			if (player.tailCount <= 1)
-				outputText(" A swishing [skin coat.color] fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
-			else outputText(" " + Num2Text(player.tailCount) + " swishing [skin coat.color] fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
-		}
-		else if (player.tailType == Tail.DRACONIC) {
-			outputText(" A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip. Its tip menaces with spikes of bone, meant to deliver painful blows.");
-		}
-		//appearance
-		else if (player.tailType == Tail.RACCOON) {
-			outputText(" A black-and-[skin coat.color]-ringed raccoon tail waves behind you.");
-		}
-		else if (player.tailType == Tail.MOUSE) {
-			//appearance
-			outputText(" A naked, " + player.skinTone + " mouse tail pokes from your butt, dragging on the ground and twitching occasionally.");
-		}
-		//<mod>
-		else if (player.tailType == Tail.BEHEMOTH) {
-			outputText(" A long seemingly-tapering tail pokes from your butt, ending in spikes just like behemoth's.");
-		}
-		else if (player.tailType == Tail.PIG) {
-			outputText(" A short, curly pig tail sprouts from just above your butt.");
-		}
-		else if (player.tailType == Tail.GOAT) {
-			outputText(" A very short, stubby goat tail sprouts from just above your butt.");
-		}
-		else if (player.tailType == Tail.RHINO) {
-			outputText(" A ropey rhino tail sprouts from just above your butt, swishing from time to time.");
-		}
-		else if (player.tailType == Tail.ECHIDNA) {
-			outputText(" A stumpy echidna tail forms just about your [ass].");
-		}
-		else if (player.tailType == Tail.DEER) {
-			outputText(" A very short, stubby deer tail sprouts from just above your butt.");
-		}
-		else if (player.tailType == Tail.WOLF) {
-			outputText(" A bushy [skin coat.color] wolf tail sprouts just above your " + assDescript() + ", wagging to and fro whenever you are happy.");
-		}
-		else if (player.tailType == Tail.GARGOYLE) {
-			outputText(" A long spiked tail hangs down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
-		}
-		else if (player.tailType == Tail.GARGOYLE_2) {
-			outputText(" A long tail ending with an axe blade on both sides hangs down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
-		}
-		else if (player.tailType == Tail.ORCA) {
-			outputText(" A long, powerful Orca tail trails down from your backside, swaying to and fro, always ready to propulse you through the water or smack an opponent on the head. It has a huge fin at the end and a smaller one not so far from your ass.");
-		}
-		else if (player.tailType == Tail.YGGDRASIL) {
-			outputText(" A thin prehensile reptilian tail swings behind, covered by [skin coat]. Adorning the tip of your tail is a leaf, bobbing with each of your tail’s movements.");
-		}
-		else if (player.tailType == Tail.RAIJU) {
-			outputText(" Your silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch and almost glows at the tip, letting others know of your lightning based motif.");
-		}
-		else if (player.tailType == Tail.WEASEL) {
-			outputText(" Your short silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch.");
-		}
-		else if (player.tailType == Tail.RED_PANDA) {
-			outputText(" Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
-		}
-		else if(player.tailType == Tail.LION) {
-			outputText(" A soft [skin coat.color] cat-tail sprouts just above your " + assDescript() + ", curling and twisting with every step to maintain perfect balance. It ends with a small puffy hair balls like that of a lion.");
-		}
-		else if (player.tailType == Tail.AVIAN) {
-			outputText(" A tail shaped like a fan of long, [skin coat.color] feathers rests above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
-		}
-		else if (player.tailType == Tail.GRIFFIN) {
-			outputText(" From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [skin coat.color2] fur with a tip made of a tuft of [skin coat.color] colored feathers. It moves sinuously as you walk.");
-		}
-		else if(player.tailType == Tail.BURNING) {
-			outputText(" A blazing cat tail pokes out from your " + assDescript() + ". It has a tendency to light things on fire if you are not careful but at least it assists with your balance.");
-		}
-		else if(player.tailType == Tail.TWINKASHA) {
-			outputText(" A pair blazing cat tail pokes out from your " + assDescript() + ". They have a tendency to light things on fire if you are not careful but at least they assists with your balance. From these tails you draw in tremendous fell power.");
-		}
-		else if(player.tailType == Tail.HINEZUMI) {
-			outputText(" A blazing, " + player.skinTone + " mouse tail pokes out from your " + assDescript() + ". It has a tendency to light things on fire if you are not careful.");
-		}
-		else if(player.tailType == Tail.THUNDERBIRD) {
-			outputText(" From just above your " + assDescript() + " extend a long thin sinuous tail tipped with feathers which are shaped like a lightning bolt.");
-		}
-		else if(player.tailType == Tail.BEAR) {
-			outputText(" A cute, furry ursan tail sits up from your backside.");
-		}
-		else if(player.lowerBody == LowerBody.CANCER) {
-			outputText(" On the front of your crab half, covering your privates, is a set of chitinous mandibula covered in feelers, constantly chittering and foaming with your drooling fluids.");
-		}
-		else if(player.tailType == Tail.USHI_ONI_ONNA) {
-			outputText(" You have an Ushi-"+player.mf("oni","onna")+" tail, the furred member is "+(player.tallness > 72 ? "5":"4")+" feet long and prehensile, the tip can shoot web string that are very thick and strong, and produce an arousing substance when in contact with the victim.");
-		}
-		else if(player.tailType == Tail.SQUIRREL) {
-			outputText(" At your back is a big long striped furry tail that curves up like that of a squirrel.");
-		}
-		else if(player.tailType == Tail.WENDIGO) {
-			outputText(" Your silky tail extends out from just above your ass. Its fur is lovely to the touch and warm. It protects you well against the cold.");
-		}
+		outputText(Tail.getAppearanceDescription(player));
 	}
 
 	public function describeArms():void {
-		const armsOpts:Object = {
-			id: player.arms.type,
-			skinTone: player.skinTone,
-			gargoyleMaterial: getGargoyleMaterial()
-		};
-
-		outputText(Arms.getAppearanceDescription(armsOpts));
+		outputText(Arms.getAppearanceDescription(player));
 	}
 
 	public function describeRearBody():void {
@@ -1134,7 +928,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	public function describeWings():void {
-	//WINGS!
+		//WINGS!
 		var wingType:Number = player.wings.type;
 		if (wingType == Wings.BEE_LIKE_SMALL)
 			outputText(" A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");
@@ -1185,7 +979,7 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.VAMPIRE){
 			outputText(" Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");
 		}
-		if (wingType == Wings.FEY_DRAGON_WINGS){
+		if (wingType == Wings.FEY_DRAGON){
 			outputText(" Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone. While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.");
 		}
 		if (wingType == Wings.FEATHERED_AVIAN){
@@ -1194,7 +988,7 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.NIGHTMARE){
 			outputText(" A pair of large ominous black leathery wings expand from your back. You can open them wide to soar high in the sky.");
 		}
-		if (wingType == Wings.ETHEREAL_WINGS){
+		if (wingType == Wings.ETHEREAL){
 			outputText(" Three pairs of otherworldly tendrils grow out of your back. They have an ethereal glow around them and they gently sway against an invisible wind.");
 		}
 		if (wingType == Wings.THUNDEROUS_AURA){
@@ -1209,12 +1003,11 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.FAIRY){
 			outputText(" A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
 		}
-		if (wingType == Wings.SEADRAGON){
+		if (wingType == Wings.SEA_DRAGON){
 			outputText(" Two large majestic webbed wings not unlike the aquatic flippers of a deep-sea creature unfurls from your back, the interior lined with bright color patterns and bioluminescent specks that change depending on your mood. These wings are as good to fly as they are to swim.");
 		}
 	}
 	public function describeHorns():void {
-//Horns
 		//Demonic horns
 		if (player.horns.type == Horns.DEMON) {
 			if (player.horns.count == 2)
@@ -1249,7 +1042,7 @@ public class PlayerAppearance extends BaseContent {
 		//Frost wyrm Horns
 		if (player.horns.type == Horns.FROSTWYRM){
 			outputText(" Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great");
-			if (player.lowerBody == LowerBody.FROSTWYRM) outputText(" especially with your fur which makes you look like a sheep serpantine dragon");
+			if (player.lowerBody == LowerBody.FROSTWYRM) outputText(", especially with your fur, which makes you look like a sheep serpantine dragon");
 			outputText(".");
 		}
 		//Antlers!
@@ -1269,7 +1062,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.horns.type == Horns.RHINO) {
 			if (player.horns.count >= 2) {
-				if (player.faceType == Face.RHINO)
+				if (CoC.instance.transformations.FaceRhino.isPresent())
 					outputText(" A second horns sprouts from your forehead just above the horns on your nose.");
 				else
 					outputText(" A single horns sprouts from your forehead. It is conical and resembles a rhino's horns.");
@@ -1314,7 +1107,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.horns.type == Horns.ORCHID) {
 			if (player.horns.count > 0)
-				outputText(" A huge pair of "+player.NakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
+				outputText(" A huge pair of "+player.nakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
 		}
 		if (player.horns.type == Horns.ONI_X2) {
 			if (player.horns.count > 0)
@@ -1336,17 +1129,16 @@ public class PlayerAppearance extends BaseContent {
 			if (player.horns.count > 0)
 				outputText(" Crowning above your head is a fleshy Kraken hood easily adding you a few extra inch in height.\n");
 		}
-		if (player.horns.type == Horns.USHI_ONI_ONNA) {
+		if (player.horns.type == Horns.USHI_ONI) {
 			if (player.horns.count > 0)
 				outputText(" You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
 		}
-		if (player.horns.type == Horns.SEADRAGON) {
+		if (player.horns.type == Horns.SEA_DRAGON) {
 			if (player.horns.count > 0)
 				outputText(" Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.\n");
 		}
 	}
 	public function describeTongue():void {
-//Tongue
 		if (player.tongue.type == Tongue.SNAKE)
 			outputText(" A snake-like tongue occasionally flits between your lips, tasting the air.");
 		else if (player.tongue.type == Tongue.DEMONIC)
@@ -1373,7 +1165,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" You constantly hunger for food and your ravenous tongue has gained some unnatural skills of its own, always ready to coax a penis or a pussy into cumming.");
 	}
 	public function describeBeard():void {
-//Beards!
+		//Beards!
 		if (player.beardLength > 0) {
 			outputText(" You have a " + beardDescript() + " ");
 			if (player.beardStyle != Beard.GOATEE) {
@@ -1389,11 +1181,11 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeEyes():void {
 		var eyeType:Number = player.eyes.type;
-		if(eyeType == Eyes.FOUR_SPIDER_EYES)
+		if(eyeType == Eyes.SPIDER)
 			outputText(" In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead.");
 		else if(eyeType == Eyes.BLACK_EYES_SAND_TRAP)
 			outputText(" Your eyes are solid spheres of inky, alien darkness.");
-		else if(eyeType == Eyes.CAT_SLITS)
+		else if(eyeType == Eyes.CAT)
 			outputText(" Your [eyecolor] eyes have vertically slit like those of cat.");
 		else if(eyeType == Eyes.CANCER)
 			outputText(" Your eyes look human at first glance, save for their natural [eyecolor] irises covered by a completely transparent layer of protective tissue to protect them against things such as salt and sand in the water.");
@@ -1407,11 +1199,11 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your [eyecolor] eyes looks like those of a fox with a slit in the middle.");
 		else if(eyeType == Eyes.FIENDISH)
 			outputText(" Your [eyecolor] eyes looks like those of a fiend with a slit in the middle.");
-		else if(eyeType == Eyes.REPTILIAN)
+		else if(eyeType == Eyes.LIZARD)
 			outputText(" Your eyes looks like those of a reptile with [eyecolor] irises and a slit.");
 		else if(eyeType == Eyes.SNAKE)
 			outputText(" Your [eyecolor] eyes have slitted pupils like that of a snake.");
-		else if(eyeType == Eyes.DRAGON)
+		else if(eyeType == Eyes.DRACONIC)
 			outputText(" Your [eyecolor] eyes have slitted pupils like that of a dragon.");
 		else if(player.eyes.type == Eyes.DEVIL)
 			outputText(" Your eyes look fiendish, with their black sclera and glowing [eyecolor] iris.");
@@ -1483,7 +1275,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GREMLIN){
 			outputText(" Your [eyecolor] eyes looks human enough though your eyelids are dark, just as if you very tired althought it's more likely traces of your demonic corruption.");
 		}
-		else if(eyeType == Eyes.DEAD_EYES){
+		else if(eyeType == Eyes.DEAD){
 			outputText(" Your eyes look dead, but the pupils glow in the dark with a [eyecolor].");
 		}
 		else outputText(" Your eyes are [eyecolor].");
@@ -1491,12 +1283,14 @@ public class PlayerAppearance extends BaseContent {
 	public function describeHairAndEars():void {
 		//if bald
 		var earType:Number = player.ears.type;
-		if(player.hairLength == 0)
-		{
+
+		outputText("\n\n" + Hair.getAppearanceDescription(player));
+
+		if(player.hairLength == 0) {
 			if(player.skinType == Skin.FUR)
 				outputText(" You have no hair, only a thin layer of fur atop of your head. ");
 			else {
-				outputText(" You are totally bald, showing only shiny " + player.skinTone + " [skin.type]");
+				outputText(" You are totally bald, showing only shiny [skintone] [skin.type]");
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
 				else if (player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
 				else if (player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
@@ -1513,7 +1307,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.DOG)
 				outputText(" A pair of dog ears protrude from your skull, flopping down adorably.");
 			else if(earType == Ears.COW)
-				outputText(" A pair of round, " + player.hairColor + " floppy cow ears protrude from the sides of your skull.");
+				outputText(" A pair of round, [haircolor] floppy cow ears protrude from the sides of your skull.");
 			else if(earType == Ears.ELFIN)
 				outputText(" A pair of large pointy ears stick out from your skull.");
 			else if(earType == Ears.SHARK)
@@ -1620,107 +1414,105 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
 			if(player.antennae.type == Antennae.CENTIPEDE)
 				outputText(" A pair of long antennae have grown just behind your hairline. They occasionally curl and twitch at the slightest of movements.");
-			if(player.antennae.type == Antennae.SEADRAGON)
+			if(player.antennae.type == Antennae.SEA_DRAGON)
 				outputText(" Just below your ears are four bioluminescent strands that run down your neck, beautifully lighting up your front and giving you an air of mystique.");
 		}
 		//not bald
-		else
-		{
+		else {
 			if(earType == Ears.HUMAN)
-				outputText(" Your [hairlongdesc] looks good on you, accentuating your features well.");
+				outputText(" Your [hairshortdesc] looks good on you, accentuating your features well.");
 			else if(earType == Ears.FERRET)
-				outputText(" A pair of small, rounded ferret ears burst through the top of your [hairlongdesc].");
+				outputText(" A pair of small, rounded ferret ears burst through the top of your [hairshortdesc].");
 			else if(earType == Ears.HORSE)
-				outputText(" The [hairlongdesc] on your head parts around a pair of very horse-like ears that grow up from your head.");
+				outputText(" The [hairshortdesc] on your head parts around a pair of very horse-like ears that grow up from your head.");
 			else if(earType == Ears.DOG)
-				outputText(" The [hairlongdesc] on your head is overlapped by a pair of pointed dog ears.");
+				outputText(" The [hairshortdesc] on your head is overlapped by a pair of pointed dog ears.");
 			else if(earType == Ears.COW)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of " + player.hairColor + " rounded cow ears that stick out sideways.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of [haircolor] rounded cow ears that stick out sideways.");
 			else if(earType == Ears.ELFIN)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
 			else if(earType == Ears.CAT)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
 			else if(earType == Ears.LIZARD)
-				outputText(" The [hairlongdesc] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
+				outputText(" The [hairshortdesc] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
 			else if(earType == Ears.BUNNY)
-				outputText(" A pair of floppy rabbit ears stick up out of your [hairlongdesc], bouncing around as you walk.");
+				outputText(" A pair of floppy rabbit ears stick up out of your [hairshortdesc], bouncing around as you walk.");
 			else if(earType == Ears.KANGAROO)
-				outputText(" The [hairlongdesc] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
+				outputText(" The [hairshortdesc] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
 			else if(earType == Ears.FOX)
-				outputText(" The [hairlongdesc] atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
+				outputText(" The [hairshortdesc] atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
 			else if(earType == Ears.DRAGON)
-				outputText(" The [hairlongdesc] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears. Bony fins sprout behind them.");
+				outputText(" The [hairshortdesc] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears. Bony fins sprout behind them.");
 			else if(earType == Ears.RACCOON)
-				outputText(" The [hairlongdesc] on your head parts around a pair of egg-shaped, furry raccoon ears.");
+				outputText(" The [hairshortdesc] on your head parts around a pair of egg-shaped, furry raccoon ears.");
 			else if(earType == Ears.MOUSE)
-				outputText(" The [hairlongdesc] atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
+				outputText(" The [hairshortdesc] atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
 			else if(earType == Ears.PIG)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
 			else if(earType == Ears.RHINO)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of tubular rhino ears.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of tubular rhino ears.");
 			else if (earType == Ears.SQUIRREL)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of sideways round squirrel ears that flick toward every slight sound.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of sideways round squirrel ears that flick toward every slight sound.");
 			else if(earType == Ears.ECHIDNA)
-				outputText(" Your [hairlongdesc] makes it near-impossible to see the small, rounded openings that are your ears.");
+				outputText(" Your [hairshortdesc] makes it near-impossible to see the small, rounded openings that are your ears.");
 			else if(earType == Ears.DEER)
-				outputText(" The [hairlongdesc] on your head parts around a pair of deer-like ears that grow up from your head.");
+				outputText(" The [hairshortdesc] on your head parts around a pair of deer-like ears that grow up from your head.");
 			else if(earType == Ears.WOLF)
-				outputText(" The [hairlongdesc] on your head is overlapped by a pair of pointed wolf ears.");
+				outputText(" The [hairshortdesc] on your head is overlapped by a pair of pointed wolf ears.");
 			else if(earType == Ears.LION)
-				outputText(" The [hairlongdesc] is parted by a pair of lion ears that listen to every sound.");
+				outputText(" The [hairshortdesc] is parted by a pair of lion ears that listen to every sound.");
 			else if(earType == Ears.YETI)
-				outputText(" The [hairlongdesc] is parted by a pair of yeti ears, bigger than your old human ones.");
+				outputText(" The [hairshortdesc] is parted by a pair of yeti ears, bigger than your old human ones.");
 			else if(earType == Ears.ORCA)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.");
 			else if(earType == Ears.SNAKE)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
 			else if(earType == Ears.GOAT)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of ears looking similar to those of a goat, flapping from time to time in response to sounds.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of ears looking similar to those of a goat, flapping from time to time in response to sounds.");
 			else if(earType == Ears.ONI)
-				outputText(" The [hairlongdesc] on your head is parted by a pair of pointed elf-like oni ears.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of pointed elf-like oni ears.");
 			else if(earType == Ears.ELVEN) {
-				outputText(" The [hairlongdesc] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound.");
-				//if (player.hairType == SILKEN) outputText(" .");
+				outputText(" The [hairshortdesc] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound.");
 			}
 			else if(earType == Ears.GREMLIN){
-				outputText(" The [hairlongdesc] is parted by a pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
+				outputText(" The [hairshortdesc] is parted by a pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
 				if (silly()){
 					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
 				}
 			}
 			else if(earType == Ears.RAIJU)
-				outputText(" Your [hairlongdesc] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
+				outputText(" Your [hairshortdesc] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
 			else if(earType == Ears.WEASEL)
-				outputText(" Your [hairlongdesc] is parted by two sideways leaning weasel ears that flick toward every slight sound.");
+				outputText(" Your [hairshortdesc] is parted by two sideways leaning weasel ears that flick toward every slight sound.");
 			if (earType == Ears.BAT){
-				outputText(" The [hairlongdesc] on your head is parted by large bat ears atop your head, always perked up to catch any stray sound.");
+				outputText(" The [hairshortdesc] on your head is parted by large bat ears atop your head, always perked up to catch any stray sound.");
 			}
 			if (earType == Ears.VAMPIRE){
-				outputText(" The [hairlongdesc] on your head is parted by pointed elfin ears powerful enough to catch even the heartbeat of those around you.")
+				outputText(" The [hairshortdesc] on your head is parted by pointed elfin ears powerful enough to catch even the heartbeat of those around you.")
 			}
 			if (earType == Ears.RED_PANDA) {
 				outputText(" Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.")
 			}
 			if (earType == Ears.AVIAN){
-				outputText(" The [hairlongdesc] atop your head compliments you quite well, and two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
+				outputText(" The [hairshortdesc] atop your head compliments you quite well, and two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
 			}
 			if (earType == Ears.GRYPHON){
-				outputText(" Two triangular ears part your [hairlongdesc] at each side of your head. They’re streamlined and adapted to fly, and are quite useful to locate sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
+				outputText(" Two triangular ears part your [hairshortdesc] at each side of your head. They’re streamlined and adapted to fly, and are quite useful to locate sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
 			}
 			if (earType == Ears.CAVE_WYRM){
 				outputText(" Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
 			}
 			if (earType == Ears.BEAR){
-				outputText(" The [hairlongdesc] on your head is parted by a pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound.");
 			}
 			if (earType == Ears.PANDA){
-				outputText(" The [hairlongdesc] on your head is parted by a pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound.");
+				outputText(" The [hairshortdesc] on your head is parted by a pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound.");
 			}
 			if (earType == Ears.DISPLACER){
-				outputText(" The [hairlongdesc] on your head is parted by large long furry ears atop your head, always perked up to catch any stray sound.");
+				outputText(" The [hairshortdesc] on your head is parted by large long furry ears atop your head, always perked up to catch any stray sound.");
 			}
 			if (earType == Ears.MELKIE){
-				outputText("The [hairlongdesc] on your head is parted by your long and flat furry Melkie ears, reaching all the way down to your waist.");
+				outputText("The [hairshortdesc] on your head is parted by your long and flat furry Melkie ears, reaching all the way down to your waist.");
 			}
 			//</mod>
 			if(player.antennae.type == Antennae.MANTIS)
@@ -1749,26 +1541,6 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 	}
-	public function describeHairStyle():void {
-		var hairStyle:Number = player.hairStyle;
-		if(player.hairLength == 0 && (player.hairType == Hair.STORM || player.hairType == Hair.BURNING || player.hairType == Hair.ANEMONE
-				|| player.hairType == Hair.QUILL || player.hairType == Hair.FEATHER || player.hairType == Hair.GORGON || player.hairType == Hair.FLUFFY || player.hairType == Hair.CRAZY)) {
-		}
-		else {
-			if(hairStyle == Hair.PLAIN)
-				outputText(" Your hairs hangs plainly along the side of your head.");
-			else if(hairStyle == Hair.WILD)
-				outputText(" Your hairs are stand up in a wild fashion.")
-			else if(hairStyle == Hair.PONYTAIL)
-				outputText(" Your hairs are tied up into a ponytail.");
-			else if(hairStyle == Hair.LONGTRESSES)
-				outputText(" Your hairs are tied up into a great ponytail.");
-			else if(hairStyle == Hair.TWINPIGTAIL)
-				outputText(" Your hairs are tied up into a pair of pigtail.");
-			else if(hairStyle == Hair.DWARVEN)
-				outputText(" Your hairs are tied up into a dwarven fashion.");
-		}
-	}
 
 	//Call this function when looking for repeatable tattoo conditional text
 	public function tattooAndPatternGeneric():void{
@@ -1785,7 +1557,7 @@ public class PlayerAppearance extends BaseContent {
 		// story.display("faceShape");
 		var faceType:Number = player.faceType;
 		var skin:Skin = player.skin;
-		if (player.facePart.isHumanShaped()) {
+		if (Face.isHumanShaped(player.faceType)) {
 			var odd:int = 0;
 			var skinAndSomething:String = "";
 			if (player.facePart.type == Face.BUCKTEETH) {
@@ -2135,12 +1907,12 @@ public class PlayerAppearance extends BaseContent {
 		}
 		//<mod>
 		if (faceType == Face.PIG) {
-			outputText(" Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
+			outputText(" Your face is like that of a pig, with [skintone] skin, complete with a snout that is always wiggling.");
 		}
 		if (faceType == Face.BOAR) {
 			outputText(" Your face is like that of a boar, ");
 			if (player.skinType == Skin.FUR)
-				outputText("with " + player.skinTone + " skin underneath your [skin coat.color] fur");
+				outputText("with [skintone] skin underneath your [skin coat.color] fur");
 			outputText(", complete with tusks and a snout that is always wiggling.");
 		}
 		if (faceType == Face.RHINO) {
@@ -2172,7 +1944,7 @@ public class PlayerAppearance extends BaseContent {
 				tattooAndPatternGeneric();
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
-				outputText(" It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+				outputText(" It's covered in [skin coat] that covers your [skintone] skin underneath.");
 			} else {
 				outputText(" It's covered in [skin coat], making your face looks more unusual.");
 			}
@@ -2209,17 +1981,17 @@ public class PlayerAppearance extends BaseContent {
 			outputText(". The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
 		}
 		if (faceType == Face.JIANGSHI) {
-			outputText(" Your face is human in form and shape with " + player.skinTone + " but your expression is kind of zombie like.");
+			outputText(" Your face is human in form and shape with [skintone] but your expression is kind of zombie like.");
 		}
 		if (faceType == Face.KUDERE) {
-			outputText(" Your face is human in shape and structure with " + player.skinTone + ". The most unsettling thing about it is your complete and constant lack of emotion.");
+			outputText(" Your face is human in shape and structure with [skintone]. The most unsettling thing about it is your complete and constant lack of emotion.");
 			if (!player.hasCoat()) {
 				if (!player.skin.hasNoPattern()){
 					outputText(" The [skin] is");
 					tattooAndPatternGeneric();
 				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
-				outputText(" It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+				outputText(" It's covered in [skin coat] that covers your [skintone] skin underneath.");
 			} else {
 				outputText(" It's covered in [skin coat], making your face looks even more unusual.");
 			}
@@ -2232,34 +2004,15 @@ public class PlayerAppearance extends BaseContent {
 					tattooAndPatternGeneric();
 				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
-				outputText(" It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+				outputText(" It's covered in [skin coat] that covers your [skintone] skin underneath.");
 			} else {
-				outputText(" It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath, making your face looks more unusual.");
+				outputText(" It's covered in [skin coat] that covers your [skintone] skin underneath, making your face looks more unusual.");
 			}
 		}
-		if (faceType == Face.USHI_ONI_ONNA) {
+		if (faceType == Face.USHI_ONI) {
 			outputText(" You have the face of a ushi " + player.mf("oni", "onna") + ", you have strange black tattoos circling your eyes and in your mouth small fangs with a weak poison can be seen when you smile or open you mouth.");
 		}
-		//WIP Code reformating of the face section
-		//section for the tatoo
-		//if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo.");
-		//else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo.");
-		//else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos.");
-		//else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos.");
-		//else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins.");
-		//else outputText(".");
-		//Section for the coat
-		//if (!player.hasPartialCoatNoTypeDeclaration){
-			//if (!player.hasPartialCoat(Skin.FUR)) outputText(" On your cheek you have [skin coat].");
-			//if (!player.hasPartialCoat(Skin.SCALES)){} outputText(" On your cheek you have [skin coat].");
-			//if (!player.hasPartialCoat(Skin.AQUA_SCALES)){} outputText(" On your cheek you have [skin coat].");
-			//if (!player.hasPartialCoat(Skin.CHITIN)){} outputText(" On your cheek you have [skin coat].");
-		//} else if (player.hasFullCoat()) {
-			//if (player.hasFullCoatOfType(Skin.FUR)) outputText(" Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
-			//if (player.hasFullCoatOfType(Skin.SCALES)){} outputText(" Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
-			//if (player.hasFullCoatOfType(Skin.AQUA_SCALES)){} outputText(" Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
-			//if (player.hasFullCoatOfType(Skin.CHITIN)){} outputText(" Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
-		//}
+
 		//Section for below the head
 		if (player.skin.hasVenomousMarking()) {
 			outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
@@ -2271,8 +2024,8 @@ public class PlayerAppearance extends BaseContent {
 		clearOutput();
 		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
 		//Alicorn
-		if (player.alicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Alicorn/True Nightmare: " + player.alicornScore() + " (+60% to Str racial multi, +70% to Tou racial multi, +140% to Spe racial multi, +85% to Int racial multi)</font>");
-		else if (player.alicornScore() >= 12) outputText("\n<font color=\"#0000a0\">Alicorn/Nightmare: " + player.alicornScore() + " (+35% to Tou racial multi, +90% to Spe racial multi, +75% to Int racial multi)</font>");
+		if (player.alicornScore() >= 27) outputText("\n<font color=\"#0000a0\">True Alicorn/True Nightmare: " + player.alicornScore() + " (+60% to Str racial multi, +70% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi)</font>");
+		else if (player.alicornScore() >= 18) outputText("\n<font color=\"#0000a0\">Alicorn/Nightmare: " + player.alicornScore() + " (+55% to Tou racial multi, +120% to Spe racial multi, +95% to Int racial multi)</font>");
 		else if (player.alicornScore() >= 8) outputText("\n<font color=\"#0000a0\"> Half Alicorn/Half Nightmare: " + player.alicornScore() + " (+15% to Tou racial multi, +50% to Spe racial multi, +55% to Int racial multi)</font>");
 		else if (player.alicornScore() >= 1) outputText("\n<font color=\"#008000\">Alicorn/Nightmare: " + player.alicornScore() + "</font>");
 		else if (player.alicornScore() < 1) outputText("\n<font color=\"#ff0000\">Alicorn/Nightmare: 0</font>");
@@ -2296,8 +2049,8 @@ public class PlayerAppearance extends BaseContent {
 		//Atlach Nacha
 		score = player.atlachNachaScore();
 		if (score >= 30) outputText("\n<font color=\"#0000a0\">Greater Atlach Nacha: " + score + " (+115% to Str racial multi, +135% to Tou racial multi, +150% to Int racial multi, +150% to Lib racial multi, -50% to Wis racial multi, +50 to Sens)</font>");
-		else if (score >= 18) outputText("\n<font color=\"#0000a0\">Atlach Nacha: " + score + " (+80% to Str racial multi, +90% to Tou racial multi, +100% to Int racial multi, +100% to Lib racial multi, -50% to Wis racial multi, +50 to Sens)</font>");
-		else if (score >= 10) outputText("\n<font color=\"#0000a0\">Incomplete Atlach Nacha: " + score + " (+50% to Tou racial multi, +75% to Int racial multi, +20% to Lib racial multi, -20% to Wis racial multi)</font>");
+		else if (score >= 21) outputText("\n<font color=\"#0000a0\">Atlach Nacha: " + score + " (+280% to Str racial multi, +315% to Tou racial multi, +350% to Int racial multi, +350% to Lib racial multi, -50% to Wis racial multi, +90 to Sens)</font>");
+		else if (score >= 14) outputText("\n<font color=\"#0000a0\">Incomplete Atlach Nacha: " + score + " (+60% to Tou racial multi, +100% to Int racial multi, +40% to Lib racial multi, -10% to Wis racial multi)</font>");
 		else if (score >= 1) outputText("\n<font color=\"#008000\">Incomplete Atlach Nacha: " + score + "</font>");
 		else if (score < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 		//Avian
@@ -2441,8 +2194,10 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.elfScore() >= 1) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
 		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
 		//Wood Elf
-		if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi, +100% to Lib racial multi, +50 min Sens, +20% max Mana)</font>");
-		else if (player.woodElfScore() >= 17) outputText("\n<font color=\"#0000a0\">Wood Elf little sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +100% to Spe / Int / Lib racial multi, +50 min Sens, +10% max Mana)</font>");
+		if (player.woodElfScore() >= 31) outputText("\n<font color=\"#0000a0\">Wood Elf elder sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +550% to Spe racial multi, +495% to Int racial multi, +455% to Lib racial multi, +80 Sens, +40% max Mana)</font>");
+		else if (player.woodElfScore() >= 28) outputText("\n<font color=\"#0000a0\">Wood Elf sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +495% to Spe racial multi, +445% to Int racial multi, +415% to Lib racial multi, +70 Sens, +30% max Mana)</font>");
+		else if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf young sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +430% to Spe racial multi, +405% to Int racial multi, +375% to Lib racial multi, +60 Sens, +20% max Mana)</font>");
+		else if (player.woodElfScore() >= 22) outputText("\n<font color=\"#0000a0\">Wood Elf little sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +375% to Spe racial multi, +355% to Int racial multi, +335% to Lib racial multi, +50 Sens, +10% max Mana)</font>");
 		else if (player.woodElfScore() >= 1) outputText("\n<font color=\"#008000\">Wood Elf: " + player.woodElfScore() + "</font>");
 		else if (player.woodElfScore() < 1) outputText("\n<font color=\"#ff0000\">Wood Elf: 0</font>");
 		//Ferret
@@ -2457,10 +2212,12 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 		else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
 		//Fairy
-		if (player.fairyScore() >= 26) outputText("\n<font color=\"#0000a0\">Fairy Queen: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +200% to Spe racial multi, +200% to Int racial multi, +45% to Wis racial multi, +20 min Sens)</font>");
-		if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +185% to Spe racial multi, +185% to Int racial multi, +30% to Wis racial multi, +20 min Sens)</font>");
-		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Greater Fairy: " + player.fairyScore() + "</font>");
-		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Greater Fairy: 0</font>");
+		if (player.fairyScore() >= 32) outputText("\n<font color=\"#0000a0\">Titania: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +660% to Spe racial multi, +660% to Int racial multi, +200% to Wis racial multi, +50 Sens)</font>");
+		else if (player.fairyScore() >= 29) outputText("\n<font color=\"#0000a0\">Fairy Queen: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +600% to Spe racial multi, +600% to Int racial multi, +175% to Wis racial multi, +40 Sens)</font>");
+		else if (player.fairyScore() >= 26) outputText("\n<font color=\"#0000a0\">Noble Fairy: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +540% to Spe racial multi, +540% to Int racial multi, +150% to Wis racial multi, +30 Sens)</font>");
+		else if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +480% to Spe racial multi, +480% to Int racial multi, +125% to Wis racial multi, +20 Sens)</font>");
+		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Fairy: " + player.fairyScore() + "</font>");
+		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Fairy: 0</font>");
 		//Frost Wyrm
 		if (player.frostWyrmScore() >= 26) outputText("\n<font color=\"#0000a0\">Greater Frost Wyrm: " + player.frostWyrmScore() + " (+200% to Str racial multi, +90% to Spe racial multi, +160% to Tou racial multi, -90% to Int racial multi, +75% to Lib racial multi)</font>");
 		else if (player.frostWyrmScore() >= 18) outputText("\n<font color=\"#0000a0\">Frost Wyrm: " + player.frostWyrmScore() + " (+140% to Str racial multi, +75% to Spe racial multi, +125% to Tou racial multi, -90% to Int racial multi, +50% to Lib racial multi)</font>");
@@ -2468,22 +2225,14 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.frostWyrmScore() >= 1) outputText("\n<font color=\"#008000\">Half Frost Wyrm: " + player.frostWyrmScore() + "</font>");
 		else if (player.frostWyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Frost Wyrm: 0</font>");
 		//GARGOYLE
-		if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoylePure)) {
-			outputText("\n<font color=\"#0000a0\">PURE GARGOYLE: " + player.gargoyleScore() + " (+");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("165% to Str racial multi, +250% to Tou racial multi, +50% to Spe racial multi, +30");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("50% to Str racial multi, +250% to Tou racial multi, +30% to Spe racial multi, +165");
-			outputText("% to Int racial multi, +80% to Wis racial multi, -10% to Lib racial multi, -10 max Sens, +");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 * (1 + player.newGamePlusMod())) + " spell resistance");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 * (1 + player.newGamePlusMod())) + " spell resistance");
-			outputText(")</font>");
-		}
-		else if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoyleCorrupted)) {
-			outputText("\n<font color=\"#0000a0\">CORRUPTED GARGOYLE: " + player.gargoyleScore() + " (+");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("165% to Str racial multi, +250% to Tou racial multi, +50% to Spe racial multi, +30");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("50% to Str racial multi, +250% to Tou racial multi, +30% to Spe racial multi, +165");
-			outputText("% to Int racial multi, -10% to Wis racial multi, +80% to Lib racial multi, +15 min Sens, +");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 * (1 + player.newGamePlusMod())) + " spell resistance");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 * (1 + player.newGamePlusMod())) + " spell resistance");
+		if (player.gargoyleScore() >= 20 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted))) {
+			outputText("\n<font color=\"#0000a0\">" + (player.hasPerk(PerkLib.GargoylePure) ? "PURE":"CORRUPTED") + " GARGOYLE: " + player.gargoyleScore() + " (+");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("300% to Str racial multi, +510% to Tou racial multi, +100% to Spe racial multi, +80% to Int racial multi, ");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("100% to Str racial multi, +510% to Tou racial multi, +80% to Spe racial multi, +300% to Int racial multi, ");
+			if (player.hasPerk(PerkLib.GargoylePure)) outputText("+130% to Wis racial multi, -20% to Lib racial multi, -10 Sens, +");
+			if (player.hasPerk(PerkLib.GargoyleCorrupted)) outputText("-20% to Wis racial multi, +140% to Lib racial multi, +");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (150 * (1 + player.newGamePlusMod())) + " Armor, +" + (25 * (1 + player.newGamePlusMod())) + " spell resistance");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (25 * (1 + player.newGamePlusMod())) + " Armor, +" + (150 * (1 + player.newGamePlusMod())) + " spell resistance");
 			outputText(")</font>");
 		}
 		else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
@@ -2829,8 +2578,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 		else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
 		//Sphinx
-		if (player.sphinxScore() >= 26) outputText("\n<font color=\"#0000a0\">Greater Sphinx: " + player.sphinxScore() + " (+110% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "70":"60")+"% to Spe racial multi, +130% to Int racial multi, +110% to Wis racial multi)</font>");
-		if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+50% to Str racial multi, -10% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "50":"40")+"% to Spe racial multi, +90% to Int racial multi, +40% to Wis racial multi)</font>");
+		if (player.sphinxScore() >= 30) outputText("\n<font color=\"#0000a0\">Noble Sphinx: " + player.sphinxScore() + " (+110% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "70":"60")+"% to Spe racial multi, +150% to Int racial multi, +150% to Wis racial multi)</font>");
+		else if (player.sphinxScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Sphinx: " + player.sphinxScore() + " (+90% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "60":"50")+"% to Spe racial multi, +100% to Int racial multi, +95% to Wis racial multi)</font>");
+		else if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+50% to Str racial multi, -10% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "50":"40")+"% to Spe racial multi, +90% to Int racial multi, +40% to Wis racial multi)</font>");
 		else if (player.sphinxScore() >= 1) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
 		else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
 		//Spider
@@ -2879,8 +2629,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>");
 		else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>");
 		//Unicorn
-		if (player.unicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Unicorn/True Bicorn: " + player.unicornScore() + " (+75% to Str racial multi, +70% to Tou racial multi, +115% to Spe racial multi, +120% to Int racial multi)</font>");
-		else if (player.unicornScore() >= 12) outputText("\n<font color=\"#0000a0\">Unicorn/Bicorn: " + player.unicornScore() + " (+35% to Tou racial multi, +90% to Spe racial multi, +105% to Int racial multi)</font>");
+		if (player.unicornScore() >= 27) outputText("\n<font color=\"#0000a0\">True Unicorn/True Bicorn: " + player.unicornScore() + " (+60% to Str racial multi, +90% to Tou racial multi, +115% to Spe racial multi, +140% to Int racial multi)</font>");
+		else if (player.unicornScore() >= 18) outputText("\n<font color=\"#0000a0\">Unicorn/Bicorn: " + player.unicornScore() + " (+55% to Tou racial multi, +90% to Spe racial multi, +125% to Int racial multi)</font>");
 		else if (player.unicornScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Unicorn/Half Bicorn: " + player.unicornScore() + " (+25% to Tou racial multi, +40% to Spe racial multi, +55% to Int racial multi)</font>");
 		else if (player.unicornScore() >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornScore() + "</font>");
 		else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn/Bicorn: 0</font>");
@@ -2946,13 +2696,10 @@ public class PlayerAppearance extends BaseContent {
 		doNext(GenderForcedSetting);
 	}
 
-	public function getGargoyleMaterial(): String {
+	public static function getGargoyleMaterial(gargoyleFlag: int): String {
 		var gargoyleMaterials: Array = ["marble","alabaster"];
 
-		//Defines Gargoyle's material, 1 or 2 if successful
-		const gargoyleFlag: int = flags[kFLAGS.GARGOYLE_BODY_MATERIAL] && flags[kFLAGS.GARGOYLE_BODY_MATERIAL] > 0 ? flags[kFLAGS.GARGOYLE_BODY_MATERIAL] - 1 : 0;
-
-		return gargoyleMaterials[gargoyleFlag];
+		return gargoyleMaterials[gargoyleFlag] || gargoyleMaterials[0];
 	}
 
 	private function campActionsReflect():void {

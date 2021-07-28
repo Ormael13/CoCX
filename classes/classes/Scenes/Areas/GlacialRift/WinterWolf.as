@@ -29,7 +29,7 @@ public class WinterWolf extends Monster
 			if(!player.hasStatusEffect(StatusEffects.Frostbite)) {
 				outputText(" You feel the cold enter your body and shake you to the very core weakening your resolve just as much as slowing down your movement.");
 				if(player.str > 7) {
-					player.addCurse("str", 6);
+					player.addCurse("str", 6,2);
 					showStatDown( 'str' );
 					player.createStatusEffect(StatusEffects.Frostbite,6,0,0,0);
 				}
@@ -47,7 +47,7 @@ public class WinterWolf extends Monster
 			else {
 				outputText(" The coldness effects intensify as your movement slowing down even more.");
 				if(player.str > 6) {
-					player.addCurse("str", 5);
+					player.addCurse("str", 5,2);
 					showStatDown( 'str' );
 					player.addStatusValue(StatusEffects.Frostbite,1,5);
 				}
@@ -83,7 +83,7 @@ public class WinterWolf extends Monster
 		{
 			this.a = "the ";
 			this.short = "winter wolf";
-			this.imageName = "winter-wolf";
+			this.imageName = "s_winterWolf";
 			this.long = "You're facing a wolf that can only be described as oversized. The beast bigger than a horse is easily 10 feet tall with a pelt about just as white as the landscape below it. A small blue mist trail regularly escape its mouth subjesting its bite might be way worse then it appear.";
 			// this.plural = false;
 			this.createCock(18, 3, CockTypesEnum.WOLF);

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--
+	This is now deprecated. Don't bother modifying this, it's all been moved to Celess.as. This is here for backup.
+-->
 <story name="celess" xmlns="xxc-story">
 	<lib name="strings">
 		<lib name="birth">

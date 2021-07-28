@@ -14,12 +14,6 @@ import classes.internals.WeightedDrop;
 
 public class DemonPackBeach extends Monster
 	{
-		override protected function performCombatAction():void
-		{
-			if (rand(2) == 0)
-				special1();
-			else special2();
-		}
 		
 		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
@@ -77,8 +71,9 @@ public class DemonPackBeach extends Monster
 							consumables.OVIELIX,
 							consumables.B__BOOK);
 			this.abilities = [
-				{call: SceneLib.combat.packAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
-				{call: SceneLib.combat.lustAttack(), type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{call: SceneLib.combat.packAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: SceneLib.combat.lustAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 			];
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;

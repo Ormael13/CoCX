@@ -3,7 +3,7 @@ public class SimpleTransformation extends Transformation {
 	private var applyTfFn:Function;
 	private var isPresentFn:Function;
 	private var isPossibleFn:Function;
-	
+
 	public function SimpleTransformation(
 			name: String,
 			applyTfFn:Function,
@@ -15,15 +15,15 @@ public class SimpleTransformation extends Transformation {
 		this.isPresentFn = isPresentFn;
 		this.isPossibleFn = isPossibleFn;
 	}
-	
+
 	override public function isPresent():Boolean {
 		return isPresentFn();
 	}
-	
+
 	override public function isPossible():Boolean {
-		return isPossibleFn ? isPossibleFn() : !isPresentFn();
+		return (isPossibleFn != null) ? isPossibleFn() : !isPresentFn();
 	}
-	
+
 	override public function applyEffect(doOutput:Boolean = true):void {
 		applyTfFn(doOutput);
 	}

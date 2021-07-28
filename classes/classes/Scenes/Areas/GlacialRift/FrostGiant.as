@@ -71,13 +71,13 @@ public class FrostGiant extends Monster
 				}
 				else if (player.str >= 50 && player.str < 100) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 30 + rand((str + weaponAttack) * 1.5);
+					if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {damage = 30 + rand((str + weaponAttack) * 1.5);
 					player.takePhysDamage(damage, true);
 					}
 				}
 				else if (player.str < 50) {
 					outputText("The giant squeezes you mercilessly, the pressure on your body reaching critical levels. The giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 60 + rand((str + weaponAttack) * 2.25);
+					if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {damage = 60 + rand((str + weaponAttack) * 2.25);
 					player.takePhysDamage(damage, true);
 					}
 				}

@@ -86,7 +86,7 @@ public class YukiOnnaScene extends BaseContent
 				outputText("You feel like you nearly died for that matter so Yu finding you was timely indeed. You thank her for the save.\n\n");
 				outputText("\"<i>Yu did nothing big. If [name] want for heart warmth though [name] should ask Yu, not sketchy girl in blizzard.</i>\"\n\n");
 				outputText("You will remember that one.\n\n");
-				player.addCurse("tou", 30);
+				player.addCurse("tou", 30,2);
 			}
 			else {
 				if (rand(3) == 0) player.skinTone = "snow white";
@@ -104,23 +104,24 @@ public class YukiOnnaScene extends BaseContent
 				outputText("You still breathe, drawing air in and out, yet the air coming out is cold and creates none of the warm cloud a living being should make when breathing at such temperatures. Your feet are naked yet the snow feels pleasant underneath them."+(player.gender == 3 ? " Whatever male asset you had is gone from your nether as well… you’re definitely fully female now.":"")+" You don't feel cold despite the ambient temperature yet… you yearn for the warmth of others, the warmth that you lost, this is all so unfair. ");
 				outputText("You desperately need to fill this empty void within you with something... anything. Surely they will share it if you ask nicely and if they don't... you will simply have to steal it from them.\n\n");
 				outputText("As if to mirror your growing jealous indignation the snow around you becomes agitated, turning into a small indoor blizzard which only calms down once you do. You need to feel warmth again no matter what and it doesn't matter if everyone around you has to freeze to death in order to satisfy YOUR needs. <b>Your soul has frozen over, you have become a Yuki Onna in body and heart.</b>\n\n");
-				CoC.instance.mutations.setFaceType(Face.YUKI_ONNA);
-				CoC.instance.mutations.setLowerBody(LowerBody.YUKI_ONNA);
-				if (player.legCount != 2) player.legCount = 2;
-				CoC.instance.mutations.setArmType(Arms.YUKI_ONNA);
-				CoC.instance.mutations.setEyeTypeAndColor(Eyes.HUMAN,"light purple");
-				CoC.instance.mutations.setHairType(Hair.SNOWY);
+				CoC.instance.transformations.FaceYukiOnna.applyEffect(false);
+				transformations.LowerBodyYukiOnna.applyEffect(false);
+				CoC.instance.transformations.ArmsYukiOnna.applyEffect(false);
+				CoC.instance.transformations.EyesHuman.applyEffect(false);
+				CoC.instance.transformations.EyesChangeColor(["light purple"]).applyEffect(false);
+				CoC.instance.transformations.EyesHuman.applyEffect(false);
+				outputText("\n\n");
+				CoC.instance.transformations.HairSnowy.applyEffect(false);
 				if (rand(3) == 0) player.hairColor = "snow white";
 				else {
 					if (rand(2) == 0) player.hairColor = "silver white";
 					else player.hairColor = "platinum blonde";
 				}
 				if (player.hairLength < 25) player.hairLength = 25;
-				CoC.instance.mutations.setWingType(Wings.LEVITATION, "levitation");
-				CoC.instance.mutations.setRearBody(RearBody.GLACIAL_AURA);
+				CoC.instance.transformations.WingsLevitation.applyEffect(false);
+				CoC.instance.transformations.RearBodyGlacialAura.applyEffect(false);
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-					player.skin.base.pattern = Skin.PATTERN_NONE;
-					player.skin.base.adj = "";
+					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
 				if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.DeadMetabolism, 0, 0, 0, 0);

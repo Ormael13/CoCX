@@ -4,11 +4,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 
 public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
-		
+
 		public function CorruptedGlade() {
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		public function timeChange():Boolean {
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
 				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0 && rand(6) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
@@ -23,11 +23,11 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			}
 			return false;
 		}
-		
+
 		public function timeChangeLarge():Boolean {
 			return false;
 		}
-		
+
 		public function intro():void {
 			spriteSelect(92);
 			outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.");
@@ -74,7 +74,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			}
 			//Wallow in decadence reaction - UNFINISHED
 		}
-		
+
 		private function flowerFun():void {
 			clearOutput();
 			spriteSelect(92);
@@ -87,20 +87,20 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 						outputText("balls and gently squeezing them.\n\n");
 					else
 						outputText("groin and gently squeezing your taint.\n\n");
-						
+
 					outputText("You feel a flood of wetness surge up from the depths of the plant, surrounding your member with even more fluid as the stem begins constricting and squeezing.  Gently at first, and then with increasing insistence, a suction builds inside the stem, drawing more and more blood into your [cock].  The stem, now heavily distended by your massive member, continues rippling, squeezing, and sucking your over-engorged meat-pole, overwhelming your mind with sensation far beyond normal.  You'd wonder just what kind of tactile-enhancing fluids that plant excretes, if you weren't already mindlessly pistoning against the tainted plant, still locked inside it by tight little tentacles.\n\n");
 				}
 				else { //Multicock
 					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stems bend with ease as you grab a few with your hand and pull them towards your groin, your other hand fumbling to open your [armor].  In seconds you free yourself, and gingerly bring the folds closer.  The musky scent filling the air rapidly brings your [cocks] to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flowers look fairly deep, you quickly feel yourself bottom out inside the petals' slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cocks].  As you pound away, you begin to notice a change in the rear of the flowers.\n\n");
 
 					outputText("They seem to be gradually opening up, allowing the smallest of your cock-tips to begin slipping through an opening in the backs of the flowers and into the stems.  Shocked by this unexpected development, you pull the bundle of flowers from your [cocks], but whiplike tendrils shoot forth from deep within the flowers, wrapping tightly around your manhoods, painfully squeezing as they drag your [cocks] back into the tight vaginal openings.  They pull tighter as they force you deeper inside the plant, pulling the full length of each of your members into the constricting stalks.   Wrapped tightly around your base, the tendrils form effective cock-rings, making each of your [cocks] overfill with blood.\n\n");
-					
+
 					outputText("You briefly try to free yourself but the pain it causes your groin overwhelms you.  Resigned to your fate, you allow the plants to wrap their petals fully around your groin, encapsulating all of your maleness.  With surprising gentleness, you feel a suction and squeezing building around each and every one of your dicks.  You feel a flood of fluids around each over-engorged member, making them tingle with unnatural sensitivity.  The squeezing and sucking of the plant's stalks, combined with the sudden onset of strange sensation, is too much to bear.  You feel a churning pressure at the base of your groin, liquid heat filling every member as your body makes ready to give these plants what they want.\n\n");
 				}
 				outputText("You cum, and cum, and cum, the evidence of your pleasure devoured by the plant's sucking, squeezing gullet.  The orgasm drags on for what feels like forever, your [legs] eventually giving out, your hips the only muscle that seems to work as they twitch into the air, as if begging for more.  You are milked of a few last big spurts, at last collapsing.\n\n");
-				
+
 				outputText("The tendrils encircling your genitals do not release; instead they pull tighter, one of " + (player.cocks.length > 1 ? "each plant's tiny" : "the tiny plant's") + " appendages penetrating your urethra" + (player.cocks.length > 1 ? "s" : "") + ", squirming up your cum slicked passage" + (player.cocks.length > 1 ? "s" : "") + " with uncomfortable slowness.  You lay there, too weak to resist it or fight, hoping that whatever the plants are doing won't hurt much.  You feel it twisting and coiling inside you... until it stops.  You feel a sharp pinch, and then it withdraws, seemingly satisfied.  The tendrils unwrap, allowing the plants to spring back up, exposing your still over-engorged and sensitive member" + (player.cocks.length > 1 ? "s" : "") + ".\n\n");
-				
+
 				outputText("You lay there for some time until your muscle control returns, your cock" + (player.cocks.length > 1 ? "s" : "") + " still slightly over-large " + (player.balls >= 2 ? "and your " + ballsDescriptLight() : "and") + " feeling sore from the exertion.  At least you hope it's just from the exertion and not from whatever the plant did.\n\n");
 				if (player.cumQ() < 25)
 					outputText("As you depart, you notice the plants looking remarkably colorful and healthy...");
@@ -117,7 +117,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					booster += 3;
 				else if (player.ballSize < 6)
 					booster += 2;
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0 && player.cumMultiplier < 3) booster += 2;
+				if (player.hasPerk(PerkLib.MessyOrgasms) && player.cumMultiplier < 3) booster += 2;
 				player.cumMultiplier += booster;
 			}
 			else { //Oral sex for those without!
@@ -126,7 +126,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				outputText("Giddy from either the novelty of the situation or the chemicals in the flower's juices, you lick at the plant's bud-like clit and are immediately rewarded with a burst of fruity plant-nectar. The taste becomes the last thing on your mind as your tongue becomes even more sensitive, every touch and taste rapidly becoming highly erotic. You delve into its folds, seeking more nectar, your tongue slurping and licking, noisily tongue-fucking the little plant. The taste deepens, losing some of the sweetness as that clitty swells bigger, drops of tangy moisture oozing from it.\n\n");
 
 				outputText("Closing your eyes, it becomes easy to lose yourself in the feeling of plunging in and out of those petals, your tongue a tiny cock. You revel in the decadence of it all, your lips becoming equally sensitive and engorged, french kissing the pussy-flower with abandon, rubbing your puffy lips over its clit, tongue-fucking the flower with abandon. The petals curl around your face, as a sudden gush of fluid rushes out from deep within the flower, flooding your mouth with tangy sweetness. Your tongue quivers in pleasure as you feel your over-sensitized mouth orgasming, pleasurable and unlike anything else you've experienced. Swallowing instinctively, you collapse back on your haunches, licking your lips and squirming in satisfaction.");
-				
+
 				outputText("You walk away, your lips and tongue feeling slightly puffy and sensitive, but none the worse for the wear.");
 				player.slimeFeed();
 				player.orgasm();
@@ -134,7 +134,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function tentacleFun():void {
 			clearOutput();
 			spriteSelect(92);
@@ -213,7 +213,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				outputText("With a snap you feel consciousness return; the endless torrent of fluid has stopped, though your mouth is still pried wide open by the engorged bulb.  In panic, you thrash backwards, painfully yanking against the now-taut vine.  You struggle in vain  for a moment, the vine not giving an inch, until finally you feel the bulb start to soften.  Working it back and forth, you eventually manage to pry it free with a satisfying 'pop'.   Rubbing your hand against your sore jawline, you step away from the glade, spitting out some of the musky goop with every step.\n\n");
 				//Last PG includes change-texts
 				outputText("As you leave the corrupted plant-life behind a comforting warmth seems to radiate from your gut, suffusing you with gentle heat that makes your ");
-				
+
 				if (player.cocks.length > 0) { //Cocks (and maybe vagina)
 					outputText(player.cocks.length == 1 ? cockDescript(0) : multiCockDescriptLight());
 					if (player.vaginas.length > 0) outputText(" and " + vaginaDescript(0));
@@ -232,10 +232,10 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				}
 				//+butt up to 10
 				if (rand(4) == 0 && player.butt.type <= 10) {
-					outputText("A strange shifting occurs on your backside, making your [armor] feel tight.  <b>Your butt has grown larger</b>, becoming a " + buttDescript() + ".  ");
+					outputText("A strange shifting occurs on your backside, making your [armor] feel tight.  <b>Your butt has grown larger</b>, becoming a [butt].  ");
 					player.butt.type += rand(3) + 1;
 				}
-				//Rarely change one prick to a vine-like tentacle cock. 
+				//Rarely change one prick to a vine-like tentacle cock.
 				if (rand(3) == 0 && player.cocks.length > 0 && player.hairColor == "green") {
 					if (player.tentacleCocks() < player.cockTotal()) {
 						if (player.cocks.length == 1) { //Single cawks
@@ -253,7 +253,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function treeBoobFun():void {
 			clearOutput();
 			spriteSelect(92);
@@ -287,18 +287,18 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		//DESTROY THE CORRUPTED GLADE!
 		private function destroyTheCorruptedGladesChoice():void {
 			clearOutput();
 			outputText("You ponder over how to destroy the foul glade.");
 			menu();
 			var button:int = 0;
-			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0) {
+			if (player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire)) {
 				if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Fire Breath", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
 			}
-			if ((player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.tailType == Tail.FOX && player.tailCount >= 7) {
+			if ((player.hasPerk(PerkLib.EnlightenedNinetails) || player.hasPerk(PerkLib.CorruptedNinetails)) && player.tailType == Tail.FOX && player.tailCount >= 7) {
 				if (player.fatigue > player.maxFatigue() - 20) addButtonDisabled(button++, "Fox Fire", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
 			}
@@ -310,7 +310,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				if (player.fatigue > player.maxFatigue() - 40) addButtonDisabled(button++, "Axe", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Axe", destroyTheCorruptedGlades, 3);
 			}
-			if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut") {
+			if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut" || player.isPartiallyStaffTypeWeapon()) {
 				if (player.fatigue > player.maxFatigue() - 30) addButtonDisabled(button++, "Weapon", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Weapon", destroyTheCorruptedGlades, 4);
 			}
@@ -318,7 +318,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			else addButton(button++, "Your Hands", destroyTheCorruptedGlades, 5);
 			addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 		}
-		
+
 		private function destroyTheCorruptedGlades(choice:int):void {
 			var destroyAmount:int = 0;
 			clearOutput();

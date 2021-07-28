@@ -238,7 +238,7 @@ private function sandWitchBadEndPartTwo():void {
 private function sandWitchBadEndPartThree():void {
 	clearOutput();
 	outputText("Something breaks within your soul, accompanied by a strangled sob. Tears of humiliation trickle down your face as you part your quivering lips. \"<i>Please milk me, Mistress. Your slave needs to be milked.</i>\"\n\n");
-	if (player.findPerk(PerkLib.MarblesMilk) >= 0) {
+	if (player.hasPerk(PerkLib.MarblesMilk)) {
 		outputText("No sooner have you spoken before a torrent of milk spurts from each of your nipples, but the effect isn't as pleasurable as it used to be; in fact you're starting to feel very weak.  The Sand Witch looks at you in confusion as the stream of milk from your massive breasts quickly slows and your breasts start to shrivel up.\n\n");
 		outputText("Trying to figure out why you feel so incredibly weak, you think back on what might have caused this.  When was the last time you had some of Marble's milk?  Feeling your body start to wither away, the realization hits you.  You chuckle softly at your captor as the world starts to go dark; looks like you'll be the one to have the last laugh...\n\n");
 		outputText("The last thing you hear is the Sand Witch screaming \"<i>What the hell is going on?  I ALWAYS get what I want!</i>\"");
@@ -352,14 +352,14 @@ private function sandwitchCentaurBoning():void {
 	player.sexReward("vaginalFluids","Dick");
 	outputText("The Sand Witch is panting before you, her clothes in disarray ");
 	//[win via HP]
-	if(monster.HP < 1) outputText("and torn in many places. ");
+	if(monster.HP <= monster.minHP()) outputText("and torn in many places. ");
 	//[win via lust]
 	else outputText("and her fingers squeezing her nipples as lust overwhelms her. ");
 	//[has breasts]
 	if(player.biggestTitSize() > 3) {
 		outputText("As you approach, her eyes drift up to your [allbreasts] and she ");
 		//[win via HP]
-		if(monster.HP < 1) outputText("is unable to stop herself from slowly licking her lips. ");
+		if(monster.HP <= monster.minHP()) outputText("is unable to stop herself from slowly licking her lips. ");
 		//[win via lust]
 		else outputText("sensually licks her parted lips. ");
 	}
@@ -763,14 +763,14 @@ private function missingoSex6():void {
 private function ovipositSandWitches():void {
 	clearOutput();
 	outputText("As you glance down at the ");
-	if(monster.HP < 1) outputText("bruised and battered");
+	if(monster.HP <= monster.minHP()) outputText("bruised and battered");
 	else outputText("lusty");
 	outputText(" sand witch, you feel the familiar tug of arousal in your loins.  Yet your current... situation offers quite the opportunity to relieve some tension through the use of your 'other' sexual appendage.  Licking your lips in anticipation, you lower yourself down to the obstinate spell caster, who immediately reacts with ");
-	if(monster.HP < 1) outputText("fright as she clamors to get away.");
+	if(monster.HP <= monster.minHP()) outputText("fright as she clamors to get away.");
 	else outputText("an uneasy curiosity to see what exactly you have planned.");
 	
 	//PC won through HP victory: 
-	if(monster.HP < 1) outputText("\n\nRolling your eyes, you offer a sympathetic hand to the defeated witch, showing her that you don't mean to hurt her any further, that you have something more... pleasurable in mind.  ");
+	if(monster.HP <= monster.minHP()) outputText("\n\nRolling your eyes, you offer a sympathetic hand to the defeated witch, showing her that you don't mean to hurt her any further, that you have something more... pleasurable in mind.  ");
 	outputText("The sand witch slows to a dead stop as she assesses your intentions, which are made all the more clear as you disrobe and toss your [armor] aside, exposing your ");
 	if(player.hasCock()) outputText("hardened  " + multiCockDescriptLight());
 	if(player.gender == 3) outputText(" and ");
@@ -1022,7 +1022,7 @@ public function witchBirfsSomeBees():void {
 private function sandwitchSpanking():void {
 	clearOutput();
 	outputText("Feeling euphoric after your clear victory, you lazily circle the panting witch and laugh at her.  \"<i>Look at you,</i>\" you taunt, \"<i>A mighty witch of the sands, laid low by a helpless traveller.");
-	if(monster.HP < 1) outputText("  You can't even stand up!");
+	if(monster.HP <= monster.minHP()) outputText("  You can't even stand up!");
 	else outputText("  You can't even stop masturbating, can you?");
 	outputText("</i>\"  You kick her hand away, and she tumbles down into a distraught heap, crying softly");
 	if(monster.lust >= monster.maxLust()) outputText(" but still masturbating");
@@ -1039,7 +1039,7 @@ private function sandwitchSpanking():void {
 	if(player.hasCock()) outputText("Worse still, [eachCock] is now unprotected and pressed against the rough stone by your body-weight.  It's less than pleasant.  ");
 	else if(player.hasVagina()) outputText("Worse still, your [vagina] is pressed up against the rough stone.  It's less than pleasant.  ");
 	outputText("You bristle at your helplessness");
-	if(player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.DragonFireBreath) >= 0) outputText(", breathing out a gout of flame in rage, but you can't even direct the blast properly like this.  All it does is melt some of the sand below into glass");
+	if(player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText(", breathing out a gout of flame in rage, but you can't even direct the blast properly like this.  All it does is melt some of the sand below into glass");
 	else outputText(", but there's nothing you can do");
 	outputText(".  Fingers tickle the [skin] of your bottom, and then, without warning, your [butt] is slapped!  The sound of the hit rings out across the desert, hard enough to make moisture bead at the corners of your eyes.");
 	outputText("\n\nThe smirking sorceress laughs, \"<i>You are too prideful for your own good.  Now, I will teach you respect for our order, one spank at a time.</i>\"  She doesn't even wait before hitting you again, bringing her hand down on your unprotected ass without hesitation.  You squirm from pain, trying to escape, to wiggle free, but there's no use - you're tied down with stone restraints that you can't hope to escape.  All you can do is writhe uselessly against your bindings while your [butt] is tanned bright red, tingling with residual pain even when it isn't being hit.");

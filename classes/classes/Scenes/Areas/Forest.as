@@ -44,7 +44,7 @@ use namespace CoC;
 		public function Forest() {
 			onGameInit(init);
 		}
-		
+
 		public function isDiscovered():Boolean {
 			return player.exploredForest > 0;
 		}
@@ -142,7 +142,7 @@ use namespace CoC;
 						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
 							//Extra chance of Jojo encounter.
-							return (player.findPerk(PerkLib.PiercedFurrite) >= 0
+							return (player.hasPerk(PerkLib.PiercedFurrite)
 									&& rand(5) == 0
 									&& (player.cor > 25 || JojoScene.monk > 0)) ? 1.2 : 1;
 						},
@@ -151,7 +151,7 @@ use namespace CoC;
 						name  : "tentaBeast",
 						call  : tentacleBeastEncounterFn,
 						when  : fn.ifLevelMin(3)
-					},{
+					}, {
 						name  : "corrGlade",
 						call  : corruptedGladeFn,
 						when  : function():Boolean {
@@ -160,23 +160,22 @@ use namespace CoC;
 						chance: function():Number {
 							return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
 						}
-					},{
+					}, {
 						name: "trip",
 						call: tripOnARoot
-					},{
+					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
 						chance: 0.50
-					}//,{
-					//	name  : "WoodElf",
-					//	call  : SceneLib.woodElves.findElves,
-					//	chance: 0.50,
-					//	when  : function ():Boolean {
-					//		return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
-					//				|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
-					//	}
-					//}
-					, {
+					}, {
+						name  : "WoodElf",
+						call  : SceneLib.woodElves.findElves,
+						chance: 0.50,
+						when  : function ():Boolean {
+							return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
+									|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
+						}
+					}, {
 						name  : "truffle",
 						call  : findTruffle,
 						chance: 0.35
@@ -377,8 +376,8 @@ use namespace CoC;
 				name: "fera_1",
 				when: function():Boolean {
 					return isHalloween()
-						   && player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0
-						   && player.findPerk(PerkLib.FerasBoonAlpha) < 0
+						   && !player.hasPerk(PerkLib.FerasBoonBreedingBitch)
+						   && !player.hasPerk(PerkLib.FerasBoonAlpha)
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
 				call: Holidays.pumpkinFuckEncounter
@@ -554,13 +553,13 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest.");
 				}
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
 						outputText("  Juices stream from your womanhood and begin pooling on the dirt and twigs beneath you.  ");
@@ -579,13 +578,13 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest floor.");
 				}
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
 						if (lake) outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the mud beneath you.  The sloppy fem-spunk only makes the ground more muddy.");

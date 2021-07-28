@@ -27,7 +27,7 @@ public class BeeHoney extends Consumable
     {
         private const PURE_HONEY_VALUE:int = 40;
         private const SPECIAL_HONEY_VALUE:int = 20;
-		
+
         public function BeeHoney(pure:Boolean, special:Boolean) {
 			var honeyName:String = special ? "SpHoney" : ((pure ? "PurHony" : "BeeHony"));
 			var honeyLong:String = special ? "a bottle of special bee honey" : ((pure ? "a crystal vial filled with glittering honey" : "a small vial filled with giant-bee honey"));
@@ -41,7 +41,7 @@ public class BeeHoney extends Consumable
 					honeyDesc
 			);
         }
-		
+
 		override public function canUse():Boolean {
             if (value == SPECIAL_HONEY_VALUE && CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
                 outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>“Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.”</i>  You give an exasperated sigh and put the cork back in the bottle.");
@@ -49,7 +49,7 @@ public class BeeHoney extends Consumable
 			}
 			return true;
 		}
-		
+
 		override public function useItem():Boolean {
             var player:Player = CoC.instance.player;
             var pure:Boolean = (value == PURE_HONEY_VALUE);
@@ -62,16 +62,7 @@ public class BeeHoney extends Consumable
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			changeLimit += player.additionalTransformationChances;
 			//Drink text
 			if (special) {
 				outputText("You uncork the bottle and pour the incredibly strong smelling concentrated honey down your throat.  Its taste is also mighty intense.  All at once you feel the effects of the substance start to course through your body.");
@@ -107,7 +98,8 @@ public class BeeHoney extends Consumable
 				//Libido Reduction
 				if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
 					outputText(" and settling your overcharged sex-drive a bit.");
-					game.player.dynStats("lib", -3, "lus", -20);
+					dynStats("lus", -20);
+					player.addCurse("lib", 3, 1);
 					changes++;
 				}
 				else if (player.cor > 0) outputText(".");
@@ -117,7 +109,8 @@ public class BeeHoney extends Consumable
 			if (changes < changeLimit && player.hairType == 4 && Utils.rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nAs you down the sticky-sweet honey, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels and smells like the honey you just ate; you watch as it dissolves into many thin strands coated in the sugary syrup.  <b>Your hair is back to normal (well, once you wash the honey out)!</b>");
-				mutations.setHairType(Hair.NORMAL);
+				outputText("\n\n");
+				CoC.instance.transformations.HairHuman.applyEffect(false);
 				changes++;
 			}
 			//(removes tentacle hair status, restarts hair growth if not prevented by reptile status)
@@ -155,34 +148,25 @@ public class BeeHoney extends Consumable
 				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
 				else outputText(player.skinTone + " " + player.skinDesc);
 				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				game.player.dynStats("sen", -5);
+				dynStats("sen", -5);
 				player.removeBreastRow(player.breastRows.length - 1, 1);
 			}
 			//Antennae
 			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.BEE && Utils.rand(3) == 0) {
-				if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
-				else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + Appearance.hairDescription(player) + ".");
-				mutations.setAntennae(Antennae.BEE);
+				outputText("\n\n");
+				CoC.instance.transformations.AntennaeBee.applyEffect();
 				changes++;
 			}
 			//Horns
 			if (changes < changeLimit && player.horns.count > 0 && player.lowerBody != LowerBody.GARGOYLE && Utils.rand(3) == 0) {
-				outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.");
-				mutations.setHornType(Horns.NONE);
+				outputText("\n\n");
+				CoC.instance.transformations.HornsNone.applyEffect();
 				changes++;
 			}
 			// Chitin
 			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW || player.skin.coat.type != Skin.CHITIN || player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
-				player.skin.growCoat(Skin.CHITIN,{
-					color:"yellow",
-					color2:"black",
-					pattern:Skin.PATTERN_BEE_STRIPES
-				},Skin.COVERAGE_LOW);
-				// TODO grow chitin text
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
-					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
-				}
+				outputText("\n\n");
+				CoC.instance.transformations.SkinChitin(Skin.COVERAGE_LOW, {color:"yellow",	color2:"black",	pattern:Skin.PATTERN_BEE_STRIPES}).applyEffect();
 				changes++;
 			}
 			//Bee Legs
@@ -190,22 +174,14 @@ public class BeeHoney extends Consumable
 				&& player.lowerBody != LowerBody.BEE
 				&& player.lowerBody != LowerBody.GARGOYLE
 				&& Utils.rand(4) == 0) {
-				outputText("\n\nYour legs tremble with sudden unbearable pain, as if they're being ripped apart from the inside out and being stitched together again all at once.  You scream in agony as you hear bones snapping and cracking.  A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining black chitin from the thigh down, and downy yellow fuzz along your upper thighs.");
-				mutations.setLowerBody(LowerBody.BEE);
-				player.legCount = 2;
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyBee.applyEffect();
 				changes++;
 			}
 			//(Arms to carapace-covered arms)
 			if (player.arms.type != Arms.BEE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && Utils.rand(4) == 0) {
 				outputText("\n\n");
-				if (player.arms.type == Arms.SPIDER) outputText("On your upper arms slowly starting to grown yellow fuzz making them looks more like those of bee.");
-				else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. Additionaly on your upper arms appear yellow fuzz.");
-				else {
-					//(Bird pretext)
-					if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
-					outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.");
-				}
-				mutations.setArmType(Arms.BEE);
+				CoC.instance.transformations.ArmsBee.applyEffect();
 				changes++;
 			}
 			//-Nipples reduction to 1 per tit.
@@ -220,7 +196,7 @@ public class BeeHoney extends Consumable
 				}
 			}
 			//Gain oviposition!
-			if (changes < changeLimit && player.findPerk(PerkLib.BeeOvipositor) < 0 && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {
+			if (changes < changeLimit && !player.hasPerk(PerkLib.BeeOvipositor) && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {
 				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
 				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0);
@@ -228,11 +204,8 @@ public class BeeHoney extends Consumable
 			}
 			//Bee butt - 66% lower chance if already has a tail
 			if (changes < changeLimit && player.tailType != Tail.BEE_ABDOMEN && player.lowerBody != LowerBody.GARGOYLE && (player.tailType == Tail.NONE || Utils.rand(1.5) == 0) && Utils.rand(4) == 0) {
-				if (player.tailType > Tail.NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.");
-				else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a bee's abdomen.</b>");
-				mutations.setTailType(Tail.BEE_ABDOMEN,1);
-				player.tailVenom = 10;
-				player.tailRecharge = 5;
+				outputText("\n\n");
+				CoC.instance.transformations.TailBee.applyEffect();
 				changes++;
 			}
 			//Venom Increase
@@ -247,29 +220,28 @@ public class BeeHoney extends Consumable
 			//Wings
 			//Grow bigger bee wings!
 			if (changes < changeLimit && player.wings.type == Wings.BEE_LIKE_SMALL && Utils.rand(4)) {
+				outputText("\n\n");
+				CoC.instance.transformations.WingsBeeLarge.applyEffect();
 				changes++;
-				mutations.setWingType(Wings.BEE_LIKE_LARGE, "large bee-like");
-				outputText("\n\nYour wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly!  <b>You now have large bee wings!</b>  You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.");
 			}
 
 			//Grow new bee wings if player has none.
 			if (changes < changeLimit && player.wings.type == Wings.NONE && Utils.rand(4)) {
+				outputText("\n\n");
+				CoC.instance.transformations.WingsBeeSmall.applyEffect();
 				changes++;
-				outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.  You hastily remove the top portion of your [armor] and marvel as a pair of small bee-like wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new bee wings</b>.");
-				mutations.setWingType(Wings.BEE_LIKE_SMALL, "small bee-like");
 			}
 			//Melt demon wings!
 			if (changes < changeLimit && player.wings.type != Wings.BEE_LIKE_SMALL && player.wings.type != Wings.BEE_LIKE_LARGE) {
 				changes++;
 				outputText("\n\nYour wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
-				mutations.removeWings();
+				outputText("\n\n");
+				CoC.instance.transformations.WingsNone.applyEffect();
 			}
 			//Remove gills!
 			if (Utils.rand(4) == 0 && player.hasGills() && changes < changeLimit) {
-				if (player.gills.type == Gills.ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
-				else outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water quite so long anymore.");
-				outputText("  <b>You no longer have gills!</b>");
-				mutations.updateGills(Gills.NONE);
+				outputText("\n\n");
+				CoC.instance.transformations.GillsNone.applyEffect();
 				changes++;
 			}
 
@@ -289,7 +261,7 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockLength = Utils.rand(3) + 8;
 					player.cocks[0].cockThickness = 2;
 					player.orgasm();
-					game.player.dynStats("sen", 10);
+					player.addCurse("sen", 10, 1);
 				}
 				else if (player.cocks.length > 1) {
 					var biggest:int = player.biggestCockIndex();
@@ -298,7 +270,7 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockThickness	+= Math.sqrt(0.2 * player.cocks[biggest].cArea());
 					player.removeCock(biggest, 1);
 					player.orgasm();
-					game.player.dynStats("sen", 5);
+					player.addCurse("sen", 5, 1);
 				}
 				else if (player.cocks[0].cArea() < 100) {
 					outputText("\n\nYour [cock] suddenly becomes rock hard and incredibly sensitive to the touch.  You pull away your [armor], and start to masturbate furiously as it rapidly swells in size.  When the change finally finishes, you realize that your [cock] has both grown much longer and wider!  <b>");
@@ -310,7 +282,7 @@ public class BeeHoney extends Consumable
 					outputText("</b>");
 					player.cocks[0].cockLength += (Utils.rand(3) + 4) * mult; //4 to 6 inches in length
 					player.cocks[0].cockThickness += (0.1 * Utils.rand(5) + 0.5) * mult; //0.5 to 1 inches in thickness
-					game.player.dynStats("sen", 5);
+					player.addCurse("sen", 5, 1);
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
 					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
@@ -319,7 +291,7 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockType = CockTypesEnum.BEE;
 					player.cocks[0].cockLength += 5 * mult;
 					player.cocks[0].cockThickness += 1 * mult;
-					game.player.dynStats("sen", 15);
+					player.addCurse("sen", 15, 1);
 				}
 				else {
 					if (mult > 0) {
@@ -330,16 +302,18 @@ public class BeeHoney extends Consumable
 					else {
 						outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time and you have a feeling that your " + player.cockDescript(0) + " hasn't grown at all! Perhaps you've reached the upper limit of cock growth from special honey?");
 					}
-					game.player.dynStats("sen", 3);
+					player.addCurse("sen", 3, 1);
 				}
 				if (player.cor >= 5) {
 					outputText("\n\nYour mind feels surprisingly clear of the twisted thoughts that have plagued it as of late, but you find yourself feeling more and more aroused than usual.");
 					var corLoss:int = Math.min(0.1 * player.cor + 5, player.cor);
-					game.player.dynStats("cor", -corLoss, "lib", corLoss); //Lose corruption and gains that much libido
+					dynStats("cor", -corLoss); //Lose corruption and gains that much libido
+					player.MutagenBonus("lib", corLoss);
 				}
 				else {
 					outputText("\n\nYou find your mind is drifting to the thought of using your member to fertilize hundreds and hundreds of eggs every day.  You shake your head, the bizarre fantasy catching you completely off guard.");
-					game.player.dynStats("cor=", 0, "lib", 5);
+					dynStats("cor=", 0);
+					player.MutagenBonus("lib", 5);
 				}
 				if (player.femininity >= 60 || player.femininity <= 40) {
 					outputText("\n\nYour face shifts in shape, becoming more androgynous.");

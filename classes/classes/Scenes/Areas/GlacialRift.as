@@ -19,6 +19,7 @@ import classes.Scenes.Areas.Tundra.Valkyrie;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.GooArmor;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -134,6 +135,7 @@ use namespace CoC;
 					break;
 				case 3: //Winter Wolf
 					clearOutput();
+					spriteSelect(SpriteDb.s_winterWolf);
 					outputText("A titanic howling sound is heard nearby as an enormous shape jump off a nearby cliff into the snow right in front of you. As the flying snow clear off you see a wolf of immaculate pelt and size bordering the absurd. You likely accidentally stepped into its hunting territory and to clearly show its displeasure the ten feet tall monster growl at you showing its dagger-like teeth then start running in your direction howling what sounds to be a challenge.\n\n");
 					GlacialRiftConditions();
 					startCombat(new WinterWolf());
@@ -310,9 +312,9 @@ use namespace CoC;
 			outputText("The feeling then sprouts along the back of your neck and down your spine, and you pitch forward in simliar agony as you feel something pierce through your skin outward, freezing and burning its way out and down all the way to the base of your lupine tail. Once more you howl in pain, then once more the pain abruptly ceases, but not the feeling of the cold. Indeed, you notice that even the cold of the air and the frozen ground no longer feel painful; they feel comfortable, in fact. The chill air is bracing and energizing, and you are filled with the urge to race forward and chase, corner, bite, devour, kill. The frozen wastes of the world belong to <b>you</b>. They are <b>your</b> hunting ground, <b>your</b> kingdom, and let all who dare to trespass fear your wrath! <b>Your back is now covered with sharp ice spike constantly cooling the air around you and protecting you from the cold. (Gained Frozen Waste and Cold Mastery perks)</b>\n\n");
 			outputText("Then, suddenly, you feel even the warmth inside your own body die out, replaced by a creeping chill that starts at your extremities and creeps inward, killing the heat of life, the palpable kindness of living warmth, and replacing it with the cruel chill of the dead, still air of a lightless winter night. As it spreads up your torso something forces its way up and out, and you howl one last time, not in pain but in exultation, and the very air before you stills its movement as your voice saps the life and warmth from it. <b>You can now use Freezing Breath and Frostbite.</b>\n\n");
 			outputText("With a new sense of purpose and the thrill of the coming hunt you return to your camp. Let Lethice and her Demons tremble in the cold of the coming winter; Mareth has something far greater to fear now. Your ice will spread and cover the world of the living until all know and shiver at the name of <b>Fenrir</b>.\n\n");
-            if (player.faceType == Face.ANIMAL_TOOTHS) CoC.instance.mutations.setFaceType(Face.WOLF);
-            CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
-			CoC.instance.mutations.setRearBody(RearBody.FENRIR_ICE_SPIKES);
+      if (player.faceType == Face.ANIMAL_TOOTHS) CoC.instance.transformations.FaceWolf.applyEffect(false);
+			CoC.instance.transformations.EyesFenrir.applyEffect(false);
+			CoC.instance.transformations.RearBodyFenrirIceSpikes.applyEffect(false);
 			player.createPerk(PerkLib.ColdMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FromTheFrozenWaste, 0, 0, 0, 0);

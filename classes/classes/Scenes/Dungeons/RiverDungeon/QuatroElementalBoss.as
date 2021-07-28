@@ -89,14 +89,14 @@ public class QuatroElementalBoss extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The razor-like rocks cut into you. ");
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
+				damage = player.takeEarthDamage(damage, true);
 			}
 		}
 		public function subbossSpecial3():void {
@@ -110,14 +110,14 @@ public class QuatroElementalBoss extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The watery strikes connect with your body. ");
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
 			}
 		}
 		public function subbossSpecial4():void {
@@ -129,30 +129,30 @@ public class QuatroElementalBoss extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The wind slices through you. ");
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
-				damage = player.takePhysDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
+				damage = player.takeWindDamage(damage, true);
 			}
 		}
 		

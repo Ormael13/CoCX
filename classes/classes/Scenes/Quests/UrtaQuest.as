@@ -313,10 +313,10 @@ public function startUrtaQuest():void {
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
 	var UrtaMulti:Number = 1;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.1;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 2) UrtaMulti += 0.3;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 3) UrtaMulti += 0.6;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 4) UrtaMulti += 1;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.2;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 2) UrtaMulti += 0.5;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 3) UrtaMulti += 1;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 4) UrtaMulti += 2.5;
 	player.strStat.core.value = Math.round(player.str * UrtaMulti);
 	player.touStat.core.value = Math.round(player.tou * UrtaMulti);
 	player.speStat.core.value = Math.round(player.spe * UrtaMulti);
@@ -920,7 +920,7 @@ public function runIntoAGoblin(camped:Boolean = false):void {
 public function winFuckAGoblinBroodmotherAsUrta():void {
 	clearOutput();
 	outputText("You greedily eye the ");
-	if(monster.HP < 1) outputText("submissive");
+	if(monster.HP <= monster.minHP()) outputText("submissive");
 	else outputText("feverishly masturbating");
 	outputText(" form of your opponent and can't resist licking your black lips in anticipation - any guilt about fucking someone besides " + player2.short + " that might make it through the haze of lust consuming you is quickly extinguished by your conviction that " + player2.mf("he","she") + " would understand.  Your growing tower of fuck-meat is already lifting the hem of your armored skirt, making it even easier to grab its lower edge and flip it up out of the way as you advance towards your assailant, eager to see what you can do about blowing off some steam...");
 	outputText("\n\nThe saffron-skinned slut sees your advance and has the audacity to smirk at you.  \"<i>If you wanted to be on top, sexy, all you had to do was say so,</i>\" she giggles.  Without further ado she flops onto her bountiful ass, her jiggling booty easily absorbing the impact, and then lays back, doing her best to smirk at you as she lewdly spreads her netherlips with her fingers, letting you fully admire her elastic cunt.");
@@ -1721,7 +1721,7 @@ public function winRapeHyenaPrincess():void {
 	clearOutput();
 	outputText("Laughing at the Amazonian princess, you unbuckle your skirt, not even bothering to shed your armor.  Sure, your hard onyx nipples are digging into the inner lining of your leather breastplate, but it's just another pleasant sensation feeding your arousal.  In the back of your mind, you hope " + player2.short + " won't mind this indiscretion - you can't afford to go wandering around unsated in a place like this.  If a succubus found you all alone and turned on, you might actually fall for her tricks, resistant as you are.  You pray that " + player2.mf("he","she") + "'ll understand.");
 	outputText("\n\nYour guilt temporarily assuaged, you round on your prize, letting her see the sheer girth of your rising horse-cock, the mottled pink and black flesh thickening and filling until it gleams in the sunlight.  The gnoll gasps while her bright-pink girl-cock sprouts from her clitoral hood, nearly matching you in size and length.  \"<i>It's soo... big!</i>\" she says, almost reverently");
-	if(monster.HP < 1) outputText(".  In spite of her wounded state, she seems to be quite excited by the situation");
+	if(monster.HP <= monster.minHP()) outputText(".  In spite of her wounded state, she seems to be quite excited by the situation");
 	outputText(".");
 	outputText("\n\nPrancing up confidently, you smear your dick across her nose, distracting her with your potent, equine scent while you pull a spear from her backpack.  You pull her wrists together behind her back and smack the spear into her hands.  It bursts into a sticky mess, shrouding her hands and restraining them together.  The gnoll starts to struggle, but you easily push her over, rolling her over unmercifully.");
 	outputText("\n\n\"<i>Look, I SAW how you were looking at my dick.  Don't pretend you don't want this.  I just need a little guarantee you aren't gonna turn the tables,</i>\" you say almost apologetically.");
@@ -2224,7 +2224,7 @@ public function milkyUrtaTic():void {
 public function urtaBeatsUpCowcubi():void {
 	clearOutput();
 	//HP:
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("The succubus trips and falls on her face, dropping her whip at your feet.  You quickly take her whip and use it to bind her hands behind her back.");
 		outputText("\n\n\"<i>Oh, bondage... now you're getting me worked up,</i>\" she laughs and looks up at you seductively.");
 		outputText("\n\n\"<i>Breathing gets you worked up,</i>\" is your flatly intoned reply.");

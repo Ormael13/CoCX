@@ -2,7 +2,7 @@
  * ...
  * @author Zavos
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -15,16 +15,17 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
+import classes.CoC;
 
 public class WorldTree extends BaseContent
 	{
 		public var mutations:MutationsHelper = new MutationsHelper();
-		
-		public function WorldTree() 
+
+		public function WorldTree()
 		{
-			
+
 		}
-		
+
 		public function YggdrasilDiscovery():void {
 			clearOutput();
 			outputText("With your soul sense, tracing the song back to it’s source is a simple task. Before long, you’re walking the same path in the deep woods as before, and soon you reach the same statuesque tree.\n\n");
@@ -72,9 +73,9 @@ public class WorldTree extends BaseContent
 					else addButton(14, "Leave", LeaveWorldTree);
 				}
 			}
-			
+
 		}
-		
+
 		public function YggdrasilMainMenu():void {
 			clearOutput();
 			outputText("PLACEHOLDER TILL ZAVOS WIRTE TEXT FOR THIS MENU.\n\n");
@@ -91,19 +92,19 @@ public class WorldTree extends BaseContent
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
 			else addButton(14, "Leave", LeaveWorldTree);
 		}
-		
+
 		public function WhatAreYou():void {
 			clearOutput();
 			outputText("\"<i>We are Yggdrasil. You do not understand. You could, but you probably would not. We are the natural life of Mareth, from every tree to every blade of grass. We are the natural world. You stand in our “body”, but it is nothing but a shell to be filled with our voices, to hone our whispers into a song of life, an image to speak on our behalf. Alone, we are nothing, unthinking.  Together, we are Yggdrasil.</i>\"\n\n");
 			doNext(YggdrasilMainMenu);
 		}
-		
+
 		public function PurityCorruption():void {
 			clearOutput();
 			outputText("\"<i>We are pure. We are corrupt. We embody the natural balance, both corrupt and pure. We are the holy fruits planted by Marae. We are the corrupt vines sown by Lethice. Once, we were naught but purity and neutrality, but now we are a voice for the corrupt as well.  Naught amongst us deserves to exist more than any other.</i>\"\n\n");
 			doNext(YggdrasilMainMenu);
 		}
-		
+
 		public function AidTakeBranch():void {
 			clearOutput();
 			if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) {
@@ -125,7 +126,7 @@ public class WorldTree extends BaseContent
 			}
 			inventory.takeItem(useables.WT_BRAN, YggdrasilMainMenu);
 		}
-		
+
 		public function AcceptTransform():void {
 			clearOutput();
 			outputText("\"<i>Then listen to our song. Here, at the center of our power, accept it into yourself.</i>\" You nod and begin to focus... the song is all around you, the resonation of countless flora and fauna. As time passes you begin to feel as though you are more than a listener, you feel as if you are swimming in a river of power that begs you to let it in. After a moment of hesitation, you mentally submerge yourself in the song, feeling it resonate in your mind, body and soul.\n\n");
@@ -141,17 +142,17 @@ public class WorldTree extends BaseContent
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) flags[kFLAGS.YGGDRASIL_TF]++;
 			doNext(YggdrasilMainMenu);
 		}
-		
+
 		public function DeclineWolrdTreeOffer():void {
 			outputText("\"<i>So be it. You are welcome here always, particularly if you change your mind.</i>\" After a minute of looking for the exit, you find the spot you entered from. Once you are out in the daylight, the events within the tree seem somewhat surreal, almost feeling like they were little more than a dream. Shaking your head and resolving to think on this later,you make your way back to your camp.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function LeaveWorldTree():void {
 			outputText("You bid Yggdrasil farewell and return to your camp.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function yggdrasilTF():void
 		{
 			var changes:Number = 0;
@@ -240,43 +241,30 @@ public class WorldTree extends BaseContent
 			if (player.hairColor == "green" && player.hairLength > 0 && (player.hairType != Hair.LEAF && player.hairType != Hair.GRASS && player.hairType != Hair.ANEMONE) && !player.isGargoyle() && changes < changeLimit)
 			{
 				if (player.cor >= 66) {
-					outputText("Your balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
-					player.hairType = Hair.ANEMONE;
-					player.hairLength = 5;
-					if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-						outputText("  <b>(Your hair has stopped growing.)</b>\n\n");
-						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
-					}
+					outputText("\n\n");
+					CoC.instance.transformations.HairAnemone.applyEffect();
 				}
 				if (player.cor >= 33 && player.cor < 66) {
 					if (rand(2) == 0) {
-						outputText("Your balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
-						player.hairType = Hair.ANEMONE;
-						player.hairLength = 5;
-						if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-							outputText("  <b>(Your hair has stopped growing.)</b>\n\n");
-							flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
-						}
-					}
-					else {
+						outputText("\n\n");
+						CoC.instance.transformations.HairAnemone.applyEffect();
+					} else {
 						if (rand(2) == 0) {
-							outputText("Your [hair] begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>\n\n");
-							player.hairType = Hair.GRASS;
-						}
-						else {
-							outputText("Your [hair] begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>\n\n");
-							player.hairType = Hair.LEAF;
+							outputText("\n\n");
+							CoC.instance.transformations.HairGrass.applyEffect();
+						}	else {
+							outputText("\n\n");
+							CoC.instance.transformations.HairLeaf.applyEffect();
 						}
 					}
 				}
 				if (player.cor < 33) {
 					if (rand(2) == 0) {
-						outputText("Your [hair] begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>\n\n");
-						player.hairType = Hair.GRASS;
-					}
-					else {
-						outputText("Your [hair] begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>\n\n");
-						player.hairType = Hair.LEAF;
+						outputText("\n\n");
+						CoC.instance.transformations.HairGrass.applyEffect();
+					}	else {
+						outputText("\n\n");
+						CoC.instance.transformations.HairLeaf.applyEffect();
 					}
 				}
 				changes++;
@@ -339,15 +327,11 @@ public class WorldTree extends BaseContent
 				outputText("You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>\n\n");
 				player.lowerBody = LowerBody.YGG_ROOT_CLAWS;
 				if (player.legCount != 2) player.legCount = 2;
-				changes++;//player.arms.type == ORCA && 
+				changes++;//player.arms.type == ORCA &&
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS && player.faceType != Face.PLANT_DRAGON && changes < changeLimit) {
-				outputText("The familiar tingle of transformation spreads across your face. Your ");
-				if (player.hasMuzzle()) outputText("muzzle");
-				else outputText("face");
-				outputText(" shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n");
-				player.faceType = Face.PLANT_DRAGON;
+        CoC.instance.transformations.FacePlantDragon.applyEffect();
 				changes++;
 			}
 			//Plant dragon tail
@@ -371,8 +355,8 @@ public class WorldTree extends BaseContent
 				if (player.hasFur()) outputText("You scratch yourself, and come away with a large clump of " + player.coatColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
 				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
 				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your “scales” are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
-				player.skin.growCoat(Skin.SCALES,{color:"mahogany",adj:"bark-like"},Skin.COVERAGE_COMPLETE);
-				changes++;	
+				CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {color:"mahogany", adj:"bark-like"}).applyEffect(false);
+				changes++;
 			}
 			if (player.ears.type != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("All around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
@@ -383,7 +367,7 @@ public class WorldTree extends BaseContent
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-		
+
 	}
 
 }

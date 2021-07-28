@@ -351,7 +351,7 @@ private function wakeUpAfterDemonGangBangs():void {
 	fatigue(20);
 	player.slimeFeed();
 	dynStats("tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
-	player.addCurse("str", 2);
+	player.addCurse("str", 2, 2);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
@@ -368,13 +368,13 @@ public function defeetVapulasHorde():void {
 	}
 	//Sacrificed and bound
 	if(monster.hasStatusEffect(StatusEffects.AttackDisabled)) {
-	   if(monster.HP < 1) outputText("You grin wickedly as the last demons fall, defeated.  Some of the errant blows have broken and mangled the links of your chains, and you find you can get free with a bit of additional effort.");
+	   if(monster.HP <= monster.minHP()) outputText("You grin wickedly as the last demons fall, defeated.  Some of the errant blows have broken and mangled the links of your chains, and you find you can get free with a bit of additional effort.");
 		//[if won by Lust]
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even begins unfastening your bindings, hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
 	}
 	//Not
 	else {
-		if(monster.HP < 1) outputText("You grin wickedly as the last demons fall, defeated.");
+		if(monster.HP <= monster.minHP()) outputText("You grin wickedly as the last demons fall, defeated.");
 		//[if won by Lust]
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even has hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
 	}
@@ -408,7 +408,7 @@ private function rapeZeVapula():void {
 		//[if vagina]
 		if(player.hasVagina()) outputText("You stick a finger in your own " +vaginaDescript()+ " in order to lubricate it.  ");
 		outputText("The defeated horde watches you touch yourself with avid, almost desperate eyes.  You keep teasing yourself, saving your lust for the torrid storm of rape you're about to unleash on the poor creatures who dared attack you.  You walk among the battered bodies, looking for the prey that will best suit you; then you find her.  Vapula is lying here, her purple skin masking ");
-		if(monster.HP < 1) outputText("the many bruises she's received");
+		if(monster.HP <= monster.minHP()) outputText("the many bruises she's received");
 		else outputText("the constant flushing due to intense arousal");
 		outputText(".  You harshly grab her hand and grunt, \"<i>On your feet, cunt.</i>\"  She is too stunned to protest and weakly stands up, her leather straps torn to completely reveal her voluptuous body.  You feel the sudden urge to take her right now and fuck her like a ");
 		if(player.hasVagina()) outputText("bitch in heat");
@@ -473,7 +473,7 @@ private function rapeZeVapula():void {
 		//[if vagina]
 		if(player.hasVagina()) outputText("You stick a finger in your own " +vaginaDescript()+ " in order to lubricate it.  ");
 		outputText("The defeated horde watches you touch yourself with avid, almost desperate eyes.  You keep teasing yourself, saving your lust for the torrid storm of rape you're about to unleash on the poor creatures who dared attack you.  You walk among the battered bodies, looking for the prey that will best suit you; then you find her.  Vapula is lying here, her purple skin masking ");
-		if(monster.HP < 1) outputText("the many bruises she's received");
+		if(monster.HP <= monster.minHP()) outputText("the many bruises she's received");
 		else outputText("the constant flushing due to intense arousal");
 		outputText(".  You harshly grab her hand and grunt, \"<i>On your feet, cunt.</i>\"  She is too stunned to protest and weakly stands up, her leather straps torn to completely reveal her voluptuous body.  You feel the sudden urge to take her right now and fuck her like a ");
 		if(player.hasVagina()) outputText("bitch in heat");
@@ -1012,7 +1012,7 @@ private function slaveToVapulaBadEnd():void {
 private function subdueVapula():void {
 	clearOutput();
 	outputText("At last, the final demon falls, ");
-	if(monster.HP < 1) outputText("overwhelmed by your might");
+	if(monster.HP <= monster.minHP()) outputText("overwhelmed by your might");
 	else outputText("rendered insensate by his own lust");
 	outputText(".  As usual, you walk among the forlorn bodies of your enemies.  Vapula is groveling on the floor again, looking up to you with imploring eyes.  Even beaten and broken, the luscious succubus remains the most preeminent figure of the motley rabble.");
 	outputText("\n\nYou grip her by the shoulders and stare at her, asserting your dominance.  Your vanquished foe casts her gaze down but maintains eye contact; she looks solemn and reflective, probably knowing that her fate will depend on your next decision.");

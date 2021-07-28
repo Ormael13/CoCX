@@ -38,7 +38,7 @@ package classes.Items.Consumables
 				}
 			}
 			//Grant perk or rank it up
-			if (rand(1) == 0 && player.findPerk(PerkLib.MilkMaid) < 0) {
+			if (rand(1) == 0 && !player.hasPerk(PerkLib.MilkMaid)) {
 				outputText("\n\n");
 				outputText("You can feel something inside your [chest] as they feel more dense. Your entire body tingles with a strange feel. Somehow, you know you won't be able to stop lactating.\n");
 				outputText("<b>Gained Perk: Milk Maid! (Your milk production is increased by 200mL and you won't stop lactating.)</b>");

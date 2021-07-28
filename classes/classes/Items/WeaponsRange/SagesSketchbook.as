@@ -30,13 +30,13 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function playerEquip():WeaponRange {
-			while (game.player.findPerk(PerkLib.SagesKnowledge) >= 0) game.player.removePerk(PerkLib.SagesKnowledge);
+			while (game.player.hasPerk(PerkLib.SagesKnowledge)) game.player.removePerk(PerkLib.SagesKnowledge);
 			game.player.createPerk(PerkLib.SagesKnowledge,0.6,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():WeaponRange {
-			while (game.player.findPerk(PerkLib.SagesKnowledge) >= 0) game.player.removePerk(PerkLib.SagesKnowledge);
+			while (game.player.hasPerk(PerkLib.SagesKnowledge)) game.player.removePerk(PerkLib.SagesKnowledge);
 			return super.playerRemove();
 		}
 	}

@@ -31,7 +31,7 @@ import classes.internals.ChainedDrop;
 			//Success:
 			if (player.inte / 5 + rand(20) < 24 + player.newGamePlusMod() * 5) {
 				//Immune to Basilisk?
-				if (player.findPerk(PerkLib.BasiliskResistance) >= 0) {
+				if (player.hasPerk(PerkLib.BasiliskResistance)) {
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. However, no matter how much you look into the eyes, you do not see anything wrong. All you can see is the basilisk. The basilisk curses as he finds out that you're immune!");
 				}
 				else {
@@ -40,8 +40,8 @@ import classes.internals.ChainedDrop;
 					//apply status here
 					basiliskSpeed(player,20);
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
-					if (player.findPerk(PerkLib.GorgonsEyesEvolved) >= 0) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
-					else if (player.findPerk(PerkLib.GorgonsEyes) >= 0) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
+					if (player.hasPerk(PerkLib.GorgonsEyesEvolved)) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
+					else if (player.hasPerk(PerkLib.GorgonsEyes)) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
 					else flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}
 			}

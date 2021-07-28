@@ -15,6 +15,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class Centaurinum extends Consumable{
 	public function Centaurinum() {
@@ -24,16 +25,7 @@ public class Centaurinum extends Consumable{
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
 		var temp2:Number = 0;
 		var temp3:Number = 0;
@@ -74,7 +66,8 @@ public class Centaurinum extends Consumable{
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
@@ -82,7 +75,8 @@ public class Centaurinum extends Consumable{
 						outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
@@ -90,7 +84,8 @@ public class Centaurinum extends Consumable{
 						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35)
+						dynStats("lus", 35)
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
@@ -98,14 +93,16 @@ public class Centaurinum extends Consumable{
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
 				}
 				//MULTICOCK
 				else {
-					dynStats("sen", 4, "lus", 35);
+					dynStats("lus", 35);
+					player.addCurse("sen", 4, 1);
 					player.MutagenBonus("lib", 5);
 					temp = player.addHorseCock();
 					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + player.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
@@ -131,7 +128,8 @@ public class Centaurinum extends Consumable{
 				if (player.cocks.length == 1) {
 					temp2 = player.increaseCock(0, rand(3) + 1);
 					temp = 0;
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				//Multicock
 				else {
@@ -151,7 +149,8 @@ public class Centaurinum extends Consumable{
 					//Grow smallest cock!
 					//temp2 changes to growth amount
 					temp2 = player.increaseCock(temp, rand(4) + 1);
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				outputText("\n\n");
 				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
@@ -276,91 +275,51 @@ public class Centaurinum extends Consumable{
 
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyHoofed(4).applyEffect();
 			changes++;
-			outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.");
-			if (player.gender > 0) {
-				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
-			}
 			player.MutagenBonus("spe", 3);
-			mutations.setLowerBody(LowerBody.HOOFED);
-			player.legCount = 4;
 		}
 		//generic version
 		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
-			//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-			if (player.isNaga() || player.isScylla()) {
-				if (player.isNaga()) {
-					outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
-				}
-				if (player.isScylla()) {
-					outputText("\n\nYou collapse as your tentacle legs start to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
-				}
-			}
-			//Catch-all
-			else outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>");
-			if (player.gender > 0) outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
-			if ((player.lowerBody == LowerBody.HUMAN && player.arms.type != Arms.KITSUNE) || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS
-					|| player.lowerBody == LowerBody.AVIAN || player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.ELF)
-			{
-				outputText("\n\n <b>Furthermore your feets turned into hooves!</b>");
-				mutations.setLowerBody(LowerBody.HOOFED);
-			}
-			else if (player.lowerBody == LowerBody.HUMAN && player.arms.type == Arms.KITSUNE){
-				outputText("\n\n <b>Furthermore your feet turned into fox paws!</b>");
-				mutations.setLowerBody(LowerBody.FOX);
-			}
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyTaur().applyEffect();
 			player.MutagenBonus("spe", 3);
-			//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>");
-			player.legCount = 4;
-			//dynStats("cor", 0);
 			changes++;
 		}
 		//Horse tail
 		if (player.lowerBody == LowerBody.HOOFED && player.tailType != Tail.GARGOYLE && player.tailType != Tail.HORSE && changes < changeLimit && rand(3) == 0) {
-			//no tail
-			if (player.tailType == 0) {
-				outputText("\n\nThere is a sudden tickling on your ass, and you notice you have sprouted a long shiny horsetail of the same [haircolor] color as your hair.");
-			}
-			//if other animal tail
-			if (player.tailType > Tail.HORSE && player.tailType <= Tail.COW) {
-				outputText("\n\nPain lances up your [asshole] as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.");
-			}
-			//if bee/mantis/scorpion/spider-butt.
-			if ((player.tailType > Tail.COW && player.tailType < Tail.SHARK) || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN) {
-				outputText("\n\nYour insect-like abdomen bunches up as it begins shrinking, exoskeleton flaking off like a snake sheds its skin.  It bunches up until it is as small as a tennis ball, then explodes outwards, growing into an animalistic tail shape.  Moments later, it explodes into filaments of pain, dividing into hundreds of strands and turning into a shiny horsetail.");
-			}
-			if (player.tailType >= Tail.SHARK) {
-				outputText("\n\nPain lances up your [asshole] as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.");
-			}
-			outputText("  <b>You now have a horse-tail.</b>");
-			mutations.setTailType(Tail.HORSE, 1);
-			player.tailVenom = 0;
-			player.tailRecharge = 0;
+			outputText("\n\n");
+			CoC.instance.transformations.TailHorse.applyEffect();
 			changes++;
 		}
-		//Human skin	
+		//Human skin
 		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeSkin();
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
-			mutations.humanizeArms();
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		//Human ears
 		if (player.arms.type == Arms.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeEars();
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHuman.applyEffect();
 			changes++;
 		}
 		if (player.ears.type != Ears.HORSE && player.ears.type == Ears.HUMAN && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  <b>You now have horse ears.</b>");
-			mutations.setEarType(Ears.HORSE);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHorse.applyEffect();
 			changes++;
 		}
 		//Human face
 		if (player.ears.type == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeFace();
+			outputText("\n\n");
+			CoC.instance.transformations.FaceHuman.applyEffect();
 			changes++;
 		}
 		if (rand(3) == 0) outputText(player.modTone(60, 1));

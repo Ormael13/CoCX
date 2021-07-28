@@ -252,13 +252,13 @@ public class Mountain extends BaseContent
 		}
 
 		public function minotaurChance():Number {
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity)) return 3;
+			if (player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity)) return 3;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0) return 2;
 			return 1;
 		}
 		public function minotaurRouter():void {
 			//Every 15 explorations chance at mino bad-end!
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && !player.hasPerk(PerkLib.LactaBovineImmunity) && rand(16) == 0) {
+			if (player.hasPerk(PerkLib.MinotaurCumAddict) && !player.hasPerk(PerkLib.LactaBovineImmunity) && rand(16) == 0) {
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;

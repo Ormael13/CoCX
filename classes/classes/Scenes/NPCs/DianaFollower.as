@@ -476,8 +476,6 @@ private function levelingHerself():void {
 		flags[kFLAGS.DIANA_LVL_UP] = 1;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 1) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 6);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 6);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 2;
 	}
@@ -502,8 +500,6 @@ private function levelingHerself():void {
 		flags[kFLAGS.DIANA_LVL_UP] = 7;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 7) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 12);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 12);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}
@@ -671,7 +667,8 @@ public function mainCampMenu():void {
 	//1 - Talk
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", dianaSparsWithPC).hint("Ask Diana for a mock battle.");
 	//3 - ??
-	addButton(4, "Sex", mainSexMenu);
+	if (player.lust > 33) addButton(4, "Sex", mainSexMenu);
+	else addButtonDisabled(4, "Sex", "Req. 33+ lust");
 	if (player.HP < player.maxOverHP()) addButton(5, "Healing", HealingScene);
 	else addButtonDisabled(5, "Healing", "You're fully healed already.");
 	if (player.buff("Curse").isPresent()) {
@@ -706,44 +703,44 @@ public function wonOverDianaSpar():void {
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 1;
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DIANA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 45);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 45);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7)+3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7)+3));
 			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DIANA_LVL_UP] = 9;
 		}
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DIANA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 51);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 51);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8)+3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8)+3));
 			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DIANA_LVL_UP] = 10;
 		}
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.DIANA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 57);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 57);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9)+3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9)+3));
 			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DIANA_LVL_UP] = 11;
 		}
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.DIANA_LVL_UP] == 11) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 63);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 63);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10)+3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10)+3));
 			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DIANA_LVL_UP] = 12;
 		}
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.DIANA_LVL_UP] == 12) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 69);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 69);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11)+3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11)+3));
 			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DIANA_LVL_UP] = 13;
 		}
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.DIANA_LVL_UP] == 13) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 75);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 75);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12)+3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12)+3));
 			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DIANA_LVL_UP] = 14;
 		}
 		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.DIANA_LVL_UP] == 14) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 81);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 81);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13)+3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13)+3));
 			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DIANA_LVL_UP] = 15;
 		}
@@ -763,9 +760,10 @@ public function HealingScene():void {
 	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("But soon it is all over, she lets go of you, all your wounds and injuries all healed, although now you feel rather aroused.\n\n");
 	dynStats("lus", 33);
-	HPChange(player.maxHP(), true);
+	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
-	doNext(camp.returnToCampUseOneHour);
+	doNext(mainCampMenu);
+	cheatTime2(45);
 }
 
 public function CuringCurseScene1():void {	//value related curses removal
@@ -776,9 +774,12 @@ public function CuringCurseScene1():void {	//value related curses removal
 	outputText("But soon it is all over, she lets go of you, your curses are partialy removed, although now you feel rather aroused.\n\n");
 	dynStats("lus", 50);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
-		player.removeCurse(stat, 10);
+		player.removeCurse(stat, 10,1);
+		player.removeCurse(stat, 10,2);
+		player.removeCurse(stat, 10,3);
 	}
-	doNext(camp.returnToCampUseOneHour);
+	doNext(mainCampMenu);
+	cheatTime2(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
@@ -788,13 +789,15 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 	outputText("But soon it is all over, she lets go of you, your curses are partialy removed, although now you feel rather aroused.\n\n");
 	dynStats("lus", 50);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
-		player.removeCurse(stat, 10);
 		if (stat != "sens")
 		{
-			player.removeCurse(stat+".mult", 0.10);
+			player.removeCurse(stat+".mult", 0.10,1);
+			player.removeCurse(stat+".mult", 0.10,2);
+			player.removeCurse(stat+".mult", 0.10,3);
 		}
 	}
-	doNext(camp.returnToCampUseOneHour);
+	doNext(mainCampMenu);
+	cheatTime2(30);
 }
 
 public function mainSexMenu():void {
@@ -802,11 +805,28 @@ public function mainSexMenu():void {
 	outputText("You ask your mare if she feels about spend some quality time with her ‘stallion’. Diana blush right away.\n\n");
 	outputText("\"<i>How would you want us to do it?</i>\"\n\n");
 	menu();
-	if (player.lust > 33 && player.hasCock()) {
-		//addButton(0, "Breeding", SexMenuBreeding);
-		if (!player.isTaur()) addButton(1, "Vaginal", SexMenuVaginal);
-		if (!player.isTaur()) addButton(2, "Anal", SexMenuAnal);
-		if (!player.isTaur()) addButton(3, "Titfuck", SexMenuTitsfuck);
+	if (player.hasCock()) {
+		if (player.isTaur()) {
+			//addButtonDisabled(0, "Breeding", "Not for Taurs!");
+			addButtonDisabled(1, "Vaginal", "Not for Taurs!");
+			addButtonDisabled(2, "Anal", "Not for Taurs!");
+			addButtonDisabled(3, "Titfuck", "Not for Taurs!");
+		}
+		else {
+			//addButton(0, "Breeding", SexMenuBreeding);
+			if (player.cockThatFits(36, "length") >= 0) addButton(1, "Vaginal", SexMenuVaginal);
+			else addButtonDisabled(1, "Vaginal", "You're Too Big!");
+			if (player.cockThatFits(36, "length") >= 0) addButton(2, "Anal", SexMenuAnal);
+			else addButtonDisabled(2, "Anal", "You're Too Big!");
+			if (player.cockThatFits(36, "length") >= 0) addButton(3, "Titfuck", SexMenuTitsfuck);
+			else addButtonDisabled(3, "Titfuck", "You're Too Big!");
+		}
+	}
+	else {
+		//addButtonDisabled(0, "Breeding", "Not for Dickless!");
+		addButtonDisabled(1, "Vaginal", "Not for Dickless!");
+		addButtonDisabled(2, "Anal", "Not for Dickless!");
+		addButtonDisabled(3, "Titfuck", "Not for Dickless!");
 	}
 	addButton(14, "Back", mainCampMenu);
 }

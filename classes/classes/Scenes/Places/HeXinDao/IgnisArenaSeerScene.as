@@ -10,9 +10,6 @@ package classes.Scenes.Places.HeXinDao
 
 	public class IgnisArenaSeerScene extends HeXinDaoAbstractContent
 	{
-		
-		//public var arena:HeXinDao = new HeXinDao();
-		
 		public function IgnisArenaSeerScene() 
 		{}
 		

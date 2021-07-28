@@ -64,7 +64,7 @@
                 value CDATA #IMPLIED>
         ]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
-<model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
+    <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
             <common>
@@ -216,6 +216,7 @@
     </palette>
     <colorkeys>
         <key src="#FF88FF" base="hair" transform="lighten(25)"/>
+		<key src="#f934f9" base="hair" transform="lighten(10)"/>
         <key src="#CC00CC" base="hair"/>
         <key src="#880088" base="hair" transform="darken(25)"/>
         <key src="#440044" base="hair" transform="darken(50)"/>
@@ -233,6 +234,7 @@
         <key src="#442288" base="fur2" transform="darken(25)"/>
         <key src="#220044" base="fur2" transform="darken(50)"/>
         <key src="#8888FF" base="scales" transform="lighten(25)"/>
+		<key src="#5c5cfe" base="scales" transform="lighten(10)"/>
         <key src="#4444FF" base="scales"/>
         <key src="#0000CC" base="scales" transform="darken(25)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
@@ -292,6 +294,7 @@
         <cell rect="301,90,49,59" name="torso/scales" dx="79" dy="64"/>
         <cell rect="351,90,49,59" name="torso/goo" dx="79" dy="64"/>
         <cell rect="601,90,49,59" name="torso/panda" dx="79" dy="64"/>
+        <cell rect="1101,90,49,59" name="torso/dscales" dx="79" dy="64"/>
         <cell rect="451,90,49,59" name="torso_pattern/Bstripe" dx="79" dy="64"/>
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="79" dy="64"/>
         <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="79" dy="64"/>
@@ -314,6 +317,7 @@
         <cell rect="251,150,49,59" name="arms_bg/orca" dx="56" dy="64"/>
         <cell rect="301,150,49,59" name="arms_bg/pscales" dx="56" dy="64"/>
         <cell rect="351,150,49,59" name="arms_bg/scales" dx="56" dy="64"/>
+        <cell rect="351,150,49,59" name="arms_bg/dscales" dx="56" dy="64"/>
         <cell rect="401,150,49,59" name="arms_bg/goo" dx="56" dy="64"/>
         <cell rect="701,150,49,59" name="arms_bg/panda" dx="56" dy="64"/>
         <cell rect="801,150,49,59" name="arms_bg/demonlewd" dx="56" dy="64"/>
@@ -324,11 +328,12 @@
         <cell rect="201,853,49,59" name="arms_bg/displacerquad_chitin" dx="56" dy="56"/>
         <cell rect="251,853,49,59" name="arms_bg/displacerquad_orca" dx="56" dy="56"/>
         <cell rect="1,1064,49,59" name="arms_bg/feral_human" dx="56" dy="56"/>
-        <cell rect="51,1064,49,59" name="arms_bg/feral_fur" dx="56" dy="56"/>
-        <cell rect="101,1064,49,59" name="arms_bg/feral_scales" dx="56" dy="56"/>
-        <cell rect="151,1064,49,59" name="arms_bg/feral_pscales" dx="56" dy="56"/>
-        <cell rect="201,1064,49,59" name="arms_bg/feral_chitin" dx="56" dy="56"/>
-        <cell rect="251,1064,49,59" name="arms_bg/feral_orca" dx="56" dy="56"/>
+        <cell rect="51,1064,49,59" name="arms_overlay_bg/feral_fur" dx="56" dy="56"/>
+        <cell rect="101,1064,49,59" name="arms_overlay_bg/feral_scales" dx="56" dy="56"/>
+        <cell rect="151,1064,49,59" name="arms_overlay_bg/feral_pscales" dx="56" dy="56"/>
+        <cell rect="201,1064,49,59" name="arms_overlay_bg/feral_chitin" dx="56" dy="56"/>
+        <cell rect="251,1064,49,59" name="arms_overlay_bg/feral_orca" dx="56" dy="56"/>
+        <cell rect="351,1064,49,59" name="arms_bg/feral_dragon" dx="56" dy="56"/>
         <cell rect="451,150,49,59" name="arms_bg_pattern/Bstripe" dx="56" dy="64"/>
         <cell rect="501,150,49,59" name="arms_bg_pattern/Blightning" dx="56" dy="64"/>
         <cell rect="601,150,49,59" name="arms_bg_pattern/Btatoo" dx="56" dy="64"/>
@@ -343,6 +348,7 @@
         <cell rect="251,210,49,59" name="arms/orca" dx="104" dy="64"/>
         <cell rect="301,210,49,59" name="arms/pscales" dx="104" dy="64"/>
         <cell rect="351,210,49,59" name="arms/scales" dx="104" dy="64"/>
+        <cell rect="351,210,49,59" name="arms/dscales" dx="104" dy="64"/>
         <cell rect="401,210,49,59" name="arms/goo" dx="104" dy="64"/>
         <cell rect="701,210,49,59" name="arms/panda" dx="104" dy="64"/>
         <cell rect="638,520,90,90" name="arms/yeti" dx="57" dy="43"/>
@@ -360,11 +366,12 @@
         <cell rect="201,913,49,59" name="arms/displacerquad_chitin" dx="101" dy="56"/>
         <cell rect="251,913,49,59" name="arms/displacerquad_orca" dx="101" dy="56"/>
         <cell rect="1,1124,49,59" name="arms/feral_human" dx="101" dy="56"/>
-        <cell rect="51,1124,49,59" name="arms/feral_fur" dx="101" dy="56"/>
-        <cell rect="101,1124,49,59" name="arms/feral_scales" dx="101" dy="56"/>
-        <cell rect="151,1124,49,59" name="arms/feral_pscales" dx="101" dy="56"/>
-        <cell rect="201,1124,49,59" name="arms/feral_chitin" dx="101" dy="56"/>
-        <cell rect="251,1124,49,59" name="arms/feral_orca" dx="101" dy="56"/>
+        <cell rect="51,1124,49,59" name="arms_overlay/feral_fur" dx="101" dy="56"/>
+        <cell rect="101,1124,49,59" name="arms_overlay/feral_scales" dx="101" dy="56"/>
+        <cell rect="151,1124,49,59" name="arms_overlay/feral_pscales" dx="101" dy="56"/>
+        <cell rect="201,1124,49,59" name="arms_overlay/feral_chitin" dx="101" dy="56"/>
+        <cell rect="251,1124,49,59" name="arms_overlay/feral_orca" dx="101" dy="56"/>
+        <cell rect="351,1124,49,59" name="arms/feral_dragon" dx="101" dy="56"/>
         <cell rect="801,210,49,59" name="arms/demonlewd" dx="100" dy="53"/>
         <cell rect="1,1184,99,119" name="arms/hinezumistanced_human" dx="58" dy="55"/>
         <cell rect="101,1184,99,119" name="arms/hinezumistanced_fur" dx="58" dy="55"/>
@@ -434,6 +441,7 @@
         <cell rect="201,390,49,59" name="legs/orca" dx="79" dy="115"/>
         <cell rect="251,390,49,59" name="legs/pscales" dx="79" dy="115"/>
         <cell rect="301,390,49,59" name="legs/scales" dx="79" dy="115"/>
+        <cell rect="301,390,49,59" name="legs/dscales" dx="79" dy="115"/>
         <cell rect="351,390,49,59" name="legs/hoof_human" dx="79" dy="115"/>
         <cell rect="1,793,49,59" name="legs/hoof_fur" dx="79" dy="115"/>
         <cell rect="51,793,49,59" name="legs/hoof_scales" dx="79" dy="115"/>
@@ -454,6 +462,7 @@
         <cell rect="274,973,90,90" name="legs/displacer_pscales" dx="62" dy="68"/>
         <cell rect="365,973,90,90" name="legs/displacer_chitin" dx="62" dy="68"/>
         <cell rect="456,973,90,90" name="legs/displacer_orca" dx="62" dy="68"/>
+        <cell rect="638,973,90,90" name="legs/dragon" dx="46" dy="101"/>
         <cell rect="401,390,49,59" name="legs/goo" dx="79" dy="115"/>
         <cell rect="551,390,49,59" name="legs/furracoon" dx="79" dy="115"/>
         <cell rect="651,390,49,59" name="legs/panda" dx="79" dy="115"/>
@@ -546,6 +555,7 @@
         <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="84" dy="32"/>
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
+        <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="94" dy="64"/>
         <cell rect="67,184,80,28" name="clotheScarf/scarfRed" dx="94" dy="64"/>
@@ -627,7 +637,9 @@
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
         <cell rect="1234,158,20,55" name="clothLeftArm/vampireClothingleftArm" dx="81" dy="68"/>
         <cell rect="1276,158,20,55" name="clothLeftArm/vampireClothingleftArmLewd" dx="85" dy="64"/>
-        <cell rect="1099,543,70,90" name="clothLeftArm/fairyQueenDressUnderClothes" dx="64" dy="66"/>
+        <cell rect="1099,543,70,90" name="clothLeftArm/fairyqueendressleftarmAndLeg" dx="64" dy="66"/>
+        <cell rect="1181,586,35,40" name="clothLeftArm/fairyQueenDressArmBack" dx="99" dy="62"/>
+        <cell rect="1181,543,35,40" name="clothLeftArm/fairyqueendressrightarmShield" dx="101" dy="68"/>
         <cell rect="1272,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralLeft" dx="56" dy="56"/>
         <cell rect="1322,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralQuadLeft" dx="56" dy="56"/>
         <cell rect="1486,158,40,55" name="clothLeftArm/mageRobe" dx="70" dy="59"/>
@@ -686,13 +698,23 @@
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
         <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
-        <cell rect="212,1938,80,90" name="weaponBuff/swordFireBuff" dx="34" dy="31"/>
+        <cell rect="122,1938,80,90" name="weaponBuff/swordFireBuff" dx="34" dy="31"/>
         <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
         <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
         <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
         <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
         <cell rect="392,1726,80,90" name="weapon/hammerHoly" dx="38" dy="55"/>
         <cell rect="392,1832,80,90" name="weapon/hammerUnholy" dx="38" dy="55"/>
+        <cell rect="212,1938,80,90" name="weapon/swordGenericOH" dx="82" dy="55"/>
+        <cell rect="212,2044,80,90" name="weapon/swordHolyOH" dx="82" dy="55"/>
+        <cell rect="212,2150,80,90" name="weapon/swordUnholyOH" dx="82" dy="55"/>
+        <cell rect="122,2044,80,90" name="weaponBuff/swordFireBuffOH" dx="86" dy="31"/>
+        <cell rect="302,1938,80,90" name="weapon/axeGenericOH" dx="82" dy="55"/>
+        <cell rect="302,2044,80,90" name="weapon/axeHolyOH" dx="82" dy="55"/>
+        <cell rect="302,2150,80,90" name="weapon/axeUnholyOH" dx="82" dy="55"/>
+        <cell rect="392,1938,80,90" name="weapon/hammerGenericOH" dx="82" dy="55"/>
+        <cell rect="392,2044,80,90" name="weapon/hammerHolyOH" dx="82" dy="55"/>
+        <cell rect="392,2150,80,90" name="weapon/hammerUnholyOH" dx="82" dy="55"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
         <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
@@ -736,7 +758,9 @@
         <cell rect="271,251,89,98" name="hair_bg/yeti" dx="60" dy="4"/>
         <cell rect="361,251,89,98" name="hair_bg/dwarven" dx="59" dy="7"/>
         <cell rect="451,251,89,98" name="hair_bg/ponytail" dx="74" dy="4"/>
-        <cell rect="541,251,89,98" name="hair_bg/twinPigtail" dx="59" dy="6"/>
+        <cell rect="541,251,87,98" name="hair_bg/twinPigtail" dx="59" dy="6"/>
+        <cell rect="991,251,87,98" name="hair/fourWindBraid" dx="69" dy="3"/>
+        <cell rect="991,350,89,164" name="hair_bg/fourWindBraid" dx="69" dy="2"/>
         <cell rect="1,350,89,98" name="hair/raiju" dx="60" dy="4"/>
         <cell rect="91,350,89,164" name="hair_bg/raiju3" dx="60" dy="4"/>
         <cell rect="181,350,89,98" name="hair/hellcat" dx="60" dy="4"/>
@@ -765,6 +789,7 @@
         <cell rect="181,70,29,32" name="head/orca" dx="91" dy="37"/>
         <cell rect="211,70,29,32" name="head/goo" dx="90" dy="37"/>
         <cell rect="271,70,29,32" name="head/panda" dx="90" dy="37"/>
+        <cell rect="301,70,29,32" name="head/dscales" dx="90" dy="37"/>
         <cell rect="1,110,29,32" name="face/human" dx="90" dy="37"/>
         <cell rect="31,110,29,32" name="face/human_fang" dx="90" dy="37"/>
         <cell rect="61,110,29,32" name="face/fur" dx="90" dy="37"/>
@@ -787,6 +812,7 @@
         <cell rect="571,110,29,32" name="face/melancholic" dx="91" dy="38"/>
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
+        <cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -878,6 +904,7 @@
         <cell rect="261,110,49,29" name="breasts/Bscales" dx="79" dy="68"/>
         <cell rect="311,110,49,29" name="breasts/Borca" dx="79" dy="68"/>
         <cell rect="361,110,49,29" name="breasts/Bgoo" dx="79" dy="68"/>
+        <cell rect="661,110,49,29" name="breasts/Bdscales" dx="79" dy="68"/>
         <cell rect="11,140,49,29" name="breasts/Dhuman" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dfur" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dpanda" dx="79" dy="68"/>
@@ -887,6 +914,7 @@
         <cell rect="261,140,49,29" name="breasts/Dscales" dx="79" dy="68"/>
         <cell rect="311,140,49,29" name="breasts/Dorca" dx="79" dy="68"/>
         <cell rect="361,140,49,29" name="breasts/Dgoo" dx="79" dy="68"/>
+        <cell rect="661,140,49,29" name="breasts/Ddscales" dx="79" dy="68"/>
         <cell rect="11,170,49,29" name="breasts/Fhuman" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Ffur" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Fpanda" dx="79" dy="68"/>
@@ -896,6 +924,7 @@
         <cell rect="261,170,49,29" name="breasts/Fscales" dx="79" dy="68"/>
         <cell rect="311,170,49,29" name="breasts/Forca" dx="79" dy="68"/>
         <cell rect="361,170,49,29" name="breasts/Fgoo" dx="79" dy="68"/>
+        <cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -945,6 +974,10 @@
         <cell rect="161,320,49,29" name="balls/Bscaleslarge" dx="79" dy="104"/>
         <cell rect="161,350,49,29" name="balls/Bscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bscalessillyhuge" dx="79" dy="106"/>
+        <cell rect="161,290,49,29" name="balls/Bdscalesmall" dx="79" dy="104"/>
+        <cell rect="161,320,49,29" name="balls/Bdscaleslarge" dx="79" dy="104"/>
+        <cell rect="161,350,49,29" name="balls/Bdscaleshuge" dx="79" dy="105"/>
+        <cell rect="161,380,49,29" name="balls/Bdscalessillyhuge" dx="79" dy="106"/>
         <cell rect="211,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
         <cell rect="211,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
         <cell rect="211,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
@@ -1091,7 +1124,8 @@
         <cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
-        <cell rect="1,71,168,139" name="tail/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,168,139" name="tail_bg/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,60,139" name="tail_front/manticore" dx="20" dy="40"/>
         <cell rect="507,71,168,139" name="tail/manticore_taur" dx="45" dy="82"/>
         <cell rect="676,71,168,139" name="tail_front/manticore_taur" dx="45" dy="82"/>
         <cell rect="1,211,83,139" name="tail/orca" dx="78" dy="39"/>
@@ -1102,28 +1136,22 @@
         <cell rect="86,211,83,139" name="tail/mouse_taur" dx="145" dy="46"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire" dx="95" dy="40"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire_taur" dx="145" dy="46"/>
-        <cell rect="255,211,83,139" name="tail/cat" dx="108" dy="40"/>
-        <cell rect="255,211,83,139" name="tail/cat_taur" dx="158" dy="51"/>
-        <cell rect="339,211,83,139" name="tail/cat2" dx="108" dy="40"/>
-        <cell rect="339,211,83,139" name="tail/cat2_taur" dx="158" dy="55"/>
-        <cell rect="593,211,83,139" name="tail/hellcat" dx="108" dy="39"/>
-        <cell rect="593,211,83,139" name="tail/hellcat_taur" dx="158" dy="55"/>
-        <cell rect="761,211,83,139" name="tail/kasha" dx="108" dy="40"/>
-        <cell rect="761,211,83,139" name="tail/kasha_taur" dx="158" dy="55"/>
         <cell rect="509,211,83,139" name="tail/horse" dx="95" dy="40"/>
         <cell rect="509,211,83,139" name="tail/horse_taur" dx="143" dy="45"/>
         <cell rect="1,351,168,69" name="tail/reptile" dx="20" dy="90"/>
         <cell rect="1,351,168,69" name="tail/reptile_taur" dx="67" dy="102"/>
-        <cell rect="170,351,168,69" name="tail/demon" dx="25" dy="91"/>
+        <cell rect="170,351,168,69" name="tail/demon" dx="19" dy="90"/>
         <cell rect="170,351,168,69" name="tail/demon_taur" dx="74" dy="93"/>
-        <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="20" dy="90"/>
-        <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="20" dy="90"/>
+        <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="16" dy="99"/>
+        <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="16" dy="94"/>
         <cell rect="1,421,168,69" name="tail_fg/reptile_fire" dx="20" dy="90"/>
         <cell rect="1,421,168,69" name="tail/reptile_fire_taur" dx="67" dy="102"/>
-        <cell rect="170,421,168,69" name="tail/cow" dx="20" dy="90"/>
+        <cell rect="170,421,168,69" name="tail/cow" dx="19" dy="90"/>
         <cell rect="170,421,168,69" name="tail/cow_taur" dx="74" dy="93"/>
-        <cell rect="508,421,168,69" name="tail/balrog" dx="20" dy="90"/>
+        <cell rect="508,421,168,69" name="tail/balrog" dx="19" dy="90"/>
         <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
+        <cell rect="677,421,168,69" name="tail/dragon" dx="18" dy="90"/>
+        <cell rect="677,421,168,69" name="tail/dragon_taur" dx="74" dy="93"/>
         <cell rect="1,491,83,69" name="tail/bunny" dx="95" dy="90"/>
         <cell rect="1,491,83,69" name="tail/bunny_taur" dx="141" dy="97"/>
         <cell rect="86,491,83,69" name="tail/goat" dx="94" dy="103"/>
@@ -1142,7 +1170,7 @@
         <cell rect="675,561,83,139" name="tail/mantis_taur" dx="135" dy="50"/>
         <cell rect="339,561,83,139" name="tail/weasel" dx="95" dy="40"/>
         <cell rect="339,561,83,139" name="tail/weasel_taur" dx="144" dy="49"/>
-        <cell rect="423,561,168,139" name="tail/thunderbird" dx="20" dy="46"/>
+        <cell rect="423,561,168,139" name="tail/thunderbird" dx="19" dy="46"/>
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
@@ -1150,8 +1178,16 @@
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
-        <cell rect="170,71,168,139" name="tail/ratatoskr" dx="58" dy="15"/>
-        <cell rect="170,71,168,139" name="tail/ratatoskr_taur" dx="101" dy="21"/>
+        <cell rect="255,211,83,139" name="tail_bg/cat" dx="108" dy="40"/>
+        <cell rect="255,211,83,139" name="tail_bg/cat_taur" dx="158" dy="51"/>
+        <cell rect="339,211,83,139" name="tail_bg/cat2" dx="108" dy="40"/>
+        <cell rect="339,211,83,139" name="tail_bg/cat2_taur" dx="158" dy="55"/>
+        <cell rect="593,211,83,139" name="tail_bg/hellcat" dx="108" dy="39"/>
+        <cell rect="593,211,83,139" name="tail_bg/hellcat_taur" dx="158" dy="55"/>
+        <cell rect="761,211,83,139" name="tail_bg/kasha" dx="108" dy="40"/>
+        <cell rect="761,211,83,139" name="tail_bg/kasha_taur" dx="158" dy="55"/>
+        <cell rect="170,71,168,139" name="tail_bg/ratatoskr" dx="58" dy="15"/>
+        <cell rect="170,71,168,139" name="tail_bg/ratatoskr_taur" dx="101" dy="21"/>
         <cell rect="1,1015,173,156" name="tail_bg/fox1" dx="4" dy="31"/>
         <cell rect="1,1015,173,156" name="tail_bg/fox1_taur" dx="60" dy="47"/>
         <cell rect="523,858,173,156" name="tail_bg/fox2" dx="16" dy="36"/>
@@ -1202,8 +1238,10 @@
         <cell rect="254,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
         <cell rect="677,350,83,139" name="wings_bg/atlach" dx="17" dy="-3"/>
         <cell rect="747,350,83,139" name="wings/atlach" dx="87" dy="-3"/>
-        <cell rect="423,630,135,139" name="wings_bg/SeaDragonLeft" dx="-25" dy="18"/>
-        <cell rect="552,630,135,139" name="wings_bg/SeaDragonRight" dx="104" dy="18"/>
+        <cell rect="423,630,135,139" name="wings_bg/seaDragonLeft" dx="-25" dy="18"/>
+        <cell rect="552,630,135,139" name="wings_bg/seaDragonRight" dx="104" dy="18"/>
+        <cell rect="676,630,116,139" name="wings_bg/greatDragonLeft" dx="-12" dy="26"/>
+        <cell rect="793,630,135,139" name="wings_bg/greatDragonRight" dx="105" dy="26"/>
     </spritemap>
 
 	<!-- LAYER AREA -->
@@ -1253,6 +1291,7 @@
         <layer name="eyes"/>
 		<layer name="forehead"/>
         <layer name="ears_bg"/>
+		<layer name="clotheHead_bg"/>
 
 		<layer name="faceShading"/>
         <layer name="face"/>
@@ -1268,11 +1307,13 @@
 		<layer name="overhands"/>
         <layer name="hands"/>
 		<layer name="arms_pattern"/>
+		<layer name="arms_overlay"/>
         <layer name="arms"/>
 		<layer name="overhands_bg"/>
         <layer name="hands_bg"/>
 		<layer name="arms_bg_pattern"/>
 		<layer name="legs_truefg"/>
+		<layer name="arms_overlay_bg"/>
         <layer name="arms_bg"/>
 		<layer name="uniquePlantBath"/>
 		<layer name="legs_fg"/>
@@ -1292,15 +1333,15 @@
         <layer name="torso"/>
 		<layer name="ears_truebg"/>
 		<layer name="rearbody"/>
-		<layer name="clothCape"/>
-		<layer name="hair_bg"/>
-		<layer name="hairLeft"/>
-		<layer name="wings"/>
 		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
         <layer name="tail"/>
+		<layer name="clothCape"/>
 		<layer name="clothCape_bg"/>
 		<layer name="backAccessory"/>
+		<layer name="hair_bg"/>
+		<layer name="hairLeft"/>
+		<layer name="wings"/>
         <layer name="wings_bg"/>
 		<layer name="tail_bg"/>
 		<layer name="legs_bg"/>
@@ -1367,14 +1408,14 @@
 
 		<!-- CLOTHING VARIABLES AREA -->
 
-		<set var="sphinxRegalia" value="hasStatusEffect(StatusEffects.SphinxAS)"/>
+		<!--<set var="sphinxRegalia" value="hasStatusEffect(StatusEffects.SphinxAS)"/> OLD LEGACY CODE FOR DETECTING CLOTHING-->
 
 		<!-- WEAPON AREA -->
 		<if test="playerHasWeaponBannedArms">
-			<if test="WeaponDisplay == 0">		
+			<if test="WeaponDisplay == 0">
 				<!-- MELEE WEAPON -->
 				<if test="playerHasWeaponWings">
-					
+
 					<!-- Staff -->
 					<if test="PlayerHasAStaff">
 						<if test="PlayerHasAStaffHoly or PlayerHasAStaffUnholy">
@@ -1389,58 +1430,64 @@
 							</else>
 						</if>
 					</if>
-			
+
 					<!-- Sword -->
 					<if test="PlayerHasASword">
-						<if test="PlayerHasAswordHoly or PlayerHasASwordUnholy">
-							<if test="PlayerHasAswordHoly">
+						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
+							<if test="PlayerHasASwordHoly">
 								<show part="weapon/swordHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasASwordUnholy">
 								<show part="weapon/swordUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/swordGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordGenericOH"/>
+								</if>
 							</else>
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff/swordFireBuff"/>
+							<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordFireBuffOH"/>
+							</if>
 						</if>
 					</if>
-			
+
 					<!-- Axe -->
 					<if test="PlayerHasAnAxe">
 						<if test="PlayerHasAnAxeHoly or PlayerHasAnAxeUnholy">
 							<if test="PlayerHasAnAxeHoly">
 								<show part="weapon/axeHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/axeHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasAnAxeUnholy">
 								<show part="weapon/axeUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/axeUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/axeGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/axeGenericOH"/>
+								</if>
 							</else>
 						</if>
 					</if>
-			
-					<!-- Hammer -->
-					<if test="PlayerHasAHammer">
-						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
-							<if test="PlayerHasAHammerHoly">
-								<show part="weapon/hammerHoly"/>
-							</if>
-							<if test="PlayerHasAHammerUnholy">
-								<show part="weapon/hammerUnholy"/>
-							</if>
-							<else>
-								<show part="weapon/hammerGeneric"/>
-							</else>
-						</if>
-					</if>
-					
+
 					<!-- Tetsubo -->
 					<if test="PlayerHasATetsu">
-						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+						<if test="PlayerHasATetsuHoly or PlayerHasATetsuUnholy">
 							<if test="PlayerHasATetsuHoly">
 								<show part="weapon/tetsuHoly"/>
 							</if>
@@ -1452,22 +1499,31 @@
 							</else>
 						</if>
 					</if>
-					
+
 					<!-- Hammer -->
 					<if test="PlayerHasAHammer">
 						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
 							<if test="PlayerHasAHammerHoly">
 								<show part="weapon/hammerHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/hammerHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasAHammerUnholy">
 								<show part="weapon/hammerUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/hammerUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/hammerGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/hammerGenericOH"/>
+								</if>
 							</else>
 						</if>
 					</if>
-			
+
 					<!-- Spear -->
 					<if test="PlayerHasASpear">
 						<if test="PlayerHasASpearHoly or PlayerHasASpearUnholy">
@@ -1482,7 +1538,7 @@
 							</else>
 						</if>
 					</if>
-			
+
 					<!-- Katana -->
 					<if test="PlayerHasKatana">
 						<if test="PlayerHasKatanaHoly or PlayerHasKatanaUnholy">
@@ -1500,9 +1556,9 @@
 							<show part="weaponBuff/katanaFireBuff"/>
 						</if>
 					</if>
-			
+
 					<!-- Rapiers -->
-					<if test="PlayerHasRapier">			
+					<if test="PlayerHasRapier">
 						<if test="PlayerHasRapierHoly or PlayerHasRapierUnholy">
 							<if test="PlayerHasRapierHoly">
 								<show part="weapon/rapierHoly"/>
@@ -1517,11 +1573,11 @@
 						<if test="FireBuff">
 							<show part="weaponBuff/rapierFireBuff"/>
 						</if>
-					</if>			
+					</if>
 				</if>
 				<!-- Shield -->
 				<if test="PlayerHasAShield">
-					<if test="PlayerHasSanctuary">					
+					<if test="PlayerHasSanctuary">
 						<if test="PlayerHasSanctuaryHoly or PlayerHasSanctuaryCorrupt">
 							<if test="PlayerHasSanctuaryHoly">
 								<show part="shield/shieldHoly"/>
@@ -1532,7 +1588,7 @@
 							<else>
 								<show part="shield/shieldGeneric"/>
 							</else>
-						</if>				
+						</if>
 						<else>
 							<show part="shield/shieldGeneric"/>
 						</else>
@@ -1540,9 +1596,9 @@
 				</if>
 				<else>
 				<!-- RANGED WEAPON -->
-					<if test="playerHasWeaponWings">	
+					<if test="playerHasWeaponWings">
 						<!-- Bows -->
-						<if test="PlayerHasABow">			
+						<if test="PlayerHasABow">
 							<if test="PlayerHasABowHoly or PlayerHasABowUnholy">
 								<if test="PlayerHasABowHoly">
 									<show part="weapon/bowHoly"/>
@@ -1555,11 +1611,11 @@
 								</else>
 							</if>
 						</if>
-						
-						<!-- Thrown -->	
-						<if test="PlayerHasAThrownWeapon">	
-							<!-- Javelin -->						
-							<if test="PlayerHasAJavelin">	
+
+						<!-- Thrown -->
+						<if test="PlayerHasAThrownWeapon">
+							<!-- Javelin -->
+							<if test="PlayerHasAJavelin">
 								<if test="PlayerHasAJavelinHoly or PlayerHasAJavelinUnholy">
 									<if test="PlayerHasAJavelinHoly">
 										<show part="weapon/spearHoly"/>
@@ -1571,24 +1627,24 @@
 										<show part="weapon/spearGeneric"/>
 									</else>
 								</if>
-							</if>						
+							</if>
 							<!-- Axe -->
-							<if test="PlayerHasAThrownAxe">				
+							<if test="PlayerHasAThrownAxe">
 								<show part="weapon/axeGeneric"/>
-							</if>						
+							</if>
 						</if>
-						
-						<!-- Guns -->	
-						<if test="PlayerHasLactoBlaster">	
+
+						<!-- Guns -->
+						<if test="PlayerHasLactoBlaster">
 							<show part="backAccessory/LactoblasterTank"/>
 							<show part="weapon/LactoblasterGun"/>
 							<show part="weapon/LactoblasterMilker"/>
 						</if>
-						
+
 					</if>
-					
+
 				</else>
-			</if>	
+			</if>
 		</if>
 
 		<!-- ANTENNAE AREA -->
@@ -1603,7 +1659,7 @@
             <case values="Antennae.CENTIPEDE">
                 <show part="antennae/bee"/> <!-- Temporary -->
             </case>
-			<case values="Antennae.SEADRAGON">
+			<case values="Antennae.SEA_DRAGON">
                 <show part="neck/seaDragonWhisker"/>
             </case>
             <default>
@@ -1663,7 +1719,7 @@
 			<case values="Horns.ANTLERS">
 				<show part="horns_overclothe/deer"/>
             </case>
-			<case values="Horns.SEADRAGON">
+			<case values="Horns.SEA_DRAGON">
                 <show part="horns_bg/seaDragon"/>
             </case>
         </switch>
@@ -1770,14 +1826,14 @@
             <case values="Eyes.HUMAN">
                 <show part="eyes/human"/>
             </case>
-            <case values="Eyes.FOUR_SPIDER_EYES">
+            <case values="Eyes.SPIDER">
                 <show part="horns/spider"/>
 				<show part="eyes/human"/>
             </case>
             <case values="Eyes.BLACK_EYES_SAND_TRAP">
                 <show part="eyes/sandtrap"/>
             </case>
-            <case values="Eyes.FOX,Eyes,Eyes.CAT_SLITS,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
+            <case values="Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
                 <show part="eyes/cat"/>
             </case>
             <case values="Eyes.DEVIL,Eyes.FROSTWYRM">
@@ -2069,6 +2125,24 @@
                             <hide part="hair_bg/hellcat"/>
                         </if>
                     </case>
+					<case values="Hair.SNOWLILY">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/yukionna"/>
+						<show part="hair_bg/yukionna"/>
+                    </case>
+					<case values="Hair.FOURWIND">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/fourWindBraid"/>
+						<show part="hair_bg/fourWindBraid"/>
+                    </case>
+					<case values="Hair.FOURWINDL">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/fourWindBraid"/>
+						<show part="hair_bg/02"/>
+                    </case>
                     <default>
                         <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                             <switch>
@@ -2106,7 +2180,7 @@
                         <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY">
                             <set var="skinx">orca</set>
                         </if>
-						<if test="skin.base.pattern==Pattern.SEADRAGON_UNDERBODY">
+						<if test="skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
                             <set var="skinx">orca</set>
 							<show part="torso_pattern/Bbioluminescence"/>
                         </if>
@@ -2119,9 +2193,13 @@
 							<set var="skinx">panda</set>
 						</if>
                     </case>
-                    <case values="Skin.SCALES,Skin,Skin.DRAGON_SCALES">
+                    <case values="Skin.SCALES">
                         <set var="skinb">scales</set>
                         <set var="skinx">scales</set>
+                    </case>
+					<case values="Skin.DRAGON_SCALES">
+                        <set var="skinb">dscales</set>
+                        <set var="skinx">dscales</set>
                     </case>
                     <case values="Skin.GOO">
                         <set var="skinb">goo</set>
@@ -2261,6 +2339,9 @@
 					<hide part="face/human"/>
 					<show part="face/ghost"/>
 				</if>
+            </case>
+			<case values="Face.TROLL">
+                <show part="face/tusk"/>
             </case>
             <case values="'never'"><!--TODO-->
                 <show part="face/insect"/>
@@ -2438,7 +2519,7 @@
 				<show part="hands/furracoon"/>
 				<show part="hands_bg/furracoon"/>
                 <show part="overhands/ratatoskrRight"/>
-                <show part="overhands/ratatoskrLeft"/>			
+                <show part="overhands/ratatoskrLeft"/>
             </case>
             <case values="Arms.BEE">
                 <hide part="arms/*"/>
@@ -2464,9 +2545,15 @@
                 <show part="hands_bg/fins-orca"/>
             </case>
             <case values="Arms.GARGOYLE,Arms.GARGOYLE_2">
-                <hide part="arms/*"/>
-                <hide part="arms_bg/*"/>
-				<show part="arms/gargoyle_sit"/>
+				<if test="PlayerHasAWeapon or PlayerHasAShield or PlayerHasADualWeapon">
+					<show part="arms/human"/>
+					<show part="arms_bg/human"/>
+					<else>
+						<hide part="arms/*"/>
+						<hide part="arms_bg/*"/>
+						<show part="arms/gargoyle_sit"/>
+					</else>
+				</if>
             </case>
 			<case values="Arms.YETI">
                 <hide part="arms/*"/>
@@ -2531,27 +2618,25 @@
 						<hide part="hands_bg/*"/>
 						<hide part="weapon/*"/>
 						<hide part="shield/*"/>
+						<show part="arms/feral_human"/>
+						<show part="arms_bg/feral_human"/>
 						<switch>
 							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-								<show part="arms/feral_pscales"/>
-								<show part="arms_bg/feral_pscales"/>
+								<show part="arms_overlay/feral_pscales"/>
+								<show part="arms_overlay_bg/feral_pscales"/>
 							</case>
 							<case test="hasFullCoatOfType(Skin.FUR)">
-								<show part="arms/feral_fur"/>
-								<show part="arms_bg/feral_fur"/>
+								<show part="arms_overlay/feral_fur"/>
+								<show part="arms_overlay_bg/feral_fur"/>
 							</case>
 							<case test="hasFullCoatOfType(Skin.CHITIN)">
-								<show part="arms/feral_chitin"/>
-								<show part="arms_bg/feral_chitin"/>
+								<show part="arms_overlay/feral_chitin"/>
+								<show part="arms_overlay_bg/feral_chitin"/>
 							</case>
 							<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-								<show part="arms/feral_scales"/>
-								<show part="arms_bg/feral_scales"/>
+								<show part="arms_overlay/feral_scales"/>
+								<show part="arms_overlay_bg/feral_scales"/>
 							</case>
-							<default>
-								<show part="arms/feral_human"/>
-								<show part="arms_bg/feral_human"/>
-							</default>
 						</switch>
 					</if>
                 </if>
@@ -2567,35 +2652,99 @@
 						<hide part="hands_bg/*"/>
 						<hide part="weapon/*"/>
 						<hide part="shield/*"/>
+						<show part="arms/feral_human"/>
+						<show part="arms_bg/feral_human"/>
+						<show part="feet/kumiho"/>
 						<switch>
 							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-								<show part="arms/feral_pscales"/>
-								<show part="arms_bg/feral_pscales"/>
-								<show part="feet/kumiho"/>
+								<show part="arms_overlay/feral_pscales"/>
+								<show part="arms_overlay_bg/feral_pscales"/>
 							</case>
 							<case test="hasFullCoatOfType(Skin.FUR)">
-								<show part="arms/feral_fur"/>
-								<show part="arms_bg/feral_fur"/>
-								<show part="feet/kumiho"/>
+								<show part="arms_overlay/feral_fur"/>
+								<show part="arms_overlay_bg/feral_fur"/>
 							</case>
 							<case test="hasFullCoatOfType(Skin.CHITIN)">
-								<show part="arms/feral_chitin"/>
-								<show part="arms_bg/feral_chitin"/>
-								<show part="feet/kumiho"/>
+								<show part="arms_overlay/feral_chitin"/>
+								<show part="arms_overlay_bg/feral_chitin"/>
 							</case>
 							<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-								<show part="arms/feral_scales"/>
-								<show part="arms_bg/feral_scales"/>
-								<show part="feet/kumiho"/>
+								<show part="arms_overlay/feral_scales"/>
+								<show part="arms_overlay_bg/feral_scales"/>
 							</case>
-							<default>
-								<show part="arms/feral_human"/>
-								<show part="arms_bg/feral_human"/>
-								<show part="feet/kumiho"/>
-							</default>
 						</switch>
 					</if>
                 </if>
+            </case>
+			<case values="Arms.DRACONIC">
+                <show part="hands/scale"/>
+                <show part="hands_bg/scale"/>
+				<if test="PlayerHasViewableOutfit">
+					<if test="armStanceNonBannedList">
+						<if test="legCount==2">
+							<if test="lowerBody==LowerBody.DRAGON">
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="weapon/*"/>
+								<hide part="shield/*"/>
+								<show part="arms/feral_dragon"/>
+								<show part="arms_bg/feral_dragon"/>
+								<switch>
+									<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_pscales"/>
+										<show part="arms_overlay_bg/feral_pscales"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.FUR)">
+										<show part="arms_overlay/feral_fur"/>
+										<show part="arms_overlay_bg/feral_fur"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.CHITIN)">
+										<show part="arms_overlay/feral_chitin"/>
+										<show part="arms_overlay_bg/feral_chitin"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_scales"/>
+										<show part="arms_overlay_bg/feral_scales"/>
+									</case>
+								</switch>
+							</if>
+						</if>
+					</if>
+					<else>
+						<if test="legCount==2">
+							<if test="lowerBody==LowerBody.DRAGON">
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="weapon/*"/>
+								<hide part="shield/*"/>
+								<show part="arms/feral_dragon"/>
+								<show part="arms_bg/feral_dragon"/>
+								<switch>
+									<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_pscales"/>
+										<show part="arms_overlay_bg/feral_pscales"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.FUR)">
+										<show part="arms_overlay/feral_fur"/>
+										<show part="arms_overlay_bg/feral_fur"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.CHITIN)">
+										<show part="arms_overlay/feral_chitin"/>
+										<show part="arms_overlay_bg/feral_chitin"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_scales"/>
+										<show part="arms_overlay_bg/feral_scales"/>
+									</case>
+								</switch>
+							</if>
+						</if>
+					</else>
+				</if>
             </case>
 			<case values="Arms.DISPLACER">
 				<hide part="arms/*"/>
@@ -2625,11 +2774,11 @@
 					</default>
 				</switch>
 			</case>
-            <case values="Arms.LIZARD,Arms.DRAGON,Arms.HYDRA">
+            <case values="Arms.LIZARD,Arms.HYDRA">
                 <show part="hands/scales"/>
                 <show part="hands_bg/scales"/>
             </case>
-            <case values="Arms.ORCA,Arms.SEADRAGON">
+            <case values="Arms.ORCA,Arms.SEA_DRAGON">
                 <hide part="arms/*"/>
                 <hide part="arms_bg/*"/>
                 <show part="arms_bg/orca"/>
@@ -2637,7 +2786,7 @@
                 <show part="hands/fins-orca"/>
                 <show part="hands_bg/fins-orca"/>
             </case>
-            <case values="Arms.DEVIL,Arms.RAIJU_2">
+            <case values="Arms.DEVIL,Arms.RAIJU_PAWS">
                 <show part="hands/devil"/>
                 <show part="hands_bg/devil"/>
             </case>
@@ -2922,16 +3071,30 @@
                 <show part="legs/gooblob"/>
             </case>
 			<case values="LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER,LowerBody.CAVE_WYRM">
-                <switch>
-                    <case test="legCount==4">
-                        <hide part="legs/*"/>
-						<show part="legs/reptaur"/>
-                        <show part="legs_fg/reptaur"/>
-                    </case>
-                    <default>
-                        <show part="feet/scales"/>
-                    </default>
-                </switch>
+                <if test="legCount==4">
+                    <hide part="legs/*"/>
+					<show part="legs/reptaur"/>
+                    <show part="legs_fg/reptaur"/>
+					<else>
+						<show part="feet/scales"/>
+						<if test="PlayerHasViewableOutfit">
+							<if test="armStanceNonBannedList">
+								<if test="arms.type==Arms.DRACONIC">
+									<hide part="legs/*"/>
+									<hide part="feet/*"/>
+									<show part="legs/dragon"/>
+								</if>
+							</if>
+							<else>
+								<if test="arms.type==Arms.DRACONIC">
+									<hide part="legs/*"/>
+									<hide part="feet/*"/>
+									<show part="legs/dragon"/>
+								</if>
+							</else>
+						</if>
+					</else>
+                </if>
             </case>
             <case values="LowerBody.HARPY">
                 <hide part="legs/*"/>
@@ -3033,7 +3196,7 @@
 				</if>
 
             </case>
-			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEADRAGON">
+			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEA_DRAGON">
 				<if test="lowerBody==LowerBody.ORCA">
 					<hide part="legs/*"/>
 					<show part="legs/orca"/>
@@ -3249,12 +3412,16 @@
 					<show part="wings_front/nightmare"/>
 				</if>
             </case>
-            <case values="Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE,Wings.DRACONIC_HUGE"><!--TODO sizes -->
+            <case values="Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE">
                 <show part="wings_bg/scales"/>
                 <show part="wings/scales"/>
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/scales"/>
 				</if>
+            </case>
+			<case values="Wings.DRACONIC_HUGE">
+                <show part="wings_bg/greatDragonLeft"/>
+				<show part="wings_bg/greatDragonRight"/>
             </case>
             <case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_LIKE_SMALL,Wings.MANTIS_LIKE_LARGE,Wings.MANTIS_LIKE_LARGE2"><!--TODO -->
                 <show part="wings/bee"/>
@@ -3267,7 +3434,7 @@
 					<show part="wings_front/mantibig"/>
 				</if>
             </case>
-            <case values="Wings.FEY_DRAGON_WINGS">
+            <case values="Wings.FEY_DRAGON">
                 <show part="wings/fairy"/>
                 <show part="wings_bg/fairy"/>
 				<if test="playerHasLargeLowerBody">
@@ -3297,7 +3464,7 @@
 					<show part="wings_front/devilfeather"/>
 				</if>
             </case>
-			<case values="Wings.ETHEREAL_WINGS">
+			<case values="Wings.ETHEREAL">
                 <show part="wings/ghost"/>
             </case>
 			<case values="Wings.WRAITH">
@@ -3309,9 +3476,9 @@
 			<case values="Wings.WINDY_AURA">
                 <show part="aura/windyaura"/>
             </case>
-			<case values="Wings.SEADRAGON">
-                <show part="wings_bg/SeaDragonLeft"/>
-				<show part="wings_bg/SeaDragonRight"/>
+			<case values="Wings.SEA_DRAGON">
+                <show part="wings_bg/seaDragonLeft"/>
+				<show part="wings_bg/seaDragonRight"/>
             </case>
 			<case values="Wings.VAMPIRE">
                 <show part="overclothe/vampire"/>
@@ -3367,9 +3534,9 @@
             </case>
 			<case values="Tail.SQUIRREL">
 				<if test="isTaur()">
-					<show part="tail/ratatoskr_taur"/>
+					<show part="tail_bg/ratatoskr_taur"/>
 					<else>
-						<show part="tail/ratatoskr"/>
+						<show part="tail_bg/ratatoskr"/>
 					</else>
 				</if>
             </case>
@@ -3377,25 +3544,25 @@
                 <switch value="tailCount">
                     <case values="1">
 						<if test="isTaur()">
-							<show part="tail/cat_taur"/>
+							<show part="tail_bg/cat_taur"/>
 							<else>
-								<show part="tail/cat"/>
+								<show part="tail_bg/cat"/>
 							</else>
 						</if>
                     </case>
                     <case values="2">
 						<if test="isTaur()">
-							<show part="tail/cat2_taur"/>
+							<show part="tail_bg/cat2_taur"/>
 							<else>
-								<show part="tail/cat2"/>
+								<show part="tail_bg/cat2"/>
 							</else>
 						</if>
                     </case>
                     <default>
 						<if test="isTaur()">
-							<show part="tail/cat2_taur"/>
+							<show part="tail_bg/cat2_taur"/>
 							<else>
-								<show part="tail/cat2"/>
+								<show part="tail_bg/cat2"/>
 							</else>
 						</if>
                     </default>
@@ -3403,25 +3570,33 @@
             </case>
 			<case values="Tail.BURNING">
 				<if test="isTaur()">
-					<show part="tail/hellcat_taur"/>
+					<show part="tail_bg/hellcat_taur"/>
 					<else>
-						<show part="tail/hellcat"/>
+						<show part="tail_bg/hellcat"/>
 					</else>
 				</if>
             </case>
 			<case values="Tail.TWINKASHA">
 				<if test="isTaur()">
-					<show part="tail/kasha_taur"/>
+					<show part="tail_bg/kasha_taur"/>
 					<else>
-						<show part="tail/kasha"/>
+						<show part="tail_bg/kasha"/>
 					</else>
 				</if>
             </case>
-            <case values="Tail.LIZARD,Tail.DRACONIC,Tail.CAVE_WYRM">
+            <case values="Tail.LIZARD,Tail.CAVE_WYRM">
 				<if test="isTaur()">
 					<show part="tail/reptile_taur"/>
 					<else>
 						<show part="tail/reptile"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.DRACONIC">
+				<if test="isTaur()">
+					<show part="tail/dragon_taur"/>
+					<else>
+						<show part="tail/dragon"/>
 					</else>
 				</if>
             </case>
@@ -3471,7 +3646,7 @@
 					</else>
 				</if>
             </case>
-			<case values="Tail.COW">
+			<case values="Tail.COW,Tail.TROLL">
 				<if test="isTaur()">
 					<show part="tail/cow_taur"/>
 					<else>
@@ -3527,7 +3702,8 @@
 					<show part="tail/manticore_taur"/>
 					<show part="tail_front/manticore_taur"/>
 				<else>
-					<show part="tail/manticore"/>
+					<show part="tail_bg/manticore"/>
+					<show part="tail_front/manticore"/>
 				</else>
 				</if>
             </case>
@@ -3676,7 +3852,7 @@
                     </if>
                 </default>
             </switch>
-            <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER">
+            <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
                 <hide part="penis/*"/>
 				<hide part="penis_taur/*"/>
             </if>
@@ -3704,7 +3880,7 @@
             </default>
             </switch>
             <show part="balls$taur/B$skinx$ballsz$taur"/>
-			<if test="lowerBody == LowerBody.NAGA or lowerBody == LowerBody.HYDRA or lowerBody == LowerBody.FROSTWYRM or lowerBody == LowerBody.MELKIE or lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER">
+			<if test="lowerBody == LowerBody.NAGA or lowerBody == LowerBody.HYDRA or lowerBody == LowerBody.FROSTWYRM or lowerBody == LowerBody.MELKIE or lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
 				<hide part="balls/*"/>
 				<hide part="balls_taur/*"/>
 			</if>
@@ -3789,7 +3965,7 @@
             </default>
         </switch>
 
-		<!-- HIDING INVALID ARM PATTERN AREA <if test="(arms.type == Arms.HUMAN || arms.type == Arms.ELF || arms.type == Arms.KITSUNE) F (lowerBody == LowerBody.HUMAN || lowerBody == LowerBody.ELF || lowerBody == LowerBody.KITSUNE) && cor &gt;=50 && skin.coverage==Skin.COVERAGE_NONE">-->
+		<!-- HIDING INVALID ARM PATTERN AREA >-->
 		<if test="arms.type == Arms.DISPLACER">
 			<hide part="arms_pattern/*"/>
 			<hide part="arms_bg_pattern/*"/>
@@ -3818,7 +3994,6 @@
 											<hide part="arms_pattern/*"/>
 											<hide part="arms_bg_pattern/*"/>
 											<hide part="legs_pattern/*"/>
-											<hide part="shield/*"/>
 										</case>
 										<default>
 										</default>
@@ -3879,7 +4054,7 @@
 		<if test="lowerBody == LowerBody.CENTIPEDE">
 			<hide part="legs_pattern/*"/>
 		</if>
-		
+
 		<!-- SLIME CORES -->
 		<if test="DarkSlimeCore">
 			<show part="neck/darkGooCore"/>
@@ -3976,7 +4151,17 @@
 		<if test="sphinxRegalia">
 			<show part="clotheUnderAmulet/sphinxregalia"/>
 		</if>
-		
+
+		<!-- Skull Ornament -->
+		<if test="skullOrnament">
+			<show part="clotheHead_bg/warlockSkulls"/>
+		</if>
+
+		<!-- Demon tail ring -->
+		<if test="demonTailRing">
+			<show part="tailAccessory/demonTailJewelery"/>
+		</if>
+
 		<!-- Oni Gourd -->
 		<if test="oniGourd">
 			<show part="backAccessory/oniGourd"/>
@@ -4103,7 +4288,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<if test="iceQueenGown">
 			<if test="showClothing">
 				<show part="clothe/IceQueenKimonoTop"/>
@@ -4124,7 +4309,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<if test="OniLegendaryKimono">
 			<if test="showClothing">
 				<show part="clothe/OniKimonoTop"/>
@@ -4191,7 +4376,7 @@
 				</case>
 				<default>
 					<show part="armorNeck/fullplatetopFemaleLarge"/>
-				</default>		
+				</default>
 			</switch>
 			</if>
 			<show part="armorChest/fullplatebottom"/>
@@ -4203,7 +4388,7 @@
 				<show part="armorLegs_fg/taurarmorbottom"/>
 			</if>
 		</if>
-		
+
 		<if test="centaurBlackGuardArmor">
 			<if test="breastRows.length gt 0">
 			<switch>
@@ -4224,7 +4409,7 @@
 				</case>
 				<default>
 					<show part="armorNeck/blackFullplatetopFemaleLarge"/>
-				</default>		
+				</default>
 			</switch>
 			</if>
 			<show part="armorChest/blackFullplatebottom"/>
@@ -4280,8 +4465,8 @@
 				<hide part="balls/*"/>
 			</if>
 		</if>
-		
-		
+
+
 		<!--Mage set -->
 		<if test="MageRobe">
 			<if test="showClothing">
@@ -4315,6 +4500,8 @@
 				</if>
 				<if test="showLegClothing">
 					<show part="clotheLegs/mageRobe"/>
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
 				</if>
 			</if>
 		</if>
@@ -4392,7 +4579,7 @@
 				<hide part="balls/*"/>
 			</if>
 		</if>
-		
+
 		<!--Comfy set -->
 		<if test="comfyBikiniBra">
 			<if test="breastRows.length gt 0">
@@ -4956,7 +5143,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<if test="elfClothing">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -5111,7 +5298,8 @@
 
 		<if test="fairyQueenRegalia">
 			<show part="clothe/fairyQueenDressFront"/>
-			<show part="clothLeftArm/fairyQueenDressUnderClothes"/>
+			<show part="clothLeftArm/fairyqueendressleftarmAndLeg"/>
+			<show part="clothLeftArm/fairyQueenDressArmBack"/>
 			<show part="clothCape/fairyQueenDressUnder"/>
 			<show part="glove_fg/fairyQueenDressArmFront"/>
 			<show part="clotheHead/fairyQueenCirclet"/>
@@ -5122,6 +5310,14 @@
 			<show part="arms_bg/human"/>
 			<hide part="legs/*"/>
 			<show part="legs/fairyFlying"/>
+			<if test="PlayerHasAShield or PlayerHasADualWeapon">
+				<hide part="arms/*"/>
+				<hide part="arms_fg/*"/>
+				<hide part="glove_fg/*"/>
+				<hide part="clothLeftArm/fairyQueenDressArmBack"/>
+				<show part="arms/human"/>
+				<show part="clothLeftArm/fairyqueendressrightarmShield"/>
+			</if>
 		</if>
 
         <if test="berserkerArmor">
@@ -5149,21 +5345,21 @@
             <if test="showClothing">
                 <show part="clothe/berserkerArmorTop"/>
                 <if test="showArmClothing">
-                    <show part="clothRightArm/berserkerArmorArms"/>  
-					<else> 
-						<if test="PlayerIsFeralStancing">                      
+                    <show part="clothRightArm/berserkerArmorArms"/>
+					<else>
+						<if test="PlayerIsFeralStancing">
 							<show part="clothLeftArm/berserkerArmorArmsFeralLeft"/>
 							<show part="clothRightArm/berserkerArmorArmsFeralRight"/>
 						</if>
-					</else>					
+					</else>
                 </if>
                 <if test="showLegClothing">
                     <show part="clotheLegs/berserkerArmorLegs"/>
-					<else> 
-						<if test="PlayerIsFeralStancing">                      
+					<else>
+						<if test="PlayerIsFeralStancing">
 							<show part="clotheLegs/berserkerArmorLegsFeral"/>
 						</if>
-					</else>		
+					</else>
                 </if>
                 <else>
                     <if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
@@ -5173,7 +5369,7 @@
                     </if>
                     <if test="showLegClothing">
                         <show part="clotheLegs/berserkerArmorLegs"/>
-                        <else> 
+                        <else>
 							<if test="PlayerIsFeralStancing">
 								<show part="clotheLegs/berserkerArmorLegsFeral"/>
 							</if>
@@ -5182,7 +5378,7 @@
                 </else>
             </if>
         </if>
-		
+
 		<if test="chainMailBikini">
 			<if test="breastRows.length gt 0">
 			<switch>
@@ -5204,19 +5400,23 @@
 				<default>
 					<show part="bra/chainMailBraLarge"/>
 				</default>
-			</switch>	
+			</switch>
 			</if>
 			<if test="showClothing">
 				<if test="showLegClothing">
 					<if test="isTaur()==false">
-						<show part="panty/chainMailPanty"/>	
+						<show part="panty/chainMailPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
 					</if>
 				</if>
 			</if>
 		</if>
-		
-		
+
+		<if test="showClothing == false">
+			<hide part="panty/*"/>
+		</if>
+
+
     </logic>
 </model>

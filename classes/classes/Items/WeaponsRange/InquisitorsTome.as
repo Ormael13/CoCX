@@ -18,7 +18,7 @@ package classes.Items.WeaponsRange
 		
 		override public function useText():void {
 			outputText("You unclasp the lock and begin to leaf through the tome you found in the swamp cave. This tome tells the story of the rise of the demons, from a surprisingly prudish standpoint.  The author took painstaking care to relay the strategic capabilities and tactics of the demons yet dismisses the sexual aspects of their conquest with the occasional brief nod. Concealed within the pages are the ciphers you’ve noticed earlier, guarding forbidden knowledge. ");
-			if (game.player.findPerk(PerkLib.JobSorcerer) >= 0) outputText("Beyond the words... you feel power in the pages, the ink and the binding. ");
+			if (game.player.hasPerk(PerkLib.JobSorcerer)) outputText("Beyond the words... you feel power in the pages, the ink and the binding. ");
 			outputText("You reclasp the tome, and hang it ");
 			if (game.player.armorName == "nothing") outputText("from your shoulder");
 			else outputText("from your belt");
@@ -39,13 +39,13 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function playerEquip():WeaponRange {
-			while (game.player.findPerk(PerkLib.LastResort) >= 0) game.player.removePerk(PerkLib.LastResort);
+			while (game.player.hasPerk(PerkLib.LastResort)) game.player.removePerk(PerkLib.LastResort);
 			game.player.createPerk(PerkLib.LastResort,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():WeaponRange {
-			while (game.player.findPerk(PerkLib.LastResort) >= 0) game.player.removePerk(PerkLib.LastResort);
+			while (game.player.hasPerk(PerkLib.LastResort)) game.player.removePerk(PerkLib.LastResort);
 			return super.playerRemove();
 		}
 	}

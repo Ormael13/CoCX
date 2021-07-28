@@ -27,7 +27,7 @@
 
 		public function get perkName():String
 		{
-			return _ptype.name;
+			return _ptype.name(this);
 		}
 
 		public function get perkDesc():String
