@@ -4414,13 +4414,8 @@ public class Combat extends BaseContent {
                 outputText(".\n");
                 if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)){ //WTF, This can be so much simplier.
                     biteMultiplier = 1;
-                    if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 1){ //Side note, why is this a multiplier of 2... V
+                    if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){
                         biteMultiplier *= 2;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){//...When this has no multiplier, thus uses the original 1?
                         outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
