@@ -1215,7 +1215,7 @@ public function buildMassiveRing():void {
 private function doBuildMassiveRing():void {
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
 	clearOutput();
-	outputText("That large sparing ring looks for some reason... too small for your settlement needs. Letting out a barely heard sigh you proceed to go fetch many wooden stick and lots of ropes. Now it will be no longer called merely large ring. With evne more durable looking training dummies and small stand on one of the sides it will serve it purpose on much grander scale.");
+	outputText("That large sparing ring looks for some reason... too small for your settlement needs. Letting out a barely heard sigh you proceed to go fetch many wooden stick and lots of ropes. Now it will be no longer called merely large ring. With even more durable looking training dummies and small stand on one of the sides it will serve it purpose on much grander scale.");
 	flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
 	outputText("\n\nYou work for four hours on this project but by the end the ring is expanded to massive size!");
 	player.addStatusValue(StatusEffects.TrainingNPCsTimersReduction, 1, -1);

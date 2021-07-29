@@ -671,7 +671,7 @@ public function mainCampMenu():void {
 	else addButtonDisabled(4, "Sex", "Req. 33+ lust");
 	if (player.HP < player.maxOverHP()) addButton(5, "Healing", HealingScene);
 	else addButtonDisabled(5, "Healing", "You're fully healed already.");
-	if (player.buff("Curse").isPresent()) {
+	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) {
 		addButton(6, "C.C.(A)", CuringCurseScene1).hint("Cure curses that affect stats non-multiplier bonuses.");
 		addButton(7, "C.C.(B)", CuringCurseScene2).hint("Cure curses that affect stats multiplier bonsues.");
 	}

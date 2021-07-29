@@ -1101,7 +1101,10 @@ use namespace CoC;
 		public function isSpearTypeWeapon():Boolean {
 			return weapon == game.weapons.DSSPEAR || weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.LANCE || weapon == game.weapons.PTCHFRK || weapon == game.weapons.SESPEAR || weapon == game.weapons.SKYPIER || weapon == game.weapons.SPEAR || weapon == game.weapons.TRIDENT || weapon == game.weapons.URTAHLB;
 		}
-		//Scythe-type DEMSCYT LHSCYTH
+		//Scythe-type
+		public function isScytheTypeWeapon():Boolean {
+			return weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;
+		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
 			return weapon == game.weapons.ADAGGER || weapon == game.weapons.DAGGER || weapon == game.weapons.DAGWHIP || weapon == game.weapons.L_DAGGR || weapon == game.weapons.RDAGGER || weapon == game.weapons.SDAGGER || weapon == game.weapons.TODAGGER || weapon == game.weapons.TDAGGER || weapon == game.weapons.TRIDAG || weapon == game.weapons.ANGSTD || weapon == game.weapons.DDAGGER;
@@ -1354,12 +1357,12 @@ use namespace CoC;
 		//Using a spear
 		public function isUsingSpear():Boolean
 		{
-			return weaponType == "Spear";
+			return isSpearTypeWeapon();
 		}
 		//Using Staff
 		public function isUsingStaff():Boolean
 		{
-			return weaponPerk == "Staff" || weaponName == "demonic scythe";
+			return isStaffTypeWeapon();
 		}
 		//Using Wand
 		public function isUsingWand():Boolean

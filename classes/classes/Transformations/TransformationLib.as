@@ -5568,6 +5568,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			return player.gills.type === Gills.ANEMONE;
 		}
 	);
+	
+	public const GillsInTentacleLegs:Transformation = new SimpleTransformation("Tentacle Legs Gills",
+		// apply effect
+		function (doOutput:Boolean):void {
+	    var desc: String = "";
+
+			desc += "";
+
+			player.gills.type = Gills.GILLS_IN_TENTACLE_LEGS;
+	    if (doOutput) outputText(desc);
+		},
+		// is present
+		function ():Boolean {
+			return player.gills.type === Gills.GILLS_IN_TENTACLE_LEGS;
+		}
+	);
 	/*
 */
 
@@ -7009,18 +7025,18 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    function(doOutput: Boolean): void {
 	        var desc: String = "";
 
-					// Doesn't support tails
-					TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
-
+			// Doesn't support tails
+			TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 	        TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+			TransformationUtils.applyTFIfNotPresent(transformations.GillsNone, doOutput);
 
 	        desc += "You suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing. You feel something weird down your legs as you notice they are literally boneless! No wonder you fell down there's no way those empty lump of flesh would be able to carry your weight around. As you think over how you will fix this annoying situation wracking pain hits you in waves as your legs seems to stretch to a ridiculous length up to twice your height. Just as you think this can't get any weirder your legs split apart dividing into four then again into eighths! You watch you toe disappearing turning your feet into what could have been described as eight very weird tails when your legs start to cover with what looks like suction cups similar to those of an octopus. <b>Your legs have turned into tentacles!</b>";
-          if (player.gender == Gender.GENDER_FEMALE) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.";
-          else if (player.gender == Gender.GENDER_HERM) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.";
-          else if (player.gender == Gender.GENDER_MALE) desc += " Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.";
-          desc += " As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!";
+			if (player.gender == Gender.GENDER_FEMALE) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.";
+			else if (player.gender == Gender.GENDER_HERM) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.";
+			else if (player.gender == Gender.GENDER_MALE) desc += " Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.";
+			desc += " As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!";
 
-					TransformationUtils.applyTFIfNotPresent(transformations.TailNone, false);
+					transformations.GillsInTentacleLegs.applyEffect(false);
 					player.legCount = 8;
 	        player.lowerBody = LowerBody.SCYLLA;
 					if (doOutput) outputText(desc);
@@ -7036,12 +7052,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    function(doOutput: Boolean): void {
 	        var desc: String = "";
 
-					// Doesn't support tails
-					TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+			// Doesn't support tails
+			TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+			TransformationUtils.applyTFIfNotPresent(transformations.GillsNone, doOutput);
 
 	        desc += "Something in your tentacle legs shifts as additional limbs grow. You look down to discover two larger tentacles have grown along your eight legs. <b>They look similar to the ones a kraken might have.</b>";
 
-					player.legCount = 10;
+			transformations.GillsInTentacleLegs.applyEffect(false);
+			player.legCount = 10;
 	        player.lowerBody = LowerBody.KRAKEN;
 					if (doOutput) outputText(desc);
 	    },
@@ -8792,11 +8810,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				switch (tailCount) {
 					case 9:
-						Metamorph.unlockMetamorph("Fox 9th Tail");
+						if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) Metamorph.unlockMetamorph("Fox 9th Tail");
 					case 8:
-						Metamorph.unlockMetamorph("Fox 8th Tail");
+						if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) Metamorph.unlockMetamorph("Fox 8th Tail");
 					case 7:
-						Metamorph.unlockMetamorph("Fox 7th Tail");
+						if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) Metamorph.unlockMetamorph("Fox 7th Tail");
 					case 6:
 						Metamorph.unlockMetamorph("Fox 6th Tail");
 					case 5:

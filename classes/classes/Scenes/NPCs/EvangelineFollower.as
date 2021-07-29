@@ -85,7 +85,7 @@ package classes.Scenes.NPCs
 			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineAffectionMeter > 50) EvangelineAffectionMeter = 56;
 			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 50;
 			else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineAffectionMeter > 35) EvangelineAffectionMeter = 45;
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1 && flags[kFLAGS.EVANGELINE_LVL_UP] < 5 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 40;//current cap
+			else if (flags[kFLAGS.EVANGELINE_LVL_UP] < 5 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 40;//current cap
 			else if (EvangelineAffectionMeter < 0) EvangelineAffectionMeter = 0;
 			return EvangelineAffectionMeter;
 		}
@@ -186,11 +186,22 @@ public function meetEvangeline():void {
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
 	if (EvangelineAffectionMeter >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
-	if (EvangelineAffectionMeter >= 5 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
+	if (EvangelineAffectionMeter >= 5) {
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
+		else addButtonDisabled(3, "Spar", "Req. built sparring ring.");
+		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
+		else addButtonDisabled(5, "Give Gems", "Req. sparring with Evangeline at least once.");
+		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2) addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
+		else addButtonDisabled(8, "I.Mutations", "Req. Evangeline been lvl 6+.");
+	}
+	else {
+		addButtonDisabled(3, "Spar", "Req. 5%+ affection and built sparring ring.");
+		addButtonDisabled(5, "Give Gems", "Req. 5%+ affection and sparring with Evangeline at least once.");
+		addButtonDisabled(8, "I.Mutations", "Req. 5%+ affection and Evangeline been lvl 6+.");
+	}
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
-	if (EvangelineAffectionMeter >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 4) addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");//temporaly here until normal unlock will be placed
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	addButtonDisabled(9, "???", "Req. Evangeline been lvl 15+.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -198,15 +209,18 @@ public function meetEvangeline():void {
 		}
 		else addButton(11, "Wendigo", curingWendigo);
 	}
-	if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2) addButton(12, "Jiangshi", curingJiangshi);
-	if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) {
-		if (player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(12, "Jiangshi", curingJiangshi);
+	else addButtonDisabled(11, "???", "Req. to be cursed by Wendigo.");
+	if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) {
+		if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2) addButton(12, "Jiangshi", curingJiangshi);
+		else if (player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(12, "Jiangshi", curingJiangshi);
 		else addButtonDisabled(12, "Jiangshi", "Req. five vitality tinctures and five purity philters to fix your 'issue'.");
 	}
+	else addButtonDisabled(12, "???", "Req. to be Jiangshi.");
 	if (player.hasKeyItem("Soul Gem Research") >= 0) {
 		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", recivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
 		if (!player.hasStatusEffect(StatusEffects.SoulGemCrafting)) addButton(13, "Soul Gem", craftingSoulGem).hint("Ask Evangeline for crafting Soul Gem.");
 	}
+	else addButtonDisabled(13, "???", "Req. to acquire Soul Gem Research materials first.");
 	addButton(14, "Back", camp.campFollowers);
 }
 

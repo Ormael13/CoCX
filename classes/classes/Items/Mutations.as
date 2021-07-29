@@ -1709,7 +1709,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Animal tooth face
         if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasFur()) {
-            transformations.FaceAnimalTeeth.applyEffect();
+            outputText("\n\n");
+			transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
         //Wolf face

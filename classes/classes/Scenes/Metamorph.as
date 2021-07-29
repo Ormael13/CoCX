@@ -532,6 +532,28 @@ package classes.Scenes {
 		public function Metamorph() {
 			Saves.registerSaveableState(this);
 		}
+		
+		public static function resetMetamorph(): void {
+			GeneticMemoryStorage = {};
+			// Basic human parts, unlocked from the start
+				GeneticMemoryStorage["Human Hair"] = true;
+				GeneticMemoryStorage["Human Face"] = true;
+				GeneticMemoryStorage["Human Eyes"] = true;
+				GeneticMemoryStorage["Human Tongue"] = true;
+				GeneticMemoryStorage["Human Ears"] = true;
+				GeneticMemoryStorage["Human Arms"] = true;
+				GeneticMemoryStorage["Human Lower Body"] = true;
+				GeneticMemoryStorage["No Horns"] = true;
+				GeneticMemoryStorage["No Wings"] = true;
+				GeneticMemoryStorage["Plain Skin"] = true;
+				GeneticMemoryStorage["No Skin Pattern"] = true;
+				GeneticMemoryStorage["No Antennae"] = true;
+				GeneticMemoryStorage["No Gills"] = true;
+				GeneticMemoryStorage["No Rear Body"] = true;
+				GeneticMemoryStorage["No Tail"] = true;
+			// Generic value for TFs unlocked from the beginning
+			GeneticMemoryStorage["Unlocked Metamorph"] = true;
+		}
 
 		// Controls the main Metamorph menu's page without having to carry the value through functions
 		public var mainMetamorphMenuPage: int = 0;
