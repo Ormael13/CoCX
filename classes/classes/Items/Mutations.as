@@ -14397,15 +14397,15 @@ public final class Mutations extends MutationsHelper {
         }
         //Hair Color
         if (!InCollection(player.hairColor, wyrmHairColor) && changes < changeLimit && rand(3) == 0) {
-            player.hairColorOnly = randomChoice(wyrmHairColor);
-            outputText("\n\nYour head tingles as something in your hair change, the strands flashing for an instant before they turn <b>" + player.hairColor + " just like those of a frost wyrm.</b><");
+            outputText("\n\n");
+            transformations.HairChangeColor(wyrmHairColor).applyEffect();
             changes++;
         }
         //Coat
         if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit && rand(4) == 0) {
             if (!InCollection(player.coatColor, wyrmCoatColor)) player.coatColor = randomChoice(wyrmCoatColor);
             outputText("\n\n");
-            transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
+            transformations.SkinDragonScales(Skin.COVERAGE_LOW, {colors: wyrmCoatColor}).applyEffect();
             changes++;
         }
         //Coat color fix
@@ -16354,8 +16354,8 @@ public final class Mutations extends MutationsHelper {
             }
             //Reset fur if fully coated
             if (player.hasFullCoatOfType(Skin.FUR) && !player.hasPartialCoat(Skin.FUR)) {
-                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. To your surprise you are back to being furless just like your old human self.");
-                player.skin.growCoat(Skin.COVERAGE_NONE);
+                outputText("\n\n");
+                transformations.SkinPlain.applyEffect();
                 changes++;
             }
             //Partial fur
