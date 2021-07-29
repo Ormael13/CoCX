@@ -7,12 +7,15 @@ public class Arms extends BodyPart {
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("HUMAN", "HARPY")
 	 * - name: human-readable default name, ("human", "harpy")
-	 * - appearanceDesc: description of the arms to be displayed
-	 * - claw:
-	 * - scythe:
-	 * - armSlam:
-	 * - canFly: [for winged arms] part allows flight at the expense of using both arms, defaults to false
-	 * - wingSlap: [for winged arms] part allows a wing slap, defaults to false
+	 *
+	 * - appearanceDesc: description for PlayerAppearance.as (always visible)
+	 * - appearanceDescFunc: a function that returns a description for PlayerAppearance.as (appearanceDesc is ignored if this exists)
+	 *
+	 * - claw: whether the arms include claws
+	 * - scythe: whether the arms include scythe-like claws
+	 * - armSlam: whether the arms enable armSlam
+	 * - canFly: [for winged arms] whether allows flight at the expense of using both arms
+	 * - wingSlap: [for winged arms] whether part allows a wing slap
 	 */
 	public static var Types:/*EnumValue*/Array = [];
 
@@ -74,7 +77,7 @@ public class Arms extends BodyPart {
 	public static const GARGOYLE:int = 9;
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {
 		name:"gargoyle", armSlam: true,
-		appearanceDesc: "Your {gargoyleMaterial} arms end in stone sharp clawed hands."
+		appearanceDesc: "Your [gargoylematerial] arms end in stone sharp clawed hands."
 	});
 
 	public static const WOLF:int = 10;
@@ -115,8 +118,8 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
-	public static const DRAGON:int = 15;
-	EnumValue.add(Types, DRAGON, "DRAGON", {
+	public static const DRACONIC:int = 15;
+	EnumValue.add(Types, DRACONIC, "DRACONIC", {
 		name:"dragon",
 		appearanceDesc: "Thick, leathery scales cover your arms from the biceps down, and your fingernails are short curved claws.",
 		claw: true
@@ -178,7 +181,7 @@ public class Arms extends BodyPart {
 	public static const GARGOYLE_2:int = 24;
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
 		name:"gargoyle",
-		appearanceDesc: "Your {gargoyleMaterial} arms end in normal human like hands.",
+		appearanceDesc: "Your [gargoylematerial] arms end in normal human like hands.",
 		claw: true
 	});
 
@@ -193,14 +196,14 @@ public class Arms extends BodyPart {
 	public static const AVIAN:int = 26;
 	EnumValue.add(Types, AVIAN, "AVIAN", {
 		name:"avian",
-		appearanceDesc: "Your arms are covered by [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have {skinTone}, slightly rough skin, and end in short claws.",
+		appearanceDesc: "Your arms are covered by [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have [skinTone], slightly rough skin, and end in short claws.",
 		claw: true
 	});
 
 	public static const GRYPHON:int = 27;
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name:"gryphon",
-		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [skin coat.color] plumage leading to your {skinTone}, slightly rough-skinned hands equipped with short, avian claws.",
+		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [skin coat.color] plumage leading to your [skinTone], slightly rough-skinned hands equipped with short, avian claws.",
 		claw: true
 	});
 
@@ -283,8 +286,8 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
-	public static const RAIJU_2:int = 40;
-	EnumValue.add(Types, RAIJU_2, "RAIJU_2", {
+	public static const RAIJU_PAWS:int = 40;
+	EnumValue.add(Types, RAIJU_PAWS, "RAIJU_PAWS", {
 		name:"raiju paws",
 		appearanceDesc: "Your forearms are covered by dense fur upon which an electric current runs free. Your pawed hands end in sharp claws capable of delivering powerful discharges.",
 		claw: true
@@ -328,8 +331,8 @@ public class Arms extends BodyPart {
 		appearanceDesc: ""
 	});
 
-	public static const USHI_ONI_ONNA:int = 47;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {
+	public static const USHI_ONI:int = 47;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
 		name:"ushi-oni",
 		appearanceDesc: "You have ushi-oni arms, longer and thicker than those of most races. A strange pattern of fur descends from your middle biceps down to your hands, where you have bone-like claws rather than fingers."
 	});
@@ -384,8 +387,8 @@ public class Arms extends BodyPart {
 		wingSlap: true
 	});
 
-	public static const SEADRAGON:int = 55;
-	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {
+	public static const SEA_DRAGON:int = 55;
+	EnumValue.add(Types, SEA_DRAGON, "SEA_DRAGON", {
 		name:"sea dragon",
 		appearanceDesc: "A pair of fins have sprouted on each of your forearms near your elbows, and the skin between your fingers forms a small webbing which assists your swimming. You have sharp and deadly claws which allow you to impale your prey or rip your foes to shreds.",
 		claw: true
@@ -399,22 +402,16 @@ public class Arms extends BodyPart {
 		super(null, null);
 	}
 
-	public static function getAppearanceDescription(opts:Object):String {
-		if (Types[opts.id].appearanceDesc) {
-			return formatDescription(Types[opts.id].appearanceDesc, opts);
-		}
+	public static function getAppearanceDescription(creature: *):String {
+		const id: int = creature.arms.type;
 
-		return "";
+		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
 	}
 
-	private static function formatDescription(desc:String, opts: Object): String {
+	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
-		const skinTonePattern:RegExp = /{skinTone}/g;
-		const gargoyleMaterialPattern:RegExp = /{gargoyleMaterial}/g;
 
 		return " " + desc
-			.replace(skinTonePattern, opts.skinTone)
-			.replace(gargoyleMaterialPattern, opts.gargoyleMaterial)
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }

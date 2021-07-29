@@ -118,17 +118,17 @@ public class PerkLib
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
 				"While others had to work hard to unlock their metamorphic potential, it came naturally to you. Whatever the reason for that is... truth be told you try not to think about it, afraid of what it might mean for you. As long as it's nothing harmful for you in the long run, right?");
 		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
-				"Allows you to retain up to 15 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 15 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage2:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 2)", "Ascension: Transcendental Genetic Memory (Stage 2)",
-				"Allows you to retain up to 30 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 30 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage3:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 3)", "Ascension: Transcendental Genetic Memory (Stage 3)",
-				"Allows you to retain up to 45 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 45 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage4:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 4)", "Ascension: Transcendental Genetic Memory (Stage 4)",
-				"Allows you to retain up to 60 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 60 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage5:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 5)", "Ascension: Transcendental Genetic Memory (Stage 5)",
-				"Allows you to retain up to 75 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 75 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionTranscendentalGeneticMemoryStage6:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 6)", "Ascension: Transcendental Genetic Memory (Stage 6)",
-				"Allows you to retain up to 90 chosen unlocked metamorphic options.");
+				"Allows you to retain up to 90 chosen unlocked metamorphic options."); // Deprecated
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
 				"You're the underdog. Gain twice as much exp for beating up enemies above your current level with double the limit after which increases to gained exp stops.");// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
@@ -139,8 +139,6 @@ public class PerkLib
 				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive hp (+80), lust (+6), fatigue (+6) gains at lvl-up).");
 		public static const AscensionUnlockedPotential4thStage:PerkType = mk("Ascension: Unlocked Potential (4th Stage)", "Ascension: Unlocked Potential (4th Stage)",
 				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive wrath (+10), mana (+12), soulforce (+6) gains at lvl-up).");
-	//	public static const AscensionTranscendentalGeneticMemoryStage7:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 7)", "Ascension: Transcendental Genetic Memory (Stage 7)",
-	//			"Allows you to retain up to 105 chosen unlocked metamorphic options.");
 	//	public static const AscensionBuildingPrestige07:PerkType = mk("Ascension: Building Prestige (7th Stage)", "Ascension: Building Prestige (7th Stage)",
 	//			"Your understanding of prestige jobs from previous lives allows you to pick an 8th one at lvl 42+.");
 	//	public static const AscensionBuildingPrestige08:PerkType = mk("Ascension: Building Prestige (8th Stage)", "Ascension: Building Prestige (8th Stage)",
@@ -3474,7 +3472,7 @@ public class PerkLib
 				".");
 		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",
 				".");
-				
+
 		// Other super perks
 		public static const SuperPerk1:PerkType = mk("Super Perk 1", "Super Perk 1",
 				".");
@@ -6093,13 +6091,13 @@ public class PerkLib
 			}, "Displacer beast");
 			DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEADRAGON);
+                return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
 				}, "Dragon race or its variants arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.lowerBody == LowerBody.DRAGON || player.lowerBody == LowerBody.FROSTWYRM || player.lowerBody == LowerBody.SEADRAGON);
+                return (LowerBody.hasDraconicLegs(player));
 				}, "Dragon race or its variants legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.tailType == Tail.DRACONIC || player.lowerBody == LowerBody.FROSTWYRM || player.tailType == Tail.ORCA);
+                return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
@@ -6146,13 +6144,13 @@ public class PerkLib
                 return player.gorgonScore() >= 5;
             }, "Gorgon race");
 			HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-                return player.arms.type == 34;
+                return player.arms.type == Arms.HINEZUMI;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.lowerBody == 49;
+                return player.lowerBody == LowerBody.HINEZUMI;
 				}, "Hinezumi legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.tailType == 43;
+                return player.tailType == Tail.HINEZUMI;
 				}, "Hinezumi tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;
@@ -6345,13 +6343,13 @@ public class PerkLib
             HinezumiBurningBloodEvolved.requireLevel(6)
 				.requirePerk(HinezumiBurningBlood)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.arms.type == 34;
+                return player.arms.type == Arms.HINEZUMI;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.lowerBody == 49;
+                return player.lowerBody == LowerBody.HINEZUMI;
 				}, "Hinezumi legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.tailType == 43;
+                return player.tailType == Tail.HINEZUMI;
 				}, "Hinezumi tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;
@@ -6713,13 +6711,13 @@ public class PerkLib
             HinezumiBurningBloodFinalForm.requireLevel(18)
 				.requirePerk(HinezumiBurningBloodEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.arms.type == 34;
+                return player.arms.type == Arms.HINEZUMI;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.lowerBody == 49;
+                return player.lowerBody == LowerBody.HINEZUMI;
 				}, "Hinezumi legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.tailType == 43;
+                return player.tailType == Tail.HINEZUMI;
 				}, "Hinezumi tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;

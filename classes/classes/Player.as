@@ -537,8 +537,7 @@ use namespace CoC;
 			return _modArmorName;
 		}
 
-		public function set modArmorName(value:String):void
-		{
+		public function set modArmorName(value:String):void {
 			if (value == null) value = "";
 			_modArmorName = value;
 		}
@@ -638,14 +637,14 @@ use namespace CoC;
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRAGON || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEADRAGON) armorDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.SEADRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -844,7 +843,7 @@ use namespace CoC;
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorMDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorMDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRAGON || arms.type == Arms.FROSTWYRM) armorMDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM) armorMDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorMDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorMDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorMDef += (3 * newGamePlusMod);
@@ -999,15 +998,15 @@ use namespace CoC;
 			return wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
-		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody].claw;}
+		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
 		public function hasAGoreAttack():Boolean { return (Horns.Types[horns.type].gore);}
-		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || Tail.Types[tail.type].Energy || LowerBody.Types[lowerBody].tailSlam);}
-		public function hasTalonsAttack():Boolean{return lowerBody == LowerBody.HARPY;}
-		public function hasTentacleAttacks():Boolean{return LowerBody.Types[lowerBody].tentacle || hasPerk(PerkLib.MorphicWeaponry);}
+		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || Tail.Types[tail.type].Energy || LowerBody.canTailSlam(this));}
+		public function hasTalonsAttack():Boolean{return LowerBody.hasTalons(this);}
+		public function hasTentacleAttacks():Boolean{return LowerBody.hasTentacles(this) || hasPerk(PerkLib.MorphicWeaponry);}
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
@@ -1423,7 +1422,7 @@ use namespace CoC;
 		public function set ammo(value:int):void {
 			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
 		}
-		
+
 		//override public function get weapons
 		override public function get weaponFlyingSwordsName():String {
 			return _weaponFlyingSwords.name;
@@ -3279,7 +3278,7 @@ use namespace CoC;
 				{name: 'devil', score: devilkinScore(), minscore: 7},
 				{name: 'rhino', score: rhinoScore(), minscore: 4},
 				{name: 'echidna', score: echidnaScore(), minscore: 4},
-				{name: 'ushi-onna', score: ushionnaScore(), minscore: 11},
+				{name: 'ushi-oni', score: ushionnaScore(), minscore: 11},
 				{name: 'satyr', score: satyrScore(), minscore: 4},
 				{name: 'manticore', score: manticoreScore(), minscore: 7},
 				{name: 'red panda', score: redpandaScore(), minscore: 4},
@@ -4233,7 +4232,7 @@ use namespace CoC;
 					if (faceType == Face.HUMAN) race = "echidna-" + mf("boy", "girl");
 				}
 			}
-			if (TopRace == "ushi-onna") {
+			if (TopRace == "ushi-oni") {
 				if (TopScore >= 5) {
 					if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 1) race = "fiery ushi-" + mf("oni", "onna");
 					else if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 2) race = "frozen ushi-" + mf("oni", "onna");
@@ -5670,7 +5669,7 @@ use namespace CoC;
 				catCounter++;
 			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
 				catCounter -= 7;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				catCounter++;
 			if (ears.type == Ears.CAT)
 				catCounter++;
@@ -5733,7 +5732,7 @@ use namespace CoC;
 			var nekomataCounter:Number = 0;
 			if (faceType == Face.CAT_CANINES)
 				nekomataCounter++;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				nekomataCounter++;
 			if (ears.type == Ears.CAT)
 				nekomataCounter++;
@@ -5791,7 +5790,7 @@ use namespace CoC;
 			var cheshireCounter:Number = 0;
 			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
 				cheshireCounter += 2;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				cheshireCounter++;
 			if (ears.type == Ears.CAT)
 				cheshireCounter++;
@@ -5959,7 +5958,7 @@ use namespace CoC;
 				lizardCounter++;
 			if (ears.type == Ears.LIZARD)
 				lizardCounter++;
-			if (eyes.type == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.LIZARD)
 				lizardCounter++;
 			if (tailType == Tail.LIZARD)
 				lizardCounter++;
@@ -6004,7 +6003,7 @@ use namespace CoC;
 		public function spiderScore():Number {
 			Begin("Player","racialScore","spider");
 			var spiderCounter:Number = 0;
-			if (eyes.type == Eyes.FOUR_SPIDER_EYES)
+			if (eyes.type == Eyes.SPIDER)
 				spiderCounter++;
 			if (faceType == Face.SPIDER_FANGS)
 				spiderCounter++;
@@ -6137,7 +6136,7 @@ use namespace CoC;
 				kitsuneCounter -= 2;
 			if (skin.base.type != Skin.PLAIN)
 				kitsuneCounter -= 3;
-			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE)
+			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE || arms.type == Arms.FOX)
 				kitsuneCounter++;
 				kitsuneCounter2++;
 			if (lowerBody == LowerBody.FOX || lowerBody == LowerBody.HUMAN)
@@ -6204,7 +6203,7 @@ use namespace CoC;
 				dragonCounter2++;
 			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
 				dragonCounter -= 10;
-			if (eyes.type == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRACONIC)
 				dragonCounter++;
 				dragonCounter2++;
 			if (ears.type == Ears.DRAGON)
@@ -6225,12 +6224,12 @@ use namespace CoC;
 			if (wings.type == Wings.DRACONIC_HUGE)
 				dragonCounter += 4;
 				dragonCounter2 += 4;
-			if (wings.type == Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM)
+			if (wings.type == Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM)
 				dragonCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				dragonCounter++;
 				dragonCounter2++;
-			if (arms.type == Arms.DRAGON)
+			if (arms.type == Arms.DRACONIC)
 				dragonCounter++;
 				dragonCounter2++;
 			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
@@ -6302,7 +6301,7 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
 				jabberwockyCounter -= 10;
-			if (eyes.type == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRACONIC)
 				jabberwockyCounter++;
 			if (ears.type == Ears.DRAGON)
 				jabberwockyCounter++;
@@ -6310,13 +6309,13 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (tongue.type == Tongue.DRACONIC)
 				jabberwockyCounter++;
-			if (wings.type == Wings.FEY_DRAGON_WINGS)
+			if (wings.type == Wings.FEY_DRAGON)
 				jabberwockyCounter += 4;
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				jabberwockyCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				jabberwockyCounter++;
-			if (arms.type == Arms.DRAGON)
+			if (arms.type == Arms.DRACONIC)
 				jabberwockyCounter++;
 			if (tallness > 120 && jabberwockyCounter >= 10)
 				jabberwockyCounter++;
@@ -6360,7 +6359,7 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && jabberwockyCounter >= 8)
 				jabberwockyCounter += 1;
-			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
+			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
 			if (isGargoyle()) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -6800,7 +6799,7 @@ use namespace CoC;
 				vouivreCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				vouivreCounter++;
-			if (arms.type == Arms.DRAGON)
+			if (arms.type == Arms.DRACONIC)
 				vouivreCounter++;
 			if (hasCoatOfType(Skin.DRAGON_SCALES))
 				vouivreCounter++;
@@ -7049,7 +7048,7 @@ use namespace CoC;
 				poltergeistCounter++;
 			if (lowerBody == LowerBody.GHOST_2)
 				poltergeistCounter += 2;
-			if (wings.type == Wings.ETHEREAL_WINGS)
+			if (wings.type == Wings.ETHEREAL)
 				poltergeistCounter += 2;
 			if (tailType == Tail.NONE)
 				poltergeistCounter++;
@@ -7404,7 +7403,7 @@ use namespace CoC;
 				orcaCounter += 1;
 			if (isGargoyle()) orcaCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) orcaCounter = 0;
-			if (wings.type == Wings.SEADRAGON || lowerBody == LowerBody.SEADRAGON || arms.type == Arms.SEADRAGON)
+			if (wings.type == Wings.SEA_DRAGON || lowerBody == LowerBody.SEA_DRAGON || arms.type == Arms.SEA_DRAGON)
 				orcaCounter = 0;
 			orcaCounter = finalRacialScore(orcaCounter, Race.ORCA);
 			End("Player","racialScore");
@@ -7415,9 +7414,9 @@ use namespace CoC;
 		public function leviathanScore():Number {
 			Begin("Player","racialScore","orca");
 			var LeviathanCounter:Number = 0;
-			if (horns.type == Horns.SEADRAGON)
+			if (horns.type == Horns.SEA_DRAGON)
 				LeviathanCounter++;
-			if (antennae.type == Antennae.SEADRAGON)
+			if (antennae.type == Antennae.SEA_DRAGON)
 				LeviathanCounter++;
 			if (ears.type == Ears.ORCA)
 				LeviathanCounter++;
@@ -7427,15 +7426,15 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (tongue.type == Tongue.DRACONIC)
 				LeviathanCounter++;
-			if (eyes.type == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRACONIC)
 				LeviathanCounter++;
 			if (InCollection(eyes.colour,"orange","yellow","light green"))
 				LeviathanCounter++;
 			if (hairType == Hair.PRISMATIC)
 				LeviathanCounter++;
-			if (lowerBody == LowerBody.SEADRAGON)
+			if (lowerBody == LowerBody.SEA_DRAGON)
 				LeviathanCounter++;
-			if (arms.type == Arms.SEADRAGON)
+			if (arms.type == Arms.SEA_DRAGON)
 				LeviathanCounter++;
 			if (rearBody.type == RearBody.ORCA_BLOWHOLE)
 				LeviathanCounter++;
@@ -7443,9 +7442,9 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (skinAdj == "glossy")
 				LeviathanCounter++;
-			if (skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY)
+			if (skin.base.pattern == Skin.PATTERN_SEA_DRAGON_UNDERBODY)
 				LeviathanCounter++;
-			if (wings.type == Wings.SEADRAGON)
+			if (wings.type == Wings.SEA_DRAGON)
 				LeviathanCounter += 4;
 			if (tone < 10)
 				LeviathanCounter++;
@@ -7489,9 +7488,9 @@ use namespace CoC;
 				LeviathanCounter += 1;
 			if (isGargoyle()) LeviathanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) LeviathanCounter = 0;
-			if (wings.type == Wings.NONE || lowerBody != LowerBody.SEADRAGON || arms.type != Arms.SEADRAGON)
+			if (wings.type == Wings.NONE || lowerBody != LowerBody.SEA_DRAGON || arms.type != Arms.SEA_DRAGON)
 				LeviathanCounter = 0;
-			LeviathanCounter = finalRacialScore(LeviathanCounter, Race.SEADRAGON);
+			LeviathanCounter = finalRacialScore(LeviathanCounter, Race.SEA_DRAGON);
 			End("Player","racialScore");
 			return LeviathanCounter;
 		}
@@ -7906,7 +7905,7 @@ use namespace CoC;
 				raijuCounter++;
 			if (faceType == Face.WEASEL)
 				raijuCounter++;
-			if (arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2)
+			if (arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_PAWS)
 				raijuCounter++;
 			if (lowerBody == LowerBody.RAIJU)
 				raijuCounter++;
@@ -8395,7 +8394,7 @@ use namespace CoC;
 				if (ears.type == Ears.HUMAN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON)
 					salamanderCounter++;
 			}
-			if (eyes.type == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.LIZARD)
 				salamanderCounter++;
 			if (arms.type == Arms.SALAMANDER)
 				salamanderCounter++;
@@ -8612,7 +8611,7 @@ use namespace CoC;
 				wendigoCounter++;
 			if (coatColor == "snow white")
 				wendigoCounter++;
-			if (eyes.type == Eyes.DEAD_EYES)
+			if (eyes.type == Eyes.DEAD)
 				wendigoCounter++;
 			if (eyes.colour == "spectral blue")
 				wendigoCounter++;
@@ -8858,7 +8857,7 @@ use namespace CoC;
 			}
 			if (InCollection(skinTone, SphinxSkinColor))
 				sphinxCounter++;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
 				sphinxCounter++;
@@ -9283,7 +9282,7 @@ use namespace CoC;
 				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON && phoenixCounter > 2)
 					phoenixCounter++;
 			}
-			if (eyes.type == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.LIZARD)
 				phoenixCounter++;
 			if (lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.HARPY)
 				phoenixCounter++;
@@ -9875,15 +9874,15 @@ use namespace CoC;
 			var ushionnaCounter:Number = 0;
 			if (ears.type == Ears.COW)
 				ushionnaCounter++;
-			if (tailType == Tail.USHI_ONI_ONNA)
+			if (tailType == Tail.USHI_ONI)
 				ushionnaCounter++;
-			if (faceType == Face.USHI_ONI_ONNA)
+			if (faceType == Face.USHI_ONI)
 				ushionnaCounter++;
-			if (horns.type == Horns.USHI_ONI_ONNA)
+			if (horns.type == Horns.USHI_ONI)
 				ushionnaCounter++;
-			if (arms.type == Arms.USHI_ONI_ONNA)
+			if (arms.type == Arms.USHI_ONI)
 				ushionnaCounter++;
-			if (lowerBody == LowerBody.USHI_ONI_ONNA)
+			if (lowerBody == LowerBody.USHI_ONI)
 				ushionnaCounter += 2;
 			if (skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY)
 				ushionnaCounter += 2;
@@ -10261,11 +10260,11 @@ use namespace CoC;
 		}
 
 		public function atlachFullTfCheck():Boolean {
-			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES && ears.type == Ears.ELFIN
+			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.SPIDER && ears.type == Ears.ELFIN
 			&& rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS && hasCoatOfType(Skin.CHITIN)
 			&& eyes.colour == "red" && coatColor == "midnight purple" && hairColor == "midnight purple";
 		}
-		
+
 		public function atlachNachaScore():int {
 			var score:int = 0;
 			Begin("Player","racialScore","atlachNacha");
@@ -10280,7 +10279,7 @@ use namespace CoC;
 			if (arms.type == Arms.SPIDER)
 				score++;
 			// Omni Eye on forehead 1
-			if (eyes.type == Eyes.FOUR_SPIDER_EYES) {
+			if (eyes.type == Eyes.SPIDER) {
 				score++;
 				// Red eye color 1
 				if (eyes.colour == "red")
@@ -12730,7 +12729,7 @@ use namespace CoC;
 					currentSen += 25;
 				}
 			}
-			
+
 			if (poltergeistScore() >= 6) {
 				if (poltergeistScore() >= 18) {
 					maxStrCap2 -= 45;
@@ -12753,7 +12752,7 @@ use namespace CoC;
 				}
 			}
 			if (bansheeScore() >= 4) {
-			
+
 			}
 			if (firesnailScore() >= 15) {
 				maxStrCap2 += 70;
@@ -15255,7 +15254,7 @@ use namespace CoC;
 			return sadomasochismBoost;
 		}
 
-		public function additionalTransformationChances():Number {
+		public function get additionalTransformationChances():Number {
 			var additionalTransformationChancesCounter:Number = 0;
 			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
@@ -15318,6 +15317,14 @@ use namespace CoC;
 				case 2: return female;
 				default: return old;
 			}
+		}
+
+		public function get areBaseStatsMaxed(): Boolean {
+			if (strStat.core.value < strStat.core.max || touStat.core.value < touStat.core.max || speStat.core.value < speStat.core.max || intStat.core.value < intStat.core.max || wisStat.core.value < wisStat.core.max || libStat.core.value < libStat.core.max) {
+				return false;
+			}
+
+			return true;
 		}
 
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {

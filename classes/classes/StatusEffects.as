@@ -13,9 +13,8 @@ import classes.StatusEffects.VampireThirstEffect;
 	public class StatusEffects
 	{
 		//metamorph
-		public static const TranscendentalGeneticMemory:StatusEffectType = mk("Transcendental Genetic Memory");//v1 - limit of permable options, v2 - current permed options counter
+		public static const TranscendentalGeneticMemory:StatusEffectType = mk("Transcendental Genetic Memory");//v1 - limit of permable options, v2 - current permed options counter (Deprecated)
 		public static const UnlockedFur:StatusEffectType				 = mk("Unlocked Fur");//1 (for line 15)	użyć fox fur lub inne skin tf scene text
-		public static const UnlockedAquaScales:StatusEffectType			 = mk("Unlocked Fish Scales");
 		public static const UnlockedScales:StatusEffectType				 = mk("Unlocked Scales");
 		public static const UnlockedChitin:StatusEffectType				 = mk("Unlocked Chitin");
 		public static const UnlockedDragonScales:StatusEffectType		 = mk("Unlocked Dragon Scales");//5 (for line 19)
@@ -77,7 +76,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedHarpyLegs:StatusEffectType           = mk("Unlocked Harpy Legs");
 		public static const UnlockedHarpyTail:StatusEffectType           = mk("Unlocked Harpy Tail");
 		public static const UnlockedHarpyArms:StatusEffectType           = mk("Unlocked Harpy Arms");
-		public static const UnlockedHarpyHair:StatusEffectType           = mk("Unlocked Harpy Hair");
+		public static const UnlockedHarpyHair:StatusEffectType           = mk("Unlocked Feather Hair");
 		public static const UnlockedHarpyWings:StatusEffectType          = mk("Unlocked Harpy Wings");
 		public static const UnlockedElfinEars:StatusEffectType           = mk("Unlocked Elfin Ears");
 		public static const UnlockedSpiderFourEyes:StatusEffectType      = mk("Unlocked Spider Six Eyes");
@@ -148,7 +147,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedElfArms:StatusEffectType			 = mk("Unlocked Elf Arms");
 		public static const UnlockedElfEars:StatusEffectType			 = mk("Unlocked Elf Ears");
 		public static const UnlockedElfEyes:StatusEffectType			 = mk("Unlocked Elf Eyes");
-		public static const UnlockedElfHair:StatusEffectType			 = mk("Unlocked Elf Hair");
+		public static const UnlockedElfHair:StatusEffectType			 = mk("Unlocked Silky Hair");
 		public static const UnlockedElfTongue:StatusEffectType			 = mk("Unlocked Elf Tongue");
 		public static const UnlockedOniLegs:StatusEffectType			 = mk("Unlocked Oni Legs");
 		public static const UnlockedOniArms:StatusEffectType			 = mk("Unlocked Oni Arms");
@@ -164,7 +163,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedRaijuFace:StatusEffectType			 = mk("Unlocked Weasel Face");
 		public static const UnlockedRaijuEars:StatusEffectType			 = mk("Unlocked Raiju Ears");
 		public static const UnlockedRaijuEyes:StatusEffectType			 = mk("Unlocked Raiju Eyes");
-		public static const UnlockedRaijuHair:StatusEffectType			 = mk("Unlocked Raiju Hair");
+		public static const UnlockedRaijuHair:StatusEffectType			 = mk("Unlocked Storm Hair");
 		public static const UnlockedRaijuArms2:StatusEffectType			 = mk("Unlocked Raiju Arms 2");
 		public static const UnlockedRaijuThunderousAura:StatusEffectType = mk("Unlocked Raiju Thunderous Aura");
 		public static const UnlockedBatEars:StatusEffectType			 = mk("Unlocked Bat Ears");
@@ -653,7 +652,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const WildManticore:StatusEffectType                  = mk("Wild Manticore");
 		public static const VampireThirst:StatusEffectType                  = VampireThirstEffect.TYPE;
 		public static const YetiScarf:StatusEffectType                      = mk("Yeti Scarf");
-		public static const YukiOnnaHairpin:StatusEffectType                = mk("Yuki Onna Hairpin");
+		public static const YukiOnnaHairpin:StatusEffectType                = mk("Snowy Hairpin");
 		public static const YukiOnnaKimono:StatusEffectType                 = mk("Yuki Onna Kimono");
 		public static const ZenjiTrainingsCounters1:StatusEffectType        = mk("Zenji Trainings Counters 1");
 		public static const ZenjiTrainingsCounters2:StatusEffectType        = mk("Zenji Trainings Counters 2");
