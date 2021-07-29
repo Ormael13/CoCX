@@ -15,10 +15,11 @@ package classes.GeneticMemories {
 	 * - title: name displayed on the metamorph button
 	 * - availableCoverages: which levels of skin coverage are available for this skin Metamorph
 	 * - transformation: TF object that refers to what the metamorph does
-	 * - transformationFunc: returns TF function that refers to what the metamorph does, overwrites transformation
+	 * - transformationCoverage: returns TF function that refers to what the metamorph does, overwrites transformation
 	 *
 	 * Optional properties:
 	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
+	 * - lockedInfo: additional text to be shown on *locked* Metamorphs when hovering over a button
 
 	 * Template:
 
@@ -31,7 +32,7 @@ package classes.GeneticMemories {
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			},
-			transformationFunc: function(function(player: *, coverage: int): Transformation {
+			transformationCoverage: function(function(player: *, coverage: int): Transformation {
 				return CoC.instance.transformations.[TF Function from TransformationLib](Necessary Properties);
 			}
 		});
@@ -56,7 +57,7 @@ package classes.GeneticMemories {
 			cost: 100,
 			title: "Fur",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
-			transformationFunc: function(coverage: int): Transformation {
+			transformationCoverage: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinFur(coverage);
 			}
 		});
@@ -67,7 +68,7 @@ package classes.GeneticMemories {
 			cost: 100,
 			title: "Scales",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
-			transformationFunc: function(coverage: int): Transformation {
+			transformationCoverage: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinScales(coverage);
 			}
 		});
@@ -78,7 +79,7 @@ package classes.GeneticMemories {
 			cost: 150,
 			title: "D.Scales",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
-			transformationFunc: function(coverage: int): Transformation {
+			transformationCoverage: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinDragonScales(coverage);
 			}
 		});
@@ -89,7 +90,7 @@ package classes.GeneticMemories {
 			cost: 100,
 			title: "Chitin",
 			availableCoverages: [Skin.COVERAGE_LOW, Skin.COVERAGE_COMPLETE],
-			transformationFunc: function(coverage: int): Transformation {
+			transformationCoverage: function(coverage: int): Transformation {
 				return CoC.instance.transformations.SkinChitin(coverage);
 			}
 		});

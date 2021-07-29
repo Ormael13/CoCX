@@ -218,7 +218,7 @@ use namespace CoC;
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
-			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "Refund A. M.", RefundAscensionMetamorphPerks).hint("Refunds the Ascension points spent on Transcedental Metamorph Perks and brings you to the Ascension menu.");
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "Refund A. M.", RefundAscensionMetamorphPerks).hint("Refunds the Ascension points spent on Transcedental Metamorph Perks or Permanent Metamorphs and brings you to the Ascension menu.");
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");

@@ -17,6 +17,7 @@ package classes.GeneticMemories {
 	 *
 	 * Optional properties:
 	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
+	 * - lockedInfo: additional text to be shown on *locked* Metamorphs when hovering over a button
 
 	 * Template:
 

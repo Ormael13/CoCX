@@ -17,6 +17,7 @@ package classes.GeneticMemories {
 	 *
 	 * Optional properties:
 	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
+	 * - lockedInfo: additional text to be shown on *locked* Metamorphs when hovering over a button
 
 	 * Template:
 
@@ -339,6 +340,7 @@ package classes.GeneticMemories {
 			id: "Fox 7th Tail",
 			cost: 700,
 			title: "Fox 7th",
+			lockedInfo: "Requires Perk: Nine-tails Kitsune of Balance",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(7);
 			}
@@ -349,6 +351,7 @@ package classes.GeneticMemories {
 			id: "Fox 8th Tail",
 			cost: 800,
 			title: "Fox 8th",
+			lockedInfo: "Requires Perk: Nine-tails Kitsune of Balance",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(8);
 			}
@@ -359,6 +362,7 @@ package classes.GeneticMemories {
 			id: "Fox 9th Tail",
 			cost: 900,
 			title: "Fox 9th",
+			lockedInfo: "Requires Perk: Nine-tails Kitsune of Balance",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(9);
 			}

@@ -527,6 +527,10 @@ package classes.Scenes {
 					/*
 				*/
 			}
+
+			GeneticMemoryStorage["Fox 7th Tail"] = undefined;
+			GeneticMemoryStorage["Fox 8th Tail"] = undefined;
+			GeneticMemoryStorage["Fox 9th Tail"] = undefined;
 		}
 
 		public function Metamorph() {
@@ -690,9 +694,6 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			// TODO: Add to all appearances are refactored
-			// outputText(Hair.getAppearanceDescription(player));
-			// outputText("\n\nYou wonder about changing it. In that case, what kind of hair would you like instead?");
 			outputText("What kind of hair do you want?");
 
 			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, HairMem.Memories);
@@ -866,7 +867,7 @@ package classes.Scenes {
 				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
-				else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 				currentButton++;
 			}
 
@@ -915,16 +916,16 @@ package classes.Scenes {
 				const unlocked: Boolean = GeneticMemoryStorage[genMem.id];
 				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
-				if (!genMem.transformationFunc) {
+				if (!genMem.transformationCoverage) {
 					const partsInUse: Boolean = genMem.transformation().isPresent();
 					if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 					else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
 					else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
-					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+					else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 					currentButton++;
 				} else {
 					if (unlocked) addButton(currentButton, buttonStr, openCoverageMenu, genMem);
-					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+					else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 					currentButton++;
 				}
 			}
@@ -970,7 +971,7 @@ package classes.Scenes {
 				if (InCollection(coverage.value, genMem.availableCoverages)) {
 					const cost: int = genMem.cost * (coverages.indexOf(coverage) + 1);
 					const enoughSF: Boolean = player.soulforce >= cost;
-					const inEffect: Boolean = genMem.transformationFunc(coverage.value).isPresent();
+					const inEffect: Boolean = genMem.transformationCoverage(coverage.value).isPresent();
 
 					if (enoughSF && !inEffect) addButton(currentButton, coverage.name, doMetamorphSkin, genMem, coverage.value, cost).hint("Cost: " + cost + " SF");
 					else if (inEffect) addButtonDisabled(currentButton, coverage.name, "You already have this much coverage, the metamorphosis would have no effect!");
@@ -986,7 +987,7 @@ package classes.Scenes {
 			clearOutput();
 			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.id.split(" Skin")[0] + "</u></font>\n");
 
-			genMem.transformationFunc(coverage).applyEffect();
+			genMem.transformationCoverage(coverage).applyEffect();
 			player.soulforce -= cost;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(accessMetamorphMenu);

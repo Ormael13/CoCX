@@ -17,6 +17,7 @@ package classes.GeneticMemories {
 	 *
 	 * Optional properties:
 	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
+	 * - lockedInfo: additional text to be shown on *locked* Metamorphs when hovering over a button
 	 * - isTaur: the Metamorph is a Taur variant of another and should only be displayed after the player became Taur at least once
 
 	 * Template:
