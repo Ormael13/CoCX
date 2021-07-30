@@ -4159,7 +4159,9 @@
 
 		<!-- Demon tail ring -->
 		<if test="demonTailRing">
-			<show part="tailAccessory/demonTailJewelery"/>
+			<if test="tailType == Tail.DEMONIC">
+				<show part="tailAccessory/demonTailJewelery"/>
+			</if>
 		</if>
 
 		<!-- Oni Gourd -->
