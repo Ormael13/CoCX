@@ -20,6 +20,8 @@ package classes.GeneticMemories {
 	 * Optional properties:
 	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 	 * - lockedInfo: additional text to be shown on *locked* Metamorphs when hovering over a button
+	 * - permCost: how many Ascension Perk Points it costs to permanentize this Metamorph, defaults to 5 if not added
+	 * - permReq: the ID of another Metamorph which must be permanentized first before the current one can be bought
 
 	 * Template:
 
@@ -43,7 +45,7 @@ package classes.GeneticMemories {
 
 		public static const PLAIN:int = 0;
 		EnumValue.add(Memories, PLAIN, "PLAIN", {
-			id: "Plain Skin",
+			id: "Unlocked Metamorph",
 			cost: 500,
 			title: "Human",
 			transformation: function(): Transformation {

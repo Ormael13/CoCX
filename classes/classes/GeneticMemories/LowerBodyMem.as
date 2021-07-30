@@ -18,7 +18,9 @@ package classes.GeneticMemories {
 	 * Optional properties:
 	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
 	 * - lockedInfo: additional text to be shown on *locked* Metamorphs when hovering over a button
-	 * - isTaur: the Metamorph is a Taur variant of another and should only be displayed after the player became Taur at least once
+	 * - permCost: how many Ascension Perk Points it costs to permanentize this Metamorph, defaults to 5 if not added
+	 * - permReq: the ID of another Metamorph which must be permanentized first before the current one can be bought
+	 * - taurVariant: the Metamorph is a Taur variant of another and should only be displayed after the player became Taur at least once
 
 	 * Template:
 
@@ -38,7 +40,7 @@ package classes.GeneticMemories {
 
 		public static const HUMAN: int = 0;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
-		  id: "Human Lower Body",
+		  id: "Unlocked Metamorph",
 		  cost: 500,
 		  title: "Human",
 		  transformation: function(): Transformation {
@@ -64,7 +66,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyHoofed(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const NAGA: int = 3;
@@ -124,7 +126,8 @@ package classes.GeneticMemories {
 		  title: "Cat (4)",
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyCat(4)
-		  }
+		  },
+			taurVariant: true
 		});
 
 		public static const LIZARD: int = 9;
@@ -145,7 +148,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyLizard(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const HARPY: int = 11;
@@ -197,7 +200,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyFox(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const DRAGON: int = 16;
@@ -218,7 +221,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyDraconic(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const CLOVEN_HOOFED: int = 18;
@@ -239,7 +242,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyClovenHoofed(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const SALAMANDER: int = 20;
@@ -260,7 +263,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodySalamander(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const MANTIS: int = 22;
@@ -281,7 +284,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyMantis(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const SHARK: int = 24;
@@ -302,7 +305,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyShark(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const LION: int = 26;
@@ -323,7 +326,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyLion(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const ORCA: int = 28;
@@ -344,7 +347,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyOrca(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const ONI: int = 30;
@@ -385,7 +388,7 @@ package classes.GeneticMemories {
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyRaiju(4)
 		  },
-			isTaur: true
+			taurVariant: true
 		});
 
 		public static const RED_PANDA: int = 34;

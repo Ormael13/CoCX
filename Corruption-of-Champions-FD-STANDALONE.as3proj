@@ -88,7 +88,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="True" />
-    <option testMovie="Default" />
+    <option testMovie="ExternalPlayer" />
     <option testMovieCommand="" />
   </options>
   <!-- Plugin storage -->
