@@ -4798,96 +4798,8 @@ public function wakeFromBadEnd():void {
 			return;
 		}
 
-		// Flag to define whether the migration should open the Ascension menu for the player to buy Perks, mostly used for refunds
-		// Remember to set to False at the start of a migration if it's used
-		var refundAscensionPerks: Boolean = false;
-
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32 {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
-			clearOutput();
-
-			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
-			/*
-				*/
-				outputText("Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
-
-				// Non-human permanent Metamorphs cost 5 points each
-				player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
-				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
-
-				// Upgrade prices
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
-					player.ascensionPerkPoints += 15;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
-					player.ascensionPerkPoints += 30;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
-					player.ascensionPerkPoints += 45;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
-					player.ascensionPerkPoints += 60;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
-					player.ascensionPerkPoints += 75;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
-					player.ascensionPerkPoints += 90;
-				}
-
-				// Human permanent Metamorphs cost 25 each, but 5 was already refunded, leaving 20
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanHair);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanFace);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanEyes);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanTongue);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanEars);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanArms);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanLowerBody);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoHorns);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoWings);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanSkin);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoAntennae);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoGills);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoRearBody);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
-				/*
-			*/
-
-			if (player.ascensionPerkPoints > 0) {
-				outputText("\n\nYou'll be redirected to the Ascension menu to use your refunded points, then you can either go back to your current game or reincarnate.");
-				doNext(CoC.instance.charCreation.migrationAscension);
-			} else {
-				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
-				doNext(SceneLib.camp.campAfterMigration);
-			}
-
-			return;
-		}
-
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 && flags[kFLAGS.HARDCORE_MODE] == 1) flags[kFLAGS.HARDCORE_MODE] = 0;
@@ -4911,15 +4823,15 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
