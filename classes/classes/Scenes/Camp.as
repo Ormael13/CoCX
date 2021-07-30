@@ -2318,7 +2318,14 @@ public class Camp extends NPCAwareContent{
 	private function VisitClone():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			if (player.statusEffectv4(StatusEffects.PCClone) < 4) outputText("Your clone is still incomplete. Would you work on completing it?");
+			if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
+				outputText("Your clone is ");
+				if (player.statusEffectv4(StatusEffects.PCClone) == 1) outputText("slowly rotating volleyball sized sphere of soul and life essences");
+				else if (player.statusEffectv4(StatusEffects.PCClone) == 2) outputText("still incomplete");
+				else if (player.statusEffectv4(StatusEffects.PCClone) == 3) outputText("still incomplete");
+				else outputText("still incomplete");
+				outputText(". Would you work on completing it?");
+			}
 			else {
 				outputText("Your clone is wandering around camp. What would you ask " + player.mf + " to do?\n\n");
 				outputText("Current clone task: ");
@@ -2328,7 +2335,8 @@ public class Camp extends NPCAwareContent{
 		else outputText("You not have clone created.");
 		outputText("\n\n");
 		menu();
-		if (player.hasStatusEffect(StatusEffects.PCClone)) addButtonDisabled(0, "Create", "You already created your clone.");
+		if (player.isGargoyle()) addButtonDisabled(0, "Create", "Your current form/race not allow to create clone.");
+		else if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(0, "Create", "You already created your clone.");
 		else addButton(0, "Create", CreateClone);
 		addButton(14, "Back", campMiscActions);
 	}
@@ -2368,7 +2376,9 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		else {
-			outputText("Part 1 forming placeholder.\n\n");
+			outputText("Closing your eyes you focus on forming core of your clone. After long minutes you start to feel how part of your soulforce and life essence starts to seep throu the pores outside your body.\n\n");
+			outputText("Slowly directing it to focus it takes over hour to start focus into swirling shere before you. Keeping your conetration you guide more of essence and soul energy to leave your body and drift toward very slowly growing object before you.\n\n");
+			outputText("After another few hours of very slow process of nurishing core of your clone you reach point of almost fully been depleyed of soulfroce and alot of your life essence been used. Shifting\n\n");
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
 			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
 			HPChange( -player.maxHP() * 0.5, true);
@@ -4797,11 +4807,10 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32 {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
 			clearOutput();
-			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end.");
+			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end. Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 && flags[kFLAGS.HARDCORE_MODE] == 1) flags[kFLAGS.HARDCORE_MODE] = 0;
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards) && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 2) {
 				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
@@ -4820,6 +4829,75 @@ public function wakeFromBadEnd():void {
 			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
 			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
 			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
+			// Flag to define whether the migration should open the Ascension menu for the player to buy Perks, mostly used for refunds
+			// Remember to set to False at the start of a migration if it's used
+			var refundAscensionPerks: Boolean = false;
+			// Non-human permanent Metamorphs cost 5 points each
+			player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
+			player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+			// Upgrade prices
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
+				player.ascensionPerkPoints += 15;
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
+				player.ascensionPerkPoints += 30;
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
+				player.ascensionPerkPoints += 45;
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
+				player.ascensionPerkPoints += 60;
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
+				player.ascensionPerkPoints += 75;
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
+				player.ascensionPerkPoints += 90;
+			}
+			// Human permanent Metamorphs cost 25 each, but 5 was already refunded, leaving 20
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanHair);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanFace);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanEyes);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanTongue);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanEars);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanArms);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanLowerBody);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanNoHorns);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanNoWings);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanSkin);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanNoAntennae);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanNoGills);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanNoRearBody);
+			if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
+			player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
+			if (player.ascensionPerkPoints > 0) {
+				outputText("\n\nYou'll be redirected to the Ascension menu to use your refunded points, then you can either go back to your current game or reincarnate.");
+				doNext(CoC.instance.charCreation.migrationAscension);
+			} else {
+				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
+				doNext(SceneLib.camp.campAfterMigration);
+			}
 			doNext(doCamp);
 			return;
 		}

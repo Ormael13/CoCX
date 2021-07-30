@@ -2915,6 +2915,7 @@ import coc.view.MainView;
 		}
 		private function reincarnate():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
+			Metamorph.resetMetamorph();
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();

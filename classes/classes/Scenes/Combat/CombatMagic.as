@@ -1561,6 +1561,8 @@ public class CombatMagic extends BaseCombatContent {
 					.hint("Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage.  \n\nBones cost: 5");
 			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
 				bd.disable("You not have enough demon bones to use any this necromancer spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
@@ -1583,6 +1585,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only strike one target.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
 				bd.disable("You need more time before you can cast Boneshatter again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 	}

@@ -416,7 +416,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
-			bd = buttons.add("Blood Requiem", bloodSwipe)
+			bd = buttons.add("Blood Requiem", bloodRequiem)
 					.hint("Blood Requiem will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
@@ -432,7 +432,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
-			bd = buttons.add("Blood Requiem (SF)", bloodSwipeSF)
+			bd = buttons.add("Blood Requiem (SF)", bloodRequiemSF)
 					.hint("(Soulforce infused) Blood Requiem, which was infused by small amount of soulforce to enhance it power, will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "\n\nSoulforce cost: " + Math.round(150 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
