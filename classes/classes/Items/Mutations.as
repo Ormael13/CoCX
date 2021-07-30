@@ -1710,7 +1710,7 @@ public final class Mutations extends MutationsHelper {
         //Animal tooth face
         if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasFur()) {
             outputText("\n\n");
-            transformations.FaceAnimalTeeth.applyEffect();
+			transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
         //Wolf face
@@ -14416,7 +14416,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit && rand(4) == 0) {
             if (!InCollection(player.coatColor, wyrmCoatColor)) player.coatColor = randomChoice(wyrmCoatColor);
             outputText("\n\n");
-            transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
+            transformations.SkinDragonScales(Skin.COVERAGE_LOW, {colors: wyrmCoatColor}).applyEffect();
             changes++;
         }
         //Coat color fix

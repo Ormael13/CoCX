@@ -30,6 +30,8 @@ import classes.lists.Gender;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
 
+import classes.GeneticMemories.*;
+
 import coc.view.MainView;
 
 //import flash.events.MouseEvent;
@@ -1755,6 +1757,7 @@ import coc.view.MainView;
 			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
 			player.sleepUpdateStat();
 			player.HP = player.maxHP();
+			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
 			addButton(0, "Ingnam", goToIngnam);
 			addButton(1,"Skip Ingnam", arrival);
@@ -1771,14 +1774,18 @@ import coc.view.MainView;
 		//-- ASCENSION
 		//-----------------
 		private var migration: Boolean = false;
+		private var migrationMsg: String = "";
 
-		public function migrationAscension(): void {
+		public function updateAscension(msg: String = ""): void {
 			migration = true;
+			migrationMsg = msg;
 			ascensionMenu();
 		}
 
-		public function returnFromMigrationAscension(): void {
+		public function returnFromupdateAscension(): void {
 			migration = false;
+			migrationMsg = "";
+			Metamorph.registerPermanentMetamorphs();
 			SceneLib.camp.campAfterMigration();
 		}
 
@@ -1787,7 +1794,10 @@ import coc.view.MainView;
 			clearOutput();
 			hideMenus();
 			mainView.nameBox.visible = false;
-			EngineCore.displayHeader("Ascension");
+			EngineCore.displayHeader("Ascension" + (migration ? " (Update Migration)" : ""));
+
+			if (migrationMsg) outputText(migrationMsg);
+
 			outputText("The world you have departed is irrelevant and you are in an endless black void dotted with tens of thousands of stars. You encompass everything and everything encompasses you.");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			outputText("\n\n(When you're done, select Reincarnate" + (migration ? " or Return" : "") + ".)");
@@ -1797,6 +1807,14 @@ import coc.view.MainView;
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
+			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
+					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.", "Permanent Metamorphs");
+				} else {
+					addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>You already bought the maximum amount of Permanent Metamorphs allowed by your stage of Transcedental Genetic Memory!</b>");
+				}
+
+			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possessed History perk into Past Life perk (5 points).", "Perk Selection");
 			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
 			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
@@ -1806,7 +1824,7 @@ import coc.view.MainView;
 			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			addButton(11, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
-			if (migration) addButton(12, "Return", returnFromMigrationAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+			if (migration) addButton(12, "Return", returnFromupdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -2160,6 +2178,46 @@ import coc.view.MainView;
 			else if (player.ascensionPerkPoints < 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
 			btn++;
+			if (player.findPerk(PerkLib.AscensionNaturalMetamorph) >= 0) {
+				if (player.ascensionPerkPoints >= 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
+				else if (player.ascensionPerkPoints < 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S1)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "T.G.M.(S1)", "You already bought Transcendental Genetic Memory (Stage 1) perk.");
+			}
+			else addButtonDisabled(btn, "T.G.M.(S1)", "You need to buy Natural Metamorph perk first.");
+			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) >= 0) {
+				if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) < 0) addButton(btn, "T.G.M.(S2)", perkTranscendentalGeneticMemoryStage2).hint("Perk allowing to retain up to 30(45) unlocked options from Metamorph menu.\n\nCost: 30 points");
+				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "T.G.M.(S2)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "T.G.M.(S2)", "You already bought Transcendental Genetic Memory (Stage 2) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S2)", "You need to buy Transcendental Genetic Memory (Stage 1) perk first.");
+			else addButtonDisabled(btn, "T.G.M.(S2)", "You need ascend more times to buy this perk.");
+			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) >= 0) {
+				if (player.ascensionPerkPoints >= 45 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) < 0) addButton(btn, "T.G.M.(S3)", perkTranscendentalGeneticMemoryStage3).hint("Perk allowing to retain up to 45(90) unlocked options from Metamorph menu.\n\nCost: 45 points");
+				else if (player.ascensionPerkPoints < 45) addButtonDisabled(btn, "T.G.M.(S3)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "T.G.M.(S3)", "You already bought Transcendental Genetic Memory (Stage 3) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) < 0) addButtonDisabled(btn, "T.G.M.(S3)", "You need to buy Transcendental Genetic Memory (Stage 2) perk first.");
+			else addButtonDisabled(btn, "T.G.M.(S3)", "You need ascend more times to buy this perk.");
+			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) >= 0) {
+				if (player.ascensionPerkPoints >= 60 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButton(btn, "T.G.M.(S4)", perkTranscendentalGeneticMemoryStage4).hint("Perk allowing to retain up to 60(150) unlocked options from Metamorph menu.\n\nCost: 60 points");
+				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "T.G.M.(S4)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "T.G.M.(S4)", "You already bought Transcendental Genetic Memory (Stage 4) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) < 0) addButtonDisabled(btn, "T.G.M.(S4)", "You need to buy Transcendental Genetic Memory (Stage 3) perk first.");
+			else addButtonDisabled(btn, "T.G.M.(S4)", "You need ascend more times to buy this perk.");
+			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) >= 0) {
+				if (player.ascensionPerkPoints >= 75 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) < 0) addButton(btn, "T.G.M.(S5)", perkTranscendentalGeneticMemoryStage5).hint("Perk allowing to retain up to 75(225) unlocked options from Metamorph menu.\n\nCost: 75 points");
+				else if (player.ascensionPerkPoints < 75) addButtonDisabled(btn, "T.G.M.(S5)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "T.G.M.(S5)", "You already bought Transcendental Genetic Memory (Stage 5) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
+			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
+			btn++;
+
 			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought Underdog perk.");
@@ -2203,6 +2261,54 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
 			clearOutput();
 			outputText("You gained Natural Metamorph perk.");
+			doNext(rarePerks2);
+		}
+		private function perkTranscendentalGeneticMemoryStage1():void {
+			player.ascensionPerkPoints -= 15;
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1, 0, 0, 0, 1);
+			player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
+			clearOutput();
+			outputText("Your gained Transcendental Genetic Memory (Stage 1) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkTranscendentalGeneticMemoryStage2():void {
+			player.ascensionPerkPoints -= 30;
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2, 0, 0, 0, 1);
+			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 30);
+			clearOutput();
+			outputText("Your gained Transcendental Genetic Memory (Stage 2) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkTranscendentalGeneticMemoryStage3():void {
+			player.ascensionPerkPoints -= 45;
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3, 0, 0, 0, 1);
+			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 45);
+			clearOutput();
+			outputText("Your gained Transcendental Genetic Memory (Stage 3) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkTranscendentalGeneticMemoryStage4():void {
+			player.ascensionPerkPoints -= 60;
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4, 0, 0, 0, 1);
+			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 60);
+			clearOutput();
+			outputText("Your gained Transcendental Genetic Memory (Stage 4) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkTranscendentalGeneticMemoryStage5():void {
+			player.ascensionPerkPoints -= 75;
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
+			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 75);
+			clearOutput();
+			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkTranscendentalGeneticMemoryStage6():void {
+			player.ascensionPerkPoints -= 90;
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
+			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 90);
+			clearOutput();
+			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
 			doNext(rarePerks2);
 		}
 		private function perkUnderdog():void {
@@ -2542,6 +2648,248 @@ import coc.view.MainView;
 			player.addPerkValue(PerkLib.CorruptedKitsune, 4, 1);
 			player.addPerkValue(PerkLib.CorruptedNinetails, 4, 1);
 			ascensionPermeryMenu(1);
+		}
+
+		public function ascensionMetamorphPermMenu(currentPage: int = 0):void {
+			clearOutput();
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs</u></font>\n");
+			outputText("You can spend Ascension points to keep the available Metamorphs indefinitely, regardless of how many times you Ascend.\n\n");
+			outputText("<b>Metamorphs Permanentized:</b> " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + "/" + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "\n\n");
+			outputText("Ascension Perk Points: " + player.ascensionPerkPoints);
+
+			menu();
+
+			const menusList: Array = [
+				{
+					name: "Hair",
+					func: accessHairMenu
+				},
+				{
+					name: "Face",
+					func: accessFaceMenu
+				},
+				{
+					name: "Eyes",
+					func: accessEyesMenu
+				},
+				{
+					name: "Tongue",
+					func: accessTongueMenu
+				},
+				{
+					name: "Ears",
+					func: accessEarsMenu
+				},
+				{
+					name: "Arms",
+					func: accessArmsMenu
+				},
+				{
+					name: "Lower Body",
+					func: accessLowerBodyMenu
+				},
+				{
+					name: "Rear Body",
+					func: accessRearBodyMenu
+				},
+				{
+					name: "Skin",
+					func: accessSkinMenu
+				},
+				{
+					name: "Patterns",
+					func: accessSkinPatternsMenu
+				},
+				{
+					name: "Antennae",
+					func: accessAntennaeMenu
+				},
+				{
+					name: "Horns",
+					func: accessHornsMenu
+				},
+				{
+					name: "Gills",
+					func: accessGillsMenu
+				},
+				{
+					name: "Wings",
+					func: accessWingsMenu
+				},
+				{
+					name: "Tail",
+					func: accessTailMenu
+				}
+			];
+
+			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
+
+			const lastPage: int = Math.ceil(menusList.length/menusPerPage) - 1;
+
+			const pageMenus: Array = menusList.slice(currentPage * menusPerPage, (currentPage * menusPerPage) + menusPerPage);
+
+			var currentButton: int = 0;
+
+			for each (var menuObj: * in pageMenus) {
+				if (menuObj.hint) {
+					addButton(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
+				} else {
+					addButton(currentButton, menuObj.name, menuObj.func);
+				}
+				currentButton++;
+			}
+
+			if (lastPage > 0) {
+				if (currentPage > 0) addButton(12, "Prev Page", ascensionMetamorphPermMenu, currentPage - 1);
+				else addButtonDisabled (12, "Prev Page");
+				if (currentPage < lastPage) addButton(13, "Next Page", ascensionMetamorphPermMenu, currentPage + 1);
+				else addButtonDisabled (13, "Next Page");
+			}
+
+			addButton(14, "Back", ascensionMenu);
+		}
+
+		private function accessHornsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Horns", accessHornsMenu, currentPage, HornsMem.Memories);
+		}
+
+		private function accessHairMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Hair", accessLowerBodyMenu, currentPage, HairMem.Memories);
+		}
+
+		private function accessFaceMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Face", accessFaceMenu, currentPage, FaceMem.Memories);
+		}
+
+		private function accessEyesMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Eyes", accessEyesMenu, currentPage, EyesMem.Memories);
+		}
+
+		private function accessTongueMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Tongue", accessTongueMenu, currentPage, TongueMem.Memories);
+		}
+
+		private function accessEarsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Ears", accessEarsMenu, currentPage, EarsMem.Memories);
+		}
+
+		private function accessArmsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Arms", accessArmsMenu, currentPage, ArmsMem.Memories);
+		}
+
+		private function accessWingsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Wings", accessWingsMenu, currentPage, WingsMem.Memories);
+		}
+
+		private function accessLowerBodyMenu(currentPage: int = 0): void {
+			var memArray: Array = LowerBodyMem.Memories;
+
+			// Hides Taur variants of pre-existing TFs
+			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
+				if (element && !element.taurVariant) {
+					return true;
+				}
+				return false;
+			});
+
+
+			openPaginatedMetamorphMenu("Lower Body", accessLowerBodyMenu, currentPage, memArray);
+		}
+
+		private function accessSkinMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Skin", accessSkinMenu, currentPage, SkinMem.Memories);
+		}
+
+		private function accessRearBodyMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Rear Body", accessRearBodyMenu, currentPage, RearBodyMem.Memories);
+		}
+
+		private function accessAntennaeMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Antennae", accessAntennaeMenu, currentPage, AntennaeMem.Memories);
+		}
+
+		private function accessSkinPatternsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Skin Patterns", accessSkinPatternsMenu, currentPage, SkinPatternMem.Memories);
+		}
+
+		private function accessGillsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Gills", accessGillsMenu, currentPage, GillsMem.Memories);
+		}
+
+		private function accessTailMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
+		}
+
+		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
+			clearOutput();
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs - " + title +"</u></font>\n");
+			outputText("You can spend Ascension points to keep the available Metamorphs indefinitely, regardless of how many times you Ascend.\n\n");
+			outputText("<b>Metamorphs Permanentized:</b> " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + "/" + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "\n\n");
+			outputText("Ascension Perk Points: " + player.ascensionPerkPoints);
+			menu();
+
+			const menuInfo: * = {
+				title: title,
+				thisMenu: thisMenu,
+				currentPage: currentPage,
+				memArray: memArray
+			};
+
+			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
+				if (element && element.id !== "Unlocked Metamorph") {
+					return true;
+				}
+				return false;
+			});
+
+			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
+
+			const lastPage: int = Math.ceil(memArray.length/memsPerPage) - 1;
+
+			const pageMems: Array = memArray.slice(currentPage * memsPerPage, (currentPage * memsPerPage) + memsPerPage);
+
+			var currentButton: int = 0;
+
+			for each (var genMem: * in pageMems) {
+				const buttonStr: String = genMem.title || "";
+				const unlocked: Boolean = Metamorph.GeneticMemoryStorage[genMem.id];
+				const enoughPP: Boolean = player.ascensionPerkPoints >= (genMem.permCost || 5);
+				const obtained: Boolean = Metamorph.PermanentMemoryStorage[genMem.id];
+				const hasRequirements: Boolean = (genMem.permReq ? Metamorph.PermanentMemoryStorage[genMem.permReq] || false : true);
+
+				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points");
+				else if (unlocked && !hasRequirements && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points\n\n<b>Requirement</b>: Permanentize " + genMem.permReq);
+				else if (unlocked && hasRequirements && !enoughPP && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points (You don't have enough Ascension Perk Points to permanentize this metamorphosis!)");
+				else if (obtained) addButtonDisabled(currentButton, buttonStr, "You already permanentized this metamorphosis!");
+				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You can't permanentize a metamorphosis you didn't unlock!");
+				currentButton++;
+			}
+
+			if (lastPage > 0) {
+				if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1);
+				else addButtonDisabled (12, "Prev Page");
+				if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1);
+				else addButtonDisabled (13, "Next Page");
+			}
+
+			addButton(14, "Back", ascensionMetamorphPermMenu);
+		}
+
+		private function permanentizeMetamorph (menuInfo: *, genMem: *): void {
+			player.ascensionPerkPoints -= (genMem.permCost || 5);
+			Metamorph.PermanentMemoryStorage[genMem.id] = true;
+			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
+
+			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
+				openPaginatedMetamorphMenu(menuInfo.title, menuInfo.thisMenu, menuInfo.currentPage, menuInfo.memArray);
+			} else {
+				clearOutput();
+				outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs</u></font>\n");
+				outputText("<b>You've permanentized the maximum amount of of metamorphs available for your current stage of Transcedental Genetic Memory!</b>");
+				menu();
+				doNext(ascensionMenu);
+			}
+
 		}
 
 		private function renamePrompt():void {

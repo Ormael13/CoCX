@@ -17,6 +17,9 @@ package classes.GeneticMemories {
 	 *
 	 * Optional properties:
 	 * - info: additional text to be shown underneath the Metamorph cost in the menu when hovering over a button
+	 * - lockedInfo: additional text to be shown on *locked* Metamorphs when hovering over a button
+	 * - permCost: how many Ascension Perk Points it costs to permanentize this Metamorph, defaults to 5 if not added
+	 * - permReq: the ID of another Metamorph which must be permanentized first before the current one can be bought
 
 	 * Template:
 
@@ -36,7 +39,7 @@ package classes.GeneticMemories {
 
 		public static const NONE:int = 0;
 		EnumValue.add(Memories, NONE, "NONE", {
-			id: "No Tail",
+			id: "Unlocked Metamorph",
 			cost: 500,
 			title: "None",
 			transformation: function(): Transformation {
@@ -159,6 +162,7 @@ package classes.GeneticMemories {
 			id: "Manticore Tail",
 			cost: 200,
 			title: "Manticore",
+			permReq: "Scorpion Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailManticore;
 			}
@@ -249,6 +253,7 @@ package classes.GeneticMemories {
 			id: "Forked 1/3 Tail",
 			cost: 200,
 			title: "Forked 1/3",
+			permReq: "Cat Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailNekomataOneThirdForked;
 			}
@@ -259,6 +264,7 @@ package classes.GeneticMemories {
 			id: "Forked 2/3 Tail",
 			cost: 300,
 			title: "Forked 2/3",
+			permReq: "Forked 1/3 Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailNekomataTwoThirdsForked;
 			}
@@ -269,6 +275,7 @@ package classes.GeneticMemories {
 			id: "Cat 2nd Tail",
 			cost: 400,
 			title: "Cat 2nd",
+			permReq: "Forked 2/3 Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailCat2nd;
 			}
@@ -289,6 +296,7 @@ package classes.GeneticMemories {
 			id: "Fox 2nd Tail",
 			cost: 200,
 			title: "Fox 2nd",
+			permReq: "Fox Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(2);
 			}
@@ -299,6 +307,7 @@ package classes.GeneticMemories {
 			id: "Fox 3rd Tail",
 			cost: 300,
 			title: "Fox 3rd",
+			permReq: "Fox 2nd Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(3);
 			}
@@ -309,6 +318,7 @@ package classes.GeneticMemories {
 			id: "Fox 4th Tail",
 			cost: 400,
 			title: "Fox 4th",
+			permReq: "Fox 3rd Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(4);
 			}
@@ -319,6 +329,7 @@ package classes.GeneticMemories {
 			id: "Fox 5th Tail",
 			cost: 500,
 			title: "Fox 5th",
+			permReq: "Fox 4th Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(5);
 			}
@@ -329,6 +340,7 @@ package classes.GeneticMemories {
 			id: "Fox 6th Tail",
 			cost: 600,
 			title: "Fox 6th",
+			permReq: "Fox 5th Tail",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(6);
 			}
@@ -339,6 +351,8 @@ package classes.GeneticMemories {
 			id: "Fox 7th Tail",
 			cost: 700,
 			title: "Fox 7th",
+			permReq: "Fox 6th Tail",
+			lockedInfo: "Requires Perk: Nine-tails Kitsune of Balance",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(7);
 			}
@@ -349,6 +363,8 @@ package classes.GeneticMemories {
 			id: "Fox 8th Tail",
 			cost: 800,
 			title: "Fox 8th",
+			permReq: "Fox 7th Tail",
+			lockedInfo: "Requires Perk: Nine-tails Kitsune of Balance",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(8);
 			}
@@ -359,6 +375,8 @@ package classes.GeneticMemories {
 			id: "Fox 9th Tail",
 			cost: 900,
 			title: "Fox 9th",
+			permReq: "Fox 8th Tail",
+			lockedInfo: "Requires Perk: Nine-tails Kitsune of Balance",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFox(9);
 			}

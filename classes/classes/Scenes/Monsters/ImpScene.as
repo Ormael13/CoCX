@@ -1301,7 +1301,7 @@ use namespace CoC;
 		public function impRapesYou():void {
 			clearOutput();
 			if (doSFWloss()) return;
-			if (player.isAlraune){
+			if (player.isAlraune()){
 				outputText(images.showImage("imp-loss-female-fuck"));
 				outputText("You sink to the ground, too overcome by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows...and grows...and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
 				if (player.isLiliraune()){ outputText(" Your twin sister can’t help but rub her pussy in anticipation the moment she sees this.\n\n" +
@@ -1336,7 +1336,7 @@ use namespace CoC;
 				outputText("\n\n");
 				if (player.isLiliraune()) outputText("Several minutes of fucking later, he");
 				else outputText("He");
-				outputText("pulls his dick free, and you");
+				outputText(" pulls his dick free, and you");
 				if (player.isLiliraune()) outputText("r sister");
 				outputText(" flop");
 				if (player.isLiliraune()) outputText("s");
