@@ -454,6 +454,18 @@ public class PerkLib
 		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
 				".",
 				"You've chosen the 'Offensive Staff Channeling' perk. .");
+		public static const DivineKnowledge:PerkType = mk("Divine Knowledge", "Divine Knowledge",
+				"Allow to cast divine magic spells as long corruption is 20-, locks out access to black spells and deal 20% more dmg when using white or divine magic to attack corrupted enemies.",
+				"You've chosen the 'Divine Knowledge' perk, gaining access to divine magic.");
+		public static const DivineArmament:PerkType = mk("Divine armament", "Divine armament",
+				"Charge weapon/armor spell power is doubled and works at full power even when using heavy armor. If wearing a robe, PC gains a bonus to armor equal to 1/3 of its level. Staves wielded without a shield can now be used to block (10%) and gain a tripled base damage value on physical attacks.",
+				"You've chosen the 'Divine armament' perk. Charge weapon/armor spell power is doubled and works at full power even when using heavy armor. If wearing a robe, PC gains a bonus to armor equal to 1/3 of its level. Staves wielded without a shield can now be used to block (10%) and gain a tripled base damage value on physical attacks.");
+		public static const PureMagic:PerkType = mk("Pure magic", "Pure magic",
+				"Your spells gain aligned damage, dealing more damage against the corrupt. Buff spells now last for the battle duration.",
+				"You've chosen the 'Pure magic' perk. Your spells gain aligned damage, dealing more damage against the corrupt. Buff spells now last for the battle duration.");
+		public static const CorruptMagic:PerkType = mk("Corrupt magic", "Corrupt magic",
+				"Your spells gain aligned damage, dealing more damage against the pure. Spells that drain health heals for twice as much while Dark Ritual is active.",
+				"You've chosen the 'Corrupt magic' perk. Your spells gain aligned damage, dealing more damage against the pure. Spells that drain health heals for twice as much while Dark Ritual is active.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -5231,6 +5243,9 @@ public class PerkLib
             HexKnowledge.requirePerk(PrestigeJobWarlock)
                     .requireInt(225)
                     .requireLevel(48);
+            DivineKnowledge.requirePerk(PrestigeJobArchpriest)
+                    .requireInt(225)
+                    .requireLevel(48);
             GrandGreyArchmage.requirePerk(GreyArchmage)
                     .requireInt(225)
                     .requireLevel(48);
@@ -5240,6 +5255,9 @@ public class PerkLib
                     .requirePerk(PeerlessSpirituality)
                     .requireLevel(54);
             DarkRitual.requirePerk(HexKnowledge)
+					.requireInt(250)
+					.requireLevel(54);
+            DivineArmament.requirePerk(DivineKnowledge)
 					.requireInt(250)
 					.requireLevel(54);
 			RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
@@ -5263,6 +5281,12 @@ public class PerkLib
                     .requireInt(330)
                     .requirePerk(HalfStepToInhumanSpirituality)
                     .requireLevel(60);
+            CorruptMagic.requirePerk(DarkRitual)
+					.requireInt(275)
+					.requireLevel(60);
+            PureMagic.requirePerk(DivineArmament)
+					.requireInt(275)
+					.requireLevel(60);
             UnlockForce3rdStage.requirePerk(UnlockForce2ndStage)
                     .requireInt(230)
                     .requireLevel(60);

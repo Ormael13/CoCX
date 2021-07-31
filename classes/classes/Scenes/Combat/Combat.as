@@ -4978,6 +4978,7 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+			if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) damage *= 3; 
 			damage *= meleeDualWieldDamagePenalty();
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
@@ -6402,6 +6403,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance += (player.tou - 100) / 5;
             else blockChance += 10;
         }
+		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance += 10;
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
 		var wrathShieldSize:int = 6;
@@ -6426,6 +6428,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
             else blockChance2 += 10;
         }
+		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance2 += 10;
         if (blockChance2 < 10) blockChance2 = 10;
         //if (player.weaponRange == weaponsrange.M1CERBE) blockChance2 = 0;
         return blockChance2;
@@ -8935,13 +8938,17 @@ public class Combat extends BaseContent {
             if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
                 player.removeStatusEffect(StatusEffects.ChargeWeapon);
                 outputText("<b>Charged Weapon effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
+            } else {
+				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
+			}
         }
         if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
             if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
                 player.removeStatusEffect(StatusEffects.ChargeArmor);
                 outputText("<b>Charged Armor effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
+            } else {
+				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
+			}
         }
         //Blizzard
         if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -14656,3 +14663,4 @@ public class Combat extends BaseContent {
     }
 }
 }
+
