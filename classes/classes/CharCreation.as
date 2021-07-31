@@ -1782,7 +1782,7 @@ import coc.view.MainView;
 			ascensionMenu();
 		}
 
-		public function returnFromupdateAscension(): void {
+		public function returnFromUpdateAscension(): void {
 			migration = false;
 			migrationMsg = "";
 			Metamorph.registerPermanentMetamorphs();
@@ -1824,7 +1824,7 @@ import coc.view.MainView;
 			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			addButton(11, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
-			if (migration) addButton(12, "Return", returnFromupdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+			if (migration) addButton(12, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
