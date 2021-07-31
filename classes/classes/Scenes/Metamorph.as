@@ -30,6 +30,9 @@ package classes.Scenes {
 	public class Metamorph extends BaseContent implements SaveableState {
 
 		public static var GeneticMemoryStorage: Object;
+		public static var PermanentMemoryStorage: Object;
+
+		private static var PermanentMemoryMigration: Boolean;
 
 		public function stateObjectName():String {
 			return "GeneticMemoryStorage";
@@ -38,51 +41,42 @@ package classes.Scenes {
 		public function resetState():void {
 			GeneticMemoryStorage = {};
 
-			// Basic human parts, unlocked from the start
-			/*
-				*/
-				GeneticMemoryStorage["Human Hair"] = true;
-				GeneticMemoryStorage["Human Face"] = true;
-				GeneticMemoryStorage["Human Eyes"] = true;
-				GeneticMemoryStorage["Human Tongue"] = true;
-				GeneticMemoryStorage["Human Ears"] = true;
-				GeneticMemoryStorage["Human Arms"] = true;
-				GeneticMemoryStorage["Human Lower Body"] = true;
-				GeneticMemoryStorage["No Horns"] = true;
-				GeneticMemoryStorage["No Wings"] = true;
-				GeneticMemoryStorage["Plain Skin"] = true;
-				GeneticMemoryStorage["No Skin Pattern"] = true;
-				GeneticMemoryStorage["No Antennae"] = true;
-				GeneticMemoryStorage["No Gills"] = true;
-				GeneticMemoryStorage["No Rear Body"] = true;
-				GeneticMemoryStorage["No Tail"] = true;
-				/*
-			*/
-
 			// Generic value for TFs unlocked from the beginning
 			GeneticMemoryStorage["Unlocked Metamorph"] = true;
 		}
 
 		public function saveToObject():Object {
 			return {
-				"genetic memory storage": GeneticMemoryStorage
+				"genetic memory storage": GeneticMemoryStorage,
+				"permanent memory storage": PermanentMemoryStorage
 			};
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-				GeneticMemoryStorage = Utils.copyObject({}, o["genetic memory storage"]);
-
 				GeneticMemoryStorage = {};
 				var storage:* = o["genetic memory storage"];
 				for (var k:String in storage) {
     			if (storage.hasOwnProperty(k)) GeneticMemoryStorage[k] = !!storage[k];
 				}
+
+				PermanentMemoryMigration = o["permanent memory migration"];
+				if (!o["permanent memory storage"]) {
+					PermanentMemoryMigration = true;
+				} else {
+					PermanentMemoryMigration = undefined;
+				}
+
+				PermanentMemoryStorage = {};
+				var storage2:* = o["permanent memory storage"];
+				for (var k2:String in storage2) {
+    			if (storage2.hasOwnProperty(k2)) PermanentMemoryStorage[k2] = !!storage2[k2];
+				}
 			} else {
 				// Migration from old save
 				resetState();
 
-				// Converting Unlocked flags into Genetic Memory Storage (Human flags are dealt with in the refund migration in Camp.as)
+				// Converting Unlocked flags into Genetic Memory Storage (Human flags are dealt with separately)
 				/*
 					*/
 					if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) GeneticMemoryStorage["Feather Hair"] = true;
@@ -490,6 +484,8 @@ package classes.Scenes {
 					/*
 				*/
 
+				refundAscMetamorph();
+
 				// Previous code didn't unlock more than 2 tails forEnlightened Kitsunes, migration fix
 				/*
 					*/
@@ -529,6 +525,75 @@ package classes.Scenes {
 			}
 		}
 
+		public function refundAscMetamorph(): void {
+			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
+			/*
+				*/
+				// Non-human permanent Metamorphs cost 5 points each
+				player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
+				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+
+				// Upgrade prices
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
+					player.ascensionPerkPoints += 15;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
+					player.ascensionPerkPoints += 30;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
+					player.ascensionPerkPoints += 45;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
+					player.ascensionPerkPoints += 60;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
+					player.ascensionPerkPoints += 75;
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
+					player.ascensionPerkPoints += 90;
+				}
+
+				// Human permanent Metamorphs cost 25 each, but 5 was already refunded, leaving 20
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanHair);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanFace);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEyes);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanTongue);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanEars);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanArms);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanLowerBody);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoHorns);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoWings);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanSkin);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoAntennae);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoGills);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoRearBody);
+				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
+				player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
+				/*
+			*/
+		}
+
 		public function Metamorph() {
 			Saves.registerSaveableState(this);
 		}
@@ -555,11 +620,36 @@ package classes.Scenes {
 			GeneticMemoryStorage["Unlocked Metamorph"] = true;
 		}
 
+		public static function resetMetamorph(): void {
+			GeneticMemoryStorage = {};
+
+			// Generic value for TFs unlocked from the beginning
+			GeneticMemoryStorage["Unlocked Metamorph"] = true;
+
+			for (var id:String in PermanentMemoryStorage) {
+				GeneticMemoryStorage[id] = true;
+			}
+		}
+
+		public static function registerPermanentMetamorphs(): void {
+			for (var id:String in PermanentMemoryStorage) {
+				if (!GeneticMemoryStorage[id]) GeneticMemoryStorage[id] = true;
+			}
+		}
+
 		// Controls the main Metamorph menu's page without having to carry the value through functions
 		public var mainMetamorphMenuPage: int = 0;
 
 		// Resets the main Metamorph menu's page when accessing Metamorph
 		public function openMetamorph(): void {
+			if (PermanentMemoryMigration) {
+				PermanentMemoryMigration = false;
+				if (player.ascensionPerkPoints > 0) {
+					CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, including Transcedental Genetic Memory's Stages and with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to buy them back, and then either return to your game or Reincarnate a bit earlier than usual, if you'd like.</b>\n\n");
+					return;
+				}
+			}
+
 			mainMetamorphMenuPage = 0;
 			accessMetamorphMenu();
 		}
@@ -684,9 +774,6 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			// TODO: Add to all appearances are refactored
-			// outputText(Hair.getAppearanceDescription(player));
-			// outputText("\n\nYou wonder about changing it. In that case, what kind of hair would you like instead?");
 			outputText("What kind of hair do you want?");
 
 			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, HairMem.Memories);
@@ -764,7 +851,7 @@ package classes.Scenes {
 			// Locks Taur TFs if player didn't become Taur at least once
 			if (!GeneticMemoryStorage["Taur Lower Body"]) {
 				memArray.map(function(item: *, index: int, array: Array): void {
-					if (item && item.isTaur) {
+					if (item && item.taurVariant) {
 						item.id = "Locked Metamorph";
 					}
 				});
@@ -860,7 +947,7 @@ package classes.Scenes {
 				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
-				else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 				currentButton++;
 			}
 
@@ -909,16 +996,16 @@ package classes.Scenes {
 				const unlocked: Boolean = GeneticMemoryStorage[genMem.id];
 				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
-				if (!genMem.transformationFunc) {
+				if (!genMem.transformationCoverage) {
 					const partsInUse: Boolean = genMem.transformation().isPresent();
 					if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 					else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
 					else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
-					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+					else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 					currentButton++;
 				} else {
 					if (unlocked) addButton(currentButton, buttonStr, openCoverageMenu, genMem);
-					else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+					else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 					currentButton++;
 				}
 			}
@@ -964,7 +1051,7 @@ package classes.Scenes {
 				if (InCollection(coverage.value, genMem.availableCoverages)) {
 					const cost: int = genMem.cost * (coverages.indexOf(coverage) + 1);
 					const enoughSF: Boolean = player.soulforce >= cost;
-					const inEffect: Boolean = genMem.transformationFunc(coverage.value).isPresent();
+					const inEffect: Boolean = genMem.transformationCoverage(coverage.value).isPresent();
 
 					if (enoughSF && !inEffect) addButton(currentButton, coverage.name, doMetamorphSkin, genMem, coverage.value, cost).hint("Cost: " + cost + " SF");
 					else if (inEffect) addButtonDisabled(currentButton, coverage.name, "You already have this much coverage, the metamorphosis would have no effect!");
@@ -980,17 +1067,10 @@ package classes.Scenes {
 			clearOutput();
 			outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - " + genMem.id.split(" Skin")[0] + "</u></font>\n");
 
-			genMem.transformationFunc(coverage).applyEffect();
+			genMem.transformationCoverage(coverage).applyEffect();
 			player.soulforce -= cost;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(accessMetamorphMenu);
-		}
-
-		public static function unlockMetamorph (genMemName: String): void {
-			if (!GeneticMemoryStorage[genMemName] && player.hasPerk(PerkLib.GeneticMemory)) {
-				GeneticMemoryStorage[genMemName] = true;
-				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "</b>");
-			}
 		}
 
 		private function accessPageEx1MetamorphMenu():void {
@@ -1095,6 +1175,18 @@ package classes.Scenes {
 			player.hairLength -= 2;
 			if (player.hairLength < 0) player.hairLength = 0;
 			doNext(accessPageEx1MetamorphMenu);
+		}
+
+		public static function unlockMetamorph (genMemName: String): void {
+			if (!GeneticMemoryStorage[genMemName] && player.hasPerk(PerkLib.GeneticMemory)) {
+				GeneticMemoryStorage[genMemName] = true;
+				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "</b>");
+			}
+		}
+
+		public static function permMetamorph (genMem: *): void {
+			PermanentMemoryStorage[genMem.id] = true;
+			player.ascensionPerkPoints -= genMem.permCost || 5;
 		}
 	}
 }

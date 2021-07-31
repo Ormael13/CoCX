@@ -13,7 +13,7 @@ import classes.StatusEffects.VampireThirstEffect;
 	public class StatusEffects
 	{
 		//metamorph
-		public static const TranscendentalGeneticMemory:StatusEffectType = mk("Transcendental Genetic Memory");//v1 - limit of permable options, v2 - current permed options counter (Deprecated)
+		public static const TranscendentalGeneticMemory:StatusEffectType = mk("Transcendental Genetic Memory");//v1 - limit of permable options, v2 - current permed options counter
 		public static const UnlockedFur:StatusEffectType				 = mk("Unlocked Fur");//1 (for line 15)	użyć fox fur lub inne skin tf scene text
 		public static const UnlockedScales:StatusEffectType				 = mk("Unlocked Scales");
 		public static const UnlockedChitin:StatusEffectType				 = mk("Unlocked Chitin");

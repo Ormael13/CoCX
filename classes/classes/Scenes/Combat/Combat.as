@@ -414,7 +414,7 @@ public class Combat extends BaseContent {
         else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
-        else if (canSpearDance() && player.isUsingSpear() && player.shield == ShieldLib.NOTHING){
+        else if (canSpearDance() && player.isSpearTypeWeapon() && player.shield == ShieldLib.NOTHING){
             var Special:Number = 0;
             if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) Special += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
             if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks()+Special;
@@ -3034,7 +3034,7 @@ public class Combat extends BaseContent {
             //Section for item damage modifiers
             if (weaponRangePerk == "Bow"){
                 if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isUsingSpear() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
+                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
             }
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
@@ -4414,13 +4414,8 @@ public class Combat extends BaseContent {
                 outputText(".\n");
                 if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)){ //WTF, This can be so much simplier.
                     biteMultiplier = 1;
-                    if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 1){ //Side note, why is this a multiplier of 2... V
+                    if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){
                         biteMultiplier *= 2;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){//...When this has no multiplier, thus uses the original 1?
                         outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
@@ -4944,7 +4939,7 @@ public class Combat extends BaseContent {
                 damage += scalingBonusToughness() * 0.25;
             }
             else{
-                if (player.isElf() && player.isUsingSpear() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
+                if (player.isElf() && player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
                     damage += player.inte;
                     damage += scalingBonusToughness() * 0.25;
                     if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.20*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
@@ -5091,7 +5086,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) damage *= 1.05;
-            if (player.isUsingSpear() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
+            if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
@@ -5328,7 +5323,7 @@ public class Combat extends BaseContent {
 				if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
 				if (player.isMaceHammerTypeWeapon()) macehammerXP(meleeMasteryEXPgains);
 				if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
-				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
+				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains); //Polearm weapon should honestly also give exp to axes type weapon not just spear.
 				if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
 				if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
 				if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
@@ -13621,8 +13616,11 @@ public class Combat extends BaseContent {
 				else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
 			}
             if (player.haveWeaponForJouster()) {
-                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3;
-                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5;
+                var JousterDamageMod:Number = 1;
+                //if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
+                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3*JousterDamageMod;
+                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5*JousterDamageMod;
+
             }
 			damage *= (1 + PASPAS());
         } else {
@@ -13660,7 +13658,9 @@ public class Combat extends BaseContent {
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
             crit = true;
-            if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
+            if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()){
+                damage *= 2.5;
+            }
             else damage *= 1.75;
         }
 		outputText(".");

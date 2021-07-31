@@ -118,17 +118,17 @@ public class PerkLib
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
 				"While others had to work hard to unlock their metamorphic potential, it came naturally to you. Whatever the reason for that is... truth be told you try not to think about it, afraid of what it might mean for you. As long as it's nothing harmful for you in the long run, right?");
 		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
-				"Allows you to retain up to 15 chosen unlocked metamorphic options."); // Deprecated
+				"Allows you to retain up to 15 chosen unlocked metamorphic options.");
 		public static const AscensionTranscendentalGeneticMemoryStage2:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 2)", "Ascension: Transcendental Genetic Memory (Stage 2)",
-				"Allows you to retain up to 30 chosen unlocked metamorphic options."); // Deprecated
+				"Allows you to retain up to 30 chosen unlocked metamorphic options.");
 		public static const AscensionTranscendentalGeneticMemoryStage3:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 3)", "Ascension: Transcendental Genetic Memory (Stage 3)",
-				"Allows you to retain up to 45 chosen unlocked metamorphic options."); // Deprecated
+				"Allows you to retain up to 45 chosen unlocked metamorphic options.");
 		public static const AscensionTranscendentalGeneticMemoryStage4:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 4)", "Ascension: Transcendental Genetic Memory (Stage 4)",
-				"Allows you to retain up to 60 chosen unlocked metamorphic options."); // Deprecated
+				"Allows you to retain up to 60 chosen unlocked metamorphic options.");
 		public static const AscensionTranscendentalGeneticMemoryStage5:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 5)", "Ascension: Transcendental Genetic Memory (Stage 5)",
-				"Allows you to retain up to 75 chosen unlocked metamorphic options."); // Deprecated
+				"Allows you to retain up to 75 chosen unlocked metamorphic options.");
 		public static const AscensionTranscendentalGeneticMemoryStage6:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 6)", "Ascension: Transcendental Genetic Memory (Stage 6)",
-				"Allows you to retain up to 90 chosen unlocked metamorphic options."); // Deprecated
+				"Allows you to retain up to 90 chosen unlocked metamorphic options.");
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
 				"You're the underdog. Gain twice as much exp for beating up enemies above your current level with double the limit after which increases to gained exp stops.");// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",

@@ -83,7 +83,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasATetsuHoly:player.weapon == game.weapons.POCDEST,
 					PlayerHasATetsuUnholy:player.weapon == game.weapons.DOCDEST,
 
-					PlayerHasASpear: player.isSpearTypeWeapon(),
+					PlayerHasASpear: player.isSpearTypeWeapon(), //until polearm have their own sprite they share sprite with spears
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
 

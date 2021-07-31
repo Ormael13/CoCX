@@ -1484,7 +1484,7 @@ use namespace CoC;
 				//5
 				//6
 				//7
-				//8
+				addButton(8, "CheckWeapon", TestWeaponType).hint("Detect Weapon Type Equiped for sprite and battle testing.");
 				addButton(9, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 				addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
 				addButton(11, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
@@ -1799,7 +1799,6 @@ use namespace CoC;
 		}
 		public function AddFTear():void {
 			outputText("\n\n<b>(Gained 1 Fafnir Tear!)</b>\n\n");
-			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isSpearTypeWeapon(),player.isDuelingTypeWeapon()].join());
 			inventory.takeItem(consumables.F_TEAR, curry(NonEquipmentMenu, 2));
 		}
 		public function AddBubble():void {
@@ -1865,6 +1864,10 @@ use namespace CoC;
 		public function AddFeralImpSkull():void {
 			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
 			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
+		}
+
+		public function TestWeaponType():void {
+			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isScytheTypeWeapon(),player.isDuelingTypeWeapon()].join());
 		}
 
 		public function FightTheDummy():void {
@@ -4119,4 +4122,3 @@ use namespace CoC;
 		}
 	}
 }
-
