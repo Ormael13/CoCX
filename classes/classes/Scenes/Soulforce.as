@@ -1867,7 +1867,7 @@ use namespace CoC;
 		}
 
 		public function TestWeaponType():void {
-			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isPolearmTypeWeapon(),player.isDuelingTypeWeapon()].join());
+			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isScytheTypeWeapon(),player.isDuelingTypeWeapon()].join());
 		}
 
 		public function FightTheDummy():void {

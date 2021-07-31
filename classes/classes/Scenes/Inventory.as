@@ -96,10 +96,7 @@ use namespace CoC;
 			if (player.isAxeTypeWeapon()) outputText(" (Axe-type weapon)");
 			if (player.isMaceHammerTypeWeapon()) outputText(" (Mace/Hammer-type weapon)");
 			if (player.isDuelingTypeWeapon()) outputText(" (Dueling Sword-type weapon)");
-			if (player.isPolearmTypeWeapon()){
-				if (player.isSpearTypeWeapon()) outputText(" (Spear-type weapon)");
-				else outputText(" (Polearm-type weapon)");
-			}
+			if (player.isSpearTypeWeapon()) outputText(" (Spear-type weapon)");
 			if (player.isDaggerTypeWeapon()) outputText(" (Dagger-type weapon)");
 			if (player.isWhipTypeWeapon()) outputText(" (Whip-type weapon)");
 			if (player.isRibbonTypeWeapon()) outputText(" (Ribbon-type weapon)");

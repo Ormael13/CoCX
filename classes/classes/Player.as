@@ -1107,7 +1107,7 @@ use namespace CoC;
 		}
 		//Scythe-type
 		public function isScytheTypeWeapon():Boolean {
-			return weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;
+			return weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.URTAHLB;
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
@@ -1208,7 +1208,7 @@ use namespace CoC;
 		}
 		public function haveWeaponForJouster():Boolean
 		{
-			return isSpearTypeWeapon() || weaponName == "demonic scythe" || isPolearmTypeWeapon();
+			return isSpearTypeWeapon();
 		}
 		public function playerIsBlinded():Boolean
 		{
