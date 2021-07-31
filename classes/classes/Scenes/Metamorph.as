@@ -63,8 +63,6 @@ package classes.Scenes {
 				PermanentMemoryMigration = o["permanent memory migration"];
 				if (!o["permanent memory storage"]) {
 					PermanentMemoryMigration = true;
-				} else {
-					PermanentMemoryMigration = undefined;
 				}
 
 				PermanentMemoryStorage = {};
@@ -75,6 +73,7 @@ package classes.Scenes {
 			} else {
 				// Migration from old save
 				resetState();
+				PermanentMemoryMigration = true;
 
 				// Converting Unlocked flags into Genetic Memory Storage (Human flags are dealt with separately)
 				/*
@@ -484,11 +483,15 @@ package classes.Scenes {
 					/*
 				*/
 
-				refundAscMetamorph();
-
-				// Previous code didn't unlock more than 2 tails forEnlightened Kitsunes, migration fix
+				// Previous code didn't unlock more than 2 tails for Enlightened Kitsunes, migration fix
 				/*
 					*/
+					if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
+						GeneticMemoryStorage["Fox 7th Tail"] = true;
+						GeneticMemoryStorage["Fox 8th Tail"] = true;
+						GeneticMemoryStorage["Fox 9th Tail"] = true;
+					}
+
 					if (player.hasPerk(PerkLib.EnlightenedKitsune) || player.hasPerk(PerkLib.CorruptedKitsune)) {
 						GeneticMemoryStorage["Fox Tail"] = true;
 						GeneticMemoryStorage["Fox 2nd Tail"] = true;
@@ -496,12 +499,6 @@ package classes.Scenes {
 						GeneticMemoryStorage["Fox 4th Tail"] = true;
 						GeneticMemoryStorage["Fox 5th Tail"] = true;
 						GeneticMemoryStorage["Fox 6th Tail"] = true;
-						GeneticMemoryStorage["Fox 7th Tail"] = true;
-					}
-
-					if (player.hasPerk(PerkLib.EnlightenedNinetails) || player.hasPerk(PerkLib.CorruptedNinetails)) {
-						GeneticMemoryStorage["Fox 8th Tail"] = true;
-						GeneticMemoryStorage["Fox 9th Tail"] = true;
 					}
 
 					if (player.tailType == Tail.FOX && player.tailCount < 7) {
@@ -525,7 +522,9 @@ package classes.Scenes {
 			}
 		}
 
-		public function refundAscMetamorph(): void {
+		public function refundAscMetamorph(): Boolean {
+			const refunded: Boolean = player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+
 			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
 			/*
 				*/
@@ -592,12 +591,14 @@ package classes.Scenes {
 				player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
 				/*
 			*/
+
+			return refunded;
 		}
 
 		public function Metamorph() {
 			Saves.registerSaveableState(this);
 		}
-		
+
 		public static function resetMetamorph(): void {
 			GeneticMemoryStorage = {};
 			// Generic value for TFs unlocked from the beginning
@@ -619,8 +620,8 @@ package classes.Scenes {
 		// Resets the main Metamorph menu's page when accessing Metamorph
 		public function openMetamorph(): void {
 			if (PermanentMemoryMigration) {
-				PermanentMemoryMigration = false;
-				if (player.ascensionPerkPoints > 0) {
+				PermanentMemoryMigration = undefined;
+				if (refundAscMetamorph()) {
 					CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, including Transcedental Genetic Memory's Stages and with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to buy them back, and then either return to your game or Reincarnate a bit earlier than usual, if you'd like.</b>\n\n");
 					return;
 				}
