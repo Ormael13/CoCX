@@ -2498,6 +2498,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.ORC_FANGS;
+			Metamorph.unlockMetamorph("Orc Fangs Face");
 	  },
 	  // is present
 	  function (): Boolean {
