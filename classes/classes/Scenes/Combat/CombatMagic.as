@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
+import classes.Items.ShieldLib;
 import classes.PerkLib;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
@@ -706,6 +707,19 @@ public class CombatMagic extends BaseCombatContent {
 			else whiteLustCap = (player.maxLust() - 45);
 		}
 		return whiteLustCap;
+	}
+	
+	public function perkRelatedDurationBoosting():Number {
+		var perkRelatedDB:Number = 0;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsII)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsV)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.EverLastingBuffs)) perkRelatedDB += 5;
+		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) perkRelatedDB += 5;
+		return perkRelatedDB;
 	}
 
 	internal function calcInfernoModImpl(damage:Number):int {
@@ -1590,6 +1604,67 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 	
+	public function buildDivineMenu(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
+
+		if (player.hasStatusEffect(StatusEffects.KnowsAegis)) {
+			bd = buttons.add("Aegis", spellAegis)
+					.hint("Increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence)  " +
+							"\n\nMana Cost: " + spellCostWhite(500) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(500)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500) && player.HP < spellCostWhite(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsExorcise)) {
+			bd = buttons.add("Exorcise", spellExorcise)
+					.hint("Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt.  " +
+							"\n\nMana Cost: " + spellCostWhite(400) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(400)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(400) && player.HP < spellCostWhite(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownExorcise)) {
+				bd.disable("You need more time before you can cast Exorcise again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsDivineShield)) {
+			bd = buttons.add("DivineShield", spellDivineShield)
+					.hint("Increase magic resistance by 40%.  " +
+							"\n\nMana Cost: " + spellCostWhite(600) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(600)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(600) && player.HP < spellCostWhite(600)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(600)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			}
+		}
+	}
+	
 	public function buildNecroMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		if (player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
@@ -2315,14 +2390,7 @@ public class CombatMagic extends BaseCombatContent {
 			MightBoost = Math.round(MightBoost);
 			if (MightBoost > MightBoostCap) MightBoost = MightBoostCap;
 			var MightDuration:Number = 5;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsV)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.EverLastingBuffs)) MightDuration += 5;
-			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) MightDuration += 5;
+			MightDuration += perkRelatedDurationBoosting();
 			tempTou = MightBoost;
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = Math.round(MightBoost * 1.25);
 			else tempStr = MightBoost;
@@ -2410,14 +2478,7 @@ public class CombatMagic extends BaseCombatContent {
 			BlinkBoost = Math.round(BlinkBoost);
 			if (BlinkBoost > BlinkBoostCap) BlinkBoost = BlinkBoostCap;
 			var BlinkDuration:Number = 5;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsV)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.EverLastingBuffs)) BlinkDuration += 5;
-			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) BlinkDuration += 5;
+			BlinkDuration += perkRelatedDurationBoosting();
 			tempSpe = BlinkBoost;
 			var oldHPratio:Number = player.hp100/100;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
@@ -3524,6 +3585,102 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
 	}
+	
+	public function spellAegis():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(500);
+		else useMana(500,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You call on divine protection in order to shield yourself against attacks."+(player.shield == ShieldLib.NOTHING ? " On your off-hand manifests a shield made of pure light, which will help deflect blows.":" Your shield begins to glow with white protective light, strengthening it as benevolent powers guide your hands, increasing your ability to block.")+"\n\n");
+		var AegisDuration:Number = 6;
+		AegisDuration += perkRelatedDurationBoosting();
+		var aegismagnitude:Number = 0;
+		if (spellModWhite() > 5) aegismagnitude += 5;
+		else aegismagnitude += spellModWhite();
+		if (player.inte / 50 > 5) aegismagnitude += 5;
+		else aegismagnitude += player.inte / 25;
+		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) aegismagnitude *= 1.1;
+		if (player.isUsingStaff() && player.shield == ShieldLib.NOTHING) aegismagnitude *= 3;
+		player.createStatusEffect(StatusEffects.Aegis,Math.round(aegismagnitude),AegisDuration,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellExorcise():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(400);
+		else useMana(400,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		var damage:Number = scalingBonusIntelligence() * spellModBlack();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
+        else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
+        else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
+        else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
+        else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+		if (monster.cor < 33) damage = Math.round(damage * 1.0);
+		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4);
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		player.createStatusEffect(StatusEffects.CooldownExorcise,2,0,0,0);
+		outputText("Your [weapon] begins to glow as you charge and deliver a mighty strike. As the mystical blow strikes your opponent"+(monster.plural ? "s":"")+", the magic explodes forward from your weapon in the shape of the sigil of the Marethian divine pantheon, damaging your foe"+(monster.plural ? "s":"")+" further and throwing "+monster.pronoun2+" back.\n\n");
+		
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellDivineShield():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(600);
+		else useMana(600,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You usher a prayer for protection from the dark spells cast by the heretics and a powerful bubble of raw energy encases you, deflecting most of the magical assaults away.\n\n");
+		var DivineShieldDuration:Number = 6;
+		DivineShieldDuration += perkRelatedDurationBoosting();
+		player.createStatusEffect(StatusEffects.DivineShield,40,DivineShieldDuration,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
 	/*public function spell2IceRain():void {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
@@ -4279,14 +4436,7 @@ public class CombatMagic extends BaseCombatContent {
 		ChargeWeaponBoost *= spellChargeWeaponWeaponSize();
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
 		var ChargeWeaponDuration:Number = 5;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsII)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsV)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.EverLastingBuffs)) ChargeWeaponDuration += 5;
-		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) ChargeWeaponDuration += 5;
+		ChargeWeaponDuration += perkRelatedDurationBoosting();
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,ChargeWeaponDuration,0,0);
 			statScreenRefresh();
@@ -4353,14 +4503,7 @@ public class CombatMagic extends BaseCombatContent {
 		ChargeArmorBoost *= spellChargeArmorType();
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
 		var ChargeArmorDuration:Number = 5;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsII)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsV)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.EverLastingBuffs)) ChargeArmorDuration += 5;
-		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) ChargeArmorDuration += 5;
+		ChargeArmorDuration += perkRelatedDurationBoosting();
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,ChargeArmorDuration,0,0);
 			statScreenRefresh();

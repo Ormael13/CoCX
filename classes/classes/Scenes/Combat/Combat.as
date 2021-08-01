@@ -6404,6 +6404,7 @@ public class Combat extends BaseContent {
             else blockChance += 10;
         }
 		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
 		var wrathShieldSize:int = 6;
@@ -6429,6 +6430,7 @@ public class Combat extends BaseContent {
             else blockChance2 += 10;
         }
 		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance2 += 10;
+		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance2 += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance2 < 10) blockChance2 = 10;
         //if (player.weaponRange == weaponsrange.M1CERBE) blockChance2 = 0;
         return blockChance2;
@@ -9773,6 +9775,22 @@ public class Combat extends BaseContent {
                 outputText("<b>Metal Skin effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.MetalSkin, 2, -1);
         }
+		//Aegis
+		if (player.hasStatusEffect(StatusEffects.Aegis)) {
+			if (player.statusEffectv2(StatusEffects.Aegis) <= 0) {
+                player.removeStatusEffect(StatusEffects.Aegis);
+            } else {
+                player.addStatusValue(StatusEffects.Aegis, 2, -1);
+            }
+		}
+		//Divine Shield
+		if (player.hasStatusEffect(StatusEffects.DivineShield)) {
+			if (player.statusEffectv2(StatusEffects.DivineShield) <= 0) {
+                player.removeStatusEffect(StatusEffects.DivineShield);
+            } else {
+                player.addStatusValue(StatusEffects.DivineShield, 2, -1);
+            }
+		}
         //Possess
         if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
             if (player.statusEffectv1(StatusEffects.CooldownPossess) <= 0) {
@@ -9881,6 +9899,38 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownBalefulPolymorph, 1, -1);
             }
         }
+		//Consuming Darkness
+		if (player.hasStatusEffect(StatusEffects.CooldownConsumingDarkness)) {
+			if (player.statusEffectv1(StatusEffects.CooldownConsumingDarkness) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownConsumingDarkness);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownConsumingDarkness, 1, -1);
+            }
+		}
+		//Curse of Desire
+		if (player.hasStatusEffect(StatusEffects.CooldownCurseOfDesire)) {
+			if (player.statusEffectv1(StatusEffects.CooldownCurseOfDesire) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownCurseOfDesire);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownCurseOfDesire, 1, -1);
+            }
+		}
+		//Curse of Weeping
+		if (player.hasStatusEffect(StatusEffects.CooldownCurseOfWeeping)) {
+			if (player.statusEffectv1(StatusEffects.CooldownCurseOfWeeping) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownCurseOfWeeping);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownCurseOfWeeping, 1, -1);
+            }
+		}
+		//Exorcise
+		if (player.hasStatusEffect(StatusEffects.CooldownExorcise)) {
+			if (player.statusEffectv1(StatusEffects.CooldownExorcise) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownExorcise);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownExorcise, 1, -1);
+            }
+		}
         //Boneshatter
         if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
             if (player.statusEffectv1(StatusEffects.CooldownBoneshatter) <= 0) {

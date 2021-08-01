@@ -2550,6 +2550,9 @@ use namespace CoC;
 			if (statusEffectv4(StatusEffects.ZenjiZList) == 2) {
 				mult -= 10;
 			}
+			if (hasStatusEffect(StatusEffects.DivineShield)) {
+				mult -= 40;
+			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}

@@ -42,6 +42,7 @@ public class CombatUI extends BaseCombatContent {
 	private var blackSpellButtons:ButtonDataList = new ButtonDataList();
 	private var greySpellButtons:ButtonDataList = new ButtonDataList();
 	private var hexSpellButtons:ButtonDataList = new ButtonDataList();
+	private var divineSpellButtons:ButtonDataList = new ButtonDataList();
 	private var necroSpellButtons:ButtonDataList = new ButtonDataList();
 	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
@@ -55,6 +56,7 @@ public class CombatUI extends BaseCombatContent {
 		blackSpellButtons.clear();
 		greySpellButtons.clear();
 		hexSpellButtons.clear();
+		divineSpellButtons.clear();
 		necroSpellButtons.clear();
 		bloodSpellButtons.clear();
 		soulforceButtons.clear();
@@ -553,12 +555,14 @@ public class CombatUI extends BaseCombatContent {
 		combat.magic.buildBlackMenu(blackSpellButtons);
 		combat.magic.buildGreyMenu(greySpellButtons);
 		combat.magic.buildHexMenu(hexSpellButtons);
+		combat.magic.buildDivineMenu(divineSpellButtons);
 		combat.magic.buildNecroMenu(necroSpellButtons);
 		combat.magic.buildBloodMenu(bloodSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
 		if (player.hasPerk(PerkLib.GreyMagic) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
 		if (player.hasPerk(PerkLib.HexKnowledge) && hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		if (player.hasPerk(PerkLib.DivineKnowledge) && divineSpellButtons.length > 0) buttons.add("Divine", curry(submenu,divineSpellButtons, submenuSpells, 0, false)).hint("Open your Divine tome");
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && necroSpellButtons.length > 0) buttons.add("Necro Spells", curry(submenu,necroSpellButtons, submenuSpells, 0, false)).hint("Open your Necromicon");
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) && bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
 	}

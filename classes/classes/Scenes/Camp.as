@@ -2322,7 +2322,7 @@ public class Camp extends NPCAwareContent{
 	private function VisitClone():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
+			if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) {
 				outputText("Your clone is ");
 				if (player.statusEffectv4(StatusEffects.PCClone) == 1) outputText("slowly rotating volleyball sized sphere of soul and life essences");
 				else if (player.statusEffectv4(StatusEffects.PCClone) == 2) outputText("still incomplete");

@@ -3873,11 +3873,21 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
         }*/
 		if (player.hasPerk(PerkLib.DivineKnowledge)) {
-			//Smart enough for Mental Shield and doesnt have it
-			/*if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
-				player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
-			}*/
+			//Smart enough for Aegis and doesnt have it
+			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Aegis.</b>");
+				player.createStatusEffect(StatusEffects.KnowsAegis, 0, 0, 0, 0);
+			}
+			//Smart enough for Exorcise and doesnt have it
+			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsExorcise)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Exorcise.</b>");
+				player.createStatusEffect(StatusEffects.KnowsExorcise, 0, 0, 0, 0);
+			}
+			//Smart enough for Divine Shield and doesnt have it
+			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsDivineShield)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Divine Shield.</b>");
+				player.createStatusEffect(StatusEffects.KnowsDivineShield, 0, 0, 0, 0);
+			}
 		}
     }
 
