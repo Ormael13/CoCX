@@ -1389,7 +1389,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level > 6) outputText("\n\nYou have gained one perk point!");
 				else outputText("\n\nYou have gained two perk points!");
 			}
-			if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
+			if (player.statPoints > 0) {
 				doNext(attributeMenu);
 			} else if (player.perkPoints > 0) {
 				doNext(perkBuyMenu);
@@ -1398,7 +1398,7 @@ public class PlayerInfo extends BaseContent {
 			}
 		}
 		//Spend attribute points
-		else if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
+		else if (player.statPoints > 0) {
 			attributeMenu();
 		}
 		//Spend perk points

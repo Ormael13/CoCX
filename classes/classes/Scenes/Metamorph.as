@@ -31,8 +31,7 @@ package classes.Scenes {
 
 		public static var GeneticMemoryStorage: Object;
 		public static var PermanentMemoryStorage: Object;
-
-		private static var PermanentMemoryMigration: Boolean;
+		public static var TriggerUpdate: Boolean;
 
 		public function stateObjectName():String {
 			return "GeneticMemoryStorage";
@@ -40,6 +39,7 @@ package classes.Scenes {
 
 		public function resetState():void {
 			GeneticMemoryStorage = {};
+			if (!PermanentMemoryStorage) PermanentMemoryStorage = {};
 
 			// Generic value for TFs unlocked from the beginning
 			GeneticMemoryStorage["Unlocked Metamorph"] = true;
@@ -60,9 +60,8 @@ package classes.Scenes {
     			if (storage.hasOwnProperty(k)) GeneticMemoryStorage[k] = !!storage[k];
 				}
 
-				PermanentMemoryMigration = o["permanent memory migration"];
 				if (!o["permanent memory storage"]) {
-					PermanentMemoryMigration = true;
+					TriggerUpdate = true;
 				}
 
 				PermanentMemoryStorage = {};
@@ -73,11 +72,11 @@ package classes.Scenes {
 			} else {
 				// Migration from old save
 				resetState();
-				PermanentMemoryMigration = true;
+				TriggerUpdate = true;
 			}
 		}
 
-		private function refundAscMetamorph(): Boolean {
+		private static function refundAscMetamorph(): Boolean {
 			const refunded: Boolean = player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory);
 
 			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
@@ -150,7 +149,7 @@ package classes.Scenes {
 			return refunded;
 		}
 
-		private function convertUnlockMetamorphFlags(): void {
+		private static function convertUnlockMetamorphFlags(): void {
 			// Converting Unlocked flags into Genetic Memory Storage (Human flags are dealt with separately)
 			/*
 				*/
@@ -160,6 +159,8 @@ package classes.Scenes {
 				player.removeStatusEffect(StatusEffects.UnlockedGorgonHair);
 				if (player.hasStatusEffect(StatusEffects.UnlockedElfHair)) GeneticMemoryStorage["Silky Hair"] = true;
 				player.removeStatusEffect(StatusEffects.UnlockedElfHair);
+				trace("LOADED");
+				trace(player.hasStatusEffect(StatusEffects.UnlockedRaijuHair));
 				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair)) GeneticMemoryStorage["Storm Hair"] = true;
 				player.removeStatusEffect(StatusEffects.UnlockedRaijuHair);
 				if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) GeneticMemoryStorage["Burning Hair"] = true;
@@ -582,6 +583,17 @@ package classes.Scenes {
 			*/
 		}
 
+		public static function update(): void {
+			if (TriggerUpdate) {
+				TriggerUpdate = undefined;
+				convertUnlockMetamorphFlags();
+				if (refundAscMetamorph()) {
+					CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to spend your points to reobtain them, and perhaps buy something else as well, before returning to your game.</b>\n\n");
+					return;
+				}
+			}
+		}
+
 		public function Metamorph() {
 			Saves.registerSaveableState(this);
 		}
@@ -606,15 +618,6 @@ package classes.Scenes {
 
 		// Resets the main Metamorph menu's page when accessing Metamorph
 		public function openMetamorph(): void {
-			if (PermanentMemoryMigration) {
-				PermanentMemoryMigration = undefined;
-				convertUnlockMetamorphFlags();
-				if (refundAscMetamorph()) {
-					CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, including Transcedental Genetic Memory's Stages and with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to buy them back, and then either return to your game or Reincarnate a bit earlier than usual, if you'd like.</b>\n\n");
-					return;
-				}
-			}
-
 			mainMetamorphMenuPage = 0;
 			accessMetamorphMenu();
 		}
