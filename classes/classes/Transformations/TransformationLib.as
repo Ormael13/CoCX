@@ -7744,10 +7744,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.tailType != Tail.NONE) desc += "Painful swelling just above your [ass] doubles you over, and you hear the sound of your tail dropping off onto the ground! Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one. It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'. <b>You have a scorpion tail.</b>";
 	    else desc += "Painful swelling just above your [ass] doubles you over. It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt. The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide. You sigh as your stinger slides into place with a 'snick', finishing the transformation. <b>You have a scorpion tail.</b>";
-	    player.tailCount = 1;
 	    player.tailVenom = 15;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.SCORPION;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Scorpion Tail");
@@ -7790,8 +7790,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Warmth rampages all over your body before concentrating right above your [ass]. Right on cue, a blade of fire bursts from that spot, spiraling upwards. Strangely, despite the tail being obviously made of flames, it doesn't even feel hot unless you will it to. <b>You now have burning tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.BURNING;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Burning Tail");
@@ -7811,8 +7811,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Something weird is happening to your tail as the fire suddenly begins to flare to twice its volume. You screech, hiss and yowl in pain like a cat as it suddenly cracks and splits into <b>two fiery cat tails.</b> Feeling horny you proceed to stretch and lick your vagina to damp out your growing heat but it swiftly becomes obvious you will not be able to get rid of that scorching heat without a victim.";
 
-	    player.tailCount = 2;
 	    player.tailType = Tail.TWINKASHA;
+	    player.tailCount = 2;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -7838,8 +7838,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    } else desc += "You pause and tilt your head... something feels different. Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.CAT;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Cat Tail");
@@ -7858,7 +7858,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailCat, doOutput);
 
 	    desc += "A tingling pressure builds on your backside, and your soft, glossy tail begins to glow with an eerie, ghostly light. With a crackle of electrical energy, it starts splitting into two, stopping once the split reaches a third of the way down the length! <b>You now have a cat tail that is forked on the last third of its length.</b>";
-	    player.tailCount = 1;
+
 	    player.tailType = Tail.NEKOMATA_FORKED_1_3;
 
 	    if (doOutput) outputText(desc);
@@ -7879,7 +7879,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailNekomataOneThirdForked, doOutput);
 
 	    desc += "A tingling pressure builds on your backside, and your soft, glossy, and partially forked tail begins to glow with an eerie, ghostly light. With a crackle of electrical energy, it starts splitting into two, stopping as another third of its length becomes forked! <b>You now have a cat tail that is forked at two thirds of its length.</b>";
-	    player.tailCount = 1;
+
 	    player.tailType = Tail.NEKOMATA_FORKED_2_3;
 
 	    if (doOutput) outputText(desc);
@@ -7901,8 +7901,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailNekomataTwoThirdsForked, doOutput);
 
 	    desc += "A tingling pressure builds on your backside, and your soft, glossy, and partially forked tail begins to glow with an eerie, ghostly light. With a crackle of electrical energy, your tail finishes splitting in two! <b>You now have a pair of cat tails.</b>";
-	    player.tailCount = 2;
+
 	    player.tailType = Tail.CAT;
+	    player.tailCount = 2;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Cat 2nd Tail");
@@ -7939,8 +7940,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    }
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.RED_PANDA;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Red_panda Tail");
@@ -7969,8 +7970,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += " <b>You now have a horse-tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.HORSE;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Horse Tail");
@@ -7992,8 +7993,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    else desc += "You feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.PIG;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Pig Tail");
@@ -8015,8 +8016,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    else desc += "You nearly jump out of your skin as your tail burst into a huge lightning bolt. You watch as it curls and twist around before it fizzles out. <b>You now have a silky Raiju tail!</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.RAIJU;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Raiju Tail");
@@ -8039,8 +8040,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Painful swelling just above your firm backside doubles you over. It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and elongating with a series of pops until you have a bulbous abdomen hanging just above your butt. The whole thing is covered in a hard greenish chitinous material, and large enough to be impossible to hide. <b>You have a Mantis abdomen.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.MANTIS_ABDOMEN;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Mantis Tail");
@@ -8063,8 +8064,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.GOAT;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Goat Tail");
@@ -8092,8 +8093,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    }
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.COW;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Cow Tail");
@@ -8115,8 +8116,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    else desc += "An icy sensation fills your behind as your tail suddenly goes curiously numb. Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible, its tip adorned with wicked spikes. <b>You now have a dragon tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.DRACONIC;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Draconic Tail");
@@ -8139,8 +8140,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "A large bump starts to grow out of your [ass], making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. You swing your tail a few times, battering the ground, and realize that you should now be able to easily reach very high speeds on water. <b>You're going to have a lot of fun swimming with your new Orca tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.ORCA;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Orca Tail");
@@ -8164,8 +8165,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.SALAMANDER;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Salamander Tail");
@@ -8188,8 +8189,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Jets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.SHARK;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Shark Tail");
@@ -8214,8 +8215,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.coatColor = "black";
 	    player.tailVenom = 5;
 	    player.tailRecharge = 5;
-	    player.tailCount = 1;
 	    player.tailType = Tail.SPIDER_ADBOMEN;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Spider Tail");
@@ -8237,8 +8238,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    else desc += "A tingling tickles the base of your spine, making you squirm in place. A moment later, it fades, but a fan of feathers erupts from your [skin.type] in its place. The new tail fluffs up and down instinctively with every shift of the breeze. <b>You have a feathery harpy tail!</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.HARPY;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Harpy Tail");
@@ -8258,10 +8259,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.tailType !== Tail.NONE) desc += "Painful swelling just above your [butt] doubles you over, and you hear the sound of your tail dropping off onto the ground! Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail. It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.";
 	    else desc += "Painful swelling just above your [butt] doubles you over. It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt. The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide. You sigh as your stinger slides into place with a 'snick', finishing the transformation. <b>You have a bee's abdomen.</b>";
-	    player.tailCount = 1;
 	    player.tailVenom = 10;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.BEE_ABDOMEN;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Bee Tail");
@@ -8283,8 +8284,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    else desc += "You drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point. It flicks back and forth, prehensile and totally under your control. <b>You now have a reptilian tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.LIZARD;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Lizard Tail");
@@ -8310,8 +8311,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    } else desc += "A pain builds in your backside... growing more and more pronounced. The pressure suddenly disappears with a loud ripping and tearing noise. <b>You realize you now have a demon tail</b>... complete with a cute little spade.";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.DEMONIC;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph("Demonic Tail");
@@ -8340,8 +8341,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.WOLF;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8369,8 +8370,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.DOG;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8393,8 +8394,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.CAVE_WYRM;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8417,8 +8418,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.RABBIT;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8448,8 +8449,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.AVIAN;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8470,8 +8471,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.GRIFFIN;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8499,8 +8500,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.KANGAROO;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8522,8 +8523,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.THUNDERBIRD;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8545,8 +8546,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.SQUIRREL;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8568,8 +8569,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.WEASEL;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8594,8 +8595,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.RACCOON;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8618,8 +8619,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.MOUSE;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8640,8 +8641,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.HINEZUMI;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8676,8 +8677,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.FERRET;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8701,8 +8702,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.BEAR;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8724,8 +8725,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 5;
 	    player.tailRecharge = 5;
-	    player.tailCount = 1;
 	    player.tailType = Tail.USHI_ONI;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -8746,8 +8747,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
-	    player.tailCount = 1;
 	    player.tailType = Tail.WENDIGO;
+	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
 	  },
