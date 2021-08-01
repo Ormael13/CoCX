@@ -547,6 +547,7 @@ package classes.Scenes {
         player.removeStatusEffect(StatusEffects.UnlockedOrcLegs);
 				/*
 			*/
+
 			// Previous code didn't unlock more than 2 tails for Enlightened Kitsunes, migration fix
 			/*
 				*/
@@ -584,13 +585,11 @@ package classes.Scenes {
 		}
 
 		public static function update(): void {
-			if (TriggerUpdate) {
-				TriggerUpdate = undefined;
-				convertUnlockMetamorphFlags();
-				if (refundAscMetamorph()) {
-					CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to spend your points to reobtain them, and perhaps buy something else as well, before returning to your game.</b>\n\n");
-					return;
-				}
+			TriggerUpdate = false;
+			convertUnlockMetamorphFlags();
+			if (refundAscMetamorph()) {
+				CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to spend your points to reobtain them, and perhaps buy something else as well, before returning to your game.</b>\n\n");
+				return;
 			}
 		}
 
