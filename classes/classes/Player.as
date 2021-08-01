@@ -15326,14 +15326,6 @@ use namespace CoC;
 			}
 		}
 
-		public function get areBaseStatsMaxed(): Boolean {
-			if (strStat.core.value < strStat.core.max || touStat.core.value < touStat.core.max || speStat.core.value < speStat.core.max || intStat.core.value < intStat.core.max || wisStat.core.value < wisStat.core.max || libStat.core.value < libStat.core.max) {
-				return false;
-			}
-
-			return true;
-		}
-
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;

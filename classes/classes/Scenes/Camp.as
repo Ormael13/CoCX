@@ -167,6 +167,10 @@ public class Camp extends NPCAwareContent{
 
 			CoC.instance.saves.saveGame(player.slotName);
 		}
+		if (Metamorph.TriggerUpdate) {
+			Metamorph.update();
+			return;
+		}
 		CoC.instance.inCombat = false;
 		if (ingnam.inIngnam) { //Ingnam
 			SceneLib.ingnam.menuIngnam();
@@ -3933,7 +3937,7 @@ public function wakeFromBadEnd():void {
 		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
 			if (!levelup) {
-				if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
+				if (player.statPoints > 0) {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Stat Up");
 					mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
 				} else  if (player.perkPoints > 0) {
@@ -4915,6 +4919,7 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}*/
+
 		doCamp();
 	}
 

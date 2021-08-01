@@ -6037,8 +6037,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.HOOFED).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.HOOFED;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Hoofed Lower Body");
 	    },
@@ -6180,8 +6180,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.CAT).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.CAT;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Cat Lower Body");
 	    },
@@ -6225,8 +6225,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.LIZARD).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.LIZARD;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Lizard Lower Body");
 	    },
@@ -6342,8 +6342,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        desc += ". When the spasms subside and you can once again stand, <b>you find that your four [legs] have been changed to those of a fox!</b>";
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.FOX;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Fox Lower Body");
 	    },
@@ -6418,8 +6418,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.DRAGON).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.DRAGON;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Draconic Lower Body");
 	    },
@@ -6465,8 +6465,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.CLOVEN_HOOFED).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.CLOVEN_HOOFED;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Cloven Hoofed Lower Body");
 	    },
@@ -6510,8 +6510,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.SALAMANDER).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.SALAMANDER;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Salamander Lower Body");
 	    },
@@ -6547,8 +6547,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.MANTIS).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.MANTIS;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Mantis Lower Body");
 	    },
@@ -6584,8 +6584,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.SHARK).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.SHARK;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Shark Lower Body");
 	    },
@@ -6613,7 +6613,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	        // Display TF text if the player is obtaining this part instead of only changing leg count
 	        if (player.lowerBody !== LowerBody.LION) {
-	          desc += "Your legs suddenly shift painfully. You feel new fur growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede you sit and take a look at your [feet]; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws for feet";
+	          desc += "Your legs suddenly shift painfully. You feel new fur growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede you sit and take a look at your [feet]; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws for feet.</b>";
 	        }
 	      }
 	      // Case 3: Taur TF
@@ -6621,8 +6621,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.LION).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.LION;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Lion Lower Body");
 	    },
@@ -6658,8 +6658,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.ORCA).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.ORCA;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Orca Lower Body");
 	    },
@@ -6735,8 +6735,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.RAIJU).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.RAIJU;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	      Metamorph.unlockMetamorph("Raiju Lower Body");
 	    },
@@ -6830,8 +6830,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.DOG).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.DOG;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	    },
 	    // is present
@@ -6866,8 +6866,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.WOLF).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.WOLF;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	    },
 	    // is present
@@ -7486,8 +7486,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.WEASEL).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.WEASEL;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	    },
 	    // is present
@@ -7524,8 +7524,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.BEAR).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.BEAR;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	    },
 	    // is present
@@ -7562,8 +7562,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.SEA_DRAGON).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.SEA_DRAGON;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	    },
 	    // is present
@@ -7598,8 +7598,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        transformations.LowerBodyTaur(LowerBody.GRYPHON).applyEffect(doOutput);
 	      }
 
-	      player.legCount = legCount;
 	      player.lowerBody = LowerBody.GRYPHON;
+	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
 	    },
 	    // is present
