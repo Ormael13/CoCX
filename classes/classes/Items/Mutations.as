@@ -3872,6 +3872,13 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
         }*/
+		if (player.hasPerk(PerkLib.DivineKnowledge)) {
+			//Smart enough for Mental Shield and doesnt have it
+			/*if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
+				player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
+			}*/
+		}
     }
 
 	public function redManuscript(player:Player):void {
