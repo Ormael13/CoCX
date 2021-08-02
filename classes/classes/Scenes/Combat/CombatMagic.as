@@ -1494,7 +1494,7 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(1250) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(250)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(1250)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.DivineKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
@@ -1514,7 +1514,8 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function buildHexMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		var badLustForBlack:Boolean        = player.lust < getBlackMagicMinLust();
+		var badLustForBlack:Boolean = player.lust < getBlackMagicMinLust();
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		//HEX MAGIC
 		if (player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
@@ -1536,8 +1537,12 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(750)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(750)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(750) && player.HP < spellCostBlack(750)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(750)) {
+				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.LifeSiphon)) {
 				bd.disable("You're still linked to the enemy.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
@@ -1554,8 +1559,12 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(350)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(350)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(350) && player.HP < spellCostBlack(350)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(350)) {
+				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownConsumingDarkness)) {
 				bd.disable("You need more time before you can cast Consuming darkness again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
@@ -1572,8 +1581,12 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(400)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(400)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(400) && player.HP < spellCostBlack(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownCurseOfDesire)) {
 				bd.disable("You need more time before you can cast Curse of Desire again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
@@ -1590,8 +1603,12 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(300)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(300)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(300) && player.HP < (spellCostBlack(300) + player.maxHP() * .5)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostBlack(300) + player.maxHP() * .5)) {
+				bd.disable("Your hp is too low to cast this spell.");
 			} else if(player.HP < player.maxHP() * .5) {
 				bd.disable("Your HP is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownCurseOfWeeping)) {
@@ -1623,6 +1640,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(500)) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Aegis)) {
+				bd.disable("Your Aegis is still active.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsExorcise)) {
@@ -1661,6 +1680,48 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(600)) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.DivineShield)) {
+				bd.disable("Your Divine Shield is still active.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) {
+			bd = buttons.add("Thunderstorm", spellThunderstorm)
+					.hint("Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds.  " +
+							"\n\nMana Cost: " + spellCostWhite(1200) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(1200)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1200) && player.HP < spellCostWhite(1200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(1200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Thunderstorm)) {
+				bd.disable("Can be casted only once per combat.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) {
+			bd = buttons.add("TearsOfDenial", spellTearsOfDenial)
+					.hint("When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away.  " +
+							"\n\nMana Cost: " + spellCostWhite(3000) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(3000)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(3000) && player.HP < spellCostWhite(3000)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(3000)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.TearsOfDenial)) {
+				bd.disable("Can be casted only once per combat.");
 			}
 		}
 	}
@@ -3328,13 +3389,13 @@ public class CombatMagic extends BaseCombatContent {
 			var lifetap:Number = 0;
 			lifetap += Math.round(player.maxHP() * .25);
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifetap = Math.round(lifetap * 1.2);
-			/*if (player.hasPerk(PerkLib.CorruptMagic)) {
+			if (player.hasPerk(PerkLib.CorruptMagic)) {
 				if (monster.cor >= 66) lifetap = Math.round(lifetap * 1.0);
 				else if (monster.cor >= 50) lifetap = Math.round(lifetap * 1.1);
 				else if (monster.cor >= 25) lifetap = Math.round(lifetap * 1.2);
 				else if (monster.cor >= 10) lifetap = Math.round(lifetap * 1.3);
 				else lifetap = Math.round(lifetap * 1.4);
-			}*/
+			}
 			outputText("You proceed to cut your hand and draw a small pattern. You feel your magical reservoirs fill back up by a significant amount.");
 			HPChange(-lifetap, false);
 			player.mana += lifetap;
@@ -3353,7 +3414,8 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellLifeSiphon():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(750, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(750)) player.HP -= spellCostBlack(750);
+		else useMana(750, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3386,15 +3448,16 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifesiphon = Math.round(lifesiphon * 1.2);
 			if (player.hasPerk(PerkLib.CorruptMagic)) {
 				if (player.hasStatusEffect(StatusEffects.DarkRitual)) lifesiphon *= 2;
-				/*if (monster.cor >= 66) lifesiphon = Math.round(lifesiphon * 1.0);
+				if (monster.cor >= 66) lifesiphon = Math.round(lifesiphon * 1.0);
 				else if (monster.cor >= 50) lifesiphon = Math.round(lifesiphon * 1.1);
 				else if (monster.cor >= 25) lifesiphon = Math.round(lifesiphon * 1.2);
 				else if (monster.cor >= 10) lifesiphon = Math.round(lifesiphon * 1.3);
-				else lifesiphon = Math.round(lifesiphon * 1.4);*/
+				else lifesiphon = Math.round(lifesiphon * 1.4);
 			}
 			outputText("You wave a sign linking yourself to " + monster.a + monster.short + " as you begin to funnel its health and vitality to yourself.");
 			monster.HP -= lifesiphon;
-			HPChange(lifesiphon, false);
+			if (player.hasStatusEffect(StatusEffects.DarkRitual)) HPChange((player.maxHP() * 0.15), false);
+			else HPChange((player.maxHP() * 0.05), false);
 			player.createStatusEffect(StatusEffects.LifeSiphon, 15, lifesiphon, 0, 0);
 			MagicAddonEffect();
 		}
@@ -3411,7 +3474,8 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellConsumingDarkness():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(350, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(350)) player.HP -= spellCostBlack(350);
+		else useMana(350, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3468,7 +3532,8 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellCurseOfDesire():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(400, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(400)) player.HP -= spellCostBlack(400);
+		else useMana(400, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3532,7 +3597,8 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellCurseOfWeeping():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(300, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(300)) player.HP -= spellCostBlack(300);
+		else useMana(300, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3589,7 +3655,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellAegis():void {
 		clearOutput();
 		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(500);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500)) player.HP -= spellCostWhite(500);
 		else useMana(500,5);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3619,7 +3685,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellExorcise():void {
 		clearOutput();
 		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(400);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(400)) player.HP -= spellCostWhite(400);
 		else useMana(400,5);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3634,11 +3700,14 @@ public class CombatMagic extends BaseCombatContent {
         else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
         else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
         else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-		if (monster.cor < 33) damage = Math.round(damage * 1.0);
-		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-		else damage = Math.round(damage * 1.4);
+		if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
+		if (player.hasPerk(PerkLib.DivineArmament)) {
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3663,7 +3732,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellDivineShield():void {
 		clearOutput();
 		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(600);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(600)) player.HP -= spellCostWhite(600);
 		else useMana(600,5);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3675,6 +3744,71 @@ public class CombatMagic extends BaseCombatContent {
 		var DivineShieldDuration:Number = 6;
 		DivineShieldDuration += perkRelatedDurationBoosting();
 		player.createStatusEffect(StatusEffects.DivineShield,40,DivineShieldDuration,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellThunderstorm():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1200)) player.HP -= spellCostWhite(1200);
+		else useMana(1200,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
+		if (player.hasPerk(PerkLib.DivineArmament)) {
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
+		player.createStatusEffect(StatusEffects.Thunderstorm,damage,30,0,0);
+		outputText("You call upon the anger of the gods to smite your foe and they gladly answer with thunder. Lightning begins to strike down upon your opponent"+(monster.plural ? "s":"")+" with perfect precision.");
+		doLightingDamage(damage, true, true);
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellTearsOfDenial():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(3000)) player.HP -= spellCostWhite(3000);
+		else useMana(3000,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You call on the power of mercy in order to deny defeat. A small aura of magic shields your heart as your spell takes effect, ready to safeguard your victory.\n\n");
+		player.createStatusEffect(StatusEffects.TearsOfDenial,1,0,0,0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;

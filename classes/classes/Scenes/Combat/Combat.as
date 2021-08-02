@@ -475,16 +475,31 @@ public class Combat extends BaseContent {
     }
 
     public function endHpLoss():void {
-        monster.won_(true, false);
+		if (player.hasStatusEffect(StatusEffects.TearsOfDenial) && player.statusEffectv1(StatusEffects.TearsOfDenial) == 1) {
+			player.addStatusValue(StatusEffects.TearsOfDenial, 1, -1);
+			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To " + monster.a + monster.short + " dismay you get back up, still undefeated and ready to keep fighting.");
+			player.HP = player.maxOverHP();
+			player.lust = player.minLust();
+			doNext(curry(combatMenu, true));
+		}
+        else monster.won_(true, false);
     }
 
     public function endLustLoss():void {
-        if (player.hasStatusEffect(StatusEffects.Infested) && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-            flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-            SceneLib.mountain.wormsScene.infestOrgasm();
-            monster.won_(false, true);
-        } else {
-            monster.won_(false, false);
+		if (player.hasStatusEffect(StatusEffects.TearsOfDenial) && player.statusEffectv1(StatusEffects.TearsOfDenial) == 1) {
+			player.addStatusValue(StatusEffects.TearsOfDenial, 1, -1);
+			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To " + monster.a + monster.short + " dismay you get back up, still undefeated and ready to keep fighting.");
+			player.HP = player.maxOverHP();
+			player.lust = player.minLust();
+			doNext(curry(combatMenu, true));
+		}
+        else {
+			if (player.hasStatusEffect(StatusEffects.Infested) && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
+				SceneLib.mountain.wormsScene.infestOrgasm();
+				monster.won_(false, true);
+			}
+			else monster.won_(false, false);
         }
     }
 
@@ -8119,6 +8134,13 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 2, -1);
         }
         monster.combatRoundUpdate();
+		//Thunderstorm
+		if (player.hasStatusEffect(StatusEffects.Thunderstorm) && player.statusEffectv2(StatusEffects.Thunderstorm) > 0) {
+			player.addStatusValue(StatusEffects.Thunderstorm, 2, -1);
+            outputText("<b>A bolt of divine lightning falls from the sky and strikes "+monster.a+monster.short+". ");
+            monster.takeLightningDamage(player.statusEffectv1(StatusEffects.Thunderstorm), true);
+            outputText("\n\n");
+		}
         //[Silence warning]
         if (player.hasStatusEffect(StatusEffects.ThroatPunch)) {
             player.addStatusValue(StatusEffects.ThroatPunch, 1, -1);
@@ -8346,7 +8368,6 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2+power + rand(4));
             else monster.lust += monster.lustVuln * (2+power+ rand(4));
         }
-
         //Unicorn and Bicorn aura
         //Unicorn
         if (player.hasPerk(PerkLib.AuraOfPurity)) {
@@ -8393,7 +8414,6 @@ public class Combat extends BaseContent {
                 outputText("Your opponent seems not to be affected by the cleansing flames of your aura of purity. Probably because [monster he] has no corruption within [monster his] body.");
             }
         }
-
         //Bicorn
         if (player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
@@ -8475,7 +8495,6 @@ public class Combat extends BaseContent {
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
-
         //Lust storm
         if (player.hasStatusEffect(StatusEffects.lustStorm)) {
             var damage0:Number = scalingBonusIntelligence() * spellModWhite();
@@ -8581,7 +8600,6 @@ public class Combat extends BaseContent {
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
         }
-
         //Black Frost Aura
         if (player.hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore()>=14) {
             if (!monster.hasPerk(PerkLib.IceNature)) {
@@ -8617,7 +8635,6 @@ public class Combat extends BaseContent {
                 outputText("Your opponent seems not to be affected by the cold of your aura of black frost. Probably because [monster he] is immune to cold temperature effects.");
             }
         }
-
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
             dynStats("lus", 3);
@@ -10026,6 +10043,8 @@ public class Combat extends BaseContent {
         regeneration(true);
         if (player.lust >= player.maxLust()) doNext(endLustLoss);
         if (player.HP <= player.minHP()) doNext(endHpLoss);
+		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
 
     public function regeneration(combat:Boolean = true):void {

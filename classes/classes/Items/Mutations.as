@@ -3888,6 +3888,16 @@ public final class Mutations extends MutationsHelper {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Divine Shield.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDivineShield, 0, 0, 0, 0);
 			}
+			//Smart enough for Thunderstorm and doesnt have it
+			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Thunderstorm.</b>");
+				player.createStatusEffect(StatusEffects.KnowsThunderstorm, 0, 0, 0, 0);
+			}
+			//Smart enough for Tears of Denial and doesnt have it
+			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Tears of Denial.</b>");
+				player.createStatusEffect(StatusEffects.KnowsTearsOfDenial, 0, 0, 0, 0);
+			}
 		}
     }
 
