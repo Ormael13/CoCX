@@ -3649,8 +3649,9 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		player.createStatusEffect(StatusEffects.CooldownExorcise,2,0,0,0);
-		outputText("Your [weapon] begins to glow as you charge and deliver a mighty strike. As the mystical blow strikes your opponent"+(monster.plural ? "s":"")+", the magic explodes forward from your weapon in the shape of the sigil of the Marethian divine pantheon, damaging your foe"+(monster.plural ? "s":"")+" further and throwing "+monster.pronoun2+" back.\n\n");
-		
+		outputText("Your [weapon] begins to glow as you charge and deliver a mighty strike. As the mystical blow strikes your opponent"+(monster.plural ? "s":"")+", the magic explodes forward from your weapon in the shape of the sigil of the Marethian divine pantheon, damaging your foe"+(monster.plural ? "s":"")+" further and throwing "+monster.pronoun2+" back.");
+		doMagicDamage(damage, true, true);
+		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -5354,4 +5355,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}
