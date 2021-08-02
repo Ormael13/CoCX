@@ -316,9 +316,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_name + " stops crying and looks at you with her big eyes, letting out a cute laugh in response.\n"+
 			"You think she likes it. Having solved this important matter, you drift asleep with " + _name + " still hugging your chest.\n\n"+
 			"When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.\n" +
-			"You are hardly surprised, already knowing how short most pregnancies are in Mareth.");
-			if (player.inte > 50) outputText("Maybe it’s due to how time and space distort here?");
-			outputText("Still, you had hoped this phase would have lasted at least a little bit longer.");
+			"You are hardly surprised, already knowing how short most pregnancies are in Mareth. ");
+			if (player.inte > 50) outputText("Maybe it’s due to how time and space distort here? ");
+			outputText("Still, you had hoped this phase would have lasted at least a little bit longer. ");
 			if(isCorrupt) {
 				outputText("Your daughter wakes up as well, opening her beautiful crimson eyes to the world.\n" +
 				"She has silver hair and twilight black fur.");
@@ -327,8 +327,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				outputText("Your daughter wakes up as well, opening her beautiful azure eyes to the world.\n" +
 				"She has platinum blonde hair and white fur as befits an unicorn.");
 			}
-			outputText("You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older?");
-			if (player.inte > 50) outputText("Does make sense, otherwise they would cause some nasty internal damage during birth.");
+			outputText("You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older? ");
+			if (player.inte > 50) outputText("Does make sense, otherwise they would cause some nasty internal damage during birth. ");
 			outputText("<i>\"Mom, is something wrong?\"</i>\n" +
 			"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
 			"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
