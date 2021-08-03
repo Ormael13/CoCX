@@ -143,6 +143,21 @@ package classes.Scenes
 			outputText("-New white spell: Aegis. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence) Cost 500 mana.\n");
 			outputText("-New white spell: Exorcise. It can be learned by using white book after picking Divine Knowledge perk. Effect: Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt. Cost 400 mana. (2 turns cooldown)\n");
 			outputText("-New white spell: Divine shield. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase magic resistance by 40%. Cost 600 mana.\n");
+			outputText("-New white spell: Thunderstorm. It can be learned by using white book after picking Divine Knowledge perk. Effect: Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds. Cost 1200 mana. ONCE PER FIGHT\n");
+			outputText("-New white spell: Tears of Denial. It can be learned by using white book after picking Divine Knowledge perk. Effect: When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away. Cost 3000 mana. ONCE PER FIGHT\n");
+			outputText("-Nosferatu spell been moved to black magic again (yay...) and Heal spell recievied 6 turn cooldown after use. All recently added white/black magic spells can be taught by Dominika (beside fire/ice spell, which are rewards from paladin/archmage quests).\n");
+			outputText("-New white spell: Mental Shield. It can be learned by using white book. Effect: Protects against lust effects for 10 rounds, halving the damage. Cost 300 mana. (10 turns cooldown)\n");
+			outputText("-New gray spell: Clear Mind. It can be learned by using grey book. Effect: Clear some lust by taking physical wounds. Allows you to break out of charm and ignore stun. (Available while stunned) Cost 100 mana. (5 turns cooldown)\n");
+			outputText("-New gray spell: Balance of Life. It can be learned by using grey book. Effect: Heals for 5% of your hp when dealing spell damage.\n");
+			outputText("-New white spell: Cure. It can be learned by using white book. Effect: Negate all status ailments. Restore stat damaged by poison. Cost 500 mana. (7 turns cooldown)\n");
+			outputText("-New gray spell: Energy Drain. It can be learned by using grey book. Effect: Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost). Cost 350 mana. (7 turns cooldown)\n");//
+			outputText("-New gray spell: Restore. It can be learned by using grey book. Effect: Heal for a decent amount of health and regenerate a little over time. Cost 80 mana. (8 turns cooldown)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -168,6 +183,8 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -240,6 +257,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -266,7 +285,8 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			utputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
 			outputText("\n");
@@ -282,26 +302,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1098,7 +1098,7 @@ package classes.Scenes
 			outputText("-New range weapon (by Liadri): Harpoon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Beach area. Cost 1030 gems. Base atk is 50 and ammo clip size 1. +20% dmg underwater.\n");
 			outputText("-New range weapon (by Liadri): Tripxi Fatbilly - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 5230 gems. Base atk is 260 and ammo clip size 1. Can't use multishoot, can't be used with sneak range attack, can't crit and it deal AoE damage. It's 2H Firearm type range weapon.\n");
 			outputText("-New black spell: Lifetap. It can be learned by using black book after picking Hex Knowledge perk. Effect: Sacrifice a quarter of your hp to recover a quarter of your mana.\n");
-			outputText("-New black spell: Life syphon. It can be learned by using black book after picking Hex Knowledge perk. Effect: Create a funnel between you and your target, forcefully stealing its vitality to recover your own. (Deals low damage but last 15 round.)\n");
+			outputText("-New black spell: Life siphon. It can be learned by using black book after picking Hex Knowledge perk. Effect: Create a funnel between you and your target, forcefully stealing its vitality to recover your own. (Deals low damage but last 15 round.)\n");
 			outputText("-New black spell: Consuming darkness. It can be learned by using black book after picking Hex Knowledge perk. Effect: For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.\n");
 			outputText("-New black spell: Curse of Desire. It can be learned by using black book after picking Hex Knowledge perk. Effect: Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.\n");
 			outputText("-New black spell: Curse of Weeping. It can be learned by using black book after picking Hex Knowledge perk. Effect: Draw your own blood (50%) and inflict on your target a terrible curse, dealing high damage for 6 rounds.\n");
