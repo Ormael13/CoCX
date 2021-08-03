@@ -40,10 +40,19 @@ package classes.Scenes
 			outputText("-New tier 3 misc lvl-up perk: Lift Off. Req. Aerobatics perk, 45+ str and 40+ spe. Effect: Allows you to start combat already flying.\n");
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to tou multi and +60 to wis multi (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
+			outputText("-New tier 7 libido lvl-up perk: Prestige Job: Bindmaster. Req. Job: Eromancer and Guardian perks, 200+ lib. Effect: +20 to tou multi and +60 to lib multi (scalable with NG tiers), gain the ability to tie up opponents using a whip (work similar to naga grapple).\n");
 			outputText("-New tier 8 wisdom lvl-up perk: Greater harvest. Req. Prestige Job: Necromancer perk. Effect: A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.\n");
+			outputText("-New tier 8 libido lvl-up perk: Unbreakable bind. Req. Prestige Job: Bindmaster perk. Effect: Improves all binding abilities efficiency by 100%.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Grand Grey Archmage. Req. Grey Archmage perk and 225+ int. Effect: Increases grey spell strength by 40%, mana pool by 600, lust bar by 160, regain it 100% faster. Grey spells can be cast without limitation due to current lust.\n");
 			outputText("-New tier 9 wisdom lvl-up perk: Bone soul. Req. Greater harvest perk. Effect: When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%. Increase limit of stored demonic bones by 100.\n");
+			outputText("-New tier 9 libido lvl-up perk: Sadomasochism. Req. Unbreakable bind perk. Effect: You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Skeleton Lord. Req. Bone soul perk. Effect: You may now control up to 10 skeleton of each type. Allow to levitate all skeletons.\n");
+			outputText("-New tier 10 libido lvl-up perk: Control freak. Req. Sadomasochism perk. Effect: Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.\n");
+			outputText("-New tier 10 soulforce lvl-up perk: Soul King. Req. Soul Tyrant and F class Heaven Tribulation Survivor perks; 200+ wis. Effect: Allow reaching 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)\n");
+			outputText("-New tier 10 soulforce lvl-up perk: Flesh Body: Overlord Stage. Req. Flesh Body: Elder Stage perk. Effect: Your reached fourth stage of body cultivating. (+10 to unarmed attack, +5 to armor, +4 to magic resistance, +500 max HP S.King, S.Emperor, S.Ancestor stages\n");
+			outputText("-New tier 10 soulforce lvl-up perk: Daoist: Overlord Stage. Req. Daoist: Elder Stage perk. Effect: Your reached fourth stage of Daoist path. (+50% soulskill/m.soulskill power, +60 max SF S.King, S.Emperor, S.Ancestor stages)\n");
+			outputText("-New tier 11 soulforce lvl-up perk: Soul Emperor. Req. Soul King perk and 220+ wis. Effect: Allow reaching 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)\n");
+			outputText("-New tier 12 soulforce lvl-up perk: Soul Ancestor. Req. Soul Emperor perk and 240+ wis. Effect: Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)\n");
 			outputText("-New event perk: H class Heaven Tribulation Survivor. Gained by surviving 3 rounds of H class Heaven tribulation attacks. Effects: +10% to all stats multi/+50 to sens. Allow to comprehend Dao of Elements.\n");
 			outputText("-New event perk: G class Heaven Tribulation Survivor. Gained by surviving 4 rounds of G class Heaven tribulation attacks. Effects: +15% to all stats multi/+75 to sens. Allow to use soulforce to fly without need for wings.\n");
 			outputText("-New event perk: F class Heaven Tribulation Survivor. Gained by surviving 5 rounds of F class Heaven tribulation attacks. Effects: +20% to all stats multi/+100 to sens. Allow to use create clone. It can be used as new body for PC Nascent Soul in case main body get destroyed.\n");
@@ -52,9 +61,16 @@ package classes.Scenes
 			outputText("-New black spell: Bone spirit. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage. Cost 5 demon bones to cast.\n");
 			outputText("-New black spell: Bone armor. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%. Cooldown: 10 turns.\n");
 			outputText("-New black spell: Boneshatter. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only, monster take 10-60(20)% strength drain from this (not work on boneless creatures: construct, elemental, ghost, goo, plant). Cooldown: 3 turns\n");
+			outputText("-New Blood Spell: Blood Shield - learned from Red Manuscript. Cost 20% of max Over HP. Would create crimson shield that will absorb dmg equal to cost of cast multiplied by blood spells power multiplier. In case caster already have other shields active it will the last shield that absorb the damage.\n");
+			outputText("-New Blood Spell: Blood Chains - learned from Red Manuscript. Cost 100 health. Would immobilize enemy (stun effect) for 2 turns and have cooldown of 3 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
+			outputText("-New Blood Spell: Blood Wave - learned from Red Manuscript. Cost 400 health. Deal AoE magic dmg and have cooldown of 5 turns. If used against large groups of enemies would deal much more damage.\n");
+			outputText("-New Blood Spell: Lifesteal Enchantment - learned from Red Manuscript. Cost 500 health. Adding lifesteal on melee (0.5%/1%/2%/4%) and range (1%) weapons attacks for 5 turns.\n");
+			outputText("-New Blood Spell: Blood Field - learned from Red Manuscript. Cost 600 health. Would form a field of blood on the ground that would drain enemy health and heal caster. Additionaly enemeis will have their speed reduced. Not effective against any target that aren't touching the ground (flying enemies or ones beneath the ground).\n");
 			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
 			outputText("-New necklace (by Ormael): Wrathless - buyable at Kaiba shop in Tel'Adre. Cost 4500 gems. +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
+			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison, water, earth, wind, blood. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
+			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
 			outputText("-Added new cultivators specific events: Heavenly Tribulations (H class, G class, F class). They last only for 3/4/5 turns and req. PC to survive tribulation attacks without dropping to min hp or maxing up lust bar.\n");
 			outputText("-Killing true demon will count now toward counter of true demons killed not imps (sadly it won't retroactively move all demons kills from imps count kills thou).\n");
 			outputText("-Teleporting Circle to move between each of River Dungeon Floors been instaled by... someone. It sstill req. to beat each floor boss/es to open teleport option to deeper floors but after that it will amke easier to travel deeper without need to go thro all previous floors.\n");
@@ -87,14 +103,7 @@ package classes.Scenes
 			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
 			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");///Water/Air/Earth
 			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
-			outputText("-New tier 10 soulforce lvl-up perk: Soul King. Req. Soul Tyrant and F class Heaven Tribulation Survivor perks; 200+ wis. Effect: Allow reaching 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)\n");
-			outputText("-New tier 10 soulforce lvl-up perk: Flesh Body: Overlord Stage. Req. Flesh Body: Elder Stage perk. Effect: Your reached fourth stage of body cultivating. (+10 to unarmed attack, +5 to armor, +4 to magic resistance, +500 max HP S.King, S.Emperor, S.Ancestor stages\n");
-			outputText("-New tier 10 soulforce lvl-up perk: Daoist: Overlord Stage. Req. Daoist: Elder Stage perk. Effect: Your reached fourth stage of Daoist path. (+50% soulskill/m.soulskill power, +60 max SF S.King, S.Emperor, S.Ancestor stages)\n");
-			outputText("-New tier 11 soulforce lvl-up perk: Soul Emperor. Req. Soul King perk and 220+ wis. Effect: Allow reaching 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)\n");
-			outputText("-New tier 12 soulforce lvl-up perk: Soul Ancestor. Req. Soul Emperor perk and 240+ wis. Effect: Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)\n");
 			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpected help in form of evolved twins for attacks and/or defense.\n");
-			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison, water, earth, wind, blood. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
-			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
 			outputText("-Exploring Forrest can trigger meeting with Wood Elfs. That carry a chance to become pernamenrtly TF'd into one of them. Or if correct decision will be chosen it would cause PC to never again meet them.\n");
 			outputText("-Grey Mage perk tier been lowered from tier 7 to tier 3 intelligence perk. Req. changed to having perk Grey Mage Apprentice and 125+ int. Effects changed to: Increases grey spell strength by 20%, mana pool by 300, lust bar by 40, regain it 50% faster. Treshold for white/black magic use effect stays unchanged.\n");
 			outputText("-Grey Archmage perk tier been lowered from tier 10 to tier 6 intelligence perk. Req. int lowered to 175+. Effects changed to: Increases grey spell strength by 30%, mana pool by 450, lust bar by 80 and regain mana 75% faster.\n");
@@ -102,10 +111,6 @@ package classes.Scenes
 			outputText("-Fire Storm and Ice Rain spells been moved from grey magic to tier 2 of white/black magic with matching change of scalling and added cooldowns. Polar Midnight and Meteor Shower are classied now as tier 3 white/black magic. All 4 spells got increase in mana cost to 500 (tier 2) or 1250 (tier 3).\n");
 			outputText("-Mana Shield changes by Shard: Mana Shield able to partial absorb damage instead of all dmg or none approach.\n");
 			outputText("-Depravatio, Element of Corruption and Puritas, Element of Purity are worth each 960 gems and effect changed from: x1,6 spellpower to +60% and then x1,6 spellpower. Ascensus, Element of Ascension is worth now 2400 gems and effects changed from: x1,8x spellpower to +150% spellpower and then x2,5 spellpower.\n");
-			outputText("-New tier 7 libido lvl-up perk: Prestige Job: Bindmaster. Req. Job: Eromancer and Guardian perks, 200+ lib. Effect: +20 to tou multi and +60 to lib multi (scalable with NG tiers), gain the ability to tie up opponents using a whip (work similar to naga grapple).\n");
-			outputText("-New tier 8 libido lvl-up perk: Unbreakable bind. Req. Prestige Job: Bindmaster perk. Effect: Improves all binding abilities efficiency by 100%.\n");
-			outputText("-New tier 9 libido lvl-up perk: Sadomasochism. Req. Unbreakable bind perk. Effect: You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)\n");
-			outputText("-New tier 10 libido lvl-up perk: Control freak. Req. Sadomasochism perk. Effect: Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.\n");
 			outputText("-In Journey to the east appearted yet another weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless stat points (after capping all core stats) and deeply lacking spare perk points. But be warned that service not come cheap either... but what is few stones for such rich adventure as your PC, right?\n");
 			outputText("-Fasting Pill can be bought by non cultivator PC's too. But it effectivness is now 2x lower and duration 3 times shorter.\n");
 			outputText("-Flames/Icicles of Love and Storm of Sisterhood/Night of Brotherhood soulskills been slight changed. Their are considered (Rankless) instead of (Basic Rank), they not req. any cultivation perk to be bought (that mean they on first stall of golem merchant now). Due to reduction of req. their power been decreased, less lust/wrath used and cooldown decreased to 1 turn.\n");
@@ -114,11 +119,6 @@ package classes.Scenes
 			outputText("-New Blood Soulskill: Heart Seeker - learned from Crimson Jade. Cost 120 health. Deal true dmg and have cooldown of 3 turns.\n");
 			outputText("-New Blood Soulskill: Blood Dewdrops - learned from Crimson Jade. Cost 240 health. Deal AoE phys dmg and have cooldown of 2 turns.\n");
 			outputText("-New Blood Soulskill: Blood Requiem - learned from Crimson Jade. Cost 150 health. Deal phys dmg and have cooldown of 4 turns. Would also reduce healing effects on enemies by 20% (constructs, elementals, flesh constructs, ghosts) / 50% (plants) / 80% (rest enemy types) for 2 turns (4 turns from SF variant). Debuff duration stacks.\n");
-			outputText("-New Blood Spell: Blood Shield - learned from Red Manuscript. Cost 20% of max Over HP. Would create crimson shield that will absorb dmg equal to cost of cast multiplied by blood spells power multiplier. In case caster already have other shields active it will the last shield that absorb the damage.\n");
-			outputText("-New Blood Spell: Blood Chains - learned from Red Manuscript. Cost 100 health. Would immobilize enemy (stun effect) for 2 turns and have cooldown of 3 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
-			outputText("-New Blood Spell: Blood Wave - learned from Red Manuscript. Cost 400 health. Deal AoE magic dmg and have cooldown of 5 turns. If used against large groups of enemies would deal much more damage.\n");
-			outputText("-New Blood Spell: Lifesteal Enchantment - learned from Red Manuscript. Cost 500 health. Adding lifesteal on melee (0.5%/1%/2%/4%) and range (1%) weapons attacks for 5 turns.\n");
-			outputText("-New Blood Spell: Blood Field - learned from Red Manuscript. Cost 600 health. Would form a field of blood on the ground that would drain enemy health and heal caster. Additionaly enemeis will have their speed reduced. Not effective against any target that aren't touching the ground (flying enemies or ones beneath the ground).\n");
 			outputText("-Added Water & Earth elmental attack type. Water and Earth elementals dmg been changed to those new types of elemental dmg.\n");
 			outputText("-Added Acid elmental attack type. Acid Spit, Hydra Acid Breath specials dmg been changed to this new type of elemental dmg.\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 100+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
@@ -140,6 +140,27 @@ package classes.Scenes
 			outputText("-New tier 9 intelligence lvl-up perk: Divine armament. Req. Divine Knowledge perk and 250+ int. Effect: Charge weapon/armor spell power is doubled and works at full power even when using heavy armor. If wearing a robe, PC gains a bonus to armor equal to 1/3 of its level. Staves wielded without a shield can now be used to block (10%) and gain a tripled base damage value on physical attacks.\n");
 			outputText("-New tier 10 intelligence lvl-up perk: Pure magic. Req. Divine armament perk and 275+ int. Effect: Your spells gain aligned damage, dealing more damage against the corrupt. Buff spells now last for the battle duration.\n");
 			outputText("-New tier 10 intelligence lvl-up perk: Corrupt magic. Req. Dark Ritual perk and 275+ int. Effect: Your spells gain aligned damage, dealing more damage against the pure. Spells that drain health heals for twice as much while Dark Ritual is active.\n");
+			outputText("-New white spell: Aegis. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence) Cost 500 mana.\n");
+			outputText("-New white spell: Exorcise. It can be learned by using white book after picking Divine Knowledge perk. Effect: Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt. Cost 400 mana. (2 turns cooldown)\n");
+			outputText("-New white spell: Divine shield. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase magic resistance by 40%. Cost 600 mana.\n");
+			outputText("-New white spell: Thunderstorm. It can be learned by using white book after picking Divine Knowledge perk. Effect: Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds. Cost 1200 mana. ONCE PER FIGHT\n");
+			outputText("-New white spell: Tears of Denial. It can be learned by using white book after picking Divine Knowledge perk. Effect: When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away. Cost 3000 mana. ONCE PER FIGHT\n");
+			outputText("-Nosferatu spell been moved to black magic again (yay...) and Heal spell recievied 6 turn cooldown after use. All recently added white/black magic spells can be taught by Dominika (beside fire/ice spell, which are rewards from paladin/archmage quests).\n");
+			outputText("-New white spell: Mental Shield. It can be learned by using white book. Effect: Protects against lust effects for 10 rounds, halving the damage. Cost 300 mana. (10 turns cooldown)\n");
+			outputText("-New gray spell: Clear Mind. It can be learned by using grey book. Effect: Clear some lust by taking physical wounds. Allows you to break out of charm and ignore stun. (Available while stunned) Cost 100 mana. (5 turns cooldown)\n");
+			outputText("-New gray spell: Balance of Life. It can be learned by using grey book. Effect: Heals for 5% of your hp when dealing spell damage.\n");
+			outputText("-New white spell: Cure. It can be learned by using white book. Effect: Negate all status ailments. Restore stat damaged by poison. Cost 500 mana. (7 turns cooldown)\n");
+			outputText("-New gray spell: Energy Drain. It can be learned by using grey book. Effect: Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost). Cost 350 mana. (7 turns cooldown)\n");//
+			outputText("-New gray spell: Restore. It can be learned by using grey book. Effect: Heal for a decent amount of health and regenerate a little over time. Cost 80 mana. (8 turns cooldown)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -149,7 +170,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
-			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen\n");/*ostatni punkt changelogu
+			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -162,6 +183,9 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -232,6 +256,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -257,7 +284,9 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			utputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
 			outputText("\n");
@@ -273,6 +302,22 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1053,7 +1098,7 @@ package classes.Scenes
 			outputText("-New range weapon (by Liadri): Harpoon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Beach area. Cost 1030 gems. Base atk is 50 and ammo clip size 1. +20% dmg underwater.\n");
 			outputText("-New range weapon (by Liadri): Tripxi Fatbilly - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 5230 gems. Base atk is 260 and ammo clip size 1. Can't use multishoot, can't be used with sneak range attack, can't crit and it deal AoE damage. It's 2H Firearm type range weapon.\n");
 			outputText("-New black spell: Lifetap. It can be learned by using black book after picking Hex Knowledge perk. Effect: Sacrifice a quarter of your hp to recover a quarter of your mana.\n");
-			outputText("-New black spell: Life syphon. It can be learned by using black book after picking Hex Knowledge perk. Effect: Create a funnel between you and your target, forcefully stealing its vitality to recover your own. (Deals low damage but last 15 round.)\n");
+			outputText("-New black spell: Life siphon. It can be learned by using black book after picking Hex Knowledge perk. Effect: Create a funnel between you and your target, forcefully stealing its vitality to recover your own. (Deals low damage but last 15 round.)\n");
 			outputText("-New black spell: Consuming darkness. It can be learned by using black book after picking Hex Knowledge perk. Effect: For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.\n");
 			outputText("-New black spell: Curse of Desire. It can be learned by using black book after picking Hex Knowledge perk. Effect: Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.\n");
 			outputText("-New black spell: Curse of Weeping. It can be learned by using black book after picking Hex Knowledge perk. Effect: Draw your own blood (50%) and inflict on your target a terrible curse, dealing high damage for 6 rounds.\n");

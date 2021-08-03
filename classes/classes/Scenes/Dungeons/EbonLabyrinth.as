@@ -375,7 +375,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				}
 				outputText("You finally find the center of the labyrinth, somewhat exhausted. You can see the rose from here in all its dark beauty. As you are about to approach it, a monstrous creature lands right in front of you. This beast has no less than four heads! A dragon on the left, a lion on the center, a goat on ");
 				outputText("the right and, at the tip of its tail, the head of a snake! All four heads roar a warning at you as the beast stands up on its leonine legs, easily twelve feet tall, its massive wings opening in a threatening display revealing nothing short of four erect thirty inches cock already drooling precum!\n\n");
-				outputText("\"<i>Foolish intruder, you walked to your death! No one but me will ever touch the rose for it is mine and no one else's! I will rape you and then devour you alive!</i>\"\n\n");
+				outputText("\"<i>Foolish intruder, you've walked to your death. You come seeking the rose? Let's see how long your search lasts once you're in the belly of the beast!</i>\"\n\n");
 				outputText("<b>It's too late to run as you're fighting the chaos chimera!</b>");
 				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss1, 1, 0, 0, 0);
 				startCombat(new ChaosChimera(), true);

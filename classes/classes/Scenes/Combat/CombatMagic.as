@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
+import classes.Items.ShieldLib;
 import classes.PerkLib;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
@@ -20,6 +21,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
+import classes.EngineCore;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -707,6 +709,19 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		return whiteLustCap;
 	}
+	
+	public function perkRelatedDurationBoosting():Number {
+		var perkRelatedDB:Number = 0;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsII)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsV)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) perkRelatedDB += 1;
+		if (player.hasPerk(PerkLib.EverLastingBuffs)) perkRelatedDB += 5;
+		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) perkRelatedDB += 5;
+		return perkRelatedDB;
+	}
 
 	internal function calcInfernoModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.RagingInferno)) {
@@ -1092,6 +1107,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your chosen path of magic locked out this spell.");
 			} else if(player.mana < healCostWhite(30)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellHeal)) {
+				bd.disable("You need more time before you can cast Heal again.");
 			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
 				bd.disable("Your ability to use white magic was sealed.");
 			}
@@ -1112,25 +1129,63 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(50)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+			bd = buttons.add("MentalShield", spellMentalShield)
+					.hint("Protects against lust effects for 10 rounds, halving the damage.  " +
+							"\n\nMana Cost: " + spellCostWhite(300) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on white magic.");
+			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
+				bd.disable("Your chosen path of magic locked out this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.MentalShield)) {
+				bd.disable("Mental Shield is already active and cannot be cast again.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(300)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(300) && player.HP < spellCostWhite(300)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(300)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellMentalShield)) {
+				bd.disable("You need more time before you can cast Mental Shield again.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsCure)) {
+			bd = buttons.add("Cure", spellCure)
+					.hint("Negate all status ailments. Restore stat damaged by poison.  " +
+							"\n\nMana Cost: " + spellCostWhite(500) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on white magic.");
+			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
+				bd.disable("Your chosen path of magic locked out this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(500)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500) && player.HP < spellCostWhite(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellCure)) {
+				bd.disable("You need more time before you can cast Cure again.");
 			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
 				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
-			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(500) + "");
+			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCostWhite(500) + "");
 			if (badLustForWhite) {
 				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(500)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(500)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(500) && player.HP < spellCost(500)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500) && player.HP < spellCostWhite(500)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(500)) {
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(500)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellFireStorm)) {
 				bd.disable("You need more time before you can cast Fire Storm again.");
@@ -1143,20 +1198,20 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
 			bd = buttons.add("Meteor Shower", spellMeteorShower)
 					.hint("Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times.  " +
-							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(1250) + "");
+							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCostWhite(1250) + "");
 			if (badLustForWhite) {
 				bd.disable("You are far too aroused to focus on white magic.");
 			} else if (inDungeon || player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
 				bd.disable("You can't use this spell inside small spaces. Unless you want get killed along with your enemies.");
 			} else if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				bd.disable("You can't use this spell underwater.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(1250)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(1250)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(1250) && player.HP < spellCost(1250)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1250) && player.HP < spellCostWhite(1250)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(1250)) {
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(1250)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
 				bd.disable("You need more time before you can cast Meteor Shower again.");
@@ -1455,16 +1510,16 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
-			bd = buttons.add("Ice Rain", spellIceRain).hint("Drawning your own lust to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  It carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(500) + "");
+			bd = buttons.add("Ice Rain", spellIceRain).hint("Drawning your own lust to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  It carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCostBlack(500) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(500)) {
+			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(500)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.DivineKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(500) && player.HP < spellCost(500)) {
+			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(500) && player.HP < spellCostBlack(500)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(500)) {
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(500)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellIceRain)) {
 				bd.disable("You need more time before you can cast Ice Rain again.");
@@ -1474,19 +1529,37 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+			bd = buttons.add("Nosferatu", spellNosferatu)
+					.hint("Vampirise the health of your foe, dealing damage and healing you back for 100% of the damage done." +
+							"\n\nMana Cost: " + healCostBlack(50) + "");
+			if (badLustForBlack) {
+				bd.disable("You aren't turned on enough to use any black magics.");
+			} else if (player.hasPerk(PerkLib.DivineKnowledge)) {
+				bd.disable("Your chosen path of magic locked out this spell.");
+			} else if(player.mana < healCostBlack(50)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellNosferatu)) {
+				bd.disable("You need more time before you can cast Nosferatu again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
 			bd = buttons.add("Polar Midnight", spellPolarMidnight)
 					.hint("Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  " +
-							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(1250) + "");
+							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCostBlack(1250) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(250)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(1250)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.DivineKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(1250) && player.HP < spellCost(1250)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(1250) && player.HP < spellCostBlack(1250)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(1250)) {
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(1250)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellPolarMidnight)) {
 				bd.disable("You need more time before you can cast Polar Midnight again.");
@@ -1500,7 +1573,8 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function buildHexMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		var badLustForBlack:Boolean        = player.lust < getBlackMagicMinLust();
+		var badLustForBlack:Boolean = player.lust < getBlackMagicMinLust();
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		//HEX MAGIC
 		if (player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
@@ -1522,8 +1596,12 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(750)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(750)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(750) && player.HP < spellCostBlack(750)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(750)) {
+				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.LifeSiphon)) {
 				bd.disable("You're still linked to the enemy.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
@@ -1540,9 +1618,13 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(350)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(350)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownConsumingDarkness)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(350) && player.HP < spellCostBlack(350)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(350)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellConsumingDarkness)) {
 				bd.disable("You need more time before you can cast Consuming darkness again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1558,9 +1640,13 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(400)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(400)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownCurseOfDesire)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(400) && player.HP < spellCostBlack(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfDesire)) {
 				bd.disable("You need more time before you can cast Curse of Desire again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1576,16 +1662,125 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any hex magics.");
 			} else if(player.cor < 80) {
 				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.mana < spellCostBlack(300)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(300)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(300) && player.HP < (spellCostBlack(300) + player.maxHP() * .5)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostBlack(300) + player.maxHP() * .5)) {
+				bd.disable("Your hp is too low to cast this spell.");
 			} else if(player.HP < player.maxHP() * .5) {
 				bd.disable("Your HP is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownCurseOfWeeping)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping)) {
 				bd.disable("You need more time before you can cast Curse of Weeping again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+	}
+	
+	public function buildDivineMenu(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
+
+		if (player.hasStatusEffect(StatusEffects.KnowsAegis)) {
+			bd = buttons.add("Aegis", spellAegis)
+					.hint("Increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence)  " +
+							"\n\nMana Cost: " + spellCostWhite(500) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(500)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500) && player.HP < spellCostWhite(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Aegis)) {
+				bd.disable("Your Aegis is still active.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsExorcise)) {
+			bd = buttons.add("Exorcise", spellExorcise)
+					.hint("Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt.  " +
+							"\n\nMana Cost: " + spellCostWhite(400) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(400)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(400) && player.HP < spellCostWhite(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellExorcise)) {
+				bd.disable("You need more time before you can cast Exorcise again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsDivineShield)) {
+			bd = buttons.add("DivineShield", spellDivineShield)
+					.hint("Increase magic resistance by 40%.  " +
+							"\n\nMana Cost: " + spellCostWhite(600) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(600)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(600) && player.HP < spellCostWhite(600)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(600)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.DivineShield)) {
+				bd.disable("Your Divine Shield is still active.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) {
+			bd = buttons.add("Thunderstorm", spellThunderstorm)
+					.hint("Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds.  " +
+							"\n\nMana Cost: " + spellCostWhite(1200) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(1200)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1200) && player.HP < spellCostWhite(1200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(1200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Thunderstorm)) {
+				bd.disable("Can be casted only once per combat.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) {
+			bd = buttons.add("TearsOfDenial", spellTearsOfDenial)
+					.hint("When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away.  " +
+							"\n\nMana Cost: " + spellCostWhite(3000) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on divine magic.");
+			} else if(player.cor > 20) {
+				bd.disable("Your corruption is too high to cast this spell.");
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(3000)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(3000) && player.HP < spellCostWhite(3000)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(3000)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.TearsOfDenial)) {
+				bd.disable("Can be casted only once per combat.");
 			}
 		}
 	}
@@ -1606,7 +1801,7 @@ public class CombatMagic extends BaseCombatContent {
 					.hint("Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%.  \n\n<b>Cooldown: 10 turns</b>  \n\nBones cost: 10");
 			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 10) {
 				bd.disable("You not have enough demon bones to use any this necromancer spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneArmor)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneArmor)) {
 				bd.disable("You need more time before you can cast Bone armor again.");
 			}
 		}
@@ -1619,7 +1814,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your enemy lack bones.");
 			} else if (monster.plural || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				bd.disable("You can only strike one target.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneshatter)) {
 				bd.disable("You need more time before you can cast Boneshatter again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1646,18 +1841,52 @@ public class CombatMagic extends BaseCombatContent {
 				}
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-			bd = buttons.add("Nosferatu", spellNosferatu)
-					.hint("Vampirise the health of your foe, dealing damage and healing you back for 100% of the damage done." +
-							"\n\nMana Cost: " + healCost(50) + "");
+		if (player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
+			bd = buttons.add("Energy Drain", spellEnergyDrain)
+					.hint("Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost).  " +
+							"\n\nMana Cost: " + spellCost(350) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");
-			} else if (player.mana < healCost(50)) {
+			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(350)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(350) && player.HP < spellCost(350)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(350)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellEnergyDrain)) {
+				bd.disable("You need more time before you can cast Energy Drain again.");
+			} else if (monster.hasStatusEffect(StatusEffects.EnergyDrain)) {
+				bd.disable("Energy Drain is still active.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsRestore)) {
+			bd = buttons.add("Restore", spellRestore)
+					.hint("Heal for a decent amount of health and regenerate a little over time.  " +
+							"\n\nMana Cost: " + healCost(80) + "");
+			if (badLustForGrey) {
+				bd.disable("You can't use any grey magics.");
+			} else if(player.mana < healCost(80)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellRestore)) {
+				bd.disable("You need more time before you can cast Restore again.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBalanceOfLife)) {
+			bd = buttons.add("BalanceOfLife", spellBalanceOfLife)
+					.hint("Heals for 5% of your hp when dealing spell damage." +
+							"\n\nMana Cost: " + spellCost(500) + "");
+			if (badLustForGrey) {
+				bd.disable("You can't use any grey magics.");
+			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(500)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(500) && player.HP < spellCost(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(500)) {
+				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
@@ -1843,6 +2072,7 @@ public class CombatMagic extends BaseCombatContent {
 				outputText(" in " + monster.a + monster.short + " through your magic!");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) HPChange((player.maxHP() * numberOfProcs * 0.05), false);
 	}
 	
 	public function spellBloodMissiles():void {
@@ -2279,7 +2509,8 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
-			player.createStatusEffect(StatusEffects.PlayerRegenerate,7,0,0,0);
+			if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) player.addStatusValue(StatusEffects.PlayerRegenerate,1,7);
+			else player.createStatusEffect(StatusEffects.PlayerRegenerate,7,0,0,0);
 			outputText(" This should hold up for about seven rounds.");
 		}
 		outputText("\n\n");
@@ -2315,14 +2546,7 @@ public class CombatMagic extends BaseCombatContent {
 			MightBoost = Math.round(MightBoost);
 			if (MightBoost > MightBoostCap) MightBoost = MightBoostCap;
 			var MightDuration:Number = 5;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsV)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) MightDuration += 1;
-			if (player.hasPerk(PerkLib.EverLastingBuffs)) MightDuration += 5;
-			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) MightDuration += 5;
+			MightDuration += perkRelatedDurationBoosting();
 			tempTou = MightBoost;
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = Math.round(MightBoost * 1.25);
 			else tempStr = MightBoost;
@@ -2410,14 +2634,7 @@ public class CombatMagic extends BaseCombatContent {
 			BlinkBoost = Math.round(BlinkBoost);
 			if (BlinkBoost > BlinkBoostCap) BlinkBoost = BlinkBoostCap;
 			var BlinkDuration:Number = 5;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsV)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) BlinkDuration += 1;
-			if (player.hasPerk(PerkLib.EverLastingBuffs)) BlinkDuration += 5;
-			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) BlinkDuration += 5;
+			BlinkDuration += perkRelatedDurationBoosting();
 			tempSpe = BlinkBoost;
 			var oldHPratio:Number = player.hp100/100;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
@@ -3148,7 +3365,7 @@ public class CombatMagic extends BaseCombatContent {
 			dura += plus2;
 		}
 		player.createStatusEffect(StatusEffects.BoneArmor,dura,0,0,0);
-		player.createStatusEffect(StatusEffects.CooldownBoneArmor,10,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellBoneArmor,10,0,0,0);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
@@ -3228,7 +3445,7 @@ public class CombatMagic extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.Boneshatter, shatterIt, 0, 0, 0);
 			monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
 		}
-		player.createStatusEffect(StatusEffects.CooldownBoneshatter,3,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellBoneshatter,3,0,0,0);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
@@ -3267,17 +3484,16 @@ public class CombatMagic extends BaseCombatContent {
 			var lifetap:Number = 0;
 			lifetap += Math.round(player.maxHP() * .25);
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifetap = Math.round(lifetap * 1.2);
-			/*if (player.hasPerk(PerkLib.CorruptMagic)) {
+			if (player.hasPerk(PerkLib.CorruptMagic)) {
 				if (monster.cor >= 66) lifetap = Math.round(lifetap * 1.0);
 				else if (monster.cor >= 50) lifetap = Math.round(lifetap * 1.1);
 				else if (monster.cor >= 25) lifetap = Math.round(lifetap * 1.2);
 				else if (monster.cor >= 10) lifetap = Math.round(lifetap * 1.3);
 				else lifetap = Math.round(lifetap * 1.4);
-			}*/
+			}
 			outputText("You proceed to cut your hand and draw a small pattern. You feel your magical reservoirs fill back up by a significant amount.");
 			HPChange(-lifetap, false);
-			player.mana += lifetap;
-			if (player.mana > player.maxMana()) player.mana = player.maxMana();
+			EngineCore.ManaChange(lifetap, false);
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -3292,7 +3508,8 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellLifeSiphon():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(750, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(750)) player.HP -= spellCostBlack(750);
+		else useMana(750, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3325,15 +3542,16 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifesiphon = Math.round(lifesiphon * 1.2);
 			if (player.hasPerk(PerkLib.CorruptMagic)) {
 				if (player.hasStatusEffect(StatusEffects.DarkRitual)) lifesiphon *= 2;
-				/*if (monster.cor >= 66) lifesiphon = Math.round(lifesiphon * 1.0);
+				if (monster.cor >= 66) lifesiphon = Math.round(lifesiphon * 1.0);
 				else if (monster.cor >= 50) lifesiphon = Math.round(lifesiphon * 1.1);
 				else if (monster.cor >= 25) lifesiphon = Math.round(lifesiphon * 1.2);
 				else if (monster.cor >= 10) lifesiphon = Math.round(lifesiphon * 1.3);
-				else lifesiphon = Math.round(lifesiphon * 1.4);*/
+				else lifesiphon = Math.round(lifesiphon * 1.4);
 			}
 			outputText("You wave a sign linking yourself to " + monster.a + monster.short + " as you begin to funnel its health and vitality to yourself.");
 			monster.HP -= lifesiphon;
-			HPChange(lifesiphon, false);
+			if (player.hasStatusEffect(StatusEffects.DarkRitual)) HPChange((player.maxHP() * 0.15), false);
+			else HPChange((player.maxHP() * 0.05), false);
 			player.createStatusEffect(StatusEffects.LifeSiphon, 15, lifesiphon, 0, 0);
 			MagicAddonEffect();
 		}
@@ -3350,14 +3568,15 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellConsumingDarkness():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(350, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(350)) player.HP -= spellCostBlack(350);
+		else useMana(350, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
-		player.createStatusEffect(StatusEffects.CooldownConsumingDarkness, 15, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownSpellConsumingDarkness, 15, 0, 0, 0);
 		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
 		//30% backfire!
 		var backfire:int = 30;
@@ -3407,14 +3626,15 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellCurseOfDesire():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(400, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(400)) player.HP -= spellCostBlack(400);
+		else useMana(400, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
-		player.createStatusEffect(StatusEffects.CooldownCurseOfDesire, 15, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownSpellCurseOfDesire, 15, 0, 0, 0);
 		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
 		//30% backfire!
 		var backfire:int = 30;
@@ -3471,14 +3691,15 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellCurseOfWeeping():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(300, 9);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(300)) player.HP -= spellCostBlack(300);
+		else useMana(300, 9);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
-		player.createStatusEffect(StatusEffects.CooldownCurseOfWeeping, 10, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping, 10, 0, 0, 0);
 		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
 		//30% backfire!
 		var backfire:int = 30;
@@ -3523,6 +3744,171 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
+	}
+	
+	public function spellAegis():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500)) player.HP -= spellCostWhite(500);
+		else useMana(500,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You call on divine protection in order to shield yourself against attacks."+(player.shield == ShieldLib.NOTHING ? " On your off-hand manifests a shield made of pure light, which will help deflect blows.":" Your shield begins to glow with white protective light, strengthening it as benevolent powers guide your hands, increasing your ability to block.")+"\n\n");
+		var AegisDuration:Number = 6;
+		AegisDuration += perkRelatedDurationBoosting();
+		var aegismagnitude:Number = 0;
+		if (spellModWhite() > 5) aegismagnitude += 5;
+		else aegismagnitude += spellModWhite();
+		if (player.inte / 50 > 5) aegismagnitude += 5;
+		else aegismagnitude += player.inte / 25;
+		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) aegismagnitude *= 1.1;
+		if (player.isUsingStaff() && player.shield == ShieldLib.NOTHING) aegismagnitude *= 3;
+		player.createStatusEffect(StatusEffects.Aegis,Math.round(aegismagnitude),AegisDuration,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellExorcise():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(400)) player.HP -= spellCostWhite(400);
+		else useMana(400,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		var damage:Number = scalingBonusIntelligence() * spellModBlack();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
+        else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
+        else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
+        else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
+        else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+		if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
+		if (player.hasPerk(PerkLib.DivineArmament)) {
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		player.createStatusEffect(StatusEffects.CooldownSpellExorcise,2,0,0,0);
+		outputText("Your [weapon] begins to glow as you charge and deliver a mighty strike. As the mystical blow strikes your opponent"+(monster.plural ? "s":"")+", the magic explodes forward from your weapon in the shape of the sigil of the Marethian divine pantheon, damaging your foe"+(monster.plural ? "s":"")+" further and throwing "+monster.pronoun2+" back.");
+		doMagicDamage(damage, true, true);
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellDivineShield():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(600)) player.HP -= spellCostWhite(600);
+		else useMana(600,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You usher a prayer for protection from the dark spells cast by the heretics and a powerful bubble of raw energy encases you, deflecting most of the magical assaults away.\n\n");
+		var DivineShieldDuration:Number = 6;
+		DivineShieldDuration += perkRelatedDurationBoosting();
+		player.createStatusEffect(StatusEffects.DivineShield,40,DivineShieldDuration,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellThunderstorm():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1200)) player.HP -= spellCostWhite(1200);
+		else useMana(1200,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
+		if (player.hasPerk(PerkLib.DivineArmament)) {
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
+		player.createStatusEffect(StatusEffects.Thunderstorm,damage,30,0,0);
+		outputText("You call upon the anger of the gods to smite your foe and they gladly answer with thunder. Lightning begins to strike down upon your opponent"+(monster.plural ? "s":"")+" with perfect precision.");
+		doLightingDamage(damage, true, true);
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellTearsOfDenial():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(3000)) player.HP -= spellCostWhite(3000);
+		else useMana(3000,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You call on the power of mercy in order to deny defeat. A small aura of magic shields your heart as your spell takes effect, ready to safeguard your victory.\n\n");
+		player.createStatusEffect(StatusEffects.TearsOfDenial,1,0,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
 	}
 	/*public function spell2IceRain():void {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -3659,8 +4045,8 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(500)) player.HP -= spellCost(500);
-		else useMana(500,1);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(500)) player.HP -= spellCostBlack(500);
+		else useMana(500,6);
 		if(handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -3746,6 +4132,59 @@ public class CombatMagic extends BaseCombatContent {
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
+	
+	public function spellNosferatu():void {
+		clearOutput();
+		doNext(combatMenu);
+		useMana(50, 11);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		player.createStatusEffect(StatusEffects.CooldownSpellNosferatu, 7, 0, 0, 0);
+		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		if(rand(100) < backfire) {
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			var nosferatu:Number = 0;
+			nosferatu += player.inte;
+			nosferatu += scalingBonusIntelligence();
+			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += scalingBonusWisdom();
+			nosferatu = Math.round(nosferatu * healMod() * spellModGrey());
+			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
+			if (monster.plural) outputText("s");
+			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
+			monster.HP -= nosferatu;
+			HPChange(nosferatu,false);
+			MagicAddonEffect();
+		}
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}
 
 	//(100) Polar Midnight - AoE Ice spell
 	public function spellPolarMidnight():void {
@@ -3826,8 +4265,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		else {
 			doNext(combatMenu);
-			if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(1250)) player.HP -= spellCost(1250);
-			else useMana(1250,1);
+			if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(1250)) player.HP -= spellCostBlack(1250);
+			else useMana(1250,6);
 			if(handleShell()){return;}
 			//if (monster is Doppleganger)
 			//{
@@ -4003,6 +4442,47 @@ public class CombatMagic extends BaseCombatContent {
 		enemyAI();
 	}
 	
+	public function spellClearMind():void {
+		clearOutput();
+		doNext(combatMenu);
+		useMana(100, 9);
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		if(rand(100) < backfire) {
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			outputText("As you incant the spell, you draw a small knife and cut your hand as the incantation ends, the jolt of pain clearing your mind and snapping you out of some of your lust.");
+			HPChange(-(player.maxHP() * 0.01), false);
+			if (player.hasStatusEffect(StatusEffects.IsabellaStunned)) player.removeStatusEffect(StatusEffects.IsabellaStunned);
+			if (player.hasStatusEffect(StatusEffects.Stunned)) player.removeStatusEffect(StatusEffects.Stunned);
+			if (player.hasStatusEffect(StatusEffects.Whispered)) player.removeStatusEffect(StatusEffects.Whispered);
+			if (player.hasStatusEffect(StatusEffects.Confusion)) player.removeStatusEffect(StatusEffects.Confusion);
+			if (player.hasStatusEffect(StatusEffects.Fear)) player.removeStatusEffect(StatusEffects.Fear);
+		}
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.HP <= player.minHP()) doNext(endHpLoss);
+		else enemyAI();
+	}/*
+	
 	public function spellNosferatu():void {
 		clearOutput();
 		doNext(combatMenu);
@@ -4053,6 +4533,127 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
+	}*/
+	
+//(35) Energy Drain
+	public function spellEnergyDrain():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(350)) player.HP -= spellCost(350);
+		else useMana(350, 1);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		if(rand(100) < backfire) {
+			outputText(" An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			outputText("You point at "+monster.a+monster.short+" and with a sharp pulling gesture you rip out some of their vigor for your own use. They won’t be hitting at full strength for a while.");
+			monster.createStatusEffect(StatusEffects.EnergyDrain, 7, 0, 0, 0);
+			var energydrain:Number = monster.maxMana() * 0.2;
+			if (energydrain > spellCost(1400)) energydrain = spellCost(1400);
+			EngineCore.ManaChange(Math.round(energydrain), false);
+		}
+		outputText("\n\n");
+		player.createStatusEffect(StatusEffects.CooldownSpellEnergyDrain,7,0,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}	
+	
+//(35) Restore
+	public function spellRestore():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(350)) player.HP -= spellCost(80);
+		else useMana(80, 9);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		if(rand(100) < backfire) {
+			outputText(" An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) player.addStatusValue(StatusEffects.PlayerRegenerate,1,7);
+			else player.createStatusEffect(StatusEffects.PlayerRegenerate,7,0,0,0);
+			outputText(" As you incant the spell, your wounds begins to close as if they never existed and you feel rejuvenated ready from battle! ");
+			spellHealEffect();
+		}
+		outputText("\n\n");
+		player.createStatusEffect(StatusEffects.CooldownSpellRestore,8,0,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}	
+
+//(35) Balance of Life
+	public function spellBalanceOfLife():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(500)) player.HP -= spellCost(500);
+		else useMana(500,1);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownSpellBalanceOfLife,8,0,0,0);
+		outputText("A red aura envelop you as you begin converting some of your destructive magic to healing.\n\n");
+		var durationBalanceOfLife:Number = 4;
+		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) durationBalanceOfLife *= 1.1;
+		player.createStatusEffect(StatusEffects.BalanceOfLife,Math.round(durationBalanceOfLife),0,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
 	}
 
 //(100) Fire Storm - AoE Fire spell
@@ -4060,8 +4661,8 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(500)) player.HP -= spellCost(500);
-		else useMana(500,1);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500)) player.HP -= spellCostWhite(500);
+		else useMana(500,5);
 		if(handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -4227,8 +4828,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		else {
 			doNext(combatMenu);
-			if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(1250)) player.HP -= spellCost(1250);
-			else useMana(1250,1);
+			if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1250)) player.HP -= spellCostWhite(1250);
+			else useMana(1250,5);
 			if(handleShell()){return;}
 			//if (monster is Doppleganger)
 			//{
@@ -4279,14 +4880,7 @@ public class CombatMagic extends BaseCombatContent {
 		ChargeWeaponBoost *= spellChargeWeaponWeaponSize();
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
 		var ChargeWeaponDuration:Number = 5;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsII)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsV)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) ChargeWeaponDuration += 1;
-		if (player.hasPerk(PerkLib.EverLastingBuffs)) ChargeWeaponDuration += 5;
-		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) ChargeWeaponDuration += 5;
+		ChargeWeaponDuration += perkRelatedDurationBoosting();
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,ChargeWeaponDuration,0,0);
 			statScreenRefresh();
@@ -4353,14 +4947,7 @@ public class CombatMagic extends BaseCombatContent {
 		ChargeArmorBoost *= spellChargeArmorType();
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
 		var ChargeArmorDuration:Number = 5;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsII)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsV)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) ChargeArmorDuration += 1;
-		if (player.hasPerk(PerkLib.EverLastingBuffs)) ChargeArmorDuration += 5;
-		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) ChargeArmorDuration += 5;
+		ChargeArmorDuration += perkRelatedDurationBoosting();
 		if (silent) {
 			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,ChargeArmorDuration,0,0);
 			statScreenRefresh();
@@ -4409,8 +4996,10 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. ");
 		spellHealEffect();
 		outputText("\n\n");
+		player.createStatusEffect(StatusEffects.CooldownSpellHeal,6,0,0,0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -4439,7 +5028,7 @@ public class CombatMagic extends BaseCombatContent {
 			heal *= 1.75;
 		}
 		heal = Math.round(heal);
-		outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
+		outputText("<b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
 		if (crit) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(heal,false);
 	}
@@ -5192,6 +5781,80 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) blizzardmagnitude *= 1.1;
 		player.createStatusEffect(StatusEffects.Blizzard,Math.round(blizzardmagnitude),0,0,0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+
+//(35) Mental Shield
+	public function spellMentalShield():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(300)) player.HP -= spellCost(300);
+		else useMana(300,1);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownSpellMentalShield,10,0,0,0);
+		outputText("You draw on your inner calm, forcing it out in the form of a powerful magical ward to weaken the effect of your opponent’s depraved attacks on you.\n\n");
+		var mentalshieldduration:Number = 10;
+		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) mentalshieldduration *= 1.1;
+		player.createStatusEffect(StatusEffects.MentalShield,Math.round(mentalshieldduration),0,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+
+//(35) Cure
+	public function spellCure():void {
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500)) player.HP -= spellCostWhite(500);
+		else useMana(500,5);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownSpellCure,7,0,0,0);
+		outputText("You channel white magic to rid yourself of all negative effect affecting you.\n\n");
+		if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.removeStatusEffect(StatusEffects.BurnDoT);
+		if (player.hasStatusEffect(StatusEffects.AcidSlap)) player.removeStatusEffect(StatusEffects.AcidSlap);
+		if (player.hasStatusEffect(StatusEffects.DriderKiss)) player.removeStatusEffect(StatusEffects.DriderKiss);
+		if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
+			player.removeStatusEffect(StatusEffects.AikoLightningArrow);
+            player.addCombatBuff('str', 6);
+            player.addCombatBuff('spe', 6);
+		}
+		if (player.hasStatusEffect(StatusEffects.NagaVenom)) player.removeStatusEffect(StatusEffects.NagaVenom);
+		if (player.hasStatusEffect(StatusEffects.MedusaVenom)) player.removeStatusEffect(StatusEffects.MedusaVenom);
+		if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
+		if (player.hasStatusEffect(StatusEffects.Poison)) player.removeStatusEffect(StatusEffects.Poison);
+		if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.removeStatusEffect(StatusEffects.AcidDoT);
+		if (player.hasStatusEffect(StatusEffects.FrostburnDoT)) player.removeStatusEffect(StatusEffects.FrostburnDoT);
+		if (player.hasStatusEffect(StatusEffects.FrozenLung)) player.removeStatusEffect(StatusEffects.FrozenLung);
+		if (player.statStore.hasBuff("Poison")) player.buff("Poison").remove();
+		if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained")) {
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+				player.removeCurse(stat, 6,1);
+				player.removeCurse(stat, 3,2);
+				if (stat != "sens") {
+					player.removeCurse(stat+".mult", 0.06,1);
+					player.removeCurse(stat+".mult", 0.03,2);
+				}
+			}
+		}
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
