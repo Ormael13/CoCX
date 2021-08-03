@@ -794,12 +794,21 @@ public class Combat extends BaseContent {
             outputText("\n<b>You're too confused</b> about who you are to try to attack!");
             stunned = true;
         }
-        if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
-            outputText("\n<b>You fight against the spell to return to your true form!</b>");
-            stunned = true;
-        }
         return stunned;
     }
+	
+	public function isPlayerPowerStunned():Boolean {
+		var powerstunned:Boolean = false;
+        if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
+            outputText("\n<b>You fight against the spell to return to your true form!</b>");
+            powerstunned = true;
+        }
+        if (player.hasStatusEffect(StatusEffects.FrozenSolid)) {
+            outputText("\n<b>placeholder text</b>");
+            powerstunned = true;
+        }
+		return powerstunned;
+	}
 
     public function isPlayerFeared():Boolean {
         var feared:Boolean = false;
@@ -8188,8 +8197,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             outputText("<b>You're tangled up in Holli's verdant limbs!  All you can do is try to struggle free...</b>\n\n");
         }
-        if (player.hasStatusEffect(StatusEffects.UBERWEB))
-            outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n");
+        if (player.hasStatusEffect(StatusEffects.UBERWEB)) outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n");
         if (player.playerIsBlinded() && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
             if (player.hasStatusEffect(StatusEffects.SheilaOil)) {
                 if (player.statusEffectv1(StatusEffects.Blind) <= 0) {
@@ -9111,15 +9119,15 @@ public class Combat extends BaseContent {
             } else player.addStatusValue(StatusEffects.EverywhereAndNowhere, 1, -1);
         }
         //Ezekiel Curse
-        if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
+        if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {/*
             if (EvangelineFollower.EvangelineAffectionMeter >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {
                 outputText("<b>You feel familiar feeling of your own lifeforce been slowly extinquished.  Maybe you should finish this fight as soon as possible to start healing this aligment?</b>\n\n");
                 player.takePhysDamage(500);
-            } else if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
-                outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation as otherwise...</b>\n\n");
+            } else */if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
+                outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation OR...</b>\n\n");
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
                 else player.takePhysDamage(100);
-            }
+			}
         }
 		//Lifesteal Enchantment
         if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
@@ -9681,6 +9689,27 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellChainLightingEx, 1, -1);
             }
         }
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellHeal)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellHeal) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellHeal);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellHeal, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellMentalShield)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellMentalShield) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellMentalShield);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellMentalShield, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellCure)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellCure) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellCure);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellCure, 1, -1);
+            }
+		}
         if (player.hasStatusEffect(StatusEffects.CooldownSpellRegenerate)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellRegenerate) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellRegenerate);
@@ -9709,6 +9738,41 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellMeteorShower, 1, -1);
             }
         }
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellNosferatu)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellNosferatu) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellNosferatu);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellNosferatu, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellClearMind)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellClearMind) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellClearMind);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellClearMind, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellBalanceOfLife)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellBalanceOfLife) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBalanceOfLife);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBalanceOfLife, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellEnergyDrain)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellEnergyDrain) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellEnergyDrain);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellEnergyDrain, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellRestore)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellRestore) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellRestore);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellRestore, 1, -1);
+            }
+		}
         if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodMissiles)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellBloodMissiles) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodMissiles);
@@ -9765,6 +9829,48 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellConsumingDarkness)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellConsumingDarkness) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellConsumingDarkness);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellConsumingDarkness, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfDesire)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellCurseOfDesire) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellCurseOfDesire);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellCurseOfDesire, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellCurseOfWeeping) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellCurseOfWeeping, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellExorcise)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellExorcise) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellExorcise);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellExorcise, 1, -1);
+            }
+		}
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneshatter)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBoneshatter) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBoneshatter);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBoneshatter, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneArmor)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBoneArmor) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBoneArmor);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBoneArmor, 1, -1);
+            }
+        }
         //Companion Boosting PC Armor Value
         if (player.hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) player.removeStatusEffect(StatusEffects.CompBoostingPCArmorValue);
         //Elemental Aspect status effects
@@ -9806,6 +9912,22 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.DivineShield);
             } else {
                 player.addStatusValue(StatusEffects.DivineShield, 2, -1);
+            }
+		}
+		//Mental Shield
+		if (player.hasStatusEffect(StatusEffects.MentalShield)) {
+			if (player.statusEffectv1(StatusEffects.MentalShield) <= 0) {
+                player.removeStatusEffect(StatusEffects.MentalShield);
+            } else {
+                player.addStatusValue(StatusEffects.MentalShield, 1, -1);
+            }
+		}
+		//Balance of Life
+		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) {
+			if (player.statusEffectv2(StatusEffects.BalanceOfLife) <= 0) {
+                player.removeStatusEffect(StatusEffects.BalanceOfLife);
+            } else {
+                player.addStatusValue(StatusEffects.BalanceOfLife, 1, -1);
             }
 		}
         //Possess
@@ -9914,54 +10036,6 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownBalefulPolymorph);
             } else {
                 player.addStatusValue(StatusEffects.CooldownBalefulPolymorph, 1, -1);
-            }
-        }
-		//Consuming Darkness
-		if (player.hasStatusEffect(StatusEffects.CooldownConsumingDarkness)) {
-			if (player.statusEffectv1(StatusEffects.CooldownConsumingDarkness) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownConsumingDarkness);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownConsumingDarkness, 1, -1);
-            }
-		}
-		//Curse of Desire
-		if (player.hasStatusEffect(StatusEffects.CooldownCurseOfDesire)) {
-			if (player.statusEffectv1(StatusEffects.CooldownCurseOfDesire) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownCurseOfDesire);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownCurseOfDesire, 1, -1);
-            }
-		}
-		//Curse of Weeping
-		if (player.hasStatusEffect(StatusEffects.CooldownCurseOfWeeping)) {
-			if (player.statusEffectv1(StatusEffects.CooldownCurseOfWeeping) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownCurseOfWeeping);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownCurseOfWeeping, 1, -1);
-            }
-		}
-		//Exorcise
-		if (player.hasStatusEffect(StatusEffects.CooldownExorcise)) {
-			if (player.statusEffectv1(StatusEffects.CooldownExorcise) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownExorcise);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownExorcise, 1, -1);
-            }
-		}
-        //Boneshatter
-        if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
-            if (player.statusEffectv1(StatusEffects.CooldownBoneshatter) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownBoneshatter);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownBoneshatter, 1, -1);
-            }
-        }
-        //Bone armor
-        if (player.hasStatusEffect(StatusEffects.CooldownBoneArmor)) {
-            if (player.statusEffectv1(StatusEffects.CooldownBoneArmor) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownBoneArmor);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownBoneArmor, 1, -1);
             }
         }
         //Nonuple Thrust
@@ -14732,4 +14806,3 @@ public class Combat extends BaseContent {
     }
 }
 }
-

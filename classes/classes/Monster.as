@@ -3207,6 +3207,10 @@ import flash.utils.getQualifiedClassName;
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
 			}
+			if (hasStatusEffect(StatusEffects.EnergyDrain)) {
+				if (statusEffectv1(StatusEffects.EnergyDrain) <= 0) removeStatusEffect(StatusEffects.EnergyDrain);
+				else addStatusValue(StatusEffects.EnergyDrain,1,-1);
+			}
 		}
 
 		public function handleAwardItemText(itype:ItemType):void

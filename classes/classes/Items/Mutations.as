@@ -3670,6 +3670,12 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
             return;
         }
+		//Smart enough for nosferatu and doesnt have it
+		if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
+			player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
+			return;
+		}
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
 			//Smart enough for Bone spirit and doesnt have it
 			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
@@ -3740,13 +3746,13 @@ public final class Mutations extends MutationsHelper {
     public function greySpellbook(player:Player):void {
         clearOutput();
         outputText("You open the grey volume, and discover it to be an instructional book on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        if (player.inte < 100) {
+        if (player.inte < 75) {
             outputText("\n\nYou feel greatly enlightened by your time spent reading.");
             KnowledgeBonus("int", 4);
-        } else if (player.inte < 150) {
+        } else if (player.inte < 100) {
             outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.");
             KnowledgeBonus("int", 2);
-        } else if (player.inte < 200) {
+        } else if (player.inte < 125) {
             outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.");
             KnowledgeBonus("int", 1);
         } else {
@@ -3754,41 +3760,47 @@ public final class Mutations extends MutationsHelper {
             KnowledgeBonus("int", 0.5);
         }
         if (player.hasPerk(PerkLib.GreyMagic)) {
-            //Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for Fraction of heal and harm and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fraction of heal and harm.</b>");
-                player.createStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm, 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for Clear Mind and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
-                player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
-                return;
-            }*/
             //Smart enough for mana shield and doesnt have it
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
             }
-			//Smart enough for nosferatu and doesnt have it
-			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
-				player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
-				return;
-			}
+            //Smart enough for Clear Mind and doesnt have it
+            if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
+                player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for  and doesnt have it
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
+                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+                return;
+            }*/
+            //Smart enough for  and doesnt have it
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
+                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+                return;
+            }*/
+            //Smart enough for Energy Drain and doesnt have it
+            if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Energy Drain.</b>");
+                player.createStatusEffect(StatusEffects.KnowsEnergyDrain, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Restore and doesnt have it
+            if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsRestore)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Restore.</b>");
+                player.createStatusEffect(StatusEffects.KnowsRestore, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Balance of Life and doesnt have it
+            if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBalanceOfLife)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Balance of Life.</b>");
+                player.createStatusEffect(StatusEffects.KnowsBalanceOfLife, 0, 0, 0, 0);
+                return;
+            }
         }
     }
 
@@ -3861,17 +3873,22 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
         }
+        //Smart enough for Mental Shield and doesnt have it
+        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
+            player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
+        }
+        //Smart enough for Cure and doesnt have it
+        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
+            player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
+        }
         //Smart enough for fire storm and doesnt have it
         if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
             outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
             player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
             return;
         }
-        //Smart enough for Mental Shield and doesnt have it
-        /*if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
-            player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
-        }*/
 		if (player.hasPerk(PerkLib.DivineKnowledge)) {
 			//Smart enough for Aegis and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {

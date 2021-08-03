@@ -35,6 +35,10 @@ public class EngineCore {
         return CoC.instance.player.maxSoulforce();
     }
 
+    public static function maxOverSoulforce():Number {
+        return CoC.instance.player.maxOverSoulforce();
+    }
+
     public static function maxWrath():Number {
         return CoC.instance.player.maxWrath();
     }
@@ -45,6 +49,10 @@ public class EngineCore {
 
     public static function maxMana():Number {
         return CoC.instance.player.maxMana();
+    }
+
+    public static function maxOverMana():Number {
+        return CoC.instance.player.maxOverMana();
     }
 
     public static function silly():Boolean {

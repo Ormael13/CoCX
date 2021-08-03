@@ -9677,5 +9677,3 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 */
 }
 }
-
-

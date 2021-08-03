@@ -145,6 +145,15 @@ package classes.Scenes
 			outputText("-New white spell: Divine shield. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase magic resistance by 40%. Cost 600 mana.\n");
 			outputText("-New white spell: Thunderstorm. It can be learned by using white book after picking Divine Knowledge perk. Effect: Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds. Cost 1200 mana. ONCE PER FIGHT\n");
 			outputText("-New white spell: Tears of Denial. It can be learned by using white book after picking Divine Knowledge perk. Effect: When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away. Cost 3000 mana. ONCE PER FIGHT\n");
+			outputText("-Nosferatu spell been moved to black magic again (yay...) and Heal spell recievied 6 turn cooldown after use. All recently added white/black magic spells can be taught by Dominika (beside fire/ice spell, which are rewards from paladin/archmage quests).\n");
+			outputText("-New white spell: Mental Shield. It can be learned by using white book. Effect: Protects against lust effects for 10 rounds, halving the damage. Cost 300 mana. (10 turns cooldown)\n");
+			outputText("-New gray spell: Clear Mind. It can be learned by using grey book. Effect: Clear some lust by taking physical wounds. Allows you to break out of charm and ignore stun. (Available while stunned) Cost 100 mana. (5 turns cooldown)\n");
+			outputText("-New gray spell: Balance of Life. It can be learned by using grey book. Effect: Heals for 5% of your hp when dealing spell damage.\n");
+			outputText("-New white spell: Cure. It can be learned by using white book. Effect: Negate all status ailments. Restore stat damaged by poison. Cost 500 mana. (7 turns cooldown)\n");
+			outputText("-New gray spell: Energy Drain. It can be learned by using grey book. Effect: Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost). Cost 350 mana. (7 turns cooldown)\n");//
+			outputText("-New gray spell: Restore. It can be learned by using grey book. Effect: Heal for a decent amount of health and regenerate a little over time. Cost 80 mana. (8 turns cooldown)\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -174,6 +183,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -248,7 +258,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -290,18 +302,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

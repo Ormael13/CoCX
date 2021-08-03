@@ -243,9 +243,20 @@ public class CombatUI extends BaseCombatContent {
 		// Modifications - full or partial replacements
 		if (isPlayerBound()) {
 			mainMenuWhenBound();
-		} else if (isPlayerStunned() || isPlayerFeared()) {
+		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
 			menu();
 			addButton(0, "Recover", combat.wait);
+			if (player.hasStatusEffect(StatusEffects.KnowsClearMind) && !isPlayerPowerStunned()) {
+				var numb:Number = 50;
+				if (player.hasPerk(PerkLib.GrandGreyArchmage)) numb -= 50;
+				var badLustForGrey:Boolean = player.lust < numb || player.lust > (player.maxLust() - numb);
+				var bloodForBloodGod:Number = (player.HP - player.minHP());
+				if (badLustForGrey) addButtonDisabled(1, "Clear Mind", "You can't use any grey magics.");
+				else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your mana is too low to cast this spell.");
+				else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(100) && player.HP < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your hp is too low to cast this spell.");
+				else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your hp is too low to cast this spell.");
+				else addButton(1, "Clear Mind", combat.magic.spellClearMind);
+			}
 		} else if (player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 			mainMenuWhenChanneling();
 		} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
