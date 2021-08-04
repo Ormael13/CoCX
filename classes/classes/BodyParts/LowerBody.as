@@ -69,14 +69,14 @@ public class LowerBody extends SaveableBodyPart {
 		name: "hoofed",
 		feet: "hooves",
 		foot: "hoof",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = ""
 
-			if (creature.isBiped()) {
+			if (player.isBiped()) {
 				desc += "Your two legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.";
 			}
 
-			if (creature.isTaur()) {
+			if (player.isTaur()) {
 				desc += "From the waist down, you have the body of a horse, with four muscled legs which are jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves."
 			}
 
@@ -172,10 +172,10 @@ public class LowerBody extends SaveableBodyPart {
 		feet: "flat pony-feet",
 		foot: "flat pony-foot",
 		legCount: 4,
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = ""
 
-			if (creature.isTaur()) {
+			if (player.isTaur()) {
 				desc += "From the waist down, you have an incredibly cute and cartoonish parody of a horse's body, with all four legs ending in flat, rounded feet."
 			}
 
@@ -304,10 +304,10 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, SCYLLA, "SCYLLA", {
 		name: "slippery octopus tentacles",
 		appearanceDesc: "Where your legs would normally start, you have grown the body of an octopus, with {legCount} tentacle legs that sprout from your [hips].",
-		crotchDescFunc: function(creature: *): String {
+		crotchDescFunc: function(player: *): String {
 			var desc: String = "";
 
-			switch (creature.gender) {
+			switch (player.gender) {
 				case 1:
 					desc += "Your sex is concealed between your front octopus tentacle legs dangling freely when not in use.";
 				break;
@@ -316,7 +316,7 @@ public class LowerBody extends SaveableBodyPart {
 				break;
 				case 3:
 					desc += "Your sex";
-					if(creature.cockTotal() > 1) {
+					if(player.cockTotal() > 1) {
 						desc += "es are ";
 					} else {
 						desc += " is ";
@@ -343,14 +343,14 @@ public class LowerBody extends SaveableBodyPart {
 	public static const SHARK:int = 29;
 	EnumValue.add(Types, SHARK, "SHARK", {
 		name: "shark",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = ""
 
-			if (creature.isBiped()) {
+			if (player.isBiped()) {
 				desc += "Your two legs are mostly human save for the webbing between your toes.";
 			}
 
-			if (creature.isTaur()) {
+			if (player.isTaur()) {
 				desc += "Your four legs end in three-toed scaled paws with webbing between the toes, and an even larger webbing running on the entire length."
 			}
 
@@ -562,10 +562,10 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, KRAKEN, "KRAKEN", {
 		name: "kraken",
 		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to [doubletallness] feet in length!",
-		crotchDescFunc: function(creature: *): String {
+		crotchDescFunc: function(player: *): String {
 			var desc: String = "";
 
-			switch (creature.gender) {
+			switch (player.gender) {
 				case 1:
 					desc += "Your sex is concealed between your front octopus tentacle legs, dangling freely when not in use.";
 				break;
@@ -574,7 +574,7 @@ public class LowerBody extends SaveableBodyPart {
 				break;
 				case 3:
 					desc += "Your sex";
-					if(creature.cockTotal() > 1) {
+					if(player.cockTotal() > 1) {
 						desc += "es are ";
 					} else {
 						desc += " is ";
@@ -609,10 +609,10 @@ public class LowerBody extends SaveableBodyPart {
 	public static const FROSTWYRM:int = 62;
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {
 		name: "frost wyrm",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail easily [quadrupletallness] feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [skin coat.color] dragon scales, harder than steel and capable of deflecting most weapons.";
 
-			if (creature.tallness > 120) {
+			if (player.tallness > 120) {
 				desc += " Your body is so large it's no wonder your passage underground can cause tremors.";
 			}
 
@@ -733,20 +733,16 @@ public class LowerBody extends SaveableBodyPart {
 		savedata.legCount = legCount;
 	}
 
-	public static function getAppearanceDescription(creature: *):String {
-		const id: int = creature.lowerBody;
+	public static function getAppearanceDescription(player: *):String {
+		const id: int = player.lowerBody;
 
-		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
+		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(player) : Types[id].appearanceDesc) || "", player);
 	}
 
-	public static function getCrotchDescription(creature: *):String {
-		const id: int = creature.lowerBody;
+	public static function getCrotchDescription(player: *):String {
+		const id: int = player.lowerBody;
 
-		return formatDescription((Types[id].crotchDescFunc ? Types[id].crotchDescFunc(creature) : Types[id].crotchDesc) || "", creature);
-	}
-
-	public static function getTFDescription(creature: *, bodyPart: *):String {
-		return (bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.metamorphDesc) || "";
+		return formatDescription((Types[id].crotchDescFunc ? Types[id].crotchDescFunc(player) : Types[id].crotchDesc) || "", player);
 	}
 
 	private static function formatDescription(desc:String, creature: *): String {

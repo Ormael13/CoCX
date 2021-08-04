@@ -35,6 +35,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n\n");
 		describeFaceShape();
 		outputText(" It has " + player.faceDesc() + "."); //M/F stuff!
+		outputText("\n\n");
 		describeHairAndEars();
 		describeEyes();
 		describeBeard();
@@ -44,14 +45,14 @@ public class PlayerAppearance extends BaseContent {
 		outputText("[pg]");
 		describeBodyShape();
 		describeWings();
+		outputText(" ");
 		describeRearBody();
 		describeArms();
+		outputText("\n\n");
 		describeLowerBody();
 
 		outputText("\n");
-	if (player.hasStatusEffect(StatusEffects.GooStuffed))
-
-	{
+	if (player.hasStatusEffect(StatusEffects.GooStuffed)) {
 		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
 	}
 	//Pregnancy Shiiiiiitz
@@ -210,10 +211,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" You could easily fill a " + player.breastCup(temp) + " bra.");
 		//Done with tits. Move on.
 		outputText("\n");
-	}
-	//many rows
-	else
-	{
+	} else {
 		outputText("You have " + num2Text(player.breastRows.length) + " rows of breasts, the topmost pair starting at your chest.\n");
 		while (temp < player.breastRows.length)
 		{
@@ -538,9 +536,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	//Genderless lovun'
-	if(player.cockTotal() == 0 && player.vaginas.length == 0)
-		outputText("\nYou have a curious lack of any sexual endowments.\n");
-
+	if(player.cockTotal() == 0 && player.vaginas.length == 0) outputText("\nYou have a curious lack of any sexual endowments.\n");
 
 	//BUNGHOLIO
 	if(player.ass) {
@@ -563,8 +559,7 @@ public class PlayerAppearance extends BaseContent {
 	else if(player.nipplesPierced > 0)
 		outputText("\nYour " + nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".");
 	if(player.cockTotal() > 0) {
-		if(player.cocks[0].pierced > 0)
-		{
+		if(player.cocks[0].pierced > 0) {
 			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your [cock].");
 		}
 	}
@@ -713,7 +708,6 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeLowerBody():void {
 
-		outputText("\n\n");
 		outputText(LowerBody.getAppearanceDescription(player));
 
 		//Hip info only displays if you aren't a centaur.
@@ -869,64 +863,9 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeRearBody():void {
-		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
-			outputText(" Jagged ice shards grows out of your back, providing excellent defence and chilling the air around you.");
-		}
-		else if (player.rearBody.type == RearBody.LION_MANE) {
-			outputText(" Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
-		}
-		else if (player.rearBody.type == RearBody.SHARK_FIN) {
-			outputText(" A large shark-like fin has sprouted between your shoulder blades. With it you have far more control over swimming underwater.");
-		}
-		else if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) {
-			outputText(" Between your shoulder blades is a blowhole that allows to breath in air from your back while swimming, just like an orca.");
-		}
-		else if (player.rearBody.type == RearBody.RAIJU_MANE) {
-			outputText(" A thick collar of fur grows around your neck. Multiple strands of fur are colored in a dark shade, making it look like a lightning bolt runs along the center of your fur collar.");
-		}
-		else if (player.rearBody.type == RearBody.BAT_COLLAR) {
-			outputText(" Around your neck is a thick collar of fur reminiscent of a bat's.");
-		}
-		else if (player.rearBody.type == RearBody.WOLF_COLLAR) {
-			outputText(" Around your neck, there is a thick coat of [skin coat.color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human.");
-		}
-		else if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
-			outputText(" On your back grows two tentacles with a pair of thick, heavy feelers. You use them to suck your victims dry of their milk loads as you pump them full of your lewd venom.");
-		}
-		else if (player.rearBody.type == RearBody.SNAIL_SHELL) {
-			outputText(" On your back is a large spiralling shell which"+(player.hasPerk(PerkLib.FireAffinity)?" erupts regularly with magma and":"")+" protects your vital organs.");
-		}
-		else if (player.rearBody.type == RearBody.METAMORPHIC_GOO) {
-			outputText(" Since your body is made of malleable goo you can reshape your form however you want to gain tentacle or any limb or appendage whenever you need one either for combat or for fun.");
-		}
-		else if (player.rearBody.type == RearBody.GHOSTLY_AURA) {
-			outputText(" An eerie ghostly aura surrounds you. Your ominous presence is enough to disturb even the bravest of souls.");
-		}
-		else if (player.rearBody.type == RearBody.YETI_FUR) {
-			outputText(" Covered with a natural "+(player.biggestTitSize() > 1 ? "fur bikini":"layer of fur")+", your "+(player.biggestTitSize() > 1 ? "chest and ":"")+"crotch is protected against the cold.");
-		}
-		else if (player.rearBody.type == RearBody.GLACIAL_AURA) {
-			outputText(" The air temperature around you naturally drops to water freezing levels, causing snow flurries to appear around you every now and then as moisture enters your personal space.");
-		}
-		else if (player.rearBody.type == RearBody.CENTIPEDE) {
-			outputText(" Around your neck sits a set of pincer like maxillipeds. You can use them to sting and hold onto your prey.");
-		}
-		else if (player.rearBody.type == RearBody.KRAKEN) {
-			outputText(" Small glowing dots draw a trail all over the length of your body. They shine beautifully in both the deepest waters and the night giving you a somewhat ominous presence.");
-		}
-		else if (player.rearBody.type == RearBody.FROSTWYRM) {
-			outputText(" Around your neck there is a thick collar of snowy white fur. It looks great on you and, best of all, shields you against the cold.");
-		}
-		else if (player.rearBody.type == RearBody.FUR_COAT) {
-			outputText(" On your back you wear a thick fur coat, not unlike a mantle complete with a hood always worn over your head it has a pair of holes just to let a pair of horns or rather antlers juts through it.");
-		}
-		else if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS) {
-			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. Their gazes are charged with lethal magical powers.");
-		}
-		else if (player.rearBody.type == RearBody.ATLACH_NACHA) {
-			outputText(" Two pairs of chitinous, black spider legs sprout from your shoulders and back. Red eyes blink and close at the tips.")
-		}
+		outputText(RearBody.getAppearanceDescription(player));
 	}
+
 	public function describeWings():void {
 		//WINGS!
 		var wingType:Number = player.wings.type;
@@ -1284,7 +1223,7 @@ public class PlayerAppearance extends BaseContent {
 		//if bald
 		var earType:Number = player.ears.type;
 
-		outputText("\n\n" + Hair.getAppearanceDescription(player));
+		outputText(Hair.getAppearanceDescription(player));
 
 		if(player.hairLength == 0) {
 			if(player.skinType == Skin.FUR)
