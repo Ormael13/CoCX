@@ -69,13 +69,15 @@ public class VampireBlood extends Consumable {
             changes++;
         }
 
-        if (pure && rand(3) == 0 && changes < changeLimit && pure ? CoC.instance.transformations.EarsVampire.isPossible() : CoC.instance.transformations.EarsBat.isPossible()) {
+        if (!pure && rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EarsBat.isPossible()) {
             outputText("\n\n");
-            if (pure) {
-                CoC.instance.transformations.EarsVampire.applyEffect();
-            } else {
-                CoC.instance.transformations.EarsBat.applyEffect();
-            }
+            CoC.instance.transformations.EarsBat.applyEffect();
+            changes++;
+        }
+
+        if (pure && rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EarsVampire.isPossible()) {
+            outputText("\n\n");
+            CoC.instance.transformations.EarsVampire.applyEffect();
             changes++;
         }
 
