@@ -45,7 +45,6 @@ public class PlayerAppearance extends BaseContent {
 		outputText("[pg]");
 		describeBodyShape();
 		describeWings();
-		outputText(" ");
 		describeRearBody();
 		describeArms();
 		outputText("\n\n");
@@ -863,89 +862,17 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeRearBody():void {
-		outputText(RearBody.getAppearanceDescription(player));
+		const rearBodyDesc = RearBody.getAppearanceDescription(player);
+
+		if (rearBodyDesc) outputText(" " + rearBodyDesc);
 	}
 
 	public function describeWings():void {
-		//WINGS!
-		var wingType:Number = player.wings.type;
-		if (wingType == Wings.BEE_LIKE_SMALL)
-			outputText(" A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");
-		if (wingType == Wings.BEE_LIKE_LARGE)
-			outputText(" A pair of large bee-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.");
-		if (wingType == Wings.MANTIS_LIKE_SMALL)
-			outputText(" A pair of tiny mantis-wings sprout from your back, too small to allow you to fly.");
-		if (wingType == Wings.MANTIS_LIKE_LARGE)
-			outputText(" A pair of large mantis-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.");
-		if (wingType == Wings.BAT_LIKE_TINY)
-			outputText(" A pair of tiny bat-like demon-wings sprout from your back, flapping cutely, but otherwise being of little use.");
-		if (wingType == Wings.BAT_LIKE_LARGE)
-			outputText(" A pair of large bat-like demon-wings fold behind your shoulders. With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
-		if (wingType == Wings.BAT_LIKE_LARGE_2)
-			outputText(" Two pairs of large bat-like demon-wings fold behind your shoulders. With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
-		if (wingType == Wings.MANTICORE_LIKE_SMALL)
-			outputText(" A pair of small leathery wings covered with [skin coat.color] fur rest on your back. Despite being too small to allow flight they at least look cute on you.");
-		if (wingType == Wings.MANTICORE_LIKE_LARGE)
-			outputText(" A pair of large ominous leathery wings covered with [skin coat.color] fur expand from your back. You can open them wide to soar high in search of your next prey.");
-		if (wingType == Wings.FEATHERED_LARGE)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.");
-		if (wingType == Wings.FEATHERED_ALICORN)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.");
-		if (wingType == Wings.FEATHERED_SPHINX)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a sphinx.");
-		if (wingType == Wings.FEATHERED_PHOENIX)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.");
-		if (wingType == Wings.DRACONIC_SMALL)
-			outputText(" Small, vestigial wings sprout from your shoulders. They might look like bat's wings, but the membranes are covered in fine, delicate scales.");
-		else if (wingType == Wings.DRACONIC_LARGE)
-			outputText(" Large wings sprout from your shoulders. When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		else if (wingType == Wings.DRACONIC_HUGE)
-			outputText(" Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		if (wingType == Wings.GIANT_DRAGONFLY)
-			outputText(" Giant dragonfly wings hang from your shoulders. At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
-		if (wingType == Wings.GARGOYLE_LIKE_LARGE) {
-			outputText(" Large ");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" wings sprout from your shoulders. When unfurled they stretch wider than your arm span and a single beat of them is all you need to set out toward the sky. They look a bit like ");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText("bird");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText("bat");
-			outputText(" wings and, although they were made of stone, they allow you to fly around with excellent aerial agility.");
-		}
-		if (wingType == Wings.PLANT) {
-			outputText(" Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
-		}
-		if (wingType == Wings.VAMPIRE){
-			outputText(" Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");
-		}
-		if (wingType == Wings.FEY_DRAGON){
-			outputText(" Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone. While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.");
-		}
-		if (wingType == Wings.FEATHERED_AVIAN){
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [skin coat.color] wings folded close, they can unfurl to allow you to soar as gracefully as a bird.");
-		}
-		if (wingType == Wings.NIGHTMARE){
-			outputText(" A pair of large ominous black leathery wings expand from your back. You can open them wide to soar high in the sky.");
-		}
-		if (wingType == Wings.ETHEREAL){
-			outputText(" Three pairs of otherworldly tendrils grow out of your back. They have an ethereal glow around them and they gently sway against an invisible wind.");
-		}
-		if (wingType == Wings.THUNDEROUS_AURA){
-			outputText(" You generate so much electricity that the sound of static and voltage follows you around, announcing your arrival.");
-		}
-		if (wingType == Wings.WINDY_AURA){
-			outputText(" An aura of strong wind constantly seems to accompany you wherever you go. You can use it to create tornados and even take flight riding on a dust devil should you need to.");
-		}
-		if (wingType == Wings.LEVITATION){
-			outputText(" You have the ability to levitate in the air should you wish to although you prefer to stay at ground level to not alert your would be victims to your otherworldly nature.");
-		}
-		if (wingType == Wings.FAIRY){
-			outputText(" A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
-		}
-		if (wingType == Wings.SEA_DRAGON){
-			outputText(" Two large majestic webbed wings not unlike the aquatic flippers of a deep-sea creature unfurls from your back, the interior lined with bright color patterns and bioluminescent specks that change depending on your mood. These wings are as good to fly as they are to swim.");
-		}
+		const wingsDesc = Wings.getAppearanceDescription(player);
+
+		if (wingsDesc) outputText(" " + wingsDesc);
 	}
+
 	public function describeHorns():void {
 		//Demonic horns
 		if (player.horns.type == Horns.DEMON) {
