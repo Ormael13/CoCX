@@ -266,12 +266,12 @@ package classes.Items.Consumables {
             }
             if (temp3 == 1) outputText("  <b>Your penis has transformed into a Cat's!</b>");
           } else {
-						for (var i: Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType != CockTypesEnum.CAT; i++) {
+						for (var j: Number = 0; j < (player.cockTotal()) && player.cocks[j].cockType != CockTypesEnum.CAT; j++) {
             	dynStats("lus", 35);
             	player.addCurse("sen", 4, 1);
             	player.MutagenBonus("lib", 5);
-            	player.cocks[i].cockType = CockTypesEnum.CAT;
-            	player.cocks[i].knotMultiplier = 1;
+            	player.cocks[j].cockType = CockTypesEnum.CAT;
+            	player.cocks[j].knotMultiplier = 1;
             	outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see your [cock] swells up with near-painful arousal and begin to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum..");
             	if (temp == -1) {
             	  CoC_Settings.error("");
