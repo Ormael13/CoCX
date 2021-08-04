@@ -10,6 +10,9 @@ public class Horns extends BodyPart {
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("NONE", "DEMON")
 	 * - name: human-readable default name, ("non-existant", "demon")
+	 *
+	 * - appearanceDesc: description for PlayerAppearance.as (always visible)
+	 * - appearanceDescFunc: a function that returns a description for PlayerAppearance.as (appearanceDesc is ignored if this exists)
 	 */
 	public static var Types:/*EnumValue*/Array = [];
 

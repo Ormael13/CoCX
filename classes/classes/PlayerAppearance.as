@@ -880,30 +880,9 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeTongue():void {
-		if (player.tongue.type == Tongue.SNAKE)
-			outputText(" A snake-like tongue occasionally flits between your lips, tasting the air.");
-		else if (player.tongue.type == Tongue.DEMONIC)
-			outputText(" A slowly undulating tongue occasionally slips from between your lips. It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
-		else if (player.tongue.type == Tongue.DRACONIC)
-			outputText(" Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet. It has sufficient manual dexterity that you can use it almost like a third arm.");
-		else if (player.tongue.type == Tongue.ECHIDNA)
-			outputText(" A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
-		else if (player.tongue.type == Tongue.CAT)
-			outputText(" Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
-		else if (player.tongue.type == Tongue.ELF)
-			outputText(" One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else.");
-		else if (player.tongue.type == Tongue.MELKIE)
-			outputText(" One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else. Your mermaid-like song is capable of captivating the minds of those who listens to it.");
-		else if (player.tongue.type == Tongue.DOG)
-			outputText(" You sometime let your panting canine tongue out to vent heat.");
-		else if (player.tongue.type == Tongue.CAVE_WYRM)
-			outputText(" A slowly undulating neon blue tongue that glow in the dark occasionally slips from between your lips. It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
-		else if (player.tongue.type == Tongue.GHOST)
-			outputText(" Occasionally a long transparent tongue slicks out of your mouth, stretching out about a foot in length.");
-		else if (player.tongue.type == Tongue.RATATOSKR)
-			outputText(" Your tongue is human in appearance but way more dexterous at handling words, able to form sentences and words so good it becomes art or so bad that it bleeds the ears and drives who hear them insane.");
-		else if (player.tongue.type == Tongue.RAVENOUS_TONGUE)
-			outputText(" You constantly hunger for food and your ravenous tongue has gained some unnatural skills of its own, always ready to coax a penis or a pussy into cumming.");
+		const tongueDesc: String = Tongue.getAppearanceDescription(player);
+
+		if (tongueDesc) outputText(" " + tongueDesc);
 	}
 
 	public function describeBeard():void {

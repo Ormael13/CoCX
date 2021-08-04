@@ -9,6 +9,10 @@ public class Wings extends SaveableBodyPart {
 	 * - value: numerical id (1, 4)
 	 * - id: name of the constant ("BEE_LIKE_SMALL", "HARPY")
 	 * - name: short human-readable default name, ("small bee-like", "harpy")
+	 *
+	 * - appearanceDesc: description for PlayerAppearance.as (always visible)
+	 * - appearanceDescFunc: a function that returns a description for PlayerAppearance.as (appearanceDesc is ignored if this exists)
+	 *
 	 * - wingSlap: enables use of arms for wing slap
 	 * - canFly: special arms type that enables flying even without wings
 	 */
