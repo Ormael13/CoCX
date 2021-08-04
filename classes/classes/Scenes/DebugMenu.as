@@ -1,6 +1,7 @@
 package classes.Scenes
 {
 import classes.*;
+import classes.BodyParts.Ears;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
@@ -1096,6 +1097,14 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Eye color", COLOR_CONSTANTS, player.eyes.colour,
 					function (item:*):void {
 						player.eyes.colour = item.data;
+						dumpPlayerData();
+					}
+			);
+			var earTypes:Array = mapForComboBox(Ears.Types, "id");
+			addBeComboBox("Ear type", earTypes,
+					Ears.Types[player.ears.type],
+					function (item:*):void {
+						player.ears.type = item.data.value;
 						dumpPlayerData();
 					}
 			);
