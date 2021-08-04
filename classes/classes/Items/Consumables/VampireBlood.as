@@ -107,10 +107,12 @@ public class VampireBlood extends Consumable {
             outputText("Your skin suddenly starts itching, causing you to look at it just in time for you to see it finish paling into a shade that wouldn’t be out of place on a corpse. You feel sleepy… horribly so, but you dismiss it as being the fault of the glaring light above your head. <b>You guess you could use some extra sunlight with your pale skin.</b>");
             player.skinTone = "pale";
 
-            if (CoC.instance.transformations.EyesChangeColor(["blood-red"]).isPossible()) {
-                outputText("\n\n");
-                CoC.instance.transformations.EyesChangeColor(["blood-red"]).applyEffect();
-            }
+            changes++;
+        }
+
+        if (pure && rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EyesChangeColor(["blood-red"]).isPossible()) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesChangeColor(["blood-red"]).applyEffect();
 
             changes++;
         }
