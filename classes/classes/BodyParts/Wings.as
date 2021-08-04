@@ -1,6 +1,7 @@
 package classes.BodyParts {
 import classes.internals.EnumValue;
 import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
 
 public class Wings extends SaveableBodyPart {
 	/**
@@ -264,10 +265,16 @@ public class Wings extends SaveableBodyPart {
 		type = intOr(savedata.wingType, NONE);
 	}
 
+	public static function getAppearanceDescription(player: *):String {
+		const id: int = player.wings.type;
+
+		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(player) : Types[id].appearanceDesc) || "", player);
+	}
+
 	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
 
-		return " " + desc
+		return desc
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }

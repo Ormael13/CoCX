@@ -557,7 +557,7 @@ public class Skin extends SaveableBodyPart {
 	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
 
-		return " " + desc
+		return desc
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }

@@ -779,21 +779,7 @@ public class DebugMenu extends BaseContent
 		private function dumpPlayerData():void {
 			clearOutput();
 			mainViewManager.showPlayerDoll(true);
-            var pa:PlayerAppearance = CoC.instance.playerAppearance;
-            pa.describeRace();
-			pa.describeFaceShape();
-			outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
-			pa.describeEyes();
-			pa.describeHairAndEars();
-			pa.describeBeard();
-			pa.describeTongue();
-			pa.describeHorns();
-			outputText("[pg]");
-			pa.describeBodyShape();
-			pa.describeWings();
-			pa.describeRearBody();
-			pa.describeArms();
-			pa.describeLowerBody();
+			CoC.instance.playerAppearance.appearance();
 			outputText("[pg]");
 			for each (var race:Race in Race.ALL_RACES) {
 				if (!race) continue;

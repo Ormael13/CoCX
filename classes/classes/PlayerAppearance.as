@@ -858,152 +858,27 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeArms():void {
-		outputText(Arms.getAppearanceDescription(player));
+		outputText(" " + Arms.getAppearanceDescription(player));
 	}
 
 	public function describeRearBody():void {
-		const rearBodyDesc = RearBody.getAppearanceDescription(player);
+		const rearBodyDesc: String = RearBody.getAppearanceDescription(player);
 
 		if (rearBodyDesc) outputText(" " + rearBodyDesc);
 	}
 
 	public function describeWings():void {
-		const wingsDesc = Wings.getAppearanceDescription(player);
+		const wingsDesc: String = Wings.getAppearanceDescription(player);
 
 		if (wingsDesc) outputText(" " + wingsDesc);
 	}
 
 	public function describeHorns():void {
-		//Demonic horns
-		if (player.horns.type == Horns.DEMON) {
-			if (player.horns.count == 2)
-				outputText(" A small pair of pointed horns has broken through the [skin.type] on your forehead, proclaiming some demonic taint to any who see them.");
-			if (player.horns.count == 4)
-				outputText(" A quartet of prominent horns has broken through your [skin.type]. The back pair are longer, and curve back along your head. The front pair protrude forward demonically.");
-			if (player.horns.count == 6)
-				outputText(" Six horns have sprouted through your [skin.type], the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost eight inches long upwards and a little forward.");
-			if (player.horns.count >= 8)
-				outputText(" A large number of thick demonic horns sprout through your [skin.type], each pair sprouting behind the ones before. The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears. You estimate you have a total of " + num2Text(player.horns.count) + " horns.");
-		}
-		//Minotaur horns
-		if (player.horns.type == Horns.COW_MINOTAUR) {
-			if (player.horns.count < 3)
-				outputText(" Two tiny horns-like nubs protrude from your forehead, resembling the horns of the young livestock kept by your village.");
-			if (player.horns.count >= 3 && player.horns.count < 6)
-				outputText(" Two moderately sized horns grow from your forehead, similar in size to those on a young bovine.");
-			if (player.horns.count >= 6 && player.horns.count < 12)
-				outputText(" Two large horns sprout from your forehead, curving forwards like those of a bull.");
-			if (player.horns.count >= 12 && player.horns.count < 20)
-				outputText(" Two very large and dangerous looking horns sprout from your head, curving forward and over a foot long. They have dangerous looking points.");
-			if (player.horns.count >= 20)
-				outputText(" Two huge horns erupt from your forehead, curving outward at first, then forwards. The weight of them is heavy, and they end in dangerous looking points.");
-		}
-		//Lizard horns
-		if (player.horns.type == Horns.DRACONIC_X2) {
-			outputText(" A pair of " + Measurements.inchesOrCentimetres(int(player.horns.count)) + " horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.");
-		}
-		//Super lizard horns
-		if (player.horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
-			outputText(" Two pairs of horns, roughly a foot long, sprout from the sides of your head. They sweep back and give you a fearsome look, almost like the dragons from your village's legends.");
-		//Frost wyrm Horns
-		if (player.horns.type == Horns.FROSTWYRM){
-			outputText(" Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great");
-			if (player.lowerBody == LowerBody.FROSTWYRM) outputText(", especially with your fur, which makes you look like a sheep serpantine dragon");
-			outputText(".");
-		}
-		//Antlers!
-		if (player.horns.type == Horns.ANTLERS) {
-			if (player.horns.count > 0)
-				outputText(" Two antlers, forking into " + num2Text(player.horns.count) + " points, have sprouted from the top of your head, forming a spiky, regal crown of bone.");
-		}
-		if (player.horns.type == Horns.GOAT) {
-			if (player.horns.count == 1)
-				outputText(" A pair of stubby goat horns sprout from the sides of your head.");
-			else
-				outputText(" A pair of tall-standing goat horns sprout from the sides of your head. They are curved and patterned with ridges.");
-		}
-		if (player.horns.type == Horns.GOATQUAD) {
-			if (player.horns.count == 1)
-				outputText(" Four tall-standing goat horns sprout from the sides of your head denouncing your fiendish nature. They are curved and patterned with ridges.\n");
-		}
-		if (player.horns.type == Horns.RHINO) {
-			if (player.horns.count >= 2) {
-				if (CoC.instance.transformations.FaceRhino.isPresent())
-					outputText(" A second horns sprouts from your forehead just above the horns on your nose.");
-				else
-					outputText(" A single horns sprouts from your forehead. It is conical and resembles a rhino's horns.");
-				outputText(" You estimate it to be about seven inches long.");
-			}
-			else {
-				outputText(" A single horns sprouts from your forehead. It is conical and resembles a rhino's horns. You estimate it to be about six inches long.");
-			}
+		const hornsDesc: String = Horns.getAppearanceDescription(player);
 
-		}
-		if (player.horns.type == Horns.UNICORN) {
-			if (player.horns.count < 3)
-				outputText(" Tiny horns-like nub protrude from your forehead, resembling the horns of the young unicorn.");
-			if (player.horns.count >= 3 && player.horns.count < 6)
-				outputText(" One moderately sized horns grow from your forehead, similar in size to those on a young unicorn.");
-			if (player.horns.count >= 6 && player.horns.count < 12)
-				outputText(" One large horns sprout from your forehead, spiraling and pointing forwards like those of an unicorn.");
-			if (player.horns.count >= 12 && player.horns.count < 20)
-				outputText(" One very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long. It have dangerous looking tip.");
-			if (player.horns.count >= 20)
-				outputText(" One huge and long spiraling horns erupt from your forehead, pointing forward. The weight of it is heavy and ends with dangerous and sharp looking tip.");
-		}
-		if (player.horns.type == Horns.BICORN) {
-			if (player.horns.count < 3)
-				outputText(" A pair of tiny horns-like nub protrude from your forehead, resembling the horns of the young bicorns.");
-			if (player.horns.count >= 3 && player.horns.count < 6)
-				outputText(" Two moderately sized horns grow from your forehead, similar in size to those on a young bicorn.");
-			if (player.horns.count >= 6 && player.horns.count < 12)
-				outputText(" Two large horns sprout from your forehead, spiraling and pointing forwards like those of a bicorn.");
-			if (player.horns.count >= 12 && player.horns.count < 20)
-				outputText(" Two very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long. They have dangerous looking tip.");
-			if (player.horns.count >= 20)
-				outputText(" Two huge and long spiraling horns erupt from your forehead, pointing forward. The weight of them is heavy and ends with dangerous and sharp looking tips.");
-		}
-		if (player.horns.type == Horns.OAK) {
-			if (player.horns.count > 0)
-				outputText(" Two branches, forking into " + num2Text(player.horns.count) + " points, have sprouted from the top of your head, forming a spiky, regal crown made of oak wood.");
-		}
-		if (player.horns.type == Horns.GARGOYLE) {
-			if (player.horns.count > 0)
-				outputText(" A large pair of thick demonic looking horns sprout through the side of your head giving you a fiendish appearance.");
-		}
-		if (player.horns.type == Horns.ORCHID) {
-			if (player.horns.count > 0)
-				outputText(" A huge pair of "+player.nakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
-		}
-		if (player.horns.type == Horns.ONI_X2) {
-			if (player.horns.count > 0)
-				outputText(" You have a pair of horns on your head warning anyone who looks that you are an oni and do mean serious business.");
-		}
-		if (player.horns.type == Horns.ONI) {
-			if (player.horns.count > 0)
-				outputText(" You have a single horns on your head warning anyone who looks that you are an oni and do mean serious business.");
-		}
-		if (player.horns.type == Horns.GHOSTLY_WISPS) {
-			if (player.horns.count > 0)
-				outputText(" Floating above your head is several wispy balls of light. They hold an unsettling ethereal presence around them, though in reality they’re merely an extension of yourself.");
-		}
-		if (player.horns.type == Horns.SPELL_TAG) {
-			if (player.horns.count > 0)
-				outputText(" On your forehead is a cursed spell tag, the source of your current predicament and supernatural powers.");
-		}
-		if (player.horns.type == Horns.KRAKEN) {
-			if (player.horns.count > 0)
-				outputText(" Crowning above your head is a fleshy Kraken hood easily adding you a few extra inch in height.\n");
-		}
-		if (player.horns.type == Horns.USHI_ONI) {
-			if (player.horns.count > 0)
-				outputText(" You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
-		}
-		if (player.horns.type == Horns.SEA_DRAGON) {
-			if (player.horns.count > 0)
-				outputText(" Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.\n");
-		}
+		if (hornsDesc) outputText(" " + hornsDesc);
 	}
+
 	public function describeTongue():void {
 		if (player.tongue.type == Tongue.SNAKE)
 			outputText(" A snake-like tongue occasionally flits between your lips, tasting the air.");
@@ -1030,6 +905,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tongue.type == Tongue.RAVENOUS_TONGUE)
 			outputText(" You constantly hunger for food and your ravenous tongue has gained some unnatural skills of its own, always ready to coax a penis or a pussy into cumming.");
 	}
+
 	public function describeBeard():void {
 		//Beards!
 		if (player.beardLength > 0) {
