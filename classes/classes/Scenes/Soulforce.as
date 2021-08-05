@@ -1457,12 +1457,19 @@ use namespace CoC;
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
 				addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
 				addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
+				addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 				//addButton(11, "", ).hint("Add 1 .");
 				if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 				addButton(13, "-1-", NonEquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
+
+		private function addConsumable(consumable: Consumable): void {
+			outputText("\n\n<b>(Gained 1 " + consumable.longName + "!)</b>\n\n");
+			inventory.takeItem(consumable, curry(NonEquipmentMenu, 2));
+		}
+
 		public function MaterialMenu(page:int = 1):void {
 			menu();
 			if (page == 1) {

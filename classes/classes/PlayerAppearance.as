@@ -35,6 +35,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n\n");
 		describeFaceShape();
 		outputText(" It has " + player.faceDesc() + "."); //M/F stuff!
+		outputText("\n\n");
 		describeHairAndEars();
 		describeEyes();
 		describeBeard();
@@ -46,12 +47,11 @@ public class PlayerAppearance extends BaseContent {
 		describeWings();
 		describeRearBody();
 		describeArms();
+		outputText("\n\n");
 		describeLowerBody();
 
 		outputText("\n");
-	if (player.hasStatusEffect(StatusEffects.GooStuffed))
-
-	{
+	if (player.hasStatusEffect(StatusEffects.GooStuffed)) {
 		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
 	}
 	//Pregnancy Shiiiiiitz
@@ -210,10 +210,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" You could easily fill a " + player.breastCup(temp) + " bra.");
 		//Done with tits. Move on.
 		outputText("\n");
-	}
-	//many rows
-	else
-	{
+	} else {
 		outputText("You have " + num2Text(player.breastRows.length) + " rows of breasts, the topmost pair starting at your chest.\n");
 		while (temp < player.breastRows.length)
 		{
@@ -538,9 +535,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	//Genderless lovun'
-	if(player.cockTotal() == 0 && player.vaginas.length == 0)
-		outputText("\nYou have a curious lack of any sexual endowments.\n");
-
+	if(player.cockTotal() == 0 && player.vaginas.length == 0) outputText("\nYou have a curious lack of any sexual endowments.\n");
 
 	//BUNGHOLIO
 	if(player.ass) {
@@ -563,8 +558,7 @@ public class PlayerAppearance extends BaseContent {
 	else if(player.nipplesPierced > 0)
 		outputText("\nYour " + nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".");
 	if(player.cockTotal() > 0) {
-		if(player.cocks[0].pierced > 0)
-		{
+		if(player.cocks[0].pierced > 0) {
 			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your [cock].");
 		}
 	}
@@ -713,7 +707,6 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeLowerBody():void {
 
-		outputText("\n\n");
 		outputText(LowerBody.getAppearanceDescription(player));
 
 		//Hip info only displays if you aren't a centaur.
@@ -865,305 +858,33 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeArms():void {
-		outputText(Arms.getAppearanceDescription(player));
+		outputText(" " + Arms.getAppearanceDescription(player));
 	}
 
 	public function describeRearBody():void {
-		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
-			outputText(" Jagged ice shards grows out of your back, providing excellent defence and chilling the air around you.");
-		}
-		else if (player.rearBody.type == RearBody.LION_MANE) {
-			outputText(" Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
-		}
-		else if (player.rearBody.type == RearBody.SHARK_FIN) {
-			outputText(" A large shark-like fin has sprouted between your shoulder blades. With it you have far more control over swimming underwater.");
-		}
-		else if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) {
-			outputText(" Between your shoulder blades is a blowhole that allows to breath in air from your back while swimming, just like an orca.");
-		}
-		else if (player.rearBody.type == RearBody.RAIJU_MANE) {
-			outputText(" A thick collar of fur grows around your neck. Multiple strands of fur are colored in a dark shade, making it look like a lightning bolt runs along the center of your fur collar.");
-		}
-		else if (player.rearBody.type == RearBody.BAT_COLLAR) {
-			outputText(" Around your neck is a thick collar of fur reminiscent of a bat's.");
-		}
-		else if (player.rearBody.type == RearBody.WOLF_COLLAR) {
-			outputText(" Around your neck, there is a thick coat of [skin coat.color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human.");
-		}
-		else if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
-			outputText(" On your back grows two tentacles with a pair of thick, heavy feelers. You use them to suck your victims dry of their milk loads as you pump them full of your lewd venom.");
-		}
-		else if (player.rearBody.type == RearBody.SNAIL_SHELL) {
-			outputText(" On your back is a large spiralling shell which"+(player.hasPerk(PerkLib.FireAffinity)?" erupts regularly with magma and":"")+" protects your vital organs.");
-		}
-		else if (player.rearBody.type == RearBody.METAMORPHIC_GOO) {
-			outputText(" Since your body is made of malleable goo you can reshape your form however you want to gain tentacle or any limb or appendage whenever you need one either for combat or for fun.");
-		}
-		else if (player.rearBody.type == RearBody.GHOSTLY_AURA) {
-			outputText(" An eerie ghostly aura surrounds you. Your ominous presence is enough to disturb even the bravest of souls.");
-		}
-		else if (player.rearBody.type == RearBody.YETI_FUR) {
-			outputText(" Covered with a natural "+(player.biggestTitSize() > 1 ? "fur bikini":"layer of fur")+", your "+(player.biggestTitSize() > 1 ? "chest and ":"")+"crotch is protected against the cold.");
-		}
-		else if (player.rearBody.type == RearBody.GLACIAL_AURA) {
-			outputText(" The air temperature around you naturally drops to water freezing levels, causing snow flurries to appear around you every now and then as moisture enters your personal space.");
-		}
-		else if (player.rearBody.type == RearBody.CENTIPEDE) {
-			outputText(" Around your neck sits a set of pincer like maxillipeds. You can use them to sting and hold onto your prey.");
-		}
-		else if (player.rearBody.type == RearBody.KRAKEN) {
-			outputText(" Small glowing dots draw a trail all over the length of your body. They shine beautifully in both the deepest waters and the night giving you a somewhat ominous presence.");
-		}
-		else if (player.rearBody.type == RearBody.FROSTWYRM) {
-			outputText(" Around your neck there is a thick collar of snowy white fur. It looks great on you and, best of all, shields you against the cold.");
-		}
-		else if (player.rearBody.type == RearBody.FUR_COAT) {
-			outputText(" On your back you wear a thick fur coat, not unlike a mantle complete with a hood always worn over your head it has a pair of holes just to let a pair of horns or rather antlers juts through it.");
-		}
-		else if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS) {
-			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. Their gazes are charged with lethal magical powers.");
-		}
-		else if (player.rearBody.type == RearBody.ATLACH_NACHA) {
-			outputText(" Two pairs of chitinous, black spider legs sprout from your shoulders and back. Red eyes blink and close at the tips.")
-		}
-	}
-	public function describeWings():void {
-		//WINGS!
-		var wingType:Number = player.wings.type;
-		if (wingType == Wings.BEE_LIKE_SMALL)
-			outputText(" A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");
-		if (wingType == Wings.BEE_LIKE_LARGE)
-			outputText(" A pair of large bee-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.");
-		if (wingType == Wings.MANTIS_LIKE_SMALL)
-			outputText(" A pair of tiny mantis-wings sprout from your back, too small to allow you to fly.");
-		if (wingType == Wings.MANTIS_LIKE_LARGE)
-			outputText(" A pair of large mantis-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.");
-		if (wingType == Wings.BAT_LIKE_TINY)
-			outputText(" A pair of tiny bat-like demon-wings sprout from your back, flapping cutely, but otherwise being of little use.");
-		if (wingType == Wings.BAT_LIKE_LARGE)
-			outputText(" A pair of large bat-like demon-wings fold behind your shoulders. With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
-		if (wingType == Wings.BAT_LIKE_LARGE_2)
-			outputText(" Two pairs of large bat-like demon-wings fold behind your shoulders. With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
-		if (wingType == Wings.MANTICORE_LIKE_SMALL)
-			outputText(" A pair of small leathery wings covered with [skin coat.color] fur rest on your back. Despite being too small to allow flight they at least look cute on you.");
-		if (wingType == Wings.MANTICORE_LIKE_LARGE)
-			outputText(" A pair of large ominous leathery wings covered with [skin coat.color] fur expand from your back. You can open them wide to soar high in search of your next prey.");
-		if (wingType == Wings.FEATHERED_LARGE)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.");
-		if (wingType == Wings.FEATHERED_ALICORN)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.");
-		if (wingType == Wings.FEATHERED_SPHINX)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a sphinx.");
-		if (wingType == Wings.FEATHERED_PHOENIX)
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.");
-		if (wingType == Wings.DRACONIC_SMALL)
-			outputText(" Small, vestigial wings sprout from your shoulders. They might look like bat's wings, but the membranes are covered in fine, delicate scales.");
-		else if (wingType == Wings.DRACONIC_LARGE)
-			outputText(" Large wings sprout from your shoulders. When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		else if (wingType == Wings.DRACONIC_HUGE)
-			outputText(" Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		if (wingType == Wings.GIANT_DRAGONFLY)
-			outputText(" Giant dragonfly wings hang from your shoulders. At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
-		if (wingType == Wings.GARGOYLE_LIKE_LARGE) {
-			outputText(" Large ");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" wings sprout from your shoulders. When unfurled they stretch wider than your arm span and a single beat of them is all you need to set out toward the sky. They look a bit like ");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText("bird");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText("bat");
-			outputText(" wings and, although they were made of stone, they allow you to fly around with excellent aerial agility.");
-		}
-		if (wingType == Wings.PLANT) {
-			outputText(" Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
-		}
-		if (wingType == Wings.VAMPIRE){
-			outputText(" Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");
-		}
-		if (wingType == Wings.FEY_DRAGON){
-			outputText(" Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone. While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.");
-		}
-		if (wingType == Wings.FEATHERED_AVIAN){
-			outputText(" A pair of large, feathery wings sprout from your back. Though you usually keep the [skin coat.color] wings folded close, they can unfurl to allow you to soar as gracefully as a bird.");
-		}
-		if (wingType == Wings.NIGHTMARE){
-			outputText(" A pair of large ominous black leathery wings expand from your back. You can open them wide to soar high in the sky.");
-		}
-		if (wingType == Wings.ETHEREAL){
-			outputText(" Three pairs of otherworldly tendrils grow out of your back. They have an ethereal glow around them and they gently sway against an invisible wind.");
-		}
-		if (wingType == Wings.THUNDEROUS_AURA){
-			outputText(" You generate so much electricity that the sound of static and voltage follows you around, announcing your arrival.");
-		}
-		if (wingType == Wings.WINDY_AURA){
-			outputText(" An aura of strong wind constantly seems to accompany you wherever you go. You can use it to create tornados and even take flight riding on a dust devil should you need to.");
-		}
-		if (wingType == Wings.LEVITATION){
-			outputText(" You have the ability to levitate in the air should you wish to although you prefer to stay at ground level to not alert your would be victims to your otherworldly nature.");
-		}
-		if (wingType == Wings.FAIRY){
-			outputText(" A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
-		}
-		if (wingType == Wings.SEA_DRAGON){
-			outputText(" Two large majestic webbed wings not unlike the aquatic flippers of a deep-sea creature unfurls from your back, the interior lined with bright color patterns and bioluminescent specks that change depending on your mood. These wings are as good to fly as they are to swim.");
-		}
-	}
-	public function describeHorns():void {
-		//Demonic horns
-		if (player.horns.type == Horns.DEMON) {
-			if (player.horns.count == 2)
-				outputText(" A small pair of pointed horns has broken through the [skin.type] on your forehead, proclaiming some demonic taint to any who see them.");
-			if (player.horns.count == 4)
-				outputText(" A quartet of prominent horns has broken through your [skin.type]. The back pair are longer, and curve back along your head. The front pair protrude forward demonically.");
-			if (player.horns.count == 6)
-				outputText(" Six horns have sprouted through your [skin.type], the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost eight inches long upwards and a little forward.");
-			if (player.horns.count >= 8)
-				outputText(" A large number of thick demonic horns sprout through your [skin.type], each pair sprouting behind the ones before. The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears. You estimate you have a total of " + num2Text(player.horns.count) + " horns.");
-		}
-		//Minotaur horns
-		if (player.horns.type == Horns.COW_MINOTAUR) {
-			if (player.horns.count < 3)
-				outputText(" Two tiny horns-like nubs protrude from your forehead, resembling the horns of the young livestock kept by your village.");
-			if (player.horns.count >= 3 && player.horns.count < 6)
-				outputText(" Two moderately sized horns grow from your forehead, similar in size to those on a young bovine.");
-			if (player.horns.count >= 6 && player.horns.count < 12)
-				outputText(" Two large horns sprout from your forehead, curving forwards like those of a bull.");
-			if (player.horns.count >= 12 && player.horns.count < 20)
-				outputText(" Two very large and dangerous looking horns sprout from your head, curving forward and over a foot long. They have dangerous looking points.");
-			if (player.horns.count >= 20)
-				outputText(" Two huge horns erupt from your forehead, curving outward at first, then forwards. The weight of them is heavy, and they end in dangerous looking points.");
-		}
-		//Lizard horns
-		if (player.horns.type == Horns.DRACONIC_X2) {
-			outputText(" A pair of " + Measurements.inchesOrCentimetres(int(player.horns.count)) + " horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.");
-		}
-		//Super lizard horns
-		if (player.horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
-			outputText(" Two pairs of horns, roughly a foot long, sprout from the sides of your head. They sweep back and give you a fearsome look, almost like the dragons from your village's legends.");
-		//Frost wyrm Horns
-		if (player.horns.type == Horns.FROSTWYRM){
-			outputText(" Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great");
-			if (player.lowerBody == LowerBody.FROSTWYRM) outputText(", especially with your fur, which makes you look like a sheep serpantine dragon");
-			outputText(".");
-		}
-		//Antlers!
-		if (player.horns.type == Horns.ANTLERS) {
-			if (player.horns.count > 0)
-				outputText(" Two antlers, forking into " + num2Text(player.horns.count) + " points, have sprouted from the top of your head, forming a spiky, regal crown of bone.");
-		}
-		if (player.horns.type == Horns.GOAT) {
-			if (player.horns.count == 1)
-				outputText(" A pair of stubby goat horns sprout from the sides of your head.");
-			else
-				outputText(" A pair of tall-standing goat horns sprout from the sides of your head. They are curved and patterned with ridges.");
-		}
-		if (player.horns.type == Horns.GOATQUAD) {
-			if (player.horns.count == 1)
-				outputText(" Four tall-standing goat horns sprout from the sides of your head denouncing your fiendish nature. They are curved and patterned with ridges.\n");
-		}
-		if (player.horns.type == Horns.RHINO) {
-			if (player.horns.count >= 2) {
-				if (CoC.instance.transformations.FaceRhino.isPresent())
-					outputText(" A second horns sprouts from your forehead just above the horns on your nose.");
-				else
-					outputText(" A single horns sprouts from your forehead. It is conical and resembles a rhino's horns.");
-				outputText(" You estimate it to be about seven inches long.");
-			}
-			else {
-				outputText(" A single horns sprouts from your forehead. It is conical and resembles a rhino's horns. You estimate it to be about six inches long.");
-			}
+		const rearBodyDesc: String = RearBody.getAppearanceDescription(player);
 
-		}
-		if (player.horns.type == Horns.UNICORN) {
-			if (player.horns.count < 3)
-				outputText(" Tiny horns-like nub protrude from your forehead, resembling the horns of the young unicorn.");
-			if (player.horns.count >= 3 && player.horns.count < 6)
-				outputText(" One moderately sized horns grow from your forehead, similar in size to those on a young unicorn.");
-			if (player.horns.count >= 6 && player.horns.count < 12)
-				outputText(" One large horns sprout from your forehead, spiraling and pointing forwards like those of an unicorn.");
-			if (player.horns.count >= 12 && player.horns.count < 20)
-				outputText(" One very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long. It have dangerous looking tip.");
-			if (player.horns.count >= 20)
-				outputText(" One huge and long spiraling horns erupt from your forehead, pointing forward. The weight of it is heavy and ends with dangerous and sharp looking tip.");
-		}
-		if (player.horns.type == Horns.BICORN) {
-			if (player.horns.count < 3)
-				outputText(" A pair of tiny horns-like nub protrude from your forehead, resembling the horns of the young bicorns.");
-			if (player.horns.count >= 3 && player.horns.count < 6)
-				outputText(" Two moderately sized horns grow from your forehead, similar in size to those on a young bicorn.");
-			if (player.horns.count >= 6 && player.horns.count < 12)
-				outputText(" Two large horns sprout from your forehead, spiraling and pointing forwards like those of a bicorn.");
-			if (player.horns.count >= 12 && player.horns.count < 20)
-				outputText(" Two very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long. They have dangerous looking tip.");
-			if (player.horns.count >= 20)
-				outputText(" Two huge and long spiraling horns erupt from your forehead, pointing forward. The weight of them is heavy and ends with dangerous and sharp looking tips.");
-		}
-		if (player.horns.type == Horns.OAK) {
-			if (player.horns.count > 0)
-				outputText(" Two branches, forking into " + num2Text(player.horns.count) + " points, have sprouted from the top of your head, forming a spiky, regal crown made of oak wood.");
-		}
-		if (player.horns.type == Horns.GARGOYLE) {
-			if (player.horns.count > 0)
-				outputText(" A large pair of thick demonic looking horns sprout through the side of your head giving you a fiendish appearance.");
-		}
-		if (player.horns.type == Horns.ORCHID) {
-			if (player.horns.count > 0)
-				outputText(" A huge pair of "+player.nakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
-		}
-		if (player.horns.type == Horns.ONI_X2) {
-			if (player.horns.count > 0)
-				outputText(" You have a pair of horns on your head warning anyone who looks that you are an oni and do mean serious business.");
-		}
-		if (player.horns.type == Horns.ONI) {
-			if (player.horns.count > 0)
-				outputText(" You have a single horns on your head warning anyone who looks that you are an oni and do mean serious business.");
-		}
-		if (player.horns.type == Horns.GHOSTLY_WISPS) {
-			if (player.horns.count > 0)
-				outputText(" Floating above your head is several wispy balls of light. They hold an unsettling ethereal presence around them, though in reality they’re merely an extension of yourself.");
-		}
-		if (player.horns.type == Horns.SPELL_TAG) {
-			if (player.horns.count > 0)
-				outputText(" On your forehead is a cursed spell tag, the source of your current predicament and supernatural powers.");
-		}
-		if (player.horns.type == Horns.KRAKEN) {
-			if (player.horns.count > 0)
-				outputText(" Crowning above your head is a fleshy Kraken hood easily adding you a few extra inch in height.\n");
-		}
-		if (player.horns.type == Horns.USHI_ONI) {
-			if (player.horns.count > 0)
-				outputText(" You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
-		}
-		if (player.horns.type == Horns.SEA_DRAGON) {
-			if (player.horns.count > 0)
-				outputText(" Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.\n");
-		}
+		if (rearBodyDesc) outputText(" " + rearBodyDesc);
 	}
+
+	public function describeWings():void {
+		const wingsDesc: String = Wings.getAppearanceDescription(player);
+
+		if (wingsDesc) outputText(" " + wingsDesc);
+	}
+
+	public function describeHorns():void {
+		const hornsDesc: String = Horns.getAppearanceDescription(player);
+
+		if (hornsDesc) outputText(" " + hornsDesc);
+	}
+
 	public function describeTongue():void {
-		if (player.tongue.type == Tongue.SNAKE)
-			outputText(" A snake-like tongue occasionally flits between your lips, tasting the air.");
-		else if (player.tongue.type == Tongue.DEMONIC)
-			outputText(" A slowly undulating tongue occasionally slips from between your lips. It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
-		else if (player.tongue.type == Tongue.DRACONIC)
-			outputText(" Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet. It has sufficient manual dexterity that you can use it almost like a third arm.");
-		else if (player.tongue.type == Tongue.ECHIDNA)
-			outputText(" A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
-		else if (player.tongue.type == Tongue.CAT)
-			outputText(" Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
-		else if (player.tongue.type == Tongue.ELF)
-			outputText(" One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else.");
-		else if (player.tongue.type == Tongue.MELKIE)
-			outputText(" One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else. Your mermaid-like song is capable of captivating the minds of those who listens to it.");
-		else if (player.tongue.type == Tongue.DOG)
-			outputText(" You sometime let your panting canine tongue out to vent heat.");
-		else if (player.tongue.type == Tongue.CAVE_WYRM)
-			outputText(" A slowly undulating neon blue tongue that glow in the dark occasionally slips from between your lips. It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
-		else if (player.tongue.type == Tongue.GHOST)
-			outputText(" Occasionally a long transparent tongue slicks out of your mouth, stretching out about a foot in length.");
-		else if (player.tongue.type == Tongue.RATATOSKR)
-			outputText(" Your tongue is human in appearance but way more dexterous at handling words, able to form sentences and words so good it becomes art or so bad that it bleeds the ears and drives who hear them insane.");
-		else if (player.tongue.type == Tongue.RAVENOUS_TONGUE)
-			outputText(" You constantly hunger for food and your ravenous tongue has gained some unnatural skills of its own, always ready to coax a penis or a pussy into cumming.");
+		const tongueDesc: String = Tongue.getAppearanceDescription(player);
+
+		if (tongueDesc) outputText(" " + tongueDesc);
 	}
+
 	public function describeBeard():void {
 		//Beards!
 		if (player.beardLength > 0) {
@@ -1284,7 +1005,7 @@ public class PlayerAppearance extends BaseContent {
 		//if bald
 		var earType:Number = player.ears.type;
 
-		outputText("\n\n" + Hair.getAppearanceDescription(player));
+		outputText(Hair.getAppearanceDescription(player));
 
 		if(player.hairLength == 0) {
 			if(player.skinType == Skin.FUR)
