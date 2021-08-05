@@ -180,6 +180,10 @@ public function infertilityQuestions():void {
 }
 
 private function resetToPC():void {
+	if (player.hasStatusEffect(StatusEffects.UrtaQuestAdjusted)) {
+		flags[kFLAGS.GAME_DIFFICULTY] = player.statusEffectv1(StatusEffects.UrtaQuestAdjusted);
+		player.removeStatusEffect(StatusEffects.UrtaQuestAdjusted);
+	}
 	player = player2;
 	player.itemSlot1 = urtaQItems1;
 	player.itemSlot2 = urtaQItems2;
@@ -312,17 +316,10 @@ public function startUrtaQuest():void {
 	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
-	var UrtaMulti:Number = 1;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.2;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 2) UrtaMulti += 0.5;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 3) UrtaMulti += 1;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 4) UrtaMulti += 2.5;
-	player.strStat.core.value = Math.round(player.str * UrtaMulti);
-	player.touStat.core.value = Math.round(player.tou * UrtaMulti);
-	player.speStat.core.value = Math.round(player.spe * UrtaMulti);
-	player.intStat.core.value = Math.round(player.inte * UrtaMulti);
-	player.wisStat.core.value = Math.round(player.wis * UrtaMulti);
-	player.libStat.core.value = Math.round(player.lib * UrtaMulti);
+	if (flags[kFLAGS.GAME_DIFFICULTY] > 0) {
+		player.createStatusEffect(StatusEffects.UrtaQuestAdjusted,flags[kFLAGS.GAME_DIFFICULTY],0,0,0);
+		flags[kFLAGS.GAME_DIFFICULTY] = 0;
+	}
 
 	//PERKS
 	player.createPerk(PerkLib.Agility,0,0,0,0);

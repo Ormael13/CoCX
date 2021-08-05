@@ -822,6 +822,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TimeStopUsed:StatusEffectType       	= mk("Time Stop Used");
 		public static const Uber:StatusEffectType               	= mk("Uber");
 		public static const UrtaSecondWinded:StatusEffectType   	= mk("Urta Second Winded");
+		public static const UrtaQuestAdjusted:StatusEffectType      = mk("Urta Quest Adjusted");
 		public static const UsedTitsmother:StatusEffectType     	= mk("UsedTitsmother");
 		public static const Vala:StatusEffectType               	= mk("vala");
 		public static const Vapula:StatusEffectType             	= mk("Vapula");
