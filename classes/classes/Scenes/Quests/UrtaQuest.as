@@ -181,7 +181,8 @@ public function infertilityQuestions():void {
 
 private function resetToPC():void {
 	if (player.hasStatusEffect(StatusEffects.UrtaQuestAdjusted)) {
-		flags[kFLAGS.GAME_DIFFICULTY] = player.statusEffectv1(StatusEffects.UrtaQuestAdjusted);
+		if (player.statusEffectv1(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.GAME_DIFFICULTY] = player.statusEffectv1(StatusEffects.UrtaQuestAdjusted);
+		if (player.statusEffectv2(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.SECONDARY_STATS_SCALING] = player.statusEffectv2(StatusEffects.UrtaQuestAdjusted);
 		player.removeStatusEffect(StatusEffects.UrtaQuestAdjusted);
 	}
 	player = player2;
@@ -295,12 +296,12 @@ public function startUrtaQuest():void {
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 	player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
 	player.clitLength = 1;
-	player.strStat.core.value = 143;
+	player.strStat.core.value = 163;
 	player.touStat.core.value = 183;
-	player.speStat.core.value = 178;
-	player.intStat.core.value = 60;
-	player.wisStat.core.value = 50;
-	player.libStat.core.value = 90;
+	player.speStat.core.value = 198;
+	player.intStat.core.value = 80;
+	player.wisStat.core.value = 70;
+	player.libStat.core.value = 120;
 	player.sensStat.redefine({base:50});
 	player.cor = 30;
 	player.lust = 40;
@@ -316,9 +317,16 @@ public function startUrtaQuest():void {
 	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
-	if (flags[kFLAGS.GAME_DIFFICULTY] > 0) {
-		player.createStatusEffect(StatusEffects.UrtaQuestAdjusted,flags[kFLAGS.GAME_DIFFICULTY],0,0,0);
-		flags[kFLAGS.GAME_DIFFICULTY] = 0;
+	if (flags[kFLAGS.GAME_DIFFICULTY] > 0 || flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) {
+		player.createStatusEffect(StatusEffects.UrtaQuestAdjusted, 0, 0, 0, 0);
+		if (flags[kFLAGS.GAME_DIFFICULTY] > 0) {
+			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 1, flags[kFLAGS.GAME_DIFFICULTY]);
+			flags[kFLAGS.GAME_DIFFICULTY] = 0;
+		}
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) {
+			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 1, flags[kFLAGS.SECONDARY_STATS_SCALING]);
+			flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
+		}
 	}
 
 	//PERKS
@@ -1057,12 +1065,12 @@ public function urtaSpecials():void {
         return;
 	}
 	menu();
-	addButton(0, "Combo", urtaComboAttack).hint("Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 40");
-	addButton(1, "Vault", urtaVaultAttack).hint("Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes. \n\nFatigue cost: 30");
-	addButton(2, "Sidewinder", urtaSidewinder).hint("An attack that hits for reduced damage but has a high chance of stunning. \n\nFatigue cost: 15");
-	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 5");
+	addButton(0, "Combo", urtaComboAttack).hint("Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 75");
+	addButton(1, "Vault", urtaVaultAttack).hint("Make a vaulting attack for an extra 50% damage.  Automatically crits stunned foes. \n\nFatigue cost: 60");
+	addButton(2, "Sidewinder", urtaSidewinder).hint("An attack that hits for reduced damage but can stun enemy. \n\nFatigue cost: 100");
+	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 15");
 	addButton(4, "Metabolize", urtaMetabolize).hint("Convert 5% of your maximum HP into fatigue.");
-	addButton(5, "SecondWind", urtaSecondWind).hint("Regain 30% of your HP, 200 fatigue, and reduce lust by 200.", "Second Wind");
+	addButton(5, "SecondWind", urtaSecondWind).hint("Regain 50% of your HP, 200 fatigue, and reduce lust by 200.", "Second Wind");
 	addButton(14, "Back", combat.combatMenu, false);
 }
 
@@ -1097,7 +1105,7 @@ private function urtaMetabolize():void {
 	clearOutput();
 	var damage:int = player.takePhysDamage(Math.round(player.maxHP()/5));
 	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 25 fatigue!\n\n");
-	fatigue(-25);
+	fatigue(-100);
     SceneLib.combat.enemyAIImpl();
 }
 
@@ -1112,7 +1120,7 @@ private function urtaSecondWind():void {
 		return;
 	}
 	monster.createStatusEffect(StatusEffects.UrtaSecondWinded,3,0,0,0);
-	HPChange(Math.round(player.maxHP()*0.3),false);
+	HPChange(Math.round(player.maxHP()*0.5),false);
 	fatigue(-200);
 	dynStats("lus", -200);
 	outputText("Closing your eyes for a moment, you focus all of your willpower on pushing yourself to your absolute limits, forcing your lusts down and drawing on reserves of energy you didn't know you had!\n\n");
@@ -1123,7 +1131,7 @@ private function urtaSecondWind():void {
 private function urtaComboAttack():void {
 	if(!player.hasStatusEffect(StatusEffects.Attacks)) {
 		clearOutput();
-		if(player.fatigue + 50 > player.maxFatigue()) {
+		if(player.fatigue + 75 > player.maxFatigue()) {
 			outputText("You are too fatigued to use that attack!");
 //Gone			menuLoc = 3;
 //			doNext(combat.combatMenu);
@@ -1131,10 +1139,9 @@ private function urtaComboAttack():void {
 			addButton(0, "Next", combat.combatMenu, false);
 			return;
 		}
-		fatigue(25);
+		fatigue(75);
 	}
-	if(!player.hasStatusEffect(StatusEffects.Attacks))
-		player.createStatusEffect(StatusEffects.Attacks,3,0,0,0);
+	if (!player.hasStatusEffect(StatusEffects.Attacks)) player.createStatusEffect(StatusEffects.Attacks,3,0,0,0);
 	else {
 		player.addStatusValue(StatusEffects.Attacks,1,-1);
 		trace("DECREMENDED ATTACKS");
@@ -1144,10 +1151,7 @@ private function urtaComboAttack():void {
 		}
 	}
 	//Blind
-	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
-	}
-	var damage:Number;
+	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	//Determine if dodged!
 	if(!monster.hasStatusEffect(StatusEffects.Blind) && (rand(3) == 0 || (player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80))) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
@@ -1164,24 +1168,16 @@ private function urtaComboAttack():void {
             return;
 		}
 	}
-	//Determine damage
-	/*Determine damage - str modified by enemy toughness!
-	if(player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
-		if(player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
-		else damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef));
-	}*/
 	//Basic damage stuff
-	damage = player.str;
-	damage += combat.scalingBonusStrength() * 0.5;
-	damage *= 1.2;
+	var damage:Number = player.str;
+	damage += combat.scalingBonusStrength();
+	damage *= 1.5;
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.05));
 	else damage *= (3.5 + ((player.weaponAttack - 50) * 0.04));
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	var critChance:int = 5;
+	var critChance:int = 15;
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
@@ -1190,37 +1186,14 @@ private function urtaComboAttack():void {
 		crit = true;
 		damage *= 2;
 	}
-	//Start figuring enemy damage resistance
-	var reduction:Number = rand(monster.tou);
-	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
-		reduction += monster.armorDef;
-		//Remove half armor for lunging strikes
-		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
-			reduction -= monster.armorDef/2;
-	}
-	//Take 5 off enemy armor for katana
-	if(player.weaponName == "katana") {
-		//Knock off 5
-		if(monster.armorDef >= 5) reduction -= 5;
-		//Less than 5 armor?  TAKE IT ALL!
-		else reduction -= monster.armorDef;
-	}
-	//Apply AND DONE!
-	damage -= reduction;
-	//Damage post processing!
-	//Thunderous Strikes
-	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
-		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
-
-	if(damage > 0) {
+	if (damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
-	if(damage <= 0) {
+	if (damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
@@ -1228,14 +1201,14 @@ private function urtaComboAttack():void {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
 	outputText("\n");
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
+	if (monster.HP >= (monster.minHP() + 1) && monster.lust < monster.maxLust()) {
 		if(player.hasStatusEffect(StatusEffects.Attacks)) {
 			trace("MORE ATTACK");
 			urtaComboAttack();
@@ -1246,7 +1219,7 @@ private function urtaComboAttack():void {
         SceneLib.combat.enemyAIImpl();
     }
 	else {
-		if(monster.HP <= 0) doNext(SceneLib.combat.endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(SceneLib.combat.endHpVictory);
 		else doNext(SceneLib.combat.endLustVictory);
 	}
 }
@@ -1254,7 +1227,7 @@ private function urtaComboAttack():void {
 //Dirt Kick
 private function urtaDirtKick():void {
 	clearOutput();
-	if(player.fatigue + 5 > player.maxFatigue()) {
+	if(player.fatigue + 15 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that ability!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);
@@ -1262,11 +1235,9 @@ private function urtaDirtKick():void {
 		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(5);
+	fatigue(15);
 	//Blind
-	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ");
-	}
+	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards " + monster.a + monster.short + "!  ");
 	//Dodged!
 	if(rand(20) + 1 + monster.spe/20 > 15 + player.spe/20) {
@@ -1274,9 +1245,7 @@ private function urtaDirtKick():void {
         SceneLib.combat.enemyAIImpl();
         return;
 	}
-	else if(monster.hasStatusEffect(StatusEffects.Blind)) {
-		outputText(monster.mf("He","She") + "'s already blinded.  What a waste.\n\n");
-	}
+	else if (monster.hasStatusEffect(StatusEffects.Blind)) outputText(monster.mf("He","She") + "'s already blinded.  What a waste.\n\n");
 	else {
 		outputText(monster.mf("He","She") + "'s blinded!\n\n");
 		monster.createStatusEffect(StatusEffects.Blind, 2 + rand(3),0,0,0);
@@ -1284,10 +1253,10 @@ private function urtaDirtKick():void {
     SceneLib.combat.enemyAIImpl();
 }
 
-//SideWinder: 70% damage + stun chance
+//SideWinder: 50% damage + 80% chance for stun
 private function urtaSidewinder():void {
 	clearOutput();
-	if(player.fatigue + 15 > player.maxFatigue()) {
+	if(player.fatigue + 100 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);
@@ -1295,13 +1264,10 @@ private function urtaSidewinder():void {
 		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(10);
+	fatigue(100);
 	//Blind
-	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ");
-	}
+	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
-	var damage:Number;
 	//Determine if dodged!
 	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
@@ -1311,25 +1277,17 @@ private function urtaSidewinder():void {
         SceneLib.combat.enemyAIImpl();
         return;
 	}
-	//Determine damage
-	/*Determine damage - str modified by enemy toughness!
-	if(player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
-		if(player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
-		else damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef));
-	}*/
 	//Basic damage stuff
-	damage = player.str;
-	damage += combat.scalingBonusStrength() * 0.5;
+	var damage:Number = player.str;
+	damage += combat.scalingBonusStrength();
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.05));
 	else damage *= (3.5 + ((player.weaponAttack - 50) * 0.04));
-	//70% crappier than normal attack.
-	damage *= .7;
+	//50% crappier than normal attack.
+	damage *= 0.5;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	var critChance:int = 5;
+	var critChance:int = 15;
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
@@ -1338,37 +1296,14 @@ private function urtaSidewinder():void {
 		crit = true;
 		damage *= 1.75;
 	}
-	//Start figuring enemy damage resistance
-	var reduction:Number = rand(monster.tou);
-	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
-		reduction += monster.armorDef;
-		//Remove half armor for lunging strikes
-		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
-			reduction -= monster.armorDef/2;
-	}
-	//Take 5 off enemy armor for katana
-	if(player.weaponName == "katana") {
-		//Knock off 5
-		if(monster.armorDef >= 5) reduction -= 5;
-		//Less than 5 armor?  TAKE IT ALL!
-		else reduction -= monster.armorDef;
-	}
-	//Apply AND DONE!
-	damage -= reduction;
-	//Damage post processing!
-	//Thunderous Strikes
-	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
-		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
-
-	if(damage > 0) {
+	if (damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
-	if(damage <= 0) {
+	if (damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
@@ -1376,20 +1311,16 @@ private function urtaSidewinder():void {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	if(!monster.hasStatusEffect(StatusEffects.Stunned) && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0) {
-		if(rand(3) > 0) {
-			outputText("\n<b>" + monster.capitalA + monster.short + " is stunned!</b>");
-			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
-		}
+	if (!monster.hasStatusEffect(StatusEffects.Stunned) && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0 && rand(5) > 0) {
+		outputText("\n<b>" + monster.capitalA + monster.short + " is stunned!</b>");
+		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 	}
-	else if(monster.findPerk(PerkLib.Resolute) >= 0) {
-		outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
-	}
+	else if (monster.findPerk(PerkLib.Resolute) >= 0) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	outputText("\n");
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
@@ -1410,7 +1341,7 @@ private function urtaSidewinder():void {
 //Vault: Use the halberd to support her weight and deliver a high power kick to the enemy, deals 15% more damage. If the enemy is stunned, auto-critical. This is like the move she uses during the fight against the wolf in that scene at Tel'Adre.
 private function urtaVaultAttack():void {
 	clearOutput();
-	if(player.fatigue + 30 > player.maxFatigue()) {
+	if (player.fatigue + 60 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);
@@ -1418,25 +1349,22 @@ private function urtaVaultAttack():void {
 		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(20);
-	if(player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
+	fatigue(60);
+	if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n");
         SceneLib.combat.enemyAIImpl();
         return;
 	}
 	//Blind
-	if(player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
-	}
+	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("You leap into the air, intent on slamming your [weapon] into your foe!  ");
-	var damage:Number;
 	//Determine if dodged!
 	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
 		outputText("\n");
-		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
+		if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
 		}
@@ -1444,25 +1372,17 @@ private function urtaVaultAttack():void {
 		enemyAI();
 		return;
 	}
-	//Determine damage
-	/*Determine damage - str modified by enemy toughness!
-	if(player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
-		if(player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
-		else damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef));
-	}*/
 	//Basic damage stuff
-	damage = player.str;
-	damage += combat.scalingBonusStrength() * 0.5;
+	var damage:Number = player.str;
+	damage += combat.scalingBonusStrength();
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.05));
 	else damage *= (3.5 + ((player.weaponAttack - 50) * 0.04));
-	//25% better than normal attack.
-	damage *= 1.25;
+	//50% better than normal attack.
+	damage *= 1.5;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	var critChance:int = 5;
+	var critChance:int = 15;
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
@@ -1470,47 +1390,24 @@ private function urtaVaultAttack():void {
 	if (monster.monsterIsStunned()) critChance = 100;
 	if (rand(100) < critChance) {
 		crit = true;
-		damage *= 2;
+		damage *= 2.5;
 	}
-	//Start figuring enemy damage resistance
-	var reduction:Number = rand(monster.tou);
-	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
-		reduction += monster.armorDef;
-		//Remove half armor for lunging strikes
-		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
-			reduction -= monster.armorDef/2;
-	}
-	//Take 5 off enemy armor for katana
-	if(player.weaponName == "katana") {
-		//Knock off 5
-		if(monster.armorDef >= 5) reduction -= 5;
-		//Less than 5 armor?  TAKE IT ALL!
-		else reduction -= monster.armorDef;
-	}
-	//Apply AND DONE!
-	damage -= reduction;
-	//Damage post processing!
-	//Thunderous Strikes
-	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
-		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
-
-	if(damage > 0) {
+	if (damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
-	if(damage <= 0) {
+	if (damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
 	else {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
-		if(crit) outputText(" <b>*CRIT*</b>");
+		if (crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;

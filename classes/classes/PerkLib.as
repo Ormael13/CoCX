@@ -4118,12 +4118,12 @@ public class PerkLib
                     .requireAnyPerk(Berzerker, Lustzerker)
                     .requireStr(200)
                     .requireLevel(42);
-            PrestigeJobStalker.requirePrestigeJobSlot()
+            /*PrestigeJobStalker.requirePrestigeJobSlot()
                     .requirePerk(JobWarrior)
                     .requirePerk(JobHunter)
                     .requireStr(150)
                     .requireSpe(150)
-                    .requireLevel(42);
+                    .requireLevel(42);*/
             PrestigeJobSpellKnight.requirePrestigeJobSlot()
                     .requireStr(200)
                     .requireInt(150)

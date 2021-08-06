@@ -2842,6 +2842,34 @@ use namespace CoC;
 			outputText("\n\n");
 			doNext(camp.returnToCampUseEightHours);
 		}
+		public function DaoContemplationsEffectClone(statusEffect:StatusEffectType, daoname:String):void {
+			player.addStatusValue(statusEffect, 1, 1);
+			if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+				player.addStatusValue(statusEffect, 1, -140);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+				player.addStatusValue(statusEffect, 1, -100);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+				player.addStatusValue(statusEffect, 1, -60);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+				player.addStatusValue(statusEffect, 1, -40);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+				player.addStatusValue(statusEffect, 1, -20);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer.</b>");
+			}
+		}
 		public function SoulforceRegeneration2():void {
 			clearOutput();
 			var soulforceamountrestored:int = 52;

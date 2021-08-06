@@ -79,6 +79,8 @@ public class CombatTeases extends BaseCombatContent {
 		chance = 70;
 		//2% chance for each tease level.
 		chance += player.teaseLevel * 2;
+		//bonus for Urta
+		if (SceneLib.urtaQuest.isUrta()) chance += 10;
 		//Extra chance for sexy undergarments.
 		chance += player.upperGarment.sexiness;
 		chance += player.lowerGarment.sexiness;
@@ -1510,6 +1512,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 			if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
+			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 			damage = Math.round(damage);
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 15) {
 				outputText("\n" + monster.a + monster.short + " is so mesmerised by your show that it stands there gawking.");
