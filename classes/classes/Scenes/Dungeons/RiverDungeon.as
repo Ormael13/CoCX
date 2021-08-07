@@ -224,8 +224,8 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
 			var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
-			if (item == null) doNext(roomA20);
-			else inventory.takeItem(item, roomA20);
+			if (item == null) doNext(playerMenu);
+			else inventory.takeItem(item, playerMenu);
 		}
 		public function takeAetherSister2():void {
 			clearOutput();
@@ -252,8 +252,8 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
 			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
-			if (item == null) doNext(roomA15);
-			else inventory.takeItem(item, roomA15);
+			if (item == null) doNext(playerMenu);
+			else inventory.takeItem(item, playerMenu);
 		}
 		
 		private function encountersRuletteB():void {
@@ -453,7 +453,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
-			doNext(roomB18);
+			doNext(playerMenu);
 		}
 		public function defeatWaterElementalSubBoss():void {
 			clearOutput();
@@ -462,7 +462,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Water Undine Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
-			doNext(roomB21);
+			doNext(playerMenu);
 		}
 		public function defeatAirElementalSubBoss():void {
 			clearOutput();
@@ -471,7 +471,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Air Sylph Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
-			doNext(roomB24);
+			doNext(playerMenu);
 		}
 		public function defeatEarthElementalSubBoss():void {
 			clearOutput();
@@ -480,7 +480,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Earth Golem Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
-			doNext(roomB27);
+			doNext(playerMenu);
 		}
 		public function defeatQuatroElementalBoss():void {
 			clearOutput();
@@ -490,7 +490,7 @@ import classes.StatusEffects;
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			player.createKeyItem("Flame Heart", 0, 0, 0, 0);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
-			doNext(roomB08);
+			doNext(playerMenu);
 		}
 		
 		private function encountersRuletteC():void {

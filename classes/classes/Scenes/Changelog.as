@@ -156,7 +156,7 @@ package classes.Scenes
 			outputText("-After surviving 3rd tribulation event PC can make it own clone at camp. Takes 4 session to do it and each drain large amount of health and soulforce taking eight hours each. Finishing it would also impose 30 levels worth penalty (inculting loosing 30 perk points and 150 stat points). ");
 			outputText("But later can use the clone to comprehend dao of elements in camp while PC venture outside camp. And in case PC meet bad end it allow to use the body clone as new pc body. Sure it will sacrifice clone itself but then PC can make new one as long in emantime PC recovered those 30 levels. ");
 			outputText("If the option to switch bodies will be triggered before PC recover those lost 30 levels option to form new clone will be locked till all 30 levels are regained. Also this option of 'sacrifice' would work in any difficulty setting.\n");
-			outputText("-\n");
+			outputText("-After fight boss in River Dungeon it should no longer have chance to spawn normal mob in room unless PC leave and reeneter room then it would normaly have chance to spawn. Excellia and JoJo event will be one time off event now. In case of saves where it get reset after another proc it will be last time seen until ascension.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
