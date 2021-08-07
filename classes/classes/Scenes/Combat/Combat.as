@@ -1060,13 +1060,13 @@ public class Combat extends BaseContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-
+					
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-
+					
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-
+					
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");

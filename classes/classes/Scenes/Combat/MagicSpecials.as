@@ -541,6 +541,38 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 			}
 		}
+		if (player.hasPerk(PerkLib.HiddenJobAsura)) {
+			if (player.statStore.hasBuff("AsuraForm")) {
+				bd = buttons.add("Return", combat.returnToNormalShape).hint("Return to normal from Asura form.");
+				bd = buttons.add("Asura's Howl", combat.asurasHowl).hint("Unleash a howl before giving enemy good punching. \n\nWrath Cost: 50");
+				if (player.wrath < 50) {
+					bd.disable("Your wrath is too low to unleash howl!");
+				}
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+					bd = buttons.add("SFoD", combat.asurasSixFingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					if (player.wrath < (player.maxWrath() * 0.5)) {
+						bd.disable("Your wrath is too low to use Six Fingers of Destruction!");
+					}
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+					
+				}
+				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
+					
+				}
+				if (player.hasPerk(PerkLib.AsuraStrength)) {
+					
+				}
+			} else {
+				bd = buttons.add("Asura Form", combat.assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + combat.asuraformCost() + " per turn");
+				if (player.wrath < combat.asuraformCost()) {
+					bd.disable("Your wrath is too low to enter this state!");
+				}
+				if (player.statStore.hasBuff("CrinosShape")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
+					bd.disable("You are under transformantion effect incompatibile with Asura Form!");
+				}
+			}
+		}
 		if (player.oniScore() >= minOniScoreReq()) {
 			bd = buttons.add("Oni Rampage", startOniRampage).hint("Increase all damage done by a massive amount but silences you preventing using spells or magical oriented soulskills.");
 			bd.requireFatigue(spellCost(50));

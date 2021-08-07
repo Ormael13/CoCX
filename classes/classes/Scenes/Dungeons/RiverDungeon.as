@@ -781,7 +781,7 @@ import classes.StatusEffects;
 				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
 				startCombat(new GolemDummyImproved(), true);
 			}
-			else encountersRuletteA();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
@@ -831,7 +831,7 @@ import classes.StatusEffects;
 				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
 				startCombat(new GolemDummyImproved(), true);
 			}
-			else encountersRuletteA();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
@@ -920,7 +920,7 @@ import classes.StatusEffects;
 				outputText("You brace yourself, it's a fight!n\n");
 				startCombat(new QuatroElementalBoss(), true);
 			}
-			else encountersRuletteB();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
@@ -1031,7 +1031,7 @@ import classes.StatusEffects;
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new FireElemental(), true);
 			}
-			else encountersRuletteBFire();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteBFire();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("As you enter the new area, your breaths grow shallow as you have difficulty breathing in new air. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
@@ -1066,7 +1066,7 @@ import classes.StatusEffects;
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new WaterElemental(), true);
 			}
-			else encountersRuletteBWater();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteBWater();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("As you step into the next room, your balance is nearly thrown off as you can feel yourself sinking slightly with each second of movement. Best not to stand still too long lest you get stuck.\n\nThe room is much like the densest bog you've ever traveled in. The mist is so thick, you can hardly see more than a few feet in front of you. ");
@@ -1102,7 +1102,7 @@ import classes.StatusEffects;
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new AirElemental(), true);
 			}
-			else encountersRuletteBAir();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteBAir();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("A dense blanket of dark clouds cover the ceiling of the room, not unlike the storms you remember back home in Ignam. Thunder and lightning crash throughout the room at random, accompanied by forceful gusts of wind. If you're not careful, you could be thrown off your feet or struck at any moment. ");
@@ -1138,7 +1138,7 @@ import classes.StatusEffects;
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new EarthElemental(), true);
 			}
-			else encountersRuletteBEarth();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. Your senses are shut as you try to shield your eyes from the rough sand as the howling sandstorm is deafening to the point you can hardly hear anything else. ");
