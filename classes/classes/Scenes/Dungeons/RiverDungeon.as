@@ -453,6 +453,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
 		public function defeatWaterElementalSubBoss():void {
@@ -462,6 +463,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Water Undine Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
 		public function defeatAirElementalSubBoss():void {
@@ -471,6 +473,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Air Sylph Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
 		public function defeatEarthElementalSubBoss():void {
@@ -480,6 +483,7 @@ import classes.StatusEffects;
 			player.createKeyItem("Earth Golem Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
 		public function defeatQuatroElementalBoss():void {
@@ -490,6 +494,7 @@ import classes.StatusEffects;
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			player.createKeyItem("Flame Heart", 0, 0, 0, 0);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
 		
