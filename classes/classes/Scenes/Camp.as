@@ -2360,9 +2360,12 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (player.isGargoyle()) addButtonDisabled(0, "Create", "Your current form/race not allow to create clone.");
 		else if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(0, "Create", "You already created your clone.");
-			else if (player.statusEffectv4(StatusEffects.PCClone) == 0) addButtonDisabled(0, "Create", "You still not recovered from spiritual side-effects of creating clone to be able to from another one. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
-			else addButtonDisabled(0, "Create", "You need wait to new day before starting to created your new clone.");
+			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(0, "Create", "You still not recovered from spiritual side-effects of creating clone to be able to from another one. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
+			else {
+				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(0, "Create", "You already created your clone.");
+				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(0, "Create", CreateClone);
+				else addButtonDisabled(0, "Create", "You need wait to new day before starting to created your new clone.");
+			}
 		}
 		else addButton(0, "Create", CreateClone);
 		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
@@ -2402,7 +2405,7 @@ public class Camp extends NPCAwareContent{
 				outputText("Again you returns to work on completing your own clone. Compared to previous form of baskeball sphere it now looks more like you. Sittin before it you begin familair process for the third time.\n\n");
 				outputText("This time it outer layer first start to change into form of coccon that is barely transparent. Inside it anyone could hardly notice how each organ and other vital parts are formed nearly in real time.\n\n");
 				outputText("Sixc hours later it coccon layer start to harden and becoming akin to black chitin not letting anymore see anything that is inside. Only small part of the layer around navel keeps it semi translucent properties.\n\n");
-				outputText("Finaly feeling tiredness due to expending of large amount of life energies you lie down to res for hour or bit more beofre you get up and leave your almsot fully formed clone.\n\n");
+				outputText("Finaly feeling tiredness due to expending of large amount of life energies you lie down to res for hour or bit more before you get up and leave your almost fully formed clone.\n\n");
 				player.addStatusValue(StatusEffects.PCClone, 4, 1);
 				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
 				HPChange(-(player.maxHP() * 0.5), true);
@@ -2422,9 +2425,9 @@ public class Camp extends NPCAwareContent{
 			outputText("Closing your eyes you focus on forming core of your clone. After long minutes you start to feel how part of your soulforce and life essence starts to seep throu the pores outside your body.\n\n");
 			outputText("Slowly directing it to focus it takes over hour to start focus into swirling sphere before you. Keeping your concetration you guide more of essence and soul energy to leave your body and drift toward very slowly growning object before you.\n\n");
 			outputText("After another few hours of very slow process of nurishing core of your clone, you reach point of almost fully been depleyed of soulforce and alot of your life essence been used. ");
-			outputText("Shifting your focus from transfering to finish trasfer you finish this step by making sure swirsling mass before you not disspate before next session of forming. After this you takes a hour of rest before leaving newly formed core.\n\n");
+			outputText("Shifting your focus from transfering to finish transfer you finish this step by making sure swirling mass before you not disspate before next session of forming. After this you takes a hour of rest before leaving newly formed core.\n\n");
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
-			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			EngineCore.SoulforceChange(-(player.maxSoulforce()), true);
 			HPChange(-(player.maxHP() * 0.5), true);
 		}
 		doNext(camp.returnToCampUseEightHours);
