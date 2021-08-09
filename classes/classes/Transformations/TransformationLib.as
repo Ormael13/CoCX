@@ -5950,7 +5950,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public function LowerBodyTaur(lowerBodyType: int = undefined): Transformation {
-	  return new SimpleTransformation("Hoofed Lower Body",
+	  return new SimpleTransformation("Taur Lower Body",
 	    // apply effect
 	    function (doOutput: Boolean): void {
 	      var desc: String = "";
@@ -6339,7 +6339,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        if (player.lowerBody == LowerBody.BEE) {
 	          desc += ", while a hideous cracking fills the air";
 	        }
-	        desc += ". When the spasms subside and you can once again stand, <b>you find that your four [legs] have been changed to those of a fox!</b>";
+	        desc += ". When the spasms subside and you can once again stand, <b>you find that your [legs] have been changed to those of a fox!</b>";
 	      }
 
 	      player.lowerBody = LowerBody.FOX;

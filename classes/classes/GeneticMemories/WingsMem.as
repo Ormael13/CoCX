@@ -150,7 +150,7 @@ package classes.GeneticMemories {
 
 		public static const FEATHERED_ALICORN:int = 11
 		EnumValue.add(Memories, FEATHERED_ALICORN, "FEATHERED_ALICORN", {
-			id: "Alicorn Wings",
+			id: "Feathered Alicorn Wings",
 			cost: 200,
 			title: "Alicorn",
 			transformation: function(): Transformation {
