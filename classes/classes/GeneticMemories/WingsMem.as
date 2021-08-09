@@ -100,9 +100,9 @@ package classes.GeneticMemories {
 
 		public static const FEATHERED_LARGE:int = 6
 		EnumValue.add(Memories, FEATHERED_LARGE, "FEATHERED_LARGE", {
-			id: "Harpy Wings",
+			id: "Feathered Large Wings",
 			cost: 100,
-			title: "Harpy",
+			title: "Feathered",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.WingsFeatheredLarge;
 			}
@@ -140,7 +140,7 @@ package classes.GeneticMemories {
 
 		public static const FEATHERED_PHOENIX:int = 10
 		EnumValue.add(Memories, FEATHERED_PHOENIX, "FEATHERED_PHOENIX", {
-			id: "Phoenix Wings",
+			id: "Feathered Phoenix Wings",
 			cost: 100,
 			title: "Phoenix",
 			transformation: function(): Transformation {
