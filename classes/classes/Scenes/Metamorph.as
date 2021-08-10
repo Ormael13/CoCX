@@ -1137,7 +1137,7 @@ package classes.Scenes {
 			if (!GeneticMemoryStorage[genMemName] && player.hasPerk(PerkLib.GeneticMemory)) {
 				GeneticMemoryStorage[genMemName] = true;
 				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "!</b>");
-				if (genMemName === "Taur Lower Body") outputText("\n<b>Now you can use the Taur variant of any lower body part you unlocked when available!</b>");
+				if (genMemName === "Taur Lower Body") outputText("\n<b>Now you can metamorph into the Taur variant of any lower body part you unlocked when available!</b>");
 			}
 		}
 
