@@ -252,6 +252,7 @@ package classes.GeneticMemories {
 			id: "Cheshire Face",
 			cost: 200,
 			title: "Cheshire",
+			permReq: "Cat Face",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceCheshire;
 			}
@@ -262,6 +263,7 @@ package classes.GeneticMemories {
 			id: "Cheshire Smile Face",
 			cost: 200,
 			title: "Cheshire Smile",
+			permReq: "Cat Canines Face",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceCheshireSmile;
 			}

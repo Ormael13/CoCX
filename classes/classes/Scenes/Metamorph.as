@@ -813,18 +813,7 @@ package classes.Scenes {
 			outputText(title);
 			outputText("What kind of lower body do you want?");
 
-			var memArray: Array = LowerBodyMem.Memories;
-
-			// Locks Taur TFs if player didn't become Taur at least once
-			if (!GeneticMemoryStorage["Taur Lower Body"]) {
-				memArray.map(function(item: *, index: int, array: Array): void {
-					if (item && item.taurVariant) {
-						item.id = "Locked Metamorph";
-					}
-				});
-			}
-
-			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, memArray);
+			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, LowerBodyMem.Memories);
 		}
 
 		private function accessSkinMenu(currentPage: int = 0): void {
@@ -907,7 +896,7 @@ package classes.Scenes {
 
 			for each (var genMem: * in pageMems) {
 				const buttonStr: String = genMem.title || "";
-				const unlocked: Boolean = GeneticMemoryStorage[genMem.id];
+				const unlocked: Boolean = GeneticMemoryStorage[genMem.id] && (genMem.taurVariant ? GeneticMemoryStorage["Taur Lower Body"] : true);
 				const partsInUse: Boolean = genMem.transformation().isPresent();
 				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
@@ -1147,7 +1136,8 @@ package classes.Scenes {
 		public static function unlockMetamorph (genMemName: String): void {
 			if (!GeneticMemoryStorage[genMemName] && player.hasPerk(PerkLib.GeneticMemory)) {
 				GeneticMemoryStorage[genMemName] = true;
-				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "</b>");
+				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "!</b>");
+				if (genMemName === "Taur Lower Body") outputText("\n<b>Now you can metamorph into the Taur variant of any lower body part you unlocked when available!</b>");
 			}
 		}
 
