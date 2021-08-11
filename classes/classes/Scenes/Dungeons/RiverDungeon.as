@@ -173,7 +173,7 @@ import classes.StatusEffects;
 					}
 					startCombat(new HellHound(), true);
 				}
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
@@ -311,7 +311,7 @@ import classes.StatusEffects;
 					}*/
 					startCombat(new EarthElemental(), true);
 				}
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
@@ -329,7 +329,7 @@ import classes.StatusEffects;
 					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
 				}*/
 				startCombat(new FireElemental(), true);
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 20);
 		}
@@ -346,7 +346,7 @@ import classes.StatusEffects;
 					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
 				}*/
 				startCombat(new WaterElemental(), true);
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 20);
 		}
@@ -364,7 +364,7 @@ import classes.StatusEffects;
 					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
 				}*/
 				startCombat(new AirElemental(), true);
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 20);
 		}
@@ -382,7 +382,7 @@ import classes.StatusEffects;
 					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
 				}*/
 				startCombat(new EarthElemental(), true);
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 20);
 		}
@@ -563,7 +563,7 @@ import classes.StatusEffects;
 					}
 					startCombat(new Electra(), true);
 				}
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
@@ -586,7 +586,7 @@ import classes.StatusEffects;
 					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
 				}*/
 				startCombat(new DarknessElemental(), true);
-				doNext(playerMenu);
+				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
@@ -961,13 +961,13 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 				player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 				player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
-				outputText("As you step into the room, four suddenly erupt with a raucous of flames as the faint smell of incense fills the room. Your ears perk at the distant sound of wind within the tunnels. An echo follows with a gentle stream of water steadily growing closer.\n\n");
+				outputText("As you step into the room, four incense burners suddenly erupt with a raucous of flames as the faint smell of incense fills the room. Your ears perk at the distant sound of wind within the tunnels. An echo follows with a gentle stream of water steadily growing closer.\n\n");
 				outputText("Your balance shifts as the ground quakes beneath you. You reflexively step back as the ground splits before you as a rift opens. "+(silly() ? "Is that boss music?":"")+" From the darkness of the unsealed rift, a hand emerges before pulling itself out of the crevice.\n\n");
 				outputText("The creature hovers ominously. Its ellipsoid torso is accompanied by two short arms, thin with visible segments, tapering into a single point. From its shoulders sprout two additional pairs of arms, twice the size of the smaller one as it ends in insect-like claws.\n\n");
 				outputText("Tapering down from its torso is a tail much longer than the body, slowly dangling in the still air. The thing levitates with its lack of legs as you quickly examine it. Its eyes begin to open; the four of them aligning into a diamond shape. The creature stares at you with a distant glare, as if it hasn't realized its purpose in this reality.\n\n");
 				outputText("Embers from the braziers slowly crawl toward the rift as the fissure begins to seal.\n\n");
 				outputText("The flames begin to merge with the being, setting its arms alight before it hurls itself toward you.\n\n");
-				outputText("You brace yourself, it's a fight!n\n");
+				outputText("You brace yourself, it's a fight!\n\n");
 				startCombat(new QuatroElementalBoss(), true);
 			}
 			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteB();
@@ -1625,4 +1625,4 @@ import classes.StatusEffects;
 			playerMenu();
 		}
 	}
-}
+}
