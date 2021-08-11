@@ -3974,6 +3974,7 @@ public function rebirthFromBadEnd():void {
 		performancePoints += possibleToGainAscensionPoints();
 		player.ascensionPerkPoints += performancePoints;
 		player.knockUpForce(); //Clear pregnancy
+		player.buttKnockUpForce(); //Clear Butt preggos.
 		//Scene GO!
 		clearOutput();
 		outputText("It's time for you to ascend. You walk to the center of the [camp], announce that you're going to ascend to a higher plane of existence, and lay down. ");
