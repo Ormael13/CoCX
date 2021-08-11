@@ -2339,7 +2339,7 @@ public class Camp extends NPCAwareContent{
 				outputText(". Would you work on completing it?");
 			}
 			else {
-				outputText("Your clone is wandering around [camp]. What would you ask " + player.mf + " to do?\n\n");
+				outputText("Your clone is wandering around [camp]. What would you ask " + player.mf("him","her") + " to do?\n\n");
 				outputText("Current clone task: ");
 				if (player.statusEffectv1(StatusEffects.PCClone) > 10 && player.statusEffectv1(StatusEffects.PCClone) < 21) outputText("Contemplating Dao of ");
 				if (player.statusEffectv1(StatusEffects.PCClone) == 20) outputText("Acid");

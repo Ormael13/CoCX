@@ -956,7 +956,7 @@ private function InternalMutations():void {
 		addButton(3, "Yes", InternalMutationsTak);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		outputText("Evangeline's smile widens when she hears you would like to undergo another 'grafting'. \n\"So what today would you like to change [name]?\"");
+		outputText("Evangeline's smile widens when she hears you would like to undergo another 'grafting'.\n\n\"So what today would you like to change [name]?\"");
 		InternalMutations0();
 	}
 }
