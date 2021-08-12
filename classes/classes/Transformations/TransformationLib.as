@@ -8896,10 +8896,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    } else {
 	      switch (rand(2)) {
 	      case 0:
-	        desc += "Sensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the 	ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
+	        desc += "Sensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
 	        break;
 	      case 1:
-	        desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your 	shoulder-blades. After a moment the pain passes, though your wings are gone!";
+	        desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your	shoulder-blades. After a moment the pain passes, though your wings are gone!";
 	        break;
 	      }
 	    }
