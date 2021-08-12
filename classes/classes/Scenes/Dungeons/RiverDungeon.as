@@ -141,9 +141,13 @@ import classes.StatusEffects;
 			player.removeStatusEffect(StatusEffects.RiverDungeonA);
 			doNext(camp.returnToCampUseOneHour);
 		}
+		private function encountersRulette():Boolean {
+			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) return true;
+			else return false;
+		}
 		
 		private function encountersRuletteA():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -265,7 +269,7 @@ import classes.StatusEffects;
 		}
 		
 		private function encountersRuletteB():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -316,7 +320,7 @@ import classes.StatusEffects;
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		private function encountersRuletteBFire():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -334,7 +338,7 @@ import classes.StatusEffects;
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 20);
 		}
 		private function encountersRuletteBWater():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -351,7 +355,7 @@ import classes.StatusEffects;
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 20);
 		}
 		private function encountersRuletteBAir():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -369,7 +373,7 @@ import classes.StatusEffects;
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 20);
 		}
 		private function encountersRuletteBEarth():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -507,7 +511,7 @@ import classes.StatusEffects;
 		}
 		
 		private function encountersRuletteC():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -568,7 +572,7 @@ import classes.StatusEffects;
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		private function encountersRuletteCDarkness():void {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			if (encountersRulette()) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
@@ -828,6 +832,7 @@ import classes.StatusEffects;
 			clearOutput();
 			if (flags[kFLAGS.AETHER_SINISTER_EVO] < 1) {
 				flags[kFLAGS.AETHER_SINISTER_EVO] = 0.5;
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
 				startCombat(new GolemDummyImproved(), true);
 			}
@@ -878,6 +883,7 @@ import classes.StatusEffects;
 			clearOutput();
 			if (flags[kFLAGS.AETHER_DEXTER_EVO] < 1) {
 				flags[kFLAGS.AETHER_DEXTER_EVO] = 0.5;
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
 				startCombat(new GolemDummyImproved(), true);
 			}
@@ -961,6 +967,7 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 				player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 				player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				outputText("As you step into the room, four incense burners suddenly erupt with a raucous of flames as the faint smell of incense fills the room. Your ears perk at the distant sound of wind within the tunnels. An echo follows with a gentle stream of water steadily growing closer.\n\n");
 				outputText("Your balance shifts as the ground quakes beneath you. You reflexively step back as the ground splits before you as a rift opens. "+(silly() ? "Is that boss music?":"")+" From the darkness of the unsealed rift, a hand emerges before pulling itself out of the crevice.\n\n");
 				outputText("The creature hovers ominously. Its ellipsoid torso is accompanied by two short arms, thin with visible segments, tapering into a single point. From its shoulders sprout two additional pairs of arms, twice the size of the smaller one as it ends in insect-like claws.\n\n");
@@ -1078,6 +1085,7 @@ import classes.StatusEffects;
 			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 0) {
 				outputText("A crackling sound emanates from this distance. You turn to face a large ball of fire rushing toward you. The ball shifts, forming itself into a humanoid form in your presence. ");
 				outputText("It morphs into nine-foot-tall ifrit with a clear feminine shape.  Its entire body is alight as it attacks! You must prepare to fight!");
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new FireElemental(), true);
 			}
@@ -1113,6 +1121,7 @@ import classes.StatusEffects;
 			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 0) {
 				outputText("A soft warble emanates from nearby, it sounds much like rolling waves, quickly approaching. You notice a large sphere of water rolling toward you.  It bounces, the ball jiggling with each hop before it quickly begins to take form.  ");
 				outputText("The body of water quickly coalesces into the form a water undine with clear masculine features.  It focuses its attention on you, still dripping with water before it shifts aggressively, prepared to attack. It's a fight!");
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new WaterElemental(), true);
 			}
@@ -1149,6 +1158,7 @@ import classes.StatusEffects;
 			if (player.statusEffectv3(StatusEffects.RivereDungeonIB) == 0) {
 				outputText("A loud howl of wind is heard not far, you turn your attention to the source of the noise as you notice a tornado spinning itself toward you. The tornado is twice the size of the miniature vortexes you've seen earlier. As it draws closer, it quickly shifts into a humanoid form.  ");
 				outputText("As the harsh winds die out, the sylph takes a masculine form.  Its eyes focus upon you before it darts toward you. You brace yourself for combat.");
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new AirElemental(), true);
 			}
@@ -1185,6 +1195,7 @@ import classes.StatusEffects;
 			if (player.statusEffectv4(StatusEffects.RivereDungeonIB) == 0) {
 				outputText("An avalanche of rocks rumbles the ground. You glance over and notice a series of stones rolling over each other toward your direction.  It's much larger than the usual elementals.  As it approaches, the stone quickly take shape of a humanoid figure. ");
 				outputText("The rocks roll over, taking on a feminine form. Its eyes focus before it raises a fist. You brace yourself, it looks like the fight is on!");
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new EarthElemental(), true);
 			}
@@ -1472,7 +1483,10 @@ import classes.StatusEffects;
 		public function roomC31():void {
 			dungeonLoc = 165;
 			clearOutput();
-			encountersRuletteC();//boss room
+			/*if () {
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+			}
+			else */encountersRuletteC();//boss room
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
@@ -1521,6 +1535,15 @@ import classes.StatusEffects;
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
 		}
+		public function roomD02():void {
+			dungeonLoc = 1xx;
+			clearOutput();
+			encountersRuletteC();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
 		*/
 		private function tresureRoom1A():void {
 			clearOutput();
@@ -1544,7 +1567,7 @@ import classes.StatusEffects;
 			outputText("<i>This is my domain</i>\n\n");
 			outputText("<i>You cant take it from me the greatest you've ever seen</i>\n\n");
 			outputText("<i>you'll remember my name</i>\n\n");
-			outputText("<i>Call me a goddess, call me a queen</i>\n\n");
+			outputText("<i>Call me a god, call me a king</i>\n\n");
 			outputText("<i>You're outa my realm so bend the knee</i>\n\n");
 			//outputText("The two of you proceed to carefully extract the precious gemstones from the wall as Nessa pockets her payment.\n\n");
 			if (player.hasKeyItem("Key Of Darkness") >= 0) player.removeKeyItem("Key Of Darkness");

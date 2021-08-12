@@ -35,6 +35,7 @@ public class OnikiriSake extends Consumable {
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
 		var temp:Number = 0;

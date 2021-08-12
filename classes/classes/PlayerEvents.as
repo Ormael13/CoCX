@@ -1830,6 +1830,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
 				needNext = true;
 			}
+			//Wood elf fixed by blessing of the ancestor tree
+			if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+				if (!player.hasPerk(PerkLib.ElvenSense)) {
+					outputText("\nYour acute hearing warns you of imminent danger and you dodge as a branch falls from a nearby tree missing your head by mere inches. You realise your newly sharpened senses granted you increased agility and precision.  <b>You gained the ability Elven Senses.</b>\n\n");
+					outputText("<b>(Gained Perk: Elven Sense</b>)");
+					player.createPerk(PerkLib.ElvenSense, 0, 0, 0, 0);
+				}
+				if (!player.hasPerk(PerkLib.FlawlessBody)) {
+					outputText("\nYou examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
+					outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
+					player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
+					outputText("\n\n<b>(Gained Perk: Flawless Body</b>)");
+				}
+			}
 			//Ferocity
 			if (player.orcScore() < 11 && player.hasPerk(PerkLib.Ferocity) && !player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) {
 				outputText("\nYour natural ferocity starts vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, which might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");

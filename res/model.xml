@@ -2680,7 +2680,7 @@
                 <show part="hands/scale"/>
                 <show part="hands_bg/scale"/>
 				<if test="PlayerHasViewableOutfit">
-					<if test="armStanceNonBannedList">
+					<if test="sleevelessList">
 						<if test="legCount==2">
 							<if test="lowerBody==LowerBody.DRAGON">
 								<hide part="arms/*"/>

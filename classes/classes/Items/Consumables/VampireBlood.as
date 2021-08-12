@@ -58,6 +58,7 @@ public class VampireBlood extends Consumable {
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
         if (pure) {
             if (pure && rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EarsVampire.isPossible()) {
