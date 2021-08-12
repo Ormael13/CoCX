@@ -2339,7 +2339,7 @@ public class Camp extends NPCAwareContent{
 				outputText(". Would you work on completing it?");
 			}
 			else {
-				outputText("Your clone is wandering around [camp]. What would you ask " + player.mf + " to do?\n\n");
+				outputText("Your clone is wandering around [camp]. What would you ask " + player.mf("him","her") + " to do?\n\n");
 				outputText("Current clone task: ");
 				if (player.statusEffectv1(StatusEffects.PCClone) > 10 && player.statusEffectv1(StatusEffects.PCClone) < 21) outputText("Contemplating Dao of ");
 				if (player.statusEffectv1(StatusEffects.PCClone) == 20) outputText("Acid");
@@ -3974,6 +3974,7 @@ public function rebirthFromBadEnd():void {
 		performancePoints += possibleToGainAscensionPoints();
 		player.ascensionPerkPoints += performancePoints;
 		player.knockUpForce(); //Clear pregnancy
+		player.buttKnockUpForce(); //Clear Butt preggos.
 		//Scene GO!
 		clearOutput();
 		outputText("It's time for you to ascend. You walk to the center of the [camp], announce that you're going to ascend to a higher plane of existence, and lay down. ");

@@ -48,9 +48,31 @@ public class DarknessElemental extends Monster
 			}
 		}
 		
+		public function subbossSpecial():void {
+			outputText("The Undine concentrates, coalescing nearby ambient water into crescent-shaped shards of water before hurling them toward you with a flick of his wrist.");
+			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
+			else {
+				var damage:Number = inte + wis;
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+				damage *= 3.75;
+				damage = Math.round(damage);
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
+				outputText(" The watery strikes connect with your body. ");
+				damage = player.takeDarknessDamage(damage, true);
+				damage = player.takeDarknessDamage(damage, true);
+				damage = player.takeDarknessDamage(damage, true);
+				damage = player.takeDarknessDamage(damage, true);
+				damage = player.takeDarknessDamage(damage, true);
+				damage = player.takeDarknessDamage(damage, true);
+				damage = player.takeDarknessDamage(damage, true);
+				damage = player.takeDarknessDamage(damage, true);
+			}
+		}
+		
 		override protected function performCombatAction():void
 		{
-			/*if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				if (hasStatusEffect(StatusEffects.Provoke)) {
 					var choiceP1:Number = rand(5);
 					if (choiceP1 == 0) fluffyOfPunches();
@@ -64,7 +86,7 @@ public class DarknessElemental extends Monster
 					if (choice11 > 3) subbossSpecial();
 				}
 			}
-			else {*/
+			else {
 				if (hasStatusEffect(StatusEffects.Provoke)) {
 					var choiceP:Number = rand(5);
 					if (choiceP < 4) fluffyOfPunches();
@@ -76,19 +98,19 @@ public class DarknessElemental extends Monster
 					if (choice1 == 3 || choice1 == 4) baseElementalAttack();
 					if (choice1 == 5) eAttack();
 				}
-			//}
+			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			/*if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatAirElementalSubBoss();
-			else */cleanupAfterCombat();
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatDarknessElementalSubBoss();
+			else cleanupAfterCombat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			/*if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatedByAirElementalSubBoss();
-			else */SceneLib.dungeons.riverdungeon.defeatedByDarknessElemental();
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatedByDarknessElementalSubBoss();
+			else SceneLib.dungeons.riverdungeon.defeatedByDarknessElemental();
 		}
 		
 		public function DarknessElemental() 
@@ -148,6 +170,20 @@ public class DarknessElemental extends Monster
 				this.level = 35;
 				this.bonusHP = 1050;
 				this.additionalXP = 275;
+			}
+			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				this.short = "unique darkness elemental";
+				this.imageName = "unique darkness elemental";
+				this.long = "You're currently fighting unique darkness elemental. It's a nine foot tall creature that looks exactly like you. Its body is wrapped in an darkness cloak, almost completely concealing its form as it using its bare fists to fight.";
+				this.tallness = 108;
+				initStrTouSpeInte(46, 60, 99, 230);
+				initWisLibSensCor(230, 15, 127, 50);
+				this.weaponAttack = 22;
+				this.armorDef = 25;
+				this.armorMDef = 125;
+				this.level = 38;
+				this.bonusHP = 1575;
+				this.additionalXP = 600;
 			}
 			this.a = "the ";
 			this.plural = false;
