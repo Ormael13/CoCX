@@ -2422,10 +2422,9 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		else {
-			outputText("Closing your eyes you focus on forming core of your clone. After long minutes you start to feel how part of your soulforce and life essence starts to seep throu the pores outside your body.\n\n");
-			outputText("Slowly directing it to focus it takes over hour to start focus into swirling sphere before you. Keeping your concetration you guide more of essence and soul energy to leave your body and drift toward very slowly growning object before you.\n\n");
-			outputText("After another few hours of very slow process of nurishing core of your clone, you reach point of almost fully been depleyed of soulforce and alot of your life essence been used. ");
-			outputText("Shifting your focus from transfering to finish transfer you finish this step by making sure swirling mass before you not disspate before next session of forming. After this you takes a hour of rest before leaving newly formed core.\n\n");
+			outputText("You close your eyes with the intent of forming the core of your clone. Minutes pass as the sensation of your soul force and life essence slowly escapes from your being.\n\n");
+			outputText("An hour passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
+			outputText("The process is slow. While nourishing the core of the clone, you find yourself unable to expend any more of your life essence or risk being completely drained of soul essence.\n\n");
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
 			EngineCore.SoulforceChange(-(player.maxSoulforce()), true);
 			HPChange(-(player.maxHP() * 0.5), true);
