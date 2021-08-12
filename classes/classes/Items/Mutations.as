@@ -12328,7 +12328,7 @@ public final class Mutations extends MutationsHelper {
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY) && rand(3) == 0) {
+        if (!InCollection(player.wings.type, [Wings.NONE, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY]) && rand(3) == 0) {
             outputText("\n\n");
             transformations.WingsNone.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
