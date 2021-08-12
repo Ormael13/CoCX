@@ -780,7 +780,7 @@ public class DebugMenu extends BaseContent
 		private function dumpPlayerData():void {
 			clearOutput();
 			mainViewManager.showPlayerDoll(true);
-			CoC.instance.playerAppearance.appearance();
+			CoC.instance.playerAppearance.appearance(true);
 			outputText("[pg]");
 			for each (var race:Race in Race.ALL_RACES) {
 				if (!race) continue;
