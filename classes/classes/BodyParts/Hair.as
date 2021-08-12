@@ -114,7 +114,7 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, STORM, "STORM", {
 		name:"glowing lightning-shaped",
 		shortDesc: "lightning {hair}",
-		appearanceDesc: "Your wild, {hairInfo}'s tips end in glowing lightning-shaped locks, cackling with electricity whenever you will them to.",
+		appearanceDesc: "Your wild, {hairInfo}'s tips end in glowing lightning-shaped locks, crackling with electricity whenever you will them to.",
 		ignoresStyle: true
 	});
 
