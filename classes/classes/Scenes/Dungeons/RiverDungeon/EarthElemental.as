@@ -154,7 +154,7 @@ public class EarthElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
 				this.short = "earth elemental";
 				this.imageName = "earth elemental";
-				this.long = "You're currently fighting earth elemental. It's a four foot, nine inch tall creature of made of rocks, currently using its bare fists to fight..";
+				this.long = "You're currently fighting earth elemental. It's a four foot, nine inch tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(16, 46, 46, 70);
 				initWisLibSensCor(70, 10, 35, 50);
@@ -168,7 +168,7 @@ public class EarthElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.short = "golem";
 				this.imageName = "earth golem";
-				this.long = "You're currently fighting 'female' golem. It's a nine foot tall creature of made of rocks, currently using its bare fists to fight..";
+				this.long = "You're currently fighting 'female' golem. It's a nine foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(24, 69, 69, 105);
 				initWisLibSensCor(105, 15, 55, 50);
