@@ -4949,7 +4949,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
 				desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
-			}
 	    }
 
 	    player.coatColor = "black";
