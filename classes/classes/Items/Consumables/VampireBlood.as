@@ -53,30 +53,69 @@ public class VampireBlood extends Consumable {
             outputText("With some effort, you force down the blood and swallow it. A rush of heat flows through your veins as your body starts to react to the new blood.");
         }
 
+        changes = 0;
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
-        if (rand(3) == 0 && changes < changeLimit && pure ? player.arms.type != Arms.HUMAN : player.arms.type != Arms.BAT) {
-            outputText("\n\n");
-            if (player.arms.type != Arms.HUMAN) {
-                CoC.instance.transformations.ArmsHuman.applyEffect();
-            }
-            if (!pure) {
-                CoC.instance.transformations.ArmsBatWing.applyEffect();
-            }
-            changes++;
-        }
-
-        if (pure && rand(3) == 0 && changes < changeLimit && pure ? CoC.instance.transformations.EarsVampire.isPossible() : CoC.instance.transformations.EarsBat.isPossible()) {
-            outputText("\n\n");
-            if (pure) {
+        if (pure) {
+            if (pure && rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EarsVampire.isPossible()) {
+                outputText("\n\n");
                 CoC.instance.transformations.EarsVampire.applyEffect();
-            } else {
-                CoC.instance.transformations.EarsBat.applyEffect();
+                changes++;
             }
-            changes++;
+
+            if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.HUMAN) {
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.wings.type !== Wings.VAMPIRE) {
+                outputText("\n\n");
+                if (player.hasGooSkin()) {
+                    CoC.instance.transformations.SkinPlain.applyEffect();
+                    outputText("\n\n");
+                }
+
+                CoC.instance.transformations.WingsVampire.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.skinTone !== "pale") {
+                outputText("\n\n");
+                outputText("Your skin suddenly starts itching, causing you to look at it just in time for you to see it finish paling into a shade that wouldn’t be     out of place on a corpse. You feel sleepy… horribly so, but you dismiss it as being the fault of the glaring light above your head. <b>You guess    you could use some extra sunlight with your pale skin.</b>");
+                player.skinTone = "pale";
+
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EyesChangeColor(["blood-red"]).isPossible()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesChangeColor(["blood-red"]).applyEffect();
+
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.rearBody.type !== RearBody.BAT_COLLAR) {
+                outputText("\n\n");
+                CoC.instance.transformations.RearBodyBatCollar.applyEffect();
+                changes++;
+            }
+        } else {
+            if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EarsBat.isPossible()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EarsBat.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.BAT) {
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsBatWing.applyEffect();
+                changes++;
+            }
         }
 
         if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EyesVampire.isPossible()) {
@@ -88,36 +127,6 @@ public class VampireBlood extends Consumable {
         if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.FaceVampire.isPossible()) {
             outputText("\n\n");
             CoC.instance.transformations.FaceVampire.applyEffect();
-            changes++;
-        }
-
-        if (pure && rand(3) == 0 && changes < changeLimit && player.wings.type !== Wings.VAMPIRE) {
-            outputText("\n\n");
-            if (player.hasGooSkin()) {
-                CoC.instance.transformations.SkinPlain.applyEffect();
-                outputText("\n\n");
-            }
-
-            CoC.instance.transformations.WingsVampire.applyEffect();
-            changes++;
-        }
-
-        if (pure && rand(3) == 0 && changes < changeLimit && player.skinTone !== "pale") {
-            outputText("\n\n");
-            outputText("Your skin suddenly starts itching, causing you to look at it just in time for you to see it finish paling into a shade that wouldn’t be out of place on a corpse. You feel sleepy… horribly so, but you dismiss it as being the fault of the glaring light above your head. <b>You guess you could use some extra sunlight with your pale skin.</b>");
-            player.skinTone = "pale";
-
-            if (CoC.instance.transformations.EyesChangeColor(["blood-red"]).isPossible()) {
-                outputText("\n\n");
-                CoC.instance.transformations.EyesChangeColor(["blood-red"]).applyEffect();
-            }
-
-            changes++;
-        }
-
-        if (!pure && rand(3) == 0 && changes < changeLimit && player.rearBody.type !== RearBody.BAT_COLLAR) {
-            outputText("\n\n");
-            CoC.instance.transformations.RearBodyBatCollar.applyEffect();
             changes++;
         }
 

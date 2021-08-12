@@ -1375,6 +1375,7 @@ public class PlayerInfo extends BaseContent {
 				//if (player.level % 2 == 0) player.ascensionPerkPoints++;
 				//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
 				//może też dodać ascension perk aby móc dostawać 6 lub nawet wiecej stat points na lvl up?
+				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
 				clearOutput();
 				outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
 				if (player.level > 6) {
@@ -1461,6 +1462,7 @@ public class PlayerInfo extends BaseContent {
 				else {
 					player.perkPoints++;
 					player.statPoints += 5;
+					if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
 				}
 			}
 			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
@@ -2046,4 +2048,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}

@@ -91,7 +91,6 @@ use namespace CoC;
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
 		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
-			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) outputText(""+player.statusEffectv1(StatusEffects.TribulationCountdown)+"\n");
 		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
@@ -1457,12 +1456,19 @@ use namespace CoC;
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
 				addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
 				addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
+				addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 				//addButton(11, "", ).hint("Add 1 .");
 				if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 				addButton(13, "-1-", NonEquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
+
+		private function addConsumable(consumable: Consumable): void {
+			outputText("\n\n<b>(Gained 1 " + consumable.longName + "!)</b>\n\n");
+			inventory.takeItem(consumable, curry(NonEquipmentMenu, 2));
+		}
+
 		public function MaterialMenu(page:int = 1):void {
 			menu();
 			if (page == 1) {
@@ -2835,6 +2841,34 @@ use namespace CoC;
 			outputText("\n\n");
 			doNext(camp.returnToCampUseEightHours);
 		}
+		public function DaoContemplationsEffectClone(statusEffect:StatusEffectType, daoname:String):void {
+			player.addStatusValue(statusEffect, 1, 1);
+			if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+				player.addStatusValue(statusEffect, 1, -140);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+				player.addStatusValue(statusEffect, 1, -100);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+				player.addStatusValue(statusEffect, 1, -60);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+				player.addStatusValue(statusEffect, 1, -40);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+				player.addStatusValue(statusEffect, 1, -20);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer.</b>");
+			}
+		}
 		public function SoulforceRegeneration2():void {
 			clearOutput();
 			var soulforceamountrestored:int = 52;
@@ -3896,7 +3930,13 @@ use namespace CoC;
 			menu();
 			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc).hint("Req. 80+ soulforce");
 			else addButtonDisabled(0, "Tamani", "");
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) {
+				if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
+					if (player.hasCock()) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
+					else addButtonDisabled(1, "Tamani D.", "Req. to have cock of any type.");
+				}
+				else addButtonDisabled(1, "Tamani D.", "Req. to have 16+ (still alive) daughters with Tamani.");
+			}
 			else addButtonDisabled(1, "Tamani D.", "");
 			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion).hint("Req. 90+ soulforce");
 			else addButtonDisabled(2, "KitsuMansion", "");

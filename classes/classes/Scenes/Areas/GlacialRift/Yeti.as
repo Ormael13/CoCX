@@ -77,17 +77,44 @@ public class Yeti extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			SceneLib.glacialRift.yetiScene.winAgainstYeti();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else SceneLib.glacialRift.yetiScene.winAgainstYeti();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			SceneLib.glacialRift.yetiScene.loseToYeti();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByYeti();
+			else SceneLib.glacialRift.yetiScene.loseToYeti();
 		}
 
 		public function Yeti()
 		{
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				initStrTouSpeInte(185, 210, 105, 90);
+				initWisLibSensCor(80, 50, 30, 45);
+				this.weaponAttack = 100;
+				this.armorDef = 150;
+				this.armorMDef = 50;
+				this.bonusHP = 1500;
+				this.bonusLust = 117;
+				this.level = 37;
+				this.gems = 36 + rand(20);
+			}
+			else {
+				initStrTouSpeInte(305, 360, 185, 90);
+				initWisLibSensCor(80, 50, 30, 45);
+				this.weaponAttack = 160;
+				this.armorDef = 240;
+				this.armorMDef = 80;
+				this.bonusHP = 3000;
+				this.bonusLust = 156;
+				this.level = 76;
+				this.gems = 75 + rand(40);
+				this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			}
 			this.a = "the ";
 			this.short = "yeti";
 			this.imageName = "yeti";
@@ -106,27 +133,15 @@ public class Yeti extends Monster
 			this.skin.growFur({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 8;
-			initStrTouSpeInte(305, 360, 185, 90);
-			initWisLibSensCor(80, 50, 30, 45);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 160;
 			this.armorName = "thick fur";
-			this.armorDef = 240;
-			this.armorMDef = 80;
-			this.bonusHP = 3000;
-			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 76;
-			this.gems = 75 + rand(40);
 			this.drop = new WeightedDrop()
 					.add(consumables.YETICUM, 1)
 					.add(null, 2);
-			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
-			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.abilities = [

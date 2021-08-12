@@ -3670,6 +3670,12 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
             return;
         }
+		//Smart enough for nosferatu and doesnt have it
+		if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
+			player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
+			return;
+		}
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
 			//Smart enough for Bone spirit and doesnt have it
 			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
@@ -3740,13 +3746,13 @@ public final class Mutations extends MutationsHelper {
     public function greySpellbook(player:Player):void {
         clearOutput();
         outputText("You open the grey volume, and discover it to be an instructional book on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        if (player.inte < 100) {
+        if (player.inte < 75) {
             outputText("\n\nYou feel greatly enlightened by your time spent reading.");
             KnowledgeBonus("int", 4);
-        } else if (player.inte < 150) {
+        } else if (player.inte < 100) {
             outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.");
             KnowledgeBonus("int", 2);
-        } else if (player.inte < 200) {
+        } else if (player.inte < 125) {
             outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.");
             KnowledgeBonus("int", 1);
         } else {
@@ -3754,41 +3760,47 @@ public final class Mutations extends MutationsHelper {
             KnowledgeBonus("int", 0.5);
         }
         if (player.hasPerk(PerkLib.GreyMagic)) {
-            //Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for Fraction of heal and harm and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fraction of heal and harm.</b>");
-                player.createStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm, 0, 0, 0, 0);
-                return;
-            }*/
-            //Smart enough for Clear Mind and doesnt have it
-            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
-                player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
-                return;
-            }*/
             //Smart enough for mana shield and doesnt have it
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
             }
-			//Smart enough for nosferatu and doesnt have it
-			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
-				player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
-				return;
-			}
+            //Smart enough for Clear Mind and doesnt have it
+            if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
+                player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for  and doesnt have it
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
+                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+                return;
+            }*/
+            //Smart enough for  and doesnt have it
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
+                player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+                return;
+            }*/
+            //Smart enough for Energy Drain and doesnt have it
+            if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Energy Drain.</b>");
+                player.createStatusEffect(StatusEffects.KnowsEnergyDrain, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Restore and doesnt have it
+            if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsRestore)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Restore.</b>");
+                player.createStatusEffect(StatusEffects.KnowsRestore, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Balance of Life and doesnt have it
+            if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBalanceOfLife)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Balance of Life.</b>");
+                player.createStatusEffect(StatusEffects.KnowsBalanceOfLife, 0, 0, 0, 0);
+                return;
+            }
         }
     }
 
@@ -3861,17 +3873,22 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
         }
+        //Smart enough for Mental Shield and doesnt have it
+        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
+            player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
+        }
+        //Smart enough for Cure and doesnt have it
+        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
+            player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
+        }
         //Smart enough for fire storm and doesnt have it
         if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
             outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
             player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
             return;
         }
-        //Smart enough for Mental Shield and doesnt have it
-        /*if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
-            player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
-        }*/
 		if (player.hasPerk(PerkLib.DivineKnowledge)) {
 			//Smart enough for Aegis and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
@@ -3887,6 +3904,16 @@ public final class Mutations extends MutationsHelper {
 			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsDivineShield)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Divine Shield.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDivineShield, 0, 0, 0, 0);
+			}
+			//Smart enough for Thunderstorm and doesnt have it
+			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Thunderstorm.</b>");
+				player.createStatusEffect(StatusEffects.KnowsThunderstorm, 0, 0, 0, 0);
+			}
+			//Smart enough for Tears of Denial and doesnt have it
+			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Tears of Denial.</b>");
+				player.createStatusEffect(StatusEffects.KnowsTearsOfDenial, 0, 0, 0, 0);
 			}
 		}
     }
@@ -4560,6 +4587,7 @@ public final class Mutations extends MutationsHelper {
             dynStats("sen", -1);
             changes++;
         }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
         /*Calculate goopiness
          var goopiness:Number = 0;
          if(player.skinType == GOO) goopiness+=2;
@@ -8814,6 +8842,7 @@ public final class Mutations extends MutationsHelper {
 		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		outputText("You wad up the sweet, midnight gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat. ");
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		TransformationUtils.pickAndRunMultipleEffects(transformations.List_AtlachNacha, changeLimit);
 	}
 
@@ -10205,7 +10234,7 @@ public final class Mutations extends MutationsHelper {
 
     public function strangeFlower(player:Player):void {
         clearOutput();
-        if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+        if (player.lowerBody == LowerBody.PLANT_FLOWER && !player.blockingBodyTransformations()) {
             outputText("Having no idea of what could happen when you take a whiff of this obviously corrupted plant, you head to the forest in order to find some privacy.");
             if (silly()) {
                 outputText(" You have the feeling you might be taunting Murphy.");
@@ -10431,6 +10460,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tou > 90) player.addCurse("tou", 1, 1);
             changes++;
         }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
         //[Change Hair Color: Golden-blonde or Reddish-orange]
         var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
@@ -11121,6 +11151,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("\n\nThoughts of mischief roll across your consciousness, unbounded by your conscience or any concern for others.  You should really have some fun - who cares who it hurts, right?");
             dynStats("cor", 1);
         });
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
 
         //**********************
@@ -11330,126 +11361,6 @@ public final class Mutations extends MutationsHelper {
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
-
-    /* Moved to KitsuneGift.as
-    //Kitsune's Gift
-		public function kitsunesGift(player:Player):void
-		{
-			clearOutput();
-			outputText("Curiosity gets the best of you, and you decide to open the package.  After all, what's the worst that could happen?\n\n");
-			//Opening the gift randomly results in one of the following:
-    //			menuLoc = MENU_LOCATION_KITSUNE_GIFT;
-
-			switch(rand(12)) {
-			//[Fox Jewel]
-				case 0:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
-				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
-				inventory.takeItem(consumables.FOXJEWL, inventory.inventoryMenu);
-				break;
-
-			//[Fox Berries]
-				case 1:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
-				outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
-				//add Fox Berries to inventory
-				inventory.takeItem(consumables.FOXBERY, inventory.inventoryMenu);
-				break;
-
-			//[Gems]
-				case 2:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it is filled to the brim with shining gems!");
-				var gems:int = 2 + rand(20);
-				outputText("\n\n<b>You've received " + num2Text(gems) + " shining gems from the kitsune's gift!  How generous!</b>");
-				player.gems += gems;
-				//add X gems to inventory
-				statScreenRefresh();
-				break;
-
-			//[Kitsune Tea/Scholar's Tea] //Just use Scholar's Tea and drop the "trick" effect if you don't want to throw in another new item.
-				case 3:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small bag of dried tea leaves!");
-				outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
-				//add Kitsune Tea/Scholar's Tea to inventory
-				inventory.takeItem(consumables.SMART_T, inventory.inventoryMenu);
-				break;
-
-			//[Hair Dye]
-				case 4:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small vial filled with hair dye!");
-				var itype:ItemType = [
-					consumables.RED_DYE,
-					consumables.BLOND_D,
-					consumables.BLACK_D,
-					consumables.WHITEDY
-				][rand(4)];
-
-				outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
-				//add <color> Dye to inventory
-				inventory.takeItem(itype, inventory.inventoryMenu);
-				break;
-
-			//[Knowledge Spell]
-				case 5:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but it seems like there's nothing else inside.  As you peer into the box, a glowing circle filled with strange symbols suddenly flashes to life!  Light washes over you, and your mind is suddenly assaulted with new knowledge...  and the urge to use that knowledge for mischief!");
-
-				outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
-				//Increase INT and Libido, +10 LUST
-				dynStats("int", 4, "sen", 2, "lus", 10);
-				break;
-
-			//[Thief!]
-				case 6:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it leaps into your item pouch, then hops away and gallavants into the woods, carting off a small fortune in gems.");
-
-				outputText("\n\n<b>The kitsune's familiar has stolen your gems!</b>");
-				// Lose X gems as though losing in battle to a kitsune
-				player.gems -= 2 + rand(15);
-				statScreenRefresh();
-				break;
-
-			//[Prank]
-				case 7:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it pulls a large calligraphy brush from thin air and leaps up into your face, then hops away and gallavants off into the woods.  Touching your face experimentally, you come away with a fresh coat of black ink on your fingertips.");
-
-				outputText("\n\n<b>The kitsune's familiar has drawn all over your face!</b>  The resilient marks take about an hour to completely scrub off in the nearby stream.  You could swear you heard some mirthful snickering among the trees while you were cleaning yourself off.");
-				//Advance time 1 hour, -20 LUST
-				dynStats("lus", -20);
-				break;
-
-			//[Aphrodisiac]
-				case 8:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sweet-smelling pink dust into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel yourself growing hot and flushed, unable to keep your hands away from your groin.");
-				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
-				//+100 LUST
-				dynStats("lus=", player.maxLust(), "scale", false);
-				break;
-
-			//[Wither]
-				case 9:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sour-smelling orange powder into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel the strength draining from your muscles, withering away before your eyes.");
-				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a strength draining spell!  Hopefully it's only temporary...</b>");
-				dynStats("str", -5, "tou", -5);
-				break;
-
-			//[Dud]
-				case 10:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.");
-				outputText("\n\n<b>It seems the kitsune's gift was just a pile of useless junk!  What a ripoff!</b>");
-				break;
-
-			//[Dud...  Or is it?]
-				case 11:
-				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
-					outputText("\n\n<b>At least you managed to salvage a shard of black chitin from it...</b>  ");
-				inventory.takeItem(useables.B_CHITN, inventory.inventoryMenu);
-				break;
-
-				default: trace("Kitsune's gift roll foobar..."); break;
-			}
-		}
-*/
-
     /*
          Perk
 
@@ -11877,6 +11788,7 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("tou", 1, 1);
             changes++;
         }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
         //Sex stuff
         if (player.hasCock()) {
@@ -12044,6 +11956,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tou >= 75) player.addCurse("tou", 1, 1);
             if (player.tou >= 90) player.addCurse("tou", 1, 1);
         }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
         //SEXYYYYYYYYYYY
         //vag-anal capacity up for non-goo (available after PC < 5 ft; capacity ceiling reasonable but not horse-like or gooey)
@@ -12301,7 +12214,7 @@ public final class Mutations extends MutationsHelper {
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY) && rand(3) == 0) {
+        if (!InCollection(player.wings.type, [Wings.NONE, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY]) && rand(3) == 0) {
             outputText("\n\n");
             transformations.WingsNone.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -12361,6 +12274,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("spe", 1);
             changes++;
         }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
         //- If male with a hip rating >4 or a female/herm with a hip rating >6:
         if (((!player.hasCock() && player.hips.type > 6) || (player.hasCock() && player.hips.type > 4)) && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA warm, tingling sensation arises in your [hips].  Immediately, you reach down to them, concerned.  You can feel a small portion of your [hips] dwindling away under your hands.");
@@ -12601,6 +12515,7 @@ public final class Mutations extends MutationsHelper {
             player.ballSize++;
             changes++;
         }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
         //-----------------------
         // TRANSFORMATIONS
         //-----------------------
@@ -15624,7 +15539,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
-
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
         //public static const ushionnaSkinColors:Array = ["", "red", "gray", "sandy-tan", "pale", "purple"];
         //public static const ushionnaHairColors:Array = ["", "dark red", "blue", "brown", "white", "black"];

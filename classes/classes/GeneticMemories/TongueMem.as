@@ -69,7 +69,7 @@ package classes.GeneticMemories {
 
 		public static const DRACONIC:int = 3;
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
-			id: "Dragon Tongue",
+			id: "Draconic Tongue",
 			cost: 100,
 			title: "Dragon",
 			transformation: function(): Transformation {

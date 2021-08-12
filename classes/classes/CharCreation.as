@@ -2782,16 +2782,20 @@ import coc.view.MainView;
 		}
 
 		private function accessLowerBodyMenu(currentPage: int = 0): void {
-			var memArray: Array = LowerBodyMem.Memories;
-
 			// Hides Taur variants of pre-existing TFs
-			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
+			var memArray: Array = LowerBodyMem.Memories.filter(function(element: *, index: int, array: Array): Boolean {
 				if (element && !element.taurVariant) {
 					return true;
 				}
 				return false;
 			});
 
+			memArray.unshift({
+		  	id: "Taur Lower Body",
+				permCost: 50,
+				permInfo: "Enables metamorphosis to Taur variants of several lower body parts.",
+		  	title: "Taur Shape"
+			});
 
 			openPaginatedMetamorphMenu("Lower Body", accessLowerBodyMenu, currentPage, memArray);
 		}
@@ -2857,7 +2861,7 @@ import coc.view.MainView;
 				const obtained: Boolean = Metamorph.PermanentMemoryStorage[genMem.id];
 				const hasRequirements: Boolean = (genMem.permReq ? Metamorph.PermanentMemoryStorage[genMem.permReq] || false : true);
 
-				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points");
+				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points" + (genMem.permInfo ? "\n\n" + genMem.permInfo : ""));
 				else if (unlocked && !hasRequirements && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points\n\n<b>Requirement</b>: Permanentize " + genMem.permReq);
 				else if (unlocked && hasRequirements && !enoughPP && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points (You don't have enough Ascension Perk Points to permanentize this metamorphosis!)");
 				else if (obtained) addButtonDisabled(currentButton, buttonStr, "You already permanentized this metamorphosis!");

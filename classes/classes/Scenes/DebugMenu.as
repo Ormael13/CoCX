@@ -1,6 +1,7 @@
 package classes.Scenes
 {
 import classes.*;
+import classes.BodyParts.Ears;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
@@ -779,21 +780,7 @@ public class DebugMenu extends BaseContent
 		private function dumpPlayerData():void {
 			clearOutput();
 			mainViewManager.showPlayerDoll(true);
-            var pa:PlayerAppearance = CoC.instance.playerAppearance;
-            pa.describeRace();
-			pa.describeFaceShape();
-			outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
-			pa.describeEyes();
-			pa.describeHairAndEars();
-			pa.describeBeard();
-			pa.describeTongue();
-			pa.describeHorns();
-			outputText("[pg]");
-			pa.describeBodyShape();
-			pa.describeWings();
-			pa.describeRearBody();
-			pa.describeArms();
-			pa.describeLowerBody();
+			CoC.instance.playerAppearance.appearance();
 			outputText("[pg]");
 			for each (var race:Race in Race.ALL_RACES) {
 				if (!race) continue;
@@ -887,8 +874,8 @@ public class DebugMenu extends BaseContent
 		private function bodyPartEditorSkin():void {
 			clearBeElements();
 			addBeComboBox("Hair type",
-					mapForComboBox(Hair.Types, "id"),
-					player.hairType,
+                    mapForComboBox(Hair.Types, "id"),
+                    Hair.Types[player.hairType],
 					function (item:*):void {
 						player.hairType = item.data.value;
 						dumpPlayerData();
@@ -1110,6 +1097,14 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Eye color", COLOR_CONSTANTS, player.eyes.colour,
 					function (item:*):void {
 						player.eyes.colour = item.data;
+						dumpPlayerData();
+					}
+			);
+			var earTypes:Array = mapForComboBox(Ears.Types, "id");
+			addBeComboBox("Ear type", earTypes,
+					Ears.Types[player.ears.type],
+					function (item:*):void {
+						player.ears.type = item.data.value;
 						dumpPlayerData();
 					}
 			);

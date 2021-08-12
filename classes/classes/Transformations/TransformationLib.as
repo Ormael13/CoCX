@@ -228,7 +228,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.skin.setBaseOnly({ type: Skin.PLAIN, adj: "" });
-	    Metamorph.unlockMetamorph("Plain Skin");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -542,7 +541,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.skin.base.pattern = Skin.PATTERN_NONE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("No Skin Pattern");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -748,7 +746,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.type = Horns.NONE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("No Horns");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1205,7 +1202,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.antennae.type = Antennae.NONE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("No Antennae");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1367,7 +1363,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (doOutput) outputText(desc);
 
 	    player.hairType = Hair.NORMAL;
-	    Metamorph.unlockMetamorph("Human Hair");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1742,7 +1737,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.HUMAN;
-	    Metamorph.unlockMetamorph("Human Face");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2752,7 +2746,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You feel something strange with your tongue. When you pull it out to check what is going on, <b>you realize your tongue is perfectly human again!</b>";
 	    player.tongue.type = Tongue.HUMAN;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Human Tongue");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2947,7 +2940,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Ouch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!";
 	    player.ears.type = Ears.HUMAN;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Human Ears");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3667,7 +3659,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.HUMAN;
-	    Metamorph.unlockMetamorph("Human Eyes");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4434,39 +4425,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 */
 
 /*
-*		██████	███████	 █████  ██████
-*		██	 ██ ██			██	 ██ ██	 ██
-*		██████	█████	  ███████ ██████
-*		██	 ██ ██			██	 ██ ██	 ██
-*		██	 ██ ███████ ██	 ██ ██	 ██
-*/
-
-/*
-  */
-	public const RearAtlachNacha: Transformation = new SimpleTransformation("Atlach Nacha rear legs",
-	  // apply effect
-	  function (doOutput: Boolean): void {
-	    var desc: String = "";
-
-	    if (player.rearBody.type !== RearBody.NONE) {
-	      var rear: EnumValue = RearBody.Types[player.rearBody.type];
-	      desc += "Your old " + rear.name + " " + (rear.plural ? "are" : "is") + " drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state did not last long. ";
-	    }
-
-	    desc += "Pressure is building in multiple spots on your upper back. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. Four new chitinous limbs thrust their way into being, skittering aimlessly at the air as if to find purchase. After a moment of concentration you cause one of the spindly to rear around into your hand to take a closer look at it.It definitively looks like a spider leg except there's a set of red eyes at the end of the limb blinking back at you. <b>You now have two pairs of spider legs up your back.</b>";
-
-	    if (doOutput) outputText(desc);
-	    player.rearBody.type = RearBody.ATLACH_NACHA;
-	  },
-	  // is present
-	  function (): Boolean {
-	    return player.rearBody.type === RearBody.ATLACH_NACHA
-	  }
-	);
-  /*
-*/
-
-/*
 *		 █████	██████	███		 ███ ███████
 *		██	 ██ ██	 ██ ████	████ ██
 *		███████ ██████	██ ████ ██ ███████
@@ -4548,7 +4506,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.HUMAN;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Human Arms");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4941,13 +4898,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
-	      if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
-	    } else {
-	      if (player.arms.type == Arms.BEE) desc += "The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
-	      else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
-	      else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a shiny black carapace</b>.";
-	      else desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+	    if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+	    else if (player.arms.type == Arms.BEE) desc += "The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
+	    else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
+	    else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a shiny black carapace</b>.";
+	    else {
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+				desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 	    }
 
 	    player.coatColor = "black";
@@ -5516,7 +5474,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.gills.type = Gills.NONE;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("No Gills");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5616,7 +5573,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.rearBody.type = RearBody.NONE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("No Rear Body");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5916,6 +5872,27 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.rearBody.type === RearBody.FUR_COAT;
 	  }
 	);
+
+	public const RearBodyAtlachNacha: Transformation = new SimpleTransformation("Atlach Nacha rear legs",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.rearBody.type !== RearBody.NONE) {
+	      var rear: EnumValue = RearBody.Types[player.rearBody.type];
+	      desc += "Your old " + rear.name + " " + (rear.plural ? "are" : "is") + " drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state did not last long. ";
+	    }
+
+	    desc += "Pressure is building in multiple spots on your upper back. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. Four new chitinous limbs thrust their way into being, skittering aimlessly at the air as if to find purchase. After a moment of concentration you cause one of the spindly to rear around into your hand to take a closer look at it.It definitively looks like a spider leg except there's a set of red eyes at the end of the limb blinking back at you. <b>You now have two pairs of spider legs up your back.</b>";
+
+	    if (doOutput) outputText(desc);
+	    player.rearBody.type = RearBody.ATLACH_NACHA;
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.rearBody.type === RearBody.ATLACH_NACHA
+	  }
+	);
   /*
 */
 
@@ -5950,7 +5927,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public function LowerBodyTaur(lowerBodyType: int = undefined): Transformation {
-	  return new SimpleTransformation("Hoofed Lower Body",
+	  return new SimpleTransformation("Taur Lower Body",
 	    // apply effect
 	    function (doOutput: Boolean): void {
 	      var desc: String = "";
@@ -6004,7 +5981,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.HUMAN;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Human Lower Body");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6339,7 +6315,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        if (player.lowerBody == LowerBody.BEE) {
 	          desc += ", while a hideous cracking fills the air";
 	        }
-	        desc += ". When the spasms subside and you can once again stand, <b>you find that your four [legs] have been changed to those of a fox!</b>";
+	        desc += ". When the spasms subside and you can once again stand, <b>you find that your [legs] have been changed to those of a fox!</b>";
 	      }
 
 	      player.lowerBody = LowerBody.FOX;
@@ -7727,7 +7703,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailType = Tail.NONE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("No Tail");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8895,10 +8870,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    } else {
 	      switch (rand(2)) {
 	      case 0:
-	        desc += "Sensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the 	ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
+	        desc += "Sensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
 	        break;
 	      case 1:
-	        desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your 	shoulder-blades. After a moment the pain passes, though your wings are gone!";
+	        desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your	shoulder-blades. After a moment the pain passes, though your wings are gone!";
 	        break;
 	      }
 	    }
@@ -8907,7 +8882,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.NONE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("No Wings");
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9671,11 +9645,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			LowerBodyAtlach,
 			TailSpinneretAtlach,
 			GillsNone,
-			RearAtlachNacha
+			RearBodyAtlachNacha
 		];
 		/*
 */
 }
 }
-
-

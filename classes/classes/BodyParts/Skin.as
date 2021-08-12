@@ -20,7 +20,7 @@ import classes.internals.EnumValue;
  */
 public class Skin extends SaveableBodyPart {
 
-    public static const COVERAGE_NONE:int     = 0;
+  public static const COVERAGE_NONE:int     = 0;
 	public static const COVERAGE_LOW:int      = 1;
 	public static const COVERAGE_MEDIUM:int   = 2;
 	public static const COVERAGE_HIGH:int     = 3;
@@ -557,7 +557,7 @@ public class Skin extends SaveableBodyPart {
 	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
 
-		return " " + desc
+		return desc
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
