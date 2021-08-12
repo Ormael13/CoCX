@@ -874,8 +874,8 @@ public class DebugMenu extends BaseContent
 		private function bodyPartEditorSkin():void {
 			clearBeElements();
 			addBeComboBox("Hair type",
-					mapForComboBox(Hair.Types, "id"),
-					player.hairType,
+                    mapForComboBox(Hair.Types, "id"),
+                    Hair.Types[player.hairType],
 					function (item:*):void {
 						player.hairType = item.data.value;
 						dumpPlayerData();

@@ -254,8 +254,8 @@ public class QuatroElementalBoss extends Monster
 			armorDef += 10;
 			armorMDef += 60;
 			bonusHP += 125;
-			this.strStat.core.value *= 1.5;
-			this.touStat.core.value *= 1.5;
+			this.strStat.core.value *= 1.3;
+			this.touStat.core.value *= 1.3;
 			this.removePerk(PerkLib.FireNature);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			HP = maxHP();
@@ -271,7 +271,9 @@ public class QuatroElementalBoss extends Monster
 			armorName = "magma skin covered with layer of steam";
 			armorDef += 5;
 			armorMDef = 30;
-			this.wisStat.core.value *= 1.5;
+			this.wisStat.core.value *= 1.3;
+			this.strStat.core.value *= 1.2;
+			this.touStat.core.value *= 1.2;
 			this.removePerk(PerkLib.IceVulnerability);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			HP = maxHP();
@@ -280,7 +282,7 @@ public class QuatroElementalBoss extends Monster
 		private function phase3Ends():void
 		{
 			clearOutput();
-			outputText("The elemental falls again, defeatedly collapsing on the ground. You wonder if you should wait or try to inspect the dormant elemental quickly.Before you can react, a sudden gust of wind shakes the room, causing the remains of the elemental to swirl in a small vortex before spinning back into shape. ");
+			outputText("The elemental falls again, defeatedly collapsing on the ground. You wonder if you should wait or try to inspect the dormant elemental quickly. Before you can react, a sudden gust of wind shakes the room, causing the remains of the elemental to swirl in a small vortex before spinning back into shape. ");
 			outputText("The revenant rises once more before it speaks to you in a cacophony of different voices, <i>“I will not be aired once more.”</i> Without further warning, it rushes toward you, prepared for combat.");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			_fightPhase = 4;
@@ -289,7 +291,10 @@ public class QuatroElementalBoss extends Monster
 			weaponAttack += 5;
 			armorDef += 5;
 			armorMDef = 30;
-			this.intStat.core.value *= 1.5;
+			this.intStat.core.value *= 1.3;
+			this.wisStat.core.value *= 1.2;
+			this.strStat.core.value *= 1.1;
+			this.touStat.core.value *= 1.1;
 			this.removePerk(PerkLib.MonsterRegeneration);
 			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
 			HP = maxHP();
