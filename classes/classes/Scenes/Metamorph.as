@@ -910,7 +910,7 @@ package classes.Scenes {
 			menu();
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element) {
+				if (element && element.id !== "Taur Lower Body") {
 					return true;
 				}
 				return false;
