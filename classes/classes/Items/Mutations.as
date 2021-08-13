@@ -4223,7 +4223,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes wings!
-        if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+        if ((player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -4449,7 +4449,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes wings!
-        if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+        if ((player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -10358,7 +10358,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-may randomly remove bee wings:
-        if (rand(4) == 0 && (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) && changes < changeLimit) {
+        if (rand(4) == 0 && (player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE) && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -12199,12 +12199,12 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Demon wings
-        if (((player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_LARGE) && player.cor >= 50 || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) && rand(3) == 0) {
+        if (((player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LARGE || player.wings.type == Wings.MANTIS_LARGE || player.wings.type == Wings.MANTICORE_LARGE) && player.cor >= 50 || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicLarge.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.MANTIS_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_SMALL) && player.cor >= 50 && rand(3) == 0) {
+        if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.MANTIS_SMALL || player.wings.type == Wings.MANTICORE_SMALL) && player.cor >= 50 && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -14627,9 +14627,9 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Wings
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.MANTIS_LIKE_LARGE) && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.MANTIS_LARGE) && changes < changeLimit && rand(4) == 0) {
             //Grow bigger mantis wings!
-            if (player.wings.type == Wings.MANTIS_LIKE_SMALL) {
+            if (player.wings.type == Wings.MANTIS_SMALL) {
                 outputText("[pg]");
                 transformations.WingsMantisLarge.applyEffect();
             }
@@ -14821,10 +14821,10 @@ public final class Mutations extends MutationsHelper {
             if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) {
                 outputText("[pg]");
                 transformations.WingsDemonicLarge.applyEffect();
-            } else if (player.wings.type == Wings.BEE_LIKE_SMALL) {
+            } else if (player.wings.type == Wings.BEE_SMALL) {
                 outputText("[pg]");
                 transformations.WingsDemonicTiny.applyEffect();
-            } else if (player.wings.type == Wings.BEE_LIKE_LARGE) {
+            } else if (player.wings.type == Wings.BEE_LARGE) {
                 outputText("[pg]");
                 transformations.WingsDemonicLarge.applyEffect();
             } else {

@@ -11,8 +11,10 @@ package classes.GeneticMemories {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - name: how the Metamorph is referred to in displayed texts
 	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
 	 * - title: name displayed on the metamorph button
+	 * - unlockText: additional text displayed when Metamorph is unlocked
 	 * - transformation: TF object that refers to what the metamorph does
 	 *
 	 * Optional properties:
@@ -27,8 +29,10 @@ package classes.GeneticMemories {
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
 			id: [Name Saved in GeneticStorage],
+			name: [Name Displayed in Texts],
 			cost: [Cost Here],
-			title: "[Race Here]",
+			title: [Race Here],
+			unlockText: [Text Displayed On Unlocking Metamorph Here],
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -41,6 +45,7 @@ package classes.GeneticMemories {
 		public static const HUMAN: int = 0;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 		  id: "Unlocked Metamorph",
+			name: "Human Legs",
 		  cost: 500,
 		  title: "Human",
 		  transformation: function(): Transformation {
@@ -48,11 +53,24 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const TAUR: int = 1;
+		EnumValue.add(Memories, TAUR, "TAUR", {
+		  id: "Taur Lower Body",
+			name: "Taur Lower Body",
+		  cost: 100,
+		  title: "Taur",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyTaur()
+		  }
+		});
+
 		public static const HOOFED: int = 1;
 		EnumValue.add(Memories, HOOFED, "HOOFED", {
 		  id: "Hoofed Lower Body",
+			name: "Hooves (Legs)",
 		  cost: 100,
 		  title: "Hoofed",
+			unlockText: "Now you can metamorph into the Taur variant of any lower body part you unlocked when available!",
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyHoofed(2)
 		  }
@@ -61,6 +79,7 @@ package classes.GeneticMemories {
 		public static const HOOFED_TAUR: int = 2;
 		EnumValue.add(Memories, HOOFED_TAUR, "HOOFED_TAUR", {
 		  id: "Hoofed Lower Body",
+			name: "Hooves (Legs)",
 		  cost: 200,
 		  title: "Hoofed (4)",
 		  transformation: function(): Transformation {
@@ -72,6 +91,7 @@ package classes.GeneticMemories {
 		public static const NAGA: int = 3;
 		EnumValue.add(Memories, NAGA, "NAGA", {
 		  id: "Snake Lower Body",
+			name: "Naga Lower Body",
 		  cost: 100,
 		  title: "Naga",
 		  transformation: function(): Transformation {
@@ -82,6 +102,7 @@ package classes.GeneticMemories {
 		public static const DEMONIC_HIGH_HEELS: int = 4;
 		EnumValue.add(Memories, DEMONIC_HIGH_HEELS, "DEMONIC_HIGH_HEELS", {
 		  id: "Demon High Heels Lower Body",
+			name: "Demonic High Heels",
 		  cost: 100,
 		  title: "Dem. H. Heels",
 		  transformation: function(): Transformation {
@@ -92,6 +113,7 @@ package classes.GeneticMemories {
 		public static const DEMONIC_CLAWS: int = 5;
 		EnumValue.add(Memories, DEMONIC_CLAWS, "DEMONIC_CLAWS", {
 		  id: "Demon Clawed Lower Body",
+			name: "Demonic Clawed Feet",
 		  cost: 100,
 		  title: "Dem. Claws",
 		  transformation: function(): Transformation {
@@ -102,6 +124,7 @@ package classes.GeneticMemories {
 		public static const BEE: int = 6;
 		EnumValue.add(Memories, BEE, "BEE", {
 		  id: "Bee Lower Body",
+			name: "Bee Legs",
 		  cost: 100,
 		  title: "Bee",
 		  transformation: function(): Transformation {
@@ -112,6 +135,7 @@ package classes.GeneticMemories {
 		public static const CAT: int = 7;
 		EnumValue.add(Memories, CAT, "CAT", {
 		  id: "Cat Lower Body",
+			name: "Cat Paws (Legs)",
 		  cost: 100,
 		  title: "Cat",
 		  transformation: function(): Transformation {
@@ -122,6 +146,7 @@ package classes.GeneticMemories {
 		public static const CAT_TAUR: int = 8;
 		EnumValue.add(Memories, CAT_TAUR, "CAT_TAUR", {
 		  id: "Cat Lower Body",
+			name: "Cat Paws (Legs)",
 		  cost: 200,
 		  title: "Cat (4)",
 		  transformation: function(): Transformation {
@@ -133,6 +158,7 @@ package classes.GeneticMemories {
 		public static const LIZARD: int = 9;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 		  id: "Lizard Lower Body",
+			name: "Lizard Legs",
 		  cost: 100,
 		  title: "Lizard",
 		  transformation: function(): Transformation {
@@ -143,6 +169,7 @@ package classes.GeneticMemories {
 		public static const LIZARD_TAUR: int = 10;
 		EnumValue.add(Memories, LIZARD_TAUR, "LIZARD_TAUR", {
 		  id: "Lizard Lower Body",
+			name: "Lizard Legs",
 		  cost: 200,
 		  title: "Lizard (4)",
 		  transformation: function(): Transformation {
@@ -154,6 +181,7 @@ package classes.GeneticMemories {
 		public static const HARPY: int = 11;
 		EnumValue.add(Memories, HARPY, "HARPY", {
 		  id: "Harpy Lower Body",
+			name: "Harpy Lower Body",
 		  cost: 100,
 		  title: "Harpy",
 		  transformation: function(): Transformation {
@@ -164,6 +192,7 @@ package classes.GeneticMemories {
 		public static const CHITINOUS_SPIDER_LEGS: int = 12;
 		EnumValue.add(Memories, CHITINOUS_SPIDER_LEGS, "CHITINOUS_SPIDER_LEGS", {
 		  id: "Spider Lower Body",
+			name: "Spider Lower Body",
 		  cost: 100,
 		  title: "Spider",
 		  transformation: function(): Transformation {
@@ -174,6 +203,7 @@ package classes.GeneticMemories {
 		public static const DRIDER: int = 13;
 		EnumValue.add(Memories, DRIDER, "DRIDER", {
 		  id: "Drider Lower Body",
+			name: "Drider Lower Body",
 		  cost: 300,
 		  title: "Drider",
 		  transformation: function(): Transformation {
@@ -185,6 +215,7 @@ package classes.GeneticMemories {
 		public static const FOX: int = 14;
 		EnumValue.add(Memories, FOX, "FOX", {
 		  id: "Fox Lower Body",
+			name: "Fox Paws (Legs)",
 		  cost: 100,
 		  title: "Fox",
 		  transformation: function(): Transformation {
@@ -195,6 +226,7 @@ package classes.GeneticMemories {
 		public static const FOX_TAUR: int = 15;
 		EnumValue.add(Memories, FOX_TAUR, "FOX_TAUR", {
 		  id: "Fox Lower Body",
+			name: "Fox Paws (Legs)",
 		  cost: 200,
 		  title: "Fox (4)",
 		  transformation: function(): Transformation {
@@ -206,6 +238,7 @@ package classes.GeneticMemories {
 		public static const DRAGON: int = 16;
 		EnumValue.add(Memories, DRAGON, "DRAGON", {
 		  id: "Draconic Lower Body",
+			name: "Draconic Legs",
 		  cost: 100,
 		  title: "Dragon",
 		  transformation: function(): Transformation {
@@ -216,6 +249,7 @@ package classes.GeneticMemories {
 		public static const DRAGON_TAUR: int = 17;
 		EnumValue.add(Memories, DRAGON_TAUR, "DRAGON_TAUR", {
 		  id: "Draconic Lower Body",
+			name: "Draconic Legs",
 		  cost: 200,
 		  title: "Dragon (4)",
 		  transformation: function(): Transformation {
@@ -227,6 +261,7 @@ package classes.GeneticMemories {
 		public static const CLOVEN_HOOFED: int = 18;
 		EnumValue.add(Memories, CLOVEN_HOOFED, "CLOVEN_HOOFED", {
 		  id: "Cloven Hoofed Lower Body",
+			name: "Cloven Hooves (Legs)",
 		  cost: 100,
 		  title: "Cl. Hoofed",
 		  transformation: function(): Transformation {
@@ -237,6 +272,7 @@ package classes.GeneticMemories {
 		public static const CLOVEN_HOOFED_TAUR: int = 19;
 		EnumValue.add(Memories, CLOVEN_HOOFED_TAUR, "CLOVEN_HOOFED_TAUR", {
 		  id: "Cloven Hoofed Lower Body",
+			name: "Cloven Hooves (Legs)",
 		  cost: 200,
 		  title: "Cl. Hoofed (4)",
 		  transformation: function(): Transformation {
@@ -248,6 +284,7 @@ package classes.GeneticMemories {
 		public static const SALAMANDER: int = 20;
 		EnumValue.add(Memories, SALAMANDER, "SALAMANDER", {
 		  id: "Salamander Lower Body",
+			name: "Salamander Legs",
 		  cost: 100,
 		  title: "Salamander",
 		  transformation: function(): Transformation {
@@ -258,6 +295,7 @@ package classes.GeneticMemories {
 		public static const SALAMANDER_TAUR: int = 21;
 		EnumValue.add(Memories, SALAMANDER_TAUR, "SALAMANDER_TAUR", {
 		  id: "Salamander Lower Body",
+			name: "Salamander Legs",
 		  cost: 200,
 		  title: "Salam. (4)",
 		  transformation: function(): Transformation {
@@ -269,6 +307,7 @@ package classes.GeneticMemories {
 		public static const MANTIS: int = 22;
 		EnumValue.add(Memories, MANTIS, "MANTIS", {
 		  id: "Mantis Lower Body",
+			name: "Mantis Lower Body",
 		  cost: 100,
 		  title: "Mantis",
 		  transformation: function(): Transformation {
@@ -279,6 +318,7 @@ package classes.GeneticMemories {
 		public static const MANTIS_TAUR: int = 23;
 		EnumValue.add(Memories, MANTIS_TAUR, "MANTIS_TAUR", {
 		  id: "Mantis Lower Body",
+			name: "Mantis Lower Body",
 		  cost: 200,
 		  title: "Mantis (4)",
 		  transformation: function(): Transformation {
@@ -290,6 +330,7 @@ package classes.GeneticMemories {
 		public static const SHARK: int = 24;
 		EnumValue.add(Memories, SHARK, "SHARK", {
 		  id: "Shark Lower Body",
+			name: "Shark Legs",
 		  cost: 100,
 		  title: "Shark",
 		  transformation: function(): Transformation {
@@ -300,6 +341,7 @@ package classes.GeneticMemories {
 		public static const SHARK_TAUR: int = 25;
 		EnumValue.add(Memories, SHARK_TAUR, "SHARK_TAUR", {
 		  id: "Shark Lower Body",
+			name: "Shark Legs",
 		  cost: 200,
 		  title: "Shark",
 		  transformation: function(): Transformation {
@@ -311,6 +353,7 @@ package classes.GeneticMemories {
 		public static const LION: int = 26;
 		EnumValue.add(Memories, LION, "LION", {
 		  id: "Lion Lower Body",
+			name: "Lion Paws (Legs)",
 		  cost: 100,
 		  title: "Lion",
 		  transformation: function(): Transformation {
@@ -321,6 +364,7 @@ package classes.GeneticMemories {
 		public static const LION_TAUR: int = 27;
 		EnumValue.add(Memories, LION_TAUR, "LION_TAUR", {
 		  id: "Lion Lower Body",
+			name: "Lion Paws (Legs)",
 		  cost: 200,
 		  title: "Lion (4)",
 		  transformation: function(): Transformation {
@@ -332,6 +376,7 @@ package classes.GeneticMemories {
 		public static const ORCA: int = 28;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 		  id: "Orca Lower Body",
+			name: "Orca Legs",
 		  cost: 100,
 		  title: "Orca",
 		  transformation: function(): Transformation {
@@ -342,6 +387,7 @@ package classes.GeneticMemories {
 		public static const ORCA_TAUR: int = 29;
 		EnumValue.add(Memories, ORCA_TAUR, "ORCA_TAUR", {
 		  id: "Orca Lower Body",
+			name: "Orca Legs",
 		  cost: 200,
 		  title: "Orca (4)",
 		  transformation: function(): Transformation {
@@ -353,6 +399,7 @@ package classes.GeneticMemories {
 		public static const ONI: int = 30;
 		EnumValue.add(Memories, ONI, "ONI", {
 		  id: "Oni Lower Body",
+			name: "Oni Legs",
 		  cost: 100,
 		  title: "Oni",
 		  transformation: function(): Transformation {
@@ -363,6 +410,7 @@ package classes.GeneticMemories {
 		public static const ELF: int = 31;
 		EnumValue.add(Memories, ELF, "ELF", {
 		  id: "Elf Lower Body",
+			name: "Elf Legs",
 		  cost: 100,
 		  title: "Elf",
 		  transformation: function(): Transformation {
@@ -373,6 +421,7 @@ package classes.GeneticMemories {
 		public static const RAIJU: int = 32;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
 		  id: "Raiju Lower Body",
+			name: "Raiju Paws (Legs)",
 		  cost: 100,
 		  title: "Raiju",
 		  transformation: function(): Transformation {
@@ -383,6 +432,7 @@ package classes.GeneticMemories {
 		public static const RAIJU_TAUR: int = 33;
 		EnumValue.add(Memories, RAIJU_TAUR, "RAIJU_TAUR", {
 		  id: "Raiju Lower Body",
+			name: "Raiju Paws (Legs)",
 		  cost: 100,
 		  title: "Raiju (4)",
 		  transformation: function(): Transformation {
@@ -393,7 +443,8 @@ package classes.GeneticMemories {
 
 		public static const RED_PANDA: int = 34;
 		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
-		  id: "RedPanda Lower Body",
+		  id: "Red Panda Lower Body",
+			name: "Red Panda Paws (Legs)",
 		  cost: 100,
 		  title: "Red Panda",
 		  transformation: function(): Transformation {
@@ -404,6 +455,7 @@ package classes.GeneticMemories {
 		public static const ORC: int = 35;
 		EnumValue.add(Memories, ORC, "ORC", {
 		  id: "Orc Lower Body",
+			name: "Orc Legs",
 		  cost: 100,
 		  title: "Orc",
 		  transformation: function(): Transformation {
@@ -411,6 +463,8 @@ package classes.GeneticMemories {
 		  }
 		});
 
-
+		public static function getMemory(memoryId: Number): * {
+			return Memories[memoryId] || Memories[0];
+		}
   }
 }

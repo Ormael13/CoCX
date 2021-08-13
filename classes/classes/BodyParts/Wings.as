@@ -7,7 +7,7 @@ public class Wings extends SaveableBodyPart {
 	/**
 	 * Entry properties:
 	 * - value: numerical id (1, 4)
-	 * - id: name of the constant ("BEE_LIKE_SMALL", "HARPY")
+	 * - id: name of the constant ("BEE_SMALL", "HARPY")
 	 * - name: short human-readable default name, ("small bee-like", "harpy")
 	 *
 	 * - appearanceDesc: description for PlayerAppearance.as (always visible)
@@ -23,14 +23,14 @@ public class Wings extends SaveableBodyPart {
 		name:"non-existant"
 	});
 
-	public static const BEE_LIKE_SMALL: int = 1;
-	EnumValue.add(Types, BEE_LIKE_SMALL, "BEE_LIKE_SMALL", {
+	public static const BEE_SMALL: int = 1;
+	EnumValue.add(Types, BEE_SMALL, "BEE_SMALL", {
 		name:"small bee-like",
 		appearanceDesc: "A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly."
 	});
 
-	public static const BEE_LIKE_LARGE: int = 2;
-	EnumValue.add(Types, BEE_LIKE_LARGE, "BEE_LIKE_LARGE", {
+	public static const BEE_LARGE: int = 2;
+	EnumValue.add(Types, BEE_LARGE, "BEE_LARGE", {
 		name:"large bee-like",
 		appearanceDesc: "A pair of large bee-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.",
 		canFly: true
@@ -115,19 +115,19 @@ public class Wings extends SaveableBodyPart {
 		wingSlap: true,
 		canFly: true
 	});
-	public static const MANTIS_LIKE_SMALL: int = 17;
-	EnumValue.add(Types, MANTIS_LIKE_SMALL, "MANTIS_LIKE_SMALL", {
+	public static const MANTIS_SMALL: int = 17;
+	EnumValue.add(Types, MANTIS_SMALL, "MANTIS_SMALL", {
 		name:"small mantis-like",
 		appearanceDesc: "A pair of tiny mantis-wings sprout from your back, too small to allow you to fly."
 	});
-	public static const MANTIS_LIKE_LARGE: int = 18;
-	EnumValue.add(Types, MANTIS_LIKE_LARGE, "MANTIS_LIKE_LARGE", {
+	public static const MANTIS_LARGE: int = 18;
+	EnumValue.add(Types, MANTIS_LARGE, "MANTIS_LARGE", {
 		name:"large mantis-like",
 		appearanceDesc: "A pair of large mantis-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.",
 		canFly: true
 	});
-	public static const MANTIS_LIKE_LARGE_2: int = 19;
-	EnumValue.add(Types, MANTIS_LIKE_LARGE_2, "MANTIS_LIKE_LARGE_2", {
+	public static const MANTIS_LARGE_2: int = 19;
+	EnumValue.add(Types, MANTIS_LARGE_2, "MANTIS_LARGE_2", {
 		name:"two large pairs of mantis-like",
 		canFly: true
 	});
@@ -155,13 +155,13 @@ public class Wings extends SaveableBodyPart {
 		name:"three pairs of cockvines",
 		appearanceDesc: "Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding."
 	});
-	public static const MANTICORE_LIKE_SMALL: int = 22;
-	EnumValue.add(Types, MANTICORE_LIKE_SMALL, "MANTICORE_LIKE_SMALL", {
+	public static const MANTICORE_SMALL: int = 22;
+	EnumValue.add(Types, MANTICORE_SMALL, "MANTICORE_SMALL", {
 		name:"small manticore-like",
 		appearanceDesc: "A pair of small leathery wings covered with [skin coat.color] fur rest on your back. Despite being too small to allow flight they at least look cute on you."
 	});
-	public static const MANTICORE_LIKE_LARGE: int = 23;
-	EnumValue.add(Types, MANTICORE_LIKE_LARGE, "MANTICORE_LIKE_LARGE", {
+	public static const MANTICORE_LARGE: int = 23;
+	EnumValue.add(Types, MANTICORE_LARGE, "MANTICORE_LARGE", {
 		name:"large manticore-like",
 		appearanceDesc: "A pair of large ominous leathery wings covered with [skin coat.color] fur expand from your back. You can open them wide to soar high in search of your next prey.",
 		wingSlap: true,

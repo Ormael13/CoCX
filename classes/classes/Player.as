@@ -5387,9 +5387,9 @@ use namespace CoC;
 			}
 			if (tailType == Tail.BEE_ABDOMEN)
 				beeCounter++;
-			if (wings.type == Wings.BEE_LIKE_SMALL)
+			if (wings.type == Wings.BEE_SMALL)
 				beeCounter++;
-			if (wings.type == Wings.BEE_LIKE_LARGE)
+			if (wings.type == Wings.BEE_LARGE)
 				beeCounter += 2;
 			if (hasPerk(PerkLib.BeeOvipositor))
 				beeCounter++;
@@ -8349,11 +8349,11 @@ use namespace CoC;
 				mantisCounter++;
 			if (tailType == Tail.MANTIS_ABDOMEN)
 				mantisCounter++;
-			if (wings.type == Wings.MANTIS_LIKE_SMALL)
+			if (wings.type == Wings.MANTIS_SMALL)
 				mantisCounter++;
-			if (wings.type == Wings.MANTIS_LIKE_LARGE)
+			if (wings.type == Wings.MANTIS_LARGE)
 				mantisCounter += 2;
-			if (wings.type == Wings.MANTIS_LIKE_LARGE_2)
+			if (wings.type == Wings.MANTIS_LARGE_2)
 				mantisCounter += 4;
 			if (hasPerk(PerkLib.MantisOvipositor))
 				mantisCounter++;
@@ -9996,9 +9996,9 @@ use namespace CoC;
 				manticoreCounter++;
 			if (vaginaType() == VaginaClass.MANTICORE)
 				manticoreCounter++;
-			if (wings.type == Wings.MANTICORE_LIKE_SMALL)
+			if (wings.type == Wings.MANTICORE_SMALL)
 				manticoreCounter++;
-			if (wings.type == Wings.MANTICORE_LIKE_LARGE)
+			if (wings.type == Wings.MANTICORE_LARGE)
 				manticoreCounter += 4;
 			if (!hasCock())
 				manticoreCounter++;

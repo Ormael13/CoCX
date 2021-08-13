@@ -11,8 +11,10 @@ package classes.GeneticMemories {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - name: how the Metamorph is referred to in displayed texts
 	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
 	 * - title: name displayed on the metamorph button
+	 * - unlockText: additional text displayed when Metamorph is unlocked
 	 * - transformation: TF object that refers to what the metamorph does
 	 *
 	 * Optional properties:
@@ -26,8 +28,10 @@ package classes.GeneticMemories {
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
 			id: [Name Saved in GeneticStorage],
+			name: [Name Displayed in Texts],
 			cost: [Cost Here],
-			title: "[Race Here]",
+			title: [Race Here],
+			unlockText: [Text Displayed On Unlocking Metamorph Here],
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -40,6 +44,7 @@ package classes.GeneticMemories {
 		public static const NONE:int = 0;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
+			name: "No Antennae",
 			cost: 500,
 			title: "None",
 			transformation: function(): Transformation {
@@ -50,6 +55,7 @@ package classes.GeneticMemories {
 		public static const MANTIS:int = 1;
 		EnumValue.add(Memories, MANTIS, "MANTIS", {
 			id: "Mantis Antennae",
+			name: "Mantis Antennae",
 			cost: 100,
 			title: "Mantis",
 			transformation: function(): Transformation {
@@ -60,6 +66,7 @@ package classes.GeneticMemories {
 		public static const BEE:int = 2;
 		EnumValue.add(Memories, BEE, "BEE", {
 			id: "Bee Antennae",
+			name: "Bee Antennae",
 			cost: 100,
 			title: "Bee",
 			transformation: function(): Transformation {
@@ -67,6 +74,8 @@ package classes.GeneticMemories {
 			}
 		});
 
-
+		public static function getMemory(memoryId: Number): * {
+			return Memories[memoryId] || Memories[0];
+		}
   }
 }

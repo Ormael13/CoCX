@@ -2,7 +2,7 @@
  * ...
  * @author Ormael & Redcake
  */
-package classes.Scenes.Explore 
+package classes.Scenes.Explore
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -23,7 +23,7 @@ use namespace CoC;
 			createStatusEffect(StatusEffects.Attacks, 6, 0, 0, 0);
 			eAttack();
 		}
-		
+
 		public function moveCleanse():void {
 			outputText("The malikore stabs himself with his tail, cleansing himself from poison!");
 			if (hasStatusEffect(StatusEffects.PoisonDoT)) removeStatusEffect(StatusEffects.PoisonDoT);
@@ -31,7 +31,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.LustDoT)) removeStatusEffect(StatusEffects.LustDoT);
 			if (hasStatusEffect(StatusEffects.LustDoTH)) removeStatusEffect(StatusEffects.LustDoTH);
 		}
-		
+
 		override protected function performCombatAction():void
 		{
 			if (!monsterIsStunned() && (hasStatusEffect(StatusEffects.PoisonDoT) || hasStatusEffect(StatusEffects.PoisonDoTH) || hasStatusEffect(StatusEffects.LustDoT) || hasStatusEffect(StatusEffects.LustDoTH))) {
@@ -45,15 +45,15 @@ use namespace CoC;
 				//if (choice > 7) moveTakeFlight();
 			}
 		}
-		
+
 		override public function get long():String {
 			var str:String = "";
 			if (hasStatusEffect(StatusEffects.Flying)) str += "The malikore is circling you in the air readying a salvo of spike to throw at you.";
 			else str += "The malikore is currently circling you looking for an opening to strike. He’s actually good on the eye and you would give him more attention if not for the fact he’s trying to beat you down and rape you.";
 			return str;
 		}
-		
-		public function Pierce() 
+
+		public function Pierce()
 		{
 			this.a = "the ";
 			this.short = "alpha malikore";
@@ -92,7 +92,7 @@ use namespace CoC;
 					add(armors.S_SWMWR,1/12).//inne coś
 					add(consumables.L_DRAFT,1/4).
 					add(consumables.MANTICV,0.7);
-			this.wings.type = Wings.MANTICORE_LIKE_LARGE;
+			this.wings.type = Wings.MANTICORE_LARGE;
 			this.rearBody.type = RearBody.LION_MANE;
 			this.arms.type = Arms.LION;
 			this.lowerBody = LowerBody.LION;
@@ -108,7 +108,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
+
 	}
 
 }

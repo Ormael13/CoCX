@@ -1163,11 +1163,11 @@ package classes.Scenes {
 			doNext(accessPageEx1MetamorphMenu);
 		}
 
-		public static function unlockMetamorph (genMemName: String): void {
-			if (!GeneticMemoryStorage[genMemName] && player.hasPerk(PerkLib.GeneticMemory)) {
-				GeneticMemoryStorage[genMemName] = true;
-				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "!</b>");
-				if (genMemName === "Taur Lower Body") outputText("\n<b>Now you can metamorph into the Taur variant of any lower body part you unlocked when available!</b>");
+		public static function unlockMetamorph (genMem: *): void {
+			if (!GeneticMemoryStorage[genMem.id] && player.hasPerk(PerkLib.GeneticMemory)) {
+				GeneticMemoryStorage[genMem.id] = true;
+				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
+				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
 			}
 		}
 

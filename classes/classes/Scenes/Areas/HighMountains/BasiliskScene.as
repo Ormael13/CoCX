@@ -638,7 +638,7 @@ public class BasiliskScene extends BaseContent
 			spriteSelect(75);
 			clearOutput();
 			outputText("Completely destroyed, the basilisk lays face down on the ground, struggling pathetically to get up.  You giggle at the attempt as you ");
-			if(player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
+			if(player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
 			else outputText("saunter arrogantly over to the basilisk's crumpled up figure");
 			outputText(" and lightly nudge him in his ribs with your [foot].  His eyes are closed from to the ");
 			if(monster.HP <= monster.minHP()) outputText("pain");
