@@ -114,7 +114,7 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, STORM, "STORM", {
 		name:"glowing lightning-shaped",
 		shortDesc: "lightning {hair}",
-		appearanceDesc: "Your wild {hairInfo}'s tips end in glowing lightning-shaped locks, cackling with electricity whenever you will them to.",
+		appearanceDesc: "Your wild, {hairInfo}'s tips end in glowing lightning-shaped locks, crackling with electricity whenever you will them to.",
 		ignoresStyle: true
 	});
 
@@ -343,7 +343,7 @@ public class Hair extends BodyPart {
 		}	else if (hairscale > 0.4 && hairscale <= 0.5){
 			return "ass-length";
 		}	else if (hairscale > 0.5 && hairscale <= 1){
-			return "obscenely long, "
+			return "obscenely long"
 		}	else if (hairscale > 1 ){
 			return "floor-length";
 		}

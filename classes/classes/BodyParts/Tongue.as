@@ -46,7 +46,7 @@ public class Tongue extends BodyPart{
 	public static const ELF: int = 6;
 	EnumValue.add(Types, ELF, "ELF", {
 		name:"elf",
-		appearanceDesc: "One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else."
+		appearanceDesc: "Your voice is unnaturally beautiful and melodious."
 	});
 	public static const DOG: int = 7;
 	EnumValue.add(Types, DOG, "DOG", {
@@ -66,7 +66,7 @@ public class Tongue extends BodyPart{
 	public static const MELKIE: int = 10;
 	EnumValue.add(Types, MELKIE, "MELKIE", {
 		name:"melkie",
-		appearanceDesc: "One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else. Your mermaid-like song is capable of captivating the minds of those who listens to it."
+		appearanceDesc: "Your voice is unnaturally beautiful and melodious; your mermaid-like song is capable of captivating the minds of those who listens to it."
 	});
 	public static const RATATOSKR: int = 11;
 	EnumValue.add(Types, RATATOSKR, "RATATOSKR", {

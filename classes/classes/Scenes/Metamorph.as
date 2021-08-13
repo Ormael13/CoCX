@@ -733,7 +733,10 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of horns do you want?");
+
+			const hornsDesc: String = Horns.getAppearanceDescription(player);
+			outputText(hornsDesc ?  hornsDesc : "You have no horns.");
+			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessHornsMenu, currentPage, HornsMem.Memories);
 		}
@@ -743,7 +746,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of hair do you want?");
+
+			outputText(Hair.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, HairMem.Memories);
 		}
@@ -753,7 +757,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of face do you want?");
+
+			outputText(Face.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessFaceMenu, currentPage, FaceMem.Memories);
 		}
@@ -763,7 +768,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of eyes do you want?");
+
+			outputText(Eyes.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessEyesMenu, currentPage, EyesMem.Memories);
 		}
@@ -773,7 +779,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of tongue do you want?");
+
+			outputText(Tongue.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessTongueMenu, currentPage, TongueMem.Memories);
 		}
@@ -783,7 +790,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of ears do you want?");
+
+			outputText(Ears.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessEarsMenu, currentPage, EarsMem.Memories);
 		}
@@ -793,7 +801,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of arms do you want?");
+
+			outputText(Arms.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessArmsMenu, currentPage, ArmsMem.Memories);
 		}
@@ -803,7 +812,10 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of wings do you want?");
+
+			const wingsDesc: String = Wings.getAppearanceDescription(player);
+			outputText(wingsDesc ?  wingsDesc : "You have no wings.");
+			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessWingsMenu, currentPage, WingsMem.Memories);
 		}
@@ -813,7 +825,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of lower body do you want?");
+
+			outputText(LowerBody.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, LowerBodyMem.Memories);
 		}
@@ -823,7 +836,8 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("How do you want to change your skin?");
+
+			outputText(Skin.getSkinAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
 			openPaginatedSkinMenu(title, currentPage);
 		}
@@ -833,7 +847,10 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of rear body do you want?");
+
+			const rearBodyDesc: String = RearBody.getAppearanceDescription(player);
+			outputText(rearBodyDesc ?  rearBodyDesc : "You have no rear body.");
+			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessRearBodyMenu, currentPage, RearBodyMem.Memories);
 		}
@@ -843,7 +860,10 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of antennae do you want?");
+
+			const antennaeDesc: String = Antennae.getAppearanceDescription(player);
+			outputText(antennaeDesc ?  antennaeDesc : "You have no antennae.");
+			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessAntennaeMenu, currentPage, AntennaeMem.Memories);
 		}
@@ -853,7 +873,10 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of skin patterns do you want?");
+
+			const skinPatternDesc: String = Skin.getSkinPatternAppearanceDescription(player);
+			outputText(skinPatternDesc ?  skinPatternDesc : "You have no skin pattern.");
+			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessSkinPatternsMenu, currentPage, SkinPatternMem.Memories);
 		}
@@ -863,7 +886,9 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of gills do you want?");
+
+			const gillsDesc: String = Gills.getAppearanceDescription(player);
+			outputText(gillsDesc ?  gillsDesc + "[pg]Perhaps you'd like to change this?" : "You have no gills. Perhaps you'd like to grow some?");
 
 			openPaginatedMenu(title, accessGillsMenu, currentPage, GillsMem.Memories);
 		}
@@ -873,7 +898,10 @@ package classes.Scenes {
 
 			clearOutput();
 			outputText(title);
-			outputText("What kind of tail do you want?");
+
+			const tailDesc: String = Tail.getAppearanceDescription(player);
+			outputText(tailDesc ?  tailDesc : "You have no tail.");
+			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessTailMenu, currentPage, TailMem.Memories);
 		}

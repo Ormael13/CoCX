@@ -869,7 +869,7 @@ public final class Mutations extends MutationsHelper {
 
     public function buffAlchemicalThunder(player:Player):void {
         clearOutput();
-        outputText("You coat your weapon with the solution, and your " + player.weaponName + " begins cackling with electricity!");
+        outputText("You coat your weapon with the solution, and your " + player.weaponName + " begins crackling with electricity!");
         player.createStatusEffect(StatusEffects.AlchemicalThunderBuff, 0, 0, 0, 0);
     }
 

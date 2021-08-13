@@ -38,6 +38,7 @@ public class ParserTags {
         "ass"                   : function ():* { return CoC.instance.player.buttDescript(); },
         "asshole"               : function ():* { return CoC.instance.player.assholeDescript(); },
         "balls"                 : function ():* { return CoC.instance.player.ballsDescriptLight(); },
+        "ballsarticle"         : function ():* { return CoC.instance.player.ballsDescriptArticle(); },
         "bodytype"              : function ():* { return CoC.instance.player.bodyType(); },
         "boyfriend"             : function ():* { return CoC.instance.player.mf("boyfriend", "girlfriend"); },
         "breasts"               : function ():* { return CoC.instance.player.breastDescript(0); },

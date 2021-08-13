@@ -3923,6 +3923,11 @@ public class Creature extends Utils
 			return Appearance.ballsDescription(forcedSize, true, this);
 		}
 
+		public function ballsDescriptArticle(forcedSize:Boolean = true):String
+		{
+			return Appearance.ballsDescription(forcedSize, true, this, true);
+		}
+
 		public function sackDescript():String
 		{
 			return Appearance.sackDescript(this);
