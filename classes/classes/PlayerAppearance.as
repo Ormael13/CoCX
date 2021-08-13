@@ -870,14 +870,13 @@ public class PlayerAppearance extends BaseContent {
 					//Different description based on vag looseness
 					if(player.vaginas[i].vaginalWetness>= VaginaClass.WETNESS_WET) {
 						if(player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-							pussyDesc += "your " + vaginaDescript(i) + ". ";
+							pussyDesc += "your " + vaginaDescript(i) + ".";
 						if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-							pussyDesc += "your " + vaginaDescript(i) + ", its lips slightly parted. ";
+							pussyDesc += "your " + vaginaDescript(i) + ", its lips slightly parted.";
 						if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-							pussyDesc += "the massive hole that is your " + vaginaDescript(0) + ". ";
+							pussyDesc += "the massive hole that is your " + vaginaDescript(0) + ".";
 					}
-				}
-				if((player.lib>=50 || player.lust >=50) && (player.lib< 80 && player.lust < 80)) { //kinda horny
+				} else if((player.lib>=50 || player.lust >=50) && (player.lib< 80 && player.lust < 80)) { //kinda horny
 					//Wetness
 					if(player.vaginas[i].vaginalWetness< VaginaClass.WETNESS_WET)
 						pussyDesc += "Moisture gleams in ";
@@ -891,13 +890,12 @@ public class PlayerAppearance extends BaseContent {
 					}
 					//Different description based on vag looseness
 					if(player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-						pussyDesc += "your " + vaginaDescript(i) + ". ";
+						pussyDesc += "your " + vaginaDescript(i) + ".";
 					if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-						pussyDesc += "your " + vaginaDescript(i) + ", its lips slightly parted. ";
+						pussyDesc += "your " + vaginaDescript(i) + ", its lips slightly parted.";
 					if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-						pussyDesc += "the massive hole that is your " + vaginaDescript(0) + ". ";
-				}
-				if((player.lib> 80 || player.lust > 80)) { //WTF horny!
+						pussyDesc += "the massive hole that is your " + vaginaDescript(0) + ".";
+				} else if((player.lib> 80 || player.lust > 80)) { //WTF horny!
 					//Wetness
 					if(player.vaginas[i].vaginalWetness< VaginaClass.WETNESS_WET) {
 						pussyDesc += "Occasional beads of ";
@@ -913,11 +911,11 @@ public class PlayerAppearance extends BaseContent {
 					}
 					//Different description based on vag looseness
 					if(player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-						pussyDesc += "your " + vaginaDescript(i) + ". ";
+						pussyDesc += "your " + vaginaDescript(i) + ".";
 					if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-						pussyDesc += "your " + vaginaDescript(i) + ", its lips slightly parted. ";
+						pussyDesc += "your " + vaginaDescript(i) + ", its lips slightly parted.";
 					if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-						pussyDesc += "the massive hole that is your cunt. ";
+						pussyDesc += "the massive hole that is your cunt.";
 				}
 
 				if (player.vaginas.length > 1 && vagLoop == 0){
