@@ -37,7 +37,7 @@ public class PlayerAppearance extends BaseContent {
 
 		outputText(" " + describeFace());
 
-		outputText(" Your features consist of a " + player.faceDesc() + "."); //M/F stuff!
+		outputText(" Your features consist of " + player.faceDescArticle() + "."); //M/F stuff!
 		outputText("[pg]");
 
 		outputText(Utils.mergeSentences([describeHair(), describeEars()], ", while "));
@@ -617,7 +617,7 @@ public class PlayerAppearance extends BaseContent {
 		var breastsDesc: String = "";
 
 		if(player.breastRows.length == 1) {
-			breastsDesc += "You have" + num2Text(player.breastRows[temp].breasts) + (player.breastRows[0].breastRating >= 1 ? " " + player.breastCup(temp) : "") + " breasts, each supporting ";
+			breastsDesc += "You have " + num2Text(player.breastRows[temp].breasts) + (player.breastRows[0].breastRating >= 1 ? " " + player.breastCup(temp) : "") + " breasts, each supporting ";
 			breastsDesc += num2Text(player.breastRows[temp].nipplesPerBreast) + " "; //Number of nipples.
 			breastsDesc += Measurements.shortSuffix(int(player.nippleLength *10)/10)+" ";
 			//if (flags[kFLAGS.USE_METRICS] > 0 ) breastsDesc += int(player.nippleLength * 2.54 * 10) / 10 + "-cm "; //Centimeter display
