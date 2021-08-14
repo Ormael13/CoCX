@@ -757,7 +757,7 @@ public class Face extends SaveableBodyPart {
 				return the + "barest hint of masculinity on its features";
 			//45-55
 			else if (femininity <= 55)
-				return an + "androgynous set of features that would look normal on a male or female";
+				return an + "androgynous appearance that would look normal on a male or female";
 			//55+-65
 			else if (femininity <= 65)
 				return a + "tiny touch of femininity to it, with gentle curves";

@@ -17,6 +17,8 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.BodyParts.Tongue;
 
+import classes.GeneticMemories.*;
+
 import classes.Items.MutationsHelper;
 import classes.StatusEffects;
 import classes.internals.EnumValue;
@@ -303,7 +305,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	      player.skin.growCoat(Skin.FUR, options, coverage);
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Fur Skin");
+	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.FUR));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -362,7 +364,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	      player.skin.growCoat(Skin.SCALES, options, coverage);
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Scales Skin");
+	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.SCALES));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -413,7 +415,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	      player.skin.growCoat(Skin.DRAGON_SCALES, options, coverage);
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Dragon Scales Skin");
+	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DRAGON_SCALES));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -491,7 +493,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	      player.skin.growCoat(Skin.CHITIN, options, coverage);
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Chitin Skin");
+	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.CHITIN));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -559,7 +561,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Orc Skin Pattern");
+	    Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SCAR_SHAPED));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -577,7 +579,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Raiju Skin Pattern");
+	    Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.LIGHTNING_SHAPED));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -595,7 +597,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Oni Skin Pattern");
+	    Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BATTLE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -617,7 +619,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Kitsune Skin Pattern");
+	    Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.MAGICAL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -764,7 +766,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.type = Horns.BICORN;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bicorn Horns");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.BICORN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -783,7 +785,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.type = Horns.UNICORN;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Unicorn Horn");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.UNICORN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -807,7 +809,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.type = Horns.ONI_X2;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Oni Dual Horns");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.ONI_X2));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -831,7 +833,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.type = Horns.ONI;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Oni Horn");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.ONI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -853,7 +855,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.count = 1;
 	    player.horns.type = Horns.GOAT;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Goat Horns");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.GOAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -896,7 +898,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.count = 12;
 	    player.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Quadruple Horns");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.DRACONIC_X4));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -926,7 +928,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.horns.type = Horns.DRACONIC_X2;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Dual Horns");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.DRACONIC_X2));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -961,7 +963,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.type = Horns.COW_MINOTAUR;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cow minotaur Horns");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.COW_MINOTAUR));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -987,7 +989,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.type = Horns.DEMON;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demon Horns");
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.DEMON));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1219,7 +1221,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.antennae.type = Antennae.MANTIS;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Mantis Antennae");
+	    Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.MANTIS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1237,7 +1239,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.antennae.type = Antennae.BEE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bee Antennae");
+	    Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.BEE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1381,7 +1383,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      outputText(desc);
 	    }
 	    player.hairType = Hair.FEATHER;
-	    Metamorph.unlockMetamorph("Feather Hair");
+	    Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.FEATHER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1408,7 +1410,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (doOutput) outputText(desc);
 
 	    player.hairType = Hair.GORGON;
-	    Metamorph.unlockMetamorph("Gorgon Hair");
+	    Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.GORGON));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1423,7 +1425,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.hairType = Hair.SILKEN;
-	    Metamorph.unlockMetamorph("Silky Hair");
+	    Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.ELF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1438,7 +1440,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.hairType = Hair.STORM;
-	    Metamorph.unlockMetamorph("Storm Hair");
+	    Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.STORM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1457,7 +1459,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.hairType = Hair.BURNING;
-	    Metamorph.unlockMetamorph("Burning Hair");
+	    Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.BURNING));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1754,7 +1756,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.HORSE;
-	    Metamorph.unlockMetamorph("Horse Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.HORSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1786,7 +1788,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.COW_MINOTAUR;
-	    Metamorph.unlockMetamorph("Cow Minotaur Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.COW_MINOTAUR));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1805,7 +1807,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.SHARK_TEETH;
-	    Metamorph.unlockMetamorph("Shark Teeth Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.SHARK_TEETH));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1823,7 +1825,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.SNAKE_FANGS;
-	    Metamorph.unlockMetamorph("Snake Fangs Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.SNAKE_FANGS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1843,7 +1845,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.CAT;
-	    Metamorph.unlockMetamorph("Cat Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.CAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1878,7 +1880,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.LIZARD;
-	    Metamorph.unlockMetamorph("Lizard Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.LIZARD));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1927,7 +1929,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.SPIDER_FANGS;
 	    if (player.tailRecharge < 5) player.tailRecharge = 5;
-	    Metamorph.unlockMetamorph("Spider Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.SPIDER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1945,7 +1947,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.FOX;
-	    Metamorph.unlockMetamorph("Fox Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FOX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1962,7 +1964,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.DRAGON;
-	    Metamorph.unlockMetamorph("Draconic Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DRAGON));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -1979,7 +1981,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.DRAGON_FANGS;
-	    Metamorph.unlockMetamorph("Draconic Fangs Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DRAGON_FANGS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2109,7 +2111,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.PIG;
-	    Metamorph.unlockMetamorph("Pig Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.PIG));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2126,7 +2128,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.BOAR;
-	    Metamorph.unlockMetamorph("Boar Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.BOAR));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2209,7 +2211,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.MANTICORE;
-	    Metamorph.unlockMetamorph("Manticore Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.MANTICORE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2226,7 +2228,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.SALAMANDER_FANGS;
-	    Metamorph.unlockMetamorph("Salamander Fangs Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.SALAMANDER_FANGS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2259,7 +2261,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.ORCA;
-	    Metamorph.unlockMetamorph("Orca Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ORCA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2295,7 +2297,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.DEVIL_FANGS;
-	    Metamorph.unlockMetamorph("Devil Fangs Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DEVIL_FANGS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2314,7 +2316,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.ONI_TEETH;
-	    Metamorph.unlockMetamorph("Oni Teeth Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ONI_TEETH));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2333,7 +2335,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.WEASEL;
-	    Metamorph.unlockMetamorph("Weasel Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.WEASEL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2350,7 +2352,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.VAMPIRE;
-	    Metamorph.unlockMetamorph("Vampire Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.VAMPIRE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2399,7 +2401,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.RED_PANDA;
-	    Metamorph.unlockMetamorph("Red Panda Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.RED_PANDA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2423,7 +2425,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.CHESHIRE;
-	    Metamorph.unlockMetamorph("Cheshire Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.CHESHIRE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2445,7 +2447,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.CHESHIRE_SMILE;
-	    Metamorph.unlockMetamorph("Cheshire Smile Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.CHESHIRE_SMILE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2492,7 +2494,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.ORC_FANGS;
-			Metamorph.unlockMetamorph("Orc Fangs Face");
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ORC_FANGS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2761,7 +2763,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Your tongue suddenly feels weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>";
 	    player.tongue.type = Tongue.CAT;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cat Tongue");
+	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.CAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2779,7 +2781,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Your throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realize it is because your body became closer to that of an elf, adapting even your tongue and voice. <b>You now have the beautiful voice of the elves.</b>";
 	    player.tongue.type = Tongue.ELF;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Elf Tongue");
+	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.ELF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2796,7 +2798,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tongue.type = Tongue.DRACONIC;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Tongue");
+	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.DRACONIC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2813,7 +2815,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    else desc += "Your inhuman tongue shortens, pulling tight in the very back of your throat. After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards. By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.";
 	    player.tongue.type = Tongue.SNAKE;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Snake Tongue");
+	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.SNAKE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2832,7 +2834,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tongue.type = Tongue.DEMONIC;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demonic Tongue");
+	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.DEMONIC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2963,7 +2965,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.LION;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Lion Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.LION));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2980,7 +2982,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.coatColor = "midnight";
 	    player.ears.type = Ears.DISPLACER;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Displacer Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.DISPLACER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3002,7 +3004,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    }
 	    player.ears.type = Ears.CAT;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cat Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.CAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3021,7 +3023,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += " seems to overcome your head. Your ears tingle, and you’re sure you can feel the flesh on them shifting, as you gradually have trouble hearing. A couple of minutes later the feeling stops. Curious of what has changed you go to check yourself on the stream, only to find that they’ve changed into cute, triangular ears, covered with white fur. <b>You’ve got red-panda ears!</b>";
 	    player.ears.type = Ears.RED_PANDA;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Red_panda Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.RED_PANDA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3041,7 +3043,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "<b>You now have horse ears.</b>";
 	    player.ears.type = Ears.HORSE;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Horse Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.HORSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3057,7 +3059,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>";
 	    player.ears.type = Ears.PIG;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Pig Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.PIG));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3076,7 +3078,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.VAMPIRE;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Vampire Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.VAMPIRE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3095,7 +3097,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.BAT;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bat Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3118,7 +3120,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.WEASEL;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Weasel Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.WEASEL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3134,7 +3136,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Your ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>";
 	    player.ears.type = Ears.ONI;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Oni Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.ONI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3152,7 +3154,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Sounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.";
 	    player.ears.type = Ears.ELVEN;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Elven Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.ELVEN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3168,7 +3170,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Your ears elongate and flatten on your head. You flap them a little and discover they have turned into something similar to the ears of a goat. <b>You now have goat ears!</b>";
 	    player.ears.type = Ears.GOAT;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Goat Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.GOAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3184,7 +3186,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like. <b>You now have [haircolor] cow ears.</b>";
 	    player.ears.type = Ears.COW;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cow Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.COW));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3200,7 +3202,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "A prickling sensation suddenly fills your ears; unpleasant, but hardly painful. It grows and grows until you can't stand it any more, and reach up to scratch at them. To your surprise, you find them melting away like overheated candles. You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion. Then, all of a sudden, hearing returns to you. Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head. A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins. With a little patience, you begin to adjust these fins just like ears to aid your hearing. <b>You now have dragon ears!</b>";
 	    player.ears.type = Ears.DRAGON;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.DRACONIC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3216,7 +3218,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed ears covered in small scales</b>. You bet they look cute!";
 	    player.ears.type = Ears.SNAKE;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Snake Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.SNAKE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3233,7 +3235,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.ORCA;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Orca Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.ORCA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3265,7 +3267,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers. <b>You have reptilian ears!</b>";
 	    player.ears.type = Ears.LIZARD;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Lizard Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.LIZARD));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3285,7 +3287,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    }
 	    player.ears.type = Ears.FOX;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Fox Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.FOX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3306,7 +3308,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.ELFIN;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Elfin Ears");
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.ELFIN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3677,7 +3679,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.MANTICORE;
-	    Metamorph.unlockMetamorph("Manticore Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.MANTICORE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3696,7 +3698,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.INFERNAL;
-	    Metamorph.unlockMetamorph("Infernal Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.INFERNAL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3715,7 +3717,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.DISPLACER;
-	    Metamorph.unlockMetamorph("Displacer Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.DISPLACER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3732,7 +3734,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.CAT;
-	    Metamorph.unlockMetamorph("Cat Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.CAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3753,7 +3755,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.ORC;
-	    Metamorph.unlockMetamorph("Orc Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.ORC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3775,7 +3777,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.VAMPIRE;
-	    Metamorph.unlockMetamorph("Vampire Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.VAMPIRE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3796,7 +3798,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.eyes.type = Eyes.RAIJU;
-	    Metamorph.unlockMetamorph("Raiju Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.RAIJU));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3831,7 +3833,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.ONI;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Oni Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.ONI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3850,7 +3852,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.ELF;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Elf Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.ELF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3869,7 +3871,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.DEVIL;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Devil Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.DEVIL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3886,7 +3888,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.DRACONIC;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.DRACONIC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3903,7 +3905,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.GORGON;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Gorgon Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.GORGON));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3920,7 +3922,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.SNAKE;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Snake Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SNAKE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3937,7 +3939,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.SPIDER;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Spider Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SPIDER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3958,7 +3960,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.LIZARD;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Lizard Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.LIZARD));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3975,7 +3977,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.FOX;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Fox Eyes");
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FOX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4524,7 +4526,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.SPHINX;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Sphinx Arms");
+
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPHINX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4543,7 +4546,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.LION;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Lion Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.LION));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4562,7 +4565,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.DISPLACER;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Displacer Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.DISPLACER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4581,7 +4584,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.CAT;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cat Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4598,7 +4601,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.RED_PANDA;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Red Panda Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.RED_PANDA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4617,7 +4620,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.ORC;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Orc Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ORC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4637,7 +4640,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.BOAR;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Boar Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.BOAR));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4656,7 +4659,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.PIG;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Pig Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.PIG));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4675,7 +4678,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.BAT;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bat Wing Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.BAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4695,7 +4698,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.RAIJU_PAWS;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Raiju Paws Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.RAIJU_PAWS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4725,7 +4728,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.RAIJU;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Raiju Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.RAIJU));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4744,7 +4747,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.ONI;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Oni Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ONI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4763,7 +4766,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.ELF;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Elf Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ELF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4783,7 +4786,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.MANTIS;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Mantis Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.MANTIS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4800,7 +4803,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.DEVIL;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Devil Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.DEVIL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4817,7 +4820,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.DRACONIC;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.DRACONIC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4834,7 +4837,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.ORCA;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Orca Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ORCA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4851,7 +4854,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.PHOENIX;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Phoenix Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.PHOENIX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4868,7 +4871,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.SALAMANDER;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Salamander Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SALAMANDER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4885,7 +4888,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.SHARK;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Shark Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SHARK));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4911,7 +4914,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.coatColor = "black";
 	    player.arms.type = Arms.SPIDER;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Spider Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPIDER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4928,7 +4931,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.HARPY;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Harpy Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.HARPY));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4951,7 +4954,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.BEE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bee Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.BEE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4968,7 +4971,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.LIZARD;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Lizard Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.LIZARD));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4987,7 +4990,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.KITSUNE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Kitsune Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.KITSUNE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5006,7 +5009,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.arms.type = Arms.FOX;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Fox Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.FOX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5436,7 +5439,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.coatColor = "midnight purple";
 	    player.coatColor2 = "midnight purple";
 	    player.arms.type = Arms.SPIDER;
-	    Metamorph.unlockMetamorph("Spider Arms");
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPIDER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5501,7 +5504,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.gills.type = Gills.FISH;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Fish Gills");
+	    Metamorph.unlockMetamorph(GillsMem.getMemory(GillsMem.FISH));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5589,7 +5592,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.rearBody.type = RearBody.LION_MANE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Lion Mane Rear Body");
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.LION_MANE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5608,7 +5611,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.rearBody.type = RearBody.DISPLACER_TENTACLES;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Displacer Tentacles Rear Body");
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.DISPLACER_TENTACLES));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5625,7 +5628,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.rearBody.type = RearBody.BAT_COLLAR;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bat Collar Rear Body");
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.BAT_COLLAR));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5642,7 +5645,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.rearBody.type = RearBody.RAIJU_MANE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Raiju Mane Rear Body");
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.RAIJU_MANE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5662,7 +5665,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.rearBody.type = RearBody.ORCA_BLOWHOLE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Orca Blowhole Rear Body");
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.ORCA_BLOWHOLE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5679,7 +5682,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.rearBody.type = RearBody.SHARK_FIN;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Shark Fin Rear Body");
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.SHARK_FIN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5954,7 +5957,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 	      player.legCount = 4;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Taur Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.TAUR));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6016,7 +6019,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.HOOFED;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Hoofed Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HOOFED));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6049,7 +6052,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 1;
 	    player.lowerBody = LowerBody.NAGA;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Snake Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.NAGA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6069,7 +6072,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demon High Heels  Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DEMONIC_HIGH_HEELS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6088,7 +6091,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.lowerBody = LowerBody.DEMONIC_CLAWS;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demon Clawed Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DEMONIC_CLAWS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6108,7 +6111,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.lowerBody = LowerBody.BEE;
 	    player.legCount = 2;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bee Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6159,7 +6162,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.CAT;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Cat Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CAT));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6204,7 +6207,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.LIZARD;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Lizard Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.LIZARD));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6229,7 +6232,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.HARPY;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Harpy Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HARPY));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6248,7 +6251,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.coatColor = "black";
 	    player.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Spider Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CHITINOUS_SPIDER_LEGS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6271,7 +6274,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.coatColor = "black";
 	    player.lowerBody = LowerBody.DRIDER;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Drider Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DRIDER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6321,7 +6324,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.FOX;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Fox Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.FOX));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6397,7 +6400,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.DRAGON;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Draconic Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DRAGON));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6444,7 +6447,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.CLOVEN_HOOFED;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Cloven Hoofed Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CLOVEN_HOOFED));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6489,7 +6492,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.SALAMANDER;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Salamander Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SALAMANDER));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6526,7 +6529,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.MANTIS;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Mantis Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.MANTIS));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6563,7 +6566,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.SHARK;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Shark Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SHARK));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6600,7 +6603,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.LION;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Lion Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.LION));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6637,7 +6640,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.ORCA;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Orca Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ORCA));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6658,7 +6661,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.ONI;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Oni Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ONI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6678,7 +6681,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.ELF;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Elf Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ELF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6714,7 +6717,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.RAIJU;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
-	      Metamorph.unlockMetamorph("Raiju Lower Body");
+	    	Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.RAIJU));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -6741,7 +6744,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.RED_PANDA;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Red Panda Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.RED_PANDA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6761,7 +6764,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.ORC;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Orc Lower Body");
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ORC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7725,7 +7728,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Scorpion Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SCORPION));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7745,7 +7748,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailType = Tail.MANTICORE_PUSSYTAIL;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Manticore Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.MANTICORE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7769,7 +7772,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Burning Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.BURNING));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7817,7 +7820,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cat Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.CAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7837,7 +7840,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailType = Tail.NEKOMATA_FORKED_1_3;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Forked 1/3 Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.NEKOMATA_FORKED_1_3));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7858,7 +7861,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailType = Tail.NEKOMATA_FORKED_2_3;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Forked 2/3 Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.NEKOMATA_FORKED_2_3));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7881,7 +7884,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 2;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cat 2nd Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.CAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7919,7 +7922,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Red_panda Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.RED_PANDA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7949,7 +7952,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Horse Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.HORSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7972,7 +7975,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Pig Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.PIG));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7995,7 +7998,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Raiju Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.RAIJU));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8019,7 +8022,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Mantis Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.MANTIS_ABDOMEN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8043,7 +8046,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Goat Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.GOAT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8072,7 +8075,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Cow Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.COW));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8095,7 +8098,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DRACONIC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8119,7 +8122,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Orca Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ORCA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8144,7 +8147,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Salamander Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SALAMANDER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8168,7 +8171,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Shark Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SHARK));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8194,7 +8197,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Spider Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SPIDER_ADBOMEN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8217,7 +8220,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Harpy Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.HARPY));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8240,7 +8243,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bee Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.BEE_ABDOMEN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8263,7 +8266,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Lizard Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.LIZARD));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8290,7 +8293,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demonic Tail");
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DEMONIC));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8799,23 +8802,26 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	      switch (tailCount) {
 	      case 9:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) Metamorph.unlockMetamorph("Fox 9th Tail");
+	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
 	      case 8:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) Metamorph.unlockMetamorph("Fox 8th Tail");
+	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
 	      case 7:
-	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) Metamorph.unlockMetamorph("Fox 7th Tail");
+	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
 	      case 6:
-	        Metamorph.unlockMetamorph("Fox 6th Tail");
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
 	      case 5:
-	        Metamorph.unlockMetamorph("Fox 5th Tail");
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
 	      case 4:
-	        Metamorph.unlockMetamorph("Fox 4th Tail");
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
 	      case 3:
-	        Metamorph.unlockMetamorph("Fox 3rd Tail");
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
 	      case 2:
-	        Metamorph.unlockMetamorph("Fox 2nd Tail");
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
 	      case 1:
-	        Metamorph.unlockMetamorph("Fox Tail");
+	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
 	      }
 	    },
 	    // is present
@@ -8865,7 +8871,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) {
+	    if (player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE) {
 	      desc += "Your wings twitch and flap involuntarily. You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up. They're starting to look a lot like they did when they first popped out, wet and new. <b>As you watch, they shrivel all the way, then recede back into your body.</b>";
 	    } else {
 	      switch (rand(2)) {
@@ -8901,7 +8907,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.FEATHERED_SPHINX;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Feathered Sphinx Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEATHERED_SPHINX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8918,14 +8924,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your feel your wings growing larger by the second. They keep growing until they reach three times their original size. The transformation finally stops as your wings reach a span of twice your arms length. These will be really useful should you want to fly around in search of a meal. <b>You now have fully grown manticore wings.</b>";
 	    player.wings.desc = "large manticore-like";
-	    player.wings.type = Wings.MANTICORE_LIKE_LARGE;
+	    player.wings.type = Wings.MANTICORE_LARGE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Manticore Large Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.MANTICORE_LARGE));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.wings.type === Wings.MANTICORE_LIKE_LARGE;
+	    return player.wings.type === Wings.MANTICORE_LARGE;
 	  }
 	);
 
@@ -8939,14 +8945,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "You scream something akin to a roar from the tremendous amount of pain you're suddenly experiencing as something starts to push out from your back. Your claws start digging large marks into the ground as the things stretch out and burst through your skin. Large bones covered in a thin, yet sturdy layer of skin, forming a pair of small bat-like wings slowly push out before finally staying in place. They are too small right now to allow you to take flight but they sure look good on you. <b>You now have small manticore wings.</b>";
 	    player.wings.desc = "small manticore-like";
-	    player.wings.type = Wings.MANTICORE_LIKE_SMALL;
+	    player.wings.type = Wings.MANTICORE_SMALL;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Manticore Small Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.MANTICORE_SMALL));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.wings.type === Wings.MANTICORE_LIKE_SMALL;
+	    return player.wings.type === Wings.MANTICORE_SMALL;
 	  }
 	);
 
@@ -8962,7 +8968,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.NIGHTMARE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Nightmare Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.NIGHTMARE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8982,7 +8988,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.FEATHERED_ALICORN;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Feathered Alicorn Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEATHERED_ALICORN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9000,7 +9006,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.THUNDEROUS_AURA;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Thunderous Aura (Wings)");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.THUNDEROUS_AURA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9017,14 +9023,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your wings tingle as they grow, filling out covering your back abdomen until they are large enough to lift you from the ground and allow you to fly! You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight. <b>You now have large Mantis wings!</b>";
 	    player.wings.desc = "large mantis-like";
-	    player.wings.type = Wings.MANTIS_LIKE_LARGE;
+	    player.wings.type = Wings.MANTIS_LARGE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Mantis Large Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.MANTIS_LARGE));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.wings.type === Wings.MANTIS_LIKE_LARGE;
+	    return player.wings.type === Wings.MANTIS_LARGE;
 	  }
 	);
 
@@ -9038,14 +9044,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body.";
 	    desc += "\nYou hastily remove the top portion of your [armor] and marvel as a pair of small Insectile wings sprout from your back. Tenderly flexing your new muscles, you find you can flap them quite fast. Unfortunately you can’t seem to flap your little wings fast enough to fly, but they would certainly slow a fall. A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new mantis wings</b>.";
 	    player.wings.desc = "small mantis-like";
-	    player.wings.type = Wings.MANTIS_LIKE_SMALL;
+	    player.wings.type = Wings.MANTIS_SMALL;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Mantis Small Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.MANTIS_SMALL));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.wings.type === Wings.MANTIS_LIKE_SMALL;
+	    return player.wings.type === Wings.MANTIS_SMALL;
 	  }
 	);
 
@@ -9061,7 +9067,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.DRACONIC_HUGE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Huge Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DRACONIC_HUGE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9081,7 +9087,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.DRACONIC_LARGE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Large Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DRACONIC_LARGE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9100,7 +9106,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.DRACONIC_SMALL;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Draconic Small Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DRACONIC_SMALL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9118,7 +9124,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.desc = "large crimson feathered";
 	    player.wings.type = Wings.FEATHERED_PHOENIX;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Feathered Phoenix Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEATHERED_PHOENIX));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9137,7 +9143,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.FEATHERED_LARGE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Feathered Large Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEATHERED_LARGE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9154,14 +9160,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly! <b>You now have large bee wings!</b> You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.";
 	    player.wings.desc = "large bee-like";
-	    player.wings.type = Wings.BEE_LIKE_LARGE;
+	    player.wings.type = Wings.BEE_LARGE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bee Large Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.BEE_LARGE));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.wings.type === Wings.BEE_LIKE_LARGE;
+	    return player.wings.type === Wings.BEE_LARGE;
 	  }
 	);
 
@@ -9172,36 +9178,37 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body. You hastily remove the top portion of your [armor] and marvel as a pair of small bee-like wings sprout from your back. Tenderly flexing your new muscles, you find you can flap them quite fast. Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall. A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new bee wings</b>.";
 	    player.wings.desc = "small bee-like";
-	    player.wings.type = Wings.BEE_LIKE_SMALL;
+	    player.wings.type = Wings.BEE_SMALL;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Bee Small Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.BEE_SMALL));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.wings.type === Wings.BEE_LIKE_SMALL;
+	    return player.wings.type === Wings.BEE_SMALL;
 	  }
 	);
 
-	public const WingsDemonicQuadrupleLarge: Transformation = new SimpleTransformation("Demonic Large Quadruple Wings",
-	  // apply effect
-	  function (doOutput: Boolean): void {
-	    var desc: String = "";
+	// UNUSED
+	// public const WingsDemonicQuadrupleLarge: Transformation = new SimpleTransformation("Demonic Large Quadruple Wings",
+	//   // apply effect
+	//   function (doOutput: Boolean): void {
+	//     var desc: String = "";
 
-	    TransformationUtils.applyTFIfNotPresent(transformations.WingsDemonicLarge, doOutput);
+	//     TransformationUtils.applyTFIfNotPresent(transformations.WingsDemonicLarge, doOutput);
 
-	    desc += "Your large demonic wings starts to tremble and then starts to split from the tip. You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings. <b>Your demonic wings have splited into two pairs!</b>";
-	    player.wings.desc = "two large pairs of bat-like";
-	    player.wings.type = Wings.BAT_LIKE_LARGE_2;
+	//     desc += "Your large demonic wings starts to tremble and then starts to split from the tip. You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings. <b>Your demonic wings have splited into two pairs!</b>";
+	//     player.wings.desc = "two large pairs of bat-like";
+	//     player.wings.type = Wings.BAT_LIKE_LARGE_2;
 
-	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demonic Large Quadruple Wings");
-	  },
-	  // is present
-	  function (): Boolean {
-	    return player.wings.type === Wings.BAT_LIKE_LARGE_2;
-	  }
-	);
+	//     if (doOutput) outputText(desc);
+	//     Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DEMONIC_LARGE_X4));
+	//   },
+	//   // is present
+	//   function (): Boolean {
+	//     return player.wings.type === Wings.BAT_LIKE_LARGE_2;
+	//   }
+	// );
 
 	public const WingsDemonicLarge: Transformation = new SimpleTransformation("Demonic Large Wings",
 	  // apply effect
@@ -9210,7 +9217,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.WingsDemonicTiny, doOutput);
 
-	    if (player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_LARGE) {
+	    if (player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LARGE || player.wings.type == Wings.MANTIS_LARGE || player.wings.type == Wings.MANTICORE_LARGE) {
 	      desc += "The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing. You twist your head as far as you can for a look and realize they've changed into large <b>bat-like demon-wings!</b>";
 	    } else {
 	      desc += "Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body. You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings. <b>Your demonic wings have grown!</b>";
@@ -9220,7 +9227,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.BAT_LIKE_LARGE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demonic Large Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DEMONIC_LARGE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9240,7 +9247,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.BAT_LIKE_TINY;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Demonic Tiny Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DEMONIC_TINY));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9258,7 +9265,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.type = Wings.VAMPIRE;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph("Vampire Wings");
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.VAMPIRE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9388,7 +9395,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if ((player.wings.type == Wings.BAT_LIKE_LARGE) && player.cor >= 75) {
 	      desc += "Your wing shrivels before suddenly changing and covering themselves with black feathers. They still look demonic in a sense, albeit they are feathered now. <b>You now have black, feathered wings!</b>";
-	    } else if (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) {
+	    } else if (player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE) {
 	      desc += "The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing. You twist your head as far as you can for a look and realize they've changed into <b>black, feathered wings!</b>";
 	    } else if (player.wings.type != Wings.NONE) {
 	      desc += "A sensation of numbness suddenly fills your wings. When it dies away, they feel... different. Looking back, you realize that they have been replaced by <b>black, feathered wings!</b>";
@@ -9443,6 +9450,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
   /*
 */
+
 /*
 *    ██████  ██████  ███████  █████  ███████ ████████ ███████
 *    ██   ██ ██   ██ ██      ██   ██ ██         ██    ██
