@@ -687,7 +687,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GAZER:int = 66;
 	EnumValue.add(Types, GAZER, "GAZER", {
 		name: "gazer",
-		appearanceDesc: "Your {legCount} are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway."
+		appearanceDesc: "Your {legCount} legs are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway."
 	});
 
 	public static const SQUIRREL:int = 67;

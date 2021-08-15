@@ -83,8 +83,9 @@ public class PlayerAppearance extends BaseContent {
 		outputText("[pg]" + Utils.mergeSentences([describeBreasts(), describeCrotch()]));
 
 		if (player.hasCock() || player.balls > 0 || player.vaginas.length > 0) {
-			outputText(" " + Utils.mergeSentences([describeCock(), describePussy(), describeBalls()]));
+			outputText(" " + Utils.mergeSentences([describeCock(), describeBalls()]));
 		}
+		outputText(describePussy() + "\n");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
@@ -653,7 +654,7 @@ public class PlayerAppearance extends BaseContent {
 				temp++;
 			}
 		}
-
+		breastsDesc += "\n";
 		return breastsDesc;
 	}
 
@@ -664,7 +665,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeCock(): String {
 		var temp:Number = 0;
 		var rando:Number = 0;
-		var cockDesc: String = "";
+		var cockDesc: String = "\n";
 
 		if (player.hasCock()) {
 			rando = rand(100);
@@ -687,11 +688,11 @@ public class PlayerAppearance extends BaseContent {
 				// How to start the sentence?
 				if (player.cocks.length == 1) cockDesc += "Your ";
 				else if (cock_index == 0) cockDesc += "--Your first ";
-				else if (rando % 5 == 0) cockDesc += "--The next ";
-				else if (rando % 5 == 1) cockDesc += "--The " + num2Text2(cock_index+1) + " of your ";
-				else if (rando % 5 == 2) cockDesc += "--One of your ";
-				else if (rando % 5 == 3) cockDesc += "--The " + num2Text2(cock_index+1) + " ";
-				else if (rando % 5 == 4) cockDesc += "--Another of your ";
+				else if (rando % 5 == 0) cockDesc += "\n--The next ";
+				else if (rando % 5 == 1) cockDesc += "\n--The " + num2Text2(cock_index+1) + " of your ";
+				else if (rando % 5 == 2) cockDesc += "\n--One of your ";
+				else if (rando % 5 == 3) cockDesc += "\n--The " + num2Text2(cock_index+1) + " ";
+				else if (rando % 5 == 4) cockDesc += "\n--Another of your ";
 				// How large?
 				cockDesc += player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") + " is " + inchesOrCentimetres(player.cocks[cock_index].cockLength) + " long and ";
 				cockDesc += inchesOrCentimetres(player.cocks[cock_index].cockThickness);
@@ -739,19 +740,19 @@ public class PlayerAppearance extends BaseContent {
 					// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
 					// Anyways, check against null values, and stuff works again.
 					//trace("Found a sock description (WTF even is a sock?)", player.cocks[cock_index].sock);
-					sockDescript(cock_index);
+					cockDesc += sockDescript(cock_index);
 				}
+				//cockDesc += "\n"
 			}
 			//Worm flavor
 			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n";
 		}
 
-
 		return cockDesc;
 	}
 
 	public function describeBalls(): String {
-		var ballsDesc: String = "";
+		var ballsDesc: String = " ";
 
 		const ballsSizeDesc: String = " about " + num2Text(Math.round(player.ballSize)) + " " + (Math.round(player.ballSize) == 1 ? "inch" : "inches") +" across"
 
@@ -764,12 +765,12 @@ public class PlayerAppearance extends BaseContent {
 				if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
 				else swingsWhere = " under your [cocks].";
 
-				if (player.hasFur()) ballsDesc += "A fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
-				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "A chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.hasScales()) ballsDesc += "A scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.skinType == Skin.STONE) ballsDesc += "A stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else if (player.skinType == Skin.GOO) ballsDesc += "An oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else ballsDesc += "A [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				if (player.hasFur()) ballsDesc += "a fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
+				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "a chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.hasScales()) ballsDesc += "a scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.skinType == Skin.STONE) ballsDesc += "a stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else if (player.skinType == Skin.GOO) ballsDesc += "an oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else ballsDesc += "a [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
 			}
 
 			// ballsDesc += " You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ";
@@ -788,7 +789,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describePussy(): String {
-		var pussyDesc: String = "";
+		var pussyDesc: String = "\n";
 
 		if (player.vaginas.length > 0){
 			var vagLoop:int = 0
@@ -839,7 +840,7 @@ public class PlayerAppearance extends BaseContent {
 						pussyDesc += " constantly secretes aphrodisiac-like nectar, ensuring any stamen that parts your petals are sufficiently lubricated and ready to fertilize you. Your flower hides a ";
 						break;
 					case VaginaClass.DEMONIC:
-						pussyDesc += ", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. Your dexterous, cum-hungry twat hides a ";
+						pussyDesc += ", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Its sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. Your dexterous, cum-hungry twat hides a ";
 						break;
 					case VaginaClass.NAGA:
 						pussyDesc += " is deep and wide enough to insert your entire arm length inside and some more. Sometimes you lament that most of your partners are no longer big enough to satisfy you";
@@ -1624,37 +1625,39 @@ public class PlayerAppearance extends BaseContent {
 		doNext(playerMenu);
 	}
 
-	public function sockDescript(index:int):void {
-		outputText(" ");
+	public function sockDescript(index:int):String {
+		var cockSockDesc:String = " ";
+		//outputText(" ");
 		if (player.cocks[index].sock == "wool")
-			outputText("It's covered by a wooly white cock-sock, keeping it snug and warm despite how cold it might get.");
+			cockSockDesc += "It's covered by a wooly white cock-sock, keeping it snug and warm despite how cold it might get.";
 		else if (player.cocks[index].sock == "alabaster")
-			outputText("It's covered by a white, lacey cock-sock, snugly wrapping around it like a bridal dress around a bride.");
+			cockSockDesc +="It's covered by a white, lacey cock-sock, snugly wrapping around it like a bridal dress around a bride.";
 		else if (player.cocks[index].sock == "cockring")
-			outputText("It's covered by a black latex cock-sock with two attached metal rings, keeping your cock just a little harder and [balls] aching for release.");
+			cockSockDesc +="It's covered by a black latex cock-sock with two attached metal rings, keeping your cock just a little harder and [balls] aching for release.";
 		else if (player.cocks[index].sock == "viridian")
-			outputText("It's covered by a lacey dark green cock-sock accented with red rose-like patterns. Just wearing it makes your body, especially your cock, tingle.");
+			cockSockDesc +="It's covered by a lacey dark green cock-sock accented with red rose-like patterns. Just wearing it makes your body, especially your cock, tingle.";
 		else if (player.cocks[index].sock == "scarlet")
-			outputText("It's covered by a lacey red cock-sock that clings tightly to your member. Just wearing it makes your cock throb, as if it yearns to be larger...");
+			cockSockDesc +="It's covered by a lacey red cock-sock that clings tightly to your member. Just wearing it makes your cock throb, as if it yearns to be larger...";
 		else if (player.cocks[index].sock == "cobalt")
-			outputText("It's covered by a lacey blue cock-sock that clings tightly to your member... really tightly. It's so tight it's almost uncomfortable, and you wonder if any growth might be inhibited.");
+			cockSockDesc +="It's covered by a lacey blue cock-sock that clings tightly to your member... really tightly. It's so tight it's almost uncomfortable, and you wonder if any growth might be inhibited.";
 		else if (player.cocks[index].sock == "gilded")
-			outputText("It's covered by a metallic gold cock-sock that clings tightly to you, its surface covered in glittering gems. Despite the warmth of your body, the cock-sock remains cool.");
+			cockSockDesc +="It's covered by a metallic gold cock-sock that clings tightly to you, its surface covered in glittering gems. Despite the warmth of your body, the cock-sock remains cool.";
 		else if (player.cocks[index].sock == "amaranthine") {
-			outputText("It's covered by a lacey purple cock-sock");
+			cockSockDesc +="It's covered by a lacey purple cock-sock";
 			if (player.cocks[index].cockType != CockTypesEnum.DISPLACER)
-				outputText(" that fits somewhat awkwardly on your member");
+				cockSockDesc +=" that fits somewhat awkwardly on your member";
 			else
-				outputText(" that fits your coeurl cock perfectly");
-			outputText(". Just wearing it makes you feel stronger and more powerful.");
+				cockSockDesc +=" that fits your coeurl cock perfectly";
+			cockSockDesc +=". Just wearing it makes you feel stronger and more powerful.";
 		} else if (player.cocks[index].sock == "red")
-			outputText("It's covered by a red cock-sock that seems to glow. Just wearing it makes you feel a bit powerful.");
+			cockSockDesc +="It's covered by a red cock-sock that seems to glow. Just wearing it makes you feel a bit powerful.";
 		else if (player.cocks[index].sock == "green")
-			outputText("It's covered by a green cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.");
+			cockSockDesc +="It's covered by a green cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.";
 		else if (player.cocks[index].sock == "blue")
-			outputText("It's covered by a blue cock-sock that seems to glow. Just wearing it makes you feel like you can cast spells more effectively.");
+			cockSockDesc +="It's covered by a blue cock-sock that seems to glow. Just wearing it makes you feel like you can cast spells more effectively.";
 
-		else outputText("<b>Yo, this is an error.</b>");
+		else cockSockDesc +="<b>Yo, this is an error.</b>";
+		return cockSockDesc;
 	}
 
 	public function describeVisage():void{ //expressions!
