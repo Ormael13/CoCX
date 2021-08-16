@@ -938,7 +938,7 @@
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
 				player.createPerk(PerkLib.ELFElvenBattleStyle,0,0,0,0);
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,2);
-				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
+				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry II Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
