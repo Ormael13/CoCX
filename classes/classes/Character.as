@@ -240,6 +240,7 @@ import classes.CoC;
 	public function hasBeak():Boolean{ return facePart.hasBeak(); }
 	public function face():String { return facePart.describe(); }
 	public function faceDesc():String { return facePart.describeMF(); }
+	public function faceDescArticle():String { return facePart.describeMF(true); }
 	public function hasLongTail():Boolean { return tail.isLong(); }
 
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
@@ -900,6 +901,14 @@ import classes.CoC;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
+		public override function maxOverSoulforce():Number {
+			var max1:Number = maxSoulforce();
+			var max2:Number = 1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 1499999) max1 = 1499999;
+			return max1;
+		}
 
 		public override function maxWrath():Number
 		{
@@ -1174,6 +1183,14 @@ import classes.CoC;
 			max = Math.round(max);
 			if (max > 2499999) max = 2499999;
 			return max;
+		}
+		public override function maxOverMana():Number {
+			var max1:Number = maxMana();
+			var max2:Number = 1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 2499999) max1 = 2499999;
+			return max1;
 		}
 
 		public function maxVenom():Number

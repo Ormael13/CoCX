@@ -110,7 +110,7 @@ use namespace CoC;
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
-								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
 							} else {
 								tamaniScene.encounterTamani();
@@ -119,7 +119,7 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
-								   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
+								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
 								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 						}
 					}, {
@@ -127,7 +127,7 @@ use namespace CoC;
 						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
-								&& player.cockTotal() > 0
+								&& player.hasCock()
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
 								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
 						}
@@ -341,7 +341,7 @@ use namespace CoC;
 				chance: 0.6,
 				call  : function ():void {
 					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
-						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && rand(5) == 0) {
+						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3 && rand(5) == 0) {
 						tamaniDaughtersScene.encounterTamanisDaughters();
 					} else {
 						tamaniScene.encounterTamani();
@@ -350,7 +350,7 @@ use namespace CoC;
 				when  : function ():Boolean {
 					return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 						   && player.gender > 0
-						   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
+						   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 				}
 			}, {
@@ -358,7 +358,7 @@ use namespace CoC;
 				call  : encounterTamanisDaughtersFn,
 				when  : function ():Boolean {
 					return player.gender > 0
-						   && player.cockTotal() > 0
+						   && player.hasCock()
 						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
 				}

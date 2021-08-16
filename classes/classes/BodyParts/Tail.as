@@ -62,14 +62,14 @@ public class Tail extends SaveableBodyPart {
 	public static const SPIDER_ADBOMEN: int = 5;
 	EnumValue.add(Types, SPIDER_ADBOMEN, "SPIDER_ADBOMEN", {
 		name:"spider abdomen",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = "A large, spherical spider abdomen has grown out from your backside, covered in shiny [skin coat.color] chitin. Though it's heavy and bobs with every motion, it doesn't seem to slow you down."
 
-			if (creature.tailVenom > (creature.maxVenom() * 0.5) && creature.tailVenom < (creature.maxVenom() * 0.8)) {
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8)) {
 				desc += " Your bulging arachnid posterior feels fairly full of webbing.";
-			} else if (creature.tailVenom >= (creature.maxVenom() * 0.8) && creature.tailVenom < creature.maxVenom()) {
+			} else if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom()) {
 				desc += " Your arachnid rear bulges and feels very full of webbing.";
-			} else if (creature.tailVenom == creature.maxVenom()) {
+			} else if (player.tailVenom == player.maxVenom()) {
 				desc += " Your swollen spider-butt is distended with the sheer amount of webbing it's holding.";
 			}
 
@@ -79,14 +79,14 @@ public class Tail extends SaveableBodyPart {
 	public static const BEE_ABDOMEN: int = 6;
 	EnumValue.add(Types, BEE_ABDOMEN, "BEE_ABDOMEN", {
 		name:"bee abdomen",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = "A large bee abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard chitin with black and yellow stripes, and tipped with a dagger-like stinger."
 
-			if (creature.tailVenom > (creature.maxVenom() * 0.5) && creature.tailVenom < (creature.maxVenom() * 0.8)) {
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8)) {
 				desc += " A single drop of poison hangs from your exposed stinger.";
-			} else if (creature.tailVenom >= (creature.maxVenom() * 0.8) && creature.tailVenom < creature.maxVenom()) {
+			} else if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom()) {
 				desc += " Poisonous bee venom coats your stinger completely.";
-			} else if (creature.tailVenom == creature.maxVenom()) {
+			} else if (player.tailVenom == player.maxVenom()) {
 				desc += " Venom drips from your poisoned stinger regularly.";
 			}
 
@@ -104,10 +104,10 @@ public class Tail extends SaveableBodyPart {
 	public static const CAT: int = 8;
 	EnumValue.add(Types, CAT, "CAT", {
 		name:"cat",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = "A soft [skin coat.color] cat tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
 
-			if (creature.tailCount == 2) {
+			if (player.tailCount == 2) {
 				desc = "A pair of soft [skin coat.color] cat tails sprout just above your [butt], curling and twisting with every step to maintain perfect balance."
 			}
 
@@ -135,10 +135,10 @@ public class Tail extends SaveableBodyPart {
 	public static const KANGAROO: int = 12;
 	EnumValue.add(Types, KANGAROO, "KANGAROO", {
 		name:"kangaroo",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = "A conical, ";
 
-			if (creature.hasFur()) {
+			if (player.hasFur()) {
 				desc += "furry, and [skin coat.color] ";
 			} else {
 				desc += "gooey, and [skintone] ";
@@ -150,11 +150,11 @@ public class Tail extends SaveableBodyPart {
 	public static const FOX: int = 13;
 	EnumValue.add(Types, FOX, "FOX", {
 		name:"fox",
-		appearanceDescFunc: function(creature: *): String {
-			var desc: String = "A swishing [skin coat.color] fox brush extends from your [butt], curling around your body - the soft fur feels lovely."
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "A swishing [skin coat.color] fox brush extends from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
 
-			if (creature.tailCount > 1) {
-				desc = "[TailCount] swishing [skin coat.color] fox tails extend from your [butt], curling around your body. The soft fur feels lovely."
+			if (player.tailCount > 1) {
+				desc = "[TailCount] swishing [skin coat.color] fox tails extend from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
 			}
 
 			return desc;
@@ -202,14 +202,14 @@ public class Tail extends SaveableBodyPart {
 	public static const SCORPION: int = 20;
 	EnumValue.add(Types, SCORPION, "SCORPION", {
 		name:"scorpion",
-		appearanceDescFunc: function(creature: *): String {
+		appearanceDescFunc: function(player: *): String {
 			var desc: String = "A large insectile scorpion tail dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard chitin and tipped with a stinger."
 
-			if (creature.tailVenom > (creature.maxVenom() * 0.5) && creature.tailVenom < (creature.maxVenom() * 0.8)) {
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8)) {
 				desc += "A single drop of poison hangs from your exposed stinger.";
-			} else if (creature.tailVenom >= (creature.maxVenom() * 0.8) && creature.tailVenom < creature.maxVenom()) {
+			} else if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom()) {
 				desc += "Poisonous bee venom coats your stinger completely.";
-			} else if (creature.tailVenom == creature.maxVenom()) {
+			} else if (player.tailVenom == player.maxVenom()) {
 				desc += "Venom drips from your poisoned stinger regularly.";
 			}
 
@@ -365,8 +365,8 @@ public class Tail extends SaveableBodyPart {
 	public static const USHI_ONI: int = 47;
 	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
 		name:"ushi-oni",
-		appearanceDescFunc: function(creature: *): String {
-			var desc: String = "You have an ushi-oni tail whose furred member is " + (creature.tallness > 72 ? "five" : "four") + " feet long and prehensile. Its tip can shoot very thick and strong web strings which double as an aphrodisiac when in contact with the victim.";
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "You have an ushi-oni tail whose furred member is " + (player.tallness > 72 ? "five" : "four") + " feet long and prehensile. Its tip can shoot very thick and strong web strings which double as an aphrodisiac when in contact with the victim.";
 
 			return desc;
 		}
@@ -424,14 +424,10 @@ public class Tail extends SaveableBodyPart {
 		savedata.tailType = type;
 	}
 
-	public static function getAppearanceDescription(creature: *):String {
-		const id: int = creature.tailType;
+	public static function getAppearanceDescription(player: *):String {
+		const id: int = player.tailType;
 
-		return formatDescription((Types[id].appearanceDescFunc? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
-	}
-
-	public static function getTFDescription(creature: *, bodyPart: *):String {
-		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+		return formatDescription((Types[id].appearanceDescFunc? Types[id].appearanceDescFunc(player) : Types[id].appearanceDesc) || "", player);
 	}
 
 	private static function formatDescription(desc:String, creature: *): String {

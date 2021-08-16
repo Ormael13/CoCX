@@ -1665,7 +1665,7 @@ use namespace CoC;
 		}
 		public function loseToAnImpLord():void {
 			clearOutput();
-			if (player.isAlraune){
+			if (player.isAlraune()){
 				impRapesYou();
 			}
 			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0) && flags[kFLAGS.SFW_MODE] <= 0) getRapedAsAGirl();
@@ -2099,7 +2099,7 @@ use namespace CoC;
 
 		public function loseToAnImpOverlord():void {
 			clearOutput();
-			if (player.isAlraune){
+			if (player.isAlraune()){
 				impRapesYou();
 			}
 			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0) && flags[kFLAGS.SFW_MODE] <= 0) getRapedAsAGirlByImpOverlord();

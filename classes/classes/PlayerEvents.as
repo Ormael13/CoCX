@@ -241,6 +241,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.addStatusValue(StatusEffects.WendigoPsychosis, 1, -1);
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			}
+			//
+			if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv1(StatusEffects.PCClone) > 10 && player.statusEffectv1(StatusEffects.PCClone) < 21) {
+				if (player.statusEffectv1(StatusEffects.PCClone) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
+			}
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
@@ -845,7 +858,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);
-				if (player.hasStatusEffect(StatusEffects.ExcelliaJojo)) player.removeStatusEffect(StatusEffects.ExcelliaJojo);
 				if (flags[kFLAGS.SAMIRAH_HYPNOSIS] == 4 || flags[kFLAGS.SAMIRAH_HYPNOSIS] == 2) flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
 				//Soul Arena Gaunlet reset
 				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {
@@ -956,6 +968,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
 					player.cor += 5;
 				}
+				//Reset clone creation tracker
+				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) == 0 && player.statusEffectv4(StatusEffects.PCClone) == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
 			//Easter bunny egg balls Loosing
 			if (player.easterbunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.EasterBunnyEggBag)) {
@@ -1815,6 +1829,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.FlawlessBody);
 				player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
 				needNext = true;
+			}
+			//Wood elf fixed by blessing of the ancestor tree
+			if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+				if (!player.hasPerk(PerkLib.ElvenSense)) {
+					outputText("\nYour acute hearing warns you of imminent danger and you dodge as a branch falls from a nearby tree missing your head by mere inches. You realise your newly sharpened senses granted you increased agility and precision.  <b>You gained the ability Elven Senses.</b>\n\n");
+					outputText("<b>(Gained Perk: Elven Sense</b>)");
+					player.createPerk(PerkLib.ElvenSense, 0, 0, 0, 0);
+				}
+				if (!player.hasPerk(PerkLib.FlawlessBody)) {
+					outputText("\nYou examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
+					outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
+					player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
+					outputText("\n\n<b>(Gained Perk: Flawless Body</b>)");
+				}
 			}
 			//Ferocity
 			if (player.orcScore() < 11 && player.hasPerk(PerkLib.Ferocity) && !player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) {

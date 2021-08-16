@@ -185,13 +185,17 @@ public class DungeonEngine extends BaseContent
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_28:int = 162;
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_29:int = 163;
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_30:int = 164;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_31:int = 165;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_32:int = 166;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_33:int = 167;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_34:int = 168;
 		/*
-		private static const DUNGEON_BEE_HIVE_ENTRANCE:int	= 165;
-		private static const DUNGEON_BEE_HIVE_1:int	= 166;
-		private static const DUNGEON_BEE_HIVE_2:int	= 167;
-		private static const DUNGEON_BEE_HIVE_3:int	= 168;
-		private static const DUNGEON_BEE_HIVE_4:int	= 169;
-		private static const DUNGEON_BEE_HIVE_5:int	= 170;
+		private static const DUNGEON_BEE_HIVE_ENTRANCE:int	= 169;
+		private static const DUNGEON_BEE_HIVE_1:int	= 170;
+		private static const DUNGEON_BEE_HIVE_2:int	= 171;
+		private static const DUNGEON_BEE_HIVE_3:int	= 172;
+		private static const DUNGEON_BEE_HIVE_4:int	= 173;
+		private static const DUNGEON_BEE_HIVE_5:int	= 174;
 		*/
 		//Register dungeons
 		public var factory:Factory = new Factory;
@@ -424,7 +428,7 @@ public class DungeonEngine extends BaseContent
 			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6);//3,4,5,6 - pokonanie każdego z sub-bossów, 7 - pokonanie chimerycznego żywiołaka
 		}
 		public function checkRiverDungeon3rdFloorClear():Boolean {
-			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8);//8 - pokonanie subbossa, 9 - pokonanie bossa
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8);//8 - otwarcie drzwi boss room-u, 9 - pokonanie bossa
 		}
 		public function checkEbonLabyrinthClear():Boolean {
 			return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki

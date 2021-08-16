@@ -11,8 +11,10 @@ package classes.GeneticMemories {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - name: how the Metamorph is referred to in displayed texts
 	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
 	 * - title: name displayed on the metamorph button
+	 * - unlockText: additional text displayed when Metamorph is unlocked
 	 * - transformation: TF object that refers to what the metamorph does
 	 *
 	 * Optional properties:
@@ -26,8 +28,10 @@ package classes.GeneticMemories {
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
 			id: [Name Saved in GeneticStorage],
+			name: [Name Displayed in Texts],
 			cost: [Cost Here],
-			title: "[Race Here]",
+			title: [Race Here],
+			unlockText: [Text Displayed On Unlocking Metamorph Here],
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -40,6 +44,7 @@ package classes.GeneticMemories {
 		public static const HUMAN:int = 0;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
+			name: "Human Face",
 			cost: 500,
 			title: "Human",
 			transformation: function(): Transformation {
@@ -50,6 +55,7 @@ package classes.GeneticMemories {
 		public static const HORSE:int = 1;
 		EnumValue.add(Memories, HORSE, "HORSE", {
 			id: "Horse Face",
+			name: "Horse Face",
 			cost: 100,
 			title: "Horse",
 			transformation: function(): Transformation {
@@ -60,8 +66,9 @@ package classes.GeneticMemories {
 		public static const COW_MINOTAUR:int = 2;
 		EnumValue.add(Memories, COW_MINOTAUR, "COW_MINOTAUR", {
 			id: "Cow/Minotaur Face",
+			name: "Bovine Face",
 			cost: 100,
-			title: "Cow/Mino",
+			title: "Bovine",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceCowMinotaur;
 			}
@@ -70,6 +77,7 @@ package classes.GeneticMemories {
 		public static const SHARK_TEETH:int = 3;
 		EnumValue.add(Memories, SHARK_TEETH, "SHARK_TEETH", {
 			id: "Shark Teeth Face",
+			name: "Shark Teeth",
 			cost: 100,
 			title: "Shark",
 			transformation: function(): Transformation {
@@ -80,6 +88,7 @@ package classes.GeneticMemories {
 		public static const SNAKE_FANGS:int = 4;
 		EnumValue.add(Memories, SNAKE_FANGS, "SNAKE_FANGS", {
 			id: "Snake Fangs Face",
+			name: "Snake Fangs",
 			cost: 100,
 			title: "Snake",
 			transformation: function(): Transformation {
@@ -90,6 +99,7 @@ package classes.GeneticMemories {
 		public static const CAT:int = 5;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Face",
+			name: "Cat Face",
 			cost: 100,
 			title: "Cat",
 			transformation: function(): Transformation {
@@ -100,6 +110,7 @@ package classes.GeneticMemories {
 		public static const CAT_CANINES:int = 6;
 		EnumValue.add(Memories, CAT_CANINES, "CAT_CANINES", {
 			id: "Cat Canines Face",
+			name: "Cat Canines",
 			cost: 100,
 			title: "Cat Canines",
 			transformation: function(): Transformation {
@@ -110,6 +121,7 @@ package classes.GeneticMemories {
 		public static const LIZARD:int = 7;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard Face",
+			name: "Lizard Face",
 			cost: 100,
 			title: "Lizard",
 			transformation: function(): Transformation {
@@ -120,6 +132,7 @@ package classes.GeneticMemories {
 		public static const SPIDER:int = 8;
 		EnumValue.add(Memories, SPIDER, "SPIDER", {
 			id: "Spider Fangs Face",
+			name: "Spider Fangs",
 			cost: 100,
 			title: "Spider Fangs",
 			transformation: function(): Transformation {
@@ -130,6 +143,7 @@ package classes.GeneticMemories {
 		public static const FOX:int = 9;
 		EnumValue.add(Memories, FOX, "FOX", {
 			id: "Fox Face",
+			name: "Fox Face",
 			cost: 100,
 			title: "Fox",
 			transformation: function(): Transformation {
@@ -140,6 +154,7 @@ package classes.GeneticMemories {
 		public static const PIG:int = 10;
 		EnumValue.add(Memories, PIG, "PIG", {
 			id: "Pig Face",
+			name: "Pig Face",
 			cost: 100,
 			title: "Pig",
 			transformation: function(): Transformation {
@@ -150,6 +165,7 @@ package classes.GeneticMemories {
 		public static const BOAR:int = 11;
 		EnumValue.add(Memories, BOAR, "BOAR", {
 			id: "Boar Face",
+			name: "Boar Face",
 			cost: 100,
 			title: "Boar",
 			transformation: function(): Transformation {
@@ -160,6 +176,7 @@ package classes.GeneticMemories {
 		public static const MANTICORE:int = 12;
 		EnumValue.add(Memories, MANTICORE, "MANTICORE", {
 			id: "Manticore Face",
+			name: "Manticore Fangs",
 			cost: 100,
 			title: "Manticore",
 			transformation: function(): Transformation {
@@ -170,6 +187,7 @@ package classes.GeneticMemories {
 		public static const SALAMANDER_FANGS:int = 13;
 		EnumValue.add(Memories, SALAMANDER_FANGS, "SALAMANDER_FANGS", {
 			id: "Salamander Fangs Face",
+			name: "Salamander Fangs",
 			cost: 100,
 			title: "Salamander F.",
 			transformation: function(): Transformation {
@@ -180,6 +198,7 @@ package classes.GeneticMemories {
 		public static const ORCA:int = 14;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 			id: "Orca Face",
+			name: "Orca Face",
 			cost: 100,
 			title: "Orca",
 			transformation: function(): Transformation {
@@ -190,6 +209,7 @@ package classes.GeneticMemories {
 		public static const DRAGON:int = 15;
 		EnumValue.add(Memories, DRAGON, "DRAGON", {
 			id: "Draconic Face",
+			name: "Draconic Face",
 			cost: 100,
 			title: "Dragon",
 			transformation: function(): Transformation {
@@ -200,6 +220,7 @@ package classes.GeneticMemories {
 		public static const DRAGON_FANGS:int = 16;
 		EnumValue.add(Memories, DRAGON_FANGS, "DRAGON_FANGS", {
 			id: "Draconic Fangs Face",
+			name: "Draconic Fangs",
 			cost: 100,
 			title: "Dragon Fangs",
 			transformation: function(): Transformation {
@@ -210,6 +231,7 @@ package classes.GeneticMemories {
 		public static const ONI_TEETH:int = 17;
 		EnumValue.add(Memories, ONI_TEETH, "ONI_TEETH", {
 			id: "Oni Teeth Face",
+			name: "Oni Teeth",
 			cost: 100,
 			title: "Oni Teeh",
 			transformation: function(): Transformation {
@@ -220,6 +242,7 @@ package classes.GeneticMemories {
 		public static const WEASEL:int = 18;
 		EnumValue.add(Memories, WEASEL, "WEASEL", {
 			id: "Weasel Face",
+			name: "Weasel Face",
 			cost: 100,
 			title: "Weasel",
 			transformation: function(): Transformation {
@@ -230,6 +253,7 @@ package classes.GeneticMemories {
 		public static const VAMPIRE:int = 19;
 		EnumValue.add(Memories, VAMPIRE, "VAMPIRE", {
 			id: "Vampire Face",
+			name: "Vampire Fangs",
 			cost: 100,
 			title: "Vampire",
 			transformation: function(): Transformation {
@@ -240,6 +264,7 @@ package classes.GeneticMemories {
 		public static const RED_PANDA:int = 20;
 		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
 			id: "Red Panda Face",
+			name: "Red Panda Face",
 			cost: 100,
 			title: "Red Panda",
 			transformation: function(): Transformation {
@@ -250,8 +275,10 @@ package classes.GeneticMemories {
 		public static const CHESHIRE:int = 21;
 		EnumValue.add(Memories, CHESHIRE, "CHESHIRE", {
 			id: "Cheshire Face",
+			name: "Cheshire Face",
 			cost: 200,
 			title: "Cheshire",
+			permReq: "Cat Face",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceCheshire;
 			}
@@ -260,8 +287,10 @@ package classes.GeneticMemories {
 		public static const CHESHIRE_SMILE:int = 22;
 		EnumValue.add(Memories, CHESHIRE_SMILE, "CHESHIRE_SMILE", {
 			id: "Cheshire Smile Face",
+			name: "Cheshire Smile",
 			cost: 200,
 			title: "Cheshire Smile",
+			permReq: "Cat Canines Face",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceCheshireSmile;
 			}
@@ -270,11 +299,27 @@ package classes.GeneticMemories {
 		public static const ORC_FANGS:int = 23;
 		EnumValue.add(Memories, ORC_FANGS, "ORC_FANGS", {
 			id: "Orc Fangs Face",
+			name: "Orc Fangs",
 			cost: 200,
 			title: "Orc Fangs",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceOrcFangs;
 			}
 		});
+
+		public static const DEVIL_FANGS:int = 24;
+		EnumValue.add(Memories, DEVIL_FANGS, "DEVIL_FANGS", {
+			id: "Devil Fangs Face",
+			name: "Demonic Fangs",
+			cost: 200,
+			title: "Dem. Fangs",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceDevilFangs;
+			}
+		});
+
+		public static function getMemory(memoryId: Number): * {
+			return Memories[memoryId] || Memories[0];
+		}
   }
 }

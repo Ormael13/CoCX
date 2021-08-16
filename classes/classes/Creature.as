@@ -789,6 +789,13 @@ public class Creature extends Utils
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
 			return Math.min(199999,max);
 		}
+		public function maxOverLust():Number {
+			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
+			var max2:Number = 1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			return Math.min(199999,max1);
+		}
 		public function maxFatigue():Number {
 			return 150;
 		}
@@ -801,7 +808,13 @@ public class Creature extends Utils
 		public function maxSoulforce():Number {
 			return 0;
 		}
+		public function maxOverSoulforce():Number {
+			return 0;
+		}
 		public function maxMana():Number {
+			return 0;
+		}
+		public function maxOverMana():Number {
 			return 0;
 		}
 		/**
@@ -3908,6 +3921,11 @@ public class Creature extends Utils
 		public function ballsDescriptLight(forcedSize:Boolean = true):String
 		{
 			return Appearance.ballsDescription(forcedSize, true, this);
+		}
+
+		public function ballsDescriptArticle(forcedSize:Boolean = true):String
+		{
+			return Appearance.ballsDescription(forcedSize, true, this, true);
 		}
 
 		public function sackDescript():String

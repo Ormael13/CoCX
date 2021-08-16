@@ -132,7 +132,7 @@ public class AirElemental extends Monster
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 0) {
 				this.short = "air elemental";
 				this.imageName = "air elemental";
-				this.long = "You're currently fighting air elemental. It's a four foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it  using its bare fists to fight.";
+				this.long = "You're currently fighting air elemental. It's a four foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(10, 20, 60, 40);
 				initWisLibSensCor(40, 10, 20, 50);
@@ -146,7 +146,7 @@ public class AirElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
 				this.short = "air elemental";
 				this.imageName = "air elemental";
-				this.long = "You're currently fighting air elemental. It's a four foot, three inch tall creature. Its body is wrapped in an air current, almost completely concealing its form as it  using its bare fists to fight.";
+				this.long = "You're currently fighting air elemental. It's a four foot, three inch tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(12, 22, 62, 50);
 				initWisLibSensCor(50, 10, 25, 50);
@@ -160,7 +160,7 @@ public class AirElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
 				this.short = "air elemental";
 				this.imageName = "air elemental";
-				this.long = "You're currently fighting air elemental. It's a four and a half foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it  using its bare fists to fight.";
+				this.long = "You're currently fighting air elemental. It's a four and a half foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(14, 24, 64, 60);
 				initWisLibSensCor(60, 10, 30, 50);
@@ -174,7 +174,7 @@ public class AirElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
 				this.short = "air elemental";
 				this.imageName = "air elemental";
-				this.long = "You're currently fighting air elemental. It's a four foot, nine inch tall creature. Its body is wrapped in an air current, almost completely concealing its form as it  using its bare fists to fight.";
+				this.long = "You're currently fighting air elemental. It's a four foot, nine inch tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(16, 26, 66, 70);
 				initWisLibSensCor(70, 10, 35, 50);
@@ -188,7 +188,7 @@ public class AirElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.short = "sylph";
 				this.imageName = "air sylph";
-				this.long = "You're currently fighting 'male' sylph. It's a nine foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it  using its bare fists to fight.";
+				this.long = "You're currently fighting 'male' sylph. It's a nine foot tall creature. Its body is wrapped in an air current, almost completely concealing its form as it using its bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(24, 39, 99, 105);
 				initWisLibSensCor(105, 15, 55, 50);
@@ -210,7 +210,10 @@ public class AirElemental extends Monster
 			this.weaponVerb = "smash";
 			this.armorName = "air currents armor";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
-			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

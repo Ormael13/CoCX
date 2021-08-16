@@ -3388,7 +3388,7 @@
 		<!-- WING AREA -->
         <switch value="wings.type">
             <case values="Wings.NONE"></case>
-            <case values="Wings.BEE_LIKE_SMALL,Wings.BEE_LIKE_LARGE">
+            <case values="Wings.BEE_SMALL,Wings.BEE_LARGE">
                 <show part="wings/bee"/>
             </case>
             <case values="Wings.HARPY,Wings.FEATHERED,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE">
@@ -3423,11 +3423,11 @@
                 <show part="wings_bg/greatDragonLeft"/>
 				<show part="wings_bg/greatDragonRight"/>
             </case>
-            <case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_LIKE_SMALL,Wings.MANTIS_LIKE_LARGE,Wings.MANTIS_LIKE_LARGE2"><!--TODO -->
+            <case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_SMALL,Wings.MANTIS_LARGE,Wings.MANTIS_LARGE2"><!--TODO -->
                 <show part="wings/bee"/>
             </case>
             <!--TODO Wings.PLANT, Wings.BAT_ARM, -->
-            <case values="Wings.MANTICORE_LIKE_SMALL,Wings.MANTICORE_LIKE_LARGE">
+            <case values="Wings.MANTICORE_SMALL,Wings.MANTICORE_LARGE">
                 <show part="wings/mantibig"/>
                 <show part="wings_bg/mantibig"/>
 				<if test="playerHasLargeLowerBody">

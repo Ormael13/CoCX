@@ -475,16 +475,31 @@ public class Combat extends BaseContent {
     }
 
     public function endHpLoss():void {
-        monster.won_(true, false);
+		if (player.hasStatusEffect(StatusEffects.TearsOfDenial) && player.statusEffectv1(StatusEffects.TearsOfDenial) == 1) {
+			player.addStatusValue(StatusEffects.TearsOfDenial, 1, -1);
+			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To " + monster.a + monster.short + " dismay you get back up, still undefeated and ready to keep fighting.");
+			player.HP = player.maxOverHP();
+			player.lust = player.minLust();
+			doNext(curry(combatMenu, true));
+		}
+        else monster.won_(true, false);
     }
 
     public function endLustLoss():void {
-        if (player.hasStatusEffect(StatusEffects.Infested) && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-            flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-            SceneLib.mountain.wormsScene.infestOrgasm();
-            monster.won_(false, true);
-        } else {
-            monster.won_(false, false);
+		if (player.hasStatusEffect(StatusEffects.TearsOfDenial) && player.statusEffectv1(StatusEffects.TearsOfDenial) == 1) {
+			player.addStatusValue(StatusEffects.TearsOfDenial, 1, -1);
+			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To " + monster.a + monster.short + " dismay you get back up, still undefeated and ready to keep fighting.");
+			player.HP = player.maxOverHP();
+			player.lust = player.minLust();
+			doNext(curry(combatMenu, true));
+		}
+        else {
+			if (player.hasStatusEffect(StatusEffects.Infested) && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
+				SceneLib.mountain.wormsScene.infestOrgasm();
+				monster.won_(false, true);
+			}
+			else monster.won_(false, false);
         }
     }
 
@@ -779,12 +794,21 @@ public class Combat extends BaseContent {
             outputText("\n<b>You're too confused</b> about who you are to try to attack!");
             stunned = true;
         }
-        if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
-            outputText("\n<b>You fight against the spell to return to your true form!</b>");
-            stunned = true;
-        }
         return stunned;
     }
+	
+	public function isPlayerPowerStunned():Boolean {
+		var powerstunned:Boolean = false;
+        if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
+            outputText("\n<b>You fight against the spell to return to your true form!</b>");
+            powerstunned = true;
+        }
+        if (player.hasStatusEffect(StatusEffects.FrozenSolid)) {
+            outputText("\n<b>placeholder text</b>");
+            powerstunned = true;
+        }
+		return powerstunned;
+	}
 
     public function isPlayerFeared():Boolean {
         var feared:Boolean = false;
@@ -905,7 +929,7 @@ public class Combat extends BaseContent {
             buttons.add("Soul Drill", soul1Drill).hint("Menu to adjust your Soul Drill spinning speed.");
         }
 		if (player.weaponFlyingSwordsName != "nothing") {
-			buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined by your wisdom and weapon.\n\nSoulforce cost per attack: "+flyingSwordAttackCost()+"");
+			bd = buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined by your wisdom and weapon.\n\nSoulforce cost per attack: "+flyingSwordAttackCost()+"");
 			if (player.soulforce < flyingSwordAttackCost()) {
                 bd.disable("Your current soulforce is too low.");
             } else if (player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) {
@@ -914,14 +938,12 @@ public class Combat extends BaseContent {
 		}
         if (!player.isFlying()) {
             if (player.canFly()) buttons.add("Take Flight", takeFlightWings).hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-			if (player.canFlyNoWings()) {
-				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-				buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-			}
+			if (player.weaponFlyingSwordsName != "nothing") buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
         }
 		if (player.isFlying()) {
-			if (player.statusEffectv1(StatusEffects.Flying) == 1) buttons.add("Land", landAfterUsingFlyingSword);
-			if (player.statusEffectv1(StatusEffects.Flying) == 2) buttons.add("Land", landAfterUsingSoulforce);
+			if (player.statusEffectv2(StatusEffects.Flying) == 1) buttons.add("Land", landAfterUsingFlyingSword);
+			if (player.statusEffectv2(StatusEffects.Flying) == 2) buttons.add("Land", landAfterUsingSoulforce);
             buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
@@ -1036,13 +1058,13 @@ public class Combat extends BaseContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-
+					
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-
+					
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-
+					
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
@@ -4978,6 +5000,7 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+			if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) damage *= 3; 
 			damage *= meleeDualWieldDamagePenalty();
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
@@ -5086,7 +5109,8 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) damage *= 1.05;
-            if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
+            if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
+			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
@@ -6125,7 +6149,7 @@ public class Combat extends BaseContent {
                 else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
             }
         }
-        if (player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
+        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment)) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 			var restoreamount:Number = 0;
 			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
 			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) restoreamount += 1;
@@ -6134,7 +6158,7 @@ public class Combat extends BaseContent {
             else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * restoreamount * 0.04), false);
             else HPChange(Math.round(player.maxHP() * restoreamount * 0.01), false);
         }
-		if (player.weapon == weapons.VENCLAW) {
+		if (player.weapon == weapons.VENCLAW && monster.lustVuln > 0) {
             outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
             var Ldamage:Number = 8 + rand(3);
             monster.teased(monster.lustVuln * Ldamage);
@@ -6402,6 +6426,8 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance += (player.tou - 100) / 5;
             else blockChance += 10;
         }
+		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
 		var wrathShieldSize:int = 6;
@@ -6426,6 +6452,8 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
             else blockChance2 += 10;
         }
+		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance2 += 10;
+		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance2 += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance2 < 10) blockChance2 = 10;
         //if (player.weaponRange == weaponsrange.M1CERBE) blockChance2 = 0;
         return blockChance2;
@@ -8114,6 +8142,13 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 2, -1);
         }
         monster.combatRoundUpdate();
+		//Thunderstorm
+		if (player.hasStatusEffect(StatusEffects.Thunderstorm) && player.statusEffectv2(StatusEffects.Thunderstorm) > 0) {
+			player.addStatusValue(StatusEffects.Thunderstorm, 2, -1);
+            outputText("<b>A bolt of divine lightning falls from the sky and strikes "+monster.a+monster.short+". ");
+            monster.takeLightningDamage(player.statusEffectv1(StatusEffects.Thunderstorm), true);
+            outputText("\n\n");
+		}
         //[Silence warning]
         if (player.hasStatusEffect(StatusEffects.ThroatPunch)) {
             player.addStatusValue(StatusEffects.ThroatPunch, 1, -1);
@@ -8161,8 +8196,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             outputText("<b>You're tangled up in Holli's verdant limbs!  All you can do is try to struggle free...</b>\n\n");
         }
-        if (player.hasStatusEffect(StatusEffects.UBERWEB))
-            outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n");
+        if (player.hasStatusEffect(StatusEffects.UBERWEB)) outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n");
         if (player.playerIsBlinded() && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
             if (player.hasStatusEffect(StatusEffects.SheilaOil)) {
                 if (player.statusEffectv1(StatusEffects.Blind) <= 0) {
@@ -8341,7 +8375,6 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2+power + rand(4));
             else monster.lust += monster.lustVuln * (2+power+ rand(4));
         }
-
         //Unicorn and Bicorn aura
         //Unicorn
         if (player.hasPerk(PerkLib.AuraOfPurity)) {
@@ -8388,7 +8421,6 @@ public class Combat extends BaseContent {
                 outputText("Your opponent seems not to be affected by the cleansing flames of your aura of purity. Probably because [monster he] has no corruption within [monster his] body.");
             }
         }
-
         //Bicorn
         if (player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
@@ -8470,7 +8502,6 @@ public class Combat extends BaseContent {
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
-
         //Lust storm
         if (player.hasStatusEffect(StatusEffects.lustStorm)) {
             var damage0:Number = scalingBonusIntelligence() * spellModWhite();
@@ -8576,7 +8607,6 @@ public class Combat extends BaseContent {
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
         }
-
         //Black Frost Aura
         if (player.hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore()>=14) {
             if (!monster.hasPerk(PerkLib.IceNature)) {
@@ -8612,7 +8642,6 @@ public class Combat extends BaseContent {
                 outputText("Your opponent seems not to be affected by the cold of your aura of black frost. Probably because [monster he] is immune to cold temperature effects.");
             }
         }
-
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
             dynStats("lus", 3);
@@ -8935,13 +8964,17 @@ public class Combat extends BaseContent {
             if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
                 player.removeStatusEffect(StatusEffects.ChargeWeapon);
                 outputText("<b>Charged Weapon effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
+            } else {
+				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
+			}
         }
         if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
             if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
                 player.removeStatusEffect(StatusEffects.ChargeArmor);
                 outputText("<b>Charged Armor effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
+            } else {
+				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
+			}
         }
         //Blizzard
         if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -9085,15 +9118,15 @@ public class Combat extends BaseContent {
             } else player.addStatusValue(StatusEffects.EverywhereAndNowhere, 1, -1);
         }
         //Ezekiel Curse
-        if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
+        if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {/*
             if (EvangelineFollower.EvangelineAffectionMeter >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {
                 outputText("<b>You feel familiar feeling of your own lifeforce been slowly extinquished.  Maybe you should finish this fight as soon as possible to start healing this aligment?</b>\n\n");
                 player.takePhysDamage(500);
-            } else if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
-                outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation as otherwise...</b>\n\n");
+            } else */if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
+                outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation OR...</b>\n\n");
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
                 else player.takePhysDamage(100);
-            }
+			}
         }
 		//Lifesteal Enchantment
         if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
@@ -9655,6 +9688,27 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellChainLightingEx, 1, -1);
             }
         }
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellHeal)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellHeal) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellHeal);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellHeal, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellMentalShield)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellMentalShield) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellMentalShield);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellMentalShield, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellCure)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellCure) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellCure);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellCure, 1, -1);
+            }
+		}
         if (player.hasStatusEffect(StatusEffects.CooldownSpellRegenerate)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellRegenerate) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellRegenerate);
@@ -9683,6 +9737,41 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellMeteorShower, 1, -1);
             }
         }
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellNosferatu)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellNosferatu) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellNosferatu);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellNosferatu, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellClearMind)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellClearMind) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellClearMind);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellClearMind, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellBalanceOfLife)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellBalanceOfLife) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBalanceOfLife);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBalanceOfLife, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellEnergyDrain)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellEnergyDrain) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellEnergyDrain);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellEnergyDrain, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellRestore)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellRestore) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellRestore);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellRestore, 1, -1);
+            }
+		}
         if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodMissiles)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellBloodMissiles) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodMissiles);
@@ -9739,6 +9828,48 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellConsumingDarkness)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellConsumingDarkness) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellConsumingDarkness);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellConsumingDarkness, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfDesire)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellCurseOfDesire) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellCurseOfDesire);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellCurseOfDesire, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellCurseOfWeeping) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellCurseOfWeeping, 1, -1);
+            }
+		}
+		if (player.hasStatusEffect(StatusEffects.CooldownSpellExorcise)) {
+			if (player.statusEffectv1(StatusEffects.CooldownSpellExorcise) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellExorcise);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellExorcise, 1, -1);
+            }
+		}
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneshatter)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBoneshatter) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBoneshatter);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBoneshatter, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneArmor)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBoneArmor) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBoneArmor);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBoneArmor, 1, -1);
+            }
+        }
         //Companion Boosting PC Armor Value
         if (player.hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) player.removeStatusEffect(StatusEffects.CompBoostingPCArmorValue);
         //Elemental Aspect status effects
@@ -9766,6 +9897,38 @@ public class Combat extends BaseContent {
                 outputText("<b>Metal Skin effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.MetalSkin, 2, -1);
         }
+		//Aegis
+		if (player.hasStatusEffect(StatusEffects.Aegis)) {
+			if (player.statusEffectv2(StatusEffects.Aegis) <= 0) {
+                player.removeStatusEffect(StatusEffects.Aegis);
+            } else {
+                player.addStatusValue(StatusEffects.Aegis, 2, -1);
+            }
+		}
+		//Divine Shield
+		if (player.hasStatusEffect(StatusEffects.DivineShield)) {
+			if (player.statusEffectv2(StatusEffects.DivineShield) <= 0) {
+                player.removeStatusEffect(StatusEffects.DivineShield);
+            } else {
+                player.addStatusValue(StatusEffects.DivineShield, 2, -1);
+            }
+		}
+		//Mental Shield
+		if (player.hasStatusEffect(StatusEffects.MentalShield)) {
+			if (player.statusEffectv1(StatusEffects.MentalShield) <= 0) {
+                player.removeStatusEffect(StatusEffects.MentalShield);
+            } else {
+                player.addStatusValue(StatusEffects.MentalShield, 1, -1);
+            }
+		}
+		//Balance of Life
+		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) {
+			if (player.statusEffectv2(StatusEffects.BalanceOfLife) <= 0) {
+                player.removeStatusEffect(StatusEffects.BalanceOfLife);
+            } else {
+                player.addStatusValue(StatusEffects.BalanceOfLife, 1, -1);
+            }
+		}
         //Possess
         if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
             if (player.statusEffectv1(StatusEffects.CooldownPossess) <= 0) {
@@ -9874,22 +10037,6 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownBalefulPolymorph, 1, -1);
             }
         }
-        //Boneshatter
-        if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
-            if (player.statusEffectv1(StatusEffects.CooldownBoneshatter) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownBoneshatter);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownBoneshatter, 1, -1);
-            }
-        }
-        //Bone armor
-        if (player.hasStatusEffect(StatusEffects.CooldownBoneArmor)) {
-            if (player.statusEffectv1(StatusEffects.CooldownBoneArmor) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownBoneArmor);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownBoneArmor, 1, -1);
-            }
-        }
         //Nonuple Thrust
         if (player.hasStatusEffect(StatusEffects.CooldownNonupleThrust)) {
             if (player.statusEffectv1(StatusEffects.CooldownNonupleThrust) <= 0) {
@@ -9969,6 +10116,8 @@ public class Combat extends BaseContent {
         regeneration(true);
         if (player.lust >= player.maxLust()) doNext(endLustLoss);
         if (player.HP <= player.minHP()) doNext(endHpLoss);
+		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
 
     public function regeneration(combat:Boolean = true):void {
@@ -14655,4 +14804,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

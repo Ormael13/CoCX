@@ -12,8 +12,7 @@ public class Appearance extends Utils
 	{
 		// Eventually, this should contain the entire char appearance.
 		// At the moment, it's pretty piecemeal.
-		public static function inverseMap(x:Object):Object
-		{
+		public static function inverseMap(x:Object):Object {
 			var result:Object = {};
 			for (var i:String in x) {
 				result[String(x[i])] = i;
@@ -21,8 +20,7 @@ public class Appearance extends Utils
 			return result;
 		}
 
-		public static function hairOrFur(i_creature:Creature):String
-		{
+		public static function hairOrFur(i_creature:Creature):String {
 			if (i_creature.hasCoatOfType(Skin.FUR))
 				return "fur";
 			else
@@ -41,8 +39,7 @@ public class Appearance extends Utils
 			return Hair.getStyleDescription(i_creature);
 		}
 
-		public static function beardDescription(i_creature:Creature):String
-		{
+		public static function beardDescription(i_creature:Creature):String {
 			var description:String = "";
 			var options:Array;
 			//
@@ -97,8 +94,7 @@ public class Appearance extends Utils
 		 * @param    i_character Either Player or NonPlayer
 		 * @return    A beautiful description of a tongue.
 		 */
-		public static function tongueDescription(i_character:Creature):String
-		{
+		public static function tongueDescription(i_character:Creature):String {
 			if (i_character.tongue.type == 1) return "serpentine tongue";
 			else if (i_character.tongue.type == 2) return "demonic tongue";
 			else if (i_character.tongue.type == 3) return "draconic tongue";
@@ -110,8 +106,7 @@ public class Appearance extends Utils
 			else return "tongue";
 		}
 
-		public static function nippleDescription(i_creature:Creature, i_rowNum:Number):String
-		{
+		public static function nippleDescription(i_creature:Creature, i_rowNum:Number):String {
 			//DEBUG SHIT!
 			if (i_rowNum > (i_creature.breastRows.length - 1)) {
 				CoC_Settings.error("<B>Error: Invalid breastRows (" + i_rowNum + ") passed to nippleDescription()</b>");
@@ -304,8 +299,7 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		public static function hipDescription(i_creature:Creature):String
-		{
+		public static function hipDescription(i_creature:Creature):String {
 			var description:String    = "";
 			var options:Array;
 			var i_character:Character = i_creature as Character;
@@ -390,8 +384,7 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		public static function cockDescript(creature:Creature, cockIndex:Number = 0):String
-		{
+		public static function cockDescript(creature:Creature, cockIndex:Number = 0):String {
 			if (creature.cocks.length == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 			var cockType:CockTypesEnum = CockTypesEnum.HUMAN;
 			if (cockIndex != 99) { //CockIndex 99 forces a human cock description
@@ -415,8 +408,7 @@ public class Appearance extends Utils
 			return cockNoun(cockType);
 		}
 
-		public static function cockNoun(cockType:CockTypesEnum):String
-		{
+		public static function cockNoun(cockType:CockTypesEnum):String {
 			/*
 			if (cockType is int) {
 				trace("Someone is still calling cockNoun with an integer cock type");
@@ -743,8 +735,7 @@ public class Appearance extends Utils
 		}
 
 		//Cock adjectives for single cock
-		private static function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_cockType:CockTypesEnum, i_creature:Creature):String
-		{
+		private static function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_cockType:CockTypesEnum, i_creature:Creature):String {
 			var description:String = "";
 			var rando:Number = 0;
 			var descripts:Number = 0;
@@ -867,8 +858,7 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		public static function cockMultiNoun(cockType:CockTypesEnum):String
-		{
+		public static function cockMultiNoun(cockType:CockTypesEnum):String {
 			/*
 			if (cockType is int) {
 				trace("Someone is still calling cockNoun with an integer cock type");
@@ -1057,8 +1047,7 @@ public class Appearance extends Utils
 		 * @param    i_withArticle    Show description with article in front
 		 * @return    Full description of balls
 		 */
-		public static function ballsDescription(i_forcedSize:Boolean, i_plural:Boolean, i_creature:Creature, i_withArticle:Boolean = false):String
-		{
+		public static function ballsDescription(i_forcedSize:Boolean, i_plural:Boolean, i_creature:Creature, i_withArticle:Boolean = false):String {
 			if (i_creature.balls == 0) return "prostate";
 
 			var haveDescription:Boolean = false;
@@ -1224,8 +1213,7 @@ public class Appearance extends Utils
 		}
 
 		//Returns random description of scrotum
-		public static function sackDescript(i_creature:Creature):String
-		{
+		public static function sackDescript(i_creature:Creature):String {
 			if (i_creature.balls == 0) return "prostate";
 
 			var options:Array;
@@ -1243,8 +1231,7 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		public static function vaginaDescript(i_creature:Creature, i_vaginaIndex:Number = 0, forceDesc:Boolean=false):String
-		{
+		public static function vaginaDescript(i_creature:Creature, i_vaginaIndex:Number = 0, forceDesc:Boolean=false):String {
 			if (i_vaginaIndex > (i_creature.vaginas.length - 1)) {
 				CoC_Settings.error("<B>Error: Invalid vagina number (" + i_vaginaIndex + ") passed to vaginaDescript()</b>");
 				return "<B>Error: Invalid vagina number (" + i_vaginaIndex + ") passed to vaginaDescript()</b>";
@@ -1362,8 +1349,7 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		public static function clitDescription(i_creature:Creature):String
-		{
+		public static function clitDescription(i_creature:Creature):String {
 			var description:String = "";
 			var options:Array;
 			var haveDescription:Boolean = false;
@@ -1468,8 +1454,7 @@ public class Appearance extends Utils
 		 * @param    i_creature
 		 * @return    A full description of a Character's butt.
 		 */
-		public static function buttDescription(i_creature:Creature):String
-		{
+		public static function buttDescription(i_creature:Creature):String {
 			var description:String    = "";
 			var options:Array;
 			var i_character:Character = i_creature as Character;
@@ -1781,8 +1766,7 @@ public class Appearance extends Utils
 		 * @param    creature
 		 * @return Short description of a butt.
 		 */
-		public static function buttDescriptionShort(i_creature:Creature):String
-		{
+		public static function buttDescriptionShort(i_creature:Creature):String {
 			var description:String = "";
 			var options:Array;
 			if (i_creature.butt.type <= 1) {
@@ -1844,8 +1828,7 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		public static function assholeDescript(i_creature:Creature, forceDesc:Boolean=false):String
-		{
+		public static function assholeDescript(i_creature:Creature, forceDesc:Boolean=false):String {
 			var description:String = "";
 
 			// The way this was setup didn't work. Trying to inline-define object key-values wasn't looking up the variable *VALUES* it was using the string representation
@@ -1897,12 +1880,10 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		public static function wingsDescript(i_creature:Creature):String
-		{
+		public static function wingsDescript(i_creature:Creature):String {
 			return Wings.Types[i_creature.wings.type].name + " wings";
 		}
-		public static function eyesDescript(i_creature:Creature):String
-		{
+		public static function eyesDescript(i_creature:Creature):String {
 			var description:String = "";
 			description += i_creature.eyes.colour;
 			description += " " + Eyes.Types[i_creature.eyes.type].name;
@@ -1910,12 +1891,10 @@ public class Appearance extends Utils
 			description += " eyes"
 			return description;
 		}
-		public static function earsDescript(i_creature:Creature):String
-		{
+		public static function earsDescript(i_creature:Creature):String {
 			return Ears.Types[i_creature.ears.type].name + " ears";
 		}
-		public static function antennaeDescript(i_creature:Creature):String
-		{
+		public static function antennaeDescript(i_creature:Creature):String {
 			return Antennae.Types[i_creature.antennae.type].name + " antennae";
 		}
 
@@ -1946,8 +1925,7 @@ public class Appearance extends Utils
 			"jacques00-cup", "lia-cup"
 		];
 
-		public static function breastCup(size:Number):String
-		{
+		public static function breastCup(size:Number):String {
 			return BREAST_CUP_NAMES[Math.min(Math.floor(size), BREAST_CUP_NAMES.length - 1)];
 		}
 
@@ -1955,8 +1933,7 @@ public class Appearance extends Utils
 		 * Returns breast size from cup name.
 		 * Acceptable input: "flat","A","B","C","D","DD","DD+",... "ZZZ","ZZZ+" or exact match from BREAST_CUP_NAMES array
 		 */
-		public static function breastCupInverse(name:String, defaultValue:Number = 0):Number
-		{
+		public static function breastCupInverse(name:String, defaultValue:Number = 0):Number {
 			if (name.length == 0) return defaultValue;
 			if (name == "flat") return 0;
 			var big:Boolean = name.charAt(name.length - 1) == "+";
@@ -1981,8 +1958,8 @@ public class Appearance extends Utils
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
 				[
 					[Wings.NONE, "non-existant"],
-					[Wings.BEE_LIKE_SMALL, "small bee-like"],
-					[Wings.BEE_LIKE_LARGE, "large bee-like"],
+					[Wings.BEE_SMALL, "small bee-like"],
+					[Wings.BEE_LARGE, "large bee-like"],
 					[Wings.HARPY, "large feathery"],
 					[Wings.IMP, "small"],
 					[Wings.BAT_LIKE_TINY, "tiny, bat-like"],
@@ -1998,13 +1975,13 @@ public class Appearance extends Utils
 					[Wings.FEATHERED_PHOENIX, "large crimson feathered"],
 					[Wings.FEATHERED_ALICORN, "large white feathered"],
 					[Wings.FEATHERED_SPHINX, "large feathered"],
-					[Wings.MANTIS_LIKE_SMALL, "small mantis-like"],
-					[Wings.MANTIS_LIKE_LARGE, "large mantis-like"],
-					[Wings.MANTIS_LIKE_LARGE_2, "two large pairs of mantis-like"],
+					[Wings.MANTIS_SMALL, "small mantis-like"],
+					[Wings.MANTIS_LARGE, "large mantis-like"],
+					[Wings.MANTIS_LARGE_2, "two large pairs of mantis-like"],
 					[Wings.GARGOYLE_LIKE_LARGE, "large stony"],
 					[Wings.PLANT, "three pairs of cockvines"],
-					[Wings.MANTICORE_LIKE_SMALL, "small manticore-like"],
-					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
+					[Wings.MANTICORE_SMALL, "small manticore-like"],
+					[Wings.MANTICORE_LARGE, "large manticore-like"],
 					[Wings.FEY_DRAGON, "large majestic fey draconic"],
 					[Wings.FEATHERED_AVIAN, "large feathery"],
 					[Wings.NIGHTMARE, "large leathery"],
@@ -2104,8 +2081,7 @@ public class Appearance extends Utils
 		 *      value = 10  ->   "big"
 		 *      value > 10  ->   "more than big"
 		 */
-		public static function describeByScale(value:Number, scale:Array, lessThan:String = "less than", moreThan:String = "more than"):String
-		{
+		public static function describeByScale(value:Number, scale:Array, lessThan:String = "less than", moreThan:String = "more than"):String {
 			if (scale.length == 0) return "undescribeale";
 			if (scale.length == 1) return "about " + scale[0][1];
 			if (value < scale[0][0]) return lessThan + " " + scale[0][1];
@@ -2123,8 +2099,7 @@ public class Appearance extends Utils
 		 * numberOfThings(2,"tail") = "2 tails"
 		 * numberOfThings(3,"hoof","hooves") = "3 hooves"
 		 */
-		public static function numberOfThings(n:int, name:String, pluralForm:String = null):String
-		{
+		public static function numberOfThings(n:int, name:String, pluralForm:String = null):String {
 			pluralForm = pluralForm || (name + "s");
 			if (n == 0) return "no " + pluralForm;
 			if (n == 1) return "one " + name;
@@ -2136,8 +2111,7 @@ public class Appearance extends Utils
 		 * 5.5 -> 5.5"
 		 * Positive only!
 		 */
-		public static function feetsAndInches(n:Number):String
-		{
+		public static function feetsAndInches(n:Number):String {
 			var feet:int = Math.floor(n / 12);
 			var inches:Number = n - feet * 12;
 			if (feet > 0) return feet + "'" + inches + "\"";
@@ -2147,14 +2121,12 @@ public class Appearance extends Utils
 		/**
 		 * 13 -> 13" (2'1")
 		 */
-		public static function inchesAndFeetsAndInches(n:Number):String
-		{
+		public static function inchesAndFeetsAndInches(n:Number):String {
 			if (n < 12) return n + "\"";
 			return n + "\" (" + feetsAndInches(n) + ")";
 		}
 
-		public static function allBreastsDescript(creature:Creature):String
-		{
+		public static function allBreastsDescript(creature:Creature):String {
 			var storage:String = "";
 			if (creature.breastRows.length == 0) return "unremarkable chest muscles ";
 			if (creature.breastRows.length == 2) {
@@ -2178,8 +2150,7 @@ public class Appearance extends Utils
 
 		}
 
-		public static function tailDescript(i_creature:Creature):String
-		{
+		public static function tailDescript(i_creature:Creature):String {
 			if (i_creature.tailType == Tail.NONE)
 			{
 				trace("WARNING: Creature has no tails to describe.");
@@ -2218,8 +2189,7 @@ public class Appearance extends Utils
 			return descript;
 		}
 
-		public static function oneTailDescript(i_creature:Creature):String
-		{
+		public static function oneTailDescript(i_creature:Creature):String {
 			if (i_creature.tailType == Tail.NONE)
 			{
 				trace("WARNING: Creature has no tails to describe.");
@@ -2258,8 +2228,7 @@ public class Appearance extends Utils
 			return descript;
 		}
 
-		public static function biggestBreastSizeDescript(creature:Creature):String
-		{
+		public static function biggestBreastSizeDescript(creature:Creature):String {
 			var temp14:int = Math.random() * 3;
 			var descript:String = "";
 			var temp142:int = creature.biggestTitRow();
@@ -2310,8 +2279,7 @@ public class Appearance extends Utils
 			return descript;
 		}
 
-		public static function breastSize(val:Number):String
-		{
+		public static function breastSize(val:Number):String {
 			var descript:String = "";
 			//Catch all for dudes.
 			if (val < 1) return "manly ";
@@ -2351,22 +2319,19 @@ public class Appearance extends Utils
 		}
 
 /* Moved to Creature.as
-		public static function chestDesc(creature:Creature):String
-		{
+		public static function chestDesc(creature:Creature):String {
 			if (creature.biggestTitSize() < 1) return "chest";
 			else return biggestBreastSizeDescript(creature);
 		}
 */
 
-		public static function assholeOrPussy(creature:Creature):String
-		{
+		public static function assholeOrPussy(creature:Creature):String {
 			if (creature.hasVagina()) return vaginaDescript(creature, 0);
 			return assholeDescript(creature);
 		}
 
 
-		public static function multiCockDescriptLight(creature:Creature):String
-		{
+		public static function multiCockDescriptLight(creature:Creature):String {
 			if (creature.cocks.length < 1) {
 
 				CoC_Settings.error("");
@@ -2494,8 +2459,7 @@ public class Appearance extends Utils
 			return descript;
 		}
 
-		public static function multiCockDescript(creature:Creature):String
-		{
+		public static function multiCockDescript(creature:Creature):String {
 			if (creature.cocks.length < 1) {
 				CoC_Settings.error("");
 				return "<B>Error: multiCockDescript() called with no penises present.</B>";

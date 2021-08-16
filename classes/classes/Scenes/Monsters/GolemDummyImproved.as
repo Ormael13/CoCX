@@ -79,9 +79,6 @@ package classes.Scenes.Monsters
 				initStrTouSpeInte(50, 50, 50, 20);
 				initWisLibSensCor(20, 10, 10, 50);
 				this.level = 11;
-				this.bonusHP = 300;
-				this.additionalXP = 300;
-				this.weaponName = "stone fists";
 				this.weaponAttack = 20;
 				this.armorDef = 30;
 				this.armorMDef = 9;
@@ -94,17 +91,17 @@ package classes.Scenes.Monsters
 				initStrTouSpeInte(40, 40, 20, 10);
 				initWisLibSensCor(10, 10, 10, 50);
 				this.level = 12;
-				this.bonusHP = 100;
-				this.additionalXP = 100;
-				this.weaponName = "stone fists";
 				this.weaponAttack = 15;
 				this.armorDef = 15;
 				this.armorMDef = 3;
 			}
 			this.imageName = "dummy golem";
 			this.tallness = 78;
+			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
 			this.armorName = "cracked stone";
+			this.bonusHP = 100;
+			this.additionalXP = 100;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

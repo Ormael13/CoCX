@@ -557,49 +557,38 @@ private function owcaMainScreenOn():void {
 	}
 	outputText(images.showImage("location-owca"));
 	//[if attitude > 80]
-	if(flags[kFLAGS.OWCAS_ATTITUDE] > 80) outputText("Villagers greet you as you arrive, praising your courage and your heroism.  People shake your hands or ask you to kiss them, as if they hoped your nobility were somehow contagious.  Once they're done complimenting and flattering you in every way possible, they leave you to your business.");
+	if (flags[kFLAGS.OWCAS_ATTITUDE] > 80) outputText("Villagers greet you as you arrive, praising your courage and your heroism.  People shake your hands or ask you to kiss them, as if they hoped your nobility were somehow contagious.  Once they're done complimenting and flattering you in every way possible, they leave you to your business.");
 	//[if 60<=attitude<80]
-	else if(flags[kFLAGS.OWCAS_ATTITUDE] > 60) outputText("Villagers greet you with a friendly smile as you arrive.  Some approach you and thank you for what you've done, before leaving awkwardly.  They're obviously not used to strangers.");
+	else if (flags[kFLAGS.OWCAS_ATTITUDE] > 60) outputText("Villagers greet you with a friendly smile as you arrive.  Some approach you and thank you for what you've done, before leaving awkwardly.  They're obviously not used to strangers.");
 	//[if 40<=attitude<60]
-	else if(flags[kFLAGS.OWCAS_ATTITUDE] > 40) outputText("Villagers seem to accept your presence without comment now; though none go out of their way to greet you, neither do they avoid doing so when you pass by.");
+	else if (flags[kFLAGS.OWCAS_ATTITUDE] > 40) outputText("Villagers seem to accept your presence without comment now; though none go out of their way to greet you, neither do they avoid doing so when you pass by.");
 	//[if 20<attitude <= 40]
-	else if(flags[kFLAGS.OWCAS_ATTITUDE] > 20) outputText("Villagers keep looking at you uncomfortably; no one seems to be willing to talk to you apart from Rebecc, your friend.");
+	else if (flags[kFLAGS.OWCAS_ATTITUDE] > 20) outputText("Villagers keep looking at you uncomfortably; no one seems to be willing to talk to you apart from Rebecc, your friend.");
 	//[if attitude <= 20]
 	else outputText("Villagers here appear to be openly hostile.  You keep hearing muffled whispers as you pass by, and people look at you rancorously.  They don't bother you, though.");
 	//end variable display
 	outputText("  The village is rather small.  A dozen humble thatched cottages are standing here and there, linked by dirt tracks and enclosed with small palisades.  There seems to be very little activity.");
 	outputText("\n\nAt the end of the main road you notice the pit and the pole standing at the middle of it.  It looks rather sinister, reminding you of the permanent curse that lies on the villagers.  It is still unguarded.");
 	//[if a week has passed since last sacrifice]
-	if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] == 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  A week");
-	else if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] > 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  More than a week");
-	if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText(" has passed since the last offering to the demons; guarding the pit would certainly help improve your relations with the little town's denizens.");
-	//Option: 
-	var pit:Function = null;
-	var herd:Function = null;
-	var tavern:Function = null;
-	if(model.time.hours >= 16 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
-		//Pit. Requires 16:00 or later. Leads to the night gangbang (with possible fight) scene, this time fully equipped and clothed. Attitude is raised by 3.
-		pit = zePit;
-	}
-	if(flags[kFLAGS.OWCAS_ATTITUDE] >= 50) {
-		outputText("\n\nBeyond the tiny hamlet you see herders guarding a considerable amount of sheep.  You could probably join them and ask them for work.");
-		herd = herds;
-		//Option: Herds, needs 50 attitude.
-	}
+	if (flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] == 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  A week");
+	else if (flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] > 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  More than a week");
+	if (flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText(" has passed since the last offering to the demons; guarding the pit would certainly help improve your relations with the little town's denizens.");
+	if (flags[kFLAGS.OWCAS_ATTITUDE] >= 50) outputText("\n\nBeyond the tiny hamlet you see herders guarding a considerable amount of sheep.  You could probably join them and ask them for work.");
 	outputText("\n\nRebecc's house is nearby, and her door is open. She would probably welcome the chance to wash away any taint you've received from your time in the pit.");
 	//Option: Rebecc. Leads to Rebecc Menu
-	if(flags[kFLAGS.OWCAS_ATTITUDE] >= 10) {
-		outputText("\n\nA tavern appears to be open; various Owca folk are drinking and chatting in it.  They give you friendly waves when you make eye contact.");
-		//Option: Tavern. Leads to the Tavern, needs 10 attitude
-		tavern = owcaTavern;
-	}
+	if (flags[kFLAGS.OWCAS_ATTITUDE] >= 10) outputText("\n\nA tavern appears to be open; various Owca folk are drinking and chatting in it.  They give you friendly waves when you make eye contact.");
 	//[Pit][Herds][Rebecc][Tavern][Kindra][Leave]
 	menu();
-	if(model.time.hours >= 16) addButton(0, "Pit", zePit).hint("Guard the Pit tonight.");
-	addButton(1, "Herds", herds).hint("Help herders with a sheeps.");
+	if (model.time.hours >= 16) {
+		if (flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) addButton(0, "Pit", zePit).hint("Guard the Pit tonight.");
+		else addButtonDisabled(0, "Pit", "Horde disbanded.");
+	}
+	if (flags[kFLAGS.OWCAS_ATTITUDE] >= 50) addButton(1, "Herds", herds).hint("Help herders with a sheeps.");
+	else addButtonDisabled(1, "Herds", "Req. 50%+ attitude.");
 	addButton(2, "Rebecc", rebeccMenu).hint("Visit Rebecc.");
-	addButton(3, "Tavern", owcaTavern).hint("Visit local tavern.");
-	if(flags[kFLAGS.KINDRA_FOLLOWER] < 1) addButton(10, "LookAround", meetKindra).hint("Wander around the village.");
+	if (flags[kFLAGS.OWCAS_ATTITUDE] >= 10) addButton(3, "Tavern", owcaTavern).hint("Visit local tavern.");
+	else addButtonDisabled(3, "Tavern", "Req. 10%+ attitude.");
+	if (flags[kFLAGS.KINDRA_FOLLOWER] < 1) addButton(10, "LookAround", meetKindra).hint("Wander around the village.");
 	addButton(14, "Leave", leaveOwca).hint("Leave Owca.");
 }
 public function leaveOwca():void {

@@ -100,9 +100,9 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		//Wings
-		if ((player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL) && player.wings.type != Wings.MANTICORE_LIKE_LARGE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+		if ((player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL) && player.wings.type != Wings.MANTICORE_LARGE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
 			//Grow bigger manticore wings!
-			if (player.wings.type == Wings.MANTICORE_LIKE_SMALL) {
+			if (player.wings.type == Wings.MANTICORE_SMALL) {
 				outputText("\n\n");
         CoC.instance.transformations.WingsManticoreLarge.applyEffect();
 			}
@@ -119,7 +119,7 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		//Back(Rear) body
-		if ((player.wings.type == Wings.MANTICORE_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_LARGE) && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
+		if ((player.wings.type == Wings.MANTICORE_SMALL || player.wings.type == Wings.MANTICORE_LARGE) && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
       CoC.instance.transformations.RearBodyLionMane.applyEffect();
       changes++;

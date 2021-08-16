@@ -167,6 +167,10 @@ public class Camp extends NPCAwareContent{
 
 			CoC.instance.saves.saveGame(player.slotName);
 		}
+		if (Metamorph.TriggerUpdate) {
+			Metamorph.update();
+			return;
+		}
 		CoC.instance.inCombat = false;
 		if (ingnam.inIngnam) { //Ingnam
 			SceneLib.ingnam.menuIngnam();
@@ -747,7 +751,7 @@ public class Camp extends NPCAwareContent{
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("Three large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("Two large arcane circles are");
 			else outputText("A large arcane circle is");
-			outputText(" written at the edge of your [camp]. Its runes regularly glow with impulse of power.\n\n");
+			outputText(" written at the edge of your [camp]. Their runes regularly glow with impulse of power.\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
 			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big wooden dam increase the width of the nearby stream up to the point of creating very narrow miniature lake");
@@ -2008,9 +2012,17 @@ public class Camp extends NPCAwareContent{
 	private function campBuildingSim():void {
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
-			if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your [camp] to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10 complete" : "") + "");
-			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(0, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your [camp] defense.");
-			//addButton(2, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
+			if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
+				if (getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your [camp] to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10 complete" : "") + "");
+				else addButtonDisabled(0, "Build Wall", "Req. 4+ camp population.");
+				addButtonDisabled(1, "Build Gate", "Req. to build wall fully first.");
+			}
+			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
+				addButtonDisabled(0, "Build Wall", "Already built.");
+				if (flags[kFLAGS.CAMP_WALL_GATE] > 0) addButtonDisabled(1, "Build Gate", "Already built.");
+				else addButton(1, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your [camp] defense.");
+			}
+			//addButton(3, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
 			addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your [camp].");
 			//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
 		}
@@ -2020,8 +2032,9 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(5, "Build Misc", "Req. Carpenter's Toolbox.");
 			//addButtonDisabled(6, "Build Misc(O)", "Req. Carpenter's Toolbox.");
 		}
-		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(1, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
-		else addButtonDisabled(1, "Build Cabin", "You need to wait until 7th day.");
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
+		else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 0) addButtonDisabled(2, "Build Cabin", "You need to wait until 7th day.");
+		else addButtonDisabled(2, "Build Cabin", "Cabin is alreadfy built.");
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10) {
 			if (player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
 			addButtonDisabled(10, "AddImpSkull", "Req. at least one imp skull.");
@@ -2317,27 +2330,46 @@ public class Camp extends NPCAwareContent{
 
 	private function VisitClone():void {
 		clearOutput();
-		if (player.hasStatusEffect(StatusEffects.PCClone)) {
+		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) > 0) {
 			if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
 				outputText("Your clone is ");
-				if (player.statusEffectv4(StatusEffects.PCClone) == 1) outputText("slowly rotating volleyball sized sphere of soul and life essences");
-				else if (player.statusEffectv4(StatusEffects.PCClone) == 2) outputText("still incomplete");
-				else if (player.statusEffectv4(StatusEffects.PCClone) == 3) outputText("still incomplete");
-				else outputText("still incomplete");
+				if (player.statusEffectv4(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
+				else if (player.statusEffectv4(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
+				else outputText("looking like you covered with black chitin-like carapace");
 				outputText(". Would you work on completing it?");
 			}
 			else {
-				outputText("Your clone is wandering around camp. What would you ask " + player.mf + " to do?\n\n");
+				outputText("Your clone is wandering around [camp]. What would you ask " + player.mf("him","her") + " to do?\n\n");
 				outputText("Current clone task: ");
-				outputText("Nothing");
+				if (player.statusEffectv1(StatusEffects.PCClone) > 10 && player.statusEffectv1(StatusEffects.PCClone) < 21) outputText("Contemplating Dao of ");
+				if (player.statusEffectv1(StatusEffects.PCClone) == 20) outputText("Acid");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 19) outputText("Earth");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 18) outputText("Water");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 17) outputText("Blood");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 16) outputText("Wind");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 15) outputText("Poison");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 14) outputText("Darkness");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 13) outputText("Lightning");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 12) outputText("Ice");
+				else if (player.statusEffectv1(StatusEffects.PCClone) == 11) outputText("Fire");
+				else outputText("Nothing");
 			}
 		}
-		else outputText("You not have clone created.");
+		else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
 		outputText("\n\n");
 		menu();
-		if (player.isGargoyle()) addButtonDisabled(0, "Create", "Your current form/race not allow to create clone.");
-		else if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(0, "Create", "You already created your clone.");
+		if (player.isGargoyle()) addButtonDisabled(0, "Create", "Your current body cannot handle a clone.");
+		else if (player.hasStatusEffect(StatusEffects.PCClone)) {
+			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(0, "Create", "You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
+			else {
+				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(0, "Create", "You cannot have more than one clone.");
+				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(0, "Create", CreateClone);
+				else addButtonDisabled(0, "Create", "You must wait before creating a new clone.");
+			}
+		}
 		else addButton(0, "Create", CreateClone);
+		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
+		else addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
 		addButton(14, "Back", campMiscActions);
 	}
 	private function CreateClone():void {
@@ -2353,37 +2385,84 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv4(StatusEffects.PCClone) == 3) {
-				outputText("Part 4 forming placeholder.\n\n");
+				outputText("It's time to finish what you started. Your clone won't simply create itself. With the black carapace-like layer in front of you, you resume focusing on transferring your life essence and soulforce to the clone.\n\n");
+				outputText("Minutes draw by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
+				outputText("Soon after the heartbeat, other rapid changes begin inside the clone. The body itself begins to animate as the clone takes its first breaths. With the transfer nearly completely, the new life is on the verge of its complete vitality.\n\n");
+				outputText("Now that the body is full of life, you need to link it to your soul. The process is foreign, almost invasive as you link your essence to something alien, but as the minutes pass, the feeling steadily becomes more natural. ");
+				outputText("It's not long until the clone feels like an extension of your body, almost as if you could move it yourself. ");
+				outputText("It's not long until you're properly attuned to your clone. The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
+				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of two.\n\n");
+				outputText("<b>Your clone is fully formed.</b>\n\n");
 				player.addStatusValue(StatusEffects.PCClone, 4, 1);
 				player.addStatusValue(StatusEffects.PCClone, 3, 30);
 				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
-				HPChange( -player.maxHP() * 0.5, true);
+				HPChange(-(player.maxHP() * 0.5), true);
 				player.statPoints -= 150;
 				player.perkPoints -= 30;
 				player.level -= 30;
 			}
 			else if (player.statusEffectv4(StatusEffects.PCClone) == 2) {
-				outputText("Part 3 forming placeholder.\n\n");
+				outputText("You return to work on completing your clone. Compared to the previous form of the large sphere, it now looks more like you. You begin the process for the third time.\n\n");
+				outputText("The outer layer steadily begins to change into the form of a translucent cocoon. It's barely noticeable, but you can see the vital organs form inside the incubator.\n\n");
+				outputText("Six hours pass as the cocoon hardens into a substance akin to hard, black chitin until the cocoon is opaque. A small part of the layer around the navel keeps some translucent properties.\n\n");
+				outputText("Fatigue steadily overwhelms you after expending such intense amounts of your life energy. You lie down and rest for an hour before you decide to resume.\n\n");
 				player.addStatusValue(StatusEffects.PCClone, 4, 1);
 				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
-				HPChange( -player.maxHP() * 0.5, true);
+				HPChange(-(player.maxHP() * 0.5), true);
 			}
 			else {
-				outputText("Part 2 forming placeholder.\n\n");
+				outputText("Having recovered your spent life force and soul energy, you return to the halted ritual. Sitting before you is a slowly rotating basketball-sized sphere of soul and life essences. You start to focus on the next phase of clone formation.\n\n");
+				outputText("Without further delay, you focus the essence from your body, guiding it to the sphere before you.\n\n");
+				outputText("A few hours later, the sphere begins to take the shape of your body with the energy you've guided into it. It is slightly larger than you, with the outer layer being nothing more than something to prevent the essences you've given it from escaping.\n\n");
+				outputText("With the second phase completed, you slowly break the connection with your clone. Your mind and body wrack from the expended essence you've given to your clone. You decide to take the time to rest.\n\n");
+				outputText("After a couple of hours, you rise before leaving the half-finished creation in the corner of your [camp].\n\n");
 				player.addStatusValue(StatusEffects.PCClone, 4, 1);
 				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
-				HPChange( -player.maxHP() * 0.5, true);
+				HPChange(-(player.maxHP() * 0.5), true);
 			}
 		}
 		else {
-			outputText("Closing your eyes you focus on forming core of your clone. After long minutes you start to feel how part of your soulforce and life essence starts to seep throu the pores outside your body.\n\n");
-			outputText("Slowly directing it to focus it takes over hour to start focus into swirling shere before you. Keeping your conetration you guide more of essence and soul energy to leave your body and drift toward very slowly growing object before you.\n\n");
-			outputText("After another few hours of very slow process of nurishing core of your clone you reach point of almost fully been depleyed of soulfroce and alot of your life essence been used. Shifting\n\n");
+			outputText("You close your eyes with the intent of forming the core of your clone. Minutes pass as the sensation of your soul force and life essence slowly escapes from your being.\n\n");
+			outputText("An hour passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
+			outputText("The process is slow. While nourishing the core of the clone, you find yourself unable to expend any more of your life essence or risk being completely drained of soul essence.\n\n");
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
-			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
-			HPChange( -player.maxHP() * 0.5, true);
+			EngineCore.SoulforceChange(-(player.maxSoulforce()), true);
+			HPChange(-(player.maxHP() * 0.5), true);
 		}
 		doNext(camp.returnToCampUseEightHours);
+	}
+	private function CloneContemplateDao():void {
+		clearOutput();
+		outputText("Maybe your clone could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
+		menu();
+		if (player.statusEffectv1(StatusEffects.PCClone) == 11) addButtonDisabled(0, "Fire", "Your clone is currently contemplating this Dao.");
+		else addButton(0, "Fire", CloneContemplateDaoSet, 11);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 12) addButtonDisabled(1, "Ice", "Your clone is currently contemplating this Dao.");
+		else addButton(1, "Ice", CloneContemplateDaoSet, 12);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 13) addButtonDisabled(2, "Lightning", "Your clone is currently contemplating this Dao.");
+		else addButton(2, "Lightning", CloneContemplateDaoSet, 13);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 14) addButtonDisabled(3, "Darkness", "Your clone is currently contemplating this Dao.");
+		else addButton(3, "Darkness", CloneContemplateDaoSet, 14);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 15) addButtonDisabled(4, "Poison", "Your clone is currently contemplating this Dao.");
+		else addButton(4, "Poison", CloneContemplateDaoSet, 15);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 16) addButtonDisabled(5, "Wind", "Your clone is currently contemplating this Dao.");
+		else addButton(5, "Wind", CloneContemplateDaoSet, 16);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 17) addButtonDisabled(6, "Blood", "Your clone is currently contemplating this Dao.");
+		else addButton(6, "Blood", CloneContemplateDaoSet, 17);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 18) addButtonDisabled(7, "Water", "Your clone is currently contemplating this Dao.");
+		else addButton(7, "Water", CloneContemplateDaoSet, 18);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 19) addButtonDisabled(8, "Earth", "Your clone is currently contemplating this Dao.");
+		else addButton(8, "Earth", CloneContemplateDaoSet, 19);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 20) addButtonDisabled(9, "Acid", "Your clone is currently contemplating this Dao.");
+		else addButton(9, "Acid", CloneContemplateDaoSet, 20);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 11) addButtonDisabled(13, "None", "Your clone is currently not contemplating any Dao.");
+		else addButton(13, "None", CloneContemplateDaoSet, 0);
+		addButton(14, "Back", VisitClone);
+	}
+	private function CloneContemplateDaoSet(newdao:Number):void {
+		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone);
+		player.addStatusValue(StatusEffects.PCClone,1,(newdao-olddao));
+		doNext(CloneContemplateDao);
 	}
 
 	private function DummyTraining():void {
@@ -3295,7 +3374,7 @@ public class Camp extends NPCAwareContent{
 				outputText("Your fellow companion mourns over your passing.");
 			}
 		}
-		player.HP = 0;
+		player.HP = player.minHP();
 		EventParser.gameOver();
 		removeButton(1); //Can't continue, you're dead!
 	}
@@ -3582,8 +3661,15 @@ public function wakeFromBadEnd():void {
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
     CoC.instance.inCombat = false;
+	player.removeStatusEffect(StatusEffects.RiverDungeonA);
+	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
+	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+	player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
+	player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
+	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
+	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
     //Restore stats
-	player.HP = player.maxHP();
+	player.HP = player.maxOverHP();
 	player.fatigue = 0;
 	statScreenRefresh();
 	//PENALTY!
@@ -3594,6 +3680,48 @@ public function wakeFromBadEnd():void {
 	player.XP -= int((player.level * 10) * penaltyMultiplier);
 	if (player.gems < 0) player.gems = 0;
 	if (player.XP < 0) player.XP = 0;
+	menu();
+	addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
+}
+
+//Moving nascent soul to your clone body
+public function rebirthFromBadEnd():void {
+	clearOutput();
+	trace("Escaping bad end!");
+	outputText("No... Not like this! Your quest is... not... over..!");
+	outputText("\n\nYour nascent soul leaves your body, and unfetteredly escapes back to [camp] where it finds your clone and fuse with it. A pang of mental pain hits you after the sacrifice. After a moment of disorientation, you consider whether or not you should make another.");
+	if (silly()) outputText(" With another chance, you know your journey is far from over. You still have so much to do.");
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
+		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
+		player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
+		if (player.ballSize < 1) player.ballSize = 1;
+	}
+	//Skip time forward
+	model.time.days++;
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
+	else model.time.hours = 6;
+	//Set so you're in camp.
+	DungeonAbstractContent.inDungeon = false;
+	inRoomedDungeon = false;
+	inRoomedDungeonResume = null;
+    CoC.instance.inCombat = false;
+	player.removeStatusEffect(StatusEffects.RiverDungeonA);
+	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
+	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+	player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
+	player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
+	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
+	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
+    //Restore stats
+	player.HP = player.maxOverHP();
+	player.fatigue = 0;
+	statScreenRefresh();
+	player.addStatusValue(StatusEffects.PCClone, 4, -4);
+	if (player.statusEffectv1(StatusEffects.PCClone) > 0) {
+		var resetjob:Number = player.statusEffectv1(StatusEffects.PCClone);
+		player.addStatusValue(StatusEffects.PCClone, 1, -resetjob);
+	}
 	menu();
 	addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
 }
@@ -3845,6 +3973,7 @@ public function wakeFromBadEnd():void {
 		performancePoints += possibleToGainAscensionPoints();
 		player.ascensionPerkPoints += performancePoints;
 		player.knockUpForce(); //Clear pregnancy
+		player.buttKnockUpForce(); //Clear Butt preggos.
 		//Scene GO!
 		clearOutput();
 		outputText("It's time for you to ascend. You walk to the center of the [camp], announce that you're going to ascend to a higher plane of existence, and lay down. ");
@@ -3933,7 +4062,7 @@ public function wakeFromBadEnd():void {
 		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
 			if (!levelup) {
-				if (player.statPoints > 0 && !player.areBaseStatsMaxed) {
+				if (player.statPoints > 0) {
 					mainView.setMenuButton(MainView.MENU_LEVEL, "Stat Up");
 					mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
 				} else  if (player.perkPoints > 0) {
@@ -4915,6 +5044,7 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}*/
+
 		doCamp();
 	}
 

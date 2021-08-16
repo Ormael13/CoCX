@@ -1782,7 +1782,7 @@ import coc.view.MainView;
 			ascensionMenu();
 		}
 
-		public function returnFromupdateAscension(): void {
+		public function returnFromUpdateAscension(): void {
 			migration = false;
 			migrationMsg = "";
 			Metamorph.registerPermanentMetamorphs();
@@ -1800,7 +1800,7 @@ import coc.view.MainView;
 
 			outputText("The world you have departed is irrelevant and you are in an endless black void dotted with tens of thousands of stars. You encompass everything and everything encompasses you.");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
-			outputText("\n\n(When you're done, select Reincarnate" + (migration ? " or Return" : "") + ".)");
+			outputText("\n\n(When you're done, select " + (migration ? "Return" : "Reincarnate") + ".)");
 			menu();
 			addButton(0, "Perk Select(1)", ascensionPerkMenu).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
@@ -1823,8 +1823,8 @@ import coc.view.MainView;
 			}
 			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
-			addButton(11, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
-			if (migration) addButton(12, "Return", returnFromupdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
+			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -2782,16 +2782,20 @@ import coc.view.MainView;
 		}
 
 		private function accessLowerBodyMenu(currentPage: int = 0): void {
-			var memArray: Array = LowerBodyMem.Memories;
-
 			// Hides Taur variants of pre-existing TFs
-			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
+			var memArray: Array = LowerBodyMem.Memories.filter(function(element: *, index: int, array: Array): Boolean {
 				if (element && !element.taurVariant) {
 					return true;
 				}
 				return false;
 			});
 
+			memArray.unshift({
+		  	id: "Taur Lower Body",
+				permCost: 50,
+				permInfo: "Enables metamorphosis to Taur variants of several lower body parts.",
+		  	title: "Taur Shape"
+			});
 
 			openPaginatedMetamorphMenu("Lower Body", accessLowerBodyMenu, currentPage, memArray);
 		}
@@ -2857,7 +2861,7 @@ import coc.view.MainView;
 				const obtained: Boolean = Metamorph.PermanentMemoryStorage[genMem.id];
 				const hasRequirements: Boolean = (genMem.permReq ? Metamorph.PermanentMemoryStorage[genMem.permReq] || false : true);
 
-				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points");
+				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points" + (genMem.permInfo ? "\n\n" + genMem.permInfo : ""));
 				else if (unlocked && !hasRequirements && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points\n\n<b>Requirement</b>: Permanentize " + genMem.permReq);
 				else if (unlocked && hasRequirements && !enoughPP && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points (You don't have enough Ascension Perk Points to permanentize this metamorphosis!)");
 				else if (obtained) addButtonDisabled(currentButton, buttonStr, "You already permanentized this metamorphosis!");

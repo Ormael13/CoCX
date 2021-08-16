@@ -11,8 +11,10 @@ package classes.GeneticMemories {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
+	 * - name: how the Metamorph is referred to in displayed texts
 	 * - cost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
 	 * - title: name displayed on the metamorph button
+	 * - unlockText: additional text displayed when Metamorph is unlocked
 	 * - transformation: TF object that refers to what the metamorph does
 	 *
 	 * Optional properties:
@@ -26,8 +28,10 @@ package classes.GeneticMemories {
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
 			id: [Name Saved in GeneticStorage],
+			name: [Name Displayed in Texts],
 			cost: [Cost Here],
-			title: "[Race Here]",
+			title: [Race Here],
+			unlockText: [Text Displayed On Unlocking Metamorph Here],
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
@@ -40,6 +44,7 @@ package classes.GeneticMemories {
 		public static const NONE:int = 0;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
+			name: "No Skin Pattern",
 			cost: 500,
 			title: "None",
 			transformation: function(): Transformation {
@@ -50,6 +55,7 @@ package classes.GeneticMemories {
 		public static const MAGICAL:int = 1;
 		EnumValue.add(Memories, MAGICAL, "MAGICAL", {
 			id: "Kitsune Skin Pattern",
+			name: "Runic Kitsune Tattoos",
 			cost: 100,
 			title: "Kitsune",
 			transformation: function(): Transformation {
@@ -60,6 +66,7 @@ package classes.GeneticMemories {
 		public static const BATTLE:int = 2;
 		EnumValue.add(Memories, BATTLE, "BATTLE", {
 			id: "Oni Skin Pattern",
+			name: "Oni Battle Tattoos",
 			cost: 100,
 			title: "Oni",
 			transformation: function(): Transformation {
@@ -70,6 +77,7 @@ package classes.GeneticMemories {
 		public static const LIGHTNING_SHAPED:int = 3;
 		EnumValue.add(Memories, LIGHTNING_SHAPED, "LIGHTNING_SHAPED", {
 			id: "Raiju Skin Pattern",
+			name: "Lightning-shaped Raiju Tattoos",
 			cost: 100,
 			title: "Raiju",
 			transformation: function(): Transformation {
@@ -80,6 +88,7 @@ package classes.GeneticMemories {
 		public static const SCAR_SHAPED:int = 4;
 		EnumValue.add(Memories, SCAR_SHAPED, "SCAR_SHAPED", {
 			id: "Orc Skin Pattern",
+			name: "Scar-shaped Orc Tattoos",
 			cost: 100,
 			title: "Orc",
 			transformation: function(): Transformation {
@@ -87,5 +96,8 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static function getMemory(memoryId: Number): * {
+			return Memories[memoryId] || Memories[0];
+		}
   }
 }

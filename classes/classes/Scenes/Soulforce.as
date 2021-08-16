@@ -91,7 +91,6 @@ use namespace CoC;
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
 		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
-			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) outputText(""+player.statusEffectv1(StatusEffects.TribulationCountdown)+"\n");
 		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
@@ -217,10 +216,8 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
-			if (player.hasPerk(PerkLib.Metamorph)) {
-				addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
-				addButton(9, "Refund A. M.", RefundAscensionMetamorphPerks).hint("Refunds the Ascension points spent on Transcedental Metamorph Perks and brings you to the Ascension menu.");
-			}
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
+			//9
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
@@ -453,78 +450,6 @@ use namespace CoC;
 			}
 			Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 			doNext(SoulforceCheats);
-		}
-		public function RefundAscensionMetamorphPerks(): void {
-			clearOutput();
-			// Refunding Ascension Perk Points for each permanent Metamorph, including costlier human parts, and enable opening Ascension menu
-				outputText("Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
-				// Non-human permanent Metamorphs cost 5 points each
-				player.ascensionPerkPoints += player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) * 5;
-				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
-				// Upgrade prices
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
-					player.ascensionPerkPoints += 15;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
-					player.ascensionPerkPoints += 30;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
-					player.ascensionPerkPoints += 45;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
-					player.ascensionPerkPoints += 60;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
-					player.ascensionPerkPoints += 75;
-				}
-				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
-					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
-					player.ascensionPerkPoints += 90;
-				}
-				// Human permanent Metamorphs cost 25 each, but 5 was already refunded, leaving 20
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanHair);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanFace);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanEyes);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanTongue);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanEars);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanArms);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanLowerBody);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoHorns);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoWings);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanSkin);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoAntennae);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoGills);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoRearBody);
-				if (player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) player.ascensionPerkPoints += 20;
-				player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
-			if (player.ascensionPerkPoints > 0) {
-				outputText("\n\nYou'll be redirected to the Ascension menu to use your refunded points, then you can either go back to your current game or reincarnate.");
-				doNext(CoC.instance.charCreation.migrationAscension);
-			} else {
-				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
-				doNext(SceneLib.camp.campAfterMigration);
-			}
-			return;
 		}
 		public function PerkGalore1():void {
 			if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
@@ -1531,12 +1456,19 @@ use namespace CoC;
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
 				addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
 				addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
+				addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 				//addButton(11, "", ).hint("Add 1 .");
 				if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 				addButton(13, "-1-", NonEquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
+
+		private function addConsumable(consumable: Consumable): void {
+			outputText("\n\n<b>(Gained 1 " + consumable.longName + "!)</b>\n\n");
+			inventory.takeItem(consumable, curry(NonEquipmentMenu, 2));
+		}
+
 		public function MaterialMenu(page:int = 1):void {
 			menu();
 			if (page == 1) {
@@ -2909,6 +2841,34 @@ use namespace CoC;
 			outputText("\n\n");
 			doNext(camp.returnToCampUseEightHours);
 		}
+		public function DaoContemplationsEffectClone(statusEffect:StatusEffectType, daoname:String):void {
+			player.addStatusValue(statusEffect, 1, 1);
+			if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+				player.addStatusValue(statusEffect, 1, -140);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+				player.addStatusValue(statusEffect, 1, -100);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+				player.addStatusValue(statusEffect, 1, -60);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+				player.addStatusValue(statusEffect, 1, -40);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+				player.addStatusValue(statusEffect, 1, -20);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer.</b>");
+			}
+		}
 		public function SoulforceRegeneration2():void {
 			clearOutput();
 			var soulforceamountrestored:int = 52;
@@ -3970,7 +3930,13 @@ use namespace CoC;
 			menu();
 			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc).hint("Req. 80+ soulforce");
 			else addButtonDisabled(0, "Tamani", "");
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) {
+				if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
+					if (player.hasCock()) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
+					else addButtonDisabled(1, "Tamani D.", "Req. to have cock of any type.");
+				}
+				else addButtonDisabled(1, "Tamani D.", "Req. to have 16+ (still alive) daughters with Tamani.");
+			}
 			else addButtonDisabled(1, "Tamani D.", "");
 			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion).hint("Req. 90+ soulforce");
 			else addButtonDisabled(2, "KitsuMansion", "");
