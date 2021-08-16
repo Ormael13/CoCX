@@ -1566,7 +1566,7 @@ import classes.StatusEffects;
 			outputText("<i>This is my kingdom</i>\n\n");
 			outputText("<i>This is my domain</i>\n\n");
 			outputText("<i>You cant take it from me the greatest you've ever seen</i>\n\n");
-			outputText("<i>you'll remember my name</i>\n\n");
+			outputText("<i>You'll remember my name</i>\n\n");
 			outputText("<i>Call me a god, call me a king</i>\n\n");
 			outputText("<i>You're outa my realm so bend the knee</i>\n\n");
 			//outputText("The two of you proceed to carefully extract the precious gemstones from the wall as Nessa pockets her payment.\n\n");
@@ -1648,4 +1648,4 @@ import classes.StatusEffects;
 			playerMenu();
 		}
 	}
-}
+}

@@ -255,8 +255,11 @@ private function evangelineTalkMenu():void {
 	else addButtonDisabled(1, "???", "???");
 	if (EvangelineTalks >= 2) addButton(2, "Past Life", TalkPastLife1).hint("Talk about her past before meeting you.");
 	else addButtonDisabled(2, "???", "???");
-	//if (EvangelineTalks >= 3 && EvangelineAffectionMeter > 30) addButton(3, "3", ).hint("");her father? - na X affection score odblokowywane?	unlocks Dilapidated Temple/Shrine?
-	addButtonDisabled(3, "???", "???");
+	if (EvangelineTalks >= 3) {
+		if (EvangelineAffectionMeter >= 30) addButton(3, "Father", TalkYourFather).hint("");
+		else addButtonDisabled(3, "???", "Req. 30%+ affection");
+	}
+	else addButtonDisabled(3, "???", "???");
 	//if (EvangelineTalks >= 4) addButton(4, "4", ).hint("");her soul? - jak sie PC dowie o byciu demonicą przez nią?
 	//if (EvangelineTalks >= 5) addButton(5, "5", ).hint("");
 	addButton(14, "Back", meetEvangeline);
@@ -301,18 +304,26 @@ private function TalkPastLife1():void {
 	if (EvangelineTalks == 2) EvangelineTalks = 3;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
-}/*
+}
 private function TalkYourFather():void {
 	clearOutput();
-	outputText("Placeholder text.");
+	outputText("It's been some time she have been living here. Maybe she would tell you a bit more about herself, her past or 'the tresure' she hidden? You asks her if she could tell you something about her father.\n\n");
+	if (EvangelineTalks >= 4) outputText("\"<i>Hahahaha so you want hear that stories about me and my father again? Well not like i got so 'much more important' things to do now.</i>\"\n\n");
+	else outputText("\"<i>Hmmm. My father...</i>\" Evangeline muse to herself when she heard your reason to finsing her today. \"<i>Well i been living pretty good here for some time and you seems not so untrusty like many others... fine.</i>\"\n\n");
+	outputText("After you finds a comfortbale place to sit she stay silent for a while before starting to talking. It manly consists of some shorter or longer sotries that whould be nearly any kid tell how their father took them on a stroll or played with them. They focus much more on the places they both visited with telling not much about her father itself.\n\n");
+	outputText("\"<i>...and few times my father took me to this old shrine. I not sure why we had to visit that place. It looked more like place where would some devoted belivers or similar people come and...</i>\"\n\n");
+	outputText("Listening to her talk you noticed some interesting fact. Of all places she been taken by her father there was one where she wasn't allowed to run freely around. One where she been strictly forbidden from acting in any way that her father told her. You asks her to tell a bit more about this place.\n\n");
+	outputText("\"<i>This place?</i>\" Evangeline goes silent for a moment. \"<i>It's not good place. Even forgetting that it was located in area where was massive battle between two armies it's not good to go there, it's place where not many people would find interesting to visit.</i>\" She seems to be bit flustered when talking about and excusing herself she walks away to work on something in her alchemic lab.\n\n");
+	if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] < 1) flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 1;
 	evangelineAffection(1);
-	if (EvangelineTalks == 3) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
+	if (EvangelineTalks == 3) EvangelineTalks = 4;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
-}
+}/*
 private function TalkPastLife2():void {
 	clearOutput();
-	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona demonicą ^^
+	outputText("Placeholder text.\n\n");po tym jak sie dowie PC iż jest ona demonicą ^^
+	outputText("Placeholder text.\n\n");
 	evangelineAffection(1);zajmie miejsce PastTalk1 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;
 	doNext(evangelineTalkMenu);
@@ -320,7 +331,7 @@ private function TalkPastLife2():void {
 }
 private function TalkPastLife3():void {
 	clearOutput();
-	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona boginią ^^
+	outputText("Placeholder text.\n\n");po tym jak sie dowie PC iż jest ona boginią ^^
 	evangelineAffection(1);zajmie miejsce PastTalk2 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
