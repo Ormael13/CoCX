@@ -1188,7 +1188,7 @@ private function InternalMutations0(page:int = 0):void {
 		InternalMutationsText();
 		player.createPerk(perkTier, 0, 0, 0, 0);
 		cheatTime2(30);
-		InternalMutations0();
+		InternalMutations();
 	}
 }
 

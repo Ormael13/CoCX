@@ -129,7 +129,7 @@ package classes.Scenes
 			outputText("-Added Water & Earth elmental attack type. Water and Earth elementals dmg been changed to those new types of elemental dmg.\n");
 			outputText("-Added Acid elmental attack type. Acid Spit, Hydra Acid Breath specials dmg been changed to this new type of elemental dmg.\n");
 			outputText("-Evangeline initial encounter and post fight talk scene been slight adjusted. Her repeat encouter after rejecting recruitment first time now req. higher level and finding two city-like hubs unlocked. After been in camp her level up process is bit faster.\n");
-			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 12 for this to be possible.\n");
+			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 6 for this to be possible. She also have new talk option (req. 30%+ affection).\n");
 			outputText("-With adding 4 new subtypes of elemental dmg some of enemy attacks dmg been adjusted from magic type to one of those new four types. Also there is resistance tracked for those new types on stats page.\n");
 			outputText("-When PC race change to race without blood (atm only gargoyle) it would disable all blood spells and blood soulskills.\n");
 			outputText("-Added training dummy that is avialable after first exploration. It wouldn't deal much dmg back and won't give exp after beating it. It would also allow to always retreat from fight. It purpose is to help in safe manner to train weapon masteries. So not go all out trying to kill it in one hit or the training will last much longer ^^\n");
@@ -160,11 +160,11 @@ package classes.Scenes
 			outputText("-Zetta refactored/renovated whole way transformations and metamorph are handle under the hood steamlining both systems. IT'S MASSIVE WORK so be kind to Zetta for that long and painful work done.\n");
 			outputText("-Soul Sense option for Tamani daughters recieved same limitation as for encounters that PC could trigger before having option to find them with soul sense. Also some of tamani encounters that would proc her daughters meeting instead been changed to take into account unlocking or not them in soul sense.\n");
 			outputText("-Lifesteal effects form weapons won't work on construct enemies (they not have much of 'blood' to suck out) and Venoclaw will not 'poison' lust resistant enemies.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New Place to find: Dilapidated Shrine. Req. to have talked with Evangeline on 4th talk option and then explore (Outer) Battlefield.\n");
+			outputText("-Places menu got hints on ??? options. Temple of the Divine praying menu got added ??? options for not yet restored altairs.\n");
+			outputText("-Mind over Body I perk req. updated to include in one of job perks that allow to pick it include also job: Golemancer and Job: Healer. Arcane Regeneration (Minor) req. of perk mage been replaced with req. one of four job perks: Sorcerer, Healer, Elemental Conjuer, Golemancer.\n");
+			outputText("-Job: Healer, Elemental Conjuer, Golemancer, Enchanter and Eromancer mana regeneration bonus been increased to 10 pts from 5 pts.\n");
+			outputText("-Earth / Wood elementals dmg bonus been decreased to 100% and Metal to 30%. Purity/Corruption elementals got much better scaling increasing dmg based on enemy corruption from 100%-140% to 60%-300%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
