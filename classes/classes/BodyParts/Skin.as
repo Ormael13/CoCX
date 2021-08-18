@@ -700,7 +700,7 @@ public class Skin extends SaveableBodyPart {
 		const coveragePattern:RegExp = /{partiallyOrCompletely}/g;
 
 		return desc
-			.replace(coveragePattern, creature.skin.coverage >= Skin.COVERAGE_MEDIUM ? "completely" : "partially")
+			.replace(coveragePattern, creature.skin.coverage > Skin.COVERAGE_MEDIUM ? "completely" : "partially")
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }

@@ -85,11 +85,13 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasCock() || player.balls > 0 || player.vaginas.length > 0) {
 			outputText(" " + Utils.mergeSentences([describeCock(), describeBalls()]));
 		}
-		outputText(describePussy() + "\n");
+
+		const pussyDesc: String = describePussy();
+		outputText(pussyDesc ? "[pg]" + pussyDesc : "");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
-			outputText(" " + Utils.mergeSentences([noSexString, describeAsshole()]));
+			outputText("[pg]" + Utils.mergeSentences([noSexString, describeAsshole()]));
 		}
 
 		const piercingsDesc: String = describePiercings();
@@ -789,7 +791,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describePussy(): String {
-		var pussyDesc: String = "\n";
+		var pussyDesc: String = "";
 
 		if (player.vaginas.length > 0){
 			var vagLoop:int = 0

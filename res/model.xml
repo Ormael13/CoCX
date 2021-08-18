@@ -2111,7 +2111,7 @@
                             <hide part="hair_bg/hellcat"/>
                         </if>
                     </case>
-                    <case values="Hair.TWINPIGTAIL">
+                    <case values="Hair.TWINTAILS">
                         <show part="hair_bg/twinPigtail"/>
                         <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
                             <hide part="hair_bg/raiju3"/>
