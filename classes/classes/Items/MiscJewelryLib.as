@@ -15,7 +15,7 @@ package classes.Items
 		public static const NOTHING:Nothing = new Nothing();
 		
 		public const DMAGETO:DemonicMageTailOrnament = new DemonicMageTailOrnament();
-		//public const ONIGOURD:OniGourd = new OniGourd();
+		public const ONI_GOURD:OniGourd = new OniGourd();
 		
 		public function MiscJewelryLib() 
 		{

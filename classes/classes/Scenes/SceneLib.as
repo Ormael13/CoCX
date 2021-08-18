@@ -2,6 +2,7 @@ package classes.Scenes {
 import classes.CoC;
 import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
+import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
@@ -259,6 +260,8 @@ public class SceneLib {
     public static var hexindao:HeXinDao = new HeXinDao();
 
     public static var kitsuneScene:KitsuneScene = new KitsuneScene();
+	
+	public static var dilapidatedShrine:DilapidatedShrine = new DilapidatedShrine();
 	
 	public static var anzu:AnzuScene = new AnzuScene();
 

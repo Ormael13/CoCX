@@ -785,7 +785,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.hasPerk(PerkLib.Metamorph) && player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1)
 				//Daily regeneration of mana for non mages
-				if (!player.hasPerk(PerkLib.JobSorcerer) && !player.hasPerk(PerkLib.JobElementalConjurer) && (player.mana < player.maxMana())) {
+				if (!player.hasPerk(PerkLib.JobSorcerer) && !player.hasPerk(PerkLib.JobHealer) && !player.hasPerk(PerkLib.JobElementalConjurer) && !player.hasPerk(PerkLib.JobGolemancer) && (player.mana < player.maxMana())) {
 					player.mana += 150;
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
@@ -1818,13 +1818,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Elven Sense
-			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.hasPerk(PerkLib.ElvenSense) && !player.hasPerk(PerkLib.ElvishPeripheralNervSys)) {
+			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.hasPerk(PerkLib.ElvenSense) && !player.hasPerk(PerkLib.ElvishPeripheralNervSys) && !player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
 				outputText("\nYou feels yourself less aware of your surroundings. Heck your vision seems less keen then it used to be. Most likely because you no longer possess the senses of an elf.\n\n<b>(Lost the Elven Sense perk!)</b>\n");
 				player.removePerk(PerkLib.ElvenSense);
 				needNext = true;
 			}
 			//Flawless Body
-			if ((player.lowerBody != LowerBody.ELF || player.arms.type != Arms.ELF || !player.hasPlainSkinOnly() || player.skinAdj != "flawless") && player.hasPerk(PerkLib.FlawlessBody)) {
+			if ((player.lowerBody != LowerBody.ELF || player.arms.type != Arms.ELF || !player.hasPlainSkinOnly() || player.skinAdj != "flawless") && player.hasPerk(PerkLib.FlawlessBody) && !player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
 				outputText("\nYour body has becomes less alluring and graceful as part of reverting to a more mundane appearance.\n\n<b>(Lost the Flawless Body perk and the perfect skin!)</b>\n");
 				player.removePerk(PerkLib.FlawlessBody);
 				player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});

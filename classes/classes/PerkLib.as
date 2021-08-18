@@ -4881,7 +4881,7 @@ public class PerkLib
             WarMageNovice.requireAnyPerk(JobSorcerer, JobHealer)
                     .requireInt(40);
             UnlockForce.requireInt(20);
-            MindOverBodyI.requireAnyPerk(JobSorcerer, JobHealer)
+            MindOverBodyI.requireAnyPerk(JobSorcerer, JobHealer, JobElementalConjurer, JobGolemancer)
                     .requireInt(25);
             MindOverBodyII.requirePerk(MindOverBodyI)
                     .requireInt(45)
@@ -4947,7 +4947,7 @@ public class PerkLib
                     .requireInt(60)
                     .requirePerk(BasicSpirituality)
                     .requireLevel(6);
-            ArcaneRegenerationMinor.requirePerk(Mage)
+            ArcaneRegenerationMinor.requireAnyPerk(JobSorcerer, JobHealer, JobElementalConjurer, JobGolemancer)
                     .requireInt(50)
                     .requireLevel(6);
             GreyMageApprentice.requirePerk(GreyMagic)

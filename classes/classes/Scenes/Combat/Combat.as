@@ -1831,15 +1831,15 @@ public class Combat extends BaseContent {
         outputText("\n\nYour elemental hit [monster a] [monster name]! ");
         switch (elementType) {
             case EARTH:
-                elementalDamage *= 2.5;
+                elementalDamage *= 2;
                 doEarthDamage(elementalDamage, true, true);
                 break;
             case WOOD:
-                elementalDamage *= 2.5;
+                elementalDamage *= 2;
                 doDamage(elementalDamage, true, true);
                 break;
             case METAL:
-                elementalDamage *= 1.5;
+                elementalDamage *= 1.3;
                 doDamage(elementalDamage, true, true);
                 break;
             case FIRE:
@@ -1861,19 +1861,19 @@ public class Combat extends BaseContent {
                 doPoisonDamage(elementalDamage, true, true);
                 break;
             case PURITY:
-                if (monster.cor < 33) elementalDamage = Math.round(elementalDamage * 1.0);
-                else if (monster.cor < 50) elementalDamage = Math.round(elementalDamage * 1.1);
-                else if (monster.cor < 75) elementalDamage = Math.round(elementalDamage * 1.2);
-                else if (monster.cor < 90) elementalDamage = Math.round(elementalDamage * 1.3);
-                else elementalDamage = Math.round(elementalDamage * 1.4);
+                if (monster.cor < 33) elementalDamage = Math.round(elementalDamage * 0.6);
+                else if (monster.cor < 50) elementalDamage = Math.round(elementalDamage * 1.2);
+                else if (monster.cor < 75) elementalDamage = Math.round(elementalDamage * 1.8);
+                else if (monster.cor < 90) elementalDamage = Math.round(elementalDamage * 2.4);
+                else elementalDamage *= 3;
                 doDamage(elementalDamage, true, true);
                 break;
             case CORRUPTION:
-                if (monster.cor >= 66) elementalDamage = Math.round(elementalDamage * 1.0);
-                else if (monster.cor >= 50) elementalDamage = Math.round(elementalDamage * 1.1);
-                else if (monster.cor >= 25) elementalDamage = Math.round(elementalDamage * 1.2);
-                else if (monster.cor >= 10) elementalDamage = Math.round(elementalDamage * 1.3);
-                else elementalDamage = Math.round(elementalDamage * 1.4);
+                if (monster.cor >= 66) elementalDamage = Math.round(elementalDamage * 0.6);
+                else if (monster.cor >= 50) elementalDamage = Math.round(elementalDamage * 1.2);
+                else if (monster.cor >= 25) elementalDamage = Math.round(elementalDamage * 1.8);
+                else if (monster.cor >= 10) elementalDamage = Math.round(elementalDamage * 2.4);
+                else elementalDamage *= 3;
                 doDamage(elementalDamage, true, true);
                 break;
             default:
@@ -10352,10 +10352,11 @@ public class Combat extends BaseContent {
 
     public function manaregeneration2():Number {
         var manaregen:Number = 0;
-        if (player.hasPerk(PerkLib.JobElementalConjurer)) manaregen += 5;
-        if (player.hasPerk(PerkLib.JobEnchanter)) manaregen += 5;
-        if (player.hasPerk(PerkLib.JobEromancer)) manaregen += 5;
-        if (player.hasPerk(PerkLib.JobHealer)) manaregen += 5;
+        if (player.hasPerk(PerkLib.JobElementalConjurer)) manaregen += 10;
+        if (player.hasPerk(PerkLib.JobEnchanter)) manaregen += 10;
+        if (player.hasPerk(PerkLib.JobEromancer)) manaregen += 10;
+        if (player.hasPerk(PerkLib.JobGolemancer)) manaregen += 10;
+        if (player.hasPerk(PerkLib.JobHealer)) manaregen += 10;
         if (player.hasPerk(PerkLib.JobSorcerer)) manaregen += 10;
         if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) manaregen += 10;
         if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) manaregen += 20;
@@ -14804,4 +14805,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}
