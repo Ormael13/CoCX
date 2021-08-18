@@ -165,10 +165,10 @@ package classes.Scenes
 			outputText("-Mind over Body I perk req. updated to include in one of job perks that allow to pick it include also job: Golemancer and Job: Healer. Arcane Regeneration (Minor) req. of perk mage been replaced with req. one of four job perks: Sorcerer, Healer, Elemental Conjuer, Golemancer.\n");
 			outputText("-Job: Healer, Elemental Conjuer, Golemancer, Enchanter and Eromancer mana regeneration bonus been increased to 10 pts from 5 pts.\n");
 			outputText("-Earth / Wood elementals dmg bonus been decreased to 100% and Metal to 30%. Purity/Corruption elementals got much better scaling increasing dmg based on enemy corruption from 100%-140% to 60%-300%.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New information added to general section of stats page: minions count (would add all elementals (of any types), all golems (of all subtypes) and others like skeletons from Necormancer job).\n");
+			outputText("-Leader job perks for improving Wisp would now track all possible minions count not only elementals and simplest pernament golems type.\n");
+			outputText("-First Attack: Elementals perk would now enable a foruth option for choose: mix of 2+3 to let elemental attack and yet melee attack been replaced by another elemental attack.\n");
+			outputText("-Elementals specials that deal dmg get 100% better scaling of PC int/wis and purity and corruption one specials got the same scaling based on target corruption as melee attacks from elementals. Some of descriptions in Evocation Tome had been updated up to latest changes.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

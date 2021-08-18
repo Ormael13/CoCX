@@ -488,6 +488,7 @@ public class PerkMenu extends BaseContent {
 		menu();
 		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
 		outputText("\n<b>Elementals behavious:</b>\n");
+		if (elementalConjuerSummons == 4) outputText("Elemental will attack enemy on it own alongside PC + Attacking instead of PC each time melee attack command is chosen");
         if (elementalConjuerSummons == 3) outputText("Elemental will attack enemy on it own alongside PC.");
 		if (elementalConjuerSummons == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
 		if (elementalConjuerSummons < 2) outputText("Not participating");
@@ -526,9 +527,23 @@ public class PerkMenu extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption) && attackingElementalTypeFlag != 13) addButton(5, "Corruption", attackingElementalType, 13);
 			addButton(9, "1st", summonsbehaviourOptions, page - 1);
 		}
-		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,1);
-		if (elementalConjuerSummons != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
-		if (elementalConjuerSummons != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
+		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag, kFLAGS.ELEMENTAL_CONJUER_SUMMONS, 1);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementals)) {
+			if (elementalConjuerSummons != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
+			if (player.hasPerk(PerkLib.FirstAttackElementals)) {
+				if (elementalConjuerSummons != 3) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
+				if (elementalConjuerSummons != 4) addButton(13, "Melee+Help", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,4);
+			}
+			else {
+				addButtonDisabled(12, "Helping", "Req. First Attack: Elementals perk.");
+				addButtonDisabled(13, "Melee+Help", "Req. First Attack: Elementals perk.");
+			}
+		}
+		else {
+			addButtonDisabled(11, "MeleeAtk", "Req. to have summoned at least 1 elemental.");
+			addButtonDisabled(12, "Helping", "Req. to have summoned at least 1 elemental.");
+			addButtonDisabled(13, "Melee+Help", "Req. to have summoned at least 1 elemental.");
+		}
 		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
         else addButton(14, "Back", displayPerks);
         function elementalAttackReplacingPCmeleeAttack():void {

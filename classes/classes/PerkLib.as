@@ -1431,7 +1431,7 @@ public class PerkLib
 				"Your Fey Arcane Bloodstream grants you an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.",
 				"You've chosen the 'Fey Arcane Bloodstream (Final Form)' perk, gaining an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.").withBuffs({'int.mult':0.20});
 		public static const FirstAttackElementals:PerkType = mk("First Attack: Elementals", "First Attack: Elementals",
-				"Instead of melee attacking in PC place one of summoned elementals will attack before PC allowing latter to take any action even personaly attaking with melee weapon.",
+				"Instead of melee attacking in PC place one of summoned elementals will attack before PC allowing latter to take any action even personaly attaking with melee weapon. Or allow to use both options at once.",
 				"You've chosen the 'First Attack: Elementals' perk, allowing your summoned elementals to attack independly from you.");
 		public static const FirstAttackGolems:PerkType = mk("First Attack: Golems", "First Attack: Golems",
 				"Before your actions one or more of your golems will attack.",
@@ -2975,7 +2975,7 @@ public class PerkLib
 				"Lower by 40 needed mana to sustain active elemental in combat.",
 				"You've chosen the 'Strongest Elemental Bond (Ex)' perk, reaching near the peak of connection strength with your elementals.");
 		public static const StrongestElementalBondSu:PerkType = mk("Strongest Elemental Bond (Su)", "Strongest Elemental Bond (Su)",
-				"Lower by 40 needed mana to sustain active elemental in combat.",
+				"Lower by 50 needed mana to sustain active elemental in combat.",
 				"You've chosen the 'Strongest Elemental Bond (Su)' perk, reaching near the peak of connection strength with your elementals.");
 		public static const Studious:PerkType = mk("Studious", "Studious",
 				"You're a new student, kinda have to be studious. Your hours of study has helped you increase max mana by 10%.",
@@ -6513,7 +6513,7 @@ public class PerkLib
 					.requireInt(50)
 					.requireWis(50)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 3;
+					return player.playerMinionsCount() >= 3;
 					}, "3+ pets/minions");
             ShootTheLoadAndHitTheRoad.requireLevel(6)
                     .requirePerk(JobLeader)
@@ -6971,7 +6971,7 @@ public class PerkLib
 					.requireInt(100)
 					.requireWis(100)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 6;
+					return player.playerMinionsCount() >= 6;
 					}, "6+ pets/minions");
 			Fusion.requireLevel(24)
 					.requirePerk(Enhancement);
@@ -7192,7 +7192,7 @@ public class PerkLib
 					.requireInt(150)
 					.requireWis(150)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 10;
+					return player.playerMinionsCount() >= 10;
 					}, "10+ pets/minions");
 			Enchantment.requireLevel(42)
 					.requirePerk(Fusion);
@@ -7289,7 +7289,7 @@ public class PerkLib
 					.requireInt(200)
 					.requireWis(200)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 15;
+					return player.playerMinionsCount() >= 15;
 					}, "15+ pets/minions");
 			Refinement.requireLevel(72)
 					.requirePerk(Enchantment);

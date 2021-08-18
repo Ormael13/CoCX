@@ -5381,36 +5381,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
@@ -5444,36 +5444,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 28);
 		}
 		temp += scalingBonusIntelligence() * multiInt;
 		temp += scalingBonusWisdom() * multiWis;
@@ -5492,36 +5492,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
@@ -5595,36 +5595,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.25;
 		var multiWis:Number = 0.25;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 2) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) {
-			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 4);
-			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 4);
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 9) {
-			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 8);
-			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 8);
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 13) {
-			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 12);
-			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 12);
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 17) {
-			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 16);
-			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 16);
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 21) {
-			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 20);
-			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 20);
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 25) {
-			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 24);
-			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 24);
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 29) {
-			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 28);
-			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 28);
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 28);
 		}
 		temp += scalingBonusIntelligence() * multiInt;
 		temp += scalingBonusWisdom() * multiWis;
@@ -5687,36 +5687,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
@@ -5751,36 +5751,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
@@ -5814,36 +5814,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
@@ -5877,36 +5877,36 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
@@ -5941,44 +5941,40 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.cor < 33) damage = Math.round(damage * 1.0);
-		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-		else damage = Math.round(damage * 1.4);
+		damage *= combat.purityScalingDA();
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
@@ -6005,44 +6001,40 @@ public class MagicSpecials extends BaseCombatContent {
 		var multiInt:Number = 0.5;
 		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 2) {
-			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
-			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
+			multiInt += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
+			multiWis += 0.2 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 5) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 4);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 4);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 4);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 4);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 9) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 8);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 8);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 8);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 8);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 13) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 12);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 12);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 12);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 12);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 17) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 16);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 16);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 16);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 16);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 21) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 20);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 20);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 20);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 20);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 25) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 24);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 24);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 24);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 24);
 		}
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 29) {
-			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 28);
-			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 28);
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 28);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 28);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-		else damage = Math.round(damage * 1.4);
+		damage *= combat.corruptionScalingDA();
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");

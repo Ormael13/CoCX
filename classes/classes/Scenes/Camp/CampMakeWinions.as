@@ -953,7 +953,8 @@ package classes.Scenes.Camp
 		private function evocationTomeEarth():void {
 			clearOutput();
 			outputText("<b>Earth Elemental</b>\n\n");
-			outputText("-When attacking, it has an increased damage by 150%.\n");
+			outputText("-When attacking, it has an increased damage by 100%.\n");
+			outputText("-When attacking, it will deal Earth type damage.\n");
 			outputText("-M. Special: Creates an Earth armor around PC, increasing armor and magic resistance for a few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
@@ -968,7 +969,7 @@ package classes.Scenes.Camp
 			clearOutput();
 			outputText("<b>Water Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
-			outputText("-When attacking, it will deal water type damage.\n"); //Water elemental deals ice type damage?
+			outputText("-When attacking, it will deal Water type damage.\n");
 			outputText("-M. Special: Heals PC.\n");
 			doNext(evocationTome);
 		}
@@ -984,7 +985,7 @@ package classes.Scenes.Camp
 		private function evocationTomeWood():void {
 			clearOutput();
 			outputText("<b>Wood Elemental</b>\n\n");
-			outputText("-When attacking, it has an increased damage by 150%.\n");
+			outputText("-When attacking, it has an increased damage by 100%.\n");
 			outputText("-M. Special: PC (Minor) Healing and small increase to armor / magic resistance for a few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
@@ -993,7 +994,7 @@ package classes.Scenes.Camp
 			outputText("<b>Metal Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
-			outputText("-When attacking, it has an increased damage by 50%.\n");
+			outputText("-When attacking, it has an increased damage by 30%.\n");
 			outputText("-M. Special: Increases PC unarmed damage for a few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
@@ -1028,14 +1029,14 @@ package classes.Scenes.Camp
 		private function evocationTomePurity():void {
 			clearOutput();
 			outputText("<b>Purity Elemental</b>\n\n");
-			outputText("-When attacking, it will deal increased damage based on enemy corruption. The higher the corruption the higher bonus to damage.\n");
+			outputText("-When attacking, it will deal increased damage based on enemy corruption. The higher the corruption the higher bonus to damage. (60%-300%)\n");
 			outputText("-M. Special: Stronger version of purity attributed attack.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeCorruption():void {
 			clearOutput();
 			outputText("<b>Corruption Elemental</b>\n\n");
-			outputText("-When attacking, it will deal increased damage based on enemy corruption. The lower the corruption the higher bonus to damage.\n");
+			outputText("-When attacking, it will deal increased damage based on enemy corruption. The lower the corruption the higher bonus to damage. (60%-300%)\n");
 			outputText("-M. Special: Stronger version of corruption attributed attack.\n");
 			doNext(evocationTome);
 		}
@@ -2124,7 +2125,12 @@ package classes.Scenes.Camp
 			outputText("The elemental screams in dismay as your larger arcane circle unleash the full might of its last resort rune. Powerful discharge of energy strikes the wayward servants buying you enough time to rewrite its seal and force it back into servitude.\n\n");
 			outputText("\"<i>Someday you will attempt this ritual again and when you do I will..</i>\"");
 			outputText("Its final curse is silenced as its power are sealed again reducing it back to its former size. \"<b>Well this ritual is a failure you will have to try again when you achieved better control.</b>\"");
-			HPChange(-(Math.round(player.HP * 0.5)), true);
+			HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+		}
+		private function failToRankUpHPCost():Number {
+			var failure:Number = 0.5;
+			
+			return failure;
 		}
 		
 		//-------------

@@ -1785,7 +1785,7 @@ public class Combat extends BaseContent {
         if (summonedElementals >= 13) elementalDamage += baseDamage;
         if (elementalDamage < 10) elementalDamage = 10;
         if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) elementalDamage *= historyTacticianBonus();
-        if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) {
+        if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) {
             if (summonedElementals >= 9) elementalDamage *= 4;
             else if (summonedElementals >= 5) elementalDamage *= 3;
             else elementalDamage *= 2;
@@ -1861,19 +1861,11 @@ public class Combat extends BaseContent {
                 doPoisonDamage(elementalDamage, true, true);
                 break;
             case PURITY:
-                if (monster.cor < 33) elementalDamage = Math.round(elementalDamage * 0.6);
-                else if (monster.cor < 50) elementalDamage = Math.round(elementalDamage * 1.2);
-                else if (monster.cor < 75) elementalDamage = Math.round(elementalDamage * 1.8);
-                else if (monster.cor < 90) elementalDamage = Math.round(elementalDamage * 2.4);
-                else elementalDamage *= 3;
+                elementalDamage *= purityScalingDA();
                 doDamage(elementalDamage, true, true);
                 break;
             case CORRUPTION:
-                if (monster.cor >= 66) elementalDamage = Math.round(elementalDamage * 0.6);
-                else if (monster.cor >= 50) elementalDamage = Math.round(elementalDamage * 1.2);
-                else if (monster.cor >= 25) elementalDamage = Math.round(elementalDamage * 1.8);
-                else if (monster.cor >= 10) elementalDamage = Math.round(elementalDamage * 2.4);
-                else elementalDamage *= 3;
+                elementalDamage *= corruptionScalingDA();
                 doDamage(elementalDamage, true, true);
                 break;
             default:
@@ -1883,7 +1875,7 @@ public class Combat extends BaseContent {
         if (crit) outputText(" <b>Critical! </b>");
         //checkMinionsAchievementDamage(elementalDamage);
         if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
-            if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1 && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) {
+            if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
                 flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
                 menu();
                 addButton(0, "Next", combatMenu, false);
@@ -14471,6 +14463,25 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 1) boostAc += 0.1;
 		}
 		return boostAc;
+	}
+	
+	public function purityScalingDA():Number {
+		var purityScalingDA:Number = 1;
+		if (monster.cor < 33) purityScalingDA *= 0.6;
+        else if (monster.cor < 50) purityScalingDA *= 1.2;
+        else if (monster.cor < 75) purityScalingDA *= 1.8;
+        else if (monster.cor < 90) purityScalingDA *= 2.4;
+        else purityScalingDA *= 3;
+		return purityScalingDA;
+	}
+	public function corruptionScalingDA():Number {
+		var corruptionScalingDA:Number = 1;
+		if (monster.cor >= 66) corruptionScalingDA *= 0.6;
+        else if (monster.cor >= 50) corruptionScalingDA *= 1.2;
+        else if (monster.cor >= 25) corruptionScalingDA *= 1.8;
+        else if (monster.cor >= 10) corruptionScalingDA *= 2.4;
+        else corruptionScalingDA *= 3;
+		return corruptionScalingDA;
 	}
 
     public function oniRampagePowerMulti():Number {

@@ -112,8 +112,8 @@ public class PlayerInfo extends BaseContent {
 
 		if (camp.getCampPopulation() > 0) {
 			miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
-		//if (camp.getCampUndergroundPopulation() > 0)
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
+			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
 		}
 
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {

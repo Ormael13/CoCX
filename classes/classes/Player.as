@@ -10970,6 +10970,20 @@ use namespace CoC;
 			return boundFloat(0, cor - corruptionTolerance(), 100);
 		}
 
+		public function playerMinionsCount():Number {
+			var minions:Number = 0;
+			if (hasStatusEffect(StatusEffects.SummonedElementals)) minions += statusEffectv1(StatusEffects.SummonedElementals);
+			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) minions += flags[kFLAGS.PERMANENT_GOLEMS_BAG];
+			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) minions += flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG];
+			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) minions += flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG];
+			if (hasPerk(PerkLib.PrestigeJobNecromancer)) {
+				minions += perkv2(PerkLib.PrestigeJobNecromancer);
+				minions += perkv1(PerkLib.GreaterHarvest);
+				minions += perkv2(PerkLib.GreaterHarvest);
+			}
+			return minions;
+		}
+
 		public function newGamePlusMod():int {
 			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			//Constrains value between 0 and 5.
@@ -15421,3 +15435,4 @@ use namespace CoC;
 		}
 	}
 }
+
