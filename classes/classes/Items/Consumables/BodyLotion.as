@@ -1,4 +1,4 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
 import classes.EngineCore;
 import classes.Items.Consumable;
@@ -6,16 +6,17 @@ import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 import classes.PerkLib;
+import classes.BodyParts.*;
 
 /**
 	 * Body lotions, courtesy of Foxxling.
 	 * @author Kitteh6660
 	 */
-	public class BodyLotion extends Consumable 
+	public class BodyLotion extends Consumable
 	{
 		private var _adj:String;
-		
-		public function BodyLotion(id:String, adj:String, longAdj:String) 
+
+		public function BodyLotion(id:String, adj:String, longAdj:String)
 		{
 			this._adj = adj.toLowerCase();
 			var shortName:String = adj + " Ltn";
@@ -24,7 +25,7 @@ import classes.PerkLib;
 			var description:String = "A small wooden flask filled with a " + longAdj + " . A label across the front says, \"" + adj + " Lotion.\"";
 			super(id, shortName, longName, value, description);
 		}
-		
+
 		private function liquidDesc():String {
 			var liquidDesc:String = "";
 			switch(_adj) {
@@ -41,7 +42,7 @@ import classes.PerkLib;
 					}
 					break;
 				case "rough":
-					switch(Utils.rand(2)) { 
+					switch(Utils.rand(2)) {
 						case 0:
 							outputText("abrasive goop");
 							break;
@@ -84,7 +85,7 @@ import classes.PerkLib;
 			}
 			return liquidDesc;
 		}
-		
+
 		override public function useItem():Boolean {
 			if (game.player.skinAdj == _adj || player.blockingBodyTransformations()) {
 				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. Once you’ve finished you feel reinvigorated. ");
@@ -133,21 +134,41 @@ import classes.PerkLib;
 					}
 				} else if (game.player.hasScales()) {
 					outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
-					switch (_adj) {
-						case "smooth":
-							outputText("Soon you part your fur to reveal smooth skin that still appears natural.");
-							break;
-						case "rough":
-							outputText("Soon you part your fur to reveal rough skin that still appears natural.");
-							break;
-						case "sexy":
-							outputText("Soon you part your fur to reveal sexy skin that makes you want to kiss yourself.");
-							break;
-						case "clear":
-							outputText("Soon you part your fur to reveal the natural beauty of your " + game.player.skinFurScales() + " skin.");
-							break;
-						default: //Failsafe
-							outputText("<b>This text should not happen. Please let Ormael/Aimozg know.</b>");
+
+					if (game.player.skin.coverage > Skin.COVERAGE_MEDIUM) {
+						switch (_adj) {
+							case "smooth":
+								outputText("Soon your scales feel much smoother to the touch.");
+								break;
+							case "rough":
+								outputText("Soon your scales feel much rougher to the touch.");
+								break;
+							case "sexy":
+								outputText("Soon your scales feel much sexier, to the point you want to kiss yourself.");
+								break;
+							case "clear":
+								outputText("Soon your scales look perfectly natural.");
+								break;
+							default: //Failsafe
+								outputText("<b>This text should not happen. Please let Ormael/Aimozg know.</b>");
+						}
+					} else {
+						switch (_adj) {
+							case "smooth":
+								outputText("Soon both your skin and your scales feel much smoother to the touch.");
+								break;
+							case "rough":
+								outputText("Soon both your skin and your scales feel much rougher to the touch.");
+								break;
+							case "sexy":
+								outputText("Soon both your skin and your scales feel much sexier, to the point you want to kiss yourself.");
+								break;
+							case "clear":
+								outputText("Soon both your skin and your scales look perfectly natural.");
+								break;
+							default: //Failsafe
+								outputText("<b>This text should not happen. Please let Ormael/Aimozg know.</b>");
+						}
 					}
 				} else if (game.player.hasGooSkin()) {
 					outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
