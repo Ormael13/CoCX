@@ -159,7 +159,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You can't dig in open water!</b>\n\n");
 				}
 			}
-			if (player.hasPerk(PerkLib.OniDrinkingJug)){
+			if (player.miscJewelry == miscjewelries.ONI_GOURD || player.miscJewelry2 == miscjewelries.ONI_GOURD){
 				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Engulf
@@ -4917,10 +4917,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function Drink():void {
 		clearOutput();
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) {
-			player.addPerkValue(PerkLib.OniDrinkingJug, 1, 1);
-			CoC.instance.mutations.DrunkenPowerEmpower();
-		}
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) CoC.instance.mutations.DrunkenPowerEmpower();
 		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
 		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
 		enemyAI();

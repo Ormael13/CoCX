@@ -10,7 +10,7 @@ import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
 
-	public class OniGourd extends MiscJewelry
+	public class OniGourd extends MiscJewelry//likely to be deleted file at some point
 	{
 		
 		public function OniGourd()

@@ -53,10 +53,7 @@ public final class Mutations extends MutationsHelper {
             else bonusdepower -= (player.spe - 1);
         }
         bonusempower += (20 * (1 + player.newGamePlusMod()));
-		if (player.hasPerk(PerkLib.OniDrinkingJug) && player.perkv1(PerkLib.OniDrinkingJug) == 1) {
-			player.addPerkValue(PerkLib.OniDrinkingJug, 1, -1);
-			durationhour *= 2;
-		}
+		if (player.miscJewelry == miscjewelries.ONI_GOURD || player.miscJewelry2 == miscjewelries.ONI_GOURD) durationhour *= 2;
         player.statStore.replaceBuffObject({
             str: bonusempower,
             spe: -bonusdepower,
@@ -16613,3 +16610,4 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
+

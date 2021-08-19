@@ -1049,38 +1049,38 @@ package classes.Scenes.Camp
 		private function accessSummonElementalsMainMenu1():void {
 			menu();
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu).hint("Req. 100 mana, 50 fatigue");
-			if (player.hasPerk(PerkLib.ElementalContractRank1)) addButton(1, "RankUp(1)", rankUpSubmenu1st).hint("Req. 100 mana, 50 fatigue");
-			if (player.hasPerk(PerkLib.ElementalContractRank2)) addButton(2, "RankUp(2)", rankUpSubmenu2nd).hint("Req. 200 mana, 100 fatigue");
-			if (player.hasPerk(PerkLib.ElementalContractRank3)) addButton(3, "RankUp(3)", rankUpSubmenu3rd).hint("Req. 300 mana, 150 fatigue");
+			if (player.hasPerk(PerkLib.ElementalContractRank1)) addButton(1, "RankUp(1)", rankUpSubmenu1st);
+			if (player.hasPerk(PerkLib.ElementalContractRank2)) addButton(2, "RankUp(2)", rankUpSubmenu2nd);
+			if (player.hasPerk(PerkLib.ElementalContractRank3)) addButton(3, "RankUp(3)", rankUpSubmenu3rd);
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 2) {
-				if (player.hasPerk(PerkLib.ElementalContractRank4)) addButton(4, "RankUp(4)", rankUpSubmenu4th).hint("Req. 400 mana, 200 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank5)) addButton(5, "RankUp(5)", rankUpSubmenu5th).hint("Req. 500 mana, 250 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank6)) addButton(6, "RankUp(6)", rankUpSubmenu6th).hint("Req. 600 mana, 300 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank7)) addButton(7, "RankUp(7)", rankUpSubmenu7th).hint("Req. 700 mana, 350 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank4)) addButton(4, "RankUp(4)", rankUpSubmenu4th);
+				if (player.hasPerk(PerkLib.ElementalContractRank5)) addButton(5, "RankUp(5)", rankUpSubmenu5th);
+				if (player.hasPerk(PerkLib.ElementalContractRank6)) addButton(6, "RankUp(6)", rankUpSubmenu6th);
+				if (player.hasPerk(PerkLib.ElementalContractRank7)) addButton(7, "RankUp(7)", rankUpSubmenu7th);
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 3) {
-				if (player.hasPerk(PerkLib.ElementalContractRank8)) addButton(8, "RankUp(8)", rankUpSubmenu8th).hint("Req. 800 mana, 400 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank9)) addButton(9, "RankUp(9)", rankUpSubmenu9th).hint("Req. 900 mana, 450 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank10)) addButton(10, "RankUp(10)", rankUpSubmenu10th).hint("Req. 1000 mana, 500 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank11)) addButton(11, "RankUp(11)", rankUpSubmenu11th).hint("Req. 1100 mana, 550 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank8)) addButton(8, "RankUp(8)", rankUpSubmenu8th);
+				if (player.hasPerk(PerkLib.ElementalContractRank9)) addButton(9, "RankUp(9)", rankUpSubmenu9th);
+				if (player.hasPerk(PerkLib.ElementalContractRank10)) addButton(10, "RankUp(10)", rankUpSubmenu10th);
+				if (player.hasPerk(PerkLib.ElementalContractRank11)) addButton(11, "RankUp(11)", rankUpSubmenu11th);
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
-				if (player.hasPerk(PerkLib.ElementalContractRank12)) addButton(12, "RankUp(12)", rankUpSubmenu12th).hint("Req. 1200 mana, 600 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank13)) addButton(13, "RankUp(13)", rankUpSubmenu13th).hint("Req. 1300 mana, 650 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank12)) addButton(12, "RankUp(12)", rankUpSubmenu12th);
+				if (player.hasPerk(PerkLib.ElementalContractRank13)) addButton(13, "RankUp(13)", rankUpSubmenu13th);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function accessSummonElementalsMainMenu2():void {
 			menu();
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
-				if (player.hasPerk(PerkLib.ElementalContractRank14)) addButton(0, "RankUp(14)", rankUpSubmenu14th).hint("Req. 1400 mana, 700 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank15)) addButton(1, "RankUp(15)", rankUpSubmenu15th).hint("Req. 1500 mana, 750 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank14)) addButton(0, "RankUp(14)", rankUpSubmenu14th);
+				if (player.hasPerk(PerkLib.ElementalContractRank15)) addButton(1, "RankUp(15)", rankUpSubmenu15th);
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 5) {
-				if (player.hasPerk(PerkLib.ElementalContractRank16)) addButton(2, "RankUp(16)", rankUpSubmenu16th).hint("Req. 1600 mana, 800 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank17)) addButton(3, "RankUp(17)", rankUpSubmenu17th).hint("Req. 1700 mana, 850 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank18)) addButton(4, "RankUp(18)", rankUpSubmenu18th).hint("Req. 1800 mana, 900 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank19)) addButton(5, "RankUp(19)", rankUpSubmenu19th).hint("Req. 1900 mana, 950 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank16)) addButton(2, "RankUp(16)", rankUpSubmenu16th);
+				if (player.hasPerk(PerkLib.ElementalContractRank17)) addButton(3, "RankUp(17)", rankUpSubmenu17th);
+				if (player.hasPerk(PerkLib.ElementalContractRank18)) addButton(4, "RankUp(18)", rankUpSubmenu18th);
+				if (player.hasPerk(PerkLib.ElementalContractRank19)) addButton(5, "RankUp(19)", rankUpSubmenu19th);
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 6) {
 				if (player.hasPerk(PerkLib.ElementalContractRank20)) addButton(6, "RankUp(20)", rankUpSubmenu20th).hint("Req. 2000 mana, 1000 fatigue");
@@ -1133,622 +1133,622 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu1st():void {
-			outputText("\n\nIf you not have enough mana (100+) and fatigue (50+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()+"+) and fatigue ("+rankUpElementalFatigueCost()+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1) addButton(0, "Air", rankUpElementalAir).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1) addButton(1, "Earth", rankUpElementalEarth).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1) addButton(2, "Fire", rankUpElementalFire).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1) addButton(3, "Water", rankUpElementalWater).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1) addButton(4, "Ether", rankUpElementalEther).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1) addButton(5, "Wood", rankUpElementalWood).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1) addButton(6, "Metal", rankUpElementalMetal).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1) addButton(7, "Ice", rankUpElementalIce).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1) addButton(8, "Lightning", rankUpElementalLightning).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1) addButton(9, "Darkness", rankUpElementalDarkness).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 1) addButton(10, "Poison", rankUpElementalPoison).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 1) addButton(11, "Purity", rankUpElementalPurity).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 1) addButton(12, "Corruption", rankUpElementalCorruption).hint("100 mana, 50 fatigue");
+			if (player.mana >= rankUpElementalManaCost() && (player.fatigue + rankUpElementalFatigueCost() <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 1) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 1) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 1) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu2nd():void {
-			outputText("\n\nIf you not have enough mana (200+) and fatigue (100+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*2+"+) and fatigue ("+rankUpElementalFatigueCost()*2+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 200 && (player.fatigue + 100 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2) addButton(0, "Air", rankUpElementalAir).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2) addButton(1, "Earth", rankUpElementalEarth).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2) addButton(2, "Fire", rankUpElementalFire).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2) addButton(3, "Water", rankUpElementalWater).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2) addButton(4, "Ether", rankUpElementalEther).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2) addButton(5, "Wood", rankUpElementalWood).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2) addButton(6, "Metal", rankUpElementalMetal).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2) addButton(7, "Ice", rankUpElementalIce).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2) addButton(8, "Lightning", rankUpElementalLightning).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2) addButton(9, "Darkness", rankUpElementalDarkness).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 2) addButton(10, "Poison", rankUpElementalPoison).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 2) addButton(11, "Purity", rankUpElementalPurity).hint("200 mana, 100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 2) addButton(12, "Corruption", rankUpElementalCorruption).hint("200 mana, 100 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*2) && (player.fatigue + (rankUpElementalFatigueCost()*2) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 2) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 2) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 2) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu3rd():void {
-			outputText("\n\nIf you not have enough mana (300+) and fatigue (150+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*3+"+) and fatigue ("+rankUpElementalFatigueCost()*3+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 300 && (player.fatigue + 150 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) addButton(0, "Air", rankUpElementalAir).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3) addButton(1, "Earth", rankUpElementalEarth).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3) addButton(2, "Fire", rankUpElementalFire).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3) addButton(3, "Water", rankUpElementalWater).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3) addButton(4, "Ether", rankUpElementalEther).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3) addButton(5, "Wood", rankUpElementalWood).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3) addButton(6, "Metal", rankUpElementalMetal).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3) addButton(7, "Ice", rankUpElementalIce).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3) addButton(8, "Lightning", rankUpElementalLightning).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3) addButton(9, "Darkness", rankUpElementalDarkness).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 3) addButton(10, "Poison", rankUpElementalPoison).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 3) addButton(11, "Purity", rankUpElementalPurity).hint("300 mana, 150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 3) addButton(12, "Corruption", rankUpElementalCorruption).hint("300 mana, 150 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*3) && (player.fatigue + (rankUpElementalFatigueCost()*3) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 3) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 3) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 3) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu4th():void {
-			outputText("\n\nIf you not have enough mana (400+) and fatigue (200+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*4+"+) and fatigue ("+rankUpElementalFatigueCost()*4+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 400 && (player.fatigue + 200 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) addButton(0, "Air", rankUpElementalAir).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4) addButton(1, "Earth", rankUpElementalEarth).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4) addButton(2, "Fire", rankUpElementalFire).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4) addButton(3, "Water", rankUpElementalWater).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4) addButton(4, "Ether", rankUpElementalEther).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4) addButton(5, "Wood", rankUpElementalWood).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4) addButton(6, "Metal", rankUpElementalMetal).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) addButton(7, "Ice", rankUpElementalIce).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) addButton(8, "Lightning", rankUpElementalLightning).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) addButton(9, "Darkness", rankUpElementalDarkness).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 4) addButton(10, "Poison", rankUpElementalPoison).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 4) addButton(11, "Purity", rankUpElementalPurity).hint("400 mana, 200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 4) addButton(12, "Corruption", rankUpElementalCorruption).hint("400 mana, 200 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*4) && (player.fatigue + (rankUpElementalFatigueCost()*4) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 4) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 4) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 4) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu5th():void {
-			outputText("\n\nIf you not have enough mana (500+) and fatigue (250+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*5+"+) and fatigue ("+rankUpElementalFatigueCost()*5+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 500 && (player.fatigue + 250 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) addButton(0, "Air", rankUpElementalAir).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5) addButton(1, "Earth", rankUpElementalEarth).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5) addButton(2, "Fire", rankUpElementalFire).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5) addButton(3, "Water", rankUpElementalWater).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5) addButton(4, "Ether", rankUpElementalEther).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5) addButton(5, "Wood", rankUpElementalWood).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5) addButton(6, "Metal", rankUpElementalMetal).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5) addButton(7, "Ice", rankUpElementalIce).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5) addButton(8, "Lightning", rankUpElementalLightning).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5) addButton(9, "Darkness", rankUpElementalDarkness).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 5) addButton(10, "Poison", rankUpElementalPoison).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 5) addButton(11, "Purity", rankUpElementalPurity).hint("500 mana, 250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 5) addButton(12, "Corruption", rankUpElementalCorruption).hint("500 mana, 250 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*5) && (player.fatigue + (rankUpElementalFatigueCost()*5) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 5) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 5) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 5) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu6th():void {
-			outputText("\n\nIf you not have enough mana (600+) and fatigue (300+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*6+"+) and fatigue ("+rankUpElementalFatigueCost()*6+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 600 && (player.fatigue + 300 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) addButton(0, "Air", rankUpElementalAir).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6) addButton(1, "Earth", rankUpElementalEarth).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6) addButton(2, "Fire", rankUpElementalFire).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6) addButton(3, "Water", rankUpElementalWater).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6) addButton(4, "Ether", rankUpElementalEther).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6) addButton(5, "Wood", rankUpElementalWood).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6) addButton(6, "Metal", rankUpElementalMetal).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6) addButton(7, "Ice", rankUpElementalIce).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6) addButton(8, "Lightning", rankUpElementalLightning).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6) addButton(9, "Darkness", rankUpElementalDarkness).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 6) addButton(10, "Poison", rankUpElementalPoison).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 6) addButton(11, "Purity", rankUpElementalPurity).hint("600 mana, 300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 6) addButton(12, "Corruption", rankUpElementalCorruption).hint("600 mana, 300 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*6) && (player.fatigue + (rankUpElementalFatigueCost()*6) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 6) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 6) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 6) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu7th():void {
-			outputText("\n\nIf you not have enough mana (700+) and fatigue (350+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*7+"+) and fatigue ("+rankUpElementalFatigueCost()*7+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 700 && (player.fatigue + 350 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) addButton(0, "Air", rankUpElementalAir).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7) addButton(1, "Earth", rankUpElementalEarth).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7) addButton(2, "Fire", rankUpElementalFire).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7) addButton(3, "Water", rankUpElementalWater).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7) addButton(4, "Ether", rankUpElementalEther).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7) addButton(5, "Wood", rankUpElementalWood).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7) addButton(6, "Metal", rankUpElementalMetal).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7) addButton(7, "Ice", rankUpElementalIce).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7) addButton(8, "Lightning", rankUpElementalLightning).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7) addButton(9, "Darkness", rankUpElementalDarkness).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 7) addButton(10, "Poison", rankUpElementalPoison).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 7) addButton(11, "Purity", rankUpElementalPurity).hint("700 mana, 350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 7) addButton(12, "Corruption", rankUpElementalCorruption).hint("700 mana, 350 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*7) && (player.fatigue + (rankUpElementalFatigueCost()*7) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 7) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 7) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 7) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu8th():void {
-			outputText("\n\nIf you not have enough mana (800+) and fatigue (400+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*8+"+) and fatigue ("+rankUpElementalFatigueCost()*8+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 800 && (player.fatigue + 400 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8) addButton(0, "Air", rankUpElementalAir).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8) addButton(1, "Earth", rankUpElementalEarth).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8) addButton(2, "Fire", rankUpElementalFire).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8) addButton(3, "Water", rankUpElementalWater).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8) addButton(4, "Ether", rankUpElementalEther).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8) addButton(5, "Wood", rankUpElementalWood).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8) addButton(6, "Metal", rankUpElementalMetal).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8) addButton(7, "Ice", rankUpElementalIce).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8) addButton(8, "Lightning", rankUpElementalLightning).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8) addButton(9, "Darkness", rankUpElementalDarkness).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 8) addButton(10, "Poison", rankUpElementalPoison).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 8) addButton(11, "Purity", rankUpElementalPurity).hint("800 mana, 400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 8) addButton(12, "Corruption", rankUpElementalCorruption).hint("800 mana, 400 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*8) && (player.fatigue + (rankUpElementalFatigueCost()*8) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 8) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 8) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 8) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu9th():void {
-			outputText("\n\nIf you not have enough mana (900+) and fatigue (450+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*9+"+) and fatigue ("+rankUpElementalFatigueCost()*9+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 900 && (player.fatigue + 450 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 9) addButton(0, "Air", rankUpElementalAir).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 9) addButton(1, "Earth", rankUpElementalEarth).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 9) addButton(2, "Fire", rankUpElementalFire).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 9) addButton(3, "Water", rankUpElementalWater).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) addButton(4, "Ether", rankUpElementalEther).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) addButton(5, "Wood", rankUpElementalWood).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) addButton(6, "Metal", rankUpElementalMetal).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 9) addButton(7, "Ice", rankUpElementalIce).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 9) addButton(8, "Lightning", rankUpElementalLightning).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 9) addButton(9, "Darkness", rankUpElementalDarkness).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 9) addButton(10, "Poison", rankUpElementalPoison).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 9) addButton(11, "Purity", rankUpElementalPurity).hint("900 mana, 450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 9) addButton(12, "Corruption", rankUpElementalCorruption).hint("900 mana, 450 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*9) && (player.fatigue + (rankUpElementalFatigueCost()*9) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 9) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 9) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 9) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 9) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 9) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 9) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 9) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 9) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 9) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 9) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu10th():void {
-			outputText("\n\nIf you not have enough mana (1000+) and fatigue (500+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*10+"+) and fatigue ("+rankUpElementalFatigueCost()*10+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1000 && (player.fatigue + 500 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 10) addButton(0, "Air", rankUpElementalAir).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 10) addButton(1, "Earth", rankUpElementalEarth).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 10) addButton(2, "Fire", rankUpElementalFire).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 10) addButton(3, "Water", rankUpElementalWater).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 10) addButton(4, "Ether", rankUpElementalEther).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 10) addButton(5, "Wood", rankUpElementalWood).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 10) addButton(6, "Metal", rankUpElementalMetal).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 10) addButton(7, "Ice", rankUpElementalIce).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 10) addButton(8, "Lightning", rankUpElementalLightning).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 10) addButton(9, "Darkness", rankUpElementalDarkness).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 10) addButton(10, "Poison", rankUpElementalPoison).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 10) addButton(11, "Purity", rankUpElementalPurity).hint("1000 mana, 500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 10) addButton(12, "Corruption", rankUpElementalCorruption).hint("1000 mana, 500 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*10) && (player.fatigue + (rankUpElementalFatigueCost()*10) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 10) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 10) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 10) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 10) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 10) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 10) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 10) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 10) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 10) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 10) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 10) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 10) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 10) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu11th():void {
-			outputText("\n\nIf you not have enough mana (1100+) and fatigue (550+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*11+"+) and fatigue ("+rankUpElementalFatigueCost()*11+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1100 && (player.fatigue + 550 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 11) addButton(0, "Air", rankUpElementalAir).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 11) addButton(1, "Earth", rankUpElementalEarth).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 11) addButton(2, "Fire", rankUpElementalFire).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 11) addButton(3, "Water", rankUpElementalWater).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 11) addButton(4, "Ether", rankUpElementalEther).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 11) addButton(5, "Wood", rankUpElementalWood).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 11) addButton(6, "Metal", rankUpElementalMetal).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 11) addButton(7, "Ice", rankUpElementalIce).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 11) addButton(8, "Lightning", rankUpElementalLightning).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 11) addButton(9, "Darkness", rankUpElementalDarkness).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 11) addButton(10, "Poison", rankUpElementalPoison).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 11) addButton(11, "Purity", rankUpElementalPurity).hint("1100 mana, 550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 11) addButton(12, "Corruption", rankUpElementalCorruption).hint("1100 mana, 550 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*11) && (player.fatigue + (rankUpElementalFatigueCost()*11) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 11) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 11) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 11) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 11) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 11) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 11) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 11) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 11) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 11) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 11) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 11) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 11) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 11) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu12th():void {
-			outputText("\n\nIf you not have enough mana (1200+) and fatigue (600+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*12+"+) and fatigue ("+rankUpElementalFatigueCost()*12+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1200 && (player.fatigue + 600 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 12) addButton(0, "Air", rankUpElementalAir).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 12) addButton(1, "Earth", rankUpElementalEarth).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 12) addButton(2, "Fire", rankUpElementalFire).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 12) addButton(3, "Water", rankUpElementalWater).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 12) addButton(4, "Ether", rankUpElementalEther).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 12) addButton(5, "Wood", rankUpElementalWood).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 12) addButton(6, "Metal", rankUpElementalMetal).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 12) addButton(7, "Ice", rankUpElementalIce).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 12) addButton(8, "Lightning", rankUpElementalLightning).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 12) addButton(9, "Darkness", rankUpElementalDarkness).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 12) addButton(10, "Poison", rankUpElementalPoison).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 12) addButton(11, "Purity", rankUpElementalPurity).hint("1200 mana, 600 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 12) addButton(12, "Corruption", rankUpElementalCorruption).hint("1200 mana, 600 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*12) && (player.fatigue + (rankUpElementalFatigueCost()*12) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 12) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 12) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 12) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 12) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 12) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 12) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 12) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 12) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 12) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 12) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 12) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 12) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 12) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu13th():void {
-			outputText("\n\nIf you not have enough mana (1300+) and fatigue (650+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*13+"+) and fatigue ("+rankUpElementalFatigueCost()*13+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1300 && (player.fatigue + 650 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 13) addButton(0, "Air", rankUpElementalAir).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 13) addButton(1, "Earth", rankUpElementalEarth).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 13) addButton(2, "Fire", rankUpElementalFire).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 13) addButton(3, "Water", rankUpElementalWater).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 13) addButton(4, "Ether", rankUpElementalEther).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 13) addButton(5, "Wood", rankUpElementalWood).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 13) addButton(6, "Metal", rankUpElementalMetal).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 13) addButton(7, "Ice", rankUpElementalIce).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 13) addButton(8, "Lightning", rankUpElementalLightning).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 13) addButton(9, "Darkness", rankUpElementalDarkness).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 13) addButton(10, "Poison", rankUpElementalPoison).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 13) addButton(11, "Purity", rankUpElementalPurity).hint("1300 mana, 650 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 13) addButton(12, "Corruption", rankUpElementalCorruption).hint("1300 mana, 650 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*13) && (player.fatigue + (rankUpElementalFatigueCost()*13) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 13) addButton(0, "Air", rankUpElementalAir)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 13) addButton(1, "Earth", rankUpElementalEarth)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 13) addButton(2, "Fire", rankUpElementalFire)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 13) addButton(3, "Water", rankUpElementalWater)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 13) addButton(4, "Ether", rankUpElementalEther)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 13) addButton(5, "Wood", rankUpElementalWood)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 13) addButton(6, "Metal", rankUpElementalMetal)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 13) addButton(7, "Ice", rankUpElementalIce)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 13) addButton(8, "Lightning", rankUpElementalLightning)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 13) addButton(9, "Darkness", rankUpElementalDarkness)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 13) addButton(10, "Poison", rankUpElementalPoison)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 13) addButton(11, "Purity", rankUpElementalPurity)
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 13) addButton(12, "Corruption", rankUpElementalCorruption)
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu14th():void {
-			outputText("\n\nIf you not have enough mana (1400+) and fatigue (700+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*14+"+) and fatigue ("+rankUpElementalFatigueCost()*14+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1400 && (player.fatigue + 700 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 14) addButton(0, "Air", rankUpElementalAir).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 14) addButton(1, "Earth", rankUpElementalEarth).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 14) addButton(2, "Fire", rankUpElementalFire).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 14) addButton(3, "Water", rankUpElementalWater).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 14) addButton(4, "Ether", rankUpElementalEther).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 14) addButton(5, "Wood", rankUpElementalWood).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 14) addButton(6, "Metal", rankUpElementalMetal).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 14) addButton(7, "Ice", rankUpElementalIce).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 14) addButton(8, "Lightning", rankUpElementalLightning).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 14) addButton(9, "Darkness", rankUpElementalDarkness).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 14) addButton(10, "Poison", rankUpElementalPoison).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 14) addButton(11, "Purity", rankUpElementalPurity).hint("1400 mana, 700 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 14) addButton(12, "Corruption", rankUpElementalCorruption).hint("1400 mana, 700 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*14) && (player.fatigue + (rankUpElementalFatigueCost()*14) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 14) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 14) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 14) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 14) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 14) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 14) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 14) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 14) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 14) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 14) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 14) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 14) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 14) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu15th():void {
-			outputText("\n\nIf you not have enough mana (1500+) and fatigue (750+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*15+"+) and fatigue ("+rankUpElementalFatigueCost()*15+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1500 && (player.fatigue + 750 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 15) addButton(0, "Air", rankUpElementalAir).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 15) addButton(1, "Earth", rankUpElementalEarth).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 15) addButton(2, "Fire", rankUpElementalFire).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 15) addButton(3, "Water", rankUpElementalWater).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 15) addButton(4, "Ether", rankUpElementalEther).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 15) addButton(5, "Wood", rankUpElementalWood).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 15) addButton(6, "Metal", rankUpElementalMetal).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 15) addButton(7, "Ice", rankUpElementalIce).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 15) addButton(8, "Lightning", rankUpElementalLightning).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 15) addButton(9, "Darkness", rankUpElementalDarkness).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 15) addButton(10, "Poison", rankUpElementalPoison).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 15) addButton(11, "Purity", rankUpElementalPurity).hint("1500 mana, 750 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 15) addButton(12, "Corruption", rankUpElementalCorruption).hint("1500 mana, 750 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*15) && (player.fatigue + (rankUpElementalFatigueCost()*15) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 15) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 15) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 15) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 15) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 15) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 15) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 15) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 15) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 15) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 15) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 15) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 15) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 15) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu16th():void {
-			outputText("\n\nIf you not have enough mana (1600+) and fatigue (800+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*16+"+) and fatigue ("+rankUpElementalFatigueCost()*16+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1600 && (player.fatigue + 800 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 16) addButton(0, "Air", rankUpElementalAir).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 16) addButton(1, "Earth", rankUpElementalEarth).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 16) addButton(2, "Fire", rankUpElementalFire).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 16) addButton(3, "Water", rankUpElementalWater).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 16) addButton(4, "Ether", rankUpElementalEther).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 16) addButton(5, "Wood", rankUpElementalWood).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 16) addButton(6, "Metal", rankUpElementalMetal).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 16) addButton(7, "Ice", rankUpElementalIce).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 16) addButton(8, "Lightning", rankUpElementalLightning).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 16) addButton(9, "Darkness", rankUpElementalDarkness).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 16) addButton(10, "Poison", rankUpElementalPoison).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 16) addButton(11, "Purity", rankUpElementalPurity).hint("1600 mana, 800 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 16) addButton(12, "Corruption", rankUpElementalCorruption).hint("1600 mana, 800 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*16) && (player.fatigue + (rankUpElementalFatigueCost()*16) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 16) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 16) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 16) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 16) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 16) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 16) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 16) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 16) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 16) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 16) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 16) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 16) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 16) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu17th():void {
-			outputText("\n\nIf you not have enough mana (1700+) and fatigue (850+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*17+"+) and fatigue ("+rankUpElementalFatigueCost()*17+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1700 && (player.fatigue + 850 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 17) addButton(0, "Air", rankUpElementalAir).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 17) addButton(1, "Earth", rankUpElementalEarth).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 17) addButton(2, "Fire", rankUpElementalFire).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 17) addButton(3, "Water", rankUpElementalWater).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 17) addButton(4, "Ether", rankUpElementalEther).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 17) addButton(5, "Wood", rankUpElementalWood).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 17) addButton(6, "Metal", rankUpElementalMetal).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 17) addButton(7, "Ice", rankUpElementalIce).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 17) addButton(8, "Lightning", rankUpElementalLightning).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 17) addButton(9, "Darkness", rankUpElementalDarkness).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 17) addButton(10, "Poison", rankUpElementalPoison).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 17) addButton(11, "Purity", rankUpElementalPurity).hint("1700 mana, 850 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 17) addButton(12, "Corruption", rankUpElementalCorruption).hint("1700 mana, 850 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*17) && (player.fatigue + (rankUpElementalFatigueCost()*17) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 17) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 17) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 17) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 17) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 17) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 17) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 17) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 17) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 17) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 17) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 17) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 17) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 17) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu18th():void {
-			outputText("\n\nIf you not have enough mana (1800+) and fatigue (900+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*18+"+) and fatigue ("+rankUpElementalFatigueCost()*18+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1800 && (player.fatigue + 900 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 18) addButton(0, "Air", rankUpElementalAir).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 18) addButton(1, "Earth", rankUpElementalEarth).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 18) addButton(2, "Fire", rankUpElementalFire).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 18) addButton(3, "Water", rankUpElementalWater).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 18) addButton(4, "Ether", rankUpElementalEther).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 18) addButton(5, "Wood", rankUpElementalWood).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 18) addButton(6, "Metal", rankUpElementalMetal).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 18) addButton(7, "Ice", rankUpElementalIce).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 18) addButton(8, "Lightning", rankUpElementalLightning).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 18) addButton(9, "Darkness", rankUpElementalDarkness).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 18) addButton(10, "Poison", rankUpElementalPoison).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 18) addButton(11, "Purity", rankUpElementalPurity).hint("1800 mana, 900 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 18) addButton(12, "Corruption", rankUpElementalCorruption).hint("1800 mana, 900 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*18) && (player.fatigue + (rankUpElementalFatigueCost()*18) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 18) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 18) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 18) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 18) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 18) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 18) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 18) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 18) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 18) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 18) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 18) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 18) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 18) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu19th():void {
-			outputText("\n\nIf you not have enough mana (1900+) and fatigue (950+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*19+"+) and fatigue ("+rankUpElementalFatigueCost()*19+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 1900 && (player.fatigue + 950 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 19) addButton(0, "Air", rankUpElementalAir).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 19) addButton(1, "Earth", rankUpElementalEarth).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 19) addButton(2, "Fire", rankUpElementalFire).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 19) addButton(3, "Water", rankUpElementalWater).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 19) addButton(4, "Ether", rankUpElementalEther).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 19) addButton(5, "Wood", rankUpElementalWood).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 19) addButton(6, "Metal", rankUpElementalMetal).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 19) addButton(7, "Ice", rankUpElementalIce).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 19) addButton(8, "Lightning", rankUpElementalLightning).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 19) addButton(9, "Darkness", rankUpElementalDarkness).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 19) addButton(10, "Poison", rankUpElementalPoison).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 19) addButton(11, "Purity", rankUpElementalPurity).hint("1900 mana, 950 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 19) addButton(12, "Corruption", rankUpElementalCorruption).hint("1900 mana, 950 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*19) && (player.fatigue + (rankUpElementalFatigueCost()*19) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 19) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 19) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 19) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 19) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 19) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 19) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 19) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 19) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 19) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 19) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 19) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 19) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 19) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu20th():void {
-			outputText("\n\nIf you not have enough mana (2000+) and fatigue (1000+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*20+"+) and fatigue ("+rankUpElementalFatigueCost()*20+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2000 && (player.fatigue + 1000 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 20) addButton(0, "Air", rankUpElementalAir).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 20) addButton(1, "Earth", rankUpElementalEarth).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 20) addButton(2, "Fire", rankUpElementalFire).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 20) addButton(3, "Water", rankUpElementalWater).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 20) addButton(4, "Ether", rankUpElementalEther).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 20) addButton(5, "Wood", rankUpElementalWood).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 20) addButton(6, "Metal", rankUpElementalMetal).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 20) addButton(7, "Ice", rankUpElementalIce).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 20) addButton(8, "Lightning", rankUpElementalLightning).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 20) addButton(9, "Darkness", rankUpElementalDarkness).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 20) addButton(10, "Poison", rankUpElementalPoison).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 20) addButton(11, "Purity", rankUpElementalPurity).hint("2000 mana, 1000 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 20) addButton(12, "Corruption", rankUpElementalCorruption).hint("2000 mana, 1000 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*20) && (player.fatigue + (rankUpElementalFatigueCost()*20) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 20) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 20) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 20) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 20) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 20) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 20) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 20) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 20) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 20) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 20) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 20) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 20) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 20) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu21th():void {
-			outputText("\n\nIf you not have enough mana (2100+) and fatigue (1050+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*21+"+) and fatigue ("+rankUpElementalFatigueCost()*21+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2100 && (player.fatigue + 1050 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 21) addButton(0, "Air", rankUpElementalAir).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 21) addButton(1, "Earth", rankUpElementalEarth).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 21) addButton(2, "Fire", rankUpElementalFire).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 21) addButton(3, "Water", rankUpElementalWater).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 21) addButton(4, "Ether", rankUpElementalEther).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 21) addButton(5, "Wood", rankUpElementalWood).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 21) addButton(6, "Metal", rankUpElementalMetal).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 21) addButton(7, "Ice", rankUpElementalIce).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 21) addButton(8, "Lightning", rankUpElementalLightning).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 21) addButton(9, "Darkness", rankUpElementalDarkness).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 21) addButton(10, "Poison", rankUpElementalPoison).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 21) addButton(11, "Purity", rankUpElementalPurity).hint("2100 mana, 1050 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 21) addButton(12, "Corruption", rankUpElementalCorruption).hint("2100 mana, 1050 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*21) && (player.fatigue + (rankUpElementalFatigueCost()*21) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 21) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 21) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 21) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 21) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 21) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 21) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 21) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 21) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 21) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 21) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 21) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 21) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 21) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu22th():void {
-			outputText("\n\nIf you not have enough mana (2200+) and fatigue (1100+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*22+"+) and fatigue ("+rankUpElementalFatigueCost()*22+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2200 && (player.fatigue + 1100 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 22) addButton(0, "Air", rankUpElementalAir).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 22) addButton(1, "Earth", rankUpElementalEarth).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 22) addButton(2, "Fire", rankUpElementalFire).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 22) addButton(3, "Water", rankUpElementalWater).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 22) addButton(4, "Ether", rankUpElementalEther).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 22) addButton(5, "Wood", rankUpElementalWood).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 22) addButton(6, "Metal", rankUpElementalMetal).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 22) addButton(7, "Ice", rankUpElementalIce).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 22) addButton(8, "Lightning", rankUpElementalLightning).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 22) addButton(9, "Darkness", rankUpElementalDarkness).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 22) addButton(10, "Poison", rankUpElementalPoison).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 22) addButton(11, "Purity", rankUpElementalPurity).hint("2200 mana, 1100 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 22) addButton(12, "Corruption", rankUpElementalCorruption).hint("2200 mana, 1100 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*22) && (player.fatigue + (rankUpElementalFatigueCost()*22) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 22) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 22) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 22) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 22) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 22) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 22) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 22) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 22) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 22) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 22) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 22) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 22) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 22) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu23th():void {
-			outputText("\n\nIf you not have enough mana (2300+) and fatigue (1150+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*23+"+) and fatigue ("+rankUpElementalFatigueCost()*23+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2300 && (player.fatigue + 1150 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 23) addButton(0, "Air", rankUpElementalAir).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 23) addButton(1, "Earth", rankUpElementalEarth).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 23) addButton(2, "Fire", rankUpElementalFire).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 23) addButton(3, "Water", rankUpElementalWater).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 23) addButton(4, "Ether", rankUpElementalEther).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 23) addButton(5, "Wood", rankUpElementalWood).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 23) addButton(6, "Metal", rankUpElementalMetal).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 23) addButton(7, "Ice", rankUpElementalIce).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 23) addButton(8, "Lightning", rankUpElementalLightning).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 23) addButton(9, "Darkness", rankUpElementalDarkness).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 23) addButton(10, "Poison", rankUpElementalPoison).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 23) addButton(11, "Purity", rankUpElementalPurity).hint("2300 mana, 1150 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 23) addButton(12, "Corruption", rankUpElementalCorruption).hint("2300 mana, 1150 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*23) && (player.fatigue + (rankUpElementalFatigueCost()*23) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 23) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 23) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 23) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 23) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 23) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 23) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 23) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 23) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 23) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 23) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 23) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 23) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 23) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu24th():void {
-			outputText("\n\nIf you not have enough mana (2400+) and fatigue (1200+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*24+"+) and fatigue ("+rankUpElementalFatigueCost()*24+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2400 && (player.fatigue + 1200 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 24) addButton(0, "Air", rankUpElementalAir).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 24) addButton(1, "Earth", rankUpElementalEarth).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 24) addButton(2, "Fire", rankUpElementalFire).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 24) addButton(3, "Water", rankUpElementalWater).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 24) addButton(4, "Ether", rankUpElementalEther).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 24) addButton(5, "Wood", rankUpElementalWood).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 24) addButton(6, "Metal", rankUpElementalMetal).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 24) addButton(7, "Ice", rankUpElementalIce).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 24) addButton(8, "Lightning", rankUpElementalLightning).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 24) addButton(9, "Darkness", rankUpElementalDarkness).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 24) addButton(10, "Poison", rankUpElementalPoison).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 24) addButton(11, "Purity", rankUpElementalPurity).hint("2400 mana, 1200 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 24) addButton(12, "Corruption", rankUpElementalCorruption).hint("2400 mana, 1200 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*24) && (player.fatigue + (rankUpElementalFatigueCost()*24) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 24) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 24) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 24) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 24) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 24) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 24) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 24) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 24) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 24) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 24) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 24) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 24) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 24) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu25th():void {
-			outputText("\n\nIf you not have enough mana (2500+) and fatigue (1250+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*25+"+) and fatigue ("+rankUpElementalFatigueCost()*25+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2500 && (player.fatigue + 1250 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 25) addButton(0, "Air", rankUpElementalAir).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 25) addButton(1, "Earth", rankUpElementalEarth).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 25) addButton(2, "Fire", rankUpElementalFire).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 25) addButton(3, "Water", rankUpElementalWater).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 25) addButton(4, "Ether", rankUpElementalEther).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 25) addButton(5, "Wood", rankUpElementalWood).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 25) addButton(6, "Metal", rankUpElementalMetal).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 25) addButton(7, "Ice", rankUpElementalIce).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 25) addButton(8, "Lightning", rankUpElementalLightning).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 25) addButton(9, "Darkness", rankUpElementalDarkness).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 25) addButton(10, "Poison", rankUpElementalPoison).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 25) addButton(11, "Purity", rankUpElementalPurity).hint("2500 mana, 1250 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 25) addButton(12, "Corruption", rankUpElementalCorruption).hint("2500 mana, 1250 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*25) && (player.fatigue + (rankUpElementalFatigueCost()*25) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 25) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 25) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 25) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 25) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 25) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 25) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 25) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 25) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 25) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 25) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 25) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 25) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 25) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu26th():void {
-			outputText("\n\nIf you not have enough mana (2600+) and fatigue (1300+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*26+"+) and fatigue ("+rankUpElementalFatigueCost()*26+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2600 && (player.fatigue + 1300 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 26) addButton(0, "Air", rankUpElementalAir).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 26) addButton(1, "Earth", rankUpElementalEarth).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 26) addButton(2, "Fire", rankUpElementalFire).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 26) addButton(3, "Water", rankUpElementalWater).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 26) addButton(4, "Ether", rankUpElementalEther).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 26) addButton(5, "Wood", rankUpElementalWood).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 26) addButton(6, "Metal", rankUpElementalMetal).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 26) addButton(7, "Ice", rankUpElementalIce).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 26) addButton(8, "Lightning", rankUpElementalLightning).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 26) addButton(9, "Darkness", rankUpElementalDarkness).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 26) addButton(10, "Poison", rankUpElementalPoison).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 26) addButton(11, "Purity", rankUpElementalPurity).hint("2600 mana, 1300 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 26) addButton(12, "Corruption", rankUpElementalCorruption).hint("2600 mana, 1300 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*26) && (player.fatigue + (rankUpElementalFatigueCost()*26) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 26) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 26) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 26) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 26) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 26) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 26) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 26) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 26) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 26) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 26) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 26) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 26) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 26) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu27th():void {
-			outputText("\n\nIf you not have enough mana (2700+) and fatigue (1350+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*27+"+) and fatigue ("+rankUpElementalFatigueCost()*27+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2700 && (player.fatigue + 1350 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 27) addButton(0, "Air", rankUpElementalAir).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 27) addButton(1, "Earth", rankUpElementalEarth).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 27) addButton(2, "Fire", rankUpElementalFire).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 27) addButton(3, "Water", rankUpElementalWater).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 27) addButton(4, "Ether", rankUpElementalEther).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 27) addButton(5, "Wood", rankUpElementalWood).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 27) addButton(6, "Metal", rankUpElementalMetal).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 27) addButton(7, "Ice", rankUpElementalIce).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 27) addButton(8, "Lightning", rankUpElementalLightning).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 27) addButton(9, "Darkness", rankUpElementalDarkness).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 27) addButton(10, "Poison", rankUpElementalPoison).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 27) addButton(11, "Purity", rankUpElementalPurity).hint("2700 mana, 1350 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 27) addButton(12, "Corruption", rankUpElementalCorruption).hint("2700 mana, 1350 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*27) && (player.fatigue + (rankUpElementalFatigueCost()*27) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 27) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 27) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 27) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 27) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 27) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 27) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 27) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 27) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 27) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 27) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 27) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 27) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 27) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu28th():void {
-			outputText("\n\nIf you not have enough mana (2800+) and fatigue (1400+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*28+"+) and fatigue ("+rankUpElementalFatigueCost()*28+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2800 && (player.fatigue + 1400 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 28) addButton(0, "Air", rankUpElementalAir).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 28) addButton(1, "Earth", rankUpElementalEarth).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 28) addButton(2, "Fire", rankUpElementalFire).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 28) addButton(3, "Water", rankUpElementalWater).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 28) addButton(4, "Ether", rankUpElementalEther).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 28) addButton(5, "Wood", rankUpElementalWood).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 28) addButton(6, "Metal", rankUpElementalMetal).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 28) addButton(7, "Ice", rankUpElementalIce).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 28) addButton(8, "Lightning", rankUpElementalLightning).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 28) addButton(9, "Darkness", rankUpElementalDarkness).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 28) addButton(10, "Poison", rankUpElementalPoison).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 28) addButton(11, "Purity", rankUpElementalPurity).hint("2800 mana, 1400 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 28) addButton(12, "Corruption", rankUpElementalCorruption).hint("2800 mana, 1400 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*28) && (player.fatigue + (rankUpElementalFatigueCost()*28) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 28) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 28) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 28) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 28) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 28) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 28) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 28) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 28) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 28) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 28) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 28) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 28) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 28) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
 		}
 		private function rankUpSubmenu29th():void {
-			outputText("\n\nIf you not have enough mana (2900+) and fatigue (1550+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*29+"+) and fatigue ("+rankUpElementalFatigueCost()*29+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 2900 && (player.fatigue + 1450 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 29) addButton(0, "Air", rankUpElementalAir).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 29) addButton(1, "Earth", rankUpElementalEarth).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 29) addButton(2, "Fire", rankUpElementalFire).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 29) addButton(3, "Water", rankUpElementalWater).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 29) addButton(4, "Ether", rankUpElementalEther).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 29) addButton(5, "Wood", rankUpElementalWood).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 29) addButton(6, "Metal", rankUpElementalMetal).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 29) addButton(7, "Ice", rankUpElementalIce).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 29) addButton(8, "Lightning", rankUpElementalLightning).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 29) addButton(9, "Darkness", rankUpElementalDarkness).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 29) addButton(10, "Poison", rankUpElementalPoison).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 29) addButton(11, "Purity", rankUpElementalPurity).hint("2900 mana, 1450 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 29) addButton(12, "Corruption", rankUpElementalCorruption).hint("2900 mana, 1450 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*29) && (player.fatigue + (rankUpElementalFatigueCost()*29) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 29) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 29) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 29) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 29) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 29) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 29) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 29) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 29) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 29) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 29) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 29) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 29) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 29) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
 		}
 		private function rankUpSubmenu30th():void {
-			outputText("\n\nIf you not have enough mana (3000+) and fatigue (150+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*30+"+) and fatigue ("+rankUpElementalFatigueCost()*30+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 3000 && (player.fatigue + 1500 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 30) addButton(0, "Air", rankUpElementalAir).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 30) addButton(1, "Earth", rankUpElementalEarth).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 30) addButton(2, "Fire", rankUpElementalFire).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 30) addButton(3, "Water", rankUpElementalWater).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 30) addButton(4, "Ether", rankUpElementalEther).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 30) addButton(5, "Wood", rankUpElementalWood).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 30) addButton(6, "Metal", rankUpElementalMetal).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 30) addButton(7, "Ice", rankUpElementalIce).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 30) addButton(8, "Lightning", rankUpElementalLightning).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 30) addButton(9, "Darkness", rankUpElementalDarkness).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 30) addButton(10, "Poison", rankUpElementalPoison).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 30) addButton(11, "Purity", rankUpElementalPurity).hint("3000 mana, 1500 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 30) addButton(12, "Corruption", rankUpElementalCorruption).hint("3000 mana, 1500 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*30) && (player.fatigue + (rankUpElementalFatigueCost()*30) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 30) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 30) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 30) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 30) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 30) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 30) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 30) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 30) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 30) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 30) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 30) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 30) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 30) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
 		}
 		private function rankUpSubmenu31th():void {
-			outputText("\n\nIf you not have enough mana (3100+) and fatigue (1550+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*31+"+) and fatigue ("+rankUpElementalFatigueCost()*31+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
-			if (player.mana >= 3100 && (player.fatigue + 1550 <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 31) addButton(0, "Air", rankUpElementalAir).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 31) addButton(1, "Earth", rankUpElementalEarth).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 31) addButton(2, "Fire", rankUpElementalFire).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 31) addButton(3, "Water", rankUpElementalWater).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 31) addButton(4, "Ether", rankUpElementalEther).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 31) addButton(5, "Wood", rankUpElementalWood).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 31) addButton(6, "Metal", rankUpElementalMetal).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 31) addButton(7, "Ice", rankUpElementalIce).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 31) addButton(8, "Lightning", rankUpElementalLightning).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 31) addButton(9, "Darkness", rankUpElementalDarkness).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 31) addButton(10, "Poison", rankUpElementalPoison).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 31) addButton(11, "Purity", rankUpElementalPurity).hint("3100 mana, 1550 fatigue");
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 31) addButton(12, "Corruption", rankUpElementalCorruption).hint("3100 mana, 1550 fatigue");
+			if (player.mana >= (rankUpElementalManaCost()*31) && (player.fatigue + (rankUpElementalFatigueCost()*31) <= player.maxFatigue())) {
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 31) addButton(0, "Air", rankUpElementalAir);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 31) addButton(1, "Earth", rankUpElementalEarth);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 31) addButton(2, "Fire", rankUpElementalFire);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 31) addButton(3, "Water", rankUpElementalWater);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 31) addButton(4, "Ether", rankUpElementalEther);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 31) addButton(5, "Wood", rankUpElementalWood);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 31) addButton(6, "Metal", rankUpElementalMetal);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 31) addButton(7, "Ice", rankUpElementalIce);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 31) addButton(8, "Lightning", rankUpElementalLightning);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 31) addButton(9, "Darkness", rankUpElementalDarkness);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 31) addButton(10, "Poison", rankUpElementalPoison);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 31) addButton(11, "Purity", rankUpElementalPurity);
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 31) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
 		}
@@ -1892,8 +1892,8 @@ package classes.Scenes.Camp
 		
 		private function rankUpElementalAir():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -1909,8 +1909,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -1926,8 +1926,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -1943,8 +1943,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -1960,8 +1960,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalIce():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -1977,8 +1977,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalLightning():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -1994,8 +1994,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalDarkness():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -2011,8 +2011,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalWood():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -2028,8 +2028,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalMetal():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -2045,8 +2045,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalEther():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -2062,8 +2062,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalPoison():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -2079,8 +2079,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalPurity():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -2096,8 +2096,8 @@ package classes.Scenes.Camp
 		}
 		private function rankUpElementalCorruption():void {
 			clearOutput();
-			useMana(100 * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
-			fatigue(50 * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
+			useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
+			fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
 			statScreenRefresh();
 			rankUpElementalPart1();
 			var summmast:Number = 0;
@@ -2110,6 +2110,16 @@ package classes.Scenes.Camp
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime2(30);
+		}
+		private function rankUpElementalManaCost():Number {
+			var rankUpElementalManaCost:Number = 100;
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledge)) rankUpElementalManaCost -= 40;
+			return rankUpElementalManaCost;
+		}
+		private function rankUpElementalFatigueCost():Number {
+			var rankUpElementalFatigueCost:Number = 50;
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledge)) rankUpElementalFatigueCost -= 20;
+			return rankUpElementalFatigueCost;
 		}
 		private function rankUpElementalPart1():void {
 			outputText("It has been a while and your mastery of summoning has increased as a consequence. Now confident that you can contain it you head to the arcane circle and set up the ritual to release some of your servant restraints. You order your pet to stand still as you release the binding rune containing it. ");
@@ -2129,7 +2139,7 @@ package classes.Scenes.Camp
 		}
 		private function failToRankUpHPCost():Number {
 			var failure:Number = 0.5;
-			
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledge)) failure -= 0.2;
 			return failure;
 		}
 		

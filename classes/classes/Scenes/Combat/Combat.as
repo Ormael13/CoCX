@@ -1765,6 +1765,17 @@ public class Combat extends BaseContent {
             doNext(curry(combatMenu, false));
         } else {
             if (manaCost > 0) player.mana -= manaCost;
+			if (player.hasPerk(PerkLib.FirstAttackElementalsEx)) {
+				if (summonedElementals > 1) {
+					var elementalDamageMulti:Number = 1;
+					elementalDamageMulti += 0.05 * (summonedElementals - 1);
+					//lina do dodanie 10% per epic elemental
+					//lina na dodanie 20% per unique elemental
+					summonedElementals *= elementalDamageMulti;
+				}
+				elementalattacks(elementType, summonedElementals);
+				if (rand(4) == 0) elementalattacks(elementType, summonedElementals);
+			}
             elementalattacks(elementType, summonedElementals);
         }
     }

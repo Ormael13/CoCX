@@ -5430,8 +5430,8 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your fire elemental douses your opponent with a torrent of fire <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("Your fire elemental douses your opponent with a torrent of fire ");
+		doFireDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -5545,8 +5545,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your elemental unleash a barrage of star shaped bolts of arcane energy, blasting your opponent. <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText("Your elemental unleash a barrage of star shaped bolts of arcane energy, blasting your opponent. ");
+		doDamage(damage, true, true);
+		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -5736,8 +5737,8 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your elemental produces a ray of hyper condensed cold and aims it straight at " + monster.a + monster.short + "  <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("Your elemental produces a ray of hyper condensed cold and aims it straight at " + monster.a + monster.short + " dealing ");
+		doIceDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -5799,8 +5800,8 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your elemental charges electricity, then discharges it with a blinding bolt  <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("Your elemental charges electricity, then discharges it with a blinding bolt doing ");
+		doLightingDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -5862,8 +5863,8 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your darkness elemental condenses shadows into solid matter, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("Your darkness elemental condenses shadows into solid matter, striking your opponent with them doing ");
+		doDarknessDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -5921,8 +5922,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your poison elemental condenses aphrodisiac poison into spike, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
+		outputText("Your poison elemental condenses aphrodisiac poison into spike, striking your opponent with them doing ");
+		doPoisonDamage(damage, true, true);
+		outputText(" damage.");
 		var lustdamage:Number = 20 + rand(player.statusEffectv2(StatusEffects.SummonedElementalsPoison) + 1);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
@@ -5986,9 +5988,8 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at " + monster.a + monster.short + "  <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		outputText(" damage.\n\n");
+		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at " + monster.a + monster.short + " doing ");
+		doDamage(damage, true, true);outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -6046,8 +6047,8 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		doDamage(damage);
-		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them doing ");
+		doDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();

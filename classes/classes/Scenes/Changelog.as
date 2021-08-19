@@ -167,10 +167,10 @@ package classes.Scenes
 			outputText("-Earth / Wood elementals dmg bonus been decreased to 100% and Metal to 30%. Purity/Corruption elementals got much better scaling increasing dmg based on enemy corruption from 100%-140% to 60%-300%.\n");
 			outputText("-New information added to general section of stats page: minions count (would add all elementals (of any types), all golems (of all subtypes) and others like skeletons from Necormancer job).\n");
 			outputText("-Leader job perks for improving Wisp would now track all possible minions count not only elementals and simplest pernament golems type.\n");
-			outputText("-First Attack: Elementals perk would now enable a foruth option for choose: mix of 2+3 to let elemental attack and yet melee attack been replaced by another elemental attack.\n");
+			outputText("-First Attack: Elementals perk would now enable a fourth option for choose: mix of 2+3 to let elemental attack and yet melee attack been replaced by another elemental attack.\n");
 			outputText("-Elementals specials that deal dmg get 100% better scaling of PC int/wis and purity and corruption one specials got the same scaling based on target corruption as melee attacks from elementals. Some of descriptions in Evocation Tome had been updated up to latest changes.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Elemental Conjurer Knowledge. Req. Elemental Contract Rank 2 perk and 100+ wis. Effect: You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)\n");
+			outputText("-New tier 4 wisdom lvl-up perk: First Attack: Elementals (Ex). Req. First Attack: Elementals and Elemental Contract Rank 5 perks. Effect: Your summoned elementals when attacking would deal 5%/10%/20% more for each normal/rare/unique elemental in group/party outside the attacking elemental. In case of option when elemental attack on it own it would attack 2 or 3 times.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
