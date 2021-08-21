@@ -10972,7 +10972,11 @@ use namespace CoC;
 
 		public function playerMinionsCount():Number {
 			var minions:Number = 0;
-			if (hasStatusEffect(StatusEffects.SummonedElementals)) minions += statusEffectv1(StatusEffects.SummonedElementals);
+			if (hasStatusEffect(StatusEffects.SummonedElementals)) {
+				minions += statusEffectv1(StatusEffects.SummonedElementals);
+				minions += statusEffectv2(StatusEffects.SummonedElementals);
+				minions += statusEffectv3(StatusEffects.SummonedElementals);
+			}
 			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) minions += flags[kFLAGS.PERMANENT_GOLEMS_BAG];
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) minions += flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG];
 			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) minions += flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG];

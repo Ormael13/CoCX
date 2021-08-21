@@ -4965,6 +4965,22 @@ public function rebirthFromBadEnd():void {
 			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
 			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
 			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
+			if (player.hasPerk(PerkLib.StrongerElementalBond)) {
+				player.removePerk(PerkLib.StrongerElementalBond);
+				player.createPerk(PerkLib.StrongElementalBondEx,0,0,0,0);
+			}
+			if (player.hasPerk(PerkLib.StrongestElementalBond)) {
+				player.removePerk(PerkLib.StrongestElementalBond);
+				player.createPerk(PerkLib.StrongElementalBondSu,0,0,0,0);
+			}
+			if (player.hasPerk(PerkLib.StrongestElementalBondEx)) {
+				player.removePerk(PerkLib.StrongestElementalBondEx);
+				player.createPerk(PerkLib.StrongerElementalBond,0,0,0,0);
+			}
+			if (player.hasPerk(PerkLib.StrongestElementalBondSu)) {
+				player.removePerk(PerkLib.StrongestElementalBondSu);
+				player.createPerk(PerkLib.StrongerElementalBondEx,0,0,0,0);
+			}
 			// Flag to define whether the migration should open the Ascension menu for the player to buy Perks, mostly used for refunds
 			// Remember to set to False at the start of a migration if it's used
 			var refundAscensionPerks: Boolean = false;
@@ -5567,3 +5583,4 @@ public function rebirthFromBadEnd():void {
         */
 	}
 }
+

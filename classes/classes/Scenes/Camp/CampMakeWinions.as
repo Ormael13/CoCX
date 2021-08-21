@@ -414,9 +414,14 @@ package classes.Scenes.Camp
 		
 		public function accessSummonElementalsMainMenu():void {
 			clearOutput();
-			menu();
 			outputText("Which one elemental would you like to summon or promote to higher rank?\n\n");
-			if (player.hasPerk(PerkLib.JobElementalConjurer)) outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n\n");
+			if (player.hasPerk(PerkLib.JobElementalConjurer)) {
+				outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n");
+				outputText("Current elemental summoned count\n");
+				outputText("<i>-Normal: " + (player.hasStatusEffect(StatusEffects.SummonedElementals)? ""+player.statusEffectv1(StatusEffects.SummonedElementals)+"":"0") + "\n");
+				outputText("-Epic: " + (player.hasStatusEffect(StatusEffects.SummonedElementals)? ""+player.statusEffectv2(StatusEffects.SummonedElementals)+"":"0") + "\n");
+				outputText("-Unique: 0</i>\n\n");
+			}
 			outputText("<b>Currently summoned elementals:</b><i>");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 				outputText("\nAir");
@@ -893,10 +898,61 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 31) outputText(" ((Advanced) Viscount Rank)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 32) outputText(" ((Peak) Viscount Rank)");
 			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
+				outputText("\nAir <b>(Elite)</b>");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 1) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 2) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 3) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 4) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 6) outputText(" (Lord Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 7) outputText(" (Baron Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 8) outputText(" (Viscount Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 9) outputText(" (Earl Rank)");//204
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 10) outputText(" (Marquess Rank)");//228
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 11) outputText(" (Duke Rank)");//252
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 12) outputText(" (Prince Rank)");//276
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 13) outputText(" (King Rank)");//300
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
+				outputText("\nEarth <b>(Elite)</b>");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 1) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 2) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 3) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 4) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 6) outputText(" (Lord Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 7) outputText(" (Baron Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 8) outputText(" (Viscount Rank)");
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
+				outputText("\nFire <b>(Elite)</b>");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 1) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 2) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 3) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 4) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 6) outputText(" (Lord Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 7) outputText(" (Baron Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 8) outputText(" (Viscount Rank)");
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
+				outputText("\nWater <b>(Elite)</b>");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 1) outputText(" (Rank 1)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 2) outputText(" (Rank 2)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 3) outputText(" (Rank 3)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 4) outputText(" (Rank 4)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) outputText(" (Elder Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 6) outputText(" (Lord Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 7) outputText(" (Baron Rank)");
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 8) outputText(" (Viscount Rank)");
+			}
 			outputText("</i>");
-			addButton(0, "Ranks (1)", accessSummonElementalsMainMenu1).hint("Rank 0 to 9th Elder Rank");
-			addButton(1, "Ranks (2)", accessSummonElementalsMainMenu2).hint("5th Elder Rank to (Peak) Baron Rank");
-			addButton(2, "Ranks (3)", accessSummonElementalsMainMenu3).hint("(Low) Viscount Rank to (Peak) Viscount Rank");
+			menu();
+			addButton(0, "Ranks (N1)", accessSummonElementalsMainMenu1).hint("Rank 0 to 9th Elder Rank Normal Elementals");
+			addButton(1, "Ranks (N2)", accessSummonElementalsMainMenu2).hint("5th Elder Rank to (Peak) Baron Rank Normal Elementals");
+			addButton(2, "Ranks (N3)", accessSummonElementalsMainMenu3).hint("(Low) Viscount Rank to (Peak) Viscount Rank Normal Elementals");
+			addButtonDisabled(5, "Ranks (E)", "Rank 1 to Viscount Rank Epic Elementals");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", playerMenu);
 		}
@@ -1038,6 +1094,24 @@ package classes.Scenes.Camp
 			outputText("<b>Corruption Elemental</b>\n\n");
 			outputText("-When attacking, it will deal increased damage based on enemy corruption. The lower the corruption the higher bonus to damage. (60%-300%)\n");
 			outputText("-M. Special: Stronger version of corruption attributed attack.\n");
+			doNext(evocationTome);
+		}
+		private function evocationTome4():void {
+			clearOutput();
+			outputText("<b>1 Elemental</b>\n\n");
+			outputText("-M. Special: \n");
+			doNext(evocationTome);
+		}
+		private function evocationTome3():void {
+			clearOutput();
+			outputText("<b>1 Elemental</b>\n\n");
+			outputText("-M. Special: \n");
+			doNext(evocationTome);
+		}
+		private function evocationTome2():void {
+			clearOutput();
+			outputText("<b>1 Elemental</b>\n\n");
+			outputText("-M. Special: \n");
 			doNext(evocationTome);
 		}
 		private function evocationTome1():void {
@@ -2261,4 +2335,4 @@ package classes.Scenes.Camp
 			cheatTime2(10);
 		}
 	}
-}
+}

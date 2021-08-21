@@ -532,7 +532,7 @@ public class PerkMenu extends BaseContent {
 			if (elementalConjuerSummons != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
 			if (player.hasPerk(PerkLib.FirstAttackElementals)) {
 				if (elementalConjuerSummons != 3) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
-				if (elementalConjuerSummons != 4) addButton(13, "Melee+Help", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,4);
+				if (elementalConjuerSummons != 4) addButton(13, "Melee+Help", elementalAttackReplacingPCmeleeAttack2);
 			}
 			else {
 				addButtonDisabled(12, "Helping", "Req. First Attack: Elementals perk.");
@@ -548,6 +548,26 @@ public class PerkMenu extends BaseContent {
         else addButton(14, "Back", displayPerks);
         function elementalAttackReplacingPCmeleeAttack():void {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
+            if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
+                menu();
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", attackingElementalType,1);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", attackingElementalType,2);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", attackingElementalType,3);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", attackingElementalType,4);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", attackingElementalType,10);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", attackingElementalType,8);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", attackingElementalType,9);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", attackingElementalType,5);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", attackingElementalType,6);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", attackingElementalType,7);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(10, "Poison", attackingElementalType,11);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(11, "Purity", attackingElementalType,12);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(12, "Corruption", attackingElementalType,13);
+            }
+			else summonsbehaviourOptions();
+        }
+        function elementalAttackReplacingPCmeleeAttack2():void {
+            flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 4;
             if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
                 menu();
                 if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", attackingElementalType,1);

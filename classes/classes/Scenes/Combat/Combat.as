@@ -1706,6 +1706,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = elementType;
         }
         var summonedElementals:int;
+		var summonedElementalsMulti:Number = 1;
         switch (elementType) {
             case AIR        :
                 summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsAir);
@@ -1748,35 +1749,47 @@ public class Combat extends BaseContent {
                 break;
         }
         var manaCost:Number = 1;
+		var manaCostInt:Number = 8;
+		var manaCostWis:Number = 8;
+		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) {
+			manaCostInt += 17;
+			manaCostWis += 42;
+		}
         manaCost += summonedElementals;
         if (summonedElementals >= 11) manaCost += summonedElementals;
         if (summonedElementals >= 21) manaCost += summonedElementals;
-        manaCost += player.inte / 8;
-        manaCost += player.wis / 8;
+        if (summonedElementals >= 29) manaCost += summonedElementals;
+        manaCost += player.inte / manaCostInt;
+        manaCost += player.wis / manaCostWis;
+        if (summonedElementals >= 2 && manaCost > 11 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
+        if (summonedElementals >= 4 && manaCost > 22 && player.hasPerk(PerkLib.StrongElementalBondEx)) manaCost -= 20;
+        if (summonedElementals >= 6 && manaCost > 33 && player.hasPerk(PerkLib.StrongElementalBondSu)) manaCost -= 30;
+        if (summonedElementals >= 9 && manaCost > 44 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 40;
+        if (summonedElementals >= 12 && manaCost > 55 && player.hasPerk(PerkLib.StrongerElementalBondEx)) manaCost -= 50;
+        if (summonedElementals >= 15 && manaCost > 66 && player.hasPerk(PerkLib.StrongerElementalBondSu)) manaCost -= 60;
+        if (summonedElementals >= 19 && manaCost > 77 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 70;
+        if (summonedElementals >= 23 && manaCost > 88 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 80;
+        if (summonedElementals >= 27 && manaCost > 99 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 90;
+		if (manaCost > 1 && player.hasPerk(PerkLib.FirstAttackElementalsSu)) manaCost *= 0.5;
         manaCost = Math.round(manaCost);
-        if (summonedElementals >= 4 && manaCost > 11 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
-        if (summonedElementals >= 6 && manaCost > 22 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 20;
-        if (summonedElementals >= 8 && manaCost > 33 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 30;
-        if (summonedElementals >= 11 && manaCost > 44 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 40;
-        if (summonedElementals >= 21 && manaCost > 55 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 50;
         if (player.mana < manaCost) {
             outputText("\n\nYour mana is too low to fuel your elemental attack!");
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
             doNext(curry(combatMenu, false));
         } else {
+			outputText("\n\nYour elemental hit [monster a] [monster name]! ");
             if (manaCost > 0) player.mana -= manaCost;
-			if (player.hasPerk(PerkLib.FirstAttackElementalsEx)) {
-				if (summonedElementals > 1) {
-					var elementalDamageMulti:Number = 1;
-					elementalDamageMulti += 0.05 * (summonedElementals - 1);
-					//lina do dodanie 10% per epic elemental
-					//lina na dodanie 20% per unique elemental
-					summonedElementals *= elementalDamageMulti;
-				}
-				elementalattacks(elementType, summonedElementals);
-				if (rand(4) == 0) elementalattacks(elementType, summonedElementals);
+			if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) {
+				var elementalDamageMulti:Number = 1;
+				elementalDamageMulti += 0.05 * (player.statusEffectv1(StatusEffects.SummonedElementals));
+				elementalDamageMulti += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementals));
+				elementalDamageMulti += 0.2 * (player.statusEffectv3(StatusEffects.SummonedElementals));
+				summonedElementals *= elementalDamageMulti;
+				summonedElementalsMulti += 1;
+				if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
+				if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 			}
-            elementalattacks(elementType, summonedElementals);
+            elementalattacks(elementType, summonedElementals, summonedElementalsMulti);
         }
     }
 
@@ -1787,7 +1800,7 @@ public class Combat extends BaseContent {
         return intwisscalingvar;
     }
 
-    public function elementalattacks(elementType:int, summonedElementals:int):void {
+    public function elementalattacks(elementType:int, summonedElementals:int, summonedElementalsMulti:Number):void {
         var elementalDamage:Number = 0;
         var baseDamage:Number = summonedElementals * intwisscaling() * 0.1;
         if (summonedElementals >= 1) elementalDamage += baseDamage;
@@ -1839,7 +1852,6 @@ public class Combat extends BaseContent {
         }
         if (elementType != AIR && elementType != ETHER) elementalDamage *= (monster.damagePercent() / 100);
         elementalDamage = Math.round(elementalDamage);
-        outputText("\n\nYour elemental hit [monster a] [monster name]! ");
         switch (elementType) {
             case EARTH:
                 elementalDamage *= 2;
@@ -1887,9 +1899,14 @@ public class Combat extends BaseContent {
         //checkMinionsAchievementDamage(elementalDamage);
         if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
             if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
-                flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
-                menu();
-                addButton(0, "Next", combatMenu, false);
+				if (summonedElementalsMulti > 1) {
+					summonedElementalsMulti -= 1;
+					elementalattacks(elementType, summonedElementals, summonedElementalsMulti);
+				} else {
+					flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+					menu();
+					addButton(0, "Next", combatMenu, false);
+				}
             } else {
                 wrathregeneration();
                 fatigueRecovery();
@@ -10366,6 +10383,15 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) manaregen += 30;
         if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaregen += 40;
         if (player.hasPerk(PerkLib.ArcaneRegenerationMythical)) manaregen += 50;
+        if (player.hasPerk(PerkLib.StrongElementalBond)) manaregen += 2;
+        if (player.hasPerk(PerkLib.StrongElementalBondEx)) manaregen += 4;
+        if (player.hasPerk(PerkLib.StrongElementalBondSu)) manaregen += 6;
+        if (player.hasPerk(PerkLib.StrongerElementalBond)) manaregen += 8;
+        if (player.hasPerk(PerkLib.StrongerElementalBondEx)) manaregen += 10;
+        if (player.hasPerk(PerkLib.StrongerElementalBondSu)) manaregen += 12;
+        if (player.hasPerk(PerkLib.StrongestElementalBond)) manaregen += 14;
+        if (player.hasPerk(PerkLib.StrongestElementalBondEx)) manaregen += 16;
+        if (player.hasPerk(PerkLib.StrongestElementalBondSu)) manaregen += 18;
         if (player.hasPerk(PerkLib.DraconicHeart)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartEvolved)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) manaregen += 5;
@@ -10373,7 +10399,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) manaregen += 10;
         if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) manaregen += 15;
         if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 2);
-        if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += player.maxMana()*0.02;
+        if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
         return manaregen;
     }
 
