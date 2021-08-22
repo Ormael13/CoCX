@@ -10,6 +10,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkClass;
 import classes.PerkLib;
+import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
 import classes.Scenes.SceneLib;
@@ -157,7 +158,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
 			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
 			outputText("\n\nBerzerker: <b>");
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3) outputText("Autocast");
@@ -285,7 +286,7 @@ public class PerkMenu extends BaseContent {
 			if (((player.weaponName == "fists" && player.hasNaturalWeapons) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
 			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(10, "None", zerkingStyle,0);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(11, "Berserking", zerkingStyle,1);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(12, "Lustzerking", zerkingStyle,2);
@@ -727,8 +728,6 @@ public class PerkMenu extends BaseContent {
 
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
-		Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
-		When (/If) Orm reworks perks to use v1/v2/v3 things, can be made simplier. Current workaround to make it easier for player to use mutation menu.
 		Source: Player.as for list of mutations under function maxHeartMutations, PerkLib.as for mutation descriptions.
  		*/
 		if (review) {	//Initial screen for user to know how many points they have per part
@@ -745,6 +744,7 @@ public class PerkMenu extends BaseContent {
 				mutationCount++;
 			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.");
+
 		}
 
 		function menuGen(menuItems:Array, page:int):void{
@@ -756,22 +756,14 @@ public class PerkMenu extends BaseContent {
 			}
 			submenu(selectMenu, displayPerks, page, false);
 		}
-
-		/*
-		Example:
-		mutationsDatabaseVerify([PerkLib.mutationperkhere, PerkLib.mutationperkevolvedhere, PerkLib.mutationperkfinalformhere], "optional manual acquisition comment")
-		Manual comment overwrites Requirements output, and is assumed that there will only be 1 perk in that chain.
-		 */
+		
 		function mutationsDBHeart():void{
 			clearOutput();
 			//Heart Mutations
 			displayHeader("Heart Mutations:");
-			mutationsDatabaseVerify([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Heart")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -779,8 +771,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Muscle Mutations
 			displayHeader("Muscle Mutations:");
-			mutationsDatabaseVerify([PerkLib.MantislikeAgility, PerkLib.MantislikeAgilityEvolved, PerkLib.MantislikeAgilityFinalForm]);
-			mutationsDatabaseVerify([PerkLib.OniMusculature, PerkLib.OniMusculatureEvolved, PerkLib.OniMusculatureFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Muscle")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -788,8 +781,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Mouth Mutations
 			displayHeader("Mouth Mutations:");
-			mutationsDatabaseVerify([PerkLib.VenomGlands, PerkLib.VenomGlandsEvolved, PerkLib.VenomGlandsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HollowFangs, PerkLib.HollowFangsEvolved, PerkLib.HollowFangsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Mouth")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -797,8 +791,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Adrenal Glands Mutations
 			displayHeader("Adrenal Gland Mutations");
-			mutationsDatabaseVerify([PerkLib.SalamanderAdrenalGlands, PerkLib.SalamanderAdrenalGlandsEvolved, PerkLib.SalamanderAdrenalGlandsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.OrcAdrenalGlands, PerkLib.OrcAdrenalGlandsEvolved, PerkLib.OrcAdrenalGlandsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Adrenals")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -806,9 +801,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
 			displayHeader("Bloodstream Mutations");
-			mutationsDatabaseVerify([PerkLib.VampiricBloodsteam, PerkLib.VampiricBloodsteamEvolved, PerkLib.VampiricBloodsteamFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HinezumiBurningBlood, PerkLib.HinezumiBurningBloodEvolved, PerkLib.HinezumiBurningBloodFinalForm]);
-			mutationsDatabaseVerify([PerkLib.FeyArcaneBloodstream, PerkLib.FeyArcaneBloodstreamEvolved, PerkLib.FeyArcaneBloodstreamFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Bloodstream")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -816,10 +811,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Fat tissue Mutations
 			displayHeader("Fat and Tissue Mutations");
-			mutationsDatabaseVerify([PerkLib.PigBoarFat, PerkLib.PigBoarFatEvolved, PerkLib.PigBoarFatFinalForm]);
-			mutationsDatabaseVerify([PerkLib.NaturalPunchingBag, PerkLib.NaturalPunchingBagEvolved, PerkLib.NaturalPunchingBagFinalForm]);
-			mutationsDatabaseVerify([PerkLib.WhaleFat, PerkLib.WhaleFatEvolved, PerkLib.WhaleFatFinalForm]);
-			mutationsDatabaseVerify([PerkLib.YetiFat, PerkLib.YetiFatEvolved, PerkLib.YetiFatFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("FaT")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -827,11 +821,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Lungs Mutations
 			displayHeader("Lungs Mutations");
-			mutationsDatabaseVerify([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Lungs")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -839,9 +831,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Metabolism Mutations
 			displayHeader("Metabolism Mutations");
-			mutationsDatabaseVerify([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved]);
-			mutationsDatabaseVerify([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved]);
-			mutationsDatabaseVerify([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Metabolism")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -849,8 +841,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Ovaries Mutations
 			displayHeader("Ovaries Mutations");
-			mutationsDatabaseVerify([PerkLib.LactaBovinaOvaries, PerkLib.LactaBovinaOvariesEvolved, PerkLib.LactaBovinaOvariesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.FloralOvaries, PerkLib.FloralOvariesEvolved, PerkLib.FloralOvariesFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Ovaries")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -858,9 +851,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Testicle Mutations
 			displayHeader("Balls Mutations");
-			mutationsDatabaseVerify([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.EasterBunnyEggBag, PerkLib.EasterBunnyEggBagEvolved, PerkLib.EasterBunnyEggBagFinalForm]);
-			mutationsDatabaseVerify([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Testicles")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -868,8 +861,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Eyes Mutations
 			displayHeader("Eye Mutations");
-			mutationsDatabaseVerify([PerkLib.GorgonsEyes, PerkLib.GorgonsEyesEvolved]);
-			mutationsDatabaseVerify([PerkLib.GazerEye, PerkLib.GazerEyeEvolved, PerkLib.GazerEyeFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Eyes")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -877,7 +871,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Peripheral/NervSys Mutations
 			displayHeader("Peripheral Nervous System Mutations");
-			mutationsDatabaseVerify([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -885,9 +881,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Bones and Marrow Mutations
 			displayHeader("Bones and Marrow Mutations");
-			mutationsDatabaseVerify([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase(1);
 		}
 
@@ -895,8 +891,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Thyroid Glands Mutations
 			displayHeader("Thyroid Gland Mutations");
-			mutationsDatabaseVerify([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm]);
-			mutationsDatabaseVerify([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Thyroid")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase(1);
 		}
 
@@ -904,8 +901,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//ParaThyroid Glands Mutations. What's the difference between this and the above???
 			displayHeader("ParaThyroid Glands Mutations");
-			mutationsDatabaseVerify([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase(1);
 		}
 
@@ -915,9 +913,9 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Dragon Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
-			mutationsDatabaseVerify([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.DraconicBones, MutationsLib.DraconicBonesEvolved, MutationsLib.DraconicBonesFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.DraconicHeart, MutationsLib.DraconicHeartEvolved, MutationsLib.DraconicHeartFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.DraconicLungs, MutationsLib.DraconicLungsEvolved, MutationsLib.DraconicLungsFinalForm]);
 			mutationsDatabase(1);
 		}
 
@@ -926,8 +924,8 @@ public class PerkMenu extends BaseContent {
 			//Kitsune Mutations
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-			mutationsDatabaseVerify([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm]);
-			mutationsDatabaseVerify([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.KitsuneThyroidGland, MutationsLib.KitsuneThyroidGlandEvolved, MutationsLib.KitsuneThyroidGlandFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
 			mutationsDatabase(1);
 		}
 
@@ -1083,9 +1081,9 @@ public class PerkMenu extends BaseContent {
 		var endlist:Array = [];					//Final list of perks to output
 
 		function initSet():void {
-			var mutationList:Array = [PerkLib.BlackHeart, PerkLib.FrozenHeart, PerkLib.ObsidianHeart, PerkLib.TwinHeart, PerkLib.HeartOfTheStorm, PerkLib.DraconicHeart, PerkLib.MantislikeAgility, PerkLib.OniMusculature, PerkLib.VenomGlands, PerkLib.HollowFangs, PerkLib.SalamanderAdrenalGlands, PerkLib.OrcAdrenalGlands, PerkLib.VampiricBloodsteam, PerkLib.HinezumiBurningBlood, PerkLib.FeyArcaneBloodstream, PerkLib.PigBoarFat, PerkLib.NaturalPunchingBag, PerkLib.WhaleFat, PerkLib.YetiFat, PerkLib.ArachnidBookLung, PerkLib.DraconicLungs, PerkLib.CaveWyrmLungs, PerkLib.MelkieLung, PerkLib.DrakeLungs, PerkLib.ManticoreMetabolism, PerkLib.DisplacerMetabolism, PerkLib.LactaBovinaOvaries, PerkLib.FloralOvaries, PerkLib.MinotaurTesticles, PerkLib.EasterBunnyEggBag, PerkLib.NukiNuts, PerkLib.GorgonsEyes, PerkLib.GazerEye, PerkLib.ElvishPeripheralNervSys, PerkLib.LizanMarrow, PerkLib.DraconicBones, PerkLib.HarpyHollowBones, PerkLib.KitsuneThyroidGland, PerkLib.NekomataThyroidGland, PerkLib.KitsuneParathyroidGlands, PerkLib.HellcatParathyroidGlands]
+			var mutationList:Array = MutationsLib.mutationsArray("",true)
 			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
-				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){	//Okay, proved that this does remove the base mutations properly.
+				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){
 					var pPerkReq:PerkType = pPerks.ptype
 					var perkno:Boolean = true;
 					for each (var temp1:Object in pPerkReq.requirements) {
@@ -1185,7 +1183,7 @@ public class PerkMenu extends BaseContent {
 		}
 
 		function perkOut():void {	//Results of just the perks that are left.
-			for each(var pPerk:PerkType in endlist.sort()) {	//The fuck, this doesn't do it right either.
+			for each(var pPerk:PerkType in endlist.sort()) {
 				outputText("<b>" + player.getPerk(pPerk).perkName + ":</b> ");
 				try {
 					outputText(player.getPerk(pPerk).perkDesc);

@@ -386,7 +386,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 6) {
-				this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 7) {
@@ -398,7 +398,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 9) {
-				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) {
@@ -410,7 +410,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 12) {
-				this.createPerk(PerkLib.LizanMarrowFinalForm, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LizanMarrowFinalForm, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) {

@@ -1016,12 +1016,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Heart Mutations
-		mutationsAssistant([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Heart")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1029,8 +1026,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0;
 		menu();
 		//Muscle Mutations
-		mutationsAssistant([PerkLib.MantislikeAgility, PerkLib.MantislikeAgilityEvolved, PerkLib.MantislikeAgilityFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.OniMusculature, PerkLib.OniMusculatureEvolved, PerkLib.OniMusculatureFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Muscle")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1038,8 +1036,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Mouth Mutations
-		mutationsAssistant([PerkLib.VenomGlands, PerkLib.VenomGlandsEvolved, PerkLib.VenomGlandsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HollowFangs, PerkLib.HollowFangsEvolved, PerkLib.HollowFangsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Mouth")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1047,8 +1046,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Adrenal Glands Mutations
-		mutationsAssistant([PerkLib.SalamanderAdrenalGlands, PerkLib.SalamanderAdrenalGlandsEvolved, PerkLib.SalamanderAdrenalGlandsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.OrcAdrenalGlands, PerkLib.OrcAdrenalGlandsEvolved, PerkLib.OrcAdrenalGlandsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Adrenals")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1056,9 +1056,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		mutationsAssistant([PerkLib.VampiricBloodsteam, PerkLib.VampiricBloodsteamEvolved, PerkLib.VampiricBloodsteamFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HinezumiBurningBlood, PerkLib.HinezumiBurningBloodEvolved, PerkLib.HinezumiBurningBloodFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.FeyArcaneBloodstream, PerkLib.FeyArcaneBloodstreamEvolved, PerkLib.FeyArcaneBloodstreamFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Bloodstream")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1066,10 +1066,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Fat tissue Mutations
-		mutationsAssistant([PerkLib.PigBoarFat, PerkLib.PigBoarFatEvolved, PerkLib.PigBoarFatFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.NaturalPunchingBag, PerkLib.NaturalPunchingBagEvolved, PerkLib.NaturalPunchingBagFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.WhaleFat, PerkLib.WhaleFatEvolved, PerkLib.WhaleFatFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.YetiFat, PerkLib.YetiFatEvolved, PerkLib.YetiFatFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("FaT")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1077,11 +1076,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Lungs Mutations
-		mutationsAssistant([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm], btnNum++);
-		//mutationsAssistant([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Lungs")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1089,9 +1086,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Metabolism Mutations
-		mutationsAssistant([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved], btnNum++);
-		mutationsAssistant([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved], btnNum++);
-		mutationsAssistant([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Metabolism")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1099,8 +1096,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Ovaries Mutations
-		mutationsAssistant([PerkLib.LactaBovinaOvaries, PerkLib.LactaBovinaOvariesEvolved, PerkLib.LactaBovinaOvariesFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.FloralOvaries, PerkLib.FloralOvariesEvolved, PerkLib.FloralOvariesFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Ovaries")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1108,9 +1106,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Testicle Mutations
-		mutationsAssistant([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.EasterBunnyEggBag, PerkLib.EasterBunnyEggBagEvolved, PerkLib.EasterBunnyEggBagFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Testicles")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1118,8 +1116,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Eyes Mutations
-		mutationsAssistant([PerkLib.GazerEye, PerkLib.GazerEyeEvolved, PerkLib.GazerEyeFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.GorgonsEyes, PerkLib.GorgonsEyesEvolved], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Eyes")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1127,7 +1126,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Peripheral/NervSys Mutations
-		mutationsAssistant([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1135,9 +1136,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Bones and Marrow Mutations
-		mutationsAssistant([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
@@ -1145,8 +1146,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Thyroid Glands Mutations
-		mutationsAssistant([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm], btnNum++);
-		//mutationsAssistant([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Thyroid")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
@@ -1154,8 +1156,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		mutationsAssistant([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 

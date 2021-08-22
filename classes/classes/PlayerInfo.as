@@ -1689,6 +1689,7 @@ public class PlayerInfo extends BaseContent {
 		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
+		//perks = mutationsClear(perks);
 		if (perks.length == 0) {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");
@@ -1716,6 +1717,15 @@ public class PlayerInfo extends BaseContent {
 			menu();
 			addButton(1, "Skip", perkSkip);
 		}
+	}
+	public function mutationsClear(perks:Array):Array{
+		var temp:Array = []
+		for each (var playerPerk:PerkType in perks){
+			if (!playerPerk in MutationsLib.mutationsArray("", true)){
+				temp.push(playerPerk);
+			}
+		}
+		return temp
 	}
 	private var perkList:Array = [];
 	private function linkhandler(e:TextEvent):void{

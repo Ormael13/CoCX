@@ -8,6 +8,7 @@ import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
 import classes.PerkLib;
+import classes.MutationsLib;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
@@ -345,8 +346,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
-				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
+			if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) {
+				if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
 		}
@@ -484,8 +485,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
-				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
+			if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) {
+				if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
 		}
@@ -2780,8 +2781,8 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doIceDamage(damage, true, true);
@@ -2904,8 +2905,8 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doDarknessDamage(damage, true, true);
@@ -3122,8 +3123,8 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doIceDamage(damage, true, true);
@@ -3244,8 +3245,8 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doDarknessDamage(damage, true, true);
@@ -3319,8 +3320,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doTrueDamage(damage, true, true);
@@ -3393,8 +3394,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		else player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, 5);
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doTrueDamage(damage, true, true);
@@ -3955,8 +3956,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.plural) damage *= 5;
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doIceDamage(damage, true, true);
@@ -3977,8 +3978,8 @@ public class CombatMagic extends BaseCombatContent {
 		else doIceDamage(damage, true, true);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
 			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 				else damage *= 0.2;
 				damage = Math.round(damage);
 				doIceDamage(damage, true, true);
@@ -3998,8 +3999,8 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			else doIceDamage(damage, true, true);
 			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 				else damage *= 0.2;
 				damage = Math.round(damage);
 				doIceDamage(damage, true, true);
@@ -4093,8 +4094,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.plural) damage *= 5;
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doIceDamage(damage, true, true);
@@ -4223,8 +4224,8 @@ public class CombatMagic extends BaseCombatContent {
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 			if (monster.plural) damage *= 5;
 			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 				else damage *= 0.2;
 				damage = Math.round(damage);
 				doIceDamage(damage, true, true);
@@ -4336,8 +4337,8 @@ public class CombatMagic extends BaseCombatContent {
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doFireDamage(damage, true, true);
@@ -4358,8 +4359,8 @@ public class CombatMagic extends BaseCombatContent {
 		else doFireDamage(damage, true, true);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
 			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 				else damage *= 0.2;
 				damage = Math.round(damage);
 				doFireDamage(damage, true, true);
@@ -4379,8 +4380,8 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			else doFireDamage(damage, true, true);
 			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 				else damage *= 0.2;
 				damage = Math.round(damage);
 				doFireDamage(damage, true, true);
@@ -4708,8 +4709,8 @@ public class CombatMagic extends BaseCombatContent {
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doFireDamage(damage, true, true);
@@ -4784,8 +4785,8 @@ public class CombatMagic extends BaseCombatContent {
 					damage *= 1.75;
 				}
 				if (player.hasPerk(PerkLib.Omnicaster)) {
-					if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-					else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+					if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+					else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 					else damage *= 0.2;
 					damage = Math.round(damage);
 					doFireDamage(damage, true, true);
@@ -5240,8 +5241,8 @@ public class CombatMagic extends BaseCombatContent {
 			else damage = Math.round(damage * 1.4);
 		}
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doFireDamage(damage, true, true);
@@ -5304,8 +5305,8 @@ public class CombatMagic extends BaseCombatContent {
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doFireDamage(damage, true, true);
@@ -5414,8 +5415,8 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doLightingDamage(damage, true, true);
@@ -5545,8 +5546,8 @@ public class CombatMagic extends BaseCombatContent {
 			else damage = Math.round(damage * 1.4);
 		}
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doFireDamage(damage, true, true);
@@ -5611,8 +5612,8 @@ public class CombatMagic extends BaseCombatContent {
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doFireDamage(damage, true, true);
@@ -5720,8 +5721,8 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText("for ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.3;
 			else damage *= 0.2;
 			damage = Math.round(damage);
 			doLightingDamage(damage, true, true);
