@@ -1689,7 +1689,7 @@ public class PlayerInfo extends BaseContent {
 		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		//perks = mutationsClear(perks);
+		perks = mutationsClear(perks);
 		if (perks.length == 0) {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");
@@ -1719,13 +1719,14 @@ public class PlayerInfo extends BaseContent {
 		}
 	}
 	public function mutationsClear(perks:Array):Array{
-		var temp:Array = []
+		var temp:Array = [];
+		var compMutate:Array = MutationsLib.mutationsArray("", true);
 		for each (var playerPerk:PerkType in perks){
-			if (!playerPerk in MutationsLib.mutationsArray("", true)){
+			if (!(compMutate.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
 			}
 		}
-		return temp
+		return temp;
 	}
 	private var perkList:Array = [];
 	private function linkhandler(e:TextEvent):void{
