@@ -93,6 +93,10 @@ public class Combat extends BaseContent {
     public static const POISON:int = 11;
     public static const PURITY:int = 12;
     public static const CORRUPTION:int = 13;
+    public static const AIR_E:int = 31;
+    public static const EARTH_E:int = 32;
+    public static const FIRE_E:int = 33;
+    public static const WATER_E:int = 34;
 
     public function get inCombat():Boolean {
         return CoC.instance.inCombat;
@@ -1708,6 +1712,7 @@ public class Combat extends BaseContent {
         }
         var summonedElementals:int;
 		var summonedElementalsMulti:Number = 1;
+		var summonedEpicElemental:Boolean = false;
         switch (elementType) {
             case AIR        :
                 summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsAir);
@@ -1747,6 +1752,22 @@ public class Combat extends BaseContent {
                 break;
             case CORRUPTION :
                 summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsCorruption);
+                break;
+            case AIR_E      :
+                summonedElementals = (5 * player.statusEffectv2(StatusEffects.SummonedElementalsAirE));
+				summonedEpicElemental = true;
+                break;
+            case EARTH_E    :
+                summonedElementals = (5 * player.statusEffectv2(StatusEffects.SummonedElementalsEarthE));
+				summonedEpicElemental = true;
+                break;
+            case FIRE_E     :
+                summonedElementals = (5 * player.statusEffectv2(StatusEffects.SummonedElementalsFireE));
+				summonedEpicElemental = true;
+                break;
+            case WATER_E    :
+                summonedElementals = (5 * player.statusEffectv2(StatusEffects.SummonedElementalsWaterE));
+				summonedEpicElemental = true;
                 break;
         }
         var manaCost:Number = 1;
@@ -1790,7 +1811,7 @@ public class Combat extends BaseContent {
 				if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 				if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 			}
-            elementalattacks(elementType, summonedElementals, summonedElementalsMulti);
+            elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
         }
     }
 
@@ -1801,7 +1822,7 @@ public class Combat extends BaseContent {
         return intwisscalingvar;
     }
 
-    public function elementalattacks(elementType:int, summonedElementals:int, summonedElementalsMulti:Number):void {
+    public function elementalattacks(elementType:int, summonedElementals:int, summonedElementalsMulti:Number, summonedEpicElemental:Boolean):void {
         var elementalDamage:Number = 0;
         var baseDamage:Number = summonedElementals * intwisscaling() * 0.1;
         if (summonedElementals >= 1) elementalDamage += baseDamage;
@@ -1834,7 +1855,7 @@ public class Combat extends BaseContent {
         var crit:Boolean = false;
         var critChance:int = 5;
         critChance += combatMagicalCritical();
-        if (elementType == AIR || elementType == WATER || elementType == METAL || elementType == ETHER) critChance += 10;
+        if (elementType == AIR || elementType == AIR_E || elementType == WATER || elementType == WATER_E || elementType == METAL || elementType == ETHER) critChance += 10;
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
             crit = true;
@@ -1843,6 +1864,7 @@ public class Combat extends BaseContent {
                     elementalDamage *= 2;
                     break;
                 case AIR:
+                case AIR_E:
                 case METAL:
                     elementalDamage *= 1.75;
                     break;
@@ -1851,10 +1873,11 @@ public class Combat extends BaseContent {
                     break;
             }
         }
-        if (elementType != AIR && elementType != ETHER) elementalDamage *= (monster.damagePercent() / 100);
+        if (elementType != AIR && elementType != AIR_E && elementType != ETHER) elementalDamage *= (monster.damagePercent() / 100);
         elementalDamage = Math.round(elementalDamage);
         switch (elementType) {
             case EARTH:
+            case EARTH_E:
                 elementalDamage *= 2;
                 doEarthDamage(elementalDamage, true, true);
                 break;
@@ -1867,9 +1890,11 @@ public class Combat extends BaseContent {
                 doDamage(elementalDamage, true, true);
                 break;
             case FIRE:
+            case FIRE_E:
                 doFireDamage(elementalDamage, true, true);
                 break;
             case WATER:
+            case WATER_E:
                 doWaterDamage(elementalDamage, true, true);
                 break;
             case ICE:
@@ -1899,23 +1924,27 @@ public class Combat extends BaseContent {
         if (crit) outputText(" <b>Critical! </b>");
         //checkMinionsAchievementDamage(elementalDamage);
         if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
-            if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
-				if (summonedElementalsMulti > 1) {
-					summonedElementalsMulti -= 1;
-					elementalattacks(elementType, summonedElementals, summonedElementalsMulti);
-				} else {
-					flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+			if (summonedElementalsMulti > 1) {
+				summonedElementalsMulti -= 1;
+				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
+			} else {
+				if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
+					if (summonedEpicElemental) {
+						flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+						summonedEpicElemental = false;
+					}
+					else flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
 					menu();
 					addButton(0, "Next", combatMenu, false);
+				} else {
+					wrathregeneration();
+					fatigueRecovery();
+					manaregeneration();
+					soulforceregeneration();
+					venomCombatRecharge();
+					enemyAI();
 				}
-            } else {
-                wrathregeneration();
-                fatigueRecovery();
-                manaregeneration();
-                soulforceregeneration();
-				venomCombatRecharge();
-                enemyAI();
-            }
+			} 
         } else {
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             else doNext(endLustVictory);

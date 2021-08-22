@@ -560,6 +560,10 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsPoison)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsPoison);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsPurity)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsPurity);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsCorruption);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAirE)) max += maxHP_ElementalBondFleshMulti() * 20 * statusEffectv2(StatusEffects.SummonedElementalsAirE);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) max += maxHP_ElementalBondFleshMulti() * 20 * statusEffectv2(StatusEffects.SummonedElementalsEarthE);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFireE)) max += maxHP_ElementalBondFleshMulti() * 20 * statusEffectv2(StatusEffects.SummonedElementalsFireE);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) max += maxHP_ElementalBondFleshMulti() * 20 * statusEffectv2(StatusEffects.SummonedElementalsWaterE);
 			}
 			if (hasPerk(PerkLib.JobGuardian)) max += 120;
 			if (hasPerk(PerkLib.BodyCultivator)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -737,6 +741,10 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsPoison)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsPoison);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsPurity)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsPurity);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsCorruption);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsAirE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsAirE);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsEarthE);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsFireE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsFireE);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsWaterE);
 			}
 			if (hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.FutaForm)) max += 60;
 			if (hasPerk(PerkLib.OmnibusGift)) max += 45;

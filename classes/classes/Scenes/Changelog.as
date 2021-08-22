@@ -40,6 +40,9 @@ package classes.Scenes
 			outputText("-New tier 3 misc lvl-up perk: Lift Off. Req. Aerobatics perk, 45+ str and 40+ spe. Effect: Allows you to start combat already flying.\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 100+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Strong Elemental Bond (Ex). Req. Strong Elemental Bond and Elemental Contract Rank 5 perk, 125+ wis. Effect: Lower by 20 needed mana to sustain active elemental in combat and +4 mana regeneration.\n");
+			outputText("-New tier 5 wisdom lvl-up perk: First Attack: Elementals (Ex). Req. First Attack: Elementals and Elemental Contract Rank 5 perks. Effect: Your summoned elementals when attacking would deal 5%/10%/20% more for each normal/rare/unique elemental in group/party outside the attacking elemental. In case of option when elemental attack on it own it would attack 2 or 3 times (10% chance).\n");
+			outputText("-New tier 6 wisdom lvl-up perk: Strong Elemental Bond (Su). Req. Strong Elemental Bond (Ex) and Elemental Contract Rank 7 perks, 175+ wis. Effect: Lower by 30 needed mana to sustain active elemental in combat and +6 mana regeneration.\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to tou multi and +60 to wis multi (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
 			outputText("-New tier 7 libido lvl-up perk: Prestige Job: Bindmaster. Req. Job: Eromancer and Guardian perks, 200+ lib. Effect: +20 to tou multi and +60 to lib multi (scalable with NG tiers), gain the ability to tie up opponents using a whip (work similar to naga grapple).\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Arch-priest. Req. Jobs: Guardian and Enchanter, 200+ int, finishing second part of certain paladin npc training. Effect: +40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower.\n");
@@ -59,6 +62,8 @@ package classes.Scenes
 			outputText("-New tier 10 soulforce lvl-up perk: Daoist: Overlord Stage. Req. Daoist: Elder Stage perk. Effect: Your reached fourth stage of Daoist path. (+50% soulskill/m.soulskill power, +60 max SF S.King, S.Emperor, S.Ancestor stages)\n");
 			outputText("-New tier 11 soulforce lvl-up perk: Soul Emperor. Req. Soul King perk and 220+ wis. Effect: Allow reaching 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)\n");
 			outputText("-New tier 12 soulforce lvl-up perk: Soul Ancestor. Req. Soul Emperor perk and 240+ wis. Effect: Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)\n");
+			outputText("-New tier 12 wisdom lvl-up perk: Stronger Elemental Bond (Ex). Req. Stronger Elemental Bond and Elemental Contract Rank 13 perks, 325+ wis. Effect: Lower by 50 needed mana to sustain active elemental in combat and +10 mana regeneration.\n");
+			outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
 			outputText("-New event perk: H class Heaven Tribulation Survivor. Gained by surviving 3 rounds of H class Heaven tribulation attacks. Effects: +10% to all stats multi/+50 to sens. Allow to comprehend Dao of Elements.\n");
 			outputText("-New event perk: G class Heaven Tribulation Survivor. Gained by surviving 4 rounds of G class Heaven tribulation attacks. Effects: +15% to all stats multi/+75 to sens. Allow to use soulforce to fly without need for wings.\n");
 			outputText("-New event perk: F class Heaven Tribulation Survivor. Gained by surviving 5 rounds of F class Heaven tribulation attacks. Effects: +20% to all stats multi/+100 to sens. Allow to use create clone. It can be used as new body for PC Nascent Soul in case main body get destroyed.\n");
@@ -114,7 +119,7 @@ package classes.Scenes
 			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
 			outputText("-Added in combat slow venom recharge.\n");
 			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
-			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting.\n");
+			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting. Also helped with internal mutation system changes.\n");
 			outputText("-Nosferatu spell been moved to grey book. Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
 			outputText("-Jtex many code corrections.\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
@@ -170,17 +175,24 @@ package classes.Scenes
 			outputText("-First Attack: Elementals perk would now enable a fourth option for choose: mix of 2+3 to let elemental attack and yet melee attack been replaced by another elemental attack.\n");
 			outputText("-Elementals specials that deal dmg get 100% better scaling of PC int/wis and purity and corruption one specials got the same scaling based on target corruption as melee attacks from elementals. Some of descriptions in Evocation Tome had been updated up to latest changes.\n");
 			outputText("-New tier 3 wisdom lvl-up perk: Elemental Conjurer Knowledge. Req. Elemental Contract Rank 2 perk and 100+ wis. Effect: You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)\n");
-			outputText("-New tier 5 wisdom lvl-up perk: First Attack: Elementals (Ex). Req. First Attack: Elementals and Elemental Contract Rank 5 perks. Effect: Your summoned elementals when attacking would deal 5%/10%/20% more for each normal/rare/unique elemental in group/party outside the attacking elemental. In case of option when elemental attack on it own it would attack 2 or 3 times (10% chance).\n");
 			outputText("-All perks in line starting with Strong Elemental Bond would now suplement PC mana regeneration a bit (starts at +2 and each another would give 2 pts more).\n");
-			outputText("-New tier 4 wisdom lvl-up perk: Strong Elemental Bond (Ex). Req. Strong Elemental Bond and Elemental Contract Rank 5 perk, 125+ wis. Effect: Lower by 20 needed mana to sustain active elemental in combat and +4 mana regeneration.\n");
-			outputText("-New tier 6 wisdom lvl-up perk: Strong Elemental Bond (Su). Req. Strong Elemental Bond (Ex) and Elemental Contract Rank 7 perks, 175+ wis. Effect: Lower by 30 needed mana to sustain active elemental in combat and +6 mana regeneration.\n");
-			outputText("-New tier 12 wisdom lvl-up perk: Stronger Elemental Bond (Ex). Req. Stronger Elemental Bond and Elemental Contract Rank 13 perks, 325+ wis. Effect: Lower by 50 needed mana to sustain active elemental in combat and +10 mana regeneration.\n");
-			outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
-			//outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
-			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
-			outputText("-New tier 6 wisdom lvl-up perk: First Attack: Elementals (Su). Req. First Attack: Elementals (Ex) and Elemental Contract Rank 6 perks. Effect: Mana cost scaling of elemental attacking based on int/wis stats lowered by 68% and 84%. Additionaly cost halfed before final rounding up. Elemental always attack 4 times.\n");//epic elementals can now also attack (as second turn of elementals attacks)
+			outputText("-New tier 6 wisdom lvl-up perk: First Attack: Elementals (Su). Req. First Attack: Elementals (Ex) and Elemental Contract Rank 6 perks. Effect: Mana cost scaling of elemental attacking based on int/wis stats lowered by 68% and 84%. Additionaly cost halfed before final rounding up. Elemental always attack 4 times. Epic elementals can now also attack (as another turn of elementals attacks)\n");
+			outputText("-Elemental Conjuer can now summon epic elementals. It's more demanding on things that summoner must gather or use but the power of summon is on entirely other level that it lesser kind (well it's called epic for a reason, right? ^^). On top of spending 200 fatigue and one elemental shard it also require matching element object to serve as 'core' of summoned elemental. If player have perks ");
+			outputText("increasing max hp/lust based on elementals ranks their effects are increased fivefold.\n");
+			outputText("-Joy scene with lactacid no longer have limtis how much hunger it would refill.\n");
 			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
+			//outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
+			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -204,6 +216,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -283,7 +296,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -328,6 +343,7 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

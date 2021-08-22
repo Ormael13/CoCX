@@ -372,7 +372,7 @@ package classes.Scenes.Camp
 		//
 		//--------------
 		
-		public function maxSizeOfElementalsArmy():Number {
+		private function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
 			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 2;
 			if (player.hasPerk(PerkLib.ElementalContractRank1)) maxSizeOfElementalsArmyCounter += 1;
@@ -411,15 +411,23 @@ package classes.Scenes.Camp
 			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 1;
 			return maxSizeOfElementalsArmyCounter;
 		}
+		private function currentSizeOfElementalsArmy():Number {
+			var currentSizeOfElementalsArmyCounter:Number = 0;
+			if (player.statusEffectv1(StatusEffects.SummonedElementals) > 0) currentSizeOfElementalsArmyCounter += player.statusEffectv1(StatusEffects.SummonedElementals);
+			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) currentSizeOfElementalsArmyCounter += player.statusEffectv2(StatusEffects.SummonedElementals) * 2;
+			return currentSizeOfElementalsArmyCounter;
+		}
 		
 		public function accessSummonElementalsMainMenu():void {
 			clearOutput();
 			outputText("Which one elemental would you like to summon or promote to higher rank?\n\n");
 			if (player.hasPerk(PerkLib.JobElementalConjurer)) {
 				outputText("Current limit for elemental summons: " + maxSizeOfElementalsArmy() + " different types of elementals\n");
-				outputText("Current elemental summoned count\n");
-				outputText("<i>-Normal: " + (player.hasStatusEffect(StatusEffects.SummonedElementals)? ""+player.statusEffectv1(StatusEffects.SummonedElementals)+"":"0") + "\n");
-				outputText("-Epic: " + (player.hasStatusEffect(StatusEffects.SummonedElementals)? ""+player.statusEffectv2(StatusEffects.SummonedElementals)+"":"0") + "\n");
+				outputText("Current summoned elementals count\n<i>");
+				if (player.hasStatusEffect(StatusEffects.SummonedElementals)) {
+					outputText("-Normal: " + player.statusEffectv1(StatusEffects.SummonedElementals) + " (" + player.statusEffectv1(StatusEffects.SummonedElementals) + ")\n");
+					outputText("-Epic: " + player.statusEffectv2(StatusEffects.SummonedElementals) + " (" + player.statusEffectv2(StatusEffects.SummonedElementals) * 2 + ")\n");
+				}
 				outputText("-Unique: 0</i>\n\n");
 			}
 			outputText("<b>Currently summoned elementals:</b><i>");
@@ -952,7 +960,7 @@ package classes.Scenes.Camp
 			addButton(0, "Ranks (N1)", accessSummonElementalsMainMenu1).hint("Rank 0 to 9th Elder Rank Normal Elementals");
 			addButton(1, "Ranks (N2)", accessSummonElementalsMainMenu2).hint("5th Elder Rank to (Peak) Baron Rank Normal Elementals");
 			addButton(2, "Ranks (N3)", accessSummonElementalsMainMenu3).hint("(Low) Viscount Rank to (Peak) Viscount Rank Normal Elementals");
-			addButtonDisabled(5, "Ranks (E)", "Rank 1 to Viscount Rank Epic Elementals");
+			addButton(5, "Ranks (E)", accessSummonEpicElementalsMainMenu).hint("Rank 1 to Viscount Rank Epic Elementals");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", playerMenu);
 		}
@@ -1122,25 +1130,52 @@ package classes.Scenes.Camp
 		}
 		private function accessSummonElementalsMainMenu1():void {
 			menu();
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && (player.statusEffectv1(StatusEffects.SummonedElementals) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu).hint("Req. 100 mana, 50 fatigue");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
+			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
 			if (player.hasPerk(PerkLib.ElementalContractRank1)) addButton(1, "RankUp(1)", rankUpSubmenu1st);
+			else addButtonDisabled(1, "RankUp(1)", "Req. Elemental Contract Rank 1 perk.");
 			if (player.hasPerk(PerkLib.ElementalContractRank2)) addButton(2, "RankUp(2)", rankUpSubmenu2nd);
+			else addButtonDisabled(2, "RankUp(2)", "Req. Elemental Contract Rank 2 perk.");
 			if (player.hasPerk(PerkLib.ElementalContractRank3)) addButton(3, "RankUp(3)", rankUpSubmenu3rd);
+			else addButtonDisabled(3, "RankUp(3)", "Req. Elemental Contract Rank 3 perk.");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 2) {
 				if (player.hasPerk(PerkLib.ElementalContractRank4)) addButton(4, "RankUp(4)", rankUpSubmenu4th);
+				else addButtonDisabled(4, "RankUp(4)", "Req. Elemental Contract Rank 4 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank5)) addButton(5, "RankUp(5)", rankUpSubmenu5th);
+				else addButtonDisabled(5, "RankUp(5)", "Req. Elemental Contract Rank 5 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank6)) addButton(6, "RankUp(6)", rankUpSubmenu6th);
+				else addButtonDisabled(6, "RankUp(6)", "Req. Elemental Contract Rank 6 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank7)) addButton(7, "RankUp(7)", rankUpSubmenu7th);
+				else addButtonDisabled(7, "RankUp(7)", "Req. Elemental Contract Rank 7 perk.");
+			} else {
+				addButtonDisabled(4, "RankUp(4)", "Req. 2nd Arcane Circle added.");
+				addButtonDisabled(5, "RankUp(5)", "Req. 2nd Arcane Circle added.");
+				addButtonDisabled(6, "RankUp(6)", "Req. 2nd Arcane Circle added.");
+				addButtonDisabled(7, "RankUp(7)", "Req. 2nd Arcane Circle added.");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 3) {
 				if (player.hasPerk(PerkLib.ElementalContractRank8)) addButton(8, "RankUp(8)", rankUpSubmenu8th);
+				else addButtonDisabled(8, "RankUp(8)", "Req. Elemental Contract Rank 8 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank9)) addButton(9, "RankUp(9)", rankUpSubmenu9th);
+				else addButtonDisabled(9, "RankUp(9)", "Req. Elemental Contract Rank 9 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank10)) addButton(10, "RankUp(10)", rankUpSubmenu10th);
+				else addButtonDisabled(10, "RankUp(10)", "Req. Elemental Contract Rank 10 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank11)) addButton(11, "RankUp(11)", rankUpSubmenu11th);
+				else addButtonDisabled(11, "RankUp(11)", "Req. Elemental Contract Rank 11 perk.");
+			} else {
+				addButtonDisabled(8, "RankUp(8)", "Req. 3rd Arcane Circle added.");
+				addButtonDisabled(9, "RankUp(9)", "Req. 3rd Arcane Circle added.");
+				addButtonDisabled(10, "RankUp(10)", "Req. 3rd Arcane Circle added.");
+				addButtonDisabled(10, "RankUp(10)", "Req. 3rd Arcane Circle added.");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
 				if (player.hasPerk(PerkLib.ElementalContractRank12)) addButton(12, "RankUp(12)", rankUpSubmenu12th);
+				else addButtonDisabled(12, "RankUp(12)", "Req. Elemental Contract Rank 12 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank13)) addButton(13, "RankUp(13)", rankUpSubmenu13th);
+				else addButtonDisabled(13, "RankUp(13)", "Req. Elemental Contract Rank 13 perk.");
+			} else {
+				addButtonDisabled(12, "RankUp(12)", "Req. 4th Arcane Circle added.");
+				addButtonDisabled(13, "RankUp(13)", "Req. 4th Arcane Circle added.");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
@@ -1148,66 +1183,115 @@ package classes.Scenes.Camp
 			menu();
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
 				if (player.hasPerk(PerkLib.ElementalContractRank14)) addButton(0, "RankUp(14)", rankUpSubmenu14th);
+				else addButtonDisabled(0, "RankUp(14)", "Req. Elemental Contract Rank 14 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank15)) addButton(1, "RankUp(15)", rankUpSubmenu15th);
+				else addButtonDisabled(1, "RankUp(15)", "Req. Elemental Contract Rank 15 perk.");
+			} else {
+				addButtonDisabled(0, "RankUp(14)", "Req. 4th Arcane Circle added.");
+				addButtonDisabled(1, "RankUp(15)", "Req. 4th Arcane Circle added.");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 5) {
 				if (player.hasPerk(PerkLib.ElementalContractRank16)) addButton(2, "RankUp(16)", rankUpSubmenu16th);
+				else addButtonDisabled(2, "RankUp(16)", "Req. Elemental Contract Rank 16 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank17)) addButton(3, "RankUp(17)", rankUpSubmenu17th);
+				else addButtonDisabled(3, "RankUp(17)", "Req. Elemental Contract Rank 17 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank18)) addButton(4, "RankUp(18)", rankUpSubmenu18th);
+				else addButtonDisabled(4, "RankUp(18)", "Req. Elemental Contract Rank 18 perk.");
 				if (player.hasPerk(PerkLib.ElementalContractRank19)) addButton(5, "RankUp(19)", rankUpSubmenu19th);
+				else addButtonDisabled(5, "RankUp(19)", "Req. Elemental Contract Rank 19 perk.");
+			} else {
+				addButtonDisabled(2, "RankUp(16)", "Req. 5th Arcane Circle added.");
+				addButtonDisabled(3, "RankUp(17)", "Req. 5th Arcane Circle added.");
+				addButtonDisabled(4, "RankUp(18)", "Req. 5th Arcane Circle added.");
+				addButtonDisabled(5, "RankUp(19)", "Req. 5th Arcane Circle added.");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 6) {
-				if (player.hasPerk(PerkLib.ElementalContractRank20)) addButton(6, "RankUp(20)", rankUpSubmenu20th).hint("Req. 2000 mana, 1000 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank21)) addButton(7, "RankUp(21)", rankUpSubmenu21th).hint("Req. 2100 mana, 1050 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank22)) addButton(8, "RankUp(22)", rankUpSubmenu22th).hint("Req. 2200 mana, 1100 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank23)) addButton(9, "RankUp(23)", rankUpSubmenu23th).hint("Req. 2300 mana, 1150 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank20)) addButton(6, "RankUp(20)", rankUpSubmenu20th);
+				else addButtonDisabled(6, "RankUp(20)", "Req. Elemental Contract Rank 20 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank21)) addButton(7, "RankUp(21)", rankUpSubmenu21th);
+				else addButtonDisabled(7, "RankUp(21)", "Req. Elemental Contract Rank 21 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank22)) addButton(8, "RankUp(22)", rankUpSubmenu22th);
+				else addButtonDisabled(8, "RankUp(22)", "Req. Elemental Contract Rank 22 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank23)) addButton(9, "RankUp(23)", rankUpSubmenu23th);
+				else addButtonDisabled(9, "RankUp(23)", "Req. Elemental Contract Rank 23 perk.");
+			} else {
+				addButtonDisabled(6, "RankUp(20)", "Req. 6th Arcane Circle added.");
+				addButtonDisabled(7, "RankUp(21)", "Req. 6th Arcane Circle added.");
+				addButtonDisabled(8, "RankUp(22)", "Req. 6th Arcane Circle added.");
+				addButtonDisabled(9, "RankUp(23)", "Req. 6th Arcane Circle added.");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 7) {
-				if (player.hasPerk(PerkLib.ElementalContractRank24)) addButton(10, "RankUp(24)", rankUpSubmenu24th).hint("Req. 2400 mana, 1200 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank25)) addButton(11, "RankUp(25)", rankUpSubmenu25th).hint("Req. 2500 mana, 1250 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank26)) addButton(12, "RankUp(26)", rankUpSubmenu26th).hint("Req. 2600 mana, 1300 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank27)) addButton(13, "RankUp(27)", rankUpSubmenu27th).hint("Req. 2700 mana, 1350 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank24)) addButton(10, "RankUp(24)", rankUpSubmenu24th);
+				else addButtonDisabled(10, "RankUp(24)", "Req. Elemental Contract Rank 24 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank25)) addButton(11, "RankUp(25)", rankUpSubmenu25th);
+				else addButtonDisabled(11, "RankUp(25)", "Req. Elemental Contract Rank 25 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank26)) addButton(12, "RankUp(26)", rankUpSubmenu26th);
+				else addButtonDisabled(12, "RankUp(26)", "Req. Elemental Contract Rank 26 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank27)) addButton(13, "RankUp(27)", rankUpSubmenu27th);
+				else addButtonDisabled(13, "RankUp(27)", "Req. Elemental Contract Rank 27 perk.");
+			} else {
+				addButtonDisabled(10, "RankUp(24)", "Req. 7th Arcane Circle added.");
+				addButtonDisabled(11, "RankUp(25)", "Req. 7th Arcane Circle added.");
+				addButtonDisabled(12, "RankUp(26)", "Req. 7th Arcane Circle added.");
+				addButtonDisabled(13, "RankUp(27)", "Req. 7th Arcane Circle added.");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function accessSummonElementalsMainMenu3():void {
 			menu();
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 8) {
-				if (player.hasPerk(PerkLib.ElementalContractRank28)) addButton(10, "RankUp(28)", rankUpSubmenu28th).hint("Req. 2800 mana, 1400 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank29)) addButton(11, "RankUp(29)", rankUpSubmenu29th).hint("Req. 2900 mana, 1450 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank30)) addButton(12, "RankUp(30)", rankUpSubmenu30th).hint("Req. 3000 mana, 1500 fatigue");
-				if (player.hasPerk(PerkLib.ElementalContractRank31)) addButton(13, "RankUp(31)", rankUpSubmenu31th).hint("Req. 3100 mana, 1550 fatigue");
+				if (player.hasPerk(PerkLib.ElementalContractRank28)) addButton(0, "RankUp(28)", rankUpSubmenu28th);
+				else addButtonDisabled(0, "RankUp(28)", "Req. Elemental Contract Rank 28 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank29)) addButton(1, "RankUp(29)", rankUpSubmenu29th);
+				else addButtonDisabled(1, "RankUp(29)", "Req. Elemental Contract Rank 29 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank30)) addButton(2, "RankUp(30)", rankUpSubmenu30th);
+				else addButtonDisabled(2, "RankUp(30)", "Req. Elemental Contract Rank 30 perk.");
+				if (player.hasPerk(PerkLib.ElementalContractRank31)) addButton(3, "RankUp(31)", rankUpSubmenu31th);
+				else addButtonDisabled(3, "RankUp(31)", "Req. Elemental Contract Rank 31 perk.");
+			} else {
+				addButtonDisabled(0, "RankUp(28)", "Req. 8th Arcane Circle added.");
+				addButtonDisabled(1, "RankUp(29)", "Req. 8th Arcane Circle added.");
+				addButtonDisabled(2, "RankUp(30)", "Req. 8th Arcane Circle added.");
+				addButtonDisabled(3, "RankUp(31)", "Req. 8th Arcane Circle added.");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
+		private function accessSummonEpicElementalsMainMenu():void {
+			menu();
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningEpicElementalsSubmenu);
+			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
 		private function summoningElementalsSubmenu():void {
-			outputText("\n\nIf you not have enough mana (100+) and fatigue (50+) it will be impossible to summon any elementals.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana (100+) and fatigue (50+) it will be impossible to summon any elementals.\n\n");
 			menu();
 			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxFatigue())) {
-				if (player.statusEffectv1(StatusEffects.SummonedElementalsAir) < 1) addButton(0, "Air", summonElementalAir).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire).hint("100 mana, 50 fatigue");
-				if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater).hint("100 mana, 50 fatigue");
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsAir) < 1) addButton(0, "Air", summonElementalAir);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater);
 				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther).hint("100 mana, 50 fatigue");
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood).hint("100 mana, 50 fatigue");
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal).hint("100 mana, 50 fatigue");
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal);
 				}
 				if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce).hint("100 mana, 50 fatigue");
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning).hint("100 mana, 50 fatigue");
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness).hint("100 mana, 50 fatigue");
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness);
 				}
 				if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) {
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsPoison) < 1) addButton(10, "Poison", summonElementalPoison).hint("100 mana, 50 fatigue");
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsPurity) < 1) addButton(11, "Purity", summonElementalPurity).hint("100 mana, 50 fatigue");
-					if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption).hint("100 mana, 50 fatigue");
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsPoison) < 1) addButton(10, "Poison", summonElementalPoison);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsPurity) < 1) addButton(11, "Purity", summonElementalPurity);
+					if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption);
 				}
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu1st():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()+"+) and fatigue ("+rankUpElementalFatigueCost()+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()+"+) and fatigue ("+rankUpElementalFatigueCost()+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= rankUpElementalManaCost() && (player.fatigue + rankUpElementalFatigueCost() <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1) addButton(0, "Air", rankUpElementalAir);
@@ -1227,7 +1311,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu2nd():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*2+"+) and fatigue ("+rankUpElementalFatigueCost()*2+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*2+"+) and fatigue ("+rankUpElementalFatigueCost()*2+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*2) && (player.fatigue + (rankUpElementalFatigueCost()*2) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2) addButton(0, "Air", rankUpElementalAir);
@@ -1247,7 +1332,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu3rd():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*3+"+) and fatigue ("+rankUpElementalFatigueCost()*3+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*3+"+) and fatigue ("+rankUpElementalFatigueCost()*3+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*3) && (player.fatigue + (rankUpElementalFatigueCost()*3) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) addButton(0, "Air", rankUpElementalAir);
@@ -1267,7 +1353,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu4th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*4+"+) and fatigue ("+rankUpElementalFatigueCost()*4+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*4+"+) and fatigue ("+rankUpElementalFatigueCost()*4+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*4) && (player.fatigue + (rankUpElementalFatigueCost()*4) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) addButton(0, "Air", rankUpElementalAir);
@@ -1287,7 +1374,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu5th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*5+"+) and fatigue ("+rankUpElementalFatigueCost()*5+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*5+"+) and fatigue ("+rankUpElementalFatigueCost()*5+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*5) && (player.fatigue + (rankUpElementalFatigueCost()*5) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) addButton(0, "Air", rankUpElementalAir);
@@ -1307,7 +1395,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu6th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*6+"+) and fatigue ("+rankUpElementalFatigueCost()*6+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*6+"+) and fatigue ("+rankUpElementalFatigueCost()*6+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*6) && (player.fatigue + (rankUpElementalFatigueCost()*6) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) addButton(0, "Air", rankUpElementalAir);
@@ -1327,7 +1416,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu7th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*7+"+) and fatigue ("+rankUpElementalFatigueCost()*7+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*7+"+) and fatigue ("+rankUpElementalFatigueCost()*7+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*7) && (player.fatigue + (rankUpElementalFatigueCost()*7) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) addButton(0, "Air", rankUpElementalAir);
@@ -1347,7 +1437,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu8th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*8+"+) and fatigue ("+rankUpElementalFatigueCost()*8+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*8+"+) and fatigue ("+rankUpElementalFatigueCost()*8+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*8) && (player.fatigue + (rankUpElementalFatigueCost()*8) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8) addButton(0, "Air", rankUpElementalAir);
@@ -1367,7 +1458,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu9th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*9+"+) and fatigue ("+rankUpElementalFatigueCost()*9+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*9+"+) and fatigue ("+rankUpElementalFatigueCost()*9+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*9) && (player.fatigue + (rankUpElementalFatigueCost()*9) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 9) addButton(0, "Air", rankUpElementalAir);
@@ -1387,7 +1479,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu10th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*10+"+) and fatigue ("+rankUpElementalFatigueCost()*10+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*10+"+) and fatigue ("+rankUpElementalFatigueCost()*10+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*10) && (player.fatigue + (rankUpElementalFatigueCost()*10) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 10) addButton(0, "Air", rankUpElementalAir);
@@ -1407,7 +1500,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu11th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*11+"+) and fatigue ("+rankUpElementalFatigueCost()*11+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*11+"+) and fatigue ("+rankUpElementalFatigueCost()*11+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*11) && (player.fatigue + (rankUpElementalFatigueCost()*11) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 11) addButton(0, "Air", rankUpElementalAir);
@@ -1427,7 +1521,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu12th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*12+"+) and fatigue ("+rankUpElementalFatigueCost()*12+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*12+"+) and fatigue ("+rankUpElementalFatigueCost()*12+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*12) && (player.fatigue + (rankUpElementalFatigueCost()*12) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 12) addButton(0, "Air", rankUpElementalAir);
@@ -1447,7 +1542,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu13th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*13+"+) and fatigue ("+rankUpElementalFatigueCost()*13+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*13+"+) and fatigue ("+rankUpElementalFatigueCost()*13+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*13) && (player.fatigue + (rankUpElementalFatigueCost()*13) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 13) addButton(0, "Air", rankUpElementalAir)
@@ -1467,7 +1563,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu14th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*14+"+) and fatigue ("+rankUpElementalFatigueCost()*14+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*14+"+) and fatigue ("+rankUpElementalFatigueCost()*14+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*14) && (player.fatigue + (rankUpElementalFatigueCost()*14) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 14) addButton(0, "Air", rankUpElementalAir);
@@ -1487,7 +1584,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu15th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*15+"+) and fatigue ("+rankUpElementalFatigueCost()*15+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*15+"+) and fatigue ("+rankUpElementalFatigueCost()*15+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*15) && (player.fatigue + (rankUpElementalFatigueCost()*15) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 15) addButton(0, "Air", rankUpElementalAir);
@@ -1507,7 +1605,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu16th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*16+"+) and fatigue ("+rankUpElementalFatigueCost()*16+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*16+"+) and fatigue ("+rankUpElementalFatigueCost()*16+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*16) && (player.fatigue + (rankUpElementalFatigueCost()*16) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 16) addButton(0, "Air", rankUpElementalAir);
@@ -1527,7 +1626,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu17th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*17+"+) and fatigue ("+rankUpElementalFatigueCost()*17+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*17+"+) and fatigue ("+rankUpElementalFatigueCost()*17+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*17) && (player.fatigue + (rankUpElementalFatigueCost()*17) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 17) addButton(0, "Air", rankUpElementalAir);
@@ -1547,7 +1647,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu18th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*18+"+) and fatigue ("+rankUpElementalFatigueCost()*18+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*18+"+) and fatigue ("+rankUpElementalFatigueCost()*18+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*18) && (player.fatigue + (rankUpElementalFatigueCost()*18) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 18) addButton(0, "Air", rankUpElementalAir);
@@ -1567,7 +1668,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu19th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*19+"+) and fatigue ("+rankUpElementalFatigueCost()*19+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*19+"+) and fatigue ("+rankUpElementalFatigueCost()*19+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*19) && (player.fatigue + (rankUpElementalFatigueCost()*19) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 19) addButton(0, "Air", rankUpElementalAir);
@@ -1587,7 +1689,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu20th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*20+"+) and fatigue ("+rankUpElementalFatigueCost()*20+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*20+"+) and fatigue ("+rankUpElementalFatigueCost()*20+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*20) && (player.fatigue + (rankUpElementalFatigueCost()*20) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 20) addButton(0, "Air", rankUpElementalAir);
@@ -1607,7 +1710,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu21th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*21+"+) and fatigue ("+rankUpElementalFatigueCost()*21+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*21+"+) and fatigue ("+rankUpElementalFatigueCost()*21+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*21) && (player.fatigue + (rankUpElementalFatigueCost()*21) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 21) addButton(0, "Air", rankUpElementalAir);
@@ -1627,7 +1731,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu22th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*22+"+) and fatigue ("+rankUpElementalFatigueCost()*22+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*22+"+) and fatigue ("+rankUpElementalFatigueCost()*22+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*22) && (player.fatigue + (rankUpElementalFatigueCost()*22) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 22) addButton(0, "Air", rankUpElementalAir);
@@ -1647,7 +1752,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu23th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*23+"+) and fatigue ("+rankUpElementalFatigueCost()*23+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*23+"+) and fatigue ("+rankUpElementalFatigueCost()*23+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*23) && (player.fatigue + (rankUpElementalFatigueCost()*23) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 23) addButton(0, "Air", rankUpElementalAir);
@@ -1667,7 +1773,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu24th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*24+"+) and fatigue ("+rankUpElementalFatigueCost()*24+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*24+"+) and fatigue ("+rankUpElementalFatigueCost()*24+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*24) && (player.fatigue + (rankUpElementalFatigueCost()*24) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 24) addButton(0, "Air", rankUpElementalAir);
@@ -1687,7 +1794,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu25th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*25+"+) and fatigue ("+rankUpElementalFatigueCost()*25+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*25+"+) and fatigue ("+rankUpElementalFatigueCost()*25+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*25) && (player.fatigue + (rankUpElementalFatigueCost()*25) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 25) addButton(0, "Air", rankUpElementalAir);
@@ -1707,7 +1815,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu26th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*26+"+) and fatigue ("+rankUpElementalFatigueCost()*26+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*26+"+) and fatigue ("+rankUpElementalFatigueCost()*26+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*26) && (player.fatigue + (rankUpElementalFatigueCost()*26) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 26) addButton(0, "Air", rankUpElementalAir);
@@ -1727,7 +1836,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu27th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*27+"+) and fatigue ("+rankUpElementalFatigueCost()*27+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*27+"+) and fatigue ("+rankUpElementalFatigueCost()*27+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*27) && (player.fatigue + (rankUpElementalFatigueCost()*27) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 27) addButton(0, "Air", rankUpElementalAir);
@@ -1747,7 +1857,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu2);
 		}
 		private function rankUpSubmenu28th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*28+"+) and fatigue ("+rankUpElementalFatigueCost()*28+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*28+"+) and fatigue ("+rankUpElementalFatigueCost()*28+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*28) && (player.fatigue + (rankUpElementalFatigueCost()*28) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 28) addButton(0, "Air", rankUpElementalAir);
@@ -1767,7 +1878,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
 		}
 		private function rankUpSubmenu29th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*29+"+) and fatigue ("+rankUpElementalFatigueCost()*29+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*29+"+) and fatigue ("+rankUpElementalFatigueCost()*29+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*29) && (player.fatigue + (rankUpElementalFatigueCost()*29) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 29) addButton(0, "Air", rankUpElementalAir);
@@ -1787,7 +1899,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
 		}
 		private function rankUpSubmenu30th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*30+"+) and fatigue ("+rankUpElementalFatigueCost()*30+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*30+"+) and fatigue ("+rankUpElementalFatigueCost()*30+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*30) && (player.fatigue + (rankUpElementalFatigueCost()*30) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 30) addButton(0, "Air", rankUpElementalAir);
@@ -1807,7 +1920,8 @@ package classes.Scenes.Camp
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
 		}
 		private function rankUpSubmenu31th():void {
-			outputText("\n\nIf you not have enough mana ("+rankUpElementalManaCost()*31+"+) and fatigue ("+rankUpElementalFatigueCost()*31+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
+			clearOutput();
+			outputText("If you not have enough mana ("+rankUpElementalManaCost()*31+"+) and fatigue ("+rankUpElementalFatigueCost()*31+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
 			menu();
 			if (player.mana >= (rankUpElementalManaCost()*31) && (player.fatigue + (rankUpElementalFatigueCost()*31) <= player.maxFatigue())) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 31) addButton(0, "Air", rankUpElementalAir);
@@ -1825,6 +1939,27 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 31) addButton(12, "Corruption", rankUpElementalCorruption);
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu3);
+		}
+		private function summoningEpicElementalsSubmenu():void {
+			clearOutput();
+			outputText("If you not have matching item, elemental shard and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
+			menu();
+			if (player.hasItem(useables.ELSHARD, 1) && (player.fatigue + 200 <= player.maxFatigue())) {
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) < 1) addButton(0, "Air", summonElementalAirEpic);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) < 1) addButton(1, "Earth", summonElementalEarthEpic);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) < 1) addButton(2, "Fire", summonElementalFireEpic);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsWaterE) < 1) addButton(3, "Water", summonElementalWaterEpic);
+				/*if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsPoison) < 1) addButton(10, "Poison", summonElementalPoison);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsPurity) < 1) addButton(11, "Purity", summonElementalPurity);
+				if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption);*/
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 
 		private function summonElementalAir():void {
@@ -1960,6 +2095,84 @@ package classes.Scenes.Camp
 		private function finishingSummoningElemental():void {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
+			doNext(accessSummonElementalsMainMenu);
+			cheatTime2(30);
+		}
+		private function summonElementalAirEpic():void {
+			clearOutput();
+			if (player.hasKeyItem("Air Sylph Core") >= 0) {
+				player.removeKeyItem("Air Sylph Core");
+				player.destroyItems(useables.ELSHARD, 1);
+				fatigue(200);
+				statScreenRefresh();
+				outputText("As it will be your first time summoning an epic air elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Air Sylph Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The air elemental appear within the circle. ");
+				outputText("At first huge and terrifying, it fight against its binding trying to break through. The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. During decreasing size it shape also morph into masculine humanoid form of sylph instead of generic shape of all elementals. ");
+				outputText("Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own epic air elemental!</b>\"");
+				player.createStatusEffect(StatusEffects.SummonedElementalsAirE, 1, 1, 0, 0);
+				finishingSummoningEpicElemental();
+			}
+			else {
+				outputText("Looks like you lack most important part 'Air Sylph Core'. Without it there is no point to attempt summoning epic air elemental.");
+				doNext(accessSummonElementalsMainMenu);
+			}
+		}
+		private function summonElementalEarthEpic():void {
+			clearOutput();
+			if (player.hasKeyItem("Earth Golem Core") >= 0) {
+				player.removeKeyItem("Earth Golem Core");
+				player.destroyItems(useables.ELSHARD, 1);
+				fatigue(200);
+				statScreenRefresh();
+				outputText("As it will be your first time summoning an epic earth elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Earth Golem Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The earth elemental appear within the circle. ");
+				outputText("At first huge and terrifying, it fight against its binding trying to break through. The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. During decreasing size it shape also morph into feminine humanoid form of golem instead of generic shape of all elementals. ");
+				outputText("Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own epic earth elemental!</b>\"");
+				player.createStatusEffect(StatusEffects.SummonedElementalsEarthE, 1, 1, 0, 0);
+				finishingSummoningEpicElemental();
+			}
+			else {
+				outputText("Looks like you lack most important part 'Earth Golem Core'. Without it there is no point to attempt summoning epic earth elemental.");
+				doNext(accessSummonElementalsMainMenu);
+			}
+		}
+		private function summonElementalFireEpic():void {
+			clearOutput();
+			if (player.hasKeyItem("Fire Ifrit Core") >= 0) {
+				player.removeKeyItem("Fire Ifrit Core");
+				player.destroyItems(useables.ELSHARD, 1);
+				fatigue(200);
+				statScreenRefresh();
+				outputText("As it will be your first time summoning an epic fire elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Fire Ifrit Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The fire elemental appear within the circle. ");
+				outputText("At first huge and terrifying, it fight against its binding trying to break through. The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. During decreasing size it shape also morph into feminine humanoid form of ifrit instead of generic shape of all elementals. ");
+				outputText("Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own epic fire elemental!</b>\"");
+				player.createStatusEffect(StatusEffects.SummonedElementalsFireE, 1, 1, 0, 0);
+				finishingSummoningEpicElemental();
+			}
+			else {
+				outputText("Looks like you lack most important part 'Fire Ifrit Core'. Without it there is no point to attempt summoning epic fire elemental.");
+				doNext(accessSummonElementalsMainMenu);
+			}
+		}
+		private function summonElementalWaterEpic():void {
+			clearOutput();
+			if (player.hasKeyItem("Water Undine Core") >= 0) {
+				player.removeKeyItem("Water Undine Core");
+				player.destroyItems(useables.ELSHARD, 1);
+				fatigue(200);
+				statScreenRefresh();
+				outputText("As it will be your first time summoning an epic water elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Water Undine Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The water elemental appear within the circle. ");
+				outputText("At first huge and terrifying, it fight against its binding trying to break through. The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. During decreasing size it shape also morph into masculine humanoid form of undine instead of generic shape of all elementals. ");
+				outputText("Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own epic water elemental!</b>\"");
+				player.createStatusEffect(StatusEffects.SummonedElementalsWaterE, 1, 1, 0, 0);
+				finishingSummoningEpicElemental();
+			}
+			else {
+				outputText("Looks like you lack most important part 'Water Undine Core'. Without it there is no point to attempt summoning epic water elemental.");
+				doNext(accessSummonElementalsMainMenu);
+			}
+		}
+		private function finishingSummoningEpicElemental():void {
+			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 2, 1);
+			else player.createStatusEffect(StatusEffects.SummonedElementals, 0, 1, 0, 0);
 			doNext(accessSummonElementalsMainMenu);
 			cheatTime2(30);
 		}
@@ -2335,4 +2548,4 @@ package classes.Scenes.Camp
 			cheatTime2(10);
 		}
 	}
-}
+}
