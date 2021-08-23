@@ -255,8 +255,11 @@ private function evangelineTalkMenu():void {
 	else addButtonDisabled(1, "???", "???");
 	if (EvangelineTalks >= 2) addButton(2, "Past Life", TalkPastLife1).hint("Talk about her past before meeting you.");
 	else addButtonDisabled(2, "???", "???");
-	//if (EvangelineTalks >= 3 && EvangelineAffectionMeter > 30) addButton(3, "3", ).hint("");her father? - na X affection score odblokowywane?	unlocks Dilapidated Temple/Shrine?
-	addButtonDisabled(3, "???", "???");
+	if (EvangelineTalks >= 3) {
+		if (EvangelineAffectionMeter >= 30) addButton(3, "Father", TalkYourFather).hint("");
+		else addButtonDisabled(3, "???", "Req. 30%+ affection");
+	}
+	else addButtonDisabled(3, "???", "???");
 	//if (EvangelineTalks >= 4) addButton(4, "4", ).hint("");her soul? - jak sie PC dowie o byciu demonicą przez nią?
 	//if (EvangelineTalks >= 5) addButton(5, "5", ).hint("");
 	addButton(14, "Back", meetEvangeline);
@@ -301,18 +304,26 @@ private function TalkPastLife1():void {
 	if (EvangelineTalks == 2) EvangelineTalks = 3;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
-}/*
+}
 private function TalkYourFather():void {
 	clearOutput();
-	outputText("Placeholder text.");
+	outputText("It's been some time she have been living here. Maybe she would tell you a bit more about herself, her past or 'the tresure' she hidden? You asks her if she could tell you something about her father.\n\n");
+	if (EvangelineTalks >= 4) outputText("\"<i>Hahahaha so you want hear that stories about me and my father again? Well not like i got so 'much more important' things to do now.</i>\"\n\n");
+	else outputText("\"<i>Hmmm. My father...</i>\" Evangeline muse to herself when she heard your reason to finsing her today. \"<i>Well i been living pretty good here for some time and you seems not so untrusty like many others... fine.</i>\"\n\n");
+	outputText("After you finds a comfortbale place to sit she stay silent for a while before starting to talking. It manly consists of some shorter or longer sotries that whould be nearly any kid tell how their father took them on a stroll or played with them. They focus much more on the places they both visited with telling not much about her father itself.\n\n");
+	outputText("\"<i>...and few times my father took me to this old shrine. I not sure why we had to visit that place. It looked more like place where would some devoted belivers or similar people come and...</i>\"\n\n");
+	outputText("Listening to her talk you noticed some interesting fact. Of all places she been taken by her father there was one where she wasn't allowed to run freely around. One where she been strictly forbidden from acting in any way that her father told her. You asks her to tell a bit more about this place.\n\n");
+	outputText("\"<i>This place?</i>\" Evangeline goes silent for a moment. \"<i>It's not good place. Even forgetting that it was located in area where was massive battle between two armies it's not good to go there, it's place where not many people would find interesting to visit.</i>\" She seems to be bit flustered when talking about and excusing herself she walks away to work on something in her alchemic lab.\n\n");
+	if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] < 1) flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 1;
 	evangelineAffection(1);
-	if (EvangelineTalks == 3) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
+	if (EvangelineTalks == 3) EvangelineTalks = 4;
 	doNext(evangelineTalkMenu);
 	cheatTime2(15);
-}
+}/*
 private function TalkPastLife2():void {
 	clearOutput();
-	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona demonicą ^^
+	outputText("Placeholder text.\n\n");po tym jak sie dowie PC iż jest ona demonicą ^^
+	outputText("Placeholder text.\n\n");
 	evangelineAffection(1);zajmie miejsce PastTalk1 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;
 	doNext(evangelineTalkMenu);
@@ -320,7 +331,7 @@ private function TalkPastLife2():void {
 }
 private function TalkPastLife3():void {
 	clearOutput();
-	outputText("Placeholder text.");po tym jak sie dowie PC iż jest ona boginią ^^
+	outputText("Placeholder text.\n\n");po tym jak sie dowie PC iż jest ona boginią ^^
 	evangelineAffection(1);zajmie miejsce PastTalk2 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
@@ -1005,12 +1016,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Heart Mutations
-		mutationsAssistant([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Heart")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1018,8 +1026,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0;
 		menu();
 		//Muscle Mutations
-		mutationsAssistant([PerkLib.MantislikeAgility, PerkLib.MantislikeAgilityEvolved, PerkLib.MantislikeAgilityFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.OniMusculature, PerkLib.OniMusculatureEvolved, PerkLib.OniMusculatureFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Muscle")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1027,8 +1036,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Mouth Mutations
-		mutationsAssistant([PerkLib.VenomGlands, PerkLib.VenomGlandsEvolved, PerkLib.VenomGlandsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HollowFangs, PerkLib.HollowFangsEvolved, PerkLib.HollowFangsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Mouth")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1036,8 +1046,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Adrenal Glands Mutations
-		mutationsAssistant([PerkLib.SalamanderAdrenalGlands, PerkLib.SalamanderAdrenalGlandsEvolved, PerkLib.SalamanderAdrenalGlandsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.OrcAdrenalGlands, PerkLib.OrcAdrenalGlandsEvolved, PerkLib.OrcAdrenalGlandsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Adrenals")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1045,9 +1056,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		mutationsAssistant([PerkLib.VampiricBloodsteam, PerkLib.VampiricBloodsteamEvolved, PerkLib.VampiricBloodsteamFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HinezumiBurningBlood, PerkLib.HinezumiBurningBloodEvolved, PerkLib.HinezumiBurningBloodFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.FeyArcaneBloodstream, PerkLib.FeyArcaneBloodstreamEvolved, PerkLib.FeyArcaneBloodstreamFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Bloodstream")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1055,10 +1066,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Fat tissue Mutations
-		mutationsAssistant([PerkLib.PigBoarFat, PerkLib.PigBoarFatEvolved, PerkLib.PigBoarFatFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.NaturalPunchingBag, PerkLib.NaturalPunchingBagEvolved, PerkLib.NaturalPunchingBagFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.WhaleFat, PerkLib.WhaleFatEvolved, PerkLib.WhaleFatFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.YetiFat, PerkLib.YetiFatEvolved, PerkLib.YetiFatFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("FaT")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1066,11 +1076,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Lungs Mutations
-		mutationsAssistant([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm], btnNum++);
-		//mutationsAssistant([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Lungs")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1078,9 +1086,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Metabolism Mutations
-		mutationsAssistant([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved], btnNum++);
-		mutationsAssistant([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved], btnNum++);
-		mutationsAssistant([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Metabolism")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1088,8 +1096,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Ovaries Mutations
-		mutationsAssistant([PerkLib.LactaBovinaOvaries, PerkLib.LactaBovinaOvariesEvolved, PerkLib.LactaBovinaOvariesFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.FloralOvaries, PerkLib.FloralOvariesEvolved, PerkLib.FloralOvariesFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Ovaries")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1097,9 +1106,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Testicle Mutations
-		mutationsAssistant([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.EasterBunnyEggBag, PerkLib.EasterBunnyEggBagEvolved, PerkLib.EasterBunnyEggBagFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Testicles")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1107,8 +1116,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Eyes Mutations
-		mutationsAssistant([PerkLib.GazerEye, PerkLib.GazerEyeEvolved, PerkLib.GazerEyeFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.GorgonsEyes, PerkLib.GorgonsEyesEvolved], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Eyes")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1116,7 +1126,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Peripheral/NervSys Mutations
-		mutationsAssistant([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1124,9 +1136,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Bones and Marrow Mutations
-		mutationsAssistant([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
@@ -1134,8 +1146,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Thyroid Glands Mutations
-		mutationsAssistant([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm], btnNum++);
-		//mutationsAssistant([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("Thyroid")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
@@ -1143,8 +1156,9 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		mutationsAssistant([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm], btnNum++);
+		for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
+			mutationsAssistant(mutate, btnNum++);
+		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
@@ -1177,7 +1191,7 @@ private function InternalMutations0(page:int = 0):void {
 		InternalMutationsText();
 		player.createPerk(perkTier, 0, 0, 0, 0);
 		cheatTime2(30);
-		InternalMutations0();
+		doNext(InternalMutations);
 	}
 }
 

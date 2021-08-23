@@ -112,8 +112,8 @@ public class PlayerInfo extends BaseContent {
 
 		if (camp.getCampPopulation() > 0) {
 			miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
-		//if (camp.getCampUndergroundPopulation() > 0)
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
+			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
 		}
 
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {
@@ -1689,6 +1689,7 @@ public class PlayerInfo extends BaseContent {
 		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
+		perks = mutationsClear(perks);
 		if (perks.length == 0) {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");
@@ -1716,6 +1717,16 @@ public class PlayerInfo extends BaseContent {
 			menu();
 			addButton(1, "Skip", perkSkip);
 		}
+	}
+	public function mutationsClear(perks:Array):Array{
+		var temp:Array = [];
+		var compMutate:Array = MutationsLib.mutationsArray("", true);
+		for each (var playerPerk:PerkType in perks){
+			if (!(compMutate.indexOf(playerPerk) >= 0)){
+				temp.push(playerPerk);
+			}
+		}
+		return temp;
 	}
 	private var perkList:Array = [];
 	private function linkhandler(e:TextEvent):void{

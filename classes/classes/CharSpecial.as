@@ -1685,7 +1685,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
 			player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
-			player.createPerk(PerkLib.BlackHeart, 0, 0, 0, 0);
+			player.createPerk(MutationsLib.BlackHeart, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Pervert, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);

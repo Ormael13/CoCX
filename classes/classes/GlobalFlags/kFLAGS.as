@@ -2747,7 +2747,7 @@ public static const PERMANENT_STEEL_GOLEMS_BAG:int                              
 public static const IMPROVED_PERMANENT_STEEL_GOLEMS_BAG:int                         = 2739;
 public static const UNKNOWN_FLAG_NUMBER_02740:int                                   = 2740;
 public static const WEAPON_DISPLAY_FLAG:int                                   	    = 2741;
-public static const UNKNOWN_FLAG_NUMBER_02742:int                                   = 2742;
+public static const DILAPIDATED_SHRINE_UNLOCKED:int                                 = 2742;
 public static const ZENJI_PERSPECTIVE_ON_PLAYER:int                                 = 2743;
 public static const ZENJI_PROGRESS:int                                   			= 2744;
 public static const ZENJI_DESTROYING_CORRUPTED_GLADES:int                           = 2745;
