@@ -37,7 +37,7 @@ public class PlayerAppearance extends BaseContent {
 
 		outputText(" " + describeFace());
 
-		outputText(" Your features consist of " + player.faceDescArticle() + "."); //M/F stuff!
+		outputText(" Your features are adorned by " + player.faceDescArticle() + "."); //M/F stuff!
 		outputText("[pg]");
 
 		outputText(Utils.mergeSentences([describeHair(), describeEars()], ", while "));

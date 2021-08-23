@@ -742,7 +742,7 @@ public class Face extends SaveableBodyPart {
 			}
 			//10+ -20
 			else if (femininity < 20) {
-			faceo = a + "rugged looks ";
+			faceo = a + "rugged look ";
 				if (hasBeard()) faceo += "and " + beard();
 				return faceo + "that's surely handsome";
 			}
@@ -794,7 +794,7 @@ public class Face extends SaveableBodyPart {
 					desc += ", and on your cheeks you have [skin coat]";
 				}
 				desc += ".";
-			} else if (creature.skin.hasCoatOfType(Skin.FUR)) {
+			} else {
 				desc += "Under your [skin coat], you have a face which is human in shape and structure.";
 			}
 		}
