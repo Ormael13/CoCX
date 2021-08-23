@@ -241,7 +241,7 @@ public class Face extends SaveableBodyPart {
 	public static const MOUSE: int = 16;
 	EnumValue.add(Types, MOUSE, "MOUSE", {
 		name: "mouse",
-		appearanceDesc: "You have a snubby, tapered mouse's face, with whiskers, a little pink nose, and [skin full]. Two large incisors complete it.",
+		appearanceDesc: "You have a snubby, tapered mouse's face, with whiskers and a little pink nose. Two large incisors complete it.",
 		bite: true
 	});
 	public static const FERRET_MASK: int = 17;
