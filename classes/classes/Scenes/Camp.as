@@ -4947,7 +4947,6 @@ public function rebirthFromBadEnd():void {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
 			clearOutput();
 			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end. Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
-			outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 && flags[kFLAGS.HARDCORE_MODE] == 1) flags[kFLAGS.HARDCORE_MODE] = 0;
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards) && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 2) {
 				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
@@ -5051,11 +5050,12 @@ public function rebirthFromBadEnd():void {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
 			}
-			for each(var mutref:PerkType in MutationsLib.mutationsArray("",true)){
-				if (player.hasPerk(mutref)){
-					player.perkPoints++;
-				}
-			}
+			//outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
+			//for each(var mutref:PerkType in MutationsLib.mutationsArray("",true)){
+			//	if (player.hasPerk(mutref)){
+			//		player.perkPoints++;
+			//	}
+			//}
 			doNext(doCamp);
 			return;
 		}

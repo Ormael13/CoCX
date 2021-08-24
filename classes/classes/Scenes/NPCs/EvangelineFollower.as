@@ -16,6 +16,7 @@ package classes.Scenes.NPCs
 	import classes.Scenes.Monsters.Imp;
 	import classes.Items.Armor;
 	import classes.Items.ArmorLib;
+	import classes.MutationsLib;
 	import classes.Items.Shield;
 	import classes.Items.ShieldLib;
 	import classes.Items.Undergarment;

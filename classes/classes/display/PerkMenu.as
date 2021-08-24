@@ -745,6 +745,9 @@ public class PerkMenu extends BaseContent {
 			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.");
 
+			player.perks.forEach(function (perk:PerkClass, ...args):void {
+				outputText(perk.perkName + "\n");
+			});
 		}
 
 		function menuGen(menuItems:Array, page:int):void{
@@ -992,7 +995,7 @@ public class PerkMenu extends BaseContent {
 				else{	//Information not available.
 					reqs.push("Missing data. Perhaps Unacquirable?");
 				}
-				outputText("\nRequirements for next tier: " + reqs.join(", ") + ".");
+				outputText("\nRequirements for next tier: " + reqs.join(", ")+ ".");
 			}
 			else {	//Manual done this way.
 				outputText("\nRequirements for next tier: " + acquireReq + ".");

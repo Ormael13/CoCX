@@ -11,6 +11,10 @@ import classes.BodyParts.Tail;
 
 public class MutationsLib
 	{
+		//This returns the requirements :) but also removes any prior to save 32's knowledge of acquired mutations :(
+		public function get game():CoC{
+			return CoC.instance;
+		}
 		//public static const
 		public static const DraconicBones:PerkType = mk("Draconic Bones", "Draconic Bones",
 				"Basic strengthening of your body bone structure. (+10 to unarmed attack)",
@@ -388,7 +392,7 @@ public class MutationsLib
 			return new PerkType(id, name, desc, longDesc, keepOnAscension);
 		}
 
-		//Idea: One function that returns array of highest mutation, to be cycled down at use. Each push is a different mutation bodypart. Set merge to true for all requested to return in one array, else returns as an array of arrays.
+		//Idea: One function that returns array of each mutation. Each push is a different mutation bodypart. Set merge to true for all requested to return in one array, else returns as an array of arrays.
 		//Must update here with an extra push to all mutations points. This feeds the Perks/Mutations DB and Evangeline's Mutations information.
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
 			var MutationsList:Array = []
@@ -1058,13 +1062,10 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.minotaurScore() >= 12;
 						}, "Minotaur race");
-
-
-
-			} catch (e:Error) {
-				trace(e.getStackTrace());
+				} catch (e:Error) {
+					trace(e.getStackTrace());
+				}
 			}
-		}
-
+		initMutations();
 	}
 }
