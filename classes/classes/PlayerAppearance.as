@@ -85,11 +85,13 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasCock() || player.balls > 0 || player.vaginas.length > 0) {
 			outputText(" " + Utils.mergeSentences([describeCock(), describeBalls()]));
 		}
-		outputText(describePussy() + "\n");
+
+		const pussyDesc: String = describePussy();
+		outputText(pussyDesc ? "[pg]" + pussyDesc : "");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
-			outputText(" " + Utils.mergeSentences([noSexString, describeAsshole()]));
+			outputText("[pg]" + Utils.mergeSentences([noSexString, describeAsshole()]));
 		}
 
 		const piercingsDesc: String = describePiercings();
@@ -789,7 +791,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describePussy(): String {
-		var pussyDesc: String = "\n";
+		var pussyDesc: String = "";
 
 		if (player.vaginas.length > 0){
 			var vagLoop:int = 0
@@ -1301,17 +1303,17 @@ public class PlayerAppearance extends BaseContent {
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
-			if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("185");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("170");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else outputText("140");
-			} else if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) {
+			} else if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("170");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("160");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("150");
 				else outputText("140");
-			} else if (player.hasPerk(PerkLib.MantislikeAgility)) {
+			} else if (player.hasPerk(MutationsLib.MantislikeAgility)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("150");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("145");
@@ -1321,12 +1323,12 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.mantisScore() >= 6) {
 			outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-20% to Str racial multi, +30% to Tou racial multi, +");
-			if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("100");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("90");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("80");
 				else outputText("70");
-			} else if (player.hasPerk(PerkLib.MantislikeAgility)) {
+			} else if (player.hasPerk(MutationsLib.MantislikeAgility)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("85");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("80");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("75");

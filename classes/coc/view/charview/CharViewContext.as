@@ -198,8 +198,8 @@ import coc.xlogic.ExecContext;
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
 
-					// Unique ring Accessories
-					oniGourd: player.jewelry == game.jewelries.ONIGOURD || player.jewelry2 == game.jewelries.ONIGOURD || player.jewelry3 == game.jewelries.ONIGOURD || player.jewelry4 == game.jewelries.ONIGOURD,
+					// Unique misc Accessories
+					oniGourd: player.miscJewelry == game.miscjewelries.ONI_GOURD || player.miscJewelry2 == game.miscjewelries.ONI_GOURD,
 					demonTailRing: player.miscJewelry == game.miscjewelries.DMAGETO || player.miscJewelry2 == game.miscjewelries.DMAGETO,
 
 					// Viewable neck Accessory lists

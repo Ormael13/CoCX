@@ -1336,7 +1336,6 @@ import classes.lists.Gender;
 			outputText("\n\nYou're inclined to agree, but right now you feel you should get back to your business, so you wave her goodbye and leave.");
 			//Refill hunger, restore HP and fatigue, gain lust
 			var refillAmount:int = (flags[kFLAGS.JOY_BREAST_SIZE] + 6) * 5;
-			if (refillAmount > (120 - player.hunger)) refillAmount = (120 - player.hunger); //Constrain max weight gain to +2.
 			player.refillHunger(refillAmount);
 			fatigue(-40);
 			HPChange(50 + player.maxHP() / 5, false);

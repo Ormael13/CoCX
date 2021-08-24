@@ -7068,6 +7068,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodySnake, doOutput);
 
+	    // Doesn't support tails
+	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
 	    desc += "With a ripping sound your tail suddenly begins to tear apart, splitting from the junction just below your thigh level into two segments as if cut by a scalpel. Pain doubles up as bones snaps, your tail tip growing into larger bulbs which a few second later turns into snake heads hissing loudly and mirroring your pain as blood seeps out of the wound. Finally, the wound left by the splitting of your tail closes at high speed, filling in with new flesh and muscle as your newly acquired hydra regeneration kicks in. <b>You snake tail is now forked with two hydra heads!</b>";
 
 	    if (!player.hasPerk(PerkLib.HydraRegeneration)) player.createPerk(PerkLib.HydraRegeneration, 0, 0, 0, 0);

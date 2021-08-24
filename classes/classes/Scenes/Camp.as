@@ -3459,6 +3459,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.MET_MINERVA] >= 4) places++;
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) places++;
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] > 0) places++;
+		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) places++;
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) places++;
 		if (flags[kFLAGS.YU_SHOP] == 2) places++;
 		if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) places++;
@@ -3486,22 +3487,25 @@ public class Camp extends NPCAwareContent{
 		}
 		menu();
 		if (dungeonFound()) addButton(0, "Dungeons", dungeons).hint("Delve into dungeons.");
-		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit the Marae's Islan in middle of the Lake.");
-		else addButtonDisabled(2, "???", "???");
+		else addButtonDisabled(0, "???", "Find at least one dungeon.");
+		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit the Marae's Island in middle of the Lake.");
+		else addButtonDisabled(2, "???", "Search the lake on the boat.");
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
-		else addButtonDisabled(3, "???", "???");
+		else addButtonDisabled(3, "???", "Search the lake.");
 		addButton(4, "Next", placesPage2);
 
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
-		else addButtonDisabled(5, "???", "???");
+		else addButtonDisabled(5, "???", "Search the desert.");
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", SceneLib.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
-		else addButtonDisabled(6, "???", "???");
+		else addButtonDisabled(6, "???", "Search the plains.");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
-		else addButtonDisabled(7, "???", "???");
+		else addButtonDisabled(7, "???", "Search the plains.");
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
-		else addButtonDisabled(10, "???", "???");
+		else addButtonDisabled(10, "???", "Explore the realm.");
 		if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
-		else addButtonDisabled(11, "???", "???");
+		else addButtonDisabled(11, "???", "Search the forest.");
+		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) addButton(11, "Dilapidated Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro).hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.");
+		else addButtonDisabled(12, "???", "Search the battlefield. (After hearing npc meantions this place)");
 		addButton(14, "Back", playerMenu);
 		return true;
 	}
@@ -3513,23 +3517,23 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.GAR_NAME] == 0) addButton(0, "Cathedral", SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork).hint("Visit the ruined cathedral you've recently discovered.");
 			else addButton(0, "Cathedral", SceneLib.gargoyle.returnToCathedral).hint("Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.");
 		}
-		else addButtonDisabled(0, "???", "???");
+		else addButtonDisabled(0, "???", "Explore the realm.");
 		if (farmFound()) addButton(1, "Farm", SceneLib.farm.farmExploreEncounter).hint("Visit Whitney's farm.");
-		else addButtonDisabled(1, "???", "???");
+		else addButtonDisabled(1, "???", "Search the lake.");
 		if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(2, "Town Ruins", SceneLib.amilyScene.exploreVillageRuin).hint("Visit the village ruins. \n\nRecommended level: 12");
-		else addButtonDisabled(2, "???", "???");
+		else addButtonDisabled(2, "???", "Search the lake.");
 		if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", SceneLib.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
-		else addButtonDisabled(3, "???", "???");
+		else addButtonDisabled(3, "???", "Search the mountains.");
 		addButton(4, "Next", placesPage3);
 
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
-		else addButtonDisabled(5, "???", "???");
+		else addButtonDisabled(5, "???", "Search the deepwoods.");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
-		else addButtonDisabled(6, "???", "???");
+		else addButtonDisabled(6, "???", "Search the high mountains.");
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
-		else addButtonDisabled(7, "???", "???");
+		else addButtonDisabled(7, "???", "Search the high mountains.");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
-		else addButtonDisabled(8, "???", "???");
+		else addButtonDisabled(8, "???", "Search the (outer) glacial rift.");
 		addButton(9, "Previous", placesToPage1);
 
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
@@ -3549,8 +3553,8 @@ public class Camp extends NPCAwareContent{
 			else addButton(1, "Quarry", camp.cabinProgress.quarrySite);
 		}
 		else {
-			addButtonDisabled(0, "???", "???");
-			addButtonDisabled(1, "???", "???");
+			addButtonDisabled(0, "???", "Search the forest.");
+			addButtonDisabled(1, "???", "Search the mountains.");
 		}
 
 		addButton(9, "Previous", placesToPage2);
@@ -3653,9 +3657,12 @@ public function wakeFromBadEnd():void {
 	}
 	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
 	//Skip time forward
-	model.time.days++;
-	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
-	else model.time.hours = 6;
+	var timeskip:Number = 24;
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) timeskip += flags[kFLAGS.BENOIT_CLOCK_ALARM];
+	else timeskip += 6;
+	CoC.instance.timeQ = timeskip - model.time.hours;
+	camp.sleepRecovery(true);
+	CoC.instance.timeQ = 0;
 	//Set so you're in camp.
 	DungeonAbstractContent.inDungeon = false;
 	inRoomedDungeon = false;
@@ -4860,7 +4867,7 @@ public function rebirthFromBadEnd():void {
 				player.ascensionPerkPoints += refund1;
 			}
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
+			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
 			if (player.perkv1(PerkLib.StarSphereMastery) > SphereMastery) {
 				player.gems += (1000 * (player.perkv1(PerkLib.StarSphereMastery) - SphereMastery));
 				player.removePerk(PerkLib.StarSphereMastery);
@@ -4958,6 +4965,22 @@ public function rebirthFromBadEnd():void {
 			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
 			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
 			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
+			if (player.hasPerk(PerkLib.StrongerElementalBond)) {
+				player.removePerk(PerkLib.StrongerElementalBond);
+				player.createPerk(PerkLib.StrongElementalBondEx,0,0,0,0);
+			}
+			if (player.hasPerk(PerkLib.StrongestElementalBond)) {
+				player.removePerk(PerkLib.StrongestElementalBond);
+				player.createPerk(PerkLib.StrongElementalBondSu,0,0,0,0);
+			}
+			if (player.hasPerk(PerkLib.StrongestElementalBondEx)) {
+				player.removePerk(PerkLib.StrongestElementalBondEx);
+				player.createPerk(PerkLib.StrongerElementalBond,0,0,0,0);
+			}
+			if (player.hasPerk(PerkLib.StrongestElementalBondSu)) {
+				player.removePerk(PerkLib.StrongestElementalBondSu);
+				player.createPerk(PerkLib.StrongerElementalBondEx,0,0,0,0);
+			}
 			// Flag to define whether the migration should open the Ascension menu for the player to buy Perks, mostly used for refunds
 			// Remember to set to False at the start of a migration if it's used
 			var refundAscensionPerks: Boolean = false;
