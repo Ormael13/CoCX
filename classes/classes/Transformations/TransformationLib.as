@@ -229,7 +229,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    }
 
 	    if (doOutput) outputText(desc);
-	    player.skin.setBaseOnly({ type: Skin.PLAIN, adj: "" });
+	    player.skin.setBaseOnly({ type: Skin.PLAIN, adj: "", desc: "skin" });
 	  },
 	  // is present
 	  function (): Boolean {
@@ -245,7 +245,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    // apply effect
 	    function (doOutput: Boolean): void {
 	      options = skinFormatOptions(options);
-	      player.skinDesc = "fur";
 
 	      const color: String = options.color;
 
@@ -303,9 +302,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 	      }
 
+	      player.skinDesc = "skin";
 	      player.skin.growCoat(Skin.FUR, options, coverage);
 	      if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.FUR));
+	    	Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.FUR));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -362,9 +362,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 	      }
 
+	      player.skinDesc = "skin";
 	      player.skin.growCoat(Skin.SCALES, options, coverage);
 	      if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.SCALES));
+	    	Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.SCALES));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -413,9 +414,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 	      }
 
+	      player.skinDesc = "skin";
 	      player.skin.growCoat(Skin.DRAGON_SCALES, options, coverage);
 	      if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DRAGON_SCALES));
+	    	Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DRAGON_SCALES));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -491,9 +493,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 	      }
 
+	      player.skinDesc = "skin";
 	      player.skin.growCoat(Skin.CHITIN, options, coverage);
 	      if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.CHITIN));
+	    	Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.CHITIN));
 	    },
 	    // is present
 	    function (): Boolean {
