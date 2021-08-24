@@ -744,10 +744,6 @@ public class PerkMenu extends BaseContent {
 				mutationCount++;
 			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.");
-
-			//player.perks.forEach(function (perk:PerkClass, ...args):void {
-			//	outputText(perk.ptype.id + "\n");
-			//});
 		}
 
 		function menuGen(menuItems:Array, page:int):void{

@@ -545,7 +545,7 @@ public class MutationsLib
 			return MutationsList;
 		}
 
-		public static function initMutations():void{
+		private static function initMutations():void{
 			try {
 				ArachnidBookLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.spiderScore() >= 5 || player.atlachNachaScore() >= 5;
