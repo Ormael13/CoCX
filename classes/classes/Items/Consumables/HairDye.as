@@ -27,54 +27,59 @@ public class HairDye extends Consumable
 		override public function useItem():Boolean {
 			clearOutput();
 			EngineCore.menu();
-			if (game.player.hairLength > 0) {
-				outputText("You have " + game.player.hairColor + " hair.");
-				if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
-				else EngineCore.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
-			} else {
-				outputText("You don't have any hair.");
-				EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
+			if (player.blockingBodyTransformations()){
+				EngineCore.addButtonDisabled(0, "Immune", "Your body is immune to any and all transformations.");
 			}
-			if (game.player.hasCoatOfType(Skin.FUR)) {
-				outputText("\n\nYou have [skin coat].");
-				if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
-				else EngineCore.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
-			} else {
-				outputText("\n\nYou don't have any fur.");
-				EngineCore.addButtonDisabled(1, "Fur", "You don't have any fur!");
-			}
-			if (game.player.hasCoatOfType(Skin.SCALES)) {
-				outputText("\n\nYou have [skin coat].");
-				if (game.player.coatColor != _color) {
-					if (game.player.hasItem(game.useables.REAGENT, 1)) EngineCore.addButton(2, "Scales", dyeScales);
-					else EngineCore.addButtonDisabled(2, "Scales", "You do not have enough reagents! (1)");
+			else{
+				if (game.player.hairLength > 0) {
+					outputText("You have " + game.player.hairColor + " hair.");
+					if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
+					else EngineCore.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
+				} else {
+					outputText("You don't have any hair.");
+					EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
 				}
-				else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
-			} else {
-				outputText("\n\nYou don't have any scales.");
-				EngineCore.addButtonDisabled(2, "Scale", "You don't have any scales!");
-			}
-			if (game.player.hasCoatOfType(Skin.CHITIN)) {
-				outputText("\n\nYou have [skin coat].");
-				if (game.player.coatColor != _color) {
-					if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(3, "Chitin", dyeChitin);
-					else EngineCore.addButtonDisabled(3, "Chitin", "You do not have enough reagents! (2)");
+				if (game.player.hasCoatOfType(Skin.FUR)) {
+					outputText("\n\nYou have [skin coat].");
+					if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
+					else EngineCore.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
+				} else {
+					outputText("\n\nYou don't have any fur.");
+					EngineCore.addButtonDisabled(1, "Fur", "You don't have any fur!");
 				}
-				else EngineCore.addButtonDisabled(3, "Chitin", "Your already have " + _color + " chitin!");
-			} else {
-				outputText("\n\nYou don't have any chitin.");
-				EngineCore.addButtonDisabled(3, "Chitin", "You don't have any scales!");
-			}
-			if (game.player.hasCoatOfType(Skin.DRAGON_SCALES)) {
-				outputText("\n\nYou have [skin coat].");
-				if (game.player.coatColor != _color) {
-					if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(7, "D.Scales", dyeDragonScales);
-					else EngineCore.addButtonDisabled(7, "D.Scales", "You do not have enough reagents! (2)");
+				if (game.player.hasCoatOfType(Skin.SCALES)) {
+					outputText("\n\nYou have [skin coat].");
+					if (game.player.coatColor != _color) {
+						if (game.player.hasItem(game.useables.REAGENT, 1)) EngineCore.addButton(2, "Scales", dyeScales);
+						else EngineCore.addButtonDisabled(2, "Scales", "You do not have enough reagents! (1)");
+					}
+					else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
+				} else {
+					outputText("\n\nYou don't have any scales.");
+					EngineCore.addButtonDisabled(2, "Scale", "You don't have any scales!");
 				}
-				else EngineCore.addButtonDisabled(7, "D.Scale", "Your already have " + _color + " dragon scales!");
-			} else {
-				outputText("\n\nYou don't have any dragon scales.");
-				EngineCore.addButtonDisabled(7, "D.Scale", "You don't have any scales!");
+				if (game.player.hasCoatOfType(Skin.CHITIN)) {
+					outputText("\n\nYou have [skin coat].");
+					if (game.player.coatColor != _color) {
+						if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(3, "Chitin", dyeChitin);
+						else EngineCore.addButtonDisabled(3, "Chitin", "You do not have enough reagents! (2)");
+					}
+					else EngineCore.addButtonDisabled(3, "Chitin", "Your already have " + _color + " chitin!");
+				} else {
+					outputText("\n\nYou don't have any chitin.");
+					EngineCore.addButtonDisabled(3, "Chitin", "You don't have any scales!");
+				}
+				if (game.player.hasCoatOfType(Skin.DRAGON_SCALES)) {
+					outputText("\n\nYou have [skin coat].");
+					if (game.player.coatColor != _color) {
+						if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(7, "D.Scales", dyeDragonScales);
+						else EngineCore.addButtonDisabled(7, "D.Scales", "You do not have enough reagents! (2)");
+					}
+					else EngineCore.addButtonDisabled(7, "D.Scale", "Your already have " + _color + " dragon scales!");
+				} else {
+					outputText("\n\nYou don't have any dragon scales.");
+					EngineCore.addButtonDisabled(7, "D.Scale", "You don't have any scales!");
+				}
 			}
 			EngineCore.addButton(14, "Nevermind", dyeCancel);
 			return true;
