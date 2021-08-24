@@ -37,7 +37,7 @@ public class PlayerAppearance extends BaseContent {
 
 		outputText(" " + describeFace());
 
-		outputText(" Your features consist of " + player.faceDescArticle() + "."); //M/F stuff!
+		outputText(" Your features are adorned by " + player.faceDescArticle() + "."); //M/F stuff!
 		outputText("[pg]");
 
 		outputText(Utils.mergeSentences([describeHair(), describeEars()], ", while "));
@@ -74,28 +74,31 @@ public class PlayerAppearance extends BaseContent {
 		const tailDescription: String = describeTail();
 		outputText(tailDescription ? " " + tailDescription : "");
 
-		const specialCasesDescription: String = describeSpecialCases();
-		outputText(specialCasesDescription ? "[pg]" + specialCasesDescription : "");
+		outputText("[pg]" + describeBreasts());
 
-		const pregnancyDescription: String = describePregnancy();
-		outputText(pregnancyDescription ? "[pg]" + pregnancyDescription : "");
-
-		outputText("[pg]" + Utils.mergeSentences([describeBreasts(), describeCrotch()]));
+		const crotchDesc: String = describeCrotch();
+		outputText(crotchDesc ? " " + crotchDesc : "");
 
 		if (player.hasCock() || player.balls > 0 || player.vaginas.length > 0) {
 			outputText(" " + Utils.mergeSentences([describeCock(), describeBalls()]));
 		}
 
 		const pussyDesc: String = describePussy();
-		outputText(pussyDesc ? "[pg]" + pussyDesc : "");
+		outputText(pussyDesc ? " " + pussyDesc : "");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
-			outputText("[pg]" + Utils.mergeSentences([noSexString, describeAsshole()]));
+			outputText(" " + Utils.mergeSentences([noSexString, describeAsshole()]));
 		}
 
 		const piercingsDesc: String = describePiercings();
 		outputText(piercingsDesc ? "[pg]" + piercingsDesc : "");
+
+		const specialCasesDescription: String = describeSpecialCases();
+		outputText(specialCasesDescription ? "[pg]" + specialCasesDescription : "");
+
+		const pregnancyDescription: String = describePregnancy();
+		outputText(pregnancyDescription ? "[pg]" + pregnancyDescription : "");
 
 		// EQUIPMENT
 		outputText("[pg]" + describeGear());
@@ -656,7 +659,6 @@ public class PlayerAppearance extends BaseContent {
 				temp++;
 			}
 		}
-		breastsDesc += "\n";
 		return breastsDesc;
 	}
 
@@ -667,7 +669,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeCock(): String {
 		var temp:Number = 0;
 		var rando:Number = 0;
-		var cockDesc: String = "\n";
+		var cockDesc: String = "";
 
 		if (player.hasCock()) {
 			rando = rand(100);
@@ -754,7 +756,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeBalls(): String {
-		var ballsDesc: String = " ";
+		var ballsDesc: String = "";
 
 		const ballsSizeDesc: String = " about " + num2Text(Math.round(player.ballSize)) + " " + (Math.round(player.ballSize) == 1 ? "inch" : "inches") +" across"
 
@@ -827,7 +829,7 @@ public class PlayerAppearance extends BaseContent {
 						clitExists++
 						break;
 					case LowerBody.MELKIE:
-						pussyDesc += " set is twice as big as the other, and the other hidden within it's folds. Your outer lips hide a";
+						pussyDesc += " set is twice as big as the other, and the other hidden within its folds. Your outer lips hide a";
 						break;
 					case VaginaClass.MANTICORE:
 						pussyDesc += " is ultrasensitive, even the slightest touch is enough to make you moan out a melody. Your song-box hides a ";
