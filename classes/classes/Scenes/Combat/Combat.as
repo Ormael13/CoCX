@@ -1799,7 +1799,24 @@ public class Combat extends BaseContent {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
             doNext(curry(combatMenu, false));
         } else {
-			outputText("\n\nYour elemental hit [monster a] [monster name]! ");
+			outputText("\n\n");
+			switch (elementType) {
+				case AIR_E      :
+					outputText("Sylph");
+					break;
+				case EARTH_E    :
+					outputText("Golem");
+					break;
+				case FIRE_E     :
+					outputText("Ifrit");
+					break;
+				case WATER_E    :
+					outputText("Undine");
+					break;
+				default:
+                    outputText("Your elemental");
+                    break;
+			}
             if (manaCost > 0) player.mana -= manaCost;
 			if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) {
 				var elementalDamageMulti:Number = 1;
@@ -1811,6 +1828,7 @@ public class Combat extends BaseContent {
 				if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 				if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 			}
+			outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]! ");
             elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
         }
     }
@@ -14883,4 +14901,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}
