@@ -5050,6 +5050,12 @@ public function rebirthFromBadEnd():void {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
 			}
+			//outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
+			//for each(var mutref:PerkType in MutationsLib.mutationsArray("",true)){
+			//	if (player.hasPerk(mutref)){
+			//		player.perkPoints++;
+			//	}
+			//}
 			doNext(doCamp);
 			return;
 		}
