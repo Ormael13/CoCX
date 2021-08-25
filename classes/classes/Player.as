@@ -10519,266 +10519,122 @@ use namespace CoC;
 
 		public function maxHeartMutations():Number {
 			var heartMutations:Number = 1;
-			if (hasPerk(MutationsLib.BlackHeart))
-				heartMutations--;
-			if (hasPerk(MutationsLib.FrozenHeart))
-				heartMutations--;
-			if (hasPerk(MutationsLib.ObsidianHeart))
-				heartMutations--;
-			if (hasPerk(MutationsLib.TwinHeart))
-				heartMutations--;
-			if (hasPerk(MutationsLib.HeartOfTheStorm))
-				heartMutations--;
-			if (hasPerk(MutationsLib.DraconicHeart))
-				heartMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				heartMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				heartMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				heartMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				heartMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Heart")){
+				if (hasPerk(pPerk)) heartMutations--;
+			}
+			heartMutations = heartMutations += maxAscensionBoost()
 			return heartMutations;
 		}
 		public function maxMusclesMutations():Number {
 			var musclesMutations:Number = 1;
-			if (hasPerk(MutationsLib.MantislikeAgility))
-				musclesMutations--;
-			if (hasPerk(MutationsLib.OniMusculature))
-				musclesMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				musclesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				musclesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				musclesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				musclesMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Muscle")){
+				if (hasPerk(pPerk)) musclesMutations--;
+			}
+			musclesMutations = musclesMutations += maxAscensionBoost()
 			return musclesMutations;
 		}
 		public function maxMouthMutations():Number {
 			var mouthMutations:Number = 1;
-			if (hasPerk(MutationsLib.VenomGlands))
-				mouthMutations--;
-			if (hasPerk(MutationsLib.HollowFangs))
-				mouthMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				mouthMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				mouthMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				mouthMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				mouthMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Mouth")){
+				if (hasPerk(pPerk)) mouthMutations--;
+			}
+			mouthMutations = mouthMutations += maxAscensionBoost()
 			return mouthMutations;
 		}
 		public function maxAdrenalGlandsMutations():Number {
 			var adrenalglandsMutations:Number = 1;
-			if (hasPerk(MutationsLib.SalamanderAdrenalGlands))
-				adrenalglandsMutations--;
-			if (hasPerk(MutationsLib.OrcAdrenalGlands))
-				adrenalglandsMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				adrenalglandsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				adrenalglandsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				adrenalglandsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				adrenalglandsMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Adrenals")){
+				if (hasPerk(pPerk)) adrenalglandsMutations--;
+			}
+			adrenalglandsMutations = adrenalglandsMutations += maxAscensionBoost()
 			return adrenalglandsMutations;
 		}
 		public function maxBloodsteamMutations():Number {
 			var bloodsteamMutations:Number = 1;
-			if (hasPerk(MutationsLib.VampiricBloodsteam))
-				bloodsteamMutations--;
-			if (hasPerk(MutationsLib.HinezumiBurningBlood))
-				bloodsteamMutations--;
-			if (hasPerk(MutationsLib.FeyArcaneBloodstream))
-				bloodsteamMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				bloodsteamMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				bloodsteamMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				bloodsteamMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				bloodsteamMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Bloodstream")){
+				if (hasPerk(pPerk)) bloodsteamMutations--;
+			}
+			bloodsteamMutations = bloodsteamMutations += maxAscensionBoost()
 			return bloodsteamMutations;
 		}
 		public function maxFatTissueMutations():Number {
 			var fattissueMutations:Number = 1;
-			if (hasPerk(MutationsLib.PigBoarFat))
-				fattissueMutations--;
-			if (hasPerk(MutationsLib.NaturalPunchingBag))
-				fattissueMutations--;
-			if (hasPerk(MutationsLib.WhaleFat))
-				fattissueMutations--;
-			if (hasPerk(MutationsLib.YetiFat))
-				fattissueMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				fattissueMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				fattissueMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				fattissueMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				fattissueMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("FaT")){
+				if (hasPerk(pPerk)) fattissueMutations--;
+			}
+			fattissueMutations = fattissueMutations += maxAscensionBoost()
 			return fattissueMutations;
 		}
 		public function maxLungsMutations():Number {
 			var lungsMutations:Number = 1;
-			if (hasPerk(MutationsLib.ArachnidBookLung))
-				lungsMutations--;
-			if (hasPerk(MutationsLib.DraconicLungs))
-				lungsMutations--;
-			if (hasPerk(MutationsLib.CaveWyrmLungs))
-				lungsMutations--;
-			if (hasPerk(MutationsLib.MelkieLung))
-				lungsMutations--;
-			if (hasPerk(MutationsLib.DrakeLungs))
-				lungsMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				lungsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				lungsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				lungsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				lungsMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Lungs")){
+				if (hasPerk(pPerk)) lungsMutations--;
+			}
+			lungsMutations = lungsMutations += maxAscensionBoost()
 			return lungsMutations;
 		}
 		public function maxMetabolismMutations():Number {
 			var metabolismMutations:Number = 1;
-			if (hasPerk(MutationsLib.ManticoreMetabolism))
-				metabolismMutations--;
-			if (hasPerk(MutationsLib.DisplacerMetabolism))
-				metabolismMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				metabolismMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				metabolismMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				metabolismMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				metabolismMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Metabolism")){
+				if (hasPerk(pPerk)) metabolismMutations--;
+			}
+			metabolismMutations = metabolismMutations += maxAscensionBoost()
 			return metabolismMutations;
 		}
 		public function maxOvariesMutations():Number {
 			var ovariesMutations:Number = 1;
-			if (hasPerk(MutationsLib.LactaBovinaOvaries))
-				ovariesMutations--;
-			if (hasPerk(MutationsLib.FloralOvaries))
-				ovariesMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				ovariesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				ovariesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				ovariesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				ovariesMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Ovaries")){
+				if (hasPerk(pPerk)) ovariesMutations--;
+			}
+			ovariesMutations = ovariesMutations += maxAscensionBoost()
 			return ovariesMutations;
 		}
 		public function maxBallsMutations():Number {
 			var ballsMutations:Number = 1;
-			if (hasPerk(MutationsLib.MinotaurTesticles))
-				ballsMutations--;
-			if (hasPerk(MutationsLib.EasterBunnyEggBag))
-				ballsMutations--;
-			if (hasPerk(MutationsLib.NukiNuts))
-				ballsMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				ballsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				ballsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				ballsMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				ballsMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Testicles")){
+				if (hasPerk(pPerk)) ballsMutations--;
+			}
+			ballsMutations = ballsMutations += maxAscensionBoost()
 			return ballsMutations;
 		}
 		public function maxEyesMutations():Number {
 			var eyesMutations:Number = 1;
-			if (hasPerk(MutationsLib.GorgonsEyes))
-				eyesMutations--;
-			if (hasPerk(MutationsLib.GazerEye))
-				eyesMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				eyesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				eyesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				eyesMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				eyesMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Eyes")){
+				if (hasPerk(pPerk)) eyesMutations--;
+			}
+			eyesMutations = eyesMutations += maxAscensionBoost()
 			return eyesMutations;
 		}
 		public function maxPeripheralNervSysMutations():Number {
 			var peripheralnervsysMutations:Number = 1;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSys))
-				peripheralnervsysMutations--;
-			//if (hasPerk(MutationsLib.FloralOvaries))
-			//	peripheralnervsysMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				peripheralnervsysMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				peripheralnervsysMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				peripheralnervsysMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				peripheralnervsysMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Nerv/Sys")){
+				if (hasPerk(pPerk)) peripheralnervsysMutations--;
+			}
+			peripheralnervsysMutations = peripheralnervsysMutations += maxAscensionBoost()
 			return peripheralnervsysMutations;
 		}
 		public function maxBonesAndMarrowMutations():Number {
 			var bonesandmarrowMutations:Number = 1;
-			if (hasPerk(MutationsLib.LizanMarrow))
-				bonesandmarrowMutations--;
-			if (hasPerk(MutationsLib.DraconicBones))
-				bonesandmarrowMutations--;
-			if (hasPerk(MutationsLib.HarpyHollowBones))
-				bonesandmarrowMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				bonesandmarrowMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				bonesandmarrowMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				bonesandmarrowMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				bonesandmarrowMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Bone")){
+				if (hasPerk(pPerk)) bonesandmarrowMutations--;
+			}
+			bonesandmarrowMutations = bonesandmarrowMutations += maxAscensionBoost()
 			return bonesandmarrowMutations;
 		}
 		public function maxThyroidGlandMutations():Number {
 			var thyroidglandMutations:Number = 1;
-			if (hasPerk(MutationsLib.KitsuneThyroidGland))
-				thyroidglandMutations--;
-			if (hasPerk(MutationsLib.NekomataThyroidGland))
-				thyroidglandMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				thyroidglandMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				thyroidglandMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				thyroidglandMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				thyroidglandMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("Thyroid")){
+				if (hasPerk(pPerk)) thyroidglandMutations--;
+			}
+			thyroidglandMutations = thyroidglandMutations += maxAscensionBoost()
 			return thyroidglandMutations;
 		}
 		public function maxParathyroidGlandMutations():Number {
 			var parathyroidglandMutations:Number = 1;
-			if (hasPerk(MutationsLib.HellcatParathyroidGlands))
-				parathyroidglandMutations--;
-			if (hasPerk(MutationsLib.KitsuneParathyroidGlands))
-				parathyroidglandMutations--;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				parathyroidglandMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				parathyroidglandMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				parathyroidglandMutations++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				parathyroidglandMutations++;
+			for each (var pPerk:PerkType in MutationsLib.mutationsArray("PThyroid")){
+				if (hasPerk(pPerk)) parathyroidglandMutations--;
+			}
+			parathyroidglandMutations = parathyroidglandMutations += maxAscensionBoost()
 			return parathyroidglandMutations;
 		}
 		public function maxDragonMutations():Number {
@@ -10796,6 +10652,18 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.KitsuneThyroidGland)) kitsuneMutations--;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) kitsuneMutations++;
 			return kitsuneMutations;
+		}
+		public function maxAscensionBoost():Number {
+			var ascensionMax:Number = 0;
+			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
+				ascensionMax++;
+			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
+				ascensionMax++;
+			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
+				ascensionMax++;
+			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
+				ascensionMax++;
+			return ascensionMax;
 		}
 
 		public function lactationQ():Number

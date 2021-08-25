@@ -743,7 +743,25 @@ public class PerkMenu extends BaseContent {
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
 				mutationCount++;
 			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
-					"\nNote: Not all body parts will use all available slots.");
+					"\nNote: Not all body parts will use all available slots.\n\n");
+			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
+			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid", "PThyroid"]
+			for each (var bodyPart:String in bPartlist){
+				var mCount:int = 0
+				for each (var pPerk:Array in MutationsLib.mutationsArray((bodyPart))){
+					if (player.hasPerk(pPerk[0])){
+						mCount++;
+					}
+				}
+				outputText(bodyPart + " mutations obtained: ");
+				if (mCount > mutationCount){
+					outputText("<font color=\"#800000\">");
+				}
+				else{
+					outputText("<font color=\"#008000\">");
+				}
+				outputText( mCount +"</font> of " + mutationCount + ".\n");
+			}
 
 		}
 

@@ -383,7 +383,7 @@ public class MutationsLib
 			return new PerkType(id, name, desc, longDesc, keepOnAscension);
 		}
 
-		//Idea: One function that returns array of each mutation. Each push is a different mutation bodypart. Set merge to true for all requested to return in one array, else returns as an array of arrays.
+		//Returns an array of arrays of mutation body parts. Can be specified to specific parts with teh first argument.
 		//Must update here with an extra push to all mutations points. This feeds the Perks/Mutations DB and Evangeline's Mutations information.
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
 			var MutationsList:Array = []
@@ -421,14 +421,14 @@ public class MutationsLib
 			function mutationsLungs():void{
 				MutationsList.push([ArachnidBookLung, ArachnidBookLungEvolved, ArachnidBookLungFinalForm]);
 				MutationsList.push([DraconicLungs, DraconicLungsEvolved, DraconicLungsFinalForm]);
-				MutationsList.push([CaveWyrmLungs, CaveWyrmLungsEvolved, CaveWyrmLungsFinalForm]);
+				//MutationsList.push([CaveWyrmLungs, CaveWyrmLungsEvolved, CaveWyrmLungsFinalForm]);
 				MutationsList.push([MelkieLung, MelkieLungEvolved, MelkieLungFinalForm]);
 				MutationsList.push([DrakeLungs, DrakeLungsEvolved, DrakeLungsFinalForm]);
 			}
 			function mutationsMetabolism():void{
 				MutationsList.push([ManticoreMetabolism, ManticoreMetabolismEvolved]);
 				MutationsList.push([DisplacerMetabolism, DisplacerMetabolismEvolved]);
-				MutationsList.push([SlimeMetabolism, SlimeMetabolismEvolved]);
+				//MutationsList.push([SlimeMetabolism, SlimeMetabolismEvolved]);
 			}
 			function mutationsOvaries():void{
 				MutationsList.push([LactaBovinaOvaries, LactaBovinaOvariesEvolved, LactaBovinaOvariesFinalForm]);
@@ -440,7 +440,7 @@ public class MutationsLib
 				MutationsList.push([NukiNuts, NukiNutsEvolved, NukiNutsFinalForm]);
 			}
 			function mutationsEyes():void{
-				MutationsList.push([GazerEye, GazerEyeEvolved, GazerEyeFinalForm]);
+				//MutationsList.push([GazerEye, GazerEyeEvolved, GazerEyeFinalForm]);
 				MutationsList.push([GorgonsEyes, GorgonsEyesEvolved]);
 			}
 			function mutationsNervSys():void{
