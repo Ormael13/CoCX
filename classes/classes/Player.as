@@ -4769,11 +4769,11 @@ use namespace CoC;
 			//	internalChimeraCounter++;
 			//if (hasPerk(PerkLib.))
 			//	internalChimeraCounter++;
-			if (hasPerk(MutationsLib.TrachealSystem))
+			if (hasPerk(PerkLib.TrachealSystem))
 				internalChimeraCounter++;
-			if (hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (hasPerk(PerkLib.TrachealSystemEvolved))
 				internalChimeraCounter++;
-			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
+			if (hasPerk(PerkLib.TrachealSystemFinalForm))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.TwinHeart))
 				internalChimeraCounter++;
@@ -5393,11 +5393,11 @@ use namespace CoC;
 				beeCounter += 2;
 			if (hasPerk(PerkLib.BeeOvipositor))
 				beeCounter++;
-			if (beeCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
+			if (beeCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 				beeCounter++;
-			if (beeCounter > 4 && hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (beeCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
 				beeCounter++;
-			if (beeCounter > 8 && hasPerk(MutationsLib.TrachealSystemFinalForm))
+			if (beeCounter > 8 && hasPerk(PerkLib.TrachealSystemFinalForm))
 				beeCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				beeCounter += 50;
@@ -6040,11 +6040,11 @@ use namespace CoC;
 				spiderCounter+=2;
 			if (hasPerk(MutationsLib.ArachnidBookLungFinalForm))
 				spiderCounter+=2;
-			if (spiderCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
+			if (spiderCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 				spiderCounter++;
-			if (spiderCounter > 4 && hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (spiderCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
 				spiderCounter++;
-			if (spiderCounter > 8 && hasPerk(MutationsLib.TrachealSystemFinalForm))
+			if (spiderCounter > 8 && hasPerk(PerkLib.TrachealSystemFinalForm))
 				spiderCounter++;
 			if (hasStatusEffect(StatusEffects.BlackNipples))
 				spiderCounter++;
@@ -6056,11 +6056,11 @@ use namespace CoC;
 				spiderCounter++;
 			if (hasPerk(MutationsLib.VenomGlandsFinalForm))
 				spiderCounter++;
-			if ((hasPerk(MutationsLib.VenomGlands) || hasPerk(MutationsLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((hasPerk(MutationsLib.VenomGlands) || hasPerk(PerkLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				spiderCounter++;
-			if ((hasPerk(MutationsLib.VenomGlandsEvolved) || hasPerk(MutationsLib.TrachealSystemEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((hasPerk(MutationsLib.VenomGlandsEvolved) || hasPerk(PerkLib.TrachealSystemEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				spiderCounter++;
-			if ((hasPerk(MutationsLib.VenomGlandsFinalForm) || hasPerk(MutationsLib.TrachealSystemFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((hasPerk(MutationsLib.VenomGlandsFinalForm) || hasPerk(PerkLib.TrachealSystemFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				spiderCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				spiderCounter += 50;
@@ -8291,11 +8291,11 @@ use namespace CoC;
 		//		trollCounter++;
 		//	if (tailType == Tail.SCORPION)
 		//		trollCounter++;
-		//	if (scorpionCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
+		//	if (scorpionCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 		//		trollCounter++;
-		//	if (scorpionCounter > 4 && hasPerk(MutationsLib.TrachealSystemEvolved))
+		//	if (scorpionCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
 		//		trollCounter++;
-		//	if (scorpionCounter > 8 && hasPerk(MutationsLib.TrachealSystemFinalForm))
+		//	if (scorpionCounter > 8 && hasPerk(PerkLib.TrachealSystemFinalForm))
 		//		trollCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				trollCounter += 50;
@@ -8314,11 +8314,11 @@ use namespace CoC;
 				scorpionCounter++;
 			if (tailType == Tail.SCORPION)
 				scorpionCounter++;
-			if (scorpionCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
+			if (scorpionCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 				scorpionCounter++;
-			if (scorpionCounter > 4 && hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (scorpionCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
 				scorpionCounter++;
-			if (scorpionCounter > 8 && hasPerk(MutationsLib.TrachealSystemFinalForm))
+			if (scorpionCounter > 8 && hasPerk(PerkLib.TrachealSystemFinalForm))
 				scorpionCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				scorpionCounter += 50;
@@ -8357,11 +8357,11 @@ use namespace CoC;
 				mantisCounter += 4;
 			if (hasPerk(PerkLib.MantisOvipositor))
 				mantisCounter++;
-			if (mantisCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
+			if (mantisCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 				mantisCounter++;
-			if (mantisCounter > 4 && hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (mantisCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
 				mantisCounter++;
-			if (mantisCounter > 8 && hasPerk(MutationsLib.TrachealSystemFinalForm))
+			if (mantisCounter > 8 && hasPerk(PerkLib.TrachealSystemFinalForm))
 				mantisCounter++;
 			if (hasPerk(MutationsLib.MantislikeAgility))
 				mantisCounter++;
@@ -8369,11 +8369,11 @@ use namespace CoC;
 				mantisCounter++;
 			if (hasPerk(MutationsLib.MantislikeAgilityFinalForm))
 				mantisCounter++;
-			if ((hasPerk(MutationsLib.TrachealSystem) || hasPerk(MutationsLib.MantislikeAgility)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((hasPerk(PerkLib.TrachealSystem) || hasPerk(MutationsLib.MantislikeAgility)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				mantisCounter++;
-			if ((hasPerk(MutationsLib.TrachealSystemEvolved) || hasPerk(MutationsLib.MantislikeAgilityEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((hasPerk(PerkLib.TrachealSystemEvolved) || hasPerk(MutationsLib.MantislikeAgilityEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				mantisCounter++;
-			if ((hasPerk(MutationsLib.TrachealSystemFinalForm) || hasPerk(MutationsLib.MantislikeAgilityFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((hasPerk(PerkLib.TrachealSystemFinalForm) || hasPerk(MutationsLib.MantislikeAgilityFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				mantisCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && mantisCounter >= 4)
@@ -8823,17 +8823,17 @@ use namespace CoC;
 				cancerCounter += 2;
 			if (hasPerk(MutationsLib.TwinHeartFinalForm))
 				cancerCounter += 2;
-			if (hasPerk(MutationsLib.TrachealSystem))
+			if (hasPerk(PerkLib.TrachealSystem))
 				cancerCounter++;
-			if (hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (hasPerk(PerkLib.TrachealSystemEvolved))
 				cancerCounter++;
-			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
+			if (hasPerk(PerkLib.TrachealSystemFinalForm))
 				cancerCounter++;
-			if ((hasPerk(MutationsLib.TwinHeart) || hasPerk(MutationsLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((hasPerk(MutationsLib.TwinHeart) || hasPerk(PerkLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				cancerCounter++;
-			if ((hasPerk(MutationsLib.TwinHeartEvolved) || hasPerk(MutationsLib.TrachealSystemEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((hasPerk(MutationsLib.TwinHeartEvolved) || hasPerk(PerkLib.TrachealSystemEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				cancerCounter++;
-			if ((hasPerk(MutationsLib.TwinHeartFinalForm) || hasPerk(MutationsLib.TrachealSystemFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((hasPerk(MutationsLib.TwinHeartFinalForm) || hasPerk(PerkLib.TrachealSystemFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				cancerCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				cancerCounter += 50;
@@ -9500,7 +9500,7 @@ use namespace CoC;
 				plantCounter -= 7;
 			if (yggdrasilScore() >= 10)
 				plantCounter -= 4;
-		//	if (scorpionCounter > 0 && hasPerk(MutationsLib.TrachealSystemEvolved))
+		//	if (scorpionCounter > 0 && hasPerk(PerkLib.TrachealSystemEvolved))
 		//		plantCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				plantCounter += 50;
@@ -10339,11 +10339,11 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.ArachnidBookLungFinalForm))
 				score+=2;
 			// Perk +3 (Tracheal)
-			if (hasPerk(MutationsLib.TrachealSystem))
+			if (hasPerk(PerkLib.TrachealSystem))
 				score++;
-			if (hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (hasPerk(PerkLib.TrachealSystemEvolved))
 				score++;
-			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
+			if (hasPerk(PerkLib.TrachealSystemFinalForm))
 				score++;
 			// Perk +3 (VenomGland)
 			if (hasPerk(MutationsLib.VenomGlands))
@@ -13551,16 +13551,16 @@ use namespace CoC;
 				removePerk(PerkLib.ScyllaInkGlandsEvolved);
 				perkPoints += 1;
 			}
-			if (hasPerk(MutationsLib.TrachealSystem)) {
-				removePerk(MutationsLib.TrachealSystem);
+			if (hasPerk(PerkLib.TrachealSystem)) {
+				removePerk(PerkLib.TrachealSystem);
 				perkPoints += 1;
 			}
-			if (hasPerk(MutationsLib.TrachealSystemEvolved)) {
-				removePerk(MutationsLib.TrachealSystemEvolved);
+			if (hasPerk(PerkLib.TrachealSystemEvolved)) {
+				removePerk(PerkLib.TrachealSystemEvolved);
 				perkPoints += 1;
 			}
-			if (hasPerk(MutationsLib.TrachealSystemFinalForm)) {
-				removePerk(MutationsLib.TrachealSystemFinalForm);
+			if (hasPerk(PerkLib.TrachealSystemFinalForm)) {
+				removePerk(PerkLib.TrachealSystemFinalForm);
 				perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.VampiricBloodsteam)) {
