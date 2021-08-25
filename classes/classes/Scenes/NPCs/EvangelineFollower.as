@@ -387,10 +387,10 @@ private function evangelineSparMenu():void {
 }
 
 private function LightSpar():void {
-	outputText("\n\n");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("Evangeline adjusts her lusty maiden's armor");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] < 8) outputText("Evangeline adjusts her practically indecent steel armor");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 5) outputText("Evangeline adjusts her rags");
+	outputText("\n\nEvangeline adjusts her ");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("lusty maiden's armor");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3 && flags[kFLAGS.EVANGELINE_LVL_UP] < 8) outputText("practically indecent steel armor");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 3) outputText("rags");
 	outputText(" and after stretching a few times she’s finished her warm up.  You raise your [weapon] and prepare to fight.  It's on!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 7) startCombat(new Evangeline1());
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] < 12) startCombat(new Evangeline2());
@@ -956,7 +956,10 @@ private function recivingCraftedSoulGem():void {
 private function InternalMutations():void {
 	clearOutput();
 	if (EvangelinePeepTalkOnInternalMutations == 0) {
-		outputText("Placeholder Text on dangers of internal mutation and etc.");
+		outputText("You ask Evangeline about ways to further make your body like that of a specific creature. Evangeline raises an eyebrow before replying.\n\n");
+		outputText("\"<i>It's possible to further improve yourself through internal mutations However such changes would cause stress upon the host body. Also you won't be able to get inner mutations from transformative alone, I will need to craft something special. As a human or former human your anatomy wasn't made to host foreign organs and thus might react unfavorably to the change causing your health to suffer degeneration. ");
+		outputText("I can create the mutagens required to transform your insides but don't you say I didn't warn you about the after effects. Oh and before you ask, no this isn't something a regular transformative can do. While eating food on Mareth can conform your body to that of any race if not literally make you almost like a member of said species at a first glance it doesn't go deep enough to strip everything human out of you else you would lose the ability to transform at all. ");
+		outputText("Inner mutation requires something more advanced than just eating random food you find across the wilderness. Did you understand all of that?</i>\"");
 		menu();
 		addButton(1, "No", InternalMutationsNie);
 		addButton(3, "Yes", InternalMutationsTak);
@@ -973,12 +976,14 @@ private function InternalMutations():void {
 	}
 }
 private function InternalMutationsNie():void {
-	outputText("\n\nPlaceholder Text on Evangeline been displeased with PC been super dumb village idiot.");
+	outputText("\n\nYour confused look annoys Evangeline to no end.");
+	outputText("\n\n\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"");
 	EvangelinePeepTalkOnInternalMutations = 1;
 	doNext(meetEvangeline);
 }
 private function InternalMutationsTak():void {
-	outputText("\n\nPlaceholder Text on Evangeline been pleased with PC not been so super dumb village idiot.");
+	outputText("\n\nEvangeline sighs in relief.");
+	outputText("\n\n\"<i>Glad to hear you at least are smarter than a minotaur. Anyway there are means to reduce the stress on your body from internal mutations. With proper training you can develop the Chimera Corpus Exocell or in common therm the chimera body adaptation. This will allow your body to adapt to stress and slowly negate the drawbacks. Of course the lazy route would be to acquire regeneration from a species inner mutation and thus negate the need to train entirely.</i>\"");
 	EvangelinePeepTalkOnInternalMutations = 2;
 	doNext(meetEvangeline);
 }

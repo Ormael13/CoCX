@@ -80,6 +80,7 @@ public class Combat extends BaseContent {
     public var MSGControllForEvasion:Boolean = false; // need to correctly display damage MSG. This way as i use it game will show just first damage msg.
     public var isBowDamageMDO:Boolean = false; // use it as a switch between melee and bow damage for correct calculations and display
 
+    public static const NONE:int = 0;
     public static const AIR:int = 1;
     public static const EARTH:int = 2;
     public static const FIRE:int = 3;
@@ -93,6 +94,7 @@ public class Combat extends BaseContent {
     public static const POISON:int = 11;
     public static const PURITY:int = 12;
     public static const CORRUPTION:int = 13;
+    public static const NONE_E:int = 30;
     public static const AIR_E:int = 31;
     public static const EARTH_E:int = 32;
     public static const FIRE_E:int = 33;
@@ -1769,6 +1771,14 @@ public class Combat extends BaseContent {
                 summonedElementals = (5 * player.statusEffectv2(StatusEffects.SummonedElementalsWaterE));
 				summonedEpicElemental = true;
                 break;
+			case NONE		:
+				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
+				doNext(curry(combatMenu, false));
+				break;
+			case NONE_E		:
+				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+				doNext(curry(combatMenu, false));
+				break;
         }
         var manaCost:Number = 1;
 		var manaCostInt:Number = 8;
@@ -10708,7 +10718,7 @@ public class Combat extends BaseContent {
         else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
         else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
         else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
-        monster.HP = monster.maxHP();
+        monster.HP = monster.maxOverHP();
         monster.mana = monster.maxMana();
         monster.soulforce = monster.maxSoulforce();
         monster.XP = monster.totalXP();

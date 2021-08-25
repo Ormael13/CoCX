@@ -3004,6 +3004,9 @@ import coc.view.MainView;
 			player.setJewelry3(JewelryLib.NOTHING);
 			player.setJewelry4(JewelryLib.NOTHING);
 			player.setVehicle(VehiclesLib.NOTHING);
+			player.setMiscJewelry(MiscJewelryLib.NOTHING);
+			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
+			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();
@@ -3044,4 +3047,4 @@ import coc.view.MainView;
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	} // what the fuck are those weird comments here? ^
-}
+}

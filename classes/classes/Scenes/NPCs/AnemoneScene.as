@@ -1204,8 +1204,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			addButton(0, "Item", item);
 			addButton(1, weaponT, weaponB);
 			if (flags[kFLAGS.KID_SITTER] <= 1) {
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= 90) addButton(3, "Tutor", tutorAnemoneKid);
-				else if (player.fatigue > 90) outputText("\n\nYou're too tired to tutor Kid A.");
+				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= (player.maxFatigue() - 25)) addButton(3, "Tutor", tutorAnemoneKid);
+				else if (player.fatigue > (player.maxFatigue() - 25)) outputText("\n\nYou're too tired to tutor Kid A.");
 				addButton(4, "Watch", anemoneWatchToggle);
 				addButton(8, "Evict", evictANemone);
 				var sex:Boolean = false;
@@ -1584,7 +1584,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			//else if no HP or lust outcome triggered: pass 1 hour, gain 40 xp, increment fatigue by 10
 			else {
 				if (player.level < 10) player.XP += 30;
-				fatigue(10);
+				fatigue(25);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}

@@ -441,6 +441,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+			addButton(13, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of elemental. Would skip to next minion attack/your main turn.");
 		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
 			menu();
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, Combat.AIR);
@@ -456,6 +457,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(10, "Poison", combat.baseelementalattacks, Combat.POISON);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(11, "Purity", combat.baseelementalattacks, Combat.PURITY);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(12, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
+			addButton(13, "None", combat.baseelementalattacks, Combat.NONE).hint("You forfeit potential attack of elemental. Would skip to next minion attack/your main turn.");
 		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") combat.comfoll.amilyCombatActions();

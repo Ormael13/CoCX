@@ -185,10 +185,10 @@ package classes.Scenes
 			//outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
 			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
 			outputText("-Dyes not working on permament races. (by Liadri)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-There is another predator that now decided to prowl the muntains. So maybe if you hear (lvl 15) Moooo you may consider running or something.\n");
+			outputText("-Max lust of monsters below lvl 6 been bit increased to 60%. Bit now also their max HP cap is also reduced to 60%. In any case lust or HP cap of monster can't decrease below 100/300.\n");
+			outputText("-New monster perk: For Beginners-type enemy. Given to lvl 1 imps, fearl imps and lvl 2 goblins. As for effect it makes their max hp/lust decreased to 10% of orginal values and scalings from diff setting, secondary scaling setting or ascension been reduced by large margin. That perk override effect for max hp/lust reduction of monsters below lvl 6.\n");
+			outputText("-When elementals attack added option to skip their turn (whatever reason it may be (totaly not due to rare bug of immortal mino king))\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -203,7 +203,7 @@ package classes.Scenes
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks gfiving Dodge error msg, still more than a few TF items ignoring perm TF's ");
-			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's\n");/*ostatni punkt changelogu
+			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

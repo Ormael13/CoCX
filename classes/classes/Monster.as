@@ -299,7 +299,12 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			temp *= stats_multi_based_on_misc();
+			if (this.level < 6) {
+				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
+				else temp *= 0.6;
+			}
 			temp = Math.round(temp);
+			if (temp < 300) temp = 300;
 			return temp;
 		}
 		public override function maxHP():Number {
@@ -455,9 +460,12 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) temp *= 0.5;
-			if (this.level < 3) temp *= 0.5;
+			if (this.level < 6) {
+				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
+				else temp *= 0.6;
+			}
 			temp = Math.round(temp);
+			if (temp < 100) temp = 100;
 			return temp;
 		}
 
@@ -736,27 +744,45 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyChampionType)) temp += 2;
 			if (hasPerk(PerkLib.EnemyBossType)) temp += 3;
 			if (this.level >= 25) temp *= 2;
-			if (this.level >= 50) temp *= 2.5;
-			if (this.level >= 75) temp *= 3;
-			if (this.level >= 100) temp *= 3.5;
-			if (this.level >= 125) temp *= 4;
-			if (this.level >= 150) temp *= 4.5;
-			if (this.level >= 175) temp *= 5;
-			if (this.level >= 200) temp *= 5.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 2;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 5;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 6;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+			if (this.level >= 50) temp *= 3;
+			if (this.level >= 75) temp *= 4;
+			if (this.level >= 100) temp *= 5;
+			if (this.level >= 125) temp *= 6;
+			if (this.level >= 150) temp *= 7;
+			if (this.level >= 175) temp *= 8;
+			if (this.level >= 200) temp *= 9;
+			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.1;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 5;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 1.2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 1.4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 1.6;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 1.8;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 2.2;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
+			}
+			else {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 2;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 5;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 6;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
+			}
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) temp = 1;
 			return temp;
 		}
@@ -3409,8 +3435,8 @@ import flash.utils.getQualifiedClassName;
 				armorMDef += Math.round(armorMDef * 0.5);
 			}
 			if (level < 6) {
-				if (level < 3) this.lust *= 0.25;
-				else this.lust *= 0.5;
+				if (hasPerk(PerkLib.EnemyForBeginnersType)) this.lust *= 0.1;
+				else this.lust *= 0.6;
 				this.lust = Math.round(this.lust);
 			}
 		}

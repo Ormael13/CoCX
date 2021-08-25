@@ -5050,12 +5050,12 @@ public function rebirthFromBadEnd():void {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
 			}
-			//outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
-			//for each(var mutref:PerkType in MutationsLib.mutationsArray("",true)){
-			//	if (player.hasPerk(mutref)){
-			//		player.perkPoints++;
-			//	}
-			//}
+			outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
+			for each(var mutref:PerkType in MutationsLib.mutationsArray("",true)){
+				if (player.hasPerk(mutref)){
+					player.perkPoints++;
+				}
+			}
 			doNext(doCamp);
 			return;
 		}
@@ -5293,6 +5293,10 @@ public function rebirthFromBadEnd():void {
 			awardAchievement("You're in Deep", kACHIEVEMENTS.DUNGEON_YOURE_IN_DEEP);
 			dungeonsCleared++;
 		}
+		if (SceneLib.dungeons.checkLethiceStrongholdClear()) {
+			awardAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN);
+			dungeonsCleared++;
+		}
 		if (SceneLib.dungeons.checkSandCaveClear()) {
 			awardAchievement("Friend of the Sand Witches", kACHIEVEMENTS.DUNGEON_SAND_WITCH_FRIEND);
 			dungeonsCleared++;
@@ -5301,10 +5305,6 @@ public function rebirthFromBadEnd():void {
 			awardAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL);
 			dungeonsCleared++;
 			if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == CoC.instance.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
-		}
-		if (SceneLib.dungeons.checkLethiceStrongholdClear()) {
-			awardAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN);
-			dungeonsCleared++;
 		}
 		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) {
 			awardAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON);
@@ -5428,16 +5428,16 @@ public function rebirthFromBadEnd():void {
 		//if (TotalKillCount >= 1410) awardAchievement("Body Count: Bloodiest Champion Ever", kACHIEVEMENTS.GENERAL_BODY_COUNT_BLOODIEST_CHAMPION_EVER);
 
 		var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
-		if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
-		if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) NPCsBadEnds++;
-		if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) NPCsBadEnds++;
 		if (flags[kFLAGS.KELT_KILLED] > 0 || flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) NPCsBadEnds++;
 		if (flags[kFLAGS.JOJO_DEAD_OR_GONE] == 2) NPCsBadEnds++;
 		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) NPCsBadEnds++;
 		if (flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) NPCsBadEnds++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5) NPCsBadEnds++;
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 3) NPCsBadEnds++;
-		//Dungeon 3 encounters
+		//Dungeons
+		if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
+		if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) NPCsBadEnds++;
+		if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) NPCsBadEnds++;
 		if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) NPCsBadEnds++;
 		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 1) NPCsBadEnds++;
 		if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 1) NPCsBadEnds++;
