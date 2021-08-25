@@ -307,15 +307,6 @@ public class MutationsLib
 		public static const SalamanderAdrenalGlandsFinalForm:PerkType = mk("Salamander Adrenal Glands (Final Form)", "Salamander Adrenal Glands (Final Form)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed, libido; double bonus to attack, boost slight natural wrath generation rate, extend berserking/lustzerking by 8 turns and enable to start with one or both of them.",
 				"You've chosen the 'Salamander Adrenal Glands (Final Form)' perk, repeadly use of lustzerk caused your adrenal glands mutate for the third time.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.05});
-		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
-				"Your body possesses rudimentary respiratory system of the insects.",
-				"You've chosen the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
-		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
-				"Your body possesses half developed respiratory system of the insects. (+5 to max str (scalable))",
-				"You've chosen the 'Tracheal System (Evolved)' perk, continuous exposition to insectoidal changes caused your tracheal system evolution into more complete form.").withBuffs({'str.mult':0.05});
-		public static const TrachealSystemFinalForm:PerkType = mk("Tracheal System (Final Form)", "Tracheal System (Final Form)",
-				"Your body possesses fully developed respiratory system of the insects. (+10 to max spe (scalable))",
-				"You've chosen the 'Tracheal System (Final Form)' perk, continued exposition to insectoidal changes caused your tracheal system evolution into it final form.").withBuffs({'spe.mult':0.10});
 		public static const TwinHeart:PerkType = mk("Twin Heart", "Twin Heart",
 				"+40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).",
 				"You've chosen the 'Twin Heart' perk, +40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).").withBuffs({'tou.mult':0.05,'spe.mult':0.05});
@@ -650,7 +641,7 @@ public class MutationsLib
 				ManticoreMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.manticoreScore() >= 5 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
 				}, "Manticore race and tail");
-				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+				MantislikeAgility.requireMusclesMutationSlot().requirePerk(PerkLib.TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 5;
 				}, "Mantis race");
 				MelkieLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -692,9 +683,6 @@ public class MutationsLib
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
-				TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
-				}, "Any insect race");
 				TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
 				}, "Tauric or Unicorn race");
@@ -775,9 +763,6 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.devilkinScore() >= 12;
 						}, "Devil race");
-				TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 17;
-				}, "Any insect race");
 				TwinHeartEvolved.requireLevel(6)
 						.requirePerk(TwinHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
@@ -945,9 +930,6 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.devilkinScore() >= 14;
 						}, "Devil race");
-				TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 17;
-				}, "Any insect race");
 				TwinHeartFinalForm.requireLevel(24)
 						.requirePerk(TwinHeartEvolved)
 						.requireCustomFunction(function (player:Player):Boolean {

@@ -3160,7 +3160,7 @@ public class PerkLib
 		public static const ToughHide:PerkType = mk("Tough Hide", "Tough Hide",
 				"Increase your armor by 2 and magic resistance by 1 so long as you have scale chitin fur or other natural armor. (boost scalable with ng tiers)",
 				"You've chosen the 'Tough Hide' perk, increase your armor and magic resistance as long you have any natural armor!");
-		/*public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
+		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
 				"Your body possesses rudimentary respiratory system of the insects.",
 				"You've chosen the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
 		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
@@ -3169,7 +3169,6 @@ public class PerkLib
 		public static const TrachealSystemFinalForm:PerkType = mk("Tracheal System (Final Form)", "Tracheal System (Final Form)",
 				"Your body possesses fully developed respiratory system of the insects. (+10 to max spe (scalable))",
 				"You've chosen the 'Tracheal System (Final Form)' perk, continued exposition to insectoidal changes caused your tracheal system evolution into it final form.").withBuffs({'spe.mult':0.10});
-		*/
 		public static const TraditionalMageI:PerkType = mk("Traditional Mage I", "Traditional Mage I",
 				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
 				"You've chosen the 'Traditional Mage I' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
@@ -6368,10 +6367,10 @@ public class PerkLib
             ScyllaInkGlands.requirePerk(InkSpray).requireCustomFunction(function (player:Player):Boolean {
                 return player.scyllaScore() >= 5;
             }, "Scylla race");
-            /*TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
+            TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
                 return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
-            TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+            /*TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
             }, "Tauric or Unicorn race");
 			VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -6511,10 +6510,10 @@ public class PerkLib
             /*ScyllaInkGlandsEvolved.requireLevel(6).requirePerk(ScyllaInkGlands).requireCustomFunction(function (player:Player):Boolean {
                 return player.scyllaScore() >= 10;
             }, "Scylla race");*/
-            /*TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+            TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
                 return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
-            TwinHeartEvolved.requireLevel(6)
+            /*TwinHeartEvolved.requireLevel(6)
 				.requirePerk(TwinHeart)
 				.requireCustomFunction(function (player:Player):Boolean {
 				return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.sphinxScore() >= 16 || player.cancerScore() >= 8;
@@ -6993,10 +6992,11 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.devilkinScore() >= 14;
             }, "Devil race");
+            */
             TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
-            TwinHeartFinalForm.requireLevel(24)
+            /*TwinHeartFinalForm.requireLevel(24)
 				.requirePerk(TwinHeartEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12;

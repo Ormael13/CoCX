@@ -2091,7 +2091,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 return;
 	 if (monster.plural) {
 	 if (player.findPerk(MutationsLib.MantislikeAgility) >= 0) {
-	 if (player.findPerk(MutationsLib.MantislikeAgilityEvolved) >= 0 && player.findPerk(MutationsLib.TrachealSystemEvolved) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+	 if (player.findPerk(MutationsLib.MantislikeAgilityEvolved) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
 	 }
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
@@ -2107,8 +2107,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.findPerk(MutationsLib.MantislikeAgility) < 0) damage *= 0.6;
 	 //bonuses if fighting multiple enemies
 	 if (monster.plural) {
-	 if (player.findPerk(MutationsLib.MantislikeAgility) < 0 && player.findPerk(MutationsLib.TrachealSystemEvolved) < 0) damage *= 1.1;
-	 if (player.findPerk(MutationsLib.MantislikeAgility) >= 0 && player.findPerk(MutationsLib.TrachealSystemEvolved) >= 0) damage *= 1.5;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) < 0 && player.findPerk(PerkLib.TrachealSystemEvolved) < 0) damage *= 1.1;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) damage *= 1.5;
 	 }
 	 //weapon bonus
 	 if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
