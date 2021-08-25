@@ -748,7 +748,8 @@ public class PerkMenu extends BaseContent {
 			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid", "PThyroid"]
 			for each (var bodyPart:String in bPartlist){
 				var mCount:int = 0
-				for each (var pPerk:Array in MutationsLib.mutationsArray((bodyPart))){
+				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart)
+				for each (var pPerk:Array in mPerkarray){
 					if (player.hasPerk(pPerk[0])){
 						mCount++;
 					}
@@ -760,9 +761,8 @@ public class PerkMenu extends BaseContent {
 				else{
 					outputText("<font color=\"#008000\">");
 				}
-				outputText( mCount +"</font> of " + mutationCount + ".\n");
+				outputText( mCount +"</font> of " + mutationCount + ". Max:(" + mPerkarray.length + ")\n");
 			}
-
 		}
 
 		function menuGen(menuItems:Array, page:int):void{
