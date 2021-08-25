@@ -2366,9 +2366,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
 
+			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+			var mutationsShift:Array = [];
+			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
+				mutationsShift.push(pperk1.id);
+			}
+
 			if (ptype == null) {
 				trace("ERROR: Unknown perk id=" + id);
-
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {

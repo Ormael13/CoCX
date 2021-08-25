@@ -7532,6 +7532,5 @@ public class PerkLib
         }
 	}
 	initDependencies();
-	//MutationsLib.initMutations();
 }
 }
