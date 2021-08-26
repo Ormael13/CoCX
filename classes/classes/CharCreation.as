@@ -1759,6 +1759,7 @@ import coc.view.MainView;
 			player.HP = player.maxHP();
 			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
+			menu();
 			addButton(0, "Ingnam", goToIngnam);
 			addButton(1,"Skip Ingnam", arrival);
 		}
@@ -3047,4 +3048,4 @@ import coc.view.MainView;
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	} // what the fuck are those weird comments here? ^
-}
+}
