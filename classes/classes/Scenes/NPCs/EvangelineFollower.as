@@ -1006,17 +1006,7 @@ private function InternalMutations0(page:int = 0):void {
 	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
 	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
 	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
-	menuGen(menuItems, page);
-
-	function menuGen(menuItems:Array, page:int):void {
-		var selectMenu:ButtonDataList = new ButtonDataList();
-		for (var i:int = 0; i < menuItems.length; i++) {
-			if (i % 2 == 0) {
-				selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
-			}
-		}
-		submenu(selectMenu, meetEvangeline, page, false);
-	}
+	menuGen(menuItems, page, meetEvangeline, false);
 
 	function InternalMutationsHeart():void{
 		var btnNum:int = 0

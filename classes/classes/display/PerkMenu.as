@@ -728,7 +728,7 @@ public class PerkMenu extends BaseContent {
 
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
-		Source: Player.as for list of mutations under function maxHeartMutations, PerkLib.as for mutation descriptions.
+		Source: MutationsLib.as for all mutations.
  		*/
 		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
@@ -765,16 +765,6 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 
-		function menuGen(menuItems:Array, page:int):void{
-			var selectMenu:ButtonDataList = new ButtonDataList();
-			for (var i:int = 0; i < menuItems.length; i++){
-				if (i%2 == 0){
-					selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
-				}
-			}
-			submenu(selectMenu, displayPerks, page, false);
-		}
-		
 		function mutationsDBHeart():void{
 			clearOutput();
 			//Heart Mutations
@@ -970,7 +960,7 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
 		menuItems.push("Dragons", mutationsDBDragon);
 		menuItems.push("Kitsunes", mutationsDBKitsune);
-		menuGen(menuItems, page);
+		menuGen(menuItems, page, displayPerks, false);
 	}
 	//Why does it need menu(); to update output / not blank the screen???
 
