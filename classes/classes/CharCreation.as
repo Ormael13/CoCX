@@ -1759,6 +1759,7 @@ import coc.view.MainView;
 			player.HP = player.maxHP();
 			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
+			menu();
 			addButton(0, "Ingnam", goToIngnam);
 			addButton(1,"Skip Ingnam", arrival);
 		}
