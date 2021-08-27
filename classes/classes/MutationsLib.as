@@ -453,7 +453,7 @@ public class MutationsLib
 			}
 			function mutationsThyroidGlands():void{
 				MutationsList.push([KitsuneThyroidGland, KitsuneThyroidGlandEvolved, KitsuneThyroidGlandFinalForm]);
-				MutationsList.push([NekomataThyroidGland, NekomataThyroidGlandEvolved, NekomataThyroidGlandFinalForm]);
+				//MutationsList.push([NekomataThyroidGland, NekomataThyroidGlandEvolved, NekomataThyroidGlandFinalForm]);
 			}
 			function mutationsParaThyroidGlands():void{
 				MutationsList.push([KitsuneParathyroidGlands, KitsuneParathyroidGlandsEvolved, KitsuneParathyroidGlandsFinalForm]);
