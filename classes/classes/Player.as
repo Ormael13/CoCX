@@ -14145,7 +14145,7 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masteryThrowingLevel < maxThrowingLevel() && masteryThrowingXP >= ThrowingExpToLevelUp()) {
-					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
+					outputText("\n<b>Dao of Throwing Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
 					masteryThrowingLevel++;
 					masteryThrowingXP = 0;
 				}
@@ -14186,7 +14186,7 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masteryFirearmsLevel < maxFirearmsLevel() && masteryFirearmsXP >= FirearmsExpToLevelUp()) {
-					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
+					outputText("\n<b>Dao of Firearms Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
 					masteryFirearmsLevel++;
 					masteryFirearmsXP = 0;
 				}
