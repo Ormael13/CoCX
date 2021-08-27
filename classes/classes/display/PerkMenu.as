@@ -761,7 +761,18 @@ public class PerkMenu extends BaseContent {
 				else{
 					outputText("<font color=\"#008000\">");
 				}
-				outputText( mCount +"</font> of " + mutationCount + ". Max:(" + mPerkarray.length + ")\n");
+				outputText( mCount +"</font> of " + mutationCount + ". Max:(");
+				if (flags[kFLAGS.MUTATIONS_SPOILERS]){
+					outputText(mPerkarray.length + ")\n");
+				}
+				else{
+					if (mPerkarray.length == mCount){
+						outputText(mPerkarray.length + ")\n");
+					}
+					else{
+						outputText("?)\n");
+					}
+				}
 			}
 		}
 
@@ -1028,8 +1039,12 @@ public class PerkMenu extends BaseContent {
 				if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
 					outputText("No description available.");
 				}
-			} else {
-				outputText("\n???" + "\nDescription: ???");
+				else{
+					outputText(perkName[perkCount].desc());
+				}
+			}
+			else {
+				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
 			}
 		}
 		outputText("\n");
