@@ -1097,6 +1097,7 @@ public class PerkMenu extends BaseContent {
 		returnTo();
 	}
 
+	//Doesn't work perfectly, some perks create stack overflows for some reason.
 	public function playerPerksList():void {	//Can this be done better? Very likely. But hell, I'm not a programmer.
 		var pPerkList:Array = player.perks;	 	//Player Perks
 		var masterlist:Array = [];				//Temp hold of above
