@@ -761,7 +761,18 @@ public class PerkMenu extends BaseContent {
 				else{
 					outputText("<font color=\"#008000\">");
 				}
-				outputText( mCount +"</font> of " + mutationCount + ". Max:(" + mPerkarray.length + ")\n");
+				outputText( mCount +"</font> of " + mutationCount + ". Max:(");
+				if (flags[kFLAGS.MUTATIONS_SPOILERS]){
+					outputText(mPerkarray.length + ")\n");
+				}
+				else{
+					if (mPerkarray.length == mCount){
+						outputText(mPerkarray.length + ")\n");
+					}
+					else{
+						outputText("?)\n");
+					}
+				}
 			}
 		}
 
@@ -933,7 +944,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([MutationsLib.KitsuneThyroidGland, MutationsLib.KitsuneThyroidGlandEvolved, MutationsLib.KitsuneThyroidGlandFinalForm]);
-			mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
+			//mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
 			mutationsDatabase(1);
 		}
 
@@ -1028,8 +1039,12 @@ public class PerkMenu extends BaseContent {
 				if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
 					outputText("No description available.");
 				}
-			} else {
-				outputText("\n???" + "\nDescription: ???");
+				else{
+					outputText(perkName[perkCount].desc());
+				}
+			}
+			else {
+				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
 			}
 		}
 		outputText("\n");
@@ -1082,6 +1097,7 @@ public class PerkMenu extends BaseContent {
 		returnTo();
 	}
 
+	//Doesn't work perfectly, some perks create stack overflows for some reason.
 	public function playerPerksList():void {	//Can this be done better? Very likely. But hell, I'm not a programmer.
 		var pPerkList:Array = player.perks;	 	//Player Perks
 		var masterlist:Array = [];				//Temp hold of above

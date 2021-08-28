@@ -2036,8 +2036,12 @@ public class Camp extends NPCAwareContent{
 		else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 0) addButtonDisabled(2, "Build Cabin", "You need to wait until 7th day.");
 		else addButtonDisabled(2, "Build Cabin", "Cabin is alreadfy built.");
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10) {
-			if (player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
-			addButtonDisabled(10, "AddImpSkull", "Req. at least one imp skull.");
+			if (player.hasItem(useables.IMPSKLL, 1)) {
+				addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
+			} //How was this never caught???
+			else{
+				addButtonDisabled(10, "AddImpSkull", "Req. at least one imp skull.");
+			}
 		}
 		else addButtonDisabled(10, "AddImpSkull", "Req. built at least one wall section.");
 		addButton(14, "Back", campActions);

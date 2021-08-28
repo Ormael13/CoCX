@@ -13045,29 +13045,11 @@ use namespace CoC;
 		}
 
 		public function removeAllRacialMutation():void {
-			if (hasPerk(MutationsLib.ArachnidBookLung)) {
-				removePerk(MutationsLib.ArachnidBookLung);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
-				removePerk(MutationsLib.ArachnidBookLungEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ArachnidBookLungFinalForm)) {
-				removePerk(MutationsLib.ArachnidBookLungFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.BlackHeart)) {
-				removePerk(MutationsLib.BlackHeart);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.BlackHeartEvolved)) {
-				removePerk(MutationsLib.BlackHeartEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.BlackHeartFinalForm)) {
-				removePerk(MutationsLib.BlackHeartFinalForm);
-				perkPoints += 1;
+			for each (var pPerks:PerkType in MutationsLib.mutationsArray("", true)){
+				if (hasPerk(pPerks)){
+					removePerk(pPerks);
+					//perkPoints += 1;
+				}
 			}
 			if (hasPerk(PerkLib.CatlikeNimbleness)) {
 				removePerk(PerkLib.CatlikeNimbleness);
@@ -13083,363 +13065,39 @@ use namespace CoC;
 			}
 			if (hasPerk(MutationsLib.CaveWyrmLungs)) {
 				removePerk(MutationsLib.HinezumiBurningBlood);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.CaveWyrmLungsEvolved)) {
 				removePerk(MutationsLib.HinezumiBurningBloodEvolved);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.CaveWyrmLungsFinalForm)) {
 				removePerk(MutationsLib.HinezumiBurningBloodFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DisplacerMetabolism)) {
-				removePerk(MutationsLib.DisplacerMetabolism);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DisplacerMetabolismEvolved)) {
-				removePerk(MutationsLib.DisplacerMetabolismEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicBones)) {
-				removePerk(MutationsLib.DraconicBones);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicBonesEvolved)) {
-				removePerk(MutationsLib.DraconicBonesEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicBonesFinalForm)) {
-				removePerk(MutationsLib.DraconicBonesFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicHeart)) {
-				removePerk(MutationsLib.DraconicHeart);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicHeartEvolved)) {
-				removePerk(MutationsLib.DraconicHeartEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicHeartFinalForm)) {
-				removePerk(MutationsLib.DraconicHeartFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicLungs)) {
-				removePerk(MutationsLib.DraconicLungs);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicLungsEvolved)) {
-				removePerk(MutationsLib.DraconicLungsEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.DraconicLungsFinalForm)) {
-				removePerk(MutationsLib.DraconicLungsFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSys)) {
-				removePerk(MutationsLib.ElvishPeripheralNervSys);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) {
-				removePerk(MutationsLib.ElvishPeripheralNervSysEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) {
-				removePerk(MutationsLib.ElvishPeripheralNervSysFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.EasterBunnyEggBag)) {
-				removePerk(MutationsLib.EasterBunnyEggBag);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved)) {
-				removePerk(MutationsLib.EasterBunnyEggBagEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.EasterBunnyEggBagFinalForm)) {
-				removePerk(MutationsLib.EasterBunnyEggBagFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FloralOvaries)) {
-				removePerk(MutationsLib.FloralOvaries);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FloralOvariesEvolved)) {
-				removePerk(MutationsLib.FloralOvariesEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FloralOvariesFinalForm)) {
-				removePerk(MutationsLib.FloralOvariesFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FrozenHeart)) {
-				removePerk(MutationsLib.FrozenHeart);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FrozenHeartEvolved)) {
-				removePerk(MutationsLib.FrozenHeartEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FrozenHeartFinalForm)) {
-				removePerk(MutationsLib.FrozenHeartFinalForm);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.GazerEye)) {
 				removePerk(MutationsLib.GazerEye);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.GazerEyeEvolved)) {
 				removePerk(MutationsLib.GazerEyeEvolved);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.GazerEyeFinalForm)) {
 				removePerk(MutationsLib.GazerEyeFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.GorgonsEyes)) {
-				removePerk(MutationsLib.GorgonsEyes);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.GorgonsEyesEvolved)) {
-				removePerk(MutationsLib.GorgonsEyesEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HarpyHollowBones)) {
-				removePerk(MutationsLib.HarpyHollowBones);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved)) {
-				removePerk(MutationsLib.HarpyHollowBonesEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HarpyHollowBonesFinalForm)) {
-				removePerk(MutationsLib.HarpyHollowBonesFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HeartOfTheStorm)) {
-				removePerk(MutationsLib.HeartOfTheStorm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HeartOfTheStormEvolved)) {
-				removePerk(MutationsLib.HeartOfTheStormEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HeartOfTheStormFinalForm)) {
-				removePerk(MutationsLib.HeartOfTheStormFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HellcatParathyroidGlands)) {
-				removePerk(MutationsLib.HellcatParathyroidGlands);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HellcatParathyroidGlandsEvolved)) {
-				removePerk(MutationsLib.HellcatParathyroidGlandsEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HellcatParathyroidGlandsFinalForm)) {
-				removePerk(MutationsLib.HellcatParathyroidGlandsFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HinezumiBurningBlood)) {
-				removePerk(MutationsLib.HinezumiBurningBlood);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) {
-				removePerk(MutationsLib.HinezumiBurningBloodEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HinezumiBurningBloodFinalForm)) {
-				removePerk(MutationsLib.HinezumiBurningBloodFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HollowFangs)) {
-				removePerk(MutationsLib.HollowFangs);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HollowFangsEvolved)) {
-				removePerk(MutationsLib.HollowFangsEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.HollowFangsFinalForm)) {
-				removePerk(MutationsLib.HollowFangsFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.KitsuneThyroidGland)) {
-				removePerk(MutationsLib.KitsuneThyroidGland);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) {
-				removePerk(MutationsLib.KitsuneThyroidGlandEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) {
-				removePerk(MutationsLib.KitsuneThyroidGlandFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.LactaBovinaOvaries)) {
-				removePerk(MutationsLib.LactaBovinaOvaries);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) {
-				removePerk(MutationsLib.LactaBovinaOvariesEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) {
-				removePerk(MutationsLib.LactaBovinaOvariesFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.LizanMarrow)) {
-				removePerk(MutationsLib.LizanMarrow);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.LizanMarrowEvolved)) {
-				removePerk(MutationsLib.LizanMarrowEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.LizanMarrowFinalForm)) {
-				removePerk(MutationsLib.LizanMarrowFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ManticoreMetabolism)) {
-				removePerk(MutationsLib.ManticoreMetabolism);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ManticoreMetabolismEvolved)) {
-				removePerk(MutationsLib.ManticoreMetabolismEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MantislikeAgility)) {
-				removePerk(MutationsLib.MantislikeAgility);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
-				removePerk(MutationsLib.MantislikeAgilityEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
-				removePerk(MutationsLib.MantislikeAgilityFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MelkieLung)) {
-				removePerk(MutationsLib.MelkieLung);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MelkieLungEvolved)) {
-				removePerk(MutationsLib.MelkieLungEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MelkieLungFinalForm)) {
-				removePerk(MutationsLib.MelkieLungFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MinotaurTesticles)) {
-				removePerk(MutationsLib.MinotaurTesticles);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
-				removePerk(MutationsLib.MinotaurTesticlesEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) {
-				removePerk(MutationsLib.MinotaurTesticlesFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.NaturalPunchingBag)) {
-				removePerk(MutationsLib.NaturalPunchingBag);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.NaturalPunchingBagEvolved)) {
-				removePerk(MutationsLib.NaturalPunchingBagEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) {
-				removePerk(MutationsLib.NaturalPunchingBagFinalForm);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.NekomataThyroidGland)) {
 				removePerk(MutationsLib.NekomataThyroidGland);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.NekomataThyroidGlandEvolved)) {
 				removePerk(MutationsLib.NekomataThyroidGlandEvolved);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.NekomataThyroidGlandFinalForm)) {
 				removePerk(MutationsLib.NekomataThyroidGlandFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.NukiNuts)) {
-				removePerk(MutationsLib.NukiNuts);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.NukiNutsEvolved)) {
-				removePerk(MutationsLib.NukiNutsEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.NukiNutsFinalForm)) {
-				removePerk(MutationsLib.NukiNutsFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ObsidianHeart)) {
-				removePerk(MutationsLib.ObsidianHeart);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ObsidianHeartEvolved)) {
-				removePerk(MutationsLib.ObsidianHeartEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.ObsidianHeartFinalForm)) {
-				removePerk(MutationsLib.ObsidianHeartFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.OniMusculature)) {
-				removePerk(MutationsLib.OniMusculature);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.OniMusculatureEvolved)) {
-				removePerk(MutationsLib.OniMusculatureEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.OniMusculatureFinalForm)) {
-				removePerk(MutationsLib.OniMusculatureFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.OrcAdrenalGlands)) {
-				removePerk(MutationsLib.OrcAdrenalGlands);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) {
-				removePerk(MutationsLib.OrcAdrenalGlandsEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsFinalForm)) {
-				removePerk(MutationsLib.OrcAdrenalGlandsFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.PigBoarFat)) {
-				removePerk(MutationsLib.PigBoarFat);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.PigBoarFatEvolved)) {
-				removePerk(MutationsLib.PigBoarFatEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.PigBoarFatFinalForm)) {
-				removePerk(MutationsLib.PigBoarFatFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.SalamanderAdrenalGlands)) {
-				removePerk(MutationsLib.SalamanderAdrenalGlands);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
-				removePerk(MutationsLib.SalamanderAdrenalGlandsEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
-				removePerk(MutationsLib.SalamanderAdrenalGlandsFinalForm);
-				perkPoints += 1;
+				//perkPoints += 1;
 			}
 			if (hasPerk(PerkLib.ScyllaInkGlands)) {
 				removePerk(PerkLib.ScyllaInkGlands);
@@ -13461,30 +13119,6 @@ use namespace CoC;
 				removePerk(PerkLib.TrachealSystemFinalForm);
 				perkPoints += 1;
 			}
-			if (hasPerk(MutationsLib.VampiricBloodsteam)) {
-				removePerk(MutationsLib.VampiricBloodsteam);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.VampiricBloodsteamEvolved)) {
-				removePerk(MutationsLib.VampiricBloodsteamEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.VampiricBloodsteamFinalForm)) {
-				removePerk(MutationsLib.VampiricBloodsteamFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FeyArcaneBloodstream)) {
-				removePerk(MutationsLib.FeyArcaneBloodstream);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) {
-				removePerk(MutationsLib.FeyArcaneBloodstreamEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.FeyArcaneBloodstreamFinalForm)) {
-				removePerk(MutationsLib.FeyArcaneBloodstreamFinalForm);
-				perkPoints += 1;
-			}
 			if (hasPerk(PerkLib.EclipticMind)) {
 				removePerk(PerkLib.EclipticMind);
 				perkPoints += 1;
@@ -13495,42 +13129,6 @@ use namespace CoC;
 			}
 			if (hasPerk(PerkLib.EclipticMindFinalForm)) {
 				removePerk(PerkLib.EclipticMindFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.VenomGlands)) {
-				removePerk(MutationsLib.VenomGlands);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.VenomGlandsEvolved)) {
-				removePerk(MutationsLib.VenomGlandsEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.VenomGlandsFinalForm)) {
-				removePerk(MutationsLib.VenomGlandsFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.WhaleFat)) {
-				removePerk(MutationsLib.WhaleFat);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.WhaleFatEvolved)) {
-				removePerk(MutationsLib.WhaleFatEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.WhaleFatFinalForm)) {
-				removePerk(MutationsLib.WhaleFatFinalForm);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.YetiFat)) {
-				removePerk(MutationsLib.YetiFat);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.YetiFatEvolved)) {
-				removePerk(MutationsLib.YetiFatEvolved);
-				perkPoints += 1;
-			}
-			if (hasPerk(MutationsLib.YetiFatFinalForm)) {
-				removePerk(MutationsLib.YetiFatFinalForm);
 				perkPoints += 1;
 			}
 			if (hasPerk(PerkLib.ChimericalBodyInitialStage)){
@@ -14547,7 +14145,7 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masteryThrowingLevel < maxThrowingLevel() && masteryThrowingXP >= ThrowingExpToLevelUp()) {
-					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
+					outputText("\n<b>Dao of Throwing Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
 					masteryThrowingLevel++;
 					masteryThrowingXP = 0;
 				}
@@ -14588,7 +14186,7 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masteryFirearmsLevel < maxFirearmsLevel() && masteryFirearmsXP >= FirearmsExpToLevelUp()) {
-					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
+					outputText("\n<b>Dao of Firearms Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
 					masteryFirearmsLevel++;
 					masteryFirearmsXP = 0;
 				}
