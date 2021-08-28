@@ -48,6 +48,7 @@ public class Thief extends Monster
 			this.drop = new WeightedDrop().add(weapons.DAGGER,1)
 					.add(armors.LEATHRA,1)
 					.add(null,8);
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

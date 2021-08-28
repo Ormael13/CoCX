@@ -50,7 +50,7 @@ package classes.Scenes.Areas.Tundra
 			var damage:Number = (eBaseIntelligenceDamage() + eBaseWisdomDamage()) * 2;
 			damage = Math.round(damage);
 			if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-			outputText("At the palm of it hand form ice spike that then shots toward you! ");
+			outputText("At the palm of golem hand form ice spike that then shots toward you! ");
 			damage = player.takeIceDamage(damage, true);
 		}
 		
@@ -91,7 +91,7 @@ package classes.Scenes.Areas.Tundra
 			this.a = "the ";
 			this.short = "true ice golem";
 			this.imageName = "true ice golem";
-			this.long = "You're currently fighting true ice golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic gorilla, with bird-like wings, covered with with thick ice and using huge fists to smash enemies.";
+			this.long = "You're currently fighting true ice golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic gorilla, with bird-like wings, covered with thick ice and using huge fists to smash enemies.";
 			//this.plural = true;
 			initStrTouSpeInte(315, 295, 175, 20);
 			initWisLibSensCor(20, 10, 10, 50);

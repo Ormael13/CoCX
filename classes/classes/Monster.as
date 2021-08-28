@@ -304,7 +304,7 @@ import flash.utils.getQualifiedClassName;
 				else temp *= 0.6;
 			}
 			temp = Math.round(temp);
-			if (temp < 300) temp = 300;
+			if (temp < (300 + (100 * newGamePlusMod()))) temp = (300 + (100 * newGamePlusMod()));
 			return temp;
 		}
 		public override function maxHP():Number {
@@ -465,7 +465,7 @@ import flash.utils.getQualifiedClassName;
 				else temp *= 0.6;
 			}
 			temp = Math.round(temp);
-			if (temp < 100) temp = 100;
+			if (temp < (100 + (30 * newGamePlusMod()))) temp = (100 + (30 * newGamePlusMod()));
 			return temp;
 		}
 

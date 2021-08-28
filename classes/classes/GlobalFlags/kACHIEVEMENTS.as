@@ -336,7 +336,7 @@ package classes.GlobalFlags
 		public static const ZONE_DEFILED:int						= 290;//100 exploration of Defiled Ravine
 		public static const ZONE_291:int		= 291;//100 exploration of Marsh
 		public static const ZONE_292:int		= 292;//100 exploration of Deep Caves
-		public static const ZONE_293:int		= 293;//100 exploration of Tundra
+		public static const ZONE_SUB_ZERO:int						= 293;//100 exploration of Tundra
 		public static const ZONE_ASHES_TO_ASHES_DUST_TO_DUST:int	= 294;//100 exploration of Ashlands
 		public static const ZONE_295:int		= 295;//100 exploration of Outer Plateau
 		public static const ZONE_296:int		= 296;//100 exploration of Inner Plateau

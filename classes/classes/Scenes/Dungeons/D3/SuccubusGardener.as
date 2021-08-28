@@ -52,7 +52,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.Diehard, 0, 0, 0, 0); - czy te perki są jej potrzebne?
+			this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 			createStatusEffect(StatusEffects.TentagrappleCooldown, 10, 0, 0, 0);
