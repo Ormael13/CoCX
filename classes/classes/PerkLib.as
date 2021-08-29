@@ -464,8 +464,8 @@ public class PerkLib
 				"You carry that long pole with a lit flme on it... you no longer sleep during mass, so you know how to further decrease your minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
 				"You've chosen the 'Acolyte' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const AdvancedAerialCombat:PerkType = mk("Advanced Aerial Combat", "Advanced Aerial Combat",
-				"You are trained to fight while in flight. (extend flight duration by 2 turns and increase evasion when flying by 5%)",
-				"You've chosen the 'Advanced Aerial Combat' perk, you trained to fight while in flight. (extend flight duration by 2 turns and increase evasion when flying by 5%)");
+				"You are trained to fight while in flight. (extend flight duration while using wings by 2 turns and increase evasion when flying by 5%)",
+				"You've chosen the 'Advanced Aerial Combat' perk, you trained to fight while in flight. (extend flight duration while using wings by 2 turns and increase evasion when flying by 5%)");
 		public static const AdvancedAerobatics:PerkType = mk("Advanced Aerobatics", "Advanced Aerobatics",
 				"You understand the properties of wind resistance and aerodynamics nearly perfectly. (increase accuracy to melee/range attacks by 50% when flying)",
 				"You've chosen the 'Advanced Aerobatics' perk. You understand the properties of wind resistance and aerodynamics nearly perfectly. (increase accuracy to melee/range attacks by 50% when flying)");
@@ -1482,7 +1482,7 @@ public class PerkLib
 						"]",
 				"You've chosen the 'Grand Tactician' perk, increasing physical critical hit chance by up to 30% (Intelligence-based).");
 		public static const GreaterAerialCombat:PerkType = mk("Greater Aerial Combat", "Greater Aerial Combat",
-				"You have learned to use air and gravity to your own benefit. (extend flight duration by 4 turns and increase evasion when flying by 15%)",
+				"You have learned to use air and gravity to your own benefit. (extend flight duration while using wings by 4 turns and increase evasion when flying by 15%)",
 				"You've chosen the 'Greater Aerial Combat' perk, you learned to use air and gravity to your own benefit.");
 		public static const GreaterBrawn:PerkType = mk("Greater Brawn", "Greater Brawn",
 				"You have greatly improved your striking power. (+20% to phantom Str bonus, +15% to unarmed atk)",
@@ -6598,4 +6598,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

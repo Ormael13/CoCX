@@ -542,13 +542,13 @@ public class Combat extends BaseContent {
 				else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight letting the storm carry you up.");
 				else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.");
 				else outputText("You open you wing taking flight.");
-				player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Flying, flightDurationNatural(), 0, 0, 0);
 			}
-			else if (flags[kFLAGS.AUTO_FLIGHT] == 2 && player.weaponFlyingSwordsName != "nothing") {
+			else if (flags[kFLAGS.AUTO_FLIGHT] == 2 && player.soulforce >= flyingSwordUseCost() && player.weaponFlyingSwordsName != "nothing") {
 				outputText("You jump on your "+player.weaponFlyingSwordsName+" taking flight.");
 				player.createStatusEffect(StatusEffects.Flying, 1, 1, 0, 0);
 			}
-			else if (flags[kFLAGS.AUTO_FLIGHT] == 3) {
+			else if (flags[kFLAGS.AUTO_FLIGHT] == 3 && player.soulforce >= flyingWithSoulforceCost()) {
 				outputText("You surround your body with soulforce taking off int the air"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".");
 				player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
 			}
@@ -10625,18 +10625,7 @@ public class Combat extends BaseContent {
             if (monster.armorDef <= 10) monster.armorDef = 0;
             else monster.armorDef -= 10;
         }
-        if (player.hasPerk(PerkLib.WellspringOfLust)) {
-            if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
-            if (!player.hasPerk(PerkLib.GreyMage) && player.lust < 50) player.lust = 50;
-        }
-		if (player.hasPerk(PerkLib.AdrenalineRush)) {
-			player.wrath += 100;
-			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
-		}
-		applyAutocast0();
-        magic.applyAutocast();
-        mspecials.applyAutocast2();
-        //Adjust lust vulnerability in New Game+.
+		//Adjust lust vulnerability in New Game+.
         if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.9;
         else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
         else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
@@ -10645,36 +10634,7 @@ public class Combat extends BaseContent {
         monster.mana = monster.maxMana();
         monster.soulforce = monster.maxSoulforce();
         monster.XP = monster.totalXP();
-        if (player.weaponRange == weaponsrange.LBLASTR){
-            var milkAmmo:Number = player.lactationQ()/100
-            if (milkAmmo > 20) milkAmmo = 20;
-            player.ammo = milkAmmo;
-        }
-        if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
-        if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
-        if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
-        if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
-        if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
-        if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
-        if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
-        if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.HARPGUN) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TRFATBI) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
-        if (player.statusEffectv1(StatusEffects.SoulDrill1) > 0) {
-            player.removeStatusEffect(StatusEffects.SoulDrill1);
-            player.createStatusEffect(StatusEffects.SoulDrill1, 0, 0, 0, 0);
-        }
+        settingPCforFight();
         if (prison.inPrison && prison.prisonCombatAutoLose) {
             dynStats("lus", player.maxLust(), "scale", false);
             doNext(endLustLoss);
@@ -10703,16 +10663,6 @@ public class Combat extends BaseContent {
             if (monster.armorDef <= 10) monster.armorDef = 0;
             else monster.armorDef -= 10;
         }
-        if (player.hasPerk(PerkLib.WellspringOfLust)) {
-            if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
-            if (!player.hasPerk(PerkLib.GreyMage) && player.lust < 50) player.lust = 50;
-        }
-		if (player.hasPerk(PerkLib.AdrenalineRush)) {
-			player.wrath += 100;
-			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
-		}
-        magic.applyAutocast();
-        mspecials.applyAutocast2();
         //Adjust lust vulnerability in New Game+.
         if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.9;
         else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
@@ -10722,6 +10672,27 @@ public class Combat extends BaseContent {
         monster.mana = monster.maxMana();
         monster.soulforce = monster.maxSoulforce();
         monster.XP = monster.totalXP();
+		settingPCforFight();
+        playerMenu();
+    }
+	
+	private function settingPCforFight():void {
+		if (player.hasPerk(PerkLib.WellspringOfLust)) {
+            if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
+            if (!player.hasPerk(PerkLib.GreyMage) && player.lust < 50) player.lust = 50;
+        }
+		if (player.hasPerk(PerkLib.AdrenalineRush)) {
+			player.wrath += 100;
+			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		}
+		applyAutocast0();
+        magic.applyAutocast();
+        mspecials.applyAutocast2();
+        if (player.weaponRange == weaponsrange.LBLASTR) {
+            var milkAmmo:Number = player.lactationQ() / 100;
+            if (milkAmmo > 20) milkAmmo = 20;
+            player.ammo = milkAmmo;
+        }
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
@@ -10733,7 +10704,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
-		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
+        if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
@@ -10747,8 +10718,7 @@ public class Combat extends BaseContent {
             player.removeStatusEffect(StatusEffects.SoulDrill1);
             player.createStatusEffect(StatusEffects.SoulDrill1, 0, 0, 0, 0);
         }
-        playerMenu();
-    }
+	}
 
     public function display():void {
         if (!monster.checkCalled) {
@@ -13724,7 +13694,7 @@ public class Combat extends BaseContent {
         else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight letting the storm carry you up.\n\n");
         else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.\n\n");
         else outputText("You open you wing taking flight.\n\n");
-        player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.Flying, flightDurationNatural(), 0, 0, 0);
         takeFlight();
 	}
 	public function takeFlightByFlyingSword():void {
@@ -13747,6 +13717,12 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
         enemyAI();
     }
+	public function flightDurationNatural():Number {
+		var flightDurationNatural:Number = 7;
+		if (player.hasPerk(PerkLib.AdvancedAerialCombat)) flightDurationNatural += 2;
+		if (player.hasPerk(PerkLib.GreaterAerialCombat)) flightDurationNatural += 4;
+		return flightDurationNatural;
+	}
 
 	public function landAfterUsingFlyingSword():void {
 		clearOutput();
@@ -13911,7 +13887,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
-        if (!player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm) || player.statusEffectv1(StatusEffects.Flying) > 0) {
+        if (!player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm) && player.statusEffectv1(StatusEffects.Flying) == 0) {
             if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
             if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                 player.removeStatusEffect(StatusEffects.FlyingNoStun);

@@ -1938,7 +1938,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function takeFlight():void {
 		clearOutput();
 		outputText("You open you wing taking flight.\n\n");
-		player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.Flying, combat.flightDurationNatural(), 0, 0, 0);
 		if (!player.hasPerk(PerkLib.Resolute)) {
 			player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
