@@ -11,7 +11,6 @@ import classes.BodyParts.Tail;
 
 public class MutationsLib
 	{
-		//This returns the requirements :) but also removes any prior to save 32's knowledge of acquired mutations :(
 		public function get game():CoC{
 			return CoC.instance;
 		}
@@ -568,10 +567,8 @@ public class MutationsLib
 							return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
 				DraconicLungs.requireLungsMutationSlot()
-						.requirePerk(PerkLib.DragonFireBreath)
-						.requirePerk(PerkLib.DragonIceBreath)
-						.requirePerk(PerkLib.DragonLightningBreath)
-						.requirePerk(PerkLib.DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
+						.requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
+						.requireCustomFunction(function (player:Player):Boolean {
 					return (player.dragonScore() >= 8);
 				}, "Dragon race");
 				DrakeLungs.requireLungsMutationSlot().requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
@@ -722,23 +719,19 @@ public class MutationsLib
 					return player.displacerbeastScore() >= 12;
 				}, "Displacer beast");
 				DraconicBonesEvolved.requireLevel(12)
-						.requirePerk(DraconicBones)
-						.requirePerk(DraconicHeart)
+						.requirePerks(DraconicBones, DraconicHeart)
 						.requireAnyPerk(DraconicLungs, DrakeLungs)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
 				DraconicHeartEvolved.requireLevel(12)
-						.requirePerk(DraconicBones)
-						.requirePerk(DraconicHeart)
+						.requirePerks(DraconicBones, DraconicHeart)
 						.requireAnyPerk(DraconicLungs, DrakeLungs)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
 				DraconicLungsEvolved.requireLevel(12)
-						.requirePerk(DraconicBones)
-						.requirePerk(DraconicHeart)
-						.requirePerk(DraconicLungs)
+						.requirePerks(DraconicBones, DraconicHeart, DraconicLungs)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12);
 						}, "Dragon race");
@@ -896,23 +889,19 @@ public class MutationsLib
 							return player.demonScore() >= 14;
 						}, "Demon race");
 				DraconicBonesFinalForm.requireLevel(30)
-						.requirePerk(DraconicBonesEvolved)
-						.requirePerk(DraconicHeartEvolved)
+						.requirePerks(DraconicBonesEvolved, DraconicHeartEvolved)
 						.requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
 				DraconicHeartFinalForm.requireLevel(30)
-						.requirePerk(DraconicBonesEvolved)
-						.requirePerk(DraconicHeartEvolved)
+						.requirePerks(DraconicBonesEvolved, DraconicHeartEvolved)
 						.requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
 				DraconicLungsFinalForm.requireLevel(30)
-						.requirePerk(DraconicBonesEvolved)
-						.requirePerk(DraconicHeartEvolved)
-						.requirePerk(DraconicLungsEvolved)
+						.requirePerks(DraconicBonesEvolved, DraconicHeartEvolved, DraconicLungsEvolved)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16);
 						}, "Dragon race");

@@ -4131,8 +4131,7 @@ public class PerkLib
                     .requirePerk(SuperiorEndurance)
                     .requireLevel(42);
             PrestigeJobSentinel.requirePrestigeJobSlot()
-                    .requirePerk(JobKnight)
-                    .requirePerk(JobWarrior)
+                    .requirePerks(JobKnight, JobWarrior)
                     .requireTou(200)
                     .requireLevel(42);
             CheetahIV.requirePerk(CheetahIII)
@@ -4488,9 +4487,7 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(42);
             PrestigeJobTempest.requirePrestigeJobSlot()
-                    .requirePerk(JobDervish)
-                    .requirePerk(JobWarrior)
-                    .requirePerk(DualWield)
+                    .requirePerks(JobDervish, JobWarrior, DualWield)
                     .requireSpe(200)
                     .requireLevel(42);
             //Tier 8 Speed Perks
@@ -4509,8 +4506,7 @@ public class PerkLib
                     .requirePerk(SteelStorm);
 			//Tier 10 Speed Perks
             TwinRiposte.requireLevel(60)
-                    .requirePerk(Parry)
-                    .requirePerk(BladeBarrier);
+                    .requirePerks(Parry, BladeBarrier);
             UnlockEndurance3rdStage.requirePerk(UnlockEndurance2ndStage)
                     .requireSpe(230)
                     .requireLevel(60);
@@ -4636,8 +4632,7 @@ public class PerkLib
             FocusedMind.requirePerk(Mage)
                     .requireInt(75)
                     .requireLevel(12);
-            RagingInferno.requirePerk(GrandMage)
-                    .requirePerk(Channeling)
+            RagingInferno.requirePerks(GrandMage, Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
                                 || player.hasStatusEffect(StatusEffects.KnowsPyreBurst)
@@ -4650,8 +4645,7 @@ public class PerkLib
                     }, "Any fire spell")
                     .requireLevel(12)
                     .requireInt(75);
-            GlacialStorm.requirePerk(GrandMage)
-                    .requirePerk(Channeling)
+            GlacialStorm.requirePerks(GrandMage, Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
                                 || player.hasStatusEffect(StatusEffects.KnowsArcticGale)
@@ -4662,8 +4656,7 @@ public class PerkLib
                     }, "Any ice spell")
                     .requireLevel(12)
                     .requireInt(75);
-            HighVoltage.requirePerk(GrandMage)
-                    .requirePerk(Channeling)
+            HighVoltage.requirePerks(GrandMage, Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
                                 || player.hasStatusEffect(StatusEffects.KnowsChainLighting)
@@ -4671,8 +4664,7 @@ public class PerkLib
                     }, "Any lightning spell")
                     .requireLevel(12)
                     .requireInt(75);
-            EclipsingShadow.requirePerk(GrandMage)
-                    .requirePerk(Channeling)
+            EclipsingShadow.requirePerks(GrandMage, Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
                                 || player.hasStatusEffect(StatusEffects.KnowsDuskWave)
@@ -4832,20 +4824,16 @@ public class PerkLib
             ArcaneRegenerationMythical.requirePerks(GrandArchmage2ndCircle, ArcaneRegenerationLegendary)
                     .requireInt(150)
                     .requireLevel(30);
-            RagingInfernoEx.requirePerk(GrandArchmage)
-					.requirePerk(RagingInferno)
+            RagingInfernoEx.requirePerks(GrandArchmage, RagingInferno)
                     .requireLevel(30)
                     .requireInt(150);
-            GlacialStormEx.requirePerk(GrandArchmage)
-					.requirePerk(GlacialStorm)
+            GlacialStormEx.requirePerks(GrandArchmage, GlacialStorm)
                     .requireLevel(30)
                     .requireInt(150);
-            HighVoltageEx.requirePerk(GrandArchmage)
-					.requirePerk(HighVoltage)
+            HighVoltageEx.requirePerks(GrandArchmage, HighVoltage)
                     .requireLevel(30)
                     .requireInt(150);
-            EclipsingShadowEx.requirePerk(GrandArchmage)
-					.requirePerk(EclipsingShadow)
+            EclipsingShadowEx.requirePerks(GrandArchmage, EclipsingShadow)
                     .requireLevel(30)
                     .requireInt(150);
             UnlockForce2ndStage.requirePerk(UnlockForce)
@@ -4880,21 +4868,18 @@ public class PerkLib
                     .requireInt(200)
                     .requireLevel(42);
 		*/	PrestigeJobGreySage.requirePrestigeJobSlot()
-                    .requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(JobEnchanter)
+                    .requirePerks(GrandArchmage3rdCircle, JobEnchanter)
                     .requireInt(200)
                     .requireLevel(42);
         	PrestigeJobWarlock.requirePrestigeJobSlot()
-                    .requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(JobEromancer)
+                    .requirePerks(GrandArchmage3rdCircle, JobEromancer)
                     .requireInt(200)
                     .requireLevel(42)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;
                     }, "Finished a certain black mage quest line up to the third part of the training");//Alvina
         	PrestigeJobArchpriest.requirePrestigeJobSlot()
-                    .requirePerk(JobEnchanter)
-                    .requirePerk(JobGuardian)
+                    .requirePerks(JobEnchanter, JobGuardian)
                     .requireInt(200)
                     .requireLevel(42)
 					.requireCustomFunction(function (player:Player):Boolean {
@@ -4932,20 +4917,16 @@ public class PerkLib
             DivineArmament.requirePerk(DivineKnowledge)
 					.requireInt(250)
 					.requireLevel(54);
-			RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(RagingInfernoEx)
+			RagingInfernoSu.requirePerks(GrandArchmage3rdCircle, RagingInfernoEx)
                     .requireLevel(54)
                     .requireInt(300);
-            GlacialStormSu.requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(GlacialStormEx)
+            GlacialStormSu.requirePerks(GrandArchmage3rdCircle, GlacialStormEx)
                     .requireLevel(54)
                     .requireInt(300);
-            HighVoltageSu.requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(HighVoltageEx)
+            HighVoltageSu.requirePerks(GrandArchmage3rdCircle, HighVoltageEx)
                     .requireLevel(54)
                     .requireInt(300);
-            EclipsingShadowSu.requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(EclipsingShadowEx)
+            EclipsingShadowSu.requirePerks(GrandArchmage3rdCircle, EclipsingShadowEx)
                     .requireLevel(54)
                     .requireInt(300);
             //Tier 10 Intelligence perks
@@ -5129,8 +5110,7 @@ public class PerkLib
             ElementalContractRank5.requirePerks(ElementalContractRank4, ElementalConjurerDedication)
                     .requireWis(125)
                     .requireLevel(24);
-            StrongElementalBondEx.requirePerk(StrongElementalBond)
-					.requirePerk(ElementalContractRank5)
+            StrongElementalBondEx.requirePerks(StrongElementalBond, ElementalContractRank5)
                     .requireWis(125)
                     .requireLevel(24);
             ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
@@ -5150,8 +5130,7 @@ public class PerkLib
             ElementalContractRank6.requirePerk(ElementalContractRank5)
                     .requireWis(150)
                     .requireLevel(30);
-            FirstAttackElementalsEx.requirePerk(FirstAttackElementals)
-					.requirePerk(ElementalContractRank5)
+            FirstAttackElementalsEx.requirePerks(FirstAttackElementals, ElementalContractRank5)
                     .requireLevel(30);
 			/*ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
 					.requireWis(150)
@@ -5170,12 +5149,10 @@ public class PerkLib
             ElementalContractRank7.requirePerk(ElementalContractRank6)
                     .requireWis(175)
                     .requireLevel(36);
-            StrongElementalBondSu.requirePerk(StrongElementalBondEx)
-                    .requirePerk(ElementalContractRank7)
+            StrongElementalBondSu.requirePerks(StrongElementalBondEx, ElementalContractRank7)
                     .requireWis(175)
                     .requireLevel(36);
-            FirstAttackElementalsSu.requirePerk(FirstAttackElementalsEx)
-					.requirePerk(ElementalContractRank6)
+            FirstAttackElementalsSu.requirePerks(FirstAttackElementalsEx, ElementalContractRank6)
                     .requireLevel(36);
             EpicWisdom.requireWis(10)
                     .requireLevel(36);
@@ -5189,16 +5166,14 @@ public class PerkLib
                     .requireLevel(36);
             //Tier 7 Wisdom perks
             PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
-                    .requirePerk(FleshBodyApprenticeStage)
-                    .requirePerk(JobMonk)
+                    .requirePerks(FleshBodyApprenticeStage, JobMonk)
                     .requireWis(200)
                     .requireLevel(42);
             ElementalContractRank8.requirePerk(ElementalContractRank7)
                     .requireWis(200)
                     .requireLevel(42);
 			PrestigeJobNecromancer.requirePrestigeJobSlot()
-                    .requirePerk(DaoistApprenticeStage)
-                    .requirePerk(JobGolemancer)
+                    .requirePerks(DaoistApprenticeStage, JobGolemancer)
 					.requireInt(125)
 					.requireWis(175)
                     .requireLevel(42);/*
@@ -5222,9 +5197,8 @@ public class PerkLib
             ElementalContractRank10.requirePerk(ElementalContractRank9)
                     .requireWis(250)
                     .requireLevel(54);
-			//This perk below for some reason stack overflows when using requirePerks.
-            StrongerElementalBond.requirePerk(StrongElementalBondSu)
-					.requirePerk(ElementalContractRank10)
+			//This perk below (with others as well) for some reason stack overflows when using requirePerks.
+            StrongerElementalBond.requirePerks(StrongElementalBondSu, ElementalContractRank10)
                     .requireWis(250)
                     .requireLevel(54);
             Backlash.requireLevel(54)
@@ -5239,8 +5213,7 @@ public class PerkLib
                     .requireWis(230)
                     .requireLevel(60);
             FlurryOfBlows.requireLevel(60)
-                    .requirePerk(ComboMaster)
-                    .requirePerk(Backlash);
+                    .requirePerks(ComboMaster, Backlash);
             SkeletonLord.requireLevel(60)
                     .requirePerk(BoneSoul);
             //Tier 11 Wisdom perks
@@ -5259,8 +5232,7 @@ public class PerkLib
             ElementalContractRank13.requirePerk(ElementalContractRank12)
                     .requireWis(325)
                     .requireLevel(72);
-            StrongerElementalBondEx.requirePerk(StrongerElementalBond)
-                    .requirePerk(ElementalContractRank13)
+            StrongerElementalBondEx.requirePerks(StrongerElementalBond, ElementalContractRank13)
                     .requireWis(325)
                     .requireLevel(72);
             //Tier 13 Wisdom perks
@@ -5278,8 +5250,7 @@ public class PerkLib
 			ElementalContractRank16.requirePerk(ElementalContractRank15)
                     .requireWis(400)
                     .requireLevel(90);
-            StrongerElementalBondSu.requirePerk(StrongerElementalBondEx)
-                    .requirePerk(ElementalContractRank16)
+            StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
                     .requireWis(400)
                     .requireLevel(90);
 			///Tier 16 Wisdom perks
@@ -5527,8 +5498,7 @@ public class PerkLib
                     .requireLib(150);
             //Tier 7 Libido Perks
             PrestigeJobBindmaster.requirePrestigeJobSlot()
-                    .requirePerk(JobEromancer)
-                    .requirePerk(JobGuardian)
+                    .requirePerks(JobEromancer, JobGuardian)
                     .requireLib(200)
                     .requireLevel(42);
         	HalfStepToPeerlessSelfControl.requireLib(240)
@@ -5848,8 +5818,7 @@ public class PerkLib
             IronStomach.requireHungerEnabled();
             JobLeader.requireInt(10)
 					.requireWis(10);
-            Motivation.requirePerk(JobLeader)
-					.requirePerk(BasicLeadership);
+            Motivation.requirePerks(JobLeader, BasicLeadership);
 			VenomousDiet.requireHungerEnabled()
 					.requireMaxVenom(100);
 			VenomousAdiposeTissue.requireTou(10)
@@ -6598,4 +6567,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
