@@ -1097,7 +1097,6 @@ public class PerkMenu extends BaseContent {
 		returnTo();
 	}
 
-	//Doesn't work perfectly, some just straight up ignore the logic.
 	public function playerPerksList():void {	//Can this be done better? Very likely. But hell, I'm not a programmer.
 		var pPerkList:Array = player.perks;	 	//Player Perks
 		//var pPerkList:Array = PerkTree.obtainablePerks();	//DebugLine. Returns most perks.
