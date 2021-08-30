@@ -9213,26 +9213,26 @@ public class Combat extends BaseContent {
         }
         //Flying
         if (player.isFlying()) {
-			if (player.statusEffectv1(StatusEffects.Flying) == 0) {
+			if (player.statusEffectv2(StatusEffects.Flying) == 0) {
 				if (!player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) player.addStatusValue(StatusEffects.Flying, 1, -1);
 			}
-            if (player.statusEffectv1(StatusEffects.Flying) == 1) {
+            if (player.statusEffectv2(StatusEffects.Flying) == 1) {
 				if (player.soulforce < flyingSwordUseCost()) {
-					player.addStatusValue(StatusEffects.Flying, 1, -2);
+					player.removeStatusEffect(StatusEffects.Flying);
 					outputText("<b>You land gently on the ground having too little soulforce to keep flying using "+player.weaponFlyingSwordsName+".</b>\n\n");
 				}
 				else player.soulforce -= flyingSwordUseCost();
 			}
-			if (player.statusEffectv1(StatusEffects.Flying) == 2) {
+			if (player.statusEffectv2(StatusEffects.Flying) == 2) {
 				if (player.soulforce < flyingWithSoulforceCost()) {
-					player.addStatusValue(StatusEffects.Flying, 1, -2);
+					player.removeStatusEffect(StatusEffects.Flying);
 					outputText("<b>You land gently on the ground having too little soulforce to sustain flying.</b>\n\n");
 				}
 				else player.soulforce -= flyingWithSoulforceCost();
 			}
             if (player.statusEffectv1(StatusEffects.Flying) >= 0) outputText("<b>You keep making circles in the air around your opponent.</b>\n\n");
             else {
-				if (player.statusEffectv1(StatusEffects.Flying) == 0) {
+				if (player.statusEffectv2(StatusEffects.Flying) == 0) {
 					if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
 						outputText("<b>You need to give some time for your mech to recharge and thus land back to the ground.</b>\n\n");
 						player.createStatusEffect(StatusEffects.CooldownJetpack, 3, 0, 0, 0);
