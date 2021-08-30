@@ -4131,8 +4131,7 @@ public class PerkLib
                     .requirePerk(SuperiorEndurance)
                     .requireLevel(42);
             PrestigeJobSentinel.requirePrestigeJobSlot()
-                    .requirePerk(JobKnight)
-                    .requirePerk(JobWarrior)
+                    .requirePerks(JobKnight, JobWarrior)
                     .requireTou(200)
                     .requireLevel(42);
             CheetahIV.requirePerk(CheetahIII)
@@ -4488,9 +4487,7 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(42);
             PrestigeJobTempest.requirePrestigeJobSlot()
-                    .requirePerk(JobDervish)
-                    .requirePerk(JobWarrior)
-                    .requirePerk(DualWield)
+                    .requirePerks(JobDervish, JobWarrior, DualWield)
                     .requireSpe(200)
                     .requireLevel(42);
             //Tier 8 Speed Perks
@@ -4509,8 +4506,7 @@ public class PerkLib
                     .requirePerk(SteelStorm);
 			//Tier 10 Speed Perks
             TwinRiposte.requireLevel(60)
-                    .requirePerk(Parry)
-                    .requirePerk(BladeBarrier);
+                    .requirePerks(Parry, BladeBarrier);
             UnlockEndurance3rdStage.requirePerk(UnlockEndurance2ndStage)
                     .requireSpe(230)
                     .requireLevel(60);
@@ -5222,9 +5218,8 @@ public class PerkLib
             ElementalContractRank10.requirePerk(ElementalContractRank9)
                     .requireWis(250)
                     .requireLevel(54);
-			//This perk below for some reason stack overflows when using requirePerks.
-            StrongerElementalBond.requirePerk(StrongElementalBondSu)
-					.requirePerk(ElementalContractRank10)
+			//This perk below (with others as well) for some reason stack overflows when using requirePerks.
+            StrongerElementalBond.requirePerks(StrongElementalBondSu, ElementalContractRank10)
                     .requireWis(250)
                     .requireLevel(54);
             Backlash.requireLevel(54)
@@ -6598,4 +6593,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
