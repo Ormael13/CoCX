@@ -1207,7 +1207,9 @@ public class PerkMenu extends BaseContent {
 
 		function tempchk():void{//Debug function to see where specific perks have been sent to.
 			//List of perks on my save that currently do not go where they're supposed to + neighbours/ expected sequence.
-			var temp123:Array = masterlist.sort();
+			var temp123:Array = [];
+			//temp123 = masterlist.sort();
+			//temp123.push();
 			for each (var pPerks1:PerkType in temp123){
 				var hi:Boolean = false;
 				outputText(pPerks1.name() + ": ");
