@@ -776,7 +776,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
@@ -875,7 +875,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
@@ -1543,7 +1543,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -1837,7 +1837,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -1910,7 +1910,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -2027,7 +2027,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -2152,7 +2152,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
@@ -2242,7 +2242,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The lightning courses by the stone skin harmlessly. Thou it does leave the surface of the statue sparkling with a few residual lighting discharges.");
@@ -2331,7 +2331,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The darkness courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
@@ -2419,7 +2419,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The water courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
@@ -2523,7 +2523,7 @@ public class MagicSpecials extends BaseCombatContent {
 				enemyAI();
 				return;
 			}
-			if (checkConcentration()) return; //Amily concentration
+			if (combat.checkConcentration()) return; //Amily concentration
 			if (monster is LivingStatue)
 			{
 				outputText("The elemental energies courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of multicolor glow.");
@@ -2623,7 +2623,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -2731,7 +2731,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses over the stone behemoths skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -3356,7 +3356,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -4911,7 +4911,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The winds courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -5002,7 +5002,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The winds courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -6013,3 +6013,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
+

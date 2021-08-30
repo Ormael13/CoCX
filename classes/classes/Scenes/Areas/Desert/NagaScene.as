@@ -943,7 +943,7 @@ public function nagaPlayerConstrict():void {
 		return;
 	}
 	fatigue(10, USEFATG_PHYSICAL);
-	if (checkConcentration("", true)) return; //Amily concentration... why(true) SceneLib.combat.enemyAIImpl(); and not enemyAI();? no idea
+	if (combat.checkConcentration("", true)) return; //Amily concentration... why(true) SceneLib.combat.enemyAIImpl(); and not enemyAI();? no idea
 	//WRAP IT UPPP
 	if (monster.hasStatusEffect(StatusEffects.Dig)) {
 		if (rand(player.spe + 80) > monster.spe) {
@@ -1277,4 +1277,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

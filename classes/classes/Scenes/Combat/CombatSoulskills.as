@@ -2076,7 +2076,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 fatigue(60, USEFATG_PHYSICAL);
 	 }
 	 else fatigue(24, USEFATG_PHYSICAL);
-	if (checkConcentration()) return; //Amily concentration
+	if (combat.checkConcentration()) return; //Amily concentration
 	 outputText("You ready your wrists mounted scythes and prepare to sweep them towards " + monster.a + monster.short + ".\n\n");
 	 if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");

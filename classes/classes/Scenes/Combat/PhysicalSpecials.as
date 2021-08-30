@@ -3199,7 +3199,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Keep logic sane if this attack brings victory
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster.short == "lizan rogue") {
 			outputText("As your webbing flies at him the lizan flips back, slashing at the adhesive strands with the claws on his hands and feet with practiced ease.  It appears he's used to countering this tactic.");
 			enemyAI();
@@ -3265,7 +3265,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
 			if(monster.plural) {
@@ -3309,7 +3309,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You entangle your opponent with your whip, attempting to bind its movement. ");
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
@@ -3355,7 +3355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				return;
 			}
 			fatigue(10, USEFATG_PHYSICAL);
-			if (checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to grapple [monster him].")) return; //Amily concentration
+			if (combat.checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to grapple [monster him].")) return; //Amily concentration
 			//WRAP IT UPPP
 			outputText("You grab your opponent with your jaw while [monster he] is stunned inflicting grievous wounds before you toss [monster him] high in the air!");
 			monster.createStatusEffect(StatusEffects.OrcaPlay, 0,0,0,0);
@@ -3388,7 +3388,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You plunge on " + monster.a + monster.short + " and let your liquid body engulf it. ");
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
@@ -3463,7 +3463,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You growl menacingly, dropping on all four" + (player.tail.type != Tail.NONE ? " and flicking your tail" : "") + ", as you pounce on " + monster.a + monster.short + " clawing at " + monster.pronoun1 + " body and leaving deep bleeding wounds.");
@@ -3512,7 +3512,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(10, USEFATG_PHYSICAL);
 		outputText("You attempt to slam both of your powerful forepaws on " + monster.a + monster.short + ". ");
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You land both paws on " + monster.a + monster.short + " with brutal power using your claws to grab " + monster.pronoun2 + ".");
@@ -3547,7 +3547,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else fatigue(30, USEFATG_PHYSICAL);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownSlamBear,7,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownSlamBear,8,0,0,0);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		var damage:Number = 0;
 		//str bonuses
 		damage += player.str;
@@ -3639,7 +3639,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(20, USEFATG_PHYSICAL);
 		else fatigue(10, USEFATG_PHYSICAL);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			var damage:Number = 0;
@@ -3732,7 +3732,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function hydraBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -3797,7 +3797,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -3834,7 +3834,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function spiderBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -3919,7 +3919,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -3972,7 +3972,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else fatigue(24, USEFATG_PHYSICAL);
 			}
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You ready your wrists mounted scythes and prepare to sweep them towards " + monster.a + monster.short + ".\n\n");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
@@ -4094,7 +4094,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(50, USEFATG_PHYSICAL);
 		else fatigue(25, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
 		if(player.horns.count >= 6 && player.horns.count < 12) {
@@ -4238,7 +4238,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(30, USEFATG_PHYSICAL);
 		else fatigue(15, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
 		if(player.horns.count >= 6 && player.horns.count < 12) {
@@ -4364,7 +4364,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your stinger!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your stinger with superior quickness!\n\n");
@@ -4510,7 +4510,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
@@ -4542,7 +4542,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
@@ -4706,7 +4706,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(25, USEFATG_PHYSICAL);
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You open your mouth wide, your ");
 		if (player.faceType == Face.SHARK_TEETH) outputText("shark teeth extending out");
 		if (player.faceType == Face.ORCA) outputText("sharp orca teeth shining briefly");
@@ -4841,7 +4841,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (checkConcentration()) return; //Amily concentration
+		if (combat.checkConcentration()) return; //Amily concentration
 		//Blind
 		if (player.playerIsBlinded()) {
 			outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");

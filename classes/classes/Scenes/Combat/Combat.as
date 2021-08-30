@@ -687,6 +687,24 @@ public class Combat extends BaseContent {
 	if (damage >= 2500) CoC.instance.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
 	if (damage >= 5000) CoC.instance.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
 }*/
+	
+	public function checkConcentration(replacetext:String = "", sceneimpl:Boolean = false):Boolean {
+	//Amily concentration
+	//	if (checkConcentration()) return;
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			if (replacetext == "") {
+				outputText("[monster name] easily glides around your attack thanks to [monster his] complete concentration on your movements.\n\n");
+			} else {
+				outputText(replacetext);
+			}
+			if (sceneimpl == false) enemyAI();
+			if (sceneimpl == true) SceneLib.combat.enemyAIImpl();
+			return true;
+		}
+		return false;
+	}
+
     public function approachAfterKnockback1():void {
         clearOutput();
         outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
@@ -2886,7 +2904,7 @@ public class Combat extends BaseContent {
         }
         //Keep logic sane if this attack brings victory
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-        if checkConcentration("[monster name] easily glides around your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " thanks to [monster his] complete concentration on your movements.\n\n") return; //Amily concentration
+        if (checkConcentration("[monster name] easily glides around your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " thanks to [monster his] complete concentration on your movements.\n\n")) return; //Amily concentration
         if (monster.hasStatusEffect(StatusEffects.Sandstorm) && rand(10) > 1) {
             outputText("Your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " is blown off target by the tornado of sand and wind.  Damn!\n\n");
             enemyAI();
