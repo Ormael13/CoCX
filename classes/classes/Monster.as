@@ -1821,7 +1821,7 @@ import flash.utils.getQualifiedClassName;
 			if (player.hasPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
 				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)
+			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)
 			|| hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
 				if (!handleConstricted()) return;
 			}
