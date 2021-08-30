@@ -1998,13 +1998,8 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
+		if (checkConcentration()) return; //Amily concentration
+		if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
                 (monster as SandTrap).trapLevel(-4);
@@ -2891,12 +2886,7 @@ public class Combat extends BaseContent {
         }
         //Keep logic sane if this attack brings victory
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-            outputText("Amily easily glides around your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
+        if checkConcentration("[monster name] easily glides around your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " thanks to [monster his] complete concentration on your movements.\n\n") return; //Amily concentration
         if (monster.hasStatusEffect(StatusEffects.Sandstorm) && rand(10) > 1) {
             outputText("Your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " is blown off target by the tornado of sand and wind.  Damn!\n\n");
             enemyAI();
@@ -4312,13 +4302,7 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
-            clearOutput();
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
+		if (checkConcentration()) return; //Amily concentration
         if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
@@ -4872,13 +4856,7 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
-            clearOutput();
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
+        if (checkConcentration() && !isWieldingRangedWeapon()) return; //Amily concentration
         if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
@@ -11515,13 +11493,7 @@ public class Combat extends BaseContent {
             }
         }
         fatigue(10, USEFATG_PHYSICAL);
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-            clearOutput();
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-            enemyAI();
-            return;
-        }
+		if (checkConcentration()) return; //Amily concentration
         //WRAP IT UPPP
         if (monster.hasStatusEffect(StatusEffects.Dig)) {
             outputText("You dig right underneath your opponent, ");
@@ -11622,13 +11594,7 @@ public class Combat extends BaseContent {
                 return;
             }
             fatigue(10, USEFATG_PHYSICAL);
-            //Amily!
-            if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-                clearOutput();
-                outputText("Amily recovers just in time to get out of your reach as you attempt to straddle her.");
-                enemyAI();
-                return;
-            }
+			if(checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to straddle [monster him].")) return; //Amily concentration
             //WRAP IT UPPP
             monster.createStatusEffect(StatusEffects.Straddle, 0, 0, 0, 0);
             player.createStatusEffect(StatusEffects.StraddleRoundLeft, 2 + rand(3), 0, 0, 0);

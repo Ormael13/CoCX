@@ -912,7 +912,6 @@ public function nagaRapeChoice2():void {
 public function nagaPlayerConstrict():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	clearOutput();
-	clearOutput();
 	if(player.fatigue + combat.physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...");
 		//Gone		menuLoc = 1;
@@ -944,12 +943,7 @@ public function nagaPlayerConstrict():void {
 		return;
 	}
 	fatigue(10, USEFATG_PHYSICAL);
-	//Amily!
-	if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-        SceneLib.combat.enemyAIImpl();
-        return;
-	}
+	if (checkConcentration("", true)) return; //Amily concentration... why(true) SceneLib.combat.enemyAIImpl(); and not enemyAI();? no idea
 	//WRAP IT UPPP
 	if (monster.hasStatusEffect(StatusEffects.Dig)) {
 		if (rand(player.spe + 80) > monster.spe) {

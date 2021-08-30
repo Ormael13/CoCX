@@ -150,6 +150,22 @@ public class BaseCombatContent extends BaseContent {
 	protected function isPlayerFeared():Boolean {
 		return combat.isPlayerFeared();
 	}
+	protected function checkConcentration(replacetext:String = "", sceneimpl:Boolean = false):Boolean {
+	//Amily concentration
+	//	if (checkConcentration()) return;
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			if (replacetext == "") {
+				outputText("[monster name] easily glides around your attack thanks to [monster his] complete concentration on your movements.\n\n");
+			} else {
+				outputText(replacetext);
+			}
+			if (sceneimpl == false) enemyAI();
+			if (sceneimpl == true) SceneLib.combat.enemyAIImpl();
+			return true;
+		}
+		return false;
+	}
 	// =================
 	// MODIFIERS
 	// =================
