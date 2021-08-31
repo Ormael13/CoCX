@@ -14786,13 +14786,6 @@ use namespace CoC;
 		public function get additionalTransformationChances():Number {
 			var additionalTransformationChancesCounter:Number = 0;
 			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
 			return additionalTransformationChancesCounter;
@@ -14801,6 +14794,13 @@ use namespace CoC;
 		public function MutagenBonus(statName: String, bonus: Number):void
 		{
 			var MBCap:Number = 0.2;
+			if (hasPerk(PerkLib.Enhancement)) MBCap += 0.02;
+			if (hasPerk(PerkLib.Fusion)) MBCap += 0.02;
+			if (hasPerk(PerkLib.Enchantment)) MBCap += 0.02;
+			if (hasPerk(PerkLib.Refinement)) MBCap += 0.02;
+			if (hasPerk(PerkLib.Saturation)) MBCap += 0.02;
+			if (hasPerk(PerkLib.Perfection)) MBCap += 0.02;
+			if (hasPerk(PerkLib.Creationism)) MBCap += 0.02;
 			removeCurse(statName, bonus);
 			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < MBCap){
 				buff("Mutagen").addStat(""+statName+".mult",0.01);
@@ -14812,6 +14812,13 @@ use namespace CoC;
 		public function AlchemyBonus(statName: String, bonus: Number):void
 		{
 			var ABCap:Number = 0.2;
+			if (hasPerk(PerkLib.Enhancement)) ABCap += 0.02;
+			if (hasPerk(PerkLib.Fusion)) ABCap += 0.02;
+			if (hasPerk(PerkLib.Enchantment)) ABCap += 0.02;
+			if (hasPerk(PerkLib.Refinement)) ABCap += 0.02;
+			if (hasPerk(PerkLib.Saturation)) ABCap += 0.02;
+			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
+			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
 			removeCurse(statName, bonus);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);

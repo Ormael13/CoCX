@@ -81,7 +81,7 @@ use namespace CoC;
 				else if (player.perkv1(PerkLib.Dantain) == 1) outputText("Foundation Establishment");
 				else outputText("Qi Condensation");
 				outputText("\n");
-			}
+			}//outputText("<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + player.tailRecharge + " / hour; Current Venom: " + player.tailVenom + ", Max Cap: " + player.maxVenom() + "\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");

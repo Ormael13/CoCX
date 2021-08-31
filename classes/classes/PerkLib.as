@@ -877,8 +877,8 @@ public class PerkLib
 				"Reduces lust gain by 10%.",
 				"You've chosen the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
 		public static const Creationism:PerkType = mk("Creationism", "Creationism",
-				"You have surpassed the pinnacle of alchemy, placing yourself on the level of gods. By creating the perfect transformative, you have guaranteed its potent effects +1 effect.",
-				"You've chosen the 'Creationism' perk, number of possible effects of transformatives +1.");
+				"You have surpassed the pinnacle of alchemy, placing yourself on the level of gods. By creating the perfect transformative, you have guaranteed its potent effects +2% alchemy/mutagen boost.",
+				"You've chosen the 'Creationism' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const CriticalPerformance:PerkType = mk("Critical performance", "Critical performance",
 				"Allows your non periodic tease damage to critically hit based on your libido, maximum +20%.",
 				"You've chosen the 'Critical performance' perk, allowing your non periodic tease damage to critically hit based on your libido.");
@@ -1182,14 +1182,14 @@ public class PerkLib
 				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
 				"You've chosen the 'Enable Criticals' perk, allowing you to get crits on normaly immune to this enemy types.");
 		public static const Enchantment:PerkType = mk("Enchantment", "Enchantment",
-				"Using your arcane knowledge associated with alchemy,  you enchant each item to further power its effects +1 effect.",
-				"You've chosen the 'Enchantment' perk, number of possible effects of transformatives +1.");
+				"Using your arcane knowledge associated with alchemy,  you enchant each item to further power its effects +2% alchemy/mutagen boost.",
+				"You've chosen the 'Enchantment' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const EngineersFriend:PerkType = mk("Engineer's Friend", "Engineer's Friend",
 				"Ah Spah's sappin' mah Sentrah! (Damn that's a thick accent... best take the +10% ranged damage buff before he turns it on you)",
 				"You've chosen the 'Engineer's Friend' perk, gaining +10% range phys dmg.");
 		public static const Enhancement:PerkType = mk("Enhancement", "Enhancement",
-				"Using your knowledge of alchemy, you've found a way to enhance the effects of transformatives +1 effect.",
-				"You've chosen the 'Enhancement' perk, number of possible effects of transformatives +1.");
+				"Using your knowledge of alchemy, you've found a way to enhance the effects of transformatives +2% alchemy/mutagen boost.",
+				"You've chosen the 'Enhancement' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const EnvenomedBolt:PerkType = mk("Envenomed Bolt", "Envenomed Bolt",
 				"By carefully collecting your venom you can apply poison to your arrows and bolts.",
 				"You've chosen the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
@@ -1362,8 +1362,8 @@ public class PerkLib
 				"I don't know how you worked without one, but now you have a furnace! Now take your upgraded armor proficiency while I get answers... (+5% phys/mag resistance)",
 				"You've chosen the 'Furnace' perk, increasing armor proficiency. (+5% phys/mag resistance)");
 		public static const Fusion:PerkType = mk("Fusion", "Fusion",
-				"Using your knowledge of alchemy and enhancement, you found a way to fuse two of the same item together, further enhacing transformative effects +1 effect.",
-				"You've chosen the 'Fusion' perk, number of possible effects of transformatives +1.");
+				"Using your knowledge of alchemy and enhancement, you found a way to fuse two of the same item together, further enhacing transformative effects +2% alchemy/mutagen boost.",
+				"You've chosen the 'Fusion' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const GigantGrip:PerkType = mk("Gigant's Grip", "Gigant's Grip",
 				"Gain an ability to wield large weapons and massive shields in one hand. (+5 to max Str)",
 				"You've chosen the 'Gigant's Grip' perk, gaining an ability to wield large weapons and massive shields in one hand.").withBuffs({'str.mult':0.5});
@@ -2298,8 +2298,8 @@ public class PerkLib
 				"Defend move now massively reduce incoming damage and allow for improved fatigue/mana/soulforce recovery.",
 				"You've chosen the 'Perfect Defence Stance' perk, perfecting your defence pose beyond mastery level.");
 		public static const Perfection:PerkType = mk("Perfection", "Perfection",
-				"The ultimate stage of alchemy, you have perfected the art of making transformatives more effective. This is a level very few have reached +1 effect.",
-				"You've chosen the 'Perfection' perk, number of possible effects of transformatives +1.");
+				"The ultimate stage of alchemy, you have perfected the art of making transformatives more effective. This is a level very few have reached +2% alchemy/mutagen boost.",
+				"You've chosen the 'Perfection' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const PerfectStrike:PerkType = mk("Perfect strike", "Perfect strike",
 				"When you strike (with puch/kick/soulblast) a stunned or frozen solid opponent you deal extra damage (50%).",
 				"You've chosen the 'Perfect strike' perk, allowing to deal more damage to stunned or frozen solid enemeis with punch/kick type soulskills.");
@@ -2464,8 +2464,8 @@ public class PerkLib
 				"Raises max HP by 5% of base value.",
 				"You've chosen the 'Refined Body VI' perk, giving you an additional 5% to base HP!");
 		public static const Refinement:PerkType = mk("Refinement", "Refinement",
-				"Using your acquired knowledge, you refine each item to increase its effects on your body, further increasing the changes +1 effect.",
-				"You've chosen the 'Refinement' perk, number of possible effects of transformatives +1.");
+				"Using your acquired knowledge, you refine each item to increase its effects on your body, further increasing the changes +2% alchemy/mutagen boost.",
+				"You've chosen the 'Refinement' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const Regeneration:RegenerationPerk = new RegenerationPerk();
 		public static const Regeneration2:Regeneration2Perk = new Regeneration2Perk();
 		public static const Regeneration3:Regeneration3Perk = new Regeneration3Perk();
@@ -2510,8 +2510,8 @@ public class PerkLib
 				"You go on periodic journeys to spread your faith and help those in need. These constant pilgrimages decrease your minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
 				"You've chosen the 'Saint' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const Saturation:PerkType = mk("Saturation", "Saturation",
-				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +1 effect.",
-				"You've chosen the 'Saturation' perk, number of possible effects of transformatives +1.");
+				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +2% alchemy/mutagen boost.",
+				"You've chosen the 'Saturation' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
 				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.",
 				"You've chosen the 'Scylla Ink Glands' perk, due to repeadly use of ink attack leading to denveloping ink glands!").withBuffs({'str.mult':0.10});
