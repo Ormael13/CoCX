@@ -1424,63 +1424,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Recharge venom/web pool
 			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA
 			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(MutationsLib.VenomGlandsEvolved) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
-				if (player.tailRecharge < 5) player.tailRecharge = 5;
-				if (player.hasPerk(PerkLib.ImprovedVenomGland)) player.tailRecharge += 5;
-				if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) player.tailRecharge += 15;
-				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) player.tailRecharge += 45;
-				if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) player.tailRecharge += 2;
-				if (player.hasPerk(MutationsLib.VenomGlandsFinalForm)) player.tailRecharge += 8;
-				if (player.hasPerk(PerkLib.VenomousDiet)) {
-					if (player.hunger > 1400) player.tailRecharge += 30;
-					else if (player.hunger > 1200) player.tailRecharge += 28;
-					else if (player.hunger > 1000) player.tailRecharge += 26;
-					else if (player.hunger > 900) player.tailRecharge += 24;
-					else if (player.hunger > 800) player.tailRecharge += 22;
-					else if (player.hunger > 700) player.tailRecharge += 20;
-					else if (player.hunger > 600) player.tailRecharge += 18;
-					else if (player.hunger > 500) player.tailRecharge += 16;
-					else if (player.hunger > 400) player.tailRecharge += 14;
-					else if (player.hunger > 300) player.tailRecharge += 12;
-					else if (player.hunger > 200) player.tailRecharge += 10;
-					else if (player.hunger > 150) player.tailRecharge += 8;
-					else if (player.hunger > 100) player.tailRecharge += 6;
-					else if (player.hunger > 50) player.tailRecharge += 4;
-					else player.tailRecharge += 2;
-				}
+				var venomHRecharge:Number = 0;
+				venomHRecharge += combat.venomCombatRecharge2();
 				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
-					if (player.maxHunger() > 1600) player.tailRecharge += 30;
-					else if (player.maxHunger() > 800) player.tailRecharge += 25;
-					else if (player.maxHunger() > 400) player.tailRecharge += 20;
-					else if (player.maxHunger() > 200) player.tailRecharge += 15;
-					else if (player.maxHunger() > 100) player.tailRecharge += 10;
-					else player.tailRecharge += 5;
+					if (player.maxHunger() > 1600) venomHRecharge += 27.5;
+					else if (player.maxHunger() > 800) venomHRecharge += 22.5;
+					else if (player.maxHunger() > 400) venomHRecharge += 17.5;
+					else if (player.maxHunger() > 200) venomHRecharge += 12.5;
+					else if (player.maxHunger() > 100) venomHRecharge += 7.5;
+					else venomHRecharge += 2.5;
 				}
-				if (player.hasPerk(PerkLib.VenomousAdiposeTissue)) {
-					if (player.tou > 20000) player.tailRecharge += 20;
-					else if (player.tou > 10000) player.tailRecharge += 18;
-					else if (player.tou > 5000) player.tailRecharge += 16;
-					else if (player.tou > 2000) player.tailRecharge += 14;
-					else if (player.tou > 1000) player.tailRecharge += 12;
-					else if (player.tou > 500) player.tailRecharge += 10;
-					else if (player.tou > 200) player.tailRecharge += 8;
-					else if (player.tou > 100) player.tailRecharge += 6;
-					else if (player.tou > 50) player.tailRecharge += 4;
-					else player.tailRecharge += 2;
-					if (player.thickness > 150) player.tailRecharge += 20;
-					else if (player.thickness > 100) player.tailRecharge += 15;
-					else if (player.thickness > 50) player.tailRecharge += 10;
-					else player.tailRecharge += 5;
-				}
-				if (player.faceType == Face.SNAKE_FANGS) player.tailRecharge += 4;
-				if (player.faceType == Face.SPIDER_FANGS) player.tailRecharge += 4;
-				if (player.tailType == Tail.BEE_ABDOMEN) player.tailRecharge += 6;
-				if (player.tailType == Tail.SPIDER_ADBOMEN) player.tailRecharge += 6;
-				if (player.tailType == Tail.SCORPION) player.tailRecharge += 6;
-				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) player.tailRecharge += 8;
-				if (player.lowerBody == LowerBody.HYDRA) player.tailRecharge += 8;
-				if (player.lowerBody == LowerBody.ATLACH_NACHA) player.tailRecharge *= 2;
-				if (player.hasPerk(PerkLib.AxillaryVenomGlands)) player.tailRecharge *= 2;
-				player.tailVenom += player.tailRecharge;
+				player.tailVenom += venomHRecharge;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
 			//Satyr Sexuality

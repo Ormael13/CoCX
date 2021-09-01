@@ -8703,19 +8703,19 @@ public final class Mutations extends MutationsHelper {
         //Appearance Changes
         //***************
         //(Ears become pointed if not human)
-        if (player.ears.type != Ears.ELFIN && rand(4) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.ELFIN && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
 			transformations.EarsElfin.applyEffect();
             changes++;
         }
         //(Fur/Scales fall out replaced by chitin)
-        if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
 			transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
             changes++;
         }
         //(Gain human face)
-        if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS && player.faceType != Face.HUMAN) && changes < changeLimit && rand(4) == 0) {
+        if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS && player.faceType != Face.HUMAN) && changes < changeLimit && rand(3) == 0) {
 			outputText("[pg]");
 			transformations.FaceHuman.applyEffect();
             changes++;
@@ -8727,38 +8727,38 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Nipples reduction to 1 per tit.
-        if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(3) == 0) {
 			outputText("[pg]");
 			transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
         //Nipples Turn Black:
-        if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
 			transformations.NipplesBlack.applyEffect();
             changes++;
         }
         //eyes!
 		// (player.faceType != Face.SPIDER_FANGS || player.faceType != Face.HUMAN) makes no sense btw
-        if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS || player.faceType != Face.HUMAN) && player.eyes.type == Eyes.HUMAN && rand(4) == 0 && changes < changeLimit) {
+        if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS || player.faceType != Face.HUMAN) && player.eyes.type == Eyes.HUMAN && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
 			transformations.EyesSpiderAndMutagenInt.applyEffect();
             changes++;
         }
         //(Gain spider fangs)
-        if (player.faceType == Face.HUMAN && player.hasCoatOfType(Skin.CHITIN) && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType == Face.HUMAN && player.hasCoatOfType(Skin.CHITIN) && changes < changeLimit && rand(3) == 0) {
 			outputText("[pg]");
 			transformations.FaceSpiderFangs.applyEffect();
             changes++;
         }
         //(Arms to carapace-covered arms)
-        if (player.arms.type != Arms.SPIDER && changes < changeLimit && rand(4) == 0) {
+        if (player.arms.type != Arms.SPIDER && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.ArmsSpider.applyEffect();
             changes++;
         }
         if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune())
-                && changes < changeLimit && rand(4) == 0) {
+                && changes < changeLimit && rand(3) == 0) {
 			outputText("[pg]");
             transformations.LowerBodyHuman.applyEffect();
             changes++;
@@ -8780,25 +8780,25 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //(Normal Biped Legs -> Carapace-Clad Legs)
-        if (((type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS && player.lowerBody != LowerBody.ATLACH_NACHA) || (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (((type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS && player.lowerBody != LowerBody.ATLACH_NACHA) || (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodySpider.applyEffect();
             changes++;
         }
         //(Tail becomes spider abdomen GRANT WEB ATTACK)
-        if (player.tailType != Tail.SPIDER_ADBOMEN && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.ATLACH_NACHA) && player.arms.type == Arms.SPIDER && rand(4) == 0) {
+        if (player.tailType != Tail.SPIDER_ADBOMEN && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.ATLACH_NACHA) && player.arms.type == Arms.SPIDER && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailSpider.applyEffect();
             changes++;
         }
         //(Drider Item Only: Carapace-Clad Legs to Drider Legs)
-        if (type == 1 && player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
+        if (type == 1 && player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(3) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
             outputText("[pg]");
             transformations.LowerBodyDrider.applyEffect();
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+        if (rand(3) == 0 && player.hasGills() && changes < changeLimit) {
 			outputText("[pg]");
 			transformations.GillsNone.applyEffect();
 		}

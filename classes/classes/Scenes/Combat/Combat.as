@@ -10537,6 +10537,7 @@ public class Combat extends BaseContent {
 	public function venomCombatRecharge2():Number {
 		var venomCRecharge:Number = 0;
         venomCRecharge += player.tailRecharge;
+		if (venomCRecharge < 2.5) venomCRecharge = 5;
 		if (player.hasPerk(PerkLib.ImprovedVenomGland)) venomCRecharge += 2.5;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) venomCRecharge += 7.5;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) venomCRecharge += 22.5;

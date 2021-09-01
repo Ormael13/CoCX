@@ -81,7 +81,7 @@ use namespace CoC;
 				else if (player.perkv1(PerkLib.Dantain) == 1) outputText("Foundation Establishment");
 				else outputText("Qi Condensation");
 				outputText("\n");
-			}//outputText("<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + player.tailRecharge + " / hour; Current Venom: " + player.tailVenom + ", Max Cap: " + player.maxVenom() + "\n");
+			}
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -931,13 +931,14 @@ use namespace CoC;
 			addButton(1, "Add 5 PerkP", AddPerkPoints).hint("Add 5 perk points.");
 			addButton(2, "Sub 10 PerkP", SubPerkPoints).hint("Substract 10 perk points.");
 			addButton(3, "Add Gems 1", AddGems1).hint("Add 100 gems.");
-			addButton(4, "Add Gems 2", AddGems2).hint("Add 1000 gems.");
+			addButton(4, "Add Gems 2", AddGems2).hint("Add 1,000 gems.");
 			addButton(5, "Add EXP 1", AddEXP1).hint("Add 100 EXP.");
-			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
-			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
-			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
-			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(10, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
-			if (player.hasPerk(PerkLib.SoulAncestor)) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
+			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1,000 EXP.");
+			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10,000 EXP.");
+			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100,000 EXP.");
+			addButton(4, "Add Gems 3", AddGems3).hint("Add 10,000 gems.");
+			if (player.hasPerk(PerkLib.SoulAncestor)) addButton(10, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
+			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(11, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
@@ -1350,36 +1351,6 @@ use namespace CoC;
 			flags[kFLAGS.ETNA_LVL_UP]--;
 			outputText("\n\n<b>Etna been De-LvL'd!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
-		}
-		public function TribulationPerks():void {
-			if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
-			}
-			doNext(SoulforceCheats);
-		}
-		public function Stage10to12SoulPerks():void {
-			if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				player.removePerk(PerkLib.FleshBodyOverlordStage);
-				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage!)</b>");
-			}
-			if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-				player.removePerk(PerkLib.DaoistOverlordStage);
-				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage!)</b>");
-			}
-			if (player.hasPerk(PerkLib.SoulKing)) {
-				player.removePerk(PerkLib.SoulKing);
-				outputText("\n\n<b>(Lost Perk: Soul King!)</b>");
-			}
-			if (player.hasPerk(PerkLib.SoulEmperor)) {
-				player.removePerk(PerkLib.SoulEmperor);
-				outputText("\n\n<b>(Lost Perk: Soul Emperor!)</b>");
-			}
-			if (player.hasPerk(PerkLib.SoulAncestor)) {
-				player.removePerk(PerkLib.SoulAncestor);
-				outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
-			}
-			doNext(SoulforceCheats);
 		}
 		public function EquipmentMenu(page:int = 1):void {
 			menu();
@@ -2394,6 +2365,41 @@ use namespace CoC;
 			player.XP = player.XP + 100000;
 			statScreenRefresh();
 			PerksGemsEXPLvL();
+		}
+		public function AddGems3():void {
+			player.gems = player.gems + 10000;
+			statScreenRefresh();
+			PerksGemsEXPLvL();
+		}
+		public function Stage10to12SoulPerks():void {
+			if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				player.removePerk(PerkLib.FleshBodyOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage!)</b>");
+			}
+			if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+				player.removePerk(PerkLib.DaoistOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage!)</b>");
+			}
+			if (player.hasPerk(PerkLib.SoulKing)) {
+				player.removePerk(PerkLib.SoulKing);
+				outputText("\n\n<b>(Lost Perk: Soul King!)</b>");
+			}
+			if (player.hasPerk(PerkLib.SoulEmperor)) {
+				player.removePerk(PerkLib.SoulEmperor);
+				outputText("\n\n<b>(Lost Perk: Soul Emperor!)</b>");
+			}
+			if (player.hasPerk(PerkLib.SoulAncestor)) {
+				player.removePerk(PerkLib.SoulAncestor);
+				outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
+			}
+			doNext(SoulforceCheats);
+		}
+		public function TribulationPerks():void {
+			if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
+				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
+			}
+			doNext(SoulforceCheats);
 		}
 		public function AddLvL1():void {
 			player.level = player.level + 1;
