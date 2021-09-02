@@ -1068,6 +1068,10 @@ use namespace CoC;
 		{
 			return !isShieldsForShieldBash() || shield != game.shields.BATTNET || shield != game.shields.Y_U_PAN;
 		}
+		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
+		{
+			return shield == ShieldLib.NOTHING || shield == game.shields.AETHERS;
+		}
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean {
 			return weaponName == "fists" || isGauntletWeapon();
@@ -14941,4 +14945,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}
