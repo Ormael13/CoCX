@@ -1099,11 +1099,11 @@ public class PerkMenu extends BaseContent {
 
 	public function playerPerksList():void {	//Can this be done better? Very likely. But hell, I'm not a programmer.
 		var pPerkList:Array = player.perks;	 	//Player Perks
-		//var pPerkList:Array = PerkTree.obtainablePerks();	//DebugLine. Returns most perks.
 		var masterlist:Array = [];				//Temp hold of above
 		var ignorelist:Array = [];				//List to check against repetitively
 		var endlist:Array = [];					//Final list of perks to output
-		var maxpPerks:int = 0;
+		//var pPerkList:Array = PerkTree.obtainablePerks();	//DebugLine. Returns most perks.
+		var maxpPerks:int = 0;					//DebugLine
 
 		function initSet():void {
 			var mutationList:Array = MutationsLib.mutationsArray("",true)
@@ -1128,14 +1128,13 @@ public class PerkMenu extends BaseContent {
 			repPerkClr();
 		}
 
-		//Idea: Local perk table to create new one every time, then overwrite existing one higher up? Skips the removing step which seems to be the problem....?
 		function repPerkClr():void { //Cycling perks against requirements until no higher can be achieved per.
 			var change:Boolean = false;
 			//outputText("Hit! Current list length: " + masterlist.length + "\n");	//DebugLine
-			for each(var pPerk:PerkType in masterlist) {	//Needs a thing to hold the removals, cause there's a chance the thing it needs is later on..
+			for each(var pPerk:PerkType in masterlist){
 				var requirelen:int = 0;
-				for each (var cond:Object in pPerk.requirements) {	//Here? Multiple objects, which could contain both .reqPerk+ .reqAnyPerk. Jumped gun?
-					if (cond.type == "allperks"){	//Checks if player has all required perks
+				for each (var cond:Object in pPerk.requirements) {
+					if (cond.type == "allperks"){		//Checks if player has all required perks
 						var iterval:int = 0;
 						for each (var pPerk1:PerkType in cond.allperks) {
 							if (ignorelist.indexOf(pPerk1) >= 0){
@@ -1151,13 +1150,13 @@ public class PerkMenu extends BaseContent {
 					}
 					else if (cond.type == "anyperk"){	//Checks if player has any of the perks
 						for each (var temp2:PerkType in cond.perks) {
-							if (ignorelist.indexOf(temp2) >= 0 ){
+							if (ignorelist.indexOf(temp2) >= 0){
 								perkArrMgmt(temp2, pPerk);
 								change = true;
 							}
 						}
 					}
-					else if (cond.type == "perk"){	//Checks if player has the perk
+					else if (cond.type == "perk"){		//Checks if player has the perk
 						var temp3:PerkType = cond.perk;
 						if (ignorelist.indexOf(temp3) >= 0){
 							perkArrMgmt(temp3, pPerk);
@@ -1172,10 +1171,10 @@ public class PerkMenu extends BaseContent {
 					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
 				}
 			}
-			if (change) {	//This feels terrible. But I suppose it works as a workaround to me not being able to directly splice arrays, since it seems to fuck up in odd ways.
+			if (change){
 				repPerkClr();
 			}
-			else {
+			else{
 				perkOut();
 				//tempchk();	//DebugLine
 			}
