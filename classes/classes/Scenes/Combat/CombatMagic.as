@@ -3767,7 +3767,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.inte / 50 > 5) aegismagnitude += 5;
 		else aegismagnitude += player.inte / 25;
 		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) aegismagnitude *= 1.1;
-		if (player.isUsingStaff() && player.shield == ShieldLib.NOTHING) aegismagnitude *= 3;
+		if (player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) aegismagnitude *= 3;
 		player.createStatusEffect(StatusEffects.Aegis,Math.round(aegismagnitude),AegisDuration,0,0);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();

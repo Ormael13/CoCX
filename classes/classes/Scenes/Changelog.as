@@ -194,8 +194,8 @@ package classes.Scenes
 			outputText("-2 new achievments.\n");
 			outputText("-There is new (well kinda) enemies added to Ashlands and Vulcanic Crag: Phoenix Squad/Platoon. They're group enemeis of lvl 41 and 74. Platoon additionaly have modifiers for large group of enemies.\n");
 			outputText("-Double barreled dragon gun remains have been moved from Vulcanic Crag to Ashlands.\n");
-			outputText("-All perks that are gained when having History/Past Life: ALchemist perk won;t give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
-			outputText("-\n");
+			outputText("-All perks that are gained when having History/Past Life: ALchemist perk won't give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
+			outputText("-Aether Twin that use shield slot won't be count as wearing shield in cases when perks check for lack of shield to trigger their effect (for example Hold with Both Hands).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
