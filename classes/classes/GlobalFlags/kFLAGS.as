@@ -1307,9 +1307,9 @@ public static const UNKNOWN_FLAG_NUMBER_01298:int                               
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
 public static const KAIBA_SHELFS:int                                   				= 1300;
 public static const MARAE_ISLAND:int                                   				= 1301;
-public static const UNKNOWN_FLAG_NUMBER_01302:int                                   = 1302;
-public static const UNKNOWN_FLAG_NUMBER_01303:int                                   = 1303;
-public static const UNKNOWN_FLAG_NUMBER_01304:int                                   = 1304;
+public static const DISCOVERED_BEE_HIVE_DUNGEON:int                                 = 1302;
+public static const TIFA_FOLLOWER:int                                   			= 1303;
+public static const TIFA_AFFECTION:int                                   			= 1304;
 public static const UNKNOWN_FLAG_NUMBER_01305:int                                   = 1305;
 public static const UNKNOWN_FLAG_NUMBER_01306:int                                   = 1306;
 public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
