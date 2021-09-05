@@ -1772,6 +1772,54 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n             | ");
 				}
 			}
+			else if (DungeonAbstractContent.dungeonLoc >= 169 && DungeonAbstractContent.dungeonLoc < 174) { //Bee Hive
+				rawOutputText("Bee Hive");
+				if (DungeonAbstractContent.dungeonLoc == 169) {
+					rawOutputText(", Entrance");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[ ]-[ ]-[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 170) {
+					rawOutputText(", Princess cells");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[ ]-[ ]-[P]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 171) {
+					rawOutputText(", Honey Brewers halls");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[ ]-[P]-[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 172) {
+					rawOutputText(", Library");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[P]-[ ]-[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 173) {
+					rawOutputText(", Far corridor towards the throne room");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[ ]-[ ]-[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+			}
 			
 			
 			

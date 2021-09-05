@@ -177,7 +177,7 @@ public class Zetaz extends Monster
 			this.tallness = 4*12+1;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.lowerBody = LowerBody.KANGAROO;
+			this.lowerBody = LowerBody.HOOFED;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;

@@ -42,7 +42,12 @@ public class Questlog extends BaseContent
 			outputText("\n<b>Fall of the Phoenix:</b> ");
 			if (flags[kFLAGS.CLEARED_HEL_TOWER] == 2) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkPhoenixTowerClear()) outputText("Completed");
-			else outputText("Not Started");
+			else outputText("Not Started");/*
+			outputText("\n<b>:</b> ");
+			if (flags[kFLAGS.] == 2) outputText("Completed (Reward taken)");
+			else if (SceneLib.dungeons.checkBeeHiveClear()) outputText("Completed");
+			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) outputText("In Progress");
+			else outputText("Not Started");*/
 			outputText("\n<b>Tiger stalking the Dragon:</b> ");
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 6) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkHiddenCaveClear()) outputText("Completed");
@@ -129,7 +134,7 @@ public class Questlog extends BaseContent
 			//button 4 - ?Demon Secret Lab?
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
-			//button 7 - ???
+			//button 7 - Bee Hive
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor reward");
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) {
 				if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 2) addButton(8, "River Dungeon", takeRewardForRiverDungeon3rdFloor).hint("3rd floor reward");

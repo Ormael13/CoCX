@@ -1207,6 +1207,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YamataEntwine:StatusEffectType 		   = mkCombat("Yamata Entwine");
 		public static const BerzerkingSiegweird:StatusEffectType   = mkCombat("Berzerking Siegweird");
 		public static const HealingSiegweird:StatusEffectType      = mkCombat("Healing Siegweird");
+		public static const CHCompellingAria:StatusEffectType      = mkCombat("Corrupted Handmaidens Compelling Aria");
 
 		/**
 		 * Creates status affect

@@ -189,14 +189,13 @@ public class DungeonEngine extends BaseContent
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_32:int = 166;
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_33:int = 167;
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_34:int = 168;
-		/*
-		private static const DUNGEON_BEE_HIVE_ENTRANCE:int	= 169;
-		private static const DUNGEON_BEE_HIVE_1:int	= 170;
-		private static const DUNGEON_BEE_HIVE_2:int	= 171;
-		private static const DUNGEON_BEE_HIVE_3:int	= 172;
-		private static const DUNGEON_BEE_HIVE_4:int	= 173;
-		private static const DUNGEON_BEE_HIVE_5:int	= 174;
-		*/
+		
+		private static const DUNGEON_BEE_HIVE_1:int	= 169;
+		private static const DUNGEON_BEE_HIVE_2:int	= 170;
+		private static const DUNGEON_BEE_HIVE_3:int	= 171;
+		private static const DUNGEON_BEE_HIVE_4:int	= 172;
+		private static const DUNGEON_BEE_HIVE_5:int	= 173;
+		
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
@@ -395,6 +394,12 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_1) ebonlabyrinth.roomBBB();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_2) ebonlabyrinth.roomCCC();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_3) ebonlabyrinth.roomDDD();
+			//Ebon Labyrinth
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_1) beehive.room1South();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_2) beehive.room2Center();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_3) beehive.room3West();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_4) beehive.room4East();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_5) beehive.room5North();
 		}
 		
 		public function checkFactoryClear():Boolean {
@@ -420,6 +425,9 @@ public class DungeonEngine extends BaseContent
 		}
 		public function checkDenOfDesireClear():Boolean {
 			return (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 2);
+		}
+		public function checkBeeHiveClear():Boolean {
+			return (flags[kFLAGS.TIFA_FOLLOWER] > 5);
 		}
 		public function checkRiverDungeon1stFloorClear():Boolean {
 			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pokonanie 1 golema, 2 pokonanie obu golemów
