@@ -42,18 +42,6 @@ import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 			player.dynStats("lus", statusEffectv1(StatusEffects.CHCompellingAria));
 		}
 		
-		public function corruptedHandmaidensSpearStrike():void {
-			outputText("One of the corrupted handmaidens attempts to impale you with her spear! ");
-			//Miss:
-			if (rand(20) + 1 + player.spe / 20 > 17) outputText("The weapon missed you.");
-			//Hit:
-			else {
-				outputText("The weapon goes right through you! ");
-				var damage:Number = weaponAttack + str * 2 + rand(str);
-				damage = player.takePhysDamage(damage, true);
-			}
-		}
-		
 		override protected function performCombatAction():void {
 			if (monsterIsStunned()) removeStatusEffect(StatusEffects.CHCompellingAria);
 			if (hasStatusEffect(StatusEffects.CHCompellingAria)) corruptedHandmaidensCompellingAria();
@@ -62,7 +50,7 @@ import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 					if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) corruptedHandmaidensCompellingAria();
 					else corruptedHandmaidensStinger();
 				}
-				else corruptedHandmaidensSpearStrike();
+				else eAttack();
 			}
 		}
 		

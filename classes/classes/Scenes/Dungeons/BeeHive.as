@@ -6,8 +6,10 @@
 package classes.Scenes.Dungeons 
 {
 import classes.EventParser;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.EngineCore;
 import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 import classes.Scenes.Dungeons.BeeHive.CorruptBeeQueen;
 import classes.Scenes.Dungeons.BeeHive.DemonicBee;
@@ -57,6 +59,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 					outputText("\"<i>Zzzizzzter? Drone? Whatever, all Beezzz are supposed to be inside until the Queen givezzz further notice!</i>\" They snap.\n\n");
 					outputText("Apologising, you hurry past them before they realize you aren't actually one of them.\n\n");
 				}
+				EngineCore.awardAchievement("Buzz Off", kACHIEVEMENTS.DUNGEON_BUZZ_OFF);
 			}
 			else {
 				outputText("You tell them that you come in peace, trying to look non-threatening as you approach.\n\n");

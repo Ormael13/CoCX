@@ -191,13 +191,13 @@ package classes.Scenes
 			outputText("-When elementals attack added option to skip their turn (whatever reason it may be (totaly not due to rare bug of immortal mino king))\n");
 			outputText("-New area: Ashlands. Exploring caves allows now to find it (have similar lvl range for enemies as tundra and is much warmer place too). Exploring Ashlands leads to finding (Outer) Vulcanic Crag - it have enemies with level range like (Outer) Glacial Rift ones.\n");
 			outputText("-Behemoth/True Fire Golems at Vulcanic Crag got their level rised from 40/43 to 71/80 (that included buff to most of their stats).\n");
-			outputText("-2 new achievments.\n");
+			outputText("-4 new achievments. (1 shadow one)\n");
 			outputText("-There is new (well kinda) enemies added to Ashlands and Vulcanic Crag: Phoenix Squad/Platoon. They're group enemeis of lvl 41 and 74. Platoon additionaly have modifiers for large group of enemies.\n");
 			outputText("-Double barreled dragon gun remains have been moved from Vulcanic Crag to Ashlands.\n");
 			outputText("-All perks that are gained when having History/Past Life: ALchemist perk won't give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
 			outputText("-Aether Twin that use shield slot won't be count as wearing shield in cases when perks check for lack of shield to trigger their effect (for example Hold with Both Hands).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-After beating Tentacle Beast there is 10% chance to find bee girl. She would unlock new dungeon: Bee Hive. It have enemies from lvl 30 to 40.\n");
+			outputText("-Clearing up Bee Hive would add new follower to camp: bee that goes by the name Tifa.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -216,7 +216,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks gfiving Dodge error msg, still more than a few TF items ignoring perm TF's ");
 			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural emans (wings), Fera first halloween event not triggering if pc had permed ");
-			outputText("one of two fera perks form 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting\n");/*ostatni punkt changelogu
+			outputText("one of two fera perks form 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
