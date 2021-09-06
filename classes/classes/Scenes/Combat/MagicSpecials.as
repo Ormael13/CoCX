@@ -39,7 +39,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 2;
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) berzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
-			outputText("<b>Berzerking was used succesfully.</b>\n\n");
+			outputText("<b>Berzerking was used successfully.</b>\n\n");
 		}
 		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
 			player.wrath -= 50;
@@ -47,7 +47,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 2;
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) lustzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
-			outputText("<b>Lustzerking was used succesfully.</b>\n\n");
+			outputText("<b>Lustzerking was used successfully.</b>\n\n");
 		}
 		if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
 			outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
@@ -68,7 +68,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.wrath >= 50 && flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1) {
 			player.wrath -= 50;
-			outputText("<b>Warrior's rage was used succesfully.</b>\n\n");
+			outputText("<b>Warrior's rage was used successfully.</b>\n\n");
 			warriorsrage007();
 		}
 	}

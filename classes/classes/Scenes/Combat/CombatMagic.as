@@ -41,7 +41,7 @@ public class CombatMagic extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
-			outputText("<b>Charge Weapon was autocasted succesfully.</b>\n\n");
+			outputText("<b>Charge Weapon was autocasted successfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) && player.haveNaturalArmor() && player.isNaked()) || !player.isNaked())) {
 			spellChargeArmor(true);
@@ -49,7 +49,7 @@ public class CombatMagic extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
-			outputText("<b>Charge Armor was autocasted succesfully.</b>\n\n");
+			outputText("<b>Charge Armor was autocasted successfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Battlemage) && ((player.hasPerk(PerkLib.GreyMage) && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
@@ -57,7 +57,7 @@ public class CombatMagic extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
-			outputText("<b>Might was autocasted succesfully.</b>\n\n");
+			outputText("<b>Might was autocasted successfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Battleflash) && ((player.hasPerk(PerkLib.GreyMage) && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(40) * spellBlinkCostMultiplier()) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
@@ -65,14 +65,14 @@ public class CombatMagic extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
-			outputText("<b>Blink was autocasted succesfully.</b>\n\n");
+			outputText("<b>Blink was autocasted successfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Battleshield) && (player.lust >= 50 || player.lust < (player.maxLust() - 49)) && flags[kFLAGS.AUTO_CAST_MANA_SHIELD] == 0) {
 			spellManaShield(true);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
-			outputText("<b>Mana Shield was autocasted succesfully.</b>\n\n");
+			outputText("<b>Mana Shield was autocasted successfully.</b>\n\n");
 		}
 	}
 
