@@ -577,6 +577,7 @@ public function breakingInYourMare():void {
 		outputText("\"<i>Go... go faster. I'm ready, I want more of you... I need more,</i>\" Diana moans, smiling back at you.\n\n");
 		outputText("Smiling, you speed up, beginning to piston your hips and slamming your cock into her tight cunt, earning a scream from Diana as her pussy is finally pounded by your [cock].\n\n");
 		outputText("\"<i>Don't stop! It just feels so good!</i>\" Diana moans, her body shaking as her insides are pounded, \"<i>Your cock feels so good inside me!! You’re gonna make me cum soon!!</i>\"\n\n");
+		outputText("")
 		outputText("True to her word she cums, screaming into the ground as her pussy tightens and convulses around your cock, as you continue to fuck her, making her scream and moan as you continue to pound her pussy through her orgasm.\n\n");
 		outputText("\"<i>NOOOO! IT FEELS TOO GOOD!!! I’M GOING INSANE!!</i>\" Diana screams, her body shaking in pleasure, her face in ecstasy.\n\n");
 		outputText("Smirking, you start to savagely thrust into her, earning her loudest scream yet, prolonging her orgasm further and making her pussy tighten so much it nearly hurts, but you continue to thrust into her, pounding her cunt and you reshape it into your personal fuckhole. By the time her orgasm finishes, ");
@@ -617,6 +618,7 @@ public function breakingInYourMare():void {
 		outputText("You wait for her lead before speeding up, smiling at your cute mare.\n\n");
 		outputText("\"<i>Go... go faster. I'm ready, I want more of you... I need more,</i>\" Diana moans, smiling back at you.\n\n");
 		outputText("Smiling, you speed up, beginning to piston you hips and slamming your cocks into her tight cunt and arse, earning a scream from Diana as her pussy and butt are finally pounded by your [cocks].\n\n");
+		outputText("")
 		outputText("\"<i>Don't stop! It just feels so good!</i>\" Diana moans, her body shaking as her inside are pounded, \"<i>Your cocks feels so good inside me!! You’re gonna make me cum soon!!</i>\"\n\n");
 		outputText("True to her word she cums, screaming into the ground as her pussy and arsehole tighten and convulse around your cock, while you continue to fuck her, making her scream and moan as you continue to pound her pussy and arse through her orgasm.\n\n");
 		outputText("\"<i>NOOOO! IT FEELS TOO GOOD!!! I’M GOING INSANE!!</i>\" Diana screams, her body shaking in pleasure, her face in ecstasy.\n\n");
