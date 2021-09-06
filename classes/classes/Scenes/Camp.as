@@ -1078,6 +1078,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
+		if (flags[kFLAGS.TIFA_FOLLOWER] > 5) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.FOLLOWER)) {
 				counter++;
@@ -1942,6 +1943,8 @@ public class Camp extends NPCAwareContent{
 			}
 			//PC Goblin daughters
 			if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) buttons.add("Goblin kids", campScenes.PCGoblinDaughters).hint("Check up on your goblin daughters.");
+			//Tifa
+			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) buttons.add("Tifa", SceneLib.tifaFollower.tifaMainMenu).hint("Check up on Tifa.");
 		}
 		//Shouldra
 		if (followerShouldra()) {
@@ -3428,6 +3431,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.EBON_LABYRINTH] > 0) return true;
 		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
 		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) return true;
+		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) return true;
 		if (flags[kFLAGS.LUMI_MET] > 0) return true;
 		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) return true;
 		return false;
@@ -4024,6 +4028,7 @@ public function rebirthFromBadEnd():void {
 		if (SceneLib.dungeons.checkDenOfDesireClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePointsPrediction += 3;
 		if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePointsPrediction += 2;
+		if (SceneLib.dungeons.checkBeeHiveClear()) performancePointsPrediction += 2;
 		//Quests
 		if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePointsPrediction += 2;
 		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePointsPrediction += 2;
@@ -5316,6 +5321,10 @@ public function rebirthFromBadEnd():void {
 			dungeonsCleared++;
 			if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == CoC.instance.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 		}
+		if (SceneLib.dungeons.checkBeeHiveClear()) {
+			awardAchievement("Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY);
+			dungeonsCleared++;
+		}
 		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) {
 			awardAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON);
 			dungeonsCleared++;
@@ -5333,11 +5342,15 @@ public function rebirthFromBadEnd():void {
 			awardAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR);
 			dungeonsCleared++;
 		}
+		if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 50 && flags[kFLAGS.EBON_LABYRINTH] == 2) dungeonsCleared++;
 		if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
 		if (dungeonsCleared >= 2) awardAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE);
 		if (dungeonsCleared >= 4) awardAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
 		if (dungeonsCleared >= 8) awardAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT);
-		if (dungeonsCleared >= 16) awardAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER);//obecnie max 9
+		if (dungeonsCleared >= 16) awardAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER);//obecnie max 11
+		
+		if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear()) awardAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER);
+		if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear()) awardAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER);
 
 		//Fashion
 		if (player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF) awardAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD);
@@ -5598,4 +5611,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}

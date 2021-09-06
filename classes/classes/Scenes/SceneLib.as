@@ -225,6 +225,8 @@ public class SceneLib {
 
     public static var tedScene:TedScenes = new TedScenes();
 
+    public static var tifaFollower:TifaFollower = new TifaFollower();
+
     public static var urta:Urta = new Urta();
 
     public static var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();

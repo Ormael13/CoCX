@@ -1642,7 +1642,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodSwipe():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(-spellCostBlood(60), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipe,2,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, three red claw-like lines coalesce briefly before being shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
@@ -1681,7 +1681,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodSwipeSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(-spellCostBlood(60), false);
 		var soulforcecost:Number = 60 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
@@ -1726,7 +1726,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function heartSeeker():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(120), false);
+		HPChange(-spellCostBlood(120), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeeker,3,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward " + monster.a + monster.short + " vital spot.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
@@ -1761,7 +1761,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function heartSeekerSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(120), false);
+		HPChange(-spellCostBlood(120), false);
 		var soulforcecost:Number = 120 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
@@ -1800,7 +1800,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodDewdrops():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(240), false);
+		HPChange(-spellCostBlood(240), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdrops,2,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood pellets shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
@@ -1842,7 +1842,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodDewdropsSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(240), false);
+		HPChange(-spellCostBlood(240), false);
 		var soulforcecost:Number = 240 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
@@ -1890,7 +1890,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodRequiem():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(150), false);
+		HPChange(-spellCostBlood(150), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiem,4,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. Within an instant, large blood dripping pillars coalesce above " + monster.a + monster.short + " and descends not giving time for " + monster.pronoun2 + " to react.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
@@ -1927,7 +1927,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodRequiemSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(150), false);
+		HPChange(-spellCostBlood(150), false);
 		var soulforcecost:Number = 150 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
