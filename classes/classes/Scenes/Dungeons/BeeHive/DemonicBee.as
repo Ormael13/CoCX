@@ -17,7 +17,7 @@ import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 		public function demonicBeeStinger():void {
 			outputText("The demonic bee guard strikes through your defenses, trying to burrow her stinger in. ");
 			//Miss:
-			if (rand(20) + 1 + player.spe / 20 > 17) outputText("Luckly it missed you.");
+			if (rand(20) + 1 + player.spe / 20 > 17) outputText("Luckily it missed you.");
 			//Hit:
 			else {
 				outputText("The arousal and pleasure spike from the aphrodisiac in the sting leaves you stunned.");
@@ -28,15 +28,15 @@ import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 		}
 		
 		public function demonicBeeSpearStrike():void {
-			outputText("The demonic bee guard attempts to impale you with her spear! ");
+			outputText("The demonic bee guard attempts to impale you with her spear, ");
 			//Miss:
-			if (rand(20) + 1 + player.spe / 20 > 17) outputText("The weapon missed you.");
+			if (rand(20) + 1 + player.spe / 20 > 17) outputText("but misses you.");
 			//Hit:
 			else {
-				outputText("The weapon goes right through you! ");
+				outputText("and the weapon goes right through you! ");
 				var damage:Number = weaponAttack + str * 2 + rand(str);
 				damage = player.takePhysDamage(damage, true);
-				outputText(" What's worse she applied venom on it! ");
+				outputText("What's worse, she applied venom on it!");
 				player.dynStats("lus", 20 + rand(10));
 			}
 		}
