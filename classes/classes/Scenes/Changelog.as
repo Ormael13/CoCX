@@ -40,6 +40,9 @@ package classes.Scenes
 			outputText("-New tier 3 misc lvl-up perk: Lift Off. Req. Aerobatics perk, 45+ str and 40+ spe. Effect: Allows you to start combat already flying.\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 100+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Strong Elemental Bond (Ex). Req. Strong Elemental Bond and Elemental Contract Rank 5 perk, 125+ wis. Effect: Lower by 20 needed mana to sustain active elemental in combat and +4 mana regeneration.\n");
+			outputText("-New tier 5 wisdom lvl-up perk: First Attack: Elementals (Ex). Req. First Attack: Elementals and Elemental Contract Rank 5 perks. Effect: Your summoned elementals when attacking would deal 5%/10%/20% more for each normal/rare/unique elemental in group/party outside the attacking elemental. In case of option when elemental attack on it own it would attack 2 or 3 times (10% chance).\n");
+			outputText("-New tier 6 wisdom lvl-up perk: Strong Elemental Bond (Su). Req. Strong Elemental Bond (Ex) and Elemental Contract Rank 7 perks, 175+ wis. Effect: Lower by 30 needed mana to sustain active elemental in combat and +6 mana regeneration.\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to tou multi and +60 to wis multi (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
 			outputText("-New tier 7 libido lvl-up perk: Prestige Job: Bindmaster. Req. Job: Eromancer and Guardian perks, 200+ lib. Effect: +20 to tou multi and +60 to lib multi (scalable with NG tiers), gain the ability to tie up opponents using a whip (work similar to naga grapple).\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Arch-priest. Req. Jobs: Guardian and Enchanter, 200+ int, finishing second part of certain paladin npc training. Effect: +40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower.\n");
@@ -59,15 +62,28 @@ package classes.Scenes
 			outputText("-New tier 10 soulforce lvl-up perk: Daoist: Overlord Stage. Req. Daoist: Elder Stage perk. Effect: Your reached fourth stage of Daoist path. (+50% soulskill/m.soulskill power, +60 max SF S.King, S.Emperor, S.Ancestor stages)\n");
 			outputText("-New tier 11 soulforce lvl-up perk: Soul Emperor. Req. Soul King perk and 220+ wis. Effect: Allow reaching 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)\n");
 			outputText("-New tier 12 soulforce lvl-up perk: Soul Ancestor. Req. Soul Emperor perk and 240+ wis. Effect: Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)\n");
+			outputText("-New tier 12 wisdom lvl-up perk: Stronger Elemental Bond (Ex). Req. Stronger Elemental Bond and Elemental Contract Rank 13 perks, 325+ wis. Effect: Lower by 50 needed mana to sustain active elemental in combat and +10 mana regeneration.\n");
+			outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
 			outputText("-New event perk: H class Heaven Tribulation Survivor. Gained by surviving 3 rounds of H class Heaven tribulation attacks. Effects: +10% to all stats multi/+50 to sens. Allow to comprehend Dao of Elements.\n");
 			outputText("-New event perk: G class Heaven Tribulation Survivor. Gained by surviving 4 rounds of G class Heaven tribulation attacks. Effects: +15% to all stats multi/+75 to sens. Allow to use soulforce to fly without need for wings.\n");
 			outputText("-New event perk: F class Heaven Tribulation Survivor. Gained by surviving 5 rounds of F class Heaven tribulation attacks. Effects: +20% to all stats multi/+100 to sens. Allow to use create clone. It can be used as new body for PC Nascent Soul in case main body get destroyed.\n");
 			outputText("-New event perk: Improved venom gland (Ex). Gained by reaching 125 pts on venom use counter. Effects: +200 to max venom, +15 venom recharge, -20% venom costs.\n");
 			outputText("-New event perk: Improved venom gland (Su). Gained by reaching 375 pts on venom use counter. Effects: +400 to max venom, +45 venom recharge, venom specials effects increased by 100% at 50% increased cost.\n");
 			outputText("-New monster perk: No Exp Gained. Atm only training dummy have it. As for effects it name speaks for itself.\n");
+			outputText("-New white spell: Aegis. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence) Cost 500 mana.\n");
+			outputText("-New white spell: Exorcise. It can be learned by using white book after picking Divine Knowledge perk. Effect: Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt. Cost 400 mana. (2 turns cooldown)\n");
+			outputText("-New white spell: Divine shield. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase magic resistance by 40%. Cost 600 mana.\n");
+			outputText("-New white spell: Thunderstorm. It can be learned by using white book after picking Divine Knowledge perk. Effect: Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds. Cost 1200 mana. ONCE PER FIGHT\n");
+			outputText("-New white spell: Tears of Denial. It can be learned by using white book after picking Divine Knowledge perk. Effect: When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away. Cost 3000 mana. ONCE PER FIGHT\n");
+			outputText("-New white spell: Mental Shield. It can be learned by using white book. Effect: Protects against lust effects for 10 rounds, halving the damage. Cost 300 mana. (10 turns cooldown)\n");
+			outputText("-New white spell: Cure. It can be learned by using white book. Effect: Negate all status ailments. Restore stat damaged by poison. Cost 500 mana. (7 turns cooldown)\n");
 			outputText("-New black spell: Bone spirit. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage. Cost 5 demon bones to cast.\n");
 			outputText("-New black spell: Bone armor. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%. Cooldown: 10 turns.\n");
 			outputText("-New black spell: Boneshatter. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only, monster take 10-60(20)% strength drain from this (not work on boneless creatures: construct, elemental, ghost, goo, plant). Cooldown: 3 turns\n");
+			outputText("-New gray spell: Clear Mind. It can be learned by using grey book. Effect: Clear some lust by taking physical wounds. Allows you to break out of charm and ignore stun. (Available while stunned) Cost 100 mana. (5 turns cooldown)\n");
+			outputText("-New gray spell: Balance of Life. It can be learned by using grey book. Effect: Heals for 5% of your hp when dealing spell damage.\n");
+			outputText("-New gray spell: Energy Drain. It can be learned by using grey book. Effect: Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost). Cost 350 mana. (7 turns cooldown)\n");//
+			outputText("-New gray spell: Restore. It can be learned by using grey book. Effect: Heal for a decent amount of health and regenerate a little over time. Cost 80 mana. (8 turns cooldown)\n");
 			outputText("-New Blood Spell: Blood Shield - learned from Red Manuscript. Cost 20% of max Over HP. Would create crimson shield that will absorb dmg equal to cost of cast multiplied by blood spells power multiplier. In case caster already have other shields active it will the last shield that absorb the damage.\n");
 			outputText("-New Blood Spell: Blood Chains - learned from Red Manuscript. Cost 100 health. Would immobilize enemy (stun effect) for 2 turns and have cooldown of 3 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
 			outputText("-New Blood Spell: Blood Wave - learned from Red Manuscript. Cost 400 health. Deal AoE magic dmg and have cooldown of 5 turns. If used against large groups of enemies would deal much more damage.\n");
@@ -78,7 +94,7 @@ package classes.Scenes
 			outputText("-New Blood Soulskill: Blood Requiem - learned from Crimson Jade. Cost 150 health. Deal phys dmg and have cooldown of 4 turns. Would also reduce healing effects on enemies by 20% (constructs, elementals, flesh constructs, ghosts) / 50% (plants) / 80% (rest enemy types) for 2 turns (4 turns from SF variant). Debuff duration stacks.\n");
 			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
 			outputText("-New necklace (by Ormael): Wrathless - buyable at Kaiba shop in Tel'Adre. Cost 4500 gems. +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.\n");
-			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
+			outputText("-New enemies: Ice/Lightning/Darkness Elementals, True Fire Golem. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon. True Fire Golem is lvl 64 and could be found in Ashlands.\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
 			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison, water, earth, wind, blood. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
 			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
@@ -103,7 +119,7 @@ package classes.Scenes
 			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
 			outputText("-Added in combat slow venom recharge.\n");
 			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
-			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting.\n");
+			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting. Also helped with internal mutation system changes.\n");
 			outputText("-Nosferatu spell been moved to grey book. Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
 			outputText("-Jtex many code corrections.\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
@@ -129,7 +145,7 @@ package classes.Scenes
 			outputText("-Added Water & Earth elmental attack type. Water and Earth elementals dmg been changed to those new types of elemental dmg.\n");
 			outputText("-Added Acid elmental attack type. Acid Spit, Hydra Acid Breath specials dmg been changed to this new type of elemental dmg.\n");
 			outputText("-Evangeline initial encounter and post fight talk scene been slight adjusted. Her repeat encouter after rejecting recruitment first time now req. higher level and finding two city-like hubs unlocked. After been in camp her level up process is bit faster.\n");
-			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 12 for this to be possible.\n");
+			outputText("-Internal mutation have been moved from level up menu (all so far spent perk points will get refound) and moved to be handled by Evangeline. It will req. her to level up to lvl 6 for this to be possible. She also have new talk option (req. 30%+ affection).\n");
 			outputText("-With adding 4 new subtypes of elemental dmg some of enemy attacks dmg been adjusted from magic type to one of those new four types. Also there is resistance tracked for those new types on stats page.\n");
 			outputText("-When PC race change to race without blood (atm only gargoyle) it would disable all blood spells and blood soulskills.\n");
 			outputText("-Added training dummy that is avialable after first exploration. It wouldn't deal much dmg back and won't give exp after beating it. It would also allow to always retreat from fight. It purpose is to help in safe manner to train weapon masteries. So not go all out trying to kill it in one hit or the training will last much longer ^^\n");
@@ -140,18 +156,7 @@ package classes.Scenes
 			outputText("-New tier 3 intelligence lvl-up perk: Defensive Staff Channeling. Req. Staff Channeling and Job: Enchanter perks, knowing any defensive spell, 120+ int. Effect: When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
 			outputText(" (Mana shield would be able to absorb more damage per mana spent and blizzard would last longer or block more fire attacks before vanishing)\n");
 			outputText("-For staff channeling perk effects would now count also weapons that are only 'partial' staffs like inscribed spellblade or demonic scythe.\n");
-			outputText("-New white spell: Aegis. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence) Cost 500 mana.\n");
-			outputText("-New white spell: Exorcise. It can be learned by using white book after picking Divine Knowledge perk. Effect: Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt. Cost 400 mana. (2 turns cooldown)\n");
-			outputText("-New white spell: Divine shield. It can be learned by using white book after picking Divine Knowledge perk. Effect: For 6 turns increase magic resistance by 40%. Cost 600 mana.\n");
-			outputText("-New white spell: Thunderstorm. It can be learned by using white book after picking Divine Knowledge perk. Effect: Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds. Cost 1200 mana. ONCE PER FIGHT\n");
-			outputText("-New white spell: Tears of Denial. It can be learned by using white book after picking Divine Knowledge perk. Effect: When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away. Cost 3000 mana. ONCE PER FIGHT\n");
 			outputText("-Nosferatu spell been moved to black magic again (yay...) and Heal spell recievied 6 turn cooldown after use. All recently added white/black magic spells can be taught by Dominika (beside fire/ice spell, which are rewards from paladin/archmage quests).\n");
-			outputText("-New white spell: Mental Shield. It can be learned by using white book. Effect: Protects against lust effects for 10 rounds, halving the damage. Cost 300 mana. (10 turns cooldown)\n");
-			outputText("-New gray spell: Clear Mind. It can be learned by using grey book. Effect: Clear some lust by taking physical wounds. Allows you to break out of charm and ignore stun. (Available while stunned) Cost 100 mana. (5 turns cooldown)\n");
-			outputText("-New gray spell: Balance of Life. It can be learned by using grey book. Effect: Heals for 5% of your hp when dealing spell damage.\n");
-			outputText("-New white spell: Cure. It can be learned by using white book. Effect: Negate all status ailments. Restore stat damaged by poison. Cost 500 mana. (7 turns cooldown)\n");
-			outputText("-New gray spell: Energy Drain. It can be learned by using grey book. Effect: Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost). Cost 350 mana. (7 turns cooldown)\n");//
-			outputText("-New gray spell: Restore. It can be learned by using grey book. Effect: Heal for a decent amount of health and regenerate a little over time. Cost 80 mana. (8 turns cooldown)\n");
 			outputText("-Urta Quest would temporaly reset to normal settings on diffuculty or secondary stats modifiers. Maybe not all loves Urta but we not need to make her quest too hellish trip for her, right? Oh right and her stats been minimaly increased + her attacks bit 'adjusted' to pack a bit more punch ;)\n");
 			outputText("-After surviving 3rd tribulation event PC can make it own clone at camp. Takes 4 session to do it and each drain large amount of health and soulforce taking eight hours each. Finishing it would also impose 30 levels worth penalty (inculting loosing 30 perk points and 150 stat points). ");
 			outputText("But later can use the clone to comprehend dao of elements in camp while PC venture outside camp. And in case PC meet bad end it allow to use the body clone as new pc body. Sure it will sacrifice clone itself but then PC can make new one as long in emantime PC recovered those 30 levels. ");
@@ -160,6 +165,39 @@ package classes.Scenes
 			outputText("-Zetta refactored/renovated whole way transformations and metamorph are handle under the hood steamlining both systems. IT'S MASSIVE WORK so be kind to Zetta for that long and painful work done.\n");
 			outputText("-Soul Sense option for Tamani daughters recieved same limitation as for encounters that PC could trigger before having option to find them with soul sense. Also some of tamani encounters that would proc her daughters meeting instead been changed to take into account unlocking or not them in soul sense.\n");
 			outputText("-Lifesteal effects form weapons won't work on construct enemies (they not have much of 'blood' to suck out) and Venoclaw will not 'poison' lust resistant enemies.\n");
+			outputText("-New Place to find: Dilapidated Shrine. Req. to have talked with Evangeline on 4th talk option and then explore (Outer) Battlefield.\n");
+			outputText("-Places menu got hints on ??? options. Temple of the Divine praying menu got added ??? options for not yet restored altairs.\n");
+			outputText("-Mind over Body I perk req. updated to include in one of job perks that allow to pick it include also job: Golemancer and Job: Healer. Arcane Regeneration (Minor) req. of perk mage been replaced with req. one of four job perks: Sorcerer, Healer, Elemental Conjuer, Golemancer.\n");
+			outputText("-Job: Healer, Elemental Conjuer, Golemancer, Enchanter and Eromancer mana regeneration bonus been increased to 10 pts from 5 pts.\n");
+			outputText("-Earth / Wood elementals dmg bonus been decreased to 100% and Metal to 30%. Purity/Corruption elementals got much better scaling increasing dmg based on enemy corruption from 100%-140% to 60%-300%.\n");
+			outputText("-New information added to general section of stats page: minions count (would add all elementals (of any types), all golems (of all subtypes) and others like skeletons from Necormancer job).\n");
+			outputText("-Leader job perks for improving Wisp would now track all possible minions count not only elementals and simplest pernament golems type.\n");
+			outputText("-First Attack: Elementals perk would now enable a fourth option for choose: mix of 2+3 to let elemental attack and yet melee attack been replaced by another elemental attack.\n");
+			outputText("-Elementals specials that deal dmg get 100% better scaling of PC int/wis and purity and corruption one specials got the same scaling based on target corruption as melee attacks from elementals. Some of descriptions in Evocation Tome had been updated up to latest changes.\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Elemental Conjurer Knowledge. Req. Elemental Contract Rank 2 perk and 100+ wis. Effect: You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)\n");
+			outputText("-All perks in line starting with Strong Elemental Bond would now suplement PC mana regeneration a bit (starts at +2 and each another would give 2 pts more).\n");
+			outputText("-New tier 6 wisdom lvl-up perk: First Attack: Elementals (Su). Req. First Attack: Elementals (Ex) and Elemental Contract Rank 6 perks. Effect: Mana cost scaling of elemental attacking based on int/wis stats lowered by 68% and 84%. Additionaly cost halfed before final rounding up. Elemental always attack 4 times. Epic elementals can now also attack (as another turn of elementals attacks)\n");
+			outputText("-Elemental Conjuer can now summon epic elementals. It's more demanding on things that summoner must gather or use but the power of summon is on entirely other level that it lesser kind (well it's called epic for a reason, right? ^^). On top of spending 200 fatigue and one elemental shard it also require matching element object to serve as 'core' of summoned elemental. If player have perks ");
+			outputText("increasing max hp/lust based on elementals ranks their effects are increased fivefold. Each elemental of this type would also take 2 points of control instead of 1 point like their normal tier cousins.\n");
+			outputText("-Joy scene with lactacid no longer have limits how much hunger it would refill.\n");
+			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
+			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
+			//outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
+			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
+			outputText("-Dyes not working on permament races. (by Liadri)\n");
+			outputText("-There is another predator that now decided to prowl the mountains. So maybe if you hear (lvl 15) Moooo you may consider running or something.\n");
+			outputText("-Max lust of monsters below lvl 6 been bit increased to 60%. Bit now also their max HP cap is also reduced to 60%. In any case lust or HP cap of monster can't decrease below 100(+30 perk NG up to +150)/300(+100 perk NG up to +500).\n");
+			outputText("-New monster perk: For Beginners-type enemy. Given to lvl 1 imps, fearl imps, thiefs and lvl 2 goblins. As for effect it makes their max hp/lust decreased to 10% of orginal values and scalings from diff setting, secondary scaling setting or ascension been reduced by large margin. That perk override effect for max hp/lust reduction of monsters below lvl 6.\n");
+			outputText("-When elementals attack added option to skip their turn (whatever reason it may be (totaly not due to rare bug of immortal mino king))\n");
+			outputText("-New area: Ashlands. Exploring caves allows now to find it (have similar lvl range for enemies as tundra and is much warmer place too). Exploring Ashlands leads to finding (Outer) Vulcanic Crag - it have enemies with level range like (Outer) Glacial Rift ones.\n");
+			outputText("-Behemoth/True Fire Golems at Vulcanic Crag got their level rised from 40/43 to 71/80 (that included buff to most of their stats).\n");
+			outputText("-4 new achievments. (1 shadow one)\n");
+			outputText("-There is new (well kinda) enemies added to Ashlands and Vulcanic Crag: Phoenix Squad/Platoon. They're group enemeis of lvl 41 and 74. Platoon additionaly have modifiers for large group of enemies.\n");
+			outputText("-Double barreled dragon gun remains have been moved from Vulcanic Crag to Ashlands.\n");
+			outputText("-All perks that are gained when having History/Past Life: ALchemist perk won't give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
+			outputText("-Aether Twin that use shield slot won't be count as wearing shield in cases when perks check for lack of shield to trigger their effect (for example Hold with Both Hands).\n");
+			outputText("-After beating Tentacle Beast there is 10% chance to find bee girl. She would unlock new dungeon: Bee Hive. It have enemies from lvl 30 to 40.\n");
+			outputText("-Clearing up Bee Hive would add new follower to camp: bee that goes by the name Tifa.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -169,20 +207,16 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks gfiving Dodge error msg, still more than a few TF items ignoring perm TF's ");
-			outputText("immunity to been TF'd\n");/*ostatni punkt changelogu
+			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural emans (wings), Fera first halloween event not triggering if pc had permed ");
+			outputText("one of two fera perks form 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -195,6 +229,9 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -272,7 +309,20 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -316,6 +366,9 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1207,7 +1260,7 @@ package classes.Scenes
 			outputText("-13 new achievments (4 shadow ones). Dungeon achiev for 8 dungeons cleared is now possible to attain.\n");
 			outputText("-New melee weapon (by Ormael): Aether (Dex) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Base atk is 0. When weared with Aether (Sin) shield will have 20% chance to stun and will get all benefits of gaunlet type weapon.\n");
 			outputText("-New shield (by Ormael): Aether (Sin) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Block chance is 0. When weared with Aether (Dex) block chance will rise by 1.\n");
-			outputText("-Jade Talisman now have use - in one of Hidden Caves rooms is possible to use it. The following event with few steps to be done in order would req. having membership in Adventures Guild and waiting 5+ days to complete succesfully.\n");
+			outputText("-Jade Talisman now have use - in one of Hidden Caves rooms is possible to use it. The following event with few steps to be done in order would req. having membership in Adventures Guild and waiting 5+ days to complete successfully.\n");
 			outputText("-New PC camp npc's. Some of them can spar in camp, help with constructing structures, and even assist in one or another way in fight (like you use them directly to beat enemeis or have them help as henchman).\n");
 			outputText("-Chimera and Grand Chimera race desc been changed to req. full racial scores for Chimera and 3rd step in race for Grand Chimera (that meaning only 11 races can mixed to give Grand Chimera race desc instead of almost 70 racial scores).\n");
 			outputText("-Monsters could slowly recover mana and soulforce spent based on what perks they got that could affect speed of recovery of those two resources.\n");
@@ -2200,7 +2253,7 @@ package classes.Scenes
 			outputText("-Healing spells will have it own spellpower and cost reduction meter. Items like Mana Bracer, Nocturnal/Unicorn Staff or all 3 Marae Bark enhanced wizard staffs, rings, perks on weapons or armors or ascension one perk would boost heal power meter too in addition to normal spellpower. Similary perks on equipment + spell affinity perk would lower costs of heal spells.\n");
 			outputText("-Perk Mana Affinity I req. changed now to 25+ int and one of two perks: Job: Sorcerer or Job: Healer\n");
 			outputText("-Black Magic spell Heal digievolv... en becoming White Magic spell with all the same effect and costs (but without chance to backfire at PC ^^). I was all the time feeling it should be white magic with some other spell taking healing-type spell among black magic spells.\n");
-			outputText("-New Black Magic spell: Regenerate. When casted succesfully will give 7 turns regeneration effect on PC.\n");
+			outputText("-New Black Magic spell: Regenerate. When casted successfully will give 7 turns regeneration effect on PC.\n");
 			outputText("-New Grey Magic spell: Nosferatu. It deals damage to enemy at same time healing PC by the same amount.\n");
 			outputText("-New TF item: Skyborn Seed (avian TF) buyable in He'Xin'Dao TF shop for 30 gems, droped by Hapries or radomly found in High Mountains. Bonuses for (Half) Avian-morph would be for 4(9) pts in racial score: +15(30) to max Str, +30(75) to max Spe and +15(30) to max Int.\n");
 			outputText("-New body part - legs: Avain Legs. No prereq.\n");

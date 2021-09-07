@@ -24,6 +24,7 @@ public class Mountain extends BaseContent
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var lactabovinaScene:LactaBovinaScene = new LactaBovinaScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
@@ -144,6 +145,10 @@ public class Mountain extends BaseContent
 						name:"minotaur",
 						chance:minotaurChance,
 						call:minotaurRouter,
+						mods:[SceneLib.exploration.furriteMod]
+					},{
+						name:"lacta_bovina",
+						call:lactabovinaScene.lactaBovinaInto,
 						mods:[SceneLib.exploration.furriteMod]
 					},{
 						name:"factory",

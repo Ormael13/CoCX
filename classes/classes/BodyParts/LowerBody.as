@@ -103,6 +103,18 @@ public class LowerBody extends SaveableBodyPart {
 		feet: "coils",
 		foot: "coiled tail",
 		appearanceDesc: "Below your waist, your flesh is fused together into a very long snake-like tail.",
+		crotchDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if(player.gender > 0) {
+				desc += "Your sex";
+				if(player.gender == 3 || player.cockTotal() > 1) desc += "es are ";
+				else desc += " is ";
+				desc += "concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.";
+			}
+
+			return desc;
+		},
 		tail: true,
 		tailSlam: true,
 		isNaga: true
@@ -508,6 +520,18 @@ public class LowerBody extends SaveableBodyPart {
 		feet: "coils",
 		foot: "coiled tail",
 		appearanceDesc: "Below your waist your flesh is fused together into the body of a snake which split into [hydraheads] [doubletallness] long serpentine coils each ending with a snake head. Your many heads tend to hiss when you are in pain or angry.",
+		crotchDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if(player.gender > 0) {
+				desc += "Your sex";
+				if(player.gender == 3 || player.cockTotal() > 1) desc += "es are ";
+				else desc += " is ";
+				desc += "concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.";
+			}
+
+			return desc;
+		},
 		bite: true,
 		isNaga: true
 	});
@@ -618,6 +642,18 @@ public class LowerBody extends SaveableBodyPart {
 
 			return desc;
 		},
+		crotchDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if(player.gender > 0) {
+				desc += "Your sex";
+				if(player.gender == 3 || player.cockTotal() > 1) desc += "es are ";
+				else desc += " is ";
+				desc += "concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.";
+			}
+
+			return desc;
+		},
 		tail: true,
 		tailSlam: true,
 		isNaga: true,
@@ -651,7 +687,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GAZER:int = 66;
 	EnumValue.add(Types, GAZER, "GAZER", {
 		name: "gazer",
-		appearanceDesc: "Your {legCount} are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway."
+		appearanceDesc: "Your {legCount} legs are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway."
 	});
 
 	public static const SQUIRREL:int = 67;

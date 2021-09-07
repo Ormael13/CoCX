@@ -618,11 +618,15 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SphinxAS:StatusEffectType             			= mk("SphinxAS");
 		public static const SuccubiFirst:StatusEffectType                   = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusEffectType                   = mk("succubiNight");
-		public static const SummonedElementals:StatusEffectType             = mk("Summoned Elementals");
+		public static const SummonedElementals:StatusEffectType             = mk("Summoned Elementals");//v1 - normal, v2 - epic, v3 - unique
 		public static const SummonedElementalsAir:StatusEffectType          = mk("Summoned Elementals Air");
+		public static const SummonedElementalsAirE:StatusEffectType         = mk("Summoned Elementals Air (Epic)");
 		public static const SummonedElementalsEarth:StatusEffectType        = mk("Summoned Elementals Earth");
+		public static const SummonedElementalsEarthE:StatusEffectType       = mk("Summoned Elementals Earth (Epic)");
 		public static const SummonedElementalsFire:StatusEffectType         = mk("Summoned Elementals Fire");
+		public static const SummonedElementalsFireE:StatusEffectType        = mk("Summoned Elementals Fire (Epic)");
 		public static const SummonedElementalsWater:StatusEffectType        = mk("Summoned Elementals Water");
+		public static const SummonedElementalsWaterE:StatusEffectType       = mk("Summoned Elementals Water (Epic)");
 		public static const SummonedElementalsIce:StatusEffectType        	= mk("Summoned Elementals Ice");
 		public static const SummonedElementalsLightning:StatusEffectType    = mk("Summoned Elementals Lightning");
 		public static const SummonedElementalsDarkness:StatusEffectType     = mk("Summoned Elementals Darkness");
@@ -1203,6 +1207,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YamataEntwine:StatusEffectType 		   = mkCombat("Yamata Entwine");
 		public static const BerzerkingSiegweird:StatusEffectType   = mkCombat("Berzerking Siegweird");
 		public static const HealingSiegweird:StatusEffectType      = mkCombat("Healing Siegweird");
+		public static const CHCompellingAria:StatusEffectType      = mkCombat("Corrupted Handmaidens Compelling Aria");
 
 		/**
 		 * Creates status affect

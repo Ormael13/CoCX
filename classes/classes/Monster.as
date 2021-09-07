@@ -299,7 +299,12 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			temp *= stats_multi_based_on_misc();
+			if (this.level < 6) {
+				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
+				else temp *= 0.6;
+			}
 			temp = Math.round(temp);
+			if (temp < (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()))) temp = (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()));
 			return temp;
 		}
 		public override function maxHP():Number {
@@ -358,9 +363,9 @@ import flash.utils.getQualifiedClassName;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
 			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-			if (hasPerk(PerkLib.LizanMarrowFinalForm)) min -= maxHP() * 0.05;
-			if (hasPerk(PerkLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-			if (hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) min -= maxHP() * 0.02;
+			if (hasPerk(MutationsLib.LizanMarrowFinalForm)) min -= maxHP() * 0.05;
+			if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
+			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) min -= maxHP() * 0.02;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;
@@ -455,9 +460,12 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) temp *= 0.5;
-			if (this.level < 3) temp *= 0.5;
+			if (this.level < 6) {
+				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
+				else temp *= 0.6;
+			}
 			temp = Math.round(temp);
+			if (temp < (100 + (30 * newGamePlusMod()))) temp = (100 + (30 * newGamePlusMod()));
 			return temp;
 		}
 
@@ -736,27 +744,45 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyChampionType)) temp += 2;
 			if (hasPerk(PerkLib.EnemyBossType)) temp += 3;
 			if (this.level >= 25) temp *= 2;
-			if (this.level >= 50) temp *= 2.5;
-			if (this.level >= 75) temp *= 3;
-			if (this.level >= 100) temp *= 3.5;
-			if (this.level >= 125) temp *= 4;
-			if (this.level >= 150) temp *= 4.5;
-			if (this.level >= 175) temp *= 5;
-			if (this.level >= 200) temp *= 5.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 2;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 5;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 6;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+			if (this.level >= 50) temp *= 3;
+			if (this.level >= 75) temp *= 4;
+			if (this.level >= 100) temp *= 5;
+			if (this.level >= 125) temp *= 6;
+			if (this.level >= 150) temp *= 7;
+			if (this.level >= 175) temp *= 8;
+			if (this.level >= 200) temp *= 9;
+			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.1;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 5;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 1.2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 1.4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 1.6;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 1.8;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 2.2;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
+			}
+			else {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 2;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 5;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 6;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
+			}
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) temp = 1;
 			return temp;
 		}
@@ -1795,7 +1821,7 @@ import flash.utils.getQualifiedClassName;
 			if (player.hasPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
 				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)
+			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)
 			|| hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
 				if (!handleConstricted()) return;
 			}
@@ -2366,7 +2392,7 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(PerkLib.LizanMarrow) || hasPerk(PerkLib.LizanMarrowEvolved) || hasPerk(PerkLib.LizanMarrowFinalForm) || hasPerk(PerkLib.DraconicHeartFinalForm) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(MutationsLib.LizanMarrow) || hasPerk(MutationsLib.LizanMarrowEvolved) || hasPerk(MutationsLib.LizanMarrowFinalForm) || hasPerk(MutationsLib.DraconicHeartFinalForm) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
@@ -2376,13 +2402,13 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.VladimirRegalia) && !isNightTime()) healingPercent -= 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && isNightTime()) healingPercent += 5;
 				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
-				if (hasPerk(PerkLib.LizanMarrow) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
-				if (hasPerk(PerkLib.LizanMarrowEvolved) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
-				if (hasPerk(PerkLib.LizanMarrowFinalForm) && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
+				if (hasPerk(MutationsLib.LizanMarrow) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
+				if (hasPerk(MutationsLib.LizanMarrowEvolved) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
+				if (hasPerk(MutationsLib.LizanMarrowFinalForm) && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
 					healingPercent += 1.5;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
-				if (hasPerk(PerkLib.DraconicHeartFinalForm)) healingPercent += 1;
+				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) healingPercent += 1;
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
 				if (hasPerk(PerkLib.BodyCultivator)) healingPercent += 0.5;
@@ -2395,7 +2421,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.MonsterRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				if (hasPerk(PerkLib.Diehard) && !hasPerk(PerkLib.EpicDiehard) && this.HP < 1) healingPercent -= 1;
-				if (hasPerk(PerkLib.LizanMarrowFinalForm) && this.HP < 1) healingPercent -= 1;
+				if (hasPerk(MutationsLib.LizanMarrowFinalForm) && this.HP < 1) healingPercent -= 1;
 				if (hasStatusEffect(StatusEffects.BloodRequiem) && healingPercent > 0) {
 					if (hasPerk(PerkLib.EnemyConstructType) || hasPerk(PerkLib.EnemyElementalType) || hasPerk(PerkLib.EnemyFleshConstructType) || hasPerk(PerkLib.EnemyGhostType)) healingPercent *= 0.8;
 					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
@@ -2440,9 +2466,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
-				if (hasPerk(PerkLib.DraconicHeart)) manaRecovery += 4;
-				if (hasPerk(PerkLib.DraconicHeartEvolved)) manaRecovery += 4;
-				if (hasPerk(PerkLib.DraconicHeartFinalForm)) manaRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) manaRecovery += 4;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}
@@ -2455,9 +2481,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.ArcaneRegenerationEpic)) manaRecovery += 30;
 				if (hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaRecovery += 40;
 				if (hasPerk(PerkLib.ArcaneRegenerationMythical)) manaRecovery += 50;
-				if (hasPerk(PerkLib.DraconicHeart)) manaRecovery += 5;
-				if (hasPerk(PerkLib.DraconicHeartEvolved)) manaRecovery += 5;
-				if (hasPerk(PerkLib.DraconicHeartFinalForm)) manaRecovery += 5;
+				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 5;
+				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 5;
+				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) manaRecovery += 5;
 				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
 				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
@@ -3264,8 +3290,8 @@ import flash.utils.getQualifiedClassName;
 		}
 		public function prepareForCombat():void {
 			var bonusStatsAmp:Number = 0.6;
-			if (hasPerk(PerkLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.MantislikeAgilityEvolved)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
+			if (hasPerk(MutationsLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(MutationsLib.MantislikeAgilityEvolved)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
 			if (level > 25) bonusStatsAmp += 0.3*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();
@@ -3409,8 +3435,8 @@ import flash.utils.getQualifiedClassName;
 				armorMDef += Math.round(armorMDef * 0.5);
 			}
 			if (level < 6) {
-				if (level < 3) this.lust *= 0.25;
-				else this.lust *= 0.5;
+				if (hasPerk(PerkLib.EnemyForBeginnersType)) this.lust *= 0.1;
+				else this.lust *= 0.6;
 				this.lust = Math.round(this.lust);
 			}
 		}

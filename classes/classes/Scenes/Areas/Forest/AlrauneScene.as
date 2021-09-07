@@ -8,7 +8,7 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
 	import classes.Scenes.Areas.Tundra.SnowLily;
-	import classes.Scenes.Areas.VolcanicCrag.Cinderbloom;
+	import classes.Scenes.Areas.Ashlands.Cinderbloom;
 	import classes.display.SpriteDb;
 
 public class AlrauneScene extends BaseContent
@@ -87,11 +87,11 @@ public class AlrauneScene extends BaseContent
 			AlrauneVSAlraune("crag","cinderbloom");
 		} else {
 			if (isHalloween()) {
-				outputText("As you wander the area you come across a rather large pumpkin growing in the crag. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
+				outputText("As you wander the area you come across a rather large pumpkin growing in the ashlands. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
 				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
 				outputText("There's no way you will let this thing pull you in!\n\n");
 			} else {
-				outputText("As you wander the crag you come across a rather large flower growing in the ash. You ponder how plants even manage to grow in this inhospitable landscape. The flower has petals the same color as lava and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with chocolate skin and deep red eyes.\n\n");
+				outputText("As you wander the ashlands you come across a rather large flower growing in the ashes. You ponder how plants even manage to grow in this inhospitable landscape. The flower has petals the same color as lava and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with chocolate skin and deep red eyes.\n\n");
 				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
 				outputText("There's no way you will let this thing pull you in!\n\n");
 			}
@@ -106,11 +106,11 @@ public class AlrauneScene extends BaseContent
 			AlrauneVSAlraune("rift","snow lily");
 		} else {
 			if (isHalloween()) {
-				outputText("As you wander the area you come across a rather large pumpkin growing in the rift. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
+				outputText("As you wander the area you come across a rather large pumpkin growing in the tundra. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
 				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
 				outputText("There's no way you will let this thing pull you in!\n\n");
 			} else {
-				outputText("As you wander the rift you come across a rather large flower growing in the snow. You ponder how plants even manage to grow in this icy landscape. The flower has petals the same color as the snow and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with sky blue skin and light blue eyes.\n\n");
+				outputText("As you wander the  tundra you come across a rather large flower growing in the snow. You ponder how plants even manage to grow in this cold landscape. The flower has petals the same color as the snow and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with sky blue skin and light blue eyes.\n\n");
 				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
 				outputText("There's no way you will let this thing pull you in!\n\n");
 			}

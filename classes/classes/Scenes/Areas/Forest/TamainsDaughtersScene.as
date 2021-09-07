@@ -114,7 +114,16 @@ public function encounterTamanisDaughters():void {
 		if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] >= 10) outputText(", your wife");
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)");
 		//[Fuck Them] [Let Them] [Fight]
-		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
+		menu();
+		addButton(1, "Fight", fightTamanisDaughters);
+		if (player.hasCock()) {
+			addButton(2, "Fuck Them", fuckYoDaughtersHomie);
+			addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
+		}
+		else {
+			addButtonDisabled(2, "Fuck Them", "You not have cock.");
+			addButtonDisabled(3, "Let Them", "You not have cock.");
+		}
 		return;
 	}
 	tamaniPresent = false;
@@ -127,11 +136,31 @@ public function encounterTamanisDaughters():void {
 	if(flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS] == 0) {
 		outputText("She calls out, \"<i>We're tired of getting leftovers, so we're coming to the source.  Are you going to give us what we want?</i>\"\n\n");
 		//[Fuck them] [Fight] [Play Dumb]
-		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Play Dumb", playDumbToTamanisDaughters, "Let Them", legTamanisDaughtersRAEPYou, "", null);
+		menu();
+		addButton(1, "Fight", fightTamanisDaughters);
+		if (player.hasCock()) {
+			addButton(2, "Fuck Them", fuckYoDaughtersHomie);
+			addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
+			addButton(4, "Play Dumb", playDumbToTamanisDaughters);
+		}
+		else {
+			addButtonDisabled(2, "Fuck Them", "You not have cock.");
+			addButtonDisabled(3, "Let Them", "You not have cock.");
+			addButtonDisabled(4, "Play Dumb", "You not have cock.");
+		}
 	}
 	else {
 		outputText("She calls out, \"<i>We came back for more cream!  Come on, let's fuck again!</i>\"\n\nIt doesn't look like 'no' is a word they understand.  What do you do?</i>");
-		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
+		menu();
+		addButton(1, "Fight", fightTamanisDaughters);
+		if (player.hasCock()) {
+			addButton(2, "Fuck Them", fuckYoDaughtersHomie);
+			addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
+		}
+		else {
+			addButtonDisabled(2, "Fuck Them", "You not have cock.");
+			addButtonDisabled(3, "Let Them", "You not have cock.");
+		}
 	}
 }
 
@@ -152,26 +181,29 @@ private function playDumbToTamanisDaughters():void {
 	outputText("litters one way or another!</i>\"\n\n");
 	//[Fuck them] [Fight] [Let them have their way with you]
 	menu();
-	if (player.hasCock()) addButton(0, "Fuck Them", fuckYoDaughtersHomie);
-	else addButtonDisabled(0, "Fuck Them", "You not have cock.");
-	addButton(2, "Fight", fightTamanisDaughters);
-	addButton(4, "Let Them", legTamanisDaughtersRAEPYou);
+	addButton(1, "Fight", fightTamanisDaughters);
+	if (player.hasCock()) {
+		addButton(2, "Fuck Them", fuckYoDaughtersHomie);
+		addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
+	}
+	else {
+		addButtonDisabled(2, "Fuck Them", "You not have cock.");
+		addButtonDisabled(3, "Let Them", "You not have cock.");
+	}
 }
 
 //[Fight Them]
 private function fightTamanisDaughters():void {
 	clearOutput();
-
 	outputText("You whirl around threateningly, intent on putting Tamani's wayward brood back in their place.\n\n");
 	startCombat(new TamanisDaughters());
 	spriteSelect(57);
 	if (tamaniPresent) {
 		//(+5 mob strength)
-
-		monster.strStat.core.value += 5;
+		monster.strStat.core.value += 25;
 		//(+5 mob toughness)
-		monster.touStat.core.value += 5;
-		monster.HP += 10;
+		monster.touStat.core.value += 25;
+		monster.HP += 150;
 		//(-20 mob lust)
 		monster.lust -= 20;
 		//append combat desc
@@ -1036,8 +1068,6 @@ private function knockUpDaughters():void {
 	//Determine how many kids...
 	flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 2;
 	var cum:Number = player.cumQ();
-	//Breeder perk is awesome
-	if (player.hasPerk(PerkLib.MaraesGiftStud)) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] += 3;
 	if (cum >=  50 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
 	if (cum >= 100 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
 	if (cum >= 200 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
@@ -1045,6 +1075,17 @@ private function knockUpDaughters():void {
 	if (cum >= 400 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
 	if (cum >= 500 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
 	if (cum >= 600 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 700 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 800 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 900 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 1000 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 1200 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 1400 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 1600 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 1800 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	if (cum >= 2000 && rand(2) == 0) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]++;
+	//Breeder perk is awesome
+	if (player.hasPerk(PerkLib.MaraesGiftStud)) flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] *= 2;
 }
 
 internal function combatWinAgainstDaughters():void {
@@ -1052,7 +1093,7 @@ internal function combatWinAgainstDaughters():void {
 	clearOutput();
 	if(monster.HP <= monster.minHP()) {
 		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.");
-		if(player.lust >= 33 && player.cockTotal() > 0) {
+		if(player.lust >= 33 && player.hasCock()) {
 			outputText("In spite of their injuries, they do try to present their bodies in as lewd a way as possible.  You could still fuck them, but things might get out of hand...\n\nDo you fuck them?");
 			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
 		}
@@ -1062,7 +1103,7 @@ internal function combatWinAgainstDaughters():void {
 	else {
 		outputText("You smile in satisfaction as your daughters collapse in upon themselves, devolving into a frenzied orgy.  It looks like they're too distracted to continue fighting.  They're putting on quite a show...\n\n");
 		dynStats("lus", 5);
-		if(player.lust >= 33 && player.cockTotal() > 0) {
+		if(player.lust >= 33 && player.hasCock()) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?");
 			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
 		}

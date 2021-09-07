@@ -151,10 +151,10 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, FOX, "FOX", {
 		name:"fox",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = "A swishing [skin coat.color] fox brush extends from your [butt], curling around your body - the soft fur feels lovely."
+			var desc: String = "A swishing [skin coat.color] fox brush extends from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
 
 			if (player.tailCount > 1) {
-				desc = "[TailCount] swishing [skin coat.color] fox tails extend from your [butt], curling around your body. The soft fur feels lovely."
+				desc = "[TailCount] swishing [skin coat.color] fox tails extend from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
 			}
 
 			return desc;

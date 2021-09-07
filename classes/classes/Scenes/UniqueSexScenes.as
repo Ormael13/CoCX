@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes 
+package classes.Scenes
 {
 	import classes.*;
 	import classes.BodyParts.Arms;
@@ -12,11 +12,11 @@ package classes.Scenes
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
 	import classes.Scenes.NPCs.Anemone;
-	
+
 	public class UniqueSexScenes extends BaseContent
 	{
-		
-		public function UniqueSexScenes() 
+
+		public function UniqueSexScenes()
 		{
 		}
 
@@ -284,32 +284,27 @@ package classes.Scenes
 
 		public function strangleAndRapeScene():void {
 			clearOutput();
-			outputText("While you were deliberating what to do you suddenly catch sight of " + monster.a + monster.short + " attempting to flee. You swiftly wrap your tail around its neck like a noose and forcefully pull " + monster.pronoun2 + " back to you.\n\n");
-			outputText("\"<i>Where do you think you’re going now? You think I will just let you go after that? You’re dead wrong!?</i>\"\n\n");
-			outputText("You begin to choke " + monster.pronoun2 + " until " + monster.pronoun1 + " gasp pitifully for air and then finally you get an idea. You forcefully shove " + monster.a + monster.short + " on " + monster.pronoun3 + " back exposing your ");
+			outputText("As you wonder what to do, you suddenly catch sight of " + monster.a + monster.short + " attempting to flee. You swiftly wrap your tail around " + monster.pronoun2 + " neck like a noose and forcefully pull " + monster.pronoun2 + " back to you.\n\n");
+			outputText("You ask where does " + monster.pronoun1 + " think  " + monster.pronoun1 + "'s going, as you still have to claim your prize.\n\n");
+			outputText("You can see some fear blossom in " + monster.pronoun3 + " eyes as you begin to choke " + monster.pronoun2 + " until " + monster.pronoun1 + " begins gasping pitifully for air, and then you have an idea. You forcefully shove " + monster.a + monster.short + " on " + monster.pronoun3 + " back and expose your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.hasVagina()) outputText("[pussy]");
 			outputText(" with clear intent.\n\n");
-			outputText("\"<i>Well, what are you waiting for dumbass? ");
-			if (player.hasCock()) outputText("Suck it! ");
-			if (player.hasVagina()) outputText("Eat me out! ");
-			outputText("You want me to tighten it?");
-			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) outputText(" I can also give you a nice neck burn too and I won’t hesitate to do it after what you’ve done.");
-			outputText("</i>\"\n\n");
-			outputText("" + monster.capitalA + monster.short + " fully realizes the predicament of " + monster.pronoun3 + " situation as you begin tightening the noose and panicked, " + monster.pronoun1 + " begins to lick your");
-			if (player.hasCock()) outputText(" [cock] in an effort to draw it erect as fast as possible");
-			if (player.hasVagina()) outputText(" your vaginal lips");
-			outputText(" in an effort to douse your wrath. That’s way to fast for your tastes though and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.mouseScore() >= 8) ? " You get a thrill out of this domineering position which considering your size is actually unsurprising. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot its ");
-			if (monster.hasCock()) outputText("" + monster.cockDescript() + " hardening and twitching");
+			outputText("When " + monster.a + monster.short + " does nothing but stare for a few seconds, you ask what " + monster.pronoun1 + "'s waiting for, lightly tightening your tail around " + monster.pronoun3 + " neck as a warning to start working or else.\n\n");
+			outputText("" + monster.capitalA + monster.short + " finally seems to realize " + monster.pronoun3 + " predicament and panics, immediately moving to lick your");
+			if (player.hasCock()) outputText(" [cock]");
+			if (player.hasVagina()) outputText(" vaginal lips");
+			outputText(" in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.mouseScore() >= 8) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
+			if (monster.hasCock()) outputText(" " + monster.cockDescript() + " hardening and twitching");
 			if (monster.hasVagina()) {
-				if (monster.hasCock()) outputText(" and its");
+				if (monster.hasCock()) outputText(" and " + monster.pronoun3);
 				outputText("" + monster.vaginaDescript() + " wetting the ground with girl juices");
 			}
-			outputText(" this sicko is getting off from the abuse. Well, guess you won’t need to worry about its need then as you shove your");
+			outputText("[pg]It seems your victim is getting off from the abuse. Well, it seems you won’t need to worry about " + monster.pronoun2 + " needs, you figure as you shove your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.hasVagina()) outputText("[pussy]");
-			outputText("harder into " + monster.pronoun3 + " face!\n\n");
-			outputText("Only as you reach your third orgasm do you finally release your abused victim from your noose. You can still see your tail imprints on its neck but hell if you care " + monster.pronoun1 + " had it coming. You head home highly satisfied.\n\n");
+			outputText(" harder into " + monster.pronoun3 + " face!\n\n");
+			outputText("Only as you reach your third orgasm do you finally release your victim, ordering " + monster.pronoun2 + " to scram or else. As " + monster.pronoun1 + " does just that, you can still see your tail imprints on " + monster.pronoun3 + " neck, but you don't particularly care by this point. You head home quite satisfied.\n\n");
 			player.sexReward("saliva");
 			statScreenRefresh();
 			cleanupAfterCombat();

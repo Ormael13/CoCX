@@ -1119,7 +1119,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
-			addButton(7, "Oni enchanted drinking jug", buyItem, jewelries.ONIGOURD).hint("A magical drinking jug beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
+			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
 			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 			addButton(10, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
@@ -1797,6 +1797,7 @@ public function meetingLunaRepeatedYes():void {
 	outputText("Quite sure, you tell her. You felt sorry for her at the start, and you're sure you'd have no trouble keeping her paid; and her skills are sure to be useful even if your humble camp isn't as nice as what she's used to. And, speaking of keeping her paid, you ask her what her rate is.");
 	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\"" +
 			" You're a bit curous why she's begging in the streets if she has money left over from her previous employment, but as she looks at you with shining golden eyes you lose the will to ask. You offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
+	player.gems -= 100;
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaCamp():void {

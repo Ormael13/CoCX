@@ -48,6 +48,11 @@ use namespace CoC;
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}
+			//Dilapidated Shrine
+			if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] == 1 && rand(10) == 0) {
+				SceneLib.dilapidatedShrine.firstvisitshrineintro();
+				return;
+			}
 			//Giant Slayer Mech
 			if (flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] == 0 && rand(10) == 0) {
 				takeWrathMech();

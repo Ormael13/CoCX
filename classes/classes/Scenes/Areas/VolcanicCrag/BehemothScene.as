@@ -183,7 +183,7 @@ public class BehemothScene extends BaseContent
 		
 		public function winAgainstBehemoth():void {
 			clearOutput();
-			if (monster.HP <= 0) outputText("The behemoth falls down on his knees, too badly beaten to continue fighting.");
+			if (monster.HP <= monster.minHP()) outputText("The behemoth falls down on his knees, too badly beaten to continue fighting.");
 			else outputText("The behemoth falls down on his knees, too turned on to continue fighting.");
 			outputText("\n\n\"<i>You have managed to beat me. Nothing beats a good workout,</i>\" he says.");
 			//Get some gems back.

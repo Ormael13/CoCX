@@ -5,6 +5,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
@@ -197,6 +198,8 @@ import classes.internals.*;
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				hasTwoAttacks = true;
 			}
+			this.horns.type = Horns.COW_MINOTAUR;
+			this.horns.count = 6;
 			this.tailType = Tail.COW;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

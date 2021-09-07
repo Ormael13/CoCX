@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -17,7 +17,7 @@ import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 import classes.internals.ChainedDrop;
 
 	public class WaspGirl extends Monster {
-		
+
 		public function waspSpearAttack():void {
 			outputText("The " + short + " lunges at you, jabbing with her spear.  You dodge the first attack easily, ");
 			var evade:String = player.getEvasionReason();
@@ -58,7 +58,7 @@ import classes.internals.ChainedDrop;
 				paralyze.increaseWasp2();
 			}
 		}
-		
+
 		public function waspStingAttack():void {
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind)) {
@@ -111,7 +111,7 @@ import classes.internals.ChainedDrop;
 			if (player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
-		
+
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
@@ -119,8 +119,8 @@ import classes.internals.ChainedDrop;
 			if (choice == 1) waspSpearAttack();
 			if (choice >= 2) eAttack();
 		}
-		
-		public function WaspGirl() 
+
+		public function WaspGirl()
 		{
 			super();
 			this.a = "a ";
@@ -158,12 +158,12 @@ import classes.internals.ChainedDrop;
 					.add(consumables.BEEHONY, 1 / 2)
 					.elseDrop(useables.B_CHITN);
 			this.antennae.type = Antennae.BEE;
-			this.wings.type = Wings.BEE_LIKE_SMALL;
+			this.wings.type = Wings.BEE_SMALL;
 			this.tailType = Tail.BEE_ABDOMEN;
 			this.tailVenom = 100;
 			checkMonster();
 		}
-		
+
 	}
 
 }

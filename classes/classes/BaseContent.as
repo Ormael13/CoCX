@@ -986,6 +986,16 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
+		//Returns an autocreated menu. Takes an array in buttonName + function. i.e., array.push("buttonname", function).
+		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void {
+			var selectMenu:ButtonDataList = new ButtonDataList();
+			for (var i:int = 0; i < menuItems.length; i++){
+				if (i % 2 == 0){
+					selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
+				}
+			}
+			submenu(selectMenu, back, page, sort);
+		}
 	}
 
 }

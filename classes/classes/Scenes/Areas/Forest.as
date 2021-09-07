@@ -376,8 +376,8 @@ use namespace CoC;
 				name: "fera_1",
 				when: function():Boolean {
 					return isHalloween()
-						   && !player.hasPerk(PerkLib.FerasBoonBreedingBitch)
-						   && !player.hasPerk(PerkLib.FerasBoonAlpha)
+						   && (!player.hasPerk(PerkLib.FerasBoonBreedingBitch) || (player.hasPerk(PerkLib.FerasBoonBreedingBitch) && player.perkv4(PerkLib.FerasBoonBreedingBitch) > 0))
+						   && (!player.hasPerk(PerkLib.FerasBoonAlpha) || (player.hasPerk(PerkLib.FerasBoonAlpha) && player.perkv4(PerkLib.FerasBoonAlpha) > 0))
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
 				call: Holidays.pumpkinFuckEncounter
@@ -386,7 +386,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return isHalloween()
 						   && flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0
-						   && date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR];
+						   && (date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] || flags[kFLAGS.ITS_EVERY_DAY] >= 1);
 				},
 				call: Holidays.feraSceneTwoIntroduction
 			},{
