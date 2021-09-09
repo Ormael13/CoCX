@@ -132,7 +132,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 				outputText("You decide to come back later as you have no way to convince this bee to let you in.\n\n");
 				flags[kFLAGS.TIFA_FOLLOWER] = 1;
 			}
-			else {
+			else if (flags[kFLAGS.TIFA_FOLLOWER] >= 2){
 				outputText("In return, you quickly explain who you are, and the situation with the other princesses and how Bridgess told you to find Tifa. This causes the voice to put on a more quizzical buzz than a threatening one.\n\n");
 				outputText("\"<i>Normally I wouldn’t believe that zzzteaming load, but you don’t zzzound like a local, zzzo I guezzz you can come in. But I warn you, no funny buzzinezzz!</i>\"\n\n");
 				doNext(room3part2);
@@ -270,7 +270,9 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		public function room4East():void {
 			dungeonLoc = 170;
 			clearOutput();
-			room4();
+			if (flags[kFLAGS.TIFA_FOLLOWER] < 2){
+				room4();
+			}
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Princess cells</b>\n");
 			outputText("Even with the corrupted guard defeated, lingering in this area is dangerous, best not tarry long.");

@@ -396,9 +396,9 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_3) ebonlabyrinth.roomDDD();
 			//Beehive
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_1) beehive.room1South();
-			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_2) beehive.room2Center();
-			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_3) beehive.room3West();
-			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_4) beehive.room4East();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_2) beehive.room4East();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_3) beehive.room2Center();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_4) beehive.room3West();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_BEE_HIVE_5) beehive.room5North();
 		}
 		
