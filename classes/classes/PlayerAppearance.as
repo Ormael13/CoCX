@@ -252,11 +252,8 @@ public class PlayerAppearance extends BaseContent {
 		outputText("You are a ");
 		outputText(Measurements.footInchOrMetres(player.tallness));
 		var pcrace:String = player.race();
-		if (pcrace != "half cow-morph" && pcrace != "half cow-girl" && pcrace != "cow-girl" && pcrace != "cow-girl" && pcrace != "cow-morph"
-				&& pcrace != "minotaur" && pcrace != "half-minotaur"
-				&& pcrace != "alraune" && pcrace != "liliraune"
-				&& pcrace != "half unicorn" && pcrace != "unicorn" && pcrace != "unicornkin" && pcrace != "half alicorn" && pcrace != "alicorn" && pcrace != "alicornkin" && pcrace != "true alicorn"
-				&& pcrace != "half bicorn" && pcrace != "bicorn" && pcrace != "bicornkin" && pcrace != "half nightmare" && pcrace != "nightmare" && pcrace != "nightmarekin" && pcrace != "true nightmare")
+		var genderlessRace:Array = ["half cow-morph", "half cow-girl", "cow-girl", "cow-girl", "cow-morph", "minotaur", "half-minotaur", "alraune", "liliraune", "half unicorn", "unicorn", "unicornkin", "half alicorn", "alicorn", "alicornkin", "true alicorn", "half bicorn", "bicorn", "bicornkin", "half nightmare","nightmare", "nightmarekin", "true nightmare"];
+		if (!(genderlessRace.indexOf(pcrace) >= 0))
 		{
 			outputText(" tall [malefemaleherm] [race], with [bodytype].");
 		}
