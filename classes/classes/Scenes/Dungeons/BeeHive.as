@@ -136,8 +136,6 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 				else if (flags[kFLAGS.TIFA_FOLLOWER] >= 2){
 					outputText("In return, you quickly explain who you are, and the situation with the other princesses and how Bridgess told you to find Tifa. This causes the voice to put on a more quizzical buzz than a threatening one.\n\n");
 					outputText("\"<i>Normally I wouldn’t believe that zzzteaming load, but you don’t zzzound like a local, zzzo I guezzz you can come in. But I warn you, no funny buzzinezzz!</i>\"\n\n");
-					//menu();
-					//addButton(0, "Next", room3part2);
 					doNext(room3part2);
 				}
 			}
@@ -158,8 +156,6 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			outputText("\"<i>If you are seriouzzz about this you will have to get to the throne room which is blocked by a gate that will only open to royal honey. I can grant you accezzz but after that, you are on your own.</i>\"\n\n");
 			outputText("<b>Tifa is following you for now!</b>\n\n");
 			flags[kFLAGS.TIFA_FOLLOWER] = 4;
-			//menu();
-			//addButton(0, "Next", room3);
 			doNext(room3West);
 		}
 		
