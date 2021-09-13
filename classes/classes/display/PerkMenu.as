@@ -728,7 +728,7 @@ public class PerkMenu extends BaseContent {
 
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
-		Source: Player.as for list of mutations under function maxHeartMutations, PerkLib.as for mutation descriptions.
+		Source: MutationsLib.as for all mutations.
  		*/
 		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
@@ -743,20 +743,39 @@ public class PerkMenu extends BaseContent {
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
 				mutationCount++;
 			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
-					"\nNote: Not all body parts will use all available slots.");
-
-		}
-
-		function menuGen(menuItems:Array, page:int):void{
-			var selectMenu:ButtonDataList = new ButtonDataList();
-			for (var i:int = 0; i < menuItems.length; i++){
-				if (i%2 == 0){
-					selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
+					"\nNote: Not all body parts will use all available slots.\n\n");
+			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
+			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid"]//, "PThyroid"
+			for each (var bodyPart:String in bPartlist){
+				var mCount:int = 0
+				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart)
+				for each (var pPerk:Array in mPerkarray){
+					if (player.hasPerk(pPerk[0])){
+						mCount++;
+					}
+				}
+				outputText(bodyPart + " mutations obtained: ");
+				if (mCount > mutationCount){
+					outputText("<font color=\"#800000\">");
+				}
+				else{
+					outputText("<font color=\"#008000\">");
+				}
+				outputText( mCount +"</font> of " + mutationCount + ". Max:(");
+				if (flags[kFLAGS.MUTATIONS_SPOILERS]){
+					outputText(mPerkarray.length + ")\n");
+				}
+				else{
+					if (mPerkarray.length == mCount){
+						outputText(mPerkarray.length + ")\n");
+					}
+					else{
+						outputText("?)\n");
+					}
 				}
 			}
-			submenu(selectMenu, displayPerks, page, false);
 		}
-		
+
 		function mutationsDBHeart():void{
 			clearOutput();
 			//Heart Mutations
@@ -925,7 +944,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([MutationsLib.KitsuneThyroidGland, MutationsLib.KitsuneThyroidGlandEvolved, MutationsLib.KitsuneThyroidGlandFinalForm]);
-			mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
+			//mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
 			mutationsDatabase(1);
 		}
 
@@ -949,10 +968,10 @@ public class PerkMenu extends BaseContent {
 		// Thus, hardcoded into the function.
 		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow);
 		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands);
-		menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
+		//menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
 		menuItems.push("Dragons", mutationsDBDragon);
 		menuItems.push("Kitsunes", mutationsDBKitsune);
-		menuGen(menuItems, page);
+		menuGen(menuItems, page, displayPerks, false);
 	}
 	//Why does it need menu(); to update output / not blank the screen???
 
@@ -992,7 +1011,7 @@ public class PerkMenu extends BaseContent {
 				else{	//Information not available.
 					reqs.push("Missing data. Perhaps Unacquirable?");
 				}
-				outputText("\nRequirements for next tier: " + reqs.join(", ") + ".");
+				outputText("\nRequirements for next tier: " + reqs.join(", "));
 			}
 			else {	//Manual done this way.
 				outputText("\nRequirements for next tier: " + acquireReq + ".");
@@ -1020,8 +1039,12 @@ public class PerkMenu extends BaseContent {
 				if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
 					outputText("No description available.");
 				}
-			} else {
-				outputText("\n???" + "\nDescription: ???");
+				else{
+					outputText(perkName[perkCount].desc());
+				}
+			}
+			else {
+				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
 			}
 		}
 		outputText("\n");
@@ -1079,11 +1102,14 @@ public class PerkMenu extends BaseContent {
 		var masterlist:Array = [];				//Temp hold of above
 		var ignorelist:Array = [];				//List to check against repetitively
 		var endlist:Array = [];					//Final list of perks to output
+		//var pPerkList:Array = PerkTree.obtainablePerks();	//DebugLine. Returns most perks.
+		var maxpPerks:int = 0;					//DebugLine
 
 		function initSet():void {
 			var mutationList:Array = MutationsLib.mutationsArray("",true)
 			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
 				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){
+					//maxpPerks++
 					var pPerkReq:PerkType = pPerks.ptype
 					var perkno:Boolean = true;
 					for each (var temp1:Object in pPerkReq.requirements) {
@@ -1102,91 +1128,75 @@ public class PerkMenu extends BaseContent {
 			repPerkClr();
 		}
 
-		//Idea: Local perk table to create new one every time, then overwrite existing one higher up? Skips the removing step which seems to be the problem....?
 		function repPerkClr():void { //Cycling perks against requirements until no higher can be achieved per.
 			var change:Boolean = false;
-			var replaceList:Array = [];
-			var removeList:Array = [];
-			for each(var pPerk:PerkType in masterlist) {
+			//outputText("Hit! Current list length: " + masterlist.length + "\n");	//DebugLine
+			for each(var pPerk:PerkType in masterlist){
 				var requirelen:int = 0;
 				for each (var cond:Object in pPerk.requirements) {
-					if (cond.hasOwnProperty("allperks")){	//Checks if player has all required perks
-						var pCondPerkLen:int = cond.allperks.length;
-						var condlen:int = 0;
-						var alltrue:Array = [];
-						for each (var pPerkYes1:PerkType in cond.allperks) {
-							if (ignorelist.indexOf(pPerkYes1) >= 0) {
-								condlen++
-								alltrue.push(pPerkYes1);
-								change = true;
-								if (condlen == pCondPerkLen){
-									replaceList.push(pPerk);
-									for each (var pPerkRem:PerkType in alltrue){
-										removeList.push(pPerkRem)
-									}
+					if (cond.type == "allperks"){		//Checks if player has all required perks
+						var iterval:int = 0;
+						for each (var pPerk1:PerkType in cond.allperks) {
+							if (ignorelist.indexOf(pPerk1) >= 0){
+								iterval++
+							}
+							if (iterval == cond.allperks.length){
+								for each (var temp1:PerkType in cond.allperks){
+									perkArrMgmt(temp1, pPerk);
+									change = true;
 								}
 							}
 						}
-						break;
 					}
-					else if (cond.hasOwnProperty("perks")){	//Checks if player has any of the perks
-						var pPerkCycle:Boolean = false
-						for each (var pPerkYes2:PerkType in cond.perks) {
-							if (ignorelist.indexOf(pPerkYes2) >= 0) {
-								removeList.push(pPerkYes2);
+					else if (cond.type == "anyperk"){	//Checks if player has any of the perks
+						for each (var temp2:PerkType in cond.perks) {
+							if (ignorelist.indexOf(temp2) >= 0){
+								perkArrMgmt(temp2, pPerk);
 								change = true;
-								if (!pPerkCycle) {
-									replaceList.push(pPerk);
-									pPerkCycle = true
-								}
 							}
 						}
-						//break;
 					}
-					else if (cond.hasOwnProperty("perk")){	//Checks if player has the perk
-						if (ignorelist.indexOf(cond.perk) >= 0) {
-							replaceList.push(pPerk);
-							removeList.push(cond.perk);
-							endlist.push(pPerk);
+					else if (cond.type == "perk"){		//Checks if player has the perk
+						var temp3:PerkType = cond.perk;
+						if (ignorelist.indexOf(temp3) >= 0){
+							perkArrMgmt(temp3, pPerk);
 							change = true;
-							break;
 						}
 					}
-					else {	//This should never occur, as all these in masterlist should have a perk requirement of some sort.
+					else {	//The effect from this cause should never occur, as all these in masterlist should have a perk requirement of some sort.
 						requirelen++
 					}
 				}
-				if (requirelen == pPerk.requirements.len){
+				if (requirelen == pPerk.requirements.length){
 					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
 				}
 			}
-			if (change) {	//This feels terrible. But I suppose it works as a workaround to me not being able to directly splice arrays, since it seems to fuck up in odd ways.
-				for each (var pPerkCleared:PerkType in replaceList){	//Keep perks for final/filter
-					ignorelist.push(pPerkCleared);
-					endlist.push(pPerkCleared);
-					masterlist.splice(masterlist.indexOf(pPerkCleared), 1);
-				}
-				var endResetList:Array = [];
-				for each (var pPerkQuarantined:PerkType in endlist){	//Remove perks from source
-					if (!(removeList.indexOf(pPerkQuarantined) >= 0)){
-						if (!(endResetList.indexOf(pPerkQuarantined) >= 0)){
-							endResetList.push(pPerkQuarantined);
-						}
-					}
-				}
-				endlist = endResetList;
+			if (change){
 				repPerkClr();
 			}
-			else {
+			else{
 				perkOut();
+				//tempchk();	//DebugLine
 			}
 		}
 
-		function perkOut():void {	//Results of just the perks that are left.
+		function perkArrMgmt(pval1:PerkType, pval2:PerkType):void{
+			if (endlist.indexOf(pval1) >= 0){
+				endlist.splice(endlist.indexOf(pval1), 1);
+			}
+			if (endlist.indexOf(pval2) < 0){
+				endlist.push(pval2);
+				ignorelist.push(pval2);
+				masterlist.splice(masterlist.indexOf(pval2), 1);
+			}
+		}
+
+		function perkOut():void {//Results of just the perks that are left.
 			for each(var pPerk:PerkType in endlist.sort()) {
-				outputText("<b>" + player.getPerk(pPerk).perkName + ":</b> ");
+				outputText("<b>" + pPerk.name() + ":</b> ");
 				try {
-					outputText(player.getPerk(pPerk).perkDesc);
+					var pclass:PerkClass = player.getPerk(pPerk);
+					outputText(pclass?pPerk.desc(pclass):pPerk.longDesc);
 				} catch (error:Error) {
 					outputText("No description.");
 				}
@@ -1194,27 +1204,34 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 
-		function tempchk():void{	//Debug function to see where specific perks have been sent to.
-			var chkperk:PerkType = PerkLib.EternalyLastingBuffs
-			var hi:Boolean = false;
-			if (masterlist.indexOf(chkperk) >= 0){
-				outputText("MasterList\n");
-				hi = true
+		function tempchk():void{//Debug function to see where specific perks have been sent to.
+			//List of perks on my save that currently do not go where they're supposed to + neighbours/ expected sequence.
+			var temp123:Array = [];
+			//temp123 = masterlist.sort();
+			//temp123.push();
+			for each (var pPerks1:PerkType in temp123){
+				var hi:Boolean = false;
+				outputText(pPerks1.name() + ": ");
+				if (masterlist.indexOf(pPerks1) >= 0){
+					outputText("MasterList");
+					hi = true
+				}
+				if (ignorelist.indexOf(pPerks1) >= 0){
+					outputText("IgnoreList");
+					hi = true
+				}
+				if (endlist.indexOf(pPerks1) >= 0){
+					outputText("EndList");
+					hi = true
+				}
+				if (!hi){
+					outputText("Lost to the void");
+				}
+				outputText("\n");
 			}
-			if (ignorelist.indexOf(chkperk) >= 0){
-				outputText("IgnoreList\n");
-				hi = true
-			}
-			if (endlist.indexOf(chkperk) >= 0){
-				outputText("EndList\n");
-				hi = true
-			}
-			if (!hi){
-				outputText("Lost to the void");
-			}
-			outputText("\n");
-		}
+			outputText("Leftover/Cleared/Original Total: " +masterlist.length.toString() + "/" + ignorelist.length.toString() + "/" + maxpPerks.toString() + "\n");
 
+		}
 		initSet();
 	}
 	/* [INTERMOD: revamp]

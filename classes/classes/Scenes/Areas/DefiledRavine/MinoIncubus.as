@@ -123,6 +123,8 @@ package classes.Scenes.Areas.DefiledRavine
 			this.hairColor = "brown";
 			this.hairLength = 3;
 			this.faceType = Face.COW_MINOTAUR;
+			this.horns.type = Horns.COW_MINOTAUR;
+			this.horns.count = 6;
 			initStrTouSpeInte(200, 170, 135, 60);
 			initWisLibSensCor(60, 120 + this.ballSize * 2, 45 + this.ballSize * 2, 35);
 			this.weaponName = "dual axes";

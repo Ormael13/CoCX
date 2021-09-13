@@ -1797,6 +1797,7 @@ public function meetingLunaRepeatedYes():void {
 	outputText("Quite sure, you tell her. You felt sorry for her at the start, and you're sure you'd have no trouble keeping her paid; and her skills are sure to be useful even if your humble camp isn't as nice as what she's used to. And, speaking of keeping her paid, you ask her what her rate is.");
 	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\"" +
 			" You're a bit curous why she's begging in the streets if she has money left over from her previous employment, but as she looks at you with shining golden eyes you lose the will to ask. You offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
+	player.gems -= 100;
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaCamp():void {

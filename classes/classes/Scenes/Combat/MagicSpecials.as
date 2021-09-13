@@ -39,7 +39,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 2;
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) berzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
-			outputText("<b>Berzerking was used succesfully.</b>\n\n");
+			outputText("<b>Berzerking was used successfully.</b>\n\n");
 		}
 		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
 			player.wrath -= 50;
@@ -47,7 +47,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 2;
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) lustzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
-			outputText("<b>Lustzerking was used succesfully.</b>\n\n");
+			outputText("<b>Lustzerking was used successfully.</b>\n\n");
 		}
 		if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
 			outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
@@ -68,7 +68,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.wrath >= 50 && flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1) {
 			player.wrath -= 50;
-			outputText("<b>Warrior's rage was used succesfully.</b>\n\n");
+			outputText("<b>Warrior's rage was used successfully.</b>\n\n");
 			warriorsrage007();
 		}
 	}
@@ -776,13 +776,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
@@ -881,13 +875,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
@@ -1555,13 +1543,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -1855,13 +1837,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -1934,13 +1910,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -2057,13 +2027,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -2188,13 +2152,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
@@ -2284,13 +2242,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The lightning courses by the stone skin harmlessly. Thou it does leave the surface of the statue sparkling with a few residual lighting discharges.");
@@ -2379,13 +2331,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The darkness courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
@@ -2473,13 +2419,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The water courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
@@ -2583,13 +2523,7 @@ public class MagicSpecials extends BaseCombatContent {
 				enemyAI();
 				return;
 			}
-			//Amily!
-			if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-				clearOutput();
-				outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-				enemyAI();
-				return;
-			}
+			if (combat.checkConcentration()) return; //Amily concentration
 			if (monster is LivingStatue)
 			{
 				outputText("The elemental energies courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of multicolor glow.");
@@ -2689,13 +2623,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -2803,13 +2731,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses over the stone behemoths skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -3434,13 +3356,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -4995,13 +4911,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The winds courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -5092,13 +5002,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The winds courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
@@ -6109,3 +6013,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
+

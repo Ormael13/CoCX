@@ -80,6 +80,7 @@ public class Combat extends BaseContent {
     public var MSGControllForEvasion:Boolean = false; // need to correctly display damage MSG. This way as i use it game will show just first damage msg.
     public var isBowDamageMDO:Boolean = false; // use it as a switch between melee and bow damage for correct calculations and display
 
+    public static const NONE:int = 0;
     public static const AIR:int = 1;
     public static const EARTH:int = 2;
     public static const FIRE:int = 3;
@@ -93,6 +94,7 @@ public class Combat extends BaseContent {
     public static const POISON:int = 11;
     public static const PURITY:int = 12;
     public static const CORRUPTION:int = 13;
+    public static const NONE_E:int = 30;
     public static const AIR_E:int = 31;
     public static const EARTH_E:int = 32;
     public static const FIRE_E:int = 33;
@@ -419,7 +421,7 @@ public class Combat extends BaseContent {
         else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
-        else if (canSpearDance() && player.isSpearTypeWeapon() && player.shield == ShieldLib.NOTHING){
+        else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
             var Special:Number = 0;
             if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) Special += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
             if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks()+Special;
@@ -540,13 +542,13 @@ public class Combat extends BaseContent {
 				else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight letting the storm carry you up.");
 				else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.");
 				else outputText("You open you wing taking flight.");
-				player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Flying, flightDurationNatural(), 0, 0, 0);
 			}
-			else if (flags[kFLAGS.AUTO_FLIGHT] == 2 && player.weaponFlyingSwordsName != "nothing") {
+			else if (flags[kFLAGS.AUTO_FLIGHT] == 2 && player.soulforce >= flyingSwordUseCost() && player.weaponFlyingSwordsName != "nothing") {
 				outputText("You jump on your "+player.weaponFlyingSwordsName+" taking flight.");
 				player.createStatusEffect(StatusEffects.Flying, 1, 1, 0, 0);
 			}
-			else if (flags[kFLAGS.AUTO_FLIGHT] == 3) {
+			else if (flags[kFLAGS.AUTO_FLIGHT] == 3 && player.soulforce >= flyingWithSoulforceCost()) {
 				outputText("You surround your body with soulforce taking off int the air"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".");
 				player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
 			}
@@ -685,6 +687,24 @@ public class Combat extends BaseContent {
 	if (damage >= 2500) CoC.instance.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
 	if (damage >= 5000) CoC.instance.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
 }*/
+	
+	public function checkConcentration(replacetext:String = "", sceneimpl:Boolean = false):Boolean {
+	//Amily concentration
+	//	if (checkConcentration()) return;
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			if (replacetext == "") {
+				outputText("[monster name] easily glides around your attack thanks to [monster his] complete concentration on your movements.\n\n");
+			} else {
+				outputText(replacetext);
+			}
+			if (sceneimpl == false) enemyAI();
+			if (sceneimpl == true) SceneLib.combat.enemyAIImpl();
+			return true;
+		}
+		return false;
+	}
+
     public function approachAfterKnockback1():void {
         clearOutput();
         outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
@@ -1769,6 +1789,14 @@ public class Combat extends BaseContent {
                 summonedElementals = (5 * player.statusEffectv2(StatusEffects.SummonedElementalsWaterE));
 				summonedEpicElemental = true;
                 break;
+			case NONE		:
+				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
+				doNext(curry(combatMenu, false));
+				break;
+			case NONE_E		:
+				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+				doNext(curry(combatMenu, false));
+				break;
         }
         var manaCost:Number = 1;
 		var manaCostInt:Number = 8;
@@ -1988,13 +2016,8 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
+		if (checkConcentration()) return; //Amily concentration
+		if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
                 (monster as SandTrap).trapLevel(-4);
@@ -2881,12 +2904,7 @@ public class Combat extends BaseContent {
         }
         //Keep logic sane if this attack brings victory
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-            outputText("Amily easily glides around your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
+        if (checkConcentration("[monster name] easily glides around your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " thanks to [monster his] complete concentration on your movements.\n\n")) return; //Amily concentration
         if (monster.hasStatusEffect(StatusEffects.Sandstorm) && rand(10) > 1) {
             outputText("Your attack" + (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 ? "s" : "") + " is blown off target by the tornado of sand and wind.  Damn!\n\n");
             enemyAI();
@@ -3124,7 +3142,7 @@ public class Combat extends BaseContent {
             //Section for item damage modifiers
             if (weaponRangePerk == "Bow"){
                 if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
+                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
             }
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
@@ -4302,13 +4320,7 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
-            clearOutput();
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
+		if (checkConcentration()) return; //Amily concentration
         if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
@@ -4862,13 +4874,7 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
-            clearOutput();
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-            enemyAI();
-            return;
-        }
+        if (checkConcentration() && !isWieldingRangedWeapon()) return; //Amily concentration
         if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
@@ -5060,7 +5066,7 @@ public class Combat extends BaseContent {
                 damage += (player.spe / 2);
                 damage += scalingBonusSpeed() * 0.10;
             }
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
             if (damage < 10) damage = 10;
             //Weapon addition!
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -5068,7 +5074,7 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-			if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) damage *= 3; 
+			if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3; 
 			damage *= meleeDualWieldDamagePenalty();
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
@@ -5162,7 +5168,7 @@ public class Combat extends BaseContent {
             if (rand(100) < critChance) {
                 crit = true;
                 if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
-				if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.shield == ShieldLib.NOTHING) critDamage += 0.2;
+				if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
                 damage *= critDamage;
             }
             //Apply AND DONE!
@@ -5709,7 +5715,7 @@ public class Combat extends BaseContent {
                 extraHitDamage = damage;
                 extraHitDamage2 = damage;
             }
-            if (player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING){
+            if (player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
                 if (player.hasPerk(PerkLib.JabbingStyle)){
                     if (player.hasPerk(PerkLib.JabbingGrandmaster)){
                         extraHitChance = 10;
@@ -6425,7 +6431,7 @@ public class Combat extends BaseContent {
             else parryChance2 += 10;
             if (player.hasPerk(PerkLib.BladeBarrier) && (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large")) parryChance2 += 15;
         }
-		if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.shield == ShieldLib.NOTHING) {
+		if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) {
 			if (player.spe <= 100) parryChance2 += player.spe / 10;
             else parryChance2 += 10;
 		}
@@ -6453,8 +6459,8 @@ public class Combat extends BaseContent {
             if (player.inte > 300) critPChance += 25;
         }
         if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critPChance += 5;
-        if (player.hasPerk(PerkLib.Blademaster) && player.shield == ShieldLib.NOTHING && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 5;
-        if (player.hasPerk(PerkLib.GrandBlademaster) && player.shield == ShieldLib.NOTHING && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 15;
+        if (player.hasPerk(PerkLib.Blademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 5;
+        if (player.hasPerk(PerkLib.GrandBlademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 15;
         if (player.armor == armors.R_CHANG || player.armor == armors.R_QIPAO || player.armor == armors.G_CHANG || player.armor == armors.G_QIPAO || player.armor == armors.B_CHANG || player.armor == armors.B_QIPAO || player.armor == armors.P_CHANG || player.armor == armors.P_QIPAO) critPChance += 5;
         if (player.headJewelry == headjewelries.SCANGOG) critPChance += 5;
         if (player.headJewelry == headjewelries.SATGOG) critPChance += 10;
@@ -6494,7 +6500,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance += (player.tou - 100) / 5;
             else blockChance += 10;
         }
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance += 10;
+		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance += 10;
 		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
@@ -6520,7 +6526,7 @@ public class Combat extends BaseContent {
             if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
             else blockChance2 += 10;
         }
-		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.shield == ShieldLib.NOTHING) blockChance2 += 10;
+		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance2 += 10;
 		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance2 += player.statusEffectv1(StatusEffects.Aegis);
         if (blockChance2 < 10) blockChance2 = 10;
         //if (player.weaponRange == weaponsrange.M1CERBE) blockChance2 = 0;
@@ -9203,26 +9209,26 @@ public class Combat extends BaseContent {
         }
         //Flying
         if (player.isFlying()) {
-			if (player.statusEffectv1(StatusEffects.Flying) == 0) {
+			if (player.statusEffectv2(StatusEffects.Flying) == 0) {
 				if (!player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) player.addStatusValue(StatusEffects.Flying, 1, -1);
 			}
-            if (player.statusEffectv1(StatusEffects.Flying) == 1) {
+            if (player.statusEffectv2(StatusEffects.Flying) == 1) {
 				if (player.soulforce < flyingSwordUseCost()) {
-					player.addStatusValue(StatusEffects.Flying, 1, -2);
+					player.removeStatusEffect(StatusEffects.Flying);
 					outputText("<b>You land gently on the ground having too little soulforce to keep flying using "+player.weaponFlyingSwordsName+".</b>\n\n");
 				}
 				else player.soulforce -= flyingSwordUseCost();
 			}
-			if (player.statusEffectv1(StatusEffects.Flying) == 2) {
+			if (player.statusEffectv2(StatusEffects.Flying) == 2) {
 				if (player.soulforce < flyingWithSoulforceCost()) {
-					player.addStatusValue(StatusEffects.Flying, 1, -2);
+					player.removeStatusEffect(StatusEffects.Flying);
 					outputText("<b>You land gently on the ground having too little soulforce to sustain flying.</b>\n\n");
 				}
 				else player.soulforce -= flyingWithSoulforceCost();
 			}
             if (player.statusEffectv1(StatusEffects.Flying) >= 0) outputText("<b>You keep making circles in the air around your opponent.</b>\n\n");
             else {
-				if (player.statusEffectv1(StatusEffects.Flying) == 0) {
+				if (player.statusEffectv2(StatusEffects.Flying) == 0) {
 					if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
 						outputText("<b>You need to give some time for your mech to recharge and thus land back to the ground.</b>\n\n");
 						player.createStatusEffect(StatusEffects.CooldownJetpack, 3, 0, 0, 0);
@@ -10531,6 +10537,7 @@ public class Combat extends BaseContent {
 	public function venomCombatRecharge2():Number {
 		var venomCRecharge:Number = 0;
         venomCRecharge += player.tailRecharge;
+		if (venomCRecharge < 2.5) venomCRecharge = 5;
 		if (player.hasPerk(PerkLib.ImprovedVenomGland)) venomCRecharge += 2.5;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) venomCRecharge += 7.5;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) venomCRecharge += 22.5;
@@ -10615,18 +10622,7 @@ public class Combat extends BaseContent {
             if (monster.armorDef <= 10) monster.armorDef = 0;
             else monster.armorDef -= 10;
         }
-        if (player.hasPerk(PerkLib.WellspringOfLust)) {
-            if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
-            if (!player.hasPerk(PerkLib.GreyMage) && player.lust < 50) player.lust = 50;
-        }
-		if (player.hasPerk(PerkLib.AdrenalineRush)) {
-			player.wrath += 100;
-			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
-		}
-		applyAutocast0();
-        magic.applyAutocast();
-        mspecials.applyAutocast2();
-        //Adjust lust vulnerability in New Game+.
+		//Adjust lust vulnerability in New Game+.
         if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.9;
         else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
         else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
@@ -10635,36 +10631,7 @@ public class Combat extends BaseContent {
         monster.mana = monster.maxMana();
         monster.soulforce = monster.maxSoulforce();
         monster.XP = monster.totalXP();
-        if (player.weaponRange == weaponsrange.LBLASTR){
-            var milkAmmo:Number = player.lactationQ()/100
-            if (milkAmmo > 20) milkAmmo = 20;
-            player.ammo = milkAmmo;
-        }
-        if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
-        if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
-        if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
-        if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
-        if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
-        if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
-        if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
-        if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.HARPGUN) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TRFATBI) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
-        if (player.statusEffectv1(StatusEffects.SoulDrill1) > 0) {
-            player.removeStatusEffect(StatusEffects.SoulDrill1);
-            player.createStatusEffect(StatusEffects.SoulDrill1, 0, 0, 0, 0);
-        }
+        settingPCforFight();
         if (prison.inPrison && prison.prisonCombatAutoLose) {
             dynStats("lus", player.maxLust(), "scale", false);
             doNext(endLustLoss);
@@ -10693,7 +10660,21 @@ public class Combat extends BaseContent {
             if (monster.armorDef <= 10) monster.armorDef = 0;
             else monster.armorDef -= 10;
         }
-        if (player.hasPerk(PerkLib.WellspringOfLust)) {
+        //Adjust lust vulnerability in New Game+.
+        if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.9;
+        else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
+        else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
+        else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
+        monster.HP = monster.maxOverHP();
+        monster.mana = monster.maxMana();
+        monster.soulforce = monster.maxSoulforce();
+        monster.XP = monster.totalXP();
+		settingPCforFight();
+        playerMenu();
+    }
+	
+	private function settingPCforFight():void {
+		if (player.hasPerk(PerkLib.WellspringOfLust)) {
             if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
             if (!player.hasPerk(PerkLib.GreyMage) && player.lust < 50) player.lust = 50;
         }
@@ -10701,17 +10682,14 @@ public class Combat extends BaseContent {
 			player.wrath += 100;
 			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
 		}
+		applyAutocast0();
         magic.applyAutocast();
         mspecials.applyAutocast2();
-        //Adjust lust vulnerability in New Game+.
-        if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.9;
-        else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
-        else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
-        else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
-        monster.HP = monster.maxHP();
-        monster.mana = monster.maxMana();
-        monster.soulforce = monster.maxSoulforce();
-        monster.XP = monster.totalXP();
+        if (player.weaponRange == weaponsrange.LBLASTR) {
+            var milkAmmo:Number = player.lactationQ() / 100;
+            if (milkAmmo > 20) milkAmmo = 20;
+            player.ammo = milkAmmo;
+        }
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
@@ -10723,7 +10701,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
-		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
+        if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
@@ -10737,8 +10715,7 @@ public class Combat extends BaseContent {
             player.removeStatusEffect(StatusEffects.SoulDrill1);
             player.createStatusEffect(StatusEffects.SoulDrill1, 0, 0, 0, 0);
         }
-        playerMenu();
-    }
+	}
 
     public function display():void {
         if (!monster.checkCalled) {
@@ -11329,7 +11306,7 @@ public class Combat extends BaseContent {
             fatigue(20, USEFATG_PHYSICAL);
             var damage:Number = player.str;
             damage += scalingBonusStrength() * 0.25;
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
             if (damage < 10) damage = 10;
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
             else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -11391,7 +11368,7 @@ public class Combat extends BaseContent {
             if (player.level >= 30) SAMulti += 1;
             if (player.level >= 36) SAMulti += 1;
             damage += scalingBonusStrength() * 0.25;
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
             if (damage < 10) damage = 10;
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
             else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -11535,13 +11512,7 @@ public class Combat extends BaseContent {
             }
         }
         fatigue(10, USEFATG_PHYSICAL);
-        //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-            clearOutput();
-            outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-            enemyAI();
-            return;
-        }
+		if (checkConcentration()) return; //Amily concentration
         //WRAP IT UPPP
         if (monster.hasStatusEffect(StatusEffects.Dig)) {
             outputText("You dig right underneath your opponent, ");
@@ -11642,13 +11613,7 @@ public class Combat extends BaseContent {
                 return;
             }
             fatigue(10, USEFATG_PHYSICAL);
-            //Amily!
-            if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-                clearOutput();
-                outputText("Amily recovers just in time to get out of your reach as you attempt to straddle her.");
-                enemyAI();
-                return;
-            }
+			if(checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to straddle [monster him].")) return; //Amily concentration
             //WRAP IT UPPP
             monster.createStatusEffect(StatusEffects.Straddle, 0, 0, 0, 0);
             player.createStatusEffect(StatusEffects.StraddleRoundLeft, 2 + rand(3), 0, 0, 0);
@@ -13714,7 +13679,7 @@ public class Combat extends BaseContent {
         else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight letting the storm carry you up.\n\n");
         else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.\n\n");
         else outputText("You open you wing taking flight.\n\n");
-        player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.Flying, flightDurationNatural(), 0, 0, 0);
         takeFlight();
 	}
 	public function takeFlightByFlyingSword():void {
@@ -13737,6 +13702,12 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
         enemyAI();
     }
+	public function flightDurationNatural():Number {
+		var flightDurationNatural:Number = 7;
+		if (player.hasPerk(PerkLib.AdvancedAerialCombat)) flightDurationNatural += 2;
+		if (player.hasPerk(PerkLib.GreaterAerialCombat)) flightDurationNatural += 4;
+		return flightDurationNatural;
+	}
 
 	public function landAfterUsingFlyingSword():void {
 		clearOutput();
@@ -13901,7 +13872,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
-        if (!player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm) || player.statusEffectv1(StatusEffects.Flying) > 0) {
+        if (!player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm) && player.statusEffectv1(StatusEffects.Flying) == 0) {
             if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
             if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                 player.removeStatusEffect(StatusEffects.FlyingNoStun);
@@ -14901,4 +14872,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

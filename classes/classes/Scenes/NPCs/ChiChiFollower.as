@@ -289,7 +289,7 @@ public function TrainingSoulArtsWithChiChi():void {
 			player.trainStat("tou", +2, 75);
 			player.trainStat("tou", +1, 100);
 			if (player.tou >= 100) {
-				if (player.hasPerk(PerkLib.MightyFist) < 0) {
+				if (!player.hasPerk(PerkLib.MightyFist)) {
 					player.createPerk(PerkLib.MightyFist, 0, 0, 0, 0);
 					outputText(" <b>You've gained the Mighty Fist perk.</b>");
 				}

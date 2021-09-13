@@ -75,6 +75,8 @@ public class SceneLib {
 
     public static var glacialRift:GlacialRift = new GlacialRift();
 
+    public static var ashlands:Ashlands = new Ashlands();
+
     public static var volcanicCrag:VolcanicCrag = new VolcanicCrag();
 
     public static var brigidScene:BrigidScene = new BrigidScene();
@@ -222,6 +224,8 @@ public class SceneLib {
     public static var sophieScene:SophieScene = new SophieScene();
 
     public static var tedScene:TedScenes = new TedScenes();
+
+    public static var tifaFollower:TifaFollower = new TifaFollower();
 
     public static var urta:Urta = new Urta();
 

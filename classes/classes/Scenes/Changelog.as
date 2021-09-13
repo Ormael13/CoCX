@@ -94,7 +94,7 @@ package classes.Scenes
 			outputText("-New Blood Soulskill: Blood Requiem - learned from Crimson Jade. Cost 150 health. Deal phys dmg and have cooldown of 4 turns. Would also reduce healing effects on enemies by 20% (constructs, elementals, flesh constructs, ghosts) / 50% (plants) / 80% (rest enemy types) for 2 turns (4 turns from SF variant). Debuff duration stacks.\n");
 			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
 			outputText("-New necklace (by Ormael): Wrathless - buyable at Kaiba shop in Tel'Adre. Cost 4500 gems. +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.\n");
-			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
+			outputText("-New enemies: Ice/Lightning/Darkness Elementals, True Fire Golem. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon. True Fire Golem is lvl 64 and could be found in Ashlands.\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
 			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison, water, earth, wind, blood. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
 			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
@@ -184,6 +184,20 @@ package classes.Scenes
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
 			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
+			outputText("-Dyes not working on permament races. (by Liadri)\n");
+			outputText("-There is another predator that now decided to prowl the mountains. So maybe if you hear (lvl 15) Moooo you may consider running or something.\n");
+			outputText("-Max lust of monsters below lvl 6 been bit increased to 60%. Bit now also their max HP cap is also reduced to 60%. In any case lust or HP cap of monster can't decrease below 100(+30 perk NG up to +150)/300(+100 perk NG up to +500).\n");
+			outputText("-New monster perk: For Beginners-type enemy. Given to lvl 1 imps, fearl imps, thiefs and lvl 2 goblins. As for effect it makes their max hp/lust decreased to 10% of orginal values and scalings from diff setting, secondary scaling setting or ascension been reduced by large margin. That perk override effect for max hp/lust reduction of monsters below lvl 6.\n");
+			outputText("-When elementals attack added option to skip their turn (whatever reason it may be (totaly not due to rare bug of immortal mino king))\n");
+			outputText("-New area: Ashlands. Exploring caves allows now to find it (have similar lvl range for enemies as tundra and is much warmer place too). Exploring Ashlands leads to finding (Outer) Vulcanic Crag - it have enemies with level range like (Outer) Glacial Rift ones.\n");
+			outputText("-Behemoth/True Fire Golems at Vulcanic Crag got their level rised from 40/43 to 71/80 (that included buff to most of their stats).\n");
+			outputText("-4 new achievments. (1 shadow one)\n");
+			outputText("-There is new (well kinda) enemies added to Ashlands and Vulcanic Crag: Phoenix Squad/Platoon. They're group enemeis of lvl 41 and 74. Platoon additionaly have modifiers for large group of enemies.\n");
+			outputText("-Double barreled dragon gun remains have been moved from Vulcanic Crag to Ashlands.\n");
+			outputText("-All perks that are gained when having History/Past Life: ALchemist perk won't give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
+			outputText("-Aether Twin that use shield slot won't be count as wearing shield in cases when perks check for lack of shield to trigger their effect (for example Hold with Both Hands).\n");
+			outputText("-After beating Tentacle Beast there is 10% chance to find bee girl. She would unlock new dungeon: Bee Hive. It have enemies from lvl 30 to 40.\n");
+			outputText("-Clearing up Bee Hive would add new follower to camp: bee that goes by the name Tifa.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -193,17 +207,16 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks gfiving Dodge error msg, still more than a few TF items ignoring perm TF's ");
-			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's\n");/*ostatni punkt changelogu
+			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural emans (wings), Fera first halloween event not triggering if pc had permed ");
+			outputText("one of two fera perks form 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -216,6 +229,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -297,7 +311,16 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -343,6 +366,12 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1231,7 +1260,7 @@ package classes.Scenes
 			outputText("-13 new achievments (4 shadow ones). Dungeon achiev for 8 dungeons cleared is now possible to attain.\n");
 			outputText("-New melee weapon (by Ormael): Aether (Dex) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Base atk is 0. When weared with Aether (Sin) shield will have 20% chance to stun and will get all benefits of gaunlet type weapon.\n");
 			outputText("-New shield (by Ormael): Aether (Sin) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Block chance is 0. When weared with Aether (Dex) block chance will rise by 1.\n");
-			outputText("-Jade Talisman now have use - in one of Hidden Caves rooms is possible to use it. The following event with few steps to be done in order would req. having membership in Adventures Guild and waiting 5+ days to complete succesfully.\n");
+			outputText("-Jade Talisman now have use - in one of Hidden Caves rooms is possible to use it. The following event with few steps to be done in order would req. having membership in Adventures Guild and waiting 5+ days to complete successfully.\n");
 			outputText("-New PC camp npc's. Some of them can spar in camp, help with constructing structures, and even assist in one or another way in fight (like you use them directly to beat enemeis or have them help as henchman).\n");
 			outputText("-Chimera and Grand Chimera race desc been changed to req. full racial scores for Chimera and 3rd step in race for Grand Chimera (that meaning only 11 races can mixed to give Grand Chimera race desc instead of almost 70 racial scores).\n");
 			outputText("-Monsters could slowly recover mana and soulforce spent based on what perks they got that could affect speed of recovery of those two resources.\n");
@@ -2224,7 +2253,7 @@ package classes.Scenes
 			outputText("-Healing spells will have it own spellpower and cost reduction meter. Items like Mana Bracer, Nocturnal/Unicorn Staff or all 3 Marae Bark enhanced wizard staffs, rings, perks on weapons or armors or ascension one perk would boost heal power meter too in addition to normal spellpower. Similary perks on equipment + spell affinity perk would lower costs of heal spells.\n");
 			outputText("-Perk Mana Affinity I req. changed now to 25+ int and one of two perks: Job: Sorcerer or Job: Healer\n");
 			outputText("-Black Magic spell Heal digievolv... en becoming White Magic spell with all the same effect and costs (but without chance to backfire at PC ^^). I was all the time feeling it should be white magic with some other spell taking healing-type spell among black magic spells.\n");
-			outputText("-New Black Magic spell: Regenerate. When casted succesfully will give 7 turns regeneration effect on PC.\n");
+			outputText("-New Black Magic spell: Regenerate. When casted successfully will give 7 turns regeneration effect on PC.\n");
 			outputText("-New Grey Magic spell: Nosferatu. It deals damage to enemy at same time healing PC by the same amount.\n");
 			outputText("-New TF item: Skyborn Seed (avian TF) buyable in He'Xin'Dao TF shop for 30 gems, droped by Hapries or radomly found in High Mountains. Bonuses for (Half) Avian-morph would be for 4(9) pts in racial score: +15(30) to max Str, +30(75) to max Spe and +15(30) to max Int.\n");
 			outputText("-New body part - legs: Avain Legs. No prereq.\n");

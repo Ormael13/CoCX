@@ -354,10 +354,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.canFly()) {
-				var flightduration:Number = 6;
-				if (player.hasPerk(PerkLib.AdvancedAerialCombat)) flightduration += 2;
-				if (player.hasPerk(PerkLib.GreaterAerialCombat)) flightduration += 4;
-				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + flightduration + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + combat.flightDurationNatural() + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			}
 			if (player.isShieldsForShieldBash()) {
 				bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
@@ -732,7 +729,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -870,7 +867,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -963,7 +960,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -1293,7 +1290,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -1404,7 +1401,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
 		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -1498,7 +1495,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
 		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -1938,7 +1935,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function takeFlight():void {
 		clearOutput();
 		outputText("You open you wing taking flight.\n\n");
-		player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.Flying, combat.flightDurationNatural(), 0, 0, 0);
 		if (!player.hasPerk(PerkLib.Resolute)) {
 			player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
@@ -3202,13 +3199,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Keep logic sane if this attack brings victory
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster.short == "lizan rogue") {
 			outputText("As your webbing flies at him the lizan flips back, slashing at the adhesive strands with the claws on his hands and feet with practiced ease.  It appears he's used to countering this tactic.");
 			enemyAI();
@@ -3274,13 +3265,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
 			if(monster.plural) {
@@ -3324,13 +3309,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You entangle your opponent with your whip, attempting to bind its movement. ");
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
@@ -3376,13 +3355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				return;
 			}
 			fatigue(10, USEFATG_PHYSICAL);
-			//Amily!
-			if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-				clearOutput();
-				outputText("Amily recovers just in time to get out of your reach as you attempt to grapple her.");
-				enemyAI();
-				return;
-			}
+			if (combat.checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to grapple [monster him].")) return; //Amily concentration
 			//WRAP IT UPPP
 			outputText("You grab your opponent with your jaw while [monster he] is stunned inflicting grievous wounds before you toss [monster him] high in the air!");
 			monster.createStatusEffect(StatusEffects.OrcaPlay, 0,0,0,0);
@@ -3415,13 +3388,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You plunge on " + monster.a + monster.short + " and let your liquid body engulf it. ");
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
@@ -3496,13 +3463,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		//Amily!
-		if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You growl menacingly, dropping on all four" + (player.tail.type != Tail.NONE ? " and flicking your tail" : "") + ", as you pounce on " + monster.a + monster.short + " clawing at " + monster.pronoun1 + " body and leaving deep bleeding wounds.");
@@ -3551,13 +3512,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(10, USEFATG_PHYSICAL);
 		outputText("You attempt to slam both of your powerful forepaws on " + monster.a + monster.short + ". ");
-		//Amily!
-		if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You land both paws on " + monster.a + monster.short + " with brutal power using your claws to grab " + monster.pronoun2 + ".");
@@ -3592,13 +3547,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else fatigue(30, USEFATG_PHYSICAL);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownSlamBear,7,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownSlamBear,8,0,0,0);
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		var damage:Number = 0;
 		//str bonuses
 		damage += player.str;
@@ -3690,13 +3639,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(20, USEFATG_PHYSICAL);
 		else fatigue(10, USEFATG_PHYSICAL);
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			var damage:Number = 0;
@@ -3789,13 +3732,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function hydraBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -3860,13 +3797,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -3903,13 +3834,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function spiderBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -3994,13 +3919,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(10, USEFATG_PHYSICAL);
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
@@ -4053,12 +3972,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else fatigue(24, USEFATG_PHYSICAL);
 			}
 		}
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You ready your wrists mounted scythes and prepare to sweep them towards " + monster.a + monster.short + ".\n\n");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
@@ -4069,8 +3983,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (monster.plural) {
 			if (player.hasPerk(MutationsLib.MantislikeAgility)) {
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(MutationsLib.TrachealSystemEvolved)) {
-					if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm) && player.hasPerk(MutationsLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 15;
+				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemEvolved)) {
+					if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 15;
 					else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
 				}
 				else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
@@ -4079,7 +3993,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 		}
 		else {
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm) && player.hasPerk(MutationsLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
+			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
 			else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 1;
 		}
 		mantisMultipleAttacks();
@@ -4093,8 +4007,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!player.hasPerk(MutationsLib.MantislikeAgility)) damage *= 0.6;
 		//bonuses if fighting multiple enemies
 		if (monster.plural) {
-			if (!player.hasPerk(MutationsLib.MantislikeAgility) && !player.hasPerk(MutationsLib.TrachealSystemEvolved)) damage *= 1.1;
-			if (player.hasPerk(MutationsLib.MantislikeAgility) && player.hasPerk(MutationsLib.TrachealSystemEvolved)) damage *= 1.5;
+			if (!player.hasPerk(MutationsLib.MantislikeAgility) && !player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.1;
+			if (player.hasPerk(MutationsLib.MantislikeAgility) && player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.5;
 		}
 		//other bonuses
 		damage += player.weaponAttack;
@@ -4180,12 +4094,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(50, USEFATG_PHYSICAL);
 		else fatigue(25, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
 		if(player.horns.count >= 6 && player.horns.count < 12) {
@@ -4329,12 +4238,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(30, USEFATG_PHYSICAL);
 		else fatigue(15, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
 		if(player.horns.count >= 6 && player.horns.count < 12) {
@@ -4460,12 +4364,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your stinger!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your stinger with superior quickness!\n\n");
@@ -4611,12 +4510,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
@@ -4648,12 +4542,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
@@ -4817,13 +4706,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(25, USEFATG_PHYSICAL);
-		//Amily!
-		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You open your mouth wide, your ");
 		if (player.faceType == Face.SHARK_TEETH) outputText("shark teeth extending out");
 		if (player.faceType == Face.ORCA) outputText("sharp orca teeth shining briefly");
@@ -4958,13 +4841,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Amily!
-		if (monster.hasStatusEffect(StatusEffects.Concentration)) {
-			clearOutput();
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
-			enemyAI();
-			return;
-		}
+		if (combat.checkConcentration()) return; //Amily concentration
 		//Blind
 		if (player.playerIsBlinded()) {
 			outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
@@ -5266,7 +5143,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Section for item damage modifiers
 			if (weaponRangePerk == "Bow"){
 				if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-				if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
+				if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
 			}
 			damage = Math.round(damage);
 			if (monster.HP <= monster.minHP()) {
