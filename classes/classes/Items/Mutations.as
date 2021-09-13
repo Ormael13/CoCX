@@ -9614,6 +9614,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             if (player.eyes.type == Eyes.HUMAN) {
                 transformations.EyesRaijuColors.applyEffect();
+                transformations.EyesRaiju.applyEffect();
             } else {
                 transformations.EyesHuman.applyEffect();
             }
@@ -10687,7 +10688,7 @@ public final class Mutations extends MutationsHelper {
         //should work from any face, including other muzzles
         if (player.tailType == Tail.FOX && player.faceType != Face.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
-            transformations.FaceHuman.applyEffect();
+            transformations.FaceFox.applyEffect();
             changes++;
         }
         //Fox Eyes
