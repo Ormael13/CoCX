@@ -84,7 +84,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 
 		const pussyDesc: String = describePussy();
-		outputText(pussyDesc ? " " + pussyDesc : "");
+		outputText(pussyDesc ? "\n\n" + pussyDesc : "");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
