@@ -317,18 +317,16 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FaceDevilFangs;
 			}
 		});
-/*
 	  	public static const ELF_FACE:int = 25;
 	  	EnumValue.add(Memories, ELF_FACE, "ELF_FACE", {
 		  	id: "Elf Face",
 		  	name: "Elf Face",
-		  	cost: 200,
+		  	cost: 100,
 		 	title: "Elf Face",
 		  	transformation: function(): Transformation {
 			  	return CoC.instance.transformations.FaceElf;
 		  	}
 	  	});
-*/ //Cost?
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
