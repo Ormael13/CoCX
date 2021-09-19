@@ -1716,11 +1716,16 @@ private function goJogging():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
-		addButton(1,"Showers",brooke.repeatChooseShower);
-		addButton(4,"Leave",camp.returnToCampUseOneHour);
+		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
+			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(1,"Showers",brooke.repeatChooseShower);
+			addButton(4, "Leave", camp.returnToCampUseOneHour);
+		}
+		else {
+			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+		}
 	}
-	else doYesNo(sexMachine.exploreShowers, camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }
 
 public function meetingLunaFirstTime():void {
