@@ -20,6 +20,7 @@ import classes.BodyParts.Tongue;
 import classes.GeneticMemories.*;
 
 import classes.Items.MutationsHelper;
+import classes.Perks.MetamorphPerk;
 import classes.StatusEffects;
 import classes.internals.EnumValue;
 import classes.Scenes.Metamorph;
@@ -2725,6 +2726,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.ELF;
+		  Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ELF_FACE));
 	  },
 	  // is present
 	  function (): Boolean {

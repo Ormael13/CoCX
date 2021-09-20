@@ -60,7 +60,7 @@ import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			cleanupAfterCombat();
+			beehive.defeatCorruptBeeQueen();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

@@ -3984,7 +3984,8 @@ public class PerkLib
                     .requireTou(100)
                     .requireLevel(10)
                     .requireNGPlus(2);
-            JobKnight.requirePerk(JobGuardian)
+            JobKnight.requireAdvancedJobSlot()
+					.requirePerk(JobGuardian)
                     .requireTou(50)
                     .requireLevel(6);
             ShieldMastery.requirePerk(JobKnight)

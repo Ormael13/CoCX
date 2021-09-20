@@ -1708,7 +1708,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.YetiScarf);
 			}
 			if (player.lowerBody == LowerBody.YETI && player.arms.type == Arms.YETI && !player.hasPerk(PerkLib.BigHandAndFeet)) {
-				outputText("\nGeeze, with those oversized hands and feet you should just drop your weapon and punch things out cold. Why do you even need a weapon for anyway?\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
+				outputText("\nGeeze, with those oversized hands and feet you should just drop your weapon and punch things out cold. Why do you even need a weapon for anyway?\n\n<b>(Gained the Big hand and feet perk!)</b>\n");
 				player.createPerk(PerkLib.BigHandAndFeet, 0, 0, 0, 0);
 				needNext = true;
 			}
