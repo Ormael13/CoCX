@@ -94,13 +94,13 @@ package classes.Scenes
 			outputText("-New Blood Soulskill: Blood Requiem - learned from Crimson Jade. Cost 150 health. Deal phys dmg and have cooldown of 4 turns. Would also reduce healing effects on enemies by 20% (constructs, elementals, flesh constructs, ghosts) / 50% (plants) / 80% (rest enemy types) for 2 turns (4 turns from SF variant). Debuff duration stacks.\n");
 			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
 			outputText("-New necklace (by Ormael): Wrathless - buyable at Kaiba shop in Tel'Adre. Cost 4500 gems. +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.\n");
-			outputText("-New enemies: Ice/Lightning/Darkness Elementals, True Fire Golem. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon. True Fire Golem is lvl 64 and could be found in Ashlands.\n");
+			outputText("-New enemies: True Fire Golem, Wood Elfs Hubnting Party. True Fire Golem is lvl 64 and could be found in Ashlands. Wood Elfs are lvl 15 group and can be found in forest.\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
 			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison, water, earth, wind, blood. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
 			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
 			outputText("-Added new cultivators specific events: Heavenly Tribulations (H class, G class, F class). They last only for 3/4/5 turns and req. PC to survive tribulation attacks without dropping to min hp or maxing up lust bar.\n");
 			outputText("-Killing true demon will count now toward counter of true demons killed not imps (sadly it won't retroactively move all demons kills from imps count kills thou).\n");
-			outputText("-Teleporting Circle to move between each of River Dungeon Floors been instaled by... someone. It sstill req. to beat each floor boss/es to open teleport option to deeper floors but after that it will amke easier to travel deeper without need to go thro all previous floors.\n");
+			outputText("-Teleporting Circle to move between each of River Dungeon Floors been instaled by... someone. It sstill req. to beat each floor boss/es to open teleport option to deeper floors but after that it will make easier to travel deeper without need to go thro all previous floors. Well some still may want travel previous floors for some reason but that up for them to skip use of teleport for faster travel.\n");
 			outputText("-On difficulty below Nightmare there will be no penalty for having too high wrath like unable to cast spells or m.specials. Also penalties for internal mutation would be reduced by 5 on Hard and by 10 on Normal.\n");
 			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends are saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
 			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
@@ -194,13 +194,13 @@ package classes.Scenes
 			outputText("-4 new achievments. (1 shadow one)\n");
 			outputText("-There is new (well kinda) enemies added to Ashlands and Vulcanic Crag: Phoenix Squad/Platoon. They're group enemeis of lvl 41 and 74. Platoon additionaly have modifiers for large group of enemies.\n");
 			outputText("-Double barreled dragon gun remains have been moved from Vulcanic Crag to Ashlands.\n");
-			outputText("-All perks that are gained when having History/Past Life: ALchemist perk won't give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
+			outputText("-All perks that are gained when having History/Past Life: Alchemist perk won't give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
 			outputText("-Aether Twin that use shield slot won't be count as wearing shield in cases when perks check for lack of shield to trigger their effect (for example Hold with Both Hands).\n");
 			outputText("-After beating Tentacle Beast there is 10% chance to find bee girl. She would unlock new dungeon: Bee Hive. It have enemies from lvl 30 to 40.\n");
-			outputText("-Clearing up Bee Hive would add new follower to camp: bee that goes by the name Tifa.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Clearing up Bee Hive would add new follower to camp: Bee that goes by the name Tifa.\n");
+			outputText("-Staff Channeling perk changes: Allows to attack when flying without need to have aerial combat perk. In all case it apply (having perk and matching (partial) staff) melee attack would be replaced with mana/elemental bolt attack.\n");
+			outputText("-Buttons for Use Item and Next/Previous in menu when there is no place for item in inv was switched.\n");
+			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -216,7 +216,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks gfiving Dodge error msg, still more than a few TF items ignoring perm TF's ");
 			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural emans (wings), Fera first halloween event not triggering if pc had permed ");
-			outputText("one of two fera perks form 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast\n");/*ostatni punkt changelogu
+			outputText("one of two fera perks form 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

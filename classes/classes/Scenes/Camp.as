@@ -4966,9 +4966,17 @@ public function rebirthFromBadEnd():void {
 				player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,2,0,0,0);
 			}
 			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone, 0, 0, 0, 0);
+			if (player.weapon == weapons.AETHERD && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 2;
+			if (player.shield == shields.AETHERS && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 1) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 2;
 			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
-				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+					if (player.weapon == weapons.AETHERD) player.setWeapon(WeaponLib.FISTS);
+				}
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+					if (player.shield == shields.AETHERS) player.setShield(ShieldLib.NOTHING);
+				}
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
 			if (flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] > 0) flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] = 0;

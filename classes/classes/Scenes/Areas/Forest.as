@@ -172,8 +172,14 @@ use namespace CoC;
 						call  : SceneLib.woodElves.findElves,
 						chance: 0.50,
 						when  : function ():Boolean {
-							return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
-									|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
+							return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED || WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
+						}
+					}, {
+						name  : "WoodElfRematch",
+						call  : SceneLib.woodElves.findElvesRematch,
+						chance: 0.75,
+						when  : function ():Boolean {
+							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELFSANDEVENBEATSTHEM && !player.blockingBodyTransformations()
 						}
 					}, {
 						name  : "truffle",

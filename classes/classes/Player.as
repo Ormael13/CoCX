@@ -13295,6 +13295,7 @@ use namespace CoC;
 				else {
 					flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
 				}
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 			}
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
