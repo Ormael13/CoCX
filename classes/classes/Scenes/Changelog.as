@@ -192,7 +192,7 @@ package classes.Scenes
 			outputText("-New area: Ashlands. Exploring caves allows now to find it (have similar lvl range for enemies as tundra and is much warmer place too). Exploring Ashlands leads to finding (Outer) Vulcanic Crag - it have enemies with level range like (Outer) Glacial Rift ones.\n");
 			outputText("-Behemoth/True Fire Golems at Vulcanic Crag got their level rised from 40/43 to 71/80 (that included buff to most of their stats).\n");
 			outputText("-4 new achievments. (1 shadow one)\n");
-			outputText("-There is new (well kinda) enemies added to Ashlands and Vulcanic Crag: Phoenix Squad/Platoon. They're group enemeis of lvl 41 and 74. Platoon additionaly have modifiers for large group of enemies.\n");
+			outputText("-There is new (well kinda) enemies added to Ashlands and Vulcanic Crag: Phoenix Squad/Platoon. They're group enemies of lvl 41 and 74. Platoon additionaly have modifiers for large group of enemies.\n");
 			outputText("-Double barreled dragon gun remains have been moved from Vulcanic Crag to Ashlands.\n");
 			outputText("-All perks that are gained when having History/Past Life: Alchemist perk won't give +1 more transformation chances. They would increase alchemy/mutagen bonus cap by 2%.\n");
 			outputText("-Aether Twin that use shield slot won't be count as wearing shield in cases when perks check for lack of shield to trigger their effect (for example Hold with Both Hands).\n");

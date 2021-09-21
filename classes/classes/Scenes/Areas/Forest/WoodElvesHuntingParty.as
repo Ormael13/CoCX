@@ -19,16 +19,14 @@ import classes.internals.*;
 
 public class WoodElvesHuntingParty extends Monster
 	{
-		public var woodelfshuntingparty:WoodElves = new WoodElves();
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			woodelfshuntingparty.ElfFightWin();
+			SceneLib.woodElves.ElfFightWin();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			woodelfshuntingparty.ElfFightLoose();
+			SceneLib.woodElves.ElfFightLoose();
 		}
 		
 		public function WoodElfsGroupAttack():void
@@ -144,8 +142,8 @@ public class WoodElvesHuntingParty extends Monster
 			this.ass.analWetness = AssClass.WETNESS_MOIST;
 			this.plural = true;
 			this.tallness = 72;
-			this.hips.type = Hips.RATING_CURVY + 1;
-			this.butt.type = Butt.RATING_LARGE + 2;
+			this.hips.type = Hips.RATING_AMPLE + 1;
+			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.ELF;
 			this.skinTone = "light";
 			this.hairColor = "blonde";
