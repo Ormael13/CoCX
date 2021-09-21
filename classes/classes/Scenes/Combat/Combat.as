@@ -8371,6 +8371,7 @@ public class Combat extends BaseContent {
                     flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
                 }
                 outputText("You manage to grab your weapon back!\n\n");
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
             }
         }
 		if (player.hasStatusEffect(StatusEffects.SubZeroConditions) && !player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();

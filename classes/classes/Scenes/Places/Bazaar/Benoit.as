@@ -49,10 +49,10 @@ public function benoitAffection(changes:Number = 0):Number {
 
 private function benoitKnocksUpPCCheck():void {
 	//Convert old basi's to real basi's!
-	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.findPerk(PerkLib.BasiliskWomb) >= 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.hasPerk(PerkLib.BasiliskWomb)) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 	//Knock up chances:
-	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
-		if (player.findPerk(PerkLib.BasiliskWomb) >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+		if (player.hasPerk(PerkLib.BasiliskWomb) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
 			if (player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
 				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
@@ -139,9 +139,9 @@ public function benoitKnockUp():Boolean
 	// Calc the number of eggs
 	var cumQ:int = player.cumQ();
 
-	var bounty:Boolean = (player.findPerk(PerkLib.ElvenBounty) >= 0);
-	var stud:Boolean = (player.findPerk(PerkLib.MaraesGiftStud) >= 0);
-	var alpha:Boolean = (player.findPerk(PerkLib.FerasBoonAlpha) >= 0);
+	var bounty:Boolean = (player.hasPerk(PerkLib.ElvenBounty));
+	var stud:Boolean = (player.hasPerk(PerkLib.MaraesGiftStud));
+	var alpha:Boolean = (player.hasPerk(PerkLib.FerasBoonAlpha));
 
 	var eggMod:int = 0;
 	if (bounty) eggMod += 1;
@@ -202,7 +202,7 @@ public function benoitIntro():void {
 
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls " + benoitMF("his","her") + " claws protectively into what appears to be a pile of robes sitting next to " + benoitMF("him","her") + ", which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition)) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
 		if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
 		suggest = eggySuggest;
 		suggestText = "Suggest";
@@ -304,7 +304,7 @@ public function benoitIntro():void {
 	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
 	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
 	//Basilisk Womb
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && (!(player.hasPerk(PerkLib.BasiliskWomb))) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
 	//Suggest & sex
 	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
 	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
@@ -1054,7 +1054,7 @@ private function eggySuggest():void {
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" " + benoitMF("he","she") + " says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	player.orgasm();
 	player.sexReward("cum");
-	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
 	}
@@ -1273,7 +1273,7 @@ private function tryToConvertToBassyWomb():void {
 
 		outputText("\n\nThe mixture has a lingering bite of mint overlaying the all-consuming burn of alcohol; you are reminded vaguely of the sticky liqueurs that populated the recesses of cupboards back home.  You smack your lips and plonk the bowl back down with deliberate loudness after you have finished; " + benoitMF("Benoit","Benoite") + " clutches the counter tensely as you wait.  You haven't died straight away, so that's a positive... an immense gurgle comes from your belly and you double over as your insides shift and the contents of your gut churn.  The sensation is not painful exactly but you feel like you've lost all control of your insides; you clutch your sides and try to breathe levelly as your stomach turns upside down and makes a sound like trapped gas.  Eventually you feel something like a bubble form just below your gut; slowly your insides settle as the bubble grows larger and larger, until the sensation slowly fades.  Cautiously you walk back and forth a few times, before poking your tummy.");
 		//[No oviposition:
-		if(player.findPerk(PerkLib.Oviposition) < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
+		if(player.hasPerk(PerkLib.Oviposition) < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
 		else outputText("You feel slightly bloated, but otherwise fine; you sense that were you to get impregnated by basilisk seed, the eggs you produce would be pure basilisk.");
 
 		outputText("\n\n\"<i>[name]?</i>\" says " + benoitMF("Benoit","Benoite") + " nervously.  \"<i>Are you all right?  Shall I call ze sawbones? I will call ze sawbones.  'E is mostly good at taking people apart and putting zem back togezzer again, but I am sure 'e can give you a good purgative if we rush...</i>\"  You toy with the idea of staging a dramatic allergic reaction, but deciding not to fray " + benoitMF("his","her") + " nerves any further you tell " + benoitMF("him","her") + " you feel absolutely fine.  Indeed, stroking your belly, you are almost certain that it worked.");
@@ -1350,7 +1350,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	//(Oviposition perk added)
 	player.createPerk(PerkLib.BasiliskWomb,0,0,0,0);
 	outputText("\n\n(<b>Perk Unlocked: Basilisk Womb - You can now give birth to female basilisks.</b>)");
-	if(player.findPerk(PerkLib.Oviposition) < 0) {
+	if(!(player.hasPerk(PerkLib.Oviposition))) {
 		player.createPerk(PerkLib.Oviposition,0,0,0,0);
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}

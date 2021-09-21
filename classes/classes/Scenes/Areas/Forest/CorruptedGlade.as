@@ -193,7 +193,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				player.orgasm();
 				dynStats("sen", 5, "cor", 2);
 				//Xforms
-				if (rand(3) == 0 && player.hairColor != "green") { //Change hair to green sometimes
+				if (rand(3) == 0 && player.hairColor != "green" && !player.blockingBodyTransformations()) { //Change hair to green sometimes
 					outputText("You don't get far before you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>  ");
 					player.hairColor = "green";
 				}
@@ -226,7 +226,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				//Simple stat changes - + lust.
 				dynStats("lus", 25 + player.lib / 10, "cor", 2);
 				//Change hair to green sometimes
-				if (rand(3) == 0 && player.hairColor != "green") {
+				if (rand(3) == 0 && player.hairColor != "green" && !player.blockingBodyTransformations()) {
 					outputText("You don't get far before you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>  ");
 					player.hairColor = "green";
 				}

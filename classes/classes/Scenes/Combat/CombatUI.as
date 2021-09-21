@@ -13,6 +13,7 @@ import classes.MutationsLib;
 import classes.Scenes.Areas.Beach.CancerAttack;
 import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Combat.PhysicalSpecials;
 import classes.Scenes.Dungeons.D3.DriderIncubus;
@@ -121,11 +122,22 @@ public class CombatUI extends BaseCombatContent {
 				if (monster.isFlying()) {
 					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling))) {
 						if (player.isFlying()) {
-							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling))) {
+							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon()) {
 								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 							}
+							else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
+								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
+								else {
+									if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+									else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+								}
+							}
 							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
+						}
+						else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
+							if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+							else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
 						}
 						else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 					}
@@ -511,6 +523,10 @@ public class CombatUI extends BaseCombatContent {
 						btnSpecial1.show("Dispell", lethice.dispellRapetacles);
 					}
 				}
+			} else if (monster is WoodElvesHuntingParty) {
+				var woodelves:WoodElvesHuntingParty = monster as WoodElvesHuntingParty;
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
 			}
 		}
 	}

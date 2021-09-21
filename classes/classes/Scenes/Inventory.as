@@ -1005,20 +1005,7 @@ use namespace CoC;
 			var x:int;
 			outputText("There is no room for " + itype.longName + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.");
 			menu();
-			if (page == 1) {
-				for (x = 0; x < 10; x++) {
-					if (player.itemSlots[x].unlocked)
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
-				}
-				if (getMaxSlots() > 10) addButton(11, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
-			}
-			if (page == 2) {
-				for (x = 10; x < 20; x++) {
-					if (player.itemSlots[x].unlocked)
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
-				}
-				addButton(11, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
-			}/*
+			if (showUseNow && itype is Useable) addButton(11, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));/*
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked)
 					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
@@ -1027,7 +1014,20 @@ use namespace CoC;
 				currentItemSlot = source;
 				addButton(12, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
 			}
-			if (showUseNow && itype is Useable) addButton(13, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].unlocked)
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+				}
+				if (getMaxSlots() > 10) addButton(13, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
+			}
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].unlocked)
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+				}
+				addButton(13, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
+			}
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
 
@@ -1802,4 +1802,4 @@ use namespace CoC;
 			player.itemSlots[slotNum].setItemAndQty(itype, qty);
 		}
 	}
-}
+}

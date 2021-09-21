@@ -20,6 +20,7 @@ import classes.BodyParts.Tongue;
 import classes.GeneticMemories.*;
 
 import classes.Items.MutationsHelper;
+import classes.Perks.MetamorphPerk;
 import classes.StatusEffects;
 import classes.internals.EnumValue;
 import classes.Scenes.Metamorph;
@@ -1867,6 +1868,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.CAT_CANINES;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.CAT_CANINES));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2724,6 +2726,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.ELF;
+		  Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ELF_FACE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3479,12 +3482,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>";
 
-	    player.ears.type = Ears.RAIJU;
+	    player.ears.type = Ears.WEASEL;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.WEASEL));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.ears.type === Ears.RAIJU;
+	    return player.ears.type === Ears.WEASEL;
 	  }
 	);
 
@@ -7890,7 +7894,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 2;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.CAT));
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.CAT_2));
 	  },
 	  // is present
 	  function (): Boolean {

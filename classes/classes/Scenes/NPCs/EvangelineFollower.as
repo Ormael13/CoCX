@@ -876,23 +876,29 @@ private function curingJiangshi():void {
 		player.destroyItems(consumables.VITAL_T, 5);
 		player.destroyItems(consumables.PPHILTR, 5);
 		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your cursed talisman, causing it to smoke and crumble. The first thing you do as the nasty thing peels off is head back to He’Xin’Dao and look for your gear. Thankfully it doesn't take you long to find it in a chest not too far from the table on which the crazy cat messed you up. Gosh, it feels good to be alive, like REALLY alive.\n\n");
-		if (player.weapon == WeaponLib.FISTS) {
-			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 1) player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+		if (player.weapon == WeaponLib.FISTS && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 1 && flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) {
+			player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 		}
-		if (player.weaponRange == WeaponRangeLib.NOTHING) {
+		if (player.weaponRange == WeaponRangeLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) {
 			player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 		}
-		if (player.shield == ShieldLib.NOTHING) {
+		if (player.shield == ShieldLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] < 1) player.setShield(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID]) as Shield);
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 		}
-		if (player.armor == armors.TRADITC) {
+		if (player.armor == armors.TRADITC && flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] != 0) {
 			player.setArmor(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID]) as Armor);
+			flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = 0;
 		}
-		if (player.lowerGarment == UndergarmentLib.NOTHING) {
+		if (player.lowerGarment == UndergarmentLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] != 0) {
 			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID]) as Undergarment, UndergarmentLib.TYPE_LOWERWEAR);
+			flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = 0;
 		}
-		if (player.upperGarment == UndergarmentLib.NOTHING) {
+		if (player.upperGarment == UndergarmentLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] != 0) {
 			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID]) as Undergarment, UndergarmentLib.TYPE_UPPERWEAR);
+			flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = 0;
 		}
 		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 		player.skinTone = "light";

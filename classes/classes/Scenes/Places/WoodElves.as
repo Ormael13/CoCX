@@ -15,6 +15,7 @@
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.Nothing;
+	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 	import classes.Scenes.SceneLib;
 	import classes.internals.SaveableState;
 	import classes.CoC;
@@ -22,6 +23,7 @@
 	public class WoodElves extends BaseContent implements SaveableState{
 
 		public static var WoodElvesQuest:int;
+		public static const QUEST_STAGE_METELFSANDEVENBEATSTHEM:int = -1;
 		public static const QUEST_STAGE_NOT_STARTED:int = 0;
 		public static const QUEST_STAGE_METELF:int = 1;
 		public static const QUEST_STAGE_LOSTTOELF:int = 2;
@@ -109,6 +111,13 @@
 			addButton(0, "About elves", AskAboutElves);
 			addButton(1, "Leave", LeaveStartElfFight);
 		}
+		public function findElvesRematch():void {
+			clearOutput();
+			outputText("As you explore the forest you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg holding you in place and slowly attempting to drag you toward what is likely an unsavory moment.");
+			outputText("\n\n\"<i>Good day mister adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
+			outputText("\n\nHell no! <b>IT'S A FIGHT!</b>");
+			startCombat(new WoodElvesHuntingParty());
+		}
 
 		public function AskAboutElves():void {
 			clearOutput();
@@ -137,26 +146,33 @@
 		}
 
 		public function StartElfFight():void {
+			startCombat(new WoodElvesHuntingParty());
+		}
+		public function ElfFightWin():void {
 			clearOutput();
-			outputText("Fighting the elves is temporarily disabled until the monster is implemented thank you trying out wood elves! ");
-			doNext(camp.returnToCampUseOneHour);
+			outputText("This battle is out of your hands. The moment you manage to defeat an elf another jumps in while a battle medic moves from the back to heal the fallen. You merely manage to create an exit amidst the mayhem and escape safe and sound from them. You will need to be wary of trees and blonde girls from now on seeing as this is unlikely to be the last time you run into them.");
+			WoodElvesQuest = QUEST_STAGE_METELFSANDEVENBEATSTHEM;
+			doNext(cleanupAfterCombat);
+		}
+		public function ElfFightLoose():void {
+			cleanupAfterCombat();
+			doNext(YouAreAlreadyElfLose);
 		}
 
 		public function YouAreAlreadyElfSubmit():void {
 			clearOutput();
-			outputText("You decide to let the elven lady proceed. ");
+			outputText("You decide to let the elven lady proceed. The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle");
 			YouAreAlreadyElf1();
 		}
 
 		public function YouAreAlreadyElfLose():void {
 			clearOutput();
-			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. ");
+			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. The elf leader raises an arm as tentacle-like vines whip around you while the elves circling you titter");
 			YouAreAlreadyElf1();
 		}
 
 		public function YouAreAlreadyElf1():void {
-			outputText("The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle among each other. " +
-					"\n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
+			outputText(" among each other. \n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
 					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above," +
 					" presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm" +
 					", golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
