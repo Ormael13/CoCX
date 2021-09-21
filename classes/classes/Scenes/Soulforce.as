@@ -70,7 +70,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.SoulTyrant)) dailySoulforceUsesLimit++;
 			if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1830\n");
+			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 2330\n");
 			if (player.hasPerk(PerkLib.Dantain)) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 0) player.addPerkValue(PerkLib.Dantain, 1, 1);
 				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 1) player.addPerkValue(PerkLib.Dantain, 1, 1);
@@ -3134,7 +3134,7 @@ use namespace CoC;
 		public function SoulforceGainedFromCultivation1():Number {
 			var cumulativegains:Number = 0;
 			if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
-				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" && player.jewelryName2 == "training soul ring" && player.jewelryName3 == "training soul ring" && player.jewelryName4 == "training soul ring"
 				&& player.weaponFlyingSwordsName == "training soul flying sword") {
 				cumulativegains += 28;//+130% jak wszystkie 13 slotów - każdy kolejny dodany slot dodaje kolejne 10%
 			}
@@ -3160,7 +3160,7 @@ use namespace CoC;
 			return cumulativegains;
 		}
 		public function SoulforceGainedFromCultivation2():void {
-			var bonussoulforce2:Number = 0;//razem może mieć max 1730
+			var bonussoulforce2:Number = 0;//razem może mieć max 2330
 			if (player.weaponName == "training soul axe") bonussoulforce2 += 80;
 			if (player.weaponRangeName == "training soul crossbow") bonussoulforce2 += 50;
 			if (player.shieldName == "training soul buckler") bonussoulforce2 += 60;
@@ -3173,7 +3173,7 @@ use namespace CoC;
 			if (player.jewelryName2 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName3 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName4 == "training soul ring") bonussoulforce2 += 100;
-			if (player.weaponFlyingSwordsName == "training soul flying sword") bonussoulforce2 += 100;
+			if (player.weaponFlyingSwordsName == "training soul flying sword") bonussoulforce2 += 500;
 			if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > 0) {
 				if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2]) flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2];
 				else flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += (bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]);
@@ -3960,7 +3960,7 @@ use namespace CoC;
 			//button 11
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
 			else addButtonDisabled(12, "Giacomo", "");
-			//addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
+			addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {
@@ -4093,4 +4093,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}

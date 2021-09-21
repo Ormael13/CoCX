@@ -650,6 +650,9 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf5():void {
         menu();
+		addButton(2, weaponsflyingswords.B_HALFM.shortName, weaponBuy5, weaponsflyingswords.B_HALFM);
+		addButton(3, weaponsflyingswords.W_HALFM.shortName, weaponBuy5, weaponsflyingswords.W_HALFM);
+		addButton(4, weaponsflyingswords.MOONLGT.shortName, weaponBuy5, weaponsflyingswords.MOONLGT);
 		addButton(5, weapons.W_STAFF.shortName, weaponBuy5, weapons.W_STAFF);
         addButton(6, weapons.GUANDAO.shortName, weaponBuy5, weapons.GUANDAO);
         addButton(7, weapons.HSWORDS.shortName, weaponBuy5, weapons.HSWORDS);
