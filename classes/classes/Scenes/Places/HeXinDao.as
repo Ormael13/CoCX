@@ -567,8 +567,9 @@ public class HeXinDao extends BaseContent
         addButton(1, "Shelf 1", soulequipmentshelf1).hint("Soul Training Equipment");
         addButton(2, "Shelf 2", soulequipmentshelf2).hint("Weapons");
         addButton(3, "Shelf 3", soulequipmentshelf3).hint("Armors");
-        addButton(6, "Shelf 4", soulequipmentshelf4).hint("Consumables");
-        addButton(7, "Shelf 5", soulequipmentshelf5).hint("Misc");
+        addButton(6, "Shelf 4", soulequipmentshelf4).hint("Flying Swords");
+        addButton(7, "Shelf 5", soulequipmentshelf5).hint("Consumables");
+        addButton(8, "Shelf 6", soulequipmentshelf5).hint("Misc");
 		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
@@ -622,18 +623,27 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf4():void {
         menu();
-        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy4, consumables.BANGBM1);
+		addButton(0, weaponsflyingswords.S_HALFM.shortName, weaponBuy4, weaponsflyingswords.S_HALFM);
+		addButton(1, weaponsflyingswords.E_HALFM.shortName, weaponBuy4, weaponsflyingswords.E_HALFM);
+		addButton(2, weaponsflyingswords.B_HALFM.shortName, weaponBuy4, weaponsflyingswords.B_HALFM);
+		addButton(3, weaponsflyingswords.W_HALFM.shortName, weaponBuy4, weaponsflyingswords.W_HALFM);
+		addButton(4, weaponsflyingswords.MOONLGT.shortName, weaponBuy4, weaponsflyingswords.MOONLGT);
+        addButton(14, "Back", serenamerchant);
+    }
+    public function soulequipmentshelf5():void {
+        menu();
+        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy5, consumables.BANGBM1);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
-        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy4, consumables.BANGBM2);
+        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy5, consumables.BANGBM2);
         else addButtonDisabled(6, "???", "Req. lvl 24+");
         if (player.level >= 42) {
-			addButton(0, consumables.BALLOFL.shortName, weaponBuy4, consumables.BALLOFL);
-			addButton(1, consumables.FROZENB.shortName, weaponBuy4, consumables.FROZENB);
-			addButton(2, consumables.THUNDBl.shortName, weaponBuy4, consumables.THUNDBl);
-			addButton(3, consumables.BALLOTD.shortName, weaponBuy4, consumables.BALLOTD);
-			addButton(4, consumables.POISONB.shortName, weaponBuy4, consumables.POISONB);
-			addButton(7, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
-			addButton(8, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
+			addButton(0, consumables.BALLOFL.shortName, weaponBuy5, consumables.BALLOFL);
+			addButton(1, consumables.FROZENB.shortName, weaponBuy5, consumables.FROZENB);
+			addButton(2, consumables.THUNDBl.shortName, weaponBuy5, consumables.THUNDBl);
+			addButton(3, consumables.BALLOTD.shortName, weaponBuy5, consumables.BALLOTD);
+			addButton(4, consumables.POISONB.shortName, weaponBuy5, consumables.POISONB);
+			addButton(7, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
+			addButton(8, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
 		}
         else {
 			addButtonDisabled(0, "???", "Req. lvl 42+");
@@ -644,38 +654,32 @@ public class HeXinDao extends BaseContent
 			addButtonDisabled(7, "???", "Req. lvl 42+");
 			addButtonDisabled(8, "???", "Req. lvl 42+");
 		}
-        addButton(10, consumables.BANGB_M.shortName, weaponBuy4, consumables.BANGB_M);
-        addButton(11, consumables.W_STICK.shortName, weaponBuy4, consumables.W_STICK);
+        addButton(10, consumables.BANGB_M.shortName, weaponBuy5, consumables.BANGB_M);
+        addButton(11, consumables.W_STICK.shortName, weaponBuy5, consumables.W_STICK);
         addButton(14, "Back", serenamerchant);
     }
-    public function soulequipmentshelf5():void {
+    public function soulequipmentshelf6():void {
         menu();
-		addButton(2, weaponsflyingswords.B_HALFM.shortName, weaponBuy5, weaponsflyingswords.B_HALFM);
-		addButton(3, weaponsflyingswords.W_HALFM.shortName, weaponBuy5, weaponsflyingswords.W_HALFM);
-		addButton(4, weaponsflyingswords.MOONLGT.shortName, weaponBuy5, weaponsflyingswords.MOONLGT);
-		addButton(5, weapons.W_STAFF.shortName, weaponBuy5, weapons.W_STAFF);
-        addButton(6, weapons.GUANDAO.shortName, weaponBuy5, weapons.GUANDAO);
-        addButton(7, weapons.HSWORDS.shortName, weaponBuy5, weapons.HSWORDS);
-		addButton(8, weapons.SNAKESW.shortName, weaponBuy5, weapons.SNAKESW);
+		addButton(5, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
+        addButton(6, weapons.GUANDAO.shortName, weaponBuy6, weapons.GUANDAO);
+        addButton(7, weapons.HSWORDS.shortName, weaponBuy6, weapons.HSWORDS);
+		addButton(8, weapons.SNAKESW.shortName, weaponBuy6, weapons.SNAKESW);
 		//addButton(9, Changdao
-        addButton(10, weapons.FLYWHIS.shortName, weaponBuy5, weapons.FLYWHIS);
-        addButton(11, weapons.CHAKRAM.shortName, weaponBuy5, weapons.CHAKRAM);
-        addButton(12, shields.MABRACE.shortName, weaponBuy5, shields.MABRACE);
+        addButton(10, weapons.FLYWHIS.shortName, weaponBuy6, weapons.FLYWHIS);
+        addButton(11, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
+        addButton(12, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
         addButton(14, "Back", serenamerchant);
     }
 
     private function weaponBuy1(itype:ItemType):void {
         clearOutput();
         outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
             doNext(soulequipmentshelf1);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
         doYesNo(curry(debitWeapon1,itype), soulequipmentshelf1);
     }
     private function debitWeapon1(itype:ItemType):void {
@@ -686,15 +690,12 @@ public class HeXinDao extends BaseContent
     private function weaponBuy2(itype:ItemType):void {
         clearOutput();
         outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
             doNext(soulequipmentshelf2);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
         doYesNo(curry(debitWeapon2,itype), soulequipmentshelf2);
     }
     private function debitWeapon2(itype:ItemType):void {
@@ -705,15 +706,12 @@ public class HeXinDao extends BaseContent
     private function weaponBuy3(itype:ItemType):void {
         clearOutput();
         outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
             doNext(soulequipmentshelf3);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
         doYesNo(curry(debitWeapon3,itype), soulequipmentshelf3);
     }
     private function debitWeapon3(itype:ItemType):void {
@@ -724,15 +722,12 @@ public class HeXinDao extends BaseContent
     private function weaponBuy4(itype:ItemType):void {
         clearOutput();
         outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
             doNext(soulequipmentshelf4);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
         doYesNo(curry(debitWeapon4,itype), soulequipmentshelf4);
     }
     private function debitWeapon4(itype:ItemType):void {
@@ -743,21 +738,34 @@ public class HeXinDao extends BaseContent
     private function weaponBuy5(itype:ItemType):void {
         clearOutput();
         outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
             doNext(soulequipmentshelf5);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
         doYesNo(curry(debitWeapon5,itype), soulequipmentshelf5);
     }
     private function debitWeapon5(itype:ItemType):void {
         flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
         inventory.takeItem(itype, soulequipmentshelf5);
+    }
+    private function weaponBuy6(itype:ItemType):void {
+        clearOutput();
+        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            doNext(soulequipmentshelf6);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        doYesNo(curry(debitWeapon6,itype), soulequipmentshelf6);
+    }
+    private function debitWeapon6(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, soulequipmentshelf6);
     }
 	
 	public function entranceToRiverDungeon():void {

@@ -204,6 +204,18 @@ package classes.Scenes
 			outputText("-New flying sword: Moonlight - buyable at Soul Equipment shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 8. It's classified as Small flying sword. Increase chance of bleed effect by 15%.\n");
 			outputText("-New flying sword: White Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal ice damage instead of physical damage.\n");
+			outputText("-New flying sword: Scarlet Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal lightning damage instead of physical damage.\n");
+			outputText("-New flying sword: Ebon Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal darkness damage instead of physical damage.\n");
+			outputText("-New material: a vial of E-Ichor. Cost 500 gems. Could be gained from offering in one of shrines located in Dilapidated Shrine. Could be used for internal mutation.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -230,6 +242,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -313,11 +326,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -367,9 +377,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

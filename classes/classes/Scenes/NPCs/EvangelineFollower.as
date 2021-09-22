@@ -423,7 +423,7 @@ private function evangelineAlchemyMenu():void {
 	//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
 	addButton(8, "Storm Seed", MakingStormSeed).hint("Ask her to brew a special potion that could aid in becoming a thunderbird. \n\nCost: 10 Gems \nNeeds 1 Magically-enhanced Golden Seed and 1 Voltage topaz.");//Hybryd race TF
 	addButton(9, "Enigmanium", MakingEnigmaniumPotion).hint("Ask her to brew a special potion that could aid in becoming a sphinx. \n\nCost: 30 Gems \nNeeds 1 Centarium, 1 Golden Seed and 1 Whisker Fruit.");
-	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 20 Low-grade Soulforce Recovery Pills/2 bottles of Low-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
+	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming an alicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 20 Low-grade Soulforce Recovery Pills/2 bottles of Low-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
 	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based on Black Ink.");
 	//addButton(12, "Abyssal Ink", ).hint("Ask her to brew a special potion based on Black Abbysal Ink.");
 	addButton(13, "InferWine", MakingInfernalWinePotion).hint("Ask her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
@@ -973,14 +973,22 @@ private function InternalMutations():void {
 		addButton(3, "Yes", InternalMutationsTak);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 1) {
-		outputText("RE: Placeholder Text on dangers of internal mutation and etc.");
+		outputText("Your confused look annoys Evangeline to no end.\n\n");
+		outputText("\"<i>Gosh how did human civilization even become a serious thing out of Mareth when it's made out of people like you. As I just said It's possible to further improve yourself through internal mutations however doing so will cause your body to endure an ever increasing amount of stress due to degeneration. While there are ways to fully become one's race to do so will make you cease to be human. ");
+		outputText("For you chimerism is the safest route even if it forces you to constantly seek out the assistance of a skilled medic or daily healing magic treatment. And don't you just try poping those mutations naturaly by eating a hundred of ingrediants the only thing you will get is fat. You need a specialised transformative or straith out primal magic to transform your insides and I can only craft the first. Was this simple enough for you?</i>\"");
 		menu();
 		addButton(1, "No", InternalMutationsNie);
 		addButton(3, "Yes", InternalMutationsTak);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		outputText("Evangeline's smile widens when she hears you would like to undergo another 'grafting'.\n\n\"What would you like to change today, [name]?\"");
-		InternalMutations0();
+		outputText("\"<i>Did you bring gems or find vial of the mutagen?</i>\" she asks.\n\n");
+		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
+		menu();
+		addButton(0, "Back", meetEvangeline);
+		if (player.gems >= 500) addButton(2, "Gems", InternalMutationsGemsOrMutagen);
+		else addButtonDisabled(2, "Gems", "Gotta get that 500 gems first.");
+		if (player.hasItem(useables.E_ICHOR, 1)) addButton(4, "Mutagen", InternalMutationsGemsOrMutagen);
+		else addButtonDisabled(4, "Mutagen", "Gotta get that vial of mutagen first.");
 	}
 }
 private function InternalMutationsNie():void {
@@ -994,6 +1002,10 @@ private function InternalMutationsTak():void {
 	outputText("\n\n\"<i>Glad to hear you at least are smarter than a minotaur. Anyways, there are means to reduce the stress on your body from internal mutations. With proper training you can develop the Chimera Corpus Exocell, or in common terms, the chimera body adaptation. This will allow your body to adapt to stress and slowly negate the drawbacks. Of course the lazy route would be to acquire regeneration from a species' inner mutation and thus negate the need to train entirely.</i>\"");
 	EvangelinePeepTalkOnInternalMutations = 2;
 	doNext(meetEvangeline);
+}
+private function InternalMutationsGemsOrMutagen():void {
+	outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
+	InternalMutations0();
 }
 private function InternalMutations0(page:int = 0):void {
 	menu();
@@ -1167,9 +1179,7 @@ private function InternalMutations0(page:int = 0):void {
 	}
 
 	function InternalMutationsText():void {
-		outputText("Placeholder Text on grafting mutation.\n\n");
-		outputText("Placeholder Text on grafting mutation.\n\n");
-		outputText("Placeholder Text on grafting mutation.");
+		
 	}
 
 	function mutationsAssistant(perkName:Array, menuButton:int):void {
@@ -1192,7 +1202,11 @@ private function InternalMutations0(page:int = 0):void {
 
 	function perkChoice(perkTier:PerkType):void {
 		clearOutput();
-		InternalMutationsText();
+		if (player.hasItem(useables.E_ICHOR, 1)) player.destroyItems(useables.E_ICHOR, 1);
+		else player.gems -= 500;
+		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
+		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
+		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burn at first but then spreads to your modified organ as it slowly changes to acquire new inhuman property. <b>The transformation was successful. You now have "+perkTier.name()+"!</b>");
 		player.createPerk(perkTier, 0, 0, 0, 0);
 		cheatTime2(30);
 		doNext(InternalMutations);

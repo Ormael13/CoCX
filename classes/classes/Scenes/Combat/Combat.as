@@ -13761,6 +13761,8 @@ public class Combat extends BaseContent {
 		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards " + monster.a + monster.short + ". It slash target leaving minor wound. ");
 		if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) doFireDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) doIceDamage(damage, true, true);
+		else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) doLightingDamage(damage, true, true);
+		else if (player.weaponFlyingSwords == weaponsflyingswords.E_HALFM) doDarknessDamage(damage, true, true);
 		else doDamage(damage, true, true);
         if (crit) outputText(" <b>*Critical Hit!*</b>");
 		WeaponFlyingSwordsStatusProcs();
