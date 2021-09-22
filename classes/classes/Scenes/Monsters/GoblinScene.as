@@ -15,7 +15,7 @@ import coc.xxc.Story;
 public class GoblinScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public function GoblinScene()
 		{
 			onGameInit(init);
@@ -34,11 +34,11 @@ public class GoblinScene extends BaseContent
 		 Appendages: Their arms and legs look like a human's, although they are scaled down to fit the goblin's smaller frames.
 		 Appearance: Goblins are normally lithe little creatures with somewhat elfin faces.  Their ears are pointed, though their unusual (and very punk rock) haircuts can sometimes hide them.   A goblins age can usually be determined by the size of her bust and hips.  Very young goblins have relatively small chests and hips, though as they age and give birth, their endowments will grow ludicrous sizes.  It is rumored that somewhere there is a goblin Queen who has so many children that she has become immobile.
 
-		 They often dress themselves in tight fitting leather harnesses to display their chests.  A goblin's crotch will ALWAYS be exposed.  They favor piercings in multiple locations, and most have jewelry in their nipples, clit, and both pairs of lips.  
+		 They often dress themselves in tight fitting leather harnesses to display their chests.  A goblin's crotch will ALWAYS be exposed.  They favor piercings in multiple locations, and most have jewelry in their nipples, clit, and both pairs of lips.
 		 Aging: Goblins do not get 'old' like other races, and do not get lines or wrinkles.  They will not die from age alone, though should a goblin be successful enough to immobilize herself, she may die if she does not have family that keeps her fed.
 		 Sex Life: Goblins are ALWAYS horny and ready to copulate.  They have large juicy vulva that ache for penetration, and despite their small size can take many of the larger members out there (in moderation).  They will always seek to have sex with any willing participant, and in those rare cases where they are too small, they will be sure to take as much cum inside them as possible.  Thanks to the wide array of psychology altering chemicals in their body, goblins get off on the act of giving birth.
 		 Life Cycle: The life of a young goblin is likely to end in the jaws of a hellhound, impaled on a minotaur's dick, or drowned tentacle-cum.  Due to the special properties of their wombs (any pregnancy ALWAYS results in a goblin), they are considered worthless to most monsters and demons, and due to their small size, they often end up dying after an encounter with a minotaur or similar creature. Despite the high fatality rate of young goblins, those who survive beyond their first pregnancy will often live a very long time, and will dedicate themselves to birthing their broods (4+ goblins per pregnancy) and perfecting alchemical recipes they can use to 'seduce' more 'fathers'.
-		 History: Goblins were once the technological leaders of what is now known as the Demon-Realm.  When the demons came, they signed a treaty guaranteeing peace and freedom to the goblin people.  The peace was a lie.  That night, a team of demons tunneled into the goblins water supply and began tainting with ever increasing levels of corruption.  Over the next few days, the goblins spent less and less time working, and more and more time fucking.  
+		 History: Goblins were once the technological leaders of what is now known as the Demon-Realm.  When the demons came, they signed a treaty guaranteeing peace and freedom to the goblin people.  The peace was a lie.  That night, a team of demons tunneled into the goblins water supply and began tainting with ever increasing levels of corruption.  Over the next few days, the goblins spent less and less time working, and more and more time fucking.
 
 		 Within a week, their greatest minds were spending all their time eating pussies and developing new aphrodisiacs.  Within a month the goblins were permanently turned on by the strongest of drugs and fucking nonstop in the streets of their once-great city.  A few did not partake of the tainted water, and locked themselves inside their dwellings for as long as they dared.  Some gave in to thirst or loneliness.  Others stayed indoors until the demons walked in and easily assumed control.  They put the few sane goblins left to work building the machines that run their empire to this day.  No one has seen those few survivors since, and most goblins don't waste time thinking about them.
 		 Social Structure: Goblins live in groups of 100-300, typically lead by an elder female with a direct bloodline to every goblin under her.
@@ -56,11 +56,86 @@ public class GoblinScene extends BaseContent
 		//RAEP TEXT 1
 		public function goblinRapesPlayer():void
 		{
-			
 			spriteSelect(24);
 			clearOutput();
+			if (player.isAlraune()){
+				outputText(images.showImage("goblin-loss-female-bimbodildo"));
+				outputText("The goblin saunters up to you, wiggling her hips with a needy, sexual sway. She opens a small pouch and pulls out a tube of lipstick, pausing to apply it to her lips. She caps off the tube and blows you a kiss with a wet smacking sound as she steps up to your lusty form. She leaps in the nectar bath without any hesitation, making her ass and well-rounded tits jiggle as she splashes in.  She reaches up to twist her nipple-studs, grinding the sopping wetness of her crotch up and down your belly.");
+				if (player.isLiliraune()){
+					outputText("Your twin can’t help but comment.\n\n" +
+							"\"<i>What an eager slut, I think we might as well give her exactly what she wants.</i>\"\n\n" +
+							"\"<i>I tend to agree with that. Kind of wish all females were so willing.</i>\"\n\n");
+				}
+				outputText("It is only natural that the next step would be to pull your bulges to press between her soft ass-cheeks. Your nipples already poke upwards, giving the goblin easy targets. She grabs hold of them twisting and tweaking, granting you pain and pleasure.\n\n" +
+						"The goblin says, \"<i>Baby we’re both horny, but fingers and tongues just aren’t enough for me. Lucky for you, I’ve got just the thing</i>");
+				if (player.isLiliraune())outputText("<i>even for a triple girl party</i>");
+				outputText(".\"\n\n" +
+						"She reaches into a tiny bulging pouch on her hip and pulls out a ");
+				if (player.isLiliraune()) outputText("triple ended");
+				else outputText("doubled ended");
+				outputText(" dildo that flops about in her hand as if it was glad to be free. Slapping you on the cheek with it and grinning impishly, she offers," +
+						" \"<i>Why don’t we bury one end in each of our cunts? Just open your mouth and help me get it warmed up for us, OK?</i>.\"\n\n" +
+						"You");
+				if (player.isLiliraune())outputText("<i>even for a triple girl party</i>");
+
+				if (player.isLiliraune()) outputText("both ");
+				outputText("shake your head eagerly and swiftly get to lubing the dildo, your lips swiftly plugged with the bulging sex-toy." +
+						" It 'plumps' up somehow - perhaps in reaction to your spit - forcing your jaw open and pinning your tongue to the bottom of your mouth. A trickle of fluid escapes its tip, nearly gagging you before your throat reflexively drinks it down. What did you just swallow?\n\n" +
+						"\"<i>Yummy yummy isn’t it? I made this myself. It’s made up of the best stuff – it reacts with fluids to puff up and fill ANY hole perfectly. Even better, it has a reservoir stuffed with aphrodisiacs that’ll slowly leak out. Do you feel warm yet hun?</i>\" she asks.\n\n" +
+						"You sputter a bit when she pulls the thick spit-soaked dong out of your ");
+				if (player.isLiliraune()) outputText("mouths");
+				else outputText("mouth");
+				outputText(". The part that was stuffed down your ");
+				if (player.isLiliraune()) outputText("throats");
+				else outputText("throat");
+				outputText(" is swollen up nearly twice as wide as the half in her hand. The goblin slurps the other free half into her throat, taking at least eight inches into her mouth with no sign of discomfort. She pulls it out, watching it begin to puff up and blushing, turning her slightly-dimpled cheeks purple.  The dildo slaps your twat cruelly as she drops part of it onto your mons. With a few expert motions, she shoves it inside you, stuffing you ");
+				if (player.isLiliraune()) outputText("both");
+				outputText(" full of artificial cock. The goblin giggles again and slaps the outer half of the dong, making it flop about and sending vibrations directly to your ");
+				if (player.isLiliraune()) outputText("communal ");
+				outputText("core.\n\n" +
+						"The green slut stands up, positioning herself in front of you as the warm wetness of her readiness splashes in your nectar when she works the free end of the ");
+				if (player.isLiliraune()) outputText("triple");
+				else outputText("double");
+				outputText("-dong into her own aching twat. She slides its length in, easily taking the remaining length up her juicy cunt. Your ");
+				if (player.isLiliraune()) outputText("two");
+				outputText("eager nectar drooling muff");
+				if (player.isLiliraune()) outputText("s");
+				outputText(" squelches against hers wetly as they meet in the middle. The goblin twists, making the toy quake and transfer all the nice vibrations so the");
+				if (player.isLiliraune()) outputText("three");
+				else outputText("both");
+				outputText(" can enjoy it.\n\n" +
+						"By now your passage");
+				if (player.isLiliraune()) outputText("s");
+				outputText(" feel");
+				if (player.isLiliraune()) outputText("s");
+				outputText(" as stuffed as ");
+				if (player.isLiliraune()) outputText("they");
+				else outputText("it");
+				outputText(" ever ");
+				if (player.isLiliraune()) outputText("have");
+				else outputText("has");
+				outputText(" been, crammed totally full of the squishy expanded ");
+				if (player.isLiliraune()) outputText("triple");
+				else outputText("double");
+				outputText("-dong. Every motion the tiny slut makes is amplified directly into the fuck-stick plugging your ");
+				if (player.isLiliraune()) outputText("two");
+				outputText(" slavering pussy. Judging by how wonderful it feels rubbing and twisting against your sensitive walls, the aphrodisiac is definitely having an effect. You moan and spread your legs wide, trying to insert more in. The goblin wiggles against you harder, throwing her head back and running her fingers through her purple hair, shouting out encouragement all the while, " +
+						"\"<i>Mmmm, you like this, don’t you slut</i>");
+				if (player.isLiliraune()) outputText("<i>s</i>");
+				outputText("<i>? Doesn’t my dildo just fill you up perfectly? Just don’t cum before me hun, I want to feel release with you.</i>.\"\n\n" +
+						"You lose yourself to the sweet sensations of the bloated dildo that joins your simmering groins. Rocking back and forth, scissoring relentlessly against your green mistress, you moan, drowning yourself in a sea of drug-enhanced pleasure. The goblin cries out and thrashes in sudden orgasm.  The juices of her orgasm react with the toy, stretching you almost painfully and pushing you past the point of no return. Your bodies thrash together, wracked by ");
+				if (player.isLiliraune()) outputText("a pair of");
+				outputText(" orgasms that leave you smeared with a mixture of sweat, nectar, and girl-cum.\n\n" +
+						"Later, the wet goblin audibly pops off the dildo. She stumbles, bow-legged, before teasing your pleasure-buzzer and yanking her toy free. Your lips gape apart momentarily.\n\n" +
+						"She plants a kiss on your lips and mutters, \"<i>Can’t forget this.</i>\" as she puts her dildo away. You find yourself smiling, watching her strap-covered form jiggle pleasantly as she bounds away from you into the distance. Your eyelids drift close and your lips go numb as her drugged lipstick puts you out.");
+				player.slimeFeed();
+				player.sexReward("default","Vaginal",true, false);
+				player.sexReward("default","Vaginal",true, false);
+				cleanupAfterCombat();
+				return;
+			}
 			if (doSFWloss()) return;
-			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				//[Female Bimbo Loss Against Goblin]
 				if (player.hasVagina()) {
 					outputText(images.showImage("goblin-loss-female-bimbodildo"));
@@ -400,7 +475,7 @@ public class GoblinScene extends BaseContent
 
 			outputText("The mouthy bitch apparently forgot who lost the fight, it seems, so you decide to remind her. Using her legs like a lever, you twist her around on your dick, spinning her 180 degrees, leaving her lying on her tits, her ass jutting up as you slam your cock the rest of the way into the olive-skinned nympho. She grunts and starts to say something else, but you push forward and grind her face into the mud before she can get it out, her mouth filling with her own lubrication-soaked dirt with an ecstatic gurgle. Her legs fight against your grip, jerking this way and that, her slick feet nearly slipping out of your hands. You grit your teeth and begin screwing her slavering twat as hard as you can, eager to tame the thrashing cunt of a girl. Slamming her sweat-soaked thighs against your " + hipDescript() + ", your thrusts become almost savage, bringing a deep flush to her backside as you slap her snatch against your groin, the secret condom working perfectly, as thin as skin on your " + cockDescript(x) + ".\n\n");
 
-			outputText("As you feel the tickling heat of your orgasm worming its way into your veins, you lean down, putting your weight into every uterus-filling movement while the goblin sputters and screeches her approval, toes curling in your hands. You release her legs to grab the goblin slut's thin waist with both hands and slam against her jutting ass one last time before liquid heat pours from your " + cockDescript(x) + " in thick streams of potent seed. At the cresting grunt, she wraps her legs around your " + buttDescript() + ", locking her ankles and using her sore legs to pull your gushing prick as deeply into her fertile loins as possible and keep you there. Rocking against her, you rub her head and breasts through the mud one last time as your loads fill her tummy with the ejaculate she so craved, her narrow belly bulging at the weight of your jizz. You take a moment longer to enjoy the clenching, pulsing depths of the cum dumpster before sliding out an inch and taking hold of the ");
+			outputText("As you feel the tickling heat of your orgasm worming its way into your veins, you lean down, putting your weight into every uterus-filling movement while the goblin sputters and screeches her approval, toes curling in your hands. You release her legs to grab the goblin slut's thin waist with both hands and slam against her jutting ass one last time before liquid heat pours from your " + cockDescript(x) + " in thick streams of potent seed. At the cresting grunt, she wraps her legs around your [butt], locking her ankles and using her sore legs to pull your gushing prick as deeply into her fertile loins as possible and keep you there. Rocking against her, you rub her head and breasts through the mud one last time as your loads fill her tummy with the ejaculate she so craved, her narrow belly bulging at the weight of your jizz. You take a moment longer to enjoy the clenching, pulsing depths of the cum dumpster before sliding out an inch and taking hold of the ");
 			if (mode == 0) {
 				outputText("loose strand you left in your secret cock-shawl. Pulling carefully, you unravel the delicate outer layer, leaving only the sticky strands covering the inner, juice-filled sheath. With a short bark of laughter, you pull out of the whorish girl, the spider silk condom sealing as your tip slides out. ");
 			}
@@ -478,7 +553,7 @@ public class GoblinScene extends BaseContent
 
 			//[if (femininity > 50)
 			if (player.femininity > 50) outputText("\n\n\"<i>W-what?  You- I haven't got any, you stupid bitch!  This your idea of fun, jackass?  Kicking people when they're down?!</i>\"");
-			//[if (femininity < 51) 
+			//[if (femininity < 51)
 			else outputText("\n\n\"<i>W-what?  You- I haven't got any, you stupid bastard!  This your idea of fun, jackass?  Kicking people when they're down?!</i>\"");
 			outputText("  She lashes out with her feet, but there's no strength behind it, and her pout deepens as tears begin to gather at the corners of her eyes.");
 

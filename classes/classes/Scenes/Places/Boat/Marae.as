@@ -37,7 +37,7 @@ public class Marae extends Monster
 			}
 		}
 		public function maraePollenCloud():void {
-			outputText("marae giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
+			outputText("Marae giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
 			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"\n\n");
 			outputText("There is no way you will be able to not breathe it in and you feel your desire rise as the insidious aphrodisiac does its dirty work.\n\n");
 			createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);

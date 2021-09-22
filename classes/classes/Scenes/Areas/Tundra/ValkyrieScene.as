@@ -23,8 +23,8 @@ package classes.Scenes.Areas.Tundra
 			else {
 				outputText("With one swift, contemptuous kick to the head, she knocks you right out.");
 				outputText("  You are utterly freezing after such long exposure to the cold.");
-				if (player.str > 50) player.addCurse("str",1);
-				player.addCurse("str",1);
+				if (player.str > 50) player.addCurse("str",1,2);
+				player.addCurse("str",1,2);
 				if (player.spe > 50) dynStats("spe", -1);
 				dynStats("spe", -1);
 				cleanupAfterCombat();

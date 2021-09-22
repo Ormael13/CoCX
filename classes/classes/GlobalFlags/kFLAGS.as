@@ -872,7 +872,7 @@ public static const ESSRAYLE_ESCAPED_DUNGEON:int                                
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //
 public static const ESSY_MET_IN_DUNGEON:int                                         =  866; //
-public static const DOUBLE_ATTACK_STYLE:int                                         =  867; // DOUBLE_ATTACK_STYLE" Description="0 = always, 1 = dynamic, 2 = single
+public static const DOUBLE_ATTACK_STYLE:int                                         =  867; // DOUBLE_ATTACK_STYLE" Description="prefered number of attacks is (X+1)
 public static const SPELLS_CAST:int                                                 =  868; //
 public static const MILK_NAME:int                                                   =  869; //
 public static const MILK_SIZE:int                                                   =  870; //
@@ -1307,9 +1307,9 @@ public static const UNKNOWN_FLAG_NUMBER_01298:int                               
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
 public static const KAIBA_SHELFS:int                                   				= 1300;
 public static const MARAE_ISLAND:int                                   				= 1301;
-public static const UNKNOWN_FLAG_NUMBER_01302:int                                   = 1302;
-public static const UNKNOWN_FLAG_NUMBER_01303:int                                   = 1303;
-public static const UNKNOWN_FLAG_NUMBER_01304:int                                   = 1304;
+public static const DISCOVERED_BEE_HIVE_DUNGEON:int                                 = 1302;
+public static const TIFA_FOLLOWER:int                                   			= 1303;
+public static const TIFA_AFFECTION:int                                   			= 1304;
 public static const UNKNOWN_FLAG_NUMBER_01305:int                                   = 1305;
 public static const UNKNOWN_FLAG_NUMBER_01306:int                                   = 1306;
 public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
@@ -1935,7 +1935,7 @@ public static const UNKNOWN_FLAG_NUMBER_01926:int                               
 public static const UNKNOWN_FLAG_NUMBER_01927:int                                   = 1927;
 public static const UNKNOWN_FLAG_NUMBER_01928:int                                   = 1928;
 public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
-public static const UNKNOWN_FLAG_NUMBER_01930:int                                   = 1930;
+public static const UNKNOWN_FLAG_NUMBER_01930:int                                   			= 1930;
 public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
 public static const UNKNOWN_FLAG_NUMBER_01932:int                                   = 1932;
 public static const UNKNOWN_FLAG_NUMBER_01933:int                                   = 1933;
@@ -1979,15 +1979,15 @@ public static const UNKNOWN_FLAG_NUMBER_01970:int                               
 public static const UNKNOWN_FLAG_NUMBER_01971:int                                   = 1971;
 public static const UNKNOWN_FLAG_NUMBER_01972:int                                   = 1972;
 public static const UNKNOWN_FLAG_NUMBER_01973:int                                   = 1973;
-public static const UNKNOWN_FLAG_NUMBER_01974:int                                   = 1974;
+public static const TRUE_DEMONS_KILLED:int                                   		= 1974;
 public static const WRATH_GIANT_SLAYER_GOBLIN_MECH:int                              = 1975;
-public static const UNKNOWN_FLAG_NUMBER_01976:int                                   = 1976;
+public static const AUTO_FLIGHT:int                                   				= 1976;
 public static const UNKNOWN_FLAG_NUMBER_01977:int                                   = 1977;
 public static const UNKNOWN_FLAG_NUMBER_01978:int                                   = 1978;
-public static const UNKNOWN_FLAG_NUMBER_01979:int                                   = 1979;
-public static const UNKNOWN_FLAG_NUMBER_01980:int                                   = 1980;
-public static const UNKNOWN_FLAG_NUMBER_01981:int                                   = 1981;
-public static const UNKNOWN_FLAG_NUMBER_01982:int                                   = 1982;
+public static const AKALI_FOLLOWER:int                                   			= 1979;
+public static const KAI_SA_FOLLOWER:int                                   			= 1980;
+public static const EVELYNN_FOLLOWER:int                                   			= 1981;
+public static const AHRI_FOLLOWER:int                                   			= 1982;
 public static const UNKNOWN_FLAG_NUMBER_01983:int                                   = 1983;
 public static const UNKNOWN_FLAG_NUMBER_01984:int                                   = 1984;
 public static const UNKNOWN_FLAG_NUMBER_01985:int                                   = 1985;
@@ -2331,14 +2331,14 @@ public static const CAMP_UPGRADES_NUMBER_02322:int                             =
 public static const CAMP_UPGRADES_NUMBER_02323:int                             = 2323;		//Not Yet Used Flag
 public static const CAMP_UPGRADES_NUMBER_02324:int                             = 2324;		//Not Yet Used Flag
 public static const CAMP_UPGRADES_NUMBER_02325:int                             = 2325;		//Not Yet Used Flag
-public static const EVANGELINE_AFFECTION:int                                   		= 2326;
-public static const EVANGELINE_FOLLOWER:int  										= 2327;
-public static const EVANGELINE_LVL_UP:int                    	            	    = 2328;
-public static const EVANGELINE_GEMS_PURSE:int                           	        = 2329;
-public static const EVANGELINE_SPELLS_CASTED:int                        	        = 2330;
-public static const EVANGELINE_TALKS:int                            	 	        = 2331;
-public static const EVANGELINE_WENT_OUT_FOR_THE_ITEMS:int                 	        = 2332;
-public static const EVANGELINE_DEFEATS_COUNTER:int                                  = 2333;
+public static const EVANGELINE_LVL_UP:int                                   		= 2326;
+public static const EVANGELINE_DEFEATS_COUNTER:int  								= 2327;
+public static const EVANGELINE_SPELLS_CASTED:int                    	            = 2328;
+public static const EVANGELINE_WENT_OUT_FOR_THE_ITEMS:int                           = 2329;
+public static const EVANGELINE_02330:int                        	       = 2330;			//Not Yet Used Flag
+public static const EVANGELINE_02331:int                                   = 2331;			//Not Yet Used Flag
+public static const EVANGELINE_02332:int                 	               = 2332;			//Not Yet Used Flag
+public static const EVANGELINE_02333:int                                   = 2333;			//Not Yet Used Flag
 public static const EVANGELINE_02334:int                                   = 2334;			//Not Yet Used Flag
 public static const EVANGELINE_02335:int                                   = 2335;			//Not Yet Used Flag
 public static const EVANGELINE_02336:int                                   = 2336;			//Not Yet Used Flag
@@ -2734,8 +2734,8 @@ public static const CODEX_ENTRY_2:int                                   			= 272
 public static const CODEX_ENTRY_3:int                                  			 	= 2726;//squirrel
 public static const CODEX_ENTRY_4:int                                   			= 2727;//cave wyrm
 public static const CODEX_ENTRY_TROLLS:int                                   		= 2728;
-public static const CODEX_ENTRY_02729:int                                   		= 2729;
-public static const CODEX_ENTRY_02730:int                                   		= 2730;
+public static const CODEX_ENTRY_02729:int                                   		= 2729;//dark elfs
+public static const CODEX_ENTRY_02730:int                                   		= 2730;//light elfs
 public static const UNKNOWN_FLAG_NUMBER_02731:int                                   = 2731;
 public static const UNKNOWN_FLAG_NUMBER_02732:int                                   = 2732;
 public static const UNKNOWN_FLAG_NUMBER_02733:int                                   = 2733;
@@ -2747,7 +2747,7 @@ public static const PERMANENT_STEEL_GOLEMS_BAG:int                              
 public static const IMPROVED_PERMANENT_STEEL_GOLEMS_BAG:int                         = 2739;
 public static const UNKNOWN_FLAG_NUMBER_02740:int                                   = 2740;
 public static const WEAPON_DISPLAY_FLAG:int                                   	    = 2741;
-public static const UNKNOWN_FLAG_NUMBER_02742:int                                   = 2742;
+public static const DILAPIDATED_SHRINE_UNLOCKED:int                                 = 2742;
 public static const ZENJI_PERSPECTIVE_ON_PLAYER:int                                 = 2743;
 public static const ZENJI_PROGRESS:int                                   			= 2744;
 public static const ZENJI_DESTROYING_CORRUPTED_GLADES:int                           = 2745;
@@ -2967,7 +2967,7 @@ public static const UNKNOWN_FLAG_NUMBER_02958:int                               
 public static const UNKNOWN_FLAG_NUMBER_02959:int                                   = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
-public static const UNKNOWN_FLAG_NUMBER_02962:int                                   = 2962;
+public static const NEWPERKSDISPLAY:int                                   			= 2962;//Perks Display cleanup
 public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
 public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}
-}
+}

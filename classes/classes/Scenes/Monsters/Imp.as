@@ -11,16 +11,14 @@ import classes.internals.*;
 
 public class Imp extends Monster
 	{
-		public var Evangeline:EvangelineFollower = new EvangelineFollower();
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
 			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
 				SceneLib.forest.kitsuneScene.winKitsuneImpFight();
 			}
-			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
-				Evangeline.winEvangelineImpFight();
+			else if (EvangelineFollower.EvangelineAffectionMeter == 1) {
+				SceneLib.evangelineFollower.winEvangelineImpFight();
 			}
 			else {
 				SceneLib.impScene.impVictory();
@@ -37,15 +35,15 @@ public class Imp extends Monster
 				player.lust = player.maxLust();
 				doNext(SceneLib.impScene.impRapesYou);
 			}
-			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
-				flags[kFLAGS.EVANGELINE_AFFECTION] = 2;
+			else if (EvangelineFollower.EvangelineAffectionMeter == 1) {
+				EvangelineFollower.EvangelineAffectionMeter = 2;
 				SceneLib.impScene.impRapesYou();
 			}
 			else {
 				SceneLib.impScene.impRapesYou();
 			}
 		}
-		
+
 		protected function lustMagicAttack():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
 			player.dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
@@ -78,7 +76,7 @@ public class Imp extends Monster
 					case VaginaClass.WETNESS_SLAVERING:
 						outputText("Your " + allVaginaDescript() + " instantly soak" + (player.vaginas.length > 1 ? "" : "s") + " your groin.");
 					default: //Dry vaginas are unaffected
-						
+
 				}
 			}
 			outputText("\n");
@@ -86,7 +84,7 @@ public class Imp extends Monster
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
-		
+
 		protected function lustMagicAttack1():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
 			player.dynStats("lus", player.lib / 20 + player.cor / 20 + 5);
@@ -119,7 +117,7 @@ public class Imp extends Monster
 					case VaginaClass.WETNESS_SLAVERING:
 						outputText("Your " + allVaginaDescript() + " instantly soak" + (player.vaginas.length > 1 ? "" : "s") + " your groin.");
 					default: //Dry vaginas are unaffected
-						
+
 				}
 			}
 			outputText("\n");
@@ -173,9 +171,13 @@ public class Imp extends Monster
 					add(consumables.SUCMILK,3).
 					add(consumables.INCUBID,3).
 					add(consumables.IMPFOOD,4);
-			this.special1 = lustMagicAttack1;
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{call: lustMagicAttack1, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]}
+			];
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

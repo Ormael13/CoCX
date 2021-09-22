@@ -24,7 +24,7 @@ package classes.Items.Consumables
 		override public function useItem():Boolean {
 			clearOutput();
 			outputText("You toss a bangball mk 1 at your foe");
-			if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("s");
+			if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("s");
 			outputText("!  It flies straight and true, almost as if it has a mind of its own as it arcs towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 160 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 160
 				outputText("Somehow " + game.monster.a + game.monster.short + "'");
@@ -34,7 +34,7 @@ package classes.Items.Consumables
 			else { //Not dodged
 				var damage:Number = 280 + Utils.rand(141);
 				if (game.player.level >= 6) damage *= 2;
-				if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
+				if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 				outputText(game.monster.capitalA + game.monster.short + " is hit with the bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				game.monster.HP -= damage;
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;

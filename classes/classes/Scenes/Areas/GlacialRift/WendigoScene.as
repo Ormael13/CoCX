@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift  
+package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -13,11 +13,11 @@ package classes.Scenes.Areas.GlacialRift
 
 	public class WendigoScene extends BaseContent
 	{
-		
-		public function WendigoScene() 
+
+		public function WendigoScene()
 		{
 		}
-		
+
 		public function encounterWendigo():void {
 			clearOutput();
 			outputText("As you explore the rift you hear an unsettling scream in the far distance. Unsure about what that was you keep going along your current path until the scream happens again somewhat closer now. Now persuaded that something is stalking you, you look around for your opponent.\n\n");
@@ -58,7 +58,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("You head back to camp in due haste, not looking back for who is crying out loud for help.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function loseToWendigo():void {
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger)) player.createStatusEffect(StatusEffects.WendigoPsychosis,168,0,0,0);
@@ -86,7 +86,7 @@ package classes.Scenes.Areas.GlacialRift
 			}
 			cleanupAfterCombat();
 		}
-		
+
 		public function winAgainstWendigo():void {
 			clearOutput();
 			outputText("The wendigo falls to the ground too weak to keep on floating.\n\n");
@@ -94,7 +94,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Unable to find the monster anymore, you decide to head back to camp still feeling the unsettling sensation of two hungry eyes fixating you from the depths of the blizzard until the magic of the realm spirits you away.\n\n");
 			cleanupAfterCombat();
 		}
-		
+
 		public function becomeWendigo():void {
 			clearOutput();
 			outputText("Hungry… so damn hungry! You have been "+((flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()) ? "sexually ":"")+"starved for days now!\n\n");
@@ -110,31 +110,31 @@ package classes.Scenes.Areas.GlacialRift
 			player.hairColor = "silver-white";
 			player.coatColor = "snow white";
 			if (player.faceType == Face.ANIMAL_TOOTHS) {
-				CoC.instance.mutations.setFaceType(Face.DEER);
-				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
-				else if (player.hasPlainSkinOnly()) player.skin.growFur({color: player.coatColor}, Skin.COVERAGE_LOW);
+				CoC.instance.transformations.FaceDeer.applyEffect(false);
+				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
+				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.coatColor}).applyEffect(false);
 			}
 			else {
-				CoC.instance.mutations.setFaceType(Face.ANIMAL_TOOTHS);
-				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
+        CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);
+				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
 			}
-			if (player.tailType != Tail.WENDIGO) CoC.instance.mutations.setTailType(Tail.WENDIGO);
-			if (player.tailCount != 1) player.tailCount = 1;
-			if (player.lowerBody != LowerBody.WENDIGO) CoC.instance.mutations.setLowerBody(LowerBody.WENDIGO);
-			if (player.legCount != 2) player.legCount = 2;
-			if (player.arms.type != Arms.WENDIGO) CoC.instance.mutations.setArmType(Arms.WENDIGO);
-			if (player.eyes.type != Eyes.DEAD_EYES) CoC.instance.mutations.setEyeTypeAndColor(Eyes.DEAD_EYES, "spectral blue");
-			if (player.tongue.type != Tongue.RAVENOUS_TONGUE) CoC.instance.mutations.setTongueType(Tongue.RAVENOUS_TONGUE);
-			if (player.horns.type != Horns.ANTLERS) CoC.instance.mutations.setHornType(Horns.ANTLERS, 30);
-			if (player.ears.type != Ears.DEER) CoC.instance.mutations.setEarType(Ears.DEER);
-			if (player.wings.type != Wings.LEVITATION) CoC.instance.mutations.setWingType(Wings.LEVITATION, "levitation");
-			if (player.rearBody.type != RearBody.FUR_COAT) CoC.instance.mutations.setRearBody(RearBody.FUR_COAT);
+			if (player.tailType != Tail.WENDIGO) CoC.instance.transformations.TailWendigo.applyEffect(false);
+			if (player.lowerBody != LowerBody.WENDIGO) transformations.LowerBodyWendigo.applyEffect(false);
+			if (player.arms.type != Arms.WENDIGO) CoC.instance.transformations.ArmsWendigo.applyEffect(false);
+			if (CoC.instance.transformations.EyesDead.isPossible()) {
+				CoC.instance.transformations.EyesDead.applyEffect(false);
+				CoC.instance.transformations.EyesChangeColor(["spectral blue"]).applyEffect(false);
+			}
+			if (player.tongue.type != Tongue.RAVENOUS_TONGUE) CoC.instance.transformations.TongueRavenous.applyEffect(false);
+			if (player.horns.type != Horns.ANTLERS) CoC.instance.transformations.HornsAntlersWendigo.applyEffect(false);
+			if (player.ears.type != Ears.DEER) CoC.instance.transformations.EarsDeer.applyEffect(false);
+			if (player.wings.type != Wings.LEVITATION) CoC.instance.transformations.WingsLevitation.applyEffect(false);;
+			if (player.rearBody.type != RearBody.FUR_COAT) CoC.instance.transformations.RearBodyFurCoat.applyEffect(false);
 			if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE) player.vaginaType(VaginaClass.EQUINE);
 			if (player.hasVagina() && player.biggestTitSize() < 8) player.breastRows[0].breastRating += 8;
 			if (player.hasCock() && player.horseCocks() < player.cocks.length) player.addHorseCock();
 			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-				player.skin.base.pattern = Skin.PATTERN_NONE;
-				player.skin.base.adj = "";
+				CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 			}
 			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 			player.createPerk(PerkLib.UnnaturalStrength, 0, 0, 0, 0);
@@ -143,7 +143,7 @@ package classes.Scenes.Areas.GlacialRift
 			player.hunger = 80;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 	}
-	
+
 }

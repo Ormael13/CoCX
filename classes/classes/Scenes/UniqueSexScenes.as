@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes 
+package classes.Scenes
 {
 	import classes.*;
 	import classes.BodyParts.Arms;
@@ -12,11 +12,11 @@ package classes.Scenes
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
 	import classes.Scenes.NPCs.Anemone;
-	
+
 	public class UniqueSexScenes extends BaseContent
 	{
-		
-		public function UniqueSexScenes() 
+
+		public function UniqueSexScenes()
 		{
 		}
 
@@ -166,17 +166,23 @@ package classes.Scenes
 
 		public function AlrauneDungeonBadEnd():void {
 			clearOutput();
-			outputText("Unsure of what to do with you, your captors decide to keep you home as a decorative, if not perverted plant. While you have, for security reasons, been limited to the boundary of a single room to which you have been magically forced to take root, your life is not any less interesting than it was prior to your defeat as a good amount of people come in and out daily to harvest your aphrodisiac nectar, get seeded, pollenise you or a mix of all three. You were quickly repurposed as a lusty if efficient dungeon guardian, always ready to rape anything stupid or horny enough to come within reach of your vines.");
-			if(player.isLiliraune()) outputText(" When you’re not busy raping intruders or using the dungeons many denizens as your seedbed or cumpumps you spend the days of your quasi-infinite lifespan having sex with your twin in the middle of your pitcher, ever ready to invite whoever enters the room next for a threesome.");
+			outputText("Unsure of what to do with you, your captors decide to keep you home as a decorative, if not, a perverted plant." +
+					" While you have, for security reasons, been limited to the boundary of a single room to which you have been magically forced to take root," +
+					" your life is not any less interesting than it was prior to your defeat as a good amount of people come in and out daily to harvest your aphrodisiac nectar, get seeded, pollenize you or a mix of all three." +
+					" You were quickly repurposed as a lusty if efficient dungeon guardian, always ready to rape anything stupid or horny enough to come within reach of your vines.");
+			if(player.isLiliraune()) outputText(" When you’re not busy raping intruders or using the dungeons many denizens as your seedbed or cum dumps you spend the days of your quasi-infinite lifespan having sex with your twin in the middle of your pitcher, ever ready to invite whoever enters the room next for a threesome.");
 			outputText(" They kept feeding you nutrients and you gave them sex and nectar in return. The perfect deal right?\n\n" +
 					"As the days pass your vines slowly began to grow and exceed the range of the walls of your confinement room, " +
 					"turning what used to be a dungeon into a garden where your vines have become a network of tendrils, always seeking a pussy or ass to fuck. You eventually seize the dungeon in full, " +
 					"forcing the original denizens of the place to build new quarters away from your influence as your canopy of rape-happy vines stretch ever further. " +
 					"At first, they tried to prune your growth but eventually perhaps due to negligence you slowly got past the point at which you could be contained, your many vines capturing people alive to add ever more vessels to serve as your personal seedbeds. Without any further opposition, this place swiftly turned into a nursery for your many seedlings. " +
 					"Your canopy of vines spread so far it's sometimes difficult for you to know just how many people you are fucking at the same time. " +
-					"Your mind has,over time, become accustomed to this gigantic network of constant fucking and orgasms, allowing you to stay clear-headed at all times as you copulate with your many entwined victims.\n\n" +
-					"One day some human woman in armor with a magic sword managed to get past your many daughters and enter your chamber, claiming that she is the champion of some town called Ingnam. (why does that feel familiar? You should remember this…) While the name of the place might’ve had a relevance to you in the past you have been here for so long that you have since forgotten. " +
-					"She says she is here to defeat the ‘Verdant Queen’. Some title the locals have given you perhaps?\n\n" +
+					"Your mind has, over time, become accustomed to this gigantic network of constant fucking and orgasms, allowing you to stay clear-headed at all times as you copulate with your many entwined victims.\n\n" +
+
+					"One day some human woman in armor with a magic sword managed to get past your many daughters and enter your chamber, claiming that she is the champion of some town called Ingnam... Why does that feel familiar? " +
+					"You should remember this… While the name of the place might’ve had some relevance to you in the past, you have been here for so long that you have since forgotten. She says she is here to defeat the ‘Verdant Queen’." +
+					" A title the locals have given you perhaps?\n\n" +
+
 					"You care little for her speech however as you grab her with several of the vines that cover the place,");
 			if(player.isLiliraune()) outputText(" you and your twin");
 			outputText(" licking your lips in delight. It has been many years since one made it this far.\n\n");
@@ -184,7 +190,7 @@ package classes.Scenes
 					"\"<i>How about you tell us your name before we fill you full of stamens and make you forget it? It just so happens to be very lonely here and we definitely will never let you go. You’re way too convenient for that.</i>\"\n\n" +
 					"The both of you giggles");
 			else outputText(" You giggle");
-			outputText(" as you reel in the girl who fight backs tooth and nail to get free, hacking and slashing until the overpowering scent of your pollen and ripe nectar puts an end to her resistance, " +
+			outputText(" as you reel in the girl who fight back, tooth and nail to get free, hacking and slashing until the overpowering scent of your pollen and ripe nectar puts an end to her resistance, " +
 					"your vines reeling her into your pitcher to ready her flower for pollination. " +
 					"Nowadays the only things you ever get to pollinate are demons or your own daughters and the flower of a pure human is a delicacy. " +
 					"You could say that for her this is…");
@@ -278,32 +284,27 @@ package classes.Scenes
 
 		public function strangleAndRapeScene():void {
 			clearOutput();
-			outputText("While you were deliberating what to do you suddenly catch sight of " + monster.a + monster.short + " attempting to flee. You swiftly wrap your tail around its neck like a noose and forcefully pull " + monster.pronoun2 + " back to you.\n\n");
-			outputText("\"<i>Where do you think you’re going now? You think I will just let you go after that? You’re dead wrong!?</i>\"\n\n");
-			outputText("You begin to choke " + monster.pronoun2 + " until " + monster.pronoun1 + " gasp pitifully for air and then finally you get an idea. You forcefully shove " + monster.a + monster.short + " on " + monster.pronoun3 + " back exposing your ");
+			outputText("As you wonder what to do, you suddenly catch sight of " + monster.a + monster.short + " attempting to flee. You swiftly wrap your tail around " + monster.pronoun2 + " neck like a noose and forcefully pull " + monster.pronoun2 + " back to you.\n\n");
+			outputText("You ask where does " + monster.pronoun1 + " think  " + monster.pronoun1 + "'s going, as you still have to claim your prize.\n\n");
+			outputText("You can see some fear blossom in " + monster.pronoun3 + " eyes as you begin to choke " + monster.pronoun2 + " until " + monster.pronoun1 + " begins gasping pitifully for air, and then you have an idea. You forcefully shove " + monster.a + monster.short + " on " + monster.pronoun3 + " back and expose your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.hasVagina()) outputText("[pussy]");
 			outputText(" with clear intent.\n\n");
-			outputText("\"<i>Well, what are you waiting for dumbass? ");
-			if (player.hasCock()) outputText("Suck it! ");
-			if (player.hasVagina()) outputText("Eat me out! ");
-			outputText("You want me to tighten it?");
-			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) outputText(" I can also give you a nice neck burn too and I won’t hesitate to do it after what you’ve done.");
-			outputText("</i>\"\n\n");
-			outputText("" + monster.capitalA + monster.short + " fully realizes the predicament of " + monster.pronoun3 + " situation as you begin tightening the noose and panicked, " + monster.pronoun1 + " begins to lick your");
-			if (player.hasCock()) outputText(" [cock] in an effort to draw it erect as fast as possible");
-			if (player.hasVagina()) outputText(" your vaginal lips");
-			outputText(" in an effort to douse your wrath. That’s way to fast for your tastes though and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.mouseScore() >= 8) ? " You get a thrill out of this domineering position which considering your size is actually unsurprising. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot its ");
-			if (monster.hasCock()) outputText("" + monster.cockDescript() + " hardening and twitching");
+			outputText("When " + monster.a + monster.short + " does nothing but stare for a few seconds, you ask what " + monster.pronoun1 + "'s waiting for, lightly tightening your tail around " + monster.pronoun3 + " neck as a warning to start working or else.\n\n");
+			outputText("" + monster.capitalA + monster.short + " finally seems to realize " + monster.pronoun3 + " predicament and panics, immediately moving to lick your");
+			if (player.hasCock()) outputText(" [cock]");
+			if (player.hasVagina()) outputText(" vaginal lips");
+			outputText(" in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.mouseScore() >= 8) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
+			if (monster.hasCock()) outputText(" " + monster.cockDescript() + " hardening and twitching");
 			if (monster.hasVagina()) {
-				if (monster.hasCock()) outputText(" and its");
+				if (monster.hasCock()) outputText(" and " + monster.pronoun3);
 				outputText("" + monster.vaginaDescript() + " wetting the ground with girl juices");
 			}
-			outputText(" this sicko is getting off from the abuse. Well, guess you won’t need to worry about its need then as you shove your");
+			outputText("[pg]It seems your victim is getting off from the abuse. Well, it seems you won’t need to worry about " + monster.pronoun2 + " needs, you figure as you shove your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.hasVagina()) outputText("[pussy]");
-			outputText("harder into " + monster.pronoun3 + " face!\n\n");
-			outputText("Only as you reach your third orgasm do you finally release your abused victim from your noose. You can still see your tail imprints on its neck but hell if you care " + monster.pronoun1 + " had it coming. You head home highly satisfied.\n\n");
+			outputText(" harder into " + monster.pronoun3 + " face!\n\n");
+			outputText("Only as you reach your third orgasm do you finally release your victim, ordering " + monster.pronoun2 + " to scram or else. As " + monster.pronoun1 + " does just that, you can still see your tail imprints on " + monster.pronoun3 + " neck, but you don't particularly care by this point. You head home quite satisfied.\n\n");
 			player.sexReward("saliva");
 			statScreenRefresh();
 			cleanupAfterCombat();

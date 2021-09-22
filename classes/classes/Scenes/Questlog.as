@@ -43,6 +43,11 @@ public class Questlog extends BaseContent
 			if (flags[kFLAGS.CLEARED_HEL_TOWER] == 2) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkPhoenixTowerClear()) outputText("Completed");
 			else outputText("Not Started");
+			outputText("\n<b>Victory, Sweet like honey:</b> ");
+			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] == 3) outputText("Completed (Reward taken)");
+			else if (SceneLib.dungeons.checkBeeHiveClear()) outputText("Completed");
+			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0 && flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 3) outputText("In Progress");
+			else outputText("Not Started");
 			outputText("\n<b>Tiger stalking the Dragon:</b> ");
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 6) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkHiddenCaveClear()) outputText("Completed");
@@ -71,7 +76,13 @@ public class Questlog extends BaseContent
 				else outputText("Completed");
 			}
 			else outputText("Not Started/In Progress");
-			outputText("\n<i><b>3rd Floor:</b> Soon</i>");
+			outputText("\n<b>3rd Floor:</b> ");
+			if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear()) {
+				if (player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 2) outputText("Completed (Reward taken)");
+				else outputText("Completed");
+			}
+			else outputText("Not Started/In Progress");
+			outputText("\n<i><b>4th Floor:</b> Soon</i>");
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
@@ -123,9 +134,12 @@ public class Questlog extends BaseContent
 			//button 4 - ?Demon Secret Lab?
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
-			//button 7 - ???
+			if (SceneLib.dungeons.checkBeeHiveClear() && flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 3) addButton(7, "Bee Hive", takeRewardForBeeHive);
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor reward");
-			if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) < 2) addButton(8, "River Dungeon", takeRewardForRiverDungeon2ndFloor).hint("2nd floor reward");
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) {
+				if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 2) addButton(8, "River Dungeon", takeRewardForRiverDungeon3rdFloor).hint("3rd floor reward");
+				if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 1) addButton(8, "River Dungeon", takeRewardForRiverDungeon2ndFloor).hint("2nd floor reward");
+			}
 			//3rd floor
 			//4th floor
 			if (SceneLib.dungeons.checkEbonLabyrinthClear() && flags[kFLAGS.EBON_LABYRINTH] < 3) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth50th).hint("For first 50th rooms");
@@ -191,6 +205,16 @@ public class Questlog extends BaseContent
 			flags[kFLAGS.CLEARED_HEL_TOWER] = 2;
 			doNext(accessQuestlogMainMenu);
 		}
+		public function takeRewardForBeeHive():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 2 perk points and 10 stat points</b>");
+			player.perkPoints = player.perkPoints + 2;
+			player.statPoints = player.statPoints + 10;
+			statScreenRefresh();
+			flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 3;
+			doNext(accessQuestlogMainMenu);
+		}
 		public function takeRewardForRiverDungeon1stFloor():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
@@ -202,6 +226,16 @@ public class Questlog extends BaseContent
 			doNext(accessQuestlogMainMenu);
 		}
 		public function takeRewardForRiverDungeon2ndFloor():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 1 perk point and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
+			statScreenRefresh();
+			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForRiverDungeon3rdFloor():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
 			outputText("<b>Gained 1 perk point and 5 stat points</b>");

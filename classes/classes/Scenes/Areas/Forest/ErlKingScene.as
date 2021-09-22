@@ -31,7 +31,7 @@ public class ErlKingScene extends BaseContent
 			{
 				encounterPrincessGwynn();
 			}
-			
+
 			flags[kFLAGS.WILD_HUNT_ENCOUNTERS]++;
 		}
 
@@ -58,12 +58,12 @@ public class ErlKingScene extends BaseContent
 					-10 for Centaur Half
 			*/
 
-			if (player.findPerk(PerkLib.Evade) >= 0)
+			if (player.hasPerk(PerkLib.Evade))
 			{
 				baseVal += 20;
 				trace("+20 for Evade");
 			}
-			if (player.findPerk(PerkLib.Runner) >= 0)
+			if (player.hasPerk(PerkLib.Runner))
 			{
 				baseVal += 20;
 				trace("+20 for Runner");
@@ -73,35 +73,35 @@ public class ErlKingScene extends BaseContent
 				baseVal += 20;
 				trace("+20 for Drider");
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0)
+			if (player.hasPerk(PerkLib.CorruptedNinetails))
 			{
 				baseVal += 30;
 				trace("+30 For Ninetails");
 			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0)
+			if (player.hasPerk(PerkLib.EnlightenedNinetails))
 			{
 				baseVal += 30;
 				trace("+30 for Ninetails");
 			}
 
 			// Akbal Blessings
-			if (player.findPerk(PerkLib.FireLord) >= 0)
+			if (player.hasPerk(PerkLib.FireLord))
 			{
 				baseVal += 10;
 				trace("+10 for Firelord");
 			}
-			if (player.findPerk(PerkLib.Whispered) >= 0)
+			if (player.hasPerk(PerkLib.Whispered))
 			{
 				baseVal += 10;
 				trace("+10 for Whispered");
 			}
 
-			if (player.findPerk(PerkLib.Fast) >= 0)
+			if (player.hasPerk(PerkLib.Fast))
 			{
 				baseVal += 10;
 				trace("+10 for Fast");
 			}
-			if (player.findPerk(PerkLib.Incorporeality) >= 0)
+			if (player.hasPerk(PerkLib.Incorporeality))
 			{
 				baseVal += 10;
 				trace("+10 for Incorporeal");
@@ -118,7 +118,7 @@ public class ErlKingScene extends BaseContent
 				baseVal -= (player.kitsuneScore() * 20);
 				trace("-20 for each Kitsune part (-" + String(player.kitsuneScore() * 20) + ")");
 			}
-			if (player.bunnyScore() > 0) 							
+			if (player.bunnyScore() > 0)
 			{
 				baseVal -= (player.bunnyScore() * 20);
 				trace("-20 for each Bunny part (-" + String(player.bunnyScore() * 20) + ")");
@@ -142,14 +142,14 @@ public class ErlKingScene extends BaseContent
 
 			if (baseVal < 0) baseVal = 0;
 			trace("Wild Hunt Points = " + baseVal);
-			
+
 			return baseVal;
 		}
 
 		public function firstWildHuntEncounter():void
 		{
 			clearOutput();
-			
+
 			outputText("As you explore between the tall, ancient trees, you notice a thick fog beginning to spill out from between the trees and over the mossy ground. As the haze pours forth and flows past your [feet], you notice the forest around you growing distinctly darker and colder. \n\n");
 
 			outputText("A shiver of unnatural fear runs up your spine, just as a hunting horns sounds from the distance.  You gasp, your breath materializing as a puff of fine, white mist.  Just as the echoes of the horns fade, a chorus of canine howls breaks through the");
@@ -203,7 +203,7 @@ public class ErlKingScene extends BaseContent
 					else
 					{
 						outputText("  Your asshole twitches in response, aching to be filled.");
-					} 
+					}
 				}
 				outputText("\n\n");
 			}
@@ -220,12 +220,12 @@ public class ErlKingScene extends BaseContent
 
 			if (waited)
 			{
-				//[If Stand Your Ground Selected] 
+				//[If Stand Your Ground Selected]
 				outputText("“<i>You’re a brave one, aren’t you?  Standing your ground in the face of the Wild Hunt?  I applaud your audacity.  I’m going to enjoy hunting you....</i>”\n\n");
 			}
 			else
 			{
-				//[If Run Selected] 
+				//[If Run Selected]
 				outputText("“<i>I’m afraid you’re going to have to learn to run faster if you hope to elude me in the future.  I do hope you won’t bore me.</i>”\n\n");
 			}
 
@@ -234,7 +234,7 @@ public class ErlKingScene extends BaseContent
 			outputText("Within a few moments, the wind picks up, blowing the fog away, leaving no trace of the mysterious Huntsman, save for a small package on the ground.  You hurriedly pick it up, unable to shake the eerie feeling that you’re being watched.\n\n");
 
 			fatigue(10);
-			
+
 			if (waited)
 				inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 			else inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
@@ -327,10 +327,10 @@ public class ErlKingScene extends BaseContent
 		{
 			clearOutput();
 
-			// Player Hunt Score < 150.  The Erlking captures you. 
-			//If your score is above 100, the Erlking has his way with you.  
-			// If your score is below 100, Gangbang by his Hounds (canine anthros).  
-			// If the PC is a kitsune, bunny, or harpy, disregard Wild Points because the Erlking will ALWAYS opt to do the PC personally.  
+			// Player Hunt Score < 150.  The Erlking captures you.
+			//If your score is above 100, the Erlking has his way with you.
+			// If your score is below 100, Gangbang by his Hounds (canine anthros).
+			// If the PC is a kitsune, bunny, or harpy, disregard Wild Points because the Erlking will ALWAYS opt to do the PC personally.
 			// The Erlking leaves the PC a nicely-wrapped gift of foxberries or canine peppers,  The Hunt reverts to 0 points.
 
 			outputText("You run through the woods, heart pounding so hard you feel it might leap out of your throat.  Despite your best efforts, though, the fog still closes in.  With it comes the sound of the hounds, running alongside you, hidden in the thick haze. \n\n");
@@ -444,14 +444,14 @@ public class ErlKingScene extends BaseContent
 		protected function whatsMyPrize():void
 		{
 			clearOutput();
-			
+
 			outputText("You stand up, brushing yourself off, and ignore the Erlking’s clearly-visible dick, stating that you’d like some compensation for all the trouble.\n\n");
 
 			outputText("“<i>Of course, of course!</i>” laughs the Erlking, reaching into one of his saddle bags, and retrieving a small bundle.  He tosses it to you.  “<i>Better luck to you on the next hunt!</i>”\n\n");
 
 			outputText("“<i>Next hunt?</i>” you begin, but before you can get the words out, the Erlking is already on his horse, thundering away through the trees.\n\n");
 
-			//[You gain: Gems + Fox berries / Canine Peppers / Neon Pink Egg ]	
+			//[You gain: Gems + Fox berries / Canine Peppers / Neon Pink Egg ]
 			var gemFind:int = 10 + rand(15);
 			outputText("<b>You found " + gemFind + " gems.</b>\n\n");
 			player.gems += gemFind;
@@ -467,11 +467,11 @@ public class ErlKingScene extends BaseContent
 		{
 			flags[kFLAGS.ERLKING_DISABLED] = 1;
 			clearOutput();
-			
+
 			//[This ends all the Erlking Encounters]
-				
+
 			outputText("You have had enough of this maniac and his insane hunt.\n\n");
-							
+
 			outputText("Supremely irritated, you tell him to stop hunting you. \n\n");
 
 			outputText("“<i>Stop?</i>” he asks, the red light in his eyes dimming.\n\n");
@@ -589,7 +589,7 @@ public class ErlKingScene extends BaseContent
 		protected function predatoryPrey():void
 		{
 			clearOutput();
-			
+
 			outputText("You stand, unable to take your eyes from the Erlking’s slim body and erect dick.\n\n");
 
 			outputText("You smile seductively, asking the Erlking exactly what he’s offering.\n\n");
@@ -608,7 +608,7 @@ public class ErlKingScene extends BaseContent
 					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, squeezing and caressing each of your [chest] in turn.  He tweaks your nipples, one by one, sending shockwaves of pleasure through your body.\n\n");
 
 					outputText("“<i>Take me, Huntsman,</i>” you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.");
-					
+
 					player.cuntChange(12 * 3, true, true, false);
 					outputText("\n\n");
 
@@ -630,7 +630,7 @@ public class ErlKingScene extends BaseContent
 					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, tweaking each nipple before trailing down your stomach, grasping [oneCock]\n\n");
 
 					outputText("“<i>Take me, Huntsman,</i>” you groan.  His shaft is already at your [ass].  His equine dick pushing up into your [asshole], pushing deep inside you.");
-					
+
 					player.buttChange(12 * 3, true, true, false);
 					outputText("\n\n");
 
@@ -652,7 +652,7 @@ public class ErlKingScene extends BaseContent
 				if (player.hasVagina() && !player.hasCock())
 				{
 					outputText("With your [chest] against the rough bark, he lifts your [tail], exposing your [pussy] to the swelling head of his equine cock.  With a soft sound, he pushes between your lips, letting you feel each prepuce ring as they squeeze into you.");
-					
+
 					player.cuntChange(12 * 3, true, true, false);
 					outputText("\n\n");
 
@@ -673,7 +673,7 @@ public class ErlKingScene extends BaseContent
 					outputText("With your [chest] against the rough bark, he crouches at your side, taking your already stiffening [oneCock] in his gloved hand.  From this angle, you feel, rather than see the cream he lathers on your [cock], working you to full hardness. One hand strokes your flank soothingly as the other wraps around your [cock], stroking you in his strong grip.\n\n");
 
 					outputText("You pant, fingertips gripping the bark of the tree as he jacks you off.  Your tongue lolls out as his gloved hand grips you firmly, moving faster and faster as he works his way up and down your length.  Whatever lube he used is incredible, and you feel a tingle on every down and up stroke.\n\n");
-					
+
 					outputText("You can’t get enough of this feeling - being milked by the Erlking.  He even seems to be humming under his breath as he strokes your side and works you with deft fingers.  It’s like he’s calming some rutting stallion!  Your leg stamps reflexively, your [tail] swishing as your body announces your intent to cum.\n\n");
 
 					outputText("The Erlking responds by stroking you faster, his hand tightening, increasing the tingling pleasure from the cream.  You groan, gripping the tree trunk, rubbing your chest against it for extra stimulation, the rough bark scratching harshly against your [nipples].  \n\n");
@@ -686,7 +686,7 @@ public class ErlKingScene extends BaseContent
 				}
 			}
 
-			//[+10 Fatigue, +1 Toughness / +1 Strength, 100 hp healed]			
+			//[+10 Fatigue, +1 Toughness / +1 Strength, 100 hp healed]
 			if (player.tou < player.str) dynStats("toughness+", 1, "fatigue+", 10, "health+", 100, "lust=", 0);
 			else (dynStats("strength+", 1, "fatigue+", 10, "health+", 100, "lust=", 0));
 			player.sexReward("cum");
@@ -698,7 +698,7 @@ public class ErlKingScene extends BaseContent
 		protected function howDareYou():void
 		{
 			clearOutput();
-			
+
 			//[ends the Hunt permanently, Opens Princess Option]
 			outputText("You’ve had more than enough of the Erlking and his insane hunt.  You rise to your [feet], slapping away his outstretched hand.  He frowns, but before he can react, you’ve charged forward and knocked the black wood cane out of his hand.  It spins off into the undergrowth, out of sight.  The light in his eyes dims, as does the glow from his antlers.\n\n");
 
@@ -725,7 +725,7 @@ public class ErlKingScene extends BaseContent
 				outputText("“<i>Not a king anymore, are you?</i>” you growl, smiling.  “<i>You’re more like a Princess now.  A slutty, little Princess,</i>” you grin.  You see a tremble run down his chest and front, his cock straining against his tight leathers.  “<i>Eat my pussy, Princess,</i>” you order.\n\n");
 
 				outputText("Your princess moans, shuddering and submissive, shoving his flat tongue into your pussy.  It might be a trick of the light, but you swear his fur just got a little lighter.  His hips writhe, drawing attention to how slim and girlish they really are.  He’s obviously responding very well to the abuse.\n\n");
-				 
+
 				outputText("You sigh in satisfaction, settling down on his face, holding tight to his antlers and steering his lapping tongue.  You ride the Erlking’s face for nearly half an hour.  Eventually you climax, moaning in ecstasy, covering the huntsman’s face with your pussy juices.  You grind down hard on his face, pulling up hard on his horns.  With a cracking noise, his golden antlers come loose in your hands\n\n");
 
 				outputText("You stand, looking down at the disgraced forest lord.  He lies there, gasping, smeared with your pussy juices, dirt ground into his fur, his antlers broken.  From the wetness staining his leathers and hips, it looks like he came at some point, and it’s now slowly oozing out of his clothes, matting his fur.  Maybe it’s the spunk, but it looks as if his fur has an odd tint to it - slightly pink?  You shrug it off as some trick of the light as you gather yourself and prepare to leave.\n\n");
@@ -862,7 +862,7 @@ public class ErlKingScene extends BaseContent
 			clearOutput();
 
 			outputText("“<i>At once, M’Lord!</i>” she says, clapping her hands excitedly.  She bounces up in the air, then bounds low to the ground, pulling a small bottle from her purse, and dumping a liberal amount of raspberry-scented lube on your cock.  She works it in, her slim fingers massaging your cock to full attention before she hops around.\n\n");
-					
+
 			outputText("“<i>Princess Gwynn is always prepared!</i>” she chirps happily.\n\n");
 
 			outputText("She drops her shoulders to the ground and raises her white rump in the air, her pink, tufted tail twitching excitedly.  “<i>Your Princess is ready for you, m’Lord!</i>”\n\n");
@@ -916,7 +916,7 @@ public class ErlKingScene extends BaseContent
 			outputText("“<i>My Lord, are you sure?</i>” she says, tilting her head to the side.\n\n");
 
 			outputText("You assure her that this is what you want and order her onto her back, lying on the soft, mossy ground.  One lithe arm is draped over her head, the other crosses over her chest, as she bites her lip, looking up at you nervously.\n\n");
-				
+
 			outputText("Her dick is already rigid, a foot long and mottled pink and white, like clouds at dawn.  You kneel down next to her and grasp it slowly, your fingers finding natural handholds along her triple prepuce rings.\n\n");
 
 			outputText("“<i>Master, I have lube in my bag... if you’d like to use it, that is,</i>” she says shyly, reaching into her purse and offering you a small, pink bottle.  You realized that this purse used to be one of her saddlebags.  As you uncork the bottle and pour out a liberal amount of lube over her massive, flat-headed equine cock, you idly wonder if she used to carry lube as the Erlking.\n\n");
@@ -960,13 +960,13 @@ public class ErlKingScene extends BaseContent
 			if (rand(4) > 0) inventory.takeItem(consumables.PRNPKR, camp.returnToCampUseOneHour);
 			else inventory.takeItem(consumables.PRNPKR, goldenRindBonus);
 		}
-		
+
 		private function goldenRindBonus():void {
 			clearOutput();
 			outputText("“<i>Oh, I also had this left over from brewing my Pucker,</i>” she says, popping out of the brush behind you.  You yelp in surprise.  She’d vanished into the forest in front of you a moment ago.  How did she move so quickly?  “<i>Here you go!</i>” she pipes up, depositing a small item in your hand before disappearing back into the woods.  If she can move that quickly and quietly through the woods, it’s pretty likely that her falling prey to the forest predators has been entirely voluntary.\n\n");
 			inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
 		}
-		
+
 		public function deerTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 2;
@@ -974,17 +974,9 @@ public class ErlKingScene extends BaseContent
 			var x:int = 0;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
-			if (CoC.instance.mutations.blockingBodyTransformations()) changeLimit = 0;
+			changeLimit += player.additionalTransformationChances;
+			// Stat TFs
+			if (player.blockingBodyTransformations()) changeLimit = 0;
 			// Main TFs
 			//------------
 			//Gain deer ears
@@ -1028,23 +1020,19 @@ public class ErlKingScene extends BaseContent
 			//Gain fur
 			if (rand(4) == 0 && changes < changeLimit && player.horns.count > 0 && player.lowerBody != LowerBody.GARGOYLE && !player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
-				player.skin.growCoat(Skin.FUR, {color:"brown"});
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
-					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
-				}
+				CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color:"brown"}).applyEffect(false);
 				changes++;
 			}
 			//Change face to normal
 			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && (player.faceType != Face.HUMAN && player.faceType != Face.DEER)) {
 				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
-				player.faceType = Face.HUMAN;
+				CoC.instance.transformations.FaceHuman.applyEffect(false);
 				changes++;
 			}
 			//Gain deer face
 			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.faceType != Face.DEER) {
-				outputText("\n\nYou feel a grinding noise from your jaw, and a massive pressure in your sinuses, as your cheeks pinch in, followed immediately by a pointing of the lower half of your face.  You frantically (and gently) feel your face, discovering, to your surprise, that you’ve <b>gained the delicate facial features of a deer.</b>");
-				player.faceType = Face.DEER;
+				outputText("\n\n");
+				CoC.instance.transformations.FaceDeer.applyEffect();
 				changes++;
 			}
 			//Change legs to cloven hooves

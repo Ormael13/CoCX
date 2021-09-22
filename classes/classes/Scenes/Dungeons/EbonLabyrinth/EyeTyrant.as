@@ -121,13 +121,16 @@ use namespace CoC;
 			this.lustVuln = .75;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.drop = NO_DROP;
 			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.abilities = [
+				{ call: eyeTyrantOmnicast, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+				{ call: eyeTyrantDominationGaze, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[], condition: function():Boolean { return !hasStatusEffect(StatusEffects.AbilityCooldown1) }}
+			]
 			checkMonster();
 		}
 	}

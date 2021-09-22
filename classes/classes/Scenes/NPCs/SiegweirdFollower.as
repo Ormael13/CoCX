@@ -175,7 +175,7 @@ public function siegweirdMainCampMenu():void
 		}
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
 			if (player.hasKeyItem("Alvina's Shattered Phylactery") >= 0) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
-			else addButtonDisabled(11, "Advanced Study", "You need to go kill a certain dangerous devil in Blight Ridge.");
+			else addButtonDisabled(11, "Advanced Study", "You need to go kill a certain dangerous devil in Defiled Ravine.");
 		}
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 3) addButtonDisabled(11, "Advanced Study", "You already completed Advanced Study.");
 	}

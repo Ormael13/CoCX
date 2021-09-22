@@ -80,6 +80,7 @@ public class EventParser {
             EngineCore.menu();
             EngineCore.addButton(0, "Game Over", gameOverMenuOverride).hint("Your game has ended. Please load a saved file or start a new game.");
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0) EngineCore.addButton(1, "Continue", SceneLib.camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.PCClone) && CoC.instance.player.statusEffectv4(StatusEffects.PCClone) == 4) EngineCore.addButton(2, "Rebirth", SceneLib.camp.rebirthFromBadEnd).hint("You can move your nascent soul into your body clone achieving rebirth.");
             //addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
             if (CoC.instance.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || CoC.instance.debug) EngineCore.addButton(4, "Debug Cheat", playerMenu);
             gameOverMenuOverride();
@@ -188,8 +189,8 @@ public class EventParser {
             }
             player.HP = HPPercent*player.maxHP();
             SceneLib.combat.regeneration(false);
-            if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
-            if (player.findPerk(PerkLib.JobSorcerer) >= 0 || player.findPerk(PerkLib.JobElementalConjurer) >= 0) SceneLib.combat.manaregeneration(false);
+            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(false);
+            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(false);
             SceneLib.combat.wrathregeneration(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
@@ -346,15 +347,13 @@ public class EventParser {
             }
         }
         //Unequip undergarment if you have bizarre lower body.
-        if (player.lowerGarment != UndergarmentLib.NOTHING) {
-            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable") || player.lowerBody == LowerBody.GHOST_2) {
-                EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
-                SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
-                return true;
-            }
+        if (player.lowerGarment != UndergarmentLib.NOTHING && LowerBody.lowerGarmentDisabled(player)) {
+            EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
+            SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
+            return true;
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponPerk == "Large" && player.findPerk(PerkLib.GigantGrip) < 0) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponPerk == "Large" && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;
@@ -453,28 +452,28 @@ public class EventParser {
         //No diapause?  Normal!
         var player:Player = CoC.instance.player;
         var flags:DefaultDict = CoC.instance.flags;
-        if (player.findPerk(PerkLib.Diapause) < 0) {
+        if (!player.hasPerk(PerkLib.Diapause)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MagicalFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
-            if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
-            if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -482,7 +481,7 @@ public class EventParser {
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.BroodMother) >= 0) {
+            if (player.hasPerk(PerkLib.BroodMother)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -518,21 +517,21 @@ public class EventParser {
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MagicalFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
-            if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
-            if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -540,7 +539,7 @@ public class EventParser {
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.BroodMother) >= 0) {
+            if (player.hasPerk(PerkLib.BroodMother)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -557,7 +556,7 @@ public class EventParser {
         var player:Player = CoC.instance.player;
         var chance:Number = player.statusEffectv1(StatusEffects.BirthedImps) * 2;
         if (chance > 7) chance = 7;
-        if (player.findPerk(PerkLib.PiercedLethite) >= 0) chance += 4;
+        if (player.hasPerk(PerkLib.PiercedLethite)) chance += 4;
         if (player.inHeat) chance += 2;
         if (SceneLib.vapula.vapulaSlave()) chance += 7;
         //Reduce chance

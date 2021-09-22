@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -17,18 +17,18 @@ import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace CoC;
-	
+
 	public class Etna extends Monster
 	{
 		public var etnaScene:EtnaFollower = SceneLib.etnaScene;
-		
+
 		public function moveClawCombo():void {
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 8) createStatusEffect(StatusEffects.Attacks, 4, 0, 0, 0);
 			else if (flags[kFLAGS.ETNA_LVL_UP] >= 4) createStatusEffect(StatusEffects.Attacks, 3, 0, 0, 0);
 			else createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
 		}
-		
+
 		public function moveTailSpike():void {
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 9) TailSpike();
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 6) TailSpike();
@@ -60,14 +60,14 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) outputText("\n\n");
 		}
-		
+
 		public function moveTakeFlight():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
 			outputText(" takes flight, aiming with her tail as she prepares to unleash a volley of spikes at you!");
 			createStatusEffect(StatusEffects.Flying,7,0,0,0);
 		}
-		
+
 		public function moveBoobCrash():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna flies down");
 			else outputText("The flying manticore dives");
@@ -80,7 +80,7 @@ use namespace CoC;
 			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			removeStatusEffect(StatusEffects.Flying);
 		}
-		
+
 		public function moveBite():void {
 			var bitedmg:Number = Math.round(this.str / 25);
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
@@ -96,7 +96,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.ConstrictedScylla)) removeStatusEffect(StatusEffects.ConstrictedScylla);
 			if (hasStatusEffect(StatusEffects.Pounce)) removeStatusEffect(StatusEffects.Pounce);
 		}
-		
+
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla)) {
@@ -115,7 +115,7 @@ use namespace CoC;
 				if (choice > 7) moveTakeFlight();
 			}
 		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (flags[kFLAGS.ETNA_FOLLOWER] >= 2) etnaScene.etnaRapeIntro2();
@@ -123,13 +123,13 @@ use namespace CoC;
 			else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 1 && flags[kFLAGS.ETNA_AFFECTION] > 15) etnaScene.etnaRape3rdWin();
 			else etnaScene.etnaRapeIntro();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) etnaScene.etnaRapeYandere();
 			etnaScene.etnaRapesPlayer();
 		}
-		
+
 		override public function get long():String {
 			var str:String = "";
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) {
@@ -142,8 +142,8 @@ use namespace CoC;
 			}
 			return str;
 		}
-		
-		public function Etna() 
+
+		public function Etna()
 		{
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) {
 				this.a = "";
@@ -298,7 +298,7 @@ use namespace CoC;
 					add(armors.S_SWMWR,1/12).
 					add(consumables.L_DRAFT,1/4).
 					add(consumables.MANTICV,0.7);
-			this.wings.type = Wings.MANTICORE_LIKE_LARGE;
+			this.wings.type = Wings.MANTICORE_LARGE;
 			this.rearBody.type = RearBody.LION_MANE;
 			this.arms.type = Arms.LION;
 			this.lowerBody = LowerBody.LION;
@@ -330,7 +330,7 @@ use namespace CoC;
 			}
 			checkMonster();
 		}
-		
+
 	}
 
 }

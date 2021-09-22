@@ -26,7 +26,7 @@ public class WaterElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeIceDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
 			}
 		}
 		
@@ -43,8 +43,8 @@ public class WaterElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The watery strikes connect with your body. ");
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
 			}
 		}
 		
@@ -59,14 +59,14 @@ public class WaterElemental extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The watery strikes connect with your body. ");
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
 			}
 		}
 		
@@ -120,7 +120,7 @@ public class WaterElemental extends Monster
 				this.imageName = "water elemental";
 				this.long = "You're currently fighting water elemental. It's a four feet tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
-				initStrTouSpeInte(10, 35, 45, 45);
+				initStrTouSpeInte(10, 25, 45, 45);
 				initWisLibSensCor(45, 10, 20, 50);
 				this.weaponAttack = 5;
 				this.armorDef = 5;
@@ -198,7 +198,10 @@ public class WaterElemental extends Monster
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
-			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

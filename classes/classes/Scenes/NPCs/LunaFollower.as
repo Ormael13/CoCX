@@ -114,7 +114,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				if (flags[kFLAGS.LUNA_FOLLOWER] > 4) {
 					addButton(3, "Meal", mealLuna);
 					addButton(4, "Nurse", nurseLuna);
-					button(4).disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Curse"), "You are currently in perfect health.");
+					button(4).disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drained"), "You are currently in perfect health.");
 					button(4).disableIf(Nursed, "Luna needs time to recharge her Mana before she can heal you again. Try tomorrow.");
 				}
 				if (flags[kFLAGS.LUNA_AFFECTION] >= 50) {
@@ -309,14 +309,14 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.tailCount != 1) player.tailCount = 1;
 			player.rearBody.type = RearBody.WOLF_COLLAR;
 			player.arms.type = Arms.WOLF;
-			player.faceType = Face.WOLF_FANGS;
+			CoC.instance.transformations.FaceWolfFangs.applyEffect(false);
 			player.ears.type = Ears.WOLF;
 			player.eyes.type = Eyes.FERAL;
 			player.tongue.type = Tongue.DOG;
 			player.wings.type = Wings.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.horns.type = Horns.NONE;
-			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
+			CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
 			if (player.hasCock() && player.wolfCocks() < 1) {
 				var selectedCockValue:int = -1;
 				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
@@ -371,92 +371,92 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.LUNA_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.LUNA_LVL_UP] == 0) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 12);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 12, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 1;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.LUNA_LVL_UP] == 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 18);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 18, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.LUNA_LVL_UP] == 2) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 24);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 24, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 3;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.LUNA_LVL_UP] == 3) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 30);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 30, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 4;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.LUNA_LVL_UP] == 4) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 36);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 36, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 5;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.LUNA_LVL_UP] == 5) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 42);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 42, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 6;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.LUNA_LVL_UP] == 6) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 48);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 48, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 7;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.LUNA_LVL_UP] == 7) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 54);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 54, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 8;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.LUNA_LVL_UP] == 8) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 60);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 60, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 9;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.LUNA_LVL_UP] == 9) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 66);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 66, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 10;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.LUNA_LVL_UP] == 10) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 72);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 72, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 11;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.LUNA_LVL_UP] == 11) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 78);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 78, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 12;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.LUNA_LVL_UP] == 12) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 84);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 84, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 13;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.LUNA_LVL_UP] == 13) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 90);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 90, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 14;
 				}
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.LUNA_LVL_UP] == 14) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 96);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 96, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 15;
 				}
@@ -497,11 +497,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"You nod and Luna comes back with your tea, and then in a moment your meal. You have no idea where she's finding the ingredients, but so great is her culinary skill even with your crude mess kit and a campfire that you doubt most of Tel'Andre is eating so well. You finish with gusto, feeling fully satisfied, and thank Luna for the magnificent meal. She nods, blushing endearingly with honest, innocent pride at your praise.\n\n" +
 						"\"<i>It is my pride and my pleasure to serve you, " + player.mf("Master","Mistress") + ". Your praise is all I could desire and more.</i>\"\n\n");
 				player.hunger = player.maxHunger();
-				HPChange(Math.round(player.maxHP() * .1), true);
-				player.mana += Math.round(player.maxMana() * 0.1);
+				HPChange(Math.round(player.maxHP() * .05), true);
+				player.mana += Math.round(player.maxMana() * 0.05);
 				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				player.buff("WellFed").setStats({"str.mult":0.05,"tou.mult":0.05,"spe.mult":0.05}).forDays(1).withText("Well Fed");
-				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.1)));
+				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.2)));
 				flags[kFLAGS.LUNA_MEAL] = 1;
 				lunaJealousy(-100);
 				lunaAffection(10);
@@ -514,18 +514,19 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			clearOutput();
 			outputText("You ask the maid if is able to tend to your inuries.\n\n" +
 					"\"<i>Of course, " + player.mf("Master","Mistress") + ", please undress and I shall do so at once.</i>\"\n\n" +
-					"Luna casts a few healing spells on you to help your recovery. She traces your skin up and down, gently, with her slender, clean fingers, soothing your pains and closing your cuts and scrapes as she does. Her treatment is highly effective, but also a bit arousing; the young maid's touch feels loving and warm, and you soon find yourself flushed with lust under her tender caresses.\n\n");
-			dynStats("lus", 33);
-			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]){
-				player.removeCurse(stat, 10);
-				if (stat != "sens")
-				{
-					player.removeCurse(stat+".mult", 0.10);
+					"Luna apply medicines and healing ointments on your wounds treating and check for any trace of changes left by harming chemicals. She traces your skin up and down, gently, with her slender, clean fingers, soothing your pains and closing your cuts and scrapes as she does. Her treatment is highly effective, but also a bit arousing; the young maid's touch feels loving and warm, and you soon find yourself flushed with lust under her tender caresses.\n\n");
+			dynStats("lus", Math.round(player.maxLust() * 0.2));
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+				player.removeCurse(stat, 10,1);
+				player.removeCurse(stat, 5,2);
+				if (stat != "sens") {
+					player.removeCurse(stat+".mult", 0.10,1);
+					player.removeCurse(stat+".mult", 0.05,2);
 				}
 			}
 			lunaJealousy(-100);
 			lunaAffection(5);
-			HPChange(Math.round(player.maxHP() * .5), true);
+			HPChange(Math.round(player.maxHP() * .1), true);
 			Nursed = true;
 			NursedCooldown = 24;
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
@@ -623,8 +624,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 									"\"<i>" + player.mf("Master","Mistress") + ", I did warn you I can only hold myself back so long. Tonight I will not take 'no' for an answer.</i>\"\n\n" +
 									"GThere's nothing for it; already ");
 						}else{
-						
-						
+
+
 							outputText("You were about to take a break, but you turn at the sound of footsteps and see that Luna has other plans tonight; ");
 						}
 					} else {
@@ -672,7 +673,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			menu();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(0, "Accept", fullMoonEventAccept2);
 			else addButton(0, "Accept", fullMoonEventAccept);
-			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You ");
+			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You must have her here and now!");
 			else addButton(1, "Resist", fullMoonEventResist);
 		}
 		public function fullMoonEventAccept():void {
@@ -783,14 +784,14 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.tailCount != 1) player.tailCount = 1;
 			player.rearBody.type = RearBody.WOLF_COLLAR;
 			player.arms.type = Arms.WOLF;
-			player.faceType = Face.WOLF_FANGS;
+      CoC.instance.transformations.FaceWolfFangs.applyEffect(false);
 			player.ears.type = Ears.WOLF;
 			player.eyes.type = Eyes.FERAL;
 			player.tongue.type = Tongue.DOG;
 			player.wings.type = Wings.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.horns.type = Horns.NONE;
-			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
+			CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
 			if (player.hasCock() && player.wolfCocks() < 1) {
 				var selectedCockValue:int = -1;
 				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
@@ -828,12 +829,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			else if (player.gender == 0) addButtonDisabled(2, "Werewolf", "You're going to need some special equipment to play with this pup.");
 			else if (player.lust <= 33) addButtonDisabled(2, "Werewolf", "Bringing the beast out in Luna when you're not up for sex is too terrible of an idea even for you. Please reconsider.");
 			if (player.lust > 33 && player.gender > 0) {
-				if (flags[kFLAGS.AYANE_FOLLOWER] >= 2 && flags[kFLAGS.LUNA_AFFECTION] == 100) addButton(3, "Fox&Hound", sexMenuSandwichWithAyane).hint("Some group action could be fun, and you bet Ayane would be up for it too.");
-				else if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) addButtonDisabled(3, "Fox&Hound", "Some group action could be fun if you were sure Luna would do it, but you don't want to push your luck. You know how jealous she gets...");
+				if (flags[kFLAGS.AYANE_FOLLOWER] >= 2 && flags[kFLAGS.LUNA_AFFECTION] == 100 && player.hasCock()) addButton(3, "Fox&Hound", sexMenuSandwichWithAyane).hint("Some group action could be fun, and you bet Ayane would be up for it too.");
+				else if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) addButtonDisabled(3, "Fox&Hound", "Some group action could be fun if you were sure Luna would do it, but you don't want to push your luck. You know how jealous she gets... Of course to even do 'that' you would also need a penis.");
 				else addButtonDisabled(3, "???", "Get a certain other fluffy-tailed follower to join your camp and maybe you can have some group fun.");
-				
 			}
-			addButton(14, "Back", mainLunaMenu);	
+			addButton(14, "Back", mainLunaMenu);
 		}
 		/*
 		public function sexMenuMain():void {
@@ -855,7 +855,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			if (player.cor >= 30) addButton(10, "Headpat", sexMenuHeadpat);
 			else addButtonDisabled(10, "Headpat", "You're too pure for that!");
-			addButton(14, "Back", mainLunaMenu);			
+			addButton(14, "Back", mainLunaMenu);
 		}
 		*/
 		public function sexMenuDomesticService():void {
@@ -1081,7 +1081,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You feel a fuzzy protrusion press out against your forehead and realize her tail is growing in. Just as it does, Luna starts screaming. \"<i>HaaaaaaAAAA... haaaaaaaa... aaaaaaaaHHHNNNNMMmmmmmmmmohhhh god oh oh god oh GODS [name]... this is... I can't... I'm cummaaaAAAAAAAAAAAOOOOOOOOOOOOOOOOOO!</i>\" Luna's words fail a third time and she howls bestially under your furious assault. You know from experience her transformation already inflicts corrupted, orgasmic pleasure on her body, and just as it peaks your own famished, greedy lapping at her flooded pussy brings her to a more natural one. She spasms violently; her thighs squeeze and slam against the side of your head , and her pussy sprays your face with enough liquid to fill your waterskin. Then she faceplants into the ground as her arms give out from under her. You hold her hips down to your kneeling thighs while she thrashes in her mindless ecstasy, afraid she might actually hurt one of you, and her climax lasts a good ten seconds before she finally goes limp.");
 			outputText("She is fully lupine now. Ashen fur covers her arms and legs, fading to a lighter fuzz over the rest of her curvy butt and hips, her melon-sized breasts, and her tight, muscular stomach. Her frilly headband, forgotten in your sudden attack, still sits absurdly behind her lupine ears over her now ruined hair, and her white panties are still wrapped around one of her back paws like a lewd, cum-soaked anklet. You gently massage her hips and rear as she gasps and moans, and occasionally twitches again with a small aftershock after the earth-shattering orgasm you just inflicted on her. Finally with a heaving groan she manages to get back on her hands and knees, albeit shakily. \"<i>Haaaa... haaaa... [name], you're even more of a beast than <b>I</b> am... haaaaaa.... that was <b>incredible</b>.</i>\" she gasps out in a lusty moan between panting, ragged breaths.\n\n");
 			outputText("Smiling deviously you give her a couple hard slaps on the ass just beside where her tail emerges, eliciting a satisfying <i>yip</i> from your already well-fucked bitch. You remind her sternly to call you " + player.mf("Master","Mistress") + ", as she has forgotten to do twice now. Then you tell her you're happy she's enjoying herself, because you're <b>just getting started</b>. As soon as you scold her she begins making quiet whining sounds, and she submissively lowers her front half to the ground until her pillowy breasts are squished into the grass. Her rear is still sticking up at you. Despite her dejected posture and tone, however, you can clearly see she her wolf-cunt drooling even harder than before. Her clit sticks out a good half-inch from her folds, which are splayed open and puffy, revealing her wet depths visibly throbbing and squeezing, begging for her " + player.mf("Master","Mistress") + "'s rod inside it. She wriggles her behind at you, her tail curled saucily over her back, in as clear a 'come hither' as you've ever seen, and you're more than ready to oblige...\n\n");
-			
+
 			doNext(sexMenuDoggyTreats2);
 		}
 		*/

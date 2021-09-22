@@ -16,13 +16,6 @@ import classes.internals.WeightedDrop;
 public class DemonPackBlightRidge extends Monster
 	{
 		
-		override protected function performCombatAction():void
-		{
-			//Demon pack has different AI
-			if (rand(2) == 0) special1();
-			else special2();
-		}
-		
 		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
 			outputText("\n");
@@ -113,8 +106,11 @@ public class DemonPackBlightRidge extends Monster
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = SceneLib.combat.packAttack;
-			this.special2 = SceneLib.combat.lustAttack;
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{call: SceneLib.combat.packAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: SceneLib.combat.lustAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+			];
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 2;

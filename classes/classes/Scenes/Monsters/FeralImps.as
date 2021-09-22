@@ -141,6 +141,7 @@ import classes.internals.*;
 				this.level = 1;
 				this.gems = rand(5) + 5;
 				this.special1 = clawAttack;
+				this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] == 2) {
 				this.a = "the ";

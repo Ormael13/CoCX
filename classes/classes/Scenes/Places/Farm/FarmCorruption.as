@@ -16,21 +16,21 @@ import classes.StatusEffects;
 	 */
 	public class FarmCorruption extends AbstractFarmContent
 	{
-		
+
 		public function whitneySprite():void
 		{
 			farm.whitneySprite();
 		}
-		
-		public function FarmCorruption() 
+
+		public function FarmCorruption()
 		{
-			
+
 		}
-		
+
 		public function corruptFollowers():int
 		{
 			var count:int = 0;
-			
+
 			if (SceneLib.jojoScene.campCorruptJojo()) count++;
 			if (SceneLib.amilyScene.amilyCorrupt()) count++;
 			if (SceneLib.izmaScene.izmaFollower()) count++;
@@ -38,7 +38,7 @@ import classes.StatusEffects;
 			if (SceneLib.vapula.vapulaSlave()) count++;
 			if (SceneLib.ceraphScene.ceraphIsFollower()) count++;
 			if (SceneLib.latexGirl.latexGooFollower()) count++;
-			
+
 			return count;
 		}
 
@@ -47,11 +47,11 @@ import classes.StatusEffects;
 			if (mod != 0)
 			{
 				flags[kFLAGS.WHITNEY_CORRUPTION] += mod;
-				
+
 				// Track highest corruption value
 				if (flags[kFLAGS.WHITNEY_CORRUPTION] > flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST]) flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST] = flags[kFLAGS.WHITNEY_CORRUPTION];
 			}
-			
+
 			// Cap the values into the appropriate range
 			if (flags[kFLAGS.FARM_CORRUPTION_APPROACHED_WHITNEY] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 30 )
 			{
@@ -83,7 +83,7 @@ import classes.StatusEffects;
 
 			trace("Whitney corruption changed by " + String(mod));
 			trace("Whitney corruption now at " + String(flags[kFLAGS.WHITNEY_CORRUPTION]));
-				
+
 			return flags[kFLAGS.WHITNEY_CORRUPTION];
 		}
 
@@ -138,7 +138,7 @@ import classes.StatusEffects;
 		{
 			// Early exit if we've not actually started the corruption process
 			if (flags[kFLAGS.FARM_CORRUPTION_STARTED] <= 0) return flags[kFLAGS.WHITNEY_CORRUPTION];
-			
+
 			// If Whitney was disabled the previous day, set the flag for a follow up
 			if (flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] == 1)
 			{
@@ -249,7 +249,7 @@ import classes.StatusEffects;
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] == 0) flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 1;
 				flags[kFLAGS.FARM_SUCCUMILK_STORED]++;
 			}
-			
+
 			// If jojo is producing, stack up some drafts to gib
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1 && flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1)
 			{
@@ -257,14 +257,14 @@ import classes.StatusEffects;
 				flags[kFLAGS.FARM_INCUDRAFT_STORED]++;
 				if (SceneLib.jojoScene.tentacleJojo()) flags[kFLAGS.FARM_INCUDRAFT_STORED]++;
 			}
-			
+
 			// If Sophie is producing, count up time since last egg and gib a new one when ready
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] > 0 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1)
 			{
 				if (flags[kFLAGS.FARM_EGG_STORED] == 0)
 				{
 					flags[kFLAGS.FARM_EGG_COUNTDOWN]--;
-					
+
 					if (flags[kFLAGS.FARM_EGG_COUNTDOWN] == 0)
 					{
 						flags[kFLAGS.FARM_EGG_STORED] = 1;
@@ -272,16 +272,16 @@ import classes.StatusEffects;
 					}
 				}
 			}
-			
+
 			// If Vapula is producing, stack up some milks to gib
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1)
 			{
 				flags[kFLAGS.FARM_SUCCUMILK_STORED]++;
 				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FARM_SUCCUMILK_STORED]++;
-				
+
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] == 0) flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] = 1;
 			}
-			
+
 			// Item caps
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 5)
 			{
@@ -293,66 +293,66 @@ import classes.StatusEffects;
 				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] += (flags[kFLAGS.FARM_INCUDRAFT_STORED] - 5) * 5; // 5 extra gems per incudraft (less of them produced etc)
 				flags[kFLAGS.FARM_INCUDRAFT_STORED] = 5;
 			}
-			
+
 			// If Latexy is at the farm, further modify her status values
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1)
 			{
 				SceneLib.latexGirl.gooHappiness( -0.5, false);
 				SceneLib.latexGirl.gooObedience(  0.5, false);
 			}
-			
+
 			// If Ceraph is doing her thing
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 0)
 			{
 				flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH]++;
-				
+
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 7) flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] = -1;
 			}
-			
+
 			// If Holli is doing her thing
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0)
 			{
 				flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI]++;
-				
+
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 20) flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] = -1;
 			}
-			
+
 			// Contraceptives
 			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 1)
 			{
 				if (flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] == 0) flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] = 1;
 			}
-			
+
 			// Increment days since last paid out
 			flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] += 1;
-			
+
 			return modValue;
 		}
-		
+
 		public function collectTheGoodies():void
 		{
 			clearOutput();
-			
+
 			// Get gems
 			if (flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] >= 7)
 			{
 				outputText("You stroll over to the big rock at the edge of the pepper patch, smiling as you see a small burlap sack shoved underneath a fold in the stone. You scoop it up, open it and count out " + flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] + " gems.\n\n");
-				
+
 				if (farmValue() < 25) outputText(" You frown; it seems like a feeble amount for such a large operation. Perhaps you could talk to Whitney about that.\n\n");
-				
+
 				player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
 				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
 				flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] = 0;
 				EngineCore.showStats();
 			}
-			
+
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0)
 			{
 				outputText("Your ‘farmers’ have been busy under the watchful eye of their assigned task mistress. A small bundle of goods have been stashed with the gems just awaiting your arrival.\n\n");
 			}
-			
+
 			menu();
-			
+
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0)
 			{
 				outputText("<b>" + flags[kFLAGS.FARM_SUCCUMILK_STORED] + "x ");
@@ -385,30 +385,30 @@ import classes.StatusEffects;
 				outputText("</b>\n");
 				addButton(3, getItemObj(kFLAGS.FARM_CONTRACEPTIVE_STORED).shortName, takeItems, kFLAGS.FARM_CONTRACEPTIVE_STORED);
 			}
-			
+
 			addButton(14, "Back", rootScene);
 		}
-		
+
 		private function getItemObj(flag:int):Consumable
 		{
 			if (flag == kFLAGS.FARM_SUCCUMILK_STORED) return consumables.SUCMILK;
 			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
 			if (flag == kFLAGS.FARM_EGG_STORED) return SceneLib.sophieBimbo.eggTypes[SceneLib.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE])];
 			if (flag == kFLAGS.FARM_CONTRACEPTIVE_STORED) return consumables.HRBCNT;
-			
+
 			trace("No valid argument given.");
 			return null;
 		}
-		
+
 		private function takeItems(flag:int):void
 		{
 			var item:Consumable = getItemObj(flag);
-			
+
 			if (flag == kFLAGS.FARM_EGG_STORED) flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 			flags[flag]--;
 			inventory.takeItem(item, afterTakeItems);
 		}
-		
+
 		private function afterTakeItems():void {
 			if (collectionAvailable())
 				collectTheGoodies();
@@ -455,7 +455,7 @@ import classes.StatusEffects;
 			{
 				if (flags[kFLAGS.MILK_SIZE] > 0) protection += 1;
 			}
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 0) protection += 7;
 
 			return protection;
@@ -498,7 +498,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.WHITNEY_CORRUPTION_COMPLETE] == 1) fValue *= 1.25;
 			return fValue;
 		}
-		
+
 		public function takeoverPrompt():Boolean
 		{
 			if (flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 1) return false;
@@ -507,11 +507,11 @@ import classes.StatusEffects;
 				farmMenu();
 				return true; // Hook the corrupt menu here
 			}
-			
+
 			if (player.cor >= 70 && corruptFollowers() >= 2 && player.level >= 12)
 			{
 				if (flags[kFLAGS.FARM_CORRUPT_PROMPT_DISPLAY] == 0)
-				{	
+				{
 					clearOutput();
 					if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4)
 					{
@@ -525,9 +525,9 @@ import classes.StatusEffects;
 					{
 						takeoverPromptGeneric();
 					}
-					
+
 					takeoverPromptMerge(true);
-					
+
 					return true;
 				}
 				else if (flags[kFLAGS.FARM_CORRUPT_PROMPT_DISPLAY] == 3 || flags[kFLAGS.FARM_DISABLED] == 1)
@@ -542,16 +542,16 @@ import classes.StatusEffects;
 					return false;
 				}
 			}
-			
+
 			return false;
 		}
-		
+
 		protected function takeoverPromptKelly():void
 		{
 			outputText("You stand at the top of a small rise overlooking the farm. From here you can just about pick out a beige-furred figure in the pepper field, hard at work. You shake your head almost in disbelief at the pastoral tableau. You remember when you found the farm when you were taking your first faltering steps in this land, with barely anything but the clothes you stood up in. You remember the relief you felt when you found this place, a pocket of peace in this disturbed land, how grateful you were to its owner to grub in the dirt with her and work for a pittance.");
-			
+
 			outputText("\n\nNow you feel nothing but contempt. How <b>dare</b> that bitch kick you off her land as if you were some common vagrant, simply because you took your rightful revenge on the centaur cunt she allowed to hang around and do as he pleased? Would she have stepped in if he had done to you what you have done to him? You think not, no, not Whitney, she’d have quite happily sat on the hill and read her book whilst her pet asshole raped the hell out of you.");
-			
+
 			outputText("\n\nOnce it affects her, well skies above, we can’t be doing with that can we? Does she have any idea how lucky she is? Who she is dealing with? How easy it would be to do to her as you have done to Kelt");
 			if (SceneLib.amilyScene.amilyCorrupt() || SceneLib.jojoScene.campCorruptJojo())
 			{
@@ -564,13 +564,13 @@ import classes.StatusEffects;
 			}
 			outputText("?");
 		}
-		
+
 		protected function takeoverPromptMarbleRape():void
 		{
 			outputText("You stand at the top of a small rise overlooking the farm. From here you can just about pick out a beige-furred figure in the pepper field, hard at work. You shake your head almost in disbelief at the pastoral tableau. You remember when you found the farm when you were taking your first faltering steps in this land, with barely anything but the clothes you stood up in. You remember the relief you felt when you found this place, a pocket of peace in this disturbed land, how grateful you were to its owner to grub in the dirt with her and work for a pittance.");
-			
+
 			outputText("\n\nNow you feel nothing but contempt. How <b>dare</b> that bitch kick you off her land, as if you were some common vagrant, simply because you took what was rightfully yours from the cow bitch. Would Whitney have stepped in if Marble had done to you what you did to her? You think not, no, not Whitney, she’d have quite happily sat on the hill and read her book whilst the cow bitch did what she felt like to you, probably forcing her damn milk down your throat. But once it affects her, well skies above, we can’t be doing with that can we?");
-			
+
 			outputText("\n\nDoes she have any idea how lucky she is? Who she is dealing with? How easy it would be to break her will and make her your willing slave");
 			if (SceneLib.amilyScene.amilyCorrupt() || SceneLib.jojoScene.campCorruptJojo())
 			{
@@ -583,41 +583,41 @@ import classes.StatusEffects;
 			}
 			outputText("?");
 		}
-		
+
 		protected function takeoverPromptGeneric():void
 		{
 			outputText("You stand at the top of a small rise overlooking the farm. From here you can just about pick out a beige-furred figure in the pepper field, hard at work. You shake your head almost in disbelief at the pastoral tableau. You remember when you found the farm when you were taking your first faltering steps in this land, with barely anything but the clothes you stood up in.");
-			
+
 			outputText("\n\nYou remember the relief you felt when you found this place, a pocket of peace in this disturbed land, how grateful you were to its owner to grub in the dirt with her and work for a pittance.");
-			
+
 			outputText("\n\nNow you feel nothing but contempt. Who chooses to live their life out here in staid idleness? What kind of sexless nothing nods her head at passing champions and then goes back to her book, not giving a flying fuck about anyone or anything as long as it doesn’t directly affect them? Does she have any idea how lucky she is, how merciful you are that you let her live her useless life in peace, with you just over the hill with a pile of sex slaves gathering? What you would give, what you would do to make her eyes open wide in dismay, to make her see a [man] she ignored passing through her yard with bigger ideas, coming back to completely destroy her.");
 		}
-		
+
 		protected function takeoverPromptMerge(firstTime:Boolean = false):void
 		{
 			flags[kFLAGS.FARM_CORRUPT_PROMPT_DISPLAY] = 1;
-			
+
 			if (firstTime)
 			{
 				outputText("\n\nYou let your anger grow and then rage like a wildfire through you, coursing through your veins; increasingly these days, you are finding that your passion allows you to think clearer, to better fuel your muse. There’s potential in this farm, you can see that, you could turn it to your own purposes, but of course, the narrow minded bitch in the field below will never realize it herself. You will have to go down and put her in her place first. The only question is, now or later?");
 			}
 			else
 			{
-				// (plays every two times PC visits the farm for as long as they meet requirements) 
+				// (plays every two times PC visits the farm for as long as they meet requirements)
 				outputText("Again, you find yourself standing on the bluff overlooking the farm, and you feel yourself filled with unholy rage at the woman below who stands against you and your plans for this piece of property. Do you put your plan into motion now or later?");
 			}
-			
+
 			menu();
 			addButton(0, "Now", takeoverPromptNow);
 			addButton(1, "Later", takeoverPromptLater);
 			addButton(2, "Never", takeoverPromptNever);
 		}
-		
+
 		public function takeoverPromptNow():void
 		{
 			clearOutput();
-			
-			outputText("You stride down to the farm and leap over a gate. You move casually, swaggering towards the pepper field with no obvious intent. When Whitney spots you and slowly stands up from her weeding, you raise your hand in friendly greeting"); 
+
+			outputText("You stride down to the farm and leap over a gate. You move casually, swaggering towards the pepper field with no obvious intent. When Whitney spots you and slowly stands up from her weeding, you raise your hand in friendly greeting");
 			if (player.weaponName != "fists") outputText(", and to demonstrate your peacefulness, you theatrically hold up your [weapon] and then discard it with a careless swing of your arm.");
 			else outputText(".");
 
@@ -691,44 +691,44 @@ import classes.StatusEffects;
 			}
 
 			outputText("\n\n“<i>Smart decision. I’ll send along help to you as soon as I can. I look forward to a long and prosperous business relationship with you.</i>” You bow deeply, turn and move almost all the way to the gate before raising a finger.");
-			
+
 			outputText("\n\n“<i> Oh, just one more thing. I will be expecting a cut. Seeing as how I’m invested in your little operation now and all. Shall we say 20 % ? If you cannot bear giving me the money yourself, just leave it underneath the rock over yonder every week. Do that and we won’t have any... problems.</i>” You smirk at her.");
-			
+
 			outputText("\n\nShe looks at you as if she’s never seen you before in her life, incapable of words. “<i>I guess that’s settled then. Always a pleasure talking to you, Whitney.</i>” You throw your [hips] out in an exaggerated swagger as you slowly make your way back to camp, knowing the dog morph’s eyes will follow you until you disappear into the distance.");
 
 			flags[kFLAGS.FARM_CORRUPTION_STARTED] = 1;
-			
+
 			if (!player.hasStatusEffect(StatusEffects.NoMoreMarble)) flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0; // Don't have to care about recruitment paths -- she'll fuck off based on corruption before the player can corrupt the farm.
-			
+
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		protected function takeoverPromptLater():void
 		{
 			clearOutput();
-			
+
 			outputText("You stare for a moment longer, then turn and head back to camp. You will show mercy she does not deserve... for now.");
-			
+
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		protected function takeoverPromptNever():void
 		{
 			clearOutput();
 			flags[kFLAGS.FARM_CORRUPTION_DISABLED] = 1;
-			
+
 			outputText("You close your eyes and take deep, shuddering breaths, drawing in the sweet, grass scented air and listening to the quiet, gentle peace which surrounds this place. The putrid ideas and viciously colorful images crowding your mind fade bit by bit, your blood cools and slowly, eventually, you find inner tranquility.  You promise yourself that come what may you’ll never do anything to this patch of peace you found in this world so long ago, if only as a reminder of what you once were. A heavy lump gathering in your throat, you turn and leave.");
- 
+
 			// (Option never displayed again, -5 Corruption)
 			dynStats("cor-", 5);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function rootScene():void
 		{
 			clearOutput();
 			spriteSelect(62);
-			
+
 			if (flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] == 2)
 			{
 				flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] = 3;
@@ -745,9 +745,9 @@ import classes.StatusEffects;
 			if (!whitneyCorrupt())
 			{
 				outputText("You stand on the rise you’ve taken to using to look down on the farm which you are invested in.");
-				
+
 				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) outputText(" A large machine, bulky and rotund with a conical top, has been built into the milking barn. Fat pipes crawl up onto the roof from it like metal ivy, and white smoke billows busily out of its whistle chimney.");
-				
+
 				if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 1) outputText(" Next to the pepper patch another crop has been planted, a field of verdant green shrubs. Their thin stems bob idly in the breeze.");
 
 				if (flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] > 1)
@@ -767,68 +767,68 @@ import classes.StatusEffects;
 			}
 
 			// [Follower taster and “blessing” text goes here]
-			
+
 			// Ceraphs Influence
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] > 0)
 			{
 				outputText("\n\nThere is an indefinable aura of corruption slathered across the farm; you can taste it at the back of your throat, you can practically see it like a blaze on your retina from looking at a purple light too long. The area has definitely been marked by a demon.");
 			}
-			
+
 			// Holli Influence
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0)
 			{
 				outputText("\n\nThe crops and grass which surround you seem to blaze with life, almost feverishly so. Suggestively shaped vines have curled up one or two of the trees, and some of the wildflowers look... different. Holli’s blessing has caused everything on the farm to grow faster, but if you peer closely at the grass at your feet, you can make out the purple tendrils of corruption within.");
 			}
-			
+
 			// Amily
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1)
 			{
 				outputText("\n\nAmily is in the pepper patch with a trowel happily beavering away. If she wasn’t purple and naked apart from her work gloves it would be difficult to believe she was corrupt at all.");
-				
+
 			}
-			
+
 			// Jojo
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1)
 			{
 				outputText("\n\nYou cannot see Jojo but you have no doubt he was aware of your presence the moment you arrived, and that he’s somewhere nearby, watching.");
 			}
-			
+
 			// Bimbo Sophie
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && SceneLib.sophieBimbo.bimboSophie())
 			{
 				outputText("\n\nYou cannot see Sophie but distinctive coos and giggles are coming from the hen coop.");
 			}
-			
+
 			// Regular Sophie
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !SceneLib.sophieBimbo.bimboSophie())
 			{
 				outputText("\n\nSophie has put together a huge nest on top of the hen coop from which she pensively stares out at the lake. When she sees you looking she brightens noticeably and begins to preen her plumage.");
 			}
-			
+
 			// Izma
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1)
 			{
 				outputText("\n\nIzma is sitting in Whitney’s old spot below the oak tree, curled up in a book.");
 			}
-			
+
 			// Isabella
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1)
 			{
 				outputText("\n\nIsabella is hauling steel canisters in and out of the milking barn, singing merrily to herself as she does.");
 			}
-			
+
 			// Vapula
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1)
 			{
 				outputText("\n\nVapula is slouched against a barn wall, looking like the world’s grumpiest one woman gang. Not even a number of comatose imps nearby seem to have been able to cheer her up.");
 			}
-			
+
 			// Latexy
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1)
 			{
 				outputText("\n\nYou can see something black shimmering wetly underneath Whitney’s porch which could only be a certain latex goo.");
 			}
-			
+
 			// BathSlut
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1)
 			{
@@ -841,65 +841,65 @@ import classes.StatusEffects;
 					outputText("\n\n[Bathgirlname] is sat on the edge of her tank next to the cow shed, rubbing her huge tits in slow, mesmeric patterns. Her gaze is vacant except when it lands on you, whereon it becomes hopeful.");
 				}
 			}
-			
+
 			farmMenu();
 		}
-		
+
 		public function farmMenu():void
 		{
 			menu();
-			
+
 			if (flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] != 1)
 			{
 				if (!whitneyCorrupt()) addButton(0, "Whitney", dogeNotCorruptYet);
 				else addButton(0, "Whitney", dogeCorruptedMissionComplete);
 			}
-			
+
 			if (!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted) && !player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) addButton(1, "Marble", farm.meetMarble);
-			
+
 			if (player.hasStatusEffect(StatusEffects.Kelt) && !player.hasStatusEffect(StatusEffects.KeltOff))
 			{
 				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(2, "Kelly", farm.kelly.breakingKeltOptions);
 				else if (flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] == 0) addButton(2, "Kelt", keltAChangeInManagement);
 				else addButton(2, "Kelt", farm.kelly.breakingKeltOptions);
 			}
-			
-			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) 
+
+			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0)
 			{
 				if (player.hasStatusEffect(StatusEffects.Milked))
 				{
 					outputText("\n\n<b>Your " + nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>");
 				}
-				
+
 				addButton(3,"Get Milked", farm.getMilked);
 			}
-			
+
 			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
 			{
 				addButton(4,"Milk Cock", farm.cockPumping);
 			}
-			
+
 			addButton(5, "Farm", corruptingTheFarmExplore);
-			
+
 			if (slavesAtFarm()) addButton(6, "Slaves", slavesAtFarmMenu);
 			if (loversAtFarm()) addButton(7, "Lovers", loversAtFarmMenu);
 			if (followersAtFarm()) addButton(8, "Followers", followersAtFarmMenu);
-			
+
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
-		
+
 		private function corruptingTheFarmExplore():void
 		{
 			menu();
-			
+
 			addButton(0, "Explore", farm.exploreFarm);
 			addButton(1, "Work", farm.workFarm);
-			
+
 			if (flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] >= 7 || flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0) addButton(2, "Collect", collectTheGoodies);
-			
+
 			addButton(14, "Back", farmMenu);
 		}
-		
+
 		public function collectionAvailable():Boolean
 		{
 			if (flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] >= 7) return true;
@@ -909,29 +909,29 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0) return true;
 			return false;
 		}
-		
+
 		private function keltAChangeInManagement():void
 		{
 			clearOutput();
-			
+
 			outputText("“<i>Hear there’s been a change in management,</i>” says Kelt, clopping to a halt in front of you. You confirm that that is the case. The big centaur looks at you thoughtfully. There’s something different in his dark eyes and rugged scowl than his usual wearied contempt. Grudging admiration?");
 
-			outputText("“<i>Find it difficult to believe someone like you could put a bitch in her place,</i>” he says eventually. “<i>Perhaps you’ve got bigger balls than I thought you had."); 
+			outputText("“<i>Find it difficult to believe someone like you could put a bitch in her place,</i>” he says eventually. “<i>Perhaps you’ve got bigger balls than I thought you had.");
 			if (player.balls == 0) outputText(" So to speak, anyway.");
 			outputText("</i>” He snorts, and trots towards the butts. “<i>Just don’t expect me to treat you any different. As long as you’re getting free instruction from me, I’m the master and you’re the whelp. Got that?</i>”");
-			
+
 			outputText("\n\nYou reply evenly you can get along with that, and he’s welcome to stay on at the farm, but if he lays a finger on any of your own slaves you’re going to break every bone in his hands. Kelt roars with laughter.");
 
 			outputText("“<i>Do I look like I want or need your sloppy seconds? Godsdamn, I can only imagine what kind of pathetic creatures would have </i>you<i> lording it over them. What a joke! Now, are we going to go watch you fail miserably to hit a target from five yards or what?</i>”");
 
 			outputText("It’s better than you were expecting from him in all honesty. You take your bow out and silently follow him to the archery range.");
-			
+
 			flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] = 1;
 			flags[kFLAGS.FOLLOWER_AT_FARM_KELLY] = 1;
-			
+
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function numSlavesAtFarm():int
 		{
 			var count:int = 0;
@@ -955,22 +955,22 @@ import classes.StatusEffects;
 		private function slavesAtFarmMenu():void
 		{
 			menu();
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(0, "Amily", SceneLib.amilyScene.amilyFollowerEncounter);
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(1, "Jojo", SceneLib.jojoScene.corruptCampJojo);
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && SceneLib.sophieBimbo.bimboSophie()) addButton(2, "Sophie", SceneLib.sophieBimbo.approachBimboSophieInCamp);
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(3, "Vapula", SceneLib.vapula.callSlaveVapula);
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(4, flags[kFLAGS.GOO_NAME], SceneLib.latexGirl.approachLatexy);
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(5, flags[kFLAGS.MILK_NAME], SceneLib.milkWaifu.milkyMenu);
-			
+
 			addButton(14, "Back", farmMenu);
 		}
-		
+
 		private function numFollowersAtFarm():int
 		{
 			var count:int = 0;
@@ -989,12 +989,12 @@ import classes.StatusEffects;
 		private function followersAtFarmMenu():void
 		{
 			menu();
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !SceneLib.sophieBimbo.bimboSophie()) addButton(0, "Sophie", SceneLib.sophieFollowerScene.followerSophieMainScreen);
-			
+
 			addButton(14, "Back", farmMenu);
 		}
-		
+
 		private function numLoversAtFarm():int
 		{
 			var count:int = 0;
@@ -1014,12 +1014,12 @@ import classes.StatusEffects;
 		private function loversAtFarmMenu():void
 		{
 			menu();
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(0, "Izma", SceneLib.izmaScene.izmaFollowerMenu);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) addButton(0, "Izmael", EventParser.gameOver);
-			
+
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(1, "Isabella", SceneLib.isabellaFollowerScene.callForFollowerIsabella);
-			
+
 			addButton(14, "Back", farmMenu);
 		}
 
@@ -1030,14 +1030,14 @@ import classes.StatusEffects;
 
 			flags[kFLAGS.FARM_CORRUPTION_APPROACHED_WHITNEY] = 1;
 
-			// Farm Corruption drops below 30 after being higher: 
+			// Farm Corruption drops below 30 after being higher:
 			if (whitneyCorruption() < 30 && flags[kFLAGS.WHITNEY_CORRUPTION_HIGHEST] > 30 && flags[kFLAGS.WHITNEY_CORRUPTION_0_30_DROP_MESSAGE] == 0)
 			{
 				outputText("You hail Whitney as she hauls a bag of grain towards the storage barn. She entirely ignores you; there’s an expression of cold triumph on her face as she breezes past you, color high in her cheeks. You notice that she’s rediscovered her crossbow and has it strapped to her back. It hurts your eyes slightly to look at her, as if she’s standing directly in front of the sun. You scowl at her retreating back. You’ll have to do something about this.");
 
 				// [Plays once, reverts to standard message]
 				flags[kFLAGS.WHITNEY_CORRUPTION_0_30_DROP_MESSAGE] = 1;
-				
+
 				if (flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0) doNext(dogeNotCorruptLeaveFirstTime);
 				else doNext(camp.returnToCampUseOneHour);
 
@@ -1073,7 +1073,7 @@ import classes.StatusEffects;
 				}
 				else
 				{
-					// Subsequent 31-60: 
+					// Subsequent 31-60:
 					outputText("Whitney puts down her work as you stride towards her, resigned unhappiness in her expression.");
 
 					outputText("\n\n“<i>What is it?</i>”");
@@ -1097,7 +1097,7 @@ import classes.StatusEffects;
 				}
 				else
 				{
-					// 61-90 Subsequent: 
+					// 61-90 Subsequent:
 					outputText("Whitney puts down her work and smiles at you vaguely as you approach her. You again sense that queasy mixture of anxiety, unhappiness and excitement in her jerky, cramped movements and expression.");
 
 					outputText("\n\n“<i>Hello [name]. Is there something you want?</i>”");
@@ -1132,7 +1132,7 @@ import classes.StatusEffects;
 				}
 				else
 				{
-					// Subsequent 91-119: 
+					// Subsequent 91-119:
 					outputText("Whitney lays down her work eagerly as you approach. ");
 
 					outputText("\n\n“<i>What’re you after, [name]?</i>” she says, smiling. There’s a barely contained excitement in her eyes; you don’t think she realizes her short tail is wagging furiously.");
@@ -1147,8 +1147,8 @@ import classes.StatusEffects;
 				if (flags[kFLAGS.WHITNEY_CORRUPTION_COMPLETE] == 0)
 				{
 					flags[kFLAGS.WHITNEY_CORRUPTION_COMPLETE] = 1;
-					
-					// 120 Farm Corruption 
+
+					// 120 Farm Corruption
 					outputText("You don’t need to seek out Whitney this time; almost the moment you arrive on the farm a sandy furred figure is hurrying over to you. There’s deep excitement in her face and her breast is heaving with more than just exertion.");
 
 					outputText("\n\n“<i>[name], can I... can I talk to you? I really need t-to talk.</i>” You know what she’s really asking for here. You smile, withdraw the gem and once again begin to slowly turn it, clockwise, then anti-clockwise... Whitney’s eyes are full of reflected, sparkling light.");
@@ -1160,7 +1160,7 @@ import classes.StatusEffects;
 					outputText("\n\nSoftly, still spinning the gem, you ask her what she called you. Whitney makes a noise which is familiar to you but which you’ve never heard emanating from her; a faint, high pitched whine from the back of her throat. Again, gently but firmly, you ask her what word she used.");
 
 					outputText("\n\n“<i>...[Master],</i>” she says, quietly. You smile triumphantly. It’s time to move onto the final stage of your high-stakes business merger, however such is your control over the dog morph now you could make her change for you, if you so wished.");
-					
+
 					menu();
 					addButton(0, "Change Her", deFurDoge);
 					addButton(1, "Don't Change", dontDeFurDoge);
@@ -1177,7 +1177,7 @@ import classes.StatusEffects;
 
 			flags[kFLAGS.WHITNEY_LEAVE_0_60] = 1;
 
-			// Leave first time: [otherwise defaults to main farm menu] 
+			// Leave first time: [otherwise defaults to main farm menu]
 			outputText("As you turn to leave, you feel something tug on your [armor]. You turn back to look into Whitney’s searching eyes.");
 
 			outputText("\n\n“<i>How... how do you do it?</i>” she asks haltingly. “<i>How can you force other people into becoming your... your puppets, your chattel? Doesn’t it sicken your stomach?</i>” You shrug nonchalantly and say that almost all of your harem had ideas about your personal freedom, your genitals, and how they would use them to fuel their own selfish purposes; your will and desires simply proved to be stronger than theirs. You have discovered through hard experience that that is the way of this world and those who think otherwise are simply prey to those who are more ruthless. You stare for a moment longer into her eyes, and then sweep away.");
@@ -1192,11 +1192,11 @@ import classes.StatusEffects;
 
 			flags[kFLAGS.WHITNEY_LEAVE_61_90] = 1;
 
-			// Leave first time: 
+			// Leave first time:
 			outputText("“<i>I know what you’re tryin’ to do,</i>” the dog woman says abruptly as you conclude your business and turn to leave. “<i>You think that if you make me work with your slaves, poison this place with your influence and demon magic, you’ll turn me into one of your puppets too. Evil osmosis, or somethin’.</i>” She laughs bitterly. There’s an almost hysterical note to it. Maybe you’re kidding yourself but you think there might also be a brittle, perverse note of excitement in there too. “<i>It don’t work like that. All you’re doing with this business is surroundin’ me with examples of your cruelty, of what corruption and ill-will can do to ordinary folks. I can stand against it, and I will.</i>”");
 
 			outputText("\n\nYou shrug nonchalantly, retrieve a gem from your purse and spin it on your fingertips with the same affected casualness. It’s not about corruption, you say; you aren’t in league with the demons, you have a soul. All you want to do is make the very best of this farm, and open her mind to new possibilities, new ways of thinking. The gem glitters with sunlight as you spin it rhythmically. You think that she’s spent too long on her own; has become so set in her ways she sees anything that changes her world as a threat, even if it is for her own benefit. She should open her eyes and open her mind to the success you’re bringing to her fields; maybe she’d learn how rich life can be if she let go of her prejudices, and accept that from your wider experience you know better. You pinch the gem to a stop and look at Whitney. She stares at the pretty object a moment longer before shaking her head and bringing her eyes up to yours, slightly dazed. You turn and leave, smiling quietly to yourself.");
-			
+
 			doNext(rootScene);
 		}
 
@@ -1206,7 +1206,7 @@ import classes.StatusEffects;
 
 			addButton(0, "Appearance", whitneyAppearanceNotCorrupt);
 			addButton(1, "Prosperity", prosperityGoNotCorrupt);
-			
+
 			if (availableInvestments()) addButton(2, "Investment", investmentMenu);
 
 			addButton(14, "Back", rootScene);
@@ -1214,7 +1214,7 @@ import classes.StatusEffects;
 			if (whitneyCorruption() <= 60 && flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0) addButton(14, "Back", dogeNotCorruptLeaveFirstTime);
 			else if (whitneyCorruption() <= 90 && flags[kFLAGS.WHITNEY_LEAVE_61_90] == 0) addButton(14, "Back", dogeNotCorruptLeave6190);
 		}
-		
+
 		public function availableInvestments():Boolean
 		{
 			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] == 0) return true;
@@ -1235,12 +1235,12 @@ import classes.StatusEffects;
 			menu();
 			dogeNotCorruptYetMenu();
 		}
-		
+
 		private function whitneyAppearanceCorrupt():void
 		{
 			clearOutput();
 			whitneySprite();
-			
+
 			outputText("Whitney is a 5’8” dog");
 			if (whitneyDefurred()) outputText("-girl. Her human transformation has rendered her pretty in a delicate, diffident kind of way.");
 			else outputText("-morph. Her muzzle is suggestive of a golden retriever but really she could be any breed.");
@@ -1255,7 +1255,7 @@ import classes.StatusEffects;
 				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] + "\n");
 				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] + "\n");
 				if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_BUTT] + "\n");
-			} 
+			}
 
 			outputText("\n");
 			if (!whitneyDefurred()) outputText("Her fur is sandy, dusking to black at her extremities");
@@ -1287,11 +1287,11 @@ import classes.StatusEffects;
 				else outputText(" I need more hands to make the best of the place. More suitable hands at least.");
 				outputText("</i>”");
 			}
-			// Value high, Protection low: 
+			// Value high, Protection low:
 			else if (!lowValue && lowProtection) outputText("\n\n“<i>You’ve given me lots’ve good workers, lots’ve good earners, and I’ve been bringing in lots’ve produce.</i>” She sighs. “<i>The trouble is lots’ve produce attracts trouble. Imps, gnolls, that sort. And if there ain’t nobody to stop em, they help themselves. I need strong types to come along here, warriors, watchers, people who’ll stop stuff disappearing in the night. You know?</i>”");
-			// Value low, Protection high: 
+			// Value low, Protection high:
 			else if (lowValue && !lowProtection) outputText("\n\n“<i>Feel plenty safe at night, I can tell you that. You got this place protected better than a bank vault.</i>” Whitney shrugs. “<i>Trouble is, the vault is empty. Guards ‘d be great but they don’t scratch the earth for a living. I need hard workers, people who’ll produce stuff, earners. That’s what this place is crying out for right now.</i>”");
-			// Value high, Protection high: 
+			// Value high, Protection high:
 			if (!lowValue && !lowProtection) outputText("\n\n“<i>Difficult to complain. This place is doing better than I’ve ever known, even going back to my grandma’s day. As long as we keep up this level of hard work and security, we’ll keep making this kinda scratch.</i>” You look at her, unsmiling, and she is momentarily thrown. “<i>It’s not... you aren’t-? Well, the only way we’d earn more money is- but I’d never...</i>” she trails off, not looking at you.");
 
 			dogeNotCorruptYetMenu();
@@ -1515,7 +1515,7 @@ import classes.StatusEffects;
 
 					outputText("\n\nExactly, you say primly. You need her to produce more milk. Whitney looks like she’s going to refuse, but once she’s stared into your unblinking eyes and remembered a few things, she looks at her feet and sighs miserably. “<i>I could probably do that. Because she trusts you, she trusts me, and- 400 gems,</i>” she finishes in a mumble.");
 				}
-				// If Bathgirl boobed and at camp: 
+				// If Bathgirl boobed and at camp:
 				else
 				{
 					outputText("You tell Whitney you want her to build a swimming tank at the farm, then come to your camp, take away your expensively acquired milk slave and install her in it. The dog woman slowly absorbs this.");
@@ -1683,7 +1683,7 @@ import classes.StatusEffects;
 			outputText("You again retrieve your gem, and once more begin to rhythmically turn it. This time, however, you walk steadily towards Whitney, your voice getting louder in her ears, the shining light in her unfocused eyes getting brighter as you go on.");
 
 			outputText("\n\n“<i>You liked doing that, didn’t you Whitney? That letting go, that burst of pure violence, passion given physical form. You always had that within you, but for some reason you chose to bury it, stifle it under a life of complete tedium. Until </i>I<i> came along. Until </i>I<i> I gave you slaves to order around and forced those desires to the surface, an unquenchable thirst to overcome and make your own.</i>”");
- 
+
 			outputText("\n\nAs you talk, you stop rotating the jewel but continue to hold it directly in front of her eyes, whilst you place your other hand on her hip, sliding it upwards, enjoying the firm contours of your new slave. The dog girl’s eyes are not unfocused this time; they are staring into the blinding light with a hard, sheer lust, her breath drawing harshly as your hand continues to move. You find your heart quickening at the prospect of what you are about to do; but the thought of fanning those embers of furious passion you have kindled within this once calm woman is too enticing to resist.");
 
 			outputText("\n\nHer breath comes harder as you roam far enough upwards to slip underneath the belt of her skirt and then downwards again, smoothing around her tight rump and inner thigh until you touch her labia. You are not surprised to find that she is dripping wet, her underclothes soaked with excitement. You gently push your fingers into the sopping heat and begin to stroke her inner lips, curving upwards to find and caress her tiny clit as you continue to talk, pressing your compulsion on her as you drown her hypnotized mind in pleasure.");
@@ -1780,7 +1780,7 @@ import classes.StatusEffects;
 			{
 				doFunctor = cockOralTraining();
 			}
-			else 
+			else
 			{
 				doFunctor = vaginaOralTraining();
 			}
@@ -1871,10 +1871,10 @@ import classes.StatusEffects;
 			outputText("\n\n“<i>I - I want to do that, [master],</i>” she replies tensely. She’s having problems knowing what to look at, her eyes flitting between your gaze and the demanding sight of your " + ((player.hasCock()) ? "[cock biggest]" : "lush cunt") + ", eventually settling on the first. “<i>I want to serve you best I can, but I - don’t know if - it’s just, I’ve never really - I mean, once or twice, but I’ve never been very...</i>” Your growing urge makes you feel impatient and you think about stifling her meek babbling with a good face fucking... but no. There are much better ways of getting the best out of inexperienced slaves.");
 
 			outputText("\n\nIn a kind tone, you tell her not to worry. You’re going to teach her exactly how to give pleasure to her [master], and how it in turn will give her more pleasure than she’s ever known. After a few lessons, you tell her confidently, she’ll be the best and most shameless");
-			
+
 			if (player.hasCock()) outputText(" cocksucker");
 			else outputText(" pussy eater");
-			
+
 			outputText(" there has ever been. Doubt wages war with aroused apprehension on Whitney’s face.");
 
 			outputText("\n\n“<i>I, I will try, [master],</i>” she says. You reach down and hold her around the jaw-line.");
@@ -2193,7 +2193,7 @@ import classes.StatusEffects;
 
 			outputText("You smile at Whitney as you take off your... you stop, frowning down at her. Did she whimper just then? She’s completely still, staring at you intently with her big, deep, brown eyes. Without saying a word and pretending to be interested in the sky above, you continue to disrobe, doing it slowly, placing every piece of your [armor] down on the ground with careful deliberation. There is no mistaking it this time - as your [cock biggest] finally bobs into view Whitney moans deep in her throat, squirming uncomfortably in her kneeling position as her gaze bores deep into your crotch. You smile softly, sit yourself down, open your [hips] wide, and wait.");
 
-			//Male 
+			//Male
 			if (!player.hasVagina())
 			{
 				outputText("\n\nOnce you have settled yourself down the dog woman immediately sends her hand burying into her underwear, her heavy breath catching in her throat as she stares at your [cock biggest]. It only takes a few seconds of urgent jerking before she spasms forward, her tongue out and eager to begin.");
@@ -2359,7 +2359,7 @@ import classes.StatusEffects;
 
 			outputText("\n\n“<i>Very well,</i>” you say coolly. “<i>But next time you will say it clearer. Begin.</i>”");
 
-			// Male 
+			// Male
 			if (!player.hasVagina())
 			{
 				outputText("\n\nShe spasms forward, her tongue out, overwhelmingly eager to do so. ");
@@ -2424,7 +2424,7 @@ import classes.StatusEffects;
 
 				outputText("\n\n“<i>I...</i>“ she whispers, licking her succulent black lips. “<i>I think I’ve got it now, master.</i>” You beam at her proudly, and then silently send your taskmistress slut on her woozy, staggering way with a rub behind the ear and a pat on the tush.");
 			}
-			//Herm 
+			//Herm
 			else if (player.hasVagina())
 			{
 				outputText("\n\nShe spasms forward, her tongue out, overwhelmingly eager to do so. She buries herself deep into your crotch, making you laugh and then coo as she pushes her thin lips and questing tongue onto your [vagina]. You sigh as she laps at your pussy, first circling your outer folds gently before pushing in, smoothing over your sensitive walls before finding your [clit], humming contentedly as she spreads her thin, wet blanket of her tongue over it, pushing and dabbing at it until it is bulging needily and your tunnel is dripping excitement. Given she’s a total novice at that, she’s - you gasp as she sends another sumptuous twinge rippling through you - she’s very good. Once she’s got you nice and wet she replaces her masterful tongue with her warm hand, gently fingering your clit as she moves up.");
@@ -2493,7 +2493,7 @@ import classes.StatusEffects;
 
 			outputText("\n\n“<i>Very well,</i>” you say benevolently, opening your [hips]. “<i>I suppose you do deserve it for being such a hardworking task slut.</i>”");
 
-			//Male 
+			//Male
 			if (!player.hasVagina())
 			{
 				outputText("\n\nShe spasms forward, her tongue out, overwhelmingly eager to begin. ");
@@ -2550,14 +2550,14 @@ import classes.StatusEffects;
 				outputText(" Eventually you can give her no more and withdrawing you stumble back, stars swimming in your eyes from the force of it.");
 
 				outputText("\n\nYou sigh beatifically and float high and formless on your post-blowjob haze. A moment later, you feel Whitney’s wet, frictionless plumpness pressing on the beading head of your aching [cock biggest]. She moans whorishly as she savors your flavor on her lips, sending her tongue pushing all around her black plumpness with the taste of your cum, gently pumping your spent [prickplural] to make the last of it drool out so she can indulge in it even more. You close your eyes and enjoy the delightful touch of her corrupt lips on your groin, searching out every last trace of your musk and lapping it up with a series of exhalations as deep as if instead of just lying there you were giving her the most mind-blowing sex imaginable.");
-				 
+
 				outputText("\n\nOnce your whole groin has been burnished with saliva to what feels like a brilliant sheen you pull her off and press her firm, petite body into your [chest] and gaze lazily down at her. Some of the overriding need in her eyes has calmed down a bit, but it never truly leaves her now.");
 
 				outputText("\n\n“<i>What do you say, bitch?</i>”");
 
 				outputText("\n\n“<i>Thank you, [master],</i>” your taskmistress slut whispers, licking her succulent black lips as she stares adoringly into your eyes. You give her a fond rub behind a floppy ear and then send her away with a pat on her tight ass, avoiding the considerable damp patch on her skirt as you do.");
 			}
-			//Herm 
+			//Herm
 			else if (player.hasVagina())
 			{
 				outputText("\n\nShe spasms forward, her tongue out, overwhelmingly eager to begin. You sigh as she laps at your pussy, first circling your outer folds gently before pushing in, smoothing over your sensitive walls before finding your [clit], moaning with profound lust as she spreads her thin, wet blanket of her tongue over it, pushing and dabbing at it until it is bulging needily and your tunnel is dripping excitement. ");
@@ -2691,7 +2691,7 @@ import classes.StatusEffects;
 
 			outputText("\n\n“<i>First of all, before you go down on me each time you must start up here.</i>” You let a hand slide slowly across your [chest], your nipples");
 			if (player.lactationQ() > 0) outputText(" dripping slightly");
-			else outputText(" semi-erect"); 
+			else outputText(" semi-erect");
 			outputText(" from the arousal you already feel. “<i>A good slut knows her mistress’s breasts need to be attended to, her nipples and skin shining with a slave’s worship for all the world to see, before she’s deserving of drinking from her pussy. Let’s see how you do.</i>” ");
 
 			outputText("\n\nAfter a slight pause Whitney rises up, puts her arms around your waist, and bends into one of your [nipples]. You sigh as you feel her flat tongue slide across your softness and then over your");
@@ -2785,7 +2785,7 @@ import classes.StatusEffects;
 			whitneySprite();
 
 			outputText("You smile at Whitney as you take off your... you stop, frowning down at her. Did she whimper just then? She’s completely still, staring up at you intently with her big, deep, brown eyes. Without saying a word and pretending to be interested in the sky above, you continue to disrobe, doing it slowly, placing every piece of your [armor] down on the ground with careful deliberation. There is no mistaking it this time - as you spread your [hips] and expose your [vagina] Whitney moans deep in her throat, squirming uncomfortably in her kneeling position as her gaze bores deep into your crotch. You smile softly, sit yourself down, open your [legs], and wait.");
-			 
+
 			outputText("\n\nOnce you have settled yourself down the dog woman immediately sends her hand burying into her underwear, her heavy breath catching in her throat as she stares at you. It only takes a few seconds of urgent jerking before she spasms forward, her tongue out and eager to begin. She radiates heat as she pushes into your abdomen, pressing her mouth into your [chest]. Eyes closed, she silently sends her warm, flannel-like tongue rolling and questing across your softness, varnishing every inch of them with saliva, catching your skin gently here and there in her teeth, making the blood rise to the surface just so you can enjoy her licking all the more;");
 			if (!player.hasFuckableNipples()) outputText(" she takes each of your [nipples] into her mouth to bathe them in close, sucking attention");
 			else outputText(" she sends her tongue lapping into each of your cunt nipples, curling at their sensitive pink until they are wet with need");
@@ -2887,7 +2887,7 @@ import classes.StatusEffects;
 			outputText("\n\n“<i>M-mistress, what have you done? My mouth... it’s so-</i>” There is a small, moist sound and a sharp inhalation. A moment later, you feel hands wrap around your [hips] and their wet plumpness pressing on your beading [vagina].");
 
 			outputText("\n\nYou may not have given her a second vagina but it swiftly becomes apparent her new full, black lips are almost as sensitive, at least when applied to you. Whitney does not just sigh contentedly as she cleans your sex, sending her mouth smoothing over your throbbing pussy, she moans like a whore, her ass in the air, sending her tongue pushing all around her new pussy pillows with the taste of your juices, before sending it seeking back into your spent [vagina] to find every last trace of fluid. You close your eyes and enjoy the delightful touch of her new lips on your groin, searching out every last trace of your musk and lapping it up with a series of exhalations as deep as if instead of just lying there you were giving her the most mind-blowing sex imaginable. ");
-			 
+
 			outputText("\n\nPerhaps you are just imagining it, but it feels like she is producing more saliva now, and not only that but it has the very slightest clinging, oily quality to it. You pull her off before she makes your cunt ache even more, pressing her firm, petite body into your [chest] and gaze lazily down at her. Some of the overriding need in her eyes has calmed down a bit, but it will never truly leave her now. Not only is she a champion pussy-licker, she’s addicted to you and perfectly equipped for you to make the most out of both qualities. ");
 
 			outputText("\n\n“<i>I-</i>“ she whispers, licking her succulent black lips. “<i>I think I’ve got it now, milady.</i>” ");
@@ -3051,7 +3051,7 @@ import classes.StatusEffects;
 
 			outputText("\n\n“<i>Glad we got the edge off there,</i>” her lilting voice floats down to you. The pressing tone is gone, replaced with a lazier, playful one. “<i>Whew! Now then. I don’t believe I told you to stop...</i>” she says as she sinks her hips down, her oozing pussy sitting straight back onto your lips as her warm butt cheeks press over your eyes. Your groan is stifled by the returning, smothering demand of her sex. It’s impossible to struggle against it pulled tight as you are, and you are forced to do as she asks, moving your tongue over her sweltering folds in a soft, attentive way you hope will please her. “<i>That’s it. Nice an’ slow, take your time. While you’re doing that, let’s see what you got down here for me, hmm?</i>” You close your eyes as you feel her fingers run softly up your inner thighs.");
 
-			// Male: 
+			// Male:
 			if (player.hasCock() && !player.hasVagina())
 			{
 				outputText("\n\nHer dry, smooth digits touch your turgid [cock biggest] at the base, rising slowly up the sensitive stem.");
@@ -3073,7 +3073,7 @@ import classes.StatusEffects;
 			}
 			else if (player.hasCock() && player.hasVagina())
 			{
-				// Herm: 
+				// Herm:
 				outputText("\n\nHer dry, smooth digits touch your turgid [cock biggest] at the base, rising slowly up the sensitive stem. ");
 
 				outputText("\n\n“<i>Got so many things to play with tucked away in here!</i>” comes her merry voice again, as you feel her other hand creep between your thighs and touch the lips of your [vagina]; you groan into the confines of her flesh as her fingers slide into your crevice, circling your [clit]. The rough oral you’ve been subjected to has sunk heat into your loins and it doesn’t take much of her hands’ gentle but insistent working of your cock and cunt for you to stand at full mast, for you to start beading excitement. ");
@@ -3096,7 +3096,7 @@ import classes.StatusEffects;
 			}
 			else if (player.hasVagina() && !player.hasCock())
 			{
-				// Female: 
+				// Female:
 				outputText("\n\nHer dry, smooth digits flow down your mound, creep between your thighs and touch the lips of your [vagina]; you groan into the confines of her flesh as her fingers slide into your crevice, circling your [clit]. The rough oral you’ve been subjected to has sunk heat into your groin and it doesn’t take much of her hands’ gentle but insistent working of your cunt for you to start beading excitement.");
 
 				outputText("\n\nYou continue to lap away at her own moist sex, working away from her labia momentarily to lick up the lubricant which has trickled out before bending in again, directed by the sounds of gratification coming from above you. She lifts her thighs up and then heavily drops them down, up and then down, allowing you to breathe momentarily before pressing her hot, heavy need imperiously down again.");
@@ -3119,7 +3119,7 @@ import classes.StatusEffects;
 			if (player.hasCock()) outputText("cum");
 			else outputText("femcum");
 			outputText(", and only after relaxing for a long, heavy moment on your face does she finally slide off you. You heave and pant for breath, still cuffed to the bed, rivulets of femcum trickling down your face, your tongue and ");
-			if (player.hasCock()) outputText("[cock biggest]"); 
+			if (player.hasCock()) outputText("[cock biggest]");
 			if (player.hasCock() && player.hasVagina()) outputText(" and ");
 			if (player.hasVagina()) outputText("[vagina]");
 			outputText(" aching, oozing. In a deep, post-coital haze you feel someone take a towel to your body before curling into you, throwing a dense thigh over you, holding and running her hands over you possessively as you recover. ");
@@ -3194,7 +3194,7 @@ import classes.StatusEffects;
 				if (player.hasVagina()) outputText("deep, eager vagina");
 				else outputText("oily, well-used passage");
 				outputText(" eagerly swallowing it up until her hard hips are pressed against your [butt].");
-				
+
 				if (player.hasVagina())
 				{
 					player.cuntChange(36, true, true, false);
@@ -3217,7 +3217,7 @@ import classes.StatusEffects;
 				if (player.hasVagina()) outputText("take of your tight cunt");
 				else outputText("give of your tight ass");
 				outputText(", pushing the other end of the dildo into her. An even louder moan is forced out of your throat by the intensity of your tunnel being packed full of cock, albeit an imitation.");
-				
+
 				if (player.hasVagina())
 				{
 					player.cuntChange(36, true, true, false);
@@ -3273,7 +3273,7 @@ import classes.StatusEffects;
 
 			outputText("\n\nOnce she’s done tying you down the dog woman gets off the bed with a spring and disappears from your limited sightline, rummaging around her bedroom with ominous-sounding intent. Is she shifting particularly heavy things about just to torment you? You crane your neck to get a glimpse at what she’s holding as she returns to your side - and then cry out in shock as a black curtain falls down on the world.");
 
-			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyes.type == Eyes.FOUR_SPIDER_EYES) ? " Once she’s finished with that she places another blindfold over your second and third pair of eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
+			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyes.type == Eyes.SPIDER) ? " Once she’s finished with that she places another blindfold over your second and third pair of eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
 
 			outputText("\n\nShe crawls down to your lower body, taking her time now as she slides her hands across your abdomen and [hips] and sits herself down in front of [eachCock]" + ((player.balls > 0) ? ", making you twitch as she momentarily cups your [balls]" : "") + ". She teases you with slow, deliberate movements of her smooth digits, fully aware that all you can do now in your black space is lie there, feeling and listening to what she’s doing to you.");
 
@@ -3386,7 +3386,7 @@ import classes.StatusEffects;
 				outputText("\n\nShe watches you dress and sighs wistfully as you get up and head to the door. But one session at a time with this creature you’ve managed to create is about as much as you think you can physically take. The marks from this encounter will be with you for a while.");
 
 				outputText("\n\n“<i>I hope you feel suitably relaxed, [master],” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
-				
+
 				player.orgasm();
 			}
 
@@ -3650,7 +3650,7 @@ import classes.StatusEffects;
 
 			player.gems -= 50;
 			showStats();
-			
+
 			amilyBrandSlotSelect();
 		}
 
@@ -3703,7 +3703,7 @@ import classes.StatusEffects;
 
 			player.gems -= 50;
 			showStats();
-			
+
 			vapulaSlotSelect();
 		}
 
@@ -3715,7 +3715,7 @@ import classes.StatusEffects;
 
 			player.gems -= 50;
 			showStats();
-			
+
 			kellySlotSelect();
 		}
 
@@ -3729,7 +3729,7 @@ import classes.StatusEffects;
 
 			player.gems -= 50;
 			showStats();
-			
+
 			smallMilkySlotSelect();
 		}
 
@@ -3743,7 +3743,7 @@ import classes.StatusEffects;
 
 			player.gems -= 50;
 			showStats();
-			
+
 			bigMilkySlotSelect();
 		}
 
@@ -5388,7 +5388,7 @@ import classes.StatusEffects;
 
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function jojoSissySlutTattoo(slot:int):void
 		{
 			clearOutput();
@@ -6206,19 +6206,19 @@ import classes.StatusEffects;
 			outputText("\n\n“<i>2,200 gems?!</i>”");
 
 			outputText("\n\n“<i>...I could convert my front room into a relaxation room for you,</i>” the dog woman goes on doggedly. “<i>It would have everything I need to properly take care of you. Like a hot tub. And I would pack it with all the sorts of things...</i>“ she sighs dreamily again “<i>all the sorts of things a big, strong "+ player.mf("lord", "lady") +" of the land might want. For when [he] is taking care of [his] servants. Like lots of ‘em. At the same time.</i>”");
-	
+
 			menu();
-			
+
 			var noT:String = "No";
-			if (player.gems >= 2200) 
+			if (player.gems >= 2200)
 			{
 				addButton(0, "Yes", getOrgyRoom);
 			}
-			else 
+			else
 			{
 				noT = "Too Much";
 			}
-			
+
 			addButton(1, noT, noOrgyRoomPlz);
 		}
 
@@ -6233,9 +6233,9 @@ import classes.StatusEffects;
 
 			player.gems -= 2200;
 			showStats();
-			
+
 			flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] = 1;
-			
+
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -6243,7 +6243,7 @@ import classes.StatusEffects;
 		{
 			clearOutput();
 			whitneySprite();
-			
+
 			outputText("You tell her it’s a fine idea, but it will have to wait for now.");
 
 			outputText("\n\n“<i>I can wait,</i>” your taskmistress murmurs, the picture of serenity. “<i>I just don’t know if the knot in your triceps can. It would be a good investment [master], trust me.</i>”");
@@ -6328,7 +6328,7 @@ import classes.StatusEffects;
 
 			outputText("\n\nThe thicker flesh here takes longer to work loose, but your pet is patient, and eventually the lattice of muscles and meat in your thighs relax under the relentless smooth wash of the pads of her hands, giving up all the small aches and strains that are buried in there as she sends her fingers questing along their lines and valleys. Pausing to rub more oil into her hands and shuffle further down the slab, she moves on finally to your [legs].");
 
-			// Biped: 
+			// Biped:
 			if (player.isBiped())
 			{
 				outputText("\n\nShe spends a short time with your calves before encapsulating a [foot] in her oily hands.");
@@ -6355,7 +6355,7 @@ import classes.StatusEffects;
 					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the joining of flesh and hoof, working out every bit of dirt and rock wedged in there before returning deliberately to stroke at the underbelly, indulging that nervous link until you are deep in the unexpected bliss of it, before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other hoof.");
 				}
 			}
-			// Drider: 
+			// Drider:
 			else if (player.isDrider())
 			{
 				outputText("\n\nYou didn’t really expect even the most devoted of servants to try massaging the vast and intricate octet of exoskeleton legs that is your mode of locomotion, but Whitney seems determined to try. She places her hands around one armored leg stem and slides her fingers into the main joint, working at it carefully but closely. With eight legs you find you can easily ignore the aches and stiffness you sometimes develop in one or the other - to have this kind of attention lavished on a usually ignored part of your anatomy feels very nice indeed. You lift the leg so she can work on the next joint down, asking lowly where on Mareth she learned to massage spiders.");
@@ -6366,7 +6366,7 @@ import classes.StatusEffects;
 
 				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. “<i>Your next leg [master], please.</i>” You smile serenely as you lift the next intricate point into her warm, waiting grasp. It takes almost as long again for her to rub oil into each of your legs as she spent on the rest of her body, but it’s well worth it.");
 			}
-			// Naga: 
+			// Naga:
 			else if (player.isNaga())
 			{
 				outputText("\n\nYou didn’t really expect even the most devoted of servants to try massaging your long, reptilian half, but Whitney seems determined to try. She slides her hands all around the thick joining of your hips to your tubular bottom half and moves slowly down, simply glossing the scales of your top half in glistening pleasure. When she gets nearer the thin end though she begins to work more strenuously, working the thick, obdurate muscles beneath your hide loose, focusing particularly on the flexible groups on your underbelly whose flowing undulation you use to move. The patient massage sends lazy pleasure veining up your trunk, and with a delighted sigh you ask where on Mareth she learned to massage snakes.");
@@ -6452,7 +6452,7 @@ import classes.StatusEffects;
 
 				outputText("\n\n“<i>Seems like- like forever, [master]. I don’t know why I- ooh...</i>” the thought is lost as you sink into her, pushing deep into her depths, exhaling at how her moist walls push into your prick from every direction. You go slow, stopping and withdrawing almost all the way out when her breath catches in her throat, before gently spearing your way into that delicious tightness again, each time dipping a little further in. Her body remembers the rhythm of it quickly - no doubt aided by the corruption you’ve mired her in - and in no time her hips are gripping into yours, willing the return strokes of your [cock " + cockThatFits + "].");
 			}
-			// Subsequent: 
+			// Subsequent:
 			else
 			{
 				outputText("\n\nShe gasps as you push open her lips and spear into her depths with one thrust. Her pussy is used to your [cock " + cockThatFits + "] now, still deliciously tight and clenching but welcoming as well, perfectly designed to holster and squeeze every inch of your modestly sized prick with wet pleasure. Within a few moments your hips are touching hers, taking your cock down to the hilt. Her thighs tighten around your frame and you begin to lose yourself in the soft, slow rhythm.");
@@ -6498,7 +6498,7 @@ import classes.StatusEffects;
 
 				outputText("\n\n“<i>Never - never with another woman, mistress. I don’t know why I - ooh...</i>” the thought is lost as you clench into her, melding your pussies together emphatically. At first she is frozen, apparently without a clue as to what to do or how to react to the pressure of your mound against hers, flexing into her lips and inner pink pleasantly. You go as slowly and sensually as you can, sliding your grip over her supple, wet flesh, kissing and licking her face and neck possessively, murmuring encouragement when she sighs blissfully to a movement of your hand or hip. You unlock her slowly but surely, and it isn’t long before she is flexing back into you eagerly, giving as well as taking your sex.");
 			}
-			// Subsequent: 
+			// Subsequent:
 			else
 			{
 				outputText("\n\nShe gasps as you clench into her, locking your bodies together forcefully. She is used to your [vagina] now and gladly pushes her slim frame back into yours, your pussies rubbing over and around each other, teasing first your clit and then hers until they are both bulging needily.  Your sex wettens and unfurls as you scissor against her deeply. Her thighs tighten around your own and you begin to lose yourself in the soft, slow, sapphic rhythm.");

@@ -18,11 +18,11 @@ import classes.PerkLib;
 import classes.StatusEffects;
 
 public class OnikiriSake extends Consumable {
-	public function OnikiriSake() 
+	public function OnikiriSake()
 	{
 		super("OniSake", "Onikiri Sake", "a bottle of Onikiri Sake", 6, "A drink favored by oni.");
 	}
-	
+
 	override public function get description():String {
 		var desc:String = _description;
 		if (flags[kFLAGS.IZUMI_MET] > 0) desc += " Izumi kept a full stock of this in her camp. A strong beverage just like the people who drinks it.";
@@ -30,21 +30,14 @@ public class OnikiriSake extends Consumable {
 		desc += "\nBase value: " + String(value);
 		return desc;
 	}
-	
+
 	override public function useItem():Boolean {
-		var changes:Number = 0;
+		changes = 0;
 		var changeLimit:Number = 1;
-		if (rand(3) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
 		var temp:Number = 0;
 		player.slimeFeed();
@@ -88,7 +81,7 @@ public class OnikiriSake extends Consumable {
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
 			outputText(player.modTone(player.maxToneCap(), 3));
 		}
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//Sexual changed
 		if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && changes < changeLimit && rand(3) == 0) {
 			var selectedCock:int = -1;
@@ -123,72 +116,58 @@ public class OnikiriSake extends Consumable {
 		//Physical changes
 		//Legs
 		if (player.lowerBody == LowerBody.HUMAN && changes < changeLimit && rand(4) == 0) {
-			outputText("\n\nNot again! Now it's the skin on your legs that is burning as a whole set of intricate warlike tattoos covers them. Furthermore, your toenails become increasingly pointed turning black just like a set of claws. Well it seems you will have get used to your");
-			outputText(" <b>war tattooed legs and feet topped with sharp nails.</b>");
-			mutations.setLowerBody(LowerBody.ONI);
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyOni.applyEffect();
 			changes++;
 		}
 		if (player.lowerBody != LowerBody.ONI && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-			mutations.humanizeLowerBody();
+			outputText("\n\n");
+			CoC.instance.transformations.LowerBodyHuman.applyEffect();
+			changes++;
 		}
 		//Arms
 		if (player.arms.type != Arms.ONI && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-			outputText("The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>");
-			mutations.setArmType(Arms.ONI);
+			CoC.instance.transformations.ArmsOni.applyEffect();
 			changes++;
 		}
 		//Horn
 		if (rand(3) == 0 && changes < changeLimit && (player.horns.type != Horns.ONI_X2 || player.horns.type != Horns.ONI) && player.arms.type == Arms.ONI) {
 			outputText("\n\n");
 			if (rand(2) == 0) {
-				if (player.horns.type == Horns.NONE) outputText("You moan in pleasure as a pair of bony horns push forward out of your forehead,");
-				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning,");
-				outputText(" the things are actually surprisingly sensitive and you reach orgasm just from them reaching full size,");
-				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
-				if (player.gender == 3) outputText(" and");
-				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>");
-				mutations.setHornType(Horns.ONI_X2, 1);
+				CoC.instance.transformations.HornsOniDual.applyEffect();
 			}
 			else {
-				if (player.horns.type == Horns.NONE) outputText("You moan in pleasure as a single bony horns push forward out of your forehead,");
-				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning and merging into one,");
-				outputText(" the thing is actually surprisingly sensitive and you reach orgasm just from it reaching full size,");
-				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
-				if (player.gender == 3) outputText(" and");
-				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horns just like an oni.</b>");
-				mutations.setHornType(Horns.ONI, 1);
+				CoC.instance.transformations.HornsOni.applyEffect();
 			}
 			changes++;
 		}
 		//Eyes
-		if ((player.horns.type == Horns.ONI_X2 || player.horns.type == Horns.ONI)
-		    && (player.eyes.type != Eyes.ONI || !InCollection(player.eyes.colour, Mutations.oniEyeColors)) && changes < changeLimit && rand(3) == 0) {
-			var colorEyes:String;
-			colorEyes = randomChoice(Mutations.oniEyeColors);
-			mutations.setEyeTypeAndColor(Eyes.ONI,colorEyes);
-			outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
+		if ((player.horns.type == Horns.ONI_X2 || player.horns.type == Horns.ONI) && (CoC.instance.transformations.EyesOni.isPossible() || CoC.instance.transformations.EyesOniColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
+			if (CoC.instance.transformations.EyesOniColors.isPossible()) {
+				CoC.instance.transformations.EyesOniColors.applyEffect();
+			}
+
+			if (CoC.instance.transformations.EyesOni.isPossible()) {
+				CoC.instance.transformations.EyesOni.applyEffect();
+			}
 			changes++;
 		}
 		//Ears
 		if (player.eyes.type == Eyes.ONI && player.ears.type == Ears.HUMAN && player.ears.type != Ears.ONI && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>");
-			mutations.setEarType(Ears.ONI);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsOni.applyEffect();
 			changes++;
 		}
 		if (player.eyes.type == Eyes.ONI && player.ears.type != Ears.HUMAN && player.ears.type != Ears.ONI && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeEars();
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHuman.applyEffect();
 			changes++;
 		}
 		//Face
 		if (player.ears.type == Ears.ONI && player.faceType != Face.ONI_TEETH && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nY");
-			if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
-			outputText("ou feel your canines changing, growing bigger and slightly sharper. Hey you could pretend to be some kind of demon with that kind of mouth. <b>You now have oni canines.</b>");
-			mutations.setFaceType(Face.ONI_TEETH);
+			outputText("\n\n");
+      CoC.instance.transformations.FaceOniTeeth.applyEffect();
 			changes++;
 		}
 		//Skin
@@ -204,18 +183,14 @@ public class OnikiriSake extends Consumable {
 		}
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
-			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
-			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
-				outputText("\n\n<b>Genetic Memory: Battle Tattooed Skin - Memorized!</b>\n\n");
-				player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
-			}
-			player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
-			player.skin.base.adj = "battle tattooed";
+			outputText("\n\n");
+      CoC.instance.transformations.SkinPatternOni.applyEffect();
 			changes++;
 		}
 		//});
 		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-			mutations.humanizeSkin();
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPlain.applyEffect();
 		}
 		//Taller
 		if (changes < changeLimit && rand(3) == 0 && player.tallness < 132) {

@@ -453,7 +453,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			flags[kFLAGS.SANDWITCH_MOB_DEFEATED] = 1;
 			outputText("The sand witches all collapse to the floor in a vast puddle of milk and pussy juice, ");
-			if(monster.HP < 1) outputText("nursing their wounds");
+			if(monster.HP <= monster.minHP()) outputText("nursing their wounds");
 			else outputText("frantically making out with each other, huddling into a squirming orgy on the floor");
 			outputText(".  You stand alone, the sole victor, triumphant against your enemies; you can easily continue deeper into the caves, now.");
 			//PC has sufficient lust:
@@ -471,7 +471,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function dicksHaveSexWithAWitch():void {
 			clearOutput();
 			outputText("Looking over the ");
-			if(monster.HP < 1) outputText("painfully ");
+			if(monster.HP <= monster.minHP()) outputText("painfully ");
 			outputText("writhing pile of female flesh, you place your hands on your [hips] and survey the pile for the prettiest of the litter.  They're all gorgeously tanned with lustrous, blonde hair, but there's enough variety in facial features, hair style, breast size, and hips for you to narrow down which one you'd like to take the most.  She's a true beauty in the classical sense, at least facially.  She has a small, button nose, ripe lips, and hair that's tied back in a waist-length ponytail.  Her four breasts are well-rounded E-cups, big and round enough for your fingers to sink into but just barely pert enough not to show any sag.");
 			
 			outputText("\n\nBig, brown eyes look up at you with obvious fear as you approach.  Well, that won't do.  You hold your hand out to her calmly, putting as welcoming a smile as you can for your fallen foe.  She looks around her ");
@@ -1084,10 +1084,10 @@ public class DesertCave extends DungeonAbstractContent
 			
 			//Decrease PC's strength by 2 for every digit of cum production they have after 100 (I can provide an algorithm for that if you need it, it is very simple), set lust to 0, increase cum production multiplier by 1
 			player.orgasm();
-			player.addCurse("str", 2);
+			player.addCurse("str", 2, 2);
 			player.cumMultiplier++;
-			if(player.cumQ() >= 200) player.addCurse("str", 2);
-			if(player.cumQ() >= 3000) player.addCurse("str", 2);
+			if(player.cumQ() >= 200) player.addCurse("str", 2, 2);
+			if(player.cumQ() >= 3000) player.addCurse("str", 2, 2);
 			//Usual loss text+gem loss.
 			cleanupAfterCombat();
 		}
@@ -1119,7 +1119,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function cumWitchDefeated():void {
 			clearOutput();
 			//(HP)
-			if(monster.HP < 1) outputText("The chocolate-skinned witch collapses down onto her hands and knees with the tattered remnants of her robes swirling about her.  With her clothing destroyed, you're treated to the perfect view of her semi-erect cock and swollen testes swaying enticingly beneath her, paired with the glimmering wetness of her juicy cunny - also on display.  Her udder-like melons sway and jiggle in sympathy to her uncoordinated swaying.  She grumbles, \"<i>You've beaten me, interloper...</i>\"");
+			if(monster.HP <= monster.minHP()) outputText("The chocolate-skinned witch collapses down onto her hands and knees with the tattered remnants of her robes swirling about her.  With her clothing destroyed, you're treated to the perfect view of her semi-erect cock and swollen testes swaying enticingly beneath her, paired with the glimmering wetness of her juicy cunny - also on display.  Her udder-like melons sway and jiggle in sympathy to her uncoordinated swaying.  She grumbles, \"<i>You've beaten me, interloper...</i>\"");
 			else outputText("The chocolate-skinned witch collapses down onto her hands and knees, shredding her robes as she goes.  Her throbbing-hard cock drips with precum above her quaking testes while her equally enticing pussy looks positively soaked with feminine lubricants.  She rolls onto her back, tits jiggling wildly, and jams both her hands into her groin, masturbating furiously.  Panting, the witch moans, \"<i>You win... ooooohhh...  Come over here and fuck me!  Please!</i>\"\n\nWell, she did ask nicely...");
 			flags[kFLAGS.CUM_WITCH_DEFEATED] = 1;
 			menu();

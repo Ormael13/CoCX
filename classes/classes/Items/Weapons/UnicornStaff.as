@@ -12,7 +12,7 @@ package classes.Items.Weapons
 			);
 		}
 		override public function get verb():String { 
-				return game.player.findPerk(PerkLib.StaffChanneling) >= 0 ? "shot" : "smack"; 
+				return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
 		}
 	}
 }

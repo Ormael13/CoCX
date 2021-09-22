@@ -208,7 +208,7 @@ package classes.Scenes
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
-			addButton(14, "Back", playerMenu);
+			addButton(14, "Back", playerMenu).hint("Return to main settlement menu.");
 		}
 		
 		private function setCodexMenusAfterDisplay():void {

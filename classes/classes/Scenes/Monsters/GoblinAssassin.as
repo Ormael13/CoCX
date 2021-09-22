@@ -5,12 +5,10 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class GoblinAssassin extends Monster
 	{
-		public var adventure:HeXinDao = new HeXinDao();
 		
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
@@ -104,7 +102,7 @@ public class GoblinAssassin extends Monster
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) adventure.gaunletchallange2fight2();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight2();
 			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro1();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -166,13 +164,15 @@ public class GoblinAssassin extends Monster
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+				{ call: dualShot, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_WEAPON]},
+				{ call: goblinExplosion, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FIRE]},
+				{ call: lustNeedle, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_WEAPON]},
+			]
 			checkMonster();
 		}
 
-		override protected function performCombatAction():void
-		{
-			var actions:Array = [eAttack,goblinDrugAttack,lustNeedle,dualShot,goblinExplosion];
-			actions[rand(actions.length)]();
-		}
 	}
 }

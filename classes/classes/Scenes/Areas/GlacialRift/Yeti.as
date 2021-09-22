@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -9,7 +9,7 @@ import classes.internals.WeightedDrop;
 public class Yeti extends Monster
 	{
 		public var tempSpeedLoss:Number = 0;
-		
+
 		public function yetiClawAndPunch():void {
 			if (player.getEvasionRoll()) {
 				outputText("The yeti beast charges at you, though his claws only strike at air as you move nimbly over the ice flooring beneath you. The beast lets out an annoyed snarl.")
@@ -43,7 +43,7 @@ public class Yeti extends Monster
 				//take heavy damage
 				outputText("The beast’s hind claws dig into the ice before his giant furred body launches at you and he collides with you in a brutal tackle. The pair of you are sent rolling around on the floor as you trade blows with the furred beast, and then he lifts you up and tosses you aside, your body hitting the ice walls with a groan. You shakily get to your feet. ");
 				var damage:Number = ((str + weaponAttack) * 1.4) + 200 + rand(250);
-				player.takePhysDamage(damage, true);				
+				player.takePhysDamage(damage, true);
 			}
 		}
 		public function yetiSnowball():void {
@@ -73,32 +73,48 @@ public class Yeti extends Monster
 			}
 			else outputText("The beast before you seems a bit distracted, a hand dipping to fondle his ballsack, but you keep your focus fixed on the monsters face, unwilling to let your guard waver for even a moment.");
 		}
-		
-		override protected function performCombatAction():void
-		{
-			var chooser:Number = 0;
-			chooser = rand(10);
-			if (chooser < 2) eAttack();
-			if (chooser >= 2 && chooser < 4) yetiClawAndPunch(); //40% chance
-			if (chooser >= 4 && chooser < 7) yetiTackleTumble(); //30% chance
-			if (chooser >= 7 && chooser < 9) yetiTease(); //20% chance
-			if (chooser >= 9) yetiSnowball(); //10% chance
-		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			SceneLib.glacialRift.yetiScene.winAgainstYeti();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else SceneLib.glacialRift.yetiScene.winAgainstYeti();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			SceneLib.glacialRift.yetiScene.loseToYeti();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByYeti();
+			else SceneLib.glacialRift.yetiScene.loseToYeti();
 		}
-		
-		public function Yeti() 
+
+		public function Yeti()
 		{
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				initStrTouSpeInte(185, 210, 105, 90);
+				initWisLibSensCor(80, 50, 30, 45);
+				this.weaponAttack = 100;
+				this.armorDef = 150;
+				this.armorMDef = 50;
+				this.bonusHP = 1500;
+				this.bonusLust = 117;
+				this.level = 37;
+				this.gems = 36 + rand(20);
+			}
+			else {
+				initStrTouSpeInte(305, 360, 185, 90);
+				initWisLibSensCor(80, 50, 30, 45);
+				this.weaponAttack = 160;
+				this.armorDef = 240;
+				this.armorMDef = 80;
+				this.bonusHP = 3000;
+				this.bonusLust = 156;
+				this.level = 76;
+				this.gems = 75 + rand(40);
+				this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			}
 			this.a = "the ";
 			this.short = "yeti";
 			this.imageName = "yeti";
@@ -117,32 +133,27 @@ public class Yeti extends Monster
 			this.skin.growFur({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 8;
-			initStrTouSpeInte(305, 360, 185, 90);
-			initWisLibSensCor(80, 50, 30, 45);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 160;
 			this.armorName = "thick fur";
-			this.armorDef = 240;
-			this.armorMDef = 80;
-			this.bonusHP = 3000;
-			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 76;
-			this.gems = 75 + rand(40);
 			this.drop = new WeightedDrop()
 					.add(consumables.YETICUM, 1)
 					.add(null, 2);
-			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
-			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: yetiClawAndPunch, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: yetiTackleTumble, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: yetiTease, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{call: yetiSnowball, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_ICE]}
+			];
 			checkMonster();
 		}
-		
+
 	}
 
 }

@@ -24,10 +24,13 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Metamorph;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
+
+import classes.GeneticMemories.*;
 
 import coc.view.MainView;
 
@@ -405,7 +408,7 @@ import coc.view.MainView;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
-				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.CHARVIEW_STYLE]) {
+				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -1215,49 +1218,49 @@ import coc.view.MainView;
 			player.tone += 7;
 			player.thickness += 3;
 			//Add bonus +100% strength gain
-			if (player.findPerk(PerkLib.Strong) < 0) player.createPerk(PerkLib.Strong, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Strong)) player.createPerk(PerkLib.Strong, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentToughness():void {
 			player.tone += 5;
 			player.thickness += 5;
-			if (player.findPerk(PerkLib.Tough) < 0) player.createPerk(PerkLib.Tough, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Tough)) player.createPerk(PerkLib.Tough, 1, 0, 0, 0);
 			player.HP = EngineCore.maxHP();
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentSpeed():void {
 			player.tone += 10;
-			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Fast)) player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentSmarts():void {
 			player.thickness -= 5;
-			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Smart)) player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentWise():void {
 			player.thickness -= 5;
-			if (player.findPerk(PerkLib.Wise) < 0) player.createPerk(PerkLib.Wise, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Wise)) player.createPerk(PerkLib.Wise, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentLibido():void {
-			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Lusty)) player.createPerk(PerkLib.Lusty, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentTouch():void {
-			if (player.findPerk(PerkLib.Sensitive) < 0) player.createPerk(PerkLib.Sensitive, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Sensitive)) player.createPerk(PerkLib.Sensitive, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentPerversion():void {
 			player.cor += 5;
-			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 1, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Pervert)) player.createPerk(PerkLib.Pervert, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
@@ -1266,28 +1269,28 @@ import coc.view.MainView;
 			player.cocks[0].cockLength = 8;
 			player.cocks[0].cockThickness = 1.5;
 			trace("Creation - cock modded to 8inches");
-			if (player.findPerk(PerkLib.BigCock) < 0) player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.BigCock)) player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentMessyOrgasms():void {
 			player.femininity -= 5;
 			player.cumMultiplier = 2;
-			if (player.findPerk(PerkLib.MessyOrgasms) < 0) player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.MessyOrgasms)) player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentBigBreasts():void {
 			player.femininity += 10;
 			player.breastRows[0].breastRating += 2;
-			if (player.findPerk(PerkLib.BigTits) < 0) player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.BigTits)) player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentBigClit():void {
 			player.femininity -= 10;
 			player.clitLength = 1;
-			if (player.findPerk(PerkLib.BigClit) < 0) player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.BigClit)) player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
@@ -1295,14 +1298,14 @@ import coc.view.MainView;
 			player.femininity += 10;
 			player.fertility += 50;
 			player.hips.type += 3;
-			if (player.findPerk(PerkLib.Fertile) < 0) player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Fertile)) player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
 		private function setEndowmentWetVagina():void {
 			player.femininity += 15;
 			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
-			if (player.findPerk(PerkLib.WetPussy) < 0) player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.WetPussy)) player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 
@@ -1310,30 +1313,30 @@ import coc.view.MainView;
 		//-- BLOODLINE PERKS
 		//-----------------
 		public function chooseBloodlineorNot():void {
-			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) chooseBloodline();
+			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) chooseBloodline();
 			else chooseHistory();
 		}
 		public function chooseBloodline():void {
 			clearOutput();
 			outputText("There is a possibility that you were descended from non-human blood.  Was one of your ancestors non-human, and if so, what were they?");
 			menu();
-			if (player.findPerk(PerkLib.BloodlineDragon) < 0) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant).hint("(+2 to dragon score)");
+			if (!player.hasPerk(PerkLib.BloodlineDragon)) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant).hint("(+2 to dragon score)");
 			else addButtonDisabled(0, "Dragon", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineElf) < 0) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant).hint("(+2 to elf score)");
+			if (!player.hasPerk(PerkLib.BloodlineElf)) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant).hint("(+2 to elf score)");
 			else addButtonDisabled(1, "Elf", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineGoblin) < 0) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant).hint("(+2 to goblin score)");
+			if (!player.hasPerk(PerkLib.BloodlineGoblin)) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant).hint("(+2 to goblin score)");
 			else addButtonDisabled(2, "Goblin", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant).hint("(+2 to kitsune score)");
+			if (!player.hasPerk(PerkLib.BloodlineKitsune)) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant).hint("(+2 to kitsune score)");
 			else addButtonDisabled(3, "Kitsune", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant).hint("(+2 to raiju score)");
+			if (!player.hasPerk(PerkLib.BloodlineRaiju)) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant).hint("(+2 to raiju score)");
 			else addButtonDisabled(4, "Raiju", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineMinotaur) < 0) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant).hint("(+2 to minotaur score)");
+			if (!player.hasPerk(PerkLib.BloodlineMinotaur)) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant).hint("(+2 to minotaur score)");
 			else addButtonDisabled(5, "Minotaur", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineOni) < 0) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant).hint("(+2 to oni score)");
+			if (!player.hasPerk(PerkLib.BloodlineOni)) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant).hint("(+2 to oni score)");
 			else addButtonDisabled(6, "Oni", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineOrc) < 0) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant).hint("(+2 to orc score)");
+			if (!player.hasPerk(PerkLib.BloodlineOrc)) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant).hint("(+2 to orc score)");
 			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineVampire) < 0) addButton(8, "Vampire", confirmBloodline, PerkLib.VampiresDescendant).hint("(+2 to vampire score)");
+			if (!player.hasPerk(PerkLib.BloodlineVampire)) addButton(8, "Vampire", confirmBloodline, PerkLib.VampiresDescendant).hint("(+2 to vampire score)");
 			else addButtonDisabled(8, "Vampire", "You already have this bloodline!");
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead new bloodline.)");
 		}
@@ -1395,31 +1398,31 @@ import coc.view.MainView;
 			}
 			outputText("Before you became a champion, you had other plans for your life.  What were you doing before?");
 			menu();
-			if (player.findPerk(PerkLib.PastLifeAlchemist) < 0) addButton(0, "Alchemy", confirmHistory, PerkLib.HistoryAlchemist);
+			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) addButton(0, "Alchemy", confirmHistory, PerkLib.HistoryAlchemist);
 			else addButtonDisabled(0, "Alchemy", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeCultivator) < 0) addButton(1, "Cultivator", confirmHistory, PerkLib.HistoryCultivator);
+			if (!player.hasPerk(PerkLib.PastLifeCultivator)) addButton(1, "Cultivator", confirmHistory, PerkLib.HistoryCultivator);
 			else addButtonDisabled(1, "Cultivator", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeFighter) < 0) addButton(2, "Fighting", confirmHistory, PerkLib.HistoryFighter);
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) addButton(2, "Fighting", confirmHistory, PerkLib.HistoryFighter);
 			else addButtonDisabled(2, "Fighting", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeFortune) < 0) addButton(3, "Fortune", confirmHistory, PerkLib.HistoryFortune);
+			if (!player.hasPerk(PerkLib.PastLifeFortune)) addButton(3, "Fortune", confirmHistory, PerkLib.HistoryFortune);
 			else addButtonDisabled(3, "Fortune", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeHealer) < 0) addButton(4, "Healing", confirmHistory, PerkLib.HistoryHealer);
+			if (!player.hasPerk(PerkLib.PastLifeHealer)) addButton(4, "Healing", confirmHistory, PerkLib.HistoryHealer);
 			else addButtonDisabled(4, "Healing", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeReligious) < 0) addButton(5, "Religion", confirmHistory, PerkLib.HistoryReligious);
+			if (!player.hasPerk(PerkLib.PastLifeReligious)) addButton(5, "Religion", confirmHistory, PerkLib.HistoryReligious);
 			else addButtonDisabled(5, "Religion", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeScholar) < 0) addButton(6, "Schooling", confirmHistory, PerkLib.HistoryScholar);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) addButton(6, "Schooling", confirmHistory, PerkLib.HistoryScholar);
 			else addButtonDisabled(6, "Schooling", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeScout) < 0) addButton(7, "Scout", confirmHistory, PerkLib.HistoryScout);
+			if (!player.hasPerk(PerkLib.PastLifeScout)) addButton(7, "Scout", confirmHistory, PerkLib.HistoryScout);
 			else addButtonDisabled(7, "Scout", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeSlacker) < 0) addButton(8, "Slacking", confirmHistory, PerkLib.HistorySlacker);
+			if (!player.hasPerk(PerkLib.PastLifeSlacker)) addButton(8, "Slacking", confirmHistory, PerkLib.HistorySlacker);
 			else addButtonDisabled(8, "Slacking", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeSlut) < 0) addButton(9, "Slutting", confirmHistory, PerkLib.HistorySlut);
+			if (!player.hasPerk(PerkLib.PastLifeSlut)) addButton(9, "Slutting", confirmHistory, PerkLib.HistorySlut);
 			else addButtonDisabled(9, "Slutting", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeSmith) < 0) addButton(10, "Smithing", confirmHistory, PerkLib.HistorySmith);
+			if (!player.hasPerk(PerkLib.PastLifeSmith)) addButton(10, "Smithing", confirmHistory, PerkLib.HistorySmith);
 			else addButtonDisabled(10, "Smithing", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeTactician) < 0) addButton(11, "Tactician", confirmHistory, PerkLib.HistoryTactician);
+			if (!player.hasPerk(PerkLib.PastLifeTactician)) addButton(11, "Tactician", confirmHistory, PerkLib.HistoryTactician);
 			else addButtonDisabled(11, "Tactician", "You already have this History as one of your Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeWhore) < 0) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
 			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
 			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
 
@@ -1447,7 +1450,7 @@ import coc.view.MainView;
 					outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?");
 					break;
 				case PerkLib.HistoryScholar:
-					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, spellcasting uses 20% less mana and will start with Job: Sorcerer perk.  Is this your history?");
+					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, your mana cap increased by 10% and will start with Job: Sorcerer perk.  Is this your history?");
 					break;
 				case PerkLib.HistoryScout:
 					outputText("You spent much of your time learning how to use ranged weapons, and you had plans to find work as a hunter when you grew up.  You do 10% more damage with physical range attacks and +20% accuracy.  You will also start out with 50 gems and Job: Ranger perk.  Is this your history?");
@@ -1569,7 +1572,7 @@ import coc.view.MainView;
 		//-----------------
 		private function chooseModeNormal():void {
 			clearOutput();
-			outputText("You have chosen Normal Mode. This is a classic gameplay mode. \n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Normal Mode. This is a classic gameplay mode. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1578,59 +1581,52 @@ import coc.view.MainView;
 
 		private function chooseModeSurvival():void {
 			clearOutput();
-			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. \n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
-			player.hunger = 80;
+			player.hunger = 100;
 			doNext(startTheGame);
 		}
 
 		private function chooseModeRealistic():void {
 			clearOutput();
-			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down. \n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score. Also, your cum production is capped and having oversized parts will weigh you down.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
-			player.hunger = 80;
+			player.hunger = 100;
 			doNext(startTheGame);
 		}
 
 		private function chooseModeHard():void {
 			clearOutput();
-			outputText("You have chosen Hard Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 1;
+			outputText("You have chosen Hard Mode. In this mode, hunger is enabled so you have to eat periodically. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.\n\n<b>Difficulty is locked to hard.</b>");
+			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 1;
-			player.hunger = 80;
-			menu();
-			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
-			}
-			addButton(14, "Back", chooseGameModes);
+			player.hunger = 100;
+			doNext(startTheGame);
 		}
 
-		private function chooseModeHardcore():void {
+		private function chooseModeNightmare():void {
 			clearOutput();
-			outputText("You have chosen Hardcore Mode. This is the HARDEST mode of all. \n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
+			outputText("You have chosen Nightmare Mode. Hunger would be all time active so go get that food or your gonna starve... to death. If you want to spellcast or use magic specials you have to pay attention to your accumulated wrath. Also negative effects of internal mutations starts right away. You have been warned: it not gonna be walk in park anymore...\n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 2;
-			player.hunger = 80;
+			player.hunger = 50;
 			menu();
-			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
-			}
-			addButton(14, "Back", chooseGameModes);
+			doNext(startTheGame);
 		}
 
-		private function chooseModeBrutalHardcore():void {
+		private function chooseModeExtreme():void {
 			clearOutput();
-			outputText("You have chosen Brutal Hardcore Mode. This is the more than HARDEST mode of all. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>");
+			outputText("You have chosen EXTREME Mode. So you feel that neither death from starvation, nor accumulated wrath blocking your bright path of mage and not even internal mutation can stop you? Fine then let take it to next level. Game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 3;
-			player.hunger = 80;
+			player.hunger = 50;
 			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
@@ -1640,11 +1636,11 @@ import coc.view.MainView;
 
 		private function chooseModeXianxia():void {
 			clearOutput();
-			outputText("You have chosen Xianxia MC Mode. This is the mode to feel like a true XIANXIA MC. \n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
+			outputText("You have chosen Xianxia MC Mode. Since you feel all previous difficulty setting was too easy you can try this one option. Sure it would be rough but you came here to suffe...err feeling like a true XIANXIA MC, right? \n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 4;
-			player.hunger = 80;
+			player.hunger = 50;
 			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
@@ -1674,8 +1670,8 @@ import coc.view.MainView;
 			addButton(1, "Survival", chooseModeSurvival);
 			addButton(2, "Realistic", chooseModeRealistic);
 			addButton(3, "Hard", chooseModeHard);
-			addButton(4, "Hardcore", chooseModeHardcore);
-			addButton(5, "Brutal HC", chooseModeBrutalHardcore);
+			addButton(4, "Nightmare", chooseModeNightmare);
+			addButton(5, "EXTREME", chooseModeExtreme);
 			addButton(6, "Xianxia MC", chooseModeXianxia);
 		}
 
@@ -1710,42 +1706,42 @@ import coc.view.MainView;
 			else player.setUndergarment(undergarments.C_LOIN);
 			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			else player.setUndergarment(undergarments.C_SHIRT);
-			if (player.findPerk(PerkLib.HistoryCultivator) >= 0 || (player.findPerk(PerkLib.PastLifeCultivator) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryFighter) >= 0 || (player.findPerk(PerkLib.PastLifeFighter) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryScout) >= 0 || (player.findPerk(PerkLib.PastLifeScout) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryScholar) >= 0 || (player.findPerk(PerkLib.PastLifeScholar) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistorySmith) >= 0 || (player.findPerk(PerkLib.PastLifeSmith) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryTactician) >= 0 || (player.findPerk(PerkLib.PastLifeTactician) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || (player.findPerk(PerkLib.PastLifeWhore) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.HistoryFortune) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.HistoryHealer) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.HistorySlacker) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.HistorySlut) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeCultivator) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeFighter) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeScout) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeScholar) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeSmith) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeTactician) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeWhore) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeAlchemist) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeFortune) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeHealer) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeReligious) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeSlacker) >= 0) player.perkPoints += 1;
-			if (player.findPerk(PerkLib.PastLifeSlut) >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryFighter) || (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryScout) || (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryScholar) || (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistorySmith) || (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryTactician) || (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryWhore) || (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryAlchemist)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.HistoryFortune)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.HistoryHealer)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.HistoryReligious)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.HistorySlacker)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.HistorySlut)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeAlchemist)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeFortune)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeHealer)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeReligious)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeSlacker)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeSlut)) player.perkPoints += 1;
 			if (player.hasKeyItem("PerksOverJobs") >= 0) player.removeKeyItem("PerksOverJobs");
-			if (player.findPerk(PerkLib.AscensionHerosHeritage) >= 0) {
+			if (player.hasPerk(PerkLib.AscensionHerosHeritage)) {
 				player.perkPoints += 3 * player.newGamePlusMod();
 				player.statPoints += 15 * player.newGamePlusMod();
 			}
-			if (player.findPerk(PerkLib.AscensionHerosLineage) >= 0) {
+			if (player.hasPerk(PerkLib.AscensionHerosLineage)) {
 				player.perkPoints += 2 * player.newGamePlusMod();
 				player.statPoints += 10 * player.newGamePlusMod();
 			}
-			if (player.findPerk(PerkLib.AscensionNaturalMetamorph) >= 0) {
+			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			}
@@ -1761,7 +1757,11 @@ import coc.view.MainView;
 			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
 			player.sleepUpdateStat();
 			player.HP = player.maxHP();
-			doYesNo(goToIngnam, arrival);
+			Metamorph.resetMetamorph();
+			//doYesNo(goToIngnam, arrival);
+			menu();
+			addButton(0, "Ingnam", goToIngnam);
+			addButton(1,"Skip Ingnam", arrival);
 		}
 
 		public function goToIngnam():void {
@@ -1774,35 +1774,58 @@ import coc.view.MainView;
 		//-----------------
 		//-- ASCENSION
 		//-----------------
+		private var migration: Boolean = false;
+		private var migrationMsg: String = "";
+
+		public function updateAscension(msg: String = ""): void {
+			migration = true;
+			migrationMsg = msg;
+			ascensionMenu();
+		}
+
+		public function returnFromUpdateAscension(): void {
+			migration = false;
+			migrationMsg = "";
+			Metamorph.registerPermanentMetamorphs();
+			SceneLib.camp.campAfterMigration();
+		}
+
 		public function ascensionMenu():void {
 			hideStats();
 			clearOutput();
 			hideMenus();
 			mainView.nameBox.visible = false;
-			EngineCore.displayHeader("Ascension");
+			EngineCore.displayHeader("Ascension" + (migration ? " (Update Migration)" : ""));
+
+			if (migrationMsg) outputText(migrationMsg);
+
 			outputText("The world you have departed is irrelevant and you are in an endless black void dotted with tens of thousands of stars. You encompass everything and everything encompasses you.");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
-			outputText("\n\n(When you're done, select Reincarnate.)");
+			outputText("\n\n(When you're done, select " + (migration ? "Return" : "Reincarnate") + ".)");
 			menu();
 			addButton(0, "Perk Select(1)", ascensionPerkMenu).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
-			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
-				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) addButton(6, "Perm G.M.(1)", ascensionMetamorphPermeryMenu).hint("Spend Ascension Perk Points to make unlocked Metamorph options permanent. (For five points each, or 25 for human)", "Perk Selection");
-				else addButtonDisabled(6, "Perm G.M.", "You already reached your current limit on permable Metamorph options.");
-			}
-			else addButtonDisabled(6, "Perm G.M.", "You not have Ascension: Transcendental Genetic Memory (Stage 1) perk to use this option.");
+			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
+					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.", "Permanent Metamorphs");
+				} else {
+					addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>You already bought the maximum amount of Permanent Metamorphs allowed by your stage of Transcedental Genetic Memory!</b>");
+				}
+
+			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possessed History perk into Past Life perk (5 points).", "Perk Selection");
 			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
-			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
+			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
 				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possessed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
 				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
 			}
 			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
-			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge?");
-			addButton(11, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure?");
+			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
+			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
+			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -1894,7 +1917,7 @@ import coc.view.MainView;
 				}
 			}
 			player.ascensionPerkPoints -= cost;
-			if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
+			if (player.hasPerk(perk)) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
 			ascensionPerkSelection(perk, maxRank);
 		}
@@ -1934,7 +1957,7 @@ import coc.view.MainView;
 				}
 			}
 			player.ascensionPerkPoints -= cost;
-			if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
+			if (player.hasPerk(perk)) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
 			ascensionPerkSelection2(perk, maxRank);
 		}
@@ -1946,103 +1969,103 @@ import coc.view.MainView;
 			menu();
 			var btn:int = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.internalChimeraScore() >= 10) {
-				if (player.ascensionPerkPoints >= 20 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) < 0) addButton(btn, "A.O.M.(1st)", perkAdditionalOrganMutation01).hint("Perk allowing you to get one more slot for the same internal organ mutations. (As an example: 2 slots instead 1 for heart related mutations)\n\nCost: 20 points");
+				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01)) addButton(btn, "A.O.M.(1st)", perkAdditionalOrganMutation01).hint("Perk allowing you to get one more slot for the same internal organ mutations. (As an example: 2 slots instead 1 for heart related mutations)\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "A.O.M.(1st)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "A.O.M.(1st)", "You already bought Additional Organ Mutation (1st Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0) addButtonDisabled(btn, "A.O.M.(1st)", "You already bought Additional Organ Mutation (1st Stage) perk.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01)) addButtonDisabled(btn, "A.O.M.(1st)", "You already bought Additional Organ Mutation (1st Stage) perk.");
 			else addButtonDisabled(btn, "A.O.M.(1st)", "You need ascend more times and have 10+ in internal mutation score to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0) {
-				if (player.ascensionPerkPoints >= 40 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) < 0) addButton(btn, "A.O.M.(2nd)", perkAdditionalOrganMutation02).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 3 slots instead 2 for heart related mutations)\n\nCost: 40 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01)) {
+				if (player.ascensionPerkPoints >= 40 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02)) addButton(btn, "A.O.M.(2nd)", perkAdditionalOrganMutation02).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 3 slots instead 2 for heart related mutations)\n\nCost: 40 points");
 				else if (player.ascensionPerkPoints < 40) addButtonDisabled(btn, "A.O.M.(2nd)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "A.O.M.(2nd)", "You already bought Additional Organ Mutation (2nd Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) < 0) addButtonDisabled(btn, "A.O.M.(2nd)", "You need to buy Additional Organ Mutation (1st Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01)) addButtonDisabled(btn, "A.O.M.(2nd)", "You need to buy Additional Organ Mutation (1st Stage) perk first.");
 			else addButtonDisabled(btn, "A.O.M.(2nd)", "You need ascend more times and have 20+ in internal mutation score to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0) {
-				if (player.ascensionPerkPoints >= 60 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) < 0) addButton(btn, "A.O.M.(3rd)", perkAdditionalOrganMutation03).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 4 slots instead 3 for heart related mutations)\n\nCost: 60 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02)) {
+				if (player.ascensionPerkPoints >= 60 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03)) addButton(btn, "A.O.M.(3rd)", perkAdditionalOrganMutation03).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 4 slots instead 3 for heart related mutations)\n\nCost: 60 points");
 				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "A.O.M.(3rd)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "A.O.M.(3rd)", "You already bought Additional Organ Mutation (3rd Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) < 0) addButtonDisabled(btn, "A.O.M.(3rd)", "You need to buy Additional Organ Mutation (2nd Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02)) addButtonDisabled(btn, "A.O.M.(3rd)", "You need to buy Additional Organ Mutation (2nd Stage) perk first.");
 			else addButtonDisabled(btn, "A.O.M.(3rd)", "You need ascend more times and have 30+ in internal mutation score to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0) {
-				if (player.ascensionPerkPoints >= 80 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) < 0) addButton(btn, "A.O.M.(4th)", perkAdditionalOrganMutation04).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 5 slots instead 4 for heart related mutations)\n\nCost: 80 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03)) {
+				if (player.ascensionPerkPoints >= 80 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04)) addButton(btn, "A.O.M.(4th)", perkAdditionalOrganMutation04).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 5 slots instead 4 for heart related mutations)\n\nCost: 80 points");
 				else if (player.ascensionPerkPoints < 80) addButtonDisabled(btn, "A.O.M.(4th)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "A.O.M.(4th)", "You already bought Additional Organ Mutation (4th Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) < 0) addButtonDisabled(btn, "A.O.M.(4th)", "You need to buy Additional Organ Mutation (3rd Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03)) addButtonDisabled(btn, "A.O.M.(4th)", "You need to buy Additional Organ Mutation (3rd Stage) perk first.");
 			else addButtonDisabled(btn, "A.O.M.(4th)", "You need ascend more times and have 40+ in internal mutation score to buy this perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige01) < 0) addButton(btn, "B.Prestige(1st)", perkBuildingPrestige01).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 5 points");
+			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionBuildingPrestige01)) addButton(btn, "B.Prestige(1st)", perkBuildingPrestige01).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 5 points");
 			else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "B.Prestige(1st)", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "B.Prestige(1st)", "You already bought Building Prestige (1st Stage) perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionBuildingPrestige01) >= 0) {
-				if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionBuildingPrestige02) < 0) addButton(btn, "B.Prestige(2nd)", perkBuildingPrestige02).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 10 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionBuildingPrestige01)) {
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionBuildingPrestige02)) addButton(btn, "B.Prestige(2nd)", perkBuildingPrestige02).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 10 points");
 				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "B.Prestige(2nd)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "B.Prestige(2nd)", "You already bought Building Prestige (2nd Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionBuildingPrestige01) < 0) addButtonDisabled(btn, "B.Prestige(2nd)", "You need to buy Building Prestige (1st Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionBuildingPrestige01)) addButtonDisabled(btn, "B.Prestige(2nd)", "You need to buy Building Prestige (1st Stage) perk first.");
 			else addButtonDisabled(btn, "B.Prestige(2nd)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionBuildingPrestige02) >= 0) {
-				if (player.ascensionPerkPoints >= 15 && player.findPerk(PerkLib.AscensionBuildingPrestige03) < 0) addButton(btn, "B.Prestige(3rd)", perkBuildingPrestige03).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 15 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionBuildingPrestige02)) {
+				if (player.ascensionPerkPoints >= 15 && !player.hasPerk(PerkLib.AscensionBuildingPrestige03)) addButton(btn, "B.Prestige(3rd)", perkBuildingPrestige03).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 15 points");
 				else if (player.ascensionPerkPoints < 15) addButtonDisabled(btn, "B.Prestige(3rd)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "B.Prestige(3rd)", "You already bought Building Prestige (3rd Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionBuildingPrestige02) < 0) addButtonDisabled(btn, "B.Prestige(3rd)", "You need to buy Building Prestige (2nd Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && !player.hasPerk(PerkLib.AscensionBuildingPrestige02)) addButtonDisabled(btn, "B.Prestige(3rd)", "You need to buy Building Prestige (2nd Stage) perk first.");
 			else addButtonDisabled(btn, "B.Prestige(3rd)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionBuildingPrestige03) >= 0) {
-				if (player.ascensionPerkPoints >= 20 && player.findPerk(PerkLib.AscensionBuildingPrestige04) < 0) addButton(btn, "B.Prestige(4th)", perkBuildingPrestige04).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 20 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionBuildingPrestige03)) {
+				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionBuildingPrestige04)) addButton(btn, "B.Prestige(4th)", perkBuildingPrestige04).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "B.Prestige(4th)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "B.Prestige(4th)", "You already bought Building Prestige (4th Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionBuildingPrestige03) < 0) addButtonDisabled(btn, "B.Prestige(4th)", "You need to buy Building Prestige (3rd Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionBuildingPrestige03)) addButtonDisabled(btn, "B.Prestige(4th)", "You need to buy Building Prestige (3rd Stage) perk first.");
 			else addButtonDisabled(btn, "B.Prestige(4th)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionBuildingPrestige04) >= 0) {
-				if (player.ascensionPerkPoints >= 25 && player.findPerk(PerkLib.AscensionBuildingPrestige05) < 0) addButton(btn, "B.Prestige(5th)", perkBuildingPrestige05).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 25 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.hasPerk(PerkLib.AscensionBuildingPrestige04)) {
+				if (player.ascensionPerkPoints >= 25 && !player.hasPerk(PerkLib.AscensionBuildingPrestige05)) addButton(btn, "B.Prestige(5th)", perkBuildingPrestige05).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 25 points");
 				else if (player.ascensionPerkPoints < 25) addButtonDisabled(btn, "B.Prestige(5th)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "B.Prestige(5th)", "You already bought Building Prestige (5th Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionBuildingPrestige04) < 0) addButtonDisabled(btn, "B.Prestige(5th)", "You need to buy Building Prestige (4th Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && !player.hasPerk(PerkLib.AscensionBuildingPrestige04)) addButtonDisabled(btn, "B.Prestige(5th)", "You need to buy Building Prestige (4th Stage) perk first.");
 			else addButtonDisabled(btn, "B.Prestige(5th)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige05) >= 0) {
-				if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionBuildingPrestige06) < 0) addButton(btn, "B.Prestige(6th)", perkBuildingPrestige06).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 30 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.hasPerk(PerkLib.AscensionBuildingPrestige05)) {
+				if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionBuildingPrestige06)) addButton(btn, "B.Prestige(6th)", perkBuildingPrestige06).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 30 points");
 				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "B.Prestige(6th)", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "B.Prestige(6th)", "You already bought Building Prestige (6th Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige05) < 0) addButtonDisabled(btn, "B.Prestige(6th)", "You need to buy Building Prestige (5th Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && !player.hasPerk(PerkLib.AscensionBuildingPrestige05)) addButtonDisabled(btn, "B.Prestige(6th)", "You need to buy Building Prestige (5th Stage) perk first.");
 			else addButtonDisabled(btn, "B.Prestige(6th)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHybridTheory) >= 0) {
-				if (player.ascensionPerkPoints >= 20 && player.findPerk(PerkLib.AscensionCruelChimerasThesis) < 0) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 8 race points to work).\n\nCost: 20 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHybridTheory)) {
+				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionCruelChimerasThesis)) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 8 race points to work).\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "C Chimera's T", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "C Chimera's T", "You already bought Cruel Chimera's Thesis perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButtonDisabled(btn, "C Chimera's T", "You need to buy Hybrid Theory perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButtonDisabled(btn, "C Chimera's T", "You need to buy Hybrid Theory perk first.");
 			else addButtonDisabled(btn, "C Chimera's T", "You need ascend more times to buy this perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosHeritage) < 0) addButton(btn, "HeroHeritage", perkHerosHeritage).hint("Perk giving you an additional 3 perk points and 15 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
-			else if (player.ascensionPerkPoints < 5 && player.findPerk(PerkLib.AscensionHerosHeritage) < 0) addButtonDisabled(btn, "HeroHeritage", "You do not have enough ascension perk points!");
+			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionHerosHeritage)) addButton(btn, "HeroHeritage", perkHerosHeritage).hint("Perk giving you an additional 3 perk points and 15 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
+			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionHerosHeritage)) addButtonDisabled(btn, "HeroHeritage", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "HeroHeritage", "You already bought Hero's Heritage perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHerosHeritage) >= 0) {
-				if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosLineage) < 0) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHerosHeritage)) {
+				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionHerosLineage)) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
 				else if (player.ascensionPerkPoints < 5) button(btn).disable("You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "HeroLineage", "You already bought Hero's Lineage perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHerosHeritage) < 0) addButtonDisabled(btn, "HeroLineage", "You need to buy Hero's Heritage perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionHerosHeritage)) addButtonDisabled(btn, "HeroLineage", "You need to buy Hero's Heritage perk first.");
 			else addButtonDisabled(btn, "HeroLineage", "You need ascend more times to buy this perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 4 race points to work).\n\nCost: 10 points");
-			else if (player.ascensionPerkPoints < 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
+			if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 4 race points to work).\n\nCost: 10 points");
+			else if (player.ascensionPerkPoints < 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "HybridTheory", "You already bought Hybrid Theory perk.");
 			btn++;
 			addButton(14, "Back", ascensionMenu);
@@ -2152,90 +2175,83 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-			if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionNaturalMetamorph) < 0) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing you to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
-			else if (player.ascensionPerkPoints < 30 && player.findPerk(PerkLib.AscensionNaturalMetamorph) < 0) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
+			if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing you to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
+			else if (player.ascensionPerkPoints < 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
 			btn++;
 			if (player.findPerk(PerkLib.AscensionNaturalMetamorph) >= 0) {
-				if (player.ascensionPerkPoints >= 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing you to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
-				else if (player.ascensionPerkPoints < 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S1)", "You do not have enough ascension perk points!");
+				if (player.ascensionPerkPoints >= 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
+				else if (player.ascensionPerkPoints < 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S1)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S1)", "You already bought Transcendental Genetic Memory (Stage 1) perk.");
 			}
 			else addButtonDisabled(btn, "T.G.M.(S1)", "You need to buy Natural Metamorph perk first.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) >= 0) {
-				if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) < 0) addButton(btn, "T.G.M.(S2)", perkTranscendentalGeneticMemoryStage2).hint("Perk allowing you to retain up to 30(45) unlocked options from Metamorph menu.\n\nCost: 30 points");
-				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "T.G.M.(S2)", "You do not have enough ascension perk points!");
+				if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) < 0) addButton(btn, "T.G.M.(S2)", perkTranscendentalGeneticMemoryStage2).hint("Perk allowing to retain up to 30(45) unlocked options from Metamorph menu.\n\nCost: 30 points");
+				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "T.G.M.(S2)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S2)", "You already bought Transcendental Genetic Memory (Stage 2) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S2)", "You need to buy Transcendental Genetic Memory (Stage 1) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S2)", "You need ascend more times to buy this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) >= 0) {
-				if (player.ascensionPerkPoints >= 45 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) < 0) addButton(btn, "T.G.M.(S3)", perkTranscendentalGeneticMemoryStage3).hint("Perk allowing you to retain up to 45(90) unlocked options from Metamorph menu.\n\nCost: 45 points");
-				else if (player.ascensionPerkPoints < 45) addButtonDisabled(btn, "T.G.M.(S3)", "You do not have enough ascension perk points!");
+				if (player.ascensionPerkPoints >= 45 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) < 0) addButton(btn, "T.G.M.(S3)", perkTranscendentalGeneticMemoryStage3).hint("Perk allowing to retain up to 45(90) unlocked options from Metamorph menu.\n\nCost: 45 points");
+				else if (player.ascensionPerkPoints < 45) addButtonDisabled(btn, "T.G.M.(S3)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S3)", "You already bought Transcendental Genetic Memory (Stage 3) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) < 0) addButtonDisabled(btn, "T.G.M.(S3)", "You need to buy Transcendental Genetic Memory (Stage 2) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S3)", "You need ascend more times to buy this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) >= 0) {
-				if (player.ascensionPerkPoints >= 60 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButton(btn, "T.G.M.(S4)", perkTranscendentalGeneticMemoryStage4).hint("Perk allowing you to retain up to 60(150) unlocked options from Metamorph menu.\n\nCost: 60 points");
-				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "T.G.M.(S4)", "You do not have enough ascension perk points!");
+				if (player.ascensionPerkPoints >= 60 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButton(btn, "T.G.M.(S4)", perkTranscendentalGeneticMemoryStage4).hint("Perk allowing to retain up to 60(150) unlocked options from Metamorph menu.\n\nCost: 60 points");
+				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "T.G.M.(S4)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S4)", "You already bought Transcendental Genetic Memory (Stage 4) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) < 0) addButtonDisabled(btn, "T.G.M.(S4)", "You need to buy Transcendental Genetic Memory (Stage 3) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S4)", "You need ascend more times to buy this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) >= 0) {
-				if (player.ascensionPerkPoints >= 75 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) < 0) addButton(btn, "T.G.M.(S5)", perkTranscendentalGeneticMemoryStage5).hint("Perk allowing you to retain up to 75(225) unlocked options from Metamorph menu.\n\nCost: 75 points");
-				else if (player.ascensionPerkPoints < 75) addButtonDisabled(btn, "T.G.M.(S5)", "You do not have enough ascension perk points!");
+				if (player.ascensionPerkPoints >= 75 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) < 0) addButton(btn, "T.G.M.(S5)", perkTranscendentalGeneticMemoryStage5).hint("Perk allowing to retain up to 75(225) unlocked options from Metamorph menu.\n\nCost: 75 points");
+				else if (player.ascensionPerkPoints < 75) addButtonDisabled(btn, "T.G.M.(S5)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S5)", "You already bought Transcendental Genetic Memory (Stage 5) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) >= 0) {
-				if (player.ascensionPerkPoints >= 90 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6) < 0) addButton(btn, "T.G.M.(S6)", perkTranscendentalGeneticMemoryStage6).hint("Perk allowing you to retain up to 90(225) unlocked options from Metamorph menu.\n\nCost: 90 points");
-				else if (player.ascensionPerkPoints < 90) addButtonDisabled(btn, "T.G.M.(S6)", "You do not have enough ascension perk points!");
-				else addButtonDisabled(btn, "T.G.M.(S6)", "You already bought Transcendental Genetic Memory (Stage 6) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) < 0) addButtonDisabled(btn, "T.G.M.(S6)", "You need to buy Transcendental Genetic Memory (Stage 5) perk first.");
-			else addButtonDisabled(btn, "T.G.M.(S6)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionUnderdog) < 0) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
-			else if (player.ascensionPerkPoints < 5 && player.findPerk(PerkLib.AscensionUnderdog) < 0) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
+
+			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
+			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought Underdog perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionUnlockedPotential) < 0) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 5 point");
-			else if (player.ascensionPerkPoints < 5 && player.findPerk(PerkLib.AscensionUnlockedPotential) < 0) addButtonDisabled(btn, "UnlockPotent", "You do not have enough ascension perk points!");
+			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 5 point");
+			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButtonDisabled(btn, "UnlockPotent", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "UnlockPotent", "You already bought Unlocked Potential perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
-				if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) < 0) addButton(btn, "U.Potent2nd", perkUnlockedPotential2ndStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 5 point");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionUnlockedPotential)) {
+				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) addButton(btn, "U.Potent2nd", perkUnlockedPotential2ndStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 5 point");
 				else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "U.Potent2nd", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent2nd", "You already bought Unlocked Potential (2nd Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionUnlockedPotential) < 0) addButtonDisabled(btn, "U.Potent2nd", "You need to buy Unlocked Potential perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButtonDisabled(btn, "U.Potent2nd", "You need to buy Unlocked Potential perk first.");
 			else addButtonDisabled(btn, "U.Potent2nd", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
-				if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) < 0) addButton(btn, "U.Potent3rd", perkUnlockedPotential3rdStage).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 10 point");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) {
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) addButton(btn, "U.Potent3rd", perkUnlockedPotential3rdStage).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 10 point");
 				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent3rd", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent3rd", "You already bought Unlocked Potential (3rd Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) < 0) addButtonDisabled(btn, "U.Potent3rd", "You need to buy Unlocked Potential (2nd Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && !player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) addButtonDisabled(btn, "U.Potent3rd", "You need to buy Unlocked Potential (2nd Stage) perk first.");
 			else addButtonDisabled(btn, "U.Potent3rd", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) {
-				if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) < 0) addButton(btn, "U.Potent4th", perkUnlockedPotential4thStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 10 point");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) {
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButton(btn, "U.Potent4th", perkUnlockedPotential4thStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 10 point");
 				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent4th", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent4th", "You already bought Unlocked Potential (4th Stage) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) < 0) addButtonDisabled(btn, "U.Potent4th", "You need to buy Unlocked Potential (3rd Stage) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButtonDisabled(btn, "U.Potent4th", "You need to buy Unlocked Potential (3rd Stage) perk first.");
 			else addButtonDisabled(btn, "U.Potent4th", "You need ascend more times to buy this perk.");
 			btn++;
-		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 3 race points to work).\n\nCost: 10 points");
+		//	if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 3 race points to work).\n\nCost: 10 points");
 		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
 		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
 		//	btn++;
@@ -2253,7 +2269,7 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1, 0, 0, 0, 1);
 			player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 			clearOutput();
-			outputText("You gained Transcendental Genetic Memory (Stage 1) perk.");
+			outputText("Your gained Transcendental Genetic Memory (Stage 1) perk.");
 			doNext(rarePerks2);
 		}
 		private function perkTranscendentalGeneticMemoryStage2():void {
@@ -2261,7 +2277,7 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2, 0, 0, 0, 1);
 			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 30);
 			clearOutput();
-			outputText("You gained Transcendental Genetic Memory (Stage 2) perk.");
+			outputText("Your gained Transcendental Genetic Memory (Stage 2) perk.");
 			doNext(rarePerks2);
 		}
 		private function perkTranscendentalGeneticMemoryStage3():void {
@@ -2269,7 +2285,7 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3, 0, 0, 0, 1);
 			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 45);
 			clearOutput();
-			outputText("You gained Transcendental Genetic Memory (Stage 3) perk.");
+			outputText("Your gained Transcendental Genetic Memory (Stage 3) perk.");
 			doNext(rarePerks2);
 		}
 		private function perkTranscendentalGeneticMemoryStage4():void {
@@ -2277,7 +2293,7 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4, 0, 0, 0, 1);
 			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 60);
 			clearOutput();
-			outputText("You gained Transcendental Genetic Memory (Stage 4) perk.");
+			outputText("Your gained Transcendental Genetic Memory (Stage 4) perk.");
 			doNext(rarePerks2);
 		}
 		private function perkTranscendentalGeneticMemoryStage5():void {
@@ -2285,15 +2301,15 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
 			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 75);
 			clearOutput();
-			outputText("You gained Transcendental Genetic Memory (Stage 5) perk.");
+			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
 			doNext(rarePerks2);
 		}
 		private function perkTranscendentalGeneticMemoryStage6():void {
 			player.ascensionPerkPoints -= 90;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6, 0, 0, 0, 1);
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
 			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 90);
 			clearOutput();
-			outputText("You gained Transcendental Genetic Memory (Stage 6) perk.");
+			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
 			doNext(rarePerks2);
 		}
 		private function perkUnderdog():void {
@@ -2333,67 +2349,67 @@ import coc.view.MainView;
 		}
 
 		private function historyTopastlife():void {
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) {
+			if (player.hasPerk(PerkLib.HistoryAlchemist)) {
 				player.removePerk(PerkLib.HistoryAlchemist);
 				player.createPerk(PerkLib.PastLifeAlchemist,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryCultivator) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryCultivator)) {
 				player.removePerk(PerkLib.HistoryCultivator);
 				player.createPerk(PerkLib.PastLifeCultivator,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryFighter) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryFighter)) {
 				player.removePerk(PerkLib.HistoryFighter);
 				player.createPerk(PerkLib.PastLifeFighter,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryFortune) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryFortune)) {
 				player.removePerk(PerkLib.HistoryFortune);
 				player.createPerk(PerkLib.PastLifeFortune,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryHealer) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryHealer)) {
 				player.removePerk(PerkLib.HistoryHealer);
 				player.createPerk(PerkLib.PastLifeHealer,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryReligious) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryReligious)) {
 				player.removePerk(PerkLib.HistoryReligious);
 				player.createPerk(PerkLib.PastLifeReligious,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryScholar) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryScholar)) {
 				player.removePerk(PerkLib.HistoryScholar);
 				player.createPerk(PerkLib.PastLifeScholar,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryScout) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryScout)) {
 				player.removePerk(PerkLib.HistoryScout);
 				player.createPerk(PerkLib.PastLifeScout,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistorySlacker) >= 0) {
+			else if (player.hasPerk(PerkLib.HistorySlacker)) {
 				player.removePerk(PerkLib.HistorySlacker);
 				player.createPerk(PerkLib.PastLifeSlacker,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistorySlut) >= 0) {
+			else if (player.hasPerk(PerkLib.HistorySlut)) {
 				player.removePerk(PerkLib.HistorySlut);
 				player.createPerk(PerkLib.PastLifeSlut,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistorySmith) >= 0) {
+			else if (player.hasPerk(PerkLib.HistorySmith)) {
 				player.removePerk(PerkLib.HistorySmith);
 				player.createPerk(PerkLib.PastLifeSmith,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryTactician) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryTactician)) {
 				player.removePerk(PerkLib.HistoryTactician);
 				player.createPerk(PerkLib.PastLifeTactician,0,0,0,1);
 				historyTopastlife2();
 			}
-			else if (player.findPerk(PerkLib.HistoryWhore) >= 0) {
+			else if (player.hasPerk(PerkLib.HistoryWhore)) {
 				player.removePerk(PerkLib.HistoryWhore);
 				player.createPerk(PerkLib.PastLifeWhore,0,0,0,1);
 				historyTopastlife2();
@@ -2411,47 +2427,52 @@ import coc.view.MainView;
 		}
 
 		private function bloodlineACQ():void {
-			if (player.findPerk(PerkLib.DragonsDescendant) >= 0) {
+			if (player.hasPerk(PerkLib.DragonsDescendant)) {
 				player.removePerk(PerkLib.DragonsDescendant);
 				player.createPerk(PerkLib.BloodlineDragon,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.ElfsDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.ElfsDescendant)) {
 				player.removePerk(PerkLib.ElfsDescendant);
 				player.createPerk(PerkLib.BloodlineElf,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.GoblinsDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.GoblinsDescendant)) {
 				player.removePerk(PerkLib.GoblinsDescendant);
 				player.createPerk(PerkLib.BloodlineGoblin,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.KitsunesDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.KitsunesDescendant)) {
 				player.removePerk(PerkLib.KitsunesDescendant);
 				player.createPerk(PerkLib.BloodlineKitsune,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.RaijusDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.RaijusDescendant)) {
 				player.removePerk(PerkLib.RaijusDescendant);
 				player.createPerk(PerkLib.BloodlineRaiju,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.MinotaursDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.MinotaursDescendant)) {
 				player.removePerk(PerkLib.MinotaursDescendant);
 				player.createPerk(PerkLib.BloodlineMinotaur,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.OnisDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.OnisDescendant)) {
 				player.removePerk(PerkLib.OnisDescendant);
 				player.createPerk(PerkLib.BloodlineOni,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.OrcsDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.OrcsDescendant)) {
 				player.removePerk(PerkLib.OrcsDescendant);
 				player.createPerk(PerkLib.BloodlineOrc,0,0,0,1);
 				bloodlineACQ2();
 			}
-			else if (player.findPerk(PerkLib.MelkiesDescendant) >= 0) {
+			else if (player.hasPerk(PerkLib.VampiresDescendant)) {
+				player.removePerk(PerkLib.VampiresDescendant);
+				player.createPerk(PerkLib.BloodlineVampire,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.MelkiesDescendant)) {
 				player.removePerk(PerkLib.MelkiesDescendant);
 				player.createPerk(PerkLib.BloodlineMelkie,0,0,0,1);
 				bloodlineACQ2();
@@ -2475,100 +2496,100 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			if (page == 1) {
-				if (player.findPerk(PerkLib.CorruptedKitsune) > 0 && player.perkv4(PerkLib.CorruptedKitsune) < 1 && player.findPerk(PerkLib.CorruptedNinetails) > 0 && player.perkv4(PerkLib.CorruptedNinetails) < 1) addButton(0, "CorruptedK", permanentizePerkCorruptedKitsuneAndNinetails);
-				else if (player.findPerk(PerkLib.CorruptedKitsune) > 0 && player.perkv4(PerkLib.CorruptedKitsune) > 0 && player.findPerk(PerkLib.CorruptedNinetails) > 0 && player.perkv4(PerkLib.CorruptedNinetails) > 0) addButtonDisabled(0, "CorruptedK", "Corrupted Kitsune and Corrupted Ninetails perks are already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.CorruptedKitsune) && player.perkv4(PerkLib.CorruptedKitsune) < 1 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) < 1) addButton(0, "CorruptedK", permanentizePerkCorruptedKitsuneAndNinetails);
+				else if (player.hasPerk(PerkLib.CorruptedKitsune) && player.perkv4(PerkLib.CorruptedKitsune) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0) addButtonDisabled(0, "CorruptedK", "Corrupted Kitsune and Corrupted Ninetails perks are already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(0, "CorruptedK", "Corrupted Kitsune and Corrupted Ninetails");
-				if (player.findPerk(PerkLib.DarkCharm) > 0 && player.perkv4(PerkLib.DarkCharm) < 1) addButton(1, "DarkCharm", permanentizePerk1, PerkLib.DarkCharm);
-				else if (player.findPerk(PerkLib.DarkCharm) > 0 && player.perkv4(PerkLib.DarkCharm) > 0) addButtonDisabled(1, "DarkCharm", "Dark Charm perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.DarkCharm) && player.perkv4(PerkLib.DarkCharm) < 1) addButton(1, "DarkCharm", permanentizePerk1, PerkLib.DarkCharm);
+				else if (player.hasPerk(PerkLib.DarkCharm) && player.perkv4(PerkLib.DarkCharm) > 0) addButtonDisabled(1, "DarkCharm", "Dark Charm perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(1, "DarkCharm", "Dark Charm");
-				if (player.findPerk(PerkLib.DragonDarknessBreath) > 0 && player.perkv4(PerkLib.DragonDarknessBreath) < 1) addButton(2, "D.DarknessB.", permanentizePerk1, PerkLib.DragonDarknessBreath);
-				else if (player.findPerk(PerkLib.DragonDarknessBreath) > 0 && player.perkv4(PerkLib.DragonDarknessBreath) > 0) addButtonDisabled(2, "D.DarknessB.", "Dragon Darkness Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.DragonDarknessBreath) && player.perkv4(PerkLib.DragonDarknessBreath) < 1) addButton(2, "D.DarknessB.", permanentizePerk1, PerkLib.DragonDarknessBreath);
+				else if (player.hasPerk(PerkLib.DragonDarknessBreath) && player.perkv4(PerkLib.DragonDarknessBreath) > 0) addButtonDisabled(2, "D.DarknessB.", "Dragon Darkness Breath perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(2, "D.DarknessB.", "Dragon Darkness Breath");
-				if (player.findPerk(PerkLib.DragonFireBreath) > 0 && player.perkv4(PerkLib.DragonFireBreath) < 1) addButton(3, "D.FireB.", permanentizePerk1, PerkLib.DragonFireBreath);
-				else if (player.findPerk(PerkLib.DragonFireBreath) > 0 && player.perkv4(PerkLib.DragonFireBreath) > 0) addButtonDisabled(3, "D.FireB.", "Dragon Fire Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.DragonFireBreath) && player.perkv4(PerkLib.DragonFireBreath) < 1) addButton(3, "D.FireB.", permanentizePerk1, PerkLib.DragonFireBreath);
+				else if (player.hasPerk(PerkLib.DragonFireBreath) && player.perkv4(PerkLib.DragonFireBreath) > 0) addButtonDisabled(3, "D.FireB.", "Dragon Fire Breath perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(3, "D.FireB.", "Dragon Fire Breath");
 				addButton(4, "Next", ascensionPermeryMenu, page + 1);
-				if (player.findPerk(PerkLib.DragonIceBreath) > 0 && player.perkv4(PerkLib.DragonIceBreath) < 1) addButton(5, "D.IceB.", permanentizePerk1, PerkLib.DragonIceBreath);
-				else if (player.findPerk(PerkLib.DragonIceBreath) > 0 && player.perkv4(PerkLib.DragonIceBreath) > 0) addButtonDisabled(5, "D.IceB.", "Dragon Ice Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.DragonIceBreath) && player.perkv4(PerkLib.DragonIceBreath) < 1) addButton(5, "D.IceB.", permanentizePerk1, PerkLib.DragonIceBreath);
+				else if (player.hasPerk(PerkLib.DragonIceBreath) && player.perkv4(PerkLib.DragonIceBreath) > 0) addButtonDisabled(5, "D.IceB.", "Dragon Ice Breath perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(5, "D.IceB.", "Dragon Ice Breath");
-				if (player.findPerk(PerkLib.DragonLightningBreath) > 0 && player.perkv4(PerkLib.DragonLightningBreath) < 1) addButton(6, "D.LightningB.", permanentizePerk1, PerkLib.DragonLightningBreath);
-				else if (player.findPerk(PerkLib.DragonLightningBreath) > 0 && player.perkv4(PerkLib.DragonLightningBreath) > 0) addButtonDisabled(6, "D.LightningB.", "Dragon Lightning Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.DragonLightningBreath) && player.perkv4(PerkLib.DragonLightningBreath) < 1) addButton(6, "D.LightningB.", permanentizePerk1, PerkLib.DragonLightningBreath);
+				else if (player.hasPerk(PerkLib.DragonLightningBreath) && player.perkv4(PerkLib.DragonLightningBreath) > 0) addButtonDisabled(6, "D.LightningB.", "Dragon Lightning Breath perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(6, "D.LightningB.", "Dragon Lightning Breath");
-				if (player.findPerk(PerkLib.EnlightenedKitsune) > 0 && player.perkv4(PerkLib.EnlightenedKitsune) < 1 && player.findPerk(PerkLib.EnlightenedNinetails) > 0 && player.perkv4(PerkLib.EnlightenedNinetails) < 1) addButton(7, "EnlightenedK", permanentizePerkEnlightenedKitsuneAndNinetails);
-				else if (player.findPerk(PerkLib.EnlightenedKitsune) > 0 && player.perkv4(PerkLib.EnlightenedKitsune) > 0 && player.findPerk(PerkLib.EnlightenedNinetails) > 0 && player.perkv4(PerkLib.EnlightenedNinetails) > 0) addButtonDisabled(7, "EnlightenedK", "Enlightened Kitsune and Enlightened Ninetails perks are already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.perkv4(PerkLib.EnlightenedKitsune) < 1 && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) < 1) addButton(7, "EnlightenedK", permanentizePerkEnlightenedKitsuneAndNinetails);
+				else if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.perkv4(PerkLib.EnlightenedKitsune) > 0 && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0) addButtonDisabled(7, "EnlightenedK", "Enlightened Kitsune and Enlightened Ninetails perks are already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(7, "EnlightenedK", "Enlightened Kitsune and Enlightened Ninetails");
-				if (player.findPerk(PerkLib.FerasBoonAlpha) > 0 && player.perkv4(PerkLib.FerasBoonAlpha) < 1) addButton(8, "FerasB.A.", permanentizePerk1, PerkLib.FerasBoonAlpha);
-				else if (player.findPerk(PerkLib.FerasBoonAlpha) > 0 && player.perkv4(PerkLib.FerasBoonAlpha) > 0) addButtonDisabled(8, "FerasB.A.", "Feras Boon Alpha perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.FerasBoonAlpha) && player.perkv4(PerkLib.FerasBoonAlpha) < 1) addButton(8, "FerasB.A.", permanentizePerk1, PerkLib.FerasBoonAlpha);
+				else if (player.hasPerk(PerkLib.FerasBoonAlpha) && player.perkv4(PerkLib.FerasBoonAlpha) > 0) addButtonDisabled(8, "FerasB.A.", "Feras Boon Alpha perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(8, "FerasB.A.", "Feras Boon Alpha");
-				if (player.findPerk(PerkLib.FerasBoonBreedingBitch) > 0 && player.perkv4(PerkLib.FerasBoonBreedingBitch) < 1) addButton(10, "FerasB.B.B.", permanentizePerk1, PerkLib.FerasBoonBreedingBitch);
-				else if (player.findPerk(PerkLib.FerasBoonBreedingBitch) > 0 && player.perkv4(PerkLib.FerasBoonBreedingBitch) > 0) addButtonDisabled(10, "FerasB.B.B.", "Feras Boon Breeding Bitch perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.FerasBoonBreedingBitch) && player.perkv4(PerkLib.FerasBoonBreedingBitch) < 1) addButton(10, "FerasB.B.B.", permanentizePerk1, PerkLib.FerasBoonBreedingBitch);
+				else if (player.hasPerk(PerkLib.FerasBoonBreedingBitch) && player.perkv4(PerkLib.FerasBoonBreedingBitch) > 0) addButtonDisabled(10, "FerasB.B.B.", "Feras Boon Breeding Bitch perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(10, "FerasB.B.B.", "Feras Boon Breeding Bitch");
-				if (player.findPerk(PerkLib.FerasBoonMilkingTwat) > 0 && player.perkv4(PerkLib.FerasBoonMilkingTwat) < 1) addButton(11, "FerasB.M.T.", permanentizePerk1, PerkLib.FerasBoonMilkingTwat);
-				else if (player.findPerk(PerkLib.FerasBoonMilkingTwat) > 0 && player.perkv4(PerkLib.FerasBoonMilkingTwat) > 0) addButtonDisabled(11, "FerasB.M.T.", "Feras Boon Milking Twat perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.FerasBoonMilkingTwat) && player.perkv4(PerkLib.FerasBoonMilkingTwat) < 1) addButton(11, "FerasB.M.T.", permanentizePerk1, PerkLib.FerasBoonMilkingTwat);
+				else if (player.hasPerk(PerkLib.FerasBoonMilkingTwat) && player.perkv4(PerkLib.FerasBoonMilkingTwat) > 0) addButtonDisabled(11, "FerasB.M.T.", "Feras Boon Milking Twat perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(11, "FerasB.M.T.", "Feras Boon Milking Twat");
-				if (player.findPerk(PerkLib.FerasBoonSeeder) > 0 && player.perkv4(PerkLib.FerasBoonSeeder) < 1) addButton(12, "FerasB.S.", permanentizePerk1, PerkLib.FerasBoonSeeder);
-				else if (player.findPerk(PerkLib.FerasBoonSeeder) > 0 && player.perkv4(PerkLib.FerasBoonSeeder) > 0) addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) < 1) addButton(12, "FerasB.S.", permanentizePerk1, PerkLib.FerasBoonSeeder);
+				else if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) > 0) addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder");
 			}
 			if (page == 2) {
-				if (player.findPerk(PerkLib.FireLord) > 0 && player.perkv4(PerkLib.FireLord) < 1) addButton(0, "FireLord", permanentizePerk2, PerkLib.FireLord);
-				else if (player.findPerk(PerkLib.FireLord) > 0 && player.perkv4(PerkLib.FireLord) > 0) addButtonDisabled(0, "FireLord", "FireLord perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.FireLord) && player.perkv4(PerkLib.FireLord) < 1) addButton(0, "FireLord", permanentizePerk2, PerkLib.FireLord);
+				else if (player.hasPerk(PerkLib.FireLord) && player.perkv4(PerkLib.FireLord) > 0) addButtonDisabled(0, "FireLord", "FireLord perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(0, "FireLord", "FireLord");
-				if (player.findPerk(PerkLib.Flexibility) > 0 && player.perkv4(PerkLib.Flexibility) < 1) addButton(1, "Flexibility", permanentizePerk2, PerkLib.Flexibility);
-				else if (player.findPerk(PerkLib.Flexibility) > 0 && player.perkv4(PerkLib.Flexibility) > 0) addButtonDisabled(1, "Flexibility", "Flexibility perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.Flexibility) && player.perkv4(PerkLib.Flexibility) < 1) addButton(1, "Flexibility", permanentizePerk2, PerkLib.Flexibility);
+				else if (player.hasPerk(PerkLib.Flexibility) && player.perkv4(PerkLib.Flexibility) > 0) addButtonDisabled(1, "Flexibility", "Flexibility perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(1, "Flexibility", "Flexibility");
-				if (player.findPerk(PerkLib.Hellfire) > 0 && player.perkv4(PerkLib.Hellfire) < 1) addButton(2, "Hellfire", permanentizePerk2, PerkLib.Hellfire);
-				else if (player.findPerk(PerkLib.Hellfire) > 0 && player.perkv4(PerkLib.Hellfire) > 0) addButtonDisabled(2, "Hellfire", "Hellfire perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.Hellfire) && player.perkv4(PerkLib.Hellfire) < 1) addButton(2, "Hellfire", permanentizePerk2, PerkLib.Hellfire);
+				else if (player.hasPerk(PerkLib.Hellfire) && player.perkv4(PerkLib.Hellfire) > 0) addButtonDisabled(2, "Hellfire", "Hellfire perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(2, "Hellfire", "Hellfire");
-				if (player.findPerk(PerkLib.InkSpray) > 0 && player.perkv4(PerkLib.InkSpray) < 1) addButton(3, "InkSpray", permanentizePerk2, PerkLib.InkSpray);
-				else if (player.findPerk(PerkLib.InkSpray) > 0 && player.perkv4(PerkLib.InkSpray) > 0) addButtonDisabled(3, "InkSpray", "Ink Spray perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.InkSpray) && player.perkv4(PerkLib.InkSpray) < 1) addButton(3, "InkSpray", permanentizePerk2, PerkLib.InkSpray);
+				else if (player.hasPerk(PerkLib.InkSpray) && player.perkv4(PerkLib.InkSpray) > 0) addButtonDisabled(3, "InkSpray", "Ink Spray perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(3, "InkSpray", "Ink Spray");
 				addButton(4, "Next", ascensionPermeryMenu, page + 1);
-				if (player.findPerk(PerkLib.LizanRegeneration) > 0 && player.perkv4(PerkLib.LizanRegeneration) < 1) addButton(5, "LizanRegen", permanentizePerk2, PerkLib.LizanRegeneration);
-				else if (player.findPerk(PerkLib.LizanRegeneration) > 0 && player.perkv4(PerkLib.LizanRegeneration) > 0) addButtonDisabled(5, "LizanRegen", "Lizan Regeneration perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.LizanRegeneration) && player.perkv4(PerkLib.LizanRegeneration) < 1) addButton(5, "LizanRegen", permanentizePerk2, PerkLib.LizanRegeneration);
+				else if (player.hasPerk(PerkLib.LizanRegeneration) && player.perkv4(PerkLib.LizanRegeneration) > 0) addButtonDisabled(5, "LizanRegen", "Lizan Regeneration perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(5, "LizanRegen", "Lizan Regeneration");
-				if (player.findPerk(PerkLib.Lustzerker) > 0 && player.perkv4(PerkLib.Lustzerker) < 1) addButton(6, "Lustzerker", permanentizePerk2, PerkLib.Lustzerker);
-				else if (player.findPerk(PerkLib.Lustzerker) > 0 && player.perkv4(PerkLib.Lustzerker) > 0) addButtonDisabled(6, "Lustzerker", "Lustzerker perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) < 1) addButton(6, "Lustzerker", permanentizePerk2, PerkLib.Lustzerker);
+				else if (player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) > 0) addButtonDisabled(6, "Lustzerker", "Lustzerker perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(6, "Lustzerker", "Lustzerker");
-				if (player.findPerk(PerkLib.MagicalFertility) > 0 && player.perkv4(PerkLib.MagicalFertility) < 1) addButton(7, "MagicalF.", permanentizePerk2, PerkLib.MagicalFertility);
-				else if (player.findPerk(PerkLib.MagicalFertility) > 0 && player.perkv4(PerkLib.MagicalFertility) > 0) addButtonDisabled(7, "MagicalF.", "Magical Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.MagicalFertility) && player.perkv4(PerkLib.MagicalFertility) < 1) addButton(7, "MagicalF.", permanentizePerk2, PerkLib.MagicalFertility);
+				else if (player.hasPerk(PerkLib.MagicalFertility) && player.perkv4(PerkLib.MagicalFertility) > 0) addButtonDisabled(7, "MagicalF.", "Magical Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(7, "MagicalF.", "Magical Fertility");
-				if (player.findPerk(PerkLib.MagicalVirility) > 0 && player.perkv4(PerkLib.MagicalVirility) < 1) addButton(8, "MagicalV.", permanentizePerk2, PerkLib.MagicalVirility);
-				else if (player.findPerk(PerkLib.MagicalVirility) > 0 && player.perkv4(PerkLib.MagicalVirility) > 0) addButtonDisabled(8, "MagicalV.", "Magical Virility perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.MagicalVirility) && player.perkv4(PerkLib.MagicalVirility) < 1) addButton(8, "MagicalV.", permanentizePerk2, PerkLib.MagicalVirility);
+				else if (player.hasPerk(PerkLib.MagicalVirility) && player.perkv4(PerkLib.MagicalVirility) > 0) addButtonDisabled(8, "MagicalV.", "Magical Virility perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(8, "MagicalV.", "Magical Virility");
 				addButton(9, "Previous", ascensionPermeryMenu, page - 1);
-				if (player.findPerk(PerkLib.MaraesGiftButtslut) > 0 && player.perkv4(PerkLib.MaraesGiftButtslut) < 1) addButton(10, "MaraesGiftB.", permanentizePerk2, PerkLib.MaraesGiftButtslut);
-				else if (player.findPerk(PerkLib.MaraesGiftButtslut) > 0 && player.perkv4(PerkLib.MaraesGiftButtslut) > 0) addButtonDisabled(10, "MaraesGiftB.", "Maraes Gift Buttslut perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.MaraesGiftButtslut) && player.perkv4(PerkLib.MaraesGiftButtslut) < 1) addButton(10, "MaraesGiftB.", permanentizePerk2, PerkLib.MaraesGiftButtslut);
+				else if (player.hasPerk(PerkLib.MaraesGiftButtslut) && player.perkv4(PerkLib.MaraesGiftButtslut) > 0) addButtonDisabled(10, "MaraesGiftB.", "Maraes Gift Buttslut perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(10, "MaraesGiftB.", "Maraes Gift Buttslut");
-				if (player.findPerk(PerkLib.MaraesGiftFertility) > 0 && player.perkv4(PerkLib.MaraesGiftFertility) < 1) addButton(11, "MaraesGiftF.", permanentizePerk2, PerkLib.MaraesGiftFertility);
-				else if (player.findPerk(PerkLib.MaraesGiftFertility) > 0 && player.perkv4(PerkLib.MaraesGiftFertility) > 0) addButtonDisabled(11, "MaraesGiftF.", "Maraes Gift Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.MaraesGiftFertility) && player.perkv4(PerkLib.MaraesGiftFertility) < 1) addButton(11, "MaraesGiftF.", permanentizePerk2, PerkLib.MaraesGiftFertility);
+				else if (player.hasPerk(PerkLib.MaraesGiftFertility) && player.perkv4(PerkLib.MaraesGiftFertility) > 0) addButtonDisabled(11, "MaraesGiftF.", "Maraes Gift Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(11, "MaraesGiftF.", "Maraes Gift Fertility");
-				if (player.findPerk(PerkLib.MaraesGiftProfractory) > 0 && player.perkv4(PerkLib.MaraesGiftProfractory) < 1) addButton(12, "MaraesGiftP.", permanentizePerk2, PerkLib.MaraesGiftProfractory);
-				else if (player.findPerk(PerkLib.MaraesGiftProfractory) > 0 && player.perkv4(PerkLib.MaraesGiftProfractory) > 0) addButtonDisabled(12, "MaraesGiftP.", "Maraes Gift Profractory perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.MaraesGiftProfractory) && player.perkv4(PerkLib.MaraesGiftProfractory) < 1) addButton(12, "MaraesGiftP.", permanentizePerk2, PerkLib.MaraesGiftProfractory);
+				else if (player.hasPerk(PerkLib.MaraesGiftProfractory) && player.perkv4(PerkLib.MaraesGiftProfractory) > 0) addButtonDisabled(12, "MaraesGiftP.", "Maraes Gift Profractory perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(12, "MaraesGiftP.", "Maraes Gift Profractory");
-				if (player.findPerk(PerkLib.MaraesGiftStud) > 0 && player.perkv4(PerkLib.MaraesGiftStud) < 1) addButton(13, "MaraesGiftS.", permanentizePerk2, PerkLib.MaraesGiftStud);
-				else if (player.findPerk(PerkLib.MaraesGiftStud) > 0 && player.perkv4(PerkLib.MaraesGiftStud) > 0) addButtonDisabled(13, "MaraesGiftS.", "Maraes Gift Stud perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.MaraesGiftStud) && player.perkv4(PerkLib.MaraesGiftStud) < 1) addButton(13, "MaraesGiftS.", permanentizePerk2, PerkLib.MaraesGiftStud);
+				else if (player.hasPerk(PerkLib.MaraesGiftStud) && player.perkv4(PerkLib.MaraesGiftStud) > 0) addButtonDisabled(13, "MaraesGiftS.", "Maraes Gift Stud perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(13, "MaraesGiftS.", "Maraes Gift Stud");
 			}
 			if (page == 3) {
-				if (player.findPerk(PerkLib.MilkMaid) > 0 && player.perkv4(PerkLib.MilkMaid) < 1) addButton(0, "MilkMaid", permanentizePerk3, PerkLib.MilkMaid);
-				else if (player.findPerk(PerkLib.MilkMaid) > 0 && player.perkv4(PerkLib.MilkMaid) > 0) addButtonDisabled(0, "MilkMaid", "MilkMaid perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.MilkMaid) && player.perkv4(PerkLib.MilkMaid) < 1) addButton(0, "MilkMaid", permanentizePerk3, PerkLib.MilkMaid);
+				else if (player.hasPerk(PerkLib.MilkMaid) && player.perkv4(PerkLib.MilkMaid) > 0) addButtonDisabled(0, "MilkMaid", "MilkMaid perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(0, "MilkMaid", "MilkMaid");
-				if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(1, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
-				else if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(1, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
+				else if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance");
-				if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(2, "OneTrackMind", permanentizePerk3, PerkLib.OneTrackMind);
-				else if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(2, "OneTrackMind", "One Track Mind perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.OneTrackMind) && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(2, "OneTrackMind", permanentizePerk3, PerkLib.OneTrackMind);
+				else if (player.hasPerk(PerkLib.OneTrackMind) && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(2, "OneTrackMind", "One Track Mind perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(2, "OneTrackMind", "One Track Mind");
-				if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) < 1) addButton(3, "Pure&Loving", permanentizePerk3, PerkLib.PureAndLoving);
-				else if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) > 0) addButtonDisabled(3, "Pure&Loving", "Pure And Loving perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.PureAndLoving) && player.perkv4(PerkLib.PureAndLoving) < 1) addButton(3, "Pure&Loving", permanentizePerk3, PerkLib.PureAndLoving);
+				else if (player.hasPerk(PerkLib.PureAndLoving) && player.perkv4(PerkLib.PureAndLoving) > 0) addButtonDisabled(3, "Pure&Loving", "Pure And Loving perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(3, "Pure&Loving", "Pure And Loving");
 				//addButton(4, "Next", ascensionPermeryMenu, page + 1);
-				if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) < 1) addButton(5, "PurityBlessing", permanentizePerk3, PerkLib.PurityBlessing);
-				else if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) > 0) addButtonDisabled(5, "PurityBlessing", "Purity Blessing perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.PurityBlessing) && player.perkv4(PerkLib.PurityBlessing) < 1) addButton(5, "PurityBlessing", permanentizePerk3, PerkLib.PurityBlessing);
+				else if (player.hasPerk(PerkLib.PurityBlessing) && player.perkv4(PerkLib.PurityBlessing) > 0) addButtonDisabled(5, "PurityBlessing", "Purity Blessing perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(5, "PurityBlessing", "Purity Blessing");
-				if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) < 1) addButton(6, "SensualLover", permanentizePerk3, PerkLib.SensualLover);
-				else if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(6, "SensualLover", "Sensual Lover perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (player.hasPerk(PerkLib.SensualLover) && player.perkv4(PerkLib.SensualLover) < 1) addButton(6, "SensualLover", permanentizePerk3, PerkLib.SensualLover);
+				else if (player.hasPerk(PerkLib.SensualLover) && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(6, "SensualLover", "Sensual Lover perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(6, "SensualLover", "Sensual Lover");
 				addButton(9, "Previous", ascensionPermeryMenu, page - 1);
 			}
@@ -2630,969 +2651,251 @@ import coc.view.MainView;
 			ascensionPermeryMenu(1);
 		}
 
-		private function ascensionMetamorphPermeryMenu(page:int = 1):void {
+		public function ascensionMetamorphPermMenu(currentPage: int = 0):void {
 			clearOutput();
-			outputText("For the price of five points, you can make unlocked Metamorph options permanent (up to current limit) and they will carry over in future ascensions.");
-			outputText("\n\nCurent amount of permanent options / Max cap for permanent options: " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + " / " + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "");
-			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
-			menu();
-			if (page == 1) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin) && player.statusEffectv4(StatusEffects.UnlockedHumanSkin) < 9000) addButton(0, "Skin", permanentizeStatusEffect1, StatusEffects.UnlockedHumanSkin);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin) && player.statusEffectv4(StatusEffects.UnlockedHumanSkin) == 9000) addButtonDisabled(0, "Skin", "Human skin option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Skin", "Human Skin");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanLowerBody) && player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) < 9000) addButton(1, "H.Legs", permanentizeStatusEffect1, StatusEffects.UnlockedHumanLowerBody);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanLowerBody) && player.statusEffectv4(StatusEffects.UnlockedHumanLowerBody) == 9000) addButtonDisabled(1, "H.Legs", "Human Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "H.Legs", "Human Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanArms) && player.statusEffectv4(StatusEffects.UnlockedHumanArms) < 9000) addButton(2, "H.Arms", permanentizeStatusEffect1, StatusEffects.UnlockedHumanArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanArms) && player.statusEffectv4(StatusEffects.UnlockedHumanArms) == 9000) addButtonDisabled(2, "H.Arms", "Human Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "H.Arms", "Human Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanFace) && player.statusEffectv4(StatusEffects.UnlockedHumanFace) < 9000) addButton(3, "H.Face", permanentizeStatusEffect1, StatusEffects.UnlockedHumanFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanFace) && player.statusEffectv4(StatusEffects.UnlockedHumanFace) == 9000) addButtonDisabled(3, "H.Face", "Human Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "H.Face", "Human Face");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue) && player.statusEffectv4(StatusEffects.UnlockedHumanTongue) < 9000) addButton(5, "H.Tongue", permanentizeStatusEffect1, StatusEffects.UnlockedHumanTongue);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue) && player.statusEffectv4(StatusEffects.UnlockedHumanTongue) == 9000) addButtonDisabled(5, "H.Tongue", "Human Tongue option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "H.Tongue", "Human Tongue");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanEyes) && player.statusEffectv4(StatusEffects.UnlockedHumanEyes) < 9000) addButton(6, "H.Eyes", permanentizeStatusEffect1, StatusEffects.UnlockedHumanEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEyes) && player.statusEffectv4(StatusEffects.UnlockedHumanEyes) == 9000) addButtonDisabled(6, "H.Eyes", "Human Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "H.Eyes", "Human Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars) && player.statusEffectv4(StatusEffects.UnlockedHumanEars) < 9000) addButton(7, "H.Ears", permanentizeStatusEffect1, StatusEffects.UnlockedHumanEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars) && player.statusEffectv4(StatusEffects.UnlockedHumanEars) == 9000) addButtonDisabled(7, "H.Ears", "Human Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "H.Ears", "Human Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair) && player.statusEffectv4(StatusEffects.UnlockedHumanHair) < 9000) addButton(8, "H.Hair", permanentizeStatusEffect1, StatusEffects.UnlockedHumanHair);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair) && player.statusEffectv4(StatusEffects.UnlockedHumanHair) == 9000) addButtonDisabled(8, "H.Hair", "Human Hair option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "H.Hair", "Human Hair");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail) && player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) < 9000) addButton(10, "NoTail", permanentizeStatusEffect1, StatusEffects.UnlockedHumanNoTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail) && player.statusEffectv4(StatusEffects.UnlockedHumanNoTail) == 9000) addButtonDisabled(10, "NoTail", "Lack of Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "NoTail", "Lack of Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoWings) && player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) < 9000) addButton(11, "NoWings", permanentizeStatusEffect1, StatusEffects.UnlockedHumanNoWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoWings) && player.statusEffectv4(StatusEffects.UnlockedHumanNoWings) == 9000) addButtonDisabled(11, "NoWings", "Lack of Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "NoWings", "Lack of Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns) && player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) < 9000) addButton(12, "NoHorns", permanentizeStatusEffect1, StatusEffects.UnlockedHumanNoHorns);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns) && player.statusEffectv4(StatusEffects.UnlockedHumanNoHorns) == 9000) addButtonDisabled(12, "NoHorns", "Lack of Horns option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "NoHorns", "Lack of Horns");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern) && player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) < 9000) addButton(13, "NoSkinPattern", permanentizeStatusEffect1, StatusEffects.UnlockedHumanNoSkinPattern);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern) && player.statusEffectv4(StatusEffects.UnlockedHumanNoSkinPattern) == 9000) addButtonDisabled(13, "NoSkinPattern", "Lack of Skin Pattern option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "NoSkinPattern", "Lack of Skin Pattern");
-			}
-			if (page == 2) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoGills) && player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) < 9000) addButton(0, "NoGills", permanentizeStatusEffect2, StatusEffects.UnlockedHumanNoGills);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoGills) && player.statusEffectv4(StatusEffects.UnlockedHumanNoGills) == 9000) addButtonDisabled(0, "NoGills", "Lack of Gills option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "NoGills", "Lack of Gills");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoAntennae) && player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) < 9000) addButton(1, "NoAntennae", permanentizeStatusEffect2, StatusEffects.UnlockedHumanNoAntennae);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoAntennae) && player.statusEffectv4(StatusEffects.UnlockedHumanNoAntennae) == 9000) addButtonDisabled(1, "NoAntennae", "Lack of Antennae option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "NoAntennae", "Lack of Antennae");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody) && player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) < 9000) addButton(2, "N.RearBody", permanentizeStatusEffect2, StatusEffects.UnlockedHumanNoRearBody);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody) && player.statusEffectv4(StatusEffects.UnlockedHumanNoRearBody) == 9000) addButtonDisabled(2, "N.RearBody", "Normal Rear Body option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "N.RearBody", "Normal Rear Body");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(5, "", permanentizeStatusEffect2, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(5, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "", "");*/
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect2, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "", "");*/
-			}
-			if (page == 3) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedFur) && player.statusEffectv4(StatusEffects.UnlockedFur) < 9000) addButton(0, "Fur", permanentizeStatusEffect3, StatusEffects.UnlockedFur);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFur) && player.statusEffectv4(StatusEffects.UnlockedFur) == 9000) addButtonDisabled(0, "Fur", "Fur option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Fur", "Fur");
-				if (player.hasStatusEffect(StatusEffects.UnlockedScales) && player.statusEffectv4(StatusEffects.UnlockedScales) < 9000) addButton(1, "Scales", permanentizeStatusEffect3, StatusEffects.UnlockedScales);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedScales) && player.statusEffectv4(StatusEffects.UnlockedScales) == 9000) addButtonDisabled(1, "Scales", "Scales option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Scales", "Scales");
-				if (player.hasStatusEffect(StatusEffects.UnlockedChitin) && player.statusEffectv4(StatusEffects.UnlockedChitin) < 9000) addButton(2, "Chitin", permanentizeStatusEffect3, StatusEffects.UnlockedChitin);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedChitin) && player.statusEffectv4(StatusEffects.UnlockedChitin) == 9000) addButtonDisabled(2, "Chitin", "Chitin option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Chitin", "Chitin");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.statusEffectv4(StatusEffects.UnlockedDragonScales) < 9000) addButton(3, "D.Scales", permanentizeStatusEffect3, StatusEffects.UnlockedDragonScales);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDragonScales) && player.statusEffectv4(StatusEffects.UnlockedDragonScales) == 9000) addButtonDisabled(3, "D.Scales", "Dragon Scales option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "D.Scales", "Dragon Scales");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedTattoed) && player.statusEffectv4(StatusEffects.UnlockedTattoed) < 9000) addButton(5, "Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedTattoed);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedTattoed) && player.statusEffectv4(StatusEffects.UnlockedTattoed) == 9000) addButtonDisabled(5, "Tattoed", "Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Tattooed", "Tattooed");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed) && player.statusEffectv4(StatusEffects.UnlockedBattleTattoed) < 9000) addButton(6, "B.Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedBattleTattoed);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed) && player.statusEffectv4(StatusEffects.UnlockedBattleTattoed) == 9000) addButtonDisabled(6, "B.Tattoed", "Battle Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "B.Tattooed", "Battle Tattooed");
-				if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed) && player.statusEffectv4(StatusEffects.UnlockedLightningTattoed) < 9000) addButton(7, "L.Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedLightningTattoed);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed) && player.statusEffectv4(StatusEffects.UnlockedLightningTattoed) == 9000) addButtonDisabled(7, "L.Tattoed", "Lightning Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "L.Tattooed", "Lightning Tattooed");
-				if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed) && player.statusEffectv4(StatusEffects.UnlockedScarTattoed) < 9000) addButton(8, "S.Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedScarTattoed);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed) && player.statusEffectv4(StatusEffects.UnlockedScarTattoed) == 9000) addButtonDisabled(8, "S.Tattoed", "Scar Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "S.Tattooed", "Scar Tattooed");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect3, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "", "");*/
-			}
-			if (page == 4) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody) && player.statusEffectv4(StatusEffects.UnlockedFoxLowerBody) < 9000) addButton(0, "Fox Legs", permanentizeStatusEffect4, StatusEffects.UnlockedFoxLowerBody);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody) && player.statusEffectv4(StatusEffects.UnlockedFoxLowerBody) == 9000) addButtonDisabled(0, "Fox Legs", "Fox Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Fox Legs", "Fox Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms) && player.statusEffectv4(StatusEffects.UnlockedFoxArms) < 9000) addButton(1, "Fox Arms", permanentizeStatusEffect4, StatusEffects.UnlockedFoxArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms) && player.statusEffectv4(StatusEffects.UnlockedFoxArms) == 9000) addButtonDisabled(1, "Fox Arms", "Fox Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Fox Arms", "Fox Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.statusEffectv4(StatusEffects.UnlockedFoxEars) < 9000) addButton(2, "Fox Ears", permanentizeStatusEffect4, StatusEffects.UnlockedFoxEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.statusEffectv4(StatusEffects.UnlockedFoxEars) == 9000) addButtonDisabled(2, "Fox Ears", "Fox Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Fox Ears", "Fox Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.statusEffectv4(StatusEffects.UnlockedFoxTail) < 9000) addButton(3, "Fox Tail", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.statusEffectv4(StatusEffects.UnlockedFoxTail) == 9000) addButtonDisabled(3, "Fox Tail", "Fox Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Fox Tail", "Fox Tail");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.statusEffectv4(StatusEffects.UnlockedFoxTail2nd) < 9000) addButton(5, "Fox Tail 2", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail2nd);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.statusEffectv4(StatusEffects.UnlockedFoxTail2nd) == 9000) addButtonDisabled(5, "Fox Tail 2", "Fox Tail 2nd option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Fox Tail 2", "Fox Tail 2nd");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.statusEffectv4(StatusEffects.UnlockedFoxTail3rd) < 9000) addButton(6, "Fox Tail 3", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail3rd);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.statusEffectv4(StatusEffects.UnlockedFoxTail3rd) == 9000) addButtonDisabled(6, "Fox Tail 3", "Fox Tail 3rd option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Fox Tail 3", "Fox Tail 3rd");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail4th) < 9000) addButton(7, "Fox Tail 4", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail4th);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail4th) == 9000) addButtonDisabled(7, "Fox Tail 4", "Fox Tail 4th option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Fox Tail 4", "Fox Tail 4th");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail5th) < 9000) addButton(8, "Fox Tail 5", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail5th);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail5th) == 9000) addButtonDisabled(8, "Fox Tail 5", "Fox Tail 5th option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Fox Tail 5", "Fox Tail 5th");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail6th) < 9000) addButton(10, "Fox Tail 6", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail6th);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail6th) == 9000) addButtonDisabled(10, "Fox Tail 6", "Fox Tail 6th option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Fox Tail 6", "Fox Tail 6th");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail7th) < 9000) addButton(11, "Fox Tail 7", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail7th);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail7th) == 9000) addButtonDisabled(11, "Fox Tail 7", "Fox Tail 7th option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Fox Tail 7", "Fox Tail 7th");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail8th) < 9000) addButton(12, "Fox Tail 8", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail8th);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail8th) == 9000) addButtonDisabled(12, "Fox Tail 8", "Fox Tail 8th option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Fox Tail 8", "Fox Tail 8th");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail9th) < 9000) addButton(13, "Fox Tail 9", permanentizeStatusEffect4, StatusEffects.UnlockedFoxTail9th);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.statusEffectv4(StatusEffects.UnlockedFoxTail9th) == 9000) addButtonDisabled(13, "Fox Tail 9", "Fox Tail 9th option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Fox Tail 9", "Fox Tail 9th");
-			}
-			if (page == 5) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxFace) && player.statusEffectv4(StatusEffects.UnlockedFoxFace) < 9000) addButton(0, "Fox Face", permanentizeStatusEffect5, StatusEffects.UnlockedFoxFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxFace) && player.statusEffectv4(StatusEffects.UnlockedFoxFace) == 9000) addButtonDisabled(0, "Fox Face", "Fox Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Fox Face", "Fox Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.statusEffectv4(StatusEffects.UnlockedFoxEyes) < 9000) addButton(1, "Fox Eyes", permanentizeStatusEffect5, StatusEffects.UnlockedFoxEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.statusEffectv4(StatusEffects.UnlockedFoxEyes) == 9000) addButtonDisabled(1, "Fox Eyes", "Fox Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Fox Eyes", "Fox Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.statusEffectv4(StatusEffects.UnlockedKitsuneArms) < 9000) addButton(2, "Kitsune Arms", permanentizeStatusEffect5, StatusEffects.UnlockedKitsuneArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.statusEffectv4(StatusEffects.UnlockedKitsuneArms) == 9000) addButtonDisabled(2, "Kitsune Arms", "Kitsune Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Kitsune Arms", "Kitsune Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonTail) && player.statusEffectv4(StatusEffects.UnlockedDemonTail) < 9000) addButton(3, "Demon Tail", permanentizeStatusEffect5, StatusEffects.UnlockedDemonTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTail) && player.statusEffectv4(StatusEffects.UnlockedDemonTail) == 9000) addButtonDisabled(3, "Demon Tail", "Demon Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Demon Tail", "Demon Tail");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonHorns) && player.statusEffectv4(StatusEffects.UnlockedDemonHorns) < 9000) addButton(5, "Demon Horns", permanentizeStatusEffect5, StatusEffects.UnlockedDemonHorns);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonHorns) && player.statusEffectv4(StatusEffects.UnlockedDemonHorns) == 9000) addButtonDisabled(5, "Demon Horns", "Demon Horns option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Demon Horns", "Demon Horns");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.statusEffectv4(StatusEffects.UnlockedDemonTonuge) < 9000) addButton(6, "Demon Tonuge", permanentizeStatusEffect5, StatusEffects.UnlockedDemonTonuge);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.statusEffectv4(StatusEffects.UnlockedDemonTonuge) == 9000) addButtonDisabled(6, "Demon Tonuge", "Demon Tonuge option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Demon Tonuge", "Demon Tonuge");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels) && player.statusEffectv4(StatusEffects.UnlockedDemonHighHeels) < 9000) addButton(7, "D. High Heels", permanentizeStatusEffect5, StatusEffects.UnlockedDemonHighHeels);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels) && player.statusEffectv4(StatusEffects.UnlockedDemonHighHeels) == 9000) addButtonDisabled(7, "D. High Heels", "Demon High Heels option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "D. High Heels", "Demon High Heels");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonClawedLegs) && player.statusEffectv4(StatusEffects.UnlockedDemonClawedLegs) < 9000) addButton(8, "D. Clawed Legs", permanentizeStatusEffect5, StatusEffects.UnlockedDemonClawedLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonClawedLegs) && player.statusEffectv4(StatusEffects.UnlockedDemonClawedLegs) == 9000) addButtonDisabled(8, "D. Clawed Legs", "Demon Clawed Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "D. Clawed Legs", "Demon Clawed Legs");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonTinyBatWings) && player.statusEffectv4(StatusEffects.UnlockedDemonTinyBatWings) < 9000) addButton(10, "T. Bat Wings", permanentizeStatusEffect5, StatusEffects.UnlockedDemonTinyBatWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTinyBatWings) && player.statusEffectv4(StatusEffects.UnlockedDemonTinyBatWings) == 9000) addButtonDisabled(10, "T. Bat Wings", "Tiny Bat Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "T. Bat Wings", "Tiny Bat Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings) && player.statusEffectv4(StatusEffects.UnlockedDemonLargeBatWings) < 9000) addButton(11, "L. Bat Wings", permanentizeStatusEffect5, StatusEffects.UnlockedDemonLargeBatWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings) && player.statusEffectv4(StatusEffects.UnlockedDemonLargeBatWings) == 9000) addButtonDisabled(11, "L. Bat Wings", "Large Bat Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "L. Bat Wings", "Large Bat Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.statusEffectv4(StatusEffects.UnlockedDemonLargeBatWings2) < 9000) addButton(12, "L. Bat Wings(2)", permanentizeStatusEffect5, StatusEffects.UnlockedDemonLargeBatWings2);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2) && player.statusEffectv4(StatusEffects.UnlockedDemonLargeBatWings2) == 9000) addButtonDisabled(12, "L. Bat Wings(2)", "Large Bat Wings (2nd pair) option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "L. Bat Wings(2)", "Large Bat Wings (2nd pair)");
-				if (player.hasStatusEffect(StatusEffects.UnlockedLizardLegs) && player.statusEffectv4(StatusEffects.UnlockedLizardLegs) < 9000) addButton(13, "Lizard Legs", permanentizeStatusEffect5, StatusEffects.UnlockedLizardLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLizardLegs) && player.statusEffectv4(StatusEffects.UnlockedLizardLegs) == 9000) addButtonDisabled(13, "Lizard Legs", "Lizard Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Lizard Legs", "Lizard Legs");
-			}
-			if (page == 6) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.statusEffectv4(StatusEffects.UnlockedLizardArms) < 9000) addButton(0, "Lizard Arms", permanentizeStatusEffect6, StatusEffects.UnlockedLizardArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.statusEffectv4(StatusEffects.UnlockedLizardArms) == 9000) addButtonDisabled(0, "Lizard Arms", "Lizard Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Lizard Arms", "Lizard Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedLizardTail) && player.statusEffectv4(StatusEffects.UnlockedLizardTail) < 9000) addButton(1, "Lizard Tail", permanentizeStatusEffect6, StatusEffects.UnlockedLizardTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLizardTail) && player.statusEffectv4(StatusEffects.UnlockedLizardTail) == 9000) addButtonDisabled(1, "Lizard Tail", "Lizard Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Lizard Tail", "Lizard Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes) && player.statusEffectv4(StatusEffects.UnlockedLizardEyes) < 9000) addButton(2, "Lizard Eyes", permanentizeStatusEffect6, StatusEffects.UnlockedLizardEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes) && player.statusEffectv4(StatusEffects.UnlockedLizardEyes) == 9000) addButtonDisabled(2, "Lizard Eyes", "Lizard Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Lizard Eyes", "Lizard Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedLizardEars) && player.statusEffectv4(StatusEffects.UnlockedLizardEars) < 9000) addButton(3, "Lizard Ears", permanentizeStatusEffect6, StatusEffects.UnlockedLizardEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEars) && player.statusEffectv4(StatusEffects.UnlockedLizardEars) == 9000) addButtonDisabled(3, "Lizard Ears", "Lizard Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Lizard Ears", "Lizard Ears");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedLizardFace) && player.statusEffectv4(StatusEffects.UnlockedLizardFace) < 9000) addButton(5, "Lizard Face", permanentizeStatusEffect6, StatusEffects.UnlockedLizardFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLizardFace) && player.statusEffectv4(StatusEffects.UnlockedLizardFace) == 9000) addButtonDisabled(5, "Lizard Face", "Lizard Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Lizard Face", "Lizard Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae) && player.statusEffectv4(StatusEffects.UnlockedBeeAntennae) < 9000) addButton(6, "Bee Antennae", permanentizeStatusEffect6, StatusEffects.UnlockedBeeAntennae);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae) && player.statusEffectv4(StatusEffects.UnlockedBeeAntennae) == 9000) addButtonDisabled(6, "Bee Antennae", "Bee Antennae option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Bee Antennae", "Bee Antennae");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.statusEffectv4(StatusEffects.UnlockedBeeArms) < 9000) addButton(7, "Bee Arms", permanentizeStatusEffect6, StatusEffects.UnlockedBeeArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.statusEffectv4(StatusEffects.UnlockedBeeArms) == 9000) addButtonDisabled(7, "Bee Arms", "Bee Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Bee Arms", "Bee Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBeeLegs) && player.statusEffectv4(StatusEffects.UnlockedBeeLegs) < 9000) addButton(8, "Bee Legs", permanentizeStatusEffect6, StatusEffects.UnlockedBeeLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBeeLegs) && player.statusEffectv4(StatusEffects.UnlockedBeeLegs) == 9000) addButtonDisabled(8, "Bee Legs", "Bee Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Bee Legs", "Bee Legs");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedBeeTail) && player.statusEffectv4(StatusEffects.UnlockedBeeTail) < 9000) addButton(10, "Bee Tail", permanentizeStatusEffect6, StatusEffects.UnlockedBeeTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBeeTail) && player.statusEffectv4(StatusEffects.UnlockedBeeTail) == 9000) addButtonDisabled(10, "Bee Tail", "Bee Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Bee Tail", "Bee Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBeeWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedBeeWingsSmall) < 9000) addButton(11, "Bee Wings S.", permanentizeStatusEffect6, StatusEffects.UnlockedBeeWingsSmall);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBeeWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedBeeWingsSmall) == 9000) addButtonDisabled(11, "Bee Wings S.", "Bee Wings Small option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Bee Wings S.", "Bee Wings Small");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBeeWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedBeeWingsLarge) < 9000) addButton(12, "Bee Wings L.", permanentizeStatusEffect6, StatusEffects.UnlockedBeeWingsLarge);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBeeWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedBeeWingsLarge) == 9000) addButtonDisabled(12, "Bee Wings L.", "Bee Wings Large option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Bee Wings L.", "Bee Wings Large");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyLegs) && player.statusEffectv4(StatusEffects.UnlockedHarpyLegs) < 9000) addButton(13, "Harpy Legs", permanentizeStatusEffect6, StatusEffects.UnlockedHarpyLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyLegs) && player.statusEffectv4(StatusEffects.UnlockedHarpyLegs) == 9000) addButtonDisabled(13, "Harpy Legs", "Harpy Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Harpy Legs", "Harpy Legs");
-			}
-			if (page == 7) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyTail) && player.statusEffectv4(StatusEffects.UnlockedHarpyTail) < 9000) addButton(0, "Harpy Tail", permanentizeStatusEffect7, StatusEffects.UnlockedHarpyTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyTail) && player.statusEffectv4(StatusEffects.UnlockedHarpyTail) == 9000) addButtonDisabled(0, "Harpy Tail", "Harpy Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Harpy Tail", "Harpy Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.statusEffectv4(StatusEffects.UnlockedHarpyArms) < 9000) addButton(1, "Harpy Arms", permanentizeStatusEffect7, StatusEffects.UnlockedHarpyArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.statusEffectv4(StatusEffects.UnlockedHarpyArms) == 9000) addButtonDisabled(1, "Harpy Arms", "Harpy Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Harpy Arms", "Harpy Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.statusEffectv4(StatusEffects.UnlockedHarpyHair) < 9000) addButton(2, "Harpy Hair", permanentizeStatusEffect7, StatusEffects.UnlockedHarpyHair);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.statusEffectv4(StatusEffects.UnlockedHarpyHair) == 9000) addButtonDisabled(2, "Harpy Hair", "Harpy Hair option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Harpy Hair", "Harpy Hair");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyWings) && player.statusEffectv4(StatusEffects.UnlockedHarpyWings) < 9000) addButton(3, "Harpy Wings", permanentizeStatusEffect7, StatusEffects.UnlockedHarpyWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyWings) && player.statusEffectv4(StatusEffects.UnlockedHarpyWings) == 9000) addButtonDisabled(3, "Harpy Wings", "Harpy Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Harpy Wings", "Harpy Wings");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedElfinEars) && player.statusEffectv4(StatusEffects.UnlockedElfinEars) < 9000) addButton(5, "Elfin Ears", permanentizeStatusEffect7, StatusEffects.UnlockedElfinEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedElfinEars) && player.statusEffectv4(StatusEffects.UnlockedElfinEars) == 9000) addButtonDisabled(5, "Elfin Ears", "Elfin Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Elfin Ears", "Elfin Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.statusEffectv4(StatusEffects.UnlockedSpiderFourEyes) < 9000) addButton(6, "Spider Eyes", permanentizeStatusEffect7, StatusEffects.UnlockedSpiderFourEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.statusEffectv4(StatusEffects.UnlockedSpiderFourEyes) == 9000) addButtonDisabled(6, "Spider Eyes", "Spider Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Spider Eyes", "Spider Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFangs) && player.statusEffectv4(StatusEffects.UnlockedSpiderFangs) < 9000) addButton(7, "Spider Fangs", permanentizeStatusEffect7, StatusEffects.UnlockedSpiderFangs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFangs) && player.statusEffectv4(StatusEffects.UnlockedSpiderFangs) == 9000) addButtonDisabled(7, "Spider Fangs", "Spider Fangs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Spider Fangs", "Spider Fangs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms) && player.statusEffectv4(StatusEffects.UnlockedSpiderArms) < 9000) addButton(8, "Spider Arms", permanentizeStatusEffect7, StatusEffects.UnlockedSpiderArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms) && player.statusEffectv4(StatusEffects.UnlockedSpiderArms) == 9000) addButtonDisabled(8, "Spider Arms", "Spider Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Spider Arms", "Spider Arms");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedSpiderLegs) && player.statusEffectv4(StatusEffects.UnlockedSpiderLegs) < 9000) addButton(10, "Spider Legs", permanentizeStatusEffect7, StatusEffects.UnlockedSpiderLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderLegs) && player.statusEffectv4(StatusEffects.UnlockedSpiderLegs) == 9000) addButtonDisabled(10, "Spider Legs", "Spider Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Spider Legs", "Spider Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSpiderTail) && player.statusEffectv4(StatusEffects.UnlockedSpiderTail) < 9000) addButton(11, "Spider Tail", permanentizeStatusEffect7, StatusEffects.UnlockedSpiderTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderTail) && player.statusEffectv4(StatusEffects.UnlockedSpiderTail) == 9000) addButtonDisabled(11, "Spider Tail", "Spider Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Spider Tail", "Spider Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDriderLegs) && player.statusEffectv4(StatusEffects.UnlockedDriderLegs) < 9000) addButton(12, "Drider Legs", permanentizeStatusEffect7, StatusEffects.UnlockedDriderLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDriderLegs) && player.statusEffectv4(StatusEffects.UnlockedDriderLegs) == 9000) addButtonDisabled(12, "Drider Legs", "Drider Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Drider Legs", "Drider Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth) && player.statusEffectv4(StatusEffects.UnlockedSharkTeeth) < 9000) addButton(13, "Shark Teeth", permanentizeStatusEffect7, StatusEffects.UnlockedSharkTeeth);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth) && player.statusEffectv4(StatusEffects.UnlockedSharkTeeth) == 9000) addButtonDisabled(13, "Shark Teeth", "Shark Teeth option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Shark Teeth", "Shark Teeth");
-			}
-			if (page == 8) {
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs</u></font>\n");
+			outputText("You can spend Ascension points to keep the available Metamorphs indefinitely, regardless of how many times you Ascend.\n\n");
+			outputText("<b>Metamorphs Permanentized:</b> " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + "/" + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "\n\n");
+			outputText("Ascension Perk Points: " + player.ascensionPerkPoints);
 
-				if (player.hasStatusEffect(StatusEffects.UnlockedSharkTail) && player.statusEffectv4(StatusEffects.UnlockedSharkTail) < 9000) addButton(0, "Shark Tail", permanentizeStatusEffect8, StatusEffects.UnlockedSharkTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSharkTail) && player.statusEffectv4(StatusEffects.UnlockedSharkTail) == 9000) addButtonDisabled(0, "Shark Tail", "Shark Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Shark Tail", "Shark Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSharkLegs) && player.statusEffectv4(StatusEffects.UnlockedSharkLegs) < 9000) addButton(1, "Shark Legs", permanentizeStatusEffect8, StatusEffects.UnlockedSharkLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSharkLegs) && player.statusEffectv4(StatusEffects.UnlockedSharkLegs) == 9000) addButtonDisabled(1, "Shark Legs", "Shark Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Shark Legs", "Shark Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.statusEffectv4(StatusEffects.UnlockedSharkArms) < 9000) addButton(2, "Shark Arms", permanentizeStatusEffect8, StatusEffects.UnlockedSharkArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.statusEffectv4(StatusEffects.UnlockedSharkArms) == 9000) addButtonDisabled(2, "Shark Arms", "Shark Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Shark Arms", "Shark Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSharkFin) && player.statusEffectv4(StatusEffects.UnlockedSharkFin) < 9000) addButton(3, "Shark Fin", permanentizeStatusEffect8, StatusEffects.UnlockedSharkFin);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSharkFin) && player.statusEffectv4(StatusEffects.UnlockedSharkFin) == 9000) addButtonDisabled(3, "Shark Fin", "Shark Fin option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Shark Fin", "Shark Fin");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX2) && player.statusEffectv4(StatusEffects.UnlockedDraconicX2) < 9000) addButton(5, "Dragon Horns", permanentizeStatusEffect8, StatusEffects.UnlockedDraconicX2);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX2) && player.statusEffectv4(StatusEffects.UnlockedDraconicX2) == 9000) addButtonDisabled(5, "Dragon Horns", "Draconic Horns option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Dragon Horns", "Draconic Horns");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4) && player.statusEffectv4(StatusEffects.UnlockedDraconicX4) < 9000) addButton(6, "Dragon H.(2nd)", permanentizeStatusEffect8, StatusEffects.UnlockedDraconicX4);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4) && player.statusEffectv4(StatusEffects.UnlockedDraconicX4) == 9000) addButtonDisabled(6, "Dragon H.(2nd)", "Draconic Horns (2nd pair) option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Dragon H.(2nd)", "Draconic Horns (2nd pair)");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.statusEffectv4(StatusEffects.UnlockedSalamanderTail) < 9000) addButton(7, "Salaman. T.", permanentizeStatusEffect8, StatusEffects.UnlockedSalamanderTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.statusEffectv4(StatusEffects.UnlockedSalamanderTail) == 9000) addButtonDisabled(7, "Salaman. T.", "Salamander Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Salaman. T.", "Salamander Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.statusEffectv4(StatusEffects.UnlockedSalamanderLegs) < 9000) addButton(8, "Salaman. L.", permanentizeStatusEffect8, StatusEffects.UnlockedSalamanderLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs) && player.statusEffectv4(StatusEffects.UnlockedSalamanderLegs) == 9000) addButtonDisabled(8, "Salaman. L.", "Salamander Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Salaman. L.", "Salamander Legs");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.statusEffectv4(StatusEffects.UnlockedSalamanderArms) < 9000) addButton(10, "Salaman. A.", permanentizeStatusEffect8, StatusEffects.UnlockedSalamanderArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.statusEffectv4(StatusEffects.UnlockedSalamanderArms) == 9000) addButtonDisabled(10, "Salaman. A.", "Salamander Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Salaman. A.", "Salamander Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.statusEffectv4(StatusEffects.UnlockedSalamanderFace) < 9000) addButton(11, "Salaman. F.", permanentizeStatusEffect8, StatusEffects.UnlockedSalamanderFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.statusEffectv4(StatusEffects.UnlockedSalamanderFace) == 9000) addButtonDisabled(11, "Salaman. F.", "Salamander Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Salaman. F.", "Salamander Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.statusEffectv4(StatusEffects.UnlockedPhoenixArms) < 9000) addButton(12, "Phoenix A.", permanentizeStatusEffect8, StatusEffects.UnlockedPhoenixArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.statusEffectv4(StatusEffects.UnlockedPhoenixArms) == 9000) addButtonDisabled(12, "Phoenix A.", "Phoenix Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Phoenix A.", "Phoenix Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.statusEffectv4(StatusEffects.UnlockedPhoenixWings) < 9000) addButton(13, "Phoenix W.", permanentizeStatusEffect8, StatusEffects.UnlockedPhoenixWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings) && player.statusEffectv4(StatusEffects.UnlockedPhoenixWings) == 9000) addButtonDisabled(13, "Phoenix W.", "Phoenix Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Phoenix W.", "Phoenix Wings");
+			menu();
+
+			const menusList: Array = [
+				{
+					name: "Hair",
+					func: accessHairMenu
+				},
+				{
+					name: "Face",
+					func: accessFaceMenu
+				},
+				{
+					name: "Eyes",
+					func: accessEyesMenu
+				},
+				{
+					name: "Tongue",
+					func: accessTongueMenu
+				},
+				{
+					name: "Ears",
+					func: accessEarsMenu
+				},
+				{
+					name: "Arms",
+					func: accessArmsMenu
+				},
+				{
+					name: "Lower Body",
+					func: accessLowerBodyMenu
+				},
+				{
+					name: "Rear Body",
+					func: accessRearBodyMenu
+				},
+				{
+					name: "Skin",
+					func: accessSkinMenu
+				},
+				{
+					name: "Patterns",
+					func: accessSkinPatternsMenu
+				},
+				{
+					name: "Antennae",
+					func: accessAntennaeMenu
+				},
+				{
+					name: "Horns",
+					func: accessHornsMenu
+				},
+				{
+					name: "Gills",
+					func: accessGillsMenu
+				},
+				{
+					name: "Wings",
+					func: accessWingsMenu
+				},
+				{
+					name: "Tail",
+					func: accessTailMenu
+				}
+			];
+
+			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
+
+			const lastPage: int = Math.ceil(menusList.length/menusPerPage) - 1;
+
+			const pageMenus: Array = menusList.slice(currentPage * menusPerPage, (currentPage * menusPerPage) + menusPerPage);
+
+			var currentButton: int = 0;
+
+			for each (var menuObj: * in pageMenus) {
+				if (menuObj.hint) {
+					addButton(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
+				} else {
+					addButton(currentButton, menuObj.name, menuObj.func);
+				}
+				currentButton++;
 			}
-			if (page == 9) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs) && player.statusEffectv4(StatusEffects.UnlockedOrcaLegs) < 9000) addButton(0, "Orca Legs", permanentizeStatusEffect9, StatusEffects.UnlockedOrcaLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs) && player.statusEffectv4(StatusEffects.UnlockedOrcaLegs) == 9000) addButtonDisabled(0, "Orca Legs", "Orca Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Orca Legs", "Orca Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.statusEffectv4(StatusEffects.UnlockedOrcaArms) < 9000) addButton(1, "Orca Arms", permanentizeStatusEffect9, StatusEffects.UnlockedOrcaArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.statusEffectv4(StatusEffects.UnlockedOrcaArms) == 9000) addButtonDisabled(1, "Orca Arms", "Orca Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Orca Arms", "Orca Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.statusEffectv4(StatusEffects.UnlockedOrcaTail) < 9000) addButton(2, "Orca Tail", permanentizeStatusEffect9, StatusEffects.UnlockedOrcaTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.statusEffectv4(StatusEffects.UnlockedOrcaTail) == 9000) addButtonDisabled(2, "Orca Tail", "Orca Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Orca Tail", "Orca Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.statusEffectv4(StatusEffects.UnlockedOrcaEars) < 9000) addButton(3, "Orca Ears", permanentizeStatusEffect9, StatusEffects.UnlockedOrcaEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.statusEffectv4(StatusEffects.UnlockedOrcaEars) == 9000) addButtonDisabled(3, "Orca Ears", "Orca Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Orca Ears", "Orca Ears");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaFace) && player.statusEffectv4(StatusEffects.UnlockedOrcaFace) < 9000) addButton(5, "Orca Face", permanentizeStatusEffect9, StatusEffects.UnlockedOrcaFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaFace) && player.statusEffectv4(StatusEffects.UnlockedOrcaFace) == 9000) addButtonDisabled(5, "Orca Face", "Orca Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Orca Face", "Orca Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.statusEffectv4(StatusEffects.UnlockedOrcaBlowhole) < 9000) addButton(6, "Orca Blowhole", permanentizeStatusEffect9, StatusEffects.UnlockedOrcaBlowhole);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole) && player.statusEffectv4(StatusEffects.UnlockedOrcaBlowhole) == 9000) addButtonDisabled(6, "Orca Blowhole", "Orca Blowhole option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Orca Blowhole", "Orca Blowhole");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.statusEffectv4(StatusEffects.UnlockedSnakeTongue) < 9000) addButton(7, "Snake Tongue", permanentizeStatusEffect9, StatusEffects.UnlockedSnakeTongue);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.statusEffectv4(StatusEffects.UnlockedSnakeTongue) == 9000) addButtonDisabled(7, "Snake Tongue", "Snake Tongue option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Snake Tongue", "Snake Tongue");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs) && player.statusEffectv4(StatusEffects.UnlockedSnakeFangs) < 9000) addButton(8, "Snake Fangs", permanentizeStatusEffect9, StatusEffects.UnlockedSnakeFangs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs) && player.statusEffectv4(StatusEffects.UnlockedSnakeFangs) == 9000) addButtonDisabled(8, "Snake Fangs", "Snake Fangs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Snake Fangs", "Snake Fangs");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody) && player.statusEffectv4(StatusEffects.UnlockedSnakeLowerBody) < 9000) addButton(10, "Snake L.Body", permanentizeStatusEffect9, StatusEffects.UnlockedSnakeLowerBody);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody) && player.statusEffectv4(StatusEffects.UnlockedSnakeLowerBody) == 9000) addButtonDisabled(10, "Snake L.Body", "Snake Lower Body option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Snake L.Body", "Snake Lower Body");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.statusEffectv4(StatusEffects.UnlockedSnakeEyes) < 9000) addButton(11, "Snake Eyes", permanentizeStatusEffect9, StatusEffects.UnlockedSnakeEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.statusEffectv4(StatusEffects.UnlockedSnakeEyes) == 9000) addButtonDisabled(11, "Snake Eyes", "Snake Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Snake Eyes", "Snake Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.statusEffectv4(StatusEffects.UnlockedSnakeEars) < 9000) addButton(12, "Snake Ears", permanentizeStatusEffect9, StatusEffects.UnlockedSnakeEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.statusEffectv4(StatusEffects.UnlockedSnakeEars) == 9000) addButtonDisabled(12, "Snake Ears", "Snake Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Snake Ears", "Snake Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.statusEffectv4(StatusEffects.UnlockedGorgonHair) < 9000) addButton(13, "Gorgon Hair", permanentizeStatusEffect9, StatusEffects.UnlockedGorgonHair);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.statusEffectv4(StatusEffects.UnlockedGorgonHair) == 9000) addButtonDisabled(13, "Gorgon Hair", "Gorgon Hair option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Gorgon Hair", "Gorgon Hair");
+
+			if (lastPage > 0) {
+				if (currentPage > 0) addButton(12, "Prev Page", ascensionMetamorphPermMenu, currentPage - 1);
+				else addButtonDisabled (12, "Prev Page");
+				if (currentPage < lastPage) addButton(13, "Next Page", ascensionMetamorphPermMenu, currentPage + 1);
+				else addButtonDisabled (13, "Next Page");
 			}
-			if (page == 10) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.statusEffectv4(StatusEffects.UnlockedGorgonEyes) < 9000) addButton(0, "Gorgon Eyes", permanentizeStatusEffect10, StatusEffects.UnlockedGorgonEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.statusEffectv4(StatusEffects.UnlockedGorgonEyes) == 9000) addButtonDisabled(0, "Gorgon Eyes", "Gorgon Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Gorgon Eyes", "Gorgon Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.statusEffectv4(StatusEffects.UnlockedDraconicEars) < 9000) addButton(1, "Dragon Ears", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.statusEffectv4(StatusEffects.UnlockedDraconicEars) == 9000) addButtonDisabled(1, "Dragon Ears", "Draconic Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Dragon Ears", "Draconic Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedDraconicWingsSmall) < 9000) addButton(2, "Dragon W. S.", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicWingsSmall);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedDraconicWingsSmall) == 9000) addButtonDisabled(2, "Dragon W. S.", "Draconic Wings Small option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Dragon W. S.", "Draconic Wings Small");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedDraconicWingsLarge) < 9000) addButton(3, "Dragon W. L.", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicWingsLarge);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedDraconicWingsLarge) == 9000) addButtonDisabled(3, "Dragon W. L.", "Draconic Wings Large option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Dragon W. L.", "Draconic Wings Large");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.statusEffectv4(StatusEffects.UnlockedDraconicWingsHuge) < 9000) addButton(5, "Dragon Wings H.", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicWingsHuge);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge) && player.statusEffectv4(StatusEffects.UnlockedDraconicWingsHuge) == 9000) addButtonDisabled(5, "Dragon W. H.", "Draconic Wings Huge option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Dragon W. H.", "Draconic Wings Huge");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.statusEffectv4(StatusEffects.UnlockedDraconicEyes) < 9000) addButton(6, "Dragon Eyes", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.statusEffectv4(StatusEffects.UnlockedDraconicEyes) == 9000) addButtonDisabled(6, "Dragon Eyes", "Draconic Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Dragon Eyes", "Draconic Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.statusEffectv4(StatusEffects.UnlockedDraconicTongue) < 9000) addButton(7, "Dragon Tongue", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicTongue);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.statusEffectv4(StatusEffects.UnlockedDraconicTongue) == 9000) addButtonDisabled(7, "Dragon Tongue", "Draconic Tongue option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Dragon Tongue", "Draconic Tongue");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFace) && player.statusEffectv4(StatusEffects.UnlockedDraconicFace) < 9000) addButton(8, "Dragon Face", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFace) && player.statusEffectv4(StatusEffects.UnlockedDraconicFace) == 9000) addButtonDisabled(8, "Dragon Face", "Draconic Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Dragon Face", "Draconic Face");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs) && player.statusEffectv4(StatusEffects.UnlockedDraconicFangs) < 9000) addButton(10, "Dragon Fangs", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicFangs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs) && player.statusEffectv4(StatusEffects.UnlockedDraconicFangs) == 9000) addButtonDisabled(10, "Dragon Fangs", "Draconic Fangs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Dragon Fangs", "Draconic Fangs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs) && player.statusEffectv4(StatusEffects.UnlockedDraconicLegs) < 9000) addButton(11, "Dragon Legs", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs) && player.statusEffectv4(StatusEffects.UnlockedDraconicLegs) == 9000) addButtonDisabled(11, "Dragon Legs", "Draconic Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Dragon Legs", "Draconic Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.statusEffectv4(StatusEffects.UnlockedDraconicArms) < 9000) addButton(12, "Dragon Arms", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.statusEffectv4(StatusEffects.UnlockedDraconicArms) == 9000) addButtonDisabled(12, "Dragon Arms", "Draconic Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Dragon Arms", "Draconic Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.statusEffectv4(StatusEffects.UnlockedDraconicTail) < 9000) addButton(13, "Dragon Tail", permanentizeStatusEffect10, StatusEffects.UnlockedDraconicTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.statusEffectv4(StatusEffects.UnlockedDraconicTail) == 9000) addButtonDisabled(13, "Dragon Tail", "Draconic Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Dragon Tail", "Draconic Tail");
-			}
-			if (page == 11) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedHoofedLegs) && player.statusEffectv4(StatusEffects.UnlockedHoofedLegs) < 9000) addButton(0, "Hoofed Legs", permanentizeStatusEffect11, StatusEffects.UnlockedHoofedLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHoofedLegs) && player.statusEffectv4(StatusEffects.UnlockedHoofedLegs) == 9000) addButtonDisabled(0, "Hoofed Legs", "Hoofed Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Hoofed Legs", "Hoofed Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCowTail) && player.statusEffectv4(StatusEffects.UnlockedCowTail) < 9000) addButton(1, "Cow Tail", permanentizeStatusEffect11, StatusEffects.UnlockedCowTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCowTail) && player.statusEffectv4(StatusEffects.UnlockedCowTail) == 9000) addButtonDisabled(1, "Cow Tail", "Cow Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Cow Tail", "Cow Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCowEars) && player.statusEffectv4(StatusEffects.UnlockedCowEars) < 9000) addButton(2, "Cow Ears", permanentizeStatusEffect11, StatusEffects.UnlockedCowEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCowEars) && player.statusEffectv4(StatusEffects.UnlockedCowEars) == 9000) addButtonDisabled(2, "Cow Ears", "Cow Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Cow Ears", "Cow Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace) && player.statusEffectv4(StatusEffects.UnlockedCowMinotaurFace) < 9000) addButton(3, "Bovine Face", permanentizeStatusEffect11, StatusEffects.UnlockedCowMinotaurFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace) && player.statusEffectv4(StatusEffects.UnlockedCowMinotaurFace) == 9000) addButtonDisabled(3, "Bovine Face", "Cow/Minotaur Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Bovine Face", "Cow/Minotaur Face");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns) && player.statusEffectv4(StatusEffects.UnlockedCowMinotaurHorns) < 9000) addButton(5, "Bovine Horns", permanentizeStatusEffect11, StatusEffects.UnlockedCowMinotaurHorns);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns) && player.statusEffectv4(StatusEffects.UnlockedCowMinotaurHorns) == 9000) addButtonDisabled(5, "Bovine Horns", "Cow/Minotaur Horns option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Bovine Horns", "Cow/Minotaur Horns");
-				if (player.hasStatusEffect(StatusEffects.UnlockedClovenHoofedLegs) && player.statusEffectv4(StatusEffects.UnlockedClovenHoofedLegs) < 9000) addButton(6, "C. Hoofed Legs", permanentizeStatusEffect11, StatusEffects.UnlockedClovenHoofedLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedClovenHoofedLegs) && player.statusEffectv4(StatusEffects.UnlockedClovenHoofedLegs) == 9000) addButtonDisabled(6, "C. Hoofed Legs", "Cloven Hoofed Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "C. Hoofed Legs", "Cloven Hoofed Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.statusEffectv4(StatusEffects.UnlockedGoatTail) < 9000) addButton(7, "Goat Tail", permanentizeStatusEffect11, StatusEffects.UnlockedGoatTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.statusEffectv4(StatusEffects.UnlockedGoatTail) == 9000) addButtonDisabled(7, "Goat Tail", "Goat Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Goat Tail", "Goat Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns) && player.statusEffectv4(StatusEffects.UnlockedGoatHorns) < 9000) addButton(8, "Goat Horns", permanentizeStatusEffect11, StatusEffects.UnlockedGoatHorns);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns) && player.statusEffectv4(StatusEffects.UnlockedGoatHorns) == 9000) addButtonDisabled(8, "Goat Horns", "Goat Horns option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Goat Horns", "Goat Horns");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars) && player.statusEffectv4(StatusEffects.UnlockedGoatEars) < 9000) addButton(10, "Goat Ears", permanentizeStatusEffect11, StatusEffects.UnlockedGoatEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars) && player.statusEffectv4(StatusEffects.UnlockedGoatEars) == 9000) addButtonDisabled(10, "Goat Ears", "Goat Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Goat Ears", "Goat Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms) && player.statusEffectv4(StatusEffects.UnlockedDevilArms) < 9000) addButton(11, "Devil Arms", permanentizeStatusEffect11, StatusEffects.UnlockedDevilArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms) && player.statusEffectv4(StatusEffects.UnlockedDevilArms) == 9000) addButtonDisabled(11, "Devil Arms", "Devil Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Devil Arms", "Devil Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDevilFangs) && player.statusEffectv4(StatusEffects.UnlockedDevilFangs) < 9000) addButton(12, "Devil Fangs", permanentizeStatusEffect11, StatusEffects.UnlockedDevilFangs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDevilFangs) && player.statusEffectv4(StatusEffects.UnlockedDevilFangs) == 9000) addButtonDisabled(12, "Devil Fangs", "Devil Fangs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Devil Fangs", "Devil Fangs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes) && player.statusEffectv4(StatusEffects.UnlockedDevilEyes) < 9000) addButton(13, "Devil Eyes", permanentizeStatusEffect11, StatusEffects.UnlockedDevilEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes) && player.statusEffectv4(StatusEffects.UnlockedDevilEyes) == 9000) addButtonDisabled(13, "Devil Eyes", "Devil Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Devil Eyes", "Devil Eyes");
-			}
-			if (page == 12) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.statusEffectv4(StatusEffects.UnlockedMantisAntennae) < 9000) addButton(0, "Mantis A.", permanentizeStatusEffect12, StatusEffects.UnlockedMantisAntennae);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.statusEffectv4(StatusEffects.UnlockedMantisAntennae) == 9000) addButtonDisabled(0, "Mantis A.", "Mantis Antennae option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Mantis A.", "Mantis Antennae");
-				if (player.hasStatusEffect(StatusEffects.UnlockedMantisLegs) && player.statusEffectv4(StatusEffects.UnlockedMantisLegs) < 9000) addButton(1, "Mantis Legs", permanentizeStatusEffect12, StatusEffects.UnlockedMantisLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedMantisLegs) && player.statusEffectv4(StatusEffects.UnlockedMantisLegs) == 9000) addButtonDisabled(1, "Mantis Legs", "Mantis Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Mantis Legs", "Mantis Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedMantisArms) && player.statusEffectv4(StatusEffects.UnlockedMantisArms) < 9000) addButton(2, "Mantis Arms", permanentizeStatusEffect12, StatusEffects.UnlockedMantisArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedMantisArms) && player.statusEffectv4(StatusEffects.UnlockedMantisArms) == 9000) addButtonDisabled(2, "Mantis Arms", "Mantis Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Mantis Arms", "Mantis Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.statusEffectv4(StatusEffects.UnlockedMantisTail) < 9000) addButton(3, "Mantis Tail", permanentizeStatusEffect12, StatusEffects.UnlockedMantisTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.statusEffectv4(StatusEffects.UnlockedMantisTail) == 9000) addButtonDisabled(3, "Mantis Tail", "Mantis Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Mantis Tail", "Mantis Tail");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedMantisWingsSmall) < 9000) addButton(5, "Mantis W. S.", permanentizeStatusEffect12, StatusEffects.UnlockedMantisWingsSmall);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedMantisWingsSmall) == 9000) addButtonDisabled(5, "Mantis W. S.", "Mantis Wings Small option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Mantis W. S.", "Mantis Wings Small");
-				if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedMantisWingsLarge) < 9000) addButton(6, "Mantis W. L.", permanentizeStatusEffect12, StatusEffects.UnlockedMantisWingsLarge);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedMantisWingsLarge) == 9000) addButtonDisabled(6, "Mantis W. L.", "Mantis Wings Large option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Mantis W. L.", "Mantis Wings Large");
-				if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs) && player.statusEffectv4(StatusEffects.UnlockedElfLegs) < 9000) addButton(7, "Elf Legs", permanentizeStatusEffect12, StatusEffects.UnlockedElfLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedElfLegs) && player.statusEffectv4(StatusEffects.UnlockedElfLegs) == 9000) addButtonDisabled(7, "Elf Legs", "Elf Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Elf Legs", "Elf Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.statusEffectv4(StatusEffects.UnlockedElfArms) < 9000) addButton(8, "Elf Arms", permanentizeStatusEffect12, StatusEffects.UnlockedElfArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.statusEffectv4(StatusEffects.UnlockedElfArms) == 9000) addButtonDisabled(8, "Elf Arms", "Elf Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Elf Arms", "Elf Arms");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.statusEffectv4(StatusEffects.UnlockedElfEars) < 9000) addButton(10, "Elf Ears", permanentizeStatusEffect12, StatusEffects.UnlockedElfEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.statusEffectv4(StatusEffects.UnlockedElfEars) == 9000) addButtonDisabled(10, "Elf Ears", "Elf Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Elf Ears", "Elf Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.statusEffectv4(StatusEffects.UnlockedElfEyes) < 9000) addButton(11, "Elf Eyes", permanentizeStatusEffect12, StatusEffects.UnlockedElfEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.statusEffectv4(StatusEffects.UnlockedElfEyes) == 9000) addButtonDisabled(11, "Elf Eyes", "Elf Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Elf Eyes", "Elf Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedElfHair) && player.statusEffectv4(StatusEffects.UnlockedElfHair) < 9000) addButton(12, "Elf Hair", permanentizeStatusEffect12, StatusEffects.UnlockedElfHair);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedElfHair) && player.statusEffectv4(StatusEffects.UnlockedElfHair) == 9000) addButtonDisabled(12, "Elf Hair", "Elf Hair option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Elf Hair", "Elf Hair");
-				if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue) && player.statusEffectv4(StatusEffects.UnlockedElfTongue) < 9000) addButton(13, "Elf Tongue", permanentizeStatusEffect12, StatusEffects.UnlockedElfTongue);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue) && player.statusEffectv4(StatusEffects.UnlockedElfTongue) == 9000) addButtonDisabled(13, "Elf Tongue", "Elf Tongue option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Elf Tongue", "Elf Tongue");
-			}
-			if (page == 13) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedOniLegs) && player.statusEffectv4(StatusEffects.UnlockedOniLegs) < 9000) addButton(0, "Oni Legs", permanentizeStatusEffect13, StatusEffects.UnlockedOniLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOniLegs) && player.statusEffectv4(StatusEffects.UnlockedOniLegs) == 9000) addButtonDisabled(0, "Oni Legs", "Oni Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Oni Legs", "Oni Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.statusEffectv4(StatusEffects.UnlockedOniArms) < 9000) addButton(1, "Oni Arms", permanentizeStatusEffect13, StatusEffects.UnlockedOniArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.statusEffectv4(StatusEffects.UnlockedOniArms) == 9000) addButtonDisabled(1, "Oni Arms", "Oni Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Oni Arms", "Oni Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.statusEffectv4(StatusEffects.UnlockedOniEyes) < 9000) addButton(2, "Oni Eyes", permanentizeStatusEffect13, StatusEffects.UnlockedOniEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.statusEffectv4(StatusEffects.UnlockedOniEyes) == 9000) addButtonDisabled(2, "Oni Eyes", "Oni Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Oni Eyes", "Oni Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.statusEffectv4(StatusEffects.UnlockedOniEars) < 9000) addButton(3, "Oni Ears", permanentizeStatusEffect13, StatusEffects.UnlockedOniEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.statusEffectv4(StatusEffects.UnlockedOniEars) == 9000) addButtonDisabled(3, "Oni Ears", "Oni Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Oni Ears", "Oni Ears");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.statusEffectv4(StatusEffects.UnlockedOniFace) < 9000) addButton(5, "Oni Face", permanentizeStatusEffect13, StatusEffects.UnlockedOniFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.statusEffectv4(StatusEffects.UnlockedOniFace) == 9000) addButtonDisabled(5, "Oni Face", "Oni Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Oni Face", "Oni Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.statusEffectv4(StatusEffects.UnlockedOniSingleHorn) < 9000) addButton(6, "Oni S. Horn", permanentizeStatusEffect13, StatusEffects.UnlockedOniSingleHorn);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.statusEffectv4(StatusEffects.UnlockedOniSingleHorn) == 9000) addButtonDisabled(6, "Oni S. Horn", "Oni Single Horn option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Oni S. Horn", "Oni Single Horn");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.statusEffectv4(StatusEffects.UnlockedOniTwinHorns) < 9000) addButton(7, "Oni T. Horns", permanentizeStatusEffect13, StatusEffects.UnlockedOniTwinHorns);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.statusEffectv4(StatusEffects.UnlockedOniTwinHorns) == 9000) addButtonDisabled(7, "Oni T. Horns", "Oni Twin Horns option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Oni T. Horns", "Oni Twin Horns");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs) && player.statusEffectv4(StatusEffects.UnlockedRaijuLegs) < 9000) addButton(8, "Raiju Legs", permanentizeStatusEffect13, StatusEffects.UnlockedRaijuLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs) && player.statusEffectv4(StatusEffects.UnlockedRaijuLegs) == 9000) addButtonDisabled(8, "Raiju Legs", "Raiju Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Raiju Legs", "Raiju Legs");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.statusEffectv4(StatusEffects.UnlockedRaijuArms) < 9000) addButton(10, "Raiju Arms", permanentizeStatusEffect13, StatusEffects.UnlockedRaijuArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.statusEffectv4(StatusEffects.UnlockedRaijuArms) == 9000) addButtonDisabled(10, "Raiju Arms", "Raiju Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Raiju Arms", "Raiju Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2) && player.statusEffectv4(StatusEffects.UnlockedRaijuArms2) < 9000) addButton(11, "Raiju Paws", permanentizeStatusEffect13, StatusEffects.UnlockedRaijuArms2);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2) && player.statusEffectv4(StatusEffects.UnlockedRaijuArms2) == 9000) addButtonDisabled(11, "Raiju Paws", "Raiju Paws option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Raiju Paws", "Raiju Paws");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.statusEffectv4(StatusEffects.UnlockedRaijuTail) < 9000) addButton(12, "Raiju Tail", permanentizeStatusEffect13, StatusEffects.UnlockedRaijuTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.statusEffectv4(StatusEffects.UnlockedRaijuTail) == 9000) addButtonDisabled(12, "Raiju Tail", "Raiju Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Raiju Tail", "Raiju Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.statusEffectv4(StatusEffects.UnlockedRaijuMane) < 9000) addButton(13, "Raiju Mane", permanentizeStatusEffect13, StatusEffects.UnlockedRaijuMane);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.statusEffectv4(StatusEffects.UnlockedRaijuMane) == 9000) addButtonDisabled(13, "Raiju Mane", "Raiju Mane option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Raiju Mane", "Raiju Mane");
-			}
-			if (page == 14) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.statusEffectv4(StatusEffects.UnlockedRaijuFace) < 9000) addButton(0, "Raiju Face", permanentizeStatusEffect13, StatusEffects.UnlockedRaijuFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.statusEffectv4(StatusEffects.UnlockedRaijuFace) == 9000) addButtonDisabled(0, "Raiju Face", "Raiju Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Raiju Face", "Raiju Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.statusEffectv4(StatusEffects.UnlockedRaijuEars) < 9000) addButton(1, "Raiju Ears", permanentizeStatusEffect14, StatusEffects.UnlockedRaijuEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.statusEffectv4(StatusEffects.UnlockedRaijuEars) == 9000) addButtonDisabled(1, "Raiju Ears", "Raiju Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Raiju Ears", "Raiju Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.statusEffectv4(StatusEffects.UnlockedRaijuEyes) < 9000) addButton(2, "Raiju Eyes", permanentizeStatusEffect14, StatusEffects.UnlockedRaijuEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.statusEffectv4(StatusEffects.UnlockedRaijuEyes) == 9000) addButtonDisabled(2, "Raiju Eyes", "Raiju Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Raiju Eyes", "Raiju Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.statusEffectv4(StatusEffects.UnlockedRaijuHair) < 9000) addButton(3, "Raiju Hair", permanentizeStatusEffect14, StatusEffects.UnlockedRaijuHair);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.statusEffectv4(StatusEffects.UnlockedRaijuHair) == 9000) addButtonDisabled(3, "Raiju Hair", "Raiju Hair option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Raiju Hair", "Raiju Hair");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura) && player.statusEffectv4(StatusEffects.UnlockedRaijuThunderousAura) < 9000) addButton(5, "Raiju T.A.", permanentizeStatusEffect14, StatusEffects.UnlockedRaijuThunderousAura);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura) && player.statusEffectv4(StatusEffects.UnlockedRaijuThunderousAura) == 9000) addButtonDisabled(5, "Raiju T.A.", "Raiju Thunderous Aura option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Raiju T.A.", "Raiju Thunderous Aura");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.statusEffectv4(StatusEffects.UnlockedBatEars) < 9000) addButton(6, "Bat Ears", permanentizeStatusEffect14, StatusEffects.UnlockedBatEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.statusEffectv4(StatusEffects.UnlockedBatEars) == 9000) addButtonDisabled(6, "Bat Ears", "Bat Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Bat Ears", "Bat Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.statusEffectv4(StatusEffects.UnlockedBatWings) < 9000) addButton(7, "Bat Wings", permanentizeStatusEffect14, StatusEffects.UnlockedBatWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.statusEffectv4(StatusEffects.UnlockedBatWings) == 9000) addButtonDisabled(7, "Bat Wings", "Bat Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Bat Wings", "Bat Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.statusEffectv4(StatusEffects.UnlockedBatCollar) < 9000) addButton(8, "Bat Collar", permanentizeStatusEffect14, StatusEffects.UnlockedBatCollar);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.statusEffectv4(StatusEffects.UnlockedBatCollar) == 9000) addButtonDisabled(8, "Bat Collar", "Bat Collar option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Bat Collar", "Bat Collar");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.statusEffectv4(StatusEffects.UnlockedVampireEars) < 9000) addButton(10, "Vampire Ears", permanentizeStatusEffect14, StatusEffects.UnlockedVampireEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.statusEffectv4(StatusEffects.UnlockedVampireEars) == 9000) addButtonDisabled(10, "Vampire Ears", "Vampire Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Vampire Ears", "Vampire Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.statusEffectv4(StatusEffects.UnlockedVampireWings) < 9000) addButton(11, "Vampire Wings", permanentizeStatusEffect14, StatusEffects.UnlockedVampireWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.statusEffectv4(StatusEffects.UnlockedVampireWings) == 9000) addButtonDisabled(11, "Vampire Wings", "Vampire Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Vampire Wings", "Vampire Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.statusEffectv4(StatusEffects.UnlockedVampireFace) < 9000) addButton(12, "Vampire Face", permanentizeStatusEffect14, StatusEffects.UnlockedVampireFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.statusEffectv4(StatusEffects.UnlockedVampireFace) == 9000) addButtonDisabled(12, "Vampire Face", "Vampire Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Vampire Face", "Vampire Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.statusEffectv4(StatusEffects.UnlockedVampireEyes) < 9000) addButton(13, "Vampire Eyes", permanentizeStatusEffect14, StatusEffects.UnlockedVampireEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.statusEffectv4(StatusEffects.UnlockedVampireEyes) == 9000) addButtonDisabled(13, "Vampire Eyes", "Vampire Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Vampire Eyes", "Vampire Eyes");
-			}
-			if (page == 15) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.statusEffectv4(StatusEffects.UnlockedPigEars) < 9000) addButton(0, "Pig Ears", permanentizeStatusEffect15, StatusEffects.UnlockedPigEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.statusEffectv4(StatusEffects.UnlockedPigEars) == 9000) addButtonDisabled(0, "Pig Ears", "Pig Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Pig Ears", "Pig Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedPigTail) && player.statusEffectv4(StatusEffects.UnlockedPigTail) < 9000) addButton(1, "Pig Tail", permanentizeStatusEffect15, StatusEffects.UnlockedPigTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedPigTail) && player.statusEffectv4(StatusEffects.UnlockedPigTail) == 9000) addButtonDisabled(1, "Pig Tail", "Pig Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Pig Tail", "Pig Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.statusEffectv4(StatusEffects.UnlockedPigArms) < 9000) addButton(2, "Pig Arms", permanentizeStatusEffect15, StatusEffects.UnlockedPigArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.statusEffectv4(StatusEffects.UnlockedPigArms) == 9000) addButtonDisabled(2, "Pig Arms", "Pig Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Pig Arms", "Pig Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedPigFace) && player.statusEffectv4(StatusEffects.UnlockedPigFace) < 9000) addButton(3, "Pig Face", permanentizeStatusEffect15, StatusEffects.UnlockedPigFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedPigFace) && player.statusEffectv4(StatusEffects.UnlockedPigFace) == 9000) addButtonDisabled(3, "Pig Face", "Pig Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Pig Face", "Pig Face");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedBoarFace) && player.statusEffectv4(StatusEffects.UnlockedBoarFace) < 9000) addButton(5, "Boar Face", permanentizeStatusEffect15, StatusEffects.UnlockedBoarFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBoarFace) && player.statusEffectv4(StatusEffects.UnlockedBoarFace) == 9000) addButtonDisabled(5, "Boar Face", "Boar Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Boar Face", "Boar Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.statusEffectv4(StatusEffects.UnlockedBoarArms) < 9000) addButton(6, "Boar Arms", permanentizeStatusEffect15, StatusEffects.UnlockedBoarArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.statusEffectv4(StatusEffects.UnlockedBoarArms) == 9000) addButtonDisabled(6, "Boar Arms", "Boar Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Boar Arms", "Boar Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcLegs) && player.statusEffectv4(StatusEffects.UnlockedOrcLegs) < 9000) addButton(7, "Orc Legs", permanentizeStatusEffect15, StatusEffects.UnlockedOrcLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcLegs) && player.statusEffectv4(StatusEffects.UnlockedOrcLegs) == 9000) addButtonDisabled(7, "Orc Legs", "Orc Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Orc Legs", "Orc Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcArms) && player.statusEffectv4(StatusEffects.UnlockedOrcArms) < 9000) addButton(8, "Orc Arms", permanentizeStatusEffect15, StatusEffects.UnlockedOrcArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcArms) && player.statusEffectv4(StatusEffects.UnlockedOrcArms) == 9000) addButtonDisabled(8, "Orc Arms", "Orc Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Orc Arms", "Orc Arms");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcFangs) && player.statusEffectv4(StatusEffects.UnlockedOrcFangs) < 9000) addButton(10, "Orc Fangs", permanentizeStatusEffect15, StatusEffects.UnlockedOrcFangs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcFangs) && player.statusEffectv4(StatusEffects.UnlockedOrcFangs) == 9000) addButtonDisabled(10, "Orc Fangs", "Orc Fangs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Orc Fangs", "Orc Fangs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes) && player.statusEffectv4(StatusEffects.UnlockedOrcEyes) < 9000) addButton(11, "Orc Eyes", permanentizeStatusEffect15, StatusEffects.UnlockedOrcEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes) && player.statusEffectv4(StatusEffects.UnlockedOrcEyes) == 9000) addButtonDisabled(11, "Orc Eyes", "Orc Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Orc Eyes", "Orc Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace) && player.statusEffectv4(StatusEffects.UnlockedHorseFace) < 9000) addButton(12, "Horse Face", permanentizeStatusEffect15, StatusEffects.UnlockedHorseFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace) && player.statusEffectv4(StatusEffects.UnlockedHorseFace) == 9000) addButtonDisabled(12, "Horse Face", "Horse Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Horse Face", "Horse Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.statusEffectv4(StatusEffects.UnlockedHorseEars) < 9000) addButton(13, "Horse Ears", permanentizeStatusEffect15, StatusEffects.UnlockedHorseEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.statusEffectv4(StatusEffects.UnlockedHorseEars) == 9000) addButtonDisabled(13, "Horse Ears", "Horse Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Horse Ears", "Horse Ears");
-			}
-			if (page == 16) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail) && player.statusEffectv4(StatusEffects.UnlockedHorseTail) < 9000) addButton(0, "Horse Tail", permanentizeStatusEffect16, StatusEffects.UnlockedHorseTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail) && player.statusEffectv4(StatusEffects.UnlockedHorseTail) == 9000) addButtonDisabled(0, "Horse Tail", "Horse Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Horse Tail", "Horse Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn) && player.statusEffectv4(StatusEffects.UnlockedUnicornHorn) < 9000) addButton(1, "Unicorn Horn", permanentizeStatusEffect16, StatusEffects.UnlockedUnicornHorn);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn) && player.statusEffectv4(StatusEffects.UnlockedUnicornHorn) == 9000) addButtonDisabled(1, "Unicorn Horn", "Unicorn Horn option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Unicorn Horn", "Unicorn Horn");
-				if (player.hasStatusEffect(StatusEffects.UnlockedAlicornWings) && player.statusEffectv4(StatusEffects.UnlockedAlicornWings) < 9000) addButton(2, "Alicorn W.", permanentizeStatusEffect16, StatusEffects.UnlockedAlicornWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedAlicornWings) && player.statusEffectv4(StatusEffects.UnlockedAlicornWings) == 9000) addButtonDisabled(2, "Alicorn W.", "Alicorn Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Alicorn W.", "Alicorn Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedBicornHorns) && player.statusEffectv4(StatusEffects.UnlockedBicornHorns) < 9000) addButton(3, "Bicorn Horns", permanentizeStatusEffect16, StatusEffects.UnlockedBicornHorns);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedBicornHorns) && player.statusEffectv4(StatusEffects.UnlockedBicornHorns) == 9000) addButtonDisabled(3, "Bicorn Horns", "Bicorn Horns option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Bicorn Horns", "Bicorn Horns");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedNightmareWings) && player.statusEffectv4(StatusEffects.UnlockedNightmareWings) < 9000) addButton(5, "Nightmare W.", permanentizeStatusEffect16, StatusEffects.UnlockedNightmareWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedNightmareWings) && player.statusEffectv4(StatusEffects.UnlockedNightmareWings) == 9000) addButtonDisabled(5, "Nightmare W.", "Nightmare Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Nightmare W.", "Nightmare Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars) && player.statusEffectv4(StatusEffects.UnlockedRedPandaEars) < 9000) addButton(6, "R.Panda E.", permanentizeStatusEffect16, StatusEffects.UnlockedRedPandaEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars) && player.statusEffectv4(StatusEffects.UnlockedRedPandaEars) == 9000) addButtonDisabled(6, "R.Panda E.", "Red Panda Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "R.Panda E.", "Red Panda Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace) && player.statusEffectv4(StatusEffects.UnlockedRedPandaFace) < 9000) addButton(7, "R.Panda F.", permanentizeStatusEffect16, StatusEffects.UnlockedRedPandaFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace) && player.statusEffectv4(StatusEffects.UnlockedRedPandaFace) == 9000) addButtonDisabled(7, "R.Panda F.", "Red Panda Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "R.Panda F.", "Red Panda Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms) && player.statusEffectv4(StatusEffects.UnlockedRedPandaArms) < 9000) addButton(8, "R.Panda A.", permanentizeStatusEffect16, StatusEffects.UnlockedRedPandaArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms) && player.statusEffectv4(StatusEffects.UnlockedRedPandaArms) == 9000) addButtonDisabled(8, "R.Panda A.", "Red Panda Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "R.Panda A.", "Red Panda Arms");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaLegs) && player.statusEffectv4(StatusEffects.UnlockedRedPandaLegs) < 9000) addButton(10, "R.Panda L.", permanentizeStatusEffect16, StatusEffects.UnlockedRedPandaLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaLegs) && player.statusEffectv4(StatusEffects.UnlockedRedPandaLegs) == 9000) addButtonDisabled(10, "R.Panda L.", "Red Panda Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "R.Panda L.", "Red Panda Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaTail) && player.statusEffectv4(StatusEffects.UnlockedRedPandaTail) < 9000) addButton(11, "R.Panda T.", permanentizeStatusEffect16, StatusEffects.UnlockedRedPandaTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaTail) && player.statusEffectv4(StatusEffects.UnlockedRedPandaTail) == 9000) addButtonDisabled(11, "R.Panda T.", "Red Panda Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "R.Panda T.", "Red Panda Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatEars) && player.statusEffectv4(StatusEffects.UnlockedCatEars) < 9000) addButton(12, "Cat Ears", permanentizeStatusEffect16, StatusEffects.UnlockedCatEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatEars) && player.statusEffectv4(StatusEffects.UnlockedCatEars) == 9000) addButtonDisabled(12, "Cat Ears", "Cat Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Cat Ears", "Cat Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatTail) && player.statusEffectv4(StatusEffects.UnlockedCatTail) < 9000) addButton(13, "Cat Tail", permanentizeStatusEffect16, StatusEffects.UnlockedCatTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail) && player.statusEffectv4(StatusEffects.UnlockedCatTail) == 9000) addButtonDisabled(13, "Cat Tail", "Cat Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Cat Tail", "Cat Tail");
-			}
-			if (page == 17) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatLegs) && player.statusEffectv4(StatusEffects.UnlockedCatLegs) < 9000) addButton(0, "Cat Legs", permanentizeStatusEffect17, StatusEffects.UnlockedCatLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatLegs) && player.statusEffectv4(StatusEffects.UnlockedCatLegs) == 9000) addButtonDisabled(0, "Cat Legs", "Cat Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Cat Legs", "Cat Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatArms) && player.statusEffectv4(StatusEffects.UnlockedCatArms) < 9000) addButton(1, "Cat Arms", permanentizeStatusEffect17, StatusEffects.UnlockedCatArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatArms) && player.statusEffectv4(StatusEffects.UnlockedCatArms) == 9000) addButtonDisabled(1, "Cat Arms", "Cat Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "Cat Arms", "Cat Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatFace) && player.statusEffectv4(StatusEffects.UnlockedCatFace) < 9000) addButton(2, "Cat Face", permanentizeStatusEffect17, StatusEffects.UnlockedCatFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatFace) && player.statusEffectv4(StatusEffects.UnlockedCatFace) == 9000) addButtonDisabled(2, "Cat Face", "Cat Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Cat Face", "Cat Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatFangs) && player.statusEffectv4(StatusEffects.UnlockedCatFangs) < 9000) addButton(3, "Cat Fangs", permanentizeStatusEffect17, StatusEffects.UnlockedCatFangs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatFangs) && player.statusEffectv4(StatusEffects.UnlockedCatFangs) == 9000) addButtonDisabled(3, "Cat Fangs", "Cat Fangs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Cat Fangs", "Cat Fangs");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue) && player.statusEffectv4(StatusEffects.UnlockedCatTongue) < 9000) addButton(5, "Cat Tongue", permanentizeStatusEffect17, StatusEffects.UnlockedCatTongue);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue) && player.statusEffectv4(StatusEffects.UnlockedCatTongue) == 9000) addButtonDisabled(5, "Cat Tongue", "Cat Tongue option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Cat Tongue", "Cat Tongue");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatEyes) && player.statusEffectv4(StatusEffects.UnlockedCatEyes) < 9000) addButton(6, "Cat Eyes", permanentizeStatusEffect17, StatusEffects.UnlockedCatEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatEyes) && player.statusEffectv4(StatusEffects.UnlockedCatEyes) == 9000) addButtonDisabled(6, "Cat Eyes", "Cat Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Cat Eyes", "Cat Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCheshireFace) && player.statusEffectv4(StatusEffects.UnlockedCheshireFace) < 9000) addButton(7, "CheshFace", permanentizeStatusEffect17, StatusEffects.UnlockedCheshireFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCheshireFace) && player.statusEffectv4(StatusEffects.UnlockedCheshireFace) == 9000) addButtonDisabled(7, "CheshFace", "Cheshire Cat Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "CheshFace", "Cheshire Cat Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile) && player.statusEffectv4(StatusEffects.UnlockedCheshireSmile) < 9000) addButton(8, "CheshSmile", permanentizeStatusEffect17, StatusEffects.UnlockedCheshireSmile);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile) && player.statusEffectv4(StatusEffects.UnlockedCheshireSmile) == 9000) addButtonDisabled(8, "CheshSmile", "Cheshire Cat Smile option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "CheshSmile", "Cheshire Cat Smile");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedLionEars) && player.statusEffectv4(StatusEffects.UnlockedLionEars) < 9000) addButton(10, "Lion Ears", permanentizeStatusEffect17, StatusEffects.UnlockedLionEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLionEars) && player.statusEffectv4(StatusEffects.UnlockedLionEars) == 9000) addButtonDisabled(10, "Lion Ears", "Lion Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Lion Ears", "Lion Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms) && player.statusEffectv4(StatusEffects.UnlockedDisplacerArms) < 9000) addButton(11, "Displ.Arms", permanentizeStatusEffect17, StatusEffects.UnlockedDisplacerArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms) && player.statusEffectv4(StatusEffects.UnlockedDisplacerArms) == 9000) addButtonDisabled(11, "Displ.Arms", "Displacer Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Displ.Arms", "Displacer Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerBTentacles) && player.statusEffectv4(StatusEffects.UnlockedDisplacerBTentacles) < 9000) addButton(12, "Displ.B.Tent", permanentizeStatusEffect17, StatusEffects.UnlockedDisplacerBTentacles);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerBTentacles) && player.statusEffectv4(StatusEffects.UnlockedDisplacerBTentacles) == 9000) addButtonDisabled(12, "Displ.B.Tent", "Displacer Back Tentacles option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Displ.B.Tent", "Displacer Back Tentacles");
-				if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.statusEffectv4(StatusEffects.UnlockedDisplacerEyes) < 9000) addButton(13, "Displ. Eyes", permanentizeStatusEffect17, StatusEffects.UnlockedDisplacerEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.statusEffectv4(StatusEffects.UnlockedDisplacerEyes) == 9000) addButtonDisabled(13, "Displ. Eyes", "Displacer Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Displ. Eyes", "Displacer Eyes");
-			}
-			if (page == 18) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.statusEffectv4(StatusEffects.UnlockedDisplacerEars) < 9000) addButton(0, "Displ. Ears", permanentizeStatusEffect18, StatusEffects.UnlockedDisplacerEars);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.statusEffectv4(StatusEffects.UnlockedDisplacerEars) == 9000) addButtonDisabled(0, "Displ. Ears", "Displacer Ears option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "Displ. Ears", "Displacer Ears");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail) && player.statusEffectv4(StatusEffects.UnlockedHellcatBurningTail) < 9000) addButton(1, "BurningTail", permanentizeStatusEffect18, StatusEffects.UnlockedHellcatBurningTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail) && player.statusEffectv4(StatusEffects.UnlockedHellcatBurningTail) == 9000) addButtonDisabled(1, "BurningTail", "Hellcat Burning Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "BurningTail", "Hellcat Burning Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes) && player.statusEffectv4(StatusEffects.UnlockedHellcatInfernalEyes) < 9000) addButton(2, "InfernalEyes", permanentizeStatusEffect18, StatusEffects.UnlockedHellcatInfernalEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes) && player.statusEffectv4(StatusEffects.UnlockedHellcatInfernalEyes) == 9000) addButtonDisabled(2, "InfernalEyes", "Hellcat Infernal Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "InfernalEyes", "Hellcat Infernal Eyes");
-				if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair) && player.statusEffectv4(StatusEffects.UnlockedHellcatBurningHair) < 9000) addButton(3, "BurningHair", permanentizeStatusEffect18, StatusEffects.UnlockedHellcatBurningHair);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair) && player.statusEffectv4(StatusEffects.UnlockedHellcatBurningHair) == 9000) addButtonDisabled(3, "BurningHair", "Hellcat Burning Hair option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "BurningHair", "Hellcat Burning Hair");
-				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail1) && player.statusEffectv4(StatusEffects.UnlockedNekomataForkedTail1) < 9000) addButton(5, "1/3ForkedTail", permanentizeStatusEffect18, StatusEffects.UnlockedNekomataForkedTail1);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail1) && player.statusEffectv4(StatusEffects.UnlockedNekomataForkedTail1) == 9000) addButtonDisabled(5, "1/3ForkedTail", "Nekomata 1/3 Forked Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "1/3ForkedTail", "Nekomata 1/3 Forked Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail2) && player.statusEffectv4(StatusEffects.UnlockedNekomataForkedTail2) < 9000) addButton(6, "2/3ForkedTail", permanentizeStatusEffect18, StatusEffects.UnlockedNekomataForkedTail2);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail2) && player.statusEffectv4(StatusEffects.UnlockedNekomataForkedTail2) == 9000) addButtonDisabled(6, "2/3ForkedTail", "Nekomata 2/3 Forked Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "2/3ForkedTail", "Nekomata 2/3 Forked Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.statusEffectv4(StatusEffects.UnlockedCatTail2nd) < 9000) addButton(7, "Cat Tail 2", permanentizeStatusEffect18, StatusEffects.UnlockedCatTail2nd);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.statusEffectv4(StatusEffects.UnlockedCatTail2nd) == 9000) addButtonDisabled(7, "Cat Tail 2", "Cat Tail 2nd option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Cat Tail 2", "Cat Tail 2nd");
-				if (player.hasStatusEffect(StatusEffects.UnlockedLionMane) && player.statusEffectv4(StatusEffects.UnlockedLionMane) < 9000) addButton(8, "Lion Mane", permanentizeStatusEffect18, StatusEffects.UnlockedLionMane);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLionMane) && player.statusEffectv4(StatusEffects.UnlockedLionMane) == 9000) addButtonDisabled(8, "Lion Mane", "Lion Mane option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "Lion Mane", "Lion Mane");
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedLionLegs) && player.statusEffectv4(StatusEffects.UnlockedLionLegs) < 9000) addButton(10, "Lion Legs", permanentizeStatusEffect18, StatusEffects.UnlockedLionLegs);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLionLegs) && player.statusEffectv4(StatusEffects.UnlockedLionLegs) == 9000) addButtonDisabled(10, "Lion Legs", "Lion Legs option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "Lion Legs", "Lion Legs");
-				if (player.hasStatusEffect(StatusEffects.UnlockedLionArms) && player.statusEffectv4(StatusEffects.UnlockedLionArms) < 9000) addButton(11, "Lion Arms", permanentizeStatusEffect18, StatusEffects.UnlockedLionArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedLionArms) && player.statusEffectv4(StatusEffects.UnlockedLionArms) == 9000) addButtonDisabled(11, "Lion Arms", "Lion Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "Lion Arms", "Lion Arms");
-				if (player.hasStatusEffect(StatusEffects.UnlockedScorpionTail) && player.statusEffectv4(StatusEffects.UnlockedScorpionTail) < 9000) addButton(12, "Scorpion T.", permanentizeStatusEffect18, StatusEffects.UnlockedScorpionTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedScorpionTail) && player.statusEffectv4(StatusEffects.UnlockedScorpionTail) == 9000) addButtonDisabled(12, "Scorpion T.", "Scorpion Tail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "Scorpion T.", "Scorpion Tail");
-				if (player.hasStatusEffect(StatusEffects.UnlockedManticoreTail) && player.statusEffectv4(StatusEffects.UnlockedManticoreTail) < 9000) addButton(13, "Manticore T.", permanentizeStatusEffect18, StatusEffects.UnlockedManticoreTail);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreTail) && player.statusEffectv4(StatusEffects.UnlockedManticoreTail) == 9000) addButtonDisabled(13, "Manticore T.", "Manticore Pussytail option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "Manticore T.", "Manticore Pussytail");
-			}
-			if (page == 19) {
-				if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedManticoreWingsSmall) < 9000) addButton(0, "ManticoreSW", permanentizeStatusEffect19, StatusEffects.UnlockedManticoreWingsSmall);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsSmall) && player.statusEffectv4(StatusEffects.UnlockedManticoreWingsSmall) == 9000) addButtonDisabled(0, "ManticoreSW", "Manticore Small Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "ManticoreSW", "Manticore Small Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedManticoreWingsLarge) < 9000) addButton(1, "ManticoreLW", permanentizeStatusEffect19, StatusEffects.UnlockedManticoreWingsLarge);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge) && player.statusEffectv4(StatusEffects.UnlockedManticoreWingsLarge) == 9000) addButtonDisabled(1, "ManticoreLW", "Manticore Large Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "ManticoreLW", "Manticore Large Wings");
-				if (player.hasStatusEffect(StatusEffects.UnlockedManticoreFace) && player.statusEffectv4(StatusEffects.UnlockedManticoreFace) < 9000) addButton(2, "Manticore F.", permanentizeStatusEffect19, StatusEffects.UnlockedManticoreFace);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreFace) && player.statusEffectv4(StatusEffects.UnlockedManticoreFace) == 9000) addButtonDisabled(2, "Manticore F.", "Manticore Face option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Manticore F.", "Manticore Face");
-				if (player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes) && player.statusEffectv4(StatusEffects.UnlockedManticoreEyes) < 9000) addButton(3, "Manticore E.", permanentizeStatusEffect19, StatusEffects.UnlockedManticoreEyes);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes) && player.statusEffectv4(StatusEffects.UnlockedManticoreEyes) == 9000) addButtonDisabled(3, "Manticore E.", "Manticore Eyes option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Manticore E.", "Manticore Eyes");
-				//addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				if (player.hasStatusEffect(StatusEffects.UnlockedSphinxWings) && player.statusEffectv4(StatusEffects.UnlockedSphinxWings) < 9000) addButton(5, "Sphinx W.", permanentizeStatusEffect19, StatusEffects.UnlockedSphinxWings);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSphinxWings) && player.statusEffectv4(StatusEffects.UnlockedSphinxWings) == 9000) addButtonDisabled(5, "Sphinx W.", "Sphinx Wings option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Sphinx W.", "");
-				if (player.hasStatusEffect(StatusEffects.UnlockedSphinxArms) && player.statusEffectv4(StatusEffects.UnlockedSphinxArms) < 9000) addButton(6, "Sphinx A.", permanentizeStatusEffect19, StatusEffects.UnlockedSphinxArms);
-				else if (player.hasStatusEffect(StatusEffects.UnlockedSphinxArms) && player.statusEffectv4(StatusEffects.UnlockedSphinxArms) == 9000) addButtonDisabled(6, "Sphinx A.", "Sphinx Arms option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "Sphinx A.", "Sphinx Arms");
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(7, "", permanentizeStatusEffect19, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(7, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "", "");*/
-				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect19, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "", "");*/
-			}
-			//if (page == 20) {
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(0, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(0, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "", "");*/
-				//addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(5, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(5, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "", "");*/
-			//	addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "", "");*/
-			//}
-			//if (page == 21) {
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(0, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(0, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "", "");*/
-				//addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(5, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(5, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "", "");*/
-			//	addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "", "");*/
-			//}
-			//if (page == 22) {
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(0, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(0, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "", "");*/
-				//addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(5, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(5, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "", "");*/
-			//	addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "", "");*/
-			//}
-			//if (page == 23) {
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(0, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(0, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "", "");*/
-				//addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(5, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(5, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "", "");*/
-			//	addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
-				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect20, StatusEffects.);
-				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "", "");*/
-			//}
+
 			addButton(14, "Back", ascensionMenu);
 		}
 
-		private function permanentizeStatusEffect1(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 25) return;
-			player.ascensionPerkPoints -= 25;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(1);
+		private function accessHornsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Horns", accessHornsMenu, currentPage, HornsMem.Memories);
 		}
-		private function permanentizeStatusEffect2(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 25) return;
-			player.ascensionPerkPoints -= 25;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(2);
+
+		private function accessHairMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Hair", accessLowerBodyMenu, currentPage, HairMem.Memories);
 		}
-		private function permanentizeStatusEffect3(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(3);
+
+		private function accessFaceMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Face", accessFaceMenu, currentPage, FaceMem.Memories);
 		}
-		private function permanentizeStatusEffect4(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(4);
+
+		private function accessEyesMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Eyes", accessEyesMenu, currentPage, EyesMem.Memories);
 		}
-		private function permanentizeStatusEffect5(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(5);
+
+		private function accessTongueMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Tongue", accessTongueMenu, currentPage, TongueMem.Memories);
 		}
-		private function permanentizeStatusEffect6(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(6);
+
+		private function accessEarsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Ears", accessEarsMenu, currentPage, EarsMem.Memories);
 		}
-		private function permanentizeStatusEffect7(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(7);
+
+		private function accessArmsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Arms", accessArmsMenu, currentPage, ArmsMem.Memories);
 		}
-		private function permanentizeStatusEffect8(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(8);
+
+		private function accessWingsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Wings", accessWingsMenu, currentPage, WingsMem.Memories);
 		}
-		private function permanentizeStatusEffect9(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(9);
+
+		private function accessLowerBodyMenu(currentPage: int = 0): void {
+			// Hides Taur variants of pre-existing TFs
+			var memArray: Array = LowerBodyMem.Memories.filter(function(element: *, index: int, array: Array): Boolean {
+				if (element && !element.taurVariant) {
+					return true;
+				}
+				return false;
+			});
+
+			memArray.unshift({
+		  	id: "Taur Lower Body",
+				permCost: 50,
+				permInfo: "Enables metamorphosis to Taur variants of several lower body parts.",
+		  	title: "Taur Shape"
+			});
+
+			openPaginatedMetamorphMenu("Lower Body", accessLowerBodyMenu, currentPage, memArray);
 		}
-		private function permanentizeStatusEffect10(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(10);
+
+		private function accessSkinMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Skin", accessSkinMenu, currentPage, SkinMem.Memories);
 		}
-		private function permanentizeStatusEffect11(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(11);
+
+		private function accessRearBodyMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Rear Body", accessRearBodyMenu, currentPage, RearBodyMem.Memories);
 		}
-		private function permanentizeStatusEffect12(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(12);
+
+		private function accessAntennaeMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Antennae", accessAntennaeMenu, currentPage, AntennaeMem.Memories);
 		}
-		private function permanentizeStatusEffect13(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(13);
+
+		private function accessSkinPatternsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Skin Patterns", accessSkinPatternsMenu, currentPage, SkinPatternMem.Memories);
 		}
-		private function permanentizeStatusEffect14(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(14);
+
+		private function accessGillsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Gills", accessGillsMenu, currentPage, GillsMem.Memories);
 		}
-		private function permanentizeStatusEffect15(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(15);
+
+		private function accessTailMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
 		}
-		private function permanentizeStatusEffect16(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(16);
+
+		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
+			clearOutput();
+			outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs - " + title +"</u></font>\n");
+			outputText("You can spend Ascension points to keep the available Metamorphs indefinitely, regardless of how many times you Ascend.\n\n");
+			outputText("<b>Metamorphs Permanentized:</b> " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + "/" + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "\n\n");
+			outputText("Ascension Perk Points: " + player.ascensionPerkPoints);
+			menu();
+
+			const menuInfo: * = {
+				title: title,
+				thisMenu: thisMenu,
+				currentPage: currentPage,
+				memArray: memArray
+			};
+
+			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
+				if (element && element.id !== "Unlocked Metamorph") {
+					return true;
+				}
+				return false;
+			});
+
+			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
+
+			const lastPage: int = Math.ceil(memArray.length/memsPerPage) - 1;
+
+			const pageMems: Array = memArray.slice(currentPage * memsPerPage, (currentPage * memsPerPage) + memsPerPage);
+
+			var currentButton: int = 0;
+
+			for each (var genMem: * in pageMems) {
+				const buttonStr: String = genMem.title || "";
+				const unlocked: Boolean = Metamorph.GeneticMemoryStorage[genMem.id];
+				const enoughPP: Boolean = player.ascensionPerkPoints >= (genMem.permCost || 5);
+				const obtained: Boolean = Metamorph.PermanentMemoryStorage[genMem.id];
+				const hasRequirements: Boolean = (genMem.permReq ? Metamorph.PermanentMemoryStorage[genMem.permReq] || false : true);
+
+				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points" + (genMem.permInfo ? "\n\n" + genMem.permInfo : ""));
+				else if (unlocked && !hasRequirements && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points\n\n<b>Requirement</b>: Permanentize " + genMem.permReq);
+				else if (unlocked && hasRequirements && !enoughPP && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points (You don't have enough Ascension Perk Points to permanentize this metamorphosis!)");
+				else if (obtained) addButtonDisabled(currentButton, buttonStr, "You already permanentized this metamorphosis!");
+				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You can't permanentize a metamorphosis you didn't unlock!");
+				currentButton++;
+			}
+
+			if (lastPage > 0) {
+				if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1);
+				else addButtonDisabled (12, "Prev Page");
+				if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1);
+				else addButtonDisabled (13, "Next Page");
+			}
+
+			addButton(14, "Back", ascensionMetamorphPermMenu);
 		}
-		private function permanentizeStatusEffect17(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
+
+		private function permanentizeMetamorph (menuInfo: *, genMem: *): void {
+			player.ascensionPerkPoints -= (genMem.permCost || 5);
+			Metamorph.PermanentMemoryStorage[genMem.id] = true;
 			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(17);
+
+			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
+				openPaginatedMetamorphMenu(menuInfo.title, menuInfo.thisMenu, menuInfo.currentPage, menuInfo.memArray);
+			} else {
+				clearOutput();
+				outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs</u></font>\n");
+				outputText("<b>You've permanentized the maximum amount of of metamorphs available for your current stage of Transcedental Genetic Memory!</b>");
+				menu();
+				doNext(ascensionMenu);
+			}
+
 		}
-		private function permanentizeStatusEffect18(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(18);
-		}
-		private function permanentizeStatusEffect19(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(19);
-		}/*
-		private function permanentizeStatusEffect20(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(20);
-		}
-		private function permanentizeStatusEffect21(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(21);
-		}
-		private function permanentizeStatusEffect22(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(22);
-		}
-		private function permanentizeStatusEffect23(statusEffect:StatusEffectType):void {
-			if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) >= player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) return;
-			if (player.ascensionPerkPoints < 5) return;
-			player.ascensionPerkPoints -= 5;
-			player.addStatusValue(statusEffect, 4, 9000);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
-			ascensionMetamorphPermeryMenu(23);
-		}*/
 
 		private function renamePrompt():void {
 			clearOutput();
@@ -3617,6 +2920,7 @@ import coc.view.MainView;
 		}
 		private function reincarnate():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
+			Metamorph.resetMetamorph();
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();
@@ -3701,6 +3005,9 @@ import coc.view.MainView;
 			player.setJewelry3(JewelryLib.NOTHING);
 			player.setJewelry4(JewelryLib.NOTHING);
 			player.setVehicle(VehiclesLib.NOTHING);
+			player.setMiscJewelry(MiscJewelryLib.NOTHING);
+			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
+			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();

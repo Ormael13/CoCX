@@ -26,7 +26,7 @@ public function fapArenaGOOOO():void {
 	if(flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] == 0) outputText("As you approach the tent, you notice these people are actually waiting in line, pleasantly chatting with each other.  All varieties of species are there, from cute little goblins and mouse-faced people with rodent-like teeth, to towering centaurs and minotaurs, the latter easily noticed with their strong scent.   You spot the occasional sharp-toothed dog-morph or shark breeder, some traditional incubi and a few tentacled mutants, victims of consuming corrupted vegetation.  There are even a few humans, nonchalantly standing in the waiting line and making conversation, as if some of the others weren't monstrosities.  What strikes you is everyone's perfect civility.  Obviously everyone is used to the place.\n\n");
 
 	outputText("The waiting line advances and you finally end up in front of the tent's entrance guarded by a surprisingly tall goblin.  She looks at you with assessing eyes, suddenly grabs your crotch with her left hand, rubs it for a second, and says, ");
-	//[if dick size < 8 inches] 
+	//[if dick size < 8 inches]
 	if(player.longestCockLength() < 8) {
 		outputText("\"<i>I'm afraid you aren't well-endowed enough to take part in our sessions.  Please come back when ");
 		if(!player.hasCock()) outputText("you have a cock.");
@@ -39,28 +39,28 @@ public function fapArenaGOOOO():void {
 		doNext(bazaar.enterTheBazaar);
 		return;
 	}
-	//[if dick size >= 8 inches: 1st time] 
+	//[if dick size >= 8 inches: 1st time]
 	else if(flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] == 0) {
 		flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED]++;
 		outputText("\"<i>You must be new here.  Go to the backroom on the left, undress yourself and wait with the others in the main room; the session will start soon.</i>\"\n\n");
 		outputText("Meekly following the others into the backroom, you start removing your [armor].  You watch other people, fully clothed when they step in, completely naked when they go out.  The sensation of something out of place continues to bother you with all these people casually speaking and laughing with their raging erections showing, and then you finally get it: everyone in here has a dick. Even the feminine-looking ones with ample breasts and a generous ass are actually herms, as their huge boners attest.\n\n");
-		
+
 		outputText("A bit puzzled, you decide to follow everyone else.  They are all gathering in the main circular room, forming a very large ring.  Approximately 30 people and their peckers are standing here naked, and you place yourself to fit in the circle.  Once everyone is aligned, the conversations gradually stop and a red-skinned succubus with pornstar-like tits steps in.  She is completely nude and, if the sight of thirty naked people with horse-length boners wasn't arousing enough, her dripping cunt seems to be attracting your " + cockDescript(x) + " like a magnet.  Wait... she doesn't have a dick?\n\n");
-		
+
 		outputText("Awkwardly, you gently tap your right neighbor's shoulder, trying not to focus on his towering shaft too much, and whisper your question, \"<i>Why do we all have cocks but not her?</i>\"\n\n");
-		
+
 		outputText("The creature replies, in the same tone, \"<i>She's the referee.  She will explain the rules to new people, don't worry.</i>\"\n\n");
-		
+
 		outputText("The alluring demoness places herself at the center of the circle and starts speaking in a loud, clear voice, \"<i>Welcome to this new masturbating session!  Because I see some unfamiliar faces, some people here may be new; I will restate the rules.  Please do comply with them or we will have to disqualify you.</i>\"\n\n");
 
 		outputText("\"<i>When I say READY, everyone will grab hold of the dick on your right.  You must grab one and only one dick.  If your right neighbor happens to own multiple cocks, you must grab the longest one.  Players with more than one dick in their right hand will be disqualified.</i>\"\n\n");
-		
+
 		outputText("\"<i>When I say GO, everyone will start stroking the cock they have in hand until it cums.  Do NOT abandon this cock.  You may stroke it in any way you like, but you must only ever use your right hand.  The usage of other hands, tentacles, mouths, nipples, or genitalia to perform any kind of auxiliary stimulation is strictly forbidden.  Players stimulating cocks in illegal ways will be disqualified.</i>\"  You hear some muffled chuckles.  Apparently some players aren't averse to further 'stimulation', even at the cost of cheating.\n\n");
 
 		outputText("The succubus carries on, \"<i>You must stand your ground.  Use your left hand to hold your left partner if you feel your dick is being pulled a little too far.  Otherwise, you are not allowed to disrupt your left neighbor's cock-stroking.  People preventing their cock from being caressed will be disqualified.</i>\"\n\n");
-		
+
 		outputText("\"<i>A cock is considered to be cumming when the first drop of semen comes out.  Pre-cum doesn't count.  You will all be assigned a number.  Whenever a dick cums, you must shout your number followed by SCORING if the cumming dick is your right neighbor's or CUMMING if it's your own.  The winner is the player cumming last, and the loser is the player cumming first.  The orgasm order will be recorded for the second part of the session.  Player announcing a false positive will be disqualified.</i>\"\n\n");
-	
+
 		outputText("\"<i>Once everyone has come, the loser will place himself at the center of the circle, bending over, buttocks exposed.  The player who came second will place himself right behind him in fucking position, the player who came third will place himself behind him, and so on.  The winner will place himself behind everyone else.  He will give the first thrust and everyone will follow.  The winner dictates the thrusting pace.  I strongly advise you to respect the fucking rhythm.  Do you studs understand?</i>\"\n\n");
 
 		outputText("Everyone nods in agreement, hands and genitalia quivering in excitement.  ");
@@ -72,13 +72,13 @@ public function fapArenaGOOOO():void {
 		outputText("\n\nDo you stay?");
 		doYesNo(fapArenaPageII, bazaar.enterTheBazaar);
 	}
-	//[if dick size > 8 inches: after first time] 
+	//[if dick size > 8 inches: after first time]
 	else {
 		outputText("\"<i>Welcome back.  Please undress yourself in the backroom and wait with the others in the main room.</i>\"\n\n");
 		outputText("You do as you are told, quickly removing your [armor] and placing your naked self in the main room, waiting in circle with the others.  You have a pleasant and casual chat with other people, trying to recognize some faces.  You try your best to place yourself between people you don't know yet, in order to feel varied pleasures from one time to the next.  After a few minutes during which " + sMultiCockDesc() + " stands fully erect at the sight of so many naked people, the sexy referee walks in, naked as usual.\n\n");
-		
+
 		outputText("\"<i>Alright.  Welcome everyone; I see no new faces here, so I'll assume everyone knows the rules and we'll directly proceed to the masturbatory game, which I am sure you are all eager to play.  Remember: using alternative methods of stimulation is NOT allowed.  Do you studs understand?</i>\"\n\n");
-		
+
 		outputText("Everyone nods in agreement, hands and genitalia quivering in excitement.");
 		//[if Corr >40]
 		if(player.cor > 66) outputText("  You look forward to this new masturbating session.");
@@ -86,13 +86,13 @@ public function fapArenaGOOOO():void {
 	}
 	//end of condition about PC's first time, display the following
 }
-	
+
 private function fapArenaPageII():void {
 	//Increment 'times fap-arena'ed
 	flags[kFLAGS.FAP_ARENA_SESSIONS]++;
 	clearOutput();
 	var x:Number = player.longestCock();
-	
+
 	outputText("\"<i>READY!</i>\"\n\n");
 	if(player.cor > 66) outputText("You eagerly seize the rod on your right side; squeezing it a bit in impatience.  A  little tingle alerts you to your left neighbor grabbing " + oMultiCockDesc() + " with an expert hand.  Everyone around you quickly grabs hold of the nearest cock on their right side.  Some of them are trembling because of the induced stress and arousal.\n\n");
 	else if(player.cor > 33) outputText("You nervously grab hold of the rod on your right side.  In your stress, you can't help but give it a little squeeze.  You tremble as your left neighbor grabs " + oMultiCockDesc() + " with an expert hand.  Most people are as nervous as you, their whole naked body trembling in stress.\n\n");
@@ -105,43 +105,49 @@ private function fapArenaPageII():void {
 	outputText("\"<i>GO!</i>\"\n\n");
 
 	outputText("You instantly wince a little as the hand holding your " + cockDescript(x) + " starts rocking up and down energetically.  By the gods, he's good at this, whatever he is.  You suddenly remember your own hand has a job to do and you proceed to rub the shaft on your right, slowly at first and gaining more and more pace as you get more confident.  Soon you're furiously stroking it, trying to match your left partner's rhythm in intensity.  Since there wasn't any handjob stamina contest organized in Ingam, you're fairly inexperienced at this and try to imitate your left partner as best as you can, using the pleasure he's inflicting on you as a suggestion for how to treat your own victim.  You rub the sensitive points, you tickle the urethra and give gentle squeezes with your palm as your hand slowly works its way up and down the massive cock it's stroking.  Your best effort, however, goes into ignoring the hand expertly working your own " +  cockDescript(x)  + ", massaging it viciously in order to pump the semen up in your urethra.  Your erection gets bigger, if that is even possible; but you manage to hold off the incoming orgasm.\n\n");
-	
+
 	outputText("You continue stroking the pecker vigorously while trying to ignore the handjob your own " + cockDescript(x) + " is getting, and your efforts are rewarded: soon pre-cum starts dribbling from the tip of the tool you're jerking off, and your hand proceeds to smear that cock in its own juice; you notice it grows slightly bigger.  There is a profound silence in the tent; you only hear a few soft thuds resulting from dick skin being stretched: FAP FAP FAP FAP FAP FAP FAP FAP...  Occasionally a player will break the silence as their lips let a loud, pleasure-filled moan.\n\n");
-	
+
 	outputText("The pace accelerates more and more; in fear of losing, everyone's handjobs become rougher and rougher, each player hoping that they will make their right partner climax before thy themselves succumb.  Everyone looks deeply concentrated, trying to betray as little as possible of their current tension, raging inside when a muffled moan finds its way through their lips.  How long have you been here, handling a stranger's cock?  You don't know, but the session seems to be coming to an end: almost everyone's dong is now flowing with pre-cum, and the faint jerking sounds are gradually replaced with squelching and slicking noises.  There are ");
 	if(player.hasVagina()) outputText("other ");
 	outputText("dick-girls in that room: cute face, jiggling breasts, curvy body, squeezable hips; they would almost look like normal females if it weren't for that huge pre-cum-spilling, protruding cock.  They seem as deep in concentration as the others, the only difference being their feminine fluids spilling freely from their wet cunts and the occasional girlish moans that escape their lips.  The warm, musky smell of male genitalia starts impregnating the whole room as the temperature rises higher and higher and you find yourself all the more aroused.  You close your eyes in order to stop torturing yourself with the sight of hot, horny, naked bodies. You don't know if you will be able to hold on much longer.\n\n");
-	
+
 	var winner:Boolean = true;
 	if(rand(100) <= 4) winner = false;
 	//[how the game rolls:
-	//5% chance of losing no matter what.
-	//If that check fails,
-	//Let S be the PC's sensitivity
-	var s:Number = player.sens;
-	//D the number of hours since he last came 
-	var d:Number = player.hoursSinceCum;
-	var c:Number = 0;
-	if(player.cocks[x].cockType == CockTypesEnum.DEMON) c = 10;
-	else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) c = 5;
-	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD || player.cocks[x].cockType == CockTypesEnum.CAVE_WYRM) c = 3;
-	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
-	//R the player's lust resistance (0<R<1)
-	var r:Number = EngineCore.lustPercent()/100;
-	//The game does a roll between 0 and 100, call it N.
-	var n:Number = rand(100);
-	//We define the PC's stamina as ST = (N-S*R-4*D)/(D+1) + C
-	var st:Number = c + (n-s*r-4*d)/(1.2+(d/10));
-	//outputText("<B>CHEAT: " + st + "</b> N: " + n + " c: " + c + " s: " + s + " r: " + r + " D: " + d + "\n");
-	//If ST is 0 or less, the PC loses.
-	//If ST > 30, the PC wins.
-	//Otherwise the PC's rating is ST, rounded up.]
-	//[if the player loses]
-	if(st <= 0) doNext(createCallBackFunction(fapResults,3));
-	//[else if the player doesn't lose, but doesn't win either - he cums neither first nor last]
-	else if(st < 29.5) doNext(createCallBackFunction(fapResults,2));
-	//[else, the player wins]
-	else doNext(createCallBackFunction(fapResults,1));
+	if (winner){
+		//5% chance of losing no matter what.
+		//If that check fails,
+		//Let S be the PC's sensitivity
+		var s:Number = player.sens;
+		//D the number of hours since he last came
+		var d:Number = player.hoursSinceCum;
+		var c:Number = 0;
+		if(player.cocks[x].cockType == CockTypesEnum.DEMON) c = 10;
+		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) c = 5;
+		else if(player.cocks[x].cockType == CockTypesEnum.LIZARD || player.cocks[x].cockType == CockTypesEnum.CAVE_WYRM) c = 3;
+		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
+		//R the player's lust resistance (0<R<1)
+		var r:Number = EngineCore.lustPercent()/100;
+		//The game does a roll between 0 and 100, call it N.
+		var n:Number = rand(100);
+		//We define the PC's stamina as ST = (N-S*R-4*D)/(D+1) + C
+		var st:Number = c + (n-s*r-4*d)/(1.2+(d/10));
+		//outputText("<B>CHEAT: " + st + "</b> N: " + n + " c: " + c + " s: " + s + " r: " + r + " D: " + d + "\n");
+		//If ST is 0 or less, the PC loses.
+		//If ST > 30, the PC wins.
+		//Otherwise the PC's rating is ST, rounded up.]
+		//[if the player loses]
+		if(st <= 0) doNext(createCallBackFunction(fapResults,3));
+		//[else if the player doesn't lose, but doesn't win either - he cums neither first nor last]
+		else if(st < 29.5) doNext(createCallBackFunction(fapResults,2));
+		//[else, the player wins]
+		else doNext(createCallBackFunction(fapResults,1));
+	}
+	else{
+		var cval:int = rand(2) + 2 //Either 2/3
+		doNext(createCallBackFunction(fapResults,cval));
+	}
 }
 
 private function fapResults(place:Number = 3):void {
@@ -152,16 +158,16 @@ private function fapResults(place:Number = 3):void {
 	//Loses
 	if(place == 3) {
 		outputText("You try to focus as much as possible on your right arm and the cum-tube it's holding, but the raw sensations are starting to prove too much for your needy " + cockDescript(x) + ", and your arm is starting to tire.  You helplessly feel your " + cockDescript(x) + " twitching on its own as pressure builds down your urethra.  You try to count to ten in order to clarify your mind but the hand holding your " + cockDescript(x) + " doesn't allow you such leisure.  Every time you try to hold a coherent thought, the hand twists your " + cockDescript(x) + " in a rough way, sending jolts of pleasure and pain across your whole body.  Gods, it's too much.  Your rod is... you won't be able to... that's it, you can feel it.  It's too late. The flow of semen is gathering in your balls, slowly at first, but you know you don't have time.  In a desperate attempt not to lose, you ferociously rub the shaft in your own hand, faster and faster as you feel your seed starting its way up your urethra. No! This can't be! You rub the pecker wolfishly, paying special attention to the tip and pumping as much pre-cum outside as physically possible.  For a moment, you think you're going to win, for the dick's owner lets out a very loud moan and starts shuddering, victim of your eager ministrations.  You almost feel the liquid seed flowing through the cock veins; then, in a supreme effort of constriction, your right partner manages to hold off that flow.  He won't orgasm this time.  You have lost.\n\n");
-		
+
 		outputText("But it doesn't matter now.  None of it matters, as your own " + cockDescript(x) + " is about to release a flood of its own.  After a whole orgasm self-denying session, you feel like your bones are melting and your body is ascending to heaven as you reach your peak and your " + cockDescript(x) + " starts shooting an ");
 		if(player.cumQ() > 1000) outputText("unholy");
 		else if(player.cumQ() >= 500) outputText("enormous");
 		else outputText("appreciable");
-		//(depending on cum production) 
+		//(depending on cum production)
 		outputText(" rope of the creamiest, whitest liquid you've ever produced.");
 		if(player.cockTotal() > 1) outputText("  Several more gouts follow suit from the unstimulated dickflesh dangling from your groin.");
 		outputText("  Your whole body shivers, clenches and relaxes several times as you completely lose control of your muscles, your mind only focusing on the cum cannon located between your legs.\n\n");
-		
+
 		outputText("Your left partner is very professional.  At the very moment your " + cockDescript(x) + " starts shooting its goo, your cock-milker yells in a thundering voice: \"<i>NUMBER " + (num-1) + " SCORING!</i>\"  For a moment, lost in your pleasure, you pay little attention to the world outside of your " + cockDescript(x) + ".  Then you remember the game and shout in a whorish, pleasure-filled voice: \"<i>NUMBER " + num + " CUMMING!</i>\"");
 		if(player.hasVagina()) {
 		outputText("  Your thighs tense a few seconds before your " + vaginaDescript(0) + " squirts too, forming a ");
@@ -173,31 +179,31 @@ private function fapResults(place:Number = 3):void {
 		//[if player lactates]
 		if(player.biggestLactation() > 1.5) outputText("  Your [allbreasts] also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.");
 		outputText("\n\n");
-		
+
 		outputText("The cute referee nods in acknowledgement.  Her eyes seem to be filled with longing for your cum-spilling [cocks], and you know she'd eagerly finish you off if it weren't for her professionalism.\n\n");
-		
+
 		//[1/2 chance of this paragraph appearing]
 		if(rand(2) == 0) outputText("As soon as your semen starts flying up in the air, you feel pressure being released in your hand.  Exhausted by your ministrations and now that he doesn't have to fear losing anymore, your right neighbor also starts cumming, blowing his load toward the referee.  She fails to dodge the shot but nods when you angrily yell: \"<i>NUMBER " + (num) + " SCORING!</i>\", almost immediately followed by \"<i>NUMBER " + (num+1) + " CUMMING!</i>\" from your neighbor.  Annoyed that he profited from your lack of stamina and came just after you, you give his member a raging twist for good measure. It makes him scream in pain and pleasure and spills cum all the more abundantly.\n\n");
 		//[else]
 		else outputText("You remember you still have to make your right partner cum.  Now that you've lost, you don't care about being disqualified and you twist your partner's cock ragingly, fondling, cupping his balls, occasionally giving them a nice squeeze for good measure.  Your partner's cock starts twitching in indignation but it soon releases a milky torrent of semen.  Angry at your own lack of stamina, you yell, \"<i>NUMBER " + num + " SCORING!</i>\", almost immediately followed by \"<i>NUMBER " + (num+1) + " CUMMING!</i>\"  You keep twisting that pecker until you're absolutely positive that you've milked every drop of seed out of it.  Your hand is drenched in sexual juices, but you don't care.\n\n");
 		//end of else
-		
+
 		outputText("Quite satisfied, your left partner decides to stop torturing himself; he must have had a rough handjob too.  You watch in amazement as his enormous shaft starts shooting globs of sticky goo, aiming at the referee with an expert's precision.  He grins lewdly and yells: \"<i>NUMBER " + (num-1) + " CUMMING!</i>\"\n\n");
-		
+
 		outputText("Soon everyone else starts blowing their own loads, shouting their number.  You hear the pleasure-filled moans of a dozen of people giving in to their bodies, only arousing you more and increasing your cum-flow.  The referee records the results and writes them down on a little notepad but she has a hard time keeping it free of white stains because all players seem to be aiming their cumshots at her.  Players are moaning whorishly and louder than ever.  The whole room seems to be detonating as dozens of horny bodies release their powerful orgasms in an apotheosis of lust.  In a few minutes the entire room is filled with trails of cum, everyone being too eager to shoot their load after this fever of orgasm denial.\n\n");
 	}
 	//[else if the player doesn't lose, but doesn't win either - he cums neither first nor last]
 	else if(place == 2) {
 		outputText("For what seems like hours you try to hold on, resisting wave after wave of unbearable pleasure in your crotch.  Nevertheless, you feel your stamina gradually depleting; each orgasm is harder to deny.  You know you won't be able to hold on much longer, but you muster up your courage and count to ten in your head.  Surely someone will cum before you... they better do it now because your mind is about to collapse and you will no longer be able to control your body.  Gods, it feels too good.  That stroking, teasing hand is torturing you in a delicious way, but you keep denying the pleasure.  You have to.  It's so rough, so...\n\n");
-		
+
 		outputText("Your thoughts are suddenly interrupted.\n\n");
-		
+
 		outputText("Someone in the circle yells, \"<i>NUMBER " + num + " CUMMING!</i>\", immediately followed by another voice yelling even louder, \"<i>NUMBER " + (num-1) + " SCORING!</i>\"\n\n");
-		
+
 		outputText("Indeed, a player's cock has given up the stamina contest and sprays spunk all around in a hot creamy torrent.  That's one mighty cum-shot, you think in admiration.  Almost immediately after that, several players give up too and start shouting while shooting their own goo.\n\n");
-		
+
 		outputText("Your right partner suddenly shouts in a high-pitched voice, \"<i>NUMBER " + (num+5) + " CUMMING!</i>\"; you immediately understand and shout \"<i>NUMBER " + (num+4) + " SCORING!</i>\" in response.  You can feel the pressure releasing in the cock your hand is holding, the fluid being sprayed all around by the perverted pump.\n\n");
-		
+
 		outputText("A vicious yank on your own " + cockDescript(x) + " reminds you that you also need to comply to your own genitals' needs.  Unhindered by the fear of losing, you completely give up to your orgasm and sigh in utter satisfaction and relief as you release one of the most abundant cumshots you've ever had.  Lost in your orgasm, you carelessly ");
 		if(player.cumQ() >= 1000) outputText("soak");
 		else if(player.cumQ() >= 500) outputText("pollute");
@@ -212,27 +218,27 @@ private function fapResults(place:Number = 3):void {
 		}
 		if(player.biggestLactation() > 1.5) outputText("  Your [allbreasts] also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.");
 		outputText("\n\n");
-		
+
 		outputText("Quite satisfied, your left partner decides to stop torturing himself; he must have had a rough handjob too.  You watch in amazement as his cum-tube starts shooting globs of sticky goo, aiming at the referee with an expert's precision. He grins lewdly and yells: \"<i>NUMBER " + (num+3) + " CUMMING!</i>\"\n\n");
-			
+
 		outputText("Soon everyone else starts blowing their own loads, shouting their number.  You hear the pleasure-filled moans of a dozen of people giving in to their bodies, only arousing you more and increasing your cum-flow.  The referee records the results and writes them down on a little notepad but she has a hard time keeping it free of white stains because all players seem to be aiming their cumshots at her.  Players are moaning whorishly and louder than ever.  The whole room seems to be detonating as dozens of horny bodies release their powerful orgasms in an apotheosis of lust.  In a few minutes the entire room is filled with trails of spooge, everyone being too eager to shoot their load after this fever of orgasm denial.\n\n");
 	}
 	//[else, the player wins]
 	else {
 		outputText("For what seems hours you try to hold on, resisting wave after wave of unbearable pleasure in your crotch.  Nevertheless, you feel your stamina gradually depleting; each orgasm is harder to deny.  You know you won't be able to hold on much longer, but you muster up your courage and count to ten in your head.  You must win.  All these efforts can't have been in vain.  Surely someone will cum before you... and someone else, and someone else.  They better do it soon though.  You don't know how long you will be able to control your body.  Gods, it feels too good.  That stroking, teasing hand is torturing you in a delicious way, but you keep denying the pleasure.  You have to.  It's so rough, so...\n\n");
-		
+
 		outputText("Your thoughts are suddenly interrupted.\n\n");
-		
+
 		outputText("Your right partner shouts in a high-pitched voice: \"<i>NUMBER "+ (num+1) + " CUMMING!</i>\"  You immediately understand and shout \"<i>NUMBER " + num + " SCORING!</i>\" in response.\n\n");
-		
+
 		outputText("Indeed, you can feel the pressure releasing in the cock your hand is holding, the fluid being sprayed all around in a hot creamy torrent.  That's one mighty cumshot, you think in admiration.  Almost immediately after that, several players give up too and start shouting while shooting their own goo.\n\n");
-		
+
 		outputText("Someone in the circle yells \"<i>NUMBER " + (num+7) + " CUMMING!</i>\" immediately followed by another voice yelling even louder \"<i>NUMBER " + (num+6) + " SCORING!</i>\"\n\n");
-		
+
 		outputText("A vicious yank on your own " + cockDescript(x) + " reminds you that you also need to comply to your genitals' need. In a supreme effort of strength of will, you resist.  You can't allow yourself to give up now that you've an opportunity to win.  You clench your teeth and keep ignoring the treatment your " + cockDescript(x) + " is undergoing.\n\n");
-		
+
 		outputText("Tortured, your left partner decides to stop teasing himself; he must have had a rough handjob too.  You watch in amazement as his cum-tube starts shooting globs of sticky goo, aiming at the referee with an expert's precision.  He grins lewdly and yells: \"<i>NUMBER " + (num-1) + " CUMMING!</i>\"\n\n");
-		
+
 		outputText("Soon everyone else starts blowing their own loads, shouting their number.  You hear the pleasure-filled moans of a dozen of people giving in to their bodies, only arousing you more and increasing your cum-flow.  The referee records the results and writes them down on a little notepad but she has a hard time keeping it free of white stains because all players seem to be aiming their cumshots at her.  Players are moaning whorishly and louder than ever.  The whole room seems to be detonating as dozens of horny bodies release their powerful orgasms in an apotheosis of lust.  In a few minutes the entire room is filled with trails of spooge, everyone being too eager to shoot their cum-load after this fever of orgasm denial.\n\n");
 
 		outputText("You mentally keep track of all the people still in play.  They are fewer and fewer.  You just have to hold on a little longer.  Four... three... two... that's it.  You made it.  Phew, you have won just in time, your " + cockDescript(x) + " was starting to twitch on its own.  Unhindered by the fear of losing, you completely give up to your orgasm and sigh in utter satisfaction and relief as you release one of the most abundant cumshots you've ever had.  Lost in climax, you carelessly ");
@@ -251,22 +257,22 @@ private function fapResults(place:Number = 3):void {
 	}
 	//Post fap
 	outputText("You pant and relax, exhausted.  Your right arm is cramped and your " + cockDescript(x) + " is sore.  People around you look similarly tired and are slowly recovering from this rough collective dick-stroking session.  Someone gently taps your shoulder.  It is your left neighbor: \"<i>Well played. I didn't expect you would be so... resistant.  Few players last that long with me, because their rods generally don't endure my handjobs.</i>\"  He proceeds to shake hands; both you are smeared with pre-cum and various cock juices, but you don't care.  You smile and thank him for the good game and the orgasm.  It comes as something of a relief that everyone seems to show good sportsmanship.  Everyone is congratulating each other; various comments reach your ears about the game they just had and how well their opponents did.  Your right partner stands before you.  \"<i>Whoa, you sure know how to give a handjob!  That was amazing, and you know what?  I don't care if I haven't won!</i>\"  You tell him that you're glad that he enjoyed your efforts.  Everyone is now laughing and chatting casually, as if their still erect cocks weren't dripping semen and they weren't busy giving furious handjobs a few minutes ago.  ");
-		
+
 	//[if first time]
 	if(flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] == 1) outputText("You stand here, a little lost, wondering what will happen next.");
 	else outputText("You join them, congratulating some on the strength of their stroke, and commenting on the various aspects of the fapping game you've just had.\n\n");
-		
+
 	outputText("The referee, who had been busy cleaning herself up from all the spunk in a backroom, suddenly storms out and plants herself at the center of the circle, her nude red body trembling and shivering in arousal.  \"<i>Alright, everybody in a single line!  It's time for your butt-fuck reward.</i>\"\n\n");
-	
+
 	outputText("You jolt in surprise as everyone stops talking altogether and yells in a single, thundering, thrumming voice, \"<i>BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!</i>\"  It never seems to end.\n\n");
-	
+
 	//[if corr < 50]
 	if(player.cor < 50) outputText("You find yourself yelling with them, astounded by everyone's enthusiasm and eagerness to be fucked in the ass, even after this rough masturbating session.  You wish you weren't so blindly following others, but they are so hypnotizing, their hard glistening cocks pointing at the air as they keep shouting over and over again, \"<i>BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!</i>\"  ");
 	//[else, corr >50]
 	else outputText("Your body tenses and " + sMultiCockDesc() + " hardens at the perspective of a collective anal orgy.  You yell in lust like a minotaur in rut, \"<i>BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!  BUTT-FUCK!</i>\" along with the others.  ");
 	//end of global condition about PC's corr, display the following
 	outputText("As they shout rhythmically, they start forming a straight line, their position in the line reflecting their rating.\n\n");
-	
+
 	//[if you won]
 	if(place <= 1) outputText("Since you're the winner, you walk to the tail of the butt-fuck train, enjoying your prize.  ");
 	//[if you didn't win, didn't lose]
@@ -280,9 +286,9 @@ private function fapResults(place:Number = 3):void {
 		outputText(", you place yourself in front of the creature with the large cock.  It grinds against your back in impatience.  ");
 	}
 	outputText("You ready yourself up as everyone puts themselves into a proper butt-fucking position, cocks pointing to anuses.\n\n");
-	
+
 	outputText("The referee shouts, \"<i>LET THE BUTT-FUCK TRAIN BEGIN!</i>\"\n\n");
-	
+
 	//[if you won]
 	if(place <= 1) {
 		outputText("You can't believe you will get to fuck a whole train's worth of anuses and cocks.  This seems so unreal...  nevertheless, the tension and the scent of cum prove too much for you, and you give in to your lust.  ");
@@ -302,7 +308,7 @@ private function fapResults(place:Number = 3):void {
 		tentacleFapSpecial(place);
 		outputText("You eventually reach your final peak and start unloading a glorious load, flooding your partner's colon.  As baby-batter freely flows out of your urethra, you let an orgasming scream of your own, ferociously gripping the bountiful ass-cheeks within your grasp, digging your fingers in the soft skin.  You cum, cum and cum, your shaft vibrating on its own in your partner's anus; at the same time, other people in the butt-fuck train start coming too, and everyone's body tenses and clenches as if they wanted to milk every ounce of seed available into their butts.");
 		tent = tentacleFapCum();
-		//[if player has multicocks] 
+		//[if player has multicocks]
 		if((player.cockTotal() > 2) || (!tent && player.cockTotal() > 1)) {
 			if(player.cockTotal() > 3 || (!tent && player.cockTotal() > 2)) outputText("  Your other cocks also spill ");
 			if((tent && player.cockTotal() == 3) || (player.cockTotal() == 2 && !tent)) outputText("  Your other cock also spills ");
@@ -324,24 +330,24 @@ private function fapResults(place:Number = 3):void {
 			outputText(" load of girl-cum too, as if to compete with its male counterpart.");
 		}
 		//end of conditions
-		
+
 		outputText("\n\nWincing in pain and pleasure mixed, your " + cockDescript(x) + " lets out one ultimate spurt of goo before resting, deeply buried into your partner's ass.  You fall over, making the whole chain fall to rest by domino effect.  After this torrid anal session, the butt-fuck train has exhausted its fuel.\n\n");
 	}
 	//[else if you didn't win]
 	else if(place == 2) {
-		outputText("You almost instantly feel firm arms groping your " + buttDescript() + " and the tip of an erect dick knocking at the door of your colon.  It slowly massages your rectum, and you can't help but giggle a bit as you feel a tingle of pleasure passing through your body.\n\n");
-		
+		outputText("You almost instantly feel firm arms groping your [butt] and the tip of an erect dick knocking at the door of your colon.  It slowly massages your rectum, and you can't help but giggle a bit as you feel a tingle of pleasure passing through your body.\n\n");
+
 		//[1/2 chance of this]
 		if(rand(2) == 0) outputText("You eagerly grab the luxurious, gelatinous butt cheeks in front of you.  You notice a pussy underneath that fine ass, freely spilling sexual juices.  If the compelling order weren't resonating deep in your mind, you would easily lose yourself in the herm's glorious depths.  Nevertheless, your " + cockDescript(x) + " remembers its job and starts pushing its way between these tender orbs, then into the herm's tight anus.\n\n");
 		else outputText("You eagerly grab the firm, muscular ass cheeks in front of you, probably belonging to some vigorous male.  You grind your " + cockDescript(x) + " against his back and it automatically starts spilling pre-cum; as soon as the seminal liquid trickles down his shapely butt, you can feel his body tensing, as if his lust reached a new level.  Nevertheless, your " + cockDescript(x) + " remembers its job and starts pushing its way between these gorgeous buttocks, then into the man's tight anus.\n\n");
 
-		outputText("You suddenly hear a muffled moan from behind.  Someone is probably being fucked at the back of the train.  You brace yourself for the imminent anal penetration... and here it comes.  The dong is projected at full force into your " + buttDescript() + " then all the way inside your colon; you're protected only by the copious glaze of pre-cum its bearer had been applying.");
+		outputText("You suddenly hear a muffled moan from behind.  Someone is probably being fucked at the back of the train.  You brace yourself for the imminent anal penetration... and here it comes.  The dong is projected at full force into your [butt] then all the way inside your colon; you're protected only by the copious glaze of pre-cum its bearer had been applying.");
 		player.buttChange(5+rand(15),true,true,false);
-		outputText("  Instinctively, you reach for the butt awaiting your " + cockDescript(x) + " and push as if your life depended on it.  You notice how your sodomite partner does the same to the ass in front of him, and so on.  Eventually the last one is pushed face down onto the floor, but her butt bumps against the dong fucking her, making the cock's owner bump in response, and it all propagates back to your own pecker; you wince in pleasure as your asshole impales itself further on the turgescent member behind you.  You are pushed and pulled rhythmically, your throbbing member and the one fucking you serving both as vectors in this slow wave of anal pleasure.  Unable to keep control of your thrusts, you let go of your body, enjoying the feeling of being shoved in both directions, each motion bringing either a jolt of pleasure in your crotch or your " + buttDescript() + ".  You are being slowly overwhelmed by the delicious tightness of the butt you're fucking as well as the fat piece of meat pounding your own.  The raw feelings eventually prove too much for your horny body, and you jerk your head back and moan like a whore, waiting for the incoming orgasm.\n\n");
+		outputText("  Instinctively, you reach for the butt awaiting your " + cockDescript(x) + " and push as if your life depended on it.  You notice how your sodomite partner does the same to the ass in front of him, and so on.  Eventually the last one is pushed face down onto the floor, but her butt bumps against the dong fucking her, making the cock's owner bump in response, and it all propagates back to your own pecker; you wince in pleasure as your asshole impales itself further on the turgescent member behind you.  You are pushed and pulled rhythmically, your throbbing member and the one fucking you serving both as vectors in this slow wave of anal pleasure.  Unable to keep control of your thrusts, you let go of your body, enjoying the feeling of being shoved in both directions, each motion bringing either a jolt of pleasure in your crotch or your [butt].  You are being slowly overwhelmed by the delicious tightness of the butt you're fucking as well as the fat piece of meat pounding your own.  The raw feelings eventually prove too much for your horny body, and you jerk your head back and moan like a whore, waiting for the incoming orgasm.\n\n");
 		tentacleFapSpecial(place);
-		outputText("A pressure builds at your crotch as a milky torrent of seed finds its way into your urethra, down your sodomite partner's colon.  Almost simultaneously, you feel an equally thick spray of spooge being released inside your own " + buttDescript() + ". At the peak of your orgasm, you are unable to think of anything but the steady flow of jism coming in and out of you.");
+		outputText("A pressure builds at your crotch as a milky torrent of seed finds its way into your urethra, down your sodomite partner's colon.  Almost simultaneously, you feel an equally thick spray of spooge being released inside your own [butt]. At the peak of your orgasm, you are unable to think of anything but the steady flow of jism coming in and out of you.");
 		tent = tentacleFapCum();
-		//[if player has multicocks] 
+		//[if player has multicocks]
 		if((player.cockTotal() > 2) || (!tent && player.cockTotal() > 1)) {
 			if(player.cockTotal() > 3 || (!tent && player.cockTotal() > 2)) outputText("  Your other cocks also spill ");
 			if((tent && player.cockTotal() == 3) || (player.cockTotal() == 2 && !tent)) outputText("  Your other cock also spills ");
@@ -362,18 +368,18 @@ private function fapResults(place:Number = 3):void {
 			else outputText("nice");
 			outputText(" load of girl-cum too, as if to compete with its male counterpart.");
 		}
-		//end of conditions 
-		outputText("\n\nFinally the strength of all the ejaculations is starting to ebb, as well as your fading orgasm.  Wincing in pain and pleasure mixed, your " + cockDescript(x) + " lets out an ultimate spurt of goo before resting, deeply buried into your partner's ass.  You fall over, making everyone after fall too by domino effect.  As you slowly doze off, you have a special thought about the still semi-erect cock being lodged in your " + buttDescript() + ".  That wagon of butts and dicks... it felt so right, so powerful, so... connected.\n\n");
+		//end of conditions
+		outputText("\n\nFinally the strength of all the ejaculations is starting to ebb, as well as your fading orgasm.  Wincing in pain and pleasure mixed, your " + cockDescript(x) + " lets out an ultimate spurt of goo before resting, deeply buried into your partner's ass.  You fall over, making everyone after fall too by domino effect.  As you slowly doze off, you have a special thought about the still semi-erect cock being lodged in your [butt].  That wagon of butts and dicks... it felt so right, so powerful, so... connected.\n\n");
 	}
 	//[else, if you lost]
 	else {
-		outputText("You almost instantly feel firm arms groping your " + buttDescript() + " and the tip of an erect dick knocking at the door of your colon.  It slowly massages your rectum, and you can't help but giggle a bit as you feel a tingle of pleasure passing through your body.  You prepare yourself for the crazy butt-fuck train, with you being at the end of it.\n\n");
-		
-		outputText("You suddenly hear a muffled moan from behind. Someone is probably being penetrated at the back of the train.  You brace yourself for the imminent anal-fucking... and here it comes.  The dong is projected at full force into your " + buttDescript() + " then all the way inside your colon; you're protected only by the copious glaze of pre-cum its bearer had been applying.");
+		outputText("You almost instantly feel firm arms groping your [butt] and the tip of an erect dick knocking at the door of your colon.  It slowly massages your rectum, and you can't help but giggle a bit as you feel a tingle of pleasure passing through your body.  You prepare yourself for the crazy butt-fuck train, with you being at the end of it.\n\n");
+
+		outputText("You suddenly hear a muffled moan from behind. Someone is probably being penetrated at the back of the train.  You brace yourself for the imminent anal-fucking... and here it comes.  The dong is projected at full force into your [butt] then all the way inside your colon; you're protected only by the copious glaze of pre-cum its bearer had been applying.");
 		player.buttChange(5+rand(10),true,true,false);
-		outputText("  You are pushed face down to the floor, bumping your ass against your anal partner's crotch, impaling it further on that fat erect meat.  Hands roughly dig their fingers into the soft flesh of your cheeks as their owner gives you another mad, uncontrolled thrust, an avatar of the train of lust behind him.  Probably the force of thirty people butt-fucking into him was too much for him to bear, so he passes it on to you.  But unlike him, you don't have an asshole to reach and bury your " + cockDescript(x) + " into, so you are smashed on the floor again, and again, and again.  It hurts, yet it feels so... powerful, so strong.  There is only one dong pounding your " + assDescript() + ", yet it feels like you're being ass-fucked by thirty people at once.  Propelled by the might of thirty thrusts, the huge shaft is tearing its way inside your poor " + assholeDescript() + " and, needless to say, being the end of this line is probably the hardest butt-fuck you'll ever have.\n\n");
-		tentacleFapSpecial(place);		
-		outputText("You feel that towering rod grinding against the rough insides of your colon, the friction providing a shamefully amazing sensation of violation.  The large hands are gripping, pinching and groping your " + buttDescript() + " with ease and feverish lust, and your abused flesh feels every tingle, every prickle of it, bringing you to the edge every time.  You know you are being ferociously dominated by that cock, but the pleasure is too good for you to care.  The raw feelings eventually prove too much for your horny body, and you simply lay there in the dust, waiting for the incoming orgasm.  Eventually you feel an enormous spray of spooge being released in your insides.  Almost instantly, you start unloading thick ropes of jism at a steady rate.  Wallowing in a pool of dirt muddied with sexual juices like a worthless slut, you grind your " + buttDescript() + " against the cock harder, in order to milk every drop of semen coming out of it.  But your colon soon reaches its limits and spooge starts dribbling out in small spurts.");
+		outputText("  You are pushed face down to the floor, bumping your ass against your anal partner's crotch, impaling it further on that fat erect meat.  Hands roughly dig their fingers into the soft flesh of your cheeks as their owner gives you another mad, uncontrolled thrust, an avatar of the train of lust behind him.  Probably the force of thirty people butt-fucking into him was too much for him to bear, so he passes it on to you.  But unlike him, you don't have an asshole to reach and bury your " + cockDescript(x) + " into, so you are smashed on the floor again, and again, and again.  It hurts, yet it feels so... powerful, so strong.  There is only one dong pounding your [ass], yet it feels like you're being ass-fucked by thirty people at once.  Propelled by the might of thirty thrusts, the huge shaft is tearing its way inside your poor " + assholeDescript() + " and, needless to say, being the end of this line is probably the hardest butt-fuck you'll ever have.\n\n");
+		tentacleFapSpecial(place);
+		outputText("You feel that towering rod grinding against the rough insides of your colon, the friction providing a shamefully amazing sensation of violation.  The large hands are gripping, pinching and groping your [butt] with ease and feverish lust, and your abused flesh feels every tingle, every prickle of it, bringing you to the edge every time.  You know you are being ferociously dominated by that cock, but the pleasure is too good for you to care.  The raw feelings eventually prove too much for your horny body, and you simply lay there in the dust, waiting for the incoming orgasm.  Eventually you feel an enormous spray of spooge being released in your insides.  Almost instantly, you start unloading thick ropes of jism at a steady rate.  Wallowing in a pool of dirt muddied with sexual juices like a worthless slut, you grind your [butt] against the cock harder, in order to milk every drop of semen coming out of it.  But your colon soon reaches its limits and spooge starts dribbling out in small spurts.");
 		tentacleFapCum();
 		//[if player has vagina]
 		if(player.hasVagina()) {
@@ -392,7 +398,7 @@ private function fapResults(place:Number = 3):void {
 	if(place <= 1) {
 		outputText("You quickly stand back up and start dressing yourself.  Before you go, the cute little referee hands you a small box, her coy smile and nude body somehow awakening " + sMultiCockDesc() + " again. Ye Gods, it never ends.  \"<i>Here's a little something for being the winner of this session.  Hope you enjoy your prize.  Come and play again!</i>\"");
 		//You find [random item from the list: gro+, succubi's dream, large blue egg].
-		
+
 		var itype:ItemType= consumables.GROPLUS;
 		switch(rand(3)) {
 			case 0:
@@ -423,7 +429,7 @@ private function fapResults(place:Number = 3):void {
 		player.orgasm();
 		doNext(camp.returnToCampUseOneHour);
 	}
-	
+
 }
 
 //[SPECIAL: if player has an extra tentacle dick more than 40 inches long OR if the player has lost and has a unique tentacle dick, add this paragraph before the PC cums]
@@ -450,7 +456,7 @@ private function tentacleFapSpecial(place:Number):void {
 		}
 		//[if you lost]
 		else {
-			outputText("This is such an awkward position, moving your " + Appearance.cockNoun(CockTypesEnum.TENTACLE) + " backwards and blindly penetrating some herm girl you don't see.  But at least it's fair game; why should you be the only one on the receiving end?  You firmly lodge your sleek intruder inside the girl's love tunnel and start pushing, thrusting harder and deeper every time the butt-fuck wagon hits your " + assDescript() + ", as if you wanted to punish her for being part of your own rough penetration, and transmit some of the pure anal-induced energy from thirty people's cock-thrusts to her... you aren't disappointed.  As soon as your " + Appearance.cockNoun(CockTypesEnum.TENTACLE) + " starts rocking in and out of the herm's moist pussy, she lets out a huge, obscenely whorish scream of pleasure.  She waggles from one side to another and accelerates her butt-fucking and hole-filling pace, unable to control her sensations.  This disrupts the whole butt-fucking train, and everyone's ass and cock is affected to some extent; everyone's pleasure is increased because of your audacious looping retro-fuck initiative, and other loud, reluctant moans are heard.  You can't help but join them in this unholy orgy of hole-penetration.  The herm's repeated, irregular screams are covering everyone else's though, and the abundant flow of girl-squirt and pre-cum leaking out of your connected genitals tells you much about both your states of arousal.  It won't be long before you both come.\n\n");
+			outputText("This is such an awkward position, moving your " + Appearance.cockNoun(CockTypesEnum.TENTACLE) + " backwards and blindly penetrating some herm girl you don't see.  But at least it's fair game; why should you be the only one on the receiving end?  You firmly lodge your sleek intruder inside the girl's love tunnel and start pushing, thrusting harder and deeper every time the butt-fuck wagon hits your [ass], as if you wanted to punish her for being part of your own rough penetration, and transmit some of the pure anal-induced energy from thirty people's cock-thrusts to her... you aren't disappointed.  As soon as your " + Appearance.cockNoun(CockTypesEnum.TENTACLE) + " starts rocking in and out of the herm's moist pussy, she lets out a huge, obscenely whorish scream of pleasure.  She waggles from one side to another and accelerates her butt-fucking and hole-filling pace, unable to control her sensations.  This disrupts the whole butt-fucking train, and everyone's ass and cock is affected to some extent; everyone's pleasure is increased because of your audacious looping retro-fuck initiative, and other loud, reluctant moans are heard.  You can't help but join them in this unholy orgy of hole-penetration.  The herm's repeated, irregular screams are covering everyone else's though, and the abundant flow of girl-squirt and pre-cum leaking out of your connected genitals tells you much about both your states of arousal.  It won't be long before you both come.\n\n");
 		}
 	}
 }
