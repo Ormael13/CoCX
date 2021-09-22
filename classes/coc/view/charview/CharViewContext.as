@@ -96,7 +96,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
 
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
-					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
+					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
 					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
 					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
