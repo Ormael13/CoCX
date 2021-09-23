@@ -33,6 +33,11 @@ package classes.Items
 		
 		override public function get description():String {
 			var desc:String = _description;
+			//Size
+			desc += "\n\nSize: ";
+			if (perk == "Massive") desc += "(Massive)";
+			else if (perk == "Large") desc += "(Large)";
+			else if (perk == "Small") desc += "(Small)";
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value

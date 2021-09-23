@@ -742,7 +742,16 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's warehouse and connected to it granary located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("Some of your friends are currently sparring in the rings at the side of your [camp].\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
+			outputText("Some of your friends are currently sparring on ");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) outputText("massive");
+			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) outputText("large");
+			else outputText("small");
+			outputText(" ring at the side of your [camp].");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Due to large enough space even largest people living in [camp] can freely spar.");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" On one sides of it there is small stand to let others spectacle fight on the ring with more comofrt.");
+			outputText("\n\n");
+		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) {
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 8) outputText("Eight large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 7) outputText("Seven large arcane circles are");

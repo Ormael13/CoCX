@@ -5251,9 +5251,9 @@ public class PerkLib
 			ElementalContractRank16.requirePerk(ElementalContractRank15)
                     .requireWis(400)
                     .requireLevel(90);
-            StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
-                    .requireWis(400)
-                    .requireLevel(90);
+            //StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
+            //        .requireWis(400)
+            //        .requireLevel(90);
 			///Tier 16 Wisdom perks
 			ElementalContractRank17.requirePerk(ElementalContractRank16)
                     .requireWis(425)
@@ -5709,6 +5709,7 @@ public class PerkLib
             SoulWarrior.requirePerk(SoulPersonage)
                     .requireWis(60)
                     .requireLevel(18);
+            //2nd perk for flying swords slots
             //Tier 4
             SoulSprite.requirePerks(SoulWarrior, HclassHeavenTribulationSurvivor)
 					.requireWis(80)
@@ -5721,7 +5722,7 @@ public class PerkLib
             SoulScholar.requirePerk(SoulSprite)
                     .requireWis(100)
                     .requireLevel(30);
-            //Tier 6
+			//Tier 6
             SoulElder.requirePerk(SoulScholar)
                     .requireWis(120)
                     .requireLevel(36);

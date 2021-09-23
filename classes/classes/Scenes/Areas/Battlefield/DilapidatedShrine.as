@@ -28,14 +28,14 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("You decide to make a trip to the shrine. You enter the sacred ground going throu the vermillion gates and passing by guardian statues.\n\n");
 			if (shinshoku()) outputText("\"<i>Ohh that you again? Not mind me i'm just cleaning here.</i>\" After reaching the yard you hear again a voice and noticing an old person that greeted you returning to sweeping the shrine as if nothing happened.\n\n");
 			outputText("Reaching the main plaza you see four major sections located on each cardinal direction and also three smaller places located between the major one sections.\n\n");
-			outputText("\n\nWhat would you like to do in the shrine?");
+			outputText("What would you like to do in the shrine?");
 			mainmenu();
 		}
 		public function shrinemainmenu():void {
 			clearOutput();
 			outputText("You're at the large plaza with large statues situated on each cardinal direction. Behind each of them there is small buildings decorated with braided ropes with strips of paper and pair of smaller lion-dog statues on sides.\n\n");
 			outputText("On opposite side of entrance there is path leading to small building with many manuscripts stored. On left there are stairs that seems to lead to underground chamber and on the right you can see small garden area.\n\n");
-			outputText("\n\nWhat would you like to do in the shrine?");
+			outputText("What would you like to do in the shrine?");
 			mainmenu();
 		}
 		private function mainmenu():void {
@@ -85,13 +85,43 @@ import classes.GlobalFlags.kFLAGS;
 		
 		private function westSection():void {
 			clearOutput();
-			outputText("Standing inside the building located on west direction you see a statue in middle of it, which portrait hideous yet seemly mesmerizing being. Nearly each of it bodypart seems to come from different animal you have seen in this realm, yet all together seems to create harmonical whole despite all this mismatched parts. On it arms grows two sharp extensions, ");
-			outputText("that reminds mantis blade on it right arm and kamaitachi blade on it left, like an reaper scythes ready to be used at moment notice. It eyes seems to be only part that isn't misfitting looking suprisingly same, with a x shaped cross over them. At the base of the statue there is plate but due to partial rusty state of it the texts on it reads as 'E.e.ie.'. ");
-			outputText("Before it lays on the ground two medium sized plates, probably used to put on offering at times there was more visitors.\n\n");
+			outputText("Westward within the building, you see a statue in an open clearing. The towering figure portrays a hideously mesmerizing creature frozen in an aggressive pose as if it were watching you with scorn. Each limb comes from a different animal you have seen in this realm, yet all together seems to create a harmonical whole despite the chaotic ensemble.\n\n");
+			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis blade, while the right arm is a kamaitachi blade. The statue wields each arm, seemingly ready to make a move, yet almost inviting as if it wishes to guide you somewhere.\n\n");
+			outputText("Its eyes seem ordinarily human-like, with an x shaped cross for pupils.\n\n");
+			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
+			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
+			if (shinshoku()) {
+				outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps few chilly peppers would be enough...</i>\"\n\n");
+				outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
+			}
 			//outputText("\n\n");
 			menu();
-			addButtonDisabled(0, "???", "???");//offering button or some other function
+			if (player.hasItem(consumables.CHILLYP, 3)) addButton(0, "Offering", westSectionOffering);
+			else addButtonDisabled(0, "???", "???");
 			addButton(14, "Back", shrinemainmenu);
+		}
+		private function westSectionOffering():void {
+			clearOutput();
+			player.destroyItems(consumables.CHILLYP, 3);
+			outputText("\n\n");
+			switch(rand(5)) {
+				case 0:
+					inventory.takeItem(useables.E_ICHOR, westSection);
+					break;
+				case 1:
+					inventory.takeItem(consumables.NOCELIQ, westSection);
+					break;
+				case 2:
+					inventory.takeItem(consumables.SRMSEED, westSection);
+					break;
+				case 3:
+					inventory.takeItem(consumables.ENIGMANIUM, westSection);
+					break;
+				case 4:
+					inventory.takeItem(consumables.INFWINE, westSection);
+					break;
+			}
+			cheatTime(1/12);
 		}
 		
 		private function shrineShinshoku():void {
@@ -118,9 +148,11 @@ import classes.GlobalFlags.kFLAGS;
 		
 		private function southSection():void {
 			clearOutput();
-			outputText("Standing inside the building located on south direction you see a few statues in middle of it, with largest one portraiting being at peak of it power. Interesting how crafter capture traits of the being making it even statue to giving the same feeling when watching it. If you had to put it into words... you almsot can still feel that being 'killing intent'. ");
-			outputText("All surrounding it smaller ones figures looks like they all under some sort of berserker state and recklesly swinging their dual weapons around, each wielding different type of them.  At the base of the statue there is plate but due to partial rusty state of it the texts on it reads as 'Krat..'. ");
-			outputText("Before it lays on the ground medium sized plate, probably used to put on offering at times there was more visitors.\n\n");
+			outputText("Southward within the building, you see a group of statues in an open clearing. The largest one portrays a being, one of peak strength and power.\n\n");
+			outputText("It's magnificent, how crafter manages to capture traits of the being's power allows the statue to radiate awe as you gaze toward it. It's as if the figure is filled with the intent to slay and destroy anything that stands in its way.\n\n");
+			outputText("The surrounding statuettes wield weapons high. Each one carrying dual weapons of a different caliber. Axes, blades, warhammers, almost recklessly waving their weapons about.\n\n");
+			outputText("At the base of the largest statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out 'Krat..' within the text.\n\n");
+			outputText("Below the plaque lies an ornate wooden bowl, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
 			menu();
 			addButton(14, "Back", shrinemainmenu);
 		}
