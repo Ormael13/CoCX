@@ -2642,6 +2642,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.DISPLACER);
 		}
 
+		public function eldritchCocks():int { //How many eldritchCocks?
+			return countCocksOfType(CockTypesEnum.MINDBREAKER);
+		}
+
 		// Note: DogCocks/FoxCocks are functionally identical. They actually change back and forth depending on some
 		// of the PC's attributes, and this is recaluculated every hour spent at camp.
 		// As such, delineating between the two is kind of silly.
@@ -3752,6 +3756,7 @@ public class Creature extends Utils
 				case CockTypesEnum.CAVE_WYRM:
 				case CockTypesEnum.RED_PANDA:
 				case CockTypesEnum.PIG:
+				case CockTypesEnum.MINDBREAKER:
 				case CockTypesEnum.TENTACLE:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;

@@ -1915,6 +1915,10 @@ import classes.Items.*;
 					player.cocks[i].cockType = CockTypesEnum.DISPLACER;
 					player.cocks[i].knotMultiplier = 1.5;
 				}
+				else if(type < 90)
+				{
+					player.cocks[i].cockType = CockTypesEnum.MINDBREAKER;
+				}
 				else
 					player.cocks[i].cockType = CockTypesEnum.PIG;
 
