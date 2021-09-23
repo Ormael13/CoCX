@@ -1010,22 +1010,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
 					var nails:Number = 0;
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 5 + rand(11);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 5 + rand(11);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 5 + rand(11);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 5 + rand(11);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 5 + rand(11);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 5 + rand(11);
 					var metalpieces:Number = 0;
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
-					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
 					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
 					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
 					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
@@ -1036,10 +1027,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var energycore:Number = 0;
 					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) energycore += 1;
 					if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts)) {
-						if (nails > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 1, nails);
-						if (metalpieces > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 2, metalpieces);
-						if (mechanism > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 3, mechanism);
-						if (energycore > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 4, energycore);
+						if (nails > 0) {
+							if (player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts) + nails > 300) nails = 300 - player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
+							player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 1, nails);
+						}
+						if (metalpieces > 0) {
+							if (player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts) + metalpieces > 15) metalpieces = 15 - player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
+							player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 2, metalpieces);
+						}
+						if (mechanism > 0 && player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts) + mechanism < 4) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 3, mechanism);
+						if (energycore > 0 && player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) + energycore < 4) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 4, energycore);
 					}
 					else {
 						nails += 1;

@@ -261,6 +261,7 @@ public function part1TrollEncounterChallange():void {
 	addButton(2, "Speed", part1TrollEncounterChallangeSpeed);
 	addButton(3, "Intelligence", part1TrollEncounterChallangeIntelligence);
 	addButton(4, "Wisdom", part1TrollEncounterChallangeWisdom);
+	addButtonDisabled(7,"Take it Easy", "Let the troll have his fun. You know he wouldn't stand a chance against you anyway."+(flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] <= 30? " He seems to be growing quite fond of you. Perhaps he secretly enjoys watching you fail?":"")+"");
 }
 public function part1TrollEncounterChallangeStrength():void {
 	spriteSelect(SpriteDb.s_zenji);

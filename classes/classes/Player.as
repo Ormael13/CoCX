@@ -1199,6 +1199,15 @@ use namespace CoC;
 		{
 			return weaponFlyingSwordsName != "nothing" || hasPerk(PerkLib.GclassHeavenTribulationSurvivor);
 		}
+		//Flying swords related checks
+		public function canFlyOnFlyingSwords():Boolean
+		{
+			return weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Large Two" || weaponFlyingSwordsPerk == "Massive";
+		}
+		public function usingSingleFlyingSword():Boolean
+		{
+			return weaponFlyingSwordsPerk == "Small" || weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Massive";
+		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
@@ -14946,4 +14955,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

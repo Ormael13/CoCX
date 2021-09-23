@@ -104,20 +104,25 @@ import classes.GlobalFlags.kFLAGS;
 			clearOutput();
 			player.destroyItems(consumables.CHILLYP, 3);
 			outputText("\n\n");
-			switch(rand(5)) {
+			switch(rand(10)) {
 				case 0:
+				case 1:
 					inventory.takeItem(useables.E_ICHOR, westSection);
 					break;
-				case 1:
+				case 2:
+				case 3:
 					inventory.takeItem(consumables.NOCELIQ, westSection);
 					break;
-				case 2:
+				case 4:
+				case 5:
 					inventory.takeItem(consumables.SRMSEED, westSection);
 					break;
-				case 3:
+				case 6:
+				case 7:
 					inventory.takeItem(consumables.ENIGMANIUM, westSection);
 					break;
-				case 4:
+				case 8:
+				case 9:
 					inventory.takeItem(consumables.INFWINE, westSection);
 					break;
 			}

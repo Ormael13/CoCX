@@ -107,7 +107,8 @@ package classes.Scenes
 			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
 			outputText("-Fairy TF quest part that req. to gather pieces of Scepter would be bit easier with Phoukas dropping more often scepter pieces during gathering phase (actualy they will drop those pieces only then).\n");
 			outputText("-Dreams proc after reaching 50% of max libido or 40% of max lust instead of 50 libido or 40 lust.\n");
-			outputText("-All flying swords have chance to proc bleed status effect (10%) and have the same chance to deal crit damage as dueling swords. They also belong to one of 3 size groups: Small, Large, Massive. All of them can be used to attack but to fly on them it require to use large or massive ones.They can be used to attack (acting like range weapon - each attack cost 25/50/75 SF) or even fly on it (100/150 SF per turn of sustaining flight)\n");
+			outputText("-All flying swords have chance to proc bleed status effect (10%) and have the same chance to deal crit damage as dueling swords. They also belong to one of 3 size groups: Small, Large, Massive. All of them can be used to attack but to fly on them it require to use large or massive ones. Massive flying swords deal 50% more damage when attacking. ");
+			outputText("They can be used to attack (acting like range weapon - each attack cost 25/50/75 SF) or even fly on it (100/150 SF per turn of sustaining flight)\n");
 			outputText("-Added current cost of fly on f.sword or attack with it to combat subpage of stats.\n");
 			outputText("-Some of items from Kaiba have been 'repurposed' and now Dinah proudly sells them. And she change varies nearly each time pc start interactions with her so no need to wait whole day to refresh it. But she also likes to give unpredictable price 'discounts' so item player want may be in offer but cost very high sum of gems.\n");
 			outputText("-Luna meal would recover 2x less HP/mana but would restore 2x more fatigue. Her nurse option would heal only 10% max HP not 50% and lust gain would be 20% of max lust not 33.\n");
@@ -207,9 +208,9 @@ package classes.Scenes
 			outputText("-New flying sword: Scarlet Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal lightning damage instead of physical damage.\n");
 			outputText("-New flying sword: Ebon Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal darkness damage instead of physical damage.\n");
 			outputText("-New material: a vial of E-Ichor. Cost 500 gems. Could be gained from offering in one of shrines located in Dilapidated Shrine. Could be used for internal mutation.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New flying sword: Asauchi - buyable at Soul Equipment shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 32. It's classified as Massive flying sword. I have lowered by 5% chance to apply bleed effect and 15% lower base to deal crit damage. Soulforce cost of using it to fly or attack are lowered by 20%.\n");
+			outputText("-New flying sword: Sky Twins - buyable at Soul Equipment shop in He'Xin'Dao. Cost 120 spirit stones. Base atk is 12. It's classified as Large (set of 2) flying swords.\n");
+			outputText("-PC goblin daughters would leave less nails and metal plates each day. Also after few days of not taking stored spare parts by PC they stop adding more.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

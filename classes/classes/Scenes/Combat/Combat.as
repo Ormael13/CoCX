@@ -963,7 +963,7 @@ public class Combat extends BaseContent {
 		}
         if (!player.isFlying()) {
             if (player.canFly()) buttons.add("Take Flight", takeFlightWings).hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-			if (player.weaponFlyingSwordsName != "nothing" && player.weaponFlyingSwordsPerk == "Large") buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			if (player.weaponFlyingSwordsName != "nothing" && player.canFlyOnFlyingSwords()) buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
         }
 		if (player.isFlying()) {
@@ -6244,13 +6244,14 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
-		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment) && !monster.hasPerk(PerkLib.EnemyConstructType)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
     public function WeaponFlyingSwordsStatusProcs():void {
 		var bleed:Boolean = false;
         var bleedChance:int = 10;
 		if (player.weaponFlyingSwords == weaponsflyingswords.MOONLGT) bleedChance += 15;
+		if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) bleedChance -= 5;
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
         if (bleed) {
@@ -6259,10 +6260,10 @@ public class Combat extends BaseContent {
                 else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
             }
 			else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
-            if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
-            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
+            if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave"+(player.usingSingleFlyingSword()?"":"s")+" behind.");
+            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave"+(player.usingSingleFlyingSword()?"":"s")+" behind.");
         }
-		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) HPChange(Math.round(player.maxHP() * 0.01), false);
+		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment) && !monster.hasPerk(PerkLib.EnemyConstructType)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
 
 	public function ShieldsStatusProcs():void {
@@ -13747,23 +13748,26 @@ public class Combat extends BaseContent {
         else if (player.weaponFlyingSwordsAttack >= 101 && player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
         else if (player.weaponFlyingSwordsAttack >= 151 && player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
         else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+		if (player.weaponFlyingSwordsPerk == "Massive") damage *= 1.5;
 		//if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
 		//damage *= (1 + (0.01 * masteryArcheryLevel()));
         //Determine if critical hit!
         var crit:Boolean = false;
         var critChance:int = 25;
         critChance += combatPhysicalCritical();
-        if (rand(100) < critChance) {
+		if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) critChance -= 15;
+		if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
         }
         damage = Math.round(damage);
-		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards " + monster.a + monster.short + ". It slash target leaving minor wound. ");
+		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards " + monster.a + monster.short + ". "+(player.usingSingleFlyingSword()?"It":"They")+" slash target leaving minor wound"+(player.usingSingleFlyingSword()?"":"s")+". ");
 		if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) doFireDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) doIceDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) doLightingDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.E_HALFM) doDarknessDamage(damage, true, true);
 		else doDamage(damage, true, true);
+		if (player.weaponFlyingSwordsPerk == "Large Two") doDamage(damage, true, true);
         if (crit) outputText(" <b>*Critical Hit!*</b>");
 		WeaponFlyingSwordsStatusProcs();
 		outputText("\n\n");
@@ -14695,6 +14699,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.weaponFlyingSwordsPerk == "Large") fsac *= 2;
 		if (player.weaponFlyingSwordsPerk == "Massive") fsac *= 3;
+		if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.8;
 		return fsac;
 	}
 
@@ -14707,6 +14712,7 @@ public class Combat extends BaseContent {
 			if (player.perkv1(PerkLib.Dantain) > 2) fsuc -= 20;
 		}
 		if (player.weaponFlyingSwordsPerk == "Massive") fsuc *= 1.5;
+		if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsuc *= 0.8;
 		return fsuc;
 	}
 
