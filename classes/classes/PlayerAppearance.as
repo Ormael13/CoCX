@@ -848,6 +848,9 @@ public class PlayerAppearance extends BaseContent {
 						if (player.isNaga()) pussyDesc += "as your hot spot is now way further inside your deep canal, requiring quite a longer member to reach";
 								pussyDesc += ". Inside you have a ";
 						break;
+					case VaginaClass.MINDBREAKER:
+						pussyDesc += " constantly drools green slime, ensuring any cock that parts your infested cunt are sufficiently lubricated and ready to impregnate you. Your eldritch lips hides a ";
+						break;
 					default:
 						pussyDesc += " hides a ";
 						break;

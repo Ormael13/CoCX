@@ -221,6 +221,16 @@ public class Eyes extends BodyPart {
 		name:"dead",
 		appearanceDesc: "Your eyes look dead, but the pupils glow in the dark with a [eyecolor]."
 	});
+	public static const MINDBREAKER: int = 40;
+	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
+		name:"eldritch",
+		appearanceDesc: "In your hair nests many [eyecolor] eyes, granting you a nearly full peripheral vision. The biggest eye rests on your forehead. It is from this eye that you use your formidable mental powers."
+	});
+	public static const MINDBREAKERMALE: int = 41;
+	EnumValue.add(Types, MINDBREAKERMALE, "MINDBREAKERMALE", {
+		name:"eldritch male",
+		appearanceDesc: "You have three two [eyecolor], predatory eyes at the front of your head, giving you full sight and perfect perception of what’s in front of you. The eye along your forehead is considerably larger, it is where you channel your formidable mental powers."
+	});
 
 	public var count:int;
 	public var colour:String = "brown";
