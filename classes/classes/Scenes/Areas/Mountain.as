@@ -148,6 +148,7 @@ public class Mountain extends BaseContent
 						mods:[SceneLib.exploration.furriteMod]
 					},{
 						name:"lacta_bovina",
+						chance:0.7,
 						call:lactabovinaScene.lactaBovinaInto,
 						mods:[SceneLib.exploration.furriteMod]
 					},{

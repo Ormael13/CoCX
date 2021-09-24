@@ -1280,8 +1280,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var PAM2:Number = 1;
 		PAM2 += combat.PASPAS();
-		damage += player.str;
-		damage += scalingBonusStrength() * 0.25;
+		damage += player.str * 1.2;
+		damage += scalingBonusStrength() * 0.4;
+		damage += player.spe * 1.2;
+		damage += scalingBonusSpeed() * 0.4
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;

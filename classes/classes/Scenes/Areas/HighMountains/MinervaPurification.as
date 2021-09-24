@@ -1224,7 +1224,7 @@ public class MinervaPurification extends BaseContent
 			}
 			//Romanced:
 			else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face. \"<i>I hope you'll come back soon, I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
-			if (rand(100) <= player.totalFertility()) {
+			if (rand(100) <= player.totalFertility() && player.pregnancyIncubation == 0) {
 				player.knockUpForce(PregnancyStore.PREGNANCY_MINERVA, PregnancyStore.INCUBATION_MINERVA);
 			}
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;

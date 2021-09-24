@@ -1452,6 +1452,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("M.G.S. bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - M.G.S. bracer");
 		player.removeKeyItem("Powboy");
+		player.statStore.replaceBuffObject({'str.mult':1,'sens':+15},'Power bracer',{text:'M.G.S. bracer'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
 		else doNext(camp.returnToCampUseTwelveHours);
@@ -1465,6 +1466,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Powboy", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Powboy");
 		player.removeKeyItem("Power bracer");
+		player.statStore.replaceBuffObject({'str.mult':0.75,'sens':+10},'Power bracer',{text:'Powboy'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
 		else doNext(camp.returnToCampUseEightHours);
@@ -1477,6 +1479,7 @@ public class Lumi extends BaseContent {
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Power bracer is ready.\n\n");
 		player.createKeyItem("Power bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Power bracer");
+		player.statStore.replaceBuffObject({'str.mult':0.5,'sens':+5},'Power bracer',{text:'Power bracer'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
 		else doNext(camp.returnToCampUseFourHours);
@@ -1877,4 +1880,4 @@ public class Lumi extends BaseContent {
 		else doNext(camp.returnToCampUseFourHours);
 	}*/
 }
-}
+}

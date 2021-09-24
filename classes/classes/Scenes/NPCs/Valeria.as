@@ -682,15 +682,15 @@ private function valeriaGooRapeII():void {
 	//v4 = tit fill?
 	player.createStatusEffect(StatusEffects.GooStuffed, 10 + rand(300), 0, 0, 0);
 	player.buttKnockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
-	if (player.hasVagina()) {
+	if (player.hasVagina() && player.pregnancyIncubation == 0) {
 		player.changeStatusValue(StatusEffects.GooStuffed, 3, 1);
 		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	}
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		if(player.balls > 0) player.changeStatusValue(StatusEffects.GooStuffed,2,2);
 		else player.changeStatusValue(StatusEffects.GooStuffed,2,1);
 	}
-	if(player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue(StatusEffects.GooStuffed,4,1);
+	if (player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue(StatusEffects.GooStuffed,4,1);
 	cleanupAfterCombat();
 }
 
