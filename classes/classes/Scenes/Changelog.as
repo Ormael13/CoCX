@@ -28,10 +28,11 @@ package classes.Scenes
 		}
 		private function Changelog37():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8s:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8s (Venom system changes, Grey Mage changes, Elemental Conjurer changes (part 1), 3 new prestige jobs (Arch-priest, Necromancer, Bindmaster), 10th to 12th Soul Cultivation stages, Heaven Tribulation events, 3 new slots (flying sword and 2x misc acc), new spells/soulskils (white, black, grey, blood), Ashlands and new place, Bee Hive dungeon. Wood Elves, Evangeline changes and many more...):</b>\n\n");
 			outputText("-Killing true demon will count now toward counter of true demons killed not imps (sadly it won't retroactively move all demons kills from imps count kills thou).\n");
 			outputText("-Teleporting Circle to move between each of River Dungeon Floors been instaled by... someone. It still req. to beat each floor boss/es to open teleport option to deeper floors but after that it will make easier to travel deeper without need to go thro all previous floors. Well some still may want travel previous floors for some reason but that up for them to skip use of teleport for faster travel.\n");
 			outputText("-On difficulty below Nightmare there will be no penalty for having too high wrath like unable to cast spells or m.specials. Also penalties for internal mutation would be reduced by 5 on Hard and by 10 on Normal.\n");
+			outputText("-Flames/Icicles of Love and Storm of Sisterhood/Night of Brotherhood soulskills been slight changed. Their are considered (Rankless) instead of (Basic Rank), they not req. any cultivation perk to be bought (that mean they on first stall of golem merchant now). Due to reduction of req. their power been decreased, less lust/wrath used and cooldown decreased to 1 turn.\n");
 			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends are saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
 			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
 			outputText("-Fairy TF quest part that req. to gather pieces of Scepter would be bit easier with Phoukas dropping more often scepter pieces during gathering phase (actualy they will drop those pieces only then).\n");
@@ -49,7 +50,7 @@ package classes.Scenes
 			outputText("-Each use of venom to apply passive effect on arrows or spells would now increase a bit venom use counter. Maximum venom pool increase from perks or bodypart has been boosted. Refill speed was increased so without any other perks having body part that generate venom/web it would take around 2 days to refill fully (calculated based on new increased max venom values).\n");
 			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
 			outputText("-Added in combat slow venom recharge.\n");
-			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
+			outputText("-Lumi menu been bit changed with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
 			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting. Also helped with internal mutation system changes.\n");
 			outputText("-Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
 			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpected help in form of evolved twins for attacks and/or defense.\n");
@@ -90,18 +91,19 @@ package classes.Scenes
 			outputText("-Clearing up Bee Hive would add new follower to camp: Bee that goes by the name Tifa.\n");
 			outputText("-Staff Channeling perk changes: Allows to attack when flying without need to have aerial combat perk. In all case it apply (having perk and matching (partial) staff) melee attack would be replaced with mana/elemental bolt attack.\n");
 			outputText("-Buttons for Use Item and Next/Previous in menu when there is no place for item in inv was switched.\n");
+			outputText("-PC goblin daughters would leave less nails and metal plates each day. Also after few days of not taking stored spare parts by PC they stop adding more. System that check if they leave been revamped now and would include some protection so even with least amount of daughters needed to proc that event each morning there will be 25% chance that will rise up to 100% with 100+ daughters.\n");
+			outputText("-Lumi can now buy metal plates from PC (at 20% of the price). She also can enhance black ink into abyssal ink (this one was undocumented change likely).\n");
+			outputText("-Zenji encounters before lover/follower path would be decided would have another option for challange (for those that have high stats but still want to 'lose on purpose' of getting Zenji love them aka getting Lover Zenji). It even come with 5 midscene variants and one or two silly mode parts.\n");
+			outputText("-Some of cases when new 'pregnancy' been forcefully replacing existing been changed to only happen when pc is not pregnant. Included/affected enemies or npc's: Zenji, Nightmare rape event (Celess), Unicorn sex (Celess), Valeria (her stuffing PC holes with goo), Infected Hellhound stuffing PC with worms\n");
+			outputText("-Numb Rocks cost increased from 15 to 75 gems. Aside current effect they gained new effect: to decrease up to 24 hours of Heat or/and Rut duration. Disfunction effect can't trigger anymore if pc is in heat/rut.\n");
+			outputText("-Charging move now scale on both str and spe and both scalings are pretty high due to move having cooldown. Now it should be packing similar or bit more punch than base melee attacks.\n");
+			//7 page of 11
+			outputText("-Evangeline can change Abyssal Ink to it grey/white variants (similary like for scylla ink it's connected to female/herm/male varaint of that tf item). Cost and req. additional items are the same as for black ink.\n");
 			outputText("-Zetta refactored/renovated whole way transformations and metamorph are handle under the hood steamlining both systems. IT'S MASSIVE WORK so be kind to Zetta for that long and painful work done.\n");
 			outputText("-Dyes not working on permament races. (by Liadri)\n");
 			outputText("-Jtex many code corrections.\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
 			outputText("-Lia code changes/corrections.\n");
-			outputText("-PC goblin daughters would leave less nails and metal plates each day. Also after few days of not taking stored spare parts by PC they stop adding more. System that check if they leave been revamped now and would include some protection so even with least amount of daughters needed to proc that event each morning there will be 25% chance that will rise up to 100% with 100+ daughters.\n");
-			outputText("-Lumi can now buy metal plates from PC (at 20% of the price). She also can enhance black ink into abyssal ink (this one was undocumented change likely).\n");
-			outputText("-Zenji encounters before lover/follower path would be decided would have another option for challange (for those that have high stats but still want to 'lose on purpose' of getting Zenji love them aka getting Lover Zenji). It even come with 5 midscene variants and one or two silly mode parts.\n");
-			outputText("-Some of cases when new 'pregnancy' been forcefully replacing existing been changed to only happen when pc is not pregnant. Included/affected enemies or npc's: Zenji, Nightmare rape event (Celess), Unicorn sex (Celess), Valeria (her stuffing PC holes with goo), Infected Hellhound stuffing PC with worms\n");
-			outputText("-Numb Rocks cost increased from 15 to 25 gems. Aside current effect they gained new effect: to decrease up to 24 hours of Heat or/and Rut duration.\n");
-			outputText("-Charging move now scale on both str and spe and both scalings are pretty high due to move having cooldown. Now it should be packing similar or bit more punch than base melee attacks.\n");
-			outputText("-Evangeline can change Abyssal Ink to it grey/white variants (similary like for scylla ink it's connected to female/herm/male varaint of that tf item). Cost and req. additional items are the same as for black ink.\n");
 			//outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -115,10 +117,10 @@ package classes.Scenes
 			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
 			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
-			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks gfiving Dodge error msg, still more than a few TF items ignoring perm TF's ");
-			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural emans (wings), Fera first halloween event not triggering if pc had permed ");
-			outputText("one of two fera perks form 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
-			outputText("been displayed as default shield in chara viewer, goblin power breacer buff not been applied after crafting\n");/*ostatni punkt changelogu
+			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks giving Dodge error msg, still more than a few TF items ignoring perm TF's ");
+			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural means (wings), Fera first halloween event not triggering if pc had permed ");
+			outputText("one of two fera perks from 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
+			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -335,7 +337,7 @@ package classes.Scenes
 		}
 		private function Changelog36():void {
 			clearOutput();
-			outputText("(Part 1/2) <b>Version 0.8s:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8s (Venom system changes, Grey Mage changes, Elemental Conjurer changes (part 1), 3 new prestige jobs (Arch-priest, Necromancer, Bindmaster), 10th to 12th Soul Cultivation stages, Heaven Tribulation events, 3 new slots (flying sword and 2x misc acc), new spells/soulskils (white, black, grey, blood), Ashlands and new place, Bee Hive dungeon. Wood Elves, Evangeline changes and many more...):</b>\n\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Flying Sword Path. Req. Job: Soul Cultivator perk. Effect: Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Soaring Blades. Req. Dantain and Flying Sword Path perks. Effect: Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.\n");
 			outputText("-New tier 0 misc lvl-up perk: Venomous Adipose Tissue. Req. 10+ tou and having 100 points in venom/web pool. Effect: Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)\n");
@@ -411,6 +413,8 @@ package classes.Scenes
 			outputText("-New flying sword: Ebon Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal darkness damage instead of physical damage.\n");
 			outputText("-New flying sword: Asauchi - buyable at Soul Equipment shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 32. It's classified as Massive flying sword. I have lowered by 5% chance to apply bleed effect and 15% lower base to deal crit damage. Soulforce cost of using it to fly or attack are lowered by 20%.\n");
 			outputText("-New flying sword: Sky Twins - buyable at Soul Equipment shop in He'Xin'Dao. Cost 120 spirit stones. Base atk is 12. It's classified as Large (set of 2) flying swords.\n");
+			outputText("-New misc accesory: Atlatl - buyable at weapon shop in Tel'Adre. Cost 800 gems. Increase accuracy of thrown range weapons by 25% and their damage by 25%.\n");
+			outputText("-New misc accesory: Snowboard - buyable at Yu shop. Cost 400 gems. Increase the odds of escaping in glacial rift (Due to the snow and blizzards hindering conventional escape using the run option will be 50% less effective in glacial rift from now on. The snowboard offset this penalty).\n");
 			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
 			outputText("-New material: a vial of E-Ichor. Cost 500 gems. Could be gained from offering in one of shrines located in Dilapidated Shrine. Could be used for internal mutation.\n");
 			outputText("-New Area: Ashlands. Exploring caves allows now to find it (have similar lvl range for enemies as tundra and is much warmer place too). Exploring Ashlands leads to finding (Outer) Vulcanic Crag - it have enemies with level range like (Outer) Glacial Rift ones.\n");
@@ -438,7 +442,6 @@ package classes.Scenes
 			outputText("-Battleshield perk tier been decreased from 7th to 3rd. Req. intelligence was halfed.\n");
 			outputText("-Depravatio, Element of Corruption and Puritas, Element of Purity are worth each 960 gems and effect changed from: x1,6 spellpower to +60% and then x1,6 spellpower. Ascensus, Element of Ascension is worth now 2400 gems and effects changed from: x1,8x spellpower to +150% spellpower and then x2,5 spellpower.\n");
 			outputText("-Fasting Pill can be bought by non cultivator PC's too. But it effectivness is now 2x lower and duration 3 times shorter.\n");
-			outputText("-Flames/Icicles of Love and Storm of Sisterhood/Night of Brotherhood soulskills been slight changed. Their are considered (Rankless) instead of (Basic Rank), they not req. any cultivation perk to be bought (that mean they on first stall of golem merchant now). Due to reduction of req. their power been decreased, less lust/wrath used and cooldown decreased to 1 turn.\n");
 			menu();
 			addButton(0, "Next", Changelog35);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

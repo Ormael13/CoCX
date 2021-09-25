@@ -53,7 +53,7 @@ public class Lumi extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(9, "GoblinMech", lumiGarageRetry);
 		}
 		else addButton(7, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
-		addButton(9, "SellMats", lumiSell);
+		addButton(10, "SellMats", lumiSell);
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
 	

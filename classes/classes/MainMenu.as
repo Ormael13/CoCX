@@ -88,17 +88,6 @@ public class MainMenu extends BaseContent {
 		// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
 		// Fixed. No more markdown. :)
 		outputText("\n(Formerly Unnamed Text Game)");
-		//Brief credits
-		outputText("\n\n<b>Game Mod by:</b> Ormael"); //Mod Creator
-		outputText("\n\n<b>Open-source contributions by:</b> \n"); //Mod Creator
-		outputText("aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, Kitteh6660, et al"); //Contributions
-		outputText("\n\n<b>Edited by:</b> Ashi, SoS, Prisoner416, Zeikfried, et al"); //Edited By
-		outputText("\n\n<b>Created by:</b> Fenoxo\n"); //The Original Creator
-		//Github for Mod
-		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions'>https://github.com/Ormael7/Corruption-of-Champions</a></u>");
-		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions/issues'>https://github.com/Ormael7/Corruption-of-Champions/issues</a></u>");
-		//Github for Original
-		outputText("\n\n<b>Original Game Source Code:</b> <u><a href='https://github.com/OXOIndustries/Corruption-of-Champions'>https://github.com/OXOIndustries/Corruption-of-Champions</a></u>");
 		//Disclaimer
 		outputText("\n\n<b><u>DISCLAIMER</u></b>");
 		outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
@@ -106,7 +95,6 @@ public class MainMenu extends BaseContent {
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
 		outputText("\n<b>Fall of Eden</b> is worth a try too ^^");
-
 		if (debug)
 			outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
 		if (flags[kFLAGS.SHOW_SPRITES_FLAG])
@@ -123,11 +111,23 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
 			outputText("\n\n<b>It's Halloween!</b>");
+		if (SceneLib.evangelineFollower.isEvangelineBirthday())
+			outputText("\n\n<b>It's Milady Evangeline Birthday Month!</b>");
 		if (SceneLib.alvinaFollower.isAlvinaBirthday())
 			outputText("\n\n<b>It's our lady and saviour Alvina Shadowmantle Birthday Month!</b>");
 		if (SceneLib.helFollower.isHeliaBirthday())
 			outputText("\n\n<b>It's Helia's Birthday Month!</b>");
-
+		//Brief credits
+		outputText("\n\n<b>Game Mod by:</b> Ormael"); //Mod Creator
+		outputText("\n\n<b>Open-source contributions by:</b> \n"); //Mod Creator
+		outputText("aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, Kitteh6660, et al"); //Contributions
+		outputText("\n\n<b>Edited by:</b> Ashi, SoS, Prisoner416, Zeikfried, et al"); //Edited By
+		outputText("\n\n<b>Created by:</b> Fenoxo\n"); //The Original Creator
+		//Github for Mod
+		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions'>https://github.com/Ormael7/Corruption-of-Champions</a></u>");
+		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions/issues'>https://github.com/Ormael7/Corruption-of-Champions/issues</a></u>");
+		//Github for Original
+		outputText("\n\n<b>Original Game Source Code:</b> <u><a href='https://github.com/OXOIndustries/Corruption-of-Champions'>https://github.com/OXOIndustries/Corruption-of-Champions</a></u>");
 	}
 
 	//------------

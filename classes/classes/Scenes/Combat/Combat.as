@@ -2752,6 +2752,7 @@ public class Combat extends BaseContent {
         var taccmod:Number = 0;
 		taccmod += arrowsAccuracy();
 		taccmod += Math.round((masteryThrowingLevel() - 1) / 2);
+		if (player.miscjewelryName == "Atlatl" || player.miscjewelryName2 == "Atlatl") taccmod += 50;
         return taccmod;
     }
 
@@ -3437,6 +3438,7 @@ public class Combat extends BaseContent {
                     else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
                     else damage = Math.round(damage * 1.4);
                 }
+				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
                 damage *= (1 + (0.01 * masteryThrowingLevel()));
                 //Determine if critical hit!
                 var crit:Boolean = false;
@@ -3567,6 +3569,7 @@ public class Combat extends BaseContent {
                 else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
             }
+			if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
 			damage *= (1 + (0.01 * masteryThrowingLevel()));
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if (damage == 0) {

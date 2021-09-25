@@ -9,7 +9,7 @@ package classes.Items.Consumables
 	 */
 	public class NumbRocks extends Consumable 
 	{
-		private static const ITEM_VALUE:int = 25;
+		private static const ITEM_VALUE:int = 75;
 		
 		public function NumbRocks() 
 		{
@@ -43,7 +43,7 @@ package classes.Items.Consumables
 					}
 				}
 			}
-			if (rand(5) == 0) {
+			if (rand(5) == 0 && !player.inHeat && !player.inRut) {
 				if (!player.hasStatusEffect(StatusEffects.Dysfunction)) {
 					outputText("\n\nUnfortunately, the skin of ");
 					if (player.cockTotal() > 0) {
