@@ -181,6 +181,7 @@ public class MainMenu extends BaseContent {
 		outputText("<ul>");
         outputText("<li> Dasutin (Background Images)</li>");
 		outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
+		outputText("<li> Jtecx (Menu Reworks - PerkSimplified, MutationsDB, InvMgmt(Mobile), FastLvl, SFMenu, ElemMenu)</li>");
 		outputText("</ul>");
 		outputText("<b>Supplementary Events:</b>");
 		outputText("<ul>");
