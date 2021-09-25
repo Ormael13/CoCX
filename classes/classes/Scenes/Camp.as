@@ -2385,8 +2385,14 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		else addButton(0, "Create", CreateClone);
-		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
-		else addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
+		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) {
+			addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
+			
+		}
+		else {
+			addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
+			//addButtonDisabled(2, "Training", "Req. fully formed clone.");
+		}
 		addButton(14, "Back", campMiscActions);
 	}
 	private function CreateClone():void {
@@ -2472,14 +2478,17 @@ public class Camp extends NPCAwareContent{
 		else addButton(8, "Earth", CloneContemplateDaoSet, 19);
 		if (player.statusEffectv1(StatusEffects.PCClone) == 20) addButtonDisabled(9, "Acid", "Your clone is currently contemplating this Dao.");
 		else addButton(9, "Acid", CloneContemplateDaoSet, 20);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 11) addButtonDisabled(13, "None", "Your clone is currently not contemplating any Dao.");
-		else addButton(13, "None", CloneContemplateDaoSet, 0);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 10) addButtonDisabled(13, "None", "Your clone is currently not contemplating any Dao.");
+		else addButton(13, "None", CloneContemplateDaoSet, 10);
 		addButton(14, "Back", VisitClone);
 	}
 	private function CloneContemplateDaoSet(newdao:Number):void {
 		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone);
 		player.addStatusValue(StatusEffects.PCClone,1,(newdao-olddao));
 		doNext(CloneContemplateDao);
+	}
+	private function CloneTrainWaponMastery():void {
+		
 	}
 
 	private function DummyTraining():void {
@@ -4965,7 +4974,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
 			clearOutput();
 			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end. Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
@@ -5075,7 +5084,7 @@ public function rebirthFromBadEnd():void {
 			player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
 			if (player.ascensionPerkPoints > 0) {
 				outputText("\n\nYou'll be redirected to the Ascension menu to use your refunded points, then you can either go back to your current game or reincarnate.");
-				doNext(CoC.instance.charCreation.migrationAscension);
+				doNext(CoC.instance.charCreation.updateAscension);
 			} else {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
@@ -5089,7 +5098,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Text.");

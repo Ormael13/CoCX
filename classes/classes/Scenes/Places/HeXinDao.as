@@ -569,7 +569,7 @@ public class HeXinDao extends BaseContent
         addButton(3, "Shelf 3", soulequipmentshelf3).hint("Armors");
         addButton(6, "Shelf 4", soulequipmentshelf4).hint("Flying Swords");
         addButton(7, "Shelf 5", soulequipmentshelf5).hint("Consumables");
-        addButton(8, "Shelf 6", soulequipmentshelf5).hint("Misc");
+        addButton(8, "Shelf 6", soulequipmentshelf6).hint("Misc");
 		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
@@ -628,6 +628,8 @@ public class HeXinDao extends BaseContent
 		addButton(2, weaponsflyingswords.B_HALFM.shortName, weaponBuy4, weaponsflyingswords.B_HALFM);
 		addButton(3, weaponsflyingswords.W_HALFM.shortName, weaponBuy4, weaponsflyingswords.W_HALFM);
 		addButton(4, weaponsflyingswords.MOONLGT.shortName, weaponBuy4, weaponsflyingswords.MOONLGT);
+		addButton(5, weaponsflyingswords.S_TWINS.shortName, weaponBuy4, weaponsflyingswords.S_TWINS);
+		addButton(10, weaponsflyingswords.ASAUCHI.shortName, weaponBuy4, weaponsflyingswords.ASAUCHI);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf5():void {

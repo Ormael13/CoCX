@@ -9,7 +9,7 @@ package classes.Items.Consumables
 	 */
 	public class NumbRocks extends Consumable 
 	{
-		private static const ITEM_VALUE:int = 15;
+		private static const ITEM_VALUE:int = 75;
 		
 		public function NumbRocks() 
 		{
@@ -26,7 +26,24 @@ package classes.Items.Consumables
 				outputText("\n\nThe numbness spreads through your body, bringing with it a sense of calm that seems to muffle your sexual urges.");
 				player.lust -= 20 + rand(40);
 			}
-			if (rand(5) == 0) {
+			if (player.inHeat || player.inRut) {
+				outputText("\n\nAs the fizzing of the candy slowly dissipates, you can feel the effects of your carnal desires begin to fade as well.");
+				if (player.hasStatusEffect(StatusEffects.Heat)) {
+					if (player.statusEffectv3(StatusEffects.Heat) > 24) player.addStatusValue(StatusEffects.Heat, 3, -24);
+					else {
+						var heatR:Number = player.statusEffectv3(StatusEffects.Heat);
+						player.addStatusValue(StatusEffects.Heat, 3, -(heatR-1));
+					}
+				}
+				if (player.hasStatusEffect(StatusEffects.Rut)) {
+					if (player.statusEffectv3(StatusEffects.Rut) > 24) player.addStatusValue(StatusEffects.Rut, 3, -24);
+					else {
+						var rutR:Number = player.statusEffectv3(StatusEffects.Rut);
+						player.addStatusValue(StatusEffects.Rut, 3, -(rutR-1));
+					}
+				}
+			}
+			if (rand(5) == 0 && !player.inHeat && !player.inRut) {
 				if (!player.hasStatusEffect(StatusEffects.Dysfunction)) {
 					outputText("\n\nUnfortunately, the skin of ");
 					if (player.cockTotal() > 0) {

@@ -36,6 +36,7 @@ package classes.Items
 			//Size
 			desc += "\n\nSize: ";
 			if (perk == "Massive") desc += "(Massive)";
+			else if (perk == "Large Two") desc += "(Large (set of 2))";
 			else if (perk == "Large") desc += "(Large)";
 			else if (perk == "Small") desc += "(Small)";
 			//Attack

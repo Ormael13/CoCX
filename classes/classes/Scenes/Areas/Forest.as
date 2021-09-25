@@ -334,7 +334,7 @@ use namespace CoC;
 				name: "celess-nightmare",
 				call: nightmareScene.nightmareIntro,
 				when: function():Boolean {
-					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1;
+					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && player.pregnancyIncubation == 0;
 				}
 			},/*{ // [INTERMOD:8chan]
 			 name: "dullahan",
