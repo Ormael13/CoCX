@@ -246,9 +246,10 @@ public final class ConsumableLib extends BaseContent
 		public const W_STICK:WingStick        = new WingStick();
 		//Aqua Seed - prawdopodobnie nazwa dla Siren TF ; Bubble Lemonade - nazwa dla Dark Slime TF
 		//TRANSFORMATIVE ITEMS
-		public const ABYSSIN:SimpleConsumable = mk("AbyssIn", "AbyssalInk", "a vial of abyssal ink", 10, "Pitch black ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.krakenInk, 0));
+		public const ABYSSIN:SimpleConsumable = mk("AbyssIn", "AbyssalInk", "a vial of abyssal ink", 20, "Black abyssal ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.krakenInk, 0));
+		public const ABYSGIN:SimpleConsumable = mk("AbysGIn", "AbyssalGreyInk", "a vial of grey abyssal ink", 40, "Grey abyssal ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.krakenInk, 1));
+		public const ABYSWIN:SimpleConsumable = mk("AbysWIn", "AbyssalWhiteInk", "a vial of white abyssal ink", 60, "White abyssal ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.krakenInk, 2));
 		public const ALICORN:AbstractEquinum  = new AbstractEquinum(2, "Alicorn", "Alicornum", "a vial of Alicornum", 200, "This is a long flared vial with a small label that reads, \"<i>Alicornum</i>\".  It is likely this potion is tied to alicorns in some way.");
-		public const ENIGMANIUM:Enigmanium    = new Enigmanium();
 		public const AQUSEED:SimpleConsumable = mk("AquSeed", "AquaSeed", "an aqua seed", 20, "This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.", curry(m.goldenSeed, 0));
 		public const B_GOSSR:SimpleConsumable = mk("B.Gossr", "B.Gossr", "a bundle of black, gossamer webbing", 6, "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?", curry(m.sweetGossamer, 1));
 		public const BAYRLEA:SimpleConsumable = mk("BayrLea", "Bayr leaf", "a Bayr leaf", 6, "This small leaf shaped like a bear paw can be made into a tea or used as a seasoning.", m.bayrleaf);
@@ -270,6 +271,7 @@ public final class ConsumableLib extends BaseContent
 		public const DRYTENT:SimpleConsumable = mk("DryTent", "DryTent", "a shriveled tentacle", 6, "A dried tentacle from one of the lake anemones.  It's probably edible, but the stingers are still a little active.", m.shriveledTentacle);
 		public const ECTOPLS:SimpleConsumable = mk("EctoPls", "EctoPls", "a bottle of ectoplasm", 6, "The green-tinted, hardly corporeal substance flows like a liquid inside its container. It makes you feel... uncomfortable, as you observe it.", curry(m.ectoplasm, 0));
 		public const ELFEARS:SimpleConsumable = mk("ElfEars", "ElfEars", "a Fae ear shaped plant", 6, "A plant that looks like a pointed Fae ear. Upon further inspection, the plant is very delicate and seems to radiate some sort of magical energy.", m.elfears);
+		public const ENIGMANIUM:Enigmanium    = new Enigmanium();
 		public const EQUINUM:AbstractEquinum  = new AbstractEquinum(0, "Equinum", "Equinum", "a vial of Equinum", 6, "This is a long flared vial with a small label that reads, \"<i>Equinum</i>\".  It is likely this potion is tied to horses in some way.");
 		public const EYEDROP:SimpleConsumable = mk("EyeDrop", "EyeDrop", "a bottle of eye drops", 50, "A bottle of medicinal eye drops for when a person has sight issues. May have strange effects on offworlders.", curry(m.eyeDrops, 0));
 		public const F_TEAR:SimpleConsumable  = mk("F.Tear", "FafnirTear", "a Fafnir Tear", 15, "This beautiful flower only grows in the snow. It somehow digs its way and survives even in the harsh climate of the rift.", m.FafnirTear);

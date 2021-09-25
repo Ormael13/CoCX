@@ -1580,9 +1580,9 @@ import classes.StatusEffects;
 			addButtonDisabled(0, "Floor 1", "You're currently at Floor 1.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(1, "Floor 2", teleportToFloor2);
 			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
 			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(4, "Floor 4", teleportToFloor4);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(4, "Floor 4", teleportToFloor4);
 			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");*/
 			addButton(14, "Back", roomA01);
 		}
@@ -1590,8 +1590,8 @@ import classes.StatusEffects;
 			menu();
 			addButton(0, "Floor 1", teleportToFloor1);
 			addButtonDisabled(1, "Floor 2", "You're currently at Floor 2.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
-			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");
+			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");*/
 			//floor 4
 			addButton(14, "Back", roomB01);
 		}
@@ -1602,15 +1602,15 @@ import classes.StatusEffects;
 			addButtonDisabled(2, "Floor 3", "You're currently at Floor 3.");
 			//floor 4
 			addButton(14, "Back", roomC01);
-		}
+		}/*
 		private function teleportCircleFloor4():void {
 			menu();
 			addButton(0, "Floor 1", teleportToFloor1);
 			addButton(1, "Floor 2", teleportToFloor2);
 			addButton(2, "Floor 3", teleportToFloor3);
 			addButtonDisabled(3, "Floor 4", "You're currently at Floor 4.");
-			addButton(14, "Back", roomC01);
-		}
+			addButton(14, "Back", roomD01);
+		}*/
 		private function teleportCircleFloor5():void {
 			
 		}

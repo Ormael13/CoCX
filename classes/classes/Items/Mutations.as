@@ -13030,7 +13030,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //FAILSAFE CHANGE
-        if (changes == 0) outputText("[pg]Remarkably, the black ink has no effect.  Should you really be surprised at black ink NOT doing anything?");
+        if (changes == 0) {
+			var inkcolor:String = "black";
+			if (type == 1) inkcolor = "grey";
+			if (type == 2) inkcolor = "white";
+			outputText("[pg]Remarkably, the "+inkcolor+" ink has no effect.  Should you really be surprised at "+inkcolor+" ink NOT doing anything?");
+		}
         player.refillHunger(5);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
@@ -13419,7 +13424,6 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-
         //Eyes Color
         if (transformations.EyesKrakenColors.isPossible() || transformations.EyesKraken.isPossible()) {
             if (transformations.EyesKrakenColors.isPossible()) {
@@ -13457,19 +13461,26 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.KRAKEN && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]");
-            transformations.LowerBodyScylla.applyEffect();
-            changes++;
-        }
-        if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody == LowerBody.SCYLLA && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]");
-            transformations.LowerBodyKraken.applyEffect();
-            changes++;
+        if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody != LowerBody.KRAKEN && changes < changeLimit && rand(3) == 0) {
+			if (player.lowerBody == LowerBody.SCYLLA) {
+				outputText("[pg]");
+				transformations.LowerBodyKraken.applyEffect();
+				changes++;
+			}
+			if (player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SCYLLA) {
+				outputText("[pg]");
+				transformations.LowerBodyScylla.applyEffect();
+				changes++;
+			}
         }
 
         //FAILSAFE CHANGE
-        if (changes == 0) outputText("[pg]Remarkably, the abyssal ink has no effect.  Should you really be surprised at this item NOT doing anything?");
+        if (changes == 0) {
+			var abyssalinkcolor:String = "";
+			if (type == 1) abyssalinkcolor = "grey ";
+			if (type == 2) abyssalinkcolor = "white ";
+			outputText("[pg]Remarkably, the "+abyssalinkcolor+"abyssal ink has no effect.  Should you really be surprised at "+abyssalinkcolor+"abyssal ink NOT doing anything?");
+		}
         player.refillHunger(5);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }

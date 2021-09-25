@@ -2385,8 +2385,14 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		else addButton(0, "Create", CreateClone);
-		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
-		else addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
+		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) {
+			addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
+			
+		}
+		else {
+			addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
+			//addButtonDisabled(2, "Training", "Req. fully formed clone.");
+		}
 		addButton(14, "Back", campMiscActions);
 	}
 	private function CreateClone():void {
@@ -2472,14 +2478,17 @@ public class Camp extends NPCAwareContent{
 		else addButton(8, "Earth", CloneContemplateDaoSet, 19);
 		if (player.statusEffectv1(StatusEffects.PCClone) == 20) addButtonDisabled(9, "Acid", "Your clone is currently contemplating this Dao.");
 		else addButton(9, "Acid", CloneContemplateDaoSet, 20);
-		if (player.statusEffectv1(StatusEffects.PCClone) == 11) addButtonDisabled(13, "None", "Your clone is currently not contemplating any Dao.");
-		else addButton(13, "None", CloneContemplateDaoSet, 0);
+		if (player.statusEffectv1(StatusEffects.PCClone) == 10) addButtonDisabled(13, "None", "Your clone is currently not contemplating any Dao.");
+		else addButton(13, "None", CloneContemplateDaoSet, 10);
 		addButton(14, "Back", VisitClone);
 	}
 	private function CloneContemplateDaoSet(newdao:Number):void {
 		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone);
 		player.addStatusValue(StatusEffects.PCClone,1,(newdao-olddao));
 		doNext(CloneContemplateDao);
+	}
+	private function CloneTrainWaponMastery():void {
+		
 	}
 
 	private function DummyTraining():void {

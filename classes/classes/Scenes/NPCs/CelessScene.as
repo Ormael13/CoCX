@@ -531,7 +531,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
-				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+				if (player.pregnancyIncubation == 0) player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				_age = _ageDidPregnancy;
 				break;
@@ -588,7 +588,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
-				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+				if (player.pregnancyIncubation == 0) player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				_age = _ageDidPregnancy;
 				break;

@@ -53,10 +53,8 @@ public class Lumi extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(9, "GoblinMech", lumiGarageRetry);
 		}
 		else addButton(7, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
+		addButton(9, "SellMats", lumiSell);
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
-        /*var enhance:Function = null;
-        if (lumiEnhance(true))
-            enhance = lumiEnhance;*/
     }
 	
     public function lumiEnhance0(justCheck:Boolean = false):Boolean {
@@ -275,6 +273,42 @@ public class Lumi extends BaseContent {
             doNext(lumiShop);
         }
     }
+	
+	public function lumiSell():void {
+        spriteSelect(37);
+        //Set item handling to lumi shop
+        clearOutput();
+        outputText("\"<i>Aye "+player.mf("lad","lass")+" what ya got for trade today?</i>\"\n\n");
+        menu();
+		addButton(0, "Metal Plates", lumiSellMatsMetalPlates).hint("Sell Metal Plates.");
+		addButton(14, "Leave", lumiLabChoices);
+    }
+	public function lumiSellMatsMetalPlates():void {
+        spriteSelect(37);
+        //Set item handling to lumi shop
+        clearOutput();
+        outputText("\"<i>Ya want to sell me this thing? Sure I will take it from you but only for 40 gem. I ain't running a pawn shop or charity booth here, this is a lab and I need parts and fundings. So in what quantity are we speaking?</i>\"\n\n");
+        menu();
+		addButton(0, "Sell 1", lumiLustDraftPitch, 1).hint("Sell 1 Metal Plate.");
+		addButton(1, "Sell 5", lumiPitchGobboAle, 5).hint("Sell 5 Metal Plates.");
+		addButton(2, "Sell 10", lumiPitchGobboAle, 10).hint("Sell 10 Metal Plates.");
+		addButton(3, "Sell 50", lumiPitchGobboAle, 50).hint("Sell 50 Metal Plates.");
+		addButton(14, "No", lumiSellMatsMetalPlatesNo);
+    }	
+	private function lumiSellMatsMetalPlatesAmount(amount:int):void {
+		metal_pieces = amount;
+		clearOutput();
+		player.gems += (metal_pieces * 40);
+		outputText("You shake hands with Lumi and trade off the parts.\n\n\"<i>Happy doing business with you… anything else or can I get back to work?</i>\"\n\n");
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= metal_pieces;
+		statScreenRefresh();
+		doNext(lumiSellMatsMetalPlates);
+	}
+	private function lumiSellMatsMetalPlatesNo():void {
+		clearOutput();
+		outputText("You would rather think it through first. This here is prime quality material after all.\n\n\"<i>Hardly but if you wanna keep it and think it over then no skin off my back i'll obtain myself the thing the same way I do normally. So anything else you wanted [name]?</i>\"\n\n");
+		doNext(lumiSellMatsMetalPlates);
+	}
 	
 	public function lumiGarage():void {
 		spriteSelect(37);
@@ -1418,6 +1452,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("M.G.S. bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - M.G.S. bracer");
 		player.removeKeyItem("Powboy");
+		player.statStore.replaceBuffObject({'str.mult':1,'sens':+15},'Power bracer',{text:'M.G.S. bracer'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
 		else doNext(camp.returnToCampUseTwelveHours);
@@ -1431,6 +1466,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Powboy", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Powboy");
 		player.removeKeyItem("Power bracer");
+		player.statStore.replaceBuffObject({'str.mult':0.75,'sens':+10},'Power bracer',{text:'Powboy'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
 		else doNext(camp.returnToCampUseEightHours);
@@ -1443,6 +1479,7 @@ public class Lumi extends BaseContent {
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Power bracer is ready.\n\n");
 		player.createKeyItem("Power bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Power bracer");
+		player.statStore.replaceBuffObject({'str.mult':0.5,'sens':+5},'Power bracer',{text:'Power bracer'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
 		else doNext(camp.returnToCampUseFourHours);
@@ -1843,4 +1880,4 @@ public class Lumi extends BaseContent {
 		else doNext(camp.returnToCampUseFourHours);
 	}*/
 }
-}
+}
