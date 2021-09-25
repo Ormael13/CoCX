@@ -8,8 +8,6 @@ package classes.Scenes.Camp
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 
-import flash.utils.getQualifiedSuperclassName;
-
 public class CampMakeWinions extends BaseContent
 	{
 		public function CampMakeWinions() 
