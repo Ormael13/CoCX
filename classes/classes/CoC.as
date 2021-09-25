@@ -18,6 +18,7 @@ import classes.Items.*;
 import classes.Parser.Parser;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
@@ -70,7 +71,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 32;
+    public var modSaveVersion:Number = 33;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -81,22 +82,26 @@ public class CoC extends MovieClip
     /*private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
     private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }*/
 
-    public var charCreation:CharCreation         = new CharCreation();
-    public var saves:Saves                       = new Saves(gameStateDirectGet, gameStateDirectSet);
-    public var playerAppearance:PlayerAppearance = new PlayerAppearance();
+    public var charCreation:CharCreation           = new CharCreation();
+    public var saves:Saves                         = new Saves(gameStateDirectGet, gameStateDirectSet);
+    public var playerAppearance:PlayerAppearance   = new PlayerAppearance();
+    // Libraries
+    public var mutations:Mutations                 = new Mutations();
+    public var transformations:TransformationLib   = new TransformationLib();
     // Items/
-    public var mutations:Mutations				= new Mutations();
-    public var consumables:ConsumableLib		= new ConsumableLib();
+    public var consumables:ConsumableLib           = new ConsumableLib();
     public var useables:UseableLib;
-    public var weapons:WeaponLib				= new WeaponLib();
-    public var weaponsrange:WeaponRangeLib		= new WeaponRangeLib();
-    public var armors:ArmorLib					= new ArmorLib();
-    public var undergarments:UndergarmentLib	= new UndergarmentLib();
-    public var headjewelries:HeadJewelryLib		= new HeadJewelryLib();
-    public var necklaces:NecklaceLib			= new NecklaceLib();
-    public var jewelries:JewelryLib				= new JewelryLib();
-    public var shields:ShieldLib				= new ShieldLib();
-    public var vehicles:VehiclesLib				= new VehiclesLib();
+    public var weapons:WeaponLib                   = new WeaponLib();
+    public var weaponsrange:WeaponRangeLib         = new WeaponRangeLib();
+    public var weaponsflyingswords:FlyingSwordsLib = new FlyingSwordsLib();
+    public var armors:ArmorLib                     = new ArmorLib();
+    public var undergarments:UndergarmentLib       = new UndergarmentLib();
+    public var miscjewelries:MiscJewelryLib        = new MiscJewelryLib();
+    public var headjewelries:HeadJewelryLib        = new HeadJewelryLib();
+    public var necklaces:NecklaceLib               = new NecklaceLib();
+    public var jewelries:JewelryLib                = new JewelryLib();
+    public var shields:ShieldLib                   = new ShieldLib();
+    public var vehicles:VehiclesLib                = new VehiclesLib();
 
 
     // Force updates in Pepper Flash ahuehue
@@ -251,8 +256,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8r2";
-			version = ver + " (<b>Wrath changes (part 2), 2nd floor of RD main boss, Wait/Sleep delays decreased</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8s";
+			version = ver + " (<b>Venom system changes, Grey Mage changes, Elemental Conjurer changes (part 1), 3 new prestige jobs (Arch-priest, Necromancer, Bindmaster), 10th to 12th Soul Cultivation stages, Heaven Tribulation events, 3 new slots (flying sword and 2x misc acc), new spells/soulskils (white, black, grey, blood), Ashlands and new place, Bee Hive dungeon. Wood Elves, Evangeline changes and many more...</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

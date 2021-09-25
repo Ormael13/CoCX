@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
+import classes.Items.HeadJewelry;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
@@ -38,14 +39,14 @@ import classes.display.SpriteDb;
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
 		public var umasShop:UmasShop = new UmasShop();
-		
+
 		public var nails:Number = 0;
 		public var wood:Number = 0;
 		public var stone:Number = 0;
-		
+
 		public function TelAdre()
 		{
-		
+
 		}
 
 //const YVONNE_FUCK_COUNTER:int = 437;
@@ -418,7 +419,7 @@ public function barTelAdre():void {
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
 	if (player.humanScore() <= 3) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
-	
+
 	scylla.scyllaBarSelectAction(); //Done before anything else so that other NPCs can check scylla.action to see what she's doing
 		//Thanks to this function and edryn.edrynHeliaThreesomePossible() the bar menu will always display the same possible options until the game time advances.
 		//So it's safe to return to this menu, Helia or Urta can't suddenly disappear or appear just from leaving and re-entering the bar.
@@ -1083,22 +1084,18 @@ public function kaibaShopMainMenu2():void {
 	menu();
 	if (flags[kFLAGS.KAIBA_SHELFS] == 0) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
-			addButtonDisabled(0, "UnDefKingS", "You already bought item from Kaiba today.");
-			addButtonDisabled(1, "CroUndefKing", "You already bought item from Kaiba today.");
-			addButtonDisabled(2, "UnDefKingDest", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "R.DeadeyeAim", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "L.Blaster", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "I.Q.Gown", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
-			addButton(1, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
-			addButton(2, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
-			addButton(5, "L.Blaster", buyItem, weaponsrange.LBLASTR).hint("Lactoblaster - A rare weapon wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(6, "L.Blaster", buyItem, weaponsrange.LBLASTR).hint("Lactoblaster - A rare weapon wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(7, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
@@ -1106,8 +1103,6 @@ public function kaibaShopMainMenu2():void {
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
-			addButtonDisabled(0, "FlameLizR", "You already bought item from Kaiba today.");
-			addButtonDisabled(1, "InferMouseR", "You already bought item from Kaiba today.");
 			addButtonDisabled(2, "C.S.Necklace", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "B.Armor", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "Soul Drill", "You already bought item from Kaiba today.");
@@ -1116,47 +1111,43 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(7, "Oni enchanted drinking jug", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "Oni Noble Kimono", "You already bought item from Kaiba today.");
 			addButtonDisabled(9, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(10, "Demon tail ring", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
-			addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
 			addButton(3, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor - Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
-			addButton(7, "Oni enchanted drinking jug", buyItem, jewelries.ONIGOURD).hint("A magical drinking jug beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
+			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
 			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
+			addButton(10, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
-			addButtonDisabled(0, "HBHelmet", "You already bought item from Kaiba today.");
-			addButtonDisabled(1, "HBArmor", "You already bought item from Kaiba today.");
-			addButtonDisabled(2, "HBShirt", "You already bought item from Kaiba today.");
-			addButtonDisabled(3, "HBShorts", "You already bought item from Kaiba today.");
+			addButtonDisabled(3, "Wrathless", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "T.C.Kimono", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "I.B.Kimono", "You already bought item from Kaiba today.");
 			addButtonDisabled(9, "C.B.G.Armor", "You already bought item from Kaiba today.");
+			addButtonDisabled(10, "S.Ornament", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(0, "HBHelmet", buyItem, headjewelries.HBHELM).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
-			addButton(1, "HBArmor", buyItem, armors.HBARMOR).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
-			//later put her lower body armor part of HB set
-			addButton(2, "HBShirt", buyItem, undergarments.HBSHIRT).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
-			addButton(3, "HBShorts", buyItem, undergarments.HBSHORT).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			addButton(3, "Wrathless", buyItem, necklaces.WRATHLE).hint("Wrathless - +5% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.");
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
 			addButton(7, "T.C.Kimono", buyItem, armors.TCKIMO).hint("Tamamo no Mae Cursed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
 			addButton(8, "I.B.Kimono", buyItem, armors.IBKIMO).hint("Inari Blessed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
 			addButton(9, "C.B.G.Armor", buyItem, armors.CTBGUAR).hint("Centaur Blackguard Armor - Count as a light and heavy armor, An unique find buy it while you can because this won't last forever!");
+			addButton(10, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
+
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-1-", kaibaShopMainMenuPage1);
@@ -1338,7 +1329,7 @@ public function tripxiShopMainMenu2c():void {
 	//3 - Lactoblasters
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
-	
+
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButton(11, "-2-", tripxiShopMainMenu2b);
 	addButtonDisabled(12, "-3-", "Shelf 3");
@@ -1682,20 +1673,20 @@ private function goJogging():void {
 
 	//If butt is over 15 guaranteed reduction
 	if(player.butt.type >= 15) {
-		outputText("\n\nAll that running must have done some good, because your " + buttDescript() + " feels a little less bouncy.");
+		outputText("\n\nAll that running must have done some good, because your [butt] feels a little less bouncy.");
 		player.butt.type--;
 	}
 	else {
 		if(player.butt.type >= 10 && rand(3) == 0) {
-			outputText("\n\nThe jogging really helped trim up your " + buttDescript() + ".");
+			outputText("\n\nThe jogging really helped trim up your [butt].");
 			player.butt.type--;
 		}
 		else if(player.butt.type >= 5 && rand(3) == 0) {
-			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.");
+			outputText("\n\nYour [butt] seems to have gotten a little bit more compact from the work out.");
 			player.butt.type--;
 		}
 		else if(player.butt.type > 1 && rand(4) == 0) {
-			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.");
+			outputText("\n\nYour [butt] seems to have gotten a little bit more compact from the work out.");
 			player.butt.type--;
 		}
 	}//If hips is over 15 guaranteed reduction
@@ -1725,25 +1716,42 @@ private function goJogging():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
-		addButton(1,"Showers",brooke.repeatChooseShower);
-		addButton(4,"Leave",camp.returnToCampUseOneHour);
+		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
+			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(1,"Showers",brooke.repeatChooseShower);
+			addButton(4, "Leave", camp.returnToCampUseOneHour);
+		}
+		else {
+			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+		}
 	}
-	else doYesNo(sexMachine.exploreShowers, camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }
 
 public function meetingLunaFirstTime():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_luna_maid);
-	outputText("As you pass by some of the larger homes in Tel'Andre's residential district on your way to the market, you witness an unusual scene. The door of a large home in front of you flies open and, of all people, what appears to be a normal human stumbles out, her modest black dress in a terrible state of disarray, and her stockings torn into ribbons. She turns around to face back into the house and is immediately hit in the face by a bundle of white cloth - her apron, it would appear. A harsh female voice shouts from inside. \"<i>And don't you dare show your face in this neighborhood again, or I'll set the Town Watch on you, mark my words, you beast! You-! You unruly dog!</i>\" Then the door slams shut. The young woman looks like she's about to scream something back at the door, but her resolve crumbles, and as you watch she stands there, crumpled apron in her hands, her bare feet peeking through her stockings, and begins to cry.\n\n");
+	outputText("As you pass by some of the larger homes in Tel'Andre's residential district on your way to the market, you witness an unusual scene. The door of a large home in front of you flies open and, of all people, what appears to be a normal human stumbles out, her modest black dress in a terrible state of disarray, and her stockings torn into ribbons. She turns around to face back into the house and is immediately hit in the face by a bundle of white cloth - her apron, it would appear. A harsh female voice shouts from inside. " +
+			"\"<i>And don't you dare show your face in this neighborhood again, or I'll set the Town Watch on you, mark my words, you beast! You-! You unruly dog!</i>\"" +
+			" Then the door slams shut. The young woman looks like she's about to scream something back at the door, but her resolve crumbles, and as you watch she stands there, crumpled apron in her hands, her bare feet peeking through her stockings, and begins to cry.\n\n");
 	outputText("\"<i>This... this can't be happening again... why... </i>\"\n\n");
 	outputText("Unable to ignore the poor girl's distress, and against your better judgment, you decide to intervene and speak to her. Poking your nose in other people's business rarely seems to end well in Mareth, but a crying girl is a crying girl no matter what world you're in, you reflect; surely one of the great truths of the cosmos, you think profoundly.\n\n");
 	outputText("The girl starts as she hears your approach and turns to face you with her tear-stained face. You ask her what's going on.");
-	outputText("\"<i>Awawawawa-!</i> she cries, stumbling back from you a few steps. You put your palms up to indicate you mean no harm, and after she fixes you with an oddly intense stare for a moment she relaxes her guard and speaks to you in an even, professional tone; or tries, at least, as she seems still to be working through her tears.\"\n\n");
-	outputText("\"<i>M-my apologies, " + player.mf("Sir","Miss") + ", for my shameful outburst. You startled me. A-as you can see, I've just been f-f-f-f... h-had my employment terminated from the William estate.</i>\" She grits her teeth for a moment in a frightful grimace, and fresh tears fall from her eyes. After a few seconds she relaxes a bit and continues. \"<i>Mistre-I mean, Mrs. William caught her husband attempting to... to se-seduce me.</i>\" Her lips twitch and she sends a sidelong glance toward the door with a complicated expression. \"<i>B-but, of course, that wasn't my fault! I am... was, merely their lowly maid! I can only resist my Master so much... Anyway! She threw me out in a fit of jealous rage... I'm sure she must be screaming at him now. Serves him right! You heard the terrible things she called me, as if it were my fault!</i>\" As she finishes her story her tone changes from despair to anger, and her eyes glint a bit dangerously as she mentions her former Mistress.");
+	outputText("\"<i>Awawawawa-!</i>" +
+			" she cries, stumbling back from you a few steps. You put your palms up to indicate you mean no harm, and after she fixes you with an oddly intense stare for a moment she relaxes her guard and speaks to you in an even, professional tone; or tries, at least, as she seems still to be working through her tears.\"\n\n");
+	outputText("\"<i>M-my apologies, " + player.mf("Sir","Miss") + ", for my shameful outburst. You startled me. A-as you can see, I've just been f-f-f-f... h-had my employment terminated from the William estate.</i>\"" +
+			" She grits her teeth for a moment in a frightful grimace, and fresh tears fall from her eyes. After a few seconds she relaxes a bit and continues. " +
+			"\"<i>Mistre-I mean, Mrs. William caught her husband attempting to... to se-seduce me.</i>\"" +
+			" Her lips twitch and she sends a sidelong glance toward the door with a complicated expression. " +
+			"\"<i>B-but, of course, that wasn't my fault! I am... was, merely their lowly maid! I can only resist my Master so much... Anyway! She threw me out in a fit of jealous rage... I'm sure she must be screaming at him now. Serves him right! You heard the terrible things she called me, as if it were my fault!</i>\"" +
+			" As she finishes her story her tone changes from despair to anger, and her eyes glint a bit dangerously as she mentions her former Mistress.");
 	outputText("You tell her that sounds like an awful ordeal, and ask her if she has anywhere to go now.\n\n");
-	outputText("\"<i>I... I dont' kn-know...</i>\" She looks around for a few seconds, as if expecting to see a door opening or help arriving, then her shoulders slump and she drops to her knees. \"<i>No, I have nothing. Nothing! You heard her, she's going to have me blackballed! I'll never work as a maid again in Tel'Andre, and I don't know anywhere else but the stupid desert and terrible forest full of monsters and... aaAAAAAAAAHHHH!</i>\" She screams into her apron, pushing the cloth into her face to muffle her cry of anguish.\n\n");
-	outputText("After a few seconds of breathing heavily into her apron she exposes her face again and looks up at you once more. \"<i>I'm so sorry, kind " + player.mf("Sir","Miss") + ", you've been so good as to ask after my wellbeing and listen to my story, and I'm behaving so shamefully. I... I should go... somewhere. Perhaps the brothels will take me... if not, then maybe one of the street gangs... </i>\"");
+	outputText("\"<i>I... I dont' kn-know...</i>\"" +
+			" She looks around for a few seconds, as if expecting to see a door opening or help arriving, then her shoulders slump and she drops to her knees. " +
+			"\"<i>No, I have nothing. Nothing! You heard her, she's going to have me blackballed! I'll never work as a maid again in Tel'Andre, and I don't know anywhere else but the stupid desert and terrible forest full of monsters and... aaAAAAAAAAHHHH!</i>\"" +
+			" She screams into her apron, pushing the cloth into her face to muffle her cry of anguish.\n\n");
+	outputText("After a few seconds of breathing heavily into her apron she exposes her face again and looks up at you once more. " +
+			"\"<i>I'm so sorry, kind " + player.mf("Sir","Miss") + ", you've been so good as to ask after my wellbeing and listen to my story, and I'm behaving so shamefully. I... I should go... somewhere. Perhaps the brothels will take me... if not, then maybe one of the street gangs... </i>\"");
 	outputText("You could help her or leave her be. What will you do?\n\n");
 	menu();
 	if (player.gems >= 100) addButton(0, "Work4Me", meetingLunaFirstTimeHelp);
@@ -1752,7 +1760,8 @@ public function meetingLunaFirstTime():void {
 }
 public function meetingLunaFirstTimeLeave():void {
 	outputText("Sadly you see no way you could help her out; but, unwilling to leave the poor girl to offer herself to the brothels or join a gang, you point her in the direction of The Wet Bitch. They always seem busy, so perhaps they might hire her as a waitress? Waitresses and maids are similar, aren't they?\n\n");
-	outputText("The young woman looks up at you in surprise, her eyes widening and her mouth forming a cute little \"o\". You realize she's actually rather cute, with features that lean more toward soft and sweet than sultry and soft-looking, light brown hair and big golden-colored eyes. She doesn't quite smile at you, but her expression does ease a bit and she replies, saying \"<i>Thank you, kind stranger. I'll do that, I guess; it's not like I have any better options. If... if I do get hired there, will you come see me? My name is Luna. I'd... I'd like it if you came to see me again.</i>\"");
+	outputText("The young woman looks up at you in surprise, her eyes widening and her mouth forming a cute little \"o\". You realize she's actually rather cute, with features that lean more toward soft and sweet than sultry and soft-looking, light brown hair and big golden-colored eyes. She doesn't quite smile at you, but her expression does ease a bit and she replies, saying" +
+			" \"<i>Thank you, kind stranger. I'll do that, I guess; it's not like I have any better options. If... if I do get hired there, will you come see me? My name is Luna. I'd... I'd like it if you came to see me again.</i>\"");
 	outputText("Telling her that sounds nice, you say your goodbyes and continue your business, hoping that you've at least spared the poor girl the worst of her situation. If only you could do more...");
 	flags[kFLAGS.LUNA_FOLLOWER] = 1;
 	flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] = 1;
@@ -1763,7 +1772,8 @@ public function meetingLunaFirstTimeHelp():void {
 	outputText("It feels a bit strange offering work to a domestic servant when all you have is a campground, but you ask the young woman if she might not mind coming to work for you? You're hardly wealthy but you bring in enough from adventuring to support another person, and it would be useful to have someone there to help with chores, since you spend so much time exploring.\n\n");
 	outputText("\"<i>You.. you would hire me? Even after I li-after what you've seen? This isn't a joke, is it?</i>\"\n\n");
 	outputText("You inform her you're quite serious, and ask her what her rate is.\n\n");
-	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\" She looks at you with shining golden eyes, and you offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
+	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\"" +
+			" She looks at you with shining golden eyes, and you offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
 	player.gems -= 100;
 	doNext(meetingLunaCamp);
 }
@@ -1790,7 +1800,9 @@ public function meetingLunaRepeatedYes():void {
 	outputText("The maid, now a beggar, looks at you with tears in her eyes and an unbelieving stare, then stands up as she replies.\n\n");
 	outputText("\"<i>You.. you would hire me? Even... even in this state? Are you sure??</i>\"\n\n");
 	outputText("Quite sure, you tell her. You felt sorry for her at the start, and you're sure you'd have no trouble keeping her paid; and her skills are sure to be useful even if your humble camp isn't as nice as what she's used to. And, speaking of keeping her paid, you ask her what her rate is.");
-	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\" You're a bit curous why she's begging in the streets if she has money left over from her previous employment, but as she looks at you with shining golden eyes you lose the will to ask. You offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
+	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\"" +
+			" You're a bit curous why she's begging in the streets if she has money left over from her previous employment, but as she looks at you with shining golden eyes you lose the will to ask. You offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
+	player.gems -= 100;
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaCamp():void {

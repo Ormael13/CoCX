@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BodyParts.Hair;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -12,8 +13,8 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
-	import classes.Scenes.Areas.Desert.SandWitchScene;
-	import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.Areas.Desert.SandWitchScene;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -624,6 +625,7 @@ public function savePermObject(isFile:Boolean):void {
 
 		saveFile.data.flags[kFLAGS.LVL_UP_FAST] = flags[kFLAGS.LVL_UP_FAST];
 		saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] = flags[kFLAGS.MUTATIONS_SPOILERS];
+		saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] = flags[kFLAGS.NEWPERKSDISPLAY];
 		saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] = flags[kFLAGS.INVT_MGMT_TYPE];
 		saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] = flags[kFLAGS.CHARVIEWER_ENABLED];
 		saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] = flags[kFLAGS.CHARVIEW_STYLE];
@@ -684,6 +686,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 
 			if (saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] != undefined) flags[kFLAGS.MUTATIONS_SPOILERS] = saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS];
+			if (saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] != undefined) flags[kFLAGS.NEWPERKSDISPLAY] = saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY];
 			if (saveFile.data.flags[kFLAGS.LVL_UP_FAST] != undefined) flags[kFLAGS.LVL_UP_FAST] = saveFile.data.flags[kFLAGS.LVL_UP_FAST];
 			if (saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] != undefined) flags[kFLAGS.INVT_MGMT_TYPE] = saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE];
 			if (saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] != undefined) flags[kFLAGS.CHARVIEWER_ENABLED] = saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED];
@@ -820,12 +823,15 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.armorId = player.armor.id;
 		saveFile.data.weaponId = player.weapon.id;
 		saveFile.data.weaponRangeId = player.weaponRange.id;
+		saveFile.data.weaponFlyingSwordsId = player.weaponFlyingSwords.id;
 		saveFile.data.headJewelryId = player.headJewelry.id;
 		saveFile.data.necklaceId = player.necklace.id;
 		saveFile.data.jewelryId = player.jewelry.id;
 		saveFile.data.jewelryId2 = player.jewelry2.id;
 		saveFile.data.jewelryId3 = player.jewelry3.id;
 		saveFile.data.jewelryId4 = player.jewelry4.id;
+		saveFile.data.miscJewelryId = player.miscJewelry.id;
+		saveFile.data.miscJewelryId2 = player.miscJewelry2.id;
 		saveFile.data.shieldId = player.shield.id;
 		saveFile.data.upperGarmentId = player.upperGarment.id;
 		saveFile.data.lowerGarmentId = player.lowerGarment.id;
@@ -1675,6 +1681,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
+		if (saveFile.data.weaponFlyingSwordsId){
+			player.setWeaponFlyingSwordsHiddenField((ItemType.lookupItem(saveFile.data.weaponFlyingSwordsId) as FlyingSwords) || FlyingSwordsLib.NOTHING);
+		} else {
+			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is FlyingSwords && (itype as FlyingSwords).name == saveFile.data.weaponFlyingSwordsName){
+					player.setWeaponFlyingSwordsHiddenField(itype as FlyingSwords || FlyingSwordsLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
 		if (saveFile.data.shieldId){
 			player.setShieldHiddenField((ItemType.lookupItem(saveFile.data.shieldId) as Shield) || ShieldLib.NOTHING);
 		} else {
@@ -1682,6 +1700,30 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Shield && (itype as Shield).name == saveFile.data.shieldName){
 					player.setShieldHiddenField(itype as Shield || ShieldLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.miscJewelryId){
+			player.setMiscJewelryHiddenField((ItemType.lookupItem(saveFile.data.miscJewelryId) as MiscJewelry) || MiscJewelryLib.NOTHING);
+		} else {
+			player.setMiscJewelry(MiscJewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName){
+					player.setMiscJewelryHiddenField(itype as MiscJewelry || MiscJewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.miscJewelryId2){
+			player.setMiscJewelryHiddenField2((ItemType.lookupItem(saveFile.data.miscJewelryId2) as MiscJewelry) || MiscJewelryLib.NOTHING);
+		} else {
+			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName2){
+					player.setMiscJewelryHiddenField2(itype as MiscJewelry || MiscJewelryLib.NOTHING);
 					found = true;
 					break;
 				}
@@ -1698,7 +1740,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					break;
 				}
 			}
-		}
+		}/*
+		if (saveFile.data.jewelryId2){
+			player.setJewelryHiddenField2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING);
+		} else {
+			player.setJewelry2(JewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
+					player.setJewelryHiddenField2(itype as Jewelry || JewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}*/
 		if (saveFile.data.necklaceId){
 			player.setNecklaceHiddenField((ItemType.lookupItem(saveFile.data.necklaceId) as Necklace) || NecklaceLib.NOTHING);
 		} else {
@@ -2064,9 +2118,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.eyes.type = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
-			player.eyes.colour = "brown";
+			CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
 		else
-			player.eyes.colour = saveFile.data.eyeColor;
+			CoC.instance.transformations.EyesChangeColor([saveFile.data.eyeColor]).applyEffect(false);
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -2089,7 +2143,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.tallness = saveFile.data.tallness;
 		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
-			player.hairType = 0;
+			player.hairType = Hair.NORMAL;
 		else
 			player.hairType = saveFile.data.hairType;
 		if (saveFile.data.hairStyle == undefined)
@@ -2312,9 +2366,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
 
+			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+			var mutationsShift:Array = [];
+			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
+				mutationsShift.push(pperk1.id);
+			}
+
 			if (ptype == null) {
 				trace("ERROR: Unknown perk id=" + id);
-
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
@@ -2738,7 +2797,7 @@ public function unFuckSave():void
 	//Fixing shit!
 
 	// Fix duplicate elven bounty perks
-	if (player.findPerk(PerkLib.ElvenBounty) >= 0) {
+	if (player.hasPerk(PerkLib.ElvenBounty)) {
 		//CLear duplicates
 		while(player.perkDuplicated(PerkLib.ElvenBounty)) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
@@ -2748,7 +2807,7 @@ public function unFuckSave():void
 		}
 	}
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
-	while (player.perkDuplicated(PerkLib.KitsuneThyroidGland)) player.removePerk(PerkLib.KitsuneThyroidGland);
+	while (player.perkDuplicated(MutationsLib.KitsuneThyroidGland)) player.removePerk(MutationsLib.KitsuneThyroidGland);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{
@@ -2808,7 +2867,7 @@ public function unFuckSave():void
 		}
 		if (flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] > 0) {
 			if (flags[kFLAGS.AMILY_BUTT_PREGNANCY_TYPE] != 0) return; //Must be a new format save
-			if (player.findPerk(PerkLib.SpiderOvipositor) >= 0)
+			if (player.hasPerk(PerkLib.SpiderOvipositor))
 				flags[kFLAGS.AMILY_BUTT_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_DRIDER_EGGS;
 			else
 				flags[kFLAGS.AMILY_BUTT_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_BEE_EGGS;
@@ -2927,7 +2986,7 @@ public function unFuckSave():void
 		if (flags[kFLAGS.URTA_PREGNANCY_TYPE] == PregnancyStore.PREGNANCY_PLAYER) return; //Must be a new format save
 		if (flags[kFLAGS.URTA_PREGNANCY_TYPE] > 0) { //URTA_PREGNANCY_TYPE was previously URTA_EGG_INCUBATION, assume this was an egg pregnancy
 			flags[kFLAGS.URTA_INCUBATION] = flags[kFLAGS.URTA_PREGNANCY_TYPE];
-			if (player.findPerk(PerkLib.SpiderOvipositor) >= 0)
+			if (player.hasPerk(PerkLib.SpiderOvipositor))
 				flags[kFLAGS.URTA_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_DRIDER_EGGS;
 			else
 				flags[kFLAGS.URTA_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_BEE_EGGS;

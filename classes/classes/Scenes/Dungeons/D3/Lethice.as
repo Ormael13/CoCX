@@ -227,7 +227,7 @@ public class Lethice extends Monster
 			var damage:Number = 100 + rand(25);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			player.takeMagicDamage(damage,true);
+			player.takeFireDamage(damage,true);
 		}
 
 		private function wingbuffet():void

@@ -35,6 +35,10 @@ public class EngineCore {
         return CoC.instance.player.maxSoulforce();
     }
 
+    public static function maxOverSoulforce():Number {
+        return CoC.instance.player.maxOverSoulforce();
+    }
+
     public static function maxWrath():Number {
         return CoC.instance.player.maxWrath();
     }
@@ -45,6 +49,10 @@ public class EngineCore {
 
     public static function maxMana():Number {
         return CoC.instance.player.maxMana();
+    }
+
+    public static function maxOverMana():Number {
+        return CoC.instance.player.maxOverMana();
     }
 
     public static function silly():Boolean {
@@ -63,15 +71,15 @@ public class EngineCore {
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
             //Increase by 20%!
-            if (CoC.instance.player.findPerk(PerkLib.HistoryHealer) >= 0 || CoC.instance.player.findPerk(PerkLib.PastLifeHealer) >= 0) {
+            if (CoC.instance.player.hasPerk(PerkLib.HistoryHealer) || CoC.instance.player.hasPerk(PerkLib.PastLifeHealer)) {
 				healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Nurse) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Doctor) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.FirstResponse) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Paramedic) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.SurgeonsAide) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Surgeon) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Medic) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Nurse)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Doctor)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.FirstResponse)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Paramedic)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.SurgeonsAide)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Surgeon)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Medic)) healingFromHealer += 0.2;
 				changeNum *= healingFromHealer;
 			}
             if (CoC.instance.player.HP + int(changeNum) > maxOverHP()) {
@@ -140,27 +148,26 @@ public class EngineCore {
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.soulforce += int(changeNum);
+                CoC.instance.player.soulforce += changeNum;
                 //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
                 // hpUp.visible = true;
             }
         }
         //Negative Soulforce
-        /*	else
+        	else
             {
-                if(CoC.instance.player.HP + changeNum <= 0) {
-                    if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.HP = 0;
-                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
+                if(CoC.instance.player.soulforce + changeNum <= 0) {
+                    //if (display) HPChangeNotify(changeNum);
+                    CoC.instance.player.soulforce = 0;
+                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
                 else {
-                    if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.HP += changeNum;
-                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
+                    //if (display) HPChangeNotify(changeNum);
+                    CoC.instance.player.soulforce += changeNum;
+                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
             }
-            dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
-        */
+        CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();
         return CoC.instance.player.soulforce - before;
     }
@@ -179,27 +186,26 @@ public class EngineCore {
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.mana += int(changeNum);
+                CoC.instance.player.mana += changeNum;
                 //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
                 // hpUp.visible = true;
             }
         }
         //Negative Mana
-        /*	else
+        	else
             {
-                if(CoC.instance.player.HP + changeNum <= 0) {
-                    if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.HP = 0;
-                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
+                if(CoC.instance.player.mana + changeNum <= 0) {
+                    //if (display) HPChangeNotify(changeNum);
+                    CoC.instance.player.mana = 0;
+                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
                 else {
-                    if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.HP += changeNum;
-                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
+                    //if (display) HPChangeNotify(changeNum);
+                    CoC.instance.player.mana += changeNum;
+                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
             }
-            dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
-        */
+        CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();
         return CoC.instance.player.mana - before;
     }
@@ -218,7 +224,7 @@ public class EngineCore {
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.wrath += int(changeNum);
+                CoC.instance.player.wrath += changeNum;
                 //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
                 // hpUp.visible = true;
             }
@@ -586,6 +592,23 @@ public class EngineCore {
             }
         }
         callback = createCallBackFunction(func1, arg1, arg2, arg3);
+
+        if (toolTipText == "") toolTipText = getButtonToolTipText(text);
+        if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+        btn.show(text, callback, toolTipText, toolTipHeader);
+        //CoC.instance.mainView.setOutputText( CoC.instance.currentText );
+        CoC.instance.flushOutputTextToGUI();
+        return btn;
+    }
+
+    public static function fiveArgButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, arg4:* = -9000, arg5:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton{
+        var btn:CoCButton = button(pos);
+        if (func1 == null) {
+            return btn.hide();
+        }
+        var callback:Function;
+
+        callback = createCallBackFunction2(func1, arg1, arg2, arg3, arg4, arg5);
 
         if (toolTipText == "") toolTipText = getButtonToolTipText(text);
         if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);

@@ -17,7 +17,7 @@ public class PhoenixSquad extends Monster
 			outputText("You fall back under a hail of scimitar attacks.  The sheer number of phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or maneuver without getting hit!\n");
 			//(Effect: Multiple medium-damage attacks)
 			//(Effect: Multiple light attacks)
-			createStatusEffect(StatusEffects.Attacks, 2 + rand(3),0,0,0);
+			createStatusEffect(StatusEffects.Attacks, 3 + rand(2),0,0,0);
 			eAttack();
 		}
 

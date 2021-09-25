@@ -51,23 +51,23 @@ public class GameSettings extends BaseContent {
 		else outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
 		outputText("\n\n");
 		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
-			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
+			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 1,5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 15% more damage and gives ~10% more EXP. Bad-ends can ruin your game.");
+			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 20% more damage and gives ~10% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 30% more damage and gives ~20% more EXP.");
+			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 50% more damage and gives ~30% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 3x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 50% damage and gives ~30% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and gives ~60% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and gives ~40% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia MC</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 250% damage and gives ~100% more EXP.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
-			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is as easy that even coc1 and coc2 makers can't breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can't breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
 		}
 		else {
 			outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is back to what it should be.");
@@ -107,7 +107,15 @@ public class GameSettings extends BaseContent {
 			outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.")
 		}
 		else {
-			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\n For players that want to discover the mutations by themselves.")
+			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\nFor players that want to discover the mutations by themselves.")
+		}
+		outputText("\n\n")
+
+		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
+			outputText("Perks Display: <font color=\"#008000\"><b>Enabled</b></font>\nPerks are collapsed to their highest tier. Use this for potentially speeding up perks menu, and less clutter.")
+		}
+		else {
+			outputText("Perks Display: <font color=\"#800000\"><b>Disabled</b></font>\nPerks display uses old method of just spewing everything out. Use this for max stability, but higher lag and a whole menu of perks.")
 		}
 		outputText("\n\n")
 
@@ -140,17 +148,25 @@ public class GameSettings extends BaseContent {
 			addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
 			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
+			addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
+			addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
+			addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+		}
+		else {
+			addButtonDisabled(1, "Difficulty", "Req. to have loaded any save.");
+			addButtonDisabled(7, "Easy Mode", "Req. to have loaded any save.");
+			addButtonDisabled(8, "Enable Surv", "Req. to have loaded any save.");
+			addButtonDisabled(9, "Enable Real", "Req. to have loaded any save.");
+			addButtonDisabled(11, "Fetishes", "Req. to have loaded any save.");
 		}
 		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
 		addButton(4, "Hyper Happy", toggleHyperHappy);
 		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
-		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
-		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
-		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 		addButton(12, "Mutation Assist", mutationSubMenu).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
+		addButton(13, "PerkView Simplfied", perkSubMenu).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
 		}
@@ -341,6 +357,12 @@ public class GameSettings extends BaseContent {
 	public function mutationSubMenu():void {
 		if (flags[kFLAGS.MUTATIONS_SPOILERS] < 1) flags[kFLAGS.MUTATIONS_SPOILERS] = 1;
 		else flags[kFLAGS.MUTATIONS_SPOILERS] = 0;
+		settingsScreenGameSettings();
+	}
+
+	public function perkSubMenu():void {
+		if (flags[kFLAGS.NEWPERKSDISPLAY] < 1) flags[kFLAGS.NEWPERKSDISPLAY] = 1;
+		else flags[kFLAGS.NEWPERKSDISPLAY] = 0;
 		settingsScreenGameSettings();
 	}
 

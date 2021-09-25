@@ -37,11 +37,6 @@ use namespace CoC;
 			damage = player.takePhysDamage(damage, true);
 		}
 		
-		override protected function performCombatAction():void
-		{
-			moveDisplacerBeastPhaseStrike();
-		}
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.displacerbeastScene.displacerBeastVictory();
@@ -162,6 +157,9 @@ use namespace CoC;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
 					add(consumables.D_FRUIT,0.7);
+			this.abilities = [
+				{ call: moveDisplacerBeastPhaseStrike, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY] },
+			]
 			this.createStatusEffect(StatusEffects.EvasiveTeleport, 190, 0, 0, 0);
 			checkMonster();
 		}

@@ -41,7 +41,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsIceFist)) {
 			bd = buttons.add("Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) {
+			if (player.hasPerk(PerkLib.FireAffinity)) {
 				bd.disable("Try as you want, you can’t call on the power of this technique due to your close affinity to fire.");
 			} else if (!player.isFistOrFistWeapon()) {
 				bd.disable("<b>Your current used weapon not allow to use this technique.</b>");
@@ -53,7 +53,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFirePunch)) {
 			bd = buttons.add("Fire Punch", FirePunch).hint("Ignite your opponents dealing fire damage and setting them ablaze.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
-			if (player.findPerk(PerkLib.ColdAffinity) >= 0) {
+			if (player.hasPerk(PerkLib.ColdAffinity)) {
 				bd.disable("Try as you want, you can’t call on the power of this technique due to your close affinity to cold.");
 			} else if (!player.isFistOrFistWeapon()) {
 				bd.disable("<b>Your current used weapon not allow to use this technique.</b>");
@@ -301,9 +301,9 @@ public class CombatSoulskills extends BaseCombatContent {
 				}
 			}
 		}
-		if (player.findPerk(PerkLib.Trance) >= 0) {
+		if (player.hasPerk(PerkLib.Trance)) {
 			if (!player.statStore.hasBuff("TranceTransformation")) {
-				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, which enhancing physical and mental abilities at constant cost of soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
 				if (player.soulforce < 100) {
 					bd.disable("Your current soulforce is too low.");
 				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
@@ -315,7 +315,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
 			bd = buttons.add("Blood Swipe", bloodSwipe)
-					.hint("Blood Swipe is simple blood soulskill that will fire three red lines of blood energy from your hand.  " +
+					.hint("Blood Swipe will fire three red lines of blood energy from your hand.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(60) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -325,11 +325,13 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
 			bd = buttons.add("Blood Swipe (SF)", bloodSwipeSF)
-					.hint("(Soulforce infused) Blood Swipe is simple blood soulskill, which was infused by small amount of soulforce to enhance it power, that will fire three red lines of blood energy from your hand.  " +
+					.hint("(Soulforce infused) Blood Swipe, which was infused by small amount of soulforce to enhance it power, will fire three red lines of blood energy from your hand.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(60) + "\n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -341,8 +343,140 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You can only use buff soulskills while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
+			bd = buttons.add("Heart Seeker", heartSeeker)
+					.hint("Heart Seeker would hit vital point of enemy body dealing true damage.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(120) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(120)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellHeartSeeker)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
+			bd = buttons.add("Heart Seeker (SF)", heartSeekerSF)
+					.hint("(Soulforce infused) Heart Seeker, which was infused by small amount of soulforce to enhance it power, would hit vital point of enemy body dealing true damage.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(120) + "\n\nSoulforce cost: " + Math.round(120 * soulskillCost() * soulskillcostmulti()));
+			if ((bloodForBloodGod - 1) < spellCostBlood(120)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.soulforce < 120 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellHeartSeekerSF)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
+			bd = buttons.add("Blood Dewdrops", bloodDewdrops)
+					.hint("Blood Dewdrops will fire many blood droplets from your hand.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(240) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(240)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdrops)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
+			bd = buttons.add("Blood Dewdrops (SF)", bloodDewdropsSF)
+					.hint("(Soulforce infused) Blood Dewdrops, which was infused by small amount of soulforce to enhance it power, will fire many blood droplets from your hand.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(240) + "\n\nSoulforce cost: " + Math.round(240 * soulskillCost() * soulskillcostmulti()));
+			if ((bloodForBloodGod - 1) < spellCostBlood(240)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.soulforce < 240 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
+			bd = buttons.add("Blood Requiem", bloodRequiem)
+					.hint("Blood Requiem will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodRequiem)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
+			bd = buttons.add("Blood Requiem (SF)", bloodRequiemSF)
+					.hint("(Soulforce infused) Blood Requiem, which was infused by small amount of soulforce to enhance it power, will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "\n\nSoulforce cost: " + Math.round(150 * soulskillCost() * soulskillcostmulti()));
+			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.soulforce < 150 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			} else if (player.isGargoyle()) {
+				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+			}
+		}/*
+		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge))  {
+			if (!player.statStore.hasBuff("ScarletSpiritCharge")) {
+				bd = buttons.add("S.S.Ch.", TranceTransformation).hint("Activate Scarlet Spirit Charge state, which enhancing physical and mental abilities at constant cost of health.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				if (player.soulforce < 100) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if (player.isGargoyle()) {
+					bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				}
+			} else {
+				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");
+			}
+		}//jak odróżnić to od Trace and VPT soulskills???
+		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
+			if (!player.statStore.hasBuff("ScarletSpiritCharge")) {
+				bd = buttons.add("S.S.Ch.SF", TranceTransformation).hint("Activate Scarlet Spirit Charge (SF) state, which enhancing physical and mental abilities at constant cost of health & soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				if (player.soulforce < 100) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if (player.isGargoyle()) {
+					bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				}
+			} else {
+				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Scarlet Spirit Charge.");
+			}
+		}*/
 	}
 
 	public function TripleThrust():void {
@@ -526,13 +660,13 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
-		if (player.hasPerk(PerkLib.HistoryFighter) >= 0 || player.hasPerk(PerkLib.PastLifeFighter) >= 0) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) >= 0 && (monster.hasPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -547,7 +681,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.isSwordTypeWeapon()) critChance += 10;
 		if (player.isDuelingTypeWeapon()) critChance += 20;
 		critChance += combat.combatPhysicalCritical();
-		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -555,16 +689,28 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		outputText(" ");
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
-		if (crit == true) {
+		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
@@ -644,15 +790,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//group enemies bonus
-		if (monster.plural == true) damage *= 5;
+		if (monster.plural) damage *= 5;
 		//other bonuses
-		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
-		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
-		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -663,7 +809,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.isSwordTypeWeapon()) critChance += 10;
 		if (player.isDuelingTypeWeapon()) critChance += 20;
 		critChance += combat.combatPhysicalCritical();
-		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -671,17 +817,29 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] sweeps against " + monster.a + monster.short + ", dealing ");
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		outputText(" damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
@@ -717,12 +875,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
 		//other bonuses
-		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatMagicalCritical();
-		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -769,13 +927,13 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
 		//group enemies bonus
-		if (monster.plural == true) damage *= 5;
+		if (monster.plural) damage *= 5;
 		//other bonuses
-		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatMagicalCritical();
-		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -785,7 +943,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("Comet fragments hits " + monster.a + monster.short + ", dealing ");
 		doMagicDamage(damage, true, true);
 		outputText(" damage! ");
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
@@ -946,7 +1104,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
 		//other bonuses
-		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1085,6 +1243,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
+		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
@@ -1161,6 +1320,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. ");
+		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage += Math.round(damage * 0.1);
 			doFireDamage(damage, true, true);
@@ -1359,8 +1519,10 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.findPerk(PerkLib.Channeling) >= 0 && player.inte >= 60) TranceBoost += 10;
 			if (player.findPerk(PerkLib.Archmage) >= 0 && player.inte >= 75) TranceBoost += 15;
 			if (player.findPerk(PerkLib.GrandArchmage) >= 0 && player.inte >= 100) TranceBoost += 20;
-			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) TranceBoost += 25;
-			if (player.findPerk(PerkLib.GreyArchmage) >= 0 && player.inte >= 150) TranceBoost += 30;
+			if (player.findPerk(PerkLib.GreyMageApprentice) >= 0 && player.inte >= 75) TranceBoost += 10;
+			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) TranceBoost += 15;
+			if (player.findPerk(PerkLib.GreyArchmage) >= 0 && player.inte >= 175) TranceBoost += 20;
+			if (player.findPerk(PerkLib.GrandGreyArchmage) >= 0 && player.inte >= 225) TranceBoost += 25;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0 && player.inte >= 50) TranceBoost += 5;
 			if (player.findPerk(PerkLib.Battleflash) >= 0 && player.inte >= 50) TranceBoost += 15;
 			if (player.findPerk(PerkLib.JobSwordsman) >= 0) TranceBoost -= 10;
@@ -1480,7 +1642,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodSwipe():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(-spellCostBlood(60), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipe,2,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, three red claw-like lines coalesce briefly before being shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
@@ -1494,17 +1656,17 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
 		if (rand(20) < 4) {
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
 			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
 			outputText(" Attack leave many bloody gashes.");
 		}
@@ -1516,16 +1678,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
-	
 	public function bloodSwipeSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(-spellCostBlood(60), false);
 		var soulforcecost:Number = 60 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 3;
 		if (damage < 10) damage = 10;
 		//soulskill mod effect
@@ -1539,17 +1700,17 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doMagicDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
 		if (rand(20) < 4) {
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
 			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
 			outputText(" Attack leave many bloody gashes.");
 		}
@@ -1561,6 +1722,337 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
+	
+	public function heartSeeker():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(-spellCostBlood(120), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeeker,3,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward " + monster.a + monster.short + " vital spot.\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave bloody gash.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function heartSeekerSF():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(-spellCostBlood(120), false);
+		var soulforcecost:Number = 120 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeekerSF,4,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making somatic gesture with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward " + monster.a + monster.short + " vital spot.\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave bloody gash.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	
+	public function bloodDewdrops():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(-spellCostBlood(240), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdrops,2,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood pellets shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
+		if (damage < 10) damage = 10;
+		if (monster.plural) damage *= 5;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function bloodDewdropsSF():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(-spellCostBlood(240), false);
+		var soulforcecost:Number = 240 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF,3,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood droplets shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 1.5;
+		if (damage < 10) damage = 10;
+		if (monster.plural) damage *= 5;
+		//soulskill mod effect
+		damage *= soulskillPhysicalMod();
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	
+	public function bloodRequiem():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(-spellCostBlood(150), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiem,4,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. Within an instant, large blood dripping pillars coalesce above " + monster.a + monster.short + " and descends not giving time for " + monster.pronoun2 + " to react.\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (monster.hasStatusEffect(StatusEffects.BloodRequiem)) monster.addStatusValue(StatusEffects.BloodRequiem, 1, 2);
+		else monster.createStatusEffect(StatusEffects.BloodRequiem,2,0,0,0);
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave bloody gash.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function bloodRequiemSF():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(-spellCostBlood(150), false);
+		var soulforcecost:Number = 150 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF,5,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. ");
+		outputText("Within an instant, large blood dripping pillars coalesce above " + monster.a + monster.short + " and descends not giving time for " + monster.pronoun2 + " to react.\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (monster.hasStatusEffect(StatusEffects.BloodRequiem)) monster.addStatusValue(StatusEffects.BloodRequiem, 1, 4);
+		else monster.createStatusEffect(StatusEffects.BloodRequiem,4,0,0,0);
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave bloody gash.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	/*
+	public function spellMight(silent:Boolean = false):void {
+		var doEffect:Function = function():* {
+			var MightBoostCap:Number = 1.5;
+			MightBoostCap *= player.intStat.core.max;
+			MightBoostCap = Math.round(MightBoostCap);
+			var MightBoost:Number = player.intStat.core.value;
+			//MightBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells
+			if (MightBoost < 10) MightBoost = 10;
+			if (player.hasPerk(PerkLib.JobEnchanter)) MightBoost *= 1.2;
+			MightBoost *= spellModBlack();
+			//MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
+			MightBoost = Math.round(MightBoost);
+			if (MightBoost > MightBoostCap) MightBoost = MightBoostCap;
+			var MightDuration:Number = 5;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsV)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.EverLastingBuffs)) MightDuration += 5;
+			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) MightDuration += 5;
+			tempTou = MightBoost;
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = Math.round(MightBoost * 1.25);
+			else tempStr = MightBoost;
+			var oldHPratio:Number = player.hp100/100;
+			var buffValues:Object = {"tou.mult":tempTou/100};
+
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
+				buffValues["int.mult"] = Math.min( tempInt/100, player.intStat.mult.value/2);
+			} else {
+				buffValues["str.mult"] = Math.min( tempStr/100, player.strStat.mult.value/2);
+			}
+			player.buff("Might").setStats(buffValues).combatTemporary(MightDuration);
+			player.HP = oldHPratio*player.maxHP();
+			statScreenRefresh();
+		};
+
+		if (silent)	{ // for Battlemage
+			doEffect.call();
+			return;
+		}
+
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < (50 * spellMightCostMultiplier())) player.HP -= (50 * spellMightCostMultiplier());
+		else useMana((50 * spellMightCostMultiplier()),6);
+		var tempStr:Number = 0;
+		var tempTou:Number = 0;
+		var tempInt:Number = 0;
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n");
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		if(rand(100) < backfire) {
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			outputText("The rush of success and power flows through your body.  You feel like you can do anything!");
+			doEffect.call();
+		}
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}*/
 	/*
 	 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^
 	 public function mantisOmniSlash():void {
@@ -1584,12 +2076,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 fatigue(60, USEFATG_PHYSICAL);
 	 }
 	 else fatigue(24, USEFATG_PHYSICAL);
-	 //Amily!
-	 if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-	 outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
-	 enemyAI();
-	 return;
-	 }
+	if (combat.checkConcentration()) return; //Amily concentration
 	 outputText("You ready your wrists mounted scythes and prepare to sweep them towards " + monster.a + monster.short + ".\n\n");
 	 if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
@@ -1598,8 +2085,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 enemyAI();
 	 return;
 	 if (monster.plural) {
-	 if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-	 if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) >= 0) {
+	 if (player.findPerk(MutationsLib.MantislikeAgilityEvolved) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
 	 }
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
@@ -1612,11 +2099,11 @@ public class CombatSoulskills extends BaseCombatContent {
 	 damage += speedscalingbonus() * 0.5;
 	 if (damage < 10) damage = 10;
 	 //adjusting to be used 60/100% of base speed while attacking depending on insect-related perks possesed
-	 if (player.findPerk(PerkLib.MantislikeAgility) < 0) damage *= 0.6;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) < 0) damage *= 0.6;
 	 //bonuses if fighting multiple enemies
 	 if (monster.plural) {
-	 if (player.findPerk(PerkLib.MantislikeAgility) < 0 && player.findPerk(PerkLib.TrachealSystemEvolved) < 0) damage *= 1.1;
-	 if (player.findPerk(PerkLib.MantislikeAgility) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) damage *= 1.5;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) < 0 && player.findPerk(PerkLib.TrachealSystemEvolved) < 0) damage *= 1.1;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) damage *= 1.5;
 	 }
 	 //weapon bonus
 	 if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
@@ -1725,7 +2212,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
 	 else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 	 //other bonuses
-	 if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+	 if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 	 if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
 	 if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= combat.historyFighterBonus();
 	 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);

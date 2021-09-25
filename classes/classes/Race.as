@@ -93,12 +93,15 @@ public class Race {
     public static const GAZER:Race = new Race("Gazer",87, "gazerScore");
     public static const RATATOSKR:Race = new Race("Ratatoskr",88, "ratatoskrScore");
     public static const WENDIGO:Race = new Race("Wendigo",89, "wendigoScore");
-    public static const TROLL:Race = new Race("Troll",90, "trollScore");
-    
+    public static const TROLL:Race        = new Race("Troll",90, "trollScore");
+    public static const ATLACH_NACHA:Race = new Race("Atlach Nacha", 91, "atlachNachaScore");
+    public static const WOODELF:Race      = new Race("Wood Elf",92, "woodElfScore");
+    public static const SEA_DRAGON:Race = new Race("Sea Dragon",93, "leviathanScore");
+
     public var name:String;
     public var id:int;
     private var playerFunctionName:String;
-    
+
     /**
      * @param _name Display name of the race
      * @param _id Unique number id
@@ -111,7 +114,7 @@ public class Race {
         ALL_RACES[_id] = this;
         //ALL_RACES.sort(getAliasName.length)
     }
-    
+
     public function score(player:Player):int {
         return player[playerFunctionName]();
     }

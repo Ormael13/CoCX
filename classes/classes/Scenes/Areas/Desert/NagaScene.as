@@ -568,7 +568,7 @@ public function nagaFUCKSJOOOOOO():void {
 	clearOutput();
 	//BIMBO!  LIKE, TOTALLY AWESOME AND CUM!
 	//[Naga-on-Female Bimbo Loss Scene]
-	if((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && player.hasVagina()) {
+	if((player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) && player.hasVagina()) {
 		outputText("You fall to your knees, like usual, your sexy form shaking with desire.\n\n");
         outputText("The " + gorgonOrNaga);
         outputText(" slowly approaches you with a smile of delight, devouring you with her eyes like the easy little thing you are. When she is close enough, she slides her tail under you and brings you closer to her. As she hisses in your ear, a chill goes down your spine: You don't understand a word she is saying. That seems to happen a lot with your tiny brain, but at least you can tell by the tones that she won't be going easy on you. Your nipples harden at the thought, and your " + vaginaDescript(0) + " agrees. Now astride the base of her tail and facing towards her, your eyes are directed to her crotch where a scaly covering rests where you would guess -- if you had the brains -- that a vagina should be. The " + gorgonOrNaga);
@@ -912,7 +912,6 @@ public function nagaRapeChoice2():void {
 public function nagaPlayerConstrict():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	clearOutput();
-	clearOutput();
 	if(player.fatigue + combat.physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...");
 		//Gone		menuLoc = 1;
@@ -944,12 +943,7 @@ public function nagaPlayerConstrict():void {
 		return;
 	}
 	fatigue(10, USEFATG_PHYSICAL);
-	//Amily!
-	if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-        SceneLib.combat.enemyAIImpl();
-        return;
-	}
+	if (combat.checkConcentration("", true)) return; //Amily concentration... why(true) SceneLib.combat.enemyAIImpl(); and not enemyAI();? no idea
 	//WRAP IT UPPP
 	if (monster.hasStatusEffect(StatusEffects.Dig)) {
 		if (rand(player.spe + 80) > monster.spe) {
@@ -1023,11 +1017,14 @@ public function naggaSqueeze():void {
 		damageBonus = combat.unarmedAttack();
 		damageBonus *= combat.scalingBonusStrength() * 2;
 	}
+	if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
+	if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
+	if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 	damage = damage+damageBonus;
 	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
@@ -1065,42 +1062,42 @@ public function naggaTease():void {
     //2% chance for each tease level.
     chance += player.teaseLevel * 2;
     //10% for seduction perk
-    if (player.findPerk(PerkLib.Seduction) >= 0) chance += 10;
+    if (player.hasPerk(PerkLib.Seduction)) chance += 10;
     //10% for sexy armor types
-    if (player.findPerk(PerkLib.SluttySeduction) >= 0) chance += 10;
+    if (player.hasPerk(PerkLib.SluttySeduction)) chance += 10;
     //10% for bimbo shits
-    if (player.findPerk(PerkLib.BimboBody) >= 0) {
+    if (player.hasPerk(PerkLib.BimboBody)) {
         chance += 10;
         bimbo = true;
     }
-    if (player.findPerk(PerkLib.BroBody) >= 0) {
+    if (player.hasPerk(PerkLib.BroBody)) {
         chance += 10;
         bro = true;
     }
-    if (player.findPerk(PerkLib.FutaForm) >= 0) {
+    if (player.hasPerk(PerkLib.FutaForm)) {
         chance += 10;
         futa = true;
     }
     //2 & 2 for seductive valentines!
-    if (player.findPerk(PerkLib.SensualLover) >= 0) {
+    if (player.hasPerk(PerkLib.SensualLover)) {
         chance += 2;
     }
-    if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
+    if (player.hasPerk(PerkLib.FlawlessBody)) chance += 10;
     //==============================
     //Determine basic damage.
     //==============================
     damage = 6 + rand(3);
-    if (player.findPerk(PerkLib.SensualLover) >= 0) {
+    if (player.hasPerk(PerkLib.SensualLover)) {
         damage += 2;
     }
-    if (player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
+    if (player.hasPerk(PerkLib.Seduction)) damage += 5;
     //+ slutty armor bonus
-    if (player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
+    if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
     //10% for bimbo shits
     if (bimbo || bro || futa) {
         damage += 5;
     }
-    if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
+    if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
     damage += player.level;
     damage += player.teaseLevel;
     damage += rand(7);
@@ -1149,6 +1146,9 @@ public function naggaTease():void {
 		if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+		if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
+		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
+		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 		damage *= damagemultiplier;
         //Determine if critical tease!
         var crit:Boolean = false;
@@ -1277,4 +1277,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

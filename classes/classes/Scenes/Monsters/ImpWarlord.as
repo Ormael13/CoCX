@@ -104,9 +104,12 @@ public class ImpWarlord extends Imp
 					add(consumables.SUCMILK,12).
 					add(jewelries.POWRRNG,1);
 			this.wings.type = Wings.IMP;
-			this.special1 = lustMagicAttack;
-			this.special2 = clawAttack;
-			this.special3 = doubleAttack;
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: lustMagicAttack, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+				{call: clawAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: doubleAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON,TAG_BODY]}
+			];
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

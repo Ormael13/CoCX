@@ -10,6 +10,7 @@ import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
 import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
+import classes.Transformations.TransformationLib;
 import classes.internals.Utils;
 
 import coc.model.GameModel;
@@ -265,17 +266,17 @@ import coc.xxc.StoryContext;
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets
 		// (Mostly traceback printing, etc...)
-		protected function rawOutputText(output:String, purgeText:Boolean = false):void
+		protected static function rawOutputText(output:String, purgeText:Boolean = false):void
 		{
 			EngineCore.rawOutputText(output, purgeText);
 		}
 
-		protected function outputText(output:String):void
+		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
 		}
 
-		protected function clearOutput():void
+		protected static function clearOutput():void
 		{
 			EngineCore.clearOutputTextOnly();
 		}
@@ -348,6 +349,10 @@ import coc.xxc.StoryContext;
 		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
 			return EngineCore.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+		}
+		protected function addFiveArgButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, arg4:* = -9000, arg5:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
+		{
+			return EngineCore.fiveArgButton(pos, text, func1, arg1, arg2, arg3, arg4, arg5, toolTipText, toolTipHeader);
 		}
 
 		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
@@ -599,9 +604,9 @@ import coc.xxc.StoryContext;
 			return Appearance.biggestBreastSizeDescript(player);
 		}
 
-		protected function hairDescript(longDesc:Boolean = false):String
+		protected function hairDescript():String
 		{
-			return Appearance.hairDescription(player, longDesc);
+			return Appearance.hairDescription(player);
 		}
 
 		protected function beardDescript():String
@@ -722,7 +727,7 @@ import coc.xxc.StoryContext;
 
 		protected function playerMenu():void { EventParser.playerMenu(); }
 
-		protected function get player():Player
+		protected static function get player():Player
 		{
 			return CoC.instance.player;
 		}
@@ -782,6 +787,9 @@ import coc.xxc.StoryContext;
 			CoC.instance.monster = val;
 		}
 
+		protected function get transformations():TransformationLib {
+			return CoC.instance.transformations;
+		}
 		protected function get consumables():ConsumableLib{
 			return CoC.instance.consumables;
 		}
@@ -794,8 +802,14 @@ import coc.xxc.StoryContext;
 		protected function get weaponsrange():WeaponRangeLib{
 			return CoC.instance.weaponsrange;
 		}
+		protected function get weaponsflyingswords():FlyingSwordsLib{
+			return CoC.instance.weaponsflyingswords;
+		}
 		protected function get armors():ArmorLib{
 			return CoC.instance.armors;
+		}
+		protected function get miscjewelries():MiscJewelryLib{
+			return CoC.instance.miscjewelries;
 		}
 		protected function get headjewelries():HeadJewelryLib{
 			return CoC.instance.headjewelries;
@@ -971,6 +985,16 @@ import coc.xxc.StoryContext;
 				button(13).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted)).disableIf(n >= total);
 			}
 			if (back != null) button(14).show("Back",back);
+		}
+		//Returns an autocreated menu. Takes an array in buttonName + function. i.e., array.push("buttonname", function).
+		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void {
+			var selectMenu:ButtonDataList = new ButtonDataList();
+			for (var i:int = 0; i < menuItems.length; i++){
+				if (i % 2 == 0){
+					selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
+				}
+			}
+			submenu(selectMenu, back, page, sort);
 		}
 	}
 

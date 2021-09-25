@@ -222,19 +222,19 @@ private function alraunezeMeYes0():void {
 	outputText("<i>\"Mother...?</i>\"\n\n");
 	outputText("Marae warmly responds. <i>\"Good morning, my new daughter. I am glad that you appreciate your new form. I took the liberty of making you a body as close to my own as possible, within reason, of course, not hindering your ability to move around, for instance. Otherwise, it would have been difficult to continue your mission as my emissary.</i>\"\n\n");
 	outputText("You nod, appreciative of what she has done for you, as you feel as if you are now connected to her by some sort of invisible link. Knowing what must be done, you head back to your camp, leaving your newly acquired second mother to her affairs.\n\n");
-	if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 	}
-	if (player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftButtslut)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
 	}
-	if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Stud)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 	}
-	if (player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+	if (!player.hasPerk(PerkLib.MaraesGiftProfractory)) {
 		outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 	}
@@ -381,10 +381,10 @@ public function winAgainstMarae2ndRound():void {
 	clearOutput();
 	outputText(images.showImage("marae-defeated"));
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		
+
 	}
 	else {
-		
+
 	}
 }
 public function winAgainstMarae3rdRound():void {
@@ -401,7 +401,7 @@ public function winAgainstMarae3rdRound():void {
 		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ");
 	}
 	else {
-		
+
 	}
 }
 
@@ -419,7 +419,7 @@ private function maraeBadEnd():void {
 	if (player.hasCock()) {
 		outputText("You drink deeply, suckling her thick syrupy milk with strength born of an instantaneous addiction.  The desire to attain more of her 'milk' overrides any other thoughts, clouding over them like a dense morning fog.  The slick nipples feel like they tense and squirm in your mouth as you draw every last bit of their delicious cargo into your greedy gullet.  You " + hipDescript() + " twitch and squirm, throbbing and hard, making your [cocks] bob in the air.   Heedless of your groin's incessant begging, you work the nipple in your mouth as if it was your whole world, trying to pleasure as much as suckle.  You can feel your [cocks] squirming in the air  as if reaching for her.  Wait, squirming!?  You're pulled back from her nipple and given the chance to look down, where ");
 		if(player.tentacleCocks() < player.cockTotal()) {
-			for(var i:int = player.cocks.length; i >= 0; i--){
+			for(var i:int = player.cocks.length - 1; i >= 0; i--){
 				player.cocks[i].cockType = CockTypesEnum.TENTACLE;
 			}
 		}

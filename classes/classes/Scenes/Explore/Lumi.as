@@ -44,21 +44,20 @@ public class Lumi extends BaseContent {
         //Repeat Meetings
         else outputText("Once more, you step into Lumi's lab.  She's still working on her experiments. Before you even have a chance to call out to her, she has already pivoted to watch you.  In a flash her apron hits the floor and she is standing on her desk, asking,\"<i>Stho, what can Lumi the Aochomist Extwaordinaire do fo you today?</i>\"");
 		menu();
-		if (lumiEnhance(true)) addButton(0, "Enhance", lumiEnhance);
-		addButton(1, "Shop", lumiShop);
+		if (lumiEnhance0(true)) addButton(0, "Enhance", lumiEnhance0);
+		if (lumiEnhance1(true)) addButton(1, "Enhance", lumiEnhance1);
+		addButton(5, "Shop", lumiShop);
 		if (player.hasStatusEffect(StatusEffects.LumiWorkshop)) {
-			addButton(2, "Engineering", lumiEngineering);
-			addButton(3, "Workshop", lumiWorkshop);
-			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(5, "GoblinMech", lumiGarageRetry);
+			addButton(6, "Engineering", lumiEngineering);
+			addButton(7, "Workshop", lumiWorkshop);
+			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(9, "GoblinMech", lumiGarageRetry);
 		}
-		else addButton(3, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
-		addButton(4, "Leave", camp.returnToCampUseOneHour);
-        /*var enhance:Function = null;
-        if (lumiEnhance(true))
-            enhance = lumiEnhance;*/
+		else addButton(7, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
+		addButton(10, "SellMats", lumiSell);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
 	
-    public function lumiEnhance(justCheck:Boolean = false):Boolean {
+    public function lumiEnhance0(justCheck:Boolean = false):Boolean {
         var improvables:Array = [
             [consumables.FOXBERY,consumables.VIXVIGR],
             [consumables.FOXJEWL,consumables.MYSTJWL],
@@ -69,11 +68,7 @@ public class Lumi extends BaseContent {
             [consumables.GOB_ALE,consumables.GRE_BER],
             [consumables.PIGTRUF,consumables.BOARTRU],
             [consumables.PURHONY,consumables.SPHONEY],
-            [consumables.REDVIAL,consumables.VAMPBLD],
-            [consumables.C_VEMOM,consumables.P_VEMOM],
-			[consumables.BLACKIN,consumables.ABYSSIN],
-            [consumables.ECTOPLS,consumables.PROTPLS],
-            [consumables.EYEDROP,consumables.ME_DROP],
+            [consumables.SDELITE,consumables.S_DREAM],
         ];
         if(justCheck){
             for each(var improvable:Array in improvables){
@@ -83,7 +78,6 @@ public class Lumi extends BaseContent {
         }
         clearOutput();
         outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\n");
-
         if (player.gems < 100) {
             outputText("You shake your head no, and Lumi gives you a disappointed look and says, \"<i>Den Lumi can do no enhancement for you. Anyfing else?</i>\"\n\n");
             //Return to main Lumi menu
@@ -93,7 +87,7 @@ public class Lumi extends BaseContent {
             outputText("You nod and Lumi gives an excited yell, \"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"\n\n");
             for(var i:int = 0; i<improvables.length;i++){
                 if(player.hasItem(improvables[i][0])){
-                    addButton(i,improvables[i][0].shortName,lumiEnhanceGo,improvables[i][0],improvables[i][1]);
+                    addButton(i,improvables[i][0].shortName,lumiEnhanceGo0,improvables[i][0],improvables[i][1]);
                 } else {
                     addButtonDisabled(i,improvables[i][0].shortName);
                 }
@@ -102,7 +96,7 @@ public class Lumi extends BaseContent {
             return true;
         }
     }
-    private function lumiEnhanceGo(itype:ItemType,nextItem:ItemType):void{
+    private function lumiEnhanceGo0(itype:ItemType,nextItem:ItemType):void{
         spriteSelect(37);
         trace("LUMI ENHANCE");
         player.gems -= 100;
@@ -119,17 +113,71 @@ public class Lumi extends BaseContent {
 		        case 0:
 			        outputText("She starts grabbing things from around the table, seemingly at random, and adds them to " + itype.longName + ".  To your alarm, there is soon a large cloud of smoke coming off it! There is a strong smell to the smoke and it makes it hard to breathe.  Lumi grabs a mask out of a drawer and puts it on, continuing with her work unperturbed.  She suddenly stops and you wonder if she is done, but she takes off her mask and inhales deeply of the smoke, then keels over!  As you go over to help her she suddenly stands up, waves away some of the smoke, and says, \"<i>All dun!</i>\"\n\n");
 			        break;
-
 		        case 1:
 			        outputText("Taking hold of one of the bottles that were sitting where she put the tray, she seems to think for a moment before tossing the bottle into one of the corners of the room.  It shatters just behind the table, and a small puff of smoke goes up into the air.  You're a little nervous about that bottle, but before you have a chance to say anything, two more bottles fly off and join it; this time causing a small explosion. You ask her what she is thinking tossing those aside, and she simply responds, \"<i>Dey were in my way.</i>\"\n\n\"<i>What?!  So you just toss things that explode to the side?</i>\"\n\n<i>\"Don worry, I'll put counter agents in dere at de end of de day.  An I never throw stuff da'll do any damage.  Done!</i>\"\n\n");
 			        break;
-
 		        case 2:
 			        outputText("She adds a few things to the tray before moving down the table.  She adds some reagents to a bubbling chemical reaction, and then adds some more ingredients to that.  You wonder why she just left " + itype.longName + " there to work on something else.  Then Lumi moves back across the table, past where " + itype.longName + " sits, to start adding things to something else.  Before you have a chance to complain, she moves back to " + itype.longName + " and continues.  You decide that it's probably best not to ask about her work ethic and just let her do her thing; she has more experience than you, after all.\n\nPOP! You look over in surprise as the first thing she worked on makes a small explosion.  POW! Now the second experiment has blown up!  You start to move in alarm, wondering if Lumi really knows what she's doing; just before " + itype.longName + " seems to explode with an incredible BOOM.  Lumi stops moving for a moment, looking straight ahead before saying, \"<i>Dat was a gud one, Lumi dun!</i>\"\n\n");
 			        break;
 	        }
         }
-        inventory.takeItem(nextItem, lumiEnhance, lumiLabChoices);
+        inventory.takeItem(nextItem, lumiEnhance0, lumiLabChoices);
+    }
+	public function lumiEnhance1(justCheck:Boolean = false):Boolean {
+        var improvables:Array = [
+            [consumables.REDVIAL,consumables.VAMPBLD],
+            [consumables.C_VEMOM,consumables.P_VEMOM],
+			[consumables.BLACKIN,consumables.ABYSSIN],
+            [consumables.ECTOPLS,consumables.PROTPLS],
+            [consumables.EYEDROP,consumables.ME_DROP],
+        ];
+        if(justCheck){
+            for each(var improvable:Array in improvables){
+                if(player.hasItem(improvable[0])){return true;}
+            }
+            return false;
+        }
+        clearOutput();
+        outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\n");
+        if (player.gems < 100) {
+            outputText("You shake your head no, and Lumi gives you a disappointed look and says, \"<i>Den Lumi can do no enhancement for you. Anyfing else?</i>\"\n\n");
+            //Return to main Lumi menu
+            doNext(lumiLabChoices);
+            return false;
+        } else {
+            outputText("You nod and Lumi gives an excited yell, \"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"\n\n");
+            for(var i:int = 0; i<improvables.length;i++){
+                if(player.hasItem(improvables[i][0])){
+                    addButton(i,improvables[i][0].shortName,lumiEnhanceGo1,improvables[i][0],improvables[i][1]);
+                } else {
+                    addButtonDisabled(i,improvables[i][0].shortName);
+                }
+            }
+            addButton(14, "Back", lumiLabChoices);
+            return true;
+        }
+    }
+    private function lumiEnhanceGo1(itype:ItemType,nextItem:ItemType):void{
+        spriteSelect(37);
+        trace("LUMI ENHANCE");
+        player.gems -= 100;
+        statScreenRefresh();
+        player.consumeItem(itype);
+        clearOutput();
+        outputText("Lumi grabs the item from you and runs over to her table, stopping for only a second to put her apron on.  ");
+        //start list of possible enhancement texts
+        switch (rand(3)) {
+			case 0:
+				outputText("She starts grabbing things from around the table, seemingly at random, and adds them to " + itype.longName + ".  To your alarm, there is soon a large cloud of smoke coming off it! There is a strong smell to the smoke and it makes it hard to breathe.  Lumi grabs a mask out of a drawer and puts it on, continuing with her work unperturbed.  She suddenly stops and you wonder if she is done, but she takes off her mask and inhales deeply of the smoke, then keels over!  As you go over to help her she suddenly stands up, waves away some of the smoke, and says, \"<i>All dun!</i>\"\n\n");
+				break;
+			case 1:
+			    outputText("Taking hold of one of the bottles that were sitting where she put the tray, she seems to think for a moment before tossing the bottle into one of the corners of the room.  It shatters just behind the table, and a small puff of smoke goes up into the air.  You're a little nervous about that bottle, but before you have a chance to say anything, two more bottles fly off and join it; this time causing a small explosion. You ask her what she is thinking tossing those aside, and she simply responds, \"<i>Dey were in my way.</i>\"\n\n\"<i>What?!  So you just toss things that explode to the side?</i>\"\n\n<i>\"Don worry, I'll put counter agents in dere at de end of de day.  An I never throw stuff da'll do any damage.  Done!</i>\"\n\n");
+			    break;
+			case 2:
+			    outputText("She adds a few things to the tray before moving down the table.  She adds some reagents to a bubbling chemical reaction, and then adds some more ingredients to that.  You wonder why she just left " + itype.longName + " there to work on something else.  Then Lumi moves back across the table, past where " + itype.longName + " sits, to start adding things to something else.  Before you have a chance to complain, she moves back to " + itype.longName + " and continues.  You decide that it's probably best not to ask about her work ethic and just let her do her thing; she has more experience than you, after all.\n\nPOP! You look over in surprise as the first thing she worked on makes a small explosion.  POW! Now the second experiment has blown up!  You start to move in alarm, wondering if Lumi really knows what she's doing; just before " + itype.longName + " seems to explode with an incredible BOOM.  Lumi stops moving for a moment, looking straight ahead before saying, \"<i>Dat was a gud one, Lumi dun!</i>\"\n\n");
+			    break;
+        }
+        inventory.takeItem(nextItem, lumiEnhance1, lumiLabChoices);
     }
 
     public function lumiShop():void {
@@ -225,6 +273,42 @@ public class Lumi extends BaseContent {
             doNext(lumiShop);
         }
     }
+	
+	public function lumiSell():void {
+        spriteSelect(37);
+        //Set item handling to lumi shop
+        clearOutput();
+        outputText("\"<i>Aye "+player.mf("lad","lass")+" what ya got for trade today?</i>\"\n\n");
+        menu();
+		addButton(0, "Metal Plates", lumiSellMatsMetalPlates).hint("Sell Metal Plates.");
+		addButton(14, "Leave", lumiLabChoices);
+    }
+	public function lumiSellMatsMetalPlates():void {
+        spriteSelect(37);
+        //Set item handling to lumi shop
+        clearOutput();
+        outputText("\"<i>Ya want to sell me this thing? Sure I will take it from you but only for 40 gem. I ain't running a pawn shop or charity booth here, this is a lab and I need parts and fundings. So in what quantity are we speaking?</i>\"\n\n");
+        menu();
+		addButton(0, "Sell 1", lumiLustDraftPitch, 1).hint("Sell 1 Metal Plate.");
+		addButton(1, "Sell 5", lumiPitchGobboAle, 5).hint("Sell 5 Metal Plates.");
+		addButton(2, "Sell 10", lumiPitchGobboAle, 10).hint("Sell 10 Metal Plates.");
+		addButton(3, "Sell 50", lumiPitchGobboAle, 50).hint("Sell 50 Metal Plates.");
+		addButton(14, "No", lumiSellMatsMetalPlatesNo);
+    }	
+	private function lumiSellMatsMetalPlatesAmount(amount:int):void {
+		metal_pieces = amount;
+		clearOutput();
+		player.gems += (metal_pieces * 40);
+		outputText("You shake hands with Lumi and trade off the parts.\n\n\"<i>Happy doing business with you… anything else or can I get back to work?</i>\"\n\n");
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= metal_pieces;
+		statScreenRefresh();
+		doNext(lumiSellMatsMetalPlates);
+	}
+	private function lumiSellMatsMetalPlatesNo():void {
+		clearOutput();
+		outputText("You would rather think it through first. This here is prime quality material after all.\n\n\"<i>Hardly but if you wanna keep it and think it over then no skin off my back i'll obtain myself the thing the same way I do normally. So anything else you wanted [name]?</i>\"\n\n");
+		doNext(lumiSellMatsMetalPlates);
+	}
 	
 	public function lumiGarage():void {
 		spriteSelect(37);
@@ -1368,6 +1452,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("M.G.S. bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - M.G.S. bracer");
 		player.removeKeyItem("Powboy");
+		player.statStore.replaceBuffObject({'str.mult':1,'sens':+15},'Power bracer',{text:'M.G.S. bracer'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
 		else doNext(camp.returnToCampUseTwelveHours);
@@ -1381,6 +1466,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Powboy", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Powboy");
 		player.removeKeyItem("Power bracer");
+		player.statStore.replaceBuffObject({'str.mult':0.75,'sens':+10},'Power bracer',{text:'Powboy'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
 		else doNext(camp.returnToCampUseEightHours);
@@ -1393,6 +1479,7 @@ public class Lumi extends BaseContent {
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Power bracer is ready.\n\n");
 		player.createKeyItem("Power bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Power bracer");
+		player.statStore.replaceBuffObject({'str.mult':0.5,'sens':+5},'Power bracer',{text:'Power bracer'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
 		else doNext(camp.returnToCampUseFourHours);
@@ -1793,4 +1880,4 @@ public class Lumi extends BaseContent {
 		else doNext(camp.returnToCampUseFourHours);
 	}*/
 }
-}
+}

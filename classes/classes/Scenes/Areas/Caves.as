@@ -54,7 +54,15 @@ use namespace CoC;
 				return;
 			}
 			//Ashlands
-			
+			if (player.level >= 35 && flags[kFLAGS.DISCOVERED_ASHLANDS] == 0) {
+				clearOutput();
+				outputText("While exploring one of the many tunnels you begin to see a red light, curious as to where this opens you take it all the way to the surface as the heat starts to increase dramatically the cool fresh air of the tunnel replaced by a warm and smoky air, it's definitely very hot out there. ");
+				outputText("What awaits you beyond the exit is the sight of a field of ashes and lava with volcanoes in the backside.\n\n");
+				outputText("<b>You've discovered the Ashlands!</b>");
+				flags[kFLAGS.DISCOVERED_ASHLANDS]++;
+				doNext(camp.returnToCampUseTwoHours);
+				return;
+			}
 			//Tundra
 			if (player.level >= 35 && flags[kFLAGS.DISCOVERED_TUNDRA] == 0) {
 				clearOutput();

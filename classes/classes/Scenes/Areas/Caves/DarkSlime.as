@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Caves 
+package classes.Scenes.Areas.Caves
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -22,39 +22,39 @@ use namespace CoC;
 			var damage:Number = 0;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
-			if (findPerk(PerkLib.Acid) >= 0) outputText("Her body quivering from your flames, the dark slime ");
+			if (hasPerk(PerkLib.Acid)) outputText("Her body quivering from your flames, the dark slime ");
 			else outputText("The dark slime holds its hands up and they morph into a replica of your [weapon].  Happily, she swings at you");
 			//Determine if dodged!
 			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
-				if (findPerk(PerkLib.Acid) >= 0) outputText("tries to slap you, but you dodge her attack.");
+				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you dodge her attack.");
 				else outputText(", missing as you dodge aside.");
 				return;
 			}
 			//Determine if evaded
-			if (short != "Kiha" && player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				if (findPerk(PerkLib.Acid) >= 0) outputText("tries to slap you, but you evade her attack.");
+			if (short != "Kiha" && player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you evade her attack.");
 				else outputText(", but you evade the clumsy attack.");
 				return;
 			}
 			//("Misdirection"
-			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				if (findPerk(PerkLib.Acid) >= 0) outputText("tries to slap you.  You misdirect her, avoiding the hit.");
+			if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you.  You misdirect her, avoiding the hit.");
 				else outputText(", missing as you misdirect her attentions.");
 				return;
 			}
 			//Determine if cat'ed
-			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				if (findPerk(PerkLib.Acid) >= 0) outputText("tries to slap you, but misses due to your cat-like evasion.");
+			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
+				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but misses due to your cat-like evasion.");
 				else outputText(", missing due to your cat-like evasion.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
-			if (findPerk(PerkLib.Acid) >= 0) damage = int(((str + 10 + weaponAttack) * 1.5) - rand(player.tou) - player.armorDef);
+			if (hasPerk(PerkLib.Acid)) damage = int(((str + 10 + weaponAttack) * 1.5) - rand(player.tou) - player.armorDef);
 			else damage = int(((str + weaponAttack) * 1.5) - rand(player.tou) - player.armorDef);
-			
+
 			if (damage <= 0) {
 				damage = 0;
-				if (findPerk(PerkLib.Acid) >= 0) {
+				if (hasPerk(PerkLib.Acid)) {
 					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("tries to slap you, but the acid-bearing slap spatters weakly off your [armor]. ");
 					else outputText("tries to slap you with an acid-loaded hand, but it splatters off you ineffectually. ");
 				}
@@ -66,7 +66,7 @@ use namespace CoC;
 			}
 			//everyone else
 			else {
-				if (findPerk(PerkLib.Acid) >= 0) {
+				if (hasPerk(PerkLib.Acid)) {
 					outputText("delivers a painful slap across your cheek.  You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on! ");
 					if (!player.hasStatusEffect(StatusEffects.AcidSlap)) player.createStatusEffect(StatusEffects.AcidSlap, 0, 0, 0, 0);
 				}
@@ -129,30 +129,17 @@ use namespace CoC;
 			player.dynStats("lus", 20 + rand(8) + player.effectiveSensitivity() / 7);
 		}
 
-		override protected function performCombatAction():void
-		{
-			var choice:Number = rand(5);
-			if (choice == 0) gooGalAttack();
-			if (choice == 1) gooEngulph();
-			if (choice == 2) {
-				if (rand(2) == 0) gooPlay();
-				else gooThrow();
-			}
-			if (choice == 3) darkslimeMagic();
-			if (choice == 4) darkslimePoison();
-		}
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.caves.darkslimeScene.beatingDarkSlime();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
 		}
-		
-		public function DarkSlime() 
+
+		public function DarkSlime()
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
@@ -264,6 +251,14 @@ use namespace CoC;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LightningVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
+			this.abilities = [
+				{ call: gooGalAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FLUID,TAG_ACID]},
+				{ call: gooEngulph, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{ call: gooPlay, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID]},
+				{ call: gooThrow, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_FLUID,TAG_ACID]},
+				{ call: darkslimeMagic, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FLUID,TAG_ACID]},
+				{ call: darkslimePoison, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FLUID]}
+			]
 			checkMonster();
 		}
 	}

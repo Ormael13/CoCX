@@ -49,7 +49,7 @@ use namespace CoC;
 			var damage:Number = this.inte * 0.2;
 			damage += eBaseIntelligenceDamage() * 0.2;
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			damage = player.takeAcidDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 2, 10); //More heads will produce more potent acid
 			else player.createStatusEffect(StatusEffects.AcidDoT, 6, 10, 0, 0);
 		}

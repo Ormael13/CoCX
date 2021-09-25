@@ -17,8 +17,8 @@ package classes.Scenes.Areas.GlacialRift
 		public function backhand():void {
 			outputText("The golems visage twists into a grimace of irritation, and few of them flyby you swinging their hands at you in a vicious backhand.");
 			var damage:Number = int (((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 3;
 			damage = Math.round(damage);
 			//Dodge
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swings!");
@@ -34,8 +34,8 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Raising their fists high overhead, golems swiftly dives down brings their fists down in a punishing strike!");
 			
 			var damage:Number = 100 + int(((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 3;
 			damage = Math.round(damage);
 			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else
@@ -95,24 +95,24 @@ package classes.Scenes.Areas.GlacialRift
 			this.a = "the ";
 			this.short = "true ice golems";
 			this.imageName = "true ice golems";
-			this.long = "You're currently fighting true ice golems. They're all around ten feet tall without any sexual characteristics, their body shaped like gorilla, with bird-like wings, covered with with thick ice and using bare fists to smash enemies.";
+			this.long = "You're currently fighting true ice golems. They're all around ten feet tall without any sexual characteristics, their body shaped like gorilla, with bird-like wings, covered with thick ice and using bare fists to smash enemies.";
 			this.plural = true;
 			initStrTouSpeInte(375, 335, 190, 20);
 			initWisLibSensCor(20, 10, 10, 50);
 			this.lustVuln = 0;
-			this.tallness = 84;
+			this.tallness = 120;
 			this.drop = NO_DROP;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.level = 80;
 			this.bonusHP = 5000;
-			this.additionalXP = 000;
+			this.additionalXP = 1000;
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
 			this.weaponAttack = 175;
 			this.armorName = "ice armor";
-			this.armorDef = 180;
-			this.armorMDef = 180;
+			this.armorDef = 360;
+			this.armorMDef = 360;
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

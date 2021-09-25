@@ -14,7 +14,7 @@ public class HarpyMob extends Monster
 			else if(rand(3) > 0) harpyHordeClawFlurry();
 			else harpyHordeGangBangAttack();
 		}
-		
+
 		//ATTACK ONE: Claw Flurry
 		public function harpyHordeClawFlurry():void {
 			outputText("The harpies lunge at you, a veritable storm of talons and claws raining down around you.  You stumble back, trying desperately to deflect some of the attacks, but there are simply too many to block them all!  Only a single harpy in the brood seems to be holding back...\n");
@@ -22,7 +22,7 @@ public class HarpyMob extends Monster
 			createStatusEffect(StatusEffects.Attacks, 3 + rand(3),0,0,0);
 			eAttack();
 		}
-		
+
 		//ATTACK TWO: Gangbang
 		public function harpyHordeGangBangAttack():void {
 			outputText("Suddenly, a pair of harpies grabs you from behind, holding your arms to keep you from fighting back! Taking advantage of your open state, the other harpies leap at you, hammering your chest with punches and kicks - only one hangs back from the gang assault.\n\n");
@@ -30,15 +30,15 @@ public class HarpyMob extends Monster
 			//(PC must struggle:
 			harpyHordeGangBangStruggle(false);
 		}
-		
+
 		public function harpyHordeGangBangStruggle(clearDisp:Boolean = true):void {
 			if(clearDisp) clearOutput();
-			//Success: 
+			//Success:
 			if((rand(10) == 0 && player.str/5 + rand(20) >= 23) || player.hasPerk(PerkLib.FluidBody)) {
 				player.removeStatusEffect(StatusEffects.HarpyBind);
 				outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
 			}
-			//Failure: 
+			//Failure:
 			//If fail:
 			else {
 				var damage:Number = 80 + rand(40);
@@ -46,11 +46,11 @@ public class HarpyMob extends Monster
 				damage = player.takePhysDamage(damage, true);
 			}
 		}
-		
+
 		//ATTACK THREE: LUSTY HARPIES!
 		public function harpyHordeLustAttack():void {
 			outputText("The harpies back off for a moment, giving you room to breathe - only to begin a mini strip-tease, pulling off bits of clothing to reveal their massive asses and hips or bearing their small, perky tits.  They caress themselves and each other, moaning lewdly.  Distracted by the burlesque, you don't notice a lipstick-wearing harpy approach you until it's too late!  She plants a kiss right on your lips, ");
-			if(player.findPerk(PerkLib.LuststickAdapted) >= 0) outputText("doing relatively little thanks to your adaptation");
+			if(player.hasPerk(PerkLib.LuststickAdapted)) outputText("doing relatively little thanks to your adaptation");
 			else {
 				outputText("sending shivers of lust up your spine");
 				player.dynStats("lus", 5);
@@ -59,23 +59,23 @@ public class HarpyMob extends Monster
 			outputText(".");
 			player.dynStats("lus", 10);
 		}
-		
+
 		override protected function performCombatAction():void
 		{
 			harpyHordeAI();
 		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.dungeons.heltower.pcDefeatsHarpyHorde();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (player.isGargoyle()) SceneLib.dungeons.heltower.gargoyleBadEndPhoenixTower();
 			else SceneLib.dungeons.heltower.pcLosesToHarpyHorde();
 		}
-		
+
 		public function HarpyMob()
 		{
 			this.a = "the ";
@@ -116,10 +116,17 @@ public class HarpyMob extends Monster
 			this.additionalXP = 50;
 			this.tailType = Tail.HARPY;
 			this.drop = NO_DROP;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: harpyHordeClawFlurry, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: harpyHordeGangBangAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: harpyHordeLustAttack, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_BODY]}
+			]
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
 			checkMonster();
 		}
-		
+
 	}
 
 }

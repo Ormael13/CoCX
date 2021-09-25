@@ -73,6 +73,9 @@ use namespace CoC;
 		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 50, 
 			"An Elemental Shard.",
 			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
+		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 500, 
+			"An vial of E-Ichor.",
+			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be usefull to undergone mutations.");
 		//MISCELLANEOUS
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
 			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes.",

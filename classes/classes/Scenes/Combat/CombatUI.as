@@ -9,10 +9,13 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
+import classes.MutationsLib;
 import classes.Scenes.Areas.Beach.CancerAttack;
 import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
+import classes.Scenes.Combat.PhysicalSpecials;
 import classes.Scenes.Dungeons.D3.DriderIncubus;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.MinotaurKing;
@@ -41,6 +44,8 @@ public class CombatUI extends BaseCombatContent {
 	private var blackSpellButtons:ButtonDataList = new ButtonDataList();
 	private var greySpellButtons:ButtonDataList = new ButtonDataList();
 	private var hexSpellButtons:ButtonDataList = new ButtonDataList();
+	private var divineSpellButtons:ButtonDataList = new ButtonDataList();
+	private var necroSpellButtons:ButtonDataList = new ButtonDataList();
 	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
@@ -53,6 +58,8 @@ public class CombatUI extends BaseCombatContent {
 		blackSpellButtons.clear();
 		greySpellButtons.clear();
 		hexSpellButtons.clear();
+		divineSpellButtons.clear();
+		necroSpellButtons.clear();
 		bloodSpellButtons.clear();
 		soulforceButtons.clear();
 		otherButtons.clear();
@@ -79,8 +86,8 @@ public class CombatUI extends BaseCombatContent {
 		 */
 
 		//Standard menu before modifications.
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) {
-			btnMelee.show("E.Attack", combat.baseelementalattacks, "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) {
+			btnMelee.show("E.Attack", combat.baseelementalattacks, "Command your elemental to attack the enemy.  Damage it will deal is affected by your wisdom and intelligence.");
 			if (combat.isEnnemyInvisible) btnMelee.disable("You cannot use command your elemental to attack an opponent you cannot see or target.");
 		}
 		else {/*
@@ -113,13 +120,24 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else {
 				if (monster.isFlying()) {
-					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
+					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling))) {
 						if (player.isFlying()) {
-							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
+							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon()) {
 								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 							}
+							else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
+								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
+								else {
+									if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+									else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+								}
+							}
 							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
+						}
+						else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
+							if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+							else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
 						}
 						else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 					}
@@ -178,7 +196,7 @@ public class CombatUI extends BaseCombatContent {
 
 		// Submenus
 		function vampireBiteDuringGrapple(Position:int):void {
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
 				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(Position).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -238,9 +256,20 @@ public class CombatUI extends BaseCombatContent {
 		// Modifications - full or partial replacements
 		if (isPlayerBound()) {
 			mainMenuWhenBound();
-		} else if (isPlayerStunned() || isPlayerFeared()) {
+		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
 			menu();
 			addButton(0, "Recover", combat.wait);
+			if (player.hasStatusEffect(StatusEffects.KnowsClearMind) && !isPlayerPowerStunned()) {
+				var numb:Number = 50;
+				if (player.hasPerk(PerkLib.GrandGreyArchmage)) numb -= 50;
+				var badLustForGrey:Boolean = player.lust < numb || player.lust > (player.maxLust() - numb);
+				var bloodForBloodGod:Number = (player.HP - player.minHP());
+				if (badLustForGrey) addButtonDisabled(1, "Clear Mind", "You can't use any grey magics.");
+				else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your mana is too low to cast this spell.");
+				else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(100) && player.HP < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your hp is too low to cast this spell.");
+				else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your hp is too low to cast this spell.");
+				else addButton(1, "Clear Mind", combat.magic.spellClearMind);
+			}
 		} else if (player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 			mainMenuWhenChanneling();
 		} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
@@ -251,8 +280,9 @@ public class CombatUI extends BaseCombatContent {
 			} else {
 				btnMelee.show("Approach", combat.approachAfterKnockback3, "Close some distance between you and your opponent.");
 			}
+		}
 		//HYPNOSIS
-		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && !monster.hasStatusEffect(StatusEffects.Constricted)) {
+		else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && !monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
 			addButton(0, "Heal", combat.HypnosisHeal);
 			addButton(1, "Attack", combat.HypnosisAttack);
@@ -263,28 +293,29 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease).hint("Deals lesser lust damage. Does not break hypnosis.");
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
 				}
 			}
 			addButton(4, "Maintain", combat.HypnosisMaintain);
+		}
 		//Naga grapple
-		} else if (monster.hasStatusEffect(StatusEffects.Constricted) && !monster.hasStatusEffect(StatusEffects.HypnosisNaga)) {
+		else if (monster.hasStatusEffect(StatusEffects.Constricted) && !monster.hasStatusEffect(StatusEffects.HypnosisNaga)) {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease);
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
-		//Grappling Cancer
 		} else if (monster.hasStatusEffect(StatusEffects.CancerGrab)) {
 			menu();
 			addButton(0, "Guillotine", combat.Guillotine).hint("Crush your foe with your pincer and attempt to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.CrabLeggoMyEggo);
+		}
 		//Grappling scylla
-		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
+		else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
 			menu();
 			addButton(0, "Squeeze", combat.ScyllaSqueeze);
 			if (monster.plural) {
@@ -295,8 +326,14 @@ public class CombatUI extends BaseCombatContent {
 			addButton(1, "Tease", combat.ScyllaTease).hint("Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.ScyllaLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedWhip)) {
+			menu();
+			addButton(0, "Strangulate", combat.WhipStrangulate);
+			vampireBiteDuringGrapple(3);
+			addButton(4, "Release", combat.WhipLeggoMyEggo);
+		}
 		//Orca be playing rought
-		} else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
+		else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
 			menu();
 			addButton(0, "Juggle", combat.OrcaJuggle).hint("Deal bite damage and send your foe back in the air at the cost of a fairly decent amount of fatigue. Extend the duration of play by 2 rounds up to twice. \n\nFatigue Cost: " + physicalCost(50) + "");
 			addButton(1, "Tail wack", combat.OrcaWack).hint("Stun your opponent and smash it back into the air with your tail.\n\nFatigue Cost: " + physicalCost(20) + "");
@@ -309,7 +346,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.Straddle)) {
 			menu();
 			addButton(0, "Tease", combat.StraddleTease).hint("Use a powerful teasing attack");
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
 				addButton(1, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(1).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -349,7 +386,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.GooLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			menu();
-			if (player.faceType == Face.VAMPIRE || player.hasPerk(PerkLib.HollowFangs)) {
+			if (player.faceType == Face.VAMPIRE || player.hasPerk(MutationsLib.HollowFangs)) {
 				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -357,6 +394,23 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.MysticWeb)) {
+			menu();
+			addButton(0, "Tease", combat.WebTease).hint("Toy with your opponent");
+			addButton(1, "Bite", combat.spiderBiteAttack).hint("Inject your venom.");
+			addButton(2, "Release", combat.BreakOutWeb);
+			vampireBiteDuringGrapple(3);
+			//combat.mspecials.buildMenu(magspButtons);
+			if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
+			if (combat.isPlayerSilenced()) {
+				btnMSpecials.disable();
+			}
+			// Submenu - Spells
+			//BuildSpellBookMenu(spellBookButtons);
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+			} else if (!combat.canUseMagic()) btnMagic.disable();
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
 			if (player.arms.type == Arms.DISPLACER)
@@ -371,7 +425,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.GrabBear)) {
 			menu();
 			addButton(0, "Hug", combat.bearHug).hint("Crush your opponent with a bear hug. \n\nFatigue Cost: " + physicalCost(30) + "");
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -380,7 +434,27 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.BearLeggoMyEggo);
 		} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] == 0 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
 			combat.willothewispattacks();
-		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) {
+		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
+			menu();
+			addButton(0, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1);
+			if (monster.plural) {
+				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 2) {
+					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(1, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3);
+					else addButtonDisabled(1, "Send P.Gol/3", "Not enough mana.");
+				}
+				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 4) {
+					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(2, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5);
+					else addButtonDisabled(2, "Send P.Gol/5", "Not enough mana.");
+				}
+			}
+		} else if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
+			menu();
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+			addButton(13, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of elemental. Would skip to next minion attack/your main turn.");
+		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
 			menu();
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, Combat.AIR);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", combat.baseelementalattacks, Combat.EARTH);
@@ -395,19 +469,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(10, "Poison", combat.baseelementalattacks, Combat.POISON);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(11, "Purity", combat.baseelementalattacks, Combat.PURITY);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(12, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
-		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
-			menu();
-			addButton(0, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1);
-			if (monster.plural) {
-				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 2) {
-					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(1, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3);
-					else addButtonDisabled(1, "Send P.Gol/3", "Not enough mana.");
-				}
-				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 4) {
-					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(2, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5);
-					else addButtonDisabled(2, "Send P.Gol/5", "Not enough mana.");
-				}
-			}
+			addButton(13, "None", combat.baseelementalattacks, Combat.NONE).hint("You forfeit potential attack of elemental. Would skip to next minion attack/your main turn.");
 		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") combat.comfoll.amilyCombatActions();
@@ -452,7 +514,7 @@ public class CombatUI extends BaseCombatContent {
 				if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
 			} else if (monster is MinotaurKing) {
 				var minoking:MinotaurKing = monster as MinotaurKing;
-				if (!player.hasStatusEffect(StatusEffects.MinoKing)) btnSpecial1.show("Dish Helper", minoking.dishHelper);
+				if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
 			} else if (monster is Lethice) {
 				var lethice:Lethice = monster as Lethice;
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
@@ -461,6 +523,10 @@ public class CombatUI extends BaseCombatContent {
 						btnSpecial1.show("Dispell", lethice.dispellRapetacles);
 					}
 				}
+			} else if (monster is WoodElvesHuntingParty) {
+				var woodelves:WoodElvesHuntingParty = monster as WoodElvesHuntingParty;
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
 			}
 		}
 	}
@@ -525,17 +591,21 @@ public class CombatUI extends BaseCombatContent {
 		combat.magic.buildBlackMenu(blackSpellButtons);
 		combat.magic.buildGreyMenu(greySpellButtons);
 		combat.magic.buildHexMenu(hexSpellButtons);
+		combat.magic.buildDivineMenu(divineSpellButtons);
+		combat.magic.buildNecroMenu(necroSpellButtons);
 		combat.magic.buildBloodMenu(bloodSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
+		if (player.hasPerk(PerkLib.GreyMagic) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
 		if (player.hasPerk(PerkLib.HexKnowledge) && hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		if (player.hasPerk(PerkLib.DivineKnowledge) && divineSpellButtons.length > 0) buttons.add("Divine", curry(submenu,divineSpellButtons, submenuSpells, 0, false)).hint("Open your Divine tome");
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && necroSpellButtons.length > 0) buttons.add("Necro Spells", curry(submenu,necroSpellButtons, submenuSpells, 0, false)).hint("Open your Necromicon");
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) && bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
 	}
 
 	private function isPlayerPlayingWithElementalsOrGolems():Boolean {
 	var dancingwithminions:Boolean = false;
-	if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) dancingwithminions = true;
+	if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) dancingwithminions = true;
 	if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) dancingwithminions = true;
 	return dancingwithminions;
 }

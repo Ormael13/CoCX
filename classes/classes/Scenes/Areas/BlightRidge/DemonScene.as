@@ -11,6 +11,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DefiledRavine.CowSuccubus;
 import classes.Scenes.Areas.DefiledRavine.MinoIncubus;
+import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.UniqueSexScenes;
 
@@ -20,6 +21,7 @@ import classes.Scenes.UniqueSexScenes;
 	{
 		public var FactoryScene:Factory = new Factory();
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var campwinions:CampMakeWinions = new CampMakeWinions();
 		
 		public function DemonScene() 
 		{}
@@ -658,7 +660,7 @@ import classes.Scenes.UniqueSexScenes;
 		
 		public function SuccubusGetsRapedByFemale():void {
 			clearOutput();
-			if(monster.HP < 1) outputText("Your foe staggers and falls hard on her ass, utterly defeated.  Her bruises and lacerations slowly fade and heal, regenerating with the aid of her demonic powers.  You easily tear through her clothes. It doesn't take much to force her down on her back and straddle her as you disrobe, ready to take your pleasure.\n\n");
+			if(monster.HP <= monster.minHP()) outputText("Your foe staggers and falls hard on her ass, utterly defeated.  Her bruises and lacerations slowly fade and heal, regenerating with the aid of her demonic powers.  You easily tear through her clothes. It doesn't take much to force her down on her back and straddle her as you disrobe, ready to take your pleasure.\n\n");
 			else outputText("Your foe drops to her knees, stuffing three digits into her greedy snatch as arousal overcomes her desire to subdue you.  With great care, you approach your insensible enemy and tear off her clothes as you force her down on her back.  As if possessing a will of their own, her legs lewdly spread as you disrobe.\n\n");
 			outputText("Her budding clit rises from between her folds, hardening like a tiny three inch dick.\n\n");
 			if(player.biggestLactation() > 1) {
@@ -803,7 +805,7 @@ import classes.Scenes.UniqueSexScenes;
 		
 		private function killDemon():void {
 			clearOutput();
-			flags[kFLAGS.IMPS_KILLED]++;
+			flags[kFLAGS.TRUE_DEMONS_KILLED]++;
 			outputText("You make a quick work of the ");
 			if (monster.short == "succubus") outputText("succubus");
 			if (monster.short == "incubus") outputText("incubus");
@@ -811,11 +813,21 @@ import classes.Scenes.UniqueSexScenes;
 			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu(); 
-			addButton(0, "Take Skull", takeSkull);
 			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(2, "Take Skull", takeSkull);
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);
+			else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
 		}
 		private function takeSkull():void {
 			inventory.takeItem(useables.DEMSKLL, cleanupAfterCombat);
+		}
+		private function harvestBones():void {
+			var harv:Number = 1 + rand(5);
+			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
+			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > campwinions.maxDemonBonesStored()) harv = campwinions.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
+			cleanupAfterCombat();
 		}
 	}
 }

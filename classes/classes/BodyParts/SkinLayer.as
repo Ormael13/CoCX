@@ -102,7 +102,7 @@ public class SkinLayer extends BodyPart {
 
 	override public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 		super.loadFromObject(o, ignoreErrors);
-		if (_adj == "sexy tattooed") {
+		if (_adj == "tattooed") {
 			pattern = Skin.PATTERN_MAGICAL_TATTOO;
 		} else if (_adj == "covered with various intricate battle tattoos") {
 			pattern = Skin.PATTERN_BATTLE_TATTOO;

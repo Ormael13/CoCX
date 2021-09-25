@@ -67,6 +67,12 @@ public class DarkElfRanger extends DarkElfScout
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).
 					add(consumables.ELFEARS,4);
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: DarkElfBowShooting, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON]},
+				{ call: AnkleShot, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON], condition: !player.hasStatusEffect(StatusEffects.Sealed2)},
+				{ call: WingClip, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON], condition: player.isFlying(), weight: Infinity}
+			]
 			checkMonster();
 		}	
 	}

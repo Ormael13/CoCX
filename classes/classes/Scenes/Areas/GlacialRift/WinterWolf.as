@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -16,31 +16,12 @@ public class WinterWolf extends Monster
 		{
 			SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			SceneLib.glacialRift.winterwolfScene.loseToWinterWolf();
 		}
-		
-		override protected function performCombatAction():void
-		{
-			var size:Number = 0;
-			if (player.tallness >= 96) size += 2;
-			else if (player.tallness >= 72) size += 3;
-			else if (player.tallness < 72) size += 4;
-			var choice:Number = rand(size);
-			if (choice == 0) eAttack();
-			if (choice == 1) frostbite();
-			if (choice == 2) {
-				if (!player.hasStatusEffect(StatusEffects.WolfHold) && rand(2) == 0) wolfHold();
-				else frostbite();
-			}
-			if (choice == 3) {
-				if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) paw();
-				else frostbite();
-			}
-		}
-		
+
 		public function frostbite():void {
 			outputText("The wolf lunge, biting viciously at your leg.");
 			var dmgtaken:Number = 0;
@@ -48,7 +29,7 @@ public class WinterWolf extends Monster
 			if(!player.hasStatusEffect(StatusEffects.Frostbite)) {
 				outputText(" You feel the cold enter your body and shake you to the very core weakening your resolve just as much as slowing down your movement.");
 				if(player.str > 7) {
-					player.addCurse("str", 6);
+					player.addCurse("str", 6,2);
 					showStatDown( 'str' );
 					player.createStatusEffect(StatusEffects.Frostbite,6,0,0,0);
 				}
@@ -66,7 +47,7 @@ public class WinterWolf extends Monster
 			else {
 				outputText(" The coldness effects intensify as your movement slowing down even more.");
 				if(player.str > 6) {
-					player.addCurse("str", 5);
+					player.addCurse("str", 5,2);
 					showStatDown( 'str' );
 					player.addStatusValue(StatusEffects.Frostbite,1,5);
 				}
@@ -81,15 +62,15 @@ public class WinterWolf extends Monster
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
 		}
-		
+
 		protected function wolfHold():void {
 			outputText("The wolf suddenly grab you crushing you under its paw as it start tearing you apart with its maw.");
 			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0); 
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(12+rand(15));
 			}
 		}
-		
+
 		public function paw():void {
 			outputText("The wolf smash you with its enormous paw you rail at the impact as it sends you flying across the field.");
 			player.takePhysDamage(str + weaponAttack);
@@ -97,12 +78,12 @@ public class WinterWolf extends Monster
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.WolfHold)) player.removeStatusEffect(StatusEffects.WolfHold);
 		}
-		
-		public function WinterWolf() 
+
+		public function WinterWolf()
 		{
 			this.a = "the ";
 			this.short = "winter wolf";
-			this.imageName = "winter-wolf";
+			this.imageName = "s_winterWolf";
 			this.long = "You're facing a wolf that can only be described as oversized. The beast bigger than a horse is easily 10 feet tall with a pelt about just as white as the landscape below it. A small blue mist trail regularly escape its mouth subjesting its bite might be way worse then it appear.";
 			// this.plural = false;
 			this.createCock(18, 3, CockTypesEnum.WOLF);
@@ -145,9 +126,15 @@ public class WinterWolf extends Monster
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.abilities = [
+				{ call: frostbite, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_ICE]  },
+				{ call: wolfHold, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: function():Boolean { return player.tallness < 96 && !player.hasStatusEffect(StatusEffects.WolfHold) } },
+				{ call: paw, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: function():Boolean { return player.tallness < 72 && !hasStatusEffect(StatusEffects.AbilityCooldown1) } },
+				{ call: frostbite, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_ICE], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.WolfHold) }, weight:Infinity },
+			]
 			checkMonster();
 		}
-		
+
 	}
 
 }

@@ -13,7 +13,7 @@ package classes.Items
 	 * Superclass for items that could be equipped by player (armor, weapon, talisman, piercing, ...).
 	 * Subclasses should override "equip" and "unequip" methods. Optionally, they could override "equipEffect" and
 	 * "unequipEffect" methods that perform additional effects on player. By default, they do nothing.
-	 * Overridden "equip" and "unequip" should call "equipped" and "unequipped" if equipped/unequipped succesfully.
+	 * Overridden "equip" and "unequip" should call "equipped" and "unequipped" if equipped/unequipped successfully.
 	 */
 	public class Equipable extends Consumable
 	{
@@ -27,7 +27,7 @@ package classes.Items
 		}
 
 		/**
-		 * Called after item succesfully equipped. By default, does nothing. Should add perks/effects/etc.
+		 * Called after item successfully equipped. By default, does nothing. Should add perks/effects/etc.
 		 */
 		public function equipEffect(player:Player,output:Boolean):void
 		{
@@ -35,7 +35,7 @@ package classes.Items
 		}
 
 		/**
-		 * Called after item succesfully unequipped. By default, does nothing. Should remove perks/effects/etc.
+		 * Called after item successfully unequipped. By default, does nothing. Should remove perks/effects/etc.
 		 */
 		public function unequipEffect(player:Player,output:Boolean):void
 		{

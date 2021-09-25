@@ -2397,7 +2397,7 @@ internal function sheilaGotWhomped():void {
 	clearOutput();
 	outputText("Sheila collapses, ");
 	//[(HP)
-	if(monster.HP < 1) outputText("completely spread-eagled from her injuries");
+	if(monster.HP <= monster.minHP()) outputText("completely spread-eagled from her injuries");
 	///(lust)
 	else outputText("rubbing her thighs together and smearing around the moisture from her pussy");
 	outputText(".  As you stand over her, she forces herself to her elbows and tries to scoot away from you, fear written on her face.  \"<i>I'm sorry... please, no...");
@@ -2450,7 +2450,7 @@ private function rapeSheilasCooter():void {
 	
 	outputText("\n\nSliding down her body a bit, you devote your attention to her waist, unfastening her belt and unbuttoning her dusty shorts.  A triangle of white fabric greets you as you pull the flaps apart, and you tug the bottoms down quickly to expose her panties.  You place one finger at the entrance to her pussy, ");
 	//[(monster HP < 1)
-	if(monster.HP < 1) outputText("sliding it between her labia and producing a damp spot, then ");
+	if(monster.HP <= monster.minHP()) outputText("sliding it between her labia and producing a damp spot, then ");
 	outputText("dragging the wet fabric around her vulva.");
 	
 	outputText("\n\nSatisfying yourself as to her readiness, you unfasten your [armor] to extract your [cockFit 48]; the " + player.cockHead(x) + " drips with pre-cum as you pull it loose, and you lay it on her crotch, letting the goo soak the white fabric until you can see her light-brown skin through it.  She squirms under it, bringing up another droplet with her motion, and you place the tip at the entrance to her pussy, pressing eagerly against the fabric.  \"<i>Please...</i>\" she whimpers, \"<i>I'm begging you; don't.</i>\"");
@@ -4406,7 +4406,7 @@ internal function beatUpDemonSheila(output:Boolean = true):void {
 	if(output) {
 		clearOutput();
 		outputText("\"<i>Ahh, you win, mate.  I give up.</i>\"  Sheila slumps to the ground, ");
-		if(monster.HP < 1) outputText("and her wounds begin to close with a soft lilac glow.  \"<i>So fuckin' strong.  I don't suppose you've got any sperm for me, do you?  I'd love to have some of your kids...</i>\"  She looks at you beseechingly, gently fingering herself.");
+		if(monster.HP <= monster.minHP()) outputText("and her wounds begin to close with a soft lilac glow.  \"<i>So fuckin' strong.  I don't suppose you've got any sperm for me, do you?  I'd love to have some of your kids...</i>\"  She looks at you beseechingly, gently fingering herself.");
 		//(lust)
 		else outputText("frigging herself vigorously.  \"<i>Do with me what you will, lover; those were the terms.  Won't you take my body to satisfy yourself, you brute?</i>\"  The audacious woman sticks her tongue out, as if to goad you into treating her roughly.");
 	}

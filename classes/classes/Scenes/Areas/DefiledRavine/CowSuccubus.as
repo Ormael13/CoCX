@@ -83,8 +83,8 @@ package classes.Scenes.Areas.DefiledRavine
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 22;
-			this.armorMDef = 2;
+			this.armorDef = 50;
+			this.armorMDef = 25;
 			this.bonusHP = 700;
 			this.bonusLust = 241;
 			this.lust = 40;

@@ -11,9 +11,18 @@ package classes
 	{
 		public static function footInchOrMetres(inches:Number, precision:int = 2):String
 		{
-			if (CoC.instance.flags[kFLAGS.USE_METRICS])
-				return (Math.round(inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
-			return Math.floor(inches / 12) + " foot " + inches % 12 + " inch";
+			var pHeight:String = "";
+			if (CoC.instance.flags[kFLAGS.USE_METRICS]){
+				pHeight = (Math.round(inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
+			}
+			else{
+				pHeight = Math.floor(inches / 12) + " foot"
+				if (inches % 12 > 0){
+					pHeight = pHeight + " " +  inches % 12 + " inch";
+				}
+			}
+			return pHeight;
+			//return Math.floor(inches / 12) + " foot " + inches % 12 + " inch";
 		}
 		public static function numInchesOrCentimetres(inches:Number):String
 		{

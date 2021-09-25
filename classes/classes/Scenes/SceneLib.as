@@ -2,17 +2,20 @@ package classes.Scenes {
 import classes.CoC;
 import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
+import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
+import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Dungeons.DungeonEngine;
+import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
 import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
@@ -44,6 +47,8 @@ public class SceneLib {
 
     public static var defiledravine:DefiledRavine = new DefiledRavine();
 
+    public static var ebonLabyrinth:EbonLabyrinth = new EbonLabyrinth();
+
     public static var bog:Bog = new Bog();
 
     public static var deepsea:DeepSea = new DeepSea();
@@ -69,6 +74,8 @@ public class SceneLib {
     public static var tundra:Tundra = new Tundra();
 
     public static var glacialRift:GlacialRift = new GlacialRift();
+
+    public static var ashlands:Ashlands = new Ashlands();
 
     public static var volcanicCrag:VolcanicCrag = new VolcanicCrag();
 
@@ -144,6 +151,8 @@ public class SceneLib {
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
 
+    public static var harvestMoonScene:HarvestMoonScenes = new HarvestMoonScenes();
+
     public static var helFollower:HelFollower = new HelFollower();
 
     public static var helScene:HelScene = new HelScene();
@@ -151,6 +160,8 @@ public class SceneLib {
     public static var helSpawnScene:HelSpawnScene = new HelSpawnScene();
 
     public static var holliScene:HolliScene = new HolliScene();
+
+    public static var woodElves:WoodElves = new WoodElves();
 
     public static var isabellaScene:IsabellaScene = new IsabellaScene();
 
@@ -214,6 +225,8 @@ public class SceneLib {
 
     public static var tedScene:TedScenes = new TedScenes();
 
+    public static var tifaFollower:TifaFollower = new TifaFollower();
+
     public static var urta:Urta = new Urta();
 
     public static var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
@@ -251,6 +264,8 @@ public class SceneLib {
     public static var hexindao:HeXinDao = new HeXinDao();
 
     public static var kitsuneScene:KitsuneScene = new KitsuneScene();
+	
+	public static var dilapidatedShrine:DilapidatedShrine = new DilapidatedShrine();
 	
 	public static var anzu:AnzuScene = new AnzuScene();
 

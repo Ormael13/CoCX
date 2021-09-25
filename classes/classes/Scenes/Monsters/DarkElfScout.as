@@ -8,18 +8,17 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class DarkElfScout extends Monster
 	{
 		public var darkelf:DarkElfScene = new DarkElfScene();
-		public var golems:HeXinDao = new HeXinDao();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				golems.gaunletchallange1postfight();
+				SceneLib.hexindao.gaunletchallange1postfight();
 			}
 			else darkelf.wonWithDarkElf();
 		}
@@ -45,7 +44,7 @@ public class DarkElfScout extends Monster
 		public function PoisonedBowShoot():void
 		{
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
-				outputText("An arrow hits wind wall dealing no damage to you.\n\n");
+				outputText("An arrow hits the wind wall dealing no damage to you.\n\n");
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
 			}
 			else {
@@ -147,6 +146,12 @@ public class DarkElfScout extends Monster
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).
 					add(consumables.ELFEARS,4);
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: DarkElfBowShooting, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON]},
+				{ call: AnkleShot, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON], condition: !player.hasStatusEffect(StatusEffects.Sealed2)},
+				{ call: WingClip, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON], condition: player.isFlying(), weight: Infinity}
+			]
 			checkMonster();
 		}
 	}

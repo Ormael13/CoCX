@@ -17,6 +17,7 @@ Corruption-of-Champions.as3proj
 node_modules
 *.sol
 *.swc
+*.apk
 /out
 /tmp
 CoC-AIR-app.xml
@@ -26,3 +27,4 @@ CoC-AIR.airi
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/.gitignore
 Corruption-of-Champions.iml
+/.idea/runConfigurations.xml

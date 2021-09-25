@@ -24,6 +24,7 @@ public class Mountain extends BaseContent
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var lactabovinaScene:LactaBovinaScene = new LactaBovinaScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
@@ -146,6 +147,11 @@ public class Mountain extends BaseContent
 						call:minotaurRouter,
 						mods:[SceneLib.exploration.furriteMod]
 					},{
+						name:"lacta_bovina",
+						chance:0.7,
+						call:lactabovinaScene.lactaBovinaInto,
+						mods:[SceneLib.exploration.furriteMod]
+					},{
 						name:"factory",
 						when:function():Boolean {
 							return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
@@ -252,13 +258,13 @@ public class Mountain extends BaseContent
 		}
 
 		public function minotaurChance():Number {
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity)) return 3;
+			if (player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity)) return 3;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0) return 2;
 			return 1;
 		}
 		public function minotaurRouter():void {
 			//Every 15 explorations chance at mino bad-end!
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && !player.hasPerk(PerkLib.LactaBovineImmunity) && rand(16) == 0) {
+			if (player.hasPerk(PerkLib.MinotaurCumAddict) && !player.hasPerk(PerkLib.LactaBovineImmunity) && rand(16) == 0) {
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
