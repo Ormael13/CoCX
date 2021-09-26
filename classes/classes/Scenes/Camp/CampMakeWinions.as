@@ -7,8 +7,8 @@ package classes.Scenes.Camp
 	import classes.*;
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	
-	public class CampMakeWinions extends BaseContent
+
+public class CampMakeWinions extends BaseContent
 	{
 		public function CampMakeWinions() 
 		{}
@@ -957,12 +957,84 @@ package classes.Scenes.Camp
 			}
 			outputText("</i>");
 			menu();
-			addButton(0, "Ranks (N1)", accessSummonElementalsMainMenu1).hint("Rank 0 to 9th Elder Rank Normal Elementals");
-			addButton(1, "Ranks (N2)", accessSummonElementalsMainMenu2).hint("5th Elder Rank to (Peak) Baron Rank Normal Elementals");
-			addButton(2, "Ranks (N3)", accessSummonElementalsMainMenu3).hint("(Low) Viscount Rank to (Peak) Viscount Rank Normal Elementals");
-			addButton(5, "Ranks (E)", accessSummonEpicElementalsMainMenu).hint("Rank 1 to Viscount Rank Epic Elementals");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
+			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
+			addButton(1, "Ranks (E)", accessSummonEpicElementalsMainMenu).hint("Rank 1 to Viscount Rank Epic Elementals");
+			if (currentSizeOfElementalsArmy() > 0) addButton(2, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Elementals!")
+			else addButtonDisabled(2,"ElementUp", "You don't have any elementals, try summoning one!");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", playerMenu);
+		}
+		private function elementaLvlUp():void{
+			var elementalTypes:Array = [];
+			var contractRankI:int = 0;
+			var btnInt:int = 0;
+			var pPerkList:Array = player.perks;
+			menu();
+			elementalTypes.push(StatusEffects.SummonedElementalsAir, rankUpElementalAir, "air");
+			elementalTypes.push(StatusEffects.SummonedElementalsEarth, rankUpElementalEarth, "earthen");
+			elementalTypes.push(StatusEffects.SummonedElementalsFire, rankUpElementalFire, "flaming");
+			elementalTypes.push(StatusEffects.SummonedElementalsWater, rankUpElementalWater, "flowing");
+			elementalTypes.push(StatusEffects.SummonedElementalsEther, rankUpElementalEther, "ethereal");
+			elementalTypes.push(StatusEffects.SummonedElementalsWood, rankUpElementalWood, "wooden");
+			elementalTypes.push(StatusEffects.SummonedElementalsMetal, rankUpElementalMetal, "metallic");
+			elementalTypes.push(StatusEffects.SummonedElementalsIce, rankUpElementalIce, "icy");
+			elementalTypes.push(StatusEffects.SummonedElementalsLightning, rankUpElementalLightning, "electrifying");
+			elementalTypes.push(StatusEffects.SummonedElementalsDarkness, rankUpElementalDarkness, "shadowy");
+			elementalTypes.push(StatusEffects.SummonedElementalsPoison, rankUpElementalPoison, "poisonous");
+			elementalTypes.push(StatusEffects.SummonedElementalsPurity, rankUpElementalPurity, "pure");
+			elementalTypes.push(StatusEffects.SummonedElementalsCorruption, rankUpElementalCorruption, "corrupted");
+			for each(var pPerks:PerkClass in pPerkList) { //Cheaty way of getting value equivalences.
+				var temp:String = pPerks.perkName
+				if (temp.indexOf("Elemental Contract Rank") >= 0){
+					temp = temp.replace("Elemental Contract Rank ", "");
+					var temp2:int = parseInt(temp, 10);
+					if (temp2 > contractRankI){
+						contractRankI = temp2;
+					}
+				}
+			}
+			var arcaneCMax:int = (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] *4)-1;
+			for (var i:int = 0,j:int = elementalTypes.length; i < j; i++){
+				if (i % 3 == 0){
+					var btnName:String = elementalTypes[i];
+					btnName = btnName.replace("\"Summoned Elementals ", "").replace("\"", "");
+					//outputText(btnName);
+					var pElemLvlStat:int = player.statusEffectv2(elementalTypes[i]);
+					if (pElemLvlStat <= contractRankI && pElemLvlStat > 0){//Checks Elemental level lower than max, but not 0.
+						if (contractRankI <= arcaneCMax){	//If lower, don't care. You have the circle and the highest level circle can support.
+							addButton(btnInt, btnName,elementalLvlUpCostCheck , elementalTypes[i + 1], pElemLvlStat, btnName, "Level up your "+ elementalTypes[i + 2] +" elemental!");
+						}
+						else{//Outside Bracket.
+							addButtonDisabled(btnInt, btnName,"Your Arcane Circle can't handle the elemental level up safely!");
+						}
+					}
+					else if (pElemLvlStat > 0){
+						addButtonDisabled(btnInt, btnName,"You don't have this elemental yet!");
+					}
+					else{
+						addButtonDisabled(btnInt, btnName,"You can't handle this elemental if you go further!");
+					}
+					btnInt += 1;
+				}
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function elementalLvlUpCostCheck(elemType:Function, elemLvl:int, btnName:String):void{ //Check if player can afford to do so.
+			clearOutput();
+			menu();
+			outputText("It will cost you " + rankUpElementalManaCost()*elemLvl + " mana and " + rankUpElementalFatigueCost()*elemLvl + " fatigue. Are you sure you want to proceed?");
+			if (rankUpElementalManaCost()*elemLvl > player.mana){
+				addButtonDisabled(0, btnName,"You don't have enough Mana within you. Try again when you have "+ rankUpElementalManaCost()*elemLvl +" stored up!");
+			}
+			else if(player.maxFatigue() <= (player.fatigue + rankUpElementalFatigueCost()*elemLvl)){
+				addButtonDisabled(0, btnName,"You are too tired to attempt this. Try again when you have more energy!");
+			}
+			else{
+				addButton(0, btnName, elemType, null, null, null, "Let's do this!")
+			}
+			addButton(14, "Back", elementaLvlUp);
+
 		}
 		private function evocationTome():void {
 			clearOutput();
@@ -1128,134 +1200,6 @@ package classes.Scenes.Camp
 			outputText("-M. Special: \n");
 			doNext(evocationTome);
 		}
-		private function accessSummonElementalsMainMenu1():void {
-			menu();
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
-			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
-			if (player.hasPerk(PerkLib.ElementalContractRank1)) addButton(1, "RankUp(1)", rankUpSubmenu1st);
-			else addButtonDisabled(1, "RankUp(1)", "Req. Elemental Contract Rank 1 perk.");
-			if (player.hasPerk(PerkLib.ElementalContractRank2)) addButton(2, "RankUp(2)", rankUpSubmenu2nd);
-			else addButtonDisabled(2, "RankUp(2)", "Req. Elemental Contract Rank 2 perk.");
-			if (player.hasPerk(PerkLib.ElementalContractRank3)) addButton(3, "RankUp(3)", rankUpSubmenu3rd);
-			else addButtonDisabled(3, "RankUp(3)", "Req. Elemental Contract Rank 3 perk.");
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 2) {
-				if (player.hasPerk(PerkLib.ElementalContractRank4)) addButton(4, "RankUp(4)", rankUpSubmenu4th);
-				else addButtonDisabled(4, "RankUp(4)", "Req. Elemental Contract Rank 4 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank5)) addButton(5, "RankUp(5)", rankUpSubmenu5th);
-				else addButtonDisabled(5, "RankUp(5)", "Req. Elemental Contract Rank 5 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank6)) addButton(6, "RankUp(6)", rankUpSubmenu6th);
-				else addButtonDisabled(6, "RankUp(6)", "Req. Elemental Contract Rank 6 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank7)) addButton(7, "RankUp(7)", rankUpSubmenu7th);
-				else addButtonDisabled(7, "RankUp(7)", "Req. Elemental Contract Rank 7 perk.");
-			} else {
-				addButtonDisabled(4, "RankUp(4)", "Req. 2nd Arcane Circle added.");
-				addButtonDisabled(5, "RankUp(5)", "Req. 2nd Arcane Circle added.");
-				addButtonDisabled(6, "RankUp(6)", "Req. 2nd Arcane Circle added.");
-				addButtonDisabled(7, "RankUp(7)", "Req. 2nd Arcane Circle added.");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 3) {
-				if (player.hasPerk(PerkLib.ElementalContractRank8)) addButton(8, "RankUp(8)", rankUpSubmenu8th);
-				else addButtonDisabled(8, "RankUp(8)", "Req. Elemental Contract Rank 8 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank9)) addButton(9, "RankUp(9)", rankUpSubmenu9th);
-				else addButtonDisabled(9, "RankUp(9)", "Req. Elemental Contract Rank 9 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank10)) addButton(10, "RankUp(10)", rankUpSubmenu10th);
-				else addButtonDisabled(10, "RankUp(10)", "Req. Elemental Contract Rank 10 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank11)) addButton(11, "RankUp(11)", rankUpSubmenu11th);
-				else addButtonDisabled(11, "RankUp(11)", "Req. Elemental Contract Rank 11 perk.");
-			} else {
-				addButtonDisabled(8, "RankUp(8)", "Req. 3rd Arcane Circle added.");
-				addButtonDisabled(9, "RankUp(9)", "Req. 3rd Arcane Circle added.");
-				addButtonDisabled(10, "RankUp(10)", "Req. 3rd Arcane Circle added.");
-				addButtonDisabled(10, "RankUp(10)", "Req. 3rd Arcane Circle added.");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
-				if (player.hasPerk(PerkLib.ElementalContractRank12)) addButton(12, "RankUp(12)", rankUpSubmenu12th);
-				else addButtonDisabled(12, "RankUp(12)", "Req. Elemental Contract Rank 12 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank13)) addButton(13, "RankUp(13)", rankUpSubmenu13th);
-				else addButtonDisabled(13, "RankUp(13)", "Req. Elemental Contract Rank 13 perk.");
-			} else {
-				addButtonDisabled(12, "RankUp(12)", "Req. 4th Arcane Circle added.");
-				addButtonDisabled(13, "RankUp(13)", "Req. 4th Arcane Circle added.");
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu);
-		}
-		private function accessSummonElementalsMainMenu2():void {
-			menu();
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
-				if (player.hasPerk(PerkLib.ElementalContractRank14)) addButton(0, "RankUp(14)", rankUpSubmenu14th);
-				else addButtonDisabled(0, "RankUp(14)", "Req. Elemental Contract Rank 14 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank15)) addButton(1, "RankUp(15)", rankUpSubmenu15th);
-				else addButtonDisabled(1, "RankUp(15)", "Req. Elemental Contract Rank 15 perk.");
-			} else {
-				addButtonDisabled(0, "RankUp(14)", "Req. 4th Arcane Circle added.");
-				addButtonDisabled(1, "RankUp(15)", "Req. 4th Arcane Circle added.");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 5) {
-				if (player.hasPerk(PerkLib.ElementalContractRank16)) addButton(2, "RankUp(16)", rankUpSubmenu16th);
-				else addButtonDisabled(2, "RankUp(16)", "Req. Elemental Contract Rank 16 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank17)) addButton(3, "RankUp(17)", rankUpSubmenu17th);
-				else addButtonDisabled(3, "RankUp(17)", "Req. Elemental Contract Rank 17 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank18)) addButton(4, "RankUp(18)", rankUpSubmenu18th);
-				else addButtonDisabled(4, "RankUp(18)", "Req. Elemental Contract Rank 18 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank19)) addButton(5, "RankUp(19)", rankUpSubmenu19th);
-				else addButtonDisabled(5, "RankUp(19)", "Req. Elemental Contract Rank 19 perk.");
-			} else {
-				addButtonDisabled(2, "RankUp(16)", "Req. 5th Arcane Circle added.");
-				addButtonDisabled(3, "RankUp(17)", "Req. 5th Arcane Circle added.");
-				addButtonDisabled(4, "RankUp(18)", "Req. 5th Arcane Circle added.");
-				addButtonDisabled(5, "RankUp(19)", "Req. 5th Arcane Circle added.");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 6) {
-				if (player.hasPerk(PerkLib.ElementalContractRank20)) addButton(6, "RankUp(20)", rankUpSubmenu20th);
-				else addButtonDisabled(6, "RankUp(20)", "Req. Elemental Contract Rank 20 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank21)) addButton(7, "RankUp(21)", rankUpSubmenu21th);
-				else addButtonDisabled(7, "RankUp(21)", "Req. Elemental Contract Rank 21 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank22)) addButton(8, "RankUp(22)", rankUpSubmenu22th);
-				else addButtonDisabled(8, "RankUp(22)", "Req. Elemental Contract Rank 22 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank23)) addButton(9, "RankUp(23)", rankUpSubmenu23th);
-				else addButtonDisabled(9, "RankUp(23)", "Req. Elemental Contract Rank 23 perk.");
-			} else {
-				addButtonDisabled(6, "RankUp(20)", "Req. 6th Arcane Circle added.");
-				addButtonDisabled(7, "RankUp(21)", "Req. 6th Arcane Circle added.");
-				addButtonDisabled(8, "RankUp(22)", "Req. 6th Arcane Circle added.");
-				addButtonDisabled(9, "RankUp(23)", "Req. 6th Arcane Circle added.");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 7) {
-				if (player.hasPerk(PerkLib.ElementalContractRank24)) addButton(10, "RankUp(24)", rankUpSubmenu24th);
-				else addButtonDisabled(10, "RankUp(24)", "Req. Elemental Contract Rank 24 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank25)) addButton(11, "RankUp(25)", rankUpSubmenu25th);
-				else addButtonDisabled(11, "RankUp(25)", "Req. Elemental Contract Rank 25 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank26)) addButton(12, "RankUp(26)", rankUpSubmenu26th);
-				else addButtonDisabled(12, "RankUp(26)", "Req. Elemental Contract Rank 26 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank27)) addButton(13, "RankUp(27)", rankUpSubmenu27th);
-				else addButtonDisabled(13, "RankUp(27)", "Req. Elemental Contract Rank 27 perk.");
-			} else {
-				addButtonDisabled(10, "RankUp(24)", "Req. 7th Arcane Circle added.");
-				addButtonDisabled(11, "RankUp(25)", "Req. 7th Arcane Circle added.");
-				addButtonDisabled(12, "RankUp(26)", "Req. 7th Arcane Circle added.");
-				addButtonDisabled(13, "RankUp(27)", "Req. 7th Arcane Circle added.");
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu);
-		}
-		private function accessSummonElementalsMainMenu3():void {
-			menu();
-			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 8) {
-				if (player.hasPerk(PerkLib.ElementalContractRank28)) addButton(0, "RankUp(28)", rankUpSubmenu28th);
-				else addButtonDisabled(0, "RankUp(28)", "Req. Elemental Contract Rank 28 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank29)) addButton(1, "RankUp(29)", rankUpSubmenu29th);
-				else addButtonDisabled(1, "RankUp(29)", "Req. Elemental Contract Rank 29 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank30)) addButton(2, "RankUp(30)", rankUpSubmenu30th);
-				else addButtonDisabled(2, "RankUp(30)", "Req. Elemental Contract Rank 30 perk.");
-				if (player.hasPerk(PerkLib.ElementalContractRank31)) addButton(3, "RankUp(31)", rankUpSubmenu31th);
-				else addButtonDisabled(3, "RankUp(31)", "Req. Elemental Contract Rank 31 perk.");
-			} else {
-				addButtonDisabled(0, "RankUp(28)", "Req. 8th Arcane Circle added.");
-				addButtonDisabled(1, "RankUp(29)", "Req. 8th Arcane Circle added.");
-				addButtonDisabled(2, "RankUp(30)", "Req. 8th Arcane Circle added.");
-				addButtonDisabled(3, "RankUp(31)", "Req. 8th Arcane Circle added.");
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu);
-		}
 		private function accessSummonEpicElementalsMainMenu():void {
 			menu();
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningEpicElementalsSubmenu);
@@ -1264,7 +1208,7 @@ package classes.Scenes.Camp
 		}
 		private function summoningElementalsSubmenu():void {
 			clearOutput();
-			outputText("If you not have enough mana (100+) and fatigue (50+) it will be impossible to summon any elementals.\n\n");
+			outputText("If you don't have enough mana (100+) and fatigue (50+) it will be impossible to summon any elementals.\n\n");
 			menu();
 			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAir) < 1) addButton(0, "Air", summonElementalAir);
@@ -1287,659 +1231,9 @@ package classes.Scenes.Camp
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption);
 				}
 			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
-		private function rankUpSubmenu1st():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()+"+) and fatigue ("+rankUpElementalFatigueCost()+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= rankUpElementalManaCost() && (player.fatigue + rankUpElementalFatigueCost() <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 1) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 1) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 1) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 1) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 1) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 1) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 1) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 1) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 1) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 1) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 1) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 1) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 1) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu2nd():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*2+"+) and fatigue ("+rankUpElementalFatigueCost()*2+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*2) && (player.fatigue + (rankUpElementalFatigueCost()*2) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 2) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 2) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 2) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 2) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 2) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 2) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 2) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 2) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 2) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 2) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 2) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 2) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 2) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu3rd():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*3+"+) and fatigue ("+rankUpElementalFatigueCost()*3+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*3) && (player.fatigue + (rankUpElementalFatigueCost()*3) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 3) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 3) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 3) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 3) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 3) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 3) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 3) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 3) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 3) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 3) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 3) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 3) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 3) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu4th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*4+"+) and fatigue ("+rankUpElementalFatigueCost()*4+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*4) && (player.fatigue + (rankUpElementalFatigueCost()*4) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 4) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 4) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 4) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 4) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 4) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 4) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 4) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 4) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 4) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 4) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 4) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 4) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 4) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu5th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*5+"+) and fatigue ("+rankUpElementalFatigueCost()*5+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*5) && (player.fatigue + (rankUpElementalFatigueCost()*5) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 5) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 5) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 5) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 5) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 5) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 5) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 5) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 5) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 5) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 5) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 5) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 5) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 5) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu6th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*6+"+) and fatigue ("+rankUpElementalFatigueCost()*6+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*6) && (player.fatigue + (rankUpElementalFatigueCost()*6) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 6) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 6) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 6) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 6) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 6) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 6) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 6) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 6) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 6) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 6) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 6) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 6) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 6) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu7th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*7+"+) and fatigue ("+rankUpElementalFatigueCost()*7+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*7) && (player.fatigue + (rankUpElementalFatigueCost()*7) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 7) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 7) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 7) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 7) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 7) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 7) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 7) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 7) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 7) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 7) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 7) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 7) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 7) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu8th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*8+"+) and fatigue ("+rankUpElementalFatigueCost()*8+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*8) && (player.fatigue + (rankUpElementalFatigueCost()*8) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 8) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 8) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 8) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 8) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 8) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 8) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 8) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 8) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 8) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 8) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 8) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 8) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 8) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu9th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*9+"+) and fatigue ("+rankUpElementalFatigueCost()*9+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*9) && (player.fatigue + (rankUpElementalFatigueCost()*9) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 9) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 9) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 9) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 9) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 9) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 9) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 9) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 9) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 9) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 9) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 9) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 9) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 9) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu10th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*10+"+) and fatigue ("+rankUpElementalFatigueCost()*10+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*10) && (player.fatigue + (rankUpElementalFatigueCost()*10) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 10) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 10) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 10) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 10) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 10) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 10) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 10) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 10) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 10) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 10) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 10) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 10) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 10) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu11th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*11+"+) and fatigue ("+rankUpElementalFatigueCost()*11+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*11) && (player.fatigue + (rankUpElementalFatigueCost()*11) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 11) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 11) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 11) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 11) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 11) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 11) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 11) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 11) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 11) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 11) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 11) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 11) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 11) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu12th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*12+"+) and fatigue ("+rankUpElementalFatigueCost()*12+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*12) && (player.fatigue + (rankUpElementalFatigueCost()*12) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 12) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 12) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 12) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 12) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 12) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 12) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 12) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 12) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 12) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 12) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 12) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 12) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 12) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu13th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*13+"+) and fatigue ("+rankUpElementalFatigueCost()*13+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*13) && (player.fatigue + (rankUpElementalFatigueCost()*13) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 13) addButton(0, "Air", rankUpElementalAir)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 13) addButton(1, "Earth", rankUpElementalEarth)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 13) addButton(2, "Fire", rankUpElementalFire)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 13) addButton(3, "Water", rankUpElementalWater)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 13) addButton(4, "Ether", rankUpElementalEther)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 13) addButton(5, "Wood", rankUpElementalWood)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 13) addButton(6, "Metal", rankUpElementalMetal)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 13) addButton(7, "Ice", rankUpElementalIce)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 13) addButton(8, "Lightning", rankUpElementalLightning)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 13) addButton(9, "Darkness", rankUpElementalDarkness)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 13) addButton(10, "Poison", rankUpElementalPoison)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 13) addButton(11, "Purity", rankUpElementalPurity)
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 13) addButton(12, "Corruption", rankUpElementalCorruption)
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
-		}
-		private function rankUpSubmenu14th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*14+"+) and fatigue ("+rankUpElementalFatigueCost()*14+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*14) && (player.fatigue + (rankUpElementalFatigueCost()*14) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 14) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 14) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 14) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 14) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 14) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 14) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 14) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 14) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 14) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 14) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 14) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 14) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 14) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu15th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*15+"+) and fatigue ("+rankUpElementalFatigueCost()*15+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*15) && (player.fatigue + (rankUpElementalFatigueCost()*15) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 15) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 15) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 15) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 15) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 15) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 15) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 15) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 15) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 15) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 15) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 15) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 15) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 15) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu16th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*16+"+) and fatigue ("+rankUpElementalFatigueCost()*16+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*16) && (player.fatigue + (rankUpElementalFatigueCost()*16) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 16) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 16) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 16) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 16) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 16) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 16) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 16) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 16) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 16) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 16) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 16) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 16) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 16) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu17th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*17+"+) and fatigue ("+rankUpElementalFatigueCost()*17+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*17) && (player.fatigue + (rankUpElementalFatigueCost()*17) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 17) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 17) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 17) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 17) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 17) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 17) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 17) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 17) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 17) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 17) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 17) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 17) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 17) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu18th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*18+"+) and fatigue ("+rankUpElementalFatigueCost()*18+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*18) && (player.fatigue + (rankUpElementalFatigueCost()*18) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 18) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 18) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 18) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 18) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 18) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 18) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 18) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 18) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 18) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 18) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 18) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 18) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 18) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu19th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*19+"+) and fatigue ("+rankUpElementalFatigueCost()*19+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*19) && (player.fatigue + (rankUpElementalFatigueCost()*19) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 19) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 19) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 19) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 19) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 19) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 19) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 19) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 19) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 19) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 19) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 19) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 19) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 19) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu20th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*20+"+) and fatigue ("+rankUpElementalFatigueCost()*20+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*20) && (player.fatigue + (rankUpElementalFatigueCost()*20) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 20) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 20) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 20) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 20) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 20) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 20) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 20) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 20) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 20) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 20) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 20) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 20) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 20) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu21th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*21+"+) and fatigue ("+rankUpElementalFatigueCost()*21+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*21) && (player.fatigue + (rankUpElementalFatigueCost()*21) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 21) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 21) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 21) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 21) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 21) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 21) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 21) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 21) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 21) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 21) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 21) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 21) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 21) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu22th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*22+"+) and fatigue ("+rankUpElementalFatigueCost()*22+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*22) && (player.fatigue + (rankUpElementalFatigueCost()*22) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 22) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 22) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 22) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 22) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 22) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 22) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 22) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 22) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 22) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 22) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 22) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 22) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 22) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu23th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*23+"+) and fatigue ("+rankUpElementalFatigueCost()*23+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*23) && (player.fatigue + (rankUpElementalFatigueCost()*23) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 23) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 23) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 23) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 23) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 23) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 23) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 23) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 23) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 23) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 23) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 23) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 23) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 23) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu24th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*24+"+) and fatigue ("+rankUpElementalFatigueCost()*24+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*24) && (player.fatigue + (rankUpElementalFatigueCost()*24) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 24) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 24) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 24) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 24) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 24) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 24) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 24) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 24) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 24) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 24) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 24) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 24) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 24) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu25th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*25+"+) and fatigue ("+rankUpElementalFatigueCost()*25+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*25) && (player.fatigue + (rankUpElementalFatigueCost()*25) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 25) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 25) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 25) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 25) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 25) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 25) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 25) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 25) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 25) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 25) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 25) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 25) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 25) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu26th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*26+"+) and fatigue ("+rankUpElementalFatigueCost()*26+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*26) && (player.fatigue + (rankUpElementalFatigueCost()*26) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 26) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 26) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 26) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 26) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 26) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 26) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 26) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 26) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 26) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 26) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 26) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 26) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 26) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu27th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*27+"+) and fatigue ("+rankUpElementalFatigueCost()*27+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*27) && (player.fatigue + (rankUpElementalFatigueCost()*27) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 27) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 27) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 27) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 27) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 27) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 27) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 27) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 27) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 27) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 27) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 27) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 27) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 27) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
-		}
-		private function rankUpSubmenu28th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*28+"+) and fatigue ("+rankUpElementalFatigueCost()*28+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*28) && (player.fatigue + (rankUpElementalFatigueCost()*28) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 28) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 28) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 28) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 28) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 28) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 28) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 28) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 28) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 28) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 28) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 28) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 28) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 28) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu3);
-		}
-		private function rankUpSubmenu29th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*29+"+) and fatigue ("+rankUpElementalFatigueCost()*29+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*29) && (player.fatigue + (rankUpElementalFatigueCost()*29) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 29) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 29) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 29) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 29) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 29) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 29) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 29) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 29) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 29) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 29) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 29) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 29) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 29) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu3);
-		}
-		private function rankUpSubmenu30th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*30+"+) and fatigue ("+rankUpElementalFatigueCost()*30+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*30) && (player.fatigue + (rankUpElementalFatigueCost()*30) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 30) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 30) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 30) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 30) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 30) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 30) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 30) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 30) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 30) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 30) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 30) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 30) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 30) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu3);
-		}
-		private function rankUpSubmenu31th():void {
-			clearOutput();
-			outputText("If you not have enough mana ("+rankUpElementalManaCost()*31+"+) and fatigue ("+rankUpElementalFatigueCost()*31+"+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
-			menu();
-			if (player.mana >= (rankUpElementalManaCost()*31) && (player.fatigue + (rankUpElementalFatigueCost()*31) <= player.maxFatigue())) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) == 31) addButton(0, "Air", rankUpElementalAir);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) == 31) addButton(1, "Earth", rankUpElementalEarth);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) == 31) addButton(2, "Fire", rankUpElementalFire);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) == 31) addButton(3, "Water", rankUpElementalWater);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) == 31) addButton(4, "Ether", rankUpElementalEther);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) == 31) addButton(5, "Wood", rankUpElementalWood);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) == 31) addButton(6, "Metal", rankUpElementalMetal);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) == 31) addButton(7, "Ice", rankUpElementalIce);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) == 31) addButton(8, "Lightning", rankUpElementalLightning);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) == 31) addButton(9, "Darkness", rankUpElementalDarkness);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) == 31) addButton(10, "Poison", rankUpElementalPoison);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 31) addButton(11, "Purity", rankUpElementalPurity);
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 31) addButton(12, "Corruption", rankUpElementalCorruption);
-			}
-			addButton(14, "Back", accessSummonElementalsMainMenu3);
-		}
+
 		private function summoningEpicElementalsSubmenu():void {
 			clearOutput();
 			outputText("If you not have matching item, elemental shard and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
@@ -1959,7 +1253,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsPurity) < 1) addButton(11, "Purity", summonElementalPurity);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption);*/
 			}
-			addButton(14, "Back", accessSummonElementalsMainMenu1);
+			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 
 		private function summonElementalAir():void {
@@ -2191,7 +1485,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalEarth():void {
@@ -2208,7 +1502,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsEarth, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalFire():void {
@@ -2225,7 +1519,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsFire, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalWater():void {
@@ -2242,7 +1536,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsWater, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalIce():void {
@@ -2259,7 +1553,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsIce, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalLightning():void {
@@ -2276,7 +1570,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsLightning, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalDarkness():void {
@@ -2293,7 +1587,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsDarkness, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalWood():void {
@@ -2310,7 +1604,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsWood, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalMetal():void {
@@ -2327,7 +1621,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsMetal, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalEther():void {
@@ -2344,7 +1638,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsEther, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalPoison():void {
@@ -2361,7 +1655,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsPoison, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalPurity():void {
@@ -2378,7 +1672,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsPurity, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalCorruption():void {
@@ -2395,7 +1689,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.SummonedElementalsCorruption, 2, 1);
 			}
 			else failToRankUpElemental();
-			doNext(accessSummonElementalsMainMenu);
+			doNext(elementaLvlUp);
 			cheatTime2(30);
 		}
 		private function rankUpElementalManaCost():Number {
@@ -2548,4 +1842,4 @@ package classes.Scenes.Camp
 			cheatTime2(10);
 		}
 	}
-}
+}
