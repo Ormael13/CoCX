@@ -4974,7 +4974,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
 			clearOutput();
 			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end. Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
@@ -5084,7 +5084,7 @@ public function rebirthFromBadEnd():void {
 			player.removeStatusEffect(StatusEffects.UnlockedHumanNoTail);
 			if (player.ascensionPerkPoints > 0) {
 				outputText("\n\nYou'll be redirected to the Ascension menu to use your refunded points, then you can either go back to your current game or reincarnate.");
-				doNext(CoC.instance.charCreation.migrationAscension);
+				doNext(CoC.instance.charCreation.updateAscension);
 			} else {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
@@ -5098,7 +5098,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Text.");

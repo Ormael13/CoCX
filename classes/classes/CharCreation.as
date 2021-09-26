@@ -1612,7 +1612,7 @@ import coc.view.MainView;
 		private function chooseModeNightmare():void {
 			clearOutput();
 			outputText("You have chosen Nightmare Mode. Hunger would be all time active so go get that food or your gonna starve... to death. If you want to spellcast or use magic specials you have to pay attention to your accumulated wrath. Also negative effects of internal mutations starts right away. You have been warned: it not gonna be walk in park anymore...\n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 1;
+			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 2;
 			player.hunger = 50;

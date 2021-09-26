@@ -236,7 +236,7 @@ use namespace CoC;
 
 		public function GlacialRiftConditions():void {
 			if (!player.headJewelry == headjewelries.SKIGOGG) player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
-			player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
+			if (!player.miscJewelry == miscjewelries.SNOWBOA && !player.miscJewelry2 == miscjewelries.SNOWBOA) player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
 			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
 		}
 
@@ -251,7 +251,7 @@ use namespace CoC;
 			if (HPD > 0) {
 				HPD *= player.maxHP();
 				HPD = Math.round(HPD);
-				HPChange(HPD, true);
+				HPChange(-HPD, true);
 			}
 		}
 

@@ -53,7 +53,7 @@ public class Lumi extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(9, "GoblinMech", lumiGarageRetry);
 		}
 		else addButton(7, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
-		addButton(9, "SellMats", lumiSell);
+		addButton(10, "SellMats", lumiSell);
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
 	
@@ -289,10 +289,10 @@ public class Lumi extends BaseContent {
         clearOutput();
         outputText("\"<i>Ya want to sell me this thing? Sure I will take it from you but only for 40 gem. I ain't running a pawn shop or charity booth here, this is a lab and I need parts and fundings. So in what quantity are we speaking?</i>\"\n\n");
         menu();
-		addButton(0, "Sell 1", lumiLustDraftPitch, 1).hint("Sell 1 Metal Plate.");
-		addButton(1, "Sell 5", lumiPitchGobboAle, 5).hint("Sell 5 Metal Plates.");
-		addButton(2, "Sell 10", lumiPitchGobboAle, 10).hint("Sell 10 Metal Plates.");
-		addButton(3, "Sell 50", lumiPitchGobboAle, 50).hint("Sell 50 Metal Plates.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1) addButton(0, "Sell 1", lumiSellMatsMetalPlatesAmount, 1).hint("Sell 1 Metal Plate.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5) addButton(1, "Sell 5", lumiSellMatsMetalPlatesAmount, 5).hint("Sell 5 Metal Plates.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10) addButton(2, "Sell 10", lumiSellMatsMetalPlatesAmount, 10).hint("Sell 10 Metal Plates.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 50) addButton(3, "Sell 50", lumiSellMatsMetalPlatesAmount, 50).hint("Sell 50 Metal Plates.");
 		addButton(14, "No", lumiSellMatsMetalPlatesNo);
     }	
 	private function lumiSellMatsMetalPlatesAmount(amount:int):void {
@@ -1201,7 +1201,7 @@ public class Lumi extends BaseContent {
 			if (player.vehiclesName == "Goblin Mech Alpha" || player.vehiclesName == "Goblin Mech Prime" || player.vehiclesName == "Giant Slayer Mech") addButton(13, "Mech UPGR", lumiWorkshopMechUpgrades);
 			else addButtonDisabled(13, "Mech UPGR", "You need to have goblin mech currently used to craft upgrades for it.");
 			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) addButton(14, "Back", playerMenu);
-			else addButton(14, "Leave", camp.returnToCampUseOneHour);
+			else addButton(14, "Back", lumiLabChoices);
 		}
 		else {
 			spriteSelect(37);
@@ -1880,4 +1880,4 @@ public class Lumi extends BaseContent {
 		else doNext(camp.returnToCampUseFourHours);
 	}*/
 }
-}
+}
