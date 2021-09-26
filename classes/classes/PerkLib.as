@@ -4868,11 +4868,11 @@ public class PerkLib
                     .requirePerk(SoulElder)
                     .requireInt(200)
                     .requireLevel(42);
-		*/	PrestigeJobGreySage.requirePrestigeJobSlot()
+			PrestigeJobGreySage.requirePrestigeJobSlot()
                     .requirePerks(GrandArchmage3rdCircle, JobEnchanter)
                     .requireInt(200)
                     .requireLevel(42);
-        	PrestigeJobWarlock.requirePrestigeJobSlot()
+        */	PrestigeJobWarlock.requirePrestigeJobSlot()
                     .requirePerks(GrandArchmage3rdCircle, JobEromancer)
                     .requireInt(200)
                     .requireLevel(42)

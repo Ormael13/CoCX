@@ -20,6 +20,12 @@ package classes.Scenes
 			Changelog37();
 		}
 		//zrobić do 2021 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
+		private function Changelog39():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog38);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog38():void {
 			clearOutput();
 			menu();
@@ -110,6 +116,7 @@ package classes.Scenes
 			outputText("one of two fera perks from 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
 			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");
 			outputText("<b>Version 0.8s2:</b>\n\n");
+			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible.\n");
 			//outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -122,7 +129,9 @@ package classes.Scenes
 			//outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
 			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
 			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
-			outputText("-Jtex code simplification on elemental summoning/ranking up.\n");
+			outputText("-3rd Tifa sex scene account for pc having tentacle / stamen cocks or alraune lower body.\n");
+			outputText("-Numb Rocks cost reverted back to 15 gems. Efect of Rut / Heat shortening removed from them.\n");
+			outputText("-New consumable (by Ormael/Pyromania): Numb Candies. Obtained when giving Numb Rock to Lumi for enhance. Effect: Shorten Heat/Rut duration by 24 hours. If duration is 24 hours or less will instead shorten duration to 1 hour. Also have minor lust reducing effect.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -131,7 +140,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-Fixed Bugs: able to sell metal plates PC not possess to Lumi, clicking NO in Dinah rulette sending to boss tf\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -278,9 +287,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
