@@ -289,10 +289,10 @@ public class Lumi extends BaseContent {
         clearOutput();
         outputText("\"<i>Ya want to sell me this thing? Sure I will take it from you but only for 40 gem. I ain't running a pawn shop or charity booth here, this is a lab and I need parts and fundings. So in what quantity are we speaking?</i>\"\n\n");
         menu();
-		addButton(0, "Sell 1", lumiSellMatsMetalPlatesAmount, 1).hint("Sell 1 Metal Plate.");
-		addButton(1, "Sell 5", lumiSellMatsMetalPlatesAmount, 5).hint("Sell 5 Metal Plates.");
-		addButton(2, "Sell 10", lumiSellMatsMetalPlatesAmount, 10).hint("Sell 10 Metal Plates.");
-		addButton(3, "Sell 50", lumiSellMatsMetalPlatesAmount, 50).hint("Sell 50 Metal Plates.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1) addButton(0, "Sell 1", lumiSellMatsMetalPlatesAmount, 1).hint("Sell 1 Metal Plate.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5) addButton(1, "Sell 5", lumiSellMatsMetalPlatesAmount, 5).hint("Sell 5 Metal Plates.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10) addButton(2, "Sell 10", lumiSellMatsMetalPlatesAmount, 10).hint("Sell 10 Metal Plates.");
+		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 50) addButton(3, "Sell 50", lumiSellMatsMetalPlatesAmount, 50).hint("Sell 50 Metal Plates.");
 		addButton(14, "No", lumiSellMatsMetalPlatesNo);
     }	
 	private function lumiSellMatsMetalPlatesAmount(amount:int):void {
