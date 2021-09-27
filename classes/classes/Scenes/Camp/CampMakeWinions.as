@@ -1009,7 +1009,7 @@ public class CampMakeWinions extends BaseContent
 							addButtonDisabled(btnInt, btnName,"Your Arcane Circle can't handle the elemental level up safely!");
 						}
 					}
-					else if (pElemLvlStat > 0){
+					else if (pElemLvlStat == 0){
 						addButtonDisabled(btnInt, btnName,"You don't have this elemental yet!");
 					}
 					else{

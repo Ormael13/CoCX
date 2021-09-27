@@ -774,6 +774,13 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 			}
+			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
+				outputText("Mutations Assistant: On\n");
+			}
+			else{
+				outputText("Mutations Assistant: Off\n");
+			}
+			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. Default:Off.\n");
 		}
 
 		function mutationsDBHeart():void{
