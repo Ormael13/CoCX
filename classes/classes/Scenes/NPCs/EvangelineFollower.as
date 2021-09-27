@@ -1271,7 +1271,7 @@ private function InternalMutations0(page:int = 0):void {
 
 private function Experiments():void {
 	clearOutput();
-	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
+	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of the finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
 	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	menu();
 	addButtonDisabled(0, "BL/BB Plus", "Bimbo Liquer Plus / Bro Brew Plus");

@@ -227,6 +227,7 @@ public final class ConsumableLib extends BaseContent
 		public const MANUP_B:SimpleConsumable = mk("ManUp B", "ManUp B.", "a ManUp beer", 6, "A beverage made for people who believe brawn is better than brains.", m.manUpBeer);
 		public const MAPILL_:SimpleConsumable = mk("MAPill", "Medium Angry Pill", "a medium angry pill", 50, "A medium pill that's guaranteed to makes you a bit more angry.", m.mediumangrypill);
 		public const MILKPTN:Consumable       = new MilkPotion();
+		public const NUMBCND:SimpleConsumable = mk("NumbCnd","Numb Candies", "a strange packet of 'Numb Candies'", 40, "This packet of innocuous looking 'candy' guarantees to reduce troublesome hear or rut and taste delicious.", m.numbCandies);
 		public const NUMBROX:Consumable       = new NumbRocks();
 		public const NUMBOIL:Consumable       = new NumbingOil();
 		public const OVIELIX:OvipositionElixir = new OvipositionElixir();

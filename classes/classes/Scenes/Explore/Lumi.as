@@ -65,7 +65,6 @@ public class Lumi extends BaseContent {
             [consumables.KANGAFT,consumables.MGHTYVG],
             [consumables.L_DRAFT,consumables.F_DRAFT],
             [consumables.LABOVA_,consumables.PROBOVA],
-            [consumables.GOB_ALE,consumables.GRE_BER],
             [consumables.PIGTRUF,consumables.BOARTRU],
             [consumables.PURHONY,consumables.SPHONEY],
             [consumables.SDELITE,consumables.S_DREAM],
@@ -125,6 +124,8 @@ public class Lumi extends BaseContent {
     }
 	public function lumiEnhance1(justCheck:Boolean = false):Boolean {
         var improvables:Array = [
+            [consumables.NUMBROX,consumables.NUMBCND],
+            [consumables.GOB_ALE,consumables.GRE_BER],
             [consumables.REDVIAL,consumables.VAMPBLD],
             [consumables.C_VEMOM,consumables.P_VEMOM],
 			[consumables.BLACKIN,consumables.ABYSSIN],
@@ -293,7 +294,7 @@ public class Lumi extends BaseContent {
 		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5) addButton(1, "Sell 5", lumiSellMatsMetalPlatesAmount, 5).hint("Sell 5 Metal Plates.");
 		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10) addButton(2, "Sell 10", lumiSellMatsMetalPlatesAmount, 10).hint("Sell 10 Metal Plates.");
 		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 50) addButton(3, "Sell 50", lumiSellMatsMetalPlatesAmount, 50).hint("Sell 50 Metal Plates.");
-		addButton(14, "No", lumiSellMatsMetalPlatesNo);
+		addButton(14, "No", lumiSell);
     }	
 	private function lumiSellMatsMetalPlatesAmount(amount:int):void {
 		metal_pieces = amount;

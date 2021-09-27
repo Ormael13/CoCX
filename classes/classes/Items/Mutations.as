@@ -4068,7 +4068,6 @@ public final class Mutations extends MutationsHelper {
         else outputText("pink");
         outputText(" potion, and its unnatural warmth immediately flows to your groin.");
         dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
-
         //Heat/Rut for those that can have them if "fuck draft"
         if (fuck) {
             //Try to go into intense heat.
@@ -4101,6 +4100,32 @@ public final class Mutations extends MutationsHelper {
         outputText("[pg]");
         player.refillHunger(5);
     }
+	
+	public function numbCandies(player:Player):void {
+		clearOutput();
+        outputText("You pop open the package of numb candies and dump it into your waiting mouth.  The strange candies fizzes and pops, leaving the nerves on your tongue feeling a bit deadened as you swallow the sweet mess.");
+		if (player.lust >= 33) {
+			outputText("\n\nThe numbness spreads through your body, bringing with it a sense of calm that seems to muffle your sexual urges.");
+			player.lust -= 10 + rand(20);
+		}
+		if (player.inHeat || player.inRut) {
+			outputText("\n\nAs the fizzing of the candy slowly dissipates, you can feel the effects of your carnal desires begin to fade as well.");
+			if (player.hasStatusEffect(StatusEffects.Heat)) {
+				if (player.statusEffectv3(StatusEffects.Heat) > 24) player.addStatusValue(StatusEffects.Heat, 3, -24);
+				else {
+					var heatR:Number = player.statusEffectv3(StatusEffects.Heat);
+					player.addStatusValue(StatusEffects.Heat, 3, -(heatR-1));
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.Rut)) {
+				if (player.statusEffectv3(StatusEffects.Rut) > 24) player.addStatusValue(StatusEffects.Rut, 3, -24);
+				else {
+					var rutR:Number = player.statusEffectv3(StatusEffects.Rut);
+					player.addStatusValue(StatusEffects.Rut, 3, -(rutR-1));
+				}
+			}
+		}
+	}
 
     public function gremlinBeer(player:Player):void {
         player.slimeFeed();

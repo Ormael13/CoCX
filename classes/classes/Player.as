@@ -9334,6 +9334,12 @@ use namespace CoC;
 				phoenixCounter++;
 			if (hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm))
 				phoenixCounter++;
+			if ((hasPerk(MutationsLib.HarpyHollowBones) || hasPerk(MutationsLib.SalamanderAdrenalGlands)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				phoenixCounter++;
+			if ((hasPerk(MutationsLib.HarpyHollowBonesEvolved) || hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				phoenixCounter++;
+			if ((hasPerk(MutationsLib.HarpyHollowBonesFinalForm) || hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				phoenixCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				phoenixCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && phoenixCounter >= 4)
