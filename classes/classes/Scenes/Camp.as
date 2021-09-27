@@ -5101,12 +5101,23 @@ public function rebirthFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
-			outputText("Text.");
+			outputText("Grey Sage prestige realyl need to retire... please no cry blood tears it may return in some other form... maybe...");
+			if (player.hasPerk(PerkLib.PrestigeJobGreySage) {
+				player.removePerk(PerkLib.PrestigeJobGreySage);
+				player.perkPoints += 1;
+			}
 			doNext(doCamp);
 			return;
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
