@@ -3531,7 +3531,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(10, "???", "Explore the realm.");
 		if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
 		else addButtonDisabled(11, "???", "Search the forest.");
-		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) addButton(11, "Dilapidated Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro).hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.");
+		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) addButton(12, "Dilapidated Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro).hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.");
 		else addButtonDisabled(12, "???", "Search the battlefield. (After hearing npc meantions this place)");
 		addButton(14, "Back", playerMenu);
 		return true;
