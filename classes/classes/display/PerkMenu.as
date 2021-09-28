@@ -726,6 +726,7 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
+	//MutationsDB!
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
 		Source: MutationsLib.as for all mutations.
@@ -774,6 +775,15 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 			}
+			/*
+			outputText("Mutations can be obtained by ");
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2 && flags[kFLAGS.MUTATIONS_SPOILERS]){
+				outputText("finding Evangeline and asking her about it.\n");
+			}
+			else{
+				outputText("looking around for an alchemist specializing in transformatives.\n");
+			}
+			*/
 			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
 				outputText("Mutations Assistant: On\n");
 			}
@@ -980,7 +990,6 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Kitsunes", mutationsDBKitsune);
 		menuGen(menuItems, page, displayPerks, false);
 	}
-	//Why does it need menu(); to update output / not blank the screen???
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function mutationsDatabaseVerify(perkName:Array, acquireReq:String = ""):void {
