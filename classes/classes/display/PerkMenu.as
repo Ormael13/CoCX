@@ -935,7 +935,7 @@ public class PerkMenu extends BaseContent {
 
 		function mutationsDBParathyroid():void{
 			clearOutput();
-			//ParaThyroid Glands Mutations. What's the difference between this and the above???
+			//ParaThyroid Glands Mutations.
 			displayHeader("ParaThyroid Glands Mutations");
 			for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
 				mutationsDatabaseVerify(mutate);
