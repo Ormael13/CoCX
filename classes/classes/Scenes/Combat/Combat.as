@@ -10776,13 +10776,13 @@ public class Combat extends BaseContent {
                 else if (math > .75) outputText("You see [monster he] aren't very hurt.  ");
                 else if (math > .5) outputText("You see [monster he] are slightly wounded.  ");
                 else if (math > .25) outputText("You see [monster he] are seriously hurt.  ");
-                else outputText("You see [monster he] are unsteady and close to death.  ");
+                else outputText("You see [monster he] are unsteady and close to death.  "+(math<0?"Seems they have some ability to stay undefeated even having negative health.  Well it just mean you must keep attacking to the point they can't stay conscious anymore.":"")+"");
             } else {
                 if (math >= 1) outputText("You see [monster he] is in perfect health.  ");
                 else if (math > .75) outputText("You see [monster he] isn't very hurt.  ");
                 else if (math > .5) outputText("You see [monster he] is slightly wounded.  ");
                 else if (math > .25) outputText("You see [monster he] is seriously hurt.  ");
-                else outputText("You see [monster he] is unsteady and close to death.  ");//[monster heshe]
+                else outputText("You see [monster he] is unsteady and close to death.  "+(math<0?"Seems it have some ability to stay undefeated even having negative health.  Well it just mean you must keep attacking to the point it can't stay conscious anymore.":"")+"");//[monster heshe]
             }
             showMonsterLust();
             // haha literally fuck organising this shit properly any more
@@ -14891,4 +14891,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

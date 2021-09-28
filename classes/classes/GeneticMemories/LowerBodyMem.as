@@ -433,7 +433,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, RAIJU_TAUR, "RAIJU_TAUR", {
 		  id: "Raiju Lower Body",
 			name: "Raiju Paws (Legs)",
-		  cost: 100,
+		  cost: 200,
 		  title: "Raiju (4)",
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyRaiju(4)
@@ -460,6 +460,40 @@ package classes.GeneticMemories {
 		  title: "Orc",
 		  transformation: function(): Transformation {
 		    return CoC.instance.transformations.LowerBodyOrc
+		  }
+		});
+
+		public static const WOLF: int = 37;
+		EnumValue.add(Memories, WOLF, "WOLF", {
+		  id: "Wolf Lower Body",
+			name: "Wolf Legs",
+		  cost: 100,
+		  title: "Wolf",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyWolf(2)
+		  }
+		});
+
+		public static const WOLF_TAUR: int = 38;
+		EnumValue.add(Memories, WOLF_TAUR, "WOLF_TAUR", {
+		  id: "Wolf Lower Body",
+			name: "Wolf Paws (Legs)",
+		  cost: 200,
+		  title: "Wolf (4)",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyWolf(4)
+		  },
+			taurVariant: true
+		});
+
+		public static const CAVE_WYRM: int = 39;
+		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
+		  id: "Cave Wyrm Lower Body",
+			name: "Cave Wyrm Legs",
+		  cost: 100,
+		  title: "Cave Wyrm",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyCaveWyrm
 		  }
 		});
 

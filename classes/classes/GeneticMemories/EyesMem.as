@@ -228,6 +228,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const CAVE_WYRM:int = 17;
+		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
+			id: "Cave Wyrm Eyes",
+			name: "Cave Wyrm Eyes",
+			cost: 100,
+			title: "Cave Wyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesCaveWyrm;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

@@ -5251,9 +5251,9 @@ public class PerkLib
 			ElementalContractRank16.requirePerk(ElementalContractRank15)
                     .requireWis(400)
                     .requireLevel(90);
-            //StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
-            //        .requireWis(400)
-            //        .requireLevel(90);
+            StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
+                    .requireWis(400)
+                    .requireLevel(90);
 			///Tier 16 Wisdom perks
 			ElementalContractRank17.requirePerk(ElementalContractRank16)
                     .requireWis(425)
@@ -5292,10 +5292,10 @@ public class PerkLib
 			ElementalContractRank24.requirePerk(ElementalContractRank23)
                     .requireWis(600)
                     .requireLevel(138);
-            /*StrongestElementalBondEx.requirePerk(StrongestElementalBond)
+            StrongestElementalBondEx.requirePerk(StrongestElementalBond)
                     .requirePerk(ElementalContractRank24)
                     .requireWis(600)
-                    .requireLevel(138);*/
+                    .requireLevel(138);
 			///Tier 24 Wisdom perks
 			ElementalContractRank25.requirePerk(ElementalContractRank24)
                     .requireWis(625)
@@ -5312,10 +5312,10 @@ public class PerkLib
 			ElementalContractRank28.requirePerk(ElementalContractRank27)
                     .requireWis(700)
                     .requireLevel(162);
-            /*StrongestElementalBondSu.requirePerk(StrongestElementalBondEx)
+            StrongestElementalBondSu.requirePerk(StrongestElementalBondEx)
                     .requirePerk(ElementalContractRank28)
                     .requireWis(700)
-                    .requireLevel(162);*/
+                    .requireLevel(162);
 			///Tier 28 Wisdom perks
 			ElementalContractRank29.requirePerk(ElementalContractRank28)
                     .requireWis(725)

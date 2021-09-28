@@ -9622,7 +9622,7 @@ use namespace CoC;
 			if (faceType == Face.WOLF || faceType == Face.ANIMAL_TOOTHS)
 				wolfCounter++;
 			if (eyes.type == Eyes.FENRIR)
-				wolfCounter += 3;
+				wolfCounter += 3;//from collar
 			if (eyes.colour == "glacial blue")
 				wolfCounter += 2;
 			if (eyes.type == Eyes.FERAL)
@@ -9646,7 +9646,7 @@ use namespace CoC;
 			if (coatColor == "glacial white")
 				wolfCounter++;
 			if (rearBody.type == RearBody.FENRIR_ICE_SPIKES)
-				wolfCounter += 6;
+				wolfCounter += 6;//from collar
 			if (wolfCocks() > 0 && wolfCounter > 0)
 				wolfCounter++;
 			if (hasPerk(PerkLib.FreezingBreath))

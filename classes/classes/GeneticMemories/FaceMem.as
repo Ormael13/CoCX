@@ -327,6 +327,26 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceElf;
 		  	}
 	  	});
+	  	public static const WOLF_FACE:int = 26;
+	  	EnumValue.add(Memories, WOLF_FACE, "WOLF_FACE", {
+		  	id: "Wolf Face",
+		  	name: "Wolf Face",
+		  	cost: 100,
+		 	title: "Wolf Face",
+		  	transformation: function(): Transformation {
+			  	return CoC.instance.transformations.FaceWolf;
+		  	}
+	  	});
+	  	public static const ANIMAL_TOOTHS:int = 27;
+	  	EnumValue.add(Memories, ANIMAL_TOOTHS, "ANIMAL_TOOTHS", {
+		  	id: "Animal Teeth",
+		  	name: "Animal Teeth",
+		  	cost: 100,
+		 	title: "Animal Teeth",
+		  	transformation: function(): Transformation {
+			  	return CoC.instance.transformations.FaceAnimalTeeth;
+		  	}
+	  	});
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

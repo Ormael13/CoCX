@@ -116,11 +116,11 @@ package classes.Scenes
 			outputText("one of two fera perks from 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
 			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");
 			outputText("<b>Version 0.8s2:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm\n");
 			outputText("-New consumable (by Ormael/Pyromania): Numb Candies. Obtained when giving Numb Rock to Lumi for enhance. Effect: Shorten Heat/Rut duration by 24 hours. If duration is 24 hours or less will instead shorten duration to 1 hour. Also have minor lust reducing effect.\n");
 			outputText("-Numb Rocks cost reverted back to 15 gems. Efect of Rut / Heat shortening removed from them.\n");
 			outputText("-3rd Tifa sex scene account for pc having tentacle / stamen cocks or alraune lower body.\n");
 			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible.\n");
-			//outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
@@ -129,11 +129,12 @@ package classes.Scenes
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
-			//outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
-			//outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
 			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
-			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincanrate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
-			outputText("-\n");
+			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincarnate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
+			outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
+			outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
+			outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
+			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -187,7 +188,6 @@ package classes.Scenes
 			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New event perk: . Gained by . Effects: \n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
@@ -239,7 +239,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

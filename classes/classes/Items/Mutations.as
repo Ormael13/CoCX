@@ -13663,13 +13663,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //hips
-        if (rand(2) == 0 && player.hips.type < 11 && changes < changeLimit) {
+        if (rand(2) == 0 && player.hips.type < 12 && changes < changeLimit) {
             outputText("[pg]You stumble as you feel the bones in your hips grinding, expanding your hips noticeably.");
             player.hips.type += 1 + rand(2);
             changes++;
         }
         //ass
-        if (rand(2) == 0 && player.butt.type < 11 && changes < changeLimit) {
+        if (rand(2) == 0 && player.butt.type < 12 && changes < changeLimit) {
             outputText("[pg]Your ass grows in size, becoming bigger and more cushiony. A little fat to help you to endure the coming winter, perhaps.");
             player.butt.type += 1 + rand(2);
             changes++;
