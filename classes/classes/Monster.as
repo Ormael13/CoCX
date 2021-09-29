@@ -882,7 +882,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function canMonsterBleed():Boolean
 		{
-			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType);
+			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType);
 		}
 
 		/**

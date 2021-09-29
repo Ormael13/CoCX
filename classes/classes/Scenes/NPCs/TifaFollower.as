@@ -58,7 +58,7 @@ public function tifaMainMenuTalkReturn():void {
 	addButton(0, "Her", tifaMainMenuTalkHer);
 	addButton(1, "Bee life?", tifaMainMenuTalkBeeLife);
 	addButton(2, "Relations", tifaMainMenuTalkRelations);
-	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.beeScore() >= 9) addButton(2, "Handmaiden", tifaMainMenuTalkRelations).hint("Become her handmaiden.");
+	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.beeScore() >= 9) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
 	else if (flags[kFLAGS.TIFA_FOLLOWER] > 9) addButtonDisabled(3, "Handmaiden", "You're already her handmaiden.");
 	else addButtonDisabled(3, "Handmaiden", "Become her handmaiden. (Req. female or herm bee morph and discussed all conversation at least once, also have an affection rating with Tifa of 100)");
 	addButton(4, "Back", tifaMainMenu);

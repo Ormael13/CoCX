@@ -329,7 +329,7 @@ public function siegweirdAdvancedCampStudy():void
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
 			player.removeKeyItem("Alvina's Shattered Phylactery");
 			outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
-			outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [player]</i>\"\n\n");
+			outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
 			outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
 			outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
 			outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");

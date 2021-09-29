@@ -10962,7 +10962,6 @@ public class Combat extends BaseContent {
             } else if (monster.lust >= (monster.maxLust() * 0.4)) outputText("You can see the tip of his reptilian member poking out of its protective slit. ");
             else if (monster.lust >= (monster.maxLust() * 0.6)) outputText("His cock is now completely exposed and half-erect, yet somehow he still stays focused on your eyes and his face is inexpressive.  ");
             else outputText("His cock is throbbing hard, you don't think it will take much longer for him to pop.   Yet his face still looks inexpressive... despite the beads of sweat forming on his brow.  ");
-
         } else if (monster.short == "kitsune") {
             //Kitsune Lust states:
             //Low
@@ -10995,22 +10994,22 @@ public class Combat extends BaseContent {
                 if (monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "' eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
                 if (monster.cocks.length > 0) {
                     if (monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are having trouble moving due to the rigid protrusion in [monster his] groins.  ");
-                    if (monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are panting and softly whining, each movement seeming to make [monster his] bulges more pronounced.  You don't think [monster he] can hold out much longer.  ");
+                    if (monster.lust >= (monster.maxLust() * 0.85) && monster.lust < monster.maxLust()) outputText(monster.capitalA + monster.short + " are panting and softly whining, each movement seeming to make [monster his] bulges more pronounced.  You don't think [monster he] can hold out much longer.  ");
                 }
                 if (monster.vaginas.length > 0) {
                     if (monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " are obviously turned on, you can smell [monster his] arousal in the air.  ");
-                    if (monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + "' " + monster.vaginaDescript() + "s are practically soaked with their lustful secretions.  ");
+                    if (monster.lust >= (monster.maxLust() * 0.85) && monster.lust < monster.maxLust()) outputText(monster.capitalA + monster.short + "' " + monster.vaginaDescript() + "s are practically soaked with their lustful secretions.  ");
                 }
             } else {
                 if (monster.lust > (monster.maxLust() * 0.5) && monster.lust < (monster.maxLust() * 0.6)) outputText(monster.capitalA + monster.short + "'s skin remains flushed with the beginnings of arousal.  ");
                 if (monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText(monster.capitalA + monster.short + "'s eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
                 if (monster.cocks.length > 0) {
                     if (monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is having trouble moving due to the rigid protrusion in [monster his] groin.  ");
-                    if (monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is panting and softly whining, each movement seeming to make [monster his] bulge more pronounced.  You don't think [monster he] can hold out much longer.  ");
+                    if (monster.lust >= (monster.maxLust() * 0.85) && monster.lust < monster.maxLust()) outputText(monster.capitalA + monster.short + " is panting and softly whining, each movement seeming to make [monster his] bulge more pronounced.  You don't think [monster he] can hold out much longer.  ");
                 }
                 if (monster.vaginas.length > 0) {
                     if (monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + " is obviously turned on, you can smell [monster his] arousal in the air.  ");
-                    if (monster.lust >= (monster.maxLust() * 0.85)) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " is practically soaked with her lustful secretions.  ");
+                    if (monster.lust >= (monster.maxLust() * 0.85) && monster.lust < monster.maxLust()) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " is practically soaked with her lustful secretions.  ");
                 }
             }
         }
