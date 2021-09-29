@@ -4312,7 +4312,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //skinTone
-        var gremlin_skin_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
+        var gremlin_skin_color:Array = ["light", "tan", "dark"];
         if (player.skin.base.color != "light" && player.skin.base.color != "tan" && player.skin.base.color != "dark" && changes < changeLimit && rand(2) == 0) {
             player.skin.base.color = randomChoice(gremlin_skin_color);
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");

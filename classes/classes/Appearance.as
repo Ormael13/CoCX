@@ -680,6 +680,16 @@ public class Appearance extends Utils
 					"starfish tipped dick",
 					"starfish tipped penis");
 			}
+			else if (cockType == CockTypesEnum.MINDBREAKER) {
+				return randomChoice("dripping eldritch dick",
+						"eldritch cock",
+						"dripping inhuman cock",
+						"dripping eldritch prick",
+						"eldritch member",
+						"green goo dripping member",
+						"dripping eldritch shaft",
+						"taperred eldritch shaft");
+			}
 			return randomChoice("cock",
 				"prick",
 				"pecker",

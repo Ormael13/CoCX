@@ -21,6 +21,7 @@ public class VaginaClass implements IOrifice {
 		public static const ALRAUNE:int 		= 11;
 		public static const SCYLLA:int 			= 12;
 		public static const NAGA:int 			= 13;
+		public static const MINDBREAKER:int 	= 14;
 		
 		public static const WETNESS_DRY:int       = 0;
 		public static const WETNESS_NORMAL:int    = 1;
