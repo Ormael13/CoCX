@@ -397,7 +397,7 @@ public class Arms extends BodyPart {
 	public static const MINDBREAKER:int = 56;
 	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
 		name:"mindbreaker",
-		appearanceDesc: "Your arms are sleeved up in a web-like membrane, it’s very likely that they could be good for swimming too.",
+		appearanceDesc: "Your arms are sleeved up in a web-like membrane, it’s very likely that they could be good for swimming too."
 	});
 
 	public static function canFly(id: int): Boolean {
