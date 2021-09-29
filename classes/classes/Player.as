@@ -10053,6 +10053,64 @@ use namespace CoC;
 			return manticoreCounter;
 		}
 
+		public function FemaleMindbreakerScore():Number {
+			Begin("Player","racialScore","manticore");
+			var femaleMindbreakerCounter:Number = 0;
+			if (faceType == Face.HUMAN)
+				femaleMindbreakerCounter++;
+			if (eyes.type == Eyes.MINDBREAKER)
+				femaleMindbreakerCounter++;
+			if (eyes.colour == (InCollection(skin.base.color, ["yellow", "orange", "light green"])))
+				femaleMindbreakerCounter++;
+			if (ears.type == Ears.HUMAN)
+				femaleMindbreakerCounter++;
+			if (tailType == Tail.NONE)
+				femaleMindbreakerCounter ++;
+			if (rearBody.type == RearBody.MINDBREAKER)
+				femaleMindbreakerCounter+= 2;
+			if (arms.type == Arms.MINDBREAKER)
+				femaleMindbreakerCounter++;
+			if (lowerBody == LowerBody.MINDBREAKER)
+				femaleMindbreakerCounter++;
+			if (tongue.type == Tongue.MINDBREAKER)
+				femaleMindbreakerCounter++;
+			if (wings.type == Wings.NONE)
+				femaleMindbreakerCounter += 4;
+			if (vaginaType() == VaginaClass.MINDBREAKER)
+				femaleMindbreakerCounter++;
+			if ((hairType == Hair.MINDBREAKER) && hairColor == "purple")
+				femaleMindbreakerCounter++;
+			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white"])))
+				femaleMindbreakerCounter++;
+			if (skinAdj == "slippery")
+				femaleMindbreakerCounter ++;
+			if (hasPerk(PerkLib.Insanity))
+				femaleMindbreakerCounter++;
+		//	if (hasPerk(PerkLib.MindbreakerBrain))
+		//		femaleMindbreakerCounter++;
+		//	if (hasPerk(PerkLib.MindbreakerBrainEvolved))
+		//		femaleMindbreakerCounter++;
+		//	if (hasPerk(PerkLib.MindbreakerBrainFinalForm))
+		//		femaleMindbreakerCounter++;
+		//	if ((hasPerk(hasPerk(PerkLib.MindbreakerBrainEvolved)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+		//		femaleMindbreakerCounter++;
+		//	if ((hasPerk(hasPerk(PerkLib.MindbreakerBrainEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+		//		femaleMindbreakerCounter++;
+		//	if (hasPerk(PerkLib.MindbreakerBrainFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+		//		femaleMindbreakerCounter++;
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				femaleMindbreakerCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && femaleMindbreakerCounter >= 4)
+				femaleMindbreakerCounter++;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && femaleMindbreakerCounter >= 8)
+				femaleMindbreakerCounter += 1;
+			if (isGargoyle()) femaleMindbreakerCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) femaleMindbreakerCounter = 0;
+			femaleMindbreakerCounter = finalRacialScore(femaleMindbreakerCounter, Race.FMINDBREAKER);
+			End("Player","racialScore");
+			return femaleMindbreakerCounter;
+		}
+
 		//Red Panda
 		public function redpandaScore():Number {
 			Begin("Player","racialScore","redpanda");
