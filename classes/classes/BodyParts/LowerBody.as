@@ -723,13 +723,13 @@ public class LowerBody extends SaveableBodyPart {
 	public static const MINDBREAKER:int = 71;
 	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
 		name: "mindbreaker",
-		appearanceDesc: "Where you would normally have feet, eight tentacles extends, connected together by a fleshy membrane at the base like a skirt. You leave an ominous trail of green slime wherever you pass. Along your legs three extra pairs of green eyes stare at the world lined from your tight to the waist up.",
+		appearanceDesc: "Where you would normally have feet, eight tentacles extends, connected together by a fleshy membrane at the base like a skirt. You leave an ominous trail of green slime wherever you pass. Along your legs three extra pairs of green eyes stare at the world lined from your tight to the waist up."
 	});
 
 	public static const MINDBREAKERMALE:int = 72;
 	EnumValue.add(Types, MINDBREAKERMALE, "MINDBREAKERMALE", {
 		name: "mindbreaker",
-		appearanceDesc: "You stand bipedal, your feet are mostly human in shape though your toes are webbed, presumably to assist with swimming. They are fit enough to support the weight of yourself and someone else if they were to be on top of you.",
+		appearanceDesc: "You stand bipedal, your feet are mostly human in shape though your toes are webbed, presumably to assist with swimming. They are fit enough to support the weight of yourself and someone else if they were to be on top of you."
 	});
 
 	override public function set type(value:int):void {
