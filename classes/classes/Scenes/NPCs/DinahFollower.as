@@ -202,7 +202,7 @@ import classes.internals.Utils;
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
-				addButton(10, "Boss D.", DinahShopMainMenu2);
+				addButton(10, "BossTF's", DinahShopMainMenu2);
 				addButton(12, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
 			}
 			else {
@@ -342,7 +342,7 @@ import classes.internals.Utils;
 				doNext(DinahShopMainMenu3);
 				return;
 			}
-			doYesNo(Utils.curry(catChimeraTransact5,itype), DinahShopMainMenu2);
+			doYesNo(Utils.curry(catChimeraTransact5,itype), DinahShopMainMenu3);
 		}
 		public function catChimeraTransact1(itype:ItemType):void {
 			clearOutput();

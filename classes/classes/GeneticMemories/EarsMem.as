@@ -261,6 +261,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const WOLF:int = 20;
+		EnumValue.add(Memories, WOLF, "WOLF", {
+			id: "Wolf Ears",
+			name: "Wolf Ears",
+			cost: 100,
+			title: "Wolf",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsWolf;
+			}
+		});
+
+		public static const CAVE_WYRM:int = 21;
+		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
+			id: "Cave Wyrm Ears",
+			name: "Cave Wyrm Ears",
+			cost: 100,
+			title: "Cave Wyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsCaveWyrm;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

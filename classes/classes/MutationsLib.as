@@ -382,9 +382,14 @@ public class MutationsLib
 			return new PerkType(id, name, desc, longDesc, keepOnAscension);
 		}
 
-		//Returns an array of arrays of mutation body parts. Can be specified to specific parts with teh first argument.
-		//Must update here with an extra push to all mutations points. This feeds the Perks/Mutations DB and Evangeline's Mutations information.
+		/**
+		*Returns an array of arrays of mutation body parts in PerkType type.
+		*Can be specified to specific parts with the first argument.
+		*Must update here with an extra push to all mutations points.
+		*This feeds the Perks/Mutations DB and Evangeline's Mutations information.
+		*/
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
+
 			var MutationsList:Array = []
 			function mutationsHeart():void{
 				MutationsList.push([BlackHeart, BlackHeartEvolved, BlackHeartFinalForm]);

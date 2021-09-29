@@ -726,6 +726,7 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
+	//MutationsDB!
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
 		Source: MutationsLib.as for all mutations.
@@ -774,6 +775,22 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 			}
+			/*
+			outputText("Mutations can be obtained by ");
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2 && flags[kFLAGS.MUTATIONS_SPOILERS]){
+				outputText("finding Evangeline and asking her about it.\n");
+			}
+			else{
+				outputText("looking around for an alchemist specializing in transformatives.\n");
+			}
+			*/
+			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
+				outputText("Mutations Assistant: On\n");
+			}
+			else{
+				outputText("Mutations Assistant: Off\n");
+			}
+			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. Default:Off.\n");
 		}
 
 		function mutationsDBHeart():void{
@@ -918,7 +935,7 @@ public class PerkMenu extends BaseContent {
 
 		function mutationsDBParathyroid():void{
 			clearOutput();
-			//ParaThyroid Glands Mutations. What's the difference between this and the above???
+			//ParaThyroid Glands Mutations.
 			displayHeader("ParaThyroid Glands Mutations");
 			for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
 				mutationsDatabaseVerify(mutate);
@@ -973,7 +990,6 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Kitsunes", mutationsDBKitsune);
 		menuGen(menuItems, page, displayPerks, false);
 	}
-	//Why does it need menu(); to update output / not blank the screen???
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function mutationsDatabaseVerify(perkName:Array, acquireReq:String = ""):void {

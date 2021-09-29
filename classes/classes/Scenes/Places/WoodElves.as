@@ -221,6 +221,7 @@
 			CoC.instance.transformations.TongueElf.applyEffect(false);
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
+			if (player.legCount != 2) player.legCount = 2;
 			outputText("\n\n");
 			CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;

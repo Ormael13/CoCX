@@ -644,7 +644,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
@@ -774,7 +775,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
@@ -1161,7 +1163,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
@@ -1383,7 +1386,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {

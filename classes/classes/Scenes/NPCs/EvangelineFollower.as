@@ -224,7 +224,7 @@ public function meetEvangeline():void {
 	}
 	else addButtonDisabled(12, "???", "Req. to be Jiangshi.");
 	if (player.hasKeyItem("Soul Gem Research") >= 0) {
-		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", recivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
+		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", receivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
 		if (!player.hasStatusEffect(StatusEffects.SoulGemCrafting)) addButton(13, "Soul Gem", craftingSoulGem).hint("Ask Evangeline for crafting Soul Gem.");
 	}
 	else addButtonDisabled(13, "???", "Req. to acquire Soul Gem Research materials first.");
@@ -1007,7 +1007,7 @@ private function craftingSoulGem():void {
 		doNext(meetEvangeline);
 	}
 }
-private function recivingCraftedSoulGem():void {
+private function receivingCraftedSoulGem():void {
 	clearOutput();
 	outputText("As you check on Evangeline she hands a purplish crystal to you.\n\n");
 	outputText("\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"\n\n");
@@ -1037,7 +1037,7 @@ private function InternalMutations():void {
 		addButton(3, "Yes", InternalMutationsTak);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		outputText("\"<i>Did you bring gems or find vial of the mutagen?</i>\" she asks.\n\n");
+		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
 		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
 		menu();
 		addButton(0, "Back", meetEvangeline);
@@ -1049,7 +1049,7 @@ private function InternalMutations():void {
 }
 private function InternalMutationsNie():void {
 	outputText("\n\nYour confused look annoys Evangeline to no end.");
-	outputText("\n\n\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"");
+	outputText("\n\n\"<i>That's fine, but trust me, you really will want my help on this, eventually.</i>\"");
 	EvangelinePeepTalkOnInternalMutations = 1;
 	doNext(meetEvangeline);
 }
@@ -1271,7 +1271,7 @@ private function InternalMutations0(page:int = 0):void {
 
 private function Experiments():void {
 	clearOutput();
-	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
+	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of the finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
 	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	menu();
 	addButtonDisabled(0, "BL/BB Plus", "Bimbo Liquer Plus / Bro Brew Plus");

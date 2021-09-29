@@ -2198,6 +2198,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.WOLF;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.WOLF_FACE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2518,6 +2519,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.ANIMAL_TOOTHS;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ANIMAL_TOOTHS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2873,6 +2875,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tongue.type = Tongue.CAVE_WYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.CAVE_WYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3331,6 +3334,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.WOLF;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.WOLF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3403,6 +3407,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.CAVE_WYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.CAVE_WYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4105,6 +4110,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.CAVE_WYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.CAVE_WYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5097,6 +5103,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.WOLF;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.WOLF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5145,6 +5152,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.CAVE_WYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CAVE_WYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6855,6 +6863,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.lowerBody = LowerBody.WOLF;
 	      player.legCount = legCount;
 	      if (doOutput) outputText(desc);
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.WOLF));
 	    },
 	    // is present
 	    function (): Boolean {
@@ -7441,6 +7450,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.CAVE_WYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CAVE_WYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8333,6 +8343,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.WOLF));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8386,6 +8397,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.CAVE_WYRM));
 	  },
 	  // is present
 	  function (): Boolean {

@@ -1498,9 +1498,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Fenrir Eyes
 			if (CoC.instance.transformations.EyesFenrir.isPossible() && player.hasKeyItem("Gleipnir Collar") >= 0) {
 				outputText("\n");
-
 				CoC.instance.transformations.EyesFenrir.applyEffect();
-
 				outputText("\n");
 				needNext = true;
 			}

@@ -2916,10 +2916,21 @@ import coc.view.MainView;
 		private function reincarnatePrompt():void {
 			clearOutput();
 			outputText("Would you like to reincarnate and start a new life as a Champion?");
-			doYesNo(reincarnate, ascensionMenu);
+			menu();
+			addButton(1, "Yes", reincarnate001).hint("Reincarnate with increased difficulty.");
+			if (player.ascensionPerkPoints >= 50) addButton(2, "Maybe?", reincarnate002).hint("Reincarnate without increasing difficulty. But that will cost you some saved ascension points.");
+			else addButtonDisabled(2, "Maybe?", "Req. 50+ ascension points left.");
+			addButton(3, "No", ascensionMenu);
+		}
+		private function reincarnate001():void {
+			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
+			reincarnate();
+		}
+		private function reincarnate002():void {
+			player.ascensionPerkPoints -= 50;
+			reincarnate();
 		}
 		private function reincarnate():void {
-			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
 			Metamorph.resetMetamorph();
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
