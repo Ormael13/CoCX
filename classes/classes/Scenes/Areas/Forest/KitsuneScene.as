@@ -2489,7 +2489,7 @@ public class KitsuneScene extends BaseContent
 					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
-				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 90 &&  player.inte >= 90 && notANineTail && (!player.hasPerk(PerkLib.CorruptedKitsune) || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 90 &&  player.wis >= 90 && notANineTail && (!player.hasPerk(PerkLib.CorruptedKitsune) || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					//Apply Kitsune perk if applicable.
 					if (!player.hasPerk(PerkLib.EnlightenedKitsune)) {
