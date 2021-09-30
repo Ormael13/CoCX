@@ -3065,6 +3065,21 @@ use namespace CoC;
 			return damage;
 		}
 
+		public function eyesOfTheHunterAdeptBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyHugeType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || CoC.instance.monster.hasPerk(PerkLib.EnemyConstructType) || CoC.instance.monster.hasPerk(PerkLib.EnemyFeralType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGooType)
+			|| CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon) || CoC.instance.monster.hasPerk(PerkLib.EnemyEliteType);
+		}
+		public function eyesOfTheHunterExpertBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyGigantType) || CoC.instance.monster.hasPerk(PerkLib.EnemyLargeGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyElementalType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGhostType) || CoC.instance.monster.hasPerk(PerkLib.EnemyPlantType) || CoC.instance.monster.hasPerk(PerkLib.EnemyChampionType)
+			|| CoC.instance.monster.hasPerk(PerkLib.FireVulnerability) || CoC.instance.monster.hasPerk(PerkLib.IceVulnerability) || CoC.instance.monster.hasPerk(PerkLib.LightningVulnerability) || CoC.instance.monster.hasPerk(PerkLib.DarknessVulnerability);
+		}
+		public function eyesOfTheHunterMasterBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyColossalType) || CoC.instance.monster.hasPerk(PerkLib.EnemyFleshConstructType) || CoC.instance.monster.hasPerk(PerkLib.FireNature) || CoC.instance.monster.hasPerk(PerkLib.IceNature) || CoC.instance.monster.hasPerk(PerkLib.LightningNature) || CoC.instance.monster.hasPerk(PerkLib.DarknessNature);
+		}
+		public function eyesOfTheHunterGrandMasterBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyGodType) || CoC.instance.monster.hasPerk(PerkLib.EnemyBossType);
+		}
+
 		public function henchmanBasedInvulnerabilityFrame():Boolean {
 			if (statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3) return true;
 			else return false;

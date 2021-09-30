@@ -1231,7 +1231,7 @@ public class PerkLib
 				"You've chosen the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 6750!");
 		public static const EpicSensitivity:PerkType = mk("Epic Sensitivity", "Epic Sensitivity",
 				"",
-				"You've chosen the 'Epic Sensitivity' perk.").withBuffs({'sens':35});
+				"You've chosen the 'Epic Sensitivity' perk.").withBuffs({'sens':140});
 		public static const EpicSpeed:PerkType = mk("Epic Speed", "Epic Speed",
 				"",
 				"You've chosen the 'Epic Speed' perk.").withBuffs({'spe.mult':0.35});
@@ -1290,11 +1290,17 @@ public class PerkLib
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
 				"You've chosen the 'Extremely Lucky' perk, increasing gem gains from victories by 15%.");
 		public static const EyesOfTheHunterAdept:PerkType = mk("Eyes of the Hunter (Adept)", "Eyes of the Hunter (Adept)",
-				"Allow see another few infomations about enemy (as long it apply to current viewed enemy) (req. 50+ sensitivity).",
-				"You've chosen the 'Eyes of the Hunter (Adept)' perk, allowing you to gain wider than before range of information about enemy you fight.");
+				"You to deal 10% damage and have 5% higher critical chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies. (req. 50+ sensitivity)",
+				"You've chosen the 'Eyes of the Hunter (Adept)' perk, allowing you to deal 10% damage and have 5% higher critical chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies.");
+		public static const EyesOfTheHunterExpert:PerkType = mk("Eyes of the Hunter (Expert)", "Eyes of the Hunter (Expert)",
+				"You to deal 10% damage and have 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies (req. 75+ sensitivity)",
+				"You've chosen the 'Eyes of the Hunter (Expert)' perk, allowing you to deal 10% damage and have 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies.");
+		public static const EyesOfTheHunterGrandMaster:PerkType = mk("Eyes of the Hunter (Grand Master)", "Eyes of the Hunter (Grand Master)",
+				"You to deal 10% damage and have 5% higher critical chance against God, Boss type enemies (req. 100+ sensitivity)",
+				"You've chosen the 'Eyes of the Hunter (Grand Master)' perk, allowing you to deal 10% damage and have 5% higher critical chance against God, Boss type enemies.");
 		public static const EyesOfTheHunterMaster:PerkType = mk("Eyes of the Hunter (Master)", "Eyes of the Hunter (Master)",
-				"Allow see more infomations about enemy (as long it apply to current viewed enemy) (req. 75+ sensitivity).",
-				"You've chosen the 'Eyes of the Hunter (Master)' perk, adding more possible to see information about enemy you fight in compare to Adept stage.");
+				"You to deal 10% damage and have 5% higher critical chance against Colossal, Flesh Construct, God, Boss, Fire/Ice/Lightning/Darkness Nature type enemies (req. 100+ sensitivity)",
+				"You've chosen the 'Eyes of the Hunter (Master)' perk, allowing you to deal 10% damage and have 5% higher critical chance against Colossal, Flesh Construct, God, Boss, Fire/Ice/Lightning/Darkness Nature type enemies.");
 		public static const EyesOfTheHunterNovice:PerkType = mk("Eyes of the Hunter (Novice)", "Eyes of the Hunter (Novice)",
 				"Allow see few more than usual infomations about enemy (req. 25+ sensitivity).",
 				"You've chosen the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about enemy you fight.");
@@ -1934,7 +1940,7 @@ public class PerkLib
 				"You've chosen the 'Legendary Self-Control' perk. Thanks to your legendary mental conditioning, your maximum lust has been increased by 15000!");
 		public static const LegendarySensitivity:PerkType = mk("Legendary Sensitivity", "Legendary Sensitivity",
 				"",
-				"You've chosen the 'Legendary Sensitivity' perk.").withBuffs({'sens':50});
+				"You've chosen the 'Legendary Sensitivity' perk.").withBuffs({'sens':200});
 		public static const LegendarySpeed:PerkType = mk("Legendary Speed", "Legendary Speed",
 				"",
 				"You've chosen the 'Legendary Speed' perk.").withBuffs({'spe.mult':0.50});
@@ -2175,7 +2181,7 @@ public class PerkLib
 				"You've chosen the 'Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 30000!");
 		public static const MythicalSensitivity:PerkType = mk("Mythical Sensitivity", "Mythical Sensitivity",
 				"",
-				"You've chosen the 'Mythical Sensitivity' perk.").withBuffs({'sens':65});
+				"You've chosen the 'Mythical Sensitivity' perk.").withBuffs({'sens':260});
 		public static const MythicalSpeed:PerkType = mk("Mythical Speed", "Mythical Speed",
 				"",
 				"You've chosen the 'Mythical Speed' perk.").withBuffs({'spe.mult':0.65});
@@ -5580,11 +5586,17 @@ public class PerkLib
                     .requirePerk(EyesOfTheHunterNovice)
                     .requireLevel(6);
             //Tier 2 Sensitivity Perks
-            EyesOfTheHunterMaster.requireSen(75)
+            EyesOfTheHunterExpert.requireSen(75)
                     .requirePerk(EyesOfTheHunterAdept)
                     .requireLevel(12);
             //Tier 3 Sensitivity Perks
+            EyesOfTheHunterMaster.requireSen(100)
+                    .requirePerk(EyesOfTheHunterExpert)
+                    .requireLevel(18);
             //Tier 4 Sensitivity Perks
+            EyesOfTheHunterGrandMaster.requireSen(125)
+                    .requirePerk(EyesOfTheHunterMaster)
+                    .requireLevel(24);
             //Tier 5 Sensitivity Perks
             GreaterDesensitization.requireSen(20)
                     .requirePerk(Desensitization)
@@ -6568,4 +6580,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

@@ -123,7 +123,9 @@ package classes.Scenes
 			outputText("-New consumable (by Ormael/Pyromania): Numb Candies. Obtained when giving Numb Rock to Lumi for enhance. Effect: Shorten Heat/Rut duration by 24 hours. If duration is 24 hours or less will instead shorten duration to 1 hour. Also have minor lust reducing effect.\n");
 			outputText("-Numb Rocks cost reverted back to 15 gems. Efect of Rut / Heat shortening removed from them.\n");
 			outputText("-3rd Tifa sex scene account for pc having tentacle / stamen cocks or alraune lower body.\n");
+			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincarnate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
 			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible.\n");
+			outputText("-Many minor type/parser errors fixed here and there.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
@@ -133,18 +135,20 @@ package classes.Scenes
 			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
-			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincarnate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
 			outputText("-Ghost type enemies become immune to bleed effects.\n");
-			outputText("-Many minor type/parser errors fixed here and there.\n");
-			outputText("-\n");
+			outputText("-Eyes of the Hunter perks changes: Novice perk would show all types which enemy possess. Adept would increase crit chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies by 5% and increase damage by ~10% (similar to acid attacks). Master Eyes of the Hunter will give same bonuses against Colossal, Flesh Construct, Fire/Ice/Lightning/Darkness Nature type enemies.\n");
+			outputText("-New tier 2 sensitivity lvl-up perk: Eyes of the Hunter (Expert). Req. Eyes of the Hunter (Adept) and 75+ sensitivity. Effect: Increase crit chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
+			outputText("-Eyes of the Hunter (Master) perk was moved to tier 3 from 2. It req. changed to Eyes of the Hunter (Expert) perk and 100+ sensitivity.\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Eyes of the Hunter (Grand Master). Req. Eyes of the Hunter (Master) and 125+ sensitivity. Effect: Increase crit chance against God, Boss type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
+			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -158,7 +162,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -238,9 +241,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -288,7 +289,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

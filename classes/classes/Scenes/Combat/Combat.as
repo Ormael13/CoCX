@@ -6471,6 +6471,10 @@ public class Combat extends BaseContent {
         if (player.headJewelry == headjewelries.SCANGOG) critPChance += 5;
         if (player.headJewelry == headjewelries.SATGOG) critPChance += 10;
         if (player.hasStatusEffect(StatusEffects.Rage)) critPChance += player.statusEffectv1(StatusEffects.Rage);
+		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.eyesOfTheHunterAdeptBoost() && player.sens >= 50) critPChance += 5;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.eyesOfTheHunterExpertBoost() && player.sens >= 75) critPChance += 5;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.eyesOfTheHunterMasterBoost() && player.sens >= 100) critPChance += 5;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.eyesOfTheHunterGrandMasterBoost() && player.sens >= 125) critPChance += 5;
         return critPChance;
     }
 
@@ -6492,6 +6496,10 @@ public class Combat extends BaseContent {
         if (player.armor == armors.R_CHANG || player.armor == armors.R_QIPAO || player.armor == armors.G_CHANG || player.armor == armors.G_QIPAO || player.armor == armors.B_CHANG || player.armor == armors.B_QIPAO || player.armor == armors.P_CHANG || player.armor == armors.P_QIPAO) critMChance += 5;
         if (player.headJewelry == headjewelries.SCANGOG) critMChance += 5;
         if (player.headJewelry == headjewelries.SATGOG) critMChance += 10;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.eyesOfTheHunterAdeptBoost() && player.sens >= 50) critMChance += 5;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.eyesOfTheHunterExpertBoost() && player.sens >= 75) critMChance += 5;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.eyesOfTheHunterMasterBoost() && player.sens >= 100) critMChance += 5;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.eyesOfTheHunterGrandMasterBoost() && player.sens >= 125) critMChance += 5;
         return critMChance;
     }
 
@@ -6787,6 +6795,23 @@ public class Combat extends BaseContent {
 		//if (player.hasPerk(PerkLib.EnemyGodType))
         return monsterLvlAdjustment;
     }
+	
+	private function EyesOfTheHunterDamageBonus():Number {
+		var EOTHDBonus:Number = 1;
+		if (player.eyesOfTheHunterAdeptBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) EOTHDBonus += 0.1;
+		}
+		if (player.eyesOfTheHunterExpertBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) EOTHDBonus += 0.1;
+		}
+		if (player.eyesOfTheHunterMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 100) EOTHDBonus += 0.1;
+		}
+		if (player.eyesOfTheHunterGrandMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.sens >= 125) EOTHDBonus += 0.1;
+		}
+		return EOTHDBonus;
+	}
 
 //DEAL DAMAGE
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
@@ -6822,6 +6847,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6905,6 +6931,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6985,7 +7012,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
-
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7079,6 +7106,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 1.4;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7166,6 +7194,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) damage *= 1.3;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7246,6 +7275,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
 //	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7318,6 +7348,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7390,6 +7421,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7462,6 +7494,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7534,6 +7567,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7606,6 +7640,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7681,6 +7716,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -10843,21 +10879,15 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) generalTypes.push("Large Group");
                 if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
                 if (monster.hasPerk(PerkLib.EnemyTrueDemon)) generalTypes.push("True Demon");
-            }
-            if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
-                if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
+				if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
                 if (monster.hasPerk(PerkLib.EnemyChampionType)) generalTypes.push("Champion");
                 if (monster.hasPerk(PerkLib.EnemyEliteType)) generalTypes.push("Elite");
                 if (monster.hasPerk(PerkLib.EnemyGodType)) generalTypes.push("God");
-            }
-            if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
-                if (monster.hasPerk(PerkLib.DarknessNature)) elementalTypes.push("Darkness Nature");
+				if (monster.hasPerk(PerkLib.DarknessNature)) elementalTypes.push("Darkness Nature");
                 if (monster.hasPerk(PerkLib.FireNature)) elementalTypes.push("Fire Nature");
                 if (monster.hasPerk(PerkLib.IceNature)) elementalTypes.push("Ice Nature");
                 if (monster.hasPerk(PerkLib.LightningNature)) elementalTypes.push("Lightning Nature");
-            }
-            if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 75) {
-                if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalTypes.push("Darkness Vulnerability");
+				if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalTypes.push("Darkness Vulnerability");
                 if (monster.hasPerk(PerkLib.FireVulnerability)) elementalTypes.push("Fire Vulnerability");
                 if (monster.hasPerk(PerkLib.IceVulnerability)) elementalTypes.push("Ice Vulnerability");
                 if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalTypes.push("Lightning Vulnerability");
@@ -11404,7 +11434,7 @@ public class Combat extends BaseContent {
             var crit:Boolean = false;
             var critChance:int = 5;
             var critMulti:Number = 1.75;
-            critChance += combat.combatPhysicalCritical();
+            critChance += combatPhysicalCritical();
             if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
             if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
@@ -14287,7 +14317,7 @@ public class Combat extends BaseContent {
 		damage *= (1 + SFoDMulti);
 		var crit:Boolean = false;
 		var critChance:int = 65;
-		critChance += combat.combatPhysicalCritical();
+		critChance += combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
