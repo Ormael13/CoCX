@@ -113,7 +113,6 @@ import classes.GlobalFlags.kFLAGS;
 			switch(rand(10)) {
 				case 0:
 					outputText("and nothing for your troubles. How disappointing.");
-					//doNext(westSection);
 					break;
 				case 1:
 					outputText("in the other bowl, a small, glowing syringe.");
@@ -121,7 +120,6 @@ import classes.GlobalFlags.kFLAGS;
 					break;
 				case 2:
 					outputText("and nothing for your troubles. How disappointing.");
-					//doNext(westSection);
 					break;
 				case 3:
 					outputText("and a bottle of Nocello sitting in front of the statue.");
@@ -129,7 +127,6 @@ import classes.GlobalFlags.kFLAGS;
 					break;
 				case 4:
 					outputText("and nothing for your troubles. How disappointing.");
-					//doNext(westSection);
 					break;
 				case 5:
 					outputText("and a single Storm Seed rests in the other bowl.");
@@ -137,7 +134,6 @@ import classes.GlobalFlags.kFLAGS;
 					break;
 				case 6:
 					outputText("and nothing for your troubles. How disappointing.");
-					//doNext(westSection);
 					break;
 				case 7:
 					outputText("replaced by a familiar looking bottle of Enigmanium.");
@@ -145,7 +141,6 @@ import classes.GlobalFlags.kFLAGS;
 					break;
 				case 8:
 					outputText("and nothing for your troubles. How disappointing.");
-					//doNext(westSection);
 					break;
 				case 9:
 					outputText("instead, a bottle of Infernal Wine sits before the statue.");
