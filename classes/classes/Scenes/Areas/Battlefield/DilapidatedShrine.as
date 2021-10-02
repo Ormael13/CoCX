@@ -109,7 +109,7 @@ import classes.GlobalFlags.kFLAGS;
 		private function westSectionOffering():void {
 			clearOutput();
 			player.destroyItems(consumables.CHILLYP, 3);
-			outputText("\n\nYou place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
+			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
 			switch(rand(10)) {
 				case 0:
 					outputText("and nothing for your troubles. How disappointing.");
@@ -148,6 +148,8 @@ import classes.GlobalFlags.kFLAGS;
 					break;
 			}
 			outputText("\n\n")
+			menu();
+			doNext(westSection);
 			cheatTime(1/12);
 		}
 		
