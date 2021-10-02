@@ -4154,6 +4154,8 @@ use namespace CoC;
 				if (TopScore >= 5) {
 					if (TopScore >= 11) {
 						if (isTaur()) race = "elf-taur";
+						else if ((player.skintone = "ebony" || player.skintone = "dark") && player.hairColor = "white") race = "drow";
+						else if (player.skintone = "ebony" || player.skintone = "dark") race = "dark elf";
 						else race = "elf";
 					} else {
 						if (isTaur()) race = "half elf-taur";
