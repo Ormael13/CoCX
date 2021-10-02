@@ -270,7 +270,7 @@ public class Exploration extends BaseContent
 						}
 					}
 					else {
-						if (rand(4) == 0) {
+						if (rand(4) == 0 && (player.level >= 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0)) {
 							outputText("A feral imp wings out of the sky and attacks!");
 							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;

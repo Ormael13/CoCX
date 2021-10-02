@@ -125,9 +125,14 @@ package classes.Scenes
 			outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
 			outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
 			outputText("-New consumable (by Ormael/Pyromania): Numb Candies. Obtained when giving Numb Rock to Lumi for enhance. Effect: Shorten Heat/Rut duration by 24 hours. If duration is 24 hours or less will instead shorten duration to 1 hour. Also have minor lust reducing effect.\n");
+			outputText("-Eyes of the Hunter perks changes: Novice perk would show all types which enemy possess. Adept would increase crit chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies by 5% and increase damage by ~10% (similar to acid attacks). Master Eyes of the Hunter will give same bonuses against Colossal, Flesh Construct, Fire/Ice/Lightning/Darkness Nature type enemies.\n");
+			outputText("-Eyes of the Hunter (Master) perk was moved to tier 3 from 2. It req. changed to Eyes of the Hunter (Expert) perk and 100+ sensitivity.\n");
 			outputText("-Numb Rocks cost reverted back to 15 gems. Efect of Rut / Heat shortening removed from them.\n");
 			outputText("-3rd Tifa sex scene account for pc having tentacle / stamen cocks or alraune lower body.\n");
 			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincarnate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
+			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
+			outputText("-Ghost type enemies become immune to bleed effects.\n");
+			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
 			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible.\n");
 			outputText("-Kekvit Irae small changes & fixes.\n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
@@ -141,11 +146,6 @@ package classes.Scenes
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
-			outputText("-Ghost type enemies become immune to bleed effects.\n");
-			outputText("-Eyes of the Hunter perks changes: Novice perk would show all types which enemy possess. Adept would increase crit chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies by 5% and increase damage by ~10% (similar to acid attacks). Master Eyes of the Hunter will give same bonuses against Colossal, Flesh Construct, Fire/Ice/Lightning/Darkness Nature type enemies.\n");
-			outputText("-Eyes of the Hunter (Master) perk was moved to tier 3 from 2. It req. changed to Eyes of the Hunter (Expert) perk and 100+ sensitivity.\n");
-			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
 			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
 			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penatly of 50% less exp gains. Thank you all for using that free trial ^^\n");
 			outputText("-Elemental Shard and vial of E-Ichor items worth lowered to 1 gem. Both can be exchanged for spirit stones at Moga Hen shop now and purple shards exchange give 2x more stones ^^ On more sad notes he retire from his offer tf items PC can buy somewhere else. He not gonna sell stuff other sells (totaly not like they would sell cheaper making pc go to them....totaly not that). Also he now slee much less tf items ");
@@ -156,6 +156,15 @@ package classes.Scenes
 			outputText("-Simplified requirements for dragon racial mutation perks.\n");
 			outputText("-Option to get internal mutation form Evangeline no longer req. her to be lvl 6.\n");
 			outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			outputText("-Added counter how many ascensions PC already have in general stats subpage. Ignam Thief spawn chance increased from 25% to 75%.\n");
+			outputText("-Feral Imps and Raging Tentacle Beasts will not spawn when PC is below lvl 3. Only exception is in case of feral imps when PC took quests that req. to kill/capture them.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -176,7 +185,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -254,9 +262,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -303,12 +309,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

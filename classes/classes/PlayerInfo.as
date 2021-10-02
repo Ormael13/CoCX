@@ -201,6 +201,7 @@ public class PlayerInfo extends BaseContent {
 		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (curently possesed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
+		miscStats += "<b>Ascensions:</b> " + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + "\n";
 
 		if (miscStats != "")
 			outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
