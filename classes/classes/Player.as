@@ -2687,7 +2687,7 @@ use namespace CoC;
 			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
-			if (necklaceName == "Blue Winter scarf") mult -= 20;
+			if (necklaceName == "Blue Winter scarf" || necklaceName == "Green Winter scarf" || necklaceName == "Purple Winter scarf" || necklaceName == "Red Winter scarf" || necklaceName == "Yellow Winter scarf") mult -= 20;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
 			if (hasPerk(PerkLib.FireAffinity)) mult += 100;

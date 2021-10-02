@@ -248,6 +248,7 @@ use namespace CoC;
 			if ((Math.round(player.damageIcePercent())) >= 90) HPD -= 0.01;
 			if ((Math.round(player.damageIcePercent())) >= 95) HPD -= 0.01;
 			if (player.hasPerk(PerkLib.FireAffinity) && HPD > 0) HPD *= 2;
+			if (CoC.instance.inCombat) HPD *= 0.5;
 			if (HPD > 0) {
 				HPD *= player.maxHP();
 				HPD = Math.round(HPD);

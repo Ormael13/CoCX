@@ -148,8 +148,8 @@ package classes.Scenes
 			outputText("-Elemental Shard and vial of E-Ichor items worth lowered to 1 gem. Both can be exchanged for spirit stones at Moga Hen shop now and purple shards exchange give 2x more stones ^^ On more sad notes he retire from his offer tf items PC can buy somewhere else. He not gonna sell stuff other sells (totaly not like they would sell cheaper making pc go to them....totaly not that). Also he now slee much less tf items (as some of those are not so ");
 			outputText("hard to get form other vendors in Mareth). Plus some of the more worthy items he will not sell for gems but in exchange for some spirit stones.\n");
 			outputText("-Benoit shop have now 5 slots for items to sell instead of 3. All items that was before in those 3 slots been spread to 5 slots so no worry no item been discarded from our fav basilisk offer ^^\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Windstorm Emerald cost increased from 6 to 20 gems.\n");
+			outputText("-Glacial Rift damage ticks from cold climate would be 50% lower when PC is in combat (tick at the exploration been unchanged).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -163,7 +163,7 @@ package classes.Scenes
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
