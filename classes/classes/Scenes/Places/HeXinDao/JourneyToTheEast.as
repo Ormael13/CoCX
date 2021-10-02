@@ -103,15 +103,15 @@ package classes.Scenes.Places.HeXinDao
 			else outputText("morning");
 			outputText(" " + player.mf("mister", "miss") + ", what can I get you?</i>\"\n\n");
 			menu();
-			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B);
-			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE);
-			addButton(2, "OrcMead", buyDrink, consumables.ORCMEAD);
-			addButton(3, "OniSake", buyDrink, consumables.ONISAKE);
-			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_);
-			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW);
-			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ);
-			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ);
-			addButton(13, "BroBrew", buyDrink, consumables.BROBREW);
+			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B, 1);
+			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE, 1);
+			addButton(2, "OrcMead", buyDrink, consumables.ORCMEAD, 1);
+			addButton(3, "OniSake", buyDrink, consumables.ONISAKE, 1);
+			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_, 1);
+			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW, 1);
+			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ, 2);
+			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ, 100);
+			addButton(13, "BroBrew", buyDrink, consumables.BROBREW, 100);
 			addButton(14, "Back", notThirsty);
 		}
 		//drink list (to be expanded) some generic nonTF beers
@@ -121,14 +121,14 @@ package classes.Scenes.Places.HeXinDao
 			doNext(curry(enteringInn,false));
 		}
 
-		private function buyDrink(drink:ItemType):void{
-			var cost:int = drink.value * 3;
-			if(player.gems < cost){
-				outputText("\n\nBarman shakes his head, indicating you need " + String(cost - player.gems) + " more gems to purchase this drink.");
+		private function buyDrink(drink:ItemType, amount:int):void{
+			var cost:int = amount;
+			if(flags[kFLAGS.SPIRIT_STONES] < cost){
+				outputText("\n\nBarman shakes his head, indicating you need " + String(cost - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this drink.");
 				doNext(drinkAlcohol);
 				return;
 			}
-			player.gems -= cost;
+			flags[kFLAGS.SPIRIT_STONES] -= cost;
 			statScreenRefresh();
 			outputText("\n\nThe barman hands over the drink you ordered. ");
 			inventory.takeItem(drink, drinkAlcohol);

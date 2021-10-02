@@ -117,6 +117,8 @@ package classes.Scenes
 			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");
 			outputText("<b>Version 0.8s2:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm\n");
+			outputText("-New tier 2 sensitivity lvl-up perk: Eyes of the Hunter (Expert). Req. Eyes of the Hunter (Adept) and 75+ sensitivity. Effect: Increase crit chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Eyes of the Hunter (Grand Master). Req. Eyes of the Hunter (Master) and 125+ sensitivity. Effect: Increase crit chance against God, Boss type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
 			outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
 			outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
@@ -139,10 +141,12 @@ package classes.Scenes
 			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
 			outputText("-Ghost type enemies become immune to bleed effects.\n");
 			outputText("-Eyes of the Hunter perks changes: Novice perk would show all types which enemy possess. Adept would increase crit chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies by 5% and increase damage by ~10% (similar to acid attacks). Master Eyes of the Hunter will give same bonuses against Colossal, Flesh Construct, Fire/Ice/Lightning/Darkness Nature type enemies.\n");
-			outputText("-New tier 2 sensitivity lvl-up perk: Eyes of the Hunter (Expert). Req. Eyes of the Hunter (Adept) and 75+ sensitivity. Effect: Increase crit chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-Eyes of the Hunter (Master) perk was moved to tier 3 from 2. It req. changed to Eyes of the Hunter (Expert) perk and 100+ sensitivity.\n");
-			outputText("-New tier 4 sensitivity lvl-up perk: Eyes of the Hunter (Grand Master). Req. Eyes of the Hunter (Master) and 125+ sensitivity. Effect: Increase crit chance against God, Boss type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
+			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
+			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no nlonger have penatly of 50% less exp gains. Thank you all for using that free trial ^^\n");
+			outputText("-Elemental Shard and vial of E-Ichor items worth lowered to 1 gem. Both can be exchanged for spirit stones at Moga Hen shop now and purple shards exchange give 2x more stones ^^ On more sad notes he retire from his offer tf items PC can buy somewhere else. He not gonna sell stuff other sells (totaly not like they would sell cheaper making pc go to them....totaly not that).\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -162,7 +166,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -240,9 +243,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -289,7 +290,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

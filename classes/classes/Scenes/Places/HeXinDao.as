@@ -80,11 +80,11 @@ public class HeXinDao extends BaseContent
 	public function riverislandVillageStuffLunarGifts():void {
 		clearOutput();
 		outputText("There seems to be a gift exchange going about. Some people are handing over red envelopes, something about luck for the coming year. You get hold of one and open it hoping for great luck. You open the envelope and... ");
-		var Gems:Number = 501;
-		Gems += rand(1000);
-		outputText("Wow! You were lucky! There was " + Gems + " gems inside! This sure is good fortune for the coming year.");
+		var Gems:Number = 50;
+		Gems += rand(100);
+		outputText("Wow! You were lucky! There was " + Gems + " spirit stones inside! This sure is good fortune for the coming year.");
 		player.createStatusEffect(StatusEffects.CanGetLunarGift,0,0,0,0);
-		player.gems += Gems;
+		flags[kFLAGS.SPIRIT_STONES] += Gems;
 		statScreenRefresh();
 		doNext(riverislandVillageStuffLunar);
 	}
@@ -98,25 +98,24 @@ public class HeXinDao extends BaseContent
 	public function riverislandVillageStuffLunarClothing():void {
 		clearOutput();
 		outputText("As you take a corner you spot a " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + " girl working at what appears to be a festive cloth store.");
-		outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 100 gems! C'mon and buy while there's some left!</i>\"");
+		outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 10 spirit stones! C'mon and buy while there's some left!</i>\"");
 		outputText("\n\nDo you buy one from the " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + " girl?");
 		menu();
-		addButton(1, "Yes", riverislandVillageStuffLunarClothing2);
+		if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(1, "Yes", riverislandVillageStuffLunarClothing2);
+		else addButtonDisabled(1, "Yes", "You not have enough spirit stones to buy anything here");
 		addButton(3, "No", riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing2():void {
 		outputText("\n\n\"<i>Which color would you want your dress to be?</i>\"");
 		menu();
-		if (player.gems >= 100) {
-			addButton(0, armors.R_CHANG.shortName, dressBuy, armors.R_CHANG);
-			addButton(1, armors.G_CHANG.shortName, dressBuy, armors.G_CHANG);
-			addButton(2, armors.B_CHANG.shortName, dressBuy, armors.B_CHANG);
-			addButton(3, armors.P_CHANG.shortName, dressBuy, armors.P_CHANG);
-			addButton(5, armors.R_QIPAO.shortName, dressBuy, armors.R_QIPAO);
-			addButton(6, armors.G_QIPAO.shortName, dressBuy, armors.G_QIPAO);
-			addButton(7, armors.B_QIPAO.shortName, dressBuy, armors.B_QIPAO);
-			addButton(8, armors.P_QIPAO.shortName, dressBuy, armors.P_QIPAO);
-		}
+		addButton(0, armors.R_CHANG.shortName, dressBuy, armors.R_CHANG);
+		addButton(1, armors.G_CHANG.shortName, dressBuy, armors.G_CHANG);
+		addButton(2, armors.B_CHANG.shortName, dressBuy, armors.B_CHANG);
+		addButton(3, armors.P_CHANG.shortName, dressBuy, armors.P_CHANG);
+		addButton(5, armors.R_QIPAO.shortName, dressBuy, armors.R_QIPAO);
+		addButton(6, armors.G_QIPAO.shortName, dressBuy, armors.G_QIPAO);
+		addButton(7, armors.B_QIPAO.shortName, dressBuy, armors.B_QIPAO);
+		addButton(8, armors.P_QIPAO.shortName, dressBuy, armors.P_QIPAO);
 		addButton(14, "Back", riverislandVillageStuff);
 	}
 	private function dressBuy(itype:ItemType):void {
@@ -125,7 +124,7 @@ public class HeXinDao extends BaseContent
 		outputText("\n\n\"<i>Happy year of the " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + ", I wish you great luck!</i>\"");
 		outputText("\n\nYou put the dress in your bag for now. Now to put it on.");
 		outputText("\n\n<b>You got a Lunar new year dress.</b>\n\n");
-		player.gems -= 100;
+		flags[kFLAGS.SPIRIT_STONES] -= 10;
 		cheatTime(1/3);
         inventory.takeItem(itype, riverislandVillageStuffLunar);
     }
@@ -222,15 +221,15 @@ public class HeXinDao extends BaseContent
 		function TierI():void {
 			menu();
             addButton(0, "LGSFRecovPill", buyItem1,consumables.LG_SFRP,
-					sayLine1(consumables.LG_SFRP,"It's a rather quite useful item for all soul cultivators, this little pill can help you restore some of your soulforce.")).hint("Low-grade Soulforce Recovery Pill.");
-			addButton(1, "E.P.Bottle", buyItem1,useables.E_P_BOT,
-					sayLine1(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills,they must be consumed shortly after opening the bottle or they would lose their effects. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
-			addButton(2, "IncenOfInsig", buyItem1,consumables.INCOINS,
+					sayLine1(consumables.LG_SFRP,"It's a rather quite useful item for everyone, this little pill can help you restore some of your soulforce. Unless you got no soul.")).hint("Low-grade Soulforce Recovery Pill.");
+			addButton(1, "IncenOfInsig", buyItem1,consumables.INCOINS,
 					sayLine1(consumables.INCOINS,"These incenses are quite special. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(3, "Fasting Pill", buyItem2,consumables.FATPILL,
-					sayLine1(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.");
-			addButton(4, "Bag of Cosmos", buyItem1,consumables.BAGOCOS,
-					sayLine1(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
+			addButton(2, "E.P.Bottle", buyItem2,useables.E_P_BOT,
+					sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle or they would lose their effects. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
+			addButton(3, "Bag of Cosmos", buyItem2,consumables.BAGOCOS,
+					sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL,
+					sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.");
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
 				addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN,
 						sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust, this very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."),
@@ -251,19 +250,19 @@ public class HeXinDao extends BaseContent
 			}
 			addButton(10, "FlamesOfLove", buyItem1,consumables.FOLBMAN,
 					sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."),
-					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
 			).hint("Flames of Love (Rankless) Manual.");
 			addButton(11, "IciclesOfLove", buyItem1,consumables.IOLBMAN,
 					sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."),
-					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
 			).hint("Icicles of Love (Rankless) Manual.");
 			addButton(12, "SoSisterhood", buyItem1,consumables.SOSBMAN,
 					sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into ligthing."),
-					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
 			).hint("Storm of Sisterhood (Rankless) Manual.");
 			addButton(13, "NoBrotherhood", buyItem1,consumables.NOBBMAN,
 					sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."),
-					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  "
 			).hint("Night of Brotherhood (Rankless) Manual.");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
@@ -391,74 +390,54 @@ public class HeXinDao extends BaseContent
         //buyItem,consumables.,sayLine(consumables.,""),onBuyString
         function Tier1():void {
             menu();
-            addButton(0, "B.Gossr", buyItem,consumables.B_GOSSR,sayLine(consumables.B_GOSSR,"drider"),onBuyString).hint("Buy a bundle of black, gossamer webbing.");
-            addButton(1, "BayrLeaf", buyItem,consumables.BAYRLEA,sayLine(consumables.BAYRLEA,"bear"),onBuyString).hint("Buy a Bayr leaf.");
-            addButton(2, "BeeHony", buyItem,consumables.BEEHONY,sayLine(consumables.BEEHONY,"bee"),onBuyString).hint("Buy a small vial filled with giant-bee honey.");
-            addButton(3, "BladeGrass", buyItem,consumables.BLADEGR,sayLine(consumables.BLADEGR,"mantis"),onBuyString).hint("Buy a blade shaped grass.");
-            addButton(4, "CanineP", buyItem,consumables.CANINEP,sayLine(consumables.CANINEP,"dog"),onBuyString).hint("Buy a Canine pepper.");
-            addButton(5, "FaeEar", buyItem,consumables.ELFEARS,sayLine(consumables.ELFEARS,"elf"),onBuyString).hint("Buy a Fae ear shaped plant.");
-            addButton(6, "Equinum", buyItem,consumables.EQUINUM,sayLine(consumables.EQUINUM,"horse"),onBuyString).hint("Buy a vial of Equinum.");
-            addButton(7, "Fox Berry", buyItem,consumables.FOXBERY,sayLine(consumables.FOXBERY,"fox"),onBuyString).hint("Buy a fox berry.");
-            addButton(8, "FerretFrt", buyItem,consumables.FRRTFRT,sayLine(consumables.FRRTFRT,"ferret"),onBuyString).hint("Buy a ferret fruit.");
-            addButton(9, "GoldenRind", buyItem,consumables.GLDRIND,sayLine(consumables.GLDRIND,"deer"),onBuyString).hint("Buy a golden rind.");
-            addButton(10, "GoldenSeed", buyItem,consumables.GLDSEED,sayLine(consumables.GLDSEED,"harpy"),onBuyString).hint("Buy a golden seed.");
-            addButton(11, "Gob.Ale", buyItem,consumables.GOB_ALE,sayLine(consumables.GOB_ALE,"goblin"),onBuyString).hint("Buy a flagon of potent goblin ale.");
-            addButton(12, "IncubiD", buyItem,consumables.INCUBID,sayLine(consumables.INCUBID,"incubus"),onBuyString).hint("Buy a flask of Incubi draft.");
-            addButton(13, "KangaFruit", buyItem,consumables.KANGAFT,sayLine(consumables.KANGAFT,"kangaroo"),onBuyString).hint("Buy a piece of kanga fruit.");
+            addButton(0, "BayrLeaf", buyItem,consumables.BAYRLEA,sayLine(consumables.BAYRLEA,"bear"),onBuyString).hint("Buy a Bayr leaf.");
+            addButton(1, "BladeGrass", buyItem,consumables.BLADEGR,sayLine(consumables.BLADEGR,"mantis"),onBuyString).hint("Buy a blade shaped grass.");
+            addButton(2, "CanineP", buyItem,consumables.CANINEP,sayLine(consumables.CANINEP,"dog"),onBuyString).hint("Buy a Canine pepper.");
+            addButton(3, "FaeEar", buyItem,consumables.ELFEARS,sayLine(consumables.ELFEARS,"elf"),onBuyString).hint("Buy a Fae ear shaped plant.");
+            addButton(4, "GoldenRind", buyItem,consumables.GLDRIND,sayLine(consumables.GLDRIND,"deer"),onBuyString).hint("Buy a golden rind.");
+            //addButton(11, "IncubiD", buyItem,consumables.INCUBID,sayLine(consumables.INCUBID,"incubus"),onBuyString).hint("Buy a flask of Incubi draft.");
+            addButton(5, "KangaFruit", buyItem,consumables.KANGAFT,sayLine(consumables.KANGAFT,"kangaroo"),onBuyString).hint("Buy a piece of kanga fruit.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
         function Tier2():void {
             menu();
-            addButton(0, "La Bova", buyItem,consumables.LABOVA_,sayLine(consumables.LABOVA_,"cow"),onBuyString).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
-            addButton(1, "MouseCo", buyItem,consumables.MOUSECO,sayLine(consumables.MOUSECO,"mouse"),onBuyString).hint("Buy a handful of mouse cocoa.");
-            addButton(2, "MinoBlo", buyItem,consumables.MINOBLO,sayLine(consumables.MINOBLO,"bull"),onBuyString).hint("Buy a vial of Minotaur blood.");
-            addButton(3, "OrcMead", buyItem,consumables.ORCMEAD,sayLine(consumables.ORCMEAD,"orc"),onBuyString).hint("Buy a flagon of potent orc mead.");
-            addButton(4, "PigTruffle", buyItem,consumables.PIGTRUF,sayLine(consumables.PIGTRUF,"pig"),onBuyString).hint("Buy a pigtail truffle.");
-            addButton(5, "Reptilum", buyItem,consumables.REPTLUM,sayLine(consumables.REPTLUM,"lizan"),onBuyString).hint("Buy a vial of Reptilum.");
-            addButton(6, "RingFig", buyItem,consumables.RINGFIG,sayLine(consumables.RINGFIG,"raccoon"),onBuyString).hint("Buy a ringtail fig.");
-            addButton(7, "S.Gossr", buyItem,consumables.S_GOSSR,sayLine(consumables.S_GOSSR,"spider"),onBuyString).hint("Buy a bundle of pink, gossamer webbing.");
-            addButton(8, "SalamFW", buyItem,consumables.SALAMFW,sayLine(consumables.SALAMFW,"salamander"),onBuyString).hint("Buy a hip flask of Salamander Firewater.");
-            addButton(9, "Scorpinum", buyItem,consumables.SCORICO,sayLine(consumables.SCORICO,"scorpion"),onBuyString).hint("Buy a vial of Scorpinum.");
-            addButton(10, "SmartNuts", buyItem,consumables.SMRTNUT,sayLine(consumables.SMRTNUT,"squirrel"),onBuyString).hint("Buy a smarty nut.");
-            addButton(11, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
-            addButton(12, "SnakeOil", buyItem,consumables.SNAKOIL,sayLine(consumables.SNAKOIL,"snake"),onBuyString).hint("Buy a vial of snake oil.");
-            addButton(13, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
+            //addButton(0, "La Bova", buyItem,consumables.LABOVA_,sayLine(consumables.LABOVA_,"cow"),onBuyString).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
+            addButton(0, "Reptilum", buyItem,consumables.REPTLUM,sayLine(consumables.REPTLUM,"lizan"),onBuyString).hint("Buy a vial of Reptilum.");
+            addButton(1, "Scorpinum", buyItem,consumables.SCORICO,sayLine(consumables.SCORICO,"scorpion"),onBuyString).hint("Buy a vial of Scorpinum.");
+            addButton(2, "SmartNuts", buyItem,consumables.SMRTNUT,sayLine(consumables.SMRTNUT,"squirrel"),onBuyString).hint("Buy a smarty nut.");
+            addButton(3, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
+            //addButton(13, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
 		function Tier3():void {
 			menu();
-            addButton(0, "TSTooth", buyItem,consumables.TSTOOTH,sayLine(consumables.TSTOOTH,"tigershark"),onBuyString).hint("Buy a glowing tiger shark tooth.");
-            addButton(1, "W.Emerald", buyItem,consumables.W_EMRLD,sayLine(consumables.W_EMRLD,"kamaitachi"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
-            addButton(2, "W.Fruit", buyItem,consumables.W_FRUIT,sayLine(consumables.W_FRUIT,"cat"),onBuyString).hint("Buy a piece of whisker-fruit.");
-            addButton(3, "WetCloth", buyItem,consumables.WETCLTH,sayLine(consumables.WETCLTH,"goo"),onBuyString).hint("Buy a wet cloth dripping with slippery slime.");
-            addButton(4, "YetiCum", buyItem,consumables.YETICUM,sayLine(consumables.YETICUM,"yeti"),onBuyString).hint("Buy a bottle of Yeti Cum.");
+            addButton(0, "W.Emerald", buyItem,consumables.W_EMRLD,sayLine(consumables.W_EMRLD,"kamaitachi"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
+            addButton(1, "YetiCum", buyItem,consumables.YETICUM,sayLine(consumables.YETICUM,"yeti"),onBuyString).hint("Buy a bottle of Yeti Cum.");
 			addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
 		}
         function Tier4():void {
             menu();
-            addButton(0, "BlackInk", buyItem,consumables.BLACKIN,sayLine(consumables.BLACKIN,"female scylla"),onBuyString).hint("Buy a vial of black ink.");
-            addButton(1, "BlackPp", buyItem,consumables.BLACKPP,sayLine(consumables.BLACKPP,"dog"),onBuyString).hint("Buy solid black canine pepper.");
-            addButton(2, "BulbyPp", buyItem,consumables.BULBYPP,sayLine(consumables.BULBYPP,"dog"),onBuyString).hint("Buy a bulbous pepper.");
-            addButton(3, "DblPepp", buyItem,consumables.DBLPEPP,sayLine(consumables.DBLPEPP,"dog"),onBuyString).hint("Buy a double canine pepper.");
-            addButton(4, "KnottyP", buyItem,consumables.KNOTTYP,sayLine(consumables.KNOTTYP,"dog"),onBuyString).hint("Buy a knotty canine pepper.");
-            addButton(5, "LargePp", buyItem,consumables.LARGEPP,sayLine(consumables.LARGEPP,"dog"),onBuyString).hint("Buy an overly large canine pepper.");
-            addButton(6, "ChillyP", buyItem,consumables.CHILLYP,sayLine(consumables.CHILLYP,"winter wolf"),onBuyString).hint("Buy a Chilly pepper.");
-            addButton(7, "MaraFruit", buyItem,consumables.MARAFRU,sayLine(consumables.MARAFRU,"plant"),onBuyString).hint("Buy an apple-shaped fruit.");
-            addButton(8, "SkySeed", buyItem,consumables.SKYSEED,sayLine(consumables.SKYSEED,"avian"),onBuyString).hint("Buy a skyborn seed.");
+            addButton(0, "BlackPp", buyItem,consumables.BLACKPP,sayLine(consumables.BLACKPP,"dog"),onBuyString).hint("Buy solid black canine pepper.");
+            addButton(1, "BulbyPp", buyItem,consumables.BULBYPP,sayLine(consumables.BULBYPP,"dog"),onBuyString).hint("Buy a bulbous pepper.");
+            addButton(2, "DblPepp", buyItem,consumables.DBLPEPP,sayLine(consumables.DBLPEPP,"dog"),onBuyString).hint("Buy a double canine pepper.");
+            addButton(3, "KnottyP", buyItem,consumables.KNOTTYP,sayLine(consumables.KNOTTYP,"dog"),onBuyString).hint("Buy a knotty canine pepper.");
+            addButton(4, "LargePp", buyItem,consumables.LARGEPP,sayLine(consumables.LARGEPP,"dog"),onBuyString).hint("Buy an overly large canine pepper.");
+            addButton(5, "ChillyP", buyItem,consumables.CHILLYP,sayLine(consumables.CHILLYP,"winter wolf"),onBuyString).hint("Buy a Chilly pepper.");
+            addButton(6, "MaraFruit", buyItem,consumables.MARAFRU,sayLine(consumables.MARAFRU,"plant"),onBuyString).hint("Buy an apple-shaped fruit.");
+            addButton(7, "SkySeed", buyItem,consumables.SKYSEED,sayLine(consumables.SKYSEED,"avian"),onBuyString).hint("Buy a skyborn seed.");
             //addButton(9, "B.Gossr", BGossr).hint("Buy .");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
         function Tier5():void {
             menu();
-            addButton(0, "SpHoney", buyItem,consumables.SPHONEY,sayLine(consumables.SPHONEY,"bee"),onBuyString).hint("Buy a bottle of special bee honey.");
-            addButton(1, "SatyrWine", buyItem,consumables.SATYR_W,sayLine(consumables.SATYR_W,"satyr"),onBuyString).hint("Buy a bottle of satyr wine.");
-            addButton(2, "DrakeHeart", buyItem,consumables.DRAKHRT,sayLine(consumables.DRAKHRT,"dragon"),onBuyString).hint("Buy a drake's heart's flower.");
-            addButton(3, "C.Venom", buyItem,consumables.C_VEMOM,sayLine(consumables.C_VEMOM,"Centipede"),onBuyString).hint("Buy a bottle of Centipede venom.");
-            addButton(4, "Hummus", buyItem,consumables.HUMMUS_,sayLine(consumables.HUMMUS_,"humanity"),onBuyString).hint("Buy a blob of cheesy-looking hummus.");
+            addButton(0, "SatyrWine", buyItem,consumables.SATYR_W,sayLine(consumables.SATYR_W,"satyr"),onBuyString).hint("Buy a bottle of satyr wine.");
+            addButton(1, "DrakeHeart", buyItem,consumables.DRAKHRT,sayLine(consumables.DRAKHRT,"dragon"),onBuyString).hint("Buy a drake's heart's flower.");
+            addButton(2, "C.Venom", buyItem,consumables.C_VEMOM,sayLine(consumables.C_VEMOM,"Centipede"),onBuyString).hint("Buy a bottle of Centipede venom.");
+            addButton(3, "Hummus", buyItem,consumables.HUMMUS_,sayLine(consumables.HUMMUS_,"humanity"),onBuyString).hint("Buy a blob of cheesy-looking hummus.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
@@ -527,6 +506,10 @@ public class HeXinDao extends BaseContent
         if (player.hasItem(useables.GOLCORE, 5)) addButton(1, "Sell 5", sellFiveGolemCores).hint("Sell 5 golem cores.");
         if (player.hasItem(useables.PCSHARD, 1)) addButton(5, "Sell 1", sellOnePurpleCrystalShard).hint("Sell 1 purple crystal shard.");
         if (player.hasItem(useables.PCSHARD, 5)) addButton(6, "Sell 5", sellFivePurpleCrystalShards).hint("Sell 5 purple crystal shards.");
+        if (player.hasItem(useables.ELSHARD, 1)) addButton(7, "Sell 1", sellOneElementalShard).hint("Sell 1 elemental shard.");
+        if (player.hasItem(useables.ELSHARD, 5)) addButton(8, "Sell 5", sellFiveElementalShards).hint("Sell 5 elemental shards.");
+        if (player.hasItem(useables.E_ICHOR, 1)) addButton(10, "Sell 1", sellOneEIchorVial).hint("Sell 1 vial of E-Ichor.");
+        if (player.hasItem(useables.E_ICHOR, 5)) addButton(11, "Sell 5", sellFiveEIchorVials).hint("Sell 5 vials of E-Ichor.");
         addButton(14, "Back", mogahenmerchant);
     }
 
@@ -546,16 +529,44 @@ public class HeXinDao extends BaseContent
     }
     public function sellOnePurpleCrystalShard():void {
         clearOutput();
-        outputText("\"<i>A single purple crystal shard. It's still glowing, so that will be a single spirit stone,</i>\" he states after examining the shard. Moments after he went to put away the shard Moga returns and gives you a single stone.");
+        outputText("\"<i>A single purple crystal shard. It's still glowing, so that will be a two spirit stones,</i>\" he states after examining the shard. Moments after he went to put away the shard Moga returns and gives you two stone.");
         player.destroyItems(useables.PCSHARD, 1);
-        flags[kFLAGS.SPIRIT_STONES]++;
+        flags[kFLAGS.SPIRIT_STONES] += 2;
         doNext(sellItemsForSpiritStones);
     }
     public function sellFivePurpleCrystalShards():void {
         clearOutput();
-        outputText("\"<i>Purple crystal shards. Let me check...yes all of them seems to be in decent state,</i>\" after examination he walks away and return shortly. \"<i>Here are your five stones for them.</i>\"");
+        outputText("\"<i>Purple crystal shards. Let me check...yes all of them seems to be in decent state,</i>\" after examination he walks away and return shortly. \"<i>Here are your ten stones for them.</i>\"");
         player.destroyItems(useables.PCSHARD, 5);
-        flags[kFLAGS.SPIRIT_STONES] += 5;
+        flags[kFLAGS.SPIRIT_STONES] += 10;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOneElementalShard():void {
+        clearOutput();
+        outputText("\"<i>A single elemental shard. It's still posses alot energy, so that will be a three spirit stones,</i>\" he states after examining the shard. Moments after he went to put away the shard Moga returns and gives you three stone.");
+        player.destroyItems(useables.ELSHARD, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 3;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveElementalShards():void {
+        clearOutput();
+        outputText("\"<i>Elemental shards. Let me check...yes all of them seems to be in decent state,</i>\" after examination he walks away and return shortly. \"<i>Here are your twenty five stones for them.</i>\"");
+        player.destroyItems(useables.ELSHARD, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 15;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOneEIchorVial():void {
+        clearOutput();
+        outputText("\"<i>A single vial of E-Ichor. It's super rare item, so... i will give you... twenty spirit stones,</i>\" he states after very lpong examination of the vial. Moments after he went to put away the vial Moga returns and gives you twenty stone, with shaky hand as if parting with something precious.");
+        player.destroyItems(useables.E_ICHOR, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 20;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveEIchorVials():void {
+        clearOutput();
+        outputText("\"<i>Vials of E-Ichor. Let me check...yes all of them seems to be decently preserved,</i>\" after long examination he walks away and return after even longer time. \"<i>Here are your hun... hundred stones for them...</i>\"");
+        player.destroyItems(useables.E_ICHOR, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 100;
         doNext(sellItemsForSpiritStones);
     }
 
@@ -571,7 +582,6 @@ public class HeXinDao extends BaseContent
         addButton(7, "Shelf 5", soulequipmentshelf5).hint("Consumables");
         addButton(8, "Shelf 6", soulequipmentshelf6).hint("Misc");
 		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
-        //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
@@ -813,10 +823,10 @@ public class HeXinDao extends BaseContent
 
     private function weaponrangeBuy(itype:ItemType):void {
         clearOutput();
-        outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value + " gems.</i>\"");
+        outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
         //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
-        if(player.gems < itype.value) {
-            outputText("\n\nYou count out your gems and realize it's beyond your price range.");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
             //Goto shop main menu
             doNext(ermaswiftarrowmerchant);
             return;
@@ -826,17 +836,17 @@ public class HeXinDao extends BaseContent
         doYesNo(curry(debitWeaponRange,itype), ermaswiftarrowmerchant);
     }
     private function debitWeaponRange(itype:ItemType):void {
-        player.gems -= itype.value;
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
         inventory.takeItem(itype, ermaswiftarrowmerchant);
     }
 	
 	public function ermaswiftarrowmerchantarcherytraining():void {
 		clearOutput();
-		if (flags[kFLAGS.ERMA_ARCHERY_TRAINING] > 0) outputText("\"<i>Need more training? Sure, but it's 100 gems, and as usual paid up front.</i>\"");
+		if (flags[kFLAGS.ERMA_ARCHERY_TRAINING] > 0) outputText("\"<i>Need more training? Sure, but it's 10 spirit stones, and as usual paid up front.</i>\"");
 		else {
 			outputText("Bows are nice and all but they won’t be of much use to you if you can’t wield them properly. You thus ask Erma if training is something the shop can provide.\n\n");
-			outputText("\"<i>Training new archers indeed is something I do but I don’t do it for free. It would be 100 gems a session if you want to take a session.</i>\"");
+			outputText("\"<i>Training new archers indeed is something I do but I don’t do it for free. It would be 10 spirit stones a session if you want to take a session.</i>\"");
 			flags[kFLAGS.ERMA_ARCHERY_TRAINING] = 1;
 		}
 		menu();
@@ -853,12 +863,12 @@ public class HeXinDao extends BaseContent
 			doNext(ermaswiftarrowmerchant);
 		}
 		else {
-			if (player.gems < 100) {
-				outputText("\n\nSadly, you lack the gems for training right now.");
+			if (flags[kFLAGS.SPIRIT_STONES] < 10) {
+				outputText("\n\nSadly, you lack the spirit stones for training right now.");
 				doNext(ermaswiftarrowmerchant);
 			}
 			else {
-				player.gems -= 100;
+				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				outputText("\n\nYou fellow Erma behind the shop into the backyard. She has a field there for target practice. You spend the better part of the day shooting arrows and practicing and improving your aim while Erma corrects your stance and gives advice. You later leave the village with improved skills at archery.");
 				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 10, 0, 0, 0);
 				else player.addStatusValue(StatusEffects.Kelt, 1, 10);
@@ -873,14 +883,17 @@ public function soularena():void {
 	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15) chichiScene.EnterOfTheChiChi();
 	else {
 		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by them. IA few a moments after you entered, a tall, slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
-		outputText("\n\n\"<i>Welcome to the Soul Arena. Don't start fights outside of the proper place or you will be thrown out. If you break any rules here you will be kicked out. Go ahead and pick an area where you want to train or instead go to the challenges area,</i>\" without wasting time the nekomata overseer of this place explains to you all that you needed to know about the place and walks away.");
-		outputText("\n\nSo which of the three possible areas do you want to visit this time?");
+		outputText("\n\n\"<i>Welcome to the Soul Arena. Don't start fights outside of the proper place or you will be thrown out. If you break any rules here you will be kicked out. Go ahead and pick an area where you want to train or instead go to the challenges area. Oh and fights in each section cost some spirit stones so be sure to have enough of them as we not run charity here,</i>\"");
+		outputText(" without wasting time the nekomata overseer of this place explains to you all that you needed to know about the place and walks away.\n\nSo which of the three possible areas do you want to visit this time?");
 		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) outputText("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes.");
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 1) flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
 		menu();//statuseffect(soulArena) dodać na początku walk co pozwoli dać inne dropy itp. w stosunku do spotkania podobnego wroga w innym miejscu a nawet łatwo pozwoli zrobić wersje soulforce niektórych ras bez tworzenia nowych opisów monsterów - zrobić to dla trybu challenge, w który walka z wrogie da określony drop a nawet można na niej grać aby uzyskać nagro...np. nowego camp member ^^
-		addButton(0, "Solo", soularenaSolo).hint("Go to the section of soul arena for 1 on 1 fights.");
-		addButton(1, "Group", soularenaGroup).hint("Go to the section of soul arena for group fights.");
-		addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what rewards you may get after winning any of the challenges there...)");
+		if (flags[kFLAGS.SPIRIT_STONES] < 1) addButtonDisabled(0, "Solo", "To go to the section of soul arena for 1 on 1 fights you need to give 1 spirit stone.");
+		else addButton(0, "Solo", soularenaSolo).hint("Go to the section of soul arena for 1 on 1 fights.");
+		if (flags[kFLAGS.SPIRIT_STONES] < 2) addButtonDisabled(1, "Group", "To go to the section of soul arena for group fights you need to give 2 spirit stones.");
+		else addButton(1, "Group", soularenaGroup).hint("Go to the section of soul arena for group fights.");
+		if (flags[kFLAGS.SPIRIT_STONES] < 3) addButtonDisabled(2, "Challange", "To go to the section of soul arena for challenges you need to give 3 spirit stones.");
+		else addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what rewards you may get after winning any of the challenges there...)");
 		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
 		addButton(14, "Back", riverislandVillageStuff);
 		statScreenRefresh();
@@ -889,8 +902,10 @@ public function soularena():void {
 
     public function soularenaSolo():void {
         clearOutput();
+		flags[kFLAGS.SPIRIT_STONES] -= 1;
         outputText("Picking the one on the left, you prepare for a solo fight. You enter the area and look around for anyone currently available for a sparring session.");
-        menu();
+        statScreenRefresh();
+		menu();
         //addButton(0, "Goblin", );//Goblinka
         addButton(5, "D.Golem", arenaSelection,GolemDummy).hint("Dummy Golem LVL 6");
         addButton(6, "I.D.Golem", arenaSelection,GolemDummyImproved).hint("Improved Dummy Golem LVL 12");
@@ -899,13 +914,20 @@ public function soularena():void {
         addButton(10, "B.T.Golem", arenaSelection,GolemTrueBasic).hint("Basic True Golem LVL 33");
         addButton(11, "I.T.Golem", arenaSelection,GolemTrueImproved).hint("Improved True Golem LVL 42");
         addButton(12, "A.T.Golem", arenaSelection,GolemTrueAdvanced).hint("Advanced True Golem LVL 51");
-        addButton(14, "Back", soularena);
+        addButton(14, "Back", soularenaSoloBack);
     }
+	public function soularenaSoloBack():void {
+		flags[kFLAGS.SPIRIT_STONES] += 1;
+		statScreenRefresh();
+		soularena();
+	}
 
     public function soularenaGroup():void {
         clearOutput();
+        flags[kFLAGS.SPIRIT_STONES] -= 2;
         outputText("Picking the one on the right, you prepare for a group fight. You enter the area and look around for a group currently available for a sparring session.");
-        menu();
+        statScreenRefresh();
+		menu();
         //addButton(0, "Goblins", );//Córki goblinki z solo areny ^^
         addButton(5, "D.Golems", arenaSelection,GolemsDummy).hint("Dummy Golems LVL 6");
         addButton(6, "I.D.Golems", arenaSelection,GolemsDummyImproved).hint("Improved Dummy Golems LVL 12");
@@ -914,13 +936,20 @@ public function soularena():void {
         addButton(10, "B.T.Golems", arenaSelection,GolemsTrueBasic).hint("Basic True Golems LVL 33");
         addButton(11, "I.T.Golems", arenaSelection,GolemsTrueImproved).hint("Improved True Golems LVL 42");
         addButton(12, "A.T.Golems", arenaSelection,GolemsTrueAdvanced).hint("Advanced True Golems LVL 51");
-        addButton(14, "Back", soularena);
+        addButton(14, "Back", soularenaGroupBack);
     }
+	public function soularenaGroupBack():void {
+		flags[kFLAGS.SPIRIT_STONES] += 2;
+		statScreenRefresh();
+		soularena();
+	}
 
     public function soularenaChallenge():void {
         clearOutput();
+        flags[kFLAGS.SPIRIT_STONES] -= 3;
         outputText("Picking the one in the middle you prepare for the challanges. You enter the area and look around for anyone currently available for a challenge.");
-        soularenaChallengeSubpages();
+        statScreenRefresh();
+		soularenaChallengeSubpages();
     }
 	private function soularenaChallengeSubpages(page:int = 1):void {
 		menu();
@@ -942,7 +971,7 @@ public function soularena():void {
 			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
 			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
 			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
-			addButton(14, "Back", soularena);
+			addButton(14, "Back", soularenaChallengeBack);
 		}
 		if (page == 2) {
 			//addButton(0, "Kitty", arenaSelection, Veronika);
@@ -953,7 +982,7 @@ public function soularena():void {
 			else */addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
 			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
-			addButton(14, "Back", soularena);
+			addButton(14, "Back", soularenaChallengeBack);
 		}
 	}
     private function arenaSelection(mon:Class):void{
@@ -961,7 +990,6 @@ public function soularena():void {
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 		startCombat(new mon());
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
-		monster.XP = Math.round(monster.XP / 2);
     }
 	public function gaunletsinbetween():void {
 		cleanupAfterCombat();
@@ -1072,6 +1100,11 @@ public function soularena():void {
 			player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 2, 2);
 			inventory.takeItem(weapons.SCECOMM, cleanupAfterCombat);
 		}
+	}
+	public function soularenaChallengeBack():void {
+		flags[kFLAGS.SPIRIT_STONES] += 3;
+		statScreenRefresh();
+		soularena();
 	}
 	
 	private function golemancershop():void {

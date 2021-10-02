@@ -70,10 +70,10 @@ use namespace CoC;
 		public const PCSHARD:SimpleUseable = new SimpleUseable("PCShard", "Purple Crystal Shard", "a Purple Crystal Shard", 1, 
 			"A Purple Crystal Shard.",
 			"You look at the purple crystal shard. It occasionally glows gently in your hand, but you can't seem to find a use for the shard.");
-		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 50, 
+		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 1, 
 			"An Elemental Shard.",
 			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
-		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 500,
+		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
 			"An vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
 		//MISCELLANEOUS
