@@ -2915,12 +2915,12 @@ import coc.view.MainView;
 
 		private function reincarnatePrompt():void {
 			clearOutput();
-			outputText("Would you like to reincarnate and start a new life as a Champion?");
+			outputText("Would you like to reincarnate and start a new life as a Champion?\n\nReincarnating without increasing the New Game+ cycle (difficulty) will require 50 ascension points.");
 			menu();
 			addButton(1, "Yes", reincarnate001).hint("Reincarnate with increased difficulty.");
-			if (player.ascensionPerkPoints >= 50) addButton(2, "Maybe?", reincarnate002).hint("Reincarnate without increasing difficulty. But that will cost you some saved ascension points.");
-			else addButtonDisabled(2, "Maybe?", "Req. 50+ ascension points left.");
-			addButton(3, "No", ascensionMenu);
+			if (player.ascensionPerkPoints >= 50) addButton(2, "Maybe?", reincarnate002).hint("Reincarnate without increasing difficulty.");
+			else addButtonDisabled(2, "Maybe?", "Req. 50 ascension points.");
+			addButton(3, "No", ascensionMenu).hint("Go Back");
 		}
 		private function reincarnate001():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
