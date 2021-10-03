@@ -358,13 +358,22 @@ public class Kiha extends Monster
 			this.wings.type = Wings.DRACONIC_LARGE;
 			this.wings.desc = "huge";
 			this.tailType = Tail.LIZARD;
-			this.abilities = [
-				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
-				{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
-				{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
-				{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
-				{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
-			];
+			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) ( 
+				this.abilities = [
+					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
+					{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
+				] 
+			);
+			else ( 
+				this.abilities = [
+					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
+					{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
+				] 
+			);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
