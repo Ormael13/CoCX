@@ -158,9 +158,9 @@ package classes.Scenes
 			outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			outputText("-Added counter how many ascensions PC already have in general stats subpage. Ignam Thief spawn chance increased from 25% to 75%.\n");
 			outputText("-Feral Imps and Raging Tentacle Beasts will not spawn when PC is below lvl 3. Only exception is in case of feral imps when PC took quests that req. to kill/capture them.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Harpy Womb perk would give 2 pts instead of 1 to race scores of three races related to harpies. Should amke possible getting race scores for full rac3e score without need to pick mutation perks by those race PC's.\n");
+			outputText("-Blademaster perk work with dagger type weapons too.\n");
+			outputText("-Phoenix / Winter Wolf breath attacks have now scaling based on stats (for both str/tou as they bot more of phys than mag boosts in stats).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -172,7 +172,8 @@ package classes.Scenes
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
+			outputText("in adventure guild never refreshing\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

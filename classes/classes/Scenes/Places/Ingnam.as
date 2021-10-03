@@ -137,13 +137,11 @@ public class Ingnam extends BaseContent
 		public function exploreIngnam():void {
 			hideMenus();
 			clearOutput();
-			var chooser:int = rand(4);
-			if (chooser == 0) {
+			if (rand(4) == 0) {
 				outputText("You explore the village of Ingnam for a while but you don't find anything intersting.");
-				return;
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else thiefScene.encounterThief();
-			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Shopping time!

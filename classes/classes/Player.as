@@ -7299,7 +7299,7 @@ use namespace CoC;
 			if (hasCoatOfType(Skin.COVERAGE_NONE))
 				harpy++;
 			if (hasPerk(PerkLib.HarpyWomb))
-				harpy++;
+				harpy += 2;
 			if (hasPerk(MutationsLib.HarpyHollowBones))
 				harpy++;
 			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved))
@@ -8078,13 +8078,13 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "emerald", "turquoise"]))
 				thunderbirdCounter++;
+			if (hasPerk(PerkLib.HarpyWomb))
+				thunderbirdCounter += 2;
 			if (hasPerk(MutationsLib.HeartOfTheStorm))
 				thunderbirdCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStormEvolved))
 				thunderbirdCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStormFinalForm))
-				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HarpyWomb))
 				thunderbirdCounter++;
 			if (hasPerk(MutationsLib.HarpyHollowBones))
 				thunderbirdCounter++;
@@ -9338,7 +9338,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PhoenixFireBreath))
 				phoenixCounter++;
 			if (hasPerk(PerkLib.HarpyWomb))
-				phoenixCounter++;
+				phoenixCounter += 2;
 			if (hasPerk(MutationsLib.HarpyHollowBones))
 				phoenixCounter++;
 			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved))

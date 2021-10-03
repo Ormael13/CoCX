@@ -153,6 +153,12 @@ public class PerkLib
 	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
 
 		// Bloodline perks
 		public static const DragonsDescendant:PerkType = mk("Dragon's descendant", "Dragon's descendant",
@@ -697,8 +703,8 @@ public class PerkLib
 				"Chance to parry is further increased by +15% when dual wielding.",
 				"You've chosen the 'Blade Barrier' perk. Chance to parry is further increased by +15% when dual wielding.");
 		public static const Blademaster:PerkType = mk("Blademaster", "Blademaster",
-				"Gain +5% to critical strike chance when wielding weapon with blade (sword, dueling sword, axe) and not using a shield.",
-				"You've chosen the 'Blademaster' perk.  Your chance of critical hit is increased by 5% as long as you're wielding weapon with blade like sword and not using a shield.");
+				"Gain +5% to critical strike chance when wielding weapon with blade (sword, dueling sword, axe, dagger) and not using a shield.",
+				"You've chosen the 'Blademaster' perk.  Your chance of critical hit is increased by 5% as long as you're wielding weapon with blade (sword, dueling sword, axe, dagger) and not using a shield.");
 		public static const BlessedByLadyGodiva:PerkType = mk("Blessed by Lady Godiva", "Blessed by Lady Godiva",
 				"Oh now she blesses you? As it's painfully obvious you have the Goddess of chance's favor... you get even more money upon victory... yay... (15% more gems from victories)",
 				"You've chosen the 'Blessed by Lady Godiva' perk, increasing gem gains from victories by 15%.");

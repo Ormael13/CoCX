@@ -49,11 +49,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 			outputText("<b>Lustzerking was used successfully.</b>\n\n");
 		}
-		if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
+		if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1 && player.wrath >= crinosshapeCost()) {
 			outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
 			assumeCrinosShape007();
 		}
-		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0) {
+		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0 && player.wrath >= combat.asuraformCost()) {
 			outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
 			if (player.hasPerk(PerkLib.AsuraStrength)) {
 				outputText("Additionaly from your back emerge ");
@@ -760,7 +760,10 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(150, USEFATG_MAGIC_NOBM);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownFreezingBreath,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownFreezingBreath,10,0,0,0);
-		var damage:Number = int(player.level * (8 + player.wolfScore()) + rand(60));
+		var damage:Number = 0;
+		damage += scalingBonusStrength() * 0.2;
+		damage += scalingBonusToughness() * 0.2;
+		damage += rand(60);
 		damage = calcGlacialMod(damage);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
@@ -1529,8 +1532,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownPhoenixFireBreath,4,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownPhoenixFireBreath,5,0,0,0);
 		var damage:Number = 0;
+		damage += scalingBonusStrength() * 0.5;
+		damage += scalingBonusToughness() * 0.5;
 		damage += 50 + rand(20);
-		damage += (player.level * 10);
 		damage = calcInfernoMod(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -2611,8 +2615,8 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		var damage:Number;
-		damage = int(player.level * 10 + 45 + rand(10));
+		var damage:Number = 0;
+		damage += 45 + rand(10);
 		damage += scalingBonusIntelligence() * 0.25;
 		damage += scalingBonusWisdom() * 0.25;
 		damage = calcInfernoMod(damage);
