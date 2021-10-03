@@ -376,7 +376,7 @@ public class HeXinDao extends BaseContent
             return introText+desc+costText+(itype.value*3)+endText1;
         }
         function sayLine2(itype:ItemType,desc:String):String{
-            return introText+desc+costText+itype.value+endText2;
+            return introText+desc+costText+itype.value/5+endText2;
         }
         menu();
         addButton(0, "1st Stall", Tier1).hint("Check out the first stall with the cheapest TF items.");
