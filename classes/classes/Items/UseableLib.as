@@ -34,6 +34,9 @@ use namespace CoC;
 		public const TIN_ORE:SimpleUseable = new SimpleUseable("Tin Ore", "Tin ore", "a Tin ore", 40, 
 			"A Tin ore.",
 			"You look over the chunk of Tin ore. Likely usefull to making some equipment.");
+		public const IRONORE:SimpleUseable = new SimpleUseable("Iron Ore", "Iron ore", "an Iron ore", 40, 
+			"An Iron ore.",
+			"You look over the chunk of Iron ore. Likely usefull to making some equipment.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");

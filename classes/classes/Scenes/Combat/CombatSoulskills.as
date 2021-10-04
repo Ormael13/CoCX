@@ -499,6 +499,11 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
@@ -508,6 +513,11 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -539,6 +549,14 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
@@ -551,6 +569,14 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -585,6 +611,17 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
@@ -600,6 +637,17 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -835,7 +883,13 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
-		else doDamage(damage, true, true);
+		else {
+			doDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				doDamage(damage, true, true);
+				damage *= 2;
+			}
+		}
 		outputText(" damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -1195,15 +1249,16 @@ public class CombatSoulskills extends BaseCombatContent {
 				crit = true;
 				damage *= 1.75;
 			}
-			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.\n\n");
+			outputText(monster.capitalA + monster.short + " takes ");
+			doMagicDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+				doMagicDamage(damage, true, true);
+				damage *= 2;
+			}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
+			outputText("damage \n\n");
 		}
-		else {
-			damage = 0;
-			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
-		}
-		monster.HP -= damage;
+		else outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -1243,11 +1298,14 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, true);
+		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+			doIceDamage(damage, true, true);
+			damage *= 2;
+		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			if (monster.spe - 20 >= 0) {
@@ -1320,17 +1378,26 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. ");
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage += Math.round(damage * 0.1);
 			doFireDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+				doFireDamage(damage, true, true);
+				damage *= 2;
+			}
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage = Math.round(damage * 1.1);
 		}
-		else doFireDamage(damage, true, true);
+		else {
+			doFireDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+				doFireDamage(damage, true, true);
+				damage *= 2;
+			}
+		}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(5);
@@ -1414,12 +1481,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		damage = Math.round(damage);
-		doDamage(damage);
 		monster.createStatusEffect(StatusEffects.PunishingKick, 5, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownPunishingKick, 10, 0, 0, 0);
-		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. " + monster.capitalA + monster.short + " will have a hard time recovering its balance for a while. <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. " + monster.capitalA + monster.short + " will have a hard time recovering its balance for a while. ");
+		doDamage(damage, true, true);
+		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+			doDamage(damage, true, true);
+			damage *= 2;
+		}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");

@@ -72,7 +72,7 @@ public class GoblinElderScene extends BaseContent
 			if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 2) flags[kFLAGS.SOUL_SENSE_PRISCILLA]++;
 			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] == 2) {
 				flags[kFLAGS.SOUL_SENSE_PRISCILLA]++;
-				outputText("\n\n<b>You have meet her enough times to be able to find her in the future when using soul sense. (She still can be encountered when RNG GOD decide to pick her as goblin enemy)</b>\n\n");
+				outputText("\n\n<b>You have meet her enough times to be able to find her in the future when using soul sense.</b>\n\n");
 			}
 			menu();
 			addButton(0, "Fight", startFight);

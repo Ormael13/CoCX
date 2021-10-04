@@ -404,21 +404,21 @@ public class Exploration extends BaseContent
 						return;
 					}
 					//Goblin warrior! (Equal chance with Goblin Shaman)
-					else if (goblinChooser >= 50 && goblinChooser < 65) {
+					else if (goblinChooser >= 50 && goblinChooser < 75) {
 						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
 						spriteSelect(123);
 						return;
 					}
-					//Goblin shaman!
-					else if (goblinChooser >= 65 && goblinChooser < 80) {
-						SceneLib.goblinShamanScene.goblinShamanEncounter();
-						spriteSelect(124);
-						return;
-					}
-					//Goblin elder!
-					else if (goblinChooser >= 80) {
-						SceneLib.goblinElderScene.goblinElderEncounter();
-						spriteSelect(122);
+					//Goblin shaman OR elder!
+					else if (goblinChooser >= 75) {
+						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) {
+							SceneLib.goblinElderScene.goblinElderEncounter();
+							spriteSelect(122);
+						}
+						else {
+							SceneLib.goblinShamanScene.goblinShamanEncounter();
+							spriteSelect(124);
+						}
 						return;
 					}
 					if (player.gender > 0) {
