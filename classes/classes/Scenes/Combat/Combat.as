@@ -398,7 +398,7 @@ public class Combat extends BaseContent {
         var extraHits:Number = 0;
         if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3+extraHits;
         else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2+extraHits;
-        else return 1;
+        else return 1+extraHits;
     }
 
     public function maxCommonAttacks():int {
@@ -417,8 +417,6 @@ public class Combat extends BaseContent {
 
     public function maxCurrentAttacks():int {
         if (player.weaponPerk == "Staff" || player.weaponPerk == "Wand" || player.weaponPerk == "Massive") return 1;
-        else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks();
-        else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
         else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
@@ -428,6 +426,8 @@ public class Combat extends BaseContent {
             else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks()+Special;
             else return maxCommonAttacks()+Special;
         }
+        else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks();
+        else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks();
         else return maxCommonAttacks();
     }
 
@@ -15015,4 +15015,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}
