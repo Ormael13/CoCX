@@ -103,15 +103,15 @@ package classes.Scenes.Places.HeXinDao
 			else outputText("morning");
 			outputText(" " + player.mf("mister", "miss") + ", what can I get you?</i>\"\n\n");
 			menu();
-			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B);
-			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE);
-			addButton(2, "OrcMead", buyDrink, consumables.ORCMEAD);
-			addButton(3, "OniSake", buyDrink, consumables.ONISAKE);
-			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_);
-			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW);
-			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ);
-			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ);
-			addButton(13, "BroBrew", buyDrink, consumables.BROBREW);
+			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B, 1).hint("1 spirit stone");
+			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE, 1).hint("1 spirit stone");
+			addButton(2, "OrcMead", buyDrink, consumables.ORCMEAD, 1).hint("1 spirit stone");
+			addButton(3, "OniSake", buyDrink, consumables.ONISAKE, 1).hint("1 spirit stone");
+			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_, 1).hint("1 spirit stone");
+			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW, 1).hint("1 spirit stone");
+			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ, 2).hint("2 spirit stones");
+			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ, 100).hint("100 spirit stones");
+			addButton(13, "BroBrew", buyDrink, consumables.BROBREW, 100).hint("100 spirit stones");
 			addButton(14, "Back", notThirsty);
 		}
 		//drink list (to be expanded) some generic nonTF beers
@@ -121,14 +121,14 @@ package classes.Scenes.Places.HeXinDao
 			doNext(curry(enteringInn,false));
 		}
 
-		private function buyDrink(drink:ItemType):void{
-			var cost:int = drink.value * 3;
-			if(player.gems < cost){
-				outputText("\n\nBarman shakes his head, indicating you need " + String(cost - player.gems) + " more gems to purchase this drink.");
+		private function buyDrink(drink:ItemType, amount:int):void{
+			var cost:int = amount;
+			if(flags[kFLAGS.SPIRIT_STONES] < cost){
+				outputText("\n\nBarman shakes his head, indicating you need " + String(cost - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this drink.");
 				doNext(drinkAlcohol);
 				return;
 			}
-			player.gems -= cost;
+			flags[kFLAGS.SPIRIT_STONES] -= cost;
 			statScreenRefresh();
 			outputText("\n\nThe barman hands over the drink you ordered. ");
 			inventory.takeItem(drink, drinkAlcohol);
@@ -138,9 +138,9 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();//Felix - male beffy bro nekomata twin herald npc
 			outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
 			menu();
-			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN);
-			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC);
-			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS);
+			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN).hint("50 spirit stones");
+			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC).hint("40 spirit stones");
+			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS).hint("10 spirit stones");
 			addButton(14, "Back", curry(enteringInn,false));
 			statScreenRefresh();
 		}
@@ -175,7 +175,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			else {
 				outputText("When you apporach the table you see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
-				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to my table seeking my services? I not able to provide alot aside something i calls 'conversion'.</i>\"\n\n");
+				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to my table seeking my services? I not able to provide alot aside something i call 'conversion'.</i>\"\n\n");
 				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
 				outputText("Just like that without any string attatched?\n\n");
 				outputText("\"<i>Of course there would be additional price. Ten spirit stones.</i>\" She pause before asking \"<i>So dear customer would you like me to perform this conversion on you?</i>\"\n\n");

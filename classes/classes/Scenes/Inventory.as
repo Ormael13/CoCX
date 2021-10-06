@@ -497,23 +497,23 @@ use namespace CoC;
 			menu();
 			addButton(0, "Pearl Store 1", pickItemToPlaceInSkyPoisonPearl5).hint("Store item in Sky Poison Pearl (central section).");
 			addButton(5, "Pearl Take 1", pickItemToTakeFromSkyPoisonPearl5).hint("Take item from Sky Poison Pearl (central section).");
-			if (player.level >= 6) addButton(6, "Pearl Take 2", pickItemToTakeFromSkyPoisonPearl1).hint("Take item from Sky Poison Pearl (east section).");
-			if (player.level >= 12) addButton(7, "Pearl Take 3", pickItemToTakeFromSkyPoisonPearl2).hint("Take item from Sky Poison Pearl (south section).");
-			if (player.level >= 18) addButton(8, "Pearl Take 4", pickItemToTakeFromSkyPoisonPearl3).hint("Take item from Sky Poison Pearl (west section).");
-			if (player.level >= 24) addButton(9, "Pearl Take 5", pickItemToTakeFromSkyPoisonPearl4).hint("Take item from Sky Poison Pearl (north section).");
-			if (player.level >= 30) addButton(11, "Pearl Take 6", pickItemToTakeFromSkyPoisonPearl6).hint("Take item from Sky Poison Pearl (above section).");
-			if (player.level >= 36) addButton(13, "Pearl Take 7", pickItemToTakeFromSkyPoisonPearl7).hint("Take item from Sky Poison Pearl (below section).");
-			if (player.level >= 6) addButton(1, "Pearl Store 2", pickItemToPlaceInSkyPoisonPearl1).hint("Store item in Sky Poison Pearl (east section).");
+			if (player.level >= 1) addButton(6, "Pearl Take 2", pickItemToTakeFromSkyPoisonPearl1).hint("Take item from Sky Poison Pearl (east section).");
+			if (player.level >= 2) addButton(7, "Pearl Take 3", pickItemToTakeFromSkyPoisonPearl2).hint("Take item from Sky Poison Pearl (south section).");
+			if (player.level >= 3) addButton(8, "Pearl Take 4", pickItemToTakeFromSkyPoisonPearl3).hint("Take item from Sky Poison Pearl (west section).");
+			if (player.level >= 4) addButton(9, "Pearl Take 5", pickItemToTakeFromSkyPoisonPearl4).hint("Take item from Sky Poison Pearl (north section).");
+			if (player.level >= 5) addButton(11, "Pearl Take 6", pickItemToTakeFromSkyPoisonPearl6).hint("Take item from Sky Poison Pearl (above section).");
+			if (player.level >= 6) addButton(13, "Pearl Take 7", pickItemToTakeFromSkyPoisonPearl7).hint("Take item from Sky Poison Pearl (below section).");
+			if (player.level >= 1) addButton(1, "Pearl Store 2", pickItemToPlaceInSkyPoisonPearl1).hint("Store item in Sky Poison Pearl (east section).");
 			else addButtonDisabled(1, "Pearl Store 2", "Req. LvL 6+ to unlock this.");
-			if (player.level >= 12) addButton(2, "Pearl Store 3", pickItemToPlaceInSkyPoisonPearl2).hint("Store item in Sky Poison Pearl (south section).");
+			if (player.level >= 2) addButton(2, "Pearl Store 3", pickItemToPlaceInSkyPoisonPearl2).hint("Store item in Sky Poison Pearl (south section).");
 			else addButtonDisabled(2, "Pearl Store 3", "Req. LvL 12+ to unlock this.");
-			if (player.level >= 18) addButton(3, "Pearl Store 4", pickItemToPlaceInSkyPoisonPearl3).hint("Store item in Sky Poison Pearl (west section).");
+			if (player.level >= 3) addButton(3, "Pearl Store 4", pickItemToPlaceInSkyPoisonPearl3).hint("Store item in Sky Poison Pearl (west section).");
 			else addButtonDisabled(3, "Pearl Store 4", "Req. LvL 18+ to unlock this.");
-			if (player.level >= 24) addButton(4, "Pearl Store 5", pickItemToPlaceInSkyPoisonPearl4).hint("Store item in Sky Poison Pearl (north section).");
+			if (player.level >= 4) addButton(4, "Pearl Store 5", pickItemToPlaceInSkyPoisonPearl4).hint("Store item in Sky Poison Pearl (north section).");
 			else addButtonDisabled(4, "Pearl Store 5", "Req. LvL 24+ to unlock this.");
-			if (player.level >= 30) addButton(10, "Pearl Store 6", pickItemToPlaceInSkyPoisonPearl6).hint("Store item in Sky Poison Pearl (above section).");
+			if (player.level >= 5) addButton(10, "Pearl Store 6", pickItemToPlaceInSkyPoisonPearl6).hint("Store item in Sky Poison Pearl (above section).");
 			else addButtonDisabled(10, "Pearl Store 6", "Req. LvL 30+ to unlock this.");
-			if (player.level >= 36) addButton(12, "Pearl Store 7", pickItemToPlaceInSkyPoisonPearl7).hint("Store item in Sky Poison Pearl (below section).");
+			if (player.level >= 6) addButton(12, "Pearl Store 7", pickItemToPlaceInSkyPoisonPearl7).hint("Store item in Sky Poison Pearl (below section).");
 			else addButtonDisabled(12, "Pearl Store 7", "Req. LvL 36+ to unlock this.");
 			addButton(14, "Back", inventoryMenu);
 		}
@@ -1283,7 +1283,7 @@ use namespace CoC;
 
 		}
 		//Unequip!
-		private function unequipWeapon():void {
+		public function unequipWeapon():void {
 			if (player.weaponName == "Aether (Dex)") {
 				player.weapon.removeText();
 				player.setWeapon(WeaponLib.FISTS);
@@ -1292,7 +1292,7 @@ use namespace CoC;
 			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
-		private function unequipWeaponRange():void {
+		public function unequipWeaponRange():void {
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
@@ -1802,4 +1802,4 @@ use namespace CoC;
 			player.itemSlots[slotNum].setItemAndQty(itype, qty);
 		}
 	}
-}
+}

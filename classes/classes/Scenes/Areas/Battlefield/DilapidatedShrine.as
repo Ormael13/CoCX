@@ -68,7 +68,7 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("Aside from the books, there are scrawlings over the walls of what seems to be an ancient language. It's almost completely indecipherable. Perhaps you should bring someone who knows more about different languages next time?\n\n");
 			menu();
 			addButtonDisabled(2, "Spellcraft", "Placeholder button until one of the writers write something on this subject ^^");//story about god of magic			//addButtonDisabled(2, "The Fall", "Placeholder button until Lia write something on this subject ^^");//collection of propercies about gods fall on area later known as battlefield
-			addButtonDisabled(6, "Reaper", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of death/transformation
+			addButtonDisabled(6, "Reaper", "Placeholder button until one of the writers write something on this subject ^^");//story about god of death/transformation
 			addButtonDisabled(8, "Lifegiver", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of life				//addButtonDisabled(0, "Souless Ones", "Placeholder button until Lia write something on this subject ^^");//story about early days of demons/their uprising (here or other place in mareth?)
 			addButtonDisabled(12, "Warmonger", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of war				//addButtonDisabled(1, "The Descent", "Placeholder button until Lia write something on this subject ^^");//orgin of soul cultivators in Mareth (here or other place in mareth?)
 			addButton(14, "Back", shrinemainmenu);
@@ -109,7 +109,7 @@ import classes.GlobalFlags.kFLAGS;
 		private function westSectionOffering():void {
 			clearOutput();
 			player.destroyItems(consumables.CHILLYP, 3);
-			outputText("\n\nYou place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
+			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
 			switch(rand(10)) {
 				case 0:
 					outputText("and nothing for your troubles. How disappointing.");
@@ -148,6 +148,8 @@ import classes.GlobalFlags.kFLAGS;
 					break;
 			}
 			outputText("\n\n")
+			menu();
+			doNext(westSection);
 			cheatTime(1/12);
 		}
 		

@@ -999,7 +999,7 @@ use namespace CoC;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
-		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");}
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
@@ -1041,7 +1041,7 @@ use namespace CoC;
 		public function isLowGradeWrathWeapon():Boolean
 		{
 			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.BFGAUNT || weapon == game.weapons.SKYPIER || weapon == game.weapons.DWARWA || weapon == game.weapons.BFWHIP
-			 || weapon == game.weapons.UDKDEST || weapon == game.weapons.BFTHSWORD || weaponRange == game.weaponsrange.B_F_BOW;
+			 || weapon == game.weapons.UDKDEST || weapon == game.weapons.BFTHSWORD || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1078,7 +1078,7 @@ use namespace CoC;
 		}
 		public function isGauntletWeapon():Boolean {
 			return weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.L_CLAWS || weapon == game.weapons.VENCLAW || weapon == game.weapons.BFGAUNT
-			 || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"));
+			 || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
@@ -1615,7 +1615,7 @@ use namespace CoC;
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -1629,7 +1629,8 @@ use namespace CoC;
 				else block += 1;
 			}
 			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) {
-				if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets") block += 2;
+				if (AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") block += 4;
+				else if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets") block += 2;
 				block += 1;
 			}
 			if (hasPerk(PerkLib.PrestigeJobSentinel)) {
@@ -2687,7 +2688,7 @@ use namespace CoC;
 			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
-			if (necklaceName == "Blue Winter scarf") mult -= 20;
+			if (necklaceName == "Blue Winter scarf" || necklaceName == "Green Winter scarf" || necklaceName == "Purple Winter scarf" || necklaceName == "Red Winter scarf" || necklaceName == "Yellow Winter scarf") mult -= 20;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
 			if (hasPerk(PerkLib.FireAffinity)) mult += 100;
@@ -3063,6 +3064,21 @@ use namespace CoC;
 			//Apply poison damage resistance percentage.
 			damage *= damagePoisonPercent() / 100;
 			return damage;
+		}
+
+		public function eyesOfTheHunterAdeptBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyHugeType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || CoC.instance.monster.hasPerk(PerkLib.EnemyConstructType) || CoC.instance.monster.hasPerk(PerkLib.EnemyFeralType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGooType)
+			|| CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon) || CoC.instance.monster.hasPerk(PerkLib.EnemyEliteType);
+		}
+		public function eyesOfTheHunterExpertBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyGigantType) || CoC.instance.monster.hasPerk(PerkLib.EnemyLargeGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyElementalType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGhostType) || CoC.instance.monster.hasPerk(PerkLib.EnemyPlantType) || CoC.instance.monster.hasPerk(PerkLib.EnemyChampionType)
+			|| CoC.instance.monster.hasPerk(PerkLib.FireVulnerability) || CoC.instance.monster.hasPerk(PerkLib.IceVulnerability) || CoC.instance.monster.hasPerk(PerkLib.LightningVulnerability) || CoC.instance.monster.hasPerk(PerkLib.DarknessVulnerability);
+		}
+		public function eyesOfTheHunterMasterBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyColossalType) || CoC.instance.monster.hasPerk(PerkLib.EnemyFleshConstructType) || CoC.instance.monster.hasPerk(PerkLib.FireNature) || CoC.instance.monster.hasPerk(PerkLib.IceNature) || CoC.instance.monster.hasPerk(PerkLib.LightningNature) || CoC.instance.monster.hasPerk(PerkLib.DarknessNature);
+		}
+		public function eyesOfTheHunterGrandMasterBoost():Boolean {
+			return CoC.instance.monster.hasPerk(PerkLib.EnemyGodType) || CoC.instance.monster.hasPerk(PerkLib.EnemyBossType);
 		}
 
 		public function henchmanBasedInvulnerabilityFrame():Boolean {
@@ -4139,6 +4155,8 @@ use namespace CoC;
 				if (TopScore >= 5) {
 					if (TopScore >= 11) {
 						if (isTaur()) race = "elf-taur";
+						else if ((skin.base.color == "ebony" || skin.base.color == "dark") && hairColor == "white") race = "drow";
+						else if (skin.base.color == "ebony" || skin.base.color == "dark") race = "dark elf";
 						else race = "elf";
 					} else {
 						if (isTaur()) race = "half elf-taur";
@@ -7282,7 +7300,7 @@ use namespace CoC;
 			if (hasCoatOfType(Skin.COVERAGE_NONE))
 				harpy++;
 			if (hasPerk(PerkLib.HarpyWomb))
-				harpy++;
+				harpy += 2;
 			if (hasPerk(MutationsLib.HarpyHollowBones))
 				harpy++;
 			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved))
@@ -8061,13 +8079,13 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "emerald", "turquoise"]))
 				thunderbirdCounter++;
+			if (hasPerk(PerkLib.HarpyWomb))
+				thunderbirdCounter += 2;
 			if (hasPerk(MutationsLib.HeartOfTheStorm))
 				thunderbirdCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStormEvolved))
 				thunderbirdCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStormFinalForm))
-				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HarpyWomb))
 				thunderbirdCounter++;
 			if (hasPerk(MutationsLib.HarpyHollowBones))
 				thunderbirdCounter++;
@@ -9321,7 +9339,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PhoenixFireBreath))
 				phoenixCounter++;
 			if (hasPerk(PerkLib.HarpyWomb))
-				phoenixCounter++;
+				phoenixCounter += 2;
 			if (hasPerk(MutationsLib.HarpyHollowBones))
 				phoenixCounter++;
 			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved))

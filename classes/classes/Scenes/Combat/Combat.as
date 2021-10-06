@@ -398,7 +398,7 @@ public class Combat extends BaseContent {
         var extraHits:Number = 0;
         if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3+extraHits;
         else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2+extraHits;
-        else return 1;
+        else return 1+extraHits;
     }
 
     public function maxCommonAttacks():int {
@@ -417,8 +417,6 @@ public class Combat extends BaseContent {
 
     public function maxCurrentAttacks():int {
         if (player.weaponPerk == "Staff" || player.weaponPerk == "Wand" || player.weaponPerk == "Massive") return 1;
-        else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks();
-        else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
         else if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
@@ -428,6 +426,8 @@ public class Combat extends BaseContent {
             else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks()+Special;
             else return maxCommonAttacks()+Special;
         }
+        else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks();
+        else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks();
         else return maxCommonAttacks();
     }
 
@@ -2628,8 +2628,12 @@ public class Combat extends BaseContent {
     }
 
     public function meleeAccuracy():Number {
-        var accmod:Number = 200;
-        if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) accmod += 20;
+        var accmod:Number = 120;
+		if (player.level > 0) {
+			if (player.level > 5) accmod += 60;
+			else accmod += 10 * player.level;
+		}
+        if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) accmod += 40;
         if (player.isFlying() && player.hasPerk(PerkLib.AerialCombat) && !player.haveWeaponForJouster() && !player.haveThrowableMeleeWeapon()) {
             if (player.jewelryName != "Ring of Ambidexty") accmod -= 60;
             if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
@@ -2700,7 +2704,11 @@ public class Combat extends BaseContent {
 	}
 
 	public function baseRangeAccuracy():Number {
-		var baccmod:Number = 80;
+		var baccmod:Number = 120;
+		if (player.level > 0) {
+			if (player.level > 5) baccmod += 60;
+			else baccmod += 10 * player.level;
+		}
         if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) baccmod += 40;
         if (player.hasPerk(PerkLib.Accuracy1)) {
             baccmod += player.perkv1(PerkLib.Accuracy1);
@@ -2800,11 +2808,22 @@ public class Combat extends BaseContent {
 	}
 
     public function oneArrowTotalCost():Number {
-        var onearrowcost:Number = 25;
+        var onearrowcost:Number = 5;
         //additional arrow effects costs
-        if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1 || flags[kFLAGS.ELEMENTAL_ARROWS] == 2) onearrowcost += 15;
-        if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 5;
-        if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) onearrowcost += 5;
+        if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1 || flags[kFLAGS.ELEMENTAL_ARROWS] == 2) onearrowcost += 3;
+        if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 1;
+        if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) onearrowcost += 1;
+		//cost increase (likely temporal until i make more rework on this)
+		if (player.level >= 12) {//player.masteryArcheryLevel - maybe use that?
+			if (player.level >= 24) {
+				if (player.level >= 36) {
+					if (player.level >= 48) onearrowcost *= 5;
+					else onearrowcost *= 4;
+				}
+				else onearrowcost *= 3;
+			}
+			else onearrowcost *= 2;
+		}
         //Bow Shooting perk cost reduction
         if (player.hasPerk(PerkLib.BowShooting)) onearrowcost *= (1 - ((player.perkv1(PerkLib.BowShooting)) / 100));
         return onearrowcost;
@@ -5138,7 +5157,7 @@ public class Combat extends BaseContent {
                 damage += scalingBonusLibido() * 0.20;
                 damage += damage2;
             }
-            if (player.weapon == weapons.BFGAUNT) damage *= 4;
+            if (player.weapon == weapons.BFGAUNT || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 			if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
 			if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
@@ -5461,9 +5480,10 @@ public class Combat extends BaseContent {
                 }
                 //Lust raising weapon bonuses
                 if (monster.lustVuln > 0) {
-                    if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.L_DAGGR || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) {//player.weapon == weapons.large || player.weapon == weapons.massive ||
+                    if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.L_DAGGR || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU
+					|| (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) {//player.weapon == weapons.large || player.weapon == weapons.massive ||
                         outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.");
-                        if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) monster.teased(monster.lustVuln * (10 + player.cor / 8));
+                        if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) monster.teased(monster.lustVuln * (10 + player.cor / 8));
                         else monster.teased(monster.lustVuln * (5 + player.cor / 10));
                     }
                     var whipLustDmg:Number = 0;
@@ -6191,6 +6211,8 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.ZWNDER && !monster.hasStatusEffect(StatusEffects.Stunned)) stunChance += 30;
         //40% Stun chance
         if (player.weapon == weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) stunChance += 40;
+		//50% Stun chance
+		if (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") stunChance += 50;
 		if (player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
         if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
         if (stun) {
@@ -6204,7 +6226,9 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.CLAWS || player.weapon == weapons.L_CLAWS || player.weapon == weapons.VENCLAW || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
         //25% Bleed chance
         if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP || player.weapon == weapons.TRIDAG)) bleedChance += 25;
-        //100% bleed chance
+		//45% Bleed chance
+		if (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") bleedChance += 45;
+        //100% Bleed chance
         if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) bleedChance += 100;
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
@@ -6274,7 +6298,7 @@ public class Combat extends BaseContent {
 		var bleed:Boolean = false;
         var bleedChance:int = 0;
 		//50% bleed chance
-        if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH) bleedChance += 50;
+        if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) bleedChance += 50;
 		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
 		if (bleed) {
@@ -6465,12 +6489,40 @@ public class Combat extends BaseContent {
             if (player.inte > 300) critPChance += 25;
         }
         if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critPChance += 5;
-        if (player.hasPerk(PerkLib.Blademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 5;
-        if (player.hasPerk(PerkLib.GrandBlademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 15;
+        if (player.hasPerk(PerkLib.Blademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) critPChance += 5;
+        if (player.hasPerk(PerkLib.GrandBlademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) critPChance += 15;
         if (player.armor == armors.R_CHANG || player.armor == armors.R_QIPAO || player.armor == armors.G_CHANG || player.armor == armors.G_QIPAO || player.armor == armors.B_CHANG || player.armor == armors.B_QIPAO || player.armor == armors.P_CHANG || player.armor == armors.P_QIPAO) critPChance += 5;
         if (player.headJewelry == headjewelries.SCANGOG) critPChance += 5;
         if (player.headJewelry == headjewelries.SATGOG) critPChance += 10;
         if (player.hasStatusEffect(StatusEffects.Rage)) critPChance += player.statusEffectv1(StatusEffects.Rage);
+		if (player.eyesOfTheHunterAdeptBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) critPChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critPChance += 95;
+				else critPChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterExpertBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) critPChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critPChance += 95;
+				else critPChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 100) critPChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critPChance += 95;
+				else critPChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterGrandMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.sens >= 125) critPChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critPChance += 95;
+				else critPChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
         return critPChance;
     }
 
@@ -6492,6 +6544,34 @@ public class Combat extends BaseContent {
         if (player.armor == armors.R_CHANG || player.armor == armors.R_QIPAO || player.armor == armors.G_CHANG || player.armor == armors.G_QIPAO || player.armor == armors.B_CHANG || player.armor == armors.B_QIPAO || player.armor == armors.P_CHANG || player.armor == armors.P_QIPAO) critMChance += 5;
         if (player.headJewelry == headjewelries.SCANGOG) critMChance += 5;
         if (player.headJewelry == headjewelries.SATGOG) critMChance += 10;
+		if (player.eyesOfTheHunterAdeptBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) critMChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critMChance += 95;
+				else critMChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterExpertBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) critMChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critMChance += 95;
+				else critMChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 100) critMChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critMChance += 95;
+				else critMChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterGrandMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.sens >= 125) critMChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critMChance += 95;
+				else critMChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
         return critMChance;
     }
 
@@ -6772,6 +6852,10 @@ public class Combat extends BaseContent {
 
     public function playerLevelAdjustment():Number {
         var playerLevelAdjustment:Number = 0;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterEx) && player.sens >= 30) {
+			if (player.sens >= 450) playerLevelAdjustment += 30;
+			else playerLevelAdjustment += 1 * Math.round((player.sens - 25) / 25);
+		}
         return playerLevelAdjustment;
     }
 
@@ -6787,6 +6871,39 @@ public class Combat extends BaseContent {
 		//if (player.hasPerk(PerkLib.EnemyGodType))
         return monsterLvlAdjustment;
     }
+	
+	private function EyesOfTheHunterDamageBonus():Number {
+		var EOTHDBonus:Number = 1;
+		if (player.eyesOfTheHunterAdeptBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) EOTHDBonus += 0.1;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) EOTHDBonus += 1.9;
+				else EOTHDBonus += 0.02 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterExpertBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) EOTHDBonus += 0.1;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) EOTHDBonus += 1.9;
+				else EOTHDBonus += 0.02 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 100) EOTHDBonus += 0.1;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) EOTHDBonus += 1.9;
+				else EOTHDBonus += 0.02 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterGrandMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.sens >= 125) EOTHDBonus += 0.1;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) EOTHDBonus += 1.9;
+				else EOTHDBonus += 0.02 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		return EOTHDBonus;
+	}
 
 //DEAL DAMAGE
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
@@ -6822,6 +6939,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6905,6 +7023,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6985,7 +7104,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
-
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7079,6 +7198,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 1.4;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7166,6 +7286,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) damage *= 1.3;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7246,6 +7367,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
 //	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7318,6 +7440,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7390,6 +7513,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7462,6 +7586,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7534,6 +7659,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7606,6 +7732,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7681,6 +7808,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
+		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -10776,13 +10904,13 @@ public class Combat extends BaseContent {
                 else if (math > .75) outputText("You see [monster he] aren't very hurt.  ");
                 else if (math > .5) outputText("You see [monster he] are slightly wounded.  ");
                 else if (math > .25) outputText("You see [monster he] are seriously hurt.  ");
-                else outputText("You see [monster he] are unsteady and close to death.  "+(math<0?"Seems they have some ability to stay undefeated even having negative health.  Well it just mean you must keep attacking to the point they can't stay conscious anymore.":"")+"");
+                else outputText("You see [monster he] are unsteady and close to death.  "+(math<0?"<b>It appears they have the ability to remain standing even on the brink of defeat. Looks like you'll have to keep the momentum longer than they can hold themself. They can't survive on the brink of death forever!</b>":"")+"");
             } else {
                 if (math >= 1) outputText("You see [monster he] is in perfect health.  ");
                 else if (math > .75) outputText("You see [monster he] isn't very hurt.  ");
                 else if (math > .5) outputText("You see [monster he] is slightly wounded.  ");
                 else if (math > .25) outputText("You see [monster he] is seriously hurt.  ");
-                else outputText("You see [monster he] is unsteady and close to death.  "+(math<0?"Seems it have some ability to stay undefeated even having negative health.  Well it just mean you must keep attacking to the point it can't stay conscious anymore.":"")+"");//[monster heshe]
+                else outputText("You see [monster he] is unsteady and close to death.  "+(math<0?"<b>It appears it has the ability to remain standing even on the brink of defeat. Looks like you'll have to keep the momentum longer than it can hold itself. It can't survive on the brink of death forever!</b>":"")+"");
             }
             showMonsterLust();
             // haha literally fuck organising this shit properly any more
@@ -10843,26 +10971,23 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) generalTypes.push("Large Group");
                 if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
                 if (monster.hasPerk(PerkLib.EnemyTrueDemon)) generalTypes.push("True Demon");
-            }
-            if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
-                if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
+				if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
                 if (monster.hasPerk(PerkLib.EnemyChampionType)) generalTypes.push("Champion");
                 if (monster.hasPerk(PerkLib.EnemyEliteType)) generalTypes.push("Elite");
                 if (monster.hasPerk(PerkLib.EnemyGodType)) generalTypes.push("God");
-            }
-            if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
-                if (monster.hasPerk(PerkLib.DarknessNature)) elementalTypes.push("Darkness Nature");
+				if (monster.hasPerk(PerkLib.DarknessNature)) elementalTypes.push("Darkness Nature");
                 if (monster.hasPerk(PerkLib.FireNature)) elementalTypes.push("Fire Nature");
                 if (monster.hasPerk(PerkLib.IceNature)) elementalTypes.push("Ice Nature");
                 if (monster.hasPerk(PerkLib.LightningNature)) elementalTypes.push("Lightning Nature");
-            }
-            if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 75) {
-                if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalTypes.push("Darkness Vulnerability");
+				if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalTypes.push("Darkness Vulnerability");
                 if (monster.hasPerk(PerkLib.FireVulnerability)) elementalTypes.push("Fire Vulnerability");
                 if (monster.hasPerk(PerkLib.IceVulnerability)) elementalTypes.push("Ice Vulnerability");
                 if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalTypes.push("Lightning Vulnerability");
             }
-            mainView.monsterStatsView.setMonsterTypes(generalTypes, elementalTypes);
+            outputText("\n");
+            outputText("Enemy information - General: " + generalTypes.join(", ") + "\n");
+            outputText("Enemy information - Elemental: " + elementalTypes.join(", ") + "\n");
+            //mainView.monsterStatsView.setMonsterTypes(generalTypes, elementalTypes);
         }
         if (debug) {
             outputText("\n----------------------------\n");
@@ -11404,7 +11529,7 @@ public class Combat extends BaseContent {
             var crit:Boolean = false;
             var critChance:int = 5;
             var critMulti:Number = 1.75;
-            critChance += combat.combatPhysicalCritical();
+            critChance += combatPhysicalCritical();
             if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
             if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
@@ -14287,7 +14412,7 @@ public class Combat extends BaseContent {
 		damage *= (1 + SFoDMulti);
 		var crit:Boolean = false;
 		var critChance:int = 65;
-		critChance += combat.combatPhysicalCritical();
+		critChance += combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -14890,4 +15015,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

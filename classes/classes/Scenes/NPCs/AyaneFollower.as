@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Useable;
 import classes.display.SpriteDb;
+import classes.Scenes.SceneLib;
 
 public class AyaneFollower extends NPCAwareContent
 	{
@@ -118,7 +119,7 @@ public function ayaneShop():void {
 			addButton(14, "Back", ayaneCampMenu);
 		}
 		else{
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Back", SceneLib.kitsuneScene.kitsuneShrine);
 		}
 	}
 	private function sellItem(item:Useable,cost:int = -1,buy:Boolean=false):void{

@@ -2483,34 +2483,41 @@ public class KitsuneScene extends BaseContent
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
+					outputText("<b>\nYour final tail will be available at level 42, provided you have 120 Intelligence and 120 Wisdom.</b>" );
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					CoC.instance.transformations.TailFox(8).applyEffect(false);
 					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
-				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 90 &&  player.inte >= 90 && notANineTail && (!player.hasPerk(PerkLib.CorruptedKitsune) || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 90 &&  player.wis >= 90 && notANineTail && (!player.hasPerk(PerkLib.CorruptedKitsune) || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					//Apply Kitsune perk if applicable.
 					if (!player.hasPerk(PerkLib.EnlightenedKitsune)) {
 						outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 						outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
+						outputText("<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>" );
 						outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 						player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 						player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 						dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					}
 					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
+					outputText("<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>" );
 					CoC.instance.transformations.TailFox(7).applyEffect(false);
 					player.consumeItem(consumables.FOXJEWL);
 				} else if ((2 <= player.tailCount && player.tailCount <= 5) && player.tailCount - 1 <= player.level / 6 && player.tailCount <= player.inte / 15 && player.tailCount <= player.wis / 15) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened. Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailCount + 1) + "!");
+					if (player.tailCount == 3) outputText("<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>" );
+					else if (player.tailCount == 4) outputText("<b>\nYour next tail will be available at level 24, provided you have 75 Intelligence and 75 Wisdom.</b>" );
+					else if (player.tailCount == 5) outputText("<b>\nYour next tail will be available at level 30, provided you have 90 Intelligence and 90 Wisdom.\nContinue offering jewels to the shrine if you wish to obtain enlightenment. Only the corrupted would use them directly from here on out.</b>" );
 					CoC.instance.transformations.TailFox(player.tailCount + 1).applyEffect(false);
 					player.consumeItem(consumables.FOXJEWL);
 				} else if (player.inte >= 15 && player.wis >= 15 && player.tailCount == 1) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailCount + 1) + "!");
+					outputText("<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>" );
 					CoC.instance.transformations.TailFox(2).applyEffect(false);
 					player.consumeItem(consumables.FOXJEWL);
 				} else {

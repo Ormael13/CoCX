@@ -597,7 +597,6 @@ public function ElectraSeXHeadpat():void {
 			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 			inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
 		}
-		doNext(camp.returnToCampUseOneHour);
 	}
 }
 public function ElectraSeXNo():void {

@@ -14,6 +14,8 @@ import classes.GlobalFlags.kFLAGS;
 //  BENOIT_1:int = 567;
 //  BENOIT_2:int = 568;
 //  BENOIT_3:int = 569;
+//  BENOIT_4:int = 1294;
+//  BENOIT_5:int = 1295;
 //  BENOIT_TALKED_TODAY:int = 570;
 //  BENOIT_TALKED_TO_PROPERLY:int = 571;
 //  BENOIT_EGGS:int = 572;
@@ -337,7 +339,8 @@ public function benoitsBuyMenu():void {
 	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			"", null, "", null);
+			flags[kFLAGS.BENOIT_4],createCallBackFunction(benoitTransactBuy,4),
+			flags[kFLAGS.BENOIT_5],createCallBackFunction(benoitTransactBuy,5));
 	if (player.keyItemv1("Backpack") < 10) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
@@ -390,7 +393,9 @@ private function benoitTransactBuy(slot:int = 1):void {
 
 	if(slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
 	else if(slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
-	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
+	else if(slot == 3) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
+	else if(slot == 4) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_4]);
+	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_5]);
 	if(player.gems < int(buyMod * itype.value)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
 		doNext(benoitsBuyMenu);
@@ -448,8 +453,8 @@ private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
 
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.
 public function updateBenoitInventory():void {
-	//Slot 1 Any one of the following: Incubus Draft, Minotaur Blood, Minotaur Cum, Equinuum, Black Pepper, Vitalitea, Scholar's Tea, Double Pepper
-	switch(rand(9)) {
+	//Slot 1
+	switch(rand(5)) {
 		case 0:
 			flags[kFLAGS.BENOIT_1] = consumables.INCUBID.id;
 			break;
@@ -465,123 +470,141 @@ public function updateBenoitInventory():void {
 		case 4:
 			flags[kFLAGS.BENOIT_1] = consumables.BLACKPP.id;
 			break;
-		case 5:
-			flags[kFLAGS.BENOIT_1] = consumables.SMART_T.id;
-			break;
-		case 6:
-			flags[kFLAGS.BENOIT_1] = consumables.VITAL_T.id;
-			break;
-		case 7:
-			flags[kFLAGS.BENOIT_1] = consumables.DBLPEPP.id;
-			break;
-		case 8:
-			if (rand(3) == 0) flags[kFLAGS.BENOIT_1] = consumables.PURHONY.id;
-			else flags[kFLAGS.BENOIT_1] = consumables.BEEHONY.id;
-			break;
 		default:
 	}
-	//If the player discarded a unique item, the first time they arrive at the Salvage Shop after a week has passed it will appear in Slot 1.
-	if (rand(10) == 0) {
-		flags[kFLAGS.BENOIT_1] = consumables.GODMEAD.id;
+	if (rand(100) < 4) {
+		//There is a 4% chance the following items will appear in Slot 1
+		switch (rand(2)) {
+			case 0:
+				flags[kFLAGS.BENOIT_1] = consumables.L_PNKEG.id;
+				break;
+			default:
+				flags[kFLAGS.BENOIT_1] = consumables.L_BLUEG.id;
+				break;
+		}
 	}
 
-	//Slot 2 Any one of the following: Succubus Milk, Whisker Fruit, Wet Cloth, Golden Seed, LaBova, Snake Oil, Pink Gossamer, Black Gossamer
-	switch(rand(10)) {
+	//Slot 2
+	switch(rand(5)) {
 		case 0:
-			flags[kFLAGS.BENOIT_2] = consumables.SUCMILK.id;
+			flags[kFLAGS.BENOIT_2] = consumables.SMART_T.id;
 			break;
 		case 1:
-			flags[kFLAGS.BENOIT_2] = consumables.W_FRUIT.id;
+			flags[kFLAGS.BENOIT_2] = consumables.VITAL_T.id;
 			break;
 		case 2:
-			flags[kFLAGS.BENOIT_2] = consumables.WETCLTH.id;
+			flags[kFLAGS.BENOIT_2] = consumables.DBLPEPP.id;
 			break;
 		case 3:
-			flags[kFLAGS.BENOIT_2] = consumables.GLDSEED.id;
+			flags[kFLAGS.BENOIT_2] = consumables.PURHONY.id;
 			break;
 		case 4:
-			flags[kFLAGS.BENOIT_2] = consumables.LABOVA_.id;
-			break;
-		case 5:
-			flags[kFLAGS.BENOIT_2] = consumables.SNAKOIL.id;
-			break;
-		case 6:
-			flags[kFLAGS.BENOIT_2] = consumables.S_GOSSR.id;
-			break;
-		case 7:
-			flags[kFLAGS.BENOIT_2] = consumables.HUMMUS_.id;
-			break;
-		case 8:
-			flags[kFLAGS.BENOIT_2] = consumables.PIGTRUF.id;
-			break;
-		case 9:
-			flags[kFLAGS.BENOIT_2] = consumables.B_GOSSR.id;
+			flags[kFLAGS.BENOIT_2] = consumables.BEEHONY.id;
 			break;
 		default:
 	}
 	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.
-		switch (rand(5)) {
+		//There is a 4% chance the following items will appear in Slot 2
+		switch (rand(2)) {
 			case 0:
 				flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
 				break;
-
 			case 1:
-				flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
-				break;
-
-			case 2:
-				flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
-				break;
-
-			case 3:
 				flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
-				break;
-			default:
-				flags[kFLAGS.BENOIT_2] = consumables.TSTOOTH.id;
 				break;
 		}
 	}
 
-	//Slot 3 Any one of the following: Maid's Clothes, Wizard Robes, Tough Silk, Slutty Swimwear, Goo Chunk, Chitin Plate
-	switch(rand(6)) {
+	//Slot 3
+	switch(rand(5)) {
 		case 0:
-			flags[kFLAGS.BENOIT_3] = armors.W_ROBES.id;
+			flags[kFLAGS.BENOIT_3] = consumables.SUCMILK.id;
 			break;
 		case 1:
-			flags[kFLAGS.BENOIT_3] = armors.S_SWMWR.id;
+			flags[kFLAGS.BENOIT_3] = consumables.W_FRUIT.id;
 			break;
 		case 2:
-			flags[kFLAGS.BENOIT_3] = useables.GREENGL.id;
+			flags[kFLAGS.BENOIT_3] = consumables.WETCLTH.id;
 			break;
 		case 3:
-			flags[kFLAGS.BENOIT_3] = useables.B_CHITN.id;
+			flags[kFLAGS.BENOIT_3] = consumables.GLDSEED.id;
 			break;
 		case 4:
-			flags[kFLAGS.BENOIT_3] = consumables.NUMBROX.id;
+			flags[kFLAGS.BENOIT_3] = consumables.LABOVA_.id;
 			break;
-		case 5:
-			flags[kFLAGS.BENOIT_3] = consumables.SENSDRF.id;
+		default:
+	}
+	if (rand(100) < 4) {
+		//There is a 4% chance the following items will appear in Slot 3
+		switch (rand(2)) {
+			case 0:
+				flags[kFLAGS.BENOIT_3] = consumables.TSTOOTH.id;
+				break;
+			case 1:
+				flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
+				break;
+		}
+	}
+
+	//Slot 4
+	switch(rand(6)) {
+		case 0:
+			flags[kFLAGS.BENOIT_4] = consumables.SNAKOIL.id;
+			break;
+		case 1:
+			flags[kFLAGS.BENOIT_4] = consumables.S_GOSSR.id;
+			break;
+		case 2:
+			flags[kFLAGS.BENOIT_4] = consumables.HUMMUS_.id;
+			break;
+		case 3:
+			flags[kFLAGS.BENOIT_4] = consumables.PIGTRUF.id;
+			break;
+		case 4:
+			flags[kFLAGS.BENOIT_4] = consumables.B_GOSSR.id;
+			break;
+		default:
+	}
+	if (rand(100) < 4) {
+		//There is a 4% chance the following item will appear in Slot 4
+		switch (rand(2)) {
+			case 0:
+				flags[kFLAGS.BENOIT_4] = consumables.NUMBROX.id;
+				break;
+			case 1:
+				flags[kFLAGS.BENOIT_4] = consumables.SENSDRF.id;
+				break;
+		}
+	}
+
+	//Slot 5
+	switch(rand(4)) {
+		case 0:
+			flags[kFLAGS.BENOIT_5] = armors.W_ROBES.id;
+			break;
+		case 1:
+			flags[kFLAGS.BENOIT_5] = armors.S_SWMWR.id;
+			break;
+		case 2:
+			flags[kFLAGS.BENOIT_5] = useables.GREENGL.id;
+			break;
+		case 3:
+			flags[kFLAGS.BENOIT_5] = useables.B_CHITN.id;
 			break;
 		default:
 	}
 	if (rand(100) < 10) {
-		//There is a 10% chance the following items will appear in Slot 3: Bondage Straps, Nurse Outfit, Red Party Dress
-		switch (rand(3)) {
+		//There is a 10% chance the following items will appear in Slot 5
+		switch (rand(2)) {
 			case 0:
-				flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
+				flags[kFLAGS.BENOIT_5] = armors.BONSTRP.id;
 				break;
-
 			case 1:
-				flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
-				break;
-
-			default:
-				flags[kFLAGS.BENOIT_3] = armors.NURSECL.id;
+				flags[kFLAGS.BENOIT_5] = armors.NURSECL.id;
 				break;
 		}
 	}
-	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
+	//Slot 6 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }
 
 private function buyFlintlock():void {

@@ -8818,6 +8818,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 
 	      desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
+		  
+		  if (tailCount == 2) ( desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>" )
+		  else if (tailCount == 3) ( desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>" )
+		  else if (tailCount == 4) ( desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>" )
+		  else if (tailCount == 5) ( desc += "<b>\nYour next tail will be available at level 24, provided you have 75 Intelligence and 75 Wisdom.</b>" )
+		  else if (tailCount == 6) ( desc += "<b>\nYour next tail will be available at level 30, provided you have 90 Intelligence and 90 Wisdom.\nOnly the truly corrupted would continue gaining tails by directly using the jewels. Pure kitsune should offer up the jewels to Toath.</b>" )
+		  else if (tailCount == 7) ( desc += "<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>" )
+		  else if (tailCount == 8) ( desc += "<b>\nYour final tail will be available at level 42, provided you have 120 Intelligence and 120 Wisdom.</b>" )
 
 	      player.tailCount = tailCount;
 	      if (doOutput) outputText(desc);
