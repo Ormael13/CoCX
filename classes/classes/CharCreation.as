@@ -222,6 +222,7 @@ import coc.view.MainView;
 			//Default
 			player.skinTone = "light";
 			player.hairColor = "brown";
+			player.hairStyle = 0;
 			player.hairType = Hair.NORMAL;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -2919,7 +2920,7 @@ import coc.view.MainView;
 			menu();
 			addButton(1, "Yes", reincarnate001).hint("Reincarnate with increased difficulty.");
 			if (player.ascensionPerkPoints >= 50) addButton(2, "Maybe?", reincarnate002).hint("Reincarnate without increasing difficulty.");
-			else addButtonDisabled(2, "Maybe?", "Req. 50 ascension points.");
+			else addButtonDisabled(2, "Maybe?", "50 ascension points required.");
 			addButton(3, "No", ascensionMenu).hint("Go Back");
 		}
 		private function reincarnate001():void {
@@ -2928,6 +2929,9 @@ import coc.view.MainView;
 		}
 		private function reincarnate002():void {
 			player.ascensionPerkPoints -= 50;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0){ //In case ng0, otherwise, player is treated as new char.
+				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0.5
+			}
 			reincarnate();
 		}
 		private function reincarnate():void {
@@ -2935,6 +2939,9 @@ import coc.view.MainView;
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0.5){
+				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0
+			}
 			player.removeKeyItem("Ascension");
 			clearOutput();
 			mainView.nameBox.visible = false;
