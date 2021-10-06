@@ -154,7 +154,7 @@ import classes.Scenes.Monsters.Goblin;
 			this.skinTone = "dark green";
 			this.hairColor = "red";
 			this.hairLength = 4;
-			initStrTouSpeInte(175, 210, 170, 172);
+			initStrTouSpeInte(175, 250, 170, 172);
 			initWisLibSensCor(170, 145, 105, 60);
 			this.weaponName = "sword and shield";
 			this.weaponVerb = "slash";
