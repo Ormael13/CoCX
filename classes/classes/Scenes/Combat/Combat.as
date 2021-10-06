@@ -10960,7 +10960,10 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.IceVulnerability)) elementalTypes.push("Ice Vulnerability");
                 if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalTypes.push("Lightning Vulnerability");
             }
-            mainView.monsterStatsView.setMonsterTypes(generalTypes, elementalTypes);
+            outputText("\n");
+            outputText("Enemy information - General: " + generalTypes.join(", ") + "\n");
+            outputText("Enemy information - Elemental: " + elementalTypes.join(", ") + "\n");
+            //mainView.monsterStatsView.setMonsterTypes(generalTypes, elementalTypes);
         }
         if (debug) {
             outputText("\n----------------------------\n");
