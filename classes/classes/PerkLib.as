@@ -220,9 +220,9 @@ public class PerkLib
 		public static const PastLifeCultivator:PerkType = mk("Past Life: Cultivator", "Past Life: Cultivator",
 				"Soulforce is easier to keep giving you a 10% increase to your maximum amount.", null, true);
 		public static const HistoryFighter:PerkType = mk("History: Fighter", "History: Fighter",
-				"A Past full of conflict increases physical melee damage dealt by 10% and acc by 10%.");
+				"A Past full of conflict increases physical melee damage dealt by 10% and acc by 20%.");
 		public static const PastLifeFighter:PerkType = mk("Past Life: Fighter", "Past Life: Fighter",
-				"A Past full of conflict increases physical melee damage dealt by 10% and acc by 10%.", null, true);
+				"A Past full of conflict increases physical melee damage dealt by 10% and acc by 20%.", null, true);
 		public static const HistoryFortune:PerkType = mk("History: Fortune", "History: Fortune",
 				"Your luck and skills at gathering currency allows you to get 15% more gems from victories.");
 		public static const PastLifeFortune:PerkType = mk("Past Life: Fortune", "Past Life: Fortune",
@@ -1170,17 +1170,6 @@ public class PerkLib
 		public static const ElementsOfTheOrtodoxPath:PerkType = mk("Elements of the orthodox Path", "Elements of the orthodox Path",
 				"You can now summon and command ether, wood and metal elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of the orthodox Path' perk, your time spent on studing elements allowing you to call those mentioned in more orthodox writings.");
-		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
-				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
-		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
-				"As an elf, gain a 25% increase to bow damage when not wielding a shield or a melee weapon other than a Spear.");
-		public static const ELFMasterShot:PerkType = mk("Master Shot", "Master Shot",
-				"As an elf, add one extra attack to archery full attacks.");
-		public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
-		public static const ELFElvenBattleStyle:PerkType = mk("Elven Battle Style", "Elven Battle Style",
-				"As an elf, substitute your strenght to your intelligence modifier for spear damage when full attacking.");
-		public static const ELFElvenSpearDancingTechnique:PerkType = mk("Elven Spear Dancing Technique", "Elven Spear Dancing Technique",
-				"As an elf, deal additional tease damage based on your speed while wielding a spear.");
 		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
 				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
 				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.");
@@ -3474,7 +3463,18 @@ public class PerkLib
 				"Greatly empower the tease ability.");
 		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
 				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
+		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
+				"As an elf, gain a 25% increase to bow damage when not wielding a shield or a melee weapon other than a Spear.");
+		public static const ELFElvenBattleStyle:PerkType = mk("Elven Battle Style", "Elven Battle Style",
+				"As an elf, substitute your strenght to your intelligence modifier for spear damage when full attacking.");
+		public static const ELFElvenSpearDancingTechnique:PerkType = mk("Elven Spear Dancing Technique", "Elven Spear Dancing Technique",
+				"As an elf, deal additional tease damage based on your speed while wielding a spear.");
+		public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
+		public static const ELFMasterShot:PerkType = mk("Master Shot", "Master Shot",
+				"As an elf, add one extra attack to archery full attacks.");
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
+		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
+				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
 				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':100}, false);
 		public static const FeralHunter:FeralHunterPerk = new FeralHunterPerk();

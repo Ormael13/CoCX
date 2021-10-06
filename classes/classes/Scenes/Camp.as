@@ -5254,7 +5254,7 @@ public function rebirthFromBadEnd():void {
 
 		//Zones
 		if (player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && flags[kFLAGS.DISCOVERED_CAVES] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods)
-				&& flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
+				&& flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_TUNDRA] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_ASHLANDS] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
 		if (placesCount() >= 10) awardAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER);
 		if (player.explored >= 1) awardAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I);
 
@@ -5648,4 +5648,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}

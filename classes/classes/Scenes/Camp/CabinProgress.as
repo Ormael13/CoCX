@@ -289,7 +289,10 @@ import classes.Scenes.SceneLib;
 				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
 				incrementStoneSupply(minedStones);
 				if (rand(2) == 0) inventory.takeItem(useables.TIN_ORE, camp.returnToCampUseTwoHours);
-				else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+				else {
+					if (rand(2) == 0) inventory.takeItem(useables.IRONORE, camp.returnToCampUseTwoHours);
+					else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+				}
 			}
 			else {
 				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));

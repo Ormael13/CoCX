@@ -133,6 +133,8 @@ package classes.Scenes
 			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
 			outputText("-Ghost type enemies become immune to bleed effects.\n");
 			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
+			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
+			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penatly of 50% less exp gains. Thank you all for using that free trial ^^\n");
 			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible.\n");
 			outputText("-Kekvit Irae small changes & fixes.\n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
@@ -146,8 +148,6 @@ package classes.Scenes
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
-			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penatly of 50% less exp gains. Thank you all for using that free trial ^^\n");
 			outputText("-Elemental Shard and vial of E-Ichor items worth lowered to 1 gem. Both can be exchanged for spirit stones at Moga Hen shop now and purple shards exchange give 2x more stones ^^ On more sad notes he retire from his offer tf items PC can buy somewhere else. He not gonna sell stuff other sells (totaly not like they would sell cheaper making pc go to them....totaly not that). Also he now slee much less tf items ");
 			outputText("(as some of those are not so hard to get from other vendors in Mareth). Plus some of the more worthy items he will not sell for gems but in exchange for some spirit stones.\n");
 			outputText("-Benoit shop have now 5 slots for items to sell instead of 3. All items that was before in those 3 slots been spread to 5 slots so no worry no item been discarded from our fav basilisk offer ^^\n");
@@ -158,9 +158,18 @@ package classes.Scenes
 			outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			outputText("-Added counter how many ascensions PC already have in general stats subpage. Ignam Thief spawn chance increased from 25% to 75%.\n");
 			outputText("-Feral Imps and Raging Tentacle Beasts will not spawn when PC is below lvl 3. Only exception is in case of feral imps when PC took quests that req. to kill/capture them.\n");
-			outputText("-Harpy Womb perk would give 2 pts instead of 1 to race scores of three races related to harpies. Should amke possible getting race scores for full rac3e score without need to pick mutation perks by those race PC's.\n");
-			outputText("-Blademaster perk work with dagger type weapons too.\n");
+			outputText("-Harpy Womb perk would give 2 pts instead of 1 to race scores of three races related to harpies. Should make possible getting race scores for full rac3e score without need to pick mutation perks by those race PC's.\n");
+			outputText("-Blademaster perk and Flame Blade special effect work with dagger type weapons too.\n");
 			outputText("-Phoenix / Winter Wolf breath attacks have now scaling based on stats (for both str/tou as they bot more of phys than mag boosts in stats).\n");
+			outputText("-Flurry of Blows perk will make attacks been split into 2 seperate instead of one 2x stronger. Also would work with phys soulskills that can be used with first or any other weapon (but only when pc got gauntlets or not holding any weapon) so Draco Sweep and Triple Thrust+it 6/9 hit variants/\n");
+			outputText("-New material: Iron ore. Costs 40 gems. Minable in Quarry.\n");
+			outputText("-History/Past Life: Fighter bonus to accuracy increased by 10% up to 20%. Base melee and range attack accuracy been made even at 60%. Each level above 0 would increase acc by 5% up to 30% at lvl 6+.\n");
+			outputText("-Ring of Ambidexty acc bonus increased to 20% from 15%. Both this and Ring of deadeye aim price been lowered form 800 to 600 gems.\n");
+			outputText("-(WiP) Cost of bow shooting been changed to 5 fatigue that would rise up by 100% each 12 lvl until reaching 25 at lvl 48+.\n");
+			outputText("-Goglins assasins and warriors had their HP stat bit adjusted (to not make assassins more tanky than warriors *sweats*). Also Priscilla would no longer appear in randomn gobo pick pool when she already chilling in Soul Sense menu.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -173,7 +182,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
-			outputText("in adventure guild never refreshing\n");/*ostatni punkt changelogu
+			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -186,7 +195,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -262,9 +270,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -310,12 +316,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
