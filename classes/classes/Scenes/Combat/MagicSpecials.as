@@ -487,7 +487,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already cauterizing your wounds!");
 			}
 		}
-		if (player.salamanderScore() >= 12 || player.phoenixScore() >= 15 && player.tail.type == Tail.SALAMANDER && (player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) {
+		if ((player.salamanderScore() >= 12 || player.phoenixScore() >= 15) && player.tail.type == Tail.SALAMANDER && (player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) {
 			bd = buttons.add("Flame Blade", flameBlade).hint("Set your weapon on fire. \n", "Flame Blade");
 			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
 				bd.disable("Your weapon is already on fire!");
