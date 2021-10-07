@@ -279,7 +279,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = _ageShouldDoBirth;
 		}
 		else {
-			if (player.cor > 39){
+			if (player.cor > 50){
 				spriteSelect(SpriteDb.s_celessBlack);
 			}
 			else {
@@ -307,7 +307,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = 1;
 			_name = mainView.nameBox.text;
 			_corruption = 0;
-			if (player.cor > ((80 + player.corruptionTolerance()) / 2)) {
+			if (player.cor > 50) {
 				_corruption = 100;
 			}
 			mainView.nameBox.visible = false;
@@ -912,10 +912,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function doHeatOrRut():void{
 		outputText("\n\nLewd images of cocks " +(player.isMaleOrHerm()?"and vaginas":"")+" of all sizes and shapes fill your mind, making you drool in anticipation.\n"+
 		"It seems your daughter’s condition is spreading over to you.");
-		if (!player.inHeat && player.goIntoHeat(true,10)){		//This would put the PC into a 20 day heat/rut tho...
+		if (!player.inHeat && player.goIntoHeat(false)){		//This would put the PC into a 20 day heat/rut tho...
 			outputText("\nYou are now in Heat!");
 		}
-		else if (!player.inRut && player.goIntoRut(true, 10)) {	//This is based on the original.xml source.
+		else if (!player.inRut && player.goIntoRut(false)) {	//This is based on the original.xml source.
 			outputText("\nYou are now in Rut!");
 		}
 		doNext(camp.returnToCampUseOneHour);
@@ -955,7 +955,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function pureChildCorruption():void{
-		if (player.cor > 80){
+		if (player.cor > 50){
 			_corruption++;
 			if (isCorrupt) {
 				menu();
