@@ -697,31 +697,31 @@
         <cell rect="122,1832,80,102" name="weapon/staffUnholy" dx="38" dy="55"/>
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
-        <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
+        <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>	
         <cell rect="122,1938,80,90" name="weaponBuff/swordFireBuff" dx="34" dy="31"/>
-        <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
-        <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
-        <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
-        <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
-        <cell rect="392,1726,80,90" name="weapon/hammerHoly" dx="38" dy="55"/>
-        <cell rect="392,1832,80,90" name="weapon/hammerUnholy" dx="38" dy="55"/>
-        <cell rect="212,1938,80,90" name="weapon/swordGenericOH" dx="82" dy="55"/>
+		<cell rect="212,1938,80,90" name="weapon/swordGenericOH" dx="82" dy="55"/>
         <cell rect="212,2044,80,90" name="weapon/swordHolyOH" dx="82" dy="55"/>
         <cell rect="212,2150,80,90" name="weapon/swordUnholyOH" dx="82" dy="55"/>
         <cell rect="122,2044,80,90" name="weaponBuff/swordFireBuffOH" dx="86" dy="31"/>
-        <cell rect="302,1938,80,90" name="weapon/axeGenericOH" dx="82" dy="55"/>
+        <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
+        <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
+        <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
+		<cell rect="302,1938,80,90" name="weapon/axeGenericOH" dx="82" dy="55"/>
         <cell rect="302,2044,80,90" name="weapon/axeHolyOH" dx="82" dy="55"/>
-        <cell rect="302,2150,80,90" name="weapon/axeUnholyOH" dx="82" dy="55"/>
-        <cell rect="392,1938,80,90" name="weapon/hammerGenericOH" dx="82" dy="55"/>
+        <cell rect="302,2150,80,90" name="weapon/axeUnholyOH" dx="82" dy="55"/>    
+        <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
+        <cell rect="392,1726,80,90" name="weapon/hammerHoly" dx="38" dy="55"/>
+        <cell rect="392,1832,80,90" name="weapon/hammerUnholy" dx="38" dy="55"/>
+		<cell rect="392,1938,80,90" name="weapon/hammerGenericOH" dx="82" dy="55"/>
         <cell rect="392,2044,80,90" name="weapon/hammerHolyOH" dx="82" dy="55"/>
         <cell rect="392,2150,80,90" name="weapon/hammerUnholyOH" dx="82" dy="55"/>
+		<cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
+        <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
+        <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
         <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
-        <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
-        <cell rect="572,1726,80,90" name="shield/shieldHoly" dx="66" dy="60"/>
-        <cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
-        <cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
+		<cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
         <cell rect="662,1726,80,90" name="weapon/rapierHoly" dx="38" dy="55"/>
         <cell rect="662,1832,80,90" name="weapon/rapierUnholy" dx="38" dy="55"/>
         <cell rect="662,1938,80,90" name="weaponBuff/rapierFireBuff" dx="38" dy="55"/>
@@ -731,10 +731,21 @@
         <cell rect="752,1938,80,90" name="weaponBuff/katanaFireBuff" dx="25" dy="35"/>
         <cell rect="842,1620,80,90" name="weapon/tetsuGeneric" dx="38" dy="55"/>
         <cell rect="842,1726,80,90" name="weapon/tetsuHoly" dx="38" dy="55"/>
-        <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>
+        <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>	
+		<cell rect="1112,1620,80,90" name="weapon/daggerGeneric" dx="38" dy="55"/>
+        <cell rect="1112,1726,80,90" name="weapon/daggerHoly" dx="38" dy="55"/>
+        <cell rect="1112,1832,80,90" name="weapon/daggerUnholy" dx="38" dy="55"/>	
+        <cell rect="1022,1832,80,90" name="weaponBuff/daggerFireBuff" dx="34" dy="31"/>
+		<cell rect="1112,1938,80,90" name="weapon/daggerGenericOH" dx="82" dy="55"/>
+        <cell rect="1112,2044,80,90" name="weapon/daggerHolyOH" dx="82" dy="55"/>
+        <cell rect="1112,2150,80,90" name="weapon/daggerUnholyOH" dx="82" dy="55"/>
+        <cell rect="1022,1938,80,90" name="weaponBuff/daggerFireBuffOH" dx="86" dy="31"/>		
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
+        <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
+        <cell rect="572,1726,80,90" name="shield/shieldHoly" dx="66" dy="60"/>
+        <cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
         <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="34"/>
         <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
         <cell rect="1022,1776,80,45" name="weapon/LactoblasterMilker" dx="59" dy="62"/>
@@ -1572,6 +1583,24 @@
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff/rapierFireBuff"/>
+						</if>
+					</if>
+					
+					<!-- Dagger -->
+					<if test="PlayerHasDagger">
+						<if test="PlayerHasDaggerHoly or PlayerHasDaggerUnholy">
+							<if test="PlayerHasDaggerHoly">
+								<show part="weapon/daggerHoly"/>
+							</if>
+							<if test="PlayerHasDaggerUnholy">
+								<show part="weapon/daggerUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/daggerGeneric"/>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/daggerFireBuff"/>
 						</if>
 					</if>
 				</if>
