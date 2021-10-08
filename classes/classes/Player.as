@@ -2369,6 +2369,7 @@ use namespace CoC;
 					wrathFromBeenPunchingBag(damage);
 					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
+					damage = Math.round(damage);
 					HP -= damage;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
