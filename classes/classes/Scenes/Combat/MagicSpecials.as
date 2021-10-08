@@ -5077,7 +5077,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownChaosBeams,11,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownChaosBeams,12,0,0,0);
 		fatigue((player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) * 10), USEFATG_MAGIC_NOBM);
-		outputText("You shoot a salvo of chaotic eye beams at your foe. ");
+		outputText("You shoot a salvo of chaotic eye beams at your foe.\n");
 		ChaosBeamsRulette();
 		ChaosBeamsRulette();
 		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 4) {
@@ -5172,6 +5172,7 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 				break;
 		}
+		outputText("\n");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
