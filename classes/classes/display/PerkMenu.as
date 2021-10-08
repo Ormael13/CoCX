@@ -968,26 +968,26 @@ public class PerkMenu extends BaseContent {
 		menu();
 		var menuItems:Array = [];
 		//This was originally hard coded buttons. Which it can still be, I suppose.
-		menuItems.push("Heart", mutationsDBHeart);
-		menuItems.push("Muscle", mutationsDBMuscle);
-		menuItems.push("Mouth", mutationsDBMouth);
-		menuItems.push("Adrenal Glands",mutationsDBAdrenals);
-		menuItems.push("Bloodstream",mutationsDBBloodstream);
-		menuItems.push("Fat and Tissue", mutationsDBFaTissue);
-		menuItems.push("Lungs",mutationsDBLungs);
-		menuItems.push("Metabolism", mutationsDBMetabolism);
-		menuItems.push("Ovaries", mutationsDBOvaries);
-		menuItems.push("Testicles", mutationsDBTesticles);
-		menuItems.push("Eyes", mutationsDBEyes);
-		menuItems.push("Nerv/Sys", mutationsDBPNervSys);
+		menuItems.push("Heart", mutationsDBHeart, "Heart Mutations");
+		menuItems.push("Muscle", mutationsDBMuscle, "Muscle Mutations");
+		menuItems.push("Mouth", mutationsDBMouth, "Mouth Mutations");
+		menuItems.push("Adrenal Glands",mutationsDBAdrenals, "Adrenal Mutations");
+		menuItems.push("Bloodstream",mutationsDBBloodstream, "Bloodstream Mutations");
+		menuItems.push("Fat and Tissue", mutationsDBFaTissue, "FaT Mutations");
+		menuItems.push("Lungs",mutationsDBLungs, "Lungs Mutations");
+		menuItems.push("Metabolism", mutationsDBMetabolism, "Metabolism Mutations");
+		menuItems.push("Ovaries", mutationsDBOvaries, "Ovaries Mutations");
+		menuItems.push("Testicles", mutationsDBTesticles, "Testicle Mutations");
+		menuItems.push("Eyes", mutationsDBEyes, "Eyes Mutations");
+		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "PNerv-Sys Mutations");
 		// Due to not being able to return which page I am at in submenu,
 		// I cannot keep the menu to be at a specific page beyond this.
 		// Thus, hardcoded into the function.
-		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow);
-		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands);
+		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
+		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands, "Thyroid Mutations");
 		//menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
-		menuItems.push("Dragons", mutationsDBDragon);
-		menuItems.push("Kitsunes", mutationsDBKitsune);
+		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
+		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
 		menuGen(menuItems, page, displayPerks, false);
 	}
 
