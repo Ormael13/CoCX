@@ -125,7 +125,7 @@ public class MinotaurBlood extends Consumable {
 		if (!flags[kFLAGS.HYPER_HAPPY])
 		{
 			//Kills vagina size (and eventually the whole vagina)
-			if (player.vaginas.length > 0) {
+			if (player.vaginas.length > 0 && changes < changeLimit) {
 				if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
 					//tighten that bitch up!
 					outputText("\n\nYour " + Appearance.vaginaDescript(player,0) + " clenches up painfully as it tightens up, becoming smaller and tighter.");

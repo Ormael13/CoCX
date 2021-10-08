@@ -365,7 +365,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 			outputText("\n\nThe demons voice comes back as a dry, irritated rumble. \"<i>That and more, mortal. Would it please you to shape my cock for your pleasure?</i>\"");
 
-			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				outputText("\n\nGiggling, you answer, \"<i>Like totally! Let's give you a cock makeover!</i>\"");
 			}
 			else {
