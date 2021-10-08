@@ -1064,21 +1064,21 @@ private function InternalMutationsGemsOrMutagen():void {
 private function InternalMutations0(page:int = 0):void {
 	menu();
 	var menuItems:Array = [];
-	menuItems.push("Heart", InternalMutationsHeart);
-	menuItems.push("Muscle", InternalMutationsMuscle);
-	menuItems.push("Mouth", InternalMutationsMouth);
-	menuItems.push("Adrenal Glands",InternalMutationsAdrenals);
-	menuItems.push("Bloodstream",InternalMutationsBloodstream);
-	menuItems.push("Fat and Tissue", InternalMutationsFaTissue);
-	menuItems.push("Lungs",InternalMutationsLungs);
-	menuItems.push("Metabolism", InternalMutationsMetabolism);
-	menuItems.push("Ovaries", InternalMutationsOvaries);
-	menuItems.push("Testicles", InternalMutationsTesticles);
-	menuItems.push("Eyes", InternalMutationsEyes);
-	menuItems.push("Nerv/Sys", InternalMutationsPNervSys);
+	menuItems.push("Heart", InternalMutationsHeart, "Heart Mutations");
+	menuItems.push("Muscle", InternalMutationsMuscle, "Muscle Mutations");
+	menuItems.push("Mouth", InternalMutationsMouth, "Mouth Mutations");
+	menuItems.push("Adrenal Glands",InternalMutationsAdrenals, "Adrenals Mutations");
+	menuItems.push("Bloodstream",InternalMutationsBloodstream, "Bloodstream Mutations");
+	menuItems.push("Fat and Tissue", InternalMutationsFaTissue, "FaT Mutations");
+	menuItems.push("Lungs",InternalMutationsLungs, "Lungs Mutations");
+	menuItems.push("Metabolism", InternalMutationsMetabolism, "Metabolism Mutations");
+	menuItems.push("Ovaries", InternalMutationsOvaries, "Ovaries Mutations");
+	menuItems.push("Testicles", InternalMutationsTesticles, "Testicles Mutations");
+	menuItems.push("Eyes", InternalMutationsEyes, "Eyes Mutations");
+	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "PNerv-Sys Mutations");
 	//Next Page
-	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
-	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
+	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow, "Bone Mutations");
+	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
 	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
 	menuGen(menuItems, page, meetEvangeline, false);
 
