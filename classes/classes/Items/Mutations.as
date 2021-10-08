@@ -6909,12 +6909,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Partial scaled skin
-        if (player.hasPlainSkinOnly() && rand(3) == 0) {
+        if (changes < changeLimit && player.hasPlainSkinOnly() && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
-        if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
+        if (changes < changeLimit && !player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
