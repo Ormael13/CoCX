@@ -165,6 +165,7 @@ public class Goblin extends Monster
 			this.gems = rand(5) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
+					add(consumables.PONAILS,2).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

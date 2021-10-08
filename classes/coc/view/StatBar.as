@@ -125,7 +125,7 @@ public class StatBar extends Block {
 			height           : 30,
 			defaultTextFormat: {
 				font : 'Georgia',
-				size : 22,
+				size : 20,
 				align: 'right'
 			}
 		});

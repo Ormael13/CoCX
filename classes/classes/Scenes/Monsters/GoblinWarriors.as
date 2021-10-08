@@ -171,6 +171,7 @@ import classes.Scenes.Monsters.Goblin;
 			this.gems = rand(50) + 75;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
+					add(consumables.PONAILS,2).
 					add(jewelries.POWRRNG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,

@@ -75,7 +75,7 @@ import classes.internals.Utils;
 			_extra = (1 + rand(3));
 			if (rand(2) == 0) _roulette1 = rand(4);
 			if (rand(2) == 0) _roulette2 = rand(3);
-			if (rand(2) == 0) _roulette3 = rand(5);
+			if (rand(2) == 0) _roulette3 = rand(6);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
 				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
@@ -247,6 +247,7 @@ import classes.internals.Utils;
 			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
 			if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 			if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			if (_roulette3 == 5) addButton(3, "HBMech", buyItem5, 54).hint("HB Mech - Increase armor by 15, magic resistance by 15.");
 			//if (_roulette4 == 0) addButtonDisabled(6, "???", "Dud. Shame, shame.");
 			//if (_roulette5 == 0) addButtonDisabled(7, "???", "Dud. Shame, shame.");
 			//if (_roulette6 == 0) addButtonDisabled(8, "???", "Dud. Shame, shame.");
@@ -286,6 +287,8 @@ import classes.internals.Utils;
 			if (item == 51) catChimeraBuy5(armors.HBARMOR);
 			if (item == 52) catChimeraBuy5(undergarments.HBSHIRT);
 			if (item == 53) catChimeraBuy5(undergarments.HBSHORT);
+			if (item == 54) catChimeraBuy5(vehicles.HB_MECH);
+			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 		}

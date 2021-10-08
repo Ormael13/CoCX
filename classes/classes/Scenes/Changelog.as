@@ -135,8 +135,8 @@ package classes.Scenes
 			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
 			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
 			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penatly of 50% less exp gains. Thank you all for using that free trial ^^\n");
-			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible.\n");
-			outputText("-Kekvit Irae small changes & fixes.\n");
+			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc.\n");
+			outputText("-Kekvit Irae changes & fixes.\n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -163,13 +163,13 @@ package classes.Scenes
 			outputText("-Phoenix / Winter Wolf breath attacks have now scaling based on stats (for both str/tou as they bot more of phys than mag boosts in stats).\n");
 			outputText("-Flurry of Blows perk will make attacks been split into 2 seperate instead of one 2x stronger. Also would work with phys soulskills that can be used with first or any other weapon (but only when pc got gauntlets or not holding any weapon) so Draco Sweep and Triple Thrust+it 6/9 hit variants/\n");
 			outputText("-New material: Iron ore. Costs 40 gems. Minable in Quarry.\n");
-			outputText("-History/Past Life: Fighter bonus to accuracy increased by 10% up to 20%. Base melee and range attack accuracy been made even at 60%. Each level above 0 would increase acc by 5% up to 30% at lvl 6+.\n");
-			outputText("-Ring of Ambidexty acc bonus increased to 20% from 15%. Both this and Ring of deadeye aim price been lowered form 800 to 600 gems.\n");
-			outputText("-(WiP) Cost of bow shooting been changed to 5 fatigue that would rise up by 100% each 12 lvl until reaching 25 at lvl 48+.\n");
-			outputText("-Goglins assasins and warriors had their HP stat bit adjusted (to not make assassins more tanky than warriors *sweats*). Also Priscilla would no longer appear in randomn gobo pick pool when she already chilling in Soul Sense menu.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-History/Past Life: Fighter bonus to accuracy increased by 10% up to 20%. Base melee and range attack accuracy been made even at 64%. Each level above 0 would increase acc by 6% up to 30% at lvl 6+.\n");
+			outputText("-Ring of Ambidexty acc bonus increased to 20% from 15%. Both this and Ring of deadeye aim price been lowered from 800 to 600 gems.\n");
+			outputText("-Fatigue cost of bow shooting, throwing (but not telekinesis throw) been removed. Scaling on range attacks been increased.\n");
+			outputText("-Goblins assassins and warriors had their HP stat bit adjusted (to not make assassins more tanky than warriors *sweats*). Also Priscilla would no longer appear in randomn gobo pick pool when she already chilling in Soul Sense menu.\n");
+			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet tpye weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new moption in their main menu).\n");
+			outputText("-Player PC giving birth to goblin daughter(s) would increase cup / hips / ass size by 1.\n");
+			outputText("-Beautiful item discovery scene at the lake been reduced to proc once per day (some PC's due to specific progress could end up see like only that scene and no others for most of the exploration attempts at the Lake).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -182,7 +182,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
-			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold\n");/*ostatni punkt changelogu
+			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -3581,4 +3581,4 @@ package classes.Scenes
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 	}
-}
+}

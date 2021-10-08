@@ -23,7 +23,7 @@ package classes.Items
 		public const ASCENSU:Ascensus = new Ascensus();
 		public const B_STAFF:Weapon = new BeautifulStaff();
 		public const B_SWORD:Weapon = new BeautifulSword();
-		public const BFGAUNT:Weapon = new Weapon("BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600, "Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.");
+		public const BFGAUNT:Weapon = new Weapon("BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600, "Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.\nIncreases unarmed damage by 4x.\nIncreases stun chance by 40.");
 		public const BFTHSWORD:Weapon = new BFTHSword();
 		public const BFSWORD:Weapon = new BFSword();
 		public const BFWHIP :Weapon = new BFWhip();

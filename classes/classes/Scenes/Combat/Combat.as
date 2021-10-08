@@ -2628,10 +2628,10 @@ public class Combat extends BaseContent {
     }
 
     public function meleeAccuracy():Number {
-        var accmod:Number = 120;
+        var accmod:Number = 128;
 		if (player.level > 0) {
-			if (player.level > 5) accmod += 60;
-			else accmod += 10 * player.level;
+			if (player.level > 5) accmod += 72;
+			else accmod += 12 * player.level;
 		}
         if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) accmod += 40;
         if (player.isFlying() && player.hasPerk(PerkLib.AerialCombat) && !player.haveWeaponForJouster() && !player.haveThrowableMeleeWeapon()) {
@@ -2704,10 +2704,10 @@ public class Combat extends BaseContent {
 	}
 
 	public function baseRangeAccuracy():Number {
-		var baccmod:Number = 120;
+		var baccmod:Number = 128;
 		if (player.level > 0) {
-			if (player.level > 5) baccmod += 60;
-			else baccmod += 10 * player.level;
+			if (player.level > 5) baccmod += 72;
+			else baccmod += 12 * player.level;
 		}
         if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) baccmod += 40;
         if (player.hasPerk(PerkLib.Accuracy1)) {
@@ -2758,7 +2758,7 @@ public class Combat extends BaseContent {
 
     public function throwingAccuracy():Number {
         var taccmod:Number = 0;
-		taccmod += arrowsAccuracy();
+		taccmod += baseRangeAccuracy();
 		taccmod += Math.round((masteryThrowingLevel() - 1) / 2);
 		if (player.miscjewelryName == "Atlatl" || player.miscjewelryName2 == "Atlatl") taccmod += 50;
         return taccmod;
@@ -2766,7 +2766,7 @@ public class Combat extends BaseContent {
 
     public function firearmsAccuracy():Number {
         var faccmod:Number = 0;
-        faccmod += arrowsAccuracy();
+        faccmod += baseRangeAccuracy();
         if (player.hasKeyItem("Gun Scope") >= 0) faccmod += 40;
         if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) faccmod += 60;
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
@@ -2853,7 +2853,7 @@ public class Combat extends BaseContent {
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, 3);
             } else {
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, maxBowAttacks());
-            }
+            }/*
             var fireBowCost:Number = 0;
             fireBowCost += oneArrowTotalCost();
             //multiple arrows shoot costs
@@ -2869,7 +2869,7 @@ public class Combat extends BaseContent {
                 menu();
                 addButton(0, "Next", combatMenu, false);
                 return;
-            }
+            }*/
             if (player.weaponRangeName == "Avelynn") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
         }
         if (player.weaponRangePerk == "Throwing") {
@@ -2878,14 +2878,14 @@ public class Combat extends BaseContent {
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;/*
             var fc:Number = oneThrowTotalCost();
             if (player.fatigue + fc > player.maxFatigue()) {
                 outputText("You're too fatigued to throw the [weaponrange]!");
                 menu();
                 addButton(0, "Next", combatMenu, false);
                 return;
-            }
+            }*/
         }
         if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
             if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 5) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
@@ -3016,7 +3016,7 @@ public class Combat extends BaseContent {
         accRange += (arrowsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
         if (player.weaponRangeName == "Guided bow" || player.vehicles == vehicles.HB_MECH) accRange = 100;
-        fatigue(oneArrowTotalCost());
+        //fatigue(oneArrowTotalCost());
         var weaponRangePerk:String = player.weaponRangePerk;
         var ammoWord:String;
         switch (weaponRangePerk) {
@@ -3031,15 +3031,15 @@ public class Combat extends BaseContent {
             var damage:Number = 0;
             if (weaponRangePerk == "Bow") {
 				if (player.vehicles == vehicles.HB_MECH) damage += player.weaponRangeAttack * 10;
-                damage += player.spe;
-                damage += scalingBonusSpeed() * 0.2;
-                if (damage < 10) damage = 10;
+                damage += player.spe * 1.5;
+                damage += scalingBonusSpeed() * 0.3;
+                if (damage < 15) damage = 15;
             }
             if (weaponRangePerk == "Crossbow") {
-				damage += player.weaponRangeAttack * 10;
+				damage += player.weaponRangeAttack * 15;
 				if (player.vehicles == vehicles.HB_MECH) {
-					damage += player.spe;
-					damage += scalingBonusSpeed() * 0.2;
+					damage += player.spe * 1.5;
+					damage += scalingBonusSpeed() * 0.3;
 				}
 			}
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
@@ -3072,7 +3072,6 @@ public class Combat extends BaseContent {
                     outputText("The " + ammoWord + " bounces harmlessly off [monster a] [monster name].\n\n");
                 }
                 flags[kFLAGS.ARROWS_SHOT]++;
-                bowPerkUnlock();
             }
             if (monster is EncapsulationPod) {
                 outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
@@ -3185,7 +3184,6 @@ public class Combat extends BaseContent {
 				WeaponRangeStatusProcs();
                 checkAchievementDamage(damage);
                 flags[kFLAGS.ARROWS_SHOT]++;
-                bowPerkUnlock();
                 doNext(endHpVictory);
                 return;
             } else {
@@ -3347,7 +3345,6 @@ public class Combat extends BaseContent {
                     outputText("\n\n");
                     checkAchievementDamage(damage);
                     flags[kFLAGS.ARROWS_SHOT]++;
-                    bowPerkUnlock();
                     doNext(endLustVictory);
                 }
                 outputText("\n");
@@ -3358,7 +3355,6 @@ public class Combat extends BaseContent {
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
             flags[kFLAGS.ARROWS_SHOT]++;
 			WrathWeaponsProc();
-            bowPerkUnlock();
         } else {
             if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
             else {
@@ -3391,19 +3387,19 @@ public class Combat extends BaseContent {
 
     public function bowPerkUnlock():void {
         if (flags[kFLAGS.ARROWS_SHOT] >= 10 && !player.hasPerk(PerkLib.BowShooting)) {
-            outputText("<b>You've become more comfortable with using bow, unlocking the Bow Shooting perk and reducing fatigue cost of shooting arrows by 20%!</b>\n\n");
+            outputText("<b>You've become more comfortable with using bow, unlocking the Bow Shooting perk and reducing fatigue cost of bow related specials by 20%!</b>\n\n");
             player.createPerk(PerkLib.BowShooting, 20, 0, 0, 0);
         }
         if (flags[kFLAGS.ARROWS_SHOT] >= 30 && player.perkv1(PerkLib.BowShooting) < 40) {
-            outputText("<b>You've become more comfortable with using bow, further reducing cost of shooting arrows by an additional 20%!</b>\n\n");
+            outputText("<b>You've become more comfortable with using bow, further reducing cost of bow related specials by an additional 20%!</b>\n\n");
             player.setPerkValue(PerkLib.BowShooting, 1, 40);
         }
         if (flags[kFLAGS.ARROWS_SHOT] >= 90 && player.perkv1(PerkLib.BowShooting) < 60) {
-            outputText("<b>You've become more comfortable with using bow, further reducing cost of shooting arrows by an additional 20%!</b>\n\n");
+            outputText("<b>You've become more comfortable with using bow, further reducing cost of bow related specials by an additional 20%!</b>\n\n");
             player.setPerkValue(PerkLib.BowShooting, 1, 60);
         }
         if (flags[kFLAGS.ARROWS_SHOT] >= 270 && player.perkv1(PerkLib.BowShooting) < 80) {
-            outputText("<b>You've become more comfortable with using bow, further reducing cost of shooting arrows by an additional 20%!</b>\n\n");
+            outputText("<b>You've become more comfortable with using bow, further reducing cost of bow related specials by an additional 20%!</b>\n\n");
             player.setPerkValue(PerkLib.BowShooting, 1, 80);
         }
     }
@@ -3555,7 +3551,7 @@ public class Combat extends BaseContent {
         }
         else {
             if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
-            fatigue(fc);
+            //fatigue(fc);
         }
         if (rand(100) < accRange) {
             var damage:Number = 0;
@@ -5147,7 +5143,7 @@ public class Combat extends BaseContent {
                 if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
                 damage += damage1;
             }
-            if ((player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
+            if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
                 var damage2:Number = damage;
                 if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
                 if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);

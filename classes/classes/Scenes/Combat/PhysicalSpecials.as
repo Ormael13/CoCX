@@ -5025,19 +5025,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function ELFarcheryPinDown():void {
 		clearOutput()
-
 		var accRange:Number = 0;
 		accRange += (combat.arrowsAccuracy() / 2);
 		if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
 		if (player.weaponRangeName == "Guided bow" || player.vehicles == vehicles.HB_MECH) accRange = 100;
 		fatigue(combat.oneArrowTotalCost());
 		var weaponRangePerk:String = player.weaponRangePerk;
-		var ammoWord:String;
-		switch (weaponRangePerk) {
-			case "Bow":
-				ammoWord = "arrow";
-				break;
-		}
+		var ammoWord:String = "arrow";
 		if (rand(100) < accRange) {
 			var damage:Number = 0;
 			if (weaponRangePerk == "Bow") {

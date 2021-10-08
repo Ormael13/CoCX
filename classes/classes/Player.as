@@ -12505,7 +12505,7 @@ use namespace CoC;
 				}
 			}
 			if (trollScore() >= 5) {
-				if (mantisScore() >= 10) {//150
+				if (trollScore() >= 10) {//150
 					maxStrCap2 += 50;
 					maxSpeCap2 += 70;
 					maxIntCap2 += 50;
