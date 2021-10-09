@@ -3581,4 +3581,4 @@ package classes.Scenes
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 	}
-}
+}
