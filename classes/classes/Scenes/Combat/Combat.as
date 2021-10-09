@@ -10981,9 +10981,10 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalTypes.push("Lightning Vulnerability");
             }
             outputText("\n");
-            outputText("Enemy information - General: " + generalTypes.join(", ") + "\n");
-            outputText("Enemy information - Elemental: " + elementalTypes.join(", ") + "\n");
-            //mainView.monsterStatsView.setMonsterTypes(generalTypes, elementalTypes);
+            if (player.hasPerk(PerkLib.EyesOfTheHunterNovice)){
+                outputText("Enemy information - General: " + generalTypes.join(", ") + "\n");
+                outputText("Enemy information - Elemental: " + elementalTypes.join(", ") + "\n");
+            }
         }
         if (debug) {
             outputText("\n----------------------------\n");
