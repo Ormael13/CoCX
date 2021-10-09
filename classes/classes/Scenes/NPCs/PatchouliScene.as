@@ -11,6 +11,7 @@ import classes.Scenes.Areas.Bog.LizanRogue;
 import classes.Scenes.Areas.Forest.AkbalScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.HighMountains.Phoenix;
+import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
 import classes.Scenes.Camp.Jabberwocky;
@@ -278,7 +279,7 @@ public class PatchouliScene extends NPCAwareContent {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 			player.explored++;
 			outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
-			startCombat(new Phoenix());
+			startCombat(new PhoenixPlatoon());
 		}
 		else {
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] != 1) {
