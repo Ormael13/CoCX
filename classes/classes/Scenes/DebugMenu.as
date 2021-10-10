@@ -409,6 +409,7 @@ public class DebugMenu extends BaseContent
 			consumableArray.push(consumables.L_PRPEG);
 			consumableArray.push(consumables.WHITEEG);
 			consumableArray.push(consumables.L_WHTEG);
+			consumableArray.push(consumables.AMBROSA);
 
 			//------------
 			// Dyes
