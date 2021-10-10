@@ -405,7 +405,7 @@ private function goblinsBirthScene2():void {
         player.breastRows[0].nipplesPerBreast = 1;
         player.breastRows[0].breastRating = 1;
 	}
-	else player.growTits(1, 1, false, 3);
+	else player.breastRows[0].breastRating += 1;
 	player.hips.type += 1;
 	player.butt.type += 1;
 	player.orgasm();

@@ -336,6 +336,8 @@ public function benoitsBuyMenu():void {
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).value));
 	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),

@@ -709,9 +709,9 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
         player.removeStatusEffect(StatusEffects.KnockedBack);
-        if (player.weaponRange == weaponsrange.LBLASTR){
-            var milkAmmo:Number = player.lactationQ()/100
-            if (milkAmmo > 20) milkAmmo = 20;
+        if (player.weaponRange == weaponsrange.LBLASTR) {
+            var milkAmmo:Number = Math.round(player.lactationQ() / 100);
+			if (milkAmmo > 20) milkAmmo = 20;
             player.ammo = milkAmmo;
         }
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
@@ -3784,13 +3784,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
             if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
             //other effects
-            if (player.weaponRange == weaponsrange.M1CERBE) {
-                var M1:Number = 6;
-                if (player.hasPerk(PerkLib.AmateurGunslinger)) damage += 6;
-                if (player.hasPerk(PerkLib.ExpertGunslinger)) damage += 6;
-                if (player.hasPerk(PerkLib.MasterGunslinger)) damage += 6;
-                damage *= M1;
-            }
+            if (player.weaponRange == weaponsrange.M1CERBE) damage *= 6;
             if (player.weaponRange == weaponsrange.HARPGUN && player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) damage *= 1.2;
             if (player.armor == armors.GTECHC_ && !player.isInGoblinMech()) damage *= 1.2;
             if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
@@ -3982,10 +3976,20 @@ public class Combat extends BaseContent {
 						if (crit) dualWieldFirearmsXP(1);
 						dualWieldFirearmsXP(1);
 					}
+					if (player.weaponRange == weaponsrange.M1CERBE) {
+						if (player.hasPerk(PerkLib.AmateurGunslinger)) doDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.ExpertGunslinger)) doDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.MasterGunslinger)) doDamage(damage, true, true);
+					}
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
                         doDamage(damage, true, true);
+						if (player.weaponRange == weaponsrange.M1CERBE) {
+							if (player.hasPerk(PerkLib.AmateurGunslinger)) doDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.ExpertGunslinger)) doDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.MasterGunslinger)) doDamage(damage, true, true);
+						}
                     }
                     if (crit) {
 						outputText(" <b>*Critical Hit!*</b>");
@@ -4076,7 +4080,7 @@ public class Combat extends BaseContent {
                 reloadWeapon2();
             }
         } else {
-            if (player.ammo == 0) {
+            if (player.ammo <= 0) {
                 if (player.weaponRange == weaponsrange.LBLASTR) outputText("<b>Your milk tank is empty.</b>\n\n");
                 else outputText("<b>Your firearm clip is empty.</b>\n\n");
                 reloadWeapon2();

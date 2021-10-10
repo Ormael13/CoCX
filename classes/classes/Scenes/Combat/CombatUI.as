@@ -170,7 +170,7 @@ public class CombatUI extends BaseCombatContent {
 			case "Dual Firearms":
 				if (player.ammo <= 0)
 					btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
-				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>");
 				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			default:
@@ -181,7 +181,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
 				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
-					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>");
 					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
 				}
 				else btnRanged.disable("You could use your ranged weapon while piloting the goblin mech if you have firearms.");

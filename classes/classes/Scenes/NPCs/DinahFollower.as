@@ -48,6 +48,7 @@ import classes.internals.Utils;
 				flags[kFLAGS.DINAH_LVL_UP] = 0.25;
 				flags[kFLAGS.DINAH_CUP_SIZE] = 1;
 				flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = 1;
+				flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			}
 			startCombat(new Dinah());
 		}
@@ -100,8 +101,7 @@ import classes.internals.Utils;
 				addButtonDisabled(3, "Talk", "NYI");
 				addButtonDisabled(4, "Sex", "NYI");
 				addButtonDisabled(5, "Present", "NYI");//5 i 6 skopiować z MarbleScene.as i dostosować
-				addButtonDisabled(6, "Give Item", "NYI");
-				//addButton(6, "Give Item", canGiveItem() ? giveItem : null);
+				addButton(6, "Give Item", giveDinahItem);
 				addButton(14, "Back", camp.campFollowers);
 			}
 			else {
@@ -113,7 +113,7 @@ import classes.internals.Utils;
 		public function DinahAppearance():void {
 			clearOutput();
 			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.");
-			outputText("");//She has " + amilyHips() + " and a " + amilyButt() + ". She has a pair of " + amilyTits() + " on her chest. They have " + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + "s.	" + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "
+			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". ");//She has a pair of " + dinahTits() + " on her chest. They have " + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + "s.	" + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
 		}
@@ -376,6 +376,267 @@ import classes.internals.Utils;
 			player.gems -= itype.value * _extra;
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu3);
+		}
+		
+		public function giveDinahItem():void {
+			clearOutput();
+			outputText("What item do you want to give Dinah?");
+			menu();
+			var haveGift:Boolean = false;
+			var button:int = 0;
+			if (player.hasItem(consumables.BROWNEG) || player.hasItem(consumables.L_BRNEG)) {
+				addButton(button++, "Brown Egg", giveDinahABrownEgg);
+				haveGift = true;
+			}
+			if (player.hasItem(consumables.PURPLEG) || player.hasItem(consumables.L_PRPEG)) {
+				addButton(button++, "Purple Egg", giveDinahAPurpleEgg);
+				haveGift = true;
+			}
+			if (player.hasItem(consumables.REDUCTO)) {
+				addButton(button++, "Reducto", giveDinahReducto);
+				haveGift = true;
+			}
+			addButton(14, "Back", DinahMainMenu);
+		}
+		//[Brown Egg]
+		private function giveDinahABrownEgg():void {
+			clearOutput();
+			//dinha sprite
+			var maxSize:Number = 35;
+			outputText("You hold out a brown egg, telling her that it will make her butt grow.\n\n");
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < maxSize) {
+				outputText("\"<i>So, you want me to have a little more junk in the trunk, huh?</i>\" She giggles. \"<i>Well, I guess a little padding down there wouldn't hurt...</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, straining her pants. She pats it a few times, then shakes her head. \"<i>I'm going to have to go and let these pants out a little now.</i>\" She apologizes, and then walks away.\n\n");
+				dynStats("lus", 10);
+				if (player.hasItem(consumables.BROWNEG)) {
+					player.consumeItem(consumables.BROWNEG);
+					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 1 + rand(2);
+				}
+				else {
+					player.consumeItem(consumables.L_BRNEG);
+					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 2+rand(3);
+				}
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > maxSize) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = maxSize;
+			}
+			else outputText("She looks at the egg, and then shakes her head. \"<i>Sorry, but I've got more than enough junk in my trunk for my taste.</i>\" Sensing she won't back down on this, you put the egg back. \"<i>So, is there anything else you wanted?</i>\" She asks.");
+			doNext(giveDinahItem);
+		}
+		private function giveDinahAPurpleEgg():void {
+			clearOutput();
+			//dinha sprite
+			var maxSize:Number = 20; //Realistically, the maximum supported hip size in the game is 20.
+			outputText("You hold out a purple egg, telling her that it will make her hips grow.\n\n");
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < maxSize) {
+				outputText("She looks at it thoughtfully. \"<i>Wider hips...? Well, if you really want, I guess I can try it.</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, she almost loses her balance as her hips suddenly jut wider, the growth happening much faster than she expected. \"<i>I'm going to have to get used to walking like this, now.</i>\" She mutters, and then she awkwardly walks away.\n\n");
+				dynStats("lus", 10);
+				if (player.hasItem(consumables.PURPLEG)) {
+					player.consumeItem(consumables.PURPLEG);
+					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 1 + rand(2);
+				}
+				else {
+					player.consumeItem(consumables.L_PRPEG);
+					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 2+rand(3);
+				}
+				if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > maxSize) flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = maxSize;
+			}
+			else outputText("She looks at you with one eyebrow quirked. \"<i>Any bigger, and I won't be able to run anymore. No thank you; I feel like enough woman already, and they aren't messing with my speed.</i>\" She turns and saunters off, as quickly as she can, but with a deliberate swaying of her hips, as if to prove both her points.");
+			doNext(giveDinahItem);
+		}
+		private function giveDinahReducto():void {
+			clearOutput();
+			outputText("She wrinkles her nose at the awful smell of the paste you are showing her, even as you explain it's able to shrink down oversized bodyparts, and you can use this to reduce any parts that she thinks are oversized.");
+			menu();
+			//if (flags[kFLAGS.DINAH_CUP_SIZE] > 1) addButton(0, "Breasts", dinahReducto, 0);
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 6) addButton(2, "Hips", dinahReducto, 1);
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 6) addButton(3, "Butt", dinahReducto, 2);
+			addButton(14, "Nevermind", giveDinahItem);
+		}
+		private function dinahReducto(part:int):void {
+			player.consumeItem(consumables.REDUCTO);
+			var chosenPart:String = "";
+			if (part == 0) { //Breasts
+				chosenPart = "breasts";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) flags[kFLAGS.DINAH_CUP_SIZE]--; //Large breasts shrink more!
+				flags[kFLAGS.DINAH_CUP_SIZE]--;
+				if (flags[kFLAGS.DINAH_CUP_SIZE] < 1) flags[kFLAGS.DINAH_CUP_SIZE] = 1;
+			}
+			else if (part == 1) { //Hips
+				chosenPart = "hips";
+				if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 12) flags[kFLAGS.DINAH_HIPS_ASS_SIZE]--; //Large hips shrink more!
+				flags[kFLAGS.DINAH_HIPS_ASS_SIZE]--;
+				if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 6) flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = 6;
+			}
+			else if (part == 2) { //Butt
+				chosenPart = "butt";
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 10) flags[kFLAGS.DINAH_ASS_HIPS_SIZE]--; //Large butt shrinks more!
+				flags[kFLAGS.DINAH_ASS_HIPS_SIZE]--;
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 6) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 6;
+			}
+			outputText("Grimacing at the smell - it must be awful, for her sensitive nose - she starts smearing it over the " + chosenPart + ", and you step forward to help her. As the last of it wicks away, the part begins to shrink before your eyes. \"<i>Hmm. Not bad, I guess. So, was there something else you wanted?</i>\" She asks.");
+			doNext(giveDinahItem);
+		}
+		private function dinahTits():String {
+			var temp:int = Math.random()*3;
+			var descript:String = "";
+			//50% of the time size-descript them
+			if(rand(2) == 0) {
+				if(flags[kFLAGS.DINAH_CUP_SIZE] <= 2) {
+					temp = rand(3);
+					if(temp == 0) descript += "small ";
+					if(temp == 1) descript += "little ";
+					if(temp == 2) descript += "perky ";
+				}
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 2 && flags[kFLAGS.DINAH_CUP_SIZE] <= 4) descript += "ample ";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 4 && flags[kFLAGS.DINAH_CUP_SIZE] <= 6) {
+					temp = rand(4);
+					if(temp == 0) descript += "big ";
+					if(temp == 1) descript += "large ";
+					if(temp == 2) descript += "pillowy ";
+					if(temp == 3) descript += "jiggly ";
+				}
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6 && flags[kFLAGS.DINAH_CUP_SIZE] < 13) {
+					temp = rand(4);
+					if(temp == 0) descript += "basketball-sized ";
+					if(temp == 1) descript += "whorish ";
+					if(temp == 2) descript += "pornstar-like ";
+					if(temp == 3) descript += "jiggling ";
+				}
+				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 13) descript += "beach-ball sized ";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 18) {
+					temp = rand(2);
+					if(temp == 1) descript += "mountainous ";
+					else descript += "immense ";
+				}
+			}
+			//Nouns!
+			temp = rand(3);
+			if (temp == 0) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) descript += "love-pillows";
+				else descript += "boobs";
+			}
+			if (temp == 1) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) descript += "tits";
+				else descript += "breasts";
+			}
+			if (temp == 2) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) descript += "rack";
+				descript += "breasts";
+			}
+			return descript;
+		}
+		private function dinahHips():String {
+			var desc:String = "";
+			var rando:Number = 0;
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] <= 1) {
+				if (rand(2) == 0) desc = "boyish ";
+				else desc = "tiny ";
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 6) desc = "waspish ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 1 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 4) {
+				rando = rand(3);
+				if (rando == 0) desc = "slender ";
+				if (rando == 1) desc = "narrow ";
+				if (rando == 2) desc = "thin ";
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 6) desc = "waspish ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 4 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 6) {
+				rando = rand(3);
+				if (rando == 0) desc = "average ";
+				if (rando == 1) desc = "normal ";
+				if (rando == 2) desc = "plain ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 6 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 10) {
+				rando = rand(3);
+				if (rando == 0) desc = "ample ";
+				if (rando == 1) desc = "noticeable ";
+				if (rando == 2) desc = "girly ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 10 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 15) {
+				rando = rand(3);
+				if (rando == 0) desc = "flared ";
+				if (rando == 1) desc = "curvy ";
+				if (rando == 2) desc = "wide ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 15 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "fertile ";
+				if (rando == 1) desc = "child-bearing ";
+				if (rando == 2) desc = "voluptuous ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "broodmother-sized ";
+				if (rando == 1) desc = "cow-like ";
+				if (rando == 2) desc = "inhumanly-wide ";
+			}
+			rando = rand(2);
+			if (rando == 0) {
+				if (rand(2) == 0 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 15) desc += "flanks";
+				else desc += "hips";
+			}
+			if (rando == 1) {
+				if (rand(2) == 0 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 15) desc += "flanks";
+				else desc += "thighs";
+			}
+			return desc;
+		}
+		private function dinahButt():String {
+			var desc:String = "";
+			var rando:Number = 0;
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] <= 1) {
+				if (rand(2) == 0) desc = "pixie-like ";
+				else desc = "very small ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 1 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 4) {
+				rando = rand(3);
+				if (rando == 0) desc = "tight ";
+				if (rando == 1) desc = "firm ";
+				if (rando == 2) desc = "compact ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 4 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 6) {
+				rando = rand(2);
+				if (rando == 0) desc = "fair ";
+				if (rando == 1) desc = "nice ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 6 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 8) {
+				rando = rand(3);
+				if (rando == 0) return "handful of ass";
+				if (rando == 1) desc = "full ";
+				if (rando == 2) desc = "shapely ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 8 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 10) {
+				rando = rand(3);
+				if (rando == 0) desc = "squeezable ";
+				if (rando == 1) desc = "large ";
+				if (rando == 2) desc = "substantial ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 10 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 13) {
+				rando = rand(3);
+				if (rando == 0) desc = "jiggling ";
+				if (rando == 1) desc = "spacious ";
+				if (rando == 2) desc = "heavy ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 13 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 16) {
+				rando = rand(3);
+				if (rando == 0) desc = "hand-devouring ";
+				if (rando == 1) return "generous amount of ass";
+				if (rando == 2) desc = "voluminous ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 16 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "huge ";
+				if (rando == 1) desc = "vast ";
+				if (rando == 2) return "jiggling expanse of ass";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "ginormous ";
+				if (rando == 1) desc = "colossal ";
+				if (rando == 2) desc = "tremendous ";
+			}
+			rando = rand(2);
+			if (rando == 0) desc += "butt";
+			if (rando == 1) desc += "ass";
+			return desc;
 		}
 	}
 }

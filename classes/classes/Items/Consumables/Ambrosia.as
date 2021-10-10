@@ -78,7 +78,7 @@ package classes.Items.Consumables
 
             //Intelligence Boost
 			if (changes < changeLimit && Utils.rand(2) == 0) {
-				player.MutagenBonus("int", 0.1 * (80 - player.inte));
+				player.MutagenBonus("int", 1);
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the fluid residue, feeling awfully smart for it.");
 				changes++;
 			}
