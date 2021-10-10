@@ -5648,4 +5648,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}
