@@ -1376,7 +1376,7 @@ public class Lumi extends BaseContent {
 	public function lumiWorkshopSATechGoggle():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 		player.destroyItems(useables.ENECORE, 5);
 		player.destroyItems(headjewelries.SCANGOG, 1);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new S.A Tech Goggle is ready.\n\n");

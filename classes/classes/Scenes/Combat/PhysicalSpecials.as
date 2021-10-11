@@ -161,6 +161,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You can't dig in open water!</b>\n\n");
 				}
 			}
+			//Drink
 			if (player.miscJewelry == miscjewelries.ONI_GOURD || player.miscJewelry2 == miscjewelries.ONI_GOURD){
 				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
@@ -587,13 +588,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.isInGoblinMech()) {
-			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
+			if (player.hasKeyItem("Dynapunch Glove") >= 0 && player.vehicles != vehicles.GS_MECH) {
 				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
 					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasKeyItem("Taser") >= 0) {
+			if (player.hasKeyItem("Taser") >= 0 && player.vehicles != vehicles.GS_MECH) {
 				if (player.hasKeyItem("Taser with an overcharged battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
@@ -2154,15 +2155,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 300 + rand(121);
+		damage += player.inte + player.wis + 300 + rand(121);
 		if (player.hasPerk(PerkLib.ChargedCore)) {
 			if (player.hasPerk(PerkLib.SuperChargedCore)) {
 				damage += 200 + rand(81);
-				damage *= 1.4;
+				dmgamp += 0.4;
 			}
 			else {
 				damage += 100 + rand(41);
-				damage *= 1.2;
+				dmgamp += 0.2;
 			}
 		}
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
@@ -2217,16 +2218,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 300 + rand(121);
+		damage += player.inte + player.wis + 300 + rand(121);
 		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= 3;
 		if (player.hasPerk(PerkLib.ChargedCore)) {
 			if (player.hasPerk(PerkLib.SuperChargedCore)) {
 				damage += 200 + rand(81);
-				damage *= 5;
+				dmgamp += 5;
 			}
 			else {
 				damage += 100 + rand(41);
-				damage *= 4;
+				dmgamp += 2.5;
 			}
 		}
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
@@ -2282,16 +2283,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 300 + rand(121);
+		damage += player.inte + player.wis + 300 + rand(121);
 		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= 5;
 		if (player.hasPerk(PerkLib.ChargedCore)) {
 			if (player.hasPerk(PerkLib.SuperChargedCore)) {
 				damage += 200 + rand(81);
-				damage *= 10;
+				dmgamp += 10;
 			}
 			else {
 				damage += 100 + rand(41);
-				damage *= 7.5;
+				dmgamp += 5;
 			}
 		}
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
@@ -2336,16 +2337,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 300 + rand(121);
+		damage += player.inte + player.wis + 300 + rand(121);
 		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= usedGolems;
 		if (player.hasPerk(PerkLib.ChargedCore)) {
 			if (player.hasPerk(PerkLib.SuperChargedCore)) {
 				damage += 200 + rand(81);
-				damage *= (usedGolems * 2);
+				dmgamp += (usedGolems * 0.2);
 			}
 			else {
 				damage += 100 + rand(41);
-				damage *= Math.round(usedGolems * 1.5);
+				dmgamp += Math.round(usedGolems * 0.15);
 			}
 		}
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;

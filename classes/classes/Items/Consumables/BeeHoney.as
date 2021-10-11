@@ -116,7 +116,7 @@ public class BeeHoney extends Consumable
 			//(removes tentacle hair status, restarts hair growth if not prevented by reptile status)
 			//Intelligence Boost
 			if (changes < changeLimit && Utils.rand(2) == 0) {
-				player.MutagenBonus("int", 0.1 * (80 - player.inte));
+				player.MutagenBonus("int", 1);
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.");
 				changes++;
 			}

@@ -170,10 +170,16 @@ package classes.Scenes
 			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet tpye weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new moption in their main menu).\n");
 			outputText("-Player PC giving birth to goblin daughter(s) would increase cup / hips / ass size by 1.\n");
 			outputText("-Beautiful item discovery scene at the lake been reduced to proc once per day (some PC's due to specific progress could end up see like only that scene and no others for most of the exploration attempts at the Lake).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Aurora, Etna and Neisa option to spar with them is disabled when PC earleir asked any of them to assist (meaning said npc is part of the PC team). That would avoid weirdness when Aurora fight as part of PC team and also as enemy for herself.\n");
+			outputText("-Can now give Dinah some itmes to change her bodyshape: Bron Egg (butt), Blue Egg (hips), Reducto.\n");
+			outputText("-Fixes by Daikael.\n");
+			outputText("-Three blocked by formation passages in Hidden Cave now have counter of how many more enemies (solo or groups) need to be beaten down to deactivate each formation.\n");
+			outputText("-Damage from exploring Glacial Rift have been changed to be ice damage so ice resistance would be more naturaly reducing amount of recieved damage. Base % damage is lowered to 5% of PC max HP. And fire affinity still would make PC take 2x more damage (before ice resistance reduction).\n");
+			outputText("-Tooltip for firearms button in combat menu now have ammo left counter.\n");
+			outputText("-Tease max lvl starts at 16 and would rise until lvl 24 reaching cap of lvl 40. Tease base chance to hit increased from 70% to 90% and it increase by 1% per tease level.\n");
+			outputText("-Temporal golems base damage will be scaling with int/wis by adding current value of both stats.\n");
+			outputText("-New consumable (by Daikael): Ambrosia. Obtained by giving Sand Mother Bee Honey and 25 gems. Effect: As Pure Honey item but without TF body effect.\n");
+			outputText("-Super Sensual perk would increase tease cap up to 70. Also each 1% above 100% chance to succesfully tease oponent will not give ~2% more lust dmg instead of ~1%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -182,7 +188,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
-			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all\n");/*ostatni punkt changelogu
+			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all, SAT Googles craft option using incorect amount of nails\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -195,7 +201,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -269,9 +274,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -316,9 +319,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

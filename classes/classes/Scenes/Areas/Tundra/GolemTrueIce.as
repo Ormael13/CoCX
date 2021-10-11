@@ -51,7 +51,7 @@ package classes.Scenes.Areas.Tundra
 			damage = Math.round(damage);
 			if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 			outputText("At the palm of golem hand form ice spike that then shots toward you! ");
-			damage = player.takeIceDamage(damage, true);
+			player.takeIceDamage(damage, true);
 		}
 		
 		override protected function performCombatAction():void

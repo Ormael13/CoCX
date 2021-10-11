@@ -141,7 +141,7 @@ import classes.internals.*;
 			damage += eBaseIntelligenceDamage() * 4;
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
 			outputText("Large crystalline shards of ice form in a fan around Alvina. She waves her scythe in an arc launching them in a barrage at you. You are impaled several times over, your wounds bleeding grievously. ");
-			damage = player.takeIceDamage(damage, true);//, true
+			player.takeIceDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
 			else player.createStatusEffect(StatusEffects.IzmaBleed,5,0,0,0);
 			statScreenRefresh();
