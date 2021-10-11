@@ -59,7 +59,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.KONSTANTIN_SERVICES] = 0;
 			}
 			menu();
-			if (player.armorName == "nothing") addButtonDisabled(1, "Armor", "You need to wear any armor to pick this option.");
+			if (player.armorName == "nothing" || player.armorName == "gear") addButtonDisabled(0, "Armor", "You need to wear any armor to pick this option.");
 			else addButton(0, "Armor", meetKonstantinAtForestArmor);
 			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
 			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
@@ -858,7 +858,8 @@ package classes.Scenes.NPCs
 			outputText("\"<i>The price for any of those services remains the same, 25 gems.</i>\"\n\n");
 			outputText("Sounds like a good offer. What will you do?\n\n");
 			menu();
-			addButton(0, "Armor", meetKonstantinAtForestArmor);
+			if (player.armorName == "nothing" || player.armorName == "gear") addButtonDisabled(0, "Armor", "You need to wear any armor to pick this option.");
+			else addButton(0, "Armor", meetKonstantinAtForestArmor);
 			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
 			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
 			addButton(2, "Nothing", meetKonstantinAtForestNothing);
