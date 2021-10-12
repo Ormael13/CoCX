@@ -1016,8 +1016,15 @@ public class PerkMenu extends BaseContent {
 				if (perkCount != perkName.length && perkName[perkCount].requirements.length > 0) {
 					for each (var cond:Object in perkName[perkCount].requirements) {
 						var reqStr:String = cond.text;
+						var color:String = "";
 						if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
-							reqs.push("<font color='#000000'>" + cond.text + "</font>");
+							if (cond.fn(player)) {
+								color = "#008000";
+							}
+							else {
+								color = "#800000";
+							}
+							reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
 						}
 					}
 				}

@@ -747,7 +747,7 @@ public class PlayerAppearance extends BaseContent {
 				//cockDesc += "\n"
 			}
 			//Worm flavor
-			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n";
+			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes";
 		}
 
 		return cockDesc;
@@ -782,7 +782,7 @@ public class PlayerAppearance extends BaseContent {
 			// ballsDesc += " across.";
 
 			//Worms extra descript. To match as seen in infested hellhounds.
-			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += " Across its surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.";
+			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += " Across its surface, random lumps move rapidly around, further proof of your infested sack, and it's parasitic inhabitants that both boost and increase your cum production.";
 		} else {
 			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += "Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.";
 		}
