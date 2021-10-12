@@ -617,7 +617,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Zenji freaks out about corrupted celess
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && CelessScene.instance.isCorrupt && rand(4) == 0) {
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && CelessScene.instance.isCorrupt && !CelessScene.instance.setDeadOrRemoved() && rand(4) == 0) {
 			finter.zenjiFreaksOverCorruptCeless();
 			hideMenus();
 			return;
@@ -5106,6 +5106,7 @@ public function rebirthFromBadEnd():void {
 				player.removePerk(PerkLib.PrestigeJobGreySage);
 				player.perkPoints += 1;
 			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			doNext(doCamp);
 			return;
 		}
@@ -5648,4 +5649,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}

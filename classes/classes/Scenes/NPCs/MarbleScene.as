@@ -1648,7 +1648,7 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 		//[if the player is no longer addicted]
 		if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
 		//(player gains a bottle of Marble's milk)
-		inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
+		inventory.takeItem(consumables.M__MILK, playerMenu);
 	}
 }
 

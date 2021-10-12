@@ -666,7 +666,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeCock(): String {
 		var temp:Number = 0;
 		var rando:Number = 0;
-		var cockDesc: String = "";
+		var cockDesc: String = "\n\n";
 
 		if (player.hasCock()) {
 			rando = rand(100);
@@ -687,8 +687,8 @@ public class PlayerAppearance extends BaseContent {
 			for (var cock_index:int = 0; cock_index < player.cocks.length; cock_index++) {
 				rando++;
 				// How to start the sentence?
-				if (player.cocks.length == 1) cockDesc += "Your ";
-				else if (cock_index == 0) cockDesc += "--Your first ";
+				if (player.cocks.length == 1) cockDesc += "\nYour ";
+				else if (cock_index == 0) cockDesc += "\n--Your first ";
 				else if (rando % 5 == 0) cockDesc += "\n--The next ";
 				else if (rando % 5 == 1) cockDesc += "\n--The " + num2Text2(cock_index+1) + " of your ";
 				else if (rando % 5 == 2) cockDesc += "\n--One of your ";

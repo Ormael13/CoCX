@@ -269,6 +269,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BirthedImps:StatusEffectType                    = mk("Birthed Imps");
 		public static const BlackCatBeer:StatusEffectType                   = mk("Black Cat Beer");
 		public static const BlackNipples:StatusEffectType                   = mk("Black Nipples");
+		public static const BlessedItemAtTheLake:StatusEffectType           = mk("Blessed Item At The Lake");
 		public static const BlessingOfDivineFera:StatusEffectType			= mk("Blessing of Divine Agency - Fera");
 		public static const BlessingOfDivineMarae:StatusEffectType			= mk("Blessing of Divine Agency - Marae");
 		public static const BlessingOfDivineTaoth:StatusEffectType			= mk("Blessing of Divine Agency - Taoth");

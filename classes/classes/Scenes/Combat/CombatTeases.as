@@ -76,9 +76,9 @@ public class CombatTeases extends BaseCombatContent {
 		//==============================
 		//Determine basic success chance.
 		//==============================
-		chance = 70;
-		//2% chance for each tease level.
-		chance += player.teaseLevel * 2;
+		chance = 90;
+		//1% chance for each tease level.
+		chance += player.teaseLevel;
 		//bonus for Urta
 		if (SceneLib.urtaQuest.isUrta()) chance += 10;
 		//Extra chance for sexy undergarments.
@@ -1492,7 +1492,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.02 * (chance - 100));
 			if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			damage *= damagemultiplier;

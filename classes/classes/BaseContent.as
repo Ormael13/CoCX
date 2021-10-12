@@ -987,27 +987,33 @@ import coc.xxc.StoryContext;
 			if (back != null) button(14).show("Back",back);
 		}
 		//Returns an autocreated menu.
-		//Structure for array is: ["Button name", function/false, ["Available desc", "Not available desc"]/ ""]
+		//Structure for array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""]
+		//function/false/"ignore" = addbtn, addbtndisabled, no button
 		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void{
 			var bList:Array = [];
 			var total:int = menuItems.length;
 			var next:Boolean = false;
+			if(sort){
+				menuItems = menuItems.sort()
+			}
 			if(total/3 > 12){
 				for (var h:int = (page * 12) * 3, j:int = Math.min((h + 35), total - 1); h <= j; h++){ // Page 0 - array 0-36. Page 1 - array 37 -?
 					bList.push(menuItems[h]);
 					if(j != total - 1) next = true;
 				}
 			}
-			else{ //Less than 12 items to display.
+			else{
 				bList = menuItems;
 			}
-			//Actually... check page, multiply by 13 to start button creation. 14,15 is page-,+
 			menu();
 			var btnval:int = 0;
 			for (var i:int = 0; i < bList.length; i++){
 				if (i % 3 == 0){
 					if (!bList[i + 1]){
 						addButtonDisabled(btnval, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
+					}
+					else if (bList[i + 1] == "ignore") { //Not sure when this would ever be used, but in case.
+						continue;
 					}
 					else{
 						addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);

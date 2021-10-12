@@ -904,6 +904,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Kaiba daily buy limit refresh
 				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
+				//Daily reset on finding blessed ittem(s) at the lake
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.removeStatusEffect(StatusEffects.BlessedItemAtTheLake);
 				//Player overheat is intensifying
 				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
 					var intensified:Boolean

@@ -59,7 +59,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.KONSTANTIN_SERVICES] = 0;
 			}
 			menu();
-			if (player.armorName == "nothing") addButtonDisabled(1, "Armor", "You need to wear any armor to pick this option.");
+			if (player.armorName == "nothing" || player.armorName == "gear") addButtonDisabled(0, "Armor", "You need to wear any armor to pick this option.");
 			else addButton(0, "Armor", meetKonstantinAtForestArmor);
 			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
 			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
@@ -690,25 +690,25 @@ package classes.Scenes.NPCs
 				case 6: //Jock
 				//	outputText(images.showImage("rathazul-craft-ebonweavejock"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
 					itype = undergarments.EW_JOCK;
 					break;
 				case 7: //Thong
 				//	outputText(images.showImage("rathazul-craft-ebonweavethong"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
 					itype = undergarments.EWTHONG;
 					break;
 				case 8: //Vest
 				//	outputText(images.showImage("rathazul-craft-ebonweavevest"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a vest. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new vest.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new vest.");
 					itype = undergarments.EW_VEST;
 					break;
 				case 9: //Corset
 				//	outputText(images.showImage("rathazul-craft-ebonweavecorset"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a corset. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new corset.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new corset.");
 					itype = undergarments.EW_CORS;
 					break;
 				case 10: //Rune Jock
@@ -716,7 +716,7 @@ package classes.Scenes.NPCs
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
 					outputText("Adorning the cup is a rune seething with black magic.  ");
 					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
 					itype = undergarments.R_JOCK;
 					break;
 				case 11: //Rune Thongs
@@ -724,7 +724,7 @@ package classes.Scenes.NPCs
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
 					outputText("Adorning the front is a rune seething with black magic.  ");
 					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
 					itype = undergarments.R_THONG;
 					break;
 				default:
@@ -858,7 +858,8 @@ package classes.Scenes.NPCs
 			outputText("\"<i>The price for any of those services remains the same, 25 gems.</i>\"\n\n");
 			outputText("Sounds like a good offer. What will you do?\n\n");
 			menu();
-			addButton(0, "Armor", meetKonstantinAtForestArmor);
+			if (player.armorName == "nothing" || player.armorName == "gear") addButtonDisabled(0, "Armor", "You need to wear any armor to pick this option.");
+			else addButton(0, "Armor", meetKonstantinAtForestArmor);
 			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
 			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
 			addButton(2, "Nothing", meetKonstantinAtForestNothing);

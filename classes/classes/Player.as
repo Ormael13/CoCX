@@ -12506,7 +12506,7 @@ use namespace CoC;
 				}
 			}
 			if (trollScore() >= 5) {
-				if (mantisScore() >= 10) {//150
+				if (trollScore() >= 10) {//150
 					maxStrCap2 += 50;
 					maxSpeCap2 += 70;
 					maxIntCap2 += 50;
@@ -13100,7 +13100,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			var power:Number = 0;
-
 			if (hasPerk(PerkLib.BullStrength)){
 				if (cowScore() >=15) power = lactationQ()*0.001;
 				if (minotaurScore() >=15) power = cumCapacity()*0.001;
@@ -13160,15 +13159,15 @@ use namespace CoC;
 				perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.CaveWyrmLungs)) {
-				removePerk(MutationsLib.HinezumiBurningBlood);
+				removePerk(MutationsLib.CaveWyrmLungs);
 				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.CaveWyrmLungsEvolved)) {
-				removePerk(MutationsLib.HinezumiBurningBloodEvolved);
+				removePerk(MutationsLib.CaveWyrmLungsEvolved);
 				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.CaveWyrmLungsFinalForm)) {
-				removePerk(MutationsLib.HinezumiBurningBloodFinalForm);
+				removePerk(MutationsLib.CaveWyrmLungsFinalForm);
 				//perkPoints += 1;
 			}
 			if (hasPerk(MutationsLib.GazerEye)) {
@@ -13314,7 +13313,6 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
 			}
-
 			if(hasStatusEffect(StatusEffects.Displacement)) {
 				removeStatusEffect(StatusEffects.Displacement);
 			}
@@ -13337,7 +13335,6 @@ use namespace CoC;
 					removePerk(PerkLib.Resolute);
 				}
 			}
-
 			if(statStore.hasBuff("Might")){
 				statStore.removeBuffs("Might");
 				removeStatusEffect(StatusEffects.Minimise);
@@ -13405,7 +13402,6 @@ use namespace CoC;
 			if(statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) addStatusValue(StatusEffects.CombatFollowerNeisa, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) addStatusValue(StatusEffects.CombatFollowerSiegweird, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerZenji) > 0) addStatusValue(StatusEffects.CombatFollowerZenji, 4, -1);
-
 			// All CombatStatusEffects are removed here
 			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
 				// Using a copy of array in case effects are removed/added in handler
@@ -14482,7 +14478,6 @@ use namespace CoC;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
-
 		public function herbXP(XP:Number = 0):void {
 			while (XP > 0) {
 				if (XP == 1) {
@@ -14508,16 +14503,15 @@ use namespace CoC;
 			EngineCore.doNext(EventParser.playerMenu);
 		}
 
-
 		public function maxTeaseLevel():Number {
-			var maxLevel:Number = 2;
+			var maxLevel:Number = 16;
 			if (hasPerk(PerkLib.SuperSensual)) {
-				if (level < 48) maxLevel += level;
-				else maxLevel += 48;
+				if (level < 54) maxLevel += level;
+				else maxLevel += 54;
 			}
 			else {
-				if (level < 23) maxLevel += level;
-				else maxLevel += 23;
+				if (level < 24) maxLevel += level;
+				else maxLevel += 24;
 			}
 			return maxLevel;
 		}

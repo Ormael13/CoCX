@@ -592,7 +592,10 @@ public function etnaCampMenu():void
 	addButton(2, "Sex", etnaSexMenu).hint("Have some sex with Etna");
 	if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) addButtonDisabled(3, "Req. Venom", "You already asked her for a vial today.");
 	else addButton(3, "Req. Venom", etnaDailyVenomVial).hint("Ask Etna for a vial of her venom.");
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButtonDisabled(4, "Spar", "You can't fight against her as long she's in your team.");
+		else addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.");
+	}
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
