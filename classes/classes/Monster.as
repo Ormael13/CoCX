@@ -772,10 +772,19 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+				if (hasPerk(PerkLib.EnemyBossType)) {
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 200;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 1600;
+				}
+				else {
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+					
+				}
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;

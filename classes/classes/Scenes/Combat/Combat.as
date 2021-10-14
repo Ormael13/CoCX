@@ -3030,16 +3030,16 @@ public class Combat extends BaseContent {
         if (rand(100) < accRange) {
             var damage:Number = 0;
             if (weaponRangePerk == "Bow") {
-				if (player.vehicles == vehicles.HB_MECH) damage += player.weaponRangeAttack * 10;
-                damage += player.spe * 1.5;
-                damage += scalingBonusSpeed() * 0.3;
-                if (damage < 15) damage = 15;
+				if (player.vehicles == vehicles.HB_MECH) damage += player.weaponRangeAttack * 20;
+                damage += player.spe * 2;
+                damage += scalingBonusSpeed() * 0.4;
+                if (damage < 20) damage = 20;
             }
             if (weaponRangePerk == "Crossbow") {
-				damage += player.weaponRangeAttack * 15;
+				damage += player.weaponRangeAttack * 20;
 				if (player.vehicles == vehicles.HB_MECH) {
-					damage += player.spe * 1.5;
-					damage += scalingBonusSpeed() * 0.3;
+					damage += player.spe * 2;
+					damage += scalingBonusSpeed() * 0.4;
 				}
 			}
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
@@ -3433,6 +3433,7 @@ public class Combat extends BaseContent {
                 }
                 if (damage < 10) damage = 10;
                 if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
+				damage *= 1.5;
                 //Weapon addition!
                 if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
                 else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
@@ -3564,6 +3565,7 @@ public class Combat extends BaseContent {
             }
             if (damage < 10) damage = 10;
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
+			damage *= 1.5;
             //Weapon addition!
             if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
             else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
@@ -3763,11 +3765,11 @@ public class Combat extends BaseContent {
         }
         if (rand(100) < accRange) {
             var damage:Number = 0;
-            damage += player.weaponRangeAttack;
-            if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack;
+            damage += player.weaponRangeAttack * 2;
+            if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack * 2;
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
-            if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.20;
-            if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.20;
+            if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.2;
+            if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.2;
             //Weapon addition!
             if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
             else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
@@ -3797,58 +3799,58 @@ public class Combat extends BaseContent {
                 if (player.hasKeyItem("Repeater Gun") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.3;
-                        if (damage < 30) damage = 30;
+                        if (damage < 60) damage = 60;
 					} else if (player.vehicles == vehicles.GS_MECH) {
 						damage *= 1.25;
-                        if (damage < 25) damage = 25;
+                        if (damage < 50) damage = 50;
 					} else {
                         damage *= 1.2;
-                        if (damage < 20) damage = 20;
+                        if (damage < 40) damage = 40;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK1") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.6;
-                        if (damage < 60) damage = 60;
+                        if (damage < 120) damage = 120;
                     } else if (player.vehicles == vehicles.GS_MECH) {
 						damage *= 1.5;
-                        if (damage < 50) damage = 50;
+                        if (damage < 100) damage = 100;
 					} else {
                         damage *= 1.4;
-                        if (damage < 40) damage = 40;
+                        if (damage < 80) damage = 80;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK2") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.9;
-                        if (damage < 90) damage = 90;
+                        if (damage < 180) damage = 180;
                     } else if (player.vehicles == vehicles.GS_MECH) {
 						damage *= 1.75;
-                        if (damage < 75) damage = 75;
+                        if (damage < 150) damage = 150;
 					} else {
                         damage *= 1.6;
-                        if (damage < 60) damage = 60;
+                        if (damage < 120) damage = 120;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK3") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 2.2;
-                        if (damage < 120) damage = 120;
+                        if (damage < 240) damage = 240;
                     } else if (player.vehicles == vehicles.GS_MECH) {
 						damage *= 2;
-                        if (damage < 100) damage = 100;
+                        if (damage < 200) damage = 200;
 					} else {
                         damage *= 1.8;
-                        if (damage < 80) damage = 80;
+                        if (damage < 160) damage = 160;
                     }
                 }
 				if (player.hasKeyItem("Machine Gun MK4") >= 0) {
 					if (player.vehicles == vehicles.GS_MECH) {
 						damage *= 2.25;
-                        if (damage < 125) damage = 125;
+                        if (damage < 250) damage = 250;
 					} else {
                         damage *= 2;
-                        if (damage < 100) damage = 100;
+                        if (damage < 200) damage = 200;
                     }
 				}
             }

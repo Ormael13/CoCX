@@ -534,7 +534,7 @@ public class PerkLib
 				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
 				"You've chosen the 'Apex' perk. Further increasing your specialisation into a unique race and increasing racial skill power by 50%.");
 		public static const ApprenticeGolemMaker:PerkType = mk("Apprentice Golem Maker", "Apprentice Golem Maker",
-				"Your proficiency in making golems allows to decrease by 10 mana cost of their creation, lower by 5% chance of core shattering and storing more golems.",
+				"Your proficiency in making golems allows to decrease by 10 mana cost of their creation, lower by 5% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
 				"You've chosen the 'Apprentice Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ArcanePoolI:PerkType = mk("Arcane Pool I", "Arcane Pool I",
 				"+3 extra mana per point of intelligence and wisdom.",
@@ -657,7 +657,7 @@ public class PerkLib
 				"Increases maximum wrath by 75.",
 				"You've chosen the 'Basic Tranquilness' perk. Thanks to your basic anger managment training, your maximum wrath has been increased by 75!");
 		public static const BeginnerGolemMaker:PerkType = mk("Beginner Golem Maker", "Beginner Golem Maker",
-				"Your proficiency in making golems allows to lower by 5% chance of core shattering and storing more golems/golem cores.",
+				"Your proficiency in making golems allows to lower by 5% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
 				"You've chosen the 'Beginner Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const Battleflash:PerkType = mk("Battleflash", "Battleflash",
 				"Start every battle with Blink enabled, if you meet Black Magic requirements before it starts.",
@@ -1270,7 +1270,7 @@ public class PerkLib
 				"Limit of advanced job you can learn is increased by 3.",
 				"You've chosen the 'Expert All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
 		public static const ExpertGolemMaker:PerkType = mk("Expert Golem Maker", "Expert Golem Maker",
-				"Your proficiency in making golems allows them to attack even flying enemies, lower by 5% chance of core shattering and storing more golems.",
+				"Your proficiency in making golems allows them to attack even flying enemies, lower by 5% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
 				"You've chosen the 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ExpertGunslinger:PerkType = mk("Expert Gunslinger", "Expert Gunslinger",
 				"Gain an extra firearm attack per turn (3rd one).",
@@ -2088,7 +2088,7 @@ public class PerkLib
 				"Defend move now futher reduce incoming damage and allow for slight improved fatigue/mana/soulforce recovery.",
 				"You've chosen the 'Mastered Defence Stance' perk, finally attaining mastery with your defence pose.");
 		public static const MasterGolemMaker:PerkType = mk("Master Golem Maker", "Master Golem Maker",
-				"Your proficiency in making golems allows to make permanent golems that will not longer shatter after one attack. Allows to store one such golem in golem bag.",
+				"Your proficiency in making golems allows to make permanent golems that will not longer shatter after one attack. Allows to store one such golem in golem bag. Storing more temporal golems/golem cores and increase their dmg scaling up on current int/wis.",
 				"You've chosen the 'Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const MasterGunslinger:PerkType = mk("Master Gunslinger", "Master Gunslinger",
 				"Gain an extra firearm attack per turn (4th one).",
@@ -6067,7 +6067,7 @@ public class PerkLib
             ChargedCore.requireLevel(12)
                     .requireInt(70)
                     .requireWis(70)
-                    .requirePerk(ApprenticeGolemMaker);
+                    .requirePerk(JobGolemancer);
             ImprovedCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalWeapons)
                     .requireStr(50)
                     .requireTou(50)

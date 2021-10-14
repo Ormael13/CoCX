@@ -522,7 +522,7 @@ private function rapeZeVapula():void {
 		player.orgasm();
 		dynStats("str", 1,"tou", 1, "lib", -4, "cor", 4);
 		player.slimeFeed();
-		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+		if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 	}
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
 	model.time.hours = 7;

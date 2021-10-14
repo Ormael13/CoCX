@@ -2135,57 +2135,68 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	private function temporalGolemsAplification():Number {
+		var dmgAMP:Number = 0;
+		if (player.hasPerk(PerkLib.ChargedCore)) dmgAMP += 0.5;
+		if (player.hasPerk(PerkLib.SuperChargedCore)) dmgAMP += 0.5;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgAMP += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgAMP += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgAMP += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgAMP += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgAMP += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgAMP += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgAMP += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgAMP += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgAMP += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgAMP += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgAMP += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgAMP += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgAMP += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgAMP += 0.5;
+		}
+		return dmgAMP;
+	}
 	public function sendTemporalGolem1():void {
 		clearOutput();
 		flags[kFLAGS.TEMPORAL_GOLEMS_BAG]--;
 		//Determine if golem core is shattered or not picked due too overloaded bag for them!
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
 		var shatter:Boolean = false;
 		var shatterChance:int = 10;
-		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) shatterChance -= 2;
-		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) shatterChance -= 2;
-		if (player.hasPerk(PerkLib.ExpertGolemMaker)) shatterChance -= 3;
-		if (player.hasPerk(PerkLib.MasterGolemMaker)) shatterChance -= 3;
+		var overloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 2;
+		}
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 2;
+		}
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 3;
+		}
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 3;
+		}
 		if (rand(100) < shatterChance) {
 			shatter = true;
 		}
-		var overloadedGolemCoresBag:Boolean = false;
 		if (!shatter) {
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
 			else overloadedGolemCoresBag = true;
 		}
-		var damage:Number = 0;
-		var dmgamp:Number = 1;
-		damage += player.inte + player.wis + 300 + rand(121);
-		if (player.hasPerk(PerkLib.ChargedCore)) {
-			if (player.hasPerk(PerkLib.SuperChargedCore)) {
-				damage += 200 + rand(81);
-				dmgamp += 0.4;
-			}
-			else {
-				damage += 100 + rand(41);
-				dmgamp += 0.2;
-			}
-		}
-		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
-		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
-		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
-		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
-			dmgamp += 0.1;
-			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
-			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
-			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
-			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
-		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golem slam into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
+		outputText("Your stone golem slam into " + monster.a + monster.short + ". ");
+		doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Core shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*Golem Core wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2195,61 +2206,50 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 3;
 		//Determine if golem core is shattered or not picked due too overloaded bag for them!
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
 		var shatter:Boolean = false;
 		var shatterChance:int = 10;
-		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) shatterChance -= 2;
-		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) shatterChance -= 2;
-		if (player.hasPerk(PerkLib.ExpertGolemMaker)) shatterChance -= 3;
-		if (player.hasPerk(PerkLib.MasterGolemMaker)) shatterChance -= 3;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 2;
+		}
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 2;
+		}
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 3;
+		}
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 3;
+		}
 		if (rand(100) < shatterChance) {
 			shatter = true;
 		}
-		var overloadedGolemCoresBag:Boolean = false;
 		if (!shatter) {
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + 3 < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += 3;
 			else overloadedGolemCoresBag = true;
 		}
-		var partialyoverloadedGolemCoresBag:Boolean = false;
 		if (!shatter && !overloadedGolemCoresBag) {
 			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 3) {
 				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		var damage:Number = 0;
-		var dmgamp:Number = 1;
-		damage += player.inte + player.wis + 300 + rand(121);
-		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= 3;
-		if (player.hasPerk(PerkLib.ChargedCore)) {
-			if (player.hasPerk(PerkLib.SuperChargedCore)) {
-				damage += 200 + rand(81);
-				dmgamp += 5;
-			}
-			else {
-				damage += 100 + rand(41);
-				dmgamp += 2.5;
-			}
-		}
-		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
-		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
-		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
-		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
-			dmgamp += 0.1;
-			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
-			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
-			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
-			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
-		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage *= 3;
+		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2260,61 +2260,50 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 5;
 		//Determine if golem core is shattered or not picked due too overloaded bag for them!
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
 		var shatter:Boolean = false;
 		var shatterChance:int = 10;
-		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) shatterChance -= 2;
-		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) shatterChance -= 2;
-		if (player.hasPerk(PerkLib.ExpertGolemMaker)) shatterChance -= 3;
-		if (player.hasPerk(PerkLib.MasterGolemMaker)) shatterChance -= 3;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 2;
+		}
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 2;
+		}
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 3;
+		}
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
+			damage += ((player.inte + player.wis) * 5);
+			shatterChance -= 3;
+		}
 		if (rand(100) < shatterChance) {
 			shatter = true;
 		}
-		var overloadedGolemCoresBag:Boolean = false;
 		if (!shatter) {
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + 5 < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += 5;
 			else overloadedGolemCoresBag = true;
 		}
-		var partialyoverloadedGolemCoresBag:Boolean = false;
 		if (!shatter && !overloadedGolemCoresBag) {
 			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 5) {
 				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		var damage:Number = 0;
-		var dmgamp:Number = 1;
-		damage += player.inte + player.wis + 300 + rand(121);
-		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= 5;
-		if (player.hasPerk(PerkLib.ChargedCore)) {
-			if (player.hasPerk(PerkLib.SuperChargedCore)) {
-				damage += 200 + rand(81);
-				dmgamp += 10;
-			}
-			else {
-				damage += 100 + rand(41);
-				dmgamp += 5;
-			}
-		}
-		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
-		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
-		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
-		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
-			dmgamp += 0.1;
-			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
-			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
-			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
-			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
-		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage *= 5;
+		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2323,52 +2312,33 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function sendTemporalGolemKamikazeProtocol():void {
 		clearOutput();
-		var usedGolems:Number = flags[kFLAGS.TEMPORAL_GOLEMS_BAG];
-		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 0;
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
 		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		var usedGolems:Number = flags[kFLAGS.TEMPORAL_GOLEMS_BAG];
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 0;
 		if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + usedGolems < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += usedGolems;
 		else overloadedGolemCoresBag = true;
-		var partialyoverloadedGolemCoresBag:Boolean = false;
 		if (!overloadedGolemCoresBag) {
 			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < usedGolems) {
 				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		var damage:Number = 0;
-		var dmgamp:Number = 1;
-		damage += player.inte + player.wis + 300 + rand(121);
-		if (!player.hasPerk(PerkLib.ChargedCore)) damage *= usedGolems;
-		if (player.hasPerk(PerkLib.ChargedCore)) {
-			if (player.hasPerk(PerkLib.SuperChargedCore)) {
-				damage += 200 + rand(81);
-				dmgamp += (usedGolems * 0.2);
-			}
-			else {
-				damage += 100 + rand(41);
-				dmgamp += Math.round(usedGolems * 0.15);
-			}
-		}
-		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
-		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
-		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
-		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
-			dmgamp += 0.1;
-			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
-			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
-			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
-			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
-		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage *= usedGolems;
+		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + " dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");

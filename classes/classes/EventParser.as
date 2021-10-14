@@ -53,9 +53,7 @@ public class EventParser {
     }
 
     public static function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
-        if (CoC.instance.testingBlockExiting) {
-            EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
-        }
+        if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
             var textChoices:Number = Utils.rand(4);
             if (clear) EngineCore.clearOutput();
@@ -84,11 +82,9 @@ public class EventParser {
             //addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
             if (CoC.instance.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || CoC.instance.debug) EngineCore.addButton(4, "Debug Cheat", playerMenu);
             gameOverMenuOverride();
-
         }
         CoC.instance.inCombat = false;
         DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
-
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			if (CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] < CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB)) CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] = CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB);
@@ -98,11 +94,11 @@ public class EventParser {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 		}
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+			if (CoC.instance.flags[kFLAGS.NEISA_FOLLOWER] == 3) CoC.instance.flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			CoC.instance.player.removeStatusEffect(StatusEffects.RiverDungeonA);
 		}
     }
-
     private static function gameOverMenuOverride():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
         CoC.instance.mainView.showMenuButton(MainView.MENU_NEW_MAIN);
         CoC.instance.mainView.showMenuButton(MainView.MENU_DATA);

@@ -14442,7 +14442,7 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (dualWFLevel < maxDualWieldFirearmsLevel() && dualWFXP >= DualWieldFirearmsExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Firearms) skill leveled up to " + (dualWLLevel + 1) + "!</b>\n");
+					outputText("\n<b>Dual Wield (Firearms) skill leveled up to " + (dualWFLevel + 1) + "!</b>\n");
 					dualWFLevel++;
 					dualWFXP = 0;
 				}

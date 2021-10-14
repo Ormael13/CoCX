@@ -107,7 +107,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 							spriteSelect(41);
 							outputText("\n<b>You find a note from Marble back at camp, letting you know that she has an item for you!</b>\n");
 							player.createStatusEffect(StatusEffects.MarbleItemCooldown,(24 + rand(24)),0,0,0);
-							player.createStatusEffect(StatusEffects.MarbleHasItem,rand(10),0,0,0);
+							player.createStatusEffect(StatusEffects.MarbleHasItem,rand(5),0,0,0);
 							needNext = true;
 						}
 					}
@@ -2404,11 +2404,17 @@ private function marbleGathered():void {
 	outputText("You ask Marble about any supplies she might have found.  She smiles and hands you her latest find.\n\n");
 	//items that Marble can find for the player, more to be added later (there aren't many items in the game right now that Marble would bring back for the player):
 	//Vitality potion (12 hours or one day)
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) <= 4)
+	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 0)
 		inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
+	//Pack of nails
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 1)
+		inventory.takeItem(consumables.PONAILS, camp.returnToCampUseOneHour);
 	//Tanned Leather clothes, armor, def: 5 (three days)
-	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) <= 7)
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 2)
 		inventory.takeItem(armors.LEATHRA, camp.returnToCampUseOneHour);
+	//Minotaus horn
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 3)
+		inventory.takeItem(useables.MINOHOR, camp.returnToCampUseOneHour);
 	//LaBova, cow girl transformation item (if you'll let me put it here, I'd like to use it as part of the purification quest, the player can still get it if they are addicted)
 	else inventory.takeItem(consumables.LABOVA_, camp.returnToCampUseOneHour);
 	player.removeStatusEffect(StatusEffects.MarbleHasItem);

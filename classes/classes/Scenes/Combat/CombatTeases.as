@@ -113,42 +113,35 @@ public class CombatTeases extends BaseCombatContent {
 		//==============================
 		//Determine basic damage.
 		//==============================
-		damage = 6 + rand(3);
-		if (player.hasPerk(PerkLib.SensualLover)) {
-			damage += 2;
-		}
-		if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-		//+ slutty armor bonus
-		if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-		//10% for bimbo shits
+		damage = 18 + rand(6);
+		if (player.hasPerk(PerkLib.SensualLover)) damage += 6;
+		if (player.hasPerk(PerkLib.Seduction)) damage += 15;
+		if (player.hasPerk(PerkLib.SluttySeduction)) damage += (2 * player.perkv1(PerkLib.SluttySeduction));
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
 		if (bimbo || bro || futa) {
-			damage += 5;
+			damage += 15;
 			bimbo = true;
 		}
-		if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-		damage += scalingBonusLibido() * 0.1;
+		if (player.hasPerk(PerkLib.FlawlessBody)) damage += 20;
+		damage += scalingBonusLibido() * 0.2;
 		if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
 		else damage += player.teaseLevel * 2;
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
-		//partial skins bonuses
 		switch (player.coatType()) {
 			case Skin.FUR:
-				damage += (1 + player.newGamePlusMod());
-				break;
-			case Skin.SCALES:
 				damage += (2 * (1 + player.newGamePlusMod()));
 				break;
-			case Skin.CHITIN:
-				damage += (3 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.BARK:
+			case Skin.SCALES:
 				damage += (4 * (1 + player.newGamePlusMod()));
 				break;
+			case Skin.CHITIN:
+				damage += (6 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				damage += (8 * (1 + player.newGamePlusMod()));
+				break;
 		}
-		//slutty simplicity bonus
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
-		//Elven Pole Dancing style bonus
 		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) damage += scalingBonusSpeed() * 0.1;
 		//==============================
 		//TEASE SELECT CHOICES
@@ -1485,9 +1478,6 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		//Land the hit!
 		if (rand(100) <= chance + rand(bonusChance)) {
-			//NERF TEASE DAMAGE
-			damage *= .7;
-			bonusDamage *= .7;
 			var damagemultiplier:Number = 1;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();

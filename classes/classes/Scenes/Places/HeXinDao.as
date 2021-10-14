@@ -77,11 +77,11 @@ public class HeXinDao extends BaseContent
 	public function riverislandVillageStuffLunarGifts():void {
 		clearOutput();
 		outputText("There seems to be a gift exchange going about. Some people are handing over red envelopes, something about luck for the coming year. You get hold of one and open it hoping for great luck. You open the envelope and... ");
-		var Gems:Number = 50;
-		Gems += rand(100);
-		outputText("Wow! You were lucky! There was " + Gems + " spirit stones inside! This sure is good fortune for the coming year.");
+		var SpiritStones:Number = 50;
+		SpiritStones += rand(100);
+		outputText("Wow! You were lucky! There was " + SpiritStones + " spirit stones inside! This sure is good fortune for the coming year.");
 		player.createStatusEffect(StatusEffects.CanGetLunarGift,0,0,0,0);
-		flags[kFLAGS.SPIRIT_STONES] += Gems;
+		flags[kFLAGS.SPIRIT_STONES] += SpiritStones;
 		statScreenRefresh();
 		doNext(riverislandVillageStuffLunar);
 	}
@@ -977,6 +977,7 @@ public function soularena():void {
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 		startCombat(new mon());
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+		monster.XP = monster.XP * 2;
     }
 	public function gaunletsinbetween():void {
 		cleanupAfterCombat();
@@ -1256,4 +1257,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

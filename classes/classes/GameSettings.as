@@ -192,16 +192,16 @@ public class GameSettings extends BaseContent {
 			outputText("Secondary Stats Modifier: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 40x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 200x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 1600x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.STRENGTH_SCALING] >= 1) {
