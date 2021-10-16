@@ -2934,11 +2934,26 @@ import coc.view.MainView;
 			}
 			reincarnate();
 		}
+
+		private function removePerksThatShouldntBeFuckingPermanent():void {
+			if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4))
+				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry1to4);
+			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) == 0 )
+				player.removePerk(PerkLib.CorruptedNinetails);
+			if (player.hasPerk(PerkLib.CorruptedKitsune) && player.perkv4(PerkLib.CorruptedKitsune) == 0 )
+				player.removePerk(PerkLib.CorruptedKitsune);
+			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 )
+				player.removePerk(PerkLib.EnlightenedNinetails);
+			if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.perkv4(PerkLib.EnlightenedKitsune) == 0 )
+				player.removePerk(PerkLib.EnlightenedKitsune);
+		}
+
 		private function reincarnate():void {
 			Metamorph.resetMetamorph();
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();
+			removePerksThatShouldntBeFuckingPermanent();
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0.5){
 				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0
 			}
