@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function UndefeatedKingDestroyer() 
 		{
-			super("UDKDest", "UDKDestroyer", "Undefeated King's Destroyer", "an Undefeated King's Destroyer", "smash", 75, 9000, "This unrealistically large two handed mace belonged in the past to the king, which claimed to be undefeated. To just lift it you will need some absurd strength and know special technique to wield such type of weapons.", "Massive", "Mace/Hammer");
+			super("UDKDest", "UDKDestroyer", "Undefeated King's Destroyer", "an Undefeated King's Destroyer", "smash", 75, 9000, "This unrealistically large two handed mace belonged in the past to the king, which claimed to be undefeated. To just lift it you will need some absurd strength and know special technique to wield such type of weapons.", "Massive, Whirlwind, LGWrath, Stun20", "Mace/Hammer");
 		}
 		
 		override public function get attack():Number {
