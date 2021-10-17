@@ -1101,9 +1101,9 @@ use namespace CoC;
 			return (weaponClass("Dueling"));
 		}
 		//Polearm-type
-		//public function isPolearmTypeWeapon():Boolean {
-		//	return weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.LHSCYTH || weapon == game.weapons.DEMSCYT || weapon == game.weapons.URTAHLB || isSpearTypeWeapon();
-		//}
+		public function isPolearmTypeWeapon():Boolean {
+			return (weaponClass("Polearm"));
+		}
 		//Spear-type
 
 		public function isSpearTypeWeapon():Boolean {
