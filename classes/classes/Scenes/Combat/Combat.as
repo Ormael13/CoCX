@@ -341,6 +341,10 @@ public class Combat extends BaseContent {
         return magic.spellWhiteCooldownImpl();
     }
 
+    public function spellWhiteTier2Cooldown():Number {
+        return magic.spellWhiteTier2CooldownImpl();
+    }
+
     public function spellModBlack():Number {
         return magic.spellModBlackImpl();
     }
@@ -351,6 +355,10 @@ public class Combat extends BaseContent {
 
     public function spellBlackCooldown():Number {
         return magic.spellBlackCooldownImpl();
+    }
+
+    public function spellBlackTier2Cooldown():Number {
+        return magic.spellBlackTier2CooldownImpl();
     }
 
     public function healMod():Number {
@@ -455,8 +463,13 @@ public class Combat extends BaseContent {
     }
 
     public function maxFirearmsAttacks():int {
-        if (player.hasPerk(PerkLib.MasterGunslinger)) return 4;
-        else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3;
+		var bonusShots:Number = 0;
+		if (player.hasPerk(PerkLib.LockAndLoad)) {
+			if (player.hasPerk(PerkLib.Multishot)) bonusShots = 2;
+			bonusShots = 1;
+		}
+        if (player.hasPerk(PerkLib.MasterGunslinger)) return 4+bonusShots;
+        else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3+bonusShots;
         else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2;
         else return 1;
     }
@@ -714,11 +727,8 @@ public class Combat extends BaseContent {
 			if (milkAmmo > 20) milkAmmo = 20;
             player.ammo = milkAmmo;
         }
-        if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
-        if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
@@ -734,7 +744,9 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.LBLASTR){
+		if (player.hasPerk(PerkLib.TaintedMagazine)) player.ammo *= 2;
+		if (player.hasPerk(PerkLib.PrimedClipWarp)) player.ammo *= 3;
+        if (player.weaponRange == weaponsrange.LBLASTR) {
             outputText("At the same time, you moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back.");
             var lustDmg:int = rand(player.lib / 10) + 20;
             player.dynStats("lus", lustDmg);
@@ -2612,6 +2624,16 @@ public class Combat extends BaseContent {
         }
     }
 
+    internal function pickUpThrownWeapons():void {
+        clearOutput();
+        outputText("You boldly approach enemy and instead of attacks you simply pick up some of the laying around thrown wepaons.");
+		player.ammo += 5;
+        wrathregeneration();
+        manaregeneration();
+        soulforceregeneration();
+        combatRoundOver();
+    }
+
     public function attacksAccuracy():Number {		//unused for now function - maybe use later for some other attacks accuracy or maybe spells? xD
         var atkmod:Number = 100;
         /*	if (player.inte > 50 && player.hasPerk(PerkLib.JobHunter)) {
@@ -2779,6 +2801,7 @@ public class Combat extends BaseContent {
 
     public function firearmsAccuracyPenalty():Number {
         var accfmodpenalty:Number = 10;
+		if (player.hasPerk(PerkLib.LockAndLoad)) accfmodpenalty -= 5;
         if (accfmodpenalty < 0) accfmodpenalty = 0;
         return accfmodpenalty;
     }
@@ -2849,51 +2872,24 @@ public class Combat extends BaseContent {
         }
         flags[kFLAGS.LAST_ATTACK_TYPE] = 1;
         if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
-            if (player.weaponRangePerk == "Crossbow") {
-                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, 3);
-            } else {
-                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, maxBowAttacks());
-            }/*
-            var fireBowCost:Number = 0;
-            fireBowCost += oneArrowTotalCost();
-            //multiple arrows shoot costs
-            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 6) fireBowCost *= 6;
-            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 5) fireBowCost *= 5;
-            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 4) fireBowCost *= 4;
-            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 3) fireBowCost *= 3;
-            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 2) fireBowCost *= 2;
-            if (player.fatigue + fireBowCost > player.maxFatigue()) {
-                outputText("You're too fatigued to fire the ");
-                if (player.weaponRangePerk == "Crossbow") outputText("cross");
-                outputText("bow!");
-                menu();
-                addButton(0, "Next", combatMenu, false);
-                return;
-            }*/
+            if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, 3);
+            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, maxBowAttacks());
             if (player.weaponRangeName == "Avelynn") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
         }
         if (player.weaponRangePerk == "Throwing") {
-            if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 5) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 4) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
+            if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;/*
-            var fc:Number = oneThrowTotalCost();
-            if (player.fatigue + fc > player.maxFatigue()) {
-                outputText("You're too fatigued to throw the [weaponrange]!");
-                menu();
-                addButton(0, "Next", combatMenu, false);
-                return;
-            }*/
+            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
         }
         if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
-            if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 5) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-            else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 4) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-            else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
+            if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+			if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 1 && player.hasPerk(PerkLib.LockAndLoad)) {
+				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
+			}
             if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.SNIPPLE || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
             if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
             if (player.weaponRangePerk == "Dual Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
@@ -3016,7 +3012,6 @@ public class Combat extends BaseContent {
         accRange += (arrowsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
         if (player.weaponRangeName == "Guided bow" || player.vehicles == vehicles.HB_MECH) accRange = 100;
-        //fatigue(oneArrowTotalCost());
         var weaponRangePerk:String = player.weaponRangePerk;
         var ammoWord:String;
         switch (weaponRangePerk) {
@@ -3426,12 +3421,12 @@ public class Combat extends BaseContent {
                 var damage:Number = 0;
                 damage += player.str;
                 damage += ghostStrength();
-                damage += scalingBonusStrength() * 0.2;
+                damage += scalingBonusStrength() * 0.4;
                 if (player.hasPerk(PerkLib.Telekinesis)) {
                     damage += player.inte;
-                    damage += scalingBonusIntelligence() * 0.2;
+                    damage += scalingBonusIntelligence() * 0.4;
                 }
-                if (damage < 10) damage = 10;
+                if (damage < 20) damage = 20;
                 if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 				damage *= 1.5;
                 //Weapon addition!
@@ -3546,24 +3541,22 @@ public class Combat extends BaseContent {
         var accRange:Number = 0;
         accRange += (throwingAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-        if (player.hasPerk(PerkLib.PhantomShooting))
-        {
+        if (player.hasPerk(PerkLib.PhantomShooting)) {
             if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) player.takePhysDamage(fc);
         }
         else {
             if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
-            //fatigue(fc);
         }
         if (rand(100) < accRange) {
             var damage:Number = 0;
             damage += player.str;
             damage += ghostStrength();
-            damage += scalingBonusStrength() * 0.2;
+            damage += scalingBonusStrength() * 0.4;
             if (player.hasPerk(PerkLib.Telekinesis)){
                 damage += player.inte;
-                damage += scalingBonusIntelligence() * 0.2;
+                damage += scalingBonusIntelligence() * 0.4;
             }
-            if (damage < 10) damage = 10;
+            if (damage < 20) damage = 20;
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 			damage *= 1.5;
             //Weapon addition!
@@ -3767,9 +3760,9 @@ public class Combat extends BaseContent {
             var damage:Number = 0;
             damage += player.weaponRangeAttack * 2;
             if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack * 2;
-            if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
-            if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.2;
-            if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.2;
+            if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.5;
+            if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.25;
+            if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
             //Weapon addition!
             if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
             else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
@@ -3783,7 +3776,7 @@ public class Combat extends BaseContent {
                 if (player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.DBDRAGG) damage *= 2;
                 if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.DERPLAU) damage *= 5;
             }
-            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 2;
             if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
             //other effects
             if (player.weaponRange == weaponsrange.M1CERBE) damage *= 6;
@@ -3982,6 +3975,8 @@ public class Combat extends BaseContent {
 						if (player.hasPerk(PerkLib.AmateurGunslinger)) doDamage(damage, true, true);
 						if (player.hasPerk(PerkLib.ExpertGunslinger)) doDamage(damage, true, true);
 						if (player.hasPerk(PerkLib.MasterGunslinger)) doDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
 					}
                 } else {
                     if (!MSGControll) {
@@ -3991,6 +3986,8 @@ public class Combat extends BaseContent {
 							if (player.hasPerk(PerkLib.AmateurGunslinger)) doDamage(damage, true, true);
 							if (player.hasPerk(PerkLib.ExpertGunslinger)) doDamage(damage, true, true);
 							if (player.hasPerk(PerkLib.MasterGunslinger)) doDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
 						}
                     }
                     if (crit) {
@@ -4025,6 +4022,22 @@ public class Combat extends BaseContent {
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 						}
 						if (player.hasPerk(PerkLib.MasterGunslinger)) {
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+						}
+						if (player.hasPerk(PerkLib.LockAndLoad)) {
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+						}
+						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
 							outputText(" ");
 							doDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -4092,6 +4105,8 @@ public class Combat extends BaseContent {
 
     public function oneBulletReloadCost():Number {
         var reloaderCost:Number = 20;
+		if (player.hasPerk(PerkLib.TaintedMagazine)) reloaderCost += 10;
+		if (player.hasPerk(PerkLib.LightningReload)) reloaderCost *= 0.5;
         return reloaderCost;
     }
 
@@ -4101,11 +4116,8 @@ public class Combat extends BaseContent {
             if (milkAmmo > 20) milkAmmo = 20;
             player.ammo = milkAmmo;
         }
-        if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
-        if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
@@ -4121,7 +4133,9 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.LBLASTR){
+		if (player.hasPerk(PerkLib.TaintedMagazine)) player.ammo *= 2;
+		if (player.hasPerk(PerkLib.PrimedClipWarp)) player.ammo *= 3;
+        if (player.weaponRange == weaponsrange.LBLASTR) {
             outputText("You moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back. Almost immediately fresh cream fills your blasters, you're ready to resume shooting!");
             var lustDmg:int = rand(player.lib / 10) + 20;
             player.dynStats("lus", lustDmg);
@@ -4133,13 +4147,13 @@ public class Combat extends BaseContent {
         reloadWeapon();
         if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxFatigue()) {
             outputText(" You are too tired to act in this round after reloading your weapon.\n\n");
-            player.fatigue = player.maxFatigue() - oneBulletReloadCost();
+            player.fatigue += (oneBulletReloadCost() * player.ammo);
             enemyAI();
         } else {
             fatigue(oneBulletReloadCost() * player.ammo);
             if (player.hasPerk(PerkLib.RapidReload)) {
                 outputText("\n\n");
-                doNext(combatMenu);
+                doNext(curry(combatMenu, false));
             } else {
                 outputText(" Because you spent whole round on it you can't act until your next turn.\n\n");
                 enemyAI();
@@ -4151,13 +4165,13 @@ public class Combat extends BaseContent {
         reloadWeapon();
         if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxFatigue()) {
             outputText("You are too tired to keep shooting in this round after reloading your weapon.\n\n");
-            player.fatigue = player.maxFatigue() - oneBulletReloadCost();
+            player.fatigue += (oneBulletReloadCost() * player.ammo);
             enemyAI();
         } else {
             fatigue(oneBulletReloadCost() * player.ammo);
             if (player.hasPerk(PerkLib.LightningReload) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-                flags[kFLAGS.ARROWS_ACCURACY] += 10;
+                flags[kFLAGS.ARROWS_ACCURACY] += firearmsAccuracyPenalty();
                 outputText("\n\n");
                 shootWeapon();
             } else {
@@ -5046,8 +5060,7 @@ public class Combat extends BaseContent {
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
         if (player.weaponName == "Truestrike sword") accMelee = 100;
-    //	fatigue(oneArrowTotalCost());
-        if (rand(100) < accMelee) {
+    	if (rand(100) < accMelee) {
             var damage:Number = 0;
             //------------
             // DAMAGE
@@ -5056,17 +5069,17 @@ public class Combat extends BaseContent {
             //BASIC DAMAGE STUFF
             if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)){
                 damage += player.tou;
-                damage += scalingBonusToughness() * 0.25;
+                damage += scalingBonusToughness() * 0.2;
             }
             else{
                 if (player.isElf() && player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
                     damage += player.inte;
-                    damage += scalingBonusToughness() * 0.25;
-                    if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.20*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
+                    damage += scalingBonusToughness() * 0.2;
+                    if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
                 }
                 else{
                     damage += player.str;
-                    damage += scalingBonusStrength() * 0.25;
+                    damage += scalingBonusStrength() * 0.2;
                 }
             }
             if (player.isFlying()){
@@ -5878,7 +5891,6 @@ public class Combat extends BaseContent {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
-        //	fatigue(oneArrowTotalCost());
         if (rand(100) < accMelee) {
             var damage:Number = 0;
             //------------
@@ -6102,12 +6114,12 @@ public class Combat extends BaseContent {
         //High damage to goes.
         damage = combat.magic.calcVoltageModImpl(damage);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-        if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
         if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
         if (player.hasPerk(MutationsLib.FloralOvaries)) damage *= 1.25;
         if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+        damage *= 2;
         damage = Math.round(damage);
         doLightingDamage(damage, true, true);
         if (crit1) outputText(" <b>*Critical Hit!*</b>");
@@ -8728,10 +8740,8 @@ public class Combat extends BaseContent {
             //High damage to goes.
             damage0 = magic.calcVoltageModImpl(damage0);
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage0 *= (1 + (player.lust100 * 0.01));
-            if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage0 *= 4;
             if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
             if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgA *= 1.50;
-            damage0 = damage0/2;
             damage0 = Math.round(damage0);
             dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
             var lustDmgF:Number = 20 + rand(6);
@@ -10827,11 +10837,8 @@ public class Combat extends BaseContent {
             if (milkAmmo > 20) milkAmmo = 20;
             player.ammo = milkAmmo;
         }
-        if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
-        if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
@@ -10847,6 +10854,11 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
+		if (player.hasPerk(PerkLib.TaintedMagazine) && player.ammo > 0) player.ammo *= 2;
+		if (player.hasPerk(PerkLib.PrimedClipWarp) && player.ammo > 0) player.ammo *= 3;
+        if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
+        if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
+        if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
         if (player.statusEffectv1(StatusEffects.SoulDrill1) > 0) {
             player.removeStatusEffect(StatusEffects.SoulDrill1);
@@ -15018,4 +15030,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

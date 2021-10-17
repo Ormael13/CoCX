@@ -2974,10 +2974,10 @@ public static const SECONDARY_STATS_SCALING:int                                 
 public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
 public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.
 public static const SPEED_SCALING:int                                   			= 2968;
-public static const STRENGTH_SCALING:int                                   		= 2969;
-public static const SPELLS_COOLDOWNS:int                                   			= 2970;
+public static const STRENGTH_SCALING:int                                   			= 2969;
+public static const SPELLS_COOLDOWNS:int                                   = 2970;
 public static const WISDOM_SCALING:int                                   			= 2971;
-public static const INTELLIGENCE_SCALING:int                                   	= 2972;
+public static const INTELLIGENCE_SCALING:int                                   		= 2972;
 public static const NO_GORE_MODE:int                                   				= 2973;
 public static const SPARRABLE_NPCS_TRAINING:int                                     = 2974;
 public static const STAT_GAIN_MODE:int                                              = 2975;
@@ -3007,3 +3007,4 @@ public static const HYPER_HAPPY:int                                             
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}
 }
+

@@ -421,6 +421,18 @@ public class PerkLib
 		public static const ElementalConjurerKnowledgeSu:PerkType = mk("Elemental Conjurer Knowledge (Su)", "Elemental Conjurer Knowledge (Su)",
 				"Allow to convert soulforce into elemetnal energy.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk, .");
+		public static const LockAndLoad:PerkType = mk("Lock and load", "Lock and load",
+				"You gained decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).",
+				"You've chosen the 'Lock and load' perk, gaining decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).");
+		public static const SilverForMonsters:PerkType = mk("Silver for monsters", "Silver for monsters",
+				"Ranged weapons deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.",
+				"You've chosen the 'Silver for monsters' perk. Ranged weapons deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.");
+		public static const TaintedMagazine:PerkType = mk("Tainted Magazine", "Tainted Magazine",
+				"Increase reload cost by 10 and doubles max ammo (200% of base ammo count).",
+				"You've chosen the 'Tainted Magazine' perk. Increase reload cost by 10 and doubles max ammo (200% of base ammo count).");
+		public static const PrimedClipWarp:PerkType = mk("Primed Clip Warp", "Primed Clip Warp",
+				".",
+				"You've chosen the 'Primed Clip Warp' perk.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -436,18 +448,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1276,8 +1276,8 @@ public class PerkLib
 				"Gain an extra firearm attack per turn (3rd one).",
 				"You've chosen the 'Expert Gunslinger' perk, gaining an extra firearm attack per turn.");
 		public static const ExplosiveCartridge:PerkType = mk("Explosive cartridge", "Explosive cartridge",
-				"Gunshots deals double damage against groups and large enemies.",
-				"You've chosen the 'Explosive cartridge' perk, allowing for your gunshots dealing extra damage to group or large enemies.");
+				"Gunshots deals double damage against groups (of any size) and large enemies (9+ ft. tall).",
+				"You've chosen the 'Explosive cartridge' perk, allowing for your gunshots dealing extra damage to group (of any size) or large enemies (9+ ft. tall).");
 		public static const ExtraClawAttack:PerkType = mk("Extra claw attack", "Extra claw attack",
 				"When attacking with your natural weapons, add an additional attack striking up to 3 times.",
 				"You've chosen the 'Extra claw attack' perk, gaining an additional attack with your natural weapons!");
@@ -1961,8 +1961,8 @@ public class PerkLib
 				"Increases self healing by 90 out of combat and by 45 in combat (using defend option will double it).",
 				"You've chosen the 'Lifeline' perk, increasing your self healing.");
 		public static const LightningReload:PerkType = mk("Lightning Reload", "Lightning Reload",
-				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn.",
-				"You've chosen the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols.");
+				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn and decrease reload fatigue cost by 50%.",
+				"You've chosen the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols and decrease reload fatigue cost by 50%.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for non-heavy/non-small melee weapons.</b>" +
@@ -5016,6 +5016,11 @@ public class PerkLib
             ElementsOfMarethBasics.requirePerk(ElementsOfTheOrtodoxPath)
                     .requireWis(35);
             UnlockSpirit.requireWis(20);
+            JobGunslinger.requireAdvancedJobSlot()
+					.requirePerk(JobRanger)
+					.requireWis(25)
+					.requireTou(20)
+                    .requireSpe(15);
             //Tier 1 Wisdom perks
             ElementalContractRank2.requirePerk(ElementalContractRank1)
                     .requireWis(50)
@@ -5028,16 +5033,14 @@ public class PerkLib
 					.requireLevel(6);
             MagiculesTheory.requireWis(50)
                     .requireLevel(6);
-            JobGunslinger.requireAdvancedJobSlot()
-					.requirePerk(JobRanger)
-					.requireWis(25)
-					.requireTou(20)
-                    .requireSpe(15)
+            JobMonk.requireAdvancedJobSlot()
+					.requirePerk(JobSoulCultivator)
+					.requireWis(40)
                     .requireLevel(6);
-            AmateurGunslinger.requirePerk(JobGunslinger)
+            ChurchOfTheGun.requirePerk(JobGunslinger)
 					.requireWis(30)
-					.requireTou(25)
-                    .requireSpe(20)
+                    .requireTou(25)
+                    .requireInt(20)
                     .requireLevel(6);
             DualWieldFirearms.requirePerks(DualWield, JobGunslinger)
 					.requireWis(25)
@@ -5045,10 +5048,6 @@ public class PerkLib
                     .requireSpe(15)
                     .requireLevel(6);
             //Tier 2 Wisdom perks
-            JobMonk.requireAdvancedJobSlot()
-					.requirePerk(JobSoulCultivator)
-					.requireWis(60)
-                    .requireLevel(12);
             Combo.requirePerk(JobMonk)
                     .requireWis(75)
                     .requireSpe(50)
@@ -5090,15 +5089,20 @@ public class PerkLib
             StrongElementalBond.requirePerk(ElementalContractRank3)
                     .requireWis(75)
                     .requireLevel(12);
+            AmateurGunslinger.requirePerk(JobGunslinger)
+					.requireWis(35)
+					.requireTou(30)
+                    .requireSpe(25)
+                    .requireLevel(12);
             RapidReload.requirePerk(JobGunslinger)
 					.requireWis(35)
                     .requireTou(30)
                     .requireSpe(25)
                     .requireLevel(12);
-			ExplosiveCartridge.requirePerk(AmateurGunslinger)
-					.requireWis(40)
-                    .requireTou(35)
-                    .requireSpe(30)
+            AlchemicalCartridge.requirePerk(ChurchOfTheGun)
+					.requireWis(35)
+                    .requireTou(30)
+                    .requireInt(25)
                     .requireLevel(12);
             //Tier 3 Wisdom perks
             ElementalContractRank4.requirePerk(ElementalContractRank3)
@@ -5111,15 +5115,15 @@ public class PerkLib
                     .requireWis(80)
                     .requireSpe(100)
                     .requireLevel(18);
-            ExpertGunslinger.requirePerk(AmateurGunslinger)
-					.requireWis(55)
-                    .requireTou(50)
-                    .requireSpe(45)
-                    .requireLevel(18);
-			NamedBullet.requirePerk(AmateurGunslinger)
+			ExplosiveCartridge.requirePerk(AmateurGunslinger)
 					.requireWis(50)
                     .requireTou(45)
                     .requireSpe(40)
+                    .requireLevel(18);
+			TaintedMagazine.requirePerk(AmateurGunslinger)
+					.requireWis(55)
+                    .requireTou(50)
+                    .requireSpe(45)
                     .requireLevel(18);
             //Tier 4 Wisdom perks
             ComboMaster.requirePerk(Combo)
@@ -5137,12 +5141,17 @@ public class PerkLib
                     .requireLevel(24);
             FirstAttackElementals.requirePerks(StrongElementalBond, ElementalContractRank4)
                     .requireLevel(24);
+            ExpertGunslinger.requirePerk(AmateurGunslinger)
+					.requireWis(65)
+                    .requireTou(60)
+                    .requireSpe(55)
+                    .requireLevel(24);
             LightningReload.requirePerk(RapidReload)
 					.requireWis(65)
                     .requireTou(60)
                     .requireSpe(55)
                     .requireLevel(24);
-            //Tier 5 Wisdom perks
+			//Tier 5 Wisdom perks
             UnlockSpirit2ndStage.requirePerk(UnlockSpirit)
                     .requireWis(125)
                     .requireLevel(30);
@@ -5154,15 +5163,15 @@ public class PerkLib
 			/*ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
 					.requireWis(150)
                     .requireLevel(30);*/
-            MasterGunslinger.requirePerk(ExpertGunslinger)
+			NamedBullet.requirePerk(ExpertGunslinger)
 					.requireWis(80)
                     .requireTou(75)
                     .requireSpe(70)
                     .requireLevel(30);
-            AlchemicalCartridge.requirePerk(ExpertGunslinger)
+            LockAndLoad.requirePerk(ExpertGunslinger)
 					.requireWis(80)
                     .requireTou(75)
-                    .requireInt(70)
+                    .requireSpe(70)
                     .requireLevel(30);
             //Tier 6 Wisdom perks
             ElementalContractRank7.requirePerk(ElementalContractRank6)
@@ -5178,10 +5187,15 @@ public class PerkLib
             AdvancedMagiculesTheory.requirePerk(MagiculesTheory)
                     .requireWis(150)
                     .requireLevel(36);
-            ChurchOfTheGun.requirePerk(MasterGunslinger)
+            MasterGunslinger.requirePerk(ExpertGunslinger)
 					.requireWis(95)
                     .requireTou(90)
-                    .requireInt(85)
+                    .requireSpe(85)
+                    .requireLevel(36);
+			PrimedClipWarp.requirePerk(TaintedMagazine)
+					.requireWis(100)
+                    .requireTou(95)
+                    .requireSpe(90)
                     .requireLevel(36);
             //Tier 7 Wisdom perks
             PrestigeJobSoulArtMaster.requirePrestigeJobSlot()

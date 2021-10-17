@@ -239,6 +239,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const HINEZUMI:int = 18;
+		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
+			id: "Hinezumi Eyes",
+			name: "Hinezumi Eyes",
+			cost: 100,
+			title: "Hinezumi",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesHinezumi;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

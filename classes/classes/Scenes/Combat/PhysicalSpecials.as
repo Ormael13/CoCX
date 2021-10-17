@@ -5789,8 +5789,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You press the spiral button and aim, unleashing the gravity sphere at " + monster.a + monster.short + ". ");
 		player.createStatusEffect(StatusEffects.CooldownGravityShots,8,0,0,0);
 		var damage:Number;
-		damage = scalingBonusIntelligence() * spellModBlack() * 2;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = scalingBonusIntelligence() * spellModBlack() * 8;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
@@ -5824,8 +5823,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You press the BIG lightning button and aim, smirking wide as the Raijin blaster power up your mech zapping " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
 		var damage:Number;
-		damage = scalingBonusIntelligence() * spellModWhite() * 2;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
@@ -5872,8 +5870,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You activate the snowball generator, taking aim and launching a volley of snowballs at the " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
 		var damage:Number;
-		damage = scalingBonusIntelligence() * spellModBlack() * 4;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = scalingBonusIntelligence() * spellModBlack() * 8;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
@@ -5904,8 +5901,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You shoot with the Whitefire beam cannon at " + monster.a + monster.short + " burning " + monster.pronoun3 + " badly for ");
 		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
-		damage = scalingBonusIntelligence() * spellModWhite() * 4;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;

@@ -374,10 +374,12 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Spells Cost:</b> " + combat.spellCost(100) + "%\n";
 		combatStats += "<b>White Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
 		combatStats += "<b>White Spells Cost:</b> " + combat.spellCostWhite(100) + "%\n";
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) combatStats += "<b>White Spells Cooldowns:</b> " + combat.spellWhiteCooldown() + " turns\n";
+		combatStats += "<b>White Spells Cooldown (tier 1):</b> " + combat.spellWhiteCooldown() + " turns\n";
+		combatStats += "<b>White Spells Cooldown (tier 2):</b> " + combat.spellWhiteTier2Cooldown() + " turns\n";
 		combatStats += "<b>Black Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
 		combatStats += "<b>Black Spells Cost:</b> " + combat.spellCostBlack(100) + "%\n";
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) combatStats += "<b>Black Spells Cooldowns:</b> " + combat.spellBlackCooldown() + " turns\n";
+		combatStats += "<b>Black Spells Cooldown (tier 1):</b> " + combat.spellBlackCooldown() + " turns\n";
+		combatStats += "<b>Black Spells Cooldown (tier 2):</b> " + combat.spellBlackTier2Cooldown() + " turns\n";
 		combatStats += "<b>Blood Spells/Soulskills Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlood()) + "%\n";
 		combatStats += "<b>Blood Spells/Soulskills Cost:</b> " + combat.spellCostBlood(100) + "%\n";
 		combatStats += "\n";
@@ -408,7 +410,7 @@ public class PlayerInfo extends BaseContent {
 		else combatStats += "<b>Bow Skill:</b> 0 / 100\n";
 		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
 		combatStats += "<b>Arrow Cost (Fatigue): </b> " + combat.oneArrowTotalCost() + "\n";
-		combatStats += "<b>Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
+		combatStats += "<b>Telekinesis Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
 		combatStats += "<b>One Bullet Reload Cost (Fatigue): </b> " + combat.oneBulletReloadCost() + "\n";
 		combatStats += "<b>Bow/Crossbow Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
 		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Bow/Crossbow Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
@@ -424,7 +426,11 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (combat.firearmsAccuracy() / 2) + "%\n";
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - (combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty())) + "%\n";
 		if (player.hasPerk(PerkLib.ExpertGunslinger)) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 2)) + "%\n";
-		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 3)) + "%\n";
+		if (player.hasPerk(PerkLib.MasterGunslinger) || (player.hasPerk(PerkLib.ExpertGunslinger) && player.hasPerk(PerkLib.LockAndLoad))) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 3)) + "%\n";
+		if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
+			combatStats += "<b>Firearms Accuracy (5th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 4)) + "%\n";
+			combatStats += "<b>Firearms Accuracy (6th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 5)) + "%\n";
+		}
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)</i>\n";
 		combatStats += "\n";
 		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) combatStats += "<b>Cost of flying without Flying Sword (Soulforce / per turn): </b> " + combat.flyingWithSoulforceCost() + "\n";

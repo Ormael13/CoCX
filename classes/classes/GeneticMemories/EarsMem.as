@@ -283,6 +283,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const MOUSE:int = 22;
+		EnumValue.add(Memories, MOUSE, "MOUSE", {
+			id: "Mouse Ears",
+			name: "Mouse Ears",
+			cost: 100,
+			title: "Mouse",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsMouse;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

@@ -5107,6 +5107,7 @@ public function rebirthFromBadEnd():void {
 				player.perkPoints += 1;
 			}
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
+			if (flags[kFLAGS.SPELLS_COOLDOWNS] != 0) flags[kFLAGS.SPELLS_COOLDOWNS] = 0;
 			doNext(doCamp);
 			return;
 		}

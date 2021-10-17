@@ -2700,7 +2700,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellIceSpike,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellIceSpike,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2728,7 +2728,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellIceSpikeEx,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellIceSpikeEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2751,8 +2751,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellIceSpike3(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward " + monster.a + monster.short + " !\n");
-		var damage:Number = scalingBonusIntelligence() * spellModBlack();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 2;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -2827,7 +2826,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDarknessShard,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellDarknessShard,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2855,7 +2854,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDarknessShardEx,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellDarknessShardEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2878,8 +2877,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellDarknessShard3(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n");
-		var damage:Number = scalingBonusIntelligence() * spellModBlack();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 2;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -3046,7 +3044,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellArcticGale,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellArcticGale,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -3071,7 +3069,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200, 6);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellArcticGaleEx,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellArcticGaleEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -3092,8 +3090,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellArcticGale3(edgy:Boolean = false):void {
 		clearOutput();
 		outputText("You wave the signs with your hands and unleash an howling blast of cold magic upon " + monster.a + monster.short + ".  \n");
-		var damage:Number = scalingBonusIntelligence() * spellModBlack();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 2;
 		if (monster.plural) damage *= 5;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
@@ -3171,7 +3168,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDuskWave,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellDuskWave,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -3196,7 +3193,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200, 6);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDuskWaveEx,spellBlackCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellDuskWaveEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -3217,8 +3214,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellDuskWave3(edgy:Boolean = false):void {
 		clearOutput();
 		outputText("You wave the signs with your hands and all light fades as you call down to the primordial darkness to gnaw at " + monster.a + monster.short + ".  \n");
-		var damage:Number = scalingBonusIntelligence() * spellModBlack();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 2;
 		if (monster.plural) damage *= 5;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
@@ -3296,8 +3292,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		outputText("You wrap your soulforce around the bones and shape them into a horrifying bone wraith sending it flying and laughing madly toward " + monster.a + monster.short + ". The ghastly apparition explodes upon contact into a hundred sharp bone shards grievously wounding " + monster.a + monster.short + ". ");
-		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 1.5;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 3;
 		if (player.hasPerk(PerkLib.Necromancy)) damage * 1.5;
 		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
 			var minus1:Number = player.perkv1(PerkLib.PrestigeJobNecromancer);
@@ -3377,8 +3372,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		var shatterIt:Number = 0.2;
-		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.75;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 1.5;
 		if (player.hasPerk(PerkLib.Necromancy)) damage * 1.5;
 		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
 			var minus3:Number = player.perkv1(PerkLib.PrestigeJobNecromancer);
@@ -3598,9 +3592,8 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
-			var consumingdarkness:Number = scalingBonusIntelligence() * spellModBlack();// * 0.5
+			var consumingdarkness:Number = scalingBonusIntelligence() * spellModBlack() * 2;
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) consumingdarkness = Math.round(consumingdarkness * 1.2);
-			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) consumingdarkness *= 4;
 			if (player.hasPerk(PerkLib.CorruptMagic)) {
 				if (monster.cor >= 66) consumingdarkness = Math.round(consumingdarkness * 1.0);
 				else if (monster.cor >= 50) consumingdarkness = Math.round(consumingdarkness * 1.1);
@@ -3724,8 +3717,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You cut deep into your arm, drawing plenty of your blood and letting it flow in a large pattern on the ground as you hex your target with a powerful malediction, causing it to bleed from every orifice. " + monster.capitalA + monster.short + " screams in pain, unable to stop the blood flow. ");
 			HPChange(-(Math.round(player.maxHP() * .5)), false);
 		}
-		var CurseOfWeepingMod:Number = scalingBonusIntelligence() * spellModBlack();// * 0.5
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) CurseOfWeepingMod *= 4;
+		var CurseOfWeepingMod:Number = scalingBonusIntelligence() * spellModBlack() * 2;
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.2);
 		if (player.hasPerk(PerkLib.CorruptMagic)) {
 			if (monster.cor >= 66) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.0);
@@ -3788,8 +3780,7 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		var damage:Number = scalingBonusIntelligence() * spellModBlack();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 4;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
         else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
         else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
@@ -3858,8 +3849,7 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		var damage:Number = scalingBonusIntelligence() * spellModWhite();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
 		if (player.hasPerk(PerkLib.DivineArmament)) {
@@ -5141,7 +5131,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhitefire,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellWhitefire,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if (monster is Doppleganger)
 		{
@@ -5180,7 +5170,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhitefireEx,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellWhitefireEx,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if (monster is Doppleganger)
 		{
@@ -5217,8 +5207,7 @@ public class CombatMagic extends BaseCombatContent {
 		var damage:Number = 0;
 		outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 		monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-		damage = scalingBonusIntelligence() * spellModWhite() * combat.fireDamageBoostedByDao();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = scalingBonusIntelligence() * spellModWhite() * 2 * combat.fireDamageBoostedByDao();
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -5277,8 +5266,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellWhitefire4(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
 		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
-		var damage:Number = scalingBonusIntelligence() * spellModWhite();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 2;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -5352,7 +5340,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellLightningBolt,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellLightningBolt,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -5372,7 +5360,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellLightningBoltEx,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellLightningBoltEx,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -5387,8 +5375,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellLightningBolt3(edgy:Boolean = false):void {
 		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
-		var damage:Number = scalingBonusIntelligence() * spellModWhite();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 2;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -5461,7 +5448,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurst,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellPyreBurst,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -5492,7 +5479,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurstEx,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellPyreBurstEx,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -5521,8 +5508,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Attack gains burn DoT for 2-3 turns.
 		outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 		monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-		damage = scalingBonusIntelligence() * spellModWhite() * combat.fireDamageBoostedByDao();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = scalingBonusIntelligence() * spellModWhite() * 2 * combat.fireDamageBoostedByDao();
 		if (monster.plural) damage *= 5;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
@@ -5583,8 +5569,7 @@ public class CombatMagic extends BaseCombatContent {
 		var damage:Number = 0;
 		clearOutput();
 		outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over " + monster.a + monster.short + ".\n");
-		damage = scalingBonusIntelligence() * spellModWhite();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = scalingBonusIntelligence() * spellModWhite() * 2;
 		if (monster.plural) damage *= 5;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
@@ -5659,7 +5644,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellChainLighting,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellChainLighting,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -5676,7 +5661,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200, 5);
 		player.wrath -= 100;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellChainLightingEx,spellWhiteCooldown(),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellChainLightingEx,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -5689,8 +5674,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellChainLightning3(edgy:Boolean = false):void {
 		clearOutput();
 		outputText("You charge energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " ");
-		var damage:Number = scalingBonusIntelligence() * spellModWhite();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 2;
 		if (monster.plural) {
 			outputText("that jumps from one target to another ");
 			damage *= 5;
@@ -5875,4 +5859,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

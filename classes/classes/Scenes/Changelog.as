@@ -35,7 +35,6 @@ package classes.Scenes
 		private function Changelog37():void {
 			clearOutput();
 			outputText("(Part 2/2) <b>Version 0.8s (Venom system changes, Grey Mage changes, Elemental Conjurer changes (part 1), 3 new prestige jobs (Arch-priest, Necromancer, Bindmaster), 10th to 12th Soul Cultivation stages, Heaven Tribulation events, 3 new slots (flying sword and 2x misc acc), new spells/soulskils (white, black, grey, blood), Ashlands and new place, Bee Hive dungeon. Wood Elves, Evangeline changes and many more...):</b>\n\n");
-			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit! <3 -Jtecx\n");
 			outputText("-Killing true demon will count now toward counter of true demons killed not imps (sadly it won't retroactively move all demons kills from imps count kills thou).\n");
 			outputText("-Teleporting Circle to move between each of River Dungeon Floors been instaled by... someone. It still req. to beat each floor boss/es to open teleport option to deeper floors but after that it will make easier to travel deeper without need to go thro all previous floors. Well some still may want travel previous floors for some reason but that up for them to skip use of teleport for faster travel.\n");
 			outputText("-On difficulty below Nightmare there will be no penalty for having too high wrath like unable to cast spells or m.specials. Also penalties for internal mutation would be reduced by 5 on Hard and by 10 on Normal.\n");
@@ -117,7 +116,7 @@ package classes.Scenes
 			outputText("one of two fera perks from 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
 			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");
 			outputText("<b>Version 0.8s2:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm\n");
+			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm, Mouse, Hinezumi\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Eyes of the Hunter (Expert). Req. Eyes of the Hunter (Adept) and 75+ sensitivity. Effect: Increase crit chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-New tier 4 sensitivity lvl-up perk: Eyes of the Hunter (Grand Master). Req. Eyes of the Hunter (Master) and 125+ sensitivity. Effect: Increase crit chance against God, Boss type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Eyes of the Hunter (Ex). Req. Eyes of the Hunter (Novice) and 75+ sensitivity Effect: Allowing you to be able to fight much higher level enemeis than you as long your sensitivtiy is high enough. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)\n");
@@ -138,6 +137,7 @@ package classes.Scenes
 			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penalty of 50% less exp gains. It even giving you 200% of normal exp for defeating the same enemy outside arena. Thank you all for using that free trial ^^\n");
 			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc.\n");
 			outputText("-Kekvit Irae changes & fixes.\n");
+			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit! <3 -Jtecx\n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -166,9 +166,9 @@ package classes.Scenes
 			outputText("-New material: Iron ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-History/Past Life: Fighter bonus to accuracy increased by 10% up to 20%. Base melee and range attack accuracy been made even at 64%. Each level above 0 would increase acc by 6% up to 30% at lvl 6+.\n");
 			outputText("-Ring of Ambidexty acc bonus increased to 20% from 15%. Both this and Ring of deadeye aim price been lowered from 800 to 600 gems.\n");
-			outputText("-Fatigue cost of bow shooting, throwing (but not telekinesis throw) been removed. Damage scaling on range attacks has been increased.\n");
+			outputText("-Fatigue cost of bow shooting, throwing (but not telekinesis throw) been removed. Damage scaling on range attacks has been increased by large margin.\n");
 			outputText("-Goblins assassins and warriors had their HP stat bit adjusted (to not make assassins more tanky than warriors *sweats*). Also Priscilla would no longer appear in randomn gobo pick pool when she already chilling in Soul Sense menu.\n");
-			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet tpye weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new moption in their main menu).\n");
+			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet type weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new moption in their main menu).\n");
 			outputText("-Player PC giving birth to goblin daughter(s) would increase cup / hips / ass size by 1.\n");
 			outputText("-Beautiful item discovery scene at the lake been reduced to proc once per day (some PC's due to specific progress could end up see like only that scene and no others for most of the exploration attempts at the Lake).\n");
 			outputText("-Aurora, Etna and Neisa option to spar with them is disabled when PC earlier asked any of them to assist (meaning said npc is part of the PC team). That would avoid weirdness when Aurora fight as part of PC team and also as enemy for herself.\n");
@@ -180,13 +180,26 @@ package classes.Scenes
 			outputText("-Tease max lvl starts at 16 and would rise until lvl 24 reaching cap of lvl 40. Tease base chance to hit increased from 70% to 90% and it increase by 1% per tease level.\n");
 			outputText("-Temporal golems base damage will be scaling with int/wis by adding current value of both stats. Also it base value was increased.\n");
 			outputText("-New consumable (by Daikael): Ambrosia. Obtained by giving Sand Mother Bee Honey and 25 gems. Effect: As Pure Honey item but without TF body effect.\n");
-			outputText("-Super Sensual perk would increase tease cap up to 70. Also each 1% above 100% chance to succesfully tease oponent will not give ~2% more lust dmg instead of ~1%.\n");
+			outputText("-Super Sensual perk would increase tease cap up to 70. Also each 1% above 100% chance to succesfully tease oponent will not give ~2% more lust dmg instead of ~1%. Base lust damage form tease been increased.\n");
 			outputText("-Marble can give PC 2 new items from Present option: Minotaur Horns (the same PC get from killing minotaurs) and Pack of nails.\n");
 			outputText("-Charged Core perk req. of having Apprentice Golem Maker perk was replacd with Job: Golemancer perk.\n");
 			outputText("-Perks from Beginner Golem Maker to Master Golem Maker would also increase damage of temporal golems based on cuurent int/wis.\n");
 			outputText("-Secondary Stats Modifier scaling would be different for Boss type enemies and rest of enemies. Boss one modifiers would be 10/40/200/1600% instead of 5/10/25/100%.\n");
 			outputText("-Added checks to prevent wood elfs from piloting all goblin mechs (they weren't treated as all others elfs and so they cheated their way to cockpits xD)\n");
 			outputText("-Giant Slayer mech req. for max height been increased to 5 1/2 foot and PC can have small wings (those that not allow using wing slap special) or tail.\n");
+			outputText("-None of demonic enemies (imps, true demons) can impregnate goblonoid PC (goblin/gremlin).\n");
+			outputText("-Bit lowered scaling on melee attack(s).\n");
+			outputText("-Job: Monk perk moved from tier 2 to tier 1 and have it wis req. lowered from 60 to 40.\n");
+			outputText("-Many of perks form Job: Gunslinger tree moved between perk tiers (and in many cases req. stats increased/decreased according to moving up or down). Affected perks included: Job: Gunslinger - t1 > t0, AmateurGunslinger - t1 > t2, Explosive Cartridge - t2 > t3, Expert Gunslinger - t3 > t4, Named Bullet - t3 > t5, Master Gunslinger - t5 > t6, Alchemical Cartridge - t5 > t2, Church of the gun - t6 > t1. \n");
+			outputText("-Added option under 3rd special action button in combat menu to pick few of used thrown weapons (only for those that give limited amount of them liek gnow throwing axes). Each pick up will recover 5 of them but will use up player combat turn.\n");
+			outputText("-Lightning Reload perk effect expanded to include lowering fatigue cost of reloading ammo by 50%.\n");
+			outputText("-Cooldown toggle for spells been removed and some of the spells power been a bit lowered. Now cooldown option for spells will be on by default without way to turn it off.\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Tainted Magazine. Req. Amateur Gunslinger perk, 55+ wis, 50+ tou, 45+ spe. Effect: Increase reload cost by 10 and doubles max ammo (200% of base ammo count).\n");
+			outputText("-New tier 5 wisdom lvl-up perk: Lock and load. Req. Expert Gunslinger perk, 80+ wis, 75+ tou and 70+ spe. Effect: You gained decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).\n");
+			outputText("-New tier 6 wisdom lvl-up perk: Primed Clip Warp. Req. Tainted Magazine perk, 100+ wis, 95+ tou, 90+ spe. Effect: .\n");
+			//outputText("-New tier   lvl-up perk: Silver for monsters. Req. . Effect: Ranged weapons deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-Jtex with unweaving fevor implemented tag system for weapons that was in one or another way requested recently.\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -207,9 +220,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -275,13 +285,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -322,6 +326,14 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

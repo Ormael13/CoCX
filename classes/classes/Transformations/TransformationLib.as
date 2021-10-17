@@ -2052,6 +2052,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.BUCKTEETH;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.BUCKTEETH));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2068,6 +2069,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.MOUSE;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3543,6 +3545,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.MOUSE;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4167,6 +4170,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.HINEZUMI;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5316,6 +5320,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.HINEZUMI;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7187,6 +7192,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.MOUSE;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7208,6 +7214,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.HINEZUMI;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8623,6 +8630,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8645,6 +8653,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {

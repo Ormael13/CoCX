@@ -1026,7 +1026,7 @@ public class MagicSpecials extends BaseCombatContent {
 			monster.removeStatusEffect(StatusEffects.DragonWaterBreath);
 			monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		}
-		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 4;
 		//Determine if critical hit!
 		var crit1:Boolean = false;
 		var critChance1:int = 5;
@@ -1039,7 +1039,6 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -1175,7 +1174,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		outputText("You gasp in pleasure your body charging up before discharging a bolt of electricity at your foe dealing ");
-		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 4;
 		//Determine if critical hit!
 		var crit1:Boolean = false;
 		var critChance1:int = 5;
@@ -1188,7 +1187,6 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -1290,7 +1288,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Luststorm():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var damage:Number = scalingBonusIntelligence() * spellModWhite() * combat.lightningDamageBoostedByDao();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 4 * combat.lightningDamageBoostedByDao();
 		//Determine if critical hit!
 		var crit1:Boolean = false;
 		var critChance1:int = 5;
@@ -1303,7 +1301,6 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -1642,8 +1639,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		fatigue(40, USEFATG_MAGIC_NOBM);
-		var damage:Number = scalingBonusIntelligence() * spellModBlack();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 4;
 		if (player.hasPerk(MutationsLib.FrozenHeart)) {
 			var IBM:Number = 1.1;
 			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) IBM += 0.2;
@@ -1712,8 +1708,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.NaturalInstincts)) HCCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownHungeringCold,HCCD,0,0,0);
-		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.2;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.8;
 		if (player.hasPerk(MutationsLib.FrozenHeart)) {
 			var HCM:Number = 1.1;
 			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) HCM += 0.2;
@@ -1772,8 +1767,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(60, USEFATG_MAGIC_NOBM);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownFrozenKiss,7,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownFrozenKiss,8,0,0,0);
-		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.2;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.8;
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
@@ -2018,11 +2012,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
@@ -2143,11 +2137,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//Shell
@@ -2233,11 +2227,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		//Shell
@@ -2322,11 +2316,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 		//Shell
@@ -2410,11 +2404,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
@@ -2514,11 +2508,11 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
-			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			damage *= 4;
 			damage *= damult;
 			damage = Math.round(damage);
 			//Shell
@@ -2620,7 +2614,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence() * 0.25;
 		damage += scalingBonusWisdom() * 0.25;
 		damage = calcInfernoMod(damage);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage *= 4;
 		damage = Math.round(damage);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -2687,7 +2681,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 10 + 45 + rand(10));
-			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+			damage *= 4;
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
 			monster.HP -= damage;
@@ -2734,7 +2728,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(20, USEFATG_MAGIC_NOBM);
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage *= 4;
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
@@ -2749,7 +2743,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 8 + rand(10) + player.cor / 5);
-			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+			damage *= 4;
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
 			monster.HP -= damage;
@@ -3264,11 +3258,10 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You grin malevolently and weave an arcane sign, causing an infernal fire to surges from below and scorching your opponent \n");
-		var damage:Number = scalingBonusIntelligence() * 0.8;
-		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) damage += scalingBonusIntelligence() * 0.2;
-		if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) damage += scalingBonusIntelligence() * 0.4;
+		var damage:Number = scalingBonusIntelligence() * 3.2;
+		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) damage += scalingBonusIntelligence() * 0.8;
+		if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) damage += scalingBonusIntelligence() * 1.6;
 		damage *= spellMod();
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3462,7 +3455,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage *= 4;
 		damage = Math.round(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -3576,7 +3569,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage *= 4;
 		damage = Math.round(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -3700,7 +3693,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (player.headjewelryName == "fox hairpin") damage *= 1.2;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage *= 4;
 		damage = Math.round(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -3820,7 +3813,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage *= 4;
 		damage = Math.round(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -3944,7 +3937,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage *= 4;
 		damage = Math.round(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -4897,13 +4890,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownHurricane,4,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownHurricane,5,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusSpeed();// * 0.5
-		damage += scalingBonusIntelligence();// * 0.5
+		damage += scalingBonusSpeed() * 2;
+		damage += scalingBonusIntelligence() * 2;
 		damage += rand(player.level + player.couatlScore());
 		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) damage *= 1.5;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -4988,13 +4980,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownWindScythe,4,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownWindScythe,5,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusSpeed();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		damage += scalingBonusSpeed() * 2;
+		damage += scalingBonusWisdom() * 2;
 		damage += rand(player.level + player.kamaitachiScore());
 		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) damage *= 1.5;
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;

@@ -1105,7 +1105,6 @@ use namespace CoC;
 			return (weaponClass("Polearm"));
 		}
 		//Spear-type
-
 		public function isSpearTypeWeapon():Boolean {
 			return (weaponClass("Spear"));
 		}
