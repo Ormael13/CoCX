@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function AmphystClaymore() 
 		{
-			super("AClaymo", "A.Claymore", "amphyst claymore", "an amphyst claymore", "cleaving sword-slash", 15, 1200, "This two-handed sword is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Large");
+			super("AClaymo", "A.Claymore", "amphyst claymore", "an amphyst claymore", "cleaving sword-slash", 15, 1200, "This two-handed sword is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Large", "Sword");
 		}
 		
 		override public function get attack():Number {

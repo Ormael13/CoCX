@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function DualHugeWarhammer() 
 		{
-			super("D.WHam", "D.WarHam", "dual huge warhammer", "a dual huge warhammer", "smash", 15, 2400, "A pair of huge war-hammers made almost entirely of steel that only the strongest warriors could use.  Getting hit with this might stun the victim.", "Dual Large");
+			super("D.WHam", "D.WarHam", "dual huge warhammer", "a dual huge warhammer", "smash", 15, 2400, "A pair of huge war-hammers made almost entirely of steel that only the strongest warriors could use.  Getting hit with this might stun the victim.", "Dual Large", "Mace/Hammer");
 		}
 		
 		override public function get attack():Number {

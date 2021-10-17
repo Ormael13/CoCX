@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class DualSwords extends Weapon {
 		
 		public function DualSwords() {
-			super("DSwords", "DualSwords", "dual swords", "a pair of swords", "slashes", 10, 800, "A pair of swords made of the finest steel usefull for fight groups of enemies.", "Dual");
+			super("DSwords", "DualSwords", "dual swords", "a pair of swords", "slashes", 10, 800, "A pair of swords made of the finest steel usefull for fight groups of enemies.", "Dual", "Sword");
 		}
 		
 		override public function canUse():Boolean {

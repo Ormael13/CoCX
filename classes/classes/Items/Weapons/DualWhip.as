@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function DualWhip() 
 		{
-			super("P.Whip ", "P.Whip", "pair of coiled whips", "a pair of coiled whips", "whip-crack", 5, 400, "A pair of coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!", "Dual");
+			super("P.Whip ", "P.Whip", "pair of coiled whips", "a pair of coiled whips", "whip-crack", 5, 400, "A pair of coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!", "Dual", "Whip");
 		}
 		
 		override public function get attack():Number {

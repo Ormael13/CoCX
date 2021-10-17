@@ -10,7 +10,7 @@ public class NephilimBlade extends Weapon
 			super(
 				"NPHMBlade","Nephilim Blade","nephilim blade","a nephilim blade","slash",62,2480,
 				"A long lost sword, made in a shining metal. It once belonged to the demigod Nephilim. This masterfully crafted blade seeks and destroys corruption wherever it might find it. It will periodically cleanse their user body and soul.",
-				"Large"
+				"Large", "Sword"
 			);
 		}
 		override public function get attack():Number {

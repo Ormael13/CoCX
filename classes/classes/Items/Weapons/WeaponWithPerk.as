@@ -7,9 +7,9 @@ import classes.PerkType;
 public class WeaponWithPerk extends Weapon {
 		private var weapPerk:PerkClass;
 		
-		public function WeaponWithPerk(id:String, shortName:String, name:String, longName:String, verb:String, attack:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "")
+		public function WeaponWithPerk(id:String, shortName:String, name:String, longName:String, verb:String, attack:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", type:String = "")
 		{
-			super(id, shortName, name, longName, verb, attack, value, description, perk);
+			super(id, shortName, name, longName, verb, attack, value, description, perk, type);
 			this.weapPerk = new PerkClass(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
 		}
 		

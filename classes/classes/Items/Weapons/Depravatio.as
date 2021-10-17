@@ -11,13 +11,19 @@ package classes.Items.Weapons
 	public class Depravatio extends WeaponWithPerk {
 		
 		public function Depravatio() {
-			super("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption.", "Staff", PerkLib.WizardsFocus, 0.6, 0, 0, 0);
+			super("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption.", "Staff", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff");
 		}
 		
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
 			desc += "\n\nType: Weapon (Staff)";
+			if (type != "") {
+				desc += "\nWeapon Class: " + type;
+			}
+			if (perk != "") {
+				desc += "\nSpecials: " + perk;
+			}
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value

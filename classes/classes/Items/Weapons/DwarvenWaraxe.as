@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function DwarvenWaraxe() 
 		{
-			super("DwarWA","DwarvenWaraxe","dwarven waraxe","a dwarven waraxe","cleave",53,2120,"A dwarven waraxe has a large, ornate head mounted to a thick handle, making it too large to use in one hand without special training.", "Large");
+			super("DwarWA","DwarvenWaraxe","dwarven waraxe","a dwarven waraxe","cleave",53,2120,"A dwarven waraxe has a large, ornate head mounted to a thick handle, making it too large to use in one hand without special training.", "Large", "Axe");
 		}
 		
 		override public function get attack():Number {

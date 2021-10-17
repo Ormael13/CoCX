@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function Wardensstaff() 
 		{
-			super("WDStaff", "WardensStaff", "Warden’s staff", "a Warden’s staff", "smack", 10, 1600, "This staff looks ordinary up until the crystal at its tip, which is attached by tendrils grown from the staff’s body. The sacred wood faintly seethes with arcane power, and the light within the crystal pulses to the tempo of Yggdrasil's song.", "Staff", PerkLib.WizardsAndDaoistsFocus, 0.6, 0.4, 0, 0);
+			super("WDStaff", "WardensStaff", "Warden’s staff", "a Warden’s staff", "smack", 10, 1600, "This staff looks ordinary up until the crystal at its tip, which is attached by tendrils grown from the staff’s body. The sacred wood faintly seethes with arcane power, and the light within the crystal pulses to the tempo of Yggdrasil's song.", "Staff", PerkLib.WizardsAndDaoistsFocus, 0.6, 0.4, 0, 0, "", "Staff");
 		}
 		
 		override public function get description():String {

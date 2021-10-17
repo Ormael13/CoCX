@@ -9,7 +9,7 @@ package classes.Items.Weapons
 			super(
 				"EBNYBlade","Ebony Destroyer","ebony destroyer","an ebony destroyer","slash",62,2480,
 				"This massive weapon, made of the darkest metal, seems to seethe with unseen malice. Its desire to destroy and damn the pure is so strong that it’s wielder must be wary, lest the blade take control of their body to fulfill its gruesome desires.",
-				"Large"
+				"Large", "Sword"
 			);
 		}
 		override public function get attack():Number {
