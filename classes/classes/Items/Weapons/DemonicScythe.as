@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function DemonicScythe() 
 		{
-			super("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"A magic catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large", PerkLib.WizardsFocus, 1, 0, 0, 0);
+			super("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"A magic catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large", PerkLib.WizardsFocus, 1, 0, 0, 0,"", "Scythe, StaffPart");
 		}
 
 		override public function get verb():String { 

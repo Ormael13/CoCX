@@ -10,7 +10,7 @@ package classes.Items.Weapons
 	public class RaphaelsRapier extends Weapon {
 		
 		public function RaphaelsRapier() {
-			super("RRapier", "RRapier", "vulpine rapier", "Raphael's vulpine rapier", "slash", 8, 640, "He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.");
+			super("RRapier", "RRapier", "vulpine rapier", "Raphael's vulpine rapier", "slash", 8, 640, "He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.", "", "Dueling");
 		}
 		
 		override public function get attack():Number {

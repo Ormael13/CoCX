@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function NorthernerIcePicks() 
 		{
-			super("NorthIP","North.I.P.","Northerner ice picks", "a Northerner ice picks", "stabs", 5, 800, "These items are normally used by climbers to move across vertical icy surfaces. While these were not to be originally used as weapons this pair of pickaxes easily pierces through armors and hides.", "Dual Small");
+			super("NorthIP","North.I.P.","Northerner ice picks", "a Northerner ice picks", "stabs", 5, 800, "These items are normally used by climbers to move across vertical icy surfaces. While these were not to be originally used as weapons this pair of pickaxes easily pierces through armors and hides.", "Dual Small", "Exotic");
 		}
 		
 		override public function canUse():Boolean {

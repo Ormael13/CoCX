@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		{
 			super("W.GAXE", "Winged G.Axe", "winged greataxe", "a winged greataxe", "cleave", 28, 1280,
 					"A greataxe made in untarnished steel and imbued with holy power. Its shaft is wrapped in feathery wings made of brass and gold. This holy artifact was created to execute demonic fiends, always finding their weakest spot.",
-					"Large"
+					"Large", "Axe"
 			);
 		}
 		override public function get attack():Number{

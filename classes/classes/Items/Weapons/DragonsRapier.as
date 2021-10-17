@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class DragonsRapier extends Weapon {
 		
 		public function DragonsRapier() {
-			super("DRapier", "DRapier", "dragon rapier", "Dragon's Rapier", "slash", 18, 1440, "Ancient looking rapier forged in dragon fire. Tales saying that some of the dragon fire could still linger inside of it.  Still blade is piece of an extraordinatry quality and perfect for stabbing.");
+			super("DRapier", "DRapier", "dragon rapier", "Dragon's Rapier", "slash", 18, 1440, "Ancient looking rapier forged in dragon fire. Tales saying that some of the dragon fire could still linger inside of it.  Still blade is piece of an extraordinatry quality and perfect for stabbing.", "", "Dueling");
 		}
 		
 		override public function get attack():Number {

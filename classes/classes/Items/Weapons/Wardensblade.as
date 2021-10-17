@@ -13,13 +13,19 @@ package classes.Items.Weapons
 		
 		public function Wardensblade() 
 		{
-			super("WDBlade", "WardensBlade", "Warden’s blade", "a Warden’s blade", "slash", 15, 1200, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "Daoist's Focus", PerkLib.DaoistsFocus, 0.4, 0, 0, 0);
+			super("WDBlade", "WardensBlade", "Warden’s blade", "a Warden’s blade", "slash", 15, 1200, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "Daoist's Focus", PerkLib.DaoistsFocus, 0.4, 0, 0, 0, "", "Sword");
 		}
 		
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
 			desc += "\n\nType: Weapon (Sword)";
+			if (type != "") {
+				desc += "\nWeapon Class: " + type;
+			}
+			if (perk != "") {
+				desc += "\nSpecials: " + perk;
+			}
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value
