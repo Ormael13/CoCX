@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function NineTailWhip() 
 		{
-			super("NTWhip ", "NineTailWhip", "nine tail whip", "a nine tail whip", "whipping", 18, 720, "A rope that unravelled into three small ropes, each of which is unravelled again designed to whip your foes into submission.", "Large", "Whip");
+			super("NTWhip ", "NineTailWhip", "nine tail whip", "a nine tail whip", "whipping", 18, 720, "A rope that unravelled into three small ropes, each of which is unravelled again designed to whip your foes into submission.", "Large, Whipping", "Whip");
 		}
 		//przerobić na mid grade wrath weapon?
 		override public function get attack():Number {

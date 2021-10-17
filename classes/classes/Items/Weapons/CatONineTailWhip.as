@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function CatONineTailWhip() 
 		{
-			super("CNTWhip", "CatONineTailWhip", "Bastet Whip", "a Bastet Whip", "whipping", 27, 1080, "A rope made from unknown magic beast fur that unravelled into three small ropes, each of which is unravelled again designed to whip and cut your foes into submission.", "Large", "Whip");
+			super("CNTWhip", "CatONineTailWhip", "Bastet Whip", "a Bastet Whip", "whipping", 27, 1080, "A rope made from unknown magic beast fur that unravelled into three small ropes, each of which is unravelled again designed to whip and cut your foes into submission.", "Large, Whipping, Bleed25", "Whip");
 		}
 		//przerobić na high grade wrath weapon?
 		override public function get attack():Number {

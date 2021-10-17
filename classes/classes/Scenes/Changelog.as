@@ -137,7 +137,7 @@ package classes.Scenes
 			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penalty of 50% less exp gains. It even giving you 200% of normal exp for defeating the same enemy outside arena. Thank you all for using that free trial ^^\n");
 			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc.\n");
 			outputText("-Kekvit Irae changes & fixes.\n");
-			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit! <3 -Jtecx\n");
+			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit! \n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");

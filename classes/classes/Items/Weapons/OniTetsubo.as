@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function OniTetsubo() 
 		{
-			super("O.Tetsu", "OniTetsubo", "Oni Tetsubo", "an Oni Tetsubo", "smash", 45, 3600, "This unrealistically large two handed mace was clearly made for Oni warriors to wield. You likely will need some ridiculous strength just to lift it.", "Large", "Mace/Hammer, Tetsubo");
+			super("O.Tetsu", "OniTetsubo", "Oni Tetsubo", "an Oni Tetsubo", "smash", 45, 3600, "This unrealistically large two handed mace was clearly made for Oni warriors to wield. You likely will need some ridiculous strength just to lift it.", "Large, Whirlwind, LGWrath, Stun10", "Mace/Hammer, Tetsubo");
 		}
 		
 		override public function get attack():Number {
