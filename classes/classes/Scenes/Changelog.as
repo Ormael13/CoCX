@@ -199,7 +199,7 @@ package classes.Scenes
 			outputText("-New tier 6 wisdom lvl-up perk: Primed Clip Warp. Req. Tainted Magazine perk, 100+ wis, 95+ tou, 90+ spe. Effect: .\n");
 			//outputText("-New tier   lvl-up perk: Silver for monsters. Req. . Effect: Ranged weapons deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Jtex with unweaving fevor implemented tag system for weapons that was in one or another way requested recently.\n");
+			outputText("-Jtecx Weapons Tagging, now you can check what class/type it is, and what specials they can do! (Bit of help from Kekvit as well on specials.)\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
