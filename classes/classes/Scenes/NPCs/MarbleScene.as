@@ -395,7 +395,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				doNext(playerMenu);
 				return true;
 			}
-			if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+			if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.hasPerk(PerkLib.MarblesMilk)) {
 				checkedMarbleMilk++;
 				//In prison
 				if (prison.inPrison) {
@@ -420,7 +420,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						CoC.instance.timeQ++; //We can get rid of this: threshhold--;
 					}
 				}
-				doNext(playerMenu);
+				doNext(camp.returnToCampUseOneHour);
+				//Hm. Temp fix, but postAddictionCampMornings is for some reason being called... twice? That'd mean the above isn't exactly working right....
 				return true;
 			}
 			return false;
@@ -1643,10 +1644,12 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 	player.slimeFeed();
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)
+	//Yeah, but this literally can never occur.
+	//Kinda begs the question: WTF is the point of the boolean?
 	if(!player.hasItem(consumables.M__MILK, 5)) {
 		outputText("\n\nAs you are about to leave, Marble hands you a bottle of her milk.  ");
 		//[if the player is no longer addicted]
-		if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
+		if(player.hasPerk(PerkLib.MarbleResistant)) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
 		//(player gains a bottle of Marble's milk)
 		inventory.takeItem(consumables.M__MILK, playerMenu);
 	}

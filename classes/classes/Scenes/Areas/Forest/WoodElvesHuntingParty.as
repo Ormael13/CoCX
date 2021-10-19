@@ -21,14 +21,27 @@ public class WoodElvesHuntingParty extends Monster
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
+			woodElfWeaponRestoreAtCombatEnd();
 			SceneLib.woodElves.ElfFightWin();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			woodElfWeaponRestoreAtCombatEnd();
 			SceneLib.woodElves.ElfFightLoose();
 		}
-		
+
+		private function woodElfWeaponRestoreAtCombatEnd():void{
+			if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+				player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+			}
+			else if(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0){
+				player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
+			}
+		}
+
 		public function WoodElfsGroupAttack():void
 		{
 			var Acc:Number = 0;
