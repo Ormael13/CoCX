@@ -70,7 +70,11 @@ import classes.internals.*;
 		//(magic attack)
 		private function shouldraMagicLazers():void {
 			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
-			var damage:Number = player.takeMagicDamage(this.inte + rand(10), true);
+			var damage:Number = this.inte + rand(11);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			outputText("\n");
 		}
 

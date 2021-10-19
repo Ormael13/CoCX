@@ -1171,7 +1171,10 @@ public class Lumi extends BaseContent {
 			menu();
 			if (player.hasKeyItem("Blueprint - Energy Core") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && player.hasItem(useables.GOLCORE, 3)) addButton(0, "Energy Core", lumiWorkshopEnergyCore).hint("Energy Core - A power source for devices. Necessary for advanced engineering - 3 golem cores, 5 metal piece, 4 hours of work.");
 			else addButtonDisabled(0, "Energy Core", "Req. 3 golem cores, 5 metal piece.");
-			if (player.hasKeyItem("Blueprint - Mechanism") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) addButton(1, "Mechanism", lumiWorkshopMechanism).hint("Mechanism - A complex set of gear and gyro. Necessary for advanced engineering - 200 nails, 5 metal piece, 4 hours of work.");
+			if (player.hasKeyItem("Blueprint - Mechanism") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) {
+				if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Mechanism", "Your storage for mechanisms is full.");
+				else addButton(1, "Mechanism", lumiWorkshopMechanism).hint("Mechanism - A complex set of gear and gyro. Necessary for advanced engineering - 200 nails, 5 metal piece, 4 hours of work.");
+			}
 			else addButtonDisabled(1, "Mechanism", "Req. 200 nails, 5 metal piece.");
 			if (player.hasKeyItem("Blueprint - Toolbelt") >= 0 && player.inte >= 25 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1) addButton(2, "Toolbelt", lumiWorkshopToolbelt).hint("Toolbelt - A toolbelt to hang your various engineering tool such as arclight spanner and screwdrivers. To wear around the waist. Necessary for basic engineering - 25+ int, 1 metal piece, 4 hours of work.");
 			else addButtonDisabled(2, "Toolbelt", "Req. 25+ Int, 1 metal piece.");
@@ -1187,17 +1190,17 @@ public class Lumi extends BaseContent {
 			else addButtonDisabled(6, "Scan.goggle", "Req. 75+ int, Machinist Goggles, 5 metal pieces, 200 nails, 2 energy core.");
 			if (player.hasKeyItem("Blueprint - S.A Tech Goggle") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.ENECORE, 5) && player.hasItem(headjewelries.SCANGOG, 1)) addButton(7, "S.A.T.Goggle", lumiWorkshopSATechGoggle).hint("S.A Tech Goggle - Better than its previous iteration the Scanner google, the tech google actually also reveal opponent's flaws and weaknesses highlighting their vulnerability in red within the google glass. The fact it also has a complete logbook and access to previous encounter informations also helps catalogise foes weaknesses - 100+ int, Scanner goggle, 10 metal pieces, 300 nails, 5 energy core, 12 hours of work");
 			else addButtonDisabled(7, "S.A.T.Goggle", "Req. 100+ int, Scanner goggle, 10 metal pieces, 300 nails, 5 energy core.");
-			if (player.hasKeyItem("Blueprint - Nitro Boots") >= 0 && player.inte >= 100 && player.hasKeyItem("Rocket Boots") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.MECHANI, 3) && player.hasItem(consumables.SALAMFW, 5)) addButton(8, "Nitro Boots", lumiWorkshopNitroBoots).hint("Nitro Boots - This device allows you to increase your movement speed with nitro rockets. Also can be used to kick people in the face leaving some serious burns and even setting people on fire - 100+ int, Rocket Boots, 15 metal pieces, 300 nails, 3 mechanism, 5 salamander firewaters, 12 hours of work");
-			if (player.hasKeyItem("Blueprint - Rocket Boots") >= 0 && player.inte >= 75 && player.hasKeyItem("Spring Boots") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.MECHANI, 2) && player.hasItem(consumables.SALAMFW, 1)) addButton(8, "Rocket Boots", lumiWorkshopRocketBoots).hint("Rocket Boots - This device allows you to increase your movement speed with rockets. Also can be used to kick people in the face - 75+ int, Spring Boots, 10 metal pieces, 200 nails, 1 salamander firewater, 2 mechanism, 8 hours of work");
-			if (player.hasKeyItem("Blueprint - Spring Boots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(useables.MECHANI, 1)) addButton(8, "Spring Boots", lumiWorkshopSpringBoots).hint("Spring Boots - This device allows you to increase your movement speed with springs - 50+ int, Toolbelt, 5 metal pieces, 100 nails, 1 mechanism, 4 hours of work");
+			if (player.hasKeyItem("Blueprint - Nitro Boots") >= 0 && player.inte >= 100 && player.hasKeyItem("Rocket Boots") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 3 && player.hasItem(consumables.SALAMFW, 5)) addButton(8, "Nitro Boots", lumiWorkshopNitroBoots).hint("Nitro Boots - This device allows you to increase your movement speed with nitro rockets. Also can be used to kick people in the face leaving some serious burns and even setting people on fire - 100+ int, Rocket Boots, 15 metal pieces, 300 nails, 3 mechanism, 5 salamander firewaters, 12 hours of work");
+			if (player.hasKeyItem("Blueprint - Rocket Boots") >= 0 && player.inte >= 75 && player.hasKeyItem("Spring Boots") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 2 && player.hasItem(consumables.SALAMFW, 1)) addButton(8, "Rocket Boots", lumiWorkshopRocketBoots).hint("Rocket Boots - This device allows you to increase your movement speed with rockets. Also can be used to kick people in the face - 75+ int, Spring Boots, 10 metal pieces, 200 nails, 1 salamander firewater, 2 mechanism, 8 hours of work");
+			if (player.hasKeyItem("Blueprint - Spring Boots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 1) addButton(8, "Spring Boots", lumiWorkshopSpringBoots).hint("Spring Boots - This device allows you to increase your movement speed with springs - 50+ int, Toolbelt, 5 metal pieces, 100 nails, 1 mechanism, 4 hours of work");
 			if (player.hasKeyItem("Blueprint - M.G.S. bracer") >= 0 && player.inte >= 100 && player.hasKeyItem("Powboy") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.ENECORE, 4)) addButton(9, "M.G.S. bracer", lumiWorkshopMGSBracer).hint("M.G.S. bracer - The Mega Goblin Super bracer increases your physical strength by injecting " + (silly() ? "nanomachine" : "drugs") + " whenever needed, which reacts in your goblin blood and may even repair damaged tissue. Furthermore it is equipped with a mighty energy shield that works as long as you are not using any armor. And lastly, it actually tells the hour of the day - 100+ int, Powboy, 10 metal pieces, 500 nails, 4 energy core, 12 hours of work");
 			if (player.hasKeyItem("Blueprint - Powboy") >= 0 && player.inte >= 75 && player.hasKeyItem("Power bracer") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.ENECORE, 1)) addButton(9, "Powboy", lumiWorkshopPowboy).hint("Powboy - This bracer increase your physical strength by injecting drugs which reacts with your goblin blood. Furthermore it is equipped with an energy shield that work so long as you are not using armors. At last it actually tells the hour of the day. Like all drugs also increase sensitivity - 75+ int, Power bracer, 5 metal pieces, 200 nails, 1 energy core, 8 hours of work");
 			if (player.hasKeyItem("Blueprint - Power bracer") >= 0 && (player.hasKeyItem("Drug injectors") >= 0 || player.hasKeyItem("Improved Drug injectors") >= 0 || player.hasKeyItem("Potent Drug injectors") >= 0) && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(useables.ENECORE, 1)) addButton(9, "Power bracer", lumiWorkshopPowerBracer).hint("Power bracer - This bracer increase your physical strength by injecting drugs which reacts with your blood. A physical strength version of the drug injector to cope with your natural handicaps. Like all drugs also increase sensitivity - 50+ int, any Drug injector, 3 metal pieces, 100 nails, 1 energy core, 4 hours of work");
-			if (player.hasKeyItem("Blueprint - Machined greatsword") >= 0 && (player.hasKeyItem("Power bracer") >= 0 || player.hasKeyItem("Powboy") >= 0 || player.hasKeyItem("M.G.S. bracer") >= 0) && player.hasPerk(PerkLib.JobWarrior) && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.ENECORE, 1) && player.hasItem(useables.MECHANI, 2)) addButton(10, "Mach. greatsword", lumiWorkshopMachinedGreatsword).hint("Machined greatsword - This greatsword is half invention half weapon. Instead of a sharp straight blade the weapon sides is a set of metal tooth's that constantly move in order to properly saw through flesh and more solid mather, creating grievous wounds. Very good for cutting down trees too - 50+ int, Job: Warrior, any Power bracer, 3 metal pieces, 200 nails, 1 energy core, 2 mechanism, 12 hours of work");
+			if (player.hasKeyItem("Blueprint - Machined greatsword") >= 0 && (player.hasKeyItem("Power bracer") >= 0 || player.hasKeyItem("Powboy") >= 0 || player.hasKeyItem("M.G.S. bracer") >= 0) && player.hasPerk(PerkLib.JobWarrior) && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 2) addButton(10, "Mach. greatsword", lumiWorkshopMachinedGreatsword).hint("Machined greatsword - This greatsword is half invention half weapon. Instead of a sharp straight blade the weapon sides is a set of metal tooth's that constantly move in order to properly saw through flesh and more solid mather, creating grievous wounds. Very good for cutting down trees too - 50+ int, Job: Warrior, any Power bracer, 3 metal pieces, 200 nails, 1 energy core, 2 mechanism, 12 hours of work");
 			else addButtonDisabled(10, "Mach. greatsword", "Req. 50+ int, Job: Warrior, any Power bracer, 3 metal pieces, 200 nails, 1 energy core, 2 mechanism.");
-			if (player.hasKeyItem("Blueprint - Ripper 1.0") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 2) && player.hasItem(useables.MECHANI, 5) && player.hasItem(weapons.MACGRSW, 1)) addButton(11, "Ripper 1.0", lumiWorkshopRipper1).hint("Ripper 1.0 - Similar to the machined great sword this weapon is highly mechanical. Instead of a sharp straight blade the weapon sides is a set of sharp metal tooth's that constantly move in order to properly saw through flesh and more solid mather, creating grievous wounds. Very good for cutting down trees to - 75+ int, Machined greatsword, 10 metal pieces, 500 nails, 2 energy core, 5 mechanism, 12 hours of work");
+			if (player.hasKeyItem("Blueprint - Ripper 1.0") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 2) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 5 && player.hasItem(weapons.MACGRSW, 1)) addButton(11, "Ripper 1.0", lumiWorkshopRipper1).hint("Ripper 1.0 - Similar to the machined great sword this weapon is highly mechanical. Instead of a sharp straight blade the weapon sides is a set of sharp metal tooth's that constantly move in order to properly saw through flesh and more solid mather, creating grievous wounds. Very good for cutting down trees to - 75+ int, Machined greatsword, 10 metal pieces, 500 nails, 2 energy core, 5 mechanism, 12 hours of work");
 			else addButtonDisabled(11, "Ripper 1.0", "Req. 75+ int, Machined greatsword, 10 metal pieces, 500 nails, 2 energy core, 5 mechanism.");
-			if (player.hasKeyItem("Blueprint - Ripper 2.0") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 30 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.MECHANI, 10) && player.hasItem(weapons.RIPPER1, 1)) addButton(12, "Ripper 2.0", lumiWorkshopRipper2).hint("Ripper 2.0 - Similar to the machined great sword this weapon is highly mechanical. Instead of a sharp straight blade the weapon sides is a set of sharp metal tooth's that constantly move in order to properly saw through flesh and more solid mather, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set the saw constantly aflame. Aside of cutting fleshy things in half it is very good for taking down trees - 100+ int, Ripper 1.0, 30 metal pieces, 500 nails, 5 energy core, 10 mechanism, 12 hours of work");
+			if (player.hasKeyItem("Blueprint - Ripper 2.0") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 30 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 10 && player.hasItem(weapons.RIPPER1, 1)) addButton(12, "Ripper 2.0", lumiWorkshopRipper2).hint("Ripper 2.0 - Similar to the machined great sword this weapon is highly mechanical. Instead of a sharp straight blade the weapon sides is a set of sharp metal tooth's that constantly move in order to properly saw through flesh and more solid mather, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set the saw constantly aflame. Aside of cutting fleshy things in half it is very good for taking down trees - 100+ int, Ripper 1.0, 30 metal pieces, 500 nails, 5 energy core, 10 mechanism, 12 hours of work");
 			else addButtonDisabled(12, "Ripper 2.0", "Req. 100+ int, Ripper 1.0, 30 metal pieces, 500 nails, 5 energy core, 10 mechanism.");
 			if (player.vehiclesName == "Goblin Mech Alpha" || player.vehiclesName == "Goblin Mech Prime" || player.vehiclesName == "Giant Slayer Mech") addButton(13, "Mech UPGR", lumiWorkshopMechUpgrades);
 			else addButtonDisabled(13, "Mech UPGR", "You need to have goblin mech currently used to craft upgrades for it.");
@@ -1243,23 +1246,23 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 2.0") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500) addButton(0, "UpgrArmor 3.0", lumiWorkshopUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 - +15 armor/magic resistance to the mech. +50% Health. - 100+ int, Upgraded Armor plating 2.0, 20 metal pieces, 500 nails and 12 hours of work");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300) addButton(0, "UpgrArmor 2.0", lumiWorkshopUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 - +10 armor/magic resistance to the mech. +35% Health. - 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) addButton(0, "UpgrArmor 1.0", lumiWorkshopUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 - +5 armor/magic resistance to the mech. +20% Health. - 50+ int, Toolbelt, 5 metal pieces, 200 nails and 4 hours of work");
-		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0 && player.hasKeyItem("Taser") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.MECHANI, 2)) addButton(1, "Tazer O.B.", lumiWorkshopTaserOverchargeBattery).hint("Taser with an overcharged battery - Increases the Taser’s effectiveness and paralysis duration. - 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work");
-		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.ENECORE, 1) && player.hasItem(useables.MECHANI, 1)) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0 && player.hasKeyItem("Taser") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 2) addButton(1, "Tazer O.B.", lumiWorkshopTaserOverchargeBattery).hint("Taser with an overcharged battery - Increases the Taser’s effectiveness and paralysis duration. - 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 1) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(2, "Safety bubble", lumiWorkshopSafetyBubble).hint("Safety bubble - Allows you to use the mech underwater. Too fragile for standard combat use but provide fresh air. - 1 metal pieces, 100 nails, 1 energy core and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 10)) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, Machine Gun MK2, 15 metal pieces, 500 nails, 10 mechanism and 12 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, Machine Gun MK1, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, Repeater Gun, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 10) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, Machine Gun MK2, 15 metal pieces, 500 nails, 10 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 5) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, Machine Gun MK1, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 5) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, Repeater Gun, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
 		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(3, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 20% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, Toolbelt, 2 metal pieces, 100 nails and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(useables.MECHANI, 1)) addButton(4, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, Toolbelt, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 1) addButton(4, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, Toolbelt, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
 		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(5, "Whitefire B.C.", lumiWorkshopWhitefireBeamCannon).hint("Whitefire Beam Cannon - Adds a whitefire beam cannon option to your mech. - 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(6, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 2) && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.RPLASMA, 5) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(7, "Raijin blaster", lumiWorkshopRaijinBlaster).hint("Raijin blaster - Adds a Raijin blaster option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 2) && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "Gravity shots", lumiWorkshopGravityShots).hint("Gravity shots - Adds a Gravity shots option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 2 && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.RPLASMA, 5) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(7, "Raijin blaster", lumiWorkshopRaijinBlaster).hint("Raijin blaster - Adds a Raijin blaster option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 2 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "Gravity shots", lumiWorkshopGravityShots).hint("Gravity shots - Adds a Gravity shots option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0 && player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasItem(consumables.H_PILL, 5)) addButton(9, "Medical Dispenser 2.0", lumiWorkshopMedicalDispenser2).hint("Medical Dispenser 2.0 - Healing for 10 turns 20% of Heal spell value rising lust by 0,5% each turn. - 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores and 12 hours of work");
 		if (player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(consumables.H_PILL, 5) && player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(9, "Stimpack Dispenser 1.0", lumiWorkshopStimpackDispenser1).hint("Stimpack Dispenser 1.0 - Healing for 10 turns 10% of Heal spell value rising lust by 1% each turn. - 50+ int, knowing Heal spell, Toolbelt, 10 metal pieces, 200 nails, 5 healing pills and 4 hours of work");
-		if (player.hasKeyItem("Blueprint - Omni Missile") >= 0 && player.hasKeyItem("Missile launcher") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 10)) addButton(10, "Omni Missile", lumiWorkshopOmniMissile).hint("Omni Missile - Increases Missile launcher effectiveness vs groups. - 100+ int, Missile launcher, 20 metal pieces, 500 nails, 10 mechanism and 12 hours of work");
-		if (player.hasKeyItem("Blueprint - Missile launcher") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 5)) addButton(10, "Missile launcher", lumiWorkshopMissileLauncher).hint("Missile launcher - Adds an Missile launcher option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 500 nails, 5 mechanisms and 8 hours of work");
-		if (player.hasKeyItem("Blueprint - Lustnade Launcher") >= 0 && player.hasKeyItem("Aphrodigas Gun") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(consumables.L_DRAFT, 10) && player.hasItem(useables.MECHANI, 10)) addButton(11, "Lustnade Launcher", lumiWorkshopLustnadeLauncher).hint("Lustnade Launcher - Upgraded version of Aphrodigas Gun. - 100+ int, Aphrodigas Gun, 20 metal pieces, 500 nails, 10 mechanism, 10 lust drafts and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Omni Missile") >= 0 && player.hasKeyItem("Missile launcher") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 10) addButton(10, "Omni Missile", lumiWorkshopOmniMissile).hint("Omni Missile - Increases Missile launcher effectiveness vs groups. - 100+ int, Missile launcher, 20 metal pieces, 500 nails, 10 mechanism and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Missile launcher") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 5) addButton(10, "Missile launcher", lumiWorkshopMissileLauncher).hint("Missile launcher - Adds an Missile launcher option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 500 nails, 5 mechanisms and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Lustnade Launcher") >= 0 && player.hasKeyItem("Aphrodigas Gun") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(consumables.L_DRAFT, 10) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 10) addButton(11, "Lustnade Launcher", lumiWorkshopLustnadeLauncher).hint("Lustnade Launcher - Upgraded version of Aphrodigas Gun. - 100+ int, Aphrodigas Gun, 20 metal pieces, 500 nails, 10 mechanism, 10 lust drafts and 4 hours of work");
 		if (player.hasKeyItem("Blueprint - Aphrodigas Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 25 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(consumables.L_DRAFT, 5)) addButton(11, "Aphrodigas Gun",lumiWorkshopAphrodigasGun).hint("Aphrodigas Gun - Adds an Aphrodigas Gun option to your mech. - 25+ int, Toolbelt, 2 metal pieces, 100 nails, 5 lust drafts and 4 hours of work");
 		if (player.hasKeyItem("Blueprint - Impregnator 1.0") >= 0 && player.hasKeyItem("SPMK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(12, "Impregnator 1.0", lumiWorkshopImpregnator1).hint("Impregnator 1.0 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
 		if (player.hasKeyItem("Blueprint - SPMK1") >= 0 && player.hasKeyItem("Cum Reservoir") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1) addButton(12, "SPMK1", lumiWorkshopSPMK1).hint("SPMK1 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
@@ -1281,10 +1284,11 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Mechanism is ready.\n\n");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(useables.MECHANI, camp.returnToCampUseOneHour);
-		else inventory.takeItem(useables.MECHANI, camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopToolbelt():void {
 		clearOutput();
@@ -1408,7 +1412,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
-		player.destroyItems(useables.MECHANI, 3);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 3;
 		player.destroyItems(consumables.SALAMFW, 5);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Nitro Boots is ready.\n\n");
 		player.createKeyItem("Nitro Boots", 0, 0, 0, 0);
@@ -1422,7 +1426,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-		player.destroyItems(useables.MECHANI, 2);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 2;
 		player.destroyItems(consumables.SALAMFW, 1);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Rocket Boots is ready.\n\n");
 		player.createKeyItem("Rocket Boots", 0, 0, 0, 0);
@@ -1436,7 +1440,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-		player.destroyItems(useables.MECHANI, 1);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 1;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Spring Boots is ready.\n\n");
 		player.createKeyItem("Spring Boots", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Spring Boots");
@@ -1490,7 +1494,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 30;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 5);
-		player.destroyItems(useables.MECHANI, 10);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 10;
 		player.destroyItems(weapons.RIPPER1, 1);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Ripper 2.0 is ready.\n\n");
 		statScreenRefresh();
@@ -1502,7 +1506,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 2);
-		player.destroyItems(useables.MECHANI, 5);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 5;
 		player.destroyItems(weapons.MACGRSW, 1);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Ripper 1.0 is ready.\n\n");
 		statScreenRefresh();
@@ -1514,7 +1518,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 2;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		player.destroyItems(useables.ENECORE, 1);
-		player.destroyItems(useables.MECHANI, 2);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 2;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Machined greatsword is ready.\n\n");
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseOneHour);
@@ -1560,7 +1564,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 5);
-		player.destroyItems(useables.MECHANI, 2);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 2;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Taser with an overcharged battery is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Taser with an overcharged battery", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Taser with an overcharged battery");
@@ -1573,7 +1577,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 		player.destroyItems(useables.ENECORE, 1);
-		player.destroyItems(useables.MECHANI, 1);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 1;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Taser is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Taser", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Taser");
@@ -1597,7 +1601,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
-		player.destroyItems(useables.MECHANI, 10);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 10;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK3", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK3");
@@ -1610,7 +1614,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
-		player.destroyItems(useables.MECHANI, 5);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 5;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Machine Gun MK2 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK2", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK2");
@@ -1623,7 +1627,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-		player.destroyItems(useables.MECHANI, 5);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 5;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Machine Gun MK1 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK1", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK1");
@@ -1647,7 +1651,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 2;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-		player.destroyItems(useables.MECHANI, 1);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 1;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Dynapunch Glove is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Dynapunch Glove", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Dynapunch Glove");
@@ -1683,7 +1687,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
-		player.destroyItems(useables.MECHANI, 2);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 2;
 		player.destroyItems(useables.ENECORE, 5);
 		player.destroyItems(useables.RPLASMA, 5);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Raijin blaster is ready and installed up your " + player.vehiclesName + ".\n\n");
@@ -1697,7 +1701,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
-		player.destroyItems(useables.MECHANI, 2);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 2;
 		player.destroyItems(useables.ENECORE, 5);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Gravity shots is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Gravity shots", 0, 0, 0, 0);
@@ -1736,7 +1740,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
-		player.destroyItems(useables.MECHANI, 10);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 10;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Omni Missile is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Omni Missile", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Omni Missile");
@@ -1749,7 +1753,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
-		player.destroyItems(useables.MECHANI, 5);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 5;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Missile launcher is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Missile launcher", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Missile launcher");
@@ -1761,8 +1765,8 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 10;
 		player.destroyItems(consumables.L_DRAFT, 10);
-		player.destroyItems(useables.MECHANI, 10);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Lustnade Launcher is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Lustnade Launcher", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Lustnade Launcher");

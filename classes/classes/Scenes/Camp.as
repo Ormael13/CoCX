@@ -2076,7 +2076,15 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
+		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
 		addButton(14, "Back", campActions);
+	}
+	private function convertingMechanismIntoFlagValue():void {
+		clearOutput();
+		outputText("1 Mechanism converted succesfully.");
+		player.destroyItems(useables.MECHANI, 1);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
+		doNext(campMiscActions);
 	}
 
 	private function campWinionsArmySim():void {
@@ -2332,14 +2340,14 @@ public class Camp extends NPCAwareContent{
 
 	private function fillUpPillBottle00():void {
 		clearOutput();
-		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.LG_SFRP, 10);
 		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
 	}
 	private function fillUpPillBottle01():void {
 		clearOutput();
-		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);

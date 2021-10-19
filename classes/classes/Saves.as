@@ -893,6 +893,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
 		//Mastery
+		saveFile.data.masteryFeralCombatLevel = player.masteryFeralCombatLevel;
+		saveFile.data.masteryFeralCombatXP = player.masteryFeralCombatXP;
 		saveFile.data.masteryGauntletLevel = player.masteryGauntletLevel;
 		saveFile.data.masteryGauntletXP = player.masteryGauntletXP;
 		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
@@ -1893,6 +1895,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
 		//Mastery
+		if (saveFile.data.masteryFeralCombatXP == undefined)
+			player.masteryFeralCombatXP = 0;
+		else
+			player.masteryFeralCombatXP = saveFile.data.masteryFeralCombatXP;
+		if (saveFile.data.masteryFeralCombatLevel == undefined)
+			player.masteryFeralCombatLevel = 0;
+		else
+			player.masteryFeralCombatLevel = saveFile.data.masteryFeralCombatLevel;
 		if (saveFile.data.masteryGauntletXP == undefined)
 			player.masteryGauntletXP = 0;
 		else

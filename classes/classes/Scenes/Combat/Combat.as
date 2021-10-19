@@ -126,6 +126,16 @@ public class Combat extends BaseContent {
         return mod;
     }
 
+    public function masteryFeralCombatLevel():Number {
+        return player.masteryFeralCombatLevel;
+    }
+    public function maxFeralCombatLevel():Number {
+        return player.maxFeralCombatLevel();
+    }
+    public function FeralCombatExpToLevelUp():Number {
+        return player.FeralCombatExpToLevelUp();
+    }
+
     public function masteryGauntletLevel():Number {
         return player.masteryGauntletLevel;
     }
@@ -2664,6 +2674,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
+		if (player.weaponName == "fists" && player.haveNaturalClaws()) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
 		if (player.isGauntletWeapon()) accmod += Math.round((masteryGauntletLevel() - 1) / 2);
 		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
 		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
@@ -3730,13 +3741,13 @@ public class Combat extends BaseContent {
         var accRange:Number = 0;
         accRange += (firearmsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-        if (player.weaponRange == weaponsrange.M1CERBE) {
-            if (player.hasPerk(PerkLib.PhantomShooting)) player.takePhysDamage(150);
-            else player.ammo--;
-        } else {
-            if (player.hasPerk(PerkLib.PhantomShooting)) player.takePhysDamage(25);
-            else player.ammo--;
-        }
+		if (!player.hasPerk(PerkLib.PrimedClipWarp) || (player.hasPerk(PerkLib.PrimedClipWarp) && rand(4) > 0)) {
+			if (player.hasPerk(PerkLib.PhantomShooting)) {
+				if (player.weaponRange == weaponsrange.M1CERBE) player.takePhysDamage(150);
+				else player.takePhysDamage(25);
+			}
+			else player.ammo--;
+		}
         var weaponRangeName:String = player.weaponRangeName;
         var ammoWord:String;
         switch (weaponRangeName) {
@@ -3900,12 +3911,14 @@ public class Combat extends BaseContent {
             if ((monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) || player.weaponRange == weaponsrange.TRFATBI) critChance = 0;
             if (rand(100) < critChance) {
                 crit = true;
-                damage *= 1.75;
+                if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 2.25;
+				else damage *= 1.75;
             }
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
+			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
             if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -5175,6 +5188,7 @@ public class Combat extends BaseContent {
             if (player.weapon == weapons.BFGAUNT || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 			if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
+			if (player.weaponName == "fists" && player.haveNaturalClaws()) damage *= (1 + (0.01 * masteryFeralCombatLevel()));
 			if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
 			if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
 			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
@@ -5454,6 +5468,7 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
 				var meleeMasteryEXPgains:Number = 1;
 				if (crit) meleeMasteryEXPgains *= 2;
+				if (player.weaponName == "fists" && player.haveNaturalClaws()) feralCombatXP(meleeMasteryEXPgains);
 				if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
 				if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
 				if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -6214,12 +6229,11 @@ public class Combat extends BaseContent {
         if (player.isMaceHammerTypeWeapon()) stunChance += 10;
         if (player.isAxeTypeWeapon()) bleedChance += 25;
         //10% Stun chance
-
-        if (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist) || player.weaponSpecials("Stun10") || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) stunChance += 10;
+        if (player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist)) || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) stunChance += 10;
         //15% Stun Chance
-        if (player.weaponSpecials("Stun15")) stunChance += 15;
+        if (player.weapon == weapons.POCDEST || player.weapon == weapons.DOCDEST) stunChance += 15;
         //20% Stun chance
-        if ((player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.weapon != weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) || player.weaponSpecials("Stun20")) stunChance += 20;
+        if ((player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.weapon != weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) || player.weapon == weapons.UDKDEST) stunChance += 20;
         //25% Stun chance
         if (player.weapon == weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist)) stunChance += 25;
         //30% Stun chance
@@ -6238,13 +6252,13 @@ public class Combat extends BaseContent {
             }
         }
         //10% Bleed chance
-        if (player.weaponSpecials("Bleed10") || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
+        if (player.weapon == weapons.CLAWS || player.weapon == weapons.L_CLAWS || player.weapon == weapons.VENCLAW || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
         //25% Bleed chance
-        if (player.weaponSpecials("Bleed25")) bleedChance += 25;
+        if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP || player.weapon == weapons.TRIDAG)) bleedChance += 25;
 		//45% Bleed chance
 		if (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") bleedChance += 45;
         //100% Bleed chance
-        if (player.weaponSpecials("Bleed100")) bleedChance += 100;
+        if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) bleedChance += 100;
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
         if (bleed) {
@@ -6956,6 +6970,7 @@ public class Combat extends BaseContent {
 		}
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage = 0;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -11181,6 +11196,9 @@ public class Combat extends BaseContent {
         return multi;
 	}
 
+	public function feralCombatXP(XP:Number = 0):void {
+		player.feralCombatXP(XP * weaponmasteryXPMulti());
+    }
 	public function gauntletXP(XP:Number = 0):void {
 		player.gauntletXP(XP * weaponmasteryXPMulti());
     }
@@ -15031,4 +15049,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

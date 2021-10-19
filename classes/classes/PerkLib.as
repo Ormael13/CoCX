@@ -425,14 +425,14 @@ public class PerkLib
 				"You gained decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).",
 				"You've chosen the 'Lock and load' perk, gaining decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).");
 		public static const SilverForMonsters:PerkType = mk("Silver for monsters", "Silver for monsters",
-				"Ranged weapons deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.",
-				"You've chosen the 'Silver for monsters' perk. Ranged weapons deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.");
+				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.",
+				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.");
 		public static const TaintedMagazine:PerkType = mk("Tainted Magazine", "Tainted Magazine",
 				"Increase reload cost by 10 and doubles max ammo (200% of base ammo count).",
 				"You've chosen the 'Tainted Magazine' perk. Increase reload cost by 10 and doubles max ammo (200% of base ammo count).");
 		public static const PrimedClipWarp:PerkType = mk("Primed Clip Warp", "Primed Clip Warp",
-				".",
-				"You've chosen the 'Primed Clip Warp' perk.");
+				"Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.",
+				"You've chosen the 'Primed Clip Warp' perk. Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -5150,6 +5150,11 @@ public class PerkLib
 					.requireWis(65)
                     .requireTou(60)
                     .requireSpe(55)
+                    .requireLevel(24);
+            SilverForMonsters.requirePerk(ExpertGunslinger)
+					.requireWis(70)
+                    .requireTou(65)
+                    .requireSpe(60)
                     .requireLevel(24);
 			//Tier 5 Wisdom perks
             UnlockSpirit2ndStage.requirePerk(UnlockSpirit)

@@ -66,9 +66,9 @@ use namespace CoC;
 			choice[choice.length] = 0; //Golem group enemies
 			choice[choice.length] = 1; //Golem group enemies
 			choice[choice.length] = 2; //Golem group enemies
-			choice[choice.length] = 3; //Goblin/Imp group enemies
+			choice[choice.length] = 3; //
 			choice[choice.length] = 4; //Goblin/Imp group enemies
-			choice[choice.length] = 5; //Items
+			choice[choice.length] = 5; //Goblin/Imp group enemies
 			choice[choice.length] = 6; //Items
 			choice[choice.length] = 7; //Find nothing!
 			
@@ -81,43 +81,45 @@ use namespace CoC;
 					break;
 				case 3:
 				case 4:
-					SceneLib.exploration.genericGobImpEncounters1();
-					break;
 				case 5:
-					clearOutput();
-					outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
-					if (rand(2) == 0) {
-						if (player.level >= 24 && rand(3) == 0) {
-							outputText("a mid-grade Soulforce Recovery Pill. ");
-							inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
-						}
-						else {
-							outputText("a low-grade Soulforce Recovery Pill. ");
-							inventory.takeItem(consumables.LG_SFRP, camp.returnToCampUseOneHour);
-						}
-					}
-					else {
-						if (player.level >= 24 && rand(3) == 0) {
-							outputText("a diluted Arcane Regen Concotion. ");
-							inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
-						}
-						else {
-							outputText("a very diluted Arcane Regen Concotion. ");
-							inventory.takeItem(consumables.VDARCON, camp.returnToCampUseOneHour);
-						}
-					}
+					SceneLib.exploration.genericGobImpEncounters1();
 					break;
 				case 6:
 					clearOutput();
-					if (player.level >= 24 && rand(4) == 0) {
-						outputText("You spot something on the ground among various items remains. Taking a closer look, it's a Heavy Spiked Shield. ");
-						inventory.takeItem(shields.SPIH_SH, camp.returnToCampUseOneHour);
+					if (rand(2) == 0) {
+						outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
+						if (rand(2) == 0) {
+							if (player.level >= 24 && rand(3) == 0) {
+								outputText("a mid-grade Soulforce Recovery Pill. ");
+								inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
+							}
+							else {
+								outputText("a low-grade Soulforce Recovery Pill. ");
+								inventory.takeItem(consumables.LG_SFRP, camp.returnToCampUseOneHour);
+							}
+						}
+						else {
+							if (player.level >= 24 && rand(3) == 0) {
+								outputText("a diluted Arcane Regen Concotion. ");
+								inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
+							}
+							else {
+								outputText("a very diluted Arcane Regen Concotion. ");
+								inventory.takeItem(consumables.VDARCON, camp.returnToCampUseOneHour);
+							}
+						}
 					}
 					else {
-						outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
-						outputText("<b>You found a metal plate.</b>");
-						flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
-						doNext(camp.returnToCampUseOneHour);
+						if (player.level >= 24 && rand(5) == 0) {
+							outputText("You spot something on the ground among various items remains. Taking a closer look, it's a Heavy Spiked Shield. ");
+							inventory.takeItem(shields.SPIH_SH, camp.returnToCampUseOneHour);
+						}
+						else {
+							outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
+							outputText("<b>You found a metal plate.</b>");
+							flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
+							doNext(camp.returnToCampUseOneHour);
+						}
 					}
 					break;
 				default:

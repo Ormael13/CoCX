@@ -136,6 +136,7 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.LumiWorkshop)) {
 			miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
+			miscStats += "<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "/200" + "\n";
 		}
 
 		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 9\n";
@@ -1168,6 +1169,10 @@ public class PlayerInfo extends BaseContent {
 		displayHeader("Mastery Stats");
 		// Begin Mastery Stats
 		var masteryStats:String = "";
+		if (player.masteryFeralCombatLevel < combat.maxFeralCombatLevel())
+			masteryStats += "<b>Feral Combat Mastery / Dao of Feral Beast:</b>  " + player.masteryFeralCombatLevel + " / " + combat.maxFeralCombatLevel() + " (Exp: " + player.masteryFeralCombatXP + " / " + combat.FeralCombatExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryFeralCombatLevel + "% damage, +" + (0.5 * Math.round((player.masteryFeralCombatLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Feral Combat Mastery / Dao of Feral Beast:</b>  " + player.masteryFeralCombatLevel + " / " + combat.maxFeralCombatLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryFeralCombatLevel + "% damage, +" + (0.5 * Math.round((player.masteryFeralCombatLevel - 1) / 2)) + "% accuracy)</i>\n";
 		if (player.masteryGauntletLevel < combat.maxGauntletLevel())
 			masteryStats += "<b>Gauntlets Mastery / Dao of Gauntlet:</b>  " + player.masteryGauntletLevel + " / " + combat.maxGauntletLevel() + " (Exp: " + player.masteryGauntletXP + " / " + combat.GauntletExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryGauntletLevel + "% damage, +" + (0.5 * Math.round((player.masteryGauntletLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
