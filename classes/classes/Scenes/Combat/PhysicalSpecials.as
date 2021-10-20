@@ -1645,6 +1645,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.CycloneStage4)) bonusmultiplier += 0.5;
 		if (player.hasPerk(PerkLib.CycloneStage5)) bonusmultiplier += 1.5;
 		damage *= bonusmultiplier;
+		if (player.weaponName == "fists" && player.haveNaturalClaws()) damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//final touches
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
@@ -1717,6 +1718,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage += 5 + rand(6);
 			}
 			damage += player.level * 1.5;
+			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			monster.statStore.addBuffObject({spe:-damage/2}, "Poison",{text:"Poison"});
 			damage = monster.lustVuln * damage;
 			//Clean up down to 1 decimal point
@@ -1788,6 +1790,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -1977,6 +1980,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) slamDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) slamDmg *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) slamDmg *= 1.50;
+		slamDmg *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		slamDmg = Math.round(slamDmg);
 		doDamage(slamDmg);
 		outputText("<b>(<font color=\"#800000\">" + slamDmg + "</font>)</b>");
@@ -2099,6 +2103,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 				else damage *= 2;
 			}
+			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
 			damage = Math.round(damage);
@@ -2576,6 +2581,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
 		combat.WrathGenerationPerHit2(5);
@@ -2786,6 +2792,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("You slash your adversary with your sharp stone claws, dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
@@ -2865,6 +2872,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("You punch your adversary with your stone fist, dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
@@ -2941,6 +2949,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
 		if (!monster.hasStatusEffect(StatusEffects.TailSlamWhip)) monster.createStatusEffect(StatusEffects.TailSlamWhip,monster.armorDef,5,0,0);
@@ -3019,6 +3028,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
 		var multikulti:String = (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "s" : "";
@@ -3088,6 +3098,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("You buffet your foe with your massive wings, dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
@@ -3566,6 +3577,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("You slam " + monster.a + monster.short + " with your full strength, crushing it under your weight. " + monster.capitalA + monster.short + " tries to recover but is stunned and grievously wounded by your assault. (<b><font color=\"#800000\">" + damage + "</font></b>)");
@@ -3661,6 +3673,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				crit = true;
 				damage *= 1.75;
 			}
+			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
 			doDamage(damage);
 			if (player.hasPerk(PerkLib.PhantomStrike)) {
@@ -3764,6 +3777,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) HBD *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) HBD *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) HBD *= 1.50;
+		HBD *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		HBD = Math.round(HBD);
 		doDamage(HBD, true, true);
 		combat.WrathGenerationPerHit2(5);
@@ -4013,6 +4027,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		doDamage(damage);
@@ -4143,6 +4158,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
 				}
+				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			}
 			//Different horns damage messages
 			if (damage < 25) outputText("You pull yourself free, dealing  damage.");
@@ -4271,6 +4287,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
 				}
+				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 				//Round it off
 				damage = int(damage);
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -4452,6 +4469,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			lustdamage *= 1.75;
 			damage *= 1.75;
 		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//Do all damage
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -4476,7 +4494,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function playerTailSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-
 		//Worms are immune!
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural weapons, you quickly shoot an envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
@@ -4724,6 +4741,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
+			damage = Math.round(damage);
 			doDamage(damage);
 		}
 		if(damage <= 0) {
@@ -4885,6 +4904,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//Reduce damage
 		damage *= monster.damagePercent() / 100;
 		//(None yet!)
@@ -5746,7 +5766,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText(" damage!");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		enemyAI();
@@ -5811,7 +5830,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.Stunned, 4, 0, 0, 0);
 		}
 		outputText("\n\n");
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		enemyAI();
@@ -5858,7 +5876,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.teased(lustDmg);
 		if (crit1) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		enemyAI();
@@ -5889,7 +5906,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText(" damage!");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		enemyAI();
@@ -5921,7 +5937,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText(" damage!");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		enemyAI();

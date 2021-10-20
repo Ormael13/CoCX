@@ -35,9 +35,9 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) && player.weaponName == "fists") || player.weaponName != "fists")) {
+		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(60) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) && player.weaponName == "fists") || player.weaponName != "fists")) {
 			spellChargeWeapon(true);
-			useMana((30 * spellChargeWeaponCostMultiplier()), 5);
+			useMana((60 * spellChargeWeaponCostMultiplier()), 5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
@@ -1056,8 +1056,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 			bd = buttons.add("Charge W.", spellChargeWeapon)
-					.hint("The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for a few combat turns.  " +
-							"\n\nMana Cost: " + spellCostWhite(30) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
+					.hint("The Charge Weapon spell will surround your weapons in electrical energy, causing them to do even more damage.  The effect lasts for a few combat turns.  " +
+							"\n\nMana Cost: " + spellCostWhite(60) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
 			if (player.weaponName == "fists" && !player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) {
 				bd.disable("Charge weapon can't be casted on your own fists.");
 			} else if (badLustForWhite) {
@@ -4879,8 +4879,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < (30 * spellChargeWeaponCostMultiplier())) player.HP -= (30 * spellChargeWeaponCostMultiplier());
-		else useMana((30 * spellChargeWeaponCostMultiplier()), 5);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < (60 * spellChargeWeaponCostMultiplier())) player.HP -= (60 * spellChargeWeaponCostMultiplier());
+		else useMana((60 * spellChargeWeaponCostMultiplier()), 5);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);

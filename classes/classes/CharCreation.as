@@ -2987,6 +2987,8 @@ import coc.view.MainView;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 0;
+			player.masteryFeralCombatLevel = 0;
+			player.masteryFeralCombatXP = 0;
 			player.masteryGauntletLevel = 0;
 			player.masteryGauntletXP = 0;
 			player.masteryDaggerLevel = 0;

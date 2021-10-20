@@ -116,7 +116,7 @@ package classes.Scenes
 			outputText("one of two fera perks from 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
 			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");
 			outputText("<b>Version 0.8s2:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm, Mouse, Hinezumi\n");
+			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm, Mouse, Hinezumi, Cyclop, Gazer\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Eyes of the Hunter (Expert). Req. Eyes of the Hunter (Adept) and 75+ sensitivity. Effect: Increase crit chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-New tier 4 sensitivity lvl-up perk: Eyes of the Hunter (Grand Master). Req. Eyes of the Hunter (Master) and 125+ sensitivity. Effect: Increase crit chance against God, Boss type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Eyes of the Hunter (Ex). Req. Eyes of the Hunter (Novice) and 75+ sensitivity Effect: Allowing you to be able to fight much higher level enemeis than you as long your sensitivtiy is high enough. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)\n");
@@ -136,8 +136,9 @@ package classes.Scenes
 			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
 			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penalty of 50% less exp gains. It even giving you 200% of normal exp for defeating the same enemy outside arena. Thank you all for using that free trial ^^\n");
 			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc.\n");
+			outputText("-Fixes by Daikael.\n");
 			outputText("-Kekvit Irae changes & fixes.\n");
-			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit! \n");
+			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit!\n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -173,7 +174,6 @@ package classes.Scenes
 			outputText("-Beautiful item discovery scene at the lake been reduced to proc once per day (some PC's due to specific progress could end up see like only that scene and no others for most of the exploration attempts at the Lake).\n");
 			outputText("-Aurora, Etna and Neisa option to spar with them is disabled when PC earlier asked any of them to assist (meaning said npc is part of the PC team). That would avoid weirdness when Aurora fight as part of PC team and also as enemy for herself.\n");
 			outputText("-Can now give Dinah some itmes to change her bodyshape: Purified Succubus Milk (tits), Bron Egg (butt), Blue Egg (hips), Reducto.\n");
-			outputText("-Fixes by Daikael.\n");
 			outputText("-Three blocked by formation passages in Hidden Cave now have counter of how many more enemies (solo or groups) need to be beaten down to deactivate each formation.\n");
 			outputText("-Damage from exploring Glacial Rift have been changed to be ice damage so ice resistance would be more naturaly reducing amount of recieved damage. Base % damage is lowered to 5% of PC max HP. And fire affinity still would make PC take 2x more damage (before ice resistance reduction).\n");
 			outputText("-Tooltip for firearms button in combat menu now have ammo left counter.\n");
@@ -196,18 +196,23 @@ package classes.Scenes
 			outputText("-Cooldown toggle for spells been removed and some of the spells power been a bit lowered. Now cooldown option for spells will be on by default without way to turn it off.\n");
 			outputText("-New tier 3 wisdom lvl-up perk: Tainted Magazine. Req. Amateur Gunslinger perk, 55+ wis, 50+ tou, 45+ spe. Effect: Increase reload cost by 10 and doubles max ammo (200% of base ammo count).\n");
 			outputText("-New tier 5 wisdom lvl-up perk: Lock and load. Req. Expert Gunslinger perk, 80+ wis, 75+ tou and 70+ spe. Effect: You gained decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).\n");
-			outputText("-New tier 6 wisdom lvl-up perk: Primed Clip Warp. Req. Tainted Magazine perk, 100+ wis, 95+ tou, 90+ spe. Effect: .\n");
-			//outputText("-New tier   lvl-up perk: Silver for monsters. Req. . Effect: Ranged weapons deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.\n");
+			outputText("-Jtex with unweaving fevor implemented tag system for weapons that was in one or another way requested recently.\n");
+			outputText("-Halberd, Guandao and Urta's halberd been reclassified as Polearm type weapon instead of scythe type weapon.\n");
+			outputText("-Charge weapon spell cost been doubled but it would now also affect range weapon (unless pc got no weapon there or it's one of tomes).\n");
+			outputText("-New tier 6 wisdom lvl-up perk: Primed Clip Warp. Req. Tainted Magazine perk, 100+ wis, 95+ tou, 90+ spe. Effect: Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Silver for monsters. Req. Expert Gunslinger perk, 70+ wis, 65+ tou and 60+ spe. Effect: Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Jtecx Weapons Tagging, now you can check what class/type it is, and what specials they can do! (Bit of help from Kekvit as well on specials.)\n");
-			outputText("-\n");
+			outputText("-Ghost enemy type are 'virtualy' immune now to any physical damage (them deal 1 dmg because orginal enought decent to keep fencode not likes total 0).\n");
+			outputText("-Added mastery for fighting with body weapons (it would boost some of physcial specials that use bodyparts in attack - it will not affect specials that are attacks with fluids or other substances aka breath attacks).\n");//polearm type weapons and for 
+			outputText("-Mechanism item been converted to material stored in flag (with max storage cap of 200). For all Mecyhanisms that PC have as items would be convertable to flag value by option added to  menu. All checks from now for this crafting material would look for flag value than items kept in PC inventory.\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
-			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC\n");/*ostatni punkt changelogu
+			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects");
+			outputText("\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -220,6 +225,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -285,13 +291,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1358,7 +1359,7 @@ package classes.Scenes
 			outputText("-New body part - wings: Ethereal Wings. Req. Ghostly Aura\n");
 			outputText("-New event perk: Ghost-slinger. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, increases damage with guns/thrown weapons by 15%.\n");
 			outputText("-New event perk: Phantom Shooting. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, using part of own body PC form phantom bullets or throwing weapons to attack enemy (throwing/firearm shooting will not use fatigue/ammo instead draining small amount of PC ectoplasmic body (HP)).\n");
-			outputText("-New enemy perk: Ghost enemy type. Shouldra only use this perk atm. It would make enemies immune to Possess special.\n");// and reduce demages they take
+			outputText("-New enemy perk: Ghost enemy type. Shouldra only use this perk atm. It would make enemies immune to Possess special.\n");
 			outputText("-New possible race to become: Jiangshi - at 20+ pts they giving following bonuses: +140 to max Strength, +100 to max Toughness, -90 to max Speed, -90 to max Intelligence, +110 to max Wisdom, +130 to max Libido (all scaling with NG tiers)\n");
 			outputText("-New body part - eyes: Jiangshi Eyes. Req. After event\n");
 			outputText("-New body part - face: Jiangshi Face. Req. After event\n");

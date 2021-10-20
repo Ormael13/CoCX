@@ -250,6 +250,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const MONOEYE:int = 19;
+		EnumValue.add(Memories, MONOEYE, "MONOEYE", {
+			id: "Monoeye",
+			name: "Monoeye",
+			cost: 100,
+			title: "Monoeye",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesMonoeye;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

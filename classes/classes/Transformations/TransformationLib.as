@@ -686,6 +686,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.skin.base.adj = "oily skin";
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.OIL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4009,6 +4010,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.MONOEYE;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.MONOEYE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5237,6 +5239,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.GAZER;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.GAZER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5752,6 +5755,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.createStatusEffect(StatusEffects.GazerEyeStalksPlayer, 2, 0, 0, 0);
 	    player.rearBody.type = RearBody.TENTACLE_EYESTALKS;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.TENTACLE_EYESTALKS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7291,6 +7295,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.GAZER;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GAZER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9369,6 +9374,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.desc = "levitation";
 	    player.wings.type = Wings.LEVITATION;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.LEVITATION));
 	  },
 	  // is present
 	  function (): Boolean {

@@ -1750,7 +1750,9 @@ use namespace CoC;
 		}
 		public function AddMechanism():void {
 			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
-			inventory.takeItem(useables.MECHANI, curry(MaterialMenu, 2));
+			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
+			statScreenRefresh();
+			curry(MaterialMenu, 2);
 		}
 		public function AddGolemCore():void {
 			outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");

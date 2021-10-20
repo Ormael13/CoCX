@@ -104,6 +104,8 @@ use namespace CoC;
 		public var lustVuln:Number = 1;
 
 		//Mastery attributes
+		public var masteryFeralCombatLevel:Number = 0;
+		public var masteryFeralCombatXP:Number = 0;
 		public var masteryGauntletLevel:Number = 0;
 		public var masteryGauntletXP:Number = 0;
 		public var masterySwordLevel:Number = 0;
@@ -1018,27 +1020,30 @@ use namespace CoC;
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			return isSwordTypeWeapon() || isAxeTypeWeapon() || weaponSpecials("Whirlwind");// || weapon == game.weapons.
+			return isSwordTypeWeapon() || isAxeTypeWeapon() || weapon == game.weapons.URTAHLB || weapon == game.weapons.L_HAMMR || weapon == game.weapons.WARHAMR || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.D_WHAM_ || weapon == game.weapons.HALBERD
+			 || weapon == game.weapons.GUANDAO || weapon == game.weapons.UDKDEST || weapon == game.weapons.DEMSCYT;// || weapon == game.weapons.
 		}
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			return weaponSpecials("Whipping");
+			return weapon == game.weapons.FLAIL || weapon == game.weapons.L_WHIP || weapon == game.weapons.SUCWHIP || weapon == game.weapons.PSWHIP || weapon == game.weapons.WHIP || weapon == game.weapons.PWHIP || weapon == game.weapons.BFWHIP || weapon == game.weapons.DBFWHIP || weapon == game.weapons.NTWHIP || weapon == game.weapons.CNTWHIP
+			 || weapon == game.weapons.RIBBON || weapon == game.weapons.ERIBBON || weapon == game.weapons.SNAKESW || weapon == game.weapons.DAGWHIP;
 		}
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") &&!weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive"));
+			return weaponPerk != "Dual Large" && weaponPerk != "Dual" && weaponPerk != "Dual Small" && weaponPerk != "Staff" && weaponPerk != "Large" && weaponPerk != "Massive";
 		}
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
+			return weaponPerk != "Dual Large" && weaponPerk != "Large" && weaponPerk != "Massive" && !isStaffTypeWeapon();
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("LGWrath") || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
+			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.BFGAUNT || weapon == game.weapons.SKYPIER || weapon == game.weapons.DWARWA || weapon == game.weapons.BFWHIP
+			 || weapon == game.weapons.UDKDEST || weapon == game.weapons.BFTHSWORD || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1136,7 +1141,7 @@ use namespace CoC;
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
-			return weaponSpecials("Small") || weaponSpecials("Dual Small");
+			return weaponPerk == "Small" || weaponPerk == "Dual Small";
 		}
 		public function haveWeaponForSneakAttackRange():Boolean
 		{
@@ -1353,16 +1358,6 @@ use namespace CoC;
 			}
 			return (temp.indexOf(pWeaponClass) >= 0);
 		}
-		public function weaponSpecials(pWeaponSpecials:String = "", orWeaponCheck:* = null):Boolean {
-			var temp:Array = [];
-			if (orWeaponCheck != null){
-				temp = orWeaponCheck.perk.split(", ");
-			}
-			else{
-				temp = weapon.perk.split(", ");
-			}
-			return (temp.indexOf(pWeaponSpecials) >= 0);
-		}
 		//Is DualWield
 		public function isDualWield():Boolean
 		{
@@ -1441,7 +1436,10 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasPerk(PerkLib.)) rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
-		*/	rangeattack = Math.round(rangeattack);
+		*/	if (hasStatusEffect(StatusEffects.ChargeWeapon) && !isUsingTome()) {
+				rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+			}
+			rangeattack = Math.round(rangeattack);
 			return rangeattack;
 		}
 		public function get weaponRangeBaseAttack():Number {
@@ -8253,8 +8251,6 @@ use namespace CoC;
 				gazerCounter++;
 			if (tailType == Tail.NONE)
 				gazerCounter++;
-			if (skin.base.pattern == Skin.PATTERN_OIL)
-				gazerCounter++;
 			if (wings.type == Wings.LEVITATION)
 				gazerCounter += 3;
 			if (rearBody.type == RearBody.TENTACLE_EYESTALKS && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2) {
@@ -13808,6 +13804,47 @@ use namespace CoC;
 				createStatusEffect(StatusEffects.Rut, 150 * intensity, (50 * intensity)/100, 100 * intensity, 0);
 			}
 			return true;
+		}
+
+		public function maxFeralCombatLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function FeralCombatExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryFeralCombatLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryFeralCombatLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function feralCombatXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryFeralCombatXP++;
+					XP--;
+				}
+				else {
+					masteryFeralCombatXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryFeralCombatLevel < maxFeralCombatLevel() && masteryFeralCombatXP >= FeralCombatExpToLevelUp()) {
+					outputText("\n<b>Dao of Feral Beast leveled up to " + (masteryFeralCombatLevel + 1) + "!</b>\n");
+					masteryFeralCombatLevel++;
+					masteryFeralCombatXP = 0;
+				}
+			}
 		}
 
 		public function maxGauntletLevel():Number {

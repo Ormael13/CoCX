@@ -519,6 +519,17 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const GAZER: int = 42;
+		EnumValue.add(Memories, GAZER, "GAZER", {
+		  id: "Gazer Lower Body",
+			name: "Gazer Legs",
+		  cost: 100,
+		  title: "Gazer",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyGazer
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

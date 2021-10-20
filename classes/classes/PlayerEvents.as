@@ -1959,8 +1959,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.woodElfScore() >= 22 || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
+				if (player.elfScore() >= 11 || player.woodElfScore() >= 22) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
 					var RHP:Number = 1;
@@ -1990,6 +1990,32 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.HP = Math.round(player.HP);
 				player.setVehicle(VehiclesLib.NOTHING);
 				inventory.takeItem(vehicles.HB_MECH, null);
+				needNext = true;
+			}
+			if (player.isGoblinoid() && (!player.statStore.hasBuff('DrugInjector') || !player.statStore.hasBuff('Power bracer'))) {
+				outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+				if (!player.statStore.hasBuff('DrugInjector')) {
+					if (player.hasKeyItem("Drug injectors")){
+						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
+					}
+					if (player.hasKeyItem("Improved Drug injectors")){
+						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
+					}
+					if (player.hasKeyItem("Potent Drug injectors")){
+						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
+					}
+				}
+					else {
+					if (player.hasKeyItem("Power bracer") >= 0) {
+						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'})
+					}
+					if (player.hasKeyItem("Powboy") >= 0) {
+						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'})
+					}
+					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
+						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
+					}
+				}
 				needNext = true;
 			}
 			//Hot Spring
