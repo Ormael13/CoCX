@@ -3569,6 +3569,7 @@ public class PerkLib
 		public static const StarSphereMastery:StarSphereMasteryPerk = new StarSphereMasteryPerk();
 
 		// Monster perks
+		// Please add any perks below to the enemyPerkList below. Required for PerkDB filtering of PC-unobtainable perks.
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
 		public static const AlwaysSuccesfullRunaway:PerkType = mk("Always Succesfull Runaway", "Always Succesfull Runaway", "");
 		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
@@ -3607,6 +3608,50 @@ public class PerkLib
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
+
+		//Workaround to not having a proper list of enemy-only perks. Would a tagging system for perks by classification help, maybe even with Combat lag?
+		public static function enemyPerkList():Array{
+			var ePerkL:Array = [];
+			ePerkL.push(Acid);
+			ePerkL.push(AlwaysSuccesfullRunaway);
+			ePerkL.push(DarknessNature);
+			ePerkL.push(DarknessVulnerability);
+			ePerkL.push(Enemy300Type);
+			ePerkL.push(EnemyBeastOrAnimalMorphType);
+			ePerkL.push(EnemyBossType);
+			ePerkL.push(EnemyChampionType);
+			ePerkL.push(EnemyColossalType);
+			ePerkL.push(EnemyConstructType);
+			ePerkL.push(EnemyElementalType);
+			ePerkL.push(EnemyEliteType);
+			ePerkL.push(EnemyFeralType);
+			ePerkL.push(EnemyFleshConstructType);
+			ePerkL.push(EnemyForBeginnersType);
+			ePerkL.push(EnemyGhostType);
+			ePerkL.push(EnemyGigantType);
+			ePerkL.push(EnemyGodType);
+			ePerkL.push(EnemyGooType);
+			ePerkL.push(EnemyGroupType);
+			ePerkL.push(EnemyHugeType);
+			ePerkL.push(EnemyLargeGroupType);
+			ePerkL.push(EnemyPlantType);
+			ePerkL.push(EnemyTrueDemon);
+			ePerkL.push(EnemyResiliance);
+			ePerkL.push(FireNature);
+			ePerkL.push(FireVulnerability);
+			ePerkL.push(IceNature);
+			ePerkL.push(IceVulnerability);
+			ePerkL.push(LightningNature);
+			ePerkL.push(LightningVulnerability);
+			ePerkL.push(MonsterRegeneration);
+			ePerkL.push(NoExpGained);
+			ePerkL.push(NoGemsLost);
+			ePerkL.push(Sentience);
+			ePerkL.push(ShieldWielder);
+			ePerkL.push(TeaseResistance);
+			ePerkL.push(UniqueNPC);
+			return ePerkL;
+		}
 
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
 		//public static const :PerkType = mk("", "", "");
