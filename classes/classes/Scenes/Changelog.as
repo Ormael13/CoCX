@@ -139,6 +139,8 @@ package classes.Scenes
 			outputText("-Fixes by Daikael.\n");
 			outputText("-Kekvit Irae changes & fixes.\n");
 			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit!\n");
+			outputText("-Celess corruption was tweaked to be more in line with original idea, solution implemented by Lia, Kekvit. Imported back into main by Jtecx.\n");
+			outputText("-Elven Hunting party should no longer steal your weapon and keep it until next encounter.\n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");

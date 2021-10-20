@@ -12,6 +12,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
+import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
@@ -976,6 +977,26 @@ public class Camp extends NPCAwareContent{
 		//Unlock sparring ring.
 		if (sparableCampMembersCount() >= 2) {
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
+		}
+		//Wood Elf weapon fix.
+		if ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0)){
+			if (player.weapon != WeaponLib.FISTS){
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]), playerMenu);
+				}
+				else{
+					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]), playerMenu);
+				}
+			}
+			else {
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+					player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+				}
+				else{
+					player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID])as WeaponRange);
+				}
+			}
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 		}
 
 		//Menu

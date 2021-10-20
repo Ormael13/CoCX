@@ -31,7 +31,7 @@ public class WoodElvesHuntingParty extends Monster
 			SceneLib.woodElves.ElfFightLoose();
 		}
 
-		private function woodElfWeaponRestoreAtCombatEnd():void{
+		public function woodElfWeaponRestoreAtCombatEnd():void{
 			if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 				player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
