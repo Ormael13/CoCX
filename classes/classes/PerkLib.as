@@ -994,7 +994,7 @@ public class PerkLib
 				"When using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.",
 				"You've chosen the 'Devastating charge' perk, when using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.");
 		public static const Diehard:PerkType = mk("Diehard", "Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 2% of max HP + 600(scalable). When below 0 HP would lose 1% of max HP per turn.",
+				"You can't lose by HP until your health drops into the negatives any more than 2% of max HP + 600(scalable). When below 0 HP would lose 1% of max HP per turn.",
 				"You've chosen the 'Diehard' perk, allowing to contiue fight even when below 0 HP.");
 		public static const Doctor:PerkType = mk("Doctor", "Doctor",
 				"You got promoted to a doctor, allowing you to cure a wider variety of ailments. This knowledge allows you to heal yourself better, increasing health regen.",
@@ -1198,7 +1198,7 @@ public class PerkLib
 				"Negative effects of sensitivity are reduced by 15%.",
 				"You've chosen the 'Epic Desensitization' perk, decreasing negative effects of sensitivity by 15%.");
 		public static const EpicDiehard:PerkType = mk("Epic Diehard", "Epic Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 8% of max HP + 2400(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.",
+				"You can't lose by HP until your health drops into the negatives any more than 8% of max HP + 2400(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.",
 				"You've chosen the 'Epic Diehard' perk, getting third upgrade of Diehard effect.");
 		public static const EpicEndurance:PerkType = mk("Epic Endurance", "Epic Endurance",
 				"Increases maximum fatigue by 4500.",
@@ -1501,7 +1501,7 @@ public class PerkLib
 				"Negative effects of sensitivity are reduced by 10%.",
 				"You've chosen the 'Greater Desensitization' perk, decreasing negative effects of sensitivity by 10%.");
 		public static const GreaterDiehard:PerkType = mk("Greater Diehard", "Greater Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 6% of max HP + 1800(scalable). HP limit cumulative with other Diehard perks.",
+				"You can't lose by HP until your health drops into the negatives any more than 6% of max HP + 1800(scalable). HP limit cumulative with other Diehard perks.",
 				"You've chosen the 'Greater Diehard' perk, getting second increase to limit of maintaining Diehard effects.");
 		public static const GreaterEvade:PerkType = mk("Greater Evade", "Greater Evade",
 				"Increases chances of evading enemy attacks. (+15% to evasion)",
@@ -1703,7 +1703,7 @@ public class PerkLib
 				"Crinos Shape increase to physical might rise to 40% of core str/tou/spe.",
 				"You've chosen the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape (+40%).");
 		public static const ImprovedDiehard:PerkType = mk("Improved Diehard", "Improved Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 4% of max HP + 1200(scalable). HP limit cumulative with other Diehard perks.",
+				"You can't lose by HP until your health drops into the negatives any more than 4% of max HP + 1200(scalable). HP limit cumulative with other Diehard perks.",
 				"You've chosen the 'Improved Diehard' perk, increasing limit on how long you can fight.");
 		public static const ImprovedEndurance:PerkType = mk("Improved Endurance", "Improved Endurance",
 				"Increases maximum fatigue by 80.",
@@ -3569,6 +3569,7 @@ public class PerkLib
 		public static const StarSphereMastery:StarSphereMasteryPerk = new StarSphereMasteryPerk();
 
 		// Monster perks
+		// Please add any perks below to the enemyPerkList below. Required for PerkDB filtering of PC-unobtainable perks.
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
 		public static const AlwaysSuccesfullRunaway:PerkType = mk("Always Succesfull Runaway", "Always Succesfull Runaway", "");
 		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
@@ -3607,6 +3608,50 @@ public class PerkLib
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
+
+		//Workaround to not having a proper list of enemy-only perks. Would a tagging system for perks by classification help, maybe even with Combat lag?
+		public static function enemyPerkList():Array{
+			var ePerkL:Array = [];
+			ePerkL.push(Acid);
+			ePerkL.push(AlwaysSuccesfullRunaway);
+			ePerkL.push(DarknessNature);
+			ePerkL.push(DarknessVulnerability);
+			ePerkL.push(Enemy300Type);
+			ePerkL.push(EnemyBeastOrAnimalMorphType);
+			ePerkL.push(EnemyBossType);
+			ePerkL.push(EnemyChampionType);
+			ePerkL.push(EnemyColossalType);
+			ePerkL.push(EnemyConstructType);
+			ePerkL.push(EnemyElementalType);
+			ePerkL.push(EnemyEliteType);
+			ePerkL.push(EnemyFeralType);
+			ePerkL.push(EnemyFleshConstructType);
+			ePerkL.push(EnemyForBeginnersType);
+			ePerkL.push(EnemyGhostType);
+			ePerkL.push(EnemyGigantType);
+			ePerkL.push(EnemyGodType);
+			ePerkL.push(EnemyGooType);
+			ePerkL.push(EnemyGroupType);
+			ePerkL.push(EnemyHugeType);
+			ePerkL.push(EnemyLargeGroupType);
+			ePerkL.push(EnemyPlantType);
+			ePerkL.push(EnemyTrueDemon);
+			ePerkL.push(EnemyResiliance);
+			ePerkL.push(FireNature);
+			ePerkL.push(FireVulnerability);
+			ePerkL.push(IceNature);
+			ePerkL.push(IceVulnerability);
+			ePerkL.push(LightningNature);
+			ePerkL.push(LightningVulnerability);
+			ePerkL.push(MonsterRegeneration);
+			ePerkL.push(NoExpGained);
+			ePerkL.push(NoGemsLost);
+			ePerkL.push(Sentience);
+			ePerkL.push(ShieldWielder);
+			ePerkL.push(TeaseResistance);
+			ePerkL.push(UniqueNPC);
+			return ePerkL;
+		}
 
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
 		//public static const :PerkType = mk("", "", "");

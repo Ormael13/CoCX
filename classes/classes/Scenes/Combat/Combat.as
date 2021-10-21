@@ -6229,11 +6229,11 @@ public class Combat extends BaseContent {
         if (player.isMaceHammerTypeWeapon()) stunChance += 10;
         if (player.isAxeTypeWeapon()) bleedChance += 25;
         //10% Stun chance
-        if (player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist)) || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) stunChance += 10;
+        if (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist) || player.weaponSpecials("Stun10") || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) stunChance += 10;
         //15% Stun Chance
-        if (player.weapon == weapons.POCDEST || player.weapon == weapons.DOCDEST) stunChance += 15;
+        if (player.weaponSpecials("Stun15")) stunChance += 15;
         //20% Stun chance
-        if ((player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.weapon != weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) || player.weapon == weapons.UDKDEST) stunChance += 20;
+        if ((player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.weapon != weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) || player.weaponSpecials("Stun20")) stunChance += 20;
         //25% Stun chance
         if (player.weapon == weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist)) stunChance += 25;
         //30% Stun chance
@@ -6252,11 +6252,11 @@ public class Combat extends BaseContent {
             }
         }
         //10% Bleed chance
-        if (player.weapon == weapons.CLAWS || player.weapon == weapons.L_CLAWS || player.weapon == weapons.VENCLAW || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
+        if (player.weaponSpecials("Bleed10") || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
         //25% Bleed chance
-        if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP || player.weapon == weapons.TRIDAG)) bleedChance += 25;
+        if (player.weaponSpecials("Bleed25")) bleedChance += 25;
 		//45% Bleed chance
-		if (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") bleedChance += 45;
+        if (player.weaponSpecials("Bleed100")) bleedChance += 100;
         //100% Bleed chance
         if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) bleedChance += 100;
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
@@ -15049,4 +15049,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

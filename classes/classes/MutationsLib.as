@@ -208,7 +208,7 @@ public class MutationsLib
 				"Regenerates 1% of HP per round in combat and 2% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.",
 				"You've chosen the 'Lizan Marrow (Evolved)' perk. Constant use of your lizan marrow caused it to change.");
 		public static const LizanMarrowFinalForm:PerkType = mk("Lizan Marrow (Final Form)", "Lizan Marrow (Final Form)",
-				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't loose by HP until reaching droping into negative health larger than 5% of max HP.",
+				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't lose by HP until your health drops into the negatives any more than 5% of max HP.",
 				"You've chosen the 'Lizan Marrow (Final Form)' perk. Your lizan marrow undergone another change.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow atack with many tail spikes at once.",

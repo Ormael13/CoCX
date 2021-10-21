@@ -13,30 +13,9 @@ package classes.Items.Weapons
 		
 		public function Wardensgreatsword() 
 		{
-			super("WGSword", "WardenGSword", "Warden’s greatsword", "a Warden’s greatsword", "slash", 30, 2400, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "Large", PerkLib.DaoistsFocus, 0.4, 0, 0, 0, "", "Sword");
+			super("WGSword", "WardenGSword", "Warden’s greatsword", "a Warden’s greatsword", "slash", 30, 2400, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "Large, Daoist's Focus (+40% Magical Soulskill Power), Body Cultivator's Focus (+40% Physical Soulskill Power), Strife-Warden (enables Beat of War soul skill)", PerkLib.DaoistsFocus, 0.4, 0, 0, 0, "", "Sword");
 		}
-		
-		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: Weapon (Large)";
-			if (type != "") {
-				desc += "\nWeapon Class: " + type;
-			}
-			if (perk != "") {
-				desc += "\nSpecials: " + perk;
-			}
-			//Attack
-			desc += "\nAttack: " + String(attack);
-			//Value
-			desc += "\nBase value: " + String(value);
-			//Perk
-			desc += "\nSpecial: Daoist's Focus (+40% Magical Soulskill Power)";
-			desc += "\nSpecial: Body Cultivator's Focus (+40% Physical Soulskill Power)";
-			desc += "\nSpecial: Strife-Warden (enables Beat of War soul skill)";
-			return desc;
-		}
-		
+
 		override public function get attack():Number {
 			var boost:int = 0;
 			if (game.player.str >= 100) boost += 10;
