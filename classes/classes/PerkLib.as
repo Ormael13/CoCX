@@ -3121,6 +3121,27 @@ public class PerkLib
 		public static const WizardsAndDaoistsEndurance:WizardsAndDaoistsEndurancePerk = new WizardsAndDaoistsEndurancePerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
 
+		public static function gearPerks():Array{	//Re:EnemyPerkList
+			var gPerks:Array = [];
+			gPerks.push(Ambition);
+			gPerks.push(BlindImmunity);
+			gPerks.push(BloodMage);
+			gPerks.push(FairyQueenRegalia);
+			gPerks.push(KrakenBlackDress);
+			gPerks.push(LastResort);
+			gPerks.push(Obsession);
+			gPerks.push(Sanctuary);
+			gPerks.push(SeersInsight);
+			gPerks.push(ScandalousSuccubusClothing);
+			gPerks.push(SkullOrnament);
+			gPerks.push(SluttySeduction);
+			gPerks.push(WellspringOfLust);
+			gPerks.push(WizardsEnduranceAndSluttySeduction);
+			gPerks.push(WizardsAndDaoistsEndurance);
+			gPerks.push(WizardsEndurance);
+			return gPerks;
+		}
+
 		// Melee & Range weapon perks
 		public static const Accuracy1:Accuracy1Perk = new Accuracy1Perk();
 		public static const Accuracy2:Accuracy2Perk = new Accuracy2Perk();
@@ -3143,6 +3164,25 @@ public class PerkLib
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const WizardsAndDaoistsFocus:WizardsAndDaoistsFocusPerk = new WizardsAndDaoistsFocusPerk();
 		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
+
+		public static function weaPerks():Array{	//Re:EnemyPerkList
+			var wPerks:Array = [];
+			wPerks.push(Accuracy1);
+			wPerks.push(Accuracy2);
+			wPerks.push(BladeWarden);
+			wPerks.push(BodyCultivatorsFocus);
+			wPerks.push(DaoistsFocus);
+			wPerks.push(DexterousSwordsmanship);
+			wPerks.push(InariBlessedKimono);
+			wPerks.push(MageWarden);
+			wPerks.push(SagesKnowledge);
+			wPerks.push(StrifeWarden);
+			wPerks.push(TamamoNoMaeCursedKimono);
+			wPerks.push(WildWarden);
+			wPerks.push(WizardsAndDaoistsFocus);
+			wPerks.push(WizardsFocus);
+			return wPerks;
+		}
 
 		// Achievement perks
 		public static const BowShooting:BowShootingPerk = new BowShootingPerk();
@@ -3609,7 +3649,8 @@ public class PerkLib
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
 
-		//Workaround to not having a proper list of enemy-only perks. Would a tagging system for perks by classification help, maybe even with Combat lag?
+		//Ugly workaround to not having a proper list of specific-type perks.
+		//Tagging system for perks by classification would help, similar to WeaponsLib.
 		public static function enemyPerkList():Array{
 			var ePerkL:Array = [];
 			ePerkL.push(Acid);
