@@ -1307,28 +1307,6 @@ public class PerkMenu extends BaseContent {
 		displayMenu();
 	}
 
-	/*
-	public function perkDatabase2Menu(tPVal:int = 0):void{
-		var perkList:Array = [] //perkDatabase2();
-		menu();
-		displayHeader("Perk Tier: " + tPVal);
-		for each (var aPerk:PerkType in perkList[tPVal].sort()){
-			outputText(aPerk.name() + "\n");
-		}
-		if (tPVal > 0){
-			addButton(0, "Prev Page", perkDatabase2Menu,tPVal - 1);
-		} else{
-			addButtonDisabled(0,"Prev Page", "Lowest Tier.")
-		}
-		if (tPVal < perkList.length - 1){
-			addButton(4, "Next Page", perkDatabase2Menu,tPVal + 1);
-		} else{
-			addButtonDisabled(4,"Next Page", "Highest Tier.")
-		}
-		addButton(14, "Back", displayPerks);
-	}
-	 */
-
     private function toggleFlag(returnTo:Function,flag:int,on:Boolean):void{
         setFlag(returnTo,flag,((on)?1:0));
     }

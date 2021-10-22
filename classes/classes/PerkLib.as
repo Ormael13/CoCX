@@ -3649,7 +3649,8 @@ public class PerkLib
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
 
-		//Workaround to not having a proper list of enemy-only perks. Would a tagging system for perks by classification help, maybe even with Combat lag?
+		//Ugly workaround to not having a proper list of specific-type perks.
+		//Tagging system for perks by classification would help, similar to WeaponsLib.
 		public static function enemyPerkList():Array{
 			var ePerkL:Array = [];
 			ePerkL.push(Acid);
