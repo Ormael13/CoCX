@@ -79,16 +79,21 @@ public class PlayerAppearance extends BaseContent {
 		const crotchDesc: String = describeCrotch();
 		outputText(crotchDesc ? " " + crotchDesc : "");
 
-		if (player.hasCock() || player.balls > 0 || player.vaginas.length > 0) {
-			outputText(" " + Utils.mergeSentences([describeCock(), describeBalls()]));
+		if (player.cocks.length > 1) {
+			outputText("[pg]" + describeCock());
+			outputText("[pg]" + describeBalls());
+		} else {
+			if (player.hasCock() || player.balls > 0) {
+				outputText("[pg]" + Utils.mergeSentences([describeCock(), describeBalls()]));
+			}
 		}
 
 		const pussyDesc: String = describePussy();
-		outputText(pussyDesc ? "\n\n" + pussyDesc : "");
+		outputText(pussyDesc ? "[pg]" + pussyDesc : "");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
-			outputText(" " + Utils.mergeSentences([noSexString, describeAsshole()]));
+			outputText("[pg]" + Utils.mergeSentences([noSexString, describeAsshole()]));
 		}
 
 		const piercingsDesc: String = describePiercings();
@@ -666,7 +671,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeCock(): String {
 		var temp:Number = 0;
 		var rando:Number = 0;
-		var cockDesc: String = "\n\n";
+		var cockDesc: String = "";
 
 		if (player.hasCock()) {
 			rando = rand(100);
@@ -687,8 +692,8 @@ public class PlayerAppearance extends BaseContent {
 			for (var cock_index:int = 0; cock_index < player.cocks.length; cock_index++) {
 				rando++;
 				// How to start the sentence?
-				if (player.cocks.length == 1) cockDesc += "\nYour ";
-				else if (cock_index == 0) cockDesc += "\n--Your first ";
+				if (player.cocks.length == 1) cockDesc += "Your ";
+				else if (cock_index == 0) cockDesc += "--Your first ";
 				else if (rando % 5 == 0) cockDesc += "\n--The next ";
 				else if (rando % 5 == 1) cockDesc += "\n--The " + num2Text2(cock_index+1) + " of your ";
 				else if (rando % 5 == 2) cockDesc += "\n--One of your ";
@@ -744,7 +749,6 @@ public class PlayerAppearance extends BaseContent {
 					//trace("Found a sock description (WTF even is a sock?)", player.cocks[cock_index].sock);
 					cockDesc += sockDescript(cock_index);
 				}
-				//cockDesc += "\n"
 			}
 			//Worm flavor
 			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes";

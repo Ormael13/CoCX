@@ -111,11 +111,12 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, BEE_STRIPES, "BEE_STRIPES", {
 			id: "Bee Skin Pattern",
 			name: "Bee Stripes",
-			cost: 100,
-			title: "Bee",
+			cost: 200,
+			title: "Bee Stripes",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.SkinPatternOil
-			}
+				return CoC.instance.transformations.SkinPatternBeeStripes
+			},
+			info: "Includes Chitin skin"
 		});
 
 		public static function getMemory(memoryId: Number): * {
