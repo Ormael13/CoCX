@@ -680,7 +680,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "The black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>";
+	    desc += "The black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest. Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>";
 
 	    player.skin.base.pattern = Skin.PATTERN_OIL;
 	    player.skin.base.adj = "oily skin";

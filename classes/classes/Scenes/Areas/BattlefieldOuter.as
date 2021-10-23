@@ -16,6 +16,7 @@ use namespace CoC;
 	
 	public class BattlefieldOuter extends BaseContent
 	{
+		public var battlefieldEnemiesScene:BattlefieldEnemiesScenes = new BattlefieldEnemiesScenes();
 		
 		public function BattlefieldOuter() 
 		{
@@ -63,10 +64,10 @@ use namespace CoC;
 			var select:int;
 			
 			//Build choice list!
-			choice[choice.length] = 0; //Golem group enemies
+			choice[choice.length] = 0; //Ghost group enemies
 			choice[choice.length] = 1; //Golem group enemies
 			choice[choice.length] = 2; //Golem group enemies
-			choice[choice.length] = 3; //
+			choice[choice.length] = 3; //Golem group enemies
 			choice[choice.length] = 4; //Goblin/Imp group enemies
 			choice[choice.length] = 5; //Goblin/Imp group enemies
 			choice[choice.length] = 6; //Items
@@ -75,11 +76,13 @@ use namespace CoC;
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
+					battlefieldEnemiesScene.encounterVengefulApparitions();
+					break;
 				case 1:
 				case 2:
+				case 3:
 					SceneLib.exploration.genericGolemsEncounters1();
 					break;
-				case 3:
 				case 4:
 				case 5:
 					SceneLib.exploration.genericGobImpEncounters1();
@@ -124,7 +127,14 @@ use namespace CoC;
 					break;
 				default:
 					clearOutput();
-					outputText("You spend an hour exploring this deserted battlefield but you don't manage to find anything interesting, yet this trip had made you a little wiser.");
+					if (rand(4) == 0) {
+						outputText("You spend almost hour exploring this deserted battlefield but you don't manage to find anything interesting. Adter checking another pile of weapons you hear some noice comming from nearby. Intrigued you cautiously approach source of it, which turns to be... "+(rand(2) == 0?"demons":"imps")+". Whole group of them running straight at you. ");
+						outputText("As they approach you ready your [weapon] but... the first ones after reaching you jsut give you a short glance and just pass by. Then another one and one more pass you by almsot looking like they just seen you as merely obstacle to avoid during their run. Then you hear some fragments of the words they seems to talks form time to time.\n\n");
+						outputText("\"<i>...ster or the fog will catch up to u...</i>\", \"<i>...ut there is <b>SOMETHING</b> insid...</i>\", \"<i>...us..t reeee....port b...</i>\"\n\n");
+						outputText("After last one of them pass you by they soon vanish into distance behind you. What jsut happened? Usualy laidback and horny " + (rand(2) == 0?"demons":"imps") + " was actualy running away? From fog? As you thinking over it you notice something moving slightly in the direction they came. ");
+						outputText("Some grey, maybe black colored shape seemly wiggling as it like moving in your direction."+(silly()?" Oh are you approaching me?":"")+" Bit tired and on the edge due to meeting potential enemeis moemnts ago you decide to return this time. Maybe next time you will check out closer that 'fog' or whatever it's.");
+					}
+					else outputText("You spend an hour exploring this deserted battlefield but you don't manage to find anything interesting, yet this trip had made you a little wiser.");
 					dynStats("wis", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}

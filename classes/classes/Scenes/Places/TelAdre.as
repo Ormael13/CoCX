@@ -1087,15 +1087,13 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(3, "R.DeadeyeAim", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
-			addButtonDisabled(6, "L.Blaster", "You already bought item from Kaiba today.");
-			addButtonDisabled(7, "I.Q.Gown", "You already bought item from Kaiba today.");
+			addButtonDisabled(6, "I.Q.Gown", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
-			addButton(6, "L.Blaster", buyItem, weaponsrange.LBLASTR).hint("Lactoblaster - A rare weapon wich may only be in Kaiba inventory for a moment buy it while you can!");
-			addButton(7, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
@@ -1256,6 +1254,10 @@ public function tripxiShopMainMenu():void {
 			player.removeKeyItem("Double barreled dragon gun");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 3, 1);
 		}
+		if (player.hasKeyItem("Lactoblasters") >= 0) {
+			player.removeKeyItem("Lactoblasters");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 3, 1);
+		}
 		doNext(telAdreMenu);
 	}
 	else {
@@ -1326,7 +1328,8 @@ public function tripxiShopMainMenu2c():void {
 	addButton(1, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
 	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Volcanic Crag.");
-	//3 - Lactoblasters
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.LBLASTR.shortName, buyItemT2, weaponsrange.LBLASTR);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Mountains.");
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 

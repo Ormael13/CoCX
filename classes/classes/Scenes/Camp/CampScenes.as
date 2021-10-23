@@ -460,15 +460,10 @@ public function PCGoblinDaughtersBuilingWorkshopSpareParts():void {
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
 	flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
 	flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts);
-	if (player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) PCGoblinDaughtersBuilingWorkshopSparePartsEnergyCore();
+	flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);
 	player.removeStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts);
 	doNext(playerMenu);
 	cheatTime2(5);
-}
-public function PCGoblinDaughtersBuilingWorkshopSparePartsEnergyCore():void {
-	player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 4, -1);
-	if (player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) inventory.takeItem(useables.ENECORE, PCGoblinDaughtersBuilingWorkshopSparePartsEnergyCore);
-	else inventory.takeItem(useables.ENECORE, null);
 }
 
 }

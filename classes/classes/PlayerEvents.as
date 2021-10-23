@@ -254,6 +254,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.PCClone) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
 				if (player.statusEffectv1(StatusEffects.PCClone) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
 			}
+			//
+			if (player.hasStatusEffect(StatusEffects.DinahGift)) {
+				if (player.statusEffectv1(StatusEffects.DinahGift) <= 0) player.removeStatusEffect(StatusEffects.DinahGift);
+				else player.addStatusValue(StatusEffects.DinahGift, 1, -1);
+			}
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
@@ -2017,6 +2022,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				needNext = true;
+			}
+			//Cow bell
+			if (player.necklaceName == "Cow bell") {
+				if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
+				else player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
 			}
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {

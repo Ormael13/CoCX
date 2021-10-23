@@ -3266,7 +3266,7 @@ import flash.utils.getQualifiedClassName;
 			//This function doesn’t take the gems away from the player, it just provides the output text
 			if (SceneLib.prison.inPrison) {
 				SceneLib.prison.doPrisonEscapeFightLoss();
-				return 8;
+				return 6;
 			}
 			if (!inDungeon) {
 				if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
@@ -3295,7 +3295,7 @@ import flash.utils.getQualifiedClassName;
 					outputText(", but after checking your gem pouch, you realize you're missing your only gem.");
 				else outputText(".");
 			}
-			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
+			return 6; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an six hour blackout
 		}
 		public function prepareForCombat():void {
 			var bonusStatsAmp:Number = 0.6;

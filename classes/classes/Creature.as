@@ -2710,6 +2710,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.GRYPHON);
 		}
 
+		public function beeCocks():int { //How many beecocks?
+			return countCocksOfType(CockTypesEnum.BEE);
+		}
+
 
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{

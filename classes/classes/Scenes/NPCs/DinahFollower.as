@@ -100,7 +100,8 @@ import classes.internals.Utils;
 				addButton(1, "Spar", DinahSparring);
 				addButtonDisabled(3, "Talk", "NYI");
 				addButtonDisabled(4, "Sex", "NYI");
-				addButtonDisabled(5, "Present", "NYI");//5 i 6 skopiować z MarbleScene.as i dostosować
+				if (player.hasStatusEffect(StatusEffects.DinahGift)) addButtonDisabled(5, "Gift", "She not feel like she want...");
+				else addButton(5, "Gift", recieveGIFTfromDinah);
 				addButton(6, "Give Item", giveDinahItem);
 				addButton(14, "Back", camp.campFollowers);
 			}
@@ -113,7 +114,7 @@ import classes.internals.Utils;
 		public function DinahAppearance():void {
 			clearOutput();
 			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.");
-			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". ");//She has a pair of " + dinahTits() + " on her chest. They have " + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + "s.	" + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "
+			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have 0.3-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");//	" + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
 		}
@@ -376,6 +377,15 @@ import classes.internals.Utils;
 			player.gems -= itype.value * _extra;
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu3);
+		}
+		
+		public function recieveGIFTfromDinah():void {
+			clearOutput();
+			outputText("\"<i>Lady Godiva says that sometimes it's good to share something without asking for money so...</i>\" as she been talking she pulled some object from the folds of her robe and throws toward you. \"<i>...take this. And may Lady Godiva bless this place. And now firgive me i need to occupy myself with other matters.</i>\" Not giving you chance to say anything she shoo you away.");
+			player.createStatusEffect(StatusEffects.DinahGift, (16+rand(15)), 0, 0, 0);
+			/*var gift:Number = rand(20);
+			if (gift == 0) inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
+			if (gift > 0) */inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
 		}
 		
 		public function giveDinahItem():void {

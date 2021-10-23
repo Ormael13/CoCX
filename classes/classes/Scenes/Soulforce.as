@@ -1746,7 +1746,9 @@ use namespace CoC;
 		}
 		public function AddEnergyCore():void {
 			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
-			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
+			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
+			statScreenRefresh();
+			curry(MaterialMenu, 2);
 		}
 		public function AddMechanism():void {
 			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
@@ -4095,4 +4097,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}

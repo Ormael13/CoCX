@@ -107,6 +107,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const BEE_STRIPES:int = 6;
+		EnumValue.add(Memories, BEE_STRIPES, "BEE_STRIPES", {
+			id: "Bee Skin Pattern",
+			name: "Bee Stripes",
+			cost: 100,
+			title: "Bee",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.SkinPatternOil
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

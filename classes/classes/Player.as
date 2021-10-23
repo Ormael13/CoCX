@@ -41,6 +41,7 @@ import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
+import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.EvangelineFollower;
@@ -3325,7 +3326,7 @@ use namespace CoC;
 				{name: 'darkgoo', score: darkgooScore(), minscore: 6},
 				{name: 'kitsune', score: kitsuneScore(), minscore: 5},
 				{name: 'kitshoo', score: kitshooScore(), minscore: 6},
-				{name: 'bee', score: beeScore(), minscore: 5},
+				{name: 'bee', score: beeScore(), minscore: 7},
 				{name: 'kangaroo', score: kangaScore(), minscore: 4},
 				{name: 'shark', score: sharkScore(), minscore: 4},
 				{name: 'harpy', score: harpyScore(), minscore: 4},
@@ -4177,8 +4178,6 @@ use namespace CoC;
 				if (TopScore >= 5) {
 					if (TopScore >= 11) {
 						if (isTaur()) race = "elf-taur";
-						else if ((skin.base.color == "ebony" || skin.base.color == "dark") && hairColor == "white") race = "drow";
-						else if (skin.base.color == "ebony" || skin.base.color == "dark") race = "dark elf";
 						else race = "elf";
 					} else {
 						if (isTaur()) race = "half elf-taur";
@@ -4906,7 +4905,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (cowScore() >= 10)
 				chimeraCounter++;
-			if (beeScore() >= 9)
+			if (beeScore() >= 14)
 				chimeraCounter++;
 			if (goblinScore() >= 10)
 				chimeraCounter++;
@@ -5420,31 +5419,34 @@ use namespace CoC;
 		public function beeScore():Number {
 			Begin("Player","racialScore","bee");
 			var beeCounter:Number = 0;
-			if (hairColor == "shiny black")
+			if (InCollection(hairColor, BeeGirlScene.beeHair)) //TODO if hairColor2 == yellow && hairColor == black
 				beeCounter++;
-			if (hairColor == "black and yellow") // TODO if hairColor2 == yellow && hairColor == black
-				beeCounter += 2;
-			if (antennae.type == Antennae.BEE)
-			{
+			if (eyes.type == Eyes.BLACK_EYES_SAND_TRAP)
+				beeCounter += 2;//po dodaniu bee tongue wróci do +1 
+			if (antennae.type == Antennae.BEE) {
 				beeCounter++;
 				if (faceType == Face.HUMAN)
-					beeCounter++;
+					beeCounter++;//ptem zamienić na specificzną dla pszczół wariant twarzy
 			}
+			if (horns.type == Horns.NONE)
+				beeCounter++;
 			if (arms.type == Arms.BEE)
 				beeCounter++;
 			if (lowerBody == LowerBody.BEE)
-			{
 				beeCounter++;
-				if (vaginas.length == 1)
-					beeCounter++;
-			}
 			if (tailType == Tail.BEE_ABDOMEN)
 				beeCounter++;
 			if (wings.type == Wings.BEE_SMALL)
 				beeCounter++;
 			if (wings.type == Wings.BEE_LARGE)
 				beeCounter += 2;
+			if (rearBody.type == RearBody.NONE)
+				beeCounter++;
+			if (skin.base.pattern == Skin.PATTERN_BEE_STRIPES)
+				beeCounter++;
 			if (hasPerk(PerkLib.BeeOvipositor))
+				beeCounter++;
+			if (vaginas.length == 1 || (cocks.length > 0 && beeCocks() > 0))
 				beeCounter++;
 			if (beeCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 				beeCounter++;
@@ -10825,7 +10827,7 @@ use namespace CoC;
 			total = biggestTitSize() * 10 * averageLactation() * statusEffectv1(StatusEffects.LactationEndurance) * totalBreasts();
 			if (hasPerk(PerkLib.MilkMaid))
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
-			if (hasPerk(MutationsLib.LactaBovinaOvariesEvolved) )
+			if (hasPerk(MutationsLib.LactaBovinaOvariesEvolved))
 				total += 200;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				total += (perkv3(PerkLib.ProductivityDrugs));
@@ -10833,6 +10835,8 @@ use namespace CoC;
 				total += (perkv1(PerkLib.AscensionMilkFaucet) * 200);
 			if (hasPerk(MutationsLib.LactaBovinaOvariesFinalForm))
 				total *= 2.5;
+			if (necklaceName == "Cow bell")
+				total *= 1.5;
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
 			if (total > int.MAX_VALUE)
@@ -11063,7 +11067,7 @@ use namespace CoC;
 			//PUT SOME CAPS ON DAT' SHIT
 			if(raw > 50) raw = 50;
 			if(raw < -50) raw = -50;
-			if(!hasPerk(PerkLib.ManticoreCumAddict) || !hasPerk(PerkLib.LactaBovineImmunity)) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
+			if(!hasPerk(PerkLib.ManticoreCumAddict) || !hasPerk(PerkLib.LactaBovineImmunity) || necklaceName != "Cow bell") flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
 			//Recheck to make sure shit didn't break
 			if(hasPerk(PerkLib.MinotaurCumResistance)) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0; //Never get addicted!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
@@ -11419,6 +11423,7 @@ use namespace CoC;
 			if (this.hasPerk(PerkLib.GargoyleCorrupted)) {
 				minSen += 15;
 			}
+			if (beeScore() >= 14) minLib += 20;
 			//Factory Perks
 			if (this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
 			if (this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=10;}
@@ -12099,16 +12104,17 @@ use namespace CoC;
 					}
 				}
 			}
-		*/	if (beeScore() >= 5) {
-				if (beeScore() >= 9) {
-					maxTouCap2 += 50;
-					maxSpeCap2 += 50;
-					maxIntCap2 += 35;
+		*/	if (beeScore() >= 7) {
+				if (beeScore() >= 14) {
+					maxTouCap2 += 80;
+					maxSpeCap2 += 80;
+					maxIntCap2 += 50;
+					maxLibCap2 += 20;
 				}
 				else {
-					maxTouCap2 += 30;
-					maxSpeCap2 += 30;
-					maxIntCap2 += 15;
+					maxTouCap2 += 40;
+					maxSpeCap2 += 40;
+					maxIntCap2 += 25;
 				}
 			}//+40/30-40
 			if (spiderScore() >= 4) {
@@ -13120,8 +13126,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
-				if (cowScore() >=15) power = lactationQ()*0.001;
-				if (minotaurScore() >=15) power = cumCapacity()*0.001;
+				if (cowScore() >= 15) power = lactationQ()*0.001;
+				if (minotaurScore() >= 15) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
 			}

@@ -1938,7 +1938,7 @@ public static const UNKNOWN_FLAG_NUMBER_01929:int                               
 public static const UNKNOWN_FLAG_NUMBER_01930:int                                   = 1930;
 public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
 public static const UNKNOWN_FLAG_NUMBER_01932:int                                   = 1932;
-public static const UNKNOWN_FLAG_NUMBER_01933:int                                   = 1933;
+public static const CAMP_CABIN_ENERGY_CORE_RESOURCES:int                            = 1933;
 public static const CAMP_CABIN_MECHANISM_RESOURCES:int                              = 1934;
 public static const PRISCILLA_DEFEATS_COUNTER:int                                   = 1935;
 public static const PRISCILLA_LVL_UP:int                                   			= 1936;

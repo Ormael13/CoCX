@@ -156,7 +156,6 @@ package classes.Scenes
 			outputText("(as some of those are not so hard to get from other vendors in Mareth). Plus some of the more worthy items he will not sell for gems but in exchange for some spirit stones.\n");
 			outputText("-Benoit shop have now 5 slots for items to sell instead of 3. All items that was before in those 3 slots been spread to 5 slots so no worry no item been discarded from our fav basilisk offer ^^\n");
 			outputText("-Windstorm Emerald cost increased from 6 to 20 gems.\n");
-			outputText("-Glacial Rift damage ticks from cold climate would be 50% lower when PC is in combat (tick at the exploration been unchanged).\n");
 			outputText("-Simplified requirements for dragon racial mutation perks.\n");
 			outputText("-Option to get internal mutation form Evangeline no longer req. her to be lvl 6.\n");
 			outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
@@ -206,7 +205,23 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-Ghost enemy type are 'virtualy' immune now to any physical damage (them deal 1 dmg because orginal enought decent to keep fencode not likes total 0).\n");
 			outputText("-Added mastery for fighting with body weapons (it would boost some of physcial specials that use bodyparts in attack - it will not affect specials that are attacks with fluids or other substances aka breath attacks).\n");//polearm type weapons and for 
-			outputText("-Mechanism item been converted to material stored in flag (with max storage cap of 200). For all Mecyhanisms that PC have as items would be convertable to flag value by option added to  menu. All checks from now for this crafting material would look for flag value than items kept in PC inventory.\n");
+			outputText("-Mechanism item been converted to material stored in flag (with max storage cap of 200). For all Mechanisms that PC have as items are convertable to flag value by option added to camp menu. All checks from now for this crafting material would look for flag value than items kept in PC inventory.\n");
+			outputText("-Energy Core item also been converted in the same way as Mechanism item.\n");
+			outputText("-Racial paragon req. of having Job: Beast Warrior been removed.\n");
+			outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Dinah Rulette. Cost 2000 gems. Can't be used by character shorter than 7 ft. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
+			outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
+			outputText("-New enemies: Vengeful Apparitions (lvl 24 or 30 normal/large sized group of ghost type enemies and can be found in (Outer) Battlefield).\n");
+			outputText("-New mutation perk: Gazer Eye. Req. having free eye mutation slot, having monoeye, 2+ eyestalks and gazer score 4+. Effects: Keep true seeing at all times and empower gaze attacks. +5% int multi.\n");
+			outputText("-New mutation perk: Gazer Eye (Evolved). Req. having Gazer Eye (Evolved) perk, having monoeye, 4+ eyestalks and gazer score 8+. Effects: Keep true seeing at all times, empower gaze attacks and empower your ability to cast many spells as a Gazer if available (each part of split spell deal 30% not 20% of orginal spell power). +5% lib multi, + 10& int multi.\n");
+			outputText("-New mutation perk: Gazer Eye (Final Form). Req. having Gazer Eye perk, having monoeye, 6+ eyestalks and gazer score 12+. Effects: Keep true seeing at all times, empower gaze attacks, further empower your ability to cast many spells as a Gazer if available (each part of split spell deal 50% not 20% of orginal spell power) and increase spell critical hit chance by 10%. +5% lib multi, + 10& int multi.\n");
+			outputText("-Bee score for half/full bee-morph rised from 5/9 to 7/14 pts. Bonuses was also increased according to the change: +40/80% to Tou/Spe raical multi, +25/50% to Int racial multi, +0/20% ot Lib racial multi, +0/20 to min Libido.\n");
+			outputText("-Bee score now accept 2 more hair color variants and give poitns for: black eyes (same look as sandtrap), bee cocks, skin pattern for bees, not having any horns/read body variants.\n");
+			outputText("-New necklace (by Liadri): Cow bell - drop after bgeating lacta bovina or minotaur enemies. Cost 00 gems. Raise milk productivity by 50% and immunise players to the negative effects of minotaur cum addiction as if a cow girl. If the player is a cowgirl, raise maximum strength and libido by 20%.\n");
+			outputText("-Lactoblasters have been removed from Kaiba shop and placed in Mountains as remains that PC must find and bring to Tripixi for restoration.\n");
+			outputText("-From time to time Dinah can present PC with some small things (gifts?). It won't happen usualy more often that once a day. Oh and she not gonna run to notify about this like Marble, option to get smth from her for free will became avialable among her interactions options.\n");
+			outputText("-Defeat would progress time only for six not eigth hours.\n");
+			outputText("-PerksDB V2 is released, but in beta. Missing main feature of perk description, but the layout will be as such. Thoughts? -Jtecx\n");
+			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -232,9 +247,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
-			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -287,17 +299,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -329,8 +331,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
