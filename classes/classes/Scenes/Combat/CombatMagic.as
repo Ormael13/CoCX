@@ -2308,12 +2308,12 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellMagicBolt2(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
 		else outputText("You point your hand toward " + monster.a + monster.short + " and shots magic bolt!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") {
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) {
 			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
 			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
 			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
@@ -4899,18 +4899,18 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellChargeWeaponWeaponSize():Number {
 		var ab12:Number = 1;
-		if (player.weaponPerk == "" || player.weaponPerk == "Dual") ab12 *= 2;
-		if (player.weaponPerk == "Hybrid") ab12 *= 2.5;
-		if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") ab12 *= 3;
-		if (player.weaponPerk == "Massive") ab12 *= 4;
+		if (player.weaponSpecials("") || player.weaponSpecials("Dual")) ab12 *= 2;
+		if (player.weaponSpecials("Hybrid")) ab12 *= 2.5;
+		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) ab12 *= 3;
+		if (player.weaponSpecials("Massive")) ab12 *= 4;
 		return ab12;
 	}
 	public function spellChargeWeaponWeaponSizeManaCost():Number {
 		var ba21:Number = 1;
-		if (player.weaponPerk == "" || player.weaponPerk == "Dual Small") ba21 *= 2;
-		if (player.weaponPerk == "Hybrid") ba21 *= 3;
-		if (player.weaponPerk == "Large" || player.weaponPerk == "Dual") ba21 *= 4;
-		if (player.weaponPerk == "Massive" || player.weaponPerk == "Dual Large") ba21 *= 8;
+		if (player.weaponSpecials("") || player.weaponSpecials("Dual Small")) ba21 *= 2;
+		if (player.weaponSpecials("Hybrid")) ba21 *= 3;
+		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual")) ba21 *= 4;
+		if (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Large")) ba21 *= 8;
 		return ba21;
 	}
 
@@ -5859,4 +5859,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

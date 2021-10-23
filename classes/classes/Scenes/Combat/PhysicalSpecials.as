@@ -727,7 +727,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
 		}
-		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
+		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
@@ -756,9 +756,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
+		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponSpecials("Large") && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponSpecials("Dual Large") && player.str >= 140) critChance += 10;
+		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")) {
 			if (player.str >= 100) critChance += 10;
 			if (player.str >= 140) critChance += 10;
 		}
@@ -892,9 +892,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
+		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponSpecials("Large") && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponSpecials("Dual Large") && player.str >= 140) critChance += 10;
+		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")) {
 			if (player.str >= 100) critChance += 10;
 			if (player.str >= 140) critChance += 10;
 		}
@@ -958,7 +958,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
 		}
-		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
+		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
@@ -1010,7 +1010,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
-		if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
+		if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
 			if (player.tailVenom >= player.VenomWebCost()) {
 				outputText("  ");
 				if(monster.lustVuln == 0) {
@@ -1290,7 +1290,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
 		}
-		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
+		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
@@ -1420,11 +1420,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isWeaponForWhirlwind()) damage *= 1.25;
 			else damage *= 0.75;
 		}
-		if (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") {
+		if (player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
 		}
-		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive"))) damage *= 1.25;
+		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")))) damage *= 1.25;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		//crit
@@ -1510,11 +1510,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") {
+		if (player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
 		}
-		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive"))) damage *= 1.25;
+		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")))) damage *= 1.25;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		//crit
@@ -5995,4 +5995,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}
