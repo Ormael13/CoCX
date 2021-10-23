@@ -1739,7 +1739,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) outputText("' attacks ");
 				else outputText("'s attack ");
 				outputText("with your [weapon].\n");
-				if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") && game.player.wrath >= 2) {
+				if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
 					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
 					SceneLib.combat.basemeleeattacks();
 				}

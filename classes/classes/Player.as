@@ -1240,36 +1240,36 @@ use namespace CoC;
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = _weapon.attack;
-			if (hasPerk(PerkLib.JobSwordsman) && weaponPerk == "Large") {
+			if (hasPerk(PerkLib.JobSwordsman) && weaponSpecials("Large")) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.WeaponGrandMastery) && weaponPerk == "Dual Large" && str >= 140) {
+			if (hasPerk(PerkLib.WeaponGrandMastery) && weaponSpecials("Dual Large") && str >= 140) {
 				attack *= 2;
 			}
-			if (hasPerk(PerkLib.GigantGripEx) && weaponPerk == "Massive") {
+			if (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive")) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.HiddenMomentum) && (weaponPerk == "Large" || (hasPerk(PerkLib.GigantGripEx) && weaponPerk == "Massive")) && str >= 75 && spe >= 50) {
+			if (hasPerk(PerkLib.HiddenMomentum) && (weaponSpecials("Large") || (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive"))) && str >= 75 && spe >= 50) {
 				attack += (((str + spe) - 100) * 0.2);
 			}//30-70-110
-			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponPerk == "Dual Large" && str >= 150 && spe >= 100) {
+			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponSpecials("Dual Large") && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (weaponPerk != "Massive" || weaponPerk != "Large" || weaponPerk != "Dual Large" || weaponPerk != "Small" || weaponPerk != "Dual Small" || !isFistOrFistWeapon())) {
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Massive") || !weaponSpecials("Large") || !weaponSpecials("Dual Large") || !weaponSpecials("Small") || !weaponSpecials("Dual Small") || !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
-			if (weaponPerk == "Hybrid" && shieldName == "nothing"){
+			if (weaponSpecials("Hybrid") && shieldName == "nothing"){
 				attack *= 1.5;
 			}
-			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weaponPerk == "Small" || weaponPerk == "Dual Small")) {
+			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weaponSpecials("Small") || weaponSpecials("Dual Small"))) {
 				attack += ((spe - 50) * 0.2);
 			}
 			if (hasPerk(PerkLib.SteelImpact)) {
@@ -1304,7 +1304,7 @@ use namespace CoC;
 					attack += SceneLib.combat.unarmedAttack();
 				}
 			}
-			if (hasPerk(PerkLib.PrestigeJobTempest) && weaponPerk == "Dual") {
+			if (hasPerk(PerkLib.PrestigeJobTempest) && weaponSpecials("Dual")) {
 				attack += (5 * newGamePlusMod);
 			}
 			//Konstantine buff
@@ -1369,7 +1369,7 @@ use namespace CoC;
 		//Is DualWield
 		public function isDualWield():Boolean
 		{
-			return weaponRangePerk == "Dual Firearms" || weaponPerk == "Dual Large" || weaponPerk == "Dual Small" || weaponPerk == "Dual";
+			return weaponRangePerk == "Dual Firearms" || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
 		}
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
@@ -1404,7 +1404,7 @@ use namespace CoC;
 		//Using Wand
 		public function isUsingWand():Boolean
 		{
-			return weaponPerk == "Wand";
+			return weaponSpecials("Wand");
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {

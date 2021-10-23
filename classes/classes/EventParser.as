@@ -349,7 +349,7 @@ public class EventParser {
             return true;
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponPerk == "Large" && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;

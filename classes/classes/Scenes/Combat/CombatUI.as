@@ -540,7 +540,7 @@ public class CombatUI extends BaseCombatContent {
 
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
 			bd = buttons.add("M.Bolt", combat.magic.spellMagicBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 			if (player.mana < spellCost(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -551,7 +551,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("M.Bolt(Ex)", combat.magic.spellEdgyMagicBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Magic Bolt");
 				if (player.mana < spellCost(40)) {
 					bd.disable("Your mana is too low to cast this spell.");
@@ -566,7 +566,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
 			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
 			else bd.hint("Attempt to attack the enemy with elemental bolt.  Damage done is determined by your intelligence.", "Elemental Bolt");
 			if (player.mana < spellCost(80)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -577,7 +577,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("E.Bolt(Ex)", combat.magic.spellEdgyElementalBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Elemental Bolt");
 				if (player.mana < spellCost(80)) {
 					bd.disable("Your mana is too low to cast this spell.");

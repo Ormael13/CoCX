@@ -103,6 +103,7 @@ public class Creature extends Utils
 		public function get weaponName():String { return _weaponName; }
 		public function get weaponVerb():String { return _weaponVerb; }
 		public function get weaponAttack():Number { return _weaponAttack; }
+		//Warning: Deprecated since 0.8s2. New tagging system uses this args. DO NOT USE, MUST REPLACE WITH weaponSpecials
 		public function get weaponPerk():String { return _weaponPerk; }
 		public function get weaponType():String { return _weaponType; }
 		public function get weaponValue():Number { return _weaponValue; }
