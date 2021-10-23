@@ -452,7 +452,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 
 	        if (color !== player.coatColor) {
-	          desc += "You feel a strange sensation on the chitin that your skin became, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your chitin is now " + color + ".</b>"
+	          desc += "You feel a strange sensation on the chitin covering your skin, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your chitin is now " + color + ".</b>"
 	        }
 	      } else {
 	        switch (coverage) {
@@ -478,22 +478,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 	      }
 
-	      // Patterns
-	      if (options.pattern && options.pattern !== player.skin.base.pattern) {
-	        const pattern: int = options.pattern;
-
-	        if (!options.color2 && options.colors2) {
-	          options.color2 = randomChoice(options.colors2);
-	        }
-
-	        switch (pattern) {
-	        case Skin.PATTERN_BEE_STRIPES:
-	          if (!options.color2) options.color2 = "black";
-	          desc += "\n\nA ripple spreads through your chitin as some patches change in color. After a few moments you're left with a " + options.color2 + " and " + color + " striped pattern, like a bee's! <b>You've got striped chitin!</b>";
-	          break;
-	        }
-	      }
-
 	      player.skinDesc = "skin";
 	      player.skin.growCoat(Skin.CHITIN, options, coverage);
 	      if (doOutput) outputText(desc);
@@ -514,6 +498,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  if (player.coatColor == "" || player.skinType === Skin.PLAIN) player.coatColor = player.hairColor;
 
 	  if (!options.adj) options.adj = "";
+
+		if (!options.pattern) options.pattern == "";
 
 	  if (!options.color && !options.colors) {
 	    options.color = player.coatColor;
@@ -726,6 +712,29 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.skin.base.pattern === Skin.PATTERN_USHI_ONI_TATTOO;
+	  }
+	);
+
+	public const SkinPatternBeeStripes: Transformation = new SimpleTransformation("Bee Stripes Skin Pattern",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+			var coverage: int = player.skin.coverage;
+			if (coverage === Skin.COVERAGE_NONE) coverage = Skin.COVERAGE_LOW;
+
+			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(coverage, {color: "yellow"}), doOutput);
+
+			desc += "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
+
+			player.skin.base.pattern = Skin.PATTERN_BEE_STRIPES;
+			player.coatColor2 = "black";
+	    if (doOutput) outputText(desc);
+	  	Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
+	  },
+	  // is present
+	  function (): Boolean {
+			return player.skin.base.pattern === Skin.PATTERN_BEE_STRIPES;
 	  }
 	);
   /*
@@ -8832,7 +8841,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 
 	      desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
-		  
+
 		  if (tailCount == 2) ( desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>" )
 		  else if (tailCount == 3) ( desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>" )
 		  else if (tailCount == 4) ( desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>" )
@@ -9704,3 +9713,4 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 */
 }
 }
+

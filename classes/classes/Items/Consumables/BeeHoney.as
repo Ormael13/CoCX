@@ -173,7 +173,7 @@ public class BeeHoney extends Consumable
 			// Chitin
 			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW || player.skin.coat.type != Skin.CHITIN || player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
 				outputText("\n\n");
-				CoC.instance.transformations.SkinChitin(Skin.COVERAGE_LOW, {color:"yellow",	color2:"black",	pattern:Skin.PATTERN_BEE_STRIPES}).applyEffect();
+				CoC.instance.transformations.SkinPatternBeeStripes.applyEffect();
 				changes++;
 			}
 			//Bee Legs
