@@ -158,7 +158,7 @@ import classes.Scenes.SceneLib;
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
 				this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.GorgonsEyesEvolved, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.DraconicLungsEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.DraconicLungsPrimitive, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
@@ -176,7 +176,7 @@ import classes.Scenes.SceneLib;
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
-				this.createPerk(MutationsLib.DraconicLungsFinalForm, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.DraconicLungsEvolved, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.OniMusculatureFinalForm, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.OrcAdrenalGlandsFinalForm, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.PigBoarFatFinalForm, 0, 0, 0, 0);

@@ -385,9 +385,9 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsFinalForm) || (player.dragonScore() >= 16 && player.hasPerk(MutationsLib.DraconicLungs))) {
+		if (player.hasPerk(MutationsLib.DraconicLungsEvolved) || (player.dragonScore() >= 16 && player.hasPerk(MutationsLib.DraconicLungs))) {
 			bd = buttons.add("TrueDragonBreath", trueDragonBreath);
-			if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) {
+			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once per fight. \n", "True Dragon Breath");
 			} else {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once a day. \n", "True Dragon Breath");
@@ -395,7 +395,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(200));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
-				if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for a while.");
+				if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for a while.");
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
@@ -2007,8 +2007,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
+		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
@@ -2131,8 +2131,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
+		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
@@ -2221,8 +2221,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
+		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
@@ -2311,8 +2311,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
+		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
@@ -2399,8 +2399,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
+		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
@@ -2498,8 +2498,8 @@ public class MagicSpecials extends BaseCombatContent {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 3;
 			}
-			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 3;
-			if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) damult += 6;
+			if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
+			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
 			if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 			if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) damult += 3;
@@ -6008,4 +6008,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

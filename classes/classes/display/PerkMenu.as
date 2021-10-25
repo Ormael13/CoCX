@@ -952,9 +952,9 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Dragon Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
-			mutationsDatabaseVerify([MutationsLib.DraconicBones, MutationsLib.DraconicBonesEvolved, MutationsLib.DraconicBonesFinalForm]);
-			mutationsDatabaseVerify([MutationsLib.DraconicHeart, MutationsLib.DraconicHeartEvolved, MutationsLib.DraconicHeartFinalForm]);
-			mutationsDatabaseVerify([MutationsLib.DraconicLungs, MutationsLib.DraconicLungsEvolved, MutationsLib.DraconicLungsFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.DraconicBones, MutationsLib.DraconicBonesPrimitive, MutationsLib.DraconicBonesEvolved]);
+			mutationsDatabaseVerify([MutationsLib.DraconicHeart, MutationsLib.DraconicHeartPrimitive, MutationsLib.DraconicHeartEvolved]);
+			mutationsDatabaseVerify([MutationsLib.DraconicLungs, MutationsLib.DraconicLungsPrimitive, MutationsLib.DraconicLungsEvolved]);
 			mutationsDatabase(1);
 		}
 

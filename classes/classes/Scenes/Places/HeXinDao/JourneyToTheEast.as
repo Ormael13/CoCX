@@ -1087,6 +1087,7 @@ package classes.Scenes.Places.HeXinDao
 			player.createPerk(PerkLib.LifeLeech, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Undeath, 0, 0, 0, 0);
 			player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
+			player.statStore.addBuffObject({"spe.mult": -0.9,"int.mult": -0.9}, 'Energy Vampire', {text: 'Energy Vampire'});
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
 			if (player.weapon != WeaponLib.FISTS) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
@@ -1188,4 +1189,4 @@ package classes.Scenes.Places.HeXinDao
 			}
 		}
 	}
-}
+}

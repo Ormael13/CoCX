@@ -4161,6 +4161,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.BLACK_EYES_SAND_TRAP));
 	  },
 	  // is present
 	  function (): Boolean {

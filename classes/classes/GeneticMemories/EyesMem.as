@@ -261,6 +261,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const BLACK_EYES_SAND_TRAP:int = 20;
+		EnumValue.add(Memories, BLACK_EYES_SAND_TRAP, "BLACK_EYES_SAND_TRAP", {
+			id: "Black Eyes",
+			name: "Black Eyes",
+			cost: 100,
+			title: "Black Eyes",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesSandTrap;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

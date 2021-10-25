@@ -43,22 +43,31 @@ public class MutationsLib
 		public static const CaveWyrmLungs:PerkType = mk("Cave Wyrm Lungs", "Cave Wyrm Lungs",
 				"Your lung has became accustomed to the presence of acid in your biology improving the corrosiveness and volatility of your biochemical weapons.",
 				"You've chosen the 'Cave Wyrm Lungs' perk, .");
+		public static const CaveWyrmLungsPrimitive:PerkType = mk("Cave Wyrm Lungs (Primitive)", "Cave Wyrm Lungs (Primitive)",
+				".");
 		public static const CaveWyrmLungsEvolved:PerkType = mk("Cave Wyrm Lungs (Evolved)", "Cave Wyrm Lungs (Evolved)",
-				".",
-				"You've chosen the 'Cave Wyrm Lungs (Evolved)' perk, .");
+				".");
 		public static const CaveWyrmLungsFinalForm:PerkType = mk("Cave Wyrm Lungs (Final Form)", "Cave Wyrm Lungs (Final Form)",
-				".",
-				"You've chosen the 'Cave Wyrm Lungs (Final Form)' perk, .");
+				".");
 		public static const KitsuneParathyroidGlands:PerkType = mk("Kitsune Parathyroid Glands", "Kitsune Parathyroid Glands",
 				".",//decrease terror/ilussions cooldown instead of thyroid gland - rise wis or bonus sf regen or mana regen and thyroid gland instead regering sf?
 				"You've chosen the 'Kitsune Parathyroid Glands' perk, .");
+		public static const KitsuneParathyroidGlandsPrimitive:PerkType = mk("Kitsune Parathyroid Glands (Primitive)", "Kitsune Parathyroid Glands (Primitive)",
+				".");
 		public static const KitsuneParathyroidGlandsEvolved:PerkType = mk("Kitsune Parathyroid Glands (Evolved)", "Kitsune Parathyroid Glands (Evolved)",
-				".",
-				"You've chosen the 'Kitsune Parathyroid Glands (Evolved)' perk, .");
+				".");
 		public static const KitsuneParathyroidGlandsFinalForm:PerkType = mk("Kitsune Parathyroid Glands (Final Form)", "Kitsune Parathyroid Glands (Final Form)",
-				".",
-				"You've chosen the 'Kitsune Parathyroid Glands (Final Form)' perk, .");
+				".");
 		//accesable perks
+		public static const ArachnidBookLung:PerkType = mk("Arachnid Book Lung", "Arachnid Book Lung",
+				"Increase the web and poison capacity by 100%.",
+				"You've chosen the 'Arachnid Book Lung' perk. Increase the web and poison capacity by 100%.").withBuffs({'int.mult':0.05});
+		public static const ArachnidBookLungEvolved:PerkType = mk("Arachnid Book Lung (Evolved)", "Arachnid Book Lung (Evolved)",
+				"Increase the web and poison capacity by an additional 100% and increase the effectiveness of all Web abilities by half.",
+				"You've chosen the 'Arachnid Book Lung Evolved' perk. Increase the web and poison capacity by an additional 100% and increase the effectiveness of all Web abilities by half.").withBuffs({'int.mult':0.10});
+		public static const ArachnidBookLungFinalForm:PerkType = mk("Arachnid Book Lung (Final Form)", "Arachnid Book Lung (Final Form)",
+				"Increase the web and poison capacity by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ",
+				"You've chosen the 'Arachnid Book Lung Final Form' perk. Increase the web and poison capacity by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ").withBuffs({'int.mult':0.15});
 		public static const BlackHeart:PerkType = mk("Black Heart", "Black Heart",
 				"Increase the power of lust strike and empower fascinate.",
 				"You've chosen the 'Black Heart' perk. Increase the power of lust strike and empower fascinate.").withBuffs({'lib.mult':0.05});
@@ -69,29 +78,29 @@ public class MutationsLib
 				"Adds additional lust dmg to Lust strike depending on your current sensitivity (additional sensitivity/10 lust dmg), extend to 2 turns stun from Fascinate.",
 				"You've chosen the 'Black Heart (Final Form)' perk. Adds additional lust dmg to Lust strike depending on current chara sensitivity (additional sensitivity/10 lust dmg), extend to 2 turns stun from Fascinate.").withBuffs({'lib.mult':0.15});
 		public static const DraconicBones:PerkType = mk("Draconic Bones", "Draconic Bones",
-				"Basic strengthening of your body bone structure. (+10 to unarmed attack)",
-				"You've chosen the 'Draconic Bones' perk. Basic strengthening of your body bone structure. (+10 to unarmed attack)").withBuffs({'tou.mult':0.05});
+				"Basic strengthening of your body bone structure. (+10 to unarmed attack)").withBuffs({'tou.mult':0.05});
+		public static const DraconicBonesPrimitive:PerkType = mk("Draconic Bones (Primitive)", "Draconic Bones (Primitive)",
+				"Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)").withBuffs({'tou.mult':0.10});
 		public static const DraconicBonesEvolved:PerkType = mk("Draconic Bones (Evolved)", "Draconic Bones (Evolved)",
-				"Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)",
-				"You've chosen the 'Draconic Bones (Evolved)' perk. Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)").withBuffs({'tou.mult':0.10});
+				"Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)").withBuffs({'tou.mult':0.20});
 		public static const DraconicBonesFinalForm:PerkType = mk("Draconic Bones (Final Form)", "Draconic Bones (Final Form)",
 				"Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)",
 				"You've chosen the 'Draconic Bones (Final Form)' perk. Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)").withBuffs({'tou.mult':0.20});
 		public static const DraconicHeart:PerkType = mk("Draconic Heart", "Draconic Heart",
-				"Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)",
-				"You've chosen the 'Draconic Heart' perk. Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)").withBuffs({'str.mult':0.05});
+				"Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)").withBuffs({'str.mult':0.05});
+		public static const DraconicHeartPrimitive:PerkType = mk("Draconic Heart (Primitive)", "Draconic Heart (Primitive)",
+				"Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)").withBuffs({'str.mult':0.10});
 		public static const DraconicHeartEvolved:PerkType = mk("Draconic Heart (Evolved)", "Draconic Heart (Evolved)",
-				"Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)",
-				"You've chosen the 'Draconic Heart (Evolved)' perk. Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)").withBuffs({'str.mult':0.10});
+				"Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)").withBuffs({'str.mult':0.20});
 		public static const DraconicHeartFinalForm:PerkType = mk("Draconic Heart (Final Form)", "Draconic Heart (Final Form)",
 				"Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)",
 				"You've chosen the 'Draconic Heart (Final Form)' perk. Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)").withBuffs({'str.mult':0.20});
 		public static const DraconicLungs:PerkType = mk("Draconic Lungs", "Draconic Lungs",
-				"Allows to use breath attack more often. (All dragon breaths usable once per combat)",
-				"You've chosen the 'Draconic Lungs' perk. Allows to use breath attack more often.").withBuffs({'spe.mult':0.05});
+				"Allows to use breath attack more often. (All dragon breaths usable once per combat)").withBuffs({'spe.mult':0.05});
+		public static const DraconicLungsPrimitive:PerkType = mk("Draconic Lungs (Primitive)", "Draconic Lungs (Primitive)",
+				"Increases threefold the power of dragon breath attacks. (+300% to dragon breaths damage, +5% of max core Spe as phantom Spe)").withBuffs({'spe.mult':0.10});
 		public static const DraconicLungsEvolved:PerkType = mk("Draconic Lungs (Evolved)", "Draconic Lungs (Evolved)",
-				"Increases threefold the power of dragon breath attacks. (+300% to dragon breaths damage, +5% of max core Spe as phantom Spe)",
-				"You've chosen the 'Draconic Lungs (Evolved)' perk. Increases threefold the power of dragon breath attacks.").withBuffs({'spe.mult':0.10});
+				"Further increases dragon breath attacks power and allows to combine all 4 basic breath types more often. (+600% to dragon breaths damage, +10% of max core Spe as phantom Spe)").withBuffs({'spe.mult':0.20});
 		public static const DraconicLungsFinalForm:PerkType = mk("Draconic Lungs (Final Form)", "Draconic Lungs (Final Form)",
 				"Further increases dragon breath attacks power and allows to combine all 4 basic breath types more often. (+600% to dragon breaths damage, +10% of max core Spe as phantom Spe)",
 				"You've chosen the 'Draconic Lungs (Final Form)' perk. Further increases increases dragon breath attacks power and allows to combine all 4 basic breath types more often.").withBuffs({'spe.mult':0.20});
@@ -149,6 +158,16 @@ public class MutationsLib
 		public static const FrozenHeartFinalForm:PerkType = mk("Frozen heart (Final Form)", "Frozen heart (Final Form)",
 				"Ice barrage and hungering cold abilities increase their damage by another 30%, hungering cold last for 3 additional turn and recharge 3 turn faster. Gain an extra modifier from your intelligence to health. (Increase original value by 50%).",
 				"You've chosen the 'Frozen heart (Final Form)' perk, going beyond just a very frozen heart.");
+		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
+				"Keep true seeing at all times and empower gaze attacks.").withBuffs({'int.mult':0.05});
+		public static const GazerEyeEvolved:PerkType = mk("Gazer Eye (Evolved)", "Gazer Eye (Evolved)",
+				"Keep true seeing at all times, empower gaze attacks and empower your ability to cast many spells as a Gazer if available.").withBuffs({'lib.mult':0.05,'int.mult':0.10});
+		public static const GazerEyeFinalForm:PerkType = mk("Gazer Eye (Final Form)", "Gazer Eye (Final Form)",
+				"Keep true seeing at all times, empower gaze attacks, further empower your ability to cast many spells as a Gazer if available and increase spell critical hit chance by 10%.").withBuffs({'lib.mult':0.05,'int.mult':0.10});
+		public static const GorgonsEyes:PerkType = mk("Gorgon's Eyes", "Gorgon's Eyes",
+				"Can use Petrify with any type of eyes and improves your resistance to attacks that are related to sight.").withBuffs({'spe.mult':0.05,'sens':5});
+		public static const GorgonsEyesEvolved:PerkType = mk("Gorgon's Eyes (Evolved)", "Gorgon's Eyes (Evolved)",
+				"Another mutation of your eyes allows you to move a bit faster, increase the duration of Petrify and change negative effect of resistance to basilisks and similar effects into positive effect.").withBuffs({'spe.mult':0.10,'sens':10});
 		public static const HarpyHollowBones:PerkType = mk("Harpy Hollow Bones", "Harpy Hollow Bones",
 				"Your bones are hollow like those of a harpy granting you 20% increased physical damage when flying and increasing speed at the expense of toughness. Also allows to keep Harpy song.",
 				"You've chosen the 'Harpy Hollow Bones' perk. Increase damage while flying by 20% and increasing speed at the expense of toughness.").withBuffs({'tou.mult':-0.05,'spe.mult':0.20});
@@ -353,25 +372,6 @@ public class MutationsLib
 		public static const YetiFatFinalForm:PerkType = mk("Yeti Fat (Final Form)", "Yeti Fat (Final Form)",
 				"Gain further damage reduction against attacks, further increase the potency of Big Hand And Feet by 50% and increase the duration of yeti breath stun by 1 round.",
 				"You've chosen the 'Yeti Fat Final Form' perk, gaining further damage reduction against attacks, further increase the potency of Big Hand And Feet by 50% and increase the duration of yeti breath stun by 1 round while also reducing its cooldown by 3 rounds.");
-		public static const ArachnidBookLung:PerkType = mk("Arachnid Book Lung", "Arachnid Book Lung",
-				"Increase the web and poison capacity by 100%.",
-				"You've chosen the 'Arachnid Book Lung' perk. Increase the web and poison capacity by 100%.").withBuffs({'int.mult':0.05});
-		public static const ArachnidBookLungEvolved:PerkType = mk("Arachnid Book Lung (Evolved)", "Arachnid Book Lung (Evolved)",
-				"Increase the web and poison capacity by an additional 100% and increase the effectiveness of all Web abilities by half.",
-				"You've chosen the 'Arachnid Book Lung Evolved' perk. Increase the web and poison capacity by an additional 100% and increase the effectiveness of all Web abilities by half.").withBuffs({'int.mult':0.10});
-		public static const ArachnidBookLungFinalForm:PerkType = mk("Arachnid Book Lung (Final Form)", "Arachnid Book Lung (Final Form)",
-				"Increase the web and poison capacity by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ",
-				"You've chosen the 'Arachnid Book Lung Final Form' perk. Increase the web and poison capacity by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ").withBuffs({'int.mult':0.15});
-		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
-				"Keep true seeing at all times and empower gaze attacks.").withBuffs({'int.mult':0.05});
-		public static const GazerEyeEvolved:PerkType = mk("Gazer Eye (Evolved)", "Gazer Eye (Evolved)",
-				"Keep true seeing at all times, empower gaze attacks and empower your ability to cast many spells as a Gazer if available.").withBuffs({'lib.mult':0.05,'int.mult':0.10});
-		public static const GazerEyeFinalForm:PerkType = mk("Gazer Eye (Final Form)", "Gazer Eye (Final Form)",
-				"Keep true seeing at all times, empower gaze attacks, further empower your ability to cast many spells as a Gazer if available and increase spell critical hit chance by 10%.").withBuffs({'lib.mult':0.05,'int.mult':0.10});
-		public static const GorgonsEyes:PerkType = mk("Gorgon's Eyes", "Gorgon's Eyes",
-				"Can use Petrify with any type of eyes and improves your resistance to attacks that are related to sight.").withBuffs({'spe.mult':0.05,'sens':5});
-		public static const GorgonsEyesEvolved:PerkType = mk("Gorgon's Eyes (Evolved)", "Gorgon's Eyes (Evolved)",
-				"Another mutation of your eyes allows you to move a bit faster, increase the duration of Petrify and change negative effect of resistance to basilisks and similar effects into positive effect.").withBuffs({'spe.mult':0.10,'sens':10});
 		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
 				"Allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.",
 				"You've chosen the 'Displacer Metabolism' perk, allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.");
@@ -399,7 +399,7 @@ public class MutationsLib
 				MutationsList.push([ObsidianHeart, ObsidianHeartEvolved, ObsidianHeartFinalForm]);
 				MutationsList.push([TwinHeart, TwinHeartEvolved, TwinHeartFinalForm]);
 				MutationsList.push([HeartOfTheStorm, HeartOfTheStormEvolved, HeartOfTheStormFinalForm]);
-				MutationsList.push([DraconicHeart, DraconicHeartEvolved, DraconicHeartFinalForm]);
+				MutationsList.push([DraconicHeart, DraconicHeartPrimitive, DraconicHeartEvolved]);
 			}
 			function mutationsMuscle():void{
 				MutationsList.push([MantislikeAgility, MantislikeAgilityEvolved, MantislikeAgilityFinalForm]);
@@ -426,7 +426,7 @@ public class MutationsLib
 			}
 			function mutationsLungs():void{
 				MutationsList.push([ArachnidBookLung, ArachnidBookLungEvolved, ArachnidBookLungFinalForm]);
-				MutationsList.push([DraconicLungs, DraconicLungsEvolved, DraconicLungsFinalForm]);
+				MutationsList.push([DraconicLungs, DraconicLungsPrimitive, DraconicLungsEvolved]);
 				//MutationsList.push([CaveWyrmLungs, CaveWyrmLungsEvolved, CaveWyrmLungsFinalForm]);
 				MutationsList.push([MelkieLung, MelkieLungEvolved, MelkieLungFinalForm]);
 				MutationsList.push([DrakeLungs, DrakeLungsEvolved, DrakeLungsFinalForm]);
@@ -454,7 +454,7 @@ public class MutationsLib
 			}
 			function mutationsBone():void{
 				MutationsList.push([LizanMarrow, LizanMarrowEvolved, LizanMarrowFinalForm]);
-				MutationsList.push([DraconicBones, DraconicBonesEvolved, DraconicBonesFinalForm]);
+				MutationsList.push([DraconicBones, DraconicBonesPrimitive, DraconicBonesEvolved]);
 				MutationsList.push([HarpyHollowBones, HarpyHollowBonesEvolved, HarpyHollowBonesFinalForm]);
 			}
 			function mutationsThyroidGlands():void{
@@ -734,15 +734,15 @@ public class MutationsLib
 						.requirePerk(DisplacerMetabolism).requireCustomFunction(function (player:Player):Boolean {
 					return player.displacerbeastScore() >= 12;
 				}, "Displacer beast");
-				DraconicBonesEvolved.requireLevel(12).requirePerk(DraconicBones)
+				DraconicBonesPrimitive.requireLevel(12).requirePerk(DraconicBones)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicHeartEvolved.requireLevel(12).requirePerk(DraconicHeart)
+				DraconicHeartPrimitive.requireLevel(12).requirePerk(DraconicHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicLungsEvolved.requireLevel(12).requirePerk(DraconicLungs)
+				DraconicLungsPrimitive.requireLevel(12).requirePerk(DraconicLungs)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12);
 						}, "Dragon race");
@@ -910,15 +910,15 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.demonScore() >= 14;
 						}, "Demon race");
-				DraconicBonesFinalForm.requireLevel(30).requirePerk(DraconicBonesEvolved)
+				DraconicBonesEvolved.requireLevel(30).requirePerk(DraconicBonesPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicHeartFinalForm.requireLevel(30).requirePerk(DraconicHeartEvolved)
+				DraconicHeartEvolved.requireLevel(30).requirePerk(DraconicHeartPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicLungsFinalForm.requireLevel(30).requirePerk(DraconicLungsEvolved)
+				DraconicLungsEvolved.requireLevel(30).requirePerk(DraconicLungsPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16);
 						}, "Dragon race");

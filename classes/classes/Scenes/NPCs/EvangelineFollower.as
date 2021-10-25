@@ -962,6 +962,10 @@ private function curingJiangshi():void {
 		player.horns.count = 0;
 		player.arms.type = Arms.HUMAN;
 		player.lowerBody = LowerBody.HUMAN;
+		if (player.hasPerk(PerkLib.CursedTag)) {
+			player.removePerk(PerkLib.CursedTag);
+			player.perkPoints += 1;
+		}
 		player.removePerk(PerkLib.HaltedVitals);
 		player.removePerk(PerkLib.SuperStrength);
 		player.removePerk(PerkLib.PoisonNails);
@@ -971,7 +975,7 @@ private function curingJiangshi():void {
 		player.removePerk(PerkLib.EnergyDependent);
 		player.statStore.removeBuffs("Energy Vampire");
 		outputText("Done with this place you head back to camp.\n\n");
-		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent)</b>\n\n");
+		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent"+(player.hasPerk(PerkLib.CursedTag)?", Cursed Tag":"")+")</b>\n\n");
 		player.strtouspeintwislibsenCalculation2();
 		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
 		doNext(camp.returnToCampUseTwoHours);

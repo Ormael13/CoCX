@@ -2095,6 +2095,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		if (player.hasPerk(PerkLib.CursedTag)) addButton(9, "Alter Bind Scroll", AlterBindScroll);
+		else addButtonDisabled(9, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2380,6 +2382,40 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+	}
+	
+	private function AlterBindScroll():void {
+		clearOutput();
+		outputText("Would you like to alter your curse tag, and if so, with what changes?\n\n");
+		outputText("Effects of each powers:\n");
+		outputText("Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant.\n");
+		outputText("Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.\n");
+		var limitOnAltering:Number = 1;
+		var currentAltering:Number = 0;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) currentAltering += 1;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) currentAltering += 1;
+		menu();
+		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(1, "Unliving Leech", AlterBindScrollUnlivingLeech).hint("You not have this power active. Do you want to activate it?");
+		else {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(1, "Unliving Leech", AlterBindScrollUnlivingLeech).hint("You already have this power active. Do you want to deactivate it?");
+			else addButtonDisabled(1, "Unliving Leech", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		}
+		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(3, "Vital Sense", AlterBindScrollVitalSense).hint("You not have this power active. Do you want to activate it?");
+		else {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(3, "Vital Sense", AlterBindScrollVitalSense).hint("You already have this power active. Do you want to deactivate it?");
+			else addButtonDisabled(3, "Vital Sense", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		}
+		addButton(14, "Back", campMiscActions);
+	}
+	private function AlterBindScrollUnlivingLeech():void {
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.removeStatusEffect(StatusEffects.AlterBindScroll2);
+		else player.createStatusEffect(StatusEffects.AlterBindScroll2,0,0,0,0);
+		doNext(AlterBindScroll);
+	}
+	private function AlterBindScrollVitalSense():void {
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
+		else player.createStatusEffect(StatusEffects.AlterBindScroll4,0,0,0,0);
+		doNext(AlterBindScroll);
 	}
 
 	private function VisitClone():void {
@@ -5145,6 +5181,30 @@ public function rebirthFromBadEnd():void {
 			}
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			if (flags[kFLAGS.SPELLS_COOLDOWNS] != 0) flags[kFLAGS.SPELLS_COOLDOWNS] = 0;
+			if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) {
+				player.removePerk(MutationsLib.DraconicBonesEvolved);
+				player.createPerk(MutationsLib.DraconicBonesPrimitive,0,0,0,0);
+			}
+			if (player.hasPerk(MutationsLib.DraconicBonesFinalForm)) {
+				player.removePerk(MutationsLib.DraconicBonesFinalForm);
+				player.createPerk(MutationsLib.DraconicBonesEvolved,0,0,0,0);
+			}
+			if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) {
+				player.removePerk(MutationsLib.DraconicHeartEvolved);
+				player.createPerk(MutationsLib.DraconicHeartPrimitive,0,0,0,0);
+			}
+			if (player.hasPerk(MutationsLib.DraconicHeartFinalForm)) {
+				player.removePerk(MutationsLib.DraconicHeartFinalForm);
+				player.createPerk(MutationsLib.DraconicHeartEvolved,0,0,0,0);
+			}
+			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
+				player.removePerk(MutationsLib.DraconicLungsEvolved);
+				player.createPerk(MutationsLib.DraconicLungsPrimitive,0,0,0,0);
+			}
+			if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) {
+				player.removePerk(MutationsLib.DraconicLungsFinalForm);
+				player.createPerk(MutationsLib.DraconicLungsEvolved,0,0,0,0);
+			}
 			doNext(doCamp);
 			return;
 		}

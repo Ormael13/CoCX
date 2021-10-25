@@ -170,7 +170,7 @@ package classes.Scenes
 			outputText("-Ring of Ambidexty acc bonus increased to 20% from 15%. Both this and Ring of deadeye aim price been lowered from 800 to 600 gems.\n");
 			outputText("-Fatigue cost of bow shooting, throwing (but not telekinesis throw) been removed. Damage scaling on range attacks has been increased by large margin.\n");
 			outputText("-Goblins assassins and warriors had their HP stat bit adjusted (to not make assassins more tanky than warriors *sweats*). Also Priscilla would no longer appear in randomn gobo pick pool when she already chilling in Soul Sense menu.\n");
-			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet type weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new moption in their main menu).\n");
+			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet type weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new option in their main menu).\n");
 			outputText("-Player PC giving birth to goblin daughter(s) would increase cup / hips / ass size by 1.\n");
 			outputText("-Beautiful item discovery scene at the lake been reduced to proc once per day (some PC's due to specific progress could end up see like only that scene and no others for most of the exploration attempts at the Lake).\n");
 			outputText("-Aurora, Etna and Neisa option to spar with them is disabled when PC earlier asked any of them to assist (meaning said npc is part of the PC team). That would avoid weirdness when Aurora fight as part of PC team and also as enemy for herself.\n");
@@ -205,8 +205,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-Ghost enemy type are 'virtualy' immune now to any physical damage (them deal 1 dmg because orginal enought decent to keep fencode not likes total 0).\n");
 			outputText("-Added mastery for fighting with body weapons (it would boost some of physcial specials that use bodyparts in attack - it will not affect specials that are attacks with fluids or other substances aka breath attacks).\n");//polearm type weapons and for 
-			outputText("-Mechanism item been converted to material stored in flag (with max storage cap of 200). For all Mechanisms that PC have as items are convertable to flag value by option added to camp menu. All checks from now for this crafting material would look for flag value than items kept in PC inventory.\n");
-			outputText("-Energy Core item also been converted in the same way as Mechanism item.\n");
+			outputText("-Mechanism and Energy Core items been converted to materials stored in flags (with max storage cap of 200). For all Mechanisms and Energy Cores that PC have as items are convertable to flag value by option added to camp menu. All checks from now for those crafting material would look for flag value than items kept in PC inventory.\n");
 			outputText("-Racial paragon req. of having Job: Beast Warrior been removed.\n");
 			outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Dinah Rulette. Cost 2000 gems. Can't be used by character shorter than 7 ft. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
 			outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
@@ -215,12 +214,20 @@ package classes.Scenes
 			outputText("-New mutation perk: Gazer Eye (Evolved). Req. having Gazer Eye (Evolved) perk, having monoeye, 4+ eyestalks and gazer score 8+. Effects: Keep true seeing at all times, empower gaze attacks and empower your ability to cast many spells as a Gazer if available (each part of split spell deal 30% not 20% of orginal spell power). +5% lib multi, + 10& int multi.\n");
 			outputText("-New mutation perk: Gazer Eye (Final Form). Req. having Gazer Eye perk, having monoeye, 6+ eyestalks and gazer score 12+. Effects: Keep true seeing at all times, empower gaze attacks, further empower your ability to cast many spells as a Gazer if available (each part of split spell deal 50% not 20% of orginal spell power) and increase spell critical hit chance by 10%. +5% lib multi, + 10& int multi.\n");
 			outputText("-Bee score for half/full bee-morph rised from 5/9 to 7/14 pts. Bonuses was also increased according to the change: +40/80% to Tou/Spe raical multi, +25/50% to Int racial multi, +0/20% ot Lib racial multi, +0/20 to min Libido.\n");
-			outputText("-Bee score now accept 2 more hair color variants and give poitns for: black eyes (same look as sandtrap), bee cocks, skin pattern for bees, not having any horns/read body variants.\n");
-			outputText("-New necklace (by Liadri): Cow bell - drop after bgeating lacta bovina or minotaur enemies. Cost 00 gems. Raise milk productivity by 50% and immunise players to the negative effects of minotaur cum addiction as if a cow girl. If the player is a cowgirl, raise maximum strength and libido by 20%.\n");
+			outputText("-Bee score now accept 2 more hair color variants and give points for: black eyes (same look as sandtrap), bee cocks, skin pattern for bees, not having any horns/read body variants.\n");
+			outputText("-New necklace (by Liadri): Cow bell - drop after bgeating lacta bovina or minotaur enemies. Cost 1500 gems. Raise milk productivity by 50% and immunise players to the negative effects of minotaur cum addiction as if a cow girl. If the player is a cowgirl, raise maximum strength and libido by 20%.\n");
 			outputText("-Lactoblasters have been removed from Kaiba shop and placed in Mountains as remains that PC must find and bring to Tripixi for restoration.\n");
 			outputText("-From time to time Dinah can present PC with some small things (gifts?). It won't happen usualy more often that once a day. Oh and she not gonna run to notify about this like Marble, option to get smth from her for free will became avialable among her interactions options.\n");
 			outputText("-Defeat would progress time only for six not eigth hours.\n");
 			outputText("-PerksDB V2 is released, but in beta. Missing main feature of perk description, but the layout will be as such. Thoughts? -Jtecx\n");
+			outputText("-Zetta certificated fix for raiju skin pattern becoming kitsune skin pattern.\n");
+			outputText("-New tier 0 misc lvl-up perk: Cursed Tag. Req. Jiangshi race (20+ pts in score). Effect: Through arcane study, you've begun to understand the magical working of your cursed tag, allowing you to improve your abilities by altering some of the unholy text. This allows you to add one power from a list of abilities. (Option is located in misc actions subsection of camp actions)\n");
+			outputText("-Options in Alteration of Cursed Tag: Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant. / Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.\n");
+			outputText("-Vladimir Regalia (by Liadri) added to Kaiba temporaly. It's light armor with +100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -228,8 +235,8 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
-			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects");
-			outputText("\n");/*ostatni punkt changelogu
+			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects, ");
+			outputText("Wrathless necklace not giving spellpower bonus\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -242,6 +249,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -299,11 +307,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -331,11 +336,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
