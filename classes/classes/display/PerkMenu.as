@@ -1308,39 +1308,20 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			var selected:PerkClass = fPerkCList[e.text].perk;
 			var tempStr:String = "";
+			var pPerkGDesc:Array = ["\nRequires (All of these): ", "\nRequires (Any of these): ", "\nUnlocks: "]
 			var pPerkGroup:Array = pRelations[selected.ptype];
-			var pGrants:Array = CoC.instance.perkTree.listUnlocks(selected.ptype);
+			pPerkGroup.push(CoC.instance.perkTree.listUnlocks(selected.ptype));
 			outputText("<b>" + selected.perkName + ":</b>");
-			if (pPerkGroup[0].length > 0){
-				outputText("\n\nRequires (All of these): ")
-				for each (var pPerk1:PerkType in pPerkGroup[0]){
-					tempStr = tempStr + pPerk1.name() + ", ";
+			for (var i:int = 0; i <= 2; i++){
+				if (pPerkGroup[i].length > 0){
+					outputText(pPerkGDesc[i]);
+					for each (var pPerk1:PerkType in pPerkGroup[i]){
+						tempStr = tempStr + pPerk1.name() + ", ";
+					}
+					tempStr = tempStr.slice(0, -2);
+					outputText(tempStr);
+					tempStr = "";
 				}
-				tempStr = tempStr.slice(0, -2);
-				outputText(tempStr);
-				tempStr = "";
-				//dMenuLinker(tPVal, pPerkGroup[0]);
-			}
-			if (pPerkGroup[1].length > 0) {
-				outputText("\n\nRequires (Any of these): ")
-				for each (var pPerk2:PerkType in pPerkGroup[1]) {
-					tempStr = tempStr + pPerk2.name() + ", ";
-				}
-				tempStr = tempStr.slice(0, -2);
-				outputText(tempStr);
-				tempStr = "";
-				//dMenuLinker(tPVal, pPerkGroup[1]);
-
-			}
-			if (pGrants.length > 0) {
-				outputText("\n\nUnlocks: ")
-				for each (var pPerk3:PerkType in pGrants) {
-					tempStr = tempStr + pPerk3.name() + ", ";
-				}
-				tempStr = tempStr.slice(0, -2);
-				outputText(tempStr);
-				//tempStr = "";
-				//dMenuLinker(tPVal, pGrants);
 			}
 			outputText("\n\n");
 			outputText(selected?selected.ptype.desc(selected):selected.ptype.longDesc);
