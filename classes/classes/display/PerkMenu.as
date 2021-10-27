@@ -16,6 +16,7 @@ import classes.PerkType;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
+import flash.events.TextEvent;
 
 
 import coc.view.ButtonDataList;
@@ -1132,10 +1133,14 @@ public class PerkMenu extends BaseContent {
 		var tPerkList:Array = [];	//Master Source Perk Array.
 		var fPerkList:Array = [];	//Final Perk Array, of Arrays.
 		var mPerkList:Array = [];	//Master Removal Perk Array.
+		var fPerkCList:Array = [];	//PerkDisplayInfo.
+		var pSpecials:Array = [];
+		var pRelations:Dictionary = new Dictionary();	//Perk relations Dictionary.
+		//key = Perk on screen, value = [anyperk][allperk][requires] (needs,needs,opens)
 
 		//var pCount:int = 0;
 
-		function pDictPrep():void{
+		function pDictPrep():void{	//Perk Dictionary preperations/Filter
 			var pList1:Array = MutationsLib.mutationsArray("",true); //No Mutations Perks
 			var pList2:Array = PerkLib.enemyPerkList(); //No Enemy Perks.
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
@@ -1147,23 +1152,23 @@ public class PerkMenu extends BaseContent {
 				}
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
-			initTier();
 		}
 
-		function pSpecialRem(perkTrue:PerkType):Boolean{
+		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
 			var pName:String = perkTrue.name();
 			var rez:Boolean = true;
-			for each (var temp1:String in ["Ascension", "Bloodline", "History", "Past Life", "Pierced", "!!!"]){
+			for each (var temp1:String in ["Ascension", "Bloodline", "History", "Past Life", "Pierced", "Prestige", "Slime Metabolism", "Draconic", "Cave Wyrm Lungs", "Hidden Job", "Super Perk", "!!!"]){
 				if (pName.indexOf(temp1) >= 0){
 					trace(pName);
 					rez = false;
+					pSpecials.push(perkTrue);
 					break;
 				}
 			}
 			return rez;
 		}
 
-		function initTier():void{
+		function initTier():void{	//Initial tier 0,1.
 			var bPList:Array = [];
 			var b2PList:Array = [];
 			for each (var pPerkDBLP:PerkType in tPerkList){
@@ -1189,16 +1194,25 @@ public class PerkMenu extends BaseContent {
 			fPerkList.push(bPList);		//No Perk Requirements. Tier 0. Big list, needs refining.
 			perkArrMgmt(b2PList);
 			fPerkList.push(b2PList);	//Perk Requirements, but not requiring other perks beforehand. Tier 1.
+			for each (var pPerk:PerkType in pSpecials){
+				mPerkList.push(pPerk);
+			}
 			repPerkClr();
 		}
 
-		function repPerkClr():void{	//Yeah, this is just a clone of PerkSimp....
+		function repPerkClr(pLvl:int = 1):void{	//tier 2+
 			var nList:Array = [];
 			for each(var pPerk:PerkType in tPerkList){
 				try{
 					var change:Boolean = false;
 					var requirelen:int = 0;
 					for each (var cond:Object in pPerk.requirements) {
+						/*if (cond.type == "level"){
+							if (cond.level < pLvl){
+								change = false;
+								break;
+							}
+						}*/
 						if (cond.type == "allperks"){		//Checks if player has all required perks
 							var iterval:int = 0;
 							for each (var pPerk1:PerkType in cond.allperks) {
@@ -1217,8 +1231,8 @@ public class PerkMenu extends BaseContent {
 						}
 						else if (cond.type == "anyperk"){	//Checks if player has any of the perks
 							var anyChk:Boolean = false;
-							for each (var temp2:PerkType in cond.perks) {
-								if (mPerkList.indexOf(temp2) >= 0){
+							for each (var pPerk2:PerkType in cond.perks) {
+								if (mPerkList.indexOf(pPerk2) >= 0){
 									change = true;
 									anyChk = true;
 									break;
@@ -1230,8 +1244,8 @@ public class PerkMenu extends BaseContent {
 							}
 						}
 						else if (cond.type == "perk"){		//Checks if player has the perk
-							var temp3:PerkType = cond.perk;
-							if (mPerkList.indexOf(temp3) >= 0){
+							var pPerk3:PerkType = cond.perk;
+							if (mPerkList.indexOf(pPerk3) >= 0){
 								change = true;
 							}
 							else {
@@ -1258,39 +1272,129 @@ public class PerkMenu extends BaseContent {
 				}
 			}
 			if (nList.length > 0){
-				repPerkArrClr(nList);
+				perkArrMgmt(nList);
+				fPerkList.push(nList);
+				repPerkClr();
 			}
 		}
 
-		function repPerkArrClr(nList:Array):void{
-			perkArrMgmt(nList);
-			fPerkList.push(nList);
-			repPerkClr();
-		}
-
-		function perkArrMgmt(remArr:Array):void{
+		function perkArrMgmt(remArr:Array):void{	//Source List clearing.
 			var srcArr:Array = tPerkList;
 			for each (var pPerk:PerkType in remArr){
-				//if (srcArr.indexOf(pPerk) >= 0){
 				srcArr.splice(srcArr.indexOf(pPerk),1);
-				//}
 				mPerkList.push(pPerk);
 			}
 		}
 
-		function displayMenu(tPVal:int = 0):void{
+		function perkRelationsDict():void{	//Perk Relations.
+			var req1:Array = [];
+			var req2:Array = [];
+			//var req3:Array = [];
+			for each (var pPerk:PerkType in tPerkList){
+				for each (var cond:Object in pPerk.requirements) {
+					if (cond.type == "allperks"){
+						for each (var pPerk1:PerkType in cond.allperks) {
+							req1.push(pPerk1);
+						}
+					}
+					else if (cond.type == "anyperk"){
+						for each (var pPerk2:PerkType in cond.perks) {
+							req2.push(pPerk2);
+						}
+					}
+					else if (cond.type == "perk"){
+						req1.push(cond.perk);
+					}
+				}
+				//req3 = CoC.instance.perkTree.listUnlocks(pPerk); //For some reason, does not want to work. Seems to really only want it from PerkClass.ptype.
+				//trace(req3);
+				pRelations[pPerk] = [req1, req2];
+				req1 = [];
+				req2 = [];
+				//req3 = [];
+			}
+		}
+
+		function pInfoDP(tPVal:int, e:TextEvent):void{	//Perk Display Information
+			clearOutput();
+			var selected:PerkClass = fPerkCList[e.text].perk;
+			var tempStr:String = "";
+			var pPerkGDesc:Array = ["\nRequires (All of these perks): ", "\nRequires (Any of these perks): ", "\nUnlocks: "]
+			var pPerkGroup:Array = pRelations[selected.ptype];
+			var reqs:Array = [];
+			pPerkGroup.push(CoC.instance.perkTree.listUnlocks(selected.ptype));
+			outputText("<b>" + selected.perkName + ":</b>");
+			for each (var cond:Object in selected.ptype.requirements) {
+				if (!(cond.type == "allperks" || cond.type == "anyperk" || cond.type == "perk")){
+					if (cond.text is String){
+						reqs.push(cond.text);
+					}
+					else {
+						reqs.push(cond.text(player));
+					}
+				}
+			}
+			if (reqs.length > 0){
+				outputText("\nRequires (Non-perk requirements): " + reqs.join(", "));
+			}
+			for (var i:int = 0; i <= 2; i++){
+				if (pPerkGroup[i].length > 0){
+					outputText(pPerkGDesc[i]);
+					for each (var pPerk1:PerkType in pPerkGroup[i]){
+						tempStr = tempStr + pPerk1.name() + ", ";
+					}
+					tempStr = tempStr.slice(0, -2);
+					outputText(tempStr);
+					tempStr = "";
+				}
+			}
+			outputText("\n\n");
+			outputText(selected?selected.ptype.desc(selected):selected.ptype.longDesc);
+			menu();
+			addButton(14, "Back", displayMenu, tPVal);
+		}
+
+		function dMenuLinker(tPVal:int, srcArr:Array):void{	//Interaction linking
+			fPerkCList = [];
+			mainView.mainText.addEventListener(TextEvent.LINK, curry(pInfoDP, tPVal));
+			for each(var perk:PerkType in srcArr.sort()) {
+				var p:PerkClass = new PerkClass(perk,
+						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
+				var lab:* = {label: p.perkName, perk: p};
+				fPerkCList.push(lab);
+				outputText("<u><a href=\"event:"+fPerkCList.indexOf(lab)+"\">"+p.perkName+"</a></u>\n");
+			}
+		}
+
+		function displayMenu(tPVal:int = 0):void{	//Main Perk Database Display
 			if (fPerkList.length == 0){
 				pDictPrep();
+				perkRelationsDict();
+				initTier();
+				fPerkList.push(tPerkList);
 			}
 			clearOutput();
 			menu();
 			displayHeader("Perk Tier: " + tPVal);
-			outputText("Note: Work in progress. Send feedback to JTecx.");
-			if (!pSpecialRem(PerkLib.AscensionAdditionalOrganMutation01)) trace(PerkLib.AscensionAdditionalOrganMutation01.name());
-			var fPerkPage:Array = fPerkList[tPVal];
-			for each (var aPerk:PerkType in fPerkPage.sort()){
-				outputText(aPerk.name() + "\n");
+			outputText(tPerkList.length + "\n");
+			if (tPVal == 0){
+				outputText("Tier 0 contains all perks that do not have any requirements!\n");
+				outputText("It also contains perks that may not be handled in the standard manner.\n");
+				outputText("Note: This is still in beta, but works for the 90%. Odd side cases are attributed to weirdness in perk code.\n");
 			}
+			else if (tPVal == 1){
+				outputText("Tier 1 contains all perks that have a requirement, but do not require perks.\n");
+			}
+			else if (tPVal == 18){
+				outputText("Tier 18 contains perks that don't associate properly.\n");
+			}
+			else {
+				outputText("This tier contains perks that require one or more of any perks found in previous tiers!\n");
+			}
+			outputText("Note: Perks are sorted into tiers via relations to other perks only. Other requirements are stated, but are not taken into consideration here.\n")
+			//outputText("Note: Work in progress. Send feedback to JTecx.\n");
+			var tfArr:Array = fPerkList[tPVal];
+			dMenuLinker(tPVal, tfArr);
 			if (tPVal > 0){
 				addButton(0, "Prev Page", displayMenu,tPVal - 1);
 			} else{
@@ -1367,17 +1471,17 @@ public class PerkMenu extends BaseContent {
 						}
 					}
 					else if (cond.type == "anyperk"){	//Checks if player has any of the perks
-						for each (var temp2:PerkType in cond.perks) {
-							if (ignorelist.indexOf(temp2) >= 0){
-								perkArrMgmt(temp2, pPerk);
+						for each (var pPerk2:PerkType in cond.perks) {
+							if (ignorelist.indexOf(pPerk2) >= 0){
+								perkArrMgmt(pPerk2, pPerk);
 								change = true;
 							}
 						}
 					}
 					else if (cond.type == "perk"){		//Checks if player has the perk
-						var temp3:PerkType = cond.perk;
-						if (ignorelist.indexOf(temp3) >= 0){
-							perkArrMgmt(temp3, pPerk);
+						var pPerk3:PerkType = cond.perk;
+						if (ignorelist.indexOf(pPerk3) >= 0){
+							perkArrMgmt(pPerk3, pPerk);
 							change = true;
 						}
 					}

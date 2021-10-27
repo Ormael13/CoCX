@@ -758,7 +758,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeBalls(): String {
-		var ballsDesc: String = "";
+		var ballsDesc: String = "\n";
 
 		const ballsSizeDesc: String = " about " + num2Text(Math.round(player.ballSize)) + " " + (Math.round(player.ballSize) == 1 ? "inch" : "inches") +" across"
 
@@ -771,12 +771,12 @@ public class PlayerAppearance extends BaseContent {
 				if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
 				else swingsWhere = " under your [cocks].";
 
-				if (player.hasFur()) ballsDesc += "a fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
-				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "a chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.hasScales()) ballsDesc += "a scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.skinType == Skin.STONE) ballsDesc += "a stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else if (player.skinType == Skin.GOO) ballsDesc += "an oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else ballsDesc += "a [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				if (player.hasFur()) ballsDesc += "A fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
+				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "A chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.hasScales()) ballsDesc += "A scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.skinType == Skin.STONE) ballsDesc += "A stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else if (player.skinType == Skin.GOO) ballsDesc += "An oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else ballsDesc += "A [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
 			}
 
 			// ballsDesc += " You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ";
