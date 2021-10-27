@@ -1134,6 +1134,7 @@ public class PerkMenu extends BaseContent {
 		var fPerkList:Array = [];	//Final Perk Array, of Arrays.
 		var mPerkList:Array = [];	//Master Removal Perk Array.
 		var fPerkCList:Array = [];	//PerkDisplayInfo.
+		var pSpecials:Array = [];
 		var pRelations:Dictionary = new Dictionary();	//Perk relations Dictionary.
 		//key = Perk on screen, value = [anyperk][allperk][requires] (needs,needs,opens)
 
@@ -1160,6 +1161,7 @@ public class PerkMenu extends BaseContent {
 				if (pName.indexOf(temp1) >= 0){
 					trace(pName);
 					rez = false;
+					pSpecials.push(perkTrue);
 					break;
 				}
 			}
@@ -1192,16 +1194,25 @@ public class PerkMenu extends BaseContent {
 			fPerkList.push(bPList);		//No Perk Requirements. Tier 0. Big list, needs refining.
 			perkArrMgmt(b2PList);
 			fPerkList.push(b2PList);	//Perk Requirements, but not requiring other perks beforehand. Tier 1.
+			for each (var pPerk:PerkType in pSpecials){
+				mPerkList.push(pPerk);
+			}
 			repPerkClr();
 		}
 
-		function repPerkClr():void{	//tier 2+
+		function repPerkClr(pLvl:int = 1):void{	//tier 2+
 			var nList:Array = [];
 			for each(var pPerk:PerkType in tPerkList){
 				try{
 					var change:Boolean = false;
 					var requirelen:int = 0;
 					for each (var cond:Object in pPerk.requirements) {
+						/*if (cond.type == "level"){
+							if (cond.level < pLvl){
+								change = false;
+								break;
+							}
+						}*/
 						if (cond.type == "allperks"){		//Checks if player has all required perks
 							var iterval:int = 0;
 							for each (var pPerk1:PerkType in cond.allperks) {
@@ -1360,21 +1371,27 @@ public class PerkMenu extends BaseContent {
 				pDictPrep();
 				perkRelationsDict();
 				initTier();
+				fPerkList.push(tPerkList);
 			}
 			clearOutput();
 			menu();
 			displayHeader("Perk Tier: " + tPVal);
+			outputText(tPerkList.length + "\n");
 			if (tPVal == 0){
 				outputText("Tier 0 contains all perks that do not have any requirements!\n");
 				outputText("It also contains perks that may not be handled in the standard manner.\n");
-				outputText("Note: This is still in beta, but works for the 99%. Odd side cases are attributed to weirdness in perk code.\n");
+				outputText("Note: This is still in beta, but works for the 90%. Odd side cases are attributed to weirdness in perk code.\n");
 			}
 			else if (tPVal == 1){
 				outputText("Tier 1 contains all perks that have a requirement, but do not require perks.\n");
 			}
+			else if (tPVal == 18){
+				outputText("Tier 18 contains perks that don't associate properly.\n");
+			}
 			else {
 				outputText("This tier contains perks that require one or more of any perks found in previous tiers!\n");
 			}
+			outputText("Note: Perks are sorted into tiers via relations to other perks only. Other requirements are stated, but are not taken into consideration here.\n")
 			//outputText("Note: Work in progress. Send feedback to JTecx.\n");
 			var tfArr:Array = fPerkList[tPVal];
 			dMenuLinker(tPVal, tfArr);
