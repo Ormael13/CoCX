@@ -114,7 +114,7 @@ import classes.internals.Utils;
 		public function DinahAppearance():void {
 			clearOutput();
 			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.");
-			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have 0.3-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");//	" + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "
+			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have "+dinahNippleSize()+"-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
 		}
@@ -415,7 +415,7 @@ import classes.internals.Utils;
 		public function giveDinahPurifiedSuccubusMilk():void {
 			clearOutput();
 			outputText("You offer Dinah a bottle of purified succubus milk and tell her that you'd like her to make her bust bigger.");
-			if (flags[kFLAGS.DINAH_CUP_SIZE] < 22) {
+			if (flags[kFLAGS.DINAH_CUP_SIZE] < 28) {
 				outputText("\n\n\"<i>Alright, if you say so.</i>\"  Dinah lifts the bottle to her mouth, and drinks the substance down.  She then drops the empty bottle, allowing it to smash on the ground, clutching her breasts and moaning ecstatically as they visibly swell, her clothes growing tighter as they do. When they finish, she squeezes them with glee. \"<i>Mmm... That feels nice. Did you want something else?</i>\"\n\n");
 				dynStats("lus", 10);
 				player.consumeItem(consumables.P_S_MLK);
@@ -512,23 +512,23 @@ import classes.internals.Utils;
 					if(temp == 1) descript += "little ";
 					if(temp == 2) descript += "perky ";
 				}
-				if (flags[kFLAGS.DINAH_CUP_SIZE] > 2 && flags[kFLAGS.DINAH_CUP_SIZE] <= 4) descript += "ample ";
-				if (flags[kFLAGS.DINAH_CUP_SIZE] > 4 && flags[kFLAGS.DINAH_CUP_SIZE] <= 6) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 2 && flags[kFLAGS.DINAH_CUP_SIZE] <= 5) descript += "ample ";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 5 && flags[kFLAGS.DINAH_CUP_SIZE] <= 8) {
 					temp = rand(4);
 					if(temp == 0) descript += "big ";
 					if(temp == 1) descript += "large ";
 					if(temp == 2) descript += "pillowy ";
 					if(temp == 3) descript += "jiggly ";
 				}
-				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6 && flags[kFLAGS.DINAH_CUP_SIZE] < 13) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 8 && flags[kFLAGS.DINAH_CUP_SIZE] < 16) {
 					temp = rand(4);
 					if(temp == 0) descript += "basketball-sized ";
 					if(temp == 1) descript += "whorish ";
 					if(temp == 2) descript += "pornstar-like ";
 					if(temp == 3) descript += "jiggling ";
 				}
-				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 13) descript += "beach-ball sized ";
-				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 18) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 16 && flags[kFLAGS.DINAH_CUP_SIZE] < 21) descript += "beach-ball sized ";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 21) {
 					temp = rand(2);
 					if(temp == 1) descript += "mountainous ";
 					else descript += "immense ";
@@ -549,6 +549,15 @@ import classes.internals.Utils;
 				descript += "breasts";
 			}
 			return descript;
+		}
+		private function dinahNippleSize():Number {
+			var dinahNS:Number = 0.3;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 5) dinahNS += 0.2;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 10) dinahNS += 0.3;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 18) dinahNS += 0.3;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 23) dinahNS += 0.4;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 28) dinahNS += 0.5;
+			return dinahNS;
 		}
 		private function dinahHips():String {
 			var desc:String = "";

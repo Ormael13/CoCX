@@ -142,7 +142,7 @@ package classes.Scenes
 			outputText("-3rd Tifa sex scene account for pc having tentacle / stamen cocks or alraune lower body.\n");
 			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincarnate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
 			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
-			outputText("-Ghost type enemies become immune to bleed effects.\n");
+			outputText("-Ghost type enemies become immune to bleed effects and they're 'virtualy' immune to any physical damage (them deal 1 dmg because orginal enought decent to keep fencode not likes total 0).\n");
 			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
 			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
 			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penalty of 50% less exp gains. It even giving you 200% of normal exp for defeating the same enemy outside arena. Thank you all for using that free trial ^^\n");
@@ -201,16 +201,15 @@ package classes.Scenes
 			outputText("-None of demonic enemies (imps, true demons) can impregnate goblonoid PC (goblin/gremlin).\n");
 			outputText("-Bit lowered scaling on melee attack(s).\n");
 			outputText("-Job: Monk perk moved from tier 2 to tier 1 and have it wis req. lowered from 60 to 40.\n");
-			outputText("-Many of perks form Job: Gunslinger tree moved between perk tiers (and in many cases req. stats increased/decreased according to moving up or down). Affected perks included: Job: Gunslinger - t1 > t0, AmateurGunslinger - t1 > t2, Explosive Cartridge - t2 > t3, Expert Gunslinger - t3 > t4, Named Bullet - t3 > t5, Master Gunslinger - t5 > t6, Alchemical Cartridge - t5 > t2, Church of the gun - t6 > t1. \n");
-			outputText("-Added option under 3rd special action button in combat menu to pick few of used thrown weapons (only for those that give limited amount of them liek gnow throwing axes). Each pick up will recover 5 of them but will use up player combat turn.\n");
+			outputText("-Many of perks form Job: Gunslinger tree moved between perk tiers (and in many cases req. stats increased/decreased according to moving up or down). Affected perks included: Job: Gunslinger - t1 > t0, AmateurGunslinger - t1 > t2, Explosive Cartridge - t2 > t3, Expert Gunslinger - t3 > t4, Named Bullet - t3 > t5, Master Gunslinger - t5 > t6, Alchemical Cartridge - t5 > t2, Church of the gun - t6 > t1.\n");
+			outputText("-Added option under 3rd special action button in combat menu to pick few of used thrown weapons (only for those that give limited amount of them like gnol throwing axes). Each pick up will recover 5 of them but will use up player combat turn.\n");
 			outputText("-Lightning Reload perk effect expanded to include lowering fatigue cost of reloading ammo by 50%.\n");
 			outputText("-Cooldown toggle for spells been removed and some of the spells power been a bit lowered. Now cooldown option for spells will be on by default without way to turn it off.\n");
 			outputText("-Jtex with unweaving fevor implemented tag system for weapons that was in one or another way requested recently.\n");
 			outputText("-Halberd, Guandao and Urta's halberd been reclassified as Polearm type weapon instead of scythe type weapon.\n");
 			outputText("-Charge weapon spell cost been doubled but it would now also affect range weapon (unless pc got no weapon there or it's one of tomes).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Ghost enemy type are 'virtualy' immune now to any physical damage (them deal 1 dmg because orginal enought decent to keep fencode not likes total 0).\n");
-			outputText("-Added mastery for fighting with body weapons (it would boost some of physcial specials that use bodyparts in attack - it will not affect specials that are attacks with fluids or other substances aka breath attacks).\n");//polearm type weapons and for 
+			outputText("-Added mastery for: polearm type weapons AND fighting with body weapons (it would boost some of physcial specials that use bodyparts in attack - it will not affect specials that are attacks with fluids or other substances aka breath attacks).\n");
 			outputText("-Mechanism and Energy Core items been converted to materials stored in flags (with max storage cap of 200). For all Mechanisms and Energy Cores that PC have as items are convertable to flag value by option added to camp menu. All checks from now for those crafting material would look for flag value than items kept in PC inventory.\n");
 			outputText("-Racial paragon req. of having Job: Beast Warrior been removed.\n");
 			outputText("-New enemies: Vengeful Apparitions (lvl 24 or 30 normal/large sized group of ghost type enemies and can be found in (Outer) Battlefield).\n");
@@ -222,12 +221,15 @@ package classes.Scenes
 			outputText("-Defeat would progress time only for six not eigth hours.\n");
 			outputText("-PerksDB V2 is released, but in beta. Missing main feature of perk description, but the layout will be as such. Thoughts? -Jtecx\n");
 			outputText("-New tier 0 misc lvl-up perk: Cursed Tag. Req. Jiangshi race (20+ pts in score). Effect: Through arcane study, you've begun to understand the magical working of your cursed tag, allowing you to improve your abilities by altering some of the unholy text. This allows you to add one power from a list of abilities. (Option is located in misc actions subsection of camp actions)\n");
-			outputText("-Options in Alteration of Cursed Tag: Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant. / Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.\n");
+			outputText("-Options in Alteration of Cursed Tag: No limiter -> Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. ");
+			outputText("This is a togglable ability. / Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant. / Undead resistance -> Gain Immunity to Cold, Poison and Fatigue damage. / Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time. / ");
+			outputText("Zombified -> You are immune to mental attacks that would affect living sane beings. Furthermore you have unlimited fatigue.\n");
 			outputText("-Vladimir Regalia (by Liadri) added to Kaiba temporaly. It's light armor with +100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.\n");
 			outputText("-In mutation racial perks all perks with suffixes (Evolved) and (Final Form) been renamed to (Primitive) and (Evolved) respectively.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added option to disable Chi Chi like few other npc's.\n");
+			outputText("-New tier 0 misc lvl-up perk: Improved Cursed Tag. Req. Jiangshi race (20+ pts in score) and Cursed Tag perk. Effect: You may keep 2 undead powers active at all times.\n");
+			outputText("-New tier 0 misc lvl-up perk: Greater Cursed Tag. Req. Jiangshi race (20+ pts in score) and Improved Cursed Tag perk. Effect: You benefit from all undead powers at all times.\n");
+			outputText("-After defeating true demon male/herm/female enemy or minotaur Jiangshi PC could access one of three unique sex scenes.\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym

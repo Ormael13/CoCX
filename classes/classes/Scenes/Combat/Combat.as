@@ -196,6 +196,16 @@ public class Combat extends BaseContent {
         return player.DuelingSwordExpToLevelUp();
     }
 
+	public function masteryPolearmLevel():Number {
+        return player.masteryPolearmLevel;
+    }
+    public function maxPolearmLevel():Number {
+        return player.maxPolearmLevel();
+    }
+    public function PolearmExpToLevelUp():Number {
+        return player.PolearmExpToLevelUp();
+    }
+
 	public function masterySpearLevel():Number {
         return player.masterySpearLevel;
     }
@@ -1177,6 +1187,10 @@ public class Combat extends BaseContent {
 			if(player.hasStatusEffect(StatusEffects.OniRampage)) {
 				bd.disable("You already rampaging!");
 			}
+		}
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) {
+			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
+			else bd = buttons.add("No limiter", returnToNormalState).hint("Toggle off No limiter.");
 		}
     }
 	public function GolemsMenu():void {
@@ -2680,6 +2694,7 @@ public class Combat extends BaseContent {
 		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
 		if (player.isMaceHammerTypeWeapon()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
 		if (player.isDuelingTypeWeapon()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
+		if (player.isPolearmTypeWeapon()) accmod += Math.round((masteryPolearmLevel() - 1) / 2);
 		if (player.isSpearTypeWeapon()) accmod += Math.round((masterySpearLevel() - 1) / 2);
 		if (player.isDaggerTypeWeapon()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
 		if (player.isWhipTypeWeapon()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
@@ -5194,6 +5209,7 @@ public class Combat extends BaseContent {
 			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
 			if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
 			if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
+			if (player.isPolearmTypeWeapon()) damage *= (1 + (0.01 * masteryPolearmLevel()));
 			if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
 			if (player.isDaggerTypeWeapon()) damage *= (1 + (0.01 * masteryDaggerLevel()));
 			if (player.isWhipTypeWeapon()) damage *= (1 + (0.01 * masteryWhipLevel()));
@@ -5333,7 +5349,8 @@ public class Combat extends BaseContent {
             if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll))) {
                 damage = 0;
                 outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
-            } else {
+            }
+			else {
                 var vbladeeffect:Boolean = false;
                 var vbladeeffectChance:int = 1;
                 if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
@@ -5478,7 +5495,8 @@ public class Combat extends BaseContent {
 				if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
 				if (player.isMaceHammerTypeWeapon()) macehammerXP(meleeMasteryEXPgains);
 				if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
-				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains); //Polearm weapon should honestly also give exp to axes type weapon not just spear.
+				if (player.isPolearmTypeWeapon()) polearmXP(meleeMasteryEXPgains);
+				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
 				if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
 				if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
 				if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
@@ -5491,6 +5509,12 @@ public class Combat extends BaseContent {
                 if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
                 else monster.armorDef = 0;
             }
+			if (player.statStore.hasBuff("NoLimiterState") && player.weaponName == "fists") {
+				var curseLib:Number = player.lib * 0.005;
+				if (curseLib < 1) curseLib = 1;
+				else curseLib = Math.round(curseLib);
+				player.addCurse("lib", 1, curseLib);
+			}
             //Damage cane.
             if (player.weapon == weapons.HNTCANE) {
                 flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER]++;
@@ -6113,6 +6137,12 @@ public class Combat extends BaseContent {
                 if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
                 else monster.armorDef = 0;
             }
+			if (player.statStore.hasBuff("NoLimiterState")) {
+				var curseLib:Number = player.lib * 0.005;
+				if (curseLib < 1) curseLib = 1;
+				else curseLib = Math.round(curseLib);
+				player.addCurse("lib", 1, curseLib);
+			}
         }
         wrathregeneration();
         fatigueRecovery();
@@ -8564,7 +8594,7 @@ public class Combat extends BaseContent {
             var slap:Number = 3 + (player.maxHP() * 0.02);
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
-        if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity)) {
+        if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity) && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
 			player.addCurse("int.mult", monster.statusEffectv1(StatusEffects.AuraOfMadness)/100,3);//non bosses have it 5
 			player.addCurse("wis.mult", monster.statusEffectv2(StatusEffects.AuraOfMadness)/100,3);//bosses have it at 20
             outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");
@@ -11221,6 +11251,9 @@ public class Combat extends BaseContent {
     }
 	public function duelingswordXP(XP:Number = 0):void {
 		player.duelingswordXP(XP * weaponmasteryXPMulti());
+    }
+	public function polearmXP(XP:Number = 0):void {
+		player.polearmXP(XP * weaponmasteryXPMulti());
     }
 	public function spearXP(XP:Number = 0):void {
 		player.spearXP(XP * weaponmasteryXPMulti());
@@ -14589,6 +14622,24 @@ public class Combat extends BaseContent {
 		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+	public function noLimiterState():void {
+		clearOutput();
+		outputText("No limiter on!\n\n");
+		var tempStr:Number = player.str;
+		mainView.statsView.showStatUp('str');
+		player.buff("NoLimiterState").addStats({str:tempStr}).withText("No limiter").combatPermanent();
+		statScreenRefresh();
+		menu();
+		addButton(0, "Next", combatMenu, false);
+	}
+	public function returnToNormalState():void {
+		clearOutput();
+		outputText("No limiter off!\n\n");
+		player.statStore.removeBuffs("NoLimiterState");
+		menu();
+		addButton(0, "Next", combatMenu, false);
 	}
 
 	public function fireDamageBoostedByDao():Number {

@@ -436,6 +436,12 @@ public class PerkLib
 		public static const CursedTag:PerkType = mk("Cursed Tag", "Cursed Tag",
 				"Through arcane study, you've begun to understand the magical working of your cursed tag, allowing you to improve your abilities by altering some of the unholy text. This allows you to add one power from a list of abilities.",
 				"You've chosen the 'Cursed Tag' perk. Through arcane study, you've begun to understand the magical working of your cursed tag, allowing you to improve your abilities by altering some of the unholy text. This allows you to add one power from a list of abilities.");
+		public static const ImprovedCursedTag:PerkType = mk("Improved Cursed Tag", "Improved Cursed Tag",
+				"You may keep 2 undead powers active at all times.",
+				"You've chosen the 'Cursed Tag' perk. You may keep 2 undead powers active at all times.");
+		public static const GreaterCursedTag:PerkType = mk("Greater Cursed Tag", "Greater Cursed Tag",
+				"You benefit from all undead powers at all times.",
+				"You've chosen the 'Cursed Tag' perk. You benefit from all undead powers at all times.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -5961,6 +5967,12 @@ public class PerkLib
 			CursedTag.requireCustomFunction(function (player:Player):Boolean {
                 return player.jiangshiScore() >= 20;
             }, "Jiangshi race");
+			ImprovedCursedTag.requirePerk(CursedTag).requireCustomFunction(function (player:Player):Boolean {
+                return player.jiangshiScore() >= 20;
+            }, "Jiangshi race");
+			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireCustomFunction(function (player:Player):Boolean {
+                return player.jiangshiScore() >= 20;
+            }, "Jiangshi race");
             //Tier 1
             CatlikeNimblenessEvolved.requireLevel(6)
 					.requirePerk(CatlikeNimbleness)
@@ -6704,4 +6716,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

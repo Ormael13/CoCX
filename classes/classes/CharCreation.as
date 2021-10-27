@@ -3001,6 +3001,8 @@ import coc.view.MainView;
 			player.masteryMaceHammerXP = 0;
 			player.masteryDuelingSwordLevel = 0;
 			player.masteryDuelingSwordXP = 0;
+			player.masteryPolearmLevel = 0;
+			player.masteryPolearmXP = 0;
 			player.masterySpearLevel = 0;
 			player.masterySpearXP = 0;
 			player.masteryWhipLevel = 0;

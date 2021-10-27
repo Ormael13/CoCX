@@ -907,6 +907,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.masteryMaceHammerXP = player.masteryMaceHammerXP;
 		saveFile.data.masteryDuelingSwordLevel = player.masteryDuelingSwordLevel;
 		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
+		saveFile.data.masteryPolearmLevel = player.masteryPolearmLevel;
+		saveFile.data.masteryPolearmXP = player.masteryPolearmXP;
 		saveFile.data.masterySpearLevel = player.masterySpearLevel;
 		saveFile.data.masterySpearXP = player.masterySpearXP;
 		saveFile.data.masteryWhipLevel = player.masteryWhipLevel;
@@ -1991,6 +1993,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.masteryDuelingSwordLevel = 0;
 		else
 			player.masteryDuelingSwordLevel = saveFile.data.masteryDuelingSwordLevel;
+		if (saveFile.data.masteryPolearmXP == undefined)
+			player.masteryPolearmXP = 0;
+		else
+			player.masteryPolearmXP = saveFile.data.masteryPolearmXP;
+		if (saveFile.data.masteryPolearmLevel == undefined)
+			player.masteryPolearmLevel = 0;
+		else
+			player.masteryPolearmLevel = saveFile.data.masteryPolearmLevel;
 		if (saveFile.data.masterySpearXP == undefined)
 			player.masterySpearXP = 0;
 		else

@@ -1199,6 +1199,10 @@ public class PlayerInfo extends BaseContent {
 		else
 			masteryStats += "<b>Dueling Swords Mastery / Dao of Dueling Sword:</b>  " + player.masteryDuelingSwordLevel + " / " + combat.maxDuelingSwordLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryDuelingSwordLevel + "% damage, +" + (0.5 * Math.round((player.masteryDuelingSwordLevel - 1) / 2)) + "% accuracy)</i>\n";
 		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) masteryStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
+		if (player.masteryPolearmLevel < combat.maxPolearmLevel())
+			masteryStats += "<b>Polearms Mastery / Dao of Polearm:</b>  " + player.masteryPolearmLevel + " / " + combat.maxPolearmLevel() + " (Exp: " + player.masteryPolearmXP + " / " + combat.PolearmExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryPolearmLevel + "% damage, +" + (0.5 * Math.round((player.masteryPolearmLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Polearms Mastery / Dao of Polearm:</b>  " + player.masteryPolearmLevel + " / " + combat.maxPolearmLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryPolearmLevel + "% damage, +" + (0.5 * Math.round((player.masteryPolearmLevel - 1) / 2)) + "% accuracy)</i>\n";
 		if (player.masterySpearLevel < combat.maxSpearLevel())
 			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: " + player.masterySpearXP + " / " + combat.SpearExpToLevelUp() + ")\n<i>(Effects: +" + player.masterySpearLevel + "% damage, +" + (0.5 * Math.round((player.masterySpearLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
@@ -2075,4 +2079,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}

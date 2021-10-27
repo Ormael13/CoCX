@@ -966,6 +966,14 @@ private function curingJiangshi():void {
 			player.removePerk(PerkLib.CursedTag);
 			player.perkPoints += 1;
 		}
+		if (player.hasPerk(PerkLib.ImprovedCursedTag)) {
+			player.removePerk(PerkLib.ImprovedCursedTag);
+			player.perkPoints += 1;
+		}
+		if (player.hasPerk(PerkLib.GreaterCursedTag)) {
+			player.removePerk(PerkLib.GreaterCursedTag);
+			player.perkPoints += 1;
+		}
 		player.removePerk(PerkLib.HaltedVitals);
 		player.removePerk(PerkLib.SuperStrength);
 		player.removePerk(PerkLib.PoisonNails);

@@ -66,7 +66,7 @@ package classes.Scenes.Places.HeXinDao
 				outputText("You enter the town local Inn ‘Journey to the East’ and look around. ");
 			}
 			outputText("You can see many people enjoying a meal or drink in the dining hall, a barman standing by ready to serve drinks.");
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && model.time.hours >= 18 && rand(4) == 0) {
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && model.time.hours >= 18 && rand(4) == 0) {
 				ChiChiDrunkSex();
 				return;
 			}

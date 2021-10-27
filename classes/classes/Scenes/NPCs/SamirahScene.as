@@ -189,7 +189,7 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>What a nice girl, I really like her. What do you need me for?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
+	else if (rand(2) == 0 && flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
 		outputText("As you were checking your camp and the people living in, you hear a shout from where Chi Chi usually leaves her dummies.\n\n");
 		outputText("\"<i>Stay back! I already know what your intentions are!</i>\"\n\n");
 		outputText("The fiery mouse is poised to attack Samirah, who only has eyes for the sources of heat.\n\n");

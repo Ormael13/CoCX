@@ -259,8 +259,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AlchemicalThunderBuff:StatusEffectType     		= mk("Alchemical Thunder Buff");
 		public static const AllNaturalOnaholeUsed:StatusEffectType          = mk("all-natural onahole used");
 		public static const AlrauneFlower:StatusEffectType                  = mk("Alraune Flower");
+		public static const AlterBindScroll1:StatusEffectType               = mk("Alter Bind Scroll 1");
 		public static const AlterBindScroll2:StatusEffectType               = mk("Alter Bind Scroll 2");
+		public static const AlterBindScroll3:StatusEffectType               = mk("Alter Bind Scroll 3");
 		public static const AlterBindScroll4:StatusEffectType               = mk("Alter Bind Scroll 4");
+		public static const AlterBindScroll5:StatusEffectType               = mk("Alter Bind Scroll 5");
 		public static const AlvinaTraining:StatusEffectType                 = mk("Alvina Training");
 		public static const AlvinaTraining2:StatusEffectType                = mk("Alvina Training 2");
 		public static const AndysSmoke:StatusEffectType                     = mk("Andy's Smoke"); //v1: Hours; v2: Speed; v3: Intelligence
@@ -698,6 +701,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PrisonRestraints:StatusEffectType        = mk("prisonRestraint");
 		public static const PrisonCaptorEllyScratch:StatusEffectType = mk("prisonCaptorEllyScatch");
 
+		public static const ChiChiOff:StatusEffectType           = mk("Chi Chi Off");
 		public static const DianaOff:StatusEffectType            = mk("Diana Off");
 		public static const DivaOff:StatusEffectType             = mk("Diva Off");
 		public static const ElectraOff:StatusEffectType          = mk("Electra Off");

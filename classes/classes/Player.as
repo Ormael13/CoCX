@@ -117,6 +117,8 @@ use namespace CoC;
 		public var masteryMaceHammerXP:Number = 0;
 		public var masteryDuelingSwordLevel:Number = 0;
 		public var masteryDuelingSwordXP:Number = 0;
+		public var masteryPolearmLevel:Number = 0;
+		public var masteryPolearmXP:Number = 0;
 		public var masterySpearLevel:Number = 0;
 		public var masterySpearXP:Number = 0;
 		public var masteryDaggerLevel:Number = 0;
@@ -2483,7 +2485,8 @@ use namespace CoC;
 				dynStats("lus", (5 * (1 + game.player.newGamePlusMod())));
 			}
 			if (hasPerk(PerkLib.HaltedVitals)) {
-				mult -= 20;
+				if (hasStatusEffect(StatusEffects.AlterBindScroll1)) mult -= 40;
+				else mult -= 20;
 			}
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
@@ -2732,6 +2735,7 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (hasStatusEffect(StatusEffects.AlterBindScroll3)) mult = 0;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -2877,6 +2881,7 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (hasStatusEffect(StatusEffects.AlterBindScroll3)) mult = 0;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -14050,6 +14055,47 @@ use namespace CoC;
 					outputText("\n<b>Dao of Dueling Sword leveled up to " + (masteryDuelingSwordLevel + 1) + "!</b>\n");
 					masteryDuelingSwordLevel++;
 					masteryDuelingSwordXP = 0;
+				}
+			}
+		}
+
+		public function maxPolearmLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function PolearmExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryPolearmLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryPolearmLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function polearmXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryPolearmXP++;
+					XP--;
+				}
+				else {
+					masteryPolearmXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryPolearmLevel < maxPolearmLevel() && masteryPolearmXP >= PolearmExpToLevelUp()) {
+					outputText("\n<b>Dao of Polearm leveled up to " + (masteryPolearmLevel + 1) + "!</b>\n");
+					masteryPolearmLevel++;
+					masteryPolearmXP = 0;
 				}
 			}
 		}

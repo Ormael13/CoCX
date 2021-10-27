@@ -70,7 +70,7 @@ public class HeXinDao extends BaseContent
 		addButton(2, "Clothing", riverislandVillageStuffLunarClothing);
 		if (model.time.hours > 19) addButton(3, "Fireworks", riverislandVillageStuffLunarFireworks);
 		else addButtonDisabled(3, "Fireworks", "You need to wait till 8 PM for that.");
-		if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && model.time.hours > 17) addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && model.time.hours > 17) addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
 		else addButtonDisabled(4, "Chi Chi", "You need to wait until it's 6 PM or later for that.");
 		addButton(14, "Back", riverislandVillageStuff1).hint("Leave festival part of He'Xin'Dao.");
 	}
@@ -137,7 +137,7 @@ public class HeXinDao extends BaseContent
 			outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 50 gems! C'mon and buy while there's some left!</i>\"");
 			outputText("\n\nYou put the dress in your bag for now. Now to put it on.");
 		}
-		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
+		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
 			outputText("\n\n\"<i>Hey, Baka! I thought you'd never join in. I waited for you here all day, you know! Sit next to me and hold my hand, I want the folks out there to know we're together.</i>\"");
 			outputText("\n\nTogether as in a couple? Is she opening up or something? Your comment makes her light red cheeks even redder.");
 			outputText("\n\n\"<i>N..no! Nothing of the sort! It's not like I care if all the other girls look at you right now! I’m just preventing you from flirting with half of the town's feminine cast!</i>\"");
@@ -185,7 +185,7 @@ public class HeXinDao extends BaseContent
 		addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
 		addButton(11, "Orsbulg", eraendirorsbulg.OrsbulgMainMenu);
 		addButton(12, "Golemancer", golemancershop);
-        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
         addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
     public function golemmerchant():void {
@@ -867,7 +867,7 @@ public class HeXinDao extends BaseContent
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: ?weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
-	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15) chichiScene.EnterOfTheChiChi();
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) chichiScene.EnterOfTheChiChi();
 	else {
 		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by them. IA few a moments after you entered, a tall, slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
 		outputText("\n\n\"<i>Welcome to the Soul Arena. Don't start fights outside of the proper place or you will be thrown out. If you break any rules here you will be kicked out. Go ahead and pick an area where you want to train or instead go to the challenges area. Oh and fights in each section cost some spirit stones so be sure to have enough of them as we not run charity here,</i>\"");
@@ -1201,10 +1201,10 @@ public function soularena():void {
         }
         clearOutput();
         outputText("You take a seat and look at the menu. ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("A dog morph that looks like a pekinese comes over to take your order.");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("A dog morph that looks like a pekinese comes over to take your order.");
         else outputText("A literally blazing mouse girl come over to take your order. Blazing is actually an understatement as her arms, legs and even her tail are on fire. ");
         outputText("\n\n\"<i>Hello my name is ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("Rin");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("Rin");
         else outputText("Chi Chi");
         outputText(" and I will be your waitress today. We have dumplings, Won ton soups and ramen offered in mild, spicy and inferno versions of the dishes. What will it be?</i>\"");
         menu();
@@ -1232,7 +1232,7 @@ public function soularena():void {
 
     private function restaurantSpicing(level:String):void{
         outputText("\n\nShe finishs noting your order, bows graciously then heads to the kitchen. ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("The waitress");
         else outputText("Chi Chi");
         outputText(" comes back with your order a few minutes later.");
         switch(level){
