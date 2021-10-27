@@ -1308,10 +1308,24 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			var selected:PerkClass = fPerkCList[e.text].perk;
 			var tempStr:String = "";
-			var pPerkGDesc:Array = ["\nRequires (All of these): ", "\nRequires (Any of these): ", "\nUnlocks: "]
+			var pPerkGDesc:Array = ["\nRequires (All of these perks): ", "\nRequires (Any of these perks): ", "\nUnlocks: "]
 			var pPerkGroup:Array = pRelations[selected.ptype];
+			var reqs:Array = [];
 			pPerkGroup.push(CoC.instance.perkTree.listUnlocks(selected.ptype));
 			outputText("<b>" + selected.perkName + ":</b>");
+			for each (var cond:Object in selected.ptype.requirements) {
+				if (!(cond.type == "allperks" || cond.type == "anyperk" || cond.type == "perk")){
+					if (cond.text is String){
+						reqs.push(cond.text);
+					}
+					else {
+						reqs.push(cond.text(player));
+					}
+				}
+			}
+			if (reqs.length > 0){
+				outputText("\nRequires (Non-perk requirements): " + reqs.join(", "));
+			}
 			for (var i:int = 0; i <= 2; i++){
 				if (pPerkGroup[i].length > 0){
 					outputText(pPerkGDesc[i]);
@@ -1350,6 +1364,16 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			menu();
 			displayHeader("Perk Tier: " + tPVal);
+			if (tPVal == 0){
+				outputText("Tier 0 contains all perks that do not have any requirements!\n");
+				outputText("It also contains perks that may not be handled in the standard manner.\n");
+			}
+			else if (tPVal == 1){
+				outputText("Tier 1 contains all perks that have a requirement, but do not require perks.\n");
+			}
+			else {
+				outputText("This tier contains perks that require one or more of any perks found in previous tiers!\n");
+			}
 			//outputText("Note: Work in progress. Send feedback to JTecx.\n");
 			var tfArr:Array = fPerkList[tPVal];
 			dMenuLinker(tPVal, tfArr);
