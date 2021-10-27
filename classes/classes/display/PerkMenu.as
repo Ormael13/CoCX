@@ -161,7 +161,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
 			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
 			outputText("\n\nBerzerker: <b>");
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3) outputText("Autocast");
@@ -289,7 +289,7 @@ public class PerkMenu extends BaseContent {
 			if (((player.weaponName == "fists" && player.hasNaturalWeapons) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
 			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(10, "None", zerkingStyle,0);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(11, "Berserking", zerkingStyle,1);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(12, "Lustzerking", zerkingStyle,2);
@@ -963,7 +963,7 @@ public class PerkMenu extends BaseContent {
 			//Kitsune Mutations
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-			mutationsDatabaseVerify([MutationsLib.KitsuneThyroidGland, MutationsLib.KitsuneThyroidGlandEvolved, MutationsLib.KitsuneThyroidGlandFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.KitsuneThyroidGland, MutationsLib.KitsuneThyroidGlandPrimitive, MutationsLib.KitsuneThyroidGlandEvolved]);
 			//mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
 			mutationsDatabase(1);
 		}

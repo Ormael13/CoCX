@@ -240,22 +240,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.PhantomStrike)) {
 					if (monster.plural) {
 						bd.hint("Attempt to slash your foes with your wrists scythes! \n");
-						if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) bd.requireFatigue(100);
+						if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) bd.requireFatigue(100);
 						else bd.requireFatigue(120);
 					} else {
 						bd.hint("Attempt to slash your foe with your wrists scythes! \n");
-						if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) bd.requireFatigue(40);
+						if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) bd.requireFatigue(40);
 						else bd.requireFatigue(48);
 					}
 				}
 				else {
 					if (monster.plural) {
 						bd.hint("Attempt to slash your foes with your wrists scythes! \n");
-						if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) bd.requireFatigue(50);
+						if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) bd.requireFatigue(50);
 						else bd.requireFatigue(60);
 					} else {
 						bd.hint("Attempt to slash your foe with your wrists scythes! \n");
-						if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) bd.requireFatigue(20);
+						if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) bd.requireFatigue(20);
 						else bd.requireFatigue(24);
 					}
 				}
@@ -327,26 +327,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(MutationsLib.LactaBovinaOvaries))) {
-				var blaaaast2:String = player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm) ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
+				var blaaaast2:String = player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved) ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Milk Blast", milkBlast).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production." + blaaaast2 + "\n");
-				if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) bd.requireLust(200);
+				if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) bd.requireLust(200);
 				else bd.requireLust(100);
 				if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast)) {
-					if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
+					if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(MutationsLib.MinotaurTesticles))) {
-				var blaaaast1:String = player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm) ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
+				var blaaaast1:String = player.hasPerk(MutationsLib.MinotaurTesticlesEvolved) ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. " + blaaaast1 + "\n");
-				if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) bd.requireLust(200);
+				if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) bd.requireLust(200);
 				else bd.requireLust(100);
 				if (player.hasStatusEffect(StatusEffects.CooldownCumCannon)) {
-					if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
+					if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if ((player.pigScore() >= 8 || player.hasPerk(MutationsLib.PigBoarFatFinalForm)) && player.thickness >= minThicknessReq()) {
+			if ((player.pigScore() >= 8 || player.hasPerk(MutationsLib.PigBoarFatEvolved)) && player.thickness >= minThicknessReq()) {
 				bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
 				bd.requireFatigue(physicalCost(50));
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -1271,8 +1271,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var costvalue:Number = chargingcoooooost();
 		fatigue(costvalue, USEFATG_PHYSICAL);
 		if (player.hasPerk(MutationsLib.TwinHeart) && (player.isTaur() || player.isDrider())) {
-			if (player.hasPerk(MutationsLib.TwinHeartEvolved) && (player.isTaur() || player.isDrider())) {
-				if (player.hasPerk(MutationsLib.TwinHeartFinalForm) && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
+			if (player.hasPerk(MutationsLib.TwinHeartPrimitive) && (player.isTaur() || player.isDrider())) {
+				if (player.hasPerk(MutationsLib.TwinHeartEvolved) && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
 				else player.createStatusEffect(StatusEffects.CooldownCharging,4,0,0,0);
 			}
 			else player.createStatusEffect(StatusEffects.CooldownCharging,5,0,0,0);
@@ -1320,8 +1320,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		if (player.isTaur() || player.isDrider()) {
-			if (player.hasPerk(MutationsLib.TwinHeartEvolved)) {
-				if (player.hasPerk(MutationsLib.TwinHeartFinalForm)) damage *= 1.8;
+			if (player.hasPerk(MutationsLib.TwinHeartPrimitive)) {
+				if (player.hasPerk(MutationsLib.TwinHeartEvolved)) damage *= 1.8;
 				else damage *= 1.2;
 			}
 			damage *= 2;
@@ -1365,8 +1365,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function chargingcoooooost():Number {
 		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.1);
 		if (player.hasPerk(MutationsLib.TwinHeart)) {
-			if (player.hasPerk(MutationsLib.TwinHeartEvolved)) {
-				if (player.hasPerk(MutationsLib.TwinHeartFinalForm)) chargingcostvalue *= 3;
+			if (player.hasPerk(MutationsLib.TwinHeartPrimitive)) {
+				if (player.hasPerk(MutationsLib.TwinHeartEvolved)) chargingcostvalue *= 3;
 				else chargingcostvalue *= 4;
 			}
 			else chargingcostvalue *= 5;
@@ -1873,7 +1873,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function milkBlast():void {
 		clearOutput();
-		if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) {
+		if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) {
 			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownMilkBlast, 3, 0, 0, 0);
 			else player.createStatusEffect(StatusEffects.CooldownMilkBlast, 4, 0, 0, 0);
 		}
@@ -1890,7 +1890,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (damage < 1) damage = 1;
 		doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) player.lust -= 200;
+		if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) player.lust -= 200;
 		else player.lust -= 100;
 		if (monster.lustVuln > 0) {
 			outputText(" ");
@@ -1907,7 +1907,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function cumCannon():void {
 		clearOutput();
-		if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) {
+		if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
 			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownCumCannon, 3, 0, 0, 0);
 			else player.createStatusEffect(StatusEffects.CooldownCumCannon, 4, 0, 0, 0);
 		}
@@ -1923,7 +1923,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) player.lust -= 200;
+		if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) player.lust -= 200;
 		else player.lust -= 100;
 		if (monster.lustVuln > 0) {
 			outputText(" ");
@@ -1975,7 +1975,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var slamDmg:Number = player.thickness;
 		if (player.hasPerk(MutationsLib.PigBoarFat)) slamDmg += player.thickness;
 		slamDmg += scalingBonusToughness();
-		if (player.hasPerk(MutationsLib.PigBoarFatFinalForm)) slamDmg *= 2;
+		if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) slamDmg *= 2;
 		if (player.hasPerk(PerkLib.RacialParagon)) slamDmg *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) slamDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) slamDmg *= 1.50;
@@ -2000,8 +2000,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function minThicknessReq():Number {
 		var miniThicknessvalue:Number = 95;
-		if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) miniThicknessvalue -= 10;
-		if (player.hasPerk(MutationsLib.PigBoarFatFinalForm)) miniThicknessvalue -= 35;
+		if (player.hasPerk(MutationsLib.PigBoarFatPrimitive)) miniThicknessvalue -= 10;
+		if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) miniThicknessvalue -= 35;
 		return miniThicknessvalue;
 	}
 
@@ -3137,8 +3137,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.spe;
 		damage += scalingBonusSpeed();
 		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.5;
+		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.5;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) damage *= 1.5;
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		//Determine if critical hit!
@@ -3211,8 +3211,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//LAND A HIT!
 		else {
 			var Multiplier:Number = 1;
+			if(player.hasPerk(MutationsLib.ArachnidBookLungPrimitive)) Multiplier += 0.5;
 			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
-			if(player.hasPerk(MutationsLib.ArachnidBookLungFinalForm)) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
@@ -3220,7 +3220,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
-			if(player.hasPerk(MutationsLib.ArachnidBookLungFinalForm)){
+			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved)){
 				if(rand(100) > 50) {
 					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				}
@@ -3942,21 +3942,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			if (monster.plural) {
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) fatigue(100, USEFATG_PHYSICAL);
+				if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) fatigue(100, USEFATG_PHYSICAL);
 				else fatigue(120, USEFATG_PHYSICAL);
 			}
 			else {
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) fatigue(40, USEFATG_PHYSICAL);
+				if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) fatigue(40, USEFATG_PHYSICAL);
 				else fatigue(48, USEFATG_PHYSICAL);
 			}
 		}
 		else {
 			if (monster.plural) {
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) fatigue(50, USEFATG_PHYSICAL);
+				if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) fatigue(50, USEFATG_PHYSICAL);
 				else fatigue(60, USEFATG_PHYSICAL);
 			}
 			else {
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) fatigue(20, USEFATG_PHYSICAL);
+				if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) fatigue(20, USEFATG_PHYSICAL);
 				else fatigue(24, USEFATG_PHYSICAL);
 			}
 		}
@@ -3971,8 +3971,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (monster.plural) {
 			if (player.hasPerk(MutationsLib.MantislikeAgility)) {
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemEvolved)) {
-					if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 15;
+				if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive) && player.hasPerk(PerkLib.TrachealSystemEvolved)) {
+					if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 15;
 					else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
 				}
 				else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
@@ -3981,7 +3981,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 		}
 		else {
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
+			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
 			else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 1;
 		}
 		mantisMultipleAttacks();
@@ -5995,4 +5995,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

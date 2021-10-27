@@ -491,7 +491,7 @@ public class Creature extends Utils
 				if (inte >= 61) max += Math.round(inte);
 				if (inte >= 81) max += Math.round(inte);
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
-				if (hasPerk(MutationsLib.FrozenHeartFinalForm)) max *= 1.5;
+				if (hasPerk(MutationsLib.FrozenHeartEvolved)) max *= 1.5;
 			}
 			else if (hasPerk(PerkLib.HaltedVitals)) {
 				max += int(lib * 2 + 50);
@@ -510,7 +510,7 @@ public class Creature extends Utils
 				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
 			}
 			if (hasPerk(PerkLib.IcyFlesh)) {
-				if (hasPerk(MutationsLib.FrozenHeartFinalForm)) {
+				if (hasPerk(MutationsLib.FrozenHeartEvolved)) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankII)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankIII)) max += Math.round(inte*18);
@@ -2533,7 +2533,7 @@ public class Creature extends Utils
 				quantity *= 2;
 			if (hasPerk(PerkLib.OneTrackMind))
 				quantity *= 1.1;
-			if (hasPerk(MutationsLib.MinotaurTesticlesFinalForm))
+			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved))
 				quantity *= 2.5;
 			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
@@ -2543,15 +2543,15 @@ public class Creature extends Utils
 				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
 			if (hasPerk(PerkLib.FerasBoonSeeder))
 				quantity += 1000;
-			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved))
+			if (hasPerk(MutationsLib.MinotaurTesticlesPrimitive))
+				quantity += 200;
+			if (hasPerk(MutationsLib.NukiNutsPrimitive))
 				quantity += 200;
 			if (hasPerk(MutationsLib.NukiNutsEvolved))
-				quantity += 200;
-			if (hasPerk(MutationsLib.NukiNutsFinalForm))
 				quantity *= 2;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved))
+			if (hasPerk(MutationsLib.EasterBunnyEggBagPrimitive))
 				quantity *= 1.5;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagFinalForm))
+			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved))
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
@@ -3379,7 +3379,7 @@ public class Creature extends Utils
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		public function isElf():Boolean {
-			return hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
+			return hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
 		}
 
 		public function isFlying():Boolean {
@@ -4089,7 +4089,7 @@ public class Creature extends Utils
 			var flychance:Number = 20;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flychance += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flychance += 15;
-			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved)) flychance += 10;
+			if (hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) flychance += 10;
 			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
 			if (hasPerk(PerkLib.Evade)) {
 				chance += 5;
@@ -4100,8 +4100,8 @@ public class Creature extends Utils
 			}
 			if (hasPerk(PerkLib.ElvenSense)) {
 				chance += 5;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) chance += 10;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) chance += 15;
+				if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) chance += 10;
+				if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) chance += 15;
 			}
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
 			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
@@ -4113,7 +4113,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) chance += 20;
+				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) chance += 20;
 				else chance += 10;
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -4170,8 +4170,8 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.JobRogue)) generalevasion += 5;
 			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) generalevasion += 10;
 			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) generalevasion += 10;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) generalevasion += 15;
+			if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) generalevasion += 10;
+			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) generalevasion += 15;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
@@ -4186,7 +4186,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm) && roll < 20) return "Illusion";
+				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && roll < 20) return "Illusion";
 				else if (roll < 10) return "Illusion";
 			}
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";

@@ -157,19 +157,19 @@ import classes.Scenes.SceneLib;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
 				this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.GorgonsEyesEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.GorgonsEyesPrimitive, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.DraconicLungsPrimitive, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 5) {
-				this.createPerk(MutationsLib.OniMusculatureEvolved, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.PigBoarFatEvolved, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.LactaBovinaOvariesEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OniMusculaturePrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OrcAdrenalGlandsPrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.PigBoarFatPrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LactaBovinaOvariesPrimitive, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -177,9 +177,9 @@ import classes.Scenes.SceneLib;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
 				this.createPerk(MutationsLib.DraconicLungsEvolved, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.OniMusculatureFinalForm, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.OrcAdrenalGlandsFinalForm, 0, 0, 0, 0);
-				this.createPerk(MutationsLib.PigBoarFatFinalForm, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OniMusculatureEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.PigBoarFatEvolved, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 8) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);

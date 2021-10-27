@@ -839,7 +839,7 @@ public class Masturbation extends BaseContent {
 						}
 						else outputText("You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 					}
-					if (player.hasPerk(MutationsLib.NukiNutsEvolved)){
+					if (player.hasPerk(MutationsLib.NukiNutsPrimitive)){
 						var cumAmmount:Number = player.cumQ();
 						var payout:Number = 1;
 						//Get rid of extra digits
@@ -849,7 +849,7 @@ public class Masturbation extends BaseContent {
 							payout += 2 + int(cumAmmount/100)*2;
 						}
 						//Reduce payout if it would push past
-						if (player.hasPerk(MutationsLib.NukiNutsFinalForm)){
+						if (player.hasPerk(MutationsLib.NukiNutsEvolved)){
 							payout *= 2;
 						}
 						if(payout > 0) {
@@ -3692,7 +3692,7 @@ public class Masturbation extends BaseContent {
 					}
 					else outputText("  You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 				}
-				if (player.hasPerk(MutationsLib.NukiNutsEvolved)){
+				if (player.hasPerk(MutationsLib.NukiNutsPrimitive)){
 					var cumAmmount:Number = player.cumQ();
 					var payout:Number = 1;
 					//Get rid of extra digits
@@ -3702,7 +3702,7 @@ public class Masturbation extends BaseContent {
 						payout += 2 + int(cumAmmount/100)*2;
 					}
 					//Reduce payout if it would push past
-					if (player.hasPerk(MutationsLib.NukiNutsFinalForm)){
+					if (player.hasPerk(MutationsLib.NukiNutsEvolved)){
 						payout *= 2;
 					}
 					if(payout > 0) {
@@ -3719,7 +3719,7 @@ public class Masturbation extends BaseContent {
 				player.orgasm();
 				dynStats("sen", -2);
 			}
-			if (player.hasPerk(MutationsLib.NukiNutsEvolved)){
+			if (player.hasPerk(MutationsLib.NukiNutsPrimitive)){
 				var cumAmmount1:Number = player.cumQ();
 				var payout1:Number = 1;
 				//Get rid of extra digits
@@ -3729,7 +3729,7 @@ public class Masturbation extends BaseContent {
 					payout1 += 2 + int(cumAmmount1/100)*2;
 				}
 				//Reduce payout if it would push past
-				if (player.hasPerk(MutationsLib.NukiNutsFinalForm)){
+				if (player.hasPerk(MutationsLib.NukiNutsEvolved)){
 					payout1 *= 2;
 				}
 				if(payout1 > 0) {

@@ -1310,12 +1310,12 @@ public class PlayerAppearance extends BaseContent {
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("185");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("170");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else outputText("140");
-			} else if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+			} else if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("170");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("160");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("150");
@@ -1330,7 +1330,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.mantisScore() >= 6) {
 			outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-20% to Str racial multi, +30% to Tou racial multi, +");
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("100");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("90");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("80");
@@ -1676,3 +1676,4 @@ public class PlayerAppearance extends BaseContent {
 	}
 }
 }
+

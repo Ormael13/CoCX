@@ -954,9 +954,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
 					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
 					player.ballSize++;
-					if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)) {
+					if (player.hasPerk(MutationsLib.EasterBunnyEggBagPrimitive)) {
 						var changeLib:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
-						if (player.hasPerk(MutationsLib.EasterBunnyEggBagFinalForm)){
+						if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)){
 							changeLib = (player.ballSize*10/100)+1;
 							player.ballSize++;
 						}
@@ -1001,7 +1001,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
-					if (player.hasPerk(MutationsLib.VampiricBloodsteamEvolved) && player.statusEffectv2(StatusEffects.VampireThirst) < 1) player.addStatusValue(StatusEffects.VampireThirst, 2, 1);
+					if (player.hasPerk(MutationsLib.VampiricBloodsteamPrimitive) && player.statusEffectv2(StatusEffects.VampireThirst) < 1) player.addStatusValue(StatusEffects.VampireThirst, 2, 1);
 					else vthirst.modSatiety(-1);
 				}
 				//Getting chrismas tree
@@ -1432,7 +1432,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Recharge venom/web pool
 			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA
-			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(MutationsLib.VenomGlandsEvolved) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
+			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(MutationsLib.VenomGlandsPrimitive) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
 				var venomHRecharge:Number = 0;
 				venomHRecharge += combat.venomCombatRecharge2();
 				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
@@ -1806,7 +1806,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Ferocity
-			if (player.orcScore() < 11 && player.hasPerk(PerkLib.Ferocity) && !player.hasPerk(MutationsLib.OrcAdrenalGlandsFinalForm)) {
+			if (player.orcScore() < 11 && player.hasPerk(PerkLib.Ferocity) && !player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) {
 				outputText("\nYour natural ferocity starts vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, which might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
 				player.removePerk(PerkLib.Ferocity);
 				needNext = true;
@@ -1936,7 +1936,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && !player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) {
+			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && !player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
@@ -2984,3 +2984,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
+
