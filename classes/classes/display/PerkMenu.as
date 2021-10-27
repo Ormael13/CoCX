@@ -1156,7 +1156,7 @@ public class PerkMenu extends BaseContent {
 		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
 			var pName:String = perkTrue.name();
 			var rez:Boolean = true;
-			for each (var temp1:String in ["Ascension", "Bloodline", "History", "Past Life", "Pierced", "!!!"]){
+			for each (var temp1:String in ["Ascension", "Bloodline", "History", "Past Life", "Pierced", "Prestige", "Slime Metabolism", "Draconic", "Cave Wyrm Lungs", "Hidden Job", "Super Perk", "!!!"]){
 				if (pName.indexOf(temp1) >= 0){
 					trace(pName);
 					rez = false;
@@ -1367,6 +1367,7 @@ public class PerkMenu extends BaseContent {
 			if (tPVal == 0){
 				outputText("Tier 0 contains all perks that do not have any requirements!\n");
 				outputText("It also contains perks that may not be handled in the standard manner.\n");
+				outputText("Note: This is still in beta, but works for the 99%. Odd side cases are attributed to weirdness in perk code.\n");
 			}
 			else if (tPVal == 1){
 				outputText("Tier 1 contains all perks that have a requirement, but do not require perks.\n");
