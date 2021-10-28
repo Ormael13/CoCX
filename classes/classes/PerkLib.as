@@ -5914,6 +5914,8 @@ public class PerkLib
                 return player.scyllaScore() >= 5;
             }, "Scylla race");
             TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
+				return player.lowerBody == LowerBody.DRIDER;
+			}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
                 return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
             /*
@@ -5986,6 +5988,8 @@ public class PerkLib
                 return player.scyllaScore() >= 10;
             }, "Scylla race");
             TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+				return player.lowerBody == LowerBody.DRIDER;
+			}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
                 return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
 			ChimericalBodyInitialStage.requireLevel(6)
@@ -6296,6 +6300,8 @@ public class PerkLib
 					return player.catScore() >= 10 || player.nekomataScore() >= 12 || player.displacerbeastScore() >= 12 || player.hellcatScore() >= 12 || player.cheshireScore() >= 12 || player.sphinxScore() >= 12;
 			}, "Any cat race");
             TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.lowerBody == LowerBody.DRIDER;
+			}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
                 return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)

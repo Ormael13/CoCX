@@ -1267,6 +1267,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.";
+		player.antennae.type = Antennae.CENTIPEDE;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -1282,6 +1283,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "Two large lumps suddenly pushes out of your head and before you know it a pair of prehensile horn-like antennae are flopping in front of your forehead <b>just like those of a slug or snail</b>.";
 
 	    desc += "";
+		player.antennae.type = Antennae.FIRE_SNAIL;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -1297,6 +1299,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "A strange feeling washes over you as something crawls along your neck. You reach your hand up as large, thin strands of flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles, but instead, they start producing dim bioluminescent lights, much like the whiskers of deep-sea creatures. <b>Just like a sea dragon you now have four bioluminescent neck strands!</b>";
+		player.antennae.type = Antennae.SEA_DRAGON;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -9655,7 +9658,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 /*
 *    ████████ ██ ███████ ██████  ███████ ██████      ████████ ███████ ███████
-*       ██    ██ ██      ██   ██ ██      ██   ██     	  ██    ██      ██
+*       ██    ██ ██      ██   ██ ██      ██   ██     	██    ██      ██
 *       ██    ██ █████   ██████  █████   ██   ██        ██    █████   ███████
 *       ██    ██ ██      ██   ██ ██      ██   ██        ██    ██           ██
 *       ██    ██ ███████ ██   ██ ███████ ██████         ██    ██      ███████
@@ -9714,4 +9717,3 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 */
 }
 }
-

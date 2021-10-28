@@ -1415,14 +1415,14 @@ import classes.CoC;
 				}
 			}
 			if (player.blockingBodyTransformations()) changeLimit = 0;
-			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].length < 12) {
+			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].cockLength < 12) {
 				outputText("\n\nHeat funnels into your cock as the alcohol flushes through you. Reaching down to inspect it, you find it has grown longer.");
-				player.cocks[player.smallestCockIndex()].length++;
+				player.cocks[player.smallestCockIndex()].cockLength += 1;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].girth < 4) {
+			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].cockThickness < 4) {
 				outputText("\n\nYou cock feels warm. When you reach down to inspect it your suspicions are confirmed. it's gotten thicker.");
-				player.cocks[player.smallestCockIndex()].girth += 0.5;
+				player.cocks[player.smallestCockIndex()].cockThickness += 0.5;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.balls > 0) {
@@ -1507,14 +1507,14 @@ import classes.CoC;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.HUMAN) == 0) {
 				outputText("You feel a stirring in your loins as your cock grows rock hard. You " + player.clothedOrNakedLower("pull it out from your [armor], to ") + "take a look. It seems you now <b>have a human dick again</b>.");
-				player.cocks.type = CockTypesEnum.HUMAN;
+				player.cocks.cockType = CockTypesEnum.HUMAN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() > 1 && (player.cockTotal() - player.countCocksOfType(CockTypesEnum.HUMAN)) > 0) {
 				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
 				for (var i:int = 0; i < player.cockTotal(); i++) {
-					if (player.cocks[i].type != CockTypesEnum.HUMAN) {
-						player.cocks[i].type = CockTypesEnum.HUMAN;
+					if (player.cocks[i].cockType != CockTypesEnum.HUMAN) {
+						player.cocks[i].cockType = CockTypesEnum.HUMAN;
 						break;
 					}
 				}
