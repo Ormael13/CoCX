@@ -151,26 +151,6 @@ package classes.Scenes
 			outputText("-Benoit shop have now 5 slots for items to sell instead of 3. All items that was before in those 3 slots been spread to 5 slots so no worry no item been discarded from our fav basilisk offer ^^\n");
 			outputText("-Windstorm Emerald cost increased from 6 to 20 gems.\n");
 			outputText("-Simplified requirements for dragon racial mutation perks.\n");
-			outputText("-Option to get internal mutation form Evangeline no longer req. her to be lvl 6.\n");
-			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc.\n");
-			outputText("-Zetta certificated fix for raiju skin pattern becoming kitsune skin pattern.\n");
-			outputText("-Fixes by Daikael.\n");
-			outputText("-Kekvit Irae changes & fixes.\n");
-			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit!\n");
-			outputText("-Celess corruption was tweaked to be more in line with original idea, solution implemented by Lia, Kekvit. Imported back into main by Jtecx.\n");
-			outputText("-Elven Hunting party should no longer steal your weapon and keep it until next encounter.\n");
-			outputText("-Many minor type/parser errors fixed here and there.\n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
-			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
-			//outputText("-New tier 7 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
-			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
-			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			outputText("-Added counter how many ascensions PC already have in general stats subpage. Ignam Thief spawn chance increased from 25% to 75%.\n");
 			outputText("-Feral Imps and Raging Tentacle Beasts will not spawn when PC is below lvl 3. Only exception is in case of feral imps when PC took quests that req. to kill/capture them.\n");
 			outputText("-Harpy Womb perk would give 2 pts instead of 1 to race scores of three races related to harpies. Should make possible getting race scores for full rac3e score without need to pick mutation perks by those race PC's.\n");
@@ -193,6 +173,26 @@ package classes.Scenes
 			outputText("-Temporal golems base damage will be scaling with int/wis by adding current value of both stats. Also it base value was increased.\n");
 			outputText("-Super Sensual perk would increase tease cap up to 70. Also each 1% above 100% chance to succesfully tease oponent will not give ~2% more lust dmg instead of ~1%. Base lust damage form tease been increased.\n");
 			outputText("-Marble can give PC 2 new items from Present option: Minotaur Horns (the same PC get from killing minotaurs) and Pack of nails.\n");
+			outputText("-Option to get internal mutation form Evangeline no longer req. her to be lvl 6.\n");
+			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc, Perk Database v2, fix for fire snail tf glitches.\n");
+			outputText("-Zetta certificated fix for raiju skin pattern becoming kitsune skin pattern.\n");
+			outputText("-Fixes by Daikael.\n");
+			outputText("-Kekvit Irae changes & fixes.\n");
+			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit!\n");
+			outputText("-Celess corruption was tweaked to be more in line with original idea, solution implemented by Lia, Kekvit. Imported back into main by Jtecx.\n");
+			outputText("-Elven Hunting party should no longer steal your weapon and keep it until next encounter.\n");
+			outputText("-Many minor type/parser errors fixed here and there.\n");
+			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
+			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
+			//outputText("-New tier 7 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
+			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
+			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			outputText("-Charged Core perk req. of having Apprentice Golem Maker perk was replacd with Job: Golemancer perk.\n");
 			outputText("-Perks from Beginner Golem Maker to Master Golem Maker would also increase damage of temporal golems based on cuurent int/wis.\n");
 			outputText("-Secondary Stats Modifier scaling would be different for Boss type enemies and rest of enemies. Boss one modifiers would be 10/40/200/1600% instead of 5/10/25/100%.\n");
@@ -230,7 +230,10 @@ package classes.Scenes
 			outputText("-New tier 0 misc lvl-up perk: Improved Cursed Tag. Req. Jiangshi race (20+ pts in score) and Cursed Tag perk. Effect: You may keep 2 undead powers active at all times.\n");
 			outputText("-New tier 0 misc lvl-up perk: Greater Cursed Tag. Req. Jiangshi race (20+ pts in score) and Improved Cursed Tag perk. Effect: You benefit from all undead powers at all times.\n");
 			outputText("-After defeating true demon male/herm/female enemy or minotaur Jiangshi PC could access one of three unique sex scenes.\n");
-			outputText("-\n");
+			outputText("-Shouldra attack with magic missiles can apply now weak dispell effect if pc got one of four white/black magic buffs casted.\n");
+			outputText("-Added option to surrender when PC is bound and can only wait or struggle (for cases when PC is locked into never ending cycle of struggling with enemy).\n");
+			outputText("-Feeding as Jiangshi would cure up to 5 pts of 'Weakened' and 'Drained' type curse on libido stat.\n");
+			outputText("-Asura Form second special req. 3rd ot 2nd perk in this job.\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -251,6 +254,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -310,7 +314,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -338,12 +344,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -57,20 +57,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.statStore.hasBuff("AsuraForm")) {
-				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+				bd = buttons.add("Asura's Howl", combat.asurasHowl).hint("Unleash a howl before giving enemy good punching. \n\nWrath Cost: 50");
+				if (player.wrath < 50) {
+					bd.disable("Your wrath is too low to unleash howl!");
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 					bd = buttons.add("SFoD", combat.asurasSixFingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					if (player.wrath < (player.maxWrath() * 0.5)) {
 						bd.disable("Your wrath is too low to use Six Fingers of Destruction!");
 					}
 				}
-				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-
-				}
-				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-
-				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-
+					
 				}
 			}
 			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {

@@ -2397,8 +2397,14 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) currentAltering += 1;
 		outputText("Would you like to alter your curse tag, and if so, with what changes?\n\n");
 		outputText("Current active powers / Limit of active powers: "+currentAltering+" / "+limitOnAltering+"\n\n");
+		outputText("Active powers:\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) outputText("<b>-No limiter</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) outputText("<b>-Unliving Leech</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) outputText("<b>-Undead resistance</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) outputText("<b>-Vital Sense</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) outputText("<b>-Zombified</b>\n");
 		outputText("Effects of each powers:\n");
-		//outputText("No limiter -> Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. This is a togglable ability.\n");
+		outputText("No limiter -> Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. This is a togglable ability.\n");
 		outputText("Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant.\n");
 		outputText("Undead resistance -> Gain Immunity to Cold, Poison and Fatigue damage.\n");
 		outputText("Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.\n");
@@ -6058,3 +6064,4 @@ public function rebirthFromBadEnd():void {
         */
 	}
 }
+

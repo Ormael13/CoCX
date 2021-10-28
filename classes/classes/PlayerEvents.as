@@ -761,10 +761,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var intBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("int.mult");
 					var speBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("spe.mult");
 					if (intBuff > -0.9) {
-						player.buff("Energy Vampire").addStats({ "int.mult": -0.3 }).withText("Energy Vampire");
+						player.buff("Energy Vampire").addStats({ "int.mult": -0.05 }).withText("Energy Vampire");
 					}
 					if (speBuff > -0.9) {
-						player.buff("Energy Vampire").addStats({ "spe.mult": -0.15 }).withText("Energy Vampire");
+						player.buff("Energy Vampire").addStats({ "spe.mult": -0.05 }).withText("Energy Vampire");
 					}
 				}
 				//Daily Fishery production

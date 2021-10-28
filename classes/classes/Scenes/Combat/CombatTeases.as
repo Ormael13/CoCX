@@ -1491,8 +1491,8 @@ public class CombatTeases extends BaseCombatContent {
 			var crit:Boolean = false;
 			var critChance:int = 5;
 			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 5;
-				if (player.lib > 100) critChance += 20;
+				if (player.lib <= 100) critChance += player.lib / 4;
+				if (player.lib > 100) critChance += 25;
 			}
 			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 			if (rand(100) < critChance) {
@@ -1504,7 +1504,7 @@ public class CombatTeases extends BaseCombatContent {
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 			damage = Math.round(damage);
-			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 15) {
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
 				outputText("\n" + monster.a + monster.short + " is so mesmerised by your show that it stands there gawking.");
 				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
@@ -1517,7 +1517,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
-				if (!justText) dynStats("lus", 2 + rand(3));
+				if (!justText) dynStats("lus", 7 + rand(6));
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
 			if (!justText && !SceneLib.urtaQuest.isUrta()) player.SexXP(1 + bonusExpAfterSuccesfullTease());

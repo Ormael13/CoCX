@@ -1108,20 +1108,14 @@ public class Combat extends BaseContent {
 				if (player.wrath < 50) {
 					bd.disable("Your wrath is too low to unleash howl!");
 				}
-				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 					bd = buttons.add("SFoD", asurasSixFingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					if (player.wrath < (player.maxWrath() * 0.5)) {
 						bd.disable("Your wrath is too low to use Six Fingers of Destruction!");
 					}
 				}
-				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-
-				}
-				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-
-				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-
+					
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");

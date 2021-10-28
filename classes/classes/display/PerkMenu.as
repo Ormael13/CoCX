@@ -28,8 +28,7 @@ public class PerkMenu extends BaseContent {
 	public function displayPerks(e:MouseEvent = null):void {
 		var temp:int = 0;
 		clearOutput();
-		displayHeader("Perks");
-		outputText("You have " + player.perks.length + " perks in total.\n")
+		displayHeader("Perks (Total: " + player.perks.length + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}

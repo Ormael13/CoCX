@@ -14900,16 +14900,23 @@ use namespace CoC;
 		public function EnergyDependentRestore():void {
 			var intBuff:Number = buff("Energy Vampire").getValueOfStatBuff("int.mult");
 			var speBuff:Number = buff("Energy Vampire").getValueOfStatBuff("spe.mult");
-			if (hasStatusEffect(StatusEffects.AlterBindScroll2)) 
-			if (intBuff < +0.5) {
-				buff("Energy Vampire").addStats({ "int.mult": +0.10 }).withText("Energy Vampire");
+			if (intBuff < +1.8) {
+				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) buff("Energy Vampire").addStats({ "int.mult": +0.20 }).withText("Energy Vampire");
+				else buff("Energy Vampire").addStats({ "int.mult": +0.10 }).withText("Energy Vampire");
 			}
-			buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
+			if (speBuff < +0.9) {
+				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) buff("Energy Vampire").addStats({ "spe.mult": +0.10 }).withText("Energy Vampire");
+				else buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
+			}
 			if (!CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon)) {
 				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) soulforce += maxSoulforce() * 0.08;
 				else soulforce += maxSoulforce() * 0.04;
 				if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
 				outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
+			}
+			if (statStore.hasBuff("NoLimiterState")) {
+				removeCurse("lib", 5, 1);
+				removeCurse("lib", 5, 2);
 			}
 		}
 
@@ -15135,4 +15142,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

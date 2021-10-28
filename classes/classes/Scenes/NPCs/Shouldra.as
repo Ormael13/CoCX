@@ -75,6 +75,12 @@ import classes.internals.*;
 			player.takeMagicDamage(damage, true);
 			player.takeMagicDamage(damage, true);
 			player.takeMagicDamage(damage, true);
+			if (player.hasStatusEffect(StatusEffects.ChargeWeapon) || player.hasStatusEffect(StatusEffects.ChargeArmor) || player.statStore.hasBuff("Might") || player.statStore.hasBuff("Blink")) {
+				if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) player.removeStatusEffect(StatusEffects.ChargeWeapon);
+				else if (player.hasStatusEffect(StatusEffects.ChargeArmor)) player.removeStatusEffect(StatusEffects.ChargeArmor);
+				else if (player.statStore.hasBuff("Might")) player.statStore.removeBuffs("Might");
+				else player.statStore.removeBuffs("Blink");
+			}
 			outputText("\n");
 		}
 

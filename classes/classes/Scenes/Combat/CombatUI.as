@@ -624,6 +624,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.UBERWEB)) {
 			addButton(6, "M. Special", submenuMagSpecials);
 		}
+		addButton(14, "Surrender", combat.surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
 		if (player.hasStatusEffect(StatusEffects.Bound)) {
 			btnStruggle.call((monster as Ceraph).ceraphBindingStruggle);
 			btnBoundWait.call((monster as Ceraph).ceraphBoundWait);
