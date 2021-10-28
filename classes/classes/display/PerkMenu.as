@@ -29,7 +29,7 @@ public class PerkMenu extends BaseContent {
 		var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks");
-		//outputText("You have " + player.perks.length + " perks in total.\n")
+		outputText("You have " + player.perks.length + " perks in total.\n")
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}
@@ -79,8 +79,8 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
 			addButton(9, "P.Golems",golemsbehaviourOptions);
 		}
-		addButton(10, "Number of", EngineCore.doNothing);
-		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
+		//addButton(10, "Number of", EngineCore.doNothing);
+		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
 		if (player.hasPerk(PerkLib.LiftOff)) {
 			outputText("\n<b>You can choose and adjust various misc effects.</b>");
 			addButton(12, "Misc Opt",MiscOption);
