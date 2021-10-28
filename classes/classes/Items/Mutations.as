@@ -15233,7 +15233,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes wings!
-        if (player.rearBody.type == RearBody.SNAIL_SHELL && player.wings.type >= Wings.NONE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(2) == 0) {
+        if (player.rearBody.type == RearBody.SNAIL_SHELL && !(player.wings.type == Wings.NONE || player.wings.type == Wings.GARGOYLE_LIKE_LARGE) && changes < changeLimit && rand(2) == 0) {
             outputText("[pg]To your utter disappointment your wings are absorbed back into your shell. Guess there's no such things as flying snails.");
             transformations.WingsNone.applyEffect(false);
             changes++;
