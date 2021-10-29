@@ -71,7 +71,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 33;
+    public var modSaveVersion:Number = 34;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -257,7 +257,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8s2";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Jiangshi mini X-pack, Bee race & Eyes of the Hunter minor changes, Twins 2nd evo & obligatory package of QoL changes/bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

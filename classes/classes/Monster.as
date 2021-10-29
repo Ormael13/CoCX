@@ -3280,7 +3280,7 @@ import flash.utils.getQualifiedClassName;
 						SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
 					}
 				}
-				outputText("\n\nYou'll probably come to your senses in eight hours or so");
+				outputText("\n\nYou'll probably come to your senses in six hours or so");
 				if (player.gems > 1)
 					outputText(", missing " + gemsLost + " gems.");
 				else if (player.gems == 1)

@@ -979,7 +979,7 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
 		}
 		//Wood Elf weapon fix.
-		if ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0)){
+		if (!player.hasPerk(PerkLib.Rigidity) && ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0))) {
 			if (player.weapon != WeaponLib.FISTS){
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]), playerMenu);
@@ -2095,7 +2095,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		if (player.hasPerk(PerkLib.CursedTag)) addButton(9, "Alter Bind Scroll", AlterBindScroll);
+		if (player.hasPerk(PerkLib.CursedTag)) addButton(9, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY aka modify your cursed tag");
 		else addButtonDisabled(9, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
@@ -2397,22 +2397,27 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) currentAltering += 1;
 		outputText("Would you like to alter your curse tag, and if so, with what changes?\n\n");
 		outputText("Current active powers / Limit of active powers: "+currentAltering+" / "+limitOnAltering+"\n\n");
-		outputText("Active powers:\n");
+		//displayHeader("Active powers:");
+		//outputText("\n");
+		outputText("<u><b>Active powers:</b></u>\n");
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) outputText("<b>-No limiter</b>\n");
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) outputText("<b>-Unliving Leech</b>\n");
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) outputText("<b>-Undead resistance</b>\n");
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) outputText("<b>-Vital Sense</b>\n");
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) outputText("<b>-Zombified</b>\n");
-		outputText("Effects of each powers:\n");
-		outputText("No limiter -> Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. This is a togglable ability.\n");
-		outputText("Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant.\n");
-		outputText("Undead resistance -> Gain Immunity to Cold, Poison and Fatigue damage.\n");
-		outputText("Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.\n");
-		outputText("Zombified -> You are immune to mental attacks that would affect living sane beings. Furthermore you have unlimited fatigue.\n");
+		//outputText("\n");
+		//displayHeader("Effects of each powers:");
+		outputText("\n<u><b>Effects of each powers:</b></u>\n");
+		//outputText("\n");
+		outputText("No limiter -> <i>Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. This is a togglable ability.</i>\n");
+		outputText("Unliving Leech -> <i>Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant.</i>\n");
+		outputText("Undead resistance -> <i>Gain Immunity to Cold, Poison and Fatigue damage.</i>\n");
+		outputText("Vital Sense -> <i>You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.</i>\n");
+		outputText("Zombified -> <i>You are immune to mental attacks that would affect living sane beings. Furthermore you have unlimited fatigue.</i>\n");
 		menu();
 		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll1)) addButton(0, "No limiter", AlterBindScrollNoLimiter).hint("You not have this power active. Do you want to activate it?");
 		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) addButton(0, "No limiter", AlterBindScrollUnlivingLeech).hint("You already have this power active. Do you want to deactivate it?");
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) addButton(0, "No limiter", AlterBindScrollNoLimiter).hint("You already have this power active. Do you want to deactivate it?");
 			else addButtonDisabled(0, "No limiter", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
 		}
 		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(1, "Unliving Leech", AlterBindScrollUnlivingLeech).hint("You not have this power active. Do you want to activate it?");
@@ -2422,7 +2427,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) addButton(2, "Undead resistance", AlterBindScrollUndeadResistance).hint("You not have this power active. Do you want to activate it?");
 		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) addButton(2, "Undead resistance", AlterBindScrollVitalSense).hint("You already have this power active. Do you want to deactivate it?");
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) addButton(2, "Undead resistance", AlterBindScrollUndeadResistance).hint("You already have this power active. Do you want to deactivate it?");
 			else addButtonDisabled(2, "Undead resistance", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
 		}
 		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll4)) addButton(3, "Vital Sense", AlterBindScrollVitalSense).hint("You not have this power active. Do you want to activate it?");
@@ -2432,7 +2437,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll5)) addButton(4, "Zombified", AlterBindScrollZombified).hint("You not have this power active. Do you want to activate it?");
 		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) addButton(4, "Zombified", AlterBindScrollVitalSense).hint("You already have this power active. Do you want to deactivate it?");
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) addButton(4, "Zombified", AlterBindScrollZombified).hint("You already have this power active. Do you want to deactivate it?");
 			else addButtonDisabled(4, "Zombified", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
 		}
 		addButton(14, "Back", campMiscActions);
@@ -5224,11 +5229,11 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
-			outputText("Grey Sage prestige really need to retire... please no cry blood tears it may return in some other form... maybe...");
-			if (player.hasPerk(PerkLib.PrestigeJobGreySage) {
+			outputText("Grey Sage prestige really need to retire... please no cry blood tears it may return in some other form... maybe... Also all Evovlved/Final Form racial mutation perks been reassigned new tiers xD");
+			if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 				player.removePerk(PerkLib.PrestigeJobGreySage);
 				player.perkPoints += 1;
 			}
@@ -5524,7 +5529,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Text.");

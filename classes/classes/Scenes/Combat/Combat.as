@@ -1183,8 +1183,8 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) {
-			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
-			else bd = buttons.add("No limiter", returnToNormalState).hint("Toggle off No limiter.");
+			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No limiter", returnToNormalState).hint("Toggle off No limiter.");
+			else bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
 		}
     }
 	public function GolemsMenu():void {
@@ -5507,7 +5507,7 @@ public class Combat extends BaseContent {
 				var curseLib:Number = player.lib * 0.005;
 				if (curseLib < 1) curseLib = 1;
 				else curseLib = Math.round(curseLib);
-				player.addCurse("lib", 1, curseLib);
+				player.addCurse("lib", curseLib, 1);
 			}
             //Damage cane.
             if (player.weapon == weapons.HNTCANE) {
@@ -6131,11 +6131,11 @@ public class Combat extends BaseContent {
                 if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
                 else monster.armorDef = 0;
             }
-			if (player.statStore.hasBuff("NoLimiterState")) {
+			if (player.statStore.hasBuff("NoLimiterState") && player.weaponName == "fists") {
 				var curseLib:Number = player.lib * 0.005;
 				if (curseLib < 1) curseLib = 1;
 				else curseLib = Math.round(curseLib);
-				player.addCurse("lib", 1, curseLib);
+				player.addCurse("lib", curseLib, 1);
 			}
         }
         wrathregeneration();
@@ -14623,7 +14623,7 @@ public class Combat extends BaseContent {
 		outputText("No limiter on!\n\n");
 		var tempStr:Number = player.str;
 		mainView.statsView.showStatUp('str');
-		player.buff("NoLimiterState").addStats({str:tempStr}).withText("No limiter").combatPermanent();
+		player.buff("NoLimiterState").addStats({"str":tempStr}).withText("No limiter").combatPermanent();
 		statScreenRefresh();
 		menu();
 		addButton(0, "Next", combatMenu, false);

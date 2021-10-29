@@ -2403,4 +2403,3 @@ use namespace CoC;
 		}
 	}
 }
-
