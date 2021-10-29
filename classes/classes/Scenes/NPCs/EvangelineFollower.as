@@ -196,10 +196,8 @@ public function meetEvangeline():void {
 		else addButtonDisabled(3, "Spar", "Req. built sparring ring.");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
 		else addButtonDisabled(5, "Give Gems", "Req. sparring with Evangeline at least once.");
-		//if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2 && !(player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.TransformationImmunityAtlach) || player.hasPerk(PerkLib.TransformationImmunityFairy) || player.hasPerk(PerkLib.BlessingOfTheAncestorTree))) addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
-		//else if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.TransformationImmunityAtlach) || player.hasPerk(PerkLib.TransformationImmunityFairy) || player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) addButtonDisabled(8, "I.Mutations", "You are immune to transformatives, as such, you can't mutate!");
-		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2) addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
-		else addButtonDisabled(8, "I.Mutations", "Req. Evangeline been lvl 6+.");
+		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.TransformationImmunityAtlach) || player.hasPerk(PerkLib.TransformationImmunityFairy) || player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) addButtonDisabled(8, "I.Mutations", "You are immune to transformatives, as such, you can't mutate!");
+		else addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
 	}
 	else {
 		addButtonDisabled(3, "Spar", "Req. 5%+ affection and built sparring ring.");
@@ -224,7 +222,7 @@ public function meetEvangeline():void {
 	}
 	else addButtonDisabled(12, "???", "Req. to be Jiangshi.");
 	if (player.hasKeyItem("Soul Gem Research") >= 0) {
-		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", recivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
+		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", receivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
 		if (!player.hasStatusEffect(StatusEffects.SoulGemCrafting)) addButton(13, "Soul Gem", craftingSoulGem).hint("Ask Evangeline for crafting Soul Gem.");
 	}
 	else addButtonDisabled(13, "???", "Req. to acquire Soul Gem Research materials first.");
@@ -964,6 +962,18 @@ private function curingJiangshi():void {
 		player.horns.count = 0;
 		player.arms.type = Arms.HUMAN;
 		player.lowerBody = LowerBody.HUMAN;
+		if (player.hasPerk(PerkLib.CursedTag)) {
+			player.removePerk(PerkLib.CursedTag);
+			player.perkPoints += 1;
+		}
+		if (player.hasPerk(PerkLib.ImprovedCursedTag)) {
+			player.removePerk(PerkLib.ImprovedCursedTag);
+			player.perkPoints += 1;
+		}
+		if (player.hasPerk(PerkLib.GreaterCursedTag)) {
+			player.removePerk(PerkLib.GreaterCursedTag);
+			player.perkPoints += 1;
+		}
 		player.removePerk(PerkLib.HaltedVitals);
 		player.removePerk(PerkLib.SuperStrength);
 		player.removePerk(PerkLib.PoisonNails);
@@ -973,7 +983,7 @@ private function curingJiangshi():void {
 		player.removePerk(PerkLib.EnergyDependent);
 		player.statStore.removeBuffs("Energy Vampire");
 		outputText("Done with this place you head back to camp.\n\n");
-		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent)</b>\n\n");
+		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent"+(player.hasPerk(PerkLib.CursedTag)?", Cursed Tag":"")+")</b>\n\n");
 		player.strtouspeintwislibsenCalculation2();
 		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
 		doNext(camp.returnToCampUseTwoHours);
@@ -1007,7 +1017,7 @@ private function craftingSoulGem():void {
 		doNext(meetEvangeline);
 	}
 }
-private function recivingCraftedSoulGem():void {
+private function receivingCraftedSoulGem():void {
 	clearOutput();
 	outputText("As you check on Evangeline she hands a purplish crystal to you.\n\n");
 	outputText("\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"\n\n");
@@ -1037,7 +1047,7 @@ private function InternalMutations():void {
 		addButton(3, "Yes", InternalMutationsTak);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		outputText("\"<i>Did you bring gems or find vial of the mutagen?</i>\" she asks.\n\n");
+		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
 		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
 		menu();
 		addButton(0, "Back", meetEvangeline);
@@ -1049,7 +1059,7 @@ private function InternalMutations():void {
 }
 private function InternalMutationsNie():void {
 	outputText("\n\nYour confused look annoys Evangeline to no end.");
-	outputText("\n\n\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"");
+	outputText("\n\n\"<i>That's fine, but trust me, you really will want my help on this, eventually.</i>\"");
 	EvangelinePeepTalkOnInternalMutations = 1;
 	doNext(meetEvangeline);
 }
@@ -1066,21 +1076,21 @@ private function InternalMutationsGemsOrMutagen():void {
 private function InternalMutations0(page:int = 0):void {
 	menu();
 	var menuItems:Array = [];
-	menuItems.push("Heart", InternalMutationsHeart);
-	menuItems.push("Muscle", InternalMutationsMuscle);
-	menuItems.push("Mouth", InternalMutationsMouth);
-	menuItems.push("Adrenal Glands",InternalMutationsAdrenals);
-	menuItems.push("Bloodstream",InternalMutationsBloodstream);
-	menuItems.push("Fat and Tissue", InternalMutationsFaTissue);
-	menuItems.push("Lungs",InternalMutationsLungs);
-	menuItems.push("Metabolism", InternalMutationsMetabolism);
-	menuItems.push("Ovaries", InternalMutationsOvaries);
-	menuItems.push("Testicles", InternalMutationsTesticles);
-	menuItems.push("Eyes", InternalMutationsEyes);
-	menuItems.push("Nerv/Sys", InternalMutationsPNervSys);
+	menuItems.push("Heart", InternalMutationsHeart, "Heart Mutations");
+	menuItems.push("Muscle", InternalMutationsMuscle, "Muscle Mutations");
+	menuItems.push("Mouth", InternalMutationsMouth, "Mouth Mutations");
+	menuItems.push("Adrenal Glands",InternalMutationsAdrenals, "Adrenals Mutations");
+	menuItems.push("Bloodstream",InternalMutationsBloodstream, "Bloodstream Mutations");
+	menuItems.push("Fat and Tissue", InternalMutationsFaTissue, "FaT Mutations");
+	menuItems.push("Lungs",InternalMutationsLungs, "Lungs Mutations");
+	menuItems.push("Metabolism", InternalMutationsMetabolism, "Metabolism Mutations");
+	menuItems.push("Ovaries", InternalMutationsOvaries, "Ovaries Mutations");
+	menuItems.push("Testicles", InternalMutationsTesticles, "Testicles Mutations");
+	menuItems.push("Eyes", InternalMutationsEyes, "Eyes Mutations");
+	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "PNerv-Sys Mutations");
 	//Next Page
-	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
-	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
+	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow, "Bone Mutations");
+	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
 	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
 	menuGen(menuItems, page, meetEvangeline, false);
 
@@ -1271,7 +1281,7 @@ private function InternalMutations0(page:int = 0):void {
 
 private function Experiments():void {
 	clearOutput();
-	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
+	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of the finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
 	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	menu();
 	addButtonDisabled(0, "BL/BB Plus", "Bimbo Liquer Plus / Bro Brew Plus");

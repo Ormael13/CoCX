@@ -118,6 +118,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const TENTACLE_EYESTALKS:int = 7;
+		EnumValue.add(Memories, TENTACLE_EYESTALKS, "TENTACLE_EYESTALKS", {
+			id: "Gazer Tentacle Eyestalks Rear Body",
+			name: "Gazer Tentacle Eyestalks",
+			cost: 100,
+			title: "Gazer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.RearBodyTentacleEyestalks;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

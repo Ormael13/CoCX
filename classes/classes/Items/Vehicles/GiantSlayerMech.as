@@ -15,18 +15,18 @@ package classes.Items.Vehicles
 		
 		public function GiantSlayerMech() 
 		{
-			super("GS Mech", "GiantSlayerMech", "Giant Slayer Mech", "a Giant Slayer Mech", 0, 0, 2000, "A customisable goblin invention, this bipedal, large mech is equipped with a comfortable seat, fit for a goblin or a rather small person. Within it you feel like you could kill gods or well gigants... \n\nType: Goblin Mech \nBase value: 500","Mech");
+			super("GS Mech", "GiantSlayerMech", "Giant Slayer Mech", "a Giant Slayer Mech", 0, 0, 2000, "A customisable goblin invention, this bipedal, large mech is equipped with a comfortable seat, fit for a goblin or a small person. Within it you feel like you could kill gods or well gigants... \n\nType: Goblin Mech \nBase value: 2000","Mech");
 		}
 		
 		override public function canUse():Boolean {
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.elfScore() >= 11) { //Elf
+			if (game.player.elfScore() >= 11 || game.player.woodElfScore() >= 22) { //Elf
 				outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}
-			if (game.player.tallness > 48 || game.player.tailType != Tail.NONE || game.player.wings.type != Wings.NONE) { //Taller than 4 ft
+			if (game.player.tallness > 66 || !game.player.haveWingsForWingSlap()) { //Taller than 5'6" ft
 				outputText("Your current size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				return false;
 			}

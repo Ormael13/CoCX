@@ -1,6 +1,14 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 	
 public class TifaFollower extends NPCAwareContent
@@ -57,7 +65,7 @@ public function tifaMainMenuTalkReturn():void {
 	addButton(0, "Her", tifaMainMenuTalkHer);
 	addButton(1, "Bee life?", tifaMainMenuTalkBeeLife);
 	addButton(2, "Relations", tifaMainMenuTalkRelations);
-	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.beeScore() >= 9) addButton(2, "Handmaiden", tifaMainMenuTalkRelations).hint("Become her handmaiden.");
+	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.beeScore() >= 14) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
 	else if (flags[kFLAGS.TIFA_FOLLOWER] > 9) addButtonDisabled(3, "Handmaiden", "You're already her handmaiden.");
 	else addButtonDisabled(3, "Handmaiden", "Become her handmaiden. (Req. female or herm bee morph and discussed all conversation at least once, also have an affection rating with Tifa of 100)");
 	addButton(4, "Back", tifaMainMenu);
@@ -114,9 +122,12 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("You’ll definitely accept to be hers for life.\n\n");
 	outputText("\"<i>Then… then pleazzze have thizzz… I… I kept thizzz item in cazzze zzzomeday I would need it. Thizzz izzz some of my own royal jelly and it should allow you to become the firzzzt true member of my hive and my mozzzt cherizzzhed handmaiden.</i>\"\n\n");
 	outputText("She hands you a small candy like item. The way she’s saying it, it's almost as awkward as a wedding proposal but you already know your answer is a yes. \n\n");
-	outputText("\n\n");
-	outputText("\n\n");
-	outputText("\n\n");
+	outputText("You take a deep breath before accepting the candy from your insectoid lover. It is a small, round and shaped like a teardrop, about an inch long and half an inch thick. You put it in your mouth. It is soft and sweet, but has a bit of a sour aftertaste. After a few moments, you feel like your head is spinning, and you lie back down on the flower while Tifa moves over you and gently caresses your face with her chitin covered arms. ");
+	outputText("Suddenly your whole body start to ache, then burn. You look down at yourself to see what is happening, only to see a layer of "+(player.coatColor == "black"?"brown":"black")+" chitin slowly growing across your torso, in the same places as a true bee! Looks like you’re turning into a full bee now.\n\n");
+	outputText("Your energy rapidly fades as more of your body changes. You try to steady your breathing while the transformation progresses. It isn’t easy, especially when something fundamental about your pussy changes, and you feel something viscous start to flow out of it. Thankfully, it isn’t gasps of pain that are making it hard to take deep breaths anymore, but gasps of pleasure. ");
+	outputText("You can’t wait to feel another part of your body rearrange itself and to experience the rush of new feelings from them. The sensations from your new honeypot in particular are almost overwhelming and every few moments another torrent of honey sprays out.\n\n");
+	outputText("Eventually, the transformation ends, and you open your eyes again. Still dizzy you try to stand back up. You look over your body, and find that you have indeed become just like a handmaiden. You push out your lips a bit and find that yes, you now have luscious black lips. Your whole body is now covered in chitin plating, in the same way as a true bees would be. Finally, you check your womanhood and find that it is now secreting honey, not unlike the bee maidens surrounding Tifa. ");
+	outputText("You are a bit surprised to find that the honey’s scent doesn’t seem to be affecting you anymore. At least not as strongly as before. Now, however, is the time for you to take on your role as Tifa’s lover and so you ask what happens next.\n\n");
 	outputText("\"<i>Now that you are part of my brood I will fill you with my eggzzz so that you can find proper incubatorzzz for them to gezzztate.</i>\"\n\n");
 	outputText("Whoa! To your surprise, her abdomen has indeed grown to double its original size while you were changing and so she explains.\n\n");
 	outputText("\"<i>I already had ahem... fertilizzzerzzz I took from back home for when the time would be right. However to truly become a queen I will need to empty my abdomen at leazzzt once. Afterward, my abdomen will only keep expanding up to the sizzze of my mother’zzz so long azzz I keep nourishing it, do not worry about the nourishment, I already zzzent an emizzzary to my zzzizzzter to obtain zzzpare dronezzz.</i>\"\n\n");
@@ -126,7 +137,21 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted from the ordeal. Tifa is tired too, likely because it's her first time. You lean on her a little, still panting and she caresses your hair in response.\n\n");
 	outputText("\"<i>Well, we are in thizzz for the better and the worzzze. I love you [name], now and until death do uzzz part.</i>\"\n\n");
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
-	//code for body changes ^^
+	player.antennae.type == Antennae.BEE;
+	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
+	player.tailType = Tail.NONE;
+	player.arms.type = Arms.BEE;
+	player.lowerBody = LowerBody.BEE;
+	//player.tongue.type = Tongue.ELF;
+	player.wings.type = Wings.BEE_LARGE;
+	player.horns.type = Horns.NONE;
+	player.horns.count = 0;
+	player.rearBody.type = RearBody.NONE;
+	player.killCocks(-1);
+	//player.createPerk(PerkLib.,0,0,0,0) - tf immunity perk
+	player.removeAllRacialMutation();
+	outputText("\n\n");
+	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(tifaMainMenuTalkReturn);
 }
 public function tifaMainMenuTalkBecomeHerHandmaidenNo():void {
@@ -191,19 +216,19 @@ public function tifaMainMenuSexBreastPlay():void {
 	outputText("In your lust riddled haze you can’t help but fawn over Tifa’s stellar body. Her large breasts, soft delicate skin, those plump thighs, and that slick blessing of a honeypot in between her legs. Just thinking about getting an ample helping of her lavish banquet causes you to start drooling, unbeknownst to you.\n\n\"<i>[name], what izzz it your thinking about? You’re drooling. Izzz my body really that entizzzing to you?</i>\" ");
 	outputText("Tifa giggles as she wipes away the line of drool from your mouth. Her actions only emphasize that supple body of hers. The way she moves her body to press against yours as she wipes away your drool, her arm squishing her breasts together making them more pronounced, the slight bend in her form, the playful glint in her eyes, and that sweet enrapturing smell of honey protruding from her body is overwhelming your senses. You MUST have her!\n\n");
 	outputText("\"<i>Oh~, [name], that look in your eye izzz a bit worryi-</i>\" You cut her off as you grab her arm and pull her in, locking lips with the bee woman and pressing her head into yours so she can’t pull back. At first, the speed and ferocity of your sudden attack startled Tifa, her wings rapidly beating in hopes of pulling away from you but you never let up. Eventually, your kissing prowess melted away her resistance, and now she can’t help but moan as she pushes her body into you, making it clear she wants you. ");
-	outputText("You immediately take control of the kiss, your tongue breaking through her lips and dominating her tongue. You’re relentless in your conquest, roving your tongue over every crevice of her mouth while holding her against you.\n\n");
+	outputText("You immediately take control of the kiss, your tongue breaking through her lips and dominating her tongue. You’re relentless in your conquest, roving your tongue over every crevice of her mouth while holding her against you."+(pcGotTentaclesForFun()?" Your "+(player.stamenCocks()>0?"vines":"tentacles")+" roaming over every bit of that delicious skin, teasing and tickling every bit of flesh they encounter.":"")+"\n\n");
 	outputText("You finally pull back, having finished ravaging her oral cavern and ready to move on to your main conquest. Tifa looks delirious as she reels from your assault, unable to speak as she tries to regain her breath. You’re far from done with her. Licking your lips, that sweet aroma renews its assault on your senses. It seems she enjoyed being played with so roughly, the slutty bitch. Getting another eyeful of her alluring body, an idea pops into your head.\n\n");
-	outputText("\"<i>[name], I-</i>\" you quickly silence her with a quick kiss, telling her that you’ll take good care of her. She makes to reply but then stops herself, allowing you to take the lead.\n\n");
-	outputText("You softly lay her on the ground, once again reassuring her that she’ll love this and kiss her on the forehead. "+(player.isNaked()?"":"You remove your [armor], making sure to give her a show by slowly removing each piece and revealing your tantalizing [skin]. ")+"Her eyes drink in your form with painfully obvious want, her honeypot doing its best to imitate a broken dam as honey pools beneath her. With the obvious sign that she’s ready and her delectable body at your mercy, you set about your work.\n\n");
-	outputText("You lock lips with her again, softly this time, your tongues entwining and coiling. Your fingers play down her chest, teasing her skin. You reach her drooling slit and penetrate her with two fingers. She gasps and pulls you closer, her hips bucking into your fingers. It’s a wonder she could control herself for so long. Nevertheless, you smile at her display of need for you and drive your fingers deeper, hilting them. Her body lurches in a mini-orgasm, and you collect as much honey as you can on your fingers.\n\n");
+	outputText("\"<i>[name], I-</i>\" you quickly silence her with a quick kiss, telling her that you’ll take good care of her. She makes to reply but then stops herself, allowing you to take the lead.\n\nYou softly lay her on the ground, once again reassuring her that she’ll love this and kiss her on the forehead. ");
+	outputText(""+(player.isNaked()?"":"You remove your [armor], making sure to give her a show by slowly removing each piece and revealing your tantalizing [skin]. ")+"Her eyes drink in your form with painfully obvious want, her honeypot doing its best to imitate a broken dam as honey pools beneath her. With the obvious sign that she’s ready and her delectable body at your mercy, you set about your work.\n\nYou lock lips with her again, softly this time, your tongues entwining and coiling. Your fingers play down her chest, ");
+	outputText("teasing her skin"+(pcGotTentaclesForFun()?" along with your "+(player.stamenCocks()>0?"vines":"tentacles")+" as you set them back to work":"")+". You reach her drooling slit and penetrate her with two fingers. She gasps and pulls you closer, her hips bucking into your fingers. It’s a wonder she could control herself for so long. Nevertheless, you smile at her display of need for you and drive your fingers deeper, hilting them. Her body lurches in a mini-orgasm, and you collect as much honey as you can on your fingers.\n\n");
 	outputText("Pulling them free of her greedy muff, you give Tifa a good look at the mess she made. \"<i>W-why did you stop?</i>\" Tifa whines while thrusting her hips, hoping to get you back to pleasuring her. You only laugh and proceed to mount her mashing your chest against her. A final chaste kiss is planted on her lips before you go to work. You lather up her mounds with honey, paying special attention to those glorious peaks of hers. ");
 	outputText("Tifa gives you a confused look before arching her back in pleasure as you attack her now incredibly sensitive peaks, the bee’s honey working as you thought. It’s working so well that Tifa is practically screaming as your tongue is dragged over every inch of her breasts, tickling, sucking, licking, and teasing while you devour the delicacy that is her shameless lust.\n\n");
 	outputText("The honey has an effect of its own on you, spiking your want for her. Her cries are of the sweetest tune, her movements against your flesh ignites your nerves. All of these feelings at once make you lose yourself to your lust for her, nothing matters apart from her screams of want and desire.\n\n");
 	outputText("Your hand shoots down to her leaking lips again, this time three fingers dive in and fuck her pussy, your only desire is to hear her orgasmic cries again. Remorseless in your aim, Tifa is helpless against the wonton onslaught of your skilled digits and she soon convulses in orgasmic rapture, her screams of release echoing off into the distance. Collecting the copious amounts of fluids. ");
 	outputText("You slather her breasts again, coating them with her sweet nectar and move to devour it again. Not willing to go a second without hearing her blissful cries, your hand plunges into her depth once more to excavate more of her precious liquid. You think you can hear Tifa begging you for something, but you don’t care what it is. Those aren’t her moans and cries of pleasure, they mean nothing to you.\n\n");
 	outputText("Soon she’s reduced to pathetic whimpers and hoarse whispers, her body falling to your reckless assault on her senses. Eventually you can’t ignore your lust and ");
-	if (player.hasCock()) outputText("grab your [cock biggest]"+(player.cocks.length > 1?" and [cock biggest2]":"")+" jerking them vehemently.");
-	else outputText("plunge your honey coated digits into your [vagina].");
+	if (player.hasCock()) outputText("grab your [cock biggest]"+(player.cocks.length > 1?" and [cock biggest2]":"")+" jerking them vehemently"+(pcGotTentaclesForFun()?" while you divert some of your tentacles towards your own needs, penetrating your [ass], teasing your chest"+(player.biggestTitSize()>0?" [breasts]":"")+", and forcing one to fuck your throat while the rest shamelessly play with Tifa’s vulnerable body":"")+".");
+	else outputText("plunge your honey coated digits into your [vagina]"+(pcGotTentaclesForFun()?" and divert some of your tentacles towards your needs, plunging them into your [ass], teasing your chest"+(player.biggestTitSize()>0?" [breasts]":"")+", and forcing one to fuck your throat while the rest shamelessly plays with Tifa’s vulnerable body":"")+".");
 	outputText("It doesn’t take long for you to reach your peak, ");
 	if (player.hasVagina()) outputText("your cunt divulging its lusty payload all over Tifa’s abdomen"+(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING?" your cunt squirting its lusty payload all over Tifa’s chest":"")+"");
 	if (player.gender == 3) outputText(" and ");
@@ -219,6 +244,9 @@ public function tifaMainMenuSexBreastPlay():void {
 	if (player.hasVagina()) player.sexReward("Default", "Vaginal", true, false);
 	tifaAffection(10);
 	doNext(tifaMainMenuTalkReturn);
+}
+private function pcGotTentaclesForFun():Boolean {
+	return player.lowerBody == LowerBody.FLOWER_LILIRAUNE || player.tentacleCocks() > 0 || player.stamenCocks() > 0;
 }
 	}
 }

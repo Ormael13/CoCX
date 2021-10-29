@@ -363,9 +363,9 @@ import flash.utils.getQualifiedClassName;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
 			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-			if (hasPerk(MutationsLib.LizanMarrowFinalForm)) min -= maxHP() * 0.05;
+			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
 			if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) min -= maxHP() * 0.02;
+			if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;
@@ -772,10 +772,19 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+				if (hasPerk(PerkLib.EnemyBossType)) {
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 200;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 1600;
+				}
+				else {
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+					
+				}
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
@@ -882,7 +891,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function canMonsterBleed():Boolean
 		{
-			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType);
+			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType);
 		}
 
 		/**
@@ -1730,7 +1739,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) outputText("' attacks ");
 				else outputText("'s attack ");
 				outputText("with your [weapon].\n");
-				if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") && game.player.wrath >= 2) {
+				if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
 					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
 					SceneLib.combat.basemeleeattacks();
 				}
@@ -2170,7 +2179,7 @@ import flash.utils.getQualifiedClassName;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
-			EngineCore.doNext(SceneLib.camp.returnToCampUseEightHours);
+			EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
 		}
 
 		/**
@@ -2392,7 +2401,7 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(MutationsLib.LizanMarrow) || hasPerk(MutationsLib.LizanMarrowEvolved) || hasPerk(MutationsLib.LizanMarrowFinalForm) || hasPerk(MutationsLib.DraconicHeartFinalForm) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(MutationsLib.LizanMarrow) || hasPerk(MutationsLib.LizanMarrowPrimitive) || hasPerk(MutationsLib.LizanMarrowEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
@@ -2403,12 +2412,12 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.VladimirRegalia) && isNightTime()) healingPercent += 5;
 				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
 				if (hasPerk(MutationsLib.LizanMarrow) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
-				if (hasPerk(MutationsLib.LizanMarrowEvolved) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
-				if (hasPerk(MutationsLib.LizanMarrowFinalForm) && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
+				if (hasPerk(MutationsLib.LizanMarrowPrimitive) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
+				if (hasPerk(MutationsLib.LizanMarrowEvolved) && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
 					healingPercent += 1.5;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
-				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) healingPercent += 1;
+				if (hasPerk(MutationsLib.DraconicHeartEvolved)) healingPercent += 1;
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
 				if (hasPerk(PerkLib.BodyCultivator)) healingPercent += 0.5;
@@ -2421,7 +2430,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.MonsterRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				if (hasPerk(PerkLib.Diehard) && !hasPerk(PerkLib.EpicDiehard) && this.HP < 1) healingPercent -= 1;
-				if (hasPerk(MutationsLib.LizanMarrowFinalForm) && this.HP < 1) healingPercent -= 1;
+				if (hasPerk(MutationsLib.LizanMarrowEvolved) && this.HP < 1) healingPercent -= 1;
 				if (hasStatusEffect(StatusEffects.BloodRequiem) && healingPercent > 0) {
 					if (hasPerk(PerkLib.EnemyConstructType) || hasPerk(PerkLib.EnemyElementalType) || hasPerk(PerkLib.EnemyFleshConstructType) || hasPerk(PerkLib.EnemyGhostType)) healingPercent *= 0.8;
 					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
@@ -2467,8 +2476,8 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
 				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) manaRecovery += 4;
 				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 4;
-				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) manaRecovery += 4;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}
@@ -2482,8 +2491,8 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaRecovery += 40;
 				if (hasPerk(PerkLib.ArcaneRegenerationMythical)) manaRecovery += 50;
 				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 5;
+				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) manaRecovery += 5;
 				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 5;
-				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) manaRecovery += 5;
 				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
 				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
@@ -3257,7 +3266,7 @@ import flash.utils.getQualifiedClassName;
 			//This function doesn’t take the gems away from the player, it just provides the output text
 			if (SceneLib.prison.inPrison) {
 				SceneLib.prison.doPrisonEscapeFightLoss();
-				return 8;
+				return 6;
 			}
 			if (!inDungeon) {
 				if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
@@ -3271,7 +3280,7 @@ import flash.utils.getQualifiedClassName;
 						SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
 					}
 				}
-				outputText("\n\nYou'll probably come to your senses in eight hours or so");
+				outputText("\n\nYou'll probably come to your senses in six hours or so");
 				if (player.gems > 1)
 					outputText(", missing " + gemsLost + " gems.");
 				else if (player.gems == 1)
@@ -3286,12 +3295,12 @@ import flash.utils.getQualifiedClassName;
 					outputText(", but after checking your gem pouch, you realize you're missing your only gem.");
 				else outputText(".");
 			}
-			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
+			return 6; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an six hour blackout
 		}
 		public function prepareForCombat():void {
 			var bonusStatsAmp:Number = 0.6;
 			if (hasPerk(MutationsLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
-			if (hasPerk(MutationsLib.MantislikeAgilityEvolved)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
+			if (hasPerk(MutationsLib.MantislikeAgilityPrimitive)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
 			if (level > 25) bonusStatsAmp += 0.3*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();
@@ -3441,4 +3450,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

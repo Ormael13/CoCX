@@ -57,7 +57,7 @@ public function treeMenu():void {
 			if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("\"<i>I can't remember the last time I did something like this. Let me help too!</i>\" Marble says.\n\n");
 			if (arianScene.arianFollower()) outputText("\"<i>What's this [name]? You're putting ornaments on the tree?</i>\" Arian asks, puzzled.\n\n");
 			if (followerKiha()) outputText("\"<i>Geez can you go any slower [name]? Bet I can get this done faster than you can blink!</i>\" Kiha boasts.\n\n");
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) outputText("\"<i>So this is what you've been up to. Well, I can't deny that this looks interesting. Let me help too.</i>\" Chi Chi offers.\n\n");
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("\"<i>So this is what you've been up to. Well, I can't deny that this looks interesting. Let me help too.</i>\" Chi Chi offers.\n\n");
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("\"<i>Oh? I've never since something like this before. Is it normal to put decorations on a tree like this?</i>\" Samirah asks while looking at the tree.\n\n");
 			outputText("It takes a few hours but soon the tree is finally fully decorated from top to bottom. You step back, admiring your hard work. The now decorated tree somehow adds a little more color to camp, making it another fine addition. The way the ornaments and garland shimmer in the light really brings out the beauty and joy of the season.");
 			player.removeKeyItem("Decorations");

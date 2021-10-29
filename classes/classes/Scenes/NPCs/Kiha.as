@@ -358,13 +358,22 @@ public class Kiha extends Monster
 			this.wings.type = Wings.DRACONIC_LARGE;
 			this.wings.desc = "huge";
 			this.tailType = Tail.LIZARD;
-			this.abilities = [
-				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
-				{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
-				{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
-				{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
-				{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
-			];
+			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) ( 
+				this.abilities = [
+					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
+					{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
+				] 
+			);
+			else ( 
+				this.abilities = [
+					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
+					{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
+				] 
+			);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
@@ -398,7 +407,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 9) {
-				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) {
@@ -410,7 +419,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 12) {
-				this.createPerk(MutationsLib.LizanMarrowFinalForm, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) {

@@ -26,7 +26,7 @@ public class IceElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
 			}
 		}
 		
@@ -43,8 +43,8 @@ public class IceElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The strikes connect, hitting you directly in the chest. ");
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
 			}
 		}
 		

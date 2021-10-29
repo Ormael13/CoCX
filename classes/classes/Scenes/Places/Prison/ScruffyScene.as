@@ -291,7 +291,7 @@ package classes.Scenes.Places.Prison
 				if(player.hasVagina())
 				{
 					player.cuntChange(20, true, true, false);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 				}
 				else
 				{

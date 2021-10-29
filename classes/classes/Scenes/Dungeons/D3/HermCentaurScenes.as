@@ -252,7 +252,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			player.orgasm();
 			dynStats("cor+", 5);
 			player.sexReward("vaginalFluids");
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
             cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }

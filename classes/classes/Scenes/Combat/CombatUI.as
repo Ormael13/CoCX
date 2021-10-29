@@ -118,6 +118,13 @@ public class CombatUI extends BaseCombatContent {
 				else btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.");
 				if (combat.isEnnemyInvisible) btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
 			}
+			else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
+				if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
+				else {
+					if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+					else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
+				}
+			}
 			else {
 				if (monster.isFlying()) {
 					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling))) {
@@ -125,13 +132,6 @@ public class CombatUI extends BaseCombatContent {
 							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon()) {
 								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
-							}
-							else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling)) {
-								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
-								else {
-									if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
-									else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.");
-								}
 							}
 							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
 						}
@@ -170,7 +170,7 @@ public class CombatUI extends BaseCombatContent {
 			case "Dual Firearms":
 				if (player.ammo <= 0)
 					btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
-				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>");
 				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			default:
@@ -181,7 +181,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
 				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
-					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>");
 					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
 				}
 				else btnRanged.disable("You could use your ranged weapon while piloting the goblin mech if you have firearms.");
@@ -196,7 +196,7 @@ public class CombatUI extends BaseCombatContent {
 
 		// Submenus
 		function vampireBiteDuringGrapple(Position:int):void {
-			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsPrimitive)) {
 				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(Position).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -293,7 +293,7 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease).hint("Deals lesser lust damage. Does not break hypnosis.");
-			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsPrimitive)) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -346,7 +346,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.Straddle)) {
 			menu();
 			addButton(0, "Tease", combat.StraddleTease).hint("Use a powerful teasing attack");
-			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsPrimitive)) {
 				addButton(1, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(1).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -425,7 +425,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.GrabBear)) {
 			menu();
 			addButton(0, "Hug", combat.bearHug).hint("Crush your opponent with a bear hug. \n\nFatigue Cost: " + physicalCost(30) + "");
-			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
+			if (player.hasPerk(MutationsLib.HollowFangsPrimitive)) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
@@ -528,6 +528,9 @@ public class CombatUI extends BaseCombatContent {
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
 			}
+			if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || (player.weaponRange == weaponsrange.TRJAVEL && player.ammo <= 10)) {
+				btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
+			}
 		}
 	}
 
@@ -537,7 +540,7 @@ public class CombatUI extends BaseCombatContent {
 
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
 			bd = buttons.add("M.Bolt", combat.magic.spellMagicBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 			if (player.mana < spellCost(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -548,7 +551,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("M.Bolt(Ex)", combat.magic.spellEdgyMagicBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Magic Bolt");
 				if (player.mana < spellCost(40)) {
 					bd.disable("Your mana is too low to cast this spell.");
@@ -563,7 +566,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
 			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
 			else bd.hint("Attempt to attack the enemy with elemental bolt.  Damage done is determined by your intelligence.", "Elemental Bolt");
 			if (player.mana < spellCost(80)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -574,7 +577,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("E.Bolt(Ex)", combat.magic.spellEdgyElementalBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Elemental Bolt");
 				if (player.mana < spellCost(80)) {
 					bd.disable("Your mana is too low to cast this spell.");
@@ -621,6 +624,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.UBERWEB)) {
 			addButton(6, "M. Special", submenuMagSpecials);
 		}
+		addButton(14, "Surrender", combat.surrender).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
 		if (player.hasStatusEffect(StatusEffects.Bound)) {
 			btnStruggle.call((monster as Ceraph).ceraphBindingStruggle);
 			btnBoundWait.call((monster as Ceraph).ceraphBoundWait);
@@ -753,3 +757,4 @@ public class CombatUI extends BaseCombatContent {
 	}
 }
 }
+

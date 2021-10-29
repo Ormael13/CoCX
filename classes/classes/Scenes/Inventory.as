@@ -1283,7 +1283,7 @@ use namespace CoC;
 
 		}
 		//Unequip!
-		private function unequipWeapon():void {
+		public function unequipWeapon():void {
 			if (player.weaponName == "Aether (Dex)") {
 				player.weapon.removeText();
 				player.setWeapon(WeaponLib.FISTS);
@@ -1292,7 +1292,7 @@ use namespace CoC;
 			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
-		private function unequipWeaponRange():void {
+		public function unequipWeaponRange():void {
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
@@ -1802,4 +1802,4 @@ use namespace CoC;
 			player.itemSlots[slotNum].setItemAndQty(itype, qty);
 		}
 	}
-}
+}

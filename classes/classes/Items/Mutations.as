@@ -65,7 +65,7 @@ public final class Mutations extends MutationsHelper {
     public function DrunkenPowerEmpowerOni():Number {
         var bonusempoweroni:Number = 12;
         if (player.hasPerk(MutationsLib.OniMusculature)) bonusempoweroni -= 6;
-        if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) bonusempoweroni -= 3;
+        if (player.hasPerk(MutationsLib.OniMusculaturePrimitive)) bonusempoweroni -= 3;
         return bonusempoweroni;
     }
 
@@ -74,10 +74,10 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("str", 2 + rand(3));
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("str", 2 + rand(3));
         else AlchemyBonus("str", 1 + rand(2));
         if (rand(3) == 0) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(player.maxToneCap(), 6));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) outputText(player.modTone(player.maxToneCap(), 6));
             else outputText(player.modTone(player.maxToneCap(), 3));
         }
         player.refillHunger(10);
@@ -89,10 +89,10 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe", 2 + rand(3));
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("spe", 2 + rand(3));
         else AlchemyBonus("spe", 1 + rand(2));
         if (rand(3) == 0) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(player.maxToneCap(), 6));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) outputText(player.modTone(player.maxToneCap(), 6));
             else outputText(player.modTone(player.maxToneCap(), 3));
         }
         player.refillHunger(5);
@@ -102,17 +102,17 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You use the incense and sit to meditate as the perfume of flowers and fruits fill the area. You see visions of things you could do and things you could’ve done good and bad, and when you open your eyes you realise you found new insight on your goals.");
         if (rand(3) == 0) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(15, 2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) outputText(player.modTone(15, 2));
             else outputText(player.modTone(15, 1));
         }
         if (player.wis < 50) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe", 2 + rand(7));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("spe", 2 + rand(7));
             else AlchemyBonus("wis", 1 + rand(4));
         } else if (player.wis < 100) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe", 2 + rand(5));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("spe", 2 + rand(5));
             else AlchemyBonus("wis", 1 + rand(3));
         } else {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe", 2 + rand(3));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("spe", 2 + rand(3));
             else AlchemyBonus("wis", 1 + rand(2));
         }
     }/*
@@ -135,17 +135,17 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You prepare the tea and drink it. It would seem that Ayane didn’t lie to you as a pink haze settle in your mind leaving you not only aroused but highly inspired. Images of sensual caresses and passionate lovemaking come and go in your head, making you blush yet smile in anticipation. You can’t wait to try what you learned.");
         if (rand(3) == 0) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(15, 2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) outputText(player.modTone(15, 2));
             else outputText(player.modTone(15, 1));
         }
         if (player.lib < 50) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("lib", 2 + rand(7));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("lib", 2 + rand(7));
             else AlchemyBonus("lib", 1 + rand(4));
         } else if (player.lib < 100) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("lib", 2 + rand(5));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("lib", 2 + rand(5));
             else AlchemyBonus("lib", 1 + rand(3));
         } else {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) AlchemyBonus("lib", 2 + rand(3));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("lib", 2 + rand(3));
             else AlchemyBonus("lib", 1 + rand(2));
         }
         player.refillHunger(10);
@@ -157,7 +157,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventualy passes but you remain relatively less libidinous afterward.");
         player.buff("Curse").addStats( {"lib.mult": -0.05} ).permanent();
-		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) dynStats("lib", -4, "lus", -20);
+		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) dynStats("lib", -4, "lus", -20);
         else dynStats("lus", -10);
         player.addCurse("lib", 2, 1);
         player.refillHunger(15);
@@ -222,8 +222,8 @@ public final class Mutations extends MutationsHelper {
 
     public function smallangrypill(player:Player):void {
         clearOutput();
-        outputText("You pop the small pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) ? "40" : "20") + ")");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) player.wrath += 40;
+        outputText("You pop the small pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) ? "40" : "20") + ")");
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) player.wrath += 40;
         else player.wrath += 20;
         if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
@@ -231,8 +231,8 @@ public final class Mutations extends MutationsHelper {
 
     public function mediumangrypill(player:Player):void {
         clearOutput();
-        outputText("You pop the medium pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) ? "120" : "60") + ")");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) player.wrath += 120;
+        outputText("You pop the medium pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) ? "120" : "60") + ")");
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) player.wrath += 120;
         else player.wrath += 60;
         if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
@@ -240,8 +240,8 @@ public final class Mutations extends MutationsHelper {
 
     public function bigangrypill(player:Player):void {
         clearOutput();
-        outputText("You pop the big pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) ? "360" : "180") + ")");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) player.wrath += 360;
+        outputText("You pop the big pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) ? "360" : "180") + ")");
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) player.wrath += 360;
         else player.wrath += 180;
         if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
@@ -252,8 +252,8 @@ public final class Mutations extends MutationsHelper {
         var rand:int = Math.random() * 100;
         outputText("You pop the medium pill into your mouth and swallow. ");
         if (player.HP < player.maxOverHP()) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 6), true);
-            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) || player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 4.5), true);
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) HPChange(Math.round((50 + player.tou) * 6), true);
+            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagPrimitive)) || player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) HPChange(Math.round((50 + player.tou) * 4.5), true);
             else HPChange((50 + player.tou) * 3, true);
             outputText("Some of your wounds are healed. ");
         } else outputText("You feel an odd sensation. ");
@@ -275,8 +275,8 @@ public final class Mutations extends MutationsHelper {
         var rand:int = Math.random() * 100;
         outputText("You pop the big pill into your mouth and swallow. ");
         if (player.HP < player.maxOverHP()) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 18), true);
-            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) || player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 13.5), true);
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) HPChange(Math.round((50 + player.tou) * 18), true);
+            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagPrimitive)) || player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) HPChange(Math.round((50 + player.tou) * 13.5), true);
             else HPChange((50 + player.tou) * 9, true);
             outputText("Some of your wounds are healed. ");
         } else outputText("You feel an odd sensation. ");
@@ -4068,7 +4068,6 @@ public final class Mutations extends MutationsHelper {
         else outputText("pink");
         outputText(" potion, and its unnatural warmth immediately flows to your groin.");
         dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
-
         //Heat/Rut for those that can have them if "fuck draft"
         if (fuck) {
             //Try to go into intense heat.
@@ -4101,6 +4100,32 @@ public final class Mutations extends MutationsHelper {
         outputText("[pg]");
         player.refillHunger(5);
     }
+	
+	public function numbCandies(player:Player):void {
+		clearOutput();
+        outputText("You pop open the package of numb candies and dump it into your waiting mouth.  The strange candies fizzes and pops, leaving the nerves on your tongue feeling a bit deadened as you swallow the sweet mess.");
+		if (player.lust >= 33) {
+			outputText("\n\nThe numbness spreads through your body, bringing with it a sense of calm that seems to muffle your sexual urges.");
+			player.lust -= 10 + rand(20);
+		}
+		if (player.inHeat || player.inRut) {
+			outputText("\n\nAs the fizzing of the candy slowly dissipates, you can feel the effects of your carnal desires begin to fade as well.");
+			if (player.hasStatusEffect(StatusEffects.Heat)) {
+				if (player.statusEffectv3(StatusEffects.Heat) > 24) player.addStatusValue(StatusEffects.Heat, 3, -24);
+				else {
+					var heatR:Number = player.statusEffectv3(StatusEffects.Heat);
+					player.addStatusValue(StatusEffects.Heat, 3, -(heatR-1));
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.Rut)) {
+				if (player.statusEffectv3(StatusEffects.Rut) > 24) player.addStatusValue(StatusEffects.Rut, 3, -24);
+				else {
+					var rutR:Number = player.statusEffectv3(StatusEffects.Rut);
+					player.addStatusValue(StatusEffects.Rut, 3, -(rutR-1));
+				}
+			}
+		}
+	}
 
     public function gremlinBeer(player:Player):void {
         player.slimeFeed();
@@ -4287,7 +4312,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //skinTone
-        var gremlin_skin_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
+        var gremlin_skin_color:Array = ["light", "tan", "dark"];
         if (player.skin.base.color != "light" && player.skin.base.color != "tan" && player.skin.base.color != "dark" && changes < changeLimit && rand(2) == 0) {
             player.skin.base.color = randomChoice(gremlin_skin_color);
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");
@@ -5018,6 +5043,7 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
             }
             player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
+            changes++
         }
 
         if (player.vaginas.length == 1 && changes < changeLimit && rand(3) == 0) {
@@ -5055,23 +5081,23 @@ public final class Mutations extends MutationsHelper {
             player.antennae.type = Antennae.NONE;
             changes++;
         }
-        //9c) II The tongue (sensitivity bonus, stored as a perk?)
-        if (changes == 0 && player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
+        //9c) I The tongue (sensitivity bonus, stored as a perk?)
+        if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueSnake.applyEffect();
             player.addCurse("sen", 5, 1);
             changes++;
         }
-        //9c) III The fangs
-        if (changes == 0 && player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
+        //9c) II The fangs
+        if (player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.FaceSnakeFangs.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
-        //9c) I The tail ( http://tvtropes.org/pmwiki/pmwiki.php/Main/TransformationIsAFreeAction ) (Shouldn't we try to avert this? -Ace)
-        //Should the enemy "kill" you during the transformation, it skips the scene and immediately goes to tthe rape scene. (Now that I'm thinking about it, we should add some sort of appendix where the player realizes how much he's/she's changed. -Ace)
-        if (changes == 0 && player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && rand(4) == 0 && changes < changeLimit) {
+        //9c) III The tail ( http://tvtropes.org/pmwiki/pmwiki.php/Main/TransformationIsAFreeAction ) (Shouldn't we try to avert this? -Ace)
+        //Should the enemy "kill" you during the transformation, it skips the scene and immediately goes to the rape scene. (Now that I'm thinking about it, we should add some sort of appendix where the player realizes how much he's/she's changed. -Ace)
+        if (player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             CoC.instance.transformations.LowerBodySnake.applyEffect();
             changes++;
@@ -7338,7 +7364,7 @@ public final class Mutations extends MutationsHelper {
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be salamander.
         if (!player.hasPerk(PerkLib.HarpyWomb) && (player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.SALAMANDER) && player.tailType == Tail.SALAMANDER && rand(4) == 0 && changes < changeLimit) {
             player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
-            outputText("[pg]There's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
+            outputText("[pg]There's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy/salamander legs and a salamander tail.</b>)");
             changes++;
         }
         //-Salamander Legs
@@ -9727,7 +9753,7 @@ public final class Mutations extends MutationsHelper {
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
         if (player.hasPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
             player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
-            outputText("[pg]There's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
+            outputText("[pg]There's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a thunderbird tail.</b>)");
             changes++;
         }
         if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
@@ -13638,13 +13664,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //hips
-        if (rand(2) == 0 && player.hips.type < 11 && changes < changeLimit) {
+        if (rand(2) == 0 && player.hips.type < 12 && changes < changeLimit) {
             outputText("[pg]You stumble as you feel the bones in your hips grinding, expanding your hips noticeably.");
             player.hips.type += 1 + rand(2);
             changes++;
         }
         //ass
-        if (rand(2) == 0 && player.butt.type < 11 && changes < changeLimit) {
+        if (rand(2) == 0 && player.butt.type < 12 && changes < changeLimit) {
             outputText("[pg]Your ass grows in size, becoming bigger and more cushiony. A little fat to help you to endure the coming winter, perhaps.");
             player.butt.type += 1 + rand(2);
             changes++;
@@ -15207,7 +15233,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes wings!
-        if (player.rearBody.type == RearBody.SNAIL_SHELL && player.wings.type >= Wings.NONE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(2) == 0) {
+        if (player.rearBody.type == RearBody.SNAIL_SHELL && !(player.wings.type == Wings.NONE || player.wings.type == Wings.GARGOYLE_LIKE_LARGE) && changes < changeLimit && rand(2) == 0) {
             outputText("[pg]To your utter disappointment your wings are absorbed back into your shell. Guess there's no such things as flying snails.");
             transformations.WingsNone.applyEffect(false);
             changes++;

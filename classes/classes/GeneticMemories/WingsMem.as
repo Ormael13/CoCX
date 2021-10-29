@@ -261,6 +261,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const LEVITATION:int = 20
+		EnumValue.add(Memories, LEVITATION, "LEVITATION", {
+			id: "Levitation (Wings)",
+			name: "Levitation (Wings)",
+			cost: 100,
+			title: "Levitation",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsLevitation;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

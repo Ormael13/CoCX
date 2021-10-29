@@ -176,6 +176,20 @@ public class Hair extends BodyPart {
 		appearanceDesc: "Although your {hairInfo} looks mostly human, that notion is quickly discarded by its prismatic strands, varying in hue along their length to display all the colors of a rainbow."
 	});
 
+	public static const MINDBREAKER:int = 19;
+	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
+		name:"mindbreaker",
+		shortDesc: "slimy tentacle {hair}",
+		appearanceDesc: "Your {hairInfo} is made out of tentacles, only vaguely resembling the real deal."
+	});
+
+	public static const MINDBREAKERMALE:int = 20;
+	EnumValue.add(Types, MINDBREAKERMALE, "MINDBREAKERMALE", {
+		name:"mindbreaker",
+		shortDesc: "slimy tentacle {hair}",
+		appearanceDesc: "Smaller webbings frill along the top of your head, forming a crown-like ring. Along these frills are longer hair-like tentacles that reach down to drape past your shoulders, just above your pectorals."
+	});
+
 	// Additional modifiers for hair descriptions
 	public static var Styles:/*EnumValue*/Array = [];
 

@@ -152,47 +152,41 @@ import classes.Scenes.SceneLib;
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") 
-			{
+			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") {
 				outputText("You are carrying a large axe with you.");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
-			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) 
-			{
+			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 				outputText("You are carrying carpenter's box with you. It contains an axe.\n");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
-			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) 
-			{
+			if (camp.followerKiha()) {
+				outputText("You have someone who might help you. Kiha might be able to assist you.\n");
+				addButton(1, "Kiha", getHelpFromKiha);
+			}
+			if (silly() && player.str >= 70) {
+				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
+				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
+			}
+			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) {
 				if (player.weapon == weapons.RIPPER2) {
 					outputText("You are carrying a Ripper 2.0 with you.\n");
-					addButton(1, "Ripper 2.0", cutTreeMechTIMBER);
+					addButton(3, "Ripper 2.0", cutTreeMechTIMBER);
 				}
 				else if (player.weapon == weapons.RIPPER1) {
 					outputText("You are carrying a Ripper 1.0 with you.\n");
-					addButton(1, "Ripper 1.0", cutTreeMechTIMBER);
+					addButton(3, "Ripper 1.0", cutTreeMechTIMBER);
 				}
 				else {
 					outputText("You are carrying a Machined greatsword with you.\n");
-					addButton(1, "Mach.Greatsword", cutTreeMechTIMBER);
+					addButton(3, "Mach.Greatsword", cutTreeMechTIMBER);
 				}
 			}
-			if (player.isInGoblinMech())
-			{
+			if (player.isInGoblinMech()) {
 				outputText("You are in goblin mech that have sawblade as melee weapon.\n");
-				addButton(0, "Sawblade", cutTreeMechTIMBER);
+				addButton(4, "Sawblade", cutTreeMechTIMBER);
 			}
-			if (camp.followerKiha()) 
-			{
-				outputText("You have someone who might help you. Kiha might be able to assist you.\n");
-				addButton(2, "Kiha", getHelpFromKiha);
-			}
-			if (silly() && player.str >= 70) 
-			{
-				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
-				addButton(3, "Punch Tree", punchTreeMinecraftStyle);
-			}
-			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2))) {
+			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2) || buttonIsVisible(3) || buttonIsVisible(4))) {
 				outputText("<b>Unfortunately, there is nothing you can do right now.</b>");
 			}
 			addButton(14, "Leave", noThanks);
@@ -289,7 +283,10 @@ import classes.Scenes.SceneLib;
 				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
 				incrementStoneSupply(minedStones);
 				if (rand(2) == 0) inventory.takeItem(useables.TIN_ORE, camp.returnToCampUseTwoHours);
-				else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+				else {
+					if (rand(2) == 0) inventory.takeItem(useables.IRONORE, camp.returnToCampUseTwoHours);
+					else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+				}
 			}
 			else {
 				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
@@ -326,10 +323,10 @@ import classes.Scenes.SceneLib;
 		//Get help from Kiha.
 		private function getHelpFromKiha():void {
 			outputText("You recall Kiha wields an oversized axe. You call out for her. After a minute, she walks over to you and says \"<i>Yes, my idiot?</i>\" You tell her that you would like her to cut down some trees so you can haul the wood. She nods and yells \"<i>Stand back!</i>\" as you stand back while you watch her easily cut down not one but two trees! With the trees cut down, you and Kiha haul the wood back to your camp. ");
-			if (player.str < 33) outputText("It's a daunting task as you can only carry few of the wood at a time. Even Kiha is far superior to your carrying capacity as she can carry a lot of wood. \n\n");
-			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood. \n\n");
-			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!\n\n");
-			outputText("It takes some time but you eventually bring the last of wood back to your camp. \n\n");
+			if (player.str < 33) outputText("It's a daunting task as you can only carry few of the wood at a time. Even Kiha is far superior to your carrying capacity as she can carry a lot of wood.");
+			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood.");
+			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!");
+			outputText("\n\nIt takes some time but you eventually bring the last of wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
 			incrementWoodSupply(20 + Math.floor(player.str / 5));
 			fatigue(50, USEFATG_PHYSICAL);

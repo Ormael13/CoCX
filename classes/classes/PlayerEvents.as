@@ -254,6 +254,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.PCClone) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
 				if (player.statusEffectv1(StatusEffects.PCClone) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < 5) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
 			}
+			//
+			if (player.hasStatusEffect(StatusEffects.DinahGift)) {
+				if (player.statusEffectv1(StatusEffects.DinahGift) <= 0) player.removeStatusEffect(StatusEffects.DinahGift);
+				else player.addStatusValue(StatusEffects.DinahGift, 1, -1);
+			}
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
@@ -721,7 +726,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.beardLength > 0 && player.beardLength < 12) EventParser.growBeard(0.02);
 				}
 				//Clear dragon breath cooldowns!
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && !player.hasPerk(MutationsLib.DraconicLungsFinalForm)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && !player.hasPerk(MutationsLib.DraconicLungsEvolved)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) && !player.hasPerk(MutationsLib.DraconicLungs)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) && !player.hasPerk(MutationsLib.DraconicLungs)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) && !player.hasPerk(MutationsLib.DraconicLungs)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
@@ -879,8 +884,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests3) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
 				}
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) {
-					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 1, -3);
-					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
+					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, -3);
+					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, -3);
 				}
 				if (flags[kFLAGS.AURORA_LVL] > 0.3 && flags[kFLAGS.AURORA_LVL] < 0.7) flags[kFLAGS.AURORA_LVL] += 0.05;
 				//Zenji training conuters
@@ -904,6 +909,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Kaiba daily buy limit refresh
 				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
+				//Daily reset on finding blessed ittem(s) at the lake
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.removeStatusEffect(StatusEffects.BlessedItemAtTheLake);
 				//Player overheat is intensifying
 				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
 					var intensified:Boolean
@@ -947,9 +954,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
 					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
 					player.ballSize++;
-					if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)) {
+					if (player.hasPerk(MutationsLib.EasterBunnyEggBagPrimitive)) {
 						var changeLib:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
-						if (player.hasPerk(MutationsLib.EasterBunnyEggBagFinalForm)){
+						if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)){
 							changeLib = (player.ballSize*10/100)+1;
 							player.ballSize++;
 						}
@@ -994,7 +1001,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
-					if (player.hasPerk(MutationsLib.VampiricBloodsteamEvolved) && player.statusEffectv2(StatusEffects.VampireThirst) < 1) player.addStatusValue(StatusEffects.VampireThirst, 2, 1);
+					if (player.hasPerk(MutationsLib.VampiricBloodsteamPrimitive) && player.statusEffectv2(StatusEffects.VampireThirst) < 1) player.addStatusValue(StatusEffects.VampireThirst, 2, 1);
 					else vthirst.modSatiety(-1);
 				}
 				//Getting chrismas tree
@@ -1425,7 +1432,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Recharge venom/web pool
 			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA
-			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(MutationsLib.VenomGlandsEvolved) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
+			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(MutationsLib.VenomGlandsPrimitive) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
 				var venomHRecharge:Number = 0;
 				venomHRecharge += combat.venomCombatRecharge2();
 				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
@@ -1498,9 +1505,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Fenrir Eyes
 			if (CoC.instance.transformations.EyesFenrir.isPossible() && player.hasKeyItem("Gleipnir Collar") >= 0) {
 				outputText("\n");
-
 				CoC.instance.transformations.EyesFenrir.applyEffect();
-
 				outputText("\n");
 				needNext = true;
 			}
@@ -1801,7 +1806,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Ferocity
-			if (player.orcScore() < 11 && player.hasPerk(PerkLib.Ferocity) && !player.hasPerk(MutationsLib.OrcAdrenalGlandsFinalForm)) {
+			if (player.orcScore() < 11 && player.hasPerk(PerkLib.Ferocity) && !player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) {
 				outputText("\nYour natural ferocity starts vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, which might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
 				player.removePerk(PerkLib.Ferocity);
 				needNext = true;
@@ -1931,7 +1936,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && !player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) {
+			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && !player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
@@ -1959,8 +1964,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.woodElfScore() >= 22 || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
+				if (player.elfScore() >= 11 || player.woodElfScore() >= 22) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
 					var RHP:Number = 1;
@@ -1991,6 +1996,37 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.setVehicle(VehiclesLib.NOTHING);
 				inventory.takeItem(vehicles.HB_MECH, null);
 				needNext = true;
+			}
+			if (player.isGoblinoid() && (!player.statStore.hasBuff('DrugInjector') || !player.statStore.hasBuff('Power bracer'))) {
+				outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+				if (!player.statStore.hasBuff('DrugInjector')) {
+					if (player.hasKeyItem("Drug injectors")){
+						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
+					}
+					if (player.hasKeyItem("Improved Drug injectors")){
+						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
+					}
+					if (player.hasKeyItem("Potent Drug injectors")){
+						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
+					}
+				}
+					else {
+					if (player.hasKeyItem("Power bracer") >= 0) {
+						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'})
+					}
+					if (player.hasKeyItem("Powboy") >= 0) {
+						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'})
+					}
+					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
+						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
+					}
+				}
+				needNext = true;
+			}
+			//Cow bell
+			if (player.necklaceName == "Cow bell") {
+				if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
+				else player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
 			}
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {

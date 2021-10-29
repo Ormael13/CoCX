@@ -16,7 +16,7 @@ import classes.GlobalFlags.kFLAGS;
 		public function firstvisitshrineintro():void {
 			flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 2;
 			clearOutput();
-			outputText("As you explore the battlefied, you notice a dilapidated building not far from you. You cautiously approach as your curiosity takes hold of you. A sparse amount of trees surround a shrine. It almost sparkles within the faint ambient light.\n\n");
+			outputText("As you explore the battlefield, you notice a dilapidated building not far from you. You cautiously approach as your curiosity takes hold of you. A sparse amount of trees surround a shrine. It almost sparkles within the faint ambient light.\n\n");
 			outputText("How could such a thing survive in a place where nothing but war has waged?\n\nYou enter what you can only assume to be the entreance. You push open the wooden door. ");
 			outputText("The vermillion hued gates are remarkably crafted, yet you remain wary of potential danger. As the entrance falls behind you, you notice at both your sides rest two statues of strange beings. They seem to be half-lion and half-dog, a creature the likes of which you've never seen. You marvel at their almost life-like features. One stands with its jaw agape, the other with its lips sealed.\n\n");
 			outputText("Deeper into the shrine is a large plaza with statues located on each of your cardinal directions.\n\n");
@@ -68,7 +68,7 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("Aside from the books, there are scrawlings over the walls of what seems to be an ancient language. It's almost completely indecipherable. Perhaps you should bring someone who knows more about different languages next time?\n\n");
 			menu();
 			addButtonDisabled(2, "Spellcraft", "Placeholder button until one of the writers write something on this subject ^^");//story about god of magic			//addButtonDisabled(2, "The Fall", "Placeholder button until Lia write something on this subject ^^");//collection of propercies about gods fall on area later known as battlefield
-			addButtonDisabled(6, "Reaper", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of death/transformation
+			addButtonDisabled(6, "Reaper", "Placeholder button until one of the writers write something on this subject ^^");//story about god of death/transformation
 			addButtonDisabled(8, "Lifegiver", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of life				//addButtonDisabled(0, "Souless Ones", "Placeholder button until Lia write something on this subject ^^");//story about early days of demons/their uprising (here or other place in mareth?)
 			addButtonDisabled(12, "Warmonger", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of war				//addButtonDisabled(1, "The Descent", "Placeholder button until Lia write something on this subject ^^");//orgin of soul cultivators in Mareth (here or other place in mareth?)
 			addButton(14, "Back", shrinemainmenu);
@@ -97,41 +97,59 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
 			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
 			if (shinshoku()) {
-				outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps few chilly peppers would be enough...</i>\"\n\n");
+				outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
 				outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
 			}
 			//outputText("\n\n");
 			menu();
 			if (player.hasItem(consumables.CHILLYP, 3)) addButton(0, "Offering", westSectionOffering);
-			else addButtonDisabled(0, "???", "???");
+			else addButtonDisabled(0, "???", "Perhaps if you came back with Chilly peppers, like the voice said...");
 			addButton(14, "Back", shrinemainmenu);
 		}
 		private function westSectionOffering():void {
 			clearOutput();
 			player.destroyItems(consumables.CHILLYP, 3);
-			outputText("\n\n");
+			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
 			switch(rand(10)) {
 				case 0:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
 				case 1:
+					outputText("in the other bowl, a small, glowing syringe.");
 					inventory.takeItem(useables.E_ICHOR, westSection);
 					break;
 				case 2:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
 				case 3:
+					outputText("and a bottle of Nocello sitting in front of the statue.");
 					inventory.takeItem(consumables.NOCELIQ, westSection);
 					break;
 				case 4:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
 				case 5:
+					outputText("and a single Storm Seed rests in the other bowl.");
 					inventory.takeItem(consumables.SRMSEED, westSection);
 					break;
 				case 6:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
 				case 7:
+					outputText("replaced by a familiar looking bottle of Enigmanium.");
 					inventory.takeItem(consumables.ENIGMANIUM, westSection);
 					break;
 				case 8:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
 				case 9:
+					outputText("instead, a bottle of Infernal Wine sits before the statue.");
 					inventory.takeItem(consumables.INFWINE, westSection);
 					break;
 			}
+			outputText("\n\n")
+			menu();
+			doNext(westSection);
 			cheatTime(1/12);
 		}
 		

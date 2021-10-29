@@ -71,7 +71,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 33;
+    public var modSaveVersion:Number = 34;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -256,8 +256,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s";
-			version = ver + " (<b>Venom system changes, Grey Mage changes, Elemental Conjurer changes (part 1), 3 new prestige jobs (Arch-priest, Necromancer, Bindmaster), 10th to 12th Soul Cultivation stages, Heaven Tribulation events, 3 new slots (flying sword and 2x misc acc), new spells/soulskils (white, black, grey, blood), Ashlands and new place, Bee Hive dungeon. Wood Elves, Evangeline changes and many more...</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8s2";
+			version = ver + " (<b>Jiangshi mini X-pack, Bee race & Eyes of the Hunter minor changes, Twins 2nd evo & obligatory package of QoL changes/bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places{
+package classes.Scenes.Places{
 	import classes.*;
 	import classes.BodyParts.Antennae;
 	import classes.BodyParts.Arms;
@@ -221,6 +221,7 @@
 			CoC.instance.transformations.TongueElf.applyEffect(false);
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
+			if (player.legCount != 2) player.legCount = 2;
 			outputText("\n\n");
 			CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
@@ -646,7 +647,6 @@
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
 		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
 			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
-			addButtonDisabled(3, "Elenwen", "Under Review.");
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
 			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
@@ -720,7 +720,7 @@
 						" resist the urge to join them, for now; you can always find another release later, when you’re a little less busy.")
 				player.dynStats("lus",+30);
 			}
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function Tent():void {
@@ -788,7 +788,7 @@
 			player.sexReward("vaginalFluids", "Vaginal")
 			player.trainStat("lib", +1, 80);
 			CoC.instance.timeQ = 1;
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function Fletching():void {
@@ -884,9 +884,10 @@
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			bowSkill(5)
+			if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
+			else player.addStatusValue(StatusEffects.Kelt, 1, 5);
 			CoC.instance.timeQ = 1;
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function Alyssa():void {
@@ -977,7 +978,7 @@
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 

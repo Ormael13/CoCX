@@ -208,6 +208,7 @@ public final class ConsumableLib extends BaseContent
 		public const C_VEMOM:CentipedeVenom   = new CentipedeVenom();
 		public const CERUL_P:Consumable       = new CeruleanPotion();
 		public const COAL___:Consumable       = new Coal();
+		public const AMBROSA:Consumable       = new Ambrosia();
 		public const CFISHS:SimpleConsumable  = mk("CFishS.", "Cold Fish S.", "a bowl of cold fish soup", 20, "A soup made with fishes from the glacial rift. It is served cold to preserve the flavor and supposed calming effect which act as a lustkiller.", m.coldFishSoup);
 	//	public const DAO_DEW:SimpleConsumable = mk("Dao Dew", "Dao Dew", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.daoDew);
 		public const DEBIMBO:DeBimbo          = new DeBimbo();
@@ -227,6 +228,7 @@ public final class ConsumableLib extends BaseContent
 		public const MANUP_B:SimpleConsumable = mk("ManUp B", "ManUp B.", "a ManUp beer", 6, "A beverage made for people who believe brawn is better than brains.", m.manUpBeer);
 		public const MAPILL_:SimpleConsumable = mk("MAPill", "Medium Angry Pill", "a medium angry pill", 50, "A medium pill that's guaranteed to makes you a bit more angry.", m.mediumangrypill);
 		public const MILKPTN:Consumable       = new MilkPotion();
+		public const NUMBCND:SimpleConsumable = mk("NumbCnd","Numb Candies", "a strange packet of 'Numb Candies'", 40, "This packet of innocuous looking 'candy' guarantees to reduce troublesome hear or rut and taste delicious.", m.numbCandies);
 		public const NUMBROX:Consumable       = new NumbRocks();
 		public const NUMBOIL:Consumable       = new NumbingOil();
 		public const OVIELIX:OvipositionElixir = new OvipositionElixir();
@@ -318,6 +320,7 @@ public final class ConsumableLib extends BaseContent
 		public const PRFRUIT:SimpleConsumable = mk("PrFruit", "PrFruit", "a purple fruit", 6, "This sweet-smelling produce looks like an eggplant, but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.", m.purpleFruitEssrayle);
 		public const PROBOVA:SimpleConsumable = mk("ProBova", "ProBova", "a bottle containing a misty fluid labeled \"ProBova\"", 6, "This cloudy potion has been enhanced by the alchemist Lumi to imbue its drinker with cow-like attributes.", curry(m.laBova, true, true));
 		public const PROTPLS:SimpleConsumable = mk("ProtPls", "ProtPls", "a bottle of protoplasm", 6, "The opaque, incorporeal substance flows like a liquid inside its container. It makes you feel... uncomfortable, as you observe it and maybe it observe you back...", curry(m.ectoplasm, 1));
+
 		public const PURHONY:BeeHoney		  = new BeeHoney(true, false);
 		public const RDRROOT:SimpleConsumable = mk("RdRRoot", "R.R.Root", "a red river root", 14, "A long, odd shaped root. It smells spicy but surprisingly tasty. Eating it would supposedly alter your body in unknown ways.", m.redRiverRoot);
 		public const REDVIAL:VampireBlood 	  = new VampireBlood();
@@ -348,7 +351,7 @@ public final class ConsumableLib extends BaseContent
 		public const VOLTTOP:SimpleConsumable = mk("VoltTop", "VoltTopaz", "a Voltage topaz", 6, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint static tingle warms your [hands] as a light flush travels up your arms...", curry(m.voltageTopaz, true));
 		public const VOUIOIL:SimpleConsumable = mk("VouiOil", "VouivreOil", "a vial of vouivre oil", 70, "A vial the size of your fist made of light green glass. It contains what appears to be an oily, purple liquid. The odor is strange.", curry(m.evolvedNagaOil, 1));
 		public const W_FRUIT:SimpleConsumable = mk("W.Fruit", "W.Fruit", "a piece of whisker-fruit", 6, "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.", curry(m.catTransformation, 0));
-		public const W_EMRLD:SimpleConsumable = mk("W.Emerald", "W.Emerald", "a Windstorm Emerald", 6, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint green glow warms your [hands] as a light breeze travels up your arms...", curry(m.windstormEmerald, true));
+		public const W_EMRLD:SimpleConsumable = mk("W.Emerald", "W.Emerald", "a Windstorm Emerald", 20, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint green glow warms your [hands] as a light breeze travels up your arms...", curry(m.windstormEmerald, true));
 		public const WHITEIS:SimpleConsumable = mk("WhiteIS", "WhiteIceShard", "a White Ice Shard", 30, "This shard of cloudy white ice seems to resist all forms of heat and appears to radiate a sense of loneliness and frigid desire.", m.whiteIceShard);
 		public const WOFRUIT:SimpleConsumable = mk("WoFruit", "WonderFruit", "a Wonder fruit", 10, "A strange whisker fruit from what appears to be a different dimension. Its skin is dyed with all the color of the rainbow.", curry(m.catTransformation, 2));
 		public const WETCLTH:SimpleConsumable = mk("WetClth", "WetCloth", "a wet cloth dripping with slippery slime", 6, "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.", curry(m.gooGasmic, 0));

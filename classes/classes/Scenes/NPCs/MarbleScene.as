@@ -107,7 +107,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 							spriteSelect(41);
 							outputText("\n<b>You find a note from Marble back at camp, letting you know that she has an item for you!</b>\n");
 							player.createStatusEffect(StatusEffects.MarbleItemCooldown,(24 + rand(24)),0,0,0);
-							player.createStatusEffect(StatusEffects.MarbleHasItem,rand(10),0,0,0);
+							player.createStatusEffect(StatusEffects.MarbleHasItem,rand(5),0,0,0);
 							needNext = true;
 						}
 					}
@@ -395,7 +395,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				doNext(playerMenu);
 				return true;
 			}
-			if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+			if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.hasPerk(PerkLib.MarblesMilk)) {
 				checkedMarbleMilk++;
 				//In prison
 				if (prison.inPrison) {
@@ -420,7 +420,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						CoC.instance.timeQ++; //We can get rid of this: threshhold--;
 					}
 				}
-				doNext(playerMenu);
+				doNext(camp.returnToCampUseOneHour);
+				//Hm. Temp fix, but postAddictionCampMornings is for some reason being called... twice? That'd mean the above isn't exactly working right....
 				return true;
 			}
 			return false;
@@ -1643,12 +1644,14 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 	player.slimeFeed();
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)
+	//Yeah, but this literally can never occur.
+	//Kinda begs the question: WTF is the point of the boolean?
 	if(!player.hasItem(consumables.M__MILK, 5)) {
 		outputText("\n\nAs you are about to leave, Marble hands you a bottle of her milk.  ");
 		//[if the player is no longer addicted]
-		if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
+		if(player.hasPerk(PerkLib.MarbleResistant)) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
 		//(player gains a bottle of Marble's milk)
-		inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
+		inventory.takeItem(consumables.M__MILK, playerMenu);
 	}
 }
 
@@ -2404,11 +2407,17 @@ private function marbleGathered():void {
 	outputText("You ask Marble about any supplies she might have found.  She smiles and hands you her latest find.\n\n");
 	//items that Marble can find for the player, more to be added later (there aren't many items in the game right now that Marble would bring back for the player):
 	//Vitality potion (12 hours or one day)
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) <= 4)
+	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 0)
 		inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
+	//Pack of nails
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 1)
+		inventory.takeItem(consumables.PONAILS, camp.returnToCampUseOneHour);
 	//Tanned Leather clothes, armor, def: 5 (three days)
-	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) <= 7)
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 2)
 		inventory.takeItem(armors.LEATHRA, camp.returnToCampUseOneHour);
+	//Minotaus horn
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 3)
+		inventory.takeItem(useables.MINOHOR, camp.returnToCampUseOneHour);
 	//LaBova, cow girl transformation item (if you'll let me put it here, I'd like to use it as part of the purification quest, the player can still get it if they are addicted)
 	else inventory.takeItem(consumables.LABOVA_, camp.returnToCampUseOneHour);
 	player.removeStatusEffect(StatusEffects.MarbleHasItem);

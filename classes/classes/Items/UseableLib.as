@@ -34,6 +34,9 @@ use namespace CoC;
 		public const TIN_ORE:SimpleUseable = new SimpleUseable("Tin Ore", "Tin ore", "a Tin ore", 40, 
 			"A Tin ore.",
 			"You look over the chunk of Tin ore. Likely usefull to making some equipment.");
+		public const IRONORE:SimpleUseable = new SimpleUseable("Iron Ore", "Iron ore", "an Iron ore", 40, 
+			"An Iron ore.",
+			"You look over the chunk of Iron ore. Likely usefull to making some equipment.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
@@ -70,12 +73,12 @@ use namespace CoC;
 		public const PCSHARD:SimpleUseable = new SimpleUseable("PCShard", "Purple Crystal Shard", "a Purple Crystal Shard", 1, 
 			"A Purple Crystal Shard.",
 			"You look at the purple crystal shard. It occasionally glows gently in your hand, but you can't seem to find a use for the shard.");
-		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 50, 
+		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 1, 
 			"An Elemental Shard.",
 			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
-		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 500, 
+		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
 			"An vial of E-Ichor.",
-			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be usefull to undergone mutations.");
+			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
 		//MISCELLANEOUS
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
 			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes.",

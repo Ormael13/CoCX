@@ -893,6 +893,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
 		//Mastery
+		saveFile.data.masteryFeralCombatLevel = player.masteryFeralCombatLevel;
+		saveFile.data.masteryFeralCombatXP = player.masteryFeralCombatXP;
 		saveFile.data.masteryGauntletLevel = player.masteryGauntletLevel;
 		saveFile.data.masteryGauntletXP = player.masteryGauntletXP;
 		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
@@ -905,6 +907,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.masteryMaceHammerXP = player.masteryMaceHammerXP;
 		saveFile.data.masteryDuelingSwordLevel = player.masteryDuelingSwordLevel;
 		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
+		saveFile.data.masteryPolearmLevel = player.masteryPolearmLevel;
+		saveFile.data.masteryPolearmXP = player.masteryPolearmXP;
 		saveFile.data.masterySpearLevel = player.masterySpearLevel;
 		saveFile.data.masterySpearXP = player.masterySpearXP;
 		saveFile.data.masteryWhipLevel = player.masteryWhipLevel;
@@ -1893,6 +1897,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
 		//Mastery
+		if (saveFile.data.masteryFeralCombatXP == undefined)
+			player.masteryFeralCombatXP = 0;
+		else
+			player.masteryFeralCombatXP = saveFile.data.masteryFeralCombatXP;
+		if (saveFile.data.masteryFeralCombatLevel == undefined)
+			player.masteryFeralCombatLevel = 0;
+		else
+			player.masteryFeralCombatLevel = saveFile.data.masteryFeralCombatLevel;
 		if (saveFile.data.masteryGauntletXP == undefined)
 			player.masteryGauntletXP = 0;
 		else
@@ -1981,6 +1993,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.masteryDuelingSwordLevel = 0;
 		else
 			player.masteryDuelingSwordLevel = saveFile.data.masteryDuelingSwordLevel;
+		if (saveFile.data.masteryPolearmXP == undefined)
+			player.masteryPolearmXP = 0;
+		else
+			player.masteryPolearmXP = saveFile.data.masteryPolearmXP;
+		if (saveFile.data.masteryPolearmLevel == undefined)
+			player.masteryPolearmLevel = 0;
+		else
+			player.masteryPolearmLevel = saveFile.data.masteryPolearmLevel;
 		if (saveFile.data.masterySpearXP == undefined)
 			player.masterySpearXP = 0;
 		else

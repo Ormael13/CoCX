@@ -14,21 +14,14 @@ package classes.Items.Weapons
 		
 		public function BeautifulStaff() 
 		{
-			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "smack", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Staff", PerkLib.WizardsFocus, 0, 0, 0, 0);
+			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "smack", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Staff" + descExtra, PerkLib.WizardsFocus, 0, 0, 0, 0, "", "Staff");
 		}
 		
-		override public function get description():String {
-			var desc:String = _description;
+		public function descExtra():String {
+			var desc:String = "";
 			var temp:int = 40 - game.player.cor;
 			if (temp < 10) temp = 10;
-			//Type
-			desc += "\n\nType: Weapon (Staff)";
-			//Attack
-			desc += "\nAttack: " + String(attack);
-			//Value
-			desc += "\nBase value: " + String(value);
-			//Perk
-			desc += "\nSpecial: Wizard's Focus (+" + temp + "% Spellpower)";
+			desc += ", Wizard's Focus (+" + temp + "% Spellpower)";
 			return desc;
 		}
 		

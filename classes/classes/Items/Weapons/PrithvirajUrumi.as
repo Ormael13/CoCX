@@ -15,7 +15,7 @@ package classes.Items.Weapons
 		{
 			super("PrUrumi ","Pr.Urumi","Prithviraj urumi","a Prithviraj urumi","slash",24,4800,
 					"This urumi is a weapon made of four sharp blades of shining silver-blue steel put together so as to appear like a single blade when not in use. Its handle has a motif of elephants on lacquered ivory, decorated with blue sapphires.",
-					"Large"
+					"Large", "Sword"
 			);
 		}
 		

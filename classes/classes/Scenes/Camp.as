@@ -12,6 +12,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
+import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
@@ -617,7 +618,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Zenji freaks out about corrupted celess
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && CelessScene.instance.isCorrupt && rand(4) == 0) {
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && CelessScene.instance.isCorrupt && !CelessScene.instance.setDeadOrRemoved() && rand(4) == 0) {
 			finter.zenjiFreaksOverCorruptCeless();
 			hideMenus();
 			return;
@@ -977,6 +978,26 @@ public class Camp extends NPCAwareContent{
 		if (sparableCampMembersCount() >= 2) {
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
 		}
+		//Wood Elf weapon fix.
+		if (!player.hasPerk(PerkLib.Rigidity) && ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0))) {
+			if (player.weapon != WeaponLib.FISTS){
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]), playerMenu);
+				}
+				else{
+					inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]), playerMenu);
+				}
+			}
+			else {
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+					player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+				}
+				else{
+					player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID])as WeaponRange);
+				}
+			}
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+		}
 
 		//Menu
 
@@ -1128,7 +1149,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
 		if (arianScene.arianFollower()) counter++;
-		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) counter++;
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
@@ -1159,7 +1180,7 @@ public class Camp extends NPCAwareContent{
 		if (emberScene.followerEmber()) counter++;
 		if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
-		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) counter++;
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
@@ -1209,7 +1230,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
 		if (helspawnFollower()) counter++;
-		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) counter++;
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
@@ -1307,7 +1328,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Ceani", SceneLib.ceaniScene.ceaniCampMainMenu).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
 			//Chi Chi
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) {
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
 				outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
 				if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0, "Wet.");
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
@@ -2074,9 +2095,27 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		if (player.hasPerk(PerkLib.CursedTag)) addButton(9, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY aka modify your cursed tag");
+		else addButtonDisabled(9, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
+		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
+		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
 		addButton(14, "Back", campActions);
+	}
+	private function convertingEnergyCoreIntoFlagValue():void {
+		clearOutput();
+		outputText("1 Energy Core converted succesfully.");
+		player.destroyItems(useables.ENECORE, 1);
+		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
+		doNext(campMiscActions);
+	}
+	private function convertingMechanismIntoFlagValue():void {
+		clearOutput();
+		outputText("1 Mechanism converted succesfully.");
+		player.destroyItems(useables.MECHANI, 1);
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
+		doNext(campMiscActions);
 	}
 
 	private function campWinionsArmySim():void {
@@ -2332,17 +2371,101 @@ public class Camp extends NPCAwareContent{
 
 	private function fillUpPillBottle00():void {
 		clearOutput();
-		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.LG_SFRP, 10);
 		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
 	}
 	private function fillUpPillBottle01():void {
 		clearOutput();
-		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+	}
+	
+	private function AlterBindScroll():void {
+		clearOutput();
+		var limitOnAltering:Number = 1;
+		var currentAltering:Number = 0;
+		if (player.hasPerk(PerkLib.ImprovedCursedTag)) limitOnAltering += 1;
+		if (player.hasPerk(PerkLib.GreaterCursedTag)) limitOnAltering += 3;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) currentAltering += 1;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) currentAltering += 1;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) currentAltering += 1;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) currentAltering += 1;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) currentAltering += 1;
+		outputText("Would you like to alter your curse tag, and if so, with what changes?\n\n");
+		outputText("Current active powers / Limit of active powers: "+currentAltering+" / "+limitOnAltering+"\n\n");
+		//displayHeader("Active powers:");
+		//outputText("\n");
+		outputText("<u><b>Active powers:</b></u>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) outputText("<b>-No limiter</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) outputText("<b>-Unliving Leech</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) outputText("<b>-Undead resistance</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) outputText("<b>-Vital Sense</b>\n");
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) outputText("<b>-Zombified</b>\n");
+		//outputText("\n");
+		//displayHeader("Effects of each powers:");
+		outputText("\n<u><b>Effects of each powers:</b></u>\n");
+		//outputText("\n");
+		outputText("No limiter -> <i>Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. This is a togglable ability.</i>\n");
+		outputText("Unliving Leech -> <i>Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant.</i>\n");
+		outputText("Undead resistance -> <i>Gain Immunity to Cold, Poison and Fatigue damage.</i>\n");
+		outputText("Vital Sense -> <i>You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.</i>\n");
+		outputText("Zombified -> <i>You are immune to mental attacks that would affect living sane beings. Furthermore you have unlimited fatigue.</i>\n");
+		menu();
+		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll1)) addButton(0, "No limiter", AlterBindScrollNoLimiter).hint("You not have this power active. Do you want to activate it?");
+		else {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) addButton(0, "No limiter", AlterBindScrollNoLimiter).hint("You already have this power active. Do you want to deactivate it?");
+			else addButtonDisabled(0, "No limiter", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		}
+		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(1, "Unliving Leech", AlterBindScrollUnlivingLeech).hint("You not have this power active. Do you want to activate it?");
+		else {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(1, "Unliving Leech", AlterBindScrollUnlivingLeech).hint("You already have this power active. Do you want to deactivate it?");
+			else addButtonDisabled(1, "Unliving Leech", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		}
+		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) addButton(2, "Undead resistance", AlterBindScrollUndeadResistance).hint("You not have this power active. Do you want to activate it?");
+		else {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) addButton(2, "Undead resistance", AlterBindScrollUndeadResistance).hint("You already have this power active. Do you want to deactivate it?");
+			else addButtonDisabled(2, "Undead resistance", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		}
+		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll4)) addButton(3, "Vital Sense", AlterBindScrollVitalSense).hint("You not have this power active. Do you want to activate it?");
+		else {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) addButton(3, "Vital Sense", AlterBindScrollVitalSense).hint("You already have this power active. Do you want to deactivate it?");
+			else addButtonDisabled(3, "Vital Sense", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		}
+		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll5)) addButton(4, "Zombified", AlterBindScrollZombified).hint("You not have this power active. Do you want to activate it?");
+		else {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) addButton(4, "Zombified", AlterBindScrollZombified).hint("You already have this power active. Do you want to deactivate it?");
+			else addButtonDisabled(4, "Zombified", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		}
+		addButton(14, "Back", campMiscActions);
+	}
+	private function AlterBindScrollNoLimiter():void {
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) player.removeStatusEffect(StatusEffects.AlterBindScroll1);
+		else player.createStatusEffect(StatusEffects.AlterBindScroll1,0,0,0,0);
+		doNext(AlterBindScroll);
+	}
+	private function AlterBindScrollUnlivingLeech():void {
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.removeStatusEffect(StatusEffects.AlterBindScroll2);
+		else player.createStatusEffect(StatusEffects.AlterBindScroll2,0,0,0,0);
+		doNext(AlterBindScroll);
+	}
+	private function AlterBindScrollUndeadResistance():void {
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) player.removeStatusEffect(StatusEffects.AlterBindScroll3);
+		else player.createStatusEffect(StatusEffects.AlterBindScroll3,0,0,0,0);
+		doNext(AlterBindScroll);
+	}
+	private function AlterBindScrollVitalSense():void {
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
+		else player.createStatusEffect(StatusEffects.AlterBindScroll4,0,0,0,0);
+		doNext(AlterBindScroll);
+	}
+	private function AlterBindScrollZombified():void {
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
+		else player.createStatusEffect(StatusEffects.AlterBindScroll5,0,0,0,0);
+		doNext(AlterBindScroll);
 	}
 
 	private function VisitClone():void {
@@ -2387,7 +2510,7 @@ public class Camp extends NPCAwareContent{
 		else addButton(0, "Create", CreateClone);
 		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) == 4) {
 			addButton(1, "Contemplate", CloneContemplateDao).hint("Task your clone with contemplating one of the Daos you know.");
-			
+
 		}
 		else {
 			addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
@@ -2488,7 +2611,7 @@ public class Camp extends NPCAwareContent{
 		doNext(CloneContemplateDao);
 	}
 	private function CloneTrainWaponMastery():void {
-		
+
 	}
 
 	private function DummyTraining():void {
@@ -2518,6 +2641,7 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode\n");
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode\n");
 		}
+		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("\nChi Chi: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.DianaOff)) outputText("\nDiana: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.DivaOff)) outputText("\nDiva: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: <font color=\"#800000\"><b>Disabled</b></font>");
@@ -2529,10 +2653,11 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
 		}
-		addButton(0, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(1, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(2, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(3, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(0, "Chi Chi", toggleChiChiMenu).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(1, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(2, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(3, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		addButton(14, "Back", campActions);
@@ -2548,6 +2673,12 @@ public class Camp extends NPCAwareContent{
 		outputText("\n\nPlaceholder text about telling NPC's to relax.");
 		flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
 		doNext(SparrableNPCsMenu);
+	}
+
+	private function toggleChiChiMenu():void {
+		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) player.removeStatusEffect(StatusEffects.ChiChiOff);
+		else player.createStatusEffect(StatusEffects.ChiChiOff, 0, 0, 0, 0);
+		SparrableNPCsMenu();
 	}
 
 	private function toggleDianaMenu():void {
@@ -3531,7 +3662,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(10, "???", "Explore the realm.");
 		if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
 		else addButtonDisabled(11, "???", "Search the forest.");
-		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) addButton(11, "Dilapidated Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro).hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.");
+		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) addButton(12, "Dilapidated Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro).hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.");
 		else addButtonDisabled(12, "???", "Search the battlefield. (After hearing npc meantions this place)");
 		addButton(14, "Back", playerMenu);
 		return true;
@@ -4027,7 +4158,7 @@ public function rebirthFromBadEnd():void {
 		performancePointsPrediction += companionsCount();
 		if (flags[kFLAGS.ALVINA_FOLLOWER] == 12) performancePointsPrediction++;
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePointsPrediction++;
-		if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5) performancePointsPrediction++;
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5 || player.hasStatusEffect(StatusEffects.ChiChiOff)) performancePointsPrediction++;
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 3) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.DianaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.DivaOff)) performancePointsPrediction++;
@@ -4898,7 +5029,7 @@ public function rebirthFromBadEnd():void {
 				player.ascensionPerkPoints += refund1;
 			}
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
+			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 15;
 			if (player.perkv1(PerkLib.StarSphereMastery) > SphereMastery) {
 				player.gems += (1000 * (player.perkv1(PerkLib.StarSphereMastery) - SphereMastery));
 				player.removePerk(PerkLib.StarSphereMastery);
@@ -4977,7 +5108,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
 			clearOutput();
-			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end. Metamorph has been updated and genetic memories can't be carried over Ascensions now. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
+			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end. Metamorph and Transcedental Genetic Memory Perks have been updated. Ascension points for all players who bought Transcedental Genetic Memory Perks will be refunded.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 && flags[kFLAGS.HARDCORE_MODE] == 1) flags[kFLAGS.HARDCORE_MODE] = 0;
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards) && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 2) {
 				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
@@ -5098,15 +5229,315 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
+			clearOutput();
+			outputText("Grey Sage prestige really need to retire... please no cry blood tears it may return in some other form... maybe... Also all Evovlved/Final Form racial mutation perks been reassigned new tiers xD");
+			if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+				player.removePerk(PerkLib.PrestigeJobGreySage);
+				player.perkPoints += 1;
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
+			if (flags[kFLAGS.SPELLS_COOLDOWNS] != 0) flags[kFLAGS.SPELLS_COOLDOWNS] = 0;
+			if (!player.hasPerk(MutationsLib.GorgonsEyesFinalForm)) {
+				if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
+					player.removePerk(MutationsLib.ArachnidBookLungEvolved);
+					player.createPerk(MutationsLib.ArachnidBookLungPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.ArachnidBookLungFinalForm)) {
+					player.removePerk(MutationsLib.ArachnidBookLungFinalForm);
+					player.createPerk(MutationsLib.ArachnidBookLungEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.BlackHeartEvolved)) {
+					player.removePerk(MutationsLib.BlackHeartEvolved);
+					player.createPerk(MutationsLib.BlackHeartPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.BlackHeartFinalForm)) {
+					player.removePerk(MutationsLib.BlackHeartFinalForm);
+					player.createPerk(MutationsLib.BlackHeartEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DisplacerMetabolismEvolved)) {
+					player.removePerk(MutationsLib.DisplacerMetabolismEvolved);
+					player.createPerk(MutationsLib.DisplacerMetabolismPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) {
+					player.removePerk(MutationsLib.DraconicBonesEvolved);
+					player.createPerk(MutationsLib.DraconicBonesPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DraconicBonesFinalForm)) {
+					player.removePerk(MutationsLib.DraconicBonesFinalForm);
+					player.createPerk(MutationsLib.DraconicBonesEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) {
+					player.removePerk(MutationsLib.DraconicHeartEvolved);
+					player.createPerk(MutationsLib.DraconicHeartPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DraconicHeartFinalForm)) {
+					player.removePerk(MutationsLib.DraconicHeartFinalForm);
+					player.createPerk(MutationsLib.DraconicHeartEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
+					player.removePerk(MutationsLib.DraconicLungsEvolved);
+					player.createPerk(MutationsLib.DraconicLungsPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) {
+					player.removePerk(MutationsLib.DraconicLungsFinalForm);
+					player.createPerk(MutationsLib.DraconicLungsEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
+					player.removePerk(MutationsLib.DrakeLungsEvolved);
+					player.createPerk(MutationsLib.DrakeLungsPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) {
+					player.removePerk(MutationsLib.DrakeLungsFinalForm);
+					player.createPerk(MutationsLib.DrakeLungsEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)) {
+					player.removePerk(MutationsLib.EasterBunnyEggBagEvolved);
+					player.createPerk(MutationsLib.EasterBunnyEggBagPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.EasterBunnyEggBagFinalForm)) {
+					player.removePerk(MutationsLib.EasterBunnyEggBagFinalForm);
+					player.createPerk(MutationsLib.EasterBunnyEggBagEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) {
+					player.removePerk(MutationsLib.ElvishPeripheralNervSysEvolved);
+					player.createPerk(MutationsLib.ElvishPeripheralNervSysPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) {
+					player.removePerk(MutationsLib.ElvishPeripheralNervSysFinalForm);
+					player.createPerk(MutationsLib.ElvishPeripheralNervSysEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) {
+					player.removePerk(MutationsLib.FeyArcaneBloodstreamEvolved);
+					player.createPerk(MutationsLib.FeyArcaneBloodstreamPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamFinalForm)) {
+					player.removePerk(MutationsLib.FeyArcaneBloodstreamFinalForm);
+					player.createPerk(MutationsLib.FeyArcaneBloodstreamEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.FloralOvariesEvolved)) {
+					player.removePerk(MutationsLib.FloralOvariesEvolved);
+					player.createPerk(MutationsLib.FloralOvariesPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.FloralOvariesFinalForm)) {
+					player.removePerk(MutationsLib.FloralOvariesFinalForm);
+					player.createPerk(MutationsLib.FloralOvariesEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) {
+					player.removePerk(MutationsLib.FrozenHeartEvolved);
+					player.createPerk(MutationsLib.FrozenHeartPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.FrozenHeartFinalForm)) {
+					player.removePerk(MutationsLib.FrozenHeartFinalForm);
+					player.createPerk(MutationsLib.FrozenHeartEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.GazerEyeEvolved)) {
+					player.removePerk(MutationsLib.GazerEyeEvolved);
+					player.createPerk(MutationsLib.GazerEyePrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) {
+					player.removePerk(MutationsLib.GazerEyeFinalForm);
+					player.createPerk(MutationsLib.GazerEyeEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.GorgonsEyesEvolved)) {
+					player.removePerk(MutationsLib.GorgonsEyesEvolved);
+					player.createPerk(MutationsLib.GorgonsEyesPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) {
+					player.removePerk(MutationsLib.HarpyHollowBonesEvolved);
+					player.createPerk(MutationsLib.HarpyHollowBonesPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm)) {
+					player.removePerk(MutationsLib.HarpyHollowBonesFinalForm);
+					player.createPerk(MutationsLib.HarpyHollowBonesEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) {
+					player.removePerk(MutationsLib.HeartOfTheStormEvolved);
+					player.createPerk(MutationsLib.HeartOfTheStormPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) {
+					player.removePerk(MutationsLib.HeartOfTheStormFinalForm);
+					player.createPerk(MutationsLib.HeartOfTheStormEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) {
+					player.removePerk(MutationsLib.HinezumiBurningBloodEvolved);
+					player.createPerk(MutationsLib.HinezumiBurningBloodPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HinezumiBurningBloodFinalForm)) {
+					player.removePerk(MutationsLib.HinezumiBurningBloodFinalForm);
+					player.createPerk(MutationsLib.HinezumiBurningBloodEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
+					player.removePerk(MutationsLib.HollowFangsEvolved);
+					player.createPerk(MutationsLib.HollowFangsPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.HollowFangsFinalForm)) {
+					player.removePerk(MutationsLib.HollowFangsFinalForm);
+					player.createPerk(MutationsLib.HollowFangsEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) {
+					player.removePerk(MutationsLib.KitsuneThyroidGlandEvolved);
+					player.createPerk(MutationsLib.KitsuneThyroidGlandPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) {
+					player.removePerk(MutationsLib.KitsuneThyroidGlandFinalForm);
+					player.createPerk(MutationsLib.KitsuneThyroidGlandEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) {
+					player.removePerk(MutationsLib.LactaBovinaOvariesEvolved);
+					player.createPerk(MutationsLib.LactaBovinaOvariesPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) {
+					player.removePerk(MutationsLib.LactaBovinaOvariesFinalForm);
+					player.createPerk(MutationsLib.LactaBovinaOvariesEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.LizanMarrowEvolved)) {
+					player.removePerk(MutationsLib.LizanMarrowEvolved);
+					player.createPerk(MutationsLib.LizanMarrowPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.LizanMarrowFinalForm)) {
+					player.removePerk(MutationsLib.LizanMarrowFinalForm);
+					player.createPerk(MutationsLib.LizanMarrowEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) {
+					player.removePerk(MutationsLib.ManticoreMetabolismEvolved);
+					player.createPerk(MutationsLib.ManticoreMetabolismPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+					player.removePerk(MutationsLib.MantislikeAgilityEvolved);
+					player.createPerk(MutationsLib.MantislikeAgilityPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
+					player.removePerk(MutationsLib.MantislikeAgilityFinalForm);
+					player.createPerk(MutationsLib.MantislikeAgilityEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.MelkieLungEvolved)) {
+					player.removePerk(MutationsLib.MelkieLungEvolved);
+					player.createPerk(MutationsLib.MelkieLungPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.MelkieLungFinalForm)) {
+					player.removePerk(MutationsLib.MelkieLungFinalForm);
+					player.createPerk(MutationsLib.MelkieLungEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
+					player.removePerk(MutationsLib.MinotaurTesticlesEvolved);
+					player.createPerk(MutationsLib.MinotaurTesticlesPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) {
+					player.removePerk(MutationsLib.MinotaurTesticlesFinalForm);
+					player.createPerk(MutationsLib.MinotaurTesticlesEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) {
+					player.removePerk(MutationsLib.NaturalPunchingBagEvolved);
+					player.createPerk(MutationsLib.NaturalPunchingBagPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) {
+					player.removePerk(MutationsLib.NaturalPunchingBagFinalForm);
+					player.createPerk(MutationsLib.NaturalPunchingBagEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.NukiNutsEvolved)) {
+					player.removePerk(MutationsLib.NukiNutsEvolved);
+					player.createPerk(MutationsLib.NukiNutsPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.NukiNutsFinalForm)) {
+					player.removePerk(MutationsLib.NukiNutsFinalForm);
+					player.createPerk(MutationsLib.NukiNutsEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) {
+					player.removePerk(MutationsLib.ObsidianHeartEvolved);
+					player.createPerk(MutationsLib.ObsidianHeartPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) {
+					player.removePerk(MutationsLib.ObsidianHeartFinalForm);
+					player.createPerk(MutationsLib.ObsidianHeartEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) {
+					player.removePerk(MutationsLib.OniMusculatureEvolved);
+					player.createPerk(MutationsLib.OniMusculaturePrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.OniMusculatureFinalForm)) {
+					player.removePerk(MutationsLib.OniMusculatureFinalForm);
+					player.createPerk(MutationsLib.OniMusculatureEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) {
+					player.removePerk(MutationsLib.OrcAdrenalGlandsEvolved);
+					player.createPerk(MutationsLib.OrcAdrenalGlandsPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.OrcAdrenalGlandsFinalForm)) {
+					player.removePerk(MutationsLib.OrcAdrenalGlandsFinalForm);
+					player.createPerk(MutationsLib.OrcAdrenalGlandsEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) {
+					player.removePerk(MutationsLib.PigBoarFatEvolved);
+					player.createPerk(MutationsLib.PigBoarFatPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.PigBoarFatFinalForm)) {
+					player.removePerk(MutationsLib.PigBoarFatFinalForm);
+					player.createPerk(MutationsLib.PigBoarFatEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
+					player.removePerk(MutationsLib.SalamanderAdrenalGlandsEvolved);
+					player.createPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
+					player.removePerk(MutationsLib.SalamanderAdrenalGlandsFinalForm);
+					player.createPerk(MutationsLib.SalamanderAdrenalGlandsEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.TwinHeartEvolved)) {
+					player.removePerk(MutationsLib.TwinHeartEvolved);
+					player.createPerk(MutationsLib.TwinHeartPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.TwinHeartFinalForm)) {
+					player.removePerk(MutationsLib.TwinHeartFinalForm);
+					player.createPerk(MutationsLib.TwinHeartEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.VampiricBloodsteamEvolved)) {
+					player.removePerk(MutationsLib.VampiricBloodsteamEvolved);
+					player.createPerk(MutationsLib.VampiricBloodsteamPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.VampiricBloodsteamFinalForm)) {
+					player.removePerk(MutationsLib.VampiricBloodsteamFinalForm);
+					player.createPerk(MutationsLib.VampiricBloodsteamEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) {
+					player.removePerk(MutationsLib.VenomGlandsEvolved);
+					player.createPerk(MutationsLib.VenomGlandsPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.VenomGlandsFinalForm)) {
+					player.removePerk(MutationsLib.VenomGlandsFinalForm);
+					player.createPerk(MutationsLib.VenomGlandsEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.WhaleFatEvolved)) {
+					player.removePerk(MutationsLib.WhaleFatEvolved);
+					player.createPerk(MutationsLib.WhaleFatPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.WhaleFatFinalForm)) {
+					player.removePerk(MutationsLib.WhaleFatFinalForm);
+					player.createPerk(MutationsLib.WhaleFatEvolved,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.YetiFatEvolved)) {
+					player.removePerk(MutationsLib.YetiFatEvolved);
+					player.createPerk(MutationsLib.YetiFatPrimitive,0,0,0,0);
+				}
+				if (player.hasPerk(MutationsLib.YetiFatFinalForm)) {
+					player.removePerk(MutationsLib.YetiFatFinalForm);
+					player.createPerk(MutationsLib.YetiFatEvolved,0,0,0,0);
+				}
+			}
+			if (player.hasPerk(MutationsLib.GorgonsEyesFinalForm)) player.removePerk(MutationsLib.GorgonsEyesFinalForm);
+			doNext(doCamp);
+			return;
+		}
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
@@ -5243,7 +5674,7 @@ public function rebirthFromBadEnd():void {
 
 		//Zones
 		if (player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && flags[kFLAGS.DISCOVERED_CAVES] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods)
-				&& flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
+				&& flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_TUNDRA] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_ASHLANDS] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
 		if (placesCount() >= 10) awardAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER);
 		if (player.explored >= 1) awardAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I);
 
@@ -5374,7 +5805,7 @@ public function rebirthFromBadEnd():void {
 		if (dungeonsCleared >= 4) awardAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
 		if (dungeonsCleared >= 8) awardAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT);
 		if (dungeonsCleared >= 16) awardAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER);//obecnie max 11
-		
+
 		if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear()) awardAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER);
 		if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear()) awardAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER);
 
@@ -5638,3 +6069,4 @@ public function rebirthFromBadEnd():void {
         */
 	}
 }
+
