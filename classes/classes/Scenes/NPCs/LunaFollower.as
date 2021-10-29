@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Liandri, edited by Scary Dragon Mom
+ * @author Liandri
  */
 package classes.Scenes.NPCs
 {
@@ -865,7 +865,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					" There is a mat woven from soft rushes laying on a patch of grass, and a shady tree and a large boulder with a smooth, flat side create a comfortable and secluded atmosphere. You hear the stream running nearby, giving the entire scene a peaceful, rustic atmosphere. It's quite charming and intimate feeling, and you wonder when and why she found time to set this up. Was she anticipating this?\n\n" +
 					"Luna awaits your command, her hands joined demurely in front of her abdomen and her head lowered deferentially. How will you make use of her?");
 			menu();
-			addButtonDisabled(0, "JustCuddle", "NYI - Scary Dragon Mom hasn't written the scene yet. Get on her!" );
+			addButtonDisabled(0, "JustCuddle", "Writer has left the building. Needs a new adopter." );
 			if (player.lust > 33 && player.gender > 0) addButton(1, "Vaginal", sexMenuVaginalIntro).hint("Have Luna soothe and pleasure you with her (currently, at least) normal human pussy; sometimes simple is best, and your cute maid can still be the best even when she isn't the beast.");
 			else if (player.lust > 33 && player.gender == 0) addButtonDisabled(1, "Vaginal", "You need to have genitals if you want Luna to use her own on them!");
 			else if (player.lust <= 33) addButtonDisabled(1, "Vaginal", "You're not up for sex at the moment, though you're sure Luna can find a way to fix that.");
@@ -1128,7 +1128,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			addButton(1, "Dominate", sexMenuDominateHer).hint("Take your bitch as rough as you want until you've had enough. It'll do her good.");
 			if (player.hasCock()) addButton(2, "Surprise", sexMenuDoggyTreats2).hint("You're feeling a little saucy, and Luna's asshole looks too tempting to pass up.");
 			else addButtonDisabled(2, "Surprise", "As tempting as Luna's ass looks, you're going to need a cock to take advantage of it.");
-			addButtonDisabled(3, "Press Luck", "NYI - Scary Dragon Mom hasn't written the scene yet! Get on her!" );
+			addButtonDisabled(3, "Press Luck", "Writer has left the building. Needs a new adopter." );
 			addButtonDisabled(14, "Back", "You know perfectly well you're not getting out of this now.");
 		}
 		public function sexMenuDoggyTreats2():void {
