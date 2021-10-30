@@ -28,7 +28,7 @@ package classes.Scenes
 		}
 		private function Changelog38():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8s2:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8s2 (Jiangshi mini X-pack, Bee race & Eyes of the Hunter minor changes, Twins 2nd evo & obligatory package of QoL changes/bugfixes):</b>\n\n");
 			outputText("-Eyes of the Hunter perks changes: Novice perk would show all types which enemy possess. Adept would increase crit chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies by 5% and increase damage by ~10% (similar to acid attacks). Master Eyes of the Hunter will give same bonuses against Colossal, Flesh Construct, Fire/Ice/Lightning/Darkness Nature type enemies.\n");
 			outputText("-Eyes of the Hunter (Master) perk was moved to tier 3 from 2. It req. changed to Eyes of the Hunter (Expert) perk and 100+ sensitivity.\n");
 			outputText("-Numb Rocks cost reverted back to 15 gems. Efect of Rut / Heat shortening removed from them.\n");
@@ -97,6 +97,7 @@ package classes.Scenes
 			outputText("-In mutation racial perks all perks with suffixes (Evolved) and (Final Form) been renamed to (Primitive) and (Evolved) respectively.\n");
 			outputText("-Added option to disable Chi Chi like few other npc's.\n");
 			outputText("-After defeating true demon male/herm/female enemy or minotaur Jiangshi PC could access one of three unique sex scenes.\n");
+			//6 of 11 pages
 			outputText("-Shouldra attack with magic missiles can apply now weak dispell effect if pc got one of four white/black magic buffs casted.\n");
 			outputText("-Added option to surrender when PC is bound and can only wait or struggle (for cases when PC is locked into never ending cycle of struggling with enemy).\n");
 			outputText("-Feeding as Jiangshi would cure up to 5 pts of 'Weakened' and 'Drained' type curse on libido stat.\n");
@@ -112,20 +113,11 @@ package classes.Scenes
 			outputText("-Many minor type/parser errors fixed here and there.\n");
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
 			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects, ");
-			outputText("Wrathless necklace not giving spellpower bonus\n");/*ostatni punkt changelogu
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("Wrathless necklace not giving spellpower bonus\n\n");
+			outputText("<b>Version 0.8s3:</b>\n\n");
+			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
 			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
 			//outputText("-New tier 7 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -135,7 +127,17 @@ package classes.Scenes
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Fixed Bugs: \n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Fixed Bugs: \n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -148,6 +150,13 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -203,9 +212,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -232,12 +240,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -344,8 +346,8 @@ package classes.Scenes
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks giving Dodge error msg, still more than a few TF items ignoring perm TF's ");
 			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural means (wings), Fera first halloween event not triggering if pc had permed ");
 			outputText("one of two fera perks from 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
-			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");
-			outputText("(Part 1/2) <b>Version 0.8s2:</b>\n\n");
+			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n\n");
+			outputText("(Part 1/2) <b>Version 0.8s2 (Jiangshi mini X-pack, Bee race & Eyes of the Hunter minor changes, Twins 2nd evo & obligatory package of QoL changes/bugfixes):</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm, Mouse, Hinezumi, Cyclop, Gazer\n");
 			outputText("-New tier 0 misc lvl-up perk: Cursed Tag. Req. Jiangshi race (20+ pts in score). Effect: Through arcane study, you've begun to understand the magical working of your cursed tag, allowing you to improve your abilities by altering some of the unholy text. This allows you to add one power from a list of abilities. (Option is located in misc actions subsection of camp actions)\n");
 			outputText("-New tier 0 misc lvl-up perk: Improved Cursed Tag. Req. Jiangshi race (20+ pts in score) and Cursed Tag perk. Effect: You may keep 2 undead powers active at all times.\n");

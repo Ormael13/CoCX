@@ -6069,4 +6069,3 @@ public function rebirthFromBadEnd():void {
         */
 	}
 }
-

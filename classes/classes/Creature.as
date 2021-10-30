@@ -657,36 +657,18 @@ public class Creature extends Utils
 		}
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
-			if (hasPerk(PerkLib.HiddenJobBloodDemon)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.WayOfTheBlood)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.YourPainMyPower)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.BloodDemonToughness)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			var maxOver2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonWisdom)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonIntelligence)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
+			maxOver *= maxOver2;//~170%
+			maxOver = Math.round(maxOver);
 			return Math.min(19999999,maxOver);
 		}
 		public function minHP():Number {

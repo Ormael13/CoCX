@@ -757,4 +757,3 @@ public class CombatUI extends BaseCombatContent {
 	}
 }
 }
-

@@ -1676,4 +1676,3 @@ public class PlayerAppearance extends BaseContent {
 	}
 }
 }
-
