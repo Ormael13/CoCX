@@ -1905,7 +1905,7 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Double Pepper!
         //Xforms/grows dicks to make you have two dogcocks
-        if (type == 2) {
+        if (changes < changeLimit && type == 2) {
             //If already doubled up, GROWTH
             if (player.dogCocks() >= 2) {
                 type = 1;
@@ -1980,7 +1980,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Knotty knot pepper!
-        if (type == 4) {
+        if (changes < changeLimit && type == 4) {
             //Cocks only!
             if (player.cockTotal() > 0) {
                 //biggify knots
@@ -2024,7 +2024,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("[pg]A slight wave of nausea passes through you.  It seems this pepper does not quite agree with your body.");
         }
         //GROW BALLS
-        if (type == 5) {
+        if (changes < changeLimit && type == 5) {
             if (player.balls <= 1) {
                 outputText("[pg]A spike of pain doubles you up, nearly making you vomit.  You stay like that, nearly crying, as a palpable sense of relief suddenly washes over you.  You look down and realize you now have a small sack, complete with two relatively small balls.");
                 player.balls = 2;
@@ -2050,7 +2050,7 @@ public final class Mutations extends MutationsHelper {
         //1. Cock Xform
         //2. Knot Size++
         //3. cumMultiplier++ (to max of 1.5)
-        if (player.cocks.length > 0) {
+        if (changes < changeLimit && player.cocks.length > 0) {
             //Grow knot on smallest knotted dog cock
             if (type != 4 && player.dogCocks() > 0 && ((changes < changeLimit && rand(1.4) == 0) || type == 1)) {
                 choice = 0;
@@ -2198,7 +2198,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Female Stuff
         //Multiboobages
-        if (player.breastRows.length > 0) {
+        if (changes < changeLimit && player.breastRows.length > 0) {
             //if bigger than A cup
             if (player.breastRows[0].breastRating > 0 && player.vaginas.length > 0) {
                 //Doggies only get 3 rows of tits! FENOXO HAS SPOKEN
@@ -3268,7 +3268,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Sex bits - Duderiffic
-        if (player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+        if (changes < changeLimit && player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
             //If the player has at least one dick, decrease the size of each slightly,
             outputText("[pg]");
             temp = 0;
@@ -3341,7 +3341,7 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("sen", 1, 1);
         }
         //Quad nipples and other 'special enhanced things.
-        if (enhanced) {
+        if (changes < changeLimit && enhanced) {
             //QUAD DAMAGE!
             if (player.breastRows[0].nipplesPerBreast == 1) {
                 changes++;
@@ -3434,7 +3434,7 @@ public final class Mutations extends MutationsHelper {
         //apply an effect where the player really wants
         //to give their milk to other creatures
         //(capable of getting them addicted):
-        if (!player.hasStatusEffect(StatusEffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
+        if (changes < changeLimit && !player.hasStatusEffect(StatusEffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
             outputText("[pg]You start to feel a strange desire to give your milk to other creatures.  For some reason, you know it will be very satisfying.[pg]<b>(You have gained the 'Feeder' perk!)</b>");
             player.createStatusEffect(StatusEffects.Feeder, 0, 0, 0, 0);
             player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
@@ -3538,14 +3538,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //enhanced get shitty fur
-        if (enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR && player.lowerBody != LowerBody.GARGOYLE) {
+        if (changes < changeLimit && enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR && player.lowerBody != LowerBody.GARGOYLE) {
             outputText("[pg]");
             transformations.HairChangeColor(["black"]).applyEffect();
             outputText("[pg]");
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "black", color2: "white", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
         }
         //if enhanced to probova give a shitty cow face
-        else if (enhanced && player.faceType != Face.COW_MINOTAUR && player.tailType != Tail.GARGOYLE) {
+        else if (changes < changeLimit && enhanced && player.faceType != Face.COW_MINOTAUR && player.tailType != Tail.GARGOYLE) {
             outputText("[pg]");
             transformations.FaceCowMinotaur.applyEffect();
             changes++;
@@ -6910,12 +6910,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Partial scaled skin
-        if (player.hasPlainSkinOnly() && rand(3) == 0) {
+        if (changes < changeLimit && player.hasPlainSkinOnly() && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
-        if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
+        if (changes < changeLimit && !player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;

@@ -2024,9 +2024,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Cow bell
-			if (player.necklaceName == "Cow bell") {
+			if (player.necklace == necklaces.COWBELL) {
 				if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
-				else player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
+				else player.statStore.replaceBuffObject({'str.mult':0.2,'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
 			}
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {

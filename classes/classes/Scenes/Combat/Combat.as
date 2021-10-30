@@ -11959,6 +11959,10 @@ public class Combat extends BaseContent {
                 EngineCore.SoulforceChange(100 + (player.wis*2), true);
             }
         }
+        if (player.hasPerk(PerkLib.EnergyDependent)) {
+            outputText("\n\nYou moan in relief as you drink on your victim's lifeforce to replenish your own, feeding of [monster his] pleasure. ");
+            player.EnergyDependentRestore();
+        }
         if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
             player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
             if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
@@ -12527,7 +12531,6 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
 		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
-		damage = damage;
 		doDamage(damage, true, true);
 		//Enemy faints -
 		if(monster.HP <= monster.minHP()) {

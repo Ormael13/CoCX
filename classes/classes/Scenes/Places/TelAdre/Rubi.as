@@ -623,7 +623,7 @@ public function rubisFuckingHouseYouPervert():void {
 		flags[kFLAGS.RUBIS_HOUSE_FIRST_TIME]++;
 	}
 	//Bimbo Shopping!
-	else if(rubiBimbo() && (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && rand(7) == 0) {
+	else if(rubiBimbo() && (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) && rand(7) == 0) {
 		flags[kFLAGS.RUBI_BIMBO_MINIDRESS] = 1;
 		outputText("Rather than order anything, you stop Rubi as she's going by your table and pull her close.  \"<i>How about we get out of here?</i>\"  you whisper into her ear.");
 		outputText("\n\nRubi's mouth pulls into a Cheshire-like grin and she nods.  \"<i>Like, for sure!  Just let me get Dia to cover my tables, kay?</i>\"  She promptly heads off into the back room, returning minutes later with the young canine waitress behind her.  Rubi points out a few tables, says some things to her replacement, and then returns to your side.");

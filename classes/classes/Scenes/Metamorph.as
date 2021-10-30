@@ -1168,7 +1168,7 @@ package classes.Scenes {
 				GeneticMemoryStorage[genMem.id] = true;
 				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
 				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
-			}
+			}the
 		}
 
 		public static function permMetamorph (genMem: *): void {
