@@ -3222,6 +3222,8 @@ public class PerkLib
 				"Gain Blood Demon Toughness. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10% of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap, +0,5% HP regen)");
 		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
 				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
+		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
+				"Increase by 5% caps for mutagen, alchemic, knowledge multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
 		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
 				"X th Asura super perk. (+10% of OverMax Wrath/Base TOU Cap)");
 		public static const BloodDemonWisdom:PerkType = mk("Blood Demon Wisdom", "Blood Demon Wisdom",
@@ -3230,8 +3232,6 @@ public class PerkLib
 				"X th Asura super perk. (+10% of OverMax Wrath/Base SPE Cap)");
 		public static const BloodDemonIntelligence:PerkType = mk("Blood Demon Intelligence", "Blood Demon Intelligence",
 				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base INT Cap)");
-		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
-				"increase multi caps for mutagen, alchemic, knowledge higher than 20%.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
 		public static const MunchkinAtWork:PerkType = mk("Munchkin @Work", "Munchkin @Work",
 				"+2 prestige job slots, +1 hidden job slot.");//?increase to overmax HP/Wrath/Lust??
 		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",

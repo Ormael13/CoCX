@@ -1188,4 +1188,4 @@ package classes.Scenes.Places.HeXinDao
 			}
 		}
 	}
-}
+}

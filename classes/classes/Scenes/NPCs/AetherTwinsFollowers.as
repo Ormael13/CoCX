@@ -210,7 +210,7 @@ public function aethertwinsFollowers():void {
 		if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(11, "Take A.S.", "Your current rigid state not allowing you to take her with you.");
 		else addButton(11, "Take A.S.", takeAetherS).hint(shields.AETHERS.description);
 	}
-	if (AetherTwinsFoodMenu1) addButton(13, "Morph", aethertwinsFollowersFeed).hint("Morph Aether Twins between all their unlocked forms.");
+	if (AetherTwinsFoodMenu1) addButton(13, "Morph", aethertwinsFollowersMorphMain).hint("Morph Aether Twins between all their unlocked forms.");
 	else addButtonDisabled(13, "???", "Maybe you should working toward their second evolution?");
 	addButton(14, "Back", camp.campFollowers);
 }
@@ -316,6 +316,8 @@ public function aethertwinsFollowersFeed():void {
 		outputText("\n-Tin ore ("+AetherTwinsFoodMenuTin+"/"+AetherTwinsFoodMenuTinCap+")");
 		outputText("\n-Copper ore ("+AetherTwinsFoodMenuCopper+"/"+AetherTwinsFoodMenuCopperCap+")");
 		outputText("\n-Iron ore ("+AetherTwinsFoodMenuIron+"/"+AetherTwinsFoodMenuIronCap+")");
+		outputText("\n-Amethyst ("+AetherTwinsFoodMenuAmethyst+"/"+AetherTwinsFoodMenuAmethystCap+")");
+		outputText("\n-Diamond ("+AetherTwinsFoodMenuDiamond+"/"+AetherTwinsFoodMenuDiamondCap+")");
 	}
 	outputText("\n\nEaten equipment:");
 	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");
@@ -414,6 +416,7 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 		case useables.G_INGOT: AetherTwinsFoodMenuGold += 1;	break;
 	}
 	player.destroyItems(itype, 1);
+	aethertwinsFollowersPostFeedEvolution();
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);
 }
@@ -431,6 +434,11 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 		case weapons.L_CLAWS:	AetherTwinsFoodMenuLustyClaws = true;	break;
 	}
 	player.destroyItems(itype, 1);
+	aethertwinsFollowersPostFeedEvolution();
+	doNext(aethertwinsFollowersFeed);
+	cheatTime(1/4);
+}
+private function aethertwinsFollowersPostFeedEvolution():void {
 	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuClaws) {
 		outputText("\"<i>Woohoo we're evolving.</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
 		outputText("<b>The Aether Twins base form evolved unlocking some of their sealed memories.</b>\n\n");
@@ -448,7 +456,7 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 		AetherTwinsFoodMenuGoldCap = 2;
 		AetherTwinsTalkMenu = 1;
 	}
-	else if (AetherTwinsFoodMenuSpikeLShield && AetherTwinsFoodMenuHGaunt && AetherTwinsFoodMenuBFGauntlets && AetherTwinsFoodMenuLustyClaws && AetherTwinsFoodMenuTin == 2 && AetherTwinsFoodMenuCopper == 2 && AetherTwinsFoodMenuIron == 2) {
+	if (AetherTwinsFoodMenuSpikeLShield && AetherTwinsFoodMenuHGaunt && AetherTwinsFoodMenuBFGauntlets && AetherTwinsFoodMenuLustyClaws && AetherTwinsFoodMenuTin == 2 && AetherTwinsFoodMenuCopper == 2 && AetherTwinsFoodMenuIron == 2 && AetherTwinsFoodMenuSilver == 2 && AetherTwinsFoodMenuGold == 2) {
 		outputText("\"<i>Woohoo it's that feeling again... We're evolving again...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Curvier Sharper!!!</i>\"\n\n");
 		outputText("<b>The Aether Twins base form evolved second time unlocking option to switch between current form and pre-evolution one.</b>\n\n");
 		player.addStatusValue(StatusEffects.AetherTwins1, 2, 10);
@@ -469,8 +477,6 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 		AetherTwinsFoodMenuDiamond = 0;
 		AetherTwinsFoodMenuDiamondCap = 2;
 	}
-	doNext(aethertwinsFollowersFeed);
-	cheatTime(1/4);
 }
 
 public function aethertwinsFollowersMorphMain():void {
