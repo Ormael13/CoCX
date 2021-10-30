@@ -14915,10 +14915,15 @@ use namespace CoC;
 				if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
 				outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 			}
-			if (statStore.hasBuff("NoLimiterState")) {
-				removeCurse("lib", 5, 1);
-				removeCurse("lib", 5, 2);
+			if (HP < maxHP()) {
+				EngineCore.HPChange(25 + (lib/2), true);
 			}
+			if (mana < maxMana()) {
+				EngineCore.ManaChange(25 + (inte/2), true);
+			}
+			EngineCore.changeFatigue(-(25 + (spe/2)));
+			removeCurse("lib", 5, 1);
+			removeCurse("lib", 5, 2);
 		}
 
 		public function hasUniquePregnancy():Boolean{
