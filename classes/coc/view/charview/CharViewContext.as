@@ -227,7 +227,7 @@ import coc.xlogic.ExecContext;
 							player.necklace == game.necklaces.NECKWIS || player.necklace == game.necklaces.FIRENEC || player.necklace == game.necklaces.ICENECK ||
 							player.necklace == game.necklaces.LIGHNEC || player.necklace == game.necklaces.DARKNEC || player.necklace == game.necklaces.POISNEC ||
 							player.necklace == game.necklaces.LUSTNEC,
-					CowBellAmulet: player.necklace == game.necklaces.COWBELL,
+					CowBellAmulet: player.necklace == game.necklaces.COWBELL
 				}
 			]);
 			this.charview = charview;
