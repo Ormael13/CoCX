@@ -239,6 +239,39 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const HINEZUMI:int = 18;
+		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
+			id: "Hinezumi Eyes",
+			name: "Hinezumi Eyes",
+			cost: 100,
+			title: "Hinezumi",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesHinezumi;
+			}
+		});
+
+		public static const MONOEYE:int = 19;
+		EnumValue.add(Memories, MONOEYE, "MONOEYE", {
+			id: "Monoeye",
+			name: "Monoeye",
+			cost: 100,
+			title: "Monoeye",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesMonoeye;
+			}
+		});
+
+		public static const BLACK_EYES_SAND_TRAP:int = 20;
+		EnumValue.add(Memories, BLACK_EYES_SAND_TRAP, "BLACK_EYES_SAND_TRAP", {
+			id: "Black Eyes",
+			name: "Black Eyes",
+			cost: 100,
+			title: "Black Eyes",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesSandTrap;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

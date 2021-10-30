@@ -360,6 +360,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const HINEZUMI:int = 29;
+		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
+			id: "Hinezumi Arms",
+			name: "Hinezumi Arms",
+			cost: 100,
+			title: "Hinezumi",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsHinezumi;
+			}
+		});
+
+		public static const GAZER:int = 30;
+		EnumValue.add(Memories, GAZER, "GAZER", {
+			id: "Gazer Arms",
+			name: "Gazer Arms",
+			cost: 100,
+			title: "Gazer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsGazer;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

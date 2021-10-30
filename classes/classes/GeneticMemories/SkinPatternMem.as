@@ -96,6 +96,29 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const OIL:int = 5;
+		EnumValue.add(Memories, OIL, "OIL", {
+			id: "Gazer Skin Pattern",
+			name: "Drips black fluids",
+			cost: 100,
+			title: "Gazer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.SkinPatternOil
+			}
+		});
+
+		public static const BEE_STRIPES:int = 6;
+		EnumValue.add(Memories, BEE_STRIPES, "BEE_STRIPES", {
+			id: "Bee Skin Pattern",
+			name: "Bee Stripes",
+			cost: 200,
+			title: "Bee Stripes",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.SkinPatternBeeStripes
+			},
+			info: "Includes Chitin skin"
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

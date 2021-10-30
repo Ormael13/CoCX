@@ -66,7 +66,7 @@ package classes.Scenes.Places.HeXinDao
 				outputText("You enter the town local Inn ‘Journey to the East’ and look around. ");
 			}
 			outputText("You can see many people enjoying a meal or drink in the dining hall, a barman standing by ready to serve drinks.");
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && model.time.hours >= 18 && rand(4) == 0) {
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && model.time.hours >= 18 && rand(4) == 0) {
 				ChiChiDrunkSex();
 				return;
 			}
@@ -359,7 +359,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 1, 0, 0, 0);
 			}
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestFerals1():void {
 			clearOutput();
@@ -422,7 +422,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 1, 0, 0, 0);
 			}
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestDemons1():void {
 			clearOutput();
@@ -503,7 +503,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 0, 1, 0, 0);
 			}
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestFerals2():void {
 			clearOutput();
@@ -566,7 +566,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 0, 1, 0, 0);
 			}
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestMinotaurs():void {
 			clearOutput();
@@ -627,7 +627,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 0, 0, 1, 0);
 			}
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestGel():void {
 			clearOutput();
@@ -671,7 +671,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests4, 0, 1, 0, 0);
 			}
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestChitin():void {
 			clearOutput();
@@ -725,7 +725,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests4, 1, 0, 0, 0);
 			}
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestEzekiel1():void {
 			clearOutput();
@@ -746,7 +746,7 @@ package classes.Scenes.Places.HeXinDao
 				outputText("You shrug and accept the job. Guess you are back fighting imps once again.\n\n");
 				flags[kFLAGS.GALIA_LVL_UP] = 0.01;
 			}
-			doNext(curry(enteringInn, false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestEzekiel1a():void {
 			clearOutput();
@@ -763,7 +763,7 @@ package classes.Scenes.Places.HeXinDao
 			flags[kFLAGS.GALIA_AFFECTION] = 0;
 			flags[kFLAGS.SPIRIT_STONES] += 22;
 			statScreenRefresh();
-			doNext(curry(enteringInn, false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestEzekiel1Keep():void {
 			outputText("She sigh in disappointment before grabbing the female imp by the neck, putting her in an harness and handing her back to you fully hogtied.\n\n");
@@ -773,29 +773,29 @@ package classes.Scenes.Places.HeXinDao
 		public function BoardkeeperYangQuestEzekiel2():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");//feral tentacle beasts capture
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestFerals3():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");//feral demons hunt
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuestGolems():void {
 			clearOutput();//golem harvesting quest
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			outputText("Placeholder for lazyLia writing ^^\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuest2():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangQuest1():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangGolemRetrievalJob():void {
 			clearOutput();
@@ -816,14 +816,14 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangGolemRetrievalJob1():void {
 			outputText("You tell Yang you will come back later to post the request.\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangGolemRetrievalJob2():void {
 			outputText("Yang wait at you arm crossed. You write a full job description and hand it over to Yang along with the stones. This done, she then posts it on the board as an iron plate request.\n\n");
 			flags[kFLAGS.SPIRIT_STONES] -= 10;
 			flags[kFLAGS.AURORA_LVL] = 0.35;
 			statScreenRefresh();
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangTalk():void {
 			clearOutput();
@@ -831,7 +831,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("\"<i>Here to talk or something else?</i>\"");
 			menu();
 			addButton(0, "Her Job", BoardkeeperYangTalkHerJob);
-			addButton(1, "He'Xin'Dao", BoardkeeperYangTalkHeXinDao);
+			//addButton(1, "He'Xin'Dao", BoardkeeperYangTalkHeXinDao);
 			addButton(2, "Requests", BoardkeeperYangTalkRequests);
 			addButton(3, "Others", BoardkeeperYangTalkOthers);
 			addButton(4, "Back", BoardkeeperYangMain);
@@ -867,7 +867,7 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();
 			outputText("She giggle before teasingly puffing her chest up, which only shows more cleavage than necessary.\n\n");
 			outputText("\"<i>Well that’s cute " + player.mf("Mr", "Mrs") + " hero but I don’t go for a ride with just anyone who ask. Complete at least a silver request for the guild and I will give you a shot.</i>\"");
-			doNext(curry(enteringInn,false));
+			doNext(BoardkeeperYangMain);
 		}
 		public function BoardkeeperYangPromotion():void {
 			clearOutput();
@@ -1188,4 +1188,4 @@ package classes.Scenes.Places.HeXinDao
 			}
 		}
 	}
-}
+}

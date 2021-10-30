@@ -22,7 +22,7 @@ package classes.Items.Vehicles
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.elfScore() >= 11) { //Elf
+			if (game.player.elfScore() >= 11 || game.player.woodElfScore() >= 22) { //Elf
 				outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}

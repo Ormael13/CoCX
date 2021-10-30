@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function TopazClaymore() 
 		{
-			super("TClaymo", "T.Claymore", "topaz claymore", "a topaz claymore", "cleaving sword-slash", 15, 1200, "This two-handed sword is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Large");
+			super("TClaymo", "T.Claymore", "topaz claymore", "a topaz claymore", "cleaving sword-slash", 15, 1200, "This two-handed sword is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Large", "Sword");
 		}
 		
 		override public function get attack():Number {

@@ -11,7 +11,7 @@ package classes.Items.Weapons
 		
 		public function Skypiercer() 
 		{
-			super("Skypier", "Skypiercer", "Skypiercer", "a Skypiercer", "piercing stab", 55, 3840, "Tales has it that this spear tip is so sharp it is said it could pierce through the sky.  Req. 300+ speed and 100+ strength to unleash full attack power", "Large", "Spear");
+			super("Skypier", "Skypiercer", "Skypiercer", "a Skypiercer", "piercing stab", 55, 3840, "Tales has it that this spear tip is so sharp it is said it could pierce through the sky.  Req. 300+ speed and 100+ strength to unleash full attack power", "Large, LGWrath", "Spear");
 		}
 		
 		override public function get attack():Number {

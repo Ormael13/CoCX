@@ -177,7 +177,7 @@ import classes.Scenes.UniqueSexScenes;
 			player.orgasm();
 			player.sexReward("cum","Vaginal");
 			dynStats("cor", 2);
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			cleanupAfterCombat();
 		}
 		
@@ -447,7 +447,7 @@ import classes.Scenes.UniqueSexScenes;
 			player.sexReward("cum","Vaginal");
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3,"cor", 1);
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			cleanupAfterCombat();
 		}
 		

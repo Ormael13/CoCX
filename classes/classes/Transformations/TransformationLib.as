@@ -452,7 +452,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 
 	        if (color !== player.coatColor) {
-	          desc += "You feel a strange sensation on the chitin that your skin became, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your chitin is now " + color + ".</b>"
+	          desc += "You feel a strange sensation on the chitin covering your skin, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your chitin is now " + color + ".</b>"
 	        }
 	      } else {
 	        switch (coverage) {
@@ -478,22 +478,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        }
 	      }
 
-	      // Patterns
-	      if (options.pattern && options.pattern !== player.skin.base.pattern) {
-	        const pattern: int = options.pattern;
-
-	        if (!options.color2 && options.colors2) {
-	          options.color2 = randomChoice(options.colors2);
-	        }
-
-	        switch (pattern) {
-	        case Skin.PATTERN_BEE_STRIPES:
-	          if (!options.color2) options.color2 = "black";
-	          desc += "\n\nA ripple spreads through your chitin as some patches change in color. After a few moments you're left with a " + options.color2 + " and " + color + " striped pattern, like a bee's! <b>You've got striped chitin!</b>";
-	          break;
-	        }
-	      }
-
 	      player.skinDesc = "skin";
 	      player.skin.growCoat(Skin.CHITIN, options, coverage);
 	      if (doOutput) outputText(desc);
@@ -514,6 +498,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  if (player.coatColor == "" || player.skinType === Skin.PLAIN) player.coatColor = player.hairColor;
 
 	  if (!options.adj) options.adj = "";
+
+		if (!options.pattern) options.pattern == "";
 
 	  if (!options.color && !options.colors) {
 	    options.color = player.coatColor;
@@ -680,12 +666,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "The black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>";
+	    desc += "The black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest. Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>";
 
 	    player.skin.base.pattern = Skin.PATTERN_OIL;
 	    player.skin.base.adj = "oily skin";
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.OIL));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -725,6 +712,29 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.skin.base.pattern === Skin.PATTERN_USHI_ONI_TATTOO;
+	  }
+	);
+
+	public const SkinPatternBeeStripes: Transformation = new SimpleTransformation("Bee Stripes Skin Pattern",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+			var coverage: int = player.skin.coverage;
+			if (coverage === Skin.COVERAGE_NONE) coverage = Skin.COVERAGE_LOW;
+
+			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(coverage, {color: "yellow"}), doOutput);
+
+			desc += "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
+
+			player.skin.base.pattern = Skin.PATTERN_BEE_STRIPES;
+			player.coatColor2 = "black";
+	    if (doOutput) outputText(desc);
+	  	Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
+	  },
+	  // is present
+	  function (): Boolean {
+			return player.skin.base.pattern === Skin.PATTERN_BEE_STRIPES;
 	  }
 	);
   /*
@@ -1257,6 +1267,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.";
+		player.antennae.type = Antennae.CENTIPEDE;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -1272,6 +1283,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "Two large lumps suddenly pushes out of your head and before you know it a pair of prehensile horn-like antennae are flopping in front of your forehead <b>just like those of a slug or snail</b>.";
 
 	    desc += "";
+		player.antennae.type = Antennae.FIRE_SNAIL;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -1287,6 +1299,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "A strange feeling washes over you as something crawls along your neck. You reach your hand up as large, thin strands of flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles, but instead, they start producing dim bioluminescent lights, much like the whiskers of deep-sea creatures. <b>Just like a sea dragon you now have four bioluminescent neck strands!</b>";
+		player.antennae.type = Antennae.SEA_DRAGON;
 
 	    if (doOutput) outputText(desc);
 	  },
@@ -2052,6 +2065,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.BUCKTEETH;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.BUCKTEETH));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -2068,6 +2082,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.MOUSE;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3543,6 +3558,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.MOUSE;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4006,6 +4022,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.MONOEYE;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.MONOEYE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4147,6 +4164,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.BLACK_EYES_SAND_TRAP));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4167,6 +4185,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.HINEZUMI;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5233,6 +5252,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.GAZER;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.GAZER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5316,6 +5336,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.HINEZUMI;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5747,6 +5768,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.createStatusEffect(StatusEffects.GazerEyeStalksPlayer, 2, 0, 0, 0);
 	    player.rearBody.type = RearBody.TENTACLE_EYESTALKS;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.TENTACLE_EYESTALKS));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7187,6 +7209,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.MOUSE;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7208,6 +7231,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.HINEZUMI;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7284,6 +7308,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.GAZER;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GAZER));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8623,6 +8648,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.MOUSE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8645,6 +8671,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.HINEZUMI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8818,7 +8845,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 
 	      desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
-		  
+
 		  if (tailCount == 2) ( desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>" )
 		  else if (tailCount == 3) ( desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>" )
 		  else if (tailCount == 4) ( desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>" )
@@ -9360,6 +9387,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.desc = "levitation";
 	    player.wings.type = Wings.LEVITATION;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.LEVITATION));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9630,7 +9658,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 /*
 *    ████████ ██ ███████ ██████  ███████ ██████      ████████ ███████ ███████
-*       ██    ██ ██      ██   ██ ██      ██   ██     	  ██    ██      ██
+*       ██    ██ ██      ██   ██ ██      ██   ██     	██    ██      ██
 *       ██    ██ █████   ██████  █████   ██   ██        ██    █████   ███████
 *       ██    ██ ██      ██   ██ ██      ██   ██        ██    ██           ██
 *       ██    ██ ███████ ██   ██ ███████ ██████         ██    ██      ███████

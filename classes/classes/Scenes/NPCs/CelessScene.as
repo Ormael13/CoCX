@@ -90,7 +90,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function get isCorrupt():Boolean {
-		return _corruption > 39;
+		return _corruption > 50;
 	}
 
 	public function get isAdult():Boolean {

@@ -408,8 +408,8 @@ import coc.view.MainView;
 			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
-				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
-				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE]) {
+				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.WATERSPORTS_ENABLED, 
+				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -2934,11 +2934,26 @@ import coc.view.MainView;
 			}
 			reincarnate();
 		}
+
+		private function removePerksThatShouldntBeFuckingPermanent():void {
+			if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4))
+				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry1to4);
+			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) == 0 )
+				player.removePerk(PerkLib.CorruptedNinetails);
+			if (player.hasPerk(PerkLib.CorruptedKitsune) && player.perkv4(PerkLib.CorruptedKitsune) == 0 )
+				player.removePerk(PerkLib.CorruptedKitsune);
+			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 )
+				player.removePerk(PerkLib.EnlightenedNinetails);
+			if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.perkv4(PerkLib.EnlightenedKitsune) == 0 )
+				player.removePerk(PerkLib.EnlightenedKitsune);
+		}
+
 		private function reincarnate():void {
 			Metamorph.resetMetamorph();
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();
+			removePerksThatShouldntBeFuckingPermanent();
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0.5){
 				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0
 			}
@@ -2972,6 +2987,8 @@ import coc.view.MainView;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 0;
+			player.masteryFeralCombatLevel = 0;
+			player.masteryFeralCombatXP = 0;
 			player.masteryGauntletLevel = 0;
 			player.masteryGauntletXP = 0;
 			player.masteryDaggerLevel = 0;
@@ -2984,6 +3001,8 @@ import coc.view.MainView;
 			player.masteryMaceHammerXP = 0;
 			player.masteryDuelingSwordLevel = 0;
 			player.masteryDuelingSwordXP = 0;
+			player.masteryPolearmLevel = 0;
+			player.masteryPolearmXP = 0;
 			player.masterySpearLevel = 0;
 			player.masterySpearXP = 0;
 			player.masteryWhipLevel = 0;

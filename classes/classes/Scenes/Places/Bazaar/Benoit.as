@@ -549,7 +549,7 @@ public function updateBenoitInventory():void {
 	}
 
 	//Slot 4
-	switch(rand(6)) {
+	switch(rand(5)) {
 		case 0:
 			flags[kFLAGS.BENOIT_4] = consumables.SNAKOIL.id;
 			break;

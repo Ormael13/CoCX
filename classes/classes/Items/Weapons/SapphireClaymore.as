@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function SapphireClaymore() 
 		{
-			super("SClaymo", "S.Claymore", "sapphire claymore", "a sapphire claymore", "cleaving sword-slash", 15, 1200, "This two-handed sword is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Large");
+			super("SClaymo", "S.Claymore", "sapphire claymore", "a sapphire claymore", "cleaving sword-slash", 15, 1200, "This two-handed sword is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Large", "Sword");
 		}
 		
 		override public function get attack():Number {

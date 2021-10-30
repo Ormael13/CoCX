@@ -79,16 +79,21 @@ public class PlayerAppearance extends BaseContent {
 		const crotchDesc: String = describeCrotch();
 		outputText(crotchDesc ? " " + crotchDesc : "");
 
-		if (player.hasCock() || player.balls > 0 || player.vaginas.length > 0) {
-			outputText(" " + Utils.mergeSentences([describeCock(), describeBalls()]));
+		if (player.cocks.length > 1) {
+			outputText("[pg]" + describeCock());
+			outputText("[pg]" + describeBalls());
+		} else {
+			if (player.hasCock() || player.balls > 0) {
+				outputText("[pg]" + Utils.mergeSentences([describeCock(), describeBalls()]));
+			}
 		}
 
 		const pussyDesc: String = describePussy();
-		outputText(pussyDesc ? "\n\n" + pussyDesc : "");
+		outputText(pussyDesc ? "[pg]" + pussyDesc : "");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
-			outputText(" " + Utils.mergeSentences([noSexString, describeAsshole()]));
+			outputText("[pg]" + Utils.mergeSentences([noSexString, describeAsshole()]));
 		}
 
 		const piercingsDesc: String = describePiercings();
@@ -666,7 +671,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeCock(): String {
 		var temp:Number = 0;
 		var rando:Number = 0;
-		var cockDesc: String = "\n\n";
+		var cockDesc: String = "";
 
 		if (player.hasCock()) {
 			rando = rand(100);
@@ -687,8 +692,8 @@ public class PlayerAppearance extends BaseContent {
 			for (var cock_index:int = 0; cock_index < player.cocks.length; cock_index++) {
 				rando++;
 				// How to start the sentence?
-				if (player.cocks.length == 1) cockDesc += "\nYour ";
-				else if (cock_index == 0) cockDesc += "\n--Your first ";
+				if (player.cocks.length == 1) cockDesc += "Your ";
+				else if (cock_index == 0) cockDesc += "--Your first ";
 				else if (rando % 5 == 0) cockDesc += "\n--The next ";
 				else if (rando % 5 == 1) cockDesc += "\n--The " + num2Text2(cock_index+1) + " of your ";
 				else if (rando % 5 == 2) cockDesc += "\n--One of your ";
@@ -744,17 +749,16 @@ public class PlayerAppearance extends BaseContent {
 					//trace("Found a sock description (WTF even is a sock?)", player.cocks[cock_index].sock);
 					cockDesc += sockDescript(cock_index);
 				}
-				//cockDesc += "\n"
 			}
 			//Worm flavor
-			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n";
+			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes";
 		}
 
 		return cockDesc;
 	}
 
 	public function describeBalls(): String {
-		var ballsDesc: String = "";
+		var ballsDesc: String = "\n";
 
 		const ballsSizeDesc: String = " about " + num2Text(Math.round(player.ballSize)) + " " + (Math.round(player.ballSize) == 1 ? "inch" : "inches") +" across"
 
@@ -767,12 +771,12 @@ public class PlayerAppearance extends BaseContent {
 				if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
 				else swingsWhere = " under your [cocks].";
 
-				if (player.hasFur()) ballsDesc += "a fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
-				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "a chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.hasScales()) ballsDesc += "a scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.skinType == Skin.STONE) ballsDesc += "a stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else if (player.skinType == Skin.GOO) ballsDesc += "an oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else ballsDesc += "a [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				if (player.hasFur()) ballsDesc += "A fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
+				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "A chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.hasScales()) ballsDesc += "A scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.skinType == Skin.STONE) ballsDesc += "A stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else if (player.skinType == Skin.GOO) ballsDesc += "An oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else ballsDesc += "A [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
 			}
 
 			// ballsDesc += " You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ";
@@ -782,7 +786,7 @@ public class PlayerAppearance extends BaseContent {
 			// ballsDesc += " across.";
 
 			//Worms extra descript. To match as seen in infested hellhounds.
-			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += " Across its surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.";
+			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += " Across its surface, random lumps move rapidly around, further proof of your infested sack, and it's parasitic inhabitants that both boost and increase your cum production.";
 		} else {
 			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += "Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.";
 		}
@@ -997,8 +1001,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.bearpandaScore() >= 1) outputText("\n<font color=\"#008000\">Half Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
 		else if (player.bearpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bear/Panda-morph: 0</font>");
 		//Bee
-		if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+50% to Tou racial multi, +50% to Spe racial multi, +35% to Int racial multi)</font>");
-		else if (player.beeScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+30% to Tou racial multi, +30% to Spe racial multi, +15% to Int racial multi)</font>");
+		if (player.beeScore() >= 14) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+80% to Tou racial multi, +80% to Spe racial multi, +50% to Int racial multi, +20% to Lib racial multi & +20 to min Lib)</font>");
+		else if (player.beeScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+40% to Tou racial multi, +40% to Spe racial multi, +25% to Int racial multi)</font>");
 		else if (player.beeScore() >= 1) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>");
 		else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");
 		//Bunny
@@ -1116,9 +1120,7 @@ public class PlayerAppearance extends BaseContent {
 		//Echidna
 		outputText("\nEchidna: " + player.echidnaScore());
 		//Elf
-		if (player.elfScore() >= 11 && (player.skin.base.color == "ebony" || player.skin.base.color == "dark") && player.hairColor == "white") outputText("\n<font color=\"#0000a0\">Drow: " + player.elfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +80% to Spe / Int racial multi, +60% to Wis racial multi, +30 min Sens, +20% max Mana)</font>");
-		else if (player.elfScore() >= 11 && (player.skin.base.color == "ebony" || player.skin.base.color == "dark")) outputText("\n<font color=\"#0000a0\">Dark Elf: " + player.elfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +80% to Spe / Int racial multi, +60% to Wis racial multi, +30 min Sens, +20% max Mana)</font>");
-		else if (player.elfScore() >= 11) outputText("\n<font color=\"#0000a0\">Elf: " + player.elfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +80% to Spe / Int racial multi, +60% to Wis racial multi, +30 min Sens, +20% max Mana)</font>");
+		if (player.elfScore() >= 11) outputText("\n<font color=\"#0000a0\">Elf: " + player.elfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +80% to Spe / Int racial multi, +60% to Wis racial multi, +30 min Sens, +20% max Mana)</font>");
 		else if (player.elfScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Elf: " + player.elfScore() + " (-5% to Str racial multi, -10% to Tou racial multi, +45% to Spe / Int racial multi, +30% to Wis racial multi, +15 min Sens, +10% max Mana)</font>");
 		else if (player.elfScore() >= 1) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
 		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
@@ -1308,12 +1310,12 @@ public class PlayerAppearance extends BaseContent {
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("185");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("170");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else outputText("140");
-			} else if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+			} else if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("170");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("160");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("150");
@@ -1328,7 +1330,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.mantisScore() >= 6) {
 			outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-20% to Str racial multi, +30% to Tou racial multi, +");
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("100");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("90");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("80");

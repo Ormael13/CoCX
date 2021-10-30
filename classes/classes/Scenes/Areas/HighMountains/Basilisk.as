@@ -40,7 +40,7 @@ import classes.internals.ChainedDrop;
 					//apply status here
 					basiliskSpeed(player,20);
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
-					if (player.hasPerk(MutationsLib.GorgonsEyesEvolved)) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
+					if (player.hasPerk(MutationsLib.GorgonsEyesPrimitive)) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
 					else if (player.hasPerk(MutationsLib.GorgonsEyes)) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
 					else flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}

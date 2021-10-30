@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function DualDaggers() 
 		{
-			super("DDagger","D.Daggers","dual daggers","a dual daggers","stab",3,240,"A pair of small blades.  Preferred weapons for the rogues.", "Dual Small");
+			super("DDagger","D.Daggers","dual daggers","a dual daggers","stab",3,240,"A pair of small blades.  Preferred weapons for the rogues.", "Dual Small", "Dagger");
 		}
 		
 		override public function canUse():Boolean {

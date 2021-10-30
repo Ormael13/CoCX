@@ -486,8 +486,7 @@ public function aethertwinsFollowersMorphMain():void {
 }
 public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	outputText("\n\n");
+	outputText("\"<i>So you liked our Human-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become larger than pair of medium sized gauntlets that coversr your hands and forearms with sharp claws.");
 	AetherTwinsShape = "Human-tier Gaunlets";
 	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 0) {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);
@@ -502,8 +501,7 @@ public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
 }
 public function aethertwinsFollowersMorphMainSkyTierGaunlets():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	outputText("\n\n");
+	outputText("\"<i>So you liked our Human-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a bit larger than BF gauntelrs with much much sharper claws and spiked similar to those on spiked shield growing all over upper section of gauntlets.\n\n");
 	AetherTwinsShape = "Sky-tier Gaunlets";
 	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 0) {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);

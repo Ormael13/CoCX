@@ -683,7 +683,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			player.sexReward("vaginalFluids","Dick");
 
 			dynStats("sen", -2, "cor", .25);
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00290] == 0) {
 				outputText("You smirk and wonder if you should punish her for stuffing her cock down your throat.  Do you?");
 				simpleChoices("Punish", punishCeraphForSurpriseThroatFuck, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
@@ -838,7 +838,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			player.sexReward("cum","Vaginal");
 			dynStats("sen", -2, "cor", 2);
 			//Preggers chance!
-			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0) {
+			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0 && !player.isGoblinoid()) {
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 				trace("PC KNOCKED UP WITH CERAPH IMPS");
 			}

@@ -1344,10 +1344,11 @@ public class MarblePurification extends NPCAwareContent{
 	public function purificationQuestFinal():void
 	{
 		clearOutput();
+		var expReward:Number = 500;
+		if (player.level > 4) expReward += (player.level - 4) * 100;
 	 	outputText("\"<i>It has been quite the morning, hasn't it sweetie?</i>\"  It certainly has been, but at least now, your lover is finally free of her corruption once and for all.");
-	 	outputText("\n\nYou've gained 500 exp for helping Marble attain purity.");
-		//increase exp by x
-		player.XP += 500;
+	 	outputText("\n\nYou've gained "+expReward+" exp for helping Marble attain purity.");
+		player.XP += expReward;
 		//Marble corruption is set to 10
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;

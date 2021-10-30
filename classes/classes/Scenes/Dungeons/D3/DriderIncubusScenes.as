@@ -753,7 +753,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			player.dynStats("cor+", 20);
 			player.orgasm();
 			player.sexReward("cum", "Vaginal");
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();
 		}
 	
