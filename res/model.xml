@@ -557,6 +557,7 @@
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
         <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
+		<cell rect="1029,41,15,13" name="clotheAmulet/CowBellAmulet" dx="97" dy="64"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="94" dy="64"/>
         <cell rect="67,184,80,28" name="clotheScarf/scarfRed" dx="94" dy="64"/>
         <cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="94" dy="64"/>
