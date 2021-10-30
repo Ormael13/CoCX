@@ -51,21 +51,21 @@ use namespace CoC;
 			this.skinTone = "light";
 			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(130, 195, 330, 200);
-			initWisLibSensCor(200, 230, 110, 80);
+			initStrTouSpeInte(130, 195, 230, 200);
+			initWisLibSensCor(200, 290, 210, 80);
 			this.weaponAttack = 54;
-			this.weaponName = "Frostlightning";
+			this.weaponName = "Frostlight";
 			this.weaponVerb="slash";
 			this.armorName = "vest";
-			this.armorDef = 16;
-			this.armorMDef = 3;
-			this.bonusHP = 200;
-			this.bonusLust = 379;
+			this.armorDef = 32;
+			this.armorMDef = 60;
+			this.bonusHP = 300;
+			this.bonusLust = 543;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.level = 39;//or 40-42?
+			this.level = 43;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.gems = 45 + rand(40);
+			this.gems = 65 + rand(30);
 			this.drop = new ChainedDrop().
 					add(consumables.VOLTTOP,1);
 					add(consumables.ALCTHUN,0.7).

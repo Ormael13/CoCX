@@ -382,6 +382,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const FROSTWYRM:int = 31;
+		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+			id: "Frostwyrm Arms",
+			name: "Frostwyrm Arms",
+			cost: 100,
+			title: "Frostwyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsFrostwyrm;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

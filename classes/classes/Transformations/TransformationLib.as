@@ -1172,6 +1172,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.horns.count = 30;
 	    player.horns.type = Horns.FROSTWYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.FROSTWYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4204,6 +4205,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.eyes.type = Eyes.FROSTWYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FROSTWYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5401,6 +5403,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.FROSTWYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.FROSTWYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5841,6 +5844,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.rearBody.type = RearBody.FROSTWYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.FROSTWYRM));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7366,6 +7370,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 1;
 	    player.lowerBody = LowerBody.FROSTWYRM;
 	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.FROSTWYRM));
 	  },
 	  // is present
 	  function (): Boolean {

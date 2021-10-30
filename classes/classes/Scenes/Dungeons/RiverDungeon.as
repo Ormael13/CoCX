@@ -597,21 +597,21 @@ import classes.StatusEffects;
 		
 		public function defeatedByIceElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
 		}
 		public function defeatedByLightningElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
 		}
 		public function defeatedByDarknessElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
@@ -632,7 +632,7 @@ import classes.StatusEffects;
 		}
 		public function defeatedByDarknessElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Placeholder Bad End.\n\n");//embrace the darkness(silly - dorkness) > boss invade all pc orfices and then rips apart fomr inside out or just devour from inside
 			//[GAME OVER]
 			EventParser.gameOver();
 		}/*

@@ -254,6 +254,7 @@ public class QuatroElementalBoss extends Monster
 			armorDef += 10;
 			armorMDef += 60;
 			bonusHP += 125;
+			level += 2;
 			this.strStat.core.value *= 1.3;
 			this.touStat.core.value *= 1.3;
 			this.removePerk(PerkLib.FireNature);
@@ -271,6 +272,7 @@ public class QuatroElementalBoss extends Monster
 			armorName = "magma skin covered with layer of steam";
 			armorDef += 5;
 			armorMDef = 30;
+			level += 2;
 			this.wisStat.core.value *= 1.3;
 			this.strStat.core.value *= 1.2;
 			this.touStat.core.value *= 1.2;
@@ -291,6 +293,7 @@ public class QuatroElementalBoss extends Monster
 			weaponAttack += 5;
 			armorDef += 5;
 			armorMDef = 30;
+			level += 2;
 			this.intStat.core.value *= 1.3;
 			this.wisStat.core.value *= 1.2;
 			this.strStat.core.value *= 1.1;
@@ -355,8 +358,8 @@ public class QuatroElementalBoss extends Monster
 			this.lustVuln = 0;
 			this.drop = new ChainedDrop()
 					.add(useables.ELSHARD, 1);
-			this.level = 24;
-			this.additionalXP = 200;
+			this.level = 21;
+			this.additionalXP = 250;
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
