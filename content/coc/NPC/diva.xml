@@ -481,18 +481,18 @@
                     Both of you scream in ecstasy, breaking out of the bite, blood still dripping from each other chin as you cum your load in her greedy vagina
                     <if test="player.cumQ() ge 20"> the excess dripping to the ground</if>.
 
-                    <elseif test="player.isFemale">
-                        You begin to feel more than blood oozing out of you.
-                        Your pussy lips are drooling and you can feel Diva juices slowly running down your leg.
-                        You are panting from the feeling in your neck and you desire more, Diva too, so on a common nod you get to step two.
-                        You start to grind your wet cunt against Diva’s, both of you moaning in each other neck.
-                        Blood is good but blood and sex is simply divine.
-                        Your pussies are literally eating each others seeking for a cock that is not there as you feel your vagina pulse with delightful pleasure, every single nerve aflame.
-                        Both of you slide against each other for several minutes, never parting away as a constant fountain of female fluids runs down your respective legs.
-                        Diva wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
-                        The both of you scream in ecstasy breaking out of the bite, blood still dripping from each other chin as you and Diva reach your orgasm.
-                        Unsatisfied the both of you keep at it for several hours. After about the sixth orgasm
-                    </elseif>
+                <elseif test="player.isFemale">
+                    You begin to feel more than blood oozing out of you.
+                    Your pussy lips are drooling and you can feel Diva juices slowly running down your leg.
+                    You are panting from the feeling in your neck and you desire more, Diva too, so on a common nod you get to step two.
+                    You start to grind your wet cunt against Diva’s, both of you moaning in each other neck.
+                    Blood is good but blood and sex is simply divine.
+                    Your pussies are literally eating each others seeking for a cock that is not there as you feel your vagina pulse with delightful pleasure, every single nerve aflame.
+                    Both of you slide against each other for several minutes, never parting away as a constant fountain of female fluids runs down your respective legs.
+                    Diva wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
+                    The both of you scream in ecstasy breaking out of the bite, blood still dripping from each other chin as you and Diva reach your orgasm.
+                    Unsatisfied the both of you keep at it for several hours. After about the sixth orgasm
+                </elseif>
                 </if>
 
                 You start to doze off tired as Diva pull you down in her coffin still embracing you.
