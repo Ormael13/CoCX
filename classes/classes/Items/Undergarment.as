@@ -1,6 +1,7 @@
 package classes.Items
 {
 import classes.BodyParts.LowerBody;
+import classes.PerkLib;
 	/**
 	 * @author Kitteh6660
 	 */
@@ -130,6 +131,10 @@ import classes.BodyParts.LowerBody;
 					outputText("Your form makes it impossible to put this on. You place it back into your inventory.");
 					return false;
 				}
+			}
+			if (game.player.hasPerk(PerkLib.Rigidity)) {
+				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				return false;
 			}
 			return true;
 		}

@@ -578,8 +578,8 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				//spriteSelect(25);
-				/*if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) */flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-				//else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
+				if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
+				else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
 				if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a large mass of darkness rushing towards you!  When it it almost next to you it starts to morph into nearly ideal nine feet tall copy of you just made up from darkness.  ");
 					outputText("After finishing assuming it new form it attacks!");
@@ -597,21 +597,21 @@ import classes.StatusEffects;
 		
 		public function defeatedByIceElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
 		}
 		public function defeatedByLightningElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
 		}
 		public function defeatedByDarknessElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
@@ -632,7 +632,7 @@ import classes.StatusEffects;
 		}
 		public function defeatedByDarknessElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Placeholder Bad End.\n\n");//embrace the darkness(silly - dorkness) > boss invade all pc orfices and then rips apart fomr inside out or just devour from inside
 			//[GAME OVER]
 			EventParser.gameOver();
 		}/*
@@ -644,16 +644,22 @@ import classes.StatusEffects;
 		}*/
 		public function defeatDarknessElementalSubBoss():void {
 			clearOutput();
-			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n");
+			outputText("Beaten unique darkness elemental starting to slowly disperse. The only thing that remains is a piece of black object, lying on the ground.\n\n");
 			if (player.hasKeyItem("Key Of Darkness (2/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (2/3)");
 				player.createKeyItem("Key Of Darkness", 0, 0, 0, 0);
+				outputText(" once again kneeling you takes out incomplete key, whcih as you expected merge with the piece laying on the gorun. Now it looks like proper key mad of black material. <b>You have gained Key Item: Key Of Darkness</b>");
 			}
 			else if (player.hasKeyItem("Key Of Darkness (1/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (1/3)");
 				player.createKeyItem("Key Of Darkness (2/3)", 0, 0, 0, 0);
+				outputText(" After you kneel to pick it up it flash with balck light and vanish. And you see something else in the pocket feel a bit heavier. <b>You have gained Key Item: Key Of Darkness (2/3)</b>");
 			}
-			else player.createKeyItem("Key Of Darkness (1/3)", 0, 0, 0, 0);
+			else {
+				player.createKeyItem("Key Of Darkness (1/3)", 0, 0, 0, 0);
+				outputText(" <b>You have gained Key Item: Key Of Darkness (1/3)</b>");
+			}
+			outputText("\n\n");
 			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
@@ -1058,9 +1064,8 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Your vision is obscured by thick fog. You instinctively tense as the echoes of footsteps bounce off the walls. Enemies could be right next to you, and you wouldn't know unless you bump into one. You break into a light sweat, or is that the moisture condescending onto your [skin]?");
 			dungeons.setDungeonButtonsRD(null, roomB14, null, null);
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(6, "Down", roomC01);
-			else addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");*/
-			addButtonDisabled(6, "Down", "The passage is blocked by cave in with traces of lighting discharges and frost at the edges. Symbols left on the rocks forms words 'you shall not pass'.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(6, "Down", roomC01);
+			else addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomB16():void {
 			dungeonLoc = 119;
@@ -1482,7 +1487,7 @@ import classes.StatusEffects;
 			dungeons.setDungeonButtonsRD(null, roomC29, roomC34, roomC27);
 		}
 		public function roomC31():void {
-			dungeonLoc = 165;
+			dungeonLoc = 165;//boss room
 			clearOutput();
 			/*if () {
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
@@ -1504,7 +1509,7 @@ import classes.StatusEffects;
 			else {
 				dungeons.setDungeonButtonsRD(roomC33, null, null, roomC28);
 				addButtonDisabled(11, "South", "There are massive doors with a simple keyhole in middle of it. Maybe you should look for a key? It should be still somehwere on this floor, right?");
-				if (player.hasKeyItem("Key Of Darkness") >= 0) addButtonDisabled(0, "Insert Key", "??? is not yet ready to see you. You have to wait a bit more.");
+				if (player.hasKeyItem("Key Of Darkness") >= 0) addButton(0, "Insert Key", insertTheKey).("Now you got the key. Would you open the doors?");
 				else addButtonDisabled(0, "Insert Key", "Would you kindly find the key first?");
 			}
 		}

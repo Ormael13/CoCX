@@ -16,6 +16,7 @@ package classes.Scenes.Places.HeXinDao
 	import classes.Scenes.SceneLib;
 	import classes.Scenes.Dungeons.RiverDungeon;
 	import classes.Items.ArmorLib;
+	import classes.Items.HeadJewelryLib;
 	import classes.Items.ShieldLib;
 	import classes.Items.UndergarmentLib;
 	import classes.Items.WeaponLib;
@@ -1103,9 +1104,10 @@ package classes.Scenes.Places.HeXinDao
 				player.setShield(ShieldLib.NOTHING);
 			}
 			if (player.armor != ArmorLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
-				player.setArmor(armors.TRADITC);
+				if (player.armorName == "goo armor") player.armor.removeText();
+				else flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
 			}
+			player.setArmor(armors.TRADITC);
 			if (player.lowerGarment != UndergarmentLib.NOTHING) {
 				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = player.lowerGarment.id;
 				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
@@ -1114,12 +1116,15 @@ package classes.Scenes.Places.HeXinDao
 				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = player.upperGarment.id;
 				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
 			}
+			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+			player.setHeadJewelry(headjewelries.JIANGCT);
 			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
 			if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
 			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
 			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
+			player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			player.strtouspeintwislibsenCalculation2();
 			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
@@ -1188,4 +1193,4 @@ package classes.Scenes.Places.HeXinDao
 			}
 		}
 	}
-}
+}

@@ -15009,6 +15009,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) MBCap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) MBCap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) MBCap += 0.02;
+			if (hasPerk(PerkLib.MunchkinAtGym)) MBCap += 0.05;
 			removeCurse(statName, bonus);
 			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < MBCap){
 				buff("Mutagen").addStat(""+statName+".mult",0.01);
@@ -15027,6 +15028,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
+			if (hasPerk(PerkLib.MunchkinAtGym)) ABCap += 0.05;
 			removeCurse(statName, bonus);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
@@ -15038,6 +15040,7 @@ use namespace CoC;
 		public function KnowledgeBonus(statName: String, bonus: Number):void
 		{
 			var KBCap:Number = 0.2;
+			if (hasPerk(PerkLib.MunchkinAtGym)) KBCap += 0.05;
 			removeCurse(statName, bonus);
 			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < KBCap){
 				buff("Knowledge").addStat(""+statName+".mult",0.01);

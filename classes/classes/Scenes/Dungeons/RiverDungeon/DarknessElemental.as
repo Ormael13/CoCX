@@ -194,7 +194,7 @@ public class DarknessElemental extends Monster
 			initGenderless();
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
-			this.armorName = "darkness skin";
+			this.armorName = "skin of the darkness";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DarknessNature, 0, 0, 0, 0);
 			checkMonster();

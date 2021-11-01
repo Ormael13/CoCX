@@ -18,7 +18,7 @@ public class ScarredBlade extends Weapon
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.cor >= (66 - game.player.corruptionTolerance())) return true;
+			if (game.player.cor >= (66 - game.player.corruptionTolerance())) return super.canUse();
 			SceneLib.sheilaScene.rebellingScarredBlade(true);
 			return false;
 		}

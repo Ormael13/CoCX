@@ -2682,7 +2682,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
-		if (player.weaponName == "fists" && player.haveNaturalClaws()) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
+		if (player.weaponName == "fists") accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
 		if (player.isGauntletWeapon()) accmod += Math.round((masteryGauntletLevel() - 1) / 2);
 		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
 		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
@@ -5197,7 +5197,7 @@ public class Combat extends BaseContent {
             if (player.weapon == weapons.BFGAUNT || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 			if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
-			if (player.weaponName == "fists" && player.haveNaturalClaws()) damage *= (1 + (0.01 * masteryFeralCombatLevel()));
+			if (player.weaponName == "fists") damage *= (1 + (0.01 * masteryFeralCombatLevel()));
 			if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
 			if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
 			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
@@ -12531,6 +12531,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
 		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+		damage = Math.round(damage);
 		doDamage(damage, true, true);
 		//Enemy faints -
 		if(monster.HP <= monster.minHP()) {

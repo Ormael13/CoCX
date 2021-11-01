@@ -19,6 +19,8 @@ package classes.Scenes.NPCs
 	import classes.MutationsLib;
 	import classes.Items.Shield;
 	import classes.Items.ShieldLib;
+	import classes.Items.HeadJewelry;
+	import classes.Items.HeadJewelryLib;
 	import classes.Items.Undergarment;
 	import classes.Items.UndergarmentLib;
 	import classes.Items.Weapon;
@@ -196,8 +198,7 @@ public function meetEvangeline():void {
 		else addButtonDisabled(3, "Spar", "Req. built sparring ring.");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
 		else addButtonDisabled(5, "Give Gems", "Req. sparring with Evangeline at least once.");
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.TransformationImmunityAtlach) || player.hasPerk(PerkLib.TransformationImmunityFairy) || player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) addButtonDisabled(8, "I.Mutations", "You are immune to transformatives, as such, you can't mutate!");
-		else addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
+		addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
 	}
 	else {
 		addButtonDisabled(3, "Spar", "Req. 5%+ affection and built sparring ring.");
@@ -954,6 +955,10 @@ private function curingJiangshi():void {
 			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID]) as Undergarment, UndergarmentLib.TYPE_UPPERWEAR);
 			flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = 0;
 		}
+		if (player.headJewelry == HeadJewelryLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] != 0) {
+			player.setHeadJewelry(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID]) as HeadJewelry);
+			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = 0;
+		}
 		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 		player.skinTone = "light";
 		CoC.instance.transformations.FaceHuman.applyEffect(false);
@@ -982,6 +987,7 @@ private function curingJiangshi():void {
 		player.removePerk(PerkLib.Undeath);
 		player.removePerk(PerkLib.EnergyDependent);
 		player.statStore.removeBuffs("Energy Vampire");
+		player.statStore.removeBuffs("Jiangshi Curse Tag");
 		outputText("Done with this place you head back to camp.\n\n");
 		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent"+(player.hasPerk(PerkLib.CursedTag)?", Cursed Tag":"")+")</b>\n\n");
 		player.strtouspeintwislibsenCalculation2();

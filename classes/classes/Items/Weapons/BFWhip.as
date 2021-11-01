@@ -34,7 +34,7 @@ package classes.Items.Weapons
         }
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return true;
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
 			outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this whip. Unless you want to hurt yourself instead enemies when trying to use it...  ");
 			return false;
 		}
