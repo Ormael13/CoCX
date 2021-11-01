@@ -691,6 +691,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			dynStats("cor", 100);
 			player.tailType = Tail.SPIDER_ADBOMEN;
 			player.lowerBody = LowerBody.ATLACH_NACHA;
+			player.legCount = 8;
 			if (!player.hasVagina()) player.createVagina();
 			player.vaginaType(5);
 			if (player.tailRecharge < 15) player.tailRecharge = 15;
