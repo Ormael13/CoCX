@@ -2404,7 +2404,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (type == 3 && player.hairColor != "midnight black" && player.lowerBody != LowerBody.GARGOYLE) {
+        if (changes < changeLimit && type == 3 && player.hairColor != "midnight black" && player.lowerBody != LowerBody.GARGOYLE) {
             outputText("[pg]");
             transformations.HairChangeColor(["midnight black"]).applyEffect();
             outputText("[pg]");
