@@ -1808,7 +1808,7 @@ public class PerkLib
 				"Almost hellish training increeased your fists attack rating by another 10.",
 				"You've chosen the 'Iron Fists V' perk, to once again make your first more tough. This increases attack power once more for 10.");
 		public static const IronFistsVI:PerkType = mk("Iron Fists VI", "Iron Fists VI",
-				"Another round of almost hellish taining increeased your fists attack rating by another 10.",
+				"Another round of almost hellish training increased your fists attack rating by another 10.",
 				"You've chosen the 'Iron Fists VI' perk, to again make your first tougher. This increases attack power again for 10.");
 		public static const IronMan:PerkType = mk("Iron Man", "Iron Man",
 				"Reduces the fatigue cost of physical specials by 50%.",
