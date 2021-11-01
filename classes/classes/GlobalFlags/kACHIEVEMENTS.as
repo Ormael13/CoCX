@@ -432,8 +432,8 @@ package classes.GlobalFlags
 		public static const COMBAT_EDGY_CASTER:int					= 385;
 		public static const DUNGEON_VICTORY_SWEET_LIKE_HONEY:int	= 386;
 		public static const DUNGEON_BUZZ_OFF:int					= 387;
-		public static const UNKNOWN_ACHIEVEMENT_388:int				= 388;
-		public static const UNKNOWN_ACHIEVEMENT_389:int				= 389;
+		public static const EPIC_F_H_B_S_CURVIER_4:int				= 388;
+		public static const EPIC_F_H_B_S_CURVIER_5:int				= 389;
 		public static const UNKNOWN_ACHIEVEMENT_390:int				= 390;
 		public static const UNKNOWN_ACHIEVEMENT_391:int				= 391;
 		public static const UNKNOWN_ACHIEVEMENT_392:int				= 392;

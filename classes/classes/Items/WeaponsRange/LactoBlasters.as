@@ -17,7 +17,7 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && game.player.str >= 100 && game.player.biggestTitSize() > 4) return true;
+			if (game.player.hasPerk(PerkLib.DualWield) && game.player.str >= 100 && game.player.biggestTitSize() > 4) return super.canUse();
 			if (!game.player.hasPerk(PerkLib.DualWield))outputText("You have yet to master the art of dual wielding! ");
 			if (game.player.str < 100)outputText("This setup is to heavy for you to wield! ");
 			if (game.player.biggestTitSize() < 4)outputText("You lack the 'assets' to use this weapon. ");

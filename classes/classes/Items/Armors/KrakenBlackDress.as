@@ -24,7 +24,7 @@ import classes.Scenes.NPCs.CelessScene;
 			withTag(ItemTags.REVEALING,ItemTags.AGILE);
 		}
 		override public function canUse():Boolean{
-			if (game.player.isKraken() || game.player.isScylla()){return true}
+			if (game.player.isKraken() || game.player.isScylla()){return super.canUse()}
 			outputText("You try to figure out how to wear this thing but your current body shape does not allow it. You put it back in your backpack for now.");
 			return false;
 		}

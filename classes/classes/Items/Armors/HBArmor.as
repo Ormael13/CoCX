@@ -46,7 +46,7 @@ package classes.Items.Armors
 		
 		override public function canUse():Boolean {
 			if (game.player.str >= 60 && game.player.spe >= 60 && game.player.tallness >= 84) {
-				return true;
+				return super.canUse();
 			}
 			if (game.player.tallness < 84) outputText("You aren't tall enough to wear this armor!  ");
 			else outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
