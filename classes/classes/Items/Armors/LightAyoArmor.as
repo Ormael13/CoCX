@@ -46,7 +46,7 @@ package classes.Items.Armors
 		
 		override public function canUse():Boolean {
 			if (game.player.str >= 20 && game.player.spe >= 20) {
-				return true;
+				return super.canUse();
 			}
 			outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
 			return false;

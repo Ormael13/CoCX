@@ -2028,6 +2028,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
 				else player.statStore.replaceBuffObject({'str.mult':0.2,'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
 			}
+			//Jiangshi cursed tag
+			if (player.headJewelry == headjewelries.JIANGCT && player.jiangshiScore() >= 20 && !player.statStore.hasBuff('Jiangshi Curse Tag')) player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {
 				outputText("\nWhile wandering around the border of your camp, you randomly kick a rock and a stream of water sprays out. Surprised, you touch the water, discovering it to be startlingly hot. An idea comes to your mind. You get a shovel, digging around the fountaining water which soon turns into a small pool. This is the perfect place to build a hot spring. You smile, delighted at the idea of being able to take frequent baths in it! You resolve to get to work as soon as possible.");

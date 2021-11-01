@@ -5532,7 +5532,8 @@ public function rebirthFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
-			outputText("Text.");
+			outputText("Jiangshi getting Tag'd");
+			if (player.hasPerk(PerkLib.Rigidity)) jiangshiBuggedItemsCleanUpCrew();//LAST THING TO DO IN THIS SAVE UPDATE
 			doNext(doCamp);
 			return;
 		}
@@ -5542,9 +5543,70 @@ public function rebirthFromBadEnd():void {
 			outputText("Text.");
 			doNext(doCamp);
 			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 36) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 37;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 37) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 38;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
 		}*/
 
 		doCamp();
+	}
+	
+	private function jiangshiBuggedItemsCleanUpCrew():void {
+		if (player.weapon != WeaponLib.FISTS) {
+			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+				player.setWeapon(WeaponLib.FISTS);
+				jiangshiBuggedItemsCleanUpCrew();
+				return;
+			}
+			else {
+				inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew);
+				return;
+			}
+		}
+		if (player.weaponRange != WeaponRangeLib.NOTHING) {
+			inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (player.shield != ShieldLib.NOTHING) {
+			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
+				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+				player.setShield(ShieldLib.NOTHING);
+				jiangshiBuggedItemsCleanUpCrew();
+				return;
+			}
+			else {
+				inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew);
+				return;
+			}
+		}
+		if (player.armor != ArmorLib.NOTHING) {
+			if (player.armorName == "goo armor") player.armor.removeText();
+			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (player.lowerGarment != UndergarmentLib.NOTHING) {
+			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (player.upperGarment != UndergarmentLib.NOTHING) {
+			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		player.setHeadJewelry(headjewelries.JIANGCT);
+		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 
 	private function furColorSelection1():void {
@@ -5799,15 +5861,16 @@ public function rebirthFromBadEnd():void {
 			awardAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR);
 			dungeonsCleared++;
 		}
+		//bee hive clear
 		if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 50 && flags[kFLAGS.EBON_LABYRINTH] == 2) dungeonsCleared++;
 		if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
 		if (dungeonsCleared >= 2) awardAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE);
 		if (dungeonsCleared >= 4) awardAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
 		if (dungeonsCleared >= 8) awardAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT);
-		if (dungeonsCleared >= 16) awardAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER);//obecnie max 11
+		if (dungeonsCleared >= 16) awardAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER);//obecnie max 10
 
 		if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear()) awardAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER);
-		if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear()) awardAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER);
+		//if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear()) awardAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER);
 
 		//Fashion
 		if (player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF) awardAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD);
@@ -5928,7 +5991,7 @@ public function rebirthFromBadEnd():void {
 		if (NPCsBadEnds >= 2) awardAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER);
 		if (NPCsBadEnds >= 4) awardAchievement("Bad Ender 2: Electric Boogaloo", kACHIEVEMENTS.GENERAL_BAD_ENDER_2);
 		if (NPCsBadEnds >= 8) awardAchievement("Bad Ender 3: Serious Serial Slayer", kACHIEVEMENTS.GENERAL_BAD_ENDER_3);
-		if (NPCsBadEnds >= 16) awardAchievement("Bad Ender 4: The Prequel", kACHIEVEMENTS.GENERAL_BAD_ENDER_4);
+		//if (NPCsBadEnds >= 16) awardAchievement("Bad Ender 4: The Prequel", kACHIEVEMENTS.GENERAL_BAD_ENDER_4);
 
 		if (flags[kFLAGS.TIMES_TRANSFORMED] >= 1) awardAchievement("What's Happening to Me?", kACHIEVEMENTS.GENERAL_WHATS_HAPPENING_TO_ME);
 		if (flags[kFLAGS.TIMES_TRANSFORMED] >= 10) awardAchievement("Transformer", kACHIEVEMENTS.GENERAL_TRANSFORMER);
@@ -6034,9 +6097,13 @@ public function rebirthFromBadEnd():void {
 		if (EvolutionsCount >= 1) awardAchievement("Faster Harder Better Stronger Curvier!!! (1)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_1);
 		//if (EvolutionsCount >= 2) awardAchievement("Faster Harder Better Stronger Curvier!!! (2)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_2);
 		//if (EvolutionsCount >= 4) awardAchievement("Faster Harder Better Stronger Curvier!!! (3)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_3);
+		//if (EvolutionsCount >= 8) awardAchievement("Faster Harder Better Stronger Curvier!!! (4)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_4);
+		//if (EvolutionsCount >= 16) awardAchievement("Faster Harder Better Stronger Curvier!!! (5)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_5);
 
 		if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
+		//atlach nacha achiev
+		//handmaiden achiev
 		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 		if (player.yukiOnnaScore() >= 14) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
 		//wendigo achiev

@@ -217,7 +217,7 @@ use namespace CoC;
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
-			//9
+			addButton(9, "FixJiangshi", jiangshiBuggedItemsCleanUpCrew0).hint("Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
@@ -241,6 +241,57 @@ use namespace CoC;
 			addButton(12, "PerkGalore2", PerkGalore2);
 			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew0():void {
+			if (player.weapon != WeaponLib.FISTS) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+					player.setWeapon(WeaponLib.FISTS);
+					jiangshiBuggedItemsCleanUpCrew1();
+				}
+				else inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew1);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew1);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew1():void {
+			if (player.weaponRange != WeaponRangeLib.NOTHING) inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew2);
+			else doNext(jiangshiBuggedItemsCleanUpCrew2);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew2():void {
+			if (player.shield != ShieldLib.NOTHING) {
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+					player.setShield(ShieldLib.NOTHING);
+					jiangshiBuggedItemsCleanUpCrew3();
+				}
+				else inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew3);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew3);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew3():void {
+			if (player.armor != ArmorLib.NOTHING) {
+				if (player.armorName == "goo armor") player.armor.removeText();
+				inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew4);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew4():void {
+			if (player.lowerGarment != UndergarmentLib.NOTHING) {
+				inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew5);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew5);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew5():void {
+			if (player.upperGarment != UndergarmentLib.NOTHING) {
+				inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew6);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew6);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew6():void {
+			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+			player.setHeadJewelry(headjewelries.JIANGCT);
+			player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
+			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack033():void {
 			outputText("\n\nFix completed");

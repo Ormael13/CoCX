@@ -1211,7 +1211,7 @@ use namespace CoC;
 					addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
 				}
 				else addButtonDisabled(6, "Upperwear", "You not have upperwear equipped.");
-				if (player.vehicles != VehiclesLib.NOTHING) {
+				if (player.vehicles != VehiclesLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(7, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
 				}
 				else addButtonDisabled(7, "Vehicle", "You not using currently any vehicle.");
@@ -1223,7 +1223,7 @@ use namespace CoC;
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
-				if (player.headJewelry != HeadJewelryLib.NOTHING) {
+				if (player.headJewelry != HeadJewelryLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
 				}
 				else addButtonDisabled(0, "Head Acc", "You not have equipped any head accesory.");

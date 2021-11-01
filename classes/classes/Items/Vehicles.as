@@ -37,6 +37,10 @@ package classes.Items
 		}
 		
 		override public function canUse():Boolean {
+			if (game.player.hasPerk(PerkLib.Rigidity)) {
+				outputText("You would very like to enter " + longName + " cockpit but your body stiffness prevents you from doing so.");
+				return false;
+			}
 			return super.canUse();
 		}
 		
