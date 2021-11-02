@@ -3165,7 +3165,7 @@ public class MagicSpecials extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
-		else combatRoundOver();
+		else enemyAI();
 	}
 
 	public function Minimise():void {
