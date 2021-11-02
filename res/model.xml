@@ -4159,6 +4159,9 @@
 		<if test="GoldStatAmulet">
 			<show part="clotheAmulet/GoldStatAmulet"/>
 		</if>
+		<if test="CowBellAmulet">
+			<show part="clotheAmulet/CowBellAmulet"/>
+		</if>
 
 		<!-- Winter Scarves -->
 		<if test="blueScarf">
@@ -5388,8 +5391,11 @@
                 <if test="showLegClothing">
                     <show part="clotheLegs/berserkerArmorLegs"/>
 					<else>
-						<if test="PlayerIsFeralStancing">
-							<show part="clotheLegs/berserkerArmorLegsFeral"/>
+						<if test="PlayerIsStancing">
+							<hide part="clotheLegs/*"/>
+							<if test="PlayerIsFeralStancing">
+								<show part="clotheLegs/berserkerArmorLegsFeral"/>
+							</if>
 						</if>
 					</else>
                 </if>
