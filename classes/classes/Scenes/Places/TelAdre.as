@@ -211,13 +211,13 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 		homes = true;
 	menu();
 	addButton(0, "Shops", armorShops);
-	addButton(1, "Bakery", bakeryScene.bakeryuuuuuu);
-	addButton(2, "Bar", enterBarTelAdre);
-	addButton(3, "Gym", gymDesc);
-	if (homes) addButton(4, "Homes", houses);
-	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", SceneLib.arianScene.visitThePark);
-	addButton(6, "Pawn", oswaldPawn);
-	addButton(8, "Tower", library.visitZeMagesTower);
+	addButton(1, "Pawn", oswaldPawn);
+	addButton(2, "Bakery", bakeryScene.bakeryuuuuuu);
+	addButton(3, "Bar", enterBarTelAdre);
+	addButton(4, "Gym", gymDesc);
+	if (homes) addButton(5, "Homes", houses);
+	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(6, "Park", SceneLib.arianScene.visitThePark);
+	addButton(7, "Tower", library.visitZeMagesTower);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 

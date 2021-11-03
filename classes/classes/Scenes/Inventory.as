@@ -1196,15 +1196,16 @@ use namespace CoC;
 					addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 				}
 				else addButtonDisabled(2, "Shield", "You not have shield equipped.");
-				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING) {
 					addButton(3, "Flying Sword", unequipFlyingSwords).hint(player.weaponFlyingSwords.description, capitalizeFirstLetter(player.weaponFlyingSwords.name));
 				}
 				else {
 					if (player.hasPerk(PerkLib.FlyingSwordPath)) addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped.");
 					else addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
 				}
-				if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
+				if (player.armor != ArmorLib.NOTHING) {
+					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(5, "Armour", "Your body stiffness prevents you from unequipping this armor.");
+					else addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 				}
 				else addButtonDisabled(5, "Armour", "You not have armor equipped.");
 				if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
@@ -1223,8 +1224,9 @@ use namespace CoC;
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
-				if (player.headJewelry != HeadJewelryLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
+				if (player.headJewelry != HeadJewelryLib.NOTHING) {
+					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(0, "Head Acc", "Your body stiffness prevents you from unequipping this head accesory.");
+					else addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
 				}
 				else addButtonDisabled(0, "Head Acc", "You not have equipped any head accesory.");
 				if (player.necklace != NecklaceLib.NOTHING) {

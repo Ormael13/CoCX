@@ -117,7 +117,10 @@ package classes.Scenes
 			outputText("<b>Version 0.8s3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Frost Wyrm\n");
 			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 10% caps for mutagen, alchemic, knowledge multi.\n");
+			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
+			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
+			outputText("-Jiangshi PC aside not able to equip melee/range weapons, shields, armors and underwear will now not be able to equip two more items types: head jewelry and vehicles.\n");
 			outputText("-Liadri many small changes.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -129,16 +132,13 @@ package classes.Scenes
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
-			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
-			outputText("-Jiangshi PC aside not able to equip melee/range weapons, shields, armors and underwear will now not be able to equip two more items types: head jewelry and vehicles.\n");
 			outputText("-Jtex numerous fixes.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-Ingnam Thiefs post fight win options and giving gems scenes would take less time: from 1 hour down to 15 minutes. Gems reward for beating them increased a bit too.\n");
+			outputText("-Exploring would also take only 15 minutes. Working at farm could make PC gain 10 not 15 fatigue and gain 5 more gems. Trading Post can buy items form PC too now.\n");
+			outputText("-New items added in Ingnam: Heal Pill, Incese of Wisdom, Agility Elixir, ManUp Beer added to trading post; Healing herb, Moonlight grass added to alchemist, Ringtail fig to Black Market.\n");
+			outputText("-Luna talk scenes takes 15 min now and not sends PC back to main camp menu.\n");
+			outputText("-Charge move will be unusable if PC not have enough fatigue to use it.\n");
+			outputText("-Zetta fixes.\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk

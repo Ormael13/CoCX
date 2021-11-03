@@ -809,6 +809,9 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.LUNA_LVL_UP] == 0) interpersonStats += "<b>Luna lvl:</b> 9\n";
 		}
 
+		if (player.hasStatusEffect(StatusEffects.Marble))
+			interpersonStats += "<b>Marble Affection:</b> " + Math.round(player.statusEffectv1(StatusEffects.Marble)) + "%\n";
+
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
 			if (flags[kFLAGS.NEISA_AFFECTION] < 50) interpersonStats += "<b>Neisa Loyalty:</b> " + Math.round(flags[kFLAGS.NEISA_AFFECTION]) * 2 + "%\n";
 			else interpersonStats += "<b>Neisa Loyalty:</b> 100%\n";

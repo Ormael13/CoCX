@@ -139,7 +139,8 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			if (rand(4) == 0) {
 				outputText("You explore the village of Ingnam for a while but you don't find anything intersting.");
-				doNext(camp.returnToCampUseOneHour);
+				cheatTime2(15);
+				doNext(camp.doCamp);
 			}
 			else thiefScene.encounterThief();
 		}
@@ -170,14 +171,14 @@ public class Ingnam extends BaseContent
 			outputText("\n\n<b><u>Blacksmith's pricings</u></b>");
 			menu();
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) { //20% discount for History: Fighter
-				addShopItem(weapons.DAGGER, 32, 1);
+				addShopItem(weapons.DAGGER, 48, 1);
 				addShopItem(weapons.PIPE, 40, 1);
 				addShopItem(weapons.SPEAR, 140, 1);
 				addShopItem(weapons.KATANA, 200, 1);
 				addShopItem(weapons.MACE, 80, 1);
 			}
 			else {
-				addShopItem(weapons.DAGGER, 40, 1);
+				addShopItem(weapons.DAGGER, 60, 1);
 				addShopItem(weapons.PIPE, 50, 1);
 				addShopItem(weapons.SPEAR, 175, 1);
 				addShopItem(weapons.KATANA, 250, 1);
@@ -186,12 +187,12 @@ public class Ingnam extends BaseContent
 			if (player.findPerk(PerkLib.HistorySmith) >= 0) { //20% discount for History: Smith perk
 				addShopItem(armors.LEATHRA, 40, 2);
 				addShopItem(armors.FULLCHN, 120, 2);
-				addShopItem(armors.SCALEML, 160, 2);
+				addShopItem(armors.SCALEML, 288, 2);
 			}
 			else {
 				addShopItem(armors.LEATHRA, 50, 2);
 				addShopItem(armors.FULLCHN, 150, 2);
-				addShopItem(armors.SCALEML, 200, 2);
+				addShopItem(armors.SCALEML, 360, 2);
 			}
 			addButton(14, "Leave", menuShops);
 		}
@@ -233,12 +234,16 @@ public class Ingnam extends BaseContent
 				addShopItem(consumables.GROPLUS, 80, 4);
 				addShopItem(consumables.L_DRAFT, 25, 4);
 				addShopItem(consumables.LACTAID, 40, 4);
+				addShopItem(consumables.HEALHERB, 12, 4);
+				addShopItem(consumables.MOONGRASS, 12, 4);
 			}
 			else {
 				addShopItem(consumables.REDUCTO, 100, 4);
 				addShopItem(consumables.GROPLUS, 100, 4);
 				addShopItem(consumables.L_DRAFT, 30, 4);
 				addShopItem(consumables.LACTAID, 50, 4);
+				addShopItem(consumables.HEALHERB, 15, 4);
+				addShopItem(consumables.MOONGRASS, 15, 4);
 			}
 			addButton(14, "Leave", menuShops);
 		}
@@ -246,13 +251,94 @@ public class Ingnam extends BaseContent
 		public function shopTradingPost():void {
 			clearOutput();
 			outputText("The trading post is one of the larger buildings in the village with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
-			outputText("\n\nYou suspect you could buy some imported goods here.");
+			outputText("\n\nYou suspect you could buy or sell some imported goods here.");
 			outputText("\n\n<b><u>Trading post pricings</u></b>");
 			menu();
+			addShopItem(consumables.MANUP_B, 12, 5);
 			addShopItem(consumables.VITAL_T, 30, 5);
+			addShopItem(consumables.AGILI_E, 12, 5);
 			addShopItem(consumables.SMART_T, 30, 5);
+			addShopItem(consumables.INCOINS, 30, 5);
 			addShopItem(consumables.FISHFIL, 5, 5);
+			addShopItem(consumables.H_PILL, 10, 5);
+			addButton(10, "Sell", sellAtTradingPost);
 			addButton(14, "Leave", menuShops);
+		}
+		private function sellAtTradingPost(page:int = 1):void {
+			var slot:int;
+			clearOutput();
+			outputText("The trading post is one of the larger buildings in the village with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
+			outputText("\n\nYou suspect you could buy or sell some imported goods here.\n\n");
+			menu();
+			var totalItems:int = 0;
+			if (page == 1) {
+				for (slot = 0; slot < 10; slot++) {
+					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
+						totalItems += player.itemSlots[slot].quantity;
+					}
+				}
+				if (inventory.getMaxSlots() > 10) addButton(13, "Next", sellAtTradingPost, page + 1);
+			}
+			if (page == 2) {
+				for (slot = 10; slot < 20; slot++) {
+					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						addButton(slot-10, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
+						totalItems += player.itemSlots[slot].quantity;
+					}
+				}
+				addButton(13, "Prev", sellAtTradingPost, page - 1);
+			}
+			if (totalItems > 1) addButton(12, "Sell All", shopTradingPostSellAll);
+			addButton(14, "Back", shopTradingPost);
+		}
+		private function shopTradingPostSell(slot:int):void {
+			var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
+			clearOutput();
+			if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+				if (itemValue == 0)
+					outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+				else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
+				while (player.itemSlots[slot].quantity > 0){
+					player.itemSlots[slot].removeOneItem();
+					if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+					player.gems += itemValue;
+				}
+			}
+			else {
+				if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+				if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+				if (itemValue == 0)
+				outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+				else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+				player.itemSlots[slot].removeOneItem();
+				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
+				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+				player.gems += itemValue;
+			}
+			statScreenRefresh();
+			doNext(sellAtTradingPost);
+		}
+
+		private function shopTradingPostSellAll():void {
+			var itemValue:int = 0;
+			clearOutput();
+			for (var slot:int = 0; slot < 20; slot++) {
+				if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+					itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
+					player.itemSlots[slot].quantity = 0;
+				}
+			}
+			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+			if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+			outputText("You lay out all the items you're carrying on the counter in front of trader.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
+			if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+			player.gems += itemValue;
+			statScreenRefresh();
+			doNext(sellAtTradingPost);
 		}
 		
 		public function shopBlackMarket():void {
@@ -276,6 +362,7 @@ public class Ingnam extends BaseContent
 			addShopItem(consumables.EQUINUM, 75, 6);
 			addShopItem(consumables.INCUBID, 75, 6);
 			addShopItem(consumables.SUCMILK, 75, 6);
+			addShopItem(consumables.RINGFIG, 75, 6);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -575,13 +662,13 @@ public class Ingnam extends BaseContent
 
 		private function buyTrailMix():void {
 			clearOutput();
-			if (player.gems < 10) {
+			if (player.gems < 20) {
 				outputText("You can't afford one of those!");
 				doNext(orderFood);
 				return;
 			}
 			outputText("You pay twenty gems for a pack of trail mix.  ");
-			player.gems -= 10;
+			player.gems -= 20;
 			statScreenRefresh();
 			inventory.takeItem(consumables.TRAILMX, orderFood);
 		}

@@ -97,6 +97,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (!player.isStaffTypeWeapon()) {
 				bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
+				bd.requireFatigue(chargingcoooooost());
 				if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
 					bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
 				}

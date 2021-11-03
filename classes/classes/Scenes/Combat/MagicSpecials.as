@@ -3159,13 +3159,11 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if (player.gems * 0.99 <= 100) player.gems -= 100;
 		else player.gems *= 0.99;
-		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
-		{
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-			enemyAI();
 		}
-		else enemyAI();
+		enemyAI();
 	}
 
 	public function Minimise():void {
@@ -6008,4 +6006,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

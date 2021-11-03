@@ -481,7 +481,11 @@ public function encounterMarbleInitially():void {
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?");
 	outputText("\n\n(Of course, you could always turn around and resolve to avoid her from this point on, if you wanted.)");
 	//- player chooses caress, suckle, or rape
-	simpleChoices("Caress", caressMarble, "Suckle", suckleMarble, "Rape", rapeDAHMARBLEZ, "", null, "Leave", turnOffMarbleForever);
+	menu();
+	addButton(1, "Caress", caressMarble).hint("+5% affection");
+	addButton(3, "Suckle", suckleMarble).hint("+15% affection, +10% addiction");
+	addButton(2, "Rape", rapeDAHMARBLEZ);
+	addButton(4, "Leave", turnOffMarbleForever).hint("You will never meet her again");
 }
 
 private function turnOffMarbleForever():void {
@@ -722,7 +726,10 @@ private function resistMarbleInitially():void {
 	//- continue to the next part
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?");
 	//- player chooses caress, suckle, or rape
-	simpleChoices("Caress", caressMarble, "Suckle", suckleMarble, "Rape", rapeDAHMARBLEZ, "", null, "", null);
+	menu();
+	addButton(1, "Caress", caressMarble).hint("+5% affection");
+	addButton(3, "Suckle", suckleMarble).hint("+15% affection, +10% addiction");
+	addButton(2, "Rape", rapeDAHMARBLEZ);
 }
 
 private function marblePicksYouUpInitially():void {
@@ -1934,7 +1941,6 @@ public function marbleStatusChange(affection:Number, addiction:Number, isAddicte
 		player.addStatusValue(StatusEffects.Marble,2,addiction);
 	}
 	if (isAddicted != -1) player.changeStatusValue(StatusEffects.Marble, 3, isAddicted);
-	
 	trace("Marble Affection: " + player.statusEffectv1(StatusEffects.Marble));
 	trace("Marble Addiction: " + player.statusEffectv2(StatusEffects.Marble));
 }
