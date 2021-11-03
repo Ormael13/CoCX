@@ -83,7 +83,7 @@ package classes.Scenes.Places{
 					// new save, can load
 					hasTrainedTodayCooldown = o["elfHasTrainedTodayCooldown"];
 				} else {
-					// old save, still need to set NursedCooldown  to something
+					// old save, still need to set Cooldown  to something
 					hasTrainedTodayCooldown = 0;
 				}
 			} else {

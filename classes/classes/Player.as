@@ -550,7 +550,7 @@ use namespace CoC;
 			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && armor != ArmorLib.NOTHING;
 		}
 		public function isStancing():Boolean {
-			return (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
+			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
 		}
 		public function isSitStancing():Boolean {
 			return (lowerBody == LowerBody.LION && arms.type == Arms.LION);
@@ -1019,6 +1019,7 @@ use namespace CoC;
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
 		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20); }
+		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
@@ -10107,7 +10108,7 @@ use namespace CoC;
 				femaleMindbreakerCounter++;
 			if (eyes.type == Eyes.MINDBREAKER)
 				femaleMindbreakerCounter++;
-			if (eyes.colour == (InCollection(skin.base.color, ["yellow", "orange", "light green"])))
+			if (eyes.colour == (InCollection(eyes.colour, ["yellow", "orange", "light green"])))
 				femaleMindbreakerCounter++;
 			if (ears.type == Ears.HUMAN)
 				femaleMindbreakerCounter++;

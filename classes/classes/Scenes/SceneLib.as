@@ -161,8 +161,6 @@ public class SceneLib {
 
     public static var holliScene:HolliScene = new HolliScene();
 
-    public static var woodElves:WoodElves = new WoodElves();
-
     public static var isabellaScene:IsabellaScene = new IsabellaScene();
 
     public static var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
@@ -192,6 +190,8 @@ public class SceneLib {
     public static var michikoFollower:Michiko = new Michiko();
 
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
+
+    public static var mindbreaker:Mindbreaker = new Mindbreaker();
 
     public static var neisaFollower:NeisaFollower = new NeisaFollower();
 
@@ -238,6 +238,8 @@ public class SceneLib {
     public static var valeria:Valeria = new Valeria();
 
     public static var vapula:Vapula = new Vapula();
+
+    public static var woodElves:WoodElves = new WoodElves();
 
     public static var zenjiScene:ZenjiScenes = new ZenjiScenes();
 
