@@ -626,8 +626,12 @@
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
         <cell rect="1969,158,20,25" name="armorNeck/elfClotheCape_fg" dx="94" dy="62"/>
+		<cell rect="579,1550,30,23" name="armorNeck/alraunedress" dx="86" dy="60"/>
+        <cell rect="548,1550,30,23" name="armorNeck/alraunedressLili" dx="55" dy="60"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="1161,42,45,58" name="armorChest/blackFullplatebottom" dx="82" dy="75"/>
+		<cell rect="651,1430,44,58" name="armorChest/alraunedress" dx="87" dy="74"/>
+        <cell rect="606,1430,44,58" name="armorChest/alraunedressLili" dx="42" dy="74"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
         <cell rect="1056,42,45,58" name="armorLegs/blackFullplateLegs" dx="82" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="72" dy="96"/>
