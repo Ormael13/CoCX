@@ -1759,7 +1759,7 @@ public class PlayerInfo extends BaseContent {
 	}
 	public  function filterPerks(element:Object, index:int, arr:Array):Boolean{  	//filter from perks availabe for player
 		var temp1:Boolean = false;
-		var temp2:Boolean = false;
+		var temp2:Boolean = true;
 		for each (var x:Object in element.requirements){ 							//in all requirements for that perk
 			if(
 			 ((x.attr=="str")&&(filterChoices[1]==1)) ||
@@ -1775,7 +1775,7 @@ public class PlayerInfo extends BaseContent {
 		if (filterChoices[9]==1){		//only perks that will not have any stat req.
 			temp2=true;
 			for each (var y:Object in element.requirements){
-				if ((x.attr!=null)){temp2=false;}
+				if ((y.attr!=null)){temp2=false;}
 			}
 		}
 	temp1||=temp2;
