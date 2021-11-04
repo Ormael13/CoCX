@@ -1762,14 +1762,14 @@ public class PlayerInfo extends BaseContent {
 		var temp2:Boolean = false;
 		for each (var x:Object in element.requirements){ 							//in all requirements for that perk
 			if(
-				((x.attr=="str")&&(filterChoices[1]==1)) ||
-				((x.attr=="tou")&&(filterChoices[2]==1)) ||
-				((x.attr=="spe")&&(filterChoices[3]==1)) ||
-				((x.attr=="inte")&&(filterChoices[4]==1)) ||
-				((x.attr=="wis")&&(filterChoices[5]==1)) ||
-				((x.attr=="lib")&&(filterChoices[6]==1)) ||
-				((x.attr=="sens")&&(filterChoices[7]==1)) ||
-				((x.attr=="cor")&&(filterChoices[8]==1))
+			 ((x.attr=="str")&&(filterChoices[1]==1)) ||
+			 ((x.attr=="tou")&&(filterChoices[2]==1)) ||
+			 ((x.attr=="spe")&&(filterChoices[3]==1)) ||
+			 ((x.attr=="inte")&&(filterChoices[4]==1)) ||
+			 ((x.attr=="wis")&&(filterChoices[5]==1)) ||
+			 ((x.attr=="lib")&&(filterChoices[6]==1)) ||
+			 ((x.attr=="sens")&&(filterChoices[7]==1)) ||
+			 ((x.attr=="cor")&&(filterChoices[8]==1))
 			) temp1 = true;
 		}
 		if (filterChoices[9]==1){		//only perks that will not have any stat req.
