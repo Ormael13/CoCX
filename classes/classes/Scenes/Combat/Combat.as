@@ -4011,16 +4011,14 @@ public class Combat extends BaseContent {
 							if (player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
 							if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
 						}
-                    }
-                    if (crit) {
-						outputText(" <b>*Critical Hit!*</b>");
+						if (crit) firearmsXP(1);
 						firearmsXP(1);
-					}
-					firearmsXP(1);
-					if (player.weaponRangePerk == "Dual Firearms") {
-						if (crit) dualWieldFirearmsXP(1);
-						dualWieldFirearmsXP(1);
-					}
+						if (player.weaponRangePerk == "Dual Firearms") {
+							if (crit) dualWieldFirearmsXP(1);
+							dualWieldFirearmsXP(1);
+						}
+                    }
+                    if (crit) outputText(" <b>*Critical Hit!*</b>");
                     //	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
 					if (player.weaponRange == weaponsrange.TOUHOM3) {
@@ -4126,8 +4124,8 @@ public class Combat extends BaseContent {
     }
 
     public function oneBulletReloadCost():Number {
-        var reloaderCost:Number = 20;
-		if (player.hasPerk(PerkLib.TaintedMagazine)) reloaderCost += 10;
+        var reloaderCost:Number = 4;
+		if (player.hasPerk(PerkLib.TaintedMagazine)) reloaderCost += 2;
 		if (player.hasPerk(PerkLib.LightningReload)) reloaderCost *= 0.5;
         return reloaderCost;
     }
@@ -10306,6 +10304,14 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownBalefulPolymorph, 1, -1);
             }
         }
+        //Sextuple Thrust
+        if (player.hasStatusEffect(StatusEffects.CooldownSextupleThrust)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSextupleThrust) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSextupleThrust);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSextupleThrust, 1, -1);
+            }
+        }
         //Nonuple Thrust
         if (player.hasStatusEffect(StatusEffects.CooldownNonupleThrust)) {
             if (player.statusEffectv1(StatusEffects.CooldownNonupleThrust) <= 0) {
@@ -10533,7 +10539,13 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) fatiguecombatrecovery += 1;
         if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
-        fatiguecombatrecovery *= fatigueRecoveryMultiplier();
+        if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) fatiguecombatrecovery += 1;
+		if (player.hasPerk(PerkLib.ExpertGunslinger)) fatiguecombatrecovery += 1;
+		if (player.hasPerk(PerkLib.MasterGunslinger)) fatiguecombatrecovery += 1;
+		if (player.hasPerk(PerkLib.AlchemicalCartridge)) fatiguecombatrecovery += 2;
+		if (player.hasPerk(PerkLib.ChurchOfTheGun)) fatiguecombatrecovery += 3;
+		fatiguecombatrecovery *= fatigueRecoveryMultiplier();
         fatiguecombatrecovery = Math.round(fatiguecombatrecovery);
         return fatiguecombatrecovery;
     }
@@ -15107,4 +15119,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

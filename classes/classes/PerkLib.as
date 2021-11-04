@@ -428,8 +428,8 @@ public class PerkLib
 				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.",
 				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.");
 		public static const TaintedMagazine:PerkType = mk("Tainted Magazine", "Tainted Magazine",
-				"Increase reload cost by 10 and doubles max ammo (200% of base ammo count).",
-				"You've chosen the 'Tainted Magazine' perk. Increase reload cost by 10 and doubles max ammo (200% of base ammo count).");
+				"Increase reload cost by 2 and doubles max ammo (200% of base ammo count).",
+				"You've chosen the 'Tainted Magazine' perk. Increase reload cost by 2 and doubles max ammo (200% of base ammo count).");
 		public static const PrimedClipWarp:PerkType = mk("Primed Clip Warp", "Primed Clip Warp",
 				"Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.",
 				"You've chosen the 'Primed Clip Warp' perk. Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.");
@@ -5129,7 +5129,7 @@ public class PerkLib
 					.requirePerk(JobSoulCultivator)
 					.requireWis(40)
                     .requireLevel(6);
-            ChurchOfTheGun.requirePerk(JobGunslinger)
+            AlchemicalCartridge.requirePerk(JobGunslinger)
 					.requireWis(30)
                     .requireTou(25)
                     .requireInt(20)
@@ -5191,7 +5191,7 @@ public class PerkLib
                     .requireTou(30)
                     .requireSpe(25)
                     .requireLevel(12);
-            AlchemicalCartridge.requirePerk(ChurchOfTheGun)
+            ChurchOfTheGun.requirePerk(AlchemicalCartridge)
 					.requireWis(35)
                     .requireTou(30)
                     .requireInt(25)

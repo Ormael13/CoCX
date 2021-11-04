@@ -1277,12 +1277,8 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){
-			if (rand(100) < 10) {
-				if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
-			}
-		}
-		else enemyAI();
+		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved) && rand(100) < 10 && monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+		enemyAI();
 	}
 
 	public function Luststorm():void {

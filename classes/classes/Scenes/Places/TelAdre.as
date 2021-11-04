@@ -267,7 +267,7 @@ public function houses():void {
 public function oswaldPawn():void {
 	spriteSelect(47);
 	clearOutput();
-	if(!player.hasStatusEffect(StatusEffects.Oswald)) {
+	if (!player.hasStatusEffect(StatusEffects.Oswald)) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ");
 		if(player.cor < 75) outputText("Who would've thought that seeing someone NOT aroused would ever shock you?");
 		else outputText("What a shame, but maybe you can give him a reason to stand up straight?");
@@ -280,7 +280,7 @@ public function oswaldPawn():void {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
 		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)");
 	}
-	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
+	if (player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
 	{
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
 		if (player.gems < 500) {
@@ -333,13 +333,20 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 		addButton(13, "Prev", oswaldPawnMenu, page - 1);
 	}
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
+	addButton(14, "Back", telAdreMenu);
+}
+private function oswaldPawnMenu2():void {
+	spriteSelect(47);
+	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
+	menu();
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
 		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
 		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
 	}
-	addButton(14, "Back", telAdreMenu);
+	addButton(14, "Back", oswaldPawnMenu);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
@@ -390,6 +397,41 @@ private function oswaldPawnSellAll():void {
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
+}
+
+private function buyBackpack():void {
+	clearOutput();
+	outputText("You ask Oswald if he has a backpack to spare.");
+	outputText("\n\n\"<i>Yes. They come in two sizes. What will you pick?</i>\" he asks.");
+	outputText("\n\n<b><u>Backpack Size and Pricings</u></b>");
+	outputText("\nSmall: 100 gems, +2 inventory slot");
+	outputText("\nMedium: 200 gems, +4 inventory slots");
+	menu();
+	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	addButton(14, "Nevermind", oswaldPawnMenu2);
+}
+private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
+	clearOutput();
+	if (player.gems < price) {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(oswaldPawnMenu2);
+		return;
+	}
+	outputText("\"<i>Here you go.</i>\"");
+	if (player.hasKeyItem("Backpack") >= 0) {
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	else {
+		outputText("\n\n<b>(Key Item Gained: " + sizeDesc + " Backpack! You now have " + num2Text(size) + " extra inventory slots");
+		player.createKeyItem("Backpack", size, 0, 0, 0);
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	player.gems -= price;
+	statScreenRefresh();
+	doNext(oswaldPawnMenu2);
 }
 
 private function anotherButton(button:int, nam:String, func:Function, arg:* = -9000):int {

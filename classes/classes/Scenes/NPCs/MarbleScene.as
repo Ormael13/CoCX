@@ -592,9 +592,11 @@ internal function marbleFightWin():void {
 	//after the lust+HP defeat scenes if the player wins
 	outputText("You've gathered a bit of a crowd around you now, thanks to the noise of this cow clunking around with her huge hooves and hammer.  It might not be a terribly good idea to rape Marble...  you'd have to drag her up to her room just to avoid interruption and Whitney would likely find out and be upset.  What do you do?");
 	//Options, rape in room, milk (Spy's submission - not included yet) and, don't rape.
-	var feed:Function = null;
-	if(player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() > 200) feed = forceFeedMarble;
-	simpleChoices("Feed Her", feed, "RapeInRoom", rapeMarbleInHerRoom, "", null, "", null, "Leave", cleanupAfterCombat);
+	menu();
+	if (player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() > 200) addButton(1, "Feed Her", forceFeedMarble);
+	addButtonDisabled(1, "Feed Her", "Your lactation is too low or you not posses Feeder perk.");
+	addButton(2, "RapeInRoom", rapeMarbleInHerRoom);
+	addButton(3, "Leave", cleanupAfterCombat);
 }
 internal function marbleFightLose():void {
 	spriteSelect(41);
