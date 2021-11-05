@@ -378,12 +378,11 @@ private function leave():void
 {
 	if (player.hasStatusEffect(StatusEffects.Spar)) {
 		player.removeStatusEffect(StatusEffects.Spar);
-		cleanupAfterCombat();
 	}
 	if (player.hasStatusEffect(StatusEffects.DomFight)) {
 		player.removeStatusEffect(StatusEffects.DomFight);
-		cleanupAfterCombat();
 	}
+	cleanupAfterCombat();
 	doNext(camp.returnToCampUseOneHour);
 }
 
