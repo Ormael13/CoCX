@@ -13,6 +13,7 @@ import classes.PerkLib;
 import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
@@ -749,6 +750,21 @@ public class PerkMenu extends BaseContent {
 				mutationCount++;
 			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.\n\n");
+			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
+				outputText("Mutations Assistant: <b>On</b>\n");
+			}
+			else{
+				outputText("Mutations Assistant: <b>Off</b>\n");
+			}
+			outputText("Mutations can be obtained by ");
+			if (flags[kFLAGS.MUTATIONS_SPOILERS] || EvangelineFollower.EvangelineAffectionMeter >= 3){
+				outputText("finding Evangeline and asking her about it.\n");
+			}
+			else{
+				outputText("looking around for an alchemist specializing in transformatives.\n");
+			}
+			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n");
+
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
 			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid"]//, "PThyroid"
 			for each (var bodyPart:String in bPartlist){
@@ -779,22 +795,6 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 			}
-			/*
-			outputText("Mutations can be obtained by ");
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2 && flags[kFLAGS.MUTATIONS_SPOILERS]){
-				outputText("finding Evangeline and asking her about it.\n");
-			}
-			else{
-				outputText("looking around for an alchemist specializing in transformatives.\n");
-			}
-			*/
-			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
-				outputText("Mutations Assistant: On\n");
-			}
-			else{
-				outputText("Mutations Assistant: Off\n");
-			}
-			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. Default:Off.\n");
 		}
 
 		function mutationsDBHeart():void{
