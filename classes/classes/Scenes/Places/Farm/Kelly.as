@@ -353,7 +353,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	outputText("\n\nLike hell! You aren't going to let him slip away like that.  ");
 	//NO NEW PG.  FORK FOR CENTAURS AND NON}
 	//BIPEDAL}
-	if(player.isBiped) {	//I'm counting slimes as being fast enough. Player.spe should also probably factor into this.
+	if(player.isBiped()) {	//I'm counting slimes as being fast enough. Player.spe should also probably factor into this.
 		outputText("Of course, your speed is no match to that of a four-legged warrior, but you don't actually need to outrun him.  You rush to Kelt's hindquarters and lunge at him, managing to get a good grip on his flanks.  You wriggle a bit in order to adopt a more comfortable position but a few seconds later you're on his back, effectively mounting him.");
 		outputText("\n\nNeedless to say, Kelt doesn't like this at all.  He arches his back, rears back, and fidgets repeatedly in desperate attempts to get you off him, but you latch on firmly.  Seeing that he won't get rid of you easily, he becomes enraged.  He snorts, whinnies and shakes his back like a horse gone crazy.  You do your best to cling to his neck and never let go of him, determined to tame the beast.  You let him exhaust himself, riding him out as his fits of rage become less and less violent.  At last he drops on his legs, yielding to you.");
 		
