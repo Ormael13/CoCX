@@ -332,6 +332,7 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 		}
 		addButton(13, "Prev", oswaldPawnMenu, page - 1);
 	}
+	addButton(10, "Misc", oswaldPawnMenu2);
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
 	addButton(14, "Back", telAdreMenu);
 }

@@ -352,18 +352,43 @@ internal function defeatKellyNDBREAKHIM():void {
 	
 	outputText("\n\nLike hell! You aren't going to let him slip away like that.  ");
 	//NO NEW PG.  FORK FOR CENTAURS AND NON}
-	//NON CENTAURS}
-	if(!player.isTaur()) {
+	//BIPEDAL}
+	if(player.isBiped) {	//I'm counting slimes as being fast enough. Player.spe should also probably factor into this.
 		outputText("Of course, your speed is no match to that of a four-legged warrior, but you don't actually need to outrun him.  You rush to Kelt's hindquarters and lunge at him, managing to get a good grip on his flanks.  You wriggle a bit in order to adopt a more comfortable position but a few seconds later you're on his back, effectively mounting him.");
 		outputText("\n\nNeedless to say, Kelt doesn't like this at all.  He arches his back, rears back, and fidgets repeatedly in desperate attempts to get you off him, but you latch on firmly.  Seeing that he won't get rid of you easily, he becomes enraged.  He snorts, whinnies and shakes his back like a horse gone crazy.  You do your best to cling to his neck and never let go of him, determined to tame the beast.  You let him exhaust himself, riding him out as his fits of rage become less and less violent.  At last he drops on his legs, yielding to you.");
 		
 		outputText("\n\nSatisfied, you unmount him and begin to drag him again to the barn.  ");
 	}
-	//CENTAURS
+	//NOT BIPEDAL
 	else {
-		outputText("Of course, you can keep up with the four-legged warrior as a centaur yourself, but you don't actually need to outrun him - not for long.  You come up alongside the defeated archer and lean into him, pushing to the side and causing him to flounder in the mud, hooves flailing.  He can barely even try to right himself before you're towering overtop of him and looking down victoriously.");
-		
-		outputText("\n\nKicking him for good measure, you quickly grab a loop of rope from a nearby fence and return, looping it around the beaten bully's body.  He staggers up as you begin to pull, morosely allowing himself to be led into the barn for another lesson.  You do your best to keep the impromptu leash tight, determined to tame this beast.  At times he struggles, but you let him completely exhaust himself.  ");
+		var raceType:String;
+		if (player.isTaur()) {
+			raceType = "Centaur"
+		}
+		else if (player.isNaga()){
+			raceType = silly()? "Snek":"Snake"
+		}
+		else if (player.isDrider()){
+			raceType = silly()? "Spooder":"Spider"
+		}
+		else if (player.isGoo()){
+			raceType = "Goo"
+		}
+		else{
+			raceType = "[race]"
+		}
+		outputText("Of course, you can keep up with the four-legged warrior as a " + raceType +", but you don't actually need to outrun him - not for long.  You come up alongside the defeated archer and lean into him, pushing to the side and causing him to flounder in the mud, hooves flailing.  He can barely even try to right himself before you're towering overtop of him and looking down victoriously.");
+		if (player.isDrider()){
+			outputText("\n\nYou spin out some thread from your spinneret, fashioning it into a strong rope, and tie it around his body.")
+		}
+		else if(player.isNaga()){
+			outputText("\n\nYou quickly surround him in your strong tail, wrapping around his centaur half tightly enough for him to feel the pressure, but not enough to outright crush him. ")
+		}
+		else{
+			outputText("\n\nKicking him for good measure, you quickly grab a loop of rope from a nearby fence and return, looping it around the beaten bully's body.")
+
+		}
+		outputText("He staggers up as you begin to pull, morosely allowing himself to be led into the barn for another lesson.  You do your best to keep the impromptu leash tight, determined to tame this beast.  At times he struggles, but you let him completely exhaust himself.  ");
 	}
 	//MERGE BACK - ALL PATHS
 	outputText("Kelt hardly shows any resistance, sometimes walking, sometimes letting himself be hauled like a beast of burden.  When you reach the barn, he's too tired to oppose you as you tie him up again.  When he's fully bound again, you remove your [armor] and pull out your items, ready to prepare another 'meal' for the centaur.  You empty all your bottles in the keg you used last time; in your haste, some of your sweat drips into the container, but you shrug it off.  After all, the bitch is going to get accustomed to your bodily fluids in one way or another.");
