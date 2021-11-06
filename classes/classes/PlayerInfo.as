@@ -1705,6 +1705,7 @@ public class PlayerInfo extends BaseContent {
 		else doNext(playerMenu);
 	}
 
+	private static var filterChoices:Array = [0,1,1,1,1,1,1,1,1,1];	//1 - is active?, 2-10 - is shown?
 	public function perkBuyMenu():void {
 		clearOutput();
 		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
@@ -1727,6 +1728,7 @@ public class PlayerInfo extends BaseContent {
             if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 	        mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
 	        perkList = [];
+			if (filterChoices[0] == 1) perks = perks.filter(filterPerks);
 	        for each(var perk:PerkType in perks.sort()) {
 		        var p:PerkClass = new PerkClass(perk,
 				        perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
@@ -1737,7 +1739,58 @@ public class PlayerInfo extends BaseContent {
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
 			addButton(1, "Skip", perkSkip);
+			addButton(4,"Filter",changeFilter, 0).hint("Filter perks by reqired stats")
+			if (filterChoices[0]==1)
+			{
+				addButton(5,(filterChoices[1]==1)?"Str Y":"Str N", changeFilter, 1);
+				addButton(6,(filterChoices[2]==1)?"Tou Y":"Tou N", changeFilter, 2);
+				addButton(7,(filterChoices[3]==1)?"Spe Y":"Spe N", changeFilter, 3);
+				addButton(8,(filterChoices[4]==1)?"Int Y":"Int N", changeFilter, 4);
+				addButton(10,(filterChoices[5]==1)?"Wis Y":"Wis N", changeFilter, 5);
+				addButton(11,(filterChoices[6]==1)?"Lib Y":"Lib N", changeFilter, 6);
+				addButton(12,(filterChoices[7]==1)?"Sen Y":"Sen N", changeFilter, 7);
+				addButton(13,(filterChoices[8]==1)?"Cor Y":"Cor N", changeFilter, 8);
+				addButton(9,(filterChoices[9]==1)?"Other Y":"Other N", changeFilter, 9); //perks that have non stat req
+				addButton(14,"Clear",clearFilter);
+			}
 		}
+	}
+	public  function filterPerks(element:Object, index:int, arr:Array):Boolean{  	//filter from perks availabe for player
+		var temp1:Boolean = false;
+		var temp2:Boolean = true;
+		for each (var x:Object in element.requirements){ 							//in all requirements for that perk
+			if(
+			 ((x.attr=="str")&&(filterChoices[1]==1)) ||
+			 ((x.attr=="tou")&&(filterChoices[2]==1)) ||
+			 ((x.attr=="spe")&&(filterChoices[3]==1)) ||
+			 ((x.attr=="inte")&&(filterChoices[4]==1)) ||
+			 ((x.attr=="wis")&&(filterChoices[5]==1)) ||
+			 ((x.attr=="lib")&&(filterChoices[6]==1)) ||
+			 ((x.attr=="sens")&&(filterChoices[7]==1)) ||
+			 ((x.attr=="cor")&&(filterChoices[8]==1))
+			) temp1 = true;
+		}
+		if (filterChoices[9]==1){		//only perks that will not have any stat req.
+			temp2=true;
+			for each (var y:Object in element.requirements){
+				if ((y.attr!=null)){temp2=false;}
+			}
+		}
+	temp1||=temp2;
+	return temp1;
+	}
+
+	public function changeFilter(pos:int):void
+	{
+		if ((filterChoices[pos])==0) filterChoices[pos] = 1;
+		else filterChoices[pos] = 0;
+		perkBuyMenu();
+	}
+
+	public function clearFilter():void
+	{
+		filterChoices = [1,1,1,1,1,1,1,1,1,1];
+		perkBuyMenu();
 	}
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
@@ -1787,6 +1840,20 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		addButton(0, "Okay", perkSelect, selected);
 		addButton(1, "Skip", perkSkip);
+		addButton(4,"Filter",changeFilter, 0).hint("Filter perks by reqired stats")
+		if (filterChoices[0]==1)
+		{
+			addButton(5,(filterChoices[1]==1)?"Str Y":"Str N", changeFilter, 1);
+			addButton(6,(filterChoices[2]==1)?"Tou Y":"Tou N", changeFilter, 2);
+			addButton(7,(filterChoices[3]==1)?"Spe Y":"Spe N", changeFilter, 3);
+			addButton(8,(filterChoices[4]==1)?"Int Y":"Int N", changeFilter, 4);
+			addButton(10,(filterChoices[5]==1)?"Wis Y":"Wis N", changeFilter, 5);
+			addButton(11,(filterChoices[6]==1)?"Lib Y":"Lib N", changeFilter, 6);
+			addButton(12,(filterChoices[7]==1)?"Sen Y":"Sen N", changeFilter, 7);
+			addButton(13,(filterChoices[8]==1)?"Cor Y":"Cor N", changeFilter, 8);
+			addButton(9,(filterChoices[9]==1)?"Other Y":"Other N", changeFilter, 9); //perks that have non stat req
+			addButton(14,"Clear",clearFilter);
+		}
 	}
 
 	public function applyPerk(perk:PerkClass):void {
