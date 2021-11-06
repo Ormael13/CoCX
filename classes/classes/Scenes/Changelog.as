@@ -136,14 +136,21 @@ package classes.Scenes
 			outputText("-Ingnam Thiefs post fight win options and giving gems scenes would take less time: from 1 hour down to 15 minutes. Gems reward for beating them increased a bit too.\n");
 			outputText("-Exploring would also take only 15 minutes. Working at farm could make PC gain 10 not 15 fatigue and gain 5 more gems. Trading Post can buy items form PC too now.\n");
 			outputText("-New items added in Ingnam: Heal Pill, Incese of Wisdom, Agility Elixir, ManUp Beer added to trading post; Healing herb, Moonlight grass added to alchemist, Ringtail fig to Black Market.\n");
-			outputText("-Luna talk scenes takes 15 min now and not sends PC back to main camp menu.\n");
+			outputText("-Luna talk scenes takes 15 min now and not sends PC back to main camp menu. In choice after nuring added lust req. for 1st option that will be greyed out if pc lust is too low.\n");
 			outputText("-Charge special will be unusable if PC not have enough fatigue to use it.\n");
 			outputText("-Zetta fixes.\n");
 			outputText("-Added affecion/addition gains on first milestone scene with Marble. Added her Affection on Stats page (NPC's subpage).\n");
-			outputText("-Tainted Magazine perk increase cost of reload by 2 (down from 10). Reload cost decreased from 20 to 4.\n");
-			outputText("-Job: Gunslinger, Amateur Gunslinger, Expert Gunslinger, Master Gunslinger perks increase fatigue recovery by 1 each. Perks Alchemical Cartridge and Church of the gun by 2/3. Both eprks for scaling dmg based on int/wis are also switched.\n");
+			outputText("-Tainted Magazine perk increase cost of reload by 2 (down from 10). Default reload cost decreased from 20 to 4.\n");
+			outputText("-Job: Gunslinger, Amateur Gunslinger, Expert Gunslinger, Master Gunslinger perks increase fatigue recovery by 1 each. Perks Alchemical Cartridge and Church of the gun by 2/3. Both perks for scaling dmg based on int/wis are also switched.\n");
 			outputText("-Removed some unneded stats tracked on combat subpage.\n");
 			outputText("-Backpack prices dropped 4 times. And small/medium sized ones can be bought at Oswald pawn shop too.\n");
+			outputText("-Konstantin talk options takes each 5 min now.\n");
+			outputText("-Diana combat use of Heal having now cooldown of 2 turns (so she will no longer ends keep healing herself when below 20% of HP until running out of the mana).\n");
+			outputText("-Shouldra recrutoiment moved form morning to time during the day (between 10 and 18) to prevent some weirdness with other events triggering at the morning.\n");
+			outputText("-Added out of combat fatigue recovery. In combat fatigue recovery due to that been increased twicefold. Both fatigue recovery rates can be checked on stats page / combat subpage.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -162,6 +169,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -225,7 +233,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -252,6 +262,12 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -26,7 +26,7 @@ package classes.Items.Vehicles
 				outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}
-			if (game.player.tallness > 66 || !game.player.haveWingsForWingSlap()) { //Taller than 5'6" ft
+			if (game.player.tallness > 66 || game.player.haveWingsForWingSlap()) { //Taller than 5'6" ft
 				outputText("Your current size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				return false;
 			}

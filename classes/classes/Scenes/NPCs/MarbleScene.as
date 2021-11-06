@@ -2059,16 +2059,6 @@ public function interactWithMarbleAtCamp():void {
 	addButton(6, "Playtime", playtime);
 	addButton(7, "Break Up", breakUpWithMarble);
 	addButton(8, goEventString, marbleGoEvent);
-	/*choices("Appearance",marbleAppearance,
-			"Talk",marbleTalkOverhaul,
-			"Present",gatherEvent,
-			"Give Item", (canGiveItem() ? giveItem : null),
-			"Get Milk",milkEvent,
-			"Release",sexEvent,
-			"Playtime",playtime,
-			"Break Up",breakUpWithMarble,
-			goEventString,marbleGoEvent,
-			"", null);*/
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -2403,7 +2393,7 @@ private function gotMilk():void {
 	doNext(camp.returnToCampUseOneHour);
 	clearOutput();
 	outputText("You ask Marble for a bottle of her milk, and she happily hands you one.  ");
-	inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.M__MILK, interactWithMarbleAtCamp);
 }
 
 private function marbleGathered():void {

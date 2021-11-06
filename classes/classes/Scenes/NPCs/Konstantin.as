@@ -223,6 +223,7 @@ package classes.Scenes.NPCs
 			outputText("Wanting to divert my mind from the loneliness feeling, I focuses on improved my smithing skill, so I spent the next couple years practicing. Every now and then a customer passed through the forest me and requested my services, and then one day, one of them kept coming with more regularity...but I bet that you know what happened after that.</i>\"\n\n");
 			outputText("With a smirk, you answer that you do. Thanking him for his conversation, you return to your taks.\n\n");
 			doNext(KonstantinTalkMenu);
+			cheatTime2(5);
 		}
 		public function KonstantinTalkHisWork():void {
 			clearOutput();
@@ -248,6 +249,7 @@ package classes.Scenes.NPCs
 			}
 			outputText(".</i>\"\n\nThanking him for his conversation, you leave Konstantin to his own things.\n\n");
 			doNext(KonstantinTalkMenu);
+			cheatTime2(5);
 		}
 		public function KonstantinTalkTheCamp():void {
 			clearOutput();
@@ -275,6 +277,7 @@ package classes.Scenes.NPCs
 				outputText("\"<i>So all in all, I think that this is a great places. Good company, no demons in the proximity, and a great potential for the years to come.</i>\"\n\n");
 			}
 			doNext(KonstantinTalkMenu);
+			cheatTime2(5);
 		}
 		
 		public function KonstantinSmithingMenu():void {

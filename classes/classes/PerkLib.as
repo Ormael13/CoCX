@@ -2652,13 +2652,13 @@ public class PerkLib
 				"Add speed based scaling of melee attacks when using smaller than large weapon(s).",
 				"You've chosen the 'Speed Demon' perk, allowing you to use your speed when attacking with smaller than large melee weapons.");
 		public static const SpeedyRecovery:PerkType = mk("Speedy Recovery", "Speedy Recovery",
-				"Regain fatigue +50% out of combat / +100% in combat faster.",
+				"Regain fatigue +50% faster.",
 				"You've chosen the 'Speedy Recovery' perk, boosting your fatigue recovery rate!");
 		public static const SpeedyRecuperation:PerkType = mk("Speedy Recuperation", "Speedy Recuperation",
-				"Regain fatigue +100% out of combat / +200% in combat faster.",
+				"Regain fatigue +100% faster.",
 				"You've chosen the 'Speedy Recuperation' perk, boosting your fatigue recovery rate!");
 		public static const SpeedyRejuvenation:PerkType = mk("Speedy Rejuvenation", "Speedy Rejuvenation",
-				"Regain fatigue +200% out of combat / +400% in combat faster.",
+				"Regain fatigue +200% faster.",
 				"You've chosen the 'Speedy Rejuvenation' perk, boosting your fatigue recovery rate!");
 		public static const Spellarmor:PerkType = mk("Spellarmor", "Spellarmor",
 				"Start every battle with Charge Armor enabled, if you meet White Magic requirements before it starts.",

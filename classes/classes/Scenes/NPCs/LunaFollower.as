@@ -537,7 +537,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
 				outputText("\nThe treatment complete, she breaks contact and her expression melts into a more coy smile. Doubtless she knows what effect she's had on you, and fully intended it. Do you take her here and now?\n\n");
 				menu();
-				addButton(0, "Yes", sexMenuMain);
+				if (player.lust > 33) addButton(0, "Yes", sexMenuMain);
+				else addButtonDisabled(0, "Yes", "Your lust is too low for that.");
 				addButton(1, "No", nurseLunaEnd);
 			}
 			else doNext(camp.returnToCampUseFourHours);

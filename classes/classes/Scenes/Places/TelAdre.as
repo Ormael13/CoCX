@@ -338,7 +338,6 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 }
 private function oswaldPawnMenu2():void {
 	spriteSelect(47);
-	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
@@ -347,7 +346,7 @@ private function oswaldPawnMenu2():void {
 		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
 		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
 	}
-	addButton(14, "Back", oswaldPawnMenu);
+	addButton(14, "Back", oswaldPawn);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
@@ -401,6 +400,7 @@ private function oswaldPawnSellAll():void {
 }
 
 private function buyBackpack():void {
+	spriteSelect(47);
 	clearOutput();
 	outputText("You ask Oswald if he has a backpack to spare.");
 	outputText("\n\n\"<i>Yes. They come in two sizes. What will you pick?</i>\" he asks.");
@@ -413,10 +413,11 @@ private function buyBackpack():void {
 	addButton(14, "Nevermind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
+	spriteSelect(47);
 	clearOutput();
 	if (player.gems < price) {
 		outputText("You count out your gems and realize it's beyond your price range.");
-		doNext(oswaldPawnMenu2);
+		doNext(buyBackpack);
 		return;
 	}
 	outputText("\"<i>Here you go.</i>\"");
@@ -432,7 +433,7 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	player.gems -= price;
 	statScreenRefresh();
-	doNext(oswaldPawnMenu2);
+	doNext(buyBackpack);
 }
 
 private function anotherButton(button:int, nam:String, func:Function, arg:* = -9000):int {

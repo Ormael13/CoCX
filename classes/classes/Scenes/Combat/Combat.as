@@ -8071,9 +8071,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ZZZ)) multi += 0.2;
         if (player.hasPerk(PerkLib.Lazy)) multi += 0.2;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
-        if (player.hasPerk(PerkLib.SpeedyRecovery)) multi += 1;
-        if (player.hasPerk(PerkLib.SpeedyRecuperation)) multi += 2;
-        if (player.hasPerk(PerkLib.SpeedyRejuvenation)) multi += 4;
+        if (player.hasPerk(PerkLib.SpeedyRecovery)) multi += 0.5;
+        if (player.hasPerk(PerkLib.SpeedyRecuperation)) multi += 1;
+        if (player.hasPerk(PerkLib.SpeedyRejuvenation)) multi += 2;
         if (player.hasPerk(PerkLib.NaturesSpringI)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringII)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringIII)) multi += 0.05;
@@ -10519,10 +10519,14 @@ public class Combat extends BaseContent {
         return maxRegen;
     }
 
-    public function fatigueRecovery():void {
+    public function fatigueRecovery(combat:Boolean = true):void {
         var fatigue1:Number = 0;
         fatigue1 += fatigueRecovery2();
-        fatigue(-fatigue1);
+        if (combat) {
+			fatigue1 *= 2;
+			fatigue(-fatigue1);
+		}
+		else fatigue(-fatigue1);
     }
 
     public function fatigueRecovery2():Number {

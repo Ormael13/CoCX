@@ -2171,7 +2171,7 @@ public class Camp extends NPCAwareContent{
 		//Checks if pc has this ingrediant growing
 		outputText("You move over to your gardening fields. You can plant and grow herbs here.");
 		//plants typicaly takes 1 week to grow from a single ingrediant into 5 new ingrediants sample player can use this button to go to the harvest selection
-		addButton(1, "Seed", Seed).hint("plant down some seeds sacrificing an ingrediants.");
+		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingrediants.");
 		addFiveArgButton(2, "Harvest", Harvest, HarvestMoonScenes.harvestmoonstageHH >= 1, HarvestMoonScenes.harvestmoonstageMG >= 1, HarvestMoonScenes.harvestmoonstageSB >= 1, HarvestMoonScenes.harvestmoonstageIW >= 1, HarvestMoonScenes.harvestmoonstageBF >= 1).hint("Check your harvests.")
 		addButton(14, "Back", campActions).hint("Go back to camp action menu.");
 	}
