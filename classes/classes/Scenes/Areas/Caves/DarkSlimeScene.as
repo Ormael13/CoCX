@@ -71,7 +71,7 @@ public function beatingDarkSlime():void {
 
 public function LetzRape2():void {
 	LetzRape(true);
-	cleanupAfterCombat();
+	cleanupAfterCombatTFEvent();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function LetzRape(letzRape:Boolean = false):void {
