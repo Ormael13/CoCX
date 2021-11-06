@@ -3263,9 +3263,9 @@ import flash.utils.getQualifiedClassName;
 					}
 				}
 				outputText("\n\nYou'll probably come to your senses in six hours or so");
-				if (player.gems > 1)
+				if ((player.gems > 1) && gemsLost > 0)
 					outputText(", missing " + gemsLost + " gems.");
-				else if (player.gems == 1)
+				else if ((player.gems == 1) && gemsLost > 0)
 					outputText(", missing your only gem.");
 				else outputText(".");
 			}

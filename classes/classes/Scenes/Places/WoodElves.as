@@ -146,6 +146,8 @@ package classes.Scenes.Places{
 		}
 
 		public function StartElfFight():void {
+			clearOutput();
+			outputText("\n\nRealising that there is no peaceful way out of this you ready your weapon and prepare for battle. The elves don't seem all too worried after all its you versus an entire group of them and they likely think they can easily overwhelm you. That and they have archers ready to shoot from all directions. This is not going to be a fun fight.");
 			startCombat(new WoodElvesHuntingParty());
 		}
 		public function ElfFightWin():void {
@@ -155,7 +157,7 @@ package classes.Scenes.Places{
 			doNext(cleanupAfterCombat);
 		}
 		public function ElfFightLoose():void {
-			cleanupAfterCombat();
+			cleanupAfterCombatTFEvent();
 			doNext(YouAreAlreadyElfLose);
 		}
 
