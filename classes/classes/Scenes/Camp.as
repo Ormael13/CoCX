@@ -19,6 +19,7 @@ import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.Boat.MaraeScene;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Soulforce;
 import classes.Scenes.SceneLib;
 import classes.lists.Gender;
@@ -2082,6 +2083,8 @@ public class Camp extends NPCAwareContent{
 	}
 
 	private function campMiscActions():void {
+		clearOutput();
+		outputText("What would you like to do?");
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(0, "Fishery", VisitFishery).hint("Visit Fishery.");
 		else addButtonDisabled(0, "Fishery", "Would you kindly build it first?");
@@ -2091,12 +2094,14 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
 		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
+		if (player.hasPerk(PerkLib.CursedTag)) addButton(4, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY aka modify your cursed tag");
+		else addButtonDisabled(4, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
 		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(5, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		if (player.hasPerk(PerkLib.CursedTag)) addButton(9, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY aka modify your cursed tag");
-		else addButtonDisabled(9, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
+		if (AdventurerGuild.Slot01Cap > 0) addButton(9, "Quest Loot", questItemsBag).hint("Manage your bag with quest items.");
+		else addButtonDisabled(9, "Quest Loot", "You have to join Adventure Guild to have bag for quest items.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2368,21 +2373,6 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 	}
-
-	private function fillUpPillBottle00():void {
-		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.LG_SFRP, 10);
-		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
-	}
-	private function fillUpPillBottle01():void {
-		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.MG_SFRP, 10);
-		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
-	}
 	
 	private function AlterBindScroll():void {
 		clearOutput();
@@ -2466,6 +2456,100 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
 		else player.createStatusEffect(StatusEffects.AlterBindScroll5,0,0,0,0);
 		doNext(AlterBindScroll);
+	}
+
+	private function fillUpPillBottle00():void {
+		clearOutput();
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.LG_SFRP, 10);
+		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
+	}
+	private function fillUpPillBottle01():void {
+		clearOutput();
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.MG_SFRP, 10);
+		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+	}
+	
+	private function questItemsBag():void {
+		clearOutput();
+		outputText("Would you like to put some quest items into the bag, and if so, with ones?\n\n");
+		if (AdventurerGuild.Slot01Cap > 0) outputText("<b>Imp Skulls:</b> "+AdventurerGuild.Slot01+" / "+AdventurerGuild.Slot01Cap+"\n");
+		if (AdventurerGuild.Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+AdventurerGuild.Slot02+" / "+AdventurerGuild.Slot02Cap+"\n");
+		if (AdventurerGuild.Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+AdventurerGuild.Slot03+" / "+AdventurerGuild.Slot03Cap+"\n");
+		if (AdventurerGuild.Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+AdventurerGuild.Slot04+" / "+AdventurerGuild.Slot04Cap+"\n");
+		menu();
+		if (AdventurerGuild.Slot01 < AdventurerGuild.Slot01Cap) {
+			if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
+			else addButtonDisabled(0, "ImpSkull", "You not have any imp skulls to store.");
+		}
+		else addButtonDisabled(0, "ImpSkull", "You can't store more imp skulls in your bag.");
+		if (AdventurerGuild.Slot01 > 0) addButton(5, "ImpSkull", questItemsBagImpSkull1Down);
+		else addButtonDisabled(5, "ImpSkull", "You not have any imp skulls in your bag.");
+		if (AdventurerGuild.Slot02 < AdventurerGuild.Slot02Cap) {
+			if (player.hasItem(useables.FIMPSKL, 1)) addButton(1, "FeralImpS.", questItemsBagFeralImpSkull1Up);
+			else addButtonDisabled(1, "ImpSkull", "You not have any feral imp skulls to store.");
+		}
+		else addButtonDisabled(1, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
+		if (AdventurerGuild.Slot02 > 0) addButton(6, "FeralImpS.", questItemsBagFeralImpSkull1Down);
+		else addButtonDisabled(6, "FeralImpS.", "You not have any feral imp skulls in your bag.");
+		if (AdventurerGuild.Slot03 < AdventurerGuild.Slot03Cap) {
+			if (player.hasItem(useables.MINOHOR, 1)) addButton(2, "MinoHorns", questItemsBagMinotaurHorns1Up);
+			else addButtonDisabled(2, "ImpSkull", "You not have any minotaur horns to store.");
+		}
+		else addButtonDisabled(2, "MinoHorns", "You can't store more minotaur horns in your bag.");
+		if (AdventurerGuild.Slot03 > 0) addButton(7, "MinoHorns", questItemsBagMinotaurHorns1Down);
+		else addButtonDisabled(7, "MinoHorns", "You not have any minotaur horns in your bag.");
+		if (AdventurerGuild.Slot04 < AdventurerGuild.Slot04Cap) {
+			if (player.hasItem(useables.DEMSKLL, 1)) addButton(3, "DemonSkull", questItemsBagDemonSkull1Up);
+			else addButtonDisabled(3, "ImpSkull", "You not have any demon skulls to store.");
+		}
+		else addButtonDisabled(3, "DemonSkull", "You can't store more demon skulls in your bag.");
+		if (AdventurerGuild.Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
+		else addButtonDisabled(8, "DemonSkull", "You not have any demon skulls in your bag.");
+		addButton(14, "Back", campMiscActions);
+	}
+	private function questItemsBagImpSkull1UP():void {
+		player.destroyItems(useables.IMPSKLL, 1);
+		AdventurerGuild.Slot01 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagImpSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot01 -= 1;
+		inventory.takeItem(useables.IMPSKLL, questItemsBag);
+	}
+	private function questItemsBagFeralImpSkull1Up():void {
+		player.destroyItems(useables.FIMPSKL, 1);
+		AdventurerGuild.Slot02 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagFeralImpSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot02 -= 1;
+		inventory.takeItem(useables.FIMPSKL, questItemsBag);
+	}
+	private function questItemsBagMinotaurHorns1Up():void {
+		player.destroyItems(useables.MINOHOR, 1);
+		AdventurerGuild.Slot03 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagMinotaurHorns1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot03 -= 1;
+		inventory.takeItem(useables.MINOHOR, questItemsBag);
+	}
+	private function questItemsBagDemonSkull1Up():void {
+		player.destroyItems(useables.DEMSKLL, 1);
+		AdventurerGuild.Slot04 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagDemonSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot04 -= 1;
+		inventory.takeItem(useables.DEMSKLL, questItemsBag);
 	}
 
 	private function VisitClone():void {
@@ -5532,8 +5616,20 @@ public function rebirthFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
-			outputText("Jiangshi getting Tag'd");
+			outputText("Jiangshi getting Tag'd and your backpack feel somehow cheaper (no worry will get back some gems for it if needed).");
 			if (player.hasKeyItem("Backpack") >= 0) player.gems += (150 * player.keyItemv1("Backpack"));
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 1) {
+				outputText(" Very small present from Adventure Guild for having easier to manage all the loot ;)");
+				AdventurerGuild.Slot01Cap = 6;
+				AdventurerGuild.Slot02Cap = 6;
+			}
+			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.Slot03Cap < 1) {
+				outputText(" Small present from Adventure Guild for having easier to manage all the loot ;)");
+				AdventurerGuild.Slot01Cap = 6;
+				AdventurerGuild.Slot02Cap = 6;
+				AdventurerGuild.Slot03Cap = 6;
+				AdventurerGuild.Slot04Cap = 6;
+			}
 			if (player.hasPerk(PerkLib.Rigidity)) jiangshiBuggedItemsCleanUpCrew();//LAST THING TO DO IN THIS SAVE UPDATE
 			doNext(doCamp);
 			return;

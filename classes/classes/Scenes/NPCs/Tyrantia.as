@@ -24,20 +24,28 @@ public class Tyrantia extends Monster
 		
 		private function tyrantiaLustAura():void {
 			outputText("Tyrantia’s eyes close momentarily, and a wave of energy pulses from her, in sickening pink and black waves. Lust and pain intermingled fills your senses for a split second, and she groans. The energy stops, leaving you hornier, and feeling a little dirtier, than before.\n\n");
-			player.dynStats("cor", 1, "lus", (8 + int(player.effectiveLibido() / 15 + player.effectiveSensitivity() / 15 + player.cor / 20)));
+			player.dynStats("cor", 1, "lus", (10 + int(player.effectiveLibido() / 20 + player.effectiveSensitivity() / 20 + player.cor / 20)), "scale", false);
 		}
 		
 		private function tyrantiaBasicAttack():void {
 			outputText("The Giantess Drider stabs toward you, her phallus-spear glistening. Your body feels warmer wherever the thing touches you, blood flowing faster than usual. ");
+			var lust0:Number = (5 + int(player.effectiveLibido() / 10 + player.effectiveSensitivity() / 10 + player.cor / 10));
 			var dmg0:Number = 0;
 			dmg0 += this.str * 3;
 			dmg0 += eBaseStrengthDamage() * 2;
 			dmg0 += this.weaponAttack * 3;
 			dmg0 = Math.round(dmg0);
+			lust0 *= 3;
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
-			player.dynStats("lus", (4 + int(player.effectiveLibido() / 20 + player.effectiveSensitivity() / 20 + player.cor / 25)));
+			if (hasStatusEffect(StatusEffects.Lustzerking)) {
+				lust0 *= 2;
+				player.takePhysDamage(dmg0, true);
+				player.takePhysDamage(dmg0, true);
+				player.takePhysDamage(dmg0, true);
+			}
+			player.dynStats("lus", lust0, "scale", false);
 		}
 		
 		private function tyrantiaWebbing():void {
@@ -59,34 +67,38 @@ public class Tyrantia extends Monster
 			else {
 				outputText("Unable to throw the giant Drider off of you, she sinks two of her bladed limbs into your body, seemingly at random. You buck, the cold steel sending rippling pain through you, to no effect. ");
 				var dmg3:Number = 0;
-				dmg3 += this.str * 3;
-				dmg3 += eBaseStrengthDamage() * 2;
+				dmg3 += this.str * 4;
+				dmg3 += eBaseStrengthDamage() * 3;
+				dmg3 += this.weaponAttack;
 				dmg3 = Math.round(dmg3);
 				player.takePhysDamage(dmg3, true);
 				player.takePhysDamage(dmg3, true);
+				if (hasStatusEffect(StatusEffects.Lustzerking)) {
+					player.takePhysDamage(dmg3, true);
+					player.takePhysDamage(dmg3, true);
+				}
 			}
 		}
 		
 		private function tyrantiaLustzerk():void {
 			wrath -= 50;
 			outputText("Tyrantia makes no motion towards you, but her smile grows. She licks her arm, where one of your strikes had injured her. The wound doesn’t seem to phase her, and her five functioning eyes narrow. \"<i>You’re a tricky one, aren’t you?</i>\" She coos, and you can feel the skin on your back crawling. \"<i>I know exactly how I’m paying you back.</i>\" The black aura around her thickens, and a small pink layer forms underneath.\n\n");
-			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
+			this.weaponAttack += (45 + (45 * (1 + player.newGamePlusMod())));
 			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
 		}
 		
 		private function tyrantiaFangs():void {
 			outputText("The massive Drider charges at you. You sidestep her Dick, but that proved to be a feint. She rams you with her shoulder, then grabs you in her furry arms. You squirm, but her fangs sink into your exposed neck, leaving you both flushed and in pain. Blood squirts from your neck, and as you push, getting out from her grip, you can feel your muscles slackening.\n\n");
-			player.dynStats("lus", (2 + int(player.effectiveLibido() / 25 + player.effectiveSensitivity() / 25 + player.cor / 30)));
-			tyraniaSpeed(player,5);
+			player.dynStats("lus", (20 + int(player.effectiveLibido() / 10 + player.effectiveSensitivity() / 10 + player.cor / 10)), "scale", false);
+			tyraniaSpeed(player,10);
 		}
 		
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
-				wrath += 5;
 				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
 				else {
-					this.weaponAttack -= (40 + (40 * (1 + player.newGamePlusMod)));
+					this.weaponAttack -= (45 + (45 * (1 + player.newGamePlusMod())));
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
@@ -108,8 +120,8 @@ public class Tyrantia extends Monster
 						tyrantiaPounce();
 						break;
 					case 4:
-						/*if (!hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 50) tyrantiaLustzerk();
-						else */tyrantiaBasicAttack();
+						if (!hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 50) tyrantiaLustzerk();
+						else tyrantiaBasicAttack();
 						break;
 					case 5:
 						tyrantiaFangs();
@@ -151,17 +163,17 @@ public class Tyrantia extends Monster
 			this.skinTone = "brown";
 			this.hairColor = "black";
 			this.hairLength = 24;
-			initStrTouSpeInte(275, 310, 190, 150);
-			initWisLibSensCor(100, 280, 150, 100);
+			initStrTouSpeInte(295, 310, 190, 150);
+			initWisLibSensCor(100, 280, 100, 100);
 			this.weaponName = "Dick";
 			this.weaponVerb="piercing stab";
-			this.weaponAttack = 100;
+			this.weaponAttack = 150;
 			this.armorName = "carapace";
-			this.armorDef = 200;
-			this.armorMDef = 200;
-			//this.bonusHP = 300;
-			this.bonusLust = 488;
-			this.lustVuln = .1;
+			this.armorDef = 300;
+			this.armorMDef = 300;
+			this.bonusHP = 2000;
+			this.bonusLust = 438;
+			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 58;
 			this.gems = rand(10) + 40;

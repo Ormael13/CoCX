@@ -121,6 +121,9 @@ package classes.Scenes
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
 			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
 			outputText("-Jiangshi PC aside not able to equip melee/range weapons, shields, armors and underwear will now not be able to equip two more items types: head jewelry and vehicles.\n");
+			outputText("-Ingnam Thiefs post fight win options and giving gems scenes would take less time: from 1 hour down to 15 minutes. Gems reward for beating them increased a bit too.\n");
+			outputText("-Jtex numerous fixes.\n");
+			outputText("-Zetta fixes.\n");
 			outputText("-Liadri many small changes.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -132,13 +135,10 @@ package classes.Scenes
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Jtex numerous fixes.\n");
-			outputText("-Ingnam Thiefs post fight win options and giving gems scenes would take less time: from 1 hour down to 15 minutes. Gems reward for beating them increased a bit too.\n");
 			outputText("-Exploring would also take only 15 minutes. Working at farm could make PC gain 10 not 15 fatigue and gain 5 more gems. Trading Post can buy items form PC too now.\n");
 			outputText("-New items added in Ingnam: Heal Pill, Incese of Wisdom, Agility Elixir, ManUp Beer added to trading post; Healing herb, Moonlight grass added to alchemist, Ringtail fig to Black Market.\n");
 			outputText("-Luna talk scenes takes 15 min now and not sends PC back to main camp menu. In choice after nuring added lust req. for 1st option that will be greyed out if pc lust is too low.\n");
 			outputText("-Charge special will be unusable if PC not have enough fatigue to use it.\n");
-			outputText("-Zetta fixes.\n");
 			outputText("-Added affecion/addition gains on first milestone scene with Marble. Added her Affection on Stats page (NPC's subpage).\n");
 			outputText("-Tainted Magazine perk increase cost of reload by 2 (down from 10). Default reload cost decreased from 20 to 4.\n");
 			outputText("-Job: Gunslinger, Amateur Gunslinger, Expert Gunslinger, Master Gunslinger perks increase fatigue recovery by 1 each. Perks Alchemical Cartridge and Church of the gun by 2/3. Both perks for scaling dmg based on int/wis are also switched.\n");
@@ -148,9 +148,10 @@ package classes.Scenes
 			outputText("-Diana combat use of Heal having now cooldown of 2 turns (so she will no longer ends keep healing herself when below 20% of HP until running out of the mana).\n");
 			outputText("-Shouldra recrutoiment moved form morning to time during the day (between 10 and 18) to prevent some weirdness with other events triggering at the morning.\n");
 			outputText("-Added out of combat fatigue recovery. In combat fatigue recovery due to that been increased twicefold. Both fatigue recovery rates can be checked on stats page / combat subpage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Imp Skulls, Feral Imp Skulls, Minotaur Horns and Demon Skulls could be now stored in special bag given at joining / promotion in Adventure Guild. Adventures with Copper plate can store in it first two items and those that have already Iron plate can store all 4 tpyes of items. In both cases bag limit is 6 items of the same type. PC can freely put in and take out them from the bag.");
+			outputText("When turning in one of those four quest items they will be first taken form quest itme bag and then if PC not have enough of them in bag from inventory.\n");
+			outputText("-Fletching table accessable at Elven Village. Allow to: improve bow string. Each of those options increase damage of shoot arrows and are act like multiplier bonuses that can stack on each other.\n");//craft special arrows, , reinforce bow
+			outputText("-Added option to put in golem cores into bag for cores without need to first make temporal golem and then using it.\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

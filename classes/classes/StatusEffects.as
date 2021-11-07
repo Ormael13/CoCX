@@ -372,6 +372,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Feeder:StatusEffectType                         = mk("Feeder");
 		public static const Fertilized:StatusEffectType                     = mk("Fertilized");
 		public static const FetishOn:StatusEffectType                       = mk("fetishON");
+		public static const FletchingTable:StatusEffectType					= mk("Fletching Table");
 		public static const FortressOfIntellect:StatusEffectType            = mk("Fortress of Intellect");
 		public static const FoundFactory:StatusEffectType                   = mk("Found Factory");
 		public static const FuckedMarble:StatusEffectType                   = mk("FuckedMarble");

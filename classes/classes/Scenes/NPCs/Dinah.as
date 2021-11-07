@@ -198,7 +198,7 @@ import classes.internals.*;
 			player.takePhysDamage(physdamage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
-			outputText("" + physdamage + " physical damage, " + firedamage + " fire damage. Reeling in pain you begin to bleed and burn at the same time.");
+			outputText(" Reeling in pain you begin to bleed and burn at the same time.");
 		}
 		
 		public function hellcatFelineCurseDinah():void

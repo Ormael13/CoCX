@@ -3079,6 +3079,7 @@ public class Combat extends BaseContent {
 					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
 				}
 			}
+			if (weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.FletchingTable) && player.statusEffectv2(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.FletchingTable)));
 			damage *= (1 + (0.01 * masteryArcheryLevel()));
             if (damage == 0) {
                 if (monster.inte > 0) {

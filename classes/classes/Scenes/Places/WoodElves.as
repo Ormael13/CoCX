@@ -418,7 +418,7 @@ package classes.Scenes.Places{
 		}
 
 		public function DemonsTopic():void {
-			clearOutput()
+			clearOutput();
 			outputText("You ask about the elves’ relationship to the Demons." +
 					"\n\nMerisiel answers you first. \"<i>When the demons invaded Mareth it didn’t take them long to find us here in the forest.</i>\" she says, sadly. \"<i>They… changed our Sacred Tree, and when they did we changed with it. We became much more sexually active, and our men mostly turned into women. Those of us that were affected the worst they took with them to be… toys, I suppose, or maybe soldiers; we don’t really know. Since then they’ve left us alone, I’m sure because they know we’re not a threat.</i>\"" +
 					"\n\nAlyssa interjects. \"<i>But we’re not allied with them! We hate Lethice for what she did to our Sacred Tree… even if we, um… kind of enjoy the sex now.</i>\"" +
@@ -600,7 +600,7 @@ package classes.Scenes.Places{
 		}
 
 		public function GroveLayout():void {
-			clearOutput()
+			clearOutput();
 			if (WoodElvesQuest != QUEST_STAGE_PCCAMEBACK){
 				outputText("You walk along the treeline following the way back to the elves as you last remember. You know you are nearing your destination as the familiar sound of running water as the river hits your ears before coming to view." +
 						"You spot the giant tree resting in its clearing before you quickly advance to it. Memories flow through you as you caress its fine bark. A gentle vine stretches out, endearingly caressing you in reciprocation. Your memories guide you as you follow the river back and finally spot the elven houses. You walk on the gravel as a few curious glances turn your way. Their eyes glint with the sparkling green light bouncing off of their glance as the elves take notice of you one after the other." +
@@ -641,8 +641,7 @@ package classes.Scenes.Places{
 			addButton(1, "Tent", Tent);
 			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(1,"Tent","You need to be an elf.");
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
-			//addButton(2, "Fletching table", Fletching);
-			addButtonDisabled(2,"Fletching table","Under Construction.");
+			addButton(2, "Fletching table", Fletching);
 			addButton(3, "Elenwen", Elenwen);
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
 		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
@@ -655,7 +654,7 @@ package classes.Scenes.Places{
 		}
 
 		public function River():void {
-			clearOutput()
+			clearOutput();
 			if (!player.statStore.hasBuff("Sisterly bathing")) {
 				outputText("You learned to love bathing in this stream during your days spent living with the Wood elves;" +
 						" its clear, cool waters always left you feeling refreshed and clear-headed. More importantly," +
@@ -724,7 +723,7 @@ package classes.Scenes.Places{
 		}
 
 		public function Tent():void {
-			clearOutput()
+			clearOutput();
 			outputText("This tent only really gets used for one thing, and it’s just what you want right now. Alyssa and Elenwen notice you entering, and you smile as they glance at each other and leave off their work to follow you in." +
 					" Before long, the three of you are stripped naked and laying together on the bed, already feeling each other up and preparing for the fun you’re about to have." +
 					"\n\n\"<i>This brings back memories, doesn’t it, [name]?</i>\"says Elenwen, smiling nostalgically." +
@@ -792,20 +791,73 @@ package classes.Scenes.Places{
 		}
 
 		public function Fletching():void {
-			clearOutput()
-			outputText("TEMPORARY PLACEHOLDER STUB FLETCHING TABLE");
-			doNext(GroveLayout);
+			clearOutput();
+			if (!player.hasStatusEffect(StatusEffects.FletchingTable)) player.createStatusEffect(StatusEffects.FletchingTable,0,0,0,0);
+			outputText("You approach the fletching table. Here you can craft improved arrowheads using elven tools.");
+			menu();
+			
+			addButton(2, "AdjustString", FletchingAdjustString);
+			addButton(3, "Reinforce", FletchingReinforce);
+			addButton(14, "Back", GroveLayout);
+		}
+
+		public function FletchingCraftArrows():void {
+			outputText("What kind of arrows would you like to create?");
+			menu();
+			
+			addButton(14, "Back", GroveLayout);
+		}
+		private function FletchingCraftArrows2():void {
+			outputText("What kind of arrows would you like to create?");
+		}
+
+		public function FletchingAdjustString():void {
+			outputText("You may choose a different sturdier string for your bow. What would you use?");
+			menu();
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "SpiderSilk", "You already used this for improving bow string.");
+			else {
+				if (player.hasItem(useables.T_SSILK, 1)) addButton(0, "SpiderSilk", FletchingAdjustString2, useables.T_SSILK);
+				else addButtonDisabled(0, "SpiderSilk", "You need to have spider silk.");
+			}
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Ebonbloom", "You already used this for improving bow string.");
+			else {
+				if (player.hasItem(useables.EBONBLO, 1)) {
+					if (player.statusEffectv2(StatusEffects.FletchingTable) == 1) addButtonDisabled(1, "Ebonbloom", "You need to imprpve string with spider silk first.");
+					else addButton(1, "Ebonbloom", FletchingAdjustString2, useables.EBONBLO);
+				}
+				else addButtonDisabled(1, "Ebonbloom", "You need to have ebonbloom.");
+			}
+			//Spider silk(Can be gathered from spider enemy) +10 % Damage
+			//Ebonbloom(Requires Ebonbloom) +20% Damage
+			//Unicorn hair(Obtained from Celess) +30 % Damage
+			addButton(14, "Back", GroveLayout);
+		}
+		private function FletchingAdjustString2(itype:ItemType):void {
+			outputText("You work for 8 hours adjusting your new " + itype.shortName + " string to your bow. This will serve you well in your adventures.");
+			player.addStatusValue(StatusEffects.FletchingTable, 2, 1);
+			player.destroyItems(itype, 1);
+			doNext(camp.returnToCampUseEightHours);
+		}
+
+		public function FletchingReinforce():void {
+			outputText("You may choose to reinforce your bow using various materials. What would you use?");
+			menu();
+			
+			addButton(14, "Back", GroveLayout);
+		}
+		private function FletchingReinforce2():void {
+			outputText("You work for 8 hours applying your new [MatName] reinforcement to your bow. This will serve you well in your adventures.");
 		}
 
 		//Elenwen is nearly as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
 		private function bowSkill(diff:Number):Number {
 			player.addStatusValue(StatusEffects.Kelt,1,diff);
-			if (player.statusEffectv1(StatusEffects.Kelt) >= 150) player.changeStatusValue(StatusEffects.Kelt,1,150);
+			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);//Kelt track basic archery skill that caps on 100 not 150 so not need to thanks me for fixing too high cap on this training ;)
 			return player.statusEffectv1(StatusEffects.Kelt);
 		}
 
 		public function Elenwen():void {
-			clearOutput()
+			clearOutput();
 			outputText("At the archery range, you find Elenwen practicing with her bow. Her posture is poised and masterful as she aims at a target before nocking an arrow." +
 					" She releases the arrow in a single smooth motion that leaves her long, golden hair fluttering. The arrow flies directly into the center of her mark," +
 					" joining several other perfect shots on the many targets that surround her. Her demeanor is serious and focused," +
@@ -891,7 +943,7 @@ package classes.Scenes.Places{
 		}
 
 		public function Alyssa():void {
-			clearOutput()
+			clearOutput();
 			outputText("On the sparring grounds, you find Alyssa practicing her spear technique." +
 					" She moves elegantly, alternating between smooth, dance-like footwork with broad sweeps and twirls of her long spear and sharp," +
 					" snapping thrusts that seem to pierce the air itself. She is naked, and her petite, slender frame seems to emanate vitality and grace" +

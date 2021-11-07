@@ -135,8 +135,9 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) addButton(6, "I.P.S.Golem", makePermanentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 100 Stones, " + permanentImprovedStoneGolemMakingCost() + " Mana");
 			addButtonDisabled(7, "I.M.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + permanentImprovedSteelGolemMakingCost() + " Mana
-			addButtonDisabled(12, "Upgrades", "Options to upgrade permanent golems.");
-			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
+			if (player.hasItem(useables.GOLCORE, 1) && (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < maxReusableGolemCoresBagSize())) addButton(11, "PutInCore", putInGolemCoreIntoGolemBag).hint("Put in one golem core into 'golem bag'.")
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(12, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
+			addButtonDisabled(13, "Upgrades", "Options to upgrade permanent golems.");
 			addButton(14, "Back", playerMenu);
 		}
 		
@@ -262,6 +263,13 @@ public class CampMakeWinions extends BaseContent
 			cheatTime2(60);
 		}
 
+		public function putInGolemCoreIntoGolemBag():void {
+			clearOutput();
+			outputText("In order to have some free space in your backpack you put in one of golem cores into your bag.\n\n");
+			player.destroyItems(useables.GOLCORE, 1);
+			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
+			doNext(accessMakeWinionsMainMenu);
+		}
 		public function takeOutGolemCoreFromGolemBag():void {
 			clearOutput();
 			outputText("In order to not overload your bag for reusable golem cores you take out one of them.\n\n");

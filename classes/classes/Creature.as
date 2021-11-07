@@ -4334,6 +4334,7 @@ public class Creature extends Utils
 				"speed": "spe",
 				"intellect": "int",
 				"inte": "int",
+				"wisdom": "wis",
 				"libido": "lib",
 				"sensitivity": "sen",
 				"sens": "sen",
@@ -4342,8 +4343,7 @@ public class Creature extends Utils
 				"sca": "scale",
 				"scaled": "scale",
 				"res": "scale",
-				"resisted": "scale",
-				"wisdom": "wis"
+				"resisted": "scale"
 			};
 
 			for (var i:int = 0; i < args.length; i += 2)

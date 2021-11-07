@@ -44,6 +44,7 @@ import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
@@ -232,7 +233,7 @@ use namespace CoC;
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
 			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
-			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
+			addButton(5, "QuestItBag", AddMaxBackpack2).hint("Giving missing Quest Items Bag as part of Adventure Guild welcome/promotion package.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) addButton(8, ":Re", AddMaxBackpack5).hint("Rewind Evangeline.");
@@ -344,8 +345,16 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			if (player.hasKeyItem("Fenrir Collar") >= 0) player.removeKeyItem("Fenrir Collar");
-			player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 1) {
+				AdventurerGuild.Slot01Cap = 6;
+				AdventurerGuild.Slot02Cap = 6;
+			}
+			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.Slot03Cap < 1) {
+				AdventurerGuild.Slot01Cap = 6;
+				AdventurerGuild.Slot02Cap = 6;
+				AdventurerGuild.Slot03Cap = 6;
+				AdventurerGuild.Slot04Cap = 6;
+			}
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
@@ -4154,4 +4163,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}

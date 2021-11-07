@@ -26,18 +26,14 @@ import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.NPCs.Syth;
 import classes.Scenes.NPCs.Rangiku;
 import classes.Scenes.NPCs.Veronika;
+import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
-
-//import classes.Scenes.Places.HeXinDao.*;
-//import classes.Items.Armor;
-//import classes.Scenes.Dungeons.DeepCave.ValaScene;
 
 public class HeXinDao extends BaseContent
 {
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
     public var neisaScene:NeisaFollower = new NeisaFollower();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
-	public var journeytotheeast:JourneyToTheEast = new JourneyToTheEast();
     public var riverdungeon:RiverDungeon = new RiverDungeon();
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
 
@@ -179,7 +175,7 @@ public class HeXinDao extends BaseContent
 			else addButtonDisabled(4, "Dungeon", "You need to find someone to form a party with you if you wish to enter!");
 		}
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
-        addButton(6, "JourTTEast", journeytotheeast.enteringInn);
+        addButton(6, "JourTTEast", SceneLib.journeyToTheEast.enteringInn);
         addButton(7, "Arena", soularena);
         addButton(8, "Restaurant", restaurantShiraOfTheEast);
 		addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
