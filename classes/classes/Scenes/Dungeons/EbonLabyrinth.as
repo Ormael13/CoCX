@@ -100,11 +100,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("You refuse to end up as a meal to a slime and, unable to pose a decent fight, you keep the thing at bay using a torch.\n\n");
 			outputText("\"<i>Not fair! Put that out, damn thing hurts like a bitch. Fucking knew I should have put more work on my fire wards!</i>\"\n\n");
 			outputText("Aha! So she can’t stand fire, huh? Well too bad for her, as you proceed to crawl away from the slime keeping the torch between you and her so she can’t approach. Eventually, you manage to stand up and begin running from the, somewhat disappointed, slime girl.\n\n");
-			cleanupAfterCombat();
+			cleanupAfterCombatTFEvent();
 		}
 		public function defeatedByDarkSlimeLetHer():void {
 			SceneLib.caves.darkslimeScene.LetzRape();
-			cleanupAfterCombat();
+			cleanupAfterCombatTFEvent();
 			dungeonLoc = 131;
 			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);

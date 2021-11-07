@@ -595,7 +595,7 @@ public class Combat extends BaseContent {
 	}
 
 //combat is over. Clear shit out and go to main
-    public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
+    public function cleanupAfterCombatImpl(nextFunc:Function = null, ThisIsNotATFScene:Boolean = true):void {
         magic.cleanupAfterCombatImpl();
         if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
         if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
@@ -634,20 +634,22 @@ public class Combat extends BaseContent {
                     doNext(nextFunc);
                     return;
                 }
-                var gemsLost:int = rand(10) + 1 + Math.round(monster.level / 2);
-                if (inDungeon) gemsLost += 20 + monster.level * 2;
-                //Increases gems lost in NG+.
-                gemsLost *= 1 + (player.newGamePlusMod() * 0.5);
-                //Round gems.
-                gemsLost = Math.round(gemsLost);
-                if (player.hasStatusEffect(StatusEffects.SoulArena) || monster.hasPerk(PerkLib.NoGemsLost)) gemsLost = 0;
-				//Keep gems from going below zero.
-                if (gemsLost > player.gems) gemsLost = player.gems;
-                if (monster.short == "manticore") gemsLost = 0;
-                var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
-                if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && player.hasPerk(PerkLib.FireAffinity))) timePasses = 1;
-                player.gems -= gemsLost;
-                if (monster.perkv3(PerkLib.NoGemsLost) > 0) player.gems += monster.perkv3(PerkLib.NoGemsLost);
+                if(ThisIsNotATFScene){
+                    var gemsLost:int = rand(10) + 1 + Math.round(monster.level / 2);
+                    if (inDungeon) gemsLost += 20 + monster.level * 2;
+                    //Increases gems lost in NG+.
+                    gemsLost *= 1 + (player.newGamePlusMod() * 0.5);
+                    //Round gems.
+                    gemsLost = Math.round(gemsLost);
+                    if (player.hasStatusEffect(StatusEffects.SoulArena) || monster.hasPerk(PerkLib.NoGemsLost)) gemsLost = 0;
+				    //Keep gems from going below zero.
+                    if (gemsLost > player.gems) gemsLost = player.gems;
+                    if (monster.short == "manticore") gemsLost = 0;
+                    var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
+                    if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && player.hasPerk(PerkLib.FireAffinity))) timePasses = 1;
+                    player.gems -= gemsLost;
+                    if (monster.perkv3(PerkLib.NoGemsLost) > 0) player.gems += monster.perkv3(PerkLib.NoGemsLost);
+                }
                 inCombat = false;
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
                 if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);

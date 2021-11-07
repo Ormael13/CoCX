@@ -194,6 +194,11 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
 		}
 
+		protected function cleanupAfterCombatTFEvent(nextFunc:Function = null, ThisIsNotATFScene:Boolean = false):void
+		{
+			SceneLib.combat.cleanupAfterCombatImpl(nextFunc,ThisIsNotATFScene);
+		}
+
 		protected function enemyAI():void
 		{
 			SceneLib.combat.enemyAIImpl();
