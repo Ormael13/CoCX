@@ -366,6 +366,10 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_28) riverdungeon.roomC28();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_29) riverdungeon.roomC29();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_30) riverdungeon.roomC30();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_31) riverdungeon.roomC31();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_32) riverdungeon.roomC32();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_33) riverdungeon.roomC33();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_34) riverdungeon.roomC34();
 			//River Dungeon 4th floor
 			//Den of Desire
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_ENTRANCE) denofdesire.roomEntrance();

@@ -17,6 +17,13 @@ import classes.Monster;
 	
 public class Tyrantia extends Monster
 	{
+		private function lustFromHits():Number {
+			return (25 + int(player.effectiveLibido() / 5 + player.effectiveSensitivity() / 5 + player.cor / 5));
+		}
+		private function lustzerkerBoost():Number {
+			return (150 + (30 * player.newGamePlusMod()));
+		}
+		
 		public static function tyraniaSpeed(player:Player,amount:Number = 0):void {
 			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
 			bse.applyEffect(amount);
@@ -24,12 +31,12 @@ public class Tyrantia extends Monster
 		
 		private function tyrantiaLustAura():void {
 			outputText("Tyrantia’s eyes close momentarily, and a wave of energy pulses from her, in sickening pink and black waves. Lust and pain intermingled fills your senses for a split second, and she groans. The energy stops, leaving you hornier, and feeling a little dirtier, than before.\n\n");
-			player.dynStats("cor", 1, "lus", (10 + int(player.effectiveLibido() / 20 + player.effectiveSensitivity() / 20 + player.cor / 20)), "scale", false);
+			player.dynStats("cor", 1, "lus", (lustFromHits() * 2));
 		}
 		
 		private function tyrantiaBasicAttack():void {
 			outputText("The Giantess Drider stabs toward you, her phallus-spear glistening. Your body feels warmer wherever the thing touches you, blood flowing faster than usual. ");
-			var lust0:Number = (5 + int(player.effectiveLibido() / 10 + player.effectiveSensitivity() / 10 + player.cor / 10));
+			var lust0:Number = lustFromHits();
 			var dmg0:Number = 0;
 			dmg0 += this.str * 3;
 			dmg0 += eBaseStrengthDamage() * 2;
@@ -39,13 +46,7 @@ public class Tyrantia extends Monster
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
-			if (hasStatusEffect(StatusEffects.Lustzerking)) {
-				lust0 *= 2;
-				player.takePhysDamage(dmg0, true);
-				player.takePhysDamage(dmg0, true);
-				player.takePhysDamage(dmg0, true);
-			}
-			player.dynStats("lus", lust0, "scale", false);
+			player.dynStats("lus", lust0);
 		}
 		
 		private function tyrantiaWebbing():void {
@@ -57,39 +58,50 @@ public class Tyrantia extends Monster
 		}
 		
 		private function tyrantiaPounce():void {
-			outputText("As you finish your attack, the violet eyes of the spider-girl flash with sudden anger. The shaft of her Dick flashes in your vision before nailing you in the side of the head. As you reel in pain, her front legs strike you in the shoulder. Before you can react, you’re on the ground, and all you can see are her bladed limbs. ");
-			if (rand(2) == 0) {
-				outputText("You notice a single weak point in her armor, the single metal flap on the front of her spider half. You surge up, jamming your fist as hard as you can into it. The metal and leather slide aside...and your fist enters a surprisingly warm, wet crevasse. The drider on top of you wails in surprise...and something else. Well, if you didn’t know what you’d entered before, you do now. She bucks, your fist exiting with a moist *pop*, and the giantess backs up, her tan cheeks bright red.\n\n");
-				outputText("\"<i>Fighting Dirty like that?!</i>\" She hisses. \"<i>I’ll show you.</i>\"\n");
-				dynStats("lus", 15);
-				teased(15);
-			}
-			else {
-				outputText("Unable to throw the giant Drider off of you, she sinks two of her bladed limbs into your body, seemingly at random. You buck, the cold steel sending rippling pain through you, to no effect. ");
-				var dmg3:Number = 0;
-				dmg3 += this.str * 4;
-				dmg3 += eBaseStrengthDamage() * 3;
-				dmg3 += this.weaponAttack;
-				dmg3 = Math.round(dmg3);
-				player.takePhysDamage(dmg3, true);
-				player.takePhysDamage(dmg3, true);
-				if (hasStatusEffect(StatusEffects.Lustzerking)) {
-					player.takePhysDamage(dmg3, true);
-					player.takePhysDamage(dmg3, true);
-				}
-			}
+			outputText("As you finish your attack, the violet eyes of the spider-girl flash with sudden anger. The shaft of her Dick flashes in your vision before nailing you in the side of the head. As you reel in pain, her front legs strike you in the shoulder. Before you can react, you’re on the ground, and all you can see are her bladed limbs. You’ve been pinned!");
+			player.createStatusEffect(StatusEffects.Pounced, 2, 0, 0, 0);
+		}
+		public function tyrantiaPouncedStruggle():void {
+			clearOutput();
+			player.removeStatusEffect(StatusEffects.Pounced);
+			if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) tyrantiaPounceSuccess();
+			else tyrantiaPounceFail();
+			SceneLib.combat.enemyAIImpl();
+		}
+		public function tyrantiaPouncedWait():void {
+			clearOutput();
+			player.removeStatusEffect(StatusEffects.Pounced);
+			tyrantiaPounceFail();
+			SceneLib.combat.enemyAIImpl();
+		}
+		private function tyrantiaPounceSuccess():void {
+			outputText("You notice a single weak point in her armor, the single metal flap on the front of her spider half. You surge up, jamming your fist as hard as you can into it. The metal and leather slide aside...and your fist enters a surprisingly warm, wet crevasse. The drider on top of you wails in surprise...and something else. Well, if you didn’t know what you’d entered before, you do now. She bucks, your fist exiting with a moist *pop*, and the giantess backs up, her tan cheeks bright red.\n\n");
+			outputText("\"<i>Fighting Dirty like that?!</i>\" She hisses. \"<i>I’ll show you.</i>\"\n");
+			var lustDang:Number = 15 + rand(15);
+			dynStats("lus", lustDang);
+			teased(lustDang);
+		}
+		private function tyrantiaPounceFail():void {
+			outputText("Unable to throw the giant Drider off of you, she sinks two of her bladed limbs into your body, seemingly at random. You buck, the cold steel sending rippling pain through you, to no effect. ");
+			var dmg3:Number = 0;
+			dmg3 += this.str * 4;
+			dmg3 += eBaseStrengthDamage() * 3;
+			dmg3 += this.weaponAttack;
+			dmg3 = Math.round(dmg3);
+			player.takePhysDamage(dmg3, true);
+			player.takePhysDamage(dmg3, true);
 		}
 		
 		private function tyrantiaLustzerk():void {
 			wrath -= 50;
 			outputText("Tyrantia makes no motion towards you, but her smile grows. She licks her arm, where one of your strikes had injured her. The wound doesn’t seem to phase her, and her five functioning eyes narrow. \"<i>You’re a tricky one, aren’t you?</i>\" She coos, and you can feel the skin on your back crawling. \"<i>I know exactly how I’m paying you back.</i>\" The black aura around her thickens, and a small pink layer forms underneath.\n\n");
-			this.weaponAttack += (45 + (45 * (1 + player.newGamePlusMod())));
+			this.weaponAttack += lustzerkerBoost();
 			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
 		}
 		
 		private function tyrantiaFangs():void {
 			outputText("The massive Drider charges at you. You sidestep her Dick, but that proved to be a feint. She rams you with her shoulder, then grabs you in her furry arms. You squirm, but her fangs sink into your exposed neck, leaving you both flushed and in pain. Blood squirts from your neck, and as you push, getting out from her grip, you can feel your muscles slackening.\n\n");
-			player.dynStats("lus", (20 + int(player.effectiveLibido() / 10 + player.effectiveSensitivity() / 10 + player.cor / 10)), "scale", false);
+			player.dynStats("lus", (lustFromHits() * 4));
 			tyraniaSpeed(player,10);
 		}
 		
@@ -98,7 +110,7 @@ public class Tyrantia extends Monster
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
 				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
 				else {
-					this.weaponAttack -= (45 + (45 * (1 + player.newGamePlusMod())));
+					this.weaponAttack -= lustzerkerBoost();
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
@@ -130,6 +142,13 @@ public class Tyrantia extends Monster
 						tyrantiaBasicAttack();
 				}
 			//}
+		}
+		
+		protected override function outputDefaultTeaseReaction(lustDelta:Number):void {
+			if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
+			if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.");
+			if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seems to be enjoying the show.");
+			if (lustDelta >= 10) outputText("\nYou notice a clear liquid dripping from a small hatch on the armored Drider’s front, right where her snatch should be. Her black aura intensifies as you look. Clearly, this Giantess isn’t as cold as she pretends to be!");
 		}
 		
 		override public function get long():String

@@ -331,8 +331,8 @@ package classes.Scenes.Places.HeXinDao
 				flags[kFLAGS.SPIRIT_STONES] -= 5;
 				statScreenRefresh();
 				player.createKeyItem("Adventurer Guild: Copper plate", 0, 0, 0, 0);
-				Slot01Cap = 6;
-				Slot02Cap = 6;
+				Slot01Cap = 10;
+				Slot02Cap = 10;
 				doNext(BoardkeeperYangMain);
 			}
 		}
@@ -964,8 +964,8 @@ package classes.Scenes.Places.HeXinDao
 					player.removeKeyItem("Adventurer Guild: Copper plate");
 					player.createKeyItem("Adventurer Guild: Iron plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 10;
-					Slot03Cap = 6;
-					Slot04Cap = 6;
+					Slot03Cap = 10;
+					Slot04Cap = 10;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather, you would like to but you lack the required spirit stones for the promotion fee.\n\n");
@@ -979,8 +979,8 @@ package classes.Scenes.Places.HeXinDao
 					player.removeKeyItem("Adventurer Guild: Iron plate");
 					player.createKeyItem("Adventurer Guild: Bronze plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 15;
-					Slot05Cap = 6;
-					Slot06Cap = 6;
+					Slot05Cap = 10;
+					Slot06Cap = 10;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");

@@ -827,6 +827,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) bound = true;
         if (player.hasStatusEffect(StatusEffects.Chokeslam)) bound = true;
         if (player.hasStatusEffect(StatusEffects.Titsmother)) bound = true;
+        if (player.hasStatusEffect(StatusEffects.Pounced)) bound = true;
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
             bound = true;
@@ -11169,6 +11170,11 @@ public class Combat extends BaseContent {
             } else if (monster.lust >= (monster.maxLust() * 0.4)) outputText("You can see the tip of his reptilian member poking out of its protective slit. ");
             else if (monster.lust >= (monster.maxLust() * 0.6)) outputText("His cock is now completely exposed and half-erect, yet somehow he still stays focused on your eyes and his face is inexpressive.  ");
             else outputText("His cock is throbbing hard, you don't think it will take much longer for him to pop.   Yet his face still looks inexpressive... despite the beads of sweat forming on his brow.  ");
+        } else if (monster.short == "Tyrantia") {
+            if (monster.lust > (monster.maxLust() * 0.5) && monster.lust < (monster.maxLust() * 0.6)) outputText("Drider Giantess's skin remains flushed with the beginnings of arousal.  ");
+            if (monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText("Drider Giantess's eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
+            if (monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.8)) outputText("Drider Giantess is obviously turned on, you can smell [monster his] arousal in the air.  ");
+            if (monster.lust >= (monster.maxLust() * 0.8) && monster.lust < monster.maxLust()) outputText("You can see the giantess’s back legs trembling, the armored hatch on her front gushing lubricant.  ");
         } else if (monster.short == "kitsune") {
             //Kitsune Lust states:
             //Low

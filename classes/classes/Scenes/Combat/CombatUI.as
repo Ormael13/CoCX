@@ -22,6 +22,7 @@ import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.NPCs.Ceraph;
 import classes.Scenes.NPCs.Luna;
+import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.Yamata;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
@@ -640,6 +641,11 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
 			btnStruggle.call((monster as Izumi).titSmotherStruggle);
 			btnBoundWait.call((monster as Izumi).titSmotherWait);
+		}
+		if (player.hasStatusEffect(StatusEffects.Pounced)) {
+			outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
+			btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
+			btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
 			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);

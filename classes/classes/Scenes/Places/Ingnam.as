@@ -170,7 +170,7 @@ public class Ingnam extends BaseContent
 			}
 			outputText("\n\n<b><u>Blacksmith's pricings</u></b>");
 			menu();
-			if (player.findPerk(PerkLib.HistoryFighter) >= 0) { //20% discount for History: Fighter
+			if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) { //20% discount for History: Fighter
 				addShopItem(weapons.DAGGER, 48, 1);
 				addShopItem(weapons.PIPE, 40, 1);
 				addShopItem(weapons.SPEAR, 140, 1);
@@ -184,7 +184,7 @@ public class Ingnam extends BaseContent
 				addShopItem(weapons.KATANA, 250, 1);
 				addShopItem(weapons.MACE, 100, 1);
 			}
-			if (player.findPerk(PerkLib.HistorySmith) >= 0) { //20% discount for History: Smith perk
+			if (player.findPerk(PerkLib.HistorySmith) >= 0 || player.findPerk(PerkLib.PastLifeSmith) >= 0) { //20% discount for History: Smith perk
 				addShopItem(armors.LEATHRA, 40, 2);
 				addShopItem(armors.FULLCHN, 120, 2);
 				addShopItem(armors.SCALEML, 288, 2);
@@ -229,7 +229,7 @@ public class Ingnam extends BaseContent
 			}
 			outputText("\n\n<b><u>Alchemy shop pricings</u></b>");
 			menu();
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) { //20% discount for History: Alchemist perk
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) { //20% discount for History: Alchemist perk
 				addShopItem(consumables.REDUCTO, 80, 4);
 				addShopItem(consumables.GROPLUS, 80, 4);
 				addShopItem(consumables.L_DRAFT, 25, 4);
@@ -274,7 +274,7 @@ public class Ingnam extends BaseContent
 			if (page == 1) {
 				for (slot = 0; slot < 10; slot++) {
 					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
-						outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 3) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 						addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
 						totalItems += player.itemSlots[slot].quantity;
 					}
@@ -284,7 +284,7 @@ public class Ingnam extends BaseContent
 			if (page == 2) {
 				for (slot = 10; slot < 20; slot++) {
 					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
-						outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 3) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 						addButton(slot-10, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
 						totalItems += player.itemSlots[slot].quantity;
 					}
@@ -295,7 +295,7 @@ public class Ingnam extends BaseContent
 			addButton(14, "Back", shopTradingPost);
 		}
 		private function shopTradingPostSell(slot:int):void {
-			var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
+			var itemValue:int = int(player.itemSlots[slot].itype.value / 3);
 			clearOutput();
 			if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 				if (itemValue == 0)
