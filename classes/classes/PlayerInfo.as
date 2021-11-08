@@ -1757,7 +1757,7 @@ public class PlayerInfo extends BaseContent {
 	}
 	public  function filterPerks(element:Object, index:int, arr:Array):Boolean{  	//filter from perks availabe for player
 		var temp1:Boolean = false;
-		var temp2:Boolean = true;
+		var temp2:Boolean = false;
 		for each (var x:Object in element.requirements){ 							//in all requirements for that perk
 			if(
 			 ((x.attr=="str")&&(filterChoices[1]==1)) ||
