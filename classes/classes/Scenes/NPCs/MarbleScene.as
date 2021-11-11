@@ -2405,19 +2405,30 @@ private function marbleGathered():void {
 	outputText("You ask Marble about any supplies she might have found.  She smiles and hands you her latest find.\n\n");
 	//items that Marble can find for the player, more to be added later (there aren't many items in the game right now that Marble would bring back for the player):
 	//Vitality potion (12 hours or one day)
-	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 0)
-		inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
+	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 0) {
+		inventory.takeItem(consumables.VITAL_T, camp.campLoversMenu);
+		cheatTime2(5);
+	}
 	//Pack of nails
-	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 1)
-		inventory.takeItem(consumables.PONAILS, camp.returnToCampUseOneHour);
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 1) {
+		inventory.takeItem(consumables.PONAILS, camp.campLoversMenu);
+		cheatTime2(5);
+	}
 	//Tanned Leather clothes, armor, def: 5 (three days)
-	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 2)
-		inventory.takeItem(armors.LEATHRA, camp.returnToCampUseOneHour);
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 2) {
+		inventory.takeItem(armors.LEATHRA, camp.campLoversMenu);
+		cheatTime2(5);
+	}
 	//Minotaus horn
-	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 3)
-		inventory.takeItem(useables.MINOHOR, camp.returnToCampUseOneHour);
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 3) {
+		inventory.takeItem(useables.MINOHOR, camp.campLoversMenu);
+		cheatTime2(5);
+	}
 	//LaBova, cow girl transformation item (if you'll let me put it here, I'd like to use it as part of the purification quest, the player can still get it if they are addicted)
-	else inventory.takeItem(consumables.LABOVA_, camp.returnToCampUseOneHour);
+	else {
+		inventory.takeItem(consumables.LABOVA_, camp.campLoversMenu);
+		cheatTime2(5);
+	}
 	player.removeStatusEffect(StatusEffects.MarbleHasItem);
 }
 

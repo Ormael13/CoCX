@@ -113,17 +113,17 @@ public class Naga extends Monster
 				this.drop = new WeightedDrop().
 					add(null,1).
 					add(useables.PCSHARD,6).
-					add(headjewelries.GNHAIR,5).
-					add(consumables.REPTLUM,4).
-					add(consumables.SNAKOIL,3);
+					add(headjewelries.GNHAIR,6).
+					add(consumables.SNAKOIL,6).
+					add(consumables.REPTLUM,1);
 			}
 			else {
 				this.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
 				this.drop = new WeightedDrop().
 					add(null,1).
-					add(headjewelries.GNHAIR,5).
-					add(consumables.REPTLUM,4).
-					add(consumables.SNAKOIL,3);
+					add(headjewelries.GNHAIR,8).
+					add(consumables.SNAKOIL,8).
+					add(consumables.REPTLUM,3);
 			}
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);

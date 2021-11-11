@@ -156,13 +156,14 @@ package classes.Scenes
 			outputText("-Counters for all materials (wood, stones, nails, etc.) would be visible at all times.\n");
 			outputText("-Forest area been split into two that have only partialy shared encounters. Exploring both count toward one shared coutner of forest exploration.\n");
 			outputText("-Demonic Scythe upgrade at (pure) Celess unlocked.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-Slight shuffling buttons in explore menu with adding greyed out buttons telling how to unlock that area (at least which area to explore to get it but not telling min lvl for that - that would be too easy would it?)\n");
+			outputText("-Selected enemies in Forest/Deepwoods area got either slight decrease in lvl or increased lvl (with buffed a bit stats).\n");
+			outputText("-Charge p.special base fatigue cost been lowered to 40% from 60%.\n");
+			outputText("-Kitsune sisters now are starting as 4 tailed kitsunes. Similar to Izumi, Priscilla or Akbal they can now lvl up up to lvl 37.\n");
+			outputText("-Chicken Harpy can be found from Places after PC meet her twice.\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-Temporal golems base dmg and bonus from charged core perks been doubled. Also capacity for temporal golems and golem cores bag gained from perks possible to pick before lvl 24 been increased (since golemancer should use alot of them before getting to stage of using perm ones ");
+			outputText("it feels tough to just care like 5-7 of them only ready to use).\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-Battlefield now have two subareas (Boundary) and (Outer). First is for lower lvl enemies and 2nd got some tougher ones including ghost type enemies (which can give a bit of painb to pure phys fighters ;) )\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories, Sextuple Thrust cooldown frozen, Woodcutting location in Places req. 3x more visits that Quarry\n");/*ostatni punkt changelogu

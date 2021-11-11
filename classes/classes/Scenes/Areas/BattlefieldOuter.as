@@ -1,6 +1,6 @@
 /**
  * @author Ormael
- * Area with lvl 6-42 group enemies. Good for PC focused on group fights.
+ * Area with lvl 24-53 group enemies. Good for PC focused on group fights.
  * Currently a Work in Progress
  */
 package classes.Scenes.Areas 
@@ -24,11 +24,11 @@ use namespace CoC;
 		
 		public function exploreOuterBattlefield():void {
 			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
-			//Twin Grakaturd
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 0 && player.hasKeyItem("Twin Grakaturd") < 0 && rand(2) == 0) {
+			//
+			/*if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 0 && player.hasKeyItem("Twin Grakaturd") < 0 && rand(2) == 0) {
 				partsofTwinGrakaturd();
 				return;
-			}
+			}*/
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -49,14 +49,19 @@ use namespace CoC;
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}
-			//Dilapidated Shrine
-			if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] == 1 && rand(10) == 0) {
-				SceneLib.dilapidatedShrine.firstvisitshrineintro();
-				return;
-			}
 			//Giant Slayer Mech
 			if (flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] == 0 && rand(10) == 0) {
 				takeWrathMech();
+				return;
+			}
+			
+			//Discover Outer Battlefield
+			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && player.level >= 19) {
+				flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
+				player.explored++;
+				clearOutput();
+				outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			

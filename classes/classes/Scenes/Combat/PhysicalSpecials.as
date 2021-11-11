@@ -1362,15 +1362,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	public function chargingcoooooost():Number {
-		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.1);
+		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.01);
 		if (player.hasPerk(MutationsLib.TwinHeart)) {
 			if (player.hasPerk(MutationsLib.TwinHeartPrimitive)) {
-				if (player.hasPerk(MutationsLib.TwinHeartEvolved)) chargingcostvalue *= 3;
-				else chargingcostvalue *= 4;
+				if (player.hasPerk(MutationsLib.TwinHeartEvolved)) chargingcostvalue *= 10;
+				else chargingcostvalue *= 20;
 			}
-			else chargingcostvalue *= 5;
+			else chargingcostvalue *= 30;
 		}
-		else chargingcostvalue *= 6;
+		else chargingcostvalue *= 40;
 		if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) {
 			if (player.hasPerk(PerkLib.PhantomStrike)) chargingcostvalue += 50;
 			else chargingcostvalue += 25;
@@ -2193,9 +2193,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
 			else overloadedGolemCoresBag = true;
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
 		damage = Math.round(damage);
@@ -2245,9 +2245,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		damage *= 3;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
@@ -2299,9 +2299,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		damage *= 5;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
@@ -2334,9 +2334,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		damage *= usedGolems;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
@@ -5994,4 +5994,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

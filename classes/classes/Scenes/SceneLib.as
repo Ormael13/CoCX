@@ -41,6 +41,8 @@ public class SceneLib {
 
     public static var mutationsTable:Mutations = new Mutations();
 
+    public static var battlefiledboundary:BattlefieldBoundary = new BattlefieldBoundary();
+
     public static var battlefiledouter:BattlefieldOuter = new BattlefieldOuter();
 
     public static var beach:Beach = new Beach();

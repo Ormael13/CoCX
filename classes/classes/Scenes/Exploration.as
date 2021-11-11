@@ -105,13 +105,10 @@ public class Exploration extends BaseContent
 			if (player.exploredDesert > 0) addButton(3, "Desert", SceneLib.desert.exploreDesert).hint("Visit the dry desert. " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			else addButtonDisabled(3, "Desert", "You need to 'Explore' Mareth more.");
 
-			//if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the battlefield boundary. " + (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] : ""));
-			//else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert.");
-			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0) addButton(5, "Battlefield (O)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the outer battlefield. " + (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] : ""));
-			else addButtonDisabled(5, "Battlefield (O)", "Discovered when using 'Explore' after finding Desert.");
+			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
+			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert.");
 			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
-			//else addButtonDisabled(6, "Mountain", "Discovered when using 'Explore' after finding Battlefield (Boundary).");
-			else addButtonDisabled(6, "Mountain", "Discovered when using 'Explore' after finding Battlefield (Outer).");
+			else addButtonDisabled(6, "Mountain", "Discovered when using 'Explore' after finding Battlefield (Boundary).");
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", SceneLib.plains.explorePlains).hint("Visit the plains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
 			else addButtonDisabled(7, "Plains", "Discovered when using 'Explore' after finding Mountain.");
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", SceneLib.swamp.exploreSwamp).hint("Visit the wet swamplands. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
@@ -132,19 +129,20 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			hideMenus();
 			menu();
-			if (SceneLib.forest.isDiscovered() && player.level >= 3) addButton(0, "Forest (I)", SceneLib.forest.exploreForest).hint("Visit the lush forest. " + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
-			else addButtonDisabled(0, "Forest(I)", "You need to be ready (lvl 3+) to reach this area.");
-			//1 - desert inner part
-			//if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0) addButton(2, "Battlefield(O)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the outer battlefield. " + (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] : ""));
-			//else addButtonDisabled(2, "Battlefield(O)", "Discovered when exploring Battlefield (Boundary).");
+			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0) addButton(0, "Battlefield(O)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the outer battlefield. " + (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] : ""));
+			else addButtonDisabled(0, "Battlefield(O)", "Discovered when exploring Battlefield (Boundary).");
+			if (SceneLib.forest.isDiscovered() && player.level >= 3) addButton(1, "Forest (I)", SceneLib.forest.exploreForest).hint("Visit the lush forest. " + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
+			else addButtonDisabled(1, "Forest(I)", "You need to be ready (lvl 3+) to reach this area.");
+			//2 - desert inner part
+			//addButtonDisabled(2, "Desert(I)", "Discovered when exploring Desert.");
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
 			else addButtonDisabled(3, "High Mountain", "Discovered when exploring Mountain.");
 
-			// 5 - plains inner part
+			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
+			else addButtonDisabled(5, "Defiled Ravine", "Discovered when exploring Blight Ridge.");
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(6, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
 			else addButtonDisabled(6, "Bog", "Discovered when exploring Swamp.");
-			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(7, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
-			else addButtonDisabled(7, "Defiled Ravine", "Discovered when exploring Blight Ridge.");
+			// 7 - plains inner part
 			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) {
 				if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(8, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
 				else addButtonDisabled(8, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
@@ -171,6 +169,7 @@ public class Exploration extends BaseContent
 			menu();
 			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
 			else addButtonDisabled(0, "Deepwoods", "Discovered when exploring Forest (I).");
+			addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
 			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
@@ -675,16 +674,16 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				//Discover Outer Battlefield
-				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
-					flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
+				//Discover Battlefield Boundary
+				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+					flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the (Outer) Battlefield!</b>");
+					outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the Battlefield (Boundary)!</b>");
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && player.exploredMountain <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
 					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 					player.explored++;
 					player.exploredMountain = 1;

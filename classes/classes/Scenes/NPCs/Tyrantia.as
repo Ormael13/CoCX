@@ -50,15 +50,39 @@ public class Tyrantia extends Monster
 		}
 		
 		private function tyrantiaWebbing():void {
-			
+			if ((rand(player.spe) > this.spe / 2)) outputText("You flatten yourself to the ground as Tyrantia spins. A thin glob of ebony goo flies over your head, hissing as it hits the ground behind you. You turn back, catching a glimpse of the grass and dirt around the point of impact. The plants around the glob die, fading from vibrant green to an odd brown-black. It’s a good thing it missed!");
+			else {
+				outputText("Tyrantia turns, exposing her spinnerets. You brace yourself, expecting webbing, but instead, a viscous goop strikes you in the chest. It burns!");
+				var dmg1:Number = this.inte * 0.2;
+				dmg1 += eBaseIntelligenceDamage() * 0.2;
+				dmg1 = Math.round(dmg1);
+				dmg1 = player.takeAcidDamage(dmg1, true);
+				if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
+				else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+				tyraniaSpeed(player, 25);
+			}
 		}
 		
 		private function tyrantiaCharge():void {
-			
+			if ((rand(player.spe) > this.spe / 2)) outputText("As the giantess backs up, you brace yourself. She charges, and you throw yourself to one side, narrowly avoiding her charge.");
+			else {
+				outputText("Tyrantia scuttles backward, then lunges forward, more like an oversized horse than a spider. Her Dick strikes you square in the chest.");
+				if (!player.hasPerk(PerkLib.Resolute)) {
+					outputText(" The blow sends you sprawling to the ground, stunned.");
+					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				}
+				var dmg2:Number = 0;
+				dmg2 += this.str * 4;
+				dmg2 += eBaseStrengthDamage() * 3;
+				dmg2 += this.weaponAttack * 4;
+				dmg2 = Math.round(dmg2);
+				player.takePhysDamage(dmg2, true);
+				player.dynStats("lus", lustFromHits());
+			}
 		}
 		
 		private function tyrantiaPounce():void {
-			outputText("As you finish your attack, the violet eyes of the spider-girl flash with sudden anger. The shaft of her Dick flashes in your vision before nailing you in the side of the head. As you reel in pain, her front legs strike you in the shoulder. Before you can react, you’re on the ground, and all you can see are her bladed limbs. You’ve been pinned!");
+			outputText("As you finish your attack, the violet eyes of the spider-girl flash with sudden anger. The shaft of her Dick flashes in your vision before nailing you in the side of the head. As you reel in pain, her front legs strike you in the shoulder. Before you can react, you’re on the ground, and all you can see are her bladed limbs. <b>You’ve been pinned!</b>");
 			player.createStatusEffect(StatusEffects.Pounced, 2, 0, 0, 0);
 		}
 		public function tyrantiaPouncedStruggle():void {
@@ -102,7 +126,7 @@ public class Tyrantia extends Monster
 		private function tyrantiaFangs():void {
 			outputText("The massive Drider charges at you. You sidestep her Dick, but that proved to be a feint. She rams you with her shoulder, then grabs you in her furry arms. You squirm, but her fangs sink into your exposed neck, leaving you both flushed and in pain. Blood squirts from your neck, and as you push, getting out from her grip, you can feel your muscles slackening.\n\n");
 			player.dynStats("lus", (lustFromHits() * 4));
-			tyraniaSpeed(player,10);
+			tyraniaSpeed(player, 20);
 		}
 		
 		override protected function performCombatAction():void
@@ -120,14 +144,14 @@ public class Tyrantia extends Monster
 				var choice0:Number = rand(6);
 				switch (choice0) {
 					case 0:
-					case 1:
-					case 2:
 						tyrantiaBasicAttack();
 						break;
-					//	if (HPRatio() < .5 && rand(3) == 0 && (mana >= spellCostHeal())) castHealDinah();
-					//	break;
-					//	else if (mana >= spellCostArouse()) castArouseDinah();
-					//	break;
+					case 1:
+						tyrantiaWebbing();
+						break;
+					case 2:
+						tyrantiaCharge();
+						break;
 					case 3:
 						tyrantiaPounce();
 						break;

@@ -10526,11 +10526,11 @@ public class Combat extends BaseContent {
     public function fatigueRecovery(combat:Boolean = true):void {
         var fatigue1:Number = 0;
         fatigue1 += fatigueRecovery2();
-        if (combat) {
+        if (combat) fatigue(-fatigue1);
+		else {
 			fatigue1 *= 2;
 			fatigue(-fatigue1);
 		}
-		else fatigue(-fatigue1);
     }
 
     public function fatigueRecovery2():Number {

@@ -12,8 +12,6 @@ import classes.internals.*;
 
 public class Kitsune extends Monster
 	{
-
-
 		// Combat Abilities:
 		// the kitsune are an almost purely magical mob, relying mainly on tease attacks and spells that raise lust.
 		//Entwine:
@@ -191,7 +189,10 @@ public class Kitsune extends Monster
 
 		public function Kitsune(hairColor:String)
 		{
-
+			var str:String = "";
+			if (flags[kFLAGS.MET_KITSUNES] >= 4) str += "six";
+			else if (flags[kFLAGS.MET_KITSUNES] >= 2) str += "five";
+			else str += "four";
 			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
 			this.a = "a ";
 			this.short = "kitsune";
@@ -201,7 +202,7 @@ public class Kitsune extends Monster
 						"black": "lustrous, ass-length black",
 						"red": "unkempt, shoulder-length reddish"
 					}[hairColor]) +
-							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
+							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and "+str+" luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
 			// this.plural = false;
 			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
 				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.FOX);
@@ -210,6 +211,46 @@ public class Kitsune extends Monster
 				this.cumMultiplier = 1.5;
 				this.hoursSinceCum = ballSize * 10;
 				this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.MET_KITSUNES] < 2) {
+				initStrTouSpeInte(35, 55, 110, 105);
+				initWisLibSensCor(110, 60, 65, 45);
+				this.weaponAttack = 8;
+				this.armorDef = 5;
+				this.armorMDef = 30;
+				this.bonusHP = 120;
+				this.bonusLust = 144;
+				this.level = 19;
+			}
+			if (flags[kFLAGS.MET_KITSUNES] == 2) {
+				initStrTouSpeInte(50, 75, 140, 130);
+				initWisLibSensCor(135, 80, 75, 45);
+				this.weaponAttack = 9;
+				this.armorDef = 6;
+				this.armorMDef = 36;
+				this.bonusHP = 130;
+				this.bonusLust = 180;
+				this.level = 25;
+			}
+			if (flags[kFLAGS.MET_KITSUNES] == 3) {
+				initStrTouSpeInte(65, 95, 170, 155);
+				initWisLibSensCor(160, 100, 85, 45);
+				this.weaponAttack = 10;
+				this.armorDef = 7;
+				this.armorMDef = 42;
+				this.bonusHP = 140;
+				this.bonusLust = 216;
+				this.level = 31;
+			}
+			if (flags[kFLAGS.MET_KITSUNES] == 4) {
+				initStrTouSpeInte(80, 115, 200, 180);
+				initWisLibSensCor(185, 120, 95, 45);
+				this.weaponAttack = 11;
+				this.armorDef = 8;
+				this.armorMDef = 48;
+				this.bonusHP = 150;
+				this.bonusLust = 252;
+				this.level = 37;
 			}
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
@@ -224,20 +265,12 @@ public class Kitsune extends Monster
 			this.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 			this.hairColor = hairColor;
 			this.hairLength = 13 + rand(20);
-			initStrTouSpeInte(35, 55, 110, 105);
-			initWisLibSensCor(110, 60, 65, 45);
 			this.weaponName = "claws";
 			this.weaponVerb="punch";
-			this.weaponAttack = 8;
 			this.armorName = "skin";
-			this.armorDef = 5;
-			this.armorMDef = 30;
-			this.bonusHP = 120;
-			this.bonusLust = 136;
 			this.lust = 20;
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 11;//mają wtedy tylko 2 ogony ale z czasem jak PC też rośnie w siłe z lvl-em bdą mieć awans to lvl może 18-20 i trzeci ogon plus wzmocnienie statów itp.
 			this.gems = rand(20) + 20;
 			this.drop = new WeightedDrop().
 					add(armors.ARCBANG,1).
