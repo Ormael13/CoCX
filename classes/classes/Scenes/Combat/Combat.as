@@ -107,6 +107,21 @@ public class Combat extends BaseContent {
     public function set inCombat(value:Boolean):void {
         CoC.instance.inCombat = value;
     }
+    
+    public function callbackBeforeAbility(ability:CombatAbility):void {
+        clearOutput();
+        doNext(combatMenu);
+    }
+    public function callbackAfterAbility(ability:CombatAbility):void {
+        statScreenRefresh();
+        if (monster.HP <= monster.minHP()) {
+            doNext(endHpVictory);
+        } else if (monster.lust > monster.maxLust()) {
+            doNext(endLustVictory);
+        } else {
+            enemyAI();
+        }
+    }
 
     public function physicalCost(mod:Number):Number {
         var costPercent:Number = 100;
@@ -1118,7 +1133,7 @@ public class Combat extends BaseContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+				
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
@@ -15132,4 +15147,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

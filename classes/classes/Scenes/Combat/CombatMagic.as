@@ -13,6 +13,7 @@ import classes.MutationsLib;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.JeanClaude;
 import classes.Scenes.Dungeons.D3.Lethice;
@@ -830,12 +831,21 @@ public class CombatMagic extends BaseCombatContent {
 		return damage;
 	}
 
+	public var allWhiteSpells:/*CombatAbility*/Array = [
+			new WhitefireSpell()
+	]
+	
 	public function buildWhiteMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		//WHITE SHITZ
+		for each(var ability:CombatAbility in allWhiteSpells) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton());
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			bd = buttons.add("Whitefire", spellWhitefire)
 					.hint("Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  " +
@@ -4578,7 +4588,7 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
-	}	
+	}
 	
 //(35) Restore
 	public function spellRestore():void {
@@ -4625,7 +4635,7 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
-	}	
+	}
 
 //(35) Balance of Life
 	public function spellBalanceOfLife():void {
