@@ -179,7 +179,7 @@ import classes.internals.*;
 			this.armorMDef = 6;
 			this.armorPerk = "";
 			this.armorValue = 70;
-			if (pierced) {
+			if (pierced && !player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
 				this.nipplesPierced = 1;
 				this.bonusHP = 400;
 				this.bonusLust = 153;

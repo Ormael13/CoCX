@@ -20,6 +20,16 @@ use namespace CoC;
 	public class Vegot extends Monster
 	{
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.dungeons.riverdungeon.defeatVegot();
+		}
+		
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.riverdungeon.defeatedByVegot();
+		}
+		
 		override public function get long():String {
 			var str:String = "";
 			str += "You are fighting Vegot. He appears to be an adult raiju and proclaims himself to be the king.\n\n";
@@ -67,7 +77,7 @@ use namespace CoC;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 65 + rand(30);
 			this.drop = new ChainedDrop().
-					add(consumables.VOLTTOP,1);
+					add(consumables.VOLTTOP,1).
 					add(consumables.ALCTHUN,0.7).
 					add(useables.ELSHARD, 0.5);
 			this.wings.type = Wings.THUNDEROUS_AURA;

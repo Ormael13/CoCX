@@ -2486,27 +2486,27 @@ public class Camp extends NPCAwareContent{
 			else addButtonDisabled(0, "ImpSkull", "You not have any imp skulls to store.");
 		}
 		else addButtonDisabled(0, "ImpSkull", "You can't store more imp skulls in your bag.");
-		if (AdventurerGuild.Slot01 > 0) addButton(5, "ImpSkull", questItemsBagImpSkull1Down);
-		else addButtonDisabled(5, "ImpSkull", "You not have any imp skulls in your bag.");
+		if (AdventurerGuild.Slot01 > 0) addButton(1, "ImpSkull", questItemsBagImpSkull1Down);
+		else addButtonDisabled(1, "ImpSkull", "You not have any imp skulls in your bag.");
 		if (AdventurerGuild.Slot02 < AdventurerGuild.Slot02Cap) {
-			if (player.hasItem(useables.FIMPSKL, 1)) addButton(1, "FeralImpS.", questItemsBagFeralImpSkull1Up);
-			else addButtonDisabled(1, "ImpSkull", "You not have any feral imp skulls to store.");
+			if (player.hasItem(useables.FIMPSKL, 1)) addButton(2, "FeralImpS.", questItemsBagFeralImpSkull1Up);
+			else addButtonDisabled(2, "FeralImpS.", "You not have any feral imp skulls to store.");
 		}
-		else addButtonDisabled(1, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
-		if (AdventurerGuild.Slot02 > 0) addButton(6, "FeralImpS.", questItemsBagFeralImpSkull1Down);
-		else addButtonDisabled(6, "FeralImpS.", "You not have any feral imp skulls in your bag.");
+		else addButtonDisabled(2, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
+		if (AdventurerGuild.Slot02 > 0) addButton(3, "FeralImpS.", questItemsBagFeralImpSkull1Down);
+		else addButtonDisabled(3, "FeralImpS.", "You not have any feral imp skulls in your bag.");
 		if (AdventurerGuild.Slot03 < AdventurerGuild.Slot03Cap) {
-			if (player.hasItem(useables.MINOHOR, 1)) addButton(2, "MinoHorns", questItemsBagMinotaurHorns1Up);
-			else addButtonDisabled(2, "ImpSkull", "You not have any minotaur horns to store.");
+			if (player.hasItem(useables.MINOHOR, 1)) addButton(5, "MinoHorns", questItemsBagMinotaurHorns1Up);
+			else addButtonDisabled(5, "MinoHorns", "You not have any minotaur horns to store.");
 		}
-		else addButtonDisabled(2, "MinoHorns", "You can't store more minotaur horns in your bag.");
-		if (AdventurerGuild.Slot03 > 0) addButton(7, "MinoHorns", questItemsBagMinotaurHorns1Down);
-		else addButtonDisabled(7, "MinoHorns", "You not have any minotaur horns in your bag.");
+		else addButtonDisabled(5, "MinoHorns", "You can't store more minotaur horns in your bag.");
+		if (AdventurerGuild.Slot03 > 0) addButton(6, "MinoHorns", questItemsBagMinotaurHorns1Down);
+		else addButtonDisabled(6, "MinoHorns", "You not have any minotaur horns in your bag.");
 		if (AdventurerGuild.Slot04 < AdventurerGuild.Slot04Cap) {
-			if (player.hasItem(useables.DEMSKLL, 1)) addButton(3, "DemonSkull", questItemsBagDemonSkull1Up);
-			else addButtonDisabled(3, "ImpSkull", "You not have any demon skulls to store.");
+			if (player.hasItem(useables.DEMSKLL, 1)) addButton(7, "DemonSkull", questItemsBagDemonSkull1Up);
+			else addButtonDisabled(7, "DemonSkull", "You not have any demon skulls to store.");
 		}
-		else addButtonDisabled(3, "DemonSkull", "You can't store more demon skulls in your bag.");
+		else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
 		if (AdventurerGuild.Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
 		else addButtonDisabled(8, "DemonSkull", "You not have any demon skulls in your bag.");
 		addButton(14, "Back", campMiscActions);

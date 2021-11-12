@@ -28,8 +28,8 @@ import classes.internals.*;
 		{
 			var damage:int = (inte * 1.1) + rand(25);
 			damage = Math.round(damage);
+			outputText("The hellcat cast a spell, materializing a fireball before throwing it at you. ");
 			player.takeFireDamage(damage, true);
-			outputText("The hellcat cast a spell, materializing a fireball before throwing it at you. " + damage + " fire damage!");
 		}
 		
 		public function hellcatInfernalClaw():void

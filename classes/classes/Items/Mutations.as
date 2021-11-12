@@ -3761,6 +3761,7 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Clear Mind and doesnt have it
             if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
@@ -3869,16 +3870,19 @@ public final class Mutations extends MutationsHelper {
         if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
+            return;
         }
         //Smart enough for Mental Shield and doesnt have it
         if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
+            return;
         }
         //Smart enough for Cure and doesnt have it
         if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
             player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
+            return;
         }
         //Smart enough for fire storm and doesnt have it
         if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
@@ -3891,21 +3895,25 @@ public final class Mutations extends MutationsHelper {
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Aegis.</b>");
 				player.createStatusEffect(StatusEffects.KnowsAegis, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Exorcise and doesnt have it
 			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsExorcise)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Exorcise.</b>");
 				player.createStatusEffect(StatusEffects.KnowsExorcise, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Divine Shield and doesnt have it
 			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsDivineShield)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Divine Shield.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDivineShield, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Thunderstorm and doesnt have it
 			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Thunderstorm.</b>");
 				player.createStatusEffect(StatusEffects.KnowsThunderstorm, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Tears of Denial and doesnt have it
 			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) {

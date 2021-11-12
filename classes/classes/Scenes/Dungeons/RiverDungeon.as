@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons
 {
 import classes.EventParser;
 import classes.Scenes.Areas.GlacialRift.Yeti;
+import classes.Scenes.Dungeons.RiverDungeon.Vegot;
 import classes.display.SpriteDb;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Shield;
@@ -461,7 +462,7 @@ import classes.StatusEffects;
 		public function defeatFireElementalSubBoss():void {
 			clearOutput();
 			outputText("The Ifrit gives you a blank stare, as if deciding her next action. As she stands silently, the flames around her body cackle with embers as her entire form begins shining brightly like a dying star. You're forced to avert your eyes from the painful illumination.\n\n");
-			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n");
+			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n<b>You have gained Key Item: Fire Ifrit Core</b>\n\n");
 			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -471,7 +472,7 @@ import classes.StatusEffects;
 		public function defeatWaterElementalSubBoss():void {
 			clearOutput();
 			outputText("The Undine stops moving, holding its place like a body of undisturbed water. Suddenly, without any signs it the body loses shape, the fluid spills onto the ground in a small puddle.\n\n");
-			outputText("You notice something lying dormantly within the small pool of water. You cautiously approach to retrieve the blue sphere.\n\n");
+			outputText("You notice something lying dormantly within the small pool of water. You cautiously approach to retrieve the blue sphere.\n\n<b>You have gained Key Item: Water Undine Core</b>\n\n");
 			player.createKeyItem("Water Undine Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -481,7 +482,7 @@ import classes.StatusEffects;
 		public function defeatAirElementalSubBoss():void {
 			clearOutput();
 			outputText("The Sylph pauses in its tracks. Without warning, it suddenly shoots a strong gust of wind toward you. You reflexively brace yourself for the attack but the wind dissipates before reaching you.\n\n");
-			outputText("You look toward where the air elemental used to be, now nothing but a small, dormant sphere suspended in the air. It slowly descends to the ground as a feather would before you decide to inspect it.\n\n");
+			outputText("You look toward where the air elemental used to be, now nothing but a small, dormant sphere suspended in the air. It slowly descends to the ground as a feather would before you decide to inspect it.\n\n<b>You have gained Key Item: Air Sylph Core</b>\n\n");
 			player.createKeyItem("Air Sylph Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -491,7 +492,7 @@ import classes.StatusEffects;
 		public function defeatEarthElementalSubBoss():void {
 			clearOutput();
 			outputText("The Golem stands for a moment as a low rumbling sound enemates from it. Quickly, stones begin sloughing off its body, one by one. As quickly as it started, the humanoid form is lost to a small mound of rubble.\n\n");
-			outputText("A single sphere sticks out from the top of the pile of rocks. It lies dormantly before you before you as you inspect it.\n\n");
+			outputText("A single sphere sticks out from the top of the pile of rocks. It lies dormantly before you before you as you inspect it.\n\n<b>You have gained Key Item: Earth Golem Core</b>\n\n");
 			player.createKeyItem("Earth Golem Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -502,7 +503,7 @@ import classes.StatusEffects;
 			clearOutput();
 			outputText("The revenant collapses as all the elements it's gained die out. The rubble lies dormantly before you before slowly sinking into the ground. The voices ring as sparks of multicolored embers, each resembling one of the four elements it aligned with fly out, <i>“The elements will rise again.”</i>\n\n");
 			outputText("As the sparks fade, all that remains is an empty shell, cold and lifeless. You inspect the elemental carefully, but somehow you know nothing will come from it this time. It's apparently bare now. Though, you can't say for sure if you won't be meeting something like it again later.\n\n");
-			outputText("As you begin to take your leave, a sudden glow illuminates within the rubble, pulsating gently. Carefully, you draw closer, moving aside the debris to reveal a small, glowing heart. It pulses gently within your grasp, warm, almost alive.\n\n");
+			outputText("As you begin to take your leave, a sudden glow illuminates within the rubble, pulsating gently. Carefully, you draw closer, moving aside the debris to reveal a small, glowing heart. It pulses gently within your grasp, warm, almost alive.\n\n<b>You have gained Key Item: Flame Heart</b>\n\n");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			player.createKeyItem("Flame Heart", 0, 0, 0, 0);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -595,6 +596,13 @@ import classes.StatusEffects;
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		
+		public function defeatVegot():void {
+			clearOutput();
+			outputText("Placeholder Good End.\n\n");
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
+			doNext(playerMenu);
+		}
 		public function defeatedByIceElemental():void {
 			clearOutput();
 			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
@@ -632,32 +640,32 @@ import classes.StatusEffects;
 		}
 		public function defeatedByDarknessElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");//embrace the darkness(silly - dorkness) > boss invade all pc orfices and then rips apart fomr inside out or just devour from inside
+			outputText("Placeholder Bad End.\n\n");//embrace the darkness(silly - dorkness) > boss invade all pc orfices and then rips apart from inside out or just devour from inside
 			//[GAME OVER]
 			EventParser.gameOver();
-		}/*
-		public function defeated<Boss enemy>():void {
+		}
+		public function defeatedByVegot():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}*/
+		}
 		public function defeatDarknessElementalSubBoss():void {
 			clearOutput();
 			outputText("Beaten unique darkness elemental starting to slowly disperse. The only thing that remains is a piece of black object, lying on the ground.\n\n");
 			if (player.hasKeyItem("Key Of Darkness (2/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (2/3)");
 				player.createKeyItem("Key Of Darkness", 0, 0, 0, 0);
-				outputText(" once again kneeling you takes out incomplete key, whcih as you expected merge with the piece laying on the gorun. Now it looks like proper key mad of black material. <b>You have gained Key Item: Key Of Darkness</b>");
+				outputText("Once again kneeling you takes out incomplete key, whcih as you expected merge with the piece laying on the gorun. Now it looks like proper key mad of black material.\n\n<b>You have gained Key Item: Key Of Darkness</b>");
 			}
 			else if (player.hasKeyItem("Key Of Darkness (1/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (1/3)");
 				player.createKeyItem("Key Of Darkness (2/3)", 0, 0, 0, 0);
-				outputText(" After you kneel to pick it up it flash with balck light and vanish. And you see something else in the pocket feel a bit heavier. <b>You have gained Key Item: Key Of Darkness (2/3)</b>");
+				outputText("After you kneel to pick it up it flash with balck light and vanish. And you see something else in the pocket feel a bit heavier.\n\n<b>You have gained Key Item: Key Of Darkness (2/3)</b>");
 			}
 			else {
 				player.createKeyItem("Key Of Darkness (1/3)", 0, 0, 0, 0);
-				outputText(" <b>You have gained Key Item: Key Of Darkness (1/3)</b>");
+				outputText("<b>You have gained Key Item: Key Of Darkness (1/3)</b>");
 			}
 			outputText("\n\n");
 			cleanupAfterCombat();
@@ -685,18 +693,17 @@ import classes.StatusEffects;
 			EventParser.gameOver();
 		}
 		
-		public function defeated():void {
+		public function defeat():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
-			dungeonLoc = ;
-			playerMenu();
+			outputText("Placeholder Good End.\n\n");
+			cleanupAfterCombat();
+			doNext(playerMenu);
 		}
-		public function defeated<Boss enemy>():void {
+		public function defeat<Boss enemy>():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			outputText("Placeholder Good End.\n\n");
+			cleanupAfterCombat();
+			doNext(playerMenu);
 		}*/
 		
 		//Rooms
@@ -1489,10 +1496,12 @@ import classes.StatusEffects;
 		public function roomC31():void {
 			dungeonLoc = 165;//boss room
 			clearOutput();
-			/*if () {
+			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] == 8) {
+				outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				startCombat(new Vegot(), true);
 			}
-			else */encountersRuletteC();//boss room
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) */encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
@@ -1509,7 +1518,7 @@ import classes.StatusEffects;
 			else {
 				dungeons.setDungeonButtonsRD(roomC33, null, null, roomC28);
 				addButtonDisabled(11, "South", "There are massive doors with a simple keyhole in middle of it. Maybe you should look for a key? It should be still somehwere on this floor, right?");
-				if (player.hasKeyItem("Key Of Darkness") >= 0) addButton(0, "Insert Key", insertTheKey).("Now you got the key. Would you open the doors?");
+				if (player.hasKeyItem("Key Of Darkness") >= 0) addButton(0, "Insert Key", insertTheKey).hint("Now you got the key. Would you open the doors?");
 				else addButtonDisabled(0, "Insert Key", "Would you kindly find the key first?");
 			}
 		}
@@ -1525,7 +1534,7 @@ import classes.StatusEffects;
 		public function roomC34():void {
 			dungeonLoc = 168;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteC();//some unknown for now trigger locations
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
@@ -1569,14 +1578,24 @@ import classes.StatusEffects;
 		}
 		private function insertTheKey():void {
 			clearOutput();
-			outputText("<i>This is my kingdom</i>\n\n");
-			outputText("<i>This is my domain</i>\n\n");
-			outputText("<i>You cant take it from me the greatest you've ever seen</i>\n\n");
-			outputText("<i>You'll remember my name</i>\n\n");
-			outputText("<i>Call me a god, call me a king</i>\n\n");
+			var compcou:Number = 0;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") compcou += 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] != "") compcou += 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] != "") compcou += 1;
+			var compname:String = "";
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_1]+"";
+			else if (flags[kFLAGS.PLAYER_COMPANION_2] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_2]+"";
+			else if (flags[kFLAGS.PLAYER_COMPANION_3] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_3]+"";
+			outputText("You insert the key, only for it to immediately begin fusing with the doors. You step back as symbols start to emerge with a faint glow, aligning into text:\n\n");
+			outputText("<i>This is my kingdom</i>\n");
+			outputText("<i>This is my domain</i>\n");
+			outputText("<i>You cant take it from me the greatest you've ever seen</i>\n");
+			outputText("<i>You'll remember my name</i>\n");
+			outputText("<i>Call me a god, call me a king</i>\n");
 			outputText("<i>You're outa my realm so bend the knee</i>\n\n");
-			//outputText("The two of you proceed to carefully extract the precious gemstones from the wall as Nessa pockets her payment.\n\n");
+			outputText("Whoever this is, they seem to be rather conceited. You glance over to your companion"+(compcou > 1 ? "s":"")+", making sure "+(compcou > 1 ? "they are":""+compname+" is")+" ready to continue. With a nod, the two of you push open the door as a wave of cold air hits your face. You feel a faint hum of electricity emanating from inside as the door opens fully.\n\n");
 			if (player.hasKeyItem("Key Of Darkness") >= 0) player.removeKeyItem("Key Of Darkness");
+			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomC32);
 		}
@@ -1585,9 +1604,9 @@ import classes.StatusEffects;
 			addButtonDisabled(0, "Floor 1", "You're currently at Floor 1.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(1, "Floor 2", teleportToFloor2);
 			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
-			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(4, "Floor 4", teleportToFloor4);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
+			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(4, "Floor 4", teleportToFloor4);
 			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");*/
 			addButton(14, "Back", roomA01);
 		}
@@ -1595,8 +1614,8 @@ import classes.StatusEffects;
 			menu();
 			addButton(0, "Floor 1", teleportToFloor1);
 			addButtonDisabled(1, "Floor 2", "You're currently at Floor 2.");
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
-			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");*/
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
 			//floor 4
 			addButton(14, "Back", roomB01);
 		}

@@ -2175,15 +2175,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 6);
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 7);
 			shatterChance -= 3;
 		}
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 8);
 			shatterChance -= 3;
 		}
 		if (rand(100) < shatterChance) {
@@ -2221,15 +2221,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 6);
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 7);
 			shatterChance -= 3;
 		}
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 8);
 			shatterChance -= 3;
 		}
 		if (rand(100) < shatterChance) {
@@ -2275,15 +2275,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 6);
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 7);
 			shatterChance -= 3;
 		}
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 8);
 			shatterChance -= 3;
 		}
 		if (rand(100) < shatterChance) {
