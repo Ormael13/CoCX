@@ -382,7 +382,7 @@ public class CampMakeWinions extends BaseContent
 		
 		private function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
-			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 3;
 			if (player.hasPerk(PerkLib.ElementalContractRank1)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank2)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank3)) maxSizeOfElementalsArmyCounter += 1;
@@ -392,31 +392,31 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.ElementalContractRank7)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank8)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank9)) maxSizeOfElementalsArmyCounter += 1;
-			if (player.hasPerk(PerkLib.ElementalContractRank10)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank11)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank12)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank13)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank14)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank15)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank16)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank17)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank18)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank19)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank20)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank21)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank22)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank23)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank24)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank25)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank26)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank27)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank28)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank29)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank30)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank31)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 1;
-			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 1;
-			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank10)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank11)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank12)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank13)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank14)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank15)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank16)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank17)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank18)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank19)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank20)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank21)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank22)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank23)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank24)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank25)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank26)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank27)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank28)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank29)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank30)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank31)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 2;
 			return maxSizeOfElementalsArmyCounter;
 		}
 		private function currentSizeOfElementalsArmy():Number {
@@ -965,11 +965,11 @@ public class CampMakeWinions extends BaseContent
 			}
 			outputText("</i>");
 			menu();
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
-			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
-			addButton(1, "Ranks (E)", accessSummonEpicElementalsMainMenu).hint("Rank 1 to Viscount Rank Epic Elementals");
-			if (currentSizeOfElementalsArmy() > 0) addButton(2, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Elementals!")
-			else addButtonDisabled(2,"ElementUp", "You don't have any elementals, try summoning one!");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu);
+			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible normal elementals or reached limit of how many elementals you can command at once.");
+			addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
+			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
+			else addButtonDisabled(5,"ElementUp", "You don't have any elementals, try summoning one!");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", playerMenu);
 		}
@@ -1207,12 +1207,6 @@ public class CampMakeWinions extends BaseContent
 			outputText("<b>1 Elemental</b>\n\n");
 			outputText("-M. Special: \n");
 			doNext(evocationTome);
-		}
-		private function accessSummonEpicElementalsMainMenu():void {
-			menu();
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningEpicElementalsSubmenu);
-			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
-			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function summoningElementalsSubmenu():void {
 			clearOutput();
@@ -1850,4 +1844,4 @@ public class CampMakeWinions extends BaseContent
 			cheatTime2(10);
 		}
 	}
-}
+}

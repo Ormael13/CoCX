@@ -25,6 +25,7 @@ import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Dungeons.RiverDungeon.WaterElemental;
 import classes.Scenes.Monsters.FeralImps;
 import classes.Scenes.NPCs.Electra;
+import classes.Scenes.SceneLib;
 import classes.CoC;
 import classes.PerkLib;
 import classes.Scenes.Monsters.GolemDummyImproved;
@@ -598,7 +599,14 @@ import classes.StatusEffects;
 		
 		public function defeatVegot():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("The shield of arrogance he's barricaded himself with crumbles before you as the so-called 'king' falls to his knees. Even while groveling, he refuses to back down.\n\n");
+			outputText("\"<i>This proves <b>NOTHING!</b> I... am still the kin-</i>\" His tirade is cut short as a sharp ethereal spike pierces his torso from behind. Bits of metal drop to the floor as the spike slices through the chain holding his amulet tightly to his neck.\n\n");
+			outputText("\"<i>You aren't even a prince, never mind a king. Everything you have is by an extension of what I've given to you.</i>\" A warped voice resonates from a portal that parts, still shimmering behind him. Several more spikes lash out, impaling the Raiju until he's skewered into the ground.\n\n");
+			outputText("Vegot coughs, sputtering between his words, \"<i>No... my... my...</i>\" He reaches his hand toward his amulet but is unable to move with the spikes pinning his limbs down. As the spikes rise from his body, he is dragged with them before slowly sliding off, collapsing to the ground, and rolling toward you.\n\n");
+			outputText("\"<i>Now, be an obedient puppet. You're coming with me.</i>\" The voice quickly grows impatient as the spikes morph into chains, tying around his body before dragging him into the ominous portal.\n\n");
+			outputText("The portal begins to seal, not without a final word, \"<i>We will meet again, stranger...</i>\"\n\n");
+			outputText("Now alone, you notice the amulet he wore is sitting on the ground. It pulsates with a gentle hum of electricity, almost mocking the drum of a heartbeat.\n\n<b>You have gained Key Item: Frost Heart</b>\n\n");
+			player.createKeyItem("Frost Heart", 0, 0, 0, 0);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			cleanupAfterCombat();
 			doNext(playerMenu);
@@ -646,7 +654,19 @@ import classes.StatusEffects;
 		}
 		public function defeatedByVegot():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("You collapse, your wounds burdening your body as your will to fight falters. Knowing his victory, Vegot slowly strides toward you, \"<i>I made a promise, one that I intend to keep... Now, it's time to uphold that.</i>\" After he speaks, he bends down, touching your forehead.\n\n");
+			outputText("You shout in pain as a cold current of electricity invades your body as it circulates through you. A trio of icy horns marks along your forehead.\n\n");
+			outputText("\"<i>And now you're mine.</i>\"\n\n");
+			outputText("As if on queue, a portal opens behind him. Vegot reflexively knees, facing the opening before speaking respectfully, \"<i>My liege, you're here. What are your orders?</i>\"\n\n");
+			outputText("A warped voice resonates out of the shimmering barrier, \"<i>It seems you've obtained a new puppet. Bring it to me.</i>\"\n\n");
+			outputText("The portal expands slowly as Vegot hoists you in his arms effortlessly. You watch, unable to move as the portal expands large enough for you to pass with you in your new master's arms.\n\n");
+			outputText("On the other side is a throne room, albeit with significantly more grandeur than the one Vegot had in his icy palace. At the center, many skeletons, bloodsuckers and spectral beings guard it. A tall skeleton adorned in long, extravagant robes stares into you, his empty eye sockets glow with a purple hue.\n\n");
+			outputText("The skeleton speaks with a warped voice, \"<i>An interesting find, this one may prove useful. I shall compensate you later.</i>\"\n\n");
+			outputText("Vegot kneels, lying you on the ground.\n\n");
+			outputText("\"<i>You may return to your domain, notify me at once the moment you find another specimen for me.</i>\"\n\n");
+			outputText("\"<i>As you command, my Liege,</i>\" Vegot responds yieldingly. He stands up, returning through the portal you entered.\n\n");
+			outputText("The skeleton shifts its attention toward you again, \"<i>Oh, you're still conscious? Sentience intact? Hmmm, no, no, no. That won't do. That won't do at all.</i>\"\n\n");
+			outputText("Everything goes black, like a candle snuffed out from an overpowering blizzard.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
@@ -1496,12 +1516,17 @@ import classes.StatusEffects;
 		public function roomC31():void {
 			dungeonLoc = 165;//boss room
 			clearOutput();
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] == 8) {
-				outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] == 8) {
+				outputText("Cautiously, you enter the room only to notice several rows of ice pillars lining at the sides of a throne. As you focus your eyes, you realize that on the throne lies a... Raiju?\n\n");
+				outputText("Icy blue eyes glower toward you, his penetrative gaze feeds off nothing but scorn. A charcoal-like crown rests at the top of his head, accompanying his chiseled jawline. His toned frame is coated with an ornate cape and glittering spaulders linked together by a chain.\n\n");
+				outputText("His voice booms, \"<i>A new subject? You look... inept.</i>\" He slowly rises from his throne, grabbing a longsword resting at his side as he takes a few long strides toward you. \"<i>Still... Your soul remains clean from my touch. How about I leave a mark on your essence that you'll never forget? Then hopefully you'll remember me, the one King Vegot.</i>\"\n\n");
+				outputText("He drags the tip of the blade along the ground with each step. You notice an amulet wrapped around his neck. It glimmers with a frosted crust, pulsating with faint hums of electricity within.\n\n");
+				outputText("\"<i>You're in my domain, now.</i>\" With only a single utterance from his voice, the entire room begins to freeze. A harsh wind picks up as snow flies around the room. You brace yourself against the blizzard; <b>the fight is on!</b>\n\n");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				SceneLib.glacialRift.GlacialRiftConditions();
 				startCombat(new Vegot(), true);
 			}
-			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) */encountersRuletteC();
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteC();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");

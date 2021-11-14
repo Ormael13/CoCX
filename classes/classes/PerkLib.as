@@ -1102,70 +1102,70 @@ public class PerkLib
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 9.",
 				"You've chosen the 'Elemental Contract Rank 9' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank10:PerkType = mk("Elemental Contract Rank 10", "Elemental Contract Rank 10",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 9th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 9th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 10' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank11:PerkType = mk("Elemental Contract Rank 11", "Elemental Contract Rank 11",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 8th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 8th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 11' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank12:PerkType = mk("Elemental Contract Rank 12", "Elemental Contract Rank 12",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 7th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 7th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 12' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank13:PerkType = mk("Elemental Contract Rank 13", "Elemental Contract Rank 13",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 6th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 6th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 13' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank14:PerkType = mk("Elemental Contract Rank 14", "Elemental Contract Rank 14",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 5th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 5th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 14' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank15:PerkType = mk("Elemental Contract Rank 15", "Elemental Contract Rank 15",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 4th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 4th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 15' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank16:PerkType = mk("Elemental Contract Rank 16", "Elemental Contract Rank 16",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 3rd Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 3rd Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 16' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank17:PerkType = mk("Elemental Contract Rank 17", "Elemental Contract Rank 17",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 2nd Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 2nd Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 17' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank18:PerkType = mk("Elemental Contract Rank 18", "Elemental Contract Rank 18",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 1st Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 1st Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 18' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank19:PerkType = mk("Elemental Contract Rank 19", "Elemental Contract Rank 19",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to Grand Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to Grand Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 19' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank20:PerkType = mk("Elemental Contract Rank 20", "Elemental Contract Rank 20",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Low) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Low) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 20' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank21:PerkType = mk("Elemental Contract Rank 21", "Elemental Contract Rank 21",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Mid) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Mid) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 21' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank22:PerkType = mk("Elemental Contract Rank 22", "Elemental Contract Rank 22",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Advanced) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Advanced) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 22' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank23:PerkType = mk("Elemental Contract Rank 23", "Elemental Contract Rank 23",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Peak) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Peak) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 23' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank24:PerkType = mk("Elemental Contract Rank 24", "Elemental Contract Rank 24",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Low) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Low) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 24' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank25:PerkType = mk("Elemental Contract Rank 25", "Elemental Contract Rank 25",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Mid) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Mid) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 25' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank26:PerkType = mk("Elemental Contract Rank 26", "Elemental Contract Rank 26",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Advanced) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Advanced) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 26' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank27:PerkType = mk("Elemental Contract Rank 27", "Elemental Contract Rank 27",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Peak) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Peak) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 27' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank28:PerkType = mk("Elemental Contract Rank 28", "Elemental Contract Rank 28",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Low) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Low) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 28' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank29:PerkType = mk("Elemental Contract Rank 29", "Elemental Contract Rank 29",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Mid) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Mid) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 29' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank30:PerkType = mk("Elemental Contract Rank 30", "Elemental Contract Rank 30",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Advanced) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Advanced) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 30' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank31:PerkType = mk("Elemental Contract Rank 31", "Elemental Contract Rank 31",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Peak) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Peak) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 31' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethAdvanced:PerkType = mk("Elements of Mareth: Advanced", "Elements of Mareth: Advanced",
 				"You can now summon and command poison, purity and corruption elementals. Also increase elementals command limit by 1.",

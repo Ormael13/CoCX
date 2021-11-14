@@ -15,6 +15,43 @@ import classes.internals.*;
 	{
 		public var Ghosts:BattlefieldEnemiesScenes = new BattlefieldEnemiesScenes();
 		
+		private function VengefulApparitionsMagicMissles():void {
+			outputText("Among group, few appariutions raises their hand and casts a small spell. From their fingertips shoot magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
+			var damage:Number = eBaseIntelligenceDamage() * 0.25;
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			if (this.level == 30) {
+				player.takeMagicDamage(damage, true);
+				player.takeMagicDamage(damage, true);
+			}
+			if (player.hasStatusEffect(StatusEffects.ChargeWeapon) || player.hasStatusEffect(StatusEffects.ChargeArmor) || player.statStore.hasBuff("Might") || player.statStore.hasBuff("Blink")) {
+				if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) player.removeStatusEffect(StatusEffects.ChargeWeapon);
+				else if (player.hasStatusEffect(StatusEffects.ChargeArmor)) player.removeStatusEffect(StatusEffects.ChargeArmor);
+				else if (player.statStore.hasBuff("Might")) player.statStore.removeBuffs("Might");
+				else player.statStore.removeBuffs("Blink");
+			}
+			outputText("\n");
+		}
+
+		override protected function performCombatAction():void
+		{
+			var choice:Number = rand(4);
+			switch (choice) {
+				case 0:
+				case 1:
+				case 2:
+					eAttack();
+					break;
+				case 3:
+					VengefulApparitionsMagicMissles();
+					break;
+				default:
+					eAttack();
+			}
+		}
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			Ghosts.defeatVengefulApparitions();
