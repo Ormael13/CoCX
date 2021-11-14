@@ -6,6 +6,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.SpellsWhite.PyreBurstSpell;
 import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -20,7 +21,7 @@ public class GooGirl extends Monster
 		
 		override public function postPlayerAbility(ability:CombatAbility):void {
 			//[Using fire attacks on the goo]
-			if (ability is WhitefireSpell) {
+			if (ability is WhitefireSpell || ability is PyreBurstSpell) {
 				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + skinTone + " skin has lost some of its shimmer.");
 				if(!hasPerk(PerkLib.Acid)) createPerk(PerkLib.Acid,0,0,0,0);
 			}

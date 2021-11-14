@@ -6,6 +6,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Combat.AbstractSpell;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
@@ -112,7 +113,7 @@ public class Lethice extends Monster
 		
 		
 		override public function postPlayerAbility(ability:CombatAbility):void {
-			if (fightPhase == 3 && ability is WhitefireSpell) {
+			if (fightPhase == 3 && ability is AbstractSpell && ability.hasTag(CombatAbility.TAG_DAMAGING)) {
 				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
 				createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}

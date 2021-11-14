@@ -1,5 +1,7 @@
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.Monster;
+import classes.MutationsLib;
 import classes.PerkLib;
 import classes.StatusEffects;
 
@@ -8,8 +10,8 @@ public class AbstractSpell extends CombatAbility {
 	protected var isBloodMagicApplicable:Boolean = true;
 	protected var useManaType:int;
 	
-	function AbstractSpell(name:String, desc:String, targetType: int, useManaType:int) {
-		super(name, desc, targetType);
+	function AbstractSpell(name:String, desc:String, targetType:int, useManaType:int, tags:/*int*/Array) {
+		super(name, desc, targetType, tags);
 		this.useManaType = useManaType;
 	}
 	
@@ -25,7 +27,7 @@ public class AbstractSpell extends CombatAbility {
 		}
 		
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 		combat.spellPerkUnlock();
 	}
 	
@@ -59,19 +61,28 @@ public class AbstractSpell extends CombatAbility {
 				return "You cannot use offensive spells against an opponent you cannot see or target."
 			}
 		}
+		
+		if (player.wrath < wrathCost()) {
+			return "Your wrath is too low to cast this spell."
+		}
 		return ""
 	}
 	
-	protected function performSpellEffect():void {
-		throw new Error("Method performSpellEffect() not implemented for ability "+name);
+	protected function doSpellEffect():void {
+		throw new Error("Method performSpellEffect() not implemented for ability " + name);
+	}
+	
+	protected function postSpellEffect():void {
+		MagicAddonEffect();
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 	}
 	
 	protected override function doEffect():void {
-		useResources();
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		} else {
-			performSpellEffect();
+			doSpellEffect();
+			postSpellEffect();
 		}
 	}
 	
@@ -81,6 +92,119 @@ public class AbstractSpell extends CombatAbility {
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		combat.magic.MagicAddonEffect(numberOfProcs);
+	}
+	
+	/**
+	 * Apply bonuses from perks, items, and other sources to a damage.
+	 * Returned value is rounded.
+	 * @param baseDamage Base damage value (typically X*scalingBonusSomething)
+	 * @param damageType DamageType.XXX constant
+	 * @param category CombatAbility.CATEGORY_XXX constant
+	 * @param monster Target or null if evaluating damage outside combat
+	 * @return
+	 */
+	protected function adjustSpellDamage(
+			baseDamage:Number,
+			damageType:int,
+			category:int,
+			monster:Monster
+	):Number {
+		var damage:Number = baseDamage;
+		
+		switch (category) {
+			case SPELL_WHITE:
+				damage = spellModWhite() * damage;
+				break;
+		}
+		
+		switch (damageType) {
+			case DamageType.FIRE: {
+				damage = calcInfernoMod(damage);
+				if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+				if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
+				if (monster != null) {
+					if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+					if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+					if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
+					if (player.hasPerk(PerkLib.PureMagic)) {
+						if (monster.cor < 33) damage = Math.round(damage * 1.0);
+						else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+						else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+						else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+						else damage = Math.round(damage * 1.4);
+					}
+				}
+				damage = damage * combat.fireDamageBoostedByDao();
+				break;
+			}
+		}
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) damage *= 0.3;
+			else damage *= 0.2;
+		}
+		
+		return Math.round(damage);
+	}
+	
+	/**
+	 * Do a crit roll and apply crit multiplier.
+	 * Deal damage once or repeatedly (if Omnicaster). Does NOT apply Omnicaster damage downscale!
+	 * Also prints "Monster takes N N N N damage. Critical Hit!"
+	 * @param damage Damage to deal
+	 * @param damageType Damage type (DamageType.XXX)
+	 */
+	protected function critAndRepeatDamage(
+			damage:Number,
+			damageType:int,
+			baseCritChance:Number=5,
+			critMultiplier:Number=1.75
+	):void {
+		outputText(monster.capitalA + monster.short + " takes ");
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = baseCritChance + combatMagicalCritical();
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		
+		var damageFn:Function;
+		switch (damageType) {
+			case DamageType.FIRE:
+				damageFn =doFireDamage;
+				break;
+			case DamageType.DARKNESS:
+				damageFn = doDarknessDamage;
+				break;
+			case DamageType.ICE:
+				damageFn = doIceDamage;
+				break;
+			case DamageType.LIGHTNING:
+				damageFn = doLightingDamage;
+				break;
+			case DamageType.MAGICAL:
+				damageFn = doMagicDamage;
+				break;
+			case DamageType.PHYSICAL:
+			default:
+				damageFn = doDamage;
+		}
+		var repeats:int = 1;
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			repeats = 6;
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				repeats = 8;
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				repeats = 10;
+			}
+		}
+		while (repeats-->0) {
+			damageFn(damage, true, true);
+		}
+		outputText(" damage.");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 	}
 }
 }
