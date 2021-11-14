@@ -22,9 +22,9 @@ package classes
 				}
 			}
 			else{
-				pHeight = Math.floor(inches / 12) + "\""
+				pHeight = Math.floor(inches / 12) + "\'"
 				if (inches % 12 > 0){
-					pHeight = pHeight + " " +  inches % 12 + "\'";
+					pHeight = pHeight + " " +  inches % 12 + "\"";
 				}
 			}
 			return pHeight;
