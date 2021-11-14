@@ -35,7 +35,7 @@ use namespace CoC;
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
@@ -44,6 +44,11 @@ use namespace CoC;
 				SceneLib.dianaScene.repeatBattlefieldEnc();
 				return;
 			}
+			//Tyrania
+			/*if (rand(10) == 0 && (player.level >= 45)) {
+				SceneLib.tyrania.firstEncounter();
+				return;
+			}*/
 			//Ted
 			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();

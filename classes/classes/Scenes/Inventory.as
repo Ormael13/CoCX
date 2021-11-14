@@ -595,31 +595,26 @@ use namespace CoC;
 			clearOutput();
 			spriteSelect(-1);
 			menu();
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) {
-				outputText("You stand inside your warehouse looking at the goods stored inside.");
-				outputText("\n\n");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) {
-				outputText("You stand inside your warehouse and connected to it medium-sized granary looking at the goods and food stored inside.");
-				outputText("\n\n");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) {
-				outputText("You stand inside your warehouses and connecting them medium-sized granary looking at the goods and food stored inside.");
-				outputText("\n\n");
-			}
+			outputText("You stand inside your warehouse");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(" looking at the goods stored inside.");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
 			//Warehouse part 1 and 2
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) {
 				addButton(0, "Warehouse P1", pickItemToPlaceInWarehouse1).hint("Put item in 1st Warehouse.");
 				if (warehouse1Description()) addButton(1, "Warehouse T1", pickItemToTakeFromWarehouse1).hint("Take item from 1st Warehouse.");
+				outputText("\n\n");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 6) {
 				addButton(2, "Warehouse P2", pickItemToPlaceInWarehouse2).hint("Put item in 2nd Warehouse.");
 				if (warehouse2Description()) addButton(3, "Warehouse T2", pickItemToTakeFromWarehouse2).hint("Take item from 2nd Warehouse.");
+				outputText("\n\n");
 			}
 			//Granary
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 4) {
 				addButton(5, "Granary Put", pickItemToPlaceInGranary).hint("Put food in Granary.");
 				if (granaryDescription()) addButton(6, "Granary Take", pickItemToTakeFromGranary).hint("Take food from Granary.");
+				outputText("\n\n");
 			}
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {

@@ -105,7 +105,7 @@ public class Exploration extends BaseContent
 			if (player.exploredDesert > 0) addButton(3, "Desert", SceneLib.desert.exploreDesert).hint("Visit the dry desert. " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			else addButtonDisabled(3, "Desert", "You need to 'Explore' Mareth more.");
 
-			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
+			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledboundary.exploreBattlefieldBoundary).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
 			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert.");
 			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
 			else addButtonDisabled(6, "Mountain", "Discovered when using 'Explore' after finding Battlefield (Boundary).");

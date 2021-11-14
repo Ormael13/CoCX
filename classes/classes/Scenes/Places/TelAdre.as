@@ -306,9 +306,14 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory.as
+private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //Moved here from Inventory.as
 	var slot:int;
 	spriteSelect(47);
+	if (refresh) {
+		clearOutput();
+		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
+		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)");
+	}
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
@@ -320,7 +325,7 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		if (inventory.getMaxSlots() > 10) addButton(13, "Next", oswaldPawnMenu, page + 1);
+		if (inventory.getMaxSlots() > 10) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
 	}
 	if (page == 2) {
 		for (slot = 10; slot < 20; slot++) {
@@ -330,7 +335,7 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		addButton(13, "Prev", oswaldPawnMenu, page - 1);
+		addButton(13, "Prev", oswaldPawnMenu, page - 1, refresh = true);
 	}
 	addButton(10, "Misc", oswaldPawnMenu2);
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);

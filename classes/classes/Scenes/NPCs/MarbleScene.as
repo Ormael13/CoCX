@@ -2070,7 +2070,7 @@ private function marbleTalkOverhaul():void {
 	if( (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] < 5 && flags[kFLAGS.MARBLE_LUST] >= 20) || (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 && flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] >= 4) )
 	{
 		outputText( "[pg]<b>Marble is fidgeting around uncomfortably, perhaps she needs to be milked?</b>" );
-		addButton( 2, "Milking", milkMarble );
+		addButton(2, "Milking", milkMarble);
 	}
 	if (player.cor < 50 && player.statusEffectv4(StatusEffects.Marble) < 60) addButton(1, "Just Talk", talkWithMarbleAtCamp);
 	//if (player.level >= 10) addButton(3, "Her Hammer", hammerQuest); //Start hammer quest

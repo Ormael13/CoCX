@@ -1145,7 +1145,7 @@ public function soularena():void {
 			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
 		}
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
-			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down by two thirds of the total. 500 gems and it's yours.</i>\"");
+			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down to ine sixth of the total. 500 gems and it's yours.</i>\"");
 			if (player.gems > 499) addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
 			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
 		}

@@ -573,10 +573,12 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 
-		if (flags[kFLAGS.USE_METRICS] > 0)
+		if (flags[kFLAGS.USE_METRICS] == 1)
 			outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
-		else
-			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
+		else if (flags[kFLAGS.USE_METRICS] == 0)
+			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches. (Worded)");
+		else	//Yes, this is 2. Yes, this was added as an afterthought.
+			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches. (Symbols)");
 		outputText("\n\n");
 
 		if (flags[kFLAGS.INVT_MGMT_TYPE] > 0)
@@ -724,7 +726,7 @@ public class GameSettings extends BaseContent {
 	 }
 	 */
 	public function toggleMeasurements():void {
-		if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
+		if (flags[kFLAGS.USE_METRICS] < 2) flags[kFLAGS.USE_METRICS] += 1;
 		else flags[kFLAGS.USE_METRICS] = 0;
 		settingsScreenInterfaceSettings();
 	}

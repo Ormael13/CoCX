@@ -69,25 +69,21 @@ use namespace CoC;
 			choice[choice.length] = 0; //Golem group enemies
 			choice[choice.length] = 1; //Golem group enemies
 			choice[choice.length] = 2; //Golem group enemies
-			choice[choice.length] = 3; //Golem group enemies
-			choice[choice.length] = 4; //Goblin/Imp group enemies
-			choice[choice.length] = 5; //Goblin/Imp group enemies
-			choice[choice.length] = 6; //Items
-			choice[choice.length] = 7; //Find nothing!
+			choice[choice.length] = 3; //Goblin/Imp group enemies
+			choice[choice.length] = 4; //Items
+			choice[choice.length] = 5; //Find nothing!
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
 				case 1:
 				case 2:
-				case 3:
 					SceneLib.exploration.genericGolemsEncounters1();
 					break;
-				case 4:
-				case 5:
+				case 3:
 					SceneLib.exploration.genericGobImpEncounters1();
 					break;
-				case 6:
+				case 4:
 					clearOutput();
 					if (rand(2) == 0) {
 						outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");

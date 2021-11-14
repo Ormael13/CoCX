@@ -2715,7 +2715,7 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual Small")) accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual")) accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
-		accmod += meleeDualWieldAccuracyPenalty();
+		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) accmod += meleeDualWieldAccuracyPenalty();
         return accmod;
     }
 
@@ -2834,7 +2834,7 @@ public class Combat extends BaseContent {
 		faccmod += Math.round((masteryFirearmsLevel() - 1) / 2);
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
-		faccmod += firearmsDualWieldAccuracyPenalty();
+		if (player.weaponRangePerk == "Dual Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
         return faccmod;
     }
 
@@ -2846,13 +2846,12 @@ public class Combat extends BaseContent {
     }
 
 	public function firearmsDualWieldAccuracyPenalty():Number {
-		var accfdwmodpenalty:Number = 0;
-        if (player.weaponSpecials("Dual Firearms")) {
-			if (player.hasPerk(PerkLib.DualWieldSmall)) accfdwmodpenalty -= 15;
-			else accfdwmodpenalty -= 25;
+		var accfdwmodpenalty:Number = -25;
+		if (player.weaponSpecials("Dual Firearms")) {
+			if (player.hasPerk(PerkLib.DualWieldSmall)) accfdwmodpenalty += 10;
 		}
         if (player.weaponSpecials("Quad Firearms")) {
-			accfdwmodpenalty -= 75;
+			accfdwmodpenalty -= 50;
 		}
         return accfdwmodpenalty;
 	}
@@ -3810,7 +3809,7 @@ public class Combat extends BaseContent {
             else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
             else if (player.weaponRangeAttack >= 201 && player.weaponRangeAttack < 251) damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
             else damage *= (6 + ((player.weaponRangeAttack - 250) * 0.005));
-			damage *= firearmsDualWieldDamagePenalty();
+			if (player.weaponRangePerk == "Dual Firearms") damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.DBDRAGG) damage *= 2;
@@ -5152,7 +5151,7 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 			if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
-			damage *= meleeDualWieldDamagePenalty();
+			if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) damage *= meleeDualWieldDamagePenalty();
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //All special weapon effects like...fire/ice

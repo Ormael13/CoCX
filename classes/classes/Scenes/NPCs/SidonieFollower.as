@@ -315,7 +315,7 @@ package classes.Scenes.NPCs
 				outputText("The remaining two hours are spent reducing those planks into a more manageable size, softening it with sandpaper and bringing it back to the camp in the wagon. The clearing is quite devoid of any kind of hostile wildlife, so the process is painless, but tiresome. Both of you are left sweaty and exhausted, albeit you are quite satisfied by the huge amount of high-quality wood that you’ve brought home. ");
 				outputText("Sidonie seems a bit affected by the work-induced heat, so she has to excuse herself to jerk off. You manage to see her pint-sized globs of cum staining the grass and sawdust lying on the ground when you’re collecting her pieces of wood to put them on the wagon.\n\n");
 				outputText("Once the last load of wood has been brought to the camp, you pick the tools on the wagon and return to the camp, satisfied with today’s work.\n\n");
-				flags[kFLAGS.SIDONIE_RECOLLECTION] = 22;
+				flags[kFLAGS.SIDONIE_RECOLLECTION] = 46;
 				if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 300;
 				else {
 					if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300 ) < 900) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
