@@ -47,7 +47,7 @@ use namespace CoC;
 				else {
 					var tailspikedmg:Number = Math.round(this.str / 16);
 					var lustdmg:Number = Math.round(this.lib / 6);
-					player.addCombatBuff('spe',-2);
+					player.addCombatBuff('spe',-2, "Manticore Venom", "ManticoreVenom");
 					outputText("hits the mark dealing ");
 					player.takePhysDamage(tailspikedmg, true);
 					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. You took ");

@@ -1615,27 +1615,10 @@ public class Creature extends Utils
 		 * @param buff Creature stat is decremented by this value.
 		 * @return (oldStat-newStat)
 		 */
-		public function addCombatBuff(stat:String, buff:Number):Number {
-			switch(stat) {
-				case 'str':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatStrBuff)
-							as CombatStrBuff).applyEffect(buff);
-				case 'spe':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatSpeBuff)
-							as CombatSpeBuff).applyEffect(buff);
-				case 'tou':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatTouBuff)
-							as CombatTouBuff).applyEffect(buff);
-				case 'int':
-				case 'inte':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteBuff)
-							as CombatInteBuff).applyEffect(buff);
-				case 'wis':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatWisBuff)
-							as CombatWisBuff).applyEffect(buff);
-			}
-			trace("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
-			return 0;
+		public function addCombatBuff(stat:String, buff:Number, text:String = "Combat Buff", tag:String = "CombatBuff"):Number {
+			if (stat == "inte") stat = "int";
+            this.buff(tag).withText(text).addStat(stat,buff).combatPermanent();
+            return 0;
 		}
 		/*
 

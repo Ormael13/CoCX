@@ -1901,13 +1901,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if ((player.isGoblinoid()) && !player.hasPerk(PerkLib.GoblinoidBlood)) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
-				if (player.hasKeyItem("Drug injectors")){
+				if (player.hasKeyItem("Drug injectors") >= 0){
 					player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
 				}
-				if (player.hasKeyItem("Improved Drug injectors")){
+				if (player.hasKeyItem("Improved Drug injectors") >= 0){
 					player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 				}
-				if (player.hasKeyItem("Potent Drug injectors")){
+				if (player.hasKeyItem("Potent Drug injectors") >= 0){
 					player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
 				}
 				if (player.hasKeyItem("Power bracer") >= 0) {
@@ -2000,13 +2000,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.isGoblinoid() && (!player.statStore.hasBuff('DrugInjector') || !player.statStore.hasBuff('Power bracer'))) {
 				outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 				if (!player.statStore.hasBuff('DrugInjector')) {
-					if (player.hasKeyItem("Drug injectors")){
+					if (player.hasKeyItem("Drug injectors") >= 0){
 						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
 					}
-					if (player.hasKeyItem("Improved Drug injectors")){
+					if (player.hasKeyItem("Improved Drug injectors") >= 0){
 						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 					}
-					if (player.hasKeyItem("Potent Drug injectors")){
+					if (player.hasKeyItem("Potent Drug injectors") >= 0){
 						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
 					}
 				}
@@ -2985,4 +2985,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

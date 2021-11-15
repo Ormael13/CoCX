@@ -170,7 +170,7 @@ use namespace CoC;
 		public function partsofTwinGrakaturd():void {
 			clearOutput();
 			outputText("As you explore the (outer) battlefield, you run into what appears to be the half buried remains of an old contraption. This might just be what that gun vendor was talking about! You proceed to dig up the items realizing this to indeed be the remains of a broken firearm.\n\n");
-			outputText("You carefully put the pieces of the Twin Grakaturd in your back and head back to your camp.\n\n");
+			outputText("You carefully put the pieces of the (new firearms) in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);

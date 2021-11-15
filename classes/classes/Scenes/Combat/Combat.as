@@ -2070,7 +2070,7 @@ public class Combat extends BaseContent {
             //basilisk counter attack (block attack, significant speed loss):
             else if (player.inte / 5 + rand(20) < 25) {
                 outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.");
-                player.addCombatBuff('spe', -20);
+                player.addCombatBuff('spe', -20,"Basilisk Gaze","BasiliskGaze");
                 player.removeStatusEffect(StatusEffects.FirstAttack);
                 combatRoundOver();
                 flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
@@ -4421,7 +4421,7 @@ public class Combat extends BaseContent {
             //basilisk counter attack (block attack, significant speed loss):
             else if (player.inte / 5 + rand(20) < 25) {
                 outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.");
-                player.addCombatBuff('spe', -20);
+                player.addCombatBuff('spe', -20,"Basilisk Gaze","BasiliskGaze");
                 player.removeStatusEffect(StatusEffects.FirstAttack);
                 combatRoundOver();
                 flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
@@ -4975,7 +4975,7 @@ public class Combat extends BaseContent {
             //basilisk counter attack (block attack, significant speed loss):
             else if (player.inte / 5 + rand(20) < 25) {
                 outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.");
-                player.addCombatBuff('spe', -20);
+                player.addCombatBuff('spe', -20,"Basilisk Gaze","BasiliskGaze");
                 player.removeStatusEffect(StatusEffects.FirstAttack);
                 combatRoundOver();
                 flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
@@ -8496,7 +8496,7 @@ public class Combat extends BaseContent {
         }
         //Basilisk compulsion
         if (player.hasStatusEffect(StatusEffects.BasiliskCompulsion)) {
-            player.addCombatBuff('spe', -15);
+            player.addCombatBuff('spe', -15,"Basilisk Gaze","BasiliskGaze");
             //Continuing effect text:
             outputText("<b>You still feel the spell of those grey eyes, making your movements slow and difficult, the remembered words tempting you to look into its eyes again. You need to finish this fight as fast as your heavy limbs will allow.</b>\n\n");
             flags[kFLAGS.BASILISK_RESISTANCE_TRACKER]++;
@@ -8963,8 +8963,8 @@ public class Combat extends BaseContent {
             if (player.statusEffectv1(StatusEffects.AikoLightningArrow) <= 0) {
                 player.removeStatusEffect(StatusEffects.AikoLightningArrow);
                 outputText("<b>You feel stronger as Aiko's lightning finally fades, though the arrow is still lodged in your side.</b>\n\n");
-                player.addCombatBuff('str', 6);
-                player.addCombatBuff('spe', 6);
+                player.buff("LightningArrowStr").remove();
+				player.buff("LightningArrowSpe").remove();
             }
             //Shock effect:
             else {

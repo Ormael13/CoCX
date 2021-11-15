@@ -63,11 +63,11 @@ public class FrostGiant extends Monster
 				}
 				else if (player.str >= 1500 && player.str < 200) {
 					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
-					player.addCombatBuff('str', -2);
+					player.addCombatBuff('str', -2, "Combat Debuff", "FrostGiantDebuff");
 				}
 				else if (player.str >= 100 && player.str < 150) {
 					outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-					player.addCombatBuff('str', -4);
+					player.addCombatBuff('str', -4, "Combat Debuff", "FrostGiantDebuff");
 				}
 				else if (player.str >= 50 && player.str < 100) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");

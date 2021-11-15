@@ -52,11 +52,11 @@ public class Kitsune extends Monster
 			player.dynStats("lus", 5 + player.effectiveSensitivity() / 10);
 		}
 
-		//Fox Fire: - Low piercing damage, +10-15 LUST
+		//Fox Fire
 		private function foxFireAttack():void
 		{
 			outputText("The kitsune makes a small circle in the air with her fingers, conjuring up a pale blue flame into her palm with the sound of flint striking against steel.  Pursing her lips, she blows it toward you with a kiss.");
-			var damage:int = 5 + rand(20);
+			var damage:int = this.inte + this.wis + rand(20);
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard,1,-1);
 				outputText("\n\nThe flames burn furiously but power was negated by surround you blizzard, but still it leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");

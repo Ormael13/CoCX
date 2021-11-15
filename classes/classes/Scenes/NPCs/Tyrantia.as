@@ -129,6 +129,13 @@ public class Tyrantia extends Monster
 			tyraniaSpeed(player, 20);
 		}
 		
+		protected override function outputDefaultTeaseReaction(lustDelta:Number):void {
+			if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
+			if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.");
+			if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seems to be enjoying the show.");
+			if (lustDelta >= 10) outputText("\nYou notice a clear liquid dripping from a small hatch on the armored Drider’s front, right where her snatch should be. Her black aura intensifies as you look. Clearly, this Giantess isn’t as cold as she pretends to be!");
+		}
+		
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
@@ -167,14 +174,12 @@ public class Tyrantia extends Monster
 				}
 			//}
 		}
-		
-		protected override function outputDefaultTeaseReaction(lustDelta:Number):void {
-			if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
-			if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.");
-			if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seems to be enjoying the show.");
-			if (lustDelta >= 10) outputText("\nYou notice a clear liquid dripping from a small hatch on the armored Drider’s front, right where her snatch should be. Her black aura intensifies as you look. Clearly, this Giantess isn’t as cold as she pretends to be!");
+		/*
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.tyrania.postFightOptions(hpVictory);
 		}
-		
+		*/
 		override public function get long():String
 		{
 			var str:String = "";
