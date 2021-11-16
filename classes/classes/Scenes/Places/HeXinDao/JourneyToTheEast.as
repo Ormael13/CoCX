@@ -91,6 +91,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) addButton(10, "ShieldMaiden", firstTimeMeetingNeisa);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(10, "Neisa", meetingNeisaAfterDecline);
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(10, "Neisa", NeisabutPCgotKOd);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(10, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(10, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
@@ -213,6 +214,27 @@ package classes.Scenes.Places.HeXinDao
 				doNext(curry(enteringInn,false));
 				cheatTime2(30);
 			}
+		}
+		public function NeisabutPCgotKOd():void {
+			clearOutput();
+			outputText("As you walk towards Neisa, she does a double take as she sees you alive and well.");
+			outputText("\"Well damn. How'd you survive.... nevermind. I don't want to know. You still owe me for that expedition, so I'll be waiting here until you're better prepared.\"");
+			outputText("Unless... you want to go back in now?")
+			menu();
+			addButton(1, "Yes", reenteringTheDungeon).hint("That will make you go to the dungeon right away!");
+			addButton(3, "No", firstTimeMeetingNeisaNo);
+		}
+
+		public function reenteringTheDungeon():void{
+			outputText("With a nod, you shake her hand, and she gets up from her chair, before the two of you head back towards the dungeon.");
+			var strNeisa:Number = 50;
+			strNeisa *= (1 + (0.2 * player.newGamePlusMod()));
+			strNeisa = Math.round(strNeisa);
+			var meleeAtkNeisa:Number = 12;
+			meleeAtkNeisa += (1 + (int)(meleeAtkNeisa / 5)) * player.newGamePlusMod();
+			player.createStatusEffect(StatusEffects.CombatFollowerNeisa, strNeisa, meleeAtkNeisa, 0, 0);
+			flags[kFLAGS.PLAYER_COMPANION_1] = "Neisa";
+			doNext(riverdungeon.enterDungeon);
 		}
 
 		public function firstTimeMeetingNeisa():void {
