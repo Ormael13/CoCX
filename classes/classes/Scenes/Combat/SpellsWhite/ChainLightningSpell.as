@@ -5,7 +5,6 @@ import classes.PerkLib;
 import classes.Scenes.Combat.AbstractWhiteSpell;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
-import classes.StatusEffects;
 
 public class ChainLightningSpell extends AbstractWhiteSpell {
 	
@@ -18,6 +17,7 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 						"Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning."
 						: "Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning.",
 				TARGET_ENEMY,
+				TIMING_LASTING,
 				[TAG_DAMAGING, TAG_AOE, TAG_LIGHTNING]
 		);
 		baseManaCost = 200;
@@ -43,7 +43,7 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 				: player.statusEffectv1(StatusEffects.CooldownSpellChainLighting);
 	}
 	
-	override protected function useResources():void {
+	override public function useResources():void {
 		super.useResources(); // mana is used in AbstractSpell
 		player.createStatusEffect(
 				ex ?
@@ -66,15 +66,19 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	}
 	
 	
-	override protected function doSpellEffect():void {
-		outputText("You charge energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " ");
-		if (monster.plural) {
-			outputText("that jumps from one target to another");
+	override protected function doSpellEffect(display:Boolean = true):void {
+		if (display) {
+			outputText("You charge energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " ");
+			if (monster.plural) {
+				outputText("that jumps from one target to another");
+			}
+			outputText("!");
 		}
-		outputText("!");
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(damage, DamageType.LIGHTNING);
-		outputText("\n\n");
+		critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
+		if (display) {
+			outputText("\n\n");
+		}
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

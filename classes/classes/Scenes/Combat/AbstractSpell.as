@@ -8,14 +8,22 @@ import classes.StatusEffects;
 public class AbstractSpell extends CombatAbility {
 	
 	protected var isBloodMagicApplicable:Boolean = true;
+	protected var isLastResortApplicable:Boolean = true;
 	protected var useManaType:int;
 	
-	function AbstractSpell(name:String, desc:String, targetType:int, useManaType:int, tags:/*int*/Array) {
-		super(name, desc, targetType, tags);
+	function AbstractSpell(
+			name:String,
+			desc:String,
+			targetType:int,
+			timingType:int,
+			useManaType:int,
+			tags:/*int*/Array
+	) {
+		super(name, desc, targetType, timingType, tags);
 		this.useManaType = useManaType;
 	}
 	
-	override protected function useResources():void {
+	override public function useResources():void {
 		var realCost:Number = manaCost();
 		
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -38,13 +46,13 @@ public class AbstractSpell extends CombatAbility {
 		if (uc) return uc;
 		
 		// Run our checks
-		if (player.hasStatusEffect(StatusEffects.BloodMage)) {
+		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
 			if (player.HP - player.minHP() > manaCost()) {
 				return "Your hp is too low to cast this spell."
 			}
 		} else {
 			if (player.mana < manaCost()) {
-				if (player.hasPerk(PerkLib.LastResort)) {
+				if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort)) {
 					if (player.HP < manaCost()) {
 						return "Your hp and mana are too low to cast this spell."
 					}
@@ -68,7 +76,7 @@ public class AbstractSpell extends CombatAbility {
 		return ""
 	}
 	
-	protected function doSpellEffect():void {
+	protected function doSpellEffect(display:Boolean = true):void {
 		throw new Error("Method performSpellEffect() not implemented for ability " + name);
 	}
 	
@@ -77,17 +85,19 @@ public class AbstractSpell extends CombatAbility {
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 	}
 	
-	protected override function doEffect():void {
+	public override function doEffect(output:Boolean = true):void {
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
-			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			if (output) {
+				outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			}
 		} else {
-			doSpellEffect();
+			doSpellEffect(output);
 			postSpellEffect();
 		}
 	}
 	
 	///////////////////////////
-	// Shortcuts
+	// Shortcuts and utilities
 	///////////////////////////
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
@@ -163,6 +173,7 @@ public class AbstractSpell extends CombatAbility {
 	 * @param damageType Damage type (DamageType.XXX)
 	 */
 	protected function critAndRepeatDamage(
+			display:Boolean,
 			damage:Number,
 			damageType:int,
 			baseCritChance:Number=5,
@@ -210,7 +221,7 @@ public class AbstractSpell extends CombatAbility {
 			}
 		}
 		while (repeats-->0) {
-			damageFn(damage, true, true);
+			damageFn(damage, true, display);
 		}
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");

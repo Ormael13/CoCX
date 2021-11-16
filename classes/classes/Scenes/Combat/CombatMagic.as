@@ -38,12 +38,8 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(60) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) && player.weaponName == "fists") || player.weaponName != "fists")) {
-			spellChargeWeapon(true);
-			useMana((60 * spellChargeWeaponCostMultiplier()), 5);
-			flags[kFLAGS.SPELLS_CAST]++;
-			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
-			spellPerkUnlock();
+		if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
+			CombatAbilities.ChargeWeapon.perform(false);
 			outputText("<b>Charge Weapon was autocasted successfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) && player.haveNaturalArmor() && player.isNaked()) || !player.isNaked())) {
@@ -685,15 +681,6 @@ public class CombatMagic extends BaseCombatContent {
 		return spellBlinkMultiplier;
 	}
 
-	public function spellChargeWeaponCostMultiplier():Number {
-		var spellChargeWeaponMultiplier:Number = 1;
-		spellChargeWeaponMultiplier *= spellChargeWeaponWeaponSizeManaCost();
-		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeWeaponMultiplier *= 0.5;
-		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeWeaponMultiplier *= 2;
-		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeWeaponMultiplier *= 2;
-		return spellChargeWeaponMultiplier;
-	}
-
 	public function spellChargeArmorCostMultiplier():Number {
 		var spellChargeArmorMultiplier:Number = 1;
 		spellChargeArmorMultiplier *= spellChargeArmorType();
@@ -844,52 +831,6 @@ public class CombatMagic extends BaseCombatContent {
 				buttons.list.push(ability.createButton(monster));
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-			bd = buttons.add("Blind", spellBlind)
-					.hint("Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  " +
-							"\n\nMana Cost: " + spellCostWhite(30) + "");
-			if (badLustForWhite) {
-				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
-				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (monster.hasStatusEffect(StatusEffects.Blind)) {
-				bd.disable(monster.capitalA + monster.short + " is already affected by blind.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(30)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(30) && player.HP < spellCostWhite(30)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(30)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
-				bd.disable("Your ability to use white magic was sealed.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-			bd = buttons.add("Charge W.", spellChargeWeapon)
-					.hint("The Charge Weapon spell will surround your weapons in electrical energy, causing them to do even more damage.  The effect lasts for a few combat turns.  " +
-							"\n\nMana Cost: " + spellCostWhite(60) * spellChargeWeaponCostMultiplier() + "", "Charge Weapon");
-			if (player.weaponName == "fists" && !player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) {
-				bd.disable("Charge weapon can't be casted on your own fists.");
-			} else if (badLustForWhite) {
-				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
-				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)){
-				bd.disable("Charge weapon is already active and cannot be cast again.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && player.HP < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
-				bd.disable("Your ability to use white magic was sealed.");
-			}
-		}
 		if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
 			bd = buttons.add("Charge A.", spellChargeArmor)
 					.hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.  " +
@@ -924,26 +865,6 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellHeal)) {
 				bd.disable("You need more time before you can cast Heal again.");
-			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
-				bd.disable("Your ability to use white magic was sealed.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
-			bd = buttons.add("Blizzard", spellBlizzard)
-					.hint("Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  " +
-							"\n\nMana Cost: " + spellCostWhite(50) + "");
-			if (badLustForWhite) {
-				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
-				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-				bd.disable("Blizzard is already active and cannot be cast again.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(50)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50) && player.HP < spellCostWhite(50)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(50)) {
-				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
 				bd.disable("Your ability to use white magic was sealed.");
 			}
@@ -1046,6 +967,11 @@ public class CombatMagic extends BaseCombatContent {
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		//BLACK MAGICSKS
+		for each(var ability:CombatAbility in CombatAbilities.ALL_BLACK_SPELLS) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton(monster));
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
 			bd = buttons.add("Ice Spike", spellIceSpike)
 					.hint("Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  " +
@@ -1392,6 +1318,11 @@ public class CombatMagic extends BaseCombatContent {
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		//HEX MAGIC
+		for each(var ability:CombatAbility in CombatAbilities.ALL_HEX_SPELLS) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton(monster));
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
 			bd = buttons.add("Lifetap", spellLifetap)
 					.hint("Sacrifice a quarter of your hp to recover a quarter of your mana.");
@@ -1499,7 +1430,12 @@ public class CombatMagic extends BaseCombatContent {
 		var bd:ButtonData;
 		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
-
+		
+		for each(var ability:CombatAbility in CombatAbilities.ALL_DIVINE_SPELLS) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton(monster));
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsAegis)) {
 			bd = buttons.add("Aegis", spellAegis)
 					.hint("Increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence)  " +
@@ -1602,6 +1538,11 @@ public class CombatMagic extends BaseCombatContent {
 	
 	public function buildNecroMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
+		for each(var ability:CombatAbility in CombatAbilities.ALL_NECRO_SPELLS) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton(monster));
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
 			bd = buttons.add("Bone spirit", spellBoneSpirit)
 					.hint("Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage.  \n\nBones cost: 5");
@@ -1645,6 +1586,11 @@ public class CombatMagic extends BaseCombatContent {
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 //perki z grey mage line dajace spell mod * x% wiecej (nie wplywa na sam spell mod anu spell mod white/black)
 		// GRAY MAGIC
+		for each(var ability:CombatAbility in CombatAbilities.ALL_GREY_SPELLS) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton(monster));
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
 			if (player.hasStatusEffect(StatusEffects.ManaShield)) {
 				buttons.add("Deactiv MS", DeactivateManaShield).hint("Deactivate Mana Shield.");
@@ -1743,6 +1689,11 @@ public class CombatMagic extends BaseCombatContent {
 	
 	public function buildBloodMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
+		for each(var ability:CombatAbility in CombatAbilities.ALL_BLOOD_SPELLS) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton(monster));
+			}
+		}
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 			bd = buttons.add("BloodMissiles", spellBloodMissiles)
@@ -4667,73 +4618,6 @@ public class CombatMagic extends BaseCombatContent {
 	 * y2= 55 at x2= 100
 	 * y3=100 at x3=1000
 	 */
-	private static const ChargeWeaponABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
-//(15) Charge Weapon – boosts your weapon attack value by 5 + (player.inte/10) * SpellMod till the end of combat.
-	public function spellChargeWeapon(silent:Boolean = false):void {
-		var ChargeWeaponBoostCap:Number = 4;
-		var ChargeWeaponBoost:Number = 5;
-		ChargeWeaponBoostCap *= ChargeWeaponBoost;
-		if (player.hasPerk(PerkLib.DivineArmament)) {
-			ChargeWeaponBoostCap *= 2;
-			ChargeWeaponBoost *= 2;
-		}
-		//ChargeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
-		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeWeaponBoost *= 1.2;
-		ChargeWeaponBoost *= spellModWhite();
-		//ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
-		if (ChargeWeaponBoost > ChargeWeaponBoostCap) ChargeWeaponBoost = ChargeWeaponBoostCap;
-		ChargeWeaponBoost *= spellChargeWeaponWeaponSize();
-		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
-		var ChargeWeaponDuration:Number = 5;
-		ChargeWeaponDuration += perkRelatedDurationBoosting();
-		if (silent) {
-			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,ChargeWeaponDuration,0,0);
-			statScreenRefresh();
-			return;
-		}
-
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < (60 * spellChargeWeaponCostMultiplier())) player.HP -= (60 * spellChargeWeaponCostMultiplier());
-		else useMana((60 * spellChargeWeaponCostMultiplier()), 5);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		clearOutput();
-		outputText("You utter words of power, summoning an electrical charge around your [weapon].  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n");
-		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, ChargeWeaponDuration, 0, 0);
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		enemyAI();
-	}
-	public function spellChargeWeaponWeaponSize():Number {
-		var ab12:Number = 1;
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual")) ab12 *= 2;
-		if (player.weaponSpecials("Hybrid")) ab12 *= 2.5;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) ab12 *= 3;
-		if (player.weaponSpecials("Massive")) ab12 *= 4;
-		return ab12;
-	}
-	public function spellChargeWeaponWeaponSizeManaCost():Number {
-		var ba21:Number = 1;
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual Small")) ba21 *= 2;
-		if (player.weaponSpecials("Hybrid")) ba21 *= 3;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual")) ba21 *= 4;
-		if (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Large")) ba21 *= 8;
-		return ba21;
-	}
-
-	/**
-	 * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
-	 * y1= 10 at x1=  10
-	 * y2= 55 at x2= 100
-	 * y3=100 at x3=1000
-	 */
 	private static const ChargeArmorABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
 //(35) Charge Armor – boosts your armor value by 5 + (player.inte/10) * SpellMod till the end of combat.
 	public function spellChargeArmor(silent:Boolean = false):void {
@@ -4836,244 +4720,6 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("<b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
 		if (crit) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(heal,false);
-	}
-//(20) Blind – reduces your opponent's accuracy, giving an additional 50% miss chance to physical attacks.
-	public function spellBlind():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(30)) player.HP -= spellCostWhite(30);
-		else useMana(30,5);
-		var successrate:int = 60;
-		successrate -= (player.inte * 0.4);
-		if (successrate > 20) successrate = 20;
-		if (rand(100) > successrate) {
-			if (monster.hasStatusEffect(StatusEffects.Shell)) {
-				outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
-				enemyAI();
-				return;
-			}
-			if (monster is JeanClaude)
-			{
-				outputText("Jean-Claude howls, reeling backwards before turning back to you, rage clenching his dragon-like face and enflaming his eyes. Your spell seemed to cause him physical pain, but did nothing to blind his lidless sight.");
-
-				outputText("\n\n“<i>You think your hedge magic will work on me, intrus?</i>” he snarls. “<i>Here- let me show you how it’s really done.</i>” The light of anger in his eyes intensifies, burning a retina-frying white as it demands you stare into it...");
-
-				if (rand(player.spe) >= 50 || rand(player.inte) >= 50)
-				{
-					outputText("\n\nThe light sears into your eyes, but with the discipline of conscious effort you escape the hypnotic pull before it can mesmerize you, before Jean-Claude can blind you.");
-
-					outputText("\n\n“<i>You fight dirty,</i>” the monster snaps. He sounds genuinely outraged. “<i>I was told the interloper was a dangerous warrior, not a little [boy] who accepts duels of honour and then throws sand into his opponent’s eyes. Look into my eyes, little [boy]. Fair is fair.</i>”");
-
-					monster.HP -= int(10+(player.inte/3 + rand(player.inte/2)) * spellModWhite());
-				}
-				else
-				{
-					outputText("\n\nThe light sears into your eyes and mind as you stare into it. It’s so powerful, so infinite, so exquisitely painful that you wonder why you’d ever want to look at anything else, at anything at- with a mighty effort, you tear yourself away from it, gasping. All you can see is the afterimages, blaring white and yellow across your vision. You swipe around you blindly as you hear Jean-Claude bark with laughter, trying to keep the monster at arm’s length.");
-
-					outputText("\n\n“<i>The taste of your own medicine, it is not so nice, eh? I will show you much nicer things in there in time intrus, don’t worry. Once you have learnt your place.</i>”");
-
-					if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20, 0, 0, 0);
-				}
-				if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-					if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-					if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-					enemyAI();
-					return;
-				}
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
-				if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-				else enemyAI();
-				return;
-			}
-			else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
-			{
-				outputText("You hold your [weapon] aloft and thrust your will forward, causing it to erupt in a blinding flash of light. The demons of the court scream and recoil from the radiant burst, clutching at their eyes and trampling over each other to get back.");
-
-				outputText("\n\n<i>“Damn you, fight!”</i> Lethice screams, grabbing her whip and lashing out at the back-most demons, driving them forward -- and causing the middle bunch to be crushed between competing forces of retreating demons! <i>“Fight, or you'll be in the submission tanks for the rest of your miserable lives!”</i>");
-
-				monster.createStatusEffect(StatusEffects.Blind, 5 * spellModWhite(), 0, 0, 0);
-				outputText("\n\n");
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
-				statScreenRefresh();
-				enemyAI();
-				return;
-			}
-			clearOutput();
-			outputText("You glare at " + monster.a + monster.short + " and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n");
-			if (monster is LivingStatue)
-			{
-				// noop
-			}
-			else if(rand(3) != 0) {
-				outputText(" <b>" + monster.capitalA + monster.short + " ");
-				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>");
-				else outputText("is blinded!</b>");
-				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
-				MagicAddonEffect();
-                if(monster is Diva){(monster as Diva).handlePlayerSpell("blind");}
-				if(monster.short == "Isabella")
-					if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
-					else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.");
-				if(monster.short == "Kiha") outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.");
-				if(monster.short == "plain girl") {
-					outputText("  Remarkably, it seems as if your spell has had no effect on her, and you nearly get clipped by a roundhouse as you stand, confused. The girl flashes a radiant smile at you, and the battle continues.");
-					monster.removeStatusEffect(StatusEffects.Blind);
-				}
-			}
-		}
-		else outputText(monster.capitalA + monster.short + " blinked!");
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		statScreenRefresh();
-		enemyAI();
-	}
-
-//(45) Lightning Bolt - base lighting spell
-	public function spellLightningBolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
-		else useMana(40, 5);
-		player.createStatusEffect(StatusEffects.CooldownSpellLightningBolt,spellWhiteCooldown(),0,0,0);
-		if (handleShell()){return;}
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		clearOutput();
-		spellLightningBolt3();
-		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
-	}
-	public function spellLightningBolt2():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
-		else useMana(40, 5);
-		player.wrath -= 100;
-		player.createStatusEffect(StatusEffects.CooldownSpellLightningBoltEx,spellWhiteCooldown(),0,0,0);
-		if (handleShell()){return;}
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		clearOutput();
-		spellLightningBolt3(true);
-		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
-	}
-	public function spellLightningBolt3(edgy:Boolean = false):void {
-		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
-		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 2;
-		if (edgy) damage *= 2;
-		//Determine if critical hit!
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combatMagicalCritical();
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			damage *= 1.75;
-		}
-		//High damage to goes.
-		damage = calcVoltageMod(damage);
-		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
-		if (player.hasPerk(PerkLib.PureMagic)) {
-			if (monster.cor < 33) damage = Math.round(damage * 1.0);
-			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-			else damage = Math.round(damage * 1.4);
-		}
-		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes ");
-		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.5;
-			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) damage *= 0.3;
-			else damage *= 0.2;
-			damage = Math.round(damage);
-			doLightingDamage(damage, true, true);
-			doLightingDamage(damage, true, true);
-			doLightingDamage(damage, true, true);
-			doLightingDamage(damage, true, true);
-			doLightingDamage(damage, true, true);
-			doLightingDamage(damage, true, true);
-			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
-				doLightingDamage(damage, true, true);
-				doLightingDamage(damage, true, true);
-			}
-			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
-				doLightingDamage(damage, true, true);
-				doLightingDamage(damage, true, true);
-			}
-		}
-		else doLightingDamage(damage, true, true);
-		outputText(" damage.");
-		//Using fire attacks on the goo]
-		//if(monster.short == "goo-girl") {
-		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
-		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
-		//}
-		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		MagicAddonEffect();
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		checkAchievementDamage(damage);
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		combat.heroBaneProc(damage);
-		statScreenRefresh();
-	}
-	
-
-
-//(35) Blizzard
-	public function spellBlizzard():void {
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(50);
-		else useMana(50,5);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		clearOutput();
-		outputText("You utter words of power, summoning an ice storm.  It swirls arounds you, ensuring that you'll have more protection from the fire attacks for a few moments.\n\n");
-		var blizzardmagnitude:Number = 0;
-		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) blizzardmagnitude += 2 + player.inte / 10;
-		else blizzardmagnitude += 1 + player.inte / 25;
-		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) blizzardmagnitude *= 1.1;
-		player.createStatusEffect(StatusEffects.Blizzard,Math.round(blizzardmagnitude),0,0,0);
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		enemyAI();
 	}
 
 //(35) Mental Shield

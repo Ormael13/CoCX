@@ -1696,17 +1696,11 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(". The residual power ");
 			if (!player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				outputText("makes your staff glow with barely contained energy");
-				combat.magic.spellChargeWeapon(true);
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
+				CombatAbilities.ChargeWeapon.perform(false);
 			}
 			else {
 				outputText("makes your staff flare up, as the energy escapes as a radiant flash");
-				combat.magic.spellBlind();
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
+				CombatAbilities.Blind.perform();
 			}
 		}
 		outputText(".\n\n");

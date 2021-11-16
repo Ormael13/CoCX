@@ -5774,7 +5774,7 @@ public class Combat extends BaseContent {
             heroBaneProc(damage);
             EruptingRiposte();
             if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isKnown && CombatAbilities.Whitefire.isUsable) {
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isKnownAndUsable) {
                     outputText("\n\n");
                     CombatAbilities.Whitefire.perform();
                 }
@@ -5784,7 +5784,7 @@ public class Combat extends BaseContent {
                     outputText("\n\n");
                     magic.spellIceSpike3();
                 }
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isKnown && CombatAbilities.LightningBolt.isUsable) {
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isKnownAndUsable) {
                     outputText("\n\n");
                     CombatAbilities.LightningBolt.perform();
                 }

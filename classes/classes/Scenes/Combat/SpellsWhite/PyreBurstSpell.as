@@ -16,6 +16,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 						"Teach your foes a lesson with the strength of a wrath-empowered firestorm."
 						: "Teach your foes a lesson with the strength of a firestorm.",
 				TARGET_ENEMY,
+				TIMING_LASTING,
 				[TAG_DAMAGING, TAG_AOE, TAG_FIRE]
 		);
 		baseManaCost = 200;
@@ -39,7 +40,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 				: player.statusEffectv1(StatusEffects.CooldownSpellPyreBurstEx);
 	}
 	
-	override protected function useResources():void {
+	override public function useResources():void {
 		super.useResources(); // mana is used in AbstractSpell
 		player.createStatusEffect(
 				ex ?
@@ -61,16 +62,22 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 		return adjustSpellDamage(baseDamage, DamageType.FIRE, SPELL_WHITE, monster);
 	}
 	
-	override protected function doSpellEffect():void {
+	override protected function doSpellEffect(display:Boolean = true):void {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 2) {
-			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!")
+			if (display) {
+				outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!")
+			}
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 		} else {
-			outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over " + monster.a + monster.short + ".\n");
+			if (display) {
+				outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over " + monster.a + monster.short + ".\n");
+			}
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(damage, DamageType.FIRE);
-		outputText("\n\n");
+		critAndRepeatDamage(display, damage, DamageType.FIRE);
+		if (display) {
+			outputText("\n\n");
+		}
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

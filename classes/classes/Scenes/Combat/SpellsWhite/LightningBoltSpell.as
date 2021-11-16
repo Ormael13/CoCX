@@ -17,6 +17,7 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 						"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning."
 						: "Lightning Bolt (Ex) is a basic wrath-empowered lightning attack that will electrocute your foe with a single bolt of lightning.",
 				TARGET_ENEMY,
+				TIMING_LASTING,
 				[TAG_DAMAGING, TAG_LIGHTNING]
 		);
 		baseManaCost = 40;
@@ -42,7 +43,7 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 				: player.statusEffectv1(StatusEffects.CooldownSpellLightningBolt);
 	}
 	
-	override protected function useResources():void {
+	override public function useResources():void {
 		super.useResources(); // mana is used in AbstractSpell
 		player.createStatusEffect(
 				ex ?
@@ -64,11 +65,15 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	}
 	
 	
-	override protected function doSpellEffect():void {
-		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
+	override protected function doSpellEffect(display:Boolean = true):void {
+		if (display) {
+			outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
+		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(damage, DamageType.LIGHTNING);
-		outputText("\n\n");
+		critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
+		if (display) {
+			outputText("\n\n");
+		}
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

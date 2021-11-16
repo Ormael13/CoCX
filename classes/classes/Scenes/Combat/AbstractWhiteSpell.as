@@ -4,8 +4,14 @@ import classes.StatusEffects;
 
 public class AbstractWhiteSpell extends AbstractSpell {
 	
-	function AbstractWhiteSpell(name:String, desc:String, targetType:int, tags:/*int*/Array) {
-		super(name, desc, targetType, Combat.USEMANA_WHITE, tags);
+	function AbstractWhiteSpell(
+			name:String,
+			desc:String,
+			targetType:int,
+			timingType:int,
+			tags:/*int*/Array
+	) {
+		super(name, desc, targetType, timingType, Combat.USEMANA_WHITE, tags);
 	}
 	
 	override public function manaCost():Number {

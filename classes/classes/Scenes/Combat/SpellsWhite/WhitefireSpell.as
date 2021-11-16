@@ -19,6 +19,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 						"Whitefire(Ex) is a potent wrath-empowered fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors."
 						: "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.",
 				TARGET_ENEMY,
+				TIMING_LASTING,
 				[TAG_DAMAGING, TAG_FIRE]
 		);
 		baseManaCost = 40;
@@ -42,7 +43,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 				: player.statusEffectv1(StatusEffects.CooldownSpellWhitefireEx);
 	}
 	
-	override protected function useResources():void {
+	override public function useResources():void {
 		super.useResources(); // mana is used in AbstractSpell
 		player.createStatusEffect(
 				ex ?
@@ -63,17 +64,21 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 		return adjustSpellDamage(baseDamage, DamageType.FIRE, SPELL_WHITE, monster);
 	}
 	
-	override protected function doSpellEffect():void {
+	override protected function doSpellEffect(display:Boolean = true):void {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 2) {
-			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
+			if (display) {
+				outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
+			}
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 		} else {
-			outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
+			if (display) {
+				outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
+			}
 		}
 		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(damage, DamageType.FIRE);
-		outputText("\n\n");
+		critAndRepeatDamage(display, damage, DamageType.FIRE);
+		if (display) outputText("\n\n");
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

@@ -1,17 +1,64 @@
 package classes.Scenes.Combat {
 import classes.Monster;
 import classes.internals.EnumValue;
-import classes.internals.Utils;
 
 import coc.view.ButtonData;
 
+/**
+ * A combat ability invokable by player (spell, special, skill, etc).
+ *
+ * Handles checks for usability/knowledge, resource checks and usage, actual effect.
+ *
+ * Abilities are categorized with:
+ * - **Type** - Spells (and their sub-types), soulskills, physical and magical specials and so on.
+ * - **Target type** - Target self or enemy. Used in monster reactions, or to disable ability targeting invisible monster.
+ * - **Timing type** - Duration of the ability:<ul>
+ *     <li> Instant (happens immediately), </li>
+ *     <li> Lasting (started and lasts for some time and cannot be cast multiple times),</li>
+ *     <li> Toggle (lasting that could be toggle off by player). </li>
+ * - **Tags** - A set of extra flags (damaging or buffing, primary element, AoE and others) that could be used in checks, reactions, or modifiers
+ *
+ * Subclasses MUST implement:
+ * - `isKnown` (check if player knows the ability)
+ * - `doEffect` (actual ability effect)
+ *
+ * and COULD implement:
+ * - `usabilityCheck` (check is ability is usable and return reason text if not)
+ * - `useResources` (use mana and other resources)
+ * - `currentCooldown` (if on CD, return number of rounds)
+ *
+ * Lasting abilities MUST implement:
+ * - `isActive`
+ *
+ * Toggle abilities MUST implement:
+ * - `toggleOff`
+ *
+ * See subclasses for further info.
+ */
 public class CombatAbility extends BaseCombatContent {
 	
+	/**
+	 * This ability targets player only.
+	 */
 	public static const TARGET_SELF:int = 0;
+	/**
+	 * This ability targets enemy (or player and enemy).
+	 */
 	public static const TARGET_ENEMY:int = 1;
 	
+	/**
+	 * This ability is executed instantly.
+	 * OR it is a lasting/toggle ability not using default mechanism.
+	 */
 	public static const TIMING_INSTANT:int = 0;
+	/**
+	 * This ability adds an unstackable lasting effect.
+	 * Stacked lasting abilities go under TIMING_INSTANT type.
+	 */
 	public static const TIMING_LASTING:int = 1;
+	/**
+	 * This ability adds an unstackable lasting effect that could be toggled off by caster
+	 */
 	public static const TIMING_TOGGLE:int = 2;
 	
 	public static const AllCategories:/*EnumValue*/Array = [];
@@ -63,15 +110,23 @@ public class CombatAbility extends BaseCombatContent {
 	
 	private var _name:String;
 	private var _desc:String;
-	private var _targetType:int;
+	public var targetType:int;
+	public var timingType:int;
 	private var _tags:/*Boolean*/Array;
 	public var baseManaCost:Number = 0;
 	public var baseWrathCost:Number = 0;
 	
-	public function CombatAbility(name:String,desc:String,targetType:int,tags:/*int*/Array) {
+	public function CombatAbility(
+			name:String,
+			desc:String,
+			targetType:int,
+			timingType:int,
+			tags:/*int*/Array
+	) {
 		this._name = name;
 		this._desc = desc;
-		this._targetType = targetType;
+		this.targetType = targetType;
+		this.timingType = timingType;
 		this._tags = [];
 		for (var tag:int=0; tag<AllTags.length; tag++) {
 			this._tags[tag] = tags.indexOf(tag) >= 0;
@@ -84,10 +139,6 @@ public class CombatAbility extends BaseCombatContent {
 	
 	public function get description():String {
 		return _desc
-	}
-	
-	public function get targetType():int {
-		return _targetType
 	}
 	
 	public function get buttonName():String {
@@ -115,11 +166,28 @@ public class CombatAbility extends BaseCombatContent {
 		return "";
 	}
 	
+	/**
+	 * (For lasting/toggle abilities) Return true if ability is active.
+	 */
+	public function isActive():Boolean {
+		if (timingType == TIMING_INSTANT) return false;
+		throw new Error("Method isActive() is not implemented for ability "+name);
+	}
+	
+	/**
+	 * Create a button in the abilities menu to invoke the ability.
+	 * If ability is not usable at the moment, button will be disabled.
+	 * Adds a tooltip with description, costs and predicted effect.
+	 * DOES NOT check for isKnown.
+	 */
 	public function createButton(target:Monster):ButtonData {
 		const bd:ButtonData = new ButtonData(buttonName, buttonCallback);
+		
 		var fullDesc:String = description+"\n";
+		
 		var effectDesc:String = describeEffectVs(target);
 		if (effectDesc) fullDesc += "<b>Effect: "+effectDesc+"</b>\n";
+		
 		var tags:/*int*/Array = presentTags();
 		if (tags.length > 0) {
 			fullDesc += "\n<b>Tags: " + tags.map(function(tag:int,index:int,array:Array):String {
@@ -136,7 +204,12 @@ public class CombatAbility extends BaseCombatContent {
 		}
 		if (costs.length > 0) fullDesc += "\n" + costs.join(", ");
 		
-		var ucheck:String = usabilityCheck();
+		var ucheck:String;
+		if (timingType == TIMING_TOGGLE) {
+			ucheck = toggleOffUsabilityCheck();
+		} else {
+			ucheck = usabilityCheck();
+		}
 		if (ucheck != "") {
 			fullDesc = "<b>"+ucheck + "</b>\n\n" + fullDesc;
 			bd.disable()
@@ -146,39 +219,69 @@ public class CombatAbility extends BaseCombatContent {
 		return bd;
 	}
 	
+	/**
+	 * True if player knows this ability. Should be implemented in subclasses
+	 */
 	public function get isKnown():Boolean {
 		throw new Error("Method isKnown() not implemented for ability "+name);
 	}
 	
+	/**
+	 * True if this ability can be invoked right now
+	 */
 	public function get isUsable():Boolean {
 		return usabilityCheck() == "";
 	}
 	
-	public function buttonCallback():void {
+	public function get isKnownAndUsable():Boolean {
+		return isKnown && isUsable;
+	}
+	
+	protected function buttonCallback():void {
 		combat.callbackBeforeAbility(this);
-		perform();
+		if (timingType == TIMING_TOGGLE && isActive()) {
+			toggleOff();
+		} else {
+			perform();
+		}
 		combat.callbackAfterAbility(this);
 	}
 	
-	public function perform():void {
+	/**
+	 * Invoke this ability. Takes resources,
+	 * DOES NOT check for isKnown or isUsable.
+	 * DOES NOT clear output or proceed the enemy turn.
+	 */
+	public function perform(output:Boolean = true):void {
 		useResources();
 		if (!monster.interceptPlayerAbility(this)) {
-			doEffect();
+			doEffect(output);
 			monster.postPlayerAbility(this);
 		}
+	}
+	
+	public function toggleOff():void {
+		if (timingType == TIMING_TOGGLE) {
+			throw new Error("Cannot deactivate non-toggle ability "+name);
+		}
+		throw new Error("Method deactivate() not implemented for ability "+name);
+	}
+	
+	public function ensureToggledOff():void {
+		if (timingType == TIMING_TOGGLE && isActive()) toggleOff();
 	}
 	
 	/**
 	 * 1st part: use mana, set cooldown, increment counters etc.
 	 */
-	protected function useResources():void {
-	
+	public function useResources():void {
+		/* do nothing */
 	}
 	
 	/**
 	 * 2nd part: actual ability effect
 	 */
-	protected function doEffect():void {
+	public function doEffect(output:Boolean = true):void {
 		throw new Error("Method perform() not implemented for ability "+name);
 	}
 	
@@ -195,15 +298,25 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
-	 * @return String "" is this ability is usable, otherwise reason why it's not
+	 * @return {String} "" is this ability is usable, otherwise reason why it's not
 	 */
 	protected function usabilityCheck():String {
 		// Checks applicable to all abilities could go here
 		if (currentCooldown > 0) {
 			return "You need more time before you can use this ability again."
 		}
+		if (timingType == TIMING_LASTING && isActive()) {
+			return "This ability is already active."
+		}
 		return ""
 	}
 	
+	/**
+	 * Assuming this is an active toggle ability, check if it could be toggled off by player.
+	 * @return {String} "" if ability can be toggled off, otherwise reason why it couldn't
+	 */
+	protected function toggleOffUsabilityCheck():String {
+		return "";
+	}
 }
 }
