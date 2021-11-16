@@ -202,13 +202,18 @@ import classes.internals.Utils;
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
+			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) {
+				if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) addButtonDisabled(10, "???", "Wait until she find things that may be of use to fully restore HB mech.");
+				else addButton(10, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
+			}
+			else addButtonDisabled(10, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
-				addButton(10, "BossTF's", DinahShopMainMenu2);
-				addButton(12, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
+				addButton(11, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
+				addButton(13, "BossTF's", DinahShopMainMenu2);
 			}
 			else {
-				addButtonDisabled(10, "Boss D.", "Maybe if merchant would be more interested in you...");
-				addButtonDisabled(12, "Roulette", "Maybe if merchant would be more interested in you...");
+				addButtonDisabled(11, "Roulette", "Maybe if merchant would be more interested in you...");
+				addButtonDisabled(13, "Boss D.", "Maybe if merchant would be more interested in you...");
 			}
 			addButton(14, "Back", DinahMainMenu);
 		}
@@ -248,7 +253,6 @@ import classes.internals.Utils;
 			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
 			if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 			if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
-			if (_roulette3 == 5) addButton(3, "HBMech", buyItem5, 54).hint("HB Mech - Increase armor by 15, magic resistance by 15.");
 			//if (_roulette4 == 0) addButtonDisabled(6, "???", "Dud. Shame, shame.");
 			//if (_roulette5 == 0) addButtonDisabled(7, "???", "Dud. Shame, shame.");
 			//if (_roulette6 == 0) addButtonDisabled(8, "???", "Dud. Shame, shame.");
@@ -288,7 +292,6 @@ import classes.internals.Utils;
 			if (item == 51) catChimeraBuy5(armors.HBARMOR);
 			if (item == 52) catChimeraBuy5(undergarments.HBSHIRT);
 			if (item == 53) catChimeraBuy5(undergarments.HBSHORT);
-			if (item == 54) catChimeraBuy5(vehicles.HB_MECH);
 			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
@@ -377,6 +380,24 @@ import classes.internals.Utils;
 			player.gems -= itype.value * _extra;
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu3);
+		}
+		public function buyHowlingBansheeMech():void {
+			clearOutput();
+			outputText("You point out the Howling Banshee Mech.\n\n");
+			outputText("\"<i>Oh this one? Luckly you got armor set needed to move this monster around. An it costs only " + (2000 * _extra) + " gems. It's one time deal so not expect me to find more of those.</i>\"");
+			if (player.gems < (2000 * _extra)) {
+				outputText("\n<b>You don't have enough gems...</b>");
+				doNext(DinahShopMainMenu);
+				return;
+			}
+			doYesNo(Utils.curry(buyHowlingBansheeMech1), DinahShopMainMenu);
+		}
+		public function buyHowlingBansheeMech1():void {
+			clearOutput();
+			player.createStatusEffect(StatusEffects.BuyedHowlingBansheMech,0,0,0,0);
+			player.gems -= 2000 * _extra;
+			statScreenRefresh();
+			inventory.takeItem(vehicles.HB_MECH, DinahShopMainMenu);
 		}
 		
 		public function recieveGIFTfromDinah():void {

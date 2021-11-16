@@ -3921,10 +3921,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the " + monster.a + monster.short + " off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
 			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
-			if(monster.hasStatusEffect(StatusEffects.Frostbite))
-			{
-				monster.addStatusValue(StatusEffects.Frostbite,1,1);
-			}
+			if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
 			else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
 		}
 		else {

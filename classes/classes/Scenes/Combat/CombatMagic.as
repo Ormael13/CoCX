@@ -5122,9 +5122,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.DriderKiss)) player.removeStatusEffect(StatusEffects.DriderKiss);
 		if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
 			player.removeStatusEffect(StatusEffects.AikoLightningArrow);
-            player.addCombatBuff('str', 6);
-            player.addCombatBuff('spe', 6);
+			if (player.statStore.hasBuff("LightningArrowStr")) player.buff("LightningArrowStr").remove();
+			if (player.statStore.hasBuff("LightningArrowSpe")) player.buff("LightningArrowSpe").remove();
 		}
+		if (player.statStore.hasBuff("FireArrow")) player.buff("FireArrow").remove();
+		if (player.statStore.hasBuff("IceArrow")) player.buff("IceArrow").remove();
+		if (player.statStore.hasBuff("Illusion")) player.buff("Illusion").remove();
+		if (player.statStore.hasBuff("Fear")) player.buff("Fear").remove();
 		if (player.hasStatusEffect(StatusEffects.NagaVenom)) player.removeStatusEffect(StatusEffects.NagaVenom);
 		if (player.hasStatusEffect(StatusEffects.MedusaVenom)) player.removeStatusEffect(StatusEffects.MedusaVenom);
 		if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
@@ -5132,6 +5136,19 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.removeStatusEffect(StatusEffects.AcidDoT);
 		if (player.hasStatusEffect(StatusEffects.FrostburnDoT)) player.removeStatusEffect(StatusEffects.FrostburnDoT);
 		if (player.hasStatusEffect(StatusEffects.FrozenLung)) player.removeStatusEffect(StatusEffects.FrozenLung);
+		if (player.statStore.hasBuff("CombatDebuffStr")) player.buff("CombatDebuffStr").remove();
+		if (player.statStore.hasBuff("CombatDebuffSpe")) player.buff("CombatDebuffSpe").remove();
+		if (player.statStore.hasBuff("BasiliskGaze")) player.buff("BasiliskGaze").remove();
+		if (player.statStore.hasBuff("LightningArrow")) player.buff("LightningArrow").remove();
+		if (player.statStore.hasBuff("AkbalDebuff")) player.buff("AkbalDebuff").remove();
+		if (player.statStore.hasBuff("FrostGiantDebuff")) player.buff("FrostGiantDebuff").remove();
+		if (player.statStore.hasBuff("GnollSpearThrowerDebuff")) player.buff("GnollSpearThrowerDebuff").remove();
+		if (player.statStore.hasBuff("YoungFrostGiantDebuff")) player.buff("YoungFrostGiantDebuff").remove();
+		if (player.statStore.hasBuff("PoisonedArrow")) player.buff("PoisonedArrow").remove();
+		if (player.statStore.hasBuff("MalikoreVenom")) player.buff("MalikoreVenom").remove();
+		if (player.statStore.hasBuff("ManticoreVenom")) player.buff("ManticoreVenom").remove();
+		if (player.statStore.hasBuff("Nightmare")) player.buff("Nightmare").remove();
+		if (player.statStore.hasBuff("Entwine")) player.buff("Entwine").remove();
 		if (player.statStore.hasBuff("Poison")) player.buff("Poison").remove();
 		if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained")) {
 			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {

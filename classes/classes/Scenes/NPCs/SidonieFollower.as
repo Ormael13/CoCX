@@ -316,10 +316,13 @@ package classes.Scenes.NPCs
 				outputText("Sidonie seems a bit affected by the work-induced heat, so she has to excuse herself to jerk off. You manage to see her pint-sized globs of cum staining the grass and sawdust lying on the ground when you’re collecting her pieces of wood to put them on the wagon.\n\n");
 				outputText("Once the last load of wood has been brought to the camp, you pick the tools on the wagon and return to the camp, satisfied with today’s work.\n\n");
 				flags[kFLAGS.SIDONIE_RECOLLECTION] = 46;
-				if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 300;
+				if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
+					if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < 400) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
+					else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
+				}
 				else {
-					if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300 ) < 900) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
-					else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 900;
+					if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < 1200) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
+					else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
 				}
 				doNext(camp.returnToCampUseFourHours);
 			}

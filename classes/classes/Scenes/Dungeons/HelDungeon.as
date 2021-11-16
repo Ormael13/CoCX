@@ -403,26 +403,31 @@ use namespace CoC;
 		public function takeGooArmorAndWearIt():void {
 			spriteSelect(79);
 			clearOutput();
-			armors.GOOARMR.useText();
-			player.armor.removeText();
-			//(\"<i>You gained ValeriaArmor!</i>\")
-			cleanupAfterCombat();
-			//(\"<i>You put a (previous armorName) in your X pouch)
-            outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead.\n\n");
-            //Set flags
 			flags[kFLAGS.MET_VALERIA] = 1;
-			flags[kFLAGS.VALERIA_FLUIDS] = 80;
-			HPChange(player.maxHP(),false);
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
-			//(PC regains HP)
-			var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
-			if (item == null) {
-				if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) doNext(roomGuardHall);
-				else doNext(camp.returnToCampUseOneHour);
+			cleanupAfterCombat();
+			if (player.race() != "jiangshi"){
+				armors.GOOARMR.useText();
+				player.armor.removeText();
+				//(\"<i>You gained ValeriaArmor!</i>\")
+				//(\"<i>You put a (previous armorName) in your X pouch)
+				outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead.\n\n");
+				//Set flags
+				flags[kFLAGS.VALERIA_FLUIDS] = 80;
+				HPChange(player.maxHP(),false);
+				//(PC regains HP)
+				var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
+				if (item == null) {
+					if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) doNext(roomGuardHall);
+					else doNext(camp.returnToCampUseOneHour);
+				}
+				else {
+					if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) inventory.takeItem(item, roomGuardHall);
+					else inventory.takeItem(item, camp.returnToCampUseOneHour);
 			}
-			else {
-				if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) inventory.takeItem(item, roomGuardHall);
-				else inventory.takeItem(item, camp.returnToCampUseOneHour);
+			} else{ //Needs a better explanation, cause why can't jiangshi wear armour again?
+				outputText("You try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 

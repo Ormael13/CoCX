@@ -293,6 +293,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BuiltMilker:StatusEffectType                    = mk("BUILT: Milker");
 		public static const BurpChanged:StatusEffectType                    = mk("Burp Changed");
 		public static const ButtStretched:StatusEffectType                  = mk("ButtStretched");
+		public static const BuyedHowlingBansheMech:StatusEffectType         = mk("Buyed Howling Banshe Mech");
 		public static const CancerCrabStance:StatusEffectType             	= mk("Player arms are folder in a crab fashion");
 		public static const CanGetLunarGift:StatusEffectType             	= mk("Can Get Lunar Gift");
 		public static const CanMeetNightmare:StatusEffectType             	= mk("Can Meet Nightmare");
@@ -1236,4 +1237,3 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
-
