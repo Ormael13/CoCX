@@ -226,7 +226,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 
 		public function reenteringTheDungeon():void{
-			outputText("With a nod, you shake her hand, and she gets up from her chair, before the two of you head back towards the dungeon.");
+			outputText("\n\nWith a nod, you shake her hand, and she gets up from her chair, before the two of you head back towards the dungeon.");
 			var strNeisa:Number = 50;
 			strNeisa *= (1 + (0.2 * player.newGamePlusMod()));
 			strNeisa = Math.round(strNeisa);
