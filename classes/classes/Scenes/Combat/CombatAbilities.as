@@ -1,4 +1,6 @@
 package classes.Scenes.Combat {
+import classes.Scenes.Combat.SpellsWhite.ChainLightningSpell;
+import classes.Scenes.Combat.SpellsWhite.LightningBoltSpell;
 import classes.Scenes.Combat.SpellsWhite.PyreBurstSpell;
 import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 
@@ -7,12 +9,20 @@ public class CombatAbilities {
 	public static const Whitefire:WhitefireSpell = new WhitefireSpell();
 	public static const WhitefireEx:WhitefireSpell = new WhitefireSpell(true);
 	public static const PyreBurst:PyreBurstSpell = new PyreBurstSpell();
-	public static const PyreBurstEx:PyreBurstSpell              = new PyreBurstSpell(true);
+	public static const PyreBurstEx:PyreBurstSpell = new PyreBurstSpell(true);
+	public static const LightningBolt:LightningBoltSpell = new LightningBoltSpell();
+	public static const LightningBoltEx:LightningBoltSpell = new LightningBoltSpell(true);
+	public static const ChainLightning:ChainLightningSpell = new ChainLightningSpell();
+	public static const ChainLightningEx:ChainLightningSpell = new ChainLightningSpell(true);
 	public static const ALL_WHITE_SPELLS:/*CombatAbility*/Array = [
 		Whitefire,
 		WhitefireEx,
 		PyreBurst,
-		PyreBurstEx
+		PyreBurstEx,
+		LightningBolt,
+		LightningBoltEx,
+		ChainLightning,
+		ChainLightningEx
 	];
 	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []

@@ -995,6 +995,9 @@ public class Combat extends BaseContent {
         if (CoC_Settings.debugBuild && !debug) {
             buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
         }
+        if (CoC_Settings.debugBuild) {
+            buttons.add("CheatAbility", combat.debugCheatAbility).hint("Use any ability");
+        }
         if (player.hasPerk(PerkLib.JobDefender)) {
             buttons.add("Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
         }
@@ -4222,6 +4225,16 @@ public class Combat extends BaseContent {
         }
     }
 
+    private function debugCheatAbility():void {
+        var buttons:ButtonDataList = new ButtonDataList();
+        for each (var ability:CombatAbility in CombatAbilities.ALL) {
+            var button:ButtonData = ability.createButton(monster);
+            button.enabled = true;
+            buttons.list.push(button);
+        }
+        submenu(buttons,combatMenu,0,false);
+    }
+    
     private function debugInspect():void {
         outputText(monster.generateDebugDescription());
         menu();
@@ -5761,11 +5774,9 @@ public class Combat extends BaseContent {
             heroBaneProc(damage);
             EruptingRiposte();
             if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
-                var spell:CombatAbility;
-                spell = CombatAbilities.Whitefire;
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && spell.isKnown && spell.isUsable) {
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isKnown && CombatAbilities.Whitefire.isUsable) {
                     outputText("\n\n");
-                    spell.perform();
+                    CombatAbilities.Whitefire.perform();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
@@ -5773,11 +5784,9 @@ public class Combat extends BaseContent {
                     outputText("\n\n");
                     magic.spellIceSpike3();
                 }
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && player.mana >= spellCostWhite(40)) {
-                    if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
-                    else useMana(40, 5);
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isKnown && CombatAbilities.LightningBolt.isUsable) {
                     outputText("\n\n");
-                    magic.spellLightningBolt3();
+                    CombatAbilities.LightningBolt.perform();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);

@@ -8,7 +8,6 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractSpell;
 import classes.Scenes.Combat.CombatAbility;
-import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;

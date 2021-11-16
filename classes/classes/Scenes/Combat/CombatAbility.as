@@ -40,6 +40,26 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Debuff',
 		desc: 'This ability decreases stats or otherwise debuffs target.'
 	});
+	public static const TAG_AOE:int = EnumValue.add(AllTags, 3, 'AOE', {
+		name: 'AoE',
+		desc: 'This ability has area-of-effect.'
+	});
+	public static const TAG_FIRE:int = EnumValue.add(AllTags, 4, 'FIRE', {
+		name: 'Fire',
+		desc: "This ability primary element is Fire"
+	});
+	public static const TAG_LIGHTNING:int = EnumValue.add(AllTags, 5, 'LIGHTNING', {
+		name: 'Lightning',
+		desc: "This ability primary element is Lightning"
+	});
+	public static const TAG_ICE:int = EnumValue.add(AllTags, 6, 'ICE', {
+		name: 'Ice',
+		desc: "This ability primary element is Ice"
+	});
+	public static const TAG_DARKNESS:int = EnumValue.add(AllTags, 7, 'DARKNESS', {
+		name: 'Darkness',
+		desc: "This ability primary element is Darkness"
+	});
 	
 	private var _name:String;
 	private var _desc:String;
@@ -74,12 +94,16 @@ public class CombatAbility extends BaseCombatContent {
 		return name;
 	}
 	
-	public function get tags():Object {
-		return _tags;
+	public function presentTags():/*int*/Array {
+		var result:/*int*/Array = [];
+		for (var tag:int=0; tag<_tags.length; tag++) {
+			if (_tags[tag]) result.push(tag);
+		}
+		return result;
 	}
 	
 	public function hasTag(tag:int):Boolean {
-		return !!tags[tag];
+		return _tags[tag];
 	}
 	
 	/**
@@ -95,7 +119,13 @@ public class CombatAbility extends BaseCombatContent {
 		const bd:ButtonData = new ButtonData(buttonName, buttonCallback);
 		var fullDesc:String = description+"\n";
 		var effectDesc:String = describeEffectVs(target);
-		if (effectDesc) fullDesc += effectDesc+"\n";
+		if (effectDesc) fullDesc += "<b>Effect: "+effectDesc+"</b>\n";
+		var tags:/*int*/Array = presentTags();
+		if (tags.length > 0) {
+			fullDesc += "\n<b>Tags: " + tags.map(function(tag:int,index:int,array:Array):String {
+				return AllTags[tag].name;
+			}).join(", ")+"</b>";
+		}
 		
 		var costs:/*String*/Array = [];
 		if (baseManaCost > 0) {
@@ -108,7 +138,7 @@ public class CombatAbility extends BaseCombatContent {
 		
 		var ucheck:String = usabilityCheck();
 		if (ucheck != "") {
-			fullDesc = ucheck + "\n\n" + fullDesc;
+			fullDesc = "<b>"+ucheck + "</b>\n\n" + fullDesc;
 			bd.disable()
 		}
 		

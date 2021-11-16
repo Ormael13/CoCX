@@ -5,8 +5,6 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Tongue;
 import classes.Scenes.Combat.CombatAbility;
-import classes.Scenes.Combat.SpellsWhite.PyreBurstSpell;
-import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
 
 public class Holli extends Monster
@@ -31,7 +29,7 @@ public class Holli extends Monster
 		
 		
 		override public function postPlayerAbility(ability:CombatAbility):void {
-			if (ability is WhitefireSpell || ability is PyreBurstSpell) {
+			if (ability.hasTag(CombatAbility.TAG_DAMAGING) && ability.hasTag(CombatAbility.TAG_FIRE)) {
 				if(!hasStatusEffect(StatusEffects.HolliBurning)) lightHolliOnFireMagically();
 			}
 		}

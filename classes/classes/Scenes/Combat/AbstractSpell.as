@@ -113,7 +113,7 @@ public class AbstractSpell extends CombatAbility {
 		
 		switch (category) {
 			case SPELL_WHITE:
-				damage = spellModWhite() * damage;
+				damage *= spellModWhite();
 				break;
 		}
 		
@@ -123,19 +123,27 @@ public class AbstractSpell extends CombatAbility {
 				if (player.armor == armors.BLIZZ_K) damage *= 0.5;
 				if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 				if (monster != null) {
-					if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
-					if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-					if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
-					if (player.hasPerk(PerkLib.PureMagic)) {
-						if (monster.cor < 33) damage = Math.round(damage * 1.0);
-						else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-						else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-						else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-						else damage = Math.round(damage * 1.4);
-					}
+					if (monster.short == "goo-girl") damage *= 1.5;
+					if (monster.short == "tentacle beast") damage *= 1.2;
 				}
-				damage = damage * combat.fireDamageBoostedByDao();
+				damage *= combat.fireDamageBoostedByDao();
 				break;
+			}
+			case DamageType.LIGHTNING: {
+				damage = calcVoltageMod(damage);
+				if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+				damage *= combat.lightningDamageBoostedByDao();
+				break;
+			}
+		}
+		if (monster != null) {
+			if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage *= 1.2;
+			if (player.hasPerk(PerkLib.PureMagic)) {
+				if (monster.cor < 33) damage *= 1.0;
+				else if (monster.cor < 50) damage *= 1.1;
+				else if (monster.cor < 75) damage *= 1.2;
+				else if (monster.cor < 90) damage *= 1.3;
+				else damage *= 1.4;
 			}
 		}
 		if (player.hasPerk(PerkLib.Omnicaster)) {
@@ -164,7 +172,8 @@ public class AbstractSpell extends CombatAbility {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = baseCritChance + combatMagicalCritical();
-		if (rand(100) < critChance) {
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (critChance > 0 && rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
