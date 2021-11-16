@@ -1369,7 +1369,7 @@ public function tripxiShopMainMenu2b():void {
 	//7 - Tediore pistol
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
-	addButton(12, "-2-", tripxiShopMainMenu2c);
+	addButton(12, "-3-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
 
