@@ -42,12 +42,8 @@ public class CombatMagic extends BaseCombatContent {
 			CombatAbilities.ChargeWeapon.perform(false);
 			outputText("<b>Charge Weapon was autocasted successfully.</b>\n\n");
 		}
-		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) && player.haveNaturalArmor() && player.isNaked()) || !player.isNaked())) {
-			spellChargeArmor(true);
-			useMana((40 * spellChargeArmorCostMultiplier()), 5);
-			flags[kFLAGS.SPELLS_CAST]++;
-			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
-			spellPerkUnlock();
+		if (player.hasPerk(PerkLib.Spellarmor) && CombatAbilities.ChargeArmor.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
+			CombatAbilities.ChargeArmor.perform(false);
 			outputText("<b>Charge Armor was autocasted successfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Battlemage) && ((player.hasPerk(PerkLib.GreyMage) && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
@@ -681,14 +677,6 @@ public class CombatMagic extends BaseCombatContent {
 		return spellBlinkMultiplier;
 	}
 
-	public function spellChargeArmorCostMultiplier():Number {
-		var spellChargeArmorMultiplier:Number = 1;
-		spellChargeArmorMultiplier *= spellChargeArmorType();
-		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeArmorMultiplier *= 0.5;
-		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeArmorMultiplier *= 2;
-		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeArmorMultiplier *= 2;
-		return spellChargeArmorMultiplier;
-	}
 
 	public function getBlackMagicMinLust():Number {
 		if (player.hasPerk(PerkLib.GreyMage)) return 30;
@@ -831,44 +819,6 @@ public class CombatMagic extends BaseCombatContent {
 				buttons.list.push(ability.createButton(monster));
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-			bd = buttons.add("Charge A.", spellChargeArmor)
-					.hint("The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.  " +
-							"\n\nMana Cost: " + spellCostWhite(40) * spellChargeArmorCostMultiplier() + "", "Charge Armor");
-			if (player.isNaked() && (!player.haveNaturalArmor() || player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor))) {
-				bd.disable("Charge armor can't be casted without wearing any armor or even underwear.");
-			} else if (badLustForWhite) {
-				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
-				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
-				bd.disable("Charge armor is already active and cannot be cast again.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && player.HP < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
-				bd.disable("Your ability to use white magic was sealed.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-			bd = buttons.add("Heal", spellHeal)
-					.hint("Heal will attempt to use white magic to instnatly close your wounds and restore your body.  " +
-							"\n\nMana Cost: " + healCostWhite(30) + "");
-			if (badLustForWhite) {
-				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
-				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if(player.mana < healCostWhite(30)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellHeal)) {
-				bd.disable("You need more time before you can cast Heal again.");
-			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
-				bd.disable("Your ability to use white magic was sealed.");
-			}
-		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
 			bd = buttons.add("MentalShield", spellMentalShield)
 					.hint("Protects against lust effects for 10 rounds, halving the damage.  " +
@@ -891,26 +841,6 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCure)) {
-			bd = buttons.add("Cure", spellCure)
-					.hint("Negate all status ailments. Restore stat damaged by poison.  " +
-							"\n\nMana Cost: " + spellCostWhite(500) + "");
-			if (badLustForWhite) {
-				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
-				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(500)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500) && player.HP < spellCostWhite(500)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(500)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellCure)) {
-				bd.disable("You need more time before you can cast Cure again.");
-			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
-				bd.disable("Your ability to use white magic was sealed.");
-			}
-		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
 			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCostWhite(500) + "");
 			if (badLustForWhite) {
@@ -929,34 +859,6 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
-			bd = buttons.add("Meteor Shower", spellMeteorShower)
-					.hint("Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times.  " +
-							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCostWhite(1250) + "");
-			if (badLustForWhite) {
-				bd.disable("You are far too aroused to focus on white magic.");
-			} else if (inDungeon || player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
-				bd.disable("You can't use this spell inside small spaces. Unless you want get killed along with your enemies.");
-			} else if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-				bd.disable("You can't use this spell underwater.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(1250)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
-				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1250) && player.HP < spellCostWhite(1250)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(1250)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
-				bd.disable("You need more time before you can cast Meteor Shower again.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
-				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 	}
@@ -4373,7 +4275,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) player.addStatusValue(StatusEffects.PlayerRegenerate,1,7);
 			else player.createStatusEffect(StatusEffects.PlayerRegenerate,7,0,0,0);
 			outputText(" As you incant the spell, your wounds begins to close as if they never existed and you feel rejuvenated ready from battle! ");
-			spellHealEffect();
+			CombatAbilities.Heal.doEffect(false);
 		}
 		outputText("\n\n");
 		player.createStatusEffect(StatusEffects.CooldownSpellRestore,8,0,0,0);
@@ -4504,224 +4406,6 @@ public class CombatMagic extends BaseCombatContent {
 		else enemyAI();
 	}
 
-//(100) Meteor Shower - AoE Fire spell
-	public function spellMeteorShower():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
-			player.removeStatusEffect(StatusEffects.ChanneledAttack);
-			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-			if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
-			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
-			var meteor:Number = 11;
-			while (meteor-->0){
-				var damage:Number = scalingBonusIntelligence() * spellModWhite() * 3 * combat.fireDamageBoostedByDao();
-				//Determine if critical hit!
-				//High damage to goes.
-				damage = calcInfernoMod(damage);
-				if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
-				if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-				if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage = Math.round(damage * 1.2);
-				if (player.hasPerk(PerkLib.PureMagic)) {
-					if (monster.cor < 33) damage = Math.round(damage * 1.0);
-					else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-					else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-					else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-					else damage = Math.round(damage * 1.4);
-				}
-				if (monster.plural) damage *= 5;
-				damage = Math.round(damage);
-				var crit:Boolean = false;
-				var critChance:int = 5;
-				critChance += combatMagicalCritical();
-				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-				if (rand(100) < critChance) {
-					crit = true;
-					damage *= 1.75;
-				}
-				if (player.hasPerk(PerkLib.Omnicaster)) {
-					if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.5;
-					else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) damage *= 0.3;
-					else damage *= 0.2;
-					damage = Math.round(damage);
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-					if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
-						doFireDamage(damage, true, true);
-						doFireDamage(damage, true, true);
-					}
-					if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
-						doFireDamage(damage, true, true);
-						doFireDamage(damage, true, true);
-					}
-				}
-				else doFireDamage(damage, true, true);
-			}
-			outputText(" damage!");
-			//Using fire attacks on the goo]
-			if(monster.short == "goo-girl") {
-				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
-				if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
-			}
-			if (crit) outputText(" <b>*Critical Hit!*</b>");
-			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.\n\n");
-			MagicAddonEffect();
-			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-			damage *= 10;
-			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
-			checkAchievementDamage(damage);
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock();
-			combat.heroBaneProc(damage);
-			statScreenRefresh();
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			else enemyAI();
-		}
-		else {
-			doNext(combatMenu);
-			if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1250)) player.HP -= spellCostWhite(1250);
-			else useMana(1250,5);
-			if(handleShell()){return;}
-			//if (monster is Doppleganger)
-			//{
-			//(monster as Doppleganger).handleSpellResistance("whitefire");
-			//flags[kFLAGS.SPELLS_CAST]++;
-			//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			//spellPerkUnlock();
-			//return;
-			//}
-			if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-				if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-				if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-				enemyAI();
-				return;
-			}
-			clearOutput();
-			outputText("You begin to channel magic, the sky reddening above you.");
-			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.ChanneledAttackType, 6, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.CooldownSpellMeteorShower, 12, 0, 0, 0);
-			if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
-			outputText("\n\n");
-			enemyAI();
-		}
-	}
-
-	/**
-	 * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
-	 * y1= 10 at x1=  10
-	 * y2= 55 at x2= 100
-	 * y3=100 at x3=1000
-	 */
-	private static const ChargeArmorABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
-//(35) Charge Armor – boosts your armor value by 5 + (player.inte/10) * SpellMod till the end of combat.
-	public function spellChargeArmor(silent:Boolean = false):void {
-		var ChargeArmorBoostCap:Number = 4;
-		var ChargeArmorBoost:Number = 5;
-		ChargeArmorBoostCap *= ChargeArmorBoost;
-		if (player.hasPerk(PerkLib.DivineArmament)) {
-			ChargeArmorBoostCap *= 2;
-			ChargeArmorBoost *= 2;
-		}
-		//ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
-		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeArmorBoost *= 1.2;
-		ChargeArmorBoost *= spellModWhite();
-		//ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
-		if (ChargeArmorBoost > ChargeArmorBoostCap) ChargeArmorBoost = ChargeArmorBoostCap;
-		ChargeArmorBoost *= spellChargeArmorType();
-		ChargeArmorBoost = Math.round(ChargeArmorBoost);
-		var ChargeArmorDuration:Number = 5;
-		ChargeArmorDuration += perkRelatedDurationBoosting();
-		if (silent) {
-			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,ChargeArmorDuration,0,0);
-			statScreenRefresh();
-			return;
-		}
-
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < (40 * spellChargeArmorCostMultiplier())) player.HP -= (40 * spellChargeArmorCostMultiplier());
-		else useMana((40 * spellChargeArmorCostMultiplier()), 5);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		clearOutput();
-		outputText("You utter words of power, summoning an electrical charge around your");
-		if (player.isNaked() && player.haveNaturalArmor() && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)) outputText(" natural armor.");
-		else outputText(" [armor].");
-		outputText("  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
-		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, ChargeArmorDuration, 0, 0);
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		enemyAI();
-	}
-	public function spellChargeArmorType():Number {
-		var a12b:Number = 1;
-		if (player.armorPerk == "Medium") a12b *= 2;
-		if (player.armorPerk == "Heavy") a12b *= 3;
-		if (player.armorPerk == "Light Ayo") a12b *= 4;
-		if (player.armorPerk == "Heavy Ayo") a12b *= 5;
-		if (player.armorPerk == "Ultra Heavy Ayo") a12b *= 7.5;
-		return a12b;
-	}
-	
-	public function spellHeal():void {
-		clearOutput();
-		doNext(combatMenu);
-		useMana(30, 10);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. ");
-		spellHealEffect();
-		outputText("\n\n");
-		player.createStatusEffect(StatusEffects.CooldownSpellHeal,6,0,0,0);
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		if(player.lust >= player.maxLust()) doNext(endLustLoss);
-		else enemyAI();
-	}
-	public function spellHealEffect():void {
-		var heal:Number = 0;
-		heal += scalingBonusIntelligence();
-		if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom();
-		heal *= healModWhite();
-		if (player.armorName == "skimpy nurse's outfit") heal *= 1.2;
-		if (player.weaponName == "unicorn staff") heal *= 1.5;
-		if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {
-			if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 2.5;
-			else heal *= 1.5;
-		}
-		//Determine if critical heal!
-		var crit:Boolean = false;
-		var critHeal:int = 5;
-		critHeal += combatMagicalCritical();
-		if (rand(100) < critHeal) {
-			crit = true;
-			heal *= 1.75;
-		}
-		heal = Math.round(heal);
-		outputText("<b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
-		if (crit) outputText(" <b>*Critical Heal!*</b>");
-		HPChange(heal,false);
-	}
-
 //(35) Mental Shield
 	public function spellMentalShield():void {
 		clearOutput();
@@ -4748,70 +4432,6 @@ public class CombatMagic extends BaseCombatContent {
 		enemyAI();
 	}
 
-//(35) Cure
-	public function spellCure():void {
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500)) player.HP -= spellCostWhite(500);
-		else useMana(500,5);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		clearOutput();
-		player.createStatusEffect(StatusEffects.CooldownSpellCure,7,0,0,0);
-		outputText("You channel white magic to rid yourself of all negative effect affecting you.\n\n");
-		if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.removeStatusEffect(StatusEffects.BurnDoT);
-		if (player.hasStatusEffect(StatusEffects.AcidSlap)) player.removeStatusEffect(StatusEffects.AcidSlap);
-		if (player.hasStatusEffect(StatusEffects.DriderKiss)) player.removeStatusEffect(StatusEffects.DriderKiss);
-		if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
-			player.removeStatusEffect(StatusEffects.AikoLightningArrow);
-			if (player.statStore.hasBuff("LightningArrowStr")) player.buff("LightningArrowStr").remove();
-			if (player.statStore.hasBuff("LightningArrowSpe")) player.buff("LightningArrowSpe").remove();
-		}
-		if (player.statStore.hasBuff("FireArrow")) player.buff("FireArrow").remove();
-		if (player.statStore.hasBuff("IceArrow")) player.buff("IceArrow").remove();
-		if (player.statStore.hasBuff("Illusion")) player.buff("Illusion").remove();
-		if (player.statStore.hasBuff("Fear")) player.buff("Fear").remove();
-		if (player.hasStatusEffect(StatusEffects.NagaVenom)) player.removeStatusEffect(StatusEffects.NagaVenom);
-		if (player.hasStatusEffect(StatusEffects.MedusaVenom)) player.removeStatusEffect(StatusEffects.MedusaVenom);
-		if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
-		if (player.hasStatusEffect(StatusEffects.Poison)) player.removeStatusEffect(StatusEffects.Poison);
-		if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.removeStatusEffect(StatusEffects.AcidDoT);
-		if (player.hasStatusEffect(StatusEffects.FrostburnDoT)) player.removeStatusEffect(StatusEffects.FrostburnDoT);
-		if (player.hasStatusEffect(StatusEffects.FrozenLung)) player.removeStatusEffect(StatusEffects.FrozenLung);
-		if (player.statStore.hasBuff("CombatDebuffStr")) player.buff("CombatDebuffStr").remove();
-		if (player.statStore.hasBuff("CombatDebuffSpe")) player.buff("CombatDebuffSpe").remove();
-		if (player.statStore.hasBuff("BasiliskGaze")) player.buff("BasiliskGaze").remove();
-		if (player.statStore.hasBuff("LightningArrow")) player.buff("LightningArrow").remove();
-		if (player.statStore.hasBuff("AkbalDebuff")) player.buff("AkbalDebuff").remove();
-		if (player.statStore.hasBuff("FrostGiantDebuff")) player.buff("FrostGiantDebuff").remove();
-		if (player.statStore.hasBuff("GnollSpearThrowerDebuff")) player.buff("GnollSpearThrowerDebuff").remove();
-		if (player.statStore.hasBuff("YoungFrostGiantDebuff")) player.buff("YoungFrostGiantDebuff").remove();
-		if (player.statStore.hasBuff("PoisonedArrow")) player.buff("PoisonedArrow").remove();
-		if (player.statStore.hasBuff("MalikoreVenom")) player.buff("MalikoreVenom").remove();
-		if (player.statStore.hasBuff("ManticoreVenom")) player.buff("ManticoreVenom").remove();
-		if (player.statStore.hasBuff("Nightmare")) player.buff("Nightmare").remove();
-		if (player.statStore.hasBuff("Entwine")) player.buff("Entwine").remove();
-		if (player.statStore.hasBuff("Poison")) player.buff("Poison").remove();
-		if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained")) {
-			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
-				player.removeCurse(stat, 6,1);
-				player.removeCurse(stat, 3,2);
-				if (stat != "sens") {
-					player.removeCurse(stat+".mult", 0.06,1);
-					player.removeCurse(stat+".mult", 0.03,2);
-				}
-			}
-		}
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		enemyAI();
-	}
 
 	private function handleShell():Boolean{
         if(monster.hasStatusEffect(StatusEffects.Shell)) {

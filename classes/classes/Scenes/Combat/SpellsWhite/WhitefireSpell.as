@@ -19,7 +19,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 						"Whitefire(Ex) is a potent wrath-empowered fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors."
 						: "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.",
 				TARGET_ENEMY,
-				TIMING_LASTING,
+				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_FIRE]
 		);
 		baseManaCost = 40;
@@ -29,7 +29,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 	
 	
 	override public function describeEffectVs(target:Monster):String {
-		return ""+calcDamage(target)+" fire damage";
+		return "~"+calcDamage(target)+" fire damage";
 	}
 	
 	override public function get isKnown():Boolean {
@@ -61,7 +61,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 	public function calcDamage(monster:Monster):Number {
 		var baseDamage:Number = 2*scalingBonusIntelligence();
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.FIRE, SPELL_WHITE, monster);
+		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

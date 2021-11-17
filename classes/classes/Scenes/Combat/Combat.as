@@ -5094,7 +5094,7 @@ public class Combat extends BaseContent {
         outputText("<b>(</b>");
         for (var i:int = 0; i < damagemsg.length; i++) {
             damagemsg[i] = int(damageTemp % 10);
-            damageTemp = int(damageTemp / 10);
+            damageTemp = Math.floor(damageTemp / 10);
         }
         for (var j:int = 0, k:int = (damagemsg.length % 3); j < damagemsg.length; j++) {
             if (k == 0) {
@@ -13428,7 +13428,7 @@ public class Combat extends BaseContent {
         clearOutput();
         useMana(30, 10);
         outputText("You initiate a healing spell. ");
-        magic.spellHealEffect();
+        CombatAbilities.Heal.doEffect(false);
         outputText("\n\nIt's only when you finish your casting that " + monster.a + monster.short + " name snaps out of the hypnosis and realise what is going on. ");
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         statScreenRefresh();

@@ -17,7 +17,7 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 						"Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning."
 						: "Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning.",
 				TARGET_ENEMY,
-				TIMING_LASTING,
+				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_AOE, TAG_LIGHTNING]
 		);
 		baseManaCost = 200;
@@ -30,7 +30,7 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return ""+calcDamage(target)+" lightning damage";
+		return "~"+calcDamage(target)+" lightning damage";
 	}
 	
 	override public function get isKnown():Boolean {
@@ -60,9 +60,8 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	 */
 	public function calcDamage(monster:Monster):Number {
 		var baseDamage:Number = 2*scalingBonusIntelligence();
-		if (monster != null && monster.plural) baseDamage *= 5;
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.LIGHTNING, SPELL_WHITE, monster);
+		return adjustSpellDamage(baseDamage, DamageType.LIGHTNING, CAT_SPELL_WHITE, monster);
 	}
 	
 	

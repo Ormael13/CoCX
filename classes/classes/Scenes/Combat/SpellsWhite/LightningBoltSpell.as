@@ -17,7 +17,7 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 						"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning."
 						: "Lightning Bolt (Ex) is a basic wrath-empowered lightning attack that will electrocute your foe with a single bolt of lightning.",
 				TARGET_ENEMY,
-				TIMING_LASTING,
+				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_LIGHTNING]
 		);
 		baseManaCost = 40;
@@ -30,7 +30,7 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return ""+calcDamage(target)+" lightning damage";
+		return "~"+calcDamage(target)+" lightning damage";
 	}
 	
 	override public function get isKnown():Boolean {
@@ -61,7 +61,7 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	public function calcDamage(monster:Monster):Number {
 		var baseDamage:Number = 2*scalingBonusIntelligence();
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.LIGHTNING, SPELL_WHITE, monster);
+		return adjustSpellDamage(baseDamage, DamageType.LIGHTNING, CAT_SPELL_WHITE, monster);
 	}
 	
 	

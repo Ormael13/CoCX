@@ -5,6 +5,13 @@ import classes.MutationsLib;
 import classes.PerkLib;
 import classes.StatusEffects;
 
+/**
+ * In addition to the CombatAbility:
+ *
+ * 1. Put spell effect in doSpellEffect, not doEffect
+ * 2. Configure baseManaCost, baseWrathCost, isBloodMagicApplicable, isLastResortApplicable in the constructor and total mana cost would be calculated automatically
+ * 3. In useResources call super to use mana/hp/wrath, then apply cooldown.
+ */
 public class AbstractSpell extends CombatAbility {
 	
 	protected var isBloodMagicApplicable:Boolean = true;
@@ -24,15 +31,18 @@ public class AbstractSpell extends CombatAbility {
 	}
 	
 	override public function useResources():void {
-		var realCost:Number = manaCost();
+		var realManaCost:Number = manaCost();
+		var realWrathCost:Number = wrathCost();
 		
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < realCost) {
-			player.HP -= realCost;
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < realManaCost) {
+			player.HP -= realManaCost;
 		} else {
 			useMana(40, useManaType);
 		}
+		
+		player.wrath -= realWrathCost;
 		
 		flags[kFLAGS.SPELLS_CAST]++;
 		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
@@ -122,7 +132,7 @@ public class AbstractSpell extends CombatAbility {
 		var damage:Number = baseDamage;
 		
 		switch (category) {
-			case SPELL_WHITE:
+			case CAT_SPELL_WHITE:
 				damage *= spellModWhite();
 				break;
 		}
@@ -147,6 +157,7 @@ public class AbstractSpell extends CombatAbility {
 			}
 		}
 		if (monster != null) {
+			if (hasTag(TAG_AOE) && monster.plural) damage *= 5;
 			if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage *= 1.2;
 			if (player.hasPerk(PerkLib.PureMagic)) {
 				if (monster.cor < 33) damage *= 1.0;
@@ -176,10 +187,13 @@ public class AbstractSpell extends CombatAbility {
 			display:Boolean,
 			damage:Number,
 			damageType:int,
+			displayDamageOnly:Boolean=false,
 			baseCritChance:Number=5,
 			critMultiplier:Number=1.75
 	):void {
-		outputText(monster.capitalA + monster.short + " takes ");
+		if (display) {
+			outputText(monster.capitalA + monster.short + " takes ");
+		}
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = baseCritChance + combatMagicalCritical();
@@ -221,10 +235,12 @@ public class AbstractSpell extends CombatAbility {
 			}
 		}
 		while (repeats-->0) {
-			damageFn(damage, true, display);
+			damageFn(damage, true, display || displayDamageOnly);
 		}
-		outputText(" damage.");
-		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		if (display) {
+			outputText(" damage.");
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
+		}
 	}
 }
 }

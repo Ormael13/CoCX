@@ -698,7 +698,7 @@ public class CombatUI extends BaseCombatContent {
 						btnContinue.show("Continue", combat.magic.spellPolarMidnight, "Continue casting Polar Midnight spell.");
 						break;
 					case 6:
-						btnContinue.show("Continue", combat.magic.spellMeteorShower, "Continue casting Meteor Shower spell.");
+						btnContinue.show("Continue", CombatAbilities.MeteorShower.buttonCallback, "Continue casting Meteor Shower spell.");
 						break;/*
 					case 7:
 						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");

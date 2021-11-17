@@ -60,19 +60,20 @@ public class CombatAbility extends BaseCombatContent {
 	 * This ability adds an unstackable lasting effect that could be toggled off by caster
 	 */
 	public static const TIMING_TOGGLE:int = 2;
+	// TODO @aimozg Channeling (precast) timing
 	
 	public static const AllCategories:/*EnumValue*/Array = [];
 	
-	public static const UNIVERSAL:int = EnumValue.add(AllCategories, 0, "UNIVERSAL", {name:"universal"});
-	public static const PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {name:"physical special"});
-	public static const MAGICAL_SPECIAL:int = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {name:"magical special"});
-	public static const SOULSKILL:int = EnumValue.add(AllCategories, 3, "SOULSKILL", {name:"soulskill"});
-	public static const SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {name:"white spell"});
-	public static const SPELL_BLACK:int = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {name:"black spell"});
-	public static const SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {name:"grey spell"});
-	public static const SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {name:"hex"});
-	public static const SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {name:"necromancy spell"});
-	public static const SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {name:"blood spell"});
+	public static const CAT_UNIVERSAL:int        = EnumValue.add(AllCategories, 0, "UNIVERSAL", {name:"universal"});
+	public static const CAT_PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {name:"physical special"});
+	public static const CAT_MAGICAL_SPECIAL:int  = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {name:"magical special"});
+	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {name:"soulskill"});
+	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {name:"white spell"});
+	public static const CAT_SPELL_BLACK:int     = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {name:"black spell"});
+	public static const CAT_SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {name:"grey spell"});
+	public static const CAT_SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {name:"hex"});
+	public static const CAT_SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {name:"necromancy spell"});
+	public static const CAT_SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {name:"blood spell"});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -89,7 +90,7 @@ public class CombatAbility extends BaseCombatContent {
 	});
 	public static const TAG_AOE:int = EnumValue.add(AllTags, 3, 'AOE', {
 		name: 'AoE',
-		desc: 'This ability has area-of-effect.'
+		desc: 'This ability has area-of-effect. x5 damage to groups.'
 	});
 	public static const TAG_FIRE:int = EnumValue.add(AllTags, 4, 'FIRE', {
 		name: 'Fire',
@@ -106,6 +107,14 @@ public class CombatAbility extends BaseCombatContent {
 	public static const TAG_DARKNESS:int = EnumValue.add(AllTags, 7, 'DARKNESS', {
 		name: 'Darkness',
 		desc: "This ability primary element is Darkness"
+	});
+	public static const TAG_HEALING:int = EnumValue.add(AllTags, 8, 'HEALING', {
+		name: 'Healing',
+		desc: "This ability heals player."
+	});
+	public static const TAG_RECOVERY:int = EnumValue.add(AllTags, 9, 'RECOVERY', {
+		name: 'Recovery',
+		desc: "This ability recovers player's stats (other than HP) and statuses."
 	});
 	
 	private var _name:String;
@@ -171,7 +180,7 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function isActive():Boolean {
 		if (timingType == TIMING_INSTANT) return false;
-		throw new Error("Method isActive() is not implemented for ability "+name);
+		throw new Error("Method isActive() is not implemented for ability "+name+", or it's timing type is incorrect");
 	}
 	
 	/**
@@ -237,7 +246,7 @@ public class CombatAbility extends BaseCombatContent {
 		return isKnown && isUsable;
 	}
 	
-	protected function buttonCallback():void {
+	public function buttonCallback():void {
 		combat.callbackBeforeAbility(this);
 		if (timingType == TIMING_TOGGLE && isActive()) {
 			toggleOff();
@@ -251,9 +260,13 @@ public class CombatAbility extends BaseCombatContent {
 	 * Invoke this ability. Takes resources,
 	 * DOES NOT check for isKnown or isUsable.
 	 * DOES NOT clear output or proceed the enemy turn.
+	 * @param output Print texts
+	 * @param free Do not use resources or set cooldown
 	 */
-	public function perform(output:Boolean = true):void {
-		useResources();
+	public function perform(output:Boolean=true,free:Boolean=false):void {
+		if (!free) {
+			useResources();
+		}
 		if (!monster.interceptPlayerAbility(this)) {
 			doEffect(output);
 			monster.postPlayerAbility(this);
@@ -279,7 +292,8 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
-	 * 2nd part: actual ability effect
+	 * 2nd part: actual ability effect.
+	 * Can be used instead of perform to skip resource usage, cooldown, or monster interception
 	 */
 	public function doEffect(output:Boolean = true):void {
 		throw new Error("Method perform() not implemented for ability "+name);

@@ -1,11 +1,5 @@
 package classes.Scenes.Combat {
-import classes.Scenes.Combat.SpellsWhite.BlindSpell;
-import classes.Scenes.Combat.SpellsWhite.BlizzardSpell;
-import classes.Scenes.Combat.SpellsWhite.ChainLightningSpell;
-import classes.Scenes.Combat.SpellsWhite.ChargeWeaponSpell;
-import classes.Scenes.Combat.SpellsWhite.LightningBoltSpell;
-import classes.Scenes.Combat.SpellsWhite.PyreBurstSpell;
-import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
+import classes.Scenes.Combat.SpellsWhite.*;
 
 public class CombatAbilities {
 	
@@ -19,13 +13,13 @@ public class CombatAbilities {
 	public static const ChainLightningEx:ChainLightningSpell = new ChainLightningSpell(true);
 	public static const Blind:BlindSpell = new BlindSpell();
 	public static const ChargeWeapon:ChargeWeaponSpell = new ChargeWeaponSpell();
-	// public static const ChargeArmor:ChargeArmorSpell = new ChargeArmorSpell();
-	// public static const Heal:HealSpell = new HealSpell();
+	public static const ChargeArmor:ChargeArmorSpell = new ChargeArmorSpell();
+	public static const Heal:HealSpell = new HealSpell();
 	public static const Blizzard:BlizzardSpell = new BlizzardSpell();
-	// public static const MentalShield:MentalShieldSpell = new MentalShieldSpell();
-	// public static const Cure:CureSpell = new CureSpell();
-	// public static const FireStorm:FireStormSpell = new FireStormSpell();
-	// public static const MeteorShower:MeteorShowerSpell = new MeteorShowerSpell();
+	public static const MentalShield:MentalShieldSpell = new MentalShieldSpell();
+	public static const Cure:CureSpell = new CureSpell();
+	public static const FireStorm:FireStormSpell = new FireStormSpell();
+	public static const MeteorShower:MeteorShowerSpell = new MeteorShowerSpell();
 	public static const ALL_WHITE_SPELLS:/*CombatAbility*/Array = [
 		Whitefire,
 		WhitefireEx,
@@ -37,13 +31,13 @@ public class CombatAbilities {
 		ChainLightningEx,
 		Blind,
 		ChargeWeapon,
-		// ChargeArmor,
-		// Heal,
-		Blizzard
-		// MentalShield,
-		// Cure,
-		// FireStorm,
-		// MeteorShower
+		ChargeArmor,
+		Heal,
+		Blizzard,
+		MentalShield,
+		Cure,
+		FireStorm,
+		MeteorShower
 	];
 	
 	public static const ALL_BLACK_SPELLS:/*CombatAbility*/Array = [

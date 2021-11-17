@@ -16,7 +16,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 						"Teach your foes a lesson with the strength of a wrath-empowered firestorm."
 						: "Teach your foes a lesson with the strength of a firestorm.",
 				TARGET_ENEMY,
-				TIMING_LASTING,
+				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_AOE, TAG_FIRE]
 		);
 		baseManaCost = 200;
@@ -26,7 +26,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	
 	
 	override public function describeEffectVs(target:Monster):String {
-		return ""+calcDamage(target)+" fire damage"
+		return "~"+calcDamage(target)+" fire damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -58,8 +58,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	public function calcDamage(monster:Monster):Number {
 		var baseDamage:Number = 2*scalingBonusIntelligence();
 		if (ex) baseDamage *= 2;
-		if (monster != null && monster.plural) baseDamage *= 5;
-		return adjustSpellDamage(baseDamage, DamageType.FIRE, SPELL_WHITE, monster);
+		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
