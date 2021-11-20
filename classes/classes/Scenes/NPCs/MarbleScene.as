@@ -2407,27 +2407,27 @@ private function marbleGathered():void {
 	//Vitality potion (12 hours or one day)
 	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 0) {
 		inventory.takeItem(consumables.VITAL_T, camp.campLoversMenu);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	//Pack of nails
 	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 1) {
 		inventory.takeItem(consumables.PONAILS, camp.campLoversMenu);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	//Tanned Leather clothes, armor, def: 5 (three days)
 	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 2) {
 		inventory.takeItem(armors.LEATHRA, camp.campLoversMenu);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	//Minotaus horn
 	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 3) {
 		inventory.takeItem(useables.MINOHOR, camp.campLoversMenu);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	//LaBova, cow girl transformation item (if you'll let me put it here, I'd like to use it as part of the purification quest, the player can still get it if they are addicted)
 	else {
 		inventory.takeItem(consumables.LABOVA_, camp.campLoversMenu);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	player.removeStatusEffect(StatusEffects.MarbleHasItem);
 }

@@ -184,11 +184,11 @@ public class EventParser {
                 EngineCore.outputText("\nThe change in your body agility prowess confirms that the effects of cum must have worn off.\n");
             }
             player.HP = HPPercent*player.maxHP();
-            SceneLib.combat.regeneration(false);
-            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(false);
-            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(false);
-            SceneLib.combat.wrathregeneration(false);
-			SceneLib.combat.fatigueRecovery(false);
+            SceneLib.combat.regeneration1(false);
+            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration1(false);
+            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration1(false);
+            SceneLib.combat.wrathregeneration1(false);
+			SceneLib.combat.fatigueRecovery1(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
                 item = _timeAwareClassList[tac];
@@ -679,6 +679,30 @@ public class EventParser {
         }
         EngineCore.statScreenRefresh();
     }
+	public static function eachMinuteCount(time:Number, needNext:Boolean = false):void {
+		var minutesToPass:Number = time;
+		CoC.instance.model.time.minutes += minutesToPass;
+		SceneLib.combat.regeneration(minutesToPass);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(minutesToPass);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(minutesToPass);
+		SceneLib.combat.wrathregeneration(minutesToPass);
+		SceneLib.combat.fatigueRecovery(minutesToPass);
+		if (CoC.instance.model.time.minutes > 59) {
+            CoC.instance.timeQ++;
+            CoC.instance.model.time.minutes -= 60;
+            if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
+        }
+		time = Math.floor(time);
+		if (CoC.instance.timeQ > 0) {
+            CoC.instance.timeQ--;
+            CoC.instance.model.time.hours++;
+            if (CoC.instance.model.time.hours > 23) {
+                CoC.instance.model.time.days++;
+                CoC.instance.model.time.hours = 0;
+            }
+        }
+        EngineCore.statScreenRefresh();
+	}
 
     public static function growHair(amount:Number = .1):Boolean {
         //Grow hair!

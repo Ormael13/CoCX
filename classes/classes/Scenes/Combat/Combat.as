@@ -1908,7 +1908,7 @@ public class Combat extends BaseContent {
 				if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 				if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 			}
-			outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]! ");
+			outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]!\n\n");
             elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
         }
     }
@@ -2035,10 +2035,10 @@ public class Combat extends BaseContent {
 					menu();
 					addButton(0, "Next", combatMenu, false);
 				} else {
-					wrathregeneration();
-					fatigueRecovery();
-					manaregeneration();
-					soulforceregeneration();
+					wrathregeneration1();
+					fatigueRecovery1();
+					manaregeneration1();
+					soulforceregeneration1();
 					venomCombatRecharge();
 					enemyAI();
 				}
@@ -2253,10 +2253,10 @@ public class Combat extends BaseContent {
             return;
         }
         outputText("\n");
-        wrathregeneration();
-        fatigueRecovery();
-        manaregeneration();
-        soulforceregeneration();
+        wrathregeneration1();
+        fatigueRecovery1();
+        manaregeneration1();
+        soulforceregeneration1();
 		venomCombatRecharge();
         enemyAI();
     }
@@ -2322,9 +2322,9 @@ public class Combat extends BaseContent {
         var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
         fatigue(-5);
-        wrathregeneration();
-        manaregeneration();
-        soulforceregeneration();
+        wrathregeneration1();
+        manaregeneration1();
+        soulforceregeneration1();
         if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
             (monster as Kitsune).kitsuneWait();
             skipMonsterAction = true;
@@ -2472,9 +2472,9 @@ public class Combat extends BaseContent {
         if (monster is Alraune) {
             (monster as Alraune).alrauneStruggle();
         }
-        wrathregeneration();
-        manaregeneration();
-        soulforceregeneration();
+        wrathregeneration1();
+        manaregeneration1();
+        soulforceregeneration1();
         combatRoundOver();
     }
 
@@ -2668,9 +2668,9 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You boldly approach enemy and instead of attacks you simply pick up some of the laying around thrown wepaons.");
 		player.ammo += 5;
-        wrathregeneration();
-        manaregeneration();
-        soulforceregeneration();
+        wrathregeneration1();
+        manaregeneration1();
+        soulforceregeneration1();
         combatRoundOver();
     }
 
@@ -4352,10 +4352,10 @@ public class Combat extends BaseContent {
         outputText("You decide not to take any offensive action this round preparing for [monster a] [monster name] attack assuming defensive pose.\n\n");
         player.createStatusEffect(StatusEffects.Defend, 0, 0, 0, 0);
         if (player.hasPerk(PerkLib.DefenceStance)) {
-            wrathregeneration();
-            fatigueRecovery();
-            manaregeneration();
-            soulforceregeneration();
+            wrathregeneration1();
+            fatigueRecovery1();
+            manaregeneration1();
+            soulforceregeneration1();
 			venomCombatRecharge();
         }
         enemyAI();
@@ -4367,10 +4367,10 @@ public class Combat extends BaseContent {
         fatigue((player.maxFatigue() - player.fatigue) / 2);
         player.createStatusEffect(StatusEffects.SecondWindRegen, 10, 0, 0, 0);
         player.createStatusEffect(StatusEffects.CooldownSecondWind, 0, 0, 0, 0);
-        wrathregeneration();
-        fatigueRecovery();
-        manaregeneration();
-        soulforceregeneration();
+        wrathregeneration1();
+        fatigueRecovery1();
+        manaregeneration1();
+        soulforceregeneration1();
 		venomCombatRecharge();
         enemyAI();
     }
@@ -4390,7 +4390,7 @@ public class Combat extends BaseContent {
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
-        //		fatigueRecovery();
+        //		fatigueRecovery1();
         //	}
         if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
@@ -4944,7 +4944,7 @@ public class Combat extends BaseContent {
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
-        //		fatigueRecovery();
+        //		fatigueRecovery1();
         //	}
         if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
@@ -5912,10 +5912,10 @@ public class Combat extends BaseContent {
             outputText("\nThe pain makes your target snap out of the trance, causing them to realise what is going on.\n");
             player.removeStatusEffect(StatusEffects.HypnosisNaga);
         }
-        wrathregeneration();
-        fatigueRecovery();
-        manaregeneration();
-        soulforceregeneration();
+        wrathregeneration1();
+        fatigueRecovery1();
+        manaregeneration1();
+        soulforceregeneration1();
 		venomCombatRecharge();
         enemyAI();
     }
@@ -6164,10 +6164,10 @@ public class Combat extends BaseContent {
 				player.addCurse("lib", curseLib, 1);
 			}
         }
-        wrathregeneration();
-        fatigueRecovery();
-        manaregeneration();
-        soulforceregeneration();
+        wrathregeneration1();
+        fatigueRecovery1();
+        manaregeneration1();
+        soulforceregeneration1();
 		venomCombatRecharge();
     }
 
@@ -10416,19 +10416,25 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
         if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
-        regeneration(true);
+        regeneration1(true);
         if (player.lust >= player.maxLust()) doNext(endLustLoss);
         if (player.HP <= player.minHP()) doNext(endHpLoss);
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
 
-    public function regeneration(combat:Boolean = true):void {
+    public function regeneration(minutes:Number = 1):void {
+		var healingPercent:Number = 0;
+		healingPercent += PercentBasedRegeneration();
+        if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
+        if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
+        HPChange(Math.round(((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()) * 0.04), false);
+	}
+	public function regeneration1(combat:Boolean = true):void {
         var healingPercent:Number;
         if (combat) {
-            //Regeneration
-			var negativeHPRegen:Number = 0;
-            healingPercent = 0;
+            var negativeHPRegen:Number = 0;
+			healingPercent = 0;
             healingPercent += PercentBasedRegeneration();
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
             if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && player.hasPerk(PerkLib.AquaticAffinity) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
@@ -10452,8 +10458,7 @@ public class Combat extends BaseContent {
             HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
         }
 		else {
-            //Regeneration
-            healingPercent = 0;
+			healingPercent = 0;
             healingPercent += PercentBasedRegeneration() * 2;
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
             if (healingPercent > (maximumRegeneration() * 2)) healingPercent = (maximumRegeneration() * 2);
@@ -10547,7 +10552,12 @@ public class Combat extends BaseContent {
         return maxRegen;
     }
 
-    public function fatigueRecovery(combat:Boolean = true):void {
+    public function fatigueRecovery(minutes:Number = 1):void {
+        var fatigue1:Number = fatigueRecovery2();
+        fatigue1 *= 0.04;
+		fatigue(-Math.round(fatigue1 * minutes));
+    }
+    public function fatigueRecovery1(combat:Boolean = true):void {
         var fatigue1:Number = 0;
         fatigue1 += fatigueRecovery2();
         if (combat) fatigue(-fatigue1);
@@ -10582,7 +10592,17 @@ public class Combat extends BaseContent {
         return fatiguecombatrecovery;
     }
 
-    public function soulforceregeneration(combat:Boolean = true):void {
+    public function soulforceregeneration(minutes:Number = 1):void {
+		var gainedsoulforce:Number = 0;
+		gainedsoulforce += soulforceregeneration2();
+		gainedsoulforce *= soulforceRecoveryMultiplier();
+		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
+		gainedsoulforce = Math.round(gainedsoulforce * 0.04 * minutes);
+		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
+		EngineCore.SoulforceChange(gainedsoulforce, false);
+	}
+	public function soulforceregeneration1(combat:Boolean = true, minutes:Number = 1):void {
         var gainedsoulforce:Number = 0;
         if (combat) {
             gainedsoulforce += soulforceregeneration2();
@@ -10642,7 +10662,14 @@ public class Combat extends BaseContent {
         return multi;
     }
 
-    public function manaregeneration(combat:Boolean = true):void {
+    public function manaregeneration(minutes:Number = 1):void {
+        var gainedmana:Number = 0;
+        gainedmana += manaregeneration2();
+        gainedmana *= manaRecoveryMultiplier();
+        gainedmana = Math.round(gainedmana * 0.04 * minutes);
+        EngineCore.ManaChange(gainedmana, false);
+    }
+	public function manaregeneration1(combat:Boolean = true):void {
         var gainedmana:Number = 0;
         if (combat) {
             gainedmana += manaregeneration2();
@@ -10696,7 +10723,18 @@ public class Combat extends BaseContent {
         return manaregen;
     }
 
-    public function wrathregeneration(combat:Boolean = true):void {
+    public function wrathregeneration(minutes:Number = 1):void {
+        var gainedwrath:Number = 0;
+        if (player.hasPerk(PerkLib.AbsoluteStrength)) gainedwrath += wrathregeneration2() * 0.04 * minutes;
+		else {
+			var LostWrathPerTick:Number = player.maxWrath();
+			LostWrathPerTick *= -0.01 * minutes;
+			gainedwrath += LostWrathPerTick;
+		}
+		gainedwrath = Math.round(gainedwrath);
+        EngineCore.WrathChange(gainedwrath, false);
+    }
+	public function wrathregeneration1(combat:Boolean = true):void {
         var gainedwrath:Number = 0;
         if (combat) {
             var BonusWrathMult:Number = 1;
@@ -10766,7 +10804,7 @@ public class Combat extends BaseContent {
         if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
-        return wrathregen*BonusWrathMult;
+		return wrathregen*BonusWrathMult;
     }
 
     public function venomCombatRecharge():void {
@@ -12412,10 +12450,10 @@ public class Combat extends BaseContent {
         }
         //(Otherwise)
         else {
-            wrathregeneration();
-            fatigueRecovery();
-            manaregeneration();
-            soulforceregeneration();
+            wrathregeneration1();
+            fatigueRecovery1();
+            manaregeneration1();
+            soulforceregeneration1();
 			venomCombatRecharge();
             var damage:Number;
             var chance:Number;
@@ -12625,10 +12663,10 @@ public class Combat extends BaseContent {
         }
         //(Otherwise)
         else {
-            wrathregeneration();
-            fatigueRecovery();
-            manaregeneration();
-            soulforceregeneration();
+            wrathregeneration1();
+            fatigueRecovery1();
+            manaregeneration1();
+            soulforceregeneration1();
 			venomCombatRecharge();
             var damage:Number;
             var chance:Number;
@@ -12764,10 +12802,10 @@ public class Combat extends BaseContent {
         }
         //(Otherwise)
         else {
-            wrathregeneration();
-            fatigueRecovery();
-            manaregeneration();
-            soulforceregeneration();
+            wrathregeneration1();
+            fatigueRecovery1();
+            manaregeneration1();
+            soulforceregeneration1();
 			venomCombatRecharge();
             var damage:Number;
             var chance:Number;
@@ -12956,10 +12994,10 @@ public class Combat extends BaseContent {
         }
         //(Otherwise)
         else {
-            wrathregeneration();
-            fatigueRecovery();
-            manaregeneration();
-            soulforceregeneration();
+            wrathregeneration1();
+            fatigueRecovery1();
+            manaregeneration1();
+            soulforceregeneration1();
 			venomCombatRecharge();
             var damage:Number;
             var bimbo:Boolean = false;
@@ -13068,10 +13106,10 @@ public class Combat extends BaseContent {
         }
         //(Otherwise)
         else {
-            wrathregeneration();
-            fatigueRecovery();
-            manaregeneration();
-            soulforceregeneration();
+            wrathregeneration1();
+            fatigueRecovery1();
+            manaregeneration1();
+            soulforceregeneration1();
 			venomCombatRecharge();
             var damage:Number;
             var bimbo:Boolean = false;
@@ -13180,10 +13218,10 @@ public class Combat extends BaseContent {
         }
         //(Otherwise)
         else {
-            wrathregeneration();
-            fatigueRecovery();
-            manaregeneration();
-            soulforceregeneration();
+            wrathregeneration1();
+            fatigueRecovery1();
+            manaregeneration1();
+            soulforceregeneration1();
 			venomCombatRecharge();
             var damage:Number;
             var bimbo:Boolean = false;

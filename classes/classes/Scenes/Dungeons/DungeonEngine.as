@@ -464,18 +464,18 @@ public class DungeonEngine extends BaseContent
 		}
 		
 		public function navigateToRoom(room:Function = null):void {
-			cheatTime2(5);
+			eachMinuteCount(5);
 			room();
 		}
 		public function navigateToRoomRD(room:Function = null):void {
 			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-			cheatTime2(5);
+			eachMinuteCount(5);
 			room();
 		}
 		public function navigateToRoomEL(room:Function = null):void {
 			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			player.addStatusValue(StatusEffects.EbonLabyrinthB, 1, 1);
-			cheatTime2(15);
+			eachMinuteCount(15);
 			room();
 		}
 		

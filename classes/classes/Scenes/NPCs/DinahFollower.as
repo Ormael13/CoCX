@@ -381,6 +381,7 @@ import classes.internals.Utils;
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu3);
 		}
+		
 		public function buyHowlingBansheeMech():void {
 			clearOutput();
 			outputText("You point out the Howling Banshee Mech.\n\n");
@@ -458,7 +459,7 @@ import classes.internals.Utils;
 				dynStats("lus", 10);
 				if (player.hasItem(consumables.BROWNEG)) {
 					player.consumeItem(consumables.BROWNEG);
-					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 1 + rand(2);
+					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 1+rand(2);
 				}
 				else {
 					player.consumeItem(consumables.L_BRNEG);
@@ -478,7 +479,7 @@ import classes.internals.Utils;
 				dynStats("lus", 10);
 				if (player.hasItem(consumables.PURPLEG)) {
 					player.consumeItem(consumables.PURPLEG);
-					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 1 + rand(2);
+					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 1+rand(2);
 				}
 				else {
 					player.consumeItem(consumables.L_PRPEG);

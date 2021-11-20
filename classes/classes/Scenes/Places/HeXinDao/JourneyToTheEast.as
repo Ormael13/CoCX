@@ -212,7 +212,7 @@ package classes.Scenes.Places.HeXinDao
 				player.statPoints -= 5;
 				player.perkPoints += 1;
 				doNext(curry(enteringInn,false));
-				cheatTime2(30);
+				eachMinuteCount(30);
 			}
 		}
 		public function NeisabutPCgotKOd():void {

@@ -18,14 +18,9 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function canUse():Boolean {
-			if (!super.canUse()) {
-				return false;
-			}
-			if (game.player.tallness < 72) { //Taller than 4 ft
-				outputText("You try to put helmet on but it clearly was't designed for someone your size. Frustrated, you put it back in the bag.\n\n");
-				return false;
-			}
-			return true;
+			if (game.player.tallness >= 84) return super.canUse();
+			else outputText("You try to put helmet on but it clearly was't designed for someone your size. Frustrated, you put it back in the bag.  ");
+			return false;
 		}
 	}
 }

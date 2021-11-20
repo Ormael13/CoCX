@@ -184,7 +184,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			cheatTime2(15);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaWhatCanSheDo():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -197,7 +197,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 5)flags[kFLAGS.LUNA_FOLLOWER] = 5;
 			lunaJealousy(-100);
 			doNext(talkMenuLuna);
-			cheatTime2(15);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaHuman():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -237,7 +237,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			cheatTime2(15);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaCampThoughts():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -248,7 +248,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			cheatTime2(15);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaStopJealousy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -266,7 +266,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			cheatTime2(15);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaLycanthropy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -287,7 +287,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			cheatTime2(15);
+			eachMinuteCount(15);
 		}
 		public function talkMenuBiteMe():void {
 			spriteSelect(SpriteDb.s_luna_maid);

@@ -866,7 +866,7 @@ public class Masturbation extends BaseContent {
 				}
 			}
 			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && player.companionsInPCParty()) {
-				cheatTime2(60);
+				eachMinuteCount(60);
 				doNext(playerMenu);
 			}
 			else doNext(camp.returnToCampUseOneHour);

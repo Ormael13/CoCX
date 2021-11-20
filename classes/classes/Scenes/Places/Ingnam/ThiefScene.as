@@ -34,7 +34,7 @@ package classes.Scenes.Places.Ingnam
 				player.gems -= 5;
 			}
 			statScreenRefresh();
-			cheatTime2(15);
+			eachMinuteCount(15);
 			doNext(camp.doCamp);
 		}
 		
@@ -82,7 +82,7 @@ package classes.Scenes.Places.Ingnam
 		}
 		
 		private function thiefEncEnd():void {
-			cheatTime2(15);
+			eachMinuteCount(15);
 			doNext(camp.doCamp);
 		}
 		

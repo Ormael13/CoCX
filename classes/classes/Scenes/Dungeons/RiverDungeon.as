@@ -234,7 +234,7 @@ import classes.StatusEffects;
 			weapons.AETHERD.useText();
 			player.weapon.removeText();
 			cleanupAfterCombat();
-			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow form it to the floor then over it till it reaches you and climbing over your body reforms into gaunelt on your right arm and half of the forearm. \"<i>That will a blast!");
+			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow from it to the floor then over it till it reaches you and climbing over your body reforms into gauntlet on your right arm and half of the forearm. \"<i>That will a blast!");
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
 			var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
@@ -262,7 +262,7 @@ import classes.StatusEffects;
 			shields.AETHERS.useText();
 			player.shield.removeText();
 			cleanupAfterCombat();
-			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow form it to the floor then over it till it reaches you and climbing over your body reforms into gaunelt on your right arm and half of the forearm. \"<i>That will a blast!");
+			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow from it to the floor then over it till it reaches you and climbing over your body reforms into gauntlet on your right arm and half of the forearm. \"<i>That will a blast!");
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
 			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
