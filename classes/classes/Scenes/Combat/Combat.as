@@ -995,7 +995,7 @@ public class Combat extends BaseContent {
         if (CoC_Settings.debugBuild && !debug) {
             buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
         }
-        if (CoC_Settings.debugBuild) {
+        if (CoC_Settings.debugBuild && debug) {
             buttons.add("CheatAbility", combat.debugCheatAbility).hint("Use any ability");
         }
         if (player.hasPerk(PerkLib.JobDefender)) {
@@ -15103,8 +15103,18 @@ public class Combat extends BaseContent {
         }
         return scale;
     }
-
-    private function inteWisLibScale(stat:int):Number {
+    
+    /**
+     * Generate "effect value" by scaling a stat.
+     * * stat x (2/6 + 1/6 per 20 points) for stat <= 100
+     * * stat x (1 + 1/4 per 50 points over 50) for stat <= 100,000
+     * * stat x 50.75 for stat > 100,000
+     * + a random bonus of similar magnitude
+     * @param stat
+     * @param randomize Apply random bonus. If false, apply average random bonus.
+     * @return
+     */
+    private function inteWisLibScale(stat:int, randomize:Boolean = true):Number {
         var scale:Number = 50.75;
         var changeBy:Number = 0.50;
         if (stat <= 100000) {
@@ -15115,45 +15125,47 @@ public class Combat extends BaseContent {
                 scale = 1 + (int((stat - 100) / 50) * 0.25);
             }
         }
-        return (stat * scale) + rand(stat * (scale + changeBy));
+        var rng:Number = stat * (scale + changeBy);
+        if (!randomize) return (stat * scale) + 0.5*rng;
+        else return (stat * scale) + rand(rng);
     }
 
-    public function scalingBonusStrength():Number {
+    public function scalingBonusStrength(randomize:Boolean = true):Number {
         if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrength());
-        else return inteWisLibScale(ghostRealStrength());
+        else return inteWisLibScale(ghostRealStrength(), randomize);
     }
 
-    public function scalingBonusStrengthCompanion():Number {
+    public function scalingBonusStrengthCompanion(randomize:Boolean = true):Number {
         if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrengthCompanion());
-        else return inteWisLibScale(ghostRealStrengthCompanion());
+        else return inteWisLibScale(ghostRealStrengthCompanion(), randomize);
     }
 
-    public function scalingBonusToughness():Number {
-        return inteWisLibScale(ghostRealToughness());
+    public function scalingBonusToughness(randomize:Boolean = true):Number {
+        return inteWisLibScale(ghostRealToughness(), randomize);
     }
 
-    public function scalingBonusSpeed():Number {
+    public function scalingBonusSpeed(randomize:Boolean = true):Number {
         if (flags[kFLAGS.SPEED_SCALING] == 1) return touSpeStrScale(ghostRealSpeed());
-        else return inteWisLibScale(ghostRealSpeed());
+        else return inteWisLibScale(ghostRealSpeed(), randomize);
     }
 
-    public function scalingBonusWisdom():Number {
+    public function scalingBonusWisdom(randomize:Boolean = true):Number {
         if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(player.wis);
-        else return inteWisLibScale(player.wis);
+        else return inteWisLibScale(player.wis, randomize);
     }
 
-    public function scalingBonusIntelligence():Number {
+    public function scalingBonusIntelligence(randomize:Boolean = true):Number {
         if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(player.inte);
-        else return inteWisLibScale(player.inte);
+        else return inteWisLibScale(player.inte, randomize);
     }
 
-    public function scalingBonusIntelligenceCompanion():Number {
+    public function scalingBonusIntelligenceCompanion(randomize:Boolean = true):Number {
         if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(ghostRealIntelligenceCompanion());
-        else return inteWisLibScale(ghostRealIntelligenceCompanion());
+        else return inteWisLibScale(ghostRealIntelligenceCompanion(), randomize);
     }
 
-    public function scalingBonusLibido():Number {
-        return inteWisLibScale(player.lib);
+    public function scalingBonusLibido(randomize:Boolean = true):Number {
+        return inteWisLibScale(player.lib, randomize);
     }
 }
 }

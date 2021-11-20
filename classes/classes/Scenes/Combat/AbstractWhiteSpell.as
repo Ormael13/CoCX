@@ -14,6 +14,10 @@ public class AbstractWhiteSpell extends AbstractSpell {
 		super(name, desc, targetType, timingType, Combat.USEMANA_WHITE, tags);
 	}
 	
+	override public function get category():int {
+		return CAT_SPELL_WHITE;
+	}
+	
 	override public function manaCost():Number {
 		return spellCostWhite(baseManaCost);
 	}

@@ -49,12 +49,12 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target)+ "(x12) fire damage."
+		return "~" + calcDamage(target,false)+ "(x12) fire damage."
 	}
 	
-	public function calcDamage(target:Monster):Number {
+	public function calcDamage(target:Monster, randomize:Boolean=true):Number {
 		return adjustSpellDamage(
-				scalingBonusIntelligence()*3,
+				scalingBonusIntelligence(randomize)*3,
 				DamageType.FIRE,
 				CAT_SPELL_WHITE,
 				target
@@ -67,7 +67,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
 		if (display) {
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
-			outputText("[Monster a] [monster name] takes ")
+			outputText("[monster A] [monster name] takes ")
 		}
 		var meteor:Number = 12;
 		while (meteor-->0){
@@ -76,7 +76,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		}
 		if (display) {
 			outputText(" damage!");
-			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.\n\n");
+			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.");
 		}
 		damage *= 12;
 		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
@@ -86,7 +86,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	
 	public function meteorShowerChannel(display: Boolean = true):void {
 		if (display) {
-			outputText("You begin to channel magic, the sky reddening above you.\n\n");
+			outputText("You begin to channel magic, the sky reddening above you.");
 		}
 		player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.ChanneledAttackType, 6, 0, 0, 0);

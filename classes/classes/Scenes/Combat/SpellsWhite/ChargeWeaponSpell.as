@@ -89,7 +89,7 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 		ChargeWeaponDuration += combat.magic.perkRelatedDurationBoosting();
 		
 		if(output) {
-			outputText("You utter words of power, summoning an electrical charge around your [weapon].  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n");
+			outputText("You utter words of power, summoning an electrical charge around your [weapon].  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.");
 		}
 		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, ChargeWeaponDuration, 0, 0);
 	}

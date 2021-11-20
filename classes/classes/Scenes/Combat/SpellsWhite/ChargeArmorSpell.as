@@ -83,7 +83,7 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 			outputText("You utter words of power, summoning an electrical charge around your");
 			if (player.isNaked() && player.haveNaturalArmor() && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)) outputText(" natural armor.");
 			else outputText(" [armor].");
-			outputText("  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
+			outputText("  It crackles loudly, ensuring you'll have more protection for the rest of the fight.");
 		}
 		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, ChargeArmorDuration, 0, 0);
 		

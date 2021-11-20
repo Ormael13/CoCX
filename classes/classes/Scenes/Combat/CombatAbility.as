@@ -64,16 +64,16 @@ public class CombatAbility extends BaseCombatContent {
 	
 	public static const AllCategories:/*EnumValue*/Array = [];
 	
-	public static const CAT_UNIVERSAL:int        = EnumValue.add(AllCategories, 0, "UNIVERSAL", {name:"universal"});
-	public static const CAT_PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {name:"physical special"});
-	public static const CAT_MAGICAL_SPECIAL:int  = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {name:"magical special"});
-	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {name:"soulskill"});
-	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {name:"white spell"});
-	public static const CAT_SPELL_BLACK:int     = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {name:"black spell"});
-	public static const CAT_SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {name:"grey spell"});
-	public static const CAT_SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {name:"hex"});
-	public static const CAT_SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {name:"necromancy spell"});
-	public static const CAT_SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {name:"blood spell"});
+	public static const CAT_UNIVERSAL:int        = EnumValue.add(AllCategories, 0, "UNIVERSAL", {name:"Universal"});
+	public static const CAT_PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {name:"Physical Special"});
+	public static const CAT_MAGICAL_SPECIAL:int  = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {name:"Magical Special"});
+	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {name:"Soulskill"});
+	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {name:"White Spell"});
+	public static const CAT_SPELL_BLACK:int     = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {name:"Black Spell"});
+	public static const CAT_SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {name:"Grey Spell"});
+	public static const CAT_SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {name:"Hex"});
+	public static const CAT_SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {name:"Necromancy Spell"});
+	public static const CAT_SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {name:"Blood Spell"});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -154,6 +154,14 @@ public class CombatAbility extends BaseCombatContent {
 		return name;
 	}
 	
+	public function get category():int {
+		throw new Error("Method category() is not implemented for ability "+name);
+	}
+	
+	public function get catObject():Object {
+		return AllCategories[category];
+	}
+	
 	public function presentTags():/*int*/Array {
 		var result:/*int*/Array = [];
 		for (var tag:int=0; tag<_tags.length; tag++) {
@@ -184,14 +192,10 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
-	 * Create a button in the abilities menu to invoke the ability.
-	 * If ability is not usable at the moment, button will be disabled.
-	 * Adds a tooltip with description, costs and predicted effect.
-	 * DOES NOT check for isKnown.
+	 * @param target Monster to gauge effect against, or null if viewing outside combat.
+	 * @return {String} Ability description + costs, tags, and effects.
 	 */
-	public function createButton(target:Monster):ButtonData {
-		const bd:ButtonData = new ButtonData(buttonName, buttonCallback);
-		
+	public function fullDescription(target:Monster):String {
 		var fullDesc:String = description+"\n";
 		
 		var effectDesc:String = describeEffectVs(target);
@@ -212,6 +216,20 @@ public class CombatAbility extends BaseCombatContent {
 			costs.push("Wrath Cost: " + wrathCost());
 		}
 		if (costs.length > 0) fullDesc += "\n" + costs.join(", ");
+		
+		return fullDesc
+	}
+	
+	/**
+	 * Create a button in the abilities menu to invoke the ability.
+	 * If ability is not usable at the moment, button will be disabled.
+	 * Adds a tooltip with description, costs and predicted effect.
+	 * DOES NOT check for isKnown.
+	 */
+	public function createButton(target:Monster):ButtonData {
+		const bd:ButtonData = new ButtonData(buttonName, buttonCallback);
+		
+		var fullDesc: String = fullDescription(target);
 		
 		var ucheck:String;
 		if (timingType == TIMING_TOGGLE) {
@@ -295,7 +313,7 @@ public class CombatAbility extends BaseCombatContent {
 	 * 2nd part: actual ability effect.
 	 * Can be used instead of perform to skip resource usage, cooldown, or monster interception
 	 */
-	public function doEffect(output:Boolean = true):void {
+	public function doEffect(display:Boolean = true):void {
 		throw new Error("Method perform() not implemented for ability "+name);
 	}
 	
@@ -316,11 +334,11 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	protected function usabilityCheck():String {
 		// Checks applicable to all abilities could go here
-		if (currentCooldown > 0) {
-			return "You need more time before you can use this ability again."
-		}
 		if (timingType == TIMING_LASTING && isActive()) {
 			return "This ability is already active."
+		}
+		if (currentCooldown > 0) {
+			return "You need more time before you can use this ability again."
 		}
 		return ""
 	}

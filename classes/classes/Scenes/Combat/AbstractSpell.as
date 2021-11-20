@@ -95,14 +95,17 @@ public class AbstractSpell extends CombatAbility {
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 	}
 	
-	public override function doEffect(output:Boolean = true):void {
+	public override function doEffect(display:Boolean = true):void {
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
-			if (output) {
+			if (display) {
 				outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
 		} else {
-			doSpellEffect(output);
+			doSpellEffect(display);
 			postSpellEffect();
+			if (display) {
+				outputText("\n\n");
+			}
 		}
 	}
 	

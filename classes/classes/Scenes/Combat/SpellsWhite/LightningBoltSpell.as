@@ -14,8 +14,8 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 		super(
 				ex ? "Lightning Bolt (Ex)":"Lightning Bolt",
 				ex ?
-						"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning."
-						: "Lightning Bolt (Ex) is a basic wrath-empowered lightning attack that will electrocute your foe with a single bolt of lightning.",
+						"Lightning Bolt (Ex) is a basic wrath-empowered lightning attack that will electrocute your foe with a single bolt of lightning."
+						:"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.",
 				TARGET_ENEMY,
 				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_LIGHTNING]
@@ -30,7 +30,7 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target)+" lightning damage";
+		return "~"+calcDamage(target,false)+" lightning damage";
 	}
 	
 	override public function get isKnown():Boolean {
@@ -56,10 +56,11 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	/**
 	 * Calculate real (or theoretic) damage dealt by this spell
 	 * @param monster Target, or null if no target (ex. for description outside combat)
+	 * @param randomize true: Apply random bonus, false: Apply average bonus
 	 * @return {Number} Damage dealt by this spell
 	 */
-	public function calcDamage(monster:Monster):Number {
-		var baseDamage:Number = 2*scalingBonusIntelligence();
+	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
 		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.LIGHTNING, CAT_SPELL_WHITE, monster);
 	}
@@ -71,9 +72,6 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 		}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
-		if (display) {
-			outputText("\n\n");
-		}
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

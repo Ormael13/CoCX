@@ -74,7 +74,7 @@ public class CureSpell extends AbstractWhiteSpell{
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You channel white magic to rid yourself of all negative effect affecting you.\n\n");
+			outputText("You channel white magic to rid yourself of all negative effect affecting you.");
 		}
 		for each (var buff:String in CurableBuffs) {
 			player.buff(buff).remove();

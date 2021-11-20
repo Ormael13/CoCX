@@ -28,11 +28,12 @@ public class FireStormSpell extends AbstractWhiteSpell{
 	
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target)+" fire daamge."
+		return "~"+calcDamage(target,false)+" fire daamge."
 	}
 	
-	public function calcDamage(monster:Monster):Number {
-		return adjustSpellDamage(scalingBonusIntelligence()*3,DamageType.FIRE,CAT_SPELL_WHITE,monster);
+	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+		var baseDamage:Number = scalingBonusIntelligence(randomize)*3;
+		return adjustSpellDamage(baseDamage,DamageType.FIRE,CAT_SPELL_WHITE,monster);
 	}
 	
 	

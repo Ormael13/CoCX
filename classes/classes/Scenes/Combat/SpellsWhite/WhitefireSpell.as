@@ -14,9 +14,9 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 	
 	function WhitefireSpell(ex:Boolean=false) {
 		super(
-				ex ? "Whitefire(Ex)" : "Whitefire",
+				ex ? "Whitefire (Ex)" : "Whitefire",
 				ex ?
-						"Whitefire(Ex) is a potent wrath-empowered fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors."
+						"Whitefire (Ex) is a potent wrath-empowered fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors."
 						: "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.",
 				TARGET_ENEMY,
 				TIMING_INSTANT,
@@ -29,7 +29,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 	
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target)+" fire damage";
+		return "~"+calcDamage(target, false)+" fire damage";
 	}
 	
 	override public function get isKnown():Boolean {
@@ -56,10 +56,11 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 	/**
 	 * Calculate real (or theoretic) damage dealt by this spell
 	 * @param monster Target, or null if no target (ex. for description outside combat)
+	 * @param randomize true: Apply random bonus, false: Apply average bonus
 	 * @return {Number} Damage dealt by this spell
 	 */
-	public function calcDamage(monster:Monster):Number {
-		var baseDamage:Number = 2*scalingBonusIntelligence();
+	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
+		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
 		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster);
 	}
@@ -78,7 +79,6 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.FIRE);
-		if (display) outputText("\n\n");
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

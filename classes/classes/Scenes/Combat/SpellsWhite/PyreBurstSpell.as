@@ -26,7 +26,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target)+" fire damage"
+		return "~"+calcDamage(target,false)+" fire damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -53,10 +53,11 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	/**
 	 * Calculate real (or theoretic) damage dealt by this spell
 	 * @param monster Target, or null if no target (ex. for description outside combat)
+	 * @param randomize true: Apply random bonus, false: Apply average bonus
 	 * @return {Number} Damage dealt by this spell
 	 */
-	public function calcDamage(monster:Monster):Number {
-		var baseDamage:Number = 2*scalingBonusIntelligence();
+	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
 		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster);
 	}
@@ -74,9 +75,6 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 		}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.FIRE);
-		if (display) {
-			outputText("\n\n");
-		}
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
