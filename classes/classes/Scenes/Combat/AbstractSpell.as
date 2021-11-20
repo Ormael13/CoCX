@@ -175,7 +175,7 @@ public class AbstractSpell extends CombatAbility {
 		return Math.round(damage);
 	}
 	
-	protected function omnicasterDamageFactor():Number {
+	public static function omnicasterDamageFactor():Number {
 		if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) return 0.5;
 			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) return 0.3;
@@ -183,7 +183,7 @@ public class AbstractSpell extends CombatAbility {
 		} else return 1.0
 	}
 	
-	protected function omnicasterRepeatCount():int {
+	public static function omnicasterRepeatCount():int {
 		if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
 				return 10;

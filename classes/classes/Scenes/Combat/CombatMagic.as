@@ -695,13 +695,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	private function omnicasterMutliForReflectDmgAndAchievments():Number {
-		var omfrdaa:Number = 1;
-		omfrdaa += 0.2;
-		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) omfrdaa += 0.4;
-		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) omfrdaa += 0.4;
-		if (player.hasPerk(MutationsLib.GazerEyeEvolved)) omfrdaa *= 2.5;
-		else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) omfrdaa *= 1.5;
-		return omfrdaa;
+		return AbstractSpell.omnicasterRepeatCount();
 	}
 	
 	public function perkRelatedDurationBoosting():Number {
