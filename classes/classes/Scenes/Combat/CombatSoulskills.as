@@ -1687,26 +1687,18 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		else {
 			outputText("feeling it mend your wounds");
-			combat.magic.spellHealEffect();
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			CombatAbilities.Heal.doEffect(false);
 			spellPerkUnlock();
 		}
 		if (!monster.hasStatusEffect(StatusEffects.Blind)) {
 			outputText(". The residual power ");
 			if (!player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				outputText("makes your staff glow with barely contained energy");
-				combat.magic.spellChargeWeapon(true);
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
+				CombatAbilities.ChargeWeapon.doEffect(false);
 			}
 			else {
 				outputText("makes your staff flare up, as the energy escapes as a radiant flash");
-				combat.magic.spellBlind();
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
+				CombatAbilities.Blind.doEffect(false);
 			}
 		}
 		outputText(".\n\n");

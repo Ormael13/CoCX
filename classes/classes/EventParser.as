@@ -692,15 +692,6 @@ public class EventParser {
             CoC.instance.model.time.minutes -= 60;
             if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
         }
-		time = Math.floor(time);
-		if (CoC.instance.timeQ > 0) {
-            CoC.instance.timeQ--;
-            CoC.instance.model.time.hours++;
-            if (CoC.instance.model.time.hours > 23) {
-                CoC.instance.model.time.days++;
-                CoC.instance.model.time.hours = 0;
-            }
-        }
         EngineCore.statScreenRefresh();
 	}
 

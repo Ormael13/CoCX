@@ -3,6 +3,7 @@ package classes {
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -22,6 +23,22 @@ import flash.events.TextEvent;
 public class PlayerInfo extends BaseContent {
 	public function PlayerInfo() {}
 
+	// to add submenus, call statsMenu first then add buttons in free slots
+	private function statsMenu(currentButton:int):void {
+		menu();
+		addButton(0, "Next", playerMenu);
+		if (player.knownAbilities().length > 0) {
+			addButton(4, "Abilities", displayStatsAbilities);
+		}
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		if (currentButton >= 4 && currentButton <= 9) {
+			button(currentButton).disable("You are currently at this stats page.");
+		}
+	}
 	//------------
 	// STATS
 	//------------
@@ -332,18 +349,22 @@ public class PlayerInfo extends BaseContent {
 		if (statEffects != "")
 			outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects);
 		// End Ongoing Stat Effects
-		menu();
-		addButton(0, "Next", playerMenu);
+		statsMenu(5);
 		if (player.statPoints > 0) {
 			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");
 			addButton(1, "Stat Up", attributeMenu);
 		}
-		addButtonDisabled(5, "General", "You are currently at this stats page.");
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
 		}
+	public function displayStatsAbilities():void {
+		clearOutput();
+		for each (var ability:CombatAbility in player.knownAbilities()) {
+			outputText("<font size=\"24\" face=\"Georgia\"><u><b>"+ability.name+"</b></u></font>");
+			outputText(" "+ability.catObject.name+"\n");
+			outputText(ability.fullDescription(null));
+			outputText("\n\n");
+		}
+		statsMenu(4);
+	}
 	public function displayStatsCombat():void {
 		spriteSelect(-1);
 		clearOutput();
@@ -500,13 +521,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
 
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButtonDisabled(6, "Combat", "You are currently at this stats page.");
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
+		statsMenu(6);
 	}
 	public function displayStatsNpcs():void {
 		spriteSelect(-1);
@@ -997,13 +1012,7 @@ public class PlayerInfo extends BaseContent {
 		if (outsideCampNpcsStats != "")
 			outputText("\n<b><u>Outside camp NPC's Stats</u></b>\n" + outsideCampNpcsStats);
 		// End Outside camp NPC's Stats
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButtonDisabled(7, "NPC's", "You are currently at this stats page.");
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
+		statsMenu(7);
 	}
 	public function displayStatsChildren():void {
 		spriteSelect(-1);
@@ -1153,13 +1162,7 @@ public class PlayerInfo extends BaseContent {
 		if (childStats != "")
 			outputText("\n<b><u>Children</u></b>\n" + childStats);
 		// End Children Stats
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButtonDisabled(8, "Children", "You are currently at this stats page.");
-		addButton(9, "Mastery", displayStatsmastery);
+		statsMenu(8);
 	}
 	public function displayStatsmastery():void {
 		spriteSelect(-1);
@@ -1360,13 +1363,7 @@ public class PlayerInfo extends BaseContent {
 		if (masteryStats != "")
 			outputText("\n<b><u>Mastery</u></b>\n" + masteryStats);
 		// End Mastery Stats
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButtonDisabled(9, "Mastery", "You are currently at this stats page.");
+		statsMenu(9);
 	}
 
 	//------------
@@ -2155,4 +2152,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}

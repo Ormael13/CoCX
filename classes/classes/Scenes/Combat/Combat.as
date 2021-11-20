@@ -43,6 +43,7 @@ import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Combat.MagicSpecials;
+import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.D3.*;
@@ -106,6 +107,21 @@ public class Combat extends BaseContent {
 
     public function set inCombat(value:Boolean):void {
         CoC.instance.inCombat = value;
+    }
+    
+    public function callbackBeforeAbility(ability:CombatAbility):void {
+        clearOutput();
+        doNext(combatMenu);
+    }
+    public function callbackAfterAbility(ability:CombatAbility):void {
+        statScreenRefresh();
+        if (monster.HP <= monster.minHP()) {
+            doNext(endHpVictory);
+        } else if (monster.lust > monster.maxLust()) {
+            doNext(endLustVictory);
+        } else {
+            enemyAI();
+        }
     }
 
     public function physicalCost(mod:Number):Number {
@@ -979,6 +995,9 @@ public class Combat extends BaseContent {
         if (CoC_Settings.debugBuild && !debug) {
             buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
         }
+        if (CoC_Settings.debugBuild && debug) {
+            buttons.add("CheatAbility", combat.debugCheatAbility).hint("Use any ability");
+        }
         if (player.hasPerk(PerkLib.JobDefender)) {
             buttons.add("Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
         }
@@ -1118,7 +1137,7 @@ public class Combat extends BaseContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+				
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
@@ -4206,6 +4225,16 @@ public class Combat extends BaseContent {
         }
     }
 
+    private function debugCheatAbility():void {
+        var buttons:ButtonDataList = new ButtonDataList();
+        for each (var ability:CombatAbility in CombatAbilities.ALL) {
+            var button:ButtonData = ability.createButton(monster);
+            button.enabled = true;
+            buttons.list.push(button);
+        }
+        submenu(buttons,combatMenu,0,false);
+    }
+    
     private function debugInspect():void {
         outputText(monster.generateDebugDescription());
         menu();
@@ -5065,7 +5094,7 @@ public class Combat extends BaseContent {
         outputText("<b>(</b>");
         for (var i:int = 0; i < damagemsg.length; i++) {
             damagemsg[i] = int(damageTemp % 10);
-            damageTemp = int(damageTemp / 10);
+            damageTemp = Math.floor(damageTemp / 10);
         }
         for (var j:int = 0, k:int = (damagemsg.length % 3); j < damagemsg.length; j++) {
             if (k == 0) {
@@ -5745,11 +5774,9 @@ public class Combat extends BaseContent {
             heroBaneProc(damage);
             EruptingRiposte();
             if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && player.mana >= spellCostWhite(40)) {
-                    if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
-                    else useMana(40, 5);
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isKnownAndUsable) {
                     outputText("\n\n");
-                    magic.spellWhitefire4();
+                    CombatAbilities.Whitefire.perform();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
@@ -5757,11 +5784,9 @@ public class Combat extends BaseContent {
                     outputText("\n\n");
                     magic.spellIceSpike3();
                 }
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && player.mana >= spellCostWhite(40)) {
-                    if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
-                    else useMana(40, 5);
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isKnownAndUsable) {
                     outputText("\n\n");
-                    magic.spellLightningBolt3();
+                    CombatAbilities.LightningBolt.perform();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
@@ -13441,7 +13466,7 @@ public class Combat extends BaseContent {
         clearOutput();
         useMana(30, 10);
         outputText("You initiate a healing spell. ");
-        magic.spellHealEffect();
+        CombatAbilities.Heal.doEffect(false);
         outputText("\n\nIt's only when you finish your casting that " + monster.a + monster.short + " name snaps out of the hypnosis and realise what is going on. ");
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         statScreenRefresh();
@@ -15116,8 +15141,18 @@ public class Combat extends BaseContent {
         }
         return scale;
     }
-
-    private function inteWisLibScale(stat:int):Number {
+    
+    /**
+     * Generate "effect value" by scaling a stat.
+     * * stat x (2/6 + 1/6 per 20 points) for stat <= 100
+     * * stat x (1 + 1/4 per 50 points over 50) for stat <= 100,000
+     * * stat x 50.75 for stat > 100,000
+     * + a random bonus of similar magnitude
+     * @param stat
+     * @param randomize Apply random bonus. If false, apply average random bonus.
+     * @return
+     */
+    private function inteWisLibScale(stat:int, randomize:Boolean = true):Number {
         var scale:Number = 50.75;
         var changeBy:Number = 0.50;
         if (stat <= 100000) {
@@ -15128,45 +15163,47 @@ public class Combat extends BaseContent {
                 scale = 1 + (int((stat - 100) / 50) * 0.25);
             }
         }
-        return (stat * scale) + rand(stat * (scale + changeBy));
+        var rng:Number = stat * (scale + changeBy);
+        if (!randomize) return (stat * scale) + 0.5*rng;
+        else return (stat * scale) + rand(rng);
     }
 
-    public function scalingBonusStrength():Number {
+    public function scalingBonusStrength(randomize:Boolean = true):Number {
         if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrength());
-        else return inteWisLibScale(ghostRealStrength());
+        else return inteWisLibScale(ghostRealStrength(), randomize);
     }
 
-    public function scalingBonusStrengthCompanion():Number {
+    public function scalingBonusStrengthCompanion(randomize:Boolean = true):Number {
         if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrengthCompanion());
-        else return inteWisLibScale(ghostRealStrengthCompanion());
+        else return inteWisLibScale(ghostRealStrengthCompanion(), randomize);
     }
 
-    public function scalingBonusToughness():Number {
-        return inteWisLibScale(ghostRealToughness());
+    public function scalingBonusToughness(randomize:Boolean = true):Number {
+        return inteWisLibScale(ghostRealToughness(), randomize);
     }
 
-    public function scalingBonusSpeed():Number {
+    public function scalingBonusSpeed(randomize:Boolean = true):Number {
         if (flags[kFLAGS.SPEED_SCALING] == 1) return touSpeStrScale(ghostRealSpeed());
-        else return inteWisLibScale(ghostRealSpeed());
+        else return inteWisLibScale(ghostRealSpeed(), randomize);
     }
 
-    public function scalingBonusWisdom():Number {
+    public function scalingBonusWisdom(randomize:Boolean = true):Number {
         if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(player.wis);
-        else return inteWisLibScale(player.wis);
+        else return inteWisLibScale(player.wis, randomize);
     }
 
-    public function scalingBonusIntelligence():Number {
+    public function scalingBonusIntelligence(randomize:Boolean = true):Number {
         if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(player.inte);
-        else return inteWisLibScale(player.inte);
+        else return inteWisLibScale(player.inte, randomize);
     }
 
-    public function scalingBonusIntelligenceCompanion():Number {
+    public function scalingBonusIntelligenceCompanion(randomize:Boolean = true):Number {
         if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(ghostRealIntelligenceCompanion());
-        else return inteWisLibScale(ghostRealIntelligenceCompanion());
+        else return inteWisLibScale(ghostRealIntelligenceCompanion(), randomize);
     }
 
-    public function scalingBonusLibido():Number {
-        return inteWisLibScale(player.lib);
+    public function scalingBonusLibido(randomize:Boolean = true):Number {
+        return inteWisLibScale(player.lib, randomize);
     }
 }
 }

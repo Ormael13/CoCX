@@ -4,12 +4,24 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.AbstractSpell;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class FrostGiant extends Monster
 	{
-
+		
+		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+				if (ability is AbstractSpell) {
+					giantBoulderHit(2);
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		public function giantAttackPunch():void {
 			var damage:int = 0;
 			outputText("The giant strides toward you, closing the distance faster than you can run. He rears back and strikes at you!  ");

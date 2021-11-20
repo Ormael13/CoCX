@@ -31,6 +31,7 @@ import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.CombatMagic;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
@@ -229,6 +230,24 @@ import flash.utils.getQualifiedClassName;
 		{
 			_drop = value;
 			initedDrop = true;
+		}
+		
+		/**
+		 * Called when monster is targeted with player's ability after it started to cast (used mana etc) but before any text output. Can interrupt ability usage (return true);
+		 * @param ability
+		 * @return true if ability was intercepted and should not apply its effect, false if it should proceed as usual
+		 */
+		public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			// default - do nothing
+			return false;
+		}
+		
+		/**
+		 * Called after monster was affected by player's ability.
+		 * @param ability
+		 */
+		public function postPlayerAbility(ability:CombatAbility):void {
+			// default - do nothing
 		}
 
 		protected override function maxHP_base():Number {
