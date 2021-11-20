@@ -54,7 +54,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	
 	public function calcDamage(target:Monster, randomize:Boolean=true):Number {
 		return adjustSpellDamage(
-				scalingBonusIntelligence(randomize)*3,
+				scalingBonusIntelligence(randomize)*2,
 				DamageType.FIRE,
 				CAT_SPELL_WHITE,
 				target
@@ -79,6 +79,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.");
 		}
 		damage *= 12;
+		damage *= omnicasterRepeatCount();
 		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

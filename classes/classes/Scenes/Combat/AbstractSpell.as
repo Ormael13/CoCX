@@ -170,13 +170,31 @@ public class AbstractSpell extends CombatAbility {
 				else damage *= 1.4;
 			}
 		}
-		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) damage *= 0.5;
-			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) damage *= 0.3;
-			else damage *= 0.2;
-		}
+		damage *= omnicasterDamageFactor();
 		
 		return Math.round(damage);
+	}
+	
+	protected function omnicasterDamageFactor():Number {
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) return 0.5;
+			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) return 0.3;
+			else return 0.2;
+		} else return 1.0
+	}
+	
+	protected function omnicasterRepeatCount():int {
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				return 10;
+			} else if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				return 8;
+			} else {
+				return 6;
+			}
+		} else {
+			return 1;
+		}
 	}
 	
 	/**
@@ -227,16 +245,7 @@ public class AbstractSpell extends CombatAbility {
 			default:
 				damageFn = doDamage;
 		}
-		var repeats:int = 1;
-		if (player.hasPerk(PerkLib.Omnicaster)) {
-			repeats = 6;
-			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
-				repeats = 8;
-			}
-			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
-				repeats = 10;
-			}
-		}
+		var repeats:int = omnicasterRepeatCount();
 		while (repeats-->0) {
 			damageFn(damage, true, display || displayDamageOnly);
 		}

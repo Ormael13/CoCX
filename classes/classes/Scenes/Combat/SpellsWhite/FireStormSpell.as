@@ -32,7 +32,7 @@ public class FireStormSpell extends AbstractWhiteSpell{
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
-		var baseDamage:Number = scalingBonusIntelligence(randomize)*3;
+		var baseDamage:Number = scalingBonusIntelligence(randomize)*6;
 		return adjustSpellDamage(baseDamage,DamageType.FIRE,CAT_SPELL_WHITE,monster);
 	}
 	
@@ -48,6 +48,7 @@ public class FireStormSpell extends AbstractWhiteSpell{
 		}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.FIRE);
+		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
