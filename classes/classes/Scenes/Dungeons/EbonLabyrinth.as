@@ -823,7 +823,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function doSleepEL():void {
 			if (rand(2) == 0) {
 				clearOutput();
-				cheatTime2(15);
+				eachMinuteCount(15);
 				outputText("You ready your bedroll and go to sleep, keen on continuing your exploration tomorrow. Sadly as you prepare to lay down, a creature from the labyrinth stumbles upon your makeshift camp and you are forced to defend yourself.\n");
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				nightAmbushRuletteEL();
@@ -892,10 +892,10 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				HPChange((timeQ * hpRecovery * multiplier), false);
 				fatigue( -(timeQ * fatRecovery * multiplier));
 				model.time.hours += timeQ;
-				SceneLib.combat.regeneration(false);
-				if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
-				if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
-				SceneLib.combat.wrathregeneration(false);
+				SceneLib.combat.regeneration1(false);
+				if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration1(false);
+				if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration1(false);
+				SceneLib.combat.wrathregeneration1(false);
 				if (model.time.hours > 23) {
 					model.time.hours -= 24;
 					/*CoC.instance.*/model.time.days++;

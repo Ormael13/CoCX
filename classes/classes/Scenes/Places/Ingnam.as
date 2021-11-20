@@ -139,7 +139,7 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			if (rand(4) == 0) {
 				outputText("You explore the village of Ingnam for a while but you don't find anything intersting.");
-				cheatTime2(15);
+				eachMinuteCount(15);
 				doNext(camp.doCamp);
 			}
 			else thiefScene.encounterThief();

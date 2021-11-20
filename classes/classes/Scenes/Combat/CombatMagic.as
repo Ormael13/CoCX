@@ -716,6 +716,16 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		return whiteLustCap;
 	}
+
+	private function omnicasterMutliForReflectDmgAndAchievments():Number {
+		var omfrdaa:Number = 1;
+		omfrdaa += 0.2;
+		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) omfrdaa += 0.4;
+		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) omfrdaa += 0.4;
+		if (player.hasPerk(MutationsLib.GazerEyeEvolved)) omfrdaa *= 2.5;
+		else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) omfrdaa *= 1.5;
+		return omfrdaa;
+	}
 	
 	public function perkRelatedDurationBoosting():Number {
 		var perkRelatedDB:Number = 0;
@@ -2817,6 +2827,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2940,6 +2951,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -3157,6 +3169,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -3278,6 +3291,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -4027,6 +4041,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -4061,7 +4076,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		player.createStatusEffect(StatusEffects.CooldownSpellIceRain, spellBlackTier2Cooldown(), 0, 0, 0);
 		outputText("You narrow your eyes, focusing on the force of your lust as you narrow your eyes with deadly intent. A dark cloud coalesces above you, stretching further until there is nothing but an eerie darkness above you. You narrow your gaze at  " + monster.a + monster.short + " as countless razor-like shards of ice rain upon your opponent.\n");
-		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 3 * combat.iceDamageBoostedByDao();
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 6 * combat.iceDamageBoostedByDao();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -4120,6 +4135,7 @@ public class CombatMagic extends BaseCombatContent {
 		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -4251,6 +4267,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("\n\n" + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
+			if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 			checkAchievementDamage(damage);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -4408,6 +4425,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -4677,7 +4695,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		player.createStatusEffect(StatusEffects.CooldownSpellFireStorm, spellWhiteTier2Cooldown(), 0, 0, 0);
 		outputText("You narrow your eyes, focusing your own willpower with a deadly intent. You cojure a small vortex of embers that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at " + monster.a + monster.short + ". You intend to leave nothing but ashes!\n");
-		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 3 * combat.fireDamageBoostedByDao();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * 6 * combat.fireDamageBoostedByDao();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -4735,6 +4753,7 @@ public class CombatMagic extends BaseCombatContent {
 		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -4754,9 +4773,9 @@ public class CombatMagic extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
-			var meteor:Number = 11;
+			var meteor:Number = 12;
 			while (meteor-->0){
-				var damage:Number = scalingBonusIntelligence() * spellModWhite() * 3 * combat.fireDamageBoostedByDao();
+				var damage:Number = scalingBonusIntelligence() * spellModWhite() * 2 * combat.fireDamageBoostedByDao();
 				//Determine if critical hit!
 				//High damage to goes.
 				damage = calcInfernoMod(damage);
@@ -4812,8 +4831,9 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.\n\n");
 			MagicAddonEffect();
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-			damage *= 10;
+			damage *= 12;
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 			checkAchievementDamage(damage);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -5262,6 +5282,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -5331,6 +5352,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -5439,6 +5461,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -5564,6 +5587,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -5635,6 +5659,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -5742,6 +5767,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		if (player.hasPerk(PerkLib.Omnicaster)) damage *= omnicasterMutliForReflectDmgAndAchievments();
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);

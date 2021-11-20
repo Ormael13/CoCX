@@ -166,8 +166,8 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] < 1) flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.TEMPORAL_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) cheatTime2(5);
-			else cheatTime2(10);
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) eachMinuteCount(5);
+			else eachMinuteCount(10);
 		}
 		public function makeTemporalStoneGolems():void {
 			clearOutput();
@@ -193,7 +193,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a complex seal on the ground with 5 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
 			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 5;
 			doNext(accessMakeWinionsMainMenu);
-			cheatTime2(20);
+			eachMinuteCount(20);
 		}
 		public function makePermanentStoneGolem():void {
 			clearOutput();
@@ -226,7 +226,7 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] < 1) flags[kFLAGS.PERMANENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.PERMANENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			cheatTime2(20);
+			eachMinuteCount(20);
 		}
 		public function makePermanentImprovedStoneGolem():void {
 			clearOutput();
@@ -260,7 +260,7 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] < 1) flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			cheatTime2(60);
+			eachMinuteCount(60);
 		}
 
 		public function putInGolemCoreIntoGolemBag():void {
@@ -1392,7 +1392,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function summonElementalAirEpic():void {
 			clearOutput();
@@ -1470,7 +1470,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 2, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 0, 1, 0, 0);
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		
 		private function rankUpElementalAir():void {
@@ -1488,7 +1488,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
@@ -1505,7 +1505,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
@@ -1522,7 +1522,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
@@ -1539,7 +1539,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalIce():void {
 			clearOutput();
@@ -1556,7 +1556,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalLightning():void {
 			clearOutput();
@@ -1573,7 +1573,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalDarkness():void {
 			clearOutput();
@@ -1590,7 +1590,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalWood():void {
 			clearOutput();
@@ -1607,7 +1607,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalMetal():void {
 			clearOutput();
@@ -1624,7 +1624,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalEther():void {
 			clearOutput();
@@ -1641,7 +1641,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalPoison():void {
 			clearOutput();
@@ -1658,7 +1658,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalPurity():void {
 			clearOutput();
@@ -1675,7 +1675,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalCorruption():void {
 			clearOutput();
@@ -1692,7 +1692,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalManaCost():Number {
 			var rankUpElementalManaCost:Number = 100;
@@ -1811,7 +1811,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Warrior, ready to fight things and do anything your finger will request.");
 			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 2, 1);
 			doNext(accessMakeSkeletonWinionsMainMenu);
-			cheatTime2(10);
+			eachMinuteCount(10);
 		}
 		public function createSkeletonArcher():void {
 			clearOutput();
@@ -1826,7 +1826,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Archer, ready to fight things and do anything your finger will request.");
 			player.addPerkValue(PerkLib.GreaterHarvest, 1, 1);
 			doNext(accessMakeSkeletonWinionsMainMenu);
-			cheatTime2(10);
+			eachMinuteCount(10);
 		}
 		public function createSkeletonMage():void {
 			clearOutput();
@@ -1841,7 +1841,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Mage, ready to fight things and do anything your finger will request.");
 			player.addPerkValue(PerkLib.GreaterHarvest, 2, 1);
 			doNext(accessMakeSkeletonWinionsMainMenu);
-			cheatTime2(10);
+			eachMinuteCount(10);
 		}
 	}
-}
+}

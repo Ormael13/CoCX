@@ -10,6 +10,7 @@ import classes.internals.SaveableState;
 
 	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 	{
+		public static var TyraniaAlive:Boolean;
 		public static var TyrantiaTalks:Number;
 		public static var TyrantiaAffectionMeter:Number;
 		public static var TyrantiaFollowerStage:Number;
@@ -19,6 +20,7 @@ import classes.internals.SaveableState;
 		}
 
 		public function resetState():void {
+			TyraniaAlive = true;
 			TyrantiaTalks = 0;
 			TyrantiaAffectionMeter = 0;
 			TyrantiaFollowerStage = 0;
@@ -26,6 +28,7 @@ import classes.internals.SaveableState;
 
 		public function saveToObject():Object {
 			return {
+				"TyraniaAlive": TyraniaAlive,
 				"TyrantiaTalks": TyrantiaTalks,
 				"TyrantiaAffectionMeter": TyrantiaAffectionMeter,
 				"TyrantiaFollowerStage": TyrantiaFollowerStage
@@ -34,6 +37,7 @@ import classes.internals.SaveableState;
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
+				TyraniaAlive = o["TyraniaAlive"];
 				TyrantiaTalks = o["TyrantiaTalks"];
 				TyrantiaAffectionMeter = o["TyrantiaAffectionMeter"];
 				TyrantiaFollowerStage = o["TyrantiaFollowerStage"];
@@ -100,7 +104,7 @@ public function firstEncounterYesHideSurrender():void {
 	outputText("and dodges to one side as another golem comes hurtling through the space her upper body had been in before. She grabs it before it can hit you, spinning the hundreds of pounds of stone like a toy before slamming it into the ground, where it shatters.\n\n");
 	outputText("She looks at the golem leg in her hands, looks at you, looks back at the leg...then shrugs. \"<i>Okay, fair enough. Stupid thing wanted to hit you too.</i>\" A demon incubus claws his way out of the ruins, but the spider-giant turns, whipping the golem’s arm at the creature. It crushes the luckless demon’s skull, and she turns back to you, completely unphased.\n\n");
 	outputText("\"<i>So...who are you?</i>\" You tell her your name, that you’re a champion from Ignam, and that you’re no fan of demons either. \"<i>No Kiddin’? Well shit. Name’s Tyrantia. Sorry. I’m a bit busy right now, so why don’t you come back another time, and we’ll get a fresh start, okay?</i>\"\n\n");
-	tyraniaAffection2(5);
+	//tyraniaAffection2(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHiding():void {
@@ -115,7 +119,7 @@ public function firstEncounterYesNoHidingDunno():void {
 	clearOutput();
 	outputText("You shrug, not really knowing why you’d do that. She looks at you, dumbfounded, for a second, before bursting into uproarious laughter. A bit of black energy pulses around her, making your cheeks flush, but the laughter dies down quickly. \"<i>Y’know, for a little "+player.mf("guy","gal")+", you have some balls.</i>\" ");
 	outputText("You tell her that you’re [name], a Champion from Ignam, but she wheels about. A single demon crawls out from underneath a pillar and she turns, running after him. \"<i>Hey, I’ll talk to you another time!</i>\"\n\n");
-	tyraniaAffection2(5);
+	//tyraniaAffection2(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHidingTPolice():void {
@@ -126,7 +130,7 @@ public function firstEncounterYesNoHidingTPolice():void {
 	outputText("\"<i>Y’know, you cost me a bounty, shorty.</i>\" She reaches down, ruffling your [hair], \"<i>But I’m not even mad. That was fucking hilarious. I’m Tyrantia, but who are you?</i>\"\n\n");
 	outputText("You tell her that you’re [name], a champion from Ignam, and her five functioning eyes light up. \"<i>Oh?</i>\" She gives you a slap on the back. \"<i>Well, you’ve gotta show me what you can do sometime.</i>\" She sobers up a bit. ");
 	outputText("\"<i>But not today. I need to find me another demon to fight, and you, "+player.mf("mister","miss")+" ‘titty police’ should find someone else to arrest</i>\" She picks up her spear, giving you a sarcastic salute before striding away.\n\n");
-	tyraniaAffection2(10);
+	//tyraniaAffection2(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHidingFight():void {
@@ -156,7 +160,7 @@ public function postFightOptions(hpVictory:Boolean):void {
 	menu();
 	addButton(1, "Heal", postFightOptionsHeal);
 	addButton(2, "Kiss", postFightOptionsKiss);
-	addButton(3, "Rape", postFightOptionsRape);
+	//addButton(3, "Rape", postFightOptionsRape);
 	addButton(4, "Leave", postFightOptionsLeave);
 }
 public function postFightOptionsHeal():void {
@@ -173,7 +177,7 @@ public function postFightOptionsHealNicePerson():void {
 	outputText("You tell her that you didn’t want to hurt her, or leave her unable to defend herself.\n\n");
 	outputText("\"<i>...Who says I can’t fight?</i>\" You stifle your response, turning back towards her other injuries. After about an hour, she stands, looking down at you with a conflicted look on her face.");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	tyraniaAffection2(6);
+	//tyraniaAffection2(6);
 	cleanupAfterCombat();
 }
 public function postFightOptionsHealSex():void {
@@ -181,7 +185,7 @@ public function postFightOptionsHealSex():void {
 	outputText("You tell her that there are plenty of demons who’d love to get their hands on her body, and that you’d rather keep her to yourself.\n\n");
 	outputText("\"<i>Horndog,</i>\" she complains. \"<i>...Thank you, I guess.</i>\" After about an hour, she stands, looking down at you with a conflicted look on her face. ");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	tyraniaAffection2(3);
+	//tyraniaAffection2(3);
 	cleanupAfterCombat();
 }
 public function postFightOptionsKiss():void {
@@ -202,20 +206,20 @@ public function postFightOptionsKiss():void {
 	else {
 		outputText("\"<i>Look, [name], I...Don’t want this, no offense.</i>\" She tries to push back, and you back away. \"<i>Thanks. Look, I’ll be fine. I’ve got shit to do, and…</i>\" She tries to rise, unsuccessfully, and glares at you. \"<i>Just let me be.</i>\"\n\n");
 		outputText("You decide to leave the Drider Giantess alone, and give her a gentle goodbye as you head back to camp.\n\n");
-		tyraniaAffection2(2);
+		//tyraniaAffection2(2);
 		cleanupAfterCombat();
 	}
 }
 public function postFightOptionsKissStop():void {
 	outputText("She sighs in relief, none of her eyes meeting yours. \"<i>Look…[name]. I...I have...Reasons for pushing you away. I’m sorry, I just…</i>\" The giantess looks close to tears, and you find yourself staring at her eyes. ");
 	outputText("\"<i>Don’t look at me like that. It’s not you. Marae knows it’s not you.</i>\" She lies there, still, and for a while, says and does nothing while several waves of black energy pours from her horn.\n\n");
-	tyraniaAffection2(4);
+	//tyraniaAffection2(4);
 	cleanupAfterCombat();
 }
 public function postFightOptionsKissKeepGoing():void {
 	outputText("You tell her that whatever’s wrong, she can tell you. You kiss her again, and she pushes you away, this time strong enough to dislodge you. She tries to stand, to stagger away, roaring in anger. \"<i>Weak! Stupid!</i>\" She falls again, staying down. ");
 	outputText("\"<i>Just LEAVE ME BE!</i>\" She blindly fires a black web at you, missing by a mile. You decide it’s time to leave, and the sobbing giant’s tears fade away behind you as you walk back towards camp.\n\n");
-	tyraniaAffection2(-2);
+	//tyraniaAffection2(-2);
 	cleanupAfterCombat();
 }
 public function postFightOptionsRape():void {
@@ -239,19 +243,101 @@ public function repeatEncounterBattlefield():void {
 	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
+public function repeatEncounterBattlefieldRe():void {
+	clearOutput();
+	outputText("\"<i>Just a WiP text until something would get written for here.</i>\"\n\n");
+	menu();
+	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
+	addButton(4, "Leave", camp.returnToCampUseOneHour);
+}
 public function repeatEncounterBattlefieldTalk():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
 	menu();
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	//0 - Lab
+	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
+	//2 - Fighting Style
+	//3 - Kiha
+	//4 - Diva
+	//5 - Her
+	addButton(14, "Back", repeatEncounterBattlefieldRe);
 }
-public function repeatEncounterBattlefieldTalk1():void {
+public function repeatEncounterBattlefieldTalkLab():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
 	//affection gains
 	doNext(camp.returnToCampUseOneHour);
 }
-public function repeatEncounterBattlefieldTalk2():void {
+public function repeatEncounterBattlefieldTalkSelf():void {
+	clearOutput();
+	outputText("You ask the Drider-Giant what she thinks of you. She tilts her head, folding her legs underneath her. \"<i>Well...You’re fairly small, but strong. I like that. You’re unafraid to fight for what you believe in, and you have no fear of demons or corruption.</i>\" She looks down and away. \"<i>You’re a stand-up person, [name], and don’t forget it.</i>\"\n\n");
+	outputText("You thank Tyrantia for her kind words, and take your leave.\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkFightingStyle():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	//affection gains
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkKiha():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	//affection gains
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkDiva():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	//affection gains
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHer():void {
+	clearOutput();
+	outputText("\"<i>Okay...Don’t think I’m that interesting, but...whatever. What do ya wanna know?</i>\"\n\n");
+	menu();
+	//0 - Life Before Demons
+	addButton(1, "NoHerm?", repeatEncounterBattlefieldTalkHerNoHerm);
+	//2 - Life on the Battlefield
+	addButton(3, "Different Parts", repeatEncounterBattlefieldTalkHerDifferentParts);
+	//4 - Goblin
+	//5 - Kids
+	addButton(14, "Back", repeatEncounterBattlefieldTalk);
+}
+public function repeatEncounterBattlefieldTalkHerLifeBeforeDemons():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	//affection gains
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHerNoHerm():void {
+	clearOutput();
+	outputText("\"<i>...Herms were almost unheard of before the Demons came.</i>\" She looks down at herself. \"<i>I...of all the insane shit I’ve had to deal with...At least I didn’t become one of them.</i>\" \"<i>Not that there’s anything wrong with that, but...I like not having a second head, y’know?</i>\" She looks at her spear, rolling her eyes. \"<i>Well...A third head.</i>\"\n\n");
+	outputText("You grin, cracking a joke about how she still waves her Dick around, and she gives you a laugh, her eyes glistening. \"<i>Okay, ya got me there.</i>\" She rubs the shaft with one finger, the hair on her arms standing up. \"<i>Demons and imps run more often if you run at them screaming ‘I’m gonna shove m’dick down your throat!’, then if you threaten to kill them. Fucking Crazy, the lot of them!</i>\"\n\n");
+	outputText("She laughs, but you notice that the laughter doesn’t quite reach her eyes. You idly chat with your Drider comrade for a while, and when you leave, she seems a bit happier than before.\n\n");
+	//tyraniaAffection(2);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	//affection gains
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHerDifferentParts():void {
+	clearOutput();
+	outputText("You ask about her non-spider parts, and Tyrantia sighs, her horse-ears folding. \"<i>Look, it’s not something I like to discuss. Suffice to say, Demons happened. I trust you not to fuck me when I’m not with it, but…</i>\" She looks down, glaring at the ground, and whispers, so low you can barely make it out. \"<i>I can’t…</i>\"\n\n");
+	outputText("You apologize to your Drider friend, patting her leg sympathetically. You tell her that if she isn’t comfortable with it, you won’t pry. You give her leg a hug before heading back to camp.\n\n");
+	//tyraniaAffection(5);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHerGoblin():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	//affection gains
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHerKids():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
 	//affection gains

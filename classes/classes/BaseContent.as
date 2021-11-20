@@ -44,6 +44,10 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.cheatTime2(time, needNext);
 		}
+		protected function eachMinuteCount(time:Number, needNext:Boolean = false):void
+		{
+			EventParser.eachMinuteCount(time, needNext);
+		}
 		/*protected function incrementDay(time:Number):void
 		{
 			CoC.instance.incrementDay(time);

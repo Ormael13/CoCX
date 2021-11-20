@@ -281,7 +281,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 0) EvangelineTalks = 1;
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 private function TalkDemons():void {
 	clearOutput();
@@ -293,7 +293,7 @@ private function TalkDemons():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 1) EvangelineTalks = 2;
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 private function TalkPastLife1():void {
 	clearOutput();
@@ -309,7 +309,7 @@ private function TalkPastLife1():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 2) EvangelineTalks = 3;
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 private function TalkYourFather():void {
 	clearOutput();
@@ -324,7 +324,7 @@ private function TalkYourFather():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 3) EvangelineTalks = 4;
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }/*
 private function TalkPastLife2():void {
 	clearOutput();
@@ -333,7 +333,7 @@ private function TalkPastLife2():void {
 	evangelineAffection(1);zajmie miejsce PastTalk1 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 private function TalkPastLife3():void {
 	clearOutput();
@@ -341,7 +341,7 @@ private function TalkPastLife3():void {
 	evangelineAffection(1);zajmie miejsce PastTalk2 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 private function TalkYourEyes():void {
 	clearOutput();
@@ -349,7 +349,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 4) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 private function TalkYourEyes():void {
 	clearOutput();
@@ -357,7 +357,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 5) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 private function TalkYourEyes():void {
 	clearOutput();
@@ -365,7 +365,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 6) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 */
 private function evangelineSexMenu():void {
@@ -921,7 +921,7 @@ private function curingWendigo():void {
 		outputText("\"<i>Look, I will need five pure peaches and five purity philters to fix this up, how you get the two is up to you.</i>\"\n\n");
 		player.addPerkValue(PerkLib.WendigoCurse, 1, 1);
 		doNext(camp.campFollowers);
-		cheatTime2(15);
+		eachMinuteCount(15);
 	}
 }
 
@@ -1001,7 +1001,7 @@ private function curingJiangshi():void {
 		outputText("\"<i>Look, I will need five vitality tinctures and five purity philters to fix this up, how you get the two is up to you.</i>\"\n\n");
 		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
 		doNext(camp.campFollowers);
-		cheatTime2(15);
+		eachMinuteCount(15);
 	}
 }
 
@@ -1280,7 +1280,7 @@ private function InternalMutations0(page:int = 0):void {
 		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
 		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your " + partSwap + " as it slowly changes to acquire new inhuman property. The transformation was successful. You now have "+ perkTier.name() +"!");
 		player.createPerk(perkTier, 0, 0, 0, 0);
-		cheatTime2(30);
+		eachMinuteCount(30);
 		doNext(InternalMutations);
 	}
 }
