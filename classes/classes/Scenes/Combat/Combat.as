@@ -2039,7 +2039,7 @@ public class Combat extends BaseContent {
 					fatigueRecovery1();
 					manaregeneration1();
 					soulforceregeneration1();
-					venomCombatRecharge();
+					venomCombatRecharge1();
 					enemyAI();
 				}
 			}
@@ -2257,7 +2257,7 @@ public class Combat extends BaseContent {
         fatigueRecovery1();
         manaregeneration1();
         soulforceregeneration1();
-		venomCombatRecharge();
+		venomCombatRecharge1();
         enemyAI();
     }
 
@@ -4356,7 +4356,7 @@ public class Combat extends BaseContent {
             fatigueRecovery1();
             manaregeneration1();
             soulforceregeneration1();
-			venomCombatRecharge();
+			venomCombatRecharge1();
         }
         enemyAI();
     }
@@ -4371,7 +4371,7 @@ public class Combat extends BaseContent {
         fatigueRecovery1();
         manaregeneration1();
         soulforceregeneration1();
-		venomCombatRecharge();
+		venomCombatRecharge1();
         enemyAI();
     }
 
@@ -5916,7 +5916,7 @@ public class Combat extends BaseContent {
         fatigueRecovery1();
         manaregeneration1();
         soulforceregeneration1();
-		venomCombatRecharge();
+		venomCombatRecharge1();
         enemyAI();
     }
 
@@ -6168,7 +6168,7 @@ public class Combat extends BaseContent {
         fatigueRecovery1();
         manaregeneration1();
         soulforceregeneration1();
-		venomCombatRecharge();
+		venomCombatRecharge1();
     }
 
     public function LustyEnergyNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, stunChance:Number = 10):void {
@@ -10807,70 +10807,101 @@ public class Combat extends BaseContent {
 		return wrathregen*BonusWrathMult;
     }
 
-    public function venomCombatRecharge():void {
-        player.tailVenom += venomCombatRecharge2();
+	public function venomCombatRechargeInfo():Number {
+        var venomRecharge:Number = 0;
+		venomRecharge += venomCombatRecharge2();
+		if (player.hasPerk(PerkLib.HighlyVenomousDiet) && player.maxVenom() > 0) {
+			if (player.maxHunger() > 1600) venomRecharge += 27.5;
+			else if (player.maxHunger() > 800) venomRecharge += 22.5;
+			else if (player.maxHunger() > 400) venomRecharge += 17.5;
+			else if (player.maxHunger() > 200) venomRecharge += 12.5;
+			else if (player.maxHunger() > 100) venomRecharge += 7.5;
+			else venomRecharge += 2.5;
+		}
+		venomRecharge = Math.round(venomRecharge * 0.2);
+		return venomRecharge;
+    }
+	public function venomCombatRecharge(minutes:Number = 1):void {
+        var venomRecharge:Number = 0;
+		venomRecharge += venomCombatRecharge2();
+		if (player.hasPerk(PerkLib.HighlyVenomousDiet) && player.maxVenom() > 0) {
+			if (player.maxHunger() > 1600) venomRecharge += 27.5;
+			else if (player.maxHunger() > 800) venomRecharge += 22.5;
+			else if (player.maxHunger() > 400) venomRecharge += 17.5;
+			else if (player.maxHunger() > 200) venomRecharge += 12.5;
+			else if (player.maxHunger() > 100) venomRecharge += 7.5;
+			else venomRecharge += 2.5;
+		}
+		venomRecharge = Math.round(venomRecharge * 0.04 * minutes);
+		player.tailVenom += venomRecharge;
+		if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
+    }
+	public function venomCombatRecharge1():void {
+        player.tailVenom += venomCombatRecharge2() * 2;
 		if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
     }
 	public function venomCombatRecharge2():Number {
 		var venomCRecharge:Number = 0;
-        venomCRecharge += player.tailRecharge;
-		if (venomCRecharge < 2.5) venomCRecharge = 5;
-		if (player.hasPerk(PerkLib.ImprovedVenomGland)) venomCRecharge += 2.5;
-		if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) venomCRecharge += 7.5;
-		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) venomCRecharge += 22.5;
-		if (player.hasPerk(MutationsLib.VenomGlandsPrimitive)) venomCRecharge += 1;
-		if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) venomCRecharge += 4;
-		if (player.hasPerk(PerkLib.VenomousDiet)) {
-			if (player.hunger > 1400) venomCRecharge += 15;
-			else if (player.hunger > 1200) venomCRecharge += 14;
-			else if (player.hunger > 1000) venomCRecharge += 13;
-			else if (player.hunger > 900) venomCRecharge += 12;
-			else if (player.hunger > 800) venomCRecharge += 11;
-			else if (player.hunger > 700) venomCRecharge += 10;
-			else if (player.hunger > 600) venomCRecharge += 9;
-			else if (player.hunger > 500) venomCRecharge += 8;
-			else if (player.hunger > 400) venomCRecharge += 7;
-			else if (player.hunger > 300) venomCRecharge += 6;
-			else if (player.hunger > 200) venomCRecharge += 5;
-			else if (player.hunger > 150) venomCRecharge += 4;
-			else if (player.hunger > 100) venomCRecharge += 3;
-			else if (player.hunger > 50) venomCRecharge += 2;
-			else venomCRecharge += 1;
+		if (player.maxVenom() > 0) {
+			venomCRecharge += player.tailRecharge;
+			if (venomCRecharge < 2.5) venomCRecharge = 5;
+			if (player.hasPerk(PerkLib.ImprovedVenomGland)) venomCRecharge += 2.5;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) venomCRecharge += 7.5;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) venomCRecharge += 22.5;
+			if (player.hasPerk(MutationsLib.VenomGlandsPrimitive)) venomCRecharge += 1;
+			if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) venomCRecharge += 4;
+			if (player.hasPerk(PerkLib.VenomousDiet)) {
+				if (player.hunger > 1400) venomCRecharge += 15;
+				else if (player.hunger > 1200) venomCRecharge += 14;
+				else if (player.hunger > 1000) venomCRecharge += 13;
+				else if (player.hunger > 900) venomCRecharge += 12;
+				else if (player.hunger > 800) venomCRecharge += 11;
+				else if (player.hunger > 700) venomCRecharge += 10;
+				else if (player.hunger > 600) venomCRecharge += 9;
+				else if (player.hunger > 500) venomCRecharge += 8;
+				else if (player.hunger > 400) venomCRecharge += 7;
+				else if (player.hunger > 300) venomCRecharge += 6;
+				else if (player.hunger > 200) venomCRecharge += 5;
+				else if (player.hunger > 150) venomCRecharge += 4;
+				else if (player.hunger > 100) venomCRecharge += 3;
+				else if (player.hunger > 50) venomCRecharge += 2;
+				else venomCRecharge += 1;
+			}
+			if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
+				if (player.maxHunger() > 1600) venomCRecharge += 2.5;
+				else if (player.maxHunger() > 800) venomCRecharge += 2.5;
+				else if (player.maxHunger() > 400) venomCRecharge += 2.5;
+				else if (player.maxHunger() > 200) venomCRecharge += 2.5;
+				else if (player.maxHunger() > 100) venomCRecharge += 2.5;
+				else venomCRecharge += 2.5;
+			}
+			if (player.hasPerk(PerkLib.VenomousAdiposeTissue)) {
+				if (player.tou > 20000) venomCRecharge += 10;
+				else if (player.tou > 10000) venomCRecharge += 9;
+				else if (player.tou > 5000) venomCRecharge += 8;
+				else if (player.tou > 2000) venomCRecharge += 7;
+				else if (player.tou > 1000) venomCRecharge += 6;
+				else if (player.tou > 500) venomCRecharge += 5;
+				else if (player.tou > 200) venomCRecharge += 4;
+				else if (player.tou > 100) venomCRecharge += 3;
+				else if (player.tou > 50) venomCRecharge += 2;
+				else venomCRecharge += 1;
+				if (player.thickness > 150) venomCRecharge += 10;
+				else if (player.thickness > 100) venomCRecharge += 7.5;
+				else if (player.thickness > 50) venomCRecharge += 5;
+				else venomCRecharge += 2.5;
+			}
+			if (player.faceType == Face.SNAKE_FANGS) venomCRecharge += 2;
+			if (player.faceType == Face.SPIDER_FANGS) venomCRecharge += 2;
+			if (player.tailType == Tail.BEE_ABDOMEN) venomCRecharge += 3;
+			if (player.tailType == Tail.SPIDER_ADBOMEN) venomCRecharge += 3;
+			if (player.tailType == Tail.SCORPION) venomCRecharge += 3;
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) venomCRecharge += 4;
+			if (player.lowerBody == LowerBody.HYDRA) venomCRecharge += 4;
+			if (player.lowerBody == LowerBody.ATLACH_NACHA) venomCRecharge *= 2;
+			if (player.hasPerk(PerkLib.AxillaryVenomGlands)) venomCRecharge *= 2;
+			venomCRecharge = Math.round(venomCRecharge);
 		}
-		if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
-			if (player.maxHunger() > 1600) venomCRecharge += 2.5;
-			else if (player.maxHunger() > 800) venomCRecharge += 2.5;
-			else if (player.maxHunger() > 400) venomCRecharge += 2.5;
-			else if (player.maxHunger() > 200) venomCRecharge += 2.5;
-			else if (player.maxHunger() > 100) venomCRecharge += 2.5;
-			else venomCRecharge += 2.5;
-		}
-		if (player.hasPerk(PerkLib.VenomousAdiposeTissue)) {
-			if (player.tou > 20000) venomCRecharge += 10;
-			else if (player.tou > 10000) venomCRecharge += 9;
-			else if (player.tou > 5000) venomCRecharge += 8;
-			else if (player.tou > 2000) venomCRecharge += 7;
-			else if (player.tou > 1000) venomCRecharge += 6;
-			else if (player.tou > 500) venomCRecharge += 5;
-			else if (player.tou > 200) venomCRecharge += 4;
-			else if (player.tou > 100) venomCRecharge += 3;
-			else if (player.tou > 50) venomCRecharge += 2;
-			else venomCRecharge += 1;
-			if (player.thickness > 150) venomCRecharge += 10;
-			else if (player.thickness > 100) venomCRecharge += 7.5;
-			else if (player.thickness > 50) venomCRecharge += 5;
-			else venomCRecharge += 2.5;
-		}
-		if (player.faceType == Face.SNAKE_FANGS) venomCRecharge += 2;
-		if (player.faceType == Face.SPIDER_FANGS) venomCRecharge += 2;
-		if (player.tailType == Tail.BEE_ABDOMEN) venomCRecharge += 3;
-		if (player.tailType == Tail.SPIDER_ADBOMEN) venomCRecharge += 3;
-		if (player.tailType == Tail.SCORPION) venomCRecharge += 3;
-		if (player.tailType == Tail.MANTICORE_PUSSYTAIL) venomCRecharge += 4;
-		if (player.lowerBody == LowerBody.HYDRA) venomCRecharge += 4;
-		if (player.lowerBody == LowerBody.ATLACH_NACHA) venomCRecharge *= 2;
-		if (player.hasPerk(PerkLib.AxillaryVenomGlands)) venomCRecharge *= 2;
-		venomCRecharge = Math.round(venomCRecharge);
 		return venomCRecharge;
 	}
 
@@ -12454,7 +12485,7 @@ public class Combat extends BaseContent {
             fatigueRecovery1();
             manaregeneration1();
             soulforceregeneration1();
-			venomCombatRecharge();
+			venomCombatRecharge1();
             var damage:Number;
             var chance:Number;
             var bimbo:Boolean = false;
@@ -12667,7 +12698,7 @@ public class Combat extends BaseContent {
             fatigueRecovery1();
             manaregeneration1();
             soulforceregeneration1();
-			venomCombatRecharge();
+			venomCombatRecharge1();
             var damage:Number;
             var chance:Number;
             var bimbo:Boolean = false;
@@ -12806,7 +12837,7 @@ public class Combat extends BaseContent {
             fatigueRecovery1();
             manaregeneration1();
             soulforceregeneration1();
-			venomCombatRecharge();
+			venomCombatRecharge1();
             var damage:Number;
             var chance:Number;
             var bimbo:Boolean = false;
@@ -12998,7 +13029,7 @@ public class Combat extends BaseContent {
             fatigueRecovery1();
             manaregeneration1();
             soulforceregeneration1();
-			venomCombatRecharge();
+			venomCombatRecharge1();
             var damage:Number;
             var bimbo:Boolean = false;
             var bro:Boolean = false;
@@ -13110,7 +13141,7 @@ public class Combat extends BaseContent {
             fatigueRecovery1();
             manaregeneration1();
             soulforceregeneration1();
-			venomCombatRecharge();
+			venomCombatRecharge1();
             var damage:Number;
             var bimbo:Boolean = false;
             var bro:Boolean = false;
@@ -13222,7 +13253,7 @@ public class Combat extends BaseContent {
             fatigueRecovery1();
             manaregeneration1();
             soulforceregeneration1();
-			venomCombatRecharge();
+			venomCombatRecharge1();
             var damage:Number;
             var bimbo:Boolean = false;
             var bro:Boolean = false;

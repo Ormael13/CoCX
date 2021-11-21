@@ -171,11 +171,11 @@ package classes.Scenes
 			outputText("-Increase wood/stones (300 > 400, 900 > 1200) and nails (200 > 250, 600 > 750) storage sizes.\n");
 			outputText("-HB Mech can be only bought once now from Dinah after PC buy and have equipped HB armor and HB helmet.\n");
 			outputText("-HB Helmet height req. been increased to match the one for HB Armor or HB Mech: 7+ ft tall.\n");
-			outputText("-Tier 2 white/bl;ack magic spells dmg increased (from ~1,5x) to be roughly ~3x of tier 1 spells. Tier 3 spells power been normalized to both deal similar amount of dmg of ~12x dmg of tier 1 (that mean meteor shower spell lost 1/3 power to match dmg done by polar midnight).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Tier 2 white/black magic spells dmg increased (from ~1,5x) to be roughly ~3x of tier 1 spells. Tier 3 spells power been normalized to both deal similar amount of dmg of ~12x dmg of tier 1 (that mean meteor shower spell lost 1/3 power to match dmg done by polar midnight).\n");
+			outputText("-Resource generation been chganged from been given each hour to be given per minutes that passed (ofc that mean per minute PC in theory getting less resources but can't have tiem ingame progress by 1 minute only (least is 5 min progress). Player info page have updated amount generated per 5 min.\n");
+			outputText("-Due to option to ascend without starting harder ng+ game to perm Nine-tails Kitsune of Balance perk is req. additional thing: been on 2nd ascension (which increase difficulty of the game).\n");
+			outputText("-Inscribed Spellblade req. to finish 1st main storyline dungeon instead of 2nd.\n");
+			outputText("-Clearing out Factory can be achieved after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

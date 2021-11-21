@@ -274,7 +274,7 @@ public class MutationsLib
 		public static const NaturalPunchingBag:PerkType = mk("Natural punching bag", "Natural punching bag",
 				"Increases the damage reduction from Bouncy body by 5% and increase your natural toughness.").withBuffs({'tou.mult':0.05});
 		public static const NaturalPunchingBagPrimitive:PerkType = mk("Natural punching bag (Primitive)", "Natural punching bag (Primitive)",
-				"Oncreases the damage reduction from Bouncy body by 10%, continue to increase your natural toughness and healing items are more effective.").withBuffs({'tou.mult':0.10});
+				"Increases the damage reduction from Bouncy body by 10%, continue to increase your natural toughness and healing items are more effective.").withBuffs({'tou.mult':0.10});
 		public static const NaturalPunchingBagEvolved:PerkType = mk("Natural punching bag (Evolved)", "Natural punching bag (Evolved)",
 				"Increases the damage reduction from Bouncy body by 20%, continue to increase your natural toughness and healing/wrath/stat boosting items are more effective and allow to keep the effect of bouncy body as long as you are below 4 feet tall.").withBuffs({'tou.mult':0.20});
 		public static const NaturalPunchingBagFinalForm:PerkType = mk("Natural punching bag (Final Form)", "Natural punching bag (Final Form)",

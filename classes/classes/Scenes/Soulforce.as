@@ -4163,4 +4163,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}

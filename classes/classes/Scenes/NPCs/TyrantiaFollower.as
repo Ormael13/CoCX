@@ -10,7 +10,7 @@ import classes.internals.SaveableState;
 
 	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 	{
-		public static var TyraniaAlive:Boolean;
+		public static var TyraniaIsRemovedFromThewGame:Boolean;
 		public static var TyrantiaTalks:Number;
 		public static var TyrantiaAffectionMeter:Number;
 		public static var TyrantiaFollowerStage:Number;
@@ -20,7 +20,7 @@ import classes.internals.SaveableState;
 		}
 
 		public function resetState():void {
-			TyraniaAlive = true;
+			TyraniaIsRemovedFromThewGame = false;
 			TyrantiaTalks = 0;
 			TyrantiaAffectionMeter = 0;
 			TyrantiaFollowerStage = 0;
@@ -28,7 +28,7 @@ import classes.internals.SaveableState;
 
 		public function saveToObject():Object {
 			return {
-				"TyraniaAlive": TyraniaAlive,
+				"TyraniaIsRemovedFromThewGame": TyraniaIsRemovedFromThewGame,
 				"TyrantiaTalks": TyrantiaTalks,
 				"TyrantiaAffectionMeter": TyrantiaAffectionMeter,
 				"TyrantiaFollowerStage": TyrantiaFollowerStage
@@ -37,7 +37,7 @@ import classes.internals.SaveableState;
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-				TyraniaAlive = o["TyraniaAlive"];
+				TyraniaIsRemovedFromThewGame = o["TyraniaIsRemovedFromThewGame"];
 				TyrantiaTalks = o["TyrantiaTalks"];
 				TyrantiaAffectionMeter = o["TyrantiaAffectionMeter"];
 				TyrantiaFollowerStage = o["TyrantiaFollowerStage"];
@@ -241,6 +241,9 @@ public function repeatEncounterBattlefield():void {
 	outputText("You smile, chuckling at her embarrassment. \"<i>Sure, laugh it up, chucklehead.</i>\" Despite her words, she smiles, fangs out. As intimidating as her visage is, her smile is strangely wholesome, in a weird way. \"<i>Okay, what did you want, [name]? Don’t think you came out here for nothing.</i>\"\n\n");
 	menu();
 	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
+	//1 - Training
+	//2 - Spar
+	//3 - Sex
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldRe():void {
@@ -248,6 +251,9 @@ public function repeatEncounterBattlefieldRe():void {
 	outputText("\"<i>Just a WiP text until something would get written for here.</i>\"\n\n");
 	menu();
 	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
+	//1 - Training
+	//2 - Spar
+	//3 - Sex
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalk():void {

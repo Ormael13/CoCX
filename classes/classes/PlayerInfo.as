@@ -458,7 +458,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 		combatStats += "<b>Venom/Web:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
-		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + player.tailRecharge + " / hour\n";
+		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() * 2 + " / turn, +" + combat.venomCombatRechargeInfo() + " / 5 minutes\n";
 		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";

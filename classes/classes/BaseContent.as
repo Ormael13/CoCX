@@ -40,10 +40,6 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.cheatTime(time, needNext);
 		}
-		protected function cheatTime2(time:Number, needNext:Boolean = false):void
-		{
-			EventParser.cheatTime2(time, needNext);
-		}
 		protected function eachMinuteCount(time:Number, needNext:Boolean = false):void
 		{
 			EventParser.eachMinuteCount(time, needNext);

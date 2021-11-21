@@ -658,27 +658,6 @@ public class EventParser {
         }
         EngineCore.statScreenRefresh();
     }
-	public static function cheatTime2(time:Number, needNext:Boolean = false):void {
-        //Advance minutes
-        var minutesToPass:Number = time;
-        CoC.instance.model.time.minutes += minutesToPass;
-        if (CoC.instance.model.time.minutes > 59) {
-            CoC.instance.timeQ++;
-            CoC.instance.model.time.minutes -= 60;
-            if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
-        }
-        time = Math.floor(time);
-        //Advance hours
-        if (CoC.instance.timeQ > 0) {
-            CoC.instance.timeQ--;
-            CoC.instance.model.time.hours++;
-            if (CoC.instance.model.time.hours > 23) {
-                CoC.instance.model.time.days++;
-                CoC.instance.model.time.hours = 0;
-            }
-        }
-        EngineCore.statScreenRefresh();
-    }
 	public static function eachMinuteCount(time:Number, needNext:Boolean = false):void {
 		var minutesToPass:Number = time;
 		CoC.instance.model.time.minutes += minutesToPass;
@@ -687,6 +666,7 @@ public class EventParser {
 		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(minutesToPass);
 		SceneLib.combat.wrathregeneration(minutesToPass);
 		SceneLib.combat.fatigueRecovery(minutesToPass);
+		SceneLib.combat.venomCombatRecharge(minutesToPass);
 		if (CoC.instance.model.time.minutes > 59) {
             CoC.instance.timeQ++;
             CoC.instance.model.time.minutes -= 60;

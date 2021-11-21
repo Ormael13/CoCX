@@ -1844,4 +1844,4 @@ public class CampMakeWinions extends BaseContent
 			eachMinuteCount(10);
 		}
 	}
-}
+}

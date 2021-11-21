@@ -1195,7 +1195,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
-
 			//Armor unequip zone
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{
@@ -2024,10 +2023,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Cow bell
-			if (player.necklace == necklaces.COWBELL) {
-				if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
-				else player.statStore.replaceBuffObject({'str.mult':0.2,'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
-			}
+			if (player.necklace == necklaces.COWBELL && player.cowScore() >= 10 && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
+			if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
 			//Jiangshi cursed tag
 			if (player.headJewelry == headjewelries.JIANGCT && player.jiangshiScore() >= 20 && !player.statStore.hasBuff('Jiangshi Curse Tag')) player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			//Hot Spring

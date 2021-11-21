@@ -4264,7 +4264,6 @@ public function rebirthFromBadEnd():void {
 		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
 		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 3;
 		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkBeeHiveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePointsPrediction++;
@@ -5639,6 +5638,11 @@ public function rebirthFromBadEnd():void {
 				AdventurerGuild.Slot02Cap = 10;
 				AdventurerGuild.Slot03Cap = 10;
 				AdventurerGuild.Slot04Cap = 10;
+			}
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 2 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+				outputText(" Opps seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk pernamency will be nullified.");
+				player.setPerkValue(PerkLib.NinetailsKitsuneOfBalance, 4, 0);
+				player.ascensionPerkPoints += 5;
 			}
 			if (player.hasPerk(PerkLib.Rigidity)) jiangshiBuggedItemsCleanUpCrew();//LAST THING TO DO IN THIS SAVE UPDATE
 			doNext(doCamp);
