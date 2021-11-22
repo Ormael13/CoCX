@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Forest {
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 
 public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 
@@ -338,7 +339,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				case 2: //Whitefire
 					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					useMana(40, 5);//fatigue(20, USEFATG_MAGIC);
+					useMana(40, Combat.USEMANA_WHITE);//fatigue(20, USEFATG_MAGIC);
 					break;
 				case 3: //Axe
 					outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");

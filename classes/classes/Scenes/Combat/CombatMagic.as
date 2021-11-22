@@ -48,7 +48,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.Battlemage) && ((player.hasPerk(PerkLib.GreyMage) && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
-			useMana((50 * spellMightCostMultiplier()), 6);
+			useMana((50 * spellMightCostMultiplier()), Combat.USEMANA_BLACK);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
@@ -56,7 +56,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.Battleflash) && ((player.hasPerk(PerkLib.GreyMage) && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(40) * spellBlinkCostMultiplier()) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
-			useMana((40 * spellBlinkCostMultiplier()), 6);
+			useMana((40 * spellBlinkCostMultiplier()), Combat.USEMANA_BLACK);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 			spellPerkUnlock();
@@ -1950,21 +1950,21 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellMagicBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(40, 1);
+		useMana(40, Combat.USEMANA_MAGIC);
 		if(handleShell()){return;}
 		spellMagicBolt2();
 	}
 	public function spellElementalBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, 1);
+		useMana(80, Combat.USEMANA_MAGIC);
 		if(handleShell()){return;}
 		spellMagicBolt2();
 	}
 	public function spellEdgyMagicBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(40, 1);
+		useMana(40, Combat.USEMANA_MAGIC);
 		player.wrath -= 100;
 		if(handleShell()){return;}
 		spellMagicBolt2(true);
@@ -1972,7 +1972,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellEdgyElementalBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, 1);
+		useMana(80, Combat.USEMANA_MAGIC);
 		player.wrath -= 100;
 		if(handleShell()){return;}
 		spellMagicBolt2(true);
@@ -2053,7 +2053,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellArouse():void {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(20)) player.HP -= spellCostBlack(20);
-		else useMana(20,6);
+		else useMana(20,Combat.USEMANA_BLACK);
 		statScreenRefresh();
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -2154,7 +2154,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellRegenerate():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(50, 11);
+		useMana(50, Combat.USEMANA_BLACK_HEAL);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -2240,7 +2240,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < (50 * spellMightCostMultiplier())) player.HP -= (50 * spellMightCostMultiplier());
-		else useMana((50 * spellMightCostMultiplier()),6);
+		else useMana((50 * spellMightCostMultiplier()),Combat.USEMANA_BLACK);
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
 		var tempInt:Number = 0;
@@ -2324,7 +2324,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < (40 * spellBlinkCostMultiplier())) player.HP -= (40 * spellBlinkCostMultiplier());
-		else useMana((40 * spellBlinkCostMultiplier()),6);
+		else useMana((40 * spellBlinkCostMultiplier()),Combat.USEMANA_BLACK);
 		var tempSpe:Number = 0;
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -2370,7 +2370,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-		else useMana(40, 6);
+		else useMana(40, Combat.USEMANA_BLACK);
 		player.createStatusEffect(StatusEffects.CooldownSpellIceSpike,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
@@ -2397,7 +2397,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-		else useMana(40, 6);
+		else useMana(40, Combat.USEMANA_BLACK);
 		player.wrath -= 100;
 		player.createStatusEffect(StatusEffects.CooldownSpellIceSpikeEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
@@ -2497,7 +2497,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-		else useMana(40, 6);
+		else useMana(40, Combat.USEMANA_BLACK);
 		player.createStatusEffect(StatusEffects.CooldownSpellDarknessShard,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
@@ -2524,7 +2524,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-		else useMana(40, 6);
+		else useMana(40, Combat.USEMANA_BLACK);
 		player.wrath -= 100;
 		player.createStatusEffect(StatusEffects.CooldownSpellDarknessShardEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
@@ -2618,7 +2618,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellWaveOfEcstasy():void {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(100)) player.HP -= spellCostBlack(100);
-		else useMana(100,6);
+		else useMana(100,Combat.USEMANA_BLACK);
 		statScreenRefresh();
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -2716,7 +2716,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
-		else useMana(200,6);
+		else useMana(200,Combat.USEMANA_BLACK);
 		player.createStatusEffect(StatusEffects.CooldownSpellArcticGale,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
@@ -2740,7 +2740,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
-		else useMana(200, 6);
+		else useMana(200, Combat.USEMANA_BLACK);
 		player.wrath -= 100;
 		player.createStatusEffect(StatusEffects.CooldownSpellArcticGaleEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
@@ -2841,7 +2841,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
-		else useMana(200,6);
+		else useMana(200,Combat.USEMANA_BLACK);
 		player.createStatusEffect(StatusEffects.CooldownSpellDuskWave,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
@@ -2865,7 +2865,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
-		else useMana(200, 6);
+		else useMana(200, Combat.USEMANA_BLACK);
 		player.wrath -= 100;
 		player.createStatusEffect(StatusEffects.CooldownSpellDuskWaveEx,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
@@ -3179,7 +3179,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(750)) player.HP -= spellCostBlack(750);
-		else useMana(750, 9);
+		else useMana(750, Combat.USEMANA_MAGIC_HEAL);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3239,7 +3239,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(350)) player.HP -= spellCostBlack(350);
-		else useMana(350, 9);
+		else useMana(350, Combat.USEMANA_MAGIC_HEAL);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3296,7 +3296,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(400)) player.HP -= spellCostBlack(400);
-		else useMana(400, 9);
+		else useMana(400, Combat.USEMANA_MAGIC_HEAL);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3361,7 +3361,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(300)) player.HP -= spellCostBlack(300);
-		else useMana(300, 9);
+		else useMana(300, Combat.USEMANA_MAGIC_HEAL);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3418,7 +3418,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500)) player.HP -= spellCostWhite(500);
-		else useMana(500,5);
+		else useMana(500,Combat.USEMANA_WHITE);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3448,7 +3448,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(400)) player.HP -= spellCostWhite(400);
-		else useMana(400,5);
+		else useMana(400,Combat.USEMANA_WHITE);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3494,7 +3494,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(600)) player.HP -= spellCostWhite(600);
-		else useMana(600,5);
+		else useMana(600,Combat.USEMANA_WHITE);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3517,7 +3517,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(1200)) player.HP -= spellCostWhite(1200);
-		else useMana(1200,5);
+		else useMana(1200,Combat.USEMANA_WHITE);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3560,7 +3560,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(3000)) player.HP -= spellCostWhite(3000);
-		else useMana(3000,5);
+		else useMana(3000,Combat.USEMANA_WHITE);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3713,7 +3713,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(500)) player.HP -= spellCostBlack(500);
-		else useMana(500,6);
+		else useMana(500,Combat.USEMANA_BLACK);
 		if(handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -3804,7 +3804,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellNosferatu():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(50, 11);
+		useMana(50, Combat.USEMANA_BLACK_HEAL);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -3935,7 +3935,7 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			doNext(combatMenu);
 			if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(1250)) player.HP -= spellCostBlack(1250);
-			else useMana(1250,6);
+			else useMana(1250,Combat.USEMANA_BLACK);
 			if(handleShell()){return;}
 			//if (monster is Doppleganger)
 			//{
@@ -4115,7 +4115,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellClearMind():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(100, 9);
+		useMana(100, Combat.USEMANA_MAGIC_HEAL);
 		//30% backfire!
 		var backfire:int = 30;
 		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
@@ -4210,7 +4210,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(350)) player.HP -= spellCost(350);
-		else useMana(350, 1);
+		else useMana(350, Combat.USEMANA_MAGIC);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -4258,7 +4258,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(350)) player.HP -= spellCost(80);
-		else useMana(80, 9);
+		else useMana(80, Combat.USEMANA_MAGIC_HEAL);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -4305,7 +4305,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(500)) player.HP -= spellCost(500);
-		else useMana(500,1);
+		else useMana(500,Combat.USEMANA_MAGIC);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -4332,7 +4332,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(500)) player.HP -= spellCostWhite(500);
-		else useMana(500,5);
+		else useMana(500,Combat.USEMANA_WHITE);
 		if(handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -4424,7 +4424,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(300)) player.HP -= spellCost(300);
-		else useMana(300,1);
+		else useMana(300,Combat.USEMANA_MAGIC);
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);

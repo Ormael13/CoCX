@@ -10,7 +10,7 @@ import coc.view.ButtonData;
  * Handles checks for usability/knowledge, resource checks and usage, actual effect.
  *
  * Abilities are categorized with:
- * - **Type** - Spells (and their sub-types), soulskills, physical and magical specials and so on.
+ * - **Category&Type** - Spells (and their sub-types), soulskills, physical and magical specials and so on.
  * - **Target type** - Target self or enemy. Used in monster reactions, or to disable ability targeting invisible monster.
  * - **Timing type** - Duration of the ability:<ul>
  *     <li> Instant (happens immediately), </li>
@@ -19,6 +19,7 @@ import coc.view.ButtonData;
  * - **Tags** - A set of extra flags (damaging or buffing, primary element, AoE and others) that could be used in checks, reactions, or modifiers
  *
  * Subclasses MUST implement:
+ * - `category`
  * - `isKnown` (check if player knows the ability)
  * - `doEffect` (actual ability effect)
  *
@@ -64,16 +65,46 @@ public class CombatAbility extends BaseCombatContent {
 	
 	public static const AllCategories:/*EnumValue*/Array = [];
 	
-	public static const CAT_UNIVERSAL:int        = EnumValue.add(AllCategories, 0, "UNIVERSAL", {name:"Universal"});
-	public static const CAT_PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {name:"Physical Special"});
-	public static const CAT_MAGICAL_SPECIAL:int  = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {name:"Magical Special"});
-	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {name:"Soulskill"});
-	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {name:"White Spell"});
-	public static const CAT_SPELL_BLACK:int     = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {name:"Black Spell"});
-	public static const CAT_SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {name:"Grey Spell"});
-	public static const CAT_SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {name:"Hex"});
-	public static const CAT_SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {name:"Necromancy Spell"});
-	public static const CAT_SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {name:"Blood Spell"});
+	public static const CAT_UNIVERSAL:int        = EnumValue.add(AllCategories, 0, "UNIVERSAL", {
+		name:"Universal",
+		group:"general"
+	});
+	public static const CAT_PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {
+		name:"Physical Special",
+		group:"special"
+	});
+	public static const CAT_MAGICAL_SPECIAL:int  = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {
+		name:"Magical Special",
+		group:"special"
+	});
+	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {
+		name:"Soulskill",
+		group:"spell"
+	});
+	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {
+		name:"White Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_BLACK:int     = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {
+		name:"Black Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {
+		name:"Grey Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {
+		name:"Hex",
+		group:"spell"
+	});
+	public static const CAT_SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {
+		name:"Necromancy Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {
+		name:"Blood Spell",
+		group:"spell"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {

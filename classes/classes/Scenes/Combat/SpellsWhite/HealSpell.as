@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.SpellsWhite {
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractWhiteSpell;
+import classes.Scenes.Combat.Combat;
 import classes.StatusEffects;
 
 public class HealSpell extends AbstractWhiteSpell {
@@ -13,6 +14,7 @@ public class HealSpell extends AbstractWhiteSpell {
 				[TAG_HEALING]
 		);
 		baseManaCost = 30;
+		useManaType = Combat.USEMANA_WHITE_HEAL;
 		isBloodMagicApplicable = false;
 		isLastResortApplicable = false;
 	}

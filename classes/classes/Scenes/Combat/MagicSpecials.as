@@ -555,13 +555,13 @@ public class MagicSpecials extends BaseCombatContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					
+				
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-					
+				
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+				
 				}
 			} else {
 				bd = buttons.add("Asura Form", combat.assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + combat.asuraformCost() + " per turn");
@@ -3056,7 +3056,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function KnowledgeOverload():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, 1);
+		useMana(80, Combat.USEMANA_MAGIC);
 		var KOCD:Number = 12;
 		if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) KOCD -= 1;
 		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) KOCD -= 1;
@@ -3072,7 +3072,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Provoke():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, 1);
+		useMana(80, Combat.USEMANA_MAGIC);
 		var PCD:Number = 6;
 		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) PCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) PCD -= 1;
@@ -3090,7 +3090,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function WeirdWords():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, 1);
+		useMana(80, Combat.USEMANA_MAGIC);
 		var WWCD:Number = 4;
 		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) WWCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) WWCD -= 1;
@@ -3164,7 +3164,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function Minimise():void {
 		clearOutput();
-		useMana(50, 1);
+		useMana(50, Combat.USEMANA_MAGIC);
 		var evasionIncrease:Number = 0;
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) evasionIncrease = 25;
 		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
@@ -3175,7 +3175,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function Enlarge():void {
 		clearOutput();
-		useMana(40, 1);
+		useMana(40, Combat.USEMANA_MAGIC);
 		outputText("You grow back to your normal size.\n\n");
 		player.buff("Minimise").remove();
 		player.removeStatusEffect(StatusEffects.Minimise);
@@ -3184,7 +3184,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function Flicker():void {
 		clearOutput();
-		useMana(40, 1);
+		useMana(40, Combat.USEMANA_MAGIC);
 		outputText("Your form shimmers for a second as you vanish into thin air. Your opponent starts looking for you, annoyed.\n\n");
 		var DurationIncrease:Number = 0;
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) DurationIncrease = 1;
@@ -3233,8 +3233,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) useMana(50, 1);
-		else useMana(40, 1);
+		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) useMana(50, Combat.USEMANA_MAGIC);
+		else useMana(40, Combat.USEMANA_MAGIC);
 		if (player.cor < 60 && player.hasPerk(MutationsLib.ObsidianHeart)) dynStats("cor", 0.3);
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
@@ -3419,8 +3419,8 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function nekomataGhostFire2():void {
 		/*if (player.tailCount == 2 && player.tailType == Tail.CAT && player.hasPerk(MutationsLib.KitsuneThyroidGland)) useMana((150), 3);
-		else */if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), 3);// || player.hasPerk(MutationsLib.KitsuneThyroidGland)
-		else useMana((40), 3);
+		else */if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), Combat.USEMANA_MAGIC_NOBM);// || player.hasPerk(MutationsLib.KitsuneThyroidGland)
+		else useMana((40), Combat.USEMANA_MAGIC_NOBM);
 		outputText("Holding out your palm, you conjure ghastly greenish flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling emerald sparks everywhere.  ");
 		var damage:Number = (scalingBonusWisdom() * 0.6) + (scalingBonusIntelligence() * 0.4);
 		//Determine if critical hit!
@@ -3525,7 +3525,7 @@ public class MagicSpecials extends BaseCombatContent {
 		basicFoxFire2();
 	}
 	public function basicFoxFire2():void {
-		useMana((60 * kitsuneskillCost()), 3);
+		useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3641,7 +3641,7 @@ public class MagicSpecials extends BaseCombatContent {
 		corruptedFoxFire2();
 	}
 	public function corruptedFoxFire2():void {
-		useMana((80 * kitsuneskillCost()), 3);
+		useMana((80 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3767,7 +3767,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fusedFoxFire2();
 	}
 	public function fusedFoxFire2():void {
-		useMana((200 * kitsuneskillCost()), 3);
+		useMana((200 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3887,7 +3887,7 @@ public class MagicSpecials extends BaseCombatContent {
 		pureFoxFire2();
 	}
 	public function pureFoxFire2():void {
-		useMana((80 * kitsuneskillCost()), 3);
+		useMana((80 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -4372,7 +4372,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function FaeStorm():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, 1);
+		useMana(80, Combat.USEMANA_MAGIC);
 		outputText("Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on " + monster.a + monster.short + ". ");
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		//Determine if critical hit!
@@ -4487,7 +4487,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function BalefulPolymorph():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, 1);
+		useMana(80, Combat.USEMANA_MAGIC);
 		outputText("You chuckle playfully as you throw this spell on " + monster.a + monster.short + ", turning [monster he] temporarily into a cute harmless ");
 		var chosen:String = randomChoice("rabbit.", "squirrel.", "sheep.", "mouse.", "cat.", "dog.");
 		outputText(chosen+"\n\n");
@@ -4880,7 +4880,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Hurricane():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(50, USEFATG_MAGIC_NOBM);
+		useMana(50, Combat.USEMANA_MAGIC_NOBM);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownHurricane,4,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownHurricane,5,0,0,0);
 		var damage:Number = 0;

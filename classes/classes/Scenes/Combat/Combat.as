@@ -5780,7 +5780,7 @@ public class Combat extends BaseContent {
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-                    else useMana(40, 6);
+                    else useMana(40, USEMANA_BLACK);
                     outputText("\n\n");
                     magic.spellIceSpike3();
                 }
@@ -5790,7 +5790,7 @@ public class Combat extends BaseContent {
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-                    else useMana(40, 6);
+                    else useMana(40, USEMANA_BLACK);
                     outputText("\n\n");
                     magic.spellDarknessShard3();
                 }
@@ -13495,7 +13495,7 @@ public class Combat extends BaseContent {
 	//Naga Hypnosis
     public function HypnosisHeal():void {
         clearOutput();
-        useMana(30, 10);
+        useMana(30, USEMANA_WHITE_HEAL);
         outputText("You initiate a healing spell. ");
         CombatAbilities.Heal.doEffect(false);
         outputText("\n\nIt's only when you finish your casting that " + monster.a + monster.short + " name snaps out of the hypnosis and realise what is going on. ");
