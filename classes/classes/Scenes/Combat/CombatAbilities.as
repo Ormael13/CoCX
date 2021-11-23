@@ -41,23 +41,23 @@ public class CombatAbilities {
 		MeteorShower
 	];
 	
-	public static const IceSpike:IceSpikeSpell                   = new IceSpikeSpell();
-	public static const IceSpikeEx:IceSpikeSpell                 = new IceSpikeSpell(true);
-	public static const ArcticGale:ArcticGaleSpell               = new ArcticGaleSpell();
-	public static const ArcticGaleEx:ArcticGaleSpell             = new ArcticGaleSpell(true);
-	public static const DarknessShard:DarknessShardSpell         = new DarknessShardSpell();
-	public static const DarknessShardEx:DarknessShardSpell       = new DarknessShardSpell(true);
-	public static const DuskWave:DuskWaveSpell                   = new DuskWaveSpell();
-	public static const DuskWaveEx:DuskWaveSpell                 = new DuskWaveSpell(true);
-	public static const Arouse:ArouseSpell                       = new ArouseSpell();
-	public static const WaveOfEcstasy:WaveOfEcstasySpell         = new WaveOfEcstasySpell();
-	public static const Might:MightSpell                         = new MightSpell();
-	public static const Blink:BlinkSpell                         = new BlinkSpell();
-	public static const Regenerate:RegenerateSpell               = new RegenerateSpell();
-	public static const IceRain:IceRainSpell                     = new IceRainSpell();
-	public static const Nosferatu:NosferatuSpell                 = new NosferatuSpell();
-	public static const PolarMidnight:PolarMidnightSpell         = new PolarMidnightSpell();
-	public static const ALL_BLACK_SPELLS:/*CombatAbility*/Array  = [
+	public static const IceSpike:IceSpikeSpell                  = new IceSpikeSpell();
+	public static const IceSpikeEx:IceSpikeSpell                = new IceSpikeSpell(true);
+	public static const ArcticGale:ArcticGaleSpell              = new ArcticGaleSpell();
+	public static const ArcticGaleEx:ArcticGaleSpell            = new ArcticGaleSpell(true);
+	public static const DarknessShard:DarknessShardSpell        = new DarknessShardSpell();
+	public static const DarknessShardEx:DarknessShardSpell      = new DarknessShardSpell(true);
+	public static const DuskWave:DuskWaveSpell                  = new DuskWaveSpell();
+	public static const DuskWaveEx:DuskWaveSpell                = new DuskWaveSpell(true);
+	public static const Arouse:ArouseSpell                      = new ArouseSpell();
+	public static const WaveOfEcstasy:WaveOfEcstasySpell        = new WaveOfEcstasySpell();
+	public static const Might:MightSpell                        = new MightSpell();
+	public static const Blink:BlinkSpell                        = new BlinkSpell();
+	public static const Regenerate:RegenerateSpell              = new RegenerateSpell();
+	public static const IceRain:IceRainSpell                    = new IceRainSpell();
+	public static const Nosferatu:NosferatuSpell                = new NosferatuSpell();
+	public static const PolarMidnight:PolarMidnightSpell        = new PolarMidnightSpell();
+	public static const ALL_BLACK_SPELLS:/*CombatAbility*/Array = [
 		IceSpike,
 		IceSpikeEx,
 		ArcticGale,
@@ -75,12 +75,97 @@ public class CombatAbilities {
 		Nosferatu,
 		PolarMidnight
 	];
-	public static const ALL_HEX_SPELLS:/*CombatAbility*/Array    = [];
-	public static const ALL_DIVINE_SPELLS:/*CombatAbility*/Array = [];
-	public static const ALL_NECRO_SPELLS:/*CombatAbility*/Array  = [];
-	public static const ALL_GREY_SPELLS:/*CombatAbility*/Array   = [];
-	public static const ALL_BLOOD_SPELLS:/*CombatAbility*/Array  = [];
-	public static const ALL_SPELLS:/*CombatAbility*/Array        = []
+	
+	/* TOOD @aimozg convert these
+	public static const Lifetap:LifetapSpell                     = new LifetapSpell();
+	public static const LifeSiphon:LifeSiphonSpell               = new LifeSiphonSpell();
+	public static const ConsumingDarkness:ConsumingDarknessSpell = new ConsumingDarknessSpell();
+	public static const CurseOfDesire:CurseOfDesireSpell         = new CurseOfDesireSpell();
+	public static const CurseOfWeeping:CurseofWeepingSpell       = new CurseOfWeepingSpell();
+	 */
+	public static const ALL_HEX_SPELLS:/*CombatAbility*/Array    = [
+			/*
+		Lifetap,
+		LifeSiphon,
+		ConsumingDarkness,
+		CurseOfDesire,
+		CurseofWeeping
+		
+			 */
+	];
+	
+	/* TODO @aimozg convert these
+	public static const Aegis:AegisSpell                         = new AegisSpell();
+	public static const Exorcise:ExorciseSpell                   = new ExorciseSpell();
+	public static const DivineShield:DivineShieldSpell           = new DivineShieldSpell();
+	public static const Thunderstorm:ThunderstormSpell           = new ThunderstormSpell();
+	public static const TearsOfDenial:TearsOfDenialSpell         = new TearsOfDenialSpell();
+	
+	 */
+	public static const ALL_DIVINE_SPELLS:/*CombatAbility*/Array = [
+			/*
+		Aegis,
+		Exorcise,
+		DivineShield,
+		Thunderstorm,
+		TearsOfDenial,
+		
+			 */
+	];
+	
+	/** TODO @aimozg convert these
+	public static const BoneSpirit:BoneSpiritSpell              = new BoneSpiritSpell();
+	public static const BoneArmor:BoneArmorSpell                = new BoneArmorSpell();
+	public static const Boneshatter:BoneshatterSpell            = new BoneshatterSpell();
+	 */
+	public static const ALL_NECRO_SPELLS:/*CombatAbility*/Array = [
+			/*
+		BoneSpirit,
+		BoneArmor,
+		Boneshatter
+		
+			 */
+	];
+	
+	/* TODO @aimozg convert these
+	public static const ManaShield:ManaShieldSpell             = new ManaShieldSpell();
+	public static const EnergyDrain:EnergyDrainSpell           = new EnergyDrainSpell();
+	public static const Restore:RestoreSpell                   = new RestoreSpell();
+	public static const BalanceOfLife:BalanceOfLifeSpell       = new BalanceOfLifeSpell();
+	
+	 */
+	public static const ALL_GREY_SPELLS:/*CombatAbility*/Array = [
+			/*
+		ManaShield,
+		EnergyDrain,
+		Restore,
+		BalanceOfLife
+		
+			 */
+	];
+	
+	/* TODO @aimozg convert these
+	public static const BloodMissile:BloodMissileSpell                 = new BloodMissileSpell();
+	public static const BloodShield:BloodShieldSpell                   = new BloodShieldSpell();
+	public static const BloodExplosion:BloodExplosionSpell             = new BloodExplosionSpell();
+	public static const BloodChains:BloodChainsSpell                   = new BloodChainsSpell();
+	public static const BloodWave:BloodWaveSpell                       = new BloodWaveSpell();
+	public static const LifestealEnchantment:LifestealEnchantmentSpell = new LifestealEnchantmentSpell();
+	public static const BloodField:BloodFieldSpell                     = new BloodFieldSpell();
+	 */
+	public static const ALL_BLOOD_SPELLS:/*CombatAbility*/Array        = [
+			/*
+		BloodMissile,
+		BloodShield,
+		BloodExplosion,
+		BloodChains,
+		BloodWave,
+		LifestealEnchantment,
+		BloodField
+			 */
+	];
+	
+	public static const ALL_SPELLS:/*CombatAbility*/Array = []
 			.concat(ALL_WHITE_SPELLS)
 			.concat(ALL_BLACK_SPELLS)
 			.concat(ALL_HEX_SPELLS)

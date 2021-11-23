@@ -23,13 +23,8 @@ public class HealSpell extends AbstractWhiteSpell {
 		return player.hasStatusEffect(StatusEffects.KnowsHeal);
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellHeal);
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellHeal,6,0,0,0);
+	override public function calcCooldown():int {
+		return 6;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

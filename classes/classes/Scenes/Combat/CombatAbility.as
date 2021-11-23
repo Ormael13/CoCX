@@ -265,6 +265,10 @@ public class CombatAbility extends BaseCombatContent {
 		if (baseWrathCost > 0) {
 			costs.push("Wrath Cost: " + wrathCost());
 		}
+		var cd:int = calcCooldown();
+		if (cd > 0) {
+			costs.push("Cooldown: "+cd);
+		}
 		if (costs.length > 0) fullDesc += "\n" + costs.join(", ");
 		
 		return fullDesc
@@ -334,6 +338,7 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function perform(output:Boolean=true,free:Boolean=false,interceptable:Boolean=true):void {
 		if (!free) {
+			setCooldown();
 			useResources();
 		}
 		if (interceptable && !monster.interceptPlayerAbility(this)) {
@@ -353,8 +358,14 @@ public class CombatAbility extends BaseCombatContent {
 		if (timingType == TIMING_TOGGLE && isActive()) toggleOff();
 	}
 	
+	// "Use ablity" = setCooldown() + useResources() + doEffect()
+	
+	public function setCooldown():void {
+		player.cooldowns[id] = calcCooldown();
+	}
+	
 	/**
-	 * 1st part: use mana, set cooldown, increment counters etc.
+	 * Use mana, increment counters etc. At this point ability still might fail or be intercepted by monster
 	 */
 	public function useResources():void {
 		/* do nothing */
@@ -376,8 +387,18 @@ public class CombatAbility extends BaseCombatContent {
 		return baseWrathCost;
 	}
 	
+	/**
+	 * Current cooldown (number of rounds left before it could be used again)
+	 */
 	public function get currentCooldown():int {
-		return 0
+		return player.cooldowns[id];
+	}
+	
+	/**
+	 * Calculate cooldown of this ability. Default is 0 (no cooldown)
+	 */
+	public function calcCooldown():int {
+		return 0;
 	}
 	
 	/**
@@ -388,8 +409,9 @@ public class CombatAbility extends BaseCombatContent {
 		if (timingType == TIMING_LASTING && isActive()) {
 			return "This ability is already active."
 		}
-		if (currentCooldown > 0) {
-			return "You need more time before you can use this ability again."
+		var ccd:int = currentCooldown;
+		if (ccd > 0) {
+			return "You need to wait "+numberOfThings(ccd, "more round")+" before you can use this ability again."
 		}
 		return ""
 	}

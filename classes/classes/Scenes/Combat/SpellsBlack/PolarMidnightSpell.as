@@ -26,14 +26,21 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 		return player.hasStatusEffect(StatusEffects.KnowsPolarMidnight);
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellPolarMidnight)
+	override public function calcCooldown():int {
+		return spellBlackCooldown();
+	}
+	
+	override public function setCooldown():void {
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			super.setCooldown();
+		} else {
+			/* we're channeling, don't renew cooldown */
+		}
 	}
 	
 	override public function useResources():void {
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			super.useResources();
-			player.createStatusEffect(StatusEffects.CooldownSpellPolarMidnight, 12, 0, 0, 0);
 		} else {
 			/* we're channeling, don't use mana */
 		}
@@ -76,7 +83,6 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 		}
 		player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.ChanneledAttackType, 5, 0, 0, 0);
-		player.createStatusEffect(StatusEffects.CooldownSpellPolarMidnight, 12, 0, 0, 0);
 		if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 	}
 	

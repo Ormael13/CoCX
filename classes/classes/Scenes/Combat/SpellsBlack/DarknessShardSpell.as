@@ -38,19 +38,8 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
 	}
 	
-	override public function get currentCooldown():int {
-		return ex ?
-				player.statusEffectv1(StatusEffects.CooldownSpellDarknessShardEx)
-				: player.statusEffectv1(StatusEffects.CooldownSpellDarknessShard);
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(
-				ex ?
-						StatusEffects.CooldownSpellDarknessShardEx
-						: StatusEffects.CooldownSpellDarknessShard,
-				spellBlackCooldown(), 0, 0, 0);
+	override public function calcCooldown():int {
+		return spellBlackCooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {

@@ -21,11 +21,9 @@ public class FireStormSpell extends AbstractWhiteSpell{
 		return player.hasStatusEffect(StatusEffects.KnowsFireStorm)
 	}
 	
-	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellFireStorm)
+	override public function calcCooldown():int {
+		return spellWhiteTier2Cooldown();
 	}
-	
 	
 	override public function describeEffectVs(target:Monster):String {
 		return "~"+calcDamage(target,false)+" fire daamge."
@@ -34,12 +32,6 @@ public class FireStormSpell extends AbstractWhiteSpell{
 	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
 		var baseDamage:Number = scalingBonusIntelligence(randomize)*6;
 		return adjustSpellDamage(baseDamage,DamageType.FIRE,CAT_SPELL_WHITE,monster);
-	}
-	
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellFireStorm, spellWhiteTier2Cooldown(), 0, 0, 0);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

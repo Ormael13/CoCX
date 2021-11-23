@@ -29,14 +29,8 @@ public class NosferatuSpell extends AbstractBlackSpell {
 		return player.hasStatusEffect(StatusEffects.KnowsNosferatu);
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellNosferatu);
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellNosferatu,
-				7, 0, 0, 0);
+	override public function calcCooldown():int {
+		return 7;
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {

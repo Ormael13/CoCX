@@ -34,20 +34,8 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx))
 	}
 	
-	override public function get currentCooldown():int {
-		return ex ?
-				player.statusEffectv1(StatusEffects.CooldownSpellPyreBurst)
-				: player.statusEffectv1(StatusEffects.CooldownSpellPyreBurstEx);
-	}
-	
-	override public function useResources():void {
-		super.useResources(); // mana is used in AbstractSpell
-		player.createStatusEffect(
-				ex ?
-						StatusEffects.CooldownSpellPyreBurstEx
-						: StatusEffects.CooldownSpellPyreBurst,
-				spellWhiteCooldown(),0,0,0
-		);
+	override public function calcCooldown():int {
+		return spellWhiteCooldown();
 	}
 	
 	/**

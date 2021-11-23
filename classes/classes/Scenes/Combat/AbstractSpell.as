@@ -4,6 +4,7 @@ import classes.Monster;
 import classes.MutationsLib;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.lists.Gender;
 
 /**
  * In addition to the CombatAbility:
@@ -17,6 +18,7 @@ public class AbstractSpell extends CombatAbility {
 	protected var isBloodMagicApplicable:Boolean = true;
 	protected var isLastResortApplicable:Boolean = true;
 	protected var useManaType:int;
+	protected var canBackfire:Boolean = false;
 	
 	function AbstractSpell(
 			name:String,
@@ -109,11 +111,15 @@ public class AbstractSpell extends CombatAbility {
 		}
 	}
 	
+	// Hacky way to disable backfire. Don't forget to enable back!
+	public var backfireEnabled:Boolean = true;
 	/**
 	 * Autocast spell at combat start (guaranteed success, no output, interception)
 	 */
 	public function autocast():void {
+		backfireEnabled = false;
 		perform(false,false,false);
+		backfireEnabled = canBackfire;
 		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
 	}
 	
@@ -278,6 +284,18 @@ public class AbstractSpell extends CombatAbility {
 		}
 	}
 	
+	public function calcBackfirePercent():int {
+		if (!canBackfire) return 0;
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		return backfire
+	}
+	
 	/**
 	 * Do a crit roll and apply crit multiplier.
 	 * Deal damage once or repeatedly (if Omnicaster). Does NOT apply Omnicaster damage downscale!
@@ -333,6 +351,43 @@ public class AbstractSpell extends CombatAbility {
 		if (display) {
 			outputText(" damage.");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
+		}
+	}
+	
+	protected function backfireEffect(display:Boolean = true):void {
+		if (display) {
+			outputText("An errant sexual thought crosses your mind, and <b>you lose control of the spell!</b>  Your ");
+			switch (player.gender) {
+				case Gender.GENDER_NONE:
+					outputText("[asshole] tingles with a desire to be filled as your libido spins out of control.");
+					break;
+				case Gender.GENDER_MALE:
+					if (player.cockTotal() == 1) outputText("[cock] twitches obscenely and drips with pre-cum as your libido spins out of control.");
+					else outputText("[cocks] twitch obscenely and drip with pre-cum as your libido spins out of control.");
+					break;
+				case Gender.GENDER_FEMALE:
+					outputText("[vagina] becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+					break;
+				case Gender.GENDER_HERM:
+					outputText("[vagina] and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+					break;
+			}
+		}
+		dynStats("lib", .25, "lus", 15);
+	}
+	
+	/**
+	 * Do a backfire roll; if backfired, perform its effect
+	 * @return true Spell backfired, do not proceed with effect
+	 */
+	protected function backfired(display:Boolean):Boolean {
+		if (!backfireEnabled) return false;
+		var backfire:int = calcBackfirePercent();
+		if(rand(100) < backfire) {
+			backfireEffect(display);
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

@@ -37,19 +37,8 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
 	}
 	
-	override public function get currentCooldown():int {
-		return ex ?
-				player.statusEffectv1(StatusEffects.CooldownSpellDuskWaveEx)
-				: player.statusEffectv1(StatusEffects.CooldownSpellDuskWave);
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(
-				ex ?
-						StatusEffects.CooldownSpellDuskWaveEx
-						: StatusEffects.CooldownSpellDuskWave,
-				spellBlackCooldown(), 0, 0, 0);
+	override public function calcCooldown():int {
+		return spellBlackCooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {

@@ -33,19 +33,8 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
 	}
 	
-	override public function get currentCooldown():int {
-		return ex ?
-				player.statusEffectv1(StatusEffects.CooldownSpellIceSpikeEx)
-				: player.statusEffectv1(StatusEffects.CooldownSpellIceSpike);
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(
-				ex ?
-						StatusEffects.CooldownSpellIceSpikeEx
-						: StatusEffects.CooldownSpellIceSpike,
-				spellBlackCooldown(), 0, 0, 0);
+	override public function calcCooldown():int {
+		return spellBlackCooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {

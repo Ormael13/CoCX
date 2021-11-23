@@ -24,13 +24,8 @@ public class MentalShieldSpell extends AbstractWhiteSpell{
 		return "Protects against lust effects for "+calcDuration()+" rounds, halving the damage.  "
 	}
 	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellMentalShield,10,0,0,0);
-	}
-	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellMentalShield);
+	override public function calcCooldown():int {
+		return 10;
 	}
 	
 	override public function isActive():Boolean {

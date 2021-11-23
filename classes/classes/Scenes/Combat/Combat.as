@@ -9512,6 +9512,12 @@ public class Combat extends BaseContent {
 			player.addStatusValue(StatusEffects.FlyingDisabled, 1, -1);
 			if (player.statusEffectv1(StatusEffects.Flying) <= 0) player.removeStatusEffect(StatusEffects.FlyingDisabled);
 		}
+        // Cooldowns
+        for (var i:int = 0; i < player.cooldowns.length; i++) {
+            if (player.cooldowns[i] > 0) {
+                player.cooldowns[i]--;
+            }
+        }
         //Baleful Polymorph
         if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
             if (player.statusEffectv1(StatusEffects.CooldownBalefulPolymorph) <= 0) {
@@ -9900,189 +9906,7 @@ public class Combat extends BaseContent {
             }
         }
         //Spells
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpike)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellIceSpike) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellIceSpike);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellIceSpike, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpikeEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellIceSpikeEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellIceSpikeEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellIceSpikeEx, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShard)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellDarknessShard) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellDarknessShard);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellDarknessShard, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShardEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellDarknessShardEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellDarknessShardEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellDarknessShardEx, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGale)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellArcticGale) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellArcticGale);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellArcticGale, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGaleEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellArcticGaleEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellArcticGaleEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellArcticGaleEx, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWave)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellDuskWave) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellDuskWave);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellDuskWave, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWaveEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellDuskWaveEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellDuskWaveEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellDuskWaveEx, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellIceRain)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellIceRain) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellIceRain);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellIceRain, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellPolarMidnight)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellPolarMidnight) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellPolarMidnight);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellPolarMidnight, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefire)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellWhitefire) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellWhitefire);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellWhitefire, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefireEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellWhitefireEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellWhitefireEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellWhitefireEx, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBolt)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellLightningBolt) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellLightningBolt);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellLightningBolt, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBoltEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellLightningBoltEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellLightningBoltEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellLightningBoltEx, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellPyreBurst) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellPyreBurst);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellPyreBurst, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurstEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellPyreBurstEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellPyreBurstEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellPyreBurstEx, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellChainLighting, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLightingEx)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLightingEx) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellChainLightingEx);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellChainLightingEx, 1, -1);
-            }
-        }
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellHeal)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellHeal) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellHeal);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellHeal, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellMentalShield)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellMentalShield) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellMentalShield);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellMentalShield, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellCure)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellCure) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellCure);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellCure, 1, -1);
-            }
-		}
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellRegenerate)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellRegenerate) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellRegenerate);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellRegenerate, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellWaveOfEcstasy)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellWaveOfEcstasy) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellWaveOfEcstasy);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellWaveOfEcstasy, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellFireStorm)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellFireStorm) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellFireStorm);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellFireStorm, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellMeteorShower) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellMeteorShower);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellMeteorShower, 1, -1);
-            }
-        }
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellNosferatu)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellNosferatu) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellNosferatu);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellNosferatu, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellClearMind)) {
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellClearMind)) {
 			if (player.statusEffectv1(StatusEffects.CooldownSpellClearMind) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellClearMind);
             } else {

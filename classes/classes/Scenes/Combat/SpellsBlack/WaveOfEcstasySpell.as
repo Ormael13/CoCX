@@ -25,17 +25,12 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 		return player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy);
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellWaveOfEcstasy);
+	override public function calcCooldown():int {
+		return 6;
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
 		return "~" + calcDamage(target, false) + " lust damage"
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellWaveOfEcstasy, 6, 0, 0, 0);
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {

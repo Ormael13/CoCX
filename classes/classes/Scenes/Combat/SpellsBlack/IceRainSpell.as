@@ -24,14 +24,8 @@ public class IceRainSpell extends AbstractBlackSpell {
 		return player.hasStatusEffect(StatusEffects.KnowsIceRain);
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellIceRain);
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellIceRain,
-				spellBlackCooldown(), 0, 0, 0);
+	override public function calcCooldown():int {
+		return spellBlackCooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
