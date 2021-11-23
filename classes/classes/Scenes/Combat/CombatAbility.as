@@ -37,6 +37,11 @@ import coc.view.ButtonData;
  * See subclasses for further info.
  */
 public class CombatAbility extends BaseCombatContent {
+	/**
+	 * Array of all abilities.
+	 */
+	public static var Registry:/*CombatAbility*/Array = [];
+	private static var idCounter:int = 0;
 	
 	/**
 	 * This ability targets player only.
@@ -105,6 +110,10 @@ public class CombatAbility extends BaseCombatContent {
 		name:"Blood Spell",
 		group:"spell"
 	});
+	public static const CAT_SPELL_DIVINE:int = EnumValue.add(AllCategories, 10, "SPELL_DIVINE", {
+		name:"Divine Spell",
+		group:"spell"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -147,7 +156,15 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Recovery',
 		desc: "This ability recovers player's stats (other than HP) and statuses."
 	});
+	public static const TAG_LUSTDMG:int = EnumValue.add(AllTags, 10, 'LUSTDMG', {
+		name: 'Arousing',
+		desc: "This ability deals lust damage."
+	});
 	
+	/**
+	 * Unique id of this ability.
+	 */
+	public var id:int;
 	private var _name:String;
 	private var _desc:String;
 	public var targetType:int;
@@ -163,6 +180,8 @@ public class CombatAbility extends BaseCombatContent {
 			timingType:int,
 			tags:/*int*/Array
 	) {
+		this.id = ++idCounter;
+		Registry[this.id] = this;
 		this._name = name;
 		this._desc = desc;
 		this.targetType = targetType;
@@ -311,12 +330,13 @@ public class CombatAbility extends BaseCombatContent {
 	 * DOES NOT clear output or proceed the enemy turn.
 	 * @param output Print texts
 	 * @param free Do not use resources or set cooldown
+	 * @param interceptable Can be intercepted by monster
 	 */
-	public function perform(output:Boolean=true,free:Boolean=false):void {
+	public function perform(output:Boolean=true,free:Boolean=false,interceptable:Boolean=true):void {
 		if (!free) {
 			useResources();
 		}
-		if (!monster.interceptPlayerAbility(this)) {
+		if (interceptable && !monster.interceptPlayerAbility(this)) {
 			doEffect(output);
 			monster.postPlayerAbility(this);
 		}

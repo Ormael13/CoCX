@@ -1680,10 +1680,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
 		if (!player.statStore.hasBuff("Might")) {
 			outputText("drawing strength from it");
-			combat.magic.spellMight(true);
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock();
+			CombatAbilities.Might.backfireEnabled = false;
+			CombatAbilities.Might.doEffect(false);
+			CombatAbilities.Might.backfireEnabled = true;
 		}
 		else {
 			outputText("feeling it mend your wounds");

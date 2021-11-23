@@ -109,12 +109,67 @@ public class AbstractSpell extends CombatAbility {
 		}
 	}
 	
+	/**
+	 * Autocast spell at combat start (guaranteed success, no output, interception)
+	 */
+	public function autocast():void {
+		perform(false,false,false);
+		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
+	}
+	
 	///////////////////////////
 	// Shortcuts and utilities
 	///////////////////////////
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		combat.magic.MagicAddonEffect(numberOfProcs);
+	}
+	
+	public function spellModByCat(category:int):Number {
+		switch (category) {
+			case CAT_SPELL_WHITE:
+				return spellModWhite();
+			case CAT_SPELL_BLACK:
+				return spellModBlack();
+			case CAT_SPELL_BLOOD:
+				return spellModBlood();
+			default:
+				return spellMod();
+		}
+	}
+	
+	/**
+	 * Apply bonuses from perks, items, and other sources (including target lustVuln) to a lust damage.
+	 * Returned value is rounded.
+	 * @param baseDamage Base lust damage (typically player.inte/5)
+	 * @param monster Target or null if evaluating damage outside combat
+	 * @param category CAT_XXX
+	 * @param randomize If false, use 0.5 for random roll
+	 * @return
+	 */
+	protected function adjustLustDamage(
+			baseDamage:Number,
+			monster:Monster,
+			category:int,
+			randomize:Boolean=true
+	): Number {
+		var lustDmg:Number = baseDamage;
+		lustDmg *= spellModByCat(category);
+		if (monster != null) {
+			var randomBonus:Number = (monster.lib - monster.inte * 2 + monster.cor)/5;
+			lustDmg += randomize ? rand(randomBonus) : 0.5*randomBonus;
+			lustDmg *= monster.lustVuln;
+			if (hasTag(TAG_AOE) && monster.plural) {
+				lustDmg *= 5;
+			}
+		}
+		if(player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
+		if(player.hasStatusEffect(StatusEffects.AlvinaTraining2)) lustDmg *= 1.2;
+		if (monster != null) {
+			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg *= 1.2;
+			lustDmg *= corruptMagicPerkFactor(monster);
+		}
+		return Math.round(lustDmg);
 	}
 	
 	/**
@@ -134,11 +189,7 @@ public class AbstractSpell extends CombatAbility {
 	):Number {
 		var damage:Number = baseDamage;
 		
-		switch (category) {
-			case CAT_SPELL_WHITE:
-				damage *= spellModWhite();
-				break;
-		}
+		damage *= spellModByCat(category);
 		
 		switch (damageType) {
 			case DamageType.FIRE: {
@@ -158,21 +209,51 @@ public class AbstractSpell extends CombatAbility {
 				damage *= combat.lightningDamageBoostedByDao();
 				break;
 			}
+			case DamageType.ICE: {
+				damage = calcGlacialMod(damage);
+				if (combat.wearingWinterScarf()) damage *= 1.2;
+				if (player.armor == armors.BLIZZ_K) damage *= 1.5;
+				if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
+				damage *= combat.iceDamageBoostedByDao();
+				break;
+			}
+			case DamageType.DARKNESS: {
+				damage = calcEclypseMod(damage);
+				damage *= combat.darknessDamageBoostedByDao();
+				break;
+			}
 		}
 		if (monster != null) {
 			if (hasTag(TAG_AOE) && monster.plural) damage *= 5;
-			if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage *= 1.2;
-			if (player.hasPerk(PerkLib.PureMagic)) {
+			if ((category == CAT_SPELL_WHITE || category == CAT_SPELL_DIVINE) &&
+					player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) {
+				damage *= 1.2;
+			}
+			if (category == CAT_SPELL_WHITE && player.hasPerk(PerkLib.PureMagic)) {
 				if (monster.cor < 33) damage *= 1.0;
 				else if (monster.cor < 50) damage *= 1.1;
 				else if (monster.cor < 75) damage *= 1.2;
 				else if (monster.cor < 90) damage *= 1.3;
 				else damage *= 1.4;
 			}
+			if (category == CAT_SPELL_BLACK) {
+				damage *= corruptMagicPerkFactor(monster);
+			}
 		}
 		damage *= omnicasterDamageFactor();
 		
 		return Math.round(damage);
+	}
+	
+	public static function corruptMagicPerkFactor(monster:Monster):Number {
+		if (monster == null) return 1.0;
+		if (!player.hasPerk(PerkLib.CorruptMagic)) return 1.0;
+		
+		if (monster.cor >= 66) return 1.0;
+		else if (monster.cor >= 50) return 1.1;
+		else if (monster.cor >= 25) return 1.2;
+		else if (monster.cor >= 10) return 1.3;
+		else return 1.4;
 	}
 	
 	public static function omnicasterDamageFactor():Number {
@@ -227,7 +308,7 @@ public class AbstractSpell extends CombatAbility {
 		var damageFn:Function;
 		switch (damageType) {
 			case DamageType.FIRE:
-				damageFn =doFireDamage;
+				damageFn = doFireDamage;
 				break;
 			case DamageType.DARKNESS:
 				damageFn = doDarknessDamage;

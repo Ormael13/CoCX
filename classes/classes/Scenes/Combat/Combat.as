@@ -117,8 +117,10 @@ public class Combat extends BaseContent {
         statScreenRefresh();
         if (monster.HP <= monster.minHP()) {
             doNext(endHpVictory);
-        } else if (monster.lust > monster.maxLust()) {
+        } else if (monster.lust >= monster.maxLust()) {
             doNext(endLustVictory);
+        } else if(player.lust >= player.maxLust()) {
+            doNext(endLustLoss);
         } else {
             enemyAI();
         }
@@ -995,8 +997,9 @@ public class Combat extends BaseContent {
         if (CoC_Settings.debugBuild && !debug) {
             buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
         }
-        if (CoC_Settings.debugBuild && debug) {
+        if (debug) {
             buttons.add("CheatAbility", combat.debugCheatAbility).hint("Use any ability");
+            buttons.add("CheatStats", combat.debugCheatStats).hint("Adjust your or enemy stats. May break things!");
         }
         if (player.hasPerk(PerkLib.JobDefender)) {
             buttons.add("Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
@@ -4225,12 +4228,53 @@ public class Combat extends BaseContent {
         }
     }
 
-    private function debugCheatAbility():void {
+    private function debugCheatStats():void {
+        function cheatProperty(object:*, propName:*, newValue:*):void {
+            object[propName] = newValue;
+            statScreenRefresh();
+        }
         var buttons:ButtonDataList = new ButtonDataList();
-        for each (var ability:CombatAbility in CombatAbilities.ALL) {
-            var button:ButtonData = ability.createButton(monster);
-            button.enabled = true;
-            buttons.list.push(button);
+        
+        buttons.add("HP 10%",curry(cheatProperty,player,"HP",Math.round(player.maxHP()*0.1)));
+        buttons.add("HP 50%",curry(cheatProperty,player,"HP",Math.round(player.maxHP()*0.5)));
+        buttons.add("HP 100%",curry(cheatProperty,player,"HP",player.maxHP()));
+        buttons.add("Lust 0%",curry(cheatProperty,player,"lust",player.minLust()));
+        buttons.add("Lust 50%",curry(cheatProperty,player,"lust",Math.round(player.maxLust()*0.5)));
+        buttons.add("Lust 90%",curry(cheatProperty,player,"lust",Math.round(player.maxLust()*0.9)));
+        buttons.add("Mana 100%",curry(cheatProperty,player,"mana",player.maxMana()));
+        buttons.add("Wrath 100%",curry(cheatProperty,player,"wrath",player.maxWrath()));
+        buttons.add("Fatigue 0%",curry(cheatProperty,player,"fatigue",0));
+        buttons.add("SF 100%",curry(cheatProperty,player,"soulforce",player.maxSoulforce()));
+        buttons.add("Foe HP 10%",curry(cheatProperty,monster,"HP",(monster.maxHP()*0.1)));
+        buttons.add("Foe HP 50%",curry(cheatProperty,monster,"HP",Math.round(monster.maxHP()*0.5)));
+        buttons.add("Foe HP 100%",curry(cheatProperty,monster,"HP",monster.maxHP()));
+        buttons.add("Foe Lust 0%",curry(cheatProperty,monster,"lust",monster.minLust()));
+        buttons.add("Foe Lust 50%",curry(cheatProperty,monster,"lust",Math.round(monster.maxLust()*0.5)));
+        buttons.add("Foe Lust 90%",curry(cheatProperty,monster,"lust",Math.round(monster.maxLust()*0.9)));
+        
+        submenu(buttons,combatMenu,0,false);
+    }
+    private function debugCheatAbility():void {
+        function cheatSubmenu(abilities:/*CombatAbility*/Array):void {
+            var buttons:ButtonDataList = new ButtonDataList();
+            for each (var ability:CombatAbility in abilities) {
+                var button:ButtonData = ability.createButton(monster);
+                button.enabled = true;
+                buttons.list.push(button);
+            }
+            submenu(buttons,debugCheatAbility);
+        }
+        
+        var buttons:ButtonDataList = new ButtonDataList();
+        for each (var category:Object in CombatAbility.AllCategories) {
+            var abilities:/*CombatAbility*/Array = CombatAbilities.ALL.filter(
+                    function(ability:CombatAbility, index:int, array:Array):Boolean {
+                        return ability.category == category.value;
+                    }
+            );
+            if (abilities.length > 0) {
+                buttons.add(category.name,curry(cheatSubmenu,abilities.slice()));
+            }
         }
         submenu(buttons,combatMenu,0,false);
     }
@@ -5774,25 +5818,20 @@ public class Combat extends BaseContent {
             heroBaneProc(damage);
             EruptingRiposte();
             if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isKnownAndUsable) {
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isUsable) {
                     outputText("\n\n");
                     CombatAbilities.Whitefire.perform();
                 }
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && player.mana >= spellCostBlack(40)) {
-                    if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-                    else useMana(40, USEMANA_BLACK);
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && CombatAbilities.IceSpike.isUsable) {
                     outputText("\n\n");
-                    magic.spellIceSpike3();
+                    CombatAbilities.IceSpike.perform();
                 }
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isKnownAndUsable) {
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isUsable) {
                     outputText("\n\n");
                     CombatAbilities.LightningBolt.perform();
                 }
-                if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && player.mana >= spellCostBlack(40)) {
-                    if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
-                    else useMana(40, USEMANA_BLACK);
-                    outputText("\n\n");
-                    magic.spellDarknessShard3();
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShard.isUsable) {
+                    CombatAbilities.DarknessShard.perform();
                 }
             }
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -6526,7 +6565,11 @@ public class Combat extends BaseContent {
     }
 
     public function wearingWinterScarf():Boolean {
-        return player.necklaceName == "Blue Winter scarf" || player.necklaceName == "Green Winter scarf" || player.necklaceName == "Purple Winter scarf" || player.necklaceName == "Red Winter scarf" || player.necklaceName == "Yellow Winter scarf";
+        return player.necklace == necklaces.BWSCARF ||
+                player.necklace == necklaces.GWSCARF ||
+                player.necklace == necklaces.PWSCARF ||
+                player.necklace == necklaces.RWSCARF ||
+                player.necklace == necklaces.YWSCARF;
     }
 
     public function combatMiss():Boolean {

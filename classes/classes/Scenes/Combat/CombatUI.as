@@ -695,7 +695,7 @@ public class CombatUI extends BaseCombatContent {
 						btnContinue.show("Continue", combat.mspecials.trueDragonBreath, "Continue gathering elemental energy.");
 						break;
 					case 5:
-						btnContinue.show("Continue", combat.magic.spellPolarMidnight, "Continue casting Polar Midnight spell.");
+						btnContinue.show("Continue", CombatAbilities.PolarMidnight.buttonCallback, "Continue casting Polar Midnight spell.");
 						break;
 					case 6:
 						btnContinue.show("Continue", CombatAbilities.MeteorShower.buttonCallback, "Continue casting Meteor Shower spell.");
