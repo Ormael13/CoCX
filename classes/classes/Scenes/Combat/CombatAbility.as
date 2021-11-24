@@ -249,6 +249,15 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
+	 * (For lasting/toggle abilities)
+	 * Called every round if ability is active. Reduce duration, do regular effect and such.
+	 * @param display Print the effect
+	 */
+	public function advance(display:Boolean):void {
+		/* do nothing */
+	}
+	
+	/**
 	 * @param target Monster to gauge effect against, or null if viewing outside combat.
 	 * @return {String} Ability description + costs, tags, and effects.
 	 */

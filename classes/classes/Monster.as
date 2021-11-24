@@ -3207,20 +3207,6 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.FlameBlade,1,-1);
 			}
 
-			//Consuming darkness
-			if (hasStatusEffect(StatusEffects.ConsumingDarkness)) {
-				CombatAbilities.ConsumingDarkness.advance(true);
-			}
-			//Curse of Desire
-			if (hasStatusEffect(StatusEffects.CurseOfDesire)) {
-				CombatAbilities.CurseOfDesire.advance(true);
-			}
-
-			//Curse of Weeping
-			if (hasStatusEffect(StatusEffects.CurseOfWeeping)) {
-				CombatAbilities.CurseOfWeeping.advance(true);
-			}
-
 			//lowered damage done by enemy attacks debuff
 			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);

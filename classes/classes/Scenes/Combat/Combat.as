@@ -8480,10 +8480,12 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 2, -1);
         }
         monster.combatRoundUpdate();
-		//Thunderstorm
-		if (player.hasStatusEffect(StatusEffects.Thunderstorm) && player.statusEffectv2(StatusEffects.Thunderstorm) > 0) {
-			CombatAbilities.Thunderstorm.advance(true);
-		}
+		// Advance abilities
+        for each (var ability:CombatAbility in CombatAbility.Registry) {
+            if (ability.isActive()) {
+                ability.advance(true);
+            }
+        }
         //[Silence warning]
         if (player.hasStatusEffect(StatusEffects.ThroatPunch)) {
             player.addStatusValue(StatusEffects.ThroatPunch, 1, -1);
@@ -9295,33 +9297,6 @@ public class Combat extends BaseContent {
             } else player.addStatusValue(StatusEffects.WinterClaw, 1, -1);
         }
         //Spell buffs
-        if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-            if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
-                player.removeStatusEffect(StatusEffects.ChargeWeapon);
-                outputText("<b>Charged Weapon effect wore off!</b>\n\n");
-            } else {
-				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
-			}
-        }
-        if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
-            if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
-                player.removeStatusEffect(StatusEffects.ChargeArmor);
-                outputText("<b>Charged Armor effect wore off!</b>\n\n");
-            } else {
-				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
-			}
-        }
-        //Blizzard
-        if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-            //Remove blizzard if countdown to 0
-            if (player.statusEffectv1(StatusEffects.Blizzard) <= 0) {
-                player.removeStatusEffect(StatusEffects.Blizzard);
-                outputText("<b>Blizzard spell exhausted all of it power and need to be casted again to provide protection from the fire attacks again!</b>\n\n");
-            } else {
-                player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-                outputText("<b>Surrounding your blizzard slowly loosing it protective power.</b>\n\n");
-            }
-        }
         //Violet Pupil Transformation
         if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
             if (player.soulforce < 100) {
@@ -9336,14 +9311,6 @@ public class Combat extends BaseContent {
                 outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body. (<font color=\"#008000\">+" + hpChange1 + "</font>)</b>\n\n");
                 HPChange(hpChange1, false);
             }
-        }
-        //Regenerate
-        if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
-            CombatAbilities.Regenerate.advance(true);
-        }
-        //Life Siphon
-        if (player.hasStatusEffect(StatusEffects.LifeSiphon)) {
-            CombatAbilities.LifeSiphon.advance(true);
         }
         //Goblin Mech Stimpack
         if (player.hasStatusEffect(StatusEffects.GoblinMechStimpack)) {

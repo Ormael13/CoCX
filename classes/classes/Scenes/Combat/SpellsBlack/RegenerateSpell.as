@@ -50,7 +50,7 @@ public class RegenerateSpell extends AbstractBlackSpell {
 		return 7
 	}
 	
-	public function advance(display:Boolean):void {
+	override public function advance(display:Boolean):void {
 		if (player.statusEffectv1(StatusEffects.PlayerRegenerate) <= 0) {
 			player.removeStatusEffect(StatusEffects.PlayerRegenerate);
 			if (display) {

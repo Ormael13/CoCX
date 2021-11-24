@@ -45,7 +45,7 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 		return 15;
 	}
 	
-	public function advance(display:Boolean):void {
+	override public function advance(display:Boolean):void {
 		if (monster.statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) {
 			monster.removeStatusEffect(StatusEffects.ConsumingDarkness);
 		} else {

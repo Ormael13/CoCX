@@ -40,7 +40,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 		return 30;
 	}
 	
-	public function advance(display:Boolean):void {
+	public override function advance(display:Boolean):void {
 		player.addStatusValue(StatusEffects.Thunderstorm, 2, -1);
 		if (display) {
 			outputText("<b>A bolt of divine lightning falls from the sky and strikes [themonster]</b>. ");

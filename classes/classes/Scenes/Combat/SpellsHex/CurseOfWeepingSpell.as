@@ -58,7 +58,7 @@ public class CurseOfWeepingSpell extends AbstractHexSpell {
 		return ""
 	}
 	
-	public function advance(display:Boolean):void {
+	override public function advance(display:Boolean):void {
 		if (monster.statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) {
 			monster.removeStatusEffect(StatusEffects.CurseOfWeeping);
 		} else {

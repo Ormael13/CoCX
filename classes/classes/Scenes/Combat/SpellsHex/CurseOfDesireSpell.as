@@ -48,7 +48,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 		return 15;
 	}
 	
-	public function advance(display:Boolean):void {
+	override public function advance(display:Boolean):void {
 		if (monster.statusEffectv1(StatusEffects.CurseOfDesire) <= 0) {
 			if (monster.statusEffectv3(StatusEffects.CurseOfDesire) > 0) {
 				monster.lustVuln += monster.statusEffectv3(StatusEffects.CurseOfDesire);

@@ -32,6 +32,17 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 		return super.manaCost() * costMultiplier();
 	}
 	
+	override public function advance(display:Boolean):void {
+		if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
+			if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
+				player.removeStatusEffect(StatusEffects.ChargeArmor);
+				if (display) outputText("<b>Charged Armor effect wore off!</b>\n\n");
+			} else {
+				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
+			}
+		}
+	}
+	
 	override protected function usabilityCheck():String {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;

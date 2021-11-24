@@ -31,6 +31,17 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 		return super.manaCost() * costMultiplier()
 	}
 	
+	override public function advance(display:Boolean):void {
+		if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
+			player.removeStatusEffect(StatusEffects.ChargeWeapon);
+			if (display) {
+				outputText("<b>Charged Weapon effect wore off!</b>\n\n");
+			}
+		} else {
+			if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
+		}
+	}
+	
 	override protected function usabilityCheck():String {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;

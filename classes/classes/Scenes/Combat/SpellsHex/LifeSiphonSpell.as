@@ -37,7 +37,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 		return 15
 	}
 	
-	public function advance(display:Boolean):void {
+	override public function advance(display:Boolean):void {
 		if (player.statusEffectv1(StatusEffects.LifeSiphon) <= 0) {
 			player.removeStatusEffect(StatusEffects.LifeSiphon);
 		 }else {
