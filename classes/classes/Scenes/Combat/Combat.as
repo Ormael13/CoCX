@@ -9957,38 +9957,6 @@ public class Combat extends BaseContent {
                 outputText("<b>Metal Skin effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.MetalSkin, 2, -1);
         }
-		//Aegis
-		if (player.hasStatusEffect(StatusEffects.Aegis)) {
-			if (player.statusEffectv2(StatusEffects.Aegis) <= 0) {
-                player.removeStatusEffect(StatusEffects.Aegis);
-            } else {
-                player.addStatusValue(StatusEffects.Aegis, 2, -1);
-            }
-		}
-		//Divine Shield
-		if (player.hasStatusEffect(StatusEffects.DivineShield)) {
-			if (player.statusEffectv2(StatusEffects.DivineShield) <= 0) {
-                player.removeStatusEffect(StatusEffects.DivineShield);
-            } else {
-                player.addStatusValue(StatusEffects.DivineShield, 2, -1);
-            }
-		}
-		//Mental Shield
-		if (player.hasStatusEffect(StatusEffects.MentalShield)) {
-			if (player.statusEffectv1(StatusEffects.MentalShield) <= 0) {
-                player.removeStatusEffect(StatusEffects.MentalShield);
-            } else {
-                player.addStatusValue(StatusEffects.MentalShield, 1, -1);
-            }
-		}
-		//Balance of Life
-		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) {
-			if (player.statusEffectv2(StatusEffects.BalanceOfLife) <= 0) {
-                player.removeStatusEffect(StatusEffects.BalanceOfLife);
-            } else {
-                player.addStatusValue(StatusEffects.BalanceOfLife, 1, -1);
-            }
-		}
         //Possess
         if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
             if (player.statusEffectv1(StatusEffects.CooldownPossess) <= 0) {

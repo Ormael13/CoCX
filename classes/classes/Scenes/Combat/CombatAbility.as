@@ -21,15 +21,19 @@ import coc.view.ButtonData;
  * Subclasses MUST implement:
  * - `category`
  * - `isKnown` (check if player knows the ability)
- * - `doEffect` (actual ability effect)
+ * - `doEffect` (actual ability effect. For spells, override `doSpellEffect` instead)
  *
  * and COULD implement:
  * - `usabilityCheck` (check is ability is usable and return reason text if not)
- * - `useResources` (use mana and other resources)
- * - `currentCooldown` (if on CD, return number of rounds)
+ * - `useResources` (use mana and other resources. Some subclasses can handle it themselves)
+ * - `calcCooldown` (cooldown between uses)
+ * - any resource cost and description generating functions
  *
- * Lasting abilities MUST implement:
+ * Lasting (and toggle) abilities MUST implement:
  * - `isActive`
+ * and COULD implement:
+ * - `advance` - called every turn
+ * - `isStackable` to allow casting ability while it's active
  *
  * Toggle abilities MUST implement:
  * - `toggleOff`
@@ -66,7 +70,8 @@ public class CombatAbility extends BaseCombatContent {
 	 * This ability adds an unstackable lasting effect that could be toggled off by caster
 	 */
 	public static const TIMING_TOGGLE:int = 2;
-	// TODO @aimozg Channeling (precast) timing
+	// TODO @aimozg Channeling (precast) timing type
+	// TODO @aimozg Reactive (cast automatically on some condition) timing type?
 	
 	public static const AllCategories:/*EnumValue*/Array = [];
 	
@@ -201,7 +206,7 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	public function get buttonName():String {
-		return name;
+		return (timingType == TIMING_TOGGLE && isActive()) ? "Deactivate "+name : name;
 	}
 	
 	public function get category():int {
@@ -283,12 +288,16 @@ public class CombatAbility extends BaseCombatContent {
 	 * @return {String} Ability description + costs, tags, and effects.
 	 */
 	public function fullDescription(target:Monster):String {
-		var fullDesc:String = description+"\n";
+		var fullDesc:String = "";
+		if (timingType == TIMING_TOGGLE && isActive()) {
+			fullDesc += "<b>Deactivate "+name+"</b>\n";
+		}
+		fullDesc += description + "\n";
 		
 		var effectDesc:String = describeEffectVs(target);
 		if (effectDesc) fullDesc += "\n<b>Effect: "+effectDesc+"</b>";
 		
-		var costs:/*String*/Array = [];
+		var costs:/*String*/Array = costDescription();
 		if (costs.length > 0) fullDesc += "\n<b>" + costs.join(", ")+"</b>";
 		
 		var tags:/*int*/Array = presentTags();
@@ -313,7 +322,8 @@ public class CombatAbility extends BaseCombatContent {
 		var fullDesc: String = fullDescription(target);
 		
 		var ucheck:String;
-		if (timingType == TIMING_TOGGLE) {
+		var deactivating:Boolean;
+		if (deactivating) {
 			ucheck = toggleOffUsabilityCheck();
 		} else {
 			ucheck = usabilityCheck();
@@ -323,7 +333,7 @@ public class CombatAbility extends BaseCombatContent {
 			bd.disable()
 		}
 		
-		bd.hint(fullDesc,name);
+		bd.hint(fullDesc,deactivating ? "Deactivate " + name : name);
 		return bd;
 	}
 	
@@ -374,15 +384,15 @@ public class CombatAbility extends BaseCombatContent {
 		}
 	}
 	
-	public function toggleOff():void {
+	public function toggleOff(display:Boolean=true):void {
 		if (timingType == TIMING_TOGGLE) {
 			throw new Error("Cannot deactivate non-toggle ability "+name);
 		}
 		throw new Error("Method deactivate() not implemented for ability "+name);
 	}
 	
-	public function ensureToggledOff():void {
-		if (timingType == TIMING_TOGGLE && isActive()) toggleOff();
+	public function ensureToggledOff(display:Boolean=true):void {
+		if (timingType == TIMING_TOGGLE && isActive()) toggleOff(display);
 	}
 	
 	// "Use ablity" = setCooldown() + useResources() + doEffect()

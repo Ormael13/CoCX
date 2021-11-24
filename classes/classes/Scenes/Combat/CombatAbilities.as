@@ -4,6 +4,7 @@ import classes.Scenes.Combat.SpellsWhite.*;
 import classes.Scenes.Combat.SpellsHex.*;
 import classes.Scenes.Combat.SpellsDivine.*;
 import classes.Scenes.Combat.SpellsNecro.*;
+import classes.Scenes.Combat.SpellsGrey.*;
 
 public class CombatAbilities {
 	
@@ -117,21 +118,24 @@ public class CombatAbilities {
 		Boneshatter
 	];
 	
-	/* TODO @aimozg convert these
+	// leftover comments from CombatMagic on grey spells:
+	//perki z grey mage line dajace spell mod * x% wiecej (nie wplywa na sam spell mod anu spell mod white/black)
+	//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
+	//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	next spell (non-fire or non-ice based) goes here
+	//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	fire single target spell goes here
+	
 	public static const ManaShield:ManaShieldSpell             = new ManaShieldSpell();
 	public static const EnergyDrain:EnergyDrainSpell           = new EnergyDrainSpell();
 	public static const Restore:RestoreSpell                   = new RestoreSpell();
 	public static const BalanceOfLife:BalanceOfLifeSpell       = new BalanceOfLifeSpell();
+	public static const ClearMind:ClearMindSpell               = new ClearMindSpell();
 	
-	 */
 	public static const ALL_GREY_SPELLS:/*CombatAbility*/Array = [
-			/*
 		ManaShield,
 		EnergyDrain,
 		Restore,
-		BalanceOfLife
-		
-			 */
+		BalanceOfLife,
+		ClearMind
 	];
 	
 	/* TODO @aimozg convert these

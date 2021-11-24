@@ -50,7 +50,6 @@ public class BlindSpell extends AbstractWhiteSpell{
 					else outputText("is blinded!</b>");
 				}
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
-				MagicAddonEffect();
 				if(monster is Diva){
 					(monster as Diva).handlePlayerSpell("blind");
 				} else if(monster.short == "Isabella") {

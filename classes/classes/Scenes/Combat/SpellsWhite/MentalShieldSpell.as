@@ -38,6 +38,14 @@ public class MentalShieldSpell extends AbstractWhiteSpell{
 		return Math.round(mentalshieldduration)
 	}
 	
+	override public function advance(display:Boolean):void {
+		if (player.statusEffectv1(StatusEffects.MentalShield) <= 0) {
+			player.removeStatusEffect(StatusEffects.MentalShield);
+		} else {
+			player.addStatusValue(StatusEffects.MentalShield, 1, -1);
+		}
+	}
+	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You draw on your inner calm, forcing it out in the form of a powerful magical ward to weaken the effect of your opponent’s depraved attacks on you.");
