@@ -155,7 +155,7 @@ import classes.StatusEffects;
 		}
 		public function etnaCombatActions1():void {
 			var lustDmg:Number = Math.round(player.statusEffectv2(StatusEffects.CombatFollowerEtna) / 6);
-			outputText("Etna shoots a spike at [themonster], you can see the telltale sign of arousal in " + monster.pronoun3 + " movement. ");
+			outputText("Etna shoots a spike at [themonster], you can see the telltale sign of arousal in [monster his] movement. ");
 			monster.teased(lustDmg);
 			outputText("\n\n");
 		}
@@ -163,12 +163,12 @@ import classes.StatusEffects;
 			var dmg2:Number = player.statusEffectv1(StatusEffects.CombatFollowerEtna);
 			dmg2 += scalingBonusStrengthCompanion() * 0.5;
 			dmg2 = Math.round(dmg2);
-			outputText("Etna dives at [themonster], mauling " + monster.pronoun3 + " viciously with her claws before taking flight again. ");
+			outputText("Etna dives at [themonster], mauling [monster his] viciously with her claws before taking flight again. ");
 			doDamage(dmg2, true, true);
 			outputText("\n\n");
 		}
 		public function etnaCombatActions3():void {
-			outputText("Etna dives at [themonster] and crashes boob first into " + monster.pronoun3 + " face, staggering it before taking flight again.\n\n");
+			outputText("Etna dives at [themonster] and crashes boob first into [monster his] face, staggering it before taking flight again.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		
@@ -475,7 +475,7 @@ import classes.StatusEffects;
 			outputText("\n\n");
 		}
 		public function mitziCombatActions2():void {
-			outputText("Lildea pulls out a bubbling vial of a green liquid then tosses at [themonster]. The vial shatters on contact, causing the contents to spill onto " + monster.pronoun2 + ". ");
+			outputText("Lildea pulls out a bubbling vial of a green liquid then tosses at [themonster]. The vial shatters on contact, causing the contents to spill onto [monster him]. ");
 			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerMitzi)/4)+20), true, true);
 			outputText("\n\n");
 			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
@@ -488,7 +488,7 @@ import classes.StatusEffects;
 			outputText("\n\n");
 		}
 		public function mitziCombatActions4():void {
-			outputText("Roxy whips out two circular glass bottles filled with a pink liquid. She tosses them at [themonster] releasing a cloud of pink fog around " + monster.pronoun2 + ". ");
+			outputText("Roxy whips out two circular glass bottles filled with a pink liquid. She tosses them at [themonster] releasing a cloud of pink fog around [monster him]. ");
 			monster.teased(rand(player.statusEffectv3(StatusEffects.CombatFollowerMitzi)/4)+20);
 			outputText("\n\n");
 			if (monster.hasStatusEffect(StatusEffects.LustDoTH)) monster.addStatusValue(StatusEffects.LustDoTH,1,1);
@@ -559,13 +559,13 @@ import classes.StatusEffects;
 			var dmg8:Number = player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
 			dmg8 += scalingBonusStrengthCompanion() * 0.7;
 			dmg8 = Math.round(dmg8);
-			outputText("Excellia lunges at [themonster], throwing her full weight at " + monster.pronoun2 + " for ");
+			outputText("Excellia lunges at [themonster], throwing her full weight at [monster him] for ");
 			doDamage(dmg8, true, true);
 			outputText(" damage.\n\n");
 		}
 		public function excelliaCombatActions3():void {
 			var dmg9:Number = player.statusEffectv2(StatusEffects.CombatFollowerExcellia);
-			outputText("Excellia smirks as she stares down [themonster]. She lunges at " + monster.pronoun2 + " with a hip check, effectively knocking back and dazing " + monster.pronoun2 + ". ");
+			outputText("Excellia smirks as she stares down [themonster]. She lunges at [monster him] with a hip check, effectively knocking back and dazing [monster him]. ");
 			doDamage(dmg9, true, true);
 			outputText("\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.LoweredAccuracy)) monster.createStatusEffect(StatusEffects.LoweredAccuracy, 40, 0, 0, 0);
@@ -577,7 +577,7 @@ import classes.StatusEffects;
 			dmg10 += scalingBonusStrengthCompanion();
 			dmg10 += unarmedExcellia * 2;
 			dmg10 = Math.round(dmg10);
-			outputText("Excellia lets out a battle cry as she charges at [themonster]. She thrashes, headbutts, and kicks " + monster.pronoun2 + " with one powerful blow after another. ");
+			outputText("Excellia lets out a battle cry as she charges at [themonster]. She thrashes, headbutts, and kicks [monster him] with one powerful blow after another. ");
 			doDamage(dmg10, true, true);
 			outputText("\n\n");
 		}

@@ -1299,7 +1299,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
-		outputText("Air seems to lose all temperature around your fist as you dash at [themonster] and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
+		outputText("Air seems to lose all temperature around your fist as you dash at [themonster] and shove your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, true);
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
@@ -1379,7 +1379,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
-		outputText("Setting your fist ablaze, you rush at [themonster] and scorch " + monster.pronoun2 + " with your searing flames. ");
+		outputText("Setting your fist ablaze, you rush at [themonster] and scorch [monster him] with your searing flames. ");
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage += Math.round(damage * 0.1);
@@ -1957,7 +1957,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		HPChange(-spellCostBlood(150), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiem,4,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for " + monster.pronoun2 + " to react.\n\n");
+		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for [monster him] to react.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1998,7 +1998,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF,5,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. ");
-		outputText("Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for " + monster.pronoun2 + " to react.\n\n");
+		outputText("Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for [monster him] to react.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!

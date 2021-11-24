@@ -4381,7 +4381,7 @@ public class Combat extends BaseContent {
             outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + damage + " lust damage.");
             monster.teased(damage);
         } else {
-            outputText("You spray a cloud of aphrodisiac with your gas gun. [monster a] [monster name] tries to pinch " + monster.pronoun3 + " nose and hold " + monster.pronoun3 + " breath ");
+            outputText("You spray a cloud of aphrodisiac with your gas gun. [monster a] [monster name] tries to pinch [monster his] nose and hold [monster his] breath ");
             if (rand(100) > 25) {
                 outputText("but it’s too late and you can see arousal flushing [monster a] [monster name] skin for " + damage + " lust damage.");
                 monster.teased(damage);
@@ -12475,7 +12475,7 @@ public class Combat extends BaseContent {
 		doDamage(damage, true, true);
 		//Enemy faints -
 		if(monster.HP <= monster.minHP()) {
-			outputText("You can feel [themonster]'s life signs beginning to fade, and before you squeze all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+			outputText("You can feel [themonster]'s life signs beginning to fade, and before you squeze all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 			if(monster.short == "demons")
 				outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 			outputText("\n\n");
@@ -13338,7 +13338,7 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You maintain eye contact with the target insidiously coiling your tail around it. ");
         if (rand(4) == 0) {
-            outputText("It's only when you are fully wrapped around your victim that [themonster] snaps out and realise " + monster.pronoun3 + " predicament.");
+            outputText("It's only when you are fully wrapped around your victim that [themonster] snaps out and realise [monster his] predicament.");
             monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
             monster.removeStatusEffect(StatusEffects.HypnosisNaga);
         } else {
@@ -13366,7 +13366,7 @@ public class Combat extends BaseContent {
 	//Bear hug
     public function bearHug():void {
         fatigue(30, USEFATG_PHYSICAL);
-        outputText("You squeeze [monster a] [monster name] with a mighty hug, slowly crushing the life out of " + monster.pronoun2 + ". ");
+        outputText("You squeeze [monster a] [monster name] with a mighty hug, slowly crushing the life out of [monster him]. ");
         var damage:int = unarmedAttack();
         damage += player.str;
         damage += scalingBonusStrength() * 0.5;
@@ -14122,7 +14122,7 @@ public class Combat extends BaseContent {
     public function heavensDevourer():void {
         clearOutput();
         player.createStatusEffect(StatusEffects.CooldownHeavensDevourer, 4, 0, 0, 0);
-        outputText("You start to concentrate and between your hands forms small black sphere inscribed with many tiny symbols. With a simple flick of hand you send it toward [themonster], which preparing to defend. But sphere stops a round twenty centimiters before " + monster.pronoun3 + ". ");
+        outputText("You start to concentrate and between your hands forms small black sphere inscribed with many tiny symbols. With a simple flick of hand you send it toward [themonster], which preparing to defend. But sphere stops a round twenty centimiters before [monster his]. ");
         outputText("And then it starts greedy sucking our any bit of lust or wrath it can find in [themonster] trasmiting part of it back to you.");
         var devouredLust:Number = 0;
         var transferedLust:Number = 0;
@@ -14525,7 +14525,7 @@ public class Combat extends BaseContent {
 	}
 	public function skeletonSmash():void {
 		clearOutput();
-		outputText("Your Skeletons upon command gang up on [themonster] swarming from all side and leaving " + monster.pronoun2 + " stunned. ");
+		outputText("Your Skeletons upon command gang up on [themonster] swarming from all side and leaving [monster him] stunned. ");
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
 		damage += 300 + rand(121);

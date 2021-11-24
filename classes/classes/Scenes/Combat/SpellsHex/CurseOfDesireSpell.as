@@ -87,7 +87,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 	}
 	
 	public function calcLustResReduction(monster:Monster):Number {
-		if (monster != null) {
+		if (monster != null && monster.lustVuln != 0) {
 			if (monster.lustVuln < 0.1) return monster.lustVuln;
 		}
 		return 0.1
@@ -99,7 +99,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 		}
 		if (!backfired(display)) {
 			var llr:Number = calcLustResReduction(monster);
-			monster.lustVuln -= llr;
+			monster.lustVuln += llr;
 			if (display) {
 				outputText("You moan in pleasure as you curse your target with lewd thoughts. [Themonster] pants in arousal, unable to stop the encroaching fantasies you forced on [monster him] from having their desired effect. ");
 			}

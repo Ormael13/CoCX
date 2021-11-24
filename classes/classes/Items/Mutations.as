@@ -8248,12 +8248,12 @@ public final class Mutations extends MutationsHelper {
                 if (monster.spe - 80 > rand(100) + 1 || monster.short == "lizan rogue") {
                     outputText("Somehow [themonster]'");
                     if (!monster.plural) outputText("s");
-                    outputText(" incredible speed allows " + monster.pronoun2 + " to avoid the spinning blades!  The deadly device shatters when it impacts something in the distance.");
+                    outputText(" incredible speed allows [monster him] to avoid the spinning blades!  The deadly device shatters when it impacts something in the distance.");
                 }
                 //Not dodged
                 else {
                     var damage:Number = 40 + rand(61);
-                    outputText(monster.capitalA + monster.short + " is hit with the wingstick!  It breaks apart as it lacerates " + monster.pronoun2 + ". (" + damage + ")");
+                    outputText(monster.capitalA + monster.short + " is hit with the wingstick!  It breaks apart as it lacerates [monster him]. (" + damage + ")");
                     monster.HP -= damage;
                     if (monster.HP < 0) monster.HP = 0;
                 }

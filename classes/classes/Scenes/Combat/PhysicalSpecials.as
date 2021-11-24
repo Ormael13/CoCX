@@ -1140,7 +1140,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function feint():void {
 		clearOutput();
-		outputText("You attempt to feint " + monster.a + " " + monster.short + " into dropping " + monster.pronoun3 + " guards. It ");
+		outputText("You attempt to feint " + monster.a + " " + monster.short + " into dropping [monster his] guards. It ");
 		if (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80) outputText("failed.");
 		else {
 			var feintduration:Number = 2;
@@ -1691,15 +1691,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		prob += player.hairLength;
 		if(prob <= rand(101)) {
 			//-miss a sting
-			if(monster.plural) outputText("You rush [themonster], whipping your hair around to catch them with your tentacles, but " + monster.pronoun1 + " easily dodge.  Oy, you hope you didn't just give yourself whiplash.");
-			else outputText("You rush [themonster], whipping your hair around to catch it with your tentacles, but " + monster.pronoun1 + " easily dodges.  Oy, you hope you didn't just give yourself whiplash.");
+			if(monster.plural) outputText("You rush [themonster], whipping your hair around to catch them with your tentacles, but [monster he] easily dodge.  Oy, you hope you didn't just give yourself whiplash.");
+			else outputText("You rush [themonster], whipping your hair around to catch it with your tentacles, but [monster he] easily dodges.  Oy, you hope you didn't just give yourself whiplash.");
 		}
 		//Success!
 		else {
 			outputText("You rush [themonster], whipping your hair around like a genie");
 			outputText(", and manage to land a few swipes with your tentacles.  ");
-			if(monster.plural) outputText("As the venom infiltrates " + monster.pronoun3 + " bodies, " + monster.pronoun1 + " twitch and begin to move more slowly, hampered half by paralysis and half by arousal.");
-			else outputText("As the venom infiltrates " + monster.pronoun3 + " body, " + monster.pronoun1 + " twitches and begins to move more slowly, hampered half by paralysis and half by arousal.");
+			if(monster.plural) outputText("As the venom infiltrates [monster his] bodies, [monster he] twitch and begin to move more slowly, hampered half by paralysis and half by arousal.");
+			else outputText("As the venom infiltrates [monster his] body, [monster he] twitches and begins to move more slowly, hampered half by paralysis and half by arousal.");
 			//(decrease speed/str, increase lust)
 			//-venom capacity determined by hair length, 2-3 stings per level of length
 			//Each sting does 5-10 lust damage and 2.5-5 speed damage
@@ -1743,8 +1743,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("Twirling like a top, you swing your tail, but connect with only empty air.");
 		}
 		else {
-			if(!monster.plural) outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, " + monster.pronoun1 + " looks disbelieving, as if " + monster.pronoun3 + " world turned upside down, but " + monster.pronoun1 + " soon becomes irate and redoubles " + monster.pronoun3 + " offense, leaving large holes in " + monster.pronoun3 + " guard.  If you're going to take advantage, it had better be right away; " + monster.pronoun1 + "'ll probably cool off very quickly.");
-			else outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, " + monster.pronoun1 + " look disbelieving, as if " + monster.pronoun3 + " world turned upside down, but " + monster.pronoun1 + " soon become irate and redouble " + monster.pronoun3 + " offense, leaving large holes in " + monster.pronoun3 + " guard.  If you're going to take advantage, it had better be right away; " + monster.pronoun1 + "'ll probably cool off very quickly.");
+			if(!monster.plural) outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, [monster he] looks disbelieving, as if [monster his] world turned upside down, but [monster he] soon becomes irate and redoubles [monster his] offense, leaving large holes in [monster his] guard.  If you're going to take advantage, it had better be right away; [monster he]'ll probably cool off very quickly.");
+			else outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, [monster he] look disbelieving, as if [monster his] world turned upside down, but [monster he] soon become irate and redouble [monster his] offense, leaving large holes in [monster his] guard.  If you're going to take advantage, it had better be right away; [monster he]'ll probably cool off very quickly.");
 			if(!monster.hasStatusEffect(StatusEffects.CoonWhip)) monster.createStatusEffect(StatusEffects.CoonWhip,0,0,0,0);
 			var armorChanges:int = Math.round(monster.armorDef * .75);
 			while(armorChanges > 0 && monster.armorDef >= 1) {
@@ -2694,8 +2694,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//(if monster = demons)
-		if(!monster.plural) outputText("You throw one of your stashed bunny eggs at [themonster] face! It explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
-		else outputText("You throw one of your stashed bunny eggs up at one of [themonster]! It explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
+		if(!monster.plural) outputText("You throw one of your stashed bunny eggs at [themonster] face! It explodes in a lewd mix of fluids covering [monster his] eyes and body with your unfertilised egg content.");
+		else outputText("You throw one of your stashed bunny eggs up at one of [themonster]! It explodes in a lewd mix of fluids covering [monster his] eyes and body with your unfertilised egg content.");
 		//React
 		if(monster.lustVuln == 0) outputText("  Your opponent does not seem to be affected by it however.");
 		else {
@@ -2712,8 +2712,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//(if monster = demons)
-		if(!monster.plural) outputText("You begin throwing a barrage of your stashed bunny eggs at [themonster] face! They explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
-		else outputText("You begin throwing a barrage of your stashed bunny eggs up at one of [themonster]! They explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
+		if(!monster.plural) outputText("You begin throwing a barrage of your stashed bunny eggs at [themonster] face! They explodes in a lewd mix of fluids covering [monster his] eyes and body with your unfertilised egg content.");
+		else outputText("You begin throwing a barrage of your stashed bunny eggs up at one of [themonster]! They explodes in a lewd mix of fluids covering [monster his] eyes and body with your unfertilised egg content.");
 		//React
 		if(monster.lustVuln == 0) outputText("  Your aphrodisiac toxin has no effect!");
 		else {
@@ -3415,14 +3415,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(10, USEFATG_PHYSICAL);
 		monster.createStatusEffect(StatusEffects.EmbraceVampire, 3 + rand(3),0,0,0);
 		if (player.hasStatusEffect(StatusEffects.Flying)) {
-			outputText("You dive down at your target, wrapping your wings around [themonster] embracing " + monster.pronoun1 + " as you prepare to feast.");
+			outputText("You dive down at your target, wrapping your wings around [themonster] embracing [monster he] as you prepare to feast.");
 			player.removeStatusEffect(StatusEffects.Flying);
 			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
 				player.removeStatusEffect(StatusEffects.FlyingNoStun);
 				player.removePerk(PerkLib.Resolute);
 			}
 		}
-		else outputText("You leap and box in [themonster] with your wings, embracing " + monster.pronoun1 + " as you prepare to feast.");
+		else outputText("You leap and box in [themonster] with your wings, embracing [monster he] as you prepare to feast.");
 		outputText("\n\n");
 		enemyAI();
 	}
@@ -3450,7 +3450,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
-			outputText("You growl menacingly, dropping on all four" + (player.tail.type != Tail.NONE ? " and flicking your tail" : "") + ", as you pounce on [themonster] clawing at " + monster.pronoun1 + " body and leaving deep bleeding wounds.");
+			outputText("You growl menacingly, dropping on all four" + (player.tail.type != Tail.NONE ? " and flicking your tail" : "") + ", as you pounce on [themonster] clawing at [monster he] body and leaving deep bleeding wounds.");
 			monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2),0,0,0);
 		}
 		//Failure
@@ -3499,11 +3499,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
-			outputText("You land both paws on [themonster] with brutal power using your claws to grab " + monster.pronoun2 + ".");
+			outputText("You land both paws on [themonster] with brutal power using your claws to grab [monster him].");
 			monster.createStatusEffect(StatusEffects.GrabBear, 4 + rand(2),0,0,0);
 		}
 		//Failure
-		else outputText("Your opponent seeing it coming dodge to the side as you smash the ground where " + monster.pronoun1 + " used to stand.");
+		else outputText("Your opponent seeing it coming dodge to the side as you smash the ground where [monster he] used to stand.");
 		outputText("\n\n");
 		enemyAI();
 	}
@@ -3679,7 +3679,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				doDamage(damage);
 				damage *= 2;
 			}
-			outputText("You growl menacingly, and fold your wings, as you dive into [themonster] clawing at " + monster.pronoun2 + " body and leaving deep bleeding wounds dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!. You’re now grappling with your target ready to tear it to shreds.");
+			outputText("You growl menacingly, and fold your wings, as you dive into [themonster] clawing at [monster him] body and leaving deep bleeding wounds dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!. You’re now grappling with your target ready to tear it to shreds.");
 			if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -3796,7 +3796,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(if monster = demons)
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You catch the demon off guard and sink your needle-like fangs deep into his flesh. You quickly release your venom and retreat before he, or the rest of the group manage to react.");
 			//(Otherwise)
-			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch [themonster] off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.");
+			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch [themonster] off guard, your needle-like fangs penetrating deep into [monster his] body. You quickly release your venom, and retreat before [monster he] manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
 			var d2Bdcc:Number = 2;
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
@@ -3834,8 +3834,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You catch the demon off guard and sink your needle-like fangs deep into his flesh. You quickly release your venom and retreat before he, or the rest of the group manage to react.");
 			//(Otherwise)
 			else {
-				if(!monster.plural) outputText("You lunge at the foe headfirst, fangs bared. You manage to catch [themonster] off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.a + monster.pronoun1 + " manages to react.");
-				else outputText("You lunge at the foes headfirst, fangs bared. You manage to catch one of [themonster] off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.a + monster.pronoun1 + " manage to react.");
+				if(!monster.plural) outputText("You lunge at the foe headfirst, fangs bared. You manage to catch [themonster] off guard, your needle-like fangs penetrating deep into [monster his] body. You quickly release your venom, and retreat before " + monster.a + monster.pronoun1 + " manages to react.");
+				else outputText("You lunge at the foes headfirst, fangs bared. You manage to catch one of [themonster] off guard, your needle-like fangs penetrating deep into [monster his] body. You quickly release your venom, and retreat before " + monster.a + monster.pronoun1 + " manage to react.");
 			}
 			//React
 			if(monster.lustVuln == 0) outputText("  Your aphrodisiac toxin has no effect!");
@@ -3918,7 +3918,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(if monster = demons)
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You manage to catch the demon off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before he manages to react.");
 			//(Otherwise)
-			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the [themonster] off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
+			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the [themonster] off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before [monster he] manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
 			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
 			if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
@@ -4125,7 +4125,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else {
 				//doubles horns bonus damage
 				damage *= 2;
-				outputText("You lower your head and charge, slamming into [themonster] and burying "+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "both your horns":"your horn")+" into " + monster.pronoun2 + "! <b>Critical hit!</b>  ");
+				outputText("You lower your head and charge, slamming into [themonster] and burying "+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "both your horns":"your horn")+" into [monster him]! <b>Critical hit!</b>  ");
 			}
 			//Bonus damage for rut!
 			if (player.inRut && monster.cockTotal() > 0) {
@@ -4355,7 +4355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your stinger!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your stinger with superior quickness!\n\n");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to sting " + monster.pronoun2 + ".\n\n");
+			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to sting [monster him].\n\n");
 			enemyAI();
 			return;
 		}
@@ -4366,9 +4366,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Sting successful!
-		outputText("Searing pain lances through [themonster] as you manage to sting " + monster.pronoun2 + "!  ");
-		if(monster.plural) outputText("You watch as " + monster.pronoun1 + " stagger back a step and nearly trip, flushing hotly.");
-		else outputText("You watch as " + monster.pronoun1 + " staggers back a step and nearly trips, flushing hotly.");
+		outputText("Searing pain lances through [themonster] as you manage to sting [monster him]!  ");
+		if(monster.plural) outputText("You watch as [monster he] stagger back a step and nearly trip, flushing hotly.");
+		else outputText("You watch as [monster he] staggers back a step and nearly trips, flushing hotly.");
 		var dBd3c:Number = 1;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd3c *= 2;
 		if (player.tailType == 6) {
@@ -4398,9 +4398,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		 IT used to paralyze 50% of the time, this is no longer the case!
 		 Paralise the other 50%!
 		 else {
-		 outputText("Searing pain lances through [themonster] as you manage to sting " + monster.pronoun2 + "!  ");
-		 if(monster.short == "demons") outputText("You watch as " + monster.pronoun1 + " stagger back a step and nearly trip, finding it hard to move as " + monster.pronoun1 + " are afflicted with your paralytic venom.  ");
-		 else outputText("You watch as " + monster.pronoun1 + " staggers back a step and nearly trips, finding it hard to move as " + monster.pronoun1 + " is afflicted with your paralytic venom.  ");
+		 outputText("Searing pain lances through [themonster] as you manage to sting [monster him]!  ");
+		 if(monster.short == "demons") outputText("You watch as [monster he] stagger back a step and nearly trip, finding it hard to move as [monster he] are afflicted with your paralytic venom.  ");
+		 else outputText("You watch as [monster he] staggers back a step and nearly trips, finding it hard to move as [monster he] is afflicted with your paralytic venom.  ");
 		 if(monster.short == "demons") outputText("It appears that [themonster] are weaker and slower.");
 		 else outputText("It appears that [themonster] is weaker and slower.");
 		 monster.str -= (5+rand(player.lib/5))
@@ -4501,7 +4501,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to hit with a spike " + monster.pronoun2 + ".\n\n");
+			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
 			enemyAI();
 			return;
 		}
@@ -4533,7 +4533,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to hit with a spike " + monster.pronoun2 + ".\n\n");
+			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
 			enemyAI();
 			return;
 		}
@@ -4566,7 +4566,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		switch(attack) {
 			case 1:
 				//Attack text 1:
-				outputText("You hop up to [themonster] and attempt to plant a kiss on " + monster.pronoun3 + ".");
+				outputText("You hop up to [themonster] and attempt to plant a kiss on [monster his].");
 				break;
 				//Attack text 2:
 			case 2:
@@ -4574,11 +4574,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 				break;
 				//Attack text 3:
 			case 3:
-				outputText("Swaying sensually, you wiggle up to [themonster] and attempt to plant a nice wet kiss on " + monster.pronoun2 + ".");
+				outputText("Swaying sensually, you wiggle up to [themonster] and attempt to plant a nice wet kiss on [monster him].");
 				break;
 				//Attack text 4:
 			case 4:
-				outputText("Lunging forward, you fly through the air at [themonster] with your lips puckered and ready to smear drugs all over " + monster.pronoun2 + ".");
+				outputText("Lunging forward, you fly through the air at [themonster] with your lips puckered and ready to smear drugs all over [monster him].");
 				break;
 				//Attack text 5:
 			case 5:
@@ -4586,7 +4586,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				break;
 				//Attack text 6:
 			default:
-				outputText("Pursing your drug-laced lips, you close on [themonster] and try to plant a nice, wet kiss on " + monster.pronoun2 + ".");
+				outputText("Pursing your drug-laced lips, you close on [themonster] and try to plant a nice, wet kiss on [monster him].");
 				break;
 		}
 		//Dodged!
@@ -4600,12 +4600,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 					//Dodge 2:
 				case 2:
 					if(monster.plural) outputText("  Unfortunately, you're too slow, and [themonster] slips out of the way before you can lay a wet one on one of them.\n\n");
-					else outputText("  Unfortunately, you're too slow, and [themonster] slips out of the way before you can lay a wet one on " + monster.pronoun2 + ".\n\n");
+					else outputText("  Unfortunately, you're too slow, and [themonster] slips out of the way before you can lay a wet one on [monster him].\n\n");
 					break;
 					//Dodge 3:
 				default:
 					if(monster.plural) outputText("  Sadly, [themonster] moves aside, denying you the chance to give one of them a smooch.\n\n");
-					else outputText("  Sadly, [themonster] moves aside, denying you the chance to give " + monster.pronoun2 + " a smooch.\n\n");
+					else outputText("  Sadly, [themonster] moves aside, denying you the chance to give [monster him] a smooch.\n\n");
 					break;
 			}
 			enemyAI();
@@ -4614,7 +4614,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Success but no effect:
 		if(monster.lustVuln <= 0 || !monster.hasCock()) {
 			if(monster.plural) outputText("  Mouth presses against mouth, and you allow your tongue to stick out to taste the saliva of one of their number, making sure to give them a big dose.  Pulling back, you look at [themonster] and immediately regret wasting the time on the kiss.  It had no effect!\n\n");
-			else outputText("  Mouth presses against mouth, and you allow your tongue to stick to taste " + monster.pronoun3 + "'s saliva as you make sure to give them a big dose.  Pulling back, you look at [themonster] and immediately regret wasting the time on the kiss.  It had no effect!\n\n");
+			else outputText("  Mouth presses against mouth, and you allow your tongue to stick to taste [monster his]'s saliva as you make sure to give them a big dose.  Pulling back, you look at [themonster] and immediately regret wasting the time on the kiss.  It had no effect!\n\n");
 			enemyAI();
 			return;
 		}
@@ -4634,7 +4634,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				//Success 2:
 			case 2:
 				if(monster.plural) outputText("  Gold-gilt lips press into one of their mouths, the victim's lips melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every bit of their mouth with your lipstick before you let them go.");
-				else outputText("  Gold-gilt lips press into [themonster], " + monster.pronoun3 + " mouth melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every inch of " + monster.pronoun3 + " with your lipstick before you let " + monster.pronoun2 + " go.");
+				else outputText("  Gold-gilt lips press into [themonster], [monster his] mouth melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every inch of [monster his] with your lipstick before you let [monster him] go.");
 				damage = 20;
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -4644,7 +4644,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				//CRITICAL SUCCESS (3)
 			case 3:
 				if(monster.plural) outputText("  You slip past [themonster]'s guard and press your lips against one of them.  " + monster.mf("He","She") + " melts against you, " + monster.mf("his","her") + " tongue sliding into your mouth as " + monster.mf("he","she") + " quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to " + monster.mf("his","her") + " mouth, you break back and observe your handwork.  One of [themonster] is still standing there, licking " + monster.mf("his","her") + " his lips while " + monster.mf("his","her") + " dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way " + monster.mf("he","she") + " will go soft now.  Though you didn't drug the rest, they're probably a little 'heated up' from the show.");
-				else outputText("  You slip past [themonster]'s guard and press your lips against " + monster.pronoun3 + ".  " + monster.mf("He","She") + " melts against you, " + monster.pronoun3 + " tongue sliding into your mouth as " + monster.pronoun1 + " quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to " + monster.pronoun3 + " mouth, you break back and observe your handwork.  [Themonster] is still standing there, licking " + monster.pronoun3 + " lips while " + monster.pronoun3 + " dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way " + monster.pronoun1 + " will go soft now.");
+				else outputText("  You slip past [themonster]'s guard and press your lips against [monster his].  " + monster.mf("He","She") + " melts against you, [monster his] tongue sliding into your mouth as [monster he] quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to [monster his] mouth, you break back and observe your handwork.  [Themonster] is still standing there, licking [monster his] lips while [monster his] dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way [monster he] will go soft now.");
 				damage = 30;
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -4997,7 +4997,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function netEntangle():void {
 		clearOutput();
-		outputText("You skillfully toss your net at [themonster] restraining " + monster.pronoun3 + " movement.");
+		outputText("You skillfully toss your net at [themonster] restraining [monster his] movement.");
 		player.createStatusEffect(StatusEffects.CooldownNet,8,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		enemyAI();
@@ -5062,7 +5062,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster is EncapsulationPod) {
 				outputText("While the " + ammoWord + " do lodges deep into the pod's fleshy wall it does not hinder it in any ways.");
 			} else {
-				outputText("You take aim at [themonster] legs in order to restrain " + monster.pronoun3 + " movement. Your shot hits the mark pinning your shocked opponent down.");
+				outputText("You take aim at [themonster] legs in order to restrain [monster his] movement. Your shot hits the mark pinning your shocked opponent down.");
 			}
 			//Determine if critical hit!
 			var crit:Boolean = false;
@@ -5910,7 +5910,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function mechWhitefireBeamCannon():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		outputText("You shoot with the Whitefire beam cannon at [themonster] burning " + monster.pronoun3 + " badly for ");
+		outputText("You shoot with the Whitefire beam cannon at [themonster] burning [monster his] badly for ");
 		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
@@ -5940,7 +5940,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function mechDynapunchGlove():void {
 		clearOutput();
-		outputText("You launch the mech springed glove at [themonster] hitting " + monster.pronoun3 + " straight in the face for a K.O. [themonster] is hit for ");
+		outputText("You launch the mech springed glove at [themonster] hitting [monster his] straight in the face for a K.O. [themonster] is hit for ");
 		player.createStatusEffect(StatusEffects.CooldownDynapunchGlove,8,0,0,0);
 		var damage:Number = 0;
 		damage += player.str;
@@ -5977,7 +5977,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		doDamage(damage);
 		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage");
 		if (!monster.hasPerk(PerkLib.Resolute)) {
-			outputText(" stunning " + monster.pronoun3 + " for the round");
+			outputText(" stunning [monster his] for the round");
 			monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		}
 		outputText(".");

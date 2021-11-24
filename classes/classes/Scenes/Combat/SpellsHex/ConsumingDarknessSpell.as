@@ -59,7 +59,7 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 			store11 = Math.round(store11 * combat.darknessDamageBoostedByDao());
 			combat.doDarknessDamage(store11, true, display);
 			if (display) {
-				outputText("damage.\n\n");
+				outputText(" damage.\n\n");
 			}
 		}
 	}

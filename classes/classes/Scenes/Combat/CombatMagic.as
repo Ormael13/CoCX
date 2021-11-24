@@ -1310,7 +1310,7 @@ public class CombatMagic extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodExplosion,3,0,0,0);
 		if(handleShell()){return;}
 		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather above your hand, coalescing into a crimson sphere. ");
-		outputText("It roils as you concentrate on it before aim the orb at [themonster], it brusts and seeps into " + monster.pronoun2 + " on impact as " + monster.pronoun1 + "'" + (monster.plural ? "re":"s") + " afflicted by the magic.\n\n");
+		outputText("It roils as you concentrate on it before aim the orb at [themonster], it brusts and seeps into [monster him] on impact as [monster he]'" + (monster.plural ? "re":"s") + " afflicted by the magic.\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlood() * 4;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
@@ -1351,7 +1351,7 @@ public class CombatMagic extends BaseCombatContent {
 		HPChange(-spellCostBlood(100), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodChains,3,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
-		outputText("The blood emitted by you splited into dozens of stems and surrounded [themonster], bounding " + monster.pronoun2 + " tight enought to prevent any movements for some time.\n\n");
+		outputText("The blood emitted by you splited into dozens of stems and surrounded [themonster], bounding [monster him] tight enought to prevent any movements for some time.\n\n");
 		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1669,7 +1669,7 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		outputText("You channel your powers in [themonster] bone structure stressing it and forcing the bones to snap. [Themonster] cough blood you wreck " + monster.pronoun3 + " from the inside. ");
+		outputText("You channel your powers in [themonster] bone structure stressing it and forcing the bones to snap. [Themonster] cough blood you wreck [monster his] from the inside. ");
 		doTrueDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		MagicAddonEffect();
@@ -1764,7 +1764,7 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		player.createStatusEffect(StatusEffects.CooldownSpellExorcise,2,0,0,0);
-		outputText("Your [weapon] begins to glow as you charge and deliver a mighty strike. As the mystical blow strikes your opponent"+(monster.plural ? "s":"")+", the magic explodes forward from your weapon in the shape of the sigil of the Marethian divine pantheon, damaging your foe"+(monster.plural ? "s":"")+" further and throwing "+monster.pronoun2+" back.");
+		outputText("Your [weapon] begins to glow as you charge and deliver a mighty strike. As the mystical blow strikes your opponent"+(monster.plural ? "s":"")+", the magic explodes forward from your weapon in the shape of the sigil of the Marethian divine pantheon, damaging your foe"+(monster.plural ? "s":"")+" further and throwing [monster him] back.");
 		doMagicDamage(damage, true, true);
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);

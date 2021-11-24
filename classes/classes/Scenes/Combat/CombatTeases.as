@@ -14,7 +14,7 @@ public class CombatTeases extends BaseCombatContent {
 	public function teaseAttack():void {
 		if (monster.lustVuln == 0) {
 			clearOutput();
-			outputText("You try to tease [themonster] with your body, but it doesn't have any effect on " + monster.pronoun2 + ".\n\n");
+			outputText("You try to tease [themonster] with your body, but it doesn't have any effect on [monster him].\n\n");
 			enemyAI();
 		}
 		//Worms are immune!
@@ -36,7 +36,7 @@ public class CombatTeases extends BaseCombatContent {
 		//You cant tease a blind guy!
 		if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
 			clearOutput();
-			outputText("You do your best to tease [themonster] with your body.  It doesn't work - you blinded " + monster.pronoun2 + ", remember?\n\n");
+			outputText("You do your best to tease [themonster] with your body.  It doesn't work - you blinded [monster him], remember?\n\n");
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 1) {
@@ -647,7 +647,7 @@ public class CombatTeases extends BaseCombatContent {
 				if (player.breastRows.length == 1) {
 					//50+ breastsize% success rate
 					outputText("Your lift your top, exposing your " + breastDescript(0) + " to [themonster].  You shake them from side to side enticingly.");
-					if (player.lust >= (player.maxLust() * 0.5)) outputText("  Your " + nippleDescript(0) + "s seem to demand " + monster.pronoun3 + " attention.");
+					if (player.lust >= (player.maxLust() * 0.5)) outputText("  Your " + nippleDescript(0) + "s seem to demand [monster his] attention.");
 				}
 				//Multirow
 				if (player.breastRows.length > 1) {
@@ -662,7 +662,7 @@ public class CombatTeases extends BaseCombatContent {
 				//2 PUSSAH FLASHIN'
 			case 2:
 				if (player.isTaur()) {
-					outputText("You gallop toward your unsuspecting enemy, dodging their defenses and knocking them to the ground.  Before they can recover, you slam your massive centaur ass down upon them, stopping just short of using crushing force to pin them underneath you.  In this position, your opponent's face is buried right in your girthy horsecunt.  You grind your cunt into " + monster.pronoun3 + " face for a moment before standing.  When you do, you're gratified to see your enemy covered in your lubricant and smelling powerfully of horsecunt.");
+					outputText("You gallop toward your unsuspecting enemy, dodging their defenses and knocking them to the ground.  Before they can recover, you slam your massive centaur ass down upon them, stopping just short of using crushing force to pin them underneath you.  In this position, your opponent's face is buried right in your girthy horsecunt.  You grind your cunt into [monster his] face for a moment before standing.  When you do, you're gratified to see your enemy covered in your lubricant and smelling powerfully of horsecunt.");
 					chance += 6;
 					damage += 12;
 				}
@@ -735,7 +735,7 @@ public class CombatTeases extends BaseCombatContent {
 						chance++;
 						outputText("  Clear slime leaks from them, making it quite clear that they're more than just nipples.");
 					}
-					else outputText("  Your hard nipples seem to demand " + monster.pronoun3 + " attention.");
+					else outputText("  Your hard nipples seem to demand [monster his] attention.");
 					chance += 3;
 					damage += 6;
 				}
@@ -796,7 +796,7 @@ public class CombatTeases extends BaseCombatContent {
 				//10 Bulgy groin thrust
 			case 10:
 				outputText("You lean back and pump your hips at [themonster] in an incredibly vulgar display.  The bulging, barely-contained outline of your [cock] presses hard into your gear.  ");
-				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("No way could " + monster.pronoun1 + " resist your huge cock!");
+				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("No way could [monster he] resist your huge cock!");
 				else outputText("This is so crude, but at the same time, you know it'll likely be effective.");
 				outputText("  You go on like that, humping the air for your foe");
 				outputText("'s");
@@ -882,7 +882,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//17 Bee abdomen tease
 			case 17:
-				outputText("You swing around, shedding the [armor] around your waist to expose your [butt] to [themonster].  Taking up your oversized bee abdomen in both hands, you heft the thing and wave it about teasingly.  Drops of venom drip to and fro, a few coming dangerously close to " + monster.pronoun2 + ".  \"<i>Maybe if you behave well enough, I'll even drop a few eggs into your belly,</i>\" you say softly, dropping the abdomen back to dangle above your butt and redressing.");
+				outputText("You swing around, shedding the [armor] around your waist to expose your [butt] to [themonster].  Taking up your oversized bee abdomen in both hands, you heft the thing and wave it about teasingly.  Drops of venom drip to and fro, a few coming dangerously close to [monster him].  \"<i>Maybe if you behave well enough, I'll even drop a few eggs into your belly,</i>\" you say softly, dropping the abdomen back to dangle above your butt and redressing.");
 				ass = true;
 				chance += 2;
 				damage += 2;
@@ -916,7 +916,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//22 SPOIDAH SILK
 			case 22:
-				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to [themonster], molding the sticky substance as " + monster.pronoun1 + " looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at " + monster.pronoun2 + ". It sticks to " + monster.pronoun3 + " body, the sensation causing " + monster.pronoun2 + " to hastily slap the heart off.  " + monster.mf("He", "She") + " returns " + monster.pronoun3 + " gaze to you to find you turned around, [butt] bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  " + monster.mf("He", "She") + " gulps.");
+				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to [themonster], molding the sticky substance as [monster he] looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at [monster him]. It sticks to [monster his] body, the sensation causing [monster him] to hastily slap the heart off.  " + monster.mf("He", "She") + " returns [monster his] gaze to you to find you turned around, [butt] bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  " + monster.mf("He", "She") + " gulps.");
 				ass = true;
 				break;
 				//23 RUT TEASE
@@ -938,7 +938,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//TALL WOMAN TEASE
 			case 25:
-				outputText("You move close to your enemy, handily stepping over " + monster.pronoun3 + " defensive strike before leaning right down in " + monster.pronoun3 + " face, giving " + monster.pronoun2 + " a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy", "girl") + ",</i>\" you smile.  Before " + monster.pronoun1 + " can react, you grab " + monster.pronoun2 + " and smoosh " + monster.pronoun3 + " face into your [fullchest], nearly choking " + monster.pronoun2 + " in the canyon of your cleavage.  " + monster.mf("He", "She") + " struggles for a moment.  You give " + monster.pronoun2 + " a little kiss on the head and step back, ready for combat.");
+				outputText("You move close to your enemy, handily stepping over [monster his] defensive strike before leaning right down in [monster his] face, giving [monster him] a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy", "girl") + ",</i>\" you smile.  Before [monster he] can react, you grab [monster him] and smoosh [monster his] face into your [fullchest], nearly choking [monster him] in the canyon of your cleavage.  " + monster.mf("He", "She") + " struggles for a moment.  You give [monster him] a little kiss on the head and step back, ready for combat.");
 				breasts = true;
 				chance += 6;
 				damage += 12;
@@ -1016,7 +1016,7 @@ public class CombatTeases extends BaseCombatContent {
 				outputText("You shimmy and shake sensually. (An error occurred.)");
 				break;
 			case 37:
-				outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to [themonster] with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tailCount > 1) ? "one of your tails" : "your tail") + " up and down " + monster.pronoun3 + " body sensually.");
+				outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to [themonster] with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tailCount > 1) ? "one of your tails" : "your tail") + " up and down [monster his] body sensually.");
 				chance += 18;
 				damage += 9;
 				break;
@@ -1133,12 +1133,12 @@ public class CombatTeases extends BaseCombatContent {
 					breasts = true;
 				}
 				else if (maiden == 1) {
-					outputText("You skip up to [themonster] and spin around to rub your barely-covered butt up against " + monster.pronoun2 + ".  Before " + monster.pronoun1 + " can react, you're slowly bouncing your [butt] up and down against " + monster.pronoun3 + " groin.  When " + monster.pronoun1 + " reaches down, you grab " + monster.pronoun3 + " hand and press it up, under your skirt, right against the steamy seal on your sex.  The simmering heat of your overwhelming lust burns hot enough for " + monster.pronoun2 + " to feel even through the contoured leather, and you let " + monster.pronoun2 + " trace the inside of your [leg] for a moment before moving away, laughing playfully.");
+					outputText("You skip up to [themonster] and spin around to rub your barely-covered butt up against [monster him].  Before [monster he] can react, you're slowly bouncing your [butt] up and down against [monster his] groin.  When [monster he] reaches down, you grab [monster his] hand and press it up, under your skirt, right against the steamy seal on your sex.  The simmering heat of your overwhelming lust burns hot enough for [monster him] to feel even through the contoured leather, and you let [monster him] trace the inside of your [leg] for a moment before moving away, laughing playfully.");
 					ass    = true;
 					vagina = true;
 				}
 				else if (maiden == 2) {
-					outputText("You flip up the barely-modest chain you call a skirt and expose your g-string to [themonster].  Slowly swaying your [hips], you press a finger down on the creased crotch plate and exaggerate a lascivious moan into a throaty purr of enticing, sexual bliss.  Your eyes meet " + monster.pronoun3 + ", and you throatily whisper, \"<i>");
+					outputText("You flip up the barely-modest chain you call a skirt and expose your g-string to [themonster].  Slowly swaying your [hips], you press a finger down on the creased crotch plate and exaggerate a lascivious moan into a throaty purr of enticing, sexual bliss.  Your eyes meet [monster his], and you throatily whisper, \"<i>");
 					if (player.hasVirginVagina()) outputText("Think you can handle a virgin's infinite lust?");
 					else outputText("Think you have what it takes to satisfy this perfect pussy?");
 					outputText("</i>\"");
@@ -1146,11 +1146,11 @@ public class CombatTeases extends BaseCombatContent {
 					damage += 9;
 				}
 				else if (maiden == 3) {
-					outputText("You seductively wiggle your way up to [themonster], and before " + monster.pronoun1 + " can react to your salacious advance, you snap a [leg] up in what would be a vicious kick, if you weren't simply raising it to rest your [foot] on " + monster.pronoun3 + " shoulder.  With your thighs so perfectly spready, your skirt is lifted, and [themonster] is given a perfect view of your thong-enhanced cameltoe and the moisture that beads at the edges of your not-so-modest covering.");
+					outputText("You seductively wiggle your way up to [themonster], and before [monster he] can react to your salacious advance, you snap a [leg] up in what would be a vicious kick, if you weren't simply raising it to rest your [foot] on [monster his] shoulder.  With your thighs so perfectly spready, your skirt is lifted, and [themonster] is given a perfect view of your thong-enhanced cameltoe and the moisture that beads at the edges of your not-so-modest covering.");
 					vagina = true;
 				}
 				else {
-					outputText("Bending over, you lift your [butt] high in the air.  Most of your barely-covered tush is exposed, but the hem of your chainmail skirt still protects some of your anal modesty.  That doesn't last long.  You start shaking your [butt] up, down, back, and forth to an unheard rhythm, flipping the pointless covering out of the way so that [themonster] can gaze upon your curvy behind in it all its splendid detail.  A part of you hopes that " + monster.pronoun1 + " takes in the intricate filigree on the back of your thong, though to " + monster.pronoun2 + " it looks like a bunch of glittering arrows on an alabaster background, all pointing squarely at your [asshole].");
+					outputText("Bending over, you lift your [butt] high in the air.  Most of your barely-covered tush is exposed, but the hem of your chainmail skirt still protects some of your anal modesty.  That doesn't last long.  You start shaking your [butt] up, down, back, and forth to an unheard rhythm, flipping the pointless covering out of the way so that [themonster] can gaze upon your curvy behind in it all its splendid detail.  A part of you hopes that [monster he] takes in the intricate filigree on the back of your thong, though to [monster him] it looks like a bunch of glittering arrows on an alabaster background, all pointing squarely at your [asshole].");
 					ass = true;
 					chance += 6;
 				}
@@ -1217,7 +1217,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//naga races belly dance teases
 			case 48:
-				outputText("You give [themonster] a belly dance show, moving your hip from a side to another and displaying your assets.  [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise " + monster.pronoun1 + " did absolutely nothing for the last six seconds.");
+				outputText("You give [themonster] a belly dance show, moving your hip from a side to another and displaying your assets.  [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise [monster he] did absolutely nothing for the last six seconds.");
 				monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				chance += 9;
 				damage += 9;

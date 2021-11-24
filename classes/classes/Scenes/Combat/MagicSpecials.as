@@ -772,7 +772,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, a powerful wave of cold blasting the area in front of you.  [Themonster] does " + monster.pronoun3 + " best to avoid it, but the wave of freezing air is too fast.");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, a powerful wave of cold blasting the area in front of you.  [Themonster] does [monster his] best to avoid it, but the wave of freezing air is too fast.");
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -811,7 +811,7 @@ public class MagicSpecials extends BaseCombatContent {
 				monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be frozen by your attack.</b>");
@@ -915,7 +915,7 @@ public class MagicSpecials extends BaseCombatContent {
 				monster.createStatusEffect(StatusEffects.FrozenSolid,freezetime,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be frozen by your attack.</b>");
@@ -1061,7 +1061,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		var temp2:Number;
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
-			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward [themonster], gleefully zapping " + monster.pronoun2 + " body with your accumulated lust! Your desire, however, only continues to ramp up.\n\n");
+			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward [themonster], gleefully zapping [monster him] body with your accumulated lust! Your desire, however, only continues to ramp up.\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = 20 + rand(6);
@@ -1563,14 +1563,14 @@ public class MagicSpecials extends BaseCombatContent {
 			combatRoundOver();
 			return;
 		}
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  [Themonster] does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
 			outputText("  <b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>");
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -1609,11 +1609,11 @@ public class MagicSpecials extends BaseCombatContent {
 			doFireDamage(damage, true, true);
 		}
 		if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -1661,7 +1661,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText("You thrust both hands forward, gathering moisture and freezing it in the shape of Icy dagger like shards. The wind whips past you, cold and carrying with it long pointed shards of ice. They crash against [themonster]. " + monster.Pronoun1 + " screams in pain as " + monster.pronoun3 + " body is impaled multiple times by the barrage of projectiles. ");
+		outputText("You thrust both hands forward, gathering moisture and freezing it in the shape of Icy dagger like shards. The wind whips past you, cold and carrying with it long pointed shards of ice. They crash against [themonster]. [monster he] screams in pain as [monster his] body is impaled multiple times by the barrage of projectiles. ");
 		doIceDamage(damage, true, true);
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -1730,7 +1730,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText("You condense the natural humidity ambient in the air to a focal point and encase [themonster] in a solid block of ice! You can almost feel " + monster.pronoun2 + " shivering in there from the sudden temperature spike. ");
+		outputText("You condense the natural humidity ambient in the air to a focal point and encase [themonster] in a solid block of ice! You can almost feel [monster him] shivering in there from the sudden temperature spike. ");
 		doIceDamage(damage, true, true);
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -1768,7 +1768,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
-		outputText("You suddenly close the gap between you and [themonster] embracing " + monster.pronoun2 + " with both arms and drawing " + monster.pronoun2 + " in for a sudden kiss. At first [themonster] is surprised but " + monster.pronoun3 + " expression changes to horror as it starts to realise you're draining " + monster.pronoun3 + " warmth away. ");
+		outputText("You suddenly close the gap between you and [themonster] embracing [monster him] with both arms and drawing [monster him] in for a sudden kiss. At first [themonster] is surprised but [monster his] expression changes to horror as it starts to realise you're draining [monster his] warmth away. ");
 		var lustDmg:Number = player.lust / 10 + player.lib / 10;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if(monster.lustVuln == 0) {
@@ -1776,11 +1776,11 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText(" " + monster.Pronoun1 + " barely manages to shove you off before you turn " + monster.pronoun2 + " into a frozen husk, highly shocked yet aroused by the experience.  ");
+		outputText(" [monster he] barely manages to shove you off before you turn [monster him] into a frozen husk, highly shocked yet aroused by the experience.  ");
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
@@ -1788,7 +1788,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -1838,10 +1838,10 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You spit a blob of neon blue acid at [themonster] your corrosive fluids burning at "+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "their" : "" + monster.pronoun3 + "")+" flesh.");
+		outputText("You spit a blob of neon blue acid at [themonster] your corrosive fluids burning at "+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "their" : "[monster his]")+" flesh.");
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -1934,7 +1934,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -2044,14 +2044,14 @@ public class MagicSpecials extends BaseCombatContent {
 			combatRoundOver();
 			return;
 		}
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  [Themonster] does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
 			outputText("  <b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>");
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -2087,11 +2087,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
@@ -2153,10 +2153,10 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  [Themonster] does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -2179,11 +2179,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
@@ -2243,10 +2243,10 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  [Themonster] does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -2269,11 +2269,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
@@ -2332,10 +2332,10 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  [Themonster] does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -2358,11 +2358,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
@@ -2420,10 +2420,10 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  [Themonster] does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -2446,11 +2446,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
@@ -2527,7 +2527,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You wreel back your head, sucking in a large breath of air before letting out all the collected energy. You let loose a bellowing roar at [themonster], so forceful that even the landscape begins to warp around the blast. [Themonster] attempts to dodge but the sheer size and speed is to immense to avoid as they are slammed with Fire, Ice, Lightning and Darkness. ");
 			//Miss:
 			if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-				outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+				outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 			}
 			//Special enemy avoidances
 			else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -3196,7 +3196,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function TacticalDistraction():void {
 		clearOutput();
-		outputText("You give [themonster] a belly dance show, moving your hip from a side to another and displaying your assets. [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise " + monster.pronoun1 + " did absolutely nothing for the last six seconds. ");
+		outputText("You give [themonster] a belly dance show, moving your hip from a side to another and displaying your assets. [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise [monster he] did absolutely nothing for the last six seconds. ");
 		var lustDmg:Number = monster.lustVuln * (5 + rand(5));
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
@@ -3212,7 +3212,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var hypnosisDuration:Number = 5;
 		if (player.armorName == "desert naga pink and black silk dress") hypnosisDuration += 1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") hypnosisDuration += 1;
-		outputText("You give [themonster] a sexy belly dance show, moving your hip from a side to another and displaying your assets as you insidiously mesmerise it into laying down " + monster.pronoun3 + " guard, all the while maintaining eye contact. [Themonster] is completely captivated by your dancing.");
+		outputText("You give [themonster] a sexy belly dance show, moving your hip from a side to another and displaying your assets as you insidiously mesmerise it into laying down [monster his] guard, all the while maintaining eye contact. [Themonster] is completely captivated by your dancing.");
 		monster.createStatusEffect(StatusEffects.HypnosisNaga,hypnosisDuration,0,0,0);
 		enemyAI();
 	}
@@ -3455,7 +3455,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3466,9 +3466,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
@@ -3476,7 +3476,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -3569,7 +3569,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3580,9 +3580,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
@@ -3590,7 +3590,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -3693,7 +3693,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3704,9 +3704,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
@@ -3714,7 +3714,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -3813,7 +3813,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 11 + player.wis / 7) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3824,9 +3824,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
@@ -3834,7 +3834,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -3937,7 +3937,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
-		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3948,9 +3948,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
@@ -3958,7 +3958,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -4125,7 +4125,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
 		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -4136,9 +4136,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if (monster.cocks.length > 0) {
-			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if (monster.vaginas.length > 0) {
 			if (monster.plural) {
@@ -4146,7 +4146,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -4520,9 +4520,9 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
@@ -4530,7 +4530,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -4575,7 +4575,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if(monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -4586,9 +4586,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
@@ -4596,7 +4596,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -4641,7 +4641,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if(monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 		if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
@@ -4652,9 +4652,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		if(monster.cocks.length > 0) {
-			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+			if(monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.  ");
+			if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see [monster his] " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 		}
 		if(monster.vaginas.length > 0) {
 			if(monster.plural) {
@@ -4662,7 +4662,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak [monster him] groin.  ");
 			}
 			else {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
@@ -4776,7 +4776,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownSpectralScream,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownSpectralScream,6,0,0,0);
-		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in " + monster.pronoun3 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun3 + " sanity. ");
+		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in [monster his] tracks from sheer terror. This also seems to have damaged [monster his] sanity. ");
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence() * spellMod();
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -4865,7 +4865,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		monster.HP -= damage;
-		outputText("You call on the power of your tainted blood drawing out an almighty scream so strong and sharp it explode from you like a shockwave sending [themonster] flying. " + monster.Pronoun1 + " will be shaken from the glass shattering blast for a moment " + damage + " damage.");
+		outputText("You call on the power of your tainted blood drawing out an almighty scream so strong and sharp it explode from you like a shockwave sending [themonster] flying. [monster he] will be shaken from the glass shattering blast for a moment " + damage + " damage.");
 		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
@@ -4931,7 +4931,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -4939,11 +4939,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  [Themonster] reels as your windstorm slams into " + monster.pronoun2 + " with full force leaving behind deep wounds!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				outputText("  [Themonster] reels as your windstorm slams into [monster him] with full force leaving behind deep wounds!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your windstorm slams into " + monster.pronoun2 + " with full force leaving behind deep wounds!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your windstorm slams into [monster him] with full force leaving behind deep wounds!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
@@ -5014,14 +5014,14 @@ public class MagicSpecials extends BaseCombatContent {
 			combatRoundOver();
 			return;
 		}
-		outputText("You gather winds around you and unleash them on your opponent into a deadly gust sharper then any blade, its so powerful that even the environs crumble around " + monster.pronoun2 + ".  [Themonster] does " + monster.pronoun3 + " best to avoid it, but windstorm is too fast.");
+		outputText("You gather winds around you and unleash them on your opponent into a deadly gust sharper then any blade, its so powerful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but windstorm is too fast.");
 		if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
 			outputText("  <b>Your wind are massively dissipated by the swirling vortex, causing them to hit with far less force!</b>");
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
 		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -5029,11 +5029,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  [Themonster] reels as your windstorm slams into " + monster.pronoun2 + " with full force leaving behind deep wounds!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				outputText("  [Themonster] reels as your windstorm slams into [monster him] with full force leaving behind deep wounds!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
-				outputText("  [Themonster] reels as your windstorm slams into " + monster.pronoun2 + " with full force leaving behind deep wounds!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				outputText("  [Themonster] reels as your windstorm slams into [monster him] with full force leaving behind deep wounds!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
@@ -5094,14 +5094,14 @@ public class MagicSpecials extends BaseCombatContent {
 				doLightingDamage((damage * 3), true, true);
 				break;
 			case 1:
-				outputText(monster.capitalA + monster.short + "  starts to burn as " + monster.pronoun3 + " body catches fire from the eyebeam! ");
+				outputText(monster.capitalA + monster.short + "  starts to burn as [monster his] body catches fire from the eyebeam! ");
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(damage, true, true);
 				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
 				else monster.createStatusEffect(StatusEffects.BurnDoT, 2, 0.01, 0, 0);
 				break;
 			case 2:
-				outputText(monster.capitalA + monster.short + "  turns green as a potent poison inflicted by the eyebeam saps " + monster.pronoun3 + " strength! ");
+				outputText(monster.capitalA + monster.short + "  turns green as a potent poison inflicted by the eyebeam saps [monster his] strength! ");
 				damage = Math.round(damage * combat.poisonDamageBoostedByDao());
 				doPoisonDamage(damage, true, true);
 				var strDebuff:Number = 0;
@@ -5114,7 +5114,7 @@ public class MagicSpecials extends BaseCombatContent {
 				monster.speStat.core.value -= speDebuff;
 				break;
 			case 3:
-				outputText(monster.capitalA + monster.short + "  skin is covered with ice from the eyebeam as the air surrounding " + monster.pronoun2 + " freezes solid! ");
+				outputText(monster.capitalA + monster.short + "  skin is covered with ice from the eyebeam as the air surrounding [monster him] freezes solid! ");
 				damage = Math.round(damage * combat.iceDamageBoostedByDao());
 				doIceDamage(damage, true, true);
 				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
@@ -5152,7 +5152,7 @@ public class MagicSpecials extends BaseCombatContent {
 					doMagicDamage((damage * 2), true, true);
 				}
 				else {
-					outputText("It takes tremendous damage as the beam creates a hole in " + monster.pronoun3 + " body! ");
+					outputText("It takes tremendous damage as the beam creates a hole in [monster his] body! ");
 					doMagicDamage((damage * 10), true, true);
 				}
 				break;
@@ -5165,7 +5165,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function DominatingGaze():void {
 		clearOutput();
 		fatigue(50, USEFATG_MAGIC_NOBM);
-		outputText("You gaze deep into [themonster] eyes smashing " + monster.pronoun3 + " thoughts and resolve to nothingness along the way. " + monster.Pronoun3 + " is nothing, you are everything. [Themonster] is left stunned by the experience.\n\n");
+		outputText("You gaze deep into [themonster] eyes smashing [monster his] thoughts and resolve to nothingness along the way. [monster his] is nothing, you are everything. [Themonster] is left stunned by the experience.\n\n");
 		//player.createStatusEffect(StatusEffects.CooldownNet,8,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		enemyAI();
@@ -5315,11 +5315,11 @@ public class MagicSpecials extends BaseCombatContent {
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5430,11 +5430,11 @@ public class MagicSpecials extends BaseCombatContent {
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5622,11 +5622,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5685,11 +5685,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5748,11 +5748,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5807,11 +5807,11 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusWisdom() * multiWis;
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5873,11 +5873,11 @@ public class MagicSpecials extends BaseCombatContent {
 		damage *= combat.purityScalingDA();
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5932,11 +5932,11 @@ public class MagicSpecials extends BaseCombatContent {
 		damage *= combat.corruptionScalingDA();
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}//późniejsze lvl-e dodadzą stun chance
 		else {
-			outputText("  [Themonster] reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -5953,7 +5953,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function immolationSpell():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around [themonster], slowly burning " + monster.pronoun2 + ".");
+		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around [themonster], slowly burning [monster him].");
 		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
 		damage = calcInfernoMod(damage);
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
@@ -5983,7 +5983,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function iceprisonSpell():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of cold air gathers around [themonster], slowly freezing " + monster.pronoun2 + ".");
+		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of cold air gathers around [themonster], slowly freezing [monster him].");
 		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
 		damage = calcGlacialMod(damage);
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;

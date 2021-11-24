@@ -38,7 +38,7 @@ public class BlindSpell extends AbstractWhiteSpell{
 				}
 			} else {
 				if (display) {
-					outputText("You glare at [themonster] and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n");
+					outputText("You glare at [themonster] and point at [monster him].  A bright flash erupts before [monster him]!\n");
 				}
 			}
 			if (monster is LivingStatue) {
