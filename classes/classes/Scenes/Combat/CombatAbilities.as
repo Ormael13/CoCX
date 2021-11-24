@@ -2,6 +2,7 @@ package classes.Scenes.Combat {
 import classes.Scenes.Combat.SpellsBlack.*;
 import classes.Scenes.Combat.SpellsWhite.*;
 import classes.Scenes.Combat.SpellsHex.*;
+import classes.Scenes.Combat.SpellsDivine.*;
 
 public class CombatAbilities {
 	
@@ -91,23 +92,18 @@ public class CombatAbilities {
 		CurseOfWeeping
 	];
 	
-	/* TODO @aimozg convert these
 	public static const Aegis:AegisSpell                         = new AegisSpell();
 	public static const Exorcise:ExorciseSpell                   = new ExorciseSpell();
 	public static const DivineShield:DivineShieldSpell           = new DivineShieldSpell();
 	public static const Thunderstorm:ThunderstormSpell           = new ThunderstormSpell();
 	public static const TearsOfDenial:TearsOfDenialSpell         = new TearsOfDenialSpell();
 	
-	 */
 	public static const ALL_DIVINE_SPELLS:/*CombatAbility*/Array = [
-			/*
 		Aegis,
 		Exorcise,
 		DivineShield,
 		Thunderstorm,
 		TearsOfDenial,
-		
-			 */
 	];
 	
 	/** TODO @aimozg convert these

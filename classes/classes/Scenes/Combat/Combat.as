@@ -8482,10 +8482,7 @@ public class Combat extends BaseContent {
         monster.combatRoundUpdate();
 		//Thunderstorm
 		if (player.hasStatusEffect(StatusEffects.Thunderstorm) && player.statusEffectv2(StatusEffects.Thunderstorm) > 0) {
-			player.addStatusValue(StatusEffects.Thunderstorm, 2, -1);
-            outputText("<b>A bolt of divine lightning falls from the sky and strikes [themonster]. ");
-            monster.takeLightningDamage(player.statusEffectv1(StatusEffects.Thunderstorm), true);
-            outputText("\n\n");
+			CombatAbilities.Thunderstorm.advance(true);
 		}
         //[Silence warning]
         if (player.hasStatusEffect(StatusEffects.ThroatPunch)) {
@@ -9966,13 +9963,6 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellExorcise)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellExorcise) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellExorcise);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellExorcise, 1, -1);
-            }
-		}
         if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneshatter)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellBoneshatter) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBoneshatter);
