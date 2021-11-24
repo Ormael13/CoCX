@@ -1139,8 +1139,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSpellBloodSwipe:StatusEffectType     		= mkCombat("Cooldown Spell Blood Swipe");
 		public static const CooldownSpellBloodSwipeSF:StatusEffectType     		= mkCombat("Cooldown Spell Blood Swipe (infused with Soulforce)");
 		public static const CooldownSpellBloodWave:StatusEffectType     		= mkCombat("Cooldown Spell Blood Wave");
-		public static const CooldownSpellBoneshatter:StatusEffectType           = mkCombat("Cooldown Spell Boneshatter");
-		public static const CooldownSpellBoneArmor:StatusEffectType           	= mkCombat("Cooldown Spell Bone armor");
 		public static const CooldownSpellClearMind:StatusEffectType             = mkCombat("Cooldown Spell Clear Mind");
 		public static const CooldownSpellEnergyDrain:StatusEffectType           = mkCombat("Cooldown Spell Energy Drain");
 		public static const CooldownSpellHeartSeeker:StatusEffectType     		= mkCombat("Cooldown Spell Heart Seeker");

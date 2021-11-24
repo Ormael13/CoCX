@@ -39,8 +39,7 @@ public class FireStormSpell extends AbstractWhiteSpell{
 			outputText("You narrow your eyes, focusing your own willpower with a deadly intent. You cojure a small vortex of embers that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at [themonster]. You intend to leave nothing but ashes!");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.FIRE);
-		damage *= omnicasterRepeatCount();
+		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

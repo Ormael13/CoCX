@@ -52,7 +52,7 @@ public class ExorciseSpell extends AbstractDivineSpell {
 					"Your [weapon] begins to glow as you charge and deliver a mighty strike. As the mystical blow strikes your opponent"+(monster.plural ? "s":"")+", the magic explodes forward from your weapon in the shape of the sigil of the Marethian divine pantheon, damaging your foe"+(monster.plural ? "s":"")+" further and throwing [monster him] back.");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.MAGICAL);
+		damage = critAndRepeatDamage(display, damage, DamageType.MAGICAL);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

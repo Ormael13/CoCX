@@ -67,11 +67,10 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 			outputText("You drain the heat out of the air around your foe, causing its temperature to plummet far below its freezing point in an instant, effectively flash freezing your enemy for \n");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.ICE);
+		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
 		if (display) {
 			outputText("\n\n[Monster A] [monster name] is encased in a thick layer of ice.\n\n");
 		}
-		damage *= omnicasterRepeatCount();
 		monster.createStatusEffect(StatusEffects.FrozenSolid, 5, 0, 0, 0);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

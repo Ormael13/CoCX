@@ -142,6 +142,8 @@ public class AbstractSpell extends CombatAbility {
 				return spellModBlood();
 			case CAT_SPELL_HEX:
 				return spellModBlack();
+			case CAT_SPELL_NECRO:
+				return spellModBlack();
 			default:
 				return spellMod();
 		}
@@ -333,6 +335,7 @@ public class AbstractSpell extends CombatAbility {
 	 * Also prints "Monster takes N N N N damage. Critical Hit!"
 	 * @param damage Damage to deal
 	 * @param damageType Damage type (DamageType.XXX)
+	 * @return {Number} Total damage dealt, with crit and omnicaster adjustment
 	 */
 	protected function critAndRepeatDamage(
 			display:Boolean,
@@ -341,7 +344,7 @@ public class AbstractSpell extends CombatAbility {
 			displayDamageOnly:Boolean=false,
 			baseCritChance:Number=5,
 			critMultiplier:Number=1.75
-	):void {
+	):Number {
 		if (display) {
 			outputText(monster.capitalA + monster.short + " takes ");
 		}
@@ -376,13 +379,15 @@ public class AbstractSpell extends CombatAbility {
 				damageFn = doDamage;
 		}
 		var repeats:int = omnicasterRepeatCount();
-		while (repeats-->0) {
+		var i:int = repeats;
+		while (i-->0) {
 			damageFn(damage, true, display || displayDamageOnly);
 		}
 		if (display) {
 			outputText(" damage.");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 		}
+		return damage*repeats;
 	}
 	
 	protected function backfireEffect(display:Boolean = true):void {

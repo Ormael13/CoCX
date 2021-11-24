@@ -3,6 +3,7 @@ import classes.Scenes.Combat.SpellsBlack.*;
 import classes.Scenes.Combat.SpellsWhite.*;
 import classes.Scenes.Combat.SpellsHex.*;
 import classes.Scenes.Combat.SpellsDivine.*;
+import classes.Scenes.Combat.SpellsNecro.*;
 
 public class CombatAbilities {
 	
@@ -106,18 +107,14 @@ public class CombatAbilities {
 		TearsOfDenial,
 	];
 	
-	/** TODO @aimozg convert these
 	public static const BoneSpirit:BoneSpiritSpell              = new BoneSpiritSpell();
 	public static const BoneArmor:BoneArmorSpell                = new BoneArmorSpell();
 	public static const Boneshatter:BoneshatterSpell            = new BoneshatterSpell();
-	 */
+
 	public static const ALL_NECRO_SPELLS:/*CombatAbility*/Array = [
-			/*
 		BoneSpirit,
 		BoneArmor,
 		Boneshatter
-		
-			 */
 	];
 	
 	/* TODO @aimozg convert these

@@ -38,8 +38,7 @@ public class IceRainSpell extends AbstractBlackSpell {
 			outputText("You narrow your eyes, focusing on the force of your lust as you narrow your eyes with deadly intent. A dark cloud coalesces above you, stretching further until there is nothing but an eerie darkness above you. You narrow your gaze at  [monster a] [monster name] as countless razor-like shards of ice rain upon your opponent.\n");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.ICE);
-		damage *= omnicasterRepeatCount();
+		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

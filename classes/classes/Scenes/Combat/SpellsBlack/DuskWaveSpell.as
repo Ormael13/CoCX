@@ -52,9 +52,8 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 			outputText("You wave the signs with your hands and all light fades as you call down to the primordial darkness to gnaw at [themonster].  \n");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.DARKNESS);
+		damage = critAndRepeatDamage(display, damage, DamageType.DARKNESS);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

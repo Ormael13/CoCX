@@ -77,19 +77,18 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 			outputText("[monster A] [monster name] takes ")
 		}
 		var meteor:Number = 12;
+		var totalDamage:Number = 0;
 		while (meteor-->0){
 			var damage:Number = calcDamage(monster);
-			critAndRepeatDamage(false, damage, DamageType.FIRE, true);
+			totalDamage += critAndRepeatDamage(false, damage, DamageType.FIRE, true);
 		}
 		if (display) {
 			outputText(" damage!");
 			outputText(" [Themonster] reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.");
 		}
-		damage *= 12;
-		damage *= omnicasterRepeatCount();
 		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
-		checkAchievementDamage(damage);
-		combat.heroBaneProc(damage);
+		checkAchievementDamage(totalDamage);
+		combat.heroBaneProc(totalDamage);
 	}
 	
 	public function meteorShowerChannel(display: Boolean = true):void {

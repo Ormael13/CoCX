@@ -258,15 +258,9 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
-	 * @param target Monster to gauge effect against, or null if viewing outside combat.
-	 * @return {String} Ability description + costs, tags, and effects.
+	 * @return {String[]} Array of strings like "Mana Cost: 50", "Cooldown: 10"
 	 */
-	public function fullDescription(target:Monster):String {
-		var fullDesc:String = description+"\n";
-		
-		var effectDesc:String = describeEffectVs(target);
-		if (effectDesc) fullDesc += "\n<b>Effect: "+effectDesc+"</b>";
-		
+	public function costDescription():/*String*/Array {
 		var costs:/*String*/Array = [];
 		if (manaCost() > 0) {
 			costs.push("Mana Cost: " + manaCost());
@@ -281,6 +275,20 @@ public class CombatAbility extends BaseCombatContent {
 		if (cd > 0) {
 			costs.push("Cooldown: "+cd);
 		}
+		return costs;
+	}
+	
+	/**
+	 * @param target Monster to gauge effect against, or null if viewing outside combat.
+	 * @return {String} Ability description + costs, tags, and effects.
+	 */
+	public function fullDescription(target:Monster):String {
+		var fullDesc:String = description+"\n";
+		
+		var effectDesc:String = describeEffectVs(target);
+		if (effectDesc) fullDesc += "\n<b>Effect: "+effectDesc+"</b>";
+		
+		var costs:/*String*/Array = [];
 		if (costs.length > 0) fullDesc += "\n<b>" + costs.join(", ")+"</b>";
 		
 		var tags:/*int*/Array = presentTags();

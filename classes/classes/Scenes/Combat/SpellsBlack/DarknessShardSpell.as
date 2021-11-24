@@ -53,9 +53,8 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 			outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward [themonster]!\n");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.DARKNESS);
+		damage = critAndRepeatDamage(display, damage, DamageType.DARKNESS);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

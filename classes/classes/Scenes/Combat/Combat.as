@@ -9930,20 +9930,6 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneshatter)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBoneshatter) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBoneshatter);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBoneshatter, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBoneArmor)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBoneArmor) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBoneArmor);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBoneArmor, 1, -1);
-            }
-        }
         //Companion Boosting PC Armor Value
         if (player.hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) player.removeStatusEffect(StatusEffects.CompBoostingPCArmorValue);
         //Elemental Aspect status effects

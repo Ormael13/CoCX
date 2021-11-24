@@ -60,9 +60,8 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 			outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at [themonster] !\n");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
+		damage = critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

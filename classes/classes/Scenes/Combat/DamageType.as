@@ -27,6 +27,9 @@ public class DamageType {
 	public static const DARKNESS:int = 6;
 	EnumValue.add(Types, DARKNESS, "DARKNESS", {name: "darkness"});
 	
+	public static const TRUE:int = 7;
+	EnumValue.add(Types, TRUE, "TRUE", {name: "true"});
+	
 	function DamageType() {
 	}
 }

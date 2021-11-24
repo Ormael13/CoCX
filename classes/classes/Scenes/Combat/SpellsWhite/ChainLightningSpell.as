@@ -64,9 +64,8 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 			outputText("!");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
+		damage = critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

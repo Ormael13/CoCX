@@ -52,9 +52,8 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 			outputText("You wave the signs with your hands and unleash an howling blast of cold magic upon [themonster].\n");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.ICE);
+		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
