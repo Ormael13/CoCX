@@ -923,13 +923,13 @@ public function nagaPlayerConstrict():void {
 	if(monster.plural) {
 		if (monster.hasStatusEffect(StatusEffects.Dig))
 		{
-			outputText("You begin to dig up toward " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You halt your progression and dig back down before you expose yourself to danger.");
+			outputText("You begin to dig up toward [themonster], but with multiple enemies, wrapping one up would leave you completely open to attack.  You halt your progression and dig back down before you expose yourself to danger.");
 			outputText("\n\n");
 			SceneLib.combat.enemyAIImpl();
 			return;
 		}
 		else {
-			outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.");
+			outputText("You launch yourself at [themonster], but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.");
 			outputText("\n\n");
 			SceneLib.combat.enemyAIImpl();
 			return;
@@ -952,14 +952,14 @@ public function nagaPlayerConstrict():void {
 			}
 			//(Otherwise)
 			else {
-				outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at " + monster.a + monster.short + " and wrap yourself around " + monster.pronoun2 + ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.");
+				outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at [themonster] and wrap yourself around " + monster.pronoun2 + ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.");
 			}
 			monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
 		}
 		//Failure
 		else {
 			//Failure (-10 HPs) -
-			outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " + monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
+			outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, [themonster] jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
 			player.takePhysDamage(5, true);
 			if (player.HP <= player.minHP()) {
 				doNext(SceneLib.combat.endHpLoss);
@@ -975,14 +975,14 @@ public function nagaPlayerConstrict():void {
 			}
 			//(Otherwise)
 			else {
-				outputText("You launch yourself at " + monster.a + monster.short + " and wrap yourself around " + monster.pronoun2 + ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.");
+				outputText("You launch yourself at [themonster] and wrap yourself around " + monster.pronoun2 + ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.");
 			}
 			monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
 		}
 		//Failure
 		else {
 			//Failure (-10 HPs) -
-			outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " + monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
+			outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, [themonster] jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
 			player.takePhysDamage(5, true);
 			if (player.HP <= player.minHP()) {
 				doNext(SceneLib.combat.endHpLoss);
@@ -1025,7 +1025,7 @@ public function naggaSqueeze():void {
 	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -
 	if(monster.HP <= monster.minHP()) {
-		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+		outputText("You can feel [themonster]'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 		outputText("\n\n");
@@ -1041,9 +1041,9 @@ public function naggaTease():void {
 	clearOutput();
 	//(if poisoned)
 	if (monster.hasStatusEffect(StatusEffects.NagaVenom) || monster.gender == 0 || monster.lustVuln == 0) {
-		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but " + monster.pronoun3 + " seems too affected by your poison to react.\n\n");
-		if (monster.gender == 0) outputText("You look over " + monster.a + monster.short + ", but can't figure out how to tease such an unusual foe.\n\n");
-		if (monster.lustVuln == 0) outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate [themonster] by rubbing " + monster.pronoun3 + " nether regions, but " + monster.pronoun3 + " seems too affected by your poison to react.\n\n");
+		if (monster.gender == 0) outputText("You look over [themonster], but can't figure out how to tease such an unusual foe.\n\n");
+		if (monster.lustVuln == 0) outputText("You attempt to stimulate [themonster] by rubbing " + monster.pronoun3 + " nether regions, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
         enemyAI();
         return;
 	}
@@ -1172,7 +1172,7 @@ public function naggaTease():void {
     //Nuttin honey
     else {
         SceneLib.combat.teaseXP(1);
-        outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
+        outputText("\n[Themonster] seems unimpressed.");
     }
     outputText("\n\n");
     //OLD
@@ -1186,7 +1186,7 @@ public function naggaTease():void {
 
 public function nagaLeggoMyEggo():void {
 	clearOutput();
-	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.");
+	outputText("You release [themonster] from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.Constricted);
     SceneLib.combat.enemyAIImpl();

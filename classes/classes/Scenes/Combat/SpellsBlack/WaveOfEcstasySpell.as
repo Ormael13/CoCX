@@ -72,7 +72,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			if (monster.plural) {
 				outputText("Arousal breaks in the eyes of your many opponents as pleasure strikes them");
 			} else {
-				outputText("Unable to evade it " + monster.a + monster.short + " is struck squarely by the pleasure wave");
+				outputText("Unable to evade it [themonster] is struck squarely by the pleasure wave");
 			}
 			outputText(" for ");
 		}

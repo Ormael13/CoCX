@@ -50,7 +50,7 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n");
+			outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward [themonster]!\n");
 		}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.DARKNESS);

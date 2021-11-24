@@ -61,7 +61,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 		} else {
 			if (display) {
-				outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
+				outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and [themonster] is enveloped in a flash of white flames!\n");
 			}
 		}
 		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}

@@ -8243,10 +8243,10 @@ public final class Mutations extends MutationsHelper {
             public function wingStick(player:Player):void
             {
                 clearOutput();
-                outputText("You toss a wingstick at your foe!  It flies straight and true, almost as if it has a mind of its own as it arcs towards " + monster.a + monster.short + "!\n");
+                outputText("You toss a wingstick at your foe!  It flies straight and true, almost as if it has a mind of its own as it arcs towards [themonster]!\n");
                 //1% dodge for each point of speed over 80
                 if (monster.spe - 80 > rand(100) + 1 || monster.short == "lizan rogue") {
-                    outputText("Somehow " + monster.a + monster.short + "'");
+                    outputText("Somehow [themonster]'");
                     if (!monster.plural) outputText("s");
                     outputText(" incredible speed allows " + monster.pronoun2 + " to avoid the spinning blades!  The deadly device shatters when it impacts something in the distance.");
                 }

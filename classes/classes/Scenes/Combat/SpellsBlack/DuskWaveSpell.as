@@ -49,7 +49,7 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You wave the signs with your hands and all light fades as you call down to the primordial darkness to gnaw at " + monster.a + monster.short + ".  \n");
+			outputText("You wave the signs with your hands and all light fades as you call down to the primordial darkness to gnaw at [themonster].  \n");
 		}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.DARKNESS);

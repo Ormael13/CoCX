@@ -49,7 +49,7 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You wave the signs with your hands and unleash an howling blast of cold magic upon " + monster.a + monster.short + ".\n");
+			outputText("You wave the signs with your hands and unleash an howling blast of cold magic upon [themonster].\n");
 		}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.ICE);

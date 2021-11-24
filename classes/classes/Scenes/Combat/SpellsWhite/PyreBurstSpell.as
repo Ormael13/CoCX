@@ -58,7 +58,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 		} else {
 			if (display) {
-				outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over " + monster.a + monster.short + ".\n");
+				outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over [themonster].\n");
 			}
 		}
 		var damage:Number = calcDamage(monster);

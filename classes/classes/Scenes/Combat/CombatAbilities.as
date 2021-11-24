@@ -1,6 +1,7 @@
 package classes.Scenes.Combat {
 import classes.Scenes.Combat.SpellsBlack.*;
 import classes.Scenes.Combat.SpellsWhite.*;
+import classes.Scenes.Combat.SpellsHex.*;
 
 public class CombatAbilities {
 	
@@ -76,22 +77,18 @@ public class CombatAbilities {
 		PolarMidnight
 	];
 	
-	/* TOOD @aimozg convert these
 	public static const Lifetap:LifetapSpell                     = new LifetapSpell();
 	public static const LifeSiphon:LifeSiphonSpell               = new LifeSiphonSpell();
 	public static const ConsumingDarkness:ConsumingDarknessSpell = new ConsumingDarknessSpell();
 	public static const CurseOfDesire:CurseOfDesireSpell         = new CurseOfDesireSpell();
-	public static const CurseOfWeeping:CurseofWeepingSpell       = new CurseOfWeepingSpell();
-	 */
+	public static const CurseOfWeeping:CurseOfWeepingSpell       = new CurseOfWeepingSpell();
+	
 	public static const ALL_HEX_SPELLS:/*CombatAbility*/Array    = [
-			/*
 		Lifetap,
 		LifeSiphon,
 		ConsumingDarkness,
 		CurseOfDesire,
-		CurseofWeeping
-		
-			 */
+		CurseOfWeeping
 	];
 	
 	/* TODO @aimozg convert these

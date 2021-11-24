@@ -1195,14 +1195,14 @@ private function urtaComboAttack():void {
 	}
 	if (damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
+		outputText("Your attacks are deflected or blocked by [themonster].");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
+		outputText("You hit [themonster]! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
@@ -1238,7 +1238,7 @@ private function urtaDirtKick():void {
 	fatigue(15);
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ");
-	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards " + monster.a + monster.short + "!  ");
+	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards [themonster]!  ");
 	//Dodged!
 	if(rand(20) + 1 + monster.spe/20 > 15 + player.spe/20) {
 		outputText(monster.mf("He","She") + " manages to shield " + monster.mf("his","her") + " eyes.  Damn!\n\n");
@@ -1305,19 +1305,19 @@ private function urtaSidewinder():void {
 	}
 	if (damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
+		outputText("Your attacks are deflected or blocked by [themonster].");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
+		outputText("You hit [themonster]! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
 	if (!monster.hasStatusEffect(StatusEffects.Stunned) && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0 && rand(5) > 0) {
-		outputText("\n<b>" + monster.capitalA + monster.short + " is stunned!</b>");
+		outputText("\n<b>[Themonster] is stunned!</b>");
 		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 	}
 	else if (monster.findPerk(PerkLib.Resolute) >= 0) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
@@ -1401,14 +1401,14 @@ private function urtaVaultAttack():void {
 	}
 	if (damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
+		outputText("Your attacks are deflected or blocked by [themonster].");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
+		outputText("You hit [themonster]! (" + damage + ")");
 		if (crit) outputText(" <b>*CRIT*</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}

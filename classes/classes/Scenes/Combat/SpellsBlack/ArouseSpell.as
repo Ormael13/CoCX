@@ -45,13 +45,13 @@ public class ArouseSpell extends AbstractBlackSpell {
 		}
 		var lustDmg:Number = calcDamage(monster);
 		if (display) {
-			if (monster.lust100 < 30) outputText("[Monster A] [monster name] squirms as the magic affects [monster him].  ");
+			if (monster.lust100 < 30) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 			if (monster.lust100 >= 30 && monster.lust100 < 60) {
-				if (monster.plural) outputText("[Monster A] [monster name] stagger, suddenly weak and having trouble focusing on staying upright.  ");
-				else outputText("[Monster A] [monster name] staggers, suddenly weak and having trouble focusing on staying upright.  ");
+				if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
+				else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			}
 			if (monster.lust100 >= 60) {
-				outputText("[Monster A] [monster name]'");
+				outputText("[Themonster]'");
 				if (!monster.plural) outputText("s");
 				outputText(" eyes glaze over with desire for a moment.  ");
 			}
@@ -59,7 +59,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 				if (monster.lust100 >= 60) outputText("You see [monster his] [monster cocks] dribble pre-cum.  ");
 				if (monster.lust100 >= 30 && monster.lust100 < 60) {
 					if (monster.cocks.length == 1) {
-						outputText("[Monster A] [monster name]'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.");
+						outputText("[Themonster]'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.");
 					} else {
 						outputText("You see [monster his] [monster cocks] harden uncomfortably.  ");
 					}
@@ -67,17 +67,17 @@ public class ArouseSpell extends AbstractBlackSpell {
 			}
 			if (monster.vaginas.length > 0 && monster.lust100 >= 60) {
 				if (monster.plural) {
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Monster A] [monster name]'s [monster vagina]s dampen perceptibly.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Monster A] [monster name]'s crotches become sticky with girl-lust.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Monster A] [monster name]'s [monster vagina]s become sloppy and wet.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [monster a] [monster name]'s thighs.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Monster A] [monster name]'s [monster vagina]s instantly soak [monster him] groin.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina]s dampen perceptibly.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotches become sticky with girl-lust.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina]s become sloppy and wet.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina]s instantly soak [monster him] groin.  ");
 				} else {
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Monster A] [monster name]'s [monster vagina] dampens perceptibly.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Monster A] [monster name]'s crotch becomes sticky with girl-lust.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Monster A] [monster name]'s [monster vagina] becomes sloppy and wet.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [monster a] [monster name]'s thighs.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Monster A] [monster name]'s [monster vagina] instantly soaks her groin.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina] dampens perceptibly.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotch becomes sticky with girl-lust.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina] becomes sloppy and wet.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina] instantly soaks her groin.  ");
 				}
 			}
 		}

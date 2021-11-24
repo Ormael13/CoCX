@@ -57,7 +57,7 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
+			outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at [themonster] !\n");
 		}
 		var damage:Number = calcDamage(monster);
 		critAndRepeatDamage(display, damage, DamageType.LIGHTNING);

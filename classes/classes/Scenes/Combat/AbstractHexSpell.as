@@ -22,6 +22,9 @@ public class AbstractHexSpell extends AbstractSpell {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
+		if (player.lust < combat.magic.getBlackMagicMinLust()) {
+			return "You aren't turned on enough to use any hex magics.";
+		}
 		if (player.cor < 80) {
 			return "Your corruption is too low to cast this spell.";
 		}

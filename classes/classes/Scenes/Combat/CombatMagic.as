@@ -814,107 +814,6 @@ public class CombatMagic extends BaseCombatContent {
 				buttons.list.push(ability.createButton(monster));
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
-			bd = buttons.add("Lifetap", spellLifetap)
-					.hint("Sacrifice a quarter of your hp to recover a quarter of your mana.");
-			if (badLustForBlack) {
-				bd.disable("You aren't turned on enough to use any hex magics.");
-			} else if(player.cor < 80) {
-				bd.disable("Your corruption is too low to cast this spell.");
-			} else if(player.HP < player.maxHP() * .25) {
-				bd.disable("Your HP is too low to cast this spell.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
-			bd = buttons.add("Life siphon", spellLifeSiphon)
-					.hint("Create a funnel between you and your target, forcefully stealing its vitality to recover your own.  " +
-							"\n\nMana Cost: " + spellCostBlack(750) + "");
-			if (badLustForBlack) {
-				bd.disable("You aren't turned on enough to use any hex magics.");
-			} else if(player.cor < 80) {
-				bd.disable("Your corruption is too low to cast this spell.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(750)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(750) && player.HP < spellCostBlack(750)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(750)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.LifeSiphon)) {
-				bd.disable("You're still linked to the enemy.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
-			bd = buttons.add("Consuming darkness", spellConsumingDarkness)
-					.hint("For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.  \n\n<b>Cooldown: 15 turns</b>  " +
-							"\n\nMana Cost: " + spellCostBlack(350) + "");
-			if (badLustForBlack) {
-				bd.disable("You aren't turned on enough to use any hex magics.");
-			} else if(player.cor < 80) {
-				bd.disable("Your corruption is too low to cast this spell.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(350)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(350) && player.HP < spellCostBlack(350)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(350)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellConsumingDarkness)) {
-				bd.disable("You need more time before you can cast Consuming darkness again.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
-			bd = buttons.add("Curse of Desire", spellCurseOfDesire)
-					.hint("Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.  \n\n<b>Cooldown: 15 turns</b>  " +
-							"\n\nMana Cost: " + spellCostBlack(400) + "");
-			if (badLustForBlack) {
-				bd.disable("You aren't turned on enough to use any hex magics.");
-			} else if(player.cor < 80) {
-				bd.disable("Your corruption is too low to cast this spell.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(400)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(400) && player.HP < spellCostBlack(400)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(400)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfDesire)) {
-				bd.disable("You need more time before you can cast Curse of Desire again.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
-			bd = buttons.add("Curse of Weeping", spellCurseOfWeeping)
-					.hint("Draw your own blood and inflict on your target a terrible curse, dealing high damage for 6 rounds.  \n\n<b>Cooldown: 10 turns</b>  " +
-							"\n\nMana Cost: " + spellCostBlack(300) + "");
-			if (badLustForBlack) {
-				bd.disable("You aren't turned on enough to use any hex magics.");
-			} else if(player.cor < 80) {
-				bd.disable("Your corruption is too low to cast this spell.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(300)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(300) && player.HP < (spellCostBlack(300) + player.maxHP() * .5)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostBlack(300) + player.maxHP() * .5)) {
-				bd.disable("Your hp is too low to cast this spell.");
-			} else if(player.HP < player.maxHP() * .5) {
-				bd.disable("Your HP is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping)) {
-				bd.disable("You need more time before you can cast Curse of Weeping again.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			} else if (combat.isEnnemyInvisible) {
-				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			}
-		}
 	}
 	
 	public function buildDivineMenu(buttons:ButtonDataList):void {
@@ -1326,7 +1225,7 @@ public class CombatMagic extends BaseCombatContent {
 				}
 				outputText(" Your venom is forcefully injected ");
 				if (injections > 1) outputText(""+injections+" times");
-				outputText(" in " + monster.a + monster.short + " through your magic!");
+				outputText(" in [themonster] through your magic!");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) HPChange((player.maxHP() * numberOfProcs * 0.05), false);
@@ -1338,7 +1237,7 @@ public class CombatMagic extends BaseCombatContent {
 		HPChange(-spellCostBlood(50), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodMissiles,2,0,0,0);
 		if(handleShell()){return;}
-		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, "+(player.HP < player.maxOverHP() ? "wounds":"skin pores")+". Around you form a few crimson spheres you aim at " + monster.a + monster.short + "!\n\n");
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, "+(player.HP < player.maxOverHP() ? "wounds":"skin pores")+". Around you form a few crimson spheres you aim at [themonster]!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlood();
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1411,7 +1310,7 @@ public class CombatMagic extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodExplosion,3,0,0,0);
 		if(handleShell()){return;}
 		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather above your hand, coalescing into a crimson sphere. ");
-		outputText("It roils as you concentrate on it before aim the orb at " + monster.a + monster.short + ", it brusts and seeps into " + monster.pronoun2 + " on impact as " + monster.pronoun1 + "'" + (monster.plural ? "re":"s") + " afflicted by the magic.\n\n");
+		outputText("It roils as you concentrate on it before aim the orb at [themonster], it brusts and seeps into " + monster.pronoun2 + " on impact as " + monster.pronoun1 + "'" + (monster.plural ? "re":"s") + " afflicted by the magic.\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlood() * 4;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
@@ -1452,7 +1351,7 @@ public class CombatMagic extends BaseCombatContent {
 		HPChange(-spellCostBlood(100), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodChains,3,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
-		outputText("The blood emitted by you splited into dozens of stems and surrounded " + monster.a + monster.short + ", bounding " + monster.pronoun2 + " tight enought to prevent any movements for some time.\n\n");
+		outputText("The blood emitted by you splited into dozens of stems and surrounded [themonster], bounding " + monster.pronoun2 + " tight enought to prevent any movements for some time.\n\n");
 		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -1468,7 +1367,7 @@ public class CombatMagic extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodWave,5,0,0,0);
 		if(handleShell()){return;}
 		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather around you, coalescing into a crimson ring. ");
-		outputText("It roils as you concentrate on it before you release it. It moves in all directions looking like a raging waves until it hits " + monster.a + monster.short + ".\n\n");
+		outputText("It roils as you concentrate on it before you release it. It moves in all directions looking like a raging waves until it hits [themonster].\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlood() * 4;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
@@ -1564,8 +1463,8 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellMagicBolt2(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
-		else outputText("You point your hand toward " + monster.a + monster.short + " and shots magic bolt!\n\n");
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shots magic bolt toward [themonster]!\n\n");
+		else outputText("You point your hand toward [themonster] and shots magic bolt!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus
@@ -1644,7 +1543,7 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You wrap your soulforce around the bones and shape them into a horrifying bone wraith sending it flying and laughing madly toward " + monster.a + monster.short + ". The ghastly apparition explodes upon contact into a hundred sharp bone shards grievously wounding " + monster.a + monster.short + ". ");
+		outputText("You wrap your soulforce around the bones and shape them into a horrifying bone wraith sending it flying and laughing madly toward [themonster]. The ghastly apparition explodes upon contact into a hundred sharp bone shards grievously wounding [themonster]. ");
 		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 3;
 		if (player.hasPerk(PerkLib.Necromancy)) damage * 1.5;
 		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
@@ -1770,7 +1669,7 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		outputText("You channel your powers in " + monster.a + monster.short + " bone structure stressing it and forcing the bones to snap. " + monster.capitalA + monster.short + " cough blood you wreck " + monster.pronoun3 + " from the inside. ");
+		outputText("You channel your powers in [themonster] bone structure stressing it and forcing the bones to snap. [Themonster] cough blood you wreck " + monster.pronoun3 + " from the inside. ");
 		doTrueDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		MagicAddonEffect();
@@ -1798,298 +1697,6 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
-	}
-	
-	public function spellLifetap():void {
-		clearOutput();
-		doNext(combatMenu);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
-		//30% backfire!
-		var backfire:int = 30;
-		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
-		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
-		backfire -= (player.inte * 0.15);
-		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
-		else if (backfire < 15) backfire = 15;
-		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
-			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
-			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
-			dynStats("lib", .25, "lus", 15);
-		}
-		else {
-			var lifetap:Number = 0;
-			lifetap += Math.round(player.maxHP() * .25);
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifetap = Math.round(lifetap * 1.2);
-			if (player.hasPerk(PerkLib.CorruptMagic)) {
-				if (monster.cor >= 66) lifetap = Math.round(lifetap * 1.0);
-				else if (monster.cor >= 50) lifetap = Math.round(lifetap * 1.1);
-				else if (monster.cor >= 25) lifetap = Math.round(lifetap * 1.2);
-				else if (monster.cor >= 10) lifetap = Math.round(lifetap * 1.3);
-				else lifetap = Math.round(lifetap * 1.4);
-			}
-			outputText("You proceed to cut your hand and draw a small pattern. You feel your magical reservoirs fill back up by a significant amount.");
-			HPChange(-lifetap, false);
-			EngineCore.ManaChange(lifetap, false);
-		}
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		if(player.lust >= player.maxLust()) doNext(endLustLoss);
-		else enemyAI();
-	}
-	
-	public function spellLifeSiphon():void {
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(750)) player.HP -= spellCostBlack(750);
-		else useMana(750, Combat.USEMANA_MAGIC_HEAL);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
-		//30% backfire!
-		var backfire:int = 30;
-		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
-		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
-		backfire -= (player.inte * 0.15);
-		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
-		else if (backfire < 15) backfire = 15;
-		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
-			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
-			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
-			dynStats("lib", .25, "lus", 15);
-		}
-		else {
-			var lifesiphon:Number = 0;
-			lifesiphon += player.inte;
-			if (player.hasPerk(PerkLib.WisenedHealer)) lifesiphon += player.wis;
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifesiphon = Math.round(lifesiphon * 1.2);
-			if (player.hasPerk(PerkLib.CorruptMagic)) {
-				if (player.hasStatusEffect(StatusEffects.DarkRitual)) lifesiphon *= 2;
-				if (monster.cor >= 66) lifesiphon = Math.round(lifesiphon * 1.0);
-				else if (monster.cor >= 50) lifesiphon = Math.round(lifesiphon * 1.1);
-				else if (monster.cor >= 25) lifesiphon = Math.round(lifesiphon * 1.2);
-				else if (monster.cor >= 10) lifesiphon = Math.round(lifesiphon * 1.3);
-				else lifesiphon = Math.round(lifesiphon * 1.4);
-			}
-			outputText("You wave a sign linking yourself to " + monster.a + monster.short + " as you begin to funnel its health and vitality to yourself.");
-			monster.HP -= lifesiphon;
-			if (player.hasStatusEffect(StatusEffects.DarkRitual)) HPChange((player.maxHP() * 0.15), false);
-			else HPChange((player.maxHP() * 0.05), false);
-			player.createStatusEffect(StatusEffects.LifeSiphon, 15, lifesiphon, 0, 0);
-			MagicAddonEffect();
-		}
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		if(player.lust >= player.maxLust()) doNext(endLustLoss);
-		else enemyAI();
-	}
-	
-	public function spellConsumingDarkness():void {
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(350)) player.HP -= spellCostBlack(350);
-		else useMana(350, Combat.USEMANA_MAGIC_HEAL);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		player.createStatusEffect(StatusEffects.CooldownSpellConsumingDarkness, 15, 0, 0, 0);
-		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
-		//30% backfire!
-		var backfire:int = 30;
-		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
-		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
-		backfire -= (player.inte * 0.15);
-		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
-		else if (backfire < 15) backfire = 15;
-		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
-			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
-			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
-			dynStats("lib", .25, "lus", 15);
-		}
-		else {
-			var consumingdarkness:Number = scalingBonusIntelligence() * spellModBlack() * 2;
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) consumingdarkness = Math.round(consumingdarkness * 1.2);
-			if (player.hasPerk(PerkLib.CorruptMagic)) {
-				if (monster.cor >= 66) consumingdarkness = Math.round(consumingdarkness * 1.0);
-				else if (monster.cor >= 50) consumingdarkness = Math.round(consumingdarkness * 1.1);
-				else if (monster.cor >= 25) consumingdarkness = Math.round(consumingdarkness * 1.2);
-				else if (monster.cor >= 10) consumingdarkness = Math.round(consumingdarkness * 1.3);
-				else consumingdarkness = Math.round(consumingdarkness);
-			}
-			outputText("You call on the power of primordial darkness, which is all too happy to oblige your request of ripping your foe to shreds. The shadows all around you sprouting countless mouths and claws to do just that. " + monster.capitalA + monster.short + " can only scream in surprise, then in pain, at the sudden assault. ");
-			consumingdarkness = Math.round(consumingdarkness * combat.darknessDamageBoostedByDao());
-			monster.createStatusEffect(StatusEffects.ConsumingDarkness, 7, consumingdarkness, 0, 0);
-			doDarknessDamage(consumingdarkness, true, true);
-			MagicAddonEffect();
-		}
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		if(player.lust >= player.maxLust()) doNext(endLustLoss);
-		else enemyAI();
-	}
-	
-	public function spellCurseOfDesire():void {
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(400)) player.HP -= spellCostBlack(400);
-		else useMana(400, Combat.USEMANA_MAGIC_HEAL);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		player.createStatusEffect(StatusEffects.CooldownSpellCurseOfDesire, 15, 0, 0, 0);
-		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
-		//30% backfire!
-		var backfire:int = 30;
-		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
-		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
-		backfire -= (player.inte * 0.15);
-		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
-		else if (backfire < 15) backfire = 15;
-		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
-			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
-			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
-			dynStats("lib", .25, "lus", 15);
-		}
-		else {
-			var llr:Number = 0;
-			if (monster.lustVuln != 0) {
-				if (monster.lustVuln < 0.1) llr = monster.lustVuln;
-				else llr = 0.1;
-				monster.lustVuln -= llr;
-			}
-			var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			outputText("You moan in pleasure as you curse your target with lewd thoughts. " + monster.capitalA + monster.short + " pants in arousal, unable to stop the encroaching fantasies you forced on " + monster.pronoun2 + " from having their desired effect. ");
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg = Math.round(lustDmg * 1.2);
-			lustDmg = Math.round(lustDmg);
-			if (player.hasPerk(PerkLib.CorruptMagic)) {
-				if (monster.cor >= 66) lustDmg = Math.round(lustDmg * 1.0);
-				else if (monster.cor >= 50) lustDmg = Math.round(lustDmg * 1.1);
-				else if (monster.cor >= 25) lustDmg = Math.round(lustDmg * 1.2);
-				else if (monster.cor >= 10) lustDmg = Math.round(lustDmg * 1.3);
-				else lustDmg = Math.round(lustDmg * 1.4);
-			}
-			monster.createStatusEffect(StatusEffects.CurseOfDesire, 8, lustDmg, llr, 0);
-			if (lustDmg < 1) lustDmg = 1;
-			monster.teased(lustDmg, false);
-			dynStats("lus", 10);
-			MagicAddonEffect();
-		}
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		if(player.lust >= player.maxLust()) doNext(endLustLoss);
-		else enemyAI();
-	}
-	
-	public function spellCurseOfWeeping():void {
-		clearOutput();
-		doNext(combatMenu);
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(300)) player.HP -= spellCostBlack(300);
-		else useMana(300, Combat.USEMANA_MAGIC_HEAL);
-		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
-			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
-			return;
-		}
-		player.createStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping, 10, 0, 0, 0);
-		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
-		//30% backfire!
-		var backfire:int = 30;
-		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
-		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
-		backfire -= (player.inte * 0.15);
-		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
-		else if (backfire < 15) backfire = 15;
-		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
-			if(player.gender == 1) {
-				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
-				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
-			}
-			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
-			dynStats("lib", .25, "lus", 15);
-		}
-		else {
-			outputText("You cut deep into your arm, drawing plenty of your blood and letting it flow in a large pattern on the ground as you hex your target with a powerful malediction, causing it to bleed from every orifice. " + monster.capitalA + monster.short + " screams in pain, unable to stop the blood flow. ");
-			HPChange(-(Math.round(player.maxHP() * .5)), false);
-		}
-		var CurseOfWeepingMod:Number = scalingBonusIntelligence() * spellModBlack() * 2;
-		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.2);
-		if (player.hasPerk(PerkLib.CorruptMagic)) {
-			if (monster.cor >= 66) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.0);
-			else if (monster.cor >= 50) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.1);
-			else if (monster.cor >= 25) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.2);
-			else if (monster.cor >= 10) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.3);
-			else CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.4);
-		}
-		monster.createStatusEffect(StatusEffects.CurseOfWeeping, 6, CurseOfWeepingMod, 0, 0);
-		doDamage(CurseOfWeepingMod, true, true);
-		MagicAddonEffect();
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		statScreenRefresh();
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		if(player.lust >= player.maxLust()) doNext(endLustLoss);
-		else enemyAI();
 	}
 	
 	public function spellAegis():void {
@@ -2277,7 +1884,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You narrow your eyes, focusing on the force of your lust and willpower as you narrow your eyes with deadly intent. A dark cloud coalesces above you, stretching further until there is nothing but an eerie darkness above you. You narrow your gaze at  " + monster.a + monster.short + " as countless razor-like shards of ice rain upon your opponent.\n");
+		outputText("You narrow your eyes, focusing on the force of your lust and willpower as you narrow your eyes with deadly intent. A dark cloud coalesces above you, stretching further until there is nothing but an eerie darkness above you. You narrow your gaze at  [themonster] as countless razor-like shards of ice rain upon your opponent.\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * spellModGrey();
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -2408,7 +2015,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent. You cojure a small vortex of embers that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at " + monster.a + monster.short + ". You intend to leave nothing but ashes!\n");
+		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent. You cojure a small vortex of embers that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at [themonster]. You intend to leave nothing but ashes!\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * spellModGrey();
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -2612,7 +2219,7 @@ public class CombatMagic extends BaseCombatContent {
 			nosferatu += scalingBonusIntelligence();
 			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += scalingBonusWisdom();
 			nosferatu = Math.round(nosferatu * healMod() * spellModGrey());
-			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
+			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into [themonster] shadow");
 			if (monster.plural) outputText("s");
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
 			monster.HP -= nosferatu;
@@ -2660,7 +2267,7 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
-			outputText("You point at "+monster.a+monster.short+" and with a sharp pulling gesture you rip out some of their vigor for your own use. They won’t be hitting at full strength for a while.");
+			outputText("You point at [themonster] and with a sharp pulling gesture you rip out some of their vigor for your own use. They won’t be hitting at full strength for a while.");
 			monster.createStatusEffect(StatusEffects.EnergyDrain, 7, 0, 0, 0);
 			var energydrain:Number = monster.maxMana() * 0.2;
 			if (energydrain > spellCost(1400)) energydrain = spellCost(1400);
@@ -2753,7 +2360,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	private function handleShell():Boolean{
         if(monster.hasStatusEffect(StatusEffects.Shell)) {
-            outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+            outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
             flags[kFLAGS.SPELLS_CAST]++;
             if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
             spellPerkUnlock();

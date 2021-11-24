@@ -58,14 +58,15 @@ public class AbstractSpell extends CombatAbility {
 		if (uc) return uc;
 		
 		// Run our checks
+		var manaCost:Number = this.manaCost();
 		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
-			if (player.HP - player.minHP() > manaCost()) {
+			if (player.HP - player.minHP() > manaCost) {
 				return "Your hp is too low to cast this spell."
 			}
 		} else {
-			if (player.mana < manaCost()) {
+			if (player.mana < manaCost) {
 				if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort)) {
-					if (player.HP < manaCost()) {
+					if (player.HP < manaCost) {
 						return "Your hp and mana are too low to cast this spell."
 					}
 				} else {
@@ -100,7 +101,7 @@ public class AbstractSpell extends CombatAbility {
 	public override function doEffect(display:Boolean = true):void {
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			if (display) {
-				outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
 		} else {
 			doSpellEffect(display);
@@ -139,6 +140,8 @@ public class AbstractSpell extends CombatAbility {
 				return spellModBlack();
 			case CAT_SPELL_BLOOD:
 				return spellModBlood();
+			case CAT_SPELL_HEX:
+				return spellModBlack();
 			default:
 				return spellMod();
 		}
@@ -191,7 +194,8 @@ public class AbstractSpell extends CombatAbility {
 			baseDamage:Number,
 			damageType:int,
 			category:int,
-			monster:Monster
+			monster:Monster,
+			applyOmnicaster:Boolean = true
 	):Number {
 		var damage:Number = baseDamage;
 		
@@ -243,10 +247,13 @@ public class AbstractSpell extends CombatAbility {
 				else damage *= 1.4;
 			}
 			if (category == CAT_SPELL_BLACK) {
+				if (monster.cor < 34) damage *= 1.2;
 				damage *= corruptMagicPerkFactor(monster);
 			}
 		}
-		damage *= omnicasterDamageFactor();
+		if (applyOmnicaster) {
+			damage *= omnicasterDamageFactor();
+		}
 		
 		return Math.round(damage);
 	}

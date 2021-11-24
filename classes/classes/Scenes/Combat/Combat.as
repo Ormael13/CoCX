@@ -535,7 +535,7 @@ public class Combat extends BaseContent {
     public function endHpLoss():void {
 		if (player.hasStatusEffect(StatusEffects.TearsOfDenial) && player.statusEffectv1(StatusEffects.TearsOfDenial) == 1) {
 			player.addStatusValue(StatusEffects.TearsOfDenial, 1, -1);
-			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To " + monster.a + monster.short + " dismay you get back up, still undefeated and ready to keep fighting.");
+			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To [themonster] dismay you get back up, still undefeated and ready to keep fighting.");
 			player.HP = player.maxOverHP();
 			player.lust = player.minLust();
 			doNext(curry(combatMenu, true));
@@ -546,7 +546,7 @@ public class Combat extends BaseContent {
     public function endLustLoss():void {
 		if (player.hasStatusEffect(StatusEffects.TearsOfDenial) && player.statusEffectv1(StatusEffects.TearsOfDenial) == 1) {
 			player.addStatusValue(StatusEffects.TearsOfDenial, 1, -1);
-			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To " + monster.a + monster.short + " dismay you get back up, still undefeated and ready to keep fighting.");
+			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To [themonster] dismay you get back up, still undefeated and ready to keep fighting.");
 			player.HP = player.maxOverHP();
 			player.lust = player.minLust();
 			doNext(curry(combatMenu, true));
@@ -2142,7 +2142,7 @@ public class Combat extends BaseContent {
                 //Player Miss:
                 outputText("You swing your " + weapon + " ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
             } else {
-                if (player.isInGoblinMech()) outputText("You activate the mech’s saw blade, intent on slicing your opponent in half. " + monster.capitalA + monster.short + " avoids the blade as best as it can.\n\n");
+                if (player.isInGoblinMech()) outputText("You activate the mech’s saw blade, intent on slicing your opponent in half. [Themonster] avoids the blade as best as it can.\n\n");
             }
             enemyAI();
             return;
@@ -2229,7 +2229,7 @@ public class Combat extends BaseContent {
             damage = 0;
             outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
         } else {
-            outputText("You activate the mech’s "+weapon+", intent on slicing your opponent in half. " + monster.capitalA + monster.short + " takes ");
+            outputText("You activate the mech’s "+weapon+", intent on slicing your opponent in half. [Themonster] takes ");
             doDamage(damage, true, true);
 			if (player.vehicles == vehicles.HB_MECH) doDamage(damage, true, true);
             outputText(" damage.");
@@ -4100,12 +4100,12 @@ public class Combat extends BaseContent {
                         if (rangeweaponLustDmg > 0) {
                             var s:String = monster.plural ? "" : "s";
                             if (player.weaponRange == weaponsrange.LBLASTR){
-                                //if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on as he is splashed with your milk.");
-                                //else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily highly turned on by your moo moo milk.");
+                                //if (rand(2) == 0) outputText("\n[Themonster] shiver" + s + " and get" + s + " turned on as he is splashed with your milk.");
+                                //else outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily highly turned on by your moo moo milk.");
                             }
                             else{
-                                if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on from the injected chemicals.");
-                                else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
+                                if (rand(2) == 0) outputText("\n[Themonster] shiver" + s + " and get" + s + " turned on from the injected chemicals.");
+                                else outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
                             }
                         }
                         monster.teased(monster.lustVuln * rangeweaponLustDmg, false);
@@ -4652,67 +4652,67 @@ public class Combat extends BaseContent {
                     biteMultiplier = 1;
                     if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){
                         biteMultiplier *= 2;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 3){
                         biteMultiplier *= 3;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 4){
                         biteMultiplier *= 4;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 5){
                         biteMultiplier *= 5;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 6){
                         biteMultiplier *= 6;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 7){
                         biteMultiplier *= 7;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 8){
                         biteMultiplier *= 8;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 9){
                         biteMultiplier *= 9;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 10){
                         biteMultiplier *= 10;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11){
                         biteMultiplier *= 11;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12){
                         biteMultiplier *= 12;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
                     }
@@ -5608,7 +5608,7 @@ public class Combat extends BaseContent {
                 if (monster.lustVuln > 0) {
                     if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.L_DAGGR || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU
 					|| (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) {//player.weapon == weapons.large || player.weapon == weapons.massive ||
-                        outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.");
+                        outputText("\n[Themonster] shivers as your weapon's 'poison' goes to work.");
                         if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) monster.teased(monster.lustVuln * (10 + player.cor / 8));
                         else monster.teased(monster.lustVuln * (5 + player.cor / 10));
                     }
@@ -5632,9 +5632,9 @@ public class Combat extends BaseContent {
                     if (whipLustDmg > 0) {
                         var s:String = monster.plural ? "" : "s";
                         if (rand(2) == 0) {
-                            outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on from the whipping.");
+                            outputText("\n[Themonster] shiver" + s + " and get" + s + " turned on from the whipping.");
                         } else {
-                            outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily from the whip's touches.");
+                            outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily from the whip's touches.");
                         }
                         if (whipCorSelf > 0 && player.cor < 90) dynStats("cor", whipCorSelf);
                         monster.teased(monster.lustVuln * whipLustDmg);
@@ -5657,7 +5657,7 @@ public class Combat extends BaseContent {
                 //Weapon Procs!
                 WeaponMeleeStatusProcs();
                 if (player.weapon == weapons.RIPPER2) {
-                    outputText("  Reeling in pain " + monster.a + monster.short + " begins to burn.");
+                    outputText("  Reeling in pain [themonster] begins to burn.");
                     monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
                 }
                 if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
@@ -6341,7 +6341,7 @@ public class Combat extends BaseContent {
 		if (player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
         if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
         if (stun) {
-            outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
+            outputText("\n[Themonster] reels from the brutal blow, stunned.");
             if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
                 if (player.weapon == weapons.ZWNDER || player.weapon == weapons.UDKDEST) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
                 else monster.createStatusEffect(StatusEffects.Stunned, rand(2), 0, 0, 0);
@@ -6372,8 +6372,8 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(StatusEffects.IzmaBleed, 2, 1);
                     } else monster.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
                 }
-                if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [weapon] leave behind.");
-                else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
+                if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [weapon] leave behind.");
+                else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] leave behind.");
             }
         }
         if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment)) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
@@ -6413,8 +6413,8 @@ public class Combat extends BaseContent {
                 else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
             }
 			else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
-            if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave"+(player.usingSingleFlyingSword()?"":"s")+" behind.");
-            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave"+(player.usingSingleFlyingSword()?"":"s")+" behind.");
+            if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave"+(player.usingSingleFlyingSword()?"":"s")+" behind.");
+            else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave"+(player.usingSingleFlyingSword()?"":"s")+" behind.");
         }
 		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment) && !monster.hasPerk(PerkLib.EnemyConstructType)) HPChange(Math.round(player.maxHP() * 0.01), false);
     }
@@ -6431,8 +6431,8 @@ public class Combat extends BaseContent {
 			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 2, 0.01, 0, 0);
             if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.01);
             if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.04);
-			if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [shield] leave behind.");
-            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [shield] leave behind.");
+			if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [shield] leave behind.");
+            else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [shield] leave behind.");
 		}
 	}
 
@@ -6446,8 +6446,8 @@ public class Combat extends BaseContent {
 		if (bleed) {
 			if (monster.hasStatusEffect(StatusEffects.HemorrhageArmor)) monster.addStatusValue(StatusEffects.HemorrhageArmor, 1, 2);
 			else monster.createStatusEffect(StatusEffects.HemorrhageArmor, 2, 0.01, 0, 0);
-			if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [armor] leave behind.");
-            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [armor] leave behind.");
+			if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [armor] leave behind.");
+            else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [armor] leave behind.");
 		}
     }
 
@@ -7287,7 +7287,7 @@ public class Combat extends BaseContent {
         }
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
             monster.addStatusValue(StatusEffects.IceArmor, 1, -1);
-            outputText(" The icy shield encasing " + monster.a + monster.short + " begins to melt from the heat.");
+            outputText(" The icy shield encasing [themonster] begins to melt from the heat.");
         }
         return damage;
     }
@@ -7374,7 +7374,7 @@ public class Combat extends BaseContent {
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
             monster.addStatusValue(StatusEffects.IceArmor, 1, 1);
-            outputText(" The icy shield encasing " + monster.a + monster.short + " hardens from the cold.");
+            outputText(" The icy shield encasing [themonster] hardens from the cold.");
         }
         return damage;
     }
@@ -8483,7 +8483,7 @@ public class Combat extends BaseContent {
 		//Thunderstorm
 		if (player.hasStatusEffect(StatusEffects.Thunderstorm) && player.statusEffectv2(StatusEffects.Thunderstorm) > 0) {
 			player.addStatusValue(StatusEffects.Thunderstorm, 2, -1);
-            outputText("<b>A bolt of divine lightning falls from the sky and strikes "+monster.a+monster.short+". ");
+            outputText("<b>A bolt of divine lightning falls from the sky and strikes [themonster]. ");
             monster.takeLightningDamage(player.statusEffectv1(StatusEffects.Thunderstorm), true);
             outputText("\n\n");
 		}
@@ -9195,7 +9195,7 @@ public class Combat extends BaseContent {
             player.addStatusValue(StatusEffects.AcidDoT, 1, -1);
             //Heal wounds
             if (player.statusEffectv1(StatusEffects.AcidDoT) <= 0) {
-                outputText("Acid wounds left by " + monster.a + monster.short + " finally close ups.\n\n");
+                outputText("Acid wounds left by [themonster] finally close ups.\n\n");
                 player.removeStatusEffect(StatusEffects.AcidDoT);
             }
         }
@@ -9204,7 +9204,7 @@ public class Combat extends BaseContent {
             player.addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
             //Heal wounds
             if (player.statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
-                outputText("Frostburn wounds left by " + monster.a + monster.short + " finally close ups.\n\n");
+                outputText("Frostburn wounds left by [themonster] finally close ups.\n\n");
                 player.removeStatusEffect(StatusEffects.FrostburnDoT);
             } else {
                 var frostburnPlayer:Number = (monster.str + monster.spe + monster.tou) * 2.5;
@@ -9219,7 +9219,7 @@ public class Combat extends BaseContent {
             player.addStatusValue(StatusEffects.FrozenLung, 1, -1);
             //Heal wounds
             if (player.statusEffectv1(StatusEffects.FrozenLung) <= 0) {
-                outputText("Frozen Lung left by " + monster.a + monster.short + " finally ends.\n\n");
+                outputText("Frozen Lung left by [themonster] finally ends.\n\n");
                 player.removeStatusEffect(StatusEffects.FrozenLung);
             } else {
                 var frozenlung:Number = player.maxHP() * player.statusEffectv2(StatusEffects.FrozenLung);
@@ -9342,35 +9342,11 @@ public class Combat extends BaseContent {
         }
         //Regenerate
         if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
-            if (player.statusEffectv1(StatusEffects.PlayerRegenerate) <= 0) {
-                player.removeStatusEffect(StatusEffects.PlayerRegenerate);
-                outputText("<b>Regenerate effect wore off!</b>\n\n");
-            } else {
-                player.addStatusValue(StatusEffects.PlayerRegenerate, 1, -1);
-                var hpChange2:int = player.inte;
-                if (player.hasPerk(PerkLib.WisenedHealer)) hpChange2 += player.wis;
-                hpChange2 *= healModBlack();
-                if (player.unicornScore() >= 10) hpChange2 *= 3;
-                if (player.alicornScore() >= 12) hpChange2 *= 4;
-                if (player.armorName == "skimpy nurse's outfit") hpChange2 *= 1.2;
-                if (player.weaponName == "unicorn staff") hpChange2 *= 1.5;
-                if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {
-                    if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) hpChange2 *= 2.5;
-                    else hpChange2 *= 1.5;
-                }
-                outputText("<b>Regenerate healing power spreading in your body. (<font color=\"#008000\">+" + hpChange2 + "</font>)</b>\n\n");
-                HPChange(hpChange2, false);
-            }
+            CombatAbilities.Regenerate.advance(true);
         }
         //Life Siphon
         if (player.hasStatusEffect(StatusEffects.LifeSiphon)) {
-            if (player.statusEffectv1(StatusEffects.LifeSiphon) <= 0) player.removeStatusEffect(StatusEffects.LifeSiphon);
-            else {
-                player.addStatusValue(StatusEffects.LifeSiphon, 1, -1);
-                outputText("<b>" + monster.capitalA + monster.short + " health is being funneled to you through your life siphon hex. (<font color=\"#008000\">+" + player.statusEffectv2(StatusEffects.LifeSiphon) + "</font>)</b>\n\n");
-                HPChange(player.statusEffectv2(StatusEffects.LifeSiphon), false);
-                monster.HP -= player.statusEffectv2(StatusEffects.LifeSiphon);
-            }
+            CombatAbilities.LifeSiphon.advance(true);
         }
         //Goblin Mech Stimpack
         if (player.hasStatusEffect(StatusEffects.GoblinMechStimpack)) {
@@ -9990,27 +9966,6 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellConsumingDarkness)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellConsumingDarkness) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellConsumingDarkness);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellConsumingDarkness, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfDesire)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellCurseOfDesire) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellCurseOfDesire);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellCurseOfDesire, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellCurseOfWeeping) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellCurseOfWeeping);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellCurseOfWeeping, 1, -1);
-            }
-		}
 		if (player.hasStatusEffect(StatusEffects.CooldownSpellExorcise)) {
 			if (player.statusEffectv1(StatusEffects.CooldownSpellExorcise) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellExorcise);
@@ -11684,13 +11639,13 @@ public class Combat extends BaseContent {
         if(monster.plural) {
             if (monster.hasStatusEffect(StatusEffects.Dig))
             {
-                outputText("You begin to dig up toward " + monster.a + monster.short + ", but with multiple enemies, grabbing one up would leave you completely open to attack.  You halt your progression and dig back down before you expose yourself to danger.");
+                outputText("You begin to dig up toward [themonster], but with multiple enemies, grabbing one up would leave you completely open to attack.  You halt your progression and dig back down before you expose yourself to danger.");
                 outputText("\n\n");
                 SceneLib.combat.enemyAIImpl();
                 return;
             }
             else {
-                outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, grabbing one up would leave you completely open to attack.  You hastily dig backwards before you expose yourself to danger.");
+                outputText("You launch yourself at [themonster], but with multiple enemies, grabbing one up would leave you completely open to attack.  You hastily dig backwards before you expose yourself to danger.");
                 outputText("\n\n");
                 SceneLib.combat.enemyAIImpl();
                 return;
@@ -12258,7 +12213,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
         if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
         //Squeeze -
-        outputText("You begin to crush your foe with your pincer aiming to squeeze it to death in your mighty grip. You can feel it in your pincer as [monster his] struggles are briefly intensified. \n\n" + monster.capitalA + monster.short + " takes ");
+        outputText("You begin to crush your foe with your pincer aiming to squeeze it to death in your mighty grip. You can feel it in your pincer as [monster his] struggles are briefly intensified. \n\n[Themonster] takes ");
         doDamage(damage, true, true);
         outputText(" damage.");
         //Enemy faints -
@@ -12317,7 +12272,7 @@ public class Combat extends BaseContent {
         } else {
             outputText(" tentacle");
         }
-        outputText(", leaving [monster him] short of breath. You can feel it in your tentacles as [monster his] struggles are briefly intensified. \n\n" + monster.capitalA + monster.short + " takes ");
+        outputText(", leaving [monster him] short of breath. You can feel it in your tentacles as [monster his] struggles are briefly intensified. \n\n[Themonster] takes ");
         doDamage(damage, true, true);
         outputText(" damage.");
         //Enemy faints -
@@ -12477,7 +12432,7 @@ public class Combat extends BaseContent {
             //Nuttin honey
             else {
                 teaseXP(1);
-                outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
+                outputText("\n[Themonster] seems unimpressed.");
             }
             outputText("\n\n");
             if (monster.lust >= monster.maxLust()) {
@@ -12520,7 +12475,7 @@ public class Combat extends BaseContent {
 		doDamage(damage, true, true);
 		//Enemy faints -
 		if(monster.HP <= monster.minHP()) {
-			outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you squeze all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+			outputText("You can feel [themonster]'s life signs beginning to fade, and before you squeze all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 			if(monster.short == "demons")
 				outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 			outputText("\n\n");
@@ -12674,7 +12629,7 @@ public class Combat extends BaseContent {
             //Nuttin honey
             else {
                 teaseXP(1);
-                outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
+                outputText("\n[Themonster] seems unimpressed.");
             }
             outputText("\n\n");
             if (monster.lust >= monster.maxLust()) {
@@ -12822,7 +12777,7 @@ public class Combat extends BaseContent {
             //Nuttin honey
             else {
                 teaseXP(1);
-                outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
+                outputText("\n[Themonster] seems unimpressed.");
             }
             outputText("\n\n");
             if (monster.lust >= monster.maxLust()) {
@@ -13166,7 +13121,7 @@ public class Combat extends BaseContent {
                     damage += (4 * (1 + player.newGamePlusMod()));
                     break;
             }
-            outputText("You begin to forcefully rape " + monster.capitalA + monster.short +" from the inside wrecking [monster his] body as you attempt to extract fluids from [monster his] abused genitals.");
+            outputText("You begin to forcefully rape [Themonster] from the inside wrecking [monster his] body as you attempt to extract fluids from [monster his] abused genitals.");
             //NERF TEASE DAMAGE
             damage += scalingBonusLibido();
             damage *= 0.25;
@@ -13365,7 +13320,7 @@ public class Combat extends BaseContent {
         useMana(30, USEMANA_WHITE_HEAL);
         outputText("You initiate a healing spell. ");
         CombatAbilities.Heal.doEffect(false);
-        outputText("\n\nIt's only when you finish your casting that " + monster.a + monster.short + " name snaps out of the hypnosis and realise what is going on. ");
+        outputText("\n\nIt's only when you finish your casting that [themonster] name snaps out of the hypnosis and realise what is going on. ");
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         statScreenRefresh();
         flags[kFLAGS.SPELLS_CAST]++;
@@ -13383,12 +13338,12 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You maintain eye contact with the target insidiously coiling your tail around it. ");
         if (rand(4) == 0) {
-            outputText("It's only when you are fully wrapped around your victim that " + monster.a + monster.short + " snaps out and realise " + monster.pronoun3 + " predicament.");
+            outputText("It's only when you are fully wrapped around your victim that [themonster] snaps out and realise " + monster.pronoun3 + " predicament.");
             monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
             monster.removeStatusEffect(StatusEffects.HypnosisNaga);
         } else {
             var Duuuration:Number = monster.statusEffectv1(StatusEffects.HypnosisNaga);
-            outputText("You maintain the trance smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. " + monster.capitalA + monster.short + " is lost in your gaze unable to act.");
+            outputText("You maintain the trance smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze unable to act.");
             monster.createStatusEffect(StatusEffects.Constricted, Duuuration, 0, 0, 0);
         }
         enemyAI();
@@ -13402,7 +13357,7 @@ public class Combat extends BaseContent {
         var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
         lustDmg *= damagemultiplier;
         lustDmg = Math.round(lustDmg);
-        outputText("You maintain the trance smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. " + monster.capitalA + monster.short + " is lost in your gaze unable to act. ");
+        outputText("You maintain the trance smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze unable to act. ");
         monster.teased(lustDmg);
         outputText("\n\n");
         enemyAI();
@@ -13947,7 +13902,7 @@ public class Combat extends BaseContent {
             damage *= 1.75;
         }
         damage = Math.round(damage);
-		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards " + monster.a + monster.short + ". "+(player.usingSingleFlyingSword()?"It":"They")+" slash target leaving minor wound"+(player.usingSingleFlyingSword()?"":"s")+". ");
+		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards [themonster]. "+(player.usingSingleFlyingSword()?"It":"They")+" slash target leaving minor wound"+(player.usingSingleFlyingSword()?"":"s")+". ");
 		if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) doFireDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) doIceDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) doLightingDamage(damage, true, true);
@@ -13984,7 +13939,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
         if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
         if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 2;
-        outputText("You focus on " + monster.capitalA + monster.short + ", ");
+        outputText("You focus on [Themonster], ");
 		if (player.statusEffectv1(StatusEffects.Flying) == 0) outputText("fold your wing and dive down");
 		if (player.statusEffectv1(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward and dive down");
 		if (player.statusEffectv1(StatusEffects.Flying) == 2) outputText("fold your arms and dive down");
@@ -14095,7 +14050,7 @@ public class Combat extends BaseContent {
 		fireDMG *= fireDamageBoostedByDao();
 		fireDMG = Math.round(fireDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
-        outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'. ");
+        outputText("And with almost orgasmic joy, you sends a wave of flames toward [themonster] while mumbling about 'sharing the flames of love'. ");
 		doFireDamage(fireDMG, true, true);
         outputText("\n\n");
         enemyAI();
@@ -14116,7 +14071,7 @@ public class Combat extends BaseContent {
 		iceDMG *= iceDamageBoostedByDao();
 		iceDMG = Math.round(iceDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
-        outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'. ");
+        outputText("And with almost orgasmic joy, you sends a wave of ice shards toward [themonster] while mumbling about 'sharing the icicles of love'. ");
 		doIceDamage(iceDMG, true, true);
         outputText("\n\n");
         enemyAI();
@@ -14137,7 +14092,7 @@ public class Combat extends BaseContent {
 		lightingDMG *= lightningDamageBoostedByDao();
 		lightingDMG = Math.round(lightingDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing storm of sisterhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in ligthing.\n\n");
-        outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'. ");
+        outputText("With joy, you sends a mass of ligthing toward [themonster] while mumbling about 'sharing the storm of sisterhood'. ");
 		doLightingDamage(lightingDMG, true, true);
         outputText("\n\n");
         enemyAI();
@@ -14158,7 +14113,7 @@ public class Combat extends BaseContent {
 		darknessDMG *= darknessDamageBoostedByDao();
 		darknessDMG = Math.round(darknessDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing night of brotherhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in darkness.\n\n");
-        outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'. ");
+        outputText("With joy, you sends a mass of darkness toward [themonster] while mumbling about 'sharing the night of brotherhood'. ");
 		doDarknessDamage(darknessDMG, true, true);
         outputText("\n\n");
         enemyAI();
@@ -14167,8 +14122,8 @@ public class Combat extends BaseContent {
     public function heavensDevourer():void {
         clearOutput();
         player.createStatusEffect(StatusEffects.CooldownHeavensDevourer, 4, 0, 0, 0);
-        outputText("You start to concentrate and between your hands forms small black sphere inscribed with many tiny symbols. With a simple flick of hand you send it toward " + monster.a + monster.short + ", which preparing to defend. But sphere stops a round twenty centimiters before " + monster.pronoun3 + ". ");
-        outputText("And then it starts greedy sucking our any bit of lust or wrath it can find in " + monster.a + monster.short + " trasmiting part of it back to you.");
+        outputText("You start to concentrate and between your hands forms small black sphere inscribed with many tiny symbols. With a simple flick of hand you send it toward [themonster], which preparing to defend. But sphere stops a round twenty centimiters before " + monster.pronoun3 + ". ");
+        outputText("And then it starts greedy sucking our any bit of lust or wrath it can find in [themonster] trasmiting part of it back to you.");
         var devouredLust:Number = 0;
         var transferedLust:Number = 0;
         var devouredWrath:Number = 0;
@@ -14206,7 +14161,7 @@ public class Combat extends BaseContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		HPChange(spellCostBlood(20), false);
-		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
 		if (damage < 10) damage = 10;
 		var puppies:Number = 1;
@@ -14258,7 +14213,7 @@ public class Combat extends BaseContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		HPChange(spellCostBlood(40), false);
-		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, large blood dripping spears coalesce briefly before being shot, flying toward " + monster.a + monster.short + " vital spot.\n\n");
+		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, large blood dripping spears coalesce briefly before being shot, flying toward [themonster] vital spot.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.25;
 		if (damage < 10) damage = 10;
 		var puppies:Number = 1;
@@ -14301,7 +14256,7 @@ public class Combat extends BaseContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		HPChange(spellCostBlood(80), false);
-		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red dewdrops shoots from one of their front paws their rised for short moment, flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red dewdrops shoots from one of their front paws their rised for short moment, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
 		if (damage < 10) damage = 10;
 		var puppies:Number = 1;
@@ -14478,7 +14433,7 @@ public class Combat extends BaseContent {
 			else damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		outputText("You focus the force of your wrath, pushing the energy to the tip of your fingers. With a deep breath, you release the stored energy, thrusting it upon " + monster.a + monster.short + ". Six finger-shaped constructs materialize before you as they fly toward " + monster.a + monster.short + ". ");
+		outputText("You focus the force of your wrath, pushing the energy to the tip of your fingers. With a deep breath, you release the stored energy, thrusting it upon [themonster]. Six finger-shaped constructs materialize before you as they fly toward [themonster]. ");
         doDamage(damage, true, true);
         doDamage(damage, true, true);
         doDamage(damage, true, true);
@@ -14570,7 +14525,7 @@ public class Combat extends BaseContent {
 	}
 	public function skeletonSmash():void {
 		clearOutput();
-		outputText("Your Skeletons upon command gang up on " + monster.a + monster.short + " swarming from all side and leaving " + monster.pronoun2 + " stunned. ");
+		outputText("Your Skeletons upon command gang up on [themonster] swarming from all side and leaving " + monster.pronoun2 + " stunned. ");
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
 		damage += 300 + rand(121);

@@ -242,6 +242,13 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
+	 * (For lasting abilities) Return true if ability can be casted while it's still active
+	 */
+	public function isStackable():Boolean {
+		return false;
+	}
+	
+	/**
 	 * @param target Monster to gauge effect against, or null if viewing outside combat.
 	 * @return {String} Ability description + costs, tags, and effects.
 	 */
@@ -249,27 +256,30 @@ public class CombatAbility extends BaseCombatContent {
 		var fullDesc:String = description+"\n";
 		
 		var effectDesc:String = describeEffectVs(target);
-		if (effectDesc) fullDesc += "<b>Effect: "+effectDesc+"</b>\n";
-		
-		var tags:/*int*/Array = presentTags();
-		if (tags.length > 0) {
-			fullDesc += "\n<b>Tags: " + tags.map(function(tag:int,index:int,array:Array):String {
-				return AllTags[tag].name;
-			}).join(", ")+"</b>";
-		}
+		if (effectDesc) fullDesc += "\n<b>Effect: "+effectDesc+"</b>";
 		
 		var costs:/*String*/Array = [];
-		if (baseManaCost > 0) {
+		if (manaCost() > 0) {
 			costs.push("Mana Cost: " + manaCost());
 		}
-		if (baseWrathCost > 0) {
+		if (wrathCost() > 0) {
 			costs.push("Wrath Cost: " + wrathCost());
+		}
+		if (hpCost() > 0) {
+			costs.push("HP Cost: " + hpCost());
 		}
 		var cd:int = calcCooldown();
 		if (cd > 0) {
 			costs.push("Cooldown: "+cd);
 		}
-		if (costs.length > 0) fullDesc += "\n" + costs.join(", ");
+		if (costs.length > 0) fullDesc += "\n<b>" + costs.join(", ")+"</b>";
+		
+		var tags:/*int*/Array = presentTags();
+		if (tags.length > 0) {
+			fullDesc += "\nTags: " + tags.map(function(tag:int,index:int,array:Array):String {
+				return AllTags[tag].name;
+			}).join(", ");
+		}
 		
 		return fullDesc
 	}
@@ -387,6 +397,10 @@ public class CombatAbility extends BaseCombatContent {
 		return baseWrathCost;
 	}
 	
+	public function hpCost():Number {
+		return 0;
+	}
+	
 	/**
 	 * Current cooldown (number of rounds left before it could be used again)
 	 */
@@ -395,7 +409,8 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
-	 * Calculate cooldown of this ability. Default is 0 (no cooldown)
+	 * Calculate cooldown of this ability. Default is 0 (no cooldown).
+	 * Will be applied automatically.
 	 */
 	public function calcCooldown():int {
 		return 0;
@@ -406,7 +421,7 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	protected function usabilityCheck():String {
 		// Checks applicable to all abilities could go here
-		if (timingType == TIMING_LASTING && isActive()) {
+		if (timingType == TIMING_LASTING && !isStackable() && isActive()) {
 			return "This ability is already active."
 		}
 		var ccd:int = currentCooldown;

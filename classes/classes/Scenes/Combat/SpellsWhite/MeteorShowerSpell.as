@@ -83,7 +83,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		}
 		if (display) {
 			outputText(" damage!");
-			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.");
+			outputText(" [Themonster] reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.");
 		}
 		damage *= 12;
 		damage *= omnicasterRepeatCount();
