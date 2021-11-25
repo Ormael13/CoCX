@@ -18,7 +18,7 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "Duration: "+numberOfThings(calcDuration(),"round");
+		return ""+calcPower()+" hp leech for "+numberOfThings(calcDuration(),"round");
 	}
 	
 	override public function get isKnown():Boolean {
@@ -41,7 +41,7 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 		player.addStatusValue(StatusEffects.BloodField, 1, -1);
 		if (player.statusEffectv1(StatusEffects.BloodField) <= 0) player.removeStatusEffect(StatusEffects.BloodField);
 		if (!player.hasStatusEffect(StatusEffects.MonsterDig) && !monster.isFlying()) {
-			var bloodfield:Number = monster.statusEffectv2(StatusEffects.Hemorrhage);
+			var bloodfield:Number = monster.statusEffectv2(StatusEffects.BloodField);
 			if (monster.plural) bloodfield *= 5;
 			if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) bloodfield *= 5;
 			bloodfield = combat.doDamage(bloodfield);

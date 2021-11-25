@@ -28,13 +28,7 @@ public class LifetapSpell extends AbstractHexSpell {
 	}
 	
 	public override function hpCost():Number {
-		var lifetap:Number = 0;
-		lifetap += Math.round(player.maxHP() * .25);
-		if (monster != null) {
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifetap = Math.round(lifetap * 1.2);
-			lifetap *= corruptMagicPerkFactor(monster);
-		}
-		return lifetap;
+		return Math.round(player.maxHP() * .25);
 	}
 	
 	override protected function usabilityCheck():String {

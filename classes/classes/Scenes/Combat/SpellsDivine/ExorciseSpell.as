@@ -37,7 +37,7 @@ public class ExorciseSpell extends AbstractDivineSpell {
 	 * @return {Number} Damage dealt by this spell
 	 */
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
-		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 4;
+		var damage:Number = scalingBonusIntelligence() * 4;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
 		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));

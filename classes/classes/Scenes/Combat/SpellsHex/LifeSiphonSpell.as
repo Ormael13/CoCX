@@ -74,8 +74,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 				outputText("You wave a sign linking yourself to [themonster] as you begin to funnel its health and vitality to yourself.");
 			}
 			monster.HP -= lifesiphon;
-			if (player.hasStatusEffect(StatusEffects.DarkRitual)) HPChange((player.maxHP() * 0.15), false);
-			else HPChange((player.maxHP() * 0.05), false);
+			HPChange(lifesiphon, false);
 			player.createStatusEffect(StatusEffects.LifeSiphon, 15, lifesiphon, 0, 0);
 		}
 	}

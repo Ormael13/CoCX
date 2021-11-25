@@ -3,6 +3,7 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractHexSpell;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
 public class ConsumingDarknessSpell extends AbstractHexSpell {
@@ -56,7 +57,6 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 			var store11:Number = 0;
 			store11 += monster.statusEffectv2(StatusEffects.ConsumingDarkness);
 			store11 *= 0.2;
-			store11 = Math.round(store11 * combat.darknessDamageBoostedByDao());
 			combat.doDarknessDamage(store11, true, display);
 			if (display) {
 				outputText(" damage.\n\n");
@@ -65,13 +65,13 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
-		var consumingdarkness:Number = scalingBonusIntelligence() * spellModBlack() * 2;
-		if (monster != null) {
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) consumingdarkness *= consumingdarkness * 1.2;
-		}
-		consumingdarkness *= corruptMagicPerkFactor(monster);
-		consumingdarkness *= combat.darknessDamageBoostedByDao();
-		return Math.round(consumingdarkness);
+		return adjustSpellDamage(
+				scalingBonusIntelligence()*2,
+				DamageType.DARKNESS,
+				CAT_SPELL_HEX,
+				monster,
+				false
+		);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

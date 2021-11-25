@@ -253,26 +253,17 @@ public class AbstractSpell extends CombatAbility {
 		}
 		if (monster != null) {
 			if (hasTag(TAG_AOE) && monster.plural) damage *= 5;
-			if ((category == CAT_SPELL_WHITE || category == CAT_SPELL_DIVINE) &&
-					player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) {
-				damage *= 1.2;
-			}
-			if ((category == CAT_SPELL_BLACK || category == CAT_SPELL_HEX) &&
-					player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) {
-				damage *= 1.2;
-			}
-			if (category == CAT_SPELL_WHITE && player.hasPerk(PerkLib.PureMagic)) {
-				if (monster.cor < 33) damage *= 1.0;
-				else if (monster.cor < 50) damage *= 1.1;
-				else if (monster.cor < 75) damage *= 1.2;
-				else if (monster.cor < 90) damage *= 1.3;
-				else damage *= 1.4;
-			}
-			if (category == CAT_SPELL_BLACK) {
+			if (category == CAT_SPELL_WHITE || category == CAT_SPELL_DIVINE) {
+				if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) {
+					damage *= 1.2;
+				}
 				damage *= corruptMagicPerkFactor(monster);
 			}
-			if (category == CAT_SPELL_DIVINE) {
-				damage *= divineArmamentPerkFactor(monster);
+			if (category == CAT_SPELL_BLACK || category == CAT_SPELL_HEX) {
+				if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) {
+					damage *= 1.2;
+				}
+				damage *= pureMagicPerkFactor(monster);
 			}
 		}
 		if (applyOmnicaster) {
@@ -293,9 +284,9 @@ public class AbstractSpell extends CombatAbility {
 		else return 1.4;
 	}
 	
-	public static function divineArmamentPerkFactor(monster:Monster):Number {
+	public static function pureMagicPerkFactor(monster:Monster):Number {
 		if (monster == null) return 1.0
-		if (!player.hasPerk(PerkLib.DivineArmament)) return 1.0;
+		if (!player.hasPerk(PerkLib.PureMagic)) return 1.0;
 		
 		if (monster.cor < 33) return 1.0;
 		else if (monster.cor < 50) return 1.1;
