@@ -208,6 +208,15 @@ public class AbstractSpell extends CombatAbility {
 				/* don't change */
 				break;
 			}
+			case DamageType.PHYSICAL: {
+				break;
+			}
+			case DamageType.MAGICAL: {
+				if (category == CAT_SPELL_BLOOD) {
+					damage *= combat.bloodDamageBoostedByDao();
+				}
+				break;
+			}
 			case DamageType.FIRE: {
 				damage = calcInfernoMod(damage);
 				if (player.armor == armors.BLIZZ_K) damage *= 0.5;
@@ -238,7 +247,7 @@ public class AbstractSpell extends CombatAbility {
 				damage *= combat.darknessDamageBoostedByDao();
 				break;
 			}
-			case DamageType.MAGICAL: {
+			case DamageType.TRUE: {
 				break;
 			}
 		}
@@ -331,7 +340,7 @@ public class AbstractSpell extends CombatAbility {
 	
 	/**
 	 * Do a crit roll and apply crit multiplier.
-	 * Deal damage once or repeatedly (if Omnicaster). Does NOT apply Omnicaster damage downscale!
+	 * Deal damage once or repeatedly (if Omnicaster and param set). Does NOT apply Omnicaster damage downscale!
 	 * Also prints "Monster takes N N N N damage. Critical Hit!"
 	 * @param damage Damage to deal
 	 * @param damageType Damage type (DamageType.XXX)
@@ -342,15 +351,14 @@ public class AbstractSpell extends CombatAbility {
 			damage:Number,
 			damageType:int,
 			displayDamageOnly:Boolean=false,
-			baseCritChance:Number=5,
-			critMultiplier:Number=1.75
+			omnicasterRepeat:Boolean=true
 	):Number {
 		if (display) {
-			outputText(monster.capitalA + monster.short + " takes ");
+			outputText("[Themonster] takes ");
 		}
 		//Determine if critical hit!
 		var crit:Boolean = false;
-		var critChance:int = baseCritChance + combatMagicalCritical();
+		var critChance:int = 5 + combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (critChance > 0 && rand(100) < critChance) {
 			crit = true;
@@ -378,7 +386,7 @@ public class AbstractSpell extends CombatAbility {
 			default:
 				damageFn = doDamage;
 		}
-		var repeats:int = omnicasterRepeatCount();
+		var repeats:int = omnicasterRepeat ? omnicasterRepeatCount() : 1;
 		var i:int = repeats;
 		while (i-->0) {
 			damageFn(damage, true, display || displayDamageOnly);

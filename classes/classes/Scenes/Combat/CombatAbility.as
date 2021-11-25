@@ -413,7 +413,7 @@ public class CombatAbility extends BaseCombatContent {
 	 * Can be used instead of perform to skip resource usage, cooldown, or monster interception
 	 */
 	public function doEffect(display:Boolean = true):void {
-		throw new Error("Method perform() not implemented for ability "+name);
+		throw new Error("Method doEffect() not implemented for ability "+name);
 	}
 	
 	public function manaCost():Number {

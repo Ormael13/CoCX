@@ -9406,11 +9406,6 @@ public class Combat extends BaseContent {
                 else player.takePhysDamage(100);
 			}
         }
-		//Lifesteal Enchantment
-        if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
-            if (player.statusEffectv1(StatusEffects.LifestealEnchantment) <= 0) player.removeStatusEffect(StatusEffects.LifestealEnchantment);
-            else player.addStatusValue(StatusEffects.LifestealEnchantment, 1, -1);
-        }
         //Flying
         if (player.isFlying()) {
 			if (player.statusEffectv2(StatusEffects.Flying) == 0) {
@@ -9846,62 +9841,6 @@ public class Combat extends BaseContent {
             }
         }
         //Spells
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellClearMind)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellClearMind) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellClearMind);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellClearMind, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellBalanceOfLife)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellBalanceOfLife) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBalanceOfLife);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBalanceOfLife, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellEnergyDrain)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellEnergyDrain) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellEnergyDrain);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellEnergyDrain, 1, -1);
-            }
-		}
-		if (player.hasStatusEffect(StatusEffects.CooldownSpellRestore)) {
-			if (player.statusEffectv1(StatusEffects.CooldownSpellRestore) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellRestore);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellRestore, 1, -1);
-            }
-		}
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodMissiles)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodMissiles) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBloodMissiles);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBloodMissiles, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodExplosion)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodExplosion) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBloodExplosion);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBloodExplosion, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodChains)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodChains) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBloodChains);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBloodChains, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodWave)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodWave) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBloodWave);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBloodWave, 1, -1);
-            }
-        }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipe)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellBloodSwipe) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipe);

@@ -5,6 +5,7 @@ import classes.Scenes.Combat.SpellsHex.*;
 import classes.Scenes.Combat.SpellsDivine.*;
 import classes.Scenes.Combat.SpellsNecro.*;
 import classes.Scenes.Combat.SpellsGrey.*;
+import classes.Scenes.Combat.SpellsBlood.*;
 
 public class CombatAbilities {
 	
@@ -138,25 +139,22 @@ public class CombatAbilities {
 		ClearMind
 	];
 	
-	/* TODO @aimozg convert these
-	public static const BloodMissile:BloodMissileSpell                 = new BloodMissileSpell();
+	public static const BloodMissiles:BloodMissilesSpell               = new BloodMissilesSpell();
 	public static const BloodShield:BloodShieldSpell                   = new BloodShieldSpell();
 	public static const BloodExplosion:BloodExplosionSpell             = new BloodExplosionSpell();
 	public static const BloodChains:BloodChainsSpell                   = new BloodChainsSpell();
 	public static const BloodWave:BloodWaveSpell                       = new BloodWaveSpell();
 	public static const LifestealEnchantment:LifestealEnchantmentSpell = new LifestealEnchantmentSpell();
 	public static const BloodField:BloodFieldSpell                     = new BloodFieldSpell();
-	 */
+
 	public static const ALL_BLOOD_SPELLS:/*CombatAbility*/Array        = [
-			/*
-		BloodMissile,
+		BloodMissiles,
 		BloodShield,
 		BloodExplosion,
 		BloodChains,
 		BloodWave,
 		LifestealEnchantment,
 		BloodField
-			 */
 	];
 	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []
