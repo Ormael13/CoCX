@@ -8581,7 +8581,7 @@ use namespace CoC;
 			var yetiCounter:Number = 0;
 			if (skin.base.color == "dark" || skin.base.color == "tan")
 				yetiCounter++;
-			if (eyes.colour == "silver" || eyes.colour == "grey")
+			if (eyes.colour == "silver" || eyes.colour == "grey" || eyes.colour == "gray")
 				yetiCounter++;
 			if (lowerBody == LowerBody.YETI)
 				yetiCounter++;
