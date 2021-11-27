@@ -118,7 +118,7 @@ public class Camp extends NPCAwareContent{
 		if (!CoC.instance.inCombat) spriteSelect(-1);
 		hideMenus();
 		timeQ = timeUsed;
-		goNext(timeUsed, false);
+		goNext(false);
 	}
 
 	public function returnToCampUseOneHour():void {
@@ -407,11 +407,11 @@ public class Camp extends NPCAwareContent{
 			flags[kFLAGS.PC_PENDING_PREGGERS] = 2;
 			return;
 		}
-		if (timeQ > 0) {
+		if (timeQueued) {
 			if (!campQ) {
 				clearOutput();
 				outputText("More time passes...\n");
-				goNext(timeQ, false);
+				goNext(false);
 				return;
 			} else {
 				if (IsSleeping) {
@@ -3166,7 +3166,7 @@ public class Camp extends NPCAwareContent{
 			if (timeQ != 1) outputText("You continue to rest for " + num2Text(timeQ) + " more hours.\n");
 			else outputText("You continue to rest for another hour.\n");
 		}
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 //-----------------
@@ -3268,7 +3268,7 @@ public class Camp extends NPCAwareContent{
 			if (timeQ != 1) outputText("You continue to wait for " + num2Text(timeQ) + " more hours.\n");
 			else outputText("You continue to wait for another hour.\n");
 		}
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 //-----------------
@@ -3300,7 +3300,7 @@ public class Camp extends NPCAwareContent{
 				if (timeQ > 1) outputText("s");
 				outputText(". ");
 				sleepRecovery(true);
-				goNext(timeQ, true);
+				goNext(true);
 				return;
 			}
 			/******************************************************************/
@@ -3465,7 +3465,7 @@ public class Camp extends NPCAwareContent{
 			else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		}
 		player.sleepUpdateStat();
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 //For shit that breaks normal sleep processing.
@@ -3490,7 +3490,7 @@ public class Camp extends NPCAwareContent{
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		sleepRecovery(true);
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 	public function sleepRecovery(display:Boolean = false):void {

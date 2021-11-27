@@ -76,7 +76,8 @@ public class CoC extends MovieClip
 
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
-    public var timeQ:Number = 0;
+    public var timeQ:Number = 0; // Queued hours
+    public var timeQmin:int = 0; // Queued minutes
     //FIXME @OXDECEPTION Move above vars to more appropriate classes if possible
 
     /*private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu

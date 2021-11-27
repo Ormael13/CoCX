@@ -1,5 +1,5 @@
 //Ingnam: The Prologue
-package classes.Scenes.Places 
+package classes.Scenes.Places
 {
 import classes.*;
 import classes.BodyParts.Ears;
@@ -20,14 +20,14 @@ public class Ingnam extends BaseContent
 		
 		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM] > 0; }
 		
-		public function Ingnam() 
-		{	
+		public function Ingnam()
+		{
 		}
 		
 		//Main Ingnam menu.
 		public function menuIngnam():void {
 			//Force autosave
-			if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
+			if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0)
 			{
 				trace("Autosaving to slot: " + player.slotName);
 
@@ -39,6 +39,11 @@ public class Ingnam extends BaseContent
 				return;
 			}
 			clearOutput();
+			if (timeQueued) {
+				if (goNext(false)) {
+					return;
+				}
+			}
 			outputText(images.showImage("location-ingnam"));
 			outputText("Ingnam is a rich and prosperous village despite its small size. There is already a well-established array of shops with a constant hum of tradesmen and merchants. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
 			outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness.");
@@ -463,7 +468,7 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			outputText("The innkeeper looks at you and says, \"<i>Welcome back! I've missed you! How did your adventures go?</i>\"");
 			outputText("\n\nYou tell the innkeeper about your adventures and how you've met various denizens in Mareth.\n\n");
-			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\""); 
+			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\"");
 			else if (player.race() == "human") {
 				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed a bit.</i>\" ");
 			}
