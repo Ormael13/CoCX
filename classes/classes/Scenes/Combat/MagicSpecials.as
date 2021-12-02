@@ -4693,6 +4693,16 @@ public class MagicSpecials extends BaseCombatContent {
 		else enemyAI();
 	}
 
+	public function MirrorImage():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
+		clearOutput();
+		useMana(100, USEFATG_MAGIC_NOBM);
+		var numberOfImage:int = Math.round(player.inte/100);
+		outputText("You weave a powerful illusion, creating "+ numberOfImage +" replicas of yourself.");
+		player.createStatusEffect(StatusEffects.MirrorImage,numberOfImage,0,0,0);
+		enemyAI();
+	}
+
 	public function possess():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();

@@ -1675,74 +1675,97 @@ import flash.utils.getQualifiedClassName;
 
 		private function playerDodged():Boolean
 		{
-			//Determine if dodged!
-			var dodge:int = player.speedDodge(this);
-			if (dodge>0) {
-				outputPlayerDodged(dodge);
-				return true;
+			//Check if player has shadow clones or similar gimmick
+			var hasTargetedThePlayer:Boolean = false;
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
 			}
-			var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
-			//Determine if evaded
-			if (evasionResult == EVASION_EVADE) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
-				if (!plural) outputText("s");
-				outputText(" attack.\n");
+			if (rand(1+statusEffectv1(StatusEffects.MirrorImage)) != 1){
+				outputText("Unable to determine the real one from the fake");
+				if (statusEffectv2(StatusEffects.MirrorImage) >= 2)outputText("s");
+				outputText(", your opponent");
+				if (plural)outputText("s");
+				outputText(" targets ");
+				if (statusEffectv2(StatusEffects.MirrorImage) >= 2)outputText("one of your many illusions");
+				else outputText(" your remaining illusion");
+				outputText(" instead causing the fake to vanish.");
+				addStatusValue(StatusEffects.MirrorImage, 1,-1);
+				if (statusEffectv2(StatusEffects.MirrorImage) >= 1) outputText(" You now have "+statusEffectv2(StatusEffects.MirrorImage)+" illusion left.")
+				if (statusEffectv2(StatusEffects.MirrorImage) == 0) {
+					player.removeStatusEffect(StatusEffects.MirrorImage);
+					outputText(" Your last illusion now destroyed, you will now have to be cautious of your opponent attacks.");
+				}
 				return true;
-			}
-			//("Misdirection"
-			if (evasionResult == EVASION_MISDIRECTION) {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
-				return true;
-			}
-			//Determine if cat'ed
-			if (evasionResult == EVASION_FLEXIBILITY) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				if (plural) outputText("' attacks.\n");
-				else outputText("'s attack.\n");
-				return true;
-			}
-			if (evasionResult != null) { // Failsafe fur unhandled
-				outputText("Using your superior combat skills you manage to avoid attack completely.\n");
-				return true;
-			}
-			//Zenji parry enemy attack
-			if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
-				var parryChance:Number = 25;
-				if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
-				if (rand(100) > parryChance) {
-					outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
-					outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+			} else {
+				//Determine if dodged!
+				var dodge:int = player.speedDodge(this);
+				if (dodge>0) {
+					outputPlayerDodged(dodge);
 					return true;
 				}
-			}
-			//Parry with weapon
-			if (combatParry()) {
-				outputText("You manage to block " + a + short + "");
-				if (plural) outputText("' attacks ");
-				else outputText("'s attack ");
-				outputText("with your [weapon].\n");
-				if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					SceneLib.combat.basemeleeattacks();
+				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
+				//Determine if evaded
+				if (evasionResult == EVASION_EVADE) {
+					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
+					if (!plural) outputText("s");
+					outputText(" attack.\n");
+					return true;
 				}
-				if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
-					SceneLib.combat.basemeleeattacks();
+				//("Misdirection"
+				if (evasionResult == EVASION_MISDIRECTION) {
+					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
+					return true;
 				}
-				return true;
-			}
-			//Block with shield
-			if (combatBlock(true)) {
-				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
-				if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					SceneLib.combat.pspecials.shieldBash();
+				//Determine if cat'ed
+				if (evasionResult == EVASION_FLEXIBILITY) {
+					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
+					if (plural) outputText("' attacks.\n");
+					else outputText("'s attack.\n");
+					return true;
 				}
-				SceneLib.combat.ShieldsStatusProcs();
-				return true;
+				if (evasionResult != null) { // Failsafe fur unhandled
+					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
+					return true;
+				}
+				//Zenji parry enemy attack
+				if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
+					var parryChance:Number = 25;
+					if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
+					if (rand(100) > parryChance) {
+						outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
+						outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+						return true;
+					}
+				}
+
+				//Parry with weapon
+				if (combatParry()) {
+					outputText("You manage to block " + a + short + "");
+					if (plural) outputText("' attacks ");
+					else outputText("'s attack ");
+					outputText("with your [weapon].\n");
+					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						SceneLib.combat.basemeleeattacks();
+					}
+					if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+						SceneLib.combat.basemeleeattacks();
+					}
+					return true;
+				}
+				//Block with shield
+				if (combatBlock(true)) {
+					outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
+					if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						SceneLib.combat.pspecials.shieldBash();
+					}
+					SceneLib.combat.ShieldsStatusProcs();
+					return true;
+				}
+				return false;
 			}
-			return false;
 		}
 
 		public function monsterIsStunned():Boolean {
