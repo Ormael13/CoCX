@@ -1165,6 +1165,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSpellLightningBoltEx:StatusEffectType      	= mkCombat("Cooldown Spell Lightning Bolt (Ex)");
 		public static const CooldownSpellMentalShield:StatusEffectType          = mkCombat("Cooldown Spell Mental Shield");
 		public static const CooldownSpellMeteorShower:StatusEffectType      	= mkCombat("Cooldown Spell Meteor Shower");
+		public static const CooldownSpellMindBlast:StatusEffectType        	    = mk("Mindblast cooldown");
 		public static const CooldownSpellNosferatu:StatusEffectType      		= mkCombat("Cooldown Spell Nosferatu");
 		public static const CooldownSpellPolarMidnight:StatusEffectType      	= mkCombat("Cooldown Spell Polar Midnight");
 		public static const CooldownSpellPyreBurst:StatusEffectType      		= mkCombat("Cooldown Spell Pyre Burst");

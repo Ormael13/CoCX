@@ -15049,6 +15049,32 @@ use namespace CoC;
 			}
 		}
 
+		public function BrainMeltBonus():void
+		{
+			var MBCap:Number = 1;
+			if (hasPerk(PerkLib.MindbreakerBrain)) MBCap += 0.50;
+			if (hasPerk(PerkLib.MindbreakerBrainAlpha)) MBCap += 0.50;
+			if (hasPerk(PerkLib.MindbreakerBrainOmega)) MBCap += 0.50;
+			removeCurse("inte", 5);
+			removeCurse("wis", 5);
+			removeCurse("lib", 5);
+			if (buff("Devoured Mind").getValueOfStatBuff("int.mult") < MBCap){
+				buff("Devoured Mind").addStat("int.mult",0.05);
+				buff("Devoured Mind").addStat("wis.mult",0.05);
+				buff("Devoured Mind").addStat("lib.mult",0.05);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(inte);
+				CoC.instance.mainView.statsView.showStatUp(wis);
+				CoC.instance.mainView.statsView.showStatUp(lib);
+				outputText("Your mind surges with newfound knowledge, your brain expanding slightly from the stolen information. You orgasm in sympathy with this new added knowledge.");
+			}
+			else{
+				outputText("Sadly as much as you try to extract new knowledge from your victims brain there's only so few to be had… " +
+						"that Mareth is filled with idiots doesn't help that." +
+						" Despite draining your victim into something about as smart as a mineral you fail to extract anything noteworthy.");
+			}
+		}
+
 		public function VenomWebCost():Number
 		{
 			var VWC:Number = 5;

@@ -13,7 +13,8 @@ package classes.Scenes
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
 	import classes.Scenes.NPCs.Anemone;
-	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
 	public class UniqueSexScenes extends BaseContent
 	{
@@ -225,6 +226,8 @@ package classes.Scenes
 				else addButton(7, "Fill the reservoir", gobomechFillTheReservoir);
 			}
 			else addButtonDisabled(7, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
+			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", raijuVoltTransfer);
+			else addButtonDisabled(8, "Brain Melt", "Req. to be a mindbreaker.");
 			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd).hint("2nd page of options.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
@@ -356,6 +359,38 @@ package classes.Scenes
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			cleanupAfterCombat();
 		}
+
+		public function brainMelt():void {
+			clearOutput();
+			outputText("This host is unworthy… totally useless." +
+					" Try all you want you couldn't turn it into something useful itd have to be handled by your master but there's one thing you can do." +
+					" A nasty shade falls over your eyes as you smile perversely, your victim however want's none of that and has already started to slowly back away from you." +
+					"The " + monster.short + " try to crawl to safety but before it can get out of your reach you leap onto [monster his] back and insert your tentacles into [monster his] ears. You orgasm right away your ");
+			if (player.hasVagina()) outputText(player.vaginaDescript());
+			if (player.hasCock()) outputText(player.cockDescriptShort());
+			outputText(" drenching the " + monster.short + " ass in green goop as you plunge into [monster his] memories and experiences drawing out strands after strands of knowledge out of [monster his] brain strait into your own." +
+					" Each new memory you take make you cum as you brain overloads with new foreign knowledge." +
+					" A normal brain would've been unable to properly process such informations and this might have left you confused and unable to distinguish your experiences from the victims own but as you draw out the knowledge and accumulated pleasure of each time the " + monster.short + " has ever cumed eye crossing from the mental overload you easily manage to catalogue those feelings as something out of your own isolating the personality and feelings from the raw knowledge.\n\n");
+			if (player.hasVagina()){
+				outputText("Your new toy half broken it takes very little efforts to turn [monster him] on [monster his] back and");
+				if (monster.hasCock()) outputText(" impale");
+				else outputText(" grind");
+				outputText(" your needy squirming tentacled pussy ");
+				if (monster.hasVagina()) outputText("on her now drenched snatch allowing you to bring yourself to new heights of pleasant delirium.");
+				else if (monster.hasCock()) outputText("on his drooling erect cock allowing you to bring yourself to new heights of pleasant delirium.");
+				else outputText("on your victim naked belly attempting to draw additionnal pleasure in vain. With your victim devoid of sexual organs thats as good as you will get.");
+			}
+			if (player.hasCock()) outputText("While you mentaly rape your victim of everything that used to make its sense of self you push your needy cock through the now welcoming hole that is your half broken toy butt thrusting to bring yourself to new heights of pleasant delirium.");
+			outputText("\n\nYou cum green, your fluids dripping from your partner and tainting the ground beneath into a small pool of defiled fluid as you draw in whatever remains of your victim's now empty brain.");
+
+
+
+			player.sexReward("Default", "Default", true, false);
+			statScreenRefresh();
+			cleanupAfterCombat();
+		}
+
+
 
 		public function raijuVoltTransfer():void {
 			clearOutput();

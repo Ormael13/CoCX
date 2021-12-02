@@ -19,6 +19,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Holli;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
@@ -698,6 +699,25 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.mana < spellCost(50)) {
 				bd.disable("Your mana is too low to toss slime bolt.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB){
+			bd = buttons.add("Mind Thrust", mindThrust).hint("Use your psychic powers to strike at the opponent’s mind dealing severe physical damage.\n\nMana Cost: " + spellCostWhite(100) + "");
+			if (player.mana < spellCost(100)) {
+				bd.disable("Your mana is too low to use mind thrust.");
+			}
+
+			bd = buttons.add("Mind Blast", mindBlast).hint("Overload an opponent’s mind with lewd information, stunning it.\n\nMana Cost: " + spellCostWhite(100) + "");
+			if (player.mana < spellCost(50)) {
+				bd.disable("Your mana is too low to use mind blast.");
+			}
+			if (player.hasStatusEffect(StatusEffects.CooldownSpellMindBlast)) {
+				bd.disable("You need more time before you can use mind blast again.\n\n");
+			}
+
+			bd = buttons.add("Mirror Image", mirrorImage).hint("Create multiple clone of yourself to distract your opponent.\n\nMana Cost: " + spellCostWhite(100) + "");
+			if (player.mana < spellCost(100)) {
+				bd.disable("Your mana is too low to use mirror image.");
+			}
 		}
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
@@ -4693,13 +4713,57 @@ public class MagicSpecials extends BaseCombatContent {
 		else enemyAI();
 	}
 
-	public function MirrorImage():void {
+	public function mindThrust():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
+		clearOutput();
+		useMana(100, USEFATG_MAGIC_NOBM);
+		var damage:Number = (scalingBonusIntelligence() * spellMod());
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage = Math.round(damage);
+		outputText("Your third eye opens wide and glow a vicious green as you viciously impale " + monster.a + monster.short + "’s mind with a mental spike.");
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(".\n\n");
+		enemyAI();
+	}
+
+	public function mindBlast():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
+		clearOutput();
+		useMana(100, USEFATG_MAGIC_NOBM);
+		//cooldown 8 round
+		outputText("You assault your opponent’s mind with lewd thoughts, locking them into a blissful daze.");
+		player.createStatusEffect(StatusEffects.CooldownSpellMindBlast,8,0,0,0);
+		monster.createStatusEffect(StatusEffects.Stunned, 3,0,0,0);
+		enemyAI();
+	}
+
+	public function mirrorImage():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		useMana(100, USEFATG_MAGIC_NOBM);
 		var numberOfImage:int = Math.round(player.inte/100);
-		outputText("You weave a powerful illusion, creating "+ numberOfImage +" replicas of yourself.");
-		player.createStatusEffect(StatusEffects.MirrorImage,numberOfImage,0,0,0);
+		if (player.hasStatusEffect(StatusEffects.MirrorImage)){
+			numberOfImage = numberOfImage-player.statusEffectv1(StatusEffects.MirrorImage);
+			outputText("You weave back the spell, resplenishing "+ numberOfImage +" additionnal replicas of yourself to the remaining ones.");
+			player.addStatusValue(StatusEffects.MirrorImage, 1,numberOfImage);
+		}
+		else{
+			outputText("You weave a powerful illusion, creating "+ numberOfImage +" replicas of yourself.");
+			player.createStatusEffect(StatusEffects.MirrorImage,numberOfImage,0,0,0);
+		}
 		enemyAI();
 	}
 
