@@ -15052,7 +15052,7 @@ use namespace CoC;
 		public function BrainMeltBonus():void
 		{
 			var MBCap:Number = 1;
-			if (hasPerk(PerkLib.MindbreakerBrain1to3)) MBCap += 0.50*player.perkv1(PerkLib.MindbreakerBrain1to3);
+			if (hasPerk(PerkLib.MindbreakerBrain1to3)) MBCap += 0.50*perkv1(PerkLib.MindbreakerBrain1to3);
 			removeCurse("inte", 5);
 			removeCurse("wis", 5);
 			removeCurse("lib", 5);
