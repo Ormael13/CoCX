@@ -6,9 +6,14 @@ package classes.Scenes.Areas.Lake
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class FetishCultistScene extends AbstractLakeContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+
 		public function FetishCultistScene()
 		{
 		}
@@ -388,6 +393,138 @@ public class FetishCultistScene extends AbstractLakeContent
 			}
 		}
 
+		//PC goes for the vagina
+		private function plugSwimsuitVag():void
+		{
+			var x:Number = player.biggestCockIndex();
+			clearOutput();
+			if (player.hasVagina()) outputText("You decline the vibrators; you'd much rather take her incredibly wet pussy.  ");
+			else outputText("You tell her you're gonna fuck her.  ");
+			outputText("She nods at you and turns around shivering even harder.  You step forward and put your hands on her shoulders, then start to run them over her body, while your [cocks] pokes her in the back.  \"<i>Oh fuck me, I need you to fuck me now!</i>\" she screams.  Grinning, you push her to the ground and grip her pert, bouncing breasts.  You push her bathing suit to the side so that you have access to her waiting snatch.  You assure her that you'll be fucking her all right, all while you tease and play with her exposed body.\n\n");
+
+			outputText("When you push your " + cockDescript(x) + " inside her, she goes absolutely insane underneath you.  She squirms and wriggles all over your " + cockDescript(x) + ", as you ");
+			if (player.cockArea(x) < 50) outputText("push further and further until you're all the way inside her.");
+			else if (player.cockArea(x) < 200) outputText("push further and further, until to your great delight, she manages to take all of your massive member without any trouble!");
+			else outputText("manage to get your monster cock further and further inside her.  To your immense shock, she manages to take the whole thing, without it seeming to warp her body at all!");
+			outputText("  Her slick interior seems to fit your shaft perfectly, and with the way she is squirming around you, you're getting one hell of a ride.\n\n");
+
+			outputText("After all the foreplay, the two of you are already reaching your peaks thanks to her incredible, tight cunt and its ministrations to your member.  The cultist is screaming in pleasure, telling you to look at her, to fondle her, and to fuck her; you happily oblige her.  Her interior contracts about your " + cockDescript(x) + " as you loose the proof of your orgasm deep inside her.");
+			if (player.cockTotal() > 1) {
+				outputText("  Your remaining cock");
+				if (player.cockTotal() == 2) outputText(" lets loose its load");
+				else outputText("s let loose their loads");
+				outputText(" onto her back and legs, ");
+				if (player.cumQ() < 50) outputText("adding a little white decoration");
+				else if (player.cumQ() < 200) outputText("adding a liberal coating of white to her body");
+				else outputText("drenching her in your cum");
+				outputText(".");
+			}
+			outputText("\n\n");
+
+			outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The cultist, on the other hand, collapses in a quivering pile of pleasure on the ground.");
+			//set PC's lust to minimum
+			player.sexReward("Default","Default",true,false);
+			cleanupAfterCombat();
+		}
+
+		//PC goes for the vagina vibrators
+		private function swimsuitVibrators():void
+		{
+			clearOutput();
+			outputText("You suggest that you're interested in trying the vaginal vibrators she offered.  The cultist nods, and turns to face you holding two surprisingly large toys in her hands.  They're shaped like a long tube, with a small arm on the side near the handle that points towards the end.  You aren't sure where they came from, but you'd guess she used the same magic that she uses to shift her clothing to get them.\n\n");
+			if (player.vaginalCapacity() <= 30) {//PC does not have a very loose or looser vagina)
+				//painful or not, you're going to try! (separate function)
+				outputText("You're very intrigued by the presented toys, but you can't help but notice that they seem much bigger than what your untrained hole could reasonably take.  You share this bit of insight with the presenter, and she assures you that with the right pressure and effort, it will go in.\n\n");
+				outputText("You certainly aren't going to be the one to saying no to some fun, so you tell the girl to get to it.  She giggles and hands you one of the massive vibrators before stepping away from you and activating her own, sensually rubbing the vibrating instrument against the small strap over her nether lips.  She gives a loud exaggerated moan from the stimulation and smiles at you lewdly.  She then uses her free hand to slip her suit to the side and pushes the oversized toy up to the arm inside her, making sure to put the arm onto her engorged clitoris, continuing to moan the whole way.\n\n");
+				//end section
+
+				outputText("The cultist lets go of the toy inside her and saunters over to you, her hips swinging, moaning the whole way.  She takes the device she handed you earlier and activates it.  \"<i>Here we go!</i>\" she says as ");
+				outputText("she puts the vibrating toy to the entrance to your " + vaginaDescript(0) + ".  The next instant leaves you on your back as the cultist roughly shoves the thing inside you, forcing you to painfully stretch around the toy.");
+				//if (PC was a virgin)
+				if (player.vaginas[0].virgin) {
+					outputText("\n\n<b>Hell of a way to lose your virginity.</b>\n\n");
+					player.cuntChange(50, false, false, false);
+				}
+				else {
+					player.cuntChange(50, true, true, false);
+					outputText("\n\n");
+				}
+				outputText("For hours you're left on the ground writhing in pain and pleasure from the cultist roughly forcing the false cock in and out of you while she moans with pleasure around the quivering shaft inside her.  The sensations are too much for you, and you can do nothing but just lie there and take it.  The cultist brings you to multiple orgasms before you finally pass out from the pain and overstimulation.");
+				//increase libido, decrease sensitivity
+				player.sexReward("Default","Default",true,false);
+				dynStats("lib", 1, "sen", -3);
+				//victory becomes a defeat, even event
+				hideUpDown();
+				monster.lust = 98;
+				monster.HP = 2;
+				player.lust = player.maxLust();
+				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
+				cleanupAfterCombat();
+				player.sexReward("Default","Default",true,false);
+				dynStats("lib", 1, "sen", -3);
+			}
+			//It fits!
+			else {
+				outputText("You're quite pleased with the size of the toy, it should fit inside your \"trained\" vagina quite well.  You inform the cultist at your pleasure of the toys she has presented.  She nods to you vigorously and hands you one of them, then she slips the strap that blocks her waiting cunny and moves the toy to the entrance.  She smiles at you and you nod back, putting the tip of the toy she handed to you to your waiting lips as well.\n\n");
+
+				outputText("The cultist shows you how to activate the toy and they hum to life.  Quivering slightly, the two of you push the vibrating toys deep inside of yourselves.  The feeling of the toy filling up your " + vaginaDescript(0) + " is quite an experience.  ");
+				if (player.vaginalCapacity() < 75) outputText("It takes some effort to get it inside you, but is well worth the effort.");
+				else outputText("It easily slips inside your well-stretched hole.");
+				outputText("  The cultist giggles at you and then starts to moan in an exaggerated manner from the feeling of being filled.  You can't help but let out your own (albeit less exaggerated) moan of pleasure when the arm comes into contact with your " + clitDescript() + ".  If feels so damn good having this massive false cock firmly clamped inside your " + vaginaDescript(0) + " as it wriggles and jiggles around inside you, and its arm teases your clit...");
+				player.cuntChange(50, true, true, false);
+				outputText("\n\n");
+
+				outputText("\"<i>Oh wow, you're totally loving this, even though you just put it inside you!</i>\" the cultist squeals with glee.  \"<i>Just wait, it gets better,</i>\" she continues, taking a firm grip on the handle again while playing with her breasts with her free hand.  She starts to twist the toy around a bit, and then starts to pull it in and out.  You mimic her motions, wondering what might make this even better.  You soon realize just what she was getting at, and are surprised when the sensations start to make you squeal with glee as well.\n\n");
+
+				outputText("It doesn't take much longer for you to let loose the proof of your orgasm onto the magically humming rod between your legs.  At the same time, you suddenly feel a cool liquid spray the inside of the furnace that is your " + vaginaDescript(0) + " and the vibrator spills out of you along with ");
+				if (player.wetness() < 3) outputText("a trickle");
+				else if (player.wetness() <= 4) outputText("a wave");
+				else outputText("a torrent");
+				outputText(" of your lady juices.  You shudder for a moment and look down at it on the ground.  It seems to have, deflated a bit?  There is a clear fluid flowing out of the top of the toy.  A thump sound brings the cultist back to your attention, but only briefly as you see she is writhing on the ground in pleasure from the toy still inside her.  You shake your head and get dressed again.");
+				//end scene
+				player.sexReward("Default","Default",true,false);
+				dynStats("lib", 1, "sen", -3);
+				cleanupAfterCombat();
+			}
+		}
+
+		private function cultistBadEnd():void
+		{
+			//This ending is caused from having too low of inte when losing to the cultist (say under 15) or it could be after losing too many times to them.  You chose which you would prefer.
+			//(after being raped, do not show regular recovery message, skip here)
+			outputText("\n\nYour mind is not able to recover from the fantasy, and instead moves on to another one, and another, and another...");
+			doNext(cultistBadEnd2);
+		}
+
+		internal function cultistBadEnd2():void
+		{
+			var genderTag:String = player.mf("man", "woman");
+			clearOutput();
+			outputText("On a hill sits a large cathedral overlooking a river that feeds into a massive lake.  It is a surprisingly grand structure in a land almost devoid of any signs of civilization in any direction.  The design is quite clear; its entrance lined with statues of lewd naked figures and its windows are made of stain glass depicting acts of sexuality.  Even without hearing the sounds of ecstasy that usually emanate from inside, it is quite clear this is a place of debauchery.\n\n");
+			outputText("Within, a ");
+			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + " who was once a champion and the fetish cultist who corrupted " + player.mf("him", "her") + " step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n");
+
+			outputText("Your mind has fallen prey to the followers of the fetish, and you are now one yourself.  You have completely forgotten who or what you were, including why you came to this world in the first place.  Perhaps the next champion will not lose their sense of self so easily.");
+			EventParser.gameOver();
+		}
+
+		public function cultistDefeated():void{
+			//Defeated by health
+			if (monster.HP < 1) outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.");
+			//Defeated by lust
+			else outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.");
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+				outputText("\n\nDo you want to take advantage of her vulnerable state to sate your lusts?");
+				menu();
+				addButton(0, "Yes", playerRapesCultist);
+				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(2, "B.Feed", fetishCultistHasAMilkFetish).hint("Empty your heavy jugs.");
+				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(3, "Mindbreak", mindbreakFemaleCultist).hint("Toy with the cultist brain.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
+			else cleanupAfterCombat();
+		}
+
 		public function playerRapesCultist():void
 		{
 			clearOutput();
@@ -504,121 +641,6 @@ public class FetishCultistScene extends AbstractLakeContent
 			cleanupAfterCombat();
 		}
 
-		//PC goes for the vagina
-		private function plugSwimsuitVag():void
-		{
-			var x:Number = player.biggestCockIndex();
-			clearOutput();
-			if (player.hasVagina()) outputText("You decline the vibrators; you'd much rather take her incredibly wet pussy.  ");
-			else outputText("You tell her you're gonna fuck her.  ");
-			outputText("She nods at you and turns around shivering even harder.  You step forward and put your hands on her shoulders, then start to run them over her body, while your [cocks] pokes her in the back.  \"<i>Oh fuck me, I need you to fuck me now!</i>\" she screams.  Grinning, you push her to the ground and grip her pert, bouncing breasts.  You push her bathing suit to the side so that you have access to her waiting snatch.  You assure her that you'll be fucking her all right, all while you tease and play with her exposed body.\n\n");
-
-			outputText("When you push your " + cockDescript(x) + " inside her, she goes absolutely insane underneath you.  She squirms and wriggles all over your " + cockDescript(x) + ", as you ");
-			if (player.cockArea(x) < 50) outputText("push further and further until you're all the way inside her.");
-			else if (player.cockArea(x) < 200) outputText("push further and further, until to your great delight, she manages to take all of your massive member without any trouble!");
-			else outputText("manage to get your monster cock further and further inside her.  To your immense shock, she manages to take the whole thing, without it seeming to warp her body at all!");
-			outputText("  Her slick interior seems to fit your shaft perfectly, and with the way she is squirming around you, you're getting one hell of a ride.\n\n");
-
-			outputText("After all the foreplay, the two of you are already reaching your peaks thanks to her incredible, tight cunt and its ministrations to your member.  The cultist is screaming in pleasure, telling you to look at her, to fondle her, and to fuck her; you happily oblige her.  Her interior contracts about your " + cockDescript(x) + " as you loose the proof of your orgasm deep inside her.");
-			if (player.cockTotal() > 1) {
-				outputText("  Your remaining cock");
-				if (player.cockTotal() == 2) outputText(" lets loose its load");
-				else outputText("s let loose their loads");
-				outputText(" onto her back and legs, ");
-				if (player.cumQ() < 50) outputText("adding a little white decoration");
-				else if (player.cumQ() < 200) outputText("adding a liberal coating of white to her body");
-				else outputText("drenching her in your cum");
-				outputText(".");
-			}
-			outputText("\n\n");
-
-			outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The cultist, on the other hand, collapses in a quivering pile of pleasure on the ground.");
-			//set PC's lust to minimum
-			player.sexReward("Default","Default",true,false);
-			cleanupAfterCombat();
-		}
-
-		//PC goes for the vagina vibrators
-		private function swimsuitVibrators():void
-		{
-			clearOutput();
-			outputText("You suggest that you're interested in trying the vaginal vibrators she offered.  The cultist nods, and turns to face you holding two surprisingly large toys in her hands.  They're shaped like a long tube, with a small arm on the side near the handle that points towards the end.  You aren't sure where they came from, but you'd guess she used the same magic that she uses to shift her clothing to get them.\n\n");
-			if (player.vaginalCapacity() <= 30) {//PC does not have a very loose or looser vagina)
-				//painful or not, you're going to try! (separate function)
-				outputText("You're very intrigued by the presented toys, but you can't help but notice that they seem much bigger than what your untrained hole could reasonably take.  You share this bit of insight with the presenter, and she assures you that with the right pressure and effort, it will go in.\n\n");
-				outputText("You certainly aren't going to be the one to saying no to some fun, so you tell the girl to get to it.  She giggles and hands you one of the massive vibrators before stepping away from you and activating her own, sensually rubbing the vibrating instrument against the small strap over her nether lips.  She gives a loud exaggerated moan from the stimulation and smiles at you lewdly.  She then uses her free hand to slip her suit to the side and pushes the oversized toy up to the arm inside her, making sure to put the arm onto her engorged clitoris, continuing to moan the whole way.\n\n");
-				//end section
-
-				outputText("The cultist lets go of the toy inside her and saunters over to you, her hips swinging, moaning the whole way.  She takes the device she handed you earlier and activates it.  \"<i>Here we go!</i>\" she says as ");
-				outputText("she puts the vibrating toy to the entrance to your " + vaginaDescript(0) + ".  The next instant leaves you on your back as the cultist roughly shoves the thing inside you, forcing you to painfully stretch around the toy.");
-				//if (PC was a virgin)
-				if (player.vaginas[0].virgin) {
-					outputText("\n\n<b>Hell of a way to lose your virginity.</b>\n\n");
-					player.cuntChange(50, false, false, false);
-				}
-				else {
-					player.cuntChange(50, true, true, false);
-					outputText("\n\n");
-				}
-				outputText("For hours you're left on the ground writhing in pain and pleasure from the cultist roughly forcing the false cock in and out of you while she moans with pleasure around the quivering shaft inside her.  The sensations are too much for you, and you can do nothing but just lie there and take it.  The cultist brings you to multiple orgasms before you finally pass out from the pain and overstimulation.");
-				//increase libido, decrease sensitivity
-				player.sexReward("Default","Default",true,false);
-				dynStats("lib", 1, "sen", -3);
-				//victory becomes a defeat, even event
-				hideUpDown();
-				monster.lust = 98;
-				monster.HP = 2;
-				player.lust = player.maxLust();
-				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-				cleanupAfterCombat();
-				player.sexReward("Default","Default",true,false);
-				dynStats("lib", 1, "sen", -3);
-			}
-			//It fits!
-			else {
-				outputText("You're quite pleased with the size of the toy, it should fit inside your \"trained\" vagina quite well.  You inform the cultist at your pleasure of the toys she has presented.  She nods to you vigorously and hands you one of them, then she slips the strap that blocks her waiting cunny and moves the toy to the entrance.  She smiles at you and you nod back, putting the tip of the toy she handed to you to your waiting lips as well.\n\n");
-
-				outputText("The cultist shows you how to activate the toy and they hum to life.  Quivering slightly, the two of you push the vibrating toys deep inside of yourselves.  The feeling of the toy filling up your " + vaginaDescript(0) + " is quite an experience.  ");
-				if (player.vaginalCapacity() < 75) outputText("It takes some effort to get it inside you, but is well worth the effort.");
-				else outputText("It easily slips inside your well-stretched hole.");
-				outputText("  The cultist giggles at you and then starts to moan in an exaggerated manner from the feeling of being filled.  You can't help but let out your own (albeit less exaggerated) moan of pleasure when the arm comes into contact with your " + clitDescript() + ".  If feels so damn good having this massive false cock firmly clamped inside your " + vaginaDescript(0) + " as it wriggles and jiggles around inside you, and its arm teases your clit...");
-				player.cuntChange(50, true, true, false);
-				outputText("\n\n");
-
-				outputText("\"<i>Oh wow, you're totally loving this, even though you just put it inside you!</i>\" the cultist squeals with glee.  \"<i>Just wait, it gets better,</i>\" she continues, taking a firm grip on the handle again while playing with her breasts with her free hand.  She starts to twist the toy around a bit, and then starts to pull it in and out.  You mimic her motions, wondering what might make this even better.  You soon realize just what she was getting at, and are surprised when the sensations start to make you squeal with glee as well.\n\n");
-
-				outputText("It doesn't take much longer for you to let loose the proof of your orgasm onto the magically humming rod between your legs.  At the same time, you suddenly feel a cool liquid spray the inside of the furnace that is your " + vaginaDescript(0) + " and the vibrator spills out of you along with ");
-				if (player.wetness() < 3) outputText("a trickle");
-				else if (player.wetness() <= 4) outputText("a wave");
-				else outputText("a torrent");
-				outputText(" of your lady juices.  You shudder for a moment and look down at it on the ground.  It seems to have, deflated a bit?  There is a clear fluid flowing out of the top of the toy.  A thump sound brings the cultist back to your attention, but only briefly as you see she is writhing on the ground in pleasure from the toy still inside her.  You shake your head and get dressed again.");
-				//end scene
-				player.sexReward("Default","Default",true,false);
-				dynStats("lib", 1, "sen", -3);
-				cleanupAfterCombat();
-			}
-		}
-
-		private function cultistBadEnd():void
-		{
-			//This ending is caused from having too low of inte when losing to the cultist (say under 15) or it could be after losing too many times to them.  You chose which you would prefer.
-			//(after being raped, do not show regular recovery message, skip here)
-			outputText("\n\nYour mind is not able to recover from the fantasy, and instead moves on to another one, and another, and another...");
-			doNext(cultistBadEnd2);
-		}
-
-		internal function cultistBadEnd2():void
-		{
-			var genderTag:String = player.mf("man", "woman");
-			clearOutput();
-			outputText("On a hill sits a large cathedral overlooking a river that feeds into a massive lake.  It is a surprisingly grand structure in a land almost devoid of any signs of civilization in any direction.  The design is quite clear; its entrance lined with statues of lewd naked figures and its windows are made of stain glass depicting acts of sexuality.  Even without hearing the sounds of ecstasy that usually emanate from inside, it is quite clear this is a place of debauchery.\n\n");
-			outputText("Within, a ");
-			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + " who was once a champion and the fetish cultist who corrupted " + player.mf("him", "her") + " step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n");
-
-			outputText("Your mind has fallen prey to the followers of the fetish, and you are now one yourself.  You have completely forgotten who or what you were, including why you came to this world in the first place.  Perhaps the next champion will not lose their sense of self so easily.");
-			EventParser.gameOver();
-		}
-
 		public function fetishCultistHasAMilkFetish():void
 		{
 			clearOutput();
@@ -678,6 +700,37 @@ public class FetishCultistScene extends AbstractLakeContent
 			//You've now been milked, reset the timer for that
 			player.addStatusValue(StatusEffects.Feeder, 1, 1);
 			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
+			cleanupAfterCombat();
+		}
+
+		private function mindbreakFemaleCultist():void{
+			clearOutput();
+			outputText("She looks quite desperate for a fuck already." +
+					" It wouldn’t be too hard to just rape her and go back to your things, but why rape when you can enslave and convert her already weak mind to the will of the sorority?" +
+					" Leaving her to the Church of the Fetish would be a shame, especially because of how easy it would be to break those attachments and make her switch her allegiance." +
+					"\n\nYou pull in the fetish cultist for a surprise kiss, which takes her entirely off guard, and you use this distraction to slide your tentacles inside her head." +
+					" While the Church of the Fetish is clearly great at brainwashing, you’re even better and you start to remodel her thoughts and desires into a more appropriate form." +
+					"\n\n\"<i>What is loud smell beautiful blue happened? AAahn I am banana!</i>\"" +
+					"\n\nTurning her into a subservient slut who lives only to have her brain fucked and get fucked by you or those you dictate proves to be almost too easy." +
+					" Her legs are already completely soaked from the consecutive orgasms you're giving her and her mouth is drooling a steady flow." +
+					" You grope her breast with your remaining tentacles, covering her with your slime as you patiently ask her \"<i>who is your best friend?</i>\"" +
+					"\n\n\"<i>You big </i>");
+			if (player.hasCock())outputText("<i>brother</i>");
+			else if (player.hasVagina())outputText("<i>sister</i>");
+			outputText("<i> [name].</i>\"" +
+					"\n\nYou slide a tentacle under her breast massaging it as you ask her \"<i>What do you like the most…?</i>\"" +
+					"\n\n\"<i>Ahhhhn… Being fucked.. Ahnn.. by your tentacles in my head, big </i>");
+			if (player.hasCock())outputText("<i>brother</i>");
+			else if (player.hasVagina())outputText("<i>sister</i>");
+			outputText("<i> [name].</i>\"" +
+					"\n\nYou make a victorious grin and declare \"<i>Then you can abandon yourself to my care.</i>\"" +
+					"\n\nTotally in control, you continue fucking her brain, connecting yourself with her nerves and pussy to truly feel everything you inflict on her until you both orgasm, your cunt splattering green fluids on hers as you ride her pleasure waves." +
+					" Satisfied for now you let her out of your embrace and tell her all she has to do to feel like this forever is to obey you and her other big sister, Kaerb-Dnim, so she too can become perfect someday." +
+					" She nods, understanding everything and already smiling beautifully at the idea of getting her brain thoroughly fucked inside out." +
+					"\n\nShe leaves in a rush. Barely taking the time to dress up, her cunt still drooling from the lingering sensation of your tentacle feelers in her head." +
+					" You chuckle at the eagerness of your new convert as you head back to camp.");
+			Mindbreaker.MindBreakerFetishFemaleConvert ++;
+			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
 		}
 	}
