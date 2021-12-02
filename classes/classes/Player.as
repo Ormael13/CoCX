@@ -15052,9 +15052,7 @@ use namespace CoC;
 		public function BrainMeltBonus():void
 		{
 			var MBCap:Number = 1;
-			if (hasPerk(PerkLib.MindbreakerBrain)) MBCap += 0.50;
-			if (hasPerk(PerkLib.MindbreakerBrainAlpha)) MBCap += 0.50;
-			if (hasPerk(PerkLib.MindbreakerBrainOmega)) MBCap += 0.50;
+			if (hasPerk(PerkLib.MindbreakerBrain1to3)) MBCap += 0.50*player.perkv1(PerkLib.MindbreakerBrain1to3);
 			removeCurse("inte", 5);
 			removeCurse("wis", 5);
 			removeCurse("lib", 5);
@@ -15063,9 +15061,9 @@ use namespace CoC;
 				buff("Devoured Mind").addStat("wis.mult",0.05);
 				buff("Devoured Mind").addStat("lib.mult",0.05);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-				CoC.instance.mainView.statsView.showStatUp(inte);
-				CoC.instance.mainView.statsView.showStatUp(wis);
-				CoC.instance.mainView.statsView.showStatUp(lib);
+				CoC.instance.mainView.statsView.showStatUp("inte");
+				CoC.instance.mainView.statsView.showStatUp("wis");
+				CoC.instance.mainView.statsView.showStatUp("lib");
 				outputText("Your mind surges with newfound knowledge, your brain expanding slightly from the stolen information. You orgasm in sympathy with this new added knowledge.");
 			}
 			else{
