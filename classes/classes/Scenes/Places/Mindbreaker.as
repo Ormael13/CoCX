@@ -350,10 +350,10 @@ package classes.Scenes.Places{
 				player.lowerBody = LowerBody.MINDBREAKERMALE;
 				player.hairType = Hair.MINDBREAKERMALE;
 				player.rearBody.type = RearBody.MINDBREAKER;
-				if (player.legCount != 8) player.legCount = 8;
+				if (player.legCount != 2) player.legCount = 2;
 				player.wings.type = Wings.NONE;
-				if (!player.hasVagina()) player.createVagina();
-				player.cocks[1].cockType = CockTypesEnum.MINDBREAKER;
+				if (player.cocks.length > 1) player.killCocks( player.cocks.length - 1 )
+				player.cocks[0].cockType = CockTypesEnum.MINDBREAKER;
 				player.skin.base.color = "eldritch purple";
 				player.skin.base.color2 = "eldritch purple";
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
@@ -438,9 +438,13 @@ package classes.Scenes.Places{
 					player.growTits(sizeIncrement, 1, false, 3)
 				}
 			}
+			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
+			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
+			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
 			player.createPerk(PerkLib.Insanity,0,0,0,0);
 			player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
 			player.createPerk(PerkLib.PsionicEmpowerment,0,0,0,0);
+			player.removeAllRacialMutation();
 			MindBreakerQuest = QUEST_STAGE_ISMB;
 			doNext(camp.returnToCampUseOneHour);
 		}

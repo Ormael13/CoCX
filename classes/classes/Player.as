@@ -10164,6 +10164,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && femaleMindbreakerCounter >= 8)
 				femaleMindbreakerCounter += 1;
 			if (isGargoyle()) femaleMindbreakerCounter = 0;
+			if (hasCock()) femaleMindbreakerCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) femaleMindbreakerCounter = 0;
 			femaleMindbreakerCounter = finalRacialScore(femaleMindbreakerCounter, Race.FMINDBREAKER);
 			End("Player","racialScore");
@@ -10212,6 +10213,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && MaleMindbreakerCounter >= 8)
 				MaleMindbreakerCounter += 1;
 			if (isGargoyle()) MaleMindbreakerCounter = 0;
+			if (hasVagina()) MaleMindbreakerCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) MaleMindbreakerCounter = 0;
 			MaleMindbreakerCounter = finalRacialScore(MaleMindbreakerCounter, Race.MMINDBREAKER);
 			End("Player","racialScore");
