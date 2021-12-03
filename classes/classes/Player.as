@@ -3304,101 +3304,103 @@ use namespace CoC;
 			var race:String = "human";
 			var ScoreList:Array = [
 				{name: 'human', score: 1, minscore: 1},
-				{name: 'minotaur', score: minotaurScore(), minscore: 4},
-				{name: 'cow', score: cowScore(), minscore: 4},
-				{name: 'lizard', score: lizardScore(), minscore: 4},
-				{name: 'cancer', score: cancerScore(), minscore: 8},
-				{name: 'dragon', score: dragonScore(), minscore: 8},
-				{name: 'jabberwocky', score: jabberwockyScore(), minscore: 10},
-				{name: 'dog', score: dogScore(), minscore: 4},
-				{name: 'mouse', score: mouseScore(), minscore: 4},
-				{name: 'wolf', score: wolfScore(), minscore: 4},
-				{name: 'werewolf', score: werewolfScore(), minscore: 12},
-				{name: 'fox', score: foxScore(), minscore: 4},
-				{name: 'fairy', score: fairyScore(), minscore: 23},
-				{name: 'ferret', score: ferretScore(), minscore: 4},
-				{name: 'cat', score: catScore(), minscore: 4},
-				{name: 'sphinx', score: sphinxScore(), minscore: 14},
-				{name: 'nekomata', score: nekomataScore(), minscore: 10},
-				{name: 'cheshire', score: cheshireScore(), minscore: 11},
-				{name: 'hellcat', score: hellcatScore(), minscore: 10},
-				{name: 'displacer beast', score: displacerbeastScore(), minscore: 14},
-				{name: 'bunny', score: bunnyScore(), minscore: 5},
-				{name: 'easter bunny', score: easterbunnyScore(), minscore: 12},
-				{name: 'raccoon', score: raccoonScore(), minscore: 4},
-				{name: 'horse', score: horseScore(), minscore: 4},
-				{name: 'goblin', score: goblinScore(), minscore: 10},
-				{name: 'gremlin', score: gremlinScore(), minscore: 10},
-				{name: 'goo', score: gooScore(), minscore: 5},
-				{name: 'magmagoo', score: magmagooScore(), minscore: 6},
-				{name: 'darkgoo', score: darkgooScore(), minscore: 6},
-				{name: 'kitsune', score: kitsuneScore(), minscore: 5},
-				{name: 'kitshoo', score: kitshooScore(), minscore: 6},
-				{name: 'bee', score: beeScore(), minscore: 7},
-				{name: 'kangaroo', score: kangaScore(), minscore: 4},
-				{name: 'shark', score: sharkScore(), minscore: 4},
-				{name: 'harpy', score: harpyScore(), minscore: 4},
-				{name: 'spider', score: spiderScore(), minscore: 4},
-				{name: 'orca', score: orcaScore(), minscore: 6},
-				{name: 'oni', score: oniScore(), minscore: 6},
-				{name: 'elf', score: elfScore(), minscore: 5},
-				{name: 'wood elf', score: woodElfScore(), minscore: 22},
-				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
-				{name: 'orc', score: orcScore(), minscore: 5},
-				{name: 'raiju', score: raijuScore(), minscore: 5},
-				{name: 'thunderbird', score: thunderbirdScore(), minscore: 12},
-				{name: 'demon', score: demonScore(), minscore: 5},
-				{name: 'devil', score: devilkinScore(), minscore: 7},
-				{name: 'rhino', score: rhinoScore(), minscore: 4},
-				{name: 'echidna', score: echidnaScore(), minscore: 4},
-				{name: 'ushi-oni', score: ushionnaScore(), minscore: 11},
-				{name: 'satyr', score: satyrScore(), minscore: 4},
-				{name: 'manticore', score: manticoreScore(), minscore: 7},
-				{name: 'red panda', score: redpandaScore(), minscore: 4},
-				{name: 'bear and panda', score: bearpandaScore(), minscore: 5},
-				{name: 'pig', score: pigScore(), minscore: 5},
-				{name: 'mantis', score: mantisScore(), minscore: 6},
-				{name: 'salamander', score: salamanderScore(), minscore: 4},
-				{name: 'cave wyrm', score: cavewyrmScore(), minscore: 5},
-				{name: 'unicorn', score: unicornScore(), minscore: 8},
-				{name: 'unicornkin', score: unicornkinScore(), minscore: 12},
 				{name: 'alicorn', score: alicornScore(), minscore: 8},
 				{name: 'alicornkin', score: alicornkinScore(), minscore: 12},
-				{name: 'phoenix', score: phoenixScore(), minscore: 10},
-				{name: 'scylla', score: scyllaScore(), minscore: 4},
-				{name: 'plant', score: plantScore(), minscore: 4},
 				{name: 'alraune', score: alrauneScore(), minscore: 13},
-				{name: 'yggdrasil', score: yggdrasilScore(), minscore: 10},
-				{name: 'deer', score: deerScore(), minscore: 4},
-				{name: 'dragonne', score: dragonneScore(), minscore: 6},
-				{name: 'yeti', score: yetiScore(), minscore: 7},
-				{name: 'yuki onna', score: yukiOnnaScore(), minscore: 14},
-				{name: 'melkie', score: melkieScore(), minscore: 8},
-				{name: 'poltergeist', score: poltergeistScore(), minscore: 6},
+				{name: 'atlach nacha', score: atlachNachaScore(), minscore: 10},
+				{name: 'avian', score: avianScore(), minscore: 4},
+				{name: 'bunny', score: bunnyScore(), minscore: 5},
 				{name: 'banshee', score: bansheeScore(), minscore: 4},
-				{name: 'fire snail', score: firesnailScore(), minscore: 15},
-				{name: 'hydra', score: hydraScore(), minscore: 14},
-				{name: 'couatl', score: couatlScore(), minscore: 11},
-				{name: 'vouivre', score: vouivreScore(), minscore: 11},
-				{name: 'gorgon', score: gorgonScore(), minscore: 11},
-				{name: 'naga', score: nagaScore(), minscore: 4},
+				{name: 'bat', score: batScore(), minscore: 6},
+				{name: 'bear and panda', score: bearpandaScore(), minscore: 5},
+				{name: 'bee', score: beeScore(), minscore: 7},
+				{name: 'cancer', score: cancerScore(), minscore: 8},
+				{name: 'cat', score: catScore(), minscore: 4},
+				{name: 'cave wyrm', score: cavewyrmScore(), minscore: 5},
 				{name: 'centaur', score: centaurScore(), minscore: 8},
 				{name: 'centipede', score: centipedeScore(), minscore: 4},
-				{name: 'oomukade', score: oomukadeScore(), minscore: 15},
-				{name: 'scorpion', score: scorpionScore(), minscore: 4},
-				{name: 'avian', score: avianScore(), minscore: 4},
-				{name: 'bat', score: batScore(), minscore: 6},
-				{name: 'vampire', score: vampireScore(), minscore: 6},
-				{name: 'jiangshi', score: jiangshiScore(), minscore: 20},
-				{name: 'gargoyle', score: gargoyleScore(), minscore: 22},
-				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 7},
-				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 6},
-				{name: 'wendigo', score: wendigoScore(), minscore: 10},
-				{name: 'troll', score: trollScore(), minscore: 5},
+				{name: 'cheshire', score: cheshireScore(), minscore: 11},
+				{name: 'couatl', score: couatlScore(), minscore: 11},
+				{name: 'cow', score: cowScore(), minscore: 4},
 				{name: 'cyclop', score: cyclopScore(), minscore: 6},
+				{name: 'darkgoo', score: darkgooScore(), minscore: 6},
+				{name: 'deer', score: deerScore(), minscore: 4},
+				{name: 'demon', score: demonScore(), minscore: 5},
+				{name: 'devil', score: devilkinScore(), minscore: 7},
+				{name: 'displacer beast', score: displacerbeastScore(), minscore: 14},
+				{name: 'dog', score: dogScore(), minscore: 4},
+				{name: 'dragon', score: dragonScore(), minscore: 8},
+				{name: 'dragonne', score: dragonneScore(), minscore: 6},
+				{name: 'easter bunny', score: easterbunnyScore(), minscore: 12},
+				{name: 'echidna', score: echidnaScore(), minscore: 4},
+				{name: 'elf', score: elfScore(), minscore: 5},
+				{name: 'fairy', score: fairyScore(), minscore: 23},
+				{name: 'female mindbreaker', score: femaleMindbreakerScore(), minscore: 15},
+				{name: 'ferret', score: ferretScore(), minscore: 4},
+				{name: 'fire snail', score: firesnailScore(), minscore: 15},
+				{name: 'fox', score: foxScore(), minscore: 4},
+				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
+				{name: 'gargoyle', score: gargoyleScore(), minscore: 22},
 				{name: 'gazer', score: gazerScore(), minscore: 7},
-				{name: 'atlach nacha', score: atlachNachaScore(), minscore: 10},
+				{name: 'goblin', score: goblinScore(), minscore: 10},
+				{name: 'goo', score: gooScore(), minscore: 5},
+				{name: 'gorgon', score: gorgonScore(), minscore: 11},
+				{name: 'gremlin', score: gremlinScore(), minscore: 10},
+				{name: 'harpy', score: harpyScore(), minscore: 4},
+				{name: 'hellcat', score: hellcatScore(), minscore: 10},
+				{name: 'horse', score: horseScore(), minscore: 4},
+				{name: 'hydra', score: hydraScore(), minscore: 14},
+				{name: 'jabberwocky', score: jabberwockyScore(), minscore: 10},
+				{name: 'jiangshi', score: jiangshiScore(), minscore: 20},
+				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 7},
+				{name: 'kangaroo', score: kangaScore(), minscore: 4},
+				{name: 'kitsune', score: kitsuneScore(), minscore: 5},
+				{name: 'kitshoo', score: kitshooScore(), minscore: 6},
+				{name: 'lizard', score: lizardScore(), minscore: 4},
+				{name: 'male mindbreaker', score: maleMindbreakerScore(), minscore: 15},
+				{name: 'magmagoo', score: magmagooScore(), minscore: 6},
+				{name: 'manticore', score: manticoreScore(), minscore: 7},
+				{name: 'mantis', score: mantisScore(), minscore: 6},
+				{name: 'melkie', score: melkieScore(), minscore: 8},
+				{name: 'minotaur', score: minotaurScore(), minscore: 4},
+				{name: 'mouse', score: mouseScore(), minscore: 4},
+				{name: 'naga', score: nagaScore(), minscore: 4},
+				{name: 'nekomata', score: nekomataScore(), minscore: 10},
+				{name: 'oni', score: oniScore(), minscore: 6},
+				{name: 'oomukade', score: oomukadeScore(), minscore: 15},
+				{name: 'orc', score: orcScore(), minscore: 5},
+				{name: 'orca', score: orcaScore(), minscore: 6},
+				{name: 'phoenix', score: phoenixScore(), minscore: 10},
+				{name: 'pig', score: pigScore(), minscore: 5},
+				{name: 'plant', score: plantScore(), minscore: 4},
+				{name: 'poltergeist', score: poltergeistScore(), minscore: 6},
+				{name: 'raccoon', score: raccoonScore(), minscore: 4},
+				{name: 'raiju', score: raijuScore(), minscore: 5},
+				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 6},
+				{name: 'red panda', score: redpandaScore(), minscore: 4},
+				{name: 'rhino', score: rhinoScore(), minscore: 4},
+				{name: 'salamander', score: salamanderScore(), minscore: 4},
+				{name: 'satyr', score: satyrScore(), minscore: 4},
+				{name: 'scorpion', score: scorpionScore(), minscore: 4},
+				{name: 'scylla', score: scyllaScore(), minscore: 4},
 				{name: 'sea dragon', score: leviathanScore(), minscore: 20},
+				{name: 'shark', score: sharkScore(), minscore: 4},
+				{name: 'sphinx', score: sphinxScore(), minscore: 14},
+				{name: 'spider', score: spiderScore(), minscore: 4},
+				{name: 'thunderbird', score: thunderbirdScore(), minscore: 12},
+				{name: 'troll', score: trollScore(), minscore: 5},
+				{name: 'ushi-oni', score: ushionnaScore(), minscore: 11},
+				{name: 'unicorn', score: unicornScore(), minscore: 8},
+				{name: 'unicornkin', score: unicornkinScore(), minscore: 12},
+				{name: 'vampire', score: vampireScore(), minscore: 6},
+				{name: 'vouivre', score: vouivreScore(), minscore: 11},
+				{name: 'wendigo', score: wendigoScore(), minscore: 10},
+				{name: 'werewolf', score: werewolfScore(), minscore: 12},
+				{name: 'wood elf', score: woodElfScore(), minscore: 22},
+				{name: 'wolf', score: wolfScore(), minscore: 4},
+				{name: 'yeti', score: yetiScore(), minscore: 7},
+				{name: 'yggdrasil', score: yggdrasilScore(), minscore: 10},
+				{name: 'yuki onna', score: yukiOnnaScore(), minscore: 14},
 			];
 
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
@@ -3468,6 +3470,16 @@ use namespace CoC;
 			if (TopRace == "displacer beast") {
 				if (TopScore >= 14) {
 					race = "displacer beast";
+				}
+			}
+			if (TopRace == "female mindbreaker") {
+				if (TopScore >= 15) {
+					race = "female mindbreaker";
+				}
+			}
+			if (TopRace == "male mindbreaker") {
+				if (TopScore >= 15) {
+					race = "male mindbreaker";
 				}
 			}
 			if (TopRace == "sphinx") {
@@ -10102,7 +10114,7 @@ use namespace CoC;
 			return manticoreCounter;
 		}
 
-		public function FemaleMindbreakerScore():Number {
+		public function femaleMindbreakerScore():Number {
 			Begin("Player","racialScore","Mindbreaker");
 			var femaleMindbreakerCounter:Number = 0;
 			if (faceType == Face.HUMAN)
@@ -10150,7 +10162,7 @@ use namespace CoC;
 			return femaleMindbreakerCounter;
 		}
 
-		public function MaleMindbreakerScore():Number {
+		public function maleMindbreakerScore():Number {
 			Begin("Player","racialScore","Mindbreaker");
 			var MaleMindbreakerCounter:Number = 0;
 			if (faceType == Face.HUMAN)
@@ -12392,6 +12404,22 @@ use namespace CoC;
 					maxLibCap2 += 335;
 					currentSen += 50;
 				}
+			}
+			if (femaleMindbreakerScore() >= 15) {
+				maxStrCap2 -= 60;
+				maxSpeCap2 -= 40;
+				maxIntCap2 += 450;
+				maxLibCap2 += 300;
+				maxWisCap2 -= 30;
+				currentSen += 50;
+			}
+			if (maleMindbreakerScore() >= 15) {
+				maxStrCap2 -= 60;
+				maxSpeCap2 -= 40;
+				maxIntCap2 += 450;
+				maxLibCap2 += 300;
+				maxWisCap2 -= 30;
+				currentSen += 50;
 			}
 			if (frostWyrmScore() >= 10) {
 				if (frostWyrmScore() >= 29) {
