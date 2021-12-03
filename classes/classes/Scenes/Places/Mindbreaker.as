@@ -130,29 +130,23 @@ package classes.Scenes.Places{
 					"\n\n<b>-Warning-\n" +
 					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism and severe slutification. Proceed at your own risk.</b>\n");
 			//[Yes] [No]
-			menu();
-			addButton(0, "Yes", YesTentacle,0,0,0,"Continue exploring the cave.");
-			addButton(1, "No", FuckNo,0,0,0,"Get the hell out of here!");
+			doYesNo(YesTentacle,FuckNo);
 		}
 
 		//"\n\n\"<i></i>\"\n\n" +
 
 		public function findMindbreakerAgain():void {
 			clearOutput();
-			menu();
 			if (player.cor >= 70){
 				outputText("You approach the cave where your friend, Kaerb-Dnim, awaits you." +
 						" You're finally as lusty and slutty as you should be! Winning the game should be a piece of cake," +
 						" yet a faint voice in your head tells you something terrible is about to happen if you enter that cave. You're going to enter, right?");
-				addButton(0, "Yes", YesTentacleStage3,0,0,0,"Ignore the silly voice that keep telling you this is a bad idea and proceed.");
-				addButton(1, "No", NoIndecisive,0,0,0,"Listen to the voice of reason. Leave while you still can!");
-			}
-			else{
+				doYesNo(YesTentacleStage3,NoIndecisive);
+			}else{
 				outputText("You approach the cave again, the foreboding darkness seeping from the entrance attempts to hold sway over your resolve, trying to break you before you’ve even had a chance to enter." +
 						" But its efforts are futile. You’re prepared this time. You returned to complete your endeavor. You're stronger, better, made worthy of note through perseverance." +
 						" You’re ready. All you have to do is take the first few steps. You’re...you’re going to take the first few steps, right?");
-				addButton(0, "Yes", YesTentacleStage2,0,0,0,"This is a terrible idea... so why does it sound so great?");
-				addButton(1, "No", NoIndecisive,0,0,0,"No way.");
+				doYesNo(YesTentacleStage2,NoIndecisive);
 			}
 		}
 
@@ -179,12 +173,12 @@ package classes.Scenes.Places{
 					"\n\nThe shock of being abruptly grazed by an unseen rubbery extension prompts immediate action from your tensed muscles and you whip around, [weapon] raised, and facing the darkness. Silence greets you, the void staring back, mocking you. Shaking your head, you start taking a round of deep breaths." +
 					"\n\nYou’re too wound up, this damned dark is getting to your head. You just need a moment to steady yourself, just a couple breaths to calm your heart. It’s only a dark cave, there’s nothing to fear. You just need a light source and you’ll be fine." +
 					" You reassure yourself, bringing your heart rate under control. With a final deep breath, you prepare to move on, keeping your [weapon] ready just in case." +
-					"\n\nOnce again, you force yourself onwards, pushing further into the endless void. Finding yourself at a corner, you press your [pc hand] against the slightly moist granite. Using the rough surface as a guide, you slowly direct yourself around what appears to be a bend." +
+					"\n\nOnce again, you force yourself onwards, pushing further into the endless void. Finding yourself at a corner, you press your hand against the slightly moist granite. Using the rough surface as a guide, you slowly direct yourself around what appears to be a bend." +
 					" The wall’s texture grows slimier with each movement, further passings have the granite adopt a strange, spongy quality. A disturbingly… flesh-like quality." +
 					"\n\nWhether it be the darkness influencing your mind or your lack of vision being compensated with increased sensitivity, most likely both, you could almost swear you felt the wall... twitch." +
 					" Since whatever this is isn’t trying to actively rape you it must be some cave organism. Maybe a closer look is warranted, but with the lack of light and foreboding atmosphere, it would be best saved for another time." +
-					" You press on, though find it increasingly difficult to do so as the organism seems to have quickly grown attached to you, its form reacting to your touch by attempting to latch onto your [pc arm]." +
-					"\n\nYou try wrenching your [pc arm] away, the creature’s quite adamant about its affection for you. Struggling against the offending substance affords all your attention, the writhing sensation worming its way up your leg going relatively unnoticed." +
+					" You press on, though find it increasingly difficult to do so as the organism seems to have quickly grown attached to you, its form reacting to your touch by attempting to latch onto your arm." +
+					"\n\nYou try wrenching your arm away, the creature’s quite adamant about its affection for you. Struggling against the offending substance affords all your attention, the writhing sensation worming its way up your leg going relatively unnoticed." +
 					" By the time you finally acknowledge it, the thing has already wrapped itself around your torso, a sickeningly jovial giggling accompanies this menace’s assault, their origin from directly behind you." +
 					" Another slimy extension grapples you from behind, restraining your free arm, the maddening giggles mounting as the fiend revels in your struggle." +
 					"\n\nYou fight, pulling, kicking, biting, doing all you can to tear away your limbs from the monstrosity.Your struggles are in vain, more slimy tendrils taking hold of your restrained form, wrapping around your mouth, muffling your grunts, latching onto your arms and torso, and forcing you against the wall." +
@@ -219,7 +213,7 @@ package classes.Scenes.Places{
 					"\n\nAs you look towards the cave entrance, a sense of insignificance wells up within you. You’re not ready to enter the cave yet." +
 					" Whatever is in there is far beyond your capacity, it would be suicide attempting to go inside. You’re too feeble, too inferior, too inadequate... You just need more time. For now, it’s better if you return to camp." +
 					" Find some minotaurs to toss around, get prepared. When you return you’ll be much more suited to venture inside.");
-			dynStats("sen", 20, "cor", 5);
+			dynStats("sen", 20, "cor", 10);
 			player.sexReward("default", "Vaginal", true, false);
 			player.sexReward("default", "Vaginal", true, false);
 			player.sexReward("default", "Vaginal", true, false);
@@ -283,7 +277,7 @@ package classes.Scenes.Places{
 					"\n\n\"<i>Come to me again when you are ready and we can continue making you even better.</i>\"" +
 					"You leave, still giddy of the action. It only occurs to you once you are out of the cave that you never had a friend named Kaerb-Dnim, let alone saw a thing like her before in Ingnam." +
 					" Yet, despite this contradiction, you have the impulse to come and see her again. You feel your mind become more lustful, colorful, and perfect. Just like after each visit.");
-			dynStats("sen", 20, "cor", 5);
+			dynStats("sen", 20, "cor", 20);
 			player.sexReward("default", "Vaginal", true, false);
 			player.sexReward("default", "Vaginal", true, false);
 			player.sexReward("default", "Vaginal", true, false);
@@ -293,6 +287,7 @@ package classes.Scenes.Places{
 		}
 
 		public function YesTentacleStage3():void {
+			clearOutput();
 			if (player.hasCock() && !player.hasVagina()){
 				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
 						"\n\n\"<i>I see you have become as slutty and lusty for me as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
@@ -309,9 +304,10 @@ package classes.Scenes.Places{
 						" You can faintly feel her prod at the tip of your cumslit, slowly inserting something down your urethra." +
 						" She finally breaks away from you, her lovely tentacles retreating away from your [cock]." +
 						"\n\n\"<i>We can finally be true siblings, [name], isn’t that wonderful?</i>\"" +
-						"You only understand everything a few seconds later as you start shaking uncontrollably in pleasure." +
-						" Being a true brother to Kaerb-Dnim? What a wonderful thing! You’re so happy this is happening to you as you feel something hatch within you." +
-						"\n\nYour balls ache, tingling pleasurably just as you start changing." +
+						"\n\nYou only understand everything a few seconds later as you start shaking uncontrollably in pleasure." +
+						" Being a true brother to Kaerb-Dnim? What a wonderful thing!" +
+						" You’re so happy this is happening to you as you feel something hatch within you." +
+						"Your balls ache, tingling pleasurably just as you start changing." +
 						" It feels so good to be entirely remade from the inside and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim." +
 						" The colors begin spreading from your belly across your entire body." +
 						"\n\nYou moan in delight as your hair falls from your head, and are replaced by purple tentacles of various sizes, along them a web-like frills wrap around your head, silhouetting the shape of a crown." +
@@ -358,7 +354,11 @@ package classes.Scenes.Places{
 				player.wings.type = Wings.NONE;
 				if (!player.hasVagina()) player.createVagina();
 				player.cocks[1].cockType = CockTypesEnum.MINDBREAKER;
-				player.skin.base.color = randomChoice("eldritch purple");
+				player.skin.base.color = "eldritch purple";
+				player.skin.base.color2 = "eldritch purple";
+				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
+					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
+				}
 				player.skinAdj = "slippery";
 				player.skinType = Skin.PLAIN;
 				player.tone = 100;
@@ -382,7 +382,7 @@ package classes.Scenes.Places{
 						"\n\nSomething, not unlike a mass of tentacles, slides between her pussy and yours, and you gleefully let it in, orgasming as it squirms inside you for a minute and heads past your cervix to settle in your womb, depositing something." +
 						" She finally breaks away from you, her lovely tentacles retreating back out of your oozing snatch." +
 						"\n\n\"<i>We can finally be true sisters, [name], isn’t that wonderful?</i>\"" +
-						"You only understand everything a few seconds later as you start shaking uncontrollably in pleasure. Being a true sister to Kaerb-Dnim?" +
+						"\n\nYou only understand everything a few seconds later as you start shaking uncontrollably in pleasure. Being a true sister to Kaerb-Dnim?" +
 						" What a wonderful thing! You’re so happy this is happening to you as you feel something hatch within you." +
 						"Your womb aches and tingles pleasurably just as you start changing. It feels so good to be entirely remade from the inside and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim, and begins spreading from your belly. \n" +
 						"You moan in delight as your hair falls from your head, and are replaced by purple tentacles of various size, which you use to fuck your own brain right away." +
@@ -415,9 +415,14 @@ package classes.Scenes.Places{
 				player.wings.type = Wings.NONE;
 				if (!player.hasVagina()) player.createVagina();
 				player.vaginaType(14);
-				player.skin.base.color = randomChoice("pale", "ghostly white", "light purple");
+				var color:String = randomChoice("pale", "ghostly white", "light purple");
+				player.skin.base.color = color;
+				player.skin.base.color2 = color;
 				player.skinAdj = "slippery";
 				player.skinType = Skin.PLAIN;
+				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
+					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
+				}
 				player.tone = 0;
 				player.thickness = 20;
 				player.femininity = 80;
@@ -512,21 +517,21 @@ package classes.Scenes.Places{
 
 		public function CaveLayout2():void {
 			//if (player.hairType != Hair.MINDBREAKER) addButton(1, "Fix Me", Regaintentacles,1,1,1,"Regain your hair tentacles.");
-			addButton(1, "Sister Sex", SexCaerbDnim,1,1,1, "Get your sister to fuck your brain out.");
-			addButton(2, "Use gob", GoblinTentacle,1,1,1,"Play big sister with your smaller female follower.");
+			addButton(1, "Sister Sex", SexCaerbDnim).hint("Get your sister to fuck your brain out.");
+			addButton(2, "Use gob", GoblinTentacle).hint("Play big sister with your smaller female follower.");
 			if (MindBreakerGoblinConvert == 0) addButtonDisabled(2,"Use gob","You need at least one goblin follower to do this.");
-			addButton(3, "Use gal", FuckGirl,1,1,1,"Improve the mind of one of the girl and enjoy yourself along the way.");
+			addButton(3, "Use gal", FuckGirl).hint("Improve the mind of one of the girl and enjoy yourself along the way.");
 			if (MindBreakerFetishFemaleConvert == 0) addButtonDisabled(3,"Use gal","You need at least one female follower to do this.");
-			addButton(4, "Use boy", FuckBoy,1,1,1,"Reward one of the boy with his long awaited climax making him cum a river");
+			addButton(4, "Use boy", FuckBoy).hint("Reward one of the boy with his long awaited climax making him cum a river");
 			if (MindBreakerFetishMaleConvert == 0) addButtonDisabled(4,"Use boy","You need at least one male follower to do this.");
-			if ((MindBreakerGoblinConvert >= 1 || MindBreakerFetishFemaleConvert >= 1) && (PlayerEggIsFertile || player.hasCock()))addButton(5, "Convert", CreateMB,1,1,1,"Make one of your female pet into a new Mindbreaker.");
+			if ((MindBreakerGoblinConvert >= 1 || MindBreakerFetishFemaleConvert >= 1) && (PlayerEggIsFertile || player.hasCock()))addButton(5, "Convert", CreateMB).hint("Make one of your female pet into a new Mindbreaker.");
 			else addButtonDisabled(5,"Convert","You need at least one female follower in order to get create a new mindbreaker. Furthermore you need your parasitic eggs to be properly fertilised by a male fellower cum or that of a male mindbreaker.");
 			//addButton(6, "Puppet sex", PuppetMaster,1,1,1,"Mind control two of your favorite pet into fucking one another and enjoy it.");
 			//if (MindBreakerFetishFemaleConvert == 0 || MindBreakerFetishMaleConvert == 0) addButtonDisabled(6,"Puppet sex","You need at least one female follower and one male fellower of normal size to do this.");
 			//addButton(7, "Orgy", FuckEveryFellower,1,1,1,"Just fuck with all of your follower at the same time preferably one of each type.");
 			//if (MindBreakerGoblinConvert >= 1 && MindBreakerFetishFemaleConvert >= 1 && MindBreakerFetishMaleConvert >= 1) addButtonDisabled(7,"Orgy","You need at least a goblin a man and a woman in order to get an orgy going on.");
-			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner,1,1,1,"It appears your follower brought in a new toy for you to break how kind. Time to fix the mind of this defiant new plaything.");
-			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner","There is prisonner in the cave for you to play with at the time.");
+			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner).hint("It appears your follower brought in a new toy for you to break how kind. Time to fix the mind of this defiant new plaything.");
+			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner").hint("There is no prisonner in the cave for you to play with at the time.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -539,7 +544,7 @@ package classes.Scenes.Places{
 					" His name cannot be pronounced in any human tongue and will drive mad the one hearing it, but you should know him as The Deep One." +
 					" The gods have waged war with us for a fair millennium and almost caused us to go extinct, but the demons gave us a reprieve by slaying most of them." +
 					" I was the last of my kind until you came along. We will spread in the world’s many hidden locations and someday emerge again, this time around, Mareth will be ours.</i>\"" +
-					"\n\n You can only but agree with her sentiment. It's only a mather of time until you convert the world to this perfect way of thinking.");
+					"\n\nYou can only but agree with her sentiment. It's only a mather of time until you convert the world to this perfect way of thinking.");
 			menu();
 			CaveLayout2();
 		}

@@ -1699,18 +1699,18 @@ import flash.utils.getQualifiedClassName;
 			var hasTargetedThePlayer:Boolean = false;
 			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
 			}
-			if (rand(1+statusEffectv1(StatusEffects.MirrorImage)) != 1){
+			if (rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
 				outputText("Unable to determine the real one from the fake");
-				if (statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("s");
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("s");
 				outputText(", your opponent");
 				if (plural)outputText("s");
-				outputText(" targets ");
-				if (statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("one of your many illusions");
+				outputText(" targets");
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText(" one of your many illusions");
 				else outputText(" your remaining illusion");
 				outputText(" instead causing the fake to vanish.");
-				addStatusValue(StatusEffects.MirrorImage, 1,-1);
-				if (statusEffectv1(StatusEffects.MirrorImage) >= 1) outputText(" You now have "+statusEffectv1(StatusEffects.MirrorImage)+" illusion left.")
-				if (statusEffectv1(StatusEffects.MirrorImage) == 0) {
+				player.addStatusValue(StatusEffects.MirrorImage, 1,-1);
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 1) outputText(" You now have "+player.statusEffectv1(StatusEffects.MirrorImage)+" illusion left.")
+				if (player.statusEffectv1(StatusEffects.MirrorImage) == 0) {
 					player.removeStatusEffect(StatusEffects.MirrorImage);
 					outputText(" Your last illusion now destroyed, you will now have to be cautious of your opponent attacks.");
 				}

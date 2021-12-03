@@ -3482,12 +3482,12 @@ use namespace CoC;
 			}
 			if (TopRace == "female mindbreaker") {
 				if (TopScore >= 15) {
-					race = "female mindbreaker";
+					race = "mindbreaker";
 				}
 			}
 			if (TopRace == "male mindbreaker") {
 				if (TopScore >= 15) {
-					race = "male mindbreaker";
+					race = "mindbreaker";
 				}
 			}
 			if (TopRace == "sphinx") {

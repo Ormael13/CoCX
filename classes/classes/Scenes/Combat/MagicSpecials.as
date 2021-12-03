@@ -4756,7 +4756,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		useMana(100, USEFATG_MAGIC_NOBM);
-		var numberOfImage:int = Math.round(player.inte/100);
+		var numberOfImage:int = 2+Math.round(player.inte/100);
 		var PsionicEmpowermentBonus:int = 0;
 		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) PsionicEmpowermentBonus = (1+player.perkv1(PerkLib.MindbreakerBrain1toX))/2;
 		if (PsionicEmpowermentBonus < 1) PsionicEmpowermentBonus=0;
@@ -4766,11 +4766,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) numberOfImage += player.perkv1(PerkLib.MindbreakerBrain1toX);
 		if (player.hasStatusEffect(StatusEffects.MirrorImage)){
 			numberOfImage = numberOfImage-player.statusEffectv1(StatusEffects.MirrorImage);
-			outputText("You weave back the spell, resplenishing "+ numberOfImage +" additionnal replicas of yourself to the remaining ones.");
+			outputText("You weave back the spell, resplenishing "+ numberOfImage +" additionnal replicas of yourself to the remaining ones.\n\n");
 			player.addStatusValue(StatusEffects.MirrorImage, 1,numberOfImage);
 		}
 		else{
-			outputText("You weave a powerful illusion, creating "+ numberOfImage +" replicas of yourself.");
+			outputText("You weave a powerful illusion, creating "+ numberOfImage +" replicas of yourself.\n\n");
 			player.createStatusEffect(StatusEffects.MirrorImage,numberOfImage,0,0,0);
 		}
 		enemyAI();

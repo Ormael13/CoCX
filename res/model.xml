@@ -2339,6 +2339,10 @@
 				<if test="cor &gt;=50">
 					<hide part="face/*"/>
 					<show part="face/demonlewd"/>
+					<if test="tongue.type == Tongue.MINDBREAKERMALE">
+						<hide part="face/*"/>
+						<show part="antennae/mindbreakerMale"/>
+					</if>
 				</if>
 				<if test="cor &gt;=100">
 					<hide part="face/*"/>
@@ -2352,6 +2356,10 @@
 				<if test="skin.base.type == Skin.GOO">
 					<hide part="face/*"/>
 					<show part="face/goo"/>
+				</if>
+				<if test="tongue.type == Tongue.MINDBREAKER">
+					<hide part="face/*"/>
+					<show part="face/fairySmile"/>
 				</if>
 				<if test="tongue.type == Tongue.MINDBREAKERMALE">
 					<hide part="face/*"/>
@@ -3963,6 +3971,9 @@
 		<!-- Unique pussy AREA -->
 		<if test="CaveWyrmPussy">
 			<show part="overskinpanty/caveWyrm"/>
+		</if>
+		<if test="MindBreakerPussy">
+			<show part="overskinpanty/mindbreaker"/>
 		</if>
 
 		<!-- BALLS AREA -->

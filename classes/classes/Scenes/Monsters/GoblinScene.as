@@ -300,11 +300,13 @@ public class GoblinScene extends BaseContent
 			var spiderCondom:Function = null;
 			var jog:Function = null;
 			var eggs:Function = null;
+			var mindbreak:Function = null;
 			if (player.canOvipositSpider()) {
 				eggs = laySomeDriderEggsInGobboTwat;
 			}
 			//cunt stuff
 			if (player.hasVagina()) cuntFuck = gobboGetsRapedFem;
+			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) mindbreak = mindbreakGoblin;
 			//Dick stuff:
 			if (player.hasCock()) {
 				//Corrupt too big scene
@@ -344,6 +346,7 @@ public class GoblinScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				if (mindbreak != null) addButton(9, "Mind break", mindbreak);
 				//addButton(10, "Kill", killGoblin);
 				//addButton(14, "Leave", cleanupAfterCombat);
 				if (feeder != null || eggs != null) {
