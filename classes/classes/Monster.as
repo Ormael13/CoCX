@@ -1699,7 +1699,7 @@ import flash.utils.getQualifiedClassName;
 			var hasTargetedThePlayer:Boolean = false;
 			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
 			}
-			if (rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
 				outputText("Unable to determine the real one from the fake");
 				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("s");
 				outputText(", your opponent");

@@ -324,7 +324,7 @@ public class FetishZealotScene extends AbstractLakeContent
 					"\n\nYou promise him the chance to cum and leak like a hose with the condition he heads to Kaerb-Dnim and, of course, take tons of transformative to increase the size of his balls.");
 			Mindbreaker.MindBreakerFetishMaleConvert ++;
 			Mindbreaker.MindBreakerConvert ++;
-			if (Mindbreaker.MindBreakerConvert == Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
+			if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
 			else outputText(" This is all it takes to get your newest plaything running to the lair. You smile, knowing you have made yet another convert as you head back to camp still giggling.");
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();

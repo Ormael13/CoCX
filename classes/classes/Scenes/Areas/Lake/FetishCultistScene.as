@@ -727,7 +727,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					"\n\nTotally in control, you continue fucking her brain, connecting yourself with her nerves and pussy to truly feel everything you inflict on her until you both orgasm, your cunt splattering green fluids on hers as you ride her pleasure waves.");
 			Mindbreaker.MindBreakerFetishFemaleConvert ++;
 			Mindbreaker.MindBreakerConvert ++;
-			if (Mindbreaker.MindBreakerConvert == Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
+			if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
 			else {
 				outputText(" Satisfied for now you let her out of your embrace and tell her all she has to do to feel like this forever is to obey you and her other big sister, Kaerb-Dnim, so she too can become perfect someday." +
 						" She nods, understanding everything and already smiling beautifully at the idea of getting her brain thoroughly fucked inside out." +

@@ -517,7 +517,7 @@ package classes.Scenes.Places{
 		}
 
 		public function CaveLayout2():void {
-			//if (player.hairType != Hair.MINDBREAKER) addButton(1, "Fix Me", Regaintentacles,1,1,1,"Regain your hair tentacles.");
+			//if (player.hairType != Hair.MINDBREAKER) addButton(1, "Fix Me", Regaintentacles);
 			addButton(1, "Sister Sex", SexCaerbDnim).hint("Get your sister to fuck your brain out.");
 			addButton(2, "Use gob", GoblinTentacle).hint("Play big sister with your smaller female follower.");
 			if (MindBreakerGoblinConvert < 1) addButtonDisabled(2,"Use gob","You need at least one goblin follower to do this.");
@@ -527,9 +527,9 @@ package classes.Scenes.Places{
 			if (MindBreakerFetishMaleConvert < 1) addButtonDisabled(4,"Use boy","You need at least one male follower to do this.");
 			if ((MindBreakerGoblinConvert >= 1 || MindBreakerFetishFemaleConvert >= 1) && (PlayerEggIsFertile || player.hasCock()))addButton(5, "Convert", CreateMB).hint("Make one of your female pet into a new Mindbreaker.");
 			else addButtonDisabled(5,"Convert","You need at least one follower in order to get create a new mindbreaker. Furthermore you need your parasitic eggs to be properly fertilised by a male fellower cum or that of a male mindbreaker.");
-			//addButton(6, "Puppet sex", PuppetMaster,1,1,1,"Mind control two of your favorite pet into fucking one another and enjoy it.");
+			//addButton(6, "Puppet sex", PuppetMaster).hint("Mind control two of your favorite pet into fucking one another and enjoy it.");
 			//if (MindBreakerFetishFemaleConvert == 0 || MindBreakerFetishMaleConvert == 0) addButtonDisabled(6,"Puppet sex","You need at least one female follower and one male fellower of normal size to do this.");
-			//addButton(7, "Orgy", FuckEveryFellower,1,1,1,"Just fuck with all of your follower at the same time preferably one of each type.");
+			//addButton(7, "Orgy", FuckEveryFellower).hint("Just fuck with all of your follower at the same time preferably one of each type.");
 			//if (MindBreakerGoblinConvert >= 1 && MindBreakerFetishFemaleConvert >= 1 && MindBreakerFetishMaleConvert >= 1) addButtonDisabled(7,"Orgy","You need at least a goblin a man and a woman in order to get an orgy going on.");
 			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner).hint("It appears your follower brought in a new toy for you to break how kind. Time to fix the mind of this defiant new plaything.");
 			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner").hint("There is no prisonner in the cave for you to play with at the time.");
