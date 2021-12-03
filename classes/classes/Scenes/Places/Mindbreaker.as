@@ -225,6 +225,7 @@ package classes.Scenes.Places{
 			player.sexReward("default", "Vaginal", true, false);
 			player.sexReward("default", "Vaginal", true, false);
 			player.sexReward("default", "Vaginal", true, false);
+			MindBreakerQuest = QUEST_STAGE_METMB;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
