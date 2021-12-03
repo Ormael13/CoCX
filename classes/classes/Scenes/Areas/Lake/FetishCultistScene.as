@@ -13,6 +13,7 @@ import classes.Scenes.UniqueSexScenes;
 public class FetishCultistScene extends AbstractLakeContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var mindbreakerscene:Mindbreaker = new Mindbreaker();
 
 		public function FetishCultistScene()
 		{
@@ -724,12 +725,16 @@ public class FetishCultistScene extends AbstractLakeContent
 			else if (player.hasVagina())outputText("<i>sister</i>");
 			outputText("<i> [name].</i>\"" +
 					"\n\nYou make a victorious grin and declare \"<i>Then you can abandon yourself to my care.</i>\"" +
-					"\n\nTotally in control, you continue fucking her brain, connecting yourself with her nerves and pussy to truly feel everything you inflict on her until you both orgasm, your cunt splattering green fluids on hers as you ride her pleasure waves." +
-					" Satisfied for now you let her out of your embrace and tell her all she has to do to feel like this forever is to obey you and her other big sister, Kaerb-Dnim, so she too can become perfect someday." +
-					" She nods, understanding everything and already smiling beautifully at the idea of getting her brain thoroughly fucked inside out." +
-					"\n\nShe leaves in a rush. Barely taking the time to dress up, her cunt still drooling from the lingering sensation of your tentacle feelers in her head." +
-					" You chuckle at the eagerness of your new convert as you head back to camp.");
+					"\n\nTotally in control, you continue fucking her brain, connecting yourself with her nerves and pussy to truly feel everything you inflict on her until you both orgasm, your cunt splattering green fluids on hers as you ride her pleasure waves.");
 			Mindbreaker.MindBreakerFetishFemaleConvert ++;
+			Mindbreaker.MindBreakerConvert ++;
+			if (Mindbreaker.MindBreakerConvert >= 20) mindbreakerscene.MindbreakerBrainEvolution();
+			else {
+				outputText(" Satisfied for now you let her out of your embrace and tell her all she has to do to feel like this forever is to obey you and her other big sister, Kaerb-Dnim, so she too can become perfect someday." +
+						" She nods, understanding everything and already smiling beautifully at the idea of getting her brain thoroughly fucked inside out." +
+						"\n\nShe leaves in a rush. Barely taking the time to dress up, her cunt still drooling from the lingering sensation of your tentacle feelers in her head." +
+						" You chuckle at the eagerness of your new convert as you head back to camp.");
+			}
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
 		}

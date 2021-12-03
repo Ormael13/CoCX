@@ -12,6 +12,7 @@ import classes.Items.Armors.LustyMaidensArmor;
 public class FetishZealotScene extends AbstractLakeContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var mindbreakerscene:Mindbreaker = new Mindbreaker();
 		
 		public function FetishZealotScene()
 		{
@@ -320,10 +321,11 @@ public class FetishZealotScene extends AbstractLakeContent
 			if (player.hasCock())outputText("<i>brother</i>");
 			else if (player.hasVagina())outputText("<i>sister</i>");
 			outputText("<i>, [name] please, I beg you. Make me cum more!</i>\"" +
-					"\n\nYou promise him the chance to cum and leak like a hose with the condition he heads to Kaerb-Dnim and, of course, take tons of transformative to increase the size of his balls." +
-					" This is all it takes to get your newest plaything running to the lair." +
-					" You smile, knowing you have made yet another convert as you head back to camp still giggling.");
+					"\n\nYou promise him the chance to cum and leak like a hose with the condition he heads to Kaerb-Dnim and, of course, take tons of transformative to increase the size of his balls.");
 			Mindbreaker.MindBreakerFetishMaleConvert ++;
+			Mindbreaker.MindBreakerConvert ++;
+			if (Mindbreaker.MindBreakerConvert >= 20) mindbreakerscene.MindbreakerBrainEvolution();
+			else outputText(" This is all it takes to get your newest plaything running to the lair. You smile, knowing you have made yet another convert as you head back to camp still giggling.");
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
 		}

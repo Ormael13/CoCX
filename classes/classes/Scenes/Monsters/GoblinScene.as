@@ -16,6 +16,7 @@ import coc.xxc.Story;
 public class GoblinScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var mindbreakerscene:Mindbreaker = new Mindbreaker();
 
 		public function GoblinScene()
 		{
@@ -602,9 +603,11 @@ public class GoblinScene extends BaseContent
 					" Then… maybe you will consider rewarding her." +
 					" The goblin babbles incoherently and laughs as her cunt constantly drips with fluid." +
 					" You insert your finger in and playfully pinch her clitoris watching in amazement as the ground is instantly drenched with the girl cum of the broken girl." +
-					" Satisfied with what you saw, you lock an image of Kaerb-Dnim's cave within her mind and let her go, knowing full well she will head there at the first opportunity." +
-					"\n\nYou drop the unconscious goblin on the ground heading back to your camp, still giggling at your new acquisition.");
+					" Satisfied with what you saw, you lock an image of Kaerb-Dnim's cave within her mind and let her go, knowing full well she will head there at the first opportunity.");
 			Mindbreaker.MindBreakerGoblinConvert ++;
+			Mindbreaker.MindBreakerConvert ++;
+			if (Mindbreaker.MindBreakerConvert >= 20) mindbreakerscene.MindbreakerBrainEvolution();
+			else outputText("\n\nYou drop the unconscious goblin on the ground heading back to your camp, still giggling at your new acquisition.");
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
 		}

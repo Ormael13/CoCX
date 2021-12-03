@@ -4731,7 +4731,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.MindbreakerBrain1to3)) damage*=1+(0.5*player.perkv1(PerkLib.MindbreakerBrain1to3));
+		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) damage*=1+(0.5*player.perkv1(PerkLib.MindbreakerBrain1toX));
 		damage = Math.round(damage);
 		outputText("Your third eye opens wide and glow a vicious green as you viciously impale " + monster.a + monster.short + "’s mind with a mental spike.");
 		doTrueDamage(damage, true, true);
@@ -4746,9 +4746,14 @@ public class MagicSpecials extends BaseCombatContent {
 		useMana(100, USEFATG_MAGIC_NOBM);
 		//cooldown 8 round
 		var duration:int = 2;
-		if (player.hasPerk(PerkLib.MindbreakerBrain1to3)) duration=2+(1*player.perkv1(PerkLib.MindbreakerBrain1to3));
+		var PsionicEmpowermentBonus:int = 0;
+		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) PsionicEmpowermentBonus = player.perkv1(PerkLib.MindbreakerBrain1toX)/2;
+		if (PsionicEmpowermentBonus < 1) PsionicEmpowermentBonus=0;
+		if (PsionicEmpowermentBonus > 5) PsionicEmpowermentBonus=5;
+		PsionicEmpowermentBonus = Math.round(PsionicEmpowermentBonus);
+		if (player.hasPerk(PerkLib.PsionicEmpowerment)) duration -= PsionicEmpowermentBonus;
 		outputText("You assault your opponent’s mind with lewd thoughts, locking them into a blissful daze.");
-		player.createStatusEffect(StatusEffects.CooldownSpellMindBlast,10-player.perkv1(PerkLib.MindbreakerBrain1to3),0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownSpellMindBlast,14-PsionicEmpowermentBonus,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned, duration,0,0,0);
 		enemyAI();
 	}
@@ -4758,7 +4763,13 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(100, USEFATG_MAGIC_NOBM);
 		var numberOfImage:int = Math.round(player.inte/100);
-		if (player.hasPerk(PerkLib.MindbreakerBrain1to3)) numberOfImage += player.perkv1(PerkLib.MindbreakerBrain1to3);
+		var PsionicEmpowermentBonus:int = 0;
+		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) PsionicEmpowermentBonus = player.perkv1(PerkLib.MindbreakerBrain1toX)/2;
+		if (PsionicEmpowermentBonus < 1) PsionicEmpowermentBonus=0;
+		if (PsionicEmpowermentBonus > 10) PsionicEmpowermentBonus=10;
+		PsionicEmpowermentBonus = Math.round(PsionicEmpowermentBonus);
+		numberOfImage += PsionicEmpowermentBonus;
+		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) numberOfImage += player.perkv1(PerkLib.MindbreakerBrain1toX);
 		if (player.hasStatusEffect(StatusEffects.MirrorImage)){
 			numberOfImage = numberOfImage-player.statusEffectv1(StatusEffects.MirrorImage);
 			outputText("You weave back the spell, resplenishing "+ numberOfImage +" additionnal replicas of yourself to the remaining ones.");

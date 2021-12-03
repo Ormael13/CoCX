@@ -91,6 +91,7 @@
             <color name="dark2">#352722</color>
             <color name="dusky">#f000f0</color>
             <color name="ebony">#3d3529</color>
+			<color name="eldritch green">#87d981</color>
             <color name="emerald">#4cc875</color>
             <color name="fair">#edccbf</color>
             <color name="golden">#ffdd00</color>
@@ -408,6 +409,7 @@
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
         <cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
+		<cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
@@ -430,6 +432,7 @@
         <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="1051,150,49,59" name="hands/gnomeLeft" dx="63" dy="42"/>
         <cell rect="1051,210,49,59" name="hands/gnomeRight" dx="60" dy="46"/>
+		<cell rect="901,330,49,59" name="hands/mindbreaker" dx="97" dy="74"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="105" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="851,270,49,59" name="overhands/ratatoskrLeft" dx="56" dy="64"/>
@@ -474,6 +477,7 @@
         <cell rect="547,611,90,90" name="legs/gargoyle_sit" dx="60" dy="61"/>
         <cell rect="1,1304,90,59" name="legs_truefg/gazer" dx="41" dy="98"/>
         <cell rect="729,611,90,90" name="legs/elemental" dx="57" dy="97"/>
+		<cell rect="729,702,90,90" name="legs/mindbreaker" dx="60" dy="99"/>
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
@@ -544,6 +548,7 @@
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="77" dy="50"/>
         <cell rect="162,27,54,31" name="neck/centipede" dx="77" dy="49"/>
+		<cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
         <cell rect="992,641,173,156" name="wings/gazer" dx="22" dy="10"/>
@@ -672,9 +677,11 @@
         <cell rect="1013,56,40,13" name="clothCape/TamamoeNoMaeKimonoCollar" dx="85" dy="68"/>
         <cell rect="229,13,40,13" name="clothCape/OniKimonoCollar" dx="85" dy="68"/>
         <cell rect="607,56,40,13" name="clothCape/IceQueenKimonoCollar" dx="85" dy="68"/>
+		<cell rect="150,155,49,25" name="clothCape/mindbreaker" dx="79" dy="53"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
         <cell rect="2083,216,80,100" name="clothCape_bg/elfClotheCape_bg" dx="65" dy="64"/>
+		<cell rect="1166,641,173,156" name="clothCape_bg/mindbreaker" dx="20" dy="29"/>
         <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
@@ -765,6 +772,7 @@
         <cell rect="61,136,59,65" name="hair_bg/feather" dx="75" dy="21"/>
         <cell rect="481,136,59,65" name="hair/ratatoskr" dx="75" dy="21"/>
         <cell rect="541,136,59,65" name="hair_bg/ratatoskr" dx="75" dy="21"/>
+		<cell rect="601,136,59,65" name="hair/mindbreaker" dx="73" dy="24"/>
         <cell rect="121,70,59,65" name="hair/gorgon" dx="75" dy="21"/>
         <cell rect="121,136,59,65" name="hair_bg/gorgon" dx="75" dy="21"/>
         <cell rect="1,251,89,98" name="hair/slime" dx="60" dy="4"/>
@@ -1056,6 +1064,7 @@
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="80" dy="99"/>
         <cell rect="311,200,49,29" name="overskinpanty/Ookumukadevenom" dx="75" dy="104"/>
         <cell rect="361,200,49,29" name="overskinpanty/caveWyrm" dx="80" dy="112"/>
+		<cell rect="411,200,49,29" name="overskinpanty/mindbreaker" dx="80" dy="112"/>
         <cell rect="61,410,49,29" name="bra_fg/qipaoRedBraSmall" dx="79" dy="68"/>
         <cell rect="61,440,49,29" name="bra_fg/qipaoRedBraMedium" dx="79" dy="68"/>
         <cell rect="61,470,49,29" name="bra_fg/qipaoRedBraLarge" dx="79" dy="68"/>

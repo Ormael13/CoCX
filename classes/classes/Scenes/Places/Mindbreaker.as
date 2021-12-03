@@ -682,5 +682,27 @@ package classes.Scenes.Places{
 			MindBreakerConvert ++;
 		}
 
+		public function MindbreakerBrainEvolution():void {
+			outputText("\n\nAs you finish converting this new recruit to the sisterhood you are suddenly rocked to the core by a spike of pleasure, your mind expanding with new psychic powers as your body spontaneously cum splashing the ground beneath you green with eldritch slime." +
+					" Fully overcome by desire you order your newest disciple to kneel in front of you as you begin to fiercely masturbate, cumming over and over again and covering the convert with so much fluid one might mistake them for a slime monster." +
+					" All the while your newest disciple smiles in awe and pleasure as you baptise your newest adept with your blighted juices spontanously cuming from the psychic feedback your powers relay back to it's addled brain." +
+					" In need of more you firmly shove your");
+			if (player.hasCock())outputText(" cock");
+			if (player.hasVagina())outputText(" cunt");
+			outputText(" into the adept mouth letting your new pet do wonders with its tongue and flooding its throat with green sludge." +
+					"\n\nOnly as you reach your tenth orgasm do you relent, ordering your dazed toy to head to the cave where Kaerb Dnim will provide it with further training." +
+
+					"\n\nYour overloaded brain seems to have changed, improved as your thoughts are now more lewd, more obscene, more perfect. You are getting closer to the truth.");
+			if (!player.hasPerk(PerkLib.MindbreakerBrain1to3)){
+				outputText("<b>You acquired the Perk Mindbreaker Brain</b>.");
+				player.createPerk(PerkLib.MindbreakerBrain1to3,1,0,0,0);
+			}
+			else{
+				outputText("<b>Your brain and psionic powers have expended!</b>.");
+				var newRank:int = player.perkv1(PerkLib.MindbreakerBrain1to3)+1;
+				player.setPerkValue(PerkLib.MindbreakerBrain1to3,1,newRank);
+			}
+		}
+
 	}
 }

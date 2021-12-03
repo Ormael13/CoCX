@@ -11,15 +11,21 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Repeated mental exercise as well as the increasing size of the mindbreaker collective mental psychic allowed your brain to increase beyond normal size. Empowers all of mindbreaker your abilities by " + params.value1 * 50 + "% and allow you to store more stolen knowledge with Brain Melt.";
+			return "Repeated mental exercise as well as the increasing size of the mindbreaker collective psionic network allowed your brain to increase beyond normal size. Empowers all of mindbreaker your abilities by " + params.value1 * 50 + "% and allow you to store more stolen knowledge with Brain Melt. Your current tier is "+params.value1+"";
 		}
 
 		override public function name(params:PerkClass=null):String {
-			if (params.value1 == 3) {
+			if (params.value1 == 5) {
 				return "Mindbreaker Brain Prime";
 			}
-			if (params.value1 == 2) {
+			if (params.value1 == 4) {
+				return "Mindbreaker Brain Omega";
+			}
+			if (params.value1 == 3) {
 				return "Mindbreaker Brain Alpha";
+			}
+			if (params.value1 == 2) {
+				return "Mindbreaker Brain Beta";
 			}
 			if (params.value1 == 1) {
 				return "Mindbreaker Brain";

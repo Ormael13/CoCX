@@ -45,6 +45,7 @@ import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
@@ -10134,18 +10135,8 @@ use namespace CoC;
 				femaleMindbreakerCounter ++;
 			if (hasPerk(PerkLib.Insanity))
 				femaleMindbreakerCounter++;
-		//	if (hasPerk(PerkLib.MindbreakerBrain))
-		//		femaleMindbreakerCounter++;
-		//	if (hasPerk(PerkLib.MindbreakerBrainEvolved))
-		//		femaleMindbreakerCounter++;
-		//	if (hasPerk(PerkLib.MindbreakerBrainFinalForm))
-		//		femaleMindbreakerCounter++;
-		//	if ((hasPerk(hasPerk(PerkLib.MindbreakerBrainEvolved)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-		//		femaleMindbreakerCounter++;
-		//	if ((hasPerk(hasPerk(PerkLib.MindbreakerBrainEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-		//		femaleMindbreakerCounter++;
-		//	if (hasPerk(PerkLib.MindbreakerBrainFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-		//		femaleMindbreakerCounter++;
+			if (hasPerk(PerkLib.MindbreakerBrain1toX))
+				femaleMindbreakerCounter+= perkv1(PerkLib.MindbreakerBrain1toX);
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				femaleMindbreakerCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && femaleMindbreakerCounter >= 4)
@@ -13132,6 +13123,7 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
+			if (hasPerk(PerkLib.PsionicEmpowerment)) statStore.replaceBuffObject({'int.mult':(0.01 * Mindbreaker.MindBreakerFullConvert)}, 'Psionic Empowerment', { text: 'Psionic Empowerment' });
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
 				if (cowScore() >= 15) power = lactationQ()*0.001;
