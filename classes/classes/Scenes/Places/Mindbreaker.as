@@ -26,7 +26,7 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_MBOFF:int = -1;
 		public static const QUEST_STAGE_NOT_STARTED:int = 0;
 		public static const QUEST_STAGE_METMB:int = 1;
-		public static const QUEST_STAGE_ISMB:int = 1;
+		public static const QUEST_STAGE_ISMB:int = 2;
 
 		public static var MindBreakerConvert:int;
 		public static var MindBreakerConvertGoal:int;
