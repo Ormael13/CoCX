@@ -688,7 +688,7 @@
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
         <cell rect="1822,158,20,55" name="glove_fg/elfClothingRightArmFront" dx="104" dy="52"/>
-        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="147" dy="132"/>
+        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="133" dy="135"/>
         <cell rect="296,1550,99,45" name="uniquePlantBath/lilirauneBath" dx="34" dy="88"/>
         <cell rect="546,1430,50,100" name="torso/liliraune" dx="36" dy="26"/>
         <cell rect="296,1596,85,20" name="face/lilirauneCorruptedSmile" dx="34" dy="50"/>
@@ -1181,7 +1181,7 @@
         <cell rect="508,421,168,69" name="tail/balrog" dx="19" dy="90"/>
         <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
         <cell rect="677,421,168,69" name="tail/dragon" dx="18" dy="90"/>
-        <cell rect="677,421,168,69" name="tail/dragon_taur" dx="74" dy="93"/>
+        <cell rect="677,421,168,69" name="tail/dragon_taur" dx="62" dy="104"/>
         <cell rect="1,491,83,69" name="tail/bunny" dx="95" dy="90"/>
         <cell rect="1,491,83,69" name="tail/bunny_taur" dx="141" dy="97"/>
         <cell rect="86,491,83,69" name="tail/goat" dx="94" dy="103"/>
