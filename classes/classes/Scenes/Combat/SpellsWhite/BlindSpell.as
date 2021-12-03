@@ -38,19 +38,18 @@ public class BlindSpell extends AbstractWhiteSpell{
 				}
 			} else {
 				if (display) {
-					outputText("You glare at " + monster.a + monster.short + " and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n");
+					outputText("You glare at [themonster] and point at [monster him].  A bright flash erupts before [monster him]!\n");
 				}
 			}
 			if (monster is LivingStatue) {
 				// noop
 			} else if(rand(3) != 0) {
 				if (display) {
-					outputText(" <b>" + monster.capitalA + monster.short + " ");
+					outputText(" <b>[Themonster] ");
 					if (monster.plural && monster.short != "imp horde") outputText("are blinded!</b>");
 					else outputText("is blinded!</b>");
 				}
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
-				MagicAddonEffect();
 				if(monster is Diva){
 					(monster as Diva).handlePlayerSpell("blind");
 				} else if(monster.short == "Isabella") {

@@ -31,6 +31,7 @@ import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.CombatMagic;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
@@ -3229,62 +3230,10 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.FlameBlade,1,-1);
 			}
 
-			//Consuming darkness
-			if (hasStatusEffect(StatusEffects.ConsumingDarkness)) {
-				if (statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) removeStatusEffect(StatusEffects.ConsumingDarkness);
-				else {
-					addStatusValue(StatusEffects.ConsumingDarkness, 1, -1);
-					outputText("Hungry darkness gnaw at your foe for ");
-					var store11:Number = 0;
-					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
-					store11 *= 0.2;
-					store11 = Math.round(store11 * SceneLib.combat.darknessDamageBoostedByDao());
-					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
-					outputText("\n\n");
-				}
-			}
-			//Curse of Desire
-			if (hasStatusEffect(StatusEffects.CurseOfDesire)) {
-				if (statusEffectv1(StatusEffects.CurseOfDesire) <= 0) {
-					if (statusEffectv3(StatusEffects.CurseOfDesire) > 0) lustVuln += statusEffectv3(StatusEffects.CurseOfDesire);
-					removeStatusEffect(StatusEffects.CurseOfDesire);
-				}
-				else {
-					addStatusValue(StatusEffects.CurseOfDesire, 1, -1);
-					var lustDmg3:Number = 0;
-					lustDmg3 += statusEffectv2(StatusEffects.CurseOfDesire);
-					lustDmg3 *= 0.2;
-					if (lustDmg3 < 1) lustDmg3 = 1;
-					else lustDmg3 = Math.round(lustDmg3);
-					outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
-					teased(lustDmg3, false);
-					outputText("\n\n");
-				}
-			}
-
-			//Curse of Weeping
-			if (hasStatusEffect(StatusEffects.CurseOfWeeping)) {
-				if (statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) removeStatusEffect(StatusEffects.CurseOfWeeping);
-				else {
-					addStatusValue(StatusEffects.CurseOfWeeping, 1, -1);
-					outputText("Your foe is bleeding due to your curse. ");
-					var hemorrhage3Damage:Number = 0;
-					hemorrhage3Damage += statusEffectv2(StatusEffects.CurseOfWeeping);
-					hemorrhage3Damage *= 0.2;
-					hemorrhage3Damage = Math.round(hemorrhage3Damage);
-					hemorrhage3Damage = SceneLib.combat.doDamage(hemorrhage3Damage, true, true);
-					outputText("\n\n");
-				}
-			}
-
 			//lowered damage done by enemy attacks debuff
 			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
-			}
-			if (hasStatusEffect(StatusEffects.EnergyDrain)) {
-				if (statusEffectv1(StatusEffects.EnergyDrain) <= 0) removeStatusEffect(StatusEffects.EnergyDrain);
-				else addStatusValue(StatusEffects.EnergyDrain,1,-1);
 			}
 		}
 

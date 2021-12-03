@@ -21,11 +21,9 @@ public class FireStormSpell extends AbstractWhiteSpell{
 		return player.hasStatusEffect(StatusEffects.KnowsFireStorm)
 	}
 	
-	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellFireStorm)
+	override public function calcCooldown():int {
+		return spellWhiteTier2Cooldown();
 	}
-	
 	
 	override public function describeEffectVs(target:Monster):String {
 		return "~"+calcDamage(target,false)+" fire daamge."
@@ -36,19 +34,12 @@ public class FireStormSpell extends AbstractWhiteSpell{
 		return adjustSpellDamage(baseDamage,DamageType.FIRE,CAT_SPELL_WHITE,monster);
 	}
 	
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellFireStorm, spellWhiteTier2Cooldown(), 0, 0, 0);
-	}
-	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You narrow your eyes, focusing your own willpower with a deadly intent. You cojure a small vortex of embers that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at " + monster.a + monster.short + ". You intend to leave nothing but ashes!");
+			outputText("You narrow your eyes, focusing your own willpower with a deadly intent. You cojure a small vortex of embers that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at [themonster]. You intend to leave nothing but ashes!");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.FIRE);
-		damage *= omnicasterRepeatCount();
+		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

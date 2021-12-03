@@ -34,20 +34,8 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx))
 	}
 	
-	override public function get currentCooldown():int {
-		return ex ?
-				player.statusEffectv1(StatusEffects.CooldownSpellPyreBurst)
-				: player.statusEffectv1(StatusEffects.CooldownSpellPyreBurstEx);
-	}
-	
-	override public function useResources():void {
-		super.useResources(); // mana is used in AbstractSpell
-		player.createStatusEffect(
-				ex ?
-						StatusEffects.CooldownSpellPyreBurstEx
-						: StatusEffects.CooldownSpellPyreBurst,
-				spellWhiteCooldown(),0,0,0
-		);
+	override public function calcCooldown():int {
+		return spellWhiteCooldown();
 	}
 	
 	/**
@@ -70,13 +58,12 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 		} else {
 			if (display) {
-				outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over " + monster.a + monster.short + ".\n");
+				outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over [themonster].\n");
 			}
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.FIRE);
+		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}

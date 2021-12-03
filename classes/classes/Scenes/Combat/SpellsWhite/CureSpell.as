@@ -59,17 +59,12 @@ public class CureSpell extends AbstractWhiteSpell{
 		baseManaCost = 500;
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellCure)
-	}
-	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsCure);
 	}
 	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellCure,7,0,0,0);
+	override public function calcCooldown():int {
+		return 7;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

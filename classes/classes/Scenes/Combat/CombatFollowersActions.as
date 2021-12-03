@@ -73,7 +73,7 @@ import classes.StatusEffects;
 			else if (weaponNeisa >= 151 && weaponNeisa < 201) dmg1 *= (4.75 + ((weaponNeisa - 150) * 0.015));
 			else dmg1 *= (5.5 + ((weaponNeisa - 200) * 0.01));
 			dmg1 = Math.round(dmg1);
-			outputText("Neisa slashes at " + monster.a + monster.short + " with her sword. ");
+			outputText("Neisa slashes at [themonster] with her sword. ");
 			doDamage(dmg1, true, true);
 			outputText("\n\n");
 		}
@@ -82,11 +82,11 @@ import classes.StatusEffects;
 			player.createStatusEffect(StatusEffects.CompBoostingPCArmorValue, 0, 0, 0, 0);
 		}
 		public function neisaCombatActions3():void {
-			outputText("Neisa smashes her shield on " + monster.a + monster.short + "’s head, stunning it.\n\n");
+			outputText("Neisa smashes her shield on [themonster]’s head, stunning it.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		public function neisaCombatActions4():void {
-			outputText("Neisa viciously ram her shield on " + monster.a + monster.short + ", dazing it.\n\n");
+			outputText("Neisa viciously ram her shield on [themonster], dazing it.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		
@@ -138,7 +138,7 @@ import classes.StatusEffects;
 				}
 			}
 			else {
-				outputText("Etna takes flight, her tail taking aim at " + monster.a + monster.short + ", ready for aerial bombardment.\n\n");
+				outputText("Etna takes flight, her tail taking aim at [themonster], ready for aerial bombardment.\n\n");
 				player.addStatusValue(StatusEffects.CombatFollowerEtna, 4, 1);
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
@@ -155,7 +155,7 @@ import classes.StatusEffects;
 		}
 		public function etnaCombatActions1():void {
 			var lustDmg:Number = Math.round(player.statusEffectv2(StatusEffects.CombatFollowerEtna) / 6);
-			outputText("Etna shoots a spike at " + monster.a + monster.short + ", you can see the telltale sign of arousal in " + monster.pronoun3 + " movement. ");
+			outputText("Etna shoots a spike at [themonster], you can see the telltale sign of arousal in [monster his] movement. ");
 			monster.teased(lustDmg);
 			outputText("\n\n");
 		}
@@ -163,12 +163,12 @@ import classes.StatusEffects;
 			var dmg2:Number = player.statusEffectv1(StatusEffects.CombatFollowerEtna);
 			dmg2 += scalingBonusStrengthCompanion() * 0.5;
 			dmg2 = Math.round(dmg2);
-			outputText("Etna dives at " + monster.a + monster.short + ", mauling " + monster.pronoun3 + " viciously with her claws before taking flight again. ");
+			outputText("Etna dives at [themonster], mauling [monster his] viciously with her claws before taking flight again. ");
 			doDamage(dmg2, true, true);
 			outputText("\n\n");
 		}
 		public function etnaCombatActions3():void {
-			outputText("Etna dives at " + monster.a + monster.short + " and crashes boob first into " + monster.pronoun3 + " face, staggering it before taking flight again.\n\n");
+			outputText("Etna dives at [themonster] and crashes boob first into [monster his] face, staggering it before taking flight again.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		
@@ -231,7 +231,7 @@ import classes.StatusEffects;
 			else if (weaponAurora1 >= 151 && weaponAurora1 < 201) dmg01 *= (4.75 + ((weaponAurora1 - 150) * 0.015));
 			else dmg01 *= (5.5 + ((weaponAurora1 - 200) * 0.01));
 			dmg01 = Math.round(dmg01);
-			outputText("Aurora thrust her hand at " + monster.a + monster.short + ". ");
+			outputText("Aurora thrust her hand at [themonster]. ");
 			doDamage(dmg01, true, true);
 			outputText("\n\n");
 		}
@@ -250,12 +250,12 @@ import classes.StatusEffects;
 			else dmg3 *= (5.5 + ((weaponAurora - 200) * 0.01));
 			dmg3 *= 3;
 			dmg3 = Math.round(dmg3);
-			outputText("Aurora thrust her hand at " + monster.a + monster.short + ". Her claws hits thrice against " + monster.a + monster.short + ", dealing ");
+			outputText("Aurora thrust her hand at [themonster]. Her claws hits thrice against [themonster], dealing ");
 			doDamage(dmg3, true, true);
 			outputText(" damage!\n\n");
 		}
 		public function auroraCombatActions4():void {
-			outputText("Aurora flaps her huge bat wings at " + monster.a + monster.short + " trying to knock it down.\n\n");
+			outputText("Aurora flaps her huge bat wings at [themonster] trying to knock it down.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		
@@ -377,7 +377,7 @@ import classes.StatusEffects;
 			var lustDmg:Number = Math.round(player.statusEffectv2(StatusEffects.CombatFollowerAlvina) / 3);
 			lustDmg + (rand(player.statusEffectv3(StatusEffects.CombatFollowerAlvina) - player.statusEffectv2(StatusEffects.CombatFollowerAlvina) * 2 + monster.cor) / 3);
 			lustDmg = Math.round(lustDmg);
-			outputText("Alvina incants a spell and a powerful wave of lust hits " + monster.a + monster.short + ", leaving it more than aroused! ");
+			outputText("Alvina incants a spell and a powerful wave of lust hits [themonster], leaving it more than aroused! ");
 			monster.teased(lustDmg);
 			outputText("\n\n");
 		}
@@ -391,7 +391,7 @@ import classes.StatusEffects;
 			else if (weaponAlvina >= 151 && weaponAlvina < 201) dmg1 *= (4.75 + ((weaponAlvina - 150) * 0.015));
 			else dmg1 *= (5.5 + ((weaponAlvina - 200) * 0.01));
 			dmg1 = Math.round(dmg1);
-			outputText("Alvina slices at " + monster.a + monster.short + " with her scythe, leaving deep wounds. ");
+			outputText("Alvina slices at [themonster] with her scythe, leaving deep wounds. ");
 			doDamage(dmg1, true, true);
 			outputText("\n\n");
 			monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
@@ -470,12 +470,12 @@ import classes.StatusEffects;
 			var dmg4:Number = player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
 			dmg4 += scalingBonusStrengthCompanion() * 0.5;
 			dmg4 = Math.round(dmg4);
-			outputText("Mitzi takes a couple needles from her belt then hurls them at " + monster.a + monster.short + ". ");
+			outputText("Mitzi takes a couple needles from her belt then hurls them at [themonster]. ");
 			doDamage(dmg4, true, true);
 			outputText("\n\n");
 		}
 		public function mitziCombatActions2():void {
-			outputText("Lildea pulls out a bubbling vial of a green liquid then tosses at " + monster.a + monster.short + ". The vial shatters on contact, causing the contents to spill onto " + monster.pronoun2 + ". ");
+			outputText("Lildea pulls out a bubbling vial of a green liquid then tosses at [themonster]. The vial shatters on contact, causing the contents to spill onto [monster him]. ");
 			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerMitzi)/4)+20), true, true);
 			outputText("\n\n");
 			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
@@ -483,12 +483,12 @@ import classes.StatusEffects;
 		}
 		public function mitziCombatActions3():void {
 			var lustDmg:Number = Math.round(player.statusEffectv3(StatusEffects.CombatFollowerMitzi) / 6);
-			outputText("Furxia throws out a barrage of aphrodisia laced needles at " + monster.a + monster.short + ". ");
+			outputText("Furxia throws out a barrage of aphrodisia laced needles at [themonster]. ");
 			monster.teased(lustDmg);
 			outputText("\n\n");
 		}
 		public function mitziCombatActions4():void {
-			outputText("Roxy whips out two circular glass bottles filled with a pink liquid. She tosses them at " + monster.a + monster.short + " releasing a cloud of pink fog around " + monster.pronoun2 + ". ");
+			outputText("Roxy whips out two circular glass bottles filled with a pink liquid. She tosses them at [themonster] releasing a cloud of pink fog around [monster him]. ");
 			monster.teased(rand(player.statusEffectv3(StatusEffects.CombatFollowerMitzi)/4)+20);
 			outputText("\n\n");
 			if (monster.hasStatusEffect(StatusEffects.LustDoTH)) monster.addStatusValue(StatusEffects.LustDoTH,1,1);
@@ -532,7 +532,7 @@ import classes.StatusEffects;
 				}
 			}
 			else {
-				outputText("Excellia drops into a fighting stance, ready to take on " + monster.a + monster.short + ".\n\n");
+				outputText("Excellia drops into a fighting stance, ready to take on [themonster].\n\n");
 				player.addStatusValue(StatusEffects.CombatFollowerExcellia, 4, 1);
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
@@ -545,13 +545,13 @@ import classes.StatusEffects;
 			}
 		}
 		public function excelliaCombatActions0():void {
-			outputText("Excellia glares at " + monster.a + monster.short + ", looking for an opportunity to strike\n\n");
+			outputText("Excellia glares at [themonster], looking for an opportunity to strike\n\n");
 		}
 		public function excelliaCombatActions1():void {
 			var dmg7:Number = player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
 			dmg7 += scalingBonusStrengthCompanion() * 0.5;
 			dmg7 = Math.round(dmg7);
-			outputText("Excellia moos out as she charges at " + monster.a + monster.short + " at full force, delivering a devastating blow. ");
+			outputText("Excellia moos out as she charges at [themonster] at full force, delivering a devastating blow. ");
 			doDamage(dmg7, true, true);
 			outputText("\n\n");
 		}
@@ -559,13 +559,13 @@ import classes.StatusEffects;
 			var dmg8:Number = player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
 			dmg8 += scalingBonusStrengthCompanion() * 0.7;
 			dmg8 = Math.round(dmg8);
-			outputText("Excellia lunges at " + monster.a + monster.short + ", throwing her full weight at " + monster.pronoun2 + " for ");
+			outputText("Excellia lunges at [themonster], throwing her full weight at [monster him] for ");
 			doDamage(dmg8, true, true);
 			outputText(" damage.\n\n");
 		}
 		public function excelliaCombatActions3():void {
 			var dmg9:Number = player.statusEffectv2(StatusEffects.CombatFollowerExcellia);
-			outputText("Excellia smirks as she stares down " + monster.a + monster.short + ". She lunges at " + monster.pronoun2 + " with a hip check, effectively knocking back and dazing " + monster.pronoun2 + ". ");
+			outputText("Excellia smirks as she stares down [themonster]. She lunges at [monster him] with a hip check, effectively knocking back and dazing [monster him]. ");
 			doDamage(dmg9, true, true);
 			outputText("\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.LoweredAccuracy)) monster.createStatusEffect(StatusEffects.LoweredAccuracy, 40, 0, 0, 0);
@@ -577,7 +577,7 @@ import classes.StatusEffects;
 			dmg10 += scalingBonusStrengthCompanion();
 			dmg10 += unarmedExcellia * 2;
 			dmg10 = Math.round(dmg10);
-			outputText("Excellia lets out a battle cry as she charges at " + monster.a + monster.short + ". She thrashes, headbutts, and kicks " + monster.pronoun2 + " with one powerful blow after another. ");
+			outputText("Excellia lets out a battle cry as she charges at [themonster]. She thrashes, headbutts, and kicks [monster him] with one powerful blow after another. ");
 			doDamage(dmg10, true, true);
 			outputText("\n\n");
 		}
@@ -624,7 +624,7 @@ import classes.StatusEffects;
 				}
 			}
 			else {
-				outputText("Amily takes cover, ready to bombard " + monster.a + monster.short + " with blow darts and blades while hidden from view.\n\n");
+				outputText("Amily takes cover, ready to bombard [themonster] with blow darts and blades while hidden from view.\n\n");
 				player.addStatusValue(StatusEffects.CombatFollowerAmily, 4, 1);
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
@@ -643,16 +643,16 @@ import classes.StatusEffects;
 			var dmg5:Number = player.statusEffectv1(StatusEffects.CombatFollowerAmily);
 			dmg5 += scalingBonusStrengthCompanion() * 0.5;
 			dmg5 = Math.round(dmg5);
-			outputText("Amily peeks out from her cover before shooting a blowdart at " + monster.a + monster.short + ". ");
+			outputText("Amily peeks out from her cover before shooting a blowdart at [themonster]. ");
 			doDamage(dmg5, true, true);
 			outputText("\n\n");
 		}
 		public function amilyCombatActions2():void {
 			outputText("Amily peeks out from her cover, taking careful aim as she shoots a blow dart at [opponent]’s eyes. ");
 			monster.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
-			if (rand(3) == 0 || monster.hasPerk(PerkLib.Resolute)) outputText("" + monster.capitalA + monster.short + " shakes off the blow, but they’re still blinded from the impact.\n\n");
+			if (rand(3) == 0 || monster.hasPerk(PerkLib.Resolute)) outputText("[Themonster] shakes off the blow, but they’re still blinded from the impact.\n\n");
 			else {
-				outputText("" + monster.capitalA + monster.short + " recoils as they’re momentarily disoriented.");
+				outputText("[Themonster] recoils as they’re momentarily disoriented.");
 				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
 		}
@@ -740,7 +740,7 @@ import classes.StatusEffects;
 			else if (weaponZenji >= 151 && weaponZenji < 201) dmg11 *= (4.75 + ((weaponZenji - 150) * 0.015));
 			else dmg11 *= (5.5 + ((weaponZenji - 200) * 0.01));
 			dmg11 = Math.round(dmg11);
-			outputText("Seeing an opening, Zenji thrusts his spear at " + monster.a + monster.short + ". ");
+			outputText("Seeing an opening, Zenji thrusts his spear at [themonster]. ");
 			doDamage(dmg11, true, true);
 			outputText("S\n\n");
 		}
@@ -754,9 +754,9 @@ import classes.StatusEffects;
 			else if (weaponZenji >= 151 && weaponZenji < 201) dmg12 *= (4.75 + ((weaponZenji - 150) * 0.015));
 			else dmg12 *= (5.5 + ((weaponZenji - 200) * 0.01));
 			dmg12 = Math.round(dmg12);
-			outputText("Zenji charges at " + monster.a + monster.short + " with his spear in a feint before bashing them with his tusks. ");
+			outputText("Zenji charges at [themonster] with his spear in a feint before bashing them with his tusks. ");
 			doDamage(dmg12, true, true);
-			outputText(" " + monster.capitalA + monster.short + "");
+			outputText(" [Themonster]");
 			if (monster.hasPerk(PerkLib.Resolute) || rand(4) == 0) outputText(" remains focused despite Zenji’s brutal strikes");
 			else {
 				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -782,9 +782,9 @@ import classes.StatusEffects;
 			else dmg13 *= (5.5 + ((weaponZenji - 200) * 0.01));
 			dmg13 = Math.round(dmg13);
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
-			outputText("Zenji charges at " + monster.a + monster.short + ", knocking them down and pinning them beneath him with his spear. ");
+			outputText("Zenji charges at [themonster], knocking them down and pinning them beneath him with his spear. ");
 			doDamage(dmg13, true, true);
-			outputText(" Zenji has " + monster.a + monster.short + " pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. " + monster.capitalA + monster.short + " struggles beneath him before finally shaking him off.\n\n");
+			outputText(" Zenji has [themonster] pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. [Themonster] struggles beneath him before finally shaking him off.\n\n");
 		}
 		public function zenjiCombatActions5():void {
 			outputText("Seeing your injuries, Zenji quickly rushes to your side, \"<i>It’s okay [name]... I’m here for you…</i>\" he says, wrapping you within his arms, completely shielding you from your enemies. ");

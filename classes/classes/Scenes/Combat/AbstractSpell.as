@@ -4,6 +4,7 @@ import classes.Monster;
 import classes.MutationsLib;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.lists.Gender;
 
 /**
  * In addition to the CombatAbility:
@@ -17,6 +18,7 @@ public class AbstractSpell extends CombatAbility {
 	protected var isBloodMagicApplicable:Boolean = true;
 	protected var isLastResortApplicable:Boolean = true;
 	protected var useManaType:int;
+	protected var canBackfire:Boolean = false;
 	
 	function AbstractSpell(
 			name:String,
@@ -56,14 +58,15 @@ public class AbstractSpell extends CombatAbility {
 		if (uc) return uc;
 		
 		// Run our checks
+		var manaCost:Number = this.manaCost();
 		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
-			if (player.HP - player.minHP() > manaCost()) {
+			if (player.HP - player.minHP() > manaCost) {
 				return "Your hp is too low to cast this spell."
 			}
 		} else {
-			if (player.mana < manaCost()) {
+			if (player.mana < manaCost) {
 				if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort)) {
-					if (player.HP < manaCost()) {
+					if (player.HP < manaCost) {
 						return "Your hp and mana are too low to cast this spell."
 					}
 				} else {
@@ -98,7 +101,7 @@ public class AbstractSpell extends CombatAbility {
 	public override function doEffect(display:Boolean = true):void {
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			if (display) {
-				outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
 		} else {
 			doSpellEffect(display);
@@ -109,12 +112,75 @@ public class AbstractSpell extends CombatAbility {
 		}
 	}
 	
+	// Hacky way to disable backfire. Don't forget to enable back!
+	public var backfireEnabled:Boolean = true;
+	/**
+	 * Autocast spell at combat start (guaranteed success, no output, interception)
+	 */
+	public function autocast():void {
+		backfireEnabled = false;
+		perform(false,false,false);
+		backfireEnabled = canBackfire;
+		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
+	}
+	
 	///////////////////////////
 	// Shortcuts and utilities
 	///////////////////////////
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		combat.magic.MagicAddonEffect(numberOfProcs);
+	}
+	
+	public function spellModByCat(category:int):Number {
+		switch (category) {
+			case CAT_SPELL_WHITE:
+				return spellModWhite();
+			case CAT_SPELL_BLACK:
+				return spellModBlack();
+			case CAT_SPELL_BLOOD:
+				return spellModBlood();
+			case CAT_SPELL_HEX:
+				return spellModBlack();
+			case CAT_SPELL_NECRO:
+				return spellModBlack();
+			default:
+				return spellMod();
+		}
+	}
+	
+	/**
+	 * Apply bonuses from perks, items, and other sources (including target lustVuln) to a lust damage.
+	 * Returned value is rounded.
+	 * @param baseDamage Base lust damage (typically player.inte/5)
+	 * @param monster Target or null if evaluating damage outside combat
+	 * @param category CAT_XXX
+	 * @param randomize If false, use 0.5 for random roll
+	 * @return
+	 */
+	protected function adjustLustDamage(
+			baseDamage:Number,
+			monster:Monster,
+			category:int,
+			randomize:Boolean=true
+	): Number {
+		var lustDmg:Number = baseDamage;
+		lustDmg *= spellModByCat(category);
+		if (monster != null) {
+			var randomBonus:Number = (monster.lib - monster.inte * 2 + monster.cor)/5;
+			lustDmg += randomize ? rand(randomBonus) : 0.5*randomBonus;
+			lustDmg *= monster.lustVuln;
+			if (hasTag(TAG_AOE) && monster.plural) {
+				lustDmg *= 5;
+			}
+		}
+		if(player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
+		if(player.hasStatusEffect(StatusEffects.AlvinaTraining2)) lustDmg *= 1.2;
+		if (monster != null) {
+			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg *= 1.2;
+			lustDmg *= corruptMagicPerkFactor(monster);
+		}
+		return Math.round(lustDmg);
 	}
 	
 	/**
@@ -130,17 +196,27 @@ public class AbstractSpell extends CombatAbility {
 			baseDamage:Number,
 			damageType:int,
 			category:int,
-			monster:Monster
+			monster:Monster,
+			applyOmnicaster:Boolean = true
 	):Number {
 		var damage:Number = baseDamage;
 		
-		switch (category) {
-			case CAT_SPELL_WHITE:
-				damage *= spellModWhite();
-				break;
-		}
+		damage *= spellModByCat(category);
 		
 		switch (damageType) {
+			case DamageType.GENERIC: {
+				/* don't change */
+				break;
+			}
+			case DamageType.PHYSICAL: {
+				break;
+			}
+			case DamageType.MAGICAL: {
+				if (category == CAT_SPELL_BLOOD) {
+					damage *= combat.bloodDamageBoostedByDao();
+				}
+				break;
+			}
 			case DamageType.FIRE: {
 				damage = calcInfernoMod(damage);
 				if (player.armor == armors.BLIZZ_K) damage *= 0.5;
@@ -158,21 +234,65 @@ public class AbstractSpell extends CombatAbility {
 				damage *= combat.lightningDamageBoostedByDao();
 				break;
 			}
+			case DamageType.ICE: {
+				damage = calcGlacialMod(damage);
+				if (combat.wearingWinterScarf()) damage *= 1.2;
+				if (player.armor == armors.BLIZZ_K) damage *= 1.5;
+				if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
+				damage *= combat.iceDamageBoostedByDao();
+				break;
+			}
+			case DamageType.DARKNESS: {
+				damage = calcEclypseMod(damage);
+				damage *= combat.darknessDamageBoostedByDao();
+				break;
+			}
+			case DamageType.TRUE: {
+				break;
+			}
 		}
 		if (monster != null) {
 			if (hasTag(TAG_AOE) && monster.plural) damage *= 5;
-			if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) damage *= 1.2;
-			if (player.hasPerk(PerkLib.PureMagic)) {
-				if (monster.cor < 33) damage *= 1.0;
-				else if (monster.cor < 50) damage *= 1.1;
-				else if (monster.cor < 75) damage *= 1.2;
-				else if (monster.cor < 90) damage *= 1.3;
-				else damage *= 1.4;
+			if (category == CAT_SPELL_WHITE || category == CAT_SPELL_DIVINE) {
+				if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) {
+					damage *= 1.2;
+				}
+				damage *= pureMagicPerkFactor(monster);
+			}
+			if (category == CAT_SPELL_BLACK || category == CAT_SPELL_HEX) {
+				if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) {
+					damage *= 1.2;
+				}
+				damage *= corruptMagicPerkFactor(monster);
 			}
 		}
-		damage *= omnicasterDamageFactor();
+		if (applyOmnicaster) {
+			damage *= omnicasterDamageFactor();
+		}
 		
 		return Math.round(damage);
+	}
+	
+	public static function corruptMagicPerkFactor(monster:Monster):Number {
+		if (monster == null) return 1.0;
+		if (!player.hasPerk(PerkLib.CorruptMagic)) return 1.0;
+		
+		if (monster.cor >= 66) return 1.0;
+		else if (monster.cor >= 50) return 1.1;
+		else if (monster.cor >= 25) return 1.2;
+		else if (monster.cor >= 10) return 1.3;
+		else return 1.4;
+	}
+	
+	public static function pureMagicPerkFactor(monster:Monster):Number {
+		if (monster == null) return 1.0
+		if (!player.hasPerk(PerkLib.PureMagic)) return 1.0;
+		
+		if (monster.cor < 33) return 1.0;
+		else if (monster.cor < 50) return 1.1;
+		else if (monster.cor < 75) return 1.2;
+		else if (monster.cor < 90) return 1.3;
+		else return 1.4
 	}
 	
 	public static function omnicasterDamageFactor():Number {
@@ -197,27 +317,39 @@ public class AbstractSpell extends CombatAbility {
 		}
 	}
 	
+	public function calcBackfirePercent():int {
+		if (!canBackfire) return 0;
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		return backfire
+	}
+	
 	/**
 	 * Do a crit roll and apply crit multiplier.
-	 * Deal damage once or repeatedly (if Omnicaster). Does NOT apply Omnicaster damage downscale!
+	 * Deal damage once or repeatedly (if Omnicaster and param set). Does NOT apply Omnicaster damage downscale!
 	 * Also prints "Monster takes N N N N damage. Critical Hit!"
 	 * @param damage Damage to deal
 	 * @param damageType Damage type (DamageType.XXX)
+	 * @return {Number} Total damage dealt, with crit and omnicaster adjustment
 	 */
 	protected function critAndRepeatDamage(
 			display:Boolean,
 			damage:Number,
 			damageType:int,
 			displayDamageOnly:Boolean=false,
-			baseCritChance:Number=5,
-			critMultiplier:Number=1.75
-	):void {
+			omnicasterRepeat:Boolean=true
+	):Number {
 		if (display) {
-			outputText(monster.capitalA + monster.short + " takes ");
+			outputText("[Themonster] takes ");
 		}
 		//Determine if critical hit!
 		var crit:Boolean = false;
-		var critChance:int = baseCritChance + combatMagicalCritical();
+		var critChance:int = 5 + combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (critChance > 0 && rand(100) < critChance) {
 			crit = true;
@@ -227,7 +359,7 @@ public class AbstractSpell extends CombatAbility {
 		var damageFn:Function;
 		switch (damageType) {
 			case DamageType.FIRE:
-				damageFn =doFireDamage;
+				damageFn = doFireDamage;
 				break;
 			case DamageType.DARKNESS:
 				damageFn = doDarknessDamage;
@@ -245,13 +377,52 @@ public class AbstractSpell extends CombatAbility {
 			default:
 				damageFn = doDamage;
 		}
-		var repeats:int = omnicasterRepeatCount();
-		while (repeats-->0) {
+		var repeats:int = omnicasterRepeat ? omnicasterRepeatCount() : 1;
+		var i:int = repeats;
+		while (i-->0) {
 			damageFn(damage, true, display || displayDamageOnly);
 		}
 		if (display) {
 			outputText(" damage.");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
+		}
+		return damage*repeats;
+	}
+	
+	protected function backfireEffect(display:Boolean = true):void {
+		if (display) {
+			outputText("An errant sexual thought crosses your mind, and <b>you lose control of the spell!</b>  Your ");
+			switch (player.gender) {
+				case Gender.GENDER_NONE:
+					outputText("[asshole] tingles with a desire to be filled as your libido spins out of control.");
+					break;
+				case Gender.GENDER_MALE:
+					if (player.cockTotal() == 1) outputText("[cock] twitches obscenely and drips with pre-cum as your libido spins out of control.");
+					else outputText("[cocks] twitch obscenely and drip with pre-cum as your libido spins out of control.");
+					break;
+				case Gender.GENDER_FEMALE:
+					outputText("[vagina] becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+					break;
+				case Gender.GENDER_HERM:
+					outputText("[vagina] and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+					break;
+			}
+		}
+		dynStats("lib", .25, "lus", 15);
+	}
+	
+	/**
+	 * Do a backfire roll; if backfired, perform its effect
+	 * @return true Spell backfired, do not proceed with effect
+	 */
+	protected function backfired(display:Boolean):Boolean {
+		if (!backfireEnabled) return false;
+		var backfire:int = calcBackfirePercent();
+		if(rand(100) < backfire) {
+			backfireEffect(display);
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

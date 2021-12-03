@@ -21,8 +21,8 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		return player.hasStatusEffect(StatusEffects.KnowsMeteorShower);
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellMeteorShower)
+	override public function calcCooldown():int {
+		return 12;
 	}
 	
 	override protected function usabilityCheck():String {
@@ -39,10 +39,17 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		return "";
 	}
 	
+	override public function setCooldown():void {
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			super.setCooldown();
+		} else {
+			/* we're channeling, don't renew cooldown */
+		}
+	}
+	
 	override public function useResources():void {
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			super.useResources();
-			player.createStatusEffect(StatusEffects.CooldownSpellMeteorShower, 12, 0, 0, 0);
 		} else {
 			/* we're channeling, don't use mana */
 		}
@@ -70,19 +77,18 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 			outputText("[monster A] [monster name] takes ")
 		}
 		var meteor:Number = 12;
+		var totalDamage:Number = 0;
 		while (meteor-->0){
 			var damage:Number = calcDamage(monster);
-			critAndRepeatDamage(false, damage, DamageType.FIRE, true);
+			totalDamage += critAndRepeatDamage(false, damage, DamageType.FIRE, true);
 		}
 		if (display) {
 			outputText(" damage!");
-			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.");
+			outputText(" [Themonster] reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.");
 		}
-		damage *= 12;
-		damage *= omnicasterRepeatCount();
 		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
-		checkAchievementDamage(damage);
-		combat.heroBaneProc(damage);
+		checkAchievementDamage(totalDamage);
+		combat.heroBaneProc(totalDamage);
 	}
 	
 	public function meteorShowerChannel(display: Boolean = true):void {

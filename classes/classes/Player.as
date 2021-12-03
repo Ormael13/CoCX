@@ -67,6 +67,9 @@ use namespace CoC;
 	public class Player extends Character {
 
 		public function Player() {
+			for (var i:int = 0; i < CombatAbility.Registry.length; i++) {
+				cooldowns[i] = 0;
+			}
 			//Item things
 			itemSlot1 = new ItemSlotClass();
 			itemSlot2 = new ItemSlotClass();
@@ -145,6 +148,9 @@ use namespace CoC;
 		public var dualWFLevel:Number = 0;
 		public var dualWFXP:Number = 0;
 
+		//Combat ability cooldowns. Index is ability id.
+		public var cooldowns:/*int*/Array = [];
+		
 		//Herbalism attributes
 		public var herbalismLevel:Number = 0;
 		public var herbalismXP:Number = 0;
@@ -13389,6 +13395,7 @@ use namespace CoC;
 		{
 			var HPPercent:Number;
 			HPPercent = HP/maxHP();
+			resetCooldowns();
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
@@ -15259,6 +15266,11 @@ use namespace CoC;
 						return ability is klass && ability.isKnown
 					}
 			)
+		}
+		public function resetCooldowns():void {
+			for (var i:int = 0; i<cooldowns.length; i++) {
+				cooldowns[i] = 0;
+			}
 		}
 	}
 }

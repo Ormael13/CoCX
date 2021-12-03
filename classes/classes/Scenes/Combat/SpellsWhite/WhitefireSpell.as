@@ -37,20 +37,8 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx))
 	}
 	
-	override public function get currentCooldown():int {
-		return ex ?
-				player.statusEffectv1(StatusEffects.CooldownSpellWhitefire)
-				: player.statusEffectv1(StatusEffects.CooldownSpellWhitefireEx);
-	}
-	
-	override public function useResources():void {
-		super.useResources(); // mana is used in AbstractSpell
-		player.createStatusEffect(
-				ex ?
-						StatusEffects.CooldownSpellWhitefireEx
-						: StatusEffects.CooldownSpellWhitefire,
-				spellWhiteCooldown(),0,0,0
-		);
+	override public function calcCooldown():int {
+		return spellWhiteCooldown();
 	}
 	
 	/**
@@ -73,14 +61,13 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 		} else {
 			if (display) {
-				outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
+				outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and [themonster] is enveloped in a flash of white flames!\n");
 			}
 		}
 		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.FIRE);
+		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
