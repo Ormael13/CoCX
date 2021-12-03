@@ -293,7 +293,7 @@ package classes.Scenes.Places{
 		}
 
 		public function YesTentacleStage3():void {
-			if (player.hasCock() && !player.hasVagina){
+			if (player.hasCock() && !player.hasVagina()){
 				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
 						"\n\n\"<i>I see you have become as slutty and lusty for me as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
 						"You cheerfully nod, letting her put her loving tentacle back into your head, drooling at the mere thought of your mind becoming more lewd and obscene." +
@@ -369,7 +369,7 @@ package classes.Scenes.Places{
 				player.tailType = Tail.NONE;
 				player.balls = 0;
 				player.ballSize = 0;
-				player.shrinkTits(10);
+				player.shrinkTits();
 			}
 			else {
 				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
