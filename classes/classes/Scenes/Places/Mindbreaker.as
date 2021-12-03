@@ -29,6 +29,7 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_ISMB:int = 1;
 
 		public static var MindBreakerConvert:int;
+		public static var MindBreakerConvertGoal:int;
 		public static var MindBreakerGoblinConvert:int;
 		public static var MindBreakerFetishFemaleConvert:int;
 		public static var MindBreakerFetishMaleConvert:int;
@@ -52,6 +53,7 @@ package classes.Scenes.Places{
 			MindBreakerConvert = 0;
 			MindBreakerGoblinConvert = 0;
 			MindBreakerFetishFemaleConvert = 0;
+			MindBreakerConvertGoal = 20;
 			MindBreakerFetishMaleConvert = 0;
 			MindBreakerFullConvert = 0;
 			PlayerEggIsFertile = false;
@@ -64,6 +66,7 @@ package classes.Scenes.Places{
 				"stage": MindBreakerQuest,
 
 				"numberOfConvert": MindBreakerConvert,
+				"numberOfConvertGoal": MindBreakerConvertGoal,
 				"numberOfGoblinConvert": MindBreakerGoblinConvert,
 				"numberOfFetishFemaleConvert": MindBreakerFetishFemaleConvert,
 				"numberOfFetishMaleConvert": MindBreakerFetishMaleConvert,
@@ -83,6 +86,7 @@ package classes.Scenes.Places{
 				MindBreakerQuest = o["stage"];
 
 				MindBreakerConvert = o["numberOfConvert"];
+				MindBreakerConvertGoal = o["numberOfConvertGoal"];
 				MindBreakerGoblinConvert = o["numberOfGoblinConvert"];
 				MindBreakerFetishFemaleConvert = o["numberOfFetishFemaleConvert"];
 				MindBreakerFetishMaleConvert = o["numberOfFetishMaleConvert"];
@@ -525,6 +529,7 @@ package classes.Scenes.Places{
 			if (MindBreakerFetishMaleConvert == 1 && MindBreakerFetishFemaleConvert == 0) Choice = 1;
 			//this line is if I add a convert scene for goblin one day
 			//if (MindBreakerGoblinConvert == 1 && MindBreakerFetishMaleConvert == 0 && MindBreakerFetishFemaleConvert == 0) Choice = 2;
+			clearOutput();
 			if (Choice == 0){ //Female Scene
 				if (player.hasVagina()){
 					outputText("You visit ");
@@ -670,7 +675,7 @@ package classes.Scenes.Places{
 		}
 
 		public function PuppetMaster():void {
-
+			clearOutput();
 		}
 
 		public function FuckEveryFellower():void {
@@ -678,30 +683,61 @@ package classes.Scenes.Places{
 		}
 
 		public function BreakAPrisonner():void {
-
+			clearOutput();
+			var race:String = randomChoice("Cat Morph","Fox Morph","Ferret Morph","Dog Morph","Mouse Morph","Raccoon Morph","Lizan")
+			outputText("A scene grabs your attention at the back of the lair. It seems your many followers managed to capture an outsider. It’s a "+race+"" +
+					" who somehow managed to infiltrate the lair and obviously a female at that. You grin as a perverse idea crosses your mind." +
+					" You approach the prisoner and ask your followers if they have some hummus available to which one of them is quick to reply." +
+					"\n\n\"<i>I won’t ever talk, fiends, you're wasting your time torturing me!</i>\"" +
+					"\n\nOh, but you don’t need her to say anything. No... what you're interested in right now is her sexy body covered in fur… time to shave that!" +
+					" You insert your tentacle in the prisoner’s ears, forcing the trigger to open her mouth wide." +
+					" Her struggle is cut short by your ministration and you forcefully shoving the first chunk of hummus down her throat ordering her to eat and swallow." +
+					"\n\nShe quickly loses that animal face and fur of hers. These animals ears paw and this tail look cute and all but these just won’t do here in the lair." +
+					" You keep altering her perception as you keep feeding her more and more hummus until your victim is looking completely horrified at her now fully human body." +
+					"\n\n\"<i>You, big sister! W..what have you done to my now lovely human body?! I love you!</i>\"" +
+					"She suddenly closes her mouth, terrified at what she just said, as her own mind is betraying her, you sadisticaly whisper to her ears that you are just getting started" +
+					"\n\nGreen flashes run behind the woman’s eyes as you break down every single memory making her who she is and replace them with lewd vision of your own design, erasing her entire life within minutes." +
+					" She struggles for a moment against the brainwash, but as soon as you start adding the new memories her expression turns into that lovely, perverted, lascivious smile you have in all of your followers." +
+					" You cum green goo as the last of her memory is fully altered filling her mind with wild depraved fantasies featuring you and the sisterhood.");
+			MindBreakerFetishFemaleConvert ++;
 			MindBreakerConvert ++;
+			if (MindBreakerConvert == MindBreakerConvertGoal) MindbreakerBrainEvolution(false);
+				outputText("\n\n With her mind now fully fixed to your liking your newest acolyte voices up her need. \n\n\"<i>Big ");
+				if (player.hasCock()) outputText("sister ");
+				if (player.hasCock()) outputText("brother ");
+				outputText("[name] why am I tied?</i>\"" +
+						"You sternly tell her she did something very bad and needs to be punished her emotive response at your chastising is immediate and appropriate." +
+						" You have a dildo brought to you and you begin fucking the whore in earnest and groping her breast, teaching her the pleasures of the flesh like you did her mind to forever ingrain these feelings in her." +
+						" You make her cum until she’s half-broken from the delicious torture, then set her free to join the others." +
+						" She surpasses expectations and jumps the nearest man, straddling him right away.");
+
+			outputText("You smirk delighted at your work and head back to the lair commons");
+
 		}
 
-		public function MindbreakerBrainEvolution():void {
+		public function MindbreakerBrainEvolution(isOutOfCave:Boolean = true):void {
+
 			outputText("\n\nAs you finish converting this new recruit to the sisterhood you are suddenly rocked to the core by a spike of pleasure, your mind expanding with new psychic powers as your body spontaneously cum splashing the ground beneath you green with eldritch slime." +
 					" Fully overcome by desire you order your newest disciple to kneel in front of you as you begin to fiercely masturbate, cumming over and over again and covering the convert with so much fluid one might mistake them for a slime monster." +
 					" All the while your newest disciple smiles in awe and pleasure as you baptise your newest adept with your blighted juices spontanously cuming from the psychic feedback your powers relay back to it's addled brain." +
 					" In need of more you firmly shove your");
 			if (player.hasCock())outputText(" cock");
 			if (player.hasVagina())outputText(" cunt");
-			outputText(" into the adept mouth letting your new pet do wonders with its tongue and flooding its throat with green sludge." +
-					"\n\nOnly as you reach your tenth orgasm do you relent, ordering your dazed toy to head to the cave where Kaerb Dnim will provide it with further training." +
-
-					"\n\nYour overloaded brain seems to have changed, improved as your thoughts are now more lewd, more obscene, more perfect. You are getting closer to the truth.");
+			outputText(" into the adept mouth letting your new pet do wonders with its tongue and flooding its throat with green sludge.\n\nOnly as you reach your tenth orgasm do you relent")
+			if (isOutOfCave) outputText(", ordering your dazed toy to head to the cave where Kaerb Dnim will provide it with further training.");
+			else outputText(".");
+			outputText(" \n\nYour overloaded brain seems to have changed, improved as your thoughts are now more lewd, more obscene, more perfect. You are getting closer to the truth. ");
 			if (!player.hasPerk(PerkLib.MindbreakerBrain1toX)){
 				outputText("<b>You acquired the Perk Mindbreaker Brain</b>.");
 				player.createPerk(PerkLib.MindbreakerBrain1toX,1,0,0,0);
 			}
 			else{
-				outputText("<b>Your brain and psionic powers have expended!</b>.");
+				outputText("<b>Your psionic powers have expended!</b>.");
 				var newRank:int = player.perkv1(PerkLib.MindbreakerBrain1toX)+1;
 				player.setPerkValue(PerkLib.MindbreakerBrain1toX,1,newRank);
 			}
+			MindBreakerConvertGoal = MindBreakerConvert+20;
+			if (isOutOfCave) outputText("\n\nToroughly satisfied by this new change you head back to camp.");
 		}
 
 	}

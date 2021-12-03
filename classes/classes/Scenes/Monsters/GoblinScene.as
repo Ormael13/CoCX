@@ -606,7 +606,7 @@ public class GoblinScene extends BaseContent
 					" Satisfied with what you saw, you lock an image of Kaerb-Dnim's cave within her mind and let her go, knowing full well she will head there at the first opportunity.");
 			Mindbreaker.MindBreakerGoblinConvert ++;
 			Mindbreaker.MindBreakerConvert ++;
-			if (Mindbreaker.MindBreakerConvert >= 20) mindbreakerscene.MindbreakerBrainEvolution();
+			if (Mindbreaker.MindBreakerConvert == Mindbreaker.MindBreakerConvertGoal) mindbreakerscene.MindbreakerBrainEvolution();
 			else outputText("\n\nYou drop the unconscious goblin on the ground heading back to your camp, still giggling at your new acquisition.");
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();

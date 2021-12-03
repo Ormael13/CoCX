@@ -1972,6 +1972,11 @@
                 <show part="wings/atlach"/>
 				<show part="wings_bg/atlach"/>
             </case>
+			<case values="RearBody.MINDBREAKER">
+                <show part="neck/mindbreaker"/>
+				<show part="clothCape/mindbreaker"/>
+				<show part="clothCape_bg/mindbreaker"/>
+            </case>
             <default>
             </default>
         </switch>
@@ -2100,6 +2105,18 @@
                         </default>
                     </switch>
                 </case>
+				<case values="Hair.MINDBREAKER">
+					<switch>
+                        <case test="hairLength lt 16">
+							<show part="hair/mindbreaker"/>
+							<show part="hair_bg/mindbreaker"/>
+                        </case>
+                        <default>
+                            <show part="hair/mindbreaker"/>
+							<show part="hair_bg/mindbreaker"/>
+                        </default>
+                    </switch>
+                </case>
 
                 <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
                     <switch>
@@ -2119,7 +2136,7 @@
 		<!-- HAIR STYLE AREA -->
 		<if test="hairLength &gt; 0">
             <if test="hairType != Hair.FLUFFY and hairType != Hair.GORGON and hairType != Hair.ANEMONE and hairType != Hair.GOO">
-                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
+                <if test="hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                     <if test="hairStyle != Hair.PLAIN">
                         <hide part="hair/0"/>
                         <hide part="hair_bg/02"/>
@@ -2187,7 +2204,7 @@
 						<show part="hair_bg/02"/>
                     </case>
                     <default>
-                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
+                        <if test="hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                             <switch>
                                 <case test="hairLength lt 16">
                                     <hide part="hair/*"/>
@@ -2511,6 +2528,10 @@
             <case values="Arms.HARPY,Arms.PHOENIX">
                 <show part="hands/harpy"/>
                 <show part="hands_bg/harpy"/>
+            </case>
+			<case values="Arms.MINDBREAKER=">
+                <show part="hands/mindbreaker"/>
+                <show part="hands_bg/mindbreaker"/>
             </case>
 			<case values="Arms.GHOST">
 				<if test="femininity &gt;=40">
@@ -3029,6 +3050,10 @@
             <case values="LowerBody.FROSTWYRM">
                 <hide part="legs/*"/>
                 <show part="legs/frostWyrm"/>
+            </case>
+			<case values="LowerBody.MINDBREAKER">
+                <hide part="legs/*"/>
+                <show part="legs/mindbreaker"/>
             </case>
             <case values="LowerBody.CANCER">
                 <hide part="legs/*"/>
