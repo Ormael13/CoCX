@@ -10103,7 +10103,7 @@ use namespace CoC;
 		}
 
 		public function FemaleMindbreakerScore():Number {
-			Begin("Player","racialScore","manticore");
+			Begin("Player","racialScore","Mindbreaker");
 			var femaleMindbreakerCounter:Number = 0;
 			if (faceType == Face.HUMAN)
 				femaleMindbreakerCounter++;
@@ -10129,7 +10129,7 @@ use namespace CoC;
 				femaleMindbreakerCounter++;
 			if ((hairType == Hair.MINDBREAKER) && hairColor == "purple")
 				femaleMindbreakerCounter++;
-			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white"])))
+			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white", "light purple"])))
 				femaleMindbreakerCounter++;
 			if (skinAdj == "slippery")
 				femaleMindbreakerCounter ++;
@@ -10148,6 +10148,54 @@ use namespace CoC;
 			femaleMindbreakerCounter = finalRacialScore(femaleMindbreakerCounter, Race.FMINDBREAKER);
 			End("Player","racialScore");
 			return femaleMindbreakerCounter;
+		}
+
+		public function MaleMindbreakerScore():Number {
+			Begin("Player","racialScore","Mindbreaker");
+			var MaleMindbreakerCounter:Number = 0;
+			if (faceType == Face.HUMAN)
+				MaleMindbreakerCounter++;
+			if (eyes.type == Eyes.MINDBREAKERMALE)
+				MaleMindbreakerCounter++;
+			if (eyes.colour == (InCollection(eyes.colour, ["yellow", "orange", "light green"])))
+				MaleMindbreakerCounter++;
+			if (ears.type == Ears.HUMAN)
+				MaleMindbreakerCounter++;
+			if (tailType == Tail.NONE)
+				MaleMindbreakerCounter ++;
+			if (rearBody.type == RearBody.MINDBREAKER)
+				MaleMindbreakerCounter+= 2;
+			if (arms.type == Arms.MINDBREAKER)
+				MaleMindbreakerCounter++;
+			if (lowerBody == LowerBody.MINDBREAKERMALE)
+				MaleMindbreakerCounter++;
+			if (tongue.type == Tongue.MINDBREAKERMALE)
+				MaleMindbreakerCounter++;
+			if (wings.type == Wings.NONE)
+				MaleMindbreakerCounter += 4;
+			if (countCocksOfType(CockTypesEnum.MINDBREAKER) > 0)
+				MaleMindbreakerCounter++;
+			if ((hairType == Hair.MINDBREAKERMALE) && hairColor == "purple")
+				MaleMindbreakerCounter++;
+			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white", "light purple"])))
+				MaleMindbreakerCounter++;
+			if (skinAdj == "slippery")
+				MaleMindbreakerCounter ++;
+			if (hasPerk(PerkLib.Insanity))
+				MaleMindbreakerCounter++;
+			if (hasPerk(PerkLib.MindbreakerBrain1toX))
+				MaleMindbreakerCounter+= perkv1(PerkLib.MindbreakerBrain1toX);
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				MaleMindbreakerCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && MaleMindbreakerCounter >= 4)
+				MaleMindbreakerCounter++;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && MaleMindbreakerCounter >= 8)
+				MaleMindbreakerCounter += 1;
+			if (isGargoyle()) MaleMindbreakerCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) MaleMindbreakerCounter = 0;
+			MaleMindbreakerCounter = finalRacialScore(MaleMindbreakerCounter, Race.MMINDBREAKER);
+			End("Player","racialScore");
+			return MaleMindbreakerCounter;
 		}
 
 		//Red Panda

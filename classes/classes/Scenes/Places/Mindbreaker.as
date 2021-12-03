@@ -293,65 +293,145 @@ package classes.Scenes.Places{
 		}
 
 		public function YesTentacleStage3():void {
-			outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
-					"\n\n\"<i>I see you have become as slutty and lusty for me as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
-					"\n\nYou cheerfully nod, letting her put her loving tentacle back into your head, drooling at the mere thought of your mind becoming more lewd and obscene. This drives you to the edge, making you cum spontaneously as you feel your mind being probed again. Squelch squelch squelch is all you hear for a few seconds, and you shake your head as lights flash behind your eyelids. You think you are still shaking but you lack feedback from your body. A green song knits loud spaghetti and asks you in reverse when Snowball is." +
-					"\n\n\"<i>Woefully inadequate</i>\", you hear yourself say, not feeling your mouth at all. Kaerb-Dnim laughs." +
-					" You laugh yet again as she kisses you, her tentacle coiling around your breasts, tweaking your nipples as you fiercely masturbate under her guidance." +
-					" Soon Kaerb-Dnim guides you down to the ground and proceeds to grind her lovely purple pussy against your snatch, locking your legs against hers." +
-					" The pair of you grind for several minutes, your pussies sliding against each other until Kaerb-Dnim finally cums." +
-					"\n\nSomething, not unlike a mass of tentacles, slides between her pussy and yours, and you gleefully let it in, orgasming as it squirms inside you for a minute and heads past your cervix to settle in your womb, depositing something." +
-					" She finally breaks away from you, her lovely tentacles retreating back out of your oozing snatch." +
-					"\n\n\"<i>We can finally be true sisters, [name], isn’t that wonderful?</i>\"" +
-					"You only understand everything a few seconds later as you start shaking uncontrollably in pleasure. Being a true sister to Kaerb-Dnim?" +
-					" What a wonderful thing! You’re so happy this is happening to you as you feel something hatch within you." +
-					"Your womb aches and tingles pleasurably just as you start changing. It feels so good to be entirely remade from the inside and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim, and begins spreading from your belly. \n" +
-					"You moan in delight as your hair falls from your head, and are replaced by purple tentacles of various size, which you use to fuck your own brain right away." +
-					" You open your many new eyes located on your tentacles smiling blissfully as the thing below your waist shifts into eight tentacles webbed to each other like a nightdress." +
-					" Your chest is left somewhat intact, although you are covered with a webbed exoskeleton, similar to your legs." +
-					" From afar, one would think you're wearing a gothic leather dress until they'd notice it's a part of your body." +
-					" You moan in delight, groping your own breast at the pleasure of your new, lewd and corrupted body. Kaerb-Dnim closes in on you as you molest yourself." +
-					"\n\n\"<i>You enjoy it, don’t you? Don’t you pity those that can’t enjoy such sensations?</i>\"" +
-					"You giggle lustfully understanding her request right away. \"<i>Yes sister, I think everyone in Mareth and beyond should live like this.</i>\"" +
-					"\n\nA wicked plan starts to form in your mind. You imagine everyone living in an endless orgy of constant mind-shattering pleasure as you create an entire sorority of creatures like you." +
-					" The entire world is now playing the game, a game you and sister Kaerb-Dnim truly share now. You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
-					" It’s high time you get out and find more willing or unwilling people to join in on your perverted games. Then, once you have achieved greater numbers, you can paint Mareth green and white with fluids." +
-					"\n\n<b>You now are a Mindbreaker!</b>");
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.sexReward("default", "Vaginal", true, false);
-			player.ears.type = Ears.HUMAN;
-			player.eyes.type = Eyes.MINDBREAKER;
-			player.eyes.colour = randomChoice("yellow", "orange", "light green");
-			player.faceType = Face.HUMAN;
-			player.tongue.type = Tongue.MINDBREAKER;
-			player.arms.type = Arms.MINDBREAKER;
-			player.lowerBody = LowerBody.MINDBREAKER;
-			player.hairType = Hair.MINDBREAKER;
-			player.rearBody.type = RearBody.MINDBREAKER;
-			if (player.legCount != 8) player.legCount = 8;
-			player.wings.type = Wings.NONE;
-			if (!player.hasVagina()) player.createVagina();
-			player.vaginaType(14);
-			player.skin.base.color = randomChoice("pale", "ghostly white");
-			player.skinAdj = "slippery";
-			player.skinType = Skin.PLAIN;
-			player.tone = 0;
-			player.thickness = 20;
-			player.femininity = 80;
-			player.horns.type = Horns.NONE;
-			player.antennae.type = Antennae.NONE;
-			player.tailType = Tail.NONE;
-			player.femininity = 80;
-			player.killCocks(player.cocks.length);
-			player.balls = 0;
-			player.ballSize = 0;
-			if (player.breastRows.length >= 2) player.removeBreastRow(player.breastRows.length - 1,player.breastRows.length-1);
-			if (player.biggestTitSize() <= 4){
-				var sizeIncrement:Number = 5-player.biggestTitSize();
-				player.growTits(sizeIncrement, 1, false, 3)
+			if (player.hasCock() && !player.hasVagina){
+				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
+						"\n\n\"<i>I see you have become as slutty and lusty for me as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
+						"You cheerfully nod, letting her put her loving tentacle back into your head, drooling at the mere thought of your mind becoming more lewd and obscene." +
+						" This drives you to the edge, making you cum spontaneously as you feel your mind being probed again." +
+						" Squelch squelch squelch is all you hear for a few seconds, and you shake your head as lights flash behind your eyelids." +
+						" You think you are still shaking but you lack feedback from your body. Two times did the cheese fly to the soul by song, alas she never did lick that limp noodle." +
+						"\n\n\"<i>Woefully inadequate</i>\", you hear yourself say, once again, it comes from you, yet it feels like you’re not speaking." +
+						" Kaerb-Dnim laughs. You laugh, yet again as she kisses you, her tentacle coiling around your breasts], tweaking your nipples as you fiercely masturbate under her guidance." +
+						" Soon Kaerb-Dnim guides you down to the ground and proceeds to grind her lovely purple pussy against your [cock], locking your legs against hers." +
+						" She grinds against you, hotdogging your [cock] along the lips of her snatch until she finally cums." +
+						"\n\nSomething, not unlike a mass of tentacles, slides between her pussy and your length." +
+						" You gleefully allow her to continue, cumming as the many tentacles squirm and stroke your flesh." +
+						" You can faintly feel her prod at the tip of your cumslit, slowly inserting something down your urethra." +
+						" She finally breaks away from you, her lovely tentacles retreating away from your [cock]." +
+						"\n\n\"<i>We can finally be true siblings, [name], isn’t that wonderful?</i>\"" +
+						"You only understand everything a few seconds later as you start shaking uncontrollably in pleasure." +
+						" Being a true brother to Kaerb-Dnim? What a wonderful thing! You’re so happy this is happening to you as you feel something hatch within you." +
+						"\n\nYour balls ache, tingling pleasurably just as you start changing." +
+						" It feels so good to be entirely remade from the inside and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim." +
+						" The colors begin spreading from your belly across your entire body." +
+						"\n\nYou moan in delight as your hair falls from your head, and are replaced by purple tentacles of various sizes, along them a web-like frills wrap around your head, silhouetting the shape of a crown." +
+						" You open your eyes, but are aware of a third one above your normal pair." +
+						" You realize your view is obstructed slightly by something in front of your face." +
+						" Above your mouth you’ve sprouted several prehensile tentacles, of which you can easily wrap around your prey, giving you the chance to use your newly acquired tentacle-like tongue." +
+						" Your cock aches slightly as they are internal and very slimy." +
+						" Your balls, despite being concealed with your tapered penis in your genital slit, ache with intensity;" +
+						" your penis constantly leaks a continuous fountain of cum, filling your slit past capacity and making an obscene puddle beneath you." +
+						" Your chest is completely flat and with notable athletic tone, although you are covered with a webbed exoskeleton." +
+						" From afar, one would think you're wearing a gothic leather cape until they'd notice it's a part of your body." +
+						" You moan in delight as your cum leaking cock erupts from its slit at full mast, you reflexively bring your hand down to stroke." +
+						" Despite the fountain of cum, your legs shake as your orgasm intensifies, spilling liters of cum onto Kaerb-Dnim and the floor beneath you." +
+						" Kaerb-Dnim closes in on you as you molest yourself."+
+						"\n\n\"<i>You enjoy it, don’t you? Don’t you pity those that can’t enjoy such sensations?</i>\"" +
+						"You moan lustfully understanding her request right away.\"<i>Yes sister, I think everyone in Mareth and beyond should live like this.</i>\"" +
+						"\n\nAs an alpha male your job is to inseminate the females so that they can lay eggs and infest new lifeforms, a most important duty." +
+						" While any males can properly fertilise a mindbreaker egg the chances of success are rather slim." +
+						" Unlike some random minotaur up these mountains, your cum is particularly fertile and suited to this task" +
+						" While females typicaly leads the sorority you might as well be higher in rank then most of them an honor only you the chosen male will get." +
+						" How Kaerb-Dnim found this one egg she gave you you got no idea but likely she had it for a long while and just ned a proper host, an host such as you to lay it." +
+						" A wicked plan starts to form in your mind as you begin to plan out how to get new hosts." +
+						" You imagine everyone living in an endless orgy of constant mind-shattering pleasure as you create an entire sorority of creatures like you." +
+						" The entire world is now playing the game, a game you and sister Kaerb-Dnim truly share now." +
+						" You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
+						" It’s high time you get out and find more willing or unwilling people to join in on your perverted games." +
+						" Then, once you have achieved greater numbers, you can paint Mareth green and white with fluids.");
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.ears.type = Ears.HUMAN;
+				player.eyes.type = Eyes.MINDBREAKERMALE;
+				player.eyes.colour = randomChoice("yellow", "orange", "light green");
+				player.hairColor = "purple";
+				player.faceType = Face.HUMAN;
+				player.tongue.type = Tongue.MINDBREAKERMALE;
+				player.arms.type = Arms.MINDBREAKER;
+				player.lowerBody = LowerBody.MINDBREAKERMALE;
+				player.hairType = Hair.MINDBREAKERMALE;
+				player.rearBody.type = RearBody.MINDBREAKER;
+				if (player.legCount != 8) player.legCount = 8;
+				player.wings.type = Wings.NONE;
+				if (!player.hasVagina()) player.createVagina();
+				player.cocks[1].cockType = CockTypesEnum.MINDBREAKER;
+				player.skin.base.color = randomChoice("pale", "ghostly white", "light purple");
+				player.skinAdj = "slippery";
+				player.skinType = Skin.PLAIN;
+				player.tone = 100;
+				player.thickness = 20;
+				player.femininity = 0;
+				player.horns.type = Horns.NONE;
+				player.antennae.type = Antennae.NONE;
+				player.tailType = Tail.NONE;
+				player.balls = 0;
+				player.ballSize = 0;
+				player.shrinkTits(10);
+			}
+			else {
+				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
+						"\n\n\"<i>I see you have become as slutty and lusty for me as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
+						"\n\nYou cheerfully nod, letting her put her loving tentacle back into your head, drooling at the mere thought of your mind becoming more lewd and obscene. This drives you to the edge, making you cum spontaneously as you feel your mind being probed again. Squelch squelch squelch is all you hear for a few seconds, and you shake your head as lights flash behind your eyelids. You think you are still shaking but you lack feedback from your body. A green song knits loud spaghetti and asks you in reverse when Snowball is." +
+						"\n\n\"<i>Woefully inadequate</i>\", you hear yourself say, not feeling your mouth at all. Kaerb-Dnim laughs." +
+						" You laugh yet again as she kisses you, her tentacle coiling around your breasts, tweaking your nipples as you fiercely masturbate under her guidance." +
+						" Soon Kaerb-Dnim guides you down to the ground and proceeds to grind her lovely purple pussy against your snatch, locking your legs against hers." +
+						" The pair of you grind for several minutes, your pussies sliding against each other until Kaerb-Dnim finally cums." +
+						"\n\nSomething, not unlike a mass of tentacles, slides between her pussy and yours, and you gleefully let it in, orgasming as it squirms inside you for a minute and heads past your cervix to settle in your womb, depositing something." +
+						" She finally breaks away from you, her lovely tentacles retreating back out of your oozing snatch." +
+						"\n\n\"<i>We can finally be true sisters, [name], isn’t that wonderful?</i>\"" +
+						"You only understand everything a few seconds later as you start shaking uncontrollably in pleasure. Being a true sister to Kaerb-Dnim?" +
+						" What a wonderful thing! You’re so happy this is happening to you as you feel something hatch within you." +
+						"Your womb aches and tingles pleasurably just as you start changing. It feels so good to be entirely remade from the inside and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim, and begins spreading from your belly. \n" +
+						"You moan in delight as your hair falls from your head, and are replaced by purple tentacles of various size, which you use to fuck your own brain right away." +
+						" You open your many new eyes located on your tentacles smiling blissfully as the thing below your waist shifts into eight tentacles webbed to each other like a nightdress." +
+						" Your chest is left somewhat intact, although you are covered with a webbed exoskeleton, similar to your legs." +
+						" From afar, one would think you're wearing a gothic leather dress until they'd notice it's a part of your body." +
+						" You moan in delight, groping your own breast at the pleasure of your new, lewd and corrupted body. Kaerb-Dnim closes in on you as you molest yourself." +
+						"\n\n\"<i>You enjoy it, don’t you? Don’t you pity those that can’t enjoy such sensations?</i>\"" +
+						"You giggle lustfully understanding her request right away. \"<i>Yes sister, I think everyone in Mareth and beyond should live like this.</i>\"" +
+						"\n\nA wicked plan starts to form in your mind. You imagine everyone living in an endless orgy of constant mind-shattering pleasure as you create an entire sorority of creatures like you." +
+						" The entire world is now playing the game, a game you and sister Kaerb-Dnim truly share now. You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
+						" It’s high time you get out and find more willing or unwilling people to join in on your perverted games. Then, once you have achieved greater numbers, you can paint Mareth green and white with fluids." +
+						"\n\n<b>You now are a Mindbreaker!</b>");
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.sexReward("default", "Vaginal", true, false);
+				player.ears.type = Ears.HUMAN;
+				player.eyes.type = Eyes.MINDBREAKER;
+				player.eyes.colour = randomChoice("yellow", "orange", "light green");
+				player.hairColor = "purple";
+				player.faceType = Face.HUMAN;
+				player.tongue.type = Tongue.MINDBREAKER;
+				player.arms.type = Arms.MINDBREAKER;
+				player.lowerBody = LowerBody.MINDBREAKER;
+				player.hairType = Hair.MINDBREAKER;
+				player.rearBody.type = RearBody.MINDBREAKER;
+				if (player.legCount != 8) player.legCount = 8;
+				player.wings.type = Wings.NONE;
+				if (!player.hasVagina()) player.createVagina();
+				player.vaginaType(14);
+				player.skin.base.color = randomChoice("pale", "ghostly white", "light purple");
+				player.skinAdj = "slippery";
+				player.skinType = Skin.PLAIN;
+				player.tone = 0;
+				player.thickness = 20;
+				player.femininity = 80;
+				player.horns.type = Horns.NONE;
+				player.antennae.type = Antennae.NONE;
+				player.tailType = Tail.NONE;
+				player.killCocks(player.cocks.length);
+				player.balls = 0;
+				player.ballSize = 0;
+				if (player.breastRows.length >= 2) player.removeBreastRow(player.breastRows.length - 1,player.breastRows.length-1);
+				if (player.biggestTitSize() <= 4){
+					var sizeIncrement:Number = 5-player.biggestTitSize();
+					player.growTits(sizeIncrement, 1, false, 3)
+				}
 			}
 			player.createPerk(PerkLib.Insanity,0,0,0,0);
 			//player.createPerk(PerkLib.Psionic Empowerment,0,0,0,0);

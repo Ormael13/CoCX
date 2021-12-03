@@ -98,6 +98,7 @@ public class Race {
     public static const WOODELF:Race      = new Race("Wood Elf",92, "woodElfScore");
     public static const SEA_DRAGON:Race = new Race("Sea Dragon",93, "leviathanScore");
     public static const FMINDBREAKER:Race = new Race("Female Mind Breaker",94, "FemaleMindbreakerScore");
+    public static const MMINDBREAKER:Race = new Race("Male Mind Breaker",95, "MaleMindbreakerScore");
 
     public var name:String;
     public var id:int;

@@ -773,6 +773,7 @@
         <cell rect="481,136,59,65" name="hair/ratatoskr" dx="75" dy="21"/>
         <cell rect="541,136,59,65" name="hair_bg/ratatoskr" dx="75" dy="21"/>
 		<cell rect="601,136,59,65" name="hair/mindbreaker" dx="73" dy="24"/>
+		<cell rect="661,136,59,65" name="hair/mindbreakerMale" dx="73" dy="24"/>
         <cell rect="121,70,59,65" name="hair/gorgon" dx="75" dy="21"/>
         <cell rect="121,136,59,65" name="hair_bg/gorgon" dx="75" dy="21"/>
         <cell rect="1,251,89,98" name="hair/slime" dx="60" dy="4"/>
@@ -837,6 +838,7 @@
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
         <cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
+		<cell rect="691,110,29,32" name="face/mindbreakerMale" dx="90" dy="50"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -852,6 +854,7 @@
         <cell rect="361,150,29,32" name="eyes/caveWyrm" dx="90" dy="37"/>
         <cell rect="391,150,29,32" name="eyes/gazer" dx="90" dy="37"/>
         <cell rect="421,150,29,32" name="eyes/gremlin" dx="90" dy="37"/>
+		<cell rect="481,150,29,32" name="eyes/mindbreakerMale" dx="90" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="90" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="90" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="75" dy="36"/>
@@ -1912,6 +1915,9 @@
 			<case values="Eyes.MONOEYE">
                 <show part="eyes/gazer"/>
             </case>
+			<case values="Eyes.MINDBREAKERMALE">
+                <show part="eyes/mindbreakerMale"/>
+            </case>
             <default>
                 <show part="eyes/human"/>
             </default>
@@ -2117,6 +2123,18 @@
                         </default>
                     </switch>
                 </case>
+				<case values="Hair.MINDBREAKERMALE">
+					<switch>
+                        <case test="hairLength lt 16">
+							<show part="hair/mindbreakerMale"/>
+							<show part="hair_bg/mindbreakerMale"/>
+                        </case>
+                        <default>
+                            <show part="hair/mindbreakerMale"/>
+							<show part="hair_bg/mindbreakerMale"/>
+                        </default>
+                    </switch>
+                </case>
 
                 <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
                     <switch>
@@ -2136,7 +2154,7 @@
 		<!-- HAIR STYLE AREA -->
 		<if test="hairLength &gt; 0">
             <if test="hairType != Hair.FLUFFY and hairType != Hair.GORGON and hairType != Hair.ANEMONE and hairType != Hair.GOO">
-                <if test="hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
+                <if test="hairType != Hair.MINDBREAKERMALE and hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                     <if test="hairStyle != Hair.PLAIN">
                         <hide part="hair/0"/>
                         <hide part="hair_bg/02"/>
@@ -2204,7 +2222,7 @@
 						<show part="hair_bg/02"/>
                     </case>
                     <default>
-                        <if test="hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
+                        <if test="hairType != Hair.MINDBREAKERMALE and hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                             <switch>
                                 <case test="hairLength lt 16">
                                     <hide part="hair/*"/>
@@ -2332,6 +2350,10 @@
 				<if test="skin.base.type == Skin.GOO">
 					<hide part="face/*"/>
 					<show part="face/goo"/>
+				</if>
+				<if test="tongue.type == Tongue.MINDBREAKERMALE">
+					<hide part="face/*"/>
+					<show part="face/mindbreakerMale"/>
 				</if>
             </case>
             <case values="Face.HORSE,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
