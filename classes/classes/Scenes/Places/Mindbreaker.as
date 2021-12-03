@@ -367,9 +367,10 @@ package classes.Scenes.Places{
 				player.horns.type = Horns.NONE;
 				player.antennae.type = Antennae.NONE;
 				player.tailType = Tail.NONE;
-				player.balls = 0;
-				player.ballSize = 0;
-				player.shrinkTits();
+				player.balls = 2;
+				player.ballSize = 4;
+				while (player.breastRows.length > 1) player.removeBreastRow(player.breastRows.length - 1, 1);
+				player.biggestTitSize = 0;
 			}
 			else {
 				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
