@@ -372,7 +372,7 @@ package classes.Scenes.Places{
 				if (player.cocks[0].cockLength < 36){
 					player.increaseCock(0, 2 + rand(8));
 					player.cocks[0].thickenCock(1);
-				} 
+				}
 				while (player.breastRows.length > 1) player.removeBreastRow(player.breastRows.length - 1, 1);
 				while (player.biggestTitSize() >= 1) player.shrinkTits();
 			}
