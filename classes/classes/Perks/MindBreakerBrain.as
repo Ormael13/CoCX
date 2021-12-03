@@ -15,19 +15,19 @@ package classes.Perks
 		}
 
 		override public function name(params:PerkClass=null):String {
-			if (params.value1 == 5) {
+			if (params.value1 >= 4) {
 				return "Mindbreaker Brain Prime";
 			}
-			if (params.value1 == 4) {
+			if (params.value1 == 3) {
 				return "Mindbreaker Brain Omega";
 			}
-			if (params.value1 == 3) {
+			if (params.value1 == 2) {
 				return "Mindbreaker Brain Alpha";
 			}
-			if (params.value1 == 2) {
+			if (params.value1 == 1) {
 				return "Mindbreaker Brain Beta";
 			}
-			if (params.value1 == 1) {
+			if (params.value1 == 0) {
 				return "Mindbreaker Brain";
 			}
 		}

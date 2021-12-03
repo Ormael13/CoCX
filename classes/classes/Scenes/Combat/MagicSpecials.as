@@ -4731,7 +4731,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) damage*=1+(0.5*player.perkv1(PerkLib.MindbreakerBrain1toX));
+		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) damage*=1+(0.5*(1+player.perkv1(PerkLib.MindbreakerBrain1toX)));
 		damage = Math.round(damage);
 		outputText("Your third eye opens wide and glow a vicious green as you viciously impale " + monster.a + monster.short + "’s mind with a mental spike.");
 		doTrueDamage(damage, true, true);
@@ -4747,7 +4747,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//cooldown 8 round
 		var duration:int = 2;
 		var PsionicEmpowermentBonus:int = 0;
-		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) PsionicEmpowermentBonus = player.perkv1(PerkLib.MindbreakerBrain1toX)/2;
+		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) PsionicEmpowermentBonus = (1+player.perkv1(PerkLib.MindbreakerBrain1toX))/2;
 		if (PsionicEmpowermentBonus < 1) PsionicEmpowermentBonus=0;
 		if (PsionicEmpowermentBonus > 5) PsionicEmpowermentBonus=5;
 		PsionicEmpowermentBonus = Math.round(PsionicEmpowermentBonus);
@@ -4764,7 +4764,7 @@ public class MagicSpecials extends BaseCombatContent {
 		useMana(100, USEFATG_MAGIC_NOBM);
 		var numberOfImage:int = Math.round(player.inte/100);
 		var PsionicEmpowermentBonus:int = 0;
-		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) PsionicEmpowermentBonus = player.perkv1(PerkLib.MindbreakerBrain1toX)/2;
+		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) PsionicEmpowermentBonus = (1+player.perkv1(PerkLib.MindbreakerBrain1toX))/2;
 		if (PsionicEmpowermentBonus < 1) PsionicEmpowermentBonus=0;
 		if (PsionicEmpowermentBonus > 10) PsionicEmpowermentBonus=10;
 		PsionicEmpowermentBonus = Math.round(PsionicEmpowermentBonus);

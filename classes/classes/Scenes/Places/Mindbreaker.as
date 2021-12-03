@@ -693,14 +693,14 @@ package classes.Scenes.Places{
 					"\n\nOnly as you reach your tenth orgasm do you relent, ordering your dazed toy to head to the cave where Kaerb Dnim will provide it with further training." +
 
 					"\n\nYour overloaded brain seems to have changed, improved as your thoughts are now more lewd, more obscene, more perfect. You are getting closer to the truth.");
-			if (!player.hasPerk(PerkLib.MindbreakerBrain1to3)){
+			if (!player.hasPerk(PerkLib.MindbreakerBrain1toX)){
 				outputText("<b>You acquired the Perk Mindbreaker Brain</b>.");
-				player.createPerk(PerkLib.MindbreakerBrain1to3,1,0,0,0);
+				player.createPerk(PerkLib.MindbreakerBrain1toX,1,0,0,0);
 			}
 			else{
 				outputText("<b>Your brain and psionic powers have expended!</b>.");
-				var newRank:int = player.perkv1(PerkLib.MindbreakerBrain1to3)+1;
-				player.setPerkValue(PerkLib.MindbreakerBrain1to3,1,newRank);
+				var newRank:int = player.perkv1(PerkLib.MindbreakerBrain1toX)+1;
+				player.setPerkValue(PerkLib.MindbreakerBrain1toX,1,newRank);
 			}
 		}
 
