@@ -165,6 +165,7 @@
             <color name="platinum-blonde">#ffe5c7</color>
             <color name="purplish-black">#7d597a</color>
             <color name="dark purple">#a700bd</color>
+			<color name="eldritch purple">#7a5f95</color>
             <color name="quartz white">#ffffff</color>
             <color name="pure white">#ffffff</color>
             <color name="reddish-orange">#df8453</color>
@@ -838,7 +839,7 @@
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
         <cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
-		<cell rect="691,110,29,32" name="face/mindbreakerMale" dx="90" dy="50"/>
+		<cell rect="691,110,29,32" name="antennae/mindbreakerMale" dx="90" dy="50"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -977,6 +978,7 @@
         <cell rect="361,230,49,58" name="penis/chitinbig" dx="78" dy="106"/>
         <cell rect="561,290,49,35" name="penis/caveWyrm" dx="78" dy="106"/>
         <cell rect="561,230,49,58" name="penis/caveWyrmbig" dx="77" dy="108"/>
+		<cell rect="461,200,49,29" name="penis/mindbreakerdrip" dx="73" dy="134"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -2353,7 +2355,7 @@
 				</if>
 				<if test="tongue.type == Tongue.MINDBREAKERMALE">
 					<hide part="face/*"/>
-					<show part="face/mindbreakerMale"/>
+					<show part="antennae/mindbreakerMale"/>
 				</if>
             </case>
             <case values="Face.HORSE,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
@@ -3929,6 +3931,16 @@
                         <show part="penis$taur/caveWyrmbig$taur"/>
                         <else>
                             <show part="penis$taur/caveWyrm$taur"/>
+                        </else>
+                    </if>
+                </case>
+				
+				<case values="CockTypesEnum.MINDBREAKERMALE">
+                    <if test="big">
+                        <show part="penis$taur/humanbig$taur"/>
+						<show part="penis/mindbreakerdrip"/>
+                        <else>
+                            <show part="penis$taur/humanbig$taur"/>
                         </else>
                     </if>
                 </case>

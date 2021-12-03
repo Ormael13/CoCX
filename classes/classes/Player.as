@@ -10177,7 +10177,7 @@ use namespace CoC;
 				MaleMindbreakerCounter++;
 			if ((hairType == Hair.MINDBREAKERMALE) && hairColor == "purple")
 				MaleMindbreakerCounter++;
-			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white", "light purple"])))
+			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["eldritch purple"])))
 				MaleMindbreakerCounter++;
 			if (skinAdj == "slippery")
 				MaleMindbreakerCounter ++;

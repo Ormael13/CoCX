@@ -358,7 +358,7 @@ package classes.Scenes.Places{
 				player.wings.type = Wings.NONE;
 				if (!player.hasVagina()) player.createVagina();
 				player.cocks[1].cockType = CockTypesEnum.MINDBREAKER;
-				player.skin.base.color = randomChoice("pale", "ghostly white", "light purple");
+				player.skin.base.color = randomChoice("eldritch purple");
 				player.skinAdj = "slippery";
 				player.skinType = Skin.PLAIN;
 				player.tone = 100;
