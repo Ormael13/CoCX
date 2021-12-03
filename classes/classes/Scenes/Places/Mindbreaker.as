@@ -444,7 +444,7 @@ package classes.Scenes.Places{
 			//if (MindBreakerFetishFemaleConvert == 0 || MindBreakerFetishMaleConvert == 0) addButtonDisabled(6,"Puppet sex","You need at least one female follower and one male fellower of normal size to do this.");
 			//addButton(7, "Orgy", FuckEveryFellower,1,1,1,"Just fuck with all of your follower at the same time preferably one of each type.");
 			//if (MindBreakerGoblinConvert >= 1 && MindBreakerFetishFemaleConvert >= 1 && MindBreakerFetishMaleConvert >= 1) addButtonDisabled(7,"Orgy","You need at least a goblin a man and a woman in order to get an orgy going on.");
-			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner,1,1,1,"It appears your follower brought in a new toy for you to break how kind. Fix the mind of this defiant new plaything.");
+			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner,1,1,1,"It appears your follower brought in a new toy for you to break how kind. Time to fix the mind of this defiant new plaything.");
 			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner","There is prisonner in the cave for you to play with at the time.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
