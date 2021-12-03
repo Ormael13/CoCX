@@ -2553,7 +2553,7 @@
                 <show part="hands/harpy"/>
                 <show part="hands_bg/harpy"/>
             </case>
-			<case values="Arms.MINDBREAKER=">
+			<case values="Arms.MINDBREAKER">
                 <show part="hands/mindbreaker"/>
                 <show part="hands_bg/mindbreaker"/>
             </case>

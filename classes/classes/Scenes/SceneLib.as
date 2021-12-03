@@ -195,8 +195,6 @@ public class SceneLib {
 
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
 
-    public static var mindbreaker:Mindbreaker = new Mindbreaker();
-
     public static var neisaFollower:NeisaFollower = new NeisaFollower();
 
     public static var mitziFollower:MitziFollower = new MitziFollower();
@@ -246,6 +244,8 @@ public class SceneLib {
     public static var vapula:Vapula = new Vapula();
 
     public static var woodElves:WoodElves = new WoodElves();
+
+    public static var mindbreaker:Mindbreaker = new Mindbreaker();
 
     public static var zenjiScene:ZenjiScenes = new ZenjiScenes();
 

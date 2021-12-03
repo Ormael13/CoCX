@@ -85,7 +85,7 @@ public class Tongue extends BodyPart{
 	});
 
 	public static const MINDBREAKERMALE: int = 14;
-	EnumValue.add(Types, MINDBREAKER, "MINDBREAKERMALE", {
+	EnumValue.add(Types, MINDBREAKERMALE, "MINDBREAKERMALE", {
 		name:"mindbreaker male",
 		appearanceDesc: "Over your mouth are several tentacles, but underneath that is your long tentacle-like tongue, ready to probe the mouth of others."
 	});

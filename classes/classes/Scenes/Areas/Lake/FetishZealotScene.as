@@ -6,13 +6,13 @@ package classes.Scenes.Areas.Lake
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.Items.Armors.LustyMaidensArmor;
 
 public class FetishZealotScene extends AbstractLakeContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		public var mindbreakerscene:Mindbreaker = new Mindbreaker();
 		
 		public function FetishZealotScene()
 		{
@@ -324,7 +324,7 @@ public class FetishZealotScene extends AbstractLakeContent
 					"\n\nYou promise him the chance to cum and leak like a hose with the condition he heads to Kaerb-Dnim and, of course, take tons of transformative to increase the size of his balls.");
 			Mindbreaker.MindBreakerFetishMaleConvert ++;
 			Mindbreaker.MindBreakerConvert ++;
-			if (Mindbreaker.MindBreakerConvert == Mindbreaker.MindBreakerConvertGoal) mindbreakerscene.MindbreakerBrainEvolution();
+			if (Mindbreaker.MindBreakerConvert == Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
 			else outputText(" This is all it takes to get your newest plaything running to the lair. You smile, knowing you have made yet another convert as you head back to camp still giggling.");
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();

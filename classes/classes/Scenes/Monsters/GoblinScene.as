@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 
 import coc.xxc.BoundStory;
@@ -16,7 +17,6 @@ import coc.xxc.Story;
 public class GoblinScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		public var mindbreakerscene:Mindbreaker = new Mindbreaker();
 
 		public function GoblinScene()
 		{
@@ -606,7 +606,7 @@ public class GoblinScene extends BaseContent
 					" Satisfied with what you saw, you lock an image of Kaerb-Dnim's cave within her mind and let her go, knowing full well she will head there at the first opportunity.");
 			Mindbreaker.MindBreakerGoblinConvert ++;
 			Mindbreaker.MindBreakerConvert ++;
-			if (Mindbreaker.MindBreakerConvert == Mindbreaker.MindBreakerConvertGoal) mindbreakerscene.MindbreakerBrainEvolution();
+			if (Mindbreaker.MindBreakerConvert == Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
 			else outputText("\n\nYou drop the unconscious goblin on the ground heading back to your camp, still giggling at your new acquisition.");
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
