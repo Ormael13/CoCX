@@ -247,7 +247,7 @@ import classes.Items.*;
 			player.strStat.core.value = 10;
 			player.libStat.core.value = 30;
 			player.cor = 30;
-			outputText("As a wandering mage you had found your way into no small amount of trouble in the search for knowledge.  A strange tome here, a ritual there, most people found your pale form unsettling. They would be further troubled if they could see your feet!  Lets not even begin on the blood magic.  Yes, your interest in examining every aspect of magic has run you down a strange path, so when you wandered into Ingram and began to hear of the exile of the Champion, and the superstitions that surrounded it you were intrigued, as every little rumor and ritual often had a grain of truth.  You snuck into the cave prior to the ritual, where the old man supposedly led every Champion, and there you found a strange portal that emanated a certain degree of spacial transparency -  more than the portal's own.  Within it must have been a whole new world!  Throwing caution to the wind, your curiosities engulfing you, you dove in with nary a thought for the consequences.");
+			outputText("As a wandering mage you had found your way into no small amount of trouble in the search for knowledge.  A strange tome here, a ritual there, most people found your pale form unsettling. They would be further troubled if they could see your feet!  Lets not even begin on the blood magic.  Yes, your interest in examining every aspect of magic has run you down a strange path, so when you wandered into Ingnam and began to hear of the exile of the Champion, and the superstitions that surrounded it you were intrigued, as every little rumor and ritual often had a grain of truth.  You snuck into the cave prior to the ritual, where the old man supposedly led every Champion, and there you found a strange portal that emanated a certain degree of spacial transparency -  more than the portal's own.  Within it must have been a whole new world!  Throwing caution to the wind, your curiosities engulfing you, you dove in with nary a thought for the consequences.");
 		}
 
 		private function customCharaun():void {
@@ -1685,7 +1685,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
 			player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
-			player.createPerk(PerkLib.BlackHeart, 0, 0, 0, 0);
+			player.createPerk(MutationsLib.BlackHeart, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Pervert, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
@@ -1914,6 +1914,10 @@ import classes.Items.*;
 				{
 					player.cocks[i].cockType = CockTypesEnum.DISPLACER;
 					player.cocks[i].knotMultiplier = 1.5;
+				}
+				else if(type < 90)
+				{
+					player.cocks[i].cockType = CockTypesEnum.MINDBREAKER;
 				}
 				else
 					player.cocks[i].cockType = CockTypesEnum.PIG;

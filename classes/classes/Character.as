@@ -240,6 +240,7 @@ import classes.CoC;
 	public function hasBeak():Boolean{ return facePart.hasBeak(); }
 	public function face():String { return facePart.describe(); }
 	public function faceDesc():String { return facePart.describeMF(); }
+	public function faceDescArticle():String { return facePart.describeMF(true); }
 	public function hasLongTail():Boolean { return tail.isLong(); }
 
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
@@ -643,11 +644,11 @@ import classes.CoC;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
-			if (hasPerk(PerkLib.LizanMarrowFinalForm)) min -= maxHP() * 0.05;
-			if (hasPerk(PerkLib.OrcAdrenalGlandsFinalForm) || game.player.orcScore() >= 11) {
+			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
+			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved) || game.player.orcScore() >= 11) {
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-				if (hasPerk(PerkLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-				if (hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) min -= maxHP() * 0.02;
+				if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
+				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
 			}
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
@@ -727,8 +728,8 @@ import classes.CoC;
 			if (hasPerk(PerkLib.PrestigeJobArcaneArcher)) max += 600;
 			if (hasPerk(PerkLib.PrestigeJobSoulArcher)) max += 150;
 			if (hasPerk(PerkLib.PrestigeJobSeer)) max += 900;
-			if (hasPerk(PerkLib.RapidReload)) max += 15;
-			if (hasPerk(PerkLib.LightningReload)) max += 25;
+			if (hasPerk(PerkLib.RapidReload)) max += 20;
+			if (hasPerk(PerkLib.LightningReload)) max += 60;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib*2);
@@ -899,6 +900,14 @@ import classes.CoC;
 			max = Math.round(max);
 			if (max > 1499999) max = 1499999;
 			return max;
+		}
+		public override function maxOverSoulforce():Number {
+			var max1:Number = maxSoulforce();
+			var max2:Number = 1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 1499999) max1 = 1499999;
+			return max1;
 		}
 
 		public override function maxWrath():Number
@@ -1175,6 +1184,14 @@ import classes.CoC;
 			if (max > 2499999) max = 2499999;
 			return max;
 		}
+		public override function maxOverMana():Number {
+			var max1:Number = maxMana();
+			var max2:Number = 1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 2499999) max1 = 2499999;
+			return max1;
+		}
 
 		public function maxVenom():Number
 		{
@@ -1191,9 +1208,9 @@ import classes.CoC;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
 			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) maxven += 400;
-			if (hasPerk(PerkLib.VenomGlands)) maxven += 100;
-			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 400;
-			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
+			if (hasPerk(MutationsLib.VenomGlands)) maxven += 100;
+			if (hasPerk(MutationsLib.VenomGlandsPrimitive)) maxven += 400;
+			if (hasPerk(MutationsLib.VenomGlandsEvolved)) {
 				maxven += 700;
 				multimaxven += 1;
 			}
@@ -1219,9 +1236,9 @@ import classes.CoC;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
-			if (hasPerk(PerkLib.ArachnidBookLung)) multimaxven += 1;
-			if (hasPerk(PerkLib.ArachnidBookLungEvolved)) multimaxven += 1;
-			if (hasPerk(PerkLib.ArachnidBookLungFinalForm)) multimaxven += 1;
+			if (hasPerk(MutationsLib.ArachnidBookLung)) multimaxven += 1;
+			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive)) multimaxven += 1;
+			if (hasPerk(MutationsLib.ArachnidBookLungEvolved)) multimaxven += 1;
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;
@@ -1277,14 +1294,14 @@ import classes.CoC;
 			if (game.player.orcaScore() >= 14) max += 20;
 			if (game.player.orcaScore() >= 20) max += 25;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
-			if (hasPerk(PerkLib.DisplacerMetabolismEvolved)) max += 50;
-			if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) max += 50;
-			if (hasPerk(PerkLib.PigBoarFat)) max += 5;
-			if (hasPerk(PerkLib.PigBoarFatEvolved)) max += 10;
-			if (hasPerk(PerkLib.PigBoarFatFinalForm)) max += 20;
-			if (hasPerk(PerkLib.WhaleFat)) max += 5;
-			if (hasPerk(PerkLib.WhaleFatEvolved)) max += 10;
-			if (hasPerk(PerkLib.WhaleFatFinalForm)) max += 20;
+			if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) max += 50;
+			if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive)) max += 50;
+			if (hasPerk(MutationsLib.PigBoarFat)) max += 5;
+			if (hasPerk(MutationsLib.PigBoarFatPrimitive)) max += 10;
+			if (hasPerk(MutationsLib.PigBoarFatEvolved)) max += 20;
+			if (hasPerk(MutationsLib.WhaleFat)) max += 5;
+			if (hasPerk(MutationsLib.WhaleFatPrimitive)) max += 10;
+			if (hasPerk(MutationsLib.WhaleFatEvolved)) max += 20;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

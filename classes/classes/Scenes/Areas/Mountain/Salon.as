@@ -127,6 +127,8 @@ public function salonPurchaseMenu():void {
 	if (mudFacialEnabled) addButton(8, "Mud Facial", mudFacial).hint("This facial is supposed to enhance the softness of your face and enhance its femininity greatly.");
 	if (sandFacialEnabled) addButton(9, "Sand Facial", sandFacial).hint("The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.");
 	if (player.hairLength > 2 && !Hair.Types[player.hairType].ignoresStyle) addButton(10, "Haircut", changeHairStyle);
+	else if (Hair.Types[player.hairType].ignoresStyle) addButtonDisabled(10, "Haircut", "Your current hair can't have its style changed!");
+	else if (player.hairLength <= 2) addButtonDisabled(10, "Haircut", "Your current hair length is too short!");
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
@@ -522,18 +524,18 @@ private function changeHairStyle():void {
 	addButton(1, "Wild", chooseHairStyleFinalize, 1).hint("Ruffle and shuffle those hair some.");
 	addButton(2, "Ponytail", chooseHairStyleFinalize, 2).hint("The basic ponytail, a classic.");
 	addButton(3, "G.Tress", chooseHairStyleFinalize, 3).hint("A very long tress that reach all the way to ground level, favored by martial artist all around Mareth.");
-	addButton(4, "TwinPigtail", chooseHairStyleFinalize, 4).hint("Whats cuter then two pigtail realy?");
+	addButton(4, "Twintails", chooseHairStyleFinalize, 4).hint("Whats cuter then twintails realy?");
 	addButton(5, "Dwarven", chooseHairStyleFinalize, 5).hint("A traditionnal dwarven female haircut.");
-	addButton(7, "Snow Lily", chooseHairStyleFinalize, 6).hint("A nowaday rare haircut mostly seen amonst people of the long lost snow kingdom.");
-	addButton(8, "Wind Braid", chooseHairStyleFinalize, 7).hint("The four wind braid seen almost seldomly amonst student of the now near extinct four wind school.");
-	addButton(9, "Wind Long", chooseHairStyleFinalize, 8).hint("The four wind long hair cut seen almost seldomly amonst student of the now near extinct four wind school.");
-	addButton(6, "Back", salonPurchaseMenu);
+	addButton(6, "Snow Lily", chooseHairStyleFinalize, 6).hint("A nowaday rare haircut mostly seen amonst people of the long lost snow kingdom.");
+	addButton(7, "Wind Braid", chooseHairStyleFinalize, 7).hint("The four wind braid seen almost seldomly amonst student of the now near extinct four wind school.");
+	addButton(8, "Wind Long", chooseHairStyleFinalize, 8).hint("The four wind long hair cut seen almost seldomly amonst student of the now near extinct four wind school.");
+	addButton(14, "Back", salonPurchaseMenu);
 }
 
 private function chooseHairStyleFinalize(choiceStyle:int = 0):void {
 	clearOutput();
 	outputText("You tell Lynnette that you'd like to have your hair style changed to what you've indicated.\n\n");
-	outputText("Lynnette and her daughters begin to mess with your hair with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
+	outputText("Lynnette and her daughters begin to mess with your hair with razor-sharp scissors and white fluid while they work to change your hair style into what you've wanted.\n\n");
 	player.hairStyle = choiceStyle;
 	outputText("After a while, you now have " + player.hairStyleDescript() + "!");
 	doNext(camp.returnToCampUseOneHour);

@@ -71,11 +71,11 @@ import classes.internals.*;
 					player.removeStatusEffect(StatusEffects.Fear);
 			} else {
 				outputText("You know that none of this could be real, but you are too terrified to act this round!");
-				if (player.hasStatusEffect(StatusEffects.Fear))
-					addCombatBuff("spe", -12);
-				else
+				if (player.hasStatusEffect(StatusEffects.Fear)) addCombatBuff("spe", -12, "Nightmare", "Nightmare");
+				else {
 					createStatusEffect(StatusEffects.Fear, 0, 0, 0, 0);
-				addCombatBuff("spe", -18);
+					addCombatBuff("spe", -18, "Nightmare", "Nightmare");
+				}
 			}
 		}
 		
@@ -143,8 +143,8 @@ import classes.internals.*;
 			+"As the venomous flames course through your system, you start to become more and more turned on by the thought of being abused and degraded...  ");
 			
 			player.dynStats("cor", 2);
-			player.addCombatBuff('str',-10);
-			player.addCombatBuff('spe',-10);
+			player.addCombatBuff('str',-10, "Entwine", "Entwine");
+			player.addCombatBuff('spe',-10, "Entwine", "Entwine");
 			var damage:int = 40+25/(rand(3)+1);
 			player.takeLustDamage(rand(6) + 10, true);
 			player.takePhysDamage(damage, true);

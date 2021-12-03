@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -21,12 +21,12 @@ use namespace CoC;
 	public class Malikore extends Monster
 	{
 		public var bashemathScene:BashemathFollower = SceneLib.bashemathScene;
-		
+
 		public function moveClawCombo():void {
 			createStatusEffect(StatusEffects.Attacks, 6, 0, 0, 0);
 			eAttack();
 		}
-		
+
 		public function moveTailSpike():void {
 			TailSpike();
 			TailSpike();
@@ -46,7 +46,7 @@ use namespace CoC;
 					outputText(" damage and poisoning you. You feel extremely aroused and ");
 					if (rand(2) == 0) {
 						outputText("your movements slow down");
-						player.addCombatBuff('spe', -3);
+						player.addCombatBuff('spe', -3, "Malikore Venom", "MalikoreVenom");
 					}
 					else {
 						if (rand(2) == 0) {
@@ -70,12 +70,12 @@ use namespace CoC;
 			}
 			outputText("\n\n");
 		}
-		
+
 		public function moveTakeFlight():void {
 			outputText("The malikore takes flight, aiming with her tail as she prepares to unleash a volley of spikes at you!");
 			createStatusEffect(StatusEffects.Flying,7,0,0,0);
 		}
-		
+
 		public function moveBoobCrash():void {
 			outputText("The flying malikore dives in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she readies her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
@@ -86,7 +86,7 @@ use namespace CoC;
 			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			removeStatusEffect(StatusEffects.Flying);
 		}
-		
+
 		public function moveBite():void {
 			var bitedmg:Number = Math.round(this.str / 25);
 			outputText("The malikore bites into your ");
@@ -100,7 +100,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.ConstrictedScylla)) removeStatusEffect(StatusEffects.ConstrictedScylla);
 			if (hasStatusEffect(StatusEffects.Pounce)) removeStatusEffect(StatusEffects.Pounce);
 		}
-		
+
 		public function moveCleanse():void {
 			outputText("The malikore stabs herself with her tail, cleansing herself from poison!");
 			if (hasStatusEffect(StatusEffects.PoisonDoT)) removeStatusEffect(StatusEffects.PoisonDoT);
@@ -108,7 +108,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.LustDoT)) removeStatusEffect(StatusEffects.LustDoT);
 			if (hasStatusEffect(StatusEffects.LustDoTH)) removeStatusEffect(StatusEffects.LustDoTH);
 		}
-		
+
 		override protected function performCombatAction():void
 		{
 			if (!monsterIsStunned() && (hasStatusEffect(StatusEffects.PoisonDoT) || hasStatusEffect(StatusEffects.PoisonDoTH) || hasStatusEffect(StatusEffects.LustDoT) || hasStatusEffect(StatusEffects.LustDoTH))) {
@@ -130,27 +130,27 @@ use namespace CoC;
 				if (choice > 7) moveTakeFlight();
 			}
 		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			player.removeStatusEffect(StatusEffects.WildMalikore);
 			cleanupAfterCombat();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			player.removeStatusEffect(StatusEffects.WildMalikore);
 			cleanupAfterCombat();
 		}
-		
+
 		override public function get long():String {
 			var str:String = "";
 			if (hasStatusEffect(StatusEffects.Flying)) str += "The malikore is circling you in the air readying a salvo of spike to throw at you.";
 			else str += "The malikore is currently circling you looking for an opening to strike. She’s actually good on the eye and you would give her more attention if not for the fact she’s trying to beat you down and rape you.";
 			return str;
 		}
-		
-		public function Malikore() 
+
+		public function Malikore()
 		{
 			this.a = "the ";
 			this.short = "malikore";
@@ -186,7 +186,7 @@ use namespace CoC;
 					add(armors.S_SWMWR,1/12).
 					add(consumables.L_DRAFT,1/4).
 					add(consumables.MANTICV,0.7);
-			this.wings.type = Wings.MANTICORE_LIKE_LARGE;
+			this.wings.type = Wings.MANTICORE_LARGE;
 			this.rearBody.type = RearBody.LION_MANE;
 			this.arms.type = Arms.LION;
 			this.lowerBody = LowerBody.LION;
@@ -200,7 +200,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
+
 	}
 
 }

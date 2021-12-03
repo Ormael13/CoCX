@@ -416,7 +416,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
-			bd = buttons.add("Blood Requiem", bloodSwipe)
+			bd = buttons.add("Blood Requiem", bloodRequiem)
 					.hint("Blood Requiem will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
@@ -432,7 +432,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
-			bd = buttons.add("Blood Requiem (SF)", bloodSwipeSF)
+			bd = buttons.add("Blood Requiem (SF)", bloodRequiemSF)
 					.hint("(Soulforce infused) Blood Requiem, which was infused by small amount of soulforce to enhance it power, will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "\n\nSoulforce cost: " + Math.round(150 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
@@ -482,7 +482,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function TripleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
+		outputText("You ready your [weapon] and prepare to thrust it towards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
@@ -499,15 +499,25 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
-			outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ",");
+			outputText("Your [weapon] hits thrice against [themonster],");
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -518,7 +528,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function SextupleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
+		outputText("You ready your [weapon] and prepare to thrust it towards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
@@ -539,18 +549,34 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
-			outputText("Your [weapon] hits sixfold against " + monster.a + monster.short + ",");
+			outputText("Your [weapon] hits sixfold against [themonster],");
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -561,7 +587,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function NonupleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
+		outputText("You ready your [weapon] and prepare to thrust it towards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
@@ -585,12 +611,23 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
-			outputText("Your [weapon] hits ninefold against " + monster.a + monster.short + ",");
+			outputText("Your [weapon] hits ninefold against [themonster],");
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
@@ -600,6 +637,17 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+				MultiThrustD();
+			}
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -644,7 +692,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
@@ -660,7 +709,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -723,7 +772,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function DracoSweep():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		outputText("You ready your [weapon] and prepare to sweep it towards " + monster.a + monster.short + ".  ");
+		outputText("You ready your [weapon] and prepare to sweep it towards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
@@ -774,7 +823,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
@@ -792,7 +842,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//group enemies bonus
 		if (monster.plural) damage *= 5;
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -816,7 +866,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		outputText("Your [weapon] sweeps against " + monster.a + monster.short + ", dealing ");
+		outputText("Your [weapon] sweeps against [themonster], dealing ");
 		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
@@ -833,7 +883,13 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
-		else doDamage(damage, true, true);
+		else {
+			doDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
+				doDamage(damage, true, true);
+				damage *= 2;
+			}
+		}
 		outputText(" damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -855,9 +911,9 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function ManyBirds():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (silly ()) outputText("You focus your soulforce, projecting it as an aura around you.  As you concentrate, dozens, hundreds, thousands of tiny, ethereal birds shimmer into existence.  As you raise your hand up, more and more appear, until the area around you and " + monster.a + monster.short + "  is drowned in spectral flappy shapes.  ");
+		if (silly ()) outputText("You focus your soulforce, projecting it as an aura around you.  As you concentrate, dozens, hundreds, thousands of tiny, ethereal birds shimmer into existence.  As you raise your hand up, more and more appear, until the area around you and [themonster]  is drowned in spectral flappy shapes.  ");
 		else {
-			outputText("You thrust your hand outwards with deadly intent, and in the blink of an eye a crystal shoots towards " + monster.a + monster.short + ".  ");
+			outputText("You thrust your hand outwards with deadly intent, and in the blink of an eye a crystal shoots towards [themonster].  ");
 			if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 				if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids crystal!");
 				if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges crystal with superior quickness!");
@@ -889,12 +945,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= (monster.damagePercent() / 100);
 		if (silly ()) {
 			outputText("You snap your fingers, and at once every bird lends their high pitched voice to a unified, glass shattering cry:");
-			outputText("\n\n\"<i>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</i>\" (" + monster.a + monster.short + " take ");
+			outputText("\n\n\"<i>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</i>\" ([themonster] take ");
 			doMagicDamage(damage, true, true);
 			outputText(" damage) ");
 		}
 		else {
-			outputText("Crystal hits " + monster.a + monster.short + ", dealing ");
+			outputText("Crystal hits [themonster], dealing ");
 			doMagicDamage(damage, true, true);
 			outputText(" damage! ");
 		}
@@ -909,7 +965,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function Comet():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents " + monster.a + monster.short + ".  ");
+		outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents [themonster].  ");
 		if (monster.plural == true) outputText("Shattering into thousands of fragments that shower anything and everything around you.  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids comet fragments!");
@@ -940,7 +996,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		outputText("Comet fragments hits " + monster.a + monster.short + ", dealing ");
+		outputText("Comet fragments hits [themonster], dealing ");
 		doMagicDamage(damage, true, true);
 		outputText(" damage! ");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -954,7 +1010,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function HailOfBlades1():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("Letting soulforce leak out around you, you form six ethereal two meter long weapons. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards " + monster.a + monster.short + ".  ");
+		outputText("Letting soulforce leak out around you, you form six ethereal two meter long weapons. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
@@ -966,7 +1022,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
-		outputText("Weapons hits " + monster.a + monster.short + ", dealing ");
+		outputText("Weapons hits [themonster], dealing ");
 		BladesD();
 		BladesD();
 		BladesD();
@@ -982,7 +1038,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function HailOfBlades2():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("Letting soulforce leak out around you, you form eighteen ethereal two meter long weapons in two rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards " + monster.a + monster.short + ".  ");
+		outputText("Letting soulforce leak out around you, you form eighteen ethereal two meter long weapons in two rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 10 && int(Math.random() * (((monster.spe - player.spe) / 5) + 70)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
@@ -995,7 +1051,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades, 3, 0, 0, 0);
-		outputText("Weapons hits " + monster.a + monster.short + ", dealing ");
+		outputText("Weapons hits [themonster], dealing ");
 		BladesD();
 		BladesD();
 		BladesD();
@@ -1023,7 +1079,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function HailOfBlades3():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("Letting soulforce leak out around you, you form fifty four ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards " + monster.a + monster.short + ".  ");
+		outputText("Letting soulforce leak out around you, you form fifty four ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 20 && int(Math.random() * (((monster.spe - player.spe) / 6) + 60)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
@@ -1036,7 +1092,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades, 9, 0, 0, 0);
-		outputText("Weapons hits " + monster.a + monster.short + ", dealing ");
+		outputText("Weapons hits [themonster], dealing ");
 		BladesD();
 		BladesD();
 		BladesD();
@@ -1161,7 +1217,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
@@ -1178,7 +1235,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= corruptionMulti;
 		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
 		if (damage > 0) {
-			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing");
+			outputText("You thrust your palm forward, causing a blast of pure energy to slam against [themonster], tossing");
 			if ((monster as Monster).plural) outputText(" them");
 			else outputText((monster as Monster).mfn(" him", " her", " it"));
 			outputText(" back a few feet.\n\n");
@@ -1192,15 +1249,16 @@ public class CombatSoulskills extends BaseCombatContent {
 				crit = true;
 				damage *= 1.75;
 			}
-			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.\n\n");
+			outputText(monster.capitalA + monster.short + " takes ");
+			doMagicDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+				doMagicDamage(damage, true, true);
+				damage *= 2;
+			}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
+			outputText("damage \n\n");
 		}
-		else {
-			damage = 0;
-			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
-		}
-		monster.HP -= damage;
+		else outputText("You thrust your palm forward, causing a blast of pure energy to slam against [themonster], which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -1240,11 +1298,14 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
-		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
+		outputText("Air seems to lose all temperature around your fist as you dash at [themonster] and shove your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, true);
+		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+			doIceDamage(damage, true, true);
+			damage *= 2;
+		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			if (monster.spe - 20 >= 0) {
@@ -1269,7 +1330,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		else {
-			outputText("  <b>" + monster.capitalA + monster.short + " ");
+			outputText("  <b>[Themonster] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be frozen by your attack.</b>");
@@ -1317,17 +1378,26 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
-		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. ");
+		outputText("Setting your fist ablaze, you rush at [themonster] and scorch [monster him] with your searing flames. ");
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage += Math.round(damage * 0.1);
 			doFireDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+				doFireDamage(damage, true, true);
+				damage *= 2;
+			}
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage = Math.round(damage * 1.1);
 		}
-		else doFireDamage(damage, true, true);
+		else {
+			doFireDamage(damage, true, true);
+			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+				doFireDamage(damage, true, true);
+				damage *= 2;
+			}
+		}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(5);
@@ -1383,7 +1453,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+            if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
@@ -1410,12 +1481,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		damage = Math.round(damage);
-		doDamage(damage);
 		monster.createStatusEffect(StatusEffects.PunishingKick, 5, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownPunishingKick, 10, 0, 0, 0);
-		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. " + monster.capitalA + monster.short + " will have a hard time recovering its balance for a while. <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] will have a hard time recovering its balance for a while. ");
+		doDamage(damage, true, true);
+		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) {
+			doDamage(damage, true, true);
+			damage *= 2;
+		}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -1457,13 +1531,13 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		player.createStatusEffect(StatusEffects.CooldownSoulBlast, 15, 0, 0, 0);
-		outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. " + monster.capitalA + monster.short + " can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. ");
+		outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. [Themonster] can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. ");
 		damage = Math.round(damage);
 		doMagicDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		else {
-			outputText("  <b>" + monster.capitalA + monster.short + " ");
+			outputText("  <b>[Themonster] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are ");
 			outputText("too resolute to be stunned by your attack.</b>");
@@ -1606,33 +1680,24 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
 		if (!player.statStore.hasBuff("Might")) {
 			outputText("drawing strength from it");
-			combat.magic.spellMight(true);
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock();
+			CombatAbilities.Might.backfireEnabled = false;
+			CombatAbilities.Might.doEffect(false);
+			CombatAbilities.Might.backfireEnabled = true;
 		}
 		else {
 			outputText("feeling it mend your wounds");
-			combat.magic.spellHealEffect();
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			CombatAbilities.Heal.doEffect(false);
 			spellPerkUnlock();
 		}
 		if (!monster.hasStatusEffect(StatusEffects.Blind)) {
 			outputText(". The residual power ");
 			if (!player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				outputText("makes your staff glow with barely contained energy");
-				combat.magic.spellChargeWeapon(true);
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
+				CombatAbilities.ChargeWeapon.doEffect(false);
 			}
 			else {
 				outputText("makes your staff flare up, as the energy escapes as a radiant flash");
-				combat.magic.spellBlind();
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
+				CombatAbilities.Blind.doEffect(false);
 			}
 		}
 		outputText(".\n\n");
@@ -1642,9 +1707,9 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodSwipe():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(-spellCostBlood(60), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipe,2,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, three red claw-like lines coalesce briefly before being shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, three red claw-like lines coalesce briefly before being shot from your hands, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1681,12 +1746,12 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodSwipeSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(-spellCostBlood(60), false);
 		var soulforcecost:Number = 60 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 3;
 		if (damage < 10) damage = 10;
 		//soulskill mod effect
@@ -1726,9 +1791,9 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function heartSeeker():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(120), false);
+		HPChange(-spellCostBlood(120), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeeker,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward " + monster.a + monster.short + " vital spot.\n\n");
+		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward [themonster] vital spot.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1761,12 +1826,12 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function heartSeekerSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(120), false);
+		HPChange(-spellCostBlood(120), false);
 		var soulforcecost:Number = 120 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeekerSF,4,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making somatic gesture with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward " + monster.a + monster.short + " vital spot.\n\n");
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making somatic gesture with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward [themonster] vital spot.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1800,9 +1865,9 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodDewdrops():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(240), false);
+		HPChange(-spellCostBlood(240), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdrops,2,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood pellets shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood pellets shot from your hands, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
@@ -1842,12 +1907,12 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodDewdropsSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(240), false);
+		HPChange(-spellCostBlood(240), false);
 		var soulforcecost:Number = 240 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood droplets shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood droplets shot from your hands, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 1.5;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
@@ -1890,9 +1955,9 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodRequiem():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(150), false);
+		HPChange(-spellCostBlood(150), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiem,4,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. Within an instant, large blood dripping pillars coalesce above " + monster.a + monster.short + " and descends not giving time for " + monster.pronoun2 + " to react.\n\n");
+		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for [monster him] to react.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1927,13 +1992,13 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function bloodRequiemSF():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(150), false);
+		HPChange(-spellCostBlood(150), false);
 		var soulforcecost:Number = 150 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF,5,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. ");
-		outputText("Within an instant, large blood dripping pillars coalesce above " + monster.a + monster.short + " and descends not giving time for " + monster.pronoun2 + " to react.\n\n");
+		outputText("Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for [monster him] to react.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -2076,13 +2141,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 fatigue(60, USEFATG_PHYSICAL);
 	 }
 	 else fatigue(24, USEFATG_PHYSICAL);
-	 //Amily!
-	 if(monster.hasStatusEffect(StatusEffects.Concentration)) {
-	 outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
-	 enemyAI();
-	 return;
-	 }
-	 outputText("You ready your wrists mounted scythes and prepare to sweep them towards " + monster.a + monster.short + ".\n\n");
+	if (combat.checkConcentration()) return; //Amily concentration
+	 outputText("You ready your wrists mounted scythes and prepare to sweep them towards [themonster].\n\n");
 	 if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
 	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attacks with superior quickness!\n\n");
@@ -2090,8 +2150,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 enemyAI();
 	 return;
 	 if (monster.plural) {
-	 if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-	 if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) >= 0) {
+	 if (player.findPerk(MutationsLib.MantislikeAgilityPrimitive) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
 	 }
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
@@ -2104,11 +2164,11 @@ public class CombatSoulskills extends BaseCombatContent {
 	 damage += speedscalingbonus() * 0.5;
 	 if (damage < 10) damage = 10;
 	 //adjusting to be used 60/100% of base speed while attacking depending on insect-related perks possesed
-	 if (player.findPerk(PerkLib.MantislikeAgility) < 0) damage *= 0.6;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) < 0) damage *= 0.6;
 	 //bonuses if fighting multiple enemies
 	 if (monster.plural) {
-	 if (player.findPerk(PerkLib.MantislikeAgility) < 0 && player.findPerk(PerkLib.TrachealSystemEvolved) < 0) damage *= 1.1;
-	 if (player.findPerk(PerkLib.MantislikeAgility) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) damage *= 1.5;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) < 0 && player.findPerk(PerkLib.TrachealSystemEvolved) < 0) damage *= 1.1;
+	 if (player.findPerk(MutationsLib.MantislikeAgility) >= 0 && player.findPerk(PerkLib.TrachealSystemEvolved) >= 0) damage *= 1.5;
 	 }
 	 //weapon bonus
 	 if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
@@ -2140,7 +2200,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 //final touches
 	 damage *= (monster.damagePercent() / 100);
 	 doDamage(damage);
-	 outputText("Your scythes swiftly sweeps against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+	 outputText("Your scythes swiftly sweeps against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 	 outputText("\n");
 	 checkAchievementDamage(damage);
@@ -2196,7 +2256,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 doNext(combatMenu);
 	 return;
 	 }
-	 outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
+	 outputText("You ready your [weapon] and prepare to thrust it towards [themonster].  ");
 	 if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
@@ -2217,7 +2277,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
 	 else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 	 //other bonuses
-	 if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING) damage *= 1.2;
+	 if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 	 if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
 	 if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= combat.historyFighterBonus();
 	 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -2234,7 +2294,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 //final touches
 	 damage *= (monster.damagePercent() / 100);
 	 doDamage(damage);
-	 outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+	 outputText("Your [weapon] hits thrice against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 	 checkAchievementDamage(damage);
 	 combat.WrathGenerationPerHit2(5);
 	 combat.heroBaneProc(damage);

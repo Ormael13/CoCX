@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Useable;
 import classes.display.SpriteDb;
+import classes.Scenes.SceneLib;
 
 public class AyaneFollower extends NPCAwareContent
 	{
@@ -25,7 +26,7 @@ public function ayaneCampMenu():void
 	addButton(1, "Talk", ayaneTalkMenu).hint("Ask Ayane about something.");
 	addButton(2, "Shop", ayaneShop).hint("Check Ayane shop.");
 	addButton(3, "Sex", ayaneSexMenu).hint("Have some sex with Ayane.");
-	if (player.buff("Curse").isPresent()) addButton(5, "Cure C.", ayaneCuringCurse).hint("WIP tooltip: Cure curse effect.");
+	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) addButton(5, "Cure C.", ayaneCuringCurse).hint("WIP tooltip: Cure curse effect.");
 	else addButtonDisabled(5, "Cure C.", "WIP tooltip: You not have any curses to cure.");
 	addButton(14, "Back", camp.campFollowers);
 }
@@ -118,7 +119,7 @@ public function ayaneShop():void {
 			addButton(14, "Back", ayaneCampMenu);
 		}
 		else{
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Back", SceneLib.kitsuneScene.kitsuneShrine);
 		}
 	}
 	private function sellItem(item:Useable,cost:int = -1,buy:Boolean=false):void{

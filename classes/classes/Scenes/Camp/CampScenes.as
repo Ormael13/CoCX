@@ -62,12 +62,12 @@ public function HaveABoysBath():void {
 	clearOutput();
 	outputText("You decide to take a bath to rest your weary body.\n\n");
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo isn’t exactly what you would call muscular, but his size and lean frame fits his mouse appearance.\n\n");
-	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see any part of Rathazul’s body beyond the hip level, though you’re not particularly interested anyway.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see any part of Rathazul’s body beyond the hip level. Though, you’re not particularly interested anyway.\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and is probably enjoying it.\n\n");
-	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Ismael is a true guy now, he was allowed to bath with the boys.\n\n");
+	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Izmael is a true guy now, he was allowed to bath with the boys.\n\n");
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Sitting near you, Konstantin relaxes and stretches his limbs. His large and thick build dwarf those from the other guys. While chit-chatting, he friendly puts one arm around you, and with the other he shamelessly washes his gigantic manhood, earning no few stares and some blushes from the other boys.\n\n");
     if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-		outputText("Siegweird is at the edge of the hotspring, he's stipped down to his padded leather pants and only has his feet in the bubbling water");
+		outputText("Siegweird is at the edge of the hotspring, he's stripped down to his padded leather pants and only has his feet in the bubbling water");
 		if (camp.maleNpcsHotBathCount() > 1) outputText(", he seems extremely nervous around all the other people");
 		outputText(". Maybe he's not one for the heat.\n\n");
 	}
@@ -94,7 +94,7 @@ public function LeaveAfterMaleBath():void {
 
 public function PeepingTom1():void {
 	clearOutput();
-	outputText("As usual your many female lovers and followers head for their daily bath and you search the wooden wall for a hole to peep through. Now that's what you wanted to see!\n\n");
+	outputText("As usual, your many female lovers and followers head for their daily bath and you search the wooden wall for a hole to peep through. Now that's what you wanted to see!\n\n");
 	if (player.statusEffectv1(StatusEffects.BathedInHotSpring) < 73) {
 		player.removeStatusEffect(StatusEffects.BathedInHotSpring);
 		player.createStatusEffect(StatusEffects.BathedInHotSpring, 73, 0, 0, 0);
@@ -105,14 +105,14 @@ public function PeepingTom1():void {
 }
 public function PeepingTom2():void {
 	clearOutput();
-	outputText("As usual your many female lovers and followers head for their daily bath. This time around, you don't feel like simply waiting your turn, and search the wooden wall for a hole to peep through.\n\n");
+	outputText("As usual, your many female lovers and followers head for their daily bath. This time around, you don't feel like simply waiting your turn, and search the wooden wall for a hole to peep through.\n\n");
 	PeepingTom3();
 }
 public function PeepingTom3():void {
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("Amily is sitting in the left corner. Naturally, she’s a little shy about her modest breasts.\n\n");
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) outputText("Joy is quite silent for once, you expected her to constantly blabber lewd comments about everyone's nudity.\n\n");
 	if (followerKiha()) outputText("Kiha definitely doesn’t have a size complex, with her huge breasts leaving most of the other girls in the shade.\n\n");
-	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");
 	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally nobody but you can see she’s there as usual. Suddenly she gives you a subtle, yet coy wink. Clearly she knows you are looking but as you expected of the demoness she really does not care.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest. They’re probably the milkiest too.\n\n");
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("Isabella sings as she bathes, which is not surprising. You assume they’re folk songs from her home.\n\n");
@@ -167,7 +167,7 @@ public function HaveAGirlBath():void {
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("Amily is sitting in the left corner. Naturally, she’s a little shy about her modest breasts.\n\n");
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) outputText("Joy is quite silent for once, you expected her to constantly blabber lewd comments about everyone's nudity.\n\n");
 	if (followerKiha()) outputText("Kiha definitely doesn’t have a size complex, with her huge breasts leaving most of the other girls in the shade.\n\n");
-	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");
 	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally nobody but you can see she’s there as usual.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest, They’re probably the milkiest too.\n\n");
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("Isabella sings as she bathes, which is not surprising. You assume they’re folk songs from her home.\n\n");
@@ -399,6 +399,15 @@ private function goblinsBirthScene2():void {
 	}
 	outputText("Aw she’s fully grown up now but hey having more hands to get the work done only helps, right?\n\n");
 	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+	if (player.breastRows.length == 0) {
+		player.createBreastRow();
+        player.breastRows[0].breasts = 2;
+        player.breastRows[0].nipplesPerBreast = 1;
+        player.breastRows[0].breastRating = 1;
+	}
+	else player.breastRows[0].breastRating += 1;
+	player.hips.type += 1;
+	player.butt.type += 1;
 	player.orgasm();
 	player.dynStats("tou", -2, "spe", 3, "lib", 1, "sen", .5);
 	player.addCurse("str", 1, 2);
@@ -450,21 +459,11 @@ public function PCGoblinDaughtersBuilingWorkshopSpareParts():void {
 	outputText("</b>");
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
 	flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
-	if (player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) PCGoblinDaughtersBuilingWorkshopSparePartsMechanism();
-	if (player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) PCGoblinDaughtersBuilingWorkshopSparePartsEnergyCore();
+	flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts);
+	flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);
 	player.removeStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts);
 	doNext(playerMenu);
-	cheatTime2(5);
-}
-public function PCGoblinDaughtersBuilingWorkshopSparePartsMechanism():void {
-	player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 3, -1);
-	if (player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) inventory.takeItem(useables.MECHANI, PCGoblinDaughtersBuilingWorkshopSparePartsMechanism);
-	else inventory.takeItem(useables.MECHANI, null);
-}
-public function PCGoblinDaughtersBuilingWorkshopSparePartsEnergyCore():void {
-	player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 4, -1);
-	if (player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) inventory.takeItem(useables.ENECORE, PCGoblinDaughtersBuilingWorkshopSparePartsEnergyCore);
-	else inventory.takeItem(useables.ENECORE, null);
+	eachMinuteCount(5);
 }
 
 }

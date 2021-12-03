@@ -26,7 +26,7 @@ package classes.Scenes.Areas.GlacialRift
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" They hits you square in the chest from a few different angles. ");
-				damage = player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
 			}
 		}
 		
@@ -42,7 +42,7 @@ package classes.Scenes.Areas.GlacialRift
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The concussive strikes impacts you with a bonecrushing force. ");
-				damage = player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
 			}
 		}
 		
@@ -51,11 +51,11 @@ package classes.Scenes.Areas.GlacialRift
 			damage = Math.round(damage);
 			if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 			outputText("At the palm of their hands form ice spikes that they then shoot towards you! ");
-			damage = player.takeIceDamage(damage, true);
-			damage = player.takeIceDamage(damage, true);
-			damage = player.takeIceDamage(damage, true);
-			damage = player.takeIceDamage(damage, true);
-			damage = player.takeIceDamage(damage, true);
+			player.takeIceDamage(damage, true);
+			player.takeIceDamage(damage, true);
+			player.takeIceDamage(damage, true);
+			player.takeIceDamage(damage, true);
+			player.takeIceDamage(damage, true);
 		}
 		
 		override protected function performCombatAction():void
@@ -95,24 +95,24 @@ package classes.Scenes.Areas.GlacialRift
 			this.a = "the ";
 			this.short = "true ice golems";
 			this.imageName = "true ice golems";
-			this.long = "You're currently fighting true ice golems. They're all around ten feet tall without any sexual characteristics, their body shaped like gorilla, with bird-like wings, covered with with thick ice and using bare fists to smash enemies.";
+			this.long = "You're currently fighting true ice golems. They're all around ten feet tall without any sexual characteristics, their body shaped like gorilla, with bird-like wings, covered with thick ice and using bare fists to smash enemies.";
 			this.plural = true;
 			initStrTouSpeInte(375, 335, 190, 20);
 			initWisLibSensCor(20, 10, 10, 50);
 			this.lustVuln = 0;
-			this.tallness = 84;
+			this.tallness = 120;
 			this.drop = NO_DROP;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.level = 80;
 			this.bonusHP = 5000;
-			this.additionalXP = 000;
+			this.additionalXP = 1000;
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
 			this.weaponAttack = 175;
 			this.armorName = "ice armor";
-			this.armorDef = 180;
-			this.armorMDef = 180;
+			this.armorDef = 360;
+			this.armorMDef = 360;
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

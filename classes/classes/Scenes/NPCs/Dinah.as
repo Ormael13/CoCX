@@ -134,13 +134,11 @@ import classes.internals.*;
 			damage *= SpellMod();
 			damage = Math.round(damage);
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-			outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
-			damage *= 0.2;
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
+				outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
+				damage *= 0.2;
 			}
-			else {
-			outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
-			}
+			else outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
 			if (player.isGoo()) {
 				damage *= 1.5;
 				outputText("It's super effective!  ");
@@ -181,8 +179,8 @@ import classes.internals.*;
 		{
 			var damage:int = (inte * 1.1) + rand(25);
 			damage = Math.round(damage);
+			outputText("Dinah cast a spell, materializing a fireball before throwing it at you. ");
 			player.takeFireDamage(damage, true);
-			outputText("Dinah cast a spell, materializing a fireball before throwing it at you. " + damage + " fire damage!");
 		}
 		
 		public function hellcatInfernalClawDinah():void
@@ -198,7 +196,7 @@ import classes.internals.*;
 			player.takePhysDamage(physdamage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
-			outputText("" + physdamage + " physical damage, " + firedamage + " fire damage. Reeling in pain you begin to bleed and burn at the same time.");
+			outputText(" Reeling in pain you begin to bleed and burn at the same time.");
 		}
 		
 		public function hellcatFelineCurseDinah():void

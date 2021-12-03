@@ -2,6 +2,7 @@
 import classes.*;
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Dominika extends TelAdreAbstractContent {
 public function Dominika(){
@@ -28,7 +29,7 @@ public function fellatrixBarApproach():void {
 	outputText(images.showImage("dominika-first-meeting-at-bar"));
 	//Get the emporerors new groove (sword)
 	//Req's d2 finished
-	if(fellatrixSucked() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
+	if(fellatrixSucked() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
 		dominikaSpellblade();
 		return;
 	}
@@ -136,7 +137,7 @@ private function acceptDominikasKnowledge():void {
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n");
 
 		//[If player knows all white/black spells]
-		if(player.spellCountWhiteBlack() == 19) {
+		if(player.spellCountWhiteBlack() == 22) {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154] == 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n");
@@ -175,6 +176,10 @@ private function acceptDominikasKnowledge():void {
 			else if(!player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Arouse</b>");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+				player.createStatusEffect(StatusEffects.KnowsNosferatu,0,0,0,0);
+				outputText("\n\n<b>New Black Magic Spell Learned: Nosferatu</b>");
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 				player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
@@ -219,6 +224,14 @@ private function acceptDominikasKnowledge():void {
 			else if(!player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				player.createStatusEffect(StatusEffects.KnowsBlizzard,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Blizzard</b>");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+				player.createStatusEffect(StatusEffects.KnowsMentalShield,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Mental Shield</b>");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsCure)) {
+				player.createStatusEffect(StatusEffects.KnowsCure,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Cure</b>");
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
 				player.createStatusEffect(StatusEffects.KnowsFireStorm,0,0,0,0);
@@ -958,7 +971,7 @@ private function dominikaBlowjobs2():void {
 //Spellblade [Spellblade or S. Blade]: Sword with Wizard's Staff fatigue bonus, but higher attack (7-10? idk). ALTERNATIVELY you could put some crazy additional magic effect on there but idc
 //Mouseover description: Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic.  Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.
 
-//[Approach Dominika post-D2 in bar, requires having used her at least once before?]
+//[Approach Dominika post-D1 in bar, requires having used her at least once before?]
 public function dominikaSpellblade():void {
 	clearOutput();
 	//[Approach Dominika post-D2 in bar, on Dominika's \"<i>I'm a racist bitch</i>\" list]

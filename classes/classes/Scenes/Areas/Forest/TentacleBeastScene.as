@@ -97,12 +97,12 @@ public function encounter():void {
 		simpleChoices("Fight", startTentacleBeastCombat, "Submit", tentacleLossRape, "", null, "", null, "", null);
 		return;
 	}
-	if (rand(2) == 0) startCombat(new TentacleBeastRaging());
+	if (rand(2) == 0 && player.level >= 3) startCombat(new TentacleBeastRaging());
 	else startCombat(new TentacleBeast());
 }
 
 private function startTentacleBeastCombat():void {
-	if (rand(2) == 0) startCombat(new TentacleBeastRaging());
+	if (rand(2) == 0 && player.level >= 3) startCombat(new TentacleBeastRaging());
 	else startCombat(new TentacleBeast());
 	playerMenu();
 }
@@ -223,6 +223,61 @@ internal function tentacleLossRape():void {
 	clearOutput();
 	spriteSelect(100);
 	if (doSFWloss()) return; //Disables rape in SFW mode.
+	if (player.isAlraune()){
+		outputText("The tentacle beast at first is confused, mainly because it’s body fails to detect an actual mammal. It occurs to you that you both, are in theory, plants. Well there's no such thing as incest amongst flowers, what’s this moron waiting for?");
+		if (player.isLiliraune()){
+			outputText("You and your twin both agree this guy has to man up and take charge.\n\n" +
+					"\"<i>What are you waiting for you degenerate?</i>\"\n\n" +
+
+					"\"<i>You had us do this whole fight just to determines who’s going to rape who. Now have the decency to fertilize us!</i>\"\n\n" +
+					"The somewhat slow-witted tentacle plant finally gets the point and raises its monstrous, hollow tentacles over your waiting stamens." +
+					" You nod in approval, it's about time he gets to it. The tentacle descends upon your waiting cluster of pollen drooling stamens fully encapsulating your members and gobbles them up. You’re both ready for intercourse.");
+		}
+		outputText("A gentle tug tells you that the creature has sealed itself upon your obscene group of tentacle stamens. You see two smaller tentacles latch onto your erect nipples." +
+				" You feel nectar begin to leak out as the creature makes a perfect seal around your areola. A thick, phallic tentacle probes underneath your legs until it finds your vaginal opening. You cry out in delight as its member punches past your opening and bottoms out in your womb." +
+				" The tentacle swells up until it completely fills your vagina." +
+				" With perfect coordination, the beast sucks your cluster of stamens and tits while hammering away at your welcoming cunt." +
+				" The overwhelming pleasure courses through your body and triggers an immediate orgasm, sending gouts of liquid pollen into the tentacles sealed around your stamens." +
+				" The sensation of your fluids entering the creature prompts it to suck your throbbing vines harder as well as hammer your cooter faster, leading to a chain of orgasms.\n\n" +
+				"Drunk with pleasure, you revel in the sensation of cumming into the creature while it breastfeeds from you. You drown in the experience of being milked from top to bottom.");
+		if (player.isLiliraune()) outputText(" A quick glance to the side reveals your twin is subjected to the same delight which explains why you feel your female organ’s pleasure twice as much.");
+		outputText("The creature begins piledriving your ");
+		if (player.isLiliraune()) outputText("boxes ");
+		else outputText("box ");
+		outputText(" faster and you feel like the creature is going to impale you ");
+		if (player.isLiliraune()) outputText("both ");
+		outputText("  with its phallic tentacle.\n\n" +
+				"The creature’s milking tentacles stop moving and you feel the dick-tentacle press sharply against your womb." +
+				" You feel the thunderous force of hot fluid lance into your body as the creature cums repeatedly inside you, triggering yet another orgasm." +
+				" The creature cums in surges and shoots repeatedly inside you. Within moments, excess cum spews out of your nectar drooling fuck-hole as it cannot hold anymore, but the creature keeps cumming." +
+				" What a waste of semen. Well, you do still plan to hold as much in as you can.\n\n" +
+				"After a while, the creature withdraws its tentacles from you. It angles the tentacle-cock over your face and lets out one last load, covering your face in hot, thick sperm. You gleefully open your mouth to allow loads of the salty juice down your throat. Once spent, the creature shambles off, leaving you well milked and pollinated.");
+		player.slimeFeed();
+		player.sexReward("cum","Vaginal");
+		player.sexReward("cum","Lips");
+		player.sexReward("cum","Anal");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		player.sexReward("default","Dick");
+		if (player.isLiliraune()){
+			player.sexReward("cum","Vaginal");
+			player.sexReward("cum","Lips");
+			player.sexReward("cum","Anal");
+		}
+		player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+		cleanupAfterCombat();
+		doNext(camp.returnToCampUseOneHour);
+		return;
+	}
 	//Genderless madness
 	if(player.gender == 0) {
 		//Taur madness
@@ -616,8 +671,12 @@ private function tentacleRapeContinuation():void {
 			outputText("After a while the creature withdraws its tentacles from you. It poises the tentacle-cock over your face and lets out one last load, covering your face in hot, thick sperm. You reflexively open your mouth and allow loads of the salty juice down your throat. Once spent, the creature shambles off, leaving you well milked and cum-soaked.");
 		}
 		player.slimeFeed();
+		player.sexReward("cum");
+		player.sexReward("cum");
+		player.sexReward("cum");
 		//lactate more from the encounter.
 		player.boostLactation(.3);
+
 	}
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -664,6 +723,9 @@ private function tentacleRapeContinuationForFemales():void {
 	else outputText("In time it returns to its normal size, losing all the extra volume.");
 	if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
 	player.slimeFeed();
+	player.sexReward("cum");
+	player.sexReward("cum");
+	player.sexReward("cum");
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);

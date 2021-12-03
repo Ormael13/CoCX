@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -14,8 +15,17 @@ public class GooGirl extends Monster
 		 You are fighting a goo-girl.
 		 The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow. [if the player has a c-cup or larger chest: She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + biggestBreastSizeDescript()+ ".]
 		 */
-
-//[Goo attacks]
+		
+		
+		override public function postPlayerAbility(ability:CombatAbility):void {
+			//[Using fire attacks on the goo]
+			if (ability.hasTag(CombatAbility.TAG_DAMAGING) && ability.hasTag(CombatAbility.TAG_FIRE)) {
+				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + skinTone + " skin has lost some of its shimmer.");
+				if(!hasPerk(PerkLib.Acid)) createPerk(PerkLib.Acid,0,0,0,0);
+			}
+		}
+		
+		//[Goo attacks]
 //Slap – The slime holds its hands up and they morph into a replica of your " + weaponName + ". Happily, she swings at you, painfully smacking her gooey limbs against your head.  You shake your " + hairDescript() + ", clearing your head of the dazing slap. (lightly damages hit points)
 //Acid Slap (Only after player's fire attack) – Her body quivering from your flames, the goo-girl delivers a painful slap across your cheek. You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on! (heavily damages hit points and puts Acid Burn on the player)
 		private function gooGalAttack():void
@@ -85,14 +95,14 @@ public class GooGirl extends Monster
 			outputText("\n");
 		}
 
-//Play – 
+//Play –
 		private function gooPlay():void
 		{
 			outputText("The goo-girl lunges, wrapping her slimy arms around your waist in a happy hug, hot muck quivering excitedly against you. She looks up, empty eyes confused by your lack of enthusiasm and forms her mouth into a petulant pout before letting go.  You shiver in the cold air, regretting the loss of her embrace.");
 			player.dynStats("lus", 3 + rand(3) + player.effectiveSensitivity() / 10);
 		}
 
-//Throw – 
+//Throw –
 		private function gooThrow():void
 		{
 			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your [armor], tickling your skin like fingers dancing across your body. ");
@@ -101,7 +111,7 @@ public class GooGirl extends Monster
 			player.dynStats("lus", 5 + rand(3) + player.effectiveSensitivity() / 10);
 		}
 
-//Engulf – 
+//Engulf –
 		private function gooEngulph():void
 		{
 			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skinTone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!");
@@ -197,7 +207,7 @@ public class GooGirl extends Monster
 			return skinTone;
 		}
 
-//[azure/plum/crystalline] 
+//[azure/plum/crystalline]
 		public function gooColor2():String
 		{
 			if (skinTone == "blue") return "azure";
@@ -213,7 +223,7 @@ public class GooGirl extends Monster
 			else return "clear";
 		}
 
-//[teal/lavender/glassy] 
+//[teal/lavender/glassy]
 		public function gooColor4():String
 		{
 			if (skinTone == "blue") return "teal";

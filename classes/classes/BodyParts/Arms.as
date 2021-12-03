@@ -394,6 +394,12 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
+	public static const MINDBREAKER:int = 56;
+	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
+		name:"mindbreaker",
+		appearanceDesc: "Your arms are sleeved up in a web-like membrane, it’s very likely that they could be good for swimming too."
+	});
+
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}
@@ -411,7 +417,7 @@ public class Arms extends BodyPart {
 	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
 
-		return " " + desc
+		return desc
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }

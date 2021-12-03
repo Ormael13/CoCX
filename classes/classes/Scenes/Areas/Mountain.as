@@ -24,6 +24,7 @@ public class Mountain extends BaseContent
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var lactabovinaScene:LactaBovinaScene = new LactaBovinaScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
@@ -146,6 +147,11 @@ public class Mountain extends BaseContent
 						call:minotaurRouter,
 						mods:[SceneLib.exploration.furriteMod]
 					},{
+						name:"lacta_bovina",
+						chance:0.7,
+						call:lactabovinaScene.lactaBovinaInto,
+						mods:[SceneLib.exploration.furriteMod]
+					},{
 						name:"factory",
 						when:function():Boolean {
 							return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
@@ -221,6 +227,13 @@ public class Mountain extends BaseContent
 						},
 						chance: 30,
 						call: partsofDerpnadeLauncher
+					}, {
+						name: "lactoblasters",
+						when: function ():Boolean {
+							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Lactoblasters") < 0;
+						},
+						chance: 30,
+						call: partsofLactoBlasters
 					}, {
 						name: "ted",
 						when: function():Boolean {
@@ -363,6 +376,14 @@ public class Mountain extends BaseContent
 			outputText("You carefully put the pieces of the Derpnade Launcher in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Derpnade Launcher", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function partsofLactoBlasters():void {
+			clearOutput();
+			outputText("As you explore the mountains you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Lactoblasters in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Lactoblasters", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function hike():void {

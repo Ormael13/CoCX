@@ -144,42 +144,42 @@ import classes.Scenes.SceneLib;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.createPerk(PerkLib.DraconicLungs, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OniMusculature, 0, 0, 0, 0);
-			this.createPerk(PerkLib.PigBoarFat, 0, 0, 0, 0);
+			this.createPerk(MutationsLib.DraconicLungs, 0, 0, 0, 0);
+			this.createPerk(MutationsLib.OniMusculature, 0, 0, 0, 0);
+			this.createPerk(MutationsLib.PigBoarFat, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Ferocity, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OrcAdrenalGlands, 0, 0, 0, 0);
+			this.createPerk(MutationsLib.OrcAdrenalGlands, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-			this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
+			this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
 				this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.GorgonsEyesEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.DraconicLungsEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.GorgonsEyesPrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.DraconicLungsPrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 5) {
-				this.createPerk(PerkLib.OniMusculatureEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.PigBoarFatEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.LactaBovinaOvariesEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OniMusculaturePrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OrcAdrenalGlandsPrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.PigBoarFatPrimitive, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.LactaBovinaOvariesPrimitive, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
-				this.createPerk(PerkLib.DraconicLungsFinalForm, 0, 0, 0, 0);
-				this.createPerk(PerkLib.OniMusculatureFinalForm, 0, 0, 0, 0);
-				this.createPerk(PerkLib.OrcAdrenalGlandsFinalForm, 0, 0, 0, 0);
-				this.createPerk(PerkLib.PigBoarFatFinalForm, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.DraconicLungsEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OniMusculatureEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.PigBoarFatEvolved, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 8) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);

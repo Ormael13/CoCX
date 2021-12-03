@@ -43,6 +43,8 @@ public class BeeGirlScene extends BaseContent
 		private function get conversation():int { return (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_CONVERSATION) >> 16; }
 
 		private function set conversation(value:int):void { flags[kFLAGS.BEE_GIRL_STATUS] = (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_ATTITUDE) + (value << 16); }
+		
+		public static var beeHair:Array = ["shiny black", "black and yellow", "brown and yellow", "brown"];
 
 		//The Queen Bee
 		//location: Forest
@@ -72,7 +74,7 @@ public class BeeGirlScene extends BaseContent
 		private function beeEncounterSelect(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
 			spriteSelect(6);
-			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, antennae.type, and luscious black lips that glimmer wetly");
+			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy ntennae, and luscious black lips that glimmer wetly");
 			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				AlrauneAndBee();
 				return;
@@ -412,7 +414,7 @@ public class BeeGirlScene extends BaseContent
 			clearOutput();
 			spriteSelect(6);
 			outputText("You clear your head and resolve to defeat the monstrous bee-girl");
-			if ((rand(3) == 0 && player.level < 12) || (rand(3) > 0 && player.level >= 12)) {
+			if (player.level >= 3 && ((rand(4) == 0 && player.level < 12) || (rand(4) > 0 && player.level >= 12))) {
 				outputText(" huntress.");
 				startCombat(new BeeGirlHuntress());
 			}
@@ -760,7 +762,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("Her face breaks into a wide knowing smile.  <i>“Hello again, my fine cocked friend,”</i> she says rising and gently hovering over to you.  <i>“You know, the queen izzz eagerly waiting to meet you.  Zzzhe will be able to take care of you much better than I ever could, but I think we can zzztill zzzpend zzzome time together if you’re up for it.”</i>\n\n");
 			outputText("You look at her a bit confused, unsure exactly what she is telling you.  <i>“Zzzzilly boy, I’ve been telling the queen about our meetingzzz, and zzzhe is eager to aczzzzept you into the hive!”</i>  She moves forward and pulls your [armor] from your body and gently rubs your [cock].  <i>“I told you that only a queen bee could help you with zzzomething thizzz big, and you’ll be able to fill her with it and fertilize all her eggzzz.  Thizzz izzz the releazzze you’ve been craving all thizzz time, come on!”</i>\n\n");
 			outputText("Her offer intrigues you incredibly, and you can’t imagine turning her down, not now.  Once, you might have been able to turn away from it, but now that you’ve got this bee prick and have felt the release that bee’s honey gives you, there's just no way.  You nod eagerly to the bee girl and \n\n");
-			if (player.wings.type == Wings.BEE_LIKE_LARGE) {
+			if (player.wings.type == Wings.BEE_LARGE) {
 				outputText("spread your wings.  She takes your hand and before rising up into the air and leading you home.\n\n");
 			}
 			else {
@@ -768,7 +770,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.wings.type == Wings.NONE) {
 					outputText("At once your back starts to tingle, and a pair of bee wings erupt behind you, they quickly grow large and with a few experimental flaps you find that they can carry your weight.");
 				}
-				else if (player.wings.type == Wings.BEE_LIKE_SMALL) {
+				else if (player.wings.type == Wings.BEE_SMALL) {
 					outputText("Your wings tingle before suddenly growing much larger.  You test them for a moment finding that they are now big enough to allow you to fly!");
 				}
 				else {

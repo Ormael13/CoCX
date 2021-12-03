@@ -136,7 +136,7 @@ internal function oasisSexing():void {
 		//IZ OVER! NEWLINE BITCH
 		outputText("\n\n");
 		//Preggers chance!
-		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
+		if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
 		player.sexReward("cum","Vaginal");
 	}
 	//Buttbutt buuuuuttt

@@ -129,7 +129,7 @@ public class YukiOnnaScene extends BaseContent
 				player.femininity = 100;
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			if (CoC.instance.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombatTFEvent();
 			else doNext(camp.returnToCampUseEightHours);
 		}
 		public function encounterYukiOnnaYes2():void {

@@ -18,8 +18,6 @@ public class VolcanicCrag extends BaseContent
 	{
 		public var behemothScene:BehemothScene = new BehemothScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		public var alrauneScene:AlrauneScene = new AlrauneScene();
-		public var hellcatScene:HellCatScene = new HellCatScene();
 		
 		public function VolcanicCrag() 
 		{
@@ -27,18 +25,20 @@ public class VolcanicCrag extends BaseContent
 		
 		public function exploreVolcanicCrag():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
+			if (!player.hasPerk(PerkLib.FireAffinity)) ConstantHeatConditionsTick();
 			doNext(playerMenu);
 			
 			var choice:Array = [];
 			var select:int;
 			
 			//Build choice list!
-			choice[choice.length] = 0; //Behemoth
-			if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) choice[choice.length] = 1; //Phoenix
-			if (rand(3) == 0) choice[choice.length] = 2; //Find Drake's Heart
-			choice[choice.length] = 3; //Fire True Golems
-			choice[choice.length] = 4; //Cinderbloom
-			if (rand(3) == 0) choice[choice.length] = 5; //Find nothing! The rand will be removed from this once the Volcanic Crag is populated with more encounters.
+			choice[choice.length] = 0; //Behemoth (lvl 40)
+			choice[choice.length] = 1; //Phoenix Platoon (lvl 74) OR Behemoth (lvl 40)
+			choice[choice.length] = 2; //??? (lvl ??)
+			choice[choice.length] = 3; //??? (lvl ??)
+			choice[choice.length] = 4; //Fire True Golems (lvl 80)
+			choice[choice.length] = 5; //Find Drake's Heart
+			choice[choice.length] = 6; //Find nothing!
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
@@ -50,18 +50,15 @@ public class VolcanicCrag extends BaseContent
 				partsofTripxiFatbilly();
 				return;
 			}
-			//Double barreled dragon gun (later move to Ashland)
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0 && rand(2) == 0) {
-				partsofTripxiDoubleBarreledDragonGun();
-				return;
-			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				VolcanicCragConditions();
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
+				VolcanicCragConditions();
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
@@ -71,33 +68,30 @@ public class VolcanicCrag extends BaseContent
 					behemothScene.behemothIntro();
 					break;
 				case 1:
-					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) phoenixScene.encounterPhoenix2();
+					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) {
+						VolcanicCragConditions();
+						phoenixScene.encounterPhoenix3();
+					}
 					else behemothScene.behemothIntro();
 					break;
 				case 2:
+				/*case 2:	//
+					
+					break;
+				case 3:		//Magma Slime
+					
+					break;*/
+				case 3:
+				case 4: //True Fire Golems
+					clearOutput();
+					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your [weapon] for a fight!");
+					VolcanicCragConditions();
+					startCombat(new GolemsTrueFire());
+					break;
+				case 5:
 					clearOutput();
 					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
 					inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
-					break;
-				case 3: //True Fire Golems
-					clearOutput();
-					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your [weapon] for a fight!");
-					startCombat(new GolemsTrueFire());
-					break;
-				case 4:	//Cinderbloom
-					clearOutput();
-					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-						outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
-						menu();
-						addButton(0, "Yes", camp.returnToCampUseOneHour);
-						addButton(1, "No", alrauneScene.alrauneVolcanicCrag);
-					} else {
-						alrauneScene.alrauneVolcanicCrag();
-					}
-					break;
-				case 5:	//Hellcat/Witches Sabbath
-					if ((flags[kFLAGS.WITCHES_SABBATH] > 3 && player.hellcatScore() > 9 && player.gender == 3) || (flags[kFLAGS.WITCHES_SABBATH] > 0 && player.catScore() >= 8 && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))) SceneLib.volcanicCrag.hellcatScene.WitchesSabbath();
-					else SceneLib.volcanicCrag.hellcatScene.HellCatIntro();
 					break;
 				default:
 					clearOutput();
@@ -110,15 +104,20 @@ public class VolcanicCrag extends BaseContent
 					doNext(camp.returnToCampUseOneHour);
 			}
 		}
-		
-		public function partsofTripxiDoubleBarreledDragonGun():void {
-			clearOutput();
-			outputText("As you explore the vulcanic crag you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
-			outputText("You carefully put the pieces of the Double barreled dragon gun in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-			player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+
+		public function VolcanicCragConditions():void {
+			if (!player.hasPerk(PerkLib.FireAffinity)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,0,0,0,0);
 		}
+
+		public function ConstantHeatConditionsTick():void {
+			var HPD:Number = 0.05;
+			if (player.hasPerk(PerkLib.ColdAffinity)) HPD *= 2;
+			HPD *= player.maxHP();
+			HPD = Math.round(HPD);
+			outputText("Hot environment slowly seeps into your body. ");
+			player.takeFireDamage(HPD, true);
+		}
+		
 		public function partsofTripxiFatbilly():void {
 			clearOutput();
 			outputText("As you explore the vulcanic crag you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");

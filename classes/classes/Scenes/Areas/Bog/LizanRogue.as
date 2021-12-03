@@ -120,7 +120,7 @@ public class LizanRogue extends Monster
 			this.createPerk(PerkLib.ResistanceI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Tactician, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-			this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
+			this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.special1 = chooseBlowpipe;
 			this.special2 = wingstickThrow;

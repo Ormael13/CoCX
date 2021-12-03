@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.D3
 {
 import classes.Appearance;
 import classes.BodyParts.Ears;
@@ -6,6 +6,8 @@ import classes.BreastRowClass;
 import classes.Cock;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
@@ -155,6 +157,16 @@ import classes.VaginaClass;
 			else SceneLib.d3.doppleganger.inSovietCoCSelfFucksYou();
 		}
 		
+		
+		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			if (ability is WhitefireSpell) {
+				handleSpellResistance("whitefire");
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
 		public function handleSpellResistance(spell:String):void
 		{
 			outputText("The mirror demon barely even flinches as your fierce, puissant fire washes over [him].");
@@ -187,7 +199,7 @@ import classes.VaginaClass;
 				outputText("Your duplicate is too stunned, buying you another round!");
 				return;
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
+			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -210,7 +222,7 @@ import classes.VaginaClass;
 			addTalkShit();
 		}
 		
-		public function Doppleganger() 
+		public function Doppleganger()
 		{
 			this.a = "the ";
 			this.short = "doppleganger";

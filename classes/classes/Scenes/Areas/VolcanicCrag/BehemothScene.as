@@ -177,13 +177,14 @@ public class BehemothScene extends BaseContent
 		private function startFight():void {
 			clearOutput();
 			outputText("You tell him that you're here to fight. \"<i>All right! Get ready,</i>\" he says with a grin and claws raised.");
+			SceneLib.volcanicCrag.VolcanicCragConditions();
 			startCombat(new Behemoth());
 			monster.createStatusEffect(StatusEffects.Spar,0,0,0,0);
 		}
 		
 		public function winAgainstBehemoth():void {
 			clearOutput();
-			if (monster.HP <= 0) outputText("The behemoth falls down on his knees, too badly beaten to continue fighting.");
+			if (monster.HP <= monster.minHP()) outputText("The behemoth falls down on his knees, too badly beaten to continue fighting.");
 			else outputText("The behemoth falls down on his knees, too turned on to continue fighting.");
 			outputText("\n\n\"<i>You have managed to beat me. Nothing beats a good workout,</i>\" he says.");
 			//Get some gems back.

@@ -20,7 +20,7 @@ import classes.internals.EnumValue;
  */
 public class Skin extends SaveableBodyPart {
 
-    public static const COVERAGE_NONE:int     = 0;
+  public static const COVERAGE_NONE:int     = 0;
 	public static const COVERAGE_LOW:int      = 1;
 	public static const COVERAGE_MEDIUM:int   = 2;
 	public static const COVERAGE_HIGH:int     = 3;
@@ -38,42 +38,106 @@ public class Skin extends SaveableBodyPart {
 	 */
 	public static var SkinTypes:/*EnumValue*/Array = [];
 
-	public static const PLAIN:int                 = 0;
-	EnumValue.add(SkinTypes, PLAIN, "PLAIN", {name:"skin", plural: false,base:true});
-	public static const FUR:int                   = 1;
-	EnumValue.add(SkinTypes, FUR, "FUR", {name:"fur", plural: false, coat:true});
-	public static const SCALES:int                = 2;
-	EnumValue.add(SkinTypes, SCALES, "SCALES", {name:"scales", plural: true});
-	public static const GOO:int                   = 3;
-	EnumValue.add(SkinTypes, GOO, "GOO", {name:"skin", plural: false,base:true});
-	public static const UNDEFINED:int             = 4;//[Deprecated] Silently discarded upon loading save
-	public static const CHITIN:int                = 5;
-	EnumValue.add(SkinTypes, CHITIN, "CHITIN", {name:"chitin", plural: false, coat:true});
-	public static const BARK:int                  = 6;
-	EnumValue.add(SkinTypes, BARK, "BARK", {name:"bark", plural: false, coat:true});
-	public static const STONE:int                 = 7;
-	EnumValue.add(SkinTypes, STONE, "STONE", {name:"stone", plural: false,base:true});
-	public static const TATTOED:int               = 8; // [Deprecated] Replaced on load with PLAIN + pattern
-	public static const AQUA_SCALES:int           = 9;
-	EnumValue.add(SkinTypes, AQUA_SCALES, "AQUA_SCALES", {name:"scales", plural: true, coat:true});
-	public static const PARTIAL_FUR:int           = 10; // [Deprecated] Replaced on load with PLAIN + FUR
-	public static const PARTIAL_SCALES:int        = 11; // [Deprecated] Replaced on load with PLAIN + SCALES
-	public static const PARTIAL_CHITIN:int        = 12; // [Deprecated] Replaced on load with PLAIN + CHITIN
-	public static const PARTIAL_BARK:int          = 13; // [Deprecated] Replaced on load with PLAIN + BARK
-	public static const DRAGON_SCALES:int         = 14;
-	EnumValue.add(SkinTypes, DRAGON_SCALES, "DRAGON_SCALES", {name:"dragon scales", plural: false, coat:true});
-	public static const MOSS:int                  = 15;
-	EnumValue.add(SkinTypes, MOSS, "MOSS", {name:"moss", plural: false, coat:true});
-	public static const PARTIAL_DRAGON_SCALES:int = 16; // [Deprecated] Replaced on load with PLAIN + DRAGON_SCALES
-	public static const PARTIAL_STONE:int         = 17; // [Deprecated] Replaced on load with PLAIN + STONE
-	public static const PARTIAL_AQUA_SCALES:int   = 18; // [Deprecated] Replaced on load with PLAIN + AQUA_SCALES
-	public static const AQUA_RUBBER_LIKE:int      = 19;
-	EnumValue.add(SkinTypes, AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", {name:"slippery rubber-like skin", plural: false,base:true});
-	public static const TATTOED_ONI:int           = 20; // [Deprecated] Replaced on load with PLAIN + pattern
-	public static const FEATHER:int 	          = 21;
-	EnumValue.add(SkinTypes, FEATHER, "FEATHER", {name:"feather", plural: false,base:true});
-	public static const TRANSPARENT:int 	      = 22;
-	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {name:"transparent", plural: false,base:true});
+	public static const PLAIN: int = 0;
+	EnumValue.add(SkinTypes, PLAIN, "PLAIN", {
+		name:"skin",
+		appearanceDesc: "Your [skin full.noadj] has a completely normal texture, at least for your original world.",
+		plural: false,
+		base:true
+	});
+	public static const FUR: int = 1;
+	EnumValue.add(SkinTypes, FUR, "FUR", {
+		name:"fur",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: false,
+		coat:true
+	});
+	public static const SCALES: int = 2;
+	EnumValue.add(SkinTypes, SCALES, "SCALES", {
+		name:"scales",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: true
+	});
+	public static const GOO: int = 3;
+	EnumValue.add(SkinTypes, GOO, "GOO", {
+		name:"skin",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} made of [skin coat].",
+		plural: false,
+		base:true
+	});
+	public static const UNDEFINED: int = 4;//[Deprecated] Silently discarded upon loading save
+	public static const CHITIN: int = 5;
+	EnumValue.add(SkinTypes, CHITIN, "CHITIN", {
+		name:"chitin",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: false,
+		coat:true
+	});
+	public static const BARK: int = 6;
+	EnumValue.add(SkinTypes, BARK, "BARK", {
+		name:"bark",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: false,
+		coat:true
+	});
+	public static const STONE: int = 7;
+	EnumValue.add(SkinTypes, STONE, "STONE", {
+		name:"stone",
+		appearanceDesc: "Your [skin full.noadj] is completely made of [gargoylematerial].",
+		plural: false,
+		base:true
+	});
+	public static const TATTOED: int = 8; // [Deprecated] Replaced on load with PLAIN + pattern
+	public static const AQUA_SCALES: int = 9;
+	EnumValue.add(SkinTypes, AQUA_SCALES, "AQUA_SCALES", {
+		name:"scales",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: true,
+		coat:true
+	});
+	public static const PARTIAL_FUR: int = 10; // [Deprecated] Replaced on load with PLAIN + FUR
+	public static const PARTIAL_SCALES: int = 11; // [Deprecated] Replaced on load with PLAIN + SCALES
+	public static const PARTIAL_CHITIN: int = 12; // [Deprecated] Replaced on load with PLAIN + CHITIN
+	public static const PARTIAL_BARK: int = 13; // [Deprecated] Replaced on load with PLAIN + BARK
+	public static const DRAGON_SCALES: int = 14;
+	EnumValue.add(SkinTypes, DRAGON_SCALES, "DRAGON_SCALES", {
+		name:"dragon scales",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: false,
+		coat:true
+	});
+	public static const MOSS: int = 15;
+	EnumValue.add(SkinTypes, MOSS, "MOSS", {
+		name:"moss",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: false,
+		coat:true
+	});
+	public static const PARTIAL_DRAGON_SCALES: int = 16; // [Deprecated] Replaced on load with PLAIN + DRAGON_SCALES
+	public static const PARTIAL_STONE: int = 17; // [Deprecated] Replaced on load with PLAIN + STONE
+	public static const PARTIAL_AQUA_SCALES: int = 18; // [Deprecated] Replaced on load with PLAIN + AQUA_SCALES
+	public static const AQUA_RUBBER_LIKE: int = 19;
+	EnumValue.add(SkinTypes, AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", {
+		name:"slippery rubber-like skin",
+		appearanceDesc: "Your [skin full.noadj] has a rubber-like texture.",
+		plural: false,
+		base:true
+	});
+	public static const TATTOED_ONI: int = 20; // [Deprecated] Replaced on load with PLAIN + pattern
+	public static const FEATHER: int = 21;
+	EnumValue.add(SkinTypes, FEATHER, "FEATHER", {
+		name:"feather",
+		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		plural: false,
+		base:true
+	});
+	public static const TRANSPARENT: int = 22;
+	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {
+		name:"transparent",
+		appearanceDesc: "Your [skin full.noadj] is completely transparent, like a ghost's.",
+		plural: false,
+		base:true
+	});
 
 	/**
 	 * Entry properties:
@@ -85,38 +149,103 @@ public class Skin extends SaveableBodyPart {
 	 */
 	public static var PatternTypes:/*EnumValue*/Array = [];
 
-	public static const PATTERN_NONE:int = 0;
-	EnumValue.add(PatternTypes, PATTERN_NONE, "NONE", {name:"none", base:true, coat:true});
-	public static const PATTERN_MAGICAL_TATTOO:int = 1;
-	EnumValue.add(PatternTypes, PATTERN_MAGICAL_TATTOO, "MAGICAL_TATTOO", {name:"magical tattoo", base:true});
-	public static const PATTERN_ORCA_UNDERBODY:int = 2;
-	EnumValue.add(PatternTypes, PATTERN_ORCA_UNDERBODY, "ORCA_UNDERBODY", {name:"orca underbody", base:true});
-	public static const PATTERN_BEE_STRIPES:int = 3;
-	EnumValue.add(PatternTypes, PATTERN_BEE_STRIPES, "BEE_STRIPES", {name:"bee stripes", coat:true});
-	public static const PATTERN_TIGER_STRIPES:int = 4;
-	EnumValue.add(PatternTypes, PATTERN_TIGER_STRIPES, "TIGER_STRIPES", {name:"tiger stripes", coat:true});
-	public static const PATTERN_BATTLE_TATTOO:int = 5;
-	EnumValue.add(PatternTypes, PATTERN_BATTLE_TATTOO, "BATTLE_TATTOO", {name:"battle tattoo", base:true});
-	public static const PATTERN_SPOTTED:int = 6;
-	EnumValue.add(PatternTypes, PATTERN_SPOTTED, "SPOTTED", {name:"spotted", coat:true});
-	public static const PATTERN_LIGHTNING_SHAPED_TATTOO:int = 7;
-	EnumValue.add(PatternTypes, PATTERN_LIGHTNING_SHAPED_TATTOO, "LIGHTNING_SHAPED_TATTOO", {name:"lightning shaped tattoo", base:true});
-	public static const PATTERN_RED_PANDA_UNDERBODY:int = 8;
-	EnumValue.add(PatternTypes, PATTERN_RED_PANDA_UNDERBODY, "RED_PANDA_UNDERBODY", {name:"red panda underbody", coat:true});
-	public static const PATTERN_SCAR_SHAPED_TATTOO:int = 9;
-	EnumValue.add(PatternTypes, PATTERN_SCAR_SHAPED_TATTOO, "SCAR_SHAPED_TATTOO", {name:"scar shaped tattoo", base:true});
-	public static const PATTERN_WHITE_BLACK_VEINS:int = 10;
-	EnumValue.add(PatternTypes, PATTERN_WHITE_BLACK_VEINS, "WHITE_BLACK_VEINS", {name:"white and black veins", base:true});
-	public static const PATTERN_VENOMOUS_MARKINGS:int = 11;
-	EnumValue.add(PatternTypes, PATTERN_VENOMOUS_MARKINGS, "VENOMOUS_MARKINGS", {name:"venomous markings", base:true});
-	public static const PATTERN_USHI_ONI_TATTOO:int = 12;
-	EnumValue.add(PatternTypes, PATTERN_USHI_ONI_TATTOO, "USHI_ONI_TATTOO", {name:"ushi-oni tattoo", base:true});
-	public static const PATTERN_SCAR_WINDSWEPT:int = 13;
-	EnumValue.add(PatternTypes, PATTERN_SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {name:"windswept scars", base:true});
-	public static const PATTERN_OIL:int = 14;
-	EnumValue.add(PatternTypes, PATTERN_OIL, "OIL", {name:"oily skin", base:true});
-	public static const PATTERN_SEA_DRAGON_UNDERBODY:int = 15;
-	EnumValue.add(PatternTypes, PATTERN_SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {name:"sea dragon underbody", base:true});
+	public static const PATTERN_NONE: int = 0;
+	EnumValue.add(PatternTypes, PATTERN_NONE, "NONE", {
+		name:"none",
+		appearanceDesc: "",
+		base:true,
+		coat:true
+	});
+	public static const PATTERN_MAGICAL_TATTOO: int = 1;
+	EnumValue.add(PatternTypes, PATTERN_MAGICAL_TATTOO, "MAGICAL_TATTOO", {
+		name:"magical tattoo",
+		appearanceDesc: "Your body is covered with runic tattoos.",
+		base:true
+	});
+	public static const PATTERN_ORCA_UNDERBODY: int = 2;
+	EnumValue.add(PatternTypes, PATTERN_ORCA_UNDERBODY, "ORCA_UNDERBODY", {
+		name:"orca underbody",
+		appearanceDesc: "A [skin color2] underbelly runs on the underside of your limbs bearing a glossy shine, similar to that of an orca.",
+		base:true
+	});
+	public static const PATTERN_BEE_STRIPES: int = 3;
+	EnumValue.add(PatternTypes, PATTERN_BEE_STRIPES, "BEE_STRIPES", {
+		name:"bee stripes",
+		appearanceDesc: "You have [skin color] [skin] covered by a bee-like [skin color2] stripe pattern.",
+		coat:true
+	});
+	public static const PATTERN_TIGER_STRIPES: int = 4;
+	EnumValue.add(PatternTypes, PATTERN_TIGER_STRIPES, "TIGER_STRIPES", {
+		name:"tiger stripes",
+		appearanceDesc: "You have [skin color] [skin] covered by a tiger-like [skin color2] stripe pattern.",
+		coat:true
+	});
+	public static const PATTERN_BATTLE_TATTOO: int = 5;
+	EnumValue.add(PatternTypes, PATTERN_BATTLE_TATTOO, "BATTLE_TATTOO", {
+		name:"battle tattoo",
+		appearanceDesc: "Your body is covered with battle tattoos.",
+		base:true
+	});
+	public static const PATTERN_SPOTTED: int = 6;
+	EnumValue.add(PatternTypes, PATTERN_SPOTTED, "SPOTTED", {
+		name:"spotted",
+		appearanceDesc: "You have many [skin color2] spots around your [skin color] fur.",
+		coat:true
+	});
+	public static const PATTERN_LIGHTNING_SHAPED_TATTOO: int = 7;
+	EnumValue.add(PatternTypes, PATTERN_LIGHTNING_SHAPED_TATTOO, "LIGHTNING_SHAPED_TATTOO", {
+		name:"lightning shaped tattoo",
+		appearanceDesc: "Your body is covered with glowing lightning tattoos.",
+		base:true
+	});
+	public static const PATTERN_RED_PANDA_UNDERBODY: int = 8;
+	EnumValue.add(PatternTypes, PATTERN_RED_PANDA_UNDERBODY, "RED_PANDA_UNDERBODY", {
+		name:"red panda underbody",
+		appearanceDesc: "You have an underbelly colored [skin color2].",
+		coat:true
+	});
+	public static const PATTERN_SCAR_SHAPED_TATTOO: int = 9;
+	EnumValue.add(PatternTypes, PATTERN_SCAR_SHAPED_TATTOO, "SCAR_SHAPED_TATTOO", {
+		name:"scar shaped tattoo",
+		appearanceDesc: "Your body is covered with scar-shaped tattoos.",
+		base:true
+	});
+	public static const PATTERN_WHITE_BLACK_VEINS: int = 10;
+	EnumValue.add(PatternTypes, PATTERN_WHITE_BLACK_VEINS, "WHITE_BLACK_VEINS", {
+		name:"white and black veins",
+		appearanceDesc: "Many [skin color2] veins are clearly visible on your [skin full.noadj] body.",
+		base:true
+	});
+	public static const PATTERN_VENOMOUS_MARKINGS: int = 11;
+	EnumValue.add(PatternTypes, PATTERN_VENOMOUS_MARKINGS, "VENOMOUS_MARKINGS", {
+		name:"venomous markings",
+		appearanceDesc: "Your skin is covered in intricate purple designs which pump venom alongside their paths.",
+		base:true
+	});
+	public static const PATTERN_USHI_ONI_TATTOO: int = 12;
+	EnumValue.add(PatternTypes, PATTERN_USHI_ONI_TATTOO, "USHI_ONI_TATTOO", {
+		name:"ushi-oni tattoo",
+		appearanceDesc: "You have strange ushi-oni tattoos on your belly, chest, breasts, shoulders and even face; some are like a black sheen plate, while others are just fur.",
+		base:true
+	});
+	public static const PATTERN_SCAR_WINDSWEPT: int = 13;
+	EnumValue.add(PatternTypes, PATTERN_SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {
+		name:"windswept scars",
+		appearanceDesc: "Your body is covered with scars as if your skin was cut in various place by a windstorm",
+		base:true
+	});
+	public static const PATTERN_OIL: int = 14;
+	EnumValue.add(PatternTypes, PATTERN_OIL, "OIL", {
+		name:"oily skin",
+		appearanceDesc: "Your body is dripping with oily black fluids.",
+		base:true
+	});
+	public static const PATTERN_SEA_DRAGON_UNDERBODY: int = 15;
+	EnumValue.add(PatternTypes, PATTERN_SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {
+		name:"sea dragon underbody",
+		appearanceDesc: "An underbelly colored [skin color2] runs on the underside of your limbs bearing a glossy shine, on top of being lined up with bioluminescent dots like those of a deep sea fish.",
+		base:true
+	});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 
 	public var base:SkinLayer;
@@ -475,7 +604,7 @@ public class Skin extends SaveableBodyPart {
 		coat.type = TYPE_TO_COAT[value];
 		if (value == TATTOED) {
 			base.pattern = PATTERN_MAGICAL_TATTOO;
-			base.adj = "sexy tattooed";
+			base.adj = "tattooed";
 		} else if (value == AQUA_RUBBER_LIKE) {
 			base.adj = "slippery rubber-like";
 		} else if (value == TATTOED_ONI) {
@@ -554,10 +683,24 @@ public class Skin extends SaveableBodyPart {
 		savedata.chitinColor = coat.color;
 	}
 
+	public static function getSkinAppearanceDescription(creature: *):String {
+		const id: int = creature.skin.base.type;
+
+		return formatDescription((SkinTypes[id].appearanceDescFunc ? SkinTypes[id].appearanceDescFunc(creature) : SkinTypes[id].appearanceDesc) || "", creature);
+	}
+
+	public static function getSkinPatternAppearanceDescription(creature: *):String {
+		const id: int = creature.skin.base.pattern;
+
+		return formatDescription((PatternTypes[id].appearanceDescFunc ? PatternTypes[id].appearanceDescFunc(creature) : PatternTypes[id].appearanceDesc) || "", creature);
+	}
+
 	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
+		const coveragePattern:RegExp = /{partiallyOrCompletely}/g;
 
-		return " " + desc
+		return desc
+			.replace(coveragePattern, creature.skin.coverage > Skin.COVERAGE_MEDIUM ? "completely" : "partially")
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }

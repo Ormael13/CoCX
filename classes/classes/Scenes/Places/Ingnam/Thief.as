@@ -44,10 +44,11 @@ public class Thief extends Monster
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 1;
-			this.gems = 5+rand(10);
+			this.gems = 15+rand(5);
 			this.drop = new WeightedDrop().add(weapons.DAGGER,1)
 					.add(armors.LEATHRA,1)
 					.add(null,8);
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

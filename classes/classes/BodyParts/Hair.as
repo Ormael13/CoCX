@@ -114,16 +114,14 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, STORM, "STORM", {
 		name:"glowing lightning-shaped",
 		shortDesc: "lightning {hair}",
-		appearanceDesc: "Your wild {hairInfo}'s tips end in glowing lightning-shaped locks, cackling with electricity whenever you will them to.",
-		ignoresStyle: true
+		appearanceDesc: "Your {hairInfo}'s tips end in glowing lightning-shaped locks, crackling with electricity whenever you will them to."
 	});
 
 	public static const BURNING:int = 12;
 	EnumValue.add(Types, BURNING, "BURNING", {
 		name:"burning",
 		shortDesc: "burning hair",
-		appearanceDesc: "Your wild {hair} has its tips overtaken by a magic flame, burning anything you wish it to and nothing more.",
-		ignoresStyle: true
+		appearanceDesc: "Your {hairInfo} has its tips overtaken by a magic flame, burning anything you wish it to and nothing more."
 	});
 
 	public static const SNOWY:int = 13;
@@ -178,12 +176,26 @@ public class Hair extends BodyPart {
 		appearanceDesc: "Although your {hairInfo} looks mostly human, that notion is quickly discarded by its prismatic strands, varying in hue along their length to display all the colors of a rainbow."
 	});
 
+	public static const MINDBREAKER:int = 19;
+	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
+		name:"mindbreaker",
+		shortDesc: "slimy tentacle {hair}",
+		appearanceDesc: "Your {hairInfo} is made out of tentacles, only vaguely resembling the real deal."
+	});
+
+	public static const MINDBREAKERMALE:int = 20;
+	EnumValue.add(Types, MINDBREAKERMALE, "MINDBREAKERMALE", {
+		name:"mindbreaker",
+		shortDesc: "slimy tentacle {hair}",
+		appearanceDesc: "Smaller webbings frill along the top of your head, forming a crown-like ring. Along these frills are longer hair-like tentacles that reach down to drape past your shoulders, just above your pectorals."
+	});
+
 	// Additional modifiers for hair descriptions
 	public static var Styles:/*EnumValue*/Array = [];
 
 	public static const PLAIN:int  = 0;
 	EnumValue.add(Styles, PLAIN, "PLAIN", {
-		adjective: "plain"
+		adjective: ""
 	});
 
 	public static const WILD:int = 1;
@@ -198,32 +210,32 @@ public class Hair extends BodyPart {
 
 	public static const LONGTRESSES:int  = 3;
 	EnumValue.add(Styles, LONGTRESSES, "LONGTRESSES", {
-		adjective: "low ponytailed"
+		adjective: "low-ponytailed"
 	});
 
-	public static const TWINPIGTAIL:int  = 4;
-	EnumValue.add(Styles, TWINPIGTAIL, "TWINPIGTAIL", {
+	public static const TWINTAILS:int  = 4;
+	EnumValue.add(Styles, TWINTAILS, "TWINTAILS", {
 		adjective: "twintailed"
 	});
 
 	public static const DWARVEN:int  = 5;
 	EnumValue.add(Styles, DWARVEN, "DWARVEN", {
-		adjective: "twintailed"
+		adjective: "Dwarven"
 	});
 
 	public static const SNOWLILY:int  = 6;
 	EnumValue.add(Styles, SNOWLILY, "SNOWLILY", {
-		adjective: ""
+		adjective: "snowlily"
 	});
 
 	public static const FOURWIND:int  = 7;
 	EnumValue.add(Styles, FOURWIND, "FOURWIND", {
-		adjective: ""
+		adjective: "fourwind"
 	});
 
 	public static const FOURWINDL:int  = 8;
 	EnumValue.add(Styles, FOURWINDL, "FOURWINDL", {
-		adjective: ""
+		adjective: "long fourwind"
 	});
 
 
@@ -285,6 +297,7 @@ public class Hair extends BodyPart {
 
 	public static function getStyleDescription(creature: *): String {
 		const id: int = creature.hairStyle;
+		const hairId: int = creature.hairType;
 
 		var hair:String = "hair";
 
@@ -293,7 +306,11 @@ public class Hair extends BodyPart {
 			hair = "mane";
 		}
 
-		return Styles[id].adjective + ' ' + hair;
+		if (Types[hairId].ignoresStyle) {
+			return formatDescription(Types[hairId].shortDesc || "{hair}", creature);
+		} else {
+			return formatDescription((Styles[id].adjective + ' ' || '') + "{hair}", creature);
+		}
 	}
 
 	private static function formatDescription(desc: String, creature: *): String {
@@ -343,7 +360,7 @@ public class Hair extends BodyPart {
 		}	else if (hairscale > 0.4 && hairscale <= 0.5){
 			return "ass-length";
 		}	else if (hairscale > 0.5 && hairscale <= 1){
-			return "obscenely long, "
+			return "obscenely long"
 		}	else if (hairscale > 1 ){
 			return "floor-length";
 		}

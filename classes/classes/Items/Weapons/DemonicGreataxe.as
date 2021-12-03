@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		{
 			super("D.GAXE", "Demon G.Axe", "demonic greataxe", "a demonic greataxe", "cleave", 28, 1280,
 					"A greataxe made in black metal and imbued with unholy power. Its shaft is wrapped in bat wings made of darkened bronze. Its deadly blade seems to always aim for the enemy necks.",
-					"Large"
+					"Large", "Axe"
 			);
 		}
 		override public function get attack():Number{

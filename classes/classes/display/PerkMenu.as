@@ -10,10 +10,15 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkClass;
 import classes.PerkLib;
+import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
+import flash.utils.Dictionary;
+import flash.events.TextEvent;
+
 
 import coc.view.ButtonDataList;
 import flash.events.MouseEvent;
@@ -24,7 +29,7 @@ public class PerkMenu extends BaseContent {
 	public function displayPerks(e:MouseEvent = null):void {
 		var temp:int = 0;
 		clearOutput();
-		displayHeader("Perks");
+		displayHeader("Perks (Total: " + player.perks.length + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}
@@ -74,17 +79,13 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
 			addButton(9, "P.Golems",golemsbehaviourOptions);
 		}
-		addButton(10, "Number of", EngineCore.doNothing);
-		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
+		//addButton(10, "Number of", EngineCore.doNothing);
+		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
 		if (player.hasPerk(PerkLib.LiftOff)) {
 			outputText("\n<b>You can choose and adjust various misc effects.</b>");
 			addButton(12, "Misc Opt",MiscOption);
 		}
-		//if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
-		//	if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
-		//	if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
-		//	addButton(13, "Bloody Opt",DarkRitualOption);
-		//}
+		addButton (13, "PerkDB2", perkDatabase2); //WIP.
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
 			addButton(14, "Will-o'-the-wisp",WOTWbehaviourOptions);
@@ -162,7 +163,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
 			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
 			outputText("\n\nBerzerker: <b>");
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3) outputText("Autocast");
@@ -290,7 +291,7 @@ public class PerkMenu extends BaseContent {
 			if (((player.weaponName == "fists" && player.hasNaturalWeapons) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
 			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
 		}
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(10, "None", zerkingStyle,0);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(11, "Berserking", zerkingStyle,1);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(12, "Lustzerking", zerkingStyle,2);
@@ -493,6 +494,7 @@ public class PerkMenu extends BaseContent {
 		menu();
 		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
 		outputText("\n<b>Elementals behavious:</b>\n");
+		if (elementalConjuerSummons == 4) outputText("Elemental will attack enemy on it own alongside PC + Attacking instead of PC each time melee attack command is chosen");
         if (elementalConjuerSummons == 3) outputText("Elemental will attack enemy on it own alongside PC.");
 		if (elementalConjuerSummons == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
 		if (elementalConjuerSummons < 2) outputText("Not participating");
@@ -531,13 +533,47 @@ public class PerkMenu extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption) && attackingElementalTypeFlag != 13) addButton(5, "Corruption", attackingElementalType, 13);
 			addButton(9, "1st", summonsbehaviourOptions, page - 1);
 		}
-		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,1);
-		if (elementalConjuerSummons != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
-		if (elementalConjuerSummons != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
+		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag, kFLAGS.ELEMENTAL_CONJUER_SUMMONS, 1);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementals)) {
+			if (elementalConjuerSummons != 2) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
+			if (player.hasPerk(PerkLib.FirstAttackElementals)) {
+				if (elementalConjuerSummons != 3) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
+				if (elementalConjuerSummons != 4) addButton(13, "Melee+Help", elementalAttackReplacingPCmeleeAttack2);
+			}
+			else {
+				addButtonDisabled(12, "Helping", "Req. First Attack: Elementals perk.");
+				addButtonDisabled(13, "Melee+Help", "Req. First Attack: Elementals perk.");
+			}
+		}
+		else {
+			addButtonDisabled(11, "MeleeAtk", "Req. to have summoned at least 1 elemental.");
+			addButtonDisabled(12, "Helping", "Req. to have summoned at least 1 elemental.");
+			addButtonDisabled(13, "Melee+Help", "Req. to have summoned at least 1 elemental.");
+		}
 		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
         else addButton(14, "Back", displayPerks);
         function elementalAttackReplacingPCmeleeAttack():void {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
+            if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
+                menu();
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", attackingElementalType,1);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", attackingElementalType,2);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", attackingElementalType,3);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", attackingElementalType,4);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", attackingElementalType,10);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", attackingElementalType,8);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", attackingElementalType,9);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", attackingElementalType,5);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", attackingElementalType,6);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", attackingElementalType,7);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(10, "Poison", attackingElementalType,11);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(11, "Purity", attackingElementalType,12);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(12, "Corruption", attackingElementalType,13);
+            }
+			else summonsbehaviourOptions();
+        }
+        function elementalAttackReplacingPCmeleeAttack2():void {
+            flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 4;
             if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
                 menu();
                 if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", attackingElementalType,1);
@@ -695,15 +731,20 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
+	//MutationsDB!
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
-		Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
-		When (/If) Orm reworks perks to use v1/v2/v3 things, can be made simplier. Current workaround to make it easier for player to use mutation menu.
-		Source: Player.as for list of mutations under function maxHeartMutations, PerkLib.as for mutation descriptions.
+		Source: MutationsLib.as for all mutations.
  		*/
 		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
 			displayHeader("Mutation Stats");
+			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
+				outputText("Mutations Assistant: <b>On</b>\n");
+			}
+			else{
+				outputText("Mutations Assistant: <b>Off</b>\n");
+			}
 			var mutationCount:int = 1
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
 				mutationCount++;
@@ -713,35 +754,56 @@ public class PerkMenu extends BaseContent {
 				mutationCount++;
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
 				mutationCount++;
-			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
-					"\nNote: Not all body parts will use all available slots.");
-		}
+			outputText("You have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
+					"\nNote: Not all body parts will use all available slots.\n\n");
 
-		function menuGen(menuItems:Array, page:int):void{
-			var selectMenu:ButtonDataList = new ButtonDataList();
-			for (var i:int = 0; i < menuItems.length; i++){
-				if (i%2 == 0){
-					selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
+			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
+			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid"]//, "PThyroid"
+			for each (var bodyPart:String in bPartlist){
+				var mCount:int = 0
+				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart)
+				for each (var pPerk:Array in mPerkarray){
+					if (player.hasPerk(pPerk[0])){
+						mCount++;
+					}
+				}
+				outputText(bodyPart + " mutations obtained: ");
+				if (mCount > mutationCount){
+					outputText("<font color=\"#800000\">");
+				}
+				else{
+					outputText("<font color=\"#008000\">");
+				}
+				outputText( mCount +"</font> of " + mutationCount + ". Max:(");
+				if (flags[kFLAGS.MUTATIONS_SPOILERS]){
+					outputText(mPerkarray.length + ")\n");
+				}
+				else{
+					if (mPerkarray.length == mCount){
+						outputText(mPerkarray.length + ")\n");
+					}
+					else{
+						outputText("?)\n");
+					}
 				}
 			}
-			submenu(selectMenu, displayPerks, page, false);
+			outputText("Mutations can be obtained by ");
+			if (flags[kFLAGS.MUTATIONS_SPOILERS] || EvangelineFollower.EvangelineAffectionMeter >= 3){
+				outputText("finding Evangeline and asking her about it.\n");
+			}
+			else{
+				outputText("looking around for an alchemist specializing in transformatives.\n");
+			}
+			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n");
 		}
 
-		/*
-		Example:
-		mutationsDatabaseVerify([PerkLib.mutationperkhere, PerkLib.mutationperkevolvedhere, PerkLib.mutationperkfinalformhere], "optional manual acquisition comment")
-		Manual comment overwrites Requirements output, and is assumed that there will only be 1 perk in that chain.
-		 */
 		function mutationsDBHeart():void{
 			clearOutput();
 			//Heart Mutations
 			displayHeader("Heart Mutations:");
-			mutationsDatabaseVerify([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Heart")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -749,8 +811,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Muscle Mutations
 			displayHeader("Muscle Mutations:");
-			mutationsDatabaseVerify([PerkLib.MantislikeAgility, PerkLib.MantislikeAgilityEvolved, PerkLib.MantislikeAgilityFinalForm]);
-			mutationsDatabaseVerify([PerkLib.OniMusculature, PerkLib.OniMusculatureEvolved, PerkLib.OniMusculatureFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Muscle")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -758,8 +821,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Mouth Mutations
 			displayHeader("Mouth Mutations:");
-			mutationsDatabaseVerify([PerkLib.VenomGlands, PerkLib.VenomGlandsEvolved, PerkLib.VenomGlandsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HollowFangs, PerkLib.HollowFangsEvolved, PerkLib.HollowFangsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Mouth")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -767,8 +831,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Adrenal Glands Mutations
 			displayHeader("Adrenal Gland Mutations");
-			mutationsDatabaseVerify([PerkLib.SalamanderAdrenalGlands, PerkLib.SalamanderAdrenalGlandsEvolved, PerkLib.SalamanderAdrenalGlandsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.OrcAdrenalGlands, PerkLib.OrcAdrenalGlandsEvolved, PerkLib.OrcAdrenalGlandsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Adrenals")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -776,9 +841,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
 			displayHeader("Bloodstream Mutations");
-			mutationsDatabaseVerify([PerkLib.VampiricBloodsteam, PerkLib.VampiricBloodsteamEvolved, PerkLib.VampiricBloodsteamFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HinezumiBurningBlood, PerkLib.HinezumiBurningBloodEvolved, PerkLib.HinezumiBurningBloodFinalForm]);
-			mutationsDatabaseVerify([PerkLib.FeyArcaneBloodstream, PerkLib.FeyArcaneBloodstreamEvolved, PerkLib.FeyArcaneBloodstreamFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Bloodstream")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -786,10 +851,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Fat tissue Mutations
 			displayHeader("Fat and Tissue Mutations");
-			mutationsDatabaseVerify([PerkLib.PigBoarFat, PerkLib.PigBoarFatEvolved, PerkLib.PigBoarFatFinalForm]);
-			mutationsDatabaseVerify([PerkLib.NaturalPunchingBag, PerkLib.NaturalPunchingBagEvolved, PerkLib.NaturalPunchingBagFinalForm]);
-			mutationsDatabaseVerify([PerkLib.WhaleFat, PerkLib.WhaleFatEvolved, PerkLib.WhaleFatFinalForm]);
-			mutationsDatabaseVerify([PerkLib.YetiFat, PerkLib.YetiFatEvolved, PerkLib.YetiFatFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("FaT")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -797,11 +861,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Lungs Mutations
 			displayHeader("Lungs Mutations");
-			mutationsDatabaseVerify([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Lungs")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -809,9 +871,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Metabolism Mutations
 			displayHeader("Metabolism Mutations");
-			mutationsDatabaseVerify([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved]);
-			mutationsDatabaseVerify([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved]);
-			mutationsDatabaseVerify([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Metabolism")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -819,8 +881,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Ovaries Mutations
 			displayHeader("Ovaries Mutations");
-			mutationsDatabaseVerify([PerkLib.LactaBovinaOvaries, PerkLib.LactaBovinaOvariesEvolved, PerkLib.LactaBovinaOvariesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.FloralOvaries, PerkLib.FloralOvariesEvolved, PerkLib.FloralOvariesFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Ovaries")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -828,9 +891,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Testicle Mutations
 			displayHeader("Balls Mutations");
-			mutationsDatabaseVerify([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.EasterBunnyEggBag, PerkLib.EasterBunnyEggBagEvolved, PerkLib.EasterBunnyEggBagFinalForm]);
-			mutationsDatabaseVerify([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Testicles")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -838,8 +901,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Eyes Mutations
 			displayHeader("Eye Mutations");
-			mutationsDatabaseVerify([PerkLib.GorgonsEyes, PerkLib.GorgonsEyesEvolved]);
-			mutationsDatabaseVerify([PerkLib.GazerEye, PerkLib.GazerEyeEvolved, PerkLib.GazerEyeFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Eyes")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -847,7 +911,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Peripheral/NervSys Mutations
 			displayHeader("Peripheral Nervous System Mutations");
-			mutationsDatabaseVerify([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase();
 		}
 
@@ -855,9 +921,9 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Bones and Marrow Mutations
 			displayHeader("Bones and Marrow Mutations");
-			mutationsDatabaseVerify([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase(1);
 		}
 
@@ -865,17 +931,19 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Thyroid Glands Mutations
 			displayHeader("Thyroid Gland Mutations");
-			mutationsDatabaseVerify([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm]);
-			mutationsDatabaseVerify([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("Thyroid")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase(1);
 		}
 
 		function mutationsDBParathyroid():void{
 			clearOutput();
-			//ParaThyroid Glands Mutations. What's the difference between this and the above???
+			//ParaThyroid Glands Mutations.
 			displayHeader("ParaThyroid Glands Mutations");
-			mutationsDatabaseVerify([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm]);
-			mutationsDatabaseVerify([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm]);
+			for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
+				mutationsDatabaseVerify(mutate);
+			}
 			mutationsDatabase(1);
 		}
 
@@ -885,9 +953,9 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Dragon Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
-			mutationsDatabaseVerify([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm]);
-			mutationsDatabaseVerify([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.DraconicBones, MutationsLib.DraconicBonesPrimitive, MutationsLib.DraconicBonesEvolved]);
+			mutationsDatabaseVerify([MutationsLib.DraconicHeart, MutationsLib.DraconicHeartPrimitive, MutationsLib.DraconicHeartEvolved]);
+			mutationsDatabaseVerify([MutationsLib.DraconicLungs, MutationsLib.DraconicLungsPrimitive, MutationsLib.DraconicLungsEvolved]);
 			mutationsDatabase(1);
 		}
 
@@ -896,37 +964,36 @@ public class PerkMenu extends BaseContent {
 			//Kitsune Mutations
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-			mutationsDatabaseVerify([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm]);
-			mutationsDatabaseVerify([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm]);
+			mutationsDatabaseVerify([MutationsLib.KitsuneThyroidGland, MutationsLib.KitsuneThyroidGlandPrimitive, MutationsLib.KitsuneThyroidGlandEvolved]);
+			//mutationsDatabaseVerify([MutationsLib.KitsuneParathyroidGlands, MutationsLib.KitsuneParathyroidGlandsEvolved, MutationsLib.KitsuneParathyroidGlandsFinalForm]);
 			mutationsDatabase(1);
 		}
 
 		menu();
 		var menuItems:Array = [];
 		//This was originally hard coded buttons. Which it can still be, I suppose.
-		menuItems.push("Heart", mutationsDBHeart);
-		menuItems.push("Muscle", mutationsDBMuscle);
-		menuItems.push("Mouth", mutationsDBMouth);
-		menuItems.push("Adrenal Glands",mutationsDBAdrenals);
-		menuItems.push("Bloodstream",mutationsDBBloodstream);
-		menuItems.push("Fat and Tissue", mutationsDBFaTissue);
-		menuItems.push("Lungs",mutationsDBLungs);
-		menuItems.push("Metabolism", mutationsDBMetabolism);
-		menuItems.push("Ovaries", mutationsDBOvaries);
-		menuItems.push("Testicles", mutationsDBTesticles);
-		menuItems.push("Eyes", mutationsDBEyes);
-		menuItems.push("Nerv/Sys", mutationsDBPNervSys);
+		menuItems.push("Heart", mutationsDBHeart, "Heart Mutations");
+		menuItems.push("Muscle", mutationsDBMuscle, "Muscle Mutations");
+		menuItems.push("Mouth", mutationsDBMouth, "Mouth Mutations");
+		menuItems.push("Adrenal Glands",mutationsDBAdrenals, "Adrenal Mutations");
+		menuItems.push("Bloodstream",mutationsDBBloodstream, "Bloodstream Mutations");
+		menuItems.push("Fat and Tissue", mutationsDBFaTissue, "FaT Mutations");
+		menuItems.push("Lungs",mutationsDBLungs, "Lungs Mutations");
+		menuItems.push("Metabolism", mutationsDBMetabolism, "Metabolism Mutations");
+		menuItems.push("Ovaries", mutationsDBOvaries, "Ovaries Mutations");
+		menuItems.push("Testicles", mutationsDBTesticles, "Testicle Mutations");
+		menuItems.push("Eyes", mutationsDBEyes, "Eyes Mutations");
+		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "PNerv-Sys Mutations");
 		// Due to not being able to return which page I am at in submenu,
 		// I cannot keep the menu to be at a specific page beyond this.
 		// Thus, hardcoded into the function.
-		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow);
-		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands);
-		menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
-		menuItems.push("Dragons", mutationsDBDragon);
-		menuItems.push("Kitsunes", mutationsDBKitsune);
-		menuGen(menuItems, page);
+		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
+		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands, "Thyroid Mutations");
+		//menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
+		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
+		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
+		menuGen(menuItems, page, displayPerks, false);
 	}
-	//Why does it need menu(); to update output / not blank the screen???
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function mutationsDatabaseVerify(perkName:Array, acquireReq:String = ""):void {
@@ -953,8 +1020,15 @@ public class PerkMenu extends BaseContent {
 				if (perkCount != perkName.length && perkName[perkCount].requirements.length > 0) {
 					for each (var cond:Object in perkName[perkCount].requirements) {
 						var reqStr:String = cond.text;
+						var color:String = "";
 						if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
-							reqs.push("<font color='#000000'>" + cond.text + "</font>");
+							if (cond.fn(player)) {
+								color = "#008000";
+							}
+							else {
+								color = "#800000";
+							}
+							reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
 						}
 					}
 				}
@@ -964,7 +1038,7 @@ public class PerkMenu extends BaseContent {
 				else{	//Information not available.
 					reqs.push("Missing data. Perhaps Unacquirable?");
 				}
-				outputText("\nRequirements for next tier: " + reqs.join(", ") + ".");
+				outputText("\nRequirements for next tier: " + reqs.join(", "));
 			}
 			else {	//Manual done this way.
 				outputText("\nRequirements for next tier: " + acquireReq + ".");
@@ -992,15 +1066,28 @@ public class PerkMenu extends BaseContent {
 				if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
 					outputText("No description available.");
 				}
-			} else {
-				outputText("\n???" + "\nDescription: ???");
+				else{
+					outputText(perkName[perkCount].desc());
+				}
+			}
+			else {
+				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
 			}
 		}
 		outputText("\n");
 	}
 
-	public function perkDatabase(page:int=0, count:int=20):void {
+	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
+		//var allPerks:Array = CoC.instance.perkTree.listUnlocks()
+		/*
+		var mutationList:Array = MutationsLib.mutationsArray("",true);
+		for each(var pPerks:PerkType in allPerks) {
+			if (mutationList.indexOf(pPerks) >= 0){
+				allPerks.splice(allPerks.indexOf(pPerks), 1);
+			}
+		}
+		*/
 		clearOutput();
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
@@ -1038,6 +1125,292 @@ public class PerkMenu extends BaseContent {
 		else addButtonDisabled(1,"Next");
 		addButton(9, "Back", displayPerks);
 	}
+
+	public function perkDatabase2():void { //Messy code... Again, probably optimizable by someone else with more experience.
+		clearOutput();
+		menu();
+		var perkDict:Dictionary = PerkType.getPerkLibrary();
+		var tPerkList:Array = [];	//Master Source Perk Array.
+		var fPerkList:Array = [];	//Final Perk Array, of Arrays.
+		var mPerkList:Array = [];	//Master Removal Perk Array.
+		var fPerkCList:Array = [];	//PerkDisplayInfo.
+		var pSpecials:Array = [];
+		var pRelations:Dictionary = new Dictionary();	//Perk relations Dictionary.
+		//key = Perk on screen, value = [anyperk][allperk][requires] (needs,needs,opens)
+
+		//var pCount:int = 0;
+
+		function pDictPrep():void{	//Perk Dictionary preperations/Filter
+			var pList1:Array = MutationsLib.mutationsArray("",true); //No Mutations Perks
+			var pList2:Array = PerkLib.enemyPerkList(); //No Enemy Perks.
+			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
+			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
+			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
+			for each (var perkTrue:PerkType in perkDict){
+				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
+					tPerkList.push(perkTrue);
+				}
+			}
+			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
+		}
+
+		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
+			var pName:String = perkTrue.name();
+			var rez:Boolean = true;
+			for each (var temp1:String in ["Ascension", "Bloodline", "History", "Past Life", "Pierced", "Prestige", "Slime Metabolism", "Draconic", "Cave Wyrm Lungs", "Hidden Job", "Super Perk", "!!!"]){
+				if (pName.indexOf(temp1) >= 0){
+					trace(pName);
+					rez = false;
+					pSpecials.push(perkTrue);
+					break;
+				}
+			}
+			return rez;
+		}
+
+		function initTier():void{	//Initial tier 0,1.
+			var bPList:Array = [];
+			var b2PList:Array = [];
+			for each (var pPerkDBLP:PerkType in tPerkList){
+				if (pPerkDBLP.requirements.length == 0){
+					bPList.push(pPerkDBLP);
+					mPerkList.push(pPerkDBLP)
+				}
+				else {
+					var pReqFail:Boolean = false
+					for each (var temp1:Object in pPerkDBLP.requirements){
+						if (temp1.hasOwnProperty("perk") || temp1.hasOwnProperty("perks") || temp1.hasOwnProperty("allperks")){
+							pReqFail = true;
+							break;
+						}
+					}
+					if (!pReqFail){
+						b2PList.push(pPerkDBLP);
+						mPerkList.push(pPerkDBLP);
+					}
+				}
+			}
+			perkArrMgmt(bPList);
+			fPerkList.push(bPList);		//No Perk Requirements. Tier 0. Big list, needs refining.
+			perkArrMgmt(b2PList);
+			fPerkList.push(b2PList);	//Perk Requirements, but not requiring other perks beforehand. Tier 1.
+			for each (var pPerk:PerkType in pSpecials){
+				mPerkList.push(pPerk);
+			}
+			repPerkClr();
+		}
+
+		function repPerkClr(pLvl:int = 1):void{	//tier 2+
+			var nList:Array = [];
+			for each(var pPerk:PerkType in tPerkList){
+				try{
+					var change:Boolean = false;
+					var requirelen:int = 0;
+					for each (var cond:Object in pPerk.requirements) {
+						/*if (cond.type == "level"){
+							if (cond.level < pLvl){
+								change = false;
+								break;
+							}
+						}*/
+						if (cond.type == "allperks"){		//Checks if player has all required perks
+							var iterval:int = 0;
+							for each (var pPerk1:PerkType in cond.allperks) {
+								if (!mPerkList.indexOf(pPerk1) >= 0){
+									change = false;
+									break;
+								}
+								iterval++
+							}
+							if (iterval == cond.allperks.length){
+								change = true;
+							}
+							else{
+								break;
+							}
+						}
+						else if (cond.type == "anyperk"){	//Checks if player has any of the perks
+							var anyChk:Boolean = false;
+							for each (var pPerk2:PerkType in cond.perks) {
+								if (mPerkList.indexOf(pPerk2) >= 0){
+									change = true;
+									anyChk = true;
+									break;
+								}
+							}
+							if (!anyChk){ //in case both any and all are in req.
+								change = false;
+								break;
+							}
+						}
+						else if (cond.type == "perk"){		//Checks if player has the perk
+							var pPerk3:PerkType = cond.perk;
+							if (mPerkList.indexOf(pPerk3) >= 0){
+								change = true;
+							}
+							else {
+								if (change) change = false;
+								break;
+							}
+						}
+						else {	//The effect from this cause should never occur, as all these in masterlist should have a perk requirement of some sort.
+							requirelen++
+						}
+					}
+					if (requirelen == pPerk.requirements.length){
+						outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
+						trace(pPerk.name() + "Error. Sth is wrong, and I'm too tired to figure it out.")
+					}
+					else if(change){
+						nList.push(pPerk);
+						//mPerkList.push(pPerk);
+						change = false;
+					}
+				}
+				catch(e:Error){
+					trace(e)
+				}
+			}
+			if (nList.length > 0){
+				perkArrMgmt(nList);
+				fPerkList.push(nList);
+				repPerkClr();
+			}
+		}
+
+		function perkArrMgmt(remArr:Array):void{	//Source List clearing.
+			var srcArr:Array = tPerkList;
+			for each (var pPerk:PerkType in remArr){
+				srcArr.splice(srcArr.indexOf(pPerk),1);
+				mPerkList.push(pPerk);
+			}
+		}
+
+		function perkRelationsDict():void{	//Perk Relations.
+			var req1:Array = [];
+			var req2:Array = [];
+			//var req3:Array = [];
+			for each (var pPerk:PerkType in tPerkList){
+				for each (var cond:Object in pPerk.requirements) {
+					if (cond.type == "allperks"){
+						for each (var pPerk1:PerkType in cond.allperks) {
+							req1.push(pPerk1);
+						}
+					}
+					else if (cond.type == "anyperk"){
+						for each (var pPerk2:PerkType in cond.perks) {
+							req2.push(pPerk2);
+						}
+					}
+					else if (cond.type == "perk"){
+						req1.push(cond.perk);
+					}
+				}
+				//req3 = CoC.instance.perkTree.listUnlocks(pPerk); //For some reason, does not want to work. Seems to really only want it from PerkClass.ptype.
+				//trace(req3);
+				pRelations[pPerk] = [req1, req2];
+				req1 = [];
+				req2 = [];
+				//req3 = [];
+			}
+		}
+
+		function pInfoDP(tPVal:int, e:TextEvent):void{	//Perk Display Information
+			clearOutput();
+			var selected:PerkClass = fPerkCList[e.text].perk;
+			var tempStr:String = "";
+			var pPerkGDesc:Array = ["\nRequires (All of these perks): ", "\nRequires (Any of these perks): ", "\nUnlocks: "]
+			var pPerkGroup:Array = pRelations[selected.ptype];
+			var reqs:Array = [];
+			pPerkGroup.push(CoC.instance.perkTree.listUnlocks(selected.ptype));
+			outputText("<b>" + selected.perkName + ":</b>");
+			for each (var cond:Object in selected.ptype.requirements) {
+				if (!(cond.type == "allperks" || cond.type == "anyperk" || cond.type == "perk")){
+					if (cond.text is String){
+						reqs.push(cond.text);
+					}
+					else {
+						reqs.push(cond.text(player));
+					}
+				}
+			}
+			if (reqs.length > 0){
+				outputText("\nRequires (Non-perk requirements): " + reqs.join(", "));
+			}
+			for (var i:int = 0; i <= 2; i++){
+				if (pPerkGroup[i].length > 0){
+					outputText(pPerkGDesc[i]);
+					for each (var pPerk1:PerkType in pPerkGroup[i]){
+						tempStr = tempStr + pPerk1.name() + ", ";
+					}
+					tempStr = tempStr.slice(0, -2);
+					outputText(tempStr);
+					tempStr = "";
+				}
+			}
+			outputText("\n\n");
+			outputText(selected?selected.ptype.desc(selected):selected.ptype.longDesc);
+			menu();
+			addButton(14, "Back", displayMenu, tPVal);
+		}
+
+		function dMenuLinker(tPVal:int, srcArr:Array):void{	//Interaction linking
+			fPerkCList = [];
+			mainView.mainText.addEventListener(TextEvent.LINK, curry(pInfoDP, tPVal));
+			for each(var perk:PerkType in srcArr.sort()) {
+				var p:PerkClass = new PerkClass(perk,
+						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
+				var lab:* = {label: p.perkName, perk: p};
+				fPerkCList.push(lab);
+				outputText("<u><a href=\"event:"+fPerkCList.indexOf(lab)+"\">"+p.perkName+"</a></u>\n");
+			}
+		}
+
+		function displayMenu(tPVal:int = 0):void{	//Main Perk Database Display
+			if (fPerkList.length == 0){
+				pDictPrep();
+				perkRelationsDict();
+				initTier();
+				fPerkList.push(tPerkList);
+			}
+			clearOutput();
+			menu();
+			displayHeader("Perk Tier: " + tPVal);
+			outputText(tPerkList.length + "\n");
+			if (tPVal == 0){
+				outputText("Tier 0 contains all perks that do not have any requirements!\n");
+				outputText("It also contains perks that may not be handled in the standard manner.\n");
+				outputText("Note: This is still in beta, but works for the 90%. Odd side cases are attributed to weirdness in perk code.\n");
+			}
+			else if (tPVal == 1){
+				outputText("Tier 1 contains all perks that have a requirement, but do not require perks.\n");
+			}
+			else if (tPVal == 18){
+				outputText("Tier 18 contains perks that don't associate properly.\n");
+			}
+			else {
+				outputText("This tier contains perks that require one or more of any perks found in previous tiers!\n");
+			}
+			outputText("Note: Perks are sorted into tiers via relations to other perks only. Other requirements are stated, but are not taken into consideration here.\n")
+			//outputText("Note: Work in progress. Send feedback to JTecx.\n");
+			var tfArr:Array = fPerkList[tPVal];
+			dMenuLinker(tPVal, tfArr);
+			if (tPVal > 0){
+				addButton(0, "Prev Page", displayMenu,tPVal - 1);
+			} else{
+				addButtonDisabled(0,"Prev Page", "Lowest Tier.")
+			}
+			if (tPVal < fPerkList.length - 1){
+				addButton(4, "Next Page", displayMenu,tPVal + 1);
+			} else{
+				addButtonDisabled(4,"Next Page", "Highest Tier.")
+			}
+			addButton(14, "Back", displayPerks);
+		}
+
+		displayMenu();
+	}
+
     private function toggleFlag(returnTo:Function,flag:int,on:Boolean):void{
         setFlag(returnTo,flag,((on)?1:0));
     }
@@ -1051,11 +1424,14 @@ public class PerkMenu extends BaseContent {
 		var masterlist:Array = [];				//Temp hold of above
 		var ignorelist:Array = [];				//List to check against repetitively
 		var endlist:Array = [];					//Final list of perks to output
+		//var pPerkList:Array = PerkTree.obtainablePerks();	//DebugLine. Returns most perks.
+		var maxpPerks:int = 0;					//DebugLine
 
 		function initSet():void {
-			var mutationList:Array = [PerkLib.BlackHeart, PerkLib.FrozenHeart, PerkLib.ObsidianHeart, PerkLib.TwinHeart, PerkLib.HeartOfTheStorm, PerkLib.DraconicHeart, PerkLib.MantislikeAgility, PerkLib.OniMusculature, PerkLib.VenomGlands, PerkLib.HollowFangs, PerkLib.SalamanderAdrenalGlands, PerkLib.OrcAdrenalGlands, PerkLib.VampiricBloodsteam, PerkLib.HinezumiBurningBlood, PerkLib.FeyArcaneBloodstream, PerkLib.PigBoarFat, PerkLib.NaturalPunchingBag, PerkLib.WhaleFat, PerkLib.YetiFat, PerkLib.ArachnidBookLung, PerkLib.DraconicLungs, PerkLib.CaveWyrmLungs, PerkLib.MelkieLung, PerkLib.DrakeLungs, PerkLib.ManticoreMetabolism, PerkLib.DisplacerMetabolism, PerkLib.LactaBovinaOvaries, PerkLib.FloralOvaries, PerkLib.MinotaurTesticles, PerkLib.EasterBunnyEggBag, PerkLib.NukiNuts, PerkLib.GorgonsEyes, PerkLib.GazerEye, PerkLib.ElvishPeripheralNervSys, PerkLib.LizanMarrow, PerkLib.DraconicBones, PerkLib.HarpyHollowBones, PerkLib.KitsuneThyroidGland, PerkLib.NekomataThyroidGland, PerkLib.KitsuneParathyroidGlands, PerkLib.HellcatParathyroidGlands]
+			var mutationList:Array = MutationsLib.mutationsArray("",true)
 			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
-				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){	//Okay, proved that this does remove the base mutations properly.
+				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){
+					//maxpPerks++
 					var pPerkReq:PerkType = pPerks.ptype
 					var perkno:Boolean = true;
 					for each (var temp1:Object in pPerkReq.requirements) {
@@ -1074,91 +1450,75 @@ public class PerkMenu extends BaseContent {
 			repPerkClr();
 		}
 
-		//Idea: Local perk table to create new one every time, then overwrite existing one higher up? Skips the removing step which seems to be the problem....?
 		function repPerkClr():void { //Cycling perks against requirements until no higher can be achieved per.
 			var change:Boolean = false;
-			var replaceList:Array = [];
-			var removeList:Array = [];
-			for each(var pPerk:PerkType in masterlist) {
+			//outputText("Hit! Current list length: " + masterlist.length + "\n");	//DebugLine
+			for each(var pPerk:PerkType in masterlist){
 				var requirelen:int = 0;
 				for each (var cond:Object in pPerk.requirements) {
-					if (cond.hasOwnProperty("allperks")){	//Checks if player has all required perks
-						var pCondPerkLen:int = cond.allperks.length;
-						var condlen:int = 0;
-						var alltrue:Array = [];
-						for each (var pPerkYes1:PerkType in cond.allperks) {
-							if (ignorelist.indexOf(pPerkYes1) >= 0) {
-								condlen++
-								alltrue.push(pPerkYes1);
-								change = true;
-								if (condlen == pCondPerkLen){
-									replaceList.push(pPerk);
-									for each (var pPerkRem:PerkType in alltrue){
-										removeList.push(pPerkRem)
-									}
+					if (cond.type == "allperks"){		//Checks if player has all required perks
+						var iterval:int = 0;
+						for each (var pPerk1:PerkType in cond.allperks) {
+							if (ignorelist.indexOf(pPerk1) >= 0){
+								iterval++
+							}
+							if (iterval == cond.allperks.length){
+								for each (var temp1:PerkType in cond.allperks){
+									perkArrMgmt(temp1, pPerk);
+									change = true;
 								}
 							}
 						}
-						break;
 					}
-					else if (cond.hasOwnProperty("perks")){	//Checks if player has any of the perks
-						var pPerkCycle:Boolean = false
-						for each (var pPerkYes2:PerkType in cond.perks) {
-							if (ignorelist.indexOf(pPerkYes2) >= 0) {
-								removeList.push(pPerkYes2);
+					else if (cond.type == "anyperk"){	//Checks if player has any of the perks
+						for each (var pPerk2:PerkType in cond.perks) {
+							if (ignorelist.indexOf(pPerk2) >= 0){
+								perkArrMgmt(pPerk2, pPerk);
 								change = true;
-								if (!pPerkCycle) {
-									replaceList.push(pPerk);
-									pPerkCycle = true
-								}
 							}
 						}
-						//break;
 					}
-					else if (cond.hasOwnProperty("perk")){	//Checks if player has the perk
-						if (ignorelist.indexOf(cond.perk) >= 0) {
-							replaceList.push(pPerk);
-							removeList.push(cond.perk);
-							endlist.push(pPerk);
+					else if (cond.type == "perk"){		//Checks if player has the perk
+						var pPerk3:PerkType = cond.perk;
+						if (ignorelist.indexOf(pPerk3) >= 0){
+							perkArrMgmt(pPerk3, pPerk);
 							change = true;
-							break;
 						}
 					}
-					else {	//This should never occur, as all these in masterlist should have a perk requirement of some sort.
+					else {	//The effect from this cause should never occur, as all these in masterlist should have a perk requirement of some sort.
 						requirelen++
 					}
 				}
-				if (requirelen == pPerk.requirements.len){
+				if (requirelen == pPerk.requirements.length){
 					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
 				}
 			}
-			if (change) {	//This feels terrible. But I suppose it works as a workaround to me not being able to directly splice arrays, since it seems to fuck up in odd ways.
-				for each (var pPerkCleared:PerkType in replaceList){	//Keep perks for final/filter
-					ignorelist.push(pPerkCleared);
-					endlist.push(pPerkCleared);
-					masterlist.splice(masterlist.indexOf(pPerkCleared), 1);
-				}
-				var endResetList:Array = [];
-				for each (var pPerkQuarantined:PerkType in endlist){	//Remove perks from source
-					if (!(removeList.indexOf(pPerkQuarantined) >= 0)){
-						if (!(endResetList.indexOf(pPerkQuarantined) >= 0)){
-							endResetList.push(pPerkQuarantined);
-						}
-					}
-				}
-				endlist = endResetList;
+			if (change){
 				repPerkClr();
 			}
-			else {
+			else{
 				perkOut();
+				//tempchk();	//DebugLine
 			}
 		}
 
-		function perkOut():void {	//Results of just the perks that are left.
-			for each(var pPerk:PerkType in endlist.sort()) {	//The fuck, this doesn't do it right either.
-				outputText("<b>" + player.getPerk(pPerk).perkName + ":</b> ");
+		function perkArrMgmt(pval1:PerkType, pval2:PerkType):void{
+			if (endlist.indexOf(pval1) >= 0){
+				endlist.splice(endlist.indexOf(pval1), 1);
+			}
+			if (endlist.indexOf(pval2) < 0){
+				endlist.push(pval2);
+				ignorelist.push(pval2);
+				masterlist.splice(masterlist.indexOf(pval2), 1);
+			}
+		}
+
+		function perkOut():void {//Results of just the perks that are left.
+			for each(var pPerk:PerkType in endlist.sort()) {
+				outputText("<b>" + pPerk.name() + ":</b> ");
 				try {
-					outputText(player.getPerk(pPerk).perkDesc);
+					var pclass:PerkClass = player.getPerk(pPerk);
+					outputText(pclass?pPerk.desc(pclass):pPerk.longDesc);
 				} catch (error:Error) {
 					outputText("No description.");
 				}
@@ -1166,27 +1526,34 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 
-		function tempchk():void{	//Debug function to see where specific perks have been sent to.
-			var chkperk:PerkType = PerkLib.EternalyLastingBuffs
-			var hi:Boolean = false;
-			if (masterlist.indexOf(chkperk) >= 0){
-				outputText("MasterList\n");
-				hi = true
+		function tempchk():void{//Debug function to see where specific perks have been sent to.
+			//List of perks on my save that currently do not go where they're supposed to + neighbours/ expected sequence.
+			var temp123:Array = [];
+			//temp123 = masterlist.sort();
+			//temp123.push();
+			for each (var pPerks1:PerkType in temp123){
+				var hi:Boolean = false;
+				outputText(pPerks1.name() + ": ");
+				if (masterlist.indexOf(pPerks1) >= 0){
+					outputText("MasterList");
+					hi = true
+				}
+				if (ignorelist.indexOf(pPerks1) >= 0){
+					outputText("IgnoreList");
+					hi = true
+				}
+				if (endlist.indexOf(pPerks1) >= 0){
+					outputText("EndList");
+					hi = true
+				}
+				if (!hi){
+					outputText("Lost to the void");
+				}
+				outputText("\n");
 			}
-			if (ignorelist.indexOf(chkperk) >= 0){
-				outputText("IgnoreList\n");
-				hi = true
-			}
-			if (endlist.indexOf(chkperk) >= 0){
-				outputText("EndList\n");
-				hi = true
-			}
-			if (!hi){
-				outputText("Lost to the void");
-			}
-			outputText("\n");
-		}
+			outputText("Leftover/Cleared/Original Total: " +masterlist.length.toString() + "/" + ignorelist.length.toString() + "/" + maxpPerks.toString() + "\n");
 
+		}
 		initSet();
 	}
 	/* [INTERMOD: revamp]

@@ -144,6 +144,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function isPlayerStunned():Boolean {
 		return combat.isPlayerStunned();
 	}
+	protected function isPlayerPowerStunned():Boolean {
+		return combat.isPlayerPowerStunned();
+	}
 	protected function isPlayerFeared():Boolean {
 		return combat.isPlayerFeared();
 	}
@@ -171,29 +174,29 @@ public class BaseCombatContent extends BaseContent {
 	protected function soulskillMagicalMod():Number {
 		return combat.soulskillMagicalMod();
 	}
-	protected function scalingBonusStrength():Number {
-		return combat.scalingBonusStrength();
+	protected function scalingBonusStrength(randomize:Boolean = true):Number {
+		return combat.scalingBonusStrength(randomize);
 	}
-	protected function scalingBonusStrengthCompanion():Number {
-		return combat.scalingBonusStrengthCompanion();
+	protected function scalingBonusStrengthCompanion(randomize:Boolean = true):Number {
+		return combat.scalingBonusStrengthCompanion(randomize);
 	}
-	protected function scalingBonusToughness():Number {
-		return combat.scalingBonusToughness();
+	protected function scalingBonusToughness(randomize:Boolean = true):Number {
+		return combat.scalingBonusToughness(randomize);
 	}
-	protected function scalingBonusSpeed():Number {
-		return combat.scalingBonusSpeed();
+	protected function scalingBonusSpeed(randomize:Boolean = true):Number {
+		return combat.scalingBonusSpeed(randomize);
 	}
-	protected function scalingBonusIntelligence():Number {
-		return combat.scalingBonusIntelligence();
+	protected function scalingBonusIntelligence(randomize:Boolean = true):Number {
+		return combat.scalingBonusIntelligence(randomize);
 	}
-	protected function scalingBonusIntelligenceCompanion():Number {
-		return combat.scalingBonusIntelligenceCompanion();
+	protected function scalingBonusIntelligenceCompanion(randomize:Boolean = true):Number {
+		return combat.scalingBonusIntelligenceCompanion(randomize);
 	}
-	protected function scalingBonusWisdom():Number {
-		return combat.scalingBonusWisdom();
+	protected function scalingBonusWisdom(randomize:Boolean = true):Number {
+		return combat.scalingBonusWisdom(randomize);
 	}
-	protected function scalingBonusLibido():Number {
-		return combat.scalingBonusLibido();
+	protected function scalingBonusLibido(randomize:Boolean = true):Number {
+		return combat.scalingBonusLibido(randomize);
 	}
 	protected function spellCost(mod:Number):Number {
 		return combat.magic.spellCostImpl(mod);

@@ -107,7 +107,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 							spriteSelect(41);
 							outputText("\n<b>You find a note from Marble back at camp, letting you know that she has an item for you!</b>\n");
 							player.createStatusEffect(StatusEffects.MarbleItemCooldown,(24 + rand(24)),0,0,0);
-							player.createStatusEffect(StatusEffects.MarbleHasItem,rand(10),0,0,0);
+							player.createStatusEffect(StatusEffects.MarbleHasItem,rand(5),0,0,0);
 							needNext = true;
 						}
 					}
@@ -395,7 +395,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				doNext(playerMenu);
 				return true;
 			}
-			if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+			if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.hasPerk(PerkLib.MarblesMilk)) {
 				checkedMarbleMilk++;
 				//In prison
 				if (prison.inPrison) {
@@ -420,7 +420,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						CoC.instance.timeQ++; //We can get rid of this: threshhold--;
 					}
 				}
-				doNext(playerMenu);
+				doNext(camp.returnToCampUseOneHour);
+				//Hm. Temp fix, but postAddictionCampMornings is for some reason being called... twice? That'd mean the above isn't exactly working right....
 				return true;
 			}
 			return false;
@@ -480,7 +481,11 @@ public function encounterMarbleInitially():void {
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?");
 	outputText("\n\n(Of course, you could always turn around and resolve to avoid her from this point on, if you wanted.)");
 	//- player chooses caress, suckle, or rape
-	simpleChoices("Caress", caressMarble, "Suckle", suckleMarble, "Rape", rapeDAHMARBLEZ, "", null, "Leave", turnOffMarbleForever);
+	menu();
+	addButton(1, "Caress", caressMarble).hint("+5% affection");
+	addButton(3, "Suckle", suckleMarble).hint("+15% affection, +10% addiction");
+	addButton(2, "Rape", rapeDAHMARBLEZ);
+	addButton(4, "Leave", turnOffMarbleForever).hint("You will never meet her again");
 }
 
 private function turnOffMarbleForever():void {
@@ -587,9 +592,11 @@ internal function marbleFightWin():void {
 	//after the lust+HP defeat scenes if the player wins
 	outputText("You've gathered a bit of a crowd around you now, thanks to the noise of this cow clunking around with her huge hooves and hammer.  It might not be a terribly good idea to rape Marble...  you'd have to drag her up to her room just to avoid interruption and Whitney would likely find out and be upset.  What do you do?");
 	//Options, rape in room, milk (Spy's submission - not included yet) and, don't rape.
-	var feed:Function = null;
-	if(player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() > 200) feed = forceFeedMarble;
-	simpleChoices("Feed Her", feed, "RapeInRoom", rapeMarbleInHerRoom, "", null, "", null, "Leave", cleanupAfterCombat);
+	menu();
+	if (player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() > 200) addButton(1, "Feed Her", forceFeedMarble);
+	addButtonDisabled(1, "Feed Her", "Your lactation is too low or you not posses Feeder perk.");
+	addButton(2, "RapeInRoom", rapeMarbleInHerRoom);
+	addButton(3, "Leave", cleanupAfterCombat);
 }
 internal function marbleFightLose():void {
 	spriteSelect(41);
@@ -721,7 +728,10 @@ private function resistMarbleInitially():void {
 	//- continue to the next part
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?");
 	//- player chooses caress, suckle, or rape
-	simpleChoices("Caress", caressMarble, "Suckle", suckleMarble, "Rape", rapeDAHMARBLEZ, "", null, "", null);
+	menu();
+	addButton(1, "Caress", caressMarble).hint("+5% affection");
+	addButton(3, "Suckle", suckleMarble).hint("+15% affection, +10% addiction");
+	addButton(2, "Rape", rapeDAHMARBLEZ);
 }
 
 private function marblePicksYouUpInitially():void {
@@ -1643,12 +1653,14 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 	player.slimeFeed();
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)
+	//Yeah, but this literally can never occur.
+	//Kinda begs the question: WTF is the point of the boolean?
 	if(!player.hasItem(consumables.M__MILK, 5)) {
 		outputText("\n\nAs you are about to leave, Marble hands you a bottle of her milk.  ");
 		//[if the player is no longer addicted]
-		if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
+		if(player.hasPerk(PerkLib.MarbleResistant)) outputText("She assures you that you'll be fine as long as you don't drink directly from her breasts.");
 		//(player gains a bottle of Marble's milk)
-		inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
+		inventory.takeItem(consumables.M__MILK, playerMenu);
 	}
 }
 
@@ -1931,7 +1943,6 @@ public function marbleStatusChange(affection:Number, addiction:Number, isAddicte
 		player.addStatusValue(StatusEffects.Marble,2,addiction);
 	}
 	if (isAddicted != -1) player.changeStatusValue(StatusEffects.Marble, 3, isAddicted);
-	
 	trace("Marble Affection: " + player.statusEffectv1(StatusEffects.Marble));
 	trace("Marble Addiction: " + player.statusEffectv2(StatusEffects.Marble));
 }
@@ -2048,16 +2059,6 @@ public function interactWithMarbleAtCamp():void {
 	addButton(6, "Playtime", playtime);
 	addButton(7, "Break Up", breakUpWithMarble);
 	addButton(8, goEventString, marbleGoEvent);
-	/*choices("Appearance",marbleAppearance,
-			"Talk",marbleTalkOverhaul,
-			"Present",gatherEvent,
-			"Give Item", (canGiveItem() ? giveItem : null),
-			"Get Milk",milkEvent,
-			"Release",sexEvent,
-			"Playtime",playtime,
-			"Break Up",breakUpWithMarble,
-			goEventString,marbleGoEvent,
-			"", null);*/
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -2069,7 +2070,7 @@ private function marbleTalkOverhaul():void {
 	if( (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] < 5 && flags[kFLAGS.MARBLE_LUST] >= 20) || (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 && flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] >= 4) )
 	{
 		outputText( "[pg]<b>Marble is fidgeting around uncomfortably, perhaps she needs to be milked?</b>" );
-		addButton( 2, "Milking", milkMarble );
+		addButton(2, "Milking", milkMarble);
 	}
 	if (player.cor < 50 && player.statusEffectv4(StatusEffects.Marble) < 60) addButton(1, "Just Talk", talkWithMarbleAtCamp);
 	//if (player.level >= 10) addButton(3, "Her Hammer", hammerQuest); //Start hammer quest
@@ -2392,7 +2393,7 @@ private function gotMilk():void {
 	doNext(camp.returnToCampUseOneHour);
 	clearOutput();
 	outputText("You ask Marble for a bottle of her milk, and she happily hands you one.  ");
-	inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.M__MILK, interactWithMarbleAtCamp);
 }
 
 private function marbleGathered():void {
@@ -2404,13 +2405,30 @@ private function marbleGathered():void {
 	outputText("You ask Marble about any supplies she might have found.  She smiles and hands you her latest find.\n\n");
 	//items that Marble can find for the player, more to be added later (there aren't many items in the game right now that Marble would bring back for the player):
 	//Vitality potion (12 hours or one day)
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) <= 4)
-		inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
+	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 0) {
+		inventory.takeItem(consumables.VITAL_T, camp.campLoversMenu);
+		eachMinuteCount(5);
+	}
+	//Pack of nails
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 1) {
+		inventory.takeItem(consumables.PONAILS, camp.campLoversMenu);
+		eachMinuteCount(5);
+	}
 	//Tanned Leather clothes, armor, def: 5 (three days)
-	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) <= 7)
-		inventory.takeItem(armors.LEATHRA, camp.returnToCampUseOneHour);
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 2) {
+		inventory.takeItem(armors.LEATHRA, camp.campLoversMenu);
+		eachMinuteCount(5);
+	}
+	//Minotaus horn
+	else if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 1 && player.statusEffectv1(StatusEffects.MarbleHasItem) == 3) {
+		inventory.takeItem(useables.MINOHOR, camp.campLoversMenu);
+		eachMinuteCount(5);
+	}
 	//LaBova, cow girl transformation item (if you'll let me put it here, I'd like to use it as part of the purification quest, the player can still get it if they are addicted)
-	else inventory.takeItem(consumables.LABOVA_, camp.returnToCampUseOneHour);
+	else {
+		inventory.takeItem(consumables.LABOVA_, camp.campLoversMenu);
+		eachMinuteCount(5);
+	}
 	player.removeStatusEffect(StatusEffects.MarbleHasItem);
 }
 

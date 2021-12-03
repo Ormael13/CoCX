@@ -202,6 +202,7 @@ package classes.Scenes.NPCs
 			outputText(" chant a magical song of healing and recovery and her wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
 			mana -= spellCostHeal();
+			createStatusEffect(StatusEffects.AbilityCooldown1, 2, 0, 0, 0);
 			flags[kFLAGS.DIANA_SPELLS_CASTED]++;
 		}
 		
@@ -223,7 +224,7 @@ package classes.Scenes.NPCs
 				if (HPRatio() > .9 || soulforce < 100) removeStatusEffect(StatusEffects.MonsterVPT);
 				else soulforce -= 100;
 			}
-			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
+			if (HPRatio() < .2 && (mana >= spellCostHeal()) && !hasStatusEffect(StatusEffects.AbilityCooldown1)) usingHealSpell();
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 12 && flags[kFLAGS.DIANA_LVL_UP] < 16) {
 				var choice4:Number = rand(6);
 				if (choice4 < 3) {
@@ -232,7 +233,7 @@ package classes.Scenes.NPCs
 					else eAttack();
 				}
 				if (choice4 > 2 && choice4 < 5) {
-					if (HPRatio() < .5 && rand(3) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					if (HPRatio() < .5 && !hasStatusEffect(StatusEffects.AbilityCooldown1) && (mana >= spellCostHeal())) usingHealSpell();
 					else if (HPRatio() < .5 && rand(3) == 0 && !hasStatusEffect(StatusEffects.MonsterRegen2) && (mana >= spellCostRegenerate())) usingRegenerateSpell();
 					else if (rand(3) == 0 && (mana >= spellCostMagicBoltsBarrage())) usingMagicBoltsBarrageSpell();
 					else if (rand(2) == 0 && (mana >= spellCostMagicBolt())) usingMagicBoltSpell();
@@ -251,7 +252,7 @@ package classes.Scenes.NPCs
 					else eAttack();
 				}
 				if (choice3 > 2 && choice3 < 5) {
-					if (HPRatio() < .6 && rand(3) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					if (HPRatio() < .6 && !hasStatusEffect(StatusEffects.AbilityCooldown1) && (mana >= spellCostHeal())) usingHealSpell();
 					else if (HPRatio() < .6 && rand(3) == 0 && !hasStatusEffect(StatusEffects.MonsterRegen2) && (mana >= spellCostRegenerate())) usingRegenerateSpell();
 					else if (rand(2) == 0 && (mana >= spellCostMagicBolt())) usingMagicBoltSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 300))) usingARC();
@@ -269,7 +270,7 @@ package classes.Scenes.NPCs
 					else eAttack();
 				}
 				if (choice2 > 2 && choice2 < 5) {
-					if (HPRatio() < .6 && rand(3) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					if (HPRatio() < .6 && !hasStatusEffect(StatusEffects.AbilityCooldown1) && (mana >= spellCostHeal())) usingHealSpell();
 					else if (rand(3) == 0 && (mana < (this.maxMana() - 80))) usingARC();
 					else eAttack();
 				}
@@ -282,7 +283,7 @@ package classes.Scenes.NPCs
 				var choice1:Number = rand(6);
 				if (choice1 < 3) eAttack();
 				if (choice1 > 2 && choice1 < 5) {
-					if (HPRatio() < .5 && rand(4) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					if (HPRatio() < .5 && !hasStatusEffect(StatusEffects.AbilityCooldown1) && (mana >= spellCostHeal())) usingHealSpell();
 					else if (rand(4) == 0 && (mana < (this.maxMana() - 40))) usingARC();
 					else eAttack();
 				}

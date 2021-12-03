@@ -64,11 +64,11 @@ import classes.internals.WeightedDrop;
 				}
 				else if (player.str >= 60 && player.str < 80) {
 					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. Young giant makes sure that doesn't happen, though. ");
-					player.addCombatBuff('str', -1);
+					player.addCombatBuff('str', -1, "Combat Debuff", "YoungFrostGiantDebuff");
 				}
 				else if (player.str >= 40 && player.str < 60) {
 					outputText("Try as you might, young giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-					player.addCombatBuff('str', -2);
+					player.addCombatBuff('str', -2, "Combat Debuff", "YoungFrostGiantDebuff");
 				}
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("Young giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");

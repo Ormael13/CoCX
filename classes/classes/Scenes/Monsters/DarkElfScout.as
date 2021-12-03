@@ -60,7 +60,7 @@ public class DarkElfScout extends Monster
 				outputText("An arrow hits you for ");
 				player.takePhysDamage(damage, true);
 				outputText(" damage. It was poisoned! You feel your strength failing you!\n\n");
-				player.addCombatBuff('spe', -3);
+				player.addCombatBuff('spe', -3, "Poisoned Arrow", "PoisonedArrow");
 			}
 		}
 		

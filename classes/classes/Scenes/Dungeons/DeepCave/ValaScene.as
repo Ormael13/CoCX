@@ -821,7 +821,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				}
 			}
 			//[End Encounter]
-			cheatTime2(30);
+			eachMinuteCount(30);
 			doNext(SceneLib.telAdre.barTelAdre);
 		}
 		//[You]
@@ -914,15 +914,15 @@ public class ValaScene extends BaseContent implements SaveableState
 			ValaFairyQueenQuest = QUEST_STAGE_PCDACCEPTED;
 			//Turn pc into a proper fairy
 			CoC.instance.transformations.FaceFairy.applyEffect(false);
-			player.tongue.type = Tongue.ELF;
-			player.eyes.type = Eyes.FAIRY
-			player.ears.type = Ears.ELVEN
-			CoC.instance.transformations.HairFairy.applyEffect(false);
-			player.tailType = Tail.NONE
-			player.arms.type = Arms.ELF
+			player.eyes.type = Eyes.FAIRY;
+			player.ears.type = Ears.ELVEN;
+			player.tailType = Tail.NONE;
+			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
+			player.tongue.type = Tongue.ELF;
 			player.wings.type = Wings.FAIRY;
-			player.skinType = Skin.PLAIN
+			CoC.instance.transformations.HairFairy.applyEffect(false);
+			player.skinType = Skin.PLAIN;
 			player.skinAdj = "flawless";
 			player.removeCock(0, player.cockTotal());
 			player.skin.coverage = Skin.COVERAGE_NONE;
@@ -971,7 +971,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("\n\n");
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n");
-			cheatTime2(30);
+			eachMinuteCount(30);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -990,7 +990,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("When you finally calm down enough to swallow your spittle, wipe the slick sweat from your face and body, and release the fairy girl from the death-grip between your " + hipDescript() + ", you try to ask what happened to the petals inside your body. The fae girl gives your " + clitDescript() + " a little kiss and places her lips on your pussy. She puffs her cheeks and whispers a string of strange words into your quivering cunt. All at once, the soft petals inside you meld into one warm, hard shape, perfectly mirroring your pussy, labia to cervix. Very carefully, Vala draws the verdant shaft from your body and produces the most intricately ridged, molded dildo that you've ever seen. It's a soft pink color, matching your engorged genitals, and even gently pulses with your every heartbeat.\n\n");
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.");
-			cheatTime2(30);
+			eachMinuteCount(30);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1385,18 +1385,15 @@ public class ValaScene extends BaseContent implements SaveableState
 		//[next]
 		public function valaPartIIWaifuLove():void {
 			clearOutput();
-			model.time.hours = 6;
-			model.time.days++;
+			CoC.instance.timeQ = 10;
+			camp.sleepRecovery(true);
+			CoC.instance.timeQ = 0;
 			camp.sleepRecovery(false);
 			statScreenRefresh();
 			outputText("Letting out a yawn, you curl up in the warm covers of the bed.  You sigh and smile as the smell of food wafts over you; it reminds you of your time back home.  The scent of frying meat and eggs soon becomes too much for your sleeping mind and rouses you from your slumber.  Stretching your body out, you look around and remember your night with Vala; you must have fallen asleep in her bed.  Unable to help yourself, you follow the mouth watering aroma to the kitchen and find the loving fairy-girl there.  Her gossamer wings flutter as she hovers at the stove, naked save for the apron she wears.  The sound of grease popping and crackling fills the air along with the smell of a savory, home cooked breakfast.");
-
 			outputText("\n\nYou can't help but grin, the sweet girl treating you to breakfast after spending the night with her.  Approaching her, you slip your arms around her and hug her gently.  Despite your surprise hug, Vala keeps working, though she is more than happy to press her ass against you.  \"<i>Mmmm... good morning, did you sleep well, [name]?</i>\" she asks as she looks up at you with a bright smile of her face.  You smile back at her and slide your hands into her apron to grope and fondle her oversized breasts, the rough touch pulling a squeak and a soft moan from her lips.  \"<i>H-hey! You're supposed to be enjoying my food, not me!</i>\" she says with a blush on her cheeks, clearly not really minding your hands on her.  Looking back at the food she is preparing, Vala reluctantly pulls away.  \"<i>Breakfast is done - my treat, now let’s eat!</i>\" she cheerfully announces as she takes the food off the stove and plates the mouth-watering feast.  Each plate is blessed with a trio of bacon strips, two fried eggs and two plump sausages.  Shivering in delight at the meal ahead of you, you say a heartfelt thanks to Vala before digging in with her.");
-
 			outputText("\n\nIt’s a wonderful change of pace from the usual food you have in the morning.  The salty, savory meats and eggs fill you up, spreading a satisfied warmth through you as you eat.  Unfortunately for you, the deliciousness of the filling meal means it’s devoured quickly, leaving you almost uncomfortably full.  Letting out a sigh, you slide an arm around your fairy lover and pull her closer, cuddling with her at the table for a moment before pulling her into your lap.  Your hands run over her body and stroke her softly as you settle into the intimate, post-meal moment.  Vala smiles and presses herself against you, her arms curling around you as she snuggles you.  \"<i>My hero...  I wish we could stay like this forever, [name]</i>\" she says as she nuzzles her face into your [chest].");
-
 			outputText("\n\nWith her being as affectionate she is, you can't help but smile and stroke her.  This really was nice; you could see yourself enjoying many more times like this, but unfortunately you do have to get back to your duty.  Pulling Vala into a kiss, you squeeze her and hold her tightly against you for a moment before lifting her off you, telling the girl that you have to go.  She sighs, knowing that you have to get back to being her hero.  \"<i>I know, go and be the big strong hero I know you are, just make sure you come and visit me at the bar whenever you want,</i>\" she says before kissing you one last time and showing you to the door.  Breathing in the morning air, you head back to camp to check up on the place.");
-
 			//[return to camp][set clock to 7am]
 			doNext(camp.returnToCampUseOneHour);
 		}

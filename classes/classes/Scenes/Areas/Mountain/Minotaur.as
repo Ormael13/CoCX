@@ -5,6 +5,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
@@ -137,7 +138,8 @@ import classes.internals.*;
 					this.bonusLust = 230 + this.ballSize * 6 + rand(this.ballSize * 4);
 					this.level = 65;
 				}
-				this.drop = new ChainedDrop().add(weapons.DL_AXE_, 1 / 8)
+				this.drop = new ChainedDrop().add(necklaces.COWBELL, 1 / 12)
+						.add(weapons.DL_AXE_, 1 / 8)
 						.add(consumables.MINOCUM, 1 / 5)
 						.add(consumables.MINOBLO, 1 / 2)
 						.elseDrop(null);
@@ -197,6 +199,8 @@ import classes.internals.*;
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				hasTwoAttacks = true;
 			}
+			this.horns.type = Horns.COW_MINOTAUR;
+			this.horns.count = 6;
 			this.tailType = Tail.COW;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

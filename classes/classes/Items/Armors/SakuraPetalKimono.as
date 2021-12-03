@@ -16,7 +16,7 @@ package classes.Items.Armors
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.tallness >= 80) return true;
+			if (game.player.tallness >= 80) return super.canUse();
 			outputText("You aren't tall enough to wear this kimono!  ");
 			return false;
 		}

@@ -67,13 +67,11 @@ package classes.Items
 			if (this.supportsUndergarment == false && (game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING)) {
 				var output:String = "";
 				var wornUpper:Boolean = false;
-
 				output += "It would be awkward to put on " + longName + " when you're currently wearing ";
 				if (game.player.upperGarment != UndergarmentLib.NOTHING) {
 					output += game.player.upperGarment.longName;
 					wornUpper = true;
 				}
-
 				if (game.player.lowerGarment != UndergarmentLib.NOTHING) {
 					if (wornUpper) {
 						output += " and ";

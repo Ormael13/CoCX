@@ -365,7 +365,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 			outputText("\n\nThe demons voice comes back as a dry, irritated rumble. \"<i>That and more, mortal. Would it please you to shape my cock for your pleasure?</i>\"");
 
-			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				outputText("\n\nGiggling, you answer, \"<i>Like totally! Let's give you a cock makeover!</i>\"");
 			}
 			else {
@@ -495,15 +495,13 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			if (cType == MECHANIC_HORZ_GOG) outputText(", the head flaring to seal itself against your cervix");
 			else if (cType == MECHANIC_DOG_COCK) outputText(", the knot popping in just in time to start bloating, locking you in place");
 			outputText(", and jism begins to shoot out in waves.");
-			if (!player.isPregnant())
-			{
+			if (!player.isPregnant()) {
 				outputText(" Your empty womb drinks up the virile, seed-filled sludge with abandon.");
 				if (cType == MECHANIC_HORZ_GOG) outputText(" After all, that bestial horse-cock doesn't really leave it anywhere else to go. The demonic animal-cunt just continues spurting straight on in to have its way with your eggs, and you're sure there isn't a contraceptive this side of Mareth that could stop you from having his imps.");
 				else if (cType == MECHANIC_DOG_COCK) outputText(" After all, that immense knot doesn't really leave it anywhere else to go. Once every fold is bathed in alabaster doggie-cream, the continued ejaculations start pouring in after your eggs. His knot is so big and stretching you so wide; you don't think he would pop out even if he filled your belly to look nine months pregnant. Worse, or perhaps better, you're sure with how thick and virile his seed feels that you'll be getting pregnant with his imps from this.");
-				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			}
-			else
-			{
+			else {
 				outputText(" Your blocked womb deflects the seed, forcing it all to stay in your channel");
 				if (cType != MECHANIC_DOG_COCK) outputText(" and drip out over his balls, much to his chagrin.");
 				else outputText(" and stretch you further.");

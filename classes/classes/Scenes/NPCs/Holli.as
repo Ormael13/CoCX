@@ -4,6 +4,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Tongue;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
 
 public class Holli extends Monster
@@ -25,7 +26,15 @@ public class Holli extends Monster
 //[monster] whips out at you with branches and roots!
 
 //attack noun: lash
-//Failing to Escape -Z
+		
+		
+		override public function postPlayerAbility(ability:CombatAbility):void {
+			if (ability.hasTag(CombatAbility.TAG_DAMAGING) && ability.hasTag(CombatAbility.TAG_FIRE)) {
+				if(!hasStatusEffect(StatusEffects.HolliBurning)) lightHolliOnFireMagically();
+			}
+		}
+		
+		//Failing to Escape -Z
 		public function escapeFailWithHolli():void
 		{
 			clearOutput();

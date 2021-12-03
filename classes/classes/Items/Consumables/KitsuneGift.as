@@ -34,7 +34,7 @@ public final class KitsuneGift extends Consumable {
 			//[Gems]
 				case 2:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it is filled to the brim with shining gems!");
-				var gems:int = 2 + Utils.rand(20);
+				var gems:int = 20 + Utils.rand(10);
 				outputText("\n\n<b>You've received " + Utils.num2Text(gems) + " shining gems from the kitsune's gift!  How generous!</b>");
 				game.player.gems += gems;
 				//add X gems to inventory
@@ -70,7 +70,7 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
 				//Increase INT and Libido, +10 LUST
-				dynStats("lus", 10);
+				dynStats("lus", 50);
 				player.addCurse("sen", 2, 1);
 				player.KnowledgeBonus("int", 4);
 				break;
@@ -81,7 +81,7 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune's familiar has stolen your gems!</b>");
 				// Lose X gems as though losing in battle to a kitsune
-				game.player.gems -= 2 + Utils.rand(15);
+				game.player.gems -= 20 + Utils.rand(10);
 				EngineCore.statScreenRefresh();
 				break;
 

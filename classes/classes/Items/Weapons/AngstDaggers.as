@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function AngstDaggers() 
 		{
-			super("AngstD","AngstDaggers","Angst Daggers","an Angst Daggers","stab",21,3360,"A pair of small blades filled with anger. To fully unleash potential of those deadly blades is required 300+ speed and 60+ strength.", "Dual Small");
+			super("AngstD","AngstDaggers","Angst Daggers","an Angst Daggers","stab",21,3360,"A pair of small blades filled with anger. To fully unleash potential of those deadly blades is required 300+ speed and 60+ strength.", "Dual Small", "Dagger");
 		}
 		
 		override public function get attack():Number {
@@ -27,7 +27,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield)) return true;
+			if (game.player.hasPerk(PerkLib.DualWield)) return super.canUse();
 			outputText("You aren't skilled enough to handle this pair of weapons!  ");
 			return false;
 		}

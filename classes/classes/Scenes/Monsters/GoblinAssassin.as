@@ -146,7 +146,7 @@ public class GoblinAssassin extends Monster
 			this.skinTone = "dark green";
 			this.hairColor = "blue";
 			this.hairLength = 7;
-			initStrTouSpeInte(45, 55, 110, 95);
+			initStrTouSpeInte(45, 45, 110, 95);
 			initWisLibSensCor(95, 64, 35, 60);
 			this.weaponName = "needles";
 			this.weaponVerb = "stabbing needles";
@@ -159,6 +159,7 @@ public class GoblinAssassin extends Monster
 			this.gems = rand(50) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
+					add(consumables.PONAILS,2).
 					addMany(1, consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

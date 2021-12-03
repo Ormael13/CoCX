@@ -192,7 +192,7 @@ use namespace CoC;
 			if (player.hasKeyItem("Dangerous Plants")){
 				outputText("You remember an entry in the dangerous plant book regarding this flora. It feeds off mammal cum and fluids but since you are a plant yourself, only able to cum nectar or pollen you have nothing interesting to offer it, hence why it left you alone.");
 			}
-			outputText("That said you won’t push your luck and stand there longer than necessary and thus head back to the previous room with due haste");
+			outputText("That said you won’t push your luck and stand there longer than necessary and thus head back to the previous room with due haste.\n\n");
 			flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
 			inventory.takeItem(weapons.JRAPIER, roomGatheringHall);
 		}
@@ -409,7 +409,7 @@ use namespace CoC;
 			if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
 			player.orgasm();
 			player.sexReward("cum","Vaginal");
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 			cleanupAfterCombat();
 		}
 		public function loseToImpMob():void {
@@ -1127,10 +1127,7 @@ use namespace CoC;
 			}
 			dungeons.setDungeonButtons(null, null, null, roomGatheringHall);
 			//Had to place the button.
-			if (player.isAlraune())
-			{
-				addButton(0, "Get Sword", getSwordAlrauneSkipsEverything);
-			}
+			if (player.isAlraune() && flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] == 0) addButton(0, "Get Sword", getSwordAlrauneSkipsEverything);
 			else {
 				if (flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] == 0) {
 					addButton(0, "Get Sword", getSwordAndGetTrapped);

@@ -222,6 +222,7 @@ import coc.view.MainView;
 			//Default
 			player.skinTone = "light";
 			player.hairColor = "brown";
+			player.hairStyle = 0;
 			player.hairType = Hair.NORMAL;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -407,8 +408,8 @@ import coc.view.MainView;
 			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
-				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
-				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE]) {
+				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.WATERSPORTS_ENABLED, 
+				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -1612,7 +1613,7 @@ import coc.view.MainView;
 		private function chooseModeNightmare():void {
 			clearOutput();
 			outputText("You have chosen Nightmare Mode. Hunger would be all time active so go get that food or your gonna starve... to death. If you want to spellcast or use magic specials you have to pay attention to your accumulated wrath. Also negative effects of internal mutations starts right away. You have been warned: it not gonna be walk in park anymore...\n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 1;
+			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 2;
 			player.hunger = 50;
@@ -1759,6 +1760,7 @@ import coc.view.MainView;
 			player.HP = player.maxHP();
 			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
+			menu();
 			addButton(0, "Ingnam", goToIngnam);
 			addButton(1,"Skip Ingnam", arrival);
 		}
@@ -1782,7 +1784,7 @@ import coc.view.MainView;
 			ascensionMenu();
 		}
 
-		public function returnFromupdateAscension(): void {
+		public function returnFromUpdateAscension(): void {
 			migration = false;
 			migrationMsg = "";
 			Metamorph.registerPermanentMetamorphs();
@@ -1800,7 +1802,7 @@ import coc.view.MainView;
 
 			outputText("The world you have departed is irrelevant and you are in an endless black void dotted with tens of thousands of stars. You encompass everything and everything encompasses you.");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
-			outputText("\n\n(When you're done, select Reincarnate" + (migration ? " or Return" : "") + ".)");
+			outputText("\n\n(When you're done, select " + (migration ? "Return" : "Reincarnate") + ".)");
 			menu();
 			addButton(0, "Perk Select(1)", ascensionPerkMenu).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
@@ -1823,8 +1825,8 @@ import coc.view.MainView;
 			}
 			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
-			addButton(11, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
-			if (migration) addButton(12, "Return", returnFromupdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
+			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -2574,8 +2576,10 @@ import coc.view.MainView;
 				if (player.hasPerk(PerkLib.MilkMaid) && player.perkv4(PerkLib.MilkMaid) < 1) addButton(0, "MilkMaid", permanentizePerk3, PerkLib.MilkMaid);
 				else if (player.hasPerk(PerkLib.MilkMaid) && player.perkv4(PerkLib.MilkMaid) > 0) addButtonDisabled(0, "MilkMaid", "MilkMaid perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(0, "MilkMaid", "MilkMaid");
-				if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(1, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
-				else if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) {
+					if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(1, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
+					else if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
+				}
 				else addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance");
 				if (player.hasPerk(PerkLib.OneTrackMind) && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(2, "OneTrackMind", permanentizePerk3, PerkLib.OneTrackMind);
 				else if (player.hasPerk(PerkLib.OneTrackMind) && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(2, "OneTrackMind", "One Track Mind perk is already made permanent and will carry over in all subsequent ascensions.");
@@ -2782,16 +2786,20 @@ import coc.view.MainView;
 		}
 
 		private function accessLowerBodyMenu(currentPage: int = 0): void {
-			var memArray: Array = LowerBodyMem.Memories;
-
 			// Hides Taur variants of pre-existing TFs
-			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
+			var memArray: Array = LowerBodyMem.Memories.filter(function(element: *, index: int, array: Array): Boolean {
 				if (element && !element.taurVariant) {
 					return true;
 				}
 				return false;
 			});
 
+			memArray.unshift({
+		  	id: "Taur Lower Body",
+				permCost: 50,
+				permInfo: "Enables metamorphosis to Taur variants of several lower body parts.",
+		  	title: "Taur Shape"
+			});
 
 			openPaginatedMetamorphMenu("Lower Body", accessLowerBodyMenu, currentPage, memArray);
 		}
@@ -2857,7 +2865,7 @@ import coc.view.MainView;
 				const obtained: Boolean = Metamorph.PermanentMemoryStorage[genMem.id];
 				const hasRequirements: Boolean = (genMem.permReq ? Metamorph.PermanentMemoryStorage[genMem.permReq] || false : true);
 
-				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points");
+				if (unlocked && hasRequirements && enoughPP && !obtained) addButton(currentButton, buttonStr, permanentizeMetamorph, menuInfo, genMem).hint("Cost: " + (genMem.permCost || 5) + " Ascension Perk Points" + (genMem.permInfo ? "\n\n" + genMem.permInfo : ""));
 				else if (unlocked && !hasRequirements && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points\n\n<b>Requirement</b>: Permanentize " + genMem.permReq);
 				else if (unlocked && hasRequirements && !enoughPP && !obtained) addButtonDisabled(currentButton, buttonStr, "Cost: " + (genMem.permCost || 5) + " Ascension Perk Points (You don't have enough Ascension Perk Points to permanentize this metamorphosis!)");
 				else if (obtained) addButtonDisabled(currentButton, buttonStr, "You already permanentized this metamorphosis!");
@@ -2910,14 +2918,47 @@ import coc.view.MainView;
 
 		private function reincarnatePrompt():void {
 			clearOutput();
-			outputText("Would you like to reincarnate and start a new life as a Champion?");
-			doYesNo(reincarnate, ascensionMenu);
+			outputText("Would you like to reincarnate and start a new life as a Champion?\n\nReincarnating without increasing the New Game+ cycle (difficulty) will require 50 ascension points.");
+			menu();
+			addButton(1, "Yes", reincarnate001).hint("Reincarnate with increased difficulty.");
+			if (player.ascensionPerkPoints >= 50) addButton(2, "Maybe?", reincarnate002).hint("Reincarnate without increasing difficulty.");
+			else addButtonDisabled(2, "Maybe?", "50 ascension points required.");
+			addButton(3, "No", ascensionMenu).hint("Go Back");
 		}
-		private function reincarnate():void {
+		private function reincarnate001():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
+			reincarnate();
+		}
+		private function reincarnate002():void {
+			player.ascensionPerkPoints -= 50;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0){ //In case ng0, otherwise, player is treated as new char.
+				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0.5
+			}
+			reincarnate();
+		}
+
+		private function removePerksThatShouldntBeFuckingPermanent():void {
+			if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4))
+				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry1to4);
+			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) == 0 )
+				player.removePerk(PerkLib.CorruptedNinetails);
+			if (player.hasPerk(PerkLib.CorruptedKitsune) && player.perkv4(PerkLib.CorruptedKitsune) == 0 )
+				player.removePerk(PerkLib.CorruptedKitsune);
+			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 )
+				player.removePerk(PerkLib.EnlightenedNinetails);
+			if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.perkv4(PerkLib.EnlightenedKitsune) == 0 )
+				player.removePerk(PerkLib.EnlightenedKitsune);
+		}
+
+		private function reincarnate():void {
+			Metamorph.resetMetamorph();
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();
+			removePerksThatShouldntBeFuckingPermanent();
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0.5){
+				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0
+			}
 			player.removeKeyItem("Ascension");
 			clearOutput();
 			mainView.nameBox.visible = false;
@@ -2948,6 +2989,8 @@ import coc.view.MainView;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 0;
+			player.masteryFeralCombatLevel = 0;
+			player.masteryFeralCombatXP = 0;
 			player.masteryGauntletLevel = 0;
 			player.masteryGauntletXP = 0;
 			player.masteryDaggerLevel = 0;
@@ -2960,6 +3003,8 @@ import coc.view.MainView;
 			player.masteryMaceHammerXP = 0;
 			player.masteryDuelingSwordLevel = 0;
 			player.masteryDuelingSwordXP = 0;
+			player.masteryPolearmLevel = 0;
+			player.masteryPolearmXP = 0;
 			player.masterySpearLevel = 0;
 			player.masterySpearXP = 0;
 			player.masteryWhipLevel = 0;
@@ -2999,6 +3044,9 @@ import coc.view.MainView;
 			player.setJewelry3(JewelryLib.NOTHING);
 			player.setJewelry4(JewelryLib.NOTHING);
 			player.setVehicle(VehiclesLib.NOTHING);
+			player.setMiscJewelry(MiscJewelryLib.NOTHING);
+			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
+			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();

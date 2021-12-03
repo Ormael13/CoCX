@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\CoC_Xianxia.swf" />
+    <movie path="C:\Users\Marcin\Desktop\CoC_Xianxia_0.8s3.swf" />
     <movie fps="24" />
     <movie width="1000" />
     <movie height="800" />
@@ -12,7 +12,7 @@
     <movie minorVersion="3" />
     <movie platform="Flash Player" />
     <movie background="#000000" />
-    <movie preferredSDK="..\FlexSDK" />
+    <movie preferredSDK="Flex 4.6.0, AIR 3.1;4.6.0, 3.1;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>

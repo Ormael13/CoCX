@@ -17,7 +17,7 @@ public class Syth extends Monster
 		private function sythBerserk():void {
 			wrath -= 50;
 			outputText("Salamander roar and unleash his lustful fury in order to destroy you!\n\n");
-			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
+			this.weaponAttack += (15 + (15 * (1 + player.newGamePlusMod())));
 			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
 		}
 		
@@ -126,7 +126,7 @@ public class Syth extends Monster
 				wrath += 5;
 				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
 				else {
-					this.weaponAttack -= (40 + (40 * (1 + player.newGamePlusMod)));
+					this.weaponAttack -= (15 + (15 * (1 + player.newGamePlusMod())));
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
