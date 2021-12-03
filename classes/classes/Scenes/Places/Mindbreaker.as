@@ -439,7 +439,8 @@ package classes.Scenes.Places{
 				}
 			}
 			player.createPerk(PerkLib.Insanity,0,0,0,0);
-			//player.createPerk(PerkLib.Psionic Empowerment,0,0,0,0);
+			player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
+			player.createPerk(PerkLib.PsionicEmpowerment,0,0,0,0);
 			MindBreakerQuest = QUEST_STAGE_ISMB;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -519,13 +520,13 @@ package classes.Scenes.Places{
 			//if (player.hairType != Hair.MINDBREAKER) addButton(1, "Fix Me", Regaintentacles,1,1,1,"Regain your hair tentacles.");
 			addButton(1, "Sister Sex", SexCaerbDnim).hint("Get your sister to fuck your brain out.");
 			addButton(2, "Use gob", GoblinTentacle).hint("Play big sister with your smaller female follower.");
-			if (MindBreakerGoblinConvert == 0) addButtonDisabled(2,"Use gob","You need at least one goblin follower to do this.");
-			addButton(3, "Use gal", FuckGirl).hint("Improve the mind of one of the girl and enjoy yourself along the way.");
-			if (MindBreakerFetishFemaleConvert == 0) addButtonDisabled(3,"Use gal","You need at least one female follower to do this.");
+			if (MindBreakerGoblinConvert < 1) addButtonDisabled(2,"Use gob","You need at least one goblin follower to do this.");
+			//addButton(3, "Use gal", FuckGirl).hint("Improve the mind of one of the girl and enjoy yourself along the way.");
+			//if (MindBreakerFetishFemaleConvert < 1) addButtonDisabled(3,"Use gal","You need at least one female follower to do this.");
 			addButton(4, "Use boy", FuckBoy).hint("Reward one of the boy with his long awaited climax making him cum a river");
-			if (MindBreakerFetishMaleConvert == 0) addButtonDisabled(4,"Use boy","You need at least one male follower to do this.");
+			if (MindBreakerFetishMaleConvert < 1) addButtonDisabled(4,"Use boy","You need at least one male follower to do this.");
 			if ((MindBreakerGoblinConvert >= 1 || MindBreakerFetishFemaleConvert >= 1) && (PlayerEggIsFertile || player.hasCock()))addButton(5, "Convert", CreateMB).hint("Make one of your female pet into a new Mindbreaker.");
-			else addButtonDisabled(5,"Convert","You need at least one female follower in order to get create a new mindbreaker. Furthermore you need your parasitic eggs to be properly fertilised by a male fellower cum or that of a male mindbreaker.");
+			else addButtonDisabled(5,"Convert","You need at least one follower in order to get create a new mindbreaker. Furthermore you need your parasitic eggs to be properly fertilised by a male fellower cum or that of a male mindbreaker.");
 			//addButton(6, "Puppet sex", PuppetMaster,1,1,1,"Mind control two of your favorite pet into fucking one another and enjoy it.");
 			//if (MindBreakerFetishFemaleConvert == 0 || MindBreakerFetishMaleConvert == 0) addButtonDisabled(6,"Puppet sex","You need at least one female follower and one male fellower of normal size to do this.");
 			//addButton(7, "Orgy", FuckEveryFellower,1,1,1,"Just fuck with all of your follower at the same time preferably one of each type.");
@@ -602,7 +603,48 @@ package classes.Scenes.Places{
 
 		public function FuckBoy():void {
 			clearOutput();
-			outputText("You are curious about the mindbreakers of Mareth, where do they originate from?");
+			outputText("You check on your most recent male acquisition, keen on your promise." +
+					" You find the man bucking against a wall in a desperate attempt to cum, but unable to find satisfaction." +
+					" He can only moan in disappointment. You approach him, smiling in arousal.");
+			if (player.hasVagina()) outputText("\n\n\"<i>Please big sister [name], I beg of you to let me cum. Relieve me of my anguish.</i>\"");
+			if (player.hasCock()) outputText("\n\n\"<i>Please big brother [name], I beg of you to let me cum. Relieve me of my anguish.</i>\"");
+			outputText("\n\nHis balls have swelled to absurd size, easily two feet large from the use of transformatives and the accumulation of cum waiting to be expelled as he fiercely masturbates to no avail." +
+					" Without your brain signal, he is unable to find any release.");
+			if (MindBreakerFullConvert >= 2) outputText("\n\nYou move him toward a waiting group of mind breakers");
+			else outputText("\n\nYou move him toward a empty wall");
+			outputText(" as you slowly jerk him, making him groan in a mix of pain and pleasure, as his pillow-sized balls churn." +
+					" Finally, you insert your tentacle in his head and remove the mental block, granting him his long-awaited release." +
+					" His cock bursts into a fountain, as his body spasms from the mind-shattering orgasm that races through him." +
+					" The sheer volume and strength of the blast paint the walls");
+			if (MindBreakerFullConvert >= 2) outputText(" and the group of mindbreakers");
+			outputText(" white with sperm as his eyes roll back." +
+					" You lick your painted finger, savoring the taste of his cum as he continues erupting for an entire minute, turning part of the floor of the cave into a pool with the torrent of his cum.");
+			if (player.hasVagina()){
+				outputText("\n\nHe falls to the ground, barely conscious, his cock still spurting like a fountain." +
+						" You lick your lips and proceed to straddle him, inserting his still erupting cock into your pussy to savor the jets of cum inside of you, making you orgasm from the sheer strength of the cum flooding your vaginal walls and flowing into your womb, fertilizing your eggs." +
+						" You cum once, your greenish fluids splattering on the ground along with his cum then switch,");
+				if (MindBreakerFullConvert >= 2) outputText(" letting another mindflayer have her turn");
+				else outputText(" letting Kaerb Dnim have her turn");
+				if (MindBreakerFetishFemaleConvert >= 1) outputText(", as well as any possible female slave in need");
+				outputText("."+
+						" You each take turns straddling the man to get a proper orgasm and fertilization then repeat it." +
+						" Gods above, he cums so much it’s surprising you aren’t knee-deep in fluids right now.");
+			}
+			if (player.hasCock()){
+				outputText("\n\nHe falls to the ground, barely conscious, his cock still spurting like a fountain." +
+						" You lick your lips as your prehensile erection slides out of its slit with a gush of pooled cum." +
+						" You dig your tapered length into the man's urethra, relishing in the warm, gooey feeling of his seed." +
+						" Yet, you know this isn't all for you to enjoy." +
+						" You pull back, allowing");
+				if (MindBreakerFullConvert >= 2) outputText("\n\nother mindbreakers to have their turn,");
+				else outputText("\n\nKaerb Dnim to have her turn,");
+				outputText(" only afterward you may consider bringing him to any needy slaves.");
+				if (MindBreakerFullConvert >= 2) outputText(" Several eager mindflayers take turn");
+				else outputText(" Kaerb Dnim takes her time");
+				outputText(" trying to hold in the impossibly massive amounts of cum he has to give, it's a shame he's not quite to the point you are at yet... but that's only temporary.");
+			}
+			outputText("\n\nHighly satisfied, you head back to camp.");
+
 			PlayerEggIsFertile = true;
 			player.sexReward("Default","Vaginal",true,false);
 			doNext(camp.returnToCampUseOneHour);
