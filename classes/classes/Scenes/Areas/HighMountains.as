@@ -103,7 +103,7 @@ use namespace CoC;
 				return;
 			}
 			//Harpy odds!
-			if (player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0) {
+			if ((player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0) && flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] < 2) {
 				if (player.hasItem(consumables.OVIELIX, 2)) {
 					if (rand(4) == 0) {
 						chickenHarpy();

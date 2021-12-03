@@ -31,6 +31,7 @@ import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.CombatMagic;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
@@ -229,6 +230,24 @@ import flash.utils.getQualifiedClassName;
 		{
 			_drop = value;
 			initedDrop = true;
+		}
+		
+		/**
+		 * Called when monster is targeted with player's ability after it started to cast (used mana etc) but before any text output. Can interrupt ability usage (return true);
+		 * @param ability
+		 * @return true if ability was intercepted and should not apply its effect, false if it should proceed as usual
+		 */
+		public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			// default - do nothing
+			return false;
+		}
+		
+		/**
+		 * Called after monster was affected by player's ability.
+		 * @param ability
+		 */
+		public function postPlayerAbility(ability:CombatAbility):void {
+			// default - do nothing
 		}
 
 		protected override function maxHP_base():Number {
@@ -2411,6 +2430,7 @@ import flash.utils.getQualifiedClassName;
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
+				var temp3:Number = 0;
 				if (hasPerk(PerkLib.Regeneration)) healingPercent += (0.5 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore() >= 14) healingPercent += 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && !isNightTime()) healingPercent -= 5;
@@ -2441,6 +2461,21 @@ import flash.utils.getQualifiedClassName;
 					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
 					else healingPercent *= 0.2;
 				}
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.55;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.15;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.08;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.12;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.05;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.6;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.47;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp3 += 0.36;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp3 += 0.34;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp3 += 0.32;
+				if (temp3 > 0) healingPercent *= temp3;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (45 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.ImprovedLifeline)) temp2 += (60 * (1 + newGamePlusMod()));

@@ -463,7 +463,7 @@ public function PCGoblinDaughtersBuilingWorkshopSpareParts():void {
 	flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);
 	player.removeStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts);
 	doNext(playerMenu);
-	cheatTime2(5);
+	eachMinuteCount(5);
 }
 
 }

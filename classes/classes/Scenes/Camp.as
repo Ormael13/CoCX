@@ -20,6 +20,7 @@ import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.Boat.MaraeScene;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Soulforce;
 import classes.Scenes.SceneLib;
 import classes.lists.Gender;
@@ -2083,6 +2084,8 @@ public class Camp extends NPCAwareContent{
 	}
 
 	private function campMiscActions():void {
+		clearOutput();
+		outputText("What would you like to do?");
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(0, "Fishery", VisitFishery).hint("Visit Fishery.");
 		else addButtonDisabled(0, "Fishery", "Would you kindly build it first?");
@@ -2092,12 +2095,14 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
 		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
+		if (player.hasPerk(PerkLib.CursedTag)) addButton(4, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY aka modify your cursed tag");
+		else addButtonDisabled(4, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
 		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(5, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		if (player.hasPerk(PerkLib.CursedTag)) addButton(9, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY aka modify your cursed tag");
-		else addButtonDisabled(9, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
+		if (AdventurerGuild.Slot01Cap > 0) addButton(9, "Quest Loot", questItemsBag).hint("Manage your bag with quest items.");
+		else addButtonDisabled(9, "Quest Loot", "You have to join Adventure Guild to have bag for quest items.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2172,7 +2177,7 @@ public class Camp extends NPCAwareContent{
 		//Checks if pc has this ingrediant growing
 		outputText("You move over to your gardening fields. You can plant and grow herbs here.");
 		//plants typicaly takes 1 week to grow from a single ingrediant into 5 new ingrediants sample player can use this button to go to the harvest selection
-		addButton(1, "Seed", Seed).hint("plant down some seeds sacrificing an ingrediants.");
+		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingrediants.");
 		addFiveArgButton(2, "Harvest", Harvest, HarvestMoonScenes.harvestmoonstageHH >= 1, HarvestMoonScenes.harvestmoonstageMG >= 1, HarvestMoonScenes.harvestmoonstageSB >= 1, HarvestMoonScenes.harvestmoonstageIW >= 1, HarvestMoonScenes.harvestmoonstageBF >= 1).hint("Check your harvests.")
 		addButton(14, "Back", campActions).hint("Go back to camp action menu.");
 	}
@@ -2369,21 +2374,6 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 	}
-
-	private function fillUpPillBottle00():void {
-		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.LG_SFRP, 10);
-		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
-	}
-	private function fillUpPillBottle01():void {
-		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.MG_SFRP, 10);
-		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
-	}
 	
 	private function AlterBindScroll():void {
 		clearOutput();
@@ -2467,6 +2457,100 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
 		else player.createStatusEffect(StatusEffects.AlterBindScroll5,0,0,0,0);
 		doNext(AlterBindScroll);
+	}
+
+	private function fillUpPillBottle00():void {
+		clearOutput();
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.LG_SFRP, 10);
+		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
+	}
+	private function fillUpPillBottle01():void {
+		clearOutput();
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.MG_SFRP, 10);
+		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+	}
+
+	private function questItemsBag():void {
+		clearOutput();
+		outputText("Would you like to put some quest items into the bag, and if so, with ones?\n\n");
+		if (AdventurerGuild.Slot01Cap > 0) outputText("<b>Imp Skulls:</b> "+AdventurerGuild.Slot01+" / "+AdventurerGuild.Slot01Cap+"\n");
+		if (AdventurerGuild.Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+AdventurerGuild.Slot02+" / "+AdventurerGuild.Slot02Cap+"\n");
+		if (AdventurerGuild.Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+AdventurerGuild.Slot03+" / "+AdventurerGuild.Slot03Cap+"\n");
+		if (AdventurerGuild.Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+AdventurerGuild.Slot04+" / "+AdventurerGuild.Slot04Cap+"\n");
+		menu();
+		if (AdventurerGuild.Slot01 < AdventurerGuild.Slot01Cap) {
+			if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
+			else addButtonDisabled(0, "ImpSkull", "You not have any imp skulls to store.");
+		}
+		else addButtonDisabled(0, "ImpSkull", "You can't store more imp skulls in your bag.");
+		if (AdventurerGuild.Slot01 > 0) addButton(1, "ImpSkull", questItemsBagImpSkull1Down);
+		else addButtonDisabled(1, "ImpSkull", "You not have any imp skulls in your bag.");
+		if (AdventurerGuild.Slot02 < AdventurerGuild.Slot02Cap) {
+			if (player.hasItem(useables.FIMPSKL, 1)) addButton(2, "FeralImpS.", questItemsBagFeralImpSkull1Up);
+			else addButtonDisabled(2, "FeralImpS.", "You not have any feral imp skulls to store.");
+		}
+		else addButtonDisabled(2, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
+		if (AdventurerGuild.Slot02 > 0) addButton(3, "FeralImpS.", questItemsBagFeralImpSkull1Down);
+		else addButtonDisabled(3, "FeralImpS.", "You not have any feral imp skulls in your bag.");
+		if (AdventurerGuild.Slot03 < AdventurerGuild.Slot03Cap) {
+			if (player.hasItem(useables.MINOHOR, 1)) addButton(5, "MinoHorns", questItemsBagMinotaurHorns1Up);
+			else addButtonDisabled(5, "MinoHorns", "You not have any minotaur horns to store.");
+		}
+		else addButtonDisabled(5, "MinoHorns", "You can't store more minotaur horns in your bag.");
+		if (AdventurerGuild.Slot03 > 0) addButton(6, "MinoHorns", questItemsBagMinotaurHorns1Down);
+		else addButtonDisabled(6, "MinoHorns", "You not have any minotaur horns in your bag.");
+		if (AdventurerGuild.Slot04 < AdventurerGuild.Slot04Cap) {
+			if (player.hasItem(useables.DEMSKLL, 1)) addButton(7, "DemonSkull", questItemsBagDemonSkull1Up);
+			else addButtonDisabled(7, "DemonSkull", "You not have any demon skulls to store.");
+		}
+		else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
+		if (AdventurerGuild.Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
+		else addButtonDisabled(8, "DemonSkull", "You not have any demon skulls in your bag.");
+		addButton(14, "Back", campMiscActions);
+	}
+	private function questItemsBagImpSkull1UP():void {
+		player.destroyItems(useables.IMPSKLL, 1);
+		AdventurerGuild.Slot01 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagImpSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot01 -= 1;
+		inventory.takeItem(useables.IMPSKLL, questItemsBag);
+	}
+	private function questItemsBagFeralImpSkull1Up():void {
+		player.destroyItems(useables.FIMPSKL, 1);
+		AdventurerGuild.Slot02 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagFeralImpSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot02 -= 1;
+		inventory.takeItem(useables.FIMPSKL, questItemsBag);
+	}
+	private function questItemsBagMinotaurHorns1Up():void {
+		player.destroyItems(useables.MINOHOR, 1);
+		AdventurerGuild.Slot03 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagMinotaurHorns1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot03 -= 1;
+		inventory.takeItem(useables.MINOHOR, questItemsBag);
+	}
+	private function questItemsBagDemonSkull1Up():void {
+		player.destroyItems(useables.DEMSKLL, 1);
+		AdventurerGuild.Slot04 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagDemonSkull1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot04 -= 1;
+		inventory.takeItem(useables.DEMSKLL, questItemsBag);
 	}
 
 	private function VisitClone():void {
@@ -3647,6 +3731,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (dungeonFound()) addButton(0, "Dungeons", dungeons).hint("Delve into dungeons.");
 		else addButtonDisabled(0, "???", "Find at least one dungeon.");
+		//1 - ???
 		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit the Marae's Island in middle of the Lake.");
 		else addButtonDisabled(2, "???", "Search the lake on the boat.");
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
@@ -3659,13 +3744,19 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(6, "???", "Search the plains.");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 		else addButtonDisabled(7, "???", "Search the plains.");
+		//8 - ???
+		//9 - ???
+
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "Explore the realm.");
-		if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
-		else addButtonDisabled(11, "???", "Search the forest.");
+		if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] > 1) {
+			if (player.hasItem(consumables.OVIELIX)) addButton(11, "Chicken Harpy", SceneLib.highMountains.chickenHarpy).hint("Visit Chicken Harpy in the High Mountains.");
+			else addButtonDisabled(11, "Chicken Harpy", "You need to have at least 1-2 ovi elixirs to have reason to look for her.");
+		}
+		else addButtonDisabled(11, "???", "Search the high mountains with ovi elixir.");
 		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) addButton(12, "Dilapidated Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro).hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.");
 		else addButtonDisabled(12, "???", "Search the battlefield. (After hearing npc meantions this place)");
-		if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(13, "Eldritch Caves", SceneLib.mindbreaker.CaveLayout).hint("Visit the mindbreaker lair.");
+		if (WoodElves.WoodElvesQuest >= 5) addButton(13, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
 		else addButtonDisabled(13, "???", "Search the forest.");
 		addButton(14, "Back", playerMenu);
 		return true;
@@ -3699,6 +3790,8 @@ public class Camp extends NPCAwareContent{
 
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
 		else addButtonDisabled(10, "???", "???");
+		if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(11, "Eldritch Caves", SceneLib.mindbreaker.CaveLayout).hint("Visit the mindbreaker lair.");
+		//11 - ???
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 		if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 		addButton(14, "Back", playerMenu);
@@ -3709,9 +3802,9 @@ public class Camp extends NPCAwareContent{
 		flags[kFLAGS.PLACES_PAGE] = 2;
 		if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
 			if (player.statusEffectv1(StatusEffects.ResourceNode1) < 5) addButtonDisabled(0, "???", "You need to explore Forest more to unlock this place.");
-			else addButton(0, "Woodcutting", camp.cabinProgress.gatherWoods);
+			else addButton(0, "Woodcutting", camp.cabinProgress.gatherWoods).hint("You can cut some trees here to get wood.");
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) addButtonDisabled(1, "???", "You need to explore Mountains more to unlock this place.");
-			else addButton(1, "Quarry", camp.cabinProgress.quarrySite);
+			else addButton(1, "Quarry", camp.cabinProgress.quarrySite).hint("You can mine here to get stones, gems and maybe even some ores.");
 		}
 		else {
 			addButtonDisabled(0, "???", "Search the forest.");
@@ -4173,7 +4266,6 @@ public function rebirthFromBadEnd():void {
 		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
 		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 3;
 		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkBeeHiveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePointsPrediction++;
@@ -5535,7 +5627,25 @@ public function rebirthFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
-			outputText("Jiangshi getting Tag'd");
+			outputText("Jiangshi getting Tag'd and your backpack feel somehow cheaper (no worry will get back some gems for it if needed).");
+			if (player.hasKeyItem("Backpack") >= 0) player.gems += (150 * player.keyItemv1("Backpack"));
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 1) {
+				outputText(" Very small present from Adventure Guild for having easier to manage all the loot ;)");
+				AdventurerGuild.Slot01Cap = 10;
+				AdventurerGuild.Slot02Cap = 10;
+			}
+			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.Slot03Cap < 1) {
+				outputText(" Small present from Adventure Guild for having easier to manage all the loot ;)");
+				AdventurerGuild.Slot01Cap = 10;
+				AdventurerGuild.Slot02Cap = 10;
+				AdventurerGuild.Slot03Cap = 10;
+				AdventurerGuild.Slot04Cap = 10;
+			}
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 2 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+				outputText(" Opps seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk pernamency will be nullified.");
+				player.setPerkValue(PerkLib.NinetailsKitsuneOfBalance, 4, 0);
+				player.ascensionPerkPoints += 5;
+			}
 			if (player.hasPerk(PerkLib.Rigidity)) jiangshiBuggedItemsCleanUpCrew();//LAST THING TO DO IN THIS SAVE UPDATE
 			doNext(doCamp);
 			return;

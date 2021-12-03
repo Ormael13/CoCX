@@ -211,13 +211,13 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 		homes = true;
 	menu();
 	addButton(0, "Shops", armorShops);
-	addButton(1, "Bakery", bakeryScene.bakeryuuuuuu);
-	addButton(2, "Bar", enterBarTelAdre);
-	addButton(3, "Gym", gymDesc);
-	if (homes) addButton(4, "Homes", houses);
-	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", SceneLib.arianScene.visitThePark);
-	addButton(6, "Pawn", oswaldPawn);
-	addButton(8, "Tower", library.visitZeMagesTower);
+	addButton(1, "Pawn", oswaldPawn);
+	addButton(2, "Bakery", bakeryScene.bakeryuuuuuu);
+	addButton(3, "Bar", enterBarTelAdre);
+	addButton(4, "Gym", gymDesc);
+	if (homes) addButton(5, "Homes", houses);
+	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(6, "Park", SceneLib.arianScene.visitThePark);
+	addButton(7, "Tower", library.visitZeMagesTower);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -267,7 +267,7 @@ public function houses():void {
 public function oswaldPawn():void {
 	spriteSelect(47);
 	clearOutput();
-	if(!player.hasStatusEffect(StatusEffects.Oswald)) {
+	if (!player.hasStatusEffect(StatusEffects.Oswald)) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ");
 		if(player.cor < 75) outputText("Who would've thought that seeing someone NOT aroused would ever shock you?");
 		else outputText("What a shame, but maybe you can give him a reason to stand up straight?");
@@ -280,7 +280,7 @@ public function oswaldPawn():void {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
 		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)");
 	}
-	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
+	if (player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
 	{
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
 		if (player.gems < 500) {
@@ -306,9 +306,14 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory.as
+private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //Moved here from Inventory.as
 	var slot:int;
 	spriteSelect(47);
+	if (refresh) {
+		clearOutput();
+		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
+		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)");
+	}
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
@@ -320,7 +325,7 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		if (inventory.getMaxSlots() > 10) addButton(13, "Next", oswaldPawnMenu, page + 1);
+		if (inventory.getMaxSlots() > 10) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
 	}
 	if (page == 2) {
 		for (slot = 10; slot < 20; slot++) {
@@ -330,16 +335,23 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		addButton(13, "Prev", oswaldPawnMenu, page - 1);
+		addButton(13, "Prev", oswaldPawnMenu, page - 1, refresh = true);
 	}
+	addButton(10, "Misc", oswaldPawnMenu2);
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
+	addButton(14, "Back", telAdreMenu);
+}
+private function oswaldPawnMenu2():void {
+	spriteSelect(47);
+	menu();
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
 		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
 		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
 	}
-	addButton(14, "Back", telAdreMenu);
+	addButton(14, "Back", oswaldPawn);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
@@ -390,6 +402,43 @@ private function oswaldPawnSellAll():void {
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
+}
+
+private function buyBackpack():void {
+	spriteSelect(47);
+	clearOutput();
+	outputText("You ask Oswald if he has a backpack to spare.");
+	outputText("\n\n\"<i>Yes. They come in two sizes. What will you pick?</i>\" he asks.");
+	outputText("\n\n<b><u>Backpack Size and Pricings</u></b>");
+	outputText("\nSmall: 100 gems, +2 inventory slot");
+	outputText("\nMedium: 200 gems, +4 inventory slots");
+	menu();
+	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	addButton(14, "Nevermind", oswaldPawnMenu2);
+}
+private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
+	spriteSelect(47);
+	clearOutput();
+	if (player.gems < price) {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(buyBackpack);
+		return;
+	}
+	outputText("\"<i>Here you go.</i>\"");
+	if (player.hasKeyItem("Backpack") >= 0) {
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	else {
+		outputText("\n\n<b>(Key Item Gained: " + sizeDesc + " Backpack! You now have " + num2Text(size) + " extra inventory slots");
+		player.createKeyItem("Backpack", size, 0, 0, 0);
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	player.gems -= price;
+	statScreenRefresh();
+	doNext(buyBackpack);
 }
 
 private function anotherButton(button:int, nam:String, func:Function, arg:* = -9000):int {
@@ -613,12 +662,12 @@ public function carpentryShopInside():void {
 public function carpentryShopBuyNails():void {
 	clearOutput();
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
-		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to "+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2 ? "six":"two")+" hundred nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to "+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2 ? "seven":"two")+" hundred and fifty nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750")
 		}
 		else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
 		}
 		menu();
 		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
@@ -653,17 +702,17 @@ private function carpentryShopBuyNailsYes():void {
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
 		outputText("You hand over " + (nails * 2) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 600) * 2);
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 750) * 2);
+			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750");
 		}
-		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
+		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 200) * 2);
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 250) * 2);
+			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -676,10 +725,10 @@ public function carpentryShopBuyWood():void {
 	clearOutput();
 	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 5 gems per wood plank.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400")
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
@@ -709,17 +758,17 @@ private function carpentryShopBuyWoodYes():void {
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 		outputText("You hand over " + (wood * 5) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)) {
+		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 900) * 5);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 900);
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 1200) * 5);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 1200);
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200");
 		}
-		else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 300 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3)) {
+		else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3)) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 300) * 5);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 300);
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 400) * 5);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 400);
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -732,10 +781,10 @@ public function carpentryShopBuyStone():void {
 	clearOutput();
 	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 10 gems per stone.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400")
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
@@ -765,17 +814,17 @@ private function carpentryShopBuyStoneYes():void {
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] >= 100) awardAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO);
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
 		outputText("You hand over " + (stone * 10) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)) {
+		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)) {
 			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 900) * 10);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 900);
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 1200) * 10);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 1200);
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200");
 		}
-		else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 300 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4)) {
+		else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4)) {
 			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 300) * 10);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 300);
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 400) * 10);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 400);
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -788,10 +837,10 @@ public function carpentryShopSellNails():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellNailsAmount, 1);
@@ -821,10 +870,10 @@ private function carpentryShopSellNailsYes():void {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= nails;
 		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600");
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750");
 		}
 		else {
- 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
+ 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"");
@@ -837,10 +886,10 @@ public function carpentryShopSellWood():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of two gems per piece.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
@@ -870,10 +919,10 @@ private function carpentryShopSellWoodYes():void {
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
 		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 2) + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900");
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200");
 		}
 		else {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"");
@@ -886,10 +935,10 @@ public function carpentryShopSellStone():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy stones from you. He says, \"<i>Certainly! I'll be buying stones at a rate of four gems per piece.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
@@ -919,10 +968,10 @@ private function carpentryShopSellStoneYes():void {
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stone;
 		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 4) + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900");
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200");
 		}
 		else {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough stones.</i>\"");
@@ -1287,17 +1336,17 @@ public function tripxiShopMainMenu2a():void {
 	addButton(0, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.FLINTLK);
 	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Desert.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Desert. (lvl 6+)");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Forest.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Swamp.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(5, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(5, "???", "Search the Deepwoods.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(5, "???", "Search the Plains.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.TOUHOM3.shortName, buyItemT2, weaponsrange.TOUHOM3);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Caves.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(7, weaponsrange.TWINGRA.shortName, buyItemT2, weaponsrange.TWINGRA);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(7, "???", "Search the Battlefield(O).");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(7, "???", "Search the Battlefield(B).");
 	addButtonDisabled(10, "-1-", "Shelf 1");
 	addButton(11, "-2-", tripxiShopMainMenu2b);
 	addButton(12, "-3-", tripxiShopMainMenu2c);
@@ -1312,15 +1361,15 @@ public function tripxiShopMainMenu2b():void {
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Blight Ridge.");
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Defiled Ravine.");
-	//4 - Sakuno M2
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(5, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(5, "???", "Search the Beach.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Beach.");
+	//5 - Sakuno M2
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Mountains.");
 	//7 - Tediore pistol
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
-	addButton(12, "-2-", tripxiShopMainMenu2c);
+	addButton(12, "-3-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
 

@@ -43,6 +43,8 @@ import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.Scenes.Combat.CombatAbilities;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.Places.Mindbreaker;
@@ -5442,7 +5444,7 @@ use namespace CoC;
 			if (InCollection(hairColor, BeeGirlScene.beeHair)) //TODO if hairColor2 == yellow && hairColor == black
 				beeCounter++;
 			if (eyes.type == Eyes.BLACK_EYES_SAND_TRAP)
-				beeCounter += 2;//po dodaniu bee tongue wróci do +1 
+				beeCounter += 2;//po dodaniu bee tongue wróci do +1
 			if (antennae.type == Antennae.BEE) {
 				beeCounter++;
 				if (faceType == Face.HUMAN)
@@ -15242,6 +15244,21 @@ use namespace CoC;
 			//mainView.statsView.showUpDown();
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
+		}
+		
+		public function knownAbilities():/*CombatAbility*/Array {
+			return CombatAbilities.ALL.filter(
+					function(ability:CombatAbility,index:int,array:Array):Boolean {
+						return ability.isKnown
+					}
+			)
+		}
+		public function knownAbilitiesOfClass(klass:Class):/*CombatAbility*/Array {
+			return CombatAbilities.ALL.filter(
+					function(ability:CombatAbility,index:int,array:Array):Boolean {
+						return ability is klass && ability.isKnown
+					}
+			)
 		}
 	}
 }

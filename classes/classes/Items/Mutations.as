@@ -876,8 +876,8 @@ public final class Mutations extends MutationsHelper {
         outputText("You open the pack to find " + nails + " nails inside.");
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;
-        else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
+        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+        else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
     }
 
     /* ITEMZZZZZ FUNCTIONS GO HERE */
@@ -3761,6 +3761,7 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Clear Mind and doesnt have it
             if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
@@ -3869,16 +3870,19 @@ public final class Mutations extends MutationsHelper {
         if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
+            return;
         }
         //Smart enough for Mental Shield and doesnt have it
         if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
+            return;
         }
         //Smart enough for Cure and doesnt have it
         if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
             player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
+            return;
         }
         //Smart enough for fire storm and doesnt have it
         if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
@@ -3891,21 +3895,25 @@ public final class Mutations extends MutationsHelper {
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Aegis.</b>");
 				player.createStatusEffect(StatusEffects.KnowsAegis, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Exorcise and doesnt have it
 			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsExorcise)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Exorcise.</b>");
 				player.createStatusEffect(StatusEffects.KnowsExorcise, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Divine Shield and doesnt have it
 			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsDivineShield)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Divine Shield.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDivineShield, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Thunderstorm and doesnt have it
 			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Thunderstorm.</b>");
 				player.createStatusEffect(StatusEffects.KnowsThunderstorm, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Tears of Denial and doesnt have it
 			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) {
@@ -4100,7 +4108,7 @@ public final class Mutations extends MutationsHelper {
         outputText("[pg]");
         player.refillHunger(5);
     }
-	
+
 	public function numbCandies(player:Player):void {
 		clearOutput();
         outputText("You pop open the package of numb candies and dump it into your waiting mouth.  The strange candies fizzes and pops, leaving the nerves on your tongue feeling a bit deadened as you swallow the sweet mess.");
@@ -5955,12 +5963,7 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-    public function catTransformation(type:Number, player:Player):void {
-        //'type' refers to the variety of cat TF's.
-        //0 == normal cat
-        //1 == nekomata
-        //2 == cheshire
-        //3 == displacer beast
+    public function whiskerFruit(player:Player):void {
         var choice:int;
         var changes:Number = 0;
         var changeLimit:Number = 1;
@@ -5972,42 +5975,20 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         //Text go!
         clearOutput();
-        if (type == 0) outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
-        if (type == 1) outputText("Nekomata to be done.");
-        if (type == 2) outputText("Cheshire to be done.");
-        if (type == 3) outputText("As you close your eyes and savor the fruit you feel somewhat weird. Looking around you realise you unconsciously moved 10 feet from your original location. Well you have seen weirder things.");
+        outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
+
         //Speed raises up to 75
         if (rand(3) == 0 && changes < changeLimit) {
-            //low speed
-            if (player.spe <= 30) {
-                outputText("[pg]You feel... more balanced, sure of step. You're certain that you've become just a little bit faster.");
-                MutagenBonus("spe", 2);
-            }
-            //medium speed
-            else if (player.spe <= 60) {
-                outputText("[pg]You stumble as you shift position, surprised by how quickly you move. After a moment or two of disorientation, you adjust. You're certain that you can run faster now.");
-                MutagenBonus("spe", 1);
-            }
-            //high speed
-            else {
-                outputText("[pg]You pause mid-step and crouch. Your leg muscles have cramped up like crazy. After a few moments, the pain passes and you feel like you could chase anything down.");
-                MutagenBonus("spe", 0.5);
-            }
+            outputText("[pg]");
+            transformations.MutagenSpdCat.applyEffect();
             changes++;
         }
         //Strength raises to 40
         if (rand(3) == 0 && changes < changeLimit) {
-            if (rand(2) == 0) outputText("[pg]Your muscles feel taut, like a coiled spring, and a bit more on edge.");
-            else outputText("[pg]You arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
-            MutagenBonus("str", 1);
+            outputText("[pg]");
+            transformations.MutagenStrCat.applyEffect();
             changes++;
         }
-        //Strength ALWAYS drops if over 60
-        //Does not add to change total
-        //else if (player.str > 60 && rand(3) == 0) {
-        //outputText("[pg]Shivers run from your head to your toes, leaving you feeling weak.  Looking yourself over, your muscles seemed to have lost some bulk.");
-        //dynStats("str", -2);
-        //}
         //Toughness drops if over 50
         //Does not add to change total
         if (player.tou > 50 && rand(3) == 0) {
@@ -6015,7 +5996,7 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("tou", 2, 1);
         }
         //Intelliloss
-        if (type == 0 && rand(3) == 0 && changes < changeLimit) {
+        if (rand(3) == 0 && changes < changeLimit) {
             //low intelligence
             if (player.inte < 15) outputText("[pg]You feel like something is slipping away from you but can't figure out exactly what's happening.  You scrunch up your [face], trying to understand the situation.  Before you can reach any kind of conclusion, something glitters in the distance, distracting your feeble mind long enough for you to forget the problem entirely.");
             //medium intelligence
@@ -6040,16 +6021,6 @@ public final class Mutations extends MutationsHelper {
             //High intelligence
             else outputText("[pg]You start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this fruit may have actually made you dumber.  It would be best not to eat too much of it.");
             player.addCurse("int", 1, 1);
-            changes++;
-        }
-        if ((type == 1 || type == 2) && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]You suddenly feel more cunning and by far way smarter.");
-            MutagenBonus("int", 2);
-            changes++;
-        }
-        if (type == 3 && player.inte > 12 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]Something alerts your senses. You walk on all " + (player.arms.type == Arms.DISPLACER ? "six" : "four") + " sniffing the air around you and growling as your mind regresses into a feral state not unlike that of a beast or rather in your case that of a displacer beast.");
-            player.addCurse("int", 3, 1);
             changes++;
         }
         //Libido gain
@@ -6190,103 +6161,52 @@ public final class Mutations extends MutationsHelper {
         }
         //Body type changes
         //DA EARZ
-        if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && type != 3 && rand(3) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
 			transformations.EarsCat.applyEffect();
             changes++;
         }
-        if (player.ears.type != Ears.DISPLACER && player.tailType != Tail.GARGOYLE && type == 3 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-			transformations.EarsDisplacer.applyEffect();
-            changes++;
-        }
+
         //DA TAIL (IF ALREADY HAZ URZ)
-        if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && type != 1 && rand(3) == 0 && changes < changeLimit) {
+        if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailCat.applyEffect();
             changes++;
         }
-        if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.TailCat.applyEffect();
-            changes++;
-        }
-        if (player.tailType == Tail.CAT && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.TailNekomataOneThirdForked.applyEffect();
-            changes++;
-        }
-        if (player.tailType == Tail.NEKOMATA_FORKED_1_3 && player.level >= 6 && player.inte >= 10 && player.wis >= 25 && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.TailNekomataTwoThirdsForked.applyEffect();
-            changes++;
-        }
-        if (player.tailType == Tail.NEKOMATA_FORKED_2_3 && player.level >= 12 && player.inte >= 20 && player.wis >= 50 && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.TailCat2nd.applyEffect();
-            changes++;
-        }
-        //Kasha tail interaction with nekomata ghastly fruit
-        if (player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.TailTwinkasha.applyEffect();
-            changes++;
-        }
+
         //Da paws (if already haz tail)
-        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT && type != 3) {
+        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
             outputText("[pg]");
             transformations.LowerBodyCat(2).applyEffect();
             changes++;
         }
-        if (player.tailType == Tail.CAT && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.LION && type == 3) {
-            outputText("[pg]");
-            transformations.LowerBodyLion(2).applyEffect();
-            changes++;
-        }
+
         //Da cat arm
-        if (player.lowerBody == LowerBody.CAT && type != 3 && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
+        if (player.lowerBody == LowerBody.CAT && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
             outputText("[pg]");
             transformations.ArmsCat.applyEffect();
             changes++;
         }
-        if (player.lowerBody == LowerBody.LION && type == 3 && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DISPLACER) {
-            outputText("[pg]");
-            transformations.ArmsDisplacer.applyEffect();
-            changes++;
-        }
-        if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]");
-            transformations.RearBodyLionMane.applyEffect();
-            changes++;
-        }
-        //Displacer beast tentacles
-        if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && type == 3 && rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DISPLACER) {
-            outputText("[pg]");
-            transformations.RearBodyDisplacerTentacles.applyEffect();
-            changes++;
-        }
+
+
         //CAT-FACE!
-        if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && type != 1 && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE) && type != 3) {
-            outputText("[pg]");
-            transformations.FaceCat.applyEffect();
-            changes++;
-        }
-        if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES && (type == 1 || type == 3)) {
+
+        // Prevents player with cat face from switching to cat canines then back to cat face and wasting changes
+        var startedWithCatFace: Boolean = player.faceType == Face.CAT;
+
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES) {
             //This scenario exist only for cat tf that have no furry version!
             outputText("[pg]");
             transformations.FaceCatCanines.applyEffect();
             changes++;
         }
-        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
+
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT && !startedWithCatFace) {
             outputText("[pg]");
-            if (player.faceType == Face.CAT) {
-                transformations.FaceCheshire.applyEffect();
-            }
-            if (player.faceType == Face.CAT_CANINES) {
-                transformations.FaceCheshireSmile.applyEffect();
-            }
+            transformations.FaceCat.applyEffect();
             changes++;
         }
+
         //CAT TOUNGE CUZ WHY NOT?
         if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -6294,24 +6214,868 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //DAT EYES
-        if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT && player.eyes.type != Eyes.INFERNAL && type != 3) {
+        if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT && player.eyes.type != Eyes.INFERNAL) {
             outputText("[pg]");
             transformations.EyesCat.applyEffect();
             changes++;
         }
-        if (rand(3) == 0 && changes < changeLimit && transformations.TongueCat.isPresent() && transformations.EyesDisplacer.isPossible() && type == 3) {
-            transformations.EyesDisplacer.applyEffect();
+
+        //switching between low and high coverage of fur
+        if (player.hasFur() && rand(3) == 0 && changes < changeLimit) {
+            if (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) {
+                outputText("[pg]What used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
+                player.skin.coverage = Skin.COVERAGE_LOW;
+                changes++;
+            } else {
+                outputText("[pg]You feel your skin tickle as more fur grows to cover the areas you did not already had fur at. Guess you have truly joined the furry club now.  <b>Your skin is now entirely coated with fur.</b>");
+                player.skin.coverage = Skin.COVERAGE_COMPLETE;
+                changes++;
+            }
+        }
+
+        //TURN INTO A FURRAH!  OH SHIT
+        if ((player.eyes.type == Eyes.CAT || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+            if (!player.hasCoatOfType(Skin.FUR)) {
+                outputText("[pg]");
+                transformations.SkinPlain.applyEffect();
+            }
+
+            outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+
+            changes++;
+        }
+        // Remove gills
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.GillsNone.applyEffect();
+            changes++;
+        }
+        if (changes < changeLimit) {
+            if (rand(2) == 0) outputText(player.modThickness(5, 2));
+            if (rand(2) == 0) outputText(player.modTone(76, 2));
+            if (player.gender < 2) if (rand(2) == 0) outputText(player.modFem(65, 1));
+            else outputText(player.modFem(85, 2));
+        }
+        //FAILSAFE CHANGE
+        if (changes == 0) {
+            outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
+            HPChange(50, true);
+            dynStats("lus", 3);
+        }
+        player.refillHunger(20);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
+
+    public function ghastlyFruit(player:Player):void {
+        var choice:int;
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        var temp2:Number = 0;
+        var temp3:Number = 0;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(3) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
+        //Text go!
+        clearOutput();
+        outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
+
+        //Speed raises up to 75
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.MutagenSpdCat.applyEffect();
+            changes++;
+        }
+        //Strength raises to 40
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.MutagenStrCat.applyEffect();
+            changes++;
+        }
+        //Toughness drops if over 50
+        //Does not add to change total
+        if (player.tou > 50 && rand(3) == 0) {
+            outputText("[pg]Your body seems to compress momentarily, becoming leaner and noticeably less tough.");
+            player.addCurse("tou", 2, 1);
+        }
+
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]You suddenly feel more cunning and by far way smarter.");
+            MutagenBonus("int", 2);
+            changes++;
+        }
+
+        //Libido gain
+        if (changes < changeLimit && rand(3) == 0) {
+            //Cat dicked folks
+            if (player.catCocks() > 0) {
+                choice = player.findFirstCockType(CockTypesEnum.CAT);
+                outputText("[pg]You feel your " + cockDescript(choice) + " growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
+                if (player.cor < 33) outputText("You need to control yourself better.");
+                else if (player.cor < 66) outputText("You're not sure how you feel about the fantasy.");
+                else outputText("You hope to find a willing partner to make this a reality.");
+            }
+            //Else –
+            else {
+                outputText("[pg]A rush of tingling warmth spreads through your body as it digests the fruit.  You can feel your blood pumping through your extremities, making them feel sensitive and surprisingly sensual.  It's going to be hard to resist getting ");
+                if (player.lust > 60) outputText("even more ");
+                outputText("turned on.");
+            }
+            player.addCurse("sen", 1, 1);
+            MutagenBonus("lib", 1);
+            changes++;
+        }
+        if (player.blockingBodyTransformations()) changeLimit = 0;
+        //Sexual changes would go here if I wasn't a tard.
+        //Heat
+        if (rand(4) == 0 && changes < changeLimit) {
+            var intensified:Boolean = player.inHeat;
+            if (player.goIntoHeat(false)) {
+                if (intensified) {
+                    if (rand(2) == 0) outputText("[pg]The itch inside your [vagina] is growing stronger, and you desperately want to find a nice cock to massage the inside.");
+                    else outputText("[pg]The need inside your [vagina] grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.");
+                } else {
+                    outputText("[pg]The interior of your [vagina] clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ");
+                    if (player.hasFur()) outputText("underneath your fur ");
+                    outputText("as images and fantasies ");
+                    if (player.cor < 50) outputText("assault ");
+                    else outputText("fill ");
+                    outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your [vagina] with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>");
+                }
+                changes++;
+            }
+        }
+
+        //Shrink the boobalies down to A for men or C for girls.
+        if (changes < changeLimit && rand(4) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+            temp2 = 0;
+            temp3 = 0;
+            //Determine if shrinkage is required
+            //and set temp2 to threshold
+            if (!player.hasVagina() && player.biggestTitSize() > 2) temp2 = 2;
+            else if (player.biggestTitSize() > 4) temp2 = 4;
+            //IT IS!
+            if (temp2 > 0) {
+                //temp3 stores how many rows are changed
+                temp3 = 0;
+                for (var k:Number = 0; k < player.breastRows.length; k++) {
+                    //If this row is over threshhold
+                    if (player.breastRows[k].breastRating > temp2) {
+                        //Big change
+                        if (player.breastRows[k].breastRating > 10) {
+                            player.breastRows[k].breastRating -= 2 + rand(3);
+                            if (temp3 == 0) outputText("[pg]The [breasts] on your chest wobble for a second, then tighten up, losing several cup-sizes in the process!");
+                            else outputText("  The change moves down to your " + num2Text2(k + 1) + " row of [breasts]. They shrink greatly, losing a couple cup-sizes.");
+                        }
+                        //Small change
+                        else {
+                            player.breastRows[k].breastRating -= 1;
+                            if (temp3 == 0) outputText("[pg]All at once, your sense of gravity shifts.  Your back feels a sense of relief, and it takes you a moment to realize your " + breastDescript(k) + " have shrunk!");
+                            else outputText("  Your " + num2Text2(k + 1) + " row of " + breastDescript(k) + " gives a tiny jiggle as it shrinks, losing some off its mass.");
+                        }
+                        //Increment changed rows
+                        temp3++;
+                    }
+                }
+            }
+            //Count that tits were shrunk
+            if (temp3 > 0) changes++;
+        }
+        //Cat dangly-doo.
+        if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.CAT || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
+            //loop through and find a non-cat wang.
+            for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
+            }
+            outputText("[pg]Your " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ");
+            if (!player.hasSheath()) {
+                outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.");
+                if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
+            } else outputText("Then, it disappears back into your sheath.");
+            player.cocks[i].cockType = CockTypesEnum.CAT;
+            player.cocks[i].knotMultiplier = 1;
+            changes++;
+        }
+        //Cat penorz shrink
+        if (player.catCocks() > 0 && rand(4) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+            //loop through and find a cat wang.
+            choice = 0;
+            for (var j:Number = 0; j < (player.cockTotal()); j++) {
+                if (player.cocks[j].cockType == CockTypesEnum.CAT && player.cocks[j].cockLength > 6) {
+                    choice = 1;
+                    break;
+                }
+            }
+            if (choice == 1) {
+                //lose 33% size until under 10, then lose 2" at a time
+                if (player.cocks[j].cockLength > 16) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles, making your sheath feel a little less tight.  It dwindles in size, losing a full third of its length and a bit of girth before the change finally stops.");
+                    player.cocks[j].cockLength *= .66;
+                } else if (player.cocks[j].cockLength > 6) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles and withdraws further into your sheath.  If you had to guess, you'd say you've lost about two inches of total length and perhaps some girth.");
+                    player.cocks[j].cockLength -= 2;
+                }
+                if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                //Check for any more!
+                temp2 = 0;
+                j++;
+                for (j; j < player.cocks.length; j++) {
+                    //Found another cat wang!
+                    if (player.cocks[j].cockType == CockTypesEnum.CAT) {
+                        //Long enough - change it
+                        if (player.cocks[j].cockLength > 6) {
+                            if (player.cocks[j].cockLength > 16)
+                                player.cocks[j].cockLength *= .66;
+                            else if (player.cocks[j].cockLength > 6)
+                                player.cocks[j].cockLength -= 2;
+                            //Thickness adjustments
+                            if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                            temp2 = 1;
+                        }
+                    }
+                }
+                //(big sensitivity boost)
+                outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.");
+                player.addCurse("sen", 5, 1);
+                //Make note of other dicks changing
+                if (temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!");
+                changes++;
+            }
+        }
+        //Body type changes
+        //DA EARZ
+        if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+			transformations.EarsCat.applyEffect();
+            changes++;
+        }
+
+        if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailCat.applyEffect();
+            changes++;
+        }
+        if (player.tailType == Tail.CAT && player.tailCount == 1 && player.ears.type == Ears.CAT && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailNekomataOneThirdForked.applyEffect();
+            changes++;
+        }
+        if (player.tailType == Tail.NEKOMATA_FORKED_1_3 && player.level >= 6 && player.inte >= 10 && player.wis >= 25 && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailNekomataTwoThirdsForked.applyEffect();
+            changes++;
+        }
+        if (player.tailType == Tail.NEKOMATA_FORKED_2_3 && player.level >= 12 && player.inte >= 20 && player.wis >= 50 && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailCat2nd.applyEffect();
+            changes++;
+        }
+        //Kasha tail interaction with nekomata ghastly fruit
+        if (player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailTwinkasha.applyEffect();
+            changes++;
+        }
+        //Da paws (if already haz tail)
+        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+            outputText("[pg]");
+            transformations.LowerBodyCat(2).applyEffect();
+            changes++;
+        }
+
+        //Da cat arm
+        if (player.lowerBody == LowerBody.CAT && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
+            outputText("[pg]");
+            transformations.ArmsCat.applyEffect();
+            changes++;
+        }
+
+        if (player.arms.type == Arms.CAT && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.RearBodyLionMane.applyEffect();
+            changes++;
+        }
+
+        //CAT-FACE!
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES) {
+            outputText("[pg]");
+            transformations.FaceCatCanines.applyEffect();
+            changes++;
+        }
+
+        if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.CHESHIRE) {
+            outputText("[pg]");
+            transformations.FaceCheshireSmile.applyEffect();
+            changes++;
+        }
+
+        //CAT TOUNGE CUZ WHY NOT?
+        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TongueCat.applyEffect();
+            changes++;
+        }
+        //DAT EYES
+        if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT && player.eyes.type != Eyes.INFERNAL) {
+            outputText("[pg]");
+            transformations.EyesCat.applyEffect();
+            changes++;
+        }
+
+        //TURN INTO A FURRAH!  OH SHIT
+        if ((player.eyes.type == Eyes.CAT || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+            if (!player.hasCoatOfType(Skin.FUR)) {
+                outputText("[pg]");
+                transformations.SkinPlain.applyEffect();
+            }
+
+            transformations.SkinFur(Skin.COVERAGE_LOW, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+
+            changes++;
+        }
+        // Remove gills
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.GillsNone.applyEffect();
+            changes++;
+        }
+        if (changes < changeLimit) {
+            if (rand(2) == 0) outputText(player.modThickness(5, 2));
+            if (rand(2) == 0) outputText(player.modTone(76, 2));
+            if (player.gender < 2) if (rand(2) == 0) outputText(player.modFem(65, 1));
+            else outputText(player.modFem(85, 2));
+        }
+        //FAILSAFE CHANGE
+        if (changes == 0) {
+            outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
+            HPChange(50, true);
+            dynStats("lus", 3);
+        }
+        player.refillHunger(20);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
+
+    public function wonderFruit(player:Player):void {
+        var choice:int;
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        var temp2:Number = 0;
+        var temp3:Number = 0;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(3) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
+        //Text go!
+        clearOutput();
+        outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
+        //Speed raises up to 75
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.MutagenSpdCat.applyEffect();
+            changes++;
+        }
+        //Strength raises to 40
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.MutagenStrCat.applyEffect();
+            changes++;
+        }
+        //Toughness drops if over 50
+        //Does not add to change total
+        if (player.tou > 50 && rand(3) == 0) {
+            outputText("[pg]Your body seems to compress momentarily, becoming leaner and noticeably less tough.");
+            player.addCurse("tou", 2, 1);
+        }
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]You suddenly feel more cunning and by far way smarter.");
+            MutagenBonus("int", 2);
+            changes++;
+        }
+        //Libido gain
+        if (changes < changeLimit && rand(3) == 0) {
+            //Cat dicked folks
+            if (player.catCocks() > 0) {
+                choice = player.findFirstCockType(CockTypesEnum.CAT);
+                outputText("[pg]You feel your " + cockDescript(choice) + " growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
+                if (player.cor < 33) outputText("You need to control yourself better.");
+                else if (player.cor < 66) outputText("You're not sure how you feel about the fantasy.");
+                else outputText("You hope to find a willing partner to make this a reality.");
+            }
+            //Else –
+            else {
+                outputText("[pg]A rush of tingling warmth spreads through your body as it digests the fruit.  You can feel your blood pumping through your extremities, making them feel sensitive and surprisingly sensual.  It's going to be hard to resist getting ");
+                if (player.lust > 60) outputText("even more ");
+                outputText("turned on.");
+            }
+            player.addCurse("sen", 1, 1);
+            MutagenBonus("lib", 1);
+            changes++;
+        }
+        if (player.blockingBodyTransformations()) changeLimit = 0;
+        //Sexual changes would go here if I wasn't a tard.
+        //Heat
+        if (rand(4) == 0 && changes < changeLimit) {
+            var intensified:Boolean = player.inHeat;
+            if (player.goIntoHeat(false)) {
+                if (intensified) {
+                    if (rand(2) == 0) outputText("[pg]The itch inside your [vagina] is growing stronger, and you desperately want to find a nice cock to massage the inside.");
+                    else outputText("[pg]The need inside your [vagina] grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.");
+                } else {
+                    outputText("[pg]The interior of your [vagina] clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ");
+                    if (player.hasFur()) outputText("underneath your fur ");
+                    outputText("as images and fantasies ");
+                    if (player.cor < 50) outputText("assault ");
+                    else outputText("fill ");
+                    outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your [vagina] with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>");
+                }
+                changes++;
+            }
+        }
+
+        //Shrink the boobalies down to A for men or C for girls.
+        if (changes < changeLimit && rand(4) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+            temp2 = 0;
+            temp3 = 0;
+            //Determine if shrinkage is required
+            //and set temp2 to threshold
+            if (!player.hasVagina() && player.biggestTitSize() > 2) temp2 = 2;
+            else if (player.biggestTitSize() > 4) temp2 = 4;
+            //IT IS!
+            if (temp2 > 0) {
+                //temp3 stores how many rows are changed
+                temp3 = 0;
+                for (var k:Number = 0; k < player.breastRows.length; k++) {
+                    //If this row is over threshhold
+                    if (player.breastRows[k].breastRating > temp2) {
+                        //Big change
+                        if (player.breastRows[k].breastRating > 10) {
+                            player.breastRows[k].breastRating -= 2 + rand(3);
+                            if (temp3 == 0) outputText("[pg]The [breasts] on your chest wobble for a second, then tighten up, losing several cup-sizes in the process!");
+                            else outputText("  The change moves down to your " + num2Text2(k + 1) + " row of [breasts]. They shrink greatly, losing a couple cup-sizes.");
+                        }
+                        //Small change
+                        else {
+                            player.breastRows[k].breastRating -= 1;
+                            if (temp3 == 0) outputText("[pg]All at once, your sense of gravity shifts.  Your back feels a sense of relief, and it takes you a moment to realize your " + breastDescript(k) + " have shrunk!");
+                            else outputText("  Your " + num2Text2(k + 1) + " row of " + breastDescript(k) + " gives a tiny jiggle as it shrinks, losing some off its mass.");
+                        }
+                        //Increment changed rows
+                        temp3++;
+                    }
+                }
+            }
+            //Count that tits were shrunk
+            if (temp3 > 0) changes++;
+        }
+        //Cat dangly-doo.
+        if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.CAT || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
+            //loop through and find a non-cat wang.
+            for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
+            }
+            outputText("[pg]Your " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ");
+            if (!player.hasSheath()) {
+                outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.");
+                if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
+            } else outputText("Then, it disappears back into your sheath.");
+            player.cocks[i].cockType = CockTypesEnum.CAT;
+            player.cocks[i].knotMultiplier = 1;
+            changes++;
+        }
+        //Cat penorz shrink
+        if (player.catCocks() > 0 && rand(4) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+            //loop through and find a cat wang.
+            choice = 0;
+            for (var j:Number = 0; j < (player.cockTotal()); j++) {
+                if (player.cocks[j].cockType == CockTypesEnum.CAT && player.cocks[j].cockLength > 6) {
+                    choice = 1;
+                    break;
+                }
+            }
+            if (choice == 1) {
+                //lose 33% size until under 10, then lose 2" at a time
+                if (player.cocks[j].cockLength > 16) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles, making your sheath feel a little less tight.  It dwindles in size, losing a full third of its length and a bit of girth before the change finally stops.");
+                    player.cocks[j].cockLength *= .66;
+                } else if (player.cocks[j].cockLength > 6) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles and withdraws further into your sheath.  If you had to guess, you'd say you've lost about two inches of total length and perhaps some girth.");
+                    player.cocks[j].cockLength -= 2;
+                }
+                if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                //Check for any more!
+                temp2 = 0;
+                j++;
+                for (j; j < player.cocks.length; j++) {
+                    //Found another cat wang!
+                    if (player.cocks[j].cockType == CockTypesEnum.CAT) {
+                        //Long enough - change it
+                        if (player.cocks[j].cockLength > 6) {
+                            if (player.cocks[j].cockLength > 16)
+                                player.cocks[j].cockLength *= .66;
+                            else if (player.cocks[j].cockLength > 6)
+                                player.cocks[j].cockLength -= 2;
+                            //Thickness adjustments
+                            if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                            temp2 = 1;
+                        }
+                    }
+                }
+                //(big sensitivity boost)
+                outputText(" Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.");
+                player.addCurse("sen", 5, 1);
+                //Make note of other dicks changing
+                if (temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!");
+                changes++;
+            }
+        }
+        //Body type changes
+        //DA EARZ
+        if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+			transformations.EarsCat.applyEffect();
+            changes++;
+        }
+        //DA TAIL (IF ALREADY HAZ URZ)
+        if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailCat.applyEffect();
+            changes++;
+        }
+        //Da paws (if already haz tail)
+        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+            outputText("[pg]");
+            transformations.LowerBodyCat(2).applyEffect();
+            changes++;
+        }
+        //Da cat arm
+        if (player.lowerBody == LowerBody.CAT && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
+            outputText("[pg]");
+            transformations.ArmsCat.applyEffect();
+            changes++;
+        }
+        //CAT-FACE!
+        changeLimit = 100;
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT && player.faceType != Face.CAT_CANINES && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
+            outputText("[pg]");
+            transformations.FaceCatCanines.applyEffect();
+            changes++;
+        }
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT && player.faceType != Face.CAT_CANINES && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
+            outputText("[pg]");
+            transformations.FaceCat.applyEffect();
+            changes++;
+        }
+
+        if ((player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            if (player.faceType == Face.CHESHIRE_SMILE) {
+                transformations.FaceCheshire.applyEffect();
+            } else if (player.faceType == Face.CHESHIRE) {
+                transformations.FaceCheshireSmile.applyEffect();
+            }
+            changes++;
+        }
+
+        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            if (player.faceType == Face.CAT) {
+                transformations.FaceCheshire.applyEffect();
+            } else if (player.faceType == Face.CAT_CANINES) {
+                transformations.FaceCheshireSmile.applyEffect();
+            }
+            changes++;
+        }
+
+        //CAT TOUNGE CUZ WHY NOT?
+        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TongueCat.applyEffect();
+            changes++;
+        }
+        //DAT EYES
+        if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT && player.eyes.type != Eyes.INFERNAL) {
+            outputText("[pg]");
+            transformations.EyesCat.applyEffect();
             changes++;
         }
         //cheshire fur color
-        if (type == 2 && rand(4) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
+        if (rand(4) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
             outputText("[pg]Your fur and hair color are suddenly changing as lilac fur covered with white stripe begins to cover every area you have fur on. Your hair also changed color to match it turning to lilac strands separated by white strands every now and then. This change makes you feel like smiling at the absurdity of it all.");
             player.hairColorOnly = "lilac and white striped";
             player.coatColor = "lilac and white striped";
             changes++;
         }
         //switching between low and high coverage of fur
-        if (player.hasFur() && rand(3) == 0 && changes < changeLimit && type != 1) {
+        if (player.hasFur() && rand(3) == 0 && changes < changeLimit) {
+            if (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) {
+                outputText("[pg]What used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
+                player.skin.coverage = Skin.COVERAGE_LOW;
+                changes++;
+            } else {
+                outputText("[pg]You feel your skin tickle as more fur grows to cover the areas you did not already had fur at. Guess you have truly joined the furry club now.  <b>Your skin is now entirely coated with fur.</b>");
+                player.skin.coverage = Skin.COVERAGE_COMPLETE;
+                changes++;
+            }
+        }
+        //TURN INTO A FURRAH!  OH SHIT
+        if ((player.eyes.type == Eyes.CAT || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+            if (!player.hasCoatOfType(Skin.FUR)) {
+                outputText("[pg]");
+                transformations.SkinPlain.applyEffect();
+            }
+            outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+
+            changes++;
+        }
+        // Remove gills
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.GillsNone.applyEffect();
+            changes++;
+        }
+        if (changes < changeLimit) {
+            if (rand(2) == 0) outputText(player.modThickness(5, 2));
+            if (rand(2) == 0) outputText(player.modTone(76, 2));
+            if (player.gender < 2) if (rand(2) == 0) outputText(player.modFem(65, 1));
+            else outputText(player.modFem(85, 2));
+        }
+        //FAILSAFE CHANGE
+        if (changes == 0) {
+            outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
+            HPChange(50, true);
+            dynStats("lus", 3);
+        }
+        player.refillHunger(20);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
+
+    public function displacementFruit(player:Player):void {
+        var choice:int;
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        var temp2:Number = 0;
+        var temp3:Number = 0;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(3) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
+        //Text go!
+        clearOutput();
+
+        outputText("As you close your eyes and savor the fruit you feel somewhat weird. Looking around you realise you unconsciously moved 10 feet from your original location. Well you have seen weirder things.");
+
+        //Speed raises up to 75
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.MutagenSpdCat.applyEffect();
+            changes++;
+        }
+        //Strength raises to 40
+        if (rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.MutagenStrCat.applyEffect();
+            changes++;
+        }
+        //Toughness drops if over 50
+        //Does not add to change total
+        if (player.tou > 50 && rand(3) == 0) {
+            outputText("[pg]Your body seems to compress momentarily, becoming leaner and noticeably less tough.");
+            player.addCurse("tou", 2, 1);
+        }
+        if (player.inte > 12 && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]Something alerts your senses. You walk on all " + (player.arms.type == Arms.DISPLACER ? "six" : "four") + " sniffing the air around you and growling as your mind regresses into a feral state not unlike that of a beast or rather in your case that of a displacer beast.");
+            player.addCurse("int", 3, 1);
+            changes++;
+        }
+        //Libido gain
+        if (changes < changeLimit && rand(3) == 0) {
+            //Cat dicked folks
+            if (player.catCocks() > 0) {
+                choice = player.findFirstCockType(CockTypesEnum.CAT);
+                outputText("[pg]You feel your " + cockDescript(choice) + " growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
+                if (player.cor < 33) outputText("You need to control yourself better.");
+                else if (player.cor < 66) outputText("You're not sure how you feel about the fantasy.");
+                else outputText("You hope to find a willing partner to make this a reality.");
+            }
+            //Else –
+            else {
+                outputText("[pg]A rush of tingling warmth spreads through your body as it digests the fruit.  You can feel your blood pumping through your extremities, making them feel sensitive and surprisingly sensual.  It's going to be hard to resist getting ");
+                if (player.lust > 60) outputText("even more ");
+                outputText("turned on.");
+            }
+            player.addCurse("sen", 1, 1);
+            MutagenBonus("lib", 1);
+            changes++;
+        }
+
+        if (player.blockingBodyTransformations()) changeLimit = 0;
+
+        //Sexual changes would go here if I wasn't a tard.
+        //Heat
+        if (rand(4) == 0 && changes < changeLimit) {
+            var intensified:Boolean = player.inHeat;
+            if (player.goIntoHeat(false)) {
+                if (intensified) {
+                    if (rand(2) == 0) outputText("[pg]The itch inside your [vagina] is growing stronger, and you desperately want to find a nice cock to massage the inside.");
+                    else outputText("[pg]The need inside your [vagina] grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.");
+                } else {
+                    outputText("[pg]The interior of your [vagina] clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ");
+                    if (player.hasFur()) outputText("underneath your fur ");
+                    outputText("as images and fantasies ");
+                    if (player.cor < 50) outputText("assault ");
+                    else outputText("fill ");
+                    outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your [vagina] with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>");
+                }
+                changes++;
+            }
+        }
+
+        //Shrink the boobalies down to A for men or C for girls.
+        if (changes < changeLimit && rand(4) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+            temp2 = 0;
+            temp3 = 0;
+            //Determine if shrinkage is required
+            //and set temp2 to threshold
+            if (!player.hasVagina() && player.biggestTitSize() > 2) temp2 = 2;
+            else if (player.biggestTitSize() > 4) temp2 = 4;
+            //IT IS!
+            if (temp2 > 0) {
+                //temp3 stores how many rows are changed
+                temp3 = 0;
+                for (var k:Number = 0; k < player.breastRows.length; k++) {
+                    //If this row is over threshhold
+                    if (player.breastRows[k].breastRating > temp2) {
+                        //Big change
+                        if (player.breastRows[k].breastRating > 10) {
+                            player.breastRows[k].breastRating -= 2 + rand(3);
+                            if (temp3 == 0) outputText("[pg]The [breasts] on your chest wobble for a second, then tighten up, losing several cup-sizes in the process!");
+                            else outputText("  The change moves down to your " + num2Text2(k + 1) + " row of [breasts]. They shrink greatly, losing a couple cup-sizes.");
+                        }
+                        //Small change
+                        else {
+                            player.breastRows[k].breastRating -= 1;
+                            if (temp3 == 0) outputText("[pg]All at once, your sense of gravity shifts.  Your back feels a sense of relief, and it takes you a moment to realize your " + breastDescript(k) + " have shrunk!");
+                            else outputText("  Your " + num2Text2(k + 1) + " row of " + breastDescript(k) + " gives a tiny jiggle as it shrinks, losing some off its mass.");
+                        }
+                        //Increment changed rows
+                        temp3++;
+                    }
+                }
+            }
+            //Count that tits were shrunk
+            if (temp3 > 0) changes++;
+        }
+        //Cat dangly-doo.
+        if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.CAT || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
+            //loop through and find a non-cat wang.
+            for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
+            }
+            outputText("[pg]Your " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ");
+            if (!player.hasSheath()) {
+                outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.");
+                if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
+            } else outputText("Then, it disappears back into your sheath.");
+            player.cocks[i].cockType = CockTypesEnum.CAT;
+            player.cocks[i].knotMultiplier = 1;
+            changes++;
+        }
+        //Cat penorz shrink
+        if (player.catCocks() > 0 && rand(4) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+            //loop through and find a cat wang.
+            choice = 0;
+            for (var j:Number = 0; j < (player.cockTotal()); j++) {
+                if (player.cocks[j].cockType == CockTypesEnum.CAT && player.cocks[j].cockLength > 6) {
+                    choice = 1;
+                    break;
+                }
+            }
+            if (choice == 1) {
+                //lose 33% size until under 10, then lose 2" at a time
+                if (player.cocks[j].cockLength > 16) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles, making your sheath feel a little less tight.  It dwindles in size, losing a full third of its length and a bit of girth before the change finally stops.");
+                    player.cocks[j].cockLength *= .66;
+                } else if (player.cocks[j].cockLength > 6) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles and withdraws further into your sheath.  If you had to guess, you'd say you've lost about two inches of total length and perhaps some girth.");
+                    player.cocks[j].cockLength -= 2;
+                }
+                if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                //Check for any more!
+                temp2 = 0;
+                j++;
+                for (j; j < player.cocks.length; j++) {
+                    //Found another cat wang!
+                    if (player.cocks[j].cockType == CockTypesEnum.CAT) {
+                        //Long enough - change it
+                        if (player.cocks[j].cockLength > 6) {
+                            if (player.cocks[j].cockLength > 16)
+                                player.cocks[j].cockLength *= .66;
+                            else if (player.cocks[j].cockLength > 6)
+                                player.cocks[j].cockLength -= 2;
+                            //Thickness adjustments
+                            if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                            temp2 = 1;
+                        }
+                    }
+                }
+                //(big sensitivity boost)
+                outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.");
+                player.addCurse("sen", 5, 1);
+                //Make note of other dicks changing
+                if (temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!");
+                changes++;
+            }
+        }
+        //Body type changes
+        //DA EARZ
+        if (player.ears.type != Ears.DISPLACER && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+			transformations.EarsDisplacer.applyEffect();
+            changes++;
+        }
+        //DA TAIL (IF ALREADY HAZ URZ)
+        if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailCat.applyEffect();
+            changes++;
+        }
+
+        if (player.tailType == Tail.CAT && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.LION) {
+            outputText("[pg]");
+            transformations.LowerBodyLion(2).applyEffect();
+            changes++;
+        }
+
+        if (player.lowerBody == LowerBody.LION && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DISPLACER) {
+            outputText("[pg]");
+            transformations.ArmsDisplacer.applyEffect();
+            changes++;
+        }
+        //Displacer beast tentacles
+        if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DISPLACER) {
+            outputText("[pg]");
+            transformations.RearBodyDisplacerTentacles.applyEffect();
+            changes++;
+        }
+
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES) {
+            outputText("[pg]");
+            transformations.FaceCatCanines.applyEffect();
+            changes++;
+        }
+
+        //CAT TOUNGE CUZ WHY NOT?
+        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TongueCat.applyEffect();
+            changes++;
+        }
+        //DAT EYES
+        if (rand(3) == 0 && changes < changeLimit && transformations.TongueCat.isPresent() && transformations.EyesDisplacer.isPossible()) {
+            transformations.EyesDisplacer.applyEffect();
+            changes++;
+        }
+        //switching between low and high coverage of fur
+        if (player.hasFur() && rand(3) == 0 && changes < changeLimit) {
             if (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) {
                 outputText("[pg]What used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
                 player.skin.coverage = Skin.COVERAGE_LOW;
@@ -6323,7 +7087,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //-Skin color change – dark gray
-        if (player.skin.base.color != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && type == 3) {
+        if (player.skin.base.color != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]It takes a while for you to notice, but ");
             if (player.hasFur()) outputText("the skin under your <b>[skin coat.color]</b>" + player.skinDesc);
             else outputText("your " + player.skinDesc);
@@ -6333,14 +7097,14 @@ public final class Mutations extends MutationsHelper {
         }
         //TURN INTO A FURRAH!  OH SHIT
         if ((player.eyes.type == Eyes.CAT || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
-            if (!player.hasCoatOfType(Skin.FUR)) transformations.SkinPlain.applyEffect();
-            if (type == 1) {
-                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
-            } else {
-                outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
-                if (type == 3) transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["black", "midnight black", "midnight"]}).applyEffect();
-                else transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+            if (!player.hasCoatOfType(Skin.FUR)) {
+                outputText("[pg]");
+                transformations.SkinPlain.applyEffect();
             }
+
+            outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["black", "midnight black", "midnight"]}).applyEffect();
+
             changes++;
         }
         // Remove gills

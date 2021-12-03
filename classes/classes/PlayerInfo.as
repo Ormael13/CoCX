@@ -3,6 +3,7 @@ package classes {
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -22,6 +23,22 @@ import flash.events.TextEvent;
 public class PlayerInfo extends BaseContent {
 	public function PlayerInfo() {}
 
+	// to add submenus, call statsMenu first then add buttons in free slots
+	private function statsMenu(currentButton:int):void {
+		menu();
+		addButton(0, "Next", playerMenu);
+		if (player.knownAbilities().length > 0) {
+			addButton(4, "Abilities", displayStatsAbilities);
+		}
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		if (currentButton >= 4 && currentButton <= 9) {
+			button(currentButton).disable("You are currently at this stats page.");
+		}
+	}
 	//------------
 	// STATS
 	//------------
@@ -116,29 +133,21 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
 		}
 
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
-				miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600" + "\n";
-			else
-				miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200" + "\n";
-		}
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)
-				miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900" + "\n";
-			else
-				miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300" + "\n";
-		}
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)
-				miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900" + "\n";
-			else
-				miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300" + "\n";
-		}
-		if (player.hasStatusEffect(StatusEffects.LumiWorkshop)) {
-			miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
-			miscStats += "<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "/200" + "\n";
-			miscStats += "<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "/200" + "\n";
-		}
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
+			miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750" + "\n";
+		else
+			miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250" + "\n";
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)
+			miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200" + "\n";
+		else
+			miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400" + "\n";
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)
+			miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200" + "\n";
+		else
+			miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400" + "\n";
+		miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
+		miscStats += "<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "/200" + "\n";
+		miscStats += "<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "/200" + "\n";
 
 		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 9\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
@@ -340,18 +349,22 @@ public class PlayerInfo extends BaseContent {
 		if (statEffects != "")
 			outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects);
 		// End Ongoing Stat Effects
-		menu();
-		addButton(0, "Next", playerMenu);
+		statsMenu(5);
 		if (player.statPoints > 0) {
 			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");
 			addButton(1, "Stat Up", attributeMenu);
 		}
-		addButtonDisabled(5, "General", "You are currently at this stats page.");
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
 		}
+	public function displayStatsAbilities():void {
+		clearOutput();
+		for each (var ability:CombatAbility in player.knownAbilities()) {
+			outputText("<font size=\"24\" face=\"Georgia\"><u><b>"+ability.name+"</b></u></font>");
+			outputText(" "+ability.catObject.name+"\n");
+			outputText(ability.fullDescription(null));
+			outputText("\n\n");
+		}
+		statsMenu(4);
+	}
 	public function displayStatsCombat():void {
 		spriteSelect(-1);
 		clearOutput();
@@ -410,8 +423,6 @@ public class PlayerInfo extends BaseContent {
 				combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
 		}
 		else combatStats += "<b>Bow Skill:</b> 0 / 100\n";
-		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
-		combatStats += "<b>Arrow Cost (Fatigue): </b> " + combat.oneArrowTotalCost() + "\n";
 		combatStats += "<b>Telekinesis Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
 		combatStats += "<b>One Bullet Reload Cost (Fatigue): </b> " + combat.oneBulletReloadCost() + "\n";
 		combatStats += "<b>Bow/Crossbow Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
@@ -447,7 +458,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 		combatStats += "<b>Venom/Web:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
-		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + player.tailRecharge + " / hour\n";
+		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() * 2 + " / turn, +" + combat.venomCombatRechargeInfo() + " / 5 minutes\n";
 		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
@@ -466,12 +477,12 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
-		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
-		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
-		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
+		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + Math.round(combat.PercentBasedRegeneration() * 2.4) + " % / " + Math.round(combat.maximumRegeneration() * 2.4) + " % (hour)\n";
+		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP / turn, ~ " + Math.round(((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 0.2) + " HP / 5 minutes\n";
+		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn, " + Math.round(combat.fatigueRecovery2() * 0.2) + " / 5 minutes\n";
 		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, "+(player.hasPerk(PerkLib.AbsoluteStrength) ? ""+combat.wrathregeneration2()+"":"-60%")+" / hour\n";
-		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
-		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
+		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier() * 0.2) + " / 5 minutes\n";
+		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier() * 0.2) + " / 5 minutes\n";
 		combatStats += "\n";
 		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
 		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
@@ -510,13 +521,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
 
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButtonDisabled(6, "Combat", "You are currently at this stats page.");
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
+		statsMenu(6);
 	}
 	public function displayStatsNpcs():void {
 		spriteSelect(-1);
@@ -809,6 +814,9 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.LUNA_LVL_UP] == 0) interpersonStats += "<b>Luna lvl:</b> 9\n";
 		}
 
+		if (player.hasStatusEffect(StatusEffects.Marble))
+			interpersonStats += "<b>Marble Affection:</b> " + Math.round(player.statusEffectv1(StatusEffects.Marble)) + "%\n";
+
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
 			if (flags[kFLAGS.NEISA_AFFECTION] < 50) interpersonStats += "<b>Neisa Loyalty:</b> " + Math.round(flags[kFLAGS.NEISA_AFFECTION]) * 2 + "%\n";
 			else interpersonStats += "<b>Neisa Loyalty:</b> 100%\n";
@@ -970,6 +978,10 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 2) outsideCampNpcsStats += "<b>Izumi lvl:</b> 42\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 36\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 30\n";
+		if (flags[kFLAGS.MET_KITSUNES] == 4) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 37 (current max lvl they can reach)\n";
+		if (flags[kFLAGS.MET_KITSUNES] == 3) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 31\n";
+		if (flags[kFLAGS.MET_KITSUNES] == 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 25\n";
+		if (flags[kFLAGS.MET_KITSUNES] < 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 19\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 12) outsideCampNpcsStats += "<b>Minerva lvl:</b> 95 (current max lvl she can reach)\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 11) outsideCampNpcsStats += "<b>Minerva lvl:</b> 89\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 83\n";
@@ -1000,13 +1012,7 @@ public class PlayerInfo extends BaseContent {
 		if (outsideCampNpcsStats != "")
 			outputText("\n<b><u>Outside camp NPC's Stats</u></b>\n" + outsideCampNpcsStats);
 		// End Outside camp NPC's Stats
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButtonDisabled(7, "NPC's", "You are currently at this stats page.");
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
+		statsMenu(7);
 	}
 	public function displayStatsChildren():void {
 		spriteSelect(-1);
@@ -1156,13 +1162,7 @@ public class PlayerInfo extends BaseContent {
 		if (childStats != "")
 			outputText("\n<b><u>Children</u></b>\n" + childStats);
 		// End Children Stats
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButtonDisabled(8, "Children", "You are currently at this stats page.");
-		addButton(9, "Mastery", displayStatsmastery);
+		statsMenu(8);
 	}
 	public function displayStatsmastery():void {
 		spriteSelect(-1);
@@ -1363,13 +1363,7 @@ public class PlayerInfo extends BaseContent {
 		if (masteryStats != "")
 			outputText("\n<b><u>Mastery</u></b>\n" + masteryStats);
 		// End Mastery Stats
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButtonDisabled(9, "Mastery", "You are currently at this stats page.");
+		statsMenu(9);
 	}
 
 	//------------
@@ -1704,6 +1698,7 @@ public class PlayerInfo extends BaseContent {
 		else doNext(playerMenu);
 	}
 
+	private static var filterChoices:Array = [0,1,1,1,1,1,1,1,1,1];	//1 - is active?, 2-10 - is shown?
 	public function perkBuyMenu():void {
 		clearOutput();
 		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
@@ -1726,6 +1721,7 @@ public class PlayerInfo extends BaseContent {
             if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 	        mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
 	        perkList = [];
+			if (filterChoices[0] == 1) perks = perks.filter(filterPerks);
 	        for each(var perk:PerkType in perks.sort()) {
 		        var p:PerkClass = new PerkClass(perk,
 				        perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
@@ -1736,7 +1732,58 @@ public class PlayerInfo extends BaseContent {
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
 			addButton(1, "Skip", perkSkip);
+			addButton(4,"Filter",changeFilter, 0).hint("Filter perks by reqired stats")
+			if (filterChoices[0]==1)
+			{
+				addButton(5,(filterChoices[1]==1)?"Str Y":"Str N", changeFilter, 1);
+				addButton(6,(filterChoices[2]==1)?"Tou Y":"Tou N", changeFilter, 2);
+				addButton(7,(filterChoices[3]==1)?"Spe Y":"Spe N", changeFilter, 3);
+				addButton(8,(filterChoices[4]==1)?"Int Y":"Int N", changeFilter, 4);
+				addButton(10,(filterChoices[5]==1)?"Wis Y":"Wis N", changeFilter, 5);
+				addButton(11,(filterChoices[6]==1)?"Lib Y":"Lib N", changeFilter, 6);
+				addButton(12,(filterChoices[7]==1)?"Sen Y":"Sen N", changeFilter, 7);
+				addButton(13,(filterChoices[8]==1)?"Cor Y":"Cor N", changeFilter, 8);
+				addButton(9,(filterChoices[9]==1)?"Other Y":"Other N", changeFilter, 9); //perks that have non stat req
+				addButton(14,"Clear",clearFilter);
+			}
 		}
+	}
+	public  function filterPerks(element:Object, index:int, arr:Array):Boolean{  	//filter from perks availabe for player
+		var temp1:Boolean = false;
+		var temp2:Boolean = false;
+		for each (var x:Object in element.requirements){ 							//in all requirements for that perk
+			if(
+			 ((x.attr=="str")&&(filterChoices[1]==1)) ||
+			 ((x.attr=="tou")&&(filterChoices[2]==1)) ||
+			 ((x.attr=="spe")&&(filterChoices[3]==1)) ||
+			 ((x.attr=="inte")&&(filterChoices[4]==1)) ||
+			 ((x.attr=="wis")&&(filterChoices[5]==1)) ||
+			 ((x.attr=="lib")&&(filterChoices[6]==1)) ||
+			 ((x.attr=="sens")&&(filterChoices[7]==1)) ||
+			 ((x.attr=="cor")&&(filterChoices[8]==1))
+			) temp1 = true;
+		}
+		if (filterChoices[9]==1){		//only perks that will not have any stat req.
+			temp2=true;
+			for each (var y:Object in element.requirements){
+				if ((y.attr!=null)){temp2=false;}
+			}
+		}
+	temp1||=temp2;
+	return temp1;
+	}
+
+	public function changeFilter(pos:int):void
+	{
+		if ((filterChoices[pos])==0) filterChoices[pos] = 1;
+		else filterChoices[pos] = 0;
+		perkBuyMenu();
+	}
+
+	public function clearFilter():void
+	{
+		filterChoices = [1,1,1,1,1,1,1,1,1,1];
+		perkBuyMenu();
 	}
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
@@ -1786,6 +1833,20 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		addButton(0, "Okay", perkSelect, selected);
 		addButton(1, "Skip", perkSkip);
+		addButton(4,"Filter",changeFilter, 0).hint("Filter perks by reqired stats")
+		if (filterChoices[0]==1)
+		{
+			addButton(5,(filterChoices[1]==1)?"Str Y":"Str N", changeFilter, 1);
+			addButton(6,(filterChoices[2]==1)?"Tou Y":"Tou N", changeFilter, 2);
+			addButton(7,(filterChoices[3]==1)?"Spe Y":"Spe N", changeFilter, 3);
+			addButton(8,(filterChoices[4]==1)?"Int Y":"Int N", changeFilter, 4);
+			addButton(10,(filterChoices[5]==1)?"Wis Y":"Wis N", changeFilter, 5);
+			addButton(11,(filterChoices[6]==1)?"Lib Y":"Lib N", changeFilter, 6);
+			addButton(12,(filterChoices[7]==1)?"Sen Y":"Sen N", changeFilter, 7);
+			addButton(13,(filterChoices[8]==1)?"Cor Y":"Cor N", changeFilter, 8);
+			addButton(9,(filterChoices[9]==1)?"Other Y":"Other N", changeFilter, 9); //perks that have non stat req
+			addButton(14,"Clear",clearFilter);
+		}
 	}
 
 	public function applyPerk(perk:PerkClass):void {

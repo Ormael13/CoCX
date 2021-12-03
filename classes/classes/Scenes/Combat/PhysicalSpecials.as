@@ -97,6 +97,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (!player.isStaffTypeWeapon()) {
 				bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
+				bd.requireFatigue(chargingcoooooost());
 				if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
 					bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
 				}
@@ -1361,15 +1362,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	public function chargingcoooooost():Number {
-		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.1);
+		var chargingcostvalue:Number = Math.round(player.maxFatigue() * 0.01);
 		if (player.hasPerk(MutationsLib.TwinHeart)) {
 			if (player.hasPerk(MutationsLib.TwinHeartPrimitive)) {
-				if (player.hasPerk(MutationsLib.TwinHeartEvolved)) chargingcostvalue *= 3;
-				else chargingcostvalue *= 4;
+				if (player.hasPerk(MutationsLib.TwinHeartEvolved)) chargingcostvalue *= 10;
+				else chargingcostvalue *= 20;
 			}
-			else chargingcostvalue *= 5;
+			else chargingcostvalue *= 30;
 		}
-		else chargingcostvalue *= 6;
+		else chargingcostvalue *= 40;
 		if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) {
 			if (player.hasPerk(PerkLib.PhantomStrike)) chargingcostvalue += 50;
 			else chargingcostvalue += 25;
@@ -2174,15 +2175,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 6);
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 7);
 			shatterChance -= 3;
 		}
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 8);
 			shatterChance -= 3;
 		}
 		if (rand(100) < shatterChance) {
@@ -2192,9 +2193,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < winionsMaker.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
 			else overloadedGolemCoresBag = true;
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
 		damage = Math.round(damage);
@@ -2220,15 +2221,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 6);
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 7);
 			shatterChance -= 3;
 		}
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 8);
 			shatterChance -= 3;
 		}
 		if (rand(100) < shatterChance) {
@@ -2244,9 +2245,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		damage *= 3;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
@@ -2274,15 +2275,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 6);
 			shatterChance -= 2;
 		}
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 7);
 			shatterChance -= 3;
 		}
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			damage += ((player.inte + player.wis) * 5);
+			damage += ((player.inte + player.wis) * 8);
 			shatterChance -= 3;
 		}
 		if (rand(100) < shatterChance) {
@@ -2298,9 +2299,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		damage *= 5;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
@@ -2333,9 +2334,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
-		damage += ((player.inte + player.wis + 300 + rand(121)) * 10);
-		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 5);
-		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 5);
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		damage *= usedGolems;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
@@ -3920,10 +3921,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the " + monster.a + monster.short + " off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
 			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
-			if(monster.hasStatusEffect(StatusEffects.Frostbite))
-			{
-				monster.addStatusValue(StatusEffects.Frostbite,1,1);
-			}
+			if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
 			else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
 		}
 		else {
@@ -5993,4 +5991,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

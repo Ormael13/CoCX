@@ -1,3 +1,7 @@
+/**
+ * ...
+ * @author Liadri
+ */
 package classes.Scenes.NPCs 
 {
 import classes.*;

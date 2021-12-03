@@ -17,9 +17,9 @@ package classes.Scenes.Camp
 	
 	public class CampUpgrades extends BaseContent {
 		
-		public var maxNailSupply:int = 600;
-		public var maxWoodSupply:int = 900;
-		public var maxStoneSupply:int = 900;
+		public var maxNailSupply:int = 750;
+		public var maxWoodSupply:int = 1200;
+		public var maxStoneSupply:int = 1200;
 		
 		public var marblehelper:MarbleScene = new MarbleScene();
 		public var helhelper:HelFollower = new HelFollower();
@@ -1825,22 +1825,22 @@ public function noThanks():void {
 
 public function checkMaterials():void {
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) { 
-	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600" + " \n");
+	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750" + " \n");
 	}
 	else { 
-	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200" + " \n");
+	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250" + " \n");
 	}
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900" + "\n");
+	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200" + "\n");
 	}
 	else {
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300" + "\n");
+	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400" + "\n");
 	}
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900" + "\n");
+	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200" + "\n");
 	}
 	else {
-	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300" + "\n");
+	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400" + "\n");
 	}
 }
 

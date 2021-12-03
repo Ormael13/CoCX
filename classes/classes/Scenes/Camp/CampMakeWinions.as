@@ -23,21 +23,21 @@ public class CampMakeWinions extends BaseContent
 		
 		public function maxTemporalGolemsBagSize():Number {
 			var maxTemporalGolemsBagSizeCounter:Number = 0;
-			if (player.hasPerk(PerkLib.JobGolemancer)) maxTemporalGolemsBagSizeCounter += 5;
-			if (player.hasPerk(PerkLib.BeginnerGolemMaker)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.ExpertGolemMaker)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.JobGolemancer)) maxTemporalGolemsBagSizeCounter += 15;
+			if (player.hasPerk(PerkLib.BeginnerGolemMaker)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.ExpertGolemMaker)) maxTemporalGolemsBagSizeCounter += 6;
 			if (player.hasPerk(PerkLib.GolemArmyLieutenant)) maxTemporalGolemsBagSizeCounter += 2;
 			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxTemporalGolemsBagSizeCounter += 4;
 			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxTemporalGolemsBagSizeCounter += 6;
 			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxTemporalGolemsBagSizeCounter += 8;
 			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxTemporalGolemsBagSizeCounter += 10;
-			if (player.hasPerk(PerkLib.BiggerGolemBagI)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBagII)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBagIII)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBagIV)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBagV)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBagVI)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBagI)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.BiggerGolemBagII)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.BiggerGolemBagIII)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.BiggerGolemBagIV)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.BiggerGolemBagV)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.BiggerGolemBagVI)) maxTemporalGolemsBagSizeCounter += 6;
 			return maxTemporalGolemsBagSizeCounter;
 		}
 		public function maxPermanentStoneGolemsBagSize():Number {
@@ -135,8 +135,9 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) addButton(6, "I.P.S.Golem", makePermanentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 100 Stones, " + permanentImprovedStoneGolemMakingCost() + " Mana");
 			addButtonDisabled(7, "I.M.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + permanentImprovedSteelGolemMakingCost() + " Mana
-			addButtonDisabled(12, "Upgrades", "Options to upgrade permanent golems.");
-			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
+			if (player.hasItem(useables.GOLCORE, 1) && (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < maxReusableGolemCoresBagSize())) addButton(11, "PutInCore", putInGolemCoreIntoGolemBag).hint("Put in one golem core into 'golem bag'.")
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(12, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
+			addButtonDisabled(13, "Upgrades", "Options to upgrade permanent golems.");
 			addButton(14, "Back", playerMenu);
 		}
 		
@@ -165,8 +166,8 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] < 1) flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.TEMPORAL_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) cheatTime2(5);
-			else cheatTime2(10);
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) eachMinuteCount(5);
+			else eachMinuteCount(10);
 		}
 		public function makeTemporalStoneGolems():void {
 			clearOutput();
@@ -192,7 +193,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a complex seal on the ground with 5 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
 			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 5;
 			doNext(accessMakeWinionsMainMenu);
-			cheatTime2(20);
+			eachMinuteCount(20);
 		}
 		public function makePermanentStoneGolem():void {
 			clearOutput();
@@ -225,7 +226,7 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] < 1) flags[kFLAGS.PERMANENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.PERMANENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			cheatTime2(20);
+			eachMinuteCount(20);
 		}
 		public function makePermanentImprovedStoneGolem():void {
 			clearOutput();
@@ -259,9 +260,16 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] < 1) flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			cheatTime2(60);
+			eachMinuteCount(60);
 		}
 
+		public function putInGolemCoreIntoGolemBag():void {
+			clearOutput();
+			outputText("In order to have some free space in your backpack you put in one of golem cores into your bag.\n\n");
+			player.destroyItems(useables.GOLCORE, 1);
+			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
+			doNext(accessMakeWinionsMainMenu);
+		}
 		public function takeOutGolemCoreFromGolemBag():void {
 			clearOutput();
 			outputText("In order to not overload your bag for reusable golem cores you take out one of them.\n\n");
@@ -374,7 +382,7 @@ public class CampMakeWinions extends BaseContent
 		
 		private function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
-			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 3;
 			if (player.hasPerk(PerkLib.ElementalContractRank1)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank2)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank3)) maxSizeOfElementalsArmyCounter += 1;
@@ -384,31 +392,31 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.ElementalContractRank7)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank8)) maxSizeOfElementalsArmyCounter += 1;
 			if (player.hasPerk(PerkLib.ElementalContractRank9)) maxSizeOfElementalsArmyCounter += 1;
-			if (player.hasPerk(PerkLib.ElementalContractRank10)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank11)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank12)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank13)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank14)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank15)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank16)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank17)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank18)) maxSizeOfElementalsArmyCounter += 2;
-			if (player.hasPerk(PerkLib.ElementalContractRank19)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank20)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank21)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank22)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank23)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank24)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank25)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank26)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank27)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank28)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank29)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank30)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementalContractRank31)) maxSizeOfElementalsArmyCounter += 3;
-			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 1;
-			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 1;
-			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank10)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank11)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank12)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank13)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank14)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank15)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank16)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank17)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank18)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank19)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank20)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank21)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank22)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank23)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank24)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank25)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank26)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank27)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank28)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank29)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank30)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementalContractRank31)) maxSizeOfElementalsArmyCounter += 1;
+			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 2;
 			return maxSizeOfElementalsArmyCounter;
 		}
 		private function currentSizeOfElementalsArmy():Number {
@@ -957,11 +965,11 @@ public class CampMakeWinions extends BaseContent
 			}
 			outputText("</i>");
 			menu();
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningElementalsSubmenu);
-			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
-			addButton(1, "Ranks (E)", accessSummonEpicElementalsMainMenu).hint("Rank 1 to Viscount Rank Epic Elementals");
-			if (currentSizeOfElementalsArmy() > 0) addButton(2, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Elementals!")
-			else addButtonDisabled(2,"ElementUp", "You don't have any elementals, try summoning one!");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu);
+			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible normal elementals or reached limit of how many elementals you can command at once.");
+			addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
+			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
+			else addButtonDisabled(5,"ElementUp", "You don't have any elementals, try summoning one!");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", playerMenu);
 		}
@@ -1200,12 +1208,6 @@ public class CampMakeWinions extends BaseContent
 			outputText("-M. Special: \n");
 			doNext(evocationTome);
 		}
-		private function accessSummonEpicElementalsMainMenu():void {
-			menu();
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(0, "Summon", summoningEpicElementalsSubmenu);
-			else addButtonDisabled(0, "Summon", "You either summoned all possible elementals or reached limit of how many elementals you can command at once.");
-			addButton(14, "Back", accessSummonElementalsMainMenu);
-		}
 		private function summoningElementalsSubmenu():void {
 			clearOutput();
 			outputText("If you don't have enough mana (100+) and fatigue (50+) it will be impossible to summon any elementals.\n\n");
@@ -1390,7 +1392,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function summonElementalAirEpic():void {
 			clearOutput();
@@ -1468,7 +1470,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 2, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 0, 1, 0, 0);
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		
 		private function rankUpElementalAir():void {
@@ -1486,7 +1488,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
@@ -1503,7 +1505,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
@@ -1520,7 +1522,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
@@ -1537,7 +1539,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalIce():void {
 			clearOutput();
@@ -1554,7 +1556,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalLightning():void {
 			clearOutput();
@@ -1571,7 +1573,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalDarkness():void {
 			clearOutput();
@@ -1588,7 +1590,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalWood():void {
 			clearOutput();
@@ -1605,7 +1607,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalMetal():void {
 			clearOutput();
@@ -1622,7 +1624,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalEther():void {
 			clearOutput();
@@ -1639,7 +1641,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalPoison():void {
 			clearOutput();
@@ -1656,7 +1658,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalPurity():void {
 			clearOutput();
@@ -1673,7 +1675,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalCorruption():void {
 			clearOutput();
@@ -1690,7 +1692,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			else failToRankUpElemental();
 			doNext(elementaLvlUp);
-			cheatTime2(30);
+			eachMinuteCount(30);
 		}
 		private function rankUpElementalManaCost():Number {
 			var rankUpElementalManaCost:Number = 100;
@@ -1809,7 +1811,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Warrior, ready to fight things and do anything your finger will request.");
 			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 2, 1);
 			doNext(accessMakeSkeletonWinionsMainMenu);
-			cheatTime2(10);
+			eachMinuteCount(10);
 		}
 		public function createSkeletonArcher():void {
 			clearOutput();
@@ -1824,7 +1826,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Archer, ready to fight things and do anything your finger will request.");
 			player.addPerkValue(PerkLib.GreaterHarvest, 1, 1);
 			doNext(accessMakeSkeletonWinionsMainMenu);
-			cheatTime2(10);
+			eachMinuteCount(10);
 		}
 		public function createSkeletonMage():void {
 			clearOutput();
@@ -1839,7 +1841,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You draw a seal in the ground around the pile of bone that will soon be your servant. Once done you stand back and begin to seep your soulforce inside of the pile aligning joints together into a large 10 feet tall shape. Finishing the link on your creation you begin to feel its every movement on your fingertips. Satisfied you admire your brand new Skeleton Mage, ready to fight things and do anything your finger will request.");
 			player.addPerkValue(PerkLib.GreaterHarvest, 2, 1);
 			doNext(accessMakeSkeletonWinionsMainMenu);
-			cheatTime2(10);
+			eachMinuteCount(10);
 		}
 	}
-}
+}

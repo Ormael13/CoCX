@@ -296,7 +296,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("what made me human in the first place. Bah, who need theses anyway, morality is just a tether in the way of progress and true advancement can only be achieved by discarding it. Did I ever even have a moral code in the first place? Well I guess I somewhat did but I have chosen to ignore it, otherwise I wouldn't have gotten this far.</i>\n\n");
 		outputText("The journal continues and Alvina is nowhere in sight, you are anxious to see what's inside the diary beyond these page. Do you resume reading and throw caution out the window?\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 5;
-		cheatTime2(30);
+		eachMinuteCount(30);
 		menu();
 		addButton(1, "No", alvinaMainCampMenuDiaryNo);
 		addButton(3, "Yes", alvinaMainCampMenuDiaryYes);
@@ -321,7 +321,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("Alvina almost catches you this time but you manage to act like you didn't open her diary or read it. This is starting to become dangerous, maybe you should stop your reading now? You head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 4;
 		doNext(camp.campFollowers);
-		cheatTime2(20);
+		eachMinuteCount(20);
 	}
 	else if (flags[kFLAGS.ALVINA_DIARY] == 2) {
 		outputText("While Alvina is busy out of view you open her diary and keep on reading.\n\n");
@@ -347,7 +347,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("You decide to close the book before Alvina catches you reading it. This is getting creepier the more you know about her. Thankfully she didn’t notice and so you head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 3;
 		doNext(camp.campFollowers);
-		cheatTime2(20);
+		eachMinuteCount(20);
 	}
 	else if (flags[kFLAGS.ALVINA_DIARY] == 1) {
 		outputText("While Alvina is busy out of view you open her diary and keep on reading.\n\n");
@@ -361,7 +361,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("You decide to close the book before Alvina catches you reading it. This is getting creepier the more you learn about her. Thankfully she didn’t notice, so you head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 2;
 		doNext(camp.campFollowers);
-		cheatTime2(10);
+		eachMinuteCount(10);
 	}
 	else {
 		outputText("As you look in Alvina’s things you notice a small book that was left on a table. Curious you take it with you while she is busy and proceed to read it.\n\n");
@@ -376,7 +376,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("You decide to close the book before Alvina catches you reading it. Thankfully she didn’t notice and so you head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 1;
 		doNext(camp.campFollowers);
-		cheatTime2(10);
+		eachMinuteCount(10);
 	}
 }
 public function alvinaMainCampMenuDiaryNo():void
@@ -405,7 +405,7 @@ public function alvinaMainCampMenuDiaryYes():void
 		outputText("She picks up her journal and packs it up back in her bag.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 6;
 		doNext(camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	else {
 		outputText("\"<i>You know what they say about curiosity [name]?</i>\"\n\n");
@@ -443,7 +443,7 @@ public function alvinaMainCampMenuConfession():void
 			outputText("It's barely been an hour and Alvina has already become quite bored. She shakes her head negatively and removes herself from you.\n\n");
 			outputText("\"<i>You lack both originality and talent even for a demon. Just where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
 			doNext(camp.campFollowers);
-			cheatTime2(45);
+			eachMinuteCount(45);
 		}
 	}
 	if (flags[kFLAGS.ALVINA_FOLLOWER] == 16) {
@@ -460,7 +460,7 @@ public function alvinaMainCampMenuConfession():void
 		outputText("Fact is, the black rose is the facet of a long lost deity related to death by natural causes and aging. I want to acquire it to study its properties. Bring me the rose and I will offer you a place in my bed.</i>\"\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 17;
 		doNext(camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 }
 public function alvinaMainCampSexMenu():void
@@ -486,7 +486,7 @@ public function alvinaMainCampSexMenu():void
 		outputText("It's barely been an hour and Alvina has already become quite bored. She shakes her head negatively and removes herself from you.\n\n");
 		outputText("\"<i>You lack both originality and talent even for a demon. Just where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
 		doNext(camp.campFollowers);
-		cheatTime2(45);
+		eachMinuteCount(45);
 	}
 }
 public function alvinaMainCampSexMenu2():void
@@ -760,7 +760,7 @@ public function alvinaCampStudy():void
 			}
 		}
 		doNext(camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	} else {
 		outputText("Strangely, despite being a demon, Alvina makes for a great teacher. She corrects your posture when you miss a movement and helps you learn faster than you would by just reading books.\n\n");
 		outputText("\"<i>Still daydreaming in the middle of my lectures [name]?</i>\"\n\n");
@@ -805,7 +805,7 @@ public function alvinaCampAdvancedStudy():void
 		outputText("<b>You gained a scroll of Polar Midnight.</b>\n\n");
 		player.addStatusValue(StatusEffects.AlvinaTraining2, 1, 1);
 		inventory.takeItem(consumables.POL_MID, camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
 		player.destroyItems(useables.AMETIST, 1);
@@ -864,7 +864,7 @@ public function alvinaCampAdvancedStudy():void
 		}
 		else outputText("\"<i>You are still way too pure for us to proceed further. Corrupt your body with some demonic transformatives and we will continue.</i>\"\n\n");
 		doNext(camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	else if (player.hasStatusEffect(StatusEffects.AlvinaTraining2)) {
 		outputText("You ask your teacher if there is nothing else she can teach you.\n\n");
@@ -882,7 +882,7 @@ public function alvinaCampAdvancedStudy():void
 			outputText("\"<i>While there is one last thing I could teach you in the dark arts, I'm afraid you are still too pure for this knowledge. Come back when your soul is fully stained.</i>\"\n\n");
 		}
 		doNext(camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	else {
 		if (player.cor >= 50) {
@@ -896,7 +896,7 @@ public function alvinaCampAdvancedStudy():void
 			outputText("You ask your mentor for more advanced applications of black magic but she replies in the negative.\n\n");
 			outputText("\"<i>While I could attempt to teach you many things, there is little you could learn without darkening your soul further. Advanced black magic is for the corrupt. Without the proper mindset, there is no way you could even comprehend it. Go get fucked by a few imps or take some transformatives and we will talk about this again.</i>\"\n\n");
 			doNext(camp.campFollowers);
-			cheatTime2(5);
+			eachMinuteCount(5);
 		}
 	}
 }

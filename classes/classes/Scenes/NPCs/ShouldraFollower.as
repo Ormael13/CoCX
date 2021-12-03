@@ -75,7 +75,8 @@ private function recruitShouldraForCampSexyTimes():void {
 
 public function morningShouldraAlert():void {
 	spriteSelect(67);
-	outputText("\n\"<i>Yo, Champ!</i>\" a voice calls, stirring you from your sleep.  You grumble and sit up, rubbing the sleep from your eyes.  Shouldra's standing a few feet away from you, hands on hips and staring at you expectantly.  As soon as you slink out of bed, she slides up and wraps you in a big hug, gradually allowing herself to grow transparent and slide into you.  A few moments of adjustments later, you stretch, feeling the otherworldly presence gliding around your body.  \"<i>Alright, Champ,</i>\" Shouldra exclaims, \"<i>Let's paint this land white.</i>\"");
+	outputText("\nYou take a moment in camp to sit down and plan out your next move. The moment your [ass] hits a log-chair by your campfire, you hear a familiar, echoing voice.");
+	outputText("\n\"<i>Yo, Champ!</i>\" Shouldra's standing a few feet away from you, hands on hips and staring at you expectantly. You reluctantly stand back up and your ghostly ally slides up and wraps you in a big hug. Gradually, you feel that cool, tickling feeling spread as she turns transparent, sinking into your body. A few moments of adjustments later, you stretch, feeling the otherworldly presence gliding around you. \"<i>Alright, Champ,</i>\" Shouldra exclaims, \"<i>Let's paint this land white.</i>\"");
 	outputText("\n\nTime to set out, you figure.");
 	outputText("\n\n(<b>Gained Shouldra as a follower!</b>)");
 	flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] = 1;

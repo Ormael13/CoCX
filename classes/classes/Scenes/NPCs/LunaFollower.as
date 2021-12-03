@@ -183,7 +183,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.cor >= 60) outputText("Of course, it's those tantalizing glimpses of her true, corrupted nature that make her so cute, you think to yourself happily... definitely happily, not nervously at all.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaWhatCanSheDo():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -195,8 +196,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You can think of absolutely no potential problems with this.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 5)flags[kFLAGS.LUNA_FOLLOWER] = 5;
 			lunaJealousy(-100);
-			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaHuman():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -235,7 +236,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaCampThoughts():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -245,7 +247,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			else outputText("\"<i>While I would never impose upon " + player.mf("Master","Mistress") + ", I will admit it would be far easier to clean if there were a proper dwelling here. I would greatly enjoy the wider scope for my services a cabin would provide.</i>\"\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaStopJealousy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -262,7 +265,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			player.removeStatusEffect(StatusEffects.LunaWasCaugh);
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaLycanthropy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -282,7 +286,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			else flags[kFLAGS.LUNA_FOLLOWER] = 14;
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuBiteMe():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -532,7 +537,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
 				outputText("\nThe treatment complete, she breaks contact and her expression melts into a more coy smile. Doubtless she knows what effect she's had on you, and fully intended it. Do you take her here and now?\n\n");
 				menu();
-				addButton(0, "Yes", sexMenuMain);
+				if (player.lust > 33) addButton(0, "Yes", sexMenuMain);
+				else addButtonDisabled(0, "Yes", "Your lust is too low for that.");
 				addButton(1, "No", nurseLunaEnd);
 			}
 			else doNext(camp.returnToCampUseFourHours);

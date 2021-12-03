@@ -22,6 +22,7 @@ import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.NPCs.Ceraph;
 import classes.Scenes.NPCs.Luna;
+import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.Yamata;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
@@ -478,7 +479,7 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") combat.comfoll.excelliaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") combat.comfoll.neisaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Siegweird") combat.comfoll.siegweirdCombatActions();
+			//if (flags[kFLAGS.PLAYER_COMPANION_1] == "Siegweird") combat.comfoll.siegweirdCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") combat.comfoll.zenjiCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") combat.comfoll.alvinaCombatActions();
@@ -488,7 +489,7 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia") combat.comfoll.excelliaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") combat.comfoll.neisaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Siegweird") combat.comfoll.siegweirdCombatActions();
+			//if (flags[kFLAGS.PLAYER_COMPANION_2] == "Siegweird") combat.comfoll.siegweirdCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") combat.comfoll.zenjiCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_3] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") combat.comfoll.alvinaCombatActions();
@@ -498,7 +499,7 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") combat.comfoll.excelliaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") combat.comfoll.neisaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Siegweird") combat.comfoll.siegweirdCombatActions();
+			//if (flags[kFLAGS.PLAYER_COMPANION_3] == "Siegweird") combat.comfoll.siegweirdCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") combat.comfoll.zenjiCombatActions();
 		}
 
@@ -641,6 +642,11 @@ public class CombatUI extends BaseCombatContent {
 			btnStruggle.call((monster as Izumi).titSmotherStruggle);
 			btnBoundWait.call((monster as Izumi).titSmotherWait);
 		}
+		if (player.hasStatusEffect(StatusEffects.Pounced)) {
+			outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
+			btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
+			btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
+		}
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
 			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);
 			btnBoundWait.call((monster as SuccubusGardener).grappleWait);
@@ -692,7 +698,7 @@ public class CombatUI extends BaseCombatContent {
 						btnContinue.show("Continue", combat.magic.spellPolarMidnight, "Continue casting Polar Midnight spell.");
 						break;
 					case 6:
-						btnContinue.show("Continue", combat.magic.spellMeteorShower, "Continue casting Meteor Shower spell.");
+						btnContinue.show("Continue", CombatAbilities.MeteorShower.buttonCallback, "Continue casting Meteor Shower spell.");
 						break;/*
 					case 7:
 						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");

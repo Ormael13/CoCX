@@ -13,6 +13,7 @@ import classes.PerkLib;
 import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
@@ -738,6 +739,12 @@ public class PerkMenu extends BaseContent {
 		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
 			displayHeader("Mutation Stats");
+			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
+				outputText("Mutations Assistant: <b>On</b>\n");
+			}
+			else{
+				outputText("Mutations Assistant: <b>Off</b>\n");
+			}
 			var mutationCount:int = 1
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
 				mutationCount++;
@@ -747,8 +754,9 @@ public class PerkMenu extends BaseContent {
 				mutationCount++;
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
 				mutationCount++;
-			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
+			outputText("You have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.\n\n");
+
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
 			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid"]//, "PThyroid"
 			for each (var bodyPart:String in bPartlist){
@@ -779,22 +787,14 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 			}
-			/*
 			outputText("Mutations can be obtained by ");
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2 && flags[kFLAGS.MUTATIONS_SPOILERS]){
+			if (flags[kFLAGS.MUTATIONS_SPOILERS] || EvangelineFollower.EvangelineAffectionMeter >= 3){
 				outputText("finding Evangeline and asking her about it.\n");
 			}
 			else{
 				outputText("looking around for an alchemist specializing in transformatives.\n");
 			}
-			*/
-			if (flags[kFLAGS.MUTATIONS_SPOILERS]) {
-				outputText("Mutations Assistant: On\n");
-			}
-			else{
-				outputText("Mutations Assistant: Off\n");
-			}
-			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. Default:Off.\n");
+			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n");
 		}
 
 		function mutationsDBHeart():void{

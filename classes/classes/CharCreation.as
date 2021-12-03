@@ -2576,8 +2576,10 @@ import coc.view.MainView;
 				if (player.hasPerk(PerkLib.MilkMaid) && player.perkv4(PerkLib.MilkMaid) < 1) addButton(0, "MilkMaid", permanentizePerk3, PerkLib.MilkMaid);
 				else if (player.hasPerk(PerkLib.MilkMaid) && player.perkv4(PerkLib.MilkMaid) > 0) addButtonDisabled(0, "MilkMaid", "MilkMaid perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(0, "MilkMaid", "MilkMaid");
-				if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(1, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
-				else if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) {
+					if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(1, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
+					else if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
+				}
 				else addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance");
 				if (player.hasPerk(PerkLib.OneTrackMind) && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(2, "OneTrackMind", permanentizePerk3, PerkLib.OneTrackMind);
 				else if (player.hasPerk(PerkLib.OneTrackMind) && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(2, "OneTrackMind", "One Track Mind perk is already made permanent and will carry over in all subsequent ascensions.");

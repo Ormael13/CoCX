@@ -763,7 +763,7 @@ public function HealingScene():void {
 	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
 	doNext(mainCampMenu);
-	cheatTime2(45);
+	eachMinuteCount(45);
 }
 
 public function CuringCurseScene1():void {	//value related curses removal
@@ -779,7 +779,7 @@ public function CuringCurseScene1():void {	//value related curses removal
 		player.removeCurse(stat, 10,3);
 	}
 	doNext(mainCampMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
@@ -797,7 +797,7 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 		}
 	}
 	doNext(mainCampMenu);
-	cheatTime2(30);
+	eachMinuteCount(30);
 }
 
 public function mainSexMenu():void {
@@ -969,4 +969,4 @@ public function SexMenuTitsfuck():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 	}
-}
+}

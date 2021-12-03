@@ -1937,7 +1937,7 @@ public static const UNKNOWN_FLAG_NUMBER_01928:int                               
 public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
 public static const UNKNOWN_FLAG_NUMBER_01930:int                                   = 1930;
 public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
-public static const UNKNOWN_FLAG_NUMBER_01932:int                                   = 1932;
+public static const KITSUNES_DEFEATS_COUNTER:int                                   	= 1932;
 public static const CAMP_CABIN_ENERGY_CORE_RESOURCES:int                            = 1933;
 public static const CAMP_CABIN_MECHANISM_RESOURCES:int                              = 1934;
 public static const PRISCILLA_DEFEATS_COUNTER:int                                   = 1935;
@@ -2293,8 +2293,8 @@ public static const DISCOVERED_BLIGHT_RIDGE:int               	                 
 public static const DISCOVERED_OUTER_BATTLEFIELD:int   	                            = 2285;
 public static const DISCOVERED_INNER_BATTLEFIELD:int                   			   	= 2286;	//Not Yet Used Flag
 public static const DISCOVERED_DEFILED_RAVINE:int                                   = 2287;
-public static const DISCOVERED_02288:int                                   = 2288;			//Not Yet Used Flag //for Pit area
-public static const DISCOVERED_02289:int                          		   = 2289;			//Not Yet Used Flag //for Abyss area
+public static const DISCOVERED_BATTLEFIELD_BOUNDARY:int                             = 2288;
+public static const DISCOVERED_02289:int                          		   = 2289;			//Not Yet Used Flag //for Pit or Abyss area
 public static const DISCOVERED_BEACH:int                        		   			= 2290;
 public static const DISCOVERED_OCEAN:int                           		            = 2291;
 public static const DISCOVERED_DEEP_SEA:int                           		        = 2292;

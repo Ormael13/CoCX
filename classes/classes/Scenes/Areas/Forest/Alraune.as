@@ -168,7 +168,7 @@ public class Alraune extends Monster
 			this.butt.type = Butt.RATING_EXPANSIVE;
 			this.lowerBody = LowerBody.PLANT_FLOWER;
 			this.hairLength = 6;
-			initStrTouSpeInte(10, 100, 10, 60);
+			initStrTouSpeInte(10, 120, 10, 60);
 			initWisLibSensCor(60, 100, 50, 0);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
@@ -181,7 +181,7 @@ public class Alraune extends Monster
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 24;
+			this.level = 28;
 			this.gems = rand(20) + 5;
 			this.drop = new WeightedDrop().
 			add(consumables.RAUNENECT,7).

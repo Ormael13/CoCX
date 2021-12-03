@@ -26,18 +26,14 @@ import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.NPCs.Syth;
 import classes.Scenes.NPCs.Rangiku;
 import classes.Scenes.NPCs.Veronika;
+import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
-
-//import classes.Scenes.Places.HeXinDao.*;
-//import classes.Items.Armor;
-//import classes.Scenes.Dungeons.DeepCave.ValaScene;
 
 public class HeXinDao extends BaseContent
 {
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
     public var neisaScene:NeisaFollower = new NeisaFollower();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
-	public var journeytotheeast:JourneyToTheEast = new JourneyToTheEast();
     public var riverdungeon:RiverDungeon = new RiverDungeon();
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
 
@@ -89,7 +85,7 @@ public class HeXinDao extends BaseContent
 		clearOutput();
 		outputText("The local restaurant seems to be offering some speciality food and best of all; it's free! Some " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + "-morphs are passing it all over for extra thematics. You proceed to grab a plate of these strange ravioli the people calls jiǎozi, taking the rice dessert they call niángāo right after. The meal is comforting and you would believe everything in Mareth was going fine right now if not for the reddish stormy sky in the far distance which contrasts these festivities.");
 		player.refillHunger(50);
-		cheatTime2(30);
+		eachMinuteCount(30);
 		doNext(riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing():void {
@@ -179,7 +175,7 @@ public class HeXinDao extends BaseContent
 			else addButtonDisabled(4, "Dungeon", "You need to find someone to form a party with you if you wish to enter!");
 		}
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
-        addButton(6, "JourTTEast", journeytotheeast.enteringInn);
+        addButton(6, "JourTTEast", SceneLib.journeyToTheEast.enteringInn);
         addButton(7, "Arena", soularena);
         addButton(8, "Restaurant", restaurantShiraOfTheEast);
 		addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
@@ -1149,7 +1145,7 @@ public function soularena():void {
 			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
 		}
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
-			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down by two thirds of the total. 500 gems and it's yours.</i>\"");
+			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down to ine sixth of the total. 500 gems and it's yours.</i>\"");
 			if (player.gems > 499) addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
 			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
 		}

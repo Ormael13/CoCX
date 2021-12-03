@@ -48,10 +48,10 @@ public class CombatTeases extends BaseCombatContent {
 			outputText("He is too focused on your eyes to pay any attention to your teasing moves, <b>looks like you'll have to beat him up.</b>\n\n");
 			return;
 		}
-		combat.wrathregeneration();
-		combat.fatigueRecovery();
-		combat.manaregeneration();
-		combat.soulforceregeneration();
+		combat.wrathregeneration1();
+		combat.fatigueRecovery1();
+		combat.manaregeneration1();
+		combat.soulforceregeneration1();
 		if (monster.lustVuln == 0) {
 			outputText("You do your best to tease " + monster.a + monster.short + " with your body but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			enemyAI();

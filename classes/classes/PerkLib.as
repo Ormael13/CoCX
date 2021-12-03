@@ -428,8 +428,8 @@ public class PerkLib
 				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.",
 				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.");
 		public static const TaintedMagazine:PerkType = mk("Tainted Magazine", "Tainted Magazine",
-				"Increase reload cost by 10 and doubles max ammo (200% of base ammo count).",
-				"You've chosen the 'Tainted Magazine' perk. Increase reload cost by 10 and doubles max ammo (200% of base ammo count).");
+				"Increase reload cost by 2 and doubles max ammo (200% of base ammo count).",
+				"You've chosen the 'Tainted Magazine' perk. Increase reload cost by 2 and doubles max ammo (200% of base ammo count).");
 		public static const PrimedClipWarp:PerkType = mk("Primed Clip Warp", "Primed Clip Warp",
 				"Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.",
 				"You've chosen the 'Primed Clip Warp' perk. Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.");
@@ -540,7 +540,7 @@ public class PerkLib
 				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
 				"You've chosen the 'Apex' perk. Further increasing your specialisation into a unique race and increasing racial skill power by 50%.");
 		public static const ApprenticeGolemMaker:PerkType = mk("Apprentice Golem Maker", "Apprentice Golem Maker",
-				"Your proficiency in making golems allows to decrease by 10 mana cost of their creation, lower by 5% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
+				"Your proficiency in making golems allows to decrease by 10 mana cost of their creation, lower by 2% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
 				"You've chosen the 'Apprentice Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ArcanePoolI:PerkType = mk("Arcane Pool I", "Arcane Pool I",
 				"+3 extra mana per point of intelligence and wisdom.",
@@ -663,7 +663,7 @@ public class PerkLib
 				"Increases maximum wrath by 75.",
 				"You've chosen the 'Basic Tranquilness' perk. Thanks to your basic anger managment training, your maximum wrath has been increased by 75!");
 		public static const BeginnerGolemMaker:PerkType = mk("Beginner Golem Maker", "Beginner Golem Maker",
-				"Your proficiency in making golems allows to lower by 5% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
+				"Your proficiency in making golems allows to lower by 2% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
 				"You've chosen the 'Beginner Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const Battleflash:PerkType = mk("Battleflash", "Battleflash",
 				"Start every battle with Blink enabled, if you meet Black Magic requirements before it starts.",
@@ -688,22 +688,22 @@ public class PerkLib
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.\n");
 		public static const BiggerGolemBagI:PerkType = mk("Bigger Golem Bag I", "Bigger Golem Bag I",
-				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag I' perk, increasing your golems bag.");
 		public static const BiggerGolemBagII:PerkType = mk("Bigger Golem Bag II", "Bigger Golem Bag II",
-				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag II' perk, increasing your golems bag.");
 		public static const BiggerGolemBagIII:PerkType = mk("Bigger Golem Bag III", "Bigger Golem Bag III",
-				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag III' perk, increasing your golems bag.");
 		public static const BiggerGolemBagIV:PerkType = mk("Bigger Golem Bag IV", "Bigger Golem Bag IV",
-				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag IV' perk, increasing your golems bag.");
 		public static const BiggerGolemBagV:PerkType = mk("Bigger Golem Bag V", "Bigger Golem Bag V",
-				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag V' perk, increasing your golems bag.");
 		public static const BiggerGolemBagVI:PerkType = mk("Bigger Golem Bag VI", "Bigger Golem Bag VI",
-				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag VI' perk, increasing your golems bag.");
 		public static const BladeBarrier:PerkType = mk("Blade Barrier", "Blade Barrier",
 				"Chance to parry is further increased by +15% when dual wielding.",
@@ -1102,70 +1102,70 @@ public class PerkLib
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 9.",
 				"You've chosen the 'Elemental Contract Rank 9' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank10:PerkType = mk("Elemental Contract Rank 10", "Elemental Contract Rank 10",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 9th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 9th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 10' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank11:PerkType = mk("Elemental Contract Rank 11", "Elemental Contract Rank 11",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 8th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 8th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 11' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank12:PerkType = mk("Elemental Contract Rank 12", "Elemental Contract Rank 12",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 7th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 7th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 12' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank13:PerkType = mk("Elemental Contract Rank 13", "Elemental Contract Rank 13",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 6th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 6th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 13' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank14:PerkType = mk("Elemental Contract Rank 14", "Elemental Contract Rank 14",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 5th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 5th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 14' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank15:PerkType = mk("Elemental Contract Rank 15", "Elemental Contract Rank 15",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 4th Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 4th Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 15' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank16:PerkType = mk("Elemental Contract Rank 16", "Elemental Contract Rank 16",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 3rd Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 3rd Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 16' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank17:PerkType = mk("Elemental Contract Rank 17", "Elemental Contract Rank 17",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 2nd Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 2nd Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 17' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank18:PerkType = mk("Elemental Contract Rank 18", "Elemental Contract Rank 18",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 1st Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to 1st Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 18' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank19:PerkType = mk("Elemental Contract Rank 19", "Elemental Contract Rank 19",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to Grand Elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to Grand Elder rank.",
 				"You've chosen the 'Elemental Contract Rank 19' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank20:PerkType = mk("Elemental Contract Rank 20", "Elemental Contract Rank 20",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Low) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Low) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 20' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank21:PerkType = mk("Elemental Contract Rank 21", "Elemental Contract Rank 21",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Mid) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Mid) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 21' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank22:PerkType = mk("Elemental Contract Rank 22", "Elemental Contract Rank 22",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Advanced) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Advanced) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 22' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank23:PerkType = mk("Elemental Contract Rank 23", "Elemental Contract Rank 23",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Peak) Lord rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Peak) Lord rank.",
 				"You've chosen the 'Elemental Contract Rank 23' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank24:PerkType = mk("Elemental Contract Rank 24", "Elemental Contract Rank 24",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Low) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Low) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 24' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank25:PerkType = mk("Elemental Contract Rank 25", "Elemental Contract Rank 25",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Mid) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Mid) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 25' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank26:PerkType = mk("Elemental Contract Rank 26", "Elemental Contract Rank 26",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Advanced) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Advanced) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 26' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank27:PerkType = mk("Elemental Contract Rank 27", "Elemental Contract Rank 27",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Peak) Baron rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Peak) Baron rank.",
 				"You've chosen the 'Elemental Contract Rank 27' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank28:PerkType = mk("Elemental Contract Rank 28", "Elemental Contract Rank 28",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Low) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Low) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 28' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank29:PerkType = mk("Elemental Contract Rank 29", "Elemental Contract Rank 29",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Mid) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Mid) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 29' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank30:PerkType = mk("Elemental Contract Rank 30", "Elemental Contract Rank 30",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Advanced) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Advanced) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 30' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank31:PerkType = mk("Elemental Contract Rank 31", "Elemental Contract Rank 31",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 3. Allow to rank-up summoned elementals to (Peak) Viscount rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to (Peak) Viscount rank.",
 				"You've chosen the 'Elemental Contract Rank 31' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethAdvanced:PerkType = mk("Elements of Mareth: Advanced", "Elements of Mareth: Advanced",
 				"You can now summon and command poison, purity and corruption elementals. Also increase elementals command limit by 1.",
@@ -2652,13 +2652,13 @@ public class PerkLib
 				"Add speed based scaling of melee attacks when using smaller than large weapon(s).",
 				"You've chosen the 'Speed Demon' perk, allowing you to use your speed when attacking with smaller than large melee weapons.");
 		public static const SpeedyRecovery:PerkType = mk("Speedy Recovery", "Speedy Recovery",
-				"Regain fatigue +50% out of combat / +100% in combat faster.",
+				"Regain fatigue +50% faster.",
 				"You've chosen the 'Speedy Recovery' perk, boosting your fatigue recovery rate!");
 		public static const SpeedyRecuperation:PerkType = mk("Speedy Recuperation", "Speedy Recuperation",
-				"Regain fatigue +100% out of combat / +200% in combat faster.",
+				"Regain fatigue +100% faster.",
 				"You've chosen the 'Speedy Recuperation' perk, boosting your fatigue recovery rate!");
 		public static const SpeedyRejuvenation:PerkType = mk("Speedy Rejuvenation", "Speedy Rejuvenation",
-				"Regain fatigue +200% out of combat / +400% in combat faster.",
+				"Regain fatigue +200% faster.",
 				"You've chosen the 'Speedy Rejuvenation' perk, boosting your fatigue recovery rate!");
 		public static const Spellarmor:PerkType = mk("Spellarmor", "Spellarmor",
 				"Start every battle with Charge Armor enabled, if you meet White Magic requirements before it starts.",
@@ -5133,7 +5133,7 @@ public class PerkLib
 					.requirePerk(JobSoulCultivator)
 					.requireWis(40)
                     .requireLevel(6);
-            ChurchOfTheGun.requirePerk(JobGunslinger)
+            AlchemicalCartridge.requirePerk(JobGunslinger)
 					.requireWis(30)
                     .requireTou(25)
                     .requireInt(20)
@@ -5195,7 +5195,7 @@ public class PerkLib
                     .requireTou(30)
                     .requireSpe(25)
                     .requireLevel(12);
-            AlchemicalCartridge.requirePerk(ChurchOfTheGun)
+            ChurchOfTheGun.requirePerk(AlchemicalCartridge)
 					.requireWis(35)
                     .requireTou(30)
                     .requireInt(25)

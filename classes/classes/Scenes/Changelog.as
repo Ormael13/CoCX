@@ -117,7 +117,28 @@ package classes.Scenes
 			outputText("<b>Version 0.8s3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Frost Wyrm\n");
 			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 10% caps for mutagen, alchemic, knowledge multi.\n");
+			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
+			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
+			outputText("-Jiangshi PC aside not able to equip melee/range weapons, shields, armors and underwear will now not be able to equip two more items types: head jewelry and vehicles.\n");
+			outputText("-Ingnam Thiefs post fight win options and giving gems scenes would take less time: from 1 hour down to 15 minutes. Gems reward for beating them increased a bit too.\n");
+			outputText("-Exploring Ingnam would also take only 15 minutes. Working at farm could make PC gain 10 not 15 fatigue and gain 5 more gems. Trading Post can buy items form PC too now but at 1/3 of it orginal price (that not the price they sell those items at).\n");
+			outputText("-New items added in Ingnam: Heal Pill, Incese of Wisdom, Agility Elixir, ManUp Beer added to trading post; Healing herb, Moonlight grass added to alchemist, Ringtail fig to Black Market.\n");
+			outputText("-Luna talk scenes takes 15 min now and not sends PC back to main camp menu. In choice after nuring added lust req. for 1st option that will be greyed out if pc lust is too low.\n");
+			outputText("-Charge special will be unusable if PC not have enough fatigue to use it.\n");
+			outputText("-Added affecion/addition gains on first milestone scene with Marble. Added her Affection on Stats page (NPC's subpage).\n");
+			outputText("-Tainted Magazine perk increase cost of reload by 2 (down from 10). Default reload cost decreased from 20 to 4.\n");
+			outputText("-Job: Gunslinger, Amateur Gunslinger, Expert Gunslinger, Master Gunslinger perks increase fatigue recovery by 1 each. Perks Alchemical Cartridge and Church of the gun by 2/3. Both perks for scaling dmg based on int/wis are also switched.\n");
+			outputText("-Removed some unneded stats tracked on combat subpage.\n");
+			outputText("-Backpack prices dropped 4 times. And small/medium sized ones can be bought at Oswald pawn shop too.\n");
+			outputText("-Konstantin talk options takes each 5 min now.\n");
+			outputText("-Diana combat use of Heal having now cooldown of 2 turns (so she will no longer ends keep healing herself when below 20% of HP until running out of the mana).\n");
+			outputText("-Shouldra recruitment moved from morning to time during the day (between 10 and 18) to prevent some weirdness with other events triggering at the morning.\n");
+			outputText("-Added out of combat fatigue recovery. In combat fatigue recovery due to that been increased twicefold. Both fatigue recovery rates can be checked on stats page / combat subpage.\n");
+			outputText("-Imp Skulls, Feral Imp Skulls, Minotaur Horns and Demon Skulls could be now stored in special bag given at joining / promotion in Adventure Guild. Adventures with Copper plate can store in it two items and those that have already Iron plate can store 4 types of items. In both cases bag limit is 10 items of the same type. PC can freely put in and take out them from the bag.");
+			outputText("When turning in one of those four quest items they will be first taken form quest itme bag and then if PC not have enough of them in bag from inventory.\n");
+			outputText("-Jtex numerous fixes, including Neisa bug after bad end, Valeria conflicy with Jiangshi.\n");
+			outputText("-Zetta fixes.\n");
 			outputText("-Liadri many small changes.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -129,10 +150,52 @@ package classes.Scenes
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
-			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
-			outputText("-Jiangshi PC aside not able to equip melee/range weapons, shields, armors and underwear will now not be able to equip two more items types: head jewelry and vehicles.\n");
-			outputText("-Jtex numerous fixes.\n");
+			outputText("-Fletching table accessable at Elven Village. Allow to: improve bow string. Each of those options increase damage of shoot arrows and are act like multiplier bonuses that can stack on each other.\n");//craft special arrows, , reinforce bow
+			outputText("-Added option to put in golem cores into bag for cores without need to first make temporal golem and then using it.\n");
+			outputText("-Snippler rempains moved from Deepwoods to Plains, M1 Cerberus remains moved to Swamp from Forest and Desert Eagle remains req. lvl 6+ to found them at the Desert.\n");
+			outputText("-Counters for all materials (wood, stones, nails, etc.) would be visible at all times.\n");
+			outputText("-Forest area been split into two that have only partialy shared encounters. Exploring both count toward one shared coutner of forest exploration.\n");
+			outputText("-Demonic Scythe upgrade at (pure) Celess unlocked.\n");
+			outputText("-Slight shuffling buttons in explore menu with adding greyed out buttons telling how to unlock that area (at least which area to explore to get it but not telling min lvl for that - that would be too easy would it?)\n");
+			outputText("-Selected enemies in Forest/Deepwoods area got either slight decrease in lvl or increased lvl (with buffed a bit stats).\n");
+			outputText("-Charge p.special base fatigue cost been lowered to 40% from 60%.\n");
+			outputText("-Kitsune sisters now are starting as 4 tailed kitsunes. Similar to Izumi, Priscilla or Akbal they can now lvl up up to lvl 37.\n");
+			outputText("-Chicken Harpy can be found from Places after PC meet her twice/used exchange option for ovi elixirs twice.\n");
+			outputText("-Temporal golems base dmg and bonus from charged core perks been doubled. Also capacity for temporal golems and golem cores bag gained from perks possible to pick before lvl 24 been increased (since golemancer should use alot of them before getting to stage of using perm ones it feels tough to just have like 5-7 of them only ready to use).\n");
+			outputText("-Battlefield now have two subareas (Boundary) and (Outer). First is for lower lvl enemies and 2nd got some tougher ones including ghost type enemies (which can give a bit of pain to pure phys fighters ;) )\n");
+			outputText("-When playing on diff higher than normal, with secondary stats higher than lowest one, NG+ or higher tier enemy regeneration will not be scaling proportional to enemy max hp increase (meaning it will be bit lower than it should be normaly).\n");
+			outputText("-Time after which Sidone can go gather wood with PC increased by 24 hours.\n");
+			outputText("-2nd Gauntlet 3rd and 4th enemy been bit tweaked to make it not so randomn or tough enemy. That too early to throw such tough cookies at PC.\n");
+			outputText("-Job: Elemental Conjuer and other three perks that unlock additional types of elementals to summon giving now 1 more slots for summoning elementals.\n");
+			outputText("-All Elemental Contract (Rank 1-31) will increase amount of summonable elementals only by 1.\n");
+			outputText("-Increase wood/stones (300 > 400, 900 > 1200) and nails (200 > 250, 600 > 750) storage sizes.\n");
+			outputText("-HB Mech can be only bought once now from Dinah after PC buy and have equipped HB armor and HB helmet.\n");
+			outputText("-HB Helmet height req. been increased to match the one for HB Armor or HB Mech: 7+ ft tall.\n");
+			outputText("-Tier 2 white/black magic spells dmg increased (from ~1,5x) to be roughly ~3x of tier 1 spells. Tier 3 spells power been normalized to both deal similar amount of dmg of ~12x dmg of tier 1 (that mean meteor shower spell lost 1/3 power to match dmg done by polar midnight).\n");
+			outputText("-Resource generation been chganged from been given each hour to be given per minutes that passed (ofc that mean per minute PC in theory getting less resources but can't have tiem ingame progress by 1 minute only (least is 5 min progress). Player info page have updated amount generated per 5 min.\n");
+			outputText("-Due to option to ascend without starting harder ng+ game to perm Nine-tails Kitsune of Balance perk is req. additional thing: been on 2nd ascension (which increase difficulty of the game).\n");
+			outputText("-Inscribed Spellblade req. to finish 1st main storyline dungeon instead of 2nd.\n");
+			outputText("-Clearing out Factory can be achieved after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -140,10 +203,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories, Sextuple Thrust cooldown frozen, Woodcutting location in Places req. 3x more visits that Quarry, White Book teaching few spells at once, penatly to acc for melee weapons applied even if PC not use deal melee weapons, ");
+			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -154,8 +218,13 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
-			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -217,7 +286,20 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -244,6 +326,18 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
