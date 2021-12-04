@@ -27,16 +27,21 @@ public class PerkMenu extends BaseContent {
 	public function PerkMenu() {
 	}
 	public function displayPerks(e:MouseEvent = null):void {
-		var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks (Total: " + player.perks.length + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}
 		else{
-			while(temp < player.perks.length) {
-				outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
-				temp++;
+			var perkList:Array = player.perks;
+			for each (var temp:PerkClass in perkList){
+				try{
+					outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
+
+				} catch (error:Error) {
+					outputText(temp.perkName + " has encountered a problem. PLEASE REPORT THIS.");
+					trace("Something about " + temp.perkName + " is broken. Might wanna check that?");
+				}
 			}
 		}
 
