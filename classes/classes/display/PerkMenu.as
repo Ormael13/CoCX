@@ -1084,15 +1084,15 @@ public class PerkMenu extends BaseContent {
 
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
-		//var allPerks:Array = CoC.instance.perkTree.listUnlocks()
-		/*
 		var mutationList:Array = MutationsLib.mutationsArray("",true);
+		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
-			if (mutationList.indexOf(pPerks) >= 0){
-				allPerks.splice(allPerks.indexOf(pPerks), 1);
+			if (!(mutationList.indexOf(pPerks) >= 0)){
+				//allPerks.splice(allPerks.indexOf(pPerks), 1);
+				temp.push(pPerks)
 			}
 		}
-		*/
+		allPerks = temp;
 		clearOutput();
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
