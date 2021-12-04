@@ -5,20 +5,8 @@
 package classes.Scenes
 {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
+
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.Alraune;
@@ -53,12 +41,17 @@ import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
+import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
+
+import classes.Scenes.Metamorph;
+import classes.GeneticMemories.*;
 
 use namespace CoC;
 
@@ -79,7 +72,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.SoulTyrant)) dailySoulforceUsesLimit++;
 			if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1830\n");
+			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 2330\n");
 			if (player.hasPerk(PerkLib.Dantain)) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 0) player.addPerkValue(PerkLib.Dantain, 1, 1);
 				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 1) player.addPerkValue(PerkLib.Dantain, 1, 1);
@@ -100,19 +93,18 @@ use namespace CoC;
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
 		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
-			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) outputText(""+player.statusEffectv1(StatusEffects.TribulationCountdown)+"\n");
 		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
 					outputText("<b>TelAdre Tripxi Guns 1 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) + " (Dart pistol)\n");
-					outputText("<b>TelAdre Tripxi Guns 1 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 1 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) + " (Double barreled dragon gun)\n");
 					outputText("<b>TelAdre Tripxi Guns 1 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns1) + "\n");
 				}
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) {
 					outputText("<b>TelAdre Tripxi Guns 2 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) + " (M1 Cerberus)\n");
 					outputText("<b>TelAdre Tripxi Guns 2 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) + " (Twin Dart pistol)\n");
-					outputText("<b>TelAdre Tripxi Guns 2 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 2 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) + " (Lactoblasters)\n");
 					outputText("<b>TelAdre Tripxi Guns 2 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns2) + "\n");
 				}
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) {
@@ -144,7 +136,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
 			if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(1, "Contemplate", DaoContemplations).hint("Dao Contemplations");
-			else addButtonDisabled(1, "???", "Req. to succesfully survive 1st Tribulation.");
+			else addButtonDisabled(1, "???", "Req. to successfully survive 1st Tribulation.");
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
 				addButton(2, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
 				addButton(3, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
@@ -158,7 +150,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
 				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
-				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
+				else addButton(6, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 			}
 			else addButtonDisabled(6, "???", "Req. Metamorph.");
 			if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
@@ -204,7 +196,7 @@ use namespace CoC;
 				if (cLvlTier == 3) cLvlTier = 0;
 				if (!lNeed){
 					if (flags[kFLAGS.SOUL_CULTIVATION] >=4){
-						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name;
+						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name();
 					}
 				}
 				pLvl += 2;
@@ -227,10 +219,10 @@ use namespace CoC;
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
-			//9
+			addButton(9, "FixJiangshi", jiangshiBuggedItemsCleanUpCrew0).hint("Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
-			addButton(12, "Atlach Test", SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG).hint("Trigger Atlach scenes.");
+			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -241,16 +233,67 @@ use namespace CoC;
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
 			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
-			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
+			addButton(5, "QuestItBag", AddMaxBackpack2).hint("Giving missing Quest Items Bag as part of Adventure Guild welcome/promotion package.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			//8
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) addButton(8, ":Re", AddMaxBackpack5).hint("Rewind Evangeline.");
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			addButton(10, "All4HiddenPrestige", AddMaxBackpack03).hint("A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
 			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew0():void {
+			if (player.weapon != WeaponLib.FISTS) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+					player.setWeapon(WeaponLib.FISTS);
+					jiangshiBuggedItemsCleanUpCrew1();
+				}
+				else inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew1);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew1);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew1():void {
+			if (player.weaponRange != WeaponRangeLib.NOTHING) inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew2);
+			else doNext(jiangshiBuggedItemsCleanUpCrew2);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew2():void {
+			if (player.shield != ShieldLib.NOTHING) {
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+					player.setShield(ShieldLib.NOTHING);
+					jiangshiBuggedItemsCleanUpCrew3();
+				}
+				else inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew3);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew3);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew3():void {
+			if (player.armor != ArmorLib.NOTHING) {
+				if (player.armorName == "goo armor") player.armor.removeText();
+				inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew4);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew4():void {
+			if (player.lowerGarment != UndergarmentLib.NOTHING) {
+				inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew5);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew5);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew5():void {
+			if (player.upperGarment != UndergarmentLib.NOTHING) {
+				inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew6);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew6);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew6():void {
+			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+			player.setHeadJewelry(headjewelries.JIANGCT);
+			player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
+			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack033():void {
 			outputText("\n\nFix completed");
@@ -261,6 +304,7 @@ use namespace CoC;
 		public function AddMaxBackpack03():void {
 			outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobArchpriest)) player.createPerk(PerkLib.PrestigeJobArchpriest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
@@ -268,6 +312,7 @@ use namespace CoC;
 			if (!player.hasPerk(PerkLib.PrestigeJobSentinel)) player.createPerk(PerkLib.PrestigeJobSentinel, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) player.createPerk(PerkLib.PrestigeJobSoulArtMaster, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSpellKnight)) player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobStalker)) player.createPerk(PerkLib.PrestigeJobStalker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobTempest)) player.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
@@ -300,8 +345,16 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			if (player.hasKeyItem("Fenrir Collar") >= 0) player.removeKeyItem("Fenrir Collar");
-			player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 10) {
+				AdventurerGuild.Slot01Cap = 10;
+				AdventurerGuild.Slot02Cap = 10;
+			}
+			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.Slot03Cap < 10) {
+				AdventurerGuild.Slot01Cap = 10;
+				AdventurerGuild.Slot02Cap = 10;
+				AdventurerGuild.Slot03Cap = 10;
+				AdventurerGuild.Slot04Cap = 10;
+			}
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
@@ -314,6 +367,25 @@ use namespace CoC;
 				outputText("Get a Life... i mean Wendigo Psychosis...");
 				doNext(submenucuzwhynot);
 			}
+		}
+		public function AddMaxBackpack5():void {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
+			if (flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] > 0) flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] = 0;
+			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] > 0) flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
+			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 0;
+			if (flags[kFLAGS.EVANGELINE_02330] > 0) flags[kFLAGS.EVANGELINE_02330] = 0;
+			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
+			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
+			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
+			outputText("Rewind Evangeline ^^");
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack6():void {
+			var floor:Number = rand(3);
+			floor *= 5;
+			floor += 80;
+			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, floor, 0, 0, 0);
+			SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG();
 		}
 		public function TestDynamicStats():void {
 			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
@@ -392,227 +464,52 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function AllMetamorphOptionsUnlock():void {
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedScales)) player.createStatusEffect(StatusEffects.UnlockedScales,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedChitin)) player.createStatusEffect(StatusEffects.UnlockedChitin,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) player.createStatusEffect(StatusEffects.UnlockedDragonScales,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedTattoed)) player.createStatusEffect(StatusEffects.UnlockedTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) player.createStatusEffect(StatusEffects.UnlockedBattleTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) player.createStatusEffect(StatusEffects.UnlockedLightningTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) player.createStatusEffect(StatusEffects.UnlockedScarTattoed,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFishGills)) player.createStatusEffect(StatusEffects.UnlockedFishGills,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanLowerBody)) player.createStatusEffect(StatusEffects.UnlockedHumanLowerBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) player.createStatusEffect(StatusEffects.UnlockedHumanSkin,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanArms)) player.createStatusEffect(StatusEffects.UnlockedHumanArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanFace)) player.createStatusEffect(StatusEffects.UnlockedHumanFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanTongue)) player.createStatusEffect(StatusEffects.UnlockedHumanTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanEyes)) player.createStatusEffect(StatusEffects.UnlockedHumanEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanEars)) player.createStatusEffect(StatusEffects.UnlockedHumanEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) player.createStatusEffect(StatusEffects.UnlockedHumanHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) player.createStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoGills)) player.createStatusEffect(StatusEffects.UnlockedHumanNoGills,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoAntennae)) player.createStatusEffect(StatusEffects.UnlockedHumanNoAntennae,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns)) player.createStatusEffect(StatusEffects.UnlockedHumanNoHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoWings)) player.createStatusEffect(StatusEffects.UnlockedHumanNoWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail)) player.createStatusEffect(StatusEffects.UnlockedHumanNoTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody)) player.createStatusEffect(StatusEffects.UnlockedHumanNoRearBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody)) player.createStatusEffect(StatusEffects.UnlockedFoxLowerBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxArms)) player.createStatusEffect(StatusEffects.UnlockedFoxArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxEars)) player.createStatusEffect(StatusEffects.UnlockedFoxEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail)) player.createStatusEffect(StatusEffects.UnlockedFoxTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxFace)) player.createStatusEffect(StatusEffects.UnlockedFoxFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxEyes)) player.createStatusEffect(StatusEffects.UnlockedFoxEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd)) player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd)) player.createStatusEffect(StatusEffects.UnlockedFoxTail3rd,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail4th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail5th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail6th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms)) player.createStatusEffect(StatusEffects.UnlockedKitsuneArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTail)) player.createStatusEffect(StatusEffects.UnlockedDemonTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonHorns)) player.createStatusEffect(StatusEffects.UnlockedDemonHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge)) player.createStatusEffect(StatusEffects.UnlockedDemonTonuge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels)) player.createStatusEffect(StatusEffects.UnlockedDemonHighHeels,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonClawedLegs)) player.createStatusEffect(StatusEffects.UnlockedDemonClawedLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTinyBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonTinyBatWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardLegs)) player.createStatusEffect(StatusEffects.UnlockedLizardLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) player.createStatusEffect(StatusEffects.UnlockedLizardArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardTail)) player.createStatusEffect(StatusEffects.UnlockedLizardTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardEyes)) player.createStatusEffect(StatusEffects.UnlockedLizardEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardEars)) player.createStatusEffect(StatusEffects.UnlockedLizardEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardFace)) player.createStatusEffect(StatusEffects.UnlockedLizardFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae)) player.createStatusEffect(StatusEffects.UnlockedBeeAntennae,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeArms)) player.createStatusEffect(StatusEffects.UnlockedBeeArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeLegs)) player.createStatusEffect(StatusEffects.UnlockedBeeLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeTail)) player.createStatusEffect(StatusEffects.UnlockedBeeTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedBeeWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedBeeWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyLegs)) player.createStatusEffect(StatusEffects.UnlockedHarpyLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyTail)) player.createStatusEffect(StatusEffects.UnlockedHarpyTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyArms)) player.createStatusEffect(StatusEffects.UnlockedHarpyArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) player.createStatusEffect(StatusEffects.UnlockedHarpyHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyWings)) player.createStatusEffect(StatusEffects.UnlockedHarpyWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfinEars)) player.createStatusEffect(StatusEffects.UnlockedElfinEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes)) player.createStatusEffect(StatusEffects.UnlockedSpiderFourEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderFangs)) player.createStatusEffect(StatusEffects.UnlockedSpiderFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderArms)) player.createStatusEffect(StatusEffects.UnlockedSpiderArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderLegs)) player.createStatusEffect(StatusEffects.UnlockedSpiderLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderTail)) player.createStatusEffect(StatusEffects.UnlockedSpiderTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDriderLegs)) player.createStatusEffect(StatusEffects.UnlockedDriderLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth)) player.createStatusEffect(StatusEffects.UnlockedSharkTeeth,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkTail)) player.createStatusEffect(StatusEffects.UnlockedSharkTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkLegs)) player.createStatusEffect(StatusEffects.UnlockedSharkLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkArms)) player.createStatusEffect(StatusEffects.UnlockedSharkArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkFin)) player.createStatusEffect(StatusEffects.UnlockedSharkFin,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicX2)) player.createStatusEffect(StatusEffects.UnlockedDraconicX2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicX4)) player.createStatusEffect(StatusEffects.UnlockedDraconicX4,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail7th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail8th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail9th,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail)) player.createStatusEffect(StatusEffects.UnlockedSalamanderTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs)) player.createStatusEffect(StatusEffects.UnlockedSalamanderLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms)) player.createStatusEffect(StatusEffects.UnlockedSalamanderArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace)) player.createStatusEffect(StatusEffects.UnlockedSalamanderFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms)) player.createStatusEffect(StatusEffects.UnlockedPhoenixArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings)) player.createStatusEffect(StatusEffects.UnlockedPhoenixWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs)) player.createStatusEffect(StatusEffects.UnlockedOrcaLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaArms)) player.createStatusEffect(StatusEffects.UnlockedOrcaArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaTail)) player.createStatusEffect(StatusEffects.UnlockedOrcaTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaEars)) player.createStatusEffect(StatusEffects.UnlockedOrcaEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaFace)) player.createStatusEffect(StatusEffects.UnlockedOrcaFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole)) player.createStatusEffect(StatusEffects.UnlockedOrcaBlowhole,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue)) player.createStatusEffect(StatusEffects.UnlockedSnakeTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs)) player.createStatusEffect(StatusEffects.UnlockedSnakeFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody)) player.createStatusEffect(StatusEffects.UnlockedSnakeLowerBody,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes)) player.createStatusEffect(StatusEffects.UnlockedSnakeEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeEars)) player.createStatusEffect(StatusEffects.UnlockedSnakeEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGorgonHair)) player.createStatusEffect(StatusEffects.UnlockedGorgonHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes)) player.createStatusEffect(StatusEffects.UnlockedGorgonEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicEars)) player.createStatusEffect(StatusEffects.UnlockedDraconicEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsHuge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes)) player.createStatusEffect(StatusEffects.UnlockedDraconicEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue)) player.createStatusEffect(StatusEffects.UnlockedDraconicTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicFace)) player.createStatusEffect(StatusEffects.UnlockedDraconicFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs)) player.createStatusEffect(StatusEffects.UnlockedDraconicFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs)) player.createStatusEffect(StatusEffects.UnlockedDraconicLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicArms)) player.createStatusEffect(StatusEffects.UnlockedDraconicArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicTail)) player.createStatusEffect(StatusEffects.UnlockedDraconicTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHoofedLegs)) player.createStatusEffect(StatusEffects.UnlockedHoofedLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowTail)) player.createStatusEffect(StatusEffects.UnlockedCowTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowEars)) player.createStatusEffect(StatusEffects.UnlockedCowEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace)) player.createStatusEffect(StatusEffects.UnlockedCowMinotaurFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns)) player.createStatusEffect(StatusEffects.UnlockedCowMinotaurHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedClovenHoofedLegs)) player.createStatusEffect(StatusEffects.UnlockedClovenHoofedLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatTail)) player.createStatusEffect(StatusEffects.UnlockedGoatTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatHorns)) player.createStatusEffect(StatusEffects.UnlockedGoatHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatEars)) player.createStatusEffect(StatusEffects.UnlockedGoatEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilArms)) player.createStatusEffect(StatusEffects.UnlockedDevilArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilFangs)) player.createStatusEffect(StatusEffects.UnlockedDevilFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilEyes)) player.createStatusEffect(StatusEffects.UnlockedDevilEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae)) player.createStatusEffect(StatusEffects.UnlockedMantisAntennae,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisLegs)) player.createStatusEffect(StatusEffects.UnlockedMantisLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisArms)) player.createStatusEffect(StatusEffects.UnlockedMantisArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisTail)) player.createStatusEffect(StatusEffects.UnlockedMantisTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedMantisWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedMantisWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfLegs)) player.createStatusEffect(StatusEffects.UnlockedElfLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfArms)) player.createStatusEffect(StatusEffects.UnlockedElfArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfEars)) player.createStatusEffect(StatusEffects.UnlockedElfEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfEyes)) player.createStatusEffect(StatusEffects.UnlockedElfEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfHair)) player.createStatusEffect(StatusEffects.UnlockedElfHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedElfTongue)) player.createStatusEffect(StatusEffects.UnlockedElfTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniLegs)) player.createStatusEffect(StatusEffects.UnlockedOniLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniArms)) player.createStatusEffect(StatusEffects.UnlockedOniArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniEyes)) player.createStatusEffect(StatusEffects.UnlockedOniEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniEars)) player.createStatusEffect(StatusEffects.UnlockedOniEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniFace)) player.createStatusEffect(StatusEffects.UnlockedOniFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn)) player.createStatusEffect(StatusEffects.UnlockedOniSingleHorn,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns)) player.createStatusEffect(StatusEffects.UnlockedOniTwinHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs)) player.createStatusEffect(StatusEffects.UnlockedRaijuLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuArms)) player.createStatusEffect(StatusEffects.UnlockedRaijuArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuTail)) player.createStatusEffect(StatusEffects.UnlockedRaijuTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuMane)) player.createStatusEffect(StatusEffects.UnlockedRaijuMane,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuFace)) player.createStatusEffect(StatusEffects.UnlockedRaijuFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEars)) player.createStatusEffect(StatusEffects.UnlockedRaijuEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes)) player.createStatusEffect(StatusEffects.UnlockedRaijuEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuHair)) player.createStatusEffect(StatusEffects.UnlockedRaijuHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2)) player.createStatusEffect(StatusEffects.UnlockedRaijuArms2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura)) player.createStatusEffect(StatusEffects.UnlockedRaijuThunderousAura,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBatEars)) player.createStatusEffect(StatusEffects.UnlockedBatEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBatWings)) player.createStatusEffect(StatusEffects.UnlockedBatWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBatCollar)) player.createStatusEffect(StatusEffects.UnlockedBatCollar,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireEars)) player.createStatusEffect(StatusEffects.UnlockedVampireEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireWings)) player.createStatusEffect(StatusEffects.UnlockedVampireWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireFace)) player.createStatusEffect(StatusEffects.UnlockedVampireFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireEyes)) player.createStatusEffect(StatusEffects.UnlockedVampireEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigEars)) player.createStatusEffect(StatusEffects.UnlockedPigEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigTail)) player.createStatusEffect(StatusEffects.UnlockedPigTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigArms)) player.createStatusEffect(StatusEffects.UnlockedPigArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedPigFace)) player.createStatusEffect(StatusEffects.UnlockedPigFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBoarFace)) player.createStatusEffect(StatusEffects.UnlockedBoarFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBoarArms)) player.createStatusEffect(StatusEffects.UnlockedBoarArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcLegs)) player.createStatusEffect(StatusEffects.UnlockedOrcLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcArms)) player.createStatusEffect(StatusEffects.UnlockedOrcArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcFangs)) player.createStatusEffect(StatusEffects.UnlockedOrcFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcEyes)) player.createStatusEffect(StatusEffects.UnlockedOrcEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseFace)) player.createStatusEffect(StatusEffects.UnlockedHorseFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseEars)) player.createStatusEffect(StatusEffects.UnlockedHorseEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseTail)) player.createStatusEffect(StatusEffects.UnlockedHorseTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn)) player.createStatusEffect(StatusEffects.UnlockedUnicornHorn,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) player.createStatusEffect(StatusEffects.UnlockedAlicornWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) player.createStatusEffect(StatusEffects.UnlockedNightmareWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars)) player.createStatusEffect(StatusEffects.UnlockedRedPandaEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace)) player.createStatusEffect(StatusEffects.UnlockedRedPandaFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms)) player.createStatusEffect(StatusEffects.UnlockedRedPandaArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaLegs)) player.createStatusEffect(StatusEffects.UnlockedRedPandaLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaTail)) player.createStatusEffect(StatusEffects.UnlockedRedPandaTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatEars)) player.createStatusEffect(StatusEffects.UnlockedCatEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTail)) player.createStatusEffect(StatusEffects.UnlockedCatTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatLegs)) player.createStatusEffect(StatusEffects.UnlockedCatLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatArms)) player.createStatusEffect(StatusEffects.UnlockedCatArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatFace)) player.createStatusEffect(StatusEffects.UnlockedCatFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatFangs)) player.createStatusEffect(StatusEffects.UnlockedCatFangs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTongue)) player.createStatusEffect(StatusEffects.UnlockedCatTongue,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatEyes)) player.createStatusEffect(StatusEffects.UnlockedCatEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireFace)) player.createStatusEffect(StatusEffects.UnlockedCheshireFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile)) player.createStatusEffect(StatusEffects.UnlockedCheshireSmile,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionEars)) player.createStatusEffect(StatusEffects.UnlockedLionEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars)) player.createStatusEffect(StatusEffects.UnlockedDisplacerEars,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes)) player.createStatusEffect(StatusEffects.UnlockedDisplacerEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms)) player.createStatusEffect(StatusEffects.UnlockedDisplacerArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerBTentacles)) player.createStatusEffect(StatusEffects.UnlockedDisplacerBTentacles,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail1)) player.createStatusEffect(StatusEffects.UnlockedNekomataForkedTail1,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail2)) player.createStatusEffect(StatusEffects.UnlockedNekomataForkedTail2,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) player.createStatusEffect(StatusEffects.UnlockedCatTail2nd,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionMane)) player.createStatusEffect(StatusEffects.UnlockedLionMane,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionLegs)) player.createStatusEffect(StatusEffects.UnlockedLionLegs,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedLionArms)) player.createStatusEffect(StatusEffects.UnlockedLionArms,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedScorpionTail)) player.createStatusEffect(StatusEffects.UnlockedScorpionTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreTail)) player.createStatusEffect(StatusEffects.UnlockedManticoreTail,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedManticoreWingsSmall,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedManticoreWingsLarge,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreFace)) player.createStatusEffect(StatusEffects.UnlockedManticoreFace,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes)) player.createStatusEffect(StatusEffects.UnlockedManticoreEyes,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxWings)) player.createStatusEffect(StatusEffects.UnlockedSphinxWings,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) player.createStatusEffect(StatusEffects.UnlockedSphinxArms,0,0,0,0);/*
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);*/
+			for each (var hairMem: * in HairMem.Memories) {
+				Metamorph.GeneticMemoryStorage[hairMem.id] = true;
+			}
+			for each (var faceMem: * in FaceMem.Memories) {
+				Metamorph.GeneticMemoryStorage[faceMem.id] = true;
+			}
+			for each (var eyesMem: * in EyesMem.Memories) {
+				Metamorph.GeneticMemoryStorage[eyesMem.id] = true;
+			}
+			for each (var earsMem: * in EarsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[earsMem.id] = true;
+			}
+			for each (var armsMem: * in ArmsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[armsMem.id] = true;
+			}
+			for each (var hornsMem: * in HornsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[hornsMem.id] = true;
+			}
+			for each (var skinMem: * in SkinMem.Memories) {
+				Metamorph.GeneticMemoryStorage[skinMem.id] = true;
+			}
+			for each (var skinPatternMem: * in SkinPatternMem.Memories) {
+				Metamorph.GeneticMemoryStorage[skinPatternMem.id] = true;
+			}
+			for each (var tongueMem: * in TongueMem.Memories) {
+				Metamorph.GeneticMemoryStorage[tongueMem.id] = true;
+			}
+			for each (var wingsMem: * in WingsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[wingsMem.id] = true;
+			}
+			for each (var antennaeMem: * in AntennaeMem.Memories) {
+				Metamorph.GeneticMemoryStorage[antennaeMem.id] = true;
+			}
+			for each (var gillsMem: * in GillsMem.Memories) {
+				Metamorph.GeneticMemoryStorage[gillsMem.id] = true;
+			}
+			for each (var rearBodyMem: * in RearBodyMem.Memories) {
+				Metamorph.GeneticMemoryStorage[rearBodyMem.id] = true;
+			}
+			for each (var lowerBodyMem: * in LowerBodyMem.Memories) {
+				Metamorph.GeneticMemoryStorage[lowerBodyMem.id] = true;
+			}
+			for each (var tailMem: * in TailMem.Memories) {
+				Metamorph.GeneticMemoryStorage[tailMem.id] = true;
+			}
+			Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 			doNext(SoulforceCheats);
 		}
 		public function PerkGalore1():void {
@@ -1095,13 +992,14 @@ use namespace CoC;
 			addButton(1, "Add 5 PerkP", AddPerkPoints).hint("Add 5 perk points.");
 			addButton(2, "Sub 10 PerkP", SubPerkPoints).hint("Substract 10 perk points.");
 			addButton(3, "Add Gems 1", AddGems1).hint("Add 100 gems.");
-			addButton(4, "Add Gems 2", AddGems2).hint("Add 1000 gems.");
+			addButton(4, "Add Gems 2", AddGems2).hint("Add 1,000 gems.");
 			addButton(5, "Add EXP 1", AddEXP1).hint("Add 100 EXP.");
-			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
-			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
-			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
-			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(10, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
-			if (player.hasPerk(PerkLib.SoulAncestor)) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
+			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1,000 EXP.");
+			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10,000 EXP.");
+			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100,000 EXP.");
+			addButton(4, "Add Gems 3", AddGems3).hint("Add 10,000 gems.");
+			if (player.hasPerk(PerkLib.SoulAncestor)) addButton(10, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
+			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(11, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
@@ -1515,36 +1413,6 @@ use namespace CoC;
 			outputText("\n\n<b>Etna been De-LvL'd!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
-		public function TribulationPerks():void {
-			if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
-			}
-			doNext(SoulforceCheats);
-		}
-		public function Stage10to12SoulPerks():void {
-			if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				player.removePerk(PerkLib.FleshBodyOverlordStage);
-				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage!)</b>");
-			}
-			if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-				player.removePerk(PerkLib.DaoistOverlordStage);
-				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage!)</b>");
-			}
-			if (player.hasPerk(PerkLib.SoulKing)) {
-				player.removePerk(PerkLib.SoulKing);
-				outputText("\n\n<b>(Lost Perk: Soul King!)</b>");
-			}
-			if (player.hasPerk(PerkLib.SoulEmperor)) {
-				player.removePerk(PerkLib.SoulEmperor);
-				outputText("\n\n<b>(Lost Perk: Soul Emperor!)</b>");
-			}
-			if (player.hasPerk(PerkLib.SoulAncestor)) {
-				player.removePerk(PerkLib.SoulAncestor);
-				outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
-			}
-			doNext(SoulforceCheats);
-		}
 		public function EquipmentMenu(page:int = 1):void {
 			menu();
 			if (page == 1) {
@@ -1573,7 +1441,7 @@ use namespace CoC;
 				//5
 				//6
 				//7
-				//8
+				addButton(8, "CheckWeapon", TestWeaponType).hint("Detect Weapon Type Equiped for sprite and battle testing.");
 				addButton(9, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 				addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
 				addButton(11, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
@@ -1581,7 +1449,7 @@ use namespace CoC;
 				addButton(13, "-1-", EquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
-			
+
 		}
 		public function NonEquipmentMenu(page:int = 1):void {
 			menu();
@@ -1620,12 +1488,19 @@ use namespace CoC;
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
 				addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
 				addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
+				addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 				//addButton(11, "", ).hint("Add 1 .");
 				if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 				addButton(13, "-1-", NonEquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
+
+		private function addConsumable(consumable: Consumable): void {
+			outputText("\n\n<b>(Gained 1 " + consumable.longName + "!)</b>\n\n");
+			inventory.takeItem(consumable, curry(NonEquipmentMenu, 2));
+		}
+
 		public function MaterialMenu(page:int = 1):void {
 			menu();
 			if (page == 1) {
@@ -1672,7 +1547,7 @@ use namespace CoC;
 				addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 				addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 				//addButton(5, "", ).hint("Test fight with .");
-				//addButton(6, "", ).hint("Test fight with .");
+				addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
 				addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 				addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 				addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
@@ -1700,7 +1575,7 @@ use namespace CoC;
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
-		
+
 		public function AddRapPerk():void {
 			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
 			player.createPerk(PerkLib.RapierTraining, 0, 0, 0, 0);
@@ -1819,7 +1694,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
 			inventory.takeItem(necklaces.OBNECK, curry(EquipmentMenu, 2));
 		}
-		
+
 		public function AddFoxJewel():void {
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
 			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
@@ -1888,7 +1763,6 @@ use namespace CoC;
 		}
 		public function AddFTear():void {
 			outputText("\n\n<b>(Gained 1 Fafnir Tear!)</b>\n\n");
-			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isSpearTypeWeapon(),player.isDuelingTypeWeapon()].join());
 			inventory.takeItem(consumables.F_TEAR, curry(NonEquipmentMenu, 2));
 		}
 		public function AddBubble():void {
@@ -1900,7 +1774,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Midnight gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.M_GOSSR, curry(NonEquipmentMenu, 2));
 		}
-		
+
 		public function AddMetalPieces():void {
 			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
@@ -1933,11 +1807,15 @@ use namespace CoC;
 		}
 		public function AddEnergyCore():void {
 			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
-			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
+			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
+			statScreenRefresh();
+			curry(MaterialMenu, 2);
 		}
 		public function AddMechanism():void {
 			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
-			inventory.takeItem(useables.MECHANI, curry(MaterialMenu, 2));
+			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
+			statScreenRefresh();
+			curry(MaterialMenu, 2);
 		}
 		public function AddGolemCore():void {
 			outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
@@ -1955,7 +1833,11 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
 			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
 		}
-		
+
+		public function TestWeaponType():void {
+			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isScytheTypeWeapon(),player.isDuelingTypeWeapon()].join());
+		}
+
 		public function FightTheDummy():void {
 			clearOutput();
 			outputText("Entering battle with The Dummy! Enjoy ^^");
@@ -1966,7 +1848,7 @@ use namespace CoC;
 			outputText("Entering battle with Succubus Gardener! Enjoy ^^");
 			startCombat(new SuccubusGardener());
 		}
-		
+
 		public function AddThickGreenOnnaGossamer():void {
 			outputText("\n\n<b>(Gained 1 Thick Green Onna Gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
@@ -2549,6 +2431,41 @@ use namespace CoC;
 			statScreenRefresh();
 			PerksGemsEXPLvL();
 		}
+		public function AddGems3():void {
+			player.gems = player.gems + 10000;
+			statScreenRefresh();
+			PerksGemsEXPLvL();
+		}
+		public function Stage10to12SoulPerks():void {
+			if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				player.removePerk(PerkLib.FleshBodyOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage!)</b>");
+			}
+			if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+				player.removePerk(PerkLib.DaoistOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage!)</b>");
+			}
+			if (player.hasPerk(PerkLib.SoulKing)) {
+				player.removePerk(PerkLib.SoulKing);
+				outputText("\n\n<b>(Lost Perk: Soul King!)</b>");
+			}
+			if (player.hasPerk(PerkLib.SoulEmperor)) {
+				player.removePerk(PerkLib.SoulEmperor);
+				outputText("\n\n<b>(Lost Perk: Soul Emperor!)</b>");
+			}
+			if (player.hasPerk(PerkLib.SoulAncestor)) {
+				player.removePerk(PerkLib.SoulAncestor);
+				outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
+			}
+			doNext(SoulforceCheats);
+		}
+		public function TribulationPerks():void {
+			if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
+				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
+			}
+			doNext(SoulforceCheats);
+		}
 		public function AddLvL1():void {
 			player.level = player.level + 1;
 			player.statPoints += 5;
@@ -2631,11 +2548,11 @@ use namespace CoC;
 		public function FairyTest():void {
 			clearOutput();
 			outputText("FAIRYTIME ^^");
-			player.faceType = Face.FAIRY;
+			CoC.instance.transformations.FaceFairy.applyEffect(false);
 			player.tongue.type = Tongue.ELF;
 			player.eyes.type = Eyes.FAIRY
 			player.ears.type = Ears.ELVEN
-			player.hairType = Hair.FAIRY;
+			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.tailType = Tail.NONE
 			player.arms.type = Arms.ELF
 			player.lowerBody = LowerBody.ELF;
@@ -2652,6 +2569,11 @@ use namespace CoC;
 			}
 			player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
 			doNext(SoulforceCheats);
+		}
+		public function FightTyrantia():void {
+			clearOutput();
+			outputText("Entering battle with Drider Giantess! Enjoy ^^");
+			startCombat(new Tyrantia());
 		}
 		public function FightZenji():void {
 			clearOutput();
@@ -2927,17 +2849,32 @@ use namespace CoC;
 			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) outputText("Lightning: "+player.statusEffectv1(StatusEffects.DaoOfLightning)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) outputText("Darkness: "+player.statusEffectv1(StatusEffects.DaoOfDarkness)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) outputText("Poison: "+player.statusEffectv1(StatusEffects.DaoOfPoison)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfWind)) outputText("Wind: "+player.statusEffectv1(StatusEffects.DaoOfWind)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) outputText("Blood: "+player.statusEffectv1(StatusEffects.DaoOfBlood)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfWater)) outputText("Water: "+player.statusEffectv1(StatusEffects.DaoOfWater)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) outputText("Earth: "+player.statusEffectv1(StatusEffects.DaoOfEarth)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) outputText("Acid: "+player.statusEffectv1(StatusEffects.DaoOfAcid)+"\n");
 			menu();
-			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 5) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
 			else addButton(0, "Fire", DaoContemplationsEffect, StatusEffects.DaoOfFire, "Fire");
-			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 5) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
 			else addButton(1, "Ice", DaoContemplationsEffect, StatusEffects.DaoOfIce, "Ice");
-			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 5) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
 			else addButton(2, "Lightning", DaoContemplationsEffect, StatusEffects.DaoOfLightning, "Lightning");
-			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 5) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
 			else addButton(3, "Darkness", DaoContemplationsEffect, StatusEffects.DaoOfDarkness, "Darkness");
-			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 5) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
 			else addButton(4, "Poison", DaoContemplationsEffect, StatusEffects.DaoOfPoison, "Poison");
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) addButtonDisabled(5, "Wind", "You reached limit of comprehending this Dao.");
+			else addButton(5, "Wind", DaoContemplationsEffect, StatusEffects.DaoOfWind, "Wind");
+			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 5) addButtonDisabled(6, "Blood", "You reached limit of comprehending this Dao.");
+			else addButton(6, "Blood", DaoContemplationsEffect, StatusEffects.DaoOfBlood, "Blood");
+			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 5) addButtonDisabled(7, "Water", "You reached limit of comprehending this Dao.");
+			else addButton(7, "Water", DaoContemplationsEffect, StatusEffects.DaoOfWater, "Water");
+			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 5) addButtonDisabled(8, "Earth", "You reached limit of comprehending this Dao.");
+			else addButton(8, "Earth", DaoContemplationsEffect, StatusEffects.DaoOfEarth, "Earth");
+			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 5) addButtonDisabled(9, "Acid", "You reached limit of comprehending this Dao.");
+			else addButton(9, "Acid", DaoContemplationsEffect, StatusEffects.DaoOfAcid, "Acid");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		private function DaoContemplationsEffect(statusEffect:StatusEffectType, daoname:String):void {
@@ -2948,18 +2885,28 @@ use namespace CoC;
 				outputText("After session ends you managed to progress in Dao of "+daoname+".");
 				if (player.hasStatusEffect(statusEffect)) {
 					player.addStatusValue(statusEffect, 1, dao);
-					if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
-						player.addStatusValue(statusEffect, 1, -20);
+					if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+						player.addStatusValue(statusEffect, 1, -140);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 5th layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+						player.addStatusValue(statusEffect, 1, -100);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 4th layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+						player.addStatusValue(statusEffect, 1, -60);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 3rd layer.</b>");
 					}
-					if (player.statusEffectv1(statusEffect) > 50 && player.statusEffectv2(statusEffect) == 1) {
-						player.addStatusValue(statusEffect, 1, -50);
+					if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+						player.addStatusValue(statusEffect, 1, -40);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 2nd layer.</b>");
 					}
-					if (player.statusEffectv1(statusEffect) > 130 && player.statusEffectv2(statusEffect) == 2) {
-						player.addStatusValue(statusEffect, 1, -130);
+					if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+						player.addStatusValue(statusEffect, 1, -20);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 1st layer.</b>");
 					}
@@ -2969,6 +2916,34 @@ use namespace CoC;
 			else outputText("After the session ends, you did not manage to make an progress in your comprehension.");
 			outputText("\n\n");
 			doNext(camp.returnToCampUseEightHours);
+		}
+		public function DaoContemplationsEffectClone(statusEffect:StatusEffectType, daoname:String):void {
+			player.addStatusValue(statusEffect, 1, 1);
+			if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+				player.addStatusValue(statusEffect, 1, -140);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 5th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+				player.addStatusValue(statusEffect, 1, -100);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 4th layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+				player.addStatusValue(statusEffect, 1, -60);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 3rd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+				player.addStatusValue(statusEffect, 1, -40);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 2nd layer.</b>");
+			}
+			if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+				player.addStatusValue(statusEffect, 1, -20);
+				player.addStatusValue(statusEffect, 2, 1);
+				outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer.</b>");
+			}
 		}
 		public function SoulforceRegeneration2():void {
 			clearOutput();
@@ -3229,7 +3204,7 @@ use namespace CoC;
 		public function SoulforceGainedFromCultivation1():Number {
 			var cumulativegains:Number = 0;
 			if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
-				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" && player.jewelryName2 == "training soul ring" && player.jewelryName3 == "training soul ring" && player.jewelryName4 == "training soul ring"
 				&& player.weaponFlyingSwordsName == "training soul flying sword") {
 				cumulativegains += 28;//+130% jak wszystkie 13 slotów - każdy kolejny dodany slot dodaje kolejne 10%
 			}
@@ -3255,7 +3230,7 @@ use namespace CoC;
 			return cumulativegains;
 		}
 		public function SoulforceGainedFromCultivation2():void {
-			var bonussoulforce2:Number = 0;//razem może mieć max 1730
+			var bonussoulforce2:Number = 0;//razem może mieć max 2330
 			if (player.weaponName == "training soul axe") bonussoulforce2 += 80;
 			if (player.weaponRangeName == "training soul crossbow") bonussoulforce2 += 50;
 			if (player.shieldName == "training soul buckler") bonussoulforce2 += 60;
@@ -3268,7 +3243,7 @@ use namespace CoC;
 			if (player.jewelryName2 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName3 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName4 == "training soul ring") bonussoulforce2 += 100;
-			if (player.weaponFlyingSwordsName == "training soul flying sword") bonussoulforce2 += 100;
+			if (player.weaponFlyingSwordsName == "training soul flying sword") bonussoulforce2 += 500;
 			if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > 0) {
 				if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2]) flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2];
 				else flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += (bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]);
@@ -4031,7 +4006,13 @@ use namespace CoC;
 			menu();
 			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc).hint("Req. 80+ soulforce");
 			else addButtonDisabled(0, "Tamani", "");
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) {
+				if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
+					if (player.hasCock()) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
+					else addButtonDisabled(1, "Tamani D.", "Req. to have cock of any type.");
+				}
+				else addButtonDisabled(1, "Tamani D.", "Req. to have 16+ (still alive) daughters with Tamani.");
+			}
 			else addButtonDisabled(1, "Tamani D.", "");
 			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion).hint("Req. 90+ soulforce");
 			else addButtonDisabled(2, "KitsuMansion", "");
@@ -4049,7 +4030,7 @@ use namespace CoC;
 			//button 11
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
 			else addButtonDisabled(12, "Giacomo", "");
-			//addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
+			addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {

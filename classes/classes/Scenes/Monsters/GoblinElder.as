@@ -43,11 +43,11 @@ public class GoblinElder extends Goblin
 			//Blind
 			else if (spellChooser == 1 && (mana + spellCostBlind) <= maxMana()) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
-				if ((!player.hasPerk(PerkLib.GorgonsEyes) && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.hasPerk(MutationsLib.GorgonsEyes) && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
-				else if (player.hasPerk(PerkLib.GorgonsEyes)) {
+				else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 				else {

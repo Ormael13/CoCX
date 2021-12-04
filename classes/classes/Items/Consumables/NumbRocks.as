@@ -21,7 +21,6 @@ package classes.Items.Consumables
 			clearOutput();
 			//Numb rocks lower lust significantly but have a chance of inducing the masturbation preventing effect from minotaur.
 			outputText("You pop open the package of numb rocks and dump it into your waiting mouth.  The strange candy fizzes and pops, leaving the nerves on your tongue feeling a bit deadened as you swallow the sweet mess.");
-
 			if (player.lust >= 33) {
 				outputText("\n\nThe numbness spreads through your body, bringing with it a sense of calm that seems to muffle your sexual urges.");
 				player.lust -= 20 + rand(40);
@@ -49,7 +48,7 @@ package classes.Items.Consumables
 			}
 			else if (rand(4) == 0 && player.inte > 15) {
 				outputText("\n\nNumbness clouds your mind, making you feel slow witted and dull.  Maybe these candies weren't such a exceptio... fantas... good idea.");
-				player.addCurse("int", -(1 + rand(5)),1);
+				player.addCurse("int", (1 + rand(5)),1);
 			}
 			if (!player.hasPerk(PerkLib.ThickSkin) && rand(5) == 0) {
 				outputText("Slowly, ");

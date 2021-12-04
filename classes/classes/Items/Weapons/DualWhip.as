@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function DualWhip() 
 		{
-			super("P.Whip ", "P.Whip", "pair of coiled whips", "a pair of coiled whips", "whip-crack", 5, 400, "A pair of coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!", "Dual");
+			super("P.Whip ", "P.Whip", "pair of coiled whips", "a pair of coiled whips", "whip-crack", 5, 400, "A pair of coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!", "Dual, Whipping", "Whip");
 		}
 		
 		override public function get attack():Number {
@@ -23,7 +23,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield)) return true;
+			if (game.player.hasPerk(PerkLib.DualWield)) return super.canUse();
 			outputText("You aren't skilled enough to handle this pair of weapons!  ");
 			return false;
 		}

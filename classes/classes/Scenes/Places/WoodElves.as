@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places{
+package classes.Scenes.Places{
 	import classes.*;
 	import classes.BodyParts.Antennae;
 	import classes.BodyParts.Arms;
@@ -14,13 +14,16 @@
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armors.Nothing;
-import classes.Scenes.SceneLib;
+	import classes.Items.Armors.Nothing;
+	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
+	import classes.Scenes.SceneLib;
 	import classes.internals.SaveableState;
+	import classes.CoC;
 
 	public class WoodElves extends BaseContent implements SaveableState{
 
 		public static var WoodElvesQuest:int;
+		public static const QUEST_STAGE_METELFSANDEVENBEATSTHEM:int = -1;
 		public static const QUEST_STAGE_NOT_STARTED:int = 0;
 		public static const QUEST_STAGE_METELF:int = 1;
 		public static const QUEST_STAGE_LOSTTOELF:int = 2;
@@ -80,7 +83,7 @@ import classes.Scenes.SceneLib;
 					// new save, can load
 					hasTrainedTodayCooldown = o["elfHasTrainedTodayCooldown"];
 				} else {
-					// old save, still need to set NursedCooldown  to something
+					// old save, still need to set Cooldown  to something
 					hasTrainedTodayCooldown = 0;
 				}
 			} else {
@@ -107,6 +110,13 @@ import classes.Scenes.SceneLib;
 			menu();
 			addButton(0, "About elves", AskAboutElves);
 			addButton(1, "Leave", LeaveStartElfFight);
+		}
+		public function findElvesRematch():void {
+			clearOutput();
+			outputText("As you explore the forest you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg holding you in place and slowly attempting to drag you toward what is likely an unsavory moment.");
+			outputText("\n\n\"<i>Good day mister adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
+			outputText("\n\nHell no! <b>IT'S A FIGHT!</b>");
+			startCombat(new WoodElvesHuntingParty());
 		}
 
 		public function AskAboutElves():void {
@@ -137,25 +147,34 @@ import classes.Scenes.SceneLib;
 
 		public function StartElfFight():void {
 			clearOutput();
-			outputText("Fighting the elves is temporarily disabled until the monster is implemented thank you trying out wood elves! ");
-			doNext(camp.returnToCampUseOneHour);
+			outputText("Realising that there is no peaceful way out of this you ready your weapon and prepare for battle. The elves don't seem all too worried after all its you versus an entire group of them and they likely think they can easily overwhelm you. That and they have archers ready to shoot from all directions. This is not going to be a fun fight.");
+			startCombat(new WoodElvesHuntingParty());
+		}
+		public function ElfFightWin():void {
+			clearOutput();
+			outputText("This battle is out of your hands. The moment you manage to defeat an elf another jumps in while a battle medic moves from the back to heal the fallen. You merely manage to create an exit amidst the mayhem and escape safe and sound from them. You will need to be wary of trees and blonde girls from now on seeing as this is unlikely to be the last time you run into them.");
+			WoodElvesQuest = QUEST_STAGE_METELFSANDEVENBEATSTHEM;
+			doNext(cleanupAfterCombat);
+		}
+		public function ElfFightLoose():void {
+			cleanupAfterCombatTFEvent();
+			doNext(YouAreAlreadyElfLose);
 		}
 
 		public function YouAreAlreadyElfSubmit():void {
 			clearOutput();
-			outputText("You decide to let the elven lady proceed. ");
+			outputText("You decide to let the elven lady proceed. The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle");
 			YouAreAlreadyElf1();
 		}
 
 		public function YouAreAlreadyElfLose():void {
 			clearOutput();
-			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. ");
+			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. The elf leader raises an arm as tentacle-like vines whip around you while the elves circling you titter");
 			YouAreAlreadyElf1();
 		}
 
 		public function YouAreAlreadyElf1():void {
-			outputText("The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle among each other. " +
-					"\n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
+			outputText(" among each other. \n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
 					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above," +
 					" presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm" +
 					", golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
@@ -200,13 +219,15 @@ import classes.Scenes.SceneLib;
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.ears.type = Ears.ELVEN;
 			player.eyes.type = Eyes.ELF;
-			player.faceType = Face.ELF;
-			player.tongue.type = Tongue.ELF;
+			CoC.instance.transformations.FaceElf.applyEffect(false);
+			CoC.instance.transformations.TongueElf.applyEffect(false);
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
-			player.hairType = Hair.SILKEN;
+			if (player.legCount != 2) player.legCount = 2;
+			outputText("\n\n");
+			CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
-			player.eyes.colour = "light green";
+			CoC.instance.transformations.EyesChangeColor(["light green"]).applyEffect(false);
 			player.skin.base.color = "light";
 			player.skinAdj = "flawless";
 			player.skinType = Skin.PLAIN;
@@ -399,7 +420,7 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function DemonsTopic():void {
-			clearOutput()
+			clearOutput();
 			outputText("You ask about the elves’ relationship to the Demons." +
 					"\n\nMerisiel answers you first. \"<i>When the demons invaded Mareth it didn’t take them long to find us here in the forest.</i>\" she says, sadly. \"<i>They… changed our Sacred Tree, and when they did we changed with it. We became much more sexually active, and our men mostly turned into women. Those of us that were affected the worst they took with them to be… toys, I suppose, or maybe soldiers; we don’t really know. Since then they’ve left us alone, I’m sure because they know we’re not a threat.</i>\"" +
 					"\n\nAlyssa interjects. \"<i>But we’re not allied with them! We hate Lethice for what she did to our Sacred Tree… even if we, um… kind of enjoy the sex now.</i>\"" +
@@ -581,9 +602,27 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function GroveLayout():void {
-			clearOutput()
+			clearOutput();
 			if (WoodElvesQuest != QUEST_STAGE_PCCAMEBACK){
-				outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME BLA BLA BLA WELCOME");
+				outputText("You walk along the treeline following the way back to the elves as you last remember. You know you are nearing your destination as the familiar sound of running water as the river hits your ears before coming to view." +
+						"You spot the giant tree resting in its clearing before you quickly advance to it. Memories flow through you as you caress its fine bark. A gentle vine stretches out, endearingly caressing you in reciprocation. Your memories guide you as you follow the river back and finally spot the elven houses. You walk on the gravel as a few curious glances turn your way. Their eyes glint with the sparkling green light bouncing off of their glance as the elves take notice of you one after the other." +
+						"\n\nOut of nowhere, you are grabbed from behind as an elf gives you a surprise hug. You flinch softly at the vice-like grip, it's as if they never want to let go of you again. The elf gently loosens her grip as she looks into your eyes. Alyssa stares at you intently before gathering her words." +
+						"\n\n\"<i>Sister [name]! You came back, we all thought you would get captured by demons or worse out there!</i>");
+			if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
+				outputText("\"" +
+				"\n\nUnsurprisingly, Elenwen is not so far behind acting a little confused." +
+						"\n\n\"<i>Alyssa, what's going on? </i>");
+				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i>Who's this?</i>");
+				outputText("<i> Wait, that's actually [name]?! You finally came home! Merisiel is going to be overjoyed!</i>\"" +
+						"\n\nYou pause briefly; that's slightly concerning. You ask what happened with Merisiel." +
+						"\n\n\"<i>Well, ever since you left she's been kind of depressed. She's constantly asking herself over and over if the memory incident was her fault. </i>");
+				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Doesn't matter if you've changed t</i>");
+				else outputText("<i>T</i>");
+				outputText("<i>he mere fact that you are here despite everything is going to cheer her up.</i>\"" +
+						"Before you know it, they organize a whole party just for you. Wine, food, and more discreet pleasures included. Perhaps coming back once in a while would be nice." +
+						" You think out loud. It's just that you need time to yourself. Besides, if you spent all your time here there wouldn't be any time left for your quest." +
+						"\n\nElenwen shrugs before replying to your statement. Guess you have been thinking out loud. \"<i>You're free to come and go. Besides that, you fighting to save the land is something we should be proud of. Who knows, you might even free the blessed tree eventually.</i>\"" +
+						"\n\nFreeing the blessed tree uh… that might be something worth looking into. Regardless, you spend the few remaining hours with them and only leave at dusk promising not only to them but yourself that you will visit once in a while.");
 				WoodElvesQuest = QUEST_STAGE_PCCAMEBACK
 				GroveLayout2(true);
 			}
@@ -593,7 +632,10 @@ import classes.Scenes.SceneLib;
 
 		///ELF VILLAGE SECTION///
 		public function GroveLayout2(isFirstTime:Boolean = false):void {
-			if (!isFirstTime)outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO");
+			if (!isFirstTime)outputText("The elven village is at its usual calm today. Your sisters are playfully frolicking around in the grove. Sewing, swimming, playing music, or in some rare cases training with weapons in the small area dedicated to archery and more martial pursuit." +
+					" This grove is a small oasis of innocence cut away from the rest of Mareth. The elves living their long hedonistic existence on a day-to-day basis without worry or fear." +
+					"\n\nThe only stain amidst this beautiful scenery is the 'blessed' trees at the edge of this settlement which reminds you all too well that if no one steps up and does the fighting even this haven will eventually become corrupted and defiled beyond repair before disappearing from the face of Mareth. You try and keep your mind joyful however not to darken the light of day.");
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" Well, what's left of it… it's hard to get any sun with those damn clouds covering the sky.");
 			menu();
 			addButton(0, "River", River);
 			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
@@ -601,8 +643,7 @@ import classes.Scenes.SceneLib;
 			addButton(1, "Tent", Tent);
 			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(1,"Tent","You need to be an elf.");
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
-			//addButton(2, "Fletching table", Fletching);
-			addButtonDisabled(2,"Fletching table","Under Construction.");
+			addButton(2, "Fletching table", Fletching);
 			addButton(3, "Elenwen", Elenwen);
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
 		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
@@ -615,7 +656,7 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function River():void {
-			clearOutput()
+			clearOutput();
 			if (!player.statStore.hasBuff("Sisterly bathing")) {
 				outputText("You learned to love bathing in this stream during your days spent living with the Wood elves;" +
 						" its clear, cool waters always left you feeling refreshed and clear-headed. More importantly," +
@@ -680,11 +721,11 @@ import classes.Scenes.SceneLib;
 						" resist the urge to join them, for now; you can always find another release later, when you’re a little less busy.")
 				player.dynStats("lus",+30);
 			}
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function Tent():void {
-			clearOutput()
+			clearOutput();
 			outputText("This tent only really gets used for one thing, and it’s just what you want right now. Alyssa and Elenwen notice you entering, and you smile as they glance at each other and leave off their work to follow you in." +
 					" Before long, the three of you are stripped naked and laying together on the bed, already feeling each other up and preparing for the fun you’re about to have." +
 					"\n\n\"<i>This brings back memories, doesn’t it, [name]?</i>\"says Elenwen, smiling nostalgically." +
@@ -748,24 +789,77 @@ import classes.Scenes.SceneLib;
 			player.sexReward("vaginalFluids", "Vaginal")
 			player.trainStat("lib", +1, 80);
 			CoC.instance.timeQ = 1;
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function Fletching():void {
-			clearOutput()
-			outputText("TEMPORARY PLACEHOLDER STUB FLETCHING TABLE");
-			doNext(GroveLayout);
+			clearOutput();
+			if (!player.hasStatusEffect(StatusEffects.FletchingTable)) player.createStatusEffect(StatusEffects.FletchingTable,0,0,0,0);
+			outputText("You approach the fletching table. Here you can craft improved arrowheads using elven tools.");
+			menu();
+			
+			addButton(2, "AdjustString", FletchingAdjustString);
+			addButton(3, "Reinforce", FletchingReinforce);
+			addButton(14, "Back", GroveLayout);
+		}
+
+		public function FletchingCraftArrows():void {
+			outputText("What kind of arrows would you like to create?");
+			menu();
+			
+			addButton(14, "Back", GroveLayout);
+		}
+		private function FletchingCraftArrows2():void {
+			outputText("What kind of arrows would you like to create?");
+		}
+
+		public function FletchingAdjustString():void {
+			outputText("You may choose a different sturdier string for your bow. What would you use?");
+			menu();
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "SpiderSilk", "You already used this for improving bow string.");
+			else {
+				if (player.hasItem(useables.T_SSILK, 1)) addButton(0, "SpiderSilk", FletchingAdjustString2, useables.T_SSILK);
+				else addButtonDisabled(0, "SpiderSilk", "You need to have spider silk.");
+			}
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Ebonbloom", "You already used this for improving bow string.");
+			else {
+				if (player.hasItem(useables.EBONBLO, 1)) {
+					if (player.statusEffectv2(StatusEffects.FletchingTable) == 1) addButtonDisabled(1, "Ebonbloom", "You need to imprpve string with spider silk first.");
+					else addButton(1, "Ebonbloom", FletchingAdjustString2, useables.EBONBLO);
+				}
+				else addButtonDisabled(1, "Ebonbloom", "You need to have ebonbloom.");
+			}
+			//Spider silk(Can be gathered from spider enemy) +10 % Damage
+			//Ebonbloom(Requires Ebonbloom) +20% Damage
+			//Unicorn hair(Obtained from Celess) +30 % Damage
+			addButton(14, "Back", GroveLayout);
+		}
+		private function FletchingAdjustString2(itype:ItemType):void {
+			outputText("You work for 8 hours adjusting your new " + itype.shortName + " string to your bow. This will serve you well in your adventures.");
+			player.addStatusValue(StatusEffects.FletchingTable, 2, 1);
+			player.destroyItems(itype, 1);
+			doNext(camp.returnToCampUseEightHours);
+		}
+
+		public function FletchingReinforce():void {
+			outputText("You may choose to reinforce your bow using various materials. What would you use?");
+			menu();
+			
+			addButton(14, "Back", GroveLayout);
+		}
+		private function FletchingReinforce2():void {
+			outputText("You work for 8 hours applying your new [MatName] reinforcement to your bow. This will serve you well in your adventures.");
 		}
 
 		//Elenwen is nearly as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
 		private function bowSkill(diff:Number):Number {
 			player.addStatusValue(StatusEffects.Kelt,1,diff);
-			if (player.statusEffectv1(StatusEffects.Kelt) >= 150) player.changeStatusValue(StatusEffects.Kelt,1,150);
+			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);//Kelt track basic archery skill that caps on 100 not 150 so not need to thanks me for fixing too high cap on this training ;)
 			return player.statusEffectv1(StatusEffects.Kelt);
 		}
 
 		public function Elenwen():void {
-			clearOutput()
+			clearOutput();
 			outputText("At the archery range, you find Elenwen practicing with her bow. Her posture is poised and masterful as she aims at a target before nocking an arrow." +
 					" She releases the arrow in a single smooth motion that leaves her long, golden hair fluttering. The arrow flies directly into the center of her mark," +
 					" joining several other perfect shots on the many targets that surround her. Her demeanor is serious and focused," +
@@ -844,13 +938,14 @@ import classes.Scenes.SceneLib;
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			bowSkill(5)
+			if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
+			else player.addStatusValue(StatusEffects.Kelt, 1, 5);
 			CoC.instance.timeQ = 1;
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function Alyssa():void {
-			clearOutput()
+			clearOutput();
 			outputText("On the sparring grounds, you find Alyssa practicing her spear technique." +
 					" She moves elegantly, alternating between smooth, dance-like footwork with broad sweeps and twirls of her long spear and sharp," +
 					" snapping thrusts that seem to pierce the air itself. She is naked, and her petite, slender frame seems to emanate vitality and grace" +
@@ -914,7 +1009,7 @@ import classes.Scenes.SceneLib;
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
 				player.createPerk(PerkLib.ELFElvenBattleStyle,0,0,0,0);
 				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,2);
-				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
+				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry II Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
@@ -937,7 +1032,7 @@ import classes.Scenes.SceneLib;
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			doNext(GroveLayout);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -945,5 +1040,4 @@ import classes.Scenes.SceneLib;
 
 
 	}
-
 }

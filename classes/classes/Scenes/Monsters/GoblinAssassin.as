@@ -5,12 +5,10 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class GoblinAssassin extends Monster
 	{
-		public var adventure:HeXinDao = new HeXinDao();
 		
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
@@ -104,7 +102,7 @@ public class GoblinAssassin extends Monster
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) adventure.gaunletchallange2fight2();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight2();
 			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro1();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -148,7 +146,7 @@ public class GoblinAssassin extends Monster
 			this.skinTone = "dark green";
 			this.hairColor = "blue";
 			this.hairLength = 7;
-			initStrTouSpeInte(45, 55, 110, 95);
+			initStrTouSpeInte(45, 45, 110, 95);
 			initWisLibSensCor(95, 64, 35, 60);
 			this.weaponName = "needles";
 			this.weaponVerb = "stabbing needles";
@@ -161,6 +159,7 @@ public class GoblinAssassin extends Monster
 			this.gems = rand(50) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
+					add(consumables.PONAILS,2).
 					addMany(1, consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

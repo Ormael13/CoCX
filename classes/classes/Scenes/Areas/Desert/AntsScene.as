@@ -74,17 +74,17 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			}
 			return false;
 		}
-	
+
 		public function timeChangeLarge():Boolean {
 			return false;
 		}
 		//End of Interface Implementation
-		
+
 		public function phyllaWaifu():Boolean
 		{
 			return flags[kFLAGS.ANT_WAIFU] > 0;
 		}
-		
+
 		public function antColonyEncounter():void
 		{
 			//WAIFU GET!
@@ -497,7 +497,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (player.hasVagina()) addButton(1, "Use Vagina", femalePhyllaFirstFuckGooooo);
 			addButton(4, "Refuse", refuseAntSex);
 		}
-		
+
 		//Refuse sex. This disables further encounter.
 		private function refuseAntSex():void {
 			clearOutput();
@@ -507,7 +507,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 //►Male Continuation
 		private function gigititigitigitigitigityAntGirl():void
 		{
@@ -1951,7 +1951,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nAs you walk back in front of her you begin to strip down, leaving your armor and underwear strewn about behind you.");
 			if (player.isNaga()) outputText("  You slither almost whorishly with a slow, measured wriggle,");
 			else outputText("  You walk almost whorishly with a slow, sensual gait,");
-			outputText(" allowing her to see the sensual swivel of your " + buttDescript() + " from left to right and back again as you visibly entice Phylla's mind to lustful thoughts.  Once you're facing Phylla once again, you see her lower two hands are still covering her breasts and the upper two are gripping the stone chair she sits in.");
+			outputText(" allowing her to see the sensual swivel of your [butt] from left to right and back again as you visibly entice Phylla's mind to lustful thoughts.  Once you're facing Phylla once again, you see her lower two hands are still covering her breasts and the upper two are gripping the stone chair she sits in.");
 			outputText("\n\n\"<i>I didn't mean... I just thought...</i>\"");
 
 			//If Corruption is less than 75:

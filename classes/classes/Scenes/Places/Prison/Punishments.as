@@ -1,37 +1,37 @@
-package classes.Scenes.Places.Prison 
+package classes.Scenes.Places.Prison
 {
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.*;
 
 public class Punishments extends BaseContent
-	{	
+	{
 		public function Punishments() { }
-		
+
 		//-----------------------------------------------------------------------
 		//		*******	Stockades Punishment *******
 		//-----------------------------------------------------------------------
 		public function prisonCaptorPunishmentStockades():void
 		{
-			//Punishment Intro 
-			outputText("(Placeholder) " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " drags you to the stockades in the middle of the room, forces you to bend over them, and clamps your head and hands securely within them. She then inserts a cleverly shaped dildo in your ass. Aside from the penetrating tip, it is thin, broad, and rigid in order to allow other things to enter your " + assholeDescript() + " while it is in place, with a handle on the outside of your " + assDescript() + " that curves upward in a hook-like shape. She then attaches a chain between the handle and the ceiling, and tightens it such that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. \n\n");
+			//Punishment Intro
+			outputText("(Placeholder) " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " drags you to the stockades in the middle of the room, forces you to bend over them, and clamps your head and hands securely within them. She then inserts a cleverly shaped dildo in your ass. Aside from the penetrating tip, it is thin, broad, and rigid in order to allow other things to enter your " + assholeDescript() + " while it is in place, with a handle on the outside of your [ass] that curves upward in a hook-like shape. She then attaches a chain between the handle and the ceiling, and tightens it such that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. \n\n");
 			outputText("(Placeholder)\"<i>Since you seem reluctant to accept what you are, I think it's time for a bit of a crash course. When you have shown you truly understand that your only value is as a source of pleasure and entertainment for others, I will give you a chance to apologize for your impertinance. Until then, you will remain hanging by your ass locked in my stockades, and you will <b>learn</b> from it. And then, if I feel like it, you will hang there some more for no other reason than because it gives <b>me</b> pleasure to see squirm. And you will learn from that, too.</i>\"");
-			
-			// dont really know what this does 
+
+			// dont really know what this does
 			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 12 + rand(4));
 			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,0);
-			
+
 			// Add Restriants
 			player.changeStatusValue(StatusEffects.PrisonRestraints,1,0);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,3,1);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,4,4);
-			
+
 			//Add a flag indicating the player is in the stockades
 			flags[kFLAGS.PRISON_PUNISHMENT] = 1;
 			doNext(playerMenu);
 		}
-		
+
 		public function prisonCaptorPunishmentStockadesCallout():void
 		{
 			clearOutput();
@@ -49,7 +49,7 @@ public class Punishments extends BaseContent
 			outputText("You scream yourself hoarse but no one seems to hear you.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function prisonCaptorPunishmentStockadesVisitor():void
 		{
 			var selector:int = 0;
@@ -91,7 +91,7 @@ public class Punishments extends BaseContent
 					}
 					outputText("\n\n");
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4, player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 2);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 					player.slimeFeed();
 					player.refillHunger(25);
 					player.orgasm();
@@ -105,14 +105,14 @@ public class Punishments extends BaseContent
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function prisonCaptorPunishmentStockadesFreedom():void
 		{
 			clearOutput();
 			var begEvent:Function = null;
 			var acceptEvent:Function = null;
 			var rejectEvent:Function = null;
-			
+
 			//Check to see if the player is ready to be released
 			if(player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) < 2 + rand(5))
 			{
@@ -125,8 +125,8 @@ public class Punishments extends BaseContent
 			begEvent = prisonCaptorPunishmentStockadesFreedomBeg;
 			acceptEvent = prisonCaptorPunishmentStockadesFreedomAccept;
 			rejectEvent = prisonCaptorPunishmentStockadesFreedomReject;
-			
-			//Checks Player "Self Esteem" and "Obedience" to see whether the player will beg for freedom or simply accept it 
+
+			//Checks Player "Self Esteem" and "Obedience" to see whether the player will beg for freedom or simply accept it
 			if(player.esteem > 40 || player.obey < 10)
 			{
 				begEvent = null;
@@ -138,12 +138,12 @@ public class Punishments extends BaseContent
 			outputText("Do you accept your " + prison.prisonCaptor.captorTitle + "'s terms, or do refuse? " + prison.prisonWillCostDescript(15));
 			simpleChoices("Beg",begEvent,"Accept",acceptEvent,"Reject",rejectEvent,"",null,"",null);
 		}
-		
+
 		public function prisonCaptorPunishmentStockadesFreedomReject():void
 		{
-			
+
 			clearOutput();
-			
+
 			//Checks to see if the player actually has enough willpower to resist
 			if(player.will < prison.prisonWillCost(15))
 			{
@@ -166,7 +166,7 @@ public class Punishments extends BaseContent
 			prison.changeWill(-prison.prisonWillCost(15));
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function prisonCaptorPunishmentStockadesFreedomBeg():void
 		{
 			clearOutput();
@@ -177,7 +177,7 @@ public class Punishments extends BaseContent
 			prison.changeObey(2,prison.inPrison);
 			prisonCaptorPunishmentStockadesFreedomRelease();
 		}
-		
+
 		public function prisonCaptorPunishmentStockadesFreedomAccept():void
 		{
 			clearOutput();
@@ -196,32 +196,32 @@ public class Punishments extends BaseContent
 			player.refillHunger(5);
 			prisonCaptorPunishmentStockadesFreedomRelease();
 		}
-		
+
 		public function prisonCaptorPunishmentStockadesFreedomRelease():void
 		{
 			//Punishment Outro
 			outputText("\n\n(Placeholder) Afterward, " + prison.prisonCaptor.captorPronoun1 + " releases you. Apology or not, you are left bound and gagged, but for the time being you are just happy to be free of the neverending humiliation of the stockades.");
-			
+
 			//Add a flag indicating the player is no longer in the stockades
 			flags[kFLAGS.PRISON_PUNISHMENT] = 0;
-			
+
 			//Reset random event timers
 			prison.prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
 			prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
-			
-			//Remove Restraints 
+
+			//Remove Restraints
 			player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,3,1);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,4,4);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
-		public function prisonCaptorPunishmentStockadeBreak():void 
+
+		public function prisonCaptorPunishmentStockadeBreak():void
 		{
 			clearOutput();
 			//Checks if the player has enough willpower to attempt to break
-			if (player.will < prison.prisonWillCost(10)) 
+			if (player.will < prison.prisonWillCost(10))
 			{
 				outputText("Try as you might, you just don't have enough willpower to attempt to break out of the Stockades.");
 				doNext(playerMenu);
@@ -234,7 +234,7 @@ public class Punishments extends BaseContent
 			{
 				outputText("With all your strength, you finally manage to break the stockade! Loud snapping sound echoes throughout your cell.");
 				outputText("\n\n" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the stockade. \"<i>No! You BROKE the stockade! Very well, I'll lift your punishment.</i>\" She looks angry.");
-				
+
 				//Add a flag indicating the player is no longer in the stockades
 				flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			}
@@ -244,7 +244,7 @@ public class Punishments extends BaseContent
 			}
 			doNext(playerMenu);
 		}
-		
+
 		//-----------------------------------------------------------------------
 		//		*******	Confinement Punishment *******
 		//-----------------------------------------------------------------------
@@ -268,7 +268,7 @@ public class Punishments extends BaseContent
 			flags[kFLAGS.PRISON_PUNISHMENT] = 2;
 			doNext(playerMenu);
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementStandup():void
 		{
 			clearOutput();
@@ -302,7 +302,7 @@ public class Punishments extends BaseContent
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementRestlegs():void
 		{
 			clearOutput();
@@ -335,7 +335,7 @@ public class Punishments extends BaseContent
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementDescribeStatus(verbose:Boolean = false):void
 		{
 			var statusVal:Number = 0;
@@ -346,13 +346,13 @@ public class Punishments extends BaseContent
 			}
 			else if(statusVal >= 20)
 			{
-				outputText("You've sank down as far as you can go and your " + assDescript() + " now rests on the bar. Over 20 inches of dildo are buried in your " + assholeDescript());
+				outputText("You've sank down as far as you can go and your [ass] now rests on the bar. Over 20 inches of dildo are buried in your " + assholeDescript());
 			}
 			else
 			{
 				outputText("There are now almost " + Math.ceil(statusVal) + " inches of dildo wriggling around inside your " + assholeDescript());
 			}
-			
+
 			if(player.vaginas.length > 0)
 			{
 				outputText(" and " + vaginaDescript());
@@ -394,11 +394,11 @@ public class Punishments extends BaseContent
 					}
 					outputText(" far enough from the floor that despite being close to a kneeling position no matter how you shift your body around you can never quite get [if (isBiped = true) \"your knees to support you\"][if (isBiped = false) \"your lower body to provide the support you so desperately need\"]. The exertion of supporting yourself is turning your [legs] into useless quivering pieces of flesh, and your mind is swimming with the desire pouring from your loins.");
 				}
-				
-				
+
+
 			}
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementMasturbate():void
 		{
 			var newVal:Number = 0;
@@ -424,7 +424,7 @@ public class Punishments extends BaseContent
 			prison.changeObey(2,prison.inPrison);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementFreedom():void
 		{
 			clearOutput();
@@ -446,7 +446,7 @@ public class Punishments extends BaseContent
 			outputText("Do accept your " + prison.prisonCaptor.captorTitle + "'s terms, or do you refuse? " + prison.prisonWillCostDescript(15));
 			simpleChoices("Beg",begEvent,"Accept",acceptEvent,"Reject",rejectEvent,"",null,"",null);
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementFreedomReject():void
 		{
 			clearOutput();
@@ -471,7 +471,7 @@ public class Punishments extends BaseContent
 			prison.changeWill(-prison.prisonWillCost(15));
 			doNext(playerMenu);
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementFreedomBeg():void
 		{
 			clearOutput();
@@ -480,7 +480,7 @@ public class Punishments extends BaseContent
 			prison.changeObey(3,prison.inPrison);
 			prisonCaptorPunishmentConfinementFreedomRelease();
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementFreedomAccept():void
 		{
 			clearOutput();
@@ -496,7 +496,7 @@ public class Punishments extends BaseContent
 			}
 			prisonCaptorPunishmentConfinementFreedomRelease();
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementFreedomRelease():void
 		{
 			outputText("\n\n(Placeholder) In exchange, you are released from the confinement box. Apology or not, you are left bound and gagged, but for the time being you are just happy to be free of the darkness and unending physical stress of the box.");
@@ -509,7 +509,7 @@ public class Punishments extends BaseContent
 			flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			doNext(playerMenu);
 		}
-		
+
 		public function prisonCaptorPunishmentConfinementBreak():void {
 			clearOutput();
 			if (player.will < prison.prisonWillCost(10)) {
@@ -531,8 +531,8 @@ public class Punishments extends BaseContent
 			}
 			doNext(playerMenu);
 		}
-		
-		
+
+
 		//-----------------------------------------------------------------------
 		//		*******	BJ Trainer Punishment *******
 		//-----------------------------------------------------------------------
@@ -558,7 +558,7 @@ public class Punishments extends BaseContent
 			flags[kFLAGS.PRISON_PUNISHMENT] = 3;
 			doNext(playerMenu);
 		}
-		
+
 		public function prisonCaptorPunishmentBJTrainerSuck():void
 		{
 			clearOutput();
@@ -659,7 +659,7 @@ public class Punishments extends BaseContent
 			prisonCaptorPunishmentBJTrainerDescribeStatus();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function prisonCaptorPunishmentBJTrainerDescribeStatus(verbose:Boolean = false):void
 		{
 			var statusVal:int = 0;
@@ -689,7 +689,7 @@ public class Punishments extends BaseContent
 			{
 				outputText("inches away from being full enough for you to reach the key. ");
 			}
-			
+
 			if(verbose)
 			{
 				if(statusVal <= 10)
@@ -716,10 +716,10 @@ public class Punishments extends BaseContent
 				{
 					outputText(" inches away from being full enough for you to reach the key. ");
 				}
-				
+
 			}
 		}
-		
+
 		public function prisonCaptorPunishmentBJTrainerTimesup():void
 		{
 			outputText("(Placeholder) As " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " enters the room a pair of imp guards drag the containers from your cell. \"<i>Time's up slut. See? What did I tell you? You clearly didn't actually want freedom after all, did you? Or are you going to claim that you just aren't good enough at sucking cock? Well, don't worry -- as soon as my servants produce another cask of cum I'll be sure to give you another chance to practice.</i>\"");

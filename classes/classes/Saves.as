@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BodyParts.Hair;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -892,6 +893,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
 		//Mastery
+		saveFile.data.masteryFeralCombatLevel = player.masteryFeralCombatLevel;
+		saveFile.data.masteryFeralCombatXP = player.masteryFeralCombatXP;
 		saveFile.data.masteryGauntletLevel = player.masteryGauntletLevel;
 		saveFile.data.masteryGauntletXP = player.masteryGauntletXP;
 		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
@@ -904,6 +907,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.masteryMaceHammerXP = player.masteryMaceHammerXP;
 		saveFile.data.masteryDuelingSwordLevel = player.masteryDuelingSwordLevel;
 		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
+		saveFile.data.masteryPolearmLevel = player.masteryPolearmLevel;
+		saveFile.data.masteryPolearmXP = player.masteryPolearmXP;
 		saveFile.data.masterySpearLevel = player.masterySpearLevel;
 		saveFile.data.masterySpearXP = player.masterySpearXP;
 		saveFile.data.masteryWhipLevel = player.masteryWhipLevel;
@@ -1892,6 +1897,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
 		//Mastery
+		if (saveFile.data.masteryFeralCombatXP == undefined)
+			player.masteryFeralCombatXP = 0;
+		else
+			player.masteryFeralCombatXP = saveFile.data.masteryFeralCombatXP;
+		if (saveFile.data.masteryFeralCombatLevel == undefined)
+			player.masteryFeralCombatLevel = 0;
+		else
+			player.masteryFeralCombatLevel = saveFile.data.masteryFeralCombatLevel;
 		if (saveFile.data.masteryGauntletXP == undefined)
 			player.masteryGauntletXP = 0;
 		else
@@ -1980,6 +1993,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.masteryDuelingSwordLevel = 0;
 		else
 			player.masteryDuelingSwordLevel = saveFile.data.masteryDuelingSwordLevel;
+		if (saveFile.data.masteryPolearmXP == undefined)
+			player.masteryPolearmXP = 0;
+		else
+			player.masteryPolearmXP = saveFile.data.masteryPolearmXP;
+		if (saveFile.data.masteryPolearmLevel == undefined)
+			player.masteryPolearmLevel = 0;
+		else
+			player.masteryPolearmLevel = saveFile.data.masteryPolearmLevel;
 		if (saveFile.data.masterySpearXP == undefined)
 			player.masterySpearXP = 0;
 		else
@@ -2117,9 +2138,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.eyes.type = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
-			player.eyes.colour = "brown";
+			CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
 		else
-			player.eyes.colour = saveFile.data.eyeColor;
+			CoC.instance.transformations.EyesChangeColor([saveFile.data.eyeColor]).applyEffect(false);
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -2142,7 +2163,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.tallness = saveFile.data.tallness;
 		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
-			player.hairType = 0;
+			player.hairType = Hair.NORMAL;
 		else
 			player.hairType = saveFile.data.hairType;
 		if (saveFile.data.hairStyle == undefined)
@@ -2365,9 +2386,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
 
+			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+			var mutationsShift:Array = [];
+			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
+				mutationsShift.push(pperk1.id);
+			}
+
 			if (ptype == null) {
 				trace("ERROR: Unknown perk id=" + id);
-
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
@@ -2801,7 +2827,7 @@ public function unFuckSave():void
 		}
 	}
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
-	while (player.perkDuplicated(PerkLib.KitsuneThyroidGland)) player.removePerk(PerkLib.KitsuneThyroidGland);
+	while (player.perkDuplicated(MutationsLib.KitsuneThyroidGland)) player.removePerk(MutationsLib.KitsuneThyroidGland);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{

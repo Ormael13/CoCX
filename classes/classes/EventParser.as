@@ -53,9 +53,7 @@ public class EventParser {
     }
 
     public static function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
-        if (CoC.instance.testingBlockExiting) {
-            EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
-        }
+        if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
             var textChoices:Number = Utils.rand(4);
             if (clear) EngineCore.clearOutput();
@@ -80,14 +78,13 @@ public class EventParser {
             EngineCore.menu();
             EngineCore.addButton(0, "Game Over", gameOverMenuOverride).hint("Your game has ended. Please load a saved file or start a new game.");
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0) EngineCore.addButton(1, "Continue", SceneLib.camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.PCClone) && CoC.instance.player.statusEffectv4(StatusEffects.PCClone) == 4) EngineCore.addButton(2, "Rebirth", SceneLib.camp.rebirthFromBadEnd).hint("You can move your nascent soul into your body clone achieving rebirth.");
             //addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
             if (CoC.instance.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || CoC.instance.debug) EngineCore.addButton(4, "Debug Cheat", playerMenu);
             gameOverMenuOverride();
-
         }
         CoC.instance.inCombat = false;
         DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
-
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			if (CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] < CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB)) CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] = CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB);
@@ -97,11 +94,11 @@ public class EventParser {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 		}
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+			if (CoC.instance.flags[kFLAGS.NEISA_FOLLOWER] == 3) CoC.instance.flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			CoC.instance.player.removeStatusEffect(StatusEffects.RiverDungeonA);
 		}
     }
-
     private static function gameOverMenuOverride():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
         CoC.instance.mainView.showMenuButton(MainView.MENU_NEW_MAIN);
         CoC.instance.mainView.showMenuButton(MainView.MENU_DATA);
@@ -187,10 +184,11 @@ public class EventParser {
                 EngineCore.outputText("\nThe change in your body agility prowess confirms that the effects of cum must have worn off.\n");
             }
             player.HP = HPPercent*player.maxHP();
-            SceneLib.combat.regeneration(false);
-            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(false);
-            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(false);
-            SceneLib.combat.wrathregeneration(false);
+            SceneLib.combat.regeneration1(false);
+            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration1(false);
+            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration1(false);
+            SceneLib.combat.wrathregeneration1(false);
+			SceneLib.combat.fatigueRecovery1(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
                 item = _timeAwareClassList[tac];
@@ -346,15 +344,13 @@ public class EventParser {
             }
         }
         //Unequip undergarment if you have bizarre lower body.
-        if (player.lowerGarment != UndergarmentLib.NOTHING) {
-            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable") || player.lowerBody == LowerBody.GHOST_2) {
-                EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
-                SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
-                return true;
-            }
+        if (player.lowerGarment != UndergarmentLib.NOTHING && LowerBody.lowerGarmentDisabled(player)) {
+            EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
+            SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
+            return true;
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponPerk == "Large" && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;
@@ -662,27 +658,22 @@ public class EventParser {
         }
         EngineCore.statScreenRefresh();
     }
-	public static function cheatTime2(time:Number, needNext:Boolean = false):void {
-        //Advance minutes
-        var minutesToPass:Number = time;
-        CoC.instance.model.time.minutes += minutesToPass;
-        if (CoC.instance.model.time.minutes > 59) {
+	public static function eachMinuteCount(time:Number, needNext:Boolean = false):void {
+		var minutesToPass:Number = time;
+		CoC.instance.model.time.minutes += minutesToPass;
+		SceneLib.combat.regeneration(minutesToPass);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(minutesToPass);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(minutesToPass);
+		SceneLib.combat.wrathregeneration(minutesToPass);
+		SceneLib.combat.fatigueRecovery(minutesToPass);
+		SceneLib.combat.venomCombatRecharge(minutesToPass);
+		if (CoC.instance.model.time.minutes > 59) {
             CoC.instance.timeQ++;
             CoC.instance.model.time.minutes -= 60;
             if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
         }
-        time = Math.floor(time);
-        //Advance hours
-        if (CoC.instance.timeQ > 0) {
-            CoC.instance.timeQ--;
-            CoC.instance.model.time.hours++;
-            if (CoC.instance.model.time.hours > 23) {
-                CoC.instance.model.time.days++;
-                CoC.instance.model.time.hours = 0;
-            }
-        }
         EngineCore.statScreenRefresh();
-    }
+	}
 
     public static function growHair(amount:Number = .1):Boolean {
         //Grow hair!

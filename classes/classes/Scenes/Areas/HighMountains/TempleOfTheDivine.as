@@ -68,7 +68,6 @@ use namespace CoC;
 			outputText("\n\nHer name seems to be somewhat appropriate, her eyes glowing with a faint, azure hue. As you ponder these details, the gargoyle turns her back to you, taking flight towards one of the pillars in the room.\n\n\"<i>You are welcome to visit this place as often as you see fit. However, I will be watching you.</i>\"\n\n<b>You can now visit the Temple of the Divines!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
-
 		public function repeatvisitintro():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_gargoyle);
@@ -110,14 +109,22 @@ use namespace CoC;
 				outputText("Would you like to pray and if yes to who?");
 				menu();
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
+				else addButtonDisabled(0, "Marae", "You not yet restored this altair.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
+				else addButtonDisabled(1, "Taoth", "You not yet restored this altair.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(2, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
+				else addButtonDisabled(2, "Fera", "You not yet restored this altair.");
+				addButtonDisabled(3, "E.e.ie.", "You not yet restored this altair.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(4, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
+				else addButtonDisabled(4, "Fenrir", "You not yet restored this altair.");
+				addButtonDisabled(5, "???", "You not yet restored this altair.");//life godess
+				addButtonDisabled(6, "Krat..", "You not yet restored this altair.");
+				addButtonDisabled(7, "???", "You not yet restored this altair.");//magic god
 				//Remove curses
-				if (anyOfAltairsRepaired() && player.gems >= 5000) addButton(4, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
-				else if (!anyOfAltairsRepaired()) addButtonDisabled(4, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
-				else if (!player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drain") && !player.statStore.hasBuff("Damaged")) addButtonDisabled(4, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
-				else if (player.gems < 5000) addButtonDisabled(4, "Remove Curses", "You need at least 5000 gem in order to request deliverance from your maledictions and other status ailments.")
+				if (anyOfAltairsRepaired() && player.gems >= 5000) addButton(13, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
+				else if (!anyOfAltairsRepaired()) addButtonDisabled(13, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
+				else if (!player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drained") && !player.statStore.hasBuff("Damaged")) addButtonDisabled(13, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
+				else if (player.gems < 5000) addButtonDisabled(13, "Remove Curses", "You need at least 5000 gem in order to request deliverance from your maledictions and other status ailments.")
 				addButton(14, "Back", templemainmenu);
 			}
 			else {
@@ -141,7 +148,7 @@ use namespace CoC;
 			outputText("Divine powers radiate from the altar banishing the evil that has took a grip on your body to the void.");
 			player.gems -= 5000;
 			if (player.statStore.hasBuff("Weakened")) player.statStore.removeBuffs("Weakened");
-			else if (!player.statStore.hasBuff("Drain")) player.statStore.removeBuffs("Drained");
+			else if (!player.statStore.hasBuff("Drained")) player.statStore.removeBuffs("Drained");
 			else player.statStore.removeBuffs("Damaged");
 			doNext(PlayerPrayAtTemple);
 		}

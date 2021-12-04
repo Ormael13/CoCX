@@ -352,7 +352,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			var penAnal:Function = null;
 			var penBoth:Function = null;
 			var takeVag:Function = null;       //Mount her option is only available to females and herms with a vaginal capacity >= 100
-			var takeAnal:Function = null;      //Take Anal option is only available when Kath’s knot size is less than 4</i>”
+			var takeAnal:Function = null;      //Take Anal option is only available when Kath’s knot size is less than 4”
 			var takeVagAndAss:Function = null; //Take both is available for those who meet both the Mount Her and Take Anal requirements
 			if (player.cockThatFits(70) > -1) {
 				penKath = katherine.penetrateKatsVag;
@@ -431,7 +431,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			var penBoth:Function = null;
 			var suckNFucks:Function = null;
 			var takeVag:Function = null;       //Mount her option is only available to females and herms with a vaginal capacity >= 100
-			var takeAnal:Function = null;      //Take Anal option is only available when Kath’s knot size is less than 4</i>”
+			var takeAnal:Function = null;      //Take Anal option is only available when Kath’s knot size is less than 4”
 			var takeVagAndAss:Function = null; //Take both is available for those who meet both the Mount Her and Take Anal requirements
 			var suckNFucked:Function = null;
 			if (player.cockThatFits(70) > -1) {
@@ -668,7 +668,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 					outputText("“<i>Wow, jackpot!  Come here my swollen-dicked morsels, let’s have some fun!</i>”  Shouldra lunges after both Kath and Urta, who promptly scamper, not happy with the idea of becoming a ghost’s plaything.  You just watch the spectacle unfold and both the herms and Shouldra vanish from your sight...\n\n");
 					outputText("A few minutes later, both Urta and Kath return... panting and with their respective tents visibly absent...\n\n");
 					outputText("“<i>Oh, dear sweet Marae’s mercy, we finally lost that freaky ghoulie,</i>” Urta pants, tongue lolling out in a very canine fashion.\n\n");
-					outputText("“<i>That’s not funny, [name]! Kath shouts at you, tail jutting out like someone stuck a broom up her ass and swollen twice its usual girth with bristling hair.\n\n");
+					outputText("“<i>That’s not funny, [name]!</i>” Kath shouts at you, tail jutting out like someone stuck a broom up her ass and swollen twice its usual girth with bristling hair.\n\n");
 					outputText("You just shrug and tell them that - unfortunately - that one is out of your control.  “<i>So why do you put up with her?</i>” they promptly ask, even as they recompose themselves.  You shrug once more, replying that even you don’t know that...");
 				}
 				else if (flags[kFLAGS.TIMES_MET_SHOULDRA] > 0) {

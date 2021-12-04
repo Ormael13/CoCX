@@ -90,7 +90,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function get isCorrupt():Boolean {
-		return _corruption > 39;
+		return _corruption > 50;
 	}
 
 	public function get isAdult():Boolean {
@@ -279,7 +279,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = _ageShouldDoBirth;
 		}
 		else {
-			if (player.cor > 39){
+			if (player.cor > 50){
 				spriteSelect(SpriteDb.s_celessBlack);
 			}
 			else {
@@ -307,7 +307,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = 1;
 			_name = mainView.nameBox.text;
 			_corruption = 0;
-			if (player.cor > ((80 + player.corruptionTolerance()) / 2)) {
+			if (player.cor > 50) {
 				_corruption = 100;
 			}
 			mainView.nameBox.visible = false;
@@ -316,9 +316,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_name + " stops crying and looks at you with her big eyes, letting out a cute laugh in response.\n"+
 			"You think she likes it. Having solved this important matter, you drift asleep with " + _name + " still hugging your chest.\n\n"+
 			"When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.\n" +
-			"You are hardly surprised, already knowing how short most pregnancies are in Mareth.");
-			if (player.inte > 50) outputText("Maybe it’s due to how time and space distort here?");
-			outputText("Still, you had hoped this phase would have lasted at least a little bit longer.");
+			"You are hardly surprised, already knowing how short most pregnancies are in Mareth. ");
+			if (player.inte > 50) outputText("Maybe it’s due to how time and space distort here? ");
+			outputText("Still, you had hoped this phase would have lasted at least a little bit longer. ");
 			if(isCorrupt) {
 				outputText("Your daughter wakes up as well, opening her beautiful crimson eyes to the world.\n" +
 				"She has silver hair and twilight black fur.");
@@ -327,8 +327,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				outputText("Your daughter wakes up as well, opening her beautiful azure eyes to the world.\n" +
 				"She has platinum blonde hair and white fur as befits an unicorn.");
 			}
-			outputText("You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older?");
-			if (player.inte > 50) outputText("Does make sense, otherwise they would cause some nasty internal damage during birth.");
+			outputText("You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older? ");
+			if (player.inte > 50) outputText("Does make sense, otherwise they would cause some nasty internal damage during birth. ");
 			outputText("<i>\"Mom, is something wrong?\"</i>\n" +
 			"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
 			"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
@@ -344,7 +344,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
 			[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 			[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
-			//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],
+			[weapons.DEMSCYT, weapons.LHSCYTH, null],
 			[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
 			[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
 			[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
@@ -588,7 +588,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
-				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+				if (player.pregnancyIncubation == 0) player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				_age = _ageDidPregnancy;
 				break;
@@ -912,10 +912,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function doHeatOrRut():void{
 		outputText("\n\nLewd images of cocks " +(player.isMaleOrHerm()?"and vaginas":"")+" of all sizes and shapes fill your mind, making you drool in anticipation.\n"+
 		"It seems your daughter’s condition is spreading over to you.");
-		if (!player.inHeat && player.goIntoHeat(true,10)){		//This would put the PC into a 20 day heat/rut tho...
+		if (!player.inHeat && player.goIntoHeat(false)){		//This would put the PC into a 20 day heat/rut tho...
 			outputText("\nYou are now in Heat!");
 		}
-		else if (!player.inRut && player.goIntoRut(true, 10)) {	//This is based on the original.xml source.
+		else if (!player.inRut && player.goIntoRut(false)) {	//This is based on the original.xml source.
 			outputText("\nYou are now in Rut!");
 		}
 		doNext(camp.returnToCampUseOneHour);
@@ -955,7 +955,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function pureChildCorruption():void{
-		if (player.cor > 80){
+		if (player.cor > 50){
 			_corruption++;
 			if (isCorrupt) {
 				menu();

@@ -12,14 +12,14 @@ import classes.Scenes.SceneLib;
 	 */
 	public class CabinProgress extends BaseContent {
 		
-		public var maxNailSupply:int = 600;
+		public var maxNailSupply:int = 750;
 		public function get maxWoodSupply():int {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) return 900;
-			return 300;
+			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) return 1200;
+			return 400;
 		}
 		public function get maxStoneSupply():int {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) return 900;
-			return 300;
+			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) return 1200;
+			return 400;
 		}
 		
 		public function CabinProgress() {
@@ -135,15 +135,15 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function canGatherWoods():Boolean {
-			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply && player.statusEffectv1(StatusEffects.ResourceNode1) < 15;
+			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
 			clearOutput();
 			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
-			if (player.statusEffectv1(StatusEffects.ResourceNode1) < 15) {
-				if (player.statusEffectv1(StatusEffects.ResourceNode1) == 14) outputText("You have found this type of logging area enough times to be able to find them in the future without trouble. ('Woodcutting' option has been unlocked in Places menu)\n\n");
+			if (player.statusEffectv1(StatusEffects.ResourceNode1) < 5) {
+				if (player.statusEffectv1(StatusEffects.ResourceNode1) == 4) outputText("You have found this type of logging area enough times to be able to find them in the future without trouble. ('Woodcutting' option has been unlocked in Places menu)\n\n");
 				player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
 			}
 			menu();
@@ -152,47 +152,41 @@ import classes.Scenes.SceneLib;
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") 
-			{
+			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") {
 				outputText("You are carrying a large axe with you.");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
-			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) 
-			{
+			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 				outputText("You are carrying carpenter's box with you. It contains an axe.\n");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
-			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) 
-			{
+			if (camp.followerKiha()) {
+				outputText("You have someone who might help you. Kiha might be able to assist you.\n");
+				addButton(1, "Kiha", getHelpFromKiha);
+			}
+			if (silly() && player.str >= 70) {
+				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
+				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
+			}
+			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) {
 				if (player.weapon == weapons.RIPPER2) {
 					outputText("You are carrying a Ripper 2.0 with you.\n");
-					addButton(1, "Ripper 2.0", cutTreeMechTIMBER);
+					addButton(3, "Ripper 2.0", cutTreeMechTIMBER);
 				}
 				else if (player.weapon == weapons.RIPPER1) {
 					outputText("You are carrying a Ripper 1.0 with you.\n");
-					addButton(1, "Ripper 1.0", cutTreeMechTIMBER);
+					addButton(3, "Ripper 1.0", cutTreeMechTIMBER);
 				}
 				else {
 					outputText("You are carrying a Machined greatsword with you.\n");
-					addButton(1, "Mach.Greatsword", cutTreeMechTIMBER);
+					addButton(3, "Mach.Greatsword", cutTreeMechTIMBER);
 				}
 			}
-			if (player.isInGoblinMech())
-			{
+			if (player.isInGoblinMech()) {
 				outputText("You are in goblin mech that have sawblade as melee weapon.\n");
-				addButton(0, "Sawblade", cutTreeMechTIMBER);
+				addButton(4, "Sawblade", cutTreeMechTIMBER);
 			}
-			if (camp.followerKiha()) 
-			{
-				outputText("You have someone who might help you. Kiha might be able to assist you.\n");
-				addButton(2, "Kiha", getHelpFromKiha);
-			}
-			if (silly() && player.str >= 70) 
-			{
-				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
-				addButton(3, "Punch Tree", punchTreeMinecraftStyle);
-			}
-			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2))) {
+			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2) || buttonIsVisible(3) || buttonIsVisible(4))) {
 				outputText("<b>Unfortunately, there is nothing you can do right now.</b>");
 			}
 			addButton(14, "Leave", noThanks);
@@ -281,7 +275,7 @@ import classes.Scenes.SceneLib;
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next few hours mining. This done, you bring back your prize to camp. ");
+			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
 			var minedStones:Number = 13 + Math.floor(player.str / 7);
 			minedStones = Math.round(minedStones);
 			fatigue(50, USEFATG_PHYSICAL);
@@ -289,7 +283,10 @@ import classes.Scenes.SceneLib;
 				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
 				incrementStoneSupply(minedStones);
 				if (rand(2) == 0) inventory.takeItem(useables.TIN_ORE, camp.returnToCampUseTwoHours);
-				else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+				else {
+					if (rand(2) == 0) inventory.takeItem(useables.IRONORE, camp.returnToCampUseTwoHours);
+					else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+				}
 			}
 			else {
 				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
@@ -326,10 +323,10 @@ import classes.Scenes.SceneLib;
 		//Get help from Kiha.
 		private function getHelpFromKiha():void {
 			outputText("You recall Kiha wields an oversized axe. You call out for her. After a minute, she walks over to you and says \"<i>Yes, my idiot?</i>\" You tell her that you would like her to cut down some trees so you can haul the wood. She nods and yells \"<i>Stand back!</i>\" as you stand back while you watch her easily cut down not one but two trees! With the trees cut down, you and Kiha haul the wood back to your camp. ");
-			if (player.str < 33) outputText("It's a daunting task as you can only carry few of the wood at a time. Even Kiha is far superior to your carrying capacity as she can carry a lot of wood. \n\n");
-			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood. \n\n");
-			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!\n\n");
-			outputText("It takes some time but you eventually bring the last of wood back to your camp. \n\n");
+			if (player.str < 33) outputText("It's a daunting task as you can only carry few of the wood at a time. Even Kiha is far superior to your carrying capacity as she can carry a lot of wood.");
+			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood.");
+			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!");
+			outputText("\n\nIt takes some time but you eventually bring the last of wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
 			incrementWoodSupply(20 + Math.floor(player.str / 5));
 			fatigue(50, USEFATG_PHYSICAL);
@@ -367,22 +364,22 @@ import classes.Scenes.SceneLib;
 		
 		public function checkMaterials():void {
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) { 
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600" + " \n");
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750" + " \n");
 			}
 			else { 
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200" + " \n");
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250" + " \n");
 			}
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900" + "\n");
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200" + "\n");
 			}
 			else {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300" + "\n");
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400" + "\n");
 			}
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900" + "\n");
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200" + "\n");
 			}
 			else {
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300" + "\n");
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400" + "\n");
 			}
 		}
 		

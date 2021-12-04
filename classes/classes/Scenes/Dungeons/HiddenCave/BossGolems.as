@@ -8,12 +8,10 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.AbstractGargoyle;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class BossGolems extends AbstractGargoyle
 	{
-		public var golems:HeXinDao = new HeXinDao();
 		
 		override protected function performCombatAction():void
 		{
@@ -61,7 +59,7 @@ public class BossGolems extends AbstractGargoyle
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) golems.gaunletchallange2postfight();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2postfight();
 			else {
 				outputText("Your last attack cause the golems to crumble to rubbles on the ground. It seems the way is clear, better not linguer in the same spot for to long there is no telling when another may cross your path.\n\n");
 				flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 2;
@@ -79,13 +77,13 @@ public class BossGolems extends AbstractGargoyle
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
 				this.long = "You're currently fighting guardian quasi-gargoyles. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks, with rudimental wins and fully formed mace or axe tails, using bare stone fists to smash you.";
-				initStrTouSpeInte(60, 80, 60, 30);
+				initStrTouSpeInte(70, 90, 70, 30);
 				initWisLibSensCor(30, 10, 10, 50);
-				this.level = 15;
-				this.bonusHP = 200;
-				this.weaponAttack = 24;
-				this.armorDef = 24;
-				this.armorMDef = 24;
+				this.level = 17;
+				this.bonusHP = 500;
+				this.weaponAttack = 27;
+				this.armorDef = 27;
+				this.armorMDef = 27;
 			}
 			else {
 				this.long = "You're currently fighting guardian quasi-gargoyles. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks, with rudimental wins and fully formed mace or axe tails, using bare stone fists to smash intruders.";
@@ -96,6 +94,7 @@ public class BossGolems extends AbstractGargoyle
 				this.weaponAttack = 16;
 				this.armorDef = 16;
 				this.armorMDef = 16;
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			}
 			this.a = "the ";
 			this.short = "guardian quasi-gargoyles";
@@ -113,7 +112,6 @@ public class BossGolems extends AbstractGargoyle
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

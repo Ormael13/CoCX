@@ -6,13 +6,11 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Places.HeXinDao;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class TentacleBeast extends Monster
 	{
-		public var golems:HeXinDao = new HeXinDao();
 		
 		private function tentaclePhysicalAttack():void {
 			outputText("The shambling horror throws its tentacles at you with a murderous force.\n");
@@ -61,13 +59,23 @@ public class TentacleBeast extends Monster
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				golems.gaunletchallange1fight3();
+				SceneLib.hexindao.gaunletchallange1fight3();
 			}
 			else if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				SceneLib.desert.antsScene.phyllaTentacleDefeat();
 			}
 			else if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) cleanupAfterCombat();
+			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 1 && rand(4) == 0) {// && rand(10) == 0-na razie zamiast 10% szansa podniesiona do 25%		move to diff stronger variant of tentacle beast later on?
+				outputText("\n\nAs the tentacle beast runs away in defeat you discover to your surprise it left behind a somewhat passed out bee girl. At first, you are worried that she might be dead but, as she thankfully regains consciousness, she crawls to you, grabbing your leg for a plea.\n\n");
+				outputText("\"<i>Y..you ought to help uzz, our hive is under siege by corrupted sisterzzz if no one does anything my queen will… she…</i>\"\n\n");
+				outputText("The bee points toward a gigantic structure in the far distance.\n\n");
+				outputText("\"<i>Pleazzze zzzave the queen!</i>\"\n\n");
+				outputText("Seems you have a quest and as a champion, it is your duty to accomplish it.\n\n");
+				outputText("<b>You found the Hive!</b>\n\n");
+				flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 1;
+				cleanupAfterCombat();
+			}
 			else {
 				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
@@ -185,7 +193,7 @@ public class TentacleBeast extends Monster
 				this.armorMDef = 2;
 				this.bonusHP = 400;
 				this.bonusLust = 122;
-				this.level = 12;
+				this.level = 11;
 			}
 			this.a = "the ";
 			this.imageName = "tentaclebeast";

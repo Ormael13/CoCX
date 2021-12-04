@@ -56,12 +56,12 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		//  HAD_KID_A_DREAM:int = 758;
 
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public function AnemoneScene()
 		{
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -90,7 +90,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			}
 			return needNext;
 		}
-	
+
 		public function timeChangeLarge():Boolean {
 			return false;
 		}
@@ -110,7 +110,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			if (flags[kFLAGS.KID_A_XP] > 100) flags[kFLAGS.KID_A_XP] = 100;
 			return flags[kFLAGS.KID_A_XP];
 		}
-		
+
 		public function mortalAnemoneeeeee():void
 		{
 			spriteSelect(4);
@@ -557,7 +557,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 					if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 1) outputText("lake");
 					if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) outputText("ocean");
 					outputText("water, sending a tingle down the shaft.  ");
-					outputText("Behind you, the anemone has taken her blue, tentacled penis into her hand and is stroking it and fondling the tip, forcing her own pre-cum out and smearing it along her length.  Satisfied with its slipperiness, she edges forward until her cock is resting on your " + buttDescript() + ".  Drawing her hips back, she lines it up with your " + assholeDescript() + ", then thrusts forward while pulling back on your waist.  The wriggly feelers slip past your butthole and light up your insides with her potent venom.");
+					outputText("Behind you, the anemone has taken her blue, tentacled penis into her hand and is stroking it and fondling the tip, forcing her own pre-cum out and smearing it along her length.  Satisfied with its slipperiness, she edges forward until her cock is resting on your [butt].  Drawing her hips back, she lines it up with your " + assholeDescript() + ", then thrusts forward while pulling back on your waist.  The wriggly feelers slip past your butthole and light up your insides with her potent venom.");
 					player.buttChange(monster.cockArea(0), true);
 					outputText("\n\n");
 
@@ -593,7 +593,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 						if (player.biggestTitSize() >= 1) outputText(" breasts and");
 						outputText(" face.  You hear the anemone giggling as you flinch from the white shower.");
 					}
-					outputText("  After several minutes of climax with you shooting more jism than you thought possible and the anemone banging out an accompaniment on your " + assholeDescript() + ", you finally begin to wind down.  The anemone, clearly turned on by the impressive amount of ejaculate, unloads her own blue cock into your asshole.  Her semen, lower in temperature than yours, forms a little pocket of cool inside your " + buttDescript() + ".  She idly swishes her tentacles in the");
+					outputText("  After several minutes of climax with you shooting more jism than you thought possible and the anemone banging out an accompaniment on your " + assholeDescript() + ", you finally begin to wind down.  The anemone, clearly turned on by the impressive amount of ejaculate, unloads her own blue cock into your asshole.  Her semen, lower in temperature than yours, forms a little pocket of cool inside your [butt].  She idly swishes her tentacles in the");
 					//[(big skeet)
 					if (player.cumQ() >= 500) outputText(" semen-colored");
 					outputText(" water around her as you push out your last load and slip into a doze.\n\n");
@@ -753,7 +753,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			else outputText("clit");
 			outputText(" already drooping indolently toward the water.  She turns and looks at you out of the corner of her eye, her face a rictus of suspense.");
 
-			outputText("\n\n\"<i>Where's the hole?</i>\" you demand, pointing at your own " + buttDescript() + " for an example.");
+			outputText("\n\n\"<i>Where's the hole?</i>\" you demand, pointing at your own [butt] for an example.");
 
 			outputText("\n\nShe lights up as she understands your meaning, then lapses back into confusion when she remembers you're asking about hers, not your own.  Finally, she raises her shoulders a bit as if to shrug and shakes her head.");
 
@@ -1204,8 +1204,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			addButton(0, "Item", item);
 			addButton(1, weaponT, weaponB);
 			if (flags[kFLAGS.KID_SITTER] <= 1) {
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= 90) addButton(3, "Tutor", tutorAnemoneKid);
-				else if (player.fatigue > 90) outputText("\n\nYou're too tired to tutor Kid A.");
+				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= (player.maxFatigue() - 25)) addButton(3, "Tutor", tutorAnemoneKid);
+				else if (player.fatigue > (player.maxFatigue() - 25)) outputText("\n\nYou're too tired to tutor Kid A.");
 				addButton(4, "Watch", anemoneWatchToggle);
 				addButton(8, "Evict", evictANemone);
 				var sex:Boolean = false;
@@ -1584,7 +1584,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			//else if no HP or lust outcome triggered: pass 1 hour, gain 40 xp, increment fatigue by 10
 			else {
 				if (player.level < 10) player.XP += 30;
-				fatigue(10);
+				fatigue(25);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1946,11 +1946,11 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		 (add one level of hairlength)
 
 		 -sting with hair (combines both bee-sting effects, but weaker than either one separately):
-		 "You rush " + monster.short + ", whipping your hair around like a genie, and manage to land a few swipes with your tentacles.  As the venom infiltrates " + monster.pronoun3 + " body, " + monster.pronoun1 + " twitches and begins to move more slowly, hampered half by paralysis and half by arousal."
+		 "You rush " + monster.short + ", whipping your hair around like a genie, and manage to land a few swipes with your tentacles.  As the venom infiltrates [monster his] body, [monster he] twitches and begins to move more slowly, hampered half by paralysis and half by arousal."
 		 (decrease speed/str, increase lust)
 
 		 -miss a sting
-		 "You rush " + monster.short + ", whipping your hair around to catch it with your tentacles, but " + monster.pronoun1 + " easily dodges.  Oy, you hope you didn't just give yourself whiplash."
+		 "You rush " + monster.short + ", whipping your hair around to catch it with your tentacles, but [monster he] easily dodges.  Oy, you hope you didn't just give yourself whiplash."
 
 		 -venom capacity determined by hair length, 2-3 stings per level of length
 

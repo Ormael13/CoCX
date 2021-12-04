@@ -100,11 +100,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("You refuse to end up as a meal to a slime and, unable to pose a decent fight, you keep the thing at bay using a torch.\n\n");
 			outputText("\"<i>Not fair! Put that out, damn thing hurts like a bitch. Fucking knew I should have put more work on my fire wards!</i>\"\n\n");
 			outputText("Aha! So she can’t stand fire, huh? Well too bad for her, as you proceed to crawl away from the slime keeping the torch between you and her so she can’t approach. Eventually, you manage to stand up and begin running from the, somewhat disappointed, slime girl.\n\n");
-			cleanupAfterCombat();
+			cleanupAfterCombatTFEvent();
 		}
 		public function defeatedByDarkSlimeLetHer():void {
 			SceneLib.caves.darkslimeScene.LetzRape();
-			cleanupAfterCombat();
+			cleanupAfterCombatTFEvent();
 			dungeonLoc = 131;
 			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
@@ -375,7 +375,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				}
 				outputText("You finally find the center of the labyrinth, somewhat exhausted. You can see the rose from here in all its dark beauty. As you are about to approach it, a monstrous creature lands right in front of you. This beast has no less than four heads! A dragon on the left, a lion on the center, a goat on ");
 				outputText("the right and, at the tip of its tail, the head of a snake! All four heads roar a warning at you as the beast stands up on its leonine legs, easily twelve feet tall, its massive wings opening in a threatening display revealing nothing short of four erect thirty inches cock already drooling precum!\n\n");
-				outputText("\"<i>Foolish intruder, you walked to your death! No one but me will ever touch the rose for it is mine and no one else's! I will rape you and then devour you alive!</i>\"\n\n");
+				outputText("\"<i>Foolish intruder, you've walked to your death. You come seeking the rose? Let's see how long your search lasts once you're in the belly of the beast!</i>\"\n\n");
 				outputText("<b>It's too late to run as you're fighting the chaos chimera!</b>");
 				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss1, 1, 0, 0, 0);
 				startCombat(new ChaosChimera(), true);
@@ -691,6 +691,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			dynStats("cor", 100);
 			player.tailType = Tail.SPIDER_ADBOMEN;
 			player.lowerBody = LowerBody.ATLACH_NACHA;
+			player.legCount = 8;
 			if (!player.hasVagina()) player.createVagina();
 			player.vaginaType(5);
 			if (player.tailRecharge < 15) player.tailRecharge = 15;
@@ -822,7 +823,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function doSleepEL():void {
 			if (rand(2) == 0) {
 				clearOutput();
-				cheatTime2(15);
+				eachMinuteCount(15);
 				outputText("You ready your bedroll and go to sleep, keen on continuing your exploration tomorrow. Sadly as you prepare to lay down, a creature from the labyrinth stumbles upon your makeshift camp and you are forced to defend yourself.\n");
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				nightAmbushRuletteEL();
@@ -891,10 +892,10 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				HPChange((timeQ * hpRecovery * multiplier), false);
 				fatigue( -(timeQ * fatRecovery * multiplier));
 				model.time.hours += timeQ;
-				SceneLib.combat.regeneration(false);
-				if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
-				if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
-				SceneLib.combat.wrathregeneration(false);
+				SceneLib.combat.regeneration1(false);
+				if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration1(false);
+				if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration1(false);
+				SceneLib.combat.wrathregeneration1(false);
 				if (model.time.hours > 23) {
 					model.time.hours -= 24;
 					/*CoC.instance.*/model.time.days++;

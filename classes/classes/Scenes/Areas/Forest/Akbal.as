@@ -116,7 +116,7 @@ public class Akbal extends Monster
 				outputText("Akbal's eyes fill with light, and a strange sense of fear begins to paralyze your limbs.");
 				
 				//(Speed decrease)
-				player.addCombatBuff('spe', -player.spe / 5);
+				player.addCombatBuff('spe', -player.spe / 5, "Combat Debuff", "AkbalDebuff");
 			}
 			//*Special Attack B - 
 			else

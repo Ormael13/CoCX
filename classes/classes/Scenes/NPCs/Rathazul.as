@@ -144,7 +144,7 @@ public function campRathazul():void {
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");
 	//player.createStatusEffect(StatusEffects.metRathazul,0,0,0,0);
-	cheatTime2(5);
+	eachMinuteCount(5);
 	offered = rathazulWorkOffer();
 	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"");
@@ -257,7 +257,7 @@ private function rathazulWorkOffer():Boolean {
 		lethiciteDefense = growLethiciteDefense;
 	}
 	if(player.hasStatusEffect(StatusEffects.CampRathazul)) {
-	if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || flags[kFLAGS.JOJO_BIMBO_STATE] == 3 || (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
+	if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || flags[kFLAGS.JOJO_BIMBO_STATE] == 3 || (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) || player.hasPerk(PerkLib.BroBrains) || player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties))) {
 			rathazulDebimboOffer();
 			return true;
 		}
@@ -458,7 +458,7 @@ private function rathazulDebimboOffer():void {
 		}
 		else {
 			//Notification if the PC is the one bimbo'ed*
-			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				outputText("\n\nRathazul glances your way as you approach his lab, a thoughtful expression on his age-lined face.  \"<i>Tell me [name], do you truly enjoy living your life under the debilitating effects of that cursed potion?  Even now the spark of intelligence has all but left from your eyes.  Do you even understand what I'm saying?</i>\"");
 				outputText("\n\nYou twirl a lock of hair around your finger and giggle.  This silly old rat thinks you're like, dumb and stuff!  He just doesn't know how great it is to have a rocking body and a sex-drive that's always ready to suck and fuck.  It's so much fun!  You look back at the rat, realizing you haven't answered him yet, feeling a bit embarrassed as he sighs in disappointment.");
 				outputText("\n\n\"<i>Child, please... bring me five Scholar's Teas and 250 gems for reagents, then I can fix you!  I can help you!  Just... get the tea!</i>\" the alchemist pleads, counting off to five on his clawed fingers for extra emphasis while shaking his gem pouch profusely.  You bite your lower lip— he seems really really mad about this or something.  Maybe you should like, get the tea?");

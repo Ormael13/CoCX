@@ -1,6 +1,7 @@
 package classes.Scenes
 {
 import classes.*;
+import classes.BodyParts.Ears;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
@@ -49,7 +50,7 @@ public class DebugMenu extends BaseContent
 	{
 		public var flagNames:XML = describeType(kFLAGS);
 		private var lastMenu:Function = null;
-		
+
 		public var setArrays:Boolean = false;
 
 		//Set up equipment arrays
@@ -58,7 +59,7 @@ public class DebugMenu extends BaseContent
 		public var armourArray:Array = [];
 		public var undergarmentArray:Array = [];
 		public var accessoryArray:Array = [];
-		
+
 		//Set up item arrays
 		public var transformativeArray:Array = [];
 		public var consumableArray:Array = [];
@@ -66,12 +67,12 @@ public class DebugMenu extends BaseContent
 		public var materialArray:Array = [];
 		public var rareArray:Array = [];
 		public var testArray:Array = [];
-		
-		
+
+
 		public function DebugMenu()
 		{
 		}
-		
+
 		public function accessDebugMenu():void {
 			LogProfilingReport();
 			//buildArray();
@@ -111,7 +112,7 @@ public class DebugMenu extends BaseContent
 			}
 			doNext(playerMenu);
 		}
-		
+
 		private var selectedScene:*;
 		private function testScene(selected:*=null):void{
 			clearOutput();
@@ -122,7 +123,7 @@ public class DebugMenu extends BaseContent
 			getFun("method",selected);
 			menu();
 			addButton(0,"Back",linkhandler,new TextEvent(TextEvent.LINK,false,false,"-1"));
-			
+
 			function getFun(type:String, scene:*):void{
 				var funsxml:XML = describeType(scene);
 				var funs:Array = [];
@@ -154,15 +155,15 @@ public class DebugMenu extends BaseContent
 					selectedScene = selectedScene[e.text];
 					testScene(selectedScene);
 				}
-				
+
 			}
 		}
-		
+
 		private function testTfMenu():void {
 			clearOutput();
 			mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
 			outputText("<b>Test transformations:</b>\n");
-			
+
 			var list:/*String*/Array = keys(transformations, true).sort();
 			for each (var key:String in list) {
 				var tf:PossibleEffect = transformations[key] as PossibleEffect;
@@ -181,7 +182,7 @@ public class DebugMenu extends BaseContent
 			outputText("\n\n");
 			menu();
 			addButton(0,"Back",linkhandler,new TextEvent(TextEvent.LINK,false,false,"-1"));
-			
+
 			function linkhandler(e:TextEvent):void {
 				mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
 				var tf:PossibleEffect = (e.text in transformations) ? transformations[e.text] as PossibleEffect : null;
@@ -198,7 +199,7 @@ public class DebugMenu extends BaseContent
 				}
 			}
 		}
-		
+
 		//Spawn items menu
 		private function itemSpawnMenu():void {
 			setItemArrays();
@@ -218,7 +219,7 @@ public class DebugMenu extends BaseContent
 			addButton(10,"ConsumableLib",displayItemPage,testArray,1);
 			addButton(14, "Back", accessDebugMenu);
 		}
-		
+
 		private function displayItemPage(array:Array, page:int):void {
 			clearOutput();
 			outputText("What item would you like to spawn? ");
@@ -235,7 +236,7 @@ public class DebugMenu extends BaseContent
 			if (!isPreviousPageEmpty(array, page)) addButton(9, "Previous", displayItemPage, array, page-1);
 			addButton(14, "Back", itemSpawnMenu);
 		}
-		
+
 		private function isPreviousPageEmpty(array:Array, page:int):Boolean {
 			var isEmpty:Boolean = true;
 			for (var i:int = 0; i < 12; i++) {
@@ -245,7 +246,7 @@ public class DebugMenu extends BaseContent
 			}
 			return isEmpty;
 		}
-		
+
 		private function isNextPageEmpty(array:Array, page:int):Boolean {
 			var isEmpty:Boolean = true;
 			for (var i:int = 0; i < 12; i++) {
@@ -255,7 +256,7 @@ public class DebugMenu extends BaseContent
 			}
 			return isEmpty;
 		}
-		
+
 		private function setItemArrays():void {
             if (setArrays) return; //Already set, cancel.
             var xmlList:XMLList = describeType(ConsumableLib).factory.constant;
@@ -335,7 +336,7 @@ public class DebugMenu extends BaseContent
 			transformativeArray.push(consumables.VIXVIGR);
 			transformativeArray.push(consumables.W_FRUIT);
 			transformativeArray.push(consumables.WETCLTH);
-			
+
 			//------------
 			// Consumables
 			//------------
@@ -408,7 +409,8 @@ public class DebugMenu extends BaseContent
 			consumableArray.push(consumables.L_PRPEG);
 			consumableArray.push(consumables.WHITEEG);
 			consumableArray.push(consumables.L_WHTEG);
-			
+			consumableArray.push(consumables.AMBROSA);
+
 			//------------
 			// Dyes
 			//------------
@@ -427,7 +429,7 @@ public class DebugMenu extends BaseContent
 			dyeArray.push(consumables.RED_DYE);
 			//Page 2
 			dyeArray.push(consumables.WHITEDY);
-			
+
 			//------------
 			// Materials
 			//------------
@@ -452,10 +454,10 @@ public class DebugMenu extends BaseContent
 			rareArray.push(consumables.BROBREW);
 			rareArray.push(consumables.HUMMUS2);
 			rareArray.push(consumables.P_PEARL);
-			
+
 			rareArray.push(useables.DBGWAND);
 			rareArray.push(useables.GLDSTAT);
-			
+
 			//------------
 			// Weapons
 			//------------
@@ -506,7 +508,7 @@ public class DebugMenu extends BaseContent
 			shieldArray.push(shields.GREATSH);
 			shieldArray.push(shields.KITE_SH);
 			shieldArray.push(shields.TOWERSH);
-			
+
 			//------------
 			// Armours
 			//------------
@@ -552,7 +554,7 @@ public class DebugMenu extends BaseContent
 			armourArray.push(armors.TUBETOP);
 			//Page 4
 			armourArray.push(armors.W_ROBES);
-			
+
 			//------------
 			// Undergarments
 			//------------
@@ -572,7 +574,7 @@ public class DebugMenu extends BaseContent
 			//Page 2
 			undergarmentArray.push(undergarments.SS_LOIN);
 			undergarmentArray.push(undergarments.SSPANTY);
-			
+
 			//------------
 			// Accessories
 			//------------
@@ -591,9 +593,9 @@ public class DebugMenu extends BaseContent
 			accessoryArray.push(jewelries.SILVRNG);
 			setArrays = true;
 		}
-		
 
-		
+
+
 		private function statChangeMenu():void {
 			clearOutput();
 			outputText("Which attribute would you like to alter?");
@@ -607,7 +609,7 @@ public class DebugMenu extends BaseContent
 			addButton(7, "Corruption", statChangeAttributeMenu, "cor");
 			addButton(14, "Back", accessDebugMenu);
 		}
-		
+
 		private function statChangeAttributeMenu(stats:String = ""):void {
 			var attribute:* = stats;
 			clearOutput();
@@ -624,13 +626,13 @@ public class DebugMenu extends BaseContent
 			addButton(9, "Subtract 50", statChangeApply, stats, -50);
 			addButton(14, "Back", statChangeMenu);
 		}
-		
+
 		private function statChangeApply(stats:String = "", increment:Number = 0):void {
 			dynStats(stats, increment);
 			statScreenRefresh();
 			statChangeAttributeMenu(stats);
 		}
-		
+
 		private function styleHackMenu():void {
 			menu();
 			clearOutput();
@@ -779,21 +781,7 @@ public class DebugMenu extends BaseContent
 		private function dumpPlayerData():void {
 			clearOutput();
 			mainViewManager.showPlayerDoll(true);
-            var pa:PlayerAppearance = CoC.instance.playerAppearance;
-            pa.describeRace();
-			pa.describeFaceShape();
-			outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
-			pa.describeEyes();
-			pa.describeHairAndEars();
-			pa.describeBeard();
-			pa.describeTongue();
-			pa.describeHorns();
-			outputText("[pg]");
-			pa.describeBodyShape();
-			pa.describeWings();
-			pa.describeRearBody();
-			pa.describeArms();
-			pa.describeLowerBody();
+			CoC.instance.playerAppearance.appearance(true);
 			outputText("[pg]");
 			for each (var race:Race in Race.ALL_RACES) {
 				if (!race) continue;
@@ -883,12 +871,12 @@ public class DebugMenu extends BaseContent
 			});
 			addBeControl(label, ti);
 		}
-		
+
 		private function bodyPartEditorSkin():void {
 			clearBeElements();
 			addBeComboBox("Hair type",
-					mapForComboBox(Hair.Types, "id"),
-					player.hairType,
+                    mapForComboBox(Hair.Types, "id"),
+                    Hair.Types[player.hairType],
 					function (item:*):void {
 						player.hairType = item.data.value;
 						dumpPlayerData();
@@ -1044,7 +1032,7 @@ public class DebugMenu extends BaseContent
 			"sandy blonde", "sandy brown", "sandy-blonde", "shiny black", "silver blonde", "silver-white", "snow white",
 			"yellowish-green", "black and yellow", "white and black"
 		];
-		
+
 		private static const SKIN_ADJ_CONSTANTS:Array = [
 			"(none)", "tough", "smooth", "rough", "sexy",
 			"freckled", "glistering", "shiny", "slimy","goopey",
@@ -1110,6 +1098,14 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Eye color", COLOR_CONSTANTS, player.eyes.colour,
 					function (item:*):void {
 						player.eyes.colour = item.data;
+						dumpPlayerData();
+					}
+			);
+			var earTypes:Array = mapForComboBox(Ears.Types, "id");
+			addBeComboBox("Ear type", earTypes,
+					Ears.Types[player.ears.type],
+					function (item:*):void {
+						player.ears.type = item.data.value;
 						dumpPlayerData();
 					}
 			);
@@ -1341,12 +1337,12 @@ public class DebugMenu extends BaseContent
 			clearOutput();
 			outputText("<b>You are now a Manticore!</b>");
 			//Cat TF
-			player.faceType = Face.CAT;
+			CoC.instance.transformations.FaceCat.applyEffect(false);
 			player.ears.type = Ears.CAT;
 			player.lowerBody = LowerBody.CAT;
 			player.legCount = 2;
 			player.skin.restore();
-			player.skin.growFur();
+			CoC.instance.transformations.SkinFur().applyEffect(false);
 			//Draconic TF
 			player.horns.type = Horns.DRACONIC_X2;
 			player.horns.count = 4;
@@ -1357,26 +1353,26 @@ public class DebugMenu extends BaseContent
 			player.tailRecharge = 5;
 			doNext(styleHackMenu);
 		}
-		
+
 		private function getDragonneKit():void {
 			clearOutput();
 			outputText("<b>You are now a Dragonne!</b>");
 			//Cat TF
-			player.faceType = Face.CAT;
+			CoC.instance.transformations.FaceCat.applyEffect(false);
 			player.ears.type = Ears.CAT;
 			player.tailType = Tail.CAT;
 			player.lowerBody = LowerBody.CAT;
 			player.legCount = 2;
 			//Draconic TF
 			player.skin.restore();
-			player.skin.growCoat(Skin.SCALES);
+			CoC.instance.transformations.SkinScales().applyEffect(false);
 			player.tongue.type = Tongue.DRACONIC;
 			player.horns.type = Horns.DRACONIC_X2;
 			player.horns.count = 4;
 			player.wings.type = Wings.DRACONIC_LARGE;
 			doNext(styleHackMenu);
 		}
-		
+
 		private function debugPrison():void {
 			clearOutput();
 			doNext(styleHackMenu);
@@ -1407,17 +1403,17 @@ public class DebugMenu extends BaseContent
 			}
 			flushOutputTextToGUI();
 		}
-		
+
 		private function eventTriggerMenu():void {
 			menu();
 			addButton(0, "Anemone", SceneLib.anemoneScene.anemoneKidBirthPtII);
 			//addButton(0, "Marae Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByMarae);
 			//addButton(1, "Jojo Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
 			//addButton(2, "Rathazul Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByRathazul);
-			
+
 			addButton(14, "Back", accessDebugMenu);
 		}
-		
+
 		private function toggleMeaninglessCorruption():void {
 			clearOutput();
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] == 0) {
@@ -1429,7 +1425,7 @@ public class DebugMenu extends BaseContent
 				outputText("<b>Set MEANINGLESS_CORRUPTION flag to 0.</b>");
 			}
 		}
-		
+
 		private function resetNPCMenu():void {
 			clearOutput();
 			outputText("Which NPC would you like to reset?");
@@ -1438,10 +1434,10 @@ public class DebugMenu extends BaseContent
 			if (JojoScene.monk >= 5 || flags[kFLAGS.JOJO_DEAD_OR_GONE] > 0) addButton(1, "Jojo", resetJojo);
 			if (flags[kFLAGS.EGG_BROKEN] > 0) addButton(2, "Ember", resetEmber);
 			if (flags[kFLAGS.SHEILA_DISABLED] > 0 || flags[kFLAGS.SHEILA_DEMON] > 0 || flags[kFLAGS.SHEILA_CITE] < 0 || flags[kFLAGS.SHEILA_CITE] >= 6) addButton(6, "Sheila", resetSheila);
-			
+
 			addButton(14, "Back", accessDebugMenu);
 		}
-		
+
 		private function resetUrta():void {
 			clearOutput();
 			outputText("Did you do something wrong and get Urta heartbroken or did you fail Urta's quest? You can reset if you want to.");
@@ -1459,7 +1455,7 @@ public class DebugMenu extends BaseContent
 			}
 			doNext(resetNPCMenu);
 		}
-		
+
 		private function resetSheila():void {
 			clearOutput();
 			outputText("Did you do something wrong with Sheila? Turned her into demon? Lost the opportunity to get her lethicite? No problem, you can just reset her!");
@@ -1482,7 +1478,7 @@ public class DebugMenu extends BaseContent
 			}
 			doNext(resetNPCMenu);
 		}
-		
+
 		private function resetJojo():void {
 			clearOutput();
 			outputText("Did you do something wrong with Jojo? Corrupted him? Accidentally removed him from the game? No problem!");
@@ -1500,7 +1496,7 @@ public class DebugMenu extends BaseContent
 			}
 			doNext(resetNPCMenu);
 		}
-		
+
 		private function resetEmber():void {
 			clearOutput();
 			outputText("Did you destroy the egg containing Ember? Want to restore the egg so you can take it?");
@@ -1514,14 +1510,14 @@ public class DebugMenu extends BaseContent
 			}
 			doNext(resetNPCMenu);
 		}
-		
+
 		private function abortPregnancy():void {
 			clearOutput();
 			outputText("You feel as if something's dissolving inside your womb. Liquid flows out of your [vagina] and your womb feels empty now. <b>You are no longer pregnant!</b>");
 			player.knockUpForce();
 			doNext(accessDebugMenu);
 		}
-		
+
 		//[Flag Editor]
 		private function flagEditor():void {
 			clearOutput();
@@ -1538,7 +1534,7 @@ public class DebugMenu extends BaseContent
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		}
-		
+
 		private function editFlag():void {
 			var flagId:int = int(mainView.nameBox.text);
 			clearOutput();
@@ -1558,14 +1554,14 @@ public class DebugMenu extends BaseContent
 			addButton(0, "Save", saveFlag, flagId);
 			addButton(1, "Discard", flagEditor);
 		}
-		
+
 		private function saveFlag(flagId:int = 0):void {
 			var temp:* = Number(mainView.nameBox.text);
 			if (temp is Number || temp is int) flags[flagId] = temp;
 			else flags[flagId] = mainView.nameBox.text;
 			flagEditor();
 		}
-		
+
 		//------------
 		// LIGHTS OUT
 		//------------
@@ -1579,28 +1575,28 @@ public class DebugMenu extends BaseContent
 			clearOutput();
 			outputText("Test puzzle!");
 			outputText("\n\nThis is the same type used in Stellar Tether bomb puzzle in TiTS.");
-			
+
 			if (victoryFunction == null) victoryFunction = accessDebugMenu;
 			lightsOutVictoryFunction = victoryFunction;
 			if (failureFunction == null) failureFunction = accessDebugMenu;
 			lightsOutFailureFunction = failureFunction;
-			
+
 			menu();
 			lightsArray = new Array();
-			
+
 			for (var i:int = 0; i < 15; i++)
 			{
 				lightsArray[i] = false;
-				
+
 				addButton(i, " ", toggleLight, i);
 			}
-			
+
 			var onBts:Array = [1, 5, 6, 9, 10, 11, 12, 13];
-			
+
 			for (i = 0; i < onBts.length; i++)
 			{
 				lightsArray[onBts[i]] = true;
-				
+
 				addButton(onBts[i], "XXXXXXXX", toggleLight, onBts[i]);
 			}
 		}
@@ -1621,11 +1617,11 @@ public class DebugMenu extends BaseContent
 			addButton(0, "Yes", startLightsOut, testVictoryFunc, testFailureFunc);
 			addButton(1, "No", accessDebugMenu);
 		}
-		
+
 		public function toggleSlot(slot:int):void
 		{
 			lightsArray[slot] = !lightsArray[slot];
-			
+
 			if (lightsArray[slot])
 			{
 				//userInterface.setButtonPurple(slot);
@@ -1642,10 +1638,10 @@ public class DebugMenu extends BaseContent
 		{
 			toggleSlot(slot);
 			toggleNearby(slot);
-			
+
 			var allOff:Boolean = true;
 			var allOn:Boolean = true;
-			
+
 			for (var i:int = 0; i < 15; i++)
 			{
 				if (lightsArray[i] == 1) allOff = false;
@@ -1666,7 +1662,7 @@ public class DebugMenu extends BaseContent
 		{
 			var pX:int = slot % 5;
 			var pY:int = slot / 5;
-			
+
 			if (pX > 0) toggleSlot(slot - 1);
 			if (pX < 4) toggleSlot(slot + 1);
 			if (pY > 0) toggleSlot(slot - 5);

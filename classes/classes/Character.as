@@ -1,4 +1,4 @@
-﻿package classes 
+﻿package classes
 {
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
@@ -6,6 +6,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
+import classes.CoC;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -18,10 +19,10 @@ import classes.Items.NecklaceLib;
 
 		//Used for hip ratings
 		public var thickness:Number = 0;
-		
+
 		//Body tone i.e. Lithe, stocky, etc
 		public var tone:Number = 0;
-		
+
 		private var _pregnancyType:int = 0;
 		public function get pregnancyType():int { return _pregnancyType; }
 
@@ -35,20 +36,20 @@ import classes.Items.NecklaceLib;
 		public function get buttPregnancyIncubation():int { return _buttPregnancyIncubation; }
 
 
-		
+
 		//Key items
 		public var keyItems:Array;
-		
+
 		public function Character()
 		{
 			keyItems = [];
 		}
-		
+
 		//Return bonus fertility
 
 		//return total fertility
 
-		
+
 		//Modify femininity!
 		public function modFem(goal:Number, strength:Number = 1):String
 		{
@@ -102,7 +103,7 @@ import classes.Items.NecklaceLib;
 			}
 			return output;
 		}
-		
+
 		public function modThickness(goal:Number, strength:Number = 1):String
 		{
 			if (goal == thickness)
@@ -132,7 +133,7 @@ import classes.Items.NecklaceLib;
 				return "\n\nEach movement feels a tiny bit easier than the last.  Did you just lose a little weight!? (+" + strength + " thin)";
 			return "";
 		}
-		
+
 		public function modTone(goal:Number, strength:Number = 1):String
 		{
 			if (goal == tone)
@@ -167,7 +168,7 @@ import classes.Items.NecklaceLib;
 				return "\n\nMoving brings with it a little more jiggle than you're used to.  You don't seem to have gained weight, but your muscles look less visible. (-" + strength + " muscle tone)";
 			return "";
 		}
-		
+
 		//Run this every hour to 'fix' femininity.
 		public function fixFemininity():String
 		{
@@ -239,6 +240,7 @@ import classes.Items.NecklaceLib;
 	public function hasBeak():Boolean{ return facePart.hasBeak(); }
 	public function face():String { return facePart.describe(); }
 	public function faceDesc():String { return facePart.describeMF(); }
+	public function faceDescArticle():String { return facePart.describeMF(true); }
 	public function hasLongTail():Boolean { return tail.isLong(); }
 
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
@@ -288,7 +290,7 @@ import classes.Items.NecklaceLib;
 			_pregnancyType = type;
 			_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
 		}
-	
+
 		//fertility must be >= random(0-beat)
 		public function buttKnockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
@@ -415,7 +417,7 @@ import classes.Items.NecklaceLib;
 				keyItems.push(newKeyItem);
 				keySlot = keyItems.length - 1;
 			}
-			
+
 			keyItems[keySlot].keyName = keyName;
 			keyItems[keySlot].value1 = value1;
 			keyItems[keySlot].value2 = value2;
@@ -423,7 +425,7 @@ import classes.Items.NecklaceLib;
 			keyItems[keySlot].value4 = value4;
 			//trace("NEW KEYITEM FOR PLAYER in slot " + keySlot + ": " + keyItems[keySlot].keyName);
 		}
-		
+
 		//Remove a key item
 		public function removeKeyItem(itemName:String):void
 		{
@@ -445,7 +447,7 @@ import classes.Items.NecklaceLib;
 				}
 			}
 		}
-		
+
 		public function addKeyValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			var counter:Number = keyItems.length;
@@ -479,7 +481,7 @@ import classes.Items.NecklaceLib;
 			}
 			//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player does not have the key item.");
 		}
-		
+
 		public function keyItemv1(statusName:String):Number
 		{
 			var counter:Number = keyItems.length;
@@ -498,7 +500,7 @@ import classes.Items.NecklaceLib;
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
-		
+
 		public function keyItemv2(statusName:String):Number
 		{
 			var counter:Number = keyItems.length;
@@ -517,7 +519,7 @@ import classes.Items.NecklaceLib;
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
-		
+
 		public function keyItemv3(statusName:String):Number
 		{
 			var counter:Number = keyItems.length;
@@ -536,7 +538,7 @@ import classes.Items.NecklaceLib;
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
-		
+
 		public function keyItemv4(statusName:String):Number
 		{
 			var counter:Number = keyItems.length;
@@ -555,7 +557,7 @@ import classes.Items.NecklaceLib;
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
-		
+
 		public function removeKeyItems():void
 		{
 			var counter:Number = keyItems.length;
@@ -565,7 +567,7 @@ import classes.Items.NecklaceLib;
 				keyItems.splice(counter, 1);
 			}
 		}
-		
+
 		public function hasKeyItem(keyName:String):Number
 		{
 			var counter:Number = keyItems.length;
@@ -580,7 +582,7 @@ import classes.Items.NecklaceLib;
 			}
 			return -1;
 		}
-		
+
 		//Grow
 
 		//BreastCup
@@ -615,14 +617,14 @@ import classes.Items.NecklaceLib;
 			}
 			return false;
 		}
-		
+
 		public function hasKnot(arg:int = 0):Boolean
 		{
 			if (arg > cockTotal() - 1 || arg < 0)
 				return false;
 			return cocks[arg].hasKnot();
 		}
-		
+
 		public override function minHP():Number
 		{
 			var min:Number = 0;
@@ -642,11 +644,11 @@ import classes.Items.NecklaceLib;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
-			if (hasPerk(PerkLib.LizanMarrowFinalForm)) min -= maxHP() * 0.05;
-			if (hasPerk(PerkLib.OrcAdrenalGlandsFinalForm) || game.player.orcScore() >= 11) {
+			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
+			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved) || game.player.orcScore() >= 11) {
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-				if (hasPerk(PerkLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-				if (hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) min -= maxHP() * 0.02;
+				if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
+				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
 			}
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
@@ -664,7 +666,7 @@ import classes.Items.NecklaceLib;
 			min = Math.round(min);
 			return min;
 		}
-		
+
 		public override function maxFatigue():Number
 		{
 			var max:Number = 150;
@@ -726,8 +728,8 @@ import classes.Items.NecklaceLib;
 			if (hasPerk(PerkLib.PrestigeJobArcaneArcher)) max += 600;
 			if (hasPerk(PerkLib.PrestigeJobSoulArcher)) max += 150;
 			if (hasPerk(PerkLib.PrestigeJobSeer)) max += 900;
-			if (hasPerk(PerkLib.RapidReload)) max += 15;
-			if (hasPerk(PerkLib.LightningReload)) max += 25;
+			if (hasPerk(PerkLib.RapidReload)) max += 20;
+			if (hasPerk(PerkLib.LightningReload)) max += 60;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib*2);
@@ -754,7 +756,7 @@ import classes.Items.NecklaceLib;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
-		
+
 		public override function maxSoulforce():Number
 		{
 			var max:Number = 50;
@@ -890,7 +892,7 @@ import classes.Items.NecklaceLib;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimax += 0.25;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (hasPerk(PerkLib.Ascension)) multimax += perkv1(PerkLib.Ascension) * 0.01;
-				
+
 			}
 			if (hasPerk(PerkLib.LimitBreakerSoul1stStage)) multimax += 0.05;
 			if (hasPerk(PerkLib.LimitBreakerSoul2ndStage)) multimax += 0.1;
@@ -899,7 +901,15 @@ import classes.Items.NecklaceLib;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
-		
+		public override function maxOverSoulforce():Number {
+			var max1:Number = maxSoulforce();
+			var max2:Number = 1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 1499999) max1 = 1499999;
+			return max1;
+		}
+
 		public override function maxWrath():Number
 		{
 			var max:Number = 500;
@@ -1042,7 +1052,7 @@ import classes.Items.NecklaceLib;
 			max1 = Math.round(max1);
 			return max1;
 		}
-		
+
 		public override function maxMana():Number
 		{
 			var max:Number = 300;
@@ -1174,13 +1184,21 @@ import classes.Items.NecklaceLib;
 			if (max > 2499999) max = 2499999;
 			return max;
 		}
-		
+		public override function maxOverMana():Number {
+			var max1:Number = maxMana();
+			var max2:Number = 1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 2499999) max1 = 2499999;
+			return max1;
+		}
+
 		public function maxVenom():Number
 		{
 			var maxven:Number = 0;
 			var multimaxven:Number = 1;
-			if (game.player.faceType == Face.SNAKE_FANGS) maxven += 200;
-			if (game.player.faceType == Face.SPIDER_FANGS) maxven += 200;
+			if (CoC.instance.transformations.FaceSnakeFangs.isPresent()) maxven += 200;
+			if (CoC.instance.transformations.FaceSpiderFangs.isPresent()) maxven += 200;
 			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SCORPION) maxven += 300;
@@ -1190,9 +1208,9 @@ import classes.Items.NecklaceLib;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
 			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) maxven += 400;
-			if (hasPerk(PerkLib.VenomGlands)) maxven += 100;
-			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 400;
-			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
+			if (hasPerk(MutationsLib.VenomGlands)) maxven += 100;
+			if (hasPerk(MutationsLib.VenomGlandsPrimitive)) maxven += 400;
+			if (hasPerk(MutationsLib.VenomGlandsEvolved)) {
 				maxven += 700;
 				multimaxven += 1;
 			}
@@ -1218,14 +1236,14 @@ import classes.Items.NecklaceLib;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
-			if (hasPerk(PerkLib.ArachnidBookLung)) multimaxven += 1;
-			if (hasPerk(PerkLib.ArachnidBookLungEvolved)) multimaxven += 1;
-			if (hasPerk(PerkLib.ArachnidBookLungFinalForm)) multimaxven += 1;
+			if (hasPerk(MutationsLib.ArachnidBookLung)) multimaxven += 1;
+			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive)) multimaxven += 1;
+			if (hasPerk(MutationsLib.ArachnidBookLungEvolved)) multimaxven += 1;
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;
 		}
-		
+
 		public function maxHunger():Number
 		{
 			var max:Number = 100;
@@ -1276,14 +1294,14 @@ import classes.Items.NecklaceLib;
 			if (game.player.orcaScore() >= 14) max += 20;
 			if (game.player.orcaScore() >= 20) max += 25;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
-			if (hasPerk(PerkLib.DisplacerMetabolismEvolved)) max += 50;
-			if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) max += 50;
-			if (hasPerk(PerkLib.PigBoarFat)) max += 5;
-			if (hasPerk(PerkLib.PigBoarFatEvolved)) max += 10;
-			if (hasPerk(PerkLib.PigBoarFatFinalForm)) max += 20;
-			if (hasPerk(PerkLib.WhaleFat)) max += 5;
-			if (hasPerk(PerkLib.WhaleFatEvolved)) max += 10;
-			if (hasPerk(PerkLib.WhaleFatFinalForm)) max += 20;
+			if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) max += 50;
+			if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive)) max += 50;
+			if (hasPerk(MutationsLib.PigBoarFat)) max += 5;
+			if (hasPerk(MutationsLib.PigBoarFatPrimitive)) max += 10;
+			if (hasPerk(MutationsLib.PigBoarFatEvolved)) max += 20;
+			if (hasPerk(MutationsLib.WhaleFat)) max += 5;
+			if (hasPerk(MutationsLib.WhaleFatPrimitive)) max += 10;
+			if (hasPerk(MutationsLib.WhaleFatEvolved)) max += 20;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

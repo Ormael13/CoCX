@@ -37,7 +37,7 @@ public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface
 			if (flags[kFLAGS.COTTON_KID_COUNT] > 0 && model.time.hours == 23) flags[kFLAGS.COTTON_OLDEST_KID_AGE]++;
 			return false;
 		}
-	
+
 		public function timeChangeLarge():Boolean {
 			if (model.time.hours == 6 && flags[kFLAGS.COTTON_BREAKFAST_CLUB] == 1 && player.biggestLactation() >= 2) {
 				flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 0;
@@ -900,7 +900,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		if(player.gender == 0) outputText("  She places a hand on your bare crotch and quirks an eyebrow. \"<i>Well this is new... Certainly not bad though.</i>\" She runs a hand along your bare mound, which somehow manages to send ripples of pleasure up your spine.");
 		outputText("\n\n");
 
-		outputText("Cotton continues the kisses down to your [legs] and stands, dragging over a bench from the locker room before standing on it and giving your " + buttDescript() + " a good smack. You turn back and give her a coy look, which she returns and gives your flank another smack.");
+		outputText("Cotton continues the kisses down to your [legs] and stands, dragging over a bench from the locker room before standing on it and giving your [butt] a good smack. You turn back and give her a coy look, which she returns and gives your flank another smack.");
 		outputText("  She takes a moment to get some water from the shower over your rear end before pressing her cock against your " + player.assholeOrPussy() + ", slipping it in gently, careful not to go too quick. You moan slightly and blush, whispering back at her, urging her to continue.");
 		//(Stretch and appropriate virginity check)
 		if(player.hasVagina()) player.cuntChange(72,true,true,false);

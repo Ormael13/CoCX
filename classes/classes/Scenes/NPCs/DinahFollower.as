@@ -48,6 +48,7 @@ import classes.internals.Utils;
 				flags[kFLAGS.DINAH_LVL_UP] = 0.25;
 				flags[kFLAGS.DINAH_CUP_SIZE] = 1;
 				flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = 1;
+				flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			}
 			startCombat(new Dinah());
 		}
@@ -73,9 +74,9 @@ import classes.internals.Utils;
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
 			_extra = (1 + rand(3));
-			if (rand(2) == 0) _roulette1 = (1 + rand(4));
-			if (rand(2) == 0) _roulette2 = (1 + rand(3));
-			if (rand(2) == 0) _roulette3 = (1 + rand(5));
+			if (rand(2) == 0) _roulette1 = rand(4);
+			if (rand(2) == 0) _roulette2 = rand(3);
+			if (rand(2) == 0) _roulette3 = rand(6);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
 				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
@@ -99,9 +100,9 @@ import classes.internals.Utils;
 				addButton(1, "Spar", DinahSparring);
 				addButtonDisabled(3, "Talk", "NYI");
 				addButtonDisabled(4, "Sex", "NYI");
-				addButtonDisabled(5, "Present", "NYI");//5 i 6 skopiować z MarbleScene.as i dostosować
-				addButtonDisabled(6, "Give Item", "NYI");
-				//addButton(6, "Give Item", canGiveItem() ? giveItem : null);
+				if (player.hasStatusEffect(StatusEffects.DinahGift)) addButtonDisabled(5, "Gift", "She not feel like she want...");
+				else addButton(5, "Gift", recieveGIFTfromDinah);
+				addButton(6, "Give Item", giveDinahItem);
 				addButton(14, "Back", camp.campFollowers);
 			}
 			else {
@@ -113,7 +114,7 @@ import classes.internals.Utils;
 		public function DinahAppearance():void {
 			clearOutput();
 			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.");
-			outputText("");//She has " + amilyHips() + " and a " + amilyButt() + ". She has a pair of " + amilyTits() + " on her chest. They have " + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + "s.	" + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "
+			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have "+dinahNippleSize()+"-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
 		}
@@ -136,50 +137,50 @@ import classes.internals.Utils;
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DINAH_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DINAH_LVL_UP] == 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 6);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 6, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DINAH_LVL_UP] == 2) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 12);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 12, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 3;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DINAH_LVL_UP] == 3) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 18);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 18, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 4;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DINAH_LVL_UP] == 4) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 24);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 24, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 5;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DINAH_LVL_UP] == 5) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 30);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 30, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 6;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DINAH_LVL_UP] == 6) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 36);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 36, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 7;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 7 && flags[kFLAGS.DINAH_LVL_UP] == 7) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 42);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 42, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 8;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 8 && flags[kFLAGS.DINAH_LVL_UP] == 8) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 48);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 48, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 9;
 				}
@@ -201,13 +202,18 @@ import classes.internals.Utils;
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
+			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) {
+				if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) addButtonDisabled(10, "???", "Wait until she find things that may be of use to fully restore HB mech.");
+				else addButton(10, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
+			}
+			else addButtonDisabled(10, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
-				addButton(10, "Boss D.", DinahShopMainMenu2);
-				addButton(12, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
+				addButton(11, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
+				addButton(13, "BossTF's", DinahShopMainMenu2);
 			}
 			else {
-				addButtonDisabled(10, "Boss D.", "Maybe if merchant would be more interested in you...");
-				addButtonDisabled(12, "Roulette", "Maybe if merchant would be more interested in you...");
+				addButtonDisabled(11, "Roulette", "Maybe if merchant would be more interested in you...");
+				addButtonDisabled(13, "Boss D.", "Maybe if merchant would be more interested in you...");
 			}
 			addButton(14, "Back", DinahMainMenu);
 		}
@@ -237,7 +243,7 @@ import classes.internals.Utils;
 			menu();
 			if (_roulette1 == 0) addButtonDisabled(1, "???", "Dud. Shame, shame.");
 			if (_roulette1 == 1) addButton(1, "UnDefKingS", buyItem5, 40).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
-			if (_roulette1 == 2) addButton(1, "CroUndefKing", buyItem5, 41).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
+			if (_roulette1 == 2) addButton(1, "CroUndefKing", buyItem5, 41).hint("Crown of the Undefeated King - You can't lose by HP until your health drops into the negatives any more than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
 			if (_roulette1 == 3) addButton(1, "UnDefKingDest", buyItem5, 42).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
 			if (_roulette2 == 0) addButtonDisabled(2, "???", "Dud. Shame, shame.");
 			if (_roulette2 == 1) addButton(2, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
@@ -245,9 +251,11 @@ import classes.internals.Utils;
 			if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
 			if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
 			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
-			//later put her lower body armor part of HB set
 			if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 			if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			//if (_roulette4 == 0) addButtonDisabled(6, "???", "Dud. Shame, shame.");
+			//if (_roulette5 == 0) addButtonDisabled(7, "???", "Dud. Shame, shame.");
+			//if (_roulette6 == 0) addButtonDisabled(8, "???", "Dud. Shame, shame.");
 			addButton(14, "Back", DinahShopMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
@@ -284,6 +292,7 @@ import classes.internals.Utils;
 			if (item == 51) catChimeraBuy5(armors.HBARMOR);
 			if (item == 52) catChimeraBuy5(undergarments.HBSHIRT);
 			if (item == 53) catChimeraBuy5(undergarments.HBSHORT);
+			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 		}
@@ -340,7 +349,7 @@ import classes.internals.Utils;
 				doNext(DinahShopMainMenu3);
 				return;
 			}
-			doYesNo(Utils.curry(catChimeraTransact4,itype), DinahShopMainMenu2);
+			doYesNo(Utils.curry(catChimeraTransact5,itype), DinahShopMainMenu3);
 		}
 		public function catChimeraTransact1(itype:ItemType):void {
 			clearOutput();
@@ -371,6 +380,321 @@ import classes.internals.Utils;
 			player.gems -= itype.value * _extra;
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu3);
+		}
+		
+		public function buyHowlingBansheeMech():void {
+			clearOutput();
+			outputText("You point out the Howling Banshee Mech.\n\n");
+			outputText("\"<i>Oh this one? Luckly you got armor set needed to move this monster around. An it costs only " + (2000 * _extra) + " gems. It's one time deal so not expect me to find more of those.</i>\"");
+			if (player.gems < (2000 * _extra)) {
+				outputText("\n<b>You don't have enough gems...</b>");
+				doNext(DinahShopMainMenu);
+				return;
+			}
+			doYesNo(Utils.curry(buyHowlingBansheeMech1), DinahShopMainMenu);
+		}
+		public function buyHowlingBansheeMech1():void {
+			clearOutput();
+			player.createStatusEffect(StatusEffects.BuyedHowlingBansheMech,0,0,0,0);
+			player.gems -= 2000 * _extra;
+			statScreenRefresh();
+			inventory.takeItem(vehicles.HB_MECH, DinahShopMainMenu);
+		}
+		
+		public function recieveGIFTfromDinah():void {
+			clearOutput();
+			outputText("\"<i>Lady Godiva says that sometimes it's good to share something without asking for money so...</i>\" as she been talking she pulled some object from the folds of her robe and throws toward you. \"<i>...take this. And may Lady Godiva bless this place. And now firgive me i need to occupy myself with other matters.</i>\" Not giving you chance to say anything she shoo you away.");
+			player.createStatusEffect(StatusEffects.DinahGift, (16+rand(15)), 0, 0, 0);
+			/*var gift:Number = rand(20);
+			if (gift == 0) inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
+			if (gift > 0) */inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
+		}
+		
+		public function giveDinahItem():void {
+			clearOutput();
+			outputText("What item do you want to give Dinah?");
+			menu();
+			var haveGift:Boolean = false;
+			var button:int = 0;
+			if (player.hasItem(consumables.P_S_MLK)) {
+				addButton(button++, "P.SuccMilk", giveDinahPurifiedSuccubusMilk);
+				haveGift = true;
+			}
+			if (player.hasItem(consumables.BROWNEG) || player.hasItem(consumables.L_BRNEG)) {
+				addButton(button++, "Brown Egg", giveDinahBrownEgg);
+				haveGift = true;
+			}
+			if (player.hasItem(consumables.PURPLEG) || player.hasItem(consumables.L_PRPEG)) {
+				addButton(button++, "Purple Egg", giveDinahPurpleEgg);
+				haveGift = true;
+			}
+			if (player.hasItem(consumables.REDUCTO)) {
+				addButton(button++, "Reducto", giveDinahReducto);
+				haveGift = true;
+			}
+			addButton(14, "Back", DinahMainMenu);
+		}
+		public function giveDinahPurifiedSuccubusMilk():void {
+			clearOutput();
+			outputText("You offer Dinah a bottle of purified succubus milk and tell her that you'd like her to make her bust bigger.");
+			if (flags[kFLAGS.DINAH_CUP_SIZE] < 28) {
+				outputText("\n\n\"<i>Alright, if you say so.</i>\"  Dinah lifts the bottle to her mouth, and drinks the substance down.  She then drops the empty bottle, allowing it to smash on the ground, clutching her breasts and moaning ecstatically as they visibly swell, her clothes growing tighter as they do. When they finish, she squeezes them with glee. \"<i>Mmm... That feels nice. Did you want something else?</i>\"\n\n");
+				dynStats("lus", 10);
+				player.consumeItem(consumables.P_S_MLK);
+				flags[kFLAGS.DINAH_CUP_SIZE]++;
+			}
+			else {
+				outputText("She looks thoughtful for a moment, then shakes her head reluctantly. \"<i>I'm sorry, but I think I've got big enough breasts as it is.</i>\" She then smirks, and playfully jiggles her abundant cleavage. \"<i>Don't you agree?</i>\" she teases.\n\n");
+				outputText("Swallowing hard, you have to agree, which makes Dinah laugh.");
+				dynStats("lus", 5);
+			}
+			doNext(giveDinahItem);
+		}
+		private function giveDinahBrownEgg():void {
+			clearOutput();
+			//dinha sprite
+			outputText("You hold out a brown egg, telling her that it will make her butt grow.\n\n");
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 35) {
+				outputText("\"<i>So, you want me to have a little more junk in the trunk, huh?</i>\" She giggles. \"<i>Well, I guess a little padding down there wouldn't hurt...</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, straining her pants. She pats it a few times, then shakes her head. \"<i>I'm going to have to go and let these pants out a little now.</i>\" She apologizes, and then walks away.\n\n");
+				dynStats("lus", 10);
+				if (player.hasItem(consumables.BROWNEG)) {
+					player.consumeItem(consumables.BROWNEG);
+					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 1+rand(2);
+				}
+				else {
+					player.consumeItem(consumables.L_BRNEG);
+					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 2+rand(3);
+				}
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 35) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 35;
+			}
+			else outputText("She looks at the egg, and then shakes her head. \"<i>Sorry, but I've got more than enough junk in my trunk for my taste.</i>\" Sensing she won't back down on this, you put the egg back. \"<i>So, is there anything else you wanted?</i>\" She asks.");
+			doNext(giveDinahItem);
+		}
+		private function giveDinahPurpleEgg():void {
+			clearOutput();
+			//dinha sprite
+			outputText("You hold out a purple egg, telling her that it will make her hips grow.\n\n");
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 20) {
+				outputText("She looks at it thoughtfully. \"<i>Wider hips...? Well, if you really want, I guess I can try it.</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, she almost loses her balance as her hips suddenly jut wider, the growth happening much faster than she expected. \"<i>I'm going to have to get used to walking like this, now.</i>\" She mutters, and then she awkwardly walks away.\n\n");
+				dynStats("lus", 10);
+				if (player.hasItem(consumables.PURPLEG)) {
+					player.consumeItem(consumables.PURPLEG);
+					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 1+rand(2);
+				}
+				else {
+					player.consumeItem(consumables.L_PRPEG);
+					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 2+rand(3);
+				}
+				if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 20) flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = 20;
+			}
+			else outputText("She looks at you with one eyebrow quirked. \"<i>Any bigger, and I won't be able to run anymore. No thank you; I feel like enough woman already, and they aren't messing with my speed.</i>\" She turns and saunters off, as quickly as she can, but with a deliberate swaying of her hips, as if to prove both her points.");
+			doNext(giveDinahItem);
+		}
+		private function giveDinahReducto():void {
+			clearOutput();
+			outputText("She wrinkles her nose at the awful smell of the paste you are showing her, even as you explain it's able to shrink down oversized bodyparts, and you can use this to reduce any parts that she thinks are oversized.");
+			menu();
+			if (flags[kFLAGS.DINAH_CUP_SIZE] > 1) addButton(0, "Breasts", dinahReducto, 0);
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 6) addButton(2, "Hips", dinahReducto, 1);
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 6) addButton(3, "Butt", dinahReducto, 2);
+			addButton(14, "Nevermind", giveDinahItem);
+		}
+		private function dinahReducto(part:int):void {
+			player.consumeItem(consumables.REDUCTO);
+			var chosenPart:String = "";
+			if (part == 0) { //Breasts
+				chosenPart = "breasts";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) flags[kFLAGS.DINAH_CUP_SIZE]--; //Large breasts shrink more!
+				flags[kFLAGS.DINAH_CUP_SIZE]--;
+				if (flags[kFLAGS.DINAH_CUP_SIZE] < 1) flags[kFLAGS.DINAH_CUP_SIZE] = 1;
+			}
+			else if (part == 1) { //Hips
+				chosenPart = "hips";
+				if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 12) flags[kFLAGS.DINAH_HIPS_ASS_SIZE]--; //Large hips shrink more!
+				flags[kFLAGS.DINAH_HIPS_ASS_SIZE]--;
+				if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 6) flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = 6;
+			}
+			else if (part == 2) { //Butt
+				chosenPart = "butt";
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 10) flags[kFLAGS.DINAH_ASS_HIPS_SIZE]--; //Large butt shrinks more!
+				flags[kFLAGS.DINAH_ASS_HIPS_SIZE]--;
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 6) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 6;
+			}
+			outputText("Grimacing at the smell - it must be awful, for her sensitive nose - she starts smearing it over the " + chosenPart + ", and you step forward to help her. As the last of it wicks away, the part begins to shrink before your eyes. \"<i>Hmm. Not bad, I guess. So, was there something else you wanted?</i>\" She asks.");
+			doNext(giveDinahItem);
+		}
+		private function dinahTits():String {
+			var temp:int = Math.random()*3;
+			var descript:String = "";
+			//50% of the time size-descript them
+			if(rand(2) == 0) {
+				if(flags[kFLAGS.DINAH_CUP_SIZE] <= 2) {
+					temp = rand(3);
+					if(temp == 0) descript += "small ";
+					if(temp == 1) descript += "little ";
+					if(temp == 2) descript += "perky ";
+				}
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 2 && flags[kFLAGS.DINAH_CUP_SIZE] <= 5) descript += "ample ";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 5 && flags[kFLAGS.DINAH_CUP_SIZE] <= 8) {
+					temp = rand(4);
+					if(temp == 0) descript += "big ";
+					if(temp == 1) descript += "large ";
+					if(temp == 2) descript += "pillowy ";
+					if(temp == 3) descript += "jiggly ";
+				}
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 8 && flags[kFLAGS.DINAH_CUP_SIZE] < 16) {
+					temp = rand(4);
+					if(temp == 0) descript += "basketball-sized ";
+					if(temp == 1) descript += "whorish ";
+					if(temp == 2) descript += "pornstar-like ";
+					if(temp == 3) descript += "jiggling ";
+				}
+				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 16 && flags[kFLAGS.DINAH_CUP_SIZE] < 21) descript += "beach-ball sized ";
+				if (flags[kFLAGS.DINAH_CUP_SIZE] >= 21) {
+					temp = rand(2);
+					if(temp == 1) descript += "mountainous ";
+					else descript += "immense ";
+				}
+			}
+			//Nouns!
+			temp = rand(3);
+			if (temp == 0) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) descript += "love-pillows";
+				else descript += "boobs";
+			}
+			if (temp == 1) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) descript += "tits";
+				else descript += "breasts";
+			}
+			if (temp == 2) {
+				if (flags[kFLAGS.DINAH_CUP_SIZE] > 6) descript += "rack";
+				descript += "breasts";
+			}
+			return descript;
+		}
+		private function dinahNippleSize():Number {
+			var dinahNS:Number = 0.3;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 5) dinahNS += 0.2;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 10) dinahNS += 0.3;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 18) dinahNS += 0.3;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 23) dinahNS += 0.4;
+			if (flags[kFLAGS.DINAH_CUP_SIZE] >= 28) dinahNS += 0.5;
+			return dinahNS;
+		}
+		private function dinahHips():String {
+			var desc:String = "";
+			var rando:Number = 0;
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] <= 1) {
+				if (rand(2) == 0) desc = "boyish ";
+				else desc = "tiny ";
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 6) desc = "waspish ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 1 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 4) {
+				rando = rand(3);
+				if (rando == 0) desc = "slender ";
+				if (rando == 1) desc = "narrow ";
+				if (rando == 2) desc = "thin ";
+				if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 6) desc = "waspish ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 4 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 6) {
+				rando = rand(3);
+				if (rando == 0) desc = "average ";
+				if (rando == 1) desc = "normal ";
+				if (rando == 2) desc = "plain ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 6 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 10) {
+				rando = rand(3);
+				if (rando == 0) desc = "ample ";
+				if (rando == 1) desc = "noticeable ";
+				if (rando == 2) desc = "girly ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 10 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 15) {
+				rando = rand(3);
+				if (rando == 0) desc = "flared ";
+				if (rando == 1) desc = "curvy ";
+				if (rando == 2) desc = "wide ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 15 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "fertile ";
+				if (rando == 1) desc = "child-bearing ";
+				if (rando == 2) desc = "voluptuous ";
+			}
+			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "broodmother-sized ";
+				if (rando == 1) desc = "cow-like ";
+				if (rando == 2) desc = "inhumanly-wide ";
+			}
+			rando = rand(2);
+			if (rando == 0) {
+				if (rand(2) == 0 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 15) desc += "flanks";
+				else desc += "hips";
+			}
+			if (rando == 1) {
+				if (rand(2) == 0 && flags[kFLAGS.DINAH_HIPS_ASS_SIZE] >= 15) desc += "flanks";
+				else desc += "thighs";
+			}
+			return desc;
+		}
+		private function dinahButt():String {
+			var desc:String = "";
+			var rando:Number = 0;
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] <= 1) {
+				if (rand(2) == 0) desc = "pixie-like ";
+				else desc = "very small ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 1 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 4) {
+				rando = rand(3);
+				if (rando == 0) desc = "tight ";
+				if (rando == 1) desc = "firm ";
+				if (rando == 2) desc = "compact ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 4 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 6) {
+				rando = rand(2);
+				if (rando == 0) desc = "fair ";
+				if (rando == 1) desc = "nice ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 6 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 8) {
+				rando = rand(3);
+				if (rando == 0) return "handful of ass";
+				if (rando == 1) desc = "full ";
+				if (rando == 2) desc = "shapely ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 8 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 10) {
+				rando = rand(3);
+				if (rando == 0) desc = "squeezable ";
+				if (rando == 1) desc = "large ";
+				if (rando == 2) desc = "substantial ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 10 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 13) {
+				rando = rand(3);
+				if (rando == 0) desc = "jiggling ";
+				if (rando == 1) desc = "spacious ";
+				if (rando == 2) desc = "heavy ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 13 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 16) {
+				rando = rand(3);
+				if (rando == 0) desc = "hand-devouring ";
+				if (rando == 1) return "generous amount of ass";
+				if (rando == 2) desc = "voluminous ";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 16 && flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "huge ";
+				if (rando == 1) desc = "vast ";
+				if (rando == 2) return "jiggling expanse of ass";
+			}
+			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] >= 20) {
+				rando = rand(3);
+				if (rando == 0) desc = "ginormous ";
+				if (rando == 1) desc = "colossal ";
+				if (rando == 2) desc = "tremendous ";
+			}
+			rando = rand(2);
+			if (rando == 0) desc += "butt";
+			if (rando == 1) desc += "ass";
+			return desc;
 		}
 	}
 }

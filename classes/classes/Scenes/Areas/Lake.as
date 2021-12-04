@@ -62,21 +62,27 @@ use namespace CoC;
 				return;
 			}
 			//Sword/Bow/Staff/Shield Discovery
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) && rand(5) == 0) {// && player.hasPerk(PerkLib.JobWarrior)
-				swordInStone.findSwordInStone();
-				return;
-			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && player.hasPerk(PerkLib.JobRanger) && rand(3) == 0) {
-				swordInStone.findBowInStone();
-				return;
-			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && player.hasPerk(PerkLib.JobSorcerer) && rand(3) == 0) {
-				swordInStone.findStaffInStone();
-				return;
-			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && player.hasPerk(PerkLib.JobGuardian) && rand(3) == 0) {
-				swordInStone.findShieldInStone();
-				return;
+			if (!player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) {
+				if (!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) && rand(5) == 0) {// && player.hasPerk(PerkLib.JobWarrior)
+					player.createStatusEffect(StatusEffects.BlessedItemAtTheLake,0,0,0,0);
+					swordInStone.findSwordInStone();
+					return;
+				}
+				if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && player.hasPerk(PerkLib.JobRanger) && rand(3) == 0) {
+					player.createStatusEffect(StatusEffects.BlessedItemAtTheLake,0,0,0,0);
+					swordInStone.findBowInStone();
+					return;
+				}
+				if (!player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && player.hasPerk(PerkLib.JobSorcerer) && rand(3) == 0) {
+					player.createStatusEffect(StatusEffects.BlessedItemAtTheLake,0,0,0,0);
+					swordInStone.findStaffInStone();
+					return;
+				}
+				if (!player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && player.hasPerk(PerkLib.JobGuardian) && rand(3) == 0) {
+					player.createStatusEffect(StatusEffects.BlessedItemAtTheLake,0,0,0,0);
+					swordInStone.findShieldInStone();
+					return;
+				}
 			}
 			//Egg chooser
 			if (rand(100) < 25 && player.pregnancyIncubation > 1 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {

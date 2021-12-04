@@ -165,6 +165,7 @@ public class Goblin extends Monster
 			this.gems = rand(5) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
+					add(consumables.PONAILS,2).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
@@ -175,6 +176,7 @@ public class Goblin extends Monster
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
 				{ call: goblinTeaseAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 			]
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -19,11 +19,11 @@ public function exploreShowers():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
 		outputText("Having worked your body to a pleasant soreness as well as coating your [skin.type] in a thin sheen of sweat and pheromones, you decide to hit up the showers to wash off and relax in the hot water.  ");
 		outputText("You walk into the back halls of the gym, quickly realizing you aren't quite sure where you're headed.  You turn a couple corners, walking down the halls looking for someone, and are about to turn back when you see a goblin round the corner up ahead.\n\n");
-	
+
 		outputText("You shout after the short humanoid, jogging lightly in chase, but only come to a closed iron door.  The door has a small window on it, blocked with a wire mesh to prevent breaking.  Inside you see a relatively plain room with a couple doors to the back sides.  A single light illuminates the strange room, right above the most technological piece of weight equipment you've ever seen.  You open the door, hoping to find the goblin, only to find the back two doors are hopelessly locked.  You turn to look once more at the piece of equipment in the center of the room.\n\n");
-	
+
 		outputText("Made of polished steel, the machine has many foreign parts you couldn't even begin to guess the use of, and some familiar ones from the other work out machines from the main gym floor.  This one, however, even seems to have a small monitoring screen!  You could easily sit down and check out this sophisticated device while waiting for the goblin to come out from the back rooms.\n\n");
-		
+
 		outputText("Do you use it or not?");
 		doYesNo(useTheSexMachine, leaveShowers);
 		addButton(2, "No way!", disableMachineForGood);
@@ -107,28 +107,28 @@ private function useTheSexMachine():void {
 	else if(player.gender == 2) {
 		if(flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_FEMALE] == 0) {
 			outputText("You gently sit on the padded bench, curious as to what this machine might actually accomplish, noting the various odds and ends that seem more devious in nature than exercise inclined. The screen before you quickly flickers to life, welcoming you and asking you to kindly place your [feet] in the appropriate safety straps and place your arms in the secure cuffs. You wonder briefly if this is a good idea, but work your way into the tight fitting straps anyways.\n\n");
-	
+
 			outputText("Within moments, the machine lifts you up, pulling your arms out and apart, away from your sore aching body.  After such a workout you can do little to fight the strong pull of the mechanical assailant. It whirs to life, stating that it is beginning \"Phase 1: Preconditioning\".\n\n");
-	
-			outputText("You feel the machine begin to tug at your clothes with various mechanical clamps.  It pulls your clothing free in moments, revealing your [allbreasts], " + vaginaDescript() + ", and your " + buttDescript() + " to the cool room's air. You blush furiously, and it doesn't take the machine but a couple of moments to place a metallic, phallic-shaped device against your labia and anus, the cold metal eliciting a shocked gasp from you, allowing it to slip another cock into your mouth. The tip of the metal cock tastes salty, leaking a fluid slowly from the tip.  You blush with arousal: the machine is force feeding you cum!\n\n");
-	
+
+			outputText("You feel the machine begin to tug at your clothes with various mechanical clamps.  It pulls your clothing free in moments, revealing your [allbreasts], " + vaginaDescript() + ", and your [butt] to the cool room's air. You blush furiously, and it doesn't take the machine but a couple of moments to place a metallic, phallic-shaped device against your labia and anus, the cold metal eliciting a shocked gasp from you, allowing it to slip another cock into your mouth. The tip of the metal cock tastes salty, leaking a fluid slowly from the tip.  You blush with arousal: the machine is force feeding you cum!\n\n");
+
 			outputText("Continuing its molestations, the machine attaches a small sucker hose to your " + clitDescript() + ", quickly suctioning it erect.  The device follows suit with your " + nippleDescript(0) + "s.  You begin to moan, unable to hold back the pleasure shooting through your body from the suctioning tubes. You almost don't notice the cum leaking from both phallic devices between your legs, lubing you further until they're both starting to penetrate you at the same time, stuffing you full of cock from nearly every angle.");
 			player.cuntChange(30,true,true,false);
 			player.buttChange(30,true,true,false);
 			outputText("\n\n");
-	
+
 			outputText("You gasp in pleasure, unable to move, fight, or even touch yourself as the machine begins to fuck you with its metallic cocks. The screen flashes, showing 'phase one is completed', and that it has begun phase two, 'implantation'. You don't have time to question the machine's intentions as it begins to fuck you harder and faster, your juices and arousal only helping the machine to continue.");
 			if(player.biggestTitSize() >= 2) outputText("  It slips a fourth cock between your " + chestDesc() + ", using two arms to press them together and fuck your tits as well, splashing a burst of mysterious cum on your face with every thrust.");
 			outputText("\n\n");
-	
+
 			outputText("It doesn't take long until the cock in your mouth cums, spraying a thicker, heavier load of the heavenly seed down your throat and into your stomach. You gasp, swallowing without a choice, as your eyes roll back in your head, the machine ramming its cock into your g-spot, pushing you almost instantly to orgasm. You moan out loud, the cock popping out of your mouth now that its finished delivering its load. Your rippling vaginal walls milk the fake dick in your cunt, as it and the prick in your ass begin to cum heavily.  Every hole is quickly filled with mysterious jizz, stuffing you completely.\n\n");
-	
+
 			outputText("Finally the machine slows down, beginning to lower you back onto the padded bench with ");
 			if(player.biggestTitSize() >= 2) outputText("your breasts covered in cum and ");
 			outputText("jizz leaking from every hole on your body. You groan, sore and stiff from the brutal workout but happy with afterglow. The screen before you appears to be saving data on your measurements, as well as physical stress levels. The final number flies past too fast for you to read, but the label sends a chill up your spine: \"Pregnancy percentage chance\".\n\n");
-	
+
 			outputText("It isn't long until the goblin comes into the room gasping. \"<i>You used my baby? You... wait, it worked? It worked! Tell me, how was it?  Wait no, don't tell me, it was wonderful of course!</i>\" the red-headed goblin beams.  She's covered from head to toe in grease, wearing dirty clothing that has various tools sticking out of every pocket; a stereotypical engineer. \"<i>The machine is made to milk studly men dry and use their cum to impregnate goblin females.  It automates the process!  But if you want to use it too, feel free, sexy.</i>\"  She winks at you lewdly. \"<i>But who knows what kind of cum will knock you up!</i>\"\n\n");
-	
+
 			outputText("She turns, walking back into the locked backroom, leaving you stunned and speechless.");
 		}
 		//[Female repeat scene]
@@ -146,7 +146,7 @@ private function useTheSexMachine():void {
 			if(player.biggestTitSize() >= 2) outputText(", and it doesn't take long for the machine to slip a cock between your breasts as well, starting to tit fuck you as it rotates you in your restraints to optimize your position");
 			else outputText(" while the machine rotates you in place to optimized your positioning.");
 			outputText(".\n\n");
-																														   
+
 			outputText("You moan with your legs lifted high above your head, leaving you surprised as to how flexible you truly are; the positioning of your legs forces your ass and vagina to clamp down on the members, making you feel every ridge and nub as they piston in and out of your wet fuck holes. Once more, the cock in your mouth cums first, pumping globs of hot semen down your throat, filling your stomach while you begin to climax, panting and gasping for air even as you swallow all you can. The latex pricks fucking your other holes bounce you as your girlcum runs down your thighs, and shortly after they cum deep inside you, pumping you full of their mysterious seed.\n\n");
 
 			outputText("You pant as you are let down onto the padded bench, rubbing your swollen stomach while cum leaks out of both of your holes. You smile from the afterglow of your climax, truly exhausted, and <b>really</b> needing that shower now.\n\n");

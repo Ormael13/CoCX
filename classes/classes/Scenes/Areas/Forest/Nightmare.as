@@ -31,7 +31,7 @@ package classes.Scenes.Areas.Forest
 		public function usingHeal():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				removeStatusEffect(StatusEffects.Uber);
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)
+				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)
 				|| hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.MysticWeb) || hasStatusEffect(StatusEffects.Fascinated)) {
 					outputText("The nightmare reels in frustration as her concentration breaks under your assaults.\n\n");
 				}
@@ -77,23 +77,22 @@ package classes.Scenes.Areas.Forest
 			if(dodged != null) {
 				switch(dodged) {
 					case EVASION_SPEED:
-						outputText(" [Dodge]");
+						outputText("Using your superior combat skills you manage to avoid attack completely. ");
 						break;
 					case EVASION_EVADE:
-						outputText(" [Evade]");
+						outputText("Using your skills at evading attacks, you anticipate and sidestep wendigo attack. ");
 						break;
 					case EVASION_MISDIRECTION:
-						outputText(" [Misdirect]");
+						outputText("Using Raphael's teachings, you anticipate and sidestep wendigo attacks. ");
 						break;
 					case EVASION_FLEXIBILITY:
-						outputText(" [Flexibility]");
+						outputText("With your incredible flexibility, you squeeze out of the way of wendigo's attack. ");
 						break;
 					case EVASION_UNHINDERED:
-						outputText(" [Unhindered]");
+						outputText("Using your superior combat skills you manage to avoid attack completely. ");
 						break;
 					default:
-						CoC_Settings.error();
-						outputText(" <b>[ERROR]</b>");
+						outputText("Using your superior combat skills you manage to avoid attack completely. ");
 						break;
 				}
 			}

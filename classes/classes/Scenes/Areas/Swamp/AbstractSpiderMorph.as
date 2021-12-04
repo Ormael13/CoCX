@@ -157,7 +157,7 @@ public class AbstractSpiderMorph extends Monster
 			else if (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0) {
 				outputText("You block the webbing with your shield, causing it to miss it orginal target.");
 			}
-			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
+			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {
 				outputText("The webbing hits your ");
 				if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but it's so effectively fastened to your hands that the attack fails to disarm you.\n");
 				else outputText("gauntlets, but they're so effectively fastened to your hands that the attack fails to disarm you.\n");

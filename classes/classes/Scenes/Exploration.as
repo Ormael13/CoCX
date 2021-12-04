@@ -23,7 +23,6 @@ import classes.Scenes.Explore.RNGod;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
-import classes.Scenes.Places.HeXinDao;
 import classes.Scenes.Explore.KitsuneElder;
 import classes.Scenes.Explore.KitsuneAncestor;
 import classes.Scenes.Explore.SeabedAlrauneBoss;
@@ -36,10 +35,8 @@ import classes.display.SpriteDb;
 public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
-		public var hexindao:HeXinDao = new HeXinDao();
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var TrueDemons:DemonScene = new DemonScene();
-		public var Evangeline:EvangelineFollower = new EvangelineFollower();
 
 		public function Exploration()
 		{
@@ -48,11 +45,11 @@ public class Exploration extends BaseContent
 		public function furriteMod():Number {
 			return furriteFnGen()();
 		}
-		
+
 		public function lethiteMod():Number {
 			return lethiteFnGen()();
 		}
-		
+
 		// Why? Because what if you want to alter the iftrue/iffalse?
 		// Default values: mods:[SceneLib.exploration.furriteMod]
 		// Non-default:    mods:[SceneLib.exploration.furriteFnGen(4,0)]
@@ -62,7 +59,7 @@ public class Exploration extends BaseContent
 				return player.hasPerk(PerkLib.PiercedFurrite) ? iftrue : iffalse;
 			}
 		}
-		
+
 		public function lethiteFnGen(iftrue:Number = 3, iffalse:Number = 1):Function {
 			return function ():Number {
 				return player.hasPerk(PerkLib.PiercedLethite) ? iftrue : iffalse;
@@ -75,7 +72,9 @@ public class Exploration extends BaseContent
 		public function doExplore():void {
 			clearOutput();
 			if (player.explored <= 0) {
-				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.");
+				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Even the warning sign about cursed site or worn down training dummy you found when looking around camp earlier are here.  Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  ");
+				outputText("The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.");
+				player.createStatusEffect(StatusEffects.EzekielCurse, 0, 0, 0, 0);
 				tryDiscover();
 				return;
 			} else if (player.explored == 1) {
@@ -100,19 +99,28 @@ public class Exploration extends BaseContent
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");
-			if (SceneLib.forest.isDiscovered()) addButton(1, "Forest", SceneLib.forest.exploreForest).hint("Visit the lush forest. " + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
+			if (SceneLib.forest.isDiscovered()) addButton(1, "Forest (O)", SceneLib.forest.exploreForestOutskirts).hint("Visit the lush forest. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
 			if (player.exploredLake > 0) addButton(2, "Lake", SceneLib.lake.exploreLake).hint("Visit the lake and explore the beach. " + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
+			else addButtonDisabled(2, "Lake", "You need to 'Explore' Mareth more.");
 			if (player.exploredDesert > 0) addButton(3, "Desert", SceneLib.desert.exploreDesert).hint("Visit the dry desert. " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
-			
-			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0) addButton(5, "Battlefield(O)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the outer battlefield. " + (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] : ""));
+			else addButtonDisabled(3, "Desert", "You need to 'Explore' Mareth more.");
+
+			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledboundary.exploreBattlefieldBoundary).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
+			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert.");
 			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
+			else addButtonDisabled(6, "Mountain", "Discovered when using 'Explore' after finding Battlefield (Boundary).");
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", SceneLib.plains.explorePlains).hint("Visit the plains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
+			else addButtonDisabled(7, "Plains", "Discovered when using 'Explore' after finding Mountain.");
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", SceneLib.swamp.exploreSwamp).hint("Visit the wet swamplands. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
-			
+			else addButtonDisabled(8, "Swamp", "Discovered when using 'Explore' after finding Plains.");
+
 			if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0) addButton(10, "Blight Ridge", SceneLib.blightridge.exploreBlightRidge).hint("Visit the corrupted blight ridge. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] : ""));
+			else addButtonDisabled(10, "Blight Ridge", "Discovered when using 'Explore' after finding Swamp.");
 			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", SceneLib.beach.exploreBeach).hint("Visit the sunny beach. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
+			else addButtonDisabled(11, "Beach", "Discovered when using 'Explore' after finding Blight Ridge.");
 			if (flags[kFLAGS.DISCOVERED_CAVES] > 0) addButton(12, "Caves", SceneLib.caves.exploreCaves).hint("Visit the gloomy caves. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_CAVES] : ""));
-			
+			else addButtonDisabled(12, "Caves", "Discovered when using 'Explore' after finding Beach.");
+
 			addButton(4, "Next", explorePageII);
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
@@ -121,23 +129,35 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			hideMenus();
 			menu();
-			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
-			//desert inner part
-			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(2, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
-			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(2, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
+			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0) addButton(0, "Battlefield(O)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the outer battlefield. " + (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] : ""));
+			else addButtonDisabled(0, "Battlefield(O)", "Discovered when exploring Battlefield (Boundary).");
+			if (SceneLib.forest.isDiscovered() && player.level >= 3) addButton(1, "Forest (I)", SceneLib.forest.exploreForest).hint("Visit the lush forest. " + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
+			else addButtonDisabled(1, "Forest(I)", "You need to be ready (lvl 3+) to reach this area.");
+			//2 - desert inner part
+			//addButtonDisabled(2, "Desert(I)", "Discovered when exploring Desert.");
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
-			
+			else addButtonDisabled(3, "High Mountain", "Discovered when exploring Mountain.");
+
 			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
+			else addButtonDisabled(5, "Defiled Ravine", "Discovered when exploring Blight Ridge.");
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(6, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
-			
+			else addButtonDisabled(6, "Bog", "Discovered when exploring Swamp.");
+			// 7 - plains inner part
+			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) {
+				if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(8, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
+				else addButtonDisabled(8, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
+			}
+			else addButtonDisabled(8, "Ocean", "Need to find Beach first and then finding some way to sail on the water.");
+
 			if (flags[kFLAGS.DISCOVERED_TUNDRA] > 0) addButton(10, "Tundra", SceneLib.tundra.exploreTundra).hint("Visit the tundra. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_TUNDRA] : ""));
-			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(11, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
+			else addButtonDisabled(10, "Tundra", "Discovered when exploring Caves.");
+			if (flags[kFLAGS.DISCOVERED_ASHLANDS] > 0) addButton(11, "Ashlands", SceneLib.ashlands.exploreAshlands).hint("Visit the ashlands. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ASHLANDS] : ""));
+			else addButtonDisabled(11, "Ashlands", "Discovered when exploring Caves.");
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(10, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
-			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(11, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
-			
+
 			addButton(4, "Next", explorePageIII);
 			addButton(9, "Previous", goBackToPageI);
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
@@ -145,6 +165,25 @@ public class Exploration extends BaseContent
 		}
 		private function explorePageIII():void {
 			flags[kFLAGS.EXPLORATION_PAGE] = 3;
+			hideMenus();
+			menu();
+			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
+			else addButtonDisabled(0, "Deepwoods", "Discovered when exploring Forest (I).");
+			addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
+			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
+
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			else addButtonDisabled(10, "Glacial Rift(O)", "Discovered when exploring Tundra.");
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(11, "Volcanic Crag(O)", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
+			else addButtonDisabled(11, "Volcanic Crag(O)", "Discovered when exploring Ashlands.");
+
+			addButton(4, "Next", goBackToPageIV);
+			addButton(9, "Previous", goBackToPageII);
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+			addButton(14, "Back", playerMenu);
+		}
+		private function explorePageIV():void {
+			flags[kFLAGS.EXPLORATION_PAGE] = 4;
 			hideMenus();
 			menu();
 			if (player.level >= 31) addButton(0, "LL Explore", tryDiscoverLL).hint("Explore to find weakest new enemies.");
@@ -158,37 +197,29 @@ public class Exploration extends BaseContent
 			if (player.level >= 125) addButton(4, "XXHL Explore", tryDiscoverXXHL).hint("Explore to find strong new enemies.");
 			else addButtonDisabled(4, "XXHL Explore", "Req. lvl 125+");
 			
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
-			addButton(9, "Previous", goBackToPageII);
-			if (silly()) addButton(12, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
-			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
-			addButton(14, "Back", playerMenu);
-		}
-		private function explorePageIV():void {
-			flags[kFLAGS.EXPLORATION_PAGE] = 4;
-			hideMenus();
-			menu();
 			addButton(9, "Previous", goBackToPageIII);
+			if (silly()) addButton(12, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
+			else addButtonDisabled(12, "???", "Only in Silly Mode...");
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
 		}
-
-		private function goBackToPageI():void
-		{
+		private function goBackToPageI():void {
 			flags[kFLAGS.EXPLORATION_PAGE] = 1;
 			doExplore();
 		}
-		private function goBackToPageII():void
-		{
+		private function goBackToPageII():void {
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			doExplore();
 		}
-		private function goBackToPageIII():void
-		{
+		private function goBackToPageIII():void {
 			flags[kFLAGS.EXPLORATION_PAGE] = 3;
 			doExplore();
 		}
-		
+		private function goBackToPageIV():void {
+			flags[kFLAGS.EXPLORATION_PAGE] = 4;
+			doExplore();
+		}
+
 		public function genericGolGobImpEncounters(even:Boolean = false):void {
 			var impGobGol:Number = 5;
 			if (!even) {
@@ -266,7 +297,7 @@ public class Exploration extends BaseContent
 						}
 					}
 					else {
-						if (rand(4) == 0) {
+						if (rand(4) == 0 && (player.level >= 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0)) {
 							outputText("A feral imp wings out of the sky and attacks!");
 							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
@@ -400,21 +431,21 @@ public class Exploration extends BaseContent
 						return;
 					}
 					//Goblin warrior! (Equal chance with Goblin Shaman)
-					else if (goblinChooser >= 50 && goblinChooser < 65) {
+					else if (goblinChooser >= 50 && goblinChooser < 75) {
 						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
 						spriteSelect(123);
 						return;
 					}
-					//Goblin shaman!
-					else if (goblinChooser >= 65 && goblinChooser < 80) {
-						SceneLib.goblinShamanScene.goblinShamanEncounter();
-						spriteSelect(124);
-						return;
-					}
-					//Goblin elder!
-					else if (goblinChooser >= 80) {
-						SceneLib.goblinElderScene.goblinElderEncounter();
-						spriteSelect(122);
+					//Goblin shaman OR elder!
+					else if (goblinChooser >= 75) {
+						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) {
+							SceneLib.goblinElderScene.goblinElderEncounter();
+							spriteSelect(122);
+						}
+						else {
+							SceneLib.goblinShamanScene.goblinShamanEncounter();
+							spriteSelect(124);
+						}
 						return;
 					}
 					if (player.gender > 0) {
@@ -574,7 +605,7 @@ public class Exploration extends BaseContent
 				return;
 			}
 		}
-		
+
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
@@ -582,12 +613,12 @@ public class Exploration extends BaseContent
 			// CoC.instance.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(2) == 0 && player.level > 0) {
-				Evangeline.enterTheEvangeline();
+			if (player.level > 0 && EvangelineFollower.EvangelineAffectionMeter < 1 && rand(2) == 0) {
+				SceneLib.evangelineFollower.enterTheEvangeline();
 				return;
 			}
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] == 2 && rand(6) == 0) {
-				Evangeline.alternativEvangelineRecruit();
+			if (player.level > 2 && EvangelineFollower.EvangelineAffectionMeter == 2 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && rand(10) == 0) {
+				SceneLib.evangelineFollower.alternativEvangelineRecruit();
 				return;
 			}
 			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10) == 0) {
@@ -633,26 +664,26 @@ public class Exploration extends BaseContent
 				}
 				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
 					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
-					if (player.lowerBody == LowerBody.HUMAN) outputText("inside your footwear, between your toes");
 					if (player.lowerBody == LowerBody.HOOFED) outputText("in your hooves");
-					if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
-					if (player.isNaga()) outputText("in your scales");
+					else if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
+					else if (player.isNaga()) outputText("in your scales");
+					else outputText("inside your footwear, between your toes");
 					outputText(".\n\n<b>You've discovered the Desert!</b>");
 					player.exploredDesert = 1;
 					player.explored++;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				//Discover Outer Battlefield
-				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
-					flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
+				//Discover Battlefield Boundary
+				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+					flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] = 1;
 					player.explored++;
 					clearOutput();
-					outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the (Outer) Battlefield!</b>");
+					outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the Battlefield (Boundary)!</b>");
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && player.exploredMountain <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
 					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 					player.explored++;
 					player.exploredMountain = 1;
@@ -699,7 +730,7 @@ public class Exploration extends BaseContent
 					outputText("<b>You've discovered the Blight Ridge!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
-				}				
+				}
 				//Discover Beach / Ocean / Deep Sea
 				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && ((rand(3) == 0 && player.level >= 25) || player.level >= 30)) {
 					flags[kFLAGS.DISCOVERED_BEACH] = 1;
@@ -718,16 +749,6 @@ public class Exploration extends BaseContent
 					clearOutput();
 					outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
 					outputText("<b>You've discovered the Caves!</b>");
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Discover Volcanic Crag! - do przeniesienia do Caves exploration
-				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && ((rand(3) == 0 && player.level >= 25) || player.level >= 30)) {
-					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
-					outputText("<b>You've discovered the Volcanic Crag!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}/*
@@ -819,7 +840,7 @@ public class Exploration extends BaseContent
 			player.explored++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		//Temporaly place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
@@ -934,7 +955,7 @@ public class Exploration extends BaseContent
 				return;
 			//}
 		}
-		
+
 		public function tryRNGod():void {
 			clearOutput();
 			outputText("Traversing Mareth vast areas you're suddenly found yourself... somewhere!!! And looks like your prayers have been heard!!! (Even if you didn't pray at all!!!)");
@@ -948,7 +969,7 @@ public class Exploration extends BaseContent
 			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pearl.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it.  Nothing happens so since it somehow attracted your attention you pocket this pearl.\n\n");
 			inventory.takeItem(consumables.SPPEARL, camp.returnToCampUseOneHour);
 		}
-		
+
 		public function hiddencavediscovery():void {
 			flags[kFLAGS.HIDDEN_CAVE_FOUND] = 1;
 			clearOutput();
@@ -957,20 +978,20 @@ public class Exploration extends BaseContent
 			outputText(".\n\n");
 			doNext(hiddencave.enterDungeon);
 		}
-		
+
 		public function ryubifirstenc():void {
 			flags[kFLAGS.RYUBI_LVL_UP] = 1;
 			clearOutput();
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
 		}
-		
+
 		public function ryubirepenc():void {
 			clearOutput();
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
 		}
-		
+
 		public function debugOptions():void
 		{
 			inventory.takeItem(consumables.W_FRUIT, playerMenu);
@@ -1000,10 +1021,10 @@ public class Exploration extends BaseContent
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
 				if (player.biggestTitSize() >= 35)  outputText("  Your " + Appearance.allBreastsDescript(player) + " hang lewdly off your torso to rest on the desert sands, seeming to bury the dunes on either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s mercilessly as they grind in the sand.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The fiery warmth of the desert caresses it, causing your [balls] to pulse with the need to release their sperm through your [cocks].");
+				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  The fiery warmth of the desert caresses it, causing your [balls] to pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
 				}
@@ -1014,10 +1035,10 @@ public class Exploration extends BaseContent
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
 				if (player.biggestTitSize() >= 35)  outputText("  Your " + Appearance.allBreastsDescript(player) + " pull your human torso forward until it also is forced to rest facedown, just like your horse half.  Your tits rest, pinned on the desert sand to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s incessantly.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The airy warmth of the desert teases it, causing your [balls] pulse with the need to release their sperm through your [cocks].");
+				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  The airy warmth of the desert teases it, causing your [balls] pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
-					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
+					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the [butt] above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
 					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
 				}

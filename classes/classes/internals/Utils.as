@@ -404,6 +404,44 @@ public class Utils extends Object
 			return (string.substr(0, 1).toUpperCase() + string.substr(1));
 		}
 
+		public static function lowerCaseFirstLetter(string:String):String {
+			return (string.substr(0, 1).toLowerCase() + string.substr(1));
+		}
+
+		public static function mergeSentences(sentences: Array, lastDivider: String = ", and ", divider: String = ", "): String {
+			var mergedString: String = "";
+
+			sentences = sentences.filter(function(element: *, index: int, array: Array): Boolean {
+				if (element) {
+					return true;
+				}
+
+				return false;
+			});
+
+			for (var i: int = 0; i < sentences.length; i++) {
+				var s: String = sentences[i];
+
+				if (i > 0) {
+					s = lowerCaseFirstLetter(s);
+				}
+
+				if (i < sentences.length - 1 && s.slice (s.length - 1) === ".") {
+					s = s.slice(0, s.length - 1);
+				}
+
+				mergedString += s;
+
+				if (i < sentences.length - 2) {
+					mergedString += divider;
+				} else if (i == sentences.length - 2) {
+					mergedString += lastDivider;
+				}
+			}
+
+			return mergedString;
+		}
+
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
 		// Accepts any type.
 		// Can also accept a *single* array of items, in which case it picks from the array instead.

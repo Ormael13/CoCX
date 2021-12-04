@@ -453,7 +453,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			flags[kFLAGS.SANDWITCH_MOB_DEFEATED] = 1;
 			outputText("The sand witches all collapse to the floor in a vast puddle of milk and pussy juice, ");
-			if(monster.HP < 1) outputText("nursing their wounds");
+			if(monster.HP <= monster.minHP()) outputText("nursing their wounds");
 			else outputText("frantically making out with each other, huddling into a squirming orgy on the floor");
 			outputText(".  You stand alone, the sole victor, triumphant against your enemies; you can easily continue deeper into the caves, now.");
 			//PC has sufficient lust:
@@ -471,7 +471,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function dicksHaveSexWithAWitch():void {
 			clearOutput();
 			outputText("Looking over the ");
-			if(monster.HP < 1) outputText("painfully ");
+			if(monster.HP <= monster.minHP()) outputText("painfully ");
 			outputText("writhing pile of female flesh, you place your hands on your [hips] and survey the pile for the prettiest of the litter.  They're all gorgeously tanned with lustrous, blonde hair, but there's enough variety in facial features, hair style, breast size, and hips for you to narrow down which one you'd like to take the most.  She's a true beauty in the classical sense, at least facially.  She has a small, button nose, ripe lips, and hair that's tied back in a waist-length ponytail.  Her four breasts are well-rounded E-cups, big and round enough for your fingers to sink into but just barely pert enough not to show any sag.");
 			
 			outputText("\n\nBig, brown eyes look up at you with obvious fear as you approach.  Well, that won't do.  You hold your hand out to her calmly, putting as welcoming a smile as you can for your fallen foe.  She looks around her ");
@@ -1119,7 +1119,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function cumWitchDefeated():void {
 			clearOutput();
 			//(HP)
-			if(monster.HP < 1) outputText("The chocolate-skinned witch collapses down onto her hands and knees with the tattered remnants of her robes swirling about her.  With her clothing destroyed, you're treated to the perfect view of her semi-erect cock and swollen testes swaying enticingly beneath her, paired with the glimmering wetness of her juicy cunny - also on display.  Her udder-like melons sway and jiggle in sympathy to her uncoordinated swaying.  She grumbles, \"<i>You've beaten me, interloper...</i>\"");
+			if(monster.HP <= monster.minHP()) outputText("The chocolate-skinned witch collapses down onto her hands and knees with the tattered remnants of her robes swirling about her.  With her clothing destroyed, you're treated to the perfect view of her semi-erect cock and swollen testes swaying enticingly beneath her, paired with the glimmering wetness of her juicy cunny - also on display.  Her udder-like melons sway and jiggle in sympathy to her uncoordinated swaying.  She grumbles, \"<i>You've beaten me, interloper...</i>\"");
 			else outputText("The chocolate-skinned witch collapses down onto her hands and knees, shredding her robes as she goes.  Her throbbing-hard cock drips with precum above her quaking testes while her equally enticing pussy looks positively soaked with feminine lubricants.  She rolls onto her back, tits jiggling wildly, and jams both her hands into her groin, masturbating furiously.  Panting, the witch moans, \"<i>You win... ooooohhh...  Come over here and fuck me!  Please!</i>\"\n\nWell, she did ask nicely...");
 			flags[kFLAGS.CUM_WITCH_DEFEATED] = 1;
 			menu();
@@ -2160,7 +2160,9 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			if((flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) || (flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number))
 				addButton(7,"Free Slaves",slavesDiscussion).hint("Request the Sand Mother to release a slave.");
 			if(player.lust >= 33) addButton(8,"Sex",sexWithFriendlySandMother).hint("Have some sexy time with the Sand Mother.");
-			
+			if (player.hasItem(consumables.BEEHONY)) addButton(9, consumables.AMBROSA.shortName, SandMotherMakesAmbrosia).hint("Ask her to distill a vial of bee honey into a vial of ambrosia. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+			if (!player.hasItem(consumables.BEEHONY)) addButtonDisabled(9,consumables.AMBROSA.shortName, "Ask her to distill a vial of bee honey into a vial of ambrosia. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+			if (player.gems < 25) addButtonDisabled(9,consumables.AMBROSA.shortName, "Ask her to distill a vial of bee honey into a vial of ambrosia. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
 			addButton(14,"Leave",playerMenu);
 		}
 
@@ -2279,7 +2281,22 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			}
 			addButton(4,"Back",sandWitchMotherFriendlyMenu);
 		}
-
+		
+		public function SandMotherMakesAmbrosia():void {
+			clearOutput();
+			if (player.gems < 25) {
+				outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" the Sand Mother says.");
+				doNext(sandWitchMotherFriendlyMenu);
+				return;
+			}
+			player.destroyItems(consumables.BEEHONY, 1);
+			player.gems -= 25;
+			statScreenRefresh();
+			outputText("You hand over a vial of bee honey and the 25 gems.");
+			outputText("\n\n\"<i>I'll see what I can do,</i>\" she says as she takes the bee honey and disapears from your sight. ");
+			outputText("\n\nA few minutes later, she comes back with the crystal vial that contains glittering liquid.  \"<i>It's ready,</i>\" she says. She hands you over the vial of ambrosia and goes back to working.  ");
+			inventory.takeItem(consumables.AMBROSA, sandWitchMotherFriendlyMenu);
+		}
 
 		public function sandMotherPOMenu():void {
 			if(monster.short != "Sand Mother") {
@@ -3162,7 +3179,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		public function moreCumWitchesPlease():void {
 			clearOutput();
 			//Bimbo version:
-			if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+			if(player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				outputText("Wouldn't it be better if there were like, lots of cum witches, with yummy cocks that you could suck?");
 				outputText("\n\n\"<i>No, it wouldn't,</i>\" the Sand Mother retorts, ending the conversation.");
 				doNext(playerMenu);

@@ -12,6 +12,11 @@ import classes.Scenes.SceneLib;
 
 public class Behemoth extends Monster
 	{
+		public function clawsSlash():void {
+			createStatusEffect(StatusEffects.Attacks, 3 + rand(3),0,0,0);
+			eAttack();
+		}
+		
 		public function tailWhip():void {
 			outputText("The behemoth charges at you with his spiked tail raised!  ");
 			if (player.getEvasionRoll()) {
@@ -20,7 +25,7 @@ public class Behemoth extends Monster
 			}
 			else {
 				outputText("You weren't aware of that and his tail hits you!  <b>Your defense has been reduced!</b>  ");
-				var damage:int = (str * 1.2) + level;
+				var damage:int = (str + level) * 2;
 				player.takePhysDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 5);
@@ -29,7 +34,7 @@ public class Behemoth extends Monster
 		
 		public function tease():void {
 			outputText("The behemoth lifts his loincloth to reveal his large prick and waves his cock left and right.  You blush from looking at his cock.");
-			player.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
+			player.dynStats("lus", 50 + (player.cor / 5) + (player.lib / 5));
 		}
 		
 		override public function defeated(hpVictory:Boolean):void {
@@ -72,25 +77,27 @@ public class Behemoth extends Monster
 			this.horns.type = Horns.DRACONIC_X2;
 			this.lowerBody = LowerBody.CAT;
 			this.tailType = Tail.BEHEMOTH;
-			initStrTouSpeInte(180, 130, 100, 115);
-			initWisLibSensCor(100, 35, 15, 15);
+			initStrTouSpeInte(280, 230, 200, 215);
+			initWisLibSensCor(200, 60, 31, 15);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 34;
+			this.weaponAttack = 114;
 			this.armorName = "loincloth";
-			this.armorDef = 12;
-			this.armorMDef = 2;
-			this.bonusHP = 900;
-			this.bonusLust = 90;
+			this.armorDef = 120;
+			this.armorMDef = 20;
+			this.bonusHP = 1600;
+			this.bonusLust = 162;
 			this.lust = 15;
 			this.lustVuln = 0.3;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 40;
-			this.gems = 70 + rand(30);
+			this.level = 71;
+			this.gems =160 + rand(50);
 			this.drop = NO_DROP;
-			this.special1 = tailWhip;
-			this.special2 = tease;
+			this.special1 = clawsSlash;
+			this.special2 = tailWhip;
+			this.special3 = tease;
 			//this.special3 = aerialRave;
+			this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}

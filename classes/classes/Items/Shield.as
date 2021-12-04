@@ -10,6 +10,7 @@ package classes.Items
 	import classes.ItemType;
 	import classes.PerkLib;
 	import classes.Player;
+	import classes.Scenes.SceneLib;
 	import classes.GlobalFlags.kFLAGS
 	
 public class Shield extends Useable //Equipable
@@ -57,7 +58,7 @@ public class Shield extends Useable //Equipable
 				outputText("Your current range weapon requires two hands. Unequip your current range weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
-			else if ((game.player.weaponPerk == "Large" && !game.player.hasPerk(PerkLib.GigantGrip)) || game.player.weaponPerk == "Massive" || game.player.weaponPerk == "Dual Small" || game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") {
+			else if ((game.player.weaponSpecials("Large") && !game.player.hasPerk(PerkLib.GigantGrip)) || game.player.weaponSpecials("Massive") || game.player.weaponSpecials("Dual Small") || game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) {
 				outputText("Your current melee weapon requires two hands. Unequip your current melee weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
@@ -73,6 +74,15 @@ public class Shield extends Useable //Equipable
 		}
 		
 		public function playerEquip():Shield { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+			if ((perk == "Massive" && game.player.weapon != WeaponLib.FISTS && !game.player.hasPerk(PerkLib.GigantGrip))
+				|| (game.player.weaponSpecials("Large") && !game.player.hasPerk(PerkLib.GigantGrip))
+				|| game.player.weaponSpecials("Massive")
+				|| game.player.weaponSpecials("Dual Small")
+				|| game.player.weaponSpecials("Dual")
+				|| game.player.weaponSpecials("Dual Large")) {
+				SceneLib.inventory.unequipWeapon();
+			}
+			if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "2H Firearm") SceneLib.inventory.unequipWeaponRange();
 			return this;
 		}
 		

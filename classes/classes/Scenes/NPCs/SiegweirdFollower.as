@@ -175,7 +175,7 @@ public function siegweirdMainCampMenu():void
 		}
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
 			if (player.hasKeyItem("Alvina's Shattered Phylactery") >= 0) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
-			else addButtonDisabled(11, "Advanced Study", "You need to go kill a certain dangerous devil in Blight Ridge.");
+			else addButtonDisabled(11, "Advanced Study", "You need to go kill a certain dangerous devil in Defiled Ravine.");
 		}
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 3) addButtonDisabled(11, "Advanced Study", "You already completed Advanced Study.");
 	}
@@ -207,7 +207,7 @@ public function siegweirdCampSoup():void
 		HPChange(Math.round(player.maxHP() * recoveryV), true);
 		EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * recoveryV)));
 		doNext(camp.campFollowers);
-		cheatTime2(15);
+		eachMinuteCount(15);
 	}
 	else {
 		outputText("The smell of Siegwierd’s soup is amazing. He did offer to share it with you, so perhaps now isn’t a bad time?\n\nYou decide to approach him.\n\n");
@@ -276,7 +276,7 @@ public function siegweirdCampSoup2():void
 		player.addStatusValue(StatusEffects.SiegweirdSoup1, 3, 1);
 	}
 	doNext(camp.campFollowers);
-	cheatTime2(5);
+	eachMinuteCount(5);
 }
 
 public function siegweirdCampStudy():void
@@ -289,7 +289,7 @@ public function siegweirdCampStudy():void
 		outputText("Siegweird eyes you narrowly, \"<i>I’m sorry, [name]... but I cannot teach someone who cannot learn. Please, if you seek to study then you must purge yourself from excess corruption. </i>\"\n\n");
 		outputText("You nod your head, you shouldn’t be surprised a paladin can’t teach the impure.")
 		doNext(camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 	else {
 		outputText("Seigweird eyes you narrowly, \"<i>Yes, you are ready to learn, we shall work together. </i>\"\n\n");
@@ -329,13 +329,13 @@ public function siegweirdAdvancedCampStudy():void
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
 			player.removeKeyItem("Alvina's Shattered Phylactery");
 			outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
-			outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [player]</i>\"\n\n");
+			outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
 			outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
 			outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
 			outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");
 			player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
 			inventory.takeItem(consumables.MET_SHO, camp.campFollowers);
-			cheatTime2(5);
+			eachMinuteCount(5);
 		}
 		else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 10) {
 			outputText("Siegweird notices your presence and stops hammering on his portable anvil to look at you with a cheerful smile… or at least what you can see through the small hole in his helmet.\n\n");
@@ -346,7 +346,7 @@ public function siegweirdAdvancedCampStudy():void
 			player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
 			doNext(camp.campFollowers);
-			cheatTime2(5);
+			eachMinuteCount(5);
 		}
 		else {
 			player.destroyItems(useables.DIAMOND, 1);
@@ -361,7 +361,7 @@ public function siegweirdAdvancedCampStudy():void
 			outputText("His hands begin glowing as he gets to work with making you the holy amulet.\n\n");
 			player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
 			doNext(camp.campFollowers);
-			cheatTime2(5);
+			eachMinuteCount(5);
 		}
 	}
 	else {
@@ -377,7 +377,7 @@ public function siegweirdAdvancedCampStudy():void
 			player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
 		}
 		doNext(camp.campFollowers);
-		cheatTime2(5);
+		eachMinuteCount(5);
 	}
 }
 	}

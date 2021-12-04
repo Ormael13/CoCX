@@ -2,6 +2,7 @@ package classes.Scenes {
 import classes.CoC;
 import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
+import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
@@ -21,6 +22,8 @@ import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.*;
 import classes.Scenes.Places.Boat.SharkGirlScene;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.Quests.UrtaQuest;
 
 public class SceneLib {
@@ -37,6 +40,8 @@ public class SceneLib {
     public static var masturbation:Masturbation = new Masturbation();
 
     public static var mutationsTable:Mutations = new Mutations();
+
+    public static var battlefiledboundary:BattlefieldBoundary = new BattlefieldBoundary();
 
     public static var battlefiledouter:BattlefieldOuter = new BattlefieldOuter();
 
@@ -73,6 +78,8 @@ public class SceneLib {
     public static var tundra:Tundra = new Tundra();
 
     public static var glacialRift:GlacialRift = new GlacialRift();
+
+    public static var ashlands:Ashlands = new Ashlands();
 
     public static var volcanicCrag:VolcanicCrag = new VolcanicCrag();
 
@@ -158,8 +165,6 @@ public class SceneLib {
 
     public static var holliScene:HolliScene = new HolliScene();
 
-    public static var woodElves:WoodElves = new WoodElves();
-
     public static var isabellaScene:IsabellaScene = new IsabellaScene();
 
     public static var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
@@ -222,6 +227,10 @@ public class SceneLib {
 
     public static var tedScene:TedScenes = new TedScenes();
 
+    public static var tifaFollower:TifaFollower = new TifaFollower();
+
+    public static var tyrania:TyrantiaFollower = new TyrantiaFollower();
+
     public static var urta:Urta = new Urta();
 
     public static var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
@@ -233,6 +242,10 @@ public class SceneLib {
     public static var valeria:Valeria = new Valeria();
 
     public static var vapula:Vapula = new Vapula();
+
+    public static var woodElves:WoodElves = new WoodElves();
+
+    public static var mindbreaker:Mindbreaker = new Mindbreaker();
 
     public static var zenjiScene:ZenjiScenes = new ZenjiScenes();
 
@@ -260,6 +273,8 @@ public class SceneLib {
 
     public static var kitsuneScene:KitsuneScene = new KitsuneScene();
 	
+	public static var dilapidatedShrine:DilapidatedShrine = new DilapidatedShrine();
+	
 	public static var anzu:AnzuScene = new AnzuScene();
 
     public static var urtaQuest:UrtaQuest = new UrtaQuest();
@@ -275,6 +290,10 @@ public class SceneLib {
     public static var aikoScene:AikoScene = new AikoScene();
 	
 	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
+	
+	public static var journeyToTheEast:JourneyToTheEast = new JourneyToTheEast();
+	
+	public static var adventureGuild:AdventurerGuild = new AdventurerGuild();
 	
 	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
 

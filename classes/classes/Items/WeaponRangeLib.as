@@ -10,7 +10,7 @@ package classes.Items
 
 	public final class WeaponRangeLib
 	{
-		public static const DEFAULT_VALUE:Number = 6;	//cena dla broni dyst bazowa to 50 gems a nie 40 gems
+		public static const DEFAULT_VALUE:Number = 6;	//cena bazowa dla broni dyst to 50 gems a nie 40 gems
 		public static const NOTHING:WeaponRange = new Nothing();	//cena broni palnych to: (wart atk * 20) + (ilość naboi w magazynku * 30)
 		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");
 		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");

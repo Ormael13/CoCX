@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function CatONineTailWhip() 
 		{
-			super("CNTWhip", "CatONineTailWhip", "Bastet Whip", "a Bastet Whip", "whipping", 27, 1080, "A rope made from unknown magic beast fur that unravelled into three small ropes, each of which is unravelled again designed to whip and cut your foes into submission.", "Large");
+			super("CNTWhip", "CatONineTailWhip", "Bastet Whip", "a Bastet Whip", "whipping", 27, 1080, "A rope made from unknown magic beast fur that unravelled into three small ropes, each of which is unravelled again designed to whip and cut your foes into submission.", "Large, Whipping, Bleed25", "Whip");
 		}
 		//przerobić na high grade wrath weapon?
 		override public function get attack():Number {
@@ -35,7 +35,7 @@ package classes.Items.Weapons
         }
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return true;
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
 			outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this whip. Unless you want to hurt yourself instead enemies when trying to use it...  ");
 			return false;
 		}

@@ -336,7 +336,7 @@ package classes.GlobalFlags
 		public static const ZONE_DEFILED:int						= 290;//100 exploration of Defiled Ravine
 		public static const ZONE_291:int		= 291;//100 exploration of Marsh
 		public static const ZONE_292:int		= 292;//100 exploration of Deep Caves
-		public static const ZONE_293:int		= 293;//100 exploration of Tundra
+		public static const ZONE_SUB_ZERO:int						= 293;//100 exploration of Tundra
 		public static const ZONE_ASHES_TO_ASHES_DUST_TO_DUST:int	= 294;//100 exploration of Ashlands
 		public static const ZONE_295:int		= 295;//100 exploration of Outer Plateau
 		public static const ZONE_296:int		= 296;//100 exploration of Inner Plateau
@@ -430,10 +430,10 @@ package classes.GlobalFlags
 		public static const EPIC_F_H_B_S_CURVIER_2:int				= 383;
 		public static const EPIC_F_H_B_S_CURVIER_3:int				= 384;
 		public static const COMBAT_EDGY_CASTER:int					= 385;
-		public static const UNKNOWN_ACHIEVEMENT_386:int				= 386;
-		public static const UNKNOWN_ACHIEVEMENT_387:int				= 387;
-		public static const UNKNOWN_ACHIEVEMENT_388:int				= 388;
-		public static const UNKNOWN_ACHIEVEMENT_389:int				= 389;
+		public static const DUNGEON_VICTORY_SWEET_LIKE_HONEY:int	= 386;
+		public static const DUNGEON_BUZZ_OFF:int					= 387;
+		public static const EPIC_F_H_B_S_CURVIER_4:int				= 388;
+		public static const EPIC_F_H_B_S_CURVIER_5:int				= 389;
 		public static const UNKNOWN_ACHIEVEMENT_390:int				= 390;
 		public static const UNKNOWN_ACHIEVEMENT_391:int				= 391;
 		public static const UNKNOWN_ACHIEVEMENT_392:int				= 392;

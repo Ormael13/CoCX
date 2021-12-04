@@ -112,7 +112,7 @@ use namespace CoC;
 					}, {
 						name: "desert eagle",
 						when: function ():Boolean {
-							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Desert Eagle") < 0;
+							return player.level >= 6 && player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Desert Eagle") < 0;
 						},
 						chance: 30,
 						call: partsofDesertEagle
@@ -216,12 +216,12 @@ use namespace CoC;
 			story.display("strings/nails/b",{$extractedNail:extractedNail});
 			outputText("\n\nNails: ");
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/600");
+				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/750");
 			}
 			else {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}

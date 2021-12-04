@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function BFWhip() 
 		{
-			super("BFWhip", "B.F.Whip", "big fucking whip", "a big fucking whip", "whipping", 36, 1440, "Big Fucking Whip - the best solution for master tiny e-pen complex at this side of the Mareth!  This 2H 5 meters long whip requires 225 (strength+speed) to fully unleash it power.", "Large");
+			super("BFWhip", "B.F.Whip", "big fucking whip", "a big fucking whip", "whipping", 36, 1440, "Big Fucking Whip - the best solution for master tiny e-pen complex at this side of the Mareth!  This 2H 5 meters long whip requires 225 (strength+speed) to fully unleash it power.", "Large, Whipping, LGWrath", "Whip");
 		}
 		
 		override public function get attack():Number {
@@ -34,7 +34,7 @@ package classes.Items.Weapons
         }
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return true;
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
 			outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this whip. Unless you want to hurt yourself instead enemies when trying to use it...  ");
 			return false;
 		}

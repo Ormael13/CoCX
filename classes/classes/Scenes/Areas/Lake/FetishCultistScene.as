@@ -6,9 +6,14 @@ package classes.Scenes.Areas.Lake
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class FetishCultistScene extends AbstractLakeContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+
 		public function FetishCultistScene()
 		{
 		}
@@ -18,8 +23,8 @@ public class FetishCultistScene extends AbstractLakeContent
 		 Appearance: A large human female who's wearing what looks like a depraved religious outfit while chanting what sounds like random sentences, her outfit sometimes changes into something else, seemingly at random, but only for a short time.  Whatever intelligence she used to have is obviously long gone.
 		 Habitat: Could be anywhere, but the lake seems best from the current options.
 		 Attacks: Can raise the opponent's lust by posing in outfits that they find attractive; raise her own lust by "thinking"; or transfer half of her current lust to her opponent via magic.
-		 Raped by: She grabs the player character and their clothing shifts into a submissive costume (with a design that allows them to be raped without taking the outfit off), and then she shifts to one that dominates that one.  She then acts the part of her costume and rapes the player character, without removing the outfits.  The player character's clothes remain unchanged afterwards.  Examples: student and teacher, soldier and officer, or nurse and doctor.  The chosen pairing depends on the gender and structure of the player character, and lots of different scenes could be added.  
-		 Rape: The cultist's outfit shifts into that of something submissive and helpless and acts the part, but she clearly enjoys what is done to her.  
+		 Raped by: She grabs the player character and their clothing shifts into a submissive costume (with a design that allows them to be raped without taking the outfit off), and then she shifts to one that dominates that one.  She then acts the part of her costume and rapes the player character, without removing the outfits.  The player character's clothes remain unchanged afterwards.  Examples: student and teacher, soldier and officer, or nurse and doctor.  The chosen pairing depends on the gender and structure of the player character, and lots of different scenes could be added.
+		 Rape: The cultist's outfit shifts into that of something submissive and helpless and acts the part, but she clearly enjoys what is done to her.
 		 Loot: Could drop a random set of clothing or a costume on death.
 		 */
 
@@ -209,12 +214,12 @@ public class FetishCultistScene extends AbstractLakeContent
 				//(1 - if player has nipplecunts)
 				if (player.hasFuckableNipples()) {
 					outputText("Still smiling, the nurse looks closely at your " + nippleDescript(0) + " and says, \"<i>I see... they really are interesting.  Sorry about tying you down like that.  I know experiments like this can be a little scary, but just remember that you are helping others by agreeing to do this.</i>\"  She leaves the room for a moment and comes back with a pair of syringes.  \"<i>I hope you are as ready for this as I am,</i>\" she says with a look of glee on her face as she climbs on top of you.  She then sticks the syringes into her own nipples simultaneously and injects their contents inside her.  Quivering slightly she sets the empty syringes aside before she starts rubbing her breasts feverishly.  A moment later she stops and pulls her hands away to reveal that her nipples have grown quite long, about four inches from the tops of her mounds.  With a sigh, she lowers herself toward you and pushes her elongated nipples into your " + nippleDescript(0) + "s.  You feel your breasts seem to eagerly pull the tips inside and begin sucking on the nurse's dick-like nipples.  You feel a fluid start to come out of the nurse's nipples directly into your own, and the two of you begin moaning in ecstasy.  After a few minutes of your " + nippleDescript(0) + "s draining the nurse's long nipples, you feel them pull out of you.  With a sigh of contentment, the nurse pulls back to reveal that her nipples have returned to normal.  She then puts her hands on your [allbreasts] and starts to massage them, occasionally poking her fingers inside.  You find that they feel fuller and healthier than ever, and ");
-					//[if breasts are not lactating] 
+					//[if breasts are not lactating]
 					if (player.biggestLactation() < 1) {
 						outputText("they have even started to lactate.  ");
 						player.boostLactation(1.5);
 					}
-					//[if breasts are already lactating] 
+					//[if breasts are already lactating]
 					else {
 						outputText("they are producing more milk than before.  ");
 						player.boostLactation(.6);
@@ -241,7 +246,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					if (player.breastRows.length == 1) {
 						outputText("Once about half of the fluid has been injected into your first breast, she moves on to the other and you feel a similar sharp pain followed by the glowing pleasure.  ");
 					}
-					//[if the player has two rows of breasts] 
+					//[if the player has two rows of breasts]
 					if (player.breastRows.length == 2) outputText("Once about a quarter of the fluid has been injected into the first breast, she moves on to the second and you feel a similar sharp pain followed by the glowing pleasure.  She continues this until all of your [allbreasts] have been injected.  ");
 					//[if the player has three rows of breasts]
 					if (player.breastRows.length > 2)  outputText("Once about a sixth of the fluid has been injected into the first breast, she moves on to the second and you feel a similar sharp pain followed by the glowing pleasure.  She continues this until all of your [allbreasts] have been injected.  ");
@@ -304,7 +309,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				outputText("\n\n");
 				//(variant 3: special toy, requires both dick and vagina)
 				if (player.vaginas.length > 0 && player.cocks.length > 0) {
-					outputText("You see your [armor] becoming a nice, comfortable outfit of a white shirt and black pants that make you look well-suited to work in a manor... if they didn't have an exposed crotch and butt that puts your [cocks], your " + vaginaDescript(0) + ", and your " + buttDescript() + " on full display.  Any undergarments you had are now gone.\n\n");
+					outputText("You see your [armor] becoming a nice, comfortable outfit of a white shirt and black pants that make you look well-suited to work in a manor... if they didn't have an exposed crotch and butt that puts your [cocks], your " + vaginaDescript(0) + ", and your [butt] on full display.  Any undergarments you had are now gone.\n\n");
 					if (player.armor == armors.C_CLOTH) player.modArmorName = "crotch-revealing clothes";
 					outputText("\"<i>Toy, I am feeling aroused,</i>\" she says to you in an authoritative voice. \"<i>I want you to please me.</i>\"\n\n");
 					outputText("\"<i>Yes, mistress,</i>\" you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'.  You could swear that you were in the sitting room of a manor.  \"<i>How do you wish to be pleased?</i>\"\n\n");
@@ -312,12 +317,12 @@ public class FetishCultistScene extends AbstractLakeContent
 					outputText("Eager to please your mistress, now reclining on a lovely chair, you crawl to her, remove her shoes, and start to massage her feet.  Your hands seem to move with the will of some outside force and they expertly work to please your mistress.  Pushed on by her approving groans, you work your way up her legs, removing clothing as you go, until you reach her hips.  There, to your mistress' great delight, you run your hands over her hips and butt, and then start to rub her lower lips and clit.\n\n");
 					outputText("After a minute of this, she stops you and says, \"<i>Good; I am now ready to have you inside of me, toy.  Lie down and start fingering your " + vaginaDescript(0) + " while I use the [cocks] that I keep you here for.</i>\"\n\n");
 					outputText("With your hands slightly trembling in anticipation, you lie down and grab at your very erect [cocks] just before you slip your fingers into your " + vaginaDescript(0) + ", ready to please your mistress the best way you can.  You watch your mistress rise off her chair and slowly lower herself onto your [cock], moaning in pleasure.  Her interior is so familiar and so wonderful.  You increase the pace that your fingers plunge into your depths, moaning in the way you know your mistress loves. She starts to rock back and forth, your [cock] bringing her to the height of ecstasy. ");
-					//[if player has 2 dicks] 
+					//[if player has 2 dicks]
 					if (player.cocks.length == 2) outputText("Your " + cockDescript(1) + " rubs against her skin pleasantly.  ");
-					//[if player has more than 2 dicks] 
+					//[if player has more than 2 dicks]
 					if (player.cocks.length > 2) outputText("The rest of your [cocks] rubs against her skin pleasantly.  ");
 					outputText("Thanks to your extended foreplay, your mistress quickly comes to a climax that reverberates through both your bodies, causing you to release yourself into your mistress and cover your fingers with your other fluids.");
-					//[if player has multiple dicks] 
+					//[if player has multiple dicks]
 					if (player.cocks.length > 1) outputText("  You take special care to make sure that the rest of your cum does not get on your mistress in any way.");
 					outputText("\n\nSatisfied, your mistress rises off of you and dresses.  She tells you that she is going for a walk, and that you should continue your duties now.  ");
 				}
@@ -326,7 +331,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					if (player.cocks.length > 0 && (player.vaginas.length == 0 || rand(2) == 0)) {
 						outputText("  You see that your [armor] have become a nice looking, if simple, frilled white shirt and bow tie along with black pants and matching shoes.  They make you look like you would be at home in a manor attending the needs of a noble, if it were not for the flaps on the front and back of your pants that give easy access to your " + multiCockDescriptLight());
 						if (player.vaginas.length) outputText(", your " + vaginaDescript(0) + ",");
-						outputText(" and your " + buttDescript() + ".  Any undergarments you had are now gone.\n\n");
+						outputText(" and your [butt].  Any undergarments you had are now gone.\n\n");
 						if (player.armor == armors.C_CLOTH) player.modArmorName = "cute servant's clothes";
 						outputText("'Boy, I am feeling aroused.' she says to you in an authoritative voice. 'I want you to please me.'\n\n");
 						outputText("'Yes, mistress.' you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'. You could swear that you were in the sitting room of a manor.  'How do you wish to be pleased?'\n\n");
@@ -345,9 +350,9 @@ public class FetishCultistScene extends AbstractLakeContent
 					//(variant 2: maid, requires vagina)
 					else if (player.vaginas.length > 0) {
 						outputText("You see that your [armor] have become an apron over a plain dress with high stockings and simple black shoes.  They make you look like you would be at home keeping a manor clean and tidy, if it were not for the rather short skirt and lack of undergarments that give easy access to your " + vaginaDescript(0));
-						//[if player has a dick] 
+						//[if player has a dick]
 						if (player.cocks.length > 0) outputText(", your [cocks],");
-						outputText(" and your " + buttDescript() + ".\n\n");
+						outputText(" and your [butt].\n\n");
 						if (player.armor == armors.C_CLOTH) player.modArmorName = "maid's clothes";
 						outputText("'Girl, I am feeling aroused.' she says to you in an authoritative voice. 'I want you to please me.'\n\n");
 						outputText("'Yes, mistress.' you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'.  You could swear that you were in the sitting room of a manor.  'How do you wish to be pleased?'\n\n");
@@ -363,7 +368,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				}
 				//(variant 4: gender-less servant, requires that you have no dick or vagina)
 				if (player.gender == 0) {
-					outputText("You see that your [armor] have become a nice and comfortable outfit of a shirt white and black pants, that make you look well suited to work in a manor.  However, you notice that there is a flap on your pants that gives easy access to your " + buttDescript() + ".\n\n");
+					outputText("You see that your [armor] have become a nice and comfortable outfit of a shirt white and black pants, that make you look well suited to work in a manor.  However, you notice that there is a flap on your pants that gives easy access to your [butt].\n\n");
 					if (player.armor == armors.C_CLOTH) player.modArmorName = "servant's clothes";
 					outputText("'Servant, I am feeling aroused.' she says to you in an authoritative voice. 'I want you to please me.'\n\n");
 					outputText("'Yes, mistress.' you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'.  You could swear that you were in the sitting room of a manor.  'How do you wish to be pleased?'\n\n");
@@ -386,122 +391,6 @@ public class FetishCultistScene extends AbstractLakeContent
 					cleanupAfterCombat();
 				}
 			}
-		}
-
-		public function playerRapesCultist():void
-		{
-			clearOutput();
-			//(nun worship version, this one looks like it will be a little shorter than the other one was, only two variations again)
-			if (monster.armorName == "pervy nun's clothing") {
-				outputText("You see that the cultist's outfit has fixed on a naughty nun outfit with specially placed holes over her sexual parts.  As you get close to her, she goes down on her hands and knees and says to you, \"<i>Mighty sex god, who have shown me your power; please, take my body!</i>\"\n\n");
-				if (player.cor < 40) outputText("You are rather taken aback by this odd declaration, but in the end you decide: <i>what the hell, I'm horny.</i>\n\n");
-				else outputText("You nod to yourself thinking: <i>that's right, I am a sex god.</i>\n\n");
-				outputText("You stride over to her and loosen your [armor] and let them drop to the ground before sitting down in front of her.  \"<i>Show me your affections, then maybe I'll be willing to take you,</i>\" you tell her.  She looks over your naked body with a sort of reverence before bowing her head and saying, \"<i>Of course my lord.</i>\"  With that, she gets to work on you.\n\n");
-				outputText("She takes one of your arms and begins kissing it, from your shoulder to your hand.  Each kiss sends a short quiver of pleasure through you, one you could swear the cultist was also feeling.  When she gets to your hands she kisses each of your fingers, then takes each one into her mouth in turn, sucking on them and licking them with passion.  Her lustful acts are intense, and you can feel yourself getting close to your peak, just from her playing with your fingers.  With a shudder from the sensations, you haltingly tell her, \"<i>Good, now the other arm.</i>\"  With no hesitation, she complies.  Before too long, the fingers on your other hand are being teased and cleaned by her mouth, and again you are brought to the brink.  You shakily pull your hand back and tell her that she has done enough; you are willing to take her now.\n\n");
-				//(if player has a dick)
-				if (player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
-					outputText("She meekly leans back onto the ground and parts her legs with her hands, giving you a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please fill me!</i>\" she begs you.  You stand and stride over to her.  \"<i>Yes little girl, accept my divine rod");
-					if (player.cocks.length > 1) outputText("s");
-					outputText(" in your pussy,</i>\" you reply.  ");
-					if (player.isTaur()) outputText("You command her to get on all fours, then cover her and push ");
-					else outputText("You grab hold of and lift her legs, then kneel down and push ");
-					if (player.cocks.length > 1) outputText("the first of ");
-					outputText("your ");
-					outputText(multiCockDescriptLight() + " into her waiting love hole.  ");
-					if (player.cocks.length > 1) {
-						outputText("You thrust once, before using one of your hands to guide the second of your [cocks] inside her.  You are rather surprised at how easily she seems to accommodate your size");
-						if (player.cocks.length > 2) {
-							outputText(" and decide to push the ");
-							if (player.cocks.length == 3) outputText("last");
-							if (player.cocks.length > 3) outputText("rest");
-							outputText(" in the same way.  ");
-						}
-						else outputText(".  ");
-					}
-					outputText("Fully inside her, you begin to fuck her in earnest, and her eager moans soon fill the air.  Within moments the cultist climaxes unexpectedly quickly, and the feeling soon rushes through you as well, culminating in an incredibly huge orgasm that shakes your whole body. You ejaculate deep into her welcoming cunt, filling it up completely");
-					if (player.cumQ() < 50) outputText(".");
-					if (player.cumQ() >= 50 && player.cumQ() < 200) outputText(" before streams of cum begin to run down her thighs.");
-					if (player.cumQ() >= 200) outputText(" before torrents of cum begin to run down her legs and onto the ground.");
-					outputText("  You pull out and the cultist slumps onto the ground contentedly, massaging her well-fucked, cum-filled pussy.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
-				}
-				//(if player has a vagina)
-				else if (player.vaginas.length > 0 && !player.isTaur()) {
-					outputText("She meekly lies back on the ground and spreads her legs, one slightly in the air.  You have a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please scissor me!</i>\" she begs you.  You stand and stride over to her. \"<i>Yes little girl, accept my divine lips on your pussy,</i>\" you reply.  You grab the leg she had in the air and pull yourself between her legs, pressing your " + vaginaDescript(0) + " against her own.  With a firm tug on her leg, you begin to push and rub your pussies together in earnest, and her eager moans soon fill the air.  The cultist climaxes unexpectedly quickly, and the feeling soon rushes through you as well.  You pull back and the cultist slumps onto the ground contentedly.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
-				}
-				//Horsey
-				if (player.vaginas.length > 0 && player.isTaur()) {
-					outputText("She meekly looks at your bestial lower body, obviously unused to it, and tentatively asks if she can lick your pussy. Smiling, you present your buttocks to her and say, \"<i>Yes little girl, you can pleasure my divine lips with your tongue.</i>\" She happily gets to it, and you hear eager licking and sucking sounds as a warmth diffuses in your nether parts. She sure knows how to handle a cunt, and you find yourself cumming very quickly, as an incredibly huge orgasm shakes your whole body, sending girl-cum all over her face. You turn around and see the cultist with a look of utter bliss on her face, as if she's just been blessed.  You wonder from the quality of the orgasm she just gave you if she has the power of a real sex god.\n\n");
-				}
-				//(after either)
-				outputText("You get dressed and notice that the cultist is still lying on the ground in the perverted nun outfit, with a look of utter bliss on her face.  ");
-				outputText("Satisfied, you continue on your way.");
-				player.sexReward("Default","Default",true,false);
-			}
-			else if (monster.armorName == "swimsuit") {
-				//(scene requires that the PC not be genderless)
-				//foreplay
-				outputText("You advance on the defeated cultist, whose outfit seems to have fixated on such a ridiculously skimpy swimming suit that she might as well be naked.  She looks up at you with a worried expression as you take a closer look at her.  The cultist slowly starts to speak, \"\"<i>Ah, hey there " + player.mf("mister", "miss") + ", what a surprise to see you here!</i>\"  Embarrassed, she tries to make her incredibly revealing swimming suit somewhat less obscene while blushing furiously.  \"<i>Oh mercy me, just thinking about how much of me that you can see is turning me on.</i>\"  You arch an eyebrow: is this girl an exhibitionist?\n\n");
-
-				outputText("You slowly ask her why, if she likes it so much, is she covering herself up?  She looks around a little nervously for a moment before pulling her hands away and giving you a good look at her body.  You see her breathing becoming more rapid.  \"<i>Oh fuck yeah, look at me in this slutty outfit,</i>\" she says, starting to shiver.  She giggles and does a stretch while \"accidentally\" getting part of her suit to slip off.  \"<i>Oops, you can totally see my nipple now, can't you?</i>\" she says breathlessly, her crotch now visibly soaked with her arousal.\n\n");
-				//if (PC is an exhibitionist)
-				if (flags[kFLAGS.PC_FETISH] > 0) outputText("Given your experience with Ceraph, you can definitely understand why she is having so much fun showing off her body.  In fact, you think you'll start to do the same.");
-				else outputText("You don't really understand what could be so arousing about showing off your body to others, but you decided you were going to rape her, so you might as well strip down now.");
-				outputText("  At the sight of your nude body, the nearly naked woman gives another shiver.  \"<i>Oh sweet cocks, you look so sexy,</i>\" she says running her hands over her heaving breasts.  \"<i>Please, can we fuck?</i>\" she begs you.\n\n");
-				//corruption check!
-				if (player.cor < 33) outputText("Well, she obviously wants this, so you guess there isn't anything wrong with enjoying what's on offer, is there?\n\n");
-				else if (player.cor < 66) outputText("You think to yourself how awesome this is.  It isn't often a defeated foe is so eager.\n\n");
-				else outputText("You're almost disappointed at how easy she is making this; but hey, a fuck is a fuck, so what do you care?\n\n");
-				//end of the foreplay
-
-				//sex to be written here
-				outputText("The cultist turns around, presenting her rear end to you, looking over her shoulder.  ");
-				if (player.hasCock()) {
-					outputText("Her eyes lock onto your very erect maleness.  \"<i>I got that thing that hard?  Oh fuck yes!</i>\"  She wraps her arms around her body and rocks back and forth.  ");
-					//if (PC has a vagina)
-					if (player.hasVagina()) outputText("Then, she hesitates for some reason, before saying, \"<i>Um, I'm not sure why I'm asking this since you've got a good tool there already, but... I've got some vibrators, if you want to play with them instead...</i>\"\n\n");
-					else outputText("\"<i>I want this so damn much!</i>\"\n\n");
-				}
-				//if you ain't got a cock, break out the vibrators
-				else {
-					outputText("\"<i>Uh, hey, I've got some toys that we could play with,</i>\" she says a bit nervously.  \"<i>Do you want to play with some vibrators?</i>\"\n\n");
-				}
-				//increase PC's lust thanks to foreplay
-				dynStats("lus", 30);
-				//player chooses between; penetrate vagina, vibrator vagina, nevermind.  Options as appropriate.
-				var vibe:Function =null;
-				var fuckVag:Function =null;
-				if (player.hasVagina()) vibe = swimsuitVibrators;
-				if (player.hasCock()) fuckVag = plugSwimsuitVag;
-				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", null, "", null, "Leave", cleanupAfterCombat);
-				return;
-			}
-			else {
-				outputText("You see that the cultist's outfit has fixed on what looks remarkably similar to a farmhand from your village.  Filled with desire, you approach her.  She cries out in fear and says \"<i>Please don't hurt me!  Even though I knew there were bandits coming, I couldn't leave my mother behind.  Take whatever you want, I won't get in your way, but please leave us alone!</i>\"\n\n");
-				if (player.cor < 40) outputText("You stop, thinking that maybe you should let her go, but she grabs your hand and gives you a look of desperation.  Deciding to finish the job, you push her to her knees and the look of fear returns to her face.  ");
-				else outputText("With a wicked smile, you push her to her knees.  ");
-				//(if player has a dick)
-				if (player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
-					outputText("Telling her that she is going to please you whether she wants to or not, you reveal your [cocks].  She screams for help and starts struggling against your grip, but you tell her that no one is going to save her now.  Easily overpowering her, you force her to the ground with no care for her comfort and start tearing off her clothes.  Once you have a clear view of her love hole, you look back up at her face and see that she has stopped struggling and is now crying.  ");
-					//[if not corrupted] 
-					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear-stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ");
-					outputText("Filled with new determination, you push your [cock] into her love hole and start to rape her roughly.  Despite the tears, she starts moaning, clearly enjoying the rough treatment.  A little while into the rape, she starts to move against you, almost lovingly.  It is quite clear that she has a lot of experience, but is giving you free reign to do whatever you want.   Feeling in complete control, you decide that this game isn't too bad.  Before long you reach your orgasm and you blow your load deep inside her.");
-					outputText("\n\nYou get dressed and notice that the cultist is still lying on the ground with her farm hand outfit torn from her, with a look of utter bliss on her face.  Satisfied, you continue on your way.");
-					player.sexReward("Default","Default",true,false);
-				}
-				//(if player has a vagina)
-				else if (player.vaginas.length > 0) {
-					outputText("Telling her that she is going to please you whether she wants to or not, you reveal your " + vaginaDescript(0) + ".  Pushing your " + clitDescript() + " to her mouth, you order her to lick you if she wants you to leave her mother alone.  ");
-					outputText("She screams for help and starts struggling against your grip, but you tell her that no one is going to save her now.  You feel her tongue go in, and she hesitantly gives a lick.  You pull her head back by the hair and look into her eyes.  She is crying!  ");
-					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ");
-					outputText("With new determination, you yell at her to lick harder, and to push in as much as she can, or her mother will die.  This time when she starts licking you, she does it almost lovingly.  It is quite clear that she has a lot of experience and, regardless of her words, she obviously wants this.  Feeling in complete control, you think that this game isn't too bad.  Under her expert flicks, you quickly reach a climax.  You pull her head back and tell her that now she has to clean you up.  You specify that she can't just lick this time, she has to drink your excretions.\n\n");
-					outputText("A few minutes later, you close your [armor] back up, and look back at the cultist.  She is lying on the ground in her farm hand outfit with a look of utter bliss on her face.  Satisfied, you continue on your way.");
-					player.sexReward("Default","Default",true,false);
-				}
-				if (player.gender == 0) {
-					outputText("You make her rub your body down, but you don't really have a means to rape her.  Afterwards you do feel better, but didn't get any real release.  Disappointed, you continue on your way.");
-				}
-			}
-			cleanupAfterCombat();
 		}
 
 		//PC goes for the vagina
@@ -619,6 +508,139 @@ public class FetishCultistScene extends AbstractLakeContent
 			EventParser.gameOver();
 		}
 
+		public function cultistDefeated():void{
+			//Defeated by health
+			if (monster.HP < 1) outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.");
+			//Defeated by lust
+			else outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.");
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+				outputText("\n\nDo you want to take advantage of her vulnerable state to sate your lusts?");
+				menu();
+				addButton(0, "Yes", playerRapesCultist);
+				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(2, "B.Feed", fetishCultistHasAMilkFetish).hint("Empty your heavy jugs.");
+				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(3, "Mindbreak", mindbreakFemaleCultist).hint("Toy with the cultist brain.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
+			else cleanupAfterCombat();
+		}
+
+		public function playerRapesCultist():void
+		{
+			clearOutput();
+			//(nun worship version, this one looks like it will be a little shorter than the other one was, only two variations again)
+			if (monster.armorName == "pervy nun's clothing") {
+				outputText("You see that the cultist's outfit has fixed on a naughty nun outfit with specially placed holes over her sexual parts.  As you get close to her, she goes down on her hands and knees and says to you, \"<i>Mighty sex god, who have shown me your power; please, take my body!</i>\"\n\n");
+				if (player.cor < 40) outputText("You are rather taken aback by this odd declaration, but in the end you decide: <i>what the hell, I'm horny.</i>\n\n");
+				else outputText("You nod to yourself thinking: <i>that's right, I am a sex god.</i>\n\n");
+				outputText("You stride over to her and loosen your [armor] and let them drop to the ground before sitting down in front of her.  \"<i>Show me your affections, then maybe I'll be willing to take you,</i>\" you tell her.  She looks over your naked body with a sort of reverence before bowing her head and saying, \"<i>Of course my lord.</i>\"  With that, she gets to work on you.\n\n");
+				outputText("She takes one of your arms and begins kissing it, from your shoulder to your hand.  Each kiss sends a short quiver of pleasure through you, one you could swear the cultist was also feeling.  When she gets to your hands she kisses each of your fingers, then takes each one into her mouth in turn, sucking on them and licking them with passion.  Her lustful acts are intense, and you can feel yourself getting close to your peak, just from her playing with your fingers.  With a shudder from the sensations, you haltingly tell her, \"<i>Good, now the other arm.</i>\"  With no hesitation, she complies.  Before too long, the fingers on your other hand are being teased and cleaned by her mouth, and again you are brought to the brink.  You shakily pull your hand back and tell her that she has done enough; you are willing to take her now.\n\n");
+				//(if player has a dick)
+				if (player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
+					outputText("She meekly leans back onto the ground and parts her legs with her hands, giving you a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please fill me!</i>\" she begs you.  You stand and stride over to her.  \"<i>Yes little girl, accept my divine rod");
+					if (player.cocks.length > 1) outputText("s");
+					outputText(" in your pussy,</i>\" you reply.  ");
+					if (player.isTaur()) outputText("You command her to get on all fours, then cover her and push ");
+					else outputText("You grab hold of and lift her legs, then kneel down and push ");
+					if (player.cocks.length > 1) outputText("the first of ");
+					outputText("your ");
+					outputText(multiCockDescriptLight() + " into her waiting love hole.  ");
+					if (player.cocks.length > 1) {
+						outputText("You thrust once, before using one of your hands to guide the second of your [cocks] inside her.  You are rather surprised at how easily she seems to accommodate your size");
+						if (player.cocks.length > 2) {
+							outputText(" and decide to push the ");
+							if (player.cocks.length == 3) outputText("last");
+							if (player.cocks.length > 3) outputText("rest");
+							outputText(" in the same way.  ");
+						}
+						else outputText(".  ");
+					}
+					outputText("Fully inside her, you begin to fuck her in earnest, and her eager moans soon fill the air.  Within moments the cultist climaxes unexpectedly quickly, and the feeling soon rushes through you as well, culminating in an incredibly huge orgasm that shakes your whole body. You ejaculate deep into her welcoming cunt, filling it up completely");
+					if (player.cumQ() < 50) outputText(".");
+					if (player.cumQ() >= 50 && player.cumQ() < 200) outputText(" before streams of cum begin to run down her thighs.");
+					if (player.cumQ() >= 200) outputText(" before torrents of cum begin to run down her legs and onto the ground.");
+					outputText("  You pull out and the cultist slumps onto the ground contentedly, massaging her well-fucked, cum-filled pussy.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
+				}
+				//(if player has a vagina)
+				else if (player.vaginas.length > 0 && !player.isTaur()) {
+					outputText("She meekly lies back on the ground and spreads her legs, one slightly in the air.  You have a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please scissor me!</i>\" she begs you.  You stand and stride over to her. \"<i>Yes little girl, accept my divine lips on your pussy,</i>\" you reply.  You grab the leg she had in the air and pull yourself between her legs, pressing your " + vaginaDescript(0) + " against her own.  With a firm tug on her leg, you begin to push and rub your pussies together in earnest, and her eager moans soon fill the air.  The cultist climaxes unexpectedly quickly, and the feeling soon rushes through you as well.  You pull back and the cultist slumps onto the ground contentedly.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
+				}
+				//Horsey
+				if (player.vaginas.length > 0 && player.isTaur()) {
+					outputText("She meekly looks at your bestial lower body, obviously unused to it, and tentatively asks if she can lick your pussy. Smiling, you present your buttocks to her and say, \"<i>Yes little girl, you can pleasure my divine lips with your tongue.</i>\" She happily gets to it, and you hear eager licking and sucking sounds as a warmth diffuses in your nether parts. She sure knows how to handle a cunt, and you find yourself cumming very quickly, as an incredibly huge orgasm shakes your whole body, sending girl-cum all over her face. You turn around and see the cultist with a look of utter bliss on her face, as if she's just been blessed.  You wonder from the quality of the orgasm she just gave you if she has the power of a real sex god.\n\n");
+				}
+				//(after either)
+				outputText("You get dressed and notice that the cultist is still lying on the ground in the perverted nun outfit, with a look of utter bliss on her face.  ");
+				outputText("Satisfied, you continue on your way.");
+				player.sexReward("Default","Default",true,false);
+			}
+			else if (monster.armorName == "swimsuit") {
+				//(scene requires that the PC not be genderless)
+				//foreplay
+				outputText("You advance on the defeated cultist, whose outfit seems to have fixated on such a ridiculously skimpy swimming suit that she might as well be naked.  She looks up at you with a worried expression as you take a closer look at her.  The cultist slowly starts to speak, \"\"<i>Ah, hey there " + player.mf("mister", "miss") + ", what a surprise to see you here!</i>\"  Embarrassed, she tries to make her incredibly revealing swimming suit somewhat less obscene while blushing furiously.  \"<i>Oh mercy me, just thinking about how much of me that you can see is turning me on.</i>\"  You arch an eyebrow: is this girl an exhibitionist?\n\n");
+
+				outputText("You slowly ask her why, if she likes it so much, is she covering herself up?  She looks around a little nervously for a moment before pulling her hands away and giving you a good look at her body.  You see her breathing becoming more rapid.  \"<i>Oh fuck yeah, look at me in this slutty outfit,</i>\" she says, starting to shiver.  She giggles and does a stretch while \"accidentally\" getting part of her suit to slip off.  \"<i>Oops, you can totally see my nipple now, can't you?</i>\" she says breathlessly, her crotch now visibly soaked with her arousal.\n\n");
+				//if (PC is an exhibitionist)
+				if (flags[kFLAGS.PC_FETISH] > 0) outputText("Given your experience with Ceraph, you can definitely understand why she is having so much fun showing off her body.  In fact, you think you'll start to do the same.");
+				else outputText("You don't really understand what could be so arousing about showing off your body to others, but you decided you were going to rape her, so you might as well strip down now.");
+				outputText("  At the sight of your nude body, the nearly naked woman gives another shiver.  \"<i>Oh sweet cocks, you look so sexy,</i>\" she says running her hands over her heaving breasts.  \"<i>Please, can we fuck?</i>\" she begs you.\n\n");
+				//corruption check!
+				if (player.cor < 33) outputText("Well, she obviously wants this, so you guess there isn't anything wrong with enjoying what's on offer, is there?\n\n");
+				else if (player.cor < 66) outputText("You think to yourself how awesome this is.  It isn't often a defeated foe is so eager.\n\n");
+				else outputText("You're almost disappointed at how easy she is making this; but hey, a fuck is a fuck, so what do you care?\n\n");
+				//end of the foreplay
+
+				//sex to be written here
+				outputText("The cultist turns around, presenting her rear end to you, looking over her shoulder.  ");
+				if (player.hasCock()) {
+					outputText("Her eyes lock onto your very erect maleness.  \"<i>I got that thing that hard?  Oh fuck yes!</i>\"  She wraps her arms around her body and rocks back and forth.  ");
+					//if (PC has a vagina)
+					if (player.hasVagina()) outputText("Then, she hesitates for some reason, before saying, \"<i>Um, I'm not sure why I'm asking this since you've got a good tool there already, but... I've got some vibrators, if you want to play with them instead...</i>\"\n\n");
+					else outputText("\"<i>I want this so damn much!</i>\"\n\n");
+				}
+				//if you ain't got a cock, break out the vibrators
+				else {
+					outputText("\"<i>Uh, hey, I've got some toys that we could play with,</i>\" she says a bit nervously.  \"<i>Do you want to play with some vibrators?</i>\"\n\n");
+				}
+				//increase PC's lust thanks to foreplay
+				dynStats("lus", 30);
+				//player chooses between; penetrate vagina, vibrator vagina, nevermind.  Options as appropriate.
+				var vibe:Function =null;
+				var fuckVag:Function =null;
+				if (player.hasVagina()) vibe = swimsuitVibrators;
+				if (player.hasCock()) fuckVag = plugSwimsuitVag;
+				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", null, "", null, "Leave", cleanupAfterCombat);
+				return;
+			}
+			else {
+				outputText("You see that the cultist's outfit has fixed on what looks remarkably similar to a farmhand from your village.  Filled with desire, you approach her.  She cries out in fear and says \"<i>Please don't hurt me!  Even though I knew there were bandits coming, I couldn't leave my mother behind.  Take whatever you want, I won't get in your way, but please leave us alone!</i>\"\n\n");
+				if (player.cor < 40) outputText("You stop, thinking that maybe you should let her go, but she grabs your hand and gives you a look of desperation.  Deciding to finish the job, you push her to her knees and the look of fear returns to her face.  ");
+				else outputText("With a wicked smile, you push her to her knees.  ");
+				//(if player has a dick)
+				if (player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
+					outputText("Telling her that she is going to please you whether she wants to or not, you reveal your [cocks].  She screams for help and starts struggling against your grip, but you tell her that no one is going to save her now.  Easily overpowering her, you force her to the ground with no care for her comfort and start tearing off her clothes.  Once you have a clear view of her love hole, you look back up at her face and see that she has stopped struggling and is now crying.  ");
+					//[if not corrupted]
+					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear-stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ");
+					outputText("Filled with new determination, you push your [cock] into her love hole and start to rape her roughly.  Despite the tears, she starts moaning, clearly enjoying the rough treatment.  A little while into the rape, she starts to move against you, almost lovingly.  It is quite clear that she has a lot of experience, but is giving you free reign to do whatever you want.   Feeling in complete control, you decide that this game isn't too bad.  Before long you reach your orgasm and you blow your load deep inside her.");
+					outputText("\n\nYou get dressed and notice that the cultist is still lying on the ground with her farm hand outfit torn from her, with a look of utter bliss on her face.  Satisfied, you continue on your way.");
+					player.sexReward("Default","Default",true,false);
+				}
+				//(if player has a vagina)
+				else if (player.vaginas.length > 0) {
+					outputText("Telling her that she is going to please you whether she wants to or not, you reveal your " + vaginaDescript(0) + ".  Pushing your " + clitDescript() + " to her mouth, you order her to lick you if she wants you to leave her mother alone.  ");
+					outputText("She screams for help and starts struggling against your grip, but you tell her that no one is going to save her now.  You feel her tongue go in, and she hesitantly gives a lick.  You pull her head back by the hair and look into her eyes.  She is crying!  ");
+					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ");
+					outputText("With new determination, you yell at her to lick harder, and to push in as much as she can, or her mother will die.  This time when she starts licking you, she does it almost lovingly.  It is quite clear that she has a lot of experience and, regardless of her words, she obviously wants this.  Feeling in complete control, you think that this game isn't too bad.  Under her expert flicks, you quickly reach a climax.  You pull her head back and tell her that now she has to clean you up.  You specify that she can't just lick this time, she has to drink your excretions.\n\n");
+					outputText("A few minutes later, you close your [armor] back up, and look back at the cultist.  She is lying on the ground in her farm hand outfit with a look of utter bliss on her face.  Satisfied, you continue on your way.");
+					player.sexReward("Default","Default",true,false);
+				}
+				if (player.gender == 0) {
+					outputText("You make her rub your body down, but you don't really have a means to rape her.  Afterwards you do feel better, but didn't get any real release.  Disappointed, you continue on your way.");
+				}
+			}
+			cleanupAfterCombat();
+		}
+
 		public function fetishCultistHasAMilkFetish():void
 		{
 			clearOutput();
@@ -678,6 +700,41 @@ public class FetishCultistScene extends AbstractLakeContent
 			//You've now been milked, reset the timer for that
 			player.addStatusValue(StatusEffects.Feeder, 1, 1);
 			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
+			cleanupAfterCombat();
+		}
+
+		private function mindbreakFemaleCultist():void{
+			clearOutput();
+			outputText("She looks quite desperate for a fuck already." +
+					" It wouldn’t be too hard to just rape her and go back to your things, but why rape when you can enslave and convert her already weak mind to the will of the sorority?" +
+					" Leaving her to the Church of the Fetish would be a shame, especially because of how easy it would be to break those attachments and make her switch her allegiance." +
+					"\n\nYou pull in the fetish cultist for a surprise kiss, which takes her entirely off guard, and you use this distraction to slide your tentacles inside her head." +
+					" While the Church of the Fetish is clearly great at brainwashing, you’re even better and you start to remodel her thoughts and desires into a more appropriate form." +
+					"\n\n\"<i>What is loud smell beautiful blue happened? AAahn I am banana!</i>\"" +
+					"\n\nTurning her into a subservient slut who lives only to have her brain fucked and get fucked by you or those you dictate proves to be almost too easy." +
+					" Her legs are already completely soaked from the consecutive orgasms you're giving her and her mouth is drooling a steady flow." +
+					" You grope her breast with your remaining tentacles, covering her with your slime as you patiently ask her \"<i>who is your best friend?</i>\"" +
+					"\n\n\"<i>You big </i>");
+			if (player.hasCock())outputText("<i>brother</i>");
+			else if (player.hasVagina())outputText("<i>sister</i>");
+			outputText("<i> [name].</i>\"" +
+					"\n\nYou slide a tentacle under her breast massaging it as you ask her \"<i>What do you like the most…?</i>\"" +
+					"\n\n\"<i>Ahhhhn… Being fucked.. Ahnn.. by your tentacles in my head, big </i>");
+			if (player.hasCock())outputText("<i>brother</i>");
+			else if (player.hasVagina())outputText("<i>sister</i>");
+			outputText("<i> [name].</i>\"" +
+					"\n\nYou make a victorious grin and declare \"<i>Then you can abandon yourself to my care.</i>\"" +
+					"\n\nTotally in control, you continue fucking her brain, connecting yourself with her nerves and pussy to truly feel everything you inflict on her until you both orgasm, your cunt splattering green fluids on hers as you ride her pleasure waves.");
+			Mindbreaker.MindBreakerFetishFemaleConvert ++;
+			Mindbreaker.MindBreakerConvert ++;
+			if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
+			else {
+				outputText(" Satisfied for now you let her out of your embrace and tell her all she has to do to feel like this forever is to obey you and her other big sister, Kaerb-Dnim, so she too can become perfect someday." +
+						" She nods, understanding everything and already smiling beautifully at the idea of getting her brain thoroughly fucked inside out." +
+						"\n\nShe leaves in a rush. Barely taking the time to dress up, her cunt still drooling from the lingering sensation of your tentacle feelers in her head." +
+						" You chuckle at the eagerness of your new convert as you head back to camp.");
+			}
+			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
 		}
 	}

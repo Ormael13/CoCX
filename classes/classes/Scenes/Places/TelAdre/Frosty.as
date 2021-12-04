@@ -284,7 +284,7 @@ public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 		outputText("\n\nGeez, she could have at least not given you an intense case of blue balls.  Damn, this hurts SO much right now. “<i>Ooooh...</i>” Frosty sees the slight look of pain on your face. “Here, let me make this all better.</i>” Frosty licks the palm of the hand she used to jerk you, taking extra care to lick and suck on her fingers. She takes a look at her fingers then your cunt, then back to her fingers, back to your cunt then takes a final look at her fingers. The dim-witted nymph then launches two wet fingers into your syrup-covered pussy. So much pleasure hits you that a hard shot of pre-cum shoots from your cock.");
 		outputText("\n\nIt would have ended up in Frosty’s curly hair, but she swiftly tilts her head back and catches the pre in her mouth, not missing a beat in pushing her fingers in and out of your cunt. She may act innocent but she is one grade A pleasure slut.");
 		outputText("\n\nHer pushing two fingers into you combined with rubbing them against your G-spot makes your tongue loll out like ");
-		if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+		if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 			outputText("the bimbo you are");
 		}
 		else {

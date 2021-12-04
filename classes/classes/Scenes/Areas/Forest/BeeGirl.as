@@ -51,7 +51,7 @@ public class BeeGirl extends Monster {
 				SceneLib.forest.beeGirlScene.beeRapesYou();
 			}
 		}
-		
+
 		private function beeStingAttack():void {
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind)) {
@@ -144,7 +144,7 @@ public class BeeGirl extends Monster {
 					.add(consumables.BEEHONY, 1 / 2)
 					.elseDrop(useables.B_CHITN);
 			this.antennae.type = Antennae.BEE;
-			this.wings.type = Wings.BEE_LIKE_SMALL;
+			this.wings.type = Wings.BEE_SMALL;
 			this.tailType = Tail.BEE_ABDOMEN;
 			this.tailVenom = 100;
 			this.special1 = beeStingAttack;

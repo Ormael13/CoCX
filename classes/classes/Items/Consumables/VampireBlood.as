@@ -9,6 +9,7 @@ import classes.CoC;
 import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.EngineCore;
 
 import coc.xxc.BoundStory;
 
@@ -38,123 +39,102 @@ public class VampireBlood extends Consumable {
     }
     override public function useItem():Boolean{
         clearOutput();
-        var story:BoundStory = CoC.instance.rootStory.locate("diva/item").bind(CoC.instance.context);
         if(first){
-            story.display("useText/first");
+            outputText("Ew! This thing is indeed blood. It tastes awful, a strong, coppery taste, the liquid is thick from the iron content.\nAs you try to get the taste out of your mouth, you feel something begin to change in you.");
             first = false;
         } else if (player.vampireScore() >= 6){
-            story.display("useText/vampire");
+            outputText("The blood tastes wonderful, as always.\n\nYou have downed the whole vial much sooner than you would have liked, leaving you wishing for more even as the vampiric blood starts changing your body further.")
+            if (EngineCore.silly()) outputText("\n\nYou filthy druggie.");
+        } else if (pure) {
+            outputText("The blood tastes awful, a strong, coppery taste, and is thick from the iron content. Yet, under the blood’s metallic aftertaste, there's a hint of sweetness to it that you can’t really put your finger on.\n\nAs you try to get the taste out of your mouth, you feel your body starting to change.");
         } else {
-            story.display(pure ? "useText/pure" : "useText/normal");
+            outputText("You uncork the vial and down its contents. You gag disgusted as the thick, metallic tang of blood coats your throat.\n\n");
+            if (EngineCore.silly()) outputText("What else were you expecting with that label and smell? Tomato juice with iron shavings?\n\n");
+            outputText("With some effort, you force down the blood and swallow it. A rush of heat flows through your veins as your body starts to react to the new blood.");
         }
-        //outputText("\n\n");
-        story = story.locate("tfText");
 
-        var tfArr:Array = [
-            {
-                BodyPart: 'arms.type',
-                ChangeTo: pure ? Arms.HUMAN : Arms.BAT,
-                Check   : player.ears.type != Arms.HUMAN,
-                Override: mutations.humanizeArms,
-                Metamorph: pure ? StatusEffects.UnlockedHumanArms : StatusEffects.UnlockedBatWings
-            }, {
-                BodyPart: 'ears.type',
-                ChangeTo: pure ? Ears.VAMPIRE : Ears.BAT,
-                Check   : pure ? player.ears.type != Ears.HUMAN : false,
-                Override: pure ? mutations.humanizeEars : null,
-                Metamorph: pure ? StatusEffects.UnlockedVampireEars : StatusEffects.UnlockedBatEars
-            }, {
-                BodyPart: 'eyes.type',
-                ChangeTo: Eyes.VAMPIRE,
-                Metamorph: StatusEffects.UnlockedVampireEyes,
-                Addition: {
-                    Eyes:{
-                        BodyPart: 'eyes.colour',
-                        ChangeTo: "blood-red"
-                    }
-                }
-            }, {
-                BodyPart: 'faceType',
-                ChangeTo: Face.VAMPIRE,
-                Metamorph: StatusEffects.UnlockedVampireFace
-            }
-        ];
-        if(pure){
-            tfArr.push(
-            {
-                BodyPart: 'wings.type',
-                ChangeTo: Wings.VAMPIRE,
-                Check   : player.hasGooSkin(),
-                Override: mutations.humanizeSkin,
-                Metamorph: StatusEffects.UnlockedVampireWings
-            }, {
-                BodyPart: 'skinTone',
-                ChangeTo: "pale",
-                Addition: {
-                    Eyes:{
-                        BodyPart: 'eyes.colour',
-                        ChangeTo: "blood-red"
-                    }
-                }
-            });
-        } else {
-            tfArr.push({
-                BodyPart: 'rearBody.type',
-                ChangeTo: RearBody.BAT_COLLAR,
-                Metamorph: StatusEffects.UnlockedBatCollar
-            });
-        }
         changes = 0;
-        changeLimit = 1;
-		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
-        if (player.blockingBodyTransformations()) changeLimit = 0;
-		for each (var tf:Object in tfArr) {
-            if (changes >= changeLimit) break;
-            if (trueOnceInN(tf.Chance? tf.Chance : 3)) {
-	            doChange(tf);
-            }
-		}
-	    if(changes == 0){outputText("\n\n");story.display("noChange");}
-        return false;
+		var changeLimit:Number = 1;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 
-        function doChange(tf:Object,count:Boolean=true):void{
-            if (tf.ChangeTo != -1) {
-	            var keys:Array = tf.BodyPart.split('.');
-	            var hostObj:Object = player;
-	            var bodyPart:String = tf.BodyPart;
-	            if(keys.length > 1){
-		            hostObj = player[keys[0]];
-		            bodyPart = keys[1];
-	            }
-	            if (hostObj[bodyPart] != tf.ChangeTo){
-		            if (tf.Check) {
-			            tf.Override();
-			            if(count)changes++;
-		            }
-		            outputText("\n\n");
-		            if(count){
-			            story.display(tf.BodyPart, {$pure: pure});
-		            }
-		            hostObj[bodyPart] = tf.ChangeTo;
-     				if (tf.Metamorph) {
-        				mutations.addGeneticMemory(tf.Metamorph, tf.Metamorph.id.replace("Unlocked ", ""));
-     				}
-		            for each(var extra:Object in tf.Addition){
-			            doChange(extra,false);
-		            }
-		            if(count) changes++;
-	            }
+        if (pure) {
+            if (pure && rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EarsVampire.isPossible()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EarsVampire.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.HUMAN) {
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.wings.type !== Wings.VAMPIRE) {
+                outputText("\n\n");
+                if (player.hasGooSkin()) {
+                    CoC.instance.transformations.SkinPlain.applyEffect();
+                    outputText("\n\n");
+                }
+
+                CoC.instance.transformations.WingsVampire.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.skinTone !== "pale") {
+                outputText("\n\n");
+                outputText("Your skin suddenly starts itching, causing you to look at it just in time for you to see it finish paling into a shade that wouldn’t be     out of place on a corpse. You feel sleepy… horribly so, but you dismiss it as being the fault of the glaring light above your head. <b>You guess    you could use some extra sunlight with your pale skin.</b>");
+                player.skinTone = "pale";
+
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EyesChangeColor(["blood-red"]).isPossible()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesChangeColor(["blood-red"]).applyEffect();
+
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.rearBody.type !== RearBody.BAT_COLLAR) {
+                outputText("\n\n");
+                CoC.instance.transformations.RearBodyBatCollar.applyEffect();
+                changes++;
+            }
+        } else {
+            if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EarsBat.isPossible()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EarsBat.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.BAT) {
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsBatWing.applyEffect();
+                changes++;
             }
         }
+
+        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EyesVampire.isPossible()) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesVampire.applyEffect();
+            changes++;
+        }
+
+        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.FaceVampire.isPossible()) {
+            outputText("\n\n");
+            CoC.instance.transformations.FaceVampire.applyEffect();
+            changes++;
+        }
+
+	    if(changes == 0) {
+            outputText("\n\nOdd. You don't feel any different.");
+        }
+
+        return false;
     }
 }
 }

@@ -48,9 +48,9 @@ public class MarblePurification extends NPCAwareContent{
 	Marble taking the formula will be the last step in her purification.
 	At this point Marble is purified.
 	There were plans to let you use a pure pearl as well, but that would cause you to skip over too much content related to Marble's personality and race for it to be practical to write two forms of Marble's post-purification content.
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-	
+
 	//Marble wants to be purified
 	//This scene takes place 3-4 days after Marble joins the PC in camp
 	//The PC must have the Marble Resistant perk, must not have the Marble’s Milk perk to trigger this scene, they must have below 50 corruption, and they cannot have any corrupt followers in camp.  If at any time the PC's corruption goes over 50, or they gain a corrupt follower, the quest is cancelled.  The quest can be continued if they once again drop under 50 corruption and lose all corrupt followers.
@@ -134,8 +134,8 @@ public class MarblePurification extends NPCAwareContent{
 		flags[kFLAGS.TIMES_GIVEN_MARBLE_PURE_LABOVA]++;
 		doNext(camp.returnToCampUseOneHour);
 	}
-	
-	
+
+
 	//Display default Marble interaction options
 
 	//PC visits Rathazul
@@ -179,7 +179,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nYou thank him for his help, tell him that Marble will also appreciate it, and then calmly head back to camp. Behind you, Rathazul begins busying himself with the strange equipment he does his work with.");
 	 	flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 3;
 	 	flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] = 24;
-	 	
+
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -227,7 +227,7 @@ public class MarblePurification extends NPCAwareContent{
 		flags[kFLAGS.SLEEP_WITH] = "";
 		doNext(camp.returnToCampUseOneHour);
 	}
-	
+
 	//Clara Appears in Camp
 	//happens at the start of the sixth day after sending Marble to her family.
 	//Clara is the youngest of Marble’s sisters, she is great at cracking funny jokes, and telling stories, and has an overall upbeat nature.  She does have this almost sinister smile that sometimes appears on her face when looking at the PC.  She looks like Marble in most respects, other than having black and white blotched pattern fur, and being a bit shorter and less endowed than Marble.  She is 6’2", and has GG cup breasts.
@@ -262,8 +262,8 @@ public class MarblePurification extends NPCAwareContent{
 		menu();
 		addButton(0,"Next",partTwoOfClaraShowingUpAndBeingACunt);
 	}
-	
-	public function partTwoOfClaraShowingUpAndBeingACunt():void 
+
+	public function partTwoOfClaraShowingUpAndBeingACunt():void
 	{
 		clearOutput();
 	 	outputText("You turn back to the camp and continue going about your morning routine.  By the time you’re ready to head out, the girls have come back from the farm, bearing a bottle of Clara’s milk.  The spotted bovine’s foul mood seems to have improved as well.");
@@ -309,7 +309,7 @@ public class MarblePurification extends NPCAwareContent{
 			if (isabellaFollower())
 			{
 				outputText("\n\nYou head towards the corner of the camp that Isabella claims as her own and ask if the cow-girl warrioress would like to share some tea with the rest of you.");
-				
+
 				if (isabellaAccent())
 				{
 					outputText("  Isabella jumps from her chair, “<i>Tea?  Ooh, ja!  I hear tea und milk iz sehr gut combination, ja?</i>”  Well, she seems rather enthusiastic if nothing else.");
@@ -318,7 +318,7 @@ public class MarblePurification extends NPCAwareContent{
 				{
 					outputText("  Isabella jumps from her chair, “<i>Tea? Ooh, yes!  I hear tea and milk is a really good combination, yes? I've never had the opportunity to try it though...</i>”  Well, she seems rather enthusiastic if nothing else.");
 				}
-				
+
 				teaDrinkers++;
 			}
 			//if (Izma is in camp)
@@ -365,7 +365,7 @@ public class MarblePurification extends NPCAwareContent{
 	{
 		clearOutput();
 	 	outputText("Upon returning to the center of activity, you find a rather annoyed looking Marble sitting off to the side while Clara busies herself with a large number of cups from her pack.  Curious over what happened, you sit down next to Marble while watching Clara check the temperature of the pot.  After a moment, you ask your bovine lover why she is just watching.  \"<i>After I got the fire started, Clara insisted that I’d get in the way and ruin the tea if I tried to help,</i>\" she grumbles in annoyance.");
-		
+
 	 	outputText("\n\nA moment later the kettle Clara has on the fire starts to let out a high pitched whistling noise and is removed with an exclamation of, \"<i>It’s ready!</i>\"  The younger sibling stands up and looks around, before turning to you and asking if everyone is here.  When you nod in the affirmative, she smiles and starts pouring cups and handing them out.");
 
 		//if (temp follower variable >=1) { She does ask your companions to wait to drink until everyone has a cup. }
@@ -390,10 +390,10 @@ public class MarblePurification extends NPCAwareContent{
 		//Marble’s response
 	 	outputText("\n\nMarble puts her hand to her forehead, before demanding, \"<i>What, what are you doing Clara?!</i>\"  Clara turns to her sister and with that smirking face tells her, \"<i>I’m collecting the catch that you decided to foolishly throw away.</i>\"  Marble falls to the ground as you feel yourself start to slip thanks to the drugged tea.  Just before you pass out, the visage of a pretty young woman fills your vision and says, \"<i>Come on now, let’s run away toogether.</i>\"");
 
-		//new page 
+		//new page
 		menu();
 		addButton(0,"Next",partTwoOfLowIntelligencePCsFallingForTheIncrediblyObviousCowCuntsTrap);
-		
+
 	}
 	public function partTwoOfLowIntelligencePCsFallingForTheIncrediblyObviousCowCuntsTrap():void
 	{
@@ -420,7 +420,7 @@ public class MarblePurification extends NPCAwareContent{
 		addButton(0, "Fight", fightCowCuntAfterBeingTotesMcGoatsDrugged);
 		addButton(1, "Submit", voluntarilyChooseCowCuntBadEndYouBad);
 	}
-	
+
 	//Chose fight
 	public function fightCowCuntAfterBeingTotesMcGoatsDrugged():void {
 		clearOutput();
@@ -448,7 +448,7 @@ public class MarblePurification extends NPCAwareContent{
 		menu();
 		addButton(0,"Next",loseToClara,false);
 	}
-	
+
 	//Medium Intelligence Outcome
 	//The PC realizes that something is wrong with the situation after Clara invites everyone to drink.  The PC can hesitate to drink the tea if they have medium intelligence, or drink it anyway.  Hesitation causes the PC to not be drugged while everyone else is.
 	public function mediumIntelligenceReactsToDrugging():void
@@ -549,9 +549,10 @@ public class MarblePurification extends NPCAwareContent{
 			 	outputText("\n\n\"<i>Little bitch!</i>\"  The cowgirl snarls, standing up to her full impressive height.  \"<i>I will teach you not to try something like this again.</i>\"  Isabella grabs her shield and brandishes it prominently, ready to use it for defense and to bludgeon.");
 			}
 			//if (Jojo is in camp)
-			if(player.hasStatusEffect(StatusEffects.CampRathazul))
+			if(player.hasStatusEffect(StatusEffects.PureCampJojo))
 			{
-			 	outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Jojo says, rising off the ground and retrieving his staff.  Falling into a combat pose, his face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
+			 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Joy says, rising off the ground and retrieving her staff.  Falling into a combat pose, her face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
+				else outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Jojo says, rising off the ground and retrieving his staff.  Falling into a combat pose, his face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
 			}
 			//if (Kiha is in camp)
 			if(followerKiha())
@@ -574,11 +575,11 @@ public class MarblePurification extends NPCAwareContent{
 			startCombatWithMarbleSister(true);
 		}
 	}
-	
+
 	public function loseToClara(combat:Boolean = true):void
 	{
 		clearOutput();
-		//PC loses via health	
+		//PC loses via health
 		if(combat)
 		{
 			if(player.HP < 1) outputText("Your body gives out from the strain, and you fall to the ground.  The last thing you hear before you pass out, is Clara’s triumphant laughter.");
@@ -606,7 +607,7 @@ public class MarblePurification extends NPCAwareContent{
 		if((player.hasCock() && player.smallestCockArea() <= 40) && player.biggestTitSize() <= 25 && !player.isTaur() && !player.isNaga() && !player.isGoo() && !player.isDrider())
 		 	outputText("Instead a plain but rather slim form fitting two piece garb adorns your body.  Whoever dressed you in that definitely wanted your bodily assets to be fully visible to anyone looking at you.");
 		else outputText("You’re completely naked.");
-		
+
 		//new page
 		menu();
 		addButton(0,"Next",losingToCowCuntsPageII);
@@ -621,7 +622,7 @@ public class MarblePurification extends NPCAwareContent{
 		if(player.statusEffectv3(StatusEffects.Marble) == 1)
 		{
 		 	outputText("\"<i>Oh?  Wondering how I know about that?  Marble told me when she was explaining about you breaking free of the addiction.  Unlike her, I’m going to make sure you behave yourself.</i>\"  ");
-		} 
+		}
 		else
 		{
 		 	outputText("\"<i>Confused?  That was one of the things Marble found out when she was researching the nature of her addiction.  She said she didn’t want to trouble you with that knowledge, but I don’t see why.</i>\"  ");
@@ -690,7 +691,7 @@ public class MarblePurification extends NPCAwareContent{
 		 	outputText("Or rather, your lack of thereof.  Clara doesn’t seem to mind too much; Marble must have told her about this part of you too.");
 		}
 		//Clara fingers the PC’s asshole
-	 	outputText("\n\nIt then becomes rather apparent exactly what Clara really wants to play with now, and you feel her fingers slip down and around your body.  She gets herself a handful of your " + buttDescript() + ", and then slips her fingers into your crevice.  That finger doesn't stop until it's pushed itself inside your " + assholeDescript() + " and triggered a response that makes Clara laugh with delight.  Feeling emboldened, the bovine girl thrusts another finger into your back entrance and starts wiggling them around.");
+	 	outputText("\n\nIt then becomes rather apparent exactly what Clara really wants to play with now, and you feel her fingers slip down and around your body.  She gets herself a handful of your [butt], and then slips her fingers into your crevice.  That finger doesn't stop until it's pushed itself inside your " + assholeDescript() + " and triggered a response that makes Clara laugh with delight.  Feeling emboldened, the bovine girl thrusts another finger into your back entrance and starts wiggling them around.");
 	 	outputText("\n\nBy now you’re so over aroused from nursing that you cum on the spot from her playing with your ass.  The nipple that you’d been sucking on up until now slips out of your mouth, and the woman holding you lies you back on the ground, smiling.  Clearly your orgasm did not go unnoticed by her.  \"<i>I’m definitely going to have to find new ways to play with you after this,</i>\" she says, that crazed smile back on her face, \"<i>but for now, I think it is time for soome sex.</i>\"");
 
 		//Proceed to either the has fitted cock, no fitted cock, or has not cock variants.
@@ -727,14 +728,14 @@ public class MarblePurification extends NPCAwareContent{
 		menu();
 		addButton(0,"Next",finalBadEndWithCowCunt);
 	}
-	
+
 	//PC does not have a cock that fits, but does have at least one cock
 	//Clara gets upset over the PC’s cock(s) being too big to fit her.  If the PC can fit Marble, she will have a bit of a rant on Marble talking about learning to accept larger cocks.
 	public function cockTooBigForCowCuntageBadEndage():void
 	{
 		clearOutput();
 	 	outputText("\"<i>Now, we do have one problem.  ");
-		if(player.cockTotal() > 1) 
+		if(player.cockTotal() > 1)
 		{
 		 	outputText("All of your penises are");
 		}
@@ -921,7 +922,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nYou can't help but muse that a cow-girl's endurance is something that should never be underestimated.  Their strength certainly isn't as great, but is still more than an average human's by a fair margin.  Making someone who is quite strong completely enraged is generally a bad idea.  Especially when that someone has been working on a farm for close to a year lifting increasingly heavy loads and training with a massive hammer.");
 	 	outputText("\n\nClara doesn't stand a chance.  In a matter of moments, she's brought to the ground once more, tightly bound up in a thick rope.  \"<i>Time to teach you a lesson!</i>\"  Marble yells with a look of rage in her eyes.");
 	 	outputText("\n\nHow should you punish Clara?  You could let Marble spank Clara, ");
-		//(if PC either has a cock with an area under 20 or a vagina) 
+		//(if PC either has a cock with an area under 20 or a vagina)
 		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) outputText("use Marble's unstable state of mind to get her into a forceful threesome with Clara, ");
 		//(if PC either has a cock that will fit Marble, or has a vagina)
 		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) outputText("have sex in front of Clara so she can see what your love really is, ");
@@ -1012,10 +1013,10 @@ public class MarblePurification extends NPCAwareContent{
 		 	outputText("\n\nShe is enjoying herself so much that she cums a second time before either you or Marble reach your peaks.  Still, you and Marble do manage to bring yourselves over the top just after that and ride out the afterglow together.  Clara stumbles to the ground, coughing and sputtering from the proof of your orgasm while Marble's spills out of her lower hole.");
 		 	outputText("\n\n“<i>Damn it all, why did you have to do that?  Now I'll never be able to experience it for the first time with my perfect mate!  You're evil, sister.</i>\"  Marble looks like she is about to blow up once more at that comment...");
 		}
-		else 
+		else
 		//PC and Marble only have their vaginas
 		{
-		 	outputText("\n\nEventually you roll her onto her back.  Then Marble sits down on her sister's face while you put your mouth to Clara's womanhood and raise your " + buttDescript() + " up into the air so that your mate can reach your own " + vaginaDescript() + ".");
+		 	outputText("\n\nEventually you roll her onto her back.  Then Marble sits down on her sister's face while you put your mouth to Clara's womanhood and raise your [butt] up into the air so that your mate can reach your own " + vaginaDescript() + ".");
 		 	outputText("\n\nThis little triangle is about all you can think of doing since there isn't a whole lot three girls can do to one another if one of them is tied up, that is if you're looking for everyone to get pleasure out of the experience.  \"<i>Okay, what the hell is this?  Doo you really think I'm going to actually service -mmph!</i>\"  The naughty girl is interrupted when her elder sister smothers her face in cow-girl pussy.");
 		 	outputText("\n\n\"<i>If you don't do a good job of pleasing me....  Well, I can just grind myself all over your face,</i>\" your mate responds.  You offer up that you won't be letting Clara reach her peak if she does a poor job either.  To make your point clear, you give a small lick to the rim of the malefactor's mound and assure her that you'll be driving her to the edge but never let her cross over.");
 		 	outputText("\n\nMarble then lifts herself slightly off her sister's face and suggests, \"<i>You know, you could get out of this whole situation if you just admit you did something wrong and say you're sorry...</i>\"");
@@ -1100,7 +1101,7 @@ public class MarblePurification extends NPCAwareContent{
 		if((player.tallness >= 80 && flags[kFLAGS.MARBLE_BOVA_LEVEL] < 2) || (player.tallness >= 86 && flags[kFLAGS.MARBLE_BOVA_LEVEL] >= 2))
 		{
 		 	outputText("tightly hugs herself against your body.  Gently stroking her hair, you're happy to be a shoulder for her to cry on, given both your affection for the gentle girl and the awareness that you're able to help her feel better.");
-		} 
+		}
 		//else if (PC taller than 5 feet)
 		else if(player.tallness >= 60)
 		{
@@ -1135,7 +1136,7 @@ public class MarblePurification extends NPCAwareContent{
 
 	 	outputText("\n\nYou turn to your cow-girl lover and ask her what she'd like to do in the meantime.  She hesitates, visibly bothered by something.  \"<i>Actually, I think I need some time on my own to think about what my sister said.  Come and get me when the formula is finished, okay?</i>\"  You nod and she heads off to the edge of the camp.");
 	 	outputText("\n\nYou've got some time to kill now, you guess.  Is there something you want to spend it doing?");
-	
+
 		menu();
 		addButton(0,"Next",theFormulaIsDone);
 	}
@@ -1344,10 +1345,11 @@ public class MarblePurification extends NPCAwareContent{
 	public function purificationQuestFinal():void
 	{
 		clearOutput();
+		var expReward:Number = 500;
+		if (player.level > 4) expReward += (player.level - 4) * 100;
 	 	outputText("\"<i>It has been quite the morning, hasn't it sweetie?</i>\"  It certainly has been, but at least now, your lover is finally free of her corruption once and for all.");
-	 	outputText("\n\nYou've gained 500 exp for helping Marble attain purity.");
-		//increase exp by x
-		player.XP += 500;
+	 	outputText("\n\nYou've gained "+expReward+" exp for helping Marble attain purity.");
+		player.XP += expReward;
 		//Marble corruption is set to 10
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;
@@ -1452,7 +1454,7 @@ public class MarblePurification extends NPCAwareContent{
 			flags[kFLAGS.MARBLE_LUST] -= 5;
 			if(flags[kFLAGS.MARBLE_LUST] < 0) flags[kFLAGS.MARBLE_LUST] = 0;
 		}
-		else 
+		else
 		{
 		 	outputText("\n\n\"<i>What?  Sweetie, I'm already so tiny, I'm afraid I couldn't bring myself to get any smaller.  Sorry.</i>\"  She hands you back the jar of reducto.");
 		}
@@ -1492,7 +1494,7 @@ public class MarblePurification extends NPCAwareContent{
 			if (player.tallness < 65)
 			{
 			 	outputText("The tall cow-lady takes a seat on the rocks and you jump onto her lap, ");
-			} 
+			}
 			else if (player.tallness < 84)
 			{
 			 	outputText("You lean forward and ");
@@ -1566,7 +1568,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("While checking your traps to ensure that they're still working, you hear a voice call out from outside the camp, \"<i>Sweetie!</i>\"  You look up and see the smiling face of Marble");
 		//if (PC has at least one child with Marble)
 		if(flags[kFLAGS.MARBLE_KIDS] > 0) outputText(" and that of your child");
-		//if (PC has two or more children with Marble) 
+		//if (PC has two or more children with Marble)
 		if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("ren");
 	 	outputText(" just outside the camp.  She must have somehow found out about your purification.");
 

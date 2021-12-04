@@ -11,9 +11,11 @@ import classes.Scenes.Areas.Bog.LizanRogue;
 import classes.Scenes.Areas.Forest.AkbalScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.HighMountains.Phoenix;
+import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
 import classes.Scenes.Camp.Jabberwocky;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 import coc.view.ButtonDataList;
@@ -269,6 +271,7 @@ public class PatchouliScene extends NPCAwareContent {
 			}
 			outputText(" said that your momma is ugly and that you were born a defect!</i>\"\n\n");
 			outputText("The cat turns over to you, grinning wide as you hear the ground quake - something is coming, and it's huge! Before you have any time to punish the cat, he vanishes, still laughing as the frame of a man the size of a building breaks out of the blizzard, looking straight at you with furious eyes.");
+			if (!player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
 			startCombat(new FrostGiant());
 		}
 		// 25
@@ -278,7 +281,8 @@ public class PatchouliScene extends NPCAwareContent {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 			player.explored++;
 			outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
-			startCombat(new Phoenix());
+			if (!player.hasPerk(PerkLib.FireAffinity)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
+			startCombat(new PhoenixPlatoon());
 		}
 		else {
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] != 1) {

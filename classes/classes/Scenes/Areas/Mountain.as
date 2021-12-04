@@ -16,6 +16,7 @@ import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
 
@@ -24,6 +25,7 @@ public class Mountain extends BaseContent
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var lactabovinaScene:LactaBovinaScene = new LactaBovinaScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
@@ -146,6 +148,11 @@ public class Mountain extends BaseContent
 						call:minotaurRouter,
 						mods:[SceneLib.exploration.furriteMod]
 					},{
+						name:"lacta_bovina",
+						chance:0.7,
+						call:lactabovinaScene.lactaBovinaInto,
+						mods:[SceneLib.exploration.furriteMod]
+					},{
 						name:"factory",
 						when:function():Boolean {
 							return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
@@ -222,12 +229,33 @@ public class Mountain extends BaseContent
 						chance: 30,
 						call: partsofDerpnadeLauncher
 					}, {
+						name: "lactoblasters",
+						when: function ():Boolean {
+							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Lactoblasters") < 0;
+						},
+						chance: 30,
+						call: partsofLactoBlasters
+					}, {
 						name: "ted",
 						when: function():Boolean {
 							return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
 						},
 						call: SceneLib.tedScene.introPostHiddenCave
-					},{
+					}, {
+						name  : "mindbreaker",
+						call  : SceneLib.mindbreaker.findMindbreaker,
+						chance: 0.50,
+						when  : function ():Boolean {
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
+						}
+					}, {
+						name  : "mindbreaker",
+						call  : SceneLib.mindbreaker.findMindbreakerAgain,
+						chance: 0.50,
+						when  : function ():Boolean {
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations()
+						}
+					}, {
 						name:"hike",
 						chance:0.2,
 						call:hike
@@ -363,6 +391,14 @@ public class Mountain extends BaseContent
 			outputText("You carefully put the pieces of the Derpnade Launcher in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Derpnade Launcher", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function partsofLactoBlasters():void {
+			clearOutput();
+			outputText("As you explore the mountains you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Lactoblasters in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Lactoblasters", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function hike():void {

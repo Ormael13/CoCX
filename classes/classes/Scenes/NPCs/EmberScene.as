@@ -72,7 +72,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,  6,  7,  8 (< 15)
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -124,7 +124,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			return needNext;
 		}
-	
+
 		public function timeChangeLarge():Boolean {
 			if (!player.hasStatusEffect(StatusEffects.EmberNapping) && followerEmber() && !player.hasStatusEffect(StatusEffects.EmberFuckCooldown)) {
 				//Ember get's a whiff of fuckscent and knocks up PC!
@@ -140,7 +140,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			return false;
 		}
 		//End of Interface Implementation
-		
+
 		public function emberAffection(changes:Number = 0):Number
 		{
 			flags[kFLAGS.EMBER_AFFECTION] += changes;
@@ -177,7 +177,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3) strText += pussy;
 			return strText;
 		}
-		
+
 		private function emberVaginalCapacity():int
 		{
 			return 60;
@@ -197,7 +197,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 		{
 			return (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3);
 		}
-		
+
 		public function emberChildren():int
 		{
 			return (flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS]);
@@ -991,7 +991,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nA long, scaly, flexible tail lashes behind " + emberMF("him", "her") + ", its final third adorned with small bumps that can extend into vicious-looking spikes.  " + emberMF("His", "Her") + " legs appear humanoid until the feet, where they end in powerful, taloned reptilian claws meant for gripping at the ground.");
 
 				outputText("\n\nEmber is covered from head to toe in shield-shaped scales.  " + emberMF("His", "Her") + " dorsal scales are silver and reflect the light well, while " + emberMF("His", "Her") + " underbelly is a rich golden color that stands in stark contrast.  These metallic-colored scales are large and prominent on Ember's back and the exterior of " + emberMF("his", "her") + " limbs, but, on " + emberMF("his", "her") + " face, the interior of " + emberMF("his", "her") + " limbs and the front of " + emberMF("his", "her") + " body, they are very small and fine, giving them a smooth and silken texture.");
-				
+
 				outputText("  The ");
 				if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText("little ");
 				outputText("exposed flesh of Ember's body is a light shade of pink; but flushes when " + emberMF("he", "she") + "'s aroused, drawing your eyes towards " + emberMF("his", "her") + " most sexual parts.");
@@ -1013,7 +1013,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 							break;
 					default:
 				}
-				
+
 				//(Ember breast check)
 				outputText("\n\nSituated upon " + emberMF("his", "her") + " chest are a pair of ");
 				if (flags[kFLAGS.EMBER_MILK] > 0 || flags[kFLAGS.EMBER_GENDER] >= 2) outputText("F-cup soft, pillowy breasts");
@@ -1328,7 +1328,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			doNext(playerMenu);
 			cheatTime(1/6);
 		}
-		
+
 		private function askEmberForEggshell():void {
 			clearOutput();
 			outputText("You ask Ember if " + emberMF("he", "she") + "'s willing to give you the eggshell.  After all, it could be useful for something.");
@@ -1811,7 +1811,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber flushes with embarrassment.  \"<i>I-I... That's it!  No more milk for you!</i>\" " + emberMF("he", "she") + " declares, hauling you upright and shooing you out of her den.");
 				outputText("\n\nYou shake your head with good temper.  Still, you got your fill of her milk, and you feel refreshed and renewed, new vitality flowing through your veins.");
 				//(PC's D.Breath timer = not ready: Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!)
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -1837,12 +1837,12 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						
+
 						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
-						
+
 						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
@@ -1878,7 +1878,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber can't hide the faintest of smiles that graces " + emberMF("his", "her") + " scaly face.  You yelp softly as you feel a sharp prick against your belly; when you feel it again, you jump out of Ember's lap to reveal the clawed finger prodding you.  \"<i>Payback for teasing me earlier.  And don't think I'll be feeding you my milk everytime you ask,</i>\" " + emberMF("he", "she") + " finishes, with a small puff of smoke.");
 				outputText("\n\nYou can't resist pointing out that " + emberMF("he", "she") + " certainly seemed eager to let you drink your fill, and you didn't hear any complaining over " + emberMF("his", "her") + " purring.  Before " + emberMF("he", "she") + " can rebut that, you turn and leave the dragon in " + emberMF("his", "her") + " den.");
 				outputText("\n\nThe drink you got did you plenty of good; you feel refreshed and renewed, new vitality flowing through your veins.");
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -1904,12 +1904,12 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						
+
 						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
-						
+
 						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
@@ -1956,7 +1956,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nThe soft purrs that accompany each suckle and the soft caresses on your body, bringing you ever closer to these two motherlodes of Ember-flavoured treasure, only serve to enhance the whole experience.");
 
 				outputText("\n\nEventually, your swallows of the rich, freely-flowing, creamy dragon-milk cease as your stomach fills up.");
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -2005,12 +2005,12 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("... too late, you realize that <b>Ember's milk has sent your draconic body into ");
 					if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
 						outputText("rut");
-						
+
 						player.goIntoRut(false);
 					}
 					else {
 						outputText("heat");
-						
+
 						player.goIntoHeat(false);
 					}
 					outputText("!</b>");
@@ -2089,80 +2089,80 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1) flags[kFLAGS.EMBER_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 4 && flags[kFLAGS.EMBER_LVL_UP] < 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 24);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 24, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 1;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 5 && flags[kFLAGS.EMBER_LVL_UP] == 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 30);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 30, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 6 && flags[kFLAGS.EMBER_LVL_UP] == 2) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 36);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 36, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 3;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 7 && flags[kFLAGS.EMBER_LVL_UP] == 3) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 42);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 42, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 4;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 8 && flags[kFLAGS.EMBER_LVL_UP] == 4) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 48);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 48, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 5;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 9 && flags[kFLAGS.EMBER_LVL_UP] == 5) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 54);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 54, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 6;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 10 && flags[kFLAGS.EMBER_LVL_UP] == 6) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 60);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 60, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 7;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 11 && flags[kFLAGS.EMBER_LVL_UP] == 7) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 66);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 66, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 8;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 12 && flags[kFLAGS.EMBER_LVL_UP] == 8) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 72);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 72, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 9;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 13 && flags[kFLAGS.EMBER_LVL_UP] == 9) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 78);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 78, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 10;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 14 && flags[kFLAGS.EMBER_LVL_UP] == 10) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 84);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 84, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 11;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 15 && flags[kFLAGS.EMBER_LVL_UP] == 11) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 90);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 90, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 12;
 				}
 				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 16 && flags[kFLAGS.EMBER_LVL_UP] == 12) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 96);
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 96, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0, 0);
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 13;
 				}
@@ -2227,7 +2227,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber swallows audibly, " + emberMF("his", "her") + " cock getting even harder at the idea.  \"<i>Alright... but I'm only doing this for you.  I take no enjoyment in this.</i>\"  Even as " + emberMF("he", "she") + " replies, the dragon's cock begins throbbing visibly.");
 				outputText("\n\nYou tell " + emberMF("him", "her") + " that you understand perfectly, letting " + emberMF("him", "her") + " get away with the obvious lie.");
 			}
-			outputText("\n\nEmber leads you a short distance away from camp, to a small clearing next to a dried river.  " + emberMF("He", "She") + " selects a relatively lush-looking patch of grass and gestures at it.  Eagerly, you disrobe, casually throwing your [armor] aside as you present Ember with an enticing view of your " + buttDescript() + ",");
+			outputText("\n\nEmber leads you a short distance away from camp, to a small clearing next to a dried river.  " + emberMF("He", "She") + " selects a relatively lush-looking patch of grass and gestures at it.  Eagerly, you disrobe, casually throwing your [armor] aside as you present Ember with an enticing view of your [butt],");
 			//PC has balls:
 			if (player.balls > 0) {
 				outputText(" testicles swaying lightly as you arch your backside up at " + emberMF("him", "her"));
@@ -2241,7 +2241,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nEmber stops right behind you, gently rubbing the ");
 			if (flags[kFLAGS.EMBER_ROUNDFACE] == 0 || flags[kFLAGS.EMBER_INTERNAL_DICK] > 0) outputText("segmented");
 			else outputText("smooth");
-			outputText(" length of " + emberMF("his", "her") + " prick between your " + buttDescript() + " cheeks, letting you feel the refreshing coolness of " + emberMF("his", "her") + " pre dripping from the tip.  \"<i>This... isn't going to work,</i>\" " + emberMF("he", "she") + " growls.");
+			outputText(" length of " + emberMF("his", "her") + " prick between your [butt] cheeks, letting you feel the refreshing coolness of " + emberMF("his", "her") + " pre dripping from the tip.  \"<i>This... isn't going to work,</i>\" " + emberMF("he", "she") + " growls.");
 
 			outputText("\n\n" + emberMF("His", "Her") + " hands take hold of your butt, squeezing it slowly and firmly, caressing and massaging it with greedy anticipation.  From where you are you can't see what " + emberMF("he", "she") + "'s doing, but you can certainly hear it.  Soft, wet slurps and smacks emanate from behind you, and you realize the dragon must be licking " + emberMF("his", "her") + " own cock until it's soaked with gooey dragon-drool.");
 
@@ -4206,7 +4206,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(" slide");
 			if (player.cockTotal() == 1) outputText("s");
 			outputText(" out of " + emberMF("his", "her") + " with a wet slurp, allowing your deposit to leak its way under your prone forms.");
-			
+
 			outputText("\n\nYou both take a few moments to catch your breath, before Ember rolls over to look at you.  " + emberMF("He", "She") + " extends a clawed hand to lightly brush your cheek.  \"<i>[name]... you really know how to make a dragon feel loved...</i>\"  You return the gesture, telling " + emberMF("him", "her") + " it's easy when a dragon seems to love you just as much.  Ember smiles adoringly at you.  \"<i>Hey, can I ask you something, [name]?</i>\"  You indicate that it's okay.  \"<i>I want to be with you... hold you for a little while... is it okay if we do that?</i>\"");
 			player.sexReward("vaginalFluids");
 			dynStats("sen", -5);
@@ -4439,7 +4439,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			fatigue(-20);
 			doNext(camp.returnToCampUseTwoHours);
 		}
-		
+
 		//Sleep with Ember!
 		public function sleepWithEmber():void {
 			//Set timeQ
@@ -4551,7 +4551,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("\n\nYou've been at this for quite some time now... how many times have you drained Ember's breasts?  Four?  Five?  You don't know... and besides that, you're feeling rather tired yourself... plus all this milk sloshing inside your belly does not help keep you awake... still you must press on...");
 					outputText("\n\n<b>Even later...</b>");
 					outputText("\n\nWith a final powerful suckle, you finally drain the last of Ember's milk... for the 8th time you believe... tired and full... you don't even bother getting off the sleeping dragon.  You settle your head between Ember's soft, milky mounds, and surrounded by their soft " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "flesh") + ", you fall asleep right there...");
-					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(PerkLib.DraconicLungs) < 0)) {
+					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 						if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 						if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 						if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -4609,7 +4609,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("\n\nEmber stops " + emberMF("his", "her") + " cleaning, and instead braces " + emberMF("him", "her") + "self on the bank of the stream, leaning back to give you better access.  It seems like your roles have been reversed... not that you're complaining.  You stroke your fingers up and down " + emberMF("his", "her") + " " + (pregnancy.isPregnant ? "pregnant " : "") + "midriff, trailing lightly across the scales there, watching the dragon shiver eagerly as your ministrations arouse " + emberMF("him", "her") + ".  " + emberMF("His", "Her") + " " + emberGroinDesc("cock begins to " + (emberInternalDick() ? "peek from its slit and" : "") + " grow erect", "vagina starts to grow moist, dribbling lubricants down " + emberMF("his", "her") + " legs to drip into the water") + ".  Tantalisingly, inch by inch, your hands drift down to the dragon's crotch, stopping just before you are touching " + emberMF("his", "her") + " genitals.");
 					outputText("\n\n\"<i>T-that's enough... I can finish it myself,</i>\" Ember protests, sounding kind of weak.");
 					outputText("\n\nYou tell " + emberMF("him", "her") + " that if that's really the way " + emberMF("he", "she") + " feels... You let go of " + emberMF("him", "her") + " and turn back towards the lake, " + (player.isNaga() || player.isGoo() ? "sliding" : "walking") + " out through the water to finish washing yourself off.  Before you get far you feel Ember's tail coil around your waist a second time.");
-					outputText("\n\n\"<i>Your bath is not over yet!</i>\"  Ember declares, pulling you towards " + emberMF("him", "her") + " and groping your " + buttDescript() + "; " + emberMF("his", "her") + " hands roam all over your lower body" + (player.gender > 0 ? ", and over your genitals as well" : "") + ".  Then finally with a small slap on your butt " + emberMF("he", "she") + " declares you clean.");
+					outputText("\n\n\"<i>Your bath is not over yet!</i>\"  Ember declares, pulling you towards " + emberMF("him", "her") + " and groping your [butt]; " + emberMF("his", "her") + " hands roam all over your lower body" + (player.gender > 0 ? ", and over your genitals as well" : "") + ".  Then finally with a small slap on your butt " + emberMF("he", "she") + " declares you clean.");
 					outputText("\n\n\"<i>There you go... now I just have to finish cleaning myself.</i>\"  Ember reaches out for the bowl containing the flowery lotion, but before " + emberMF("he", "she") + " can lay a claw on it, you swipe the bowl and dip your hands inside.  She got to clean you up, so it's only fair you should do the same... before Ember can even utter a protest you begin groping and rubbing " + emberMF("his", "her") + " thighs.  Sliding your hands across " + emberMF("his", "her") + " legs and tail, before you finally reach out to your prize; Ember's " + emberGroinDesc("erect cock", "dripping pussy") + ".");
 					outputText("\n\nYou rub salve delicately into " + emberMF("his", "her") + " " + emberGroinDesc("cock", "pussy") + ", stroking the " + emberGroinDesc("long " + (emberMF("male", "herm")) + " shaft", "the soft, wet walls of " + emberMF("his", "her") + " feminine sex") + ".  Ember gasps, but the pleasure is too much for " + emberMF("him", "her") + " to utter any kind of protest.  You finish the job quickly and efficiently, not keen on teasing the dragon so much; so you smile and declare the dragon clean, once again heading towards the bank to gather your clothes.");
 					outputText("\n\nDeciding to have a little fun, you make a show of bending over seductively, flirting your [butt] as you shake and scrape the water off of your skin and then gather your clothes.  You cast a flirtatious glance back over your shoulder to see how Ember took your little display; serves " + emberMF("him", "her") + " right for groping you and getting you all turned on... and under the pretext of trying to clean you, too.");
@@ -4650,7 +4650,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			emberAffection(3);
 			doNext(camp.sleepWrapper);
 		}
-		
+
 		public function postEmberSleep():void {
 			flags[kFLAGS.EMBER_MORNING] = 0;
 			clearOutput();
@@ -4658,7 +4658,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nYou look about, but see no sign of the dragon... " + emberMF("he", "she") + "'s probably gone to get breakfast." + player.clothedOrNaked(".. looking to the side, you spot your [armorName] neatly folded beside the nest.") + "  Smiling to yourself, you " + player.clothedOrNaked("put on your [armorName] and ") + "get ready for another day...");
 			doNext(playerMenu);
 		}
-		
+
 		public function mishapsLunaEmber():void {
 			clearOutput();
 			outputText("As you call for Ember the dragon simply does not show up. You can see " + emberMF("him", "her") + " in the sky searching angrily for something and even hear " + emberMF("him", "her") + " swear in the distance. Whatever made Ember so mad you don’t want to know. You decide to call " + emberMF("him", "her") + " later so to avoid getting yourself burned as " + emberMF("he", "she") + " indeed start to torch the landscape at random.\n\n");

@@ -26,7 +26,7 @@ public class WaterElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeIceDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
 			}
 		}
 		
@@ -43,8 +43,8 @@ public class WaterElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The watery strikes connect with your body. ");
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
 			}
 		}
 		
@@ -59,14 +59,14 @@ public class WaterElemental extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The watery strikes connect with your body. ");
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
+				damage = player.takeWaterDamage(damage, true);
 			}
 		}
 		
@@ -198,7 +198,10 @@ public class WaterElemental extends Monster
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
-			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

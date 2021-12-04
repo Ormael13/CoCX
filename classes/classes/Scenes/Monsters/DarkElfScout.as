@@ -8,18 +8,17 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class DarkElfScout extends Monster
 	{
 		public var darkelf:DarkElfScene = new DarkElfScene();
-		public var golems:HeXinDao = new HeXinDao();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				golems.gaunletchallange1postfight();
+				SceneLib.hexindao.gaunletchallange1postfight();
 			}
 			else darkelf.wonWithDarkElf();
 		}
@@ -61,7 +60,7 @@ public class DarkElfScout extends Monster
 				outputText("An arrow hits you for ");
 				player.takePhysDamage(damage, true);
 				outputText(" damage. It was poisoned! You feel your strength failing you!\n\n");
-				player.addCombatBuff('spe', -3);
+				player.addCombatBuff('spe', -3, "Poisoned Arrow", "PoisonedArrow");
 			}
 		}
 		

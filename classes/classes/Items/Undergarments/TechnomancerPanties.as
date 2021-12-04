@@ -17,7 +17,7 @@ package classes.Items.Undergarments
 		}
 		
 		override public function canUse():Boolean{
-			if (game.player.tallness < 48){return true}
+			if (game.player.tallness < 48){return super.canUse()}
 			outputText("There is no way this tiny set of clothing would fit your current size.");
 			return false;
 		}

@@ -7,12 +7,10 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class HellHound extends Monster
 	{
-		public var hellpuppy:HeXinDao = new HeXinDao();
 		public var floor1:RiverDungeon = new RiverDungeon();
 		
 		protected function hellhoundFire():void {
@@ -79,7 +77,7 @@ public class HellHound extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();
-			else if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) hellpuppy.gaunletchallange2fight3();
+			else if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight3();
 			else {
 				if (hpVictory) {
 					outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);

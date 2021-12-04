@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Caves 
+package classes.Scenes.Areas.Caves
 {
 	import classes.*;
 	import classes.BodyParts.Antennae;
@@ -26,10 +26,11 @@ package classes.Scenes.Areas.Caves
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.lists.BreastCup;
-	
+	import classes.CoC;
+
 	public class DarkSlimeScene extends BaseContent
 	{
-		public function DarkSlimeScene() 
+		public function DarkSlimeScene()
 		{
 		}
 
@@ -70,7 +71,7 @@ public function beatingDarkSlime():void {
 
 public function LetzRape2():void {
 	LetzRape(true);
-	cleanupAfterCombat();
+	cleanupAfterCombatTFEvent();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function LetzRape(letzRape:Boolean = false):void {
@@ -128,27 +129,28 @@ public function LetzRape(letzRape:Boolean = false):void {
 		" You don’t have much time to think over this matter, as a sudden hunger takes hold of you. You thirst, your body mass thirsts for fluids… the fluids of others!" +
 		" You set out with a drooling pleasure addled smile looking for a fleshling to feed from.\n\n");
 		outputText("<b>You have been transformed into a dark slime!</b>\n\n");
-		player.hairType = Hair.GOO;
-		player.arms.type = Arms.GOO;
+		outputText("\n\n");
+		CoC.instance.transformations.HairGoo.applyEffect(false);
+		CoC.instance.transformations.ArmsGoo.applyEffect(false);
 		player.lowerBody = LowerBody.GOO;
 		player.rearBody.type = RearBody.METAMORPHIC_GOO;
 		player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO});
 		var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
 		var choosencolor:String = randomChoice(darkgooSkinColors);
 		player.skin.base.color = choosencolor;
-		player.skin.base.pattern = Skin.PATTERN_NONE;
+		CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 		player.hairColor = choosencolor;
-		player.eyes.type = Eyes.FIENDISH;
-		player.eyes.colour = "red";
-		player.ears.type = Ears.ELFIN;
-		player.faceType = Face.HUMAN;
-		player.tongue.type = Tongue.HUMAN;
-		player.createVagina()
+		CoC.instance.transformations.EyesFiendish.applyEffect(false);
+		CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
+		CoC.instance.transformations.EarsElfin.applyEffect(false);
+		CoC.instance.transformations.FaceHuman.applyEffect(false);
+		CoC.instance.transformations.TongueHuman.applyEffect(false);
+		if (!player.hasVagina()) player.createVagina()
 		if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
 		else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
-		player.antennae.type = Antennae.NONE;
-		player.horns.type = Horns.NONE;
-		player.wings.type = Wings.NONE;
+		CoC.instance.transformations.AntennaeNone.applyEffect(false);
+		CoC.instance.transformations.HornsNone.applyEffect(false);
+		CoC.instance.transformations.WingsNone.applyEffect(false);
 		player.tail.type = Tail.NONE;
 		player.gills.type = Gills.NONE;
 		if (!player.hasStatusEffect(StatusEffects.SlimeCraving)) {

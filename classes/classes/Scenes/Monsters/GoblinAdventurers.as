@@ -164,6 +164,7 @@ import classes.internals.*;
 			this.gems = rand(50) + 50;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
+					add(consumables.PONAILS, 3).
 					addMany(1, consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

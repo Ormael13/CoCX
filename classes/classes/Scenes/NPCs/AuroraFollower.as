@@ -38,7 +38,10 @@ public function auroraCampMenu():void {
 	menu();
 	addButton(0, "Appearance", auroraAppearance).hint("Examine Aurora appearance.");
 	//talk
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", auroraSparsWithPC).hint("Ask Aurora for a mock battle.");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") addButtonDisabled(4, "Spar", "You can't fight against her as long she's in your team.");
+		else addButton(4, "Spar", auroraSparsWithPC).hint("Ask Aurora for a mock battle.");
+	}
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to join you in adventures outside camp.");
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to stay in camp.");
@@ -76,32 +79,32 @@ public function AuroraLostSparring():void {
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.AURORA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 1;
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.AURORA_LVL] == 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 6);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 6, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction), 0, 0);
 			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.AURORA_LVL] = 2;
 		}
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.AURORA_LVL] == 2) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 12);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 12, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0);
 			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.AURORA_LVL] = 3;
 		}
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.AURORA_LVL] == 3) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 18);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 18, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0, 0);
 			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.AURORA_LVL] = 4;
 		}/*
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.AURORA_LVL] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 24);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 24, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
 			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.AURORA_LVL] = 5;
 		}
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.AURORA_LVL] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 30);
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 30, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
 			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.AURORA_LVL] = 6;
 		}*/
