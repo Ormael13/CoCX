@@ -27,16 +27,21 @@ public class PerkMenu extends BaseContent {
 	public function PerkMenu() {
 	}
 	public function displayPerks(e:MouseEvent = null):void {
-		var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks (Total: " + player.perks.length + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}
 		else{
-			while(temp < player.perks.length) {
-				outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
-				temp++;
+			var perkList:Array = player.perks;
+			for each (var temp:PerkClass in perkList){
+				try{
+					outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
+
+				} catch (error:Error) {
+					outputText(temp.perkName + " has encountered a problem. PLEASE REPORT THIS.");
+					trace("Something about " + temp.perkName + " is broken. Might wanna check that?");
+				}
 			}
 		}
 
@@ -1079,15 +1084,14 @@ public class PerkMenu extends BaseContent {
 
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
-		//var allPerks:Array = CoC.instance.perkTree.listUnlocks()
-		/*
 		var mutationList:Array = MutationsLib.mutationsArray("",true);
+		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
-			if (mutationList.indexOf(pPerks) >= 0){
-				allPerks.splice(allPerks.indexOf(pPerks), 1);
+			if (!(mutationList.indexOf(pPerks) >= 0)){
+				temp.push(pPerks)
 			}
 		}
-		*/
+		allPerks = temp;
 		clearOutput();
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+

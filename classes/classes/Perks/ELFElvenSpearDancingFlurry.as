@@ -10,8 +10,7 @@ package classes.Perks
 	public class ELFElvenSpearDancingFlurry extends PerkType
 	{
 
-		override public function desc(params:PerkClass = null):String
-		{
+		override public function desc(params:PerkClass = null):String {
 			return "As an elf add " + params.value1 + " extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by " + params.value1 * 20 + "% when full attacking.";
 		}
 
@@ -24,14 +23,12 @@ package classes.Perks
 			}
 		}
 
-		public function ELFElvenSpearDancingFlurry()
-		{
+		public function ELFElvenSpearDancingFlurry() {
 			super("Elven Spear Dancing Flurry", "Elven Spear Dancing Flurry",
 					"NOT RELEVANT TEXT");
 		}
 
-		override public function keepOnAscension(respec:Boolean = false):Boolean
-		{
+		override public function keepOnAscension(respec:Boolean = false):Boolean {
 			return true;
 		}
 	}
