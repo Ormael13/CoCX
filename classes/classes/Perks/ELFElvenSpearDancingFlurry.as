@@ -5,6 +5,7 @@ package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
+	import classes.PerkLib;
 
 	public class ELFElvenSpearDancingFlurry extends PerkType
 	{
@@ -14,11 +15,12 @@ package classes.Perks
 			return "As an elf add " + params.value1 + " extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by " + params.value1 * 20 + "% when full attacking.";
 		}
 
-		override public function name(params:PerkClass=null):String {
-			if (params) {
-				return "Elven Spear Dancing Flurry " + params.value1 + "";
+		override public function name(params:PerkClass = null):String {
+			var pPerkCompare:int = player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
+			if (pPerkCompare >= 0) {
+				return "Elven Spear Dancing Flurry " + pPerkCompare + "";
 			} else {
-				return "Elven Spear Dancing Furry";
+				return "Elven Spear Dancing Flurry";
 			}
 		}
 
