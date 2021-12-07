@@ -1521,7 +1521,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.yetiScore() >= 6 && !player.hasPerk(PerkLib.ColdAffinity)) {
+			if (player.yetiScore() >= 6 && (!player.hasPerk(PerkLib.ColdAffinity) || !player.hasPerk(PerkLib.FreezingBreathYeti))) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity and Freezing Breath Yeti</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
@@ -1997,26 +1997,31 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.isGoblinoid() && (!player.statStore.hasBuff('DrugInjector') || !player.statStore.hasBuff('Power bracer'))) {
-				outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-				if (!player.statStore.hasBuff('DrugInjector')) {
+				if (!player.statStore.hasBuff('DrugInjector')) {	//Is DrugInjector always gotten before Power bracer?
 					if (player.hasKeyItem("Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");	//Simple patch.
 						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
 					}
 					if (player.hasKeyItem("Improved Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 					}
 					if (player.hasKeyItem("Potent Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
 					}
 				}
 					else {
 					if (player.hasKeyItem("Power bracer") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'})
 					}
 					if (player.hasKeyItem("Powboy") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'})
 					}
 					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
 					}
 				}
