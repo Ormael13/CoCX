@@ -525,6 +525,39 @@ package classes.Scenes.Places{
 			CaveLayout2();
 		}
 
+		///MINDBREAKER CAVE SECTION///
+		public function CaveLayoutBack():void {
+			clearOutput();
+			outputText("You are currently on visit in the mindbreakers lair.\n\n");
+			if (MindBreakerConvert == 1) outputText("It seems a new friend already made it to the cave and is in the re-education process.");
+			else if(MindBreakerConvert >= 2) outputText(" In a corner you can see that your many new friends are in the re-education process.");
+			if (MindBreakerGoblinConvert == 1) outputText(" You see the goblin addition masturbating with a newly designed tentacle earplug toy in the corner.");
+			else if(MindBreakerGoblinConvert >= 2) outputText(" You see a few goblins masturbating with a newly designed tentacle earplug toy in the corner, their combined juices making a lovely puddle on the floor.");
+
+			if (MindBreakerFetishFemaleConvert >= 1) {
+				if (MindBreakerFullConvert >= 1) {
+					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm as her brain is thoroughly fucked.");
+				}
+				else{
+					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The female cultists you converted sit quietly in a corner of the cave practicing your teachings by themselves. It occurs to you some of them could use a good earfucking.Maybe you could even make proper mindbreakers out of some of them?");
+					else outputText(" The female cultist you converted sit quietly in a corner of the cave practicing your teachings by herself. It occurs to you she could use a good earfucking. Maybe you could even make a proper mindbreaker out of her?");
+				}
+			}
+			if (MindBreakerFetishFemaleConvert >= 1) {
+				if (MindBreakerFullConvert >= 1) {
+					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. He seems to be enjoying himself..");
+				}
+				else {
+					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum so they just end up masturbating pointlessly in frustration in the hope that their next true orgasm blows their mind out.");
+					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly in frustration in the hope that his next true orgasm blows his mind out.");
+				}
+			}
+			outputText(" Truthfully, just being here turns you on so much you can’t help but to fuck your own brain every now and then, although only ever to sharpen your own well-honed lasciviousness. Kaerb Dnim isn't to far as usual in case you want to ask something of her.");
+			menu();
+			addButton(0, "Talk", TalkAboutMB);
+			CaveLayout2();
+		}
+
 		public function CaveLayout2():void {
 			//if (player.hairType != Hair.MINDBREAKER) addButton(1, "Fix Me", Regaintentacles);
 			addButton(1, "Sister Sex", SexCaerbDnim).hint("Get your sister to fuck your brain out.");
@@ -605,7 +638,7 @@ package classes.Scenes.Places{
 
 		public function FuckGirl():void {
 			clearOutput();
-			outputText("You are curious about the mindbreakers of Mareth, where do they originate from?");
+			outputText("");
 			player.sexReward("Default","Vaginal",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -813,10 +846,12 @@ package classes.Scenes.Places{
 
 		public function PuppetMaster():void {
 			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function FuckEveryFellower():void {
-
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function BreakAPrisonner():void {
@@ -832,24 +867,24 @@ package classes.Scenes.Places{
 					"\n\nShe quickly loses that animal face and fur of hers. These animals ears paw and this tail look cute and all but these just won’t do here in the lair." +
 					" You keep altering her perception as you keep feeding her more and more hummus until your victim is looking completely horrified at her now fully human body." +
 					"\n\n\"<i>You, big sister! W..what have you done to my now lovely human body?! I love you!</i>\"" +
-					"She suddenly closes her mouth, terrified at what she just said, as her own mind is betraying her, you sadisticaly whisper to her ears that you are just getting started" +
+					" She suddenly closes her mouth, terrified at what she just said, as her own mind is betraying her, you sadisticaly whisper to her ears that you are just getting started." +
 					"\n\nGreen flashes run behind the woman’s eyes as you break down every single memory making her who she is and replace them with lewd vision of your own design, erasing her entire life within minutes." +
 					" She struggles for a moment against the brainwash, but as soon as you start adding the new memories her expression turns into that lovely, perverted, lascivious smile you have in all of your followers." +
 					" You cum green goo as the last of her memory is fully altered filling her mind with wild depraved fantasies featuring you and the sisterhood.");
 			MindBreakerFetishFemaleConvert ++;
 			MindBreakerConvert ++;
 			if (MindBreakerConvert == MindBreakerConvertGoal) MindbreakerBrainEvolution(false);
-				outputText("\n\n With her mind now fully fixed to your liking your newest acolyte voices up her need. \n\n\"<i>Big ");
-				if (player.hasCock()) outputText("sister ");
+				outputText("\n\nWith her mind now fully fixed to your liking your newest acolyte voices up her need. \n\n\"<i>Big ");
 				if (player.hasCock()) outputText("brother ");
+				if (player.hasVagina()) outputText("sister ");
 				outputText("[name] why am I tied?</i>\"" +
-						"You sternly tell her she did something very bad and needs to be punished her emotive response at your chastising is immediate and appropriate." +
+						" You sternly tell her she did something very bad and needs to be punished her emotive response at your chastising is immediate and appropriate." +
 						" You have a dildo brought to you and you begin fucking the whore in earnest and groping her breast, teaching her the pleasures of the flesh like you did her mind to forever ingrain these feelings in her." +
 						" You make her cum until she’s half-broken from the delicious torture, then set her free to join the others." +
 						" She surpasses expectations and jumps the nearest man, straddling him right away.");
 
 			outputText("You smirk delighted at your work and head back to the lair commons");
-
+			doNext(CaveLayoutBack);
 		}
 
 		public function MindbreakerBrainEvolution(isOutOfCave:Boolean = true):void {
