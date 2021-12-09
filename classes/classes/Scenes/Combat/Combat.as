@@ -14600,7 +14600,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
-            mod1 -= player.cor / 10;
+            mod1 -= player.cor / 100;
             if (mod1 < 0.1) mod1 = 0.1;
             modss += mod1;
         }
@@ -14621,7 +14621,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
-            mod1 -= player.cor / 10;
+            mod1 -= player.cor / 100;
             if (mod1 < 0.1) mod1 = 0.1;
             modssp += mod1;
         }
@@ -14665,7 +14665,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
-            mod1 -= player.cor / 10;
+            mod1 -= player.cor / 100;
             if (mod1 < 0.1) mod1 = 0.1;
             modssm += mod1;
         }
