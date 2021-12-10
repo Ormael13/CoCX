@@ -168,26 +168,47 @@ use namespace CoC;
 
 		public function SoulCultivationLvL():void {	//Converted Soul Cultivation level check to a function, easier to update, and much nicer on the eyes than the old block of ifs!
 			//Actually.... Since the tier and lvl have to sync for the soul cult lvl, and is checked for the output tier... I can hijack this and use it to output the tiers as well!
-			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
-			var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
+			var cultTier:Array = [PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+			var pLvlMax:int = 122;	//Should only need to change this and above array for future expansion.
 			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
-			var lNeed:Boolean = true;
-			var pLvl:int = 6;
-			var cLvlTier:int = 0;
+			var perkTier:PerkType;
 			var cultStanding:String = "Mortal";
-			flags[kFLAGS.SOUL_CULTIVATION] = 0;
-			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Can't think of a better idea than this for now to handle the first three.
+			//var lNeed:Boolean = true;
+			//var pLvl:int = 6;
+			//var cLvlTier:int = 0;
+			//flags[kFLAGS.SOUL_CULTIVATION] = 0;
+
+			for (var i:int = 0; i < cultTier.length(); i++){	//This *should* work?
+				if (!player.hasPerk(cultTier[i])){
+					if (i == 0) break;
+					perkTier = cultTier[i - 1];
+					if (player.level < 76) pLvlMax = player.level
+					if (i - 1 < 6){
+						cultStanding = cultRankTier[pLvlMax % 3] + perkTier.name();
+					}
+					else{
+						cultStanding = cultRankTier[pLvlMax % 4] + perkTier.name();
+					}
+					break;
+				}
+			}
+
+
+			/*
+			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Deprecating.
 				flags[kFLAGS.SOUL_CULTIVATION] +=3;
-			}	else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
+			}
+			else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
 				flags[kFLAGS.SOUL_CULTIVATION] +=2;
 				lNeed = false;
-			}	else if (player.level >= 1 && player.hasPerk(cultTier[0])){
+			}
+			else if (player.level >= 1 && player.hasPerk(cultTier[0])){
 				flags[kFLAGS.SOUL_CULTIVATION] +=1;
 				lNeed = false;
 			}
 
 			while (lNeed) {
-				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /6)])){
+				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /10)])){
 					flags[kFLAGS.SOUL_CULTIVATION] +=1;
 				}
 				else {
@@ -202,6 +223,7 @@ use namespace CoC;
 				pLvl += 2;
 				cLvlTier += 1;
 			}
+			 */
 			outputText("<b>Cultivation stage:</b> " + cultStanding + "\n");
 		}
 

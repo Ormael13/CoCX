@@ -202,6 +202,43 @@ public class Camp extends NPCAwareContent{
 		return;
 	}
 */
+		//MutationsUpdate, moves the perk to use v1 as version. Will move to next version release change code when possible to reduce camp cycles.
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01)){
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
+				player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,1);
+			}
+			else {
+				player.createPerk(PerkLib.AscensionAdditionalOrganMutationX, 1, 0, 0, 1);
+			}
+			player.removePerk(PerkLib.AscensionAdditionalOrganMutation01);
+		}
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02)){
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
+				player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,2);
+			}
+			else{
+				player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,2,0,0,1);
+			}
+			player.removePerk(PerkLib.AscensionAdditionalOrganMutation02);
+		}
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03)){
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
+				player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,3);
+			}
+			else{
+				player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,3,0,0,1);
+			}
+			player.removePerk(PerkLib.AscensionAdditionalOrganMutation03);
+		}
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04)){
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
+				player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,4);
+			}
+			else{
+				player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,4,0,0,1);
+			}
+			player.removePerk(PerkLib.AscensionAdditionalOrganMutation04);
+		}
 		//Clear out Izma's saved loot status
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 		//History perk backup

@@ -659,7 +659,7 @@ package classes.Scenes
 			outputText("-Reaching room 150+/300+ in Labirinth will grant PC new rewards from Questlog (but need to pick them in order without skipping or getting few rewards at once).\n");
 			outputText("-When PC have active quest of capture feral imps chances to meet normal and feral one imp become reverted (meaning that most of imps pc meet will be feral ones).\n");
 			outputText("-Manticore feed special gained additional effect of recharging venom by 50 pts. Having Manticore Metabolism (Evolved) perk would increase this recharge rate 2x.\n");
-			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evovlved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
+			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evolved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
 			outputText("-Tank and Refined Body perks was switched meaning first will be accesable Tank and it would be req. to unlock Refined Body perk. Also Refined Body perks effect was changed from giving 50 HP to 5% of base HP.\n");
 			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
 			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
