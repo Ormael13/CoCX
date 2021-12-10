@@ -760,47 +760,26 @@ import classes.CoC;
 		public override function maxSoulforce():Number
 		{
 			var max:Number = 50;
+			if (hasPerk(PerkLib.JobSoulCultivator)) max += 50;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) max += 30 * flags[kFLAGS.SOUL_CULTIVATION];//Soul Apprentice
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 3);//Soul Personage
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 6);//Soul Warrior
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 10) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 9);//Soul Sprite
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 12);//Soul Scholar
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 30 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Elder
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Exalt
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 60 * (flags[kFLAGS.SOUL_CULTIVATION] - 21);//Soul Overlord
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 24);//Soul Tyrant
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 90 * (flags[kFLAGS.SOUL_CULTIVATION] - 27);//Soul King
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 120 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul Emperor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 120 * (flags[kFLAGS.SOUL_CULTIVATION] - 33);//Soul Ancestor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 36);//Soul Sovereign
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 180 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 180 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
 			if (hasPerk(PerkLib.FlyingSwordPath)) max += 50;
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 3) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 5) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 6) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 40;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 8) max += 40;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 9) max += 40;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 10) max += 50;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 11) max += 50;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 12) max += 50;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 60;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 14) max += 60;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 15) max += 60;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 70;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 17) max += 70;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 18) max += 70;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 80;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 20) max += 80;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 21) max += 80;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 90;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 90;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 24) max += 90;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 100;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 26) max += 100;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 100;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 110;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 110;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 110;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 120;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) max += 120;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) max += 120;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 130;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 130;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 36) max += 130;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 140;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 140;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 140;
 			if (hasPerk(PerkLib.InsightfulResourcesI)) max += Math.round(wis*3);
 			if (hasPerk(PerkLib.InsightfulResourcesII)) max += Math.round(wis*3);
 			if (hasPerk(PerkLib.InsightfulResourcesIII)) max += Math.round(wis*3);
@@ -1247,44 +1226,23 @@ import classes.CoC;
 		public function maxHunger():Number
 		{
 			var max:Number = 100;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) max += 10;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 3) max += 10;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 5) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 6) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 8) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 9) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 10) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 11) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 12) max += 20;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 14) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 15) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 17) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 18) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 20) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 21) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 24) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 26) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 30;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 32) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 33) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 35) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 36) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 35;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 35;
+			if (hasPerk(PerkLib.JobSoulCultivator)) max += 20;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) max += 20 * flags[kFLAGS.SOUL_CULTIVATION];//Soul Apprentice
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 1 * (flags[kFLAGS.SOUL_CULTIVATION] - 3);//Soul Personage
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 1 * (flags[kFLAGS.SOUL_CULTIVATION] - 6);//Soul Warrior
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 10) max += 2 * (flags[kFLAGS.SOUL_CULTIVATION] - 9);//Soul Sprite
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) max += 2 * (flags[kFLAGS.SOUL_CULTIVATION] - 12);//Soul Scholar
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 16) max += 2 * (flags[kFLAGS.SOUL_CULTIVATION] - 15);//Soul Elder
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 4 * (flags[kFLAGS.SOUL_CULTIVATION] - 18);//Soul Exalt
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 4 * (flags[kFLAGS.SOUL_CULTIVATION] - 21);//Soul Overlord
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 6 * (flags[kFLAGS.SOUL_CULTIVATION] - 24);//Soul Tyrant
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 6 * (flags[kFLAGS.SOUL_CULTIVATION] - 27);//Soul King
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 31) max += 8 * (flags[kFLAGS.SOUL_CULTIVATION] - 30);//Soul Emperor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 34) max += 8 * (flags[kFLAGS.SOUL_CULTIVATION] - 33);//Soul Ancestor
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 36);//Soul Sovereign
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
 			if (game.player.dragonScore() >= 16) max += 50;
 			if (game.player.dragonScore() >= 24) max += 50;
 			if (game.player.pigScore() >= 5) max += 10;
@@ -1316,7 +1274,7 @@ import classes.CoC;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += 30;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += 40;
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += 50;
-			if (max > 2030) max = 2030;//obecnie max to 2030
+			if (max > 3370) max = 3370;//obecnie max to 3378
 			return max;
 		}
 	}

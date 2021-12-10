@@ -19,19 +19,22 @@ public class CampMakeWinions extends BaseContent
 		//
 		//-----------
 		
-		//TEMPORAL_GOLEMS_BAG and PERMANENT_GOLEMS_BAG - pretty easy to quess: amount of temp or perm golems PC have in "golem bag"
-		
 		public function maxTemporalGolemsBagSize():Number {
 			var maxTemporalGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.JobGolemancer)) maxTemporalGolemsBagSizeCounter += 15;
 			if (player.hasPerk(PerkLib.BeginnerGolemMaker)) maxTemporalGolemsBagSizeCounter += 6;
 			if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) maxTemporalGolemsBagSizeCounter += 6;
 			if (player.hasPerk(PerkLib.ExpertGolemMaker)) maxTemporalGolemsBagSizeCounter += 6;
-			if (player.hasPerk(PerkLib.GolemArmyLieutenant)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxTemporalGolemsBagSizeCounter += 4;
-			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxTemporalGolemsBagSizeCounter += 6;
-			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxTemporalGolemsBagSizeCounter += 8;
-			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxTemporalGolemsBagSizeCounter += 10;
+			if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant)) maxTemporalGolemsBagSizeCounter += 4;
+			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxTemporalGolemsBagSizeCounter += 8;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxTemporalGolemsBagSizeCounter += 10;
+			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxTemporalGolemsBagSizeCounter += 12;
+			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxTemporalGolemsBagSizeCounter += 14;
+			if (player.hasPerk(PerkLib.GolemArmyMajorGeneral)) maxTemporalGolemsBagSizeCounter += 16;
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) maxTemporalGolemsBagSizeCounter += 5;
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) maxTemporalGolemsBagSizeCounter += 10;
 			if (player.hasPerk(PerkLib.BiggerGolemBagI)) maxTemporalGolemsBagSizeCounter += 6;
 			if (player.hasPerk(PerkLib.BiggerGolemBagII)) maxTemporalGolemsBagSizeCounter += 6;
 			if (player.hasPerk(PerkLib.BiggerGolemBagIII)) maxTemporalGolemsBagSizeCounter += 6;
@@ -44,14 +47,19 @@ public class CampMakeWinions extends BaseContent
 			var maxPermanentStoneGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) maxPermanentStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) maxPermanentStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.EpicGolemMaker)) maxPermanentStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) maxPermanentStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) maxPermanentStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.GolemArmyLieutenant)) maxPermanentStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentStoneGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentStoneGolemsBagSizeCounter += 3;
-			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPermanentStoneGolemsBagSizeCounter += 4;
-			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPermanentStoneGolemsBagSizeCounter += 5;
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) maxPermanentStoneGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) maxPermanentStoneGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) maxPermanentStoneGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentStoneGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentStoneGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) maxPermanentStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant)) maxPermanentStoneGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentStoneGolemsBagSizeCounter += 3;
+			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentStoneGolemsBagSizeCounter += 4;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxPermanentStoneGolemsBagSizeCounter += 5;
+			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPermanentStoneGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPermanentStoneGolemsBagSizeCounter += 7;
+			if (player.hasPerk(PerkLib.GolemArmyMajorGeneral)) maxPermanentStoneGolemsBagSizeCounter += 8;
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) {
 				if (player.hasPerk(PerkLib.BiggerGolemBagI)) maxPermanentStoneGolemsBagSizeCounter += 1;
 				if (player.hasPerk(PerkLib.BiggerGolemBagII)) maxPermanentStoneGolemsBagSizeCounter += 1;
@@ -64,18 +72,39 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function maxPermanentImprovedStoneGolemsBagSize():Number {
 			var maxPermanentImprovedStoneGolemsBagSizeCounter:Number = 0;
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyMajorGeneral)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			return maxPermanentImprovedStoneGolemsBagSizeCounter;
 		}
 		public function maxPermanentSteelGolemsBagSize():Number {
 			var maxPermanentSteelGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPermanentSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyMajorGeneral)) maxPermanentSteelGolemsBagSizeCounter += 1;
 			return maxPermanentSteelGolemsBagSizeCounter;
 		}
 		public function maxPermanentImprovedSteelGolemsBagSize():Number {
 			var maxPermanentImprovedSteelGolemsBagSizeCounter:Number = 0;
-			
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyMajorGeneral)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
 			return maxPermanentImprovedSteelGolemsBagSizeCounter;
 		}
 		public function maxReusableGolemCoresBagSize():Number {
@@ -102,43 +131,82 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.EpicGolemMaker)) permGolemCost += 50;
 			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) permGolemCost += 150;
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) permGolemCost += 400;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1)) permGolemCost *= 2;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1)) permGolemCost *= 2;
+			permGolemCost = Math.round(permGolemCost);
 			return permGolemCost;
 		}
 		public function permanentImprovedStoneGolemMakingCost():Number {
-			var permGolemCost:Number = 900;
-			return permGolemCost;
+			var permIGolemCost:Number = 900;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1)) permIGolemCost *= 2;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1)) permIGolemCost *= 2;
+			permIGolemCost = Math.round(permIGolemCost);
+			return permIGolemCost;
 		}
 		public function permanentSteelGolemMakingCost():Number {
-			var permGolemCost:Number = 200;
-			return permGolemCost;
+			var permSGolemCost:Number = 200;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1)) permSGolemCost *= 2;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1)) permSGolemCost *= 2;
+			permSGolemCost = Math.round(permSGolemCost);
+			return permSGolemCost;
 		}
 		public function permanentImprovedSteelGolemMakingCost():Number {
-			var permGolemCost:Number = 2000;
-			return permGolemCost;
+			var permISGolemCost:Number = 2000;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1)) permISGolemCost *= 2;
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1)) permISGolemCost *= 2;
+			permISGolemCost = Math.round(permISGolemCost);
+			return permISGolemCost;
+		}
+		private function counterOfPernamentGolems():Number {
+			var counterOfPernamentGolems:Number = 0;
+			counterOfPernamentGolems += flags[kFLAGS.PERMANENT_GOLEMS_BAG];
+			counterOfPernamentGolems += flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG];
+			counterOfPernamentGolems += flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG];
+			counterOfPernamentGolems += flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG];
+			return counterOfPernamentGolems;
 		}
 
 		public function accessMakeWinionsMainMenu():void {
 			clearOutput();
 			outputText("What helper would you like to make?\n\n");
 			outputText("<b>Stored golem cores for future reuse when making new golems:</b> " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
-			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
-			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERMANENT_GOLEMS_BAG] + " / " + maxPermanentStoneGolemsBagSize() + " golems\n");
-			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) outputText("<b>Improved Stone Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] + " / " + maxPermanentImprovedStoneGolemsBagSize() + " golems\n");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Golems Bag:</b> " + flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentSteelGolemsBagSize() + " golems\n");
-			//outputText("<b>Improved Metal Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentImprovedSteelGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) outputText("<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "\n");
 			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) {
+				outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
+				outputText("<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "\n");
+			}
+			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("\n<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERMANENT_GOLEMS_BAG] + " / " + maxPermanentStoneGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) outputText("<b>Improved Stone Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] + " / " + maxPermanentImprovedStoneGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Steel Golems Bag:</b> " + flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentSteelGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) outputText("<b>Improved Steel Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentImprovedSteelGolemsBagSize() + " golems\n");
+			var eleShardCost:String = "";
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) eleShardCost = "1 Elemental Shard, ";
 			menu();
 			if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make the most simple golem out of a pile of stones.  <b>It will crumble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
-			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePermanentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + permanentStoneGolemMakingCost() + " Mana");
-			/*if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) */addButtonDisabled(2, "M.Golem", "Make metal golem.\n\nSoon");//Cost: 1 Golem Plasma Core, 10 Stones, 10 Metal Plates, 10 Mechanisms, i coś jeszcze innego? " + permanentSteelGolemMakingCost() + " Mana
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePermanentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + eleShardCost + permanentStoneGolemMakingCost() + " Mana");
+			else addButtonDisabled(1, "P.S.Golem", "Req. Master Golem Maker perk.");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) addButton(2, "S.Golem", makePermanentSteelGolem).hint("Make steel golem.\n\nCost: 1 Golem Core, 2 Energy Cores, 10 Metal Plates, 4 Mechanisms, " + eleShardCost + permanentSteelGolemMakingCost() + " Mana");
+			else addButtonDisabled(2, "M.Golem", "Req. Advanced Golemancy Theory perk.");
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
-			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) addButton(6, "I.P.S.Golem", makePermanentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 100 Stones, " + permanentImprovedStoneGolemMakingCost() + " Mana");
-			addButtonDisabled(7, "I.M.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + permanentImprovedSteelGolemMakingCost() + " Mana
+			else addButtonDisabled(5, "T.S.Golem(5x)", "Req. Temporal Golems Restructuration perk.");
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) addButton(6, "I.P.S.Golem", makePermanentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 1 Energy Core, 50 Stones, " + eleShardCost + permanentImprovedStoneGolemMakingCost() + " Mana");
+			else addButtonDisabled(6, "I.P.S.Golem", "Req. Epic Golem Maker perk.");
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(7, "I.M.Golem", makePermanentImprovedSteelGolem).hint("Make improved steel golem.\n\nCost: 3 Golem Cores, 6 Energy Cores, 50 Metal Plates, 12 Mechanisms, " + eleShardCost + permanentImprovedSteelGolemMakingCost() + " Mana");
+			else addButtonDisabled(7, "I.M.Golem", "Req. Legendary Golem Maker perk.");
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButton(10, "T.S.Golem(20x)", makeTemporalStoneGolemsMore).hint("Make twenty of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 20 Golem Core, " + temporalGolemMakingCost() * 20 + " Mana");
+			else addButtonDisabled(10, "T.S.Golem(20x)", "Req. Temporal Golems Restructuration (Ex) perk.");
 			if (player.hasItem(useables.GOLCORE, 1) && (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < maxReusableGolemCoresBagSize())) addButton(11, "PutInCore", putInGolemCoreIntoGolemBag).hint("Put in one golem core into 'golem bag'.")
+			else addButtonDisabled(11, "PutInCore", "You not have any golem core in your inventory to put in 'golem bag'.");
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(12, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
-			addButtonDisabled(13, "Upgrades", "Options to upgrade permanent golems.");
-			addButton(14, "Back", playerMenu);
+			else addButtonDisabled(12, "TakeOutCore", "Your 'golem bag' not have any golem cores in it.");
+			if (player.hasKeyItem("Golems, Animations and You") >= 0) {
+				if (counterOfPernamentGolems() > 0) addButton(13, "Upgrades", upgradesForPernamentGolems).hint("Options to upgrade permanent golems.");
+				else addButtonDisabled(13, "Upgrades", "You not have any pernament golem created yet.");
+			}
+			else addButtonDisabled(13, "Upgrades", "Req. 'Golems, Animations and You' manual.");
+			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		
 		public function makeTemporalStoneGolem():void {
@@ -188,12 +256,39 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 4) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 5;
 			else player.destroyItems(useables.GOLCORE, 5);
-			useMana(temporalGolemMakingCost());
+			useMana(temporalGolemMakingCost() * 5);
 			statScreenRefresh();
 			outputText("You draw a complex seal on the ground with 5 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
 			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 5;
 			doNext(accessMakeWinionsMainMenu);
-			eachMinuteCount(20);
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) eachMinuteCount(15);
+			else eachMinuteCount(20);
+		}
+		public function makeTemporalStoneGolemsMore():void {
+			clearOutput();
+			if (player.mana < (temporalGolemMakingCost() * 20)) {
+				outputText("Your mana is too low to finish golems creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (!player.hasItem(useables.GOLCORE, 20) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 20) {
+				outputText("You lack golem cores to finish the creation of the golems.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > (maxTemporalGolemsBagSize() - 20)) {
+				outputText("You not having enough space to store all twenty.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 19) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 20;
+			else player.destroyItems(useables.GOLCORE, 20);
+			useMana(temporalGolemMakingCost() * 20);
+			statScreenRefresh();
+			outputText("You draw a complex seal on the ground with 20 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
+			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 20;
+			doNext(accessMakeWinionsMainMenu);
+			eachMinuteCount(40);
 		}
 		public function makePermanentStoneGolem():void {
 			clearOutput();
@@ -204,6 +299,11 @@ public class CampMakeWinions extends BaseContent
 			}
 			else if (!player.hasItem(useables.GOLCORE, 1) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 1) {
 				outputText("You lack a golem core to finish the creation of a golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
+				outputText("You lack elemental shard to finish golem creation.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -219,6 +319,7 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			else player.destroyItems(useables.GOLCORE, 1);
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
 			useMana(permanentStoneGolemMakingCost());
 			statScreenRefresh();
@@ -240,7 +341,17 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 100) {
+			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 1) {
+				outputText("You lack energy core to use as power source for your new golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
+				outputText("You lack elemental shard to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 50) {
 				outputText("You lack high quality stones to use as body for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -252,15 +363,121 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 3) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 3;
 			else player.destroyItems(useables.GOLCORE, 3);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
+			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 1;
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			useMana(permanentImprovedStoneGolemMakingCost());
 			statScreenRefresh();
-			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
-			outputText("Slowly all the stones and cores connect with threads of magic, forming a 16 feet tall shape. Finishing the work by making some last adjustments to cores you store it in your 'golem bag'.");
+			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the energy core in upper section of torso and golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
+			outputText("Slowly all the stones and cores connect with threads of magic, forming a 12 feet tall shape. Finishing the work by making some last adjustments to cores you store it in your 'golem bag'.");
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] < 1) flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			eachMinuteCount(60);
+			eachMinuteCount(40);
+		}
+		public function makePermanentSteelGolem():void {
+			clearOutput();
+			if (player.mana < permanentSteelGolemMakingCost()) {
+				outputText("Your mana is too low to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (!player.hasItem(useables.GOLCORE, 1) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 1) {
+				outputText("You lack a golem core to finish the creation of a golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 2) {
+				outputText("You lack energy cores to use as power source for your new golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
+				outputText("You lack elemental shard to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 10) {
+				outputText("You lack metal pieces to use as body for your new golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 4) {
+				outputText("You lack mechanisms to use for your new golem body.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] == maxPermanentSteelGolemsBagSize()) {
+				outputText("You not having enough space to store another one.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
+			else player.destroyItems(useables.GOLCORE, 1);
+			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 2;
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
+			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 4;
+			useMana(permanentSteelGolemMakingCost());
+			statScreenRefresh();
+			outputText("You draw a seal in the ground around the body of your future servant. All parts are put in precise place be it mechanisms or twin energy cores hidden beneath metal plates. Once done you put golem core in the empty space left in the chest area and put on it last metal plate. You stand back and begin to seep your mana toward the laying parts as it begin to connect ");
+			outputText("each part of the future golem body. After few moments mechanisms comes alive supplied with energy from inserted energy cores under main core control. It slowly rising up reaching a bit over 7 feet tall looking pretty durable with all the body covered by metal plates and glowing red eyes. Finishing the work on your creation you store it in your 'golem bag'.");
+			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] < 1) flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] = 1;
+			else flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG]++;
+			doNext(accessMakeWinionsMainMenu);
+			eachMinuteCount(20);
+		}
+		public function makePermanentImprovedSteelGolem():void {
+			clearOutput();
+			if (player.mana < permanentImprovedSteelGolemMakingCost()) {
+				outputText("Your mana is too low to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (!player.hasItem(useables.GOLCORE, 3) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 3) {
+				outputText("You lack a golem core to finish the creation of a golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 6) {
+				outputText("You lack energy cores to use as power source for your new golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
+				outputText("You lack elemental shard to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 50) {
+				outputText("You lack metal pieces to use as body for your new golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 12) {
+				outputText("You lack mechanisms to use for your new golem body.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] == maxPermanentImprovedSteelGolemsBagSize()) {
+				outputText("You not having enough space to store another one.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 3) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 3;
+			else player.destroyItems(useables.GOLCORE, 3);
+			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 6;
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 50;
+			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 12;
+			useMana(permanentSteelGolemMakingCost());
+			statScreenRefresh();
+			outputText("You draw a seal in the ground around the body of your future servant. All parts are put in precise place be it mechanisms or each energy cores hidden beneath metal plates. Once done you put golem cores at the golem's future chest in a triangle formation and cover them with last two metal plates. You stand back and begin to seep your mana toward the laying parts as it begin to connect ");
+			outputText("each part of the future golem body. After few moments mechanisms comes alive supplied with energy from inserted energy cores under main cores control. It slowly rising up reaching a bit over 14 feet tall with six arms and whole body covered by metal plates and glowing red eyes. Finishing the work on your creation you store it in your 'golem bag'.");
+			if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] < 1) flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] = 1;
+			else flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG]++;
+			doNext(accessMakeWinionsMainMenu);
+			eachMinuteCount(40);
 		}
 
 		public function putInGolemCoreIntoGolemBag():void {
@@ -276,6 +493,171 @@ public class CampMakeWinions extends BaseContent
 			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			inventory.takeItem(useables.GOLCORE, accessMakeWinionsMainMenu);
 		}
+		
+		public function upgradesForPernamentGolems():void {
+			clearOutput();
+			var element:String = "Inactive (not yet upgraded)";
+			var poison:String = "Inactive (not yet upgraded)";
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+					if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) element = "Darkness";
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) element = "Lightning";
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) element = "Ice";
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) element = "Fire";
+					else element = "Inactive";
+				}
+				if (player.statusEffectv4(StatusEffects.GolemUpgrades1) > 0) {
+					if (player.statusEffectv4(StatusEffects.GolemUpgrades1) == 2) poison = "Active";
+					else poison = "Inactive";
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) var impMC:Number = player.statusEffectv2(StatusEffects.GolemUpgrades1);
+			outputText("You takes out the 'Golems, Animations and You' manual from your bag and opening it at index. Which one upgrade should you apply to your golems?\n\n");
+			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
+			outputText("\n<u>Index of upgrades:</u>\n");
+			outputText("\n-Multi Attacks (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+player.statusEffectv1(StatusEffects.GolemUpgrades1)+"":"0")+") (Passive)");
+			outputText("\n-Improved Mana Circuit (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC+"":"0")+") (-"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*15+"":"0")+"% req. mana for activation, +"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*25+"":"0")+"% base dmg) (Passive)");
+			outputText("\n-Elemental Weaponry ("+element+")");
+			outputText("\n-Poisoned Weaponry ("+poison+")");
+			menu();
+			addButton(0, "MultiAtks", upgradesForPernamentGolemsMultiAttacks);
+			addButton(1, "I.M.Circ.", upgradesForPernamentGolemsImprovedManaCircuit);
+			if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) == 0) || !player.hasStatusEffect(StatusEffects.GolemUpgrades1)) addButton(2, "Elem.Weapons", upgradesForPernamentGolemsElementalWeaponry);
+			else addButtonDisabled(2, "Elem.Weapons", "You already used this upgrade option on your golems.");
+			//poisoned weapons
+			addButton(14, "Back", accessMakeWinionsMainMenu);
+		}
+		public function upgradesForPernamentGolemsMultiAttacks():void {
+			menu();
+			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 0) addButton(0, "MultiAtks(1)", upgradesForPernamentGolemsMultiAttacksRank1);
+			else addButtonDisabled(0, "MultiAtks(1)", "You already used this upgrade option on your golems.");
+			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "MultiAtks(2)", "You can't use this upgrade options without previous one.");
+			else {
+				if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1) addButton(1, "MultiAtks(2)", upgradesForPernamentGolemsMultiAttacksRank2);
+				else addButtonDisabled(1, "MultiAtks(2)", "You already used this upgrade option on your golems.");
+			}
+			addButton(14, "Back", upgradesForPernamentGolems);
+		}
+		public function upgradesForPernamentGolemsMultiAttacksRank1():void {
+			clearOutput();
+			outputText("You decided to work on multi attack upgrade of your golem.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed pernament golem to make that modification.\n\n");
+			if (player.mana >= (100 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsMultiAttacksRank1Yes, upgradesForPernamentGolemsMultiAttacks);
+			else {
+				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
+				doNext(upgradesForPernamentGolemsMultiAttacks);
+			}
+		}
+		public function upgradesForPernamentGolemsMultiAttacksRank1Yes():void {
+			useMana((100 * counterOfPernamentGolems()));
+			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving new mana patchways that would allow them to attack 2nd time. And as it been described in instruction it would make their attcks drains more mana from you each time they attack.\n");
+			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
+			doNext(upgradesForPernamentGolemsMultiAttacks);
+			eachMinuteCount(30);
+		}
+		public function upgradesForPernamentGolemsMultiAttacksRank2():void {
+			clearOutput();
+			outputText("You decided to work on multi attack upgrade of your golem.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed pernament golem to make that modification.\n\n");
+			if (player.mana >= (100 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsMultiAttacksRank2Yes, upgradesForPernamentGolemsMultiAttacks);
+			else {
+				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
+				doNext(upgradesForPernamentGolemsMultiAttacks);
+			}
+		}
+		public function upgradesForPernamentGolemsMultiAttacksRank2Yes():void {
+			useMana((100 * counterOfPernamentGolems()));
+			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving new mana patchways that would allow them to attack 3rd time. And as it been described in instruction it would make their attcks drains more mana from you each time they attack.\n");
+			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
+			doNext(upgradesForPernamentGolemsMultiAttacks);
+			eachMinuteCount(30);
+		}
+		public function upgradesForPernamentGolemsImprovedManaCircuit():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(0, "I.M.Circ.(1)", upgradesForPernamentGolemsImprovedManaCircuitRank1);
+			else addButtonDisabled(0, "I.M.Circ.(1)", "You already used this upgrade option on your golems.");
+			if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "I.M.Circ.(2)", "You can't use this upgrade options without previous one.");
+			else {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1) addButton(1, "I.M.Circ.(2)", upgradesForPernamentGolemsImprovedManaCircuitRank2);
+				else addButtonDisabled(1, "I.M.Circ.(2)", "You already used this upgrade option on your golems.");
+			}/*
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(2, "I.M.Circ.(3)", upgradesForPernamentGolemsImprovedManaCircuitRank3);
+				else addButtonDisabled(2, "I.M.Circ.(3)", "You already used this upgrade option on your golems.");
+			}
+			else addButtonDisabled(2, "I.M.Circ.(3)", "You need to reach at least Legendary Golem Maker to work on this upgrade.");*/
+			addButton(14, "Back", upgradesForPernamentGolems);
+		}
+		public function upgradesForPernamentGolemsImprovedManaCircuitRank1():void {
+			clearOutput();
+			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed pernament golem to make that modification.\n\n");
+			if (player.mana >= (150 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsImprovedManaCircuitRank1Yes, upgradesForPernamentGolemsImprovedManaCircuit);
+			else {
+				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
+				doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+			}
+		}
+		public function upgradesForPernamentGolemsImprovedManaCircuitRank1Yes():void {
+			useMana((150 * counterOfPernamentGolems()));
+			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of removing old mana circuits and then engraving new and more efficient patchways. That would allow to lower mana consumtion for each golem activation and increase effectivness of their attacks.\n");
+			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
+			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+			eachMinuteCount(30);
+		}
+		public function upgradesForPernamentGolemsImprovedManaCircuitRank2():void {
+			clearOutput();
+			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed pernament golem to make that modification.\n\n");
+			if (player.mana >= (150 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsImprovedManaCircuitRank2Yes, upgradesForPernamentGolemsImprovedManaCircuit);
+			else {
+				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
+				doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+			}
+		}
+		public function upgradesForPernamentGolemsImprovedManaCircuitRank2Yes():void {
+			useMana((150 * counterOfPernamentGolems()));
+			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of removing old mana circuits and then engraving new and more efficient patchways. That would allow to lower mana consumtion for each golem activation and increase effectivness of their attacks.\n");
+			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
+			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
+			eachMinuteCount(30);
+		}
+		public function upgradesForPernamentGolemsElementalWeaponry():void {
+			clearOutput();
+			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
+			outputText("Checking page for this upgrade you see it would req. 25 mana and 1 elemental shard per each possesed pernament golem to make that modification.\n\n");
+			if (player.mana >= (25 * counterOfPernamentGolems()) && player.hasItem(useables.ELSHARD, counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsElementalWeaponryYes, upgradesForPernamentGolems);
+			else {
+				outputText("It seems you're too low on mana or lacking elemental shards to proceed with this upgrade.\n\n");
+				doNext(upgradesForPernamentGolems);
+			}
+		}
+		public function upgradesForPernamentGolemsElementalWeaponryYes():void {
+			useMana((25 * counterOfPernamentGolems()));
+			player.destroyItems(useables.ELSHARD, counterOfPernamentGolems());
+			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving patchways using elemental shards as material and mana as medium to do allow shards become engraving. After finished process each golem have new multicolor shining think patterns over their arms that would allow to convert pure mana into specific elemental mana.\n");
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) player.addStatusValue(StatusEffects.GolemUpgrades1, 3, 1);
+			else player.createStatusEffect(StatusEffects.GolemUpgrades1, 0, 0, 1, 0);
+			doNext(upgradesForPernamentGolems);
+			eachMinuteCount(30);
+		}
+		public function upgradesForPernamentGolemsPoisonedWeaponry():void {
+			clearOutput();
+			
+		}/*
+		public function upgradesForPernamentGolems():void {
+			clearOutput();
+			
+		}
+		public function upgradesForPernamentGolems():void {
+			clearOutput();
+			
+		}
+		public function upgradesForPernamentGolems():void {
+			clearOutput();
+			
+		}*/
 		
 		public function postFightGolemOptions1():void {
 			clearOutput();
@@ -438,6 +820,7 @@ public class CampMakeWinions extends BaseContent
 				}
 				outputText("-Unique: 0</i>\n\n");
 			}
+			if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
 			outputText("<b>Currently summoned elementals:</b><i>");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 				outputText("\nAir");
@@ -965,13 +1348,16 @@ public class CampMakeWinions extends BaseContent
 			}
 			outputText("</i>");
 			menu();
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu);
-			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible normal elementals or reached limit of how many elementals you can command at once.");
-			addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu).hint("Summon a Normal-tier Elementals");
+			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible Normal-tier elementals or reached limit of how many elementals you can command at once.");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
+			else addButtonDisabled(1, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
-			else addButtonDisabled(5,"ElementUp", "You don't have any elementals, try summoning one!");
+			else addButtonDisabled(5, "ElementUp", "You don't have any elementals, try summoning one!");
+			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) >= 1) addButton(12, "E.S.Conv.", elementalShardsConversion).hint("Conversion of Elemental Shards into energy stored in arcane circle elemental conduit.");
+			else addButtonDisabled(12, "E.S.Conv.", "You need to have any elemental conduit added to the arcane circle to use this option.");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
-			addButton(14, "Back", playerMenu);
+			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		private function elementaLvlUp():void{
 			var elementalTypes:Array = [];
@@ -1042,7 +1428,25 @@ public class CampMakeWinions extends BaseContent
 				addButton(0, btnName, elemType, null, null, null, "Let's do this!")
 			}
 			addButton(14, "Back", elementaLvlUp);
-
+		}
+		private function elementalShardsConversion():void {
+			clearOutput();
+			outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
+			outputText("Do you like to convert elemental shard into energy stored in conduit? (Excess energy will be lost)\n\n");
+			menu();
+			if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo);
+			else addButtonDisabled(1, "Yes", "you not have any Elemental Shardsa to convert currently.");
+			addButton(3, "Back", accessSummonElementalsMainMenu);
+		}
+		private function elementalShardsConversionGo():void {
+			clearOutput();
+			outputText("WiP for now conversion scene text.\n\n");
+			player.destroyItems(useables.ELSHARD, 1);
+			var convertedShard:Number = 0;
+			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + 400 > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
+			else convertedShard += 400;
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,convertedShard);
+			doNext(elementalShardsConversion);
 		}
 		private function evocationTome():void {
 			clearOutput();
@@ -1238,9 +1642,9 @@ public class CampMakeWinions extends BaseContent
 
 		private function summoningEpicElementalsSubmenu():void {
 			clearOutput();
-			outputText("If you not have matching item, elemental shard and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
+			outputText("If you not have matching item, two elemental shards and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
 			menu();
-			if (player.hasItem(useables.ELSHARD, 1) && (player.fatigue + 200 <= player.maxFatigue())) {
+			if (player.hasItem(useables.ELSHARD, 2) && (player.fatigue + 200 <= player.maxFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) < 1) addButton(0, "Air", summonElementalAirEpic);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) < 1) addButton(1, "Earth", summonElementalEarthEpic);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) < 1) addButton(2, "Fire", summonElementalFireEpic);
@@ -1398,7 +1802,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			if (player.hasKeyItem("Air Sylph Core") >= 0) {
 				player.removeKeyItem("Air Sylph Core");
-				player.destroyItems(useables.ELSHARD, 1);
+				player.destroyItems(useables.ELSHARD, 2);
 				fatigue(200);
 				statScreenRefresh();
 				outputText("As it will be your first time summoning an epic air elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Air Sylph Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The air elemental appear within the circle. ");
@@ -1416,7 +1820,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			if (player.hasKeyItem("Earth Golem Core") >= 0) {
 				player.removeKeyItem("Earth Golem Core");
-				player.destroyItems(useables.ELSHARD, 1);
+				player.destroyItems(useables.ELSHARD, 2);
 				fatigue(200);
 				statScreenRefresh();
 				outputText("As it will be your first time summoning an epic earth elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Earth Golem Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The earth elemental appear within the circle. ");
@@ -1434,7 +1838,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			if (player.hasKeyItem("Fire Ifrit Core") >= 0) {
 				player.removeKeyItem("Fire Ifrit Core");
-				player.destroyItems(useables.ELSHARD, 1);
+				player.destroyItems(useables.ELSHARD, 2);
 				fatigue(200);
 				statScreenRefresh();
 				outputText("As it will be your first time summoning an epic fire elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Fire Ifrit Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The fire elemental appear within the circle. ");
@@ -1452,7 +1856,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			if (player.hasKeyItem("Water Undine Core") >= 0) {
 				player.removeKeyItem("Water Undine Core");
-				player.destroyItems(useables.ELSHARD, 1);
+				player.destroyItems(useables.ELSHARD, 2);
 				fatigue(200);
 				statScreenRefresh();
 				outputText("As it will be your first time summoning an epic water elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. In centre you place Water Undine Core. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The water elemental appear within the circle. ");
@@ -1795,7 +2199,7 @@ public class CampMakeWinions extends BaseContent
 					addButtonDisabled(2, "???", "Req. Greater harvest perk to unlock this option.");
 				}
 			}
-			addButton(14, "Back", playerMenu);
+			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		
 		public function createSkeletonWarrior():void {
@@ -1844,4 +2248,4 @@ public class CampMakeWinions extends BaseContent
 			eachMinuteCount(10);
 		}
 	}
-}
+}

@@ -245,6 +245,8 @@ public class SceneLib {
 
     public static var vapula:Vapula = new Vapula();
 
+    //public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
+
     public static var woodElves:WoodElves = new WoodElves();
 
     public static var zenjiScene:ZenjiScenes = new ZenjiScenes();

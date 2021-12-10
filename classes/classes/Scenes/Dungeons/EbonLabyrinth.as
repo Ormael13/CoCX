@@ -896,6 +896,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration1(false);
 				if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration1(false);
 				SceneLib.combat.wrathregeneration1(false);
+				SceneLib.combat.fatigueRecovery1(false);
 				if (model.time.hours > 23) {
 					model.time.hours -= 24;
 					/*CoC.instance.*/model.time.days++;

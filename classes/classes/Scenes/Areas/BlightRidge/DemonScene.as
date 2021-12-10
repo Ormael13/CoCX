@@ -35,6 +35,15 @@ import classes.Scenes.UniqueSexScenes;
 			doNext(playerMenu);
 		}
 		
+		public function defeatMinoIncubus():void {
+			clearOutput();
+			menu();
+			outputText("You smile in satisfaction as the mino incubus collapses, unable to continue fighting.");
+			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton (14, "Leave", cleanupAfterCombat);
+		}
+		
 		//Incubus
 		public function IncubusEncounter():void {
 			clearOutput();
@@ -566,6 +575,15 @@ import classes.Scenes.UniqueSexScenes;
 			doNext(playerMenu);
 		}
 		
+		public function defeatCowSuccubus():void {
+			clearOutput();
+			menu();
+			outputText("You smile in satisfaction as the cow succubus collapses, unable to continue fighting.");
+			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton (14, "Leave", cleanupAfterCombat);
+		}
+		
 		//Succubus
 		public function SuccubusEncounter():void {
 			clearOutput();
@@ -810,6 +828,8 @@ import classes.Scenes.UniqueSexScenes;
 			if (monster.short == "succubus") outputText("succubus");
 			if (monster.short == "incubus") outputText("incubus");
 			if (monster.short == "omnibus") outputText("omnibus");
+			if (monster.short == "cow succubus") outputText("cow succubus");
+			if (monster.short == "mino incubus") outputText("mino incubus");
 			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu(); 

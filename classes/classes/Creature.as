@@ -4098,6 +4098,20 @@ public class Creature extends Utils
 				else chance -= 30;
 			}
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
+			if (hasPerk(PerkLib.ElementalBody)) {
+				if (perkv1(PerkLib.ElementalBody) == 1) {
+					if (perkv2(PerkLib.ElementalBody) == 1) chance += 10;
+					if (perkv2(PerkLib.ElementalBody) == 2) chance += 20;
+					if (perkv2(PerkLib.ElementalBody) == 3) chance += 30;
+					if (perkv2(PerkLib.ElementalBody) == 4) chance += 40;
+				}
+				if (perkv1(PerkLib.ElementalBody) == 3 || perkv1(PerkLib.ElementalBody) == 4)  {
+					if (perkv2(PerkLib.ElementalBody) == 1) chance += 5;
+					if (perkv2(PerkLib.ElementalBody) == 2) chance += 10;
+					if (perkv2(PerkLib.ElementalBody) == 3) chance += 15
+					if (perkv2(PerkLib.ElementalBody) == 4) chance += 20;
+				}
+			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}

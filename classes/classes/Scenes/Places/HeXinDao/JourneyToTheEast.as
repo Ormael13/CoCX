@@ -73,10 +73,11 @@ package classes.Scenes.Places.HeXinDao
 			}
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
-			addButton(2, "???", shadyPerson).hint("A strange two headed morph with two tails is sitting at one of the tables.");
+			addButton(2, "Felix", shadyPerson).hint("A strange two headed morph with two tails is sitting at the table near bar.");
 			addButton(4, "Adv.Guild", SceneLib.adventureGuild.BoardkeeperYangMain);
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
-			//addButtonDisabled(6, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
+			addButtonDisabled(6, "Monkey", "You see human bimbo with amazonian build and monkey tail sitting at the table on the rights side of inn.");
+			//addButton(6, "Monkey", SceneLib.waizabi.bimboMonkey).hint("You see human bimbo with amazonian build and monkey tail sitting at the table on the rights side of inn.");//monkey bimbo go go - Waiz'abi
 			if (workHoursMadam()) {
 				if (AhriTavernTalks) addButton(7, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");
 				else addButton(7, "???", visitMadam).hint("You see mysterious looking animal-morph sitting at one of the inn tables.");//Ahri
@@ -122,7 +123,6 @@ package classes.Scenes.Places.HeXinDao
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
 			doNext(curry(enteringInn,false));
 		}
-
 		private function buyDrink(drink:ItemType, amount:int):void{
 			var cost:int = amount;
 			if(flags[kFLAGS.SPIRIT_STONES] < cost){
@@ -136,9 +136,14 @@ package classes.Scenes.Places.HeXinDao
 			inventory.takeItem(drink, drinkAlcohol);
 		}
 
-		private function shadyPerson():void {
+		private function shadyPerson(second:Boolean = true):void {
 			clearOutput();//Felix - male beffy bro nekomata twin herald npc
-			outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
+			if (second) {
+				outputText("You approach the table seeing very peculiar looking being. It almost looks like someone would fuse two races: cat and dog one.\n\nIt have two heads, two pairs of arms and even two tails. ");
+				outputText("Left side of body looking clearly canine with dog shaped head, which almost all the time watching over surrounding. Right one looking feline but not with those lithe cat races but with noticable musculature. Seeing your approaching cat heat turns toward you and looking at you with it feline eyes.\n\n");
+			}
+			outputText("\"<i>Welcome to 'Felix Corner' traveler. Do you wanna buy something?</i>\" asks the cat head ending it with a short purr. \"<i>We have waries if you have the spirit stones.</i>\"\n\n");
+			outputText("After that the other one head stops looking around to look you directly into the eyes to add. \"<i>If you not interested then get lost... we not have a whole day for idle chatting!!!</i>\"\n\n");
 			menu();
 			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN).hint("50 spirit stones");
 			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC).hint("40 spirit stones");
@@ -153,17 +158,17 @@ package classes.Scenes.Places.HeXinDao
 			if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
 				outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
 				//Goto shop main menu
-				doNext(shadyPerson);
+				doNext(curry(shadyPerson,false));
 				return;
 			}
 			else outputText("\n\nDo you buy it?\n\n");
 			//Go to debit/update function or back to shop window
-			doYesNo(curry(debitItem,itype), shadyPerson);
+			doYesNo(curry(debitItem,itype), curry(shadyPerson,false));
 		}
 		private function debitItem(itype:ItemType):void {
 			flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
 			statScreenRefresh();
-			inventory.takeItem(itype, shadyPerson);
+			inventory.takeItem(itype, curry(shadyPerson,false));
 		}
 
 		private function workHoursMadam():Boolean {

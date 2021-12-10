@@ -123,7 +123,7 @@ public class Evangeline3 extends Monster
 		
 		public function ArouseSpell():void {
 			outputText("Evangeline make a series of arcane gestures, drawing on her own lust to inflict it upon you!\n", true);
-			var lustDmg:Number = player.lustVuln * (inte/5*SpellMod() + rand(player.lib - player.inte*2 + player.cor)/5);
+			var lustDmg:Number = player.lustVuln * (inte/5*SpellMod() + (player.lib / 6) + (player.effectiveSensitivity() / 6));
 			if(player.lust < (player.maxLust() * 0.3)) outputText("You squirms as the magic affects you.  ");
 			if(player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("You staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");

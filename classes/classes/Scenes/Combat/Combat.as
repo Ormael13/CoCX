@@ -924,6 +924,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
+			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 1) player.addStatusValue(StatusEffects.SimplifiedNonPCTurn,1,-1);
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -977,7 +978,8 @@ public class Combat extends BaseContent {
 
     internal function buildOtherActions(buttons:ButtonDataList):void {
         var bd:ButtonData;
-        buttons.add("Surrender", combat.surrender, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
+        buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending up to the point enemy would beat you down to minimal HP.");
+        buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
         if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
                 ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.doubleAttackOptions, "You can adjust your melee attack settings.");
@@ -1218,47 +1220,67 @@ public class Combat extends BaseContent {
 			if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
 				addButtonDisabled(0, "Send T.Gol/1", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
 				if (monster.plural) {
-					addButtonDisabled(1, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
-					addButtonDisabled(2, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+					addButtonDisabled(5, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+					addButtonDisabled(10, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
 				}
-				if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this)");
+				if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this)");
 			}
 			else {
 				addButton(0, "Send T.Gol/1", combat.pspecials.sendTemporalGolem1)
-					.hint("Send one golem from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
-				if (monster.plural) {
-					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) addButton(1, "Send T.Gol/3", combat.pspecials.sendTemporalGolem3)
-						.hint("Send three golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
-					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) addButton(2, "Send T.Gol/5", combat.pspecials.sendTemporalGolem5)
-						.hint("Send five golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
+					.hint("Send one golem from your bag to attack the enemy. <b>After attacking, the golem will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and its core can shatter, leaving it unable to be reused in future")+"!</b>");
+				if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) {
+					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 4) addButton(1, "Send T.Gol/4", combat.pspecials.sendTemporalGolem4)
+						.hint("Send four golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart!</b>");
+					if (monster.plural) {
+						if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 10) addButton(6, "Send T.Gol/10", combat.pspecials.sendTemporalGolem10)
+							.hint("Send ten golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
+						if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 20) addButton(11, "Send T.Gol/20", combat.pspecials.sendTemporalGolem20)
+							.hint("Send twenty golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
+					}
 				}
-				if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(3, "KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
+				if (monster.plural) {
+					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 3) addButton(5, "Send T.Gol/3", combat.pspecials.sendTemporalGolem3)
+						.hint("Send three golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and their cores can shatter, leaving them unable to be reused in future")+"!</b>");
+					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 5) addButton(10, "Send T.Gol/5", combat.pspecials.sendTemporalGolem5)
+						.hint("Send five golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and their cores can shatter, leaving them unable to be reused in future")+"!</b>");
+				}
+				if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButton(4, "KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
 					.hint("Send all temporal golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
 			}
 		}
         if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) {
             if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-				addButtonDisabled(4, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
+				addButtonDisabled(2, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
 				if (monster.plural) {
-					addButtonDisabled(5, "Send P.Gol/3", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
-					addButtonDisabled(6, "Send P.Gol/5", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
+					addButtonDisabled(7, "Send P.Gol/3", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
+					addButtonDisabled(12, "Send P.Gol/5", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
 				}
             }
 			else {
-				addButton(4, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1)
+				addButton(2, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1)
 					.hint("Send one stone golem from your bag to attack the enemy.");
 				if (monster.plural) {
-					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 2) addButton(5, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3)
+					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) addButton(7, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3)
 						.hint("Send three stone golems from your bag to attack the enemy.");
-					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 4) addButton(6, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5)
+					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) addButton(12, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5)
 						.hint("Send five stone golems from your bag to attack the enemy.");
 				}
 			}
         }
         if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
-            addButton(7, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem1)
+            addButton(3, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem1)
 				.hint("Send one improved stone golem from your bag to attack the enemy.");
+			if (monster.plural) {
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) addButton(8, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem3)
+					.hint("Send three improved stone golems from your bag to attack the enemy.");
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) addButton(13, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem5)
+					.hint("Send five improved stone golems from your bag to attack the enemy.");
+			}
         }
+		if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
+			addButton(9, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1)
+				.hint("Send one steel golem from your bag to attack the enemy.");
+		}
 		addButton(14, "Back", combat.combatMenu, false);
 	}
 	public function ElementalAspectsMenu():void {
@@ -1499,6 +1521,26 @@ public class Combat extends BaseContent {
             if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) unarmed += 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
             else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
         }
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .2;
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 2) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .2;
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .2;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .3;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .4;
+			}
+		}
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
 		if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
@@ -1743,8 +1785,78 @@ public class Combat extends BaseContent {
         attack();
     }
 
+	public function simplifiedPrePCTurn():void {
+		clearOutput();
+		player.addStatusValue(StatusEffects.SimplifiedNonPCTurn,1,1);
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 0 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
+			willothewispattacks0();
+			if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+		}
+		if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) combat.pspecials.sendPermanentGolem1();
+		if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) baseelementalattacks(Combat.AIR_E);
+			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) baseelementalattacks(Combat.EARTH_E);
+			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) baseelementalattacks(Combat.FIRE_E);
+			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) baseelementalattacks(Combat.WATER_E);
+			else baseelementalattacks(Combat.NONE_E);
+		}
+		if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) baseelementalattacks(Combat.AIR);
+			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) baseelementalattacks(Combat.EARTH);
+			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) baseelementalattacks(Combat.FIRE);
+			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) baseelementalattacks(Combat.WATER);
+			else baseelementalattacks(Combat.NONE);
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
+				comfoll.alvinaCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.alvinaCombatActions();
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
+				comfoll.amilyCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.amilyCombatActions();
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
+				comfoll.auroraCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.auroraCombatActions();
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
+				comfoll.etnaCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.etnaCombatActions();
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
+				comfoll.excelliaCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.excelliaCombatActions();
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
+				comfoll.mitziCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.mitziCombatActions();
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
+				comfoll.neisaCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.neisaCombatActions();
+			}
+			//if (flags[kFLAGS.PLAYER_COMPANION_1] == "Siegweird") comfoll.siegweirdCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
+				comfoll.zenjiCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.zenjiCombatActions();
+			}
+		}
+		menu();
+		addButton(0, "Next", combatMenu, false);
+	}
+
     public function willothewispattacks():void {
-        var willothewispDamage:Number = 0;
+        outputText("\n\n");
+		willothewispattacks0();
+        if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] == 0) {
+            flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+            menu();
+            addButton(0, "Next", combatMenu, false);
+        } else enemyAI();
+    }
+	private function willothewispattacks0():void {
+		var willothewispDamage:Number = 0;
         willothewispDamage += intwisscaling() * 0.4;
         /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnych ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
 	if (summonedElementals >= 1) elementalDamage += baseDamage;
@@ -1768,16 +1880,11 @@ public class Combat extends BaseContent {
             willothewispDamage *= critChanceMulti;
         }
         willothewispDamage = Math.round(willothewispDamage);
-        outputText("\n\nYour will-o'-the-wisp hit [monster a] [monster name]! ");
+        outputText("Your will-o'-the-wisp hit [monster a] [monster name]! ");
         doMagicDamage(willothewispDamage, true, true);
         if (crit) outputText(" <b>Critical! </b>");
         //checkMinionsAchievementDamage(elementalDamage);
-        if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] == 0) {
-            flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
-            menu();
-            addButton(0, "Next", combatMenu, false);
-        } else enemyAI();
-    }
+	}
 
     public function baseelementalattacks(elementType:int = -1):void {
         if (elementType == -1) {
@@ -1882,7 +1989,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
             doNext(curry(combatMenu, false));
         } else {
-			outputText("\n\n");
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) outputText("\n\n");
 			switch (elementType) {
 				case AIR_E      :
 					outputText("Sylph");
@@ -1911,7 +2018,7 @@ public class Combat extends BaseContent {
 				if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 				if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 			}
-			outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]!\n\n");
+			outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]! ");
             elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
         }
     }
@@ -2022,21 +2129,25 @@ public class Combat extends BaseContent {
                 doDamage(elementalDamage, true, true);
                 break;
         }
-        if (crit) outputText(" <b>Critical! </b>");
+        if (crit) outputText(" <b>Critical!</b>");
         //checkMinionsAchievementDamage(elementalDamage);
+		outputText(" ");
         if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
 			if (summonedElementalsMulti > 1) {
 				summonedElementalsMulti -= 1;
 				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
 			} else {
+				outputText("\n\n");
 				if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
 					if (summonedEpicElemental) {
 						flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
 						summonedEpicElemental = false;
 					}
 					else flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
-					menu();
-					addButton(0, "Next", combatMenu, false);
+					if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+						menu();
+						addButton(0, "Next", combatMenu, false);
+					}
 				} else {
 					wrathregeneration1();
 					fatigueRecovery1();
@@ -4419,7 +4530,14 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function surrender():void {
+    public function surrenderByHP():void {
+		doNext(combatMenu);
+        clearOutput();
+        outputText("You stop fighting letting [monster a] [monster name] beat you at the brink of the death.\n");
+        player.HP = player.minHP();
+        doNext(endHpLoss);
+    }
+    public function surrenderByLust():void {
         var remainingLust:Number = (player.maxLust() - player.lust);
         doNext(combatMenu);
         clearOutput();
@@ -5163,11 +5281,11 @@ public class Combat extends BaseContent {
             //------------
             //Determine damage
             //BASIC DAMAGE STUFF
-            if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)){
+            if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)) {
                 damage += player.tou;
                 damage += scalingBonusToughness() * 0.2;
             }
-            else{
+            else {
                 if (player.isElf() && player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
                     damage += player.inte;
                     damage += scalingBonusToughness() * 0.2;
@@ -8060,7 +8178,7 @@ public class Combat extends BaseContent {
 
     public function manaRecoveryMultiplier():Number {
         var multi:Number = 1;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.3;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
 		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
 		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
         if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
@@ -10100,7 +10218,7 @@ public class Combat extends BaseContent {
 		healingPercent += PercentBasedRegeneration();
         if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
         if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
-        HPChange(Math.round(((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()) * 0.04), false);
+        HPChange(Math.round(((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()) * 0.02), false);
 	}
 	public function regeneration1(combat:Boolean = true):void {
         var healingPercent:Number;
@@ -10226,7 +10344,7 @@ public class Combat extends BaseContent {
 
     public function fatigueRecovery(minutes:Number = 1):void {
         var fatigue1:Number = fatigueRecovery2();
-        fatigue1 *= 0.04;
+        fatigue1 *= 0.02;
 		fatigue(-Math.round(fatigue1 * minutes));
     }
     public function fatigueRecovery1(combat:Boolean = true):void {
@@ -10270,7 +10388,7 @@ public class Combat extends BaseContent {
 		gainedsoulforce *= soulforceRecoveryMultiplier();
 		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
-		gainedsoulforce = Math.round(gainedsoulforce * 0.04 * minutes);
+		gainedsoulforce = Math.round(gainedsoulforce * 0.02 * minutes);
 		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
@@ -10324,7 +10442,7 @@ public class Combat extends BaseContent {
     public function soulforceRecoveryMultiplier():Number {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.DaoistCultivator)) multi += 0.5;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.3;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
         if (player.alicornScore() >= 12) multi += 0.1;
         if (player.kitsuneScore() >= 5) {
             if (player.kitsuneScore() >= 10) multi += 1;
@@ -10338,7 +10456,7 @@ public class Combat extends BaseContent {
         var gainedmana:Number = 0;
         gainedmana += manaregeneration2();
         gainedmana *= manaRecoveryMultiplier();
-        gainedmana = Math.round(gainedmana * 0.04 * minutes);
+        gainedmana = Math.round(gainedmana * 0.02 * minutes);
         EngineCore.ManaChange(gainedmana, false);
     }
 	public function manaregeneration1(combat:Boolean = true):void {
@@ -10397,7 +10515,7 @@ public class Combat extends BaseContent {
 
     public function wrathregeneration(minutes:Number = 1):void {
         var gainedwrath:Number = 0;
-        if (player.hasPerk(PerkLib.AbsoluteStrength)) gainedwrath += wrathregeneration2() * 0.04 * minutes;
+        if (player.hasPerk(PerkLib.AbsoluteStrength)) gainedwrath += wrathregeneration2() * 0.02 * minutes;
 		else {
 			var LostWrathPerTick:Number = player.maxWrath();
 			LostWrathPerTick *= -0.01 * minutes;
@@ -10490,7 +10608,7 @@ public class Combat extends BaseContent {
 			else if (player.maxHunger() > 100) venomRecharge += 7.5;
 			else venomRecharge += 2.5;
 		}
-		venomRecharge = Math.round(venomRecharge * 0.2);
+		venomRecharge = Math.round(venomRecharge * 0.1);
 		return venomRecharge;
     }
 	public function venomCombatRecharge(minutes:Number = 1):void {
@@ -10504,7 +10622,7 @@ public class Combat extends BaseContent {
 			else if (player.maxHunger() > 100) venomRecharge += 7.5;
 			else venomRecharge += 2.5;
 		}
-		venomRecharge = Math.round(venomRecharge * 0.04 * minutes);
+		venomRecharge = Math.round(venomRecharge * 0.02 * minutes);
 		player.tailVenom += venomRecharge;
 		if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
     }
@@ -14306,9 +14424,9 @@ public class Combat extends BaseContent {
 		outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "they're":"his")+" blade arounds. ");
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 300 + rand(121);
-		damage += scalingBonusIntelligence() * 0.1;
-		damage += scalingBonusWisdom() * 0.15;
+		damage += 500 + rand(151);
+		damage += scalingBonusIntelligence() * 0.2;
+		damage += scalingBonusWisdom() * 0.4;
 		if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
@@ -14378,9 +14496,9 @@ public class Combat extends BaseContent {
 		outputText("Your Skeletons upon command gang up on [themonster] swarming from all side and leaving [monster him] stunned. ");
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 300 + rand(121);
-		damage += scalingBonusIntelligence() * 0.1;
-		damage += scalingBonusWisdom() * 0.15;
+		damage += 500 + rand(151);
+		damage += scalingBonusIntelligence() * 0.2;
+		damage += scalingBonusWisdom() * 0.4;
 		if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
@@ -14607,6 +14725,20 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modss += (player.cor * .01)/2;
         if (player.necklaceName == "Yin Yang Amulet") modss += .15;
         if (player.armorName == "Traditional clothes") modss += .4;
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) modss += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) modss += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) modss += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) modss += .2;
+			}
+			else {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) modss += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) modss += .2;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) modss += .3;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) modss += .4;
+			}
+		}
         modss = Math.round(modss * 100) / 100;
         return modss;
     }
@@ -14628,6 +14760,20 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssp += (player.cor * .01)/2;
         if (player.necklaceName == "Yin Yang Amulet") modssp += .15;
         if (player.armorName == "Traditional clothes") modssp += .4;
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) modssp += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) modssp += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) modssp += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) modssp += .2;
+			}
+			else {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) modssp += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) modssp += .2;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) modssp += .3;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) modssp += .4;
+			}
+		}
         modssp = Math.round(modssp * 100) / 100;
         return modssp;
     }
@@ -14673,6 +14819,20 @@ public class Combat extends BaseContent {
         if (player.necklaceName == "Yin Yang Amulet") modssm += .15;
         if (player.shieldName == "spirit focus") modssm += .25;
         if (player.armorName == "Traditional clothes") modssm += .4;
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) modssm += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) modssm += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) modssm += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) modssm += .2;
+			}
+			else {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) modssm += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) modssm += .2;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) modssm += .3;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) modssm += .4;
+			}
+		}
         modssm = Math.round(modssm * 100) / 100;
         return modssm;
     }
@@ -14825,6 +14985,13 @@ public class Combat extends BaseContent {
         ghostRealTou += ghostToughness();
         return ghostRealTou;
     }
+    private function ghostRealToughnessCompanion():Number {
+        var ghostRealStrCompanion:Number = 0;
+        if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") ghostRealStrCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") ghostRealStrCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") ghostRealStrCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
+        return ghostRealStrCompanion;
+    }
 
     private function ghostRealIntelligenceCompanion():Number {
         var ghostRealInteCompanion:Number = 0;
@@ -14883,6 +15050,11 @@ public class Combat extends BaseContent {
 
     public function scalingBonusToughness(randomize:Boolean = true):Number {
         return inteWisLibScale(ghostRealToughness(), randomize);
+    }
+
+    public function scalingBonusToughnessCompanion(randomize:Boolean = true):Number {
+        if (flags[kFLAGS.TOUGHNESS_SCALING] == 1) return touSpeStrScale(ghostRealToughnessCompanion());
+        else return inteWisLibScale(ghostRealToughnessCompanion(), randomize);
     }
 
     public function scalingBonusSpeed(randomize:Boolean = true):Number {

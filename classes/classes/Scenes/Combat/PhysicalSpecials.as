@@ -2143,11 +2143,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var dmgAMP:Number = 0;
 		if (player.hasPerk(PerkLib.ChargedCore)) dmgAMP += 0.5;
 		if (player.hasPerk(PerkLib.SuperChargedCore)) dmgAMP += 0.5;
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgAMP += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgAMP += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgAMP += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgAMP += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgAMP += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgAMP += 0.5;
@@ -2198,9 +2199,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golem slam into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Core shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*Golem Core wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2251,9 +2254,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 3;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2305,10 +2310,108 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 5;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
+		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function sendTemporalGolem4():void {
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 4;
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) damage += ((player.inte + player.wis) * 6);
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
+		if (!overloadedGolemCoresBag) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 4) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
+		damage *= 4;
+		dmgamp += temporalGolemsAplification();
+		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
+		damage = Math.round(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
+		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function sendTemporalGolem10():void {
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 10;
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) damage += ((player.inte + player.wis) * 6);
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
+		if (!overloadedGolemCoresBag) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 10) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
+		damage *= 10;
+		dmgamp += temporalGolemsAplification();
+		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
+		damage = Math.round(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
+		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function sendTemporalGolem20():void {
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 20;
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) damage += ((player.inte + player.wis) * 6);
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
+		if (!overloadedGolemCoresBag) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 20) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
+		damage *= 4;
+		dmgamp += temporalGolemsAplification();
+		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
+		damage = Math.round(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2340,9 +2443,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= usedGolems;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2350,39 +2455,106 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function permanentgolemsendcost():Number {
-		var permanentgolemsendcost:Number = 10;
-		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentgolemsendcost += 5;
-		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentgolemsendcost += 15;
-		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentgolemsendcost += 40;
+		var permanentgolemsendcost:Number = 20;
+		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentgolemsendcost += 10;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentgolemsendcost += 30;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentgolemsendcost += 80;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentgolemsendcost += 5;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentgolemsendcost += 5;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));//15% off each
+		permanentgolemsendcost = Math.round(permanentgolemsendcost);
 		return permanentgolemsendcost;
 	}
 	public function permanentimprovedgolemsendcost():Number {
 		var permanentimprovedgolemsendcost:Number = 250;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentimprovedgolemsendcost += 150;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentimprovedgolemsendcost += 400;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentimprovedgolemsendcost += 50;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentimprovedgolemsendcost += 50;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentimprovedgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentimprovedgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentimprovedgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));
+		permanentimprovedgolemsendcost = Math.round(permanentimprovedgolemsendcost);
 		return permanentimprovedgolemsendcost;
 	}
-	public function sendPermanentGolem1():void {
-		clearOutput();
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < permanentgolemsendcost()) {
-				outputText("Your mana is too low to make your golem attack.");
-				menu();
-				addButton(0, "Next", combatMenu, false);
-				return;
-			}
-			else useMana(permanentgolemsendcost());
+	public function permanentsteelgolemsendcost():Number {
+		var permanentsteelgolemsendcost:Number = 50;
+		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentsteelgolemsendcost += 25;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentsteelgolemsendcost += 75;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentsteelgolemsendcost += 200;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentsteelgolemsendcost += 10;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentsteelgolemsendcost += 10;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentsteelgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentsteelgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentsteelgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));
+		permanentsteelgolemsendcost = Math.round(permanentsteelgolemsendcost);
+		return permanentsteelgolemsendcost;
+	}
+	public function permanentimprovedsteelgolemsendcost():Number {
+		var permanentimprovedsteelgolemsendcost:Number = 625;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentimprovedsteelgolemsendcost += 100;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentimprovedsteelgolemsendcost += 100;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentimprovedsteelgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentimprovedsteelgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentimprovedsteelgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));
+		permanentimprovedsteelgolemsendcost = Math.round(permanentimprovedsteelgolemsendcost);
+		return permanentimprovedsteelgolemsendcost;
+	}
+	private function golemsDunks(damage:Number):void {
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
+			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
+			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
+			else doDamage(damage, true, true);
 		}
+		else doDamage(damage, true, true);
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) {
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
+				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
+				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
+				else doDamage(damage, true, true);
+			}
+			else doDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) > 1) {
+				if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+					if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
+					else doDamage(damage, true, true);
+				}
+				else doDamage(damage, true, true);
+			}
+		}
+	}
+	public function sendPermanentGolem1():void {
+		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
+		else outputText("\n\n");
+		if (player.mana < permanentgolemsendcost()) {
+			outputText("Your mana is too low to make your golem attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentgolemsendcost());
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		damage += ((player.inte + player.wis + 500 + rand(201)) * 2);
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2394,40 +2566,43 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golem slam into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		outputText("Your stone golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
-			menu();
-			addButton(0, "Next", combatMenu, false);
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
 		}
 		else enemyAI();
 	}
 	public function sendPermanentGolem3():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < permanentgolemsendcost() * 3) {
-				outputText("Your mana is too low to make your golems attack.");
-				menu();
-				addButton(0, "Next", combatMenu, false);
-				return;
-			}
-			else useMana(permanentgolemsendcost() * 3);
+		if (player.mana < permanentgolemsendcost() * 3) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
 		}
+		else useMana(permanentgolemsendcost() * 3);
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		damage += ((player.inte + player.wis + 500 + rand(201)) * 2);
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2439,11 +2614,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= 5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golems slams into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		outputText("Your stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
 			menu();
@@ -2453,27 +2630,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function sendPermanentGolem5():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < permanentgolemsendcost() * 5) {
-				outputText("Your mana is too low to make your golems attack.");
-				menu();
-				addButton(0, "Next", combatMenu, false);
-				return;
-			}
-			else useMana(permanentgolemsendcost() * 5);
+		if (player.mana < permanentgolemsendcost() * 5) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
 		}
+		else useMana(permanentgolemsendcost() * 5);
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		damage += ((player.inte + player.wis + 500 + rand(201)) * 2);
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2485,11 +2661,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= 10;
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golems slams into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		outputText("Your stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
 			menu();
@@ -2507,9 +2685,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else useMana(permanentimprovedgolemsendcost());
 		var damage:Number = 0;
-		var dmgamp:Number = 2.5;
-		damage += 15000 + rand(3001);
-		damage += combat.intwisscaling() * 0.3;
+		var dmgamp:Number = 2;
+		damage += ((player.inte + player.wis + 1500 + rand(501)) * 10);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.3;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2521,17 +2704,206 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		doDamage(damage);
-		outputText("Your improved stone golem slam into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. And then attack once again. <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
-		/*if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+		outputText("Your improved stone golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" And then attack once again. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
-		else */enemyAI();
+		else enemyAI();
+	}
+	public function sendPermanentImprovedGolem3():void {
+		clearOutput();
+		if (player.mana < permanentimprovedgolemsendcost() * 3) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentimprovedgolemsendcost() * 3);
+		var damage:Number = 0;
+		var dmgamp:Number = 2;
+		damage += ((player.inte + player.wis + 1500 + rand(501)) * 10);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.3;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= 5;
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your improved stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" And then attack once again. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
+	}
+	public function sendPermanentImprovedGolem5():void {
+		clearOutput();
+		if (player.mana < permanentimprovedgolemsendcost() * 5) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentimprovedgolemsendcost() * 5);
+		var damage:Number = 0;
+		var dmgamp:Number = 2;
+		damage += ((player.inte + player.wis + 1500 + rand(501)) * 10);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.3;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= 10;
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your improved stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" And then attack once again. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
+	}
+	public function sendPermanentSteelGolem1():void {
+		clearOutput();
+		if (player.mana < permanentsteelgolemsendcost()) {
+			outputText("Your mana is too low to make your golem attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentsteelgolemsendcost());
+		var damage:Number = 0;
+		var dmgamp:Number = 1.2;
+		damage += ((player.inte + player.wis + 750 + rand(251)) * 5);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your steel golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		else enemyAI();
+	}
+	public function sendPermanentImprovedSteelGolem1():void {
+		clearOutput();
+		if (player.mana < permanentimprovedsteelgolemsendcost()) {
+			outputText("Your mana is too low to make your golem attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentimprovedsteelgolemsendcost());
+		var damage:Number = 0;
+		var dmgamp:Number = 2.4;
+		damage += ((player.inte + player.wis + 2250 + rand(751)) * 25);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your improved steel golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" Then attack second time. ");
+		golemsDunks(damage);
+		outputText(" And finish with a third round. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		else enemyAI();
 	}
 
 	public function AlraunePollen():void {

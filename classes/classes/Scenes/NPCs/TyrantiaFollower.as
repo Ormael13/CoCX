@@ -11,9 +11,12 @@ import classes.internals.SaveableState;
 	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 	{
 		public static var TyraniaIsRemovedFromThewGame:Boolean;
-		public static var TyrantiaTalks:Number;
+		public static var TyraniaPostFinalKissScene:Boolean;
+		public static var TyraniaSeenFlitzy:Boolean;
+		public static var TyraniaAndIzumi:Boolean;
 		public static var TyrantiaAffectionMeter:Number;
 		public static var TyrantiaFollowerStage:Number;
+		public static var TyrantiaTrainingSessions:Number;
 
 		public function stateObjectName():String {
 			return "TyrantiaFollower";
@@ -21,26 +24,35 @@ import classes.internals.SaveableState;
 
 		public function resetState():void {
 			TyraniaIsRemovedFromThewGame = false;
-			TyrantiaTalks = 0;
+			TyraniaPostFinalKissScene = false;
+			TyraniaSeenFlitzy = false;
+			TyraniaAndIzumi = false;
 			TyrantiaAffectionMeter = 0;
 			TyrantiaFollowerStage = 0;
+			TyrantiaTrainingSessions = 0;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"TyraniaIsRemovedFromThewGame": TyraniaIsRemovedFromThewGame,
-				"TyrantiaTalks": TyrantiaTalks,
+				"TyraniaPostFinalKissScene": TyraniaPostFinalKissScene,
+				"TyraniaSeenFlitzy": TyraniaSeenFlitzy,
+				"TyraniaAndIzumi": TyraniaAndIzumi,
 				"TyrantiaAffectionMeter": TyrantiaAffectionMeter,
-				"TyrantiaFollowerStage": TyrantiaFollowerStage
+				"TyrantiaFollowerStage": TyrantiaFollowerStage,
+				"TyrantiaTrainingSessions": TyrantiaTrainingSessions
 			};
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
 				TyraniaIsRemovedFromThewGame = o["TyraniaIsRemovedFromThewGame"];
-				TyrantiaTalks = o["TyrantiaTalks"];
+				TyraniaPostFinalKissScene = o["TyraniaPostFinalKissScene"];
+				TyraniaSeenFlitzy = o["TyraniaSeenFlitzy"];
+				TyraniaAndIzumi = o["TyraniaAndIzumi"];
 				TyrantiaAffectionMeter = o["TyrantiaAffectionMeter"];
 				TyrantiaFollowerStage = o["TyrantiaFollowerStage"];
+				TyrantiaTrainingSessions = o["TyrantiaTrainingSessions"];
 			} else {
 				// loading from old save
 				resetState();
@@ -104,7 +116,7 @@ public function firstEncounterYesHideSurrender():void {
 	outputText("and dodges to one side as another golem comes hurtling through the space her upper body had been in before. She grabs it before it can hit you, spinning the hundreds of pounds of stone like a toy before slamming it into the ground, where it shatters.\n\n");
 	outputText("She looks at the golem leg in her hands, looks at you, looks back at the leg...then shrugs. \"<i>Okay, fair enough. Stupid thing wanted to hit you too.</i>\" A demon incubus claws his way out of the ruins, but the spider-giant turns, whipping the golem’s arm at the creature. It crushes the luckless demon’s skull, and she turns back to you, completely unphased.\n\n");
 	outputText("\"<i>So...who are you?</i>\" You tell her your name, that you’re a champion from Ignam, and that you’re no fan of demons either. \"<i>No Kiddin’? Well shit. Name’s Tyrantia. Sorry. I’m a bit busy right now, so why don’t you come back another time, and we’ll get a fresh start, okay?</i>\"\n\n");
-	//tyraniaAffection2(5);
+	tyraniaAffection2(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHiding():void {
@@ -119,7 +131,7 @@ public function firstEncounterYesNoHidingDunno():void {
 	clearOutput();
 	outputText("You shrug, not really knowing why you’d do that. She looks at you, dumbfounded, for a second, before bursting into uproarious laughter. A bit of black energy pulses around her, making your cheeks flush, but the laughter dies down quickly. \"<i>Y’know, for a little "+player.mf("guy","gal")+", you have some balls.</i>\" ");
 	outputText("You tell her that you’re [name], a Champion from Ignam, but she wheels about. A single demon crawls out from underneath a pillar and she turns, running after him. \"<i>Hey, I’ll talk to you another time!</i>\"\n\n");
-	//tyraniaAffection2(5);
+	tyraniaAffection2(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHidingTPolice():void {
@@ -130,7 +142,7 @@ public function firstEncounterYesNoHidingTPolice():void {
 	outputText("\"<i>Y’know, you cost me a bounty, shorty.</i>\" She reaches down, ruffling your [hair], \"<i>But I’m not even mad. That was fucking hilarious. I’m Tyrantia, but who are you?</i>\"\n\n");
 	outputText("You tell her that you’re [name], a champion from Ignam, and her five functioning eyes light up. \"<i>Oh?</i>\" She gives you a slap on the back. \"<i>Well, you’ve gotta show me what you can do sometime.</i>\" She sobers up a bit. ");
 	outputText("\"<i>But not today. I need to find me another demon to fight, and you, "+player.mf("mister","miss")+" ‘titty police’ should find someone else to arrest</i>\" She picks up her spear, giving you a sarcastic salute before striding away.\n\n");
-	//tyraniaAffection2(10);
+	tyraniaAffection2(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHidingFight():void {
@@ -177,7 +189,7 @@ public function postFightOptionsHealNicePerson():void {
 	outputText("You tell her that you didn’t want to hurt her, or leave her unable to defend herself.\n\n");
 	outputText("\"<i>...Who says I can’t fight?</i>\" You stifle your response, turning back towards her other injuries. After about an hour, she stands, looking down at you with a conflicted look on her face.");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	//tyraniaAffection2(6);
+	tyraniaAffection2(6);
 	cleanupAfterCombat();
 }
 public function postFightOptionsHealSex():void {
@@ -185,7 +197,7 @@ public function postFightOptionsHealSex():void {
 	outputText("You tell her that there are plenty of demons who’d love to get their hands on her body, and that you’d rather keep her to yourself.\n\n");
 	outputText("\"<i>Horndog,</i>\" she complains. \"<i>...Thank you, I guess.</i>\" After about an hour, she stands, looking down at you with a conflicted look on her face. ");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	//tyraniaAffection2(3);
+	tyraniaAffection2(3);
 	cleanupAfterCombat();
 }
 public function postFightOptionsKiss():void {
@@ -206,21 +218,24 @@ public function postFightOptionsKiss():void {
 	else {
 		outputText("\"<i>Look, [name], I...Don’t want this, no offense.</i>\" She tries to push back, and you back away. \"<i>Thanks. Look, I’ll be fine. I’ve got shit to do, and…</i>\" She tries to rise, unsuccessfully, and glares at you. \"<i>Just let me be.</i>\"\n\n");
 		outputText("You decide to leave the Drider Giantess alone, and give her a gentle goodbye as you head back to camp.\n\n");
-		//tyraniaAffection2(2);
-		cleanupAfterCombat();
+		tyraniaAffection2(2);
+		if (combat.inCombat) cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
 }
 public function postFightOptionsKissStop():void {
 	outputText("She sighs in relief, none of her eyes meeting yours. \"<i>Look…[name]. I...I have...Reasons for pushing you away. I’m sorry, I just…</i>\" The giantess looks close to tears, and you find yourself staring at her eyes. ");
 	outputText("\"<i>Don’t look at me like that. It’s not you. Marae knows it’s not you.</i>\" She lies there, still, and for a while, says and does nothing while several waves of black energy pours from her horn.\n\n");
-	//tyraniaAffection2(4);
-	cleanupAfterCombat();
+	tyraniaAffection2(4);
+	if (combat.inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 public function postFightOptionsKissKeepGoing():void {
 	outputText("You tell her that whatever’s wrong, she can tell you. You kiss her again, and she pushes you away, this time strong enough to dislodge you. She tries to stand, to stagger away, roaring in anger. \"<i>Weak! Stupid!</i>\" She falls again, staying down. ");
 	outputText("\"<i>Just LEAVE ME BE!</i>\" She blindly fires a black web at you, missing by a mile. You decide it’s time to leave, and the sobbing giant’s tears fade away behind you as you walk back towards camp.\n\n");
-	//tyraniaAffection2(-2);
-	cleanupAfterCombat();
+	tyraniaAffection2(-2);
+	if (combat.inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 public function postFightOptionsRape():void {
 	clearOutput();
@@ -241,9 +256,10 @@ public function repeatEncounterBattlefield():void {
 	outputText("You smile, chuckling at her embarrassment. \"<i>Sure, laugh it up, chucklehead.</i>\" Despite her words, she smiles, fangs out. As intimidating as her visage is, her smile is strangely wholesome, in a weird way. \"<i>Okay, what did you want, [name]? Don’t think you came out here for nothing.</i>\"\n\n");
 	menu();
 	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
-	//1 - Training
-	//2 - Spar
-	//3 - Sex
+	//1 - Spar
+	//2 - Hunt
+	addButton(3, "Kiss", postFightOptionsKiss);
+	//Training and Sex where?
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldRe():void {
@@ -251,9 +267,10 @@ public function repeatEncounterBattlefieldRe():void {
 	outputText("\"<i>Just a WiP text until something would get written for here.</i>\"\n\n");
 	menu();
 	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
-	//1 - Training
-	//2 - Spar
-	//3 - Sex
+	//1 - Spar
+	//2 - Hunt
+	addButton(3, "Kiss", postFightOptionsKiss);
+	//Training and Sex where?
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalk():void {
