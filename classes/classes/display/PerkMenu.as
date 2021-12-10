@@ -779,7 +779,7 @@ public class PerkMenu extends BaseContent {
 				else{
 					outputText("<font color=\"#008000\">");
 				}
-				outputText( mCount +"</font> of " + mutationCount + ". Max:(");
+				outputText( mCount +"</font> of " + (mutationCount > mPerkarray.length ? mPerkarray.length : mutationCount) + ". Max:(");
 				if (flags[kFLAGS.MUTATIONS_SPOILERS]){
 					outputText(mPerkarray.length + ")\n");
 				}
@@ -1088,6 +1088,7 @@ public class PerkMenu extends BaseContent {
 		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
 			if (!(mutationList.indexOf(pPerks) >= 0)){
+				//allPerks.splice(allPerks.indexOf(pPerks), 1);
 				temp.push(pPerks)
 			}
 		}
@@ -1150,9 +1151,9 @@ public class PerkMenu extends BaseContent {
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
+			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
 			for each (var perkTrue:PerkType in perkDict){
-				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
-					tPerkList.push(perkTrue);
+				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){					tPerkList.push(perkTrue);
 				}
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
@@ -1380,7 +1381,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			menu();
 			displayHeader("Perk Tier: " + tPVal);
-			outputText(tPerkList.length + "\n");
+			//outputText(tPerkList.length + "\n");
 			if (tPVal == 0){
 				outputText("Tier 0 contains all perks that do not have any requirements!\n");
 				outputText("It also contains perks that may not be handled in the standard manner.\n");
