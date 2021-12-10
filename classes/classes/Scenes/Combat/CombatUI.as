@@ -260,16 +260,8 @@ public class CombatUI extends BaseCombatContent {
 		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
 			menu();
 			addButton(0, "Recover", combat.wait);
-			if (player.hasStatusEffect(StatusEffects.KnowsClearMind) && !isPlayerPowerStunned()) {
-				var numb:Number = 50;
-				if (player.hasPerk(PerkLib.GrandGreyArchmage)) numb -= 50;
-				var badLustForGrey:Boolean = player.lust < numb || player.lust > (player.maxLust() - numb);
-				var bloodForBloodGod:Number = (player.HP - player.minHP());
-				if (badLustForGrey) addButtonDisabled(1, "Clear Mind", "You can't use any grey magics.");
-				else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your mana is too low to cast this spell.");
-				else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(100) && player.HP < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your hp is too low to cast this spell.");
-				else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(100)) addButtonDisabled(1, "Clear Mind", "Your hp is too low to cast this spell.");
-				else addButton(1, "Clear Mind", combat.magic.spellClearMind);
+			if (CombatAbilities.ClearMind.isKnown) {
+				CombatAbilities.ClearMind.createButton(monster).applyTo(button(1));
 			}
 		} else if (player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 			mainMenuWhenChanneling();
@@ -591,13 +583,13 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 		}
-		combat.magic.buildWhiteMenu(whiteSpellButtons);
-		combat.magic.buildBlackMenu(blackSpellButtons);
-		combat.magic.buildGreyMenu(greySpellButtons);
-		combat.magic.buildHexMenu(hexSpellButtons);
-		combat.magic.buildDivineMenu(divineSpellButtons);
-		combat.magic.buildNecroMenu(necroSpellButtons);
-		combat.magic.buildBloodMenu(bloodSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_WHITE_SPELLS, whiteSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_BLACK_SPELLS, blackSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_GREY_SPELLS, greySpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_HEX_SPELLS, hexSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_DIVINE_SPELLS, divineSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_NECRO_SPELLS, necroSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_BLOOD_SPELLS, necroSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
 		if (player.hasPerk(PerkLib.GreyMagic) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
@@ -605,6 +597,14 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.DivineKnowledge) && divineSpellButtons.length > 0) buttons.add("Divine", curry(submenu,divineSpellButtons, submenuSpells, 0, false)).hint("Open your Divine tome");
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && necroSpellButtons.length > 0) buttons.add("Necro Spells", curry(submenu,necroSpellButtons, submenuSpells, 0, false)).hint("Open your Necromicon");
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) && bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
+	}
+	
+	private function buildAbilityMenu(abilities:/*CombatAbility*/Array, buttons:ButtonDataList):void {
+		for each(var ability:CombatAbility in abilities) {
+			if (ability.isKnown) {
+				buttons.list.push(ability.createButton(monster));
+			}
+		}
 	}
 
 	private function isPlayerPlayingWithElementalsOrGolems():Boolean {
@@ -695,7 +695,7 @@ public class CombatUI extends BaseCombatContent {
 						btnContinue.show("Continue", combat.mspecials.trueDragonBreath, "Continue gathering elemental energy.");
 						break;
 					case 5:
-						btnContinue.show("Continue", combat.magic.spellPolarMidnight, "Continue casting Polar Midnight spell.");
+						btnContinue.show("Continue", CombatAbilities.PolarMidnight.buttonCallback, "Continue casting Polar Midnight spell.");
 						break;
 					case 6:
 						btnContinue.show("Continue", CombatAbilities.MeteorShower.buttonCallback, "Continue casting Meteor Shower spell.");

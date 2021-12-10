@@ -508,31 +508,31 @@ public function exgartuanCombatUpdate():Boolean {
 			select = rand(10);
 			switch(select) {
 				case 0:
-					outputText("Thoughts of " + monster.a + monster.short + ", wrapping " + monster.mf("him","her") + "self around your throbbing demonic member consume you, flooding your body with lust.");
+					outputText("Thoughts of [themonster], wrapping " + monster.mf("him","her") + "self around your throbbing demonic member consume you, flooding your body with lust.");
 					if(player.cor < 50) outputText("  You glance down at the sensitive bulge in your [armor] and sigh.  Damned demons.");
 					break;
 				case 1:
-					outputText("Desire courses through your veins, growing stronger as you watch " + monster.a + monster.short + "'s form.  You somehow realize the desire is artificial, but it doesn't make you want to mount " + monster.mf("him","her") + " any less...");
+					outputText("Desire courses through your veins, growing stronger as you watch [themonster]'s form.  You somehow realize the desire is artificial, but it doesn't make you want to mount " + monster.mf("him","her") + " any less...");
 					break;
 				case 2:
-					outputText("Warmth spreads throughout your body as visions of yourself mounting " + monster.a + monster.short + " over and over flutter through your mind.  You might have to make them a reality...");
+					outputText("Warmth spreads throughout your body as visions of yourself mounting [themonster] over and over flutter through your mind.  You might have to make them a reality...");
 					if(player.cor < 50) outputText("  That's terrible!  It's all that demon's fault!");
 					break;
 				case 3:
-					outputText("You really want to end this fight and bend " + monster.a + monster.short + " over... Why is this taking so long, your [cock] does NOT want to wait!");
+					outputText("You really want to end this fight and bend [themonster] over... Why is this taking so long, your [cock] does NOT want to wait!");
 					if(player.cor < 50) outputText("  You snap back to reality and curse yourself for falling to the demon's desires.");
 					break;
 				case 4:
-					outputText("This fight has gone on long enough; all you really want is to shove your [cock] into the " + monster.a + monster.short + "'s... Wait, what? Your possessed pecker is getting the better of you.");
+					outputText("This fight has gone on long enough; all you really want is to shove your [cock] into the [themonster]'s... Wait, what? Your possessed pecker is getting the better of you.");
 					break;
 				case 5:
-					outputText("For a moment, you find it hard to concentrate, visions of impaling the " + monster.a + monster.short + " with your [cock] etching their way into your mind.  Curse this horny demon!");
+					outputText("For a moment, you find it hard to concentrate, visions of impaling the [themonster] with your [cock] etching their way into your mind.  Curse this horny demon!");
 					break;
 				case 6:
 					outputText("Pleasure begins to radiate through your being, suddenly.  You snap back to your senses in time to see your hands stroking the bulge in your [armor], answering to the whims of an unholy force.");
 					break;
 				case 7:
-					outputText("Maybe it would be best to just lay down your arms and strip off your [armor]. Just give yourself up to the " + monster.a + monster.short + " and let fate decide. Surely, " + monster.pronoun1 + " would return the gesture by embracing your [cock] and... Augh!  The demon is again toying with your judgment.");
+					outputText("Maybe it would be best to just lay down your arms and strip off your [armor]. Just give yourself up to the [themonster] and let fate decide. Surely, [monster he] would return the gesture by embracing your [cock] and... Augh!  The demon is again toying with your judgment.");
 					break;
 				case 8:
 					outputText("Tight loving assholes and gaping vaginas, slick long red tongues and breasts like fine china.  Succubi and the hot sexings they bring, these are a few of your favorite things!  ...Wait, what?  Was that musing your own?  And why are you absently stroking your [cock]?");
@@ -552,7 +552,7 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("Without any control over it, your hands undo your [armor] and reveal your [cock].  Somehow it launches into a tirade all its own, \"<i>You call that a cock?  Seriously?  And do the girls actually like that?  I can't imagine why.  That's right bub, keep wilting, you've got nothing on me!</i>\"");
 					break;
 				case 1:
-					outputText("Heedless of your orders, both hands undo your gear, displaying your possessed member to " + monster.a + monster.short + ".  A disembodied voice taunts, \"<i>You really can't compete with me.  Seriously.  Take a good long look.  I'm the fucking business.  Why don't you tuck that pathetic excuse for a cock between your legs and chuck down some succubi milk until you're a girl?  You'd be better off.</i>\"");
+					outputText("Heedless of your orders, both hands undo your gear, displaying your possessed member to [themonster].  A disembodied voice taunts, \"<i>You really can't compete with me.  Seriously.  Take a good long look.  I'm the fucking business.  Why don't you tuck that pathetic excuse for a cock between your legs and chuck down some succubi milk until you're a girl?  You'd be better off.</i>\"");
 					break;
 				case 2:
 					outputText("Your [cock] squirms around, pushing your [armor] out of the way.  Exgartuan barks, \"<i>Why are you bothering my host, fool?  Can't you see my magnificence?  You're nothing compared to me.  Go wank in shame and get out of our way.  We have cunts to fill.</i>\"");
@@ -561,16 +561,16 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("The waist of your [armor] expands as your [cock] flies skyward fully erect, \"<i>Tremble in fear, peon! My " + num2Text(player.cocks[0].cockLength) + " inches of might shame that feeble nub between your legs.  We've no time for your slack-jawed awe; go home and be a family man.</i>\"");
 					break;
 				case 4:
-					outputText("Disobeying your will, your hands promptly undo your [armor], your [cock] springing forth and flaring its urethra menacingly at the " + monster.a + monster.short + ", \"<i>You have a dick not even a mother could love.  Has that thing ever graced another living being's flesh?  Run back to your lonely hovel full of unattainable fantasies, and leave the real action to the pros.</i>\"");
+					outputText("Disobeying your will, your hands promptly undo your [armor], your [cock] springing forth and flaring its urethra menacingly at the [themonster], \"<i>You have a dick not even a mother could love.  Has that thing ever graced another living being's flesh?  Run back to your lonely hovel full of unattainable fantasies, and leave the real action to the pros.</i>\"");
 					break;
 				case 5:
-					outputText("Suddenly, your [armor] pitches an impossible tent, the colossal bulge pointing directly at the " + monster.a + monster.short + ".  You can only wince in discomfort as the back of your outfit pushes against you while a muffled voice taunts, \"<i>How can something so insignificant remain so ANNOYING?  Your mere presence dulls the obvious radiance before you. DROP DEAD!</i>\"");
+					outputText("Suddenly, your [armor] pitches an impossible tent, the colossal bulge pointing directly at the [themonster].  You can only wince in discomfort as the back of your outfit pushes against you while a muffled voice taunts, \"<i>How can something so insignificant remain so ANNOYING?  Your mere presence dulls the obvious radiance before you. DROP DEAD!</i>\"");
 					break;
 				case 6:
 					outputText("Your [armor] unexpectedly opens itself of its own accord, prompting your [cock] to extend into the open air, \"<i>All the chemicals, potions, and morsels in existence can't help that infinitesimal tool you possess.  The orifices of this world deserve better!  All you are accomplishing this day is their disappointment in delaying the inevitable.</i>\"");
 					break;
 				case 7:
-					outputText("All of a sudden, your [armor] splays open, your [cock] quickly slithering up and around your back, stopping uncomfortably close to your face while pointing at your opponent, \"<i>Look at this pitiful cretin, [name].  We could be out spreading hot dickings to the wanting cunts of the land.  But, no!  This " + monster.a + monster.short + " desires eradication.  Well, champion...oblige him.</i>\"");
+					outputText("All of a sudden, your [armor] splays open, your [cock] quickly slithering up and around your back, stopping uncomfortably close to your face while pointing at your opponent, \"<i>Look at this pitiful cretin, [name].  We could be out spreading hot dickings to the wanting cunts of the land.  But, no!  This [themonster] desires eradication.  Well, champion...oblige him.</i>\"");
 					break;
 			}
 			monster.lust -= 5 + rand(10);
@@ -586,16 +586,16 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("A flirty female voice with a rumbling undertone of demonic corruption teases, \"<i>Why fight us?  Just sit back and watch the giant breasts jiggle.  Maybe if you're good we'll let you slide in between our wonderful mammaries.  Isn't that nice?</i>\"");
 					break;
 				case 1:
-					outputText("Your breasts wobble of their own accord, and " + monster.a + monster.short + " watches spellbound as they do so.  You silently thank Exgartuan for the help – maybe this fight will be easy.");
+					outputText("Your breasts wobble of their own accord, and [themonster] watches spellbound as they do so.  You silently thank Exgartuan for the help – maybe this fight will be easy.");
 					break;
 				case 2:
-					outputText("A girlish voice calls out to " + monster.a + monster.short + ", \"<i>Hey cutey pie!  Why not just give up and submit, and maybe we'll let you play with our wondrous breasts.  Wouldn't that be nice?</i>\"");
+					outputText("A girlish voice calls out to [themonster], \"<i>Hey cutey pie!  Why not just give up and submit, and maybe we'll let you play with our wondrous breasts.  Wouldn't that be nice?</i>\"");
 					break;
 				case 3:
-					outputText("Your " + chestDesc() + " begin to playfully bounce up and down, making it difficult for you to focus on your fight.  You aren't too worried, however, as the " + monster.a + monster.short + " seems to be hypnotized by the movement.");
+					outputText("Your " + chestDesc() + " begin to playfully bounce up and down, making it difficult for you to focus on your fight.  You aren't too worried, however, as the [themonster] seems to be hypnotized by the movement.");
 					break;
 				case 4:
-					outputText("A sultry woman's voice teases the " + monster.a + monster.short + ", \"<i>There's no need for hostilities, is there?  Merely lay down your arms and come help fondle these marvels of creation.</i>\"  Your " + chestDesc() + " shimmy for emphasis.");
+					outputText("A sultry woman's voice teases the [themonster], \"<i>There's no need for hostilities, is there?  Merely lay down your arms and come help fondle these marvels of creation.</i>\"  Your " + chestDesc() + " shimmy for emphasis.");
 					break;
 				case 5:
 					outputText("An alluring female voice perks up from seemingly nowhere, \"<i>We all know that you just want to nestle your head between these ferocious funbags.  No need to fight for them, just ask nicely!</i>\"");
@@ -612,7 +612,7 @@ public function exgartuanCombatUpdate():Boolean {
 			select = rand(3);
 			switch(select) {
 				case 0:
-					outputText("A brief fantasy of " + monster.a + monster.short + " brutally squeezing and caressing your chest fills your mind.  You break free of the twisted daydream and pull your hands away from your " + breastDescript(0) + ".  Damnit you're in combat!  There's no time for such foolishness!");
+					outputText("A brief fantasy of [themonster] brutally squeezing and caressing your chest fills your mind.  You break free of the twisted daydream and pull your hands away from your " + breastDescript(0) + ".  Damnit you're in combat!  There's no time for such foolishness!");
 					break;
 				case 1:
 					outputText("A blush colors your cheeks as warm pleasure spreads through your chest.  You spare a downward glance and nearly shriek when you see both hands busy massaging your massive mounds.  You don't have time for this!  You pull your hands away in a huff.");

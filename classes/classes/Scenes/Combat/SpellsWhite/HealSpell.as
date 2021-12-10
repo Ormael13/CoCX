@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.SpellsWhite {
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractWhiteSpell;
+import classes.Scenes.Combat.Combat;
 import classes.StatusEffects;
 
 public class HealSpell extends AbstractWhiteSpell {
@@ -13,6 +14,7 @@ public class HealSpell extends AbstractWhiteSpell {
 				[TAG_HEALING]
 		);
 		baseManaCost = 30;
+		useManaType = Combat.USEMANA_WHITE_HEAL;
 		isBloodMagicApplicable = false;
 		isLastResortApplicable = false;
 	}
@@ -21,13 +23,8 @@ public class HealSpell extends AbstractWhiteSpell {
 		return player.hasStatusEffect(StatusEffects.KnowsHeal);
 	}
 	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellHeal);
-	}
-	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellHeal,6,0,0,0);
+	override public function calcCooldown():int {
+		return 6;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

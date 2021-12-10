@@ -24,13 +24,8 @@ public class MentalShieldSpell extends AbstractWhiteSpell{
 		return "Protects against lust effects for "+calcDuration()+" rounds, halving the damage.  "
 	}
 	
-	override public function useResources():void {
-		super.useResources();
-		player.createStatusEffect(StatusEffects.CooldownSpellMentalShield,10,0,0,0);
-	}
-	
-	override public function get currentCooldown():int {
-		return player.statusEffectv1(StatusEffects.CooldownSpellMentalShield);
+	override public function calcCooldown():int {
+		return 10;
 	}
 	
 	override public function isActive():Boolean {
@@ -41,6 +36,14 @@ public class MentalShieldSpell extends AbstractWhiteSpell{
 		var mentalshieldduration:Number = 10;
 		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) mentalshieldduration *= 1.1;
 		return Math.round(mentalshieldduration)
+	}
+	
+	override public function advance(display:Boolean):void {
+		if (player.statusEffectv1(StatusEffects.MentalShield) <= 0) {
+			player.removeStatusEffect(StatusEffects.MentalShield);
+		} else {
+			player.addStatusValue(StatusEffects.MentalShield, 1, -1);
+		}
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

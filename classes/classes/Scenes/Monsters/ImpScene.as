@@ -27,7 +27,7 @@ use namespace CoC;
 			clearOutput();
 			var canFeed:Boolean = (player.hasStatusEffect(StatusEffects.Feeder));
 			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor);
-			outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
+			outputText("You smile in satisfaction as [themonster] collapses and begins masturbating feverishly.");
 			menu();
 			if (canFeed) {
 				if (player.lust >= 33)
@@ -39,7 +39,7 @@ use namespace CoC;
 			}
 			else {
 				clearOutput();
-				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
+				outputText("You smile in satisfaction as [themonster] collapses and begins masturbating feverishly.");
 				if (monster.HP <= 0) {
 					addButton(0, "Kill Him", killImp);
 					addButton(4, "Leave", cleanupAfterCombat);
@@ -624,7 +624,7 @@ use namespace CoC;
 			//Clear arrays in preparation
 			monster = new ImpGang();
 			outputText("\n");
-			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a + monster.short + "</b>!\n\n");
+			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by [themonster]</b>!\n\n");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) {
 				outputText("You look at the door to see that it's open. Shit. You forgot to lock the door before you've went to sleep!\n\n");
 			}

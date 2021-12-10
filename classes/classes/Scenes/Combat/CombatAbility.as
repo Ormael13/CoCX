@@ -10,7 +10,7 @@ import coc.view.ButtonData;
  * Handles checks for usability/knowledge, resource checks and usage, actual effect.
  *
  * Abilities are categorized with:
- * - **Type** - Spells (and their sub-types), soulskills, physical and magical specials and so on.
+ * - **Category&Type** - Spells (and their sub-types), soulskills, physical and magical specials and so on.
  * - **Target type** - Target self or enemy. Used in monster reactions, or to disable ability targeting invisible monster.
  * - **Timing type** - Duration of the ability:<ul>
  *     <li> Instant (happens immediately), </li>
@@ -19,16 +19,21 @@ import coc.view.ButtonData;
  * - **Tags** - A set of extra flags (damaging or buffing, primary element, AoE and others) that could be used in checks, reactions, or modifiers
  *
  * Subclasses MUST implement:
+ * - `category`
  * - `isKnown` (check if player knows the ability)
- * - `doEffect` (actual ability effect)
+ * - `doEffect` (actual ability effect. For spells, override `doSpellEffect` instead)
  *
  * and COULD implement:
  * - `usabilityCheck` (check is ability is usable and return reason text if not)
- * - `useResources` (use mana and other resources)
- * - `currentCooldown` (if on CD, return number of rounds)
+ * - `useResources` (use mana and other resources. Some subclasses can handle it themselves)
+ * - `calcCooldown` (cooldown between uses)
+ * - any resource cost and description generating functions
  *
- * Lasting abilities MUST implement:
+ * Lasting (and toggle) abilities MUST implement:
  * - `isActive`
+ * and COULD implement:
+ * - `advance` - called every turn
+ * - `isStackable` to allow casting ability while it's active
  *
  * Toggle abilities MUST implement:
  * - `toggleOff`
@@ -36,6 +41,11 @@ import coc.view.ButtonData;
  * See subclasses for further info.
  */
 public class CombatAbility extends BaseCombatContent {
+	/**
+	 * Array of all abilities.
+	 */
+	public static var Registry:/*CombatAbility*/Array = [];
+	private static var idCounter:int = 0;
 	
 	/**
 	 * This ability targets player only.
@@ -60,20 +70,55 @@ public class CombatAbility extends BaseCombatContent {
 	 * This ability adds an unstackable lasting effect that could be toggled off by caster
 	 */
 	public static const TIMING_TOGGLE:int = 2;
-	// TODO @aimozg Channeling (precast) timing
+	// TODO @aimozg Channeling (precast) timing type
+	// TODO @aimozg Reactive (cast automatically on some condition) timing type?
 	
 	public static const AllCategories:/*EnumValue*/Array = [];
 	
-	public static const CAT_UNIVERSAL:int        = EnumValue.add(AllCategories, 0, "UNIVERSAL", {name:"Universal"});
-	public static const CAT_PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {name:"Physical Special"});
-	public static const CAT_MAGICAL_SPECIAL:int  = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {name:"Magical Special"});
-	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {name:"Soulskill"});
-	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {name:"White Spell"});
-	public static const CAT_SPELL_BLACK:int     = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {name:"Black Spell"});
-	public static const CAT_SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {name:"Grey Spell"});
-	public static const CAT_SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {name:"Hex"});
-	public static const CAT_SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {name:"Necromancy Spell"});
-	public static const CAT_SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {name:"Blood Spell"});
+	public static const CAT_UNIVERSAL:int        = EnumValue.add(AllCategories, 0, "UNIVERSAL", {
+		name:"Universal",
+		group:"general"
+	});
+	public static const CAT_PHYSICAL_SPECIAL:int = EnumValue.add(AllCategories, 1, "PHYSICAL_SPECIAL", {
+		name:"Physical Special",
+		group:"special"
+	});
+	public static const CAT_MAGICAL_SPECIAL:int  = EnumValue.add(AllCategories, 2, "MAGICAL_SPECIAL", {
+		name:"Magical Special",
+		group:"special"
+	});
+	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {
+		name:"Soulskill",
+		group:"spell"
+	});
+	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {
+		name:"White Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_BLACK:int     = EnumValue.add(AllCategories, 5, "SPELL_BLACK", {
+		name:"Black Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_GREY:int = EnumValue.add(AllCategories, 6, "SPELL_GREY", {
+		name:"Grey Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_HEX:int = EnumValue.add(AllCategories, 7, "SPELL_HEX", {
+		name:"Hex",
+		group:"spell"
+	});
+	public static const CAT_SPELL_NECRO:int = EnumValue.add(AllCategories, 8, "SPELL_NECRO", {
+		name:"Necromancy Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_BLOOD:int = EnumValue.add(AllCategories, 9, "SPELL_BLOOD", {
+		name:"Blood Spell",
+		group:"spell"
+	});
+	public static const CAT_SPELL_DIVINE:int = EnumValue.add(AllCategories, 10, "SPELL_DIVINE", {
+		name:"Divine Spell",
+		group:"spell"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -116,7 +161,15 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Recovery',
 		desc: "This ability recovers player's stats (other than HP) and statuses."
 	});
+	public static const TAG_LUSTDMG:int = EnumValue.add(AllTags, 10, 'LUSTDMG', {
+		name: 'Arousing',
+		desc: "This ability deals lust damage."
+	});
 	
+	/**
+	 * Unique id of this ability.
+	 */
+	public var id:int;
 	private var _name:String;
 	private var _desc:String;
 	public var targetType:int;
@@ -132,6 +185,8 @@ public class CombatAbility extends BaseCombatContent {
 			timingType:int,
 			tags:/*int*/Array
 	) {
+		this.id = ++idCounter;
+		Registry[this.id] = this;
 		this._name = name;
 		this._desc = desc;
 		this.targetType = targetType;
@@ -151,7 +206,7 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	public function get buttonName():String {
-		return name;
+		return (timingType == TIMING_TOGGLE && isActive()) ? "Deactivate "+name : name;
 	}
 	
 	public function get category():int {
@@ -192,30 +247,65 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
+	 * (For lasting abilities) Return true if ability can be casted while it's still active
+	 */
+	public function isStackable():Boolean {
+		return false;
+	}
+	
+	/**
+	 * (For lasting/toggle abilities)
+	 * Called every round if ability is active. Reduce duration, do regular effect and such.
+	 * @param display Print the effect
+	 */
+	public function advance(display:Boolean):void {
+		/* do nothing */
+	}
+	
+	/**
+	 * @return {String[]} Array of strings like "Mana Cost: 50", "Cooldown: 10"
+	 */
+	public function costDescription():/*String*/Array {
+		var costs:/*String*/Array = [];
+		if (manaCost() > 0) {
+			costs.push("Mana Cost: " + manaCost());
+		}
+		if (wrathCost() > 0) {
+			costs.push("Wrath Cost: " + wrathCost());
+		}
+		if (hpCost() > 0) {
+			costs.push("HP Cost: " + hpCost());
+		}
+		var cd:int = calcCooldown();
+		if (cd > 0) {
+			costs.push("Cooldown: "+cd);
+		}
+		return costs;
+	}
+	
+	/**
 	 * @param target Monster to gauge effect against, or null if viewing outside combat.
 	 * @return {String} Ability description + costs, tags, and effects.
 	 */
 	public function fullDescription(target:Monster):String {
-		var fullDesc:String = description+"\n";
+		var fullDesc:String = "";
+		if (timingType == TIMING_TOGGLE && isActive()) {
+			fullDesc += "<b>Deactivate "+name+"</b>\n";
+		}
+		fullDesc += description + "\n";
 		
 		var effectDesc:String = describeEffectVs(target);
-		if (effectDesc) fullDesc += "<b>Effect: "+effectDesc+"</b>\n";
+		if (effectDesc) fullDesc += "\n<b>Effect: "+effectDesc+"</b>";
+		
+		var costs:/*String*/Array = costDescription();
+		if (costs.length > 0) fullDesc += "\n<b>" + costs.join(", ")+"</b>";
 		
 		var tags:/*int*/Array = presentTags();
 		if (tags.length > 0) {
-			fullDesc += "\n<b>Tags: " + tags.map(function(tag:int,index:int,array:Array):String {
+			fullDesc += "\nTags: " + tags.map(function(tag:int,index:int,array:Array):String {
 				return AllTags[tag].name;
-			}).join(", ")+"</b>";
+			}).join(", ");
 		}
-		
-		var costs:/*String*/Array = [];
-		if (baseManaCost > 0) {
-			costs.push("Mana Cost: " + manaCost());
-		}
-		if (baseWrathCost > 0) {
-			costs.push("Wrath Cost: " + wrathCost());
-		}
-		if (costs.length > 0) fullDesc += "\n" + costs.join(", ");
 		
 		return fullDesc
 	}
@@ -232,7 +322,8 @@ public class CombatAbility extends BaseCombatContent {
 		var fullDesc: String = fullDescription(target);
 		
 		var ucheck:String;
-		if (timingType == TIMING_TOGGLE) {
+		var deactivating:Boolean;
+		if (deactivating) {
 			ucheck = toggleOffUsabilityCheck();
 		} else {
 			ucheck = usabilityCheck();
@@ -242,7 +333,7 @@ public class CombatAbility extends BaseCombatContent {
 			bd.disable()
 		}
 		
-		bd.hint(fullDesc,name);
+		bd.hint(fullDesc,deactivating ? "Deactivate " + name : name);
 		return bd;
 	}
 	
@@ -280,30 +371,38 @@ public class CombatAbility extends BaseCombatContent {
 	 * DOES NOT clear output or proceed the enemy turn.
 	 * @param output Print texts
 	 * @param free Do not use resources or set cooldown
+	 * @param interceptable Can be intercepted by monster
 	 */
-	public function perform(output:Boolean=true,free:Boolean=false):void {
+	public function perform(output:Boolean=true,free:Boolean=false,interceptable:Boolean=true):void {
 		if (!free) {
+			setCooldown();
 			useResources();
 		}
-		if (!monster.interceptPlayerAbility(this)) {
+		if (!interceptable || !monster.interceptPlayerAbility(this)) {
 			doEffect(output);
 			monster.postPlayerAbility(this);
 		}
 	}
 	
-	public function toggleOff():void {
+	public function toggleOff(display:Boolean=true):void {
 		if (timingType == TIMING_TOGGLE) {
 			throw new Error("Cannot deactivate non-toggle ability "+name);
 		}
 		throw new Error("Method deactivate() not implemented for ability "+name);
 	}
 	
-	public function ensureToggledOff():void {
-		if (timingType == TIMING_TOGGLE && isActive()) toggleOff();
+	public function ensureToggledOff(display:Boolean=true):void {
+		if (timingType == TIMING_TOGGLE && isActive()) toggleOff(display);
+	}
+	
+	// "Use ablity" = setCooldown() + useResources() + doEffect()
+	
+	public function setCooldown():void {
+		player.cooldowns[id] = calcCooldown();
 	}
 	
 	/**
-	 * 1st part: use mana, set cooldown, increment counters etc.
+	 * Use mana, increment counters etc. At this point ability still might fail or be intercepted by monster
 	 */
 	public function useResources():void {
 		/* do nothing */
@@ -314,7 +413,7 @@ public class CombatAbility extends BaseCombatContent {
 	 * Can be used instead of perform to skip resource usage, cooldown, or monster interception
 	 */
 	public function doEffect(display:Boolean = true):void {
-		throw new Error("Method perform() not implemented for ability "+name);
+		throw new Error("Method doEffect() not implemented for ability "+name);
 	}
 	
 	public function manaCost():Number {
@@ -325,8 +424,23 @@ public class CombatAbility extends BaseCombatContent {
 		return baseWrathCost;
 	}
 	
+	public function hpCost():Number {
+		return 0;
+	}
+	
+	/**
+	 * Current cooldown (number of rounds left before it could be used again)
+	 */
 	public function get currentCooldown():int {
-		return 0
+		return player.cooldowns[id];
+	}
+	
+	/**
+	 * Calculate cooldown of this ability. Default is 0 (no cooldown).
+	 * Will be applied automatically.
+	 */
+	public function calcCooldown():int {
+		return 0;
 	}
 	
 	/**
@@ -334,11 +448,12 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	protected function usabilityCheck():String {
 		// Checks applicable to all abilities could go here
-		if (timingType == TIMING_LASTING && isActive()) {
+		if (timingType == TIMING_LASTING && !isStackable() && isActive()) {
 			return "This ability is already active."
 		}
-		if (currentCooldown > 0) {
-			return "You need more time before you can use this ability again."
+		var ccd:int = currentCooldown;
+		if (ccd > 0) {
+			return "You need to wait "+numberOfThings(ccd, "more round")+" before you can use this ability again."
 		}
 		return ""
 	}

@@ -38,19 +38,8 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx))
 	}
 	
-	override public function get currentCooldown():int {
-		return ex ? player.statusEffectv1(StatusEffects.CooldownSpellChainLightingEx)
-				: player.statusEffectv1(StatusEffects.CooldownSpellChainLighting);
-	}
-	
-	override public function useResources():void {
-		super.useResources(); // mana is used in AbstractSpell
-		player.createStatusEffect(
-				ex ?
-						StatusEffects.CooldownSpellChainLightingEx
-						: StatusEffects.CooldownSpellChainLighting,
-				spellWhiteCooldown(),0,0,0
-		);
+	override public function calcCooldown():int {
+		return spellWhiteCooldown();
 	}
 	
 	/**
@@ -68,16 +57,15 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You charge energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " ");
+			outputText("You charge energy in your hand and fire it out in the form of a powerful bolt of lightning at [themonster] ");
 			if (monster.plural) {
 				outputText("that jumps from one target to another");
 			}
 			outputText("!");
 		}
 		var damage:Number = calcDamage(monster);
-		critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
+		damage = critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		damage *= omnicasterRepeatCount();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
