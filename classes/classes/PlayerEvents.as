@@ -1997,26 +1997,37 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.isGoblinoid() && (!player.statStore.hasBuff('DrugInjector') || !player.statStore.hasBuff('Power bracer'))) {
-				outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 				if (!player.statStore.hasBuff('DrugInjector')) {
 					if (player.hasKeyItem("Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
 					}
 					if (player.hasKeyItem("Improved Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 					}
 					if (player.hasKeyItem("Potent Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
 					}
 				}
 					else {
 					if (player.hasKeyItem("Power bracer") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'})
 					}
 					if (player.hasKeyItem("Powboy") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'})
 					}
 					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
 					}
 				}
@@ -2035,7 +2046,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Marae corrupted or killed + Zenji
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && (flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1 || flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) && !ZenjiScenes.ZenjiMarae) {
-				outputText("\nZenji approaches you, \"<i>[name]. I.. I felt someting, not long ago. Someting terrible has happened, I feel it deep within me.</i>\"");
+				outputText("\nZenji approaches you, \"<i>[name]. I.. I felt something, not long ago. Someting terrible has happened, I feel it deep within me.</i>\"");
 				outputText("\n\nHe pulls you into his protective arms, \"<i>Stay close, [name], dis world just doesn’t feel right anymore.</i>\"");
 				ZenjiScenes.ZenjiMarae = true;
 				needNext = true;

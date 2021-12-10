@@ -10811,16 +10811,7 @@ use namespace CoC;
 			return kitsuneMutations;
 		}
 		public function maxAscensionBoost():Number {
-			var ascensionMax:Number = 0;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				ascensionMax++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				ascensionMax++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				ascensionMax++;
-			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				ascensionMax++;
-			return ascensionMax;
+			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
 		}
 
 		public function lactationQ():Number

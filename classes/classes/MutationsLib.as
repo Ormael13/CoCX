@@ -465,6 +465,9 @@ public class MutationsLib
 				MutationsList.push([KitsuneParathyroidGlands, KitsuneParathyroidGlandsEvolved, KitsuneParathyroidGlandsFinalForm]);
 				MutationsList.push([HellcatParathyroidGlands, HellcatParathyroidGlandsEvolved, HellcatParathyroidGlandsFinalForm]);
 			}
+			function mutationsDeprecated():void{
+				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm, LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, SalamanderAdrenalGlandsFinalForm, TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
+			}
 
 			switch(spec){
 				case "Heart":
@@ -511,6 +514,9 @@ public class MutationsLib
 					break;
 				case "PThyroid":
 					mutationsParaThyroidGlands();
+					break;
+				case "Deprecated":
+					mutationsDeprecated();
 					break;
 				default:
 					mutationsHeart();
