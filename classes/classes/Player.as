@@ -12406,19 +12406,21 @@ use namespace CoC;
 					currentSen += 50;
 				}
 			}
-			if (femaleMindbreakerScore() >= 15) {
+			if (femaleMindbreakerScore() >= 19) {
 				maxStrCap2 -= 60;
-				maxSpeCap2 -= 40;
-				maxIntCap2 += 450;
-				maxLibCap2 += 300;
+				maxSpeCap2 -= 10;
+				maxTouCap2 += 100;
+				maxIntCap2 += 550;
+				maxLibCap2 += 400;
 				maxWisCap2 -= 30;
 				currentSen += 50;
 			}
-			if (maleMindbreakerScore() >= 15) {
-				maxStrCap2 -= 60;
+			if (maleMindbreakerScore() >= 19) {
+				maxStrCap2 += 70;
 				maxSpeCap2 -= 40;
+				maxTouCap2 += 100;
 				maxIntCap2 += 450;
-				maxLibCap2 += 300;
+				maxLibCap2 += 400;
 				maxWisCap2 -= 30;
 				currentSen += 50;
 			}
