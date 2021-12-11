@@ -1186,7 +1186,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Fairy: " + player.fairyScore() + "</font>");
 		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Fairy: 0</font>");
 		//Female Mindbreaker
-		if (player.femaleMindbreakerScore() >= 19) outputText("\n<font color=\"#0000a0\">Mindbreaker: " + player.fairyScore() + " (-60% to Str racial multi, -10% to Spe racial multi, +100% to tou racial multi, +550% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
+		if (player.femaleMindbreakerScore() >= 19) outputText("\n<font color=\"#0000a0\">Mindbreaker: " + player.femaleMindbreakerScore() + " (-60% to Str racial multi, -10% to Spe racial multi, +100% to tou racial multi, +550% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
 		else if (player.femaleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Mindbreaker: 0</font>");
 		//Frost Wyrm
 		if (player.frostWyrmScore() >= 26) outputText("\n<font color=\"#0000a0\">Greater Frost Wyrm: " + player.frostWyrmScore() + " (+200% to Str racial multi, +90% to Spe racial multi, +160% to Tou racial multi, -90% to Int racial multi, +75% to Lib racial multi)</font>");
@@ -1341,7 +1341,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.magmagooScore() >= 1) outputText("\n<font color=\"#008000\">Half Magma Slime: " + player.magmagooScore() + "</font>");
 		else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Magma Slime: 0</font>");
 		//Male Mindbreaker
-		if (player.maleMindbreakerScore() >= 19) outputText("\n<font color=\"#0000a0\">Mindbreaker: " + player.fairyScore() + " (+70% to Str racial multi, -40% to Spe racial multi, +100% to tou racial multi, +450% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
+		if (player.maleMindbreakerScore() >= 19) outputText("\n<font color=\"#0000a0\">Mindbreaker: " + player.femaleMindbreakerScore() + " (+70% to Str racial multi, -40% to Spe racial multi, +100% to tou racial multi, +450% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
 		else if (player.maleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Mindbreaker: 0</font>");
 		//Manticore
 		if (player.manticoreScore() >= 22) outputText("\n<font color=\"#0000a0\">True Manticore: " + player.manticoreScore() + " (+160% to Spe racial multi, +90% to Int racial multi, +140% to Lib racial multi, +60 min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
@@ -1703,7 +1703,7 @@ public class PlayerAppearance extends BaseContent {
 		} else if (player.cocks[index].sock == "red")
 			cockSockDesc +="It's covered by a red cock-sock that seems to glow. Just wearing it makes you feel a bit powerful.";
 		else if (player.cocks[index].sock == "green")
-			cockSockDesc +="It's covered by a green cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.";
+			cockSockDesc +="It's covered by a green he cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.";
 		else if (player.cocks[index].sock == "blue")
 			cockSockDesc +="It's covered by a blue cock-sock that seems to glow. Just wearing it makes you feel like you can cast spells more effectively.";
 
