@@ -333,14 +333,14 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
+			mod1 -= player.cor / 100;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
 		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
-			mod2 -= player.cor / 10;
-			if (mod1 < 0.1) mod2 = 0.1;
+			mod2 -= player.cor / 100;
+			if (mod2 < 0.1) mod2 = 0.1;
 			mod += mod2;
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
@@ -410,6 +410,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -423,9 +424,15 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
+			mod1 -= player.cor / 100;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 100;
+			if (mod2 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -488,14 +495,14 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
+			mod1 -= player.cor / 100;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
 		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
-			mod2 -= player.cor / 10;
-			if (mod1 < 0.1) mod2 = 0.1;
+			mod2 -= player.cor / 100;
+			if (mod2 < 0.1) mod2 = 0.1;
 			mod += mod2;
 		}
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;

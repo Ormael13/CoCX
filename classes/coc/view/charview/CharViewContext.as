@@ -46,6 +46,7 @@ import coc.xlogic.ExecContext;
 				{
 					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
 					CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
+					MindBreakerPussy: player.vaginaType() == VaginaClass.MINDBREAKER,
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					SlimeCore: player.hasPerk(PerkLib.SlimeCore),
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),

@@ -4695,404 +4695,7 @@ public class Combat extends BaseContent {
         //Natural weapon Full attack list
         if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())) {
             IsFeralCombat = true;
-            //DOING BITE ATTACKS
-            if (player.hasABiteAttack()) {
-                var biteMultiplier:Number = 0.5;
-                outputText("You bite your foe, sinking your teeth in");
-                if (player.hasPerk(PerkLib.FenrirSpiritstrike) && !monster.hasPerk(PerkLib.EnemyTrueDemon)){
-                    biteMultiplier = 10;
-                    outputText(" and tearing at your foe's very soul!");
-                    HPChange(player.maxHP()*0.25,false);
-                }
-                if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
-                if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) {
-                    outputText(" and draw blood out.");
-                    if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                    else {
-                        monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
-                        monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                    }
-                }
-                if ((player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) && player.tailVenom >= player.VenomWebCost()) {
-                    outputText(" and inject your venom into their body!");
-                    if (player.faceType == Face.SNAKE_FANGS){
-						var DBPb:Number = 1;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
-                        monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
-                            monster.addStatusValue(StatusEffects.NagaVenom, 1, (DBPb * 0.4));
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, (DBPb * 0.4), 0.4, 0, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if(player.faceType == Face.SPIDER_FANGS){
-                        if (player.lowerBody == LowerBody.ATLACH_NACHA){
-                            outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-                            var damage3B:Number = 35 + rand(player.lib / 10);
-                            var poisonScaling:Number = 1;
-							var damage3Ba:Number = 1;
-                            poisonScaling += player.lib/100;
-                            poisonScaling += player.tou/100;
-                            if (player.level < 10) damage3B += 20 + (player.level * 3);
-                            else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
-                            else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
-                            else damage3B += 80;
-                            damage3B *= 0.2;
-							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage3Ba *= 2;
-							damage3B *= damage3Ba;
-							poisonScaling *= damage3Ba;
-                            damage3B *= 1 + (poisonScaling / 10);
-                            monster.teased(monster.lustVuln * damage3B);
-                            monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
-                            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                                monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
-                            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage3Ba, 0);
-                            player.tailVenom -= player.VenomWebCost();
-							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        } else {
-                            var lustDmg:int = 6 * monster.lustVuln;
-							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
-                            monster.teased(lustDmg);
-                            if (monster.lustVuln > 0) {
-                                monster.lustVuln += 0.01;
-                                if (monster.lustVuln > 1) monster.lustVuln = 1;
-                            }
-                            player.tailVenom -= player.VenomWebCost();
-							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        }
-                    }
-                }
-                outputText(".");
-                ExtraNaturalWeaponAttack(biteMultiplier);
-                outputText(".\n");
-                if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)){ //WTF, This can be so much simplier.
-                    biteMultiplier = 1;
-                    if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){
-                        biteMultiplier *= 2;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 3){
-                        biteMultiplier *= 3;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 4){
-                        biteMultiplier *= 4;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 5){
-                        biteMultiplier *= 5;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 6){
-                        biteMultiplier *= 6;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 7){
-                        biteMultiplier *= 7;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 8){
-                        biteMultiplier *= 8;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 9){
-                        biteMultiplier *= 9;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 10){
-                        biteMultiplier *= 10;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11){
-                        biteMultiplier *= 11;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                    else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12){
-                        biteMultiplier *= 12;
-                        outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                        ExtraNaturalWeaponAttack(biteMultiplier);
-                        outputText("\n");
-                    }
-                }
-            }
-            //DOING EXTRA CLAW ATTACKS
-            if (player.haveNaturalClaws()) {
-                var ClawDamageMultiplier:Number = 1;
-                if (player.arms.type == Arms.FROSTWYRM) ClawDamageMultiplier = 2;
-                if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
-                    outputText("You claw viciously at your opponent tearing away at its flesh.");
-                }
-                else {
-                    ClawDamageMultiplier *= 1.5;
-                    outputText("You slash at your opponent with your scythes leaving deep wounds");
-                    if (player.arms.type == Arms.KAMAITACHI){
-                        outputText(" that bleeds profusely");
-                    }
-                    outputText(".");
-                }
-                if (player.arms.type == Arms.KAMAITACHI){
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
-                }
-                if (player.arms.type == Arms.WENDIGO){
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
-                }
-                else{
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-                }
-                outputText("\n");
-                if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
-                    if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
-                        outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
-                        ExtraNaturalWeaponAttack();
-                        outputText("\n");
-                    } else  {
-                    outputText("The full moon grants you strength as you rend your opponent two more times with your claws.");
-                        ExtraNaturalWeaponAttack();
-                        ExtraNaturalWeaponAttack();
-                        outputText("\n");
-                    }
-                }
-                if (player.arms.type == Arms.DISPLACER)
-                {
-                    outputText("You use your extra arms to rend your opponent two more times.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    outputText("\n");
-                }
-                if (player.arms.type == Arms.WENDIGO)
-                {
-                    outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
-                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
-                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
-                    outputText("\n");
-                }
-            }
-            //CENTAUR TIME!
-            if (player.isTaur()) {
-                if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED){
-                    outputText("You rear up and trample your opponent with your hooves.");
-                }
-                else{
-                    outputText("You rear up and claw at your opponent with your forepaws.");
-                }
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                outputText("\n");
-            }
-            //POUNCING FOR THE KILL
-            if (player.canPounce()) {
-                outputText("You leap up at [monster a] [monster name] raking [monster him] with your hind claws twice.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                outputText("\n");
-            }
-            if (player.isFlying()){
-                if (player.hasTalonsAttack()){
-                    outputText("You rend at your opponent with your talons twice.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    outputText("\n");
-                }
-            }
-            //DEALING WING ATTACKS
-            if (player.hasAWingAttack())
-            {
-                if (player.wings.type == Wings.THUNDEROUS_AURA){
-                    outputText("You zap your opponent with your aura, delivering a set of arousing discharge");
-                    LustyEnergyNaturalWeaponAttack(0.20)
-                    LustyEnergyNaturalWeaponAttack(0.20)
-                    LustyEnergyNaturalWeaponAttack(0.20)
-                    LustyEnergyNaturalWeaponAttack(0.20)
-                    LustyEnergyNaturalWeaponAttack(0.20)
-                }
-                else{
-                    if (player.wings.type == Wings.WINDY_AURA){
-                        outputText("You unleash your sharp winds on your opponent delivering bruise and cuts");
-                    }
-                    else{
-                        outputText("You batter your foe with your two powerful wings");
-                    }
-                    if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE){
-                        //(If gargoyle stun proc)
-                        outputText(" the stony impact sending it reel to the side, dazed");
-                    }
-                    outputText(".");
-                    ExtraNaturalWeaponAttack(0.5);
-                }
-                outputText("\n");
-            }
-            //DOING HORN ATACK
-            if (player.hasAGoreAttack()) {
-                if (player.horns.type == Horns.UNICORN)
-                {
-                    outputText("You impale your foe on your horn, blood coating the tip.");
-                } else {
-                    outputText("You impale your foe on your horns, blood coating the tips.");
-                }
-                if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
-                else {
-                    monster.removeStatusEffect(StatusEffects.GoreBleed);
-                    monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
-                }
-                ExtraNaturalWeaponAttack(1.5);
-                outputText("\n");
-            }
-            //TAIL SLAPPING FOR THE KILL
-            if (player.hasATailSlapAttack()) {
-                var TailDamageMultiplier:Number = 1;
-                if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.FROSTWYRM) TailDamageMultiplier = 3;
-                if (player.tail.type == Tail.MANTICORE_PUSSYTAIL){
-                    outputText("You hiss and raise your tail. You strike at blinding speed impaling your opponent twice with your spike");
-                    if (player.tailVenom >= player.VenomWebCost()) {
-                        outputText(" and injecting your venom in the process");
-                        //TailVenomArea
-                        var lustdamage:Number = 35 + rand(player.lib / 10);
-						var lustDmg2:Number = 1;
-                        if (player.level < 10) lustdamage += 20 + (player.level * 3);
-                        else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
-                        else lustdamage += 80;
-                        lustdamage *= 0.14;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
-						lustdamage *= lustDmg2;
-                        monster.teased(monster.lustVuln * lustdamage, false);
-                        monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        if (player.tailVenom >= player.VenomWebCost()) {
-                            monster.teased(monster.lustVuln * lustdamage, false);
-                            monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
-                            player.tailVenom -= player.VenomWebCost();
-							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        }
-                    }
-                    outputText(".")
-                    ExtraNaturalWeaponAttack(0.5);
-                    ExtraNaturalWeaponAttack(0.5);
-                    outputText("\n")
-                }
-                if (player.tail.type == Tail.RAIJU || player.tail.type == Tail.THUNDERBIRD){
-                    outputText("You overcharge your tail in order to deliver a pleasant but electrifying caress to your opponent.");
-                    LustyEnergyNaturalWeaponAttack(1);
-                    outputText("\n")
-                }
-                else if (player.tail.type == Tail.SCORPION || player.tail.type == Tail.BEE_ABDOMEN ){
-                    outputText("You ready your stinger and plunge it deep into your opponent delivering your poison in the process");
-                    ExtraNaturalWeaponAttack(0.5);
-                    outputText("\n")
-                }
-                else{
-                    outputText("You hit your opponent with a slam of your mighty tail");
-                    if (player.tail.type == Tail.SALAMANDER) outputText(" setting your target on fire");
-                    if (player.tail.type == Tail.GARGOYLE) outputText(" leaving it dazed");
-                    outputText(".")
-                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
-                    outputText("\n");
-                }
-            }
-            //Unique attack Mantis Prayer
-            if (player.mantisScore() >= 12 && player.arms.type == Arms.MANTIS){
-                if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
-                    outputText("Taking advantage of your opponent obliviousness you strike four more times with your scythes.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    outputText("\n");
-                }
-                else{
-                    outputText("You lunge for two additional scythe slash.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    outputText("\n");
-                }
-            }
-            //Unique attack Kamaitachi Three way Cut
-            if (player.kamaitachiScore() >= 12 && player.arms.type == Arms.KAMAITACHI){
-                outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
-                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
-                if (player.hasABiteAttack()) {
-                    outputText("You head in for a bite sinking your teeth in.");
-                    ExtraNaturalWeaponAttack();
-                    outputText("\n");
-                }
-                outputText("You swirl for two more scythe slash.");
-                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
-                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
-                outputText("\n");
-                if (player.hasABiteAttack()) {
-                    outputText("You lunge for a final bite drawing blood out.");
-                    ExtraNaturalWeaponAttack();
-                    outputText("\n");
-                }
-            }
-            //Unique attack Slime
-            if (player.hasPerk(PerkLib.MorphicWeaponry)) {
-                outputText("You form tentacles out of your slimy body and batter your opponent with them.");
-                var TentacleDamageMultiplier:Number = Math.round(player.level/10);
-                ExtraNaturalWeaponAttack(0.5);
-            }
-
-            //Unique attack Alraune
-            if (player.isAlraune()) {
-                outputText("You lash at your opponent with your many vines striking twelve times.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
-            }
-
-            //Unique TENTACLES STRIKES
-            if ((player.isScylla() || player.isKraken()) && player.tallness >= 70){
-                if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
-                    outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
-                    if(player.isKraken()){
-                        ExtraNaturalWeaponAttack(1.5);
-                        ExtraNaturalWeaponAttack(1.5);
-                    }
-                    outputText("\n");
-                }
-            }
+            resolveFeralCombatAdditionnalAttacks()
         }
         // Do all other attacks
         meleeDamageAcc(IsFeralCombat);
@@ -5248,6 +4851,407 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
         // Do all other attacks
         meleeDamageAcc();
+    }
+
+    public function resolveFeralCombatAdditionnalAttacks():void {
+        //DOING BITE ATTACKS
+        if (player.hasABiteAttack()) {
+            var biteMultiplier:Number = 0.5;
+            outputText("You bite your foe, sinking your teeth in");
+            if (player.hasPerk(PerkLib.FenrirSpiritstrike) && !monster.hasPerk(PerkLib.EnemyTrueDemon)){
+                biteMultiplier = 10;
+                outputText(" and tearing at your foe's very soul!");
+                HPChange(player.maxHP()*0.25,false);
+            }
+            if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
+            if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) {
+                outputText(" and draw blood out.");
+                if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+                else {
+                    monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
+                    monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+                }
+            }
+            if ((player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) && player.tailVenom >= player.VenomWebCost()) {
+                outputText(" and inject your venom into their body!");
+                if (player.faceType == Face.SNAKE_FANGS){
+                    var DBPb:Number = 1;
+                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
+                    monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
+                    if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+                        monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
+                        monster.addStatusValue(StatusEffects.NagaVenom, 1, (DBPb * 0.4));
+                    } else monster.createStatusEffect(StatusEffects.NagaVenom, (DBPb * 0.4), 0.4, 0, 0);
+                    player.tailVenom -= player.VenomWebCost();
+                    flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                }
+                if(player.faceType == Face.SPIDER_FANGS){
+                    if (player.lowerBody == LowerBody.ATLACH_NACHA){
+                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+                        var damage3B:Number = 35 + rand(player.lib / 10);
+                        var poisonScaling:Number = 1;
+                        var damage3Ba:Number = 1;
+                        poisonScaling += player.lib/100;
+                        poisonScaling += player.tou/100;
+                        if (player.level < 10) damage3B += 20 + (player.level * 3);
+                        else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
+                        else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
+                        else damage3B += 80;
+                        damage3B *= 0.2;
+                        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage3Ba *= 2;
+                        damage3B *= damage3Ba;
+                        poisonScaling *= damage3Ba;
+                        damage3B *= 1 + (poisonScaling / 10);
+                        monster.teased(monster.lustVuln * damage3B);
+                        monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+                            monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
+                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage3Ba, 0);
+                        player.tailVenom -= player.VenomWebCost();
+                        flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                    } else {
+                        var lustDmg:int = 6 * monster.lustVuln;
+                        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
+                        monster.teased(lustDmg);
+                        if (monster.lustVuln > 0) {
+                            monster.lustVuln += 0.01;
+                            if (monster.lustVuln > 1) monster.lustVuln = 1;
+                        }
+                        player.tailVenom -= player.VenomWebCost();
+                        flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                    }
+                }
+            }
+            outputText(".");
+            ExtraNaturalWeaponAttack(biteMultiplier);
+            outputText(".\n");
+            if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)){ //WTF, This can be so much simplier.
+                biteMultiplier = 1;
+                if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){
+                    biteMultiplier *= 2;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 3){
+                    biteMultiplier *= 3;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 4){
+                    biteMultiplier *= 4;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 5){
+                    biteMultiplier *= 5;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 6){
+                    biteMultiplier *= 6;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 7){
+                    biteMultiplier *= 7;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 8){
+                    biteMultiplier *= 8;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 9){
+                    biteMultiplier *= 9;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 10){
+                    biteMultiplier *= 10;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11){
+                    biteMultiplier *= 11;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12){
+                    biteMultiplier *= 12;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    outputText("\n");
+                }
+            }
+        }
+        //DOING EXTRA CLAW ATTACKS
+        if (player.haveNaturalClaws()) {
+            var ClawDamageMultiplier:Number = 1;
+            if (player.arms.type == Arms.FROSTWYRM) ClawDamageMultiplier = 2;
+            if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
+                outputText("You claw viciously at your opponent tearing away at its flesh.");
+            }
+            else {
+                ClawDamageMultiplier *= 1.5;
+                outputText("You slash at your opponent with your scythes leaving deep wounds");
+                if (player.arms.type == Arms.KAMAITACHI){
+                    outputText(" that bleeds profusely");
+                }
+                outputText(".");
+            }
+            if (player.arms.type == Arms.KAMAITACHI){
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
+            }
+            if (player.arms.type == Arms.WENDIGO){
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+            }
+            else{
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+            }
+            outputText("\n");
+            if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
+                if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
+                    outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
+                    ExtraNaturalWeaponAttack();
+                    outputText("\n");
+                } else  {
+                    outputText("The full moon grants you strength as you rend your opponent two more times with your claws.");
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    outputText("\n");
+                }
+            }
+            if (player.arms.type == Arms.DISPLACER)
+            {
+                outputText("You use your extra arms to rend your opponent two more times.");
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                outputText("\n");
+            }
+            if (player.arms.type == Arms.WENDIGO)
+            {
+                outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
+                ExtraNaturalWeaponAttack(1, "WendigoClaw");
+                ExtraNaturalWeaponAttack(1, "WendigoClaw");
+                outputText("\n");
+            }
+        }
+        //CENTAUR TIME!
+        if (player.isTaur()) {
+            if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED){
+                outputText("You rear up and trample your opponent with your hooves.");
+            }
+            else{
+                outputText("You rear up and claw at your opponent with your forepaws.");
+            }
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            outputText("\n");
+        }
+        //POUNCING FOR THE KILL
+        if (player.canPounce()) {
+            outputText("You leap up at [monster a] [monster name] raking [monster him] with your hind claws twice.");
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            outputText("\n");
+        }
+        if (player.isFlying()){
+            if (player.hasTalonsAttack()){
+                outputText("You rend at your opponent with your talons twice.");
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                outputText("\n");
+            }
+        }
+        //DEALING WING ATTACKS
+        if (player.hasAWingAttack())
+        {
+            if (player.wings.type == Wings.THUNDEROUS_AURA){
+                outputText("You zap your opponent with your aura, delivering a set of arousing discharge");
+                LustyEnergyNaturalWeaponAttack(0.20)
+                LustyEnergyNaturalWeaponAttack(0.20)
+                LustyEnergyNaturalWeaponAttack(0.20)
+                LustyEnergyNaturalWeaponAttack(0.20)
+                LustyEnergyNaturalWeaponAttack(0.20)
+            }
+            else{
+                if (player.wings.type == Wings.WINDY_AURA){
+                    outputText("You unleash your sharp winds on your opponent delivering bruise and cuts");
+                }
+                else{
+                    outputText("You batter your foe with your two powerful wings");
+                }
+                if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE){
+                    //(If gargoyle stun proc)
+                    outputText(" the stony impact sending it reel to the side, dazed");
+                }
+                outputText(".");
+                ExtraNaturalWeaponAttack(0.5);
+            }
+            outputText("\n");
+        }
+        //DOING HORN ATACK
+        if (player.hasAGoreAttack()) {
+            if (player.horns.type == Horns.UNICORN)
+            {
+                outputText("You impale your foe on your horn, blood coating the tip.");
+            } else {
+                outputText("You impale your foe on your horns, blood coating the tips.");
+            }
+            if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
+            else {
+                monster.removeStatusEffect(StatusEffects.GoreBleed);
+                monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
+            }
+            ExtraNaturalWeaponAttack(1.5);
+            outputText("\n");
+        }
+        //TAIL SLAPPING FOR THE KILL
+        if (player.hasATailSlapAttack()) {
+            var TailDamageMultiplier:Number = 1;
+            if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.FROSTWYRM) TailDamageMultiplier = 3;
+            if (player.tail.type == Tail.MANTICORE_PUSSYTAIL){
+                outputText("You hiss and raise your tail. You strike at blinding speed impaling your opponent twice with your spike");
+                if (player.tailVenom >= player.VenomWebCost()) {
+                    outputText(" and injecting your venom in the process");
+                    //TailVenomArea
+                    var lustdamage:Number = 35 + rand(player.lib / 10);
+                    var lustDmg2:Number = 1;
+                    if (player.level < 10) lustdamage += 20 + (player.level * 3);
+                    else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+                    else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+                    else lustdamage += 80;
+                    lustdamage *= 0.14;
+                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
+                    lustdamage *= lustDmg2;
+                    monster.teased(monster.lustVuln * lustdamage, false);
+                    monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
+                    player.tailVenom -= player.VenomWebCost();
+                    flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                    if (player.tailVenom >= player.VenomWebCost()) {
+                        monster.teased(monster.lustVuln * lustdamage, false);
+                        monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
+                        player.tailVenom -= player.VenomWebCost();
+                        flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                    }
+                }
+                outputText(".")
+                ExtraNaturalWeaponAttack(0.5);
+                ExtraNaturalWeaponAttack(0.5);
+                outputText("\n")
+            }
+            if (player.tail.type == Tail.RAIJU || player.tail.type == Tail.THUNDERBIRD){
+                outputText("You overcharge your tail in order to deliver a pleasant but electrifying caress to your opponent.");
+                LustyEnergyNaturalWeaponAttack(1);
+                outputText("\n")
+            }
+            else if (player.tail.type == Tail.SCORPION || player.tail.type == Tail.BEE_ABDOMEN ){
+                outputText("You ready your stinger and plunge it deep into your opponent delivering your poison in the process");
+                ExtraNaturalWeaponAttack(0.5);
+                outputText("\n")
+            }
+            else{
+                outputText("You hit your opponent with a slam of your mighty tail");
+                if (player.tail.type == Tail.SALAMANDER) outputText(" setting your target on fire");
+                if (player.tail.type == Tail.GARGOYLE) outputText(" leaving it dazed");
+                outputText(".")
+                ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                outputText("\n");
+            }
+        }
+        //Unique attack Mantis Prayer
+        if (player.mantisScore() >= 12 && player.arms.type == Arms.MANTIS){
+            if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
+                outputText("Taking advantage of your opponent obliviousness you strike four more times with your scythes.");
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                outputText("\n");
+            }
+            else{
+                outputText("You lunge for two additional scythe slash.");
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                outputText("\n");
+            }
+        }
+        //Unique attack Kamaitachi Three way Cut
+        if (player.kamaitachiScore() >= 12 && player.arms.type == Arms.KAMAITACHI){
+            outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
+            ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
+            if (player.hasABiteAttack()) {
+                outputText("You head in for a bite sinking your teeth in.");
+                ExtraNaturalWeaponAttack();
+                outputText("\n");
+            }
+            outputText("You swirl for two more scythe slash.");
+            ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
+            ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
+            outputText("\n");
+            if (player.hasABiteAttack()) {
+                outputText("You lunge for a final bite drawing blood out.");
+                ExtraNaturalWeaponAttack();
+                outputText("\n");
+            }
+        }
+        //Unique attack Slime
+        if (player.hasPerk(PerkLib.MorphicWeaponry)) {
+            outputText("You form tentacles out of your slimy body and batter your opponent with them.");
+            var TentacleDamageMultiplier:Number = Math.round(player.level/10);
+            ExtraNaturalWeaponAttack(0.5);
+        }
+
+        //Unique attack Alraune
+        if (player.isAlraune()) {
+            outputText("You lash at your opponent with your many vines striking twelve times.");
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+            ExtraNaturalWeaponAttack();
+        }
+
+        //Unique TENTACLES STRIKES
+        if ((player.isScylla() || player.isKraken()) && player.tallness >= 70){
+            if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
+                outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                if(player.isKraken()){
+                    ExtraNaturalWeaponAttack(1.5);
+                    ExtraNaturalWeaponAttack(1.5);
+                }
+                outputText("\n");
+            }
+        }
     }
 
     public function CommasForDigits(damage:Number):void {
@@ -14718,7 +14722,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
-            mod1 -= player.cor / 10;
+            mod1 -= player.cor / 100;
             if (mod1 < 0.1) mod1 = 0.1;
             modss += mod1;
         }
@@ -14753,7 +14757,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
-            mod1 -= player.cor / 10;
+            mod1 -= player.cor / 100;
             if (mod1 < 0.1) mod1 = 0.1;
             modssp += mod1;
         }
@@ -14811,7 +14815,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
-            mod1 -= player.cor / 10;
+            mod1 -= player.cor / 100;
             if (mod1 < 0.1) mod1 = 0.1;
             modssm += mod1;
         }

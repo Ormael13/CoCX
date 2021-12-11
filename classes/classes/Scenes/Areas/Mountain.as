@@ -16,6 +16,7 @@ import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
 
@@ -240,7 +241,21 @@ public class Mountain extends BaseContent
 							return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
 						},
 						call: SceneLib.tedScene.introPostHiddenCave
-					},{
+					}, {
+						name  : "mindbreaker",
+						call  : SceneLib.mindbreaker.findMindbreaker,
+						chance: 0.50,
+						when  : function ():Boolean {
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
+						}
+					}, {
+						name  : "mindbreaker",
+						call  : SceneLib.mindbreaker.findMindbreakerAgain,
+						chance: 0.50,
+						when  : function ():Boolean {
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations()
+						}
+					}, {
 						name:"hike",
 						chance:0.2,
 						call:hike

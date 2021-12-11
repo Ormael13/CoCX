@@ -91,6 +91,7 @@
             <color name="dark2">#352722</color>
             <color name="dusky">#f000f0</color>
             <color name="ebony">#3d3529</color>
+			<color name="eldritch green">#87d981</color>
             <color name="emerald">#4cc875</color>
             <color name="fair">#edccbf</color>
             <color name="golden">#ffdd00</color>
@@ -164,6 +165,7 @@
             <color name="platinum-blonde">#ffe5c7</color>
             <color name="purplish-black">#7d597a</color>
             <color name="dark purple">#a700bd</color>
+			<color name="eldritch purple">#7a5f95</color>
             <color name="quartz white">#ffffff</color>
             <color name="pure white">#ffffff</color>
             <color name="reddish-orange">#df8453</color>
@@ -408,6 +410,7 @@
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
         <cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
+		<cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
@@ -430,6 +433,7 @@
         <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="1051,150,49,59" name="hands/gnomeLeft" dx="63" dy="42"/>
         <cell rect="1051,210,49,59" name="hands/gnomeRight" dx="60" dy="46"/>
+		<cell rect="901,330,49,59" name="hands/mindbreaker" dx="97" dy="74"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="105" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="851,270,49,59" name="overhands/ratatoskrLeft" dx="56" dy="64"/>
@@ -474,6 +478,7 @@
         <cell rect="547,611,90,90" name="legs/gargoyle_sit" dx="60" dy="61"/>
         <cell rect="1,1304,90,59" name="legs_truefg/gazer" dx="41" dy="98"/>
         <cell rect="729,611,90,90" name="legs/elemental" dx="57" dy="97"/>
+		<cell rect="729,702,90,90" name="legs/mindbreaker" dx="60" dy="99"/>
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
@@ -544,6 +549,7 @@
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="77" dy="50"/>
         <cell rect="162,27,54,31" name="neck/centipede" dx="77" dy="49"/>
+		<cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
         <cell rect="992,641,173,156" name="wings/gazer" dx="22" dy="10"/>
@@ -672,15 +678,17 @@
         <cell rect="1013,56,40,13" name="clothCape/TamamoeNoMaeKimonoCollar" dx="85" dy="68"/>
         <cell rect="229,13,40,13" name="clothCape/OniKimonoCollar" dx="85" dy="68"/>
         <cell rect="607,56,40,13" name="clothCape/IceQueenKimonoCollar" dx="85" dy="68"/>
+		<cell rect="150,155,49,25" name="clothCape/mindbreaker" dx="79" dy="53"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
         <cell rect="2083,216,80,100" name="clothCape_bg/elfClotheCape_bg" dx="65" dy="64"/>
+		<cell rect="1166,641,173,156" name="clothCape_bg/mindbreaker" dx="20" dy="29"/>
         <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
         <cell rect="1822,158,20,55" name="glove_fg/elfClothingRightArmFront" dx="104" dy="52"/>
-        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="147" dy="132"/>
+        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="133" dy="135"/>
         <cell rect="296,1550,99,45" name="uniquePlantBath/lilirauneBath" dx="34" dy="88"/>
         <cell rect="546,1430,50,100" name="torso/liliraune" dx="36" dy="26"/>
         <cell rect="296,1596,85,20" name="face/lilirauneCorruptedSmile" dx="34" dy="50"/>
@@ -765,6 +773,8 @@
         <cell rect="61,136,59,65" name="hair_bg/feather" dx="75" dy="21"/>
         <cell rect="481,136,59,65" name="hair/ratatoskr" dx="75" dy="21"/>
         <cell rect="541,136,59,65" name="hair_bg/ratatoskr" dx="75" dy="21"/>
+		<cell rect="601,136,59,65" name="hair/mindbreaker" dx="73" dy="24"/>
+		<cell rect="661,136,59,65" name="hair/mindbreakerMale" dx="73" dy="24"/>
         <cell rect="121,70,59,65" name="hair/gorgon" dx="75" dy="21"/>
         <cell rect="121,136,59,65" name="hair_bg/gorgon" dx="75" dy="21"/>
         <cell rect="1,251,89,98" name="hair/slime" dx="60" dy="4"/>
@@ -829,6 +839,7 @@
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
         <cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
+		<cell rect="691,110,29,32" name="antennae/mindbreakerMale" dx="90" dy="50"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -844,6 +855,7 @@
         <cell rect="361,150,29,32" name="eyes/caveWyrm" dx="90" dy="37"/>
         <cell rect="391,150,29,32" name="eyes/gazer" dx="90" dy="37"/>
         <cell rect="421,150,29,32" name="eyes/gremlin" dx="90" dy="37"/>
+		<cell rect="481,150,29,32" name="eyes/mindbreakerMale" dx="90" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="90" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="90" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="75" dy="36"/>
@@ -966,6 +978,7 @@
         <cell rect="361,230,49,58" name="penis/chitinbig" dx="78" dy="106"/>
         <cell rect="561,290,49,35" name="penis/caveWyrm" dx="78" dy="106"/>
         <cell rect="561,230,49,58" name="penis/caveWyrmbig" dx="77" dy="108"/>
+		<cell rect="461,200,49,29" name="penis/mindbreakerdrip" dx="73" dy="134"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -1056,6 +1069,7 @@
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="80" dy="99"/>
         <cell rect="311,200,49,29" name="overskinpanty/Ookumukadevenom" dx="75" dy="104"/>
         <cell rect="361,200,49,29" name="overskinpanty/caveWyrm" dx="80" dy="112"/>
+		<cell rect="411,200,49,29" name="overskinpanty/mindbreaker" dx="80" dy="112"/>
         <cell rect="61,410,49,29" name="bra_fg/qipaoRedBraSmall" dx="79" dy="68"/>
         <cell rect="61,440,49,29" name="bra_fg/qipaoRedBraMedium" dx="79" dy="68"/>
         <cell rect="61,470,49,29" name="bra_fg/qipaoRedBraLarge" dx="79" dy="68"/>
@@ -1167,7 +1181,7 @@
         <cell rect="508,421,168,69" name="tail/balrog" dx="19" dy="90"/>
         <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
         <cell rect="677,421,168,69" name="tail/dragon" dx="18" dy="90"/>
-        <cell rect="677,421,168,69" name="tail/dragon_taur" dx="74" dy="93"/>
+        <cell rect="677,421,168,69" name="tail/dragon_taur" dx="62" dy="104"/>
         <cell rect="1,491,83,69" name="tail/bunny" dx="95" dy="90"/>
         <cell rect="1,491,83,69" name="tail/bunny_taur" dx="141" dy="97"/>
         <cell rect="86,491,83,69" name="tail/goat" dx="94" dy="103"/>
@@ -1903,6 +1917,9 @@
 			<case values="Eyes.MONOEYE">
                 <show part="eyes/gazer"/>
             </case>
+			<case values="Eyes.MINDBREAKERMALE">
+                <show part="eyes/mindbreakerMale"/>
+            </case>
             <default>
                 <show part="eyes/human"/>
             </default>
@@ -1962,6 +1979,11 @@
 			<case values="RearBody.ATLACH_NACHA">
                 <show part="wings/atlach"/>
 				<show part="wings_bg/atlach"/>
+            </case>
+			<case values="RearBody.MINDBREAKER">
+                <show part="neck/mindbreaker"/>
+				<show part="clothCape/mindbreaker"/>
+				<show part="clothCape_bg/mindbreaker"/>
             </case>
             <default>
             </default>
@@ -2091,6 +2113,30 @@
                         </default>
                     </switch>
                 </case>
+				<case values="Hair.MINDBREAKER">
+					<switch>
+                        <case test="hairLength lt 16">
+							<show part="hair/mindbreaker"/>
+							<show part="hair_bg/mindbreaker"/>
+                        </case>
+                        <default>
+                            <show part="hair/mindbreaker"/>
+							<show part="hair_bg/mindbreaker"/>
+                        </default>
+                    </switch>
+                </case>
+				<case values="Hair.MINDBREAKERMALE">
+					<switch>
+                        <case test="hairLength lt 16">
+							<show part="hair/mindbreakerMale"/>
+							<show part="hair_bg/mindbreakerMale"/>
+                        </case>
+                        <default>
+                            <show part="hair/mindbreakerMale"/>
+							<show part="hair_bg/mindbreakerMale"/>
+                        </default>
+                    </switch>
+                </case>
 
                 <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
                     <switch>
@@ -2110,7 +2156,7 @@
 		<!-- HAIR STYLE AREA -->
 		<if test="hairLength &gt; 0">
             <if test="hairType != Hair.FLUFFY and hairType != Hair.GORGON and hairType != Hair.ANEMONE and hairType != Hair.GOO">
-                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
+                <if test="hairType != Hair.MINDBREAKERMALE and hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                     <if test="hairStyle != Hair.PLAIN">
                         <hide part="hair/0"/>
                         <hide part="hair_bg/02"/>
@@ -2178,7 +2224,7 @@
 						<show part="hair_bg/02"/>
                     </case>
                     <default>
-                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
+                        <if test="hairType != Hair.MINDBREAKERMALE and hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                             <switch>
                                 <case test="hairLength lt 16">
                                     <hide part="hair/*"/>
@@ -2293,6 +2339,10 @@
 				<if test="cor &gt;=50">
 					<hide part="face/*"/>
 					<show part="face/demonlewd"/>
+					<if test="tongue.type == Tongue.MINDBREAKERMALE">
+						<hide part="face/*"/>
+						<show part="antennae/mindbreakerMale"/>
+					</if>
 				</if>
 				<if test="cor &gt;=100">
 					<hide part="face/*"/>
@@ -2306,6 +2356,14 @@
 				<if test="skin.base.type == Skin.GOO">
 					<hide part="face/*"/>
 					<show part="face/goo"/>
+				</if>
+				<if test="tongue.type == Tongue.MINDBREAKER">
+					<hide part="face/*"/>
+					<show part="face/fairySmile"/>
+				</if>
+				<if test="tongue.type == Tongue.MINDBREAKERMALE">
+					<hide part="face/*"/>
+					<show part="antennae/mindbreakerMale"/>
 				</if>
             </case>
             <case values="Face.HORSE,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
@@ -2502,6 +2560,10 @@
             <case values="Arms.HARPY,Arms.PHOENIX">
                 <show part="hands/harpy"/>
                 <show part="hands_bg/harpy"/>
+            </case>
+			<case values="Arms.MINDBREAKER">
+                <show part="hands/mindbreaker"/>
+                <show part="hands_bg/mindbreaker"/>
             </case>
 			<case values="Arms.GHOST">
 				<if test="femininity &gt;=40">
@@ -3020,6 +3082,10 @@
             <case values="LowerBody.FROSTWYRM">
                 <hide part="legs/*"/>
                 <show part="legs/frostWyrm"/>
+            </case>
+			<case values="LowerBody.MINDBREAKER">
+                <hide part="legs/*"/>
+                <show part="legs/mindbreaker"/>
             </case>
             <case values="LowerBody.CANCER">
                 <hide part="legs/*"/>
@@ -3876,6 +3942,16 @@
                         </else>
                     </if>
                 </case>
+				
+				<case values="CockTypesEnum.MINDBREAKERMALE">
+                    <if test="big">
+                        <show part="penis$taur/humanbig$taur"/>
+						<show part="penis/mindbreakerdrip"/>
+                        <else>
+                            <show part="penis$taur/humanbig$taur"/>
+                        </else>
+                    </if>
+                </case>
                 <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
                 <default>
                     <if test="big">
@@ -3895,6 +3971,9 @@
 		<!-- Unique pussy AREA -->
 		<if test="CaveWyrmPussy">
 			<show part="overskinpanty/caveWyrm"/>
+		</if>
+		<if test="MindBreakerPussy">
+			<show part="overskinpanty/mindbreaker"/>
 		</if>
 
 		<!-- BALLS AREA -->
