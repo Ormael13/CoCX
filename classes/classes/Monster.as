@@ -279,24 +279,24 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
 			if (hasPerk(PerkLib.BodyCultivator)) temp += (100 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += (200 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulPersonage)) temp += (200 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulWarrior)) temp += (200 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulApprentice)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulPersonage)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulWarrior)) temp += (250 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += (300 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulScholar)) temp += (300 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulElder)) temp += (300 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulSprite)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulScholar)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulElder)) temp += (400 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulOverlord)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulTyrant)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulExalt)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulOverlord)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulTyrant)) temp += (600 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += (500 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulEmperor)) temp += (500 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulAncestor)) temp += (500 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulKing)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulEmperor)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulAncestor)) temp += (800 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
@@ -519,60 +519,57 @@ import flash.utils.getQualifiedClassName;
 		public override function maxSoulforce():Number {
 			//Base soulforce
 			var temp:Number = 50 + this.bonusSoulforce;
-			if (hasPerk(PerkLib.JobSoulCultivator)) {
-				if (this.level >= 2) temp += 25;
-				if (this.level >= 4) temp += 25;
-			}
+			if (hasPerk(PerkLib.JobSoulCultivator)) temp += 50;
 			if (hasPerk(PerkLib.SoulApprentice)) {
+				temp += 30;
+				if (this.level >= 3) temp += 30;
 				if (this.level >= 6) temp += 30;
-				if (this.level >= 8) temp += 30;
-				if (this.level >= 10) temp += 30;
 			}
 			if (hasPerk(PerkLib.SoulPersonage)) {
-				if (this.level >= 12) temp += 40;
-				if (this.level >= 14) temp += 40;
-				if (this.level >= 16) temp += 40;
+				if (this.level >= 9) temp += 45;
+				if (this.level >= 12) temp += 45;
+				if (this.level >= 15) temp += 45;
 			}
 			if (hasPerk(PerkLib.SoulWarrior)) {
-				if (this.level >= 18) temp += 50;
-				if (this.level >= 20) temp += 50;
-				if (this.level >= 22) temp += 50;
+				if (this.level >= 18) temp += 60;
+				if (this.level >= 21) temp += 60;
+				if (this.level >= 24) temp += 60;
 			}
 			if (hasPerk(PerkLib.SoulSprite)) {
-				if (this.level >= 24) temp += 60;
-				if (this.level >= 26) temp += 60;
-				if (this.level >= 28) temp += 60;
+				if (this.level >= 27) temp += 90;
+				if (this.level >= 30) temp += 90;
+				if (this.level >= 33) temp += 90;
 			}
 			if (hasPerk(PerkLib.SoulScholar)) {
-				if (this.level >= 30) temp += 70;
-				if (this.level >= 32) temp += 70;
-				if (this.level >= 34) temp += 70;
+				if (this.level >= 36) temp += 120;
+				if (this.level >= 39) temp += 120;
+				if (this.level >= 42) temp += 120;
 			}
 			if (hasPerk(PerkLib.SoulElder)) {
-				if (this.level >= 36) temp += 80;
-				if (this.level >= 38) temp += 80;
-				if (this.level >= 40) temp += 80;
+				if (this.level >= 45) temp += 150;
+				if (this.level >= 48) temp += 150;
+				if (this.level >= 51) temp += 150;
 			}
 			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += 30;
-				if (hasPerk(PerkLib.SoulPersonage)) temp += 30;
-				if (hasPerk(PerkLib.SoulWarrior)) temp += 30;
+				if (hasPerk(PerkLib.SoulApprentice)) temp += 40;
+				if (hasPerk(PerkLib.SoulPersonage)) temp += 40;
+				if (hasPerk(PerkLib.SoulWarrior)) temp += 40;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += 40;
-				if (hasPerk(PerkLib.SoulScholar)) temp += 40;
-				if (hasPerk(PerkLib.SoulElder)) temp += 40;
+				if (hasPerk(PerkLib.SoulSprite)) temp += 60;
+				if (hasPerk(PerkLib.SoulScholar)) temp += 60;
+				if (hasPerk(PerkLib.SoulElder)) temp += 60;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += 50;
-				if (hasPerk(PerkLib.SoulOverlord)) temp += 50;
-				if (hasPerk(PerkLib.SoulTyrant)) temp += 50;
+				if (hasPerk(PerkLib.SoulExalt)) temp += 100;
+				if (hasPerk(PerkLib.SoulOverlord)) temp += 100;
+				if (hasPerk(PerkLib.SoulTyrant)) temp += 100;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += 60;
-				if (hasPerk(PerkLib.SoulEmperor)) temp += 60;
-				if (hasPerk(PerkLib.SoulAncestor)) temp += 60;
+				if (hasPerk(PerkLib.SoulKing)) temp += 150;
+				if (hasPerk(PerkLib.SoulEmperor)) temp += 150;
+				if (hasPerk(PerkLib.SoulAncestor)) temp += 150;
 			}
 			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
@@ -3349,58 +3346,58 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulScholar)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulElder)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
 				if (hasPerk(PerkLib.SoulExalt)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulOverlord)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulTyrant)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
 				if (hasPerk(PerkLib.SoulKing)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulEmperor)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulAncestor)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 			}/*
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
 				if (hasPerk(PerkLib.soul)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 			}*/
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();

@@ -694,19 +694,19 @@ use namespace CoC;
 				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 2 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulElder)) armorDef += 3 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulScholar)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulExalt)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 6 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) armorDef += 5 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 5 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 5 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 8 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorDef += 9 * newGamePlusMod;
@@ -910,19 +910,19 @@ use namespace CoC;
 				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 1 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulElder)) armorMDef += 2 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 3 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 3 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorMDef += 3 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 3 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 5 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 5 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 5 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) armorMDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorMDef += 7 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 7 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 7 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorMDef += 4 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorMDef += 6 * newGamePlusMod;
@@ -3372,7 +3372,7 @@ use namespace CoC;
 				{name: 'elemental fusion', score: fusedElementalScore(), minscore: 5},
 				{name: 'elf', score: elfScore(), minscore: 5},
 				{name: 'fairy', score: fairyScore(), minscore: 23},
-				{name: 'female mindbreaker', score: femaleMindbreakerScore(), minscore: 15},
+				{name: 'female mindbreaker', score: femaleMindbreakerScore(), minscore: 20},
 				{name: 'ferret', score: ferretScore(), minscore: 4},
 				{name: 'fire snail', score: firesnailScore(), minscore: 15},
 				{name: 'fox', score: foxScore(), minscore: 4},
@@ -3394,7 +3394,7 @@ use namespace CoC;
 				{name: 'kitsune', score: kitsuneScore(), minscore: 5},
 				{name: 'kitshoo', score: kitshooScore(), minscore: 6},
 				{name: 'lizard', score: lizardScore(), minscore: 4},
-				{name: 'male mindbreaker', score: maleMindbreakerScore(), minscore: 15},
+				{name: 'male mindbreaker', score: maleMindbreakerScore(), minscore: 20},
 				{name: 'magmagoo', score: magmagooScore(), minscore: 6},
 				{name: 'manticore', score: manticoreScore(), minscore: 7},
 				{name: 'mantis', score: mantisScore(), minscore: 6},
@@ -3536,12 +3536,12 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "female mindbreaker") {
-				if (TopScore >= 15) {
+				if (TopScore >= 20) {
 					race = "mindbreaker";
 				}
 			}
 			if (TopRace == "male mindbreaker") {
-				if (TopScore >= 15) {
+				if (TopScore >= 20) {
 					race = "mindbreaker";
 				}
 			}
@@ -10198,7 +10198,7 @@ use namespace CoC;
 			if (tailType == Tail.NONE)
 				femaleMindbreakerCounter ++;
 			if (rearBody.type == RearBody.MINDBREAKER)
-				femaleMindbreakerCounter+= 2;
+				femaleMindbreakerCounter+= 4;
 			if (arms.type == Arms.MINDBREAKER)
 				femaleMindbreakerCounter++;
 			if (lowerBody == LowerBody.MINDBREAKER)
@@ -10206,7 +10206,7 @@ use namespace CoC;
 			if (tongue.type == Tongue.MINDBREAKER)
 				femaleMindbreakerCounter++;
 			if (wings.type == Wings.NONE)
-				femaleMindbreakerCounter += 4;
+				femaleMindbreakerCounter += 3;
 			if (vaginaType() == VaginaClass.MINDBREAKER)
 				femaleMindbreakerCounter++;
 			if ((hairType == Hair.MINDBREAKER) && hairColor == "purple")
@@ -10247,7 +10247,7 @@ use namespace CoC;
 			if (tailType == Tail.NONE)
 				MaleMindbreakerCounter ++;
 			if (rearBody.type == RearBody.MINDBREAKER)
-				MaleMindbreakerCounter+= 2;
+				MaleMindbreakerCounter+= 4;
 			if (arms.type == Arms.MINDBREAKER)
 				MaleMindbreakerCounter++;
 			if (lowerBody == LowerBody.MINDBREAKERMALE)
@@ -10255,7 +10255,7 @@ use namespace CoC;
 			if (tongue.type == Tongue.MINDBREAKERMALE)
 				MaleMindbreakerCounter++;
 			if (wings.type == Wings.NONE)
-				MaleMindbreakerCounter += 4;
+				MaleMindbreakerCounter += 3;
 			if (countCocksOfType(CockTypesEnum.MINDBREAKER) > 0)
 				MaleMindbreakerCounter++;
 			if ((hairType == Hair.MINDBREAKERMALE) && hairColor == "purple")
@@ -10748,22 +10748,10 @@ use namespace CoC;
 			return prestigeJobs1;
 		}
 		public function maxPrestigeJobs():Number {
-			var prestigeJobs2:Number = 2;
+			//var prestigeJobs2:Number = 2;
 			//if (hasPerk(PerkLib.DeityJobMunchkin))
 			//	prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige01))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige02))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige03))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige04))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige05))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige06))
-				prestigeJobs2++;
-			return prestigeJobs2;
+			return perkv1(PerkLib.AscensionBuildingPrestigeX)
 		}
 		public function freePrestigeJobsSlots():Number {
 			var prestigeJobs3:Number = 0;
@@ -12475,7 +12463,7 @@ use namespace CoC;
 					currentSen += 50;
 				}
 			}
-			if (femaleMindbreakerScore() >= 19) {
+			if (femaleMindbreakerScore() >= 20) {
 				maxStrCap2 -= 60;
 				maxSpeCap2 -= 10;
 				maxTouCap2 += 100;
@@ -12484,7 +12472,7 @@ use namespace CoC;
 				maxWisCap2 -= 30;
 				currentSen += 50;
 			}
-			if (maleMindbreakerScore() >= 19) {
+			if (maleMindbreakerScore() >= 20) {
 				maxStrCap2 += 70;
 				maxSpeCap2 -= 40;
 				maxTouCap2 += 100;

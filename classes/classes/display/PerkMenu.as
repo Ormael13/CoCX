@@ -13,6 +13,7 @@ import classes.PerkLib;
 import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Perks.AscensionOrganMutationX;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -796,14 +797,7 @@ public class PerkMenu extends BaseContent {
 				outputText("Mutations Assistant: <b>Off</b>\n");
 			}
 			var mutationCount:int = 1
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				mutationCount++;
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				mutationCount++;
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				mutationCount++;
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				mutationCount++;
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) mutationCount += player.perkv1(PerkLib.AscensionAdditionalOrganMutationX);
 			outputText("You have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.\n\n");
 

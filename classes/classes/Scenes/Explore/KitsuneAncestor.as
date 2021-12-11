@@ -32,27 +32,11 @@ import classes.internals.*;
 		
 		public function kitsunesoulskillMod():Number {
 			var kmodss:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator) && wis >= 20) kmodss += .1;
-			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice) && wis >= 30) kmodss += .2;
-				if (hasPerk(PerkLib.SoulPersonage) && wis >= 40) kmodss += .2;
-				if (hasPerk(PerkLib.SoulWarrior) && wis >= 50) kmodss += .2;
-			}
-			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite) && wis >= 60) kmodss += .3;
-				if (hasPerk(PerkLib.SoulScholar) && wis >= 70) kmodss += .3;
-				if (hasPerk(PerkLib.SoulElder) && wis >= 80) kmodss += .3;
-			}
-			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt) && wis >= 90) kmodss += .4;
-				if (hasPerk(PerkLib.SoulOverlord) && wis >= 100) kmodss += .4;
-				if (hasPerk(PerkLib.SoulTyrant) && wis >= 110) kmodss += .4;
-			}
-			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing) && wis >= 120) kmodss += .5;
-				if (hasPerk(PerkLib.SoulEmperor) && wis >= 130) kmodss += .5;
-				if (hasPerk(PerkLib.SoulAncestor) && wis >= 140) kmodss += .5;
-			}
+			if (hasPerk(PerkLib.DaoistCultivator) && wis >= 20) kmodss += .2;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) kmodss += .12;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) kmodss += 1.8;
+			if (hasPerk(PerkLib.DaoistElderStage)) kmodss += 2.4;
+			if (hasPerk(PerkLib.DaoistOverlordStage)) kmodss += 3;
 			return kmodss;
 		}
 		

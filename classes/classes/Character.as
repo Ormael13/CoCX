@@ -790,24 +790,24 @@ import classes.CoC;
 			if (hasPerk(PerkLib.PrestigeJobSeer)) max += 500;
 			if (hasPerk(PerkLib.DaoistCultivator)) max += 25;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += 30;
-				if (hasPerk(PerkLib.SoulPersonage)) max += 30;
-				if (hasPerk(PerkLib.SoulWarrior)) max += 30;
+				if (hasPerk(PerkLib.SoulApprentice)) max += 40;
+				if (hasPerk(PerkLib.SoulPersonage)) max += 40;
+				if (hasPerk(PerkLib.SoulWarrior)) max += 40;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += 40;
-				if (hasPerk(PerkLib.SoulScholar)) max += 40;
-				if (hasPerk(PerkLib.SoulElder)) max += 40;
+				if (hasPerk(PerkLib.SoulSprite)) max += 60;
+				if (hasPerk(PerkLib.SoulScholar)) max += 60;
+				if (hasPerk(PerkLib.SoulElder)) max += 60;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) max += 50;
-				if (hasPerk(PerkLib.SoulOverlord)) max += 50;
-				if (hasPerk(PerkLib.SoulTyrant)) max += 50;
+				if (hasPerk(PerkLib.SoulExalt)) max += 100;
+				if (hasPerk(PerkLib.SoulOverlord)) max += 100;
+				if (hasPerk(PerkLib.SoulTyrant)) max += 100;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) max += 60;
-				if (hasPerk(PerkLib.SoulEmperor)) max += 60;
-				if (hasPerk(PerkLib.SoulAncestor)) max += 60;
+				if (hasPerk(PerkLib.SoulKing)) max += 150;
+				if (hasPerk(PerkLib.SoulEmperor)) max += 150;
+				if (hasPerk(PerkLib.SoulAncestor)) max += 150;
 			}
 			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
 			if (hasPerk(PerkLib.AscensionSoulPurity)) max += perkv1(PerkLib.AscensionSoulPurity) * 50;

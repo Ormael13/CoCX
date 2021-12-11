@@ -1495,24 +1495,24 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.PrestigeJobSoulArtMaster) && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.BodyCultivator)) unarmed += 2 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 4 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 4 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 4 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 5 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 5 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 5 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 6 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 6 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 8 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 8 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 8 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 8 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 8 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 11 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 11 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 11 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 10 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 10 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 10 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 14 * (1 + player.newGamePlusMod());
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
@@ -14706,26 +14706,26 @@ public class Combat extends BaseContent {
 
     public function soulskillMod():Number {
         var modss:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modss += .1;
+        if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modss += .2;
         if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modss += .2;
-            if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modss += .2;
-            if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modss += .2;
+            if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modss += .4;
+            if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modss += .4;
+            if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modss += .4;
         }
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modss += .3;
-            if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modss += .3;
-            if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modss += .3;
+            if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modss += .6;
+            if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modss += .6;
+            if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modss += .6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
-            if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modss += .4;
-            if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modss += .4;
-            if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modss += .4;
+            if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modss += .8;
+            if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modss += .8;
+            if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modss += .8;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modss += .5;
-            if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modss += .5;
-            if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modss += .5;
+            if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modss += 1;
+            if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modss += 1;
+            if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modss += 1;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .4;
@@ -14799,26 +14799,26 @@ public class Combat extends BaseContent {
 
     public function soulskillMagicalMod():Number {
         var modssm:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modssm += .1;
+        if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modssm += .2;
         if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modssm += .2;
-            if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modssm += .2;
-            if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modssm += .2;
+            if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modssm += .4;
+            if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modssm += .4;
+            if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modssm += .4;
         }
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modssm += .3;
-            if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modssm += .3;
-            if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modssm += .3;
+            if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modssm += .6;
+            if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modssm += .6;
+            if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modssm += .6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
-            if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modssm += .4;
-            if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modssm += .4;
-            if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modssm += .4;
+            if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modssm += .8;
+            if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modssm += .8;
+            if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modssm += .8;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modssm += .5;
-            if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modssm += .5;
-            if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modssm += .5;
+            if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modssm += 1;
+            if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modssm += 1;
+            if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modssm += 1;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;
