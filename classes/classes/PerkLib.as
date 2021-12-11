@@ -3488,6 +3488,8 @@ public class PerkLib
 				"Causes you to crave minotaur cum frequently.  You cannot shake this addiction.");
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
+		public static const MindbreakerBrain1toX:MindBreakerBrain = new MindBreakerBrain();
+		//public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
 				"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain herbalism experience faster.");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
@@ -3508,6 +3510,8 @@ public class PerkLib
 				"Your nature as a plant gives you an instinctual knowledge of herbalism. Add some of your libido to your herbalism skill scaling and gain herbalism experience faster.");
 		public static const PoisonNails:PerkType = mk("Poison nails", "Poison nails",
 				"Your nails inflict a deadly poison on strike, damaging your foe’s toughness, speed and arousing them.");
+		public static const PsionicEmpowerment:PerkType = mk("Psionic Empowerment", "Psionic Empowerment",
+			"Your powers expands in accordance with each new convert that joins the sisterhood hivemind.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
 				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido and lust slightly.");
 		public static const RapierTraining:PerkType = mk("Rapier Training", "Rapier Training",

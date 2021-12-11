@@ -2941,6 +2941,8 @@ import coc.view.MainView;
 		private function removePerksThatShouldntBeFuckingPermanent():void {
 			if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4))
 				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry1to4);
+			if (player.hasPerk(PerkLib.MindbreakerBrain1toX))
+				player.removePerk(PerkLib.MindbreakerBrain1toX);
 			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) == 0 )
 				player.removePerk(PerkLib.CorruptedNinetails);
 			if (player.hasPerk(PerkLib.CorruptedKitsune) && player.perkv4(PerkLib.CorruptedKitsune) == 0 )

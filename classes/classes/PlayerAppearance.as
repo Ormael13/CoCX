@@ -1387,6 +1387,12 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.melkieScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+55% to Spe / Int racial multi, +35% to Lib racial multi, +25 min Sens)</font>");
 		else if (player.melkieScore() >= 1) outputText("\n<font color=\"#008000\">Half Melkie: " + player.melkieScore() + "</font>");
 		else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Half Melkie: 0</font>");
+		//Male Mindbreaker
+		if (player.maleMindbreakerScore() >= 19) outputText("\n<font color=\"#0000a0\">Male Mindbreaker: " + player.femaleMindbreakerScore() + " (+70% to Str racial multi, -40% to Spe racial multi, +100% to tou racial multi, +450% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
+		else if (player.maleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Male Mindbreaker: 0</font>");
+		//Female Mindbreaker
+		if (player.femaleMindbreakerScore() >= 19) outputText("\n<font color=\"#0000a0\">Female Mindbreaker: " + player.femaleMindbreakerScore() + " (-60% to Str racial multi, -10% to Spe racial multi, +100% to tou racial multi, +550% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
+		else if (player.femaleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Female Mindbreaker: 0</font>");
 		//Minotaur
 		if (player.minotaurScore() >= 15) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+170% to Str racial multi, +45% to Tou racial multi, -20% to Spe racial multi, -40% to Int racial multi, +70% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.minotaurScore() >= 10) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+120% to Str racial multi, +45% to Tou racial multi, -20% to Spe racial multi, -40% to Int racial multi, +45% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
@@ -1697,7 +1703,7 @@ public class PlayerAppearance extends BaseContent {
 		} else if (player.cocks[index].sock == "red")
 			cockSockDesc +="It's covered by a red cock-sock that seems to glow. Just wearing it makes you feel a bit powerful.";
 		else if (player.cocks[index].sock == "green")
-			cockSockDesc +="It's covered by a green cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.";
+			cockSockDesc +="It's covered by a green he cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.";
 		else if (player.cocks[index].sock == "blue")
 			cockSockDesc +="It's covered by a blue cock-sock that seems to glow. Just wearing it makes you feel like you can cast spells more effectively.";
 
@@ -1711,4 +1717,4 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 }
-}
+}
