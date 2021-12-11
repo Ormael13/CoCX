@@ -670,6 +670,20 @@ use namespace CoC;
 				if (faceType == Face.DEVIL_FANGS) armorDef += (30 * newGamePlusMod);
 			}
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
+			if (hasPerk(PerkLib.ElementalBody)) {
+				if (perkv1(PerkLib.ElementalBody) == 2) {
+					if (perkv2(PerkLib.ElementalBody) == 1) armorDef += (10 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 2) armorDef += (20 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 3) armorDef += (30 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 4) armorDef += (40 * newGamePlusMod);
+				}
+				if (perkv1(PerkLib.ElementalBody) == 4) {
+					if (perkv2(PerkLib.ElementalBody) == 1) armorDef += (5 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 2) armorDef += (10 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 3) armorDef += (15 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 4) armorDef += (20 * newGamePlusMod);
+				}
+			}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.BodyCultivator)) {
 				armorDef += (1 * newGamePlusMod);
@@ -874,6 +888,20 @@ use namespace CoC;
 				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
 				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorMDef += (30 * newGamePlusMod);
 				if (faceType == Face.DEVIL_FANGS) armorMDef += (30 * newGamePlusMod);
+			}
+			if (hasPerk(PerkLib.ElementalBody)) {
+				if (perkv1(PerkLib.ElementalBody) == 2) {
+					if (perkv2(PerkLib.ElementalBody) == 1) armorMDef += (10 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 2) armorMDef += (20 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 3) armorMDef += (30 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 4) armorMDef += (40 * newGamePlusMod);
+				}
+				if (perkv1(PerkLib.ElementalBody) == 4) {
+					if (perkv2(PerkLib.ElementalBody) == 1) armorMDef += (5 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 2) armorMDef += (10 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 3) armorMDef += (15 * newGamePlusMod);
+					if (perkv2(PerkLib.ElementalBody) == 4) armorMDef += (20 * newGamePlusMod);
+				}
 			}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
@@ -3341,6 +3369,7 @@ use namespace CoC;
 				{name: 'dragonne', score: dragonneScore(), minscore: 6},
 				{name: 'easter bunny', score: easterbunnyScore(), minscore: 12},
 				{name: 'echidna', score: echidnaScore(), minscore: 4},
+				{name: 'elemental fusion', score: fusedElementalScore(), minscore: 5},
 				{name: 'elf', score: elfScore(), minscore: 5},
 				{name: 'fairy', score: fairyScore(), minscore: 23},
 				{name: 'female mindbreaker', score: femaleMindbreakerScore(), minscore: 15},
@@ -3419,6 +3448,32 @@ use namespace CoC;
 			var TopScore:Number = ScoreList[0].score;
 
 			//Determine race type:
+			if (TopRace == "elemental fusion") {
+				if (perkv1(PerkLib.ElementalBody) == 1) {
+					if (perkv2(PerkLib.ElementalBody) == 1) race = "lesser sylph";
+					if (perkv2(PerkLib.ElementalBody) == 2) race = "adept sylph";
+					if (perkv2(PerkLib.ElementalBody) == 3) race = "greater sylph";
+					if (perkv2(PerkLib.ElementalBody) == 4) race = "primordial sylph";
+				}
+				if (perkv1(PerkLib.ElementalBody) == 2) {
+					if (perkv2(PerkLib.ElementalBody) == 1) race = "lesser gnome";
+					if (perkv2(PerkLib.ElementalBody) == 2) race = "adept gnome";
+					if (perkv2(PerkLib.ElementalBody) == 3) race = "greater gnome";
+					if (perkv2(PerkLib.ElementalBody) == 4) race = "primordial gnome";
+				}
+				if (perkv1(PerkLib.ElementalBody) == 3) {
+					if (perkv2(PerkLib.ElementalBody) == 1) race = "lesser ignis";
+					if (perkv2(PerkLib.ElementalBody) == 2) race = "adept ignis";
+					if (perkv2(PerkLib.ElementalBody) == 3) race = "greater ignis";
+					if (perkv2(PerkLib.ElementalBody) == 4) race = "primordial ignis";
+				}
+				if (perkv1(PerkLib.ElementalBody) == 4) {
+					if (perkv2(PerkLib.ElementalBody) == 1) race = "lesser undine";
+					if (perkv2(PerkLib.ElementalBody) == 2) race = "adept undine";
+					if (perkv2(PerkLib.ElementalBody) == 3) race = "greater undine";
+					if (perkv2(PerkLib.ElementalBody) == 4) race = "primordial undine";
+				}
+			}
 			if (TopRace == "cancer") {
 				if (TopScore >= 8) {
 					if (TopScore >= 20) {
@@ -4740,13 +4795,13 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.HinezumiBurningBloodPrimitive))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.HinezumiBurningBloodEvolved))
-				internalChimeraCounter++;
+				internalChimeraCounter++;/*
 			if (hasPerk(MutationsLib.HeartOfTheStorm))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStormPrimitive))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStormEvolved))
-				internalChimeraCounter++;
+				internalChimeraCounter++;*/
 			if (hasPerk(MutationsLib.HollowFangs))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.HollowFangsPrimitive))
@@ -6208,23 +6263,27 @@ use namespace CoC;
 			Begin("Player","racialScore","kitsune");
 			var kitsuneCounter:Number = 0;
 			var kitsuneCounter2:Number = 0;
-			if (eyes.type == Eyes.FOX)
+			if (eyes.type == Eyes.FOX) {
 				kitsuneCounter++;
 				kitsuneCounter2++;
-			if (ears.type == Ears.FOX)
+			}
+			if (ears.type == Ears.FOX) {
 				kitsuneCounter++;
 				kitsuneCounter2++;
+			}
 			//If the character has ears other than fox ears, -1
 			if (ears.type != Ears.FOX)
 				kitsuneCounter--;
-			if (tailType == Tail.FOX && tailCount >= 2)
+			if (tailType == Tail.FOX && tailCount >= 2) {
 				kitsuneCounter += tailCount;
 				kitsuneCounter2 += tailCount;
+			}
 			if (tailType != Tail.FOX || (tailType == Tail.FOX && tailCount < 2))
 				kitsuneCounter -= 7;
-			if (skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO || hasFur())
+			if (skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO || hasFur()) {
 				kitsuneCounter++;
 				kitsuneCounter2++;
+			}
 			if (skin.base.type == Skin.PLAIN)
 				kitsuneCounter ++;
 			if (InCollection(hairColor, KitsuneScene.basicKitsuneHair) || InCollection(hairColor, KitsuneScene.elderKitsuneColors))
@@ -6233,17 +6292,20 @@ use namespace CoC;
 				kitsuneCounter -= 2;
 			if (skin.base.type != Skin.PLAIN)
 				kitsuneCounter -= 3;
-			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE || arms.type == Arms.FOX)
+			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE || arms.type == Arms.FOX) {
 				kitsuneCounter++;
 				kitsuneCounter2++;
-			if (lowerBody == LowerBody.FOX || lowerBody == LowerBody.HUMAN)
+			}
+			if (lowerBody == LowerBody.FOX || lowerBody == LowerBody.HUMAN) {
 				kitsuneCounter++;
 				kitsuneCounter2++;
+			}
 			if (lowerBody != LowerBody.HUMAN && lowerBody != LowerBody.FOX)
 				kitsuneCounter--;
-			if (faceType == Face.ANIMAL_TOOTHS || faceType == Face.HUMAN || faceType == Face.FOX)
+			if (faceType == Face.ANIMAL_TOOTHS || faceType == Face.HUMAN || faceType == Face.FOX) {
 				kitsuneCounter++;
 				kitsuneCounter2++;
+			}
 			if (faceType != Face.ANIMAL_TOOTHS || faceType != Face.HUMAN && faceType != Face.FOX)
 				kitsuneCounter--;
 			//If the character has a 'vag of holding', +1
@@ -6593,7 +6655,7 @@ use namespace CoC;
 				gremlinCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				gremlinCounter += 50;
-			if (hasPerk(PerkLib.Phylactery))
+		/*	if (hasPerk(PerkLib.Phylactery))
 				gremlinCounter += 5;
 			if (hasPerk(MutationsLib.BlackHeart))
 				gremlinCounter++;
@@ -6607,7 +6669,7 @@ use namespace CoC;
 				gremlinCounter++;
 			if (hasPerk(PerkLib.DemonicLethicite))
 				gremlinCounter+=1;
-			if (!InCollection(skin.base.color, ["light", "tan", "dark"]))
+		*/	if (!InCollection(skin.base.color, ["light", "tan", "dark"]))
 				gremlinCounter=0;
 			if (ears.type != Ears.GREMLIN)
 				gremlinCounter=0;
@@ -10544,6 +10606,15 @@ use namespace CoC;
 			return score;
 		}
 
+		public function fusedElementalScore():Number {
+			Begin("Player","racialScore","fusedElemental");
+			var fusedEelementalCounter:Number = 0;
+			if (hasPerk(PerkLib.ElementalBody))
+				fusedEelementalCounter += 5;
+			End("Player","racialScore");
+			return fusedEelementalCounter;
+		}
+
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
 		public function currentBasicJobs():Number {
@@ -10654,8 +10725,8 @@ use namespace CoC;
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobDruid))
 				prestigeJobs1++;
-			if (hasPerk(PerkLib.PrestigeJobGreySage))
-				prestigeJobs1++;
+		//	if (hasPerk(PerkLib.PrestigeJobGreySage))
+		//		prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobNecromancer))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobSeer))
@@ -10677,9 +10748,7 @@ use namespace CoC;
 			return prestigeJobs1;
 		}
 		public function maxPrestigeJobs():Number {
-			var prestigeJobs2:Number = 1;
-			if (level >= 72)
-				prestigeJobs2++;
+			var prestigeJobs2:Number = 2;
 			//if (hasPerk(PerkLib.DeityJobMunchkin))
 			//	prestigeJobs2++;
 			if (hasPerk(PerkLib.AscensionBuildingPrestige01))
@@ -13184,6 +13253,96 @@ use namespace CoC;
 				maxIntCap2 += 100;
 				maxLibCap2 += 40;
 				maxWisCap2 -= 10;
+			}
+			if (hasPerk(PerkLib.ElementalBody)) {
+				if (perkv1(PerkLib.ElementalBody) == 1) {
+					if (perkv2(PerkLib.ElementalBody) == 1) {
+						maxSpeCap2 += 100;
+						maxIntCap2 += 75;
+						maxWisCap2 += 50;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 2) {
+						maxSpeCap2 += 125;
+						maxIntCap2 += 100;
+						maxWisCap2 += 75;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 3) {
+						maxSpeCap2 += 150;
+						maxIntCap2 += 125;
+						maxWisCap2 += 100;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 4) {
+						maxSpeCap2 += 175;
+						maxIntCap2 += 150;
+						maxWisCap2 += 125;
+					}
+				}
+				if (perkv1(PerkLib.ElementalBody) == 2) {
+					if (perkv2(PerkLib.ElementalBody) == 1) {
+						maxStrCap2 += 50;
+						maxTouCap2 += 100;
+						maxWisCap2 += 75;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 2) {
+						maxStrCap2 += 75;
+						maxTouCap2 += 125;
+						maxWisCap2 += 100;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 3) {
+						maxStrCap2 += 100;
+						maxTouCap2 += 150;
+						maxWisCap2 += 125;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 4) {
+						maxStrCap2 += 125;
+						maxTouCap2 += 175;
+						maxWisCap2 += 150;
+					}
+				}
+				if (perkv1(PerkLib.ElementalBody) == 3) {
+					if (perkv2(PerkLib.ElementalBody) == 1) {
+						maxStrCap2 += 75;
+						maxSpeCap2 += 100;
+						maxWisCap2 += 25;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 2) {
+						maxStrCap2 += 100;
+						maxSpeCap2 += 125;
+						maxWisCap2 += 50;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 3) {
+						maxStrCap2 += 125;
+						maxSpeCap2 += 150;
+						maxWisCap2 += 75;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 4) {
+						maxStrCap2 += 150;
+						maxSpeCap2 += 175;
+						maxWisCap2 += 100;
+					}
+				}
+				if (perkv1(PerkLib.ElementalBody) == 4) {
+					if (perkv2(PerkLib.ElementalBody) == 1) {
+						maxStrCap2 += 75;
+						maxTouCap2 += 50;
+						maxWisCap2 += 100;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 2) {
+						maxStrCap2 += 100;
+						maxTouCap2 += 75;
+						maxWisCap2 += 125;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 3) {
+						maxStrCap2 += 125;
+						maxTouCap2 += 100;
+						maxWisCap2 += 150;
+					}
+					if (perkv2(PerkLib.ElementalBody) == 4) {
+						maxStrCap2 += 150;
+						maxTouCap2 += 125;
+						maxWisCap2 += 175;
+					}
+				}
 			}
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 1, maxStrCap2);
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 2, maxTouCap2);

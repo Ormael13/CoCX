@@ -489,7 +489,6 @@ public class PerkMenu extends BaseContent {
 		}
 	}
 
-
 	public function summonsbehaviourOptions(page:int = 1):void {
         var attackingElementalTypeFlag:int = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
         var elementalConjuerSummons:int = flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS];
@@ -599,21 +598,67 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
-
-
 	public function golemsbehaviourOptions():void {
 		clearOutput();
 		menu();
 		outputText("You can choose how your permanent golems will behave during each fight.\n\n");
-		outputText("\n<b>Permanent golems behavious:</b>\n");
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
+			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+				var element:Number = player.statusEffectv3(StatusEffects.GolemUpgrades1);
+				outputText("<b>Elemental Weaponry:</b>\n");
+				switch(element){
+					case 1: outputText("Inactive"); break;
+					case 2: outputText("Fire"); break;
+					case 3: outputText("Ice"); break;
+					case 4: outputText("Lightning"); break;
+					case 5: outputText("Darkness"); break;
+				}
+				outputText("\n\n");
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 1) addButton(0, "Inactivate", golemsElementaryWeaponMode, 1);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 2) addButton(1, "Fire", golemsElementaryWeaponMode, 2);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 3) addButton(2, "Ice", golemsElementaryWeaponMode, 3);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 4) addButton(3, "Lightning", golemsElementaryWeaponMode, 4);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 5) addButton(4, "Darkness", golemsElementaryWeaponMode, 5);
+			}
+			if (player.statusEffectv4(StatusEffects.GolemUpgrades1) > 0) {
+				var poison:String = "";
+				outputText("Poisoned Weaponry Upgrade status <b>("+poison+")</b>"+player.statusEffectv4(StatusEffects.GolemUpgrades1)+"\n\n");
+				if (player.statusEffectv4(StatusEffects.GolemUpgrades1) == 2) poison = "Active";
+				else poison = "Inactive";
+				if (player.statusEffectv4(StatusEffects.GolemUpgrades1) == 2) addButton(5, "Inactivate", golemsPoisonedWeaponMode, 1);
+				else addButton(6, "Activate", golemsPoisonedWeaponMode, 2);
+			}
+		}
+		outputText("<b>Permanent golems attack pattern behavious:</b>\n");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) outputText("Attacking at the begining of each turn (owner would need to just choose how many of them will be sent).");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
+			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 1) addButton(0, "Inactivate", golemsElementaryWeaponMode, 1);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 2) addButton(1, "Fire", golemsElementaryWeaponMode, 2);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 3) addButton(2, "Ice", golemsElementaryWeaponMode, 3);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 4) addButton(3, "Lightning", golemsElementaryWeaponMode, 4);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 5) addButton(4, "Darkness", golemsElementaryWeaponMode, 5);
+			}
+			if (player.statusEffectv4(StatusEffects.GolemUpgrades1) > 0) {
+				if (player.statusEffectv4(StatusEffects.GolemUpgrades1) == 2) addButton(5, "Inactivate", golemsPoisonedWeaponMode, 1);
+				else addButton(6, "Activate", golemsPoisonedWeaponMode, 2);
+			}
+		}
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
 
 		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
+		function golemsElementaryWeaponMode(elementalMode:Number):void {
+			player.changeStatusValue(StatusEffects.GolemUpgrades1,3,elementalMode);
+			golemsbehaviourOptions();
+		}
+		function golemsPoisonedWeaponMode(poisonedMode:Number):void {
+			player.changeStatusValue(StatusEffects.GolemUpgrades1,4,poisonedMode);
+			golemsbehaviourOptions();
+		}
         function golemsAttacking(attacking:Boolean):void {
             flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
             golemsbehaviourOptions();

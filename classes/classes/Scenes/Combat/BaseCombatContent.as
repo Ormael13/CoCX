@@ -183,6 +183,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function scalingBonusToughness(randomize:Boolean = true):Number {
 		return combat.scalingBonusToughness(randomize);
 	}
+	protected function scalingBonusToughnessCompanion(randomize:Boolean = true):Number {
+		return combat.scalingBonusToughnessCompanion(randomize);
+	}
 	protected function scalingBonusSpeed(randomize:Boolean = true):Number {
 		return combat.scalingBonusSpeed(randomize);
 	}

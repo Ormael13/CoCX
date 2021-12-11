@@ -268,7 +268,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				if (monster is Minotaur || monster is MinotaurLord) addButton(8, "Drain him", jiangshiDrainHimMinotaurs);
 				else addButtonDisabled(8, "Drain him", "Only minotaur enemies.");
 			}
-			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu2nd).hint("1st page of options.");
+			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu).hint("1st page of options.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 

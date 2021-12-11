@@ -2666,7 +2666,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (flags[kFLAGS.ANT_KIDS] > 3000) kidsMod2++;
 			if (flags[kFLAGS.ANT_KIDS] > 3500) kidsMod2++;
 			if (flags[kFLAGS.ANT_KIDS] > 4000) kidsMod2++;
-			var stones:int = 2 + rand(8) + (kidsMod2 * 4);
+			var stones:int = 3 + rand(7) + (kidsMod2 * 5);
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
 			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
 			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 5000) awardAchievement("Ant-Kids and Phylla", kACHIEVEMENTS.GENERAL_ANT_KIDS_AND_PHYLLA);
@@ -2689,12 +2689,12 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
 				outputText("\n\nYou gain " + stones + " stones.");
 			}
-			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 900 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 900;
+			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
 				outputText(" <b>Your stone capacity is full.</b>");
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 300 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 300;
+			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
 				outputText(" <b>Your stone capacity is full.</b>");
  			}
 			doNext(camp.returnToCampUseOneHour);

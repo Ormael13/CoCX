@@ -342,8 +342,8 @@ package classes.Scenes.Places.HeXinDao
 			outputText("\"<i>Plenty of quest available. Which one will you take?</i>\"\n\n");
 			menu();
 			addButton(0, "Imps", BoardkeeperYangQuestImps1).hint("Copper tier Quest.");
-			addButton(1, "Ferals(1)", BoardkeeperYangQuestFerals1).hint("Copper tier Quest.");
-			addButton(2, "Ferals(2)", BoardkeeperYangQuestFerals2).hint("Copper tier Quest.");
+			addButton(1, "Ferals(1)", BoardkeeperYangQuestFerals1).hint("(T.Beasts) Copper tier Quest.");
+			addButton(2, "Ferals(2)", BoardkeeperYangQuestFerals2).hint("(Imps) Copper tier Quest.");
 			addButton(3, "Minotaurs", BoardkeeperYangQuestMinotaurs).hint("Copper tier Quest.");
 			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {
 				addButton(4, "Demons", BoardkeeperYangQuestDemons1).hint("Iron tier Quest.");

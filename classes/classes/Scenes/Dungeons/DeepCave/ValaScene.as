@@ -126,9 +126,11 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n");
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n");
 			//Choicez go here.  I can haz fucks?
-			simpleChoices("", null, "", null, "Reject", rejectFuckingVala, "", null, "", null);
-			if (player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.P_PEARL, 1)) addButton(0, "Fix Her", healVala);
+			menu();
 			if (player.gender > 0) addButton(1, "Sex", ValaGetsSexed);
+			addButton(2, "Reject", rejectFuckingVala);
+			if (player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Fix Her", healVala);
+			else addButtonDisabled(3, "???", "Need to have Pure Pearl or Pure Honey.");
 		}
 
 		//[Heal]

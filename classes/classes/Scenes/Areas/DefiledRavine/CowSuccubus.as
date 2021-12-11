@@ -21,6 +21,8 @@ package classes.Scenes.Areas.DefiledRavine
 	
 	public class CowSuccubus extends AbstractSuccubus
 	{
+		public var TrueDemons:DemonScene = new DemonScene();
+		
 		public function cowsuccubusMilkSpray():void {
 			outputText("\"<i>How about a taste?</i>\"  The succubus asks, pressing her tits together.  Before you can reply, a veritable jet of milk sprays in your direction!\n");
 			//Miss:
@@ -55,6 +57,12 @@ package classes.Scenes.Areas.DefiledRavine
 				else seduceAttack();
 			}
 			if (choice == 2) cowsuccubusMilkSpray();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			game.flags[kFLAGS.DEMONS_DEFEATED]++;
+			TrueDemons.defeatCowSuccubus();
 		}
 		
 		public function CowSuccubus() 

@@ -269,6 +269,9 @@ public class PerkLib
 		public static const AdrenalineRush:PerkType = mk("Adrenaline Rush", "Adrenaline Rush",
 				"Always start combat with 100 more points of wrath.",
 				"You've chosen the 'Adrenaline Rush' perk, to always start combat with 100 more points of wrath.");
+		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
+				"Enable option to make steel golems and store 1 such golem.",
+				"You've chosen the 'Advanced Golemancy Theory' perk, allowing to make steel golems.");
 		public static const BoneSoul:PerkType = mk("Bone soul", "Bone soul",
 				"When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%. Increase limit of stored demonic bones by 100.",
 				"You've chosen the 'Bone soul' perk. When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%. Increase limit of stored demonic bones by 100.");
@@ -356,9 +359,6 @@ public class PerkLib
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20%(or 25%) max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You've chosen the 'Too Angry to Die' perk, .");
-		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
-				"Enable option to make steel golems and store 1 such golem.",
-				"You've chosen the 'Advanced Golemancy Theory' perk, allowing to make steel golems.");
 		public static const WarMageNovice:PerkType = mk("Novice War Mage", "Novice War Mage",
 				"Increases wrath bar by 50. Safe limit for spellcasting increased by 5%.",
 				"You've chosen the 'Novice War Mage' perk, increasing wrath bar by 50 and safe limit for spellcasting increasing by 5%.");
@@ -420,7 +420,7 @@ public class PerkLib
 				"Decrease chance to fail when ranking up an elemental or/and replace mana with elemental energy gained from sacrificing elemental shards to arcane circle.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk, .");
 		public static const ElementalConjurerKnowledgeSu:PerkType = mk("Elemental Conjurer Knowledge (Su)", "Elemental Conjurer Knowledge (Su)",
-				"Allow to convert soulforce into elemetnal energy.",
+				"Allow to convert soulforce into elemental energy.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk, .");
 		public static const LockAndLoad:PerkType = mk("Lock and load", "Lock and load",
 				"You gained decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).",
@@ -443,6 +443,9 @@ public class PerkLib
 		public static const GreaterCursedTag:PerkType = mk("Greater Cursed Tag", "Greater Cursed Tag",
 				"You benefit from all undead powers at all times.",
 				"You've chosen the 'Cursed Tag' perk. You benefit from all undead powers at all times.");
+		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
+				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
+				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -458,9 +461,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1211,14 +1211,14 @@ public class PerkLib
 				"Increases maximum fatigue by 4500.",
 				"You've chosen the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 4500!");
 		public static const EpicGolemMaker:PerkType = mk("Epic Golem Maker", "Epic Golem Maker",
-				"Your proficiency in making golems allows to make stronger golems.",
-				"You've chosen the 'Epic Golem Maker' perk, increasing your proficiency in making golems.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
+				"Your proficiency in making golems allows to make stronger golems. Also allow to make and store 1 improved stone golem.",
+				"You've chosen the 'Epic Golem Maker' perk, increasing your proficiency in making golems. Also allow to make improved stone golems.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
 		public static const EpicGolemMaker2ndCircle:PerkType = mk("Epic Golem Maker (2nd Circle)", "Epic Golem Maker (2nd Circle)",
-				"Your proficiency in making golems allows to make stronger than before golems.",
-				"You've chosen the 'Epic Golem Maker (2nd Circle)' perk, increasing your proficiency in making golems.").withBuffs({'int.mult':0.20,'wis.mult':0.20});
+				"Your proficiency in making golems allows to make stronger than before golems. Allow to store 1 more improved stone golem.",
+				"You've chosen the 'Epic Golem Maker (2nd Circle)' perk, increasing your proficiency in making golems. Allow to store 1 more improved stone golem.").withBuffs({'int.mult':0.20,'wis.mult':0.20});
 		public static const EpicGolemMaker3rdCircle:PerkType = mk("Epic Golem Maker (3rd Circle)", "Epic Golem Maker (3rd Circle)",
-				"Your proficiency in making golems allows to make stronger golems as much stronger their creator became and slightly rise your intelligence and wisdom. Also allow to make and store 1 improved stone golem.",
-				"You've chosen the 'Epic Golem Maker (3rd Circle)' perk, increasing your proficiency in making golems. Also allow to make improved stone golems.").withBuffs({'int.mult':0.30,'wis.mult':0.30});
+				"Your proficiency in making golems allows to make stronger golems as much stronger their creator became and slightly rise your intelligence and wisdom. Allow to store 1 more improved stone golem.",
+				"You've chosen the 'Epic Golem Maker (3rd Circle)' perk, increasing your proficiency in making golems. Allow to store 1 more improved stone golem.").withBuffs({'int.mult':0.30,'wis.mult':0.30});
 		public static const EpicIntelligence:PerkType = mk("Epic Intelligence", "Epic Intelligence",
 				"",
 				"You've chosen the 'Epic Intelligence' perk.").withBuffs({'int.mult':0.35});
@@ -1403,20 +1403,29 @@ public class PerkLib
 				"You have surpassed your mortal self to become the embodiment of melee damage, further increasing it. (+10% melee phys dmg)",
 				"You've chosen the 'God of Steel' perk, gaining +10% melee phys dmg.");
 		public static const GolemArmyCaptain:PerkType = mk("Golem Army Captain", "Golem Army Captain",
-				"+2/4 to max limit of stored permanent/temporary stone golems.",// +1 to max limit for stored permanent steel golems.
-				"You've chosen the 'Golem Army Captain' perk, allowing to store additional permanent (+2) and temporary (+4) stone golems golems in your golem bag.");// Allow to store steel golem. (+1)
+				"+1/1/3/6 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.",
+				"You've chosen the 'Golem Army Captain' perk, allowing to store additional permanent steel golem and (improved stone +1/stone +3) and temporary (+6) stone golems in your golem bag.");
 		public static const GolemArmyColonel:PerkType = mk("Golem Army Colonel", "Golem Army Colonel",
-				"+4/8 to max limit of stored permanent/temporary stone golems.",
-				"You've chosen the 'Golem Army Colonel' perk, allowing to store additional permanent (+4) and temporary (+8) stone golems in your golem bag.");
-		public static const GolemArmyGeneral:PerkType = mk("Golem Army General", "Golem Army General",
-				"+1/5/10 to max limit stored of (permanent improved/normal)/temporary stone golems.",
-				"You've chosen the 'Golem Army General' perk, allowing to store additional permanent (improved stone +1/stone +5) and temporary (+10) stone golems in your golem bag.");
-		public static const GolemArmyLieutenant:PerkType = mk("Golem Army Lieutenant", "Golem Army Lieutenant",
+				"+1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.",
+				"You've chosen the 'Golem Army Colonel' perk, allowing to store additional permanent (improved/normal) steel golem and (improved stone +1/stone +6) and temporary (+12) stone golems in your golem bag.");
+		public static const GolemArmyGeneral:PerkType = mk("Golem Army General", "Golem Army Brigadier General",
+				"+1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.",
+				"You've chosen the 'Golem Army Brigadier General' perk, allowing to store additional permanent (improved/normal) steel golem and (improved stone +1/stone +7) and temporary (+14) stone golems in your golem bag.");
+		public static const GolemArmyJuniorLieutenant:PerkType = mk("Golem Army Junior Lieutenant", "Golem Army Junior Lieutenant",
 				"+1/2 to max limit stored of permanent/temporary stone golems.",
-				"You've chosen the 'Golem Army Lieutenant' perk, allowing to store additional permanent (+1) and temporary (+2) stone golems in your golem bag.");
+				"You've chosen the 'Golem Army Junior Lieutenant' perk, allowing to store additional permanent (+1) and temporary (+2) stone golems in your golem bag.");
+		public static const GolemArmyLieutenant:PerkType = mk("Golem Army Lieutenant", "Golem Army Lieutenant",
+				"+2/4 to max limit of stored permanent/temporary stone golems.",// +1 to max limit for stored permanent steel golems.
+				"You've chosen the 'Golem Army Lieutenant' perk, allowing to store additional permanent (+2) and temporary (+4) stone golems golems in your golem bag.");// Allow to store steel golem. (+1)
+		public static const GolemArmyLieutenantColonel:PerkType = mk("Golem Army Lieutenant Colonel", "Golem Army Lieutenant Colonel",
+				"+1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.",
+				"You've chosen the 'Golem Army Lieutenant Colonel' perk, allowing to store additional permanent steel golem and (improved stone +1/stone +5) and temporary (+10) stone golems in your golem bag.");
 		public static const GolemArmyMajor:PerkType = mk("Golem Army Major", "Golem Army Major",
-				"+3/6 to max limit stored of permanent/temporary stone golems.",
-				"You've chosen the 'Golem Army Major' perk, allowing to store additional permanent (+3) and temporary (+6) stone golems in your golem bag.");
+				"+1/1/4/8 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.",
+				"You've chosen the 'Golem Army Major' perk, allowing to store additional permanent steel golem and (improved stone +1/stone +4) and temporary (+8) stone golems in your golem bag.");
+		public static const GolemArmyMajorGeneral:PerkType = mk("Golem Army Major General", "Golem Army Major General",
+				"",
+				"You've chosen the 'Golem Army Major General' perk, allowing to store additional permanent (improved/normal) steel golem and (improved stone +1/stone +8) and temporary (+16) stone golems in your golem bag.");
 		public static const GoliathI:PerkType = mk("Goliath I", "Goliath I",
 				"+8 extra HP per point of strength.",
 				"You've chosen the 'Goliath I' perk, granting +8 extra maximum HP for each point of strength.");
@@ -1932,8 +1941,23 @@ public class PerkLib
 				"Increases maximum fatigue by 10000.",
 				"You've chosen the 'Legendary Endurance' perk. Thanks to your legendary physical conditioning, your maximum fatigue has been increased by 10000!");
 		public static const LegendaryGolemMaker:PerkType = mk("Legendary Golem Maker", "Legendary Golem Maker",
-				"Your proficiency in making golems allows to make stronger than before golems and slightly rise your intelligence and wisdom.",
-				"You've chosen the 'Legendary Golem Maker' perk, increasing your proficiency in making golems.");
+				"Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.",
+				"You've chosen the 'Legendary Golem Maker' perk, increasing your proficiency in making golems and quality of their upgrades. Also allow to make improved steel golems.").withBuffs({'int.mult':0.40,'wis.mult':0.40});
+		public static const LegendaryGolemMaker2ndCircle:PerkType = mk("Legendary Golem Maker (2nd Circle)", "Legendary Golem Maker (2nd Circle)",
+				"Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.",
+				"You've chosen the 'Legendary Golem Maker (2nd Circle)' perk, increasing your golems mana efficiency. Allow to store additional improved steel golem.").withBuffs({'int.mult':0.50,'wis.mult':0.50});/*
+		public static const LegendaryGolemMaker3rdCircle:PerkType = mk("Legendary Golem Maker (3rd Circle)", "Legendary Golem Maker (3rd Circle)",
+				".",
+				"You've chosen the 'Legendary Golem Maker (3rd Circle)' perk, .").withBuffs({'int.mult':0.60,'wis.mult':0.60});*/
+		public static const MythicalGolemMaker:PerkType = mk("Mythical Golem Maker", "Mythical Golem Maker",
+				".",
+				"You've chosen the 'Mythical Golem Maker' perk, .").withBuffs({'int.mult':0.80,'wis.mult':0.80});/*
+		public static const MythicalGolemMaker2ndCircle:PerkType = mk("Mythical Golem Maker (2nd Circle)", "Mythical Golem Maker (2nd Circle)",
+				".",
+				"You've chosen the 'Mythical Golem Maker (2nd Circle)' perk, .").withBuffs({'int.mult':1.00,'wis.mult':1.00});
+		public static const MythicalGolemMaker3rdCircle:PerkType = mk("Mythical Golem Maker (3rd Circle)", "Mythical Golem Maker (3rd Circle)",
+				".",
+				"You've chosen the 'Mythical Golem Maker (3rd Circle)' perk, .").withBuffs({'int.mult':1.20,'wis.mult':1.20});*/
 		public static const LegendaryIntelligence:PerkType = mk("Legendary Intelligence", "Legendary Intelligence",
 				"",
 				"You've chosen the 'Legendary Intelligence' perk.").withBuffs({'int.mult':0.50});
@@ -2143,14 +2167,14 @@ public class PerkLib
 				"Some people get all the luck it seems... Shut up and take our money is what all enemies scream at you upon defeat, increasing your gains on victory. (15% more gems from victories)",
 				"You've chosen the 'Money Finder' perk, increasing gem gains from victories by 15%.");
 		public static const Motivation:PerkType = mk("Motivation", "Motivation",
-				"Decrease to 35% henchmans idle time during combat.",
-				"You've chosen the 'Motivation' perk, slightly increasing motivation of allies to act in combat.");
+				"Decrease to 20% henchmans idle time during combat. Increase dmg dealt by ~50%.",
+				"You've chosen the 'Motivation' perk. Decrease to 10% henchmans idle time during combat. Increase dmg dealt by ~50%.");
 		public static const MotivationEx:PerkType = mk("Motivation (Ex)", "Motivation (Ex)",
-				"Decrease to 20% henchmans idle time during combat.",
-				"You've chosen the 'Motivation (Ex)' perk, increasing motivation of allies to act in combat.");
+				"Decrease to 1% henchmans idle time during combat. Increase dmg dealt by ~50% each time you reach specific level treshold (up to 4 times).",
+				"You've chosen the 'Motivation (Ex)' perk. Increase dmg dealt by ~50% each time you reach specific level treshold (up to 4 times).");
 		public static const MotivationSu:PerkType = mk("Motivation (Su)", "Motivation (Su)",
-				"Decrease to 5% henchmans idle time during combat.",
-				"You've chosen the 'Motivation (Su)' perk, further increasing motivation of allies to act in combat.");
+				"All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.",
+				"You've chosen the 'Motivation (Su)' perk. All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.");
 		public static const MultiClawAttack:PerkType = mk("Multi Claw Attack", "Multi Claw Attack",
 				"When attacking with your natural weapons, add an additional attack striking up to 4 times.",
 				"You've chosen the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons!");
@@ -2172,9 +2196,6 @@ public class PerkLib
 		public static const MythicalEndurance:PerkType = mk("Mythical Endurance", "Mythical Endurance",
 				"Increases maximum fatigue by 20000.",
 				"You've chosen the 'Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 20000!");
-		public static const MythicalGolemMaker:PerkType = mk("Mythical Golem Maker", "Mythical Golem Maker",
-				"Your proficiency in making golems allows to make stronger golems as much stronger their creator became and slightly rise your intelligence and wisdom. Also allow to make and store 1 improved stone golem.",
-				"You've chosen the 'Mythical Golem Maker' perk, increasing your proficiency in making golems. Also allow to make improved stone golems.");
 		public static const MythicalIntelligence:PerkType = mk("Mythical Intelligence", "Mythical Intelligence",
 				"",
 				"You've chosen the 'Mythical Intelligence' perk.").withBuffs({'int.mult':0.65});
@@ -2345,47 +2366,47 @@ public class PerkLib
 				"You own the school board, controlling what classes are taught, further increasing max mana by 10%.",
 				"You've chosen the 'President' perk, gaining +10% max Mana.");
 		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Prestige Job: Arcane Archer",
-				"You've trained in prestige art of combining magic and arrows. (+40 to max spe/int - scalable)",
-				"You've chosen the 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.").withBuffs({'spe.mult':0.40,'int.mult':0.40});
+				"You've trained in prestige art of combining magic and arrows.",
+				"You've chosen the 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.").withBuffs({'spe.mult':0.55,'int.mult':0.65});
 		public static const PrestigeJobArchpriest:PerkType = mk("Prestige Job: Arch-priest", "Prestige Job: Arch-priest",
-				"You've trained in prestige art of divine magic. (+40 to max tou, +40 to max int - scalable; +20% to white magic spellpower, -40% to black magic spellpower)",
-				"You've chosen the 'Prestige Job: Arch-priest' perk, training yourself to became Arch-priest.").withBuffs({'tou.mult':0.40,'int.mult':0.40});
+				"You've trained in prestige art of divine magic. (+20% to white magic spellpower, -40% to black magic spellpower)",
+				"You've chosen the 'Prestige Job: Arch-priest' perk, training yourself to became Arch-priest.").withBuffs({'tou.mult':0.45,'int.mult':0.75});
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
-				"You've trained in prestige art of perfect mastery over all forms of berserking. (+60 to max str, +20 to max tou - scalable)",
-				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':0.60,'tou.mult':0.20});
+				"You've trained in prestige art of perfect mastery over all forms of berserking.",
+				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':1.00,'tou.mult':0.20});
 		public static const PrestigeJobBindmaster:PerkType = mk("Prestige Job: Bindmaster", "Prestige Job: Bindmaster",
-				"You've trained in prestige art of perfect mastery over all forms of binding. (+60 to max str, +20 to max tou - scalable)",
-				"You've chosen the 'Prestige Job: Bindmaster' perk, training yourself to became Bindmaster.").withBuffs({'tou.mult':0.20,'lib.mult':0.60});
+				"You've trained in prestige art of perfect mastery over all forms of binding.",
+				"You've chosen the 'Prestige Job: Bindmaster' perk, training yourself to became Bindmaster.").withBuffs({'tou.mult':0.30,'lib.mult':0.90});
 		public static const PrestigeJobDruid:PerkType = mk("Prestige Job: Druid", "Prestige Job: Druid",
-				"You've trained in prestige art of fusing with elementals. (+40 to max tou, +40 to max wis - scalable)",
-				"You've chosen the 'Prestige Job: Druid' perk, training yourself to became Druid.").withBuffs({'tou.mult':0.40,'wis.mult':0.40});
+				"You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals)",
+				"You've chosen the 'Prestige Job: Druid' perk, training yourself to became Druid.").withBuffs({'tou.mult':0.50,'wis.mult':0.70});
 		public static const PrestigeJobNecromancer:PerkType = mk("Prestige Job: Necromancer", "Prestige Job: Necromancer",
-				"You've trained in prestige art of mastery over animating bone constructs and using necromancer spells. (+20 to max tou, +60 to max wis - scalable)",
-				"You've chosen the 'Prestige Job: Necromancer' perk, training yourself to became Necromancer.").withBuffs({'tou.mult':0.20,'wis.mult':0.60});
+				"You've trained in prestige art of mastery over animating bone constructs and using necromancer spells.",
+				"You've chosen the 'Prestige Job: Necromancer' perk, training yourself to became Necromancer.").withBuffs({'tou.mult':0.30,'wis.mult':0.90});
 		public static const PrestigeJobSeer:PerkType = mk("Prestige Job: Seer", "Prestige Job: Seer",
 				"You've trained in prestige art of combining soulforce and magic.",
-				"You've chosen the 'Prestige Job: Seer' perk, training yourself to became Seer.").withBuffs({'int.mult':0.60,'wis.mult':0.20});
+				"You've chosen the 'Prestige Job: Seer' perk, training yourself to became Seer.").withBuffs({'int.mult':0.75,'wis.mult':0.45});
 		public static const PrestigeJobSentinel:PerkType = mk("Prestige Job: Sentinel", "Prestige Job: Sentinel",
-				"You've trained in prestige art that brings 'tanking' to a whole new level. (+20 to max str, +60 to max tou - scalable)",
-				"You've chosen the 'Prestige Job: Sentinel' perk, training yourself to became Sentinel.").withBuffs({'str.mult':0.20,'tou.mult':0.60});
+				"You've trained in prestige art that brings 'tanking' to a whole new level.",
+				"You've chosen the 'Prestige Job: Sentinel' perk, training yourself to became Sentinel.").withBuffs({'str.mult':0.20,'tou.mult':1.00});
 		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Prestige Job: Soul Archer",
 				"You've trained in prestige art of combining soulforce and arrows.",
-				"You've chosen the 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.").withBuffs({'spe.mult':0.40,'wis.mult':0.40});
+				"You've chosen the 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.").withBuffs({'spe.mult':0.55,'wis.mult':0.65});
 		public static const PrestigeJobSoulArtMaster:PerkType = mk("Prestige Job: Soul Art Master", "Prestige Job: Soul Art Master",
-				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect. (+40 to max str/wis - scalable)",
-				"You've chosen the 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.").withBuffs({'str.mult':0.40,'wis.mult':0.40});
+				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
+				"You've chosen the 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.").withBuffs({'str.mult':0.50,'wis.mult':0.70});
 		public static const PrestigeJobSpellKnight:PerkType = mk("Prestige Job: Spell-Knight", "Prestige Job: Spell-Knight",
-				"You've trained in prestige art of combining swordplay and magic. (+40 to max str/int - scalable)",
-				"You've chosen the 'Prestige Job: Spell-Knight' perk, training yourself to became Spell-Knight.").withBuffs({'str.mult':0.40,'int.mult':0.40});
+				"You've trained in prestige art of combining swordplay and magic.",
+				"You've chosen the 'Prestige Job: Spell-Knight' perk, training yourself to became Spell-Knight.").withBuffs({'str.mult':0.50,'int.mult':0.70});
 		public static const PrestigeJobStalker:PerkType = mk("Prestige Job: Stalker", "Prestige Job: Stalker",
-				"You've trained in prestige art of combining master survivalist and expert huntsman. (+60 to max str, +20 to max spe - scalable)",
-				"You've chosen the 'Prestige Job: Stalker' perk, training yourself to became Stalker.").withBuffs({'str.mult':0.60,'spe.mult':0.20});
+				"You've trained in prestige art of combining master survivalist and expert huntsman.",
+				"You've chosen the 'Prestige Job: Stalker' perk, training yourself to became Stalker.").withBuffs({'str.mult':0.80,'spe.mult':0.40});
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
-				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel. (+40 to max str/spe - scalable)",
-				"You've chosen the 'Prestige Job: Tempest' perk, training yourself to became Tempest.").withBuffs({'str.mult':0.40,'spe.mult':0.40});
+				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel.",
+				"You've chosen the 'Prestige Job: Tempest' perk, training yourself to became Tempest.").withBuffs({'str.mult':0.30,'spe.mult':0.90});
 		public static const PrestigeJobWarlock:PerkType = mk("Prestige Job: Warlock", "Prestige Job: Warlock",
-				"You've trained in prestige art of hex magic. (+60 to max int, +20 to max lib - scalable; +20% to black magic spellpower, -40% to white magic spellpower)",
-				"You've chosen the 'Prestige Job: Warlock' perk, training yourself to became Warlock.").withBuffs({'int.mult':0.60,'lib.mult':0.20});
+				"You've trained in prestige art of hex magic. (+20% to black magic spellpower, -40% to white magic spellpower)",
+				"You've chosen the 'Prestige Job: Warlock' perk, training yourself to became Warlock.").withBuffs({'int.mult':0.75,'lib.mult':0.45});
 		public static const Priest:PerkType = mk("Priest", "Priest",
 				"You now speak during mass, your words of wisdom empowering others and you to have a lower minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
 				"You've chosen the 'Priest' perk, lowering min libido by 2 and rise lust resistance by 5%.");
@@ -2740,8 +2761,8 @@ public class PerkLib
 				"You're a new student, kinda have to be studious. Your hours of study has helped you increase max mana by 10%.",
 				"You've chosen the 'Studious' perk, gaining +10% max Mana.");
 		public static const SuperChargedCore:PerkType = mk("Super Charged Core", "Super Charged Core",
-				"At the cost of using additional mana you can super charge each temporary golem core attaing ever better effects than before.",
-				"You've chosen the 'Super Charged Core' perk, learning how to make core charging more effective.");
+				"At the cost of using additional mana you can super charge each temporary golem core attaing ever better effects than before. Allow to deal reduced (50%) damage to enemies that are immune to physical attacks.",
+				"You've chosen the 'Super Charged Core' perk, learning how to make core charging more effective. Even to be able damage enemeis highly resistant to physical attacks.");
 		public static const SuperiorEndurance:PerkType = mk("Superior Endurance", "Superior Endurance",
 				"Increases maximum fatigue by 500.",
 				"You've chosen the 'Superior Endurance' perk. Thanks to your superior physical conditioning, your maximum fatigue has been increased by 500!</b>");
@@ -2818,8 +2839,11 @@ public class PerkLib
 		public static const Telekinesis:PerkType = mk("Telekinesis", "Telekinesis",
 				"You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons and aquire additionnal attacks based on character level.");
 		public static const TemporalGolemsRestructuration:PerkType = mk("Temporal Golems Restructuration", "Temporal Golems Restructuration",
-				"Allow to use option of send all temporary golems to attack in one turn. Adding option to make 5 temporary golems at once and shorten a bit time to make 1 temporary golem.",
-				"You've chosen the 'Temporal Golems Restructuration' perk, adding option to make faster and more temporary golems at once and have option to send them all at once to attack.");
+				"Allow to use option of send more than 5 temporary golems to attack in one turn. Adding option to make 5 temporary golems at once and shorten a bit time to make 1 temporary golem. (+5 to max limit of stored temporary stone golems)",
+				"You've chosen the 'Temporal Golems Restructuration' perk, adding option to make faster and more temporary golems at once and have option to send more of them at once to attack. (+5 to max limit of stored temporary stone golems)");
+		public static const TemporalGolemsRestructurationEx:PerkType = mk("Temporal Golems Restructuration (Ex)", "Temporal Golems Restructuration (Ex)",
+				"Allow to use option of send all temporary golems to attack in one turn. Adding option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)",
+				"You've chosen the 'Temporal Golems Restructuration' perk, adding option to make faster and more temporary golems at once and have option to send them all at once to attack. (+10 to max limit of stored temporary stone golems)");
 		public static const ThirdRing:PerkType = mk("Third Ring", "Third Ring",
 				"Your advanced understanding of magic pools allows you to equip third ring.",
 				"You've chosen the 'Third Ring' perk, reaching advanced understanding of magic pools to allow you equip third ring.");
@@ -3030,19 +3054,34 @@ public class PerkLib
 				"You've chosen the 'Wild Quiver' perk, you combine it with triple attack and manyshot to shoot up to 5 times.");
 		public static const WisenedHealer:PerkType = mk("Wisened Healer", "Wisened Healer",
 				"Adds wisdom based scaling to healing spells at cost of doubling spells costs.",
-				"You've chosen the 'Wisened Healer' perk. Increasing healing spells effects based on current wisdom.");
+				"You've chosen the 'Wisened Healer' perk. Increasing healing spells effects based on current wisdom.");/*
+		public static const WispBrigadierGeneral:PerkType = mk("Wisp Brigadier General", "Wisp Brigadier General",
+				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 60% (210% in total).",
+				"You've chosen the 'Wisp Brigadier General' perk, training your wisp to Wisp Brigadier General.");*/
 		public static const WispCaptain:PerkType = mk("Wisp Captain", "Wisp Captain",
 				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 30% (60% in total).",
 				"You've chosen the 'Wisp Captain' perk, training your wisp to Wisp Captain.");
 		public static const WispColonel:PerkType = mk("Wisp Colonel", "Wisp Colonel",
 				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 50% (150% in total).",
-				"You've chosen the 'Wisp Colonel' perk, training your wisp to Wisp Colonel.");
+				"You've chosen the 'Wisp Colonel' perk, training your wisp to Wisp Colonel.");/*
+		public static const WispColonelGeneral:PerkType = mk("Wisp Colonel General", "Wisp Colonel General",
+				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 90% (450% in total).",
+				"You've chosen the 'Wisp Colonel General' perk, training your wisp to Wisp Lieutenant General.");
+		public static const WispFieldMarshal:PerkType = mk("Wisp Field Marshal", "Wisp Field Marshal",
+				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 100% (550% in total).",
+				"You've chosen the 'Wisp Field Marshal' perk, training your wisp to Wisp Lieutenant General.");*/
 		public static const WispLieutenant:PerkType = mk("Wisp Lieutenant", "Wisp Lieutenant",
 				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 20% (30% in total).",
-				"You've chosen the 'Wisp Lieutenant' perk, training your wisp to Wisp Lieutenant.");
+				"You've chosen the 'Wisp Lieutenant' perk, training your wisp to Wisp Lieutenant.");/*
+		public static const WispLieutenantGeneral:PerkType = mk("Wisp Lieutenant General", "Wisp Lieutenant General",
+				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 80% (360% in total).",
+				"You've chosen the 'Wisp Lieutenant General' perk, training your wisp to Wisp Lieutenant General.");*/
 		public static const WispMajor:PerkType = mk("Wisp Major", "Wisp Major",
 				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 40% (100% in total).",
-				"You've chosen the 'Wisp Major' perk, training your wisp to Wisp Major.");
+				"You've chosen the 'Wisp Major' perk, training your wisp to Wisp Major.");/*
+		public static const WispMajorGeneral:PerkType = mk("Wisp Major General", "Wisp Major General",
+				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 70% (280% in total).",
+				"You've chosen the 'Wisp Major General' perk, training your wisp to Wisp Brigadier General.");*/
 		public static const Wizened:PerkType = mk("Wizened", "Wizened",
 				"You are wise, what did you expect, something wise? You do get 10% more soulforce though.",
 				"You've chosen the 'Wizened' perk, gaining +10% max Soulforce.");
@@ -3913,24 +3952,6 @@ public class PerkLib
             //HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
             //a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
             //Tier 7 Strength Perks
-            PrestigeJobBerserker.requirePrestigeJobSlot()
-                    .requirePerks(JobSwordsman, JobGuardian)
-                    .requireAnyPerk(Berzerker, Lustzerker)
-                    .requireStr(200)
-                    .requireLevel(42);
-            /*PrestigeJobStalker.requirePrestigeJobSlot()
-                    .requirePerk(JobWarrior)
-                    .requirePerk(JobHunter)
-                    .requireStr(150)
-                    .requireSpe(150)
-                    .requireLevel(42);*/
-            PrestigeJobSpellKnight.requirePrestigeJobSlot()
-                    .requireStr(200)
-                    .requireInt(150)
-                    .requireLevel(42)
-					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) >= 1 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) >= 1;
-                    }, "Get menthorship from one of the two greatest mages in mareth.");
             HalfStepToPeerlessTranquilness.requireStr(240)
                     .requireTou(80)
                     .requireSpe(80)
@@ -3940,13 +3961,6 @@ public class PerkLib
                     .requireStr(150)
                     .requirePerk(GreaterBrute);
             //Tier 8 Strength Perks
-            Rage.requirePerk(PrestigeJobBerserker)
-                    .requireLevel(48);
-            SwiftCasting.requireLevel(48)
-                    .requirePerk(PrestigeJobSpellKnight)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard);
-                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard spell");
             PeerlessTranquilness.requireStr(270)
                     .requireTou(90)
                     .requireSpe(90)
@@ -3956,10 +3970,24 @@ public class PerkLib
                     .requireStr(165)
                     .requirePerks(GreaterBrawn, GreaterBrute);
             //Tier 9 Strength Perks
-            Anger.requirePerk(Rage)
+            PrestigeJobBerserker.requirePrestigeJobSlot()
+                    .requirePerks(JobSwordsman, JobGuardian)
+                    .requireAnyPerk(Berzerker, Lustzerker)
+                    .requireStr(200)
                     .requireLevel(54);
-            WarCaster.requirePerk(SwiftCasting)
-                    .requireLevel(54);
+            /*PrestigeJobStalker.requirePrestigeJobSlot()
+                    .requirePerk(JobWarrior)
+                    .requirePerk(JobHunter)
+                    .requireStr(150)
+                    .requireSpe(150)
+                    .requireLevel(54);*/
+            PrestigeJobSpellKnight.requirePrestigeJobSlot()
+                    .requireStr(200)
+                    .requireInt(150)
+                    .requireLevel(54)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) >= 1 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) >= 1;
+                    }, "Get menthorship from one of the two greatest mages in mareth.");
             HalfStepToInhumanTranquilness.requireStr(300)
                     .requireTou(100)
                     .requireSpe(100)
@@ -3969,10 +3997,13 @@ public class PerkLib
                     .requireStr(180)
                     .requirePerk(EpicBrute);
             //Tier 10 Strength Perks
-            FuelForTheFire.requirePerk(Anger)
+            Rage.requirePerk(PrestigeJobBerserker)
                     .requireLevel(60);
-            VampiricBlade.requirePerk(WarCaster)
-                    .requireLevel(54);
+            SwiftCasting.requireLevel(60)
+                    .requirePerk(PrestigeJobSpellKnight)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard);
+                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard spell");
             InhumanTranquilness.requireStr(330)
                     .requireTou(110)
                     .requireSpe(110)
@@ -3985,8 +4016,10 @@ public class PerkLib
                     .requireStr(195)
                     .requirePerks(EpicBrawn, EpicBrute);
             //Tier 11 Strength Perks
-            //TooAngryToDie.requirePerk(FuelForTheFire)
-                    //.requireLevel(66);
+            Anger.requirePerk(Rage)
+                    .requireLevel(66);
+            WarCaster.requirePerk(SwiftCasting)
+                    .requireLevel(66);
             HalfStepToEpicTranquilness.requireStr(360)
                     .requireTou(120)
                     .requireSpe(120)
@@ -3999,6 +4032,10 @@ public class PerkLib
                     .requireStr(210)
                     .requirePerk(LegendaryBrute);
             //Tier 12 Strength Perks
+            FuelForTheFire.requirePerk(Anger)
+                    .requireLevel(72);
+            VampiricBlade.requirePerk(WarCaster)
+                    .requireLevel(72);
             EpicTranquilness.requireStr(390)
                     .requireTou(130)
                     .requireSpe(130)
@@ -4008,6 +4045,8 @@ public class PerkLib
                     .requireStr(225)
                     .requirePerks(LegendaryBrawn, LegendaryBrute);
             //Tier 13 Strength Perks
+            //TooAngryToDie.requirePerk(FuelForTheFire)
+                    //.requireLevel(78);
             HalfStepToLegendaryTranquilness.requireStr(420)
                     .requireTou(140)
                     .requireSpe(140)
@@ -4246,10 +4285,6 @@ public class PerkLib
                     .requireStr(160)
                     .requirePerk(SuperiorEndurance)
                     .requireLevel(42);
-            PrestigeJobSentinel.requirePrestigeJobSlot()
-                    .requirePerks(JobKnight, JobWarrior)
-                    .requireTou(200)
-                    .requireLevel(42);
             CheetahIV.requirePerk(CheetahIII)
                     .requireTou(195)
                     .requireLevel(42)
@@ -4267,20 +4302,20 @@ public class PerkLib
                     .requireStr(180)
                     .requirePerk(HalfStepToPeerlessEndurance)
                     .requireLevel(48);
-            SteelImpact.requirePerk(PrestigeJobSentinel)
-                    .requireLevel(48);
             EpicLifeline.requirePerk(GreaterLifeline)
                     .requireTou(225)
                     .requireLevel(48);
             //Tier 9 Toughness Perks
-            ShieldCombat.requirePerk(SteelImpact)
+            PrestigeJobSentinel.requirePrestigeJobSlot()
+                    .requirePerks(JobKnight, JobWarrior)
+                    .requireTou(200)
                     .requireLevel(54);
             HalfStepToInhumanEndurance.requireTou(300)
                     .requireStr(200)
                     .requirePerk(PeerlessEndurance)
                     .requireLevel(54);
             //Tier 10 Toughness Perks
-            SecondWind.requirePerk(ShieldCombat)
+            SteelImpact.requirePerk(PrestigeJobSentinel)
                     .requireLevel(60);
             InhumanEndurance.requireTou(330)
                     .requireStr(220)
@@ -4290,6 +4325,8 @@ public class PerkLib
                     .requireTou(230)
                     .requireLevel(60);
             //Tier 11 Toughness Perks
+            ShieldCombat.requirePerk(SteelImpact)
+                    .requireLevel(66);
             HalfStepToEpicEndurance.requireTou(360)
                     .requireStr(240)
                     .requirePerk(InhumanEndurance)
@@ -4298,6 +4335,8 @@ public class PerkLib
                     .requirePerk(EpicToughness)
                     .requireLevel(66);
             //Tier 12 Toughness Perks
+            SecondWind.requirePerk(ShieldCombat)
+                    .requireLevel(72);
             EpicEndurance.requireTou(390)
                     .requireStr(260)
                     .requirePerk(HalfStepToEpicEndurance)
@@ -4597,51 +4636,48 @@ public class PerkLib
                     .requireStr(120)
                     .requireLevel(36);
             //Tier 7 Speed Perks
+            //Tier 8 Speed Perks
+            //Tier 9 Speed Perks
             PrestigeJobArcaneArcher.requirePrestigeJobSlot()
                     .requirePerks(JobSorcerer, JobHunter)
                     .requireSpe(200)
                     .requireInt(150)
-                    .requireLevel(42);
+                    .requireLevel(54);
             PrestigeJobTempest.requirePrestigeJobSlot()
                     .requirePerks(JobDervish, JobWarrior, DualWield)
                     .requireSpe(200)
-                    .requireLevel(42);
-            //Tier 8 Speed Perks
-            ElementalArrows.requireLevel(48)
+                    .requireLevel(54);
+			//Tier 10 Speed Perks
+            ElementalArrows.requireLevel(60)
                     .requirePerk(PrestigeJobArcaneArcher)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard);
                     }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard spell");
-            SteelStorm.requireLevel(48)
+            SteelStorm.requireLevel(60)
                     .requirePerk(PrestigeJobTempest);
-            //Tier 9 Speed Perks
-            Cupid.requireLevel(54)
-                    .requirePerk(ElementalArrows)
-                    .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
-            BladeBarrier.requireLevel(54)
-                    .requirePerk(SteelStorm);
-			//Tier 10 Speed Perks
-            TwinRiposte.requireLevel(60)
-                    .requirePerks(Parry, BladeBarrier);
             UnlockEndurance3rdStage.requirePerk(UnlockEndurance2ndStage)
                     .requireSpe(230)
                     .requireLevel(60);
 			//Tier 11 Speed Perks
+            Cupid.requireLevel(66)
+                    .requirePerk(ElementalArrows)
+                    .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
+            BladeBarrier.requireLevel(66)
+                    .requirePerk(SteelStorm);
 			LegendarySpeed.requireSpe(15)
                     .requirePerk(EpicSpeed)
                     .requireLevel(66);
 			//Tier 12 Speed Perks
+            TwinRiposte.requireLevel(72)
+                    .requirePerks(Parry, BladeBarrier);
 			/*		PrestigeJobSoulArcher.requirePrestigeJobSlot()
 					 .requirePerk(SoulOverlord)
 					 .requirePerk(JobHunter)
 					 .requireSpe(200)
 					 .requireLevel(72);
                     */
-
             //Tier 13 Speed Perks
-
 			//Tier 14 Speed Perks
-
 			//Tier 15 Speed Perks
             UnlockEndurance4thStage.requirePerk(UnlockEndurance3rdStage)
                     .requireSpe(335)
@@ -4978,29 +5014,6 @@ public class PerkLib
                     .requireInt(175)
                     .requireLevel(36);
             //Tier 7 Intelligence perks
-        /*	PrestigeJobSeer.requirePrestigeJobSlot()
-                    .requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(SoulElder)
-                    .requireInt(200)
-                    .requireLevel(42);
-			PrestigeJobGreySage.requirePrestigeJobSlot()
-                    .requirePerks(GrandArchmage3rdCircle, JobEnchanter)
-                    .requireInt(200)
-                    .requireLevel(42);
-        */	PrestigeJobWarlock.requirePrestigeJobSlot()
-                    .requirePerks(GrandArchmage3rdCircle, JobEromancer)
-                    .requireInt(200)
-                    .requireLevel(42)
-					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;
-                    }, "Finished a certain black mage quest line up to the third part of the training");//Alvina
-        	PrestigeJobArchpriest.requirePrestigeJobSlot()
-                    .requirePerks(JobEnchanter, JobGuardian)
-                    .requireInt(200)
-                    .requireLevel(42)
-					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 1;
-                    }, "Finished a certain paladin quest line up to the second part of the training");//Siegweird
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)
@@ -5010,29 +5023,37 @@ public class PerkLib
                     .requireInt(270)
                     .requirePerk(HalfStepToPeerlessSpirituality)
                     .requireLevel(48);
-            /*Trance.requirePerk(PrestigeJobSeer)
-					.requireInt(240)
-					.requireLevel(48);*/
-            HexKnowledge.requirePerk(PrestigeJobWarlock)
-                    .requireInt(225)
-                    .requireLevel(48);
-            DivineKnowledge.requirePerk(PrestigeJobArchpriest)
-                    .requireInt(225)
-                    .requireLevel(48);
             GrandGreyArchmage.requirePerk(GreyArchmage)
                     .requireInt(225)
                     .requireLevel(48);
             //Tier 9 Intelligence perks
+        /*	PrestigeJobSeer.requirePrestigeJobSlot()
+                    .requirePerk(GrandArchmage3rdCircle)
+                    .requirePerk(SoulElder)
+                    .requireInt(200)
+                    .requireLevel(54);
+			PrestigeJobGreySage.requirePrestigeJobSlot()
+                    .requirePerks(GrandArchmage3rdCircle, JobEnchanter)
+                    .requireInt(200)
+                    .requireLevel(54);
+        */	PrestigeJobWarlock.requirePrestigeJobSlot()
+                    .requirePerks(GrandArchmage3rdCircle, JobEromancer)
+                    .requireInt(200)
+                    .requireLevel(54)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;
+                    }, "Finished a certain black mage quest line up to the third part of the training");//Alvina
+        	PrestigeJobArchpriest.requirePrestigeJobSlot()
+                    .requirePerks(JobEnchanter, JobGuardian)
+                    .requireInt(200)
+                    .requireLevel(54)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 1;
+                    }, "Finished a certain paladin quest line up to the second part of the training");//Siegweird
             HalfStepToInhumanSpirituality.requireWis(200)
                     .requireInt(300)
                     .requirePerk(PeerlessSpirituality)
                     .requireLevel(54);
-            DarkRitual.requirePerk(HexKnowledge)
-					.requireInt(250)
-					.requireLevel(54);
-            DivineArmament.requirePerk(DivineKnowledge)
-					.requireInt(250)
-					.requireLevel(54);
 			RagingInfernoSu.requirePerks(GrandArchmage3rdCircle, RagingInfernoEx)
                     .requireLevel(54)
                     .requireInt(300);
@@ -5046,20 +5067,29 @@ public class PerkLib
                     .requireLevel(54)
                     .requireInt(300);
             //Tier 10 Intelligence perks
+            /*Trance.requirePerk(PrestigeJobSeer)
+					.requireInt(240)
+					.requireLevel(60);*/
+            HexKnowledge.requirePerk(PrestigeJobWarlock)
+                    .requireInt(225)
+                    .requireLevel(60);
+            DivineKnowledge.requirePerk(PrestigeJobArchpriest)
+                    .requireInt(225)
+                    .requireLevel(60);
             InhumanSpirituality.requireWis(220)
                     .requireInt(330)
                     .requirePerk(HalfStepToInhumanSpirituality)
                     .requireLevel(60);
-            CorruptMagic.requirePerk(DarkRitual)
-					.requireInt(275)
-					.requireLevel(60);
-            PureMagic.requirePerk(DivineArmament)
-					.requireInt(275)
-					.requireLevel(60);
             UnlockForce3rdStage.requirePerk(UnlockForce2ndStage)
                     .requireInt(230)
                     .requireLevel(60);
             //Tier 11 Intelligence perks
+            DarkRitual.requirePerk(HexKnowledge)
+					.requireInt(250)
+					.requireLevel(66);
+            DivineArmament.requirePerk(DivineKnowledge)
+					.requireInt(250)
+					.requireLevel(66);
             HalfStepToEpicSpirituality.requireWis(240)
                     .requireInt(360)
                     .requirePerk(InhumanSpirituality)
@@ -5068,6 +5098,12 @@ public class PerkLib
                     .requirePerk(EpicIntelligence)
                     .requireLevel(66);
             //Tier 12 Intelligence perks
+            CorruptMagic.requirePerk(DarkRitual)
+					.requireInt(275)
+					.requireLevel(72);
+            PureMagic.requirePerk(DivineArmament)
+					.requireInt(275)
+					.requireLevel(72);
             EpicSpirituality.requireWis(260)
                     .requireInt(390)
                     .requirePerk(HalfStepToEpicSpirituality)
@@ -5300,23 +5336,9 @@ public class PerkLib
                     .requireSpe(90)
                     .requireLevel(36);
             //Tier 7 Wisdom perks
-            PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
-                    .requirePerks(FleshBodyApprenticeStage, JobMonk)
-                    .requireWis(200)
-                    .requireLevel(42);
             ElementalContractRank8.requirePerk(ElementalContractRank7)
                     .requireWis(200)
                     .requireLevel(42);
-			PrestigeJobNecromancer.requirePrestigeJobSlot()
-                    .requirePerks(DaoistApprenticeStage, JobGolemancer)
-					.requireInt(125)
-					.requireWis(175)
-                    .requireLevel(42);/*
-			PrestigeJobDruid.requirePrestigeJobSlot()
-                    .requirePerk(GrandArchmage3rdCircle)
-                    .requirePerk(JobElementalConjurer)
-                    .requireWis(200)
-                    .requireLevel(42);*/
             //Tier 8 Wisdom perks
             ElementalContractRank9.requirePerks(ElementalContractRank8, ElementalConjurerSacrifice)
                     .requireWis(225)
@@ -5324,11 +5346,21 @@ public class PerkLib
             ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
                     .requireWis(220)
                     .requireLevel(48);
-            PerfectStrike.requireLevel(48)
-                    .requirePerk(PrestigeJobSoulArtMaster);
-            GreaterHarvest.requireLevel(48)
-                    .requirePerk(PrestigeJobNecromancer);
             //Tier 9 Wisdom perks
+            PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
+                    .requirePerks(FleshBodyApprenticeStage, JobMonk)
+                    .requireWis(200)
+                    .requireLevel(54);
+			PrestigeJobNecromancer.requirePrestigeJobSlot()
+                    .requirePerks(DaoistApprenticeStage, JobGolemancer)
+					.requireInt(125)
+					.requireWis(175)
+                    .requireLevel(54);
+			PrestigeJobDruid.requirePrestigeJobSlot()
+                    .requirePerk(Archmage)
+                    .requirePerk(ElementalContractRank7)
+                    .requireWis(200)
+                    .requireLevel(54);
             ElementalContractRank10.requirePerk(ElementalContractRank9)
                     .requireWis(250)
                     .requireLevel(54);
@@ -5336,22 +5368,22 @@ public class PerkLib
             StrongerElementalBond.requirePerks(StrongElementalBondSu, ElementalContractRank10)
                     .requireWis(250)
                     .requireLevel(54);
-            Backlash.requireLevel(54)
-                    .requirePerk(PerfectStrike);
-            BoneSoul.requireLevel(54)
-                    .requirePerk(GreaterHarvest);
             //Tier 10 Wisdom perks
+            PerfectStrike.requireLevel(60)
+                    .requirePerk(PrestigeJobSoulArtMaster);
+            GreaterHarvest.requireLevel(60)
+                    .requirePerk(PrestigeJobNecromancer);
             ElementalContractRank11.requirePerk(ElementalContractRank10)
                     .requireWis(275)
                     .requireLevel(60);
             UnlockSpirit3rdStage.requirePerk(UnlockSpirit2ndStage)
                     .requireWis(230)
                     .requireLevel(60);
-            FlurryOfBlows.requireLevel(60)
-                    .requirePerks(ComboMaster, Backlash);
-            SkeletonLord.requireLevel(60)
-                    .requirePerk(BoneSoul);
             //Tier 11 Wisdom perks
+            Backlash.requireLevel(66)
+                    .requirePerk(PerfectStrike);
+            BoneSoul.requireLevel(66)
+                    .requirePerk(GreaterHarvest);
             ElementalContractRank12.requirePerk(ElementalContractRank11)
                     .requireWis(300)
                     .requireLevel(66);
@@ -5361,9 +5393,11 @@ public class PerkLib
             LegendaryWisdom.requireWis(15)
                     .requirePerk(EpicWisdom)
                     .requireLevel(66);
-            RecoveryMantra.requireLevel(66)
-                    .requirePerk(FlurryOfBlows);
             //Tier 12 Wisdom perks
+            FlurryOfBlows.requireLevel(72)
+                    .requirePerks(ComboMaster, Backlash);
+            SkeletonLord.requireLevel(72)
+                    .requirePerk(BoneSoul);
             ElementalContractRank13.requirePerk(ElementalContractRank12)
                     .requireWis(325)
                     .requireLevel(72);
@@ -5371,6 +5405,8 @@ public class PerkLib
                     .requireWis(325)
                     .requireLevel(72);
             //Tier 13 Wisdom perks
+            RecoveryMantra.requireLevel(78)
+                    .requirePerk(FlurryOfBlows);
 			ElementalContractRank14.requirePerk(ElementalContractRank13)
                     .requireWis(350)
                     .requireLevel(78);
@@ -5805,6 +5841,8 @@ public class PerkLib
             //------------
             //Tier 0
             JobSoulCultivator.requireWis(10);
+            SoulApprentice.requireWis(20)
+                    .requirePerk(JobSoulCultivator);
             Dantain.requirePerk(JobSoulCultivator)
                     .requireMaxSoulforce(100);
             BodyCultivator.requirePerk(JobSoulCultivator);
@@ -5814,9 +5852,9 @@ public class PerkLib
             FlyingSwordPath.requirePerk(JobSoulCultivator);
 			SoaringBlades.requirePerks(Dantain, FlyingSwordPath);
             //Tier 1
-            SoulApprentice.requireWis(20)
-                    .requireLevel(6)
-                    .requirePerk(JobSoulCultivator);
+            SoulPersonage.requireLevel(9)
+                    .requirePerk(SoulApprentice)
+                    .requireWis(40);
             InsightfulResourcesI.requireLevel(6)
                     .requireWis(50)
                     .requirePerk(JobSoulCultivator);
@@ -5834,9 +5872,6 @@ public class PerkLib
                     .requireLevel(10)
                     .requireNGPlus(2);
             //Tier 2
-            SoulPersonage.requireLevel(12)
-                    .requirePerk(SoulApprentice)
-                    .requireWis(40);
             InsightfulResourcesIV.requireLevel(12)
                     .requirePerk(InsightfulResourcesIII)
                     .requireWis(110)
@@ -5851,57 +5886,65 @@ public class PerkLib
                     .requireNGPlus(5);
             //Tier 3
             SoulWarrior.requirePerk(SoulPersonage)
-                    .requireWis(60)
+                    .requireWis(80)
                     .requireLevel(18);
             //2nd perk for flying swords slots
             //Tier 4
             SoulSprite.requirePerks(SoulWarrior, HclassHeavenTribulationSurvivor)
-					.requireWis(80)
-                    .requireLevel(24);
+					.requireWis(100)
+                    .requireLevel(27);
             FleshBodyWarriorStage.requireLevel(24)
                     .requirePerk(FleshBodyApprenticeStage);
             DaoistWarriorStage.requireLevel(24)
                     .requirePerk(DaoistApprenticeStage);
             //Tier 5
-            SoulScholar.requirePerk(SoulSprite)
-                    .requireWis(100)
-                    .requireLevel(30);
 			//Tier 6
-            SoulElder.requirePerk(SoulScholar)
-                    .requireWis(120)
+            SoulScholar.requirePerk(SoulSprite)
+                    .requireWis(140)
                     .requireLevel(36);
             //Tier 7
-            SoulExalt.requirePerks(SoulElder, GclassHeavenTribulationSurvivor)
-                    .requireWis(140)
-                    .requireLevel(42);
-            FleshBodyElderStage.requireLevel(42)
-                    .requirePerk(FleshBodyWarriorStage);
-            DaoistElderStage.requireLevel(42)
-                    .requirePerk(DaoistWarriorStage);
-            //Tier 8
-            SoulOverlord.requirePerk(SoulExalt)
+            SoulElder.requirePerk(SoulScholar)
                     .requireWis(160)
-                    .requireLevel(48);
+                    .requireLevel(45);
+            //Tier 8
             //Tier 9
-            SoulTyrant.requireLevel(54)
-                    .requirePerk(SoulOverlord)
-                    .requireWis(180);
-            //Tier 10
-     		SoulKing.requirePerks(SoulTyrant, FclassHeavenTribulationSurvivor)
+            SoulExalt.requirePerks(SoulElder, GclassHeavenTribulationSurvivor)
                     .requireWis(200)
-                    .requireLevel(60);
-            FleshBodyOverlordStage.requireLevel(60)
-                    .requirePerk(FleshBodyElderStage);
-            DaoistOverlordStage.requireLevel(60)
-                    .requirePerk(DaoistElderStage);
+                    .requireLevel(54);
+            //Tier 10
+            FleshBodyElderStage.requireLevel(60)
+                    .requirePerk(FleshBodyWarriorStage);
+            DaoistElderStage.requireLevel(60)
+                    .requirePerk(DaoistWarriorStage);
             //Tier 11
-            SoulEmperor.requirePerk(SoulKing)
-                    .requireWis(220)
+            SoulOverlord.requirePerk(SoulExalt)
+                    .requireWis(240)
                     .requireLevel(66);
             //Tier 12
+            //Tier 13
+            SoulTyrant.requirePerks(SoulOverlord, FclassHeavenTribulationSurvivor)
+                    .requireWis(280)
+					.requireLevel(78);
+            //Tier 14
+            //Tier 15
+     		SoulKing.requirePerk(SoulTyrant)
+                    .requireWis(320)
+                    .requireLevel(90);
+            //Tier 16
+            FleshBodyOverlordStage.requireLevel(96)
+                    .requirePerk(FleshBodyElderStage);
+            DaoistOverlordStage.requireLevel(96)
+                    .requirePerk(DaoistElderStage);
+            //Tier 17
+            SoulEmperor.requirePerk(SoulKing)//s	, EclassHeavenTribulationSurvivor
+                    .requireWis(360)
+                    .requireLevel(102);
+            //Tier 18
+            //Tier 19
             SoulAncestor.requirePerk(SoulEmperor)
-                    .requireWis(240)
-                    .requireLevel(72);
+                    .requireWis(400)
+                    .requireLevel(114);
+            //Tier 20
      		//------------
             // MISCELLANEOUS
             //------------
@@ -6354,8 +6397,6 @@ public class PerkLib
                     .requireLevel(24);
             FirstAttackGolems.requireLevel(24)
                     .requirePerk(MasterGolemMaker);
-            //.requireLevel(24)
-            //				 .requirePerk(MasterGolemMaker);
             NaturalHealingEpic.requireLevel(24)
                     .requirePerk(NaturalHealingMajor)
                     .requireInt(25)
@@ -6375,13 +6416,6 @@ public class PerkLib
 					.requireSpe(50);
 			IronStomachSu.requireLevel(24)
                     .requirePerk(IronStomachEx);
-            WispCaptain.requireLevel(24)
-                    .requirePerk(WispLieutenant)
-					.requireInt(100)
-					.requireWis(100)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.playerMinionsCount() >= 6;
-					}, "6+ pets/minions");
 			Fusion.requireLevel(24)
 					.requirePerk(Enhancement);
 			PathOfEnlightenment.requireLevel(24)
@@ -6407,6 +6441,13 @@ public class PerkLib
 					.requirePerk(Amateur);
             BasicAllRounderEducation.requireLevel(24)
                     .requirePerk(JobAllRounder);
+            WispCaptain.requireLevel(27)
+                    .requirePerk(WispLieutenant)
+					.requireInt(100)
+					.requireWis(100)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.playerMinionsCount() >= 6;
+					}, "6+ pets/minions");
             //Tier 5
 			EclipticMindFinalForm.requireLevel(30).requirePerk(EclipticMindEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
@@ -6426,7 +6467,11 @@ public class PerkLib
                     .requireTou(95)
                     .requireSpe(95)
                     .requireLevel(30);
-            GolemArmyLieutenant.requireLevel(30)
+            GolemArmyJuniorLieutenant.requireLevel(30)
+                    .requireInt(110)
+                    .requireWis(110)
+                    .requirePerk(MasterGolemMaker);
+            TemporalGolemsRestructuration.requireLevel(30)
                     .requireInt(110)
                     .requireWis(110)
                     .requirePerk(MasterGolemMaker);
@@ -6466,10 +6511,6 @@ public class PerkLib
                     .requireInt(125)
                     .requireWis(125)
                     .requirePerk(MasterGolemMaker);
-            TemporalGolemsRestructuration.requireLevel(36)
-                    .requireInt(120)
-                    .requireWis(120)
-                    .requirePerk(MasterGolemMaker);
             MotivationSu.requireLevel(36)
                     .requirePerk(MotivationEx);//.requirePerk(AdvancedLeadership)
             AdvancedAllRounderEducation.requireLevel(36)
@@ -6484,23 +6525,16 @@ public class PerkLib
                     .requireStr(160)
                     .requireTou(160)
                     .requirePerk(CycloneStage4);
-            GolemArmyCaptain.requireLevel(42)
+            GolemArmyLieutenant.requireLevel(42)
                     .requireInt(135)
                     .requireWis(135)
-                    .requirePerks(GolemArmyLieutenant, GrandMasterGolemMaker);
-            //AdvancedGolemancyTheory.requireLevel(42)
-            //        .requireInt(140)
-            //        .requireWis(140)
-            //        .requirePerk(GrandMasterGolemMaker);
+                    .requirePerks(GolemArmyJuniorLieutenant, GrandMasterGolemMaker);
+            AdvancedGolemancyTheory.requireLevel(42)
+                    .requireInt(140)
+                    .requireWis(140)
+                    .requirePerk(GrandMasterGolemMaker);
             EpicDiehard.requireLevel(42)
                     .requirePerks(EpicToughness, GreaterDiehard);
-            WispMajor.requireLevel(42)
-                    .requirePerk(WispCaptain)
-					.requireInt(150)
-					.requireWis(150)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.playerMinionsCount() >= 10;
-					}, "10+ pets/minions");
 			Enchantment.requireLevel(42)
 					.requirePerk(Fusion);
 			Embodiment.requireLevel(42)
@@ -6536,7 +6570,7 @@ public class PerkLib
             EpicGolemMaker.requireLevel(48)
                     .requireInt(150)
                     .requireWis(150)
-                    .requirePerk(GrandMasterGolemMaker);
+                    .requirePerks(GrandMasterGolemMaker, AdvancedGolemancyTheory);
 			LimitBreakerHeart1stStage.requireLevel(48)
 					.requirePerk(LimitBreakerBody1stStage);
             MasterAllRounderEducation.requireLevel(48)
@@ -6547,10 +6581,21 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 50;
                     }, "Fifty racial perks");
-            GolemArmyMajor.requireLevel(54)
+            GolemArmyCaptain.requireLevel(54)
                     .requireInt(160)
                     .requireWis(160)
-                    .requirePerks(GolemArmyCaptain, EpicGolemMaker);
+                    .requirePerks(GolemArmyLieutenant, EpicGolemMaker);
+            TemporalGolemsRestructurationEx.requireLevel(54)
+                    .requireInt(160)
+                    .requireWis(160)
+                    .requirePerks(TemporalGolemsRestructuration, GrandMasterGolemMaker);
+            WispMajor.requireLevel(54)
+                    .requirePerk(WispCaptain)
+					.requireInt(160)
+					.requireWis(160)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.playerMinionsCount() >= 10;
+					}, "10+ pets/minions");
 			LimitBreakerFlesh1stStage.requireLevel(54)
 					.requirePerk(LimitBreakerHeart1stStage);
             //Tier 10
@@ -6573,10 +6618,10 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 72;
                     }, "Seventy two racial perks");
-            GolemArmyColonel.requireLevel(66)
+            GolemArmyMajor.requireLevel(66)
                     .requireInt(185)
                     .requireWis(185)
-                    .requirePerks(GolemArmyMajor, EpicGolemMaker2ndCircle);
+                    .requirePerks(GolemArmyCaptain, EpicGolemMaker2ndCircle);
 			LimitBreakerSoul1stStage.requireLevel(66)
 					.requirePerk(LimitBreakerPsyche1stStage);
             //Tier 12
@@ -6589,13 +6634,6 @@ public class PerkLib
                     .requireInt(200)
                     .requireWis(200)
                     .requirePerk(EpicGolemMaker2ndCircle);
-            WispColonel.requireLevel(72)
-                    .requirePerk(WispMajor)
-					.requireInt(200)
-					.requireWis(200)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.playerMinionsCount() >= 15;
-					}, "15+ pets/minions");
 			Refinement.requireLevel(72)
 					.requirePerk(Enchantment);
 			InControl.requireLevel(72)
@@ -6627,24 +6665,47 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 99;
                     }, "Ninety nine racial perks");
-            GolemArmyGeneral.requireLevel(78)
+            GolemArmyLieutenantColonel.requireLevel(78)
                     .requireInt(210)
                     .requireWis(210)
-                    .requirePerks(GolemArmyColonel, EpicGolemMaker3rdCircle);
+                    .requirePerks(GolemArmyMajor, EpicGolemMaker3rdCircle);
+            WispColonel.requireLevel(72)
+                    .requirePerk(WispMajor)
+					.requireInt(210)
+					.requireWis(210)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.playerMinionsCount() >= 15;
+					}, "15+ pets/minions");
 			LimitBreakerHeart2ndStage.requireLevel(78)
 					.requirePerk(LimitBreakerBody2ndStage);
             //Tier 14
+            LegendaryGolemMaker.requireLevel(84)
+                    .requireInt(225)
+                    .requireWis(225)
+                    .requirePerk(EpicGolemMaker3rdCircle);
 			LimitBreakerFlesh2ndStage.requireLevel(84)
 					.requirePerk(LimitBreakerHeart2ndStage);
             //Tier 15
+            GolemArmyColonel.requireLevel(90)
+                    .requireInt(235)
+                    .requireWis(235)
+                    .requirePerks(GolemArmyLieutenantColonel, LegendaryGolemMaker);
 			LimitBreakerPsyche2ndStage.requireLevel(90)
 					.requirePerk(LimitBreakerFlesh2ndStage);
 			FourthRing.requireLevel(90)
                     .requirePerk(ThirdRing);
             //Tier 16
+            LegendaryGolemMaker2ndCircle.requireLevel(96)
+                    .requireInt(250)
+                    .requireWis(250)
+                    .requirePerk(LegendaryGolemMaker);
 			LimitBreakerSoul2ndStage.requireLevel(96)
 					.requirePerk(LimitBreakerPsyche2ndStage);
             //Tier 17
+            GolemArmyGeneral.requireLevel(102)
+                    .requireInt(260)
+                    .requireWis(260)
+                    .requirePerks(GolemArmyColonel, LegendaryGolemMaker2ndCircle);
 			Saturation.requireLevel(102)
 					.requirePerk(Refinement);
 			Metamorphable.requireLevel(102)

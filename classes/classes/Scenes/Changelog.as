@@ -20,6 +20,12 @@ package classes.Scenes
 			Changelog38();
 		}
 		//zrobić do 2021 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
+		private function Changelog40():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog39);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog39():void {
 			clearOutput();
 			menu();
@@ -116,7 +122,7 @@ package classes.Scenes
 			outputText("Wrathless necklace not giving spellpower bonus\n\n");
 			outputText("<b>Version 0.8s3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Frost Wyrm\n");
-			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 10% caps for mutagen, alchemic, knowledge multi.\n");
+			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
 			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
 			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
@@ -131,18 +137,18 @@ package classes.Scenes
 			outputText("-Job: Gunslinger, Amateur Gunslinger, Expert Gunslinger, Master Gunslinger perks increase fatigue recovery by 1 each. Perks Alchemical Cartridge and Church of the gun by 2/3. Both perks for scaling dmg based on int/wis are also switched.\n");
 			outputText("-Removed some unneded stats tracked on combat subpage.\n");
 			outputText("-Backpack prices dropped 4 times. And small/medium sized ones can be bought at Oswald pawn shop too.\n");
-			outputText("-Konstantin talk options takes each 5 min now.\n");
+			outputText("-Konstantin and Jojo talk options takes each 5 min now. Jojo training counter added to stats page.\n");
 			outputText("-Diana combat use of Heal having now cooldown of 2 turns (so she will no longer ends keep healing herself when below 20% of HP until running out of the mana).\n");
 			outputText("-Shouldra recruitment moved from morning to time during the day (between 10 and 18) to prevent some weirdness with other events triggering at the morning.\n");
 			outputText("-Added out of combat fatigue recovery. In combat fatigue recovery due to that been increased twicefold. Both fatigue recovery rates can be checked on stats page / combat subpage.\n");
 			outputText("-Imp Skulls, Feral Imp Skulls, Minotaur Horns and Demon Skulls could be now stored in special bag given at joining / promotion in Adventure Guild. Adventures with Copper plate can store in it two items and those that have already Iron plate can store 4 types of items. In both cases bag limit is 10 items of the same type. PC can freely put in and take out them from the bag.");
 			outputText("When turning in one of those four quest items they will be first taken form quest itme bag and then if PC not have enough of them in bag from inventory.\n");
-			outputText("-Jtex numerous fixes, including Neisa bug after bad end, Valeria conflicy with Jiangshi.\n");
+			outputText("-Jtex numerous fixes, including Neisa bug after bad end, Valeria conflicy with Jiangshi, Yeti fix.\n");
 			outputText("-Zetta fixes.\n");
 			outputText("-Liadri many small changes.\n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
+			//outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-New tier 7 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
+			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
@@ -152,7 +158,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-Fletching table accessable at Elven Village. Allow to: improve bow string. Each of those options increase damage of shoot arrows and are act like multiplier bonuses that can stack on each other.\n");//craft special arrows, , reinforce bow
 			outputText("-Added option to put in golem cores into bag for cores without need to first make temporal golem and then using it.\n");
-			outputText("-Snippler rempains moved from Deepwoods to Plains, M1 Cerberus remains moved to Swamp from Forest and Desert Eagle remains req. lvl 6+ to found them at the Desert.\n");
+			outputText("-Snippler remains moved from Deepwoods to Plains, M1 Cerberus remains moved to Swamp from Forest and Desert Eagle remains req. lvl 6+ to found them at the Desert.\n");
 			outputText("-Counters for all materials (wood, stones, nails, etc.) would be visible at all times.\n");
 			outputText("-Forest area been split into two that have only partialy shared encounters. Exploring both count toward one shared coutner of forest exploration.\n");
 			outputText("-Demonic Scythe upgrade at (pure) Celess unlocked.\n");
@@ -174,31 +180,46 @@ package classes.Scenes
 			outputText("-Tier 2 white/black magic spells dmg increased (from ~1,5x) to be roughly ~3x of tier 1 spells. Tier 3 spells power been normalized to both deal similar amount of dmg of ~12x dmg of tier 1 (that mean meteor shower spell lost 1/3 power to match dmg done by polar midnight).\n");
 			outputText("-Resource generation been chganged from been given each hour to be given per minutes that passed (ofc that mean per minute PC in theory getting less resources but can't have tiem ingame progress by 1 minute only (least is 5 min progress). Player info page have updated amount generated per 5 min.\n");
 			outputText("-Due to option to ascend without starting harder ng+ game to perm Nine-tails Kitsune of Balance perk is req. additional thing: been on 2nd ascension (which increase difficulty of the game).\n");
-			outputText("-Inscribed Spellblade req. to finish 1st main storyline dungeon instead of 2nd.\n");
-			outputText("-Clearing out Factory can be achieved after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-To get Inscribed Spellblade it's now req. to finish 1st main storyline dungeon instead of 2nd.\n");
+			outputText("-Clearing out Factory can be achieved also after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
+			outputText("-Motivation perk effect changed to decrease idle action chance for henchman by 30% (20%) and would also make their attacks ~50% stronger. Motivation (Ex) perk effect changed to futher decrease idle action chance by 19% (1%) and increase their attacks power by 50% each time PC reach specific lvl (up to 4 times currently). ");
+			outputText("Motivation (Su) perk effect changed to make each henchman do 2 actions in their turn and increase power of their attacks 150% of currently boost provided by previous Motivcation perks.\n");
+			outputText("-New tier 9 misc lvl-up perk: Temporal Golems Restructuration (Ex). Req. Temporal Golems Restructuration and Grand-Master Golem Maker perks, 160+ in int+wis. Effect: Allow to use option of send all temporary golems to attack in one turn. Adding option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)\n");
+			outputText("-New tier 7 misc lvl-up perk: Advanced Golemancy Theory. Req. Grand-Master Golem Maker perk, 140+ in int+wis. Effect: Enable option to make steel golems and store 1 such golem.\n");
+			outputText("-New tier 9 wisdom lvl-up perk: Prestige Job: Druid. Req. Elemental Contract Rank 7 and Archmage perks, 200+ wis. Effect: You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals) (+50% tou multi and +70% wisdom multi)\n");
+			outputText("-Soul Cultivation perks are now less often picked (each 9 or 12 levels). First one is moved to be avialable at lvl 0+. Pills to recover SF would give more. On top of previous fixed amount they will restore 1/2/3% of max soulfroce per pill grade. Using bottle of 10 would mean it will be even up to 10/20/30% of max SF + fixed amount gained.\n");
+			outputText("-Mana potions also would restorte 1/2/3% of max mana + fixed amount it was giving before.\n");
+			outputText("-Training Dummy stats when sparring ring is upgraded to 2nd and 3rds stage got much better both in HP, Lust caps or phys/mag defence values. Still some (many?) of you will be able to annihilate it with casual attack :(\n");
+			outputText("-Pernament Golems base damage would scale now with PC int/wis stats and it will be also doubled before adding others effects increasing dmg output.\n");
+			outputText("-Having henchman and at least one type of minions that will attack at the first part of PC turn would enable turning on simplified pre PC turn for combat in minions menu in camp. It will condense into one screen attacks of wisp, golem, elementals (normal + epic) and henchman. It will ofc make some of randomness of elemental attacks taken out to use one of basic 4 elementals types ");
+			outputText("and in case PC not have any of those will skip elementals attack turn proceeding to next minions/henchman actions. ALso if PC would lack mana each minion would skip it preturn attack. So in general if someone not likes to clik up to... 5-6 times before seeing PC combat menu options could shorten it to one click to be done with all minions/helpers stuff at minor price.\n");
+			outputText("-Super Charged Core perk have additional effect of converting dmg temporal golems deal when attacking from physical to magical at cost of halfing damage.\n");
+			outputText("-New camp structure: Arcane Circle Elemental Energy Conduits Upgrade. Req. at least 1st arcane circle, 3 stones, 3 elemental shards, 150 mana. PC adds basic elemental energy conduit to arcane circle allowing to convert elemental shards into energy stored directly into circle(s). It can replace mana req. for rank up of normal elementals or be used to rank up epic/unique tier elementals.\n");
+			outputText("-New option in Summon menu for elemental conjuer PC - conversion of elemental shards into energy stored in the arcane circle. 1 shard adds 400 energy and most basic conduit can store up to 600 energy. Over the cap energy form converted shards is lost.\n");
+			outputText("-Added on stats page short note when camp npc would reach max lvl it could get. So the PC will stop beat them up in order to force them to lvl up xD\n");
+			outputText("-Lumi sell mats option moved to her shop offer menu. All garage/workshop related option are under bottom row of buttons. And so the overlap of en hance of items options will no longer happen ^^\n");
+			outputText("-After getting Master Golem Maker perk there will be new stuff to buy from golemancer gobo in HXD ;)\n");
+			outputText("-Pure Peach from Minerva Oasis would restore 5% less HP (20% only), refill 5 less hunger (20) but will give much higher fatigue reductions (15 -> 1% of max fatigue + 10). Back button in garden menu will lead back to herbalism main menu not to camp actions main menu (who would want to click 1 more time to get from harvesting to making stuff, right?)\n");
+			outputText("-Controlled Breath perk effects ingame and on tooltip become unified; increase fatigue/mana/soulforce regeneration by 20% as long PC corruption is below 30 (+corruption tolerance perk bonus).\n");
+			outputText("-Temporal Golems Restructuration perk will no longer unlock option to send all temp golems to attacks instead giving more options for sending different amount of temporal golems against enemy. Also would add +5 to max limit of stored temporary stone golems. It req. also been decreased due to moving from tier 6 to 5.\n");
+			outputText("-Improved Stone Golems can be made from Epic Golem Maker not Epic Golem Maker (3rd Circle) and each Epic Golem Maker perk would increase cvap for them by 1. Similary perks from Golem Army Major would start to add +1 capacity for improved stone golems instead from Golem Army General.\n");
+			outputText("-Cow Succubus/Mino Incubus could be now killed to taker their demon skulls or harvested for bones. Also if req. are meet could be accessed unique sex scenes.\n");
+			outputText("-Prestige jobs accesability would be moved from lvl 42+ to 54+ (meaning it will be all perks moved 2 tiers higher with minimal stat req. changes). Slots for prestige job will start at 2 and multi bonuses to stats would be 50% higher with few jobs having % slight adjusted. Current possesed perks from prestige jobs will be kept even if PC wouldn't be able to get them after changes.\n");
+			outputText("-Epic Elementals now req. 2 elemental shards to summon not 1. All those that summoned them already with 1 shard... you damn lucky people :P\n");
+			outputText("-Golemancer goblin would sell new items when PC gain specific perks (they are meanitoned in tooltip for grey out buttons).\n");
+			outputText("-New tier 5 misc lvl-up perk: Golem Army Junior Lieutenant. Req. Master Golem Maker perk and 110+ int/wis. Effect: +1/2 to max limit stored of permanent/temporary stone golems.\n");
+			outputText("-New tier 13 misc lvl-up perk: Golem Army Lieutenant Colonel. Req. Golem Army Major, Epic Golem Maker 3rd Circle perks and 210+ int/wis. Effect: +1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-Golem army perks been moved more apart making place for additional perks + last 3 of old perks (before they got their name changed) add 1 slot for metal golem.\n");
+			outputText("-New tier 14 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker (3rd Circle) perk and 225+ int/wis. Effect: Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.\n");
+			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
+			outputText("-Pernament improved stone golems cost in stones been cut in half.\n");
+			outputText("-Wisp Captain perk lvl req. rised form 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both..\n");
+			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-Each next super perk in both Hidden Job will req. to have 10 lvl more starting from lvl 0 for first Hidden Job perk itself (so the 5th one will now req. lvl 40+ not 30+ as before).\n");
+			outputText("-Added option to surrender via HP defeat. Thoise options would be accessable also when PC is under stun / power stun or fear effect.\n");
+			outputText("-Alcove in High Mountains will now no longer show for PC's with less than 6 pts in avian score.\n");
+			outputText("-Aimozg changes to spells code including new tab in Stats to give general estimate how much damage would they deal.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -207,7 +228,8 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories, Sextuple Thrust cooldown frozen, Woodcutting location in Places req. 3x more visits that Quarry, White Book teaching few spells at once, penatly to acc for melee weapons applied even if PC not use deal melee weapons, ");
-			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat\n");/*ostatni punkt changelogu
+			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat, Dinah been in false training mode when Luna is actualy training/leveling herself, error in map display for one of Den of Desire rooms, Bee Hive entrance skipping bee guards andf afterwards showing wrong desc of the room until clearing dungeon, button on 2nd page of ");
+			outputText("unique sex scenes not leading to 1st page\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -218,6 +240,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -293,7 +316,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -326,6 +351,10 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
