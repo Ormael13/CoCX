@@ -5790,6 +5790,35 @@ public function rebirthFromBadEnd():void {
 				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,4,0,0,1);
 				player.removePerk(PerkLib.AscensionAdditionalOrganMutation04);
 			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige01)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,1);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 1, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige01);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige02)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,2);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,2,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige02);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige03)){
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,3);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,3,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige03);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige04)){
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,4);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,4,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige04);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige05)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,1);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 5, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige05);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige06)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,2);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,6,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige06);
 			if (player.hasPerk(PerkLib.Rigidity)) jiangshiBuggedItemsCleanUpCrew();//LAST THING TO DO IN THIS SAVE UPDATE
 			doNext(doCamp);
 			return;
@@ -6392,4 +6421,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}

@@ -10695,22 +10695,10 @@ use namespace CoC;
 			return prestigeJobs1;
 		}
 		public function maxPrestigeJobs():Number {
-			var prestigeJobs2:Number = 2;
+			//var prestigeJobs2:Number = 2;
 			//if (hasPerk(PerkLib.DeityJobMunchkin))
 			//	prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige01))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige02))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige03))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige04))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige05))
-				prestigeJobs2++;
-			if (hasPerk(PerkLib.AscensionBuildingPrestige06))
-				prestigeJobs2++;
-			return prestigeJobs2;
+			return perkv1(PerkLib.AscensionBuildingPrestigeX)
 		}
 		public function freePrestigeJobsSlots():Number {
 			var prestigeJobs3:Number = 0;
