@@ -8,7 +8,8 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
-	import classes.Scenes.Areas.Mountain.HellHound;
+import classes.Perks.MindBreakerBrain;
+import classes.Scenes.Areas.Mountain.HellHound;
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
@@ -226,7 +227,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				else addButton(7, "Fill the reservoir", gobomechFillTheReservoir);
 			}
 			else addButtonDisabled(7, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
-			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", raijuVoltTransfer);
+			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", brainMelt);
 			else addButtonDisabled(8, "Brain Melt", "Req. to be a mindbreaker.");
 			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd).hint("2nd page of options.");
 			addButton(14, "Leave", cleanupAfterCombat);

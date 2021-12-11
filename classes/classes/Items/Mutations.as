@@ -14760,6 +14760,31 @@ public final class Mutations extends MutationsHelper {
             }
         }
 
+        if (changes < changeLimit && player.dragonCocks() < player.cockTotal() && type == 1 && rand(3) == 0) {
+            var temp:int = 0;
+            var choices:Array = [];
+            var select:int;
+            temp = player.cockTotal();
+            //Build an array of all the locations for TF'able cocks.
+            while (temp > 0) {
+                temp--;
+                if (player.cocks[temp].cockType != CockTypesEnum.DRAGON) choices[choices.length] = temp;
+            }
+            //Randomly choose one of those locations
+            select = choices[rand(choices.length)];
+            outputText("[pg]Your " + player.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
+            if (player.sens >= 50) outputText("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
+            else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
+            outputText("  <b>You now have a dragon penis.</b>");
+            //lose lust if sens>=50, gain lust if else
+            dynStats("lus", 10);
+            player.addCurse("sen", 10, 1);
+            changes++;
+            //Apply the TF
+            player.cocks[select].cockType = CockTypesEnum.DRAGON;
+            player.cocks[select].knotMultiplier = 1.3;
+        }
+
         if ((player.gender >= 2 || player.gender == 3) && player.biggestTitSize() < 30 && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]You are suddenly pulled forward as you feel a loss of balance on your front. Looking down you notice your [breasts] have increased by a full cup.");
             player.growTits(5 + rand(5), 1, false, 3);
