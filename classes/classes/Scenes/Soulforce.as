@@ -177,7 +177,7 @@ use namespace CoC;
 			var pLvl:int = 6;
 			var cLvlTier:int = 0;
 			//var perkTier:PerkType;
-			//flags[kFLAGS.SOUL_CULTIVATION] = 0;
+			flags[kFLAGS.SOUL_CULTIVATION] = 0;
 			/*for (var i:int = 0; i < cultTier.length(); i++){	//This *should* work?
 				if (!player.hasPerk(cultTier[i])){
 					if (i == 0) break;
@@ -204,7 +204,7 @@ use namespace CoC;
 				lNeed = false;
 			}
 			while (lNeed) {
-				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /10)])){
+				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /6)])){
 					flags[kFLAGS.SOUL_CULTIVATION] +=1;
 				}
 				else {
