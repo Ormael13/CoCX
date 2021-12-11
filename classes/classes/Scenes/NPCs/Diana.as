@@ -91,11 +91,11 @@ package classes.Scenes.NPCs
 		}
 		public function SoulskillMod():Number {
 			var mod3:Number = 1;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod3 += .1;
+			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod3 += .2;
 			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) mod3 += .2;
-				if (findPerk(PerkLib.SoulPersonage) >= 0) mod3 += .2;
-				if (findPerk(PerkLib.SoulWarrior) >= 0) mod3 += .2;
+				if (findPerk(PerkLib.SoulApprentice) >= 0) mod3 += .4;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) mod3 += .4;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) mod3 += .4;
 			}
 			return mod3;
 		}

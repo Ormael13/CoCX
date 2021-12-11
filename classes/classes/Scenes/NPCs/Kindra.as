@@ -24,10 +24,22 @@ use namespace CoC;
 		}
 		public function soulskillMulti():Number {
 			var multi:Number = 1;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) multi += 0.1;
-			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) multi += 0.2;
-			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) multi += 0.3;
-			if (findPerk(PerkLib.DaoistElderStage) >= 0) multi += 0.4;
+			if (findPerk(PerkLib.DaoistCultivator) >= 0) multi += 0.2;
+			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
+				if (findPerk(PerkLib.SoulApprentice) >= 0) multi += .4;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) multi += .4;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) multi += .4;
+			}
+			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) {
+				if (findPerk(PerkLib.SoulSprite) >= 0) multi += .6;
+				if (findPerk(PerkLib.SoulScholar) >= 0) multi += .6;
+				if (findPerk(PerkLib.SoulElder) >= 0) multi += .6;
+			}
+			if (findPerk(PerkLib.DaoistElderStage) >= 0) {
+				if (findPerk(PerkLib.SoulExalt) >= 0) multi += .8;
+				if (findPerk(PerkLib.SoulOverlord) >= 0) multi += .8;
+				if (findPerk(PerkLib.SoulTyrant) >= 0) multi += .8;
+			}
 			return multi;
 		}
 		

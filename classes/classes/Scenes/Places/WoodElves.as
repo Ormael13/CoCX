@@ -20,7 +20,7 @@ package classes.Scenes.Places{
 	import classes.internals.SaveableState;
 	import classes.CoC;
 
-	public class WoodElves extends BaseContent implements SaveableState{
+	public class WoodElves extends BaseContent implements SaveableState {
 
 		public static var WoodElvesQuest:int;
 		public static const QUEST_STAGE_METELFSANDEVENBEATSTHEM:int = -1;

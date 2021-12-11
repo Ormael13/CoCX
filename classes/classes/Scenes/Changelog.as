@@ -118,10 +118,12 @@ package classes.Scenes
 			outputText("-Elven Hunting party should no longer steal your weapon and keep it until next encounter.\n");
 			outputText("-Many minor type/parser errors fixed here and there.\n");
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
-			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects, ");
+			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping from any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects, ");
 			outputText("Wrathless necklace not giving spellpower bonus\n\n");
 			outputText("<b>Version 0.8s3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Frost Wyrm\n");
+			outputText("-New tier 7 misc lvl-up perk: Advanced Golemancy Theory. Req. Grand-Master Golem Maker perk, 140+ in int+wis. Effect: Enable option to make steel golems and store 1 such golem.\n");
+			outputText("-New tier 9 misc lvl-up perk: Temporal Golems Restructuration (Ex). Req. Temporal Golems Restructuration and Grand-Master Golem Maker perks, 160+ in int+wis. Effect: Allow to use option of send all temporary golems to attack in one turn. Adding option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)\n");
 			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
 			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
@@ -160,7 +162,7 @@ package classes.Scenes
 			outputText("-Added option to put in golem cores into bag for cores without need to first make temporal golem and then using it.\n");
 			outputText("-Snippler remains moved from Deepwoods to Plains, M1 Cerberus remains moved to Swamp from Forest and Desert Eagle remains req. lvl 6+ to found them at the Desert.\n");
 			outputText("-Counters for all materials (wood, stones, nails, etc.) would be visible at all times.\n");
-			outputText("-Forest area been split into two that have only partialy shared encounters. Exploring both count toward one shared coutner of forest exploration.\n");
+			outputText("-Forest area been split into two that have only partialy shared encounters. Exploring both count toward one shared counter of forest exploration.\n");
 			outputText("-Demonic Scythe upgrade at (pure) Celess unlocked.\n");
 			outputText("-Slight shuffling buttons in explore menu with adding greyed out buttons telling how to unlock that area (at least which area to explore to get it but not telling min lvl for that - that would be too easy would it?)\n");
 			outputText("-Selected enemies in Forest/Deepwoods area got either slight decrease in lvl or increased lvl (with buffed a bit stats).\n");
@@ -184,15 +186,13 @@ package classes.Scenes
 			outputText("-Clearing out Factory can be achieved also after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
 			outputText("-Motivation perk effect changed to decrease idle action chance for henchman by 30% (20%) and would also make their attacks ~50% stronger. Motivation (Ex) perk effect changed to futher decrease idle action chance by 19% (1%) and increase their attacks power by 50% each time PC reach specific lvl (up to 4 times currently). ");
 			outputText("Motivation (Su) perk effect changed to make each henchman do 2 actions in their turn and increase power of their attacks 150% of currently boost provided by previous Motivcation perks.\n");
-			outputText("-New tier 9 misc lvl-up perk: Temporal Golems Restructuration (Ex). Req. Temporal Golems Restructuration and Grand-Master Golem Maker perks, 160+ in int+wis. Effect: Allow to use option of send all temporary golems to attack in one turn. Adding option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)\n");
-			outputText("-New tier 7 misc lvl-up perk: Advanced Golemancy Theory. Req. Grand-Master Golem Maker perk, 140+ in int+wis. Effect: Enable option to make steel golems and store 1 such golem.\n");
 			outputText("-New tier 9 wisdom lvl-up perk: Prestige Job: Druid. Req. Elemental Contract Rank 7 and Archmage perks, 200+ wis. Effect: You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals) (+50% tou multi and +70% wisdom multi)\n");
 			outputText("-Soul Cultivation perks are now less often picked (each 9 or 12 levels). First one is moved to be avialable at lvl 0+. Pills to recover SF would give more. On top of previous fixed amount they will restore 1/2/3% of max soulfroce per pill grade. Using bottle of 10 would mean it will be even up to 10/20/30% of max SF + fixed amount gained.\n");
 			outputText("-Mana potions also would restorte 1/2/3% of max mana + fixed amount it was giving before.\n");
-			outputText("-Training Dummy stats when sparring ring is upgraded to 2nd and 3rds stage got much better both in HP, Lust caps or phys/mag defence values. Still some (many?) of you will be able to annihilate it with casual attack :(\n");
+			outputText("-Training Dummy stats when sparring ring is upgraded to 2nd and 3rd stage got much better both in HP, Lust caps or phys/mag defence values. Still some (many?) of you will be able to annihilate it with casual attack :(\n");
 			outputText("-Pernament Golems base damage would scale now with PC int/wis stats and it will be also doubled before adding others effects increasing dmg output.\n");
 			outputText("-Having henchman and at least one type of minions that will attack at the first part of PC turn would enable turning on simplified pre PC turn for combat in minions menu in camp. It will condense into one screen attacks of wisp, golem, elementals (normal + epic) and henchman. It will ofc make some of randomness of elemental attacks taken out to use one of basic 4 elementals types ");
-			outputText("and in case PC not have any of those will skip elementals attack turn proceeding to next minions/henchman actions. ALso if PC would lack mana each minion would skip it preturn attack. So in general if someone not likes to clik up to... 5-6 times before seeing PC combat menu options could shorten it to one click to be done with all minions/helpers stuff at minor price.\n");
+			outputText("and in case PC not have any of those will skip elementals attack turn proceeding to next minions/henchman actions. Also if PC would lack mana each minion would skip it preturn attack. So in general if someone not likes to clik up to... 5-6 times before seeing PC combat menu options could shorten it to one click to be done with all minions/helpers stuff at minor price.\n");
 			outputText("-Super Charged Core perk have additional effect of converting dmg temporal golems deal when attacking from physical to magical at cost of halfing damage.\n");
 			outputText("-New camp structure: Arcane Circle Elemental Energy Conduits Upgrade. Req. at least 1st arcane circle, 3 stones, 3 elemental shards, 150 mana. PC adds basic elemental energy conduit to arcane circle allowing to convert elemental shards into energy stored directly into circle(s). It can replace mana req. for rank up of normal elementals or be used to rank up epic/unique tier elementals.\n");
 			outputText("-New option in Summon menu for elemental conjuer PC - conversion of elemental shards into energy stored in the arcane circle. 1 shard adds 400 energy and most basic conduit can store up to 600 energy. Over the cap energy form converted shards is lost.\n");
@@ -202,8 +202,8 @@ package classes.Scenes
 			outputText("-Pure Peach from Minerva Oasis would restore 5% less HP (20% only), refill 5 less hunger (20) but will give much higher fatigue reductions (15 -> 1% of max fatigue + 10). Back button in garden menu will lead back to herbalism main menu not to camp actions main menu (who would want to click 1 more time to get from harvesting to making stuff, right?)\n");
 			outputText("-Controlled Breath perk effects ingame and on tooltip become unified; increase fatigue/mana/soulforce regeneration by 20% as long PC corruption is below 30 (+corruption tolerance perk bonus).\n");
 			outputText("-Temporal Golems Restructuration perk will no longer unlock option to send all temp golems to attacks instead giving more options for sending different amount of temporal golems against enemy. Also would add +5 to max limit of stored temporary stone golems. It req. also been decreased due to moving from tier 6 to 5.\n");
-			outputText("-Improved Stone Golems can be made from Epic Golem Maker not Epic Golem Maker (3rd Circle) and each Epic Golem Maker perk would increase cvap for them by 1. Similary perks from Golem Army Major would start to add +1 capacity for improved stone golems instead from Golem Army General.\n");
-			outputText("-Cow Succubus/Mino Incubus could be now killed to taker their demon skulls or harvested for bones. Also if req. are meet could be accessed unique sex scenes.\n");
+			outputText("-Improved Stone Golems can be made from Epic Golem Maker not Epic Golem Maker (3rd Circle) and each Epic Golem Maker perk would increase cap for them by 1. Similary perks from Golem Army Major would start to add +1 capacity for improved stone golems instead from Golem Army General.\n");
+			outputText("-Cow Succubus/Mino Incubus could be now killed to take their demon skulls or harvested for bones. Also if req. are meet could be accessed unique sex scenes.\n");
 			outputText("-Prestige jobs accesability would be moved from lvl 42+ to 54+ (meaning it will be all perks moved 2 tiers higher with minimal stat req. changes). Slots for prestige job will start at 2 and multi bonuses to stats would be 50% higher with few jobs having % slight adjusted. Current possesed perks from prestige jobs will be kept even if PC wouldn't be able to get them after changes.\n");
 			outputText("-Epic Elementals now req. 2 elemental shards to summon not 1. All those that summoned them already with 1 shard... you damn lucky people :P\n");
 			outputText("-Golemancer goblin would sell new items when PC gain specific perks (they are meanitoned in tooltip for grey out buttons).\n");
@@ -214,12 +214,26 @@ package classes.Scenes
 			outputText("-New tier 14 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker (3rd Circle) perk and 225+ int/wis. Effect: Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.\n");
 			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
 			outputText("-Pernament improved stone golems cost in stones been cut in half.\n");
-			outputText("-Wisp Captain perk lvl req. rised form 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both..\n");
+			outputText("-Wisp Captain perk lvl req. rised from 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both..\n");
 			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-Each next super perk in both Hidden Job will req. to have 10 lvl more starting from lvl 0 for first Hidden Job perk itself (so the 5th one will now req. lvl 40+ not 30+ as before).\n");
-			outputText("-Added option to surrender via HP defeat. Thoise options would be accessable also when PC is under stun / power stun or fear effect.\n");
+			outputText("-Added option to surrender via HP defeat. Those options would be accessable also when PC is under stun / power stun or fear effect.\n");
 			outputText("-Alcove in High Mountains will now no longer show for PC's with less than 6 pts in avian score.\n");
 			outputText("-Aimozg changes to spells code including new tab in Stats to give general estimate how much damage would they deal.\n");
+			outputText("-All perks in tree of Daoist Cultivator and Body Cultivator have effects increased (more for those that are gained later on).\n");
+			outputText("-1 new achievment.\n");//s	 (1 shadow one)
+			outputText("-Evangeline can make Leviatan Sunscreen (Sea Dragon TF) from Orca and Dragon TF items.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -240,6 +254,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -317,7 +332,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -351,6 +368,15 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
