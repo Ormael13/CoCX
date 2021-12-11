@@ -1218,7 +1218,7 @@ public class PerkMenu extends BaseContent {
 			return rez;
 		}
 
-		function initTier():void{	//Initial tier 0,1.
+		function initTier():void{	//Initial tier 0,1 .
 			var bPList:Array = [];
 			var b2PList:Array = [];
 			for each (var pPerkDBLP:PerkType in tPerkList){
