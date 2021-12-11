@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Combat {
 import classes.BaseContent;
+import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
@@ -5213,7 +5214,21 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.MorphicWeaponry)) {
             outputText("You form tentacles out of your slimy body and batter your opponent with them.");
             var TentacleDamageMultiplier:Number = Math.round(player.level/10);
-            ExtraNaturalWeaponAttack(0.5);
+            ExtraNaturalWeaponAttack(TentacleDamageMultiplier);
+        }
+
+        //Unique attack Sea dragon shock
+        if (player.antennae.type == Antennae.SEA_DRAGON && player.hasPerk(PerkLib.LightningAffinity)) {
+            outputText("You lash out with your whiskers delivering a pair of deadly electrical discharges.");
+            var ThunderDamageMultiplier:Number = Math.round(player.inte/100);
+            ExtraNaturalWeaponAttack(ThunderDamageMultiplier);
+            ExtraNaturalWeaponAttack(ThunderDamageMultiplier);
+            if (rand(100)>95 && !monster.hasPerk(PerkLib.LightningNature) && !monster.hasPerk(PerkLib.LightningAffinity)){
+                if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
+                    if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+                    outputText(" The discharge leaves your opponent stunned!.");
+                }
+            }
         }
 
         //Unique attack Alraune

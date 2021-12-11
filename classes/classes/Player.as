@@ -7609,7 +7609,7 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (tallness >= 84)
 				LeviathanCounter++;
-			if ((hasVagina() && biggestTitSize() > 19) || (cocks.length > 18))
+			if ((hasVagina() && biggestTitSize() > 19) || (cocks.length > 18 && dragonCocks() > 0))
 				LeviathanCounter++;
 			if (hasPerk(MutationsLib.DrakeLungs))
 				LeviathanCounter++;
