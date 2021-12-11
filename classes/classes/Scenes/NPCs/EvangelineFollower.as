@@ -559,7 +559,7 @@ private function MakingUnicornumPotion():void {
 			statScreenRefresh();
 			outputText("You hand over one vial of Orca sunscreen, a drake heart flower and a hundred gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 			outputText("\n\nAfter a while, she hands you a vial labeled \"Leviathan Sunscreen\".  ");
-			inventory.takeItem(consumables.UNICORN, evangelineAlchemyMenu);
+			inventory.takeItem(consumables.LEVISUN, evangelineAlchemyMenu);
 			cheatTime(1/6);
 		}
 
