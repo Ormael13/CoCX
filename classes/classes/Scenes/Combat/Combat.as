@@ -5218,8 +5218,8 @@ public class Combat extends BaseContent {
         }
 
         //Unique attack Sea dragon shock
-        if (player.antennae.type == Antennae.SEA_DRAGON) {
-            outputText("You lash out with your whiskers delivering a pair of deadly discharges.");
+        if (player.antennae.type == Antennae.SEA_DRAGON && player.hasPerk(PerkLib.LightningAffinity)) {
+            outputText("You lash out with your whiskers delivering a pair of deadly electrical discharges.");
             var ThunderDamageMultiplier:Number = Math.round(player.inte/100);
             ExtraNaturalWeaponAttack(ThunderDamageMultiplier);
             ExtraNaturalWeaponAttack(ThunderDamageMultiplier);
