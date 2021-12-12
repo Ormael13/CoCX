@@ -649,6 +649,7 @@ public class Creature extends Utils
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
 			}
+			if (game.player.hasPerk(PerkLib.SharedPower) && game.player.perkv1(PerkLib.SharedPower) > 0) maxHP_mult1 += (0.1*game.player.perkv1(PerkLib.SharedPower));
 			return maxHP_mult1;
 		}
 		public function maxHP():Number {

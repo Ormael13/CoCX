@@ -2142,6 +2142,7 @@ public class Camp extends NPCAwareContent{
 	private function druidMenu():void {
 		clearOutput();
 		outputText("WiP text until Lia come with something for here.");
+		if (player.hasPerk(PerkLib.SharedPower)) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health, damage and spell power when in an infused state");//temporaly to check if perk working as intended
 		menu();
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			addButtonDisabled(0, "Air", "You need to unfuse first before trying to use this fusion option.");
@@ -2182,6 +2183,7 @@ public class Camp extends NPCAwareContent{
 		if (type == 2) outputText("In your hair grows a small vine decorated with leaves, and your skin has achieved the durability of hard rock. Your legs and hands reshape, craggy and golem-like; large and crude but very powerful. Your feet are embedded in stone and heavily but not for you, the weight of the world seems no longer to affect you, rather you have acquired true control over not only rock and ground but also soil and plants.\n\n");
 		if (type == 3) outputText("Your hair, wrist, and knees burn with the excess of your fiery power, the fire ready to do your bidding. Some say you shouldn’t play with fire, but who’s going to stop you now? You have achieved true control over the fire element.\n\n");
 		if (type == 4) outputText("Your hairs now regularly drip fluid on the ground beneath you if you forget them. Not only that but you seem to be able to control and generate what appears to be an endless quantity of water. You have acquired true control over water.\n\n");
+		if (player.hasPerk(PerkLib.SharedPower)) player.addPerkValue(PerkLib.SharedPower, 1, druidMenuSharedPowerPerkCounting());
 		var tier:Number = 1;
 		if (type == 1 && player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 1) {
 			if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 3) tier += 3;
@@ -2210,9 +2212,56 @@ public class Camp extends NPCAwareContent{
 	private function druidMenuUnfuseScene():void {
 		clearOutput();
 		outputText("You end your fusion separating from the elemental back into two different entities.");
+		if (player.hasPerk(PerkLib.SharedPower)) player.setPerkValue(PerkLib.SharedPower, 1, 0);
 		player.removePerk(PerkLib.ElementalBody);
 		statScreenRefresh();
 		doNext(druidMenu);
+	}
+	private function druidMenuSharedPowerPerkCounting():Number {
+		var dmSPPC:Number = 12;
+		if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalBondFlesh)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalBondUrges)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongElementalBond)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalConjurerKnowledge)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongElementalBondEx)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.FirstAttackElementals)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.FirstAttackElementalsEx)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongElementalBondSu)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank8)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank9)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank10)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank11)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank12)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank13)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongerElementalBondEx)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank14)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank15)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank16)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongerElementalBondSu)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank17)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank18)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank19)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank20)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongestElementalBond)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank21)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank22)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank23)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank24)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongestElementalBondEx)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank25)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank26)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank27)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank28)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.StrongestElementalBondSu)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank29)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank30)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalContractRank31)) dmSPPC += 1;
+		return dmSPPC;
 	}
 	private function simplifiedPreTurn():void {
 		menu();
@@ -5813,12 +5862,12 @@ public function rebirthFromBadEnd():void {
 				player.removePerk(PerkLib.AscensionBuildingPrestige04);
 			}
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestige05)) {
-				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,1);
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,5);
 				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 5, 0, 0, 1);
 				player.removePerk(PerkLib.AscensionBuildingPrestige05);
 			}
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestige06)) {
-				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,2);
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,6);
 				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,6,0,0,1);
 				player.removePerk(PerkLib.AscensionBuildingPrestige06);
 			if (player.hasPerk(PerkLib.Rigidity)) jiangshiBuggedItemsCleanUpCrew();//LAST THING TO DO IN THIS SAVE UPDATE

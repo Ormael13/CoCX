@@ -356,6 +356,7 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .3;
 				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
 			}
+			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -504,6 +505,21 @@ public class CombatMagic extends BaseCombatContent {
 			mod2 -= player.cor / 100;
 			if (mod2 < 0.1) mod2 = 0.1;
 			mod += mod2;
+		}
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) mod += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) mod += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .2;
+			}
+			else {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) mod += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) mod += .2;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .3;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
+			}
+			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
