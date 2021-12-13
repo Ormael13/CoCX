@@ -433,6 +433,28 @@ private function evangelineAlchemyMenu():void {
 	addButton(14, "Back", meetEvangeline);
 }
 
+private function MakingLevisunPotion():void {
+	clearOutput();
+	if (player.gems < 100) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.ORCASUN, 1) && player.hasItem(consumables.DRAKHRT, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need a vial of Orca sunscreen and a drake heart flower,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.ORCASUN, 1);
+	player.destroyItems(consumables.DRAKHRT, 1);
+	player.gems -= 100;
+	statScreenRefresh();
+	outputText("You hand over one vial of Orca sunscreen, a drake heart flower and a hundred gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial labeled \"Leviathan Sunscreen\".  ");
+	inventory.takeItem(consumables.LEVISUN, evangelineAlchemyMenu);
+	cheatTime(1/6);
+}
+
 private function MakingGorgonPotion():void {
 	clearOutput();
 	if (player.gems < 10) {
@@ -540,28 +562,6 @@ private function MakingUnicornumPotion():void {
 	inventory.takeItem(consumables.UNICORN, evangelineAlchemyMenu);
 	cheatTime(1/6);
 }
-
-		private function MakingLevisunPotion():void {
-			clearOutput();
-			if (player.gems < 100) {
-				outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
-				doNext(evangelineAlchemyMenu);
-				return;
-			}
-			else if (!(player.hasItem(consumables.ORCASUN, 1) && player.hasItem(consumables.DRAKHRT, 1))) {
-				outputText("\"<i>I'm sorry but you don't have the materials I need. I need a vial of Orca sunscreen and a drake heart flower,</i>\" Evangeline says.");
-				doNext(evangelineAlchemyMenu);
-				return;
-			}
-			player.destroyItems(consumables.ORCASUN, 1);
-			player.destroyItems(consumables.DRAKHRT, 1);
-			player.gems -= 100;
-			statScreenRefresh();
-			outputText("You hand over one vial of Orca sunscreen, a drake heart flower and a hundred gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
-			outputText("\n\nAfter a while, she hands you a vial labeled \"Leviathan Sunscreen\".  ");
-			inventory.takeItem(consumables.LEVISUN, evangelineAlchemyMenu);
-			cheatTime(1/6);
-		}
 
 private function MakingNocelloLiqueur():void {
 	clearOutput();
