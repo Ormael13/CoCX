@@ -304,9 +304,10 @@
         <cell rect="951,90,49,59" name="breasts_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1051,90,49,59" name="torso_pattern/Bbioluminescence" dx="80" dy="61"/>
-        <cell rect="201,1304,99,119" name="full_pattern/undine" dx="56" dy="21"/>
-		<cell rect="301,1304,99,119" name="full_patternUnder/undine" dx="56" dy="21"/>
         <cell rect="101,1304,99,119" name="full_pattern/gnome" dx="53" dy="20"/>
+        <cell rect="201,1304,99,119" name="full_pattern/undine" dx="56" dy="21"/>
+        <cell rect="301,1304,99,119" name="full_patternUnder/undine" dx="56" dy="21"/>
+        <cell rect="401,1304,99,119" name="full_pattern/sylph" dx="56" dy="59"/>
         <cell rect="1,150,49,59" name="arms_bg/human" dx="56" dy="64"/>
         <cell rect="51,150,49,59" name="arms_bg/fur" dx="56" dy="64"/>
         <cell rect="551,150,49,59" name="arms_bg/furracoon" dx="56" dy="64"/>
@@ -407,7 +408,7 @@
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
         <cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
-		<cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
+        <cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
@@ -430,7 +431,7 @@
         <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="1051,150,49,59" name="hands/gnomeLeft" dx="63" dy="42"/>
         <cell rect="1051,210,49,59" name="hands/gnomeRight" dx="60" dy="46"/>
-		<cell rect="901,330,49,59" name="hands/mindbreaker" dx="97" dy="74"/>
+        <cell rect="901,330,49,59" name="hands/mindbreaker" dx="97" dy="74"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="105" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="851,270,49,59" name="overhands/ratatoskrLeft" dx="56" dy="64"/>
@@ -475,7 +476,7 @@
         <cell rect="547,611,90,90" name="legs/gargoyle_sit" dx="60" dy="61"/>
         <cell rect="1,1304,90,59" name="legs_truefg/gazer" dx="41" dy="98"/>
         <cell rect="729,611,90,90" name="legs/elemental" dx="57" dy="97"/>
-		<cell rect="729,702,90,90" name="legs/mindbreaker" dx="60" dy="99"/>
+        <cell rect="729,702,90,90" name="legs/mindbreaker" dx="60" dy="99"/>
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
@@ -494,6 +495,10 @@
         <cell rect="1002,611,90,90" name="legs_bg/gnome" dx="58" dy="93"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="79" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="79" dy="64"/>
+        <cell rect="1151,90,49,59" name="fullbodyMuscle/musclegnome" dx="79" dy="64"/>
+        <cell rect="1201,90,49,59" name="fullbodyMuscle/muscleignis" dx="79" dy="64"/>
+        <cell rect="1251,90,49,59" name="fullbodyMuscle/muscleundine" dx="79" dy="64"/>
+        <cell rect="1301,90,49,59" name="fullbodyMuscle/musclesylph" dx="79" dy="64"/>
         <cell rect="401,90,49,59" name="clothe/krakenM" dx="79" dy="64"/>
         <cell rect="851,90,49,59" name="clothe/krakenL" dx="79" dy="64"/>
         <cell rect="901,90,49,59" name="clothe/krakenS" dx="79" dy="64"/>
@@ -542,15 +547,16 @@
         <cell rect="122,1430,173,186" name="legs_bg/liliraune" dx="2" dy="39"/>
         <cell rect="470,956,173,156" name="fullbody/femalejiangshi" dx="16" dy="23"/>
         <cell rect="470,1272,173,156" name="fullbody/malejiangshi" dx="16" dy="23"/>
-		<cell rect="644,956,173,156" name="fullbody/gnome" dx="17" dy="23"/>
-		<cell rect="818,956,173,156" name="fullbody/ignis" dx="16" dy="21"/>
-		<cell rect="992,956,173,156" name="fullbody/undine" dx="16" dy="21"/>
-		<cell rect="1166,956,173,156" name="fullbody/sylph" dx="16" dy="21"/>
+        <cell rect="644,956,173,156" name="fullbody/gnome" dx="17" dy="23"/>
+        <cell rect="818,956,173,156" name="fullbody/ignis" dx="16" dy="21"/>
+        <cell rect="992,956,173,156" name="fullbody/undine" dx="16" dy="21"/>
+        <cell rect="1166,956,173,156" name="fullbody/femalesylph" dx="16" dy="21"/>
+        <cell rect="1340,956,173,156" name="fullbody/malesylph" dx="16" dy="21"/>
         <cell rect="260,620,21,28" name="neck/darkGooCore" dx="95" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="77" dy="50"/>
         <cell rect="162,27,54,31" name="neck/centipede" dx="77" dy="49"/>
-		<cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
+        <cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
         <cell rect="992,641,173,156" name="wings/gazer" dx="22" dy="10"/>
@@ -564,7 +570,7 @@
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
         <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
-		<cell rect="1029,41,15,13" name="clotheAmulet/CowBellAmulet" dx="97" dy="64"/>
+        <cell rect="1029,41,15,13" name="clotheAmulet/CowBellAmulet" dx="97" dy="64"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="94" dy="64"/>
         <cell rect="67,184,80,28" name="clotheScarf/scarfRed" dx="94" dy="64"/>
         <cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="94" dy="64"/>
@@ -633,11 +639,11 @@
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
         <cell rect="1969,158,20,25" name="armorNeck/elfClotheCape_fg" dx="94" dy="62"/>
-		<cell rect="579,1550,30,23" name="armorNeck/alraunedress" dx="86" dy="60"/>
+        <cell rect="579,1550,30,23" name="armorNeck/alraunedress" dx="86" dy="60"/>
         <cell rect="548,1550,30,23" name="armorNeck/alraunedressLili" dx="55" dy="60"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="1161,42,45,58" name="armorChest/blackFullplatebottom" dx="82" dy="75"/>
-		<cell rect="651,1430,44,58" name="armorChest/alraunedress" dx="87" dy="74"/>
+        <cell rect="651,1430,44,58" name="armorChest/alraunedress" dx="87" dy="74"/>
         <cell rect="606,1430,44,58" name="armorChest/alraunedressLili" dx="42" dy="74"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
         <cell rect="1056,42,45,58" name="armorLegs/blackFullplateLegs" dx="82" dy="115"/>
@@ -679,11 +685,11 @@
         <cell rect="1013,56,40,13" name="clothCape/TamamoeNoMaeKimonoCollar" dx="85" dy="68"/>
         <cell rect="229,13,40,13" name="clothCape/OniKimonoCollar" dx="85" dy="68"/>
         <cell rect="607,56,40,13" name="clothCape/IceQueenKimonoCollar" dx="85" dy="68"/>
-		<cell rect="150,155,49,25" name="clothCape/mindbreaker" dx="79" dy="53"/>
+        <cell rect="150,155,49,25" name="clothCape/mindbreaker" dx="79" dy="53"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
         <cell rect="2083,216,80,100" name="clothCape_bg/elfClotheCape_bg" dx="65" dy="64"/>
-		<cell rect="1166,641,173,156" name="clothCape_bg/mindbreaker" dx="20" dy="29"/>
+        <cell rect="1166,641,173,156" name="clothCape_bg/mindbreaker" dx="20" dy="29"/>
         <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
@@ -711,31 +717,28 @@
         <cell rect="122,1832,80,102" name="weapon/staffUnholy" dx="38" dy="55"/>
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
-        <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>	
+        <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
         <cell rect="122,1938,80,90" name="weaponBuff/swordFireBuff" dx="34" dy="31"/>
-		<cell rect="212,1938,80,90" name="weapon/swordGenericOH" dx="82" dy="55"/>
+        <cell rect="212,1938,80,90" name="weapon/swordGenericOH" dx="82" dy="55"/>
         <cell rect="212,2044,80,90" name="weapon/swordHolyOH" dx="82" dy="55"/>
         <cell rect="212,2150,80,90" name="weapon/swordUnholyOH" dx="82" dy="55"/>
         <cell rect="122,2044,80,90" name="weaponBuff/swordFireBuffOH" dx="86" dy="31"/>
         <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
         <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
         <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
-		<cell rect="302,1938,80,90" name="weapon/axeGenericOH" dx="82" dy="55"/>
+        <cell rect="302,1938,80,90" name="weapon/axeGenericOH" dx="82" dy="55"/>
         <cell rect="302,2044,80,90" name="weapon/axeHolyOH" dx="82" dy="55"/>
-        <cell rect="302,2150,80,90" name="weapon/axeUnholyOH" dx="82" dy="55"/>    
+        <cell rect="302,2150,80,90" name="weapon/axeUnholyOH" dx="82" dy="55"/>
         <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
         <cell rect="392,1726,80,90" name="weapon/hammerHoly" dx="38" dy="55"/>
         <cell rect="392,1832,80,90" name="weapon/hammerUnholy" dx="38" dy="55"/>
-		<cell rect="392,1938,80,90" name="weapon/hammerGenericOH" dx="82" dy="55"/>
+        <cell rect="392,1938,80,90" name="weapon/hammerGenericOH" dx="82" dy="55"/>
         <cell rect="392,2044,80,90" name="weapon/hammerHolyOH" dx="82" dy="55"/>
         <cell rect="392,2150,80,90" name="weapon/hammerUnholyOH" dx="82" dy="55"/>
-		<cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
-        <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
-        <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
         <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
-		<cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
+        <cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
         <cell rect="662,1726,80,90" name="weapon/rapierHoly" dx="38" dy="55"/>
         <cell rect="662,1832,80,90" name="weapon/rapierUnholy" dx="38" dy="55"/>
         <cell rect="662,1938,80,90" name="weaponBuff/rapierFireBuff" dx="38" dy="55"/>
@@ -745,15 +748,15 @@
         <cell rect="752,1938,80,90" name="weaponBuff/katanaFireBuff" dx="25" dy="35"/>
         <cell rect="842,1620,80,90" name="weapon/tetsuGeneric" dx="38" dy="55"/>
         <cell rect="842,1726,80,90" name="weapon/tetsuHoly" dx="38" dy="55"/>
-        <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>	
-		<cell rect="1112,1620,80,90" name="weapon/daggerGeneric" dx="38" dy="55"/>
+        <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>
+        <cell rect="1112,1620,80,90" name="weapon/daggerGeneric" dx="38" dy="55"/>
         <cell rect="1112,1726,80,90" name="weapon/daggerHoly" dx="38" dy="55"/>
-        <cell rect="1112,1832,80,90" name="weapon/daggerUnholy" dx="38" dy="55"/>	
+        <cell rect="1112,1832,80,90" name="weapon/daggerUnholy" dx="38" dy="55"/>
         <cell rect="1022,1832,80,90" name="weaponBuff/daggerFireBuff" dx="34" dy="31"/>
-		<cell rect="1112,1938,80,90" name="weapon/daggerGenericOH" dx="82" dy="55"/>
+        <cell rect="1112,1938,80,90" name="weapon/daggerGenericOH" dx="82" dy="55"/>
         <cell rect="1112,2044,80,90" name="weapon/daggerHolyOH" dx="82" dy="55"/>
         <cell rect="1112,2150,80,90" name="weapon/daggerUnholyOH" dx="82" dy="55"/>
-        <cell rect="1022,1938,80,90" name="weaponBuff/daggerFireBuffOH" dx="86" dy="31"/>		
+        <cell rect="1022,1938,80,90" name="weaponBuff/daggerFireBuffOH" dx="86" dy="31"/>
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
@@ -774,8 +777,8 @@
         <cell rect="61,136,59,65" name="hair_bg/feather" dx="75" dy="21"/>
         <cell rect="481,136,59,65" name="hair/ratatoskr" dx="75" dy="21"/>
         <cell rect="541,136,59,65" name="hair_bg/ratatoskr" dx="75" dy="21"/>
-		<cell rect="601,136,59,65" name="hair/mindbreaker" dx="73" dy="24"/>
-		<cell rect="661,136,59,65" name="hair/mindbreakerMale" dx="73" dy="24"/>
+        <cell rect="601,136,59,65" name="hair/mindbreaker" dx="73" dy="24"/>
+        <cell rect="661,136,59,65" name="hair/mindbreakerMale" dx="73" dy="24"/>
         <cell rect="121,70,59,65" name="hair/gorgon" dx="75" dy="21"/>
         <cell rect="121,136,59,65" name="hair_bg/gorgon" dx="75" dy="21"/>
         <cell rect="1,251,89,98" name="hair/slime" dx="60" dy="4"/>
@@ -839,7 +842,7 @@
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
         <cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
-		<cell rect="691,110,29,32" name="antennae/mindbreakerMale" dx="90" dy="50"/>
+        <cell rect="691,110,29,32" name="antennae/mindbreakerMale" dx="90" dy="50"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -855,7 +858,7 @@
         <cell rect="361,150,29,32" name="eyes/caveWyrm" dx="90" dy="37"/>
         <cell rect="391,150,29,32" name="eyes/gazer" dx="90" dy="37"/>
         <cell rect="421,150,29,32" name="eyes/gremlin" dx="90" dy="37"/>
-		<cell rect="481,150,29,32" name="eyes/mindbreakerMale" dx="90" dy="37"/>
+        <cell rect="481,150,29,32" name="eyes/mindbreakerMale" dx="90" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="90" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="90" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="75" dy="36"/>
@@ -922,7 +925,35 @@
         <cell rect="301,70,29,32" name="faceShading/faceShading" dx="90" dy="37"/>
     </spritemap>
     <spritemap file="lewd.png">
+        <cell rect="711,200,49,29" name="fullbodyPenis/gnome" dx="78" dy="106"/>
+        <cell rect="711,230,49,58" name="fullbodyPenis/gnomebig" dx="77" dy="104"/>
+        <cell rect="711,290,49,29" name="fullbodyBalls/gnomesmall" dx="79" dy="104"/>
+        <cell rect="711,320,49,29" name="fullbodyBalls/gnomelarge" dx="79" dy="104"/>
+        <cell rect="711,350,49,29" name="fullbodyBalls/gnomehuge" dx="79" dy="105"/>
+        <cell rect="711,380,49,29" name="fullbodyBalls/gnomesillyhuge" dx="79" dy="106"/>
+        <cell rect="761,200,49,29" name="fullbodyPenis/ignis" dx="78" dy="106"/>
+        <cell rect="761,230,49,58" name="fullbodyPenis/ignisbig" dx="77" dy="104"/>
+        <cell rect="761,290,49,29" name="fullbodyBalls/ignissmall" dx="79" dy="104"/>
+        <cell rect="761,320,49,29" name="fullbodyBalls/ignislarge" dx="79" dy="104"/>
+        <cell rect="761,350,49,29" name="fullbodyBalls/ignishuge" dx="79" dy="105"/>
+        <cell rect="761,380,49,29" name="fullbodyBalls/ignissillyhuge" dx="79" dy="106"/>
+        <cell rect="811,200,49,29" name="fullbodyPenis/undine" dx="78" dy="106"/>
+        <cell rect="811,230,49,58" name="fullbodyPenis/undinebig" dx="77" dy="104"/>
+        <cell rect="811,290,49,29" name="fullbodyBalls/undinesmall" dx="79" dy="104"/>
+        <cell rect="811,320,49,29" name="fullbodyBalls/undinelarge" dx="79" dy="104"/>
+        <cell rect="811,350,49,29" name="fullbodyBalls/undinehuge" dx="79" dy="105"/>
+        <cell rect="811,380,49,29" name="fullbodyBalls/undinesillyhuge" dx="79" dy="106"/>
+        <cell rect="861,200,49,29" name="fullbodyPenis/sylph" dx="78" dy="106"/>
+        <cell rect="861,230,49,58" name="fullbodyPenis/sylphbig" dx="77" dy="104"/>
+        <cell rect="861,290,49,29" name="fullbodyBalls/sylphsmall" dx="79" dy="104"/>
+        <cell rect="861,320,49,29" name="fullbodyBalls/sylphlarge" dx="79" dy="104"/>
+        <cell rect="861,350,49,29" name="fullbodyBalls/sylphhuge" dx="79" dy="105"/>
+        <cell rect="861,380,49,29" name="fullbodyBalls/sylphsillyhuge" dx="79" dy="106"/>
         <cell rect="11,80,49,29" name="breasts/0" dx="79" dy="68"/>
+        <cell rect="711,80,49,29" name="fullbodyBreast/gnome0" dx="79" dy="68"/>
+        <cell rect="761,80,49,29" name="fullbodyBreast/ignis0" dx="79" dy="68"/>
+        <cell rect="811,80,49,29" name="fullbodyBreast/undine0" dx="79" dy="68"/>
+        <cell rect="861,80,49,29" name="fullbodyBreast/sylph0" dx="79" dy="68"/>
         <cell rect="11,110,49,29" name="breasts/Bhuman" dx="79" dy="68"/>
         <cell rect="61,110,49,29" name="breasts/Bfur" dx="79" dy="68"/>
         <cell rect="61,110,49,29" name="breasts/Bpanda" dx="79" dy="68"/>
@@ -933,10 +964,10 @@
         <cell rect="311,110,49,29" name="breasts/Borca" dx="79" dy="68"/>
         <cell rect="361,110,49,29" name="breasts/Bgoo" dx="79" dy="68"/>
         <cell rect="661,110,49,29" name="breasts/Bdscales" dx="79" dy="68"/>
-		<cell rect="711,110,49,29" name="fullbodyBreast/Bgnome" dx="79" dy="68"/>
-		<cell rect="761,110,49,29" name="fullbodyBreast/Bignis" dx="79" dy="68"/>
-		<cell rect="811,110,49,29" name="fullbodyBreast/Bundine" dx="79" dy="68"/>
-		<cell rect="861,110,49,29" name="fullbodyBreast/Bsylph" dx="79" dy="68"/>
+        <cell rect="711,110,49,29" name="fullbodyBreast/Bgnome" dx="79" dy="68"/>
+        <cell rect="761,110,49,29" name="fullbodyBreast/Bignis" dx="79" dy="68"/>
+        <cell rect="811,110,49,29" name="fullbodyBreast/Bundine" dx="79" dy="68"/>
+        <cell rect="861,110,49,29" name="fullbodyBreast/Bsylph" dx="79" dy="68"/>
         <cell rect="11,140,49,29" name="breasts/Dhuman" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dfur" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dpanda" dx="79" dy="68"/>
@@ -947,10 +978,10 @@
         <cell rect="311,140,49,29" name="breasts/Dorca" dx="79" dy="68"/>
         <cell rect="361,140,49,29" name="breasts/Dgoo" dx="79" dy="68"/>
         <cell rect="661,140,49,29" name="breasts/Ddscales" dx="79" dy="68"/>
-		<cell rect="711,140,49,29" name="fullbodyBreast/Dgnome" dx="79" dy="68"/>
-		<cell rect="761,140,49,29" name="fullbodyBreast/Dignis" dx="79" dy="68"/>
-		<cell rect="811,140,49,29" name="fullbodyBreast/Dundine" dx="79" dy="68"/>
-		<cell rect="861,140,49,29" name="fullbodyBreast/Dsylph" dx="79" dy="68"/>
+        <cell rect="711,140,49,29" name="fullbodyBreast/Dgnome" dx="79" dy="68"/>
+        <cell rect="761,140,49,29" name="fullbodyBreast/Dignis" dx="79" dy="68"/>
+        <cell rect="811,140,49,29" name="fullbodyBreast/Dundine" dx="79" dy="68"/>
+        <cell rect="861,140,49,29" name="fullbodyBreast/Dsylph" dx="79" dy="68"/>
         <cell rect="11,170,49,29" name="breasts/Fhuman" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Ffur" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Fpanda" dx="79" dy="68"/>
@@ -961,10 +992,10 @@
         <cell rect="311,170,49,29" name="breasts/Forca" dx="79" dy="68"/>
         <cell rect="361,170,49,29" name="breasts/Fgoo" dx="79" dy="68"/>
         <cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
-		<cell rect="711,170,49,29" name="fullbodyBreast/Fgnome" dx="79" dy="68"/>
-		<cell rect="761,170,49,29" name="fullbodyBreast/Fignis" dx="79" dy="68"/>
-		<cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
-		<cell rect="861,170,49,29" name="fullbodyBreast/Fsylph" dx="79" dy="68"/>
+        <cell rect="711,170,49,29" name="fullbodyBreast/Fgnome" dx="79" dy="68"/>
+        <cell rect="761,170,49,29" name="fullbodyBreast/Fignis" dx="79" dy="68"/>
+        <cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
+        <cell rect="861,170,49,29" name="fullbodyBreast/Fsylph" dx="79" dy="68"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -990,7 +1021,7 @@
         <cell rect="361,230,49,58" name="penis/chitinbig" dx="78" dy="106"/>
         <cell rect="561,290,49,35" name="penis/caveWyrm" dx="78" dy="106"/>
         <cell rect="561,230,49,58" name="penis/caveWyrmbig" dx="77" dy="108"/>
-		<cell rect="461,200,49,29" name="penis/mindbreakerdrip" dx="73" dy="134"/>
+        <cell rect="461,200,49,29" name="penis/mindbreakerdrip" dx="73" dy="134"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -1081,7 +1112,7 @@
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="80" dy="99"/>
         <cell rect="311,200,49,29" name="overskinpanty/Ookumukadevenom" dx="75" dy="104"/>
         <cell rect="361,200,49,29" name="overskinpanty/caveWyrm" dx="80" dy="112"/>
-		<cell rect="411,200,49,29" name="overskinpanty/mindbreaker" dx="80" dy="112"/>
+        <cell rect="411,200,49,29" name="overskinpanty/mindbreaker" dx="80" dy="112"/>
         <cell rect="61,410,49,29" name="bra_fg/qipaoRedBraSmall" dx="79" dy="68"/>
         <cell rect="61,440,49,29" name="bra_fg/qipaoRedBraMedium" dx="79" dy="68"/>
         <cell rect="61,470,49,29" name="bra_fg/qipaoRedBraLarge" dx="79" dy="68"/>
@@ -1290,6 +1321,9 @@
     <layers>
 		<layer name="full_pattern"/>
 		<layer name="fullbodyBreast"/>
+		<layer name="fullbodyMuscle"/>
+		<layer name="fullbodyPenis"/>
+		<layer name="fullbodyBalls"/>
 		<layer name="full_patternUnder"/>
 		<layer name="fullbody"/>
 		<layer name="horns_overclothe"/>
@@ -5507,6 +5541,33 @@
 			<hide part="*"/>
 			<show part="fullbody/gnome"/>
 			<show part="full_pattern/gnome"/>
+			<if test="tone&gt;=65">
+				<show part="fullbodyMuscle/musclegnome"/>
+			</if>
+			<if test="hasCock()">
+				<if test="big">
+                    <show part="fullbodyPenis/gnomebig"/>
+                    <else>
+						<show part="fullbodyPenis/gnome"/>
+                    </else>
+                </if>
+			</if>
+			<if test="balls gt 0">
+				<switch>
+					<case test="ballSize ge 8">
+						<show part="fullbodyBalls/gnomesillyhuge"/>
+					</case>
+					<case test="ballSize ge 6">
+						<show part="fullbodyBalls/gnomehuge"/>
+					</case>
+					<case test="ballSize ge 4">
+						<show part="fullbodyBalls/gnomelarge"/>
+					</case>
+					<default>
+						<show part="fullbodyBalls/gnomesmall"/>
+					</default>
+				</switch>
+			</if>
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
@@ -5527,6 +5588,9 @@
 						<show part="fullbodyBreast/Fgnome"/>
 					</default>
 				</switch>
+				<else>
+					<show part="fullbodyBreast/gnome0"/>
+                </else>
 			</if>
 		</if>
 		
@@ -5535,6 +5599,33 @@
 			<!-- Hide everything else -->
 			<hide part="*"/>
 			<show part="fullbody/ignis"/>
+			<if test="tone&gt;=65">
+				<show part="fullbodyMuscle/muscleignis"/>
+			</if>
+			<if test="hasCock()">
+				<if test="big">
+                    <show part="fullbodyPenis/ignisbig"/>
+                    <else>
+						<show part="fullbodyPenis/ignis"/>
+                    </else>
+                </if>
+			</if>
+			<if test="balls gt 0">
+				<switch>
+					<case test="ballSize ge 8">
+						<show part="fullbodyBalls/ignissillyhuge"/>
+					</case>
+					<case test="ballSize ge 6">
+						<show part="fullbodyBalls/ignishuge"/>
+					</case>
+					<case test="ballSize ge 4">
+						<show part="fullbodyBalls/ignislarge"/>
+					</case>
+					<default>
+						<show part="fullbodyBalls/ignissmall"/>
+					</default>
+				</switch>
+			</if>
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
@@ -5555,6 +5646,9 @@
 						<show part="fullbodyBreast/Fignis"/>
 					</default>
 				</switch>
+				<else>
+					<show part="fullbodyBreast/ignis0"/>
+                </else>
 			</if>
 		</if>
 		
@@ -5565,6 +5659,33 @@
 			<show part="fullbody/undine"/>
 			<show part="full_pattern/undine"/>
 			<show part="full_patternUnder/undine"/>
+			<if test="tone&gt;=65">
+				<show part="fullbodyMuscle/muscleundine"/>
+			</if>
+			<if test="hasCock()">
+				<if test="big">
+                    <show part="fullbodyPenis/undinebig"/>
+                    <else>
+						<show part="fullbodyPenis/undine"/>
+                    </else>
+                </if>
+			</if>
+			<if test="balls gt 0">
+				<switch>
+					<case test="ballSize ge 8">
+						<show part="fullbodyBalls/undinesillyhuge"/>
+					</case>
+					<case test="ballSize ge 6">
+						<show part="fullbodyBalls/undinehuge"/>
+					</case>
+					<case test="ballSize ge 4">
+						<show part="fullbodyBalls/undinelarge"/>
+					</case>
+					<default>
+						<show part="fullbodyBalls/undinesmall"/>
+					</default>
+				</switch>
+			</if>
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
@@ -5585,6 +5706,9 @@
 						<show part="fullbodyBreast/Fundine"/>
 					</default>
 				</switch>
+				<else>
+					<show part="fullbodyBreast/undine0"/>
+                </else>
 			</if>
 		</if>
 		
@@ -5592,27 +5716,65 @@
 		<if test="IsWindElemental">
 			<!-- Hide everything else -->
 			<hide part="*"/>
-			<show part="fullbody/sylph"/>
-			<if test="breastRows.length gt 0">
+			<if test="tone&gt;=65">
+				<show part="fullbodyMuscle/musclesylph"/>
+			</if>
+			<if test="hasCock()">
+				<if test="big">
+                    <show part="fullbodyPenis/sylphbig"/>
+                    <else>
+						<show part="fullbodyPenis/sylph"/>
+                    </else>
+                </if>
+			</if>
+			<if test="balls gt 0">
 				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					<case test="ballSize ge 8">
+						<show part="fullbodyBalls/sylphsillyhuge"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="fullbodyBreast/Bsylph"/>
+					<case test="ballSize ge 6">
+						<show part="fullbodyBalls/sylphhuge"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
-						<show part="fullbodyBreast/Dsylph"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
-						<show part="fullbodyBreast/Dsylph"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
-						<show part="fullbodyBreast/Fsylph"/>
+					<case test="ballSize ge 4">
+						<show part="fullbodyBalls/sylphlarge"/>
 					</case>
 					<default>
-						<show part="fullbodyBreast/Fsylph"/>
+						<show part="fullbodyBalls/sylphsmall"/>
 					</default>
 				</switch>
+			</if>
+			<if test="breastRows[0].breastRating lte BreastCup.FLAT">
+				<show part="fullbody/malesylph"/>
+				<show part="fullbodyBreast/sylph0"/>
+				<else>
+					<show part="fullbody/femalesylph"/>
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="fullbodyBreast/Bsylph"/>
+								<show part="full_pattern/sylph"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+								<show part="fullbodyBreast/Dsylph"/>
+								<show part="full_pattern/sylph"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+								<show part="fullbodyBreast/Dsylph"/>
+								<show part="full_pattern/sylph"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+								<show part="fullbodyBreast/Fsylph"/>
+								<show part="full_pattern/sylph"/>
+							</case>
+							<default>
+								<show part="fullbodyBreast/Fsylph"/>
+								<show part="full_pattern/sylph"/>
+							</default>
+						</switch>
+					</if>
+				</else>
 			</if>
 		</if>
 
