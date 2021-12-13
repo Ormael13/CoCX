@@ -70,7 +70,7 @@ package classes.Scenes
 			outputText("-Tooltip for firearms button in combat menu now have ammo left counter.\n");
 			outputText("-Tease max lvl starts at 16 and would rise until lvl 24 reaching cap of lvl 40. Tease base chance to hit increased from 70% to 90% and it increase by 1% per tease level.\n");
 			outputText("-Temporal golems base damage will be scaling with int/wis by adding current value of both stats. Also it base value was increased.\n");
-			outputText("-Super Sensual perk would increase tease cap up to 70. Also each 1% above 100% chance to succesfully tease oponent will not give ~2% more lust dmg instead of ~1%. Base lust damage form tease been increased.\n");
+			outputText("-Super Sensual perk would increase tease cap up to 70. Also each 1% above 100% chance to succesfully tease oponent will not give ~2% more lust dmg instead of ~1%. Base lust damage from tease been increased.\n");
 			outputText("-Marble can give PC 2 new items from Present option: Minotaur Horns (the same PC get from killing minotaurs) and Pack of nails.\n");
 			outputText("-Option to get internal mutation form Evangeline no longer req. her to be lvl 6.\n");
 			outputText("-Charged Core perk req. of having Apprentice Golem Maker perk was replacd with Job: Golemancer perk.\n");
@@ -122,8 +122,10 @@ package classes.Scenes
 			outputText("Wrathless necklace not giving spellpower bonus\n\n");
 			outputText("<b>Version 0.8s3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Frost Wyrm\n");
+			outputText("-New tier 5 misc lvl-up perk: Golem Army Junior Lieutenant. Req. Master Golem Maker perk and 110+ int/wis. Effect: +1/2 to max limit stored of permanent/temporary stone golems.\n");
 			outputText("-New tier 7 misc lvl-up perk: Advanced Golemancy Theory. Req. Grand-Master Golem Maker perk, 140+ in int+wis. Effect: Enable option to make steel golems and store 1 such golem.\n");
 			outputText("-New tier 9 misc lvl-up perk: Temporal Golems Restructuration (Ex). Req. Temporal Golems Restructuration and Grand-Master Golem Maker perks, 160+ in int+wis. Effect: Allow to use option of send all temporary golems to attack in one turn. Adding option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)\n");
+			outputText("-New tier 9 wisdom lvl-up perk: Prestige Job: Druid. Req. Elemental Contract Rank 7 and Archmage perks, 200+ wis. Effect: You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals) (+50% tou multi and +70% wisdom multi)\n");
 			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
 			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
@@ -186,7 +188,6 @@ package classes.Scenes
 			outputText("-Clearing out Factory can be achieved also after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
 			outputText("-Motivation perk effect changed to decrease idle action chance for henchman by 30% (20%) and would also make their attacks ~50% stronger. Motivation (Ex) perk effect changed to futher decrease idle action chance by 19% (1%) and increase their attacks power by 50% each time PC reach specific lvl (up to 4 times currently). ");
 			outputText("Motivation (Su) perk effect changed to make each henchman do 2 actions in their turn and increase power of their attacks 150% of currently boost provided by previous Motivcation perks.\n");
-			outputText("-New tier 9 wisdom lvl-up perk: Prestige Job: Druid. Req. Elemental Contract Rank 7 and Archmage perks, 200+ wis. Effect: You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals) (+50% tou multi and +70% wisdom multi)\n");
 			outputText("-Soul Cultivation perks are now less often picked (each 9 or 12 levels). First one is moved to be avialable at lvl 0+. Pills to recover SF would give more. On top of previous fixed amount they will restore 1/2/3% of max soulfroce per pill grade. Using bottle of 10 would mean it will be even up to 10/20/30% of max SF + fixed amount gained.\n");
 			outputText("-Mana potions also would restorte 1/2/3% of max mana + fixed amount it was giving before.\n");
 			outputText("-Training Dummy stats when sparring ring is upgraded to 2nd and 3rd stage got much better both in HP, Lust caps or phys/mag defence values. Still some (many?) of you will be able to annihilate it with casual attack :(\n");
@@ -207,14 +208,13 @@ package classes.Scenes
 			outputText("-Prestige jobs accesability would be moved from lvl 42+ to 54+ (meaning it will be all perks moved 2 tiers higher with minimal stat req. changes). Slots for prestige job will start at 2 and multi bonuses to stats would be 50% higher with few jobs having % slight adjusted. Current possesed perks from prestige jobs will be kept even if PC wouldn't be able to get them after changes.\n");
 			outputText("-Epic Elementals now req. 2 elemental shards to summon not 1. All those that summoned them already with 1 shard... you damn lucky people :P\n");
 			outputText("-Golemancer goblin would sell new items when PC gain specific perks (they are meanitoned in tooltip for grey out buttons).\n");
-			outputText("-New tier 5 misc lvl-up perk: Golem Army Junior Lieutenant. Req. Master Golem Maker perk and 110+ int/wis. Effect: +1/2 to max limit stored of permanent/temporary stone golems.\n");
 			outputText("-New tier 13 misc lvl-up perk: Golem Army Lieutenant Colonel. Req. Golem Army Major, Epic Golem Maker 3rd Circle perks and 210+ int/wis. Effect: +1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-Golem army perks been moved more apart making place for additional perks + last 3 of old perks (before they got their name changed) add 1 slot for metal golem.\n");
 			outputText("-New tier 14 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker (3rd Circle) perk and 225+ int/wis. Effect: Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.\n");
 			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
 			outputText("-Pernament improved stone golems cost in stones been cut in half.\n");
-			outputText("-Wisp Captain perk lvl req. rised from 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both..\n");
+			outputText("-Wisp Captain perk lvl req. rised from 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both.\n");
 			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-Each next super perk in both Hidden Job will req. to have 10 lvl more starting from lvl 0 for first Hidden Job perk itself (so the 5th one will now req. lvl 40+ not 30+ as before).\n");
 			outputText("-Added option to surrender via HP defeat. Those options would be accessable also when PC is under stun / power stun or fear effect.\n");
@@ -223,6 +223,12 @@ package classes.Scenes
 			outputText("-All perks in tree of Daoist Cultivator and Body Cultivator have effects increased (more for those that are gained later on).\n");
 			outputText("-1 new achievment.\n");//s	 (1 shadow one)
 			outputText("-Evangeline can make Leviatan Sunscreen (Sea Dragon TF) from Orca and Dragon TF items.\n");
+			outputText("-Druid job allow to undergone another (sorta) transformation: fusion with one of 4 epic elementals (water, firte, air, earth). Fusion would change PC look, disable most of physical and magical speicals that req. to have specific bodypart, if PC nopt have any range weapon equipped that allow to attack will be granted default to specific fusion base range attack option.\n");
+			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -254,6 +260,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -333,7 +340,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -368,6 +377,7 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

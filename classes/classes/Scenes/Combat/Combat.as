@@ -3556,6 +3556,97 @@ public class Combat extends BaseContent {
         }
     }
 
+    public function throwElementalAttack():void {
+        var damage:Number = 0;
+        damage += player.str;
+        damage += ghostStrength();
+        damage += scalingBonusStrength() * 0.4;
+        if (player.hasPerk(PerkLib.Telekinesis)){
+            damage += player.inte;
+            damage += scalingBonusIntelligence() * 0.4;
+        }
+        if (damage < 20) damage = 20;
+        if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
+		damage *= 1.5;
+		damage *= (1 + (0.01 * masteryThrowingLevel()));
+        //Determine if critical hit!
+        var crit:Boolean = false;
+        var critChance:int = 5;
+        var critDmg:Number = 1.75;
+        critChance += combatPhysicalCritical();
+        if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+        if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
+        if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+        if (rand(100) < critChance) {
+            crit = true;
+            if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
+            if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
+            damage *= critDmg;
+        }
+		if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
+        if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
+        if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
+        if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+        if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
+        if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+            if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
+            else {
+                if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+                    if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
+                    else damage *= 3.5;
+                } else damage *= 2;
+            }
+        }
+        damage = Math.round(damage);
+        checkAchievementDamage(damage);
+		var elementalVariant:Number = player.perkv1(PerkLib.ElementalBody);
+        switch (elementalVariant) {
+            case 1:
+                outputText("You form and unleash a wind blade. ");
+				doWindDamage(damage, true, true);
+                break;
+            case 2:
+                outputText("You launch a huge rock. ");
+				doEarthDamage(damage, true, true);
+                break;
+            case 3:
+                outputText("You charge and toss a fireball. ");
+				doFireDamage(damage, true, true);
+                break;
+            case 4 :
+                outputText("You unleash an arrow of lethally  pressurized water. ");
+				doWaterDamage(damage, true, true);
+                break;
+            default:
+                outputText("You form and unleash a wind blade. ");
+				doWindDamage(damage, true, true);
+                break;
+        }
+		if (crit) {
+			outputText(" <b>*Critical Hit!*</b>");
+			throwingXP(1);
+		}
+		throwingXP(1);
+        if (monster.HP <= monster.minHP()) {
+            if (monster.plural) outputText(" [monster He] stagger, collapsing onto each other from the wounds you've inflicted on [monster him].");
+            else outputText(" [monster He] staggers, collapsing from the wounds you've inflicted on [monster him].");
+            outputText("\n\n");
+            doNext(endHpVictory);
+            return;
+        }
+		else {
+            outputText(" It's clearly very painful.\n\n");
+			WrathGenerationPerHit1(5);
+            heroBaneProc(damage);
+        }
+        if (monster.lust >= monster.maxLust()) {
+            doNext(endLustVictory);
+        }
+    }
+
     public function TelekinesisThrow():void {
         var fc:Number = oneThrowTotalCost();
         var accRange:Number = 0;
@@ -15100,4 +15191,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

@@ -40,6 +40,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		
 		private function room1Pass():void {
 			clearOutput();
+			dungeonLoc = 169;
 			outputText("As vague as the directions from that bee-girl were, you still managed to find the path she was indicating, and now you find yourself staring at the \"Hive\" she was talking about. It's quite an impressive sight, an edifice of wax built around the trees of the Deepwoods, it's almost the size of a small hill, it’s top reaching for the canopy and its sides vanishing into the gloom on either side of your vision. ");
 			outputText("Fortunately, there are no battles being fought in your path, despite the mental image of her usage of the word \"siege\" had invoked, and you can see an entrance into the hive. Unfortunately, it's not unguarded.\n\n");
 			outputText("There are two creatures standing in your way, and they could be identical twin sisters. They look like the bee-girls you have seen in the Forest... and yet they couldn't be more different. They're huge, easily seven feet tall and while their breasts aren't exactly small, their physiques can only be described as amazonian, with muscles visibly rippling under their tanned yellow skin even from here. ");
@@ -61,7 +62,6 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 				}
 				EngineCore.awardAchievement("Buzz Off", kACHIEVEMENTS.DUNGEON_BUZZ_OFF);
 				flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 2.75;
-				dungeonLoc = 169;
 				doNext(playerMenu);
 			}
 			else {

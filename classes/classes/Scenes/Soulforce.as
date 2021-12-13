@@ -168,15 +168,21 @@ use namespace CoC;
 
 		public function SoulCultivationLvL():void {	//Converted Soul Cultivation level check to a function, easier to update, and much nicer on the eyes than the old block of ifs!
 			//Actually.... Since the tier and lvl have to sync for the soul cult lvl, and is checked for the output tier... I can hijack this and use it to output the tiers as well!
-			//var cultTier:Array = [PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
-			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+			/*var cultTier:Array = [PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
 			var pLvlMax:int = 122;	//Should only need to change this and above array for future expansion.
 			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
 			var cultStanding:String = "Mortal";
 			var lNeed:Boolean = true;
 			var pLvl:int = 6;
 			var cLvlTier:int = 0;
-			//var perkTier:PerkType;
+			var perkTier:PerkType;*/
+			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+			var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
+			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
+			var lNeed:Boolean = true;
+			var pLvl:int = 6;
+			var cLvlTier:int = 0;
+			var cultStanding:String = "Mortal";
 			flags[kFLAGS.SOUL_CULTIVATION] = 0;
 			/*for (var i:int = 0; i < cultTier.length(); i++){	//This *should* work?
 				if (!player.hasPerk(cultTier[i])){
@@ -245,7 +251,7 @@ use namespace CoC;
 		}
 		public function submenucuzwhynot():void {
 			menu();
-			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Golem Army and Ascension: Additional Organ Mutation perks correction pre global save upgrade on new public build.");
+			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
 			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
 			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
@@ -377,12 +383,12 @@ use namespace CoC;
 				player.removePerk(PerkLib.AscensionBuildingPrestige04);
 			}
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestige05)) {
-				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,1);
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,5);
 				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 5, 0, 0, 1);
 				player.removePerk(PerkLib.AscensionBuildingPrestige05);
 			}
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestige06)) {
-				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,2);
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,6);
 				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,6,0,0,1);
 				player.removePerk(PerkLib.AscensionBuildingPrestige06);
 			}
@@ -4217,9 +4223,9 @@ use namespace CoC;
 			}
 		}
 		private function canfaceTribulation():Boolean {
-			if ((player.level >= 24 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
-				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
-				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
+			if ((player.level >= 27 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
+				(player.level >= 54 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
+				(player.level >= 78 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
 			else return false;
 		}
 		public function tribulationsPrompt():void {
