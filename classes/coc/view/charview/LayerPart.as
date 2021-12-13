@@ -17,7 +17,7 @@ public class LayerPart extends Statement {
 		this.image = image;
 		this.visible = visible;
 		this.name = name;
-		var pp:Array = name.match(/([^\/]+\/)\*/);
+		var pp:Array = name.match(/([^\*]*)\*/);
 		if (pp) {
 			this._prefix = true;
 			this.name = pp[1];
