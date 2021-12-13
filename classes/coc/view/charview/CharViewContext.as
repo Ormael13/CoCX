@@ -44,6 +44,10 @@ import coc.xlogic.ExecContext;
 				{}, // local variables
 				character,
 				{
+					IsEarthElemental: player.perkv1(PerkLib.ElementalBody) == 2,
+					IsFireElemental: player.perkv1(PerkLib.ElementalBody) == 3,
+					IsWaterElemental: player.perkv1(PerkLib.ElementalBody) == 4,
+					IsWindElemental: player.perkv1(PerkLib.ElementalBody) == 1,
 					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
 					CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
 					MindBreakerPussy: player.vaginaType() == VaginaClass.MINDBREAKER,
