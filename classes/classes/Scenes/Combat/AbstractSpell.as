@@ -41,7 +41,7 @@ public class AbstractSpell extends CombatAbility {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < realManaCost) {
 			player.HP -= realManaCost;
 		} else {
-			useMana(40, useManaType);
+			useMana(realManaCost, useManaType);
 		}
 		
 		player.wrath -= realWrathCost;
