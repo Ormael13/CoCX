@@ -392,6 +392,7 @@ use namespace CoC;
 				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,6,0,0,1);
 				player.removePerk(PerkLib.AscensionBuildingPrestige06);
 			}
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack033():void {

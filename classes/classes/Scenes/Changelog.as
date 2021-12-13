@@ -222,10 +222,10 @@ package classes.Scenes
 			outputText("-Aimozg changes to spells code including new tab in Stats to give general estimate how much damage would they deal.\n");
 			outputText("-All perks in tree of Daoist Cultivator and Body Cultivator have effects increased (more for those that are gained later on).\n");
 			outputText("-1 new achievment.\n");//s	 (1 shadow one)
-			outputText("-Evangeline can make Leviatan Sunscreen (Sea Dragon TF) from Orca and Dragon TF items.\n");
+			outputText("-Evangeline can make Leviatan Sunscreen (Sea Dragon TF) from Orca and Dragon TF items. Alchemy menu been split between 2 subpages with all options now spread there without any additional submenus (like the one before for scylla or abyssal ink).\n");
 			outputText("-Druid job allow to undergone another (sorta) transformation: fusion with one of 4 epic elementals (water, firte, air, earth). Fusion would change PC look, disable most of physical and magical speicals that req. to have specific bodypart, if PC nopt have any range weapon equipped that allow to attack will be granted default to specific fusion base range attack option.\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
-			outputText("-\n");
+			outputText("-Elemental fusions would change PC sprite look to either male or female version of one of four options. (sprites by Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
