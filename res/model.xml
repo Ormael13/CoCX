@@ -304,12 +304,9 @@
         <cell rect="951,90,49,59" name="breasts_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1051,90,49,59" name="torso_pattern/Bbioluminescence" dx="80" dy="61"/>
-        <cell rect="911,611,90,90" name="full_pattern/undine" dx="59" dy="35"/>
+        <cell rect="201,1304,99,119" name="full_pattern/undine" dx="56" dy="21"/>
+		<cell rect="301,1304,99,119" name="full_patternUnder/undine" dx="56" dy="21"/>
         <cell rect="101,1304,99,119" name="full_pattern/gnome" dx="53" dy="20"/>
-        <cell rect="911,520,90,90" name="full_pattern/IgnisTop" dx="62" dy="22"/>
-        <cell rect="820,611,90,90" name="full_pattern/IgnisBottom" dx="63" dy="79"/>
-        <cell rect="1002,520,90,90" name="full_pattern/sylphTop" dx="60" dy="46"/>
-        <cell rect="1093,520,90,90" name="full_pattern/sylphBottom" dx="60" dy="85"/>
         <cell rect="1,150,49,59" name="arms_bg/human" dx="56" dy="64"/>
         <cell rect="51,150,49,59" name="arms_bg/fur" dx="56" dy="64"/>
         <cell rect="551,150,49,59" name="arms_bg/furracoon" dx="56" dy="64"/>
@@ -545,6 +542,10 @@
         <cell rect="122,1430,173,186" name="legs_bg/liliraune" dx="2" dy="39"/>
         <cell rect="470,956,173,156" name="fullbody/femalejiangshi" dx="16" dy="23"/>
         <cell rect="470,1272,173,156" name="fullbody/malejiangshi" dx="16" dy="23"/>
+		<cell rect="644,956,173,156" name="fullbody/gnome" dx="17" dy="23"/>
+		<cell rect="818,956,173,156" name="fullbody/ignis" dx="16" dy="21"/>
+		<cell rect="992,956,173,156" name="fullbody/undine" dx="16" dy="21"/>
+		<cell rect="1166,956,173,156" name="fullbody/sylph" dx="16" dy="21"/>
         <cell rect="260,620,21,28" name="neck/darkGooCore" dx="95" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="77" dy="50"/>
@@ -798,7 +799,6 @@
         <cell rect="901,350,89,164" name="hair_bg/rainbow" dx="60" dy="5"/>
         <cell rect="241,70,59,65" name="hair/undine" dx="75" dy="21"/>
         <cell rect="811,350,89,164" name="hair_bg/undine" dx="62" dy="22"/>
-        <cell rect="811,251,89,98" name="fullbody/undine" dx="55" dy="91"/>
         <cell rect="301,136,59,65" name="hairTop/sylph" dx="85" dy="1"/>
         <cell rect="361,136,59,65" name="hairLeft/sylph" dx="54" dy="26"/>
         <cell rect="421,136,59,65" name="hairRight/sylph" dx="98" dy="26"/>
@@ -933,6 +933,10 @@
         <cell rect="311,110,49,29" name="breasts/Borca" dx="79" dy="68"/>
         <cell rect="361,110,49,29" name="breasts/Bgoo" dx="79" dy="68"/>
         <cell rect="661,110,49,29" name="breasts/Bdscales" dx="79" dy="68"/>
+		<cell rect="711,110,49,29" name="fullbodyBreast/Bgnome" dx="79" dy="68"/>
+		<cell rect="761,110,49,29" name="fullbodyBreast/Bignis" dx="79" dy="68"/>
+		<cell rect="811,110,49,29" name="fullbodyBreast/Bundine" dx="79" dy="68"/>
+		<cell rect="861,110,49,29" name="fullbodyBreast/Bsylph" dx="79" dy="68"/>
         <cell rect="11,140,49,29" name="breasts/Dhuman" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dfur" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dpanda" dx="79" dy="68"/>
@@ -943,6 +947,10 @@
         <cell rect="311,140,49,29" name="breasts/Dorca" dx="79" dy="68"/>
         <cell rect="361,140,49,29" name="breasts/Dgoo" dx="79" dy="68"/>
         <cell rect="661,140,49,29" name="breasts/Ddscales" dx="79" dy="68"/>
+		<cell rect="711,140,49,29" name="fullbodyBreast/Dgnome" dx="79" dy="68"/>
+		<cell rect="761,140,49,29" name="fullbodyBreast/Dignis" dx="79" dy="68"/>
+		<cell rect="811,140,49,29" name="fullbodyBreast/Dundine" dx="79" dy="68"/>
+		<cell rect="861,140,49,29" name="fullbodyBreast/Dsylph" dx="79" dy="68"/>
         <cell rect="11,170,49,29" name="breasts/Fhuman" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Ffur" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Fpanda" dx="79" dy="68"/>
@@ -953,6 +961,10 @@
         <cell rect="311,170,49,29" name="breasts/Forca" dx="79" dy="68"/>
         <cell rect="361,170,49,29" name="breasts/Fgoo" dx="79" dy="68"/>
         <cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
+		<cell rect="711,170,49,29" name="fullbodyBreast/Fgnome" dx="79" dy="68"/>
+		<cell rect="761,170,49,29" name="fullbodyBreast/Fignis" dx="79" dy="68"/>
+		<cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
+		<cell rect="861,170,49,29" name="fullbodyBreast/Fsylph" dx="79" dy="68"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -1276,8 +1288,10 @@
 
 	<!-- LAYER AREA -->
     <layers>
-		<layer name="fullbody"/>
 		<layer name="full_pattern"/>
+		<layer name="fullbodyBreast"/>
+		<layer name="full_patternUnder"/>
+		<layer name="fullbody"/>
 		<layer name="horns_overclothe"/>
 		<layer name="overclothe"/>
 		<layer name="shield"/>
@@ -4173,60 +4187,7 @@
 			<show part="neck/darkGooCore"/>
 		</if>
 
-		<!-- FULL BODY AND DRESS AREA -->
-
-		<!-- Jiangshi -->
-		<if test="horns.type == Horns.SPELL_TAG">
-			<!-- Hide everything else -->
-			<hide part="arms_fg/*"/>
-			<hide part="antennae/*"/>
-			<hide part="horns/*"/>
-			<hide part="ears/*"/>
-			<hide part="eyes/*"/>
-			<hide part="hair/*"/>
-			<hide part="ears_bg/*"/>
-			<hide part="face/*"/>
-			<hide part="head/*"/>
-			<hide part="horns_bg/*"/>
-			<hide part="neck/*"/>
-			<hide part="breasts_pattern/*"/>
-			<hide part="breasts/*"/>
-			<hide part="overhands/*"/>
-			<hide part="hands/*"/>
-			<hide part="arms_pattern/*"/>
-			<hide part="arms/*"/>
-			<hide part="overhands_bg/*"/>
-			<hide part="hands_bg/*"/>
-			<hide part="arms_bg_pattern/*"/>
-			<hide part="arms_bg/*"/>
-			<hide part="wings_front/*"/>
-			<hide part="legs_fg/*"/>
-			<hide part="penis/*"/>
-			<hide part="balls/*"/>
-			<hide part="overfeet/*"/>
-			<hide part="feet/*"/>
-			<hide part="legs_pattern/*"/>
-			<hide part="legs/*"/>
-			<hide part="torso_pattern/*"/>
-			<hide part="muscle/*"/>
-			<hide part="torso/*"/>
-			<hide part="ears_truebg/*"/>
-			<hide part="hair_bg/*"/>
-			<hide part="wings/*"/>
-			<hide part="rearbody/*"/>
-			<hide part="tail_fg/*"/>
-			<hide part="tail/*"/>
-			<hide part="wings_bg/*"/>
-			<hide part="legs_bg/*"/>
-			<hide part="weapon/*"/>
-			<hide part="shield/*"/>
-			<if test="breastRows[0].breastRating lte BreastCup.FLAT">
-				<show part="fullbody/malejiangshi"/>
-				<else>
-					<show part="fullbody/femalejiangshi"/>
-				</else>
-			</if>
-		</if>
+		<!-- DRESS AREA -->
 
 		<!-- Naga Jewelry -->
 		<if test="goldenNagaHairpin">
@@ -5536,6 +5497,135 @@
 
 		<if test="showClothing == false">
 			<hide part="panty/*"/>
+		</if>
+		
+		<!-- FULL BODY AREA -->
+		
+		<!-- Earth Elemental -->
+		<if test="IsEarthElemental">
+			<!-- Hide everything else -->
+			<hide part="*"/>
+			<show part="fullbody/gnome"/>
+			<show part="full_pattern/gnome"/>
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="fullbodyBreast/Bgnome"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+						<show part="fullbodyBreast/Dgnome"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+						<show part="fullbodyBreast/Dgnome"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+						<show part="fullbodyBreast/Fgnome"/>
+					</case>
+					<default>
+						<show part="fullbodyBreast/Fgnome"/>
+					</default>
+				</switch>
+			</if>
+		</if>
+		
+		<!-- Fire elemental -->
+		<if test="IsFireElemental">
+			<!-- Hide everything else -->
+			<hide part="*"/>
+			<show part="fullbody/ignis"/>
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="fullbodyBreast/Bignis"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+						<show part="fullbodyBreast/Dignis"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+						<show part="fullbodyBreast/Dignis"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+						<show part="fullbodyBreast/Fignis"/>
+					</case>
+					<default>
+						<show part="fullbodyBreast/Fignis"/>
+					</default>
+				</switch>
+			</if>
+		</if>
+		
+		<!-- Water elemental -->
+		<if test="IsWaterElemental">
+			<!-- Hide everything else -->
+			<hide part="*"/>
+			<show part="fullbody/undine"/>
+			<show part="full_pattern/undine"/>
+			<show part="full_patternUnder/undine"/>
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="fullbodyBreast/Bundine"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+						<show part="fullbodyBreast/Dundine"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+						<show part="fullbodyBreast/Dundine"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+						<show part="fullbodyBreast/Dlundine"/>
+					</case>
+					<default>
+						<show part="fullbodyBreast/Fundine"/>
+					</default>
+				</switch>
+			</if>
+		</if>
+		
+		<!-- Wind elemental -->
+		<if test="IsWindElemental">
+			<!-- Hide everything else -->
+			<hide part="*"/>
+			<show part="fullbody/sylph"/>
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="fullbodyBreast/Bsylph"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+						<show part="fullbodyBreast/Dsylph"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+						<show part="fullbodyBreast/Dsylph"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+						<show part="fullbodyBreast/Fsylph"/>
+					</case>
+					<default>
+						<show part="fullbodyBreast/Fsylph"/>
+					</default>
+				</switch>
+			</if>
+		</if>
+
+		<!-- Jiangshi -->
+		<if test="horns.type == Horns.SPELL_TAG">
+			<!-- Hide everything else -->
+			<hide part="*"/>
+			<if test="breastRows[0].breastRating lte BreastCup.FLAT">
+				<show part="fullbody/malejiangshi"/>
+				<else>
+					<show part="fullbody/femalejiangshi"/>
+				</else>
+			</if>
 		</if>
 
 
