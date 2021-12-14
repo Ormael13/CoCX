@@ -48,7 +48,7 @@ public class BloodExplosionSpell extends AbstractBloodSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather above your hand, coalescing into a crimson sphere. ");
-			outputText("It roils as you concentrate on it before aim the orb at [themonster], it brusts and seeps into [monster him] on impact as [monster he]'" + (monster.plural ? "re":"s") + " afflicted by the magic.\n\n");
+			outputText("It roils as you concentrate on it before aim the orb at [themonster], it bursts and seeps into [monster him] on impact as [monster he]'" + (monster.plural ? "re":"s") + " afflicted by the magic.\n\n");
 		}
 		var damage:Number = calcDamage(monster);
 		damage = critAndRepeatDamage(display,damage,DamageType.MAGICAL,false,false);
