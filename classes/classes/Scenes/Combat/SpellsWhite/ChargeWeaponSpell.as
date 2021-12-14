@@ -47,7 +47,7 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 		if (uc) return uc;
 		
 		if (player.weaponName == "fists" && !player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) {
-			return "Charge weapon can't be casted on your own fists.";
+			return "Charge weapon can't be casted on your bare fists.";
 		}
 		
 		return "";
