@@ -595,31 +595,26 @@ use namespace CoC;
 			clearOutput();
 			spriteSelect(-1);
 			menu();
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) {
-				outputText("You stand inside your warehouse looking at the goods stored inside.");
-				outputText("\n\n");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) {
-				outputText("You stand inside your warehouse and connected to it medium-sized granary looking at the goods and food stored inside.");
-				outputText("\n\n");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) {
-				outputText("You stand inside your warehouses and connecting them medium-sized granary looking at the goods and food stored inside.");
-				outputText("\n\n");
-			}
+			outputText("You stand inside your warehouse");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(" looking at the goods stored inside.");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
 			//Warehouse part 1 and 2
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) {
 				addButton(0, "Warehouse P1", pickItemToPlaceInWarehouse1).hint("Put item in 1st Warehouse.");
 				if (warehouse1Description()) addButton(1, "Warehouse T1", pickItemToTakeFromWarehouse1).hint("Take item from 1st Warehouse.");
+				outputText("\n\n");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 6) {
 				addButton(2, "Warehouse P2", pickItemToPlaceInWarehouse2).hint("Put item in 2nd Warehouse.");
 				if (warehouse2Description()) addButton(3, "Warehouse T2", pickItemToTakeFromWarehouse2).hint("Take item from 2nd Warehouse.");
+				outputText("\n\n");
 			}
 			//Granary
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 4) {
 				addButton(5, "Granary Put", pickItemToPlaceInGranary).hint("Put food in Granary.");
 				if (granaryDescription()) addButton(6, "Granary Take", pickItemToTakeFromGranary).hint("Take food from Granary.");
+				outputText("\n\n");
 			}
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
@@ -1005,20 +1000,7 @@ use namespace CoC;
 			var x:int;
 			outputText("There is no room for " + itype.longName + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.");
 			menu();
-			if (page == 1) {
-				for (x = 0; x < 10; x++) {
-					if (player.itemSlots[x].unlocked)
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
-				}
-				if (getMaxSlots() > 10) addButton(11, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
-			}
-			if (page == 2) {
-				for (x = 10; x < 20; x++) {
-					if (player.itemSlots[x].unlocked)
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
-				}
-				addButton(11, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
-			}/*
+			if (showUseNow && itype is Useable) addButton(11, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));/*
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked)
 					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
@@ -1027,7 +1009,20 @@ use namespace CoC;
 				currentItemSlot = source;
 				addButton(12, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
 			}
-			if (showUseNow && itype is Useable) addButton(13, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].unlocked)
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+				}
+				if (getMaxSlots() > 10) addButton(13, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
+			}
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].unlocked)
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+				}
+				addButton(13, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
+			}
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
 
@@ -1196,22 +1191,23 @@ use namespace CoC;
 					addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 				}
 				else addButtonDisabled(2, "Shield", "You not have shield equipped.");
-				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING) {
 					addButton(3, "Flying Sword", unequipFlyingSwords).hint(player.weaponFlyingSwords.description, capitalizeFirstLetter(player.weaponFlyingSwords.name));
 				}
 				else {
 					if (player.hasPerk(PerkLib.FlyingSwordPath)) addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped.");
 					else addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
 				}
-				if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
+				if (player.armor != ArmorLib.NOTHING) {
+					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(5, "Armour", "Your body stiffness prevents you from unequipping this armor.");
+					else addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 				}
 				else addButtonDisabled(5, "Armour", "You not have armor equipped.");
 				if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
 				}
 				else addButtonDisabled(6, "Upperwear", "You not have upperwear equipped.");
-				if (player.vehicles != VehiclesLib.NOTHING) {
+				if (player.vehicles != VehiclesLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(7, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
 				}
 				else addButtonDisabled(7, "Vehicle", "You not using currently any vehicle.");
@@ -1224,7 +1220,8 @@ use namespace CoC;
 			}
 			if (page == 2) {
 				if (player.headJewelry != HeadJewelryLib.NOTHING) {
-					addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
+					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(0, "Head Acc", "Your body stiffness prevents you from unequipping this head accesory.");
+					else addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
 				}
 				else addButtonDisabled(0, "Head Acc", "You not have equipped any head accesory.");
 				if (player.necklace != NecklaceLib.NOTHING) {
@@ -1283,7 +1280,7 @@ use namespace CoC;
 
 		}
 		//Unequip!
-		private function unequipWeapon():void {
+		public function unequipWeapon():void {
 			if (player.weaponName == "Aether (Dex)") {
 				player.weapon.removeText();
 				player.setWeapon(WeaponLib.FISTS);
@@ -1292,7 +1289,7 @@ use namespace CoC;
 			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
-		private function unequipWeaponRange():void {
+		public function unequipWeaponRange():void {
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}

@@ -97,12 +97,12 @@ public function encounter():void {
 		simpleChoices("Fight", startTentacleBeastCombat, "Submit", tentacleLossRape, "", null, "", null, "", null);
 		return;
 	}
-	if (rand(2) == 0) startCombat(new TentacleBeastRaging());
+	if (rand(2) == 0 && player.level >= 3) startCombat(new TentacleBeastRaging());
 	else startCombat(new TentacleBeast());
 }
 
 private function startTentacleBeastCombat():void {
-	if (rand(2) == 0) startCombat(new TentacleBeastRaging());
+	if (rand(2) == 0 && player.level >= 3) startCombat(new TentacleBeastRaging());
 	else startCombat(new TentacleBeast());
 	playerMenu();
 }

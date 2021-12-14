@@ -1092,7 +1092,7 @@ internal function combatWinAgainstDaughters():void {
 	spriteSelect(57);
 	clearOutput();
 	if(monster.HP <= monster.minHP()) {
-		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.");
+		outputText("You smile in satisfaction as [themonster] collapses, unable to continue fighting.");
 		if(player.lust >= 33 && player.hasCock()) {
 			outputText("In spite of their injuries, they do try to present their bodies in as lewd a way as possible.  You could still fuck them, but things might get out of hand...\n\nDo you fuck them?");
 			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);

@@ -251,7 +251,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");
 			}
 			addButton(14, "Back", camp.campFollowers);
-			//choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
 		}
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
@@ -267,14 +266,12 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				//(High Affection)
 				else outputText("\n\n\"<i>D-don't stare at me like that!</i>\" Ember protests, biting " + emberMF("his", "her") + " lip.");
 				outputText("\n\nYou smile at Ember, admiring the shape of the dragon, and casually mention as much.");
-
 				//Low Affection)
 				if (emberAffection() <= 25) outputText("\n\n\"<i>Flattery won't get you any points with me!</i>\" Ember declares.");
 				//(Medium Affection)
 				else if (emberAffection() < 75) outputText("\n\n\"<i>I don't buy it... you're up to something; I can tell,</i>\" Ember replies.");
 				//(High Affection)
 				else outputText("\n\n\"<i>Well, stop it!  You're making me...</i>\"  Ember never finishes " + emberMF("his", "her") + " sentence, flustered with a mixture of arousal and embarrassment.");
-
 				outputText("  ");
 				if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) {
 					outputText(emberMF("His", "Her") + " cock ");
@@ -284,7 +281,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("You can see tiny rivulets of moisture starting to run down Ember's inner thighs as they rub together, barely hiding her precious treasure from your hungry eyes.  ");
 				outputText("Well, " + emberMF("he", "she") + " is a sexy beast; you ask what naturally comes to mind.");
-
 				//(Lo-rider Affection)
 				if (emberAffection() <= 25) outputText("\n\n\"<i>T-this is just a reflex! It has nothing to do with you!</i>\"  You chuckle at Ember's failed attempt to justify " + emberMF("his", "her") + " growing arousal.");
 				//(Medium Affection)
@@ -320,9 +316,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				getBlown = stickDickInKnifeDrawer;
 				pitchAnal = stickItInEmbersButt;
 			}*/
-			//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 			menu();
-
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your [ass] with that cock of " + emberMF("his", "hers") + ".");
 			if (player.hasCock() && player.lust >= 33) addButton(1, "Pitch Anal", stickItInEmbersButt).hint("Penetrate Ember anally with your cock.");
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(2, "Blow Ember", suckEmberCock).hint("Suck Ember's cock and get a taste of " + emberMF("his", "her") + " cum. " + (flags[kFLAGS.HUNGER_ENABLED] > 0 ? "\n\nAnd get your belly stuffed, of course!" : "") + "");
@@ -334,7 +328,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (emberAffection() >= 95 && player.hasCock() && player.cockThatFits(emberVaginalCapacity()) >= 0 && (player.hasItem(consumables.L_DRAFT) || player.lib >= 50 || player.minLust() >= 40))
 				addButton(8, "LustyFuck", highAffectionEmberLustFuck);
 			addButton(14, "Leave", emberCampMenu);
-
 		}
 
 //Finding the Egg (Z)
@@ -1811,7 +1804,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber flushes with embarrassment.  \"<i>I-I... That's it!  No more milk for you!</i>\" " + emberMF("he", "she") + " declares, hauling you upright and shooing you out of her den.");
 				outputText("\n\nYou shake your head with good temper.  Still, you got your fill of her milk, and you feel refreshed and renewed, new vitality flowing through your veins.");
 				//(PC's D.Breath timer = not ready: Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!)
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -1878,7 +1871,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber can't hide the faintest of smiles that graces " + emberMF("his", "her") + " scaly face.  You yelp softly as you feel a sharp prick against your belly; when you feel it again, you jump out of Ember's lap to reveal the clawed finger prodding you.  \"<i>Payback for teasing me earlier.  And don't think I'll be feeding you my milk everytime you ask,</i>\" " + emberMF("he", "she") + " finishes, with a small puff of smoke.");
 				outputText("\n\nYou can't resist pointing out that " + emberMF("he", "she") + " certainly seemed eager to let you drink your fill, and you didn't hear any complaining over " + emberMF("his", "her") + " purring.  Before " + emberMF("he", "she") + " can rebut that, you turn and leave the dragon in " + emberMF("his", "her") + " den.");
 				outputText("\n\nThe drink you got did you plenty of good; you feel refreshed and renewed, new vitality flowing through your veins.");
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -1956,7 +1949,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nThe soft purrs that accompany each suckle and the soft caresses on your body, bringing you ever closer to these two motherlodes of Ember-flavoured treasure, only serve to enhance the whole experience.");
 
 				outputText("\n\nEventually, your swallows of the rich, freely-flowing, creamy dragon-milk cease as your stomach fills up.");
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -4551,7 +4544,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("\n\nYou've been at this for quite some time now... how many times have you drained Ember's breasts?  Four?  Five?  You don't know... and besides that, you're feeling rather tired yourself... plus all this milk sloshing inside your belly does not help keep you awake... still you must press on...");
 					outputText("\n\n<b>Even later...</b>");
 					outputText("\n\nWith a final powerful suckle, you finally drain the last of Ember's milk... for the 8th time you believe... tired and full... you don't even bother getting off the sleeping dragon.  You settle your head between Ember's soft, milky mounds, and surrounded by their soft " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "flesh") + ", you fall asleep right there...");
-					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsEvolved) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
 						if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 						if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 						if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);

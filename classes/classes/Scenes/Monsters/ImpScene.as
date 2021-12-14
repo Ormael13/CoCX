@@ -27,7 +27,7 @@ use namespace CoC;
 			clearOutput();
 			var canFeed:Boolean = (player.hasStatusEffect(StatusEffects.Feeder));
 			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor);
-			outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
+			outputText("You smile in satisfaction as [themonster] collapses and begins masturbating feverishly.");
 			menu();
 			if (canFeed) {
 				if (player.lust >= 33)
@@ -39,7 +39,7 @@ use namespace CoC;
 			}
 			else {
 				clearOutput();
-				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
+				outputText("You smile in satisfaction as [themonster] collapses and begins masturbating feverishly.");
 				if (monster.HP <= 0) {
 					addButton(0, "Kill Him", killImp);
 					addButton(4, "Leave", cleanupAfterCombat);
@@ -165,7 +165,7 @@ use namespace CoC;
 				//Taking it internal is more corruptive!
 				dynStats("cor", 1);
 				//Preggers chance!
-				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 				player.cuntChange(monster.cockArea(0), true, true, false);
 			}
 			player.sexReward("cum", "Vaginal");
@@ -435,7 +435,7 @@ use namespace CoC;
 			if(vape) clearOutput();
 			//PREGGERS CHANCE HERE - unfinished
 			//{{Player has a cunt}}
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			outputText("As the imp lays beaten its hands stroke its " + monster.cockDescriptShort(0) + " as its eyes look over you in the hope that you might abuse it in some manner.  You lick your lips as you stare at the large member and you turn around to display your " + vaginaDescript(0) + ".  ");
 			//Not gaping?
 			if(player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING) {
@@ -624,7 +624,7 @@ use namespace CoC;
 			//Clear arrays in preparation
 			monster = new ImpGang();
 			outputText("\n");
-			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a + monster.short + "</b>!\n\n");
+			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by [themonster]</b>!\n\n");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) {
 				outputText("You look at the door to see that it's open. Shit. You forgot to lock the door before you've went to sleep!\n\n");
 			}
@@ -800,7 +800,7 @@ use namespace CoC;
 					else outputText("Your last coherent thought is to find a way to make your own mutated master imp, maybe even a stable full of them...");
 					player.sexReward("cum");
 					dynStats("lib", 2, "cor", 3);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 				}
 				//Scene number 2 - male possible.
 				else {
@@ -974,7 +974,7 @@ use namespace CoC;
 					else outputText("Why bother with your silly quest, when you've only scratched the surface of the pleasures this land offers you?\n");
 					player.sexReward("cum");
 					dynStats("lib", 2, "cor", 3);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 					//Stretch!
 					if(player.hasVagina()) {
 						if(player.cuntChange(monster.cockArea(2), true)) outputText("\n");
@@ -1108,7 +1108,7 @@ use namespace CoC;
 					else outputText("Your last coherent thought is to find a way to make your own mutated master imp, one you can keep as a fuck-toy...");
 					player.sexReward("cum");
 					dynStats("lib", 2, "cor", 3);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 				}
 				else {
 					//Imp Scene 2 (Bipedal, vaginal)
@@ -1284,7 +1284,7 @@ use namespace CoC;
 					else outputText("Why bother with your silly quest, when you've only scratched the surface of the pleasures this land offers you?\n\n");
 					player.sexReward("cum");
 					dynStats("lib", 2, "cor", 3);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 					//Stretch!
 					if(player.hasVagina()) {
 						if(player.cuntChange(monster.cockArea(2), true)) outputText("\n");
@@ -1370,7 +1370,7 @@ use namespace CoC;
 				outputText("\n\n");
 				outputText("The rough fucking becomes more and more pleasurable as time goes on. You moan air-headedly with each thrust, hips squeezing around the demon-cock- loving the feeling of his fullness. Before long you can't help but cum all over him, your vagina locking around his cock like a vice, muscles rippling, milking him for his cum. The imp's prick explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption. You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with insane amounts of cum.\n\n");
 				outputText("With a sigh, he pulls his dick free, and you flop down, cum leaking out onto the ground from your well-fucked hole. If you could, like, focus at all, you'd totally be worrying about being, like, pregnant or whatever. But you lose consciousness.");
-				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 				player.sexReward("cum");
 				dynStats("lib", 1, "sen", 1, "cor", 1);
 				cleanupAfterCombat();
@@ -1419,7 +1419,7 @@ use namespace CoC;
 							else outputText("You hope you don't become pregnant, but promptly lose consciousness before you can contemplate the prospect any further.");
 						}
 					}
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 					dynStats("lib", 1, "sen", 1, "lus", 1, "cor", 1);
 					player.sexReward("cum");
 				}
@@ -2281,7 +2281,7 @@ use namespace CoC;
 			outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.");
 			if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
 			player.sexReward("cum","Vaginal");
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 			cleanupAfterCombat();
 		}
 

@@ -79,16 +79,21 @@ public class PlayerAppearance extends BaseContent {
 		const crotchDesc: String = describeCrotch();
 		outputText(crotchDesc ? " " + crotchDesc : "");
 
-		if (player.hasCock() || player.balls > 0 || player.vaginas.length > 0) {
-			outputText(" " + Utils.mergeSentences([describeCock(), describeBalls()]));
+		if (player.cocks.length > 1) {
+			outputText("[pg]" + describeCock());
+			outputText("[pg]" + describeBalls());
+		} else {
+			if (player.hasCock() || player.balls > 0) {
+				outputText("[pg]" + Utils.mergeSentences([describeCock(), describeBalls()]));
+			}
 		}
 
 		const pussyDesc: String = describePussy();
-		outputText(pussyDesc ? " " + pussyDesc : "");
+		outputText(pussyDesc ? "[pg]" + pussyDesc : "");
 
 		const noSexString: String = (player.cockTotal() == 0 && player.vaginas.length == 0 ? "You have a curious lack of any sexual endowments." : "");
 		if (player.ass || noSexString) {
-			outputText(" " + Utils.mergeSentences([noSexString, describeAsshole()]));
+			outputText("[pg]" + Utils.mergeSentences([noSexString, describeAsshole()]));
 		}
 
 		const piercingsDesc: String = describePiercings();
@@ -252,16 +257,22 @@ public class PlayerAppearance extends BaseContent {
 		outputText("You are a ");
 		outputText(Measurements.footInchOrMetres(player.tallness));
 		var pcrace:String = player.race();
-		if (pcrace != "half cow-morph" && pcrace != "half cow-girl" && pcrace != "cow-girl" && pcrace != "cow-girl" && pcrace != "cow-morph"
-				&& pcrace != "minotaur" && pcrace != "half-minotaur"
-				&& pcrace != "alraune" && pcrace != "liliraune"
-				&& pcrace != "half unicorn" && pcrace != "unicorn" && pcrace != "unicornkin" && pcrace != "half alicorn" && pcrace != "alicorn" && pcrace != "alicornkin" && pcrace != "true alicorn"
-				&& pcrace != "half bicorn" && pcrace != "bicorn" && pcrace != "bicornkin" && pcrace != "half nightmare" && pcrace != "nightmare" && pcrace != "nightmarekin" && pcrace != "true nightmare")
+		var genderlessRace:Array = ["half cow-morph", "half cow-girl", "cow-girl", "cow-girl", "cow-morph", "minotaur", "half-minotaur", "alraune", "liliraune", "half unicorn", "unicorn", "unicornkin", "half alicorn", "alicorn", "alicornkin", "true alicorn", "half bicorn", "bicorn", "bicornkin", "half nightmare","nightmare", "nightmarekin", "true nightmare"];
+		if (!(genderlessRace.indexOf(pcrace) >= 0))
 		{
 			outputText(" tall [malefemaleherm] [race], with [bodytype].");
 		}
 		else{
 			outputText(" tall [race], with [bodytype].");
+		}
+		if (player.hasPerk(PerkLib.ElementalBody))
+		{
+			outputText(" <b>You're currently fused with Epic ");
+			if (player.perkv1(PerkLib.ElementalBody) == 4) outputText("Water");
+			else if (player.perkv1(PerkLib.ElementalBody) == 3) outputText("Fire");
+			else if (player.perkv1(PerkLib.ElementalBody) == 2) outputText("Earth");
+			else outputText("Air");
+			outputText(" elemental.</b>");
 		}
 	}
 
@@ -727,6 +738,7 @@ public class PlayerAppearance extends BaseContent {
 					case CockTypesEnum.RED_PANDA: cockDesc += " It lies protected in a soft, fuzzy sheath."; break;
 					case CockTypesEnum.OOMUKADE: cockDesc += " It constantly drips with venom."; break;
 					case CockTypesEnum.USHI_ONI: cockDesc += " It's starfish tipped shaft."; break;
+					case CockTypesEnum.MINDBREAKER: cockDesc += " Hidden in a slit along with the rest of your male equipment, it constantly fills with your thick green slimy cum, to the point that your cum constantly leaks out of your genital slit, leaving a sticky trail of green “slime” in your wake."; break;
 					default: //Nothing here, move along!
 				}
 				// Knot?
@@ -746,17 +758,16 @@ public class PlayerAppearance extends BaseContent {
 					//trace("Found a sock description (WTF even is a sock?)", player.cocks[cock_index].sock);
 					cockDesc += sockDescript(cock_index);
 				}
-				//cockDesc += "\n"
 			}
 			//Worm flavor
-			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n";
+			if (player.hasStatusEffect(StatusEffects.Infested)) cockDesc += " Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes";
 		}
 
 		return cockDesc;
 	}
 
 	public function describeBalls(): String {
-		var ballsDesc: String = "";
+		var ballsDesc: String = "\n";
 
 		const ballsSizeDesc: String = " about " + num2Text(Math.round(player.ballSize)) + " " + (Math.round(player.ballSize) == 1 ? "inch" : "inches") +" across"
 
@@ -769,12 +780,12 @@ public class PlayerAppearance extends BaseContent {
 				if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
 				else swingsWhere = " under your [cocks].";
 
-				if (player.hasFur()) ballsDesc += "a fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
-				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "a chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.hasScales()) ballsDesc += "a scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.skinType == Skin.STONE) ballsDesc += "a stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else if (player.skinType == Skin.GOO) ballsDesc += "an oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
-				else ballsDesc += "a [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				if (player.hasFur()) ballsDesc += "A fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
+				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "A chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.hasScales()) ballsDesc += "A scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.skinType == Skin.STONE) ballsDesc += "A stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else if (player.skinType == Skin.GOO) ballsDesc += "An oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
+				else ballsDesc += "A [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
 			}
 
 			// ballsDesc += " You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ";
@@ -784,7 +795,7 @@ public class PlayerAppearance extends BaseContent {
 			// ballsDesc += " across.";
 
 			//Worms extra descript. To match as seen in infested hellhounds.
-			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += " Across its surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.";
+			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += " Across its surface, random lumps move rapidly around, further proof of your infested sack, and it's parasitic inhabitants that both boost and increase your cum production.";
 		} else {
 			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) ballsDesc += "Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.";
 		}
@@ -850,6 +861,9 @@ public class PlayerAppearance extends BaseContent {
 						pussyDesc += " is deep and wide enough to insert your entire arm length inside and some more. Sometimes you lament that most of your partners are no longer big enough to satisfy you";
 						if (player.isNaga()) pussyDesc += "as your hot spot is now way further inside your deep canal, requiring quite a longer member to reach";
 								pussyDesc += ". Inside you have a ";
+						break;
+					case VaginaClass.MINDBREAKER:
+						pussyDesc += " constantly drools green slime, ensuring any cock that parts your infested cunt are sufficiently lubricated and ready to impregnate you. Your eldritch lips hides a ";
 						break;
 					default:
 						pussyDesc += " hides a ";
@@ -950,6 +964,33 @@ public class PlayerAppearance extends BaseContent {
 		var score:int;
 		clearOutput();
 		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
+		//Druid fusions
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Sylph: +100% to Str racial multi, +75% to Int racial multi, +50% to Wis racial multi, +5% Unarmed damage multi, +5% Spell/Soulskill power, +10% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Sylph: +125% to Str racial multi, +100 to Int racial multi, +75% to Wis racial multi, +10% Unarmed damage multi, +10% Spell/Soulskill power, +20% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Sylph: +150% to Str racial multi, +125% to Int racial multi, +100% to Wis racial multi, +15% Unarmed damage multi, +15% Spell/Soulskill power, +30% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Sylph: +175% to Str racial multi, +150% to Int racial multi, +125% to Wis racial multi, +20% Unarmed damage multi, +20% Spell/Soulskill power, +40% Evasion</font>");
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 2) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Gnome: +50% to Str racial multi, +100% to Tou racial multi, +75% to Wis racial multi, +5% Unarmed damage multi, +10 natural armor/magic resistance (scal), +5% Spell/Soulskill power</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Gnome: +75% to Str racial multi, +125% to Tou racial multi, +100% to Wis racial multi, +10% Unarmed damage multi, +20 natural armor/magic resistance (scal), +10% Spell/Soulskill power</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Gnome: +125% to Str racial multi, +150% to Tou racial multi, +125% to Wis racial multi, +15% Unarmed damage multi, +35 natural armor/magic resistance (scal), +15% Spell/Soulskill power</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Gnome: +150% to Str racial multi, +175% to Tou racial multi, +150% to Wis racial multi, +20% Unarmed damage multi, +40 natural armor/magic resistance (scal), +20% Spell/Soulskill power</font>");
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Ignis: +75% to Str racial multi, +100% to Spe racial multi, +25% to Wis racial multi, +10% Unarmed damage multi, +5% Spell/Soulskill power, +5% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Ignis: +100% to Str racial multi, +125% to Spe racial multi, +50% to Wis racial multi, +20% Unarmed damage multi, +10% Spell/Soulskill power, +10% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Ignis: +125% to Str racial multi, +150% to Spe racial multi, +75% to Wis racial multi, +30% Unarmed damage multi, +15% Spell/Soulskill power, +15% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Ignis: +150% to Str racial multi, +175% to Spe racial multi, +100% to Wis racial multi, +40% Unarmed damage multi, +20% Spell/Soulskill power, +20% Evasion</font>");
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 4) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Undine: +75% to Str racial multi, +50% to Tou racial multi, +100% to Wis racial multi, +5 natural armor/magic resistance (scal), +10% Spell/Soulskill power, +5% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Undine: +100% to Str racial multi, +75% to Tou racial multi, +125% to Wis racial multi, +10 natural armor/magic resistance (scal), +20% Spell/Soulskill power +10% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Undine: +125% to Str racial multi, +100% to Tou racial multi, +150% to Wis racial multi, +15 natural armor/magic resistance (scal), +30% Spell/Soulskill power, +15% Evasion</font>");
+				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Undine: +150% to Str racial multi, +125% to Tou racial multi, +175% to Wis racial multi, +20 natural armor/magic resistance (scal), +40% Spell/Soulskill power, +20% Evasion</font>");
+			}
+		}
 		//Alicorn
 		if (player.alicornScore() >= 27) outputText("\n<font color=\"#0000a0\">True Alicorn/True Nightmare: " + player.alicornScore() + " (+60% to Str racial multi, +70% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi)</font>");
 		else if (player.alicornScore() >= 18) outputText("\n<font color=\"#0000a0\">Alicorn/Nightmare: " + player.alicornScore() + " (+55% to Tou racial multi, +120% to Spe racial multi, +95% to Int racial multi)</font>");
@@ -981,7 +1022,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (score >= 1) outputText("\n<font color=\"#008000\">Incomplete Atlach Nacha: " + score + "</font>");
 		else if (score < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 		//Avian
-		if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+30% to Str racial multi, +75% to Spe racial multi, +30% to Int racial multib)</font>");
+		if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+30% to Str racial multi, +75% to Spe racial multi, +30% to Int racial multi)</font>");
 		else if (player.avianScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+15% to Str racial multi, +30% to Spe racial multi, +15% to Int racial multi)</font>");
 		else if (player.avianScore() >= 1) outputText("\n<font color=\"#008000\">Half Avian-morph: " + player.avianScore() + "</font>");
 		else if (player.avianScore() < 1) outputText("\n<font color=\"#ff0000\">Half Avian-morph: 0</font>");
@@ -996,8 +1037,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.bearpandaScore() >= 1) outputText("\n<font color=\"#008000\">Half Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
 		else if (player.bearpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bear/Panda-morph: 0</font>");
 		//Bee
-		if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+50% to Tou racial multi, +50% to Spe racial multi, +35% to Int racial multi)</font>");
-		else if (player.beeScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+30% to Tou racial multi, +30% to Spe racial multi, +15% to Int racial multi)</font>");
+		if (player.beeScore() >= 14) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+80% to Tou racial multi, +80% to Spe racial multi, +50% to Int racial multi, +20% to Lib racial multi & +20 to min Lib)</font>");
+		else if (player.beeScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+40% to Tou racial multi, +40% to Spe racial multi, +25% to Int racial multi)</font>");
 		else if (player.beeScore() >= 1) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>");
 		else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");
 		//Bunny
@@ -1241,7 +1282,7 @@ public class PlayerAppearance extends BaseContent {
 				if (player.hydraScore() >= 29) outputText("\n<font color=\"#0000a0\">Legendary Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "175":"160")+"% to Str racial multi, +145% to Tou racial multi, +"+(player.isNaga() ? "145":"130")+"% to Spe racial multi)</font>");
 				else if (player.hydraScore() >= 24) outputText("\n<font color=\"#0000a0\">Ancient Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "145":"130")+"% to Str racial multi, +125% to Tou racial multi, +"+(player.isNaga() ? "120":"105")+"% to Spe racial multi)</font>");
 				else if (player.hydraScore() >= 19) outputText("\n<font color=\"#0000a0\">Greater Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "135":"120")+"% to Str racial multi, +105% to Tou racial multi, +"+(player.isNaga() ? "75":"60")+"% to Spe racial multi)</font>");
-				else outputText("\n<font color=\"#0000a0\">Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "115":"00")+"% to Str racial multi, +50% to Tou racial multi, +"+(player.isNaga() ? "75":"60")+"% to Spe racial multi)</font>");
+				else outputText("\n<font color=\"#0000a0\">Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "115":"100")+"% to Str racial multi, +50% to Tou racial multi, +"+(player.isNaga() ? "75":"60")+"% to Spe racial multi)</font>");
 			} else outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
 		}
 		else if (player.hydraScore() >= 1) outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
@@ -1305,12 +1346,12 @@ public class PlayerAppearance extends BaseContent {
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("185");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("170");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else outputText("140");
-			} else if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+			} else if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("170");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("160");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("150");
@@ -1325,7 +1366,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.mantisScore() >= 6) {
 			outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-20% to Str racial multi, +30% to Tou racial multi, +");
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+			if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("100");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("90");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("80");
@@ -1346,6 +1387,14 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.melkieScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+55% to Spe / Int racial multi, +35% to Lib racial multi, +25 min Sens)</font>");
 		else if (player.melkieScore() >= 1) outputText("\n<font color=\"#008000\">Half Melkie: " + player.melkieScore() + "</font>");
 		else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Half Melkie: 0</font>");
+		//Male Mindbreaker
+		if (player.maleMindbreakerScore() >= 20) outputText("\n<font color=\"#0000a0\">Male Mindbreaker: " + player.maleMindbreakerScore() + " (+70% to Str racial multi, -40% to Spe racial multi, +100% to tou racial multi, +450% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
+		else if (player.maleMindbreakerScore() >= 1) outputText("\n<font color=\"#008000\">Male Mindbreaker: " + player.maleMindbreakerScore() + "</font>");
+		else if (player.maleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Male Mindbreaker: 0</font>");
+		//Female Mindbreaker
+		if (player.femaleMindbreakerScore() >= 20) outputText("\n<font color=\"#0000a0\">Female Mindbreaker: " + player.femaleMindbreakerScore() + " (-60% to Str racial multi, -10% to Spe racial multi, +100% to tou racial multi, +550% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
+		else if (player.femaleMindbreakerScore() >= 1) outputText("\n<font color=\"#008000\">Female Mindbreaker: " + player.femaleMindbreakerScore() + "</font>");
+		else if (player.femaleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Female Mindbreaker: 0</font>");
 		//Minotaur
 		if (player.minotaurScore() >= 15) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+170% to Str racial multi, +45% to Tou racial multi, -20% to Spe racial multi, -40% to Int racial multi, +70% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.minotaurScore() >= 10) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+120% to Str racial multi, +45% to Tou racial multi, -20% to Spe racial multi, -40% to Int racial multi, +45% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
@@ -1656,7 +1705,7 @@ public class PlayerAppearance extends BaseContent {
 		} else if (player.cocks[index].sock == "red")
 			cockSockDesc +="It's covered by a red cock-sock that seems to glow. Just wearing it makes you feel a bit powerful.";
 		else if (player.cocks[index].sock == "green")
-			cockSockDesc +="It's covered by a green cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.";
+			cockSockDesc +="It's covered by a green he cock-sock that seems to glow. Just wearing it makes you feel a bit healthier.";
 		else if (player.cocks[index].sock == "blue")
 			cockSockDesc +="It's covered by a blue cock-sock that seems to glow. Just wearing it makes you feel like you can cast spells more effectively.";
 

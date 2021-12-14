@@ -338,6 +338,61 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const WOLF:int = 27;
+		EnumValue.add(Memories, WOLF, "WOLF", {
+			id: "Wolf Arms",
+			name: "Wolf Arms",
+			cost: 100,
+			title: "Wolf",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsWolf;
+			}
+		});
+
+		public static const CAVE_WYRM:int = 28;
+		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
+			id: "Cave Wyrm Arms",
+			name: "Cave Wyrm Arms",
+			cost: 100,
+			title: "Cave Wyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsCaveWyrm;
+			}
+		});
+
+		public static const HINEZUMI:int = 29;
+		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
+			id: "Hinezumi Arms",
+			name: "Hinezumi Arms",
+			cost: 100,
+			title: "Hinezumi",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsHinezumi;
+			}
+		});
+
+		public static const GAZER:int = 30;
+		EnumValue.add(Memories, GAZER, "GAZER", {
+			id: "Gazer Arms",
+			name: "Gazer Arms",
+			cost: 100,
+			title: "Gazer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsGazer;
+			}
+		});
+
+		public static const FROSTWYRM:int = 31;
+		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+			id: "Frostwyrm Arms",
+			name: "Frostwyrm Arms",
+			cost: 100,
+			title: "Frostwyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsFrostwyrm;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

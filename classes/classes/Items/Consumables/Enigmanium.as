@@ -28,7 +28,7 @@ package classes.Items.Consumables {
 
   public class Enigmanium extends Consumable {
     public function Enigmanium() {
-      super("Enigmanium", "Enigmanium", "a vial of Enigmanium", 40, "This strange brew crafted by Evangeline combine harpy, cat, human and centaur traits. Supposedly it could allow you to become a sphinx.");
+      super("Enigmanium", "Enigmanium", "a vial of Enigmanium", 40, "This strange brew crafted by Evangeline combines harpy, cat, human and centaur traits. Supposedly it could allow you to become a sphinx.");
     }
     public override function useItem(): Boolean {
       var choice: int;

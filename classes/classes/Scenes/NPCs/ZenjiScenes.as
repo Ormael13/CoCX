@@ -261,6 +261,7 @@ public function part1TrollEncounterChallange():void {
 	addButton(2, "Speed", part1TrollEncounterChallangeSpeed);
 	addButton(3, "Intelligence", part1TrollEncounterChallangeIntelligence);
 	addButton(4, "Wisdom", part1TrollEncounterChallangeWisdom);
+	addButton(7,"Take it Easy", part1TrollEncounterChallangeTakeItEasy).hint("Let the troll have his fun. You know he wouldn't stand a chance against you anyway."+(flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] <= 30? " He seems to be growing quite fond of you. Perhaps he secretly enjoys watching you fail?":"")+"");
 }
 public function part1TrollEncounterChallangeStrength():void {
 	spriteSelect(SpriteDb.s_zenji);
@@ -417,6 +418,78 @@ public function part1TrollEncounterChallangeWisdom():void {
 		zenjiPerspectiveOnPlayer(4);
 		part1TrollEncounterRewards();
 	}
+}
+public function part1TrollEncounterChallangeTakeItEasy():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You eye the troll up and down. Sure, he may be physically imposing... Perhaps it's an ego thing for him to challenge any passersby.\n\n");
+	outputText("His gaze focuses on you, \"<i>Have ya made ya mind yet? Don't just stand around. You could bring unwanted attention.</i>\"\n\n");
+	outputText("So be it. You'll take the alleged troll on one of his challenges then. Perhaps you'll get a good show out of watching him.\n\n");
+	outputText("He hops down from the tree, \"<i>A battle of skill it is den! If you can beat me at my own game, den I’ll let you pass.</i>\"\n\n");
+	outputText("He gestures for you to follow him inside, \"<i>So, which will it be, do you prefer to compete against me in a battle of wits, power or speed? I will test you inside, but don't ya go snoopin'.</i>\"\n\n");
+	outputText("You shrug, letting him decide on the challenge. After all, you're a guest in his place, it's only fair he decides the method of skill.\n\n");
+	outputText("\"<i>Ah, trying to be smart, are ya? Alright, alright.</i>\" He pauses as he surveys his surroundings. He slowly starts to speak up, you’re hardly listening to what he has to say.\n\n");
+	switch(rand(5)) {
+		case 0:
+			outputText("His voice drags on as he leads you a few paces inward. He mentions something about strength, which only leads you to imagine how easy it'd be to best him at something physically demanding.\n\n");
+			outputText("It shouldn't be that hard, right? There's no possible way.\n\n");
+			outputText("You look up toward a pull up bar and he has already lept up, doing several pullups before you.\n\n");
+			outputText("\"<i>Hah, impressed?</i>\" he asks. \"<i>Don't be shy, let's see if ya can hold your weight.</i>\"\n\n");
+			outputText("You know you're more than capable, but why not let him have this? Before you grab onto the pull up bar you can't help but stop and admire the chiseled abs hanging right above you.\n\n");
+			outputText("He's incredibly fuzzy, yet his abs have incredible definition.\n\n");
+			outputText("You direct your attention back to the makeshift pull up bar, leaping up and pulling your weight over his.\n\n");
+			outputText("You give it only a few minutes before you get bored of holding yourself up. It seems the troll is slowly starting to wear himself out. Better let him think he has a bigger advantage over you.\n\n");
+			outputText("You drop from the bar, feigning defeat. The troll's face widens into a smug grin,");
+			break;
+		case 1:
+			outputText("His voice drags on as he leads you a few paces inward. He mentions something about toughness, which only leads you to imagine how easy it'd be to best him at something that'd really test your endurance.\n\n");
+			outputText("It shouldn't be that hard, right? There's no possible way.\n\n");
+			outputText("You glance at the troll as he holds onto a rock between his torso and arm as he passes you another, \"<i>Come on, ya gotta hold dis above ya head. See how long ya can last.</i>\"\n\n");
+			outputText("Seems oddly simply, yet... You pause for the moment, admiring his thick, chiseled outstretched arm. You can barely see the faint lining of his veins beneath his fur.\n\n");
+			outputText("You shrug, grabbing onto the rock and holding it above your head. You hold the position for a few minutes until you start to get bored. It seems the troll is starting to wear himself out, better give in while he still has his ego.\n\n");
+			outputText("You drop the rock to the ground, feigning exhaustion as the troll tosses his rock with a smug grin plastered across his face,");
+			break;
+		case 2:
+			outputText("His voice drags on as he leads you a few paces inward. He mentions something about speed, which only leads you to imagine how easy it'd be to best him at something that truly calls for quick timing.\n\n");
+			outputText("It shouldn't be that hard, right? There's no possible way.\n\n");
+			outputText("You glance at the troll as he gestures toward a tree before stretching down to draw a line in the grass.\n\n");
+			outputText("You pause for a moment to admire his... taut... strong back"+(silly()?" and well, like his ass, obviously, but that was IMPLIED!":".")+"\n\n");
+			outputText("He turns toward you, \"<i>One lap. Back and forth, ready?</i>\"\n\n");
+			outputText("Oh, already? You wait for his queue.\n\n");
+			outputText("The two of you race for the tree, yet you remain only paces behind him. You like admiring his form. He's lean, but noticeably built. So perfectly chiseled. It's honestly rather beautiful.\n\n");
+			outputText("The distance between the two of you widens as he passes you with a taunting grin as he runs back to the start.\n\n");
+			outputText("You roll your eyes, you're not even trying, but you let him have his fun.\n\n");
+			outputText("You finally return to the finish as the troll has his arms stretched into a smug shrug,");
+			break;
+		case 3:
+			outputText("His voice drags on as he leads you a few paces inward. He mentions something about smarts, which only leads you to imagine how easy it'd be to best him at something that calls for true intellect.\n\n");
+			outputText("It shouldn't be that hard, right? There's no possible way.\n\n");
+			outputText("He tosses you a moss covered branch as he explains the rules. You only partially pay attention, focusing more on his pectorals right in front of your face. They bounce and shift slightly with the movements of his arms as he shows a few demonstrations with his makeshift pole.\n\n");
+			outputText("\"<i>All you gotta do is hit me wit da stick before I hit you.</i>\"\n\n");
+			outputText("Oh, this is just too easy, but you'll let him win this one. You ready a defensive stance with the stick as he readies himself as well.\n\n");
+			outputText("He pauses before giving you a nod, signaling that the game begins. You don't bother, fixating on his almost overwhelming masculinity before you. You're only in it for the inadvertent show he's giving you anyhow.\n\n");
+			outputText("You give a half attempt to hit him as he parries your strike and jabs you with his branch.\n\n");
+			outputText("He drops his stick, giving you a smug grin,");
+			break;
+		case 4:
+			outputText("His voice drags on as he leads you a few paces inward. He mentions something about wisdom, which only leads you to imagine how easy it'd be to best him at something that calls for a true test of wit.\n\n");
+			outputText("It shouldn't be that hard, right? There's no possible way.\n\n");
+			outputText("You gaze at several moss covered rocks within the bog before turning your attention back to him. You only partially pay attention, focusing more on his arms right in front of your face. His biceps and triceps are huge, and clearly defined. They shift and bounce slightly while he moves his arms, explaining the rules of the game.\n\n");
+			outputText("\"<i>Say when you're ready, I will see who has de most bugs unda da rock. Trust me, it ain't as easy as it looks.</i>\"\n\n");
+			outputText("Whatever, you'll let him go first and you'll kick over the nearest rock. It's not like it's worth putting in any effort anyway.\n\n");
+			outputText("The troll meanders through the rubble, inspecting the rocks but not flipping them over.\n\n");
+			outputText("He glances toward you, signaling that he's made his decision.\n\n");
+			outputText("You kick over the nearest rock, it's hardly covered in moss. Not a single insect.\n\n");
+			outputText("The troll snickers softly as he flips over his rock, several insects crawl beneath.\n\n");
+			outputText("He gives a smug shrug,");
+			break;
+	}
+	outputText(" \"<i>Hah, I knew I'd win. How'd ya like dat?</i>\"\n\n");
+	outputText("You give him a few claps, applauding his skill to reinforce his ego.\n\n");
+	outputText("\"<i>Yeah, dat's right. Now, get outta here, I'm done wit dese games. Come back when you're better at dis!</i>\"\n\n");
+	outputText("Oh, maybe you will... It's almost endearing to watch his ego inflate.\n\n");
+	zenjiPerspectiveOnPlayer(-6);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function part1TrollEncounterSex():void {
@@ -1371,7 +1444,7 @@ public function loverZenjiComfort():void {
 	dynStats("cor", -0.5);
 	if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
 	doNext(loverZenjiTalks);
-	cheatTime2(5);
+	eachMinuteCount(5);
 }
 
 public function loverZenjiFood():void {
@@ -1385,7 +1458,7 @@ public function loverZenjiFood():void {
 	if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
 	ZenjiFood = true;
 	inventory.takeItem(consumables.ZENJI_H, loverZenjiTalks);
-	cheatTime2(5);
+	eachMinuteCount(5);
 }
 
 public function loverZenjiGiveItem():void {
@@ -1775,8 +1848,10 @@ public function loverZenjiTakeVaginal():void {
 	outputText("Zenji releases you, helping you clean up from the mess of his huge orgasm and get dressed. Finally, you are ready to continue your day.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.pregnancyIncubation == 0) {
+		if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	}
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2054,8 +2129,10 @@ public function loverZenjiHotSpringRideVaginal():void{
 	outputText("Zenji looks down at his soaked loincloth, \"<i>Ugh… I did not tink dis through, I need ta get another piece of cloth.</i>\"\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.pregnancyIncubation == 0) {
+		if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	}
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2304,8 +2381,10 @@ public function loverZenjiSleepWithGetPenetrated(timeQ:Number):void {
 	outputText("Zenji gently strokes your back as he curls up with you.\n\n");
 	outputText("You plan on sleeping for " + num2Text(timeQ) + " hours.\n\n");
 	player.sexReward("cum", "Vaginal");
-	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.pregnancyIncubation == 0) {
+		if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	}
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, 1);
 	menu();
 	addButton(0,"Next",camp.sleepWrapper);

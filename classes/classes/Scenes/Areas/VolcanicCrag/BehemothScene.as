@@ -177,6 +177,7 @@ public class BehemothScene extends BaseContent
 		private function startFight():void {
 			clearOutput();
 			outputText("You tell him that you're here to fight. \"<i>All right! Get ready,</i>\" he says with a grin and claws raised.");
+			SceneLib.volcanicCrag.VolcanicCragConditions();
 			startCombat(new Behemoth());
 			monster.createStatusEffect(StatusEffects.Spar,0,0,0,0);
 		}

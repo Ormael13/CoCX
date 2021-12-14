@@ -549,7 +549,7 @@ public function breakingInYourMare():void {
 	if (player.gender == 0 || player.gender == 2) {
 		outputText("You take the mixture, groaning as you suddenly feel a sizeable cock growing between your legs.\n\n");
 		player.createCock(10 + rand(7), 2 + rand(10) / 10);
-		player.cocks[1].cockType = CockTypesEnum.HORSE;
+		player.cocks[0].cockType = CockTypesEnum.HORSE;
 	}
 	outputText("Diana, in a fit of excitement, suddenly climbs onto her knees and hands before turning around and presenting her rear for you to fuck, moving her tail out of the way of her virgin sex and her equally virgin arsehole, her whole body trembling in excitement.\n\n");
 	outputText("\"<i>Thank you!</i>\" Diana says, her voice full of happiness, as she shakes her behind temptingly. \"<i>I’ll be a good mare to you, but please fuck me!! I really can’t take it anymore, I just need your cock in me now!!</i>\" her voice desperate.\n\n");
@@ -763,7 +763,7 @@ public function HealingScene():void {
 	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
 	doNext(mainCampMenu);
-	cheatTime2(45);
+	eachMinuteCount(45);
 }
 
 public function CuringCurseScene1():void {	//value related curses removal
@@ -779,7 +779,7 @@ public function CuringCurseScene1():void {	//value related curses removal
 		player.removeCurse(stat, 10,3);
 	}
 	doNext(mainCampMenu);
-	cheatTime2(15);
+	eachMinuteCount(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
@@ -797,7 +797,7 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 		}
 	}
 	doNext(mainCampMenu);
-	cheatTime2(30);
+	eachMinuteCount(30);
 }
 
 public function mainSexMenu():void {

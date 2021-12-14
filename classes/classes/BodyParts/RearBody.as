@@ -145,6 +145,11 @@ public class RearBody extends BodyPart {
 		name: "Atlach Nacha rear",
 		appearanceDesc: "Two pairs of chitinous, black spider legs sprout from your shoulders and back. Red eyes blink and close at the tips."
 	});
+	public static const MINDBREAKER: int = 24;
+	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
+		name: "Mindbreaker rear",
+		appearanceDesc: "On your back spreads a webbed leather membrane, which from afar may look like a cape."
+	});
 
 	public function RearBody() {
 		super(null, null);

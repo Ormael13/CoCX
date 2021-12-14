@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Liandri, edited by Scary Dragon Mom
+ * @author Liandri
  */
 package classes.Scenes.NPCs
 {
@@ -183,7 +183,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.cor >= 60) outputText("Of course, it's those tantalizing glimpses of her true, corrupted nature that make her so cute, you think to yourself happily... definitely happily, not nervously at all.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaWhatCanSheDo():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -195,8 +196,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You can think of absolutely no potential problems with this.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 5)flags[kFLAGS.LUNA_FOLLOWER] = 5;
 			lunaJealousy(-100);
-			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaHuman():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -235,7 +236,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaCampThoughts():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -245,7 +247,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			else outputText("\"<i>While I would never impose upon " + player.mf("Master","Mistress") + ", I will admit it would be far easier to clean if there were a proper dwelling here. I would greatly enjoy the wider scope for my services a cabin would provide.</i>\"\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaStopJealousy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -262,7 +265,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			player.removeStatusEffect(StatusEffects.LunaWasCaugh);
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuLunaLycanthropy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -282,7 +286,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			else flags[kFLAGS.LUNA_FOLLOWER] = 14;
 			lunaJealousy(-100);
 			lunaAffection(2);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(talkMenuLuna);
+			eachMinuteCount(15);
 		}
 		public function talkMenuBiteMe():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -532,7 +537,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
 				outputText("\nThe treatment complete, she breaks contact and her expression melts into a more coy smile. Doubtless she knows what effect she's had on you, and fully intended it. Do you take her here and now?\n\n");
 				menu();
-				addButton(0, "Yes", sexMenuMain);
+				if (player.lust > 33) addButton(0, "Yes", sexMenuMain);
+				else addButtonDisabled(0, "Yes", "Your lust is too low for that.");
 				addButton(1, "No", nurseLunaEnd);
 			}
 			else doNext(camp.returnToCampUseFourHours);
@@ -865,7 +871,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					" There is a mat woven from soft rushes laying on a patch of grass, and a shady tree and a large boulder with a smooth, flat side create a comfortable and secluded atmosphere. You hear the stream running nearby, giving the entire scene a peaceful, rustic atmosphere. It's quite charming and intimate feeling, and you wonder when and why she found time to set this up. Was she anticipating this?\n\n" +
 					"Luna awaits your command, her hands joined demurely in front of her abdomen and her head lowered deferentially. How will you make use of her?");
 			menu();
-			addButtonDisabled(0, "JustCuddle", "NYI - Scary Dragon Mom hasn't written the scene yet. Get on her!" );
+			addButtonDisabled(0, "JustCuddle", "Writer has left the building. Needs a new adopter." );
 			if (player.lust > 33 && player.gender > 0) addButton(1, "Vaginal", sexMenuVaginalIntro).hint("Have Luna soothe and pleasure you with her (currently, at least) normal human pussy; sometimes simple is best, and your cute maid can still be the best even when she isn't the beast.");
 			else if (player.lust > 33 && player.gender == 0) addButtonDisabled(1, "Vaginal", "You need to have genitals if you want Luna to use her own on them!");
 			else if (player.lust <= 33) addButtonDisabled(1, "Vaginal", "You're not up for sex at the moment, though you're sure Luna can find a way to fix that.");
@@ -1128,7 +1134,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			addButton(1, "Dominate", sexMenuDominateHer).hint("Take your bitch as rough as you want until you've had enough. It'll do her good.");
 			if (player.hasCock()) addButton(2, "Surprise", sexMenuDoggyTreats2).hint("You're feeling a little saucy, and Luna's asshole looks too tempting to pass up.");
 			else addButtonDisabled(2, "Surprise", "As tempting as Luna's ass looks, you're going to need a cock to take advantage of it.");
-			addButtonDisabled(3, "Press Luck", "NYI - Scary Dragon Mom hasn't written the scene yet! Get on her!" );
+			addButtonDisabled(3, "Press Luck", "Writer has left the building. Needs a new adopter." );
 			addButtonDisabled(14, "Back", "You know perfectly well you're not getting out of this now.");
 		}
 		public function sexMenuDoggyTreats2():void {

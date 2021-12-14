@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Forest {
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 
 public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 
@@ -193,7 +194,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				player.orgasm();
 				dynStats("sen", 5, "cor", 2);
 				//Xforms
-				if (rand(3) == 0 && player.hairColor != "green") { //Change hair to green sometimes
+				if (rand(3) == 0 && player.hairColor != "green" && !player.blockingBodyTransformations()) { //Change hair to green sometimes
 					outputText("You don't get far before you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>  ");
 					player.hairColor = "green";
 				}
@@ -226,7 +227,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				//Simple stat changes - + lust.
 				dynStats("lus", 25 + player.lib / 10, "cor", 2);
 				//Change hair to green sometimes
-				if (rand(3) == 0 && player.hairColor != "green") {
+				if (rand(3) == 0 && player.hairColor != "green" && !player.blockingBodyTransformations()) {
 					outputText("You don't get far before you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>  ");
 					player.hairColor = "green";
 				}
@@ -338,7 +339,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				case 2: //Whitefire
 					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					useMana(40, 5);//fatigue(20, USEFATG_MAGIC);
+					useMana(40, Combat.USEMANA_WHITE);//fatigue(20, USEFATG_MAGIC);
 					break;
 				case 3: //Axe
 					outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");

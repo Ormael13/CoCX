@@ -14,6 +14,8 @@ import classes.GlobalFlags.kFLAGS;
 //  BENOIT_1:int = 567;
 //  BENOIT_2:int = 568;
 //  BENOIT_3:int = 569;
+//  BENOIT_4:int = 1294;
+//  BENOIT_5:int = 1295;
 //  BENOIT_TALKED_TODAY:int = 570;
 //  BENOIT_TALKED_TO_PROPERLY:int = 571;
 //  BENOIT_EGGS:int = 572;
@@ -49,10 +51,10 @@ public function benoitAffection(changes:Number = 0):Number {
 
 private function benoitKnocksUpPCCheck():void {
 	//Convert old basi's to real basi's!
-	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.findPerk(PerkLib.BasiliskWomb) >= 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.hasPerk(PerkLib.BasiliskWomb)) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 	//Knock up chances:
-	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
-		if (player.findPerk(PerkLib.BasiliskWomb) >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+		if (player.hasPerk(PerkLib.BasiliskWomb) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
 			if (player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
 				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
@@ -139,9 +141,9 @@ public function benoitKnockUp():Boolean
 	// Calc the number of eggs
 	var cumQ:int = player.cumQ();
 
-	var bounty:Boolean = (player.findPerk(PerkLib.ElvenBounty) >= 0);
-	var stud:Boolean = (player.findPerk(PerkLib.MaraesGiftStud) >= 0);
-	var alpha:Boolean = (player.findPerk(PerkLib.FerasBoonAlpha) >= 0);
+	var bounty:Boolean = (player.hasPerk(PerkLib.ElvenBounty));
+	var stud:Boolean = (player.hasPerk(PerkLib.MaraesGiftStud));
+	var alpha:Boolean = (player.hasPerk(PerkLib.FerasBoonAlpha));
 
 	var eggMod:int = 0;
 	if (bounty) eggMod += 1;
@@ -202,7 +204,7 @@ public function benoitIntro():void {
 
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls " + benoitMF("his","her") + " claws protectively into what appears to be a pile of robes sitting next to " + benoitMF("him","her") + ", which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition)) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
 		if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
 		suggest = eggySuggest;
 		suggestText = "Suggest";
@@ -304,7 +306,7 @@ public function benoitIntro():void {
 	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
 	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
 	//Basilisk Womb
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && (!(player.hasPerk(PerkLib.BasiliskWomb))) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
 	//Suggest & sex
 	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
 	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
@@ -334,11 +336,14 @@ public function benoitsBuyMenu():void {
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).value));
 	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			"", null, "", null);
-	if (player.keyItemv1("Backpack") < 10) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+			flags[kFLAGS.BENOIT_4],createCallBackFunction(benoitTransactBuy,4),
+			flags[kFLAGS.BENOIT_5],createCallBackFunction(benoitTransactBuy,5));
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
 	addButton(14, "Back", benoitIntro);
@@ -390,7 +395,9 @@ private function benoitTransactBuy(slot:int = 1):void {
 
 	if(slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
 	else if(slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
-	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
+	else if(slot == 3) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
+	else if(slot == 4) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_4]);
+	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_5]);
 	if(player.gems < int(buyMod * itype.value)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
 		doNext(benoitsBuyMenu);
@@ -448,8 +455,8 @@ private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
 
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.
 public function updateBenoitInventory():void {
-	//Slot 1 Any one of the following: Incubus Draft, Minotaur Blood, Minotaur Cum, Equinuum, Black Pepper, Vitalitea, Scholar's Tea, Double Pepper
-	switch(rand(9)) {
+	//Slot 1
+	switch(rand(5)) {
 		case 0:
 			flags[kFLAGS.BENOIT_1] = consumables.INCUBID.id;
 			break;
@@ -465,123 +472,141 @@ public function updateBenoitInventory():void {
 		case 4:
 			flags[kFLAGS.BENOIT_1] = consumables.BLACKPP.id;
 			break;
-		case 5:
-			flags[kFLAGS.BENOIT_1] = consumables.SMART_T.id;
-			break;
-		case 6:
-			flags[kFLAGS.BENOIT_1] = consumables.VITAL_T.id;
-			break;
-		case 7:
-			flags[kFLAGS.BENOIT_1] = consumables.DBLPEPP.id;
-			break;
-		case 8:
-			if (rand(3) == 0) flags[kFLAGS.BENOIT_1] = consumables.PURHONY.id;
-			else flags[kFLAGS.BENOIT_1] = consumables.BEEHONY.id;
-			break;
 		default:
 	}
-	//If the player discarded a unique item, the first time they arrive at the Salvage Shop after a week has passed it will appear in Slot 1.
-	if (rand(10) == 0) {
-		flags[kFLAGS.BENOIT_1] = consumables.GODMEAD.id;
+	if (rand(100) < 4) {
+		//There is a 4% chance the following items will appear in Slot 1
+		switch (rand(2)) {
+			case 0:
+				flags[kFLAGS.BENOIT_1] = consumables.L_PNKEG.id;
+				break;
+			default:
+				flags[kFLAGS.BENOIT_1] = consumables.L_BLUEG.id;
+				break;
+		}
 	}
 
-	//Slot 2 Any one of the following: Succubus Milk, Whisker Fruit, Wet Cloth, Golden Seed, LaBova, Snake Oil, Pink Gossamer, Black Gossamer
-	switch(rand(10)) {
+	//Slot 2
+	switch(rand(5)) {
 		case 0:
-			flags[kFLAGS.BENOIT_2] = consumables.SUCMILK.id;
+			flags[kFLAGS.BENOIT_2] = consumables.SMART_T.id;
 			break;
 		case 1:
-			flags[kFLAGS.BENOIT_2] = consumables.W_FRUIT.id;
+			flags[kFLAGS.BENOIT_2] = consumables.VITAL_T.id;
 			break;
 		case 2:
-			flags[kFLAGS.BENOIT_2] = consumables.WETCLTH.id;
+			flags[kFLAGS.BENOIT_2] = consumables.DBLPEPP.id;
 			break;
 		case 3:
-			flags[kFLAGS.BENOIT_2] = consumables.GLDSEED.id;
+			flags[kFLAGS.BENOIT_2] = consumables.PURHONY.id;
 			break;
 		case 4:
-			flags[kFLAGS.BENOIT_2] = consumables.LABOVA_.id;
-			break;
-		case 5:
-			flags[kFLAGS.BENOIT_2] = consumables.SNAKOIL.id;
-			break;
-		case 6:
-			flags[kFLAGS.BENOIT_2] = consumables.S_GOSSR.id;
-			break;
-		case 7:
-			flags[kFLAGS.BENOIT_2] = consumables.HUMMUS_.id;
-			break;
-		case 8:
-			flags[kFLAGS.BENOIT_2] = consumables.PIGTRUF.id;
-			break;
-		case 9:
-			flags[kFLAGS.BENOIT_2] = consumables.B_GOSSR.id;
+			flags[kFLAGS.BENOIT_2] = consumables.BEEHONY.id;
 			break;
 		default:
 	}
 	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.
-		switch (rand(5)) {
+		//There is a 4% chance the following items will appear in Slot 2
+		switch (rand(2)) {
 			case 0:
 				flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
 				break;
-
 			case 1:
-				flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
-				break;
-
-			case 2:
-				flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
-				break;
-
-			case 3:
 				flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
-				break;
-			default:
-				flags[kFLAGS.BENOIT_2] = consumables.TSTOOTH.id;
 				break;
 		}
 	}
 
-	//Slot 3 Any one of the following: Maid's Clothes, Wizard Robes, Tough Silk, Slutty Swimwear, Goo Chunk, Chitin Plate
-	switch(rand(6)) {
+	//Slot 3
+	switch(rand(5)) {
 		case 0:
-			flags[kFLAGS.BENOIT_3] = armors.W_ROBES.id;
+			flags[kFLAGS.BENOIT_3] = consumables.SUCMILK.id;
 			break;
 		case 1:
-			flags[kFLAGS.BENOIT_3] = armors.S_SWMWR.id;
+			flags[kFLAGS.BENOIT_3] = consumables.W_FRUIT.id;
 			break;
 		case 2:
-			flags[kFLAGS.BENOIT_3] = useables.GREENGL.id;
+			flags[kFLAGS.BENOIT_3] = consumables.WETCLTH.id;
 			break;
 		case 3:
-			flags[kFLAGS.BENOIT_3] = useables.B_CHITN.id;
+			flags[kFLAGS.BENOIT_3] = consumables.GLDSEED.id;
 			break;
 		case 4:
-			flags[kFLAGS.BENOIT_3] = consumables.NUMBROX.id;
+			flags[kFLAGS.BENOIT_3] = consumables.LABOVA_.id;
 			break;
-		case 5:
-			flags[kFLAGS.BENOIT_3] = consumables.SENSDRF.id;
+		default:
+	}
+	if (rand(100) < 4) {
+		//There is a 4% chance the following items will appear in Slot 3
+		switch (rand(2)) {
+			case 0:
+				flags[kFLAGS.BENOIT_3] = consumables.TSTOOTH.id;
+				break;
+			case 1:
+				flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
+				break;
+		}
+	}
+
+	//Slot 4
+	switch(rand(5)) {
+		case 0:
+			flags[kFLAGS.BENOIT_4] = consumables.SNAKOIL.id;
+			break;
+		case 1:
+			flags[kFLAGS.BENOIT_4] = consumables.S_GOSSR.id;
+			break;
+		case 2:
+			flags[kFLAGS.BENOIT_4] = consumables.HUMMUS_.id;
+			break;
+		case 3:
+			flags[kFLAGS.BENOIT_4] = consumables.PIGTRUF.id;
+			break;
+		case 4:
+			flags[kFLAGS.BENOIT_4] = consumables.B_GOSSR.id;
+			break;
+		default:
+	}
+	if (rand(100) < 4) {
+		//There is a 4% chance the following item will appear in Slot 4
+		switch (rand(2)) {
+			case 0:
+				flags[kFLAGS.BENOIT_4] = consumables.NUMBROX.id;
+				break;
+			case 1:
+				flags[kFLAGS.BENOIT_4] = consumables.SENSDRF.id;
+				break;
+		}
+	}
+
+	//Slot 5
+	switch(rand(4)) {
+		case 0:
+			flags[kFLAGS.BENOIT_5] = armors.W_ROBES.id;
+			break;
+		case 1:
+			flags[kFLAGS.BENOIT_5] = armors.S_SWMWR.id;
+			break;
+		case 2:
+			flags[kFLAGS.BENOIT_5] = useables.GREENGL.id;
+			break;
+		case 3:
+			flags[kFLAGS.BENOIT_5] = useables.B_CHITN.id;
 			break;
 		default:
 	}
 	if (rand(100) < 10) {
-		//There is a 10% chance the following items will appear in Slot 3: Bondage Straps, Nurse Outfit, Red Party Dress
-		switch (rand(3)) {
+		//There is a 10% chance the following items will appear in Slot 5
+		switch (rand(2)) {
 			case 0:
-				flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
+				flags[kFLAGS.BENOIT_5] = armors.BONSTRP.id;
 				break;
-
 			case 1:
-				flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
-				break;
-
-			default:
-				flags[kFLAGS.BENOIT_3] = armors.NURSECL.id;
+				flags[kFLAGS.BENOIT_5] = armors.NURSECL.id;
 				break;
 		}
 	}
-	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
+	//Slot 6 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }
 
 private function buyFlintlock():void {
@@ -634,24 +659,24 @@ private function buyAlarmClockConfirmation():void {
 private function buyBackpack():void {
 	clearOutput();
 	outputText("You ask " + benoitMF("Benoit", "Benoite") + " if " + benoitMF("he", "she") + " has a backpack to spare.");
-	outputText("\n\n\"<i>Yes. Zese come in three sizes. What will you pick?</i>\" " + benoitMF("he", "she") + " asks.");
+	outputText("\n\n\"<i>Yes. Zese come in six sizes. What will you pick?</i>\" " + benoitMF("he", "she") + " asks.");
 	outputText("\n\n<b><u>Backpack Size and Pricings</u></b>");
-	outputText("\nSmall: 400 gems, +2 inventory slot");
-	outputText("\nMedium: 800 gems, +4 inventory slots");
-	outputText("\nLarge: 1200 gems, +6 inventory slots");
-	outputText("\nExtra Large: 1600 gems, +8 inventory slots");
-	outputText("\nDouble Extra Large: 2000 gems, +10 inventory slots");
-	outputText("\nTriple Extra Large: 2400 gems, +12 inventory slots");
+	outputText("\nSmall: 100 gems, +2 inventory slot");
+	outputText("\nMedium: 200 gems, +4 inventory slots");
+	outputText("\nLarge: 300 gems, +6 inventory slots");
+	outputText("\nExtra Large: 400 gems, +8 inventory slots");
+	outputText("\nDouble Extra Large: 500 gems, +10 inventory slots");
+	outputText("\nTriple Extra Large: 600 gems, +12 inventory slots");
 	menu();
-	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 400, "Grants additional two slot. \n\nCost: 400 gems");
-	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 600, "Grants additional four slots. \n\nCost: 800 gems");
-	if (player.keyItemv1("Backpack") < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 1200, "Grants additional six slots. \n\nCost: 1200 gems");
-	if (player.keyItemv1("Backpack") < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 1600, "Grants additional eight slots. \n\nCost: 1600 gems");
-	if (player.keyItemv1("Backpack") < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 2000, "Grants additional ten slots. \n\nCost: 2000 gems");
-	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 2400, "Grants additional twelve slots. \n\nCost: 2400 gems");
+	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	if (player.keyItemv1("Backpack") < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 300, "Grants additional six slots. \n\nCost: 300 gems");
+	if (player.keyItemv1("Backpack") < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 400, "Grants additional eight slots. \n\nCost: 400 gems");
+	if (player.keyItemv1("Backpack") < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 500, "Grants additional ten slots. \n\nCost: 500 gems");
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 600, "Grants additional twelve slots. \n\nCost: 600 gems");
 	addButton(14, "Nevermind", benoitsBuyMenu);
 }
-private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 400):void {
+private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	clearOutput();
 	if (player.gems < price) {
 		outputText("You count out your gems and realize it's beyond your price range.");
@@ -1054,7 +1079,7 @@ private function eggySuggest():void {
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" " + benoitMF("he","she") + " says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	player.orgasm();
 	player.sexReward("cum");
-	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
 	}
@@ -1273,7 +1298,7 @@ private function tryToConvertToBassyWomb():void {
 
 		outputText("\n\nThe mixture has a lingering bite of mint overlaying the all-consuming burn of alcohol; you are reminded vaguely of the sticky liqueurs that populated the recesses of cupboards back home.  You smack your lips and plonk the bowl back down with deliberate loudness after you have finished; " + benoitMF("Benoit","Benoite") + " clutches the counter tensely as you wait.  You haven't died straight away, so that's a positive... an immense gurgle comes from your belly and you double over as your insides shift and the contents of your gut churn.  The sensation is not painful exactly but you feel like you've lost all control of your insides; you clutch your sides and try to breathe levelly as your stomach turns upside down and makes a sound like trapped gas.  Eventually you feel something like a bubble form just below your gut; slowly your insides settle as the bubble grows larger and larger, until the sensation slowly fades.  Cautiously you walk back and forth a few times, before poking your tummy.");
 		//[No oviposition:
-		if(player.findPerk(PerkLib.Oviposition) < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
+		if(player.hasPerk(PerkLib.Oviposition) < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
 		else outputText("You feel slightly bloated, but otherwise fine; you sense that were you to get impregnated by basilisk seed, the eggs you produce would be pure basilisk.");
 
 		outputText("\n\n\"<i>[name]?</i>\" says " + benoitMF("Benoit","Benoite") + " nervously.  \"<i>Are you all right?  Shall I call ze sawbones? I will call ze sawbones.  'E is mostly good at taking people apart and putting zem back togezzer again, but I am sure 'e can give you a good purgative if we rush...</i>\"  You toy with the idea of staging a dramatic allergic reaction, but deciding not to fray " + benoitMF("his","her") + " nerves any further you tell " + benoitMF("him","her") + " you feel absolutely fine.  Indeed, stroking your belly, you are almost certain that it worked.");
@@ -1350,7 +1375,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	//(Oviposition perk added)
 	player.createPerk(PerkLib.BasiliskWomb,0,0,0,0);
 	outputText("\n\n(<b>Perk Unlocked: Basilisk Womb - You can now give birth to female basilisks.</b>)");
-	if(player.findPerk(PerkLib.Oviposition) < 0) {
+	if(!(player.hasPerk(PerkLib.Oviposition))) {
 		player.createPerk(PerkLib.Oviposition,0,0,0,0);
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}

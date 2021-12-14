@@ -103,6 +103,7 @@ public class Creature extends Utils
 		public function get weaponName():String { return _weaponName; }
 		public function get weaponVerb():String { return _weaponVerb; }
 		public function get weaponAttack():Number { return _weaponAttack; }
+		//Warning: Deprecated since 0.8s2. New tagging system uses this args. DO NOT USE, MUST REPLACE WITH weaponSpecials
 		public function get weaponPerk():String { return _weaponPerk; }
 		public function get weaponType():String { return _weaponType; }
 		public function get weaponValue():Number { return _weaponValue; }
@@ -490,7 +491,7 @@ public class Creature extends Utils
 				if (inte >= 61) max += Math.round(inte);
 				if (inte >= 81) max += Math.round(inte);
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
-				if (hasPerk(MutationsLib.FrozenHeartFinalForm)) max *= 1.5;
+				if (hasPerk(MutationsLib.FrozenHeartEvolved)) max *= 1.5;
 			}
 			else if (hasPerk(PerkLib.HaltedVitals)) {
 				max += int(lib * 2 + 50);
@@ -509,7 +510,7 @@ public class Creature extends Utils
 				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
 			}
 			if (hasPerk(PerkLib.IcyFlesh)) {
-				if (hasPerk(MutationsLib.FrozenHeartFinalForm)) {
+				if (hasPerk(MutationsLib.FrozenHeartEvolved)) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankII)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankIII)) max += Math.round(inte*18);
@@ -568,24 +569,24 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.JobGuardian)) max += 120;
 			if (hasPerk(PerkLib.BodyCultivator)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulPersonage)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulWarrior)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulApprentice)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulPersonage)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulWarrior)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulScholar)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulElder)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulSprite)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulScholar)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulElder)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulOverlord)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulTyrant)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulExalt)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulOverlord)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulTyrant)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulEmperor)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulAncestor)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulKing)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulEmperor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulAncestor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -648,6 +649,7 @@ public class Creature extends Utils
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
 			}
+			if (game.player.hasPerk(PerkLib.SharedPower) && game.player.perkv1(PerkLib.SharedPower) > 0) maxHP_mult1 += (0.1*game.player.perkv1(PerkLib.SharedPower));
 			return maxHP_mult1;
 		}
 		public function maxHP():Number {
@@ -656,36 +658,18 @@ public class Creature extends Utils
 		}
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
-			if (hasPerk(PerkLib.HiddenJobBloodDemon)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.WayOfTheBlood)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.YourPainMyPower)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.BloodDemonToughness)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			var maxOver2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonWisdom)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonIntelligence)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
+			maxOver *= maxOver2;//~170%
+			maxOver = Math.round(maxOver);
 			return Math.min(19999999,maxOver);
 		}
 		public function minHP():Number {
@@ -1632,27 +1616,10 @@ public class Creature extends Utils
 		 * @param buff Creature stat is decremented by this value.
 		 * @return (oldStat-newStat)
 		 */
-		public function addCombatBuff(stat:String, buff:Number):Number {
-			switch(stat) {
-				case 'str':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatStrBuff)
-							as CombatStrBuff).applyEffect(buff);
-				case 'spe':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatSpeBuff)
-							as CombatSpeBuff).applyEffect(buff);
-				case 'tou':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatTouBuff)
-							as CombatTouBuff).applyEffect(buff);
-				case 'int':
-				case 'inte':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteBuff)
-							as CombatInteBuff).applyEffect(buff);
-				case 'wis':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatWisBuff)
-							as CombatWisBuff).applyEffect(buff);
-			}
-			trace("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
-			return 0;
+		public function addCombatBuff(stat:String, buff:Number, text:String = "Combat Buff", tag:String = "CombatBuff"):Number {
+			if (stat == "inte") stat = "int";
+            this.buff(tag).withText(text).addStat(stat,buff).combatPermanent();
+            return 0;
 		}
 		/*
 
@@ -2532,7 +2499,7 @@ public class Creature extends Utils
 				quantity *= 2;
 			if (hasPerk(PerkLib.OneTrackMind))
 				quantity *= 1.1;
-			if (hasPerk(MutationsLib.MinotaurTesticlesFinalForm))
+			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved))
 				quantity *= 2.5;
 			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
@@ -2542,15 +2509,15 @@ public class Creature extends Utils
 				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
 			if (hasPerk(PerkLib.FerasBoonSeeder))
 				quantity += 1000;
-			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved))
+			if (hasPerk(MutationsLib.MinotaurTesticlesPrimitive))
+				quantity += 200;
+			if (hasPerk(MutationsLib.NukiNutsPrimitive))
 				quantity += 200;
 			if (hasPerk(MutationsLib.NukiNutsEvolved))
-				quantity += 200;
-			if (hasPerk(MutationsLib.NukiNutsFinalForm))
 				quantity *= 2;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved))
+			if (hasPerk(MutationsLib.EasterBunnyEggBagPrimitive))
 				quantity *= 1.5;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagFinalForm))
+			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved))
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
@@ -2642,6 +2609,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.DISPLACER);
 		}
 
+		public function eldritchCocks():int { //How many eldritchCocks?
+			return countCocksOfType(CockTypesEnum.MINDBREAKER);
+		}
+
 		// Note: DogCocks/FoxCocks are functionally identical. They actually change back and forth depending on some
 		// of the PC's attributes, and this is recaluculated every hour spent at camp.
 		// As such, delineating between the two is kind of silly.
@@ -2704,6 +2675,10 @@ public class Creature extends Utils
 
 		public function gryphonCocks():int { //How many gryphoncocks?
 			return countCocksOfType(CockTypesEnum.GRYPHON);
+		}
+
+		public function beeCocks():int { //How many beecocks?
+			return countCocksOfType(CockTypesEnum.BEE);
 		}
 
 
@@ -2902,31 +2877,11 @@ public class Creature extends Utils
 			return false;
 		}
 
-		//Eyes of the Hunter
-		public function whenEyesOfTheHunterActivates():Boolean
-		{
-			return (game.player.hasPerk(PerkLib.EyesOfTheHunterNovice) && game.player.sens >= 25 && (game.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || game.monster.hasPerk(PerkLib.EnemyFeralType) || game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType)
-					|| game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyHugeType) || game.monster.hasPerk(PerkLib.EnemyGigantType) || game.monster.hasPerk(PerkLib.EnemyColossalType) || game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
-					|| game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) || (game.player.hasPerk(PerkLib.EyesOfTheHunterAdept) && game.player.sens >= 50 && (game.monster.hasPerk(PerkLib.EnemyGodType) || game.monster.hasPerk(PerkLib.EnemyBossType) || game.monster.hasPerk(PerkLib.DarknessNature) || game.monster.hasPerk(PerkLib.FireNature) || game.monster.hasPerk(PerkLib.IceNature)
-                    || game.monster.hasPerk(PerkLib.LightningNature))) || (game.player.hasPerk(PerkLib.EyesOfTheHunterMaster) && game.player.sens >= 75 && (game.monster.hasPerk(PerkLib.DarknessVulnerability) || game.monster.hasPerk(PerkLib.FireVulnerability) || game.monster.hasPerk(PerkLib.IceVulnerability) || game.monster.hasPerk(PerkLib.LightningVulnerability)));
-		}
-		public function whenGeneralEnemyPerksDisplayed():Boolean
-		{
-			return (game.player.hasPerk(PerkLib.EyesOfTheHunterNovice) && game.player.sens >= 25 && (game.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || game.monster.hasPerk(PerkLib.EnemyFeralType) || game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType)
-					|| game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyHugeType) || game.monster.hasPerk(PerkLib.EnemyGigantType) || game.monster.hasPerk(PerkLib.EnemyColossalType) || game.monster.hasPerk(PerkLib.EnemyGhostType)
-					|| game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyGhostType))) || (game.player.hasPerk(PerkLib.EyesOfTheHunterAdept) && game.player.sens >= 50 && (game.monster.hasPerk(PerkLib.EnemyGodType) || game.monster.hasPerk(PerkLib.EnemyBossType)));
-		}
-		public function whenElementalEnemyPerksDisplayed():Boolean
-		{
-			return (game.player.hasPerk(PerkLib.EyesOfTheHunterAdept) && game.player.sens >= 50 && (game.monster.hasPerk(PerkLib.DarknessNature) || game.monster.hasPerk(PerkLib.FireNature) || game.monster.hasPerk(PerkLib.IceNature) || game.monster.hasPerk(PerkLib.LightningNature)))
-                    || (game.player.hasPerk(PerkLib.EyesOfTheHunterMaster) && game.player.sens >= 75 && (game.monster.hasPerk(PerkLib.DarknessVulnerability) || game.monster.hasPerk(PerkLib.FireVulnerability) || game.monster.hasPerk(PerkLib.IceVulnerability) || game.monster.hasPerk(PerkLib.LightningVulnerability)));
-		}
-
 		//Unique sex scenes
 		public function pcCanUseUniqueSexScene():Boolean
 		{
 			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER ||
-			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) ||
+			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) || game.player.jiangshiScore() >= 20 ||
 			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) ||
 			(game.player.yukiOnnaScore() >= 14 && game.monster.hasCock() && !game.monster.hasPerk(PerkLib.UniqueNPC) && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()))
 				return true;
@@ -3390,7 +3345,7 @@ public class Creature extends Utils
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		public function isElf():Boolean {
-			return hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
+			return hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
 		}
 
 		public function isFlying():Boolean {
@@ -3752,6 +3707,7 @@ public class Creature extends Utils
 				case CockTypesEnum.CAVE_WYRM:
 				case CockTypesEnum.RED_PANDA:
 				case CockTypesEnum.PIG:
+				case CockTypesEnum.MINDBREAKER:
 				case CockTypesEnum.TENTACLE:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
@@ -4099,7 +4055,7 @@ public class Creature extends Utils
 			var flychance:Number = 20;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flychance += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flychance += 15;
-			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved)) flychance += 10;
+			if (hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) flychance += 10;
 			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
 			if (hasPerk(PerkLib.Evade)) {
 				chance += 5;
@@ -4110,8 +4066,8 @@ public class Creature extends Utils
 			}
 			if (hasPerk(PerkLib.ElvenSense)) {
 				chance += 5;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) chance += 10;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) chance += 15;
+				if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) chance += 10;
+				if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) chance += 15;
 			}
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
 			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
@@ -4123,7 +4079,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) chance += 20;
+				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) chance += 20;
 				else chance += 10;
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -4143,6 +4099,20 @@ public class Creature extends Utils
 				else chance -= 30;
 			}
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
+			if (hasPerk(PerkLib.ElementalBody)) {
+				if (perkv1(PerkLib.ElementalBody) == 1) {
+					if (perkv2(PerkLib.ElementalBody) == 1) chance += 10;
+					if (perkv2(PerkLib.ElementalBody) == 2) chance += 20;
+					if (perkv2(PerkLib.ElementalBody) == 3) chance += 30;
+					if (perkv2(PerkLib.ElementalBody) == 4) chance += 40;
+				}
+				if (perkv1(PerkLib.ElementalBody) == 3 || perkv1(PerkLib.ElementalBody) == 4)  {
+					if (perkv2(PerkLib.ElementalBody) == 1) chance += 5;
+					if (perkv2(PerkLib.ElementalBody) == 2) chance += 10;
+					if (perkv2(PerkLib.ElementalBody) == 3) chance += 15
+					if (perkv2(PerkLib.ElementalBody) == 4) chance += 20;
+				}
+			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}
@@ -4180,8 +4150,8 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.JobRogue)) generalevasion += 5;
 			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) generalevasion += 10;
 			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) generalevasion += 10;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) generalevasion += 15;
+			if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) generalevasion += 10;
+			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) generalevasion += 15;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
@@ -4196,7 +4166,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm) && roll < 20) return "Illusion";
+				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && roll < 20) return "Illusion";
 				else if (roll < 10) return "Illusion";
 			}
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
@@ -4362,6 +4332,7 @@ public class Creature extends Utils
 				"speed": "spe",
 				"intellect": "int",
 				"inte": "int",
+				"wisdom": "wis",
 				"libido": "lib",
 				"sensitivity": "sen",
 				"sens": "sen",
@@ -4370,8 +4341,7 @@ public class Creature extends Utils
 				"sca": "scale",
 				"scaled": "scale",
 				"res": "scale",
-				"resisted": "scale",
-				"wisdom": "wis"
+				"resisted": "scale"
 			};
 
 			for (var i:int = 0; i < args.length; i += 2)

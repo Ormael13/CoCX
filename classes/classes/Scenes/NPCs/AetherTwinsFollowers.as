@@ -50,6 +50,9 @@ import classes.internals.SaveableState;
 		public static var AetherTwinsFoodMenu2:Boolean;
 		public static var AetherTwinsFoodMenu1:Boolean;
 		
+		private var one:Number = 0;
+		private var two:Number = 0;
+		
 		public function stateObjectName():String {
 			return "AetherTwinsScenes";
 		}
@@ -197,8 +200,11 @@ public function aethertwinsFollowers():void {
 	addButton(1, "Talk", aethertwinsFollowersTalk).hint("Discuss with the Aether Twins.");
 	if (AetherTwinsFoodMenu) addButton(2, "Feed", aethertwinsFollowersFeed).hint("Give Aether Twins some equipment or materials to eat.");
 	else addButtonDisabled(2, "???", "Maybe you should talk with them to unlock this option?");
-	//if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");
+	//if (AetherTwinsTalkMenu > 0) addButton(3, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");
 	//if (player.lust >= 33) addButton(4, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
+	if (AetherTwinsFoodMenu1) addButton(5, "Morph", aethertwinsFollowersMorphMain).hint("Morph Aether Twins between all their unlocked forms.");
+	else addButtonDisabled(5, "???", "Maybe you should working toward their second evolution?");
+	addButton(9, "Evolutions", aethertwinsFollowersEvolutionsMain);
 	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) {
 		if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(10, "Take A.D.", "Your current rigid state not allowing you to take her with you.");
 		else addButton(10, "Take A.D.", takeAetherD).hint(weapons.AETHERD.description);
@@ -208,23 +214,6 @@ public function aethertwinsFollowers():void {
 		else addButton(11, "Take A.S.", takeAetherS).hint(shields.AETHERS.description);
 	}
 	addButton(14, "Back", camp.campFollowers);
-}
-
-private function takeAetherD():void {
-	clearOutput();
-	weapons.AETHERD.useText();
-	player.weapon.removeText();
-	var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
-	if (item == null) doNext(aethertwinsFollowers);
-	else inventory.takeItem(item, aethertwinsFollowers);
-}
-private function takeAetherS():void {
-	clearOutput();
-	shields.AETHERS.useText();
-	player.shield.removeText();
-	var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
-	if (item == null) doNext(aethertwinsFollowers);
-	else inventory.takeItem(item, aethertwinsFollowers);
 }
 
 public function aethertwinsFollowersAppearance():void {
@@ -308,6 +297,9 @@ public function aethertwinsFollowersFeed():void {
 		outputText("\n-Gold ingot ("+AetherTwinsFoodMenuGold+"/"+AetherTwinsFoodMenuGoldCap+")");
 		outputText("\n-Tin ore ("+AetherTwinsFoodMenuTin+"/"+AetherTwinsFoodMenuTinCap+")");
 		outputText("\n-Copper ore ("+AetherTwinsFoodMenuCopper+"/"+AetherTwinsFoodMenuCopperCap+")");
+		outputText("\n-Iron ore ("+AetherTwinsFoodMenuIron+"/"+AetherTwinsFoodMenuIronCap+")");
+		outputText("\n-Amethyst ("+AetherTwinsFoodMenuAmethyst+"/"+AetherTwinsFoodMenuAmethystCap+")");
+		outputText("\n-Diamond ("+AetherTwinsFoodMenuDiamond+"/"+AetherTwinsFoodMenuDiamondCap+")");
 	}
 	outputText("\n\nEaten equipment:");
 	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");
@@ -351,6 +343,14 @@ public function aethertwinsFollowersFeed():void {
 		else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
 	}
+	if (player.hasItem(useables.IRONORE, 1)) {
+		if (AetherTwinsTalkMenu > 0) {
+			if (AetherTwinsFoodMenuIron < AetherTwinsFoodMenuIronCap) addButton(btn, useables.IRONORE.shortName, aethertwinsFollowersFeedMaterial, useables.IRONORE);
+			else addButtonDisabled(btn, useables.IRONORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+		}
+		else addButtonDisabled(btn, useables.IRONORE.shortName, "They can't eat this type of metal before first evolution.");
+		btn++;
+	}
 	if (player.hasItem(shields.BUCKLER, 1) && !AetherTwinsFoodMenuBuckler) {
 		addButton(btn, shields.BUCKLER.shortName, aethertwinsFollowersFeedEquipment, shields.BUCKLER);
 		btn++;
@@ -363,16 +363,26 @@ public function aethertwinsFollowersFeed():void {
 		addButton(btn, weapons.CLAWS.shortName, aethertwinsFollowersFeedEquipment, weapons.CLAWS);
 		btn++;
 	}
-	//if (AetherTwinsTalkMenu > 0) {
-		//if (player.hasItem(shields.SPIL_SH, 1) && !AetherTwinsFoodMenuSpikeLShield) addButton(btn, shields.SPIL_SH.shortName, aethertwinsFollowersFeedEquipment, shields.SPIL_SH);
-		//btn++;
-		//if (player.hasItem(weapons.H_GAUNT, 1) && !AetherTwinsFoodMenuHGaunt) addButton(btn, weapons.H_GAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.H_GAUNT);
-		//btn++;
-		//if (player.hasItem(weapons.BFGAUNT, 1) && !AetherTwinsFoodMenuBFGauntlets) addButton(btn, weapons.BFGAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.BFGAUNT);
-		//btn++;
-		//if (player.hasItem(weapons.L_CLAWS, 1) && !AetherTwinsFoodMenuLustyClaws) addButton(btn, weapons.L_CLAWS.shortName, aethertwinsFollowersFeedEquipment, weapons.L_CLAWS);
-		//btn++;
-	//}
+	if (player.hasItem(shields.SPIL_SH, 1) && !AetherTwinsFoodMenuSpikeLShield) {
+		if (AetherTwinsTalkMenu > 0) addButton(btn, shields.SPIL_SH.shortName, aethertwinsFollowersFeedEquipment, shields.SPIL_SH);
+		else addButtonDisabled(btn, shields.SPIL_SH.shortName, "They can't eat this shield before first evolution.");
+		btn++;
+	}
+	if (player.hasItem(weapons.H_GAUNT, 1) && !AetherTwinsFoodMenuHGaunt) {
+		if (AetherTwinsTalkMenu > 0) addButton(btn, weapons.H_GAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.H_GAUNT);
+		else addButtonDisabled(btn, weapons.H_GAUNT.shortName, "They can't eat this weapon before first evolution.");
+		btn++;
+	}
+	if (player.hasItem(weapons.BFGAUNT, 1) && !AetherTwinsFoodMenuBFGauntlets) {
+		if (AetherTwinsTalkMenu > 0) addButton(btn, weapons.BFGAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.BFGAUNT);
+		else addButtonDisabled(btn, weapons.BFGAUNT.shortName, "They can't eat this weapon before first evolution.");
+		btn++;
+	}
+	if (player.hasItem(weapons.L_CLAWS, 1) && !AetherTwinsFoodMenuLustyClaws) {
+		if (AetherTwinsTalkMenu > 0) addButton(btn, weapons.L_CLAWS.shortName, aethertwinsFollowersFeedEquipment, weapons.L_CLAWS);
+		else addButtonDisabled(btn, weapons.L_CLAWS.shortName, "They can't eat this weapon before first evolution.");
+		btn++;
+	}
 	addButton(14, "Back", aethertwinsFollowers);
 }
 public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
@@ -383,7 +393,7 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 	switch (itype) {
 		case useables.TIN_ORE: AetherTwinsFoodMenuTin += 1;		break;
 		case useables.COP_ORE: AetherTwinsFoodMenuCopper += 1;	break;
-		//case useables.: AetherTwinsFoodMenuIron += 1;	break;
+		case useables.IRONORE: AetherTwinsFoodMenuIron += 1;	break;
 		case useables.S_INGOT: AetherTwinsFoodMenuSilver += 1;	break;
 		case useables.G_INGOT: AetherTwinsFoodMenuGold += 1;	break;
 	}
@@ -405,26 +415,129 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 		case weapons.L_CLAWS:	AetherTwinsFoodMenuLustyClaws = true;	break;
 	}
 	player.destroyItems(itype, 1);
-	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuClaws) {
-		outputText("\"<i>Woohoo we're evolving.</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
-		outputText("<b>The Aether Twins base form evolved unlocking some of their sealed memories.</b>\n\n");
-		player.createStatusEffect(StatusEffects.AetherTwins1, 0, 5, 0, 0);
-		//player.addStatusValue(StatusEffects.AetherTwins1, 2, 5);
-		AetherTwinsShape = "Human-tier Gaunlets";
-		AetherTwinsFoodMenuTin = 0;
-		AetherTwinsFoodMenuTinCap = 2;
-		AetherTwinsFoodMenuCopper = 0;
-		AetherTwinsFoodMenuCopperCap = 2;
-		AetherTwinsFoodMenuIron = 0;
-		AetherTwinsFoodMenuIronCap = 2;
-		AetherTwinsFoodMenuSilver = 0;
-		AetherTwinsFoodMenuSilverCap = 2;
-		AetherTwinsFoodMenuGold = 0;
-		AetherTwinsFoodMenuGoldCap = 2;
-		AetherTwinsTalkMenu = 1;
-	}
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);
+}
+
+public function aethertwinsFollowersMorphMain():void {
+	clearOutput();
+	outputText("\"<i>You want us to change form into different one? Wasn't the one we currently have good one? Ahh well... then what other form you want us to assume?</i>\"\n\n");
+	menu();
+	if (AetherTwinsShape == "Human-tier Gaunlets") addButtonDisabled(0, "HtGauntl", "They are curretly in Human-tier Gauntlets form.");
+	else addButton(0, "HtGauntl", aethertwinsFollowersMorphMainHumanTierGaunlets);
+	if (AetherTwinsShape == "Sky-tier Gaunlets") addButtonDisabled(1, "StGauntl", "They are curretly in Sky-tier Gauntlets form.");
+	else addButton(1, "StGauntl", aethertwinsFollowersMorphMainSkyTierGaunlets);
+	addButton(14, "Back", aethertwinsFollowers);
+}
+public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
+	clearOutput();
+	outputText("\"<i>So you liked our Human-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become larger than pair of medium sized gauntlets that coversr your hands and forearms with sharp claws.");
+	AetherTwinsShape = "Human-tier Gaunlets";
+	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 0) {
+		one = player.statusEffectv1(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 1, -one);
+	}
+	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 5) {
+		two = player.statusEffectv2(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 5));
+	}
+	doNext(aethertwinsFollowersMorphMain);
+	cheatTime(1/6);
+}
+public function aethertwinsFollowersMorphMainSkyTierGaunlets():void {
+	clearOutput();
+	outputText("\"<i>So you liked our Human-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a bit larger than BF gauntelrs with much much sharper claws and spiked similar to those on spiked shield growing all over upper section of gauntlets.\n\n");
+	AetherTwinsShape = "Sky-tier Gaunlets";
+	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 0) {
+		one = player.statusEffectv1(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 1, -one);
+	}
+	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 15) {
+		two = player.statusEffectv2(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 15));
+	}
+	doNext(aethertwinsFollowersMorphMain);
+	cheatTime(1/6);
+}
+
+public function aethertwinsFollowersEvolutionsMain():void {
+	menu();
+	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuClaws && AetherTwinsTalkMenu < 1) addButton(0, "HtGauntl", aethertwinsFollowersEvolutionsToHumanTierGaunlets);
+	else if (AetherTwinsTalkMenu > 0) addButtonDisabled(0, "HtGauntl", "They already unlocked Human-tier Gauntlets form.");
+	else addButtonDisabled(0, "HtGauntl", "They not yet ate enough nutriments to evolve into this shape.");
+	if (AetherTwinsFoodMenuSpikeLShield && AetherTwinsFoodMenuHGaunt && AetherTwinsFoodMenuBFGauntlets && AetherTwinsFoodMenuLustyClaws && AetherTwinsFoodMenuTin == 2 && AetherTwinsFoodMenuCopper == 2 && AetherTwinsFoodMenuIron == 2 && AetherTwinsFoodMenuSilver == 2 && AetherTwinsFoodMenuGold == 2 && AetherTwinsFoodMenu1 == false) addButton(1, "StGauntl", aethertwinsFollowersEvolutionsToSkyTierGaunlets);
+	else if (AetherTwinsFoodMenu1 = true) addButtonDisabled(1, "StGauntl", "They already unlocked Sky-tier Gauntlets form.");
+	else addButtonDisabled(1, "StGauntl", "They not yet ate enough nutriments to evolve into this shape.");
+	addButton(14, "Back", aethertwinsFollowers);
+}
+private function aethertwinsFollowersEvolutionsToHumanTierGaunlets():void {
+	clearOutput();
+	outputText("\"<i>Woohoo we're evolving.</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
+	outputText("<b>The Aether Twins base form evolved unlocking some of their sealed memories.</b>\n\n");
+	player.createStatusEffect(StatusEffects.AetherTwins1, 0, 5, 0, 0);
+	AetherTwinsShape = "Human-tier Gaunlets";
+	AetherTwinsFoodMenuTin = 0;
+	AetherTwinsFoodMenuTinCap = 2;
+	AetherTwinsFoodMenuCopper = 0;
+	AetherTwinsFoodMenuCopperCap = 2;
+	AetherTwinsFoodMenuIron = 0;
+	AetherTwinsFoodMenuIronCap = 2;
+	AetherTwinsFoodMenuSilver = 0;
+	AetherTwinsFoodMenuSilverCap = 2;
+	AetherTwinsFoodMenuGold = 0;
+	AetherTwinsFoodMenuGoldCap = 2;
+	AetherTwinsTalkMenu = 1;
+	doNext(aethertwinsFollowersMorphMain);
+	cheatTime(1/6);
+}
+private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
+	clearOutput();
+	outputText("\"<i>Woohoo it's that feeling again... We're evolving again...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Curvier Sharper!!!</i>\"\n\n");
+	outputText("<b>The Aether Twins base form evolved second time unlocking option to switch between current form and pre-evolution one.</b>\n\n");
+	player.addStatusValue(StatusEffects.AetherTwins1, 2, 10);
+	AetherTwinsShape = "Sky-tier Gaunlets";
+	AetherTwinsFoodMenu1 = true;
+	AetherTwinsFoodMenuTin -= 2;
+	AetherTwinsFoodMenuTinCap += 2;
+	AetherTwinsFoodMenuCopper -= 2;
+	AetherTwinsFoodMenuCopperCap += 2;
+	AetherTwinsFoodMenuIron -= 2;
+	AetherTwinsFoodMenuIronCap += 2;
+	AetherTwinsFoodMenuSilver -= 2;
+	AetherTwinsFoodMenuSilverCap += 2;
+	AetherTwinsFoodMenuGold -= 2;
+	AetherTwinsFoodMenuGoldCap += 2;
+	AetherTwinsFoodMenuAmethyst = 0;
+	AetherTwinsFoodMenuAmethystCap = 2;
+	AetherTwinsFoodMenuDiamond = 0;
+	AetherTwinsFoodMenuDiamondCap = 2;
+	doNext(aethertwinsFollowersMorphMain);
+	cheatTime(1/6);
+}
+private function aethertwinsFollowersEvolutionsTo():void {
+	clearOutput();
+	
+	doNext(aethertwinsFollowersMorphMain);
+	cheatTime(1/6);
+}
+
+private function takeAetherD():void {
+	clearOutput();
+	weapons.AETHERD.useText();
+	player.weapon.removeText();
+	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 2;
+	var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
+	if (item == null) doNext(aethertwinsFollowers);
+	else inventory.takeItem(item, aethertwinsFollowers);
+}
+private function takeAetherS():void {
+	clearOutput();
+	shields.AETHERS.useText();
+	player.shield.removeText();
+	if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] < 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 2;
+	var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
+	if (item == null) doNext(aethertwinsFollowers);
+	else inventory.takeItem(item, aethertwinsFollowers);
 }
 	}
 }//do 781 linii na razie dodawać ^^

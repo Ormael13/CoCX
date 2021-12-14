@@ -6,6 +6,7 @@ package classes.Items.Consumables
 import classes.Appearance;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
+import classes.BodyParts.Eyes;
 import classes.BodyParts.Gills;
 import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
@@ -13,6 +14,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
@@ -116,7 +118,7 @@ public class BeeHoney extends Consumable
 			//(removes tentacle hair status, restarts hair growth if not prevented by reptile status)
 			//Intelligence Boost
 			if (changes < changeLimit && Utils.rand(2) == 0) {
-				player.MutagenBonus("int", 0.1 * (80 - player.inte));
+				player.MutagenBonus("int", 1);
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.");
 				changes++;
 			}
@@ -124,10 +126,9 @@ public class BeeHoney extends Consumable
 			//No idears
 			//Appearance Stuff
 			//Hair Color
-			if (changes < changeLimit && (player.hairColor != "shiny black" && player.hairColor != "black and yellow") && player.lowerBody != LowerBody.GARGOYLE && player.hairLength > 10 && Utils.rand(5) == 0) {
+			if (changes < changeLimit && !InCollection(player.hairColor, BeeGirlScene.beeHair) && player.lowerBody != LowerBody.GARGOYLE && player.hairLength > 10 && Utils.rand(5) == 0) {
 				outputText("\n\nYou feel your scalp tingling, and you grab your hair in a panic, pulling a strand forward.  ");
-				if (Utils.rand(9) == 0) player.hairColor = "black and yellow";
-				else player.hairColor = "shiny black";
+				player.hairColor = randomChoice(BeeGirlScene.beeHair);
 				outputText("Your hair is now [haircolor], just like a bee-girl's!");
 				changes++;
 			}
@@ -157,6 +158,12 @@ public class BeeHoney extends Consumable
 				CoC.instance.transformations.AntennaeBee.applyEffect();
 				changes++;
 			}
+			//Eyes
+			if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\n");
+				CoC.instance.transformations.EyesSandTrap.applyEffect();
+				changes++;
+			}
 			//Horns
 			if (changes < changeLimit && player.horns.count > 0 && player.lowerBody != LowerBody.GARGOYLE && Utils.rand(3) == 0) {
 				outputText("\n\n");
@@ -166,7 +173,7 @@ public class BeeHoney extends Consumable
 			// Chitin
 			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW || player.skin.coat.type != Skin.CHITIN || player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
 				outputText("\n\n");
-				CoC.instance.transformations.SkinChitin(Skin.COVERAGE_LOW, {color:"yellow",	color2:"black",	pattern:Skin.PATTERN_BEE_STRIPES}).applyEffect();
+				CoC.instance.transformations.SkinPatternBeeStripes.applyEffect();
 				changes++;
 			}
 			//Bee Legs
@@ -224,7 +231,6 @@ public class BeeHoney extends Consumable
 				CoC.instance.transformations.WingsBeeLarge.applyEffect();
 				changes++;
 			}
-
 			//Grow new bee wings if player has none.
 			if (changes < changeLimit && player.wings.type == Wings.NONE && Utils.rand(4)) {
 				outputText("\n\n");
@@ -244,7 +250,6 @@ public class BeeHoney extends Consumable
 				CoC.instance.transformations.GillsNone.applyEffect();
 				changes++;
 			}
-
 			if (special) { //All the special honey effects occur after any normal bee transformations (if the player wasn't a full bee morph)
 				//Cock growth multiplier.
 				var mult:int = 1.0;

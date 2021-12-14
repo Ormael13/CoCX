@@ -78,7 +78,7 @@ public class GoblinWarrior extends Goblin
 			this.skinTone = "dark green";
 			this.hairColor = "red";
 			this.hairLength = 4;
-			initStrTouSpeInte(75, 50, 70, 72);
+			initStrTouSpeInte(75, 60, 70, 72);
 			initWisLibSensCor(70, 45, 45, 60);
 			this.weaponName = "sword and shield";
 			this.weaponVerb = "slash";
@@ -95,6 +95,7 @@ public class GoblinWarrior extends Goblin
 			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
+					add(consumables.PONAILS,2).
 					add(jewelries.POWRRNG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,

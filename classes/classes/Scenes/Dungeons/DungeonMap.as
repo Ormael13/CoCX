@@ -741,7 +741,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 64) {
+				else if (DungeonAbstractContent.dungeonLoc == 65) {
 					rawOutputText(", Great Hall");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -2247,4 +2247,4 @@ else if (SceneLib.d3._currentRoom == "southwestcourtyard") {
 		
 	}
 
-}
+}

@@ -27,9 +27,8 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		
 		public function enterDungeon():void {
 			inDungeon = true;
-			dungeonLoc = 169;
-			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] == 1 && flags[kFLAGS.TIFA_FOLLOWER] < 6) room1Pass();
-			playerMenu();
+			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 2.75) room1Pass();
+			else room1South();
 		}
 		
 		public function exitDungeon():void {
@@ -40,6 +39,8 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		private function room1Pass():void {
+			clearOutput();
+			dungeonLoc = 169;
 			outputText("As vague as the directions from that bee-girl were, you still managed to find the path she was indicating, and now you find yourself staring at the \"Hive\" she was talking about. It's quite an impressive sight, an edifice of wax built around the trees of the Deepwoods, it's almost the size of a small hill, it’s top reaching for the canopy and its sides vanishing into the gloom on either side of your vision. ");
 			outputText("Fortunately, there are no battles being fought in your path, despite the mental image of her usage of the word \"siege\" had invoked, and you can see an entrance into the hive. Unfortunately, it's not unguarded.\n\n");
 			outputText("There are two creatures standing in your way, and they could be identical twin sisters. They look like the bee-girls you have seen in the Forest... and yet they couldn't be more different. They're huge, easily seven feet tall and while their breasts aren't exactly small, their physiques can only be described as amazonian, with muscles visibly rippling under their tanned yellow skin even from here. ");
@@ -60,6 +61,8 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 					outputText("Apologising, you hurry past them before they realize you aren't actually one of them.\n\n");
 				}
 				EngineCore.awardAchievement("Buzz Off", kACHIEVEMENTS.DUNGEON_BUZZ_OFF);
+				flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 2.75;
+				doNext(playerMenu);
 			}
 			else {
 				outputText("You tell them that you come in peace, trying to look non-threatening as you approach.\n\n");
@@ -122,20 +125,22 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		private function room3():void {
-			if (flags[kFLAGS.TIFA_FOLLOWER] == 3) outputText("You go back to the blocked path trying to find a way to open it.");
-			else {
-				outputText("As you make your way through the lambent hallway, it opens up to a beautiful golden-roofed atrium, letting sunlight pour in from above. However, your progress is hindered due to a few large bookshelves in your way which you notice have been hastily pushed into position to barricade the entrance.\n\n");
-				outputText("Despite your efforts, they do not budge and you realize why. A very dark translucent material is used as a makeshift glue, bonding the bookcases together. Further inspection reveals it to be very reminiscent of caramel. Short of licking it away, you would be hard pressed to remove the hard, congealed substance.");
-			}
-			outputText(" As you silently fume and ponder the situation, a voice suddenly calls out from behind the shelves with an angry buzzing accompanying it.\n\n\"<i>Begone intruderzzz! You zzzhall not pazzz!</i>\" the voice shouts"+(silly() ? ", emphasizing her last statement with a <i>thump</i> sounding like if someone broke a bridge with a staff":"")+".\n\n");
-			if (flags[kFLAGS.TIFA_FOLLOWER] == 0) {
-				outputText("You decide to come back later as you have no way to convince this bee to let you in.\n\n");
-				flags[kFLAGS.TIFA_FOLLOWER] = 1;
-			}
-			else {
-				outputText("In return, you quickly explain who you are, and the situation with the other princesses and how Bridgess told you to find Tifa. This causes the voice to put on a more quizzical buzz than a threatening one.\n\n");
-				outputText("\"<i>Normally I wouldn’t believe that zzzteaming load, but you don’t zzzound like a local, zzzo I guezzz you can come in. But I warn you, no funny buzzinezzz!</i>\"\n\n");
-				doNext(room3part2);
+			if (flags[kFLAGS.TIFA_FOLLOWER] < 4){
+				if (flags[kFLAGS.TIFA_FOLLOWER] == 3) outputText("You go back to the blocked path trying to find a way to open it.");
+				else {
+					outputText("As you make your way through the lambent hallway, it opens up to a beautiful golden-roofed atrium, letting sunlight pour in from above. However, your progress is hindered due to a few large bookshelves in your way which you notice have been hastily pushed into position to barricade the entrance.\n\n");
+					outputText("Despite your efforts, they do not budge and you realize why. A very dark translucent material is used as a makeshift glue, bonding the bookcases together. Further inspection reveals it to be very reminiscent of caramel. Short of licking it away, you would be hard pressed to remove the hard, congealed substance.");
+				}
+				outputText(" As you silently fume and ponder the situation, a voice suddenly calls out from behind the shelves with an angry buzzing accompanying it.\n\n\"<i>Begone intruderzzz! You zzzhall not pazzz!</i>\" the voice shouts"+(silly() ? ", emphasizing her last statement with a <i>thump</i> sounding like if someone broke a bridge with a staff":"")+".\n\n");
+				if (flags[kFLAGS.TIFA_FOLLOWER] == 0) {
+					outputText("You decide to come back later as you have no way to convince this bee to let you in.\n\n");
+					flags[kFLAGS.TIFA_FOLLOWER] = 1;
+				}
+				else if (flags[kFLAGS.TIFA_FOLLOWER] >= 2){
+					outputText("In return, you quickly explain who you are, and the situation with the other princesses and how Bridgess told you to find Tifa. This causes the voice to put on a more quizzical buzz than a threatening one.\n\n");
+					outputText("\"<i>Normally I wouldn’t believe that zzzteaming load, but you don’t zzzound like a local, zzzo I guezzz you can come in. But I warn you, no funny buzzinezzz!</i>\"\n\n");
+					doNext(room3part2);
+				}
 			}
 		}
 		private function room3part2():void {
@@ -146,7 +151,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			outputText("A magnificent bee woman is standing in front of you, out of breath and panting, with sweat running down her black and yellow fuzz, and antennae drooping slightly. She is wearing a white high-cut tank top giving you an excellent view of her considerable cleavage and waist. Black carapace gauntlets cover her elbows down to her hands, ");
 			outputText("ending in the same fingerless red gloves you saw before. Her large abdomen extends out behind her, connected to her through a hole in her suspended leather mini-skirt, which you notice is extremely damp around her crotch. You smirk as you realize exactly how she ‘procured’ the honey to liquefy the caramel.\n\n");
 			menu();
-			addButton(2, "Talk", room3part3);
+			addButton(1, "Talk", room3part3);
 		}
 		private function room3part3():void {
 			clearOutput();
@@ -154,6 +159,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			outputText("\"<i>If you are seriouzzz about this you will have to get to the throne room which is blocked by a gate that will only open to royal honey. I can grant you accezzz but after that, you are on your own.</i>\"\n\n");
 			outputText("<b>Tifa is following you for now!</b>\n\n");
 			flags[kFLAGS.TIFA_FOLLOWER] = 4;
+			doNext(room3West);
 		}
 		
 		private function room4():void {
@@ -188,6 +194,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		private function room6():void {
+			clearOutput();
 			outputText("As you enter the first thing that hits you is the overpowering smell of honey. At the deepest reach of the room is a large shape of a sex-addled bee you presume to be the queen. Several smaller bees, the corrupted handmaidens, are busily pistoning in and out of a multitude of orifices in her abdomen.\n\n");
 			outputText("As you approach the queen they finally take notice of you.\n\n");
 			outputText("\"<i>Hey, girlzzz therezzz an interloper in the throne room! Letzzz add it to the orgy, mother izzz about to turn and we will need willing incubatorzzz.</i>\"\n\n");
@@ -262,7 +269,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 				outputText("The guards let you pass into the Hive reminding you not to stir troubles.\n\n");
 				outputText("\"<i>You are welcome into the Hive azzz by the queen'zzz orderzzz zzzo long azzz you don’t go further than the honeybrewerzzz hallzzz</i>\"");
 			}
-			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 1) outputText("No one's there to block your path to the Hive, it seems you can proceed.");
+			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 2.5) outputText("No one's there to block your path to the Hive, it seems you can proceed.");
 			else outputText("The two guards fall to the ground, "+(flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] == 2.5 ? "too busy masturbating":"their wounds too great")+" to keep up on fighting. You get past them and enter the Hive.");
 			dungeons.setDungeonButtons(room2Center, null, null, null);
 			addButton(11, "Leave", exitDungeon);
@@ -270,7 +277,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		public function room4East():void {
 			dungeonLoc = 170;
 			clearOutput();
-			room4();
+			if (flags[kFLAGS.TIFA_FOLLOWER] < 2) room4();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Princess cells</b>\n");
 			outputText("Even with the corrupted guard defeated, lingering in this area is dangerous, best not tarry long.");
@@ -293,10 +300,12 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		public function room3West():void {
 			dungeonLoc = 172;
 			clearOutput();
-			room3();
 			outputText("<b><u></u>The Library</b>\n");
-			if (flags[kFLAGS.TIFA_FOLLOWER] > 3) outputText("The library is empty right now.");
-			dungeons.setDungeonButtons(null, null, null, room2Center);
+			room3();
+			if (flags[kFLAGS.TIFA_FOLLOWER] > 3) outputText("The library is empty right now.\n");
+			if ((flags[kFLAGS.TIFA_FOLLOWER] != 2) && (flags[kFLAGS.TIFA_FOLLOWER] != 3)){
+				dungeons.setDungeonButtons(null, null, null, room2Center);
+			}
 		}
 		public function room5North(first:Boolean = true):void {
 			dungeonLoc = 173;

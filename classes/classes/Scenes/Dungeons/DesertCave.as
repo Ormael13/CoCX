@@ -2160,7 +2160,9 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			if((flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) || (flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number))
 				addButton(7,"Free Slaves",slavesDiscussion).hint("Request the Sand Mother to release a slave.");
 			if(player.lust >= 33) addButton(8,"Sex",sexWithFriendlySandMother).hint("Have some sexy time with the Sand Mother.");
-			
+			if (player.hasItem(consumables.BEEHONY)) addButton(9, consumables.AMBROSA.shortName, SandMotherMakesAmbrosia).hint("Ask her to distill a vial of bee honey into a vial of ambrosia. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+			if (!player.hasItem(consumables.BEEHONY)) addButtonDisabled(9,consumables.AMBROSA.shortName, "Ask her to distill a vial of bee honey into a vial of ambrosia. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+			if (player.gems < 25) addButtonDisabled(9,consumables.AMBROSA.shortName, "Ask her to distill a vial of bee honey into a vial of ambrosia. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
 			addButton(14,"Leave",playerMenu);
 		}
 
@@ -2279,7 +2281,22 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			}
 			addButton(4,"Back",sandWitchMotherFriendlyMenu);
 		}
-
+		
+		public function SandMotherMakesAmbrosia():void {
+			clearOutput();
+			if (player.gems < 25) {
+				outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" the Sand Mother says.");
+				doNext(sandWitchMotherFriendlyMenu);
+				return;
+			}
+			player.destroyItems(consumables.BEEHONY, 1);
+			player.gems -= 25;
+			statScreenRefresh();
+			outputText("You hand over a vial of bee honey and the 25 gems.");
+			outputText("\n\n\"<i>I'll see what I can do,</i>\" she says as she takes the bee honey and disapears from your sight. ");
+			outputText("\n\nA few minutes later, she comes back with the crystal vial that contains glittering liquid.  \"<i>It's ready,</i>\" she says. She hands you over the vial of ambrosia and goes back to working.  ");
+			inventory.takeItem(consumables.AMBROSA, sandWitchMotherFriendlyMenu);
+		}
 
 		public function sandMotherPOMenu():void {
 			if(monster.short != "Sand Mother") {
@@ -3162,7 +3179,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		public function moreCumWitchesPlease():void {
 			clearOutput();
 			//Bimbo version:
-			if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+			if(player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				outputText("Wouldn't it be better if there were like, lots of cum witches, with yummy cocks that you could suck?");
 				outputText("\n\n\"<i>No, it wouldn't,</i>\" the Sand Mother retorts, ending the conversation.");
 				doNext(playerMenu);

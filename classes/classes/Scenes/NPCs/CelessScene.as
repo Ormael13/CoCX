@@ -90,7 +90,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function get isCorrupt():Boolean {
-		return _corruption > 39;
+		return _corruption > 50;
 	}
 
 	public function get isAdult():Boolean {
@@ -279,7 +279,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = _ageShouldDoBirth;
 		}
 		else {
-			if (player.cor > 39){
+			if (player.cor > 50){
 				spriteSelect(SpriteDb.s_celessBlack);
 			}
 			else {
@@ -307,7 +307,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = 1;
 			_name = mainView.nameBox.text;
 			_corruption = 0;
-			if (player.cor > ((80 + player.corruptionTolerance()) / 2)) {
+			if (player.cor > 50) {
 				_corruption = 100;
 			}
 			mainView.nameBox.visible = false;
@@ -344,7 +344,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
 			[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 			[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
-			//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],
+			[weapons.DEMSCYT, weapons.LHSCYTH, null],
 			[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
 			[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
 			[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
@@ -588,7 +588,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
-				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+				if (player.pregnancyIncubation == 0) player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				_age = _ageDidPregnancy;
 				break;
@@ -912,10 +912,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function doHeatOrRut():void{
 		outputText("\n\nLewd images of cocks " +(player.isMaleOrHerm()?"and vaginas":"")+" of all sizes and shapes fill your mind, making you drool in anticipation.\n"+
 		"It seems your daughter’s condition is spreading over to you.");
-		if (!player.inHeat && player.goIntoHeat(true,10)){		//This would put the PC into a 20 day heat/rut tho...
+		if (!player.inHeat && player.goIntoHeat(false)){		//This would put the PC into a 20 day heat/rut tho...
 			outputText("\nYou are now in Heat!");
 		}
-		else if (!player.inRut && player.goIntoRut(true, 10)) {	//This is based on the original.xml source.
+		else if (!player.inRut && player.goIntoRut(false)) {	//This is based on the original.xml source.
 			outputText("\nYou are now in Rut!");
 		}
 		doNext(camp.returnToCampUseOneHour);
@@ -955,7 +955,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function pureChildCorruption():void{
-		if (player.cor > 80){
+		if (player.cor > 50){
 			_corruption++;
 			if (isCorrupt) {
 				menu();

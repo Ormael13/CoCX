@@ -10,7 +10,7 @@ package classes.Items.Weapons
 		public function QueensGuard() 
 		{
 			super("Q.Guard", "Q. Guard", "queen's guard rapier", "a queen's guard rapier", "slash", 20, 2400,
-					" An elegant rapier made in brass and gold, with the seal of Mareth’s former nobility. The ruby gemstones running among the blade and the intricate engravings in gold identify it as belonging to the old kingdom knighthoods orders."
+					" An elegant rapier made in brass and gold, with the seal of Mareth’s former nobility. The ruby gemstones running among the blade and the intricate engravings in gold identify it as belonging to the old kingdom knighthoods orders.", "", "Dueling"
 			);
 		}
 		override public function get attack():Number{

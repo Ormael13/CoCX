@@ -66,7 +66,7 @@ public class TentacleBeast extends Monster
 				SceneLib.desert.antsScene.phyllaTentacleDefeat();
 			}
 			else if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) cleanupAfterCombat();
-			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 1 && rand(10) == 0) {//move to diff stronger variant of tentacle beast later on?
+			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 1 && rand(4) == 0) {// && rand(10) == 0-na razie zamiast 10% szansa podniesiona do 25%		move to diff stronger variant of tentacle beast later on?
 				outputText("\n\nAs the tentacle beast runs away in defeat you discover to your surprise it left behind a somewhat passed out bee girl. At first, you are worried that she might be dead but, as she thankfully regains consciousness, she crawls to you, grabbing your leg for a plea.\n\n");
 				outputText("\"<i>Y..you ought to help uzz, our hive is under siege by corrupted sisterzzz if no one does anything my queen will… she…</i>\"\n\n");
 				outputText("The bee points toward a gigantic structure in the far distance.\n\n");
@@ -193,7 +193,7 @@ public class TentacleBeast extends Monster
 				this.armorMDef = 2;
 				this.bonusHP = 400;
 				this.bonusLust = 122;
-				this.level = 12;
+				this.level = 11;
 			}
 			this.a = "the ";
 			this.imageName = "tentaclebeast";

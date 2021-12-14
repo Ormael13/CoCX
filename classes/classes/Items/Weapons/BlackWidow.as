@@ -10,7 +10,7 @@ package classes.Items.Weapons
 		public function BlackWidow() 
 		{
 			super("BWidow", "B. Widow", "black widow rapier", "a black widow rapier", "slash", 20, 2400,
-					"A rapier that used to belong a deceitful noblewoman, made in a strange, purple metal. Its pommel design looks similar to that of a spiderweb, while the blade and hilt are decorated with amethysts and arachnid-looking engravings."
+					"A rapier that used to belong a deceitful noblewoman, made in a strange, purple metal. Its pommel design looks similar to that of a spiderweb, while the blade and hilt are decorated with amethysts and arachnid-looking engravings.", "", "Dueling"
 			);
 		}
 		override public function get attack():Number{

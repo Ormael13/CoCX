@@ -118,6 +118,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const TENTACLE_EYESTALKS:int = 7;
+		EnumValue.add(Memories, TENTACLE_EYESTALKS, "TENTACLE_EYESTALKS", {
+			id: "Gazer Tentacle Eyestalks Rear Body",
+			name: "Gazer Tentacle Eyestalks",
+			cost: 100,
+			title: "Gazer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.RearBodyTentacleEyestalks;
+			}
+		});
+
+		public static const FROSTWYRM:int = 8;
+		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+			id: "Frostwyrm Rear Body",
+			name: "Frostwyrm Collar",
+			cost: 100,
+			title: "Frostwyrm",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.RearBodyFrostwyrm;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

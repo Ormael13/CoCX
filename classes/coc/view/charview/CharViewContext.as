@@ -44,14 +44,19 @@ import coc.xlogic.ExecContext;
 				{}, // local variables
 				character,
 				{
+					IsEarthElemental: player.perkv1(PerkLib.ElementalBody) == 2,
+					IsFireElemental: player.perkv1(PerkLib.ElementalBody) == 3,
+					IsWaterElemental: player.perkv1(PerkLib.ElementalBody) == 4,
+					IsWindElemental: player.perkv1(PerkLib.ElementalBody) == 1,
 					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
 					CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
+					MindBreakerPussy: player.vaginaType() == VaginaClass.MINDBREAKER,
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					SlimeCore: player.hasPerk(PerkLib.SlimeCore),
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					showClothing: [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing(),
 					showArmClothing: [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
-					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
+					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					PlayerHasViewableOutfit: player.isWearingArmor(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -95,8 +100,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
 					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
-					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
+					PlayerHasDagger: player.isDaggerTypeWeapon(),
+					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
+					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
+
+					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
+					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
 					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
 					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
@@ -222,7 +231,8 @@ import coc.xlogic.ExecContext;
 							player.necklace == game.necklaces.NECKSPE || player.necklace == game.necklaces.NECKSTR || player.necklace == game.necklaces.NECKTOU ||
 							player.necklace == game.necklaces.NECKWIS || player.necklace == game.necklaces.FIRENEC || player.necklace == game.necklaces.ICENECK ||
 							player.necklace == game.necklaces.LIGHNEC || player.necklace == game.necklaces.DARKNEC || player.necklace == game.necklaces.POISNEC ||
-							player.necklace == game.necklaces.LUSTNEC
+							player.necklace == game.necklaces.LUSTNEC,
+					CowBellAmulet: player.necklace == game.necklaces.COWBELL
 				}
 			]);
 			this.charview = charview;

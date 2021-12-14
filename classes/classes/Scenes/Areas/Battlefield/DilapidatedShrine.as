@@ -16,26 +16,32 @@ import classes.GlobalFlags.kFLAGS;
 		public function firstvisitshrineintro():void {
 			flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 2;
 			clearOutput();
-			outputText("As you wander the battlefield, you eventually notice the rundown building in the distance. Intrigued you approach closer seeing a shrine surrounded by a few trees. How could such thing survive in this place where only remains of the massive battle are seen?\n\n");
-			outputText("Entering by what seems of the entrance, well vermillion colored wooden gates would count as one likely and guarded behind the entrance on both sides by beings looking like part lions and part dogs you marvel on their almost life like features. One of them have closed mouth and other opened. Further away there is large plaza with statues located on each cardinal direction.\n\n");
-			outputText("\"<i>What bring you here, young one?</i>\" while you been thinking over the reason of this place existance a voice rings you back to reality. Before you standing an older person judging by it voice clothed in clothes similar to those weared by monk covering it all body including head. It appeared so sudden as moment ago there wasn't anyone standing so close before you.\n\n");
-			outputText("\"<i>You looks confused. Do not mind this old person. I just merely clean up here and there in this shrine of the four gods.</i>\" It talks again and then... vanish. Like literaly you been looking at it and after blinking it no longer there. What the heck is going on here?\n\n");
+			outputText("As you explore the battlefield, you notice a dilapidated building not far from you. You cautiously approach as your curiosity takes hold of you. A sparse amount of trees surround a shrine. It almost sparkles within the faint ambient light.\n\n");
+			outputText("How could such a thing survive in a place where nothing but war has waged?\n\nYou enter what you can only assume to be the entreance. You push open the wooden door. ");
+			outputText("The vermillion hued gates are remarkably crafted, yet you remain wary of potential danger. As the entrance falls behind you, you notice at both your sides rest two statues of strange beings. They seem to be half-lion and half-dog, a creature the likes of which you've never seen. You marvel at their almost life-like features. One stands with its jaw agape, the other with its lips sealed.\n\n");
+			outputText("Deeper into the shrine is a large plaza with statues located on each of your cardinal directions.\n\n");
+			outputText("A voice rings, breaking your thoughts, \"<i>What brings you here, young one?</i>\" Its voice is slightly raspy, clearly aged."+(silly()?" That or they seriously need to stop smoking.":"")+"\n\n");
+			outputText("You turn to face an elderly person, judging by their voice and wear, not unlike something you'd expect a monk to be dressed in. Not an inch of skin is shown, everything is completely sealed within layers of fabric.\n\n");
+			outputText("\"<i>You looks confused. Oh, Don't mind little ol' me. I'm merely cleaning up here and there. I can't let the shrine of the four gods grow dusty, can I?</i>\"\n\n");
+			outputText("You only blink and in that instant, they've vanished. An apparition? Illusion? Best to keep your guard up, lest danger will get the best of you.\n\n");
 			outputText("<b>You have discovered Dilapidated Shrine. You can visit it from Places menu.</b>");
 			mainmenu();
 		}
 		public function repeatvisitshrineintro():void {
 			clearOutput();
-			outputText("You decide to make a trip to the shrine. You enter the sacred ground going throu the vermillion gates and passing by guardian statues.\n\n");
-			if (shinshoku()) outputText("\"<i>Ohh that you again? Not mind me i'm just cleaning here.</i>\" After reaching the yard you hear again a voice and noticing an old person that greeted you returning to sweeping the shrine as if nothing happened.\n\n");
-			outputText("Reaching the main plaza you see four major sections located on each cardinal direction and also three smaller places located between the major one sections.\n\n");
-			outputText("\n\nWhat would you like to do in the shrine?");
+			outputText("You decide to make a trip to the shrine. Entering the sacred grounds, you walk through the vermillion gates, passing the guardian statues.\n\n");
+			if (shinshoku()) outputText("As you reach the yard, you hear a voice again, \"<i>Oh, is that you again? Don't mind me, I'm simply maintaining the dust. They can get so riled up sometimes.</i>\" As you notice them, the old person that greeted you has returned to sweeping the shrine like you aren't even here.\n\n");
+			outputText("Upon reaching the main plaza, you see four major sections located on each cardinal direction. There are three smaller places located between the major wings.\n\n");
+			outputText("You consider where to go or what you should do.");
 			mainmenu();
 		}
 		public function shrinemainmenu():void {
 			clearOutput();
-			outputText("You're at the large plaza with large statues situated on each cardinal direction. Behind each of them there is small buildings decorated with braided ropes with strips of paper and pair of smaller lion-dog statues on sides.\n\n");
-			outputText("On opposite side of entrance there is path leading to small building with many manuscripts stored. On left there are stairs that seems to lead to underground chamber and on the right you can see small garden area.\n\n");
-			outputText("\n\nWhat would you like to do in the shrine?");
+			outputText("You're at the open plaza, large statues situated at each cardinal direction watch over you. Behind each statue are several small buildings decorated with braded ropes, strips of paper and smaller lion-dog statues at the sides.");
+			outputText("At the opposide side of the entrace is a path leading to small building with several manuscripts stored.");
+			outputText("At your left is a set of stairs that seem to lead into an underground chamber.");
+			outputText("At your right, you can see a small garden area.");
+			outputText("You consider what you should do or where to go.");
 			mainmenu();
 		}
 		private function mainmenu():void {
@@ -57,14 +63,14 @@ import classes.GlobalFlags.kFLAGS;
 		
 		private function shrineLibrary():void {
 			clearOutput();
-			outputText("Walking toward the small building you finds yourself inside room that have many shelfs each with some books on them. Despite cleaness of the place you can see marks of time with all the wood furniture looking like it been left uncared for months if not years. In some places you can even see cobweebs. ");
-			outputText("But to your suprise the floor looks like it been freshly cleaned up without a single speck of dust you could find.\n\n");
-			outputText("Aside books there is writings all over the walls that looks like some sort of ancient language, which you can hardly read up. Maybe you should bring someone who knows more about languages of this realm on one of next visits here.\n\n");
+			outputText("As you walk toward the small building, you find yourself inside a room with countless shelves, many of which contain an assortment of books haphazardly strewn on them. Despite the cleanliness of the place, you can see the passage of time on the surrounding furniture. This place seems to have been untouched for months, if not years.\n\n");
+			outputText("You notice in the corners of the room, and beneath a few shelves are cobwebs and dust bunnies, yet the floor is strangely pristine. Did someone recently sweep the place? There's not a speck of dust on the ground.\n\n");
+			outputText("Aside from the books, there are scrawlings over the walls of what seems to be an ancient language. It's almost completely indecipherable. Perhaps you should bring someone who knows more about different languages next time?\n\n");
 			menu();
-			addButtonDisabled(2, "Spellcraft", "Placeholder button until Lia write something on this subject ^^");//story about god of magic			//addButtonDisabled(2, "The Fall", "Placeholder button until Lia write something on this subject ^^");//collection of propercies about gods fall on area later known as battlefield
-			addButtonDisabled(6, "Reaper", "Placeholder button until Lia write something on this subject ^^");//story about god of death/transformation
-			addButtonDisabled(8, "Lifegiver", "Placeholder button until Lia write something on this subject ^^");//story about god of life				//addButtonDisabled(0, "Souless Ones", "Placeholder button until Lia write something on this subject ^^");//story about early days of demons/their uprising (here or other place in mareth?)
-			addButtonDisabled(12, "Warmonger", "Placeholder button until Lia write something on this subject ^^");//story about god of war				//addButtonDisabled(1, "The Descent", "Placeholder button until Lia write something on this subject ^^");//orgin of soul cultivators in Mareth (here or other place in mareth?)
+			addButtonDisabled(2, "Spellcraft", "Placeholder button until one of the writers write something on this subject ^^");//story about god of magic			//addButtonDisabled(2, "The Fall", "Placeholder button until Lia write something on this subject ^^");//collection of propercies about gods fall on area later known as battlefield
+			addButtonDisabled(6, "Reaper", "Placeholder button until one of the writers write something on this subject ^^");//story about god of death/transformation
+			addButtonDisabled(8, "Lifegiver", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of life				//addButtonDisabled(0, "Souless Ones", "Placeholder button until Lia write something on this subject ^^");//story about early days of demons/their uprising (here or other place in mareth?)
+			addButtonDisabled(12, "Warmonger", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of war				//addButtonDisabled(1, "The Descent", "Placeholder button until Lia write something on this subject ^^");//orgin of soul cultivators in Mareth (here or other place in mareth?)
 			addButton(14, "Back", shrinemainmenu);
 		}
 		
@@ -85,13 +91,66 @@ import classes.GlobalFlags.kFLAGS;
 		
 		private function westSection():void {
 			clearOutput();
-			outputText("Standing inside the building located on west direction you see a statue in middle of it, which portrait hideous yet seemly mesmerizing being. Nearly each of it bodypart seems to come from different animal you have seen in this realm, yet all together seems to create harmonical whole despite all this mismatched parts. On it arms grows two sharp extensions, ");
-			outputText("that reminds mantis blade on it right arm and kamaitachi blade on it left, like an reaper scythes ready to be used at moment notice. It eyes seems to be only part that isn't misfitting looking suprisingly same, with a x shaped cross over them. At the base of the statue there is plate but due to partial rusty state of it the texts on it reads as 'E.e.ie.'. ");
-			outputText("Before it lays on the ground two medium sized plates, probably used to put on offering at times there was more visitors.\n\n");
+			outputText("Westward within the building, you see a statue in an open clearing. The towering figure portrays a hideously mesmerizing creature frozen in an aggressive pose as if it were watching you with scorn. Each limb comes from a different animal you have seen in this realm, yet all together seems to create a harmonical whole despite the chaotic ensemble.\n\n");
+			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis blade, while the right arm is a kamaitachi blade. The statue wields each arm, seemingly ready to make a move, yet almost inviting as if it wishes to guide you somewhere.\n\n");
+			outputText("Its eyes seem ordinarily human-like, with an x shaped cross for pupils.\n\n");
+			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
+			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
+			if (shinshoku()) {
+				outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
+				outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
+			}
 			//outputText("\n\n");
 			menu();
-			addButtonDisabled(0, "???", "???");//offering button or some other function
+			if (player.hasItem(consumables.CHILLYP, 3)) addButton(0, "Offering", westSectionOffering);
+			else addButtonDisabled(0, "???", "Perhaps if you came back with Chilly peppers, like the voice said...");
 			addButton(14, "Back", shrinemainmenu);
+		}
+		private function westSectionOffering():void {
+			clearOutput();
+			player.destroyItems(consumables.CHILLYP, 3);
+			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
+			switch(rand(10)) {
+				case 0:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
+				case 1:
+					outputText("in the other bowl, a small, glowing syringe.");
+					inventory.takeItem(useables.E_ICHOR, westSection);
+					break;
+				case 2:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
+				case 3:
+					outputText("and a bottle of Nocello sitting in front of the statue.");
+					inventory.takeItem(consumables.NOCELIQ, westSection);
+					break;
+				case 4:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
+				case 5:
+					outputText("and a single Storm Seed rests in the other bowl.");
+					inventory.takeItem(consumables.SRMSEED, westSection);
+					break;
+				case 6:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
+				case 7:
+					outputText("replaced by a familiar looking bottle of Enigmanium.");
+					inventory.takeItem(consumables.ENIGMANIUM, westSection);
+					break;
+				case 8:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
+				case 9:
+					outputText("instead, a bottle of Infernal Wine sits before the statue.");
+					inventory.takeItem(consumables.INFWINE, westSection);
+					break;
+			}
+			outputText("\n\n")
+			menu();
+			doNext(westSection);
+			cheatTime(1/12);
 		}
 		
 		private function shrineShinshoku():void {
@@ -118,9 +177,11 @@ import classes.GlobalFlags.kFLAGS;
 		
 		private function southSection():void {
 			clearOutput();
-			outputText("Standing inside the building located on south direction you see a few statues in middle of it, with largest one portraiting being at peak of it power. Interesting how crafter capture traits of the being making it even statue to giving the same feeling when watching it. If you had to put it into words... you almsot can still feel that being 'killing intent'. ");
-			outputText("All surrounding it smaller ones figures looks like they all under some sort of berserker state and recklesly swinging their dual weapons around, each wielding different type of them.  At the base of the statue there is plate but due to partial rusty state of it the texts on it reads as 'Krat..'. ");
-			outputText("Before it lays on the ground medium sized plate, probably used to put on offering at times there was more visitors.\n\n");
+			outputText("Southward within the building, you see a group of statues in an open clearing. The largest one portrays a being, one of peak strength and power.\n\n");
+			outputText("It's magnificent, how crafter manages to capture traits of the being's power allows the statue to radiate awe as you gaze toward it. It's as if the figure is filled with the intent to slay and destroy anything that stands in its way.\n\n");
+			outputText("The surrounding statuettes wield weapons high. Each one carrying dual weapons of a different caliber. Axes, blades, warhammers, almost recklessly waving their weapons about.\n\n");
+			outputText("At the base of the largest statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out 'Krat..' within the text.\n\n");
+			outputText("Below the plaque lies an ornate wooden bowl, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
 			menu();
 			addButton(14, "Back", shrinemainmenu);
 		}
