@@ -50,7 +50,7 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 			outputText("The two guards fall to the ground, " + (hpVictory ? "their wounds too great":"too busy masturbating") + " to keep up on fighting. You get past them and enter the Hive.");
 			if (hpVictory) flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 2;
 			else flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 2.5;
-			SceneLib.combat.finishCombat();
+			cleanupAfterCombat();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
