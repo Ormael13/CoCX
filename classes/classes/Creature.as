@@ -353,6 +353,34 @@ public class Creature extends Utils
 		public var wisStat:PrimaryStat;
 		public var libStat:PrimaryStat;
 		public var sensStat:BuffableStat;
+		
+		// auxiliary stats
+		
+		public var maxHpBaseStat: BuffableStat;
+		public var maxHpPerLevelStat: BuffableStat;
+		public var maxHpMultStat: BuffableStat;
+		public var maxLustBaseStat: BuffableStat;
+		public var maxLustPerLevelStat: BuffableStat;
+		public var maxLustPerLibStat: BuffableStat;
+		public var maxLustMultStat: BuffableStat;
+		public var maxWrathBaseStat: BuffableStat;
+		public var maxWrathPerLevelStat: BuffableStat;
+		public var maxWrathMultStat: BuffableStat;
+		public var maxFatigueBaseStat: BuffableStat;
+		public var maxFatiguePerLevelStat: BuffableStat;
+		public var maxFatiguePerSpeStat: BuffableStat;
+		public var maxFatigueMultStat: BuffableStat;
+		public var maxManaBaseStat: BuffableStat;
+		public var maxManaPerLevelStat: BuffableStat;
+		public var maxManaPerIntStat: BuffableStat;
+		public var maxManaPerWisStat: BuffableStat;
+		public var maxManaMultStat: BuffableStat;
+		public var maxSfBaseStat: BuffableStat;
+		public var maxSfPerLevelStat: BuffableStat;
+		public var maxSfPerWisStat: BuffableStat;
+		public var maxSfMultStat: BuffableStat;
+		
+		public var spellpowerStat: BuffableStat;
 
 		private var _stats: StatStore;
 
@@ -482,8 +510,8 @@ public class Creature extends Utils
 			return 10;
 		}
 		protected function maxHP_base():Number {
-			var max:Number = 0;
-			var multimax:Number = 1;
+			var max:Number = maxHpBaseStat.value;
+			var multimax:Number = maxHpMultStat.value;
 			if (hasPerk(PerkLib.IcyFlesh)) {
 				max += int(inte * 2 + 50);
 				if (inte >= 21) max += Math.round(inte);
@@ -594,7 +622,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionHardiness)) max += perkv1(PerkLib.AscensionHardiness) * 400;
 			if (hasPerk(PerkLib.ChiReflowDefense)) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-			max += level * 60;
+			max += level * maxHpPerLevelStat.value;
 			if (level <= 6) max += level * 60;
 			if (hasPerk(PerkLib.UnlockBody)) max += level * 60;
 			if (hasPerk(PerkLib.UnlockBody2ndStage)) max += level * 60;
@@ -676,41 +704,9 @@ public class Creature extends Utils
 			return 0;
 		}
 		protected function maxLust_base():Number {
-			var max:Number = 100;
-			var multimax:Number = 1;
-			if (hasPerk(PerkLib.InhumanDesireI)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireII)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireIII)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireIV)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireV)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireVI)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.BasicSelfControl)) max += 45;
-			if (hasPerk(PerkLib.HalfStepToImprovedSelfControl)) max += 75;
-			if (hasPerk(PerkLib.ImprovedSelfControl)) max += 120;
-			if (hasPerk(PerkLib.HalfStepToAdvancedSelfControl)) max += 180;
-			if (hasPerk(PerkLib.AdvancedSelfControl)) max += 300;
-			if (hasPerk(PerkLib.HalfStepToSuperiorSelfControl)) max += 480;
-			if (hasPerk(PerkLib.SuperiorSelfControl)) max += 750;
-			if (hasPerk(PerkLib.HalfStepToPeerlessSelfControl)) max += 1050;
-			if (hasPerk(PerkLib.PeerlessSelfControl)) max += 1500;
-			if (hasPerk(PerkLib.HalfStepToInhumanSelfControl)) max += 2250;
-			if (hasPerk(PerkLib.InhumanSelfControl)) max += 3000;
-			if (hasPerk(PerkLib.HalfStepToEpicSelfControl)) max += 4500;
-			if (hasPerk(PerkLib.EpicSelfControl)) max += 6750;
-			if (hasPerk(PerkLib.HalfStepToLegendarySelfControl)) max += 10500;
-			if (hasPerk(PerkLib.LegendarySelfControl)) max += 15000;
-			if (hasPerk(PerkLib.HalfStepToMythicalSelfControl)) max += 22500;
-			if (hasPerk(PerkLib.MythicalSelfControl)) max += 30000;
-			if (hasPerk(PerkLib.Mage)) max += 15;
-			if (hasPerk(PerkLib.GrandMage)) max += 30;
-			if (hasPerk(PerkLib.Archmage)) max += 45;
-			if (hasPerk(PerkLib.GrandArchmage)) max += 60;
-			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) max += 75;
-			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) max += 90;
-			if (hasPerk(PerkLib.GreyMageApprentice)) max += 20;
-			if (hasPerk(PerkLib.GreyMage)) max += 40;
-			if (hasPerk(PerkLib.GreyArchmage)) max += 80;
-			if (hasPerk(PerkLib.GrandGreyArchmage)) max += 160;
+			var max:Number = maxLustBaseStat.value;
+			var multimax:Number = maxLustMultStat.value;
+			max += maxLustPerLibStat.value*lib;
 			if (hasPerk(PerkLib.ElementalBondUrges)) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -730,34 +726,13 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsFireE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsFireE);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsWaterE);
 			}
-			if (hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.FutaForm)) max += 60;
-			if (hasPerk(PerkLib.OmnibusGift)) max += 45;
-			if (hasPerk(PerkLib.JobCourtesan)) max += 60;
-			if (hasPerk(PerkLib.JobSeducer)) max += 30;
-			if (hasPerk(PerkLib.GreyMagic)) max += 30;
-			if (hasPerk(PerkLib.PrestigeJobGreySage)) max += 300;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (375 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionDesires)) max += perkv1(PerkLib.AscensionDesires) * 30;
-			max += level * 3;
+			max += level * maxLustPerLevelStat.value;
 			if (level <= 6) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor)) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor2ndStage)) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor3rdStage)) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor4thStage)) max += level * 3;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential)) max += level * 6;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) max += level * 6;
-			if (hasPerk(PerkLib.DemonicDesireI)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireII)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireIII)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireVI)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireV)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireVI)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerHeart1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerHeart2ndStage)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.2;
 			max *= multimax;
 			max = Math.round(max);
 			return max;
@@ -1217,16 +1192,68 @@ public class Creature extends Utils
 			wisStat = new PrimaryStat(this,'wis');
 			libStat = new PrimaryStat(this,'lib');
 			sensStat = new BuffableStat(this,'sens', {base:15, min:0});
+			
+			maxHpBaseStat = new BuffableStat(this, 'maxhp_base', {base:0});
+			maxHpPerLevelStat = new BuffableStat(this, 'maxhp_perlevel', {base:60});
+			maxHpMultStat = new BuffableStat(this, 'maxhp_mult', {base:1});
+			maxLustBaseStat = new BuffableStat(this, 'maxlust_base', {base:100});
+			maxLustPerLevelStat = new BuffableStat(this, 'maxlust_perlevel', {base:3});
+			maxLustPerLibStat = new BuffableStat(this, 'maxlust_perlib', {base:0});
+			maxLustMultStat = new BuffableStat(this, 'maxlust_mult', {base:1});
+			maxWrathBaseStat = new BuffableStat(this, 'maxwrath_base', {base:500});
+			maxWrathPerLevelStat = new BuffableStat(this, 'maxwrath_perlevel', {base:5});
+			maxWrathMultStat = new BuffableStat(this, 'maxwrath_mult', {base:1});
+			maxFatigueBaseStat = new BuffableStat(this, 'maxfatigue_base', {base:150});
+			maxFatiguePerLevelStat = new BuffableStat(this, 'maxfatigue_perlevel', {base:5});
+			maxFatiguePerSpeStat = new BuffableStat(this, 'maxfatigue_perlevel', {base:0});
+			maxFatigueMultStat = new BuffableStat(this, 'maxfatigue_mult', {base:1});
+			maxManaBaseStat = new BuffableStat(this, 'maxmana_base', {base:300});
+			maxManaPerLevelStat = new BuffableStat(this, 'maxmana_perlevel', {base:10});
+			maxManaPerIntStat = new BuffableStat(this, 'maxmana_perint', {base:0});
+			maxManaPerWisStat = new BuffableStat(this, 'maxmana_perwis', {base:0});
+			maxManaMultStat = new BuffableStat(this, 'maxmana_mult', {base:1});
+			maxSfBaseStat = new BuffableStat(this, 'maxsf_base', {base:50});
+			maxSfPerLevelStat = new BuffableStat(this, 'maxsf_perlevel', {base:5});
+			maxSfPerWisStat = new BuffableStat(this, 'maxsf_perwis', {base:0});
+			maxSfMultStat = new BuffableStat(this, 'maxsf_mult', {base:1});
+			
+			spellpowerStat = new BuffableStat(this, 'spellpower', {base:1});
 
-			_stats = new StatStore({
-				'str': strStat,
-				'tou': touStat,
-				'spe': speStat,
-				'int': intStat,
-				'wis': wisStat,
-				'lib': libStat,
-				'sens': sensStat
-			});
+			_stats = new StatStore([
+				strStat,
+				touStat,
+				speStat,
+				intStat,
+				wisStat,
+				libStat,
+				sensStat,
+				
+				maxHpBaseStat,
+				maxHpPerLevelStat,
+				maxHpMultStat,
+				maxLustBaseStat,
+				maxLustPerLevelStat,
+				maxLustPerLibStat,
+				maxLustMultStat,
+				maxWrathBaseStat,
+				maxWrathPerLevelStat,
+				maxWrathMultStat,
+				maxFatigueBaseStat,
+				maxFatiguePerLevelStat,
+				maxFatiguePerSpeStat,
+				maxFatigueMultStat,
+				maxManaBaseStat,
+				maxManaPerLevelStat,
+				maxManaPerIntStat,
+				maxManaPerWisStat,
+				maxManaMultStat,
+				maxSfBaseStat,
+				maxSfPerLevelStat,
+				maxSfPerWisStat,
+				maxSfMultStat,
+				
+				spellpowerStat
+			]);
 
 			skin = new Skin(this);
 			underBody = new UnderBody(this);
