@@ -9,7 +9,7 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 	public function BloodFieldSpell() {
 		super(
 				"Blood Field",
-				"Blood Field will form field on the ground that would slow down enemies, drain their health and heal the caster.",
+				"Blood Field will coat the ground in tacky-wet blood infused with your mana. The mass will slow down enemies, drain their health and heal the caster.",
 				TARGET_ENEMY,
 				TIMING_LASTING,
 				[TAG_DEBUFF]
@@ -52,7 +52,7 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
-			outputText("It roils as you concentrate on it before aim the orb at the ground, it brusts and seeps into it causing to appear a crimson field beneath your feet that start spread around until it cover large area. Additionaly small blood thorns grows from it imparing your enem" + (monster.plural ? "es":"y") + " movements.\n\n");
+			outputText("It roils as you concentrate on it before aim the orb at the ground. Bursting on impact, the blood forms tendrils, spreading its mass across the battlefield. As you watch, small spines of crystalized blood form on the surface. When you touch them, they bend, but your enem" + (monster.plural ? "es":"y") + " won't be as lucky.\n\n");
 		}
 		player.createStatusEffect(StatusEffects.BloodField,calcDuration(),calcPower(),0,0);
 		if (!monster.isFlying()) {

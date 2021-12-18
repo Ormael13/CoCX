@@ -131,6 +131,9 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
 			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
+			if (player.race() == "mindbreaker") {
+				miscStats += "<b>Mindbroken Minions:</b> " + player.perkv1(PerkLib.MindbreakerBrain1toX) + "\n";
+			}
 		}
 
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
