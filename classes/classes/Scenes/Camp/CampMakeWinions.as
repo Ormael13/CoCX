@@ -212,7 +212,7 @@ public class CampMakeWinions extends BaseContent
 		public function makeTemporalStoneGolem():void {
 			clearOutput();
 			if (player.mana < temporalGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -222,7 +222,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] == maxTemporalGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("You try to place your new golem into your bag, but it's already full. You groan, annoyed at your embarassing mistake.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -230,7 +230,7 @@ public class CampMakeWinions extends BaseContent
 			else player.destroyItems(useables.GOLCORE, 1);
 			useMana(temporalGolemMakingCost());
 			statScreenRefresh();
-			outputText("You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You draw a seal in the ground, placing a ring of stones along the inside edge. Next, you put the golem core in the middle of the seal, with another line of smaller stones around the core. With the groundwork done, you stand back and begin to chant, mana flowing from your hands into the seal. The stones glow, the smaller ring coating the core as it rises from the ground. One by one, the stones on the outer ring leap from the earth, attaching to the core and forming a rough bumanoid shape, just over six feet tall. The golem stands, the seal vanishing from the earth. You order the newly created golem to come to you, storing it in your golem bag.");
 			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] < 1) flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.TEMPORAL_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
@@ -240,7 +240,7 @@ public class CampMakeWinions extends BaseContent
 		public function makeTemporalStoneGolems():void {
 			clearOutput();
 			if (player.mana < (temporalGolemMakingCost() * 5)) {
-				outputText("Your mana is too low to finish golems creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -250,7 +250,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > (maxTemporalGolemsBagSize() - 5)) {
-				outputText("You not having enough space to store all five.");
+				outputText("You try to place your new golem into your bag, but it's already full. You groan, annoyed at your embarassing mistake.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -258,7 +258,7 @@ public class CampMakeWinions extends BaseContent
 			else player.destroyItems(useables.GOLCORE, 5);
 			useMana(temporalGolemMakingCost() * 5);
 			statScreenRefresh();
-			outputText("You draw a complex seal on the ground with 5 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
+			outputText("You draw five seals in the ground, each with a ring of stones, golem core in the middle and another line of smaller stones. With the groundwork done, you stand back and begin to chant, mana flowing from your hands into the seals. The stones glow, the smaller rings coating the five cores as they rise from the ground. One by one, the stones cover the cores, forming five rough bumanoid shapes. The golems stand, the seals vanishing from the earth. You order the newly created golems to come to you, storing them in your golem bag.");
 			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 5;
 			doNext(accessMakeWinionsMainMenu);
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) eachMinuteCount(15);
@@ -267,7 +267,7 @@ public class CampMakeWinions extends BaseContent
 		public function makeTemporalStoneGolemsMore():void {
 			clearOutput();
 			if (player.mana < (temporalGolemMakingCost() * 20)) {
-				outputText("Your mana is too low to finish golems creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -277,7 +277,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > (maxTemporalGolemsBagSize() - 20)) {
-				outputText("You not having enough space to store all twenty.");
+				outputText("Your golem bag may be able to store 20 golems, but you still have too many.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -285,7 +285,7 @@ public class CampMakeWinions extends BaseContent
 			else player.destroyItems(useables.GOLCORE, 20);
 			useMana(temporalGolemMakingCost() * 20);
 			statScreenRefresh();
-			outputText("You draw a complex seal on the ground with 20 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
+			outputText("You draw a complex seal on the ground with 20 node points, complete with golem core and a pile of stones. Once done, you stand back and begin to seep your mana into the seal. Each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
 			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 20;
 			doNext(accessMakeWinionsMainMenu);
 			eachMinuteCount(40);
@@ -303,17 +303,17 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
-				outputText("You lack elemental shard to finish golem creation.");
+				outputText("You don't have the elemental shards you need to upgrade your golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 10) {
-				outputText("You lack high quality stones to use as body for your new golem.");
+				outputText("You lack high quality stones to use as the body for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] == maxPermanentStoneGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("There's no more space in your golem bag.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -332,22 +332,22 @@ public class CampMakeWinions extends BaseContent
 		public function makePermanentImprovedStoneGolem():void {
 			clearOutput();
 			if (player.mana < permanentImprovedStoneGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (!player.hasItem(useables.GOLCORE, 3) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 3) {
-				outputText("You lack golem cores to finish golem creation.");
+				outputText("You lack golem cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 1) {
-				outputText("You lack energy core to use as power source for your new golem.");
+				outputText("You don't have an energy core. No power, no golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
-				outputText("You lack elemental shard to finish golem creation.");
+				outputText("You lack the elemental shard you need.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -357,7 +357,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] == maxPermanentImprovedStoneGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("There's no more space in your golem bag.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -368,8 +368,8 @@ public class CampMakeWinions extends BaseContent
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			useMana(permanentImprovedStoneGolemMakingCost());
 			statScreenRefresh();
-			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the energy core in upper section of torso and golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
-			outputText("Slowly all the stones and cores connect with threads of magic, forming a 12 feet tall shape. Finishing the work by making some last adjustments to cores you store it in your 'golem bag'.");
+			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the energy core in the upper section of the torso and golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
+			outputText("Slowly all the stones and cores connect with threads of magic, forming a hulking, 12 foot tall shape. Making some last adjustments to the cores, you store it in your 'golem bag'.");
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] < 1) flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
@@ -378,37 +378,37 @@ public class CampMakeWinions extends BaseContent
 		public function makePermanentSteelGolem():void {
 			clearOutput();
 			if (player.mana < permanentSteelGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("Your mana is too low to make another golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (!player.hasItem(useables.GOLCORE, 1) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 1) {
-				outputText("You lack a golem core to finish the creation of a golem.");
+				outputText("You need more golem cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 2) {
-				outputText("You lack energy cores to use as power source for your new golem.");
+				outputText("You lack energy cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
-				outputText("You lack elemental shard to finish golem creation.");
+				outputText("You lack the elemental shards for this work.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 10) {
-				outputText("You lack metal pieces to use as body for your new golem.");
+				outputText("You don't have enough metal to make a new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 4) {
-				outputText("You lack mechanisms to use for your new golem body.");
+				outputText("You lack mechanisms for your new golem body.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] == maxPermanentSteelGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("Your golem bag is already full.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -420,8 +420,8 @@ public class CampMakeWinions extends BaseContent
 			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 4;
 			useMana(permanentSteelGolemMakingCost());
 			statScreenRefresh();
-			outputText("You draw a seal in the ground around the body of your future servant. All parts are put in precise place be it mechanisms or twin energy cores hidden beneath metal plates. Once done you put golem core in the empty space left in the chest area and put on it last metal plate. You stand back and begin to seep your mana toward the laying parts as it begin to connect ");
-			outputText("each part of the future golem body. After few moments mechanisms comes alive supplied with energy from inserted energy cores under main core control. It slowly rising up reaching a bit over 7 feet tall looking pretty durable with all the body covered by metal plates and glowing red eyes. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You draw a seal in the ground, and inside, you delicately place a golem core, wrapping it in metal pieces. Mechanisms branch out, forming a rough torso, and you attach golem cores throughout the frame, ending with humanoid arms and legs, wrapped in solid metal. You stand back, examining your handiwork for a moment, before splaying your fingers out over it. You pull mana through your body, tendrils of power lancing into the now clattering metal frame.");
+			outputText("One by one, the cores you placed by the limbs light up, making your creation glow from within. A powerful humming noise sounds, and the mechanisms on the limbs begin to move. As you watch, with bated breath, your lumbering creation bends its legs, levering itself to its spiked feet. Standing over seven feet tall, with glowing red sensory units covered with blackened steel, your creation is imposing, at the very least. It marches itself to you, and you store it in your golem bag");
 			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] < 1) flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
@@ -430,17 +430,17 @@ public class CampMakeWinions extends BaseContent
 		public function makePermanentImprovedSteelGolem():void {
 			clearOutput();
 			if (player.mana < permanentImprovedSteelGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("You don't have the mana to make another golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (!player.hasItem(useables.GOLCORE, 3) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 3) {
-				outputText("You lack a golem core to finish the creation of a golem.");
+				outputText("Upon closer inspection of your supplies, you realize you don't have enough golem cores!");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 6) {
-				outputText("You lack energy cores to use as power source for your new golem.");
+				outputText("Your new creation will need power, and you don't have enough cores for it!");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -450,17 +450,17 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 50) {
-				outputText("You lack metal pieces to use as body for your new golem.");
+				outputText("Your metal reserves are low. You'll need to find some more before you can make more golems.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 12) {
-				outputText("You lack mechanisms to use for your new golem body.");
+				outputText("You lack the mechanisms for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] == maxPermanentImprovedSteelGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("Your golem bag is full. You cannot store any more.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -482,14 +482,14 @@ public class CampMakeWinions extends BaseContent
 
 		public function putInGolemCoreIntoGolemBag():void {
 			clearOutput();
-			outputText("In order to have some free space in your backpack you put in one of golem cores into your bag.\n\n");
+			outputText("In order to have some free space in your backpack you put one of golem cores into your bag.\n\n");
 			player.destroyItems(useables.GOLCORE, 1);
 			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
 		}
 		public function takeOutGolemCoreFromGolemBag():void {
 			clearOutput();
-			outputText("In order to not overload your bag for reusable golem cores you take out one of them.\n\n");
+			outputText("In order to not overload your bag for reusable golem cores you take one out, putting it in your backpack.\n\n");
 			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			inventory.takeItem(useables.GOLCORE, accessMakeWinionsMainMenu);
 		}
@@ -532,7 +532,7 @@ public class CampMakeWinions extends BaseContent
 			menu();
 			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 0) addButton(0, "MultiAtks(1)", upgradesForPernamentGolemsMultiAttacksRank1);
 			else addButtonDisabled(0, "MultiAtks(1)", "You already used this upgrade option on your golems.");
-			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "MultiAtks(2)", "You can't use this upgrade options without previous one.");
+			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "MultiAtks(2)", "You can't use this upgrade option without previous one.");
 			else {
 				if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1) addButton(1, "MultiAtks(2)", upgradesForPernamentGolemsMultiAttacksRank2);
 				else addButtonDisabled(1, "MultiAtks(2)", "You already used this upgrade option on your golems.");
@@ -542,7 +542,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsMultiAttacksRank1():void {
 			clearOutput();
 			outputText("You decided to work on multi attack upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed pernament golem to make that modification.\n\n");
+			outputText("Checking the page for this upgrade, you see it would req. 100 mana for each permanent golem to make that modification.\n\n");
 			if (player.mana >= (100 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsMultiAttacksRank1Yes, upgradesForPernamentGolemsMultiAttacks);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
@@ -551,7 +551,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsMultiAttacksRank1Yes():void {
 			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving new mana patchways that would allow them to attack 2nd time. And as it been described in instruction it would make their attcks drains more mana from you each time they attack.\n");
+			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 2nd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
 			doNext(upgradesForPernamentGolemsMultiAttacks);
 			eachMinuteCount(30);
@@ -568,7 +568,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsMultiAttacksRank2Yes():void {
 			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving new mana patchways that would allow them to attack 3rd time. And as it been described in instruction it would make their attcks drains more mana from you each time they attack.\n");
+			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 3rd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
 			doNext(upgradesForPernamentGolemsMultiAttacks);
 			eachMinuteCount(30);
@@ -601,7 +601,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsImprovedManaCircuitRank1Yes():void {
 			useMana((150 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of removing old mana circuits and then engraving new and more efficient patchways. That would allow to lower mana consumtion for each golem activation and increase effectivness of their attacks.\n");
+			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
 			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
@@ -609,7 +609,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsImprovedManaCircuitRank2():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed pernament golem to make that modification.\n\n");
+			outputText("Checking the page for this upgrade, you see it would req. 150 mana for each permanent golem to make that modification.\n\n");
 			if (player.mana >= (150 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsImprovedManaCircuitRank2Yes, upgradesForPernamentGolemsImprovedManaCircuit);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
@@ -618,7 +618,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsImprovedManaCircuitRank2Yes():void {
 			useMana((150 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of removing old mana circuits and then engraving new and more efficient patchways. That would allow to lower mana consumtion for each golem activation and increase effectivness of their attacks.\n");
+			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
 			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
@@ -693,7 +693,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core.");
+				outputText("At first the core resists, but after a few tries you successfully manage to harvest the golem core.");
 				doNext(takeCore);
 			}
 			else {
@@ -706,7 +706,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
 			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core.");
+				outputText("At first the core resists, but after a few tries you successfully manage to harvest the golem core.");
 				doNext(takeCore);
 			}
 			else {

@@ -8,7 +8,7 @@ public class BlinkSpell extends AbstractBlackSpell {
 	public function BlinkSpell() {
 		super(
 				"Blink",
-				"The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself. ",
+				"The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed. Some naturally quick mages seem like they can teleport, moving faster than the eye can track. It does carry the risk of backfiring and raising lust, like all black magic used on oneself. ",
 				TARGET_SELF,
 				TIMING_LASTING,
 				[TAG_BUFF]
@@ -71,7 +71,7 @@ public class BlinkSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You flush, drawing on your body's desires to empower your muscles and hasten you up.\n\n");
+			outputText("Your blood rushes through you, heat spreading to every muscle in your body. You feel lighter, your muscles springing back faster than before." \n\n");
 		}
 		if (!backfired(display)) {
 			var tempSpe:Number       = calcBoost();
