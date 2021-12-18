@@ -218,7 +218,7 @@ package classes.Scenes
 			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-Each next super perk in both Hidden Job will req. to have 10 lvl more starting from lvl 0 for first Hidden Job perk itself (so the 5th one will now req. lvl 40+ not 30+ as before).\n");
 			outputText("-Added option to surrender via HP defeat. Those options would be accessable also when PC is under stun / power stun or fear effect.\n");
-			outputText("-Alcove in High Mountains will now no longer show for PC's with less than 6 pts in avian score.\n");
+			outputText("-Alcove in High Mountains will now no longer show for PC's with less than 6 pts in avian score. Also statuette that PC can pick form there will be under 'Camp Actions > Spend Time' instead of 'Inventory > Misc'. Each use of those times would take 5 min.\n");
 			outputText("-Aimozg changes to spells code including new tab in Stats to give general estimate how much damage would they deal.\n");
 			outputText("-All perks in tree of Daoist Cultivator and Body Cultivator have effects increased (more for those that are gained later on).\n");
 			outputText("-1 new achievment.\n");//s	 (1 shadow one)
@@ -249,7 +249,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories, Sextuple Thrust cooldown frozen, Woodcutting location in Places req. 3x more visits that Quarry, White Book teaching few spells at once, penatly to acc for melee weapons applied even if PC not use deal melee weapons, ");
 			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat, Dinah been in false training mode when Luna is actualy training/leveling herself, error in map display for one of Den of Desire rooms, Bee Hive entrance skipping bee guards andf afterwards showing wrong desc of the room until clearing dungeon, button on 2nd page of ");
-			outputText("unique sex scenes not leading to 1st page\n");/*ostatni punkt changelogu
+			outputText("unique sex scenes not leading to 1st page, Mysterious Seed missing from Unequip/Misc menu\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

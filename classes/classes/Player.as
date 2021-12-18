@@ -10374,7 +10374,7 @@ use namespace CoC;
 				avianCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && avianCounter >= 4)
 				avianCounter += 1;
-			if (hasPerk(PerkLib.AscensionCruelChimerasThesis)  && avianCounter >= 8)
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && avianCounter >= 8)
 				avianCounter += 1;
 			if (isGargoyle()) avianCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) avianCounter = 0;
@@ -10748,10 +10748,12 @@ use namespace CoC;
 			return prestigeJobs1;
 		}
 		public function maxPrestigeJobs():Number {
-			//var prestigeJobs2:Number = 2;
+			var prestigeJobs2:Number = 2;
 			//if (hasPerk(PerkLib.DeityJobMunchkin))
 			//	prestigeJobs2++;
-			return perkv1(PerkLib.AscensionBuildingPrestigeX)
+			if (hasPerk(PerkLib.AscensionBuildingPrestigeX))
+				prestigeJobs2 += perkv1(PerkLib.AscensionBuildingPrestigeX);
+			return prestigeJobs2;
 		}
 		public function freePrestigeJobsSlots():Number {
 			var prestigeJobs3:Number = 0;
@@ -15416,3 +15418,4 @@ use namespace CoC;
 		}
 	}
 }
+

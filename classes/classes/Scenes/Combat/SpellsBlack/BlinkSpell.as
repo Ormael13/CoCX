@@ -71,7 +71,7 @@ public class BlinkSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("Your blood rushes through you, heat spreading to every muscle in your body. You feel lighter, your muscles springing back faster than before." \n\n");
+			outputText("Your blood rushes through you, heat spreading to every muscle in your body. You feel lighter, your muscles springing back faster than before.\n\n");
 		}
 		if (!backfired(display)) {
 			var tempSpe:Number       = calcBoost();

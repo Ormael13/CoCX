@@ -49,7 +49,7 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You focus your power, spreading your fingers wide. The temperature drops around you, and your fingers feel almost numb as scalpel-sharp icicles form in a halo around each of your hands. The wind picks up, carrying them away, but more form in their place. With a cry, you bring your hands together in front of you, whipping the winds to a frenzy, showering [themonster] in a hailstorm of razor-sharp icicles." \n");
+			outputText("You focus your power, spreading your fingers wide. The temperature drops around you, and your fingers feel almost numb as scalpel-sharp icicles form in a halo around each of your hands. The wind picks up, carrying them away, but more form in their place. With a cry, you bring your hands together in front of you, whipping the winds to a frenzy, showering [themonster] in a hailstorm of razor-sharp icicles.\n");
 		}
 		var damage:Number = calcDamage(monster);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);

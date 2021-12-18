@@ -2042,6 +2042,8 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
 		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
+		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
+		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		addButton(14, "Back", campActions);
 	}
 
@@ -3145,7 +3147,6 @@ public class Camp extends NPCAwareContent{
 			else outputText("accomplish");
 			outputText(" before you went through the portal. You felt a bit sad that you didn't get to achieve your old goals.");
 			dynStats("lust", -30, "scale", false);
-
 		}
 		outputText("\n\nAfter the thought, you spend a good while relaxing and watching the sun setting. By now, the sun has already set below the horizon. The sky is glowing orange after the sunset. It looks like you could explore more for a while.");
 		doNext(camp.returnToCampUseOneHour);
@@ -3177,6 +3178,17 @@ public class Camp extends NPCAwareContent{
 		outputText("\n\nYou let your mind wander and relax.");
 		dynStats("lus", -15, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
+	}
+	
+	private function useGryphonStatuette():void {
+		CoC.instance.mutations.skybornSeed(1, player);
+		eachMinuteCount(5);
+		doNext(playerMenu);
+	}
+	private function usePeacockStatuette():void {
+		CoC.instance.mutations.skybornSeed(2, player);
+		eachMinuteCount(5);
+		doNext(playerMenu);
 	}
 
 //-----------------
