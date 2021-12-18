@@ -13,8 +13,8 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 		super(
 				ex ? "Dusk Wave (Ex)" : "Dusk Wave",
 				ex ?
-						"Drawning your own lust to condense part of the the ambivalent darkness into a wave to attack your enemies."
-						: "Drawning your own lust and wrath to condense part of the the ambivalent darkness into a wave to attack your enemies.",
+						"This spell draws your own lust to condense part of the the ambivalent darkness into a wave to attack your enemies."
+						: "This spell draws your own lust and wrath to condense part of the the ambivalent darkness into a wave to attack your enemies.",
 				TARGET_ENEMY,
 				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_DARKNESS, TAG_AOE]
@@ -49,7 +49,7 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You wave the signs with your hands and all light fades as you call down to the primordial darkness to gnaw at [themonster].  \n");
+			outputText("You draw your lust, enfused with your power, into your eyes and down into your hands. You clasp your palms together, and as you draw them apart, your power condenses, pushing the light between your palms back. You aim both palms at [themonster], bringing them together as if snuffing out a light. A wave of darkness erupts from you, engulfing [themonster] in shadows. \n");
 		}
 		var damage:Number = calcDamage(monster);
 		damage = critAndRepeatDamage(display, damage, DamageType.DARKNESS);

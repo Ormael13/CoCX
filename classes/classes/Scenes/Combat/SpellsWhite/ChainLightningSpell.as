@@ -57,9 +57,9 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You charge energy in your hand and fire it out in the form of a powerful bolt of lightning at [themonster] ");
+			outputText("your mana, pushing the energy down into your hands. Electricity dances between your fingertips, and you raise your hands, fingers outstretched. Lightning crackles between your outstretched fingers, and you point them at [themonster].");
 			if (monster.plural) {
-				outputText("that jumps from one target to another");
+				outputText("You keep hold of the energy, and with a flick of your wrist, you send it arcing from target to target.");
 			}
 			outputText("!");
 		}

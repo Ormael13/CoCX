@@ -273,7 +273,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function spellModImpl():Number {
-		var mod:Number = 1;
+		var mod:Number = player.spellpowerStat.value;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
@@ -443,7 +443,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function spellModBase():Number {
-		var mod:Number = 0;
+		var mod:Number = player.spellpowerStat.value - 1;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
