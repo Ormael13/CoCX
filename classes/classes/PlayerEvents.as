@@ -1005,10 +1005,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else vthirst.modSatiety(-1);
 				}
 				//Getting chrismas tree
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 1) {
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) {
 					outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves. Looks like the seed was able to take root in the barren land after all.\n");
 					flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] = 0;
-					flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 2;
+					flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 3;
 					needNext = true;
 				}
 				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && !player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {

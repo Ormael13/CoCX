@@ -10374,7 +10374,7 @@ use namespace CoC;
 				avianCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && avianCounter >= 4)
 				avianCounter += 1;
-			if (hasPerk(PerkLib.AscensionCruelChimerasThesis)  && avianCounter >= 8)
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && avianCounter >= 8)
 				avianCounter += 1;
 			if (isGargoyle()) avianCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) avianCounter = 0;
@@ -15417,3 +15417,4 @@ use namespace CoC;
 		}
 	}
 }
+

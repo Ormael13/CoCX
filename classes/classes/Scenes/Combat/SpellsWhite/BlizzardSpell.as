@@ -29,12 +29,12 @@ public class BlizzardSpell extends AbstractWhiteSpell {
 			if (player.statusEffectv1(StatusEffects.Blizzard) <= 0) {
 				player.removeStatusEffect(StatusEffects.Blizzard);
 				if (display) {
-					outputText("<b>Blizzard spell exhausted all of it power and need to be casted again to provide protection from the fire attacks again!</b>\n\n");
+					outputText("<b>The swirling snow around you stops, the flakes melted into water. You're no longer protected from fire attacks!</b>\n\n");
 				}
 			} else {
 				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 				if (display) {
-					outputText("<b>Surrounding your blizzard slowly loosing it protective power.</b>\n\n");
+					outputText("<b>The blizzard is noticably thinner than before.</b>\n\n");
 				}
 			}
 		}
@@ -42,7 +42,7 @@ public class BlizzardSpell extends AbstractWhiteSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You utter words of power, summoning an ice storm.  It swirls arounds you, ensuring that you'll have more protection from the fire attacks for a few moments.\n\n");
+			outputText("your mana trailing from your hands and feet and into the air around you. You feel the temperature drop around you, thick snowflakes in a spiraling sheet around you. This icy shield grants you more protection from fire attacks...For now\n\n");
 		}
 		var blizzardmagnitude:Number = 0;
 		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) blizzardmagnitude += 2 + player.inte / 10;

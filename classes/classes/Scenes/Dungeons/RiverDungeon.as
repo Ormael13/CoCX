@@ -1300,8 +1300,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(null, roomC11, roomC08, roomC06);
 		}
 		public function roomC08():void {
@@ -1309,8 +1309,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC03, roomC12, null, roomC07);
 		}
 		public function roomC09():void {
@@ -1336,8 +1336,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC07, roomC17, null, null);
 		}
 		public function roomC12():void {
@@ -1345,8 +1345,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC08, null, roomC13, null);
 		}
 		public function roomC13():void {
@@ -1354,8 +1354,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(null, roomC19, roomC14, roomC12);
 		}
 		public function roomC14():void {
@@ -1390,8 +1390,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC11, null, roomC18, roomC16);
 		}
 		public function roomC18():void {
@@ -1399,8 +1399,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(null, null, roomC19, roomC17);
 		}
 		public function roomC19():void {
@@ -1408,8 +1408,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC13, null, null, roomC18);
 		}
 		public function roomC20():void {
@@ -1429,8 +1429,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC22, roomC04, null, null);
 		}
 		public function roomC22():void {
@@ -1438,8 +1439,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC23, roomC21, roomC25, null);
 		}
 		public function roomC23():void {
@@ -1447,8 +1449,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC24, roomC22, roomC26, null);
 		}
 		public function roomC24():void {
@@ -1456,8 +1459,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC23, roomC27, null);
 		}
 		public function roomC25():void {
@@ -1465,8 +1469,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC26, null, roomC28, roomC22);
 		}
 		public function roomC26():void {
@@ -1474,8 +1479,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC27, roomC25, roomC29, roomC23);
 		}
 		public function roomC27():void {
@@ -1483,8 +1489,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC26, roomC30, roomC24);
 		}
 		public function roomC28():void {
@@ -1492,8 +1499,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC29, null, roomC32, roomC25);
 		}
 		public function roomC29():void {
@@ -1501,8 +1509,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC30, roomC28, roomC33, roomC26);
 		}
 		public function roomC30():void {
@@ -1510,8 +1519,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC29, roomC34, roomC27);
 		}
 		public function roomC31():void {
@@ -1529,8 +1539,9 @@ import classes.StatusEffects;
 			}
 			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Frostlight Hall</b>\n");
+			outputText("You stand in the large hall gaving upon several rows of ice pillars that line at each side of a throne.\n\n");
+			outputText("The throne of ice is empty as the previous owner has been taken away violently.");
 			dungeons.setDungeonButtonsRD(roomC32, null, null, null);
 		}
 		public function roomC32():void {
@@ -1538,8 +1549,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) dungeons.setDungeonButtonsRD(roomC33, roomC31, null, roomC28);
 			else {
 				dungeons.setDungeonButtonsRD(roomC33, null, null, roomC28);
@@ -1553,8 +1565,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC34, roomC32, null, roomC29);
 		}
 		public function roomC34():void {
@@ -1562,8 +1575,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();//some unknown for now trigger locations
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC33, null, roomC30);
 		}
 		/*

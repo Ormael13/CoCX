@@ -669,7 +669,9 @@ import classes.CoC;
 
 		public override function maxFatigue():Number
 		{
-			var max:Number = 150;
+			var max:Number = maxFatigueBaseStat.value;
+			var multimax:Number = maxFatigueMultStat.value;
+			max += maxFatiguePerSpeStat.value*spe;
 			if (game.player.alicornScore() >= 12) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 24) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 32) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -687,49 +689,6 @@ import classes.CoC;
 			}
 			if (game.player.lizardScore() >= 4) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.ArchersStaminaI)) max += Math.round(spe);
-			if (hasPerk(PerkLib.ArchersStaminaII)) max += Math.round(spe);
-			if (hasPerk(PerkLib.ArchersStaminaIII)) max += Math.round(spe);
-			if (hasPerk(PerkLib.ArchersStaminaIV)) max += Math.round(spe);
-			if (hasPerk(PerkLib.ArchersStaminaV)) max += Math.round(spe);
-			if (hasPerk(PerkLib.ArchersStaminaVI)) max += Math.round(spe);
-			if (hasPerk(PerkLib.DancersVitalityI)) max += Math.round(spe*1.5);
-			if (hasPerk(PerkLib.DancersVitalityII)) max += Math.round(spe*1.5);
-			if (hasPerk(PerkLib.DancersVitalityIII)) max += Math.round(spe*1.5);
-			if (hasPerk(PerkLib.DancersVitalityIV)) max += Math.round(spe*1.5);
-			if (hasPerk(PerkLib.DancersVitalityV)) max += Math.round(spe*1.5);
-			if (hasPerk(PerkLib.DancersVitalityVI)) max += Math.round(spe*1.5);
-			if (hasPerk(PerkLib.NaturesSpringI)) max += 20;
-			if (hasPerk(PerkLib.NaturesSpringII)) max += 20;
-			if (hasPerk(PerkLib.NaturesSpringIII)) max += 20;
-			if (hasPerk(PerkLib.NaturesSpringIV)) max += 20;
-			if (hasPerk(PerkLib.NaturesSpringV)) max += 20;
-			if (hasPerk(PerkLib.NaturesSpringVI)) max += 20;
-			if (hasPerk(PerkLib.BasicEndurance)) max += 30;
-			if (hasPerk(PerkLib.HalfStepToImprovedEndurance)) max += 50;
-			if (hasPerk(PerkLib.ImprovedEndurance)) max += 80;
-			if (hasPerk(PerkLib.HalfStepToAdvancedEndurance)) max += 120;
-			if (hasPerk(PerkLib.AdvancedEndurance)) max += 200;
-			if (hasPerk(PerkLib.HalfStepToSuperiorEndurance)) max += 320;
-			if (hasPerk(PerkLib.SuperiorEndurance)) max += 500;
-			if (hasPerk(PerkLib.HalfStepToPeerlessEndurance)) max += 700;
-			if (hasPerk(PerkLib.PeerlessEndurance)) max += 1000;
-			if (hasPerk(PerkLib.HalfStepToInhumanEndurance)) max += 1500;
-			if (hasPerk(PerkLib.InhumanEndurance)) max += 2000;
-			if (hasPerk(PerkLib.HalfStepToEpicEndurance)) max += 3000;
-			if (hasPerk(PerkLib.EpicEndurance)) max += 4500;
-			if (hasPerk(PerkLib.HalfStepToLegendaryEndurance)) max += 7000;
-			if (hasPerk(PerkLib.LegendaryEndurance)) max += 10000;
-			if (hasPerk(PerkLib.HalfStepToMythicalEndurance)) max += 15000;
-			if (hasPerk(PerkLib.MythicalEndurance)) max += 20000;
-			if (hasPerk(PerkLib.JobHunter)) max += 50;
-			if (hasPerk(PerkLib.JobRanger)) max += 5;
-			if (hasPerk(PerkLib.JobGunslinger)) max += 10;
-			if (hasPerk(PerkLib.PrestigeJobArcaneArcher)) max += 600;
-			if (hasPerk(PerkLib.PrestigeJobSoulArcher)) max += 150;
-			if (hasPerk(PerkLib.PrestigeJobSeer)) max += 900;
-			if (hasPerk(PerkLib.RapidReload)) max += 20;
-			if (hasPerk(PerkLib.LightningReload)) max += 60;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib*2);
@@ -739,18 +698,7 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionEndurance)) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			max += level * 5;
-			if (level <= 6) max += level * 5;
-			if (hasPerk(PerkLib.UnlockEndurance)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockEndurance2ndStage)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockEndurance3rdStage)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockEndurance4thStage)) max += level * 5;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential)) max += level * 6;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) max += level * 6;
-			var multimax:Number = 1;
-			if (hasPerk(PerkLib.ZenjisInfluence1)) multimax += 0.1;
-			if (hasPerk(PerkLib.LimitBreakerHeart1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerHeart2ndStage)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
+			if (level <= 6) max += level * maxFatiguePerLevelStat.value;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 1499999) max = 1499999;
@@ -759,8 +707,9 @@ import classes.CoC;
 
 		public override function maxSoulforce():Number
 		{
-			var max:Number = 50;
-			if (hasPerk(PerkLib.JobSoulCultivator)) max += 50;
+			var max:Number = maxSfBaseStat.value;
+			var multimax:Number = maxSfMultStat.value;
+			max += maxSfPerWisStat.value*wis;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) max += 30 * flags[kFLAGS.SOUL_CULTIVATION];//Soul Apprentice
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 3);//Soul Personage
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 6);//Soul Warrior
@@ -777,18 +726,8 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 150 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 180 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 180 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
-			if (hasPerk(PerkLib.FlyingSwordPath)) max += 50;
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
-			if (hasPerk(PerkLib.InsightfulResourcesI)) max += Math.round(wis*3);
-			if (hasPerk(PerkLib.InsightfulResourcesII)) max += Math.round(wis*3);
-			if (hasPerk(PerkLib.InsightfulResourcesIII)) max += Math.round(wis*3);
-			if (hasPerk(PerkLib.InsightfulResourcesIV)) max += Math.round(wis*3);
-			if (hasPerk(PerkLib.InsightfulResourcesV)) max += Math.round(wis*3);
-			if (hasPerk(PerkLib.InsightfulResourcesVI)) max += Math.round(wis*3);
-			if (hasPerk(PerkLib.PrestigeJobSoulArcher)) max += 1000;
-			if (hasPerk(PerkLib.PrestigeJobSeer)) max += 500;
-			if (hasPerk(PerkLib.DaoistCultivator)) max += 25;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) max += 40;
 				if (hasPerk(PerkLib.SoulPersonage)) max += 40;
@@ -816,15 +755,8 @@ import classes.CoC;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude3;//+100
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude4;//+100
 			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
-			max += level * 5;
+			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
-			if (hasPerk(PerkLib.UnlockSpirit)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockSpirit2ndStage)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockSpirit3rdStage)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockSpirit4thStage)) max += level * 5;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) max += level * 6;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) max += level * 6
-			var multimax:Number = 1;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
 			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
@@ -841,14 +773,6 @@ import classes.CoC;
 			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
 			if (game.player.unicornScore() >= 10) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryCultivator) || hasPerk(PerkLib.PastLifeCultivator)) multimax += 0.1;
-			if (hasPerk(PerkLib.Wizened)) multimax += 0.1;
-			if (hasPerk(PerkLib.PathOfEnlightenment)) multimax += 0.1;
-			if (hasPerk(PerkLib.Embodiment)) multimax += 0.1;
-			if (hasPerk(PerkLib.InControl)) multimax += 0.1;
-			if (hasPerk(PerkLib.Metamorphable)) multimax += 0.1;
-			if (hasPerk(PerkLib.SoulPowered)) multimax += 0.1;
-			if (hasPerk(PerkLib.AllSeeing)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
 			if (hasPerk(PerkLib.JobSoulCultivator)) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest
 				if (hasPerk(PerkLib.Dantain)) {
 					if (hasPerk(PerkLib.JobSoulCultivator)) multimax += 0.1;
@@ -873,8 +797,6 @@ import classes.CoC;
 				//if (hasPerk(PerkLib.Ascension)) multimax += perkv1(PerkLib.Ascension) * 0.01;
 
 			}
-			if (hasPerk(PerkLib.LimitBreakerSoul1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerSoul2ndStage)) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 1499999) max = 1499999;
@@ -891,87 +813,20 @@ import classes.CoC;
 
 		public override function maxWrath():Number
 		{
-			var max:Number = 500;
-			if (hasPerk(PerkLib.DoubleAttack)) max += 50;
-			if (hasPerk(PerkLib.TripleAttack)) max += 50;
-			if (hasPerk(PerkLib.QuadrupleAttack)) max += 50;
-			if (hasPerk(PerkLib.PentaAttack)) max += 50;
-			if (hasPerk(PerkLib.HexaAttack)) max += 50;
-			if (hasPerk(PerkLib.DoubleAttackLarge)) max += 100;
-			if (hasPerk(PerkLib.TripleAttackLarge)) max += 100;
-			if (hasPerk(PerkLib.FeralArmor)) max += 100;
-			if (hasPerk(PerkLib.ClawTraining)) max += 100;
-			if (hasPerk(PerkLib.ExtraClawAttack)) max += 150;
-			if (hasPerk(PerkLib.MultiClawAttack)) max += 200;
-			if (hasPerk(PerkLib.ClawingFlurry)) max += 250;
-			if (hasPerk(PerkLib.BasicTranquilness)) max += 75;
-			if (hasPerk(PerkLib.HalfStepToImprovedTranquilness)) max += 125;
-			if (hasPerk(PerkLib.ImprovedTranquilness)) max += 200;
-			if (hasPerk(PerkLib.HalfStepToAdvancedTranquilness)) max += 300;
-			if (hasPerk(PerkLib.AdvancedTranquilness)) max += 500;
-			if (hasPerk(PerkLib.HalfStepToSuperiorTranquilness)) max += 800;
-			if (hasPerk(PerkLib.SuperiorTranquilness)) max += 1250;
-			if (hasPerk(PerkLib.HalfStepToPeerlessTranquilness)) max += 1750;
-			if (hasPerk(PerkLib.PeerlessTranquilness)) max += 2500;
-			if (hasPerk(PerkLib.HalfStepToInhumanTranquilness)) max += 3750;
-			if (hasPerk(PerkLib.InhumanTranquilness)) max += 5000;
-			if (hasPerk(PerkLib.HalfStepToEpicTranquilness)) max += 7500;
-			if (hasPerk(PerkLib.EpicTranquilness)) max += 11250;
-			if (hasPerk(PerkLib.HalfStepToLegendaryTranquilness)) max += 17500;
-			if (hasPerk(PerkLib.LegendaryTranquilness)) max += 25000;
-			if (hasPerk(PerkLib.HalfStepToMythicalTranquilness)) max += 37500;
-			if (hasPerk(PerkLib.MythicalTranquilness)) max += 50000;
-			if (hasPerk(PerkLib.JobSwordsman)) max += 100;
-			if (hasPerk(PerkLib.JobBeastWarrior)) max += 100;
-			if (hasPerk(PerkLib.JobDervish)) max += 100;
-			if (hasPerk(PerkLib.JobWarlord)) max += 100;
-			if (hasPerk(PerkLib.JobWarrior)) max += 50;
-			if (hasPerk(PerkLib.ImprovedCrinosShape)) max += 200;
-			if (hasPerk(PerkLib.GreaterCrinosShape)) max += 400;
-			if (hasPerk(PerkLib.MasterCrinosShape)) max += 800;
-			if (hasPerk(PerkLib.Berzerker)) max += 500;
-			if (hasPerk(PerkLib.ColdFury)) max += 250;
-			if (hasPerk(PerkLib.ColderFury)) max += 375;
-			if (hasPerk(PerkLib.Lustzerker)) max += 500;
-			if (hasPerk(PerkLib.ColdLust)) max += 250;
-			if (hasPerk(PerkLib.ColderLust)) max += 375;
-			if (hasPerk(PerkLib.PrestigeJobBerserker)) max += 1000;
-			if (hasPerk(PerkLib.Rage)) max += 1500;
-			if (hasPerk(PerkLib.Anger)) max += 2000;
-			if (hasPerk(PerkLib.FuelForTheFire)) max += 2500;
-			if (hasPerk(PerkLib.TooAngryToDie)) max += 3000;
-			if (hasPerk(PerkLib.PrestigeJobTempest)) max += 500;
-			if (hasPerk(PerkLib.WarMageNovice)) max += 50;
-			if (hasPerk(PerkLib.WarMageApprentice)) max += 50;
-			if (hasPerk(PerkLib.WarMageAdept)) max += 150;
+			var max:Number = maxWrathBaseStat.value;
+			var multimax:Number = maxWrathMultStat.value;
 			if (hasPerk(PerkLib.AscensionFury)) max += perkv1(PerkLib.AscensionFury) * 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude;//+75 to +175
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude2;//+75 to +175
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude3;//+75 to +175
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude4;//+75 to +175
 			if (jewelryName == "Undefeated King's Signet" || jewelryName3 == "Undefeated King's Signet") max += 150;
-			max += level * 5;
+			max += level * maxWrathPerLevelStat.value;
 			if (level <= 6) max += level * 5;
 			else max += 30;
-			if (hasPerk(PerkLib.UnlockId)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockId2ndStage)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockId3rdStage)) max += level * 5;
-			if (hasPerk(PerkLib.UnlockId4thStage)) max += level * 5;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) max += level * 10;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) max += level * 10;//~194,455
-			var multimax:Number = 1;
+			//~194,455
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
-			if (hasPerk(PerkLib.PrimalFuryI)) multimax += 0.05;
-			if (hasPerk(PerkLib.PrimalFuryII)) multimax += 0.05;
-			if (hasPerk(PerkLib.PrimalFuryIII)) multimax += 0.05;
-			if (hasPerk(PerkLib.PrimalFuryIV)) multimax += 0.05;
-			if (hasPerk(PerkLib.PrimalFuryV)) multimax += 0.05;
-			if (hasPerk(PerkLib.PrimalFuryVI)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerBody1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerBody2ndStage)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.2;
-			if (hasPerk(PerkLib.ICastAsuraFist)) multimax += 0.5;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
@@ -1034,54 +889,10 @@ import classes.CoC;
 
 		public override function maxMana():Number
 		{
-			var max:Number = 300;
-			if (hasPerk(PerkLib.MindOverBodyI)) max += Math.round(inte*6);
-			if (hasPerk(PerkLib.MindOverBodyII)) max += Math.round(inte*6);
-			if (hasPerk(PerkLib.MindOverBodyIII)) max += Math.round(inte*6);
-			if (hasPerk(PerkLib.MindOverBodyIV)) max += Math.round(inte*6);
-			if (hasPerk(PerkLib.MindOverBodyV)) max += Math.round(inte*6);
-			if (hasPerk(PerkLib.MindOverBodyVI)) max += Math.round(inte*6);
-			if (hasPerk(PerkLib.ArcanePoolI)) {
-				max += Math.round(inte*3);
-				max += Math.round(wis*3);
-			}
-			if (hasPerk(PerkLib.ArcanePoolII)) {
-				max += Math.round(inte*3);
-				max += Math.round(wis*3);
-			}
-			if (hasPerk(PerkLib.ArcanePoolIII)) {
-				max += Math.round(inte*3);
-				max += Math.round(wis*3);
-			}
-			if (hasPerk(PerkLib.ArcanePoolIV)) {
-				max += Math.round(inte*3);
-				max += Math.round(wis*3);
-			}
-			if (hasPerk(PerkLib.ArcanePoolV)) {
-				max += Math.round(inte*3);
-				max += Math.round(wis*3);
-			}
-			if (hasPerk(PerkLib.ArcanePoolVI)) {
-				max += Math.round(inte*3);
-				max += Math.round(wis*3);
-			}
-			if (hasPerk(PerkLib.BasicSpirituality)) max += 135;
-			if (hasPerk(PerkLib.HalfStepToImprovedSpirituality)) max += 225;
-			if (hasPerk(PerkLib.ImprovedSpirituality)) max += 360;
-			if (hasPerk(PerkLib.HalfStepToAdvancedSpirituality)) max += 540;
-			if (hasPerk(PerkLib.AdvancedSpirituality)) max += 900;
-			if (hasPerk(PerkLib.HalfStepToSuperiorSpirituality)) max += 1440;
-			if (hasPerk(PerkLib.SuperiorSpirituality)) max += 2250;
-			if (hasPerk(PerkLib.HalfStepToPeerlessSpirituality)) max += 3150;
-			if (hasPerk(PerkLib.PeerlessSpirituality)) max += 4500;
-			if (hasPerk(PerkLib.HalfStepToInhumanSpirituality)) max += 6750;
-			if (hasPerk(PerkLib.InhumanSpirituality)) max += 9000;
-			if (hasPerk(PerkLib.HalfStepToEpicSpirituality)) max += 13500;
-			if (hasPerk(PerkLib.EpicSpirituality)) max += 20250;
-			if (hasPerk(PerkLib.HalfStepToLegendarySpirituality)) max += 31500;
-			if (hasPerk(PerkLib.LegendarySpirituality)) max += 45000;
-			if (hasPerk(PerkLib.HalfStepToMythicalSpirituality)) max += 67500;
-			if (hasPerk(PerkLib.MythicalSpirituality)) max += 90000;
+			var max:Number = maxManaBaseStat.value;
+			var multimax:Number = maxManaMultStat.value;
+			max += maxManaPerIntStat.value*inte;
+			max += maxManaPerWisStat.value*wis;
 			if (hasPerk(PerkLib.Archmage) && inte >= 100) max += 180;
 			if (hasPerk(PerkLib.Channeling) && inte >= 60) max += 90;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) max += 225;
@@ -1100,7 +911,6 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
-			var multimax:Number = 1;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
 			if (game.player.woodElfScore() >= 22) multimax += 0.1;
@@ -1108,13 +918,6 @@ import classes.CoC;
 			if (game.player.woodElfScore() >= 28) multimax += 0.1;
 			if (game.player.woodElfScore() >= 31) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryScholar) || hasPerk(PerkLib.PastLifeScholar)) multimax += 0.1;
-			if (hasPerk(PerkLib.Studious)) multimax += 0.1;
-			if (hasPerk(PerkLib.Teacher)) multimax += 0.1;
-			if (hasPerk(PerkLib.Professor)) multimax += 0.1;
-			if (hasPerk(PerkLib.Principle)) multimax += 0.1;
-			if (hasPerk(PerkLib.Dean)) multimax += 0.1;
-			if (hasPerk(PerkLib.President)) multimax += 0.1;
-			if (hasPerk(PerkLib.Nerd)) multimax += 0.1;
 			if (hasPerk(PerkLib.ArcaneRegenerationMinor) && inte >= 50) {
 				multimax += 0.05;
 				if (hasPerk(PerkLib.ArcaneRegenerationMajor) && inte >= 75) multimax += 0.1;
@@ -1122,13 +925,6 @@ import classes.CoC;
 				if (hasPerk(PerkLib.ArcaneRegenerationLegendary) && inte >= 125) multimax += 0.2;
 				if (hasPerk(PerkLib.ArcaneRegenerationMythical) && inte >= 150) multimax += 0.25;
 			}
-			if (hasPerk(PerkLib.ManaAffinityI)) multimax += 0.03;
-			if (hasPerk(PerkLib.ManaAffinityII)) multimax += 0.03;
-			if (hasPerk(PerkLib.ManaAffinityIII)) multimax += 0.03;
-			if (hasPerk(PerkLib.ManaAffinityIV)) multimax += 0.03;
-			if (hasPerk(PerkLib.ManaAffinityV)) multimax += 0.03;
-			if (hasPerk(PerkLib.ManaAffinityVI)) multimax += 0.03;
-			if (hasPerk(PerkLib.ZenjisInfluence1)) multimax += 0.1;
 			if (hasPerk(PerkLib.ManaCore)) {
 				if (hasPerk(PerkLib.Archmage) && inte >= 100) multimax += 0.15;
 				if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) multimax += 0.15;
@@ -1147,17 +943,8 @@ import classes.CoC;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude3;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude4;
-			max += level * 10;
+			max += level * maxManaPerLevelStat.value;
 			if (level <= 6) max += level * 10;
-			if (hasPerk(PerkLib.UnlockForce)) max += level * 10;
-			if (hasPerk(PerkLib.UnlockForce2ndStage)) max += level * 10;
-			if (hasPerk(PerkLib.UnlockForce3rdStage)) max += level * 10;
-			if (hasPerk(PerkLib.UnlockForce4thStage)) max += level * 10;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) max += level * 12;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) max += level * 12;
-			if (hasPerk(PerkLib.LimitBreakerSoul1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerSoul2ndStage)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 2499999) max = 2499999;

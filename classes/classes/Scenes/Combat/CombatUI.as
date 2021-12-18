@@ -642,7 +642,7 @@ public class CombatUI extends BaseCombatContent {
 		buildAbilityMenu(CombatAbilities.ALL_HEX_SPELLS, hexSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_DIVINE_SPELLS, divineSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_NECRO_SPELLS, necroSpellButtons);
-		buildAbilityMenu(CombatAbilities.ALL_BLOOD_SPELLS, necroSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_BLOOD_SPELLS, bloodSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
 		if (player.hasPerk(PerkLib.GreyMagic) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
