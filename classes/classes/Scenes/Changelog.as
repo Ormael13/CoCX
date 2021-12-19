@@ -126,8 +126,14 @@ package classes.Scenes
 			outputText("-New tier 7 misc lvl-up perk: Advanced Golemancy Theory. Req. Grand-Master Golem Maker perk, 140+ in int+wis. Effect: Enable option to make steel golems and store 1 such golem.\n");
 			outputText("-New tier 9 misc lvl-up perk: Temporal Golems Restructuration (Ex). Req. Temporal Golems Restructuration and Grand-Master Golem Maker perks, 160+ in int+wis. Effect: Allow to use option of send all temporary golems to attack in one turn. Adding option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)\n");
 			outputText("-New tier 9 wisdom lvl-up perk: Prestige Job: Druid. Req. Elemental Contract Rank 7 and Archmage perks, 200+ wis. Effect: You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals) (+50% tou multi and +70% wisdom multi)\n");
+			outputText("-New tier 13 misc lvl-up perk: Golem Army Lieutenant Colonel. Req. Golem Army Major, Epic Golem Maker 3rd Circle perks and 210+ int/wis. Effect: +1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 14 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker (3rd Circle) perk and 225+ int/wis. Effect: Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.\n");
+			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
+			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
 			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
+			outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
 			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
 			outputText("-Jiangshi PC aside not able to equip melee/range weapons, shields, armors and underwear will now not be able to equip two more items types: head jewelry and vehicles.\n");
@@ -156,7 +162,6 @@ package classes.Scenes
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
-			outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -208,14 +213,9 @@ package classes.Scenes
 			outputText("-Prestige jobs accesability would be moved from lvl 42+ to 54+ (meaning it will be all perks moved 2 tiers higher with minimal stat req. changes). Slots for prestige job will start at 2 and multi bonuses to stats would be 50% higher with few jobs having % slight adjusted. Current possesed perks from prestige jobs will be kept even if PC wouldn't be able to get them after changes.\n");
 			outputText("-Epic Elementals now req. 2 elemental shards to summon not 1. All those that summoned them already with 1 shard... you damn lucky people :P\n");
 			outputText("-Golemancer goblin would sell new items when PC gain specific perks (they are meanitoned in tooltip for grey out buttons).\n");
-			outputText("-New tier 13 misc lvl-up perk: Golem Army Lieutenant Colonel. Req. Golem Army Major, Epic Golem Maker 3rd Circle perks and 210+ int/wis. Effect: +1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.\n");
-			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-Golem army perks been moved more apart making place for additional perks + last 3 of old perks (before they got their name changed) add 1 slot for metal golem.\n");
-			outputText("-New tier 14 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker (3rd Circle) perk and 225+ int/wis. Effect: Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.\n");
-			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
 			outputText("-Pernament improved stone golems cost in stones been cut in half.\n");
 			outputText("-Wisp Captain perk lvl req. rised from 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both.\n");
-			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-Each next super perk in both Hidden Job will req. to have 10 lvl more starting from lvl 0 for first Hidden Job perk itself (so the 5th one will now req. lvl 40+ not 30+ as before).\n");
 			outputText("-Added option to surrender via HP defeat. Those options would be accessable also when PC is under stun / power stun or fear effect.\n");
 			outputText("-Alcove in High Mountains will now no longer show for PC's with less than 6 pts in avian score. Also statuette that PC can pick form there will be under 'Camp Actions > Spend Time' instead of 'Inventory > Misc'. Each use of those times would take 5 min.\n");
@@ -226,7 +226,7 @@ package classes.Scenes
 			outputText("-Druid job allow to undergone another (sorta) transformation: fusion with one of 4 epic elementals (water, firte, air, earth). Fusion would change PC look, disable most of physical and magical speicals that req. to have specific bodypart, if PC nopt have any range weapon equipped that allow to attack will be granted default to specific fusion base range attack option.\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
 			outputText("-Elemental fusions would change PC sprite look to either male or female version of one of four options. (sprites by Liadri)\n");
-			outputText("-\n");
+			outputText("-Body Cultivator's Focus & Daoist's Focus perks on melee and range weapons will be seperated with change to perk desc (so there will be possible to have 2 perks with one with suffix (M) and other (R)). For making sure nothing glitch futher please deequip both melee and range weapons then reequip them anew.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

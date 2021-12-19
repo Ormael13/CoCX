@@ -2138,7 +2138,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Skeletons", "You need to be necromancer to use this option.");
 		if (player.hasPerk(PerkLib.PrestigeJobDruid)) addButton(6, "Fusions", druidMenu);
 		else addButtonDisabled(6, "Fusions", "You need to be druid to use this option.");
-		if ((flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && (flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "")) addButton(10, "SimpPreTurn", simplifiedPreTurn);
+		if (((flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && (flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "")) || player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) addButton(10, "SimpPreTurn", simplifiedPreTurn);
 		addButton(14, "Back", campActions);
 	}
 	private function druidMenu():void {

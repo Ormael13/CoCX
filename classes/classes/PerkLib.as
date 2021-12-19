@@ -3422,7 +3422,9 @@ public class PerkLib
 		public static const BladeWarden:PerkType = mk("Blade-Warden", "Blade-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const BodyCultivatorsFocus:BodyCultivatorsFocusPerk = new BodyCultivatorsFocusPerk();
+		public static const BodyCultivatorsFocusRange:BodyCultivatorsFocusRangePerk = new BodyCultivatorsFocusRangePerk();
 		public static const DaoistsFocus:DaoistsFocusPerk = new DaoistsFocusPerk();
+		public static const DaoistsFocusRange:DaoistsFocusRangePerk = new DaoistsFocusRangePerk();
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
@@ -3445,7 +3447,9 @@ public class PerkLib
 			wPerks.push(Accuracy2);
 			wPerks.push(BladeWarden);
 			wPerks.push(BodyCultivatorsFocus);
+			wPerks.push(BodyCultivatorsFocusRange);
 			wPerks.push(DaoistsFocus);
+			wPerks.push(DaoistsFocusRange);
 			wPerks.push(DexterousSwordsmanship);
 			wPerks.push(InariBlessedKimono);
 			wPerks.push(MageWarden);

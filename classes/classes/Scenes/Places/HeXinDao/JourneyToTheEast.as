@@ -76,7 +76,7 @@ package classes.Scenes.Places.HeXinDao
 			addButton(2, "Felix", shadyPerson).hint("A strange two headed morph with two tails is sitting at the table near bar.");
 			addButton(4, "Adv.Guild", SceneLib.adventureGuild.BoardkeeperYangMain);
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
-			addButtonDisabled(6, "Monkey", "You see human bimbo with amazonian build and monkey tail sitting at the table on the rights side of inn.");
+			//addButtonDisabled(6, "Monkey", "You see human bimbo with amazonian build and monkey tail sitting at the table on the rights side of inn.");
 			//addButton(6, "Monkey", SceneLib.waizabi.bimboMonkey).hint("You see human bimbo with amazonian build and monkey tail sitting at the table on the rights side of inn.");//monkey bimbo go go - Waiz'abi
 			if (workHoursMadam()) {
 				if (AhriTavernTalks) addButton(7, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");

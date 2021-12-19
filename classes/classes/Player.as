@@ -1158,7 +1158,7 @@ use namespace CoC;
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return (weaponClass("Staff"));
+			return (weaponClass("Staff")) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -1174,7 +1174,7 @@ use namespace CoC;
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart"));// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT
+			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean

@@ -33,18 +33,18 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function playerEquip():WeaponRange {
-			while (game.player.hasPerk(PerkLib.DaoistsFocus)) game.player.removePerk(PerkLib.DaoistsFocus);
-			game.player.createPerk(PerkLib.DaoistsFocus,0.4,0,0,0);
-			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
-			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
+			while (game.player.hasPerk(PerkLib.DaoistsFocusRange)) game.player.removePerk(PerkLib.DaoistsFocusRange);
+			game.player.createPerk(PerkLib.DaoistsFocusRange,0.4,0,0,0);
+			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) game.player.removePerk(PerkLib.BodyCultivatorsFocusRange);
+			game.player.createPerk(PerkLib.BodyCultivatorsFocusRange,0.4,0,0,0);
 			while (game.player.hasPerk(PerkLib.WildWarden)) game.player.removePerk(PerkLib.WildWarden);
 			game.player.createPerk(PerkLib.WildWarden,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():WeaponRange {
-			while (game.player.hasPerk(PerkLib.DaoistsFocus)) game.player.removePerk(PerkLib.DaoistsFocus);
-			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			while (game.player.hasPerk(PerkLib.DaoistsFocusRange)) game.player.removePerk(PerkLib.DaoistsFocusRange);
+			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) game.player.removePerk(PerkLib.BodyCultivatorsFocusRange);
 			while (game.player.hasPerk(PerkLib.WildWarden)) game.player.removePerk(PerkLib.WildWarden);
 			return super.playerRemove();
 		}
