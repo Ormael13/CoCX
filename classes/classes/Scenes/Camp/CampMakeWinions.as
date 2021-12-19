@@ -1388,7 +1388,7 @@ public class CampMakeWinions extends BaseContent
 					}
 				}
 			}
-			var arcaneCMax:int = (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] *4)-1;
+			var arcaneCMax:int = (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]*4) - 1;
 			for (var i:int = 0,j:int = elementalTypes.length; i < j; i++){
 				if (i % 3 == 0){
 					var btnName:String = elementalTypes[i];
@@ -1396,7 +1396,7 @@ public class CampMakeWinions extends BaseContent
 					//outputText(btnName);
 					var pElemLvlStat:int = player.statusEffectv2(elementalTypes[i]);
 					if (pElemLvlStat <= contractRankI && pElemLvlStat > 0){//Checks Elemental level lower than max, but not 0.
-						if (contractRankI <= arcaneCMax){	//If lower, don't care. You have the circle and the highest level circle can support.
+						if (pElemLvlStat < arcaneCMax){	//If lower, don't care. You have the circle and the highest level circle can support.
 							addButton(btnInt, btnName,elementalLvlUpCostCheck , elementalTypes[i + 1], pElemLvlStat, btnName, "Level up your "+ elementalTypes[i + 2] +" elemental!");
 						}
 						else{//Outside Bracket.
@@ -2248,4 +2248,4 @@ public class CampMakeWinions extends BaseContent
 			eachMinuteCount(10);
 		}
 	}
-}
+}
