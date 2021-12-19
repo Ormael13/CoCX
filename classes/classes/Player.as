@@ -6685,7 +6685,7 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","goo");
 			var gooCounter:Number = 0;
-			if (InCollection(skin.base.color, ["green", "magenta", "blue", "cerulean", "emerald", "pink"])) {
+			if (InCollection(skin.base.color, ["green", "magenta", "blue", "cerulean", "emerald", "pink", "milky white"])) {
 				gooCounter++;
 				if (hairType == Hair.GOO)
 					gooCounter++;
@@ -15418,4 +15418,3 @@ use namespace CoC;
 		}
 	}
 }
-
