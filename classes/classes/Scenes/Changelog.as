@@ -131,7 +131,7 @@ package classes.Scenes
 			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
 			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
 			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
-			outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
+			outputText("-New super perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
 			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
 			outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
@@ -227,12 +227,12 @@ package classes.Scenes
 			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
 			outputText("-Elemental fusions would change PC sprite look to either male or female version of one of four options. (sprites by Liadri)\n");
 			outputText("-Body Cultivator's Focus & Daoist's Focus perks on melee and range weapons will be seperated with change to perk desc (so there will be possible to have 2 perks with one with suffix (M) and other (R)). For making sure nothing glitch futher please deequip both melee and range weapons then reequip them anew.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Affinity (Gnome). Gained by fusing with epic earth elemental. Effects: Gain a boon based on the terrain, abundance of plants grants regeneration 15% while rocky ground gives +20% Damage reduction. Aquatic or snowy terrain gives nothing.\n");
+			outputText("-New event perk: Affinity (Ignis). Gained by fusing with epic fire elemental. Effects: +100% fire damage dealt +100% ice damage taken, takes massive damage (5% max HP) per round while underwater.\n");
+			outputText("-New event perk: Affinity (Sylph). Gained by fusing with epic air elemental. Effects: When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.\n");
+			outputText("-New event perk: Affinity (Undine). Gained by fusing with epic water elemental. Effects: Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).\n");
+			outputText("-Aquatic Affinity perk adding now weakness to lightining damage (-100% resistance).\n");
+			outputText("-Fusing with epic elemental would remove raical bonuses and give new ones realted to specific fusion. ALso would give access to passive effect + 2 specials. When Epic elemental are higher ranked it will unlock 2nd and 3rd special.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
