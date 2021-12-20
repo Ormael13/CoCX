@@ -2877,6 +2877,7 @@ public class Creature extends Utils
 				bonusStr += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusSpe += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
+			if (game.player.hasPerk(PerkLib.AffinityUndine)) bonusSpe += 50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			if (game.player.armorName == "Sexy Aquamarine Bikini" || game.player.armorName == "Sexy Black Bikini" || game.player.armorName == "Sexy Blue Bikini" || game.player.armorName == "Sexy Green Bikini" || game.player.armorName == "Sexy Pink Bikini" || game.player.armorName == "Sexy Red Bikini" || game.player.armorName == "Sexy White Bikini" || game.player.armorName == "Sexy Yellow Bikini") {
 				bonusStr += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusSpe += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
@@ -2884,6 +2885,7 @@ public class Creature extends Utils
 			if (game.player.necklaceName == "Magic coral and pearl necklace") bonusSpe += 10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			game.player.buff("UnderwaterCombatBoost").addStats({str:bonusStr,spe:bonusSpe}).withText("Fighting Underwater").combatPermanent();
 			HP = oldHPratio * maxHP();
+			if (game.player.hasPerk(PerkLib.AffinityIgnis)) createStatusEffect(StatusEffects.UnderwaterAndIgnis, 0, 0, 0, 0);
 		}
 
 		//Naked
@@ -4429,4 +4431,4 @@ public class Creature extends Utils
 			};
 		}
 	}
-}
+}

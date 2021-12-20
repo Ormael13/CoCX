@@ -2756,7 +2756,7 @@ use namespace CoC;
 			if (necklaceName == "Blue Winter scarf" || necklaceName == "Green Winter scarf" || necklaceName == "Purple Winter scarf" || necklaceName == "Red Winter scarf" || necklaceName == "Yellow Winter scarf") mult -= 20;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
-			if (hasPerk(PerkLib.FireAffinity)) mult += 100;
+			if (hasPerk(PerkLib.FireAffinity) || hasPerk(PerkLib.AffinityIgnis)) mult += 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude3;
@@ -2817,6 +2817,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.LightningAffinity)) mult -= 50;
 			if (hasPerk(MutationsLib.HeartOfTheStormPrimitive)) mult -= 10;
 			if (hasPerk(MutationsLib.HeartOfTheStormEvolved)) mult -= 30;
+			if (hasPerk(PerkLib.AquaticAffinity) || hasPerk(PerkLib.AffinityUndine)) mult += 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude3;
@@ -13588,6 +13589,9 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				dynStats("spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
+			}
+			if(hasStatusEffect(StatusEffects.UnderwaterAndIgnis)) {
+				removeStatusEffect(StatusEffects.UnderwaterAndIgnis);
 			}
 			if(hasStatusEffect(StatusEffects.EzekielCurse) && EvangelineFollower.EvangelineAffectionMeter >= 3 && hasPerk(PerkLib.EzekielBlessing)) {
 				removeStatusEffect(StatusEffects.EzekielCurse);

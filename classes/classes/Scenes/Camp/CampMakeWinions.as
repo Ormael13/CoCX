@@ -1353,7 +1353,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
 			else addButtonDisabled(1, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
-			else addButtonDisabled(5, "ElementUp", "You don't have any elementals, try summoning one!");
+			else addButtonDisabled(5, "ElementUp", "You don't have any normal elementals, try summoning one!");
 			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) >= 1) addButton(12, "E.S.Conv.", elementalShardsConversion).hint("Conversion of Elemental Shards into energy stored in arcane circle elemental conduit.");
 			else addButtonDisabled(12, "E.S.Conv.", "You need to have any elemental conduit added to the arcane circle to use this option.");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");

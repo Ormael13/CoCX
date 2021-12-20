@@ -2519,7 +2519,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 			if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
 			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 1.25;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
@@ -6034,6 +6034,80 @@ public class MagicSpecials extends BaseCombatContent {
 		doDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
+		enemyAI();
+	}
+	
+	public function FusionSpecialFirst(element:Number, type:Number):void {
+		clearOutput();
+		var soulforcecost:Number = 10 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		var damage:Number = 0;
+		var multiInt:Number = 2;
+		var multiWis:Number = 2;
+		if (element >= 4) {
+			multiInt += 0.4 * (element - 3);
+			multiWis += 0.4 * (element - 3);
+		}
+		if (element >= 7) {
+			multiInt += 0.4 * (element - 6);
+			multiWis += 0.4 * (element - 6);
+		}
+		if (element >= 10) {
+			multiInt += 0.4 * (element - 9);
+			multiWis += 0.4 * (element - 9);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
+		if (type == 1) {
+			outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
+			doWindDamage(damage, true, true);
+		}
+		if (type == 2) {
+			outputText("You smash both of your fists into the ground, causing vegetation to grow at an accelerated rate. [Themonster] is punched out of nowhere as a grown tree suddenly sprouts from beneath! ");
+			doEarthDamage(damage, true, true);
+		}
+		if (type == 3) {
+			outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
+			doFireDamage(damage, true, true);
+		}
+		if (type == 4) {
+			outputText("You push both of your palms toward your opponent, your arms turning to a pair of powerful water jets that batters [themonster] with rock crushing pressure! ");
+			doWaterDamage(damage, true, true);
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function FusionSpecialSecond(element:Number, type:Number):void {
+		clearOutput();
+		var soulforcecost:Number = 10 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		var temp:Number = 0;
+		var multiInt:Number = 2;
+		var multiWis:Number = 2;
+		if (element >= 4) {
+			multiInt += 0.8 * (element - 3);
+			multiWis += 0.8* (element - 3);
+		}
+		if (element >= 7) {
+			multiInt += 0.8 * (element - 6);
+			multiWis += 0.8 * (element - 6);
+		}
+		if (element >= 10) {
+			multiInt += 0.8 * (element - 9);
+			multiWis += 0.8 * (element - 9);
+		}
+		temp += scalingBonusIntelligence() * multiInt;
+		temp += scalingBonusWisdom() * multiWis;
+		temp = Math.round(temp);
+		if (type == 1) outputText("You soothe your wounds with a calm breeze dulling down the pain.");
+		if (type == 2) outputText("You gather energy from sunlight into the vines covering your body, converting the nutrients and repairing some of your sustained damage.");
+		if (type == 3) outputText("You channel warmth into your wounds soothing the pain and repairing the damages you sustained.");
+		if (type == 4) outputText("You relax and concentrate on your liquid form closing breaches and repairing any damage you sustained.");
+		outputText(" <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+		HPChange(temp,false);
+		outputText("\n\n");
 		enemyAI();
 	}
 

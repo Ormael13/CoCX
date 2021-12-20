@@ -2187,27 +2187,31 @@ public class Camp extends NPCAwareContent{
 		if (type == 4) outputText("Your hairs now regularly drip fluid on the ground beneath you if you forget them. Not only that but you seem to be able to control and generate what appears to be an endless quantity of water. You have acquired true control over water.\n\n");
 		if (player.hasPerk(PerkLib.SharedPower)) player.addPerkValue(PerkLib.SharedPower, 1, druidMenuSharedPowerPerkCounting());
 		var tier:Number = 1;
-		if (type == 1 && player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 2) tier += 2;
+		if (type == 1 && player.statusEffectv2(StatusEffects.SummonedElementalsAirE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) > 6) tier += 2;
 			else tier += 1;
 		}
-		if (type == 2 && player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) > 2) tier += 2;
+		if (type == 2 && player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) > 6) tier += 2;
 			else tier += 1;
 		}
-		if (type == 3 && player.statusEffectv1(StatusEffects.SummonedElementalsFireE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) > 2) tier += 2;
+		if (type == 3 && player.statusEffectv2(StatusEffects.SummonedElementalsFireE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) > 6) tier += 2;
 			else tier += 1;
 		}
-		if (type == 4 && player.statusEffectv1(StatusEffects.SummonedElementalsWaterE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsWaterE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsWaterE) > 2) tier += 2;
+		if (type == 4 && player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) > 6) tier += 2;
 			else tier += 1;
 		}
 		player.createPerk(PerkLib.ElementalBody,type,tier,0,0);
+		if (type == 1) player.createPerk(PerkLib.AffinitySylph,0,0,0,0);
+		if (type == 2) player.createPerk(PerkLib.AffinityGnome,0,0,0,0);
+		if (type == 3) player.createPerk(PerkLib.AffinityIgnis,0,0,0,0);
+		if (type == 4) player.createPerk(PerkLib.AffinityUndine,0,0,0,0);
 		statScreenRefresh();
 		doNext(druidMenu);
 	}
@@ -2216,6 +2220,10 @@ public class Camp extends NPCAwareContent{
 		outputText("You end your fusion separating from the elemental back into two different entities.");
 		if (player.hasPerk(PerkLib.SharedPower)) player.setPerkValue(PerkLib.SharedPower, 1, 0);
 		player.removePerk(PerkLib.ElementalBody);
+		if (player.hasPerk(PerkLib.AffinitySylph)) player.removePerk(PerkLib.AffinitySylph);
+		if (player.hasPerk(PerkLib.AffinityGnome)) player.removePerk(PerkLib.AffinityGnome);
+		if (player.hasPerk(PerkLib.AffinityIgnis)) player.removePerk(PerkLib.AffinityIgnis);
+		if (player.hasPerk(PerkLib.AffinityUndine)) player.removePerk(PerkLib.AffinityUndine);
 		statScreenRefresh();
 		doNext(druidMenu);
 	}

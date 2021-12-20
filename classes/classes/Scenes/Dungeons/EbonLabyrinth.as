@@ -246,7 +246,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			clearOutput();
 			outputText("The snail girl catches you before you even hit the floor, a wide gooey smile on her face.\n\n");
 			outputText("\"<i>Aw, no need to be so aggressive, I know exactly what you need! A BIG warm hug!</i>\"\n\n");
-			if (player.hasPerk(PerkLib.FireAffinity)) {
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) {
 				outputText("No way, she's going to hug you!? You scream in panic trying to get free but it's pointless as she has you beneath her shell now. However friendly she is, your body isn't made to endure such crazy heat. Or is it? To your surprise you actually feel comfortable in her grasp and even begin to relax, returning the hug and gently imprinting your hands into her generous breasts.");
 				HellfireSnailSex();
 				monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
@@ -515,7 +515,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		
 		public function encountersRuletteBossesEL1HellSnail():void {
-			if (player.hasPerk(PerkLib.FireAffinity) && flags[kFLAGS.HELLFIRE_SNAIL_ENC] == 1) {
+			if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && flags[kFLAGS.HELLFIRE_SNAIL_ENC] == 1) {
 				outputText("You turn the corner expecting to run into yet another monster out to badly hurt you but sigh in relief as you run into the fire snail girl instead.\n\n");
 				outputText("\"<i>Hey it's you again. Having fun down there?</i>\"\n\n");
 				outputText("Well you could say that, in a way, yes you are having fun down there.\n\n");
