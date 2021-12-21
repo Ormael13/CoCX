@@ -456,8 +456,8 @@ public class PerkLib
 				".",
 				"You've chosen the 'Offensive Staff Channeling' perk. .");
 		public static const ElementalConjurerKnowledge:PerkType = mk("Elemental Conjurer Knowledge", "Elemental Conjurer Knowledge",
-				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)",
-				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)");
+				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
+				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
 		public static const ElementalConjurerKnowledgeEx:PerkType = mk("Elemental Conjurer Knowledge (Ex)", "Elemental Conjurer Knowledge (Ex)",
 				"Decrease chance to fail when ranking up an elemental or/and replace mana with elemental energy gained from sacrificing elemental shards to arcane circle.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk, .");
