@@ -1804,7 +1804,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText(" damage! ");
 				damage *= 2;
 			}
-			monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
+			if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+			else monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
@@ -2976,7 +2977,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 2;
 		if (player.hasKeyItem("Nitro Boots") >= 0) {
 			outputText(" Your foe catches on fire.");
-			monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+			if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+			else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");

@@ -1433,20 +1433,32 @@ public class CampMakeWinions extends BaseContent
 		}
 		private function elementaLvlUpEpic():void {
 			menu();
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 3) {
-				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)) addButton(0, "Air", rankUpElementalAirEpic);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", rankUpElementalAirEpic);
+					else addButtonDisabled(0, "Air", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
 				else addButtonDisabled(0, "Air", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 3) {
-				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200)) addButton(1, "Earth", rankUpElementalEarthEpic);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", rankUpElementalEarthEpic);
+					else addButtonDisabled(1, "Earth", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
 				else addButtonDisabled(1, "Earth", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 3) {
-				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200)) addButton(2, "Fire", rankUpElementalFireEpic);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", rankUpElementalFireEpic);
+					else addButtonDisabled(2, "Fire", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
 				else addButtonDisabled(2, "Fire", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 3) {
-				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200)) addButton(3, "Water", rankUpElementalWaterEpic);
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", rankUpElementalWaterEpic);
+					else addButtonDisabled(3, "Water", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
 				else addButtonDisabled(3, "Water", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu)
@@ -2388,3 +2400,4 @@ public class CampMakeWinions extends BaseContent
 		}
 	}
 }
+

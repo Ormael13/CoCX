@@ -6062,18 +6062,38 @@ public class MagicSpecials extends BaseCombatContent {
 		if (type == 1) {
 			outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
 			doWindDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+			}
 		}
 		if (type == 2) {
 			outputText("You smash both of your fists into the ground, causing vegetation to grow at an accelerated rate. [Themonster] is punched out of nowhere as a grown tree suddenly sprouts from beneath! ");
 			doEarthDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+					monster.addStatusValue(StatusEffects.AcidDoT,1,1);
+					monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+				}
+				else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+			}
 		}
 		if (type == 3) {
 			outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
 			doFireDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
+			}
 		}
 		if (type == 4) {
 			outputText("You push both of your palms toward your opponent, your arms turning to a pair of powerful water jets that batters [themonster] with rock crushing pressure! ");
 			doWaterDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
+				if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
+				else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+			}
 		}
 		outputText("\n\n");
 		enemyAI();

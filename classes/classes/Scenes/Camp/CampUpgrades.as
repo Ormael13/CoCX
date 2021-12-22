@@ -125,10 +125,8 @@ public function buildmisc1Menu():void {
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3) addButton(4, "Sparring Ring", sparringRing).hint("Expand sparring ring to large size. (Decrease npc's training time by 1/6 and increase exp from using training dummy by 100% (200% of base amount))(Req. 150 fatigue)");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. 50 fatigue)");
 	}
-	if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) {
-		addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp OR add another circle to it. (Unlock elementals summons/rank up related options)(Req. 50 fatigue, enough stones, mana and blood)");
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) addButton(6, "Elemental E. C.", arcaneCircleUpgrade).hint("Add Elemental Energy Conduits to your arcane circle to store in them elemental energy stored in elementals shards for more easy use. (Allowing to replace mana and reduce fatigue usage when summoning/ranking up normal tier elementals. Allowing to rank up elementals of tiers above normal tier.)(Req. 50 fatigue, enough stones, mana and elemental shards)");
-	}
+	if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp OR add another circle to it. (Unlock elementals summons/rank up related options)(Req. 50 fatigue, enough stones, mana and blood)");
+	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) addButton(6, "Elemental E. C.", arcaneCircleUpgrade).hint("Add Elemental Energy Conduits to your arcane circle to store in them elemental energy stored in elementals shards for more easy use. (Allowing to replace mana and reduce fatigue usage when summoning/ranking up normal tier elementals. Allowing to rank up elementals of tiers above normal tier.)(Req. 50 fatigue, enough stones, mana and elemental shards)");
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(7, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(8, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue * tier of built dam)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(9, "Fishery", fishery).hint("Build up a fishery on the steam next to the camp. (Req. 200 fatigue)");
@@ -1581,10 +1579,10 @@ public function arcaneCircleUpgrade():void {
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 3) {
 					upgradeSecondElementalEnergyConduit();
 					return;
-				}/*
+				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 4) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) {
-						buildSecondElementalEnergyConduit();
+						buildThirdElementalEnergyConduit();
 						return;
 					}
 					else {
@@ -1592,16 +1590,38 @@ public function arcaneCircleUpgrade():void {
 						doNext(playerMenu);
 					}
 				}
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 5) {
+					upgradeThirdElementalEnergyConduit();
+					return;
+				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 6) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) {
-						buildSecondElementalEnergyConduit();
+						buildFourthElementalEnergyConduit();
 						return;
 					}
 					else {
 						outputText("You lack fourth ritual circle!");
 						doNext(playerMenu);
 					}
-				}*/
+				}
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 7) {
+					upgradeFourthElementalEnergyConduit();
+					return;
+				}
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 8) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) {
+						buildFifthElementalEnergyConduit();
+						return;
+					}
+					else {
+						outputText("You lack fifth ritual circle!");
+						doNext(playerMenu);
+					}
+				}
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 9) {
+					upgradeFifthElementalEnergyConduit();
+					return;
+				}
 			}
 			else
 			{
@@ -1691,7 +1711,7 @@ public function buildSecondElementalEnergyConduit():void {
 private function doBuildSecondElementalEnergyConduit():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 4;
 	clearOutput();
-	outputText("You decide to engrave conduict in secend circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle forming basic elemental conduit in it.");
+	outputText("You decide to engrave conduict in second circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,800);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
 	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+800)</b>\"");
@@ -1733,6 +1753,186 @@ private function doUpgradeSecondElementalEnergyConduit():void {
 	player.destroyItems(useables.ELSHARD, 4);
 	fatigue(fatigueAmount);
 	useMana(200);
+	doNext(camp.returnToCampUseFourHours);
+}
+public function buildThirdElementalEnergyConduit():void {
+	outputText("Do you start work on making third elemental energy conduit? (Cost: 5 stones, 5 Elemental Shards and 250 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 5 && player.hasItem(useables.ELSHARD, 5) && player.mana >= 250)
+	{
+		doYesNo(doBuildThirdElementalEnergyConduit, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildThirdElementalEnergyConduit():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 5;
+	clearOutput();
+	outputText("You decide to engrave conduict in third circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all five prepared nodes in the third circle forming basic elemental conduit in it.");
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1000);
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
+	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,000)</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+	if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
+	outputText("\n\n");
+	player.destroyItems(useables.ELSHARD, 5);
+	fatigue(fatigueAmount);
+	useMana(250);
+	doNext(camp.returnToCampUseFourHours);
+}
+public function upgradeThirdElementalEnergyConduit():void {
+	outputText("Do you start work on expanding third elemental energy conduit? (Cost: 5 stones, 5 Elemental Shards and 250 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 5 && player.hasItem(useables.ELSHARD, 5) && player.mana >= 250)
+	{
+		doYesNo(doUpgradeThirdElementalEnergyConduit, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doUpgradeThirdElementalEnergyConduit():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 5;
+	clearOutput();
+	outputText("You decide to expand your third energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all five prepared nodes in the third circle changing basic one elemental conduit into advanced.");
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1000);
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
+	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,000)</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+	if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
+	outputText("\n\n");
+	player.destroyItems(useables.ELSHARD, 5);
+	fatigue(fatigueAmount);
+	useMana(250);
+	doNext(camp.returnToCampUseFourHours);
+}
+public function buildFourthElementalEnergyConduit():void {
+	outputText("Do you start work on making fourth elemental energy conduit? (Cost: 6 stones, 6 Elemental Shards and 300 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 6 && player.hasItem(useables.ELSHARD, 6) && player.mana >= 300)
+	{
+		doYesNo(doBuildFourthElementalEnergyConduit, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildFourthElementalEnergyConduit():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 6;
+	clearOutput();
+	outputText("You decide to engrave conduict in fourth circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all six prepared nodes in the fourth circle forming basic elemental conduit in it.");
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1200);
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
+	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,200)</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+	if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
+	outputText("\n\n");
+	player.destroyItems(useables.ELSHARD, 6);
+	fatigue(fatigueAmount);
+	useMana(300);
+	doNext(camp.returnToCampUseFourHours);
+}
+public function upgradeFourthElementalEnergyConduit():void {
+	outputText("Do you start work on expanding fourth elemental energy conduit? (Cost: 6 stones, 6 Elemental Shards and 300 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 6 && player.hasItem(useables.ELSHARD, 6) && player.mana >= 300)
+	{
+		doYesNo(doUpgradeFourthElementalEnergyConduit, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doUpgradeFourthElementalEnergyConduit():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 6;
+	clearOutput();
+	outputText("You decide to expand your fourth energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all six prepared nodes in the fourth circle changing basic one elemental conduit into advanced.");
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1200);
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
+	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,200)</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+	if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
+	outputText("\n\n");
+	player.destroyItems(useables.ELSHARD, 6);
+	fatigue(fatigueAmount);
+	useMana(300);
+	doNext(camp.returnToCampUseFourHours);
+}
+public function buildFifthElementalEnergyConduit():void {
+	outputText("Do you start work on making fifth elemental energy conduit? (Cost: 7 stones, 7 Elemental Shards and 350 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 7 && player.hasItem(useables.ELSHARD, 7) && player.mana >= 350)
+	{
+		doYesNo(doBuildFifthElementalEnergyConduit, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildFifthElementalEnergyConduit():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 7;
+	clearOutput();
+	outputText("You decide to engrave conduict in fifth circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all seven prepared nodes in the fifth circle forming basic elemental conduit in it.");
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1400);
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
+	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,400)</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+	if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
+	outputText("\n\n");
+	player.destroyItems(useables.ELSHARD, 7);
+	fatigue(fatigueAmount);
+	useMana(350);
+	doNext(camp.returnToCampUseFourHours);
+}
+public function upgradeFifthElementalEnergyConduit():void {
+	outputText("Do you start work on expanding fifth elemental energy conduit? (Cost: 7 stones, 7 Elemental Shards and 350 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 7 && player.hasItem(useables.ELSHARD, 7) && player.mana >= 350)
+	{
+		doYesNo(doUpgradeFifthElementalEnergyConduit, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doUpgradeFifthElementalEnergyConduit():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 7;
+	clearOutput();
+	outputText("You decide to expand your fifth energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all seven prepared nodes in the fifth circle changing basic one elemental conduit into advanced.");
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1400);
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
+	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,400)</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+	if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
+	outputText("\n\n");
+	player.destroyItems(useables.ELSHARD, 7);
+	fatigue(fatigueAmount);
+	useMana(350);
 	doNext(camp.returnToCampUseFourHours);
 }
 

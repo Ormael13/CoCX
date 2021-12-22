@@ -224,7 +224,7 @@ package classes.Scenes
 			outputText("-1 new achievment.\n");//s	 (1 shadow one)
 			outputText("-Evangeline can make Leviatan Sunscreen (Sea Dragon TF) from Orca and Dragon TF items. Alchemy menu been split between 2 subpages with all options now spread there without any additional submenus (like the one before for scylla or abyssal ink).\n");
 			outputText("-Druid job allow to undergone another (sorta) transformation: fusion with one of 4 epic elementals (water, firte, air, earth). Fusion would change PC look, disable most of physical and magical speicals that req. to have specific bodypart, if PC nopt have any range weapon equipped that allow to attack will be granted default to specific fusion base range attack option.\n");
-			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
+			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid perk. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
 			outputText("-Elemental fusions would change PC sprite look to either male or female version of one of four options. (sprites by Liadri)\n");
 			outputText("-Body Cultivator's Focus & Daoist's Focus perks on melee and range weapons will be seperated with change to perk desc (so there will be possible to have 2 perks with one with suffix (M) and other (R)). For making sure nothing glitch futher please deequip both melee and range weapons then reequip them anew.\n");
 			outputText("-New event perk: Affinity (Gnome). Gained by fusing with epic earth elemental. Effects: Gain a boon based on the terrain, abundance of plants grants regeneration 15% while rocky ground gives +20% Damage reduction. Aquatic or snowy terrain gives nothing.\n");
@@ -233,7 +233,7 @@ package classes.Scenes
 			outputText("-New event perk: Affinity (Undine). Gained by fusing with epic water elemental. Effects: Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).\n");
 			outputText("-Aquatic Affinity perk adding now weakness to lightining damage (-100% resistance).\n");
 			outputText("-Fusing with epic elemental would remove raical bonuses and give new ones realted to specific fusion. Also would give access to passive effect + 2 specials. When Epic elemental are higher ranked it will unlock 2nd and 3rd special.\n");
-			outputText("-\n");
+			outputText("-New tier 11 wisdom lvl-up perk: Elemental touch. Req. Shared power perk. Effect: Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

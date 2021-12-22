@@ -5942,7 +5942,8 @@ public class Combat extends BaseContent {
                 WeaponMeleeStatusProcs();
                 if (player.weapon == weapons.RIPPER2) {
                     outputText("  Reeling in pain [themonster] begins to burn.");
-                    monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+                    if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+					else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
                 }
                 if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
                     var lust0damage:Number = 35 + rand(player.lib / 10);
@@ -6678,6 +6679,28 @@ public class Combat extends BaseContent {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
         }
+		if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch) && player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+                else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 2) {
+				if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+					monster.addStatusValue(StatusEffects.AcidDoT,1,1);
+					monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+				}
+				else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 4) {
+				monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
+				if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
+				else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+			}
+		}
     }
 
     public function WeaponRangeStatusProcs():void {
@@ -15259,4 +15282,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

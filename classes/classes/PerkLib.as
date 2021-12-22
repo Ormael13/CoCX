@@ -374,6 +374,9 @@ public class PerkLib
 		public static const Sadomasochism:PerkType = mk("Sadomasochism", "Sadomasochism",
 				"You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)",
 				"You've chosen the 'Sadomasochism' perk. You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat.");
+		public static const SharedPower:PerkType = mk("Shared power", "Shared power",
+				"Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.",
+				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.");
 		public static const SilverForMonsters:PerkType = mk("Silver for monsters", "Silver for monsters",
 				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.",
 				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.");
@@ -464,9 +467,9 @@ public class PerkLib
 		public static const ElementalConjurerKnowledgeSu:PerkType = mk("Elemental Conjurer Knowledge (Su)", "Elemental Conjurer Knowledge (Su)",
 				"Allow to convert soulforce into elemental energy.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk, .");
-		public static const SharedPower:PerkType = mk("Shared power", "Shared power",
-				"Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.",
-				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.");
+		public static const ElementalTouch:PerkType = mk("Elemental touch", "Elemental touch",
+				"Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.",
+				"You've chosen the 'Elemental touch' perk. Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.");
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
@@ -480,9 +483,6 @@ public class PerkLib
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of four traditional.");
 		/*public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
@@ -5643,6 +5643,8 @@ public class PerkLib
                     .requirePerk(PerfectStrike);
             BoneSoul.requireLevel(66)
                     .requirePerk(GreaterHarvest);
+            ElementalTouch.requireLevel(66)
+                    .requirePerk(SharedPower);
             ElementalContractRank12.requirePerk(ElementalContractRank11)
                     .requireWis(300)
                     .requireLevel(66);
@@ -7048,3 +7050,4 @@ public class PerkLib
 	initDependencies();
 }
 }
+
