@@ -1354,12 +1354,14 @@ public class CampMakeWinions extends BaseContent
 			else addButtonDisabled(1, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
 			else addButtonDisabled(5, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(6, "ElementUp(E)", elementaLvlUpEpic);
+			else addButtonDisabled(6, "ElementUp(E)", "You don't have any epic elementals, try summoning one!");
 			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) >= 1) addButton(12, "E.S.Conv.", elementalShardsConversion).hint("Conversion of Elemental Shards into energy stored in arcane circle elemental conduit.");
 			else addButtonDisabled(12, "E.S.Conv.", "You need to have any elemental conduit added to the arcane circle to use this option.");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
-		private function elementaLvlUp():void{
+		private function elementaLvlUp():void {
 			var elementalTypes:Array = [];
 			var contractRankI:int = 0;
 			var btnInt:int = 0;
@@ -1429,13 +1431,21 @@ public class CampMakeWinions extends BaseContent
 			}
 			addButton(14, "Back", elementaLvlUp);
 		}
+		private function elementaLvlUpEpic():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 3) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)) addButton(0, "Air", rankUpElementalAirEpic);
+				else addButtonDisabled(0, "Air", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu)
+		}
 		private function elementalShardsConversion():void {
 			clearOutput();
 			outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
 			outputText("Do you like to convert elemental shard into energy stored in conduit? (Excess energy will be lost)\n\n");
 			menu();
 			if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo);
-			else addButtonDisabled(1, "Yes", "you not have any Elemental Shardsa to convert currently.");
+			else addButtonDisabled(1, "Yes", "You not have any Elemental Shards to convert currently.");
 			addButton(3, "Back", accessSummonElementalsMainMenu);
 		}
 		private function elementalShardsConversionGo():void {
@@ -2128,6 +2138,87 @@ public class CampMakeWinions extends BaseContent
 			var failure:Number = 0.5;
 			if (player.hasPerk(PerkLib.ElementalConjurerKnowledge)) failure -= 0.2;
 			return failure;
+		}
+		private function rankUpElementalAirEpic():void {
+			clearOutput();
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("You start with three circles, offset from the very center of the magic circle. Each with a slightly different color of light-blue. Each circle consists of the “Control” rune, of uniform size, each running into the next with no space between them.\n\n");
+			outputText("Spiraling runes of black, white and grey come next, coming out from the center and wrapping around the group of three circles, binding them together. “Power” forms the majority of them, but you throw in “flow” and “wind” periodically, each of those runes forming their own miniature swirl of runes. ");
+			outputText("Finally, at the edge, “Movement”, and “Freedom” runes adorn the outside edge. With that last step completed, you sit, mentally calling for your Epic Air elemental.\n\n");
+			outputText("A swirl of air, barely more than a breeze, forms into solid mass, your epic air elemental, its arms folded, stares at you.\n\n");
+			outputText("\"<i>What is the meaning of this containment?</i>\" It looks down at the clearly magical circle. You explain that it’s time to upgrade its power.\n\n");
+			outputText("\"<i>So even the most abhorrent creations serve a purpose. Very well.</i>\"\n\n");
+			outputText("You call to your power, magic enfusing the runes in the middle. Your three circles shoot up, growing larger at the top, and shrinking down into the three small circles at the ground. Your waves of spiralling runes are taken with them, ");
+			outputText("the trails of different colored runes bleeding into each other, lashing in dizzying, chaotic flows. In the center, in the middle of those three runic tornadoes, your epic air elemental raises its hands, calm in the eye of your storm.\n\n");
+			outputText("<i>Winds howl, the sky’s fury made will. Land and Sea bow before it.</i> Lightning strikes your runes, and the wind howls, nearly picking you up off the ground. <i>Breath of life, storm of Death, the line between them ragged and torn.</i>\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 100) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("Your storm, as quickly as it had formed, is drawn into the center. The three howling tornadoes shrink into one, then are pulled down, down further, back towards the ground. Your runes wrap around the wrists of your epic air elemental, and are absorbed, bit by bit, into the creature’s body.\n\n");
+				outputText("\"<i>But in that uncertainty lies power, for the bold...or the foolish.</i>\" Your epic air elemental begins to fade into ethereality, a bit bigger than before. \"<i>Call upon me soon, [master].</i>\"\n\n");
+				player.addStatusValue(StatusEffects.SummonedElementalsAirE, 2, 1);
+			}
+			else {
+				outputText("Your magic circle groans, your control runes warping. You watch in horror as one of your runes is pulled in between two of the three swirling vortexes...and is promptly torn to shreds. As if a switch had been pulled, the winds explode in a howling, screaming force, throwing you away from the circle. ");
+				outputText("You hit a rock back-first, and as you sit there, dazed, the figure of your epic air elemental lowers itself in front of you.\n\n");
+				outputText("\"<i>The storm seems to have failed to claim you. Good. Call upon the winds once more, once you have recovered.</i>\" Your epic air elemental fades from view, a light warm breeze blowing past your face.\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
+		}
+		private function rankUpElementalEarthEpic():void {
+			clearOutput();
+			
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 100) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				player.addStatusValue(StatusEffects.SummonedElementalsEarthE, 2, 1);
+			}
+			else failToRankUpElemental();
+			doNext(elementaLvlUp);
+			eachMinuteCount(30);
+		}
+		private function rankUpElementalFireEpic():void {
+			clearOutput();
+			
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 100) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				player.addStatusValue(StatusEffects.SummonedElementalsFireE, 2, 1);
+			}
+			else failToRankUpElemental();
+			doNext(elementaLvlUp);
+			eachMinuteCount(30);
+		}
+		private function rankUpElementalWaterEpic():void {
+			clearOutput();
+			
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 25) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				player.addStatusValue(StatusEffects.SummonedElementalsWaterE, 2, 1);
+			}
+			else failToRankUpElemental();
+			doNext(elementaLvlUp);
+			eachMinuteCount(30);
 		}
 		
 		//-------------

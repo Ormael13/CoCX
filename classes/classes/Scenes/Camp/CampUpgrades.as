@@ -128,7 +128,6 @@ public function buildmisc1Menu():void {
 	if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) {
 		addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp OR add another circle to it. (Unlock elementals summons/rank up related options)(Req. 50 fatigue, enough stones, mana and blood)");
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) addButton(6, "Elemental E. C.", arcaneCircleUpgrade).hint("Add Elemental Energy Conduits to your arcane circle to store in them elemental energy stored in elementals shards for more easy use. (Allowing to replace mana and reduce fatigue usage when summoning/ranking up normal tier elementals. Allowing to rank up elementals of tiers above normal tier.)(Req. 50 fatigue, enough stones, mana and elemental shards)");
-		//7? - upgrades of conduits or do it as part of  option 6 menu?
 	}
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(7, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(8, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue * tier of built dam)");
@@ -1564,40 +1563,51 @@ public function arcaneCircleUpgrade():void {
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) {
-			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 1) {
-				upgradeFirstElementalEnergyConduit();
-				return;
+			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) < 4) {
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 1) {
+					upgradeFirstElementalEnergyConduit();
+					return;
+				}
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 2) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) {
+						buildSecondElementalEnergyConduit();
+						return;
+					}
+					else {
+						outputText("You lack second ritual circle!");
+						doNext(playerMenu);
+					}
+				}
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 3) {
+					upgradeSecondElementalEnergyConduit();
+					return;
+				}/*
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 4) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) {
+						buildSecondElementalEnergyConduit();
+						return;
+					}
+					else {
+						outputText("You lack third ritual circle!");
+						doNext(playerMenu);
+					}
+				}
+				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 6) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) {
+						buildSecondElementalEnergyConduit();
+						return;
+					}
+					else {
+						outputText("You lack fourth ritual circle!");
+						doNext(playerMenu);
+					}
+				}*/
 			}
-			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 2) {
-				if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) {
-					buildSecondElementalEnergyConduit();
-					return;
-				}
-				else {
-					outputText("You lack second ritual circle!");
-					doNext(playerMenu);
-				}
-			}/*
-			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 4) {
-				if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) {
-					buildSecondElementalEnergyConduit();
-					return;
-				}
-				else {
-					outputText("You lack third ritual circle!");
-					doNext(playerMenu);
-				}
+			else
+			{
+				outputText("You can't add new one elemental energy conduit! (Due to having all arcane circles having them or reaching last possible to construct conduit)");
+				doNext(playerMenu);
 			}
-			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 6) {
-				if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) {
-					buildSecondElementalEnergyConduit();
-					return;
-				}
-				else {
-					outputText("You lack fourth ritual circle!");
-					doNext(playerMenu);
-				}
-			}*/
 		}
 	}
 	else
@@ -1651,7 +1661,7 @@ public function upgradeFirstElementalEnergyConduit():void {
 private function doUpgradeFirstElementalEnergyConduit():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 3;
 	clearOutput();
-	outputText("You decide to expand your first energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all three prepared nodes in the first circle chancing basic one elemental conduit into advanced.");
+	outputText("You decide to expand your first energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all three prepared nodes in the first circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,600);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
 	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+600)</b>\"");
@@ -1682,6 +1692,36 @@ private function doBuildSecondElementalEnergyConduit():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 4;
 	clearOutput();
 	outputText("You decide to engrave conduict in secend circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle forming basic elemental conduit in it.");
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,800);
+	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
+	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+800)</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+	if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
+	outputText("\n\n");
+	player.destroyItems(useables.ELSHARD, 4);
+	fatigue(fatigueAmount);
+	useMana(200);
+	doNext(camp.returnToCampUseFourHours);
+}
+public function upgradeSecondElementalEnergyConduit():void {
+	outputText("Do you start work on expanding second elemental energy conduit? (Cost: 4 stones, 4 Elemental Shards and 200 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 4 && player.hasItem(useables.ELSHARD, 4) && player.mana >= 200)
+	{
+		doYesNo(doUpgradeSecondElementalEnergyConduit, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doUpgradeSecondElementalEnergyConduit():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 4;
+	clearOutput();
+	outputText("You decide to expand your second energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,800);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
 	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+800)</b>\"");
