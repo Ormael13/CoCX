@@ -232,7 +232,7 @@ package classes.Scenes
 			outputText("-New event perk: Affinity (Sylph). Gained by fusing with epic air elemental. Effects: When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.\n");
 			outputText("-New event perk: Affinity (Undine). Gained by fusing with epic water elemental. Effects: Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).\n");
 			outputText("-Aquatic Affinity perk adding now weakness to lightining damage (-100% resistance).\n");
-			outputText("-Fusing with epic elemental would remove raical bonuses and give new ones realted to specific fusion. ALso would give access to passive effect + 2 specials. When Epic elemental are higher ranked it will unlock 2nd and 3rd special.\n");
+			outputText("-Fusing with epic elemental would remove raical bonuses and give new ones realted to specific fusion. Also would give access to passive effect + 2 specials. When Epic elemental are higher ranked it will unlock 2nd and 3rd special.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

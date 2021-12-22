@@ -1390,7 +1390,7 @@ public class CampMakeWinions extends BaseContent
 					}
 				}
 			}
-			var arcaneCMax:int = (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]*4) - 1;
+			var arcaneCMax:int = (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]*4);
 			for (var i:int = 0,j:int = elementalTypes.length; i < j; i++){
 				if (i % 3 == 0){
 					var btnName:String = elementalTypes[i];
@@ -1436,6 +1436,18 @@ public class CampMakeWinions extends BaseContent
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 3) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)) addButton(0, "Air", rankUpElementalAirEpic);
 				else addButtonDisabled(0, "Air", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 3) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200)) addButton(1, "Earth", rankUpElementalEarthEpic);
+				else addButtonDisabled(1, "Earth", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 3) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200)) addButton(2, "Fire", rankUpElementalFireEpic);
+				else addButtonDisabled(2, "Fire", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 3) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200)) addButton(3, "Water", rankUpElementalWaterEpic);
+				else addButtonDisabled(3, "Water", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu)
 		}
@@ -2171,54 +2183,90 @@ public class CampMakeWinions extends BaseContent
 		}
 		private function rankUpElementalEarthEpic():void {
 			clearOutput();
-			
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Earth elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("First, you coat the outside of the circle in green ink, stenciling in “Control”. Nodes of brown and grey runes, clumped into seemingly random spots along the summoning circle, spell “Power”. On completion, each rune shakes a little before stopping, in a slightly different place than you drew it in.\n\n");
+			outputText("“Ground”, “Earth” and “Stone” runes line the inner layers, painted in red, blue and green. As you finish each one, it begins to shine from within, and you can see the stone you painted it on, underneath.\n\n");
+			outputText("Finally, a layer of gold-colored runes in the very center, spiraling out. The runes shine, glittering as if a spotlight was shone on a gold bar.\n\n");
+			outputText("Encouraged, you call out to your epic earth elemental.\n\n");
+			outputText("\"<i>You called?</i>\" Rising from within the circle, your epic earth elemental pops from the ground. Her eyes are gemstones, red and green, and a simple ring of sapphires adorn what would be her ‘neck’. Other than that, your elemental looks like a well-made statue of a nubile young woman. She sits in the circle, feminine legs crossed, and tilts her head as your elemental considers you.\n\n");
+			outputText("\"<i>What needs to be swallowed?</i>\" You tell your epic earth elemental that you are preparing to draw out more of its power. Its gem eyes light up, and you swear you could see a smile on its face.\n\n");
+			outputText("\"<i>Let us begin, then!</i>\" Your earth elemental stands, folding her arms over her ample chest and looking down at the runes below.\n\n");
+			outputText("You call out to your power, mana visibly clumping into pieces, then latching themselves onto your runes. As you pour more mana into the ritual, a gold band forms, rising from the inner circle and spinning rapidly. Your control runes shoot up, carried by crude spikes of stone that curve inwards, forming a mountainous cocoon around your circle and blocking out the light.\n\n");
+			outputText("Your flickering, glowing runes in the inner circle are the next to rise, floating in midair. Despite the darkness, they shine with an inner light, almost like enchanted gemstones. The rocks around you stop shaking, and for a moment, all is still.\n\n");
+			outputText("\"<i>Gold, Gems, Plant, Animal: All come from the cradle of the earth. And to Earth they all return...</i>\"\n\n");
 			var summmast:Number = 0;
 			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 100) summmast += 25;
 			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 4);
 			if (rand(summmast) > 5) {
-				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				outputText("\"<i>And the earth hungers.</i>\" The mountain crumbles, showering you and your elemental in stone. Your gemstone runes fade, and your epic earth elemental stands, arching its back as the last light from the runes shoot into its body. \"<i>Well done, [master].</i>\"\n\n");
 				player.addStatusValue(StatusEffects.SummonedElementalsEarthE, 2, 1);
 			}
-			else failToRankUpElemental();
-			doNext(elementaLvlUp);
-			eachMinuteCount(30);
+			else {
+				outputText("\"<i>Some sooner than most.</i>\" Your mountain caves inward, spikes of stone forming on the inside. You charge one side of your magic circle, and the thin spire of stone explodes outwards. Finally disrupted, the gemstones shatter, pelting you in painful shards. ");
+				outputText("As the dust settles, cuts on your [skin] gushing blood, your elemental frowns, shaking its head. \"<i>A disappointment, to be sure.</i>\"\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
 		}
 		private function rankUpElementalFireEpic():void {
 			clearOutput();
-			
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Fire elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. In red ink, you stencil runes reading “power”, in thin, curving lines inside the circle. As you complete each section of the fiery pattern, you can feel the air around you heat up slightly.\n\n");
+			outputText("Inside of each line, you stencil curls of “control” runes in orange. Each rune flickers as you complete it, making each rune slightly harder to create.\n\n");
+			outputText("Yellow ink comes next: you write “Heat” in waves, rising from between the orange curls towards the center of the circle. As you draw each one, the center of the circle begins to shimmer, distorting what you can see through it.\n\n");
+			outputText("You draw wavy lines from the center of your circle, where the heat is, twelve in total, in a white color.\n\n");
+			outputText("Upon completion, the runes shift, beginning to move, flickering like the flames their design suggests. Encouraged by this, you sit in your magic circle, and call upon your Epic Fire Elemental. At your call, you feel a stirring, rising heat in your head.\n\n");
+			outputText("\"<i>What shall we turn to ash, [master]?</i>\" The womanly form of your Elemental appears in the summoning circle, her face featureless except for burning yellow eyes.\n\n");
+			outputText("You tell your elemental that the time has come to draw upon more of her power.\n\n");
+			outputText("\"<i>How bold...Calling so much heat into the world...Very well. So it shall be...If you can handle more of me.</i>\"\n\n");
+			outputText("As your elemental settles in, the flickering runes rise from the ground, the red splitting, mixing. Your elemental leans back, womanly curves setting the runes ablaze. Strings of runic power mix with the flames, the mixture wrapping around the edges of the circle. A pillar of flame and text sear the edges of the circle, reaching skyward with hungry intent.\n\n");
+			outputText("\"<i>All fires wish to grow, to consume…So it has always been...</i>\"\n\n");
 			var summmast:Number = 0;
 			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 100) summmast += 25;
 			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 4);
 			if (rand(summmast) > 5) {
-				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				outputText("Your elemental floats up, into the center of the circle. Your runes float towards her, sticking to her body, the text slowly merging with the writhing flames of her body. Quicker and quicker, the flames enter, whipping past your body. The heat rises, rises...You close your eyes as a flash of light envelops the area.\n\n");
+				outputText("When you open your eyes, your epic flame elemental is lounging in midair. She seems slightly bigger than before, her flames brighter.\n\n");
+				outputText("\"<i>And so it shall be. Show this world our heat. Consume what you will.</i>\" Your elemental vanishes, leaving your [skin] looking like you’d spent a week in the sun.\n\n");
 				player.addStatusValue(StatusEffects.SummonedElementalsFireE, 2, 1);
 			}
-			else failToRankUpElemental();
-			doNext(elementaLvlUp);
-			eachMinuteCount(30);
+			else {
+				outputText("The flames roar, and your elemental winces, vanishing from the circle. You watch in horror as the flames roar out of control, consuming your runes, turning them black before they vanish. The lines of your magic circle whine, barely containing the raging inferno. You wince, enduring the flames as best you can, but before it dies down, you’ve taken a lot of damage.\n\n");
+				outputText("\"<i>...And it will consume those who underestimate its power. Perhaps another time, [master].</i>\"\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
 		}
 		private function rankUpElementalWaterEpic():void {
 			clearOutput();
-			
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Water elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. You start with rolling lines of “control” runes, in a dark, almost black blue, then a line of lighter blue waves of “Power” runes, all along the outside of the circle. ");
+			outputText("In the middle, you draw a single circle of “Tide” runes in white, with smaller circles inside.\n\nAs you complete the last of the “Tide” runes, you notice your white runes in the middle spin, slow at first, but picking up speed. As it does, the runes along the outside begin to move, colors mixing and flowing like water. ");
+			outputText("The white keeps spinning, seemingly pulling the outer ‘waves’ along with it.\n\nYou know that the time to call upon your epic water elemental has come. You feel your mana drain, and a deep, masculine voice sounds in your head.\n\n");
+			outputText("\"<i>So you call me.</i>\" Very well. Water erupts from the ground below you, quickly forming into a masculine form. Your epic water elemental stands, body shifting visibly as the tide runes below him rotate. He sits, shifting with the tides below.\n\n");
+			outputText("You explain to your elemental that you can draw more power, and it nods. \"<i>So it would seem. I will not attempt to stop you.</i>\"\n\n");
+			outputText("You call upon your power, and a roaring sound fills your ears. Your runes whip around inside the circle, and your waves rise, spraying up around the edges. Your white moon below begins to glow, and the water moves faster, still faster.\n\n");
+			outputText("\"<i>Mighty is the great flow: For none can stand forever. The rivers flow, the oceans roar...</i>\"\n\n");
 			var summmast:Number = 0;
 			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 25) summmast += 25;
 			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 4);
 			if (rand(summmast) > 5) {
-				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				outputText("Your epic elemental grabs hold of the white orb in the center of the circle. It begins to glow, and as it does, the spiraling flow of runic water comes in, closer and closer...and as it nears the orb, it vanishes, absorbed into the fluids of your epic elemental. The water roars, faster...Faster…It stings your everything, and keeping your eyes open is impossible.\n\n");
+				outputText("The roaring stops. You open your eyes to see your masculine water elemental, arms crossed, and as you see it, the creature nods.\n\n");
+				outputText("\"<i>But the water’s flow can be beneficial, to those who can bend.</i>\" The elemental closes its eyes. \"<i>We are more powerful. Wash away those who defy us.</i>\" It vanishes, leaving you soaking wet.\n\n");
 				player.addStatusValue(StatusEffects.SummonedElementalsWaterE, 2, 1);
 			}
-			else failToRankUpElemental();
-			doNext(elementaLvlUp);
-			eachMinuteCount(30);
+			else {
+				outputText("The moon-runes underneath you warp and groan, the white-whipped waters thrash harder. A single rune in the thrashing waves shudders...and shatters. This unleashes a wave of power that shatters your control runes. Stuck in the magic circle, you hunker down as the roaring water strikes you from every side. ");
+				outputText("For what feels like hours, you sit in your circle, enduring the waves you unleashed until your power runes are spent.\n\n");
+				outputText("\"<i>...and wash away those foolish enough to think they can weather the storm.</i>\" Your epic water elemental stands. \"<i>A pity, that more of my power cannot be unleashed in this realm.</i>\"\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
 		}
 		
 		//-------------
