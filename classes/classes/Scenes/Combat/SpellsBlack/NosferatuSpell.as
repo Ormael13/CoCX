@@ -36,7 +36,7 @@ public class NosferatuSpell extends AbstractBlackSpell {
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
 		var damage:Number = player.inte + scalingBonusIntelligence(randomize);
 		if (player.hasPerk(PerkLib.WisenedHealer)) damage += scalingBonusWisdom();
-		damage = Math.round(damage * healMod() * combat.magic.spellModGrey());
+		damage = Math.round(damage * healModBlack() * spellModBlack());
 		return damage;
 	}
 	

@@ -279,24 +279,24 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
 			if (hasPerk(PerkLib.BodyCultivator)) temp += (100 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += (200 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulPersonage)) temp += (200 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulWarrior)) temp += (200 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulApprentice)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulPersonage)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulWarrior)) temp += (250 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += (300 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulScholar)) temp += (300 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulElder)) temp += (300 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulSprite)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulScholar)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulElder)) temp += (400 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulOverlord)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulTyrant)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulExalt)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulOverlord)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulTyrant)) temp += (600 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += (500 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulEmperor)) temp += (500 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulAncestor)) temp += (500 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulKing)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulEmperor)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulAncestor)) temp += (800 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
@@ -519,60 +519,57 @@ import flash.utils.getQualifiedClassName;
 		public override function maxSoulforce():Number {
 			//Base soulforce
 			var temp:Number = 50 + this.bonusSoulforce;
-			if (hasPerk(PerkLib.JobSoulCultivator)) {
-				if (this.level >= 2) temp += 25;
-				if (this.level >= 4) temp += 25;
-			}
+			if (hasPerk(PerkLib.JobSoulCultivator)) temp += 50;
 			if (hasPerk(PerkLib.SoulApprentice)) {
+				temp += 30;
+				if (this.level >= 3) temp += 30;
 				if (this.level >= 6) temp += 30;
-				if (this.level >= 8) temp += 30;
-				if (this.level >= 10) temp += 30;
 			}
 			if (hasPerk(PerkLib.SoulPersonage)) {
-				if (this.level >= 12) temp += 40;
-				if (this.level >= 14) temp += 40;
-				if (this.level >= 16) temp += 40;
+				if (this.level >= 9) temp += 45;
+				if (this.level >= 12) temp += 45;
+				if (this.level >= 15) temp += 45;
 			}
 			if (hasPerk(PerkLib.SoulWarrior)) {
-				if (this.level >= 18) temp += 50;
-				if (this.level >= 20) temp += 50;
-				if (this.level >= 22) temp += 50;
+				if (this.level >= 18) temp += 60;
+				if (this.level >= 21) temp += 60;
+				if (this.level >= 24) temp += 60;
 			}
 			if (hasPerk(PerkLib.SoulSprite)) {
-				if (this.level >= 24) temp += 60;
-				if (this.level >= 26) temp += 60;
-				if (this.level >= 28) temp += 60;
+				if (this.level >= 27) temp += 90;
+				if (this.level >= 30) temp += 90;
+				if (this.level >= 33) temp += 90;
 			}
 			if (hasPerk(PerkLib.SoulScholar)) {
-				if (this.level >= 30) temp += 70;
-				if (this.level >= 32) temp += 70;
-				if (this.level >= 34) temp += 70;
+				if (this.level >= 36) temp += 120;
+				if (this.level >= 39) temp += 120;
+				if (this.level >= 42) temp += 120;
 			}
 			if (hasPerk(PerkLib.SoulElder)) {
-				if (this.level >= 36) temp += 80;
-				if (this.level >= 38) temp += 80;
-				if (this.level >= 40) temp += 80;
+				if (this.level >= 45) temp += 150;
+				if (this.level >= 48) temp += 150;
+				if (this.level >= 51) temp += 150;
 			}
 			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += 30;
-				if (hasPerk(PerkLib.SoulPersonage)) temp += 30;
-				if (hasPerk(PerkLib.SoulWarrior)) temp += 30;
+				if (hasPerk(PerkLib.SoulApprentice)) temp += 40;
+				if (hasPerk(PerkLib.SoulPersonage)) temp += 40;
+				if (hasPerk(PerkLib.SoulWarrior)) temp += 40;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += 40;
-				if (hasPerk(PerkLib.SoulScholar)) temp += 40;
-				if (hasPerk(PerkLib.SoulElder)) temp += 40;
+				if (hasPerk(PerkLib.SoulSprite)) temp += 60;
+				if (hasPerk(PerkLib.SoulScholar)) temp += 60;
+				if (hasPerk(PerkLib.SoulElder)) temp += 60;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += 50;
-				if (hasPerk(PerkLib.SoulOverlord)) temp += 50;
-				if (hasPerk(PerkLib.SoulTyrant)) temp += 50;
+				if (hasPerk(PerkLib.SoulExalt)) temp += 100;
+				if (hasPerk(PerkLib.SoulOverlord)) temp += 100;
+				if (hasPerk(PerkLib.SoulTyrant)) temp += 100;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += 60;
-				if (hasPerk(PerkLib.SoulEmperor)) temp += 60;
-				if (hasPerk(PerkLib.SoulAncestor)) temp += 60;
+				if (hasPerk(PerkLib.SoulKing)) temp += 150;
+				if (hasPerk(PerkLib.SoulEmperor)) temp += 150;
+				if (hasPerk(PerkLib.SoulAncestor)) temp += 150;
 			}
 			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
@@ -1695,74 +1692,97 @@ import flash.utils.getQualifiedClassName;
 
 		private function playerDodged():Boolean
 		{
-			//Determine if dodged!
-			var dodge:int = player.speedDodge(this);
-			if (dodge>0) {
-				outputPlayerDodged(dodge);
-				return true;
+			//Check if player has shadow clones or similar gimmick
+			var hasTargetedThePlayer:Boolean = false;
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
 			}
-			var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
-			//Determine if evaded
-			if (evasionResult == EVASION_EVADE) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
-				if (!plural) outputText("s");
-				outputText(" attack.\n");
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
+				outputText("Unable to determine the real one from the fake");
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("s");
+				outputText(", your opponent");
+				if (plural)outputText("s");
+				outputText(" targets");
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText(" one of your many illusions");
+				else outputText(" your remaining illusion");
+				outputText(" instead causing the fake to vanish.");
+				player.addStatusValue(StatusEffects.MirrorImage, 1,-1);
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 1) outputText(" You now have "+player.statusEffectv1(StatusEffects.MirrorImage)+" illusion left.")
+				if (player.statusEffectv1(StatusEffects.MirrorImage) == 0) {
+					player.removeStatusEffect(StatusEffects.MirrorImage);
+					outputText(" Your last illusion now destroyed, you will now have to be cautious of your opponent attacks.");
+				}
 				return true;
-			}
-			//("Misdirection"
-			if (evasionResult == EVASION_MISDIRECTION) {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
-				return true;
-			}
-			//Determine if cat'ed
-			if (evasionResult == EVASION_FLEXIBILITY) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				if (plural) outputText("' attacks.\n");
-				else outputText("'s attack.\n");
-				return true;
-			}
-			if (evasionResult != null) { // Failsafe fur unhandled
-				outputText("Using your superior combat skills you manage to avoid attack completely.\n");
-				return true;
-			}
-			//Zenji parry enemy attack
-			if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
-				var parryChance:Number = 25;
-				if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
-				if (rand(100) > parryChance) {
-					outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
-					outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+			} else {
+				//Determine if dodged!
+				var dodge:int = player.speedDodge(this);
+				if (dodge>0) {
+					outputPlayerDodged(dodge);
 					return true;
 				}
-			}
-			//Parry with weapon
-			if (combatParry()) {
-				outputText("You manage to block " + a + short + "");
-				if (plural) outputText("' attacks ");
-				else outputText("'s attack ");
-				outputText("with your [weapon].\n");
-				if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					SceneLib.combat.basemeleeattacks();
+				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
+				//Determine if evaded
+				if (evasionResult == EVASION_EVADE) {
+					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
+					if (!plural) outputText("s");
+					outputText(" attack.\n");
+					return true;
 				}
-				if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
-					SceneLib.combat.basemeleeattacks();
+				//("Misdirection"
+				if (evasionResult == EVASION_MISDIRECTION) {
+					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
+					return true;
 				}
-				return true;
-			}
-			//Block with shield
-			if (combatBlock(true)) {
-				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
-				if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					SceneLib.combat.pspecials.shieldBash();
+				//Determine if cat'ed
+				if (evasionResult == EVASION_FLEXIBILITY) {
+					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
+					if (plural) outputText("' attacks.\n");
+					else outputText("'s attack.\n");
+					return true;
 				}
-				SceneLib.combat.ShieldsStatusProcs();
-				return true;
+				if (evasionResult != null) { // Failsafe fur unhandled
+					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
+					return true;
+				}
+				//Zenji parry enemy attack
+				if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
+					var parryChance:Number = 25;
+					if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
+					if (rand(100) > parryChance) {
+						outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
+						outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+						return true;
+					}
+				}
+
+				//Parry with weapon
+				if (combatParry()) {
+					outputText("You manage to block " + a + short + "");
+					if (plural) outputText("' attacks ");
+					else outputText("'s attack ");
+					outputText("with your [weapon].\n");
+					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						SceneLib.combat.basemeleeattacks();
+					}
+					if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+						SceneLib.combat.basemeleeattacks();
+					}
+					return true;
+				}
+				//Block with shield
+				if (combatBlock(true)) {
+					outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
+					if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						SceneLib.combat.pspecials.shieldBash();
+					}
+					SceneLib.combat.ShieldsStatusProcs();
+					return true;
+				}
+				return false;
 			}
-			return false;
 		}
 
 		public function monsterIsStunned():Boolean {
@@ -3326,58 +3346,58 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulScholar)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulElder)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
 				if (hasPerk(PerkLib.SoulExalt)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulOverlord)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulTyrant)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
 				if (hasPerk(PerkLib.SoulKing)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulEmperor)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulAncestor)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 			}/*
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
 				if (hasPerk(PerkLib.soul)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 			}*/
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();

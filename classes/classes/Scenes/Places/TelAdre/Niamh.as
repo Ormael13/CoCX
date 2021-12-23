@@ -106,7 +106,7 @@ public function getANiamhBeer():void {
 	outputText(images.showImage("niamh-get-beer"));
 	outputText("\"<i>That'll be two gems,</i>\" she replies.  You hand over the payment, which she holds up to the light and scrutinizes thoroughly.  Satisfied, she drops the things into a sack at her waist.  \"<i>Sorry,</i>\" she mutters. \"<i>I do want to get this damned beer out o' me, but this is still my primary livelihood; I canno' afford to be cheated.  Anyway, here's your mug - you can keep that f'r another two gems; I get 'em cheap.  Go ahead and fill it up, but keep in mind what you're tweakin', right?</i>\"");
 	//Feeder
-	if(player.findPerk(PerkLib.Feeder) >= 0) outputText("  You understand exactly what she's going through; the weight of a huge pair of breasts, the sensitivity as they engorge with fluids, the near-maddening sensation of the contents sloshing around underneath your straining skin...");
+	if(player.hasPerk(PerkLib.Feeder)) outputText("  You understand exactly what she's going through; the weight of a huge pair of breasts, the sensitivity as they engorge with fluids, the near-maddening sensation of the contents sloshing around underneath your straining skin...");
 	//(Player has G-cups or bigger;
 	else if(player.biggestTitSize() >= 15)
 	{

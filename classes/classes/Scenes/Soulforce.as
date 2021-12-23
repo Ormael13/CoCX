@@ -168,6 +168,14 @@ use namespace CoC;
 
 		public function SoulCultivationLvL():void {	//Converted Soul Cultivation level check to a function, easier to update, and much nicer on the eyes than the old block of ifs!
 			//Actually.... Since the tier and lvl have to sync for the soul cult lvl, and is checked for the output tier... I can hijack this and use it to output the tiers as well!
+			/*var cultTier:Array = [PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+			var pLvlMax:int = 122;	//Should only need to change this and above array for future expansion.
+			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
+			var cultStanding:String = "Mortal";
+			var lNeed:Boolean = true;
+			var pLvl:int = 6;
+			var cLvlTier:int = 0;
+			var perkTier:PerkType;*/
 			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
 			var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
 			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
@@ -176,16 +184,31 @@ use namespace CoC;
 			var cLvlTier:int = 0;
 			var cultStanding:String = "Mortal";
 			flags[kFLAGS.SOUL_CULTIVATION] = 0;
-			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Can't think of a better idea than this for now to handle the first three.
+			/*for (var i:int = 0; i < cultTier.length(); i++){	//This *should* work?
+				if (!player.hasPerk(cultTier[i])){
+					if (i == 0) break;
+					perkTier = cultTier[i - 1];
+					if (player.level < 76) pLvlMax = player.level
+					if (i - 1 < 6){
+						cultStanding = cultRankTier[pLvlMax % 3] + perkTier.name();
+					}
+					else{
+						cultStanding = cultRankTier[pLvlMax % 4] + perkTier.name();
+					}
+					break;
+				}
+			}*/
+			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Deprecating.
 				flags[kFLAGS.SOUL_CULTIVATION] +=3;
-			}	else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
+			}
+			else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
 				flags[kFLAGS.SOUL_CULTIVATION] +=2;
 				lNeed = false;
-			}	else if (player.level >= 1 && player.hasPerk(cultTier[0])){
+			}
+			else if (player.level >= 1 && player.hasPerk(cultTier[0])){
 				flags[kFLAGS.SOUL_CULTIVATION] +=1;
 				lNeed = false;
 			}
-
 			while (lNeed) {
 				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /6)])){
 					flags[kFLAGS.SOUL_CULTIVATION] +=1;
@@ -228,7 +251,7 @@ use namespace CoC;
 		}
 		public function submenucuzwhynot():void {
 			menu();
-			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Zenji spawning pool");
+			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
 			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
 			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
@@ -295,6 +318,83 @@ use namespace CoC;
 			player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			doNext(SoulforceCheats);
 		}
+		public function AddMaxBackpack00():void {
+			outputText("\n\nFix completed");
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant) && !player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) {
+				if (player.hasPerk(PerkLib.GolemArmyLieutenant)) {
+					player.removePerk(PerkLib.GolemArmyLieutenant);
+					player.createPerk(PerkLib.GolemArmyJuniorLieutenant,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyCaptain)) {
+					player.removePerk(PerkLib.GolemArmyCaptain);
+					player.createPerk(PerkLib.GolemArmyLieutenant,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyMajor)) {
+					player.removePerk(PerkLib.GolemArmyMajor);
+					player.createPerk(PerkLib.GolemArmyCaptain,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyColonel)) {
+					player.removePerk(PerkLib.GolemArmyColonel);
+					player.createPerk(PerkLib.GolemArmyMajor,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyGeneral)) {
+					player.removePerk(PerkLib.GolemArmyGeneral);
+					player.createPerk(PerkLib.GolemArmyLieutenantColonel,0,0,0,0);
+				}
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01)) {
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,1);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX, 1, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation01);
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02)) {
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,2);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,2,0,0,1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation02);
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03)){
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,3);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,3,0,0,1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation03);
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04)){
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,4);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,4,0,0,1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation04);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige01)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,1);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 1, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige01);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige02)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,2);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,2,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige02);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige03)){
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,3);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,3,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige03);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige04)){
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,4);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,4,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige04);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige05)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,5);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 5, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige05);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige06)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,6);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,6,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige06);
+			}
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
+			doNext(submenucuzwhynot);
+		}
 		public function AddMaxBackpack033():void {
 			outputText("\n\nFix completed");
 			flags[kFLAGS.MARRIAGE_FLAG] = 0;
@@ -307,7 +407,6 @@ use namespace CoC;
 			if (!player.hasPerk(PerkLib.PrestigeJobArchpriest)) player.createPerk(PerkLib.PrestigeJobArchpriest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
-			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobNecromancer)) player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSentinel)) player.createPerk(PerkLib.PrestigeJobSentinel, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) player.createPerk(PerkLib.PrestigeJobSoulArtMaster, 0, 0, 0, 0);
@@ -329,14 +428,6 @@ use namespace CoC;
 			player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
-			doNext(submenucuzwhynot);
-		}
-		public function AddMaxBackpack00():void {
-			player.createStatusEffect(StatusEffects.ZenjiModificationsList,0,0,15,7);
-			player.createStatusEffect(StatusEffects.ZenjiPreparationsList,0,0,0,0);
-			player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
-			flags[kFLAGS.ZENJI_PROGRESS] = 11;
-			flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 0;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack01():void {
@@ -4133,9 +4224,9 @@ use namespace CoC;
 			}
 		}
 		private function canfaceTribulation():Boolean {
-			if ((player.level >= 24 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
-				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
-				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
+			if ((player.level >= 27 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
+				(player.level >= 54 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
+				(player.level >= 78 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
 			else return false;
 		}
 		public function tribulationsPrompt():void {

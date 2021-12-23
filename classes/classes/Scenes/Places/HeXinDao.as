@@ -865,7 +865,7 @@ public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: ?weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
 	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) chichiScene.EnterOfTheChiChi();
 	else {
-		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by them. IA few a moments after you entered, a tall, slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
+		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by them. In few a moments after you entered, a tall, slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
 		outputText("\n\n\"<i>Welcome to the Soul Arena. Don't start fights outside of the proper place or you will be thrown out. If you break any rules here you will be kicked out. Go ahead and pick an area where you want to train or instead go to the challenges area. Oh and fights in each section cost some spirit stones so be sure to have enough of them as we not run charity here,</i>\"");
 		outputText(" without wasting time the nekomata overseer of this place explains to you all that you needed to know about the place and walks away.\n\nSo which of the three possible areas do you want to visit this time?");
 		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) outputText("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes.");
@@ -1111,17 +1111,24 @@ public function soularena():void {
 	}
 	private function golemancershop1():void {
 		menu();
+		if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) addButton(0, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
+		else addButtonDisabled(0, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) addButton(1, "Mechanism", buyItemMechanism).hint("A complex set of gears and gyros.");
+		else addButtonDisabled(1, "???", "Items only for Epic Golemancer users.");
 		addButton(5, "G.Rod", buyItem, weapons.G_ROD).hint("Golemancer Rod");
 		addButton(6, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
-		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");/*
+		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animations and You' manual.");
 			else addButton(12, "G,A&Y Man.", golemancershopPermGolemsUpgradesGuide).hint("Buy 'Golems, Animations and You' manual to make golems great again.");
-		}*/
+		}
+		else addButtonDisabled(12, "???", "Req. Master Golem Maker perk.");
 		if (player.hasPerk(PerkLib.JobGolemancer)) {
-			if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButton(13, "'Free Cores?'", golemancershopNotSoFreeCores).hint("A dark side of you whispers: 'Dew it!!! Press this button!!! Dew it now!!!'");
-			else if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButtonDisabled(13, "'Free Cores?'", "You already 'Dew It and pressed the button'. No more freebies for ya...")
-			else addButtonDisabled(13, "'Free Cores?'", "How could such an esteemed and well known golemancer like you ask for freebies? Go smash a few golems to take their cores instead to try beg her...")
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButtonDisabled(13, "'Free Cores?'", "How could such an esteemed and well known golemancer like you ask for freebies? Go smash a few golems to take their cores instead to try beg her...");
+			else {
+				if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButton(13, "'Free Cores?'", golemancershopNotSoFreeCores).hint("A dark side of you whispers: 'Dew it!!! Press this button!!! Dew it now!!!'");
+				else addButtonDisabled(13, "'Free Cores?'", "You already 'Dew It and pressed the button'. No more freebies for ya...");
+			}
 		}
 		addButton(14, "Leave", riverislandVillageStuff);
 	}
@@ -1141,13 +1148,13 @@ public function soularena():void {
 		menu();
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 1) {
 			outputText("3000 gems and it's yours, how's that for a price?</i>\"");
-			if (player.gems > 2999) addButtonDisabled(1, "Buy", "You do not have enough gems to buy this.");
-			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			if (player.gems >= 3000) addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			else addButtonDisabled(1, "Buy", "You do not have enough gems to buy this.");
 		}
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
 			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down to ine sixth of the total. 500 gems and it's yours.</i>\"");
-			if (player.gems > 499) addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
-			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			if (player.gems >= 500) addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			else addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
 		}
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
@@ -1157,7 +1164,46 @@ public function soularena():void {
 		statScreenRefresh();
 		outputText("She counts the gems before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
+		player.createStatusEffect(StatusEffects.GolemUpgrades1, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.GolemUpgrades2, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.GolemUpgrades3, 0, 0, 0, 0);
 		player.createKeyItem("Golems, Animations and You", 0, 0, 0, 0);
+		doNext(golemancershopRepeat);
+	}
+	private function buyItemEnergyCore():void {
+		clearOutput();
+		var cost:int = 1015 / 5;//zmniejszane do /10 dla golemancer pc?
+		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
+		menu();
+		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
+		else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else addButton(1, "Buy", buyItemEnergyCoreYes);
+		addButton(3, "Don't Buy", golemancershopRepeat);
+	}
+	private function buyItemEnergyCoreYes():void {
+		flags[kFLAGS.SPIRIT_STONES] -= 1015 / 5;// * 3
+		statScreenRefresh();
+		outputText("She counts the stones before handing your purchase over.\n\n");
+		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
+		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES]++;
+		doNext(golemancershopRepeat);
+	}
+	private function buyItemMechanism():void {
+		clearOutput();
+		var cost:int = 1200 / 5;//zmniejszane do /10 dla golemancer pc?
+		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
+		menu();
+		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
+		else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else addButton(1, "Buy", buyItemMechanismYes);
+		addButton(3, "Don't Buy", golemancershopRepeat);
+	}
+	private function buyItemMechanismYes():void {
+		flags[kFLAGS.SPIRIT_STONES] -= 1200 / 5;// * 3
+		statScreenRefresh();
+		outputText("She counts the stones before handing your purchase over.\n\n");
+		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES]++;
 		doNext(golemancershopRepeat);
 	}	
 	private function buyItem(odd:ItemType):void {
@@ -1253,4 +1299,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

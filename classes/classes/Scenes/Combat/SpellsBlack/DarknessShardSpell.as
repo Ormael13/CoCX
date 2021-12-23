@@ -13,8 +13,8 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 		super(
 				ex ? "Darkness Shard (Ex)" : "Darkness Shard",
 				ex ?
-						"Drawning your own lust and wrath to condense part of the the ambivalent darkness into a shard to attack your enemies."
-						: "Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.",
+						"Drawing your own lust and wrath to condense part of the the ambivalent darkness into a shard to attack your enemies."
+						: "Drawing your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.",
 				TARGET_ENEMY,
 				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_DARKNESS]
@@ -50,7 +50,7 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward [themonster]!\n");
+			outputText("You narrow your eyes, enfusing your mana with the sickly-sweet power of lust.  In the palm of your hand forms a shard of energy, blacker than night, which pushes the light away. You focus your will at your enemy, and your shadowy missile rockets toward [themonster]!\n");
 		}
 		var damage:Number = calcDamage(monster);
 		damage = critAndRepeatDamage(display, damage, DamageType.DARKNESS);

@@ -5,6 +5,8 @@ package classes.Scenes.Areas.Lake
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.Items.Armors.LustyMaidensArmor;
 
@@ -263,6 +265,7 @@ public class FetishZealotScene extends AbstractLakeContent
 				menu();
 				addButton(0, "Yes", zealotWinRape);
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(2, "Mindbreak", mindbreakMaleCultist).hint("Toy with the cultist brain.");
 				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
@@ -270,7 +273,7 @@ public class FetishZealotScene extends AbstractLakeContent
 		}
 
 
-//Raped by the player
+	//Raped by the player
 		private function zealotWinRape():void
 		{
 			clearOutput();
@@ -300,6 +303,30 @@ public class FetishZealotScene extends AbstractLakeContent
 				player.sexReward("cum","Vaginal");
 			}
 			player.sexReward("cum");
+			cleanupAfterCombat();
+		}
+
+		private function mindbreakMaleCultist():void{
+			clearOutput();
+			outputText("As the fetish cultist drops to the ground, it occurs to you that Kaerb-Dnim wants you to invite more people to the ‘game’." +
+					" This guy doesn’t even need you in his brain to blabber insanity." +
+					" He's likely already insane, but perhaps you can fix him still." +
+					" You approach the man and insert your tentacles inside of his ears, squelching your way in as you look for the damaged part of his brain." +
+					"\n\n\"<i>Woohoo! Why am I riding a flying mud tart you need to blue my smelly!</i>\"" +
+					"\n\nYou ignore his blabber as you proceed to mess with his memory, erasing all this stupid fetish stuff of his and altering his perception of reality so that he believes the only way he can cum is through you messing with his head." +
+					" You give a few small shocks to his pleasure center in order to test the results." +
+					" Green light dances behind his eyes as they roll up and he spontaneously starts cumming like a fountain." +
+					" When you stop playing with his pleasure switch he whines pitifully and begs for more as his balls keep churning, waiting for the chance to let go." +
+					"\n\n\"<i>Big </i>");
+			if (player.hasCock())outputText("<i>brother</i>");
+			else if (player.hasVagina())outputText("<i>sister</i>");
+			outputText("<i>, [name] please, I beg you. Make me cum more!</i>\"" +
+					"\n\nYou promise him the chance to cum and leak like a hose with the condition he heads to Kaerb-Dnim and, of course, take tons of transformative to increase the size of his balls.");
+			Mindbreaker.MindBreakerFetishMaleConvert ++;
+			Mindbreaker.MindBreakerConvert ++;
+			if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
+			else outputText(" This is all it takes to get your newest plaything running to the lair. You smile, knowing you have made yet another convert as you head back to camp still giggling.");
+			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
 		}
 	}

@@ -55,16 +55,16 @@ import classes.internals.*;
 		
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod1 += .1;
+			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod1 += .2;
 			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) mod1 += .2;
-				if (findPerk(PerkLib.SoulPersonage) >= 0) mod1 += .2;
-				if (findPerk(PerkLib.SoulWarrior) >= 0) mod1 += .2;
+				if (findPerk(PerkLib.SoulApprentice) >= 0) mod1 += .4;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) mod1 += .4;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) mod1 += .4;
 			}
 			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) {
-				if (findPerk(PerkLib.SoulSprite) >= 0) mod1 += .3;
-				if (findPerk(PerkLib.SoulScholar) >= 0) mod1 += .3;
-				if (findPerk(PerkLib.SoulElder) >= 0) mod1 += .3;
+				if (findPerk(PerkLib.SoulSprite) >= 0) mod1 += .6;
+				if (findPerk(PerkLib.SoulScholar) >= 0) mod1 += .6;
+				if (findPerk(PerkLib.SoulElder) >= 0) mod1 += .6;
 			}
 			return mod1;
 		}

@@ -123,33 +123,41 @@ public function auroraHenchmanOption():void
 		var meleeAtkAurora:Number = 5;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) {
 			if (flags[kFLAGS.AURORA_LVL] == 2) {
+				strAurora += 40;
 				meleeAtkAurora += 4;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 3) {
+				strAurora += 80;
 				touAurora += 20;
 				meleeAtkAurora += 10;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 4) {
+				strAurora += 120;
 				touAurora += 20;
 				meleeAtkAurora += 18;
 			}/*
 			if (flags[kFLAGS.AURORA_LVL] == 5) {
+				strAurora += 160;
 				touAurora += 40;
 				meleeAtkAurora += 28;
 			} 
 			if (flags[kFLAGS.AURORA_LVL] == 6) {
+				strAurora += 200;
 				touAurora += 40;
 				meleeAtkAurora += 40;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 7) {
+				strAurora += 240;
 				touAurora += 60;
 				meleeAtkAurora += 54;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 8) {
+				strAurora += 280;
 				touAurora += 60;
 				meleeAtkAurora += 70;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 9) {
+				strAurora += 320;
 				touAurora += 80;
 				meleeAtkAurora += 88;
 			}

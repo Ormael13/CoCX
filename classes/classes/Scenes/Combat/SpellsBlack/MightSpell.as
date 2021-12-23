@@ -79,7 +79,9 @@ public class MightSpell extends AbstractBlackSpell {
 			outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n");
 		}
 		if (!backfired(display)) {
-			outputText("The rush of success and power flows through your body.  You feel like you can do anything!");
+			if (display) {
+				outputText("The rush of success and power flows through your body.  You feel like you can do anything!");
+			}
 			var MightBoost:Number    = calcBoost();
 			var MightDuration:Number = calcDuration();
 			var tempTou:Number       = MightBoost;

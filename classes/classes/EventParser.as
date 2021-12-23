@@ -185,19 +185,19 @@ public class EventParser {
             HPPercent = player.HP/player.maxHP();
             player.statStore.advanceTime(Buff.RATE_HOURS,1);
             player.HP = HPPercent*player.maxHP();
-            if (player.statStore.recentlyRemovedTags["IzumiSmoke"]){
+            if (player.statStore.recentlyRemovedTags["IzumiSmoke"]) {
                 EngineCore.outputText("\n<b>You groan softly as your thoughts begin to clear somewhat. It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
             }
-            if (player.statStore.recentlyRemovedTags["AndysSmoke"]){
+            if (player.statStore.recentlyRemovedTags["AndysSmoke"]) {
                 EngineCore.outputText("\n<b>You groan softly as your body begins to feels less sluggish and mind less sharp. It looks like the effects of Andy's pipe smoke have worn off.</b>\n");
             }
-            if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]){
+            if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]) {
                 EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
             }
-            if (player.statStore.recentlyRemovedTags["Hangover"]){
+            if (player.statStore.recentlyRemovedTags["Hangover"]) {
                 EngineCore.outputText("\nYour head finally clears as your hangover wears off. Drinking with the shemale lizard was definitely a bad idea.\n");
             }
-            if (player.statStore.recentlyRemovedTags["Feeding Euphoria"]){
+            if (player.statStore.recentlyRemovedTags["Feeding Euphoria"]) {
                 EngineCore.outputText("\nThe change in your body agility prowess confirms that the effects of cum must have worn off.\n");
             }
             player.HP = HPPercent*player.maxHP();

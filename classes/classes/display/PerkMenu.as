@@ -13,6 +13,7 @@ import classes.PerkLib;
 import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Perks.AscensionOrganMutationX;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -27,16 +28,21 @@ public class PerkMenu extends BaseContent {
 	public function PerkMenu() {
 	}
 	public function displayPerks(e:MouseEvent = null):void {
-		var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks (Total: " + player.perks.length + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}
 		else{
-			while(temp < player.perks.length) {
-				outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
-				temp++;
+			var perkList:Array = player.perks;
+			for each (var temp:PerkClass in perkList){
+				try{
+					outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
+
+				} catch (error:Error) {
+					outputText(temp.perkName + " has encountered a problem. PLEASE REPORT THIS.");
+					trace("Something about " + temp.perkName + " is broken. Might wanna check that?");
+				}
 			}
 		}
 
@@ -288,7 +294,7 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.Poisoning) && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(9, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.jiangshiScore() >= 20) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
-			if (((player.weaponName == "fists" && player.hasNaturalWeapons) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
+			if (((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
 			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
 		}
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
@@ -484,7 +490,6 @@ public class PerkMenu extends BaseContent {
 		}
 	}
 
-
 	public function summonsbehaviourOptions(page:int = 1):void {
         var attackingElementalTypeFlag:int = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
         var elementalConjuerSummons:int = flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS];
@@ -594,21 +599,67 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
-
-
 	public function golemsbehaviourOptions():void {
 		clearOutput();
 		menu();
 		outputText("You can choose how your permanent golems will behave during each fight.\n\n");
-		outputText("\n<b>Permanent golems behavious:</b>\n");
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
+			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+				var element:Number = player.statusEffectv3(StatusEffects.GolemUpgrades1);
+				outputText("<b>Elemental Weaponry:</b>\n");
+				switch(element){
+					case 1: outputText("Inactive"); break;
+					case 2: outputText("Fire"); break;
+					case 3: outputText("Ice"); break;
+					case 4: outputText("Lightning"); break;
+					case 5: outputText("Darkness"); break;
+				}
+				outputText("\n\n");
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 1) addButton(0, "Inactivate", golemsElementaryWeaponMode, 1);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 2) addButton(1, "Fire", golemsElementaryWeaponMode, 2);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 3) addButton(2, "Ice", golemsElementaryWeaponMode, 3);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 4) addButton(3, "Lightning", golemsElementaryWeaponMode, 4);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 5) addButton(4, "Darkness", golemsElementaryWeaponMode, 5);
+			}
+			if (player.statusEffectv4(StatusEffects.GolemUpgrades1) > 0) {
+				var poison:String = "";
+				outputText("Poisoned Weaponry Upgrade status <b>("+poison+")</b>"+player.statusEffectv4(StatusEffects.GolemUpgrades1)+"\n\n");
+				if (player.statusEffectv4(StatusEffects.GolemUpgrades1) == 2) poison = "Active";
+				else poison = "Inactive";
+				if (player.statusEffectv4(StatusEffects.GolemUpgrades1) == 2) addButton(5, "Inactivate", golemsPoisonedWeaponMode, 1);
+				else addButton(6, "Activate", golemsPoisonedWeaponMode, 2);
+			}
+		}
+		outputText("<b>Permanent golems attack pattern behavious:</b>\n");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) outputText("Attacking at the begining of each turn (owner would need to just choose how many of them will be sent).");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
+			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 1) addButton(0, "Inactivate", golemsElementaryWeaponMode, 1);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 2) addButton(1, "Fire", golemsElementaryWeaponMode, 2);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 3) addButton(2, "Ice", golemsElementaryWeaponMode, 3);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 4) addButton(3, "Lightning", golemsElementaryWeaponMode, 4);
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) != 5) addButton(4, "Darkness", golemsElementaryWeaponMode, 5);
+			}
+			if (player.statusEffectv4(StatusEffects.GolemUpgrades1) > 0) {
+				if (player.statusEffectv4(StatusEffects.GolemUpgrades1) == 2) addButton(5, "Inactivate", golemsPoisonedWeaponMode, 1);
+				else addButton(6, "Activate", golemsPoisonedWeaponMode, 2);
+			}
+		}
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
 
 		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
+		function golemsElementaryWeaponMode(elementalMode:Number):void {
+			player.changeStatusValue(StatusEffects.GolemUpgrades1,3,elementalMode);
+			golemsbehaviourOptions();
+		}
+		function golemsPoisonedWeaponMode(poisonedMode:Number):void {
+			player.changeStatusValue(StatusEffects.GolemUpgrades1,4,poisonedMode);
+			golemsbehaviourOptions();
+		}
         function golemsAttacking(attacking:Boolean):void {
             flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
             golemsbehaviourOptions();
@@ -746,14 +797,7 @@ public class PerkMenu extends BaseContent {
 				outputText("Mutations Assistant: <b>Off</b>\n");
 			}
 			var mutationCount:int = 1
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
-				mutationCount++;
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
-				mutationCount++;
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
-				mutationCount++;
-			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
-				mutationCount++;
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) mutationCount += player.perkv1(PerkLib.AscensionAdditionalOrganMutationX);
 			outputText("You have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.\n\n");
 
@@ -774,7 +818,7 @@ public class PerkMenu extends BaseContent {
 				else{
 					outputText("<font color=\"#008000\">");
 				}
-				outputText( mCount +"</font> of " + mutationCount + ". Max:(");
+				outputText( mCount +"</font> of " + (mutationCount > mPerkarray.length ? mPerkarray.length : mutationCount) + ". Max:(");
 				if (flags[kFLAGS.MUTATIONS_SPOILERS]){
 					outputText(mPerkarray.length + ")\n");
 				}
@@ -1079,15 +1123,15 @@ public class PerkMenu extends BaseContent {
 
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
-		//var allPerks:Array = CoC.instance.perkTree.listUnlocks()
-		/*
 		var mutationList:Array = MutationsLib.mutationsArray("",true);
+		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
-			if (mutationList.indexOf(pPerks) >= 0){
-				allPerks.splice(allPerks.indexOf(pPerks), 1);
+			if (!(mutationList.indexOf(pPerks) >= 0)){
+				//allPerks.splice(allPerks.indexOf(pPerks), 1);
+				temp.push(pPerks)
 			}
 		}
-		*/
+		allPerks = temp;
 		clearOutput();
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
@@ -1146,9 +1190,9 @@ public class PerkMenu extends BaseContent {
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
+			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
 			for each (var perkTrue:PerkType in perkDict){
-				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
-					tPerkList.push(perkTrue);
+				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){					tPerkList.push(perkTrue);
 				}
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
@@ -1376,7 +1420,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			menu();
 			displayHeader("Perk Tier: " + tPVal);
-			outputText(tPerkList.length + "\n");
+			//outputText(tPerkList.length + "\n");
 			if (tPVal == 0){
 				outputText("Tier 0 contains all perks that do not have any requirements!\n");
 				outputText("It also contains perks that may not be handled in the standard manner.\n");

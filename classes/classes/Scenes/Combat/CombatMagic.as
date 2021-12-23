@@ -273,7 +273,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function spellModImpl():Number {
-		var mod:Number = 1;
+		var mod:Number = player.spellpowerStat.value;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
@@ -333,15 +333,30 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
+			mod1 -= player.cor / 100;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
 		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
-			mod2 -= player.cor / 10;
-			if (mod1 < 0.1) mod2 = 0.1;
+			mod2 -= player.cor / 100;
+			if (mod2 < 0.1) mod2 = 0.1;
 			mod += mod2;
+		}
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) mod += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) mod += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .2;
+			}
+			else {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) mod += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) mod += .2;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .3;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
+			}
+			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -396,6 +411,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -409,9 +425,15 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
+			mod1 -= player.cor / 100;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 100;
+			if (mod2 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -421,7 +443,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function spellModBase():Number {
-		var mod:Number = 0;
+		var mod:Number = player.spellpowerStat.value - 1;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
@@ -474,15 +496,30 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
+			mod1 -= player.cor / 100;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
 		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
-			mod2 -= player.cor / 10;
-			if (mod1 < 0.1) mod2 = 0.1;
+			mod2 -= player.cor / 100;
+			if (mod2 < 0.1) mod2 = 0.1;
 			mod += mod2;
+		}
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) mod += .05;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) mod += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .15;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .2;
+			}
+			else {
+				if (player.perkv2(PerkLib.ElementalBody) == 1) mod += .1;
+				if (player.perkv2(PerkLib.ElementalBody) == 2) mod += .2;
+				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .3;
+				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
+			}
+			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;

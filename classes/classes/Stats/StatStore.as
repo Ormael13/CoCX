@@ -15,17 +15,28 @@ public class StatStore implements IStatHolder {
 	 */
 	public var recentlyRemovedTags:Object = {};
 	
-	/**
-	 * @param setup object { [statName:String] => IStat }
-	 */
-	public function StatStore(setup:Object =null) {
-		if (setup) addStats(setup);
+	public function StatStore(setup:/*IStat*/Array =null) {
+		if (setup) {
+			for each (var stat:IStat in setup) {
+				this._stats[stat.statName] = stat;
+			}
+		}
 	}
 	public function findStat(fullname:String):IStat {
 		if (fullname.indexOf('.') == -1) return _stats[fullname];
 		return StatUtils.findStatByPath(this, fullname);
 	}
-	public function addStats(setup:Object):StatStore {
+	public function addStat(stat:IStat):StatStore {
+		this._stats[stat.statName] = stat;
+		return this;
+	}
+	public function addStatList(setup:/*IStat*/Array):StatStore {
+		for each (var stat:IStat in setup) {
+			addStat(stat)
+		}
+		return this;
+	}
+	public function addStatObject(setup:Object):StatStore {
 		Utils.extend(_stats,setup);
 		return this;
 	}

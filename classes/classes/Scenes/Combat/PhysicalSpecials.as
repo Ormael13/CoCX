@@ -4,6 +4,7 @@
 package classes.Scenes.Combat {
 import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
@@ -103,26 +104,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hairType == 4) {
+			if (player.hairType == 4 && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Bitez
-			if (player.faceType == Face.SHARK_TEETH) {
+			if (player.faceType == Face.SHARK_TEETH && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.faceType == Face.ORCA) {
+			if (player.faceType == Face.ORCA && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.faceType == Face.WOLF) {
+			if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
 				if (player.hasPerk(PerkLib.FreezingBreath)) buttons.add("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//hydra bite - variant of snake bite
-			if (player.faceType == Face.SNAKE_FANGS || player.hasPerk(MutationsLib.VenomGlands)) {
+			if ((player.faceType == Face.SNAKE_FANGS || player.hasPerk(MutationsLib.VenomGlands)) && !player.hasPerk(PerkLib.ElementalBody)) {
 				if (player.lowerBody == LowerBody.HYDRA) {
 					bd = buttons.add("HydraBite", hydraBiteAttack).hint("Deal as many attacks as pc got heads. Also delivers naga poison for as many time as pc got heads. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < player.VenomWebCost() * 5) {
@@ -137,24 +138,24 @@ public class PhysicalSpecials extends BaseCombatContent {
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI || player.hasPerk(MutationsLib.VenomGlands)) {
+			if ((player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI || player.hasPerk(MutationsLib.VenomGlands)) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("SpiderBite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. (deal lust dmg and lower gradualy enemy lust resistance)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < player.VenomWebCost() * 5) {
 					bd.disable("You do not have enough venom to use spider bite right now!");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Constrict
-			if (player.isNaga()) {
+			if (player.isNaga() && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Cancer Grab
-			if (player.lowerBody == LowerBody.CANCER) {
+			if (player.lowerBody == LowerBody.CANCER && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Grab", combat.CancerGrab).hint("Grab your opponents with your pincers, then proceed to crush them.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Dig
-			if (player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.FROSTWYRM) {
+			if ((player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.FROSTWYRM) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Dig", Dig).hint("Dig underground to escape your opponent attack for a while.");
 				if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 					bd.disable("<b>You can't dig in open water!</b>\n\n");
@@ -165,26 +166,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Engulf
-			if (player.lowerBody == LowerBody.GOO) {
+			if (player.lowerBody == LowerBody.GOO && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Embrace
-			if ((player.arms.type == Arms.BAT || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+			if ((player.arms.type == Arms.BAT || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
-			if ((player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.FROSTWYRM) && player.horns.count >= 6) {
+			if ((player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.FROSTWYRM) && player.horns.count >= 6 && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if ((player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) && player.horns.count >= 6) {
+			if ((player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) && player.horns.count >= 6 && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn"+(player.horns.type == Horns.BICORN ? "s":"")+".  This attack is stronger and easier to land with large horn"+(player.horns.type == Horns.BICORN ? "s":"")+".");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Upheaval - requires rhino horns
-			if (player.horns.type == Horns.RHINO && player.horns.count >= 2 && player.faceType == Face.RHINO) {
+			if (player.horns.type == Horns.RHINO && player.horns.count >= 2 && player.faceType == Face.RHINO && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(30));
 				else bd.requireFatigue(physicalCost(15));
@@ -200,7 +201,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Grapple
-			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
+			if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.maleMindbreakerScore() >= 20 || player.femaleMindbreakerScore() >= 20)  && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -211,14 +212,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else if (monster.plural) bd.disable("You cannot grapple more than one foe at once.");
 			}
 			//Kick
-			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
+			if ((player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
 				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
 					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Pounce
-			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd =buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -234,7 +235,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("There's no way you'd be able to find their lips while you're blind!");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS) {
+			if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Multi Slash", mantisMultiSlash);
 				if (player.hasPerk(PerkLib.PhantomStrike)) {
 					if (monster.plural) {
@@ -260,7 +261,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			    if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION)) {
+			if (player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Sting", playerStinger);
 				var stingername:String,period:String;
 				if (player.tailType == Tail.BEE_ABDOMEN) {
@@ -275,7 +276,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("You do not have enough venom to sting right now! (Req. "+player.VenomWebCost()*5+"+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < player.VenomWebCost() * 5) {
 					bd.disable("You do not have enough venom to shoot a spike right now! (Req. "+player.VenomWebCost()*5+"+)");
@@ -287,29 +288,29 @@ public class PhysicalSpecials extends BaseCombatContent {
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.tailType == Tail.SPIDER_ADBOMEN) {
+			if (player.tailType == Tail.SPIDER_ADBOMEN && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < player.VenomWebCost() * 5) {
 					bd.disable("You do not have enough webbing to shoot right now! (Req. "+player.VenomWebCost()*5+"+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tail.isAny(Tail.SHARK, Tail.LIZARD, Tail.KANGAROO, Tail.DRACONIC, Tail.RACCOON, Tail.RED_PANDA)) {
+			if (player.tail.isAny(Tail.SHARK, Tail.LIZARD, Tail.KANGAROO, Tail.DRACONIC, Tail.RACCOON, Tail.RED_PANDA) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			if (player.tailType == Tail.SALAMANDER) {
+			if (player.tailType == Tail.SALAMANDER && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tailType == Tail.ORCA) {
+			if (player.tailType == Tail.ORCA && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
 				bd.requireFatigue(physicalCost(40));
 				if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 					bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0) {
+			if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0 && !player.hasPerk(PerkLib.ElementalBody)) {
 				var liftWhat:String = player.gender == 1 ? "your cock" : "your front tentacle";
 				var liftWha2:String = player.gender == 1 ? "Lift your cock and s" : "S";
 				var cooldown:Number = 8;
@@ -325,7 +326,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(MutationsLib.LactaBovinaOvaries))) {
+			if (player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(MutationsLib.LactaBovinaOvaries)) && !player.hasPerk(PerkLib.ElementalBody)) {
 				var blaaaast2:String = player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved) ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Milk Blast", milkBlast).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production." + blaaaast2 + "\n");
 				if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) bd.requireLust(200);
@@ -335,7 +336,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(MutationsLib.MinotaurTesticles))) {
+			if (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(MutationsLib.MinotaurTesticles)) && !player.hasPerk(PerkLib.ElementalBody)) {
 				var blaaaast1:String = player.hasPerk(MutationsLib.MinotaurTesticlesEvolved) ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. " + blaaaast1 + "\n");
 				if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) bd.requireLust(200);
@@ -354,7 +355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Sling Goo", slinggoo).hint("Throw slime at your opponent, lacing it with your aphrodisiac compound and reduce their speed.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.canFly()) {
+			if (player.canFly() && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + combat.flightDurationNatural() + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			}
 			if (player.isShieldsForShieldBash()) {
@@ -395,7 +396,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				// Whirlwind (Beast Warrior)
-				if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) {
+				if (player.hasPerk(PerkLib.JobBeastWarrior) && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) {
 					bd = buttons.add("F. Whirlwind", whirlwindClaws).hint("Spin yourself around to slash multiple enemies with your claws at once.  \n\n<b>AoE attack.</b>");
 					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
@@ -405,18 +406,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.isAlraune() || player.hasPerk(MutationsLib.FloralOvaries)) {
+			if ((player.isAlraune() || player.hasPerk(MutationsLib.FloralOvaries)) && !player.hasPerk(PerkLib.ElementalBody)) {
 				// Pollen
 				bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
 				if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
 			}
-			if (player.isAlraune()) {
+			if (player.isAlraune() && !player.hasPerk(PerkLib.ElementalBody)) {
 				// Entangle
 				bd = buttons.add("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
 				if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
 				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
+			if (player.hasStatusEffect(StatusEffects.AlrauneEntangle) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
 				bd.requireFatigue(physicalCost(60));
 				if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyHugeType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
@@ -429,7 +430,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.arms.type == Arms.GARGOYLE) {
+			if (player.arms.type == Arms.GARGOYLE && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claws.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "2":"3")+" rounds");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
 				else bd.requireFatigue(physicalCost(60));
@@ -437,7 +438,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.arms.type == Arms.GARGOYLE_2) {
+			if (player.arms.type == Arms.GARGOYLE_2 && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Stone Fist", StoneFistAttack).hint("Slam your two fist at your foe and attempt to stun them.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "2":"3")+" rounds");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
 				else bd.requireFatigue(physicalCost(60));
@@ -445,7 +446,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Stone Fist again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tailType == Tail.GARGOYLE) {
+			if (player.tailType == Tail.GARGOYLE && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace-like tail on your foe's head, dealing severe damage, crushing its defences, and stunning it.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "4":"5")+" rounds");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
 				else bd.requireFatigue(physicalCost(30));
@@ -453,7 +454,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tailType == Tail.GARGOYLE_2) {
+			if (player.tailType == Tail.GARGOYLE_2 && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Tail Cleave", TailCleaveAttack).hint("Swipe your axe-bladed tail, cleaving through multiple opponents and dealing severe bleeding damage.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "4":"5")+" rounds");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
 				else bd.requireFatigue(physicalCost(30));
@@ -461,7 +462,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Tail Cleave again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE) {
+			if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive wings, staggering them.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "5":"6")+" rounds");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
 				else bd.requireFatigue(physicalCost(30));
@@ -469,7 +470,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
+			if (player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.ElementalBody)) {
 				if (!player.hasPerk(MutationsLib.EasterBunnyEggBag) || (player.hasPerk(MutationsLib.EasterBunnyEggBag) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] == 1)) {
 					bd = buttons.add("Egg throw", EggthrowAttack).hint("Throw one of your many stashed bunny eggs blinding and arousing the opponent. These attacks benefit from skills that improve thrown weapons \n\n"+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" egg remaining.");
 					bd.requireFatigue(physicalCost(30));
@@ -482,7 +483,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.requireFatigue(physicalCost(30));
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.orcaScore() >= 10 || player.leviathanScore() >= 20 && player.faceType == Face.ORCA) {
+			if ((player.orcaScore() >= 10 || player.leviathanScore() >= 20) && player.faceType == Face.ORCA) {
 				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
 				bd.requireFatigue(physicalCost(30));
 				if (!monster.hasStatusEffect(StatusEffects.Stunned)) bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
@@ -1803,7 +1804,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText(" damage! ");
 				damage *= 2;
 			}
-			monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
+			if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+			else monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
@@ -2143,11 +2145,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var dmgAMP:Number = 0;
 		if (player.hasPerk(PerkLib.ChargedCore)) dmgAMP += 0.5;
 		if (player.hasPerk(PerkLib.SuperChargedCore)) dmgAMP += 0.5;
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgAMP += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgAMP += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgAMP += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgAMP += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgAMP += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgAMP += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgAMP += 0.5;
@@ -2198,9 +2201,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golem slam into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Core shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*Golem Core wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2251,9 +2256,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 3;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2305,10 +2312,108 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 5;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
+		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function sendTemporalGolem4():void {
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 4;
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) damage += ((player.inte + player.wis) * 6);
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
+		if (!overloadedGolemCoresBag) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 4) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
+		damage *= 4;
+		dmgamp += temporalGolemsAplification();
+		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
+		damage = Math.round(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
+		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function sendTemporalGolem10():void {
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 10;
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) damage += ((player.inte + player.wis) * 6);
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
+		if (!overloadedGolemCoresBag) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 10) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
+		damage *= 10;
+		dmgamp += temporalGolemsAplification();
+		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
+		damage = Math.round(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
+		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function sendTemporalGolem20():void {
+		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 20;
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		var overloadedGolemCoresBag:Boolean = false;
+		var partialyoverloadedGolemCoresBag:Boolean = false;
+		if (player.hasPerk(PerkLib.BeginnerGolemMaker)) damage += ((player.inte + player.wis) * 5);
+		if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) damage += ((player.inte + player.wis) * 6);
+		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
+		if (!overloadedGolemCoresBag) {
+			if ((winionsMaker.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 20) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = winionsMaker.maxReusableGolemCoresBagSize();
+				partialyoverloadedGolemCoresBag = true;
+			}
+		}
+		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
+		if (player.hasPerk(PerkLib.ChargedCore)) damage += ((300 + rand(121)) * 10);
+		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
+		damage *= 4;
+		dmgamp += temporalGolemsAplification();
+		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
+		damage = Math.round(damage);
+		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2340,9 +2445,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= usedGolems;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		doDamage(damage, true, true);
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
+		else doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2350,39 +2457,106 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function permanentgolemsendcost():Number {
-		var permanentgolemsendcost:Number = 10;
-		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentgolemsendcost += 5;
-		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentgolemsendcost += 15;
-		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentgolemsendcost += 40;
+		var permanentgolemsendcost:Number = 20;
+		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentgolemsendcost += 10;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentgolemsendcost += 30;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentgolemsendcost += 80;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentgolemsendcost += 5;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentgolemsendcost += 5;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));//15% off each
+		permanentgolemsendcost = Math.round(permanentgolemsendcost);
 		return permanentgolemsendcost;
 	}
 	public function permanentimprovedgolemsendcost():Number {
 		var permanentimprovedgolemsendcost:Number = 250;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentimprovedgolemsendcost += 150;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentimprovedgolemsendcost += 400;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentimprovedgolemsendcost += 50;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentimprovedgolemsendcost += 50;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentimprovedgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentimprovedgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentimprovedgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));
+		permanentimprovedgolemsendcost = Math.round(permanentimprovedgolemsendcost);
 		return permanentimprovedgolemsendcost;
 	}
-	public function sendPermanentGolem1():void {
-		clearOutput();
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < permanentgolemsendcost()) {
-				outputText("Your mana is too low to make your golem attack.");
-				menu();
-				addButton(0, "Next", combatMenu, false);
-				return;
-			}
-			else useMana(permanentgolemsendcost());
+	public function permanentsteelgolemsendcost():Number {
+		var permanentsteelgolemsendcost:Number = 50;
+		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentsteelgolemsendcost += 25;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentsteelgolemsendcost += 75;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentsteelgolemsendcost += 200;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentsteelgolemsendcost += 10;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentsteelgolemsendcost += 10;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentsteelgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentsteelgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentsteelgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));
+		permanentsteelgolemsendcost = Math.round(permanentsteelgolemsendcost);
+		return permanentsteelgolemsendcost;
+	}
+	public function permanentimprovedsteelgolemsendcost():Number {
+		var permanentimprovedsteelgolemsendcost:Number = 625;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentimprovedsteelgolemsendcost += 100;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv4(StatusEffects.GolemUpgrades1) > 1) permanentimprovedsteelgolemsendcost += 100;
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) permanentimprovedsteelgolemsendcost *= 0.8;
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) permanentimprovedsteelgolemsendcost *= (1 + player.statusEffectv1(StatusEffects.GolemUpgrades1));
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0) permanentimprovedsteelgolemsendcost *= (1 - (0.15 * player.statusEffectv2(StatusEffects.GolemUpgrades1)));
+		permanentimprovedsteelgolemsendcost = Math.round(permanentimprovedsteelgolemsendcost);
+		return permanentimprovedsteelgolemsendcost;
+	}
+	private function golemsDunks(damage:Number):void {
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
+			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
+			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
+			else doDamage(damage, true, true);
 		}
+		else doDamage(damage, true, true);
+		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) {
+			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
+				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
+				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
+				else doDamage(damage, true, true);
+			}
+			else doDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) > 1) {
+				if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
+					if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
+					else doDamage(damage, true, true);
+				}
+				else doDamage(damage, true, true);
+			}
+		}
+	}
+	public function sendPermanentGolem1():void {
+		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
+		else outputText("\n\n");
+		if (player.mana < permanentgolemsendcost()) {
+			outputText("Your mana is too low to make your golem attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentgolemsendcost());
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		damage += ((player.inte + player.wis + 500 + rand(201)) * 2);
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2394,40 +2568,43 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golem slam into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		outputText("Your stone golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
-			menu();
-			addButton(0, "Next", combatMenu, false);
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
 		}
 		else enemyAI();
 	}
 	public function sendPermanentGolem3():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < permanentgolemsendcost() * 3) {
-				outputText("Your mana is too low to make your golems attack.");
-				menu();
-				addButton(0, "Next", combatMenu, false);
-				return;
-			}
-			else useMana(permanentgolemsendcost() * 3);
+		if (player.mana < permanentgolemsendcost() * 3) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
 		}
+		else useMana(permanentgolemsendcost() * 3);
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		damage += ((player.inte + player.wis + 500 + rand(201)) * 2);
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2439,11 +2616,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= 5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golems slams into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		outputText("Your stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
 			menu();
@@ -2453,27 +2632,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function sendPermanentGolem5():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < permanentgolemsendcost() * 5) {
-				outputText("Your mana is too low to make your golems attack.");
-				menu();
-				addButton(0, "Next", combatMenu, false);
-				return;
-			}
-			else useMana(permanentgolemsendcost() * 5);
+		if (player.mana < permanentgolemsendcost() * 5) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
 		}
+		else useMana(permanentgolemsendcost() * 5);
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
-		damage += 500 + rand(201);
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		damage += ((player.inte + player.wis + 500 + rand(201)) * 2);
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2485,11 +2663,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= 10;
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Your stone golems slams into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.\n\n");
+		outputText("Your stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
 			menu();
@@ -2507,9 +2687,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else useMana(permanentimprovedgolemsendcost());
 		var damage:Number = 0;
-		var dmgamp:Number = 2.5;
-		damage += 15000 + rand(3001);
-		damage += combat.intwisscaling() * 0.3;
+		var dmgamp:Number = 2;
+		damage += ((player.inte + player.wis + 1500 + rand(501)) * 10);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.3;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2521,17 +2706,206 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		doDamage(damage);
-		doDamage(damage);
-		outputText("Your improved stone golem slam into [themonster] dealing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage. And then attack once again. <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
-		/*if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+		outputText("Your improved stone golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" And then attack once again. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
 			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
-		else */enemyAI();
+		else enemyAI();
+	}
+	public function sendPermanentImprovedGolem3():void {
+		clearOutput();
+		if (player.mana < permanentimprovedgolemsendcost() * 3) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentimprovedgolemsendcost() * 3);
+		var damage:Number = 0;
+		var dmgamp:Number = 2;
+		damage += ((player.inte + player.wis + 1500 + rand(501)) * 10);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.3;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= 5;
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your improved stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" And then attack once again. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
+	}
+	public function sendPermanentImprovedGolem5():void {
+		clearOutput();
+		if (player.mana < permanentimprovedgolemsendcost() * 5) {
+			outputText("Your mana is too low to make your golems attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentimprovedgolemsendcost() * 5);
+		var damage:Number = 0;
+		var dmgamp:Number = 2;
+		damage += ((player.inte + player.wis + 1500 + rand(501)) * 10);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.2;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.3;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= 10;
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your improved stone golems slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" And then attack once again. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		else enemyAI();
+	}
+	public function sendPermanentSteelGolem1():void {
+		clearOutput();
+		if (player.mana < permanentsteelgolemsendcost()) {
+			outputText("Your mana is too low to make your golem attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentsteelgolemsendcost());
+		var damage:Number = 0;
+		var dmgamp:Number = 1.2;
+		damage += ((player.inte + player.wis + 750 + rand(251)) * 5);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.12;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your steel golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		else enemyAI();
+	}
+	public function sendPermanentImprovedSteelGolem1():void {
+		clearOutput();
+		if (player.mana < permanentimprovedsteelgolemsendcost()) {
+			outputText("Your mana is too low to make your golem attack.");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		else useMana(permanentimprovedsteelgolemsendcost());
+		var damage:Number = 0;
+		var dmgamp:Number = 2.4;
+		damage += ((player.inte + player.wis + 2250 + rand(751)) * 25);
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.24;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		damage *= dmgamp;
+		damage = Math.round(damage);
+		outputText("Your improved steel golem slam into " + monster.a + monster.short + ". ");
+		golemsDunks(damage);
+		outputText(" Then attack second time. ");
+		golemsDunks(damage);
+		outputText(" And finish with a third round. ");
+		golemsDunks(damage);
+		outputText("\n\n");
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		else enemyAI();
 	}
 
 	public function AlraunePollen():void {
@@ -2603,7 +2977,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 2;
 		if (player.hasKeyItem("Nitro Boots") >= 0) {
 			outputText(" Your foe catches on fire.");
-			monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+			if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+			else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
