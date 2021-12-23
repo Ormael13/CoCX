@@ -1363,7 +1363,7 @@ public function buildSecondArcaneCircle():void {
 private function doBuildSecondArcaneCircle():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 8;
 	clearOutput();
-	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a second larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a second larger circle around the smaller one inscribing additional protections and wards. As you finish, you look them over, checking for any imperfections in the writing. Satisfied you nod at the result.");
 	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
 	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
 	//Gain fatigue.
@@ -1392,7 +1392,7 @@ public function buildThirdArcaneCircle():void {
 private function doBuildThirdArcaneCircle():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 12;
 	clearOutput();
-	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a third larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a third larger circle around the smaller ones inscribing additional protections and ward. As you finish, you look them over, checking for any imperfections in the writing. Satisfied you nod at the result.");
 	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
 	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
 	//Gain fatigue.
@@ -1421,7 +1421,7 @@ public function buildFourthArcaneCircle():void {
 private function doBuildFourthArcaneCircle():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 16;
 	clearOutput();
-	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a fourth larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a fourth larger circle around the smaller ones, inscribing additional protections and wards. As you finish, you look them over, checking for any imperfections in the writing. Satisfied you nod at the result.");
 	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
 	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
 	//Gain fatigue.
@@ -1450,7 +1450,7 @@ public function buildFifthArcaneCircle():void {
 private function doBuildFifthArcaneCircle():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 20;
 	clearOutput();
-	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a fifth larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a fifth larger circle around the smaller ones, inscribing additional protections and wards. As you finish, you look them over, checking for any imperfections in the writing. Satisfied you nod at the result.");
 	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
 	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
 	//Gain fatigue.
@@ -1479,7 +1479,7 @@ public function buildSixthArcaneCircle():void {
 private function doBuildSixthArcaneCircle():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 24;
 	clearOutput();
-	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a sixth larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a sixth larger circle around the smaller one inscribing additional protections and wards. Satisfied you nod at the result.");
 	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
 	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
 	//Gain fatigue.
@@ -1508,7 +1508,7 @@ public function buildSeventhArcaneCircle():void {
 private function doBuildSeventhArcaneCircle():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 28;
 	clearOutput();
-	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a seventh larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a seventh larger circle around the smaller ones inscribing additional protections and wards. As you finish, you look them over, checking for any imperfections in the writing. Satisfied you nod at the result.");
 	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
 	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
 	//Gain fatigue.
@@ -1652,9 +1652,9 @@ public function buildFirstElementalEnergyConduit():void {
 private function doBuildFirstElementalEnergyConduit():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 3;
 	clearOutput();
-	outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards by engraving conduict that will pernamently store elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all three prepared nodes in the first circle forming basic elemental conduit in it.");
+	outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed in a triangular formation inside your circle, runes lining up to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node!");
 	player.createStatusEffect(StatusEffects.ElementalEnergyConduits,0,600,1,0);
-	outputText(" \"<b>You can now convert elemental shards into pure elemental energy directly stored in the arcane circle!</b>\"");
+	outputText(" \"<b>You can now convert elemental shards into pure elemental energy. You can feel that the power is directly stored in the arcane circle, ready to use.</b>\"");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1666,7 +1666,7 @@ private function doBuildFirstElementalEnergyConduit():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 public function upgradeFirstElementalEnergyConduit():void {
-	outputText("Do you start work on expanding first elemental energy conduit? (Cost: 3 stones, 3 Elemental Shards and 150 mana.)\n");
+	outputText("Do you start work on expanding your first elemental energy conduit? (Cost: 3 stones, 3 Elemental Shards and 150 mana.)\n");
 	checkMaterials();
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 3 && player.hasItem(useables.ELSHARD, 3) && player.mana >= 150)
 	{
@@ -1681,7 +1681,7 @@ public function upgradeFirstElementalEnergyConduit():void {
 private function doUpgradeFirstElementalEnergyConduit():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 3;
 	clearOutput();
-	outputText("You decide to expand your first energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all three prepared nodes in the first circle changing basic one elemental conduit into advanced.");
+	outputText("You decide that you need more elemental energy on hand, and for that, you need to expand your first energy conduit. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed around one of your pre-existing nodes, runes lining up to form veins of magic, conduits pulsing with elemental energy. One of your basic nodes has been enhanced, and can now store more power.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,600);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
 	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+600)</b>\"");
