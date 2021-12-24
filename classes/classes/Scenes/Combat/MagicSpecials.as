@@ -705,7 +705,6 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.mana < spellCost(100)) {
 				bd.disable("Your mana is too low to use mind thrust.");
 			}
-
 			bd = buttons.add("Mind Blast", mindBlast).hint("Overload an opponent’s mind with lewd information, stunning it.\n\nMana Cost: " + spellCostWhite(100) + "");
 			if (player.mana < spellCost(50)) {
 				bd.disable("Your mana is too low to use mind blast.");
@@ -713,10 +712,57 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.CooldownSpellMindBlast)) {
 				bd.disable("You need more time before you can use mind blast again.\n\n");
 			}
-
 			bd = buttons.add("Mirror Image", mirrorImage).hint("Create multiple clone of yourself to distract your opponent.\n\nMana Cost: " + spellCostWhite(100) + "");
 			if (player.mana < spellCost(100)) {
 				bd.disable("Your mana is too low to use mirror image.");
+			}
+		}
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
+				bd = buttons.add("Wind Blade", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				else if (player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
+					bd.disable("You can't use this inside too small spaces.");
+				}
+				bd = buttons.add("Healing Breeze", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
+				bd = buttons.add("Wild Growth", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				else if (monster.hasStatusEffect(StatusEffects.Flying)) {
+					bd.disable("You can reach flying targets.");
+				}
+				bd = buttons.add("Synthesis", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
+				bd = buttons.add("Pyroblast", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				bd = buttons.add("Warmth", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
+				bd = buttons.add("Hydraulic Torrent", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				bd = buttons.add("Lifewater", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);

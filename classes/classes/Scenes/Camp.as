@@ -2154,27 +2154,28 @@ public class Camp extends NPCAwareContent{
 			addButton(13, "Unfuse", druidMenuUnfuseScene);
 		}
 		else {
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", druidMenuFuseScene, "air", 1);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", druidMenuFuseScene, "air", "light green", 1);
 			else addButtonDisabled(0, "Air", "You need to summon Epic Air Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", druidMenuFuseScene, "earth", 2);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", druidMenuFuseScene, "earth", "dark brown", 2);
 			else addButtonDisabled(1, "Earth", "You need to summon Epic Earth Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", druidMenuFuseScene, "fire", 3);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", druidMenuFuseScene, "fire", "tan", 3);
 			else addButtonDisabled(2, "Fire", "You need to summon Epic Fire Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", druidMenuFuseScene, "water", 4);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", druidMenuFuseScene, "water", "light blue", 4);
 			else addButtonDisabled(3, "Water", "You need to summon Epic Water Elemental first before trying to use this fusion option.");
 			addButtonDisabled(13, "Unfuse", "You need to be fused with any of epic elementals to use this option.");
 		}
 		addButton(14, "Back", campWinionsArmySim);
 	}
-	private function druidMenuFuseScene(element:String, type:Number):void {
+	private function druidMenuFuseScene(element:String, skin:String, type:Number):void {
 		clearOutput();
+		var oldHPratio:Number = player.hp100/100;
 		outputText("You concentrate on the "+element+" elemental slowly infusing its essence within yours. Your body begins to change accordly to take on the aspect of "+element+".\n\n");
 		outputText("After a few seconds, you open your eyes, now one with "+element+" as a");
 		if (type == 1) outputText(" Sylph");
 		if (type == 2) outputText(" Gnome");
 		if (type == 3) outputText("n Ignis");
 		if (type == 4) outputText("n Undine");
-		outputText(".\n\nYou admire your new [Skin color] [skin descript with tattoo if any] skin which emphasizes the element you’ve become. Your ears have changed to "+(type == 4?"gain fins":"becoming pointed")+" like those of an "+(type == 4?"aquatic creature":"elf")+". ");
+		outputText(".\n\nYou admire your new "+skin+" skin which emphasizes the element you’ve become. Your ears have changed to "+(type == 4?"gain fins":"becoming pointed")+" like those of an "+(type == 4?"aquatic creature":"elf")+". ");
 		outputText("Your irises also have changed, the new hue is ");
 		if (type == 1) outputText("orange like the twilight sky");
 		if (type == 2) outputText("green like a leaf");
@@ -2212,11 +2213,14 @@ public class Camp extends NPCAwareContent{
 		if (type == 2) player.createPerk(PerkLib.AffinityGnome,0,0,0,0);
 		if (type == 3) player.createPerk(PerkLib.AffinityIgnis,0,0,0,0);
 		if (type == 4) player.createPerk(PerkLib.AffinityUndine,0,0,0,0);
+		CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		doNext(druidMenu);
 	}
 	private function druidMenuUnfuseScene():void {
 		clearOutput();
+		var oldHPratio:Number = player.hp100/100;
 		outputText("You end your fusion separating from the elemental back into two different entities.");
 		if (player.hasPerk(PerkLib.SharedPower)) player.setPerkValue(PerkLib.SharedPower, 1, 0);
 		player.removePerk(PerkLib.ElementalBody);
@@ -2224,6 +2228,8 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.AffinityGnome)) player.removePerk(PerkLib.AffinityGnome);
 		if (player.hasPerk(PerkLib.AffinityIgnis)) player.removePerk(PerkLib.AffinityIgnis);
 		if (player.hasPerk(PerkLib.AffinityUndine)) player.removePerk(PerkLib.AffinityUndine);
+		CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		doNext(druidMenu);
 	}
@@ -5794,7 +5800,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Jiangshi getting Tag'd and your backpack feel somehow cheaper (no worry will get back some gems for it if needed).");
@@ -5816,8 +5822,8 @@ public function rebirthFromBadEnd():void {
 				player.setPerkValue(PerkLib.NinetailsKitsuneOfBalance, 4, 0);
 				player.ascensionPerkPoints += 5;
 			}
-			if (player.hasPerk(MutationsLib.GolemArmyLieutenant) && !player.hasPerk(MutationsLib.GolemArmyJuniorLieutenant)) {
-				outputText(" We got even smth for all the golem army commnaders. No that jsut small degradation in ranks to have more glorious and longer reaching path in the future ;)");
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant) && !player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) {
+				outputText(" We got even smth for all the golem army commnaders. No that just small degradation in ranks to have more glorious and longer reaching path in the future ;)");
 				if (player.hasPerk(PerkLib.GolemArmyLieutenant)) {
 					player.removePerk(PerkLib.GolemArmyLieutenant);
 					player.createPerk(PerkLib.GolemArmyJuniorLieutenant,0,0,0,0);
@@ -5896,7 +5902,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
@@ -5917,7 +5923,6 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}*/
-
 		doCamp();
 	}
 	
