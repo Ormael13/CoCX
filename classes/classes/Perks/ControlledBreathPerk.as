@@ -15,7 +15,7 @@ package classes.Perks
 
 		public function ControlledBreathPerk()
 		{
-			super("Controlled Breath", "Controlled Breath", "Jojo’s training allows you to recover more quickly. Increases rate of fatigue regeneration by 20% and mana by 30%");
+			super("Controlled Breath", "Controlled Breath", "Jojo’s training allows you to recover more quickly. Increases rate of fatigue / mana / soulforce regeneration by 20%");
 		}
 	}
 }

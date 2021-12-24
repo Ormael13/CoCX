@@ -46,14 +46,13 @@ public class Lumi extends BaseContent {
 		menu();
 		if (lumiEnhance0(true)) addButton(0, "Enhance", lumiEnhance0);
 		if (lumiEnhance1(true)) addButton(1, "Enhance", lumiEnhance1);
-		addButton(5, "Shop", lumiShop);
+		addButton(10, "Shop", lumiShop);
 		if (player.hasStatusEffect(StatusEffects.LumiWorkshop)) {
-			addButton(6, "Engineering", lumiEngineering);
-			addButton(7, "Workshop", lumiWorkshop);
-			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(9, "GoblinMech", lumiGarageRetry);
+			addButton(11, "Engineering", lumiEngineering);
+			addButton(12, "Workshop", lumiWorkshop);
+			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(13, "GoblinMech", lumiGarageRetry);
 		}
-		else addButton(7, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
-		addButton(10, "SellMats", lumiSell);
+		else addButton(12, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
 	
@@ -194,6 +193,7 @@ public class Lumi extends BaseContent {
 		addButton(5, "G.Tech.C.", lumiPitchGoblinTechnomancerClothes).hint("Goblin Technomancer Clothes");
 		addButton(6, "Tech.Bra", lumiPitchTechnomancerBra).hint("Technomancer bra");
 		addButton(7, "Tech.Pan", lumiPitchTechnomancerPanties).hint("Technomancer panties");
+		addButton(10, "SellMats", lumiSell);
 		addButton(14, "Leave", lumiLabChoices);
     }
 //Lust Draft
@@ -282,7 +282,7 @@ public class Lumi extends BaseContent {
         outputText("\"<i>Aye "+player.mf("lad","lass")+" what ya got for trade today?</i>\"\n\n");
         menu();
 		addButton(0, "Metal Plates", lumiSellMatsMetalPlates).hint("Sell Metal Plates.");
-		addButton(14, "Leave", lumiLabChoices);
+		addButton(14, "Leave", lumiShop);
     }
 	public function lumiSellMatsMetalPlates():void {
         spriteSelect(37);

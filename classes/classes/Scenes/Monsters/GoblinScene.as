@@ -7,6 +7,8 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 
 import coc.xxc.BoundStory;
@@ -298,11 +300,13 @@ public class GoblinScene extends BaseContent
 			var spiderCondom:Function = null;
 			var jog:Function = null;
 			var eggs:Function = null;
+			var mindbreak:Function = null;
 			if (player.canOvipositSpider()) {
 				eggs = laySomeDriderEggsInGobboTwat;
 			}
 			//cunt stuff
 			if (player.hasVagina()) cuntFuck = gobboGetsRapedFem;
+			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) mindbreak = mindbreakGoblin;
 			//Dick stuff:
 			if (player.hasCock()) {
 				//Corrupt too big scene
@@ -342,6 +346,7 @@ public class GoblinScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				if (mindbreak != null) addButton(9, "Mind break", mindbreak);
 				//addButton(10, "Kill", killGoblin);
 				//addButton(14, "Leave", cleanupAfterCombat);
 				if (feeder != null || eggs != null) {
@@ -584,6 +589,32 @@ public class GoblinScene extends BaseContent
 			player.sexReward("Default", "Default",true,false);
 			cleanupAfterCombat();
 		}
+
+		private function mindbreakGoblin():void{
+			clearOutput();
+			outputText("You muse about what you will do to the annoying little wretch when you remember your sister Kaerb-Dnim's wishes and grin." +
+					" You approach the defeated slut, your mind already going wild with excitement as you grab her and proceed to fuck her in a way she would have never predicted." +
+					" You insert your tentacles and prod for the part of her brain which processes reasoning. The sensation of fucking her mind is very pleasurable to you." +
+					" Your tentacles tingle as you grope and violate the goblin." +
+					" You cum from the constant assault of stimuli passing through your brain, your snatch producing light green fluid as you ride this cerebral orgasm." +
+					" However, you have better things to do than just enjoy yourself." +
+					"\n\n\"<i>Ah what are you ding dong! Stop soaping my carrot spider soup augh...uuuh..ahh…</i>\"" +
+					"\n\nYou give an amused smile. This is just like you when Kaerb-Dnim was helping you to become perfect." +
+					" The goblin cums several times as you toy with the nerves which process pleasure and pain, sending shocks through her small body as it is wracked with several consecutive orgasms." +
+					" Her mouth drooling with the tell-tale sign of complete mental breakdown only serves to put you even more in the mood." +
+					" You're going to make the girl live in a state of constant dependence on your tentacles, producing in her the latent desire to abandon herself to every man and woman she encounters until she is a proper slut." +
+					" Then… maybe you will consider rewarding her." +
+					" The goblin babbles incoherently and laughs as her cunt constantly drips with fluid." +
+					" You insert your finger in and playfully pinch her clitoris watching in amazement as the ground is instantly drenched with the girl cum of the broken girl." +
+					" Satisfied with what you saw, you lock an image of Kaerb-Dnim's cave within her mind and let her go, knowing full well she will head there at the first opportunity.");
+			Mindbreaker.MindBreakerGoblinConvert ++;
+			Mindbreaker.MindBreakerConvert ++;
+			if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
+			else outputText("\n\nYou drop the unconscious goblin on the ground heading back to your camp, still giggling at your new acquisition.");
+			player.sexReward("Default", "Default",true,false);
+			cleanupAfterCombat();
+		}
+
 		private function killGoblin():void {
 			clearOutput();
 			flags[kFLAGS.GOBLINS_KILLED]++;

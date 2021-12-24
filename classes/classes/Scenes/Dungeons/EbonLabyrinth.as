@@ -100,11 +100,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("You refuse to end up as a meal to a slime and, unable to pose a decent fight, you keep the thing at bay using a torch.\n\n");
 			outputText("\"<i>Not fair! Put that out, damn thing hurts like a bitch. Fucking knew I should have put more work on my fire wards!</i>\"\n\n");
 			outputText("Aha! So she can’t stand fire, huh? Well too bad for her, as you proceed to crawl away from the slime keeping the torch between you and her so she can’t approach. Eventually, you manage to stand up and begin running from the, somewhat disappointed, slime girl.\n\n");
-			cleanupAfterCombat();
+			cleanupAfterCombatTFEvent();
 		}
 		public function defeatedByDarkSlimeLetHer():void {
 			SceneLib.caves.darkslimeScene.LetzRape();
-			cleanupAfterCombat();
+			cleanupAfterCombatTFEvent();
 			dungeonLoc = 131;
 			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
@@ -246,7 +246,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			clearOutput();
 			outputText("The snail girl catches you before you even hit the floor, a wide gooey smile on her face.\n\n");
 			outputText("\"<i>Aw, no need to be so aggressive, I know exactly what you need! A BIG warm hug!</i>\"\n\n");
-			if (player.hasPerk(PerkLib.FireAffinity)) {
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) {
 				outputText("No way, she's going to hug you!? You scream in panic trying to get free but it's pointless as she has you beneath her shell now. However friendly she is, your body isn't made to endure such crazy heat. Or is it? To your surprise you actually feel comfortable in her grasp and even begin to relax, returning the hug and gently imprinting your hands into her generous breasts.");
 				HellfireSnailSex();
 				monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
@@ -515,7 +515,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		
 		public function encountersRuletteBossesEL1HellSnail():void {
-			if (player.hasPerk(PerkLib.FireAffinity) && flags[kFLAGS.HELLFIRE_SNAIL_ENC] == 1) {
+			if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && flags[kFLAGS.HELLFIRE_SNAIL_ENC] == 1) {
 				outputText("You turn the corner expecting to run into yet another monster out to badly hurt you but sigh in relief as you run into the fire snail girl instead.\n\n");
 				outputText("\"<i>Hey it's you again. Having fun down there?</i>\"\n\n");
 				outputText("Well you could say that, in a way, yes you are having fun down there.\n\n");
@@ -691,6 +691,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			dynStats("cor", 100);
 			player.tailType = Tail.SPIDER_ADBOMEN;
 			player.lowerBody = LowerBody.ATLACH_NACHA;
+			player.legCount = 8;
 			if (!player.hasVagina()) player.createVagina();
 			player.vaginaType(5);
 			if (player.tailRecharge < 15) player.tailRecharge = 15;
@@ -822,7 +823,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function doSleepEL():void {
 			if (rand(2) == 0) {
 				clearOutput();
-				cheatTime2(15);
+				eachMinuteCount(15);
 				outputText("You ready your bedroll and go to sleep, keen on continuing your exploration tomorrow. Sadly as you prepare to lay down, a creature from the labyrinth stumbles upon your makeshift camp and you are forced to defend yourself.\n");
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				nightAmbushRuletteEL();
@@ -891,10 +892,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				HPChange((timeQ * hpRecovery * multiplier), false);
 				fatigue( -(timeQ * fatRecovery * multiplier));
 				model.time.hours += timeQ;
-				SceneLib.combat.regeneration(false);
-				if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
-				if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
-				SceneLib.combat.wrathregeneration(false);
+				SceneLib.combat.regeneration1(false);
+				if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration1(false);
+				if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration1(false);
+				SceneLib.combat.wrathregeneration1(false);
+				SceneLib.combat.fatigueRecovery1(false);
 				if (model.time.hours > 23) {
 					model.time.hours -= 24;
 					/*CoC.instance.*/model.time.days++;

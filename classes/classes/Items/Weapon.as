@@ -4,6 +4,7 @@
 package classes.Items
 {
 
+import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
 
@@ -112,6 +113,7 @@ public class Weapon extends Useable //Equipable
 			|| (game.player.shieldPerk == "Massive" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))) {
 				SceneLib.inventory.unequipShield();
 			}
+			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			return this;
 		}
 		

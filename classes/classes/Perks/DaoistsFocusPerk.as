@@ -1,5 +1,5 @@
 /**
- * @author Zavos
+ * @author Ormael
  */
 package classes.Perks 
 {
@@ -16,8 +16,8 @@ package classes.Perks
 		
 		public function DaoistsFocusPerk() 
 		{
-			super("Daoist's Focus", "Daoist's Focus",
-					"Your daoist's weapon grants you additional focus, increasing your soulskills power.");
+			super("Daoist's Focus", "Daoist's Focus (M)",
+					"Your daoist's melee weapon grants you additional focus, increasing your soulskills power.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

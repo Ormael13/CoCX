@@ -44,8 +44,13 @@ import coc.xlogic.ExecContext;
 				{}, // local variables
 				character,
 				{
+					IsEarthElemental: player.perkv1(PerkLib.ElementalBody) == 2,
+					IsFireElemental: player.perkv1(PerkLib.ElementalBody) == 3,
+					IsWaterElemental: player.perkv1(PerkLib.ElementalBody) == 4,
+					IsWindElemental: player.perkv1(PerkLib.ElementalBody) == 1,
 					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
 					CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
+					MindBreakerPussy: player.vaginaType() == VaginaClass.MINDBREAKER,
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					SlimeCore: player.hasPerk(PerkLib.SlimeCore),
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
@@ -226,7 +231,8 @@ import coc.xlogic.ExecContext;
 							player.necklace == game.necklaces.NECKSPE || player.necklace == game.necklaces.NECKSTR || player.necklace == game.necklaces.NECKTOU ||
 							player.necklace == game.necklaces.NECKWIS || player.necklace == game.necklaces.FIRENEC || player.necklace == game.necklaces.ICENECK ||
 							player.necklace == game.necklaces.LIGHNEC || player.necklace == game.necklaces.DARKNEC || player.necklace == game.necklaces.POISNEC ||
-							player.necklace == game.necklaces.LUSTNEC
+							player.necklace == game.necklaces.LUSTNEC,
+					CowBellAmulet: player.necklace == game.necklaces.COWBELL
 				}
 			]);
 			this.charview = charview;

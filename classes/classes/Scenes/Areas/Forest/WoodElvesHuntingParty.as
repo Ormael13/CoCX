@@ -176,7 +176,7 @@ public class WoodElvesHuntingParty extends Monster
 			this.lustVuln = .7;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 15;
+			this.level = 14;
 			this.gems = rand(10) + 10;
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).

@@ -22,6 +22,11 @@ use namespace CoC;
 		}
 		public function exploreSwamp():void
 		{
+			//M1 Cerberus
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("M1 Cerberus") < 0 && rand(2) == 0) {
+				partsofM1Cerberus();
+				return;
+			}
 			//Discover 'Bog' at after 25 explores of swamp
 			if (player.level >= 23 && flags[kFLAGS.BOG_EXPLORED] == 0) {
 				clearOutput();
@@ -90,6 +95,14 @@ use namespace CoC;
 					doNext(playerMenu);
 					break;
 			}
+		}
+		public function partsofM1Cerberus():void {
+			clearOutput();
+			outputText("As you explore the swamp you run into what appears to be the half sunken remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to pull up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the M1 Cerberus in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("M1 Cerberus", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

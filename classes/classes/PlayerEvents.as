@@ -1005,10 +1005,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else vthirst.modSatiety(-1);
 				}
 				//Getting chrismas tree
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 1) {
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) {
 					outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves. Looks like the seed was able to take root in the barren land after all.\n");
 					flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] = 0;
-					flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 2;
+					flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 3;
 					needNext = true;
 				}
 				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && !player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
@@ -1195,7 +1195,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
-
 			//Armor unequip zone
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{
@@ -1522,7 +1521,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.yetiScore() >= 6 && !player.hasPerk(PerkLib.ColdAffinity)) {
+			if (player.yetiScore() >= 6 && (!player.hasPerk(PerkLib.ColdAffinity) || !player.hasPerk(PerkLib.FreezingBreathYeti))) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity and Freezing Breath Yeti</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
@@ -1901,13 +1900,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if ((player.isGoblinoid()) && !player.hasPerk(PerkLib.GoblinoidBlood)) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
-				if (player.hasKeyItem("Drug injectors")){
+				if (player.hasKeyItem("Drug injectors") >= 0){
 					player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
 				}
-				if (player.hasKeyItem("Improved Drug injectors")){
+				if (player.hasKeyItem("Improved Drug injectors") >= 0){
 					player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 				}
-				if (player.hasKeyItem("Potent Drug injectors")){
+				if (player.hasKeyItem("Potent Drug injectors") >= 0){
 					player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
 				}
 				if (player.hasKeyItem("Power bracer") >= 0) {
@@ -1998,36 +1997,47 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.isGoblinoid() && (!player.statStore.hasBuff('DrugInjector') || !player.statStore.hasBuff('Power bracer'))) {
-				outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
 				if (!player.statStore.hasBuff('DrugInjector')) {
-					if (player.hasKeyItem("Drug injectors")){
+					if (player.hasKeyItem("Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
 					}
-					if (player.hasKeyItem("Improved Drug injectors")){
+					if (player.hasKeyItem("Improved Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 					}
-					if (player.hasKeyItem("Potent Drug injectors")){
+					if (player.hasKeyItem("Potent Drug injectors") >= 0){
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
 					}
 				}
 					else {
 					if (player.hasKeyItem("Power bracer") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'})
 					}
 					if (player.hasKeyItem("Powboy") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'})
 					}
 					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
+						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
+
 						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
 					}
 				}
 				needNext = true;
 			}
 			//Cow bell
-			if (player.necklaceName == "Cow bell") {
-				if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
-				else player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
-			}
+			if (player.necklace == necklaces.COWBELL && player.cowScore() >= 10 && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
+			if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
+			//Jiangshi cursed tag
+			if (player.headJewelry == headjewelries.JIANGCT && player.jiangshiScore() >= 20 && !player.statStore.hasBuff('Jiangshi Curse Tag')) player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {
 				outputText("\nWhile wandering around the border of your camp, you randomly kick a rock and a stream of water sprays out. Surprised, you touch the water, discovering it to be startlingly hot. An idea comes to your mind. You get a shovel, digging around the fountaining water which soon turns into a small pool. This is the perfect place to build a hot spring. You smile, delighted at the idea of being able to take frequent baths in it! You resolve to get to work as soon as possible.");
@@ -2036,7 +2046,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Marae corrupted or killed + Zenji
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && (flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1 || flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) && !ZenjiScenes.ZenjiMarae) {
-				outputText("\nZenji approaches you, \"<i>[name]. I.. I felt someting, not long ago. Someting terrible has happened, I feel it deep within me.</i>\"");
+				outputText("\nZenji approaches you, \"<i>[name]. I.. I felt something, not long ago. Someting terrible has happened, I feel it deep within me.</i>\"");
 				outputText("\n\nHe pulls you into his protective arms, \"<i>Stay close, [name], dis world just doesn’t feel right anymore.</i>\"");
 				ZenjiScenes.ZenjiMarae = true;
 				needNext = true;

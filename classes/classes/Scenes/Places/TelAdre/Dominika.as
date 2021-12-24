@@ -2,6 +2,7 @@
 import classes.*;
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class Dominika extends TelAdreAbstractContent {
 public function Dominika(){
@@ -28,7 +29,7 @@ public function fellatrixBarApproach():void {
 	outputText(images.showImage("dominika-first-meeting-at-bar"));
 	//Get the emporerors new groove (sword)
 	//Req's d2 finished
-	if(fellatrixSucked() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
+	if(fellatrixSucked() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
 		dominikaSpellblade();
 		return;
 	}
@@ -970,7 +971,7 @@ private function dominikaBlowjobs2():void {
 //Spellblade [Spellblade or S. Blade]: Sword with Wizard's Staff fatigue bonus, but higher attack (7-10? idk). ALTERNATIVELY you could put some crazy additional magic effect on there but idc
 //Mouseover description: Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic.  Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.
 
-//[Approach Dominika post-D2 in bar, requires having used her at least once before?]
+//[Approach Dominika post-D1 in bar, requires having used her at least once before?]
 public function dominikaSpellblade():void {
 	clearOutput();
 	//[Approach Dominika post-D2 in bar, on Dominika's \"<i>I'm a racist bitch</i>\" list]

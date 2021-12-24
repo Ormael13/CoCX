@@ -274,7 +274,7 @@ public class MutationsLib
 		public static const NaturalPunchingBag:PerkType = mk("Natural punching bag", "Natural punching bag",
 				"Increases the damage reduction from Bouncy body by 5% and increase your natural toughness.").withBuffs({'tou.mult':0.05});
 		public static const NaturalPunchingBagPrimitive:PerkType = mk("Natural punching bag (Primitive)", "Natural punching bag (Primitive)",
-				"Oncreases the damage reduction from Bouncy body by 10%, continue to increase your natural toughness and healing items are more effective.").withBuffs({'tou.mult':0.10});
+				"Increases the damage reduction from Bouncy body by 10%, continue to increase your natural toughness and healing items are more effective.").withBuffs({'tou.mult':0.10});
 		public static const NaturalPunchingBagEvolved:PerkType = mk("Natural punching bag (Evolved)", "Natural punching bag (Evolved)",
 				"Increases the damage reduction from Bouncy body by 20%, continue to increase your natural toughness and healing/wrath/stat boosting items are more effective and allow to keep the effect of bouncy body as long as you are below 4 feet tall.").withBuffs({'tou.mult':0.20});
 		public static const NaturalPunchingBagFinalForm:PerkType = mk("Natural punching bag (Final Form)", "Natural punching bag (Final Form)",
@@ -465,6 +465,9 @@ public class MutationsLib
 				MutationsList.push([KitsuneParathyroidGlands, KitsuneParathyroidGlandsEvolved, KitsuneParathyroidGlandsFinalForm]);
 				MutationsList.push([HellcatParathyroidGlands, HellcatParathyroidGlandsEvolved, HellcatParathyroidGlandsFinalForm]);
 			}
+			function mutationsDeprecated():void{
+				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm, LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, SalamanderAdrenalGlandsFinalForm, TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
+			}
 
 			switch(spec){
 				case "Heart":
@@ -511,6 +514,9 @@ public class MutationsLib
 					break;
 				case "PThyroid":
 					mutationsParaThyroidGlands();
+					break;
+				case "Deprecated":
+					mutationsDeprecated();
 					break;
 				default:
 					mutationsHeart();

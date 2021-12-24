@@ -64,7 +64,7 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 				return true;
 			}
 			//Ghostgirl recruitment priority
-			if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours == 6) {
+			if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours >= 10 && model.time.hours < 18) {
                 SceneLib.shouldraFollower.morningShouldraAlert();
                 return true;
 			}

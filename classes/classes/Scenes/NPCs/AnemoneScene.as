@@ -1946,11 +1946,11 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		 (add one level of hairlength)
 
 		 -sting with hair (combines both bee-sting effects, but weaker than either one separately):
-		 "You rush " + monster.short + ", whipping your hair around like a genie, and manage to land a few swipes with your tentacles.  As the venom infiltrates " + monster.pronoun3 + " body, " + monster.pronoun1 + " twitches and begins to move more slowly, hampered half by paralysis and half by arousal."
+		 "You rush " + monster.short + ", whipping your hair around like a genie, and manage to land a few swipes with your tentacles.  As the venom infiltrates [monster his] body, [monster he] twitches and begins to move more slowly, hampered half by paralysis and half by arousal."
 		 (decrease speed/str, increase lust)
 
 		 -miss a sting
-		 "You rush " + monster.short + ", whipping your hair around to catch it with your tentacles, but " + monster.pronoun1 + " easily dodges.  Oy, you hope you didn't just give yourself whiplash."
+		 "You rush " + monster.short + ", whipping your hair around to catch it with your tentacles, but [monster he] easily dodges.  Oy, you hope you didn't just give yourself whiplash."
 
 		 -venom capacity determined by hair length, 2-3 stings per level of length
 

@@ -103,7 +103,7 @@ use namespace CoC;
 				return;
 			}
 			//Harpy odds!
-			if (player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0) {
+			if ((player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0) && flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] < 2) {
 				if (player.hasItem(consumables.OVIELIX, 2)) {
 					if (rand(4) == 0) {
 						chickenHarpy();
@@ -121,7 +121,7 @@ use namespace CoC;
 				phoenixScene.encounterPhoenix1();
 				return;
 			}
-			if (player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && rand(4) == 0) {
+			if (player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.avianScore() >= 6 && rand(4) == 0) {
 				caveScene();
 				return;
 			}

@@ -4,12 +4,24 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.AbstractSpell;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
 public class FrostGiant extends Monster
 	{
-
+		
+		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+				if (ability is AbstractSpell) {
+					giantBoulderHit(2);
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		public function giantAttackPunch():void {
 			var damage:int = 0;
 			outputText("The giant strides toward you, closing the distance faster than you can run. He rears back and strikes at you!  ");
@@ -63,11 +75,11 @@ public class FrostGiant extends Monster
 				}
 				else if (player.str >= 1500 && player.str < 200) {
 					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
-					player.addCombatBuff('str', -2);
+					player.addCombatBuff('str', -2, "Combat Debuff", "FrostGiantDebuff");
 				}
 				else if (player.str >= 100 && player.str < 150) {
 					outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-					player.addCombatBuff('str', -4);
+					player.addCombatBuff('str', -4, "Combat Debuff", "FrostGiantDebuff");
 				}
 				else if (player.str >= 50 && player.str < 100) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");

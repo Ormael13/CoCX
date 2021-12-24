@@ -152,7 +152,7 @@ import classes.Scenes.SceneLib;
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
 			this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
@@ -162,7 +162,7 @@ import classes.Scenes.SceneLib;
 				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedDiehard, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 5) {
@@ -172,7 +172,7 @@ import classes.Scenes.SceneLib;
 				this.createPerk(MutationsLib.LactaBovinaOvariesPrimitive, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.GreaterDiehard, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
@@ -182,7 +182,7 @@ import classes.Scenes.SceneLib;
 				this.createPerk(MutationsLib.PigBoarFatEvolved, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 8) {
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicDiehard, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 9) {

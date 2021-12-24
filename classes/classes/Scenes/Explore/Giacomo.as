@@ -468,7 +468,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow intoYou buy the package filled with holiday decorations. Inside are shiny, colorful ornaments, garland, and lights. You can't help but think this will be perfect for decorating the tree back at camp. <b>You acquired Holiday Decorations.</b>");
 				player.gems -= 100;
 				statScreenRefresh();
-				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 6;
+				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 7;
 				player.createKeyItem("Decorations", 0, 0, 0, 0);
 				doNext(miscMenu);
 			}

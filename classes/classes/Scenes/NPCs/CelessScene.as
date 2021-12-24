@@ -157,8 +157,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		clearOutput();
 		doNext(camp.returnToCampUseOneHour);
-		outputText(_name + " sees you coming over from afar and cheers up right away.\n\n"+
-		"<i>\"Mom, did you come over to see me?!\"</i>");
+		outputText(_name + " sees you coming over from afar and cheers up right away.\n\n<i>\""+
+				player.mf("Dad", "Mom") +
+				", did you come over to see me?!\"</i>");
 		menu();
 		addButton(0,"Appearance",celessChildAppearance)
 		if (isAdult) {
@@ -198,7 +199,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			outputText(""+_name+" seems somewhat bored, and it occurs to you that being a mother comes before being the Champion." +
 					"You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps." +
 					"You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back." +
-					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>“Tehehe. Got you, mom.”</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
+					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>“Tehehe. Got you, "+ player.mf("Dad", "Mom") +" !”</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
 					"You pick one of the imps and grab him by the cock, pumping to make him shoot his cum at your daughter, who laughs as this turn into an all out impshot battle. " +
 					"Imp cum is soon splashing everywhere in the forest, the both of you using trees and bushes as cover. Eventually, you and "+_name+" are covered in so much cum her black fur almost appears white. " +
 					"After a few hours of this, the both of you head back to camp, still laughing.");
@@ -207,7 +208,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		{
 			outputText("You spend some time with your beloved daughter in the forest. " +
 					"The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.\n\n"+
-					"<i>“Mom, they smell <b>so</b> good! Are they blooming all the time like this?”</i>\n\n" +
+					"<i>\""+ player.mf("Dad", "Mom") + ", they smell <b>so</b> good! Are they blooming all the time like this?”</i>\n\n" +
 					"You admit that you don’t know, as Mareth’s time and space is distorted and difficult to predict at the best of times. ");
 			if(player.inte > 60){
 				outputText("Although you could give a rough estimate if you brought the right tools, some books on Mareth’s local botany would also help");
@@ -234,17 +235,17 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		clearOutput();
 		outputText("No matter how weird a parent you might be, you just can’t find the resolve to fuck your innocent daughter. ");
 				if(player.cor > 20) outputText("Just as you're about to dismiss the idea completely, "+_name+" surprises you.</if>\n\n");
-				outputText("<i>“MOM! HELP! ITS BACK!</i>\n\n" +
+				outputText("<i>\""+ player.mf("DAD", "MOM") +"! HELP! ITS BACK!</i>\n\n" +
 				"You watch, spellbound, as "+_name+"’s massive shaft rises to full mast, throbbing and leaking a steady stream of precum already. Clearly, "+_name+" has no idea about how to get it to calm down. " +
 				"It seems the job falls to you.\n\n" +
-				"<i>“I can’t hold this thing anymore. Please, mom, do something!”</i>\n\n" +
+				"<i>“I can’t hold this thing anymore. Please, "+ player.mf("dad", "mom") +", do something!”</i>\n\n" +
 				"This is a… somewhat unusual situation, but as a ");
 				if (player.gender == 1) outputText("male ");
 				if (player.gender == 2) outputText("parent ");
 				if (player.gender == 3) outputText("herm like her ");
 				outputText("it’s something you can understand. You approach your girl’s massive tool and give it a few experimental strokes, making "+_name+" gasp in surprise. " +
 				"You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper."+_name+" moans as her horse dong throbs in appreciation for the attention you’re giving it.\n\n" +
-				"<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>\n\n" +
+				"<i>“Eep!!! "+ player.mf("Dad", "Mom") +", I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>\n\n" +
 				""+_name+" whines as she finally orgasms, her sweet cum flooding your throat. It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. " +
 				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
 		doHeatOrRut();
@@ -329,7 +330,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 			outputText("You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older? ");
 			if (player.inte > 50) outputText("Does make sense, otherwise they would cause some nasty internal damage during birth. ");
-			outputText("<i>\"Mom, is something wrong?\"</i>\n" +
+			outputText("<i>\""+ player.mf("Dad", "Mom") +", is something wrong?\"</i>\n" +
 			"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
 			"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
 			doNext(camp.returnToCampUseFourHours);
@@ -344,7 +345,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
 			[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 			[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
-			//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],
+			[weapons.DEMSCYT, weapons.LHSCYTH, null],
 			[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
 			[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
 			[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
@@ -749,27 +750,27 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("As you wake up this morning, you check the space next to you where "+_name+" usually sleeps, and find it empty.\n\n" +
 				"You almost panic for a moment, before calming down and deciding to go look for her. When you finally find her by the stream, she’s holding her forehead, visibly in pain.\n\n");
 		if (isCorrupt) {
-			outputText("\"<i>Ahhhh so good… this feels way too good! …Mom please look!</i>\"\n\n");
+			outputText("\"<i>Ahhhh so good… this feels way too good! …"+ player.mf("Dad", "Mom") +" please look!</i>\"\n\n");
 			outputText("Well, looks like it wasn’t pain, not at all. You watch spellbound as a duo of parallel horns, symbols of her corruption, push out of "+_name+"’s forehead. " +
 					"She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. " +
 					"Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. " +
 					"Her breasts, currently D-cups, are progressively inflating, finally stopping somewhere around E-cups. " +
 					"And as her horns finish their growth, her horsecock explodes, splattering much of the ground, covering it in white. " +
 					"Your little girl seems to have matured to adulthood.\n\n" +
-					"\"<i>Mom… I feel so energised, and hot... please... help me get that throbbing thing to calm down.</i>\"\n\n");
+					"\"<i>"+ player.mf("Dad", "Mom") +"… I feel so energised, and hot... please... help me get that throbbing thing to calm down.</i>\"\n\n");
 		}
 		else{
-			outputText("\"<i>Oww! It hurts!...Mom… don’t look!</i>\"\n\n");
+			outputText("\"<i>Oww! It hurts!..."+ player.mf("Dad", "Mom") +"… don’t look!</i>\"\n\n");
 			outputText("You see your daughter is holding a large horn on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain");
 			if (silly()) outputText(", kinda obvious, what with her outright telling you less than two seconds ago,");
 			outputText(" and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horn pushes forward, eventually growing to a length just shy of her sire’s own horn." +
-					"\"<i>Mom… It’s terrible! I've grown this weird bony stump on my head, what do I do?</i>\"\n\n" +
+					"\"<i>"+ player.mf("Dad", "Mom") +"… It’s terrible! I've grown this weird bony stump on my head, what do I do?</i>\"\n\n" +
 					"You explain to your daughter that it's normal for unicorns to have a horn on their forehead and that you love her all the same, horn or not. " +
 					"She calms down and hugs you warmly like she always does. This time, however, you can’t help but notice the large horsecock between her leg rising to full mast. " +
 					"Noticing where you’re looking, she blushes and tries to hide it from you, failing miserably due to being unable to reach it with her hands. All she achieves is looking somewhat silly. " +
 					"You tell her it’s alright , that you’re here for her and that, as you already said, you love her, horn or no horn, no matter what kind. This manages to get a chuckle out of her, easing some of her worry, but not all of it. " +
 					"You sigh, she’s your daughter, and no matter the problems she might have, she can always come to you and you will gladly go to any length to help her with it. No exceptions...\n\n" +
-					"\"<i>Mom, I’m a little scared… Why did it get so big?! How do I get rid of this huge thing between my legs?</i>\"\n\n");
+					"\"<i>"+ player.mf("Dad", "Mom") +", I’m a little scared… Why did it get so big?! How do I get rid of this huge thing between my legs?</i>\"\n\n");
 		}
 		if (player.isFemaleOrHerm()) {
 			outputText("This is a… somewhat unusual situation, but as a ");
@@ -794,7 +795,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		else {
 			outputText("Her cum somehow makes your mind feel clearer and sharper, purifying some of the darker thoughts plaguing you. " +
 					""+_name+"’s horsecock finally shrinks back to its sheath, but she’s still blushing like a tomato.\n\n" +
-					"\"<i>Mom, is this really ok with you?</i>\"\n\n" +
+					"\"<i>"+ player.mf("Dad", "Mom") +", is this really ok with you?</i>\"\n\n" +
 					"You would rather it be you than some imp after her purity, stealing your daughter firsts. " +
 					"She understands you’re doing this for her sake and does her best to stop blushing, being only moderately successful. " +
 					"The morning pretty much continues as normal, aside from a lecture on sex you put some time aside to give her, mainly on what and who to avoid and why.");
@@ -822,7 +823,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function incestSuckHerOff():void{
 		clearOutput();
 		outputText("It's been a while since you last had a taste of her, thus you decide to give your daughter a sweet, loving blowjob! " + _name + " coos, delighted at the proposal.\n"+
-		"<i>\"Oh… so mommy wants a taste of my delicious lower horns? Please, mom, feel free to indulge yourself.\"</i>\n"+
+		"<i>\"Oh… so mommy wants a taste of my delicious lower horns? Please, "+ player.mf("dad", "mom") +", feel free to indulge yourself.\"</i>\n"+
 		"You approach your girl’s massive tool and give it a few experimental strokes, making " + _name + " gasp in surprise."+
 		"You lick the flared tip to get a taste.\n"+
 		"Satisfied with it you then proceed to put the thing in your mouth proper. " + _name + " moans as her horse dong throbs in appreciation for the attention you’re giving it. "+
@@ -835,12 +836,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		clearOutput();
 		outputText("You could really use some of that horse meat down there and if " + _name + "’s raging erection is anything to go by, she’s in line with your thinking.\n" +
 		"You get rid of any clothing, giving a good show of your [ass] to " + _name + " who blushes in desire while trotting up to you. Soon, you feel the tip of her huge cock at the entrance of your vagina.\n\n" +
-		"<i>\"Here I go, mom!\" </i>\n\n"+
+		"<i>\"Here I go, "+ player.mf("dad", "mom") +"!\" </i>\n\n"+
 		"She’s suddenly inside your pussy before you even had the time to shout a silent scream. "+
 		"Unsurprisingly your bicorn daughter's devilish cock seems to be made to pleasure partners, you feel no pain from the penetration only the pressure of her large member working your pussy with masterful effectiveness."+
 		"You moan in delight as she fucks you up to the cervix for several minutes, your belly bulging due to the sheer size of her cock." +
 		"Your eyes roll back as her cock drives your pussy completely crazy.. Hell, she has even more stamina than her sire! After a while, you feel her massive shaft twitch inside you as she readies to unload.\n\n"+
-		"<i>\"Ahhhh mom.. I can’t hold it anymore!\"</i>\n\n"+
+		"<i>\"Ahhhh "+ player.mf("dad", "mom") +".. I can’t hold it anymore!\"</i>\n\n"+
 		"A huge volume of cum shoots into you, filling your womb until it’s full enough to make you look pregnant already."+
 		"You feel her removing her cock from your pussy as you pass out on the grass exhausted by the experience.\n\n"+
 		"When you wake up you find " + _name + " sleeping with her head on your lap… seemingly protecting your inflated belly.");
@@ -854,13 +855,13 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function incestPureCorruption():void{
 		clearOutput();
 		outputText(_name + "suddenly starts moaning as she holds her horns with both hands.\n\n"+
-		"<i>\"Ahhhh so good… this feels way too good!…Mom, please look!\"</i>\n\n"+
+		"<i>\"Ahhhh so good… this feels way too good!…"+ player.mf("dad", "mom") +", please look!\"</i>\n\n"+
 		"You watch spellbound as her horns suddenly fissures by the center, dividing into a duo of parallel horns, a symbol of her newfound corruption.\n"+
 		"Her formerly pure white fur starts to darken to pitch black as her eyes’ irises lose their azure blue, changing shade towards a fiendish red. Even her hairs changes silks of silver replacing her former platinum blonde strands.\n" +
 		"She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them.\n"+
 		"Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already.\n"+
 		"And as her horns finish repositioning on each side of her forehead, her horsecock explodes, splattering much of the ground, covering it in white. " + _name + " seems to have embraced her inner corruption.\n\n"+
-		"<i>\"Mom… I feel so energised, and hot... please... help me get that throbbing thing to calm down.\"</i>\n\n"+
+		"<i>\""+ player.mf("Dad", "Mom") +"… I feel so energised, and hot... please... help me get that throbbing thing to calm down.\"</i>\n\n"+
 		"This is a… somewhat unusual situation, but it’s something you can understand.\n"+
 		"You approach your girl’s massive tool and give it a few experimental strokes, making " + _name + " gasp in surprise.\n"+
 		"You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. " + _name + " moans as her horse dong throbs in appreciation for the attention you’re giving it.\n"+
@@ -890,10 +891,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"<i>\"Mommy wanna play daddy today? Sure, I can get in front of that ride.\"</i>"+
 		"That being all the encouragement you need, you position yourself behind her and ram your [cock] into her warm gaping cunt without hesitation.\n"+
 		"She moans in delight as you force in as much of your cock as you can while looking for the perfect angle. "+ _name + " taunts you with dirty talk all the while.\n\n" +
-		"<i>\"Mom, please defile me as much as you want, punish my sinful pussy!\"</i>\n\n" +
+		"<i>\""+ player.mf("Dad", "Mom") +", please defile me as much as you want, punish my sinful pussy!\"</i>\n\n" +
 		"Sinful, eh? Like mother like daughter. Her pussy, despite its size, acts as if it had a mind of its own, squeezing your cock as if trying to smother it."+
 		"You would suspect her of having some succubus blood were you not aware of her actual heritage.\n\n" +
-		"<i>\"Tired already, mom? C’mon, you can screw me better than that! Or, perhaps, you'd rather be the one to be screwed?\" </i>\n\n" +
+		"<i>\"Tired already, "+ player.mf("dad", "mom") +"? C’mon, you can screw me better than that! Or, perhaps, you'd rather be the one to be screwed?\" </i>\n\n" +
 		"Oh, is that a little brat mocking you that you hear? Can’t have that, right? Let’s educate her!\n" +
 		"You proceed to wildly fuck your nymphomaniac daughter’s hole, responding to her earlier assault with a flurry of aggressive thrusts.\n\n"+
 		"<i>\"Aaaaah Yes! Defile me! Use me to your heart's content!\"</i>\n\n" +

@@ -41,8 +41,10 @@ import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
+import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
@@ -96,13 +98,13 @@ use namespace CoC;
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
 					outputText("<b>TelAdre Tripxi Guns 1 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) + " (Dart pistol)\n");
-					outputText("<b>TelAdre Tripxi Guns 1 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 1 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) + " (Double barreled dragon gun)\n");
 					outputText("<b>TelAdre Tripxi Guns 1 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns1) + "\n");
 				}
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) {
 					outputText("<b>TelAdre Tripxi Guns 2 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) + " (M1 Cerberus)\n");
 					outputText("<b>TelAdre Tripxi Guns 2 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) + " (Twin Dart pistol)\n");
-					outputText("<b>TelAdre Tripxi Guns 2 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 2 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) + " (Lactoblasters)\n");
 					outputText("<b>TelAdre Tripxi Guns 2 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns2) + "\n");
 				}
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) {
@@ -166,6 +168,14 @@ use namespace CoC;
 
 		public function SoulCultivationLvL():void {	//Converted Soul Cultivation level check to a function, easier to update, and much nicer on the eyes than the old block of ifs!
 			//Actually.... Since the tier and lvl have to sync for the soul cult lvl, and is checked for the output tier... I can hijack this and use it to output the tiers as well!
+			/*var cultTier:Array = [PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+			var pLvlMax:int = 122;	//Should only need to change this and above array for future expansion.
+			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
+			var cultStanding:String = "Mortal";
+			var lNeed:Boolean = true;
+			var pLvl:int = 6;
+			var cLvlTier:int = 0;
+			var perkTier:PerkType;*/
 			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
 			var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
 			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
@@ -174,16 +184,31 @@ use namespace CoC;
 			var cLvlTier:int = 0;
 			var cultStanding:String = "Mortal";
 			flags[kFLAGS.SOUL_CULTIVATION] = 0;
-			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Can't think of a better idea than this for now to handle the first three.
+			/*for (var i:int = 0; i < cultTier.length(); i++){	//This *should* work?
+				if (!player.hasPerk(cultTier[i])){
+					if (i == 0) break;
+					perkTier = cultTier[i - 1];
+					if (player.level < 76) pLvlMax = player.level
+					if (i - 1 < 6){
+						cultStanding = cultRankTier[pLvlMax % 3] + perkTier.name();
+					}
+					else{
+						cultStanding = cultRankTier[pLvlMax % 4] + perkTier.name();
+					}
+					break;
+				}
+			}*/
+			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Deprecating.
 				flags[kFLAGS.SOUL_CULTIVATION] +=3;
-			}	else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
+			}
+			else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
 				flags[kFLAGS.SOUL_CULTIVATION] +=2;
 				lNeed = false;
-			}	else if (player.level >= 1 && player.hasPerk(cultTier[0])){
+			}
+			else if (player.level >= 1 && player.hasPerk(cultTier[0])){
 				flags[kFLAGS.SOUL_CULTIVATION] +=1;
 				lNeed = false;
 			}
-
 			while (lNeed) {
 				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /6)])){
 					flags[kFLAGS.SOUL_CULTIVATION] +=1;
@@ -217,7 +242,7 @@ use namespace CoC;
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
-			if (!player.hasPerk(MutationsLib.GorgonsEyesFinalForm)) addButton(9, "R.M.PrePublicFix", AddMaxBackpack0333).hint("Fix ya mutation racial perks before public update of saves do it for everyone else not using test builds");
+			addButton(9, "FixJiangshi", jiangshiBuggedItemsCleanUpCrew0).hint("Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
@@ -226,12 +251,12 @@ use namespace CoC;
 		}
 		public function submenucuzwhynot():void {
 			menu();
-			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Zenji spawning pool");
+			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
 			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
 			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
-			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
+			addButton(5, "QuestItBag", AddMaxBackpack2).hint("Giving missing Quest Items Bag as part of Adventure Guild welcome/promotion package.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) addButton(8, ":Re", AddMaxBackpack5).hint("Rewind Evangeline.");
@@ -242,294 +267,133 @@ use namespace CoC;
 			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(14, "Back", SoulforceCheats);
 		}
-		public function AddMaxBackpack0333():void {
-			outputText("\n\nFix completed. Now you can play safetly without bugging out racial mutation perks until public build. So that like... 12 hours to 3 days away ;)");
-			player.createPerk(MutationsLib.GorgonsEyesFinalForm,0,0,0,0);
-			if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
-				player.removePerk(MutationsLib.ArachnidBookLungEvolved);
-				player.createPerk(MutationsLib.ArachnidBookLungPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.ArachnidBookLungFinalForm)) {
-				player.removePerk(MutationsLib.ArachnidBookLungFinalForm);
-				player.createPerk(MutationsLib.ArachnidBookLungEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.BlackHeartEvolved)) {
-				player.removePerk(MutationsLib.BlackHeartEvolved);
-				player.createPerk(MutationsLib.BlackHeartPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.BlackHeartFinalForm)) {
-				player.removePerk(MutationsLib.BlackHeartFinalForm);
-				player.createPerk(MutationsLib.BlackHeartEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DisplacerMetabolismEvolved)) {
-				player.removePerk(MutationsLib.DisplacerMetabolismEvolved);
-				player.createPerk(MutationsLib.DisplacerMetabolismPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) {
-				player.removePerk(MutationsLib.DraconicBonesEvolved);
-				player.createPerk(MutationsLib.DraconicBonesPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicBonesFinalForm)) {
-				player.removePerk(MutationsLib.DraconicBonesFinalForm);
-				player.createPerk(MutationsLib.DraconicBonesEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) {
-				player.removePerk(MutationsLib.DraconicHeartEvolved);
-				player.createPerk(MutationsLib.DraconicHeartPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicHeartFinalForm)) {
-				player.removePerk(MutationsLib.DraconicHeartFinalForm);
-				player.createPerk(MutationsLib.DraconicHeartEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
-				player.removePerk(MutationsLib.DraconicLungsEvolved);
-				player.createPerk(MutationsLib.DraconicLungsPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) {
-				player.removePerk(MutationsLib.DraconicLungsFinalForm);
-				player.createPerk(MutationsLib.DraconicLungsEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
-				player.removePerk(MutationsLib.DrakeLungsEvolved);
-				player.createPerk(MutationsLib.DrakeLungsPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) {
-				player.removePerk(MutationsLib.DrakeLungsFinalForm);
-				player.createPerk(MutationsLib.DrakeLungsEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)) {
-				player.removePerk(MutationsLib.EasterBunnyEggBagEvolved);
-				player.createPerk(MutationsLib.EasterBunnyEggBagPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.EasterBunnyEggBagFinalForm)) {
-				player.removePerk(MutationsLib.EasterBunnyEggBagFinalForm);
-				player.createPerk(MutationsLib.EasterBunnyEggBagEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) {
-				player.removePerk(MutationsLib.ElvishPeripheralNervSysEvolved);
-				player.createPerk(MutationsLib.ElvishPeripheralNervSysPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) {
-				player.removePerk(MutationsLib.ElvishPeripheralNervSysFinalForm);
-				player.createPerk(MutationsLib.ElvishPeripheralNervSysEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) {
-				player.removePerk(MutationsLib.FeyArcaneBloodstreamEvolved);
-				player.createPerk(MutationsLib.FeyArcaneBloodstreamPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamFinalForm)) {
-				player.removePerk(MutationsLib.FeyArcaneBloodstreamFinalForm);
-				player.createPerk(MutationsLib.FeyArcaneBloodstreamEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.FloralOvariesEvolved)) {
-				player.removePerk(MutationsLib.FloralOvariesEvolved);
-				player.createPerk(MutationsLib.FloralOvariesPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.FloralOvariesFinalForm)) {
-				player.removePerk(MutationsLib.FloralOvariesFinalForm);
-				player.createPerk(MutationsLib.FloralOvariesEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) {
-				player.removePerk(MutationsLib.FrozenHeartEvolved);
-				player.createPerk(MutationsLib.FrozenHeartPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.FrozenHeartFinalForm)) {
-				player.removePerk(MutationsLib.FrozenHeartFinalForm);
-				player.createPerk(MutationsLib.FrozenHeartEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) {
-				player.removePerk(MutationsLib.GazerEyeEvolved);
-				player.createPerk(MutationsLib.GazerEyePrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) {
-				player.removePerk(MutationsLib.GazerEyeFinalForm);
-				player.createPerk(MutationsLib.GazerEyeEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.GorgonsEyesEvolved)) {
-				player.removePerk(MutationsLib.GorgonsEyesEvolved);
-				player.createPerk(MutationsLib.GorgonsEyesPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) {
-				player.removePerk(MutationsLib.HarpyHollowBonesEvolved);
-				player.createPerk(MutationsLib.HarpyHollowBonesPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm)) {
-				player.removePerk(MutationsLib.HarpyHollowBonesFinalForm);
-				player.createPerk(MutationsLib.HarpyHollowBonesEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) {
-				player.removePerk(MutationsLib.HeartOfTheStormEvolved);
-				player.createPerk(MutationsLib.HeartOfTheStormPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) {
-				player.removePerk(MutationsLib.HeartOfTheStormFinalForm);
-				player.createPerk(MutationsLib.HeartOfTheStormEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) {
-				player.removePerk(MutationsLib.HinezumiBurningBloodEvolved);
-				player.createPerk(MutationsLib.HinezumiBurningBloodPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HinezumiBurningBloodFinalForm)) {
-				player.removePerk(MutationsLib.HinezumiBurningBloodFinalForm);
-				player.createPerk(MutationsLib.HinezumiBurningBloodEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
-				player.removePerk(MutationsLib.HollowFangsEvolved);
-				player.createPerk(MutationsLib.HollowFangsPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.HollowFangsFinalForm)) {
-				player.removePerk(MutationsLib.HollowFangsFinalForm);
-				player.createPerk(MutationsLib.HollowFangsEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) {
-				player.removePerk(MutationsLib.KitsuneThyroidGlandEvolved);
-				player.createPerk(MutationsLib.KitsuneThyroidGlandPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) {
-				player.removePerk(MutationsLib.KitsuneThyroidGlandFinalForm);
-				player.createPerk(MutationsLib.KitsuneThyroidGlandEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) {
-				player.removePerk(MutationsLib.LactaBovinaOvariesEvolved);
-				player.createPerk(MutationsLib.LactaBovinaOvariesPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) {
-				player.removePerk(MutationsLib.LactaBovinaOvariesFinalForm);
-				player.createPerk(MutationsLib.LactaBovinaOvariesEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.LizanMarrowEvolved)) {
-				player.removePerk(MutationsLib.LizanMarrowEvolved);
-				player.createPerk(MutationsLib.LizanMarrowPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.LizanMarrowFinalForm)) {
-				player.removePerk(MutationsLib.LizanMarrowFinalForm);
-				player.createPerk(MutationsLib.LizanMarrowEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) {
-				player.removePerk(MutationsLib.ManticoreMetabolismEvolved);
-				player.createPerk(MutationsLib.ManticoreMetabolismPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
-				player.removePerk(MutationsLib.MantislikeAgilityEvolved);
-				player.createPerk(MutationsLib.MantislikeAgilityPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
-				player.removePerk(MutationsLib.MantislikeAgilityFinalForm);
-				player.createPerk(MutationsLib.MantislikeAgilityEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.MelkieLungEvolved)) {
-				player.removePerk(MutationsLib.MelkieLungEvolved);
-				player.createPerk(MutationsLib.MelkieLungPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.MelkieLungFinalForm)) {
-				player.removePerk(MutationsLib.MelkieLungFinalForm);
-				player.createPerk(MutationsLib.MelkieLungEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
-				player.removePerk(MutationsLib.MinotaurTesticlesEvolved);
-				player.createPerk(MutationsLib.MinotaurTesticlesPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) {
-				player.removePerk(MutationsLib.MinotaurTesticlesFinalForm);
-				player.createPerk(MutationsLib.MinotaurTesticlesEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) {
-				player.removePerk(MutationsLib.NaturalPunchingBagEvolved);
-				player.createPerk(MutationsLib.NaturalPunchingBagPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) {
-				player.removePerk(MutationsLib.NaturalPunchingBagFinalForm);
-				player.createPerk(MutationsLib.NaturalPunchingBagEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.NukiNutsEvolved)) {
-				player.removePerk(MutationsLib.NukiNutsEvolved);
-				player.createPerk(MutationsLib.NukiNutsPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.NukiNutsFinalForm)) {
-				player.removePerk(MutationsLib.NukiNutsFinalForm);
-				player.createPerk(MutationsLib.NukiNutsEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) {
-				player.removePerk(MutationsLib.ObsidianHeartEvolved);
-				player.createPerk(MutationsLib.ObsidianHeartPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) {
-				player.removePerk(MutationsLib.ObsidianHeartFinalForm);
-				player.createPerk(MutationsLib.ObsidianHeartEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) {
-				player.removePerk(MutationsLib.OniMusculatureEvolved);
-				player.createPerk(MutationsLib.OniMusculaturePrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.OniMusculatureFinalForm)) {
-				player.removePerk(MutationsLib.OniMusculatureFinalForm);
-				player.createPerk(MutationsLib.OniMusculatureEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) {
-				player.removePerk(MutationsLib.OrcAdrenalGlandsEvolved);
-				player.createPerk(MutationsLib.OrcAdrenalGlandsPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.OrcAdrenalGlandsFinalForm)) {
-				player.removePerk(MutationsLib.OrcAdrenalGlandsFinalForm);
-				player.createPerk(MutationsLib.OrcAdrenalGlandsEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) {
-				player.removePerk(MutationsLib.PigBoarFatEvolved);
-				player.createPerk(MutationsLib.PigBoarFatPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.PigBoarFatFinalForm)) {
-				player.removePerk(MutationsLib.PigBoarFatFinalForm);
-				player.createPerk(MutationsLib.PigBoarFatEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
-				player.removePerk(MutationsLib.SalamanderAdrenalGlandsEvolved);
-				player.createPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
-				player.removePerk(MutationsLib.SalamanderAdrenalGlandsFinalForm);
-				player.createPerk(MutationsLib.SalamanderAdrenalGlandsEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.TwinHeartEvolved)) {
-				player.removePerk(MutationsLib.TwinHeartEvolved);
-				player.createPerk(MutationsLib.TwinHeartPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.TwinHeartFinalForm)) {
-				player.removePerk(MutationsLib.TwinHeartFinalForm);
-				player.createPerk(MutationsLib.TwinHeartEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.VampiricBloodsteamEvolved)) {
-				player.removePerk(MutationsLib.VampiricBloodsteamEvolved);
-				player.createPerk(MutationsLib.VampiricBloodsteamPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.VampiricBloodsteamFinalForm)) {
-				player.removePerk(MutationsLib.VampiricBloodsteamFinalForm);
-				player.createPerk(MutationsLib.VampiricBloodsteamEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) {
-				player.removePerk(MutationsLib.VenomGlandsEvolved);
-				player.createPerk(MutationsLib.VenomGlandsPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.VenomGlandsFinalForm)) {
-				player.removePerk(MutationsLib.VenomGlandsFinalForm);
-				player.createPerk(MutationsLib.VenomGlandsEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.WhaleFatEvolved)) {
-				player.removePerk(MutationsLib.WhaleFatEvolved);
-				player.createPerk(MutationsLib.WhaleFatPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.WhaleFatFinalForm)) {
-				player.removePerk(MutationsLib.WhaleFatFinalForm);
-				player.createPerk(MutationsLib.WhaleFatEvolved,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.YetiFatEvolved)) {
-				player.removePerk(MutationsLib.YetiFatEvolved);
-				player.createPerk(MutationsLib.YetiFatPrimitive,0,0,0,0);
-			}
-			if (player.hasPerk(MutationsLib.YetiFatFinalForm)) {
-				player.removePerk(MutationsLib.YetiFatFinalForm);
-				player.createPerk(MutationsLib.YetiFatEvolved,0,0,0,0);
-			}
+		private function jiangshiBuggedItemsCleanUpCrew0():void {
+			if (player.weapon != WeaponLib.FISTS) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+					player.setWeapon(WeaponLib.FISTS);
+					jiangshiBuggedItemsCleanUpCrew1();
+				}
+				else inventory.takeItem(player.setWeapon(WeaponLib.FISTS), jiangshiBuggedItemsCleanUpCrew1);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew1);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew1():void {
+			if (player.weaponRange != WeaponRangeLib.NOTHING) inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), jiangshiBuggedItemsCleanUpCrew2);
+			else doNext(jiangshiBuggedItemsCleanUpCrew2);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew2():void {
+			if (player.shield != ShieldLib.NOTHING) {
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
+					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+					player.setShield(ShieldLib.NOTHING);
+					jiangshiBuggedItemsCleanUpCrew3();
+				}
+				else inventory.takeItem(player.setShield(ShieldLib.NOTHING), jiangshiBuggedItemsCleanUpCrew3);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew3);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew3():void {
+			if (player.armor != ArmorLib.NOTHING) {
+				if (player.armorName == "goo armor") player.armor.removeText();
+				inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew4);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew4():void {
+			if (player.lowerGarment != UndergarmentLib.NOTHING) {
+				inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), jiangshiBuggedItemsCleanUpCrew5);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew5);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew5():void {
+			if (player.upperGarment != UndergarmentLib.NOTHING) {
+				inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), jiangshiBuggedItemsCleanUpCrew6);
+			}
+			else doNext(jiangshiBuggedItemsCleanUpCrew6);
+		}
+		private function jiangshiBuggedItemsCleanUpCrew6():void {
+			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+			player.setHeadJewelry(headjewelries.JIANGCT);
+			player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			doNext(SoulforceCheats);
+		}
+		public function AddMaxBackpack00():void {
+			outputText("\n\nFix completed");
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant) && !player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) {
+				if (player.hasPerk(PerkLib.GolemArmyLieutenant)) {
+					player.removePerk(PerkLib.GolemArmyLieutenant);
+					player.createPerk(PerkLib.GolemArmyJuniorLieutenant,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyCaptain)) {
+					player.removePerk(PerkLib.GolemArmyCaptain);
+					player.createPerk(PerkLib.GolemArmyLieutenant,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyMajor)) {
+					player.removePerk(PerkLib.GolemArmyMajor);
+					player.createPerk(PerkLib.GolemArmyCaptain,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyColonel)) {
+					player.removePerk(PerkLib.GolemArmyColonel);
+					player.createPerk(PerkLib.GolemArmyMajor,0,0,0,0);
+				}
+				if (player.hasPerk(PerkLib.GolemArmyGeneral)) {
+					player.removePerk(PerkLib.GolemArmyGeneral);
+					player.createPerk(PerkLib.GolemArmyLieutenantColonel,0,0,0,0);
+				}
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01)) {
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,1);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX, 1, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation01);
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02)) {
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,2);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,2,0,0,1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation02);
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03)){
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,3);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,3,0,0,1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation03);
+			}
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04)){
+				if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX, 1,4);
+				else player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,4,0,0,1);
+				player.removePerk(PerkLib.AscensionAdditionalOrganMutation04);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige01)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,1);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 1, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige01);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige02)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,2);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,2,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige02);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige03)){
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,3);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,3,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige03);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige04)){
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,4);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,4,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige04);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige05)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,5);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX, 5, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige05);
+			}
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestige06)) {
+				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,6);
+				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,6,0,0,1);
+				player.removePerk(PerkLib.AscensionBuildingPrestige06);
+			}
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
+			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack033():void {
 			outputText("\n\nFix completed");
@@ -543,7 +407,6 @@ use namespace CoC;
 			if (!player.hasPerk(PerkLib.PrestigeJobArchpriest)) player.createPerk(PerkLib.PrestigeJobArchpriest, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
-			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobNecromancer)) player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSentinel)) player.createPerk(PerkLib.PrestigeJobSentinel, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) player.createPerk(PerkLib.PrestigeJobSoulArtMaster, 0, 0, 0, 0);
@@ -567,22 +430,22 @@ use namespace CoC;
 			player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
 			doNext(submenucuzwhynot);
 		}
-		public function AddMaxBackpack00():void {
-			player.createStatusEffect(StatusEffects.ZenjiModificationsList,0,0,15,7);
-			player.createStatusEffect(StatusEffects.ZenjiPreparationsList,0,0,0,0);
-			player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
-			flags[kFLAGS.ZENJI_PROGRESS] = 11;
-			flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 0;
-			doNext(submenucuzwhynot);
-		}
 		public function AddMaxBackpack01():void {
 			flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			if (player.hasKeyItem("Fenrir Collar") >= 0) player.removeKeyItem("Fenrir Collar");
-			player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 10) {
+				AdventurerGuild.Slot01Cap = 10;
+				AdventurerGuild.Slot02Cap = 10;
+			}
+			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.Slot03Cap < 10) {
+				AdventurerGuild.Slot01Cap = 10;
+				AdventurerGuild.Slot02Cap = 10;
+				AdventurerGuild.Slot03Cap = 10;
+				AdventurerGuild.Slot04Cap = 10;
+			}
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
@@ -1775,7 +1638,7 @@ use namespace CoC;
 				addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 				addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 				//addButton(5, "", ).hint("Test fight with .");
-				//addButton(6, "", ).hint("Test fight with .");
+				addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
 				addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 				addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 				addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
@@ -2797,6 +2660,11 @@ use namespace CoC;
 			}
 			player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
 			doNext(SoulforceCheats);
+		}
+		public function FightTyrantia():void {
+			clearOutput();
+			outputText("Entering battle with Drider Giantess! Enjoy ^^");
+			startCombat(new Tyrantia());
 		}
 		public function FightZenji():void {
 			clearOutput();
@@ -4356,9 +4224,9 @@ use namespace CoC;
 			}
 		}
 		private function canfaceTribulation():Boolean {
-			if ((player.level >= 24 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
-				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
-				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
+			if ((player.level >= 27 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
+				(player.level >= 54 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
+				(player.level >= 78 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
 			else return false;
 		}
 		public function tribulationsPrompt():void {
@@ -4386,4 +4254,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}

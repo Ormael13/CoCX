@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons
 {
 import classes.EventParser;
 import classes.Scenes.Areas.GlacialRift.Yeti;
+import classes.Scenes.Dungeons.RiverDungeon.Vegot;
 import classes.display.SpriteDb;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Shield;
@@ -24,6 +25,7 @@ import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Dungeons.RiverDungeon.WaterElemental;
 import classes.Scenes.Monsters.FeralImps;
 import classes.Scenes.NPCs.Electra;
+import classes.Scenes.SceneLib;
 import classes.CoC;
 import classes.PerkLib;
 import classes.Scenes.Monsters.GolemDummyImproved;
@@ -232,7 +234,7 @@ import classes.StatusEffects;
 			weapons.AETHERD.useText();
 			player.weapon.removeText();
 			cleanupAfterCombat();
-			outputText("You tell the voice to come. With a giggle the gasunlet that was covering golem arm start to literaly flow form it to the floor then over it till it reaches you and climbing over your body reforms into gaunelt on your right arm and half of the forearm. \"<i>That will a blast!");
+			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow from it to the floor then over it till it reaches you and climbing over your body reforms into gauntlet on your right arm and half of the forearm. \"<i>That will a blast!");
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
 			var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
@@ -260,7 +262,7 @@ import classes.StatusEffects;
 			shields.AETHERS.useText();
 			player.shield.removeText();
 			cleanupAfterCombat();
-			outputText("You tell the voice to come. With a giggle the gasunlet that was covering golem arm start to literaly flow form it to the floor then over it till it reaches you and climbing over your body reforms into gaunelt on your right arm and half of the forearm. \"<i>That will a blast!");
+			outputText("You tell the voice to come. With a giggle the gauntlet that was covering golem arm start to literaly flow from it to the floor then over it till it reaches you and climbing over your body reforms into gauntlet on your right arm and half of the forearm. \"<i>That will a blast!");
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
 			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
@@ -461,7 +463,7 @@ import classes.StatusEffects;
 		public function defeatFireElementalSubBoss():void {
 			clearOutput();
 			outputText("The Ifrit gives you a blank stare, as if deciding her next action. As she stands silently, the flames around her body cackle with embers as her entire form begins shining brightly like a dying star. You're forced to avert your eyes from the painful illumination.\n\n");
-			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n");
+			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n<b>You have gained Key Item: Fire Ifrit Core</b>\n\n");
 			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -471,7 +473,7 @@ import classes.StatusEffects;
 		public function defeatWaterElementalSubBoss():void {
 			clearOutput();
 			outputText("The Undine stops moving, holding its place like a body of undisturbed water. Suddenly, without any signs it the body loses shape, the fluid spills onto the ground in a small puddle.\n\n");
-			outputText("You notice something lying dormantly within the small pool of water. You cautiously approach to retrieve the blue sphere.\n\n");
+			outputText("You notice something lying dormantly within the small pool of water. You cautiously approach to retrieve the blue sphere.\n\n<b>You have gained Key Item: Water Undine Core</b>\n\n");
 			player.createKeyItem("Water Undine Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -481,7 +483,7 @@ import classes.StatusEffects;
 		public function defeatAirElementalSubBoss():void {
 			clearOutput();
 			outputText("The Sylph pauses in its tracks. Without warning, it suddenly shoots a strong gust of wind toward you. You reflexively brace yourself for the attack but the wind dissipates before reaching you.\n\n");
-			outputText("You look toward where the air elemental used to be, now nothing but a small, dormant sphere suspended in the air. It slowly descends to the ground as a feather would before you decide to inspect it.\n\n");
+			outputText("You look toward where the air elemental used to be, now nothing but a small, dormant sphere suspended in the air. It slowly descends to the ground as a feather would before you decide to inspect it.\n\n<b>You have gained Key Item: Air Sylph Core</b>\n\n");
 			player.createKeyItem("Air Sylph Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -491,7 +493,7 @@ import classes.StatusEffects;
 		public function defeatEarthElementalSubBoss():void {
 			clearOutput();
 			outputText("The Golem stands for a moment as a low rumbling sound enemates from it. Quickly, stones begin sloughing off its body, one by one. As quickly as it started, the humanoid form is lost to a small mound of rubble.\n\n");
-			outputText("A single sphere sticks out from the top of the pile of rocks. It lies dormantly before you before you as you inspect it.\n\n");
+			outputText("A single sphere sticks out from the top of the pile of rocks. It lies dormantly before you before you as you inspect it.\n\n<b>You have gained Key Item: Earth Golem Core</b>\n\n");
 			player.createKeyItem("Earth Golem Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -502,7 +504,7 @@ import classes.StatusEffects;
 			clearOutput();
 			outputText("The revenant collapses as all the elements it's gained die out. The rubble lies dormantly before you before slowly sinking into the ground. The voices ring as sparks of multicolored embers, each resembling one of the four elements it aligned with fly out, <i>“The elements will rise again.”</i>\n\n");
 			outputText("As the sparks fade, all that remains is an empty shell, cold and lifeless. You inspect the elemental carefully, but somehow you know nothing will come from it this time. It's apparently bare now. Though, you can't say for sure if you won't be meeting something like it again later.\n\n");
-			outputText("As you begin to take your leave, a sudden glow illuminates within the rubble, pulsating gently. Carefully, you draw closer, moving aside the debris to reveal a small, glowing heart. It pulses gently within your grasp, warm, almost alive.\n\n");
+			outputText("As you begin to take your leave, a sudden glow illuminates within the rubble, pulsating gently. Carefully, you draw closer, moving aside the debris to reveal a small, glowing heart. It pulses gently within your grasp, warm, almost alive.\n\n<b>You have gained Key Item: Flame Heart</b>\n\n");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			player.createKeyItem("Flame Heart", 0, 0, 0, 0);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
@@ -578,8 +580,8 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				//spriteSelect(25);
-				/*if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) */flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-				//else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
+				if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
+				else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
 				if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a large mass of darkness rushing towards you!  When it it almost next to you it starts to morph into nearly ideal nine feet tall copy of you just made up from darkness.  ");
 					outputText("After finishing assuming it new form it attacks!");
@@ -595,23 +597,37 @@ import classes.StatusEffects;
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		
+		public function defeatVegot():void {
+			clearOutput();
+			outputText("The shield of arrogance he's barricaded himself with crumbles before you as the so-called 'king' falls to his knees. Even while groveling, he refuses to back down.\n\n");
+			outputText("\"<i>This proves <b>NOTHING!</b> I... am still the kin-</i>\" His tirade is cut short as a sharp ethereal spike pierces his torso from behind. Bits of metal drop to the floor as the spike slices through the chain holding his amulet tightly to his neck.\n\n");
+			outputText("\"<i>You aren't even a prince, never mind a king. Everything you have is by an extension of what I've given to you.</i>\" A warped voice resonates from a portal that parts, still shimmering behind him. Several more spikes lash out, impaling the Raiju until he's skewered into the ground.\n\n");
+			outputText("Vegot coughs, sputtering between his words, \"<i>No... my... my...</i>\" He reaches his hand toward his amulet but is unable to move with the spikes pinning his limbs down. As the spikes rise from his body, he is dragged with them before slowly sliding off, collapsing to the ground, and rolling toward you.\n\n");
+			outputText("\"<i>Now, be an obedient puppet. You're coming with me.</i>\" The voice quickly grows impatient as the spikes morph into chains, tying around his body before dragging him into the ominous portal.\n\n");
+			outputText("The portal begins to seal, not without a final word, \"<i>We will meet again, stranger...</i>\"\n\n");
+			outputText("Now alone, you notice the amulet he wore is sitting on the ground. It pulsates with a gentle hum of electricity, almost mocking the drum of a heartbeat.\n\n<b>You have gained Key Item: Frost Heart</b>\n\n");
+			player.createKeyItem("Frost Heart", 0, 0, 0, 0);
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
+			doNext(playerMenu);
+		}
 		public function defeatedByIceElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
 		}
 		public function defeatedByLightningElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
 		}
 		public function defeatedByDarknessElemental():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Your opponent punch you few more times and then carries all the way back to this floor entrance from upper floor and drop you there. Guess it's back to square one on this floor.\n\n");
 			inDungeon = true;
 			dungeonLoc = 135;
 			playerMenu();
@@ -632,28 +648,46 @@ import classes.StatusEffects;
 		}
 		public function defeatedByDarknessElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Placeholder Bad End.\n\n");//embrace the darkness(silly - dorkness) > boss invade all pc orfices and then rips apart from inside out or just devour from inside
 			//[GAME OVER]
 			EventParser.gameOver();
-		}/*
-		public function defeated<Boss enemy>():void {
+		}
+		public function defeatedByVegot():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("You collapse, your wounds burdening your body as your will to fight falters. Knowing his victory, Vegot slowly strides toward you, \"<i>I made a promise, one that I intend to keep... Now, it's time to uphold that.</i>\" After he speaks, he bends down, touching your forehead.\n\n");
+			outputText("You shout in pain as a cold current of electricity invades your body as it circulates through you. A trio of icy horns marks along your forehead.\n\n");
+			outputText("\"<i>And now you're mine.</i>\"\n\n");
+			outputText("As if on queue, a portal opens behind him. Vegot reflexively knees, facing the opening before speaking respectfully, \"<i>My liege, you're here. What are your orders?</i>\"\n\n");
+			outputText("A warped voice resonates out of the shimmering barrier, \"<i>It seems you've obtained a new puppet. Bring it to me.</i>\"\n\n");
+			outputText("The portal expands slowly as Vegot hoists you in his arms effortlessly. You watch, unable to move as the portal expands large enough for you to pass with you in your new master's arms.\n\n");
+			outputText("On the other side is a throne room, albeit with significantly more grandeur than the one Vegot had in his icy palace. At the center, many skeletons, bloodsuckers and spectral beings guard it. A tall skeleton adorned in long, extravagant robes stares into you, his empty eye sockets glow with a purple hue.\n\n");
+			outputText("The skeleton speaks with a warped voice, \"<i>An interesting find, this one may prove useful. I shall compensate you later.</i>\"\n\n");
+			outputText("Vegot kneels, lying you on the ground.\n\n");
+			outputText("\"<i>You may return to your domain, notify me at once the moment you find another specimen for me.</i>\"\n\n");
+			outputText("\"<i>As you command, my Liege,</i>\" Vegot responds yieldingly. He stands up, returning through the portal you entered.\n\n");
+			outputText("The skeleton shifts its attention toward you again, \"<i>Oh, you're still conscious? Sentience intact? Hmmm, no, no, no. That won't do. That won't do at all.</i>\"\n\n");
+			outputText("Everything goes black, like a candle snuffed out from an overpowering blizzard.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}*/
+		}
 		public function defeatDarknessElementalSubBoss():void {
 			clearOutput();
-			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n");
+			outputText("Beaten unique darkness elemental starting to slowly disperse. The only thing that remains is a piece of black object, lying on the ground.\n\n");
 			if (player.hasKeyItem("Key Of Darkness (2/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (2/3)");
 				player.createKeyItem("Key Of Darkness", 0, 0, 0, 0);
+				outputText("Once again kneeling you takes out incomplete key, whcih as you expected merge with the piece laying on the gorun. Now it looks like proper key mad of black material.\n\n<b>You have gained Key Item: Key Of Darkness</b>");
 			}
 			else if (player.hasKeyItem("Key Of Darkness (1/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (1/3)");
 				player.createKeyItem("Key Of Darkness (2/3)", 0, 0, 0, 0);
+				outputText("After you kneel to pick it up it flash with balck light and vanish. And you see something else in the pocket feel a bit heavier.\n\n<b>You have gained Key Item: Key Of Darkness (2/3)</b>");
 			}
-			else player.createKeyItem("Key Of Darkness (1/3)", 0, 0, 0, 0);
+			else {
+				player.createKeyItem("Key Of Darkness (1/3)", 0, 0, 0, 0);
+				outputText("<b>You have gained Key Item: Key Of Darkness (1/3)</b>");
+			}
+			outputText("\n\n");
 			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
@@ -679,18 +713,17 @@ import classes.StatusEffects;
 			EventParser.gameOver();
 		}
 		
-		public function defeated():void {
+		public function defeat():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
-			dungeonLoc = ;
-			playerMenu();
+			outputText("Placeholder Good End.\n\n");
+			cleanupAfterCombat();
+			doNext(playerMenu);
 		}
-		public function defeated<Boss enemy>():void {
+		public function defeat<Boss enemy>():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			outputText("Placeholder Good End.\n\n");
+			cleanupAfterCombat();
+			doNext(playerMenu);
 		}*/
 		
 		//Rooms
@@ -1058,9 +1091,8 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Your vision is obscured by thick fog. You instinctively tense as the echoes of footsteps bounce off the walls. Enemies could be right next to you, and you wouldn't know unless you bump into one. You break into a light sweat, or is that the moisture condescending onto your [skin]?");
 			dungeons.setDungeonButtonsRD(null, roomB14, null, null);
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(6, "Down", roomC01);
-			else addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");*/
-			addButtonDisabled(6, "Down", "The passage is blocked by cave in with traces of lighting discharges and frost at the edges. Symbols left on the rocks forms words 'you shall not pass'.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(6, "Down", roomC01);
+			else addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomB16():void {
 			dungeonLoc = 119;
@@ -1268,8 +1300,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(null, roomC11, roomC08, roomC06);
 		}
 		public function roomC08():void {
@@ -1277,8 +1309,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC03, roomC12, null, roomC07);
 		}
 		public function roomC09():void {
@@ -1304,8 +1336,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC07, roomC17, null, null);
 		}
 		public function roomC12():void {
@@ -1313,8 +1345,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC08, null, roomC13, null);
 		}
 		public function roomC13():void {
@@ -1322,8 +1354,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(null, roomC19, roomC14, roomC12);
 		}
 		public function roomC14():void {
@@ -1358,8 +1390,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC11, null, roomC18, roomC16);
 		}
 		public function roomC18():void {
@@ -1367,8 +1399,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(null, null, roomC19, roomC17);
 		}
 		public function roomC19():void {
@@ -1376,8 +1408,8 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteCDarkness();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Gloomy Underground Passage</b>\n");
+			outputText("An aura of doom and gloom coats the tunnel you're in with a dark atmosphere. The shadows wick about in your peripherals as if they were living creatures encroaching just outside your field of view.");
 			dungeons.setDungeonButtonsRD(roomC13, null, null, roomC18);
 		}
 		public function roomC20():void {
@@ -1388,16 +1420,18 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
 			dungeons.setDungeonButtonsRD(roomC15, null, null, null);
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(11, "Down", roomD01);
-			else */addButtonDisabled(11, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(11, "Down", roomD01);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButtonDisabled(11, "Down", "Due to the interference of unknown power/being there is erected magic barrier that blocks any attempts to travel toward 4th floor.");
+			else addButtonDisabled(11, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomC21():void {
 			dungeonLoc = 155;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC22, roomC04, null, null);
 		}
 		public function roomC22():void {
@@ -1405,8 +1439,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC23, roomC21, roomC25, null);
 		}
 		public function roomC23():void {
@@ -1414,8 +1449,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC24, roomC22, roomC26, null);
 		}
 		public function roomC24():void {
@@ -1423,8 +1459,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC23, roomC27, null);
 		}
 		public function roomC25():void {
@@ -1432,8 +1469,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC26, null, roomC28, roomC22);
 		}
 		public function roomC26():void {
@@ -1441,8 +1479,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC27, roomC25, roomC29, roomC23);
 		}
 		public function roomC27():void {
@@ -1450,8 +1489,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC26, roomC30, roomC24);
 		}
 		public function roomC28():void {
@@ -1459,8 +1499,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC29, null, roomC32, roomC25);
 		}
 		public function roomC29():void {
@@ -1468,8 +1509,9 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC30, roomC28, roomC33, roomC26);
 		}
 		public function roomC30():void {
@@ -1477,20 +1519,29 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC29, roomC34, roomC27);
 		}
 		public function roomC31():void {
-			dungeonLoc = 165;
+			dungeonLoc = 165;//boss room
 			clearOutput();
-			/*if () {
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] == 8) {
+				outputText("Cautiously, you enter the room only to notice several rows of ice pillars lining at the sides of a throne. As you focus your eyes, you realize that on the throne lies a... Raiju?\n\n");
+				outputText("Icy blue eyes glower toward you, his penetrative gaze feeds off nothing but scorn. A charcoal-like crown rests at the top of his head, accompanying his chiseled jawline. His toned frame is coated with an ornate cape and glittering spaulders linked together by a chain.\n\n");
+				outputText("His voice booms, \"<i>A new subject? You look... inept.</i>\" He slowly rises from his throne, grabbing a longsword resting at his side as he takes a few long strides toward you. \"<i>Still... Your soul remains clean from my touch. How about I leave a mark on your essence that you'll never forget? Then hopefully you'll remember me, the one King Vegot.</i>\"\n\n");
+				outputText("He drags the tip of the blade along the ground with each step. You notice an amulet wrapped around his neck. It glimmers with a frosted crust, pulsating with faint hums of electricity within.\n\n");
+				outputText("\"<i>You're in my domain, now.</i>\" With only a single utterance from his voice, the entire room begins to freeze. A harsh wind picks up as snow flies around the room. You brace yourself against the blizzard; <b>the fight is on!</b>\n\n");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				SceneLib.glacialRift.GlacialRiftConditions();
+				startCombat(new Vegot(), true);
 			}
-			else */encountersRuletteC();//boss room
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Frostlight Hall</b>\n");
+			outputText("You stand in the large hall gaving upon several rows of ice pillars that line at each side of a throne.\n\n");
+			outputText("The throne of ice is empty as the previous owner has been taken away violently.");
 			dungeons.setDungeonButtonsRD(roomC32, null, null, null);
 		}
 		public function roomC32():void {
@@ -1498,13 +1549,14 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) dungeons.setDungeonButtonsRD(roomC33, roomC31, null, roomC28);
 			else {
 				dungeons.setDungeonButtonsRD(roomC33, null, null, roomC28);
 				addButtonDisabled(11, "South", "There are massive doors with a simple keyhole in middle of it. Maybe you should look for a key? It should be still somehwere on this floor, right?");
-				if (player.hasKeyItem("Key Of Darkness") >= 0) addButtonDisabled(0, "Insert Key", "??? is not yet ready to see you. You have to wait a bit more.");
+				if (player.hasKeyItem("Key Of Darkness") >= 0) addButton(0, "Insert Key", insertTheKey).hint("Now you got the key. Would you open the doors?");
 				else addButtonDisabled(0, "Insert Key", "Would you kindly find the key first?");
 			}
 		}
@@ -1513,17 +1565,19 @@ import classes.StatusEffects;
 			clearOutput();
 			encountersRuletteC();
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(roomC34, roomC32, null, roomC29);
 		}
 		public function roomC34():void {
 			dungeonLoc = 168;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteC();//some unknown for now trigger locations
 			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			outputText("<b><u></u>Underground Hall</b>\n");
+			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
+			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC33, null, roomC30);
 		}
 		/*
@@ -1564,14 +1618,24 @@ import classes.StatusEffects;
 		}
 		private function insertTheKey():void {
 			clearOutput();
-			outputText("<i>This is my kingdom</i>\n\n");
-			outputText("<i>This is my domain</i>\n\n");
-			outputText("<i>You cant take it from me the greatest you've ever seen</i>\n\n");
-			outputText("<i>You'll remember my name</i>\n\n");
-			outputText("<i>Call me a god, call me a king</i>\n\n");
+			var compcou:Number = 0;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") compcou += 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] != "") compcou += 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] != "") compcou += 1;
+			var compname:String = "";
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_1]+"";
+			else if (flags[kFLAGS.PLAYER_COMPANION_2] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_2]+"";
+			else if (flags[kFLAGS.PLAYER_COMPANION_3] != "") compname = ""+flags[kFLAGS.PLAYER_COMPANION_3]+"";
+			outputText("You insert the key, only for it to immediately begin fusing with the doors. You step back as symbols start to emerge with a faint glow, aligning into text:\n\n");
+			outputText("<i>This is my kingdom</i>\n");
+			outputText("<i>This is my domain</i>\n");
+			outputText("<i>You cant take it from me the greatest you've ever seen</i>\n");
+			outputText("<i>You'll remember my name</i>\n");
+			outputText("<i>Call me a god, call me a king</i>\n");
 			outputText("<i>You're outa my realm so bend the knee</i>\n\n");
-			//outputText("The two of you proceed to carefully extract the precious gemstones from the wall as Nessa pockets her payment.\n\n");
+			outputText("Whoever this is, they seem to be rather conceited. You glance over to your companion"+(compcou > 1 ? "s":"")+", making sure "+(compcou > 1 ? "they are":""+compname+" is")+" ready to continue. With a nod, the two of you push open the door as a wave of cold air hits your face. You feel a faint hum of electricity emanating from inside as the door opens fully.\n\n");
 			if (player.hasKeyItem("Key Of Darkness") >= 0) player.removeKeyItem("Key Of Darkness");
+			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomC32);
 		}
@@ -1580,9 +1644,9 @@ import classes.StatusEffects;
 			addButtonDisabled(0, "Floor 1", "You're currently at Floor 1.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(1, "Floor 2", teleportToFloor2);
 			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
-			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(4, "Floor 4", teleportToFloor4);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
+			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(4, "Floor 4", teleportToFloor4);
 			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");*/
 			addButton(14, "Back", roomA01);
 		}
@@ -1590,8 +1654,8 @@ import classes.StatusEffects;
 			menu();
 			addButton(0, "Floor 1", teleportToFloor1);
 			addButtonDisabled(1, "Floor 2", "You're currently at Floor 2.");
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
-			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");*/
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
 			//floor 4
 			addButton(14, "Back", roomB01);
 		}

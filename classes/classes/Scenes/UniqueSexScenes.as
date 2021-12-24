@@ -8,12 +8,14 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
-	import classes.Scenes.Areas.Mountain.HellHound;
+import classes.Perks.MindBreakerBrain;
+import classes.Scenes.Areas.Mountain.HellHound;
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
 	import classes.Scenes.NPCs.Anemone;
-	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
 	public class UniqueSexScenes extends BaseContent
 	{
@@ -126,7 +128,7 @@ package classes.Scenes
 
 		public function Convert():void {
 			clearOutput();
-			outputText("You watch delighted as " + monster.a + monster.short + " drops to the ground in defeat. You could have used her as a seedbed, " +
+			outputText("You watch delighted as [themonster] drops to the ground in defeat. You could have used her as a seedbed, " +
 					"but this time around you have other ideas as you raise your stamen mounted vine. ");
 			if(player.isLiliraune())
 			{
@@ -225,6 +227,8 @@ package classes.Scenes
 				else addButton(7, "Fill the reservoir", gobomechFillTheReservoir);
 			}
 			else addButtonDisabled(7, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
+			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", brainMelt);
+			else addButtonDisabled(8, "Brain Melt", "Req. to be a mindbreaker.");
 			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd).hint("2nd page of options.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
@@ -265,18 +269,18 @@ package classes.Scenes
 				if (monster is Minotaur || monster is MinotaurLord) addButton(8, "Drain him", jiangshiDrainHimMinotaurs);
 				else addButtonDisabled(8, "Drain him", "Only minotaur enemies.");
 			}
-			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu2nd).hint("1st page of options.");
+			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu).hint("1st page of options.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		public function manticoreTailRapeScene():void {
 			clearOutput();
 			outputText("While your defeated foe is laying on the ground, you make a sadistic grin as you contemplate the situation. This came just as you got hungry or rather, just as your tail did.\n\n");
-			outputText("Kicking " + monster.pronoun2 + " on " + monster.pronoun3 + " back you proceed to sit on " + monster.pronoun3 + " legs to prevent " + monster.pronoun2 + " from moving. You push everything out of the way as your eyes zero in on the target, his " + monster.cockDescriptShort(0) + ". You sting " + monster.a + monster.short + " a few times, injecting " + monster.pronoun2 + " with a pint worth of aphrodisiac. For several seconds, your toy tries to get you off of " + monster.pronoun2 + " but your poison eventually kicks in and " + monster.pronoun1 + " falls limp on the ground at your it’s " + monster.cockDescriptShort(0) + " is standing throbbing and erect. Licking your lips, you take it upon yourself to relieve your victim of its pent-up lust, opening your tail and swallowing its entire length inside.\n\n");
+			outputText("Kicking [monster him] on [monster his] back you proceed to sit on [monster his] legs to prevent [monster him] from moving. You push everything out of the way as your eyes zero in on the target, his " + monster.cockDescriptShort(0) + ". You sting [themonster] a few times, injecting [monster him] with a pint worth of aphrodisiac. For several seconds, your toy tries to get you off of [monster him] but your poison eventually kicks in and [monster he] falls limp on the ground at your it’s " + monster.cockDescriptShort(0) + " is standing throbbing and erect. Licking your lips, you take it upon yourself to relieve your victim of its pent-up lust, opening your tail and swallowing its entire length inside.\n\n");
 			outputText("Smirking with malicious cruelty, you whisper softly in your terrified victim’s ear.\n\n\"<i>Does me eating you whole make it feel like you're dying? Don't worry, I will make you die over and over again until you're dry as an empty husk! From this moment you are my toy, slut!</i>\"\n\n");
-			outputText("Soon, your cumpump’s face turns to a tormented expression as your tail forcefully milks him of all his cum, regularly injecting more aphrodisiac to make him orgasm and leak constantly like a hose. Almost ironically, and against " + monster.pronoun2 + " better judgment the stimulation of your vaginal walls causes " + monster.pronoun3 + " body to buck up and down in your tail, only making him cum more. On your end, you taste every drop of cum he deposits inside just like you would with your mouth. It is a delicious taste, way different from what cum would have tasted had you been human. However you have another body part that you would like to satisfy and you move your hips to the " + monster.a + monster.short + " face, shoving your drooling [pussy] in your victim’s face.\n\n");
-			outputText("\"<i>Lick me clean you worm! Don’t you see how wet I am?!</i>\"\n\nBoth too terrified and supremely horny to refuse your command, your defeated foe begins to use its tongue to give your sensitive pussy a proper licking. Delighted by the sensations from both of your pussies, you feel like singing your pleasure and to your surprise a series of moans that sound like a song come out from your mouth as you ride orgasm after orgasm, splattering " + monster.pronoun3 + " crotch and face with your girl juice.\n\n");
-			outputText("Only once " + monster.pronoun3 + " " + monster.ballsDescriptLight() + " have shrunk to the point they look like a pair of raisins do you let go of what's left of " + monster.pronoun2 + ".\n\nYou lick your lips feeling like you just had a five course meal fit for a queen as you leave the body of your passed out opponent on the ground at the mercy of other potential sexual predators.");
+			outputText("Soon, your cumpump’s face turns to a tormented expression as your tail forcefully milks him of all his cum, regularly injecting more aphrodisiac to make him orgasm and leak constantly like a hose. Almost ironically, and against [monster him] better judgment the stimulation of your vaginal walls causes [monster his] body to buck up and down in your tail, only making him cum more. On your end, you taste every drop of cum he deposits inside just like you would with your mouth. It is a delicious taste, way different from what cum would have tasted had you been human. However you have another body part that you would like to satisfy and you move your hips to the [themonster] face, shoving your drooling [pussy] in your victim’s face.\n\n");
+			outputText("\"<i>Lick me clean you worm! Don’t you see how wet I am?!</i>\"\n\nBoth too terrified and supremely horny to refuse your command, your defeated foe begins to use its tongue to give your sensitive pussy a proper licking. Delighted by the sensations from both of your pussies, you feel like singing your pleasure and to your surprise a series of moans that sound like a song come out from your mouth as you ride orgasm after orgasm, splattering [monster his] crotch and face with your girl juice.\n\n");
+			outputText("Only once [monster his] " + monster.ballsDescriptLight() + " have shrunk to the point they look like a pair of raisins do you let go of what's left of [monster him].\n\nYou lick your lips feeling like you just had a five course meal fit for a queen as you leave the body of your passed out opponent on the ground at the mercy of other potential sexual predators.");
 			player.sexReward("cum");
 			statScreenRefresh();
 			cleanupAfterCombat();
@@ -285,17 +289,17 @@ package classes.Scenes
 		public function hinezumiTailpegScene():void {
 			clearOutput();
 			outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
-			outputText("You walk over " + monster.a + monster.short + " and wrap your tail around " + monster.pronoun3 + " neck tightening until " + monster.pronoun1 + " gasps for air and threateningly adding your next sentence.\n\n");
+			outputText("You walk over [themonster] and wrap your tail around [monster his] neck tightening until [monster he] gasps for air and threateningly adding your next sentence.\n\n");
 			outputText("\"<i>You lost and I won. Normally I would leave you alone and go about my business but know what? I don’t feel like it! You see that thing wrapped around your neck? That's my tail and I have an excellent idea of where I'll stick it in. If you try anything out of line I’m going to have you enjoy a real literal anal burn. Keep in mind that my flames only burns when I want or if I’m extra pissed, better not make either happen.</i>\"\n\n");
-			outputText("Most creatures on Mareth cares little for being raped, but pain and suffering is a whole different concept. At first " + monster.a + monster.short + " tenses up in shock then stops struggling not to further incur your wrath. In response to " + monster.pronoun3 + " you sarcastically taunt " + monster.pronoun2 + ".\n\n");
+			outputText("Most creatures on Mareth cares little for being raped, but pain and suffering is a whole different concept. At first [themonster] tenses up in shock then stops struggling not to further incur your wrath. In response to [monster his] you sarcastically taunt [monster him].\n\n");
 			outputText("\"<i>That's a good buttslut right there. Now let's have a look at the material I will be having my fun with.</i>\"\n\n");
-			outputText("You force " + monster.a + monster.short + " on " + monster.pronoun3 + " belly as you sit on " + monster.pronoun3 + " back releasing " + monster.pronoun3 + " neck from your tail noose and aiming your now still burning whip-like appendage for a new destination. Your ride shakes a little and you decide to properly tell it to stay still by wiping your tail across " + monster.pronoun3 + " ass cheeks. " + monster.capitalA + monster.short + " screams in pain as your tail leaves a pair of red marks across " + monster.pronoun3 + " flesh then finally gets the point.\n\n");
-			outputText("Once you're well aligned your tail darts in and forces its way through " + monster.a + monster.short + " welcoming ass hole. You gasp as inch after inch of your tail fills your partner all the way up the bowels. You could even see the bumps of your tail in " + monster.pronoun3 + " stomach if you wanted to. Now well inside you begin to work that hole, stretching it on your passage. While you rape that anus with your tail your hands aren’t left idle and you use them to fiercely masturbate, well intent on covering the back of your unwilling partner with your own personal markings. You feel " + monster.a + monster.short + " moan, " + monster.pronoun3 + " anal ring tightening around your tail, ");
+			outputText("You force [themonster] on [monster his] belly as you sit on [monster his] back releasing [monster his] neck from your tail noose and aiming your now still burning whip-like appendage for a new destination. Your ride shakes a little and you decide to properly tell it to stay still by wiping your tail across [monster his] ass cheeks. [Themonster] screams in pain as your tail leaves a pair of red marks across [monster his] flesh then finally gets the point.\n\n");
+			outputText("Once you're well aligned your tail darts in and forces its way through [themonster] welcoming ass hole. You gasp as inch after inch of your tail fills your partner all the way up the bowels. You could even see the bumps of your tail in [monster his] stomach if you wanted to. Now well inside you begin to work that hole, stretching it on your passage. While you rape that anus with your tail your hands aren’t left idle and you use them to fiercely masturbate, well intent on covering the back of your unwilling partner with your own personal markings. You feel [themonster] moan, [monster his] anal ring tightening around your tail, ");
 			outputText("as you keep sliding in and out faster and faster with your own impending orgasm. The dam finally breaks as your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.gender == 3) outputText(" and ");
 			if (player.hasVagina()) outputText("[pussy]");
-			outputText(" make a fine mess on " + monster.a + monster.short + "'s back. You pull your tail out of " + monster.pronoun3 + " abused hole utterly satisfied before wiping " + monster.pronoun3 + " ass once or twice as a parting gift, making " + monster.pronoun2 + " double in pain. Gosh, it feels so good to put those freaks in their place.\n\n");
+			outputText(" make a fine mess on [themonster]'s back. You pull your tail out of [monster his] abused hole utterly satisfied before wiping [monster his] ass once or twice as a parting gift, making [monster him] double in pain. Gosh, it feels so good to put those freaks in their place.\n\n");
 			outputText("You head back to camp both morally and physically satisfied of your deeds.\n\n");
 			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
@@ -304,14 +308,14 @@ package classes.Scenes
 
 		public function strangleAndRapeScene():void {
 			clearOutput();
-			outputText("As you wonder what to do, you suddenly catch sight of " + monster.a + monster.short + " attempting to flee. You swiftly wrap your tail around " + monster.pronoun2 + " neck like a noose and forcefully pull " + monster.pronoun2 + " back to you.\n\n");
-			outputText("You ask where does " + monster.pronoun1 + " think  " + monster.pronoun1 + "'s going, as you still have to claim your prize.\n\n");
-			outputText("You can see some fear blossom in " + monster.pronoun3 + " eyes as you begin to choke " + monster.pronoun2 + " until " + monster.pronoun1 + " begins gasping pitifully for air, and then you have an idea. You forcefully shove " + monster.a + monster.short + " on " + monster.pronoun3 + " back and expose your ");
+			outputText("As you wonder what to do, you suddenly catch sight of [themonster] attempting to flee. You swiftly wrap your tail around [monster him] neck like a noose and forcefully pull [monster him] back to you.\n\n");
+			outputText("You ask where does [monster he] think  [monster he]'s going, as you still have to claim your prize.\n\n");
+			outputText("You can see some fear blossom in [monster his] eyes as you begin to choke [monster him] until [monster he] begins gasping pitifully for air, and then you have an idea. You forcefully shove [themonster] on [monster his] back and expose your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.hasVagina()) outputText("[pussy]");
 			outputText(" with clear intent.\n\n");
-			outputText("When " + monster.a + monster.short + " does nothing but stare for a few seconds, you ask what " + monster.pronoun1 + "'s waiting for, lightly tightening your tail around " + monster.pronoun3 + " neck as a warning to start working or else.\n\n");
-			outputText("" + monster.capitalA + monster.short + " finally seems to realize " + monster.pronoun3 + " predicament and panics, immediately moving to lick your");
+			outputText("When [themonster] does nothing but stare for a few seconds, you ask what [monster he]'s waiting for, lightly tightening your tail around [monster his] neck as a warning to start working or else.\n\n");
+			outputText("[Themonster] finally seems to realize [monster his] predicament and panics, immediately moving to lick your");
 			if (player.hasCock()) outputText(" [cock]");
 			if (player.hasVagina()) outputText(" vaginal lips");
 			outputText(" in an effort to douse your wrath. That’s way too fast for your tastes, though, and you order your fuckslave to slow down and actually proceed with better care." + ((player.tallness < 60 && player.mouseScore() >= 8) ? " You get a thrill out of this domineering position. It's not every day that the small mouse gets to thoroughly humiliate the cat." : "") + " As you use your opponent’s mouth like a sex toy, you give a quick glance down and spot " + monster.pronoun3);
@@ -320,11 +324,11 @@ package classes.Scenes
 				if (monster.hasCock()) outputText(" and " + monster.pronoun3);
 				outputText("" + monster.vaginaDescript() + " wetting the ground with girl juices");
 			}
-			outputText("[pg]It seems your victim is getting off from the abuse. Well, it seems you won’t need to worry about " + monster.pronoun2 + " needs, you figure as you shove your ");
+			outputText("[pg]It seems your victim is getting off from the abuse. Well, it seems you won’t need to worry about [monster him] needs, you figure as you shove your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.hasVagina()) outputText("[pussy]");
-			outputText(" harder into " + monster.pronoun3 + " face!\n\n");
-			outputText("Only as you reach your third orgasm do you finally release your victim, ordering " + monster.pronoun2 + " to scram or else. As " + monster.pronoun1 + " does just that, you can still see your tail imprints on " + monster.pronoun3 + " neck, but you don't particularly care by this point. You head home quite satisfied.\n\n");
+			outputText(" harder into [monster his] face!\n\n");
+			outputText("Only as you reach your third orgasm do you finally release your victim, ordering [monster him] to scram or else. As [monster he] does just that, you can still see your tail imprints on [monster his] neck, but you don't particularly care by this point. You head home quite satisfied.\n\n");
 			player.sexReward("saliva");
 			statScreenRefresh();
 			cleanupAfterCombat();
@@ -357,23 +361,55 @@ package classes.Scenes
 			cleanupAfterCombat();
 		}
 
+		public function brainMelt():void {
+			clearOutput();
+			outputText("This host is unworthy… totally useless." +
+					" Try all you want you couldn't turn it into something useful itd have to be handled by your master but there's one thing you can do." +
+					" A nasty shade falls over your eyes as you smile perversely, your victim however want's none of that and has already started to slowly back away from you." +
+					"The " + monster.short + " try to crawl to safety but before it can get out of your reach you leap onto [monster his] back and insert your tentacles into [monster his] ears. You orgasm right away your ");
+			if (player.hasVagina()) outputText(player.vaginaDescript());
+			if (player.hasCock()) outputText(player.cockDescriptShort());
+			outputText(" drenching the " + monster.short + " ass in green goop as you plunge into [monster his] memories and experiences drawing out strands after strands of knowledge out of [monster his] brain strait into your own." +
+					" Each new memory you take make you cum as you brain overloads with new foreign knowledge." +
+					" A normal brain would've been unable to properly process such informations and this might have left you confused and unable to distinguish your experiences from the victims own but as you draw out the knowledge and accumulated pleasure of each time the " + monster.short + " has ever cumed eye crossing from the mental overload you easily manage to catalogue those feelings as something out of your own isolating the personality and feelings from the raw knowledge.\n\n");
+			if (player.hasVagina()){
+				outputText("Your new toy half broken it takes very little efforts to turn [monster him] on [monster his] back and");
+				if (monster.hasCock()) outputText(" impale");
+				else outputText(" grind");
+				outputText(" your needy squirming tentacled pussy ");
+				if (monster.hasVagina()) outputText("on her now drenched snatch allowing you to bring yourself to new heights of pleasant delirium.");
+				else if (monster.hasCock()) outputText("on his drooling erect cock allowing you to bring yourself to new heights of pleasant delirium.");
+				else outputText("on your victim naked belly attempting to draw additionnal pleasure in vain. With your victim devoid of sexual organs thats as good as you will get.");
+			}
+			if (player.hasCock()) outputText("While you mentaly rape your victim of everything that used to make its sense of self you push your needy cock through the now welcoming hole that is your half broken toy butt thrusting to bring yourself to new heights of pleasant delirium.");
+			outputText("\n\nYou cum green, your fluids dripping from your partner and tainting the ground beneath into a small pool of defiled fluid as you draw in whatever remains of your victim's now empty brain.");
+
+
+
+			player.sexReward("Default", "Default", true, false);
+			statScreenRefresh();
+			cleanupAfterCombat();
+		}
+
+
+
 		public function raijuVoltTransfer():void {
 			clearOutput();
-			outputText("Your static arcs through your entire being as you stand before your opponent. Thoughts race through you as you gaze at your prey. Your opponent shudders as you grab " + monster.pronoun2 + " by the neck.\n\n");
+			outputText("Your static arcs through your entire being as you stand before your opponent. Thoughts race through you as you gaze at your prey. Your opponent shudders as you grab [monster him] by the neck.\n\n");
 			outputText("You're losing your mind, you need them to know how much you need this. You want them to squirm beneath your touch. You want them to feel what you feel. More arcs of electricity jolt through you as lust overrides your senses. Your opponent can only helplessly wait for you take your next course of action... Your entire body is tingling in anticipation, craving for more\"\n\n");
-			outputText("" + monster.capitalA + monster.short + " trembles as you kiss " + monster.pronoun2 + ", your static starting to jolt along " + monster.pronoun3 + " skin. As you vent out your electiricity, you can only feel the squirms of pleasure mixed with arousal beneath you.\n\n");
+			outputText("[Themonster] trembles as you kiss [monster him], your static starting to jolt along [monster his] skin. As you vent out your electiricity, you can only feel the squirms of pleasure mixed with arousal beneath you.\n\n");
 			outputText("Voltage rushes out of your body as it transfers to your victim");
-			if (monster.hasCock()) outputText(" wrapping and sheathing around " + monster.pronoun3 + " penis,");
-			if (monster.biggestTitSize() >= 1) outputText(" massaging the shape of " + monster.pronoun3 + " " + monster.breastDescript(0) + ",");
-			if (monster.hasVagina()) outputText(" licking the entrance of " + monster.pronoun3 + " pussy");
-			outputText(" and spreading across the rest of " + monster.pronoun3 + " skin. You smile, contended as the haze of lust progressively dissipates from your mind. Unfortunately, your victim will not have the same pleasure you do from release. The excess of your static slowly passes into " + monster.a + monster.short + " prone form and you almost achieve climax from the relief as you purge all of this bad energy out of yourself.\n\n");
-			outputText("Your victim, however, is not so lucky. As you pour in your lust " + monster.pronoun1 + " begins to completely lose control, attempting to fiercely masturbate this excess of desire out, to no avail. As you are close to done your partner is a wrecked mess on the floor, desperate to gain release but unable to achieve it fully as the supernatural electricity keeps building " + monster.pronoun3 + " desire way beyond normal, obliterating self-restraint and pride along the way. You move away from " + monster.a + monster.short + " just as " + monster.pronoun3 + " hands begin to draw fluids out of " + monster.pronoun3 + " lust filled endowment. ");
+			if (monster.hasCock()) outputText(" wrapping and sheathing around [monster his] penis,");
+			if (monster.biggestTitSize() >= 1) outputText(" massaging the shape of [monster his] " + monster.breastDescript(0) + ",");
+			if (monster.hasVagina()) outputText(" licking the entrance of [monster his] pussy");
+			outputText(" and spreading across the rest of [monster his] skin. You smile, contended as the haze of lust progressively dissipates from your mind. Unfortunately, your victim will not have the same pleasure you do from release. The excess of your static slowly passes into [themonster] prone form and you almost achieve climax from the relief as you purge all of this bad energy out of yourself.\n\n");
+			outputText("Your victim, however, is not so lucky. As you pour in your lust [monster he] begins to completely lose control, attempting to fiercely masturbate this excess of desire out, to no avail. As you are close to done your partner is a wrecked mess on the floor, desperate to gain release but unable to achieve it fully as the supernatural electricity keeps building [monster his] desire way beyond normal, obliterating self-restraint and pride along the way. You move away from [themonster] just as [monster his] hands begin to draw fluids out of [monster his] lust filled endowment. ");
 			outputText("You stay clear as your victim’s lust explodes, spewing ");
 			if (monster.hasCock()) outputText("cum");
 			if (monster.hasVagina()) outputText("girlcum");
 			if (monster.biggestTitSize() > 0) outputText(" and milk");
-			outputText(" everywhere in the vicinity. You can see the pulse of your statics as a small glow in every thrust of " + monster.pronoun3 + " hips as " + monster.pronoun1 + " keep fiercely masturbating in an attempt to expel the lust.\n\n");
-			outputText("You leave your lust receptacle there, it's unlikely " + monster.pronoun1 + " will stop masturbating anytime soon.");
+			outputText(" everywhere in the vicinity. You can see the pulse of your statics as a small glow in every thrust of [monster his] hips as [monster he] keep fiercely masturbating in an attempt to expel the lust.\n\n");
+			outputText("You leave your lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
 			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
 			cleanupAfterCombat();
@@ -393,13 +429,13 @@ package classes.Scenes
 			outputText("and spread across the rest of [monster his] skin like a wildfire. You smile in contentment as the haze of lust progressively clears from your mind which is the opposite of what can be said for your victim. The excess of your");
 			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("hinezumi coat,");
 			else outputText("flames,");
-			outputText(" slowly pass inch by inch into " + monster.a + monster.short + " prone form and you almost achieve climax from the relief as you purge all of this ");
+			outputText(" slowly pass inch by inch into [themonster] prone form and you almost achieve climax from the relief as you purge all of this ");
 			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("bad ki ");
 			else outputText("fire ");
 			outputText("out of yourself.\n\n" +
 					"Your victim, however, is not so lucky. As you pour in your lust it begins to completely lose control attempting to fiercely masturbate this excess of desire out, to no avail. " +
 					"As you draw closer to the end, your partner is a writing mess on the floor. Desperate to cum but unable to achieve complete release as the supernatural fire keeps fueling [monster his] desire " +
-					"way beyond normal obliterating self-restraint and pride along the way. You move away from " + monster.a + monster.short + " just as [monster his] hands begin to draw fluids out of [monster his] lust filled endowment. " +
+					"way beyond normal obliterating self-restraint and pride along the way. You move away from [themonster] just as [monster his] hands begin to draw fluids out of [monster his] lust filled endowment. " +
 					"You move back as your victim reaches the height of their orgasm.");
 			if (monster.biggestTitSize() >= 1)outputText(" You notice [monster his] breasts begin to dribble milk as well. ");
 			outputText("There are fluids everywhere in the vicinity. You can see the pulse of your flames as a small embery glow in every thrust of [monster his] hips as [monster he] keeps fiercely masturbating in an attempt to expel the lust.\n\n" +
@@ -453,14 +489,14 @@ package classes.Scenes
 		public function EasterBunnyLayEggsRape():void {
 			clearOutput();
 			outputText("Oh gawsh your balls feels like they will explode anytime soon if you don’t shoot those eggs out already! Again the welcoming piece of ass your defeated foe present you looks like the perfect place to lay and this is not the kind of opportunity you would pass on.\n\n");
-			outputText("With a soulless stare and a manic smile completing your lust crazed expression that would scare the shit out of the most pent up of demon, you ready for breeding revealing your hardening [cock] as you prepare to go to town on " + monster.a + monster.short + " welcoming ass. " +
-					"" + monster.pronoun1 + " eyes widen in terror as " + monster.pronoun1 + " realizes that from predator " + monster.pronoun1 + " became the prey. You grab that ass and smack it a few times for good measure forcing a moan or two out of your partner before grabbing your victims tight as you prepare for the mating." +
-					" " + monster.a + monster.short + " eyes are almost begging for mercy by now but you’re too far gone in your lust to care.\n\n");
+			outputText("With a soulless stare and a manic smile completing your lust crazed expression that would scare the shit out of the most pent up of demon, you ready for breeding revealing your hardening [cock] as you prepare to go to town on [themonster] welcoming ass. " +
+					"[monster he] eyes widen in terror as [monster he] realizes that from predator [monster he] became the prey. You grab that ass and smack it a few times for good measure forcing a moan or two out of your partner before grabbing your victims tight as you prepare for the mating." +
+					" [themonster] eyes are almost begging for mercy by now but you’re too far gone in your lust to care.\n\n");
 			outputText("You gasp in delight as your bunny cock slides into that sweet hole the walls tighten around you. Using your powerful bunny legs you begin to jump in and out of this rabbit hole your unwilling partner groaning as you use his/her/its backside to sate your bottomless lust.\n\n");
 			outputText("<i>”Eggs…!!!! EGGS!!!”</i> You finally scream, eye crossed in delight as your two/four heavy eggs finally slide out of your balls, moving through your urethra and into your victim's spacious bowels.\n\n");
-			outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once " + monster.a + monster.short + " faint from exhaustion. " +
-					"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from " + monster.pronoun3 + " asshole gasping as your cock sensitive flesh is exposed to the air again." +
-					" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath " + monster.pronoun3 + " white. For good measure you clean your dripping penis on " + monster.a + monster.short + " ass and hops off back to camp.\n\n");
+			outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once [themonster] faint from exhaustion. " +
+					"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from [monster his] asshole gasping as your cock sensitive flesh is exposed to the air again." +
+					" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath [monster his] white. For good measure you clean your dripping penis on [themonster] ass and hops off back to camp.\n\n");
 			player.sexReward("Default", "Dick", true, false);
 			cleanupAfterCombat();
 		}
@@ -469,11 +505,11 @@ package classes.Scenes
 			clearOutput();
 			player.addKeyValue("Cum Reservoir", 1, 1);
 			outputText("Gosh you really aren't horny right now but that doesn’t mean you're going to let all this precious baby making gold go to waste!\n\n");
-			outputText("You jump out of your mech and painfully grab " + monster.a + monster.short + " by the cock in order to make your next statement clear.\n\n");
+			outputText("You jump out of your mech and painfully grab [themonster] by the cock in order to make your next statement clear.\n\n");
 			outputText("\"<i>You don’t move one inch while I work or I swear you will regret it… understood, shank???</i>\"\n\n");
-			outputText("Having made your intentions obvious, you get under your mech and pull out the reservoir tube, paying no heed to your confused victim, " + monster.pronoun1 + "'s going to find out soon enough anyway. You run back to " + monster.a + monster.short + ", tube in hand, and plug it on " + monster.pronoun3 + " " + monster.cockDescriptShort(0) + " fastening it in place with straps. Satisfied with the result, you run back to your mech and press the start button activating the vacuum.\n\n");
-			outputText("" + monster.capitalA + monster.short + "’s eyes widen as your engine forcely starts milking " + monster.pronoun3 + " dick. Of course " + monster.pronoun1 + " struggles for a bit against the pleasure inducing contraption but the aphrodisiac dripping syringes you added in the fastening make short work of any resistance " + monster.pronoun1 + " has left, causing " + monster.pronoun2 + " to jerk up and down on the ground in unwanted, yet forced consecutive orgasms. You watch with keen interest as the tube fills up with a constant flow of freshly harvested cum, smiling at the fluctuation of the volume needle on your motherboard. ");
-			outputText("Since you have nothing to do but wait, you slowly enjoy a coffee, laid back in your driver’s seat and whistling, as the engine’s cum-o-meter fills up. Soon " + monster.a + monster.short + " eyes rolls in their socket as " + monster.pronoun1 + " completely lose control of " + monster.pronoun3 + " body, " + monster.pronoun3 + " sexual organ taking over for " + monster.pronoun3 + " brain. The needle finally reaches ");
+			outputText("Having made your intentions obvious, you get under your mech and pull out the reservoir tube, paying no heed to your confused victim, [monster he]'s going to find out soon enough anyway. You run back to [themonster], tube in hand, and plug it on [monster his] " + monster.cockDescriptShort(0) + " fastening it in place with straps. Satisfied with the result, you run back to your mech and press the start button activating the vacuum.\n\n");
+			outputText("[Themonster]’s eyes widen as your engine forcely starts milking [monster his] dick. Of course [monster he] struggles for a bit against the pleasure inducing contraption but the aphrodisiac dripping syringes you added in the fastening make short work of any resistance [monster he] has left, causing [monster him] to jerk up and down on the ground in unwanted, yet forced consecutive orgasms. You watch with keen interest as the tube fills up with a constant flow of freshly harvested cum, smiling at the fluctuation of the volume needle on your motherboard. ");
+			outputText("Since you have nothing to do but wait, you slowly enjoy a coffee, laid back in your driver’s seat and whistling, as the engine’s cum-o-meter fills up. Soon [themonster] eyes rolls in their socket as [monster he] completely lose control of [monster his] body, [monster his] sexual organ taking over for [monster his] brain. The needle finally reaches ");
 			if (player.keyItemv1("Cum Reservoir") == 1) outputText("1 quarters");
 			if (player.keyItemv1("Cum Reservoir") == 2) outputText("2 quarters");
 			if (player.keyItemv1("Cum Reservoir") == 3) outputText("3 quarters");
@@ -484,15 +520,15 @@ package classes.Scenes
 
 		public function Cooldown():void {
 			clearOutput();
-			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race()+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
+			outputText("You eye [themonster] with anticipation. Being a "+player.race()+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
 					"A little cooling is in order and this unlucky rift denizen is about to serve as natural refreshment for your burning hot body.\n\n" +
-					"You proceed to force " + monster.a + monster.short + " on [monster his] back");
+					"You proceed to force [themonster] on [monster his] back");
 			if (monster.wolfCocks() > 0) outputText(", your warm body slowly forcing his puppy pecker out of its sheath");
 			outputText(". Once your partner’s towering erection is suitable you proceed to straddle him and fill your burning vagina full of his dick." +
-					"" + monster.a + monster.short + " "+monster.cockDescriptShort()+" twitches as warmth coats his member and you begin to slide up and down his towering maleness");
+					"[themonster] "+monster.cockDescriptShort()+" twitches as warmth coats his member and you begin to slide up and down his towering maleness");
 			if (monster.wolfCocks() > 0) outputText(", enjoying yourself as his knot grows and locks itself in your [pussy]");
 			outputText(". You begin to slowly work his tool with your vagina, moaning as the shaft ever so gently scrapes your walls. You want the cool cream inside to fill you all over and soon the beast growls as it reaches its impending climax, its dick unloading thick ropes of cooling cum into your furnace of a pussy.\n\n" +
-					"Thoroughly satisfied you pull from " + monster.a + monster.short + " "+monster.cockDescriptShort()+" and walk off. Gosh, this one felt hella good you should come back more often when you’re in need of some cooling.")
+					"Thoroughly satisfied you pull from [themonster] "+monster.cockDescriptShort()+" and walk off. Gosh, this one felt hella good you should come back more often when you’re in need of some cooling.")
 			//We give both sex reward so to end player rut or heat in the event pc has either
 			player.sexReward("cum");
 			player.sexReward("vaginalFluids");
@@ -501,9 +537,9 @@ package classes.Scenes
 
 		public function yukionnaStealWarmthScene():void {
 			clearOutput();
-			outputText("You eye your defeated opponent’s form with delight. " + monster.Pronoun1 + "'s so warm and full of life, certainly sharing some of it with you should be no problem? Yet the greedy creature squirms and crawl away in a vain attempt to escape you and this angers you to no end. Even worse this thing is a guy. You freeze " + monster.a + monster.short + " limbs in place, trapping them with ice, and approach him.\n\n");
+			outputText("You eye your defeated opponent’s form with delight. [monster he]'s so warm and full of life, certainly sharing some of it with you should be no problem? Yet the greedy creature squirms and crawl away in a vain attempt to escape you and this angers you to no end. Even worse this thing is a guy. You freeze [themonster] limbs in place, trapping them with ice, and approach him.\n\n");
 			outputText("Your icy glare stares into them as you feel the warmth from them linger. You'll be sure not to leave an ounce of heat left.\n\n");
-			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread " + monster.pronoun3 + " leg wide to reveal the already hardening " + monster.cockDescriptShort() + " between. You lick his length to lube it properly for what is coming next, your cool saliva making " + monster.a + monster.short + " shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss " + monster.a + monster.short + " silencing his pain and pleasure mixed groans ");
+			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread [monster his] leg wide to reveal the already hardening " + monster.cockDescriptShort() + " between. You lick his length to lube it properly for what is coming next, your cool saliva making [themonster] shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss [themonster] silencing his pain and pleasure mixed groans ");
 			outputText("as your cool breath pours in and you draw out his warm one. He begins to shake as his cock hardens further, both from the pleasure and the thin layer of ice preventing his release and softening, freezing the very blood inside and spreading out across his body. He would be screaming half mad right now if you weren't choking his loud reply with a kiss, breathing in his warmth. He keeps thrusting until his lower body loses mobility to the creeping frost, not one to end so soon you prolong his agonizing pleasure and yours by your own efforts, moaning in delight each time his diamond hard frozen member bottoms in.\n\n");
 			outputText("As you achieve your fifth orgasm, his body is entirely covered in creeping ice and he's no better than a frozen statue, devoid of all warmth and life. What a bore, you were just barely satiated and could've went on for several hours. You kick him in anger, causing his form to crack and explode like glass in the opposite direction. Guess you had fun while it lasted, time to head back to camp.\n\n");
 			player.HP = player.maxHP();
@@ -521,10 +557,10 @@ package classes.Scenes
 				outputText("A blue shimmer of energy accumulates within the demon member, a shimmer only you can see. Enthralled, you steadily hop toward the exposed cock, thirsting for the pearlescent cream that you see accumulating at the tip, steadily dripping down the lengthy member. So much energy... So much life... You lack so much, your hunger grows. Famished, your mouth uncontrollably drools, exposing your teeth and obscene tongue as it dances in anticipation of the meal you are about to dive into. The demon watches you, fascinated and aroused by your intentions, which are on display clear as your pale dead eyes. You're going to relentlessly devour him until he floods you with the creamy white vitality you yearn for.\n\n");
 			}
 			else {
-				outputText("While you are fully aware " + monster.a + monster.short + " has no soulforce to steal, his body still offers you enough sustenance to maintain yourself. Your unholy instincts drive you to focus on his " + monster.cockDescriptShort() + " with a barely contained hunger. You almost begin to wonder why you bothered to fight " + monster.pronoun2 + " when you were this eager to suck " + monster.pronoun2 + " off from the start.\n\n");
-				outputText("The demon, seemingly aware of your interest, flaunts " + monster.pronoun3 + " cock knowingly. Temptation grows at the sight, snuffing out any lingering doubts. There is no shame. No regret. Only a burning need welling up from your core.\n\n");
+				outputText("While you are fully aware [themonster] has no soulforce to steal, his body still offers you enough sustenance to maintain yourself. Your unholy instincts drive you to focus on his " + monster.cockDescriptShort() + " with a barely contained hunger. You almost begin to wonder why you bothered to fight [monster him] when you were this eager to suck [monster him] off from the start.\n\n");
+				outputText("The demon, seemingly aware of your interest, flaunts [monster his] cock knowingly. Temptation grows at the sight, snuffing out any lingering doubts. There is no shame. No regret. Only a burning need welling up from your core.\n\n");
 			}
-			outputText("You practically fall on the offered cock, crawling into position and wrapping your needy lips around it in a tight seal as you begin feverishly extracting the white vitalic seed from the fiendish member. The demon caresses you, petting your head while you worship the tool in front of you with a mastery born of your magically ingrained instincts. The demon moans in appreciation as your hungry tongue wraps around the cock, teasing and jerking " + monster.pronoun3 + " eager erection"+(monster.balls > 0 ? ", " + monster.pronoun3 + " balls sloshing with accumulating cum":"")+" as " + monster.a + monster.short + " steadily approaches " + monster.pronoun3 + " climax.\n\n");
+			outputText("You practically fall on the offered cock, crawling into position and wrapping your needy lips around it in a tight seal as you begin feverishly extracting the white vitalic seed from the fiendish member. The demon caresses you, petting your head while you worship the tool in front of you with a mastery born of your magically ingrained instincts. The demon moans in appreciation as your hungry tongue wraps around the cock, teasing and jerking [monster his] eager erection"+(monster.balls > 0 ? ", [monster his] balls sloshing with accumulating cum":"")+" as [themonster] steadily approaches [monster his] climax.\n\n");
 			outputText("Instinctively sensing the imminent climax you wrap your lips tightly around the throbbing cock, sealing shut as the demon unloads ropes after ropes of corrupted cum directly into your massaging throat.\n\n");
 			outputText("The meal is satisfying, though it does not restore your humanity, lacking the soulforce you require to make you slightly more alive. Finished with the demon, you hop off and take your leave"+(inDungeon ? "":" heading back to camp")+".\n\n");
 			HPChange(Math.round(player.maxHP() * 0.1), true);

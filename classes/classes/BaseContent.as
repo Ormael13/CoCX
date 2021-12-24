@@ -40,9 +40,9 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.cheatTime(time, needNext);
 		}
-		protected function cheatTime2(time:Number, needNext:Boolean = false):void
+		protected function eachMinuteCount(time:Number, needNext:Boolean = false):void
 		{
-			EventParser.cheatTime2(time, needNext);
+			EventParser.eachMinuteCount(time, needNext);
 		}
 		/*protected function incrementDay(time:Number):void
 		{
@@ -51,6 +51,13 @@ import coc.xxc.StoryContext;
 		protected function get timeQ():Number
 		{
 			return CoC.instance.timeQ;
+		}
+		
+		/**
+		 * Time advancement is planned
+		 */
+		protected static function get timeQueued():Boolean {
+			return CoC.instance.timeQ > 0 || CoC.instance.timeQmin > 0;
 		}
 
 		protected function get isNightTime():Boolean {
@@ -77,10 +84,15 @@ import coc.xxc.StoryContext;
 		protected function get d3():D3 {
 			return SceneLib.d3;
 		}
-
-		public function goNext(time:Number,defNext:Boolean):Boolean
+		
+		/**
+		 * Advance queued time and execute scheduled events. Then go to playerMenu (camp/Ingnam)
+		 * @param defNext Require [Next] button, otherwise can display the playerMenu right away
+		 * @return {Boolean} true if some menu was displayed, false if no display or text only
+		 */
+		public function goNext(defNext:Boolean):Boolean
 		{
-			return EventParser.goNext(time,defNext);
+			return EventParser.goNext(defNext);
 		}
 
 		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
@@ -192,6 +204,11 @@ import coc.xxc.StoryContext;
 		protected function cleanupAfterCombat(nextFunc:Function = null):void
 		{
 			SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
+		}
+
+		protected function cleanupAfterCombatTFEvent(nextFunc:Function = null, ThisIsNotATFScene:Boolean = false):void
+		{
+			SceneLib.combat.cleanupAfterCombatImpl(nextFunc,ThisIsNotATFScene);
 		}
 
 		protected function enemyAI():void

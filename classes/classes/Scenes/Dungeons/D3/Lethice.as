@@ -6,6 +6,8 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Combat.AbstractSpell;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
@@ -107,7 +109,15 @@ public class Lethice extends Monster
 
 			return str;
 		}
-
+		
+		
+		override public function postPlayerAbility(ability:CombatAbility):void {
+			if (fightPhase == 3 && ability is AbstractSpell && ability.hasTag(CombatAbility.TAG_DAMAGING)) {
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+		}
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (_fightPhase == 1)
@@ -225,8 +235,8 @@ public class Lethice extends Monster
 			outputText("Lethice narrows her eyes, focusing her mind with deadly intent. She snaps her fingers and a gout of black, twisting flames engulfs you!");
 
 			var damage:Number = 100 + rand(25);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			player.takeFireDamage(damage,true);
 		}
 
@@ -284,7 +294,7 @@ public class Lethice extends Monster
 			}
 		}
 		
-		public function grappleStruggle():void 
+		public function grappleStruggle():void
 		{
 			clearOutput();
 			outputText("You pull with all your might against the grasping tentacles to no avail; their grip is simply too strong!");
@@ -627,9 +637,9 @@ public class Lethice extends Monster
 
 		private function phase3():void
 		{
-			//Every turn she boosts her defense against lust or HP depending on how the PC damaged her. 
+			//Every turn she boosts her defense against lust or HP depending on how the PC damaged her.
 			
-			// If you hit her with a physical attack, the next turn she’ll have massive evasion (200 speed or some shit) and massively boosted defense. 
+			// If you hit her with a physical attack, the next turn she’ll have massive evasion (200 speed or some shit) and massively boosted defense.
 			// GEDNOTE: We can't really do this- CoCs combat was NEVER designed with that in mind wrt to enemy stats, it would mean modifying EVERY player attack, spell and special to account for it. However, I figured out a potential workaround that covers this so....
 			
 			// If you hit her with a lusty-damaging attack, she will become immune to lust damage for one turn. Might also have other special resistances too. Will detail in text in the “Reactions” section.

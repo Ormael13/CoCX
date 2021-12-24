@@ -343,7 +343,7 @@ public function benoitsBuyMenu():void {
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
 			flags[kFLAGS.BENOIT_4],createCallBackFunction(benoitTransactBuy,4),
 			flags[kFLAGS.BENOIT_5],createCallBackFunction(benoitTransactBuy,5));
-	if (player.keyItemv1("Backpack") < 10) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
 	addButton(14, "Back", benoitIntro);
@@ -549,7 +549,7 @@ public function updateBenoitInventory():void {
 	}
 
 	//Slot 4
-	switch(rand(6)) {
+	switch(rand(5)) {
 		case 0:
 			flags[kFLAGS.BENOIT_4] = consumables.SNAKOIL.id;
 			break;
@@ -659,24 +659,24 @@ private function buyAlarmClockConfirmation():void {
 private function buyBackpack():void {
 	clearOutput();
 	outputText("You ask " + benoitMF("Benoit", "Benoite") + " if " + benoitMF("he", "she") + " has a backpack to spare.");
-	outputText("\n\n\"<i>Yes. Zese come in three sizes. What will you pick?</i>\" " + benoitMF("he", "she") + " asks.");
+	outputText("\n\n\"<i>Yes. Zese come in six sizes. What will you pick?</i>\" " + benoitMF("he", "she") + " asks.");
 	outputText("\n\n<b><u>Backpack Size and Pricings</u></b>");
-	outputText("\nSmall: 400 gems, +2 inventory slot");
-	outputText("\nMedium: 800 gems, +4 inventory slots");
-	outputText("\nLarge: 1200 gems, +6 inventory slots");
-	outputText("\nExtra Large: 1600 gems, +8 inventory slots");
-	outputText("\nDouble Extra Large: 2000 gems, +10 inventory slots");
-	outputText("\nTriple Extra Large: 2400 gems, +12 inventory slots");
+	outputText("\nSmall: 100 gems, +2 inventory slot");
+	outputText("\nMedium: 200 gems, +4 inventory slots");
+	outputText("\nLarge: 300 gems, +6 inventory slots");
+	outputText("\nExtra Large: 400 gems, +8 inventory slots");
+	outputText("\nDouble Extra Large: 500 gems, +10 inventory slots");
+	outputText("\nTriple Extra Large: 600 gems, +12 inventory slots");
 	menu();
-	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 400, "Grants additional two slot. \n\nCost: 400 gems");
-	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 600, "Grants additional four slots. \n\nCost: 800 gems");
-	if (player.keyItemv1("Backpack") < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 1200, "Grants additional six slots. \n\nCost: 1200 gems");
-	if (player.keyItemv1("Backpack") < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 1600, "Grants additional eight slots. \n\nCost: 1600 gems");
-	if (player.keyItemv1("Backpack") < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 2000, "Grants additional ten slots. \n\nCost: 2000 gems");
-	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 2400, "Grants additional twelve slots. \n\nCost: 2400 gems");
+	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	if (player.keyItemv1("Backpack") < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 300, "Grants additional six slots. \n\nCost: 300 gems");
+	if (player.keyItemv1("Backpack") < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 400, "Grants additional eight slots. \n\nCost: 400 gems");
+	if (player.keyItemv1("Backpack") < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 500, "Grants additional ten slots. \n\nCost: 500 gems");
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 600, "Grants additional twelve slots. \n\nCost: 600 gems");
 	addButton(14, "Nevermind", benoitsBuyMenu);
 }
-private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 400):void {
+private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	clearOutput();
 	if (player.gems < price) {
 		outputText("You count out your gems and realize it's beyond your price range.");
