@@ -1014,6 +1014,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (score >= 14) outputText("\n<font color=\"#0000a0\">Incomplete Atlach Nacha: " + score + " (+60% to Tou racial multi, +100% to Int racial multi, +40% to Lib racial multi, -10% to Wis racial multi)</font>");
 		else if (score >= 1) outputText("\n<font color=\"#008000\">Incomplete Atlach Nacha: " + score + "</font>");
 		else if (score < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
+		//Angel
+		outputText("\nHalf Angel: " + player.gryphonScore());//Half Angel, Angel-kin, Angel
 		//Avian
 		if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+30% to Str racial multi, +75% to Spe racial multi, +30% to Int racial multi)</font>");
 		else if (player.avianScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+15% to Str racial multi, +30% to Spe racial multi, +15% to Int racial multi)</font>");
@@ -1212,6 +1214,8 @@ public class PlayerAppearance extends BaseContent {
 		if (player.gremlinScore() >= 15) outputText("\n<font color=\"#0000a0\">Gremlin: " + player.gremlinScore() + " (-50% to Str racial multi, +75% to Spe racial multi, +120% to Int racial multi, +115% to Lib racial multi, +20 min sens)</font>");
 		else if (player.gremlinScore() >= 1) outputText("\n<font color=\"#008000\">Gremlin: " + player.gremlinScore() + "</font>");
 		else if (player.gremlinScore() < 1) outputText("\n<font color=\"#ff0000\">Gremlin: 0</font>");
+		//Gryphon
+		outputText("\nGryphon: " + player.gryphonScore());
 		//Goo
 		if (player.gooScore() >= 15) outputText("\n<font color=\"#0000a0\">Slime Queen: " + player.gooScore() + " (+115% to Tou racial multi, -50% to Spe racial multi, +160% to Lib racial multi)</font>");
 		else if (player.gooScore() >= 11) outputText("\n<font color=\"#0000a0\">Slime: " + player.gooScore() + " (+105% to Tou racial multi, -40% to Spe racial multi, +100% to Lib racial multi)</font>");
@@ -1442,6 +1446,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.orcaScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+35% to Str racial multi, +20% to Tou racial multi, +35% to Spe racial multi)</font>");
 		else if (player.orcaScore() >= 1) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>");
 		else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>");
+		//Peacock
+		outputText("\nPeacock: " + player.peacockScore());
 		//Phantom > Poltergeist
 		if (player.poltergeistScore() >= 18) outputText("\n<font color=\"#0000a0\">Eldritch Poltergeist: " + player.poltergeistScore() + " (-45% to Str racial multi, -45% to Tou racial multi, +150% to Spe racial multi, +150% to Int racial multi, +60% to Wis racial multi)</font>");
 		else if (player.poltergeistScore() >= 12) outputText("\n<font color=\"#0000a0\">Poltergeist: " + player.poltergeistScore() + " (-25% to Str racial multi, -25% to Tou racial multi, +90% to Spe racial multi, +90% to Int racial multi, +45% to Wis racial multi)</font>");

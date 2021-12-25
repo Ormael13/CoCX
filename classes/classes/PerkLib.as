@@ -470,6 +470,9 @@ public class PerkLib
 		public static const ElementalTouch:PerkType = mk("Elemental touch", "Elemental touch",
 				"Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.",
 				"You've chosen the 'Elemental touch' perk. Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.");
+		public static const GreaterSharedPower:PerkType = mk("Greater shared power", "Greater shared power",
+				"Double the effect of Shared power.",
+				"You've chosen the 'Greater shared power' perk. ");
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
@@ -483,9 +486,6 @@ public class PerkLib
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of four traditional.");
 		/*public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
@@ -5659,6 +5659,8 @@ public class PerkLib
                     .requirePerks(ComboMaster, Backlash);
             SkeletonLord.requireLevel(72)
                     .requirePerk(BoneSoul);
+            GreaterSharedPower.requireLevel(72)
+                    .requirePerk(ElementalTouch);
             ElementalContractRank13.requirePerk(ElementalContractRank12)
                     .requireWis(325)
                     .requireLevel(72);

@@ -9101,7 +9101,7 @@ public final class Mutations extends MutationsHelper {
             transformations.ArmsAvian.applyEffect();
             changes++;
         }
-        if (player.arms.type != Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
+        if (player.arms.type != Arms.GRYPHON && player.tailType == Tail.GRIFFIN && changes < changeLimit && type == 1 && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsGryphon.applyEffect();
             changes++;

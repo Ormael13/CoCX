@@ -3345,6 +3345,7 @@ use namespace CoC;
 				{name: 'alicornkin', score: alicornkinScore(), minscore: 12},
 				{name: 'alraune', score: alrauneScore(), minscore: 13},
 				{name: 'atlach nacha', score: atlachNachaScore(), minscore: 10},
+				//{name: 'angel', score: angelScore(), minscore: 4},
 				{name: 'avian', score: avianScore(), minscore: 4},
 				{name: 'bunny', score: bunnyScore(), minscore: 5},
 				{name: 'banshee', score: bansheeScore(), minscore: 4},
@@ -3384,6 +3385,7 @@ use namespace CoC;
 				{name: 'goo', score: gooScore(), minscore: 5},
 				{name: 'gorgon', score: gorgonScore(), minscore: 11},
 				{name: 'gremlin', score: gremlinScore(), minscore: 10},
+				//{name: 'gryphon', score: gryphonScore(), minscore: 4},
 				{name: 'harpy', score: harpyScore(), minscore: 4},
 				{name: 'hellcat', score: hellcatScore(), minscore: 10},
 				{name: 'horse', score: horseScore(), minscore: 4},
@@ -3408,6 +3410,7 @@ use namespace CoC;
 				{name: 'oomukade', score: oomukadeScore(), minscore: 15},
 				{name: 'orc', score: orcScore(), minscore: 5},
 				{name: 'orca', score: orcaScore(), minscore: 6},
+				//{name: 'peacock', score: peacockScore(), minscore: 4},
 				{name: 'phoenix', score: phoenixScore(), minscore: 10},
 				{name: 'pig', score: pigScore(), minscore: 5},
 				{name: 'plant', score: plantScore(), minscore: 4},
@@ -10382,6 +10385,78 @@ use namespace CoC;
 			avianCounter = finalRacialScore(avianCounter, Race.AVIAN);
 			End("Player","racialScore");
 			return avianCounter;
+		}
+
+		//Determine Gryphon Rating
+		public function gryphonScore():Number {
+			Begin("Player","racialScore","gryphon");
+			var gryphonCounter:Number = 0;
+			if (hairType == Hair.FEATHER)
+				gryphonCounter++;
+			if (faceType == Face.AVIAN)
+				gryphonCounter++;
+			if (ears.type == Ears.GRYPHON)
+				gryphonCounter++;
+			if (eyes.type == Eyes.GRYPHON)
+				gryphonCounter++;
+			if (tailType == Tail.GRIFFIN)
+				gryphonCounter++;
+			if (arms.type == Arms.GRYPHON)
+				gryphonCounter++;
+			if (lowerBody == LowerBody.GRYPHON)
+				gryphonCounter++;
+			if (wings.type == Wings.FEATHERED_AVIAN)
+				gryphonCounter += 2;
+			if (hasCoatOfType(Skin.FEATHER))
+				gryphonCounter++;
+			if (gryphonCocks() > 0)
+				gryphonCounter++;
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				gryphonCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && gryphonCounter >= 4)
+				gryphonCounter += 1;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && gryphonCounter >= 8)
+				gryphonCounter += 1;
+			if (isGargoyle()) gryphonCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) gryphonCounter = 0;
+			gryphonCounter = finalRacialScore(gryphonCounter, Race.GRYPHON);
+			End("Player","racialScore");
+			return gryphonCounter;
+		}
+
+		//Determine Peacock Rating
+		public function peacockScore():Number {
+			Begin("Player","racialScore","peacock");
+			var peacockCounter:Number = 0;
+			if (hairType == Hair.FEATHER)
+				peacockCounter++;
+			if (faceType == Face.AVIAN)
+				peacockCounter++;
+			if (ears.type == Ears.AVIAN)
+				peacockCounter++;
+			if (tailType == Tail.AVIAN)
+				peacockCounter++;
+			if (arms.type == Arms.AVIAN)
+				peacockCounter++;
+			if (lowerBody == LowerBody.AVIAN)
+				peacockCounter++;
+			if (wings.type == Wings.FEATHERED_AVIAN)
+				peacockCounter += 2;
+			if (hasCoatOfType(Skin.FEATHER))
+				peacockCounter++;
+			if (avianCocks() > 0)
+				peacockCounter++;
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				peacockCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && peacockCounter >= 4)
+				peacockCounter += 1;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && peacockCounter >= 8)
+				peacockCounter += 1;
+			if (isGargoyle()) peacockCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) peacockCounter = 0;
+			peacockCounter = finalRacialScore(peacockCounter, Race.PEACOCK);
+			End("Player","racialScore");
+			return peacockCounter;
 		}
 
 		//Bat

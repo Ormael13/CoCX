@@ -2252,7 +2252,9 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank10)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank11)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalTouch)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank12)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank13)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.StrongerElementalBondEx)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank14)) dmSPPC += 1;
@@ -2277,6 +2279,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ElementalContractRank29)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank30)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank31)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC *= 2;
 		return dmSPPC;
 	}
 	private function simplifiedPreTurn():void {

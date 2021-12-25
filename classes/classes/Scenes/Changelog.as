@@ -28,7 +28,7 @@ package classes.Scenes
 		}
 		private function Changelog39():void {
 			clearOutput();
-			outputText("(Part /2) <b>Version 0.8s3:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8s3 (Druid Prestige Job, buffs to Gunslinger & Golemancer jobs, 3rd Floor of River Dungeon, out of combat fatigue regen + shorter intervals on resource generation, many QoL changes):</b>\n\n");
 			outputText("-Backpack prices dropped 4 times. And small/medium sized ones can be bought at Oswald pawn shop too.\n");
 			outputText("-Demonic Scythe upgrade at (pure) Celess unlocked.\n");
 			outputText("-Charge p.special base fatigue cost been lowered to 40% from 60%.\n");
@@ -88,7 +88,8 @@ package classes.Scenes
 			outputText("-Liadri many small changes.\n");
 			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories, Sextuple Thrust cooldown frozen, Woodcutting location in Places req. 3x more visits that Quarry, White Book teaching few spells at once, penatly to acc for melee weapons applied even if PC not use deal melee weapons, ");
 			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat, Dinah been in false training mode when Luna is actualy training/leveling herself, error in map display for one of Den of Desire rooms, Bee Hive entrance skipping bee guards andf afterwards showing wrong desc of the room until clearing dungeon, button on 2nd page of ");
-			outputText("unique sex scenes not leading to 1st page, Mysterious Seed missing from Unequip/Misc menu\n");/*ostatni punkt changelogu
+			outputText("unique sex scenes not leading to 1st page, Mysterious Seed missing from Unequip/Misc menu\n\n");
+			outputText("<b>Version 0.8s4:</b>\n\n");
 			//outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
@@ -98,7 +99,7 @@ package classes.Scenes
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
+			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -109,7 +110,7 @@ package classes.Scenes
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Fixed Bugs: \n");/*ostatni punkt changelogu//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -379,7 +380,7 @@ package classes.Scenes
 			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
 			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping from any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects, ");
 			outputText("Wrathless necklace not giving spellpower bonus\n\n");
-			outputText("(Part 1/2) <b>Version 0.8s3:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8s3 (Druid Prestige Job, buffs to Gunslinger & Golemancer jobs, 3rd Floor of River Dungeon, out of combat fatigue regen + shorter intervals on resource generation, many QoL changes):</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Frost Wyrm\n");
 			outputText("-New tier 5 misc lvl-up perk: Golem Army Junior Lieutenant. Req. Master Golem Maker perk and 110+ int/wis. Effect: +1/2 to max limit stored of permanent/temporary stone golems.\n");
 			outputText("-New tier 7 misc lvl-up perk: Advanced Golemancy Theory. Req. Grand-Master Golem Maker perk, 140+ in int+wis. Effect: Enable option to make steel golems and store 1 such golem.\n");
