@@ -61,6 +61,7 @@ package classes.Scenes
 			outputText("-Added on stats page short note when camp npc would reach max lvl it could get. So the PC will stop beat them up in order to force them to lvl up xD\n");
 			outputText("-Lumi sell mats option moved to her shop offer menu. All garage/workshop related option are under bottom row of buttons. And so the overlap of en hance of items options will no longer happen ^^\n");
 			outputText("-After getting Master Golem Maker perk there will be new stuff to buy from golemancer gobo in HXD ;)\n");
+			//3 of 11 pages
 			outputText("-Pure Peach from Minerva Oasis would restore 5% less HP (20% only), refill 5 less hunger (20) but will give much higher fatigue reductions (15 -> 1% of max fatigue + 10). Back button in garden menu will lead back to herbalism main menu not to camp actions main menu (who would want to click 1 more time to get from harvesting to making stuff, right?)\n");
 			outputText("-Controlled Breath perk effects ingame and on tooltip become unified; increase fatigue/mana/soulforce regeneration by 20% as long PC corruption is below 30 (+corruption tolerance perk bonus).\n");
 			outputText("-Temporal Golems Restructuration perk will no longer unlock option to send all temp golems to attacks instead giving more options for sending different amount of temporal golems against enemy. Also would add +5 to max limit of stored temporary stone golems. It req. also been decreased due to moving from tier 6 to 5.\n");
@@ -110,7 +111,7 @@ package classes.Scenes
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed Bugs: \n");/*ostatni punkt changelogu//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Fixed Bugs: One of Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion\n");/*ostatni punkt changelogu//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -363,7 +364,6 @@ package classes.Scenes
 			outputText("-In mutation racial perks all perks with suffixes (Evolved) and (Final Form) been renamed to (Primitive) and (Evolved) respectively.\n");
 			outputText("-Added option to disable Chi Chi like few other npc's.\n");
 			outputText("-After defeating true demon male/herm/female enemy or minotaur Jiangshi PC could access one of three unique sex scenes.\n");
-			//6 of 11 pages
 			outputText("-Shouldra attack with magic missiles can apply now weak dispell effect if pc got one of four white/black magic buffs casted.\n");
 			outputText("-Added option to surrender when PC is bound and can only wait or struggle (for cases when PC is locked into never ending cycle of struggling with enemy).\n");
 			outputText("-Feeding as Jiangshi would cure up to 5 pts of 'Weakened' and 'Drained' type curse on libido stat.\n");

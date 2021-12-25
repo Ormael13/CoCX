@@ -3345,7 +3345,7 @@ use namespace CoC;
 				{name: 'alicornkin', score: alicornkinScore(), minscore: 12},
 				{name: 'alraune', score: alrauneScore(), minscore: 13},
 				{name: 'atlach nacha', score: atlachNachaScore(), minscore: 10},
-				//{name: 'angel', score: angelScore(), minscore: 4},
+				{name: 'angel', score: angelScore(), minscore: 5},
 				{name: 'avian', score: avianScore(), minscore: 4},
 				{name: 'bunny', score: bunnyScore(), minscore: 5},
 				{name: 'banshee', score: bansheeScore(), minscore: 4},
@@ -3385,7 +3385,7 @@ use namespace CoC;
 				{name: 'goo', score: gooScore(), minscore: 5},
 				{name: 'gorgon', score: gorgonScore(), minscore: 11},
 				{name: 'gremlin', score: gremlinScore(), minscore: 10},
-				//{name: 'gryphon', score: gryphonScore(), minscore: 4},
+				{name: 'gryphon', score: gryphonScore(), minscore: 4},
 				{name: 'harpy', score: harpyScore(), minscore: 4},
 				{name: 'hellcat', score: hellcatScore(), minscore: 10},
 				{name: 'horse', score: horseScore(), minscore: 4},
@@ -3410,7 +3410,7 @@ use namespace CoC;
 				{name: 'oomukade', score: oomukadeScore(), minscore: 15},
 				{name: 'orc', score: orcScore(), minscore: 5},
 				{name: 'orca', score: orcaScore(), minscore: 6},
-				//{name: 'peacock', score: peacockScore(), minscore: 4},
+				{name: 'peacock', score: peacockScore(), minscore: 4},
 				{name: 'phoenix', score: phoenixScore(), minscore: 10},
 				{name: 'pig', score: pigScore(), minscore: 5},
 				{name: 'plant', score: plantScore(), minscore: 4},
@@ -5000,6 +5000,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (demonScore() >= 11)
 				chimeraCounter++;
+//			if (() >= 11)
+				chimeraCounter++;
 			if (devilkinScore() >= 11)
 				chimeraCounter++;
 			if (sharkScore() >= 8)
@@ -5048,7 +5050,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (couatlScore() >= 11)
 				chimeraCounter++;
-			if (lowerBody == 51 && hydraScore() >= 14)
+			if (hydraScore() >= 14 && lowerBody == 51)
 				chimeraCounter++;
 			if (firesnailScore() >= 15)
 				chimeraCounter++;
@@ -5098,7 +5100,11 @@ use namespace CoC;
 				chimeraCounter++;
 			if (avianScore() >= 9)
 				chimeraCounter++;
-			if (gargoyleScore() >= 22)
+/*			if (gryphonScore() >= 9)
+				chimeraCounter++;
+			if (peacockScore() >= 9)
+				chimeraCounter++;
+*/			if (gargoyleScore() >= 22)
 				chimeraCounter++;
 			if (gooScore() >= 11)
 				chimeraCounter++;
@@ -5359,6 +5365,79 @@ use namespace CoC;
 			devilkinCounter = finalRacialScore(devilkinCounter, Race.DEVIL);
 			End("Player","racialScore");
 			return devilkinCounter;
+		}
+
+		//determine angel rating
+		public function angelScore():Number {
+			Begin("Player","racialScore","angel");
+			var angelCounter:Number = 0;/*
+			if (horns.type == Horns.DEMON && horns.count > 0)
+				demonCounter++;
+				demonCounter2++;
+			if (tailType == Tail.DEMONIC)
+				demonCounter++;
+				demonCounter2++;
+			if (wings.type == Wings.BAT_LIKE_TINY)
+				demonCounter += 2;
+				demonCounter2 += 2;
+			if (wings.type == Wings.BAT_LIKE_LARGE)
+				demonCounter += 4;
+				demonCounter2 += 4;
+			if (tongue.type == Tongue.DEMONIC)
+				demonCounter++;
+				demonCounter2++;
+			if (ears.type == Ears.ELFIN || ears.type == Ears.ELVEN || ears.type == Ears.HUMAN)
+				demonCounter++;
+				demonCounter2++;
+			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS)
+				demonCounter++;
+				demonCounter2++;
+			if (demonCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.DEMONIC))
+				demonCounter++;
+			if (cor >= 50) {
+				if (horns.type == Horns.DEMON && horns.count > 4)
+					demonCounter++;
+					demonCounter2++;
+				if (hasPlainSkinOnly() && skinAdj != "slippery")
+					demonCounter++;
+				if (InCollection(skin.base.color, ["shiny black", "sky blue", "indigo", "ghostly white", "light purple", "purple", "red", "grey", "blue"]))
+					demonCounter++;
+				if (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS || faceType == Face.DEVIL_FANGS)
+					demonCounter++;
+					demonCounter2++;
+				if (arms.type == Arms.HUMAN)
+					demonCounter++;
+			}
+			if (hasPerk(PerkLib.Phylactery))
+				demonCounter += 5;
+			if (horns.type == Horns.GOAT)
+				demonCounter -= 10;
+			if (hasPerk(MutationsLib.BlackHeart))
+				angelCounter++;
+			if (hasPerk(MutationsLib.BlackHeartPrimitive))
+				angelCounter++;
+			if (hasPerk(MutationsLib.BlackHeartEvolved))
+				angelCounter++;
+			if (hasPerk(MutationsLib.BlackHeart) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				angelCounter++;
+			if (hasPerk(MutationsLib.BlackHeartPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				angelCounter++;
+			if (hasPerk(MutationsLib.BlackHeartEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				angelCounter++;*/
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				angelCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && angelCounter >= 4)
+				angelCounter += 1;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && angelCounter >= 8)
+				angelCounter += 1;/*
+			if (hasPerk(PerkLib.DemonicLethicite))
+				demonCounter+=1;
+			if (demonCounter2 < 5) demonCounter = demonCounter2;*/
+			if (isGargoyle()) angelCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) angelCounter = 0;
+			angelCounter = finalRacialScore(angelCounter, Race.ANGEL);
+			End("Player","racialScore");
+			return angelCounter;
 		}
 
 		//Determine cow rating
@@ -15497,3 +15576,4 @@ use namespace CoC;
 		}
 	}
 }
+
